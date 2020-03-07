@@ -1,0 +1,356 @@
+/*
+  test_powerseries.mac
+
+  Tests for the powerseries() function
+*/
+
+kill(all);
+done$
+
+/*
+  Basic identities
+*/
+powerseries(a, x, 0);
+a$
+
+powerseries(x, x, 0);
+x$
+
+/* Check that we get an error if the variable is a non-symbol atom */
+errcatch(powerseries(x, 0, 0));
+[]$
+
+errcatch(powerseries(x, "foo", 0));
+[]$
+
+/* Check we distribute over bags */
+niceindices(powerseries([sin(x), cos(x)], x, 0));
+''(niceindices([powerseries(sin(x), x, 0), powerseries(cos(x), x, 0)]))$
+
+/* Check we distribute over sum() and product() */
+niceindices(powerseries(sum(f(x,i), i, 0, inf), x, 0));
+''(niceindices(sum(powerseries(f(x,i), x, 0), i, 0, inf)));
+
+niceindices(powerseries(product(f(x,i), i, 0, inf), x, 0));
+''(niceindices(product(powerseries(f(x,i), x, 0), i, 0, inf)));
+
+
+/* Check that we can expand with respect to a non-atomic expression
+   (or at least check that we do something vaguely sensible) */
+niceindices(powerseries(sin(x^2), x^2, 0) - powerseries(sin(x^2), x, 0));
+0$
+
+/* Check that sums get expanded sanely (in SP1) */
+niceindices(powerseries(a + sin(x), x, 0) - powerseries(sin(x), x, 0));
+a$
+
+/* An element of the transformation dictionary for special trig sums in SP1 */
+niceindices(powerseries (1+tan(x)^2, x, 0) - powerseries(sec(x)^2, x, 0));
+0$
+
+/* Check that constant factors get pulled out (in SP1TIMES) */
+niceindices(powerseries(a*sin(x), x, 0) - a*powerseries(sin(x), x, 0));
+0$
+
+/* ... even if they aren't atoms. */
+niceindices(powerseries((a+b)*sin(x), x, 0) - (a+b)*powerseries(sin(x), x, 0));
+0$
+
+/* "Atomic" factors also get pulled out */
+niceindices(powerseries(x*sin(x), x, 0) - x*powerseries(sin(x), x, 0));
+0$
+
+/* Check that we evaluate powerseries at inf and minf sensibly */
+powerseries(1/x, x, inf);
+1/x$
+
+powerseries(1/x, x, minf);
+1/x$
+
+/*
+  Exponentiation of a sum is dealt with in SRBINEXPAND, which has to
+  cope with various possibilities depending on how much we know about
+  which terms are nonzero.
+*/
+powerseries(x^y^z, x, 0);
+x^y^z$
+
+(declare([int, posint], integer),
+ assume(posint > 0),
+ assume(pos > 0),
+ assume(notequal(nz, 0)),
+ assume(equal(zero, 0)), 0);
+0$
+
+powerseries((x^y+1)^zero, x, 0);
+1$
+
+powerseries((zero*x + 2)^y, x, 0);
+2^y$
+
+powerseries((x + zero)^y, x, 0);
+x^y$
+
+niceindices(powerseries((nz + 1)^n, nz, 0));
+'sum(nz^i/beta(i+1, n-i+1), i, 0, inf)/(n+1)$
+
+niceindices(powerseries((nz + 1)^posint, nz, 0));
+'sum(nz^i/beta(i+1, posint-i+1), i, 0, posint)/(posint+1)$
+
+niceindices(powerseries((nz + 1)^k, nz, 0));
+'sum(nz^i/beta(i+1, k-i+1), i, 0, inf)/(k+1)$
+
+niceindices(powerseries((x + 1)^k, x, 0));
+1 + 'sum(x^i/beta(i+1, k-i+1), i, 1, inf)/(k+1)$
+
+niceindices(powerseries((x + u)^posint, x, 0));
+('sum(x^i*u^(posint-i)/beta(i+1, posint-i+1),
+      i, 0, posint-1) / (posint+1)) + x^posint$
+
+powerseries((x + y)^k, x, 0);
+'powerseries((x + y)^k, x, 0)$
+
+/* Some more white-box tests, based on the structure of SRATEXPND */
+
+/* If the numerator is monomial, factor it out and recurse */
+niceindices(powerseries(a*x^u/(1+x), x, 0) - a*x^u*powerseries(1/(1+x), x, 0));
+0$
+
+/* If the denominator is free of x and the numerator is a polynomial,
+   return the quotient */
+powerseries((x^2 + x + 1)/(a + b + c), x, 0);
+(x^2 + x + 1)/(a + b + c)$
+
+/*
+  If the denominator is free of y, but the numerator is sufficiently
+  gnarly, we give up. (Obviously, it would be nice to do better here!)
+*/
+powerseries((x+x^(1+y)+1)/(2+y), x, 0);
+powerseries((x+x^(1+y)+1)/(2+y), x, 0)$
+
+/*
+  Another gnarly example we can't deal with. We can't use partial
+  fraction expansion because we don't know that k < 2 (and, even if we
+  did, I don't know how we'd parametrise the result on k).
+*/
+powerseries((x+1)^k/((x+2)*(x+3)), x, 0);
+powerseries((x+1)^k/((x+2)*(x+3)), x, 0)$
+
+/* The only way of getting a monomial denominator in sratexpnd is if
+   the numerator is a polynomial. If the denominator is a sum, we return the
+   sum of quotients: */
+powerseries((x^2 + x + 1)/(a*x^2), x, 0);
+1/a + 1/(a*x) + 1/(a*x^2)$
+
+/* If the denominator isn't a sum, we just return the quotient of the
+   top and bottom. */
+powerseries((1+x)^n/(a*x^2), x, 0);
+(1+x)^n/(a*x^2)$
+
+/* (I haven't yet managed to find an example that triggers the
+    SRATSUBST clause and doesn't yield a noun form) */
+
+/* Partial fraction expansion */
+niceindices(powerseries(1/((1-2*x)*(1-3*x)), x, 0));
+'sum((3^(i+1) - 2^(i+1))*x^i, i, 0, inf)$
+
+/*
+  Make sure we give up (rather than possibly recursing infinitely) in
+  the general case at the bottom of SRATEXPND.
+*/
+powerseries((x+2)*(x+3)^k/(x*(x+4)), x, 0);
+powerseries((x+2)*(x+3)^k/(x*(x+4)), x, 0)$
+
+/*
+  A complicated example of a partial fraction expansion. The expansion
+  into partial fractions is 1 + 2/(x+3) - 6/(x+4), and the terms then
+  expand into two infinite series and one constant term. This test
+  makes sure that we coalesce the two series properly (in PSP2FOLDSUM).
+*/
+factor(niceindices(powerseries((x+1)*(x+2)/((x+3)*(x+4)), x, 0)));
+(sum(3^(-i-1)*(-1)^i*(4^(i+1)-3^(i+2))*x^i/4^i,i,0,inf)+2)/2$
+
+/*
+  Make sure we successfully remove zero roots from the denominator
+  before trying to expand partial fractions.
+*/
+niceindices(powerseries((x+2)*(x+3)/(x^2*(x+1)^k), x, 0)*x^2 -
+            powerseries((x+2)*(x+3)/(x+1)^k, x, 0));
+0$
+
+/* Fixed in series.lisp rev 1.5, 04 Feb 2004.
+   First case returned second result */
+niceindices(powerseries(1/sqrt(1 + x), x, 0));
+1 + 2*'sum(x^i/beta(1/2-i,i+1),i,1,inf);
+niceindices (powerseries(sqrt(1+x),x,0));
+1 + 2*('sum(x^i/beta(3/2-i,i+1),i,1,inf))/3;
+
+/* sf bug 1730044 - powerseries(1+x^n,x,0) wrong; see also #2764 power series of 1 + x^n */
+powerseries(1+x^n, x, 0);
+1+x^n$
+
+(gensumnum : 0, declare(n, integer), powerseries(1/(1+x^n), x, 0));
+'sum((-1)^i1*x^(i1*n),i1,0,inf)$
+
+/* #2756 powerseries of constant plus power of linear  */
+(gensumnum : 0, powerseries(1 + (1-x)^(1/3),x,0));
+(3*sum(((-1)^i1*x^i1)/beta(4/3-i1,i1+1),i1,1,inf))/4+2$
+
+/* Examples from SF bug report [ 1722156 ] powerseries((x+1)/(1-2*x^2), x, 0);
+ * tnx Dan Gildea
+ */
+
+gensumnum : 0;
+0;
+
+/* two simple roots */
+powerseries((1)/((1-2*x)*(1-3*x)), x, 0);
+'sum((3^(i1+1)+(-2*2^i1))*x^i1,i1,0,inf);
+
+/* fibonacci */
+powerseries((1)/(1-x-x^2), x, 0);
+-'sum((-2*(sqrt(5)-1)^(-i2-1)*2^i2/sqrt(5)
+ -2*(sqrt(5)+1)^(-i2-1)*(-2)^i2/sqrt(5))
+ *x^i2,i2,0,inf);
+
+/* 1 1 2 2 4 4 8 8 */
+factor(powerseries((1+x)/(1-2*x^2), x, 0));
+/*
+'sum( (-1*(1/-(1/sqrt(2)))*(1/sqrt(2)-1)*(1/-(4/sqrt(2)))*(1/-(1/sqrt(2)))^i3 +
+      -1*(1/(1/sqrt(2)))*(-1/sqrt(2)-1)*(1/(4/sqrt(2)))*(1/(1/sqrt(2)))^i3 ) * x^i3,i3,0,inf);
+*/
+
+'sum(2^(i3/2-3/2)*((sqrt(2)-1)*(-1)^i3+sqrt(2)+1)*x^i3,i3,0,inf);
+
+/* multiple root */
+powerseries((1+x)/(1-x)^2, x, 0);
+'sum(2*(i4+1)*x^i4-x^i4,i4,0,inf);
+
+/* numerator higher order poly than denom */
+powerseries((1+x^3)/(1-x-x^2), x, 0);
+-2*x
+ *'sum((-2*(sqrt(5)-1)^(-i5-1)*2^i5/sqrt(5)
+   -2*(sqrt(5)+1)^(-i5-1)*(-2)^i5/sqrt(5))
+   *x^i5,i5,0,inf)
+  -x+1;
+
+/* zero root in denom */
+powerseries((1)/((1-2*x)*(x)), x, 0);
+('sum(2^i6*x^i6,i6,0,inf))/x;
+
+/* one simple and one repeated root in denom */
+powerseries((1+x+x^2)/((1-2*x)*(1+x)^2), x, 0);
+'sum(7*2^i7*x^i7/9+(i7+1)*(-1)^i7*x^i7/3-(-1)^i7*x^i7/9,i7,0,inf);
+
+/* gcd of exps is two */
+powerseries((1-x^2)/(1-4*x^2+x^4), x, 0);
+'sum((-1*(1/(2-sqrt(3)))*(sqrt(3)-1)*(1/(2*(2-sqrt(3))-4))*(1/(2-sqrt(3)))^i8 +
+      -1*(1/(sqrt(3)+2))*(-sqrt(3)-1)*(1/(2*(sqrt(3)+2)-4))*(1/(sqrt(3)+2))^i8 )*x^(2*i8),
+      i8, 0, inf);
+
+/* #2750 powerseries(x^x,x,0) gives Lisp error */
+powerseries(x^x, x, 0);
+'powerseries(x^x, x, 0)$
+
+sumcontract(intosum(powerseries(1+ (1-x)^(a),x,0) - powerseries((1-x)^(a),x,0)));
+1$
+
+/*
+  #2775: Don't expand a powerseries with log(ab)=log(a)+log(b) if a
+         is negative
+
+  (and also #2767)
+*/
+(gensumnum : 0, powerseries (log(2-x), x, 0));
+log(2) - sum (2^(-i2-1)*x^(i2+1)/(i2+1), i2, 0, inf)$
+
+/*
+  #2760: powerseries at minf
+
+  For an analytic function like this, the power series at minf should
+  match the power series at inf.
+*/
+block([inf_exp, minf_exp],
+  gensumnum : 0,
+  inf_exp: powerseries (1/(1+x), x, inf),
+  gensumnum : 0,
+  minf_exp: powerseries (1/(1+x), x, inf),
+  inf_exp - minf_exp);
+0$
+
+/* #2765: powerseries with non-integer order */
+powerseries (diff (f(x), x, biggles), x, 0);
+'powerseries (diff (f(x), x, biggles), x, 0)$
+
+/* #2755: powerseries of natural exponential */
+niceindices (powerseries (%e^x, x, 1));
+sum (1/i!, i, 0, inf) * sum((x-1)^i/i!, i, 0, inf)$
+
+/*
+  #2760
+
+  Make sure that we give up rather than trying to substitute an
+  arbitrary expression for an integration / differentiation variable
+  after expansion.
+*/
+powerseries(f(x), x, inf);
+'powerseries(f(x), x, inf)$
+
+/*
+  The test above gives up when it sees either an integral or a
+  derivative wrt the expansion variable as it's trying to substitute
+  answers back in. Make sure that we still allow either with respect
+  to some other variable. (Expand somewhere other than zero, otherwise
+  we skip the substitution step)
+*/
+factor(powerseries(integrate(f(x), x)*y, y, 1));
+'integrate(f(x), x)*y$
+
+niceindices(powerseries(log(sin(x)/x),x,0));
+/*('sum((-1)^i1*2^(2*i1)*bern(2*i1)*x^(2*i1)/(i1*(2*i1)!),i1,1,inf))/2$*/
+'sum((-1)^i*2^(2*i-1)*bern(2*i)*x^(2*i)/(i*(2*i)!),i,1,inf);
+
+/*
+  Check that we don't substitute blindly into the bound variables in
+  at() expressions.
+
+  The powerseries expands the integral of f(x) by computing an
+  antiderivative of the power series of f(x). Since we don't know
+  anything about f, this contains terms like "at(diff(f(x), x, n),
+  x=0)". If we then substituted the endpoints blindly, we'd get an
+  error from substituting in a number as a differentiation variable.
+*/
+op(niceindices(powerseries(integrate(f(x), x, 0, y), y, 0)));
+''(nounify('sum))$
+
+/*
+  Check we get a noun form (rather than something exploding) when
+  expanding a known power series and then trying to substitute in some
+  arbitrary function. At the moment, we only support arguments that
+  are monomials (see SP2SUB in series.lisp).
+*/
+powerseries(sin(f(x)), x, 0);
+powerseries(sin(f(x)), x, 0)$
+
+/* Basic support for expanding log(1+x) */
+factor(sumcontract(intosum(powerseries(log(x+1), x, 0) -
+                           sum((-1)^(i+1)*x^i/i, i, 1, inf))));
+0$
+
+/* Check that we can expand log(1+a*x^k) for various a and k. */
+niceindices(powerseries(log(1+a*x), x, 0));
+-sum((-1)^i * a^i * x^i / i, i, 1, inf)$
+
+niceindices(powerseries(log(1-a*x), x, 0));
+-sum(a^i * x^i / i, i, 1, inf)$
+
+/*
+  A particular example of a log expansion that didn't work when you
+  only allowed contents that SMONO accepted
+*/
+niceindices(powerseries(log(1-z*exp(-4)), z, 0));
+-sum(exp(-4*i)*z^i/i, i, 1, inf)$
+
+
+(kill(all), 0);
+0$

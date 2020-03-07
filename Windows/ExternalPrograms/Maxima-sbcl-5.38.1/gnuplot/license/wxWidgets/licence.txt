@@ -1,0 +1,9 @@
+wxWidgets is currently licenced under the "wxWindows Library Licence" pending approval of the "wxWidgets Library Licence" which will be identical apart from the name.
+
+The wxWindows Library Licence is essentially the L-GPL (Library General Public Licence), with an exception stating that derived works in binary form may be distributed on the user's own terms. This is a solution that satisfies those who wish to produce GPL'ed software using wxWidgets, and also those producing proprietary software.
+
+Participants in the discussion that led to this decision include the folk from AbiSource, Robert Roebling, Julian Smart, Markus Fleck, Karsten Ballueder, and some advice from Richard Stallman. Richard has confirmed that the new licence is compatible with GPL'ed applications. However, there are no significant restrictions on proprietary applications.
+
+The wxWindows Library Licence has been approved by the Open Source Initiative.
+
+In August 2005, an ambiguity in Clause 2 was removed (replaced "the user's" with "your") and the version bumped to 3.1

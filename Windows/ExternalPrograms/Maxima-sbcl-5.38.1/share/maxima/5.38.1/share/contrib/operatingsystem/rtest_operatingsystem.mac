@@ -1,0 +1,103 @@
+/* Tests for the operatingsystem package */
+/* File tests may need write and read permissions in the current directory */
+/* run the test (if you start maxima with ./maxima-local) with */
+/* batch("share/contrib/operatingsystem/rtest_operatingsystem.mac", 'test); */
+/* Be careful: if operations fail, directories may be left over or one might be in another directory! */
+
+(kill(all),0);
+0$
+
+( load("operatingsystem"), 0 );
+0$
+
+(olddir : getcurrentdirectory(), 0);
+0$
+
+(mkdir("testdir1"), 0);
+0$
+
+(chdir("testdir1"),0);
+0$
+
+(newdir : getcurrentdirectory(), 0);
+0$
+
+mkdirokay : if sequal(concat(olddir, "testdir1/"), newdir) then "ok" else "not ok";
+"ok"$
+
+/* in the new directory, try to create, rename and remove a file */
+pathname_name(stringout("testfile", "testdata"));
+"testfile"$
+
+length(directory("*"));
+1$
+
+pathname_name(first(directory("*")));
+"testfile"$
+
+(rename_file("testfile", "testfile2"),0);
+0$
+
+length(directory("*"));
+1$
+
+pathname_name(first(directory("*")));
+"testfile2"$
+
+(copy_file("testfile2", "testfile3"),0);
+0$
+
+length(directory("*"));
+2$
+
+pathname_name(first(sort(directory("*"))));
+"testfile2"$
+
+pathname_name(second(sort(directory("*"))));
+"testfile3"$
+
+(delete_file("testfile2"),0);
+0$
+
+length(directory("*"));
+1$
+
+pathname_name(first(directory("*")));
+"testfile3"$
+
+(delete_file("testfile3"),0);
+0$
+
+length(directory("*"));
+0$
+
+
+(if sequal(mkdirokay, "ok") then chdir(".."),0);
+0$
+
+
+/* do this test only if creating a new directory worked */
+(if sequal(mkdirokay, "ok") then rmdir("testdir1"), 0);
+0$
+
+/* now test a more complicated name - with spaces, german umlauts */
+(mkdir("testdir1 äöüß"), 0);
+0$
+
+/* do this test only if creating a new directory worked */
+(chdir("testdir1 äöüß"),0);
+0$
+
+(newdir : getcurrentdirectory(), 0);
+0$
+
+mkdirokay : if sequal(concat(olddir, "testdir1 äöüß/"), newdir) then "ok" else "not ok";
+"ok"$
+
+/* do this test only if creating a new directory worked */
+(if sequal(mkdirokay, "ok") then chdir(".."),0);
+0$
+
+/* do this test only if creating a new directory worked */
+(if sequal(mkdirokay, "ok") then rmdir("testdir1 äöüß"), 0);
+0$

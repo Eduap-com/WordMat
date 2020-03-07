@@ -1,0 +1,52 @@
+/* Test askinteger and asksign -- these are interactive,
+ * therefore this script SHOULD NOT be included in testsuite_files
+ */
+
+(kill(all),0);
+0$
+
+/* commit 3137b946 tried to fix *LOCAL-SIGNS* craziness,
+ * but screwed up in its own way. Fixed for good this time?
+ * Nicked from mailing list circa 2013-08-28
+ */
+block (print ("Please enter 'p' now:"), 0);
+0;
+
+integrate(sin(omega*t)*exp(-s*t),t,0,inf);
+omega/(s^2+omega^2);
+
+block (print ("Please enter 'p' now:"), 0);
+0;
+
+[asksign (foo), sign (foo), sign (foo)];
+[pos, pos, pos];
+
+block (print ("Please enter 'n' now:"), 0);
+0;
+
+[asksign (foo), sign (foo), sign (foo)];
+[neg, neg, neg];
+
+block (print ("Please enter 'z' now:"), 0);
+0;
+
+[asksign (foo), sign (foo), sign (foo)];
+[zero, zero, zero];
+
+block (print ("Please enter 'p' now:"), 0);
+0;
+
+limit((exp(a*x)-1)/(exp(a*x)+1),x,inf);
+1;
+
+block (print ("Please enter 'n' now:"), 0);
+0;
+
+limit((exp(a*x)-1)/(exp(a*x)+1),x,inf);
+-1;
+
+block (print ("Please enter 'z' now:"), 0);
+0;
+
+limit((exp(a*x)-1)/(exp(a*x)+1),x,inf);
+0;

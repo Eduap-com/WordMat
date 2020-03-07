@@ -1,0 +1,432 @@
+/* A nice test of the translator would be to translate the entire test suite ...
+ * In the meantime here are some tests to verify some specific bugs are fixed.
+ */
+
+(kill (all), 0);
+0;
+
+/* SF [ 1728888 ] translator bugs: no mnot mprogn */
+
+(foo (e,v) := block([vi], for vi in v while not(emptyp(e)) do (print(vi), e : rest(e)), e),
+ foo ([1, 2, 3], [a, b]));
+[3];
+
+(translate (foo), ?funcall (foo, [1, 2, 3], [a, b]));
+[3];
+
+/* simpler function featuring mprogn and mnot */
+
+(bar (x) := (x : 2*x, x : 3*x, not (x < 100)), bar (3));
+false;
+
+(translate (bar), ?funcall (bar, 3));
+false;
+
+/* SF [ 1646525 ] no function mdoin */
+
+(try_me(x) := block([acc : 0], for i in x while i > 5 do acc : acc + i, acc),
+ try_me ([10, 9, 8, 7, 6, 5, 4, 5, 6, 7, 8, 9, 10]));
+40;
+
+(translate (try_me), ?funcall (try_me, [10, 9, 8, 7, 6, 5, 4, 5, 6, 7, 8, 9, 10]));
+40;
+
+/* SF [ 1818645 ] Compiled maxima code containing $ARRAY gets a Lisp error. */
+
+(test_array_comp (x) :=
+  block ([abc, i],
+    array (abc, 3),
+    for i thru 3 do (abc[i]: i*i),
+    abc[3] : x, 
+    [abc, abc[3], abc[2]]),
+  test_array_comp (100));
+[abc, 100, 4];
+
+(translate (test_array_comp), ?funcall (test_array_comp, 100));
+[abc, 100, 4];
+
+/* SF [ 545794 ] Local Array does not compile properly */
+
+(trial (a) :=
+  block ([myvar, i],
+    local(myvar),
+    array (myvar, 7),
+    for i : 0 thru 7 do myvar [i] : a^i,
+    [member (myvar, arrays), listarray (myvar)]),
+ trial (2));
+[true, [1, 2, 4, 8, 16, 32, 64, 128]];
+
+(translate (trial), ?funcall (trial, 2));
+[true, [1, 2, 4, 8, 16, 32, 64, 128]];
+
+/* Next test fails because local(myvar) in translated code doesn't clean up properties ... */
+
+[member (myvar, arrays), errcatch (listarray (myvar))];
+[false, []];
+
+/* for loop variable not special
+ * reported to mailing list 2009-08-13 "Why won't this compile?"
+ */
+
+(kill (foo1, bar1),
+ foo1 () := bar1 + 1,
+ baz1 (n) := block ([S : 0], for bar1:0 thru n - 1 do S : S + foo1 (), S),
+ translate (baz1),
+ baz1 (10));
+55;
+
+/* original example */
+
+(fun(A,b,s,VF,x,h):= block
+ ([Y],
+   Y[1]:  x,
+   for i:2 thru s do
+    Y[i]:  x + h*(sum(A[i,j]*VF(Y[j]),j,1,i-1)),
+   x: expand(x + h*sum(b[i]*VF(Y[i]),i,1,s))),
+  A: matrix([1,1],[1,1]),
+  b: [1,1],
+ 0);
+0;
+
+fun(A,b,2,f,[1,1],.01);
+0.01*f(0.01*f([1,1])+[1,1])+0.01*f([1,1])+[1,1]$
+
+(translate (fun), fun(A,b,2,f,[1,1],.01));
+0.01*f(0.01*f([1,1])+[1,1])+0.01*f([1,1])+[1,1]$
+
+/* incorrect code emitted for call from translated function to untranslated
+ * SF bug # 2934064 "problem loading ezunits"
+ */
+
+(f0001 (x) := [f0002 (x), f0003 (x)],
+ f0002 (x) := x,
+ f0003 (x) := x,
+ translate (f0002, f0001),
+ f0001 (1));
+[1, 1];
+
+(translate (f0003), f0001 (1));
+[1, 1];
+
+(compile (f0003), f0001 (1));
+[1, 1];
+
+(compile (f0003, f0002, f0001), f0001 (1));
+[1, 1];
+
+/* SF bug # 2938716 "too much evaluation in translated code"
+ */
+
+(g0001 (x) := [g0002 (x), g0003 (x)],
+ g0002 (x) := x,
+ g0003 (x) := x,
+ translate (g0002, g0001),
+ kill (aa, bb, cc),
+ aa : 'bb,
+ bb : 'cc,
+ g0001 (aa));
+[bb, bb];
+
+(translate (g0003), g0001 (aa));
+[bb, bb];
+
+(compile (g0003), g0001 (aa));
+[bb, bb];
+
+(compile (g0003, g0002, g0001), g0001 (aa));
+[bb, bb];
+
+/* SF bug # 3035313 "some array references translated incorrectly"
+ */
+
+(kill (aa1, aa3, bb1, bb3, cc1, cc3),
+ array (aa1, 15),
+ array (aa3, 12, 4, 6),
+ array (bb1, flonum, 15),
+ array (bb3, flonum, 5, 6, 7),
+ array (cc1, fixnum, 8),
+ array (cc3, fixnum, 6, 10, 4),
+ 0);
+0;
+
+(kill (faa, gaa, fbb, gbb, fcc, gcc),
+ faa (n) := aa1[n] + aa3[n, n - 1, n - 2],
+ gaa (n) := (aa1[n] : 123, aa3[n, n - 1, n - 2] : 321),
+ fbb (n) := bb1[n] + bb3[n, n - 1, n - 2],
+ gbb (n) := (bb1[n] : 123, bb3[n, n - 1, n - 2] : 321),
+ fcc (n) := cc1[n] + cc3[n, n - 1, n - 2],
+ gcc (n) := (cc1[n] : 123, cc3[n, n - 1, n - 2] : 321),
+ 0);
+0;
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+translate (faa, gaa, fbb, gbb, fcc, gcc);
+[faa, gaa, fbb, gbb, fcc, gcc];
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+compile (faa, gaa, fbb, gbb, fcc, gcc);
+[faa, gaa, fbb, gbb, fcc, gcc];
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+/* try same stuff again w/ undeclared arrays ...
+ * no type spec => only one kind of array
+ */
+
+(kill (aa1, aa3, bb1, bb3, cc1, cc3),
+ ?fmakunbound (faa),
+ ?fmakunbound (fbb),
+ [gaa (4), faa (4)]);
+[321, 444];
+
+(translate (faa, gaa), [gaa (4), faa (4)]);
+[321, 444];
+
+(compile (faa, gaa), [gaa (4), faa (4)]);
+[321, 444];
+
+/* try same stuff again w/ Lisp arrays */
+
+(kill (aa1, aa3, bb1, bb3, cc1, cc3),
+ map (?fmakunbound, [faa, fbb, fcc, gaa, gbb, gcc]),
+ aa1 : make_array (any, 15),
+ aa3 : make_array (any, 12, 4, 6),
+ bb1 : make_array (flonum, 15),
+ bb3 : make_array (flonum, 5, 6, 7),
+ cc1 : make_array (fixnum, 8),
+ cc3 : make_array (fixnum, 6, 10, 4),
+ 0);
+0;
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+translate (faa, gaa, fbb, gbb, fcc, gcc);
+[faa, gaa, fbb, gbb, fcc, gcc];
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+compile (faa, gaa, fbb, gbb, fcc, gcc);
+[faa, gaa, fbb, gbb, fcc, gcc];
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+/* SF bug # 2569: "translate rat(1,x) and rat([1]) incorrect" */
+
+(kill (f), f () := rat (x, x), translate (f), f ());
+''(rat (x, x));
+
+(kill (f), f () := rat ([1]), translate (f), f ());
+''(rat ([1]));
+
+(kill (foo, y1a, y1b, y2a, y2b), 
+  foo(x) := block (mode_declare (x, float),
+     [tanh (x), tan (x), sech (x), sec (x), acos (x), acot (x), sin (x),
+      acsc (x), asinh (x), acsch (x), cosh (x), coth (x), realpart (x),
+      asec (x), asin (x), erf (x), log (x), cos (x), cot (x), csc (x),
+      sinh (x), csch (x)]),
+  0);
+0;
+
+y1a : foo (0.5);
+[.4621171572600097,.5463024898437905,0.886818883970074,1.139493927324549,
+ 1.047197551196597,1.107148717794091,0.479425538604203,
+ 1.570796326794897-1.316957896924817*%i,.4812118250596035,1.44363547517881,
+ 1.127625965206381,2.163953413738653,0.5,1.316957896924817*%i,
+ 0.523598775598299,.5204998778130465,-.6931471805599453,.8775825618903728,
+ 1.830487721712452,2.085829642933488,.5210953054937474,1.919034751334944]$
+
+y1b : foo (1.5);
+[.9051482536448664,14.10141994717172,.4250960349422805,14.1368329029699,
+ .9624236501192069*%i,.5880026035475675,.9974949866040544,.7297276562269662,
+ 1.194763217287109,.6251451172504168,2.352409615243247,1.104791392982512,1.5,
+ .8410686705679303,1.570796326794897-.9624236501192069*%i,.9661051464753108,
+ .4054651081081644,0.0707372016677029,.07091484430265245,1.002511304246725,
+ 2.129279455094817,.4696424405952246]$
+
+(translate (foo), y2a : foo (0.5), y2b : foo (1.5), 0);
+0;
+
+is (y1a = y2a);
+true;
+
+is (y1b = y2b);
+true;
+
+/* verify that save/compfile/compile_file/translate_file preserves upper/lower case in symbol names */
+
+/* save */
+
+(kill (all),
+ foo (x) := my_foo * x,
+ Foo (x) := my_Foo * x,
+ FOO (x) := my_FOO * x,
+ [my_foo, my_Foo, my_FOO] : [123, 456, 789],
+ results : [foo (2), Foo (3), FOO (4)],
+ my_test () := is (results = [2*123, 3*456, 4*789]),
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ lisp_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-save-", lisp_name, ".lisp"),
+ save (lisp_filename, values, functions),
+ kill (allbut (lisp_filename)),
+ load (lisp_filename),
+ my_test ());
+true;
+
+/* compfile */
+
+(kill (all),
+ foo (x) := my_foo * x,
+ Foo (x) := my_Foo * x,
+ FOO (x) := my_FOO * x,
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ lisp_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-compfile-", lisp_name, ".lisp"),
+ compfile (lisp_filename, functions),
+ kill (functions), 
+ load (lisp_filename),
+ [my_foo, my_Foo, my_FOO] : [123, 456, 789],
+ results : [foo (2), Foo (3), FOO (4)],
+ my_test () := is (results = [2*123, 3*456, 4*789]),
+ my_test ());
+true;
+ 
+/* compile_file */
+
+(kill (all),
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ maxima_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-compile_file-", lisp_name, ".mac"),
+ fasl_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-compile_file-", lisp_name, ".fasl"),
+ lisp_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-compile_file-", lisp_name, ".LISP"),
+ maxima_output : openw (maxima_filename),
+ maxima_content :
+"foo (x) := my_foo * x;
+Foo (x) := my_Foo * x;
+FOO (x) := my_FOO * x;
+[my_foo, my_Foo, my_FOO] : [123, 456, 789];
+results : [foo (2), Foo (3), FOO (4)];
+my_test () := is (results = [2*123, 3*456, 4*789]);",
+ printf (maxima_output, maxima_content),
+ close (maxima_output),
+ compile_file (maxima_filename, fasl_filename, lisp_filename),
+ kill (allbut (lisp_filename)),
+ load (lisp_filename),
+ my_test ());
+true;
+
+/* translate_file */
+
+(kill (all),
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ maxima_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-translate_file-", lisp_name, ".mac"),
+ lisp_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-translate_file-", lisp_name, ".LISP"),
+ maxima_output : openw (maxima_filename),
+ maxima_content :
+"foo (x) := my_foo * x;
+Foo (x) := my_Foo * x;
+FOO (x) := my_FOO * x;
+[my_foo, my_Foo, my_FOO] : [123, 456, 789];
+results : [foo (2), Foo (3), FOO (4)];
+my_test () := is (results = [2*123, 3*456, 4*789]);",
+ printf (maxima_output, maxima_content),
+ close (maxima_output),
+ translate_file (maxima_filename, lisp_filename),
+ kill (allbut (lisp_filename)),
+ load (lisp_filename),
+ my_test ());
+true;
+
+/* Bug 2934:
+
+   Translating a literal exponent that comes out as a float shouldn't
+   produce assigned type any. This test runs the translation for a
+   trivial function that triggered the bug then looks in the unlisp
+   file (which contains messages from the translator) and checks that
+   there aren't any warnings.
+*/
+(kill (all),
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ basename: sconcat (maxima_tempdir, "/tmp-rtest_translator-2934-", lisp_name),
+ maxima_filename : sconcat (basename, ".mac"),
+ lisp_filename : sconcat (basename, ".LISP"),
+ maxima_output : openw (maxima_filename),
+ maxima_content : "f () := block([y], mode_declare(y,float), y: 3^0.33, y)$",
+ printf (maxima_output, maxima_content),
+ close (maxima_output),
+ translate_file (maxima_filename, lisp_filename),
+ kill (allbut(basename)),
+ /* Any warning messages end up at .UNLISP */
+ block ([unlisp: openr (sconcat (basename, ".UNLISP")),
+         line, acc: []],
+   while stringp (line: readline(unlisp)) do
+     if is ("warning" = split(line, ":")[1]) then push(line, acc),
+   acc));
+[]$
+
+/* makelist translated incorrectly
+ * SF bug #3083: "Error on compiling a working maxima function"
+ */
+
+(kill(all),
+ f1(n) := makelist (1, n),
+ f2(n) := makelist (i^2, i, n),
+ f3(l) := makelist (i^3, i, l),
+ f4(n) := makelist (i^4, i, 1, n),
+ f5(m, n) := makelist (i^5, i, 1, n, m),
+ translate(f1, f2, f3, f4, f5),
+ 0);
+0;
+
+f1(5);
+[1,1,1,1,1];
+
+f2(5);
+[1, 4, 9, 16, 25];
+
+f3([1,2,3]);
+[1, 8, 27];
+
+f4(4);
+[1, 16, 81, 256];
+
+f5(2, 10);
+[1, 243, 3125, 16807, 59049];
+
+/* original function from bug report */
+
+(ordersort(lis,vars,oper):=block([negsumdispflag:false,liss:lis,varlist:vars,temp], /*Does lexicographical sort */
+ for i:1 thru length(varlist) do (
+     for j:1 thru i do (
+         liss:sort(liss,lambda([x,y],apply("and",map(oper,makelist(part(x,2)[k],k,1,i)
+                             ,makelist(part(y,2)[k],k,1,i)))))
+     )),liss),
+ translate (ordersort)); /* 'translate' doesn't trigger an error, so check return value */
+[ordersort];
+ 
+[member ('transfun, properties(ordersort)),
+ ordersort([[-7,[0,2,1]],[3,[1,2,1]],[1,[0,4,1]],[6,[4,3,3]],[6,[4,4,3]],[-7,[3,5,4]],[2,[0,0,5]],[-10,[2,2,5]],[-10,[3,4,7]],[7,[3,8,9]]],[x,y,z],">=")];
+[true, [[6,[4,4,3]],[6,[4,3,3]],[7,[3,8,9]],[-7,[3,5,4]],[-10,[3,4,7]],[-10,[2,2,5]],[3,[1,2,1]],[1,[0,4,1]],[-7,[0,2,1]],[2,[0,0,5]]]];
+

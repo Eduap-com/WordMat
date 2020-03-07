@@ -1,0 +1,23 @@
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\bin\Debug\MathFormForm.exe.config
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\bin\Debug\MathFormForm.exe
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\bin\Debug\MathFormForm.pdb
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\bin\Debug\MathMenu.dll
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\bin\Debug\MathMenu.pdb
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\obj\Debug\MathFormForm.Form1.resources
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\obj\Debug\MathFormForm.Properties.Resources.resources
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\obj\Debug\MathFormForm.exe
+C:\Users\Mikael2\Documents\Visual Studio 2010\Projects\MathMenu\MathFormForm\obj\Debug\MathFormForm.pdb
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\bin\Debug\MathFormForm.exe.config
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.exe
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.pdb
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\bin\Debug\MathFormForm.exe
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\bin\Debug\MathFormForm.pdb
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\bin\Debug\MathMenu.dll
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\bin\Debug\MathMenu.pdb
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.csprojResolveAssemblyReference.cache
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.Form1.resources
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.Properties.Resources.resources
+C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.csproj.GenerateResource.Cache
