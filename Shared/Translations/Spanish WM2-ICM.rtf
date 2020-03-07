@@ -1,0 +1,1357 @@
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\fnil\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue0;\red0\green255\blue0;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\lang13322\f0\fs22 Public Property Get dAsDiffChr() As String\par
+Dim s As String\par
+Select Case SprogNr\par
+Case 1: s = "Brug alm. d som differential d"\par
+Case 3: s = "Use regular d as differential d"\par
+Case 4: s = "Use la letra d como el diferencial d"\par
+Case Else: s = "Use regular d as differential d"\par
+End Select\par
+dAsDiffChr = s\par
+End Property\par
+\par
+Public Property Get dAsDiffChrHelp() As String\par
+Dim s As String\par
+Select Case SprogNr\par
+Case 1: s = "dy/dx notation kan normalt kun bruges vha. et specielt differential d (\\dd) eller symbolet for partielt afledte (\\partial). Hvis det ikke forventes at d/dx kan forveksles med et andet udtryk er denne indstilling en fordel idet det er nemmere at taste normalt d"\par
+Case 4: s = "La notaci\'f3n dy/dx se usa normalmente representada por una diferencial especial d (\\dd) o por el s\'edmbolo para las derivadas parciales (\\partial). Si usted cree que no se confundir\'e1 con otras expresiones puede utilizar esta opci\'f3n, ya que es m\'e1s r\'e1pido escribir dy / dx usando d".\par
+Case Else: s = "dy/dx notation can normally only be used with a special differential d (\\dd) or the symbol for partial derivatives (\\partial). If you dont expect d/dx to be confused with other expression, you can use this setting since it is faster to type dy/dx using regular d."\par
+End Select\par
+dAsDiffChrHelp = s\par
+End Property\par
+\par
+Public Property Get RegrUser() As String\par
+Dim s As String\par
+Select Case SprogNr\par
+Case 1: s = "Brugerdefineret regression"\par
+Case 4: s = "Regresi\'f3n definida por el usuario"\par
+Case Else: s = "User defined regression"\par
+End Select\par
+RegrUser = s\par
+End Property\par
+\par
+Public Property Get RibSolveDEnum() As String\par
+Dim s As String\par
+Select Case SprogNr\par
+Case 1: s = "L\'f8s koblede differentialligning(er) numerisk"\par
+Case 4: s = "Resuelve sistemas de ecuaciones diferenciales"\par
+Case Else: s = "Solve system of differential equation(s) numerically"\par
+End Select\par
+RibSolveDEnum = s\par
+End Property\par
+\par
+Public Property Get ErrorGeneral() As String\par
+Dim s As String\par
+Select Case SprogNr\par
+Case 1: s = "Der skete en fejl"\par
+Case 3: s = "An error occured"\par
+Case 4: s = "Ha ocurrido un error"\par
+Case Else: s = "Error error occured"\par
+End Select\par
+ErrorGeneral = s\par
+End Property\par
+\par
+Public Property Get Variable() As String\par
+Dim s As String\par
+Select Case SprogNr\par
+Case 1: s = "Variabel"\par
+Case 3: s = "Variable"\par
+Case 4: s = "Variable"\par
+Case Else: s = "Variable"\par
+End Select\par
+Variable = s\par
+End Property\par
+\par
+Public Property Get Warning() As String\par
+Dim s As String\par
+Select Case SprogNr\par
+Case 1: s = "Advarsel"\par
+Case 3: s = "Warning"\par
+Case 4: s = "Advertencia"\par
+Case Else: s = "Warning"\par
+End Select\par
+Warning = s\par
+End Property\par
+\par
+SA(0, 0) = "Hj\'e6lp til Maxima-kommandoer"\par
+SA(0, 1) = "Help for Maxima commands"\par
+SA(0, 2) = ""\par
+SA(0, 3) = ""\par
+SA(0, 4) = "Ayuda para comandos de M\'e1xima"\par
+SA(0, 5) = ""\par
+\par
+SA(1, 0) = "Inds\'e6t nummereret ligning"\par
+SA(1, 1) = "Insert numbered equation"\par
+SA(1, 2) = ""\par
+SA(1, 3) = ""\par
+SA(1, 4) = "Inserte ecuaciones numeradas"\par
+SA(1, 5) = ""\par
+\par
+SA(2, 0) = "Inds\'e6t nummeret ligning til reference"\par
+SA(2, 1) = "Insert numbered equation for reference"\par
+SA(2, 2) = ""\par
+SA(2, 3) = ""\par
+SA(2, 4) = "Inserte ecuaciones numeradas para referencia"\par
+SA(2, 5) = ""\par
+\par
+SA(3, 0) = "Inds\'e6t reference til ligning"\par
+SA(3, 1) = "Insert reference to equation"\par
+SA(3, 2) = ""\par
+SA(3, 3) = ""\par
+SA(3, 4) = "Inserte referencia a la ecuaci\'f3n"\par
+SA(3, 5) = ""\par
+\par
+SA(4, 0) = "Bogm\'e6rke"\par
+SA(4, 1) = "Bookmark"\par
+SA(4, 2) = ""\par
+SA(4, 3) = ""\par
+SA(4, 4) = "Marcador"\par
+SA(4, 5) = ""\par
+\par
+SA(5, 0) = "Indtast navn p\'e5 ligningen"\par
+SA(5, 1) = "Type name of the equation"\par
+SA(5, 2) = ""\par
+SA(5, 3) = ""\par
+SA(5, 4) = "Escriba el nombre de la ecuaci\'f3n"\par
+SA(5, 5) = ""\par
+\par
+SA(6, 0) = "S\'e6t ligningsnummer"\par
+SA(6, 1) = "Set equation number"\par
+SA(6, 2) = ""\par
+SA(6, 3) = ""\par
+SA(6, 4) = "Numere la ecuaci\'f3n"\par
+SA(6, 5) = ""\par
+\par
+SA(7, 0) = "Nummerede ligninger"\par
+SA(7, 1) = "Numbered equations"\par
+SA(7, 2) = ""\par
+SA(7, 3) = ""\par
+SA(7, 4) = "Ecuaciones numeradas"\par
+SA(7, 5) = ""\par
+\par
+SA(8, 0) = "Inds\'e6t Ligningssektion nr."\par
+SA(8, 1) = "Insert equation section no."\par
+SA(8, 2) = ""\par
+SA(8, 3) = ""\par
+SA(8, 4) = "Inserte ecuaci\'f3n de la secci\'f3n N\'b0"\par
+SA(8, 5) = ""\par
+\par
+SA(9, 0) = "Opdater ligningsnumre"\par
+SA(9, 1) = "Update equation numbers"\par
+SA(9, 2) = ""\par
+SA(9, 3) = ""\par
+SA(9, 4) = "Actualice los n\'fameros de las ecuaciones"\par
+SA(9, 5) = ""\par
+\par
+SA(10, 0) = "Eksisterende navne p\'e5 ligninger"\par
+SA(10, 1) = "Existing names of equations"\par
+SA(10, 2) = ""\par
+SA(10, 3) = ""\par
+SA(10, 4) = "Nombres existentes de ecuaciones"\par
+\par
+SA(11, 0) = "For at inds\'e6tte reference til ligningen senere v\'e6lges 'Inds\'e6t reference til ligning' fra WordMat-menuen under 'Inds\'e6t ligning'."\par
+SA(11, 1) = "To insert a reference to the equation later, choose 'Insert reference to equation' from the WordMat-menu under 'Insert equation'"\par
+SA(11, 2) = ""\par
+SA(11, 3) = ""\par
+SA(11, 4) = "Para insertar una referencia a la ecuaci\'f3n, m\'e1s tarde, escoja "Insertar referencia a la ecuaci\'f3n" desde el men\'fa de WordMat en la pesta\'f1a "Inserte Ecuaci\'f3n""\par
+SA(11, 5) = ""\par
+\par
+SA(12, 0) = "Navnet eksisterer allerede"\par
+SA(12, 1) = "The name already exists"\par
+SA(12, 2) = ""\par
+SA(12, 3) = ""\par
+SA(12, 4) = "El nombre ya existe"\par
+SA(12, 5) = ""\par
+\par
+SA(13, 0) = "Navnet m\'e5 ikke indeholde mellemrum"\par
+SA(13, 1) = "The name may not contain spaces"\par
+SA(13, 2) = ""\par
+SA(13, 3) = ""\par
+SA(13, 4) = "El nombre no debe contener espacios"\par
+SA(13, 5) = ""\par
+\par
+SA(14, 0) = "Ligningsreference"\par
+SA(14, 1) = "Equation reference"\par
+SA(14, 2) = ""\par
+SA(14, 3) = ""\par
+SA(14, 4) = "Referencia de ecuaci\'f3n"\par
+SA(14, 5) = ""\par
+\par
+SA(15, 0) = "Placering"\par
+SA(15, 1) = "Placement"\par
+SA(15, 2) = ""\par
+SA(15, 3) = ""\par
+SA(15, 4) = "Ubicaci\'f3n"\par
+SA(15, 5) = ""\par
+\par
+SA(16, 0) = "Venstre side"\par
+SA(16, 1) = "Left side"\par
+SA(16, 2) = ""\par
+SA(16, 3) = ""\par
+SA(16, 4) = "Lado izquierdo"\par
+SA(16, 5) = ""\par
+\par
+SA(17, 0) = "H\'f8jre side"\par
+SA(17, 1) = "Right side"\par
+SA(17, 2) = ""\par
+SA(17, 3) = ""\par
+SA(17, 4) = "Lado derecho"\par
+SA(17, 5) = ""\par
+\par
+SA(18, 0) = "Nummerering"\par
+SA(18, 1) = "Numbering"\par
+SA(18, 2) = ""\par
+SA(18, 3) = ""\par
+SA(18, 4) = "Numeraci\'f3n"\par
+SA(18, 5) = ""\par
+\par
+SA(19, 0) = "Inds\'e6t reference med 2 x Alt+m"\par
+SA(19, 1) = "Insert reference with 2 x Alt+m"\par
+SA(19, 2) = ""\par
+SA(19, 3) = ""\par
+SA(19, 4) = "Inserte referencia con 2 x Alt+m"\par
+SA(19, 5) = ""\par
+\par
+SA(20, 0) = AppNavn & " er lavet af Mikael Sams\'f8e S\'f8rensen, Nyborg Gymnasium 2009-2014." & vbCrLf & vbCrLf & "Programmet er gratis og stilles til r\'e5dighed under Gnu General public license." & vbCrLf & vbCrLf & "Med WordMat er f\'f8lgende andre gratis programmer installeret: Maxima, GnuPlot, GeoGebra, Graph " & vbCrLf & vbCrLf & "{\field{\*\fldinst{HYPERLINK "www.eduap.com"}}{\fldrslt{\ul\cf1 www.eduap.com}}}\f0\fs22 "\par
+SA(20, 1) = AppNavn & " was made by Mikael Sams\'f8e S\'f8rensen, Nyborg Gymnasium, EDUAP 2009-2014." & vbCrLf & vbCrLf & "The program is free and open source under Gnu General public license." & vbCrLf & vbCrLf & "WordMat uses the following programs: Maxima, GnuPlot, GeoGebra, Graph " & vbCrLf & vbCrLf & "{\field{\*\fldinst{HYPERLINK "www.eduap.com"}}{\fldrslt{\ul\cf1 www.eduap.com}}}\f0\fs22 "\par
+SA(20, 2) = ""\par
+SA(20, 3) = ""\par
+SA(20, 4) = ""\par
+SA(20, 5) = ""\par
+\par
+SA(21, 0) = "Der er en ny version af " & AppNavn & " klar til download." & vbCrLf & vbCrLf & "Nyheder: " & vbCrLf\par
+SA(21, 1) = "There is a new version of " & AppNavn & " ready for download." \highlight2 & vbCrLf & vbCrLf & "News: " & vbCrLf\par
+\highlight0 SA(21, 2) = ""\par
+SA(21, 3) = ""\par
+SA(21, 4) = "Hay una nueva versi\'f3n de " & AppNavn & " lista para descargar"\par
+SA(21, 5) = ""\par
+\par
+SA(22, 0) = "Vil du hente den nye version nu?"\par
+SA(22, 1) = "Do you want to download the new version now?"\par
+SA(22, 2) = ""\par
+SA(22, 3) = ""\par
+SA(22, 4) = "\'bfDesea descargar ahora la nueva versi\'f3n?"\par
+SA(22, 5) = ""\par
+\par
+SA(23, 0) = "Ny version"\par
+SA(23, 1) = "New version"\par
+SA(23, 2) = ""\par
+SA(23, 3) = ""\par
+SA(23, 4) = "Nueva versi\'f3n"\par
+SA(23, 5) = ""\par
+\par
+SA(24, 0) = "Du skal indtaste en punktm\'e6ngde enten i en tabel eller i et matematikfelt som f.eks. \{(1,2;2),(2;5,3)\}" & vbCrLf & vbCrLf & "Indtast et antal punkter, s\'e5 oprettes automatisk en tabel som kan udfyldes med punterne. N\'e5r du har udfyldt den aktiverer du den \'f8nskede regression."\par
+SA(24, 1) = "Type the number of points you want to do regression on. Then a table will be created, where you can put your points. When you want to do the regression just select the table and choose your desired regression from the menu."\par
+SA(24, 2) = ""\par
+SA(24, 3) = ""\par
+SA(24, 4) = "Indique el n\'famero de puntos con el que desea ejecutar la regresi\'f3n. Se crear\'e1 una tabla donde puede anotar sus puntos. Cuando quiera ejecutar la regresi\'f3n s\'f3lo seleccione la tabla y escoja el tipo de regresi\'f3n que desee ejecutar desde el men\'fa."\par
+SA(24, 5) = ""\par
+\par
+SA(25, 0) = "Det anbefales ikke at lave regression med mere end 200 punkter i en Word-tabel. Brug Excel hvis du vil lave regression p\'e5 s\'e5 mange punkter."\par
+SA(25, 1) = " It is not recommened to do regression on more than 200 points in a Word-table. Use Excel if you want to do regression on that many points"\par
+SA(25, 2) = ""\par
+SA(25, 3) = ""\par
+SA(25, 4) = "No es recomendable ejecutar una regresi\'f3n con m\'e1s de 200 puntos en una tabla de Word. Use Excel si desea ejecutar una regresi\'f3n con muchos puntos."\par
+SA(25, 5) = ""\par
+\par
+SA(26, 0) = "Der skete en fejl. Der er formentlig en fejl i inputtallene."\par
+SA(26, 1) = "An error occured. There is probably an error in the input numbers"\par
+SA(26, 2) = ""\par
+SA(26, 3) = ""\par
+SA(26, 4) = "Ha ocurrido un error. Hay, probablemente, un error en los n\'fameros de entrada"\par
+SA(26, 5) = ""\par
+\par
+SA(27, 0) = "Du skal lave en tabel med to kolonner. x-v\'e6rdier i venstre kolonne og y-v\'e6rdier i h\'f8jrekolonne. Bogstaver ignoreres. Der udf\'f8res regression p\'e5 de markerede tal. Hvis ingen er markerede udf\'f8res regression p\'e5 alle tal i tabellen."\par
+SA(27, 1) = "You must create a table with two columns. x-values in the left column and y-values in the right column. Letters are ignored. Regression is performed on the numbers selected. If none are selected, regression is performed on all numbers in the table"\par
+SA(27, 2) = ""\par
+SA(27, 3) = ""\par
+SA(27, 4) = "Usted debe crear una tabla con dos columnas. Los valores de x en la columna izquierda y los valores de y en la columna derecha. No se incluyen letras. La regresi\'f3n se ejecutar\'e1 sobre los n\'fameros seleccionados. Si no hay selecci\'f3n, la regresi\'f3n se ejecutar\'e1 sobre todos los n\'fameros de la tabla"\par
+SA(27, 5) = ""\par
+\par
+SA(28, 0) = "Den \'f8nskede regression kan ikke udf\'f8res p\'e5 de punkter."\par
+SA(28, 1) = "Regression cannot be performed on those points"\par
+SA(28, 2) = ""\par
+SA(28, 3) = ""\par
+SA(28, 4) = "La regresi\'f3n no puede ejecutarse en esos puntos"\par
+SA(28, 5) = ""\par
+\par
+SA(29, 0) = "Line\'e6r regression udf\'f8rt vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ": " & vbTab\par
+SA(29, 1) = "Linear regression performed by " & AppNavn & ": " & vbTab\par
+SA(29, 2) = ""\par
+SA(29, 3) = ""\par
+SA(29, 4) = "Regresi\'f3n lineal ejecutada por" & AppNavn & ": " & vbTab\par
+SA(29, 5) = ""\par
+\par
+SA(30, 0) = "Eksponentiel regression udf\'f8rt vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ": " & vbTab\par
+SA(30, 1) = "Exponential regression performed by " & AppNavn & ": " & vbTab\par
+SA(30, 2) = ""\par
+SA(30, 3) = ""\par
+SA(30, 4) = "Regresi\'f3n exponencial ejecutada por" & AppNavn & ": " & vbTab\par
+"\par
+SA(30, 5) = ""\par
+\par
+SA(31, 0) = "Potens regression udf\'f8rt vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ": " & vbTab\par
+SA(31, 1) = "Power regression performed by " & AppNavn & ": " & vbTab\par
+SA(31, 2) = ""\par
+SA(31, 3) = ""\par
+SA(31, 4) = "Regresi\'f3n de potencias ejecutada por" & AppNavn & ": " & vbTab\par
+"\par
+SA(31, 5) = ""\par
+\par
+SA(32, 0) = "Der kan ikke udf\'f8res potensregression p\'e5 de punkter. Alle skal v\'e6re positive og m\'e5 ikke v\'e6re 0."\par
+SA(32, 1) = "Power regression cannot be performed on those points. All numbers must be positive (and not zero)."\par
+SA(32, 2) = ""\par
+SA(32, 3) = ""\par
+SA(32, 4) = "La Regresi\'f3n de potencias no puede ejecutarse sobre esos n\'fameros. Todos los n\'fameros deben ser positivos(y distintos de cero)." \par
+SA(32, 5) = ""\par
+\par
+SA(33, 0) = "Brugerdefineret regression med funktionen "\par
+SA(33, 1) = "User defined regression with the function "\par
+SA(33, 2) = ""\par
+SA(33, 3) = ""\par
+SA(33, 4) = "Regresi\'f3n y funci\'f3n definida por el usuario"\par
+SA(33, 5) = ""\par
+\par
+SA(34, 0) = " udf\'f8rt vha. CAS-v\'e6rkt\'f8jet " & AppNavn\par
+SA(34, 1) = " performed by " & AppNavn\par
+SA(34, 2) = ""\par
+SA(34, 3) = ""\par
+SA(34, 4) = " ejecutada por" & AppNavn\par
+SA(34, 5) = ""\par
+\par
+SA(35, 0) = "Angiv orden af den polynomiske regression (1-"\par
+SA(35, 1) = "State the order of the polynomial regression (1-"\par
+SA(35, 2) = ""\par
+SA(35, 3) = ""\par
+SA(35, 4) = "Estado de orden de la regresi\'f3n polinomial(1-"\par
+SA(35, 5) = ""\par
+\par
+SA(36, 0) = "(Den maksimale orden bestemmes af antal punkter)"\par
+SA(36, 1) = "(The max order is determined by the number of points)"\par
+SA(36, 2) = ""\par
+SA(36, 3) = ""\par
+SA(36, 4) = "(El m\'e1ximo orden se determina por el n\'famero de puntos)"\par
+SA(36, 5) = ""\par
+\par
+' \highlight2 polynomial order\highlight0\par
+SA(37, 0) = "orden"\par
+SA(37, 1) = "order"\par
+SA(37, 2) = ""\par
+SA(37, 3) = ""\par
+SA(37, 4) = "orden"\par
+SA(37, 5) = ""\par
+\par
+SA(38, 0) = "Polynomisk regression af grad "\par
+SA(38, 1) = "Polynomial regression of degree "\par
+SA(38, 2) = ""\par
+SA(38, 3) = ""\par
+SA(38, 4) = "Regresi\'f3n polinomial de grado"\par
+SA(38, 5) = ""\par
+\par
+SA(39, 0) = "Brugerdefineret regression"\par
+SA(39, 1) = "User defined regression"\par
+SA(39, 2) = ""\par
+SA(39, 3) = ""\par
+SA(39, 4) = "Regresi\'f3n definida por el usuario"\par
+SA(39, 5) = ""\par
+\par
+SA(40, 0) = "Funktion"\par
+SA(40, 1) = "Function"\par
+SA(40, 2) = ""\par
+SA(40, 3) = ""\par
+SA(40, 4) = "Funci\'f3n"\par
+SA(40, 5) = ""\par
+\par
+SA(41, 0) = "Antal decimaler"\par
+SA(41, 1) = "Decimals"\par
+SA(41, 2) = ""\par
+SA(41, 3) = ""\par
+SA(41, 4) = "Decimales"\par
+SA(41, 5) = ""\par
+\par
+SA(42, 0) = "Startg\'e6t (Skrives p\'e5 formen a=2 ; c=10)"\par
+SA(42, 1) = "Start guess (ex.: a=2 , c=10)"\par
+SA(42, 2) = ""\par
+SA(42, 3) = ""\par
+SA(42, 4) = "Comience inferencia (ej.: a=2 , c=10)"\par
+SA(42, 5) = ""\par
+\par
+SA(43, 0) = "Pr\'e6cisionen er sat meget h\'f8jt. Beregningstiden kan blive meget lang eller fejle. Pr\'f8v evt. igen med en lavere indstilling."\par
+SA(43, 1) = "The precision is set very high. The calculation time can be very long or cause an error. If it doesn't work out, try a lower setting."\par
+SA(43, 2) = ""\par
+SA(43, 3) = ""\par
+SA(43, 4) = "La precisi\'f3n est\'e1 ajustada muy alta. El tiempo de c\'e1lculo puede ser muy largo o cusar un error. Si no funciona intente un ajuste m\'e1s bajo."\par
+SA(43, 5) = ""\par
+\par
+SA(44, 0) = "Pr\'e6cisionen er sat ret h\'f8jt. Beregningstiden kan blive lang eller fejle. Pr\'f8v evt. igen med en lavere indstilling."\par
+SA(44, 1) = "The precision is set quite high. The calculation time can be quite long or cause an error. If it doesn't work out, try a lower setting."\par
+SA(44, 2) = ""\par
+SA(44, 3) = ""\par
+SA(44, 4) = "La precisi\'f3n est\'e1 ajustada bastante alta. El tiempo de c\'e1lculo puede ser muy largo o cusar un error. Si no funciona intente un ajuste m\'e1s bajo."\par
+SA(44, 5) = ""\par
+\par
+SA(45, 0) = "Pr\'e6cisionen kan ikke v\'e6re negativ. V\'e6lg et positivt heltal"\par
+SA(45, 1) = "The precision cant be \highlight2 b\highlight0 egative. Choose a positive integer"\par
+SA(45, 2) = ""\par
+SA(45, 3) = ""\par
+SA(45, 4) = "La precisi\'f3n puede ser negativa. Escoja un entero positivo"\par
+SA(45, 5) = ""\par
+\par
+SA(46, 0) = "Pr\'e6cisionen er ugyldig. V\'e6lg et positivt heltal."\par
+SA(46, 1) = "The precision is not valid. Choose a positive integer."\par
+SA(46, 2) = ""\par
+SA(46, 3) = ""\par
+SA(46, 4) = "La precisi\'f3n no es v\'e1lida. Escoja un entero positivo"\par
+SA(46, 5) = ""\par
+\par
+SA(47, 0) = "Placer cursoren i et matematik-felt"\par
+SA(47, 1) = "Place the cursor in an equation"\par
+SA(47, 2) = ""\par
+SA(47, 3) = ""\par
+SA(47, 4) = "Sit\'fae el cursor en una ecuaci\'f3n"\par
+SA(47, 5) = ""\par
+\par
+SA(48, 0) = "Der kan ikke udf\'f8res beregninger p\'e5 definitionsfelter. Du m\'e5 udnytte din defintion nedenunder til en beregning."\par
+SA(48, 1) = "It is not possible to do calculation on definitions"\par
+SA(48, 2) = ""\par
+SA(48, 3) = ""\par
+SA(48, 4) = "No se pueden hacer c\'e1lculos en los campos de definici\'f3n"\par
+SA(48, 5) = ""\par
+\par
+SA(49, 0) = "Udtrykket differentieres vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ". "\par
+SA(49, 1) = "The expression is differentiated by " & AppNavn & ". "\par
+SA(49, 2) = ""\par
+SA(49, 3) = ""\par
+SA(49, 4) = "La expresi\'f3n se ha diferenciado mediante " & AppNavn & ". \par
+SA(49, 5) = ""\par
+\par
+SA(50, 0) = "Udtrykket kunne ikke differentieres"\par
+SA(50, 1) = "The expression could not be differetiated"\par
+SA(50, 2) = ""\par
+SA(50, 3) = ""\par
+SA(50, 4) = "La expresi\'f3n no se puede diferenciar"\par
+SA(50, 5) = ""\par
+\par
+SA(51, 0) = "Indtast variabel"\par
+SA(51, 1) = "State variable"\par
+SA(51, 2) = ""\par
+SA(51, 3) = ""\par
+SA(51, 4) = "Variable de estado"\par
+SA(51, 5) = ""\par
+\par
+SA(52, 0) = "Der findes en stamfunktion vha. CAS-v\'e6rkt\'f8jet " & AppNavn & "'s 'Stamfunktion' funktion"\par
+SA(52, 1) = "An antiderivative is found by " & AppNavn & ""\par
+SA(52, 2) = ""\par
+SA(52, 3) = ""\par
+SA(52, 4) = "Se ha encontrado una derivada mediante " & AppNavn & ""\par
+SA(52, 5) = ""\par
+\par
+SA(53, 0) = "Udtrykket kunne ikke integreres"\par
+SA(53, 1) = "The expression could not be integrated"\par
+SA(53, 2) = ""\par
+SA(53, 3) = ""\par
+SA(53, 4) = "La expresi\'f3n no se puede integrar"\par
+SA(53, 5) = ""\par
+\par
+SA(54, 0) = "Der skete en fejl. WordMat er formentlig ikke installeret korrekt. Pr\'f8v at geninstallere, evt. med Antivirus deaktiveret"\par
+SA(54, 1) = "An error occured. WordMat is probably not installed correctly. Try reinstalling, possibly with antivirus deactivated."\par
+SA(54, 2) = ""\par
+SA(54, 3) = ""\par
+SA(54, 4) = "Ha ocurrido un error. Es probable que WordMat no se haya instalado correctamente. Intente re-instalarlo, preferiblemente con el antivirus desactivado."\par
+SA(54, 5) = ""\par
+\par
+SA(55, 0) = "Der skete en fejl i fors\'f8get p\'e5 at starte Maxima"\par
+SA(55, 1) = "An error occured trying to start Maxima"\par
+SA(55, 2) = ""\par
+SA(55, 3) = ""\par
+SA(55, 4) = "Ha ocurrido un error intentando arrancar Maxima"\par
+SA(55, 5) = ""\par
+\par
+SA(56, 0) = "Uligheden l\'f8ses for "\par
+SA(56, 1) = "The inequality is solved for "\par
+SA(56, 2) = ""\par
+SA(56, 3) = ""\par
+SA(56, 4) = "La inegualdad se resuelve para "\par
+SA(56, 5) = ""\par
+\par
+SA(57, 0) = " vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ". "\par
+SA(57, 1) = " by " & AppNavn & ". "\par
+SA(57, 2) = ""\par
+SA(57, 3) = ""\par
+SA(57, 4) = " mediante " & AppNavn & ". " \par
+SA(57, 5) = ""\par
+\par
+SA(58, 0) = "Uligheden har alle tal som l\'f8sning."\par
+SA(58, 1) = "All numbers solve this inequality"\par
+SA(58, 2) = ""\par
+SA(58, 3) = ""\par
+SA(58, 4) = "Todos los n\'fameros satisfacen esta inegualdad"\par
+SA(58, 5) = ""\par
+\par
+SA(59, 0) = "Uligheden havde ingen l\'f8sninger indenfor " & ChrW(8450) & " for variabel "\par
+SA(59, 1) = "\highlight3 The inequality had no solutions in the domain " & ChrW(8450) & " for variable "\par
+\highlight0 SA(59, 2) = ""\par
+SA(59, 3) = ""\par
+SA(59, 4) = "La "inegualdad no tiene soluciones en el dominio " & ChrW(8450) & " para la variable "\par
+SA(59, 5) = ""\par
+\par
+SA(60, 0) = "Uligheden havde ingen l\'f8sninger indenfor " & ChrW(8477) & " for variabel "\par
+SA(60, 1) = "\highlight3 The inequality had no solutions in the domain " & ChrW(8477) & " for variable "\par
+\highlight0 SA(60, 2) = ""\par
+SA(60, 3) = ""\par
+SA(60, 4) = "La "inegualdad no tiene soluciones en el dominio " & ChrW(8450) & " para la variable "\par
+SA(60, 5) = ""\par
+\par
+SA(61, 0) = "med f\'f8lgende antagelser/definitioner:  "\par
+SA(61, 1) = "With the following assumptions/definitions:  "\par
+SA(61, 2) = ""\par
+SA(61, 3) = ""\par
+SA(61, 4) = "Con los siguientes supuestos/definiciones:"\par
+SA(61, 5) = ""\par
+\par
+' \highlight3 Dont change these\highlight0\par
+SA(62, 0) = "Definer"\par
+SA(62, 1) = "Define"\par
+SA(62, 2) = "Define"\par
+SA(62, 3) = "Define"\par
+SA(62, 4) = "Define"\par
+SA(62, 5) = "Define"\par
+\par
+SA(63, 0) = "Vil du oprette tastaturgenveje?" & vbCrLf & "Som standard er de oprettet, men kan blive overskrevet. Du kan genoprette dem nu."\par
+SA(63, 1) = "Do you want to create keyboard shortcuts?" & vbCrLf & "They are created by default, but they can be overwritten by other programs. You can restore them now."\par
+SA(63, 2) = ""\par
+SA(63, 3) = ""\par
+SA(63, 4) = "\'bfDesea crear un atajo de teclas?  & vbCrLf & "Este se crea por defecto, pero puede sobreescribirse por otros programas. Usted debe restablecerlo ahora"\par
+SA(63, 5) = ""\par
+\par
+SA(64, 0) = "Tasturgenveje"\par
+SA(64, 1) = "Keyboard shortcuts"\par
+SA(64, 2) = ""\par
+SA(64, 3) = ""\par
+SA(64, 4) = "Atajos de Teclado"\par
+SA(64, 5) = ""\par
+\par
+SA(65, 0) = "WordMat tastaturgenveje"\par
+SA(65, 1) = "WordMat keyboard shortcuts"\par
+SA(65, 2) = ""\par
+SA(65, 3) = ""\par
+SA(65, 4) = "Atajos de Teclado de WordMat"\par
+SA(65, 5) = ""\par
+\par
+SA(66, 0) = "Word matematikfelt-genveje"\par
+SA(66, 1) = "Word equation shortcuts"\par
+SA(66, 2) = ""\par
+SA(66, 3) = ""\par
+SA(66, 4) = "Atajos de ecuaciones de Word"\par
+SA(66, 5) = ""\par
+\par
+SA(67, 0) = "Man kan lave sine egne genveje til matematikfelter i Word eller \'e6ndre de eksisterende. N\'e5r man st\'e5r i et matematikfelt finder man Ligningsfunktion/Design fanen. Under funktioner trykker man p\'e5 den lille pil i nederste h\'f8jre hj\'f8rne. Dern\'e6st v\'e6lges 'matematisk autokorrektur'"\par
+SA(67, 1) = "You can create your own typing short cuts in Word or change the exis\highlight2 t\highlight0 ing shortcuts. Place the cursor in an equation. Open Design menu. Locate group called functions. Click the little arrow in lower right corner. Choose \highlight2 '\highlight0 Math autoentries\highlight2 ''\highlight0 "\par
+SA(67, 2) = ""\par
+SA(67, 3) = ""\par
+SA(67, 4) = "Puede crear su propio atajo en Word o cambiar los existentes. Sit\'fae el cursor en una ecuaci\'f3n. Abra el men\'fa Dise\'f1o. Ubique el grupo llamado Funciones. Pulse la flecha peque\'f1a en la esquina derecha. Escoja "Autoentradas Matem\'e1ticas""\par
+SA(67, 5) = "" \par
+\par
+SA(68, 0) = vbCrLf & "Nyt Matematikfelt" & vbTab & "Alt+M" & vbCrLf & "Forrige resultat(er)" & vbTab & "Alt+r" & vbTab & vbCrLf & "Prik-gangetegn" & vbTab & "Alt+G" & vbTab & vbCrLf & "Beregn" & vbTab & vbTab & "Alt+b   eller   AltGr+Enter" & vbTab & vbCrLf & "L\'f8s ligning" & vbTab & "Alt+L" & vbCrLf & "Indstillinger" & vbTab & "Alt + i" & vbCrLf & "Enheder til/fra" & vbTab & "Alt+E" & vbCrLf & "Konverter LaTex" & vbTab & "Alt+T" & vbCrLf & "Definer:" & vbTab & vbTab & "Alt+d" & vbCrLf & "Slet definitioner:" & vbTab & "Alt+s" & vbCrLf & "Plot Graf" & vbTab & vbTab & "Alt+P" & vbCrLf & "Omskriv" & vbTab & vbTab & "Alt+o" & vbCrLf & "Num/eksakt/auto" & vbTab & "Alt+N"\par
+SA(68, 1) = vbCrLf & "New Math equation" & vbTab & "Alt+M" & vbCrLf & "Previous result(s)" & vbTab & "Alt+r" & vbCrLf & "Multiplication sign" & vbTab & "Alt+G" & vbCrLf & "Calculate" & vbTab & vbTab & "Alt+b   or   AltGr+Enter" & vbTab & vbCrLf & "Solve equation" & vbTab & "Alt+L" & vbTab & vbCrLf & "Settings" & vbTab & vbTab & "Alt + i" & vbTab & vbCrLf & "Units on/off" & vbTab & "Alt+E" & vbCrLf & "Konverter LaTex" & vbTab & "Alt+T" & vbCrLf & "Define:" & vbTab & vbTab & "Alt+d" & vbCrLf & "Delete definitions:" & vbTab & "Alt+s" & vbCrLf & "Plot Graph" & vbTab & "Alt+P" & vbCrLf & "Simplify" & vbTab & vbTab & "Alt+o" & vbCrLf & "Num/exact/auto" & vbTab & "Alt+N"\par
+SA(68, 2) = ""\par
+SA(68, 3) = ""\par
+SA(68, 4) = "vbCrLf & "Nueva ecuaci\'f3n" & vbTab & "Alt+M" & vbCrLf & "Resultado(s) anterior(es)" & vbTab & "Alt+r" & vbCrLf & "Signo de multiplicaci\'f3n " & vbTab & "Alt+G" & vbCrLf & "Calcular" & vbTab & vbTab & "Alt+b   or   AltGr+Enter" & vbTab & vbCrLf & "Resolvee ecuaci\'f3n" & vbTab & "Alt+L" & vbTab & vbCrLf & "Ajustes" & vbTab & vbTab & "Alt + i" & vbTab & vbCrLf & "Unidades on/off" & vbTab & "Alt+E" & vbCrLf & "Convertidor a LaTex" & vbTab & "Alt+T" & vbCrLf & "Definir:" & vbTab & vbTab & "Alt+d" & vbCrLf & "Eliminar definiciones:" & vbTab & "Alt+s" & vbCrLf & "Plot Graph" & vbTab & "Alt+P" & vbCrLf & "Simplificar" & vbTab & vbTab & "Alt+o" & vbCrLf & "Num/exacto/auto" & vbTab & "Alt+N"\par
+SA(68, 5) = ""\par
+\par
+\highlight2 ' Dont change this\highlight0\par
+SA(69, 0) = "Slet definitioner"\par
+SA(69, 1) = "Delete definitions"\par
+SA(69, 2) = "Delete definitions"\par
+SA(69, 3) = "Delete definitions"\par
+SA(69, 4) = "Delete definitions"\par
+SA(69, 5) = "Delete definitions"\par
+\par
+SA(70, 0) = "Konstanter"\par
+SA(70, 1) = "Constants"\par
+SA(70, 2) = ""\par
+SA(70, 3) = ""\par
+SA(70, 4) = "Constantes"\par
+SA(70, 5) = ""\par
+\par
+SA(71, 0) = "Find v\'e6rdier p\'e5 nettet"\par
+SA(71, 1) = "Find values online"\par
+SA(71, 2) = ""\par
+SA(71, 3) = ""\par
+SA(71, 4) = "Encontrar valores en l\'ednea"\par
+SA(71, 5) = ""\par
+\par
+SA(72, 0) = "Konverter ligninger til LaTex. (Genvejen alt+T konverterer en enkelt ligning)"\par
+SA(72, 1) = "Convert equations to LaTex. (Shortcut alt+T converts a single equation)"\par
+SA(72, 2) = ""\par
+SA(72, 3) = ""\par
+SA(72, 4) = "Convertir ecuaciones a LaTex. (El atajo alt+T convierte una ecuaci\'f3n simple)"\par
+SA(72, 5) = ""\par
+\par
+SA(73, 0) = "Kopier til clipboard"\par
+SA(73, 1) = "Copy to clipboard"\par
+SA(73, 2) = ""\par
+SA(73, 3) = ""\par
+SA(73, 4) = "Copiar al portapapeles"\par
+SA(73, 5) = ""\par
+\par
+SA(74, 0) = "Visningsform"\par
+SA(74, 1) = "Display\highlight2  \highlight0 style"\par
+SA(74, 2) = ""\par
+SA(74, 3) = ""\par
+SA(74, 4) = "Estilo pantalla"\par
+SA(74, 5) = ""\par
+\par
+SA(75, 0) = "Genkend enheder og skriv dem ikke i kursiv"\par
+SA(75, 1) = "Dont write units in italic"\par
+SA(75, 2) = ""\par
+SA(75, 3) = ""\par
+SA(75, 4) = "No escriba las unidades en it\'e1lica"\par
+SA(75, 5) = ""\par
+\par
+SA(76, 0) = "Brug Maxima til LaTex konvertering"\par
+SA(76, 1) = "Use Maxima to convert LaTex"\par
+SA(76, 2) = ""\par
+SA(76, 3) = ""\par
+SA(76, 4) = "Usar Maxima para convertir LaTex"\par
+SA(76, 5) = ""\par
+\par
+SA(77, 0) = "Konverter alle"\par
+SA(77, 1) = "Convert all"\par
+SA(77, 2) = ""\par
+SA(77, 3) = ""\par
+SA(77, 4) = "Convertir todo"\par
+SA(77, 5) = ""\par
+\par
+SA(78, 0) = "Konverter og g\'e5 til n\'e6ste"\par
+SA(78, 1) = "Convert \highlight2 og\highlight0  go to next"\par
+SA(78, 2) = ""\par
+SA(78, 3) = ""\par
+SA(78, 4) = "Convertir y continuar en la siguiente"\par
+SA(78, 5) = ""\par
+\par
+SA(79, 0) = "F\'f8r"\par
+SA(79, 1) = "Before"\par
+SA(79, 2) = ""\par
+SA(79, 3) = ""\par
+SA(79, 4) = "Antes"\par
+SA(79, 5) = ""\par
+\par
+SA(80, 0) = "Efter"\par
+SA(80, 1) = "After"\par
+SA(80, 2) = ""\par
+SA(80, 3) = ""\par
+SA(80, 4) = "Despu\'e9s"\par
+SA(80, 5) = ""\par
+\par
+SA(81, 0) = "Ingen"\par
+SA(81, 1) = "None"\par
+SA(81, 2) = ""\par
+SA(81, 3) = ""\par
+SA(81, 4) = "Ninguno"\par
+SA(81, 5) = ""\par
+\par
+SA(82, 0) = "Skriv selv"\par
+SA(82, 1) = "Custom"\par
+SA(82, 2) = ""\par
+SA(82, 3) = ""\par
+SA(82, 4) = "Escriba usted mismo"\par
+SA(82, 5) = ""\par
+\par
+SA(83, 0) = "Omslutningstegn"\par
+SA(83, 1) = "Embed code"\par
+SA(83, 2) = ""\par
+SA(83, 3) = ""\par
+SA(83, 4) = "C\'f3digo incrustado"\par
+SA(83, 5) = ""\par
+\par
+SA(84, 0) = "Der er ikke flere matematikfelter i resten af dette dokument."\par
+SA(84, 1) = "There are no equations in the rest of this document to convert."\par
+SA(84, 2) = ""\par
+SA(84, 3) = ""\par
+SA(84, 4) = "No hay m\'e1s ecuaciones para convertir en el resto del documento"\par
+SA(84, 5) = ""\par
+\par
+SA(85, 0) = "L\'f8s koblede differentialligning(er) numerisk"\par
+SA(85, 1) = "Solve system of differential equations numerically"\par
+SA(85, 2) = ""\par
+SA(85, 3) = ""\par
+SA(85, 4) = "Resolver el sistema de ecuaciones diferenciales num\'e9ricamente"\par
+SA(85, 5) = ""\par
+\par
+SA(86, 0) = "Differentialligninger"\par
+SA(86, 1) = "Differential equations"\par
+SA(86, 2) = ""\par
+SA(86, 3) = ""\par
+SA(86, 4) = "Ecuaciones diferenciales"\par
+SA(86, 5) = ""\par
+\par
+SA(87, 0) = "Startv\'e6rdi"\par
+SA(87, 1) = "Start value"\par
+SA(87, 2) = ""\par
+SA(87, 3) = ""\par
+SA(87, 4) = "Valor de inicio"\par
+SA(87, 5) = ""\par
+\par
+SA(88, 0) = "Skridtl\'e6ngde"\par
+SA(88, 1) = "Step size"\par
+SA(88, 2) = ""\par
+SA(88, 3) = ""\par
+SA(88, 4) = "Tama\'f1o del paso"\par
+SA(88, 5) = ""\par
+\par
+SA(89, 0) = "Forbind punkter"\par
+SA(89, 1) = "Connect dots"\par
+SA(89, 2) = ""\par
+SA(89, 3) = ""\par
+SA(89, 4) = "Conectar Puntos"\par
+SA(89, 5) = ""\par
+\par
+SA(90, 0) = "Vis forskrifter"\par
+SA(90, 1) = "Show equations"\par
+SA(90, 2) = ""\par
+SA(90, 3) = ""\par
+SA(90, 4) = "Mostrar ecuaciones"\par
+SA(90, 5) = ""\par
+\par
+SA(91, 0) = "Inds\'e6t liste"\par
+SA(91, 1) = "Insert list"\par
+SA(91, 2) = ""\par
+SA(91, 3) = ""\par
+SA(91, 4) = "Insertar lista"\par
+SA(91, 5) = ""\par
+\par
+SA(92, 0) = "Inds\'e6t tabel"\par
+SA(92, 1) = "Insert table"\par
+SA(92, 2) = ""\par
+SA(92, 3) = ""\par
+SA(92, 4) = "Insertar tabla"\par
+SA(92, 5) = ""\par
+\par
+SA(93, 0) = "Inds\'e6t graf"\par
+SA(93, 1) = "Insert graph"\par
+SA(93, 2) = ""\par
+SA(93, 3) = ""\par
+SA(93, 4) = "Insertar gr\'e1fico"\par
+SA(93, 5) = ""\par
+\par
+SA(94, 0) = "Formentlig Udenfor definitionsomr\'e5de! " & vbCrLf & "Juster xmin/xmax"\par
+SA(94, 1) = "Probably outside domain! " & vbCrLf & "adjust xmin/xmax"\par
+SA(94, 2) = ""\par
+SA(94, 3) = ""\par
+SA(94, 4) = "Probablemente fuera del dominio!" & vbCrLf & "ajuste xmin/xmax"\par
+SA(94, 5) = ""\par
+\par
+SA(95, 0) = "Der skete en fejl. Se p\'e5 tallene ved xmin og xmax"\par
+SA(95, 1) = "An error occured. Check the numbers by xmin and xmax"\par
+SA(95, 2) = ""\par
+SA(95, 3) = ""\par
+SA(95, 4) = "Ha ocurrido un error. Revise las n\'fameros para xmin y xmax"\par
+SA(95, 5) = ""\par
+\par
+SA(96, 0) = "Fejl, regnearket med statistikdiagrammer kan ikke findes p\'e5 stien: "\par
+SA(96, 1) = "Error, cannot find the Excel file with statistic on the path: "\par
+SA(96, 2) = ""\par
+SA(96, 3) = ""\par
+SA(96, 4) = "Error, no se encuentra el archivo Excel con la estad\'edstica en la ruta: "\par
+SA(96, 5) = ""\par
+\par
+SA(97, 0) = "Der skete en fejl i fors\'f8get p\'e5 at inds\'e6tte Graph. Der er formentlig en syntaksfejl et sted i en definition eller lign"\par
+SA(97, 1) = "An error occured trying to insert Graph. You might have a synt\highlight2 ec\highlight0  error in a definition"\par
+SA(97, 2) = ""\par
+SA(97, 3) = ""\par
+SA(97, 4) = "Ha ocurrido un error intentando insertar Graph. Podr\'eda deberse a un error de sintaxis en una definici\'f3n"\par
+SA(97, 5) = ""\par
+\par
+SA(98, 0) = "Der skete en fejl i fors\'f8get p\'e5 at inds\'e6tte Excelark. Det kan skyldes at Excel er g\'e5et ned tidligere.Luk evt. \'e5bne Excelark og \'e5ben Excel inden du fors\'f8ger via WordMat igen."\par
+SA(98, 1) = "An error occured trying to insert an Excel sheet. This can be caused by a previous crash of Excel. Close all open Excel sheets and then reopen Excel before trying with WordMat again."\par
+SA(98, 2) = ""\par
+SA(98, 3) = ""\par
+SA(98, 4) = "Ha ocurrido un error intentando insertar una hoja Excel. Puede deberse a una falla previa de Excel. Cierre todas las hojas Excel y luego abra Excel antes de intentar con Wordmat nuevamente."\par
+SA(98, 5) = ""\par
+\par
+SA(99, 0) = "Der skete en fejl i fors\'f8get p\'e5 at overs\'e6tte din kommando til Maxima syntaks."\par
+SA(99, 1) = "An error occured trying to convert your command to Maxima syntax."\par
+SA(99, 2) = ""\par
+SA(99, 3) = ""\par
+SA(99, 4) = "Ha ocurrido un error intentando convertir  "\par
+SA(99, 5) = ""\par
+\par
+SA(100, 0) = "Der skete en fejl i fors\'f8get p\'e5 at overs\'e6tte Maxima output til Word synktaks."\par
+SA(100, 1) = "An error occured trying to convert Maxima output to Word syntax."\par
+SA(100, 2) = ""\par
+SA(100, 3) = ""\par
+SA(100, 4) = "Ha ocurrido un error al tratar de traducir la salida de Maxima para sintaxis de comandos  de Word."\par
+SA(100, 5) = ""\par
+\par
+SA(101, 0) = " L\'f8sningen er usikker. Pr\'f8v evt. Numerisk l\'f8sning"\par
+SA(101, 1) = " The solution is unsure. You might want to try using numerical methods as well"\par
+SA(101, 2) = ""\par
+SA(101, 3) = ""\par
+SA(101, 4) = "a soluci\'f3n es incierta. Pruebe cualquier soluci\'f3n num\'e9rica."\par
+SA(101, 5) = ""\par
+\par
+SA(102, 0) = "Da det er en trigonometrisk ligning er der uendeligt mange l\'f8sninger. Kun en af disse l\'f8sninger er angivet."\par
+SA(102, 1) = "Since this is a trigonometric equation there are infinitely many solutions. Only one of these are stated"\par
+SA(102, 2) = ""\par
+SA(102, 3) = ""\par
+SA(102, 4) = "Dado que es una ecuaci\'f3n trigonom\'e9trica existen infinitas soluciones. S\'f3lo se muestra una de ellas."\par
+SA(102, 5) = ""\par
+\par
+SA(103, 0) = " Alle l\'f8sninger er ikke fundet."\par
+SA(103, 1) = " All solutions have not been found."\par
+SA(103, 2) = ""\par
+SA(103, 3) = ""\par
+SA(103, 4) = "No se encontraron todas las soluciones"\par
+SA(103, 5) = ""\par
+\par
+SA(104, 0) = "Fejl: Division med nul."\par
+SA(104, 1) = "Error: Division by zero."\par
+SA(104, 2) = ""\par
+SA(104, 3) = ""\par
+SA(104, 4) = "Error: Divisi\'f3n por cero."\par
+SA(104, 5) = ""\par
+\par
+SA(105, 0) = "Syntaksfejl. Der er en fejl i notationen."\par
+SA(105, 1) = "Syntax error."\par
+SA(105, 2) = ""\par
+SA(105, 3) = ""\par
+SA(105, 4) = "Error de sintaxis"\par
+SA(105, 5) = ""\par
+\par
+SA(106, 0) = "Syntaksfejl. Der er brugt et forkert tegn. M\'e5ske manglende gangetegn eller komma istedet for ; som listeseparator."\par
+SA(106, 1) = "Syntax error. An incorrect symbol was used. May be a missing multiplication sign or a , . issue"\par
+SA(106, 2) = ""\par
+SA(106, 3) = ""\par
+SA(106, 4) = "Error de sintaxis. Se us\'f3 un s\'edmbolo incorrecto. Puede ser la falta de un signo de multiplicaci\'f3n o un punto o una coma en vez del punto y conma como separador de listas"\par
+SA(106, 5) = ""\par
+\par
+SA(107, 0) = "Advarsel: Du har bedt om at l\'f8se et ligningssystem, men angivet f\'e6rre variable end ligninger. Kun de f\'f8rste ligninger er l\'f8st. Kontroller selv om de(n) sidste ligning(er) passer."\par
+SA(107, 1) = "Warning: You have asked to solve a system of equation, but stated fewer variables than equations. Only the first equations are solved. Check manually the last equation(s)."\par
+SA(107, 2) = ""\par
+SA(107, 3) = ""\par
+SA(107, 4) = "Advertencia: Se le consultar\'e1 para resolver el sistema de ecuaciones, pero aparecen menos variables que ecuaciones. S\'f3lo se resolver\'e1 la primera ecuaci\'f3n. Revise manualmente la(s) \'faltima(s) ecuaci\'f3n(es)."\par
+SA(107, 5) = ""\par
+\par
+SA(108, 0) = "Der kom f\'f8lgende fejlmelding fra Maxima:"\par
+SA(108, 1) = "Maxima reported the following error:"\par
+SA(108, 2) = ""\par
+SA(108, 3) = ""\par
+SA(108, 4) = "Maxima indica el siguiente error"\par
+SA(108, 5) = ""\par
+\par
+SA(109, 0) = "Maxima fejlmelding"\par
+SA(109, 1) = "Maxima error"\par
+SA(109, 2) = ""\par
+SA(109, 3) = ""\par
+SA(109, 4) = "Error de maxima"\par
+SA(109, 5) = ""\par
+\par
+SA(110, 0) = "WordMat kunne ikke finde 'Program files' mappen"\par
+SA(110, 1) = "WordMat was unable to locate the 'Program files' folder"\par
+SA(110, 2) = ""\par
+SA(110, 3) = ""\par
+SA(110, 4) = "WordMat no pudo localizar la carpeta 'Archivos de Programa'"\par
+SA(110, 5) = ""\par
+\par
+SA(111, 0) = "Der skete en fejl i fors\'f8get p\'e5 at \'e5bne: "\par
+SA(111, 1) = "An error occured trying to open: "\par
+SA(111, 2) = ""\par
+SA(111, 3) = ""\par
+SA(111, 4) = "Ocurri\'f3 un error intentando abrir: "\par
+SA(111, 5) = ""\par
+\par
+SA(112, 0) = "Der kunne ikke oprettes forbindelse til serveren"\par
+SA(112, 1) = "Unable to connect to server"\par
+SA(112, 2) = ""\par
+SA(112, 3) = ""\par
+SA(112, 4) = "No se puede conectar con el servidor"\par
+SA(112, 5) = ""\par
+\par
+SA(113, 0) = "P\'e5 dette sted i dokumentet er der defineret f\'f8lgende:"\par
+SA(113, 1) = "At this place in the document the following is defined"\par
+SA(113, 2) = ""\par
+SA(113, 3) = ""\par
+SA(113, 4) = "Aqu\'ed, en \'e9sta parte del documento, est\'e1 definido lo siguiente:"\par
+SA(113, 5) = ""\par
+\par
+SA(114, 0) = "Der er ingen definitioner p\'e5 dette sted i dokumentet."\par
+SA(114, 1) = "There aren't any definitions at this place in the document."\par
+SA(114, 2) = ""\par
+SA(114, 3) = ""\par
+SA(114, 4) = "No hay ninguna definici\'f3n en este lugar del documento"\par
+SA(114, 5) = ""\par
+\par
+SA(115, 0) = "Lignings definitioner indledes med en 'definer ligning:' kommando Indtast definitionen p\'e5 den nye ligning" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke f\'f8r." & vbCrLf & " Hvis der inds\'e6ttes en 'slet def:' kommando l\'e6ngere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Der kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator & vbCrLf & "f.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b"\par
+SA(115, 1) = "Equation definitions are defined by '\highlight2 definer ligning:' kommando Indtast definitionen p\'e5 den nye ligning" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke f\'f8r." & vbCrLf & " Hvis der inds\'e6ttes en 'slet def:' kommando l\'e6ngere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Der kan defineres flere ligninger ved at adskille definitionerne med "\highlight0  & ListSeparator & vbCrLf & "\highlight2 f.eks\highlight0 . lig1: c=3*d " & ListSeparator & " lig2: a=2*b"\par
+SA(115, 2) = ""\par
+SA(115, 3) = ""\par
+SA(115, 4) = ""Las definiciones de la ecuaci\'f3n se realizan mediante un 'Definir la ecuaci\'f3n :' comandos para definir la nueva ecuaci\'f3n" & vbCrLf & vbCrLf & "La definici\'f3n se puede utilizar en el resto del documento, pero no antes." & vbCrLf & " Si inserta un comando "borrar def: ', m\'e1s abajo, en el documento, no se puede utilizar, \'e9sta definici\'f3n, a partir de \'e9ste punto." & vbCrLf & vbCrLf & "Puede definir varias ecuaciones, al mismo tiempo, mediante la separaci\'f3n de las definiciones con" & Separador de Listas & vbCrLf & "por.ej. ec1: c=3*d " & Separador de Listas & " ec2: a=2*b"\par
+SA(115, 5) = ""\par
+\par
+SA(116, 0) = "Man kan ikke definere en afledet funktion." & vbCrLf & "Fjern f\'f8lgende definition: " & vbCrLf\par
+SA(116, 1) = "You can't define a derivative" & vbCrLf & "Remove the definition: " & vbCrLf\par
+SA(116, 2) = ""\par
+SA(116, 3) = ""\par
+SA(116, 4) = "No puede definir una derivada" & vbCrLf & "Remover la definici\'f3n: " & vbCrLf\par
+SA(116, 5) = ""\par
+\par
+SA(117, 0) = "Der er en fejl i definitionen: "\par
+SA(117, 1) = "There is an error in the definition: "\par
+SA(117, 2) = ""\par
+SA(117, 3) = ""\par
+SA(117, 4) = "Hay un error en la definici\'f3n: "\par
+SA(117, 5) = ""\par
+\par
+SA(118, 0) = "Den ignoreres. Men ret det s\'e5 du ikke f\'e5r denne fejl ved hver beregning."\par
+SA(118, 1) = "It is ignored, but correct the \highlight2 input\highlight0  error to avoid this \highlight2 output\highlight0  error"\par
+SA(118, 2) = ""\par
+SA(118, 3) = ""\par
+SA(118, 4) = "Se ignora, pero debe corregir el error de entrada para evitar el error de salida"\par
+SA(118, 5) = ""\par
+\par
+SA(119, 0) = " ...resten fjernet."\par
+SA(119, 1) = " ...rest removed."\par
+SA(119, 2) = ""\par
+SA(119, 3) = ""\par
+SA(119, 4) = "...resto eliminado."\par
+SA(119, 5) = ""\par
+\par
+SA(120, 0) = "Indtast definitionen p\'e5 den nye variabel" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke f\'f8r." & vbCrLf & "Hvis der inds\'e6ttes en 'slet def:' kommando l\'e6ngere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Du kan defineres flere variable p\'e5 en gang ved at adskille definitionerne med " & ListSeparator & vbCrLf & " f.eks. a:1 " & ListSeparator & " b:2"\par
+SA(120, 1) = "State the definition of the new variable" & vbCrLf & vbCrLf & "The definition can be used in the rest of the document, but not before." & vbCrLf & "If you insert a  'delete def:' command further down in the document it will not be known from that point." & vbCrLf & vbCrLf & "You can define more variables at a time by separating them with " & ListSeparator & vbCrLf & " ex.:  a:1 " & ListSeparator & " b:2"\par
+SA(120, 2) = ""\par
+SA(120, 3) = ""\par
+SA(120, 4) = "Establezca la definici\'f3n de la nueva variable" & vbCrLf & vbCrLf & "La definici\'f3n se puede utilizar en el resto del documento, pero no antes." & vbCrLf & "Si usted inserta un comando 'borrar def:'  m\'e1s abajo, en el documento, no se puede utilizar, \'e9sta definici\'f3n, a partir de \'e9ste punto." & vbCrLf & vbCrLf & "Puede definir varias variables, al mismo tiempo, mediante la separaci\'f3n de las definiciones con" & Separador de Listas & vbCrLf & " ej.:  a:1 " & Separador de Listas & " b:2"\par
+SA(120, 5) = ""\par
+\par
+SA(121, 0) = "Ny variabel"\par
+SA(121, 1) = "New variable"\par
+SA(121, 2) = ""\par
+SA(121, 3) = ""\par
+SA(121, 4) = "Nueva variable"\par
+SA(121, 5) = ""\par
+\par
+SA(122, 0) = "Indtast definitionen p\'e5 den nye funktion" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke f\'f8r." & vbCrLf & " Hvis der inds\'e6ttes en 'slet def:' kommando l\'e6ngere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Der kan defineres flere funktioner ved at adskille definitionerne med " & ListSeparator & vbCrLf & "f.eks. f(x)=x " & ListSeparator & " g(x)=2x+1"\par
+SA(122, 1) = "State the definition of the new function" & vbCrLf & vbCrLf & "The definition can be used in the rest of the document, but not before." & vbCrLf & "If you insert a  'delete def:' command further down in the document it will not be known from that point." & vbCrLf & vbCrLf & "You can define more variables at a time by separating them with " & ListSeparator & vbCrLf & "ex.: f(x)=x " & ListSeparator & " g(x)=2x+1"\par
+SA(122, 2) = ""\par
+SA(122, 3) = ""\par
+SA(122, 4) = "Establezca la definici\'f3n de la nueva funci\'f3n" & vbCrLf & vbCrLf & "La definici\'f3n se puede utilizar en el resto del documento, pero no antes." & vbCrLf & "Si usted inserta un comando 'borrar def:'  m\'e1s abajo, en el documento, no se puede utilizar, \'e9sta definici\'f3n, a partir de \'e9ste punto." & vbCrLf & vbCrLf & "Puede definir varias funciones, al mismo tiempo, mediante la separaci\'f3n de las definiciones con" & Separador de Listas & vbCrLf & "ex.: f(x)=x " & Separador de Listas & " g(x)=2x+1"\par
+SA(122, 5) = ""\par
+\par
+SA(123, 0) = "Ny funktion"\par
+SA(123, 1) = "New function"\par
+SA(123, 2) = ""\par
+SA(123, 3) = ""\par
+SA(123, 4) = "Nueva funci\'f3n"\par
+SA(123, 5) = ""\par
+\par
+SA(124, 0) = "Ny ligning"\par
+SA(124, 1) = "New equation"\par
+SA(124, 2) = ""\par
+SA(124, 3) = ""\par
+SA(124, 4) = "Nueva ecuaci\'f3n"\par
+SA(124, 5) = ""\par
+\par
+SA(125, 0) = "definer ligning"\par
+SA(125, 1) = "define equation"\par
+SA(125, 2) = ""\par
+SA(125, 3) = ""\par
+SA(125, 4) = "Definir ecuaci\'f3n"\par
+SA(125, 5) = ""\par
+\par
+\highlight2 ' dont change\highlight0\par
+SA(126, 0) = "Definer"\par
+SA(126, 1) = "Define"\par
+SA(126, 2) = "Define"\par
+SA(126, 3) = "Define"\par
+SA(126, 4) = "Define"\par
+SA(126, 5) = "Define"\par
+\par
+SA(127, 0) = "Udtrykket er meget langt. Vil du inds\'e6tte det i Word?" & vbCrLf & "Word kan blive meget langsom. Pr\'f8v evt. at l\'f8se numerisk istedet." & vbCrLf & "Du kan se outputtet herunder:"\par
+\pard\qj SA(127, 1) = "The expression is very long. Do you want to insert it into word?" & vbCrLf & "This can affect the speed of Word. Long equations can bring Word to a halt on slow computers. Consider solving using numerical methods" & vbCrLf & "You can see the output below:"\par
+SA(127, 2) = ""\par
+SA(127, 3) = ""\par
+\pard\ri-448\qj SA(127, 4) = "La expresi\'f3n es muy larga.\'bfPrefiere insertarla en Word?"  & vbCrLf & "Esto puede afectar la velocidad de Word. Ecuaciones largas pueden llevar a Word a detenerse en computadores lentos. Considere la resoluci\'f3n mdiante m\'e9todos num\'e9ricos" & vbCrLf & "Se puede ver el resultado a continuaci\'f3n: "\par
+\pard SA(127, 5) = ""\par
+\par
+SA(128, 0) = "Udtrykket kunne ikke beregnes."\par
+SA(128, 1) = "The expression could not be calculated."\par
+SA(128, 2) = ""\par
+SA(128, 3) = ""\par
+SA(128, 4) = "La expresi\'f3n no puede calcularse"\par
+SA(128, 5) = ""\par
+\par
+\highlight2 SA(129, 0) = "Ligningen havde ingen l\'f8sninger indenfor " & ChrW(8450) & " for variabel "\par
+\highlight0 SA(129, 1) = "The equation had no solutions in the domain " & ChrW(8450) & " for variable "\par
+SA(129, 2) = ""\par
+SA(129, 3) = ""\par
+SA(129, 4) = "La ecuaci\'f3n no tiene soluciones en el dominio " & ChrW(8450) & " para la variable "\par
+SA(129, 5) = ""\par
+\par
+\highlight2 SA(130, 0) = "Ligningen havde ingen l\'f8sninger indenfor " & ChrW(8477) & " for variabel "\par
+\highlight0 SA(130, 1) = "The equation had no solutions in the domain " & ChrW(8477) & " for variable "\par
+SA(130, 2) = ""\par
+SA(130, 3) = ""\par
+SA(130, 4) = "La ecuaci\'f3n no tiene soluciones en el dominio " & ChrW(8450) & " para la variable "\par
+SA(130, 5) = ""\par
+\par
+SA(131, 0) = "WordMat kunne desv\'e6rre ikke l\'f8se ligningen."\par
+SA(131, 1) = "WordMat couldn't solve the equation"\par
+SA(131, 2) = ""\par
+SA(131, 3) = ""\par
+SA(131, 4) = "WordMat no puede resolver la ecuaci\'f3n"\par
+SA(131, 5) = ""\par
+\par
+SA(132, 0) = "Alle tal er l\'f8sning til ligningen"\par
+SA(132, 1) = "All numbers are solutions to the equation"\par
+SA(132, 2) = ""\par
+SA(132, 3) = ""\par
+SA(132, 4) = "Todos los n\'fameros son soluci\'f3n de la ecuaci\'f3n"\par
+SA(132, 5) = ""\par
+\par
+SA(133, 0) = "Du har bedt om at l\'f8se ligningen for en variabel der allerede er defineret. Inds\'e6t en 'slet def:' kommando f\'f8r ligningen."\par
+SA(133, 1) = "You have asked to solve the equation for a variable which is already defined. Insert a 'delete def:' command before the equation."\par
+SA(133, 2) = ""\par
+SA(133, 3) = ""\par
+SA(133, 4) = "Se le consulta resolver la ecuaci\'f3n para una variable que ya est\'e1 definida. Inserte un comando 'borrar def:' antes de la ecuaci\'f3n."\par
+SA(133, 5) = ""\par
+\par
+SA(134, 0) = "Ligningssystemet l\'f8ses for "\par
+SA(134, 1) = "The system of equations is solved for "\par
+SA(134, 2) = ""\par
+SA(134, 3) = ""\par
+SA(134, 4) = "El sistema de ecuaciones est\'e1 resuelto para "\par
+SA(134, 5) = ""\par
+\par
+SA(135, 0) = " vha. CAS-v\'e6rkt\'f8jet " & AppNavn & "'s 'L\'f8s Ligninger' funktion, "\par
+SA(135, 1) = " by " & AppNavn & "'s 'solve equation' function, "\par
+SA(135, 2) = ""\par
+SA(135, 3) = ""\par
+SA(135, 4) = "Mediante" & AppNavn & "'s 'resolver ecuaci\'f3n' funci\'f3n, "\par
+SA(135, 5) = ""\par
+\par
+SA(136, 0) = "Maxima kunne ikke l\'f8se ligningssystemet analytisk, men har angivet et omskrevet resultat der m\'e5ske kan arbejdes videre med."\par
+SA(136, 1) = "Maxima could not solve the system of equations analytically, but has stated a rearranged result."\par
+SA(136, 2) = ""\par
+SA(136, 3) = ""\par
+SA(136, 4) = "Maxima no pod\'eda resolver el sistema de ecuaciones anal\'edticamente, pero se ha creado un resultado reescrito que podr\'eda funcionar."\par
+SA(136, 5) = ""\par
+\par
+\highlight2 SA(137, 0) = "Ligningssystemet havde ingen l\'f8sninger indenfor " & ChrW(8450) & " for variablene \highlight0 "\par
+SA(137, 1) = "The system of equations had no solutions in the domain " & ChrW(8450) & " for variables "\par
+SA(137, 2) = ""\par
+SA(137, 3) = ""\par
+SA(137, 4) = "El sistema de ecuaciones no tiene soluciones en el dominio " & ChrW(8450) & " para las variables "\par
+SA(137, 5) = ""\par
+\par
+\highlight2 SA(138, 0) = "Ligningssystemet havde ingen l\'f8sninger indenfor " & ChrW(8477) & " for variablene "\par
+\highlight0 SA(138, 1) = "The system of equations had no solutions in the domain " & ChrW(8477) & " for variables "\par
+SA(138, 2) = ""\par
+SA(138, 3) = ""\par
+SA(138, 4) = "El sistema de ecuaciones no tiene soluciones en el dominio " & ChrW(8450) & " para las variables "\par
+SA(138, 5) = ""\par
+\par
+SA(139, 0) = "Der skal v\'e6re et ligmed tegn i en ligning."\par
+SA(139, 1) = "There must be an equal sign in an equation"\par
+SA(139, 2) = ""\par
+SA(139, 3) = ""\par
+SA(139, 4) = "Tiene que haber un signo igual en una ecuaci\'f3n"\par
+SA(139, 5) = ""\par
+\par
+SA(140, 0) = "Ligningssystemet kunne ikke l\'f8ses analytisk. Det var for komplekst. Der kan dog v\'e6re l\'f8sninger som kan findes vha. numeriske metoder."\par
+SA(140, 1) = "The system of equations could not be solved analytically. You might be able to find solutions using numerical methods"\par
+SA(140, 2) = ""\par
+SA(140, 3) = ""\par
+SA(140, 4) = "El sistema de ecuaciones no pudo resolverse anal\'edticamente. Usted podr\'eda encontrar soluciones usando m\'e9todos num\'e9ricos"\par
+SA(140, 5) = ""\par
+\par
+SA(141, 0) = "Der er ikke umiddelbart noget = tegn i ligningen. Vil du forts\'e6tte med at l\'f8se den? Udtrykket s\'e6ttes lig 0"\par
+SA(141, 1) = "There is no = sign in the equation. If you continue the expression will be set =0"\par
+SA(141, 2) = ""\par
+SA(141, 3) = ""\par
+SA(141, 4) = "No se encuentra el signo = en la ecuaci\'f3n. Si contin\'faa la expresi\'f3n se igualar\'e1 a cero"\par
+SA(141, 5) = ""\par
+\par
+SA(142, 0) = "F\'f8lgende variable elimineres fra ligningssystemet: "\par
+SA(142, 1) = "The following variables are eliminated from the equation system: "\par
+SA(142, 2) = ""\par
+SA(142, 3) = ""\par
+SA(142, 4) = "Las siguientes variables ser\'e1n eliminadas del sistema de ecuaciones"\par
+SA(142, 5) = ""\par
+\par
+SA(143, 0) = " vha. CAS-v\'e6rkt\'f8jet " & AppNavn & "'s 'Eliminer variabel' funktion, "\par
+SA(143, 1) = " by " & AppNavn & " 's 'Elim\highlight2 in\highlight0 ate variable' function, '"\par
+SA(143, 2) = ""\par
+SA(143, 3) = ""\par
+SA(143, 4) = "Mediante"& AppNavn & " 's 'Elimina variable' funci\'f3n, '"\par
+SA(143, 5) = ""\par
+\par
+SA(144, 0) = "sand"\par
+SA(144, 1) = "true"\par
+SA(144, 2) = ""\par
+SA(144, 3) = ""\par
+SA(144, 4) = "Verdadero"\par
+SA(144, 5) = ""\par
+\par
+SA(145, 0) = "falsk"\par
+SA(145, 1) = "false"\par
+SA(145, 2) = ""\par
+SA(145, 3) = ""\par
+SA(145, 4) = "Falso"\par
+SA(145, 5) = ""\par
+\par
+SA(146, 0) = "ukendt"\par
+SA(146, 1) = "unknown"\par
+SA(146, 2) = ""\par
+SA(146, 3) = ""\par
+SA(146, 4) = "Desconocido"\par
+SA(146, 5) = ""\par
+\par
+SA(147, 0) = " vha. CAS-v\'e6rkt\'f8jet " & AppNavn & "'s. 'L\'f8s ligninger numerisk'."\par
+SA(147, 1) = " by " & AppNavn & "'s. 'Solve equation using numerical \highlight2 metohods'\highlight0 ."\par
+SA(147, 2) = ""\par
+SA(147, 3) = ""\par
+SA(147, 4) = "Mediante" & AppNavn & "'s. 'Resolver ecuaci\'f3n usando m\'e9todos num\'e9ricos'."\par
+SA(147, 5) = ""\par
+\par
+SA(148, 0) = "Der blev fundet en l\'f8sning. Der kan dog sagtens v\'e6re flere l\'f8sninger."\par
+SA(148, 1) = "A solution was found. More solutions can exist."\par
+SA(148, 2) = ""\par
+SA(148, 3) = ""\par
+SA(148, 4) = "Se encontr\'f3 una soluci\'f3n. Pueden existir m\'e1s soluciones"\par
+SA(148, 5) = ""\par
+\par
+SA(149, 0) = "Marker kun et udtryk"\par
+SA(149, 1) = "Only select 1 expression"\par
+SA(149, 2) = ""\par
+SA(149, 3) = ""\par
+SA(149, 4) = "Seleccione s\'f3lo una expresi\'f3n"\par
+SA(149, 5) = ""\par
+\par
+SA(150, 0) = "Udtrykket omskrives vha. CAS-v\'e6rkt\'f8jet " & AppNavn & " ved brug af metoderne: "\par
+SA(150, 1) = "The expression is simplified by " & AppNavn & " using the methods: "\par
+SA(150, 2) = ""\par
+SA(150, 3) = ""\par
+SA(150, 4) = "La expresi\'f3n est\'e1 simplificada por " & AppNavn & " usando el m\'e9todo: "\par
+SA(150, 5) = ""\par
+\par
+SA(151, 0) = "Automatisk reduktion, "\par
+SA(151, 1) = "Automatic simplify, "\par
+SA(151, 2) = ""\par
+SA(151, 3) = ""\par
+SA(151, 4) = "Simplificaci\'f3n autom\'e1tica"\par
+SA(151, 5) = ""\par
+\par
+SA(152, 0) = "Trigonometrisk reduktion, "\par
+SA(152, 1) = "Trigonometric identitit\highlight2 i\highlight0 es"\par
+SA(152, 2) = ""\par
+SA(152, 3) = ""\par
+SA(152, 4) = "Identidades trigonom\'e9tricas"\par
+SA(152, 5) = ""\par
+\par
+SA(153, 0) = "Udtrykket kunne ikke reduceres"\par
+SA(153, 1) = "The expression could not be simplfied"\par
+SA(153, 2) = ""\par
+SA(153, 3) = ""\par
+SA(153, 4) = "La expresi\'f3n no puede simplificarse"\par
+SA(153, 5) = ""\par
+\par
+SA(154, 0) = "Udtrykket reduceres vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ". "\par
+SA(154, 1) = "The expression is simplifed by " & AppNavn & ". "\par
+SA(154, 2) = ""\par
+SA(154, 3) = ""\par
+SA(154, 4) = "La expresi\'f3n est\'e1 simplificada por " & AppNavn & ". "\par
+SA(154, 5) = ""\par
+\par
+SA(155, 0) = "Udtrykket faktoriseres vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ". "\par
+SA(155, 1) = "The expression is factored by " & AppNavn & ". "\par
+SA(155, 2) = ""\par
+SA(155, 3) = ""\par
+SA(155, 4) = "La expresi\'f3n est\'e1 factorizada por " & AppNavn & ". "\par
+SA(155, 5) = ""\par
+\par
+SA(156, 0) = "Udtrykket kunne ikke faktoriseres"\par
+SA(156, 1) = "The expression could not be factored"\par
+SA(156, 2) = ""\par
+SA(156, 3) = ""\par
+SA(156, 4) = "La expresi\'f3n no puede factorizarse"\par
+SA(156, 5) = ""\par
+\par
+SA(157, 0) = "Udtrykket udvides vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ". "\par
+SA(157, 1) = "The expression is expanded by " & AppNavn & ". "\par
+SA(157, 2) = ""\par
+SA(157, 3) = ""\par
+SA(157, 4) = "La expresi\'f3n est\'e1 expandida por " & AppNavn & ". "\par
+SA(157, 5) = ""\par
+\par
+SA(158, 0) = "Udtrykket kunne ikke udvides"\par
+SA(158, 1) = "The expression could not be expanded"\par
+SA(158, 2) = ""\par
+SA(158, 3) = ""\par
+SA(158, 4) = "La expresi\'f3n no puede expandirse"\par
+SA(158, 5) = ""\par
+\par
+SA(159, 0) = "Du skal sl\'e5 enheder fra for at kunne l\'f8se differentialligninger"\par
+SA(159, 1) = "You have to disable units in order to solve differential equations"\par
+SA(159, 2) = ""\par
+SA(159, 3) = ""\par
+SA(159, 4) = "Debe desactivar unidades con el fin de resolver las ecuaciones diferenciales"\par
+SA(159, 5) = ""\par
+\par
+SA(160, 0) = "Differentialligningen kunne ikke l\'f8ses"\par
+SA(160, 1) = "The differential equation could not be solved"\par
+SA(160, 2) = ""\par
+SA(160, 3) = ""\par
+SA(160, 4) = "Las ecuaciones diferenciales no se pueden resolver"\par
+SA(160, 5) = ""\par
+\par
+SA(161, 0) = "Har du glemt et gangetegn?" & vbCrLf & "Der inds\'e6ttes ikke automatisk gangetegn mellem variable eller mellem variable og parantesstart" & vbCrLf & " xy -> x*y" & vbCrLf & "y(x+1)  -> y*(x+1)" & vbCrLf & "\'c5rsagen er at det er tvetydigt. Variable kan v\'e6re p\'e5 mere end 1 bogstav og y(x) kan v\'e6re en funktion."\par
+SA(161, 1) = "Did you forget a multiplication sign?" & vbCrLf & "multiplication signs are not inserted automatically between variables or between variables and start bracket" & vbCrLf & " xy -> x*y" & vbCrLf & "y(x+1)  -> y*(x+1)" & vbCrLf & "Because these situations are ambiguous. Variables \highlight2 k\highlight0 an be more than 1 letter and y(x) can be a function."\par
+SA(161, 2) = ""\par
+SA(161, 3) = ""\par
+SA(161, 4) = "\'bfOlvid\'f3 un signo de multiplicaci\'f3n?" & vbCrLf & "Los signos de multiplicaci\'f3n no se insertan autom\'e1ticamente entre variables o entre variables y par\'e9ntesis de inicio" & vbCrLf & " xy -> x*y" & vbCrLf & "y(x+1)  -> y*(x+1)" & vbCrLf & "Estas situaciones son ambiguas. Las variables pueden quedar de m\'e1s de una letra y tambi\'e9n y(x) puede verse como una funci\'f3n."\par
+SA(161, 5) = ""\par
+\par
+SA(162, 0) = "Integrationsgr\'e6nserne skal v\'e6re reelle. M\'e5ske mangler du en antagelse."\par
+SA(162, 1) = "Limits of integration must be reel. Maybe you are missing an assumption."\par
+SA(162, 2) = ""\par
+SA(162, 3) = ""\par
+SA(162, 4) = "Los l\'edmites de integraci\'f3n deben ser reales. Es posible que necesite un supuesto"\par
+SA(162, 5) = ""\par
+\par
+SA(163, 0) = "Udsagnets sandhedsv\'e6rdi bestemmes vha. CAS-v\'e6rkt\'f8jet " & AppNavn & ". "\par
+SA(163, 1) = "The expression is tested for truth by " & AppNavn & ". "\par
+SA(163, 2) = ""\par
+SA(163, 3) = ""\par
+SA(163, 4) = "El valor de verdad para la expresi\'f3n se revis\'f3 mediante " & AppNavn & ". "\par
+SA(163, 5) = ""\par
+\par
+SA(164, 0) = "Resultatet er baseret p\'e5 numerisk sammenligning"\par
+SA(164, 1) = "The result is based on numerical comparison"\par
+SA(164, 2) = ""\par
+SA(164, 3) = ""\par
+SA(164, 4) = "El resultado se basa en comparaci\'f3n num\'e9rica"\par
+SA(164, 5) = ""\par
+\par
+SA(165, 0) = "Det kunne ikke afg\'f8res om udsagnet var sand/falsk"\par
+SA(165, 1) = "WordMat was unable to determine whether the expression was true or false"\par
+SA(165, 2) = ""\par
+SA(165, 3) = ""\par
+SA(165, 4) = "WordMat no pudo determinar si la expresi\'f3n era verdadera o falsa"\par
+SA(165, 5) = ""\par
+\par
+\par
+\par
+da.WelcomeLabel2=Denne guide installerer [name/ver] p\'e5 computeren.%n%n Det anbefales at lukke alle k\'f8rende programmer.\par
+en.WelcomeLabel2=This guide installs [name/ver].%n%n It is recommended to close all programs.\par
+sp.WelcomeLabel2=Esta gu\'eda le instalar\'e1 [name / ver] en su equipo.% N% n Se recomienda cerrar todas las aplicaciones que se ejecutan.\par
+\par
+da.FinishedLabel=Du vil nu have en ny v\'e6rkt\'f8jslinje i Word.\par
+en.FinishedLabel=You will now have a new Ribbon in Word\par
+sp.FinishedLabel=Ahora dispone de una nueva barra de herramientas en Word.\par
+\par
+[CustomMessages]\par
+da.UnInstallLabel=Du har allerede installeret WordMat. Bekr\'e6ft f\'f8rst at du vil have den gamle version afinstalleret f\'f8rst.\par
+en.UnInstallLabel=You have already installed WordMat. Confirm that you want to uninstall the old version first.\par
+sp.UnInstallLabel=Ya ha instalado WordMat. Confirme que primero va a desinstalar la versi\'f3n antigua.\par
+\par
+da.SettingsLabel=Indstillinger\par
+en.SettingsLabel=Settings\par
+sp.SettingsLabel=Ajustes\par
+\par
+da.SettingsLabel2=(Disse kan senere \'e6ndres under indstillinger/avanceret i WordMat)\par
+en.SettingsLabel2=(These settings can be changed under settings / advanced in WordMat)\par
+sp.SettingsLabel2=(\'c9stos ajustes se pueden cambiar m\'e1s adelante en la configuraci\'f3n / avanzados en WordMat)\par
+\par
+da.SettingsLabel3=Tryk p\'e5 n\'e6ste n\'e5r du har valgt.\par
+en.SettingsLabel3=Press next when you have made your choice.\par
+sp.SettingsLabel3=Pulse Siguiente cuando haya seleccionado.\par
+\par
+da.AutoStartCheckbox=Start automatisk WordMat i baggrunden med Word.\par
+en.AutoStartCheckbox=Automatically start WordMat when Word starts.\par
+sp.AutoStartCheckbox=Inicie WorMat autom\'e1ticamente cuando inicie Word.\par
+\par
+da.AutoUpdateCheckbox=Check Automatisk for opdateringer\par
+en.AutoUpdateCheckbox=Automatically check for updates\par
+esp.AutoUpdateCheckbox=Revise actualizaciones autom\'e1ticamente.\par
+\par
+da.ClickRunLabel=Du har installeret en klik og k\'f8r version af Office. Programmet installeres kun for denne bruger.'\par
+en.ClickRunLabel=You have a clickn run version of Office. The program is only installed for the current user.\par
+sp.ClickRunLabel=Usted ha accedido a una versi\'f3n de Office en funcionamiento. El programa est\'e1 instalado solamente para el usuario actual.\par
+\par
+da.OverwriteDocs=De redigerbare Word-filer med figurer og formelsamlinger eksisterer allerede. Vil du overskrive dem?%n (ellers beholdes de gamle).%n De kan altid nulstilles under indstillinger i WordMat\par
+en.OverwriteDocs=The Word documents with figurs and formulae already exists. Do you want to overwrite them? %n(If not you will keep the old).%n You can always reset these documents in the settings in WordMat.\par
+sp.OverwriteDocs=El documento Word con figuras y f\'f3rmulas ya existe. Desea reemplazarlo? %n (Si pulsa no, mantendr\'e1 el antiguo).%n Siempre puede restablecer estos documentos en los ajustes en WordMat. \par
+\par
+da.CloseWord=Gem og luk alle \'e5bne Word-dokumenter nu.%n%n Tryk dern\'e6st OK for at forts\'e6tte installationen. Evt. \'e5bne Word-dokumenter lukkes s\'e5 automatisk. %n%n (Hvis du allerede har lukket Word, er det m\'e5ske n\'f8dvendigt at genstarte) \par
+en.CloseWord=Save and close all open Word documents now.%n%n Then press OK to continue the installation. Any open Word documents are then automatically closed. %n%n (If Word is already closed, you might need to restart your computer)\par
+sp.CloseWord=Guarde y cierre todos los documentos de Word abiertos.%n%n A continuaci\'f3n, pulse Aceptar para continuar la instalaci\'f3n. Todos los documentos de Word abiertos se cerrar\'e1n autom\'e1ticamente. %n%n (Si Word ya est\'e1 cerrado, es posible que deba reiniciar el equipo)\par
+\par
+da.CloseWord2=Word blev tvunget til at lukke.%n%n Tryk OK for at forts\'e6tte installationen.'\par
+en.CloseWord2=Word was forced to close. %n%n Press OK to continues the installation.\par
+sp.CloseWord2=Word fue forzado a cerrarse. %n%n Pulse Aceptar para continuar la instalaci\'f3n\par
+\par
+da.MakroDeakt=Makroer er deaktiverede i\par
+en.MakroDeakt=Macros are disabled in \par
+sp.MakroDeakt=Las macros se desactivan en\par
+\par
+da.MakroDeakt2=Det anbefales at \'e6ndre denne indstilling, da WordMat ellers ikke vil virke. Tryk OK for \'e6ndre indstillingen nu til aktivering af makroer med meddelelse, eller anuller for at forts\'e6tte uden \'e6ndring. \par
+en.MakroDeakt2=It is recommended to change this setting, otherwise WordMat will not function. Press OK to change the setting to 'macros enabled with message', or cancel to continue without any change.\par
+sp.MakroDeakt2=Se recomienda cambiar esta configuraci\'f3n, de lo contrario WordMat no funcionar\'e1. Pulse Aceptar para cambiar el ajuste a 'macros habilitados con el mensaje', o en Cancelar para continuar sin ning\'fan cambio.\par
+\par
+da.NoWord=Du har ikke installeret Word 2007, 2010 eller 2013. Installationen afsluttes.\par
+en.NoWord=Word 2007, 2010 or 2013 is not installed. The installation will terminate.\par
+sp.NoWord=Word 2007, 2010 o 2013 no est\'e1 instalado. La instalaci\'f3n finalizar\'e1\par
+\par
+da.NoExcel=Du har ikke installeret Excel 2007, 2010 eller 2013. Installationen afsluttes.\par
+en.NoExcel=Excel 2007, 2010 or 2013 is not installed. The installation will terminate.\par
+sp.NoExcel=Excel 2007, 2010 o 2013 no est\'e1 instalado. La instalaci\'f3n finalizar\'e1\par
+\par
+da.NotAdmin=Du skal v\'e6re Administrator for at installere WordMat.%n%n Installationen afsluttes.\par
+en.NotAdmin=You need to be administrator to install WordMat.%n%n The installation will terminate.\par
+sp.NotAdmin=Debe ser administrador para instalar WordMat.%n%n la instalaci\'f3n finalizar\'e1.\par
+\par
+da.NoDotNet=WordMat kr\'e6ver Microsoft .NET Framework 4.0%n%n Opdateringen fra Microsoft vil nu blive hentet og installeret, men installationen vil tage noget tid (15-30min) og kr\'e6ve internetforbindelse.%n%n Denne installation vil ikke skulle k\'f8res ved fremtidige opdateringer af WordMat.\par
+en.NoDotNet=WordMat requires Microsoft .NET Framework 4.0 %n%n The update from Microsoft will now be downloaded and installed, but the installation will take some time (>15 min) and you need internet connection.%n%n This installation will not be required on future updates of WordMat. \par
+sp.NoDotNet=WordMat requiere Microsoft.NET Framework 4.0 %n%n Ahora se descargar\'e1 e instalar\'e1 la actualizaci\'f3n de Microsoft, pero la instalaci\'f3n se llevar\'e1 alg\'fan tiempo (> 15 min) y se necesita conexi\'f3n a Internet.%n%n Esta instalaci\'f3n no se requerir\'e1 en las futuras actualizaciones de WordMat.\par
+\par
+da.InstallError=Der skete en fejl under installationen\par
+en.InstallError=An error occured during installation\par
+sp.InstallError=Ha ocurrido un error durante la instalaci\'f3n\par
+\par
+da.UninstallOK=Den eksisterende version af WordMat blev afinstalleret korrekt. Nu forts\'e6tter installationen af den nye version.\par
+en.UninstallOK=The existing version of WordMat was uninstalled correct. The installation of the new version will now continue.\par
+sp.UninstallOK=La versi\'f3n existente de WordMat se ha desinstalado correctamente. Ahora continuar\'e1 la instalaci\'f3n de la nueva versi\'f3n.\par
+\par
+da.UnInstallError=Der skete en fejl under afinstallationen, men installationen af den nye version forts\'e6tter.\par
+en.UnInstallError=An error occured during the uninstallation, but the installation of the new version will continue.\par
+sp.UnInstallError=Ha ocurrido un error durante la desinstalaci\'f3n, pero la instalaci\'f3n de la nueva versi\'f3n continuar\'e1.\par
+\par
+da.InstallThisUser=Opret WordMat menu i Word for denne bruger\par
+en.InstallThisUser=Create WordMat ribbon in Word for this user\par
+sp.InstallThisUser=Crear cinta WordMat en Word para este usuario\par
+\par
+da.ReactivateWordMat=Reaktiver WordMat\par
+en.ReactivateWordMat=Reactivate WordMat\par
+sp.ReactivateWordMat=Reactivar WorMat\par
+\par
+da.QuickWordMat=WordMat lommeregner\par
+en.QuickWordMat=Quick WordMat\par
+sp.QuickWordMat=WordMat r\'e1pido\par
+\par
+da.InstallFor=Installer for:\par
+en.InstallFor=Install for:\par
+sp.InstallFor=Instalar para:\par
+\par
+da.AllUsers=Alle brugere\par
+en.AllUsers=All users\par
+sp.AllUsers=Para todos los usuarios\par
+\par
+da.ThisUser=Kun for denne bruger\par
+en.ThisUser=Only for this user\par
+sp.ThisUser=S\'f3lo para este usuario\par
+\par
+\par
+}
+ 
