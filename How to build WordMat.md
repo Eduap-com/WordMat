@@ -22,14 +22,14 @@ To build do the following
 1. Open WordMat.pkgproj
 2. Click build in the menu
 3. Wait until it completes
-4. a new *WordMat.pkg* file is created in the same folder
+4. A new *WordMat.pkg* file is created in the same folder
 
 Be aware that if you are building a new version there are a number of things you must observe, depending on where changes have been made in the code.
 See section *New release checklist*
 
 # New release checklist
 Whenever a new release is compiled the following checklist must be followed
-1. If any changes have been made to SolveReal.mac or WordMatunitadd.mac a new maxima.core and/or maximaunit.core must be built for both Windows and Mac. See section *Buidling a new maxima.core*
+1. If any changes have been made to SolveReal.mac or WordMatunitAddon.mac a new maxima.core and/or maximaunit.core must be built for both Windows and Mac. See section *Buidling a new maxima.core*
 2. Update the version number in WordMat.dotm, the inno script and Package script
 3. If any changes have been made to WordMat.dotm a new WordMatWinMac.dotm must be created. See section *Creating WordMatWinMac.dotm for Mac*
 4. If a new version of GeoGebra is in the release the filenames must be changed in the inno script file 
@@ -46,15 +46,17 @@ This makes it must faster to start up Maxima, instead of having to load all spec
 
 ### Compiling maxima.core on Windows
 - In the following use a normal maxima 5.38.1 installation from the programs folder and not from the GitHub repository
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib\*
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib\ *
 - run *Maxima-sbcl-5.38.1\bin\maxima.bat* by right clicking and choosing *'run as administrator'*
    If you fail to run as administrator you will recieve a permission denied error in the last step.
 - Run the following commands in the command window (You can copy/paste all in one go)
+```
 load(solvereal)$
 load(draw)$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
 :lisp (sb-ext:save-lisp-and-die "maxima.core" :toplevel #'cl-user::run)
+```
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *C:\Windows\System32* or possibly in the same folder as maxima.bat
@@ -62,12 +64,14 @@ linenum:-1;
 
 - Again run *Maxima-sbcl-5.38.1\bin\maxima.bat* as administrator
 - Run the following commands in the command window
+```
 load(solvereal)$
 load(draw)$
 load(WordMatUnitAddon)$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
 :lisp (sb-ext:save-lisp-and-die "maximaunit.core" :toplevel #'cl-user::run)
+```
 
 - Copy *C:\Windows\System32\maximaunit.core* to Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\*
 
@@ -85,6 +89,7 @@ The version of Maxima used is the most recent version which I could get to work 
 - Run maxima.app.
   (If it fails to open: Open terminal, right click maxima.app, show contents, navigate to find Resources/maxima.sh, dragn drop maxima.sh to terminal and press enter)
 - Run the following commands in the terminal window
+```
 load(solvereal)$
 load(draw)$
 gnuplot_command:"/Applications/WordMat/gnuplot/gnuplot";
@@ -92,6 +97,7 @@ set_plot_option([gnuplot_term, aqua])$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
 :lisp (sb-ext:save-lisp-and-die "maxima.core" :toplevel #'cl-user::run)
+```
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *Users/youruser* 
@@ -106,13 +112,13 @@ Changes in the VBA code must always take place in the Windows version, because M
 WordMatWinMac.dotm is basically a copy of WordMat.dotm. Any changes in the code between Windows and Mac are handles within the VBA code using compiler constants.
 However there are a couple of caveats:
 - Keyboard shortcuts will not work from Windows to Mac
-- special characters will mess up in the code, menus etc
+- Special characters will mess up in the code, menus etc
   This second problem was resolved at some point by Microsoft or Apple, but has been reintroduced since version v.1.19.
   
-To avoid this follow this procedure:
+To avoid this, follow this procedure:
 1. On Windows: Copy WordMat.dotm and rename to WordMatWinMac.dotm
 2. On Windows: Run the macro *'ReplaceToNonUnicode'* (Press Alt+F8)
-   *This macro will only run if you have set Word to trust the VBA project object model*
+*This macro will only run if you have set Word to trust the VBA project object model*
    *Files | Settings | Trust Center | Trust Center Settings | Macro Settings | Trust access to the VBA project object model *
    (The macro replaces special charcters by other text sequences like *ae* for æ)
 3. Open WordMatWinMac.dotm on Mac by first opening Word and then choosing the file. (Do not open by clicking the file in Finder)
