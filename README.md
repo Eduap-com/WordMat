@@ -3,7 +3,10 @@
 [![Release Version](https://img.shields.io/github/release/Eduap-com/WordMat)](https://github.com/Eduap-com/WordMat/releases/latest)
 
 **The main homepage of the project can be found here:** [Eduap.com](http://www.eduap.com)
+
 *From there you can download the most recent version for Windows and Mac, read the FAQ, see screenshots etc.*
+
+WordMat creates a new ribbon-menu in Word with math functionality. You can do simple and advanced calculations on any math expression entered using the builtin equation editor, plot graphs and much more.
 
 This GitHub-site is for people that wants to contribute to the project by reporting bugs, help fix bugs, translate or add new functionality.
 See [CONTRIBUTING.md](https://github.com/Eduap-com/WordMat/blob/master/CONTRIBUTING.md)
