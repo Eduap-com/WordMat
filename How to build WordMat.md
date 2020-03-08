@@ -80,14 +80,16 @@ linenum:-1;
 - Copy *C:\Windows\System32\maximaunit.core* to *Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\\*
 
 **Explanation of commands**
-*:lisp(sb-vm::set-floating-point-modes :traps nil)*  is a command which ensures that Maxima does not crash on overflow errors.
-*linenum:-1;*  resets the linenumbering
-*:lisp (sb-ext:save-lisp-and-die "maxima.core" :toplevel #'cl-user::run)*     saves the core file and exits
+>*:lisp(sb-vm::set-floating-point-modes :traps nil)*  is a command which ensures that Maxima does not crash on overflow errors.
+
+>*linenum:-1;*  resets the linenumbering
+
+>*:lisp (sb-ext:save-lisp-and-die "maxima.core" :toplevel #'cl-user::run)*     saves the core file and exits
 
 The version of Maxima used is the most recent version which I could get to work on both Windows and Mac. Both version are SBCL compiled versions, hence they should behave almost identical.
 
 ### Compiling maxima.core on Mac
-- In the following use a normal maxima 5.38.1 installation from the programs folder and not from the GitHub repository
+- In the following use a normal maxima 5.38.o installation from the programs folder and not from the GitHub repository
 - Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *maxima.app/Contents/Resourcecs/maxima/share/maxima/5.38.0/share/contrib/*
   *Right click maxima.app and choose 'show contents' to navigate the folder*
 - Run maxima.app.
@@ -108,7 +110,7 @@ linenum:-1;
 - Copy *Users/youruser/maxima.core* to  *maxima.app/Contents/Resources/maxima/lib/maxima/5.38.0/binary-sbcl/* in the Mac folder in the GitHub repository
 
 **Notes**
-If load(solvereal) fails the contents of the file can be copy/pasted to the terminal window in stead.
+>If load(solvereal) fails the contents of the file can be copy/pasted to the terminal window in stead.
 
 ## Creating WordMatWinMac.dotm for Mac
 Whenever there are changes to the VBA code in WordMat.dotm a new Mac-version of the same file must be prepared. This file is called *WordMatWinMac.dotm*

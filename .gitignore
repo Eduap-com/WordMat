@@ -4,8 +4,6 @@
 # Get the file from the most recent installer. It will be placed in folder: /Library/Application support/Microsoft/Office365/User Content/Add-ins/WordMat/
 Mac/WordMat/Maxima.app
 
-#\Contents\Resources\maxima\lib\maxima\5.38.0\binary-sbcl\maxima.core
-
 # Dont upload the compiled installers
-Windows/WordMat.exe
-Mac/WordMat.pkg
+Windows/WordMat*.exe
+Mac/WordMat*.pkg
