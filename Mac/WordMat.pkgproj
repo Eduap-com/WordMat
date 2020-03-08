@@ -21,14 +21,26 @@
 							<key>CHILDREN</key>
 							<array>
 								<dict>
+									<key>BUNDLE_CAN_DOWNGRADE</key>
+									<false/>
+									<key>BUNDLE_POSTINSTALL_PATH</key>
+									<dict>
+										<key>PATH_TYPE</key>
+										<integer>0</integer>
+									</dict>
+									<key>BUNDLE_PREINSTALL_PATH</key>
+									<dict>
+										<key>PATH_TYPE</key>
+										<integer>0</integer>
+									</dict>
 									<key>CHILDREN</key>
 									<array/>
 									<key>GID</key>
 									<integer>80</integer>
 									<key>PATH</key>
-									<string>/Users/mika0569/OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/GeoGebra 5.app</string>
+									<string>../../../../OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/GeoGebra 5.app</string>
 									<key>PATH_TYPE</key>
-									<integer>0</integer>
+									<integer>1</integer>
 									<key>PERMISSIONS</key>
 									<integer>493</integer>
 									<key>TYPE</key>
@@ -815,9 +827,9 @@
 						<key>BACKGROUND_PATH</key>
 						<dict>
 							<key>PATH</key>
-							<string>/Users/mika0569/OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/Packages/WordMatMacInstallImage2.png</string>
+							<string>Installer-files/WordMatMacInstallImage2.png</string>
 							<key>PATH_TYPE</key>
-							<integer>0</integer>
+							<integer>3</integer>
 						</dict>
 						<key>CUSTOM</key>
 						<true/>
@@ -830,9 +842,9 @@
 				<key>BACKGROUND_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/mika0569/OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/Packages/WordMatMacInstallImage2.png</string>
+					<string>Installer-files/WordMatMacInstallImage2.png</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>CUSTOM</key>
 				<true/>
@@ -852,6 +864,8 @@
 						<key>LIST</key>
 						<array>
 							<dict>
+								<key>CHILDREN</key>
+								<array/>
 								<key>DESCRIPTION</key>
 								<array/>
 								<key>OPTIONS</key>
@@ -863,11 +877,7 @@
 								</dict>
 								<key>PACKAGE_UUID</key>
 								<string>00DC9B85-4E7D-4F69-88F5-F28DF4443918</string>
-								<key>REQUIREMENTS</key>
-								<array/>
 								<key>TITLE</key>
-								<array/>
-								<key>TOOLTIP</key>
 								<array/>
 								<key>TYPE</key>
 								<integer>0</integer>
@@ -951,9 +961,9 @@
 						<key>VALUE</key>
 						<dict>
 							<key>PATH</key>
-							<string>/Users/mika0569/OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/Packages/Custom Intro_eng.rtf</string>
+							<string>Installer-files/Custom Intro_eng.rtf</string>
 							<key>PATH_TYPE</key>
-							<integer>0</integer>
+							<integer>1</integer>
 						</dict>
 					</dict>
 					<dict>
@@ -962,9 +972,9 @@
 						<key>VALUE</key>
 						<dict>
 							<key>PATH</key>
-							<string>/Users/mika0569/OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/Packages/Custom Intro.rtf</string>
+							<string>Installer-files/Custom Intro.rtf</string>
 							<key>PATH_TYPE</key>
-							<integer>0</integer>
+							<integer>1</integer>
 						</dict>
 					</dict>
 				</array>
@@ -979,9 +989,9 @@
 						<key>VALUE</key>
 						<dict>
 							<key>PATH</key>
-							<string>/Users/mika0569/OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/Packages/Licens_eng.txt</string>
+							<string>../../../../OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/Packages/Licens_eng.txt</string>
 							<key>PATH_TYPE</key>
-							<integer>0</integer>
+							<integer>1</integer>
 						</dict>
 					</dict>
 					<dict>
@@ -990,9 +1000,9 @@
 						<key>VALUE</key>
 						<dict>
 							<key>PATH</key>
-							<string>/Users/mika0569/OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/Packages/Licens.txt</string>
+							<string>../../../../OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/Packages/Licens.txt</string>
 							<key>PATH_TYPE</key>
-							<integer>0</integer>
+							<integer>1</integer>
 						</dict>
 					</dict>
 				</array>
@@ -1089,9 +1099,9 @@
 			<key>BUILD_PATH</key>
 			<dict>
 				<key>PATH</key>
-				<string>/Users/mika0569/OneDrive/Dokumenter/Eduap/WordMat/WordMat Mac/Install/</string>
+				<string>.</string>
 				<key>PATH_TYPE</key>
-				<integer>0</integer>
+				<integer>3</integer>
 			</dict>
 			<key>EXCLUDED_FILES</key>
 			<array>
@@ -1262,7 +1272,7 @@
 				</dict>
 			</array>
 			<key>NAME</key>
-			<string>WordMat2016</string>
+			<string>WordMat</string>
 			<key>PAYLOAD_ONLY</key>
 			<false/>
 			<key>TREAT_MISSING_PRESENTATION_DOCUMENTS_AS_WARNING</key>
