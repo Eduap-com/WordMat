@@ -6,6 +6,7 @@ If you find a bug create an [issue](https://github.com/Eduap-com/WordMat/issues)
 I cannot solve the issue if I cannot recreate the problem. Hence it is important to write the version of WordMat you are using and if it is Windows or Mac.
 If the problem is related to a math expression in Word you must attach a Word-document with the math-expression causing the problem, not just a screenshot.
 Some problems are caused by incorrect entering of the math expression which looks correct. I can only identify this from a worddocument by inspecting the linear code.
+Be adviced that I work on the project depending on time available and motivation. You cannot always expect swift response, and some minor issues or issues that require a lot of work might not be prioritized. Any help is appreciated :-)
 
 Translations
 -----------------
@@ -21,6 +22,7 @@ Coding
 -------------
 WordMat consist of many different parts and is written in 4 different languages (VBA, c#, c and Lisp)
 You dont need to know everything about the structure to contribute.
+Warning: Do not change anything in the Windows folder from a Mac and vice versa. Special characters will mess up in text-files. 
 Read the 'How to build WordMat' document to get started. But here is a sum up:
 The installer is created using Inno setup and written in pascal.
 
