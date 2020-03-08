@@ -2,7 +2,7 @@
 [![Downloads](https://img.shields.io/github/downloads/Eduap-com/WordMat/total.svg?style=popout)](https://github.com/Eduap-com/WordMat/releases)
 [![Release Version](https://img.shields.io/github/release/Eduap-com/WordMat)](https://github.com/Eduap-com/WordMat/releases/latest)
 
-** The main homepage of the project can be found here: ** [Eduap.com](http://www.eduap.com)
+**The main homepage of the project can be found here:** [Eduap.com](http://www.eduap.com)
 
 *From there you can download the most recent installer version for Windows and Mac, read the FAQ etc.*
 
