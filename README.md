@@ -1,4 +1,7 @@
 # WordMat
+[![Downloads](https://img.shields.io/github/downloads/Eduap-com/WordMat/total.svg?style=popout)](https://github.com/Eduap-com/WordMat/releases)
+[![Release Version](https://img.shields.io/github/release/Eduap-com/WordMat)](https://github.com/Eduap-com/WordMat/releases/latest)
+[![Build Status](https://dev.azure.com/Eduap-com/WordMat/_apis/build/status/CI%20Pipeline?branchName=master&stageName=Build)]
 WordMat is open source, released as GNU General public License.
 
 WordMat is written in VBA, c#, c and Maxima script
