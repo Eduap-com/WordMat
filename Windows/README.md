@@ -1,4 +1,4 @@
-#Windows-folder
+# Windows-folder
 This folder contains all the files required to build WordMat for Windows.
 Run the inno setup script: ‘WordMat-InnoScript’ to create the WordMat.exe file
 
