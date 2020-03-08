@@ -18,6 +18,10 @@ Be aware that if you are building a new version there are a number of things you
 ## Mac
 First install [Packages](http://s.sudre.free.fr/Software/Packages/about.html)
 
+Currently the Mac folder is missing a file/folder called **maxima.app** before it can be compiled as it exceeds the GitHub limit of 100 MB
+You can get this file from the most recent installer. It will be placed in the folder: /Library/Application support/Microsoft/Office365/User Content/Add-ins/WordMat/ Then place it in the Mac/WordMat folder.
+Also the paths in the pkgproj file probably needs to be set manually on a new computer. A work in progress.
+
 To build do the following
 1. Open WordMat.pkgproj
 2. Click build in the menu
@@ -40,15 +44,15 @@ Whenever a new release is compiled the following checklist must be followed
 
 ## Buidling a new maxima.core
 The default installation of Maxima loads the compiled *maxima.core* file from this location:
-*Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\*
+*Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\\*
 It is however posible to load maxima, make some changes and save a new maxima.core file.
 This makes it must faster to start up Maxima, instead of having to load all special function and settings upon startup.
 
 ### Compiling maxima.core on Windows
 - In the following use a normal maxima 5.38.1 installation from the programs folder and not from the GitHub repository
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib *
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib*
 - run *Maxima-sbcl-5.38.1\bin\maxima.bat* by right clicking and choosing *'run as administrator'*
-   If you fail to run as administrator you will recieve a permission denied error in the last step.
+If you fail to run as administrator you will recieve a permission denied error in the last step.
 - Run the following commands in the command window (You can copy/paste all in one go)
 ```
 load(solvereal)$
