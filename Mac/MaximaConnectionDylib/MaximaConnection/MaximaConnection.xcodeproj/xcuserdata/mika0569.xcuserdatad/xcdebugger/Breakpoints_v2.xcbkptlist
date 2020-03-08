@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "EA7A73A0-3A46-4842-A38B-80E7B7707D2B"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E029B6AE-803D-4ED9-ACCE-5460DDC5971A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaximaFunctions.c"
+            timestampString = "504566101.912393"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
+            landmarkName = "ReadOutputIfAny2(outstring)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
