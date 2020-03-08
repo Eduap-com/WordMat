@@ -26,10 +26,10 @@ sudo rm -rf ~/Library/Containers/com.microsoft.Word/Data/WordMat/
 #rmdir /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Add-ins.localized/WordMat/
 #rmdir /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/
 
-sudo rm /Applications/WordMat2016/InstallScript.sh
-sudo rm /Applications/WordMat2016/WordMat\ installation\ files.docx
-sudo rm /Applications/WordMat2016/UnInstallScript
-sudo rmdir  /Applications/WordMat2016/
+sudo rm /Applications/WordMat/InstallScript.sh
+sudo rm /Applications/WordMat/WordMat\ installation\ files.docx
+sudo rm /Applications/WordMat/UnInstallScript
+sudo rmdir  /Applications/WordMat/
 
 Echo
 Echo
