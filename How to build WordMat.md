@@ -46,7 +46,7 @@ This makes it must faster to start up Maxima, instead of having to load all spec
 
 ### Compiling maxima.core on Windows
 - In the following use a normal maxima 5.38.1 installation from the programs folder and not from the GitHub repository
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib\ *
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib *
 - run *Maxima-sbcl-5.38.1\bin\maxima.bat* by right clicking and choosing *'run as administrator'*
    If you fail to run as administrator you will recieve a permission denied error in the last step.
 - Run the following commands in the command window (You can copy/paste all in one go)
@@ -60,7 +60,7 @@ linenum:-1;
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *C:\Windows\System32* or possibly in the same folder as maxima.bat
-- Copy *C:\Windows\System32\maxima.core* to Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\* in the GitHub repository
+- Copy *C:\Windows\System32\maxima.core* to *Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl* in the GitHub repository
 
 - Again run *Maxima-sbcl-5.38.1\bin\maxima.bat* as administrator
 - Run the following commands in the command window
@@ -73,7 +73,7 @@ linenum:-1;
 :lisp (sb-ext:save-lisp-and-die "maximaunit.core" :toplevel #'cl-user::run)
 ```
 
-- Copy *C:\Windows\System32\maximaunit.core* to Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\*
+- Copy *C:\Windows\System32\maximaunit.core* to *Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\\*
 
 **Explanation of commands**
 *:lisp(sb-vm::set-floating-point-modes :traps nil)*  is a command which ensures that Maxima does not crash on overflow errors.
@@ -101,7 +101,7 @@ linenum:-1;
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *Users/youruser* 
-- Copy *Users/youruser/maxima.core* to  maxima.app/Contents/Resources/maxima/lib/maxima/5.38.0/binary-sbcl/* in the Mac folder in the GitHub repository
+- Copy *Users/youruser/maxima.core* to  *maxima.app/Contents/Resources/maxima/lib/maxima/5.38.0/binary-sbcl/* in the Mac folder in the GitHub repository
 
 **Notes**
 If load(solvereal) fails the contents of the file can be copy/pasted to the terminal window in stead.
