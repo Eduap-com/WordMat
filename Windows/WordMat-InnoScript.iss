@@ -175,28 +175,28 @@ Source: ExternalPrograms\graphtemplate.grf; DestDir: {app}; Flags: ignoreversion
 Source: Other\OpretWordMenu.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\ReaktiverWordMat.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 ; These files are in a folder a level up from the Windows folder as they are shared with the Mac version
-Source: ..\Shared\WordDocs\WordMatManual.docx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\WordMatManual_english.docx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer.docx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer.docx; DestDir: {%appdata}\WordMat\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer_english.docx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer_english.docx; DestDir: {%appdata}\WordMat\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer_spansk.docx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer_spansk.docx; DestDir: {%appdata}\WordMat\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler.docx; DestDir: {app}\Formulae; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler.docx; DestDir: {%appdata}\WordMat\Formulae\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler_spansk.docx; DestDir: {app}\Formulae; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler_spansk.docx; DestDir: {%appdata}\WordMat\Formulae\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler_english.docx; DestDir: {app}\Formulae; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler_english.docx; DestDir: {%appdata}\WordMat\Formulae\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\FysikFormler.docx; DestDir: {app}\Formulae; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\FysikFormler.docx; DestDir: {%appdata}\WordMat\Formulae\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\FysikFormler_spansk.docx; DestDir: {app}\Formulae; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\FysikFormler_spansk.docx; DestDir: {%appdata}\WordMat\Formulae\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {app}\Formulae; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {%appdata}\WordMat\Formulae\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {app}\Formulae; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {%appdata}\WordMat\Formulae\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\WordMatManual.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\WordMatManual_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\Figurer.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\Figurer.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\Figurer_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\Figurer_english.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\Figurer_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\Figurer_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\MatFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\MatFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\MatFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\MatFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\MatFormler_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\MatFormler_english.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\FysikFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\FysikFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\FysikFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\FysikFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
 Source: MathMenu.dll\MathMenu.dll; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: MathMenu.dll\MathMenu.tlb; DestDir: {app}; Flags: ignoreversion regtypelib overwritereadonly uninsremovereadonly
 
@@ -220,6 +220,7 @@ Source: ExternalPrograms\Maxima-sbcl-5.38.1\*; DestDir: {app}\Maxima-sbcl-5.38.1
 ;Source: mac-files\*; DestDir: {app}\Maxima-5.25.1-gcl\share\maxima\5.25.1\share; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\Maxima-files\SolveReal.mac; DestDir: {app}Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\Maxima-files\WordMatUnitAddon.mac; DestDir: {app}Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\unit.mac; DestDir: {app}Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib\unit; Flags: ignoreversion overwritereadonly uninsremovereadonly
 
 ;Source: C:\Users\Mikael\Documents\Eduap\MathMenu\MathMenu.dll; DestDir: {app}; Flags: ignoreversion gacinstall ; StrongAssemblyName: "MathMenu, Version=1.0.0.1, Culture=neutral, PublicKeyToken=89e88f8548e16f37, ProcessorArchitecture=MSIL"
 
