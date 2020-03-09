@@ -1,6 +1,6 @@
-# WordMat
+# Shared
 
-Files which are uses in both the Windows and Mac version. The two installers grab the files from here.
+The share folder holds files which are uses in both the Windows and Mac version. The two installers grab the files from here.
 
 Actually many files are in both versions, but must be copied from Windows to Mac, when they are changed and require a bit of tweaking.
 Mainly because special characters can mess up in many files when they are opened on a Mac.
