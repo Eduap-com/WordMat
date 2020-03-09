@@ -9,4 +9,6 @@ Windows/WordMat*.exe
 Mac/WordMat*.pkg
 
 #mac folder files
+*/.DS_Store
+*/*/.DS_Store
 **/.DS_Store
