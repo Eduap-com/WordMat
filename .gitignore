@@ -8,6 +8,10 @@ Mac/ExternalPrograms/Maxima.app
 Windows/WordMat*.exe
 Mac/WordMat*.pkg
 
+# Dont upload Backup folders
+Windows/Backup
+Mac/Backup
+
 #mac folder files
 */.DS_Store
 */*/.DS_Store

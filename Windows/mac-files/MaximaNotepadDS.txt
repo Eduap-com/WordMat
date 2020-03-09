@@ -1,8 +1,0 @@
-MaximaNotePadDS.xml
-er plugin til notepad++ så den forstår mac-filer
-
-in Notepad++, go to Language –> Define your language…
-Press Import and navigate to the file MaximaNotepadDS.xml
-Quit Notepad++ and then start the program again.
-Now in Language menu, you’ll see Maxima in the list of languages at the bottom of the drop-down menu
-A  .mac file already open won’t display with the new syntax highlighting, but any .mac file you open or save from new will automatically show with syntax highlighting.
