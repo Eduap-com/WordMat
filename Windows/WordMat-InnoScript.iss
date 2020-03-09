@@ -166,7 +166,7 @@ Source: Other\WordMatLommeregner.docm; DestDir: {app}; Flags: ignoreversion over
 Source: ExternalPrograms\SetupGraph-4.4.2.exe; DestDir: {app}; Components: Graph ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 Source: ExternalPrograms\GeoGebra-Windows-Installer-5-0-574-0.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 ;Source: GeoGebra-Windows-Installer-4-4-10-0.msi; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
-Source: Other\FormelSamling.dotx; DestDir: {%appdata}\Microsoft\Document Building Blocks\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
+Source: ..\Shared\WordDocs\FormelSamling.dotx; DestDir: {%appdata}\Microsoft\Document Building Blocks\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: Excelfiles\*; DestDir: {app}\ExcelFiler; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: Images\*; DestDir: {app}\Images; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: ExternalPrograms\GeoGebra.ggb; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
@@ -218,29 +218,30 @@ Source: ExternalPrograms\Maxima-sbcl-5.38.1\*; DestDir: {app}\Maxima-sbcl-5.38.1
                                       
 ;egne mac-filer
 ;Source: mac-files\*; DestDir: {app}\Maxima-5.25.1-gcl\share\maxima\5.25.1\share; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: mac-files\SolveReal.mac; DestDir: {app}ExternalPrograms\Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\SolveReal.mac; DestDir: {app}Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\WordMatUnitAddon.mac; DestDir: {app}Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
 
 ;Source: C:\Users\Mikael\Documents\Eduap\MathMenu\MathMenu.dll; DestDir: {app}; Flags: ignoreversion gacinstall ; StrongAssemblyName: "MathMenu, Version=1.0.0.1, Culture=neutral, PublicKeyToken=89e88f8548e16f37, ProcessorArchitecture=MSIL"
 
 ;Latex   Skabelonen bliver dog ikke installeret korrekt for forskellige sprog hvis ikke Word 2013
-Source: Fonts\lmroman12-regular.otf; DestDir: {fonts};FontInstall: "LM Roman 12"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\latinmodern-math.otf; DestDir: {fonts};FontInstall: "Latin Modern Math"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\STIXMath-Regular.otf; DestDir: {fonts};FontInstall: "STIX Math"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\STIX-Regular.otf; DestDir: {fonts};FontInstall: "STIX"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\STIX-Bold.otf; DestDir: {fonts};FontInstall: "STIX"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\STIX-Italic.otf; DestDir: {fonts};FontInstall: "STIX"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\STIX-BoldItalic.otf; DestDir: {fonts};FontInstall: "STIX"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\xits-math.otf; DestDir: {fonts};FontInstall: "XITS Math"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\xits-mathbold.otf; DestDir: {fonts};FontInstall: "XITS Math"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\xits-regular.otf; DestDir: {fonts};FontInstall: "XITS"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\xits-italic.otf; DestDir: {fonts};FontInstall: "XITS"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\xits-bold.otf; DestDir: {fonts};FontInstall: "XITS"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Fonts\xits-bolditalic.otf; DestDir: {fonts};FontInstall: "XITS"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
-Source: Latex\LatexWordTemplate.dotx; DestDir: {reg:HKCU\Software\Microsoft\Office\12.0\Word\Options,PersonalTemplates|{userdocs}\Custom Office templates}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: Latex\LatexWordTemplate.dotx; DestDir: {reg:HKCU\Software\Microsoft\Office\14.0\Word\Options,PersonalTemplates|{userdocs}\Custom Office templates}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: Latex\LatexWordTemplate.dotx; DestDir: {reg:HKCU\Software\Microsoft\Office\15.0\Word\Options,PersonalTemplates|{userdocs}\Custom Office templates}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: Latex\LatexWordTemplate.dotx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: Latex\BibWord_Stylesheet.xsl; DestDir: {code:WordInstallFolder|15}\Bibliography\Style; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Fonts\lmroman12-regular.otf; DestDir: {fonts};FontInstall: "LM Roman 12"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\latinmodern-math.otf; DestDir: {fonts};FontInstall: "Latin Modern Math"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\STIXMath-Regular.otf; DestDir: {fonts};FontInstall: "STIX Math"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\STIX-Regular.otf; DestDir: {fonts};FontInstall: "STIX"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\STIX-Bold.otf; DestDir: {fonts};FontInstall: "STIX"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\STIX-Italic.otf; DestDir: {fonts};FontInstall: "STIX"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\STIX-BoldItalic.otf; DestDir: {fonts};FontInstall: "STIX"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\xits-math.otf; DestDir: {fonts};FontInstall: "XITS Math"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\xits-mathbold.otf; DestDir: {fonts};FontInstall: "XITS Math"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\xits-regular.otf; DestDir: {fonts};FontInstall: "XITS"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\xits-italic.otf; DestDir: {fonts};FontInstall: "XITS"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\xits-bold.otf; DestDir: {fonts};FontInstall: "XITS"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\Fonts\xits-bolditalic.otf; DestDir: {fonts};FontInstall: "XITS"; Flags: fontisnttruetype onlyifdoesntexist uninsneveruninstall
+Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {reg:HKCU\Software\Microsoft\Office\12.0\Word\Options,PersonalTemplates|{userdocs}\Custom Office templates}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {reg:HKCU\Software\Microsoft\Office\14.0\Word\Options,PersonalTemplates|{userdocs}\Custom Office templates}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {reg:HKCU\Software\Microsoft\Office\15.0\Word\Options,PersonalTemplates|{userdocs}\Custom Office templates}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\BibWord_Stylesheet.xsl; DestDir: {code:WordInstallFolder|15}\Bibliography\Style; Flags: ignoreversion overwritereadonly uninsremovereadonly
         
 
 [Components]
@@ -364,8 +365,8 @@ Filename: {app}\GeoGebra-Windows-Installer-5-0-574-0.exe; Parameters: "/S";check
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /u " ; WorkingDir: "{app}"; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
 
 [UninstallDelete]
-Type: files; Name: "{code:VUserStartupFolder12}\MathMenu.dotm"
-Type: files; Name: "{code:VUserStartupFolder14}\MathMenu.dotm"
+;Type: files; Name: "{code:VUserStartupFolder12}\MathMenu.dotm"
+;Type: files; Name: "{code:VUserStartupFolder14}\MathMenu.dotm"
 Type: files; Name: "{code:VUserStartupFolder12}\WordMat.dotm"
 Type: files; Name: "{code:VUserStartupFolder14}\WordMat.dotm"
 Type: files; Name: "{code:VUserStartupFolder15}\WordMat.dotm"
@@ -374,10 +375,10 @@ Type: files; Name: "{code:VStartupFolderAll12}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll14}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll15}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll16}\WordMat.dotm"
-Type: files; Name: "{code:VUserStartupFolder12}\WordMat2.dotm"
-Type: files; Name: "{code:VUserStartupFolder14}\WordMat2.dotm"
-Type: files; Name: "{code:VStartupFolderAll12}\WordMat2.dotm"
-Type: files; Name: "{code:VStartupFolderAll14}\WordMat2.dotm"
+;Type: files; Name: "{code:VUserStartupFolder12}\WordMat2.dotm"
+;Type: files; Name: "{code:VUserStartupFolder14}\WordMat2.dotm"
+;Type: files; Name: "{code:VStartupFolderAll12}\WordMat2.dotm"
+;Type: files; Name: "{code:VStartupFolderAll14}\WordMat2.dotm"
                    
 
 [Icons]
