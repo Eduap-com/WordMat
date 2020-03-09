@@ -31,6 +31,8 @@ To build do the following
 Be aware that if you are building a new version there are a number of things you must observe, depending on where changes have been made in the code.
 See section *New release checklist*
 
+If the build fails because of permission issues a reboot often helps.
+
 # New release checklist
 Whenever a new release is compiled the following checklist must be followed
 1. If any changes have been made to SolveReal.mac or WordMatunitAddon.mac a new maxima.core and/or maximaunit.core must be built for both Windows and Mac. See section *Buidling a new maxima.core*
