@@ -2,7 +2,7 @@
 
 # This file exceeds GitHubs 100 MB filelimit. It is required to build the Mac version
 # Get the file from the most recent installer. It will be placed in folder: /Library/Application support/Microsoft/Office365/User Content/Add-ins/WordMat/
-Mac/WordMat/Maxima.app
+Mac/ExternalPrograms/Maxima.app
 
 # Dont upload the compiled installers
 Windows/WordMat*.exe
