@@ -6,8 +6,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
 AppName=WordMat
-AppVerName=WordMat v. 1.22
-VersionInfoVersion=1.22.0.0
+AppVerName=WordMat v. 1.23
+VersionInfoVersion=1.23.0.0
 AppMutex=WordMatMutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
@@ -167,7 +167,7 @@ Source: ExternalPrograms\SetupGraph-4.4.2.exe; DestDir: {app}; Components: Graph
 Source: ExternalPrograms\GeoGebra-Windows-Installer-5-0-574-0.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 ;Source: GeoGebra-Windows-Installer-4-4-10-0.msi; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 Source: ..\Shared\WordDocs\FormelSamling.dotx; DestDir: {%appdata}\Microsoft\Document Building Blocks\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
-Source: Excelfiles\*; DestDir: {app}\ExcelFiler; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
+Source: Excelfiles\*; DestDir: {app}\ExcelFiles; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: Images\*; DestDir: {app}\Images; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: ExternalPrograms\GeoGebra.ggb; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 ;Source: GeoGebraFiler\geogebra_thumbnail.png; DestDir: {app}\GeoGebraFiler\; Flags: ignoreversion
