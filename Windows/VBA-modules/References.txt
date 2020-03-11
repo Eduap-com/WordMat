@@ -1,0 +1,6 @@
+﻿VBA|Visual Basic For Applications|{000204EF-0000-0000-C000-000000000046}|4|2|C:\Program Files\Common Files\Microsoft Shared\VBA\VBA7.1\VBE7.DLL
+Word|Microsoft Word 16.0 Object Library|{00020905-0000-0000-C000-000000000046}|8|7|C:\Program Files\Microsoft Office\Root\Office16\MSWORD.OLB
+stdole|OLE Automation|{00020430-0000-0000-C000-000000000046}|2|0|C:\Windows\System32\stdole2.tlb
+Office|Microsoft Office 16.0 Object Library|{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}|2|8|C:\Program Files\Common Files\Microsoft Shared\OFFICE16\MSO.DLL
+MSForms|Microsoft Forms 2.0 Object Library|{0D452EE1-E08F-101A-852E-02608C4D0BB4}|2|0|C:\Windows\system32\FM20.DLL
+VBIDE|Microsoft Visual Basic for Applications Extensibility 5.3|{0002E157-0000-0000-C000-000000000046}|5|3|C:\Program Files (x86)\Common Files\Microsoft Shared\VBA\VBA6\VBE6EXT.OLB

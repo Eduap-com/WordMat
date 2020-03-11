@@ -39,6 +39,7 @@ Events are triggered when the buttons are pressed but also on creation to get th
 ## Maxima changes
 
 ### SolveReal.mac
+When you want to change this code the best approach is the paste it all into WxMaxima, where you can test the functions, and make changes. When done copy/paste back to the .mac file.
 
 ## MathMenu.dll
 The mathmenu.dll library is referenced from WordMat.dotm VBA code.
