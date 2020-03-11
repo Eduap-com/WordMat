@@ -8,6 +8,9 @@ Mac/ExternalPrograms/Maxima.app
 Windows/WordMat*.exe
 Mac/WordMat*.pkg
 
+# Dont upload temp copies
+Windows/WordMat*- Kopi*.dotm
+
 # Dont upload Backup folders
 Windows/Backup
 Mac/Backup
