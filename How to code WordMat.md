@@ -20,6 +20,7 @@ From this menu you can also launch macros (VBA functions). You can also launch M
 ## Maxima changes
 
 ### SolveReal.mac
+When you want to change this code the best approach is the paste it all into WxMaxima, where you can test the functions, and make changes. When done copy/paste back to the .mac file.
 
 ## MaathMenu.dll
 
