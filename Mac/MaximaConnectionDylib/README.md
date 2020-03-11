@@ -7,5 +7,5 @@ The installer places the library in
 */Library/Application support/Microsoft/Office365/User Content/Add-ins/WordMat/*
 It must be this library for Word to have the correct privilige
 
-The library MaximaConnection.dylib is referenced from the VBA code in WordMatWinMac.dotm
+The library MaximaConnection.dylib is referenced from the VBA code in WordMatMac.dotm
 
