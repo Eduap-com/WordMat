@@ -6,9 +6,16 @@
 	<array>
 		<dict>
 			<key>MUST-CLOSE-APPLICATION-ITEMS</key>
-			<array/>
+			<array>
+				<dict>
+					<key>APPLICATION_ID</key>
+					<string>com.microsoft.Word</string>
+					<key>STATE</key>
+					<true/>
+				</dict>
+			</array>
 			<key>MUST-CLOSE-APPLICATIONS</key>
-			<false/>
+			<true/>
 			<key>PACKAGE_FILES</key>
 			<dict>
 				<key>DEFAULT_INSTALL_LOCATION</key>
@@ -121,11 +128,11 @@
 																					<key>GID</key>
 																					<integer>80</integer>
 																					<key>PATH</key>
-																					<string>Excelfiler</string>
+																					<string>Excelfiles</string>
 																					<key>PATH_TYPE</key>
 																					<integer>1</integer>
 																					<key>PERMISSIONS</key>
-																					<integer>493</integer>
+																					<integer>511</integer>
 																					<key>TYPE</key>
 																					<integer>3</integer>
 																					<key>UID</key>
@@ -217,7 +224,7 @@
 																					<key>PATH_TYPE</key>
 																					<integer>1</integer>
 																					<key>PERMISSIONS</key>
-																					<integer>493</integer>
+																					<integer>511</integer>
 																					<key>TYPE</key>
 																					<integer>3</integer>
 																					<key>UID</key>
@@ -866,7 +873,7 @@
 				<key>NAME</key>
 				<string>WordMat</string>
 				<key>OVERWRITE_PERMISSIONS</key>
-				<false/>
+				<true/>
 				<key>PAYLOAD_SIZE</key>
 				<integer>-1</integer>
 				<key>REFERENCE_PATH</key>
