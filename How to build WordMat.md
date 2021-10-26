@@ -16,10 +16,10 @@ To build do the following:
 Be aware that if you are building a new version there are a number of things you must observe. See section *New release checklist*
 
 ## Mac
-First install [Packages](http://s.sudre.free.fr/Software/Packages/about.html)
+First install [Packages](http://s.sudre.free.fr/Software/Packages/about.html) (The program that generates the installer-file)
 
-Currently the Mac folder is missing a file/folder called **maxima.app** in ExternalProgram before it can be compiled as it exceeds the GitHub limit of 100 MB
-You can get this file from the most recent installer. It will be placed in the folder: /Library/Application support/Microsoft/Office365/User Content/Add-ins/WordMat/ Then place it in the Mac/ExternalPrograms folder.
+Currently the Mac folder is missing a file/folder called **maxima.app** in ExternalProgram before it can be compiled as it exceeds the GitHub limit of 100 MB.
+You can get this file from the most recent installer. Then place it in the Mac/ExternalPrograms folder. Once installed, the maxima.app file will be placed in the folder: '/Library/Application support/Microsoft/Office365/User Content/Add-ins/WordMat/' Where Word has execute privileges.
 Also the paths in the pkgproj file probably needs to be set manually on a new computer. A work in progress.
 
 To build do the following
