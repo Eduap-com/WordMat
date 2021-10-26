@@ -323,7 +323,7 @@ long SendToMaxima( char* command)
 long VBstrlen(const char *vbstr) // size_t
 {
     if (vbstr)
-        return *(((uint32_t*)vbstr)-1);
+        return *(((uint32_t*)vbstr)-1); // ændret fra 32bit 18/10-2021
     return 0;
 }
 
@@ -402,7 +402,7 @@ long GetLastOutput(char *outstring, long WaitTime)
     char *stoptext=malloc(8); // "(%i";
     int digits[8];
     int p;
-    int mi;
+    long mi; // ændret fra int 18/10-2021
     int i=0;
     if (IsMaximaRunning()<1)
         return -1;
@@ -425,11 +425,10 @@ long GetLastOutput(char *outstring, long WaitTime)
     //    time_t waittime=(time_t)waittime2;
     
     //int ReadSize=strlen(outstring)+10;
-    long ReadSize = strlen(outstring); //strlen(outstring); doesn't work for string Malloc'ed
+    long ReadSize = strlen(outstring); //VBstrlen(outstring); doesn't work for string Malloc'ed
     if (ReadSize<1)
         return -1;
     //    const int MaxNoOfReads=1;
-    
     char *buffer=malloc(ReadSize+10);
     char *ReturnString=malloc(ReadSize+10); //maxnoofread*readsize
     time_t StartTime;
@@ -595,12 +594,13 @@ long StartMaximaWait(const long WaitTime)
         return 2; // already running
     }
     char *outstring=malloc(1010); // simuler en VBstreng
+    memset(outstring, ' ', 1000); // nulstring streng
     outstring[0]=200;
     outstring[1]=3; // 512+256
-    outstring[2]=0;
-    outstring[3]=0;
-    outstring[1000]='\0';
-    
+    outstring[2]='x';
+    outstring[3]='x';
+    outstring[968]='\0';
+
     errno=0;
     long ern;
     ern=StartMaxima();
