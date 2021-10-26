@@ -49,7 +49,7 @@ Whenever a new release is compiled the following checklist must be followed
 The default installation of Maxima loads the compiled *maxima.core* file from this location:
 *Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\\*
 It is however posible to load maxima, make some changes and save a new maxima.core file.
-This makes it must faster to start up Maxima, instead of having to load all special function and settings upon startup.
+This makes it much faster to start up Maxima, instead of having to load all special function and settings upon startup.
 
 ### Compiling maxima.core on Windows
 - In the following use a normal maxima 5.38.1 installation from the programs folder and not from the GitHub repository
@@ -93,9 +93,11 @@ The version of Maxima used is the most recent version which I could get to work 
 
 ### Compiling maxima.core on Mac
 - In the following use a normal maxima 5.38.0 installation from the programs folder and not from the GitHub repository
+- Right click the maxima.app and choose show contents to navigate the contents
 - Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *maxima.app/Contents/Resourcecs/maxima/share/maxima/5.38.0/share/contrib/*
-  *Right click maxima.app and choose 'show contents' to navigate the folder*
-- Run maxima.app.
+   from v. 39:  'maxima.app/Contents/Resources/opt/share/maxima/5.43.0/share/contrib/'
+- Copy unit.mac to the subfolder unit of the contrib-folder
+…- Run maxima.app.
   (If it fails to open: Open terminal, right click maxima.app, show contents, navigate to find Resources/maxima.sh, dragn drop maxima.sh to terminal and press enter)
 - Run the following commands in the terminal window
 ```
