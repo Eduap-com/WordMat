@@ -111,8 +111,9 @@ linenum:-1;
 ```
 
 - The command window will now close if everything went fine
-- The new *maxima.core* file will be placed in *Users/youruser* 
+- The new *maxima.core* file will be placed in *Users/youruser* or same dir as maxima
 - Copy *Users/youruser/maxima.core* to  *maxima.app/Contents/Resources/maxima/lib/maxima/5.38.0/binary-sbcl/* in the Mac folder in the GitHub repository
+- The new maxima.core file can be run using the command 'sbcl --core maxima.core'
 
 **Notes**
 >If load(solvereal) fails the contents of the file can be copy/pasted to the terminal window in stead.
