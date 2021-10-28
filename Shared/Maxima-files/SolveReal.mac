@@ -589,7 +589,7 @@ sexprq:ratsimp(exprq),
 if exprsize(sexprq)<exprsize(exprq) and is(equal(sexprq,exprq)) then exprq:sexprq,
 sexprq:expand(exprq),sexprq:applyb1(exprq,fracrule),
 if exprsize(sexprq)<exprsize(exprq) and is(equal(sexprq,exprq)) then exprq:sexprq,
-sexprq:applyb1(exprq,simpdiv),
+if not errcatch(applyb1(exprq,simpdiv))=[] then sexprq:applyb1(exprq,simpdiv),
 /* simplify(M*%e^(a*x*M+a*c*M)/(%e^(a*x*M+a*c*M)+1)) */
 if sexprq#false and exprsize(sexprq)<exprsize(exprq) then exprq:sexprq,
 exprq
