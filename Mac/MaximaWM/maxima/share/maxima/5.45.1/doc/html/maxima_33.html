@@ -1,0 +1,1946 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for Expressions (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for Expressions (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for Expressions (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_28.html" rel="up" title="Expressions">
+<link href="maxima_32.html" rel="prev" title="Inequality">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Functions-and-Variables-for-Expressions">
+<div class="header">
+<p>
+Previous: <a href="maxima_32.html" accesskey="p" rel="prev">Inequality</a>, Up: <a href="maxima_28.html" accesskey="u" rel="up">Expressions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-Expressions-1"></span><h3 class="section">6.5 Functions and Variables for Expressions</h3>
+
+
+<span id="alias"></span><span id="Item_003a-Expressions_002fdeffn_002falias"></span><dl class="def">
+<dt id="index-alias"><span class="category">Function: </span><span><strong>alias</strong> <em>(<var>new_name_1</var>, <var>old_name_1</var>, &hellip;, <var>new_name_n</var>, <var>old_name_n</var>)</em><a href='#index-alias' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>provides an alternate name for a (user or system) function, variable, array,
+etc.  Any even number of arguments may be used.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="aliases"></span><span id="Item_003a-Expressions_002fdefvr_002faliases"></span><dl class="def">
+<dt id="index-aliases"><span class="category">System variable: </span><span><strong>aliases</strong><a href='#index-aliases' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>[]</code>
+</p>
+<p><code>aliases</code> is the list of atoms which have an user defined alias (set up by
+the <code><a href="#alias">alias</a></code>, <code><a href="#ordergreat">ordergreat</a></code>, <code><a href="#orderless">orderless</a></code> functions or by
+declaring the atom a <code><a href="#noun">noun</a></code> with <code><a href="maxima_58.html#declare">declare</a></code>.)
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+
+<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+
+<span id="allbut"></span><span id="Item_003a-Expressions_002fdefvr_002fallbut"></span><dl class="def">
+<dt id="index-allbut"><span class="category">Keyword: </span><span><strong>allbut</strong><a href='#index-allbut' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>works with the <code>part</code> commands (i.e.  <code><a href="#part">part</a></code>,<!-- /@w -->
+<code><a href="#inpart">inpart</a></code>, <code><a href="#substpart">substpart</a></code>, <code><a href="#substinpart">substinpart</a></code>,<!-- /@w -->
+<code><a href="#dpart">dpart</a></code>, and <code><a href="#lpart">lpart</a></code>).
+For example,
+</p>
+<div class="example">
+<pre class="example">(%i1) expr : e + d + c + b + a;
+(%o1)                   e + d + c + b + a
+</pre><pre class="example">(%i2) part (expr, [2, 5]);
+(%o2)                         d + a
+</pre></div>
+
+<p>while
+</p>
+<div class="example">
+<pre class="example">(%i1) expr : e + d + c + b + a;
+(%o1)                   e + d + c + b + a
+</pre><pre class="example">(%i2) part (expr, allbut (2, 5));
+(%o2)                       e + c + b
+</pre></div>
+
+<p><code>allbut</code> is also recognized by <code><a href="maxima_8.html#kill">kill</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) [aa : 11, bb : 22, cc : 33, dd : 44, ee : 55];
+(%o1)                 [11, 22, 33, 44, 55]
+</pre><pre class="example">(%i2) kill (allbut (cc, dd));
+(%o0)                         done
+</pre><pre class="example">(%i1) [aa, bb, cc, dd];
+(%o1)                   [aa, bb, 33, 44]
+</pre></div>
+
+<p><code>kill(allbut(<var>a_1</var>, <var>a_2</var>, ...))</code> has the effect of
+<code>kill(all)</code> except that it does not kill the symbols <var>a_1</var>, <var>a_2</var>,
+&hellip;
+</p></dd></dl>
+
+<span id="args"></span><span id="Item_003a-Expressions_002fdeffn_002fargs"></span><dl class="def">
+<dt id="index-args"><span class="category">Function: </span><span><strong>args</strong> <em>(<var>expr</var>)</em><a href='#index-args' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the list of arguments of <code>expr</code>, which may be any kind of
+expression other than an atom.  Only the arguments of the top-level operator
+are extracted; subexpressions of <code>expr</code> appear as elements or
+subexpressions of elements of the list of arguments.
+</p>
+<p>The order of the items in the list may depend on the global flag
+<code><a href="#inflag">inflag</a></code>.
+</p>
+<p><code>args (<var>expr</var>)</code> is equivalent to <code>substpart (&quot;[&quot;, <var>expr</var>, 0)</code>.
+See also <code><a href="#substpart">substpart</a></code>, <code><a href="maxima_164.html#apply">apply</a></code>, <code><a href="maxima_164.html#funmake">funmake</a></code>, and <code><a href="#op">op</a></code>.
+</p>
+<p>How to convert a matrix to a nested list:
+</p>
+<div class="example">
+<pre class="example">(%i1) M:matrix([1,2],[3,4]);
+                            [ 1  2 ]
+(%o1)                       [      ]
+                            [ 3  4 ]
+</pre><pre class="example">(%i2) args(M);
+(%o2)                   [[1, 2], [3, 4]]
+</pre></div>
+
+<p>Since maxima internally treats a sum of <code>n</code> terms as a summation command
+with <code>n</code> arguments args() can extract the list of terms in a sum:
+</p>
+<div class="example">
+<pre class="example">(%i1) a+b+c;
+(%o1)                       c + b + a
+</pre><pre class="example">(%i2) args(%);
+(%o2)                       [c, b, a]
+</pre></div>
+
+
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="atom"></span><span id="Item_003a-Expressions_002fdeffn_002fatom"></span><dl class="def">
+<dt id="index-atom"><span class="category">Function: </span><span><strong>atom</strong> <em>(<var>expr</var>)</em><a href='#index-atom' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <code>true</code> if <var>expr</var> is atomic (i.e. a number, name or string) else
+<code>false</code>.  Thus <code>atom(5)</code> is <code>true</code> while <code>atom(a[1])</code> and
+<code>atom(sin(x))</code> are <code>false</code> (assuming <code>a[1]</code> and <code>x</code> are
+unbound).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+
+<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+</div>
+</p></dd></dl>
+
+<span id="box"></span><span id="Item_003a-Expressions_002fdeffn_002fbox"></span><dl class="def">
+<dt id="index-box"><span class="category">Function: </span><span><strong>box</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>box</tt> (<var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>box</tt> (<var>expr</var>, <var>a</var>)</em><a href='#index-box' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <var>expr</var> enclosed in a box.  The return value is an expression with
+<code>box</code> as the operator and <var>expr</var> as the argument.  A box is drawn on
+the display when <code><a href="maxima_9.html#display2d">display2d</a></code> is <code>true</code>.
+</p>
+<p><code>box (<var>expr</var>, <var>a</var>)</code> encloses <var>expr</var> in a box labelled by the
+symbol <var>a</var>.  The label is truncated if it is longer than the width of the
+box.
+</p>
+<p><code>box</code> evaluates its argument.  However, a boxed expression does not
+evaluate to its content, so boxed expressions are effectively excluded from
+computations. <code><a href="#rembox">rembox</a></code> removes the box again.
+</p>
+<p><code><a href="#boxchar">boxchar</a></code> is the character used to draw the box in <code>box</code> and in the
+<code><a href="#dpart">dpart</a></code> and <code><a href="#lpart">lpart</a></code> functions.
+</p>
+<p>See also <code><a href="#rembox">rembox</a></code>, <code><a href="#dpart">dpart</a></code> and <code><a href="#lpart">lpart</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) box (a^2 + b^2);
+                            &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+                            &quot; 2    2&quot;
+(%o1)                       &quot;b  + a &quot;
+                            &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+</pre><pre class="example">(%i2) a : 1234;
+(%o2)                         1234
+</pre><pre class="example">(%i3) b : c - d;
+(%o3)                         c - d
+</pre><pre class="example">(%i4) box (a^2 + b^2);
+                      &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+                      &quot;       2          &quot;
+(%o4)                 &quot;(c - d)  + 1522756&quot;
+                      &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+</pre><pre class="example">(%i5) box (a^2 + b^2, term_1);
+                      term_1&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+                      &quot;       2          &quot;
+(%o5)                 &quot;(c - d)  + 1522756&quot;
+                      &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+</pre><pre class="example">(%i6) 1729 - box (1729);
+                                 &quot;&quot;&quot;&quot;&quot;&quot;
+(%o6)                     1729 - &quot;1729&quot;
+                                 &quot;&quot;&quot;&quot;&quot;&quot;
+</pre><pre class="example">(%i7) boxchar: &quot;-&quot;;
+(%o7)                           -
+</pre><pre class="example">(%i8) box (sin(x) + cos(y));
+                        -----------------
+(%o8)                   -cos(y) + sin(x)-
+                        -----------------
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="boxchar"></span><span id="Item_003a-Expressions_002fdefvr_002fboxchar"></span><dl class="def">
+<dt id="index-boxchar"><span class="category">Option variable: </span><span><strong>boxchar</strong><a href='#index-boxchar' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>&quot;</code>
+</p>
+<p><code>boxchar</code> is the character used to draw the box in the <code><a href="#box">box</a></code><!-- /@w -->
+and in the <code><a href="#dpart">dpart</a></code> and <code><a href="#lpart">lpart</a></code> functions.
+</p>
+<p>All boxes in an expression are drawn with the current value of <code>boxchar</code>;
+the drawing character is not stored with the box expression.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="collapse"></span><span id="Item_003a-Expressions_002fdeffn_002fcollapse"></span><dl class="def">
+<dt id="index-collapse"><span class="category">Function: </span><span><strong>collapse</strong> <em>(<var>expr</var>)</em><a href='#index-collapse' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Collapses <var>expr</var> by causing all of its common (i.e., equal) subexpressions
+to share (i.e., use the same cells), thereby saving space.  (<code>collapse</code> is
+a subroutine used by the <code><a href="#optimize">optimize</a></code> command.)  Thus, calling
+<code>collapse</code> may be useful after loading in a <code><a href="maxima_71.html#save">save</a></code> file.  You can
+collapse several expressions together by using
+<code>collapse ([<var>expr_1</var>, ..., <var>expr_n</var>])</code>.  Similarly, you can
+collapse the elements of the array <code>A</code> by doing
+<code>collapse (listarray ('A))</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="copy"></span><span id="Item_003a-Expressions_002fdeffn_002fcopy"></span><dl class="def">
+<dt id="index-copy"><span class="category">Function: </span><span><strong>copy</strong> <em>(<var>e</var>)</em><a href='#index-copy' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Return a copy of the Maxima expression <var>e</var>.  Although <var>e</var> can be any
+Maxima expression, the copy function is the most useful when <var>e</var> is either 
+a list or a matrix; consider:
+</p>
+<div class="example">
+<pre class="example">(%i1) m : [1,[2,3]]$
+(%i2) mm : m$
+(%i3) mm[2][1] : x$
+</pre><pre class="example">(%i4) m;
+(%o4)                      [1, [x, 3]]
+</pre><pre class="example">(%i5) mm;
+(%o5)                      [1, [x, 3]]
+</pre></div>
+
+<p>Let&rsquo;s try the same experiment, but this time let <var>mm</var> be a copy of <var>m</var>
+</p>
+<div class="example">
+<pre class="example">(%i1) m : [1,[2,3]]$
+(%i2) mm : copy(m)$
+(%i3) mm[2][1] : x$
+</pre><pre class="example">(%i4) m;
+(%o4)                      [1, [2, 3]]
+</pre><pre class="example">(%i5) mm;
+(%o5)                      [1, [x, 3]]
+</pre></div>
+
+<p>This time, the assignment to <var>mm</var> does not change the value of <var>m</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="disolate"></span><span id="Item_003a-Expressions_002fdeffn_002fdisolate"></span><dl class="def">
+<dt id="index-disolate"><span class="category">Function: </span><span><strong>disolate</strong> <em>(<var>expr</var>, <var>x_1</var>, &hellip;, <var>x_n</var>)</em><a href='#index-disolate' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>is similar to <code><a href="#isolate">isolate</a></code><code> (<var>expr</var>, <var>x</var>)</code> except that it enables the
+user to isolate more than one variable simultaneously.  This might be useful,
+for example, if one were attempting to change variables in a multiple
+integration, and that variable change involved two or more of the integration
+variables.  This function is autoloaded from <samp>simplification/disol.mac</samp>.
+A demo is available by <code>demo(&quot;disol&quot;)$</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="dispform"></span><span id="Item_003a-Expressions_002fdeffn_002fdispform"></span><dl class="def">
+<dt id="index-dispform"><span class="category">Function: </span><span><strong>dispform</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>dispform</tt> (<var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>dispform</tt> (<var>expr</var>, all)</em><a href='#index-dispform' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the external representation of <var>expr</var>.
+</p>
+<p><code>dispform(<var>expr</var>)</code> returns the external representation with respect to
+the main (top-level) operator.  <code>dispform(<var>expr</var>, all)</code> returns the
+external representation with respect to all operators in <var>expr</var>.
+</p>
+<p>See also <code><a href="#part">part</a></code>, <code><a href="#inpart">inpart</a></code>, and <code><a href="#inflag">inflag</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>The internal representation of <code>- x</code> is &quot;negative one times <code>x</code>&quot;
+while the external representation is &quot;minus <code>x</code>&quot;.
+</p>
+<div class="example">
+<pre class="example">(%i1) - x;
+(%o1)                          - x
+</pre><pre class="example">(%i2) ?format (true, &quot;~S~%&quot;, %);
+((MTIMES SIMP) -1 $X)
+(%o2)                         false
+</pre><pre class="example">(%i3) dispform (- x);
+(%o3)                          - x
+</pre><pre class="example">(%i4) ?format (true, &quot;~S~%&quot;, %);
+((MMINUS SIMP) $X)
+(%o4)                         false
+</pre></div>
+
+<p>The internal representation of <code>sqrt(x)</code> is &quot;<code>x</code> to the power 1/2&quot;
+while the external representation is &quot;square root of <code>x</code>&quot;.
+</p>
+<div class="example">
+<pre class="example">(%i1) sqrt (x);
+(%o1)                        sqrt(x)
+</pre><pre class="example">(%i2) ?format (true, &quot;~S~%&quot;, %);
+((MEXPT SIMP) $X ((RAT SIMP) 1 2))
+(%o2)                         false
+</pre><pre class="example">(%i3) dispform (sqrt (x));
+(%o3)                        sqrt(x)
+</pre><pre class="example">(%i4) ?format (true, &quot;~S~%&quot;, %);
+((%SQRT SIMP) $X)
+(%o4)                         false
+</pre></div>
+
+<p>Use of the optional argument <code>all</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) expr : sin (sqrt (x));
+(%o1)                     sin(sqrt(x))
+</pre><pre class="example">(%i2) freeof (sqrt, expr);
+(%o2)                         true
+</pre><pre class="example">(%i3) freeof (sqrt, dispform (expr));
+(%o3)                         true
+</pre><pre class="example">(%i4) freeof (sqrt, dispform (expr, all));
+(%o4)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="dpart"></span><span id="Item_003a-Expressions_002fdeffn_002fdpart"></span><dl class="def">
+<dt id="index-dpart"><span class="category">Function: </span><span><strong>dpart</strong> <em>(<var>expr</var>, <var>n_1</var>, &hellip;, <var>n_k</var>)</em><a href='#index-dpart' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Selects the same subexpression as <code><a href="#part">part</a></code>, but instead of just returning
+that subexpression as its value, it returns the whole expression with the
+selected subexpression displayed inside a box.  The box is actually part of the
+expression.
+</p>
+<div class="example">
+<pre class="example">(%i1) dpart (x+y/z^2, 1, 2, 1);
+                             y
+(%o1)                       ---- + x
+                               2
+                            &quot;&quot;&quot;
+                            &quot;z&quot;
+                            &quot;&quot;&quot;
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="exptisolate"></span><span id="Item_003a-Expressions_002fdefvr_002fexptisolate"></span><dl class="def">
+<dt id="index-exptisolate"><span class="category">Option variable: </span><span><strong>exptisolate</strong><a href='#index-exptisolate' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p><code>exptisolate</code>, when <code>true</code>, causes <code>isolate (expr, var)</code> to
+examine exponents of atoms (such as <code>%e</code>) which contain <code>var</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="exptsubst"></span><span id="Item_003a-Expressions_002fdefvr_002fexptsubst"></span><dl class="def">
+<dt id="index-exptsubst"><span class="category">Option variable: </span><span><strong>exptsubst</strong><a href='#index-exptsubst' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p><code>exptsubst</code>, when <code>true</code>, permits substitutions such as <code>y</code>
+for <code>%e^x</code> in <code>%e^(a x)</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) %e^(a*x);
+                                a x
+(%o1)                         %e
+</pre><pre class="example">(%i2) exptsubst;
+(%o2)                         false
+</pre><pre class="example">(%i3) subst(y, %e^x, %e^(a*x));
+                                a x
+(%o3)                         %e
+</pre><pre class="example">(%i4) exptsubst: not exptsubst;
+(%o4)                         true
+</pre><pre class="example">(%i5) subst(y, %e^x, %e^(a*x));
+                                a
+(%o5)                          y
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="freeof"></span><span id="Item_003a-Expressions_002fdeffn_002ffreeof"></span><dl class="def">
+<dt id="index-freeof"><span class="category">Function: </span><span><strong>freeof</strong> <em>(<var>x_1</var>, &hellip;, <var>x_n</var>, <var>expr</var>)</em><a href='#index-freeof' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>freeof (<var>x_1</var>, <var>expr</var>)</code> returns <code>true</code> if no subexpression of
+<var>expr</var> is equal to <var>x_1</var> or if <var>x_1</var> occurs only as a dummy variable
+in <var>expr</var>, or if <var>x_1</var> is neither the noun nor verb form of any operator
+in <var>expr</var>, and returns <code>false</code> otherwise.
+</p>
+<p><code>freeof (<var>x_1</var>, ..., <var>x_n</var>, <var>expr</var>)</code> is equivalent to 
+<code>freeof (<var>x_1</var>, <var>expr</var>) and ... and freeof (<var>x_n</var>,
+<var>expr</var>)</code>.
+</p>
+<p>The arguments <var>x_1</var>, &hellip;, <var>x_n</var> may be names of functions and
+variables, subscripted names, operators (enclosed in double quotes), or general
+expressions.  <code>freeof</code> evaluates its arguments.
+</p>
+<p><code>freeof</code> operates only on <var>expr</var> as it stands (after simplification and
+evaluation) and does not attempt to determine if some equivalent expression 
+would give a different result.  In particular, simplification may yield an
+equivalent but different expression which comprises some different elements than
+the original form of <var>expr</var>.
+</p>
+<p>A variable is a dummy variable in an expression if it has no binding outside of 
+the expression.  Dummy variables recognized by <code>freeof</code> are the index of a 
+sum or product, the limit variable in <code><a href="maxima_93.html#limit">limit</a></code>, the integration variable
+in the definite integral form of <code><a href="maxima_98.html#integrate">integrate</a></code>, the original variable in
+<code><a href="maxima_95.html#laplace">laplace</a></code>, formal variables in <code><a href="maxima_95.html#at">at</a></code> expressions, and arguments in
+<code><a href="maxima_164.html#lambda">lambda</a></code> expressions.
+</p>
+<p>The indefinite form of <code>integrate</code> is <i>not</i> free of its variable of 
+integration.
+</p>
+<p>Examples:
+</p>
+<p>Arguments are names of functions, variables, subscripted names, operators, and 
+expressions.  <code>freeof (a, b, expr)</code> is equivalent to 
+<code>freeof (a, expr) and freeof (b, expr)</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: z^3 * cos (a[1]) * b^(c+d);
+                                 d + c  3
+(%o1)                   cos(a ) b      z
+                             1
+(%i2) freeof (z, expr);
+(%o2)                         false
+(%i3) freeof (cos, expr);
+(%o3)                         false
+(%i4) freeof (a[1], expr);
+(%o4)                         false
+(%i5) freeof (cos (a[1]), expr);
+(%o5)                         false
+(%i6) freeof (b^(c+d), expr);
+(%o6)                         false
+(%i7) freeof (&quot;^&quot;, expr);
+(%o7)                         false
+(%i8) freeof (w, sin, a[2], sin (a[2]), b*(c+d), expr);
+(%o8)                         true
+</pre></div>
+
+<p><code>freeof</code> evaluates its arguments.
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: (a+b)^5$
+(%i2) c: a$
+(%i3) freeof (c, expr);
+(%o3)                         false
+</pre></div>
+
+<p><code>freeof</code> does not consider equivalent expressions.
+Simplification may yield an equivalent but different expression.
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: (a+b)^5$
+(%i2) expand (expr);
+          5        4       2  3       3  2      4      5
+(%o2)    b  + 5 a b  + 10 a  b  + 10 a  b  + 5 a  b + a
+(%i3) freeof (a+b, %);
+(%o3)                         true
+(%i4) freeof (a+b, expr);
+(%o4)                         false
+(%i5) exp (x);
+                                 x
+(%o5)                          %e
+(%i6) freeof (exp, exp (x));
+(%o6)                         true
+</pre></div>
+
+<p>A summation or definite integral is free of its dummy variable.
+An indefinite integral is not free of its variable of integration.
+</p>
+<div class="example">
+<pre class="example">(%i1) freeof (i, 'sum (f(i), i, 0, n));
+(%o1)                         true
+(%i2) freeof (x, 'integrate (x^2, x, 0, 1));
+(%o2)                         true
+(%i3) freeof (x, 'integrate (x^2, x));
+(%o3)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="inflag"></span><span id="Item_003a-Expressions_002fdefvr_002finflag"></span><dl class="def">
+<dt id="index-inflag"><span class="category">Option variable: </span><span><strong>inflag</strong><a href='#index-inflag' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>inflag</code> is <code>true</code>, functions for part extraction inspect the
+internal form of <code>expr</code>.
+</p>
+<p>Note that the simplifier re-orders expressions.  Thus <code>first (x + y)</code>
+returns <code>x</code> if <code>inflag</code> is <code>true</code> and <code>y</code> if <code>inflag</code>
+is <code>false</code>.  (<code>first (y + x)</code> gives the same results.)
+</p>
+<p>Also, setting <code>inflag</code> to <code>true</code> and calling <code><a href="#part">part</a></code> or
+<code><a href="#substpart">substpart</a></code> is the same as calling <code><a href="#inpart">inpart</a></code> or <code><a href="#substinpart">substinpart</a></code>.
+</p>
+<p>Functions affected by the setting of <code>inflag</code> are: <code><a href="#part">part</a></code>,<!-- /@w -->
+<code><a href="#substpart">substpart</a></code>, <code><a href="maxima_21.html#first">first</a></code>, <code><a href="maxima_21.html#rest">rest</a></code>, <code><a href="maxima_21.html#last">last</a></code>,<!-- /@w -->
+<code><a href="maxima_21.html#length">length</a></code>, the <code><a href="maxima_169.html#for">for</a></code> &hellip; <code>in</code> construct,
+<code><a href="maxima_169.html#map">map</a></code>, <code><a href="maxima_164.html#fullmap">fullmap</a></code>, <code><a href="maxima_169.html#maplist">maplist</a></code>, <code><a href="#reveal">reveal</a></code> and
+<code><a href="#pickapart">pickapart</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="inpart"></span><span id="Item_003a-Expressions_002fdeffn_002finpart"></span><dl class="def">
+<dt id="index-inpart"><span class="category">Function: </span><span><strong>inpart</strong> <em>(<var>expr</var>, <var>n_1</var>, &hellip;, <var>n_k</var>)</em><a href='#index-inpart' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>is similar to <code><a href="#part">part</a></code> but works on the internal representation of the
+expression rather than the displayed form and thus may be faster since no
+formatting is done.  Care should be taken with respect to the order of
+subexpressions in sums and products (since the order of variables in the
+internal form is often different from that in the displayed form) and in dealing
+with unary minus, subtraction, and division (since these operators are removed
+from the expression).  <code>part (x+y, 0)</code> or <code>inpart (x+y, 0)</code> yield
+<code>+</code>, though in order to refer to the operator it must be enclosed in &quot;s.
+For example <code>... if inpart (%o9,0) = &quot;+&quot; then ...</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) x + y + w*z;
+(%o1)                      w z + y + x
+(%i2) inpart (%, 3, 2);
+(%o2)                           z
+(%i3) part (%th (2), 1, 2);
+(%o3)                           z
+(%i4) 'limit (f(x)^g(x+1), x, 0, minus);
+                                  g(x + 1)
+(%o4)                 limit   f(x)
+                      x -&gt; 0-
+(%i5) inpart (%, 1, 2);
+(%o5)                       g(x + 1)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="isolate"></span><span id="Item_003a-Expressions_002fdeffn_002fisolate"></span><dl class="def">
+<dt id="index-isolate"><span class="category">Function: </span><span><strong>isolate</strong> <em>(<var>expr</var>, <var>x</var>)</em><a href='#index-isolate' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <var>expr</var> with subexpressions which are sums and which do not contain
+<var>var</var> replaced by intermediate expression labels (these being atomic symbols
+like <code>%t1</code>, <code>%t2</code>, &hellip;).  This is often useful to avoid
+unnecessary expansion of subexpressions which don&rsquo;t contain the variable of
+interest.  Since the intermediate labels are bound to the subexpressions they
+can all be substituted back by evaluating the expression in which they occur.
+</p>
+<p><code><a href="#exptisolate">exptisolate</a></code> (default value: <code>false</code>) if <code>true</code> will cause
+<code>isolate</code> to examine exponents of atoms (like <code>%e</code>) which contain
+<var>var</var>.
+</p>
+<p><code>isolate_wrt_times</code> if <code>true</code>, then <code>isolate</code> will also isolate
+with respect to products.  See <code><a href="#isolate_005fwrt_005ftimes">isolate_wrt_times</a></code>. See also <code><a href="#disolate">disolate</a></code>.
+</p>
+
+<p>Do <code>example (isolate)</code> for examples.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="isolate_005fwrt_005ftimes"></span><span id="Item_003a-Expressions_002fdefvr_002fisolate_005fwrt_005ftimes"></span><dl class="def">
+<dt id="index-isolate_005fwrt_005ftimes"><span class="category">Option variable: </span><span><strong>isolate_wrt_times</strong><a href='#index-isolate_005fwrt_005ftimes' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>isolate_wrt_times</code> is <code>true</code>, <code>isolate</code> will also isolate
+with respect to products.  E.g. compare both settings of the switch on
+</p>
+<div class="example">
+<pre class="example">(%i1) isolate_wrt_times: true$
+(%i2) isolate (expand ((a+b+c)^2), c);
+
+(%t2)                          2 a
+
+
+(%t3)                          2 b
+
+                          2            2
+(%t4)                    b  + 2 a b + a
+
+                     2
+(%o4)               c  + %t3 c + %t2 c + %t4
+(%i4) isolate_wrt_times: false$
+(%i5) isolate (expand ((a+b+c)^2), c);
+                     2
+(%o5)               c  + 2 b c + 2 a c + %t4
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="listconstvars"></span><span id="Item_003a-Expressions_002fdefvr_002flistconstvars"></span><dl class="def">
+<dt id="index-listconstvars"><span class="category">Option variable: </span><span><strong>listconstvars</strong><a href='#index-listconstvars' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>listconstvars</code> is <code>true</code> the list returned by
+<code>listofvars</code> contains constant variables, such as <code>%e</code>,
+<code>%pi</code>, <code>%i</code> or any variables declared as constant that
+occur in <var>expr</var>. A variable is declared as <code>constant</code>
+type via <code><a href="maxima_58.html#declare">declare</a></code>, and <code><a href="maxima_58.html#constantp">constantp</a></code> returns <code>true</code>
+for all variables declared as <code>constant</code>. The default is to
+omit constant variables from <code>listofvars</code> return value.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="listdummyvars"></span><span id="Item_003a-Expressions_002fdefvr_002flistdummyvars"></span><dl class="def">
+<dt id="index-listdummyvars"><span class="category">Option variable: </span><span><strong>listdummyvars</strong><a href='#index-listdummyvars' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>listdummyvars</code> is <code>false</code>, &quot;dummy variables&quot; in the expression
+will not be included in the list returned by <code><a href="#listofvars">listofvars</a></code>.  (The meaning
+of &quot;dummy variables&quot; is as given in <code><a href="#freeof">freeof</a></code>.  &quot;Dummy variables&quot; are
+mathematical things like the index of a sum or product, the limit variable,
+and the definite integration variable.)
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) listdummyvars: true$
+(%i2) listofvars ('sum(f(i), i, 0, n));
+(%o2)                        [i, n]
+(%i3) listdummyvars: false$
+(%i4) listofvars ('sum(f(i), i, 0, n));
+(%o4)                          [n]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="listofvars"></span><span id="Item_003a-Expressions_002fdeffn_002flistofvars"></span><dl class="def">
+<dt id="index-listofvars"><span class="category">Function: </span><span><strong>listofvars</strong> <em>(<var>expr</var>)</em><a href='#index-listofvars' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of the variables in <var>expr</var>.
+</p>
+<p><code><a href="#listconstvars">listconstvars</a></code> if <code>true</code> causes <code>listofvars</code> to include 
+<code>%e</code>, <code>%pi</code>, <code>%i</code>, and any variables declared constant in the 
+list it returns if they appear in <var>expr</var>.  The default is to omit these.
+</p>
+<p>See also the option variable <code><a href="#listdummyvars">listdummyvars</a></code> to exclude or include
+&quot;dummy variables&quot; in the list of variables.
+</p>
+<div class="example">
+<pre class="example">(%i1) listofvars (f (x[1]+y) / g^(2+a));
+(%o1)                     [g, a, x , y]
+                                  1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="lfreeof"></span><span id="Item_003a-Expressions_002fdeffn_002flfreeof"></span><dl class="def">
+<dt id="index-lfreeof"><span class="category">Function: </span><span><strong>lfreeof</strong> <em>(<var>list</var>, <var>expr</var>)</em><a href='#index-lfreeof' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>For each member <var>m</var> of <var>list</var>, calls
+<code>freeof (<var>m</var>, <var>expr</var>)</code>.  It returns <code>false</code> if any call to
+<code><a href="#freeof">freeof</a></code> does and <code>true</code> otherwise.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) lfreeof ([ a, x], x^2+b);
+(%o1)                         false
+</pre><pre class="example">(%i2) lfreeof ([ b, x], x^2+b);
+(%o2)                         false
+</pre><pre class="example">(%i3) lfreeof ([ a, y], x^2+b);
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="lpart"></span><span id="Item_003a-Expressions_002fdeffn_002flpart"></span><dl class="def">
+<dt id="index-lpart"><span class="category">Function: </span><span><strong>lpart</strong> <em>(<var>label</var>, <var>expr</var>, <var>n_1</var>, &hellip;, <var>n_k</var>)</em><a href='#index-lpart' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>is similar to <code><a href="#dpart">dpart</a></code> but uses a labelled box.  A labelled box is similar
+to the one produced by <code>dpart</code> but it has a name in the top line.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="mainvar"></span><span id="Item_003a-Expressions_002fdefvr_002fmainvar"></span><dl class="def">
+<dt id="index-mainvar"><span class="category">Property: </span><span><strong>mainvar</strong><a href='#index-mainvar' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>You may declare variables to be <code>mainvar</code>.  The ordering scale for atoms is
+essentially: numbers <code>&lt;</code> constants (e.g., <code>%e</code>, <code>%pi</code>) <code>&lt;</code> scalars <code>&lt;</code> other
+variables <code>&lt;</code> mainvars.  E.g., compare <code>expand ((X+Y)^4)</code> with
+<code>(declare (x, mainvar), expand ((x+y)^4))</code>.  (Note: Care should be taken if
+you elect to use the above feature.  E.g., if you subtract an expression in
+which <code>x</code> is a <code>mainvar</code> from one in which <code>x</code> isn&rsquo;t a
+<code>mainvar</code>, resimplification e.g. with <code>ev (expr, simp)</code> may be
+necessary if cancellation is to occur.  Also, if you save an expression in which
+<code>x</code> is a <code>mainvar</code>, you probably should also save <code>x</code>.)
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+
+<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="noun"></span><span id="Item_003a-Expressions_002fdefvr_002fnoun"></span><dl class="def">
+<dt id="index-noun"><span class="category">Property: </span><span><strong>noun</strong><a href='#index-noun' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>noun</code> is one of the options of the <code><a href="maxima_58.html#declare">declare</a></code> command.  It makes a
+function so declared a &quot;noun&quot;, meaning that it won&rsquo;t be evaluated
+automatically.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) factor (12345678);
+                             2
+(%o1)                     2 3  47 14593
+</pre><pre class="example">(%i2) declare (factor, noun);
+(%o2)                         done
+</pre><pre class="example">(%i3) factor (12345678);
+(%o3)                   factor(12345678)
+</pre><pre class="example">(%i4) ''%, nouns;
+                             2
+(%o4)                     2 3  47 14593
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Nouns-and-verbs">Nouns and verbs</a>
+</div>
+</p></dd></dl>
+
+
+<span id="noundisp"></span><span id="Item_003a-Expressions_002fdefvr_002fnoundisp"></span><dl class="def">
+<dt id="index-noundisp"><span class="category">Option variable: </span><span><strong>noundisp</strong><a href='#index-noundisp' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>noundisp</code> is <code>true</code>, nouns display with
+a single quote.  This switch is always <code>true</code> when displaying function
+definitions.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+
+<a href="maxima_369.html#Category_003a-Nouns-and-verbs">Nouns and verbs</a>
+</div>
+</p></dd></dl>
+
+
+<span id="nounify"></span><span id="Item_003a-Expressions_002fdeffn_002fnounify"></span><dl class="def">
+<dt id="index-nounify"><span class="category">Function: </span><span><strong>nounify</strong> <em>(<var>f</var>)</em><a href='#index-nounify' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the noun form of the function name <var>f</var>.  This is
+needed if one wishes to refer to the name of a verb function as if it
+were a noun.  Note that some verb functions will return their noun
+forms if they can&rsquo;t be evaluated for certain arguments.  This is also
+the form returned if a function call is preceded by a quote.
+</p>
+<p>See also <code><a href="#verbify">verbify</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Nouns-and-verbs">Nouns and verbs</a>
+</div>
+</p></dd></dl>
+
+
+<span id="nterms"></span><span id="Item_003a-Expressions_002fdeffn_002fnterms"></span><dl class="def">
+<dt id="index-nterms"><span class="category">Function: </span><span><strong>nterms</strong> <em>(<var>expr</var>)</em><a href='#index-nterms' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the number of terms that <var>expr</var> would have if it were fully
+expanded out and no cancellations or combination of terms occurred.
+Note that expressions like <code>sin (<var>expr</var>)</code>, <code>sqrt (<var>expr</var>)</code>,
+<code>exp (<var>expr</var>)</code>, etc. count as just one term regardless of how many
+terms <var>expr</var> has (if it is a sum).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="op"></span><span id="Item_003a-Expressions_002fdeffn_002fop"></span><dl class="def">
+<dt id="index-op"><span class="category">Function: </span><span><strong>op</strong> <em>(<var>expr</var>)</em><a href='#index-op' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the main operator of the expression <var>expr</var>.
+<code>op (<var>expr</var>)</code> is equivalent to <code>part (<var>expr</var>, 0)</code>.
+</p>
+<p><code>op</code> returns a string if the main operator is a built-in or user-defined
+prefix, binary or n-ary infix, postfix, matchfix, or nofix operator.
+Otherwise, if <var>expr</var> is a subscripted function expression, <code>op</code>
+returns the subscripted function; in this case the return value is not an atom.
+Otherwise, <var>expr</var> is a <code><a href="maxima_162.html#memoizing-function">memoizing function</a></code> or ordinary function expression,
+and <code>op</code> returns a symbol.
+</p>
+<p><code>op</code> observes the value of the global flag <code><a href="#inflag">inflag</a></code>.
+</p>
+<p><code>op</code> evaluates it argument.
+</p>
+<p>See also <code><a href="#args">args</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) stringdisp: true$
+</pre><pre class="example">(%i2) op (a * b * c);
+(%o2)                          &quot;*&quot;
+</pre><pre class="example">(%i3) op (a * b + c);
+(%o3)                          &quot;+&quot;
+</pre><pre class="example">(%i4) op ('sin (a + b));
+(%o4)                          sin
+</pre><pre class="example">(%i5) op (a!);
+(%o5)                          &quot;!&quot;
+</pre><pre class="example">(%i6) op (-a);
+(%o6)                          &quot;-&quot;
+</pre><pre class="example">(%i7) op ([a, b, c]);
+(%o7)                          &quot;[&quot;
+</pre><pre class="example">(%i8) op ('(if a &gt; b then c else d));
+(%o8)                         &quot;if&quot;
+</pre><pre class="example">(%i9) op ('foo (a));
+(%o9)                          foo
+</pre><pre class="example">(%i10) prefix (foo);
+(%o10)                        &quot;foo&quot;
+</pre><pre class="example">(%i11) op (foo a);
+(%o11)                        &quot;foo&quot;
+</pre><pre class="example">(%i12) op (F [x, y] (a, b, c));
+(%o12)                        F
+                               x, y
+</pre><pre class="example">(%i13) op (G [u, v, w]);
+(%o13)                          G
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+
+<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+
+<span id="operatorp"></span><span id="Item_003a-Expressions_002fdeffn_002foperatorp"></span><dl class="def">
+<dt id="index-operatorp"><span class="category">Function: </span><span><strong>operatorp</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>operatorp</tt> (<var>expr</var>, <var>op</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>operatorp</tt> (<var>expr</var>, [<var>op_1</var>, &hellip;, <var>op_n</var>])</em><a href='#index-operatorp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>operatorp (<var>expr</var>, <var>op</var>)</code> returns <code>true</code>
+if <var>op</var> is equal to the operator of <var>expr</var>.
+</p>
+<p><code>operatorp (<var>expr</var>, [<var>op_1</var>, ..., <var>op_n</var>])</code> returns
+<code>true</code> if some element <var>op_1</var>, &hellip;, <var>op_n</var> is equal to the
+operator of <var>expr</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+
+<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="option_005fopsubst"></span><span id="Item_003a-Expressions_002fdefvr_002fopsubst"></span><dl class="def">
+<dt id="index-opsubst-1"><span class="category">Option variable: </span><span><strong>opsubst</strong><a href='#index-opsubst-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>opsubst</code> is <code>false</code>, <code><a href="#subst">subst</a></code> does not attempt to
+substitute into the operator of an expression.  E.g., 
+<code>(opsubst: false, subst (x^2, r, r+r[0]))</code> will work.
+</p>
+<div class="example">
+<pre class="example">(%i1) r+r[0];
+(%o1)                        r + r
+                                  0
+</pre><pre class="example">(%i2) opsubst;
+(%o2)                         true
+</pre><pre class="example">(%i3) subst (x^2, r, r+r[0]);
+                            2     2
+(%o3)                      x  + (x )
+                                    0
+</pre><pre class="example">(%i4) opsubst: not opsubst;
+(%o4)                         false
+</pre><pre class="example">(%i5) subst (x^2, r, r+r[0]);
+                              2
+(%o5)                        x  + r
+                                   0
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="optimize"></span><span id="Item_003a-Expressions_002fdeffn_002foptimize"></span><dl class="def">
+<dt id="index-optimize"><span class="category">Function: </span><span><strong>optimize</strong> <em>(<var>expr</var>)</em><a href='#index-optimize' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns an expression that produces the same value and
+side effects as <var>expr</var> but does so more efficiently by avoiding the
+recomputation of common subexpressions.  <code>optimize</code> also has the side
+effect of &quot;collapsing&quot; its argument so that all common subexpressions
+are shared.  Do <code>example (optimize)</code> for examples.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="optimprefix"></span><span id="Item_003a-Expressions_002fdefvr_002foptimprefix"></span><dl class="def">
+<dt id="index-optimprefix"><span class="category">Option variable: </span><span><strong>optimprefix</strong><a href='#index-optimprefix' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>%</code>
+</p>
+<p><code>optimprefix</code> is the prefix used for generated symbols by
+the <code><a href="#optimize">optimize</a></code> command.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ordergreat"></span><span id="orderless"></span><span id="Item_003a-Expressions_002fdeffn_002fordergreat"></span><dl class="def">
+<dt id="index-ordergreat"><span class="category">Function: </span><span><strong>ordergreat</strong> <em>(<var>v_1</var>, &hellip;, <var>v_n</var>)</em><a href='#index-ordergreat' class='copiable-anchor'> &para;</a></span></dt>
+<dd><span id="Item_003a-Expressions_002fdeffn_002forderless"></span></dd><dt id="index-orderless"><span class="category">Function: </span><span><strong>orderless</strong> <em>(<var>v_1</var>, &hellip;, <var>v_n</var>)</em><a href='#index-orderless' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>ordergreat</code> changes the canonical ordering of Maxima expressions
+such that <var>v_1</var> succeeds <var>v_2</var> succeeds &hellip;  succeeds <var>v_n</var>,
+and <var>v_n</var> succeeds any other symbol not mentioned as an argument.
+</p>
+<p><code>orderless</code> changes the canonical ordering of Maxima expressions
+such that <var>v_1</var> precedes <var>v_2</var> precedes &hellip; precedes <var>v_n</var>,
+and <var>v_n</var> precedes any other variable not mentioned as an argument.
+</p>
+<p>The order established by <code>ordergreat</code> and <code>orderless</code> is dissolved
+by <code><a href="#unorder">unorder</a></code>.  <code>ordergreat</code> and <code>orderless</code> can be called only
+once each, unless <code>unorder</code> is called; only the last call to
+<code>ordergreat</code> and <code>orderless</code> has any effect.
+</p>
+<p>See also <code><a href="#ordergreatp">ordergreatp</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ordergreatp"></span><span id="orderlessp"></span><span id="Item_003a-Expressions_002fdeffn_002fordergreatp"></span><dl class="def">
+<dt id="index-ordergreatp"><span class="category">Function: </span><span><strong>ordergreatp</strong> <em>(<var>expr_1</var>, <var>expr_2</var>)</em><a href='#index-ordergreatp' class='copiable-anchor'> &para;</a></span></dt>
+<dd><span id="Item_003a-Expressions_002fdeffn_002forderlessp"></span></dd><dt id="index-orderlessp"><span class="category">Function: </span><span><strong>orderlessp</strong> <em>(<var>expr_1</var>, <var>expr_2</var>)</em><a href='#index-orderlessp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>ordergreatp</code> returns <code>true</code> if <var>expr_1</var> succeeds <var>expr_2</var> in
+the canonical ordering of Maxima expressions, and <code>false</code> otherwise.
+</p>
+<p><code>orderlessp</code> returns <code>true</code> if <var>expr_1</var> precedes <var>expr_2</var> in
+the canonical ordering of Maxima expressions, and <code>false</code> otherwise.
+</p>
+<p>All Maxima atoms and expressions are comparable under <code>ordergreatp</code> and
+<code>orderlessp</code>, although there are isolated examples of expressions for which
+these predicates are not transitive; that is a bug.
+</p>
+<p>The canonical ordering of atoms (symbols, literal numbers, and strings) is the
+following.
+</p>
+<p>(integers and floats) precede (bigfloats) precede
+(declared constants) precede (strings) precede (declared scalars)
+precede (first argument to <code><a href="#orderless">orderless</a></code>) precedes &hellip; precedes
+(last argument to <code>orderless</code>) precedes (other symbols) precede
+(last argument to <code><a href="#ordergreat">ordergreat</a></code>) precedes &hellip; precedes
+(first argument to <code>ordergreat</code>) precedes (declared main variables)
+</p>
+<p>For non-atomic expressions, the canonical ordering is derived from the ordering
+for atoms.  For the built-in <code>+</code> <code>*</code> and <code>^</code> operators,
+the ordering is not easily summarized.  For other built-in operators and all
+other functions and operators, expressions are ordered by their arguments
+(beginning with the first argument), then by the name of the operator or
+function.  In the case of subscripted expressions, the subscripted symbol is
+considered the operator and the subscript is considered an argument.
+</p>
+<p>The canonical ordering of expressions is modified by the functions
+<code><a href="#ordergreat">ordergreat</a></code> and <code><a href="#orderless">orderless</a></code>, and the <code><a href="#mainvar">mainvar</a></code>,<!-- /@w -->
+<code><a href="maxima_58.html#constant">constant</a></code>, and <code>scalar</code> declarations.
+</p>
+<p>See also <code><a href="maxima_21.html#sort">sort</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Ordering ordinary symbols and constants.
+Note that <code>%pi</code> is not ordered according to its numerical value.
+</p>
+<div class="example">
+<pre class="example">(%i1) stringdisp : true;
+(%o1)                         true
+</pre><pre class="example">(%i2) sort ([%pi, 3b0, 3.0, x, X, &quot;foo&quot;, 3, a, 4, &quot;bar&quot;, 4.0, 4b0]);
+(%o2) [3, 3.0, 4, 4.0, 3.0b0, 4.0b0, %pi, &quot;bar&quot;, &quot;foo&quot;, X, a, x]
+</pre></div>
+
+<p>Effect of <code>ordergreat</code> and <code>orderless</code> functions.
+</p>
+<div class="example">
+<pre class="example">(%i1) sort ([M, H, K, T, E, W, G, A, P, J, S]);
+(%o1)           [A, E, G, H, J, K, M, P, S, T, W]
+</pre><pre class="example">(%i2) ordergreat (S, J);
+(%o2)                         done
+</pre><pre class="example">(%i3) orderless (M, H);
+(%o3)                         done
+</pre><pre class="example">(%i4) sort ([M, H, K, T, E, W, G, A, P, J, S]);
+(%o4)           [M, H, A, E, G, K, P, T, W, J, S]
+</pre></div>
+
+<p>Effect of <code>mainvar</code>, <code>constant</code>, and <code>scalar</code> declarations.
+</p>
+<div class="example">
+<pre class="example">(%i1) sort ([aa, foo, bar, bb, baz, quux, cc, dd, A1, B1, C1]);
+(%o1)   [A1, B1, C1, aa, bar, baz, bb, cc, dd, foo, quux]
+</pre><pre class="example">(%i2) declare (aa, mainvar);
+(%o2)                         done
+</pre><pre class="example">(%i3) declare ([baz, quux], constant);
+(%o3)                         done
+</pre><pre class="example">(%i4) declare ([A1, B1], scalar);
+(%o4)                         done
+</pre><pre class="example">(%i5) sort ([aa, foo, bar, bb, baz, quux, cc, dd, A1, B1, C1]);
+(%o5)   [baz, quux, A1, B1, C1, bar, bb, cc, dd, foo, aa]
+</pre></div>
+
+<p>Ordering non-atomic expressions.
+</p>
+<div class="example">
+<pre class="example">(%i1) sort ([1, 2, n, f(1), f(2), f(2, 1), g(1), g(1, 2), g(n),
+       f(n, 1)]);
+(%o1) [1, 2, f(1), g(1), g(1, 2), f(2), f(2, 1), n, g(n), 
+                                                         f(n, 1)]
+</pre><pre class="example">(%i2) sort ([foo(1), X[1], X[k], foo(k), 1, k]);
+(%o2)            [1, X , foo(1), k, X , foo(k)]
+                      1              k
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+
+<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="part"></span><span id="Item_003a-Expressions_002fdeffn_002fpart"></span><dl class="def">
+<dt id="index-part"><span class="category">Function: </span><span><strong>part</strong> <em>(<var>expr</var>, <var>n_1</var>, &hellip;, <var>n_k</var>)</em><a href='#index-part' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns parts of the displayed form of <code>expr</code>.  It obtains the part of
+<code>expr</code> as specified by the indices <var>n_1</var>, &hellip;, <var>n_k</var>.  First
+part <var>n_1</var> of <code>expr</code> is obtained, then part <var>n_2</var> of that, etc.
+The result is part <var>n_k</var> of &hellip; part <var>n_2</var> of part <var>n_1</var> of
+<code>expr</code>.  If no indices are specified <code>expr</code> is returned.
+</p>
+<p><code>part</code> can be used to obtain an element of a list, a row of a matrix, etc.
+</p>
+<p>If the last argument to a <code>part</code> function is a list of indices then
+several subexpressions are picked out, each one corresponding to an
+index of the list.  Thus <code>part (x + y + z, [1, 3])</code> is <code>z+x</code>.
+</p>
+<p><code><a href="#piece">piece</a></code> holds the last expression selected when using the <code>part</code>
+functions.  It is set during the execution of the function and thus
+may be referred to in the function itself as shown below.
+</p>
+<p>If <code><a href="#partswitch">partswitch</a></code> is set to <code>true</code> then <code>end</code> is returned when a
+selected part of an expression doesn&rsquo;t exist, otherwise an error message is
+given.
+</p>
+<p>See also <code><a href="#inpart">inpart</a></code>, <code><a href="#substpart">substpart</a></code>, <code><a href="#substinpart">substinpart</a></code>,<!-- /@w -->
+<code><a href="#dpart">dpart</a></code>, and <code><a href="#lpart">lpart</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) part(z+2*y+a,2);
+(%o1)                          2 y
+</pre><pre class="example">(%i2) part(z+2*y+a,[1,3]);
+(%o2)                         z + a
+</pre><pre class="example">(%i3) part(z+2*y+a,2,1);
+(%o3)                           2
+</pre></div>
+
+<p><code>example (part)</code> displays additional examples.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="partition"></span><span id="Item_003a-Expressions_002fdeffn_002fpartition"></span><dl class="def">
+<dt id="index-partition"><span class="category">Function: </span><span><strong>partition</strong> <em>(<var>expr</var>, <var>x</var>)</em><a href='#index-partition' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of two expressions.  They are (1) the factors of <var>expr</var>
+(if it is a product), the terms of <var>expr</var> (if it is a sum), or the list
+(if it is a list) which don&rsquo;t contain <var>x</var> and, (2) the factors, terms,
+or list which do.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) partition (2*a*x*f(x), x);
+(%o1)                     [2 a, x f(x)]
+(%i2) partition (a+b, x);
+(%o2)                      [b + a, 0]
+(%i3) partition ([a, b, f(a), c], a); 
+(%o3)                  [[b, c], [a, f(a)]]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="partswitch"></span><span id="Item_003a-Expressions_002fdefvr_002fpartswitch"></span><dl class="def">
+<dt id="index-partswitch"><span class="category">Option variable: </span><span><strong>partswitch</strong><a href='#index-partswitch' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>partswitch</code> is <code>true</code>, <code>end</code> is returned
+when a selected part of an expression doesn&rsquo;t exist, otherwise an
+error message is given.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="pickapart"></span><span id="Item_003a-Expressions_002fdeffn_002fpickapart"></span><dl class="def">
+<dt id="index-pickapart"><span class="category">Function: </span><span><strong>pickapart</strong> <em>(<var>expr</var>, <var>n</var>)</em><a href='#index-pickapart' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Assigns intermediate expression labels to subexpressions of <var>expr</var> at depth
+<var>n</var>, an integer.  Subexpressions at greater or lesser depths are not
+assigned labels.  <code>pickapart</code> returns an expression in terms of
+intermediate expressions equivalent to the original expression <var>expr</var>.
+</p>
+<p>See also <code><a href="#part">part</a></code>, <code><a href="#dpart">dpart</a></code>, <code><a href="#lpart">lpart</a></code>,<!-- /@w -->
+<code><a href="#inpart">inpart</a></code>, and <code><a href="#reveal">reveal</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: (a+b)/2 + sin (x^2)/3 - log (1 + sqrt(x+1));
+                                          2
+                                     sin(x )   b + a
+(%o1)       - log(sqrt(x + 1) + 1) + ------- + -----
+                                        3        2
+(%i2) pickapart (expr, 0);
+</pre><pre class="example">                                          2
+                                     sin(x )   b + a
+(%t2)       - log(sqrt(x + 1) + 1) + ------- + -----
+                                        3        2
+</pre><pre class="example">(%o2)                          %t2
+(%i3) pickapart (expr, 1);
+
+(%t3)                - log(sqrt(x + 1) + 1)
+
+
+                                  2
+                             sin(x )
+(%t4)                        -------
+                                3
+
+
+                              b + a
+(%t5)                         -----
+                                2
+
+(%o5)                    %t5 + %t4 + %t3
+(%i5) pickapart (expr, 2);
+
+(%t6)                 log(sqrt(x + 1) + 1)
+
+
+                                  2
+(%t7)                        sin(x )
+
+
+(%t8)                         b + a
+
+                         %t8   %t7
+(%o8)                    --- + --- - %t6
+                          2     3
+(%i8) pickapart (expr, 3);
+
+(%t9)                    sqrt(x + 1) + 1
+
+
+                                2
+(%t10)                         x
+
+                  b + a              sin(%t10)
+(%o10)            ----- - log(%t9) + ---------
+                    2                    3
+(%i10) pickapart (expr, 4);
+
+(%t11)                     sqrt(x + 1)
+</pre><pre class="example">                      2
+                 sin(x )   b + a
+(%o11)           ------- + ----- - log(%t11 + 1)
+                    3        2
+</pre><pre class="example">(%i11) pickapart (expr, 5);
+
+(%t12)                        x + 1
+
+                   2
+              sin(x )   b + a
+(%o12)        ------- + ----- - log(sqrt(%t12) + 1)
+                 3        2
+(%i12) pickapart (expr, 6);
+                  2
+             sin(x )   b + a
+(%o12)       ------- + ----- - log(sqrt(x + 1) + 1)
+                3        2
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="piece"></span><span id="Item_003a-Expressions_002fdefvr_002fpiece"></span><dl class="def">
+<dt id="index-piece"><span class="category">System variable: </span><span><strong>piece</strong><a href='#index-piece' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Holds the last expression selected when using the <code><a href="#part">part</a></code> functions.
+It is set during the execution of the function and thus may be referred to in
+the function itself.
+</p>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="psubst"></span><span id="Item_003a-Expressions_002fdeffn_002fpsubst"></span><dl class="def">
+<dt id="index-psubst"><span class="category">Function: </span><span><strong>psubst</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>psubst</tt> (<var>list</var>, <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>psubst</tt> (<var>a</var>, <var>b</var>, <var>expr</var>)</em><a href='#index-psubst' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>psubst(<var>a</var>, <var>b</var>, <var>expr</var>)</code> is similar to <code>subst</code>.  See
+<code><a href="#subst">subst</a></code>.
+</p>
+<p>In distinction from <code>subst</code> the function <code>psubst</code> makes parallel 
+substitutions, if the first argument <var>list</var> is a list of equations.
+</p>
+<p>See also <code><a href="#sublis">sublis</a></code> for making parallel substitutions and <code><a href="maxima_156.html#let">let</a></code> and
+<code><a href="maxima_156.html#letsimp">letsimp</a></code> for others ways to do substitutions.
+</p>
+<p>Example:
+</p>
+<p>The first example shows parallel substitution with <code>psubst</code>.  The second
+example shows the result for the function <code>subst</code>, which does a serial
+substitution.
+</p>
+<div class="example">
+<pre class="example">(%i1) psubst ([a^2=b, b=a], sin(a^2) + sin(b));
+(%o1)                    sin(b) + sin(a)
+</pre><pre class="example">(%i2) subst ([a^2=b, b=a], sin(a^2) + sin(b));
+(%o2)                       2 sin(a)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="rembox"></span><span id="Item_003a-Expressions_002fdeffn_002frembox"></span><dl class="def">
+<dt id="index-rembox"><span class="category">Function: </span><span><strong>rembox</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>rembox</tt> (<var>expr</var>, unlabelled) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>rembox</tt> (<var>expr</var>, <var>label</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>rembox</tt> (<var>expr</var>)</em><a href='#index-rembox' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Removes boxes from <var>expr</var>.
+</p>
+<p><code>rembox (<var>expr</var>, unlabelled)</code> removes all unlabelled boxes from
+<var>expr</var>.
+</p>
+<p><code>rembox (<var>expr</var>, <var>label</var>)</code> removes only boxes bearing <var>label</var>.
+</p>
+<p><code>rembox (<var>expr</var>)</code> removes all boxes, labelled and unlabelled.
+</p>
+<p>Boxes are drawn by the <code><a href="#box">box</a></code>, <code><a href="#dpart">dpart</a></code>, and <code><a href="#lpart">lpart</a></code><!-- /@w -->
+functions.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: (a*d - b*c)/h^2 + sin(%pi*x);
+                                  a d - b c
+(%o1)                sin(%pi x) + ---------
+                                      2
+                                     h
+</pre><pre class="example">(%i2) dpart (dpart (expr, 1, 1), 2, 2);
+dpart: fell off the end.
+ -- an error. To debug this try: debugmode(true);
+</pre><pre class="example">(%i3) expr2: lpart (BAR, lpart (FOO, %, 1), 2);
+                                  BAR&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+                   FOO&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;   &quot;a d - b c&quot;
+(%o3)              &quot;sin(%pi x)&quot; + &quot;---------&quot;
+                   &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;   &quot;    2    &quot;
+                                  &quot;   h     &quot;
+                                  &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+</pre><pre class="example">(%i4) rembox (expr2, unlabelled);
+                                  BAR&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+                   FOO&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;   &quot;a d - b c&quot;
+(%o4)              &quot;sin(%pi x)&quot; + &quot;---------&quot;
+                   &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;   &quot;    2    &quot;
+                                  &quot;   h     &quot;
+                                  &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+</pre><pre class="example">(%i5) rembox (expr2, FOO);
+                                 BAR&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+                                 &quot;a d - b c&quot;
+(%o5)               sin(%pi x) + &quot;---------&quot;
+                                 &quot;    2    &quot;
+                                 &quot;   h     &quot;
+                                 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+</pre><pre class="example">(%i6) rembox (expr2, BAR);
+                    FOO&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;   a d - b c
+(%o6)               &quot;sin(%pi x)&quot; + ---------
+                    &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;       2
+                                      h
+</pre><pre class="example">(%i7) rembox (expr2);
+                                  a d - b c
+(%o7)                sin(%pi x) + ---------
+                                      2
+                                     h
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="reveal"></span><span id="Item_003a-Expressions_002fdeffn_002freveal"></span><dl class="def">
+<dt id="index-reveal"><span class="category">Function: </span><span><strong>reveal</strong> <em>(<var>expr</var>, <var>depth</var>)</em><a href='#index-reveal' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Replaces parts of <var>expr</var> at the specified integer <var>depth</var>
+with descriptive summaries.
+</p>
+<ul>
+<li> Sums and differences are replaced by <code>Sum(<var>n</var>)</code>
+where <var>n</var> is the number of operands of the sum.
+</li><li> Products are replaced by <code>Product(<var>n</var>)</code>
+where <var>n</var> is the number of operands of the product.
+</li><li> Exponentials are replaced by <code>Expt</code>.
+</li><li> Quotients are replaced by <code>Quotient</code>.
+</li><li> Unary negation is replaced by <code>Negterm</code>.
+</li><li> Lists are replaced by <code>List(<var>n</var>)</code> where <var>n</var> is the number of
+elements of the list.
+</li></ul>
+
+<p>When <var>depth</var> is greater than or equal to the maximum depth of <var>expr</var>,
+<code>reveal (<var>expr</var>, <var>depth</var>)</code> returns <var>expr</var> unmodified.
+</p>
+<p><code>reveal</code> evaluates its arguments.
+<code>reveal</code> returns the summarized expression.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) e: expand ((a - b)^2)/expand ((exp(a) + exp(b))^2);
+                          2            2
+                         b  - 2 a b + a
+(%o1)               -------------------------
+                        b + a     2 b     2 a
+                    2 %e      + %e    + %e
+(%i2) reveal (e, 1);
+(%o2)                       Quotient
+(%i3) reveal (e, 2);
+                             Sum(3)
+(%o3)                        ------
+                             Sum(3)
+(%i4) reveal (e, 3);
+</pre><pre class="example">                     Expt + Negterm + Expt
+(%o4)               ------------------------
+                    Product(2) + Expt + Expt
+</pre><pre class="example">(%i5) reveal (e, 4);
+                       2                 2
+                      b  - Product(3) + a
+(%o5)         ------------------------------------
+                         Product(2)     Product(2)
+              2 Expt + %e           + %e
+(%i6) reveal (e, 5);
+                         2            2
+                        b  - 2 a b + a
+(%o6)              --------------------------
+                       Sum(2)     2 b     2 a
+                   2 %e       + %e    + %e
+(%i7) reveal (e, 6);
+                          2            2
+                         b  - 2 a b + a
+(%o7)               -------------------------
+                        b + a     2 b     2 a
+                    2 %e      + %e    + %e
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+
+<a href="maxima_369.html#Category_003a-Display-functions">Display functions</a>
+</div>
+</p></dd></dl>
+
+<span id="sqrtdenest"></span><span id="Item_003a-Expressions_002fdeffn_002fsqrtdenest"></span><dl class="def">
+<dt id="index-sqrtdenest"><span class="category">Function: </span><span><strong>sqrtdenest</strong> <em>(<var>expr</var>)</em><a href='#index-sqrtdenest' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Denests <code>sqrt</code> of simple, numerical, binomial surds, where possible.  E.g.
+</p>
+<div class="example">
+<pre class="example">(%i1) sqrt(sqrt(3)/2+1)/sqrt(11*sqrt(2)-12);
+                             sqrt(3)
+                        sqrt(------- + 1)
+                                2
+(%o1)                 ---------------------
+                      sqrt(11 sqrt(2) - 12)
+</pre><pre class="example">(%i2) sqrtdenest(%);
+                           sqrt(3)   1
+                           ------- + -
+                              2      2
+(%o2)                     -------------
+                             1/4    3/4
+                          3 2    - 2
+</pre></div>
+
+<p>Sometimes it helps to apply <code>sqrtdenest</code> more than once, on such as
+<code>(19601-13860 sqrt(2))^(7/4)</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p>
+</dd></dl>
+
+
+<span id="sublis"></span><span id="Item_003a-Expressions_002fdeffn_002fsublis"></span><dl class="def">
+<dt id="index-sublis"><span class="category">Function: </span><span><strong>sublis</strong> <em>(<var>list</var>, <var>expr</var>)</em><a href='#index-sublis' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Makes multiple parallel substitutions into an expression.  <var>list</var> is a list
+of equations.  The left hand side of the equations must be an atom.
+</p>
+<p>The variable <code><a href="#sublis_005fapply_005flambda">sublis_apply_lambda</a></code> controls simplification after
+<code>sublis</code>.
+</p>
+<p>See also <code><a href="#psubst">psubst</a></code> for making parallel substitutions.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) sublis ([a=b, b=a], sin(a) + cos(b));
+(%o1)                    sin(b) + cos(a)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="sublis_005fapply_005flambda"></span><span id="Item_003a-Expressions_002fdefvr_002fsublis_005fapply_005flambda"></span><dl class="def">
+<dt id="index-sublis_005fapply_005flambda"><span class="category">Option variable: </span><span><strong>sublis_apply_lambda</strong><a href='#index-sublis_005fapply_005flambda' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>Controls whether <code>lambda</code>&rsquo;s substituted are applied in simplification after
+<code>sublis</code> is used or whether you have to do an <code><a href="maxima_43.html#ev">ev</a></code> to get things to
+apply.  <code>true</code> means do the application.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="subnumsimp"></span><span id="Item_003a-Expressions_002fdefvr_002fsubnumsimp"></span><dl class="def">
+<dt id="index-subnumsimp"><span class="category">Option variable: </span><span><strong>subnumsimp</strong><a href='#index-subnumsimp' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>If <code>true</code> then the functions <code><a href="#subst">subst</a></code> and <code><a href="#psubst">psubst</a></code> can substitute
+a subscripted variable <code>f[x]</code> with a number, when only the symbol <code>f</code>
+is given.
+</p>
+<p>See also <code><a href="#subst">subst</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) subst(100,g,g[x]+2);
+
+subst: cannot substitute 100 for operator g in expression g
+                                                           x
+ -- an error. To debug this try: debugmode(true);
+
+(%i2) subst(100,g,g[x]+2),subnumsimp:true;
+(%o2)                          102
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="subst"></span><span id="Item_003a-Expressions_002fdeffn_002fsubst"></span><dl class="def">
+<dt id="index-subst"><span class="category">Function: </span><span><strong>subst</strong> <em>(<var>a</var>, <var>b</var>, <var>c</var>)</em><a href='#index-subst' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Substitutes <var>a</var> for <var>b</var> in <var>c</var>.  <var>b</var> must be an atom or a
+complete subexpression of <var>c</var>.  For example, <code>x+y+z</code> is a complete
+subexpression of <code>2*(x+y+z)/w</code> while <code>x+y</code> is not.  When <var>b</var> does
+not have these characteristics, one may sometimes use <code><a href="#substpart">substpart</a></code> or
+<code><a href="maxima_76.html#ratsubst">ratsubst</a></code> (see below).  Alternatively, if <var>b</var> is of the form
+<code>e/f</code> then one could use <code>subst (a*f, e, c)</code> while if <var>b</var> is of
+the form <code>e^(1/f)</code> then one could use <code>subst (a^f, e, c)</code>.  The
+<code>subst</code> command also discerns the <code>x^y</code> in <code>x^-y</code> so that
+<code>subst (a, sqrt(x), 1/sqrt(x))</code> yields <code>1/a</code>.  <var>a</var> and <var>b</var>
+may also be operators of an expression enclosed in double-quotes <code>&quot;</code> or
+they may be function names.  If one wishes to substitute for the independent
+variable in derivative forms then the <code>at</code> function (see below) should be
+used.
+</p>
+<p><code>subst</code> is an alias for <code>substitute</code>.
+</p>
+<p>The commands <code>subst (<var>eq_1</var>, <var>expr</var>)</code> or
+<code>subst ([<var>eq_1</var>, ..., <var>eq_k</var>], <var>expr</var>)</code> are other permissible
+forms.  The <var>eq_i</var> are equations indicating substitutions to be made.
+For each equation, the right side will be substituted for the left in the 
+expression <var>expr</var>.  The equations are substituted in serial from left to
+right in <var>expr</var>.  See the functions <code>sublis</code> and <code>psubst</code> for 
+making parallel substitutions.
+</p>
+<p><code><a href="#exptsubst">exptsubst</a></code> if <code>true</code> permits substitutions
+like <code>y</code> for <code>%e^x</code> in <code>%e^(a*x)</code> to take place.
+</p>
+<p>When <code>opsubst</code> is <code>false</code>,
+<code>subst</code> will not attempt to substitute into the operator of an expression.
+E.g. <code>(opsubst: false, subst (x^2, r, r+r[0]))</code> will work.
+</p>
+<p>See also <code><a href="maxima_95.html#at">at</a></code>, <code><a href="maxima_43.html#ev">ev</a></code> and <code><a href="#psubst">psubst</a></code>, as well as <code><a href="maxima_156.html#let">let</a></code>
+and <code><a href="maxima_156.html#letsimp">letsimp</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) subst (a, x+y, x + (x+y)^2 + y);
+                                    2
+(%o1)                      y + x + a
+</pre><pre class="example">(%i2) subst (-%i, %i, a + b*%i);
+(%o2)                       a - %i b
+</pre></div>
+
+<p>The substitution is done in serial for a list of equations.  Compare this with
+a parallel substitution:
+</p>
+<div class="example">
+<pre class="example">(%i1) subst([a=b, b=c], a+b);
+(%o1)                          2 c
+</pre><pre class="example">(%i2) sublis([a=b, b=c], a+b);
+(%o2)                         c + b
+</pre></div>
+
+<p>Single-character Operators like <code>+</code> and <code>-</code> have to be quoted in
+order to be replaced by subst. It is to note, though, that <code>a+b-c</code>
+might be expressed as <code>a+b+(-1*c)</code> internally.
+</p>
+<div class="example">
+<pre class="example">(%i3) subst([&quot;+&quot;=&quot;-&quot;],a+b-c);
+(%o3)                                 c-b+a
+</pre></div>
+
+<p>The difference between <code>subst</code> and <code>at</code> can be seen in the
+following example:
+</p><div class="example">
+<pre class="example">(%i1) g1:y(t)=a*x(t)+b*diff(x(t),t);
+                            d
+(%o1)             y(t) = b (-- (x(t))) + a x(t)
+                            dt
+</pre><pre class="example">(%i2) subst('diff(x(t),t)=1,g1);
+(%o2)                   y(t) = a x(t) + b
+</pre><pre class="example">(%i3) at(g1,'diff(x(t),t)=1);
+                              !
+                     d        !
+(%o3)      y(t) = b (-- (x(t))!             ) + a x(t)
+                     dt       !d
+                              !-- (x(t)) = 1
+                               dt
+</pre></div>
+
+<p>For further examples, do <code>example (subst)</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="substinpart"></span><span id="Item_003a-Expressions_002fdeffn_002fsubstinpart"></span><dl class="def">
+<dt id="index-substinpart"><span class="category">Function: </span><span><strong>substinpart</strong> <em>(<var>x</var>, <var>expr</var>, <var>n_1</var>, &hellip;, <var>n_k</var>)</em><a href='#index-substinpart' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Similar to <code><a href="#substpart">substpart</a></code>, but <code>substinpart</code> works on the
+internal representation of <var>expr</var>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) x . 'diff (f(x), x, 2);
+                              2
+                             d
+(%o1)                   x . (--- (f(x)))
+                               2
+                             dx
+</pre><pre class="example">(%i2) substinpart (d^2, %, 2);
+                                  2
+(%o2)                        x . d
+</pre><pre class="example">(%i3) substinpart (f1, f[1](x + 1), 0);
+(%o3)                       f1(x + 1)
+</pre></div>
+
+<p>If the last argument to a <code>part</code> function is a list of indices then
+several subexpressions are picked out, each one corresponding to an
+index of the list.  Thus
+</p>
+<div class="example">
+<pre class="example">(%i1) part (x + y + z, [1, 3]);
+(%o1)                         z + x
+</pre></div>
+
+<p><code><a href="#piece">piece</a></code> holds the value of the last expression selected when using the
+<code>part</code> functions.  It is set during the execution of the function and
+thus may be referred to in the function itself as shown below.
+If <code><a href="#partswitch">partswitch</a></code> is set to <code>true</code> then <code>end</code> is returned when a
+selected part of an expression doesn&rsquo;t exist, otherwise an error
+message is given.
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: 27*y^3 + 54*x*y^2 + 36*x^2*y + y + 8*x^3 + x + 1;
+              3         2       2            3
+(%o1)     27 y  + 54 x y  + 36 x  y + y + 8 x  + x + 1
+</pre><pre class="example">(%i2) part (expr, 2, [1, 3]);
+                                  2
+(%o2)                         54 y
+</pre><pre class="example">(%i3) sqrt (piece/54);
+(%o3)                        abs(y)
+</pre><pre class="example">(%i4) substpart (factor (piece), expr, [1, 2, 3, 5]);
+                               3
+(%o4)               (3 y + 2 x)  + y + x + 1
+</pre><pre class="example">(%i5) expr: 1/x + y/x - 1/z;
+                             1    y   1
+(%o5)                     (- -) + - + -
+                             z    x   x
+</pre><pre class="example">(%i6) substpart (xthru (piece), expr, [2, 3]);
+                            y + 1   1
+(%o6)                       ----- - -
+                              x     z
+</pre></div>
+
+<p>Also, setting the option <code><a href="#inflag">inflag</a></code> to <code>true</code> and calling <code><a href="#part">part</a></code>
+or <code><a href="#substpart">substpart</a></code> is the same as calling <code><a href="#inpart">inpart</a></code> or <code>substinpart</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="substpart"></span><span id="Item_003a-Expressions_002fdeffn_002fsubstpart"></span><dl class="def">
+<dt id="index-substpart"><span class="category">Function: </span><span><strong>substpart</strong> <em>(<var>x</var>, <var>expr</var>, <var>n_1</var>, &hellip;, <var>n_k</var>)</em><a href='#index-substpart' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Substitutes <var>x</var> for the subexpression picked out by the rest of the
+arguments as in <code><a href="#part">part</a></code>.  It returns the new value of <var>expr</var>.  <var>x</var>
+may be some operator to be substituted for an operator of <var>expr</var>.  In some
+cases <var>x</var> needs to be enclosed in double-quotes <code>&quot;</code> (e.g.
+<code>substpart (&quot;+&quot;, a*b, 0)</code> yields <code>b + a</code>).
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) 1/(x^2 + 2);
+                               1
+(%o1)                        ------
+                              2
+                             x  + 2
+</pre><pre class="example">(%i2) substpart (3/2, %, 2, 1, 2);
+                               1
+(%o2)                       --------
+                             3/2
+                            x    + 2
+</pre><pre class="example">(%i3) a*x + f(b, y);
+(%o3)                     a x + f(b, y)
+</pre><pre class="example">(%i4) substpart (&quot;+&quot;, %, 1, 0);
+(%o4)                    x + f(b, y) + a
+</pre></div>
+
+<p>Also, setting the option <code><a href="#inflag">inflag</a></code> to <code>true</code> and calling <code><a href="#part">part</a></code>
+or <code>substpart</code> is the same as calling <code>inpart</code> or
+<code><a href="#substinpart">substinpart</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="symbolp"></span><span id="Item_003a-Expressions_002fdeffn_002fsymbolp"></span><dl class="def">
+<dt id="index-symbolp"><span class="category">Function: </span><span><strong>symbolp</strong> <em>(<var>expr</var>)</em><a href='#index-symbolp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <code>true</code> if <var>expr</var> is a symbol, else <code>false</code>.
+</p>
+<p>See also <a href="maxima_31.html">Identifiers</a>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+</div>
+</p></dd></dl>
+
+<span id="unorder"></span><span id="Item_003a-Expressions_002fdeffn_002funorder"></span><dl class="def">
+<dt id="index-unorder"><span class="category">Function: </span><span><strong>unorder</strong> <em>()</em><a href='#index-unorder' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Disables the aliasing created by the last use of the ordering commands 
+<code>ordergreat</code> and <code>orderless</code>.  <code>ordergreat</code> and <code>orderless</code> 
+may not be used more than one time each without calling <code>unorder</code>.
+<code>unorder</code> does not substitute back in expressions the original symbols for
+the aliases introduced by <code>ordergreat</code> and <code>orderless</code>.  Therefore,
+after execution of <code>unorder</code> the aliases appear in previous expressions.
+</p> 
+<p>See also <code>ordergreat</code> and <code>orderless</code>.
+</p>
+<p>Examples:
+</p>
+<p><code>ordergreat(a)</code> introduces an alias for the symbol <code>a</code>.  Therefore,
+the difference of <code>%o2</code> and <code>%o4</code> does not vanish.  <code>unorder</code>
+does not substitute back the symbol <code>a</code> and the alias appears in the
+output <code>%o7</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) unorder();
+(%o1)                          []
+</pre><pre class="example">(%i2) b*x + a^2;
+                                   2
+(%o2)                       b x + a
+</pre><pre class="example">(%i3) ordergreat (a);
+(%o3)                         done
+</pre><pre class="example">(%i4) b*x + a^2;
+ %th(1) - %th(3);
+                             2
+(%o4)                       a  + b x
+</pre><pre class="example">(%i5) unorder();
+                              2    2
+(%o5)                        a  - a
+</pre><pre class="example">(%i6) %th(2);
+(%o6)                          [a]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="verbify"></span><span id="Item_003a-Expressions_002fdeffn_002fverbify"></span><dl class="def">
+<dt id="index-verbify"><span class="category">Function: </span><span><strong>verbify</strong> <em>(<var>f</var>)</em><a href='#index-verbify' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the verb form of the function name <var>f</var>.
+See also <code>verb</code>, <code>noun</code>, and <code>nounify</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) verbify ('foo);
+(%o1)                          foo
+</pre><pre class="example">(%i2) :lisp $%
+$FOO
+</pre><pre class="example">(%i2) nounify (foo);
+(%o2)                          foo
+</pre><pre class="example">(%i3) :lisp $%
+%FOO
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Nouns-and-verbs">Nouns and verbs</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fOperators"></span></div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_32.html" accesskey="p" rel="prev">Inequality</a>, Up: <a href="maxima_28.html" accesskey="u" rel="up">Expressions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

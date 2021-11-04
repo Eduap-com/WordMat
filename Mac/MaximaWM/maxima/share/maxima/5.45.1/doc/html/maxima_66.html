@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Gnuplot Options (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Gnuplot Options (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Gnuplot Options (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_61.html" rel="up" title="Plotting">
+<link href="maxima_67.html" rel="next" title="Gnuplot_pipes Format Functions">
+<link href="maxima_65.html" rel="prev" title="Plotting Options">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Gnuplot-Options">
+<div class="header">
+<p>
+Next: <a href="maxima_67.html" accesskey="n" rel="next">Gnuplot_pipes Format Functions</a>, Previous: <a href="maxima_65.html" accesskey="p" rel="prev">Plotting Options</a>, Up: <a href="maxima_61.html" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Gnuplot-Options-1"></span><h3 class="section">12.5 Gnuplot Options</h3>
+
+<p>There are several plot options specific to gnuplot.  All of them consist
+of a keyword (the name of the option), followed by a string that should
+be a valid gnuplot command, to be passed directly to gnuplot.  In most
+cases, there exist a corresponding plotting option that will produce a
+similar result and whose use is more recommended than the gnuplot
+specific option.
+</p>
+<span id="gnuplot_005fterm"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fterm"></span><dl class="def">
+<dt id="index-gnuplot_005fterm"><span class="category">Plot option: </span><span><strong>gnuplot_term</strong> <em>[gnuplot_term, <var>terminal_name</var>]</em><a href='#index-gnuplot_005fterm' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Sets the output terminal type for gnuplot. The argument <var>terminal_name</var>
+can be a string or one of the following 3 special symbols
+</p><ul>
+<li> <strong>default</strong> (default value)
+
+<p>Gnuplot output is displayed in a separate graphical window and the
+gnuplot terminal used will be specified by the value of the option
+<code><a href="#gnuplot_005fdefault_005fterm_005fcommand">gnuplot_default_term_command</a></code>.
+</p>
+</li><li> <strong>dumb</strong>
+
+<p>Gnuplot output is saved to a file <code>maxout_xxx.gnuplot</code> using &quot;ASCII
+art&quot; approximation to graphics. If the option <code><a href="#gnuplot_005fout_005ffile">gnuplot_out_file</a></code> is
+set to <var>filename</var>, the plot will be saved there, instead of the
+default <code>maxout_xxx.gnuplot</code>. The settings for the &ldquo;dumb&rdquo; terminal of
+Gnuplot are given by the value of option
+<code><a href="#gnuplot_005fdumb_005fterm_005fcommand">gnuplot_dumb_term_command</a></code>. If option <code><a href="maxima_65.html#run_005fviewer">run_viewer</a></code> is set
+to true and the plot_format is <code>gnuplot</code> that ASCII representation
+will also be shown in the Maxima or Xmaxima console.
+</p>
+</li><li> <strong>ps</strong>
+
+<p>Gnuplot generates commands in the PostScript page description language.
+If the option <code><a href="#gnuplot_005fout_005ffile">gnuplot_out_file</a></code> is set to <var>filename</var>, gnuplot
+writes the PostScript commands to <var>filename</var>.  Otherwise, it is
+saved as <code>maxplot.ps</code> file. The settings for this terminal are given by the value of the option <code><a href="#gnuplot_005fdumb_005fterm_005fcommand">gnuplot_dumb_term_command</a></code>.
+</p>
+</li><li> A string representing any valid gnuplot term specification
+
+<p>Gnuplot can generate output in many other graphical formats such as png,
+jpeg, svg etc. To use those formats, option <code>gnuplot_term</code> can be
+set to any supported gnuplot term name (which must be a symbol) or even a
+full gnuplot term specification with any valid options (which must be a string).  For
+example <code>[gnuplot_term, png]</code> creates output in PNG (Portable
+Network Graphics) format while <code>[gnuplot_term, &quot;png size
+1000,1000&quot;]</code> creates PNG of 1000 x 1000 pixels size.  If the option
+<code><a href="#gnuplot_005fout_005ffile">gnuplot_out_file</a></code> is set to <var>filename</var>, gnuplot writes the
+output to <var>filename</var>.  Otherwise, it is saved as
+<code>maxplot.<var>term</var></code> file, where <var>term</var> is gnuplot terminal
+name.
+</p></li></ul>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fout_005ffile"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fout_005ffile"></span><dl class="def">
+<dt id="index-gnuplot_005fout_005ffile"><span class="category">Plot option: </span><span><strong>gnuplot_out_file</strong> <em>[gnuplot_out_file, <var>file_name</var>]</em><a href='#index-gnuplot_005fout_005ffile' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>It can be used to replace the default name for the file that contains
+the commands that will interpreted by gnuplot, when the terminal is set
+to <code>default</code>, or to replace the default name of the graphic file
+that gnuplot creates, when the terminal is different from
+<code>default</code>. If it contains one or more slashes, &ldquo;/&rdquo;, the name of
+the file will be left as it is; otherwise, it will be appended to the
+path of the temporary directory. The complete name of the files created
+by the plotting commands is always sent as output of those commands so
+they can be seen if the command is ended by semi-colon.
+</p>
+<p>When used in conjunction with the <code><a href="#gnuplot_005fterm">gnuplot_term</a></code> option, it can be
+used to save the plot in a file, in one of the graphic formats supported
+by Gnuplot. To create PNG, PDF, Postscript or SVG, it is easier to use
+options <code><a href="maxima_65.html#png_005ffile">png_file</a></code>, <code><a href="maxima_65.html#pdf_005ffile">pdf_file</a></code>, <code><a href="maxima_65.html#ps_005ffile">ps_file</a></code>,
+or <code><a href="maxima_65.html#svg_005ffile">svg_file</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fscript_005ffile"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fscript_005ffile"></span><dl class="def">
+<dt id="index-gnuplot_005fscript_005ffile"><span class="category">Plot option: </span><span><strong>gnuplot_script_file</strong> <em>[gnuplot_script_file, <var>file_name_or_function</var>]</em><a href='#index-gnuplot_005fscript_005ffile' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Set the name of the script file created by <code>plot2d</code> or <code>plot3d</code>
+when the <code><a href="maxima_65.html#plot_005fformat">plot_format</a></code> is <code>gnuplot</code>. The value
+<var>file_name_or_function</var> can be a string or a Maxima function of one
+variable that returns a string.
+</p>
+<p>In this example, the script file name is set to &ldquo;sin.gnuplot&rdquo;.
+</p>
+<div class="example">
+<pre class="example">(%i1) plot2d( sin(x), [x,0,2*%pi], [gnuplot_script_file, &quot;sin.gnuplot&quot;]);
+
+(%o1) [&quot;/tmp/sin.gnuplot&quot;]
+</pre></div>
+
+<p>In this example, <code>gnuplot_maxout_prt(<var>file</var>)</code> is a function
+that takes the default file name, <var>file</var>. It constructs a full file
+name for the data file by interpolating a random 8-digit integer with a
+pad of zeros into the default file name. The directory is determined by
+<code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code> (it is &ldquo;/tmp&rdquo; in this example).
+</p>
+<div class="example">
+<pre class="example">(%i1) gnuplot_maxout_prt(file) := block([beg,end],
+        [beg,end] : split(file,&quot;.&quot;),
+        printf(false,&quot;~a_~8,'0d.~a&quot;,beg,random(10^8-1),end)) $
+
+(%i2) plot2d( sin(x), [x,0,2*%pi], [gnuplot_script_file, gnuplot_maxout_prt]);
+
+(%o2) [&quot;/tmp/maxout68715_09606909.gnuplot&quot;]
+</pre></div>
+
+<p>By default, the script would have been saved in a file named
+<code>maxoutXXXXX.gnuplot</code> (XXXXX=68715 in this example).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fpm3d"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpm3d"></span><dl class="def">
+<dt id="index-gnuplot_005fpm3d"><span class="category">Plot option: </span><span><strong>gnuplot_pm3d</strong> <em>[gnuplot_pm3d, <var>value</var>]</em><a href='#index-gnuplot_005fpm3d' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>With a value of <code>false</code>, it can be used to disable the use of PM3D
+mode, which is enabled by default.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fpreamble"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpreamble"></span><dl class="def">
+<dt id="index-gnuplot_005fpreamble"><span class="category">Plot option: </span><span><strong>gnuplot_preamble</strong> <em>[gnuplot_preamble, <var>string</var>]</em><a href='#index-gnuplot_005fpreamble' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>This option inserts gnuplot commands before any other commands sent to
+Gnuplot. Any valid gnuplot commands may be used. Multiple commands should
+be separated with a semi-colon. See also <code><a href="#gnuplot_005fpostamble">gnuplot_postamble</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fpostamble"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpostamble"></span><dl class="def">
+<dt id="index-gnuplot_005fpostamble"><span class="category">Plot option: </span><span><strong>gnuplot_postamble</strong> <em>[gnuplot_postamble, <var>string</var>]</em><a href='#index-gnuplot_005fpostamble' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>This option inserts gnuplot commands after other commands sent to
+Gnuplot and right before the plot command is sent. Any valid gnuplot
+commands may be used. Multiple commands should be separated with a
+semi-colon. See also <code><a href="#gnuplot_005fpreamble">gnuplot_preamble</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fdefault_005fterm_005fcommand"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fdefault_005fterm_005fcommand"></span><dl class="def">
+<dt id="index-gnuplot_005fdefault_005fterm_005fcommand"><span class="category">Plot option: </span><span><strong>gnuplot_default_term_command</strong><a href='#index-gnuplot_005fdefault_005fterm_005fcommand' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>[gnuplot_default_term_command, <var>command</var>]
+</p>
+<p>The gnuplot command to set the terminal type for the default
+terminal. It this option is not set, the command used will be: <code>&quot;set term wxt size 640,480 font \&quot;,12\&quot;; set term pop&quot;</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fdumb_005fterm_005fcommand"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fdumb_005fterm_005fcommand"></span><dl class="def">
+<dt id="index-gnuplot_005fdumb_005fterm_005fcommand"><span class="category">Plot option: </span><span><strong>gnuplot_dumb_term_command</strong><a href='#index-gnuplot_005fdumb_005fterm_005fcommand' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>[gnuplot_dumb_term_command, <var>command</var>]
+</p>
+<p>The gnuplot command to set the terminal type for the dumb terminal.  It
+this option is not set, the command used will be: <code>&quot;set term dumb
+79 22&quot;</code>, which makes the text output 79 characters by 22 characters.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fpdf_005fterm_005fcommand"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpdf_005fterm_005fcommand"></span><dl class="def">
+<dt id="index-gnuplot_005fpdf_005fterm_005fcommand"><span class="category">Plot option: </span><span><strong>gnuplot_pdf_term_command</strong> <em>[gnuplot_pdf_term_command, <var>command</var>]</em><a href='#index-gnuplot_005fpdf_005fterm_005fcommand' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The gnuplot command to set the terminal type for the PDF
+terminal.  If this option is not set, the command used will be: <code>&quot;set term pdfcairo color solid lw 3 size 17.2 cm, 12.9 cm font \&quot;,18\&quot;&quot;</code>. See the gnuplot documentation for more information.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fpng_005fterm_005fcommand"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpng_005fterm_005fcommand"></span><dl class="def">
+<dt id="index-gnuplot_005fpng_005fterm_005fcommand"><span class="category">Plot option: </span><span><strong>gnuplot_png_term_command</strong> <em>[gnuplot_png_term_command, <var>command</var>]</em><a href='#index-gnuplot_005fpng_005fterm_005fcommand' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The gnuplot command to set the terminal type for the PNG terminal.  If
+this option is not set, the command used will be:
+<code>&quot;set term pngcairo font \&quot;,12\&quot;&quot;</code>. See the gnuplot documentation
+for more information.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fps_005fterm_005fcommand"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fps_005fterm_005fcommand"></span><dl class="def">
+<dt id="index-gnuplot_005fps_005fterm_005fcommand"><span class="category">Plot option: </span><span><strong>gnuplot_ps_term_command</strong> <em>[gnuplot_ps_term_command, <var>command</var>]</em><a href='#index-gnuplot_005fps_005fterm_005fcommand' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The gnuplot command to set the terminal type for the PostScript
+terminal.  If this option is not set, the command used will be: <code>&quot;set term postscript eps color solid lw 2 size 16.4 cm, 12.3 cm font \&quot;,24\&quot;&quot;</code>. See the gnuplot documentation for <code>set term postscript</code> for
+more information.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fstrings"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fstrings"></span><dl class="def">
+<dt id="index-gnuplot_005fstrings"><span class="category">Plot option: </span><span><strong>gnuplot_strings</strong> <em>[gnuplot_strings, <var>value</var>]</em><a href='#index-gnuplot_005fstrings' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>With a value of <code>true</code>, all strings used in labels and titles will
+be interpreted by gnuplot as &ldquo;enhanced&rdquo; text, if the terminal being used
+supports it. In enhanced mode, some characters such as ^ and _ are not
+printed, but interpreted as formatting characters. For a list of the
+formatting characters and their meaning, see the documentation for enhanced
+in Gnuplot. The default value for this option is <code>false</code>, which will
+not treat any characters as formatting characters.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fsvg_005fterm_005fcommand"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fsvg_005fterm_005fcommand"></span><dl class="def">
+<dt id="index-gnuplot_005fsvg_005fterm_005fcommand"><span class="category">Plot option: </span><span><strong>gnuplot_svg_term_command</strong> <em>[gnuplot_svg_term_command, <var>command</var>]</em><a href='#index-gnuplot_005fsvg_005fterm_005fcommand' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The gnuplot command to set the terminal type for the SVG
+terminal.  If this option is not set, the command used will be:
+<code>&quot;set term svg font \&quot;,14\&quot;&quot;</code>. See the gnuplot documentation for
+more information.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fcurve_005ftitles"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fcurve_005ftitles"></span><dl class="def">
+<dt id="index-gnuplot_005fcurve_005ftitles"><span class="category">Plot option: </span><span><strong>gnuplot_curve_titles</strong><a href='#index-gnuplot_005fcurve_005ftitles' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>This is an obsolete option that has been replaced by <code><a href="maxima_65.html#legend">legend</a></code> described
+above.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="gnuplot_005fcurve_005fstyles"></span><span id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fcurve_005fstyles"></span><dl class="def">
+<dt id="index-gnuplot_005fcurve_005fstyles"><span class="category">Plot option: </span><span><strong>gnuplot_curve_styles</strong><a href='#index-gnuplot_005fcurve_005fstyles' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>This is an obsolete option that has been replaced by <code><a href="maxima_65.html#style">style</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Plotting_002fnode_002fGnuplot_005fpipes-Format-Functions"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_67.html" accesskey="n" rel="next">Gnuplot_pipes Format Functions</a>, Previous: <a href="maxima_65.html" accesskey="p" rel="prev">Plotting Options</a>, Up: <a href="maxima_61.html" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

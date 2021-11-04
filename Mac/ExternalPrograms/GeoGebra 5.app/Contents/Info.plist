@@ -46,7 +46,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>5.0.574</string>
+	<string>5.0.672</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -65,9 +65,9 @@
 		<string>-Dapple.laf.useScreenMenuBar=true</string>
 		<string>-Dcom.apple.macos.use-file-dialog-packages=true</string>
 		<string>-Dcom.apple.macos.useScreenMenuBar=true</string>
-		<string>-Dcom.apple.mrj.application.apple.menu.about.name=GeoGebra Classic 5</string>
+		<string>-Dcom.apple.mrj.application.apple.menu.about.name=GeoGebra 5</string>
 		<string>-Dcom.apple.smallTabs=true</string>
-		<string>-Dapple.awt.application.name=GeoGebra Classic 5</string>
+		<string>-Dapple.awt.application.name=GeoGebra 5</string>
 		<string>-Xbootclasspath/a:../PlugIns/jdk1.8.0_201.jdk/Contents/Home/jre/lib/jfxrt.jar</string>
 		<string>-Xmx1024M</string>
 	</array>
@@ -84,6 +84,6 @@
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>2017 International GeoGebra Institute.</string>
+	<string>2014 International GeoGebra Institute.</string>
 </dict>
 </plist>

@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Operators for Equations (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Operators for Equations (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Operators for Equations (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_34.html" rel="up" title="Operators">
+<link href="maxima_40.html" rel="next" title="Assignment operators">
+<link href="maxima_38.html" rel="prev" title="Logical operators">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Operators-for-Equations">
+<div class="header">
+<p>
+Next: <a href="maxima_40.html" accesskey="n" rel="next">Assignment operators</a>, Previous: <a href="maxima_38.html" accesskey="p" rel="prev">Logical operators</a>, Up: <a href="maxima_34.html" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Operators-for-Equations-1"></span><h3 class="section">7.5 Operators for Equations</h3>
+
+<span id="g_t_0023"></span><span id="Item_003a-Operators_002fdeffn_002f_0023"></span><dl class="def">
+<dt id="index-_0023"><span class="category">Operator: </span><span><strong>#</strong><a href='#index-_0023' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Represents the negation of syntactic equality <code><a href="#g_t_003d">=</a></code>.
+</p>
+<p>Note that because of the rules for evaluation of predicate expressions
+(in particular because <code>not <var>expr</var></code> causes evaluation of <var>expr</var>),
+<code>not <var>a</var> = <var>b</var></code> is equivalent to <code>is(<var>a</var> # <var>b</var>)</code>,
+instead of <code><var>a</var> # <var>b</var></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) a = b;
+(%o1)                         a = b
+(%i2) is (a = b);
+(%o2)                         false
+(%i3) a # b;
+(%o3)                         a # b
+(%i4) not a = b;
+(%o4)                         true
+(%i5) is (a # b);
+(%o5)                         true
+(%i6) is (not a = b);
+(%o6)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_003d"></span><span id="Item_003a-Operators_002fdeffn_002f_003d"></span><dl class="def">
+<dt id="index-_003d"><span class="category">Operator: </span><span><strong>=</strong><a href='#index-_003d' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The equation operator.
+</p>
+<p>An expression <code><var>a</var> = <var>b</var></code>, by itself, represents an unevaluated
+equation, which might or might not hold.  Unevaluated equations may appear as
+arguments to <code><a href="maxima_102.html#solve">solve</a></code> and <code><a href="maxima_102.html#algsys">algsys</a></code> or some other functions.
+</p>
+<p>The function <code><a href="maxima_59.html#is">is</a></code> evaluates <code>=</code> to a Boolean value.
+<code>is(<var>a</var> = <var>b</var>)</code> evaluates <code><var>a</var> = <var>b</var></code> to <code>true</code>
+when <var>a</var> and <var>b</var> are identical.  That is, <var>a</var> and <var>b</var> are atoms
+which are identical, or they are not atoms and their operators are identical and
+their arguments are identical.  Otherwise, <code>is(<var>a</var> = <var>b</var>)</code>
+evaluates to <code>false</code>; it never evaluates to <code>unknown</code>.  When
+<code>is(<var>a</var> = <var>b</var>)</code> is <code>true</code>, <var>a</var> and <var>b</var> are said to be
+syntactically equal, in contrast to equivalent expressions, for which
+<code>is(equal(<var>a</var>, <var>b</var>))</code> is <code>true</code>.  Expressions can be
+equivalent and not syntactically equal.
+</p>
+<p>The negation of <code>=</code> is represented by <code><a href="#g_t_0023">#</a></code>.
+As with <code>=</code>, an expression <code><var>a</var> # <var>b</var></code>, by itself, is not
+evaluated.  <code>is(<var>a</var> # <var>b</var>)</code> evaluates <code><var>a</var> # <var>b</var></code> to
+<code>true</code> or <code>false</code>.
+</p>
+<p>In addition to <code>is</code>, some other operators evaluate <code>=</code> and <code>#</code>
+to <code>true</code> or <code>false</code>, namely <code><a href="maxima_169.html#if">if</a></code>, <code><a href="maxima_38.html#and">and</a></code>,<!-- /@w -->
+<code><a href="maxima_38.html#or">or</a></code>, and <code><a href="maxima_38.html#not">not</a></code>.
+</p>
+<p>Note that because of the rules for evaluation of predicate expressions
+(in particular because <code>not <var>expr</var></code> causes evaluation of <var>expr</var>),
+<code>not <var>a</var> = <var>b</var></code> is equivalent to <code>is(<var>a</var> # <var>b</var>)</code>,
+instead of <code><var>a</var> # <var>b</var></code>.
+</p>
+<p><code><a href="maxima_102.html#rhs">rhs</a></code> and <code><a href="maxima_102.html#lhs">lhs</a></code> return the right-hand and left-hand sides,
+respectively, of an equation or inequation.
+</p>
+<p>See also <code><a href="maxima_60.html#equal">equal</a></code> and <code><a href="maxima_60.html#notequal">notequal</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>An expression <code><var>a</var> = <var>b</var></code>, by itself, represents
+an unevaluated equation, which might or might not hold.
+</p>
+<div class="example">
+<pre class="example">(%i1) eq_1 : a * x - 5 * y = 17;
+(%o1)                    a x - 5 y = 17
+(%i2) eq_2 : b * x + 3 * y = 29;
+(%o2)                    3 y + b x = 29
+(%i3) solve ([eq_1, eq_2], [x, y]);
+                        196         29 a - 17 b
+(%o3)          [[x = ---------, y = -----------]]
+                     5 b + 3 a       5 b + 3 a
+(%i4) subst (%, [eq_1, eq_2]);
+</pre><pre class="example">         196 a     5 (29 a - 17 b)
+(%o4) [--------- - --------------- = 17, 
+       5 b + 3 a      5 b + 3 a
+                                  196 b     3 (29 a - 17 b)
+                                --------- + --------------- = 29]
+                                5 b + 3 a      5 b + 3 a
+</pre><pre class="example">(%i5) ratsimp (%);
+(%o5)                  [17 = 17, 29 = 29]
+</pre></div>
+
+<p><code>is(<var>a</var> = <var>b</var>)</code> evaluates <code><var>a</var> = <var>b</var></code> to <code>true</code>
+when <var>a</var> and <var>b</var> are syntactically equal (that is, identical).
+Expressions can be equivalent and not syntactically equal.
+</p>
+<div class="example">
+<pre class="example">(%i1) a : (x + 1) * (x - 1);
+(%o1)                    (x - 1) (x + 1)
+(%i2) b : x^2 - 1;
+                              2
+(%o2)                        x  - 1
+(%i3) [is (a = b), is (a # b)];
+(%o3)                     [false, true]
+(%i4) [is (equal (a, b)), is (notequal (a, b))];
+(%o4)                     [true, false]
+</pre></div>
+
+<p>Some operators evaluate <code>=</code> and <code>#</code> to <code>true</code> or <code>false</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) if expand ((x + y)^2) = x^2 + 2 * x * y + y^2 then FOO else
+      BAR;
+(%o1)                          FOO
+(%i2) eq_3 : 2 * x = 3 * x;
+(%o2)                       2 x = 3 x
+(%i3) eq_4 : exp (2) = %e^2;
+                              2     2
+(%o3)                       %e  = %e
+(%i4) [eq_3 and eq_4, eq_3 or eq_4, not eq_3];
+(%o4)                  [false, true, true]
+</pre></div>
+
+<p>Because <code>not <var>expr</var></code> causes evaluation of <var>expr</var>,
+<code>not <var>a</var> = <var>b</var></code> is equivalent to <code>is(<var>a</var> # <var>b</var>)</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) [2 * x # 3 * x, not (2 * x = 3 * x)];
+(%o1)                   [2 x # 3 x, true]
+(%i2) is (2 * x # 3 * x);
+(%o2)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Operators_002fnode_002fAssignment-operators"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_40.html" accesskey="n" rel="next">Assignment operators</a>, Previous: <a href="maxima_38.html" accesskey="p" rel="prev">Logical operators</a>, Up: <a href="maxima_34.html" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

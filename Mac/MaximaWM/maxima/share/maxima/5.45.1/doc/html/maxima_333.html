@@ -1,0 +1,627 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Characters (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Characters (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Characters (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_330.html" rel="up" title="stringproc-pkg">
+<link href="maxima_334.html" rel="next" title="String Processing">
+<link href="maxima_332.html" rel="prev" title="Input and Output">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Characters">
+<div class="header">
+<p>
+Next: <a href="maxima_334.html" accesskey="n" rel="next">String Processing</a>, Previous: <a href="maxima_332.html" accesskey="p" rel="prev">Input and Output</a>, Up: <a href="maxima_330.html" accesskey="u" rel="up">stringproc</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Characters-1"></span><h3 class="section">88.3 Characters</h3>
+
+<p>Characters are strings of length 1.
+</p>
+<span id="adjust_005fexternal_005fformat"></span><span id="Item_003a-stringproc_002fdeffn_002fadjust_005fexternal_005fformat"></span><dl class="def">
+<dt id="index-adjust_005fexternal_005fformat"><span class="category">Function: </span><span><strong>adjust_external_format</strong> <em>()</em><a href='#index-adjust_005fexternal_005fformat' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Prints information about the current external format of the Lisp reader 
+and in case the external format encoding differs from the encoding of the 
+application which runs Maxima <code>adjust_external_format</code> tries to adjust 
+the encoding or prints some help or instruction.
+<code>adjust_external_format</code> returns <code>true</code> when the external format has 
+been changed and <code>false</code> otherwise.
+</p>
+<p>Functions like <a href="#cint">cint</a>, <a href="#unicode">unicode</a>, <a href="maxima_335.html#octets_005fto_005fstring">octets_to_string</a> 
+and <a href="maxima_335.html#string_005fto_005foctets">string_to_octets</a> need UTF-8 as the external format of the 
+Lisp reader to work properly over the full range of Unicode characters. 
+</p>
+<p>Examples (Maxima on Windows, March 2016): 
+Using <code>adjust_external_format</code> when the default external format 
+is not equal to the encoding provided by the application.
+</p>
+<p>1. Command line Maxima
+</p>
+<p>In case a terminal session is preferred it is recommended to use Maxima compiled 
+with SBCL. Here Unicode support is provided by default and calls to 
+<code>adjust_external_format</code> are unnecessary. 
+</p>
+<p>If Maxima is compiled with CLISP or GCL it is recommended to change 
+the terminal encoding from CP850 to CP1252. 
+<code>adjust_external_format</code> prints some help. 
+</p>
+<p>CCL reads UTF-8 while the terminal input is CP850 by default. 
+CP1252 is not supported by CCL. <code>adjust_external_format</code> 
+prints instructions for changing the terminal encoding and external format 
+both to iso-8859-1.
+</p>
+<p>2. wxMaxima
+</p>
+<p>In wxMaxima SBCL reads CP1252 by default but the input from the application 
+is UTF-8 encoded. Adjustment is needed. 
+</p>
+<p>Calling <code>adjust_external_format</code> and restarting Maxima 
+permanently changes the default external format to UTF-8.
+</p>
+<div class="example">
+<pre class="example">(%i1)adjust_external_format();
+The line
+(setf sb-impl::*default-external-format* :utf-8)
+has been appended to the init file
+C:/Users/Username/.sbclrc
+Please restart Maxima to set the external format to UTF-8.
+(%i1) false
+</pre></div>
+
+<p>Restarting Maxima.
+</p>
+<div class="example">
+<pre class="example">(%i1) adjust_external_format();
+The external format is currently UTF-8
+and has not been changed.
+(%i1) false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="alphacharp"></span><span id="Item_003a-stringproc_002fdeffn_002falphacharp"></span><dl class="def">
+<dt id="index-alphacharp"><span class="category">Function: </span><span><strong>alphacharp</strong> <em>(<var>char</var>)</em><a href='#index-alphacharp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>  
+<p>Returns <code>true</code> if <var>char</var> is an alphabetic character. 
+</p>
+<p>To identify a non-US-ASCII character as an alphabetic character 
+the underlying Lisp must provide full Unicode support. 
+E.g. a German umlaut is detected as an alphabetic character with SBCL in GNU/Linux 
+but not with GCL. 
+(In Windows Maxima, when compiled with SBCL, must be set to UTF-8. 
+See <a href="#adjust_005fexternal_005fformat">adjust_external_format</a> for more.) 
+</p>
+<p>Example: Examination of non-US-ASCII characters.
+</p>
+<p>The underlying Lisp (SBCL, GNU/Linux) is able to convert the typed character 
+into a Lisp character and to examine.
+</p>
+<div class="example">
+<pre class="example">(%i1) alphacharp(&quot;&uuml;&quot;);
+(%o1)                          true
+</pre></div>
+
+<p>In GCL this is not possible. An error break occurs.
+</p>
+<div class="example">
+<pre class="example">(%i1) alphacharp(&quot;u&quot;);
+(%o1)                          true
+(%i2) alphacharp(&quot;&uuml;&quot;);
+
+package stringproc: &uuml; cannot be converted into a Lisp character.
+ -- an error.
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="alphanumericp"></span><span id="Item_003a-stringproc_002fdeffn_002falphanumericp"></span><dl class="def">
+<dt id="index-alphanumericp"><span class="category">Function: </span><span><strong>alphanumericp</strong> <em>(<var>char</var>)</em><a href='#index-alphanumericp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <code>true</code> if <var>char</var> is an alphabetic character or a digit 
+(only corresponding US-ASCII characters are regarded as digits). 
+</p>
+<p>Note: See remarks on <a href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="ascii"></span><span id="Item_003a-stringproc_002fdeffn_002fascii"></span><dl class="def">
+<dt id="index-ascii"><span class="category">Function: </span><span><strong>ascii</strong> <em>(<var>int</var>)</em><a href='#index-ascii' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the US-ASCII character corresponding to the integer <var>int</var>
+which has to be less than <code>128</code>.
+</p>
+<p>See <a href="#unicode">unicode</a> for converting code points larger than <code>127</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) for n from 0 thru 127 do ( 
+        ch: ascii(n), 
+        if alphacharp(ch) then sprint(ch),
+        if n = 96 then newline() )$
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="cequal"></span><span id="Item_003a-stringproc_002fdeffn_002fcequal"></span><dl class="def">
+<dt id="index-cequal"><span class="category">Function: </span><span><strong>cequal</strong> <em>(<var>char_1</var>, <var>char_2</var>)</em><a href='#index-cequal' class='copiable-anchor'> &para;</a></span></dt>
+<dd>         
+<p>Returns <code>true</code> if <var>char_1</var> and <var>char_2</var> are the same character. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="cequalignore"></span><span id="Item_003a-stringproc_002fdeffn_002fcequalignore"></span><dl class="def">
+<dt id="index-cequalignore"><span class="category">Function: </span><span><strong>cequalignore</strong> <em>(<var>char_1</var>, <var>char_2</var>)</em><a href='#index-cequalignore' class='copiable-anchor'> &para;</a></span></dt>
+<dd>  
+<p>Like <code>cequal</code> but ignores case which is only possible for non-US-ASCII 
+characters when the underlying Lisp is able to recognize a character as an 
+alphabetic character. See remarks on <a href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="cgreaterp"></span><span id="Item_003a-stringproc_002fdeffn_002fcgreaterp"></span><dl class="def">
+<dt id="index-cgreaterp"><span class="category">Function: </span><span><strong>cgreaterp</strong> <em>(<var>char_1</var>, <var>char_2</var>)</em><a href='#index-cgreaterp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>  
+<p>Returns <code>true</code> if the code point of <var>char_1</var> is greater than the 
+code point of <var>char_2</var>. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="cgreaterpignore"></span><span id="Item_003a-stringproc_002fdeffn_002fcgreaterpignore"></span><dl class="def">
+<dt id="index-cgreaterpignore"><span class="category">Function: </span><span><strong>cgreaterpignore</strong> <em>(<var>char_1</var>, <var>char_2</var>)</em><a href='#index-cgreaterpignore' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Like <code>cgreaterp</code> but ignores case which is only possible for non-US-ASCII 
+characters when the underlying Lisp is able to recognize a character as an 
+alphabetic character. See remarks on <a href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="charp"></span><span id="Item_003a-stringproc_002fdeffn_002fcharp"></span><dl class="def">
+<dt id="index-charp"><span class="category">Function: </span><span><strong>charp</strong> <em>(<var>obj</var>)</em><a href='#index-charp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <code>true</code> if <var>obj</var> is a Maxima-character.
+See introduction for example.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="cint"></span><span id="Item_003a-stringproc_002fdeffn_002fcint"></span><dl class="def">
+<dt id="index-cint"><span class="category">Function: </span><span><strong>cint</strong> <em>(<var>char</var>)</em><a href='#index-cint' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the Unicode code point of <var>char</var> which must be a 
+Maxima character, i.e. a string of length <code>1</code>.
+</p>
+<p>Examples: The hexadecimal code point of some characters 
+(Maxima with SBCL on GNU/Linux). 
+</p>
+<div class="example">
+<pre class="example">(%i1) obase: 16.$
+(%i2) map(cint, [&quot;$&quot;,&quot;&pound;&quot;,&quot;&euro;&quot;]);
+(%o2)                           [24, 0A3, 20AC]
+</pre></div>
+
+<p>Warning: It is not possible to enter characters corresponding to code points 
+larger than 16 bit in wxMaxima with SBCL on Windows when the external format 
+has not been set to UTF-8. See <a href="#adjust_005fexternal_005fformat">adjust_external_format</a>.
+</p>
+
+<p>CMUCL doesn&rsquo;t process these characters as one character. 
+<code>cint</code> then returns <code>false</code>. 
+Converting a character to a code point via UTF-8-octets may serve as a workaround: 
+</p>
+<p><code>utf8_to_unicode(string_to_octets(character));</code>
+</p>
+
+<p>See <a href="#utf8_005fto_005funicode">utf8_to_unicode</a>, <a href="maxima_335.html#string_005fto_005foctets">string_to_octets</a>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="clessp"></span><span id="Item_003a-stringproc_002fdeffn_002fclessp"></span><dl class="def">
+<dt id="index-clessp"><span class="category">Function: </span><span><strong>clessp</strong> <em>(<var>char_1</var>, <var>char_2</var>)</em><a href='#index-clessp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <code>true</code> if the code point of <var>char_1</var> is less than the 
+code point of <var>char_2</var>. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="clesspignore"></span><span id="Item_003a-stringproc_002fdeffn_002fclesspignore"></span><dl class="def">
+<dt id="index-clesspignore"><span class="category">Function: </span><span><strong>clesspignore</strong> <em>(<var>char_1</var>, <var>char_2</var>)</em><a href='#index-clesspignore' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Like <code>clessp</code> but ignores case which is only possible for non-US-ASCII 
+characters when the underlying Lisp is able to recognize a character as an 
+alphabetic character. See remarks on <a href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="constituent"></span><span id="Item_003a-stringproc_002fdeffn_002fconstituent"></span><dl class="def">
+<dt id="index-constituent"><span class="category">Function: </span><span><strong>constituent</strong> <em>(<var>char</var>)</em><a href='#index-constituent' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <code>true</code> if <var>char</var> is a graphic character but not a space character.
+A graphic character is a character one can see, plus the space character.
+(<code>constituent</code> is defined by Paul Graham. 
+See Paul Graham, ANSI Common Lisp, 1996, page 67.)
+</p>
+<div class="example">
+<pre class="example">(%i1) for n from 0 thru 255 do ( 
+tmp: ascii(n), if constituent(tmp) then sprint(tmp) )$
+! &quot; #  %  ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ? @ A B
+C D E F G H I J K L M N O P Q R S T U V W X Y Z [ \ ] ^ _ ` a b c
+d e f g h i j k l m n o p q r s t u v w x y z { | } ~
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+
+<span id="digitcharp"></span><span id="Item_003a-stringproc_002fdeffn_002fdigitcharp"></span><dl class="def">
+<dt id="index-digitcharp"><span class="category">Function: </span><span><strong>digitcharp</strong> <em>(<var>char</var>)</em><a href='#index-digitcharp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>  
+<p>Returns <code>true</code> if <var>char</var> is a digit where only the corresponding 
+US-ASCII-character is regarded as a digit.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+
+<span id="lowercasep"></span><span id="Item_003a-stringproc_002fdeffn_002flowercasep"></span><dl class="def">
+<dt id="index-lowercasep"><span class="category">Function: </span><span><strong>lowercasep</strong> <em>(<var>char</var>)</em><a href='#index-lowercasep' class='copiable-anchor'> &para;</a></span></dt>
+<dd>   
+<p>Returns <code>true</code> if <var>char</var> is a lowercase character. 
+</p>
+<p>Note: See remarks on <a href="#alphacharp">alphacharp</a>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="newline_005fvariable"></span><span id="Item_003a-stringproc_002fdefvr_002fnewline"></span><dl class="def">
+<dt id="index-newline-1"><span class="category">Variable: </span><span><strong>newline</strong><a href='#index-newline-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The newline character (ASCII-character 10). 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="space_005fvariable"></span><span id="Item_003a-stringproc_002fdefvr_002fspace"></span><dl class="def">
+<dt id="index-space"><span class="category">Variable: </span><span><strong>space</strong><a href='#index-space' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The space character.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="tab_005fvariable"></span><span id="Item_003a-stringproc_002fdefvr_002ftab"></span><dl class="def">
+<dt id="index-tab"><span class="category">Variable: </span><span><strong>tab</strong><a href='#index-tab' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The tab character.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="unicode"></span><span id="Item_003a-stringproc_002fdeffn_002funicode"></span><dl class="def">
+<dt id="index-unicode"><span class="category">Function: </span><span><strong>unicode</strong> <em>(<var>arg</var>)</em><a href='#index-unicode' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the character defined by <var>arg</var> which might be an Unicode code point 
+or a name string if the underlying Lisp provides full Unicode support. 
+</p>
+<p>Example: Characters defined by hexadecimal code points
+(Maxima with SBCL on GNU/Linux). 
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase: 16.$
+(%i2) map(unicode, [24, 0A3, 20AC]);
+(%o2)                            [$, &pound;, &euro;]
+</pre></div>
+
+<p>Warning: In wxMaxima with SBCL on Windows it is not possible to convert 
+code points larger than 16 bit to characters when the external format 
+has not been set to UTF-8. See <a href="#adjust_005fexternal_005fformat">adjust_external_format</a> for more information.
+</p>
+
+<p>CMUCL doesn&rsquo;t process code points larger than 16 bit. 
+In these cases <code>unicode</code> returns <code>false</code>. 
+Converting a code point to a character via UTF-8 octets may serve as a workaround: 
+</p>
+<p><code>octets_to_string(unicode_to_utf8(code_point));</code>
+</p>
+
+<p>See <a href="maxima_335.html#octets_005fto_005fstring">octets_to_string</a>, <a href="#unicode_005fto_005futf8">unicode_to_utf8</a>.
+</p>
+<p>In case the underlying Lisp provides full Unicode support the character might be 
+specified by its name. The following is possible in ECL, CLISP and SBCL, 
+where in SBCL on Windows the external format has to be set to UTF-8.
+<code>unicode(name)</code> is supported by CMUCL too but again limited to 16 bit 
+characters. 
+</p>
+<p>The string argument to <code>unicode</code> is basically the same string returned by 
+<code>printf</code> using the &quot;~@c&quot; specifier. 
+But as shown below the prefix &quot;#\&quot; must be omitted. 
+Underlines might be replaced by spaces and uppercase letters by lowercase ones.
+</p>
+<p>Example (continued): Characters defined by names 
+(Maxima with SBCL on GNU/Linux). 
+</p>
+<div class="example">
+<pre class="example">(%i3) printf(false, &quot;~@c&quot;, unicode(0DF));
+(%o3)                    #\LATIN_SMALL_LETTER_SHARP_S
+(%i4) unicode(&quot;LATIN_SMALL_LETTER_SHARP_S&quot;);
+(%o4)                                  &szlig;
+(%i5) unicode(&quot;Latin small letter sharp s&quot;);
+(%o5)                                  &szlig;
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="unicode_005fto_005futf8"></span><span id="Item_003a-stringproc_002fdeffn_002funicode_005fto_005futf8"></span><dl class="def">
+<dt id="index-unicode_005fto_005futf8"><span class="category">Function: </span><span><strong>unicode_to_utf8</strong> <em>(<var>code_point</var>)</em><a href='#index-unicode_005fto_005futf8' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a list containing the UTF-8 code corresponding to the Unicode <var>code_point</var>.
+</p>
+<p>Examples: Converting Unicode code points to UTF-8 and vice versa. 
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase: obase: 16.$
+(%i2) map(cint, [&quot;$&quot;,&quot;&pound;&quot;,&quot;&euro;&quot;]);
+(%o2)                           [24, 0A3, 20AC]
+(%i3) map(unicode_to_utf8, %);
+(%o3)                 [[24], [0C2, 0A3], [0E2, 82, 0AC]]
+(%i4) map(utf8_to_unicode, %);
+(%o4)                           [24, 0A3, 20AC]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="uppercasep"></span><span id="Item_003a-stringproc_002fdeffn_002fuppercasep"></span><dl class="def">
+<dt id="index-uppercasep"><span class="category">Function: </span><span><strong>uppercasep</strong> <em>(<var>char</var>)</em><a href='#index-uppercasep' class='copiable-anchor'> &para;</a></span></dt>
+<dd>  
+<p>Returns <code>true</code> if <var>char</var> is an uppercase character. 
+</p>
+<p>Note: See remarks on <a href="#alphacharp">alphacharp</a>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="us_005fascii_005fonly"></span><span id="Item_003a-stringproc_002fdefvr_002fus_005fascii_005fonly"></span><dl class="def">
+<dt id="index-us_005fascii_005fonly"><span class="category">Variable: </span><span><strong>us_ascii_only</strong><a href='#index-us_005fascii_005fonly' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>This option variable affects Maxima when the character encoding 
+provided by the application which runs Maxima is UTF-8 but the 
+external format of the Lisp reader is not equal to UTF-8. 
+</p>
+<p>On GNU/Linux this is true when Maxima is built with GCL 
+and on Windows in wxMaxima with GCL- and SBCL-builds. 
+With SBCL it is recommended to change the external format to UTF-8. 
+Setting <code>us_ascii_only</code> is unnecessary then. 
+See <a href="#adjust_005fexternal_005fformat">adjust_external_format</a> for details. 
+</p>
+<p><code>us_ascii_only</code> is <code>false</code> by default. 
+Maxima itself then (i.e. in the above described situation) parses the UTF-8 encoding.
+</p>
+<p>When <code>us_ascii_only</code> is set to <code>true</code> it is assumed that all strings 
+used as arguments to string processing functions do not contain Non-US-ASCII characters. 
+Given that promise, Maxima avoids parsing UTF-8 and strings can be processed more efficiently.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+
+<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="utf8_005fto_005funicode"></span><span id="Item_003a-stringproc_002fdeffn_002futf8_005fto_005funicode"></span><dl class="def">
+<dt id="index-utf8_005fto_005funicode"><span class="category">Function: </span><span><strong>utf8_to_unicode</strong> <em>(<var>list</var>)</em><a href='#index-utf8_005fto_005funicode' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns an Unicode code point corresponding to the <var>list</var> which must contain 
+the UTF-8 encoding of a single character.
+</p>
+<p>Examples: See <a href="#unicode_005fto_005futf8">unicode_to_utf8</a>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-stringproc">Package stringproc</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="Item_003a-stringproc_002fnode_002fString-Processing"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_334.html" accesskey="n" rel="next">String Processing</a>, Previous: <a href="maxima_332.html" accesskey="p" rel="prev">Input and Output</a>, Up: <a href="maxima_330.html" accesskey="u" rel="up">stringproc</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
