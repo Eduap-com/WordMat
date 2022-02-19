@@ -35,24 +35,6 @@ Sub ReplaceToUnicode()
 
 End Sub
 
-Sub DeleteAllModules()
-   Dim VBC As VBComponent
-   Dim i As Long, s As String, n As String
-   
-   If MsgBox("Do you really want to delete all VBA modules in this document?", vbOKCancel) = vbCancel Then Exit Sub
-'   ActiveDocument.VBProject.VBComponents.Remove ActiveDocument.VBProject.VBComponents("Diverse")
-   For i = ActiveDocument.VBProject.VBComponents.Count - 1 To 1 Step -1
-'      Set VBC = ActiveDocument.VBProject.VBComponents(i)
-
-      If ActiveDocument.VBProject.VBComponents(i).Name <> "VBAmodul" And ActiveDocument.VBProject.VBComponents(i).Name <> "ThisDocument" Then
-         ActiveDocument.VBProject.VBComponents.Remove ActiveDocument.VBProject.VBComponents(i)
-'         VBC.Collection.Remove (VBC)
-      End If
-   Next
-   ActiveDocument.VBProject.VBComponents.Remove ActiveDocument.VBProject.VBComponents("VBAmodul")
-
-End Sub
-
 Private Function ReplaceLineToNonUnicode(s As String) As String
    s = Replace(s, ChrW(230), "*ae*") 'æ
    s = Replace(s, ChrW(248), "*oe*") 'ø

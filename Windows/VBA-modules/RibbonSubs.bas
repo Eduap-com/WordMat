@@ -40,7 +40,7 @@ Sub RefreshRibbon()
         WoMatRibbon.Invalidate
     End If
 #Else
-    On Error GoTo Fejl
+    On Error GoTo fejl
    Dim lngRibPtr As LongPtr
    Dim lngRibPtrBackup As LongPtr
    Dim objRibbon As Object
@@ -64,17 +64,17 @@ Sub RefreshRibbon()
         ' It is exactly what we should have instead of that brute force reload mechanism.
     End If
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(394), vbOKOnly, Sprog.Error
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
-Slut:
+slut:
 #End If
 End Sub
 ' events der fyres når der trykkes på ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
-    On Error GoTo Fejl
+    On Error GoTo fejl
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -100,10 +100,10 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
         Oundo.EndCustomRecord
 #End If
     
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.A(395), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Public Sub Rib_Settings(control As IRibbonControl)
@@ -686,16 +686,16 @@ End Sub
 
 'Callback for ButtonNyLig onAction
 Sub Rib_nylign(control As IRibbonControl)
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     Application.ScreenUpdating = False
     Selection.OMaths.Add Range:=Selection.Range
 '    Selection.OMaths(1).BuildUp
     
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 'Callback for ButtonNumEq onAction
 Sub Rib_nynumlign(control As IRibbonControl)
@@ -819,13 +819,13 @@ Sub Rib_HelpMaxima(control As IRibbonControl)
 #Else
 Dim ReturnValue
 Dim sti As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     sti = "cmd /C """ & GetProgramFilesDir & "\WordMat\Maxima-sbcl-5.38.1\share\maxima\5.38.1\doc\chm\maxima.chm"""
     ReturnValue = Shell(sti, vbHide)
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     OpenLink "http://maxima.sourceforge.net/docs/manual/en/maxima.html"
-Slut:
+slut:
 #End If
 End Sub
 'Callback for ButtonCheckUpdate onAction

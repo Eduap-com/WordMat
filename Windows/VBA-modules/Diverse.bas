@@ -141,7 +141,7 @@ Sub ShowTempDoc()
     MsgBox tempDoc.Range.text
 End Sub
 Sub LukTempDoc()
-On Error GoTo Slut
+On Error GoTo slut
 #If Mac Then
     If Not m_tempDoc Is Nothing Then
         If Word.Application.IsObjectValid(m_tempDoc) Then
@@ -154,7 +154,7 @@ On Error GoTo Slut
 '    tempDoc.ActiveWindow
     Set tempDoc = Nothing ' added v. 1.11
 #End If
-Slut:
+slut:
 End Sub
 
 #If Mac Then
@@ -242,10 +242,10 @@ start:
 Err.Clear
 i = i + 1
 Wait (0.1)
-If i > 2 Then GoTo Slut
+If i > 2 Then GoTo slut
 tasksave.Activate
 
-Slut:
+slut:
 End Sub
 
 Sub Wait(pausetime As Variant)
@@ -375,7 +375,7 @@ Sub SetMathAutoCorrect()
 End Sub
 Sub NewEquation()
     Dim r As Range
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If Selection.OMaths.Count = 0 Then
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then
@@ -396,10 +396,10 @@ Sub NewEquation()
         Selection.TypeParagraph
         Selection.MoveLeft Unit:=wdCharacter, Count:=2
     End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Function ConvertNumber(ByVal n As String) As String
 ' sørger for at streng har maximaindstilling med separatorer
@@ -425,7 +425,7 @@ Function GetProgramFilesDir() As String
 ' bruges ikke af maxima mere da det er dll-filen der står for det nu.
 ' bruges af de Worddokumenter mm. der skal findes
 'MsgBox GetProgFilesPath
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
     GetProgramFilesDir = "/Applications/"
 #Else
@@ -448,14 +448,14 @@ On Error GoTo Fejl
 
 #End If
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
-Slut:
+slut:
 'MsgBox GetProgramFilesDir
 End Function
 Function GetDocumentsDir() As String
-On Error GoTo Fejl
+On Error GoTo fejl
   If DocumentsDir <> "" Then
     GetDocumentsDir = DocumentsDir
   Else
@@ -470,10 +470,10 @@ On Error GoTo Fejl
  DocumentsDir = GetDocumentsDir
  End If
  
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
-Slut:
+slut:
 'MsgBox GetProgramFilesDir
 End Function
 Function RegKeyRead(i_RegKey As String) As String
@@ -573,7 +573,7 @@ Dim appnr As Integer
 '    On Error GoTo fejl
     appnr = Shell(explorersti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
 #End If
-Fejl:
+fejl:
 End Sub
 
  Sub TestDll()
@@ -598,7 +598,7 @@ End If
     MaxProc.ExecuteMaximaCommand "2+3;", 1
     MsgBox MaxProc.MaximaOutput
 
-Fejl:
+fejl:
 
 End Sub
 #End If
@@ -636,7 +636,7 @@ Sub InsertSletDef()
 
 End Sub
 Sub InsertDefiner()
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     Application.ScreenUpdating = False
     Selection.InsertAfter (Sprog.A(62) & ": ")
@@ -645,10 +645,10 @@ Sub InsertDefiner()
 '    Selection.OMaths(1).BuildUp
     Selection.Collapse wdCollapseEnd
     
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub ForrigeResultat()
@@ -665,7 +665,7 @@ Sub ForrigeResultat()
     Application.ScreenUpdating = False
     
     On Error Resume Next
-    If Selection.OMaths.Count = 0 Then GoTo Slut
+    If Selection.OMaths.Count = 0 Then GoTo slut
     
     Dim scrollpos As Double
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -690,7 +690,7 @@ Sub ForrigeResultat()
     End If
     
     If ResIndex < 0 Then ResIndex = 0
-    On Error GoTo Fejl
+    On Error GoTo fejl
     start = Selection.Range.start
     sslut = Selection.Range.End
     Set ra = ActiveDocument.Range
@@ -704,14 +704,14 @@ Sub ForrigeResultat()
             Else
                 Selection.text = ""
             End If
-            GoTo Fejl
+            GoTo fejl
         End If
 '        ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range.Select
         Set r = ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range
         If Len(r.text) = 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
-            GoTo Slut
+            GoTo slut
         End If
 '        s = omax.ReadEquation2(r)
         s = omax.ReadEquation(r)
@@ -752,13 +752,13 @@ Loop While hopover
 '    ResPos2 = Selection.start
 '    ActiveDocument.Range.OMaths(ra.OMaths.Count).BuildUp
 '    ResPos2 = ResPos1 + Len(ActiveDocument.Range.OMaths(matfeltno).Range.text) - ml
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     ResIndex = 0
     ResFeltIndex = 0
     ResPos2 = 0
     ResPos1 = 0
-Slut:
+slut:
 '    Selection.End = sslut ' slut skal være først eller går det galt
 '    Selection.start = start
 '    Call sr.Move(wdCharacter, Len(s))
@@ -857,16 +857,16 @@ Do
 Loop While i < 10
 End Sub
 Sub OpenFormulae(filnavn As String)
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
     Documents.Open "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/WordDocs/" & filnavn
 #Else
     OpenWordFile "" & filnavn
 #End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub OpenWordFile(filnavn As String)
 ' OpenWordFile ("Figurer.docx")
@@ -880,7 +880,7 @@ Dim filnavn1 As String
 Dim filnavn2 As String
 Dim appdir As String
 Dim fs
-On Error GoTo Fejl
+On Error GoTo fejl
 Set fs = CreateObject("Scripting.FileSystemObject")
 appdir = Environ("AppData")
 filnavn1 = appdir & "\WordMat\WordDocs\" & filnavn
@@ -900,10 +900,10 @@ Else
 End If
 #End If
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(111) & filnavn, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 
@@ -1106,8 +1106,8 @@ Sub TurnUnitsOff()
 #If Mac Then
         If Not MaxProc Is Nothing Then
             MaxProc.Units = 0
-            MaxProc.CloseProcess
-            MaxProc.StartMaximaProcess
+'            MaxProc.CloseProcess ' skal ikke køres efter v. 1.23
+'            MaxProc.StartMaximaProcess
         End If
 #End If
         On Error Resume Next
@@ -1149,7 +1149,7 @@ Sub ToggleNum()
 End Sub
 Sub CheckForUpdateOld()
     Dim Result As VbMsgBoxResult
-    On Error GoTo Fejl
+    On Error GoTo fejl
 #If Mac Then
     MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com/WordMat/Download.aspx"
     OpenLink "http://www.eduap.com/WordMat/Download.aspx"
@@ -1173,10 +1173,10 @@ Sub CheckForUpdateOld()
     End If
 
 #End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub CheckForUpdate()
     CheckForUpdateF False
@@ -1229,7 +1229,7 @@ Sub CheckForUpdateF(Optional Silent As Boolean = False)
         s = Response.Content
         p = InStr(s, "<body")
         p = InStr(p, s, "Version ")
-        If p <= 0 Then GoTo Fejl
+        If p <= 0 Then GoTo fejl
         v = Trim(Mid(s, p + 8, 4))
         p2 = InStr(p + 10, s, "Version " & AppVersion)
         If p2 <= 0 Then p2 = InStr(p + 10, s, "Version")
@@ -1255,7 +1255,7 @@ Sub CheckForUpdateF(Optional Silent As Boolean = False)
             End If
         End If
     Else
-        GoTo Slut
+        GoTo slut
     End If
     
     
@@ -1264,10 +1264,10 @@ Sub CheckForUpdateF(Optional Silent As Boolean = False)
     
     
 '#End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub CheckForUpdateSilentOld()
 ' maxproc skal være oprettet
@@ -1275,7 +1275,7 @@ Sub CheckForUpdateSilentOld()
 #Else
     Dim nyversion As String, News As String
     Dim Result As VbMsgBoxResult
-    On Error GoTo Fejl
+    On Error GoTo fejl
     nyversion = MaxProc.CheckForUpdate()
     If nyversion = "" Then
         Exit Sub
@@ -1290,23 +1290,23 @@ Sub CheckForUpdateSilentOld()
     End If
 
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
-Slut:
+slut:
 #End If
 End Sub
 Sub CheckForUpdateSilent()
 ' maxproc skal være oprettet
-    On Error GoTo Fejl
+    On Error GoTo fejl
 '#If Mac Then
 '#Else
     CheckForUpdateF True
 '#End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
-Slut:
+slut:
 End Sub
 Function ConvertNumberToString(ByVal n As Double) As String
     Dim ns As String
@@ -1353,7 +1353,7 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = ConvertNumberToString & ") "
     End If
     
-Slut:
+slut:
 End Function
 Function ConvertNumberToStringBC(n As Double, Optional bc As Integer) As String
 ' konverter tal til streng med angivet antal betydende cifre. Hvis ingen angives anvendes maximacifre
@@ -1420,22 +1420,22 @@ End Sub
 Function TrimR(ByVal text As String, c As String)
 ' fjerner c fra højre side af text
 Dim s As String
-If text = "" Then GoTo Slut
+If text = "" Then GoTo slut
 Do While right(text, 1) = c
     text = Left(text, Len(text) - 1)
 Loop
 TrimR = text
-Slut:
+slut:
 End Function
 Function TrimL(ByVal text As String, c As String)
 ' fjerner c fra venstre side af text
 Dim s As String
-If text = "" Then GoTo Slut
+If text = "" Then GoTo slut
 Do While Left(text, 1) = c
     text = right(text, Len(text) - 1)
 Loop
 TrimL = text
-Slut:
+slut:
 End Function
 
 Function TrimB(ByVal text As String, c As String)
@@ -1443,7 +1443,7 @@ Function TrimB(ByVal text As String, c As String)
 
 TrimB = TrimL(text, c)
 TrimB = TrimR(TrimB, c)
-Slut:
+slut:
 End Function
 Function TrimRenter(ByVal text As String)
 ' removes crlf at right end
@@ -1458,13 +1458,13 @@ End Sub
 Public Sub ClearClipBoard()
 ' giver desværre sjældne problemer på nogle computere
 ' specielt hvis der er definitioner i dokumentet så den fyres to gange
-On Error GoTo Slut
+On Error GoTo slut
     Dim oData   As New DataObject 'object to use the clipboard
      
     oData.SetText text:=Empty 'Clear
     oData.PutInClipboard 'take in the clipboard to empty it
     Set oData = Nothing
-Slut:
+slut:
 End Sub
 
 Sub testt()
@@ -1479,7 +1479,7 @@ Dim i As Integer
     If mc.Count > 0 Then
 On Error Resume Next
     mc(mc.Count).ParentOMath.Range.Select
-On Error GoTo Slut
+On Error GoTo slut
     mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
     Else
         i = 0
@@ -1488,7 +1488,7 @@ On Error GoTo Slut
             i = i + 1
         Loop
     End If
-Slut:
+slut:
 On Error Resume Next
     Selection.Collapse wdCollapseEnd
     Dim r As Range
@@ -1510,7 +1510,7 @@ End Sub
 Sub ToggleLatex()
 Dim mtext As String
 Dim r As Range
-On Error GoTo Slut
+On Error GoTo slut
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -1538,7 +1538,7 @@ On Error GoTo Slut
         Oundo.EndCustomRecord
 #End If
 
-Slut:
+slut:
 End Sub
 Function RemoveLatexOmslut(text As String)
 
@@ -1560,7 +1560,7 @@ End Function
 Sub TabelToList()
 Dim dd As New DocData
 Dim om As Range
-On Error GoTo Fejl
+On Error GoTo fejl
 PrepareMaxima
 dd.ReadSelectionS
 
@@ -1570,17 +1570,17 @@ Set om = Selection.OMaths.Add(Selection.Range)
 Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
 om.OMaths(1).BuildUp
 Selection.TypeParagraph
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ListToTabel()
 Dim dd As New DocData
 Dim om As Range
 Dim Tabel As Table
 Dim i As Integer, j As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 PrepareMaxima
 dd.ReadSelection
 
@@ -1619,10 +1619,10 @@ For i = 1 To dd.nrows
     Next
 Next
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub GoToInsertPoint()
 ' finder næste punkt efter selection hvor der kan indsættes nog
@@ -1691,7 +1691,7 @@ End Function
 Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Dim t As Table, f As Field, ccut As Boolean, i As Long
     Dim placement As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
 
 
@@ -1823,15 +1823,15 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         Oundo.EndCustomRecord
 #End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEquationRef()
 Dim b As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     UserFormEquationReference.Show
     b = UserFormEquationReference.EqName
     
@@ -1872,14 +1872,14 @@ Dim b As String
 
 '    Selection.MoveLeft Unit:=wdCharacter, count:=1
 '    Selection.Fields.ToggleShowCodes
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub SetEquationNumber()
-On Error GoTo Fejl
+On Error GoTo fejl
     Application.ScreenUpdating = False
     Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, arr As Variant
     
@@ -1916,15 +1916,15 @@ On Error GoTo Fejl
     End If
     
     ActiveDocument.Fields.Update
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub SetFieldNo(f As Field, n As String)
     Dim p As Integer, p2 As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
     p = InStr(f.Code.text, "\r")
     p2 = InStr(f.Code.text, "\c")
     If p2 > 0 And p2 < p Then p = p2
@@ -1934,15 +1934,15 @@ On Error GoTo Fejl
     f.Code.text = f.Code.text & "\r" & n & " \c"
     f.Update
     ActiveDocument.Fields.Update
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEquationHeadingNo()
     Dim Result As Long
-On Error GoTo Fejl
+On Error GoTo fejl
     Result = MsgBox(Sprog.A(348), vbYesNoCancel, Sprog.A(8))
     If Result = vbCancel Then Exit Sub
     If Result = vbYes Then
@@ -1954,21 +1954,21 @@ On Error GoTo Fejl
       Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq2 \r0 \h"
 
     ActiveDocument.Fields.Update
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub UpdateEquationNumbers()
-On Error GoTo Fejl
+On Error GoTo fejl
 
     ActiveDocument.Fields.Update
     
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub CreateSprogArrays()
@@ -2003,7 +2003,7 @@ Selection.Range.InsertAfter s
 End Sub
 
 Sub SaveBackup()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim path As String
     Dim UFbackup As UserFormBackup
     
@@ -2054,20 +2054,20 @@ Sub SaveBackup()
 #End If
     tempDoc2.Close
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
-Slut:
+slut:
     Application.ScreenUpdating = True
 End Sub
 
 Sub OpenLatexTemplate()
-On Error GoTo Fejl
+On Error GoTo fejl
     Documents.Add Template:=GetWordMatDir() & "LatexWordTemplate.dotx"
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub DeleteNormalDotm()
@@ -2109,10 +2109,10 @@ Function ReadTextfileToString(filnavn As String) As String
    Set fsT = Nothing
 #End If
 
-   GoTo Slut
-Fejl:
+   GoTo slut
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
-Slut:
+slut:
 
 End Function
 
@@ -2128,10 +2128,10 @@ Sub WriteTextfileToString(filnavn As String, WriteText As String)
    Dim fsT As Object
    'On Error GoTo fejl
 
-   If filnavn = "" Then GoTo Slut
+   If filnavn = "" Then GoTo slut
    If WriteText = "" Then
       If Dir(filnavn) <> "" Then Kill filnavn
-         GoTo Slut
+         GoTo slut
    End If
    Set fsT = CreateObject("ADODB.Stream")
    fsT.Type = 2 'Specify stream type - we want To save text/string data.
@@ -2144,10 +2144,10 @@ Sub WriteTextfileToString(filnavn As String, WriteText As String)
 #End If
 
 
-   GoTo Slut
-Fejl:
+   GoTo slut
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTexfilen"
-Slut:
+slut:
 
 End Sub
 

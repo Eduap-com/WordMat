@@ -25,7 +25,7 @@ Dim i As Integer, j As Integer, k As Integer, l As Integer, c As Integer
 Dim startrow As Integer
 Dim startcol As Integer
 Dim d As Double
-On Error GoTo Fejl
+On Error GoTo fejl
 
 r = 1
 c = 1
@@ -40,14 +40,14 @@ On Error GoTo hop
 r = Selection.Rows.Count
 c = Selection.Columns.Count
 hop:
-On Error GoTo Fejl
+On Error GoTo fejl
 If r < 2 Or c < 2 Then
-    If Selection.Tables.Count < 1 Then GoTo Fejl
+    If Selection.Tables.Count < 1 Then GoTo fejl
     Selection.Tables(1).Select
     r = Selection.Rows.Count
     c = Selection.Columns.Count
     If r < 2 Or c < 2 Then
-        GoTo Fejl
+        GoTo fejl
     End If
 End If
     On Error Resume Next
@@ -102,11 +102,11 @@ End If
     Selection.TypeParagraph
     ReadSelection = True ' ingen fejl
 End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
 '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelection = False
-Slut:
+slut:
 
 End Function
 Public Function ReadSelectionS() As Boolean
@@ -127,14 +127,14 @@ On Error GoTo hop
 r = Selection.Rows.Count
 c = Selection.Columns.Count
 hop:
-On Error GoTo Fejl
+On Error GoTo fejl
 If r < 1 Or c < 1 Or (r = 1 And c = 1) Then
-    If Selection.Tables.Count < 1 Then GoTo Fejl
+    If Selection.Tables.Count < 1 Then GoTo fejl
     Selection.Tables(1).Select
     r = Selection.Rows.Count
     c = Selection.Columns.Count
     If r < 1 Or c < 1 Then
-        GoTo Fejl
+        GoTo fejl
     End If
 End If
     On Error Resume Next
@@ -164,34 +164,34 @@ End If
     Selection.TypeParagraph
     ReadSelectionS = True ' ingen fejl
 End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
 '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelectionS = False
-Slut:
+slut:
 
 End Function
 
 Public Function TabelCelle(r, c) As Double
-On Error GoTo Fejl
-If c > ncolumns Or r > nrows Then GoTo Slut
+On Error GoTo fejl
+If c > ncolumns Or r > nrows Then GoTo slut
 
 TabelCelle = Tabel(r, c)
 
-GoTo Slut
-Fejl:
-Slut:
+GoTo slut
+fejl:
+slut:
 
 End Function
 Public Function TabelsCelle(r, c) As String
-On Error GoTo Fejl
-If c > ncolumns Or r > nrows Then GoTo Slut
+On Error GoTo fejl
+If c > ncolumns Or r > nrows Then GoTo slut
 
 TabelsCelle = tabels(r, c)
 
-GoTo Slut
-Fejl:
-Slut:
+GoTo slut
+fejl:
+slut:
 
 End Function
 
@@ -309,7 +309,7 @@ Dim ea2 As New ExpressionAnalyser
 Dim r() As String
 Dim arr As Variant
 Dim i As Integer
-On Error GoTo Slut
+On Error GoTo slut
 
 ReDim r(1 To 1000) As String
 If Selection.OMaths.Count > 0 Then
@@ -388,7 +388,7 @@ ElseIf nrows > 0 Then
     ReDim Preserve tabels(1 To nrows, 1 To ncolumns) As String
 End If
 
-Slut:
+slut:
 End Sub
 
 Function ReadEquation(Optional ir As Range) As String
@@ -433,7 +433,7 @@ Dim antal As Integer
 Dim sstart As Long
 Dim sslut As Long
 Dim j As Integer
-On Error GoTo Slut
+On Error GoTo slut
 
 ' hvis bold giver det buildup problemer
 For j = 1 To Selection.OMaths.Count
@@ -485,7 +485,7 @@ Else
     sr.Select
 End If
 
-Slut:
+slut:
     
     sr.Select
 ' Selection.start = sstart

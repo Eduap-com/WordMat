@@ -4,7 +4,7 @@ Sub OmdrejningsLegeme()
 Dim Kommando As String
 Dim arr As Variant
 Dim i As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
     PrepareMaxima
     omax.ReadSelection
     i = 0
@@ -27,7 +27,7 @@ On Error GoTo Fejl
         i = i + 1
     Loop
     
-Fejl:
+fejl:
     Application.ScreenUpdating = True
     UserFormOmdrejninglegeme.Show
 
@@ -38,7 +38,7 @@ Sub Plot3DGraph()
     Dim Result As Variant
     Dim arr As Variant
     Dim i As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     PrepareMaxima
     omax.ReadSelection
@@ -75,10 +75,10 @@ Sub Plot3DGraph()
     End If
     
     UserForm3DGraph.Show
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub Insert3DEquation(Equation As String)

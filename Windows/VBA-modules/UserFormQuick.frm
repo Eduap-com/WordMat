@@ -38,7 +38,7 @@ End Sub
 
 Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
 '    If (KeyCode.Value = 18 Or KeyCode.Value = 78) And Shift = 4 Then ' alt+n
-On Error GoTo Slut
+On Error GoTo slut
     If KeyCode.Value = 78 And Shift = 4 Then ' alt+n
     If MaximaExact = 0 Then
         Me.Label_text.Caption = Sprog.Exact ' "Eksakt"
@@ -62,5 +62,5 @@ On Error GoTo Slut
     If Not (WoMatRibbon Is Nothing) Then
         WoMatRibbon.Invalidate
     End If
-Slut:
+slut:
 End Sub

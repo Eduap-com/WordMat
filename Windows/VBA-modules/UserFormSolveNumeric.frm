@@ -27,7 +27,7 @@ Private gemstartr As Integer
 Private gemr As Range
 
 Private Sub SaveVar()
-On Error GoTo Fejl
+On Error GoTo fejl
 '    If TextBox_variabel.text = "" Then
 '        SelectedVar = ListBox_vars.value
 '    Else
@@ -39,19 +39,19 @@ On Error GoTo Fejl
     TextBox_lval.text = Replace(TextBox_lval.text, ",", ".")
     TextBox_hval.text = Replace(TextBox_hval.text, ",", ".")
     
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     SelectedVar = ""
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_findroot_Click()
     SaveVar
     Method = "findroot"
     
-    GoTo Slut
-Fejl:
-Slut:
+    GoTo slut
+fejl:
+slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
@@ -62,7 +62,7 @@ End Sub
 Private Sub CommandButton_insertpic_Click()
 Dim ils As InlineShape
 Dim s As String, arr As Variant, sep As String
-On Error GoTo Fejl
+On Error GoTo fejl
 omax.GoToEndOfSelectedMaths
 Selection.TypeParagraph
 arr = Split(Label_ligning.Caption, "=")
@@ -78,10 +78,10 @@ s = s & TextBox_xmin.text & sep & TextBox_xmax.text & sep & "" & sep & "" & sep
 s = s & arr(0) & sep & TextBox_variabel.text & sep & "" & sep & "" & sep & "" & sep
 s = s & arr(1) & sep & TextBox_variabel.text & sep & "" & sep & "" & sep & "" & sep
 ils.AlternativeText = s
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -90,9 +90,9 @@ Private Sub CommandButton_ok_Click()
     SaveVar
     Method = "newton"
     
-    GoTo Slut
-Fejl:
-Slut:
+    GoTo slut
+fejl:
+slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
@@ -111,7 +111,7 @@ End Sub
 
 Private Sub CommandButton_visgraf_Click()
 Dim text As String
-On Error GoTo Fejl
+On Error GoTo fejl
 'Dim omax As New CMaxima
     If omax Is Nothing Then
         Set omax = New CMaxima
@@ -132,10 +132,10 @@ On Error GoTo Fejl
     omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
     DoEvents
 '    Me.Show
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_zoom_Click()
@@ -143,7 +143,7 @@ Dim dx As Single
 Dim midt As Single
 Dim xmin As Single
 Dim xmax As Single
-On Error GoTo Fejl
+On Error GoTo fejl
 xmin = CSng(TextBox_xmin.text)
 xmax = CSng(TextBox_xmax.text)
 
@@ -155,10 +155,10 @@ TextBox_xmax.text = xmax - dx
 OpdaterGraf
 
 Me.Repaint
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 
 End Sub
@@ -168,7 +168,7 @@ Dim dx As Single
 Dim midt As Single
 Dim xmin As Single
 Dim xmax As Single
-On Error GoTo Fejl
+On Error GoTo fejl
 xmin = CSng(TextBox_xmin.text)
 xmax = CSng(TextBox_xmax.text)
 
@@ -180,10 +180,10 @@ TextBox_xmax.text = xmax + dx
 OpdaterGraf
 
 Me.Repaint
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 
@@ -217,10 +217,10 @@ TextBox_xmax.text = xmin + cfakt * x + dx
 OpdaterGraf
 
     Me.Repaint
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox "Der skete en fejl. Se på tallene ved xmin og xmax", vbOKOnly, Sprog.Error
-Slut:
+slut:
     
 End Sub
 
@@ -252,7 +252,7 @@ Dim xmax As Single
 Dim cfakt As Single
 
 Label_zoom.visible = False
-If Abs(x - gemx) < 5 Then GoTo Slut
+If Abs(x - gemx) < 5 Then GoTo slut
 
 xmin = CSng(TextBox_xmin.text)
 xmax = CSng(TextBox_xmax.text)
@@ -266,7 +266,7 @@ TextBox_xmin.text = xmin + cfakt * gemx
 OpdaterGraf
 
     Me.Repaint
-Slut:
+slut:
 End Sub
 
 Private Sub Label_intervalhelp_Click()
@@ -286,7 +286,7 @@ Private Sub TextBox_xmin_AfterUpdate()
 
 End Sub
 Sub OpdaterGraf()
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
 Dim text As String
 Dim arr As Variant
@@ -317,10 +317,10 @@ Dim arr As Variant
     Image1.Picture = LoadPicture(GetTempDir() & "WordMatGraf.gif")
 #End If
 '    Image1.Picture = LoadPicture(Environ("TEMP") & "\WordMatGraf.gif")
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox "Der skete en fejl. Prøv at trykke Opdater.", vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Private Sub UserForm_Activate()
@@ -352,7 +352,7 @@ On Error Resume Next
     Kill GetTempDir() & "\WordMatGraf.gif"
 #End If
 
-On Error GoTo Fejl
+On Error GoTo fejl
     SelectedVar = ""
     ListBox_vars.Clear
     TextBox_guess.text = "1"
@@ -391,10 +391,10 @@ On Error GoTo Fejl
     
     CommandButton_ok.SetFocus
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 '    newton.Select
 
 End Sub

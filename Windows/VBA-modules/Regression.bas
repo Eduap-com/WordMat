@@ -11,7 +11,7 @@ Sub linregression()
 ' udføres fra menuen. Tabel skal være valgt
     Dim Cregr As New CRegression
     Application.ScreenUpdating = False
-On Error GoTo Fejl
+On Error GoTo fejl
     SaveBackup
     If Selection.OMaths.Count > 0 And Selection.Tables.Count = 0 Then
         Cregr.GetSetData
@@ -22,19 +22,19 @@ On Error GoTo Fejl
         Cregr.GetTableData
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputeLinRegr
     Cregr.InsertEquation
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ekspregression()
     Dim Cregr As New CRegression
     Application.ScreenUpdating = False
-On Error GoTo Fejl
+On Error GoTo fejl
     SaveBackup
     If Selection.OMaths.Count > 0 And Selection.Tables.Count = 0 Then
         Cregr.GetSetData
@@ -45,19 +45,19 @@ On Error GoTo Fejl
         Cregr.GetTableData
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputeExpRegr
     Cregr.InsertEquation
 '    MsgBox cregr.Ligning
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub potregression()
 
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim Cregr As New CRegression
     SaveBackup
     Application.ScreenUpdating = False
@@ -71,19 +71,19 @@ On Error GoTo Fejl
         Cregr.GetTableData
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputePowRegr
     Cregr.InsertEquation
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub polregression()
 
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim Cregr As New CRegression
     SaveBackup
     Application.ScreenUpdating = False
@@ -97,17 +97,17 @@ On Error GoTo Fejl
         Cregr.GetTableData
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputePolRegr
     Cregr.InsertEquation
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub UserRegression()
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim Cregr As New CRegression
     Dim sslut As Long
     Application.ScreenUpdating = False
@@ -125,7 +125,7 @@ On Error GoTo Fejl
         Selection.TypeParagraph
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputeUserRegr
     If Selection.OMaths.Count > 0 Then
@@ -136,10 +136,10 @@ On Error GoTo Fejl
         Selection.TypeParagraph
     End If
     Cregr.InsertEquation
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub InsertTabel()
         Dim antalp As Integer

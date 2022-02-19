@@ -10,7 +10,7 @@ Private DeVarList As String
 Public Sub PrepareMaxima(Optional Unit As Boolean = False)
 '    Dim UFwait2 As UserFormWaitForMaxima
 
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim op As Boolean
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
@@ -57,9 +57,9 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
         If Err.Number <> 0 Then
             MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
-        On Error GoTo Fejl
+        On Error GoTo fejl
         MaxProc.Units = 0
         MaxProc.StartMaximaProcess
         If SettCheckForUpdate Then CheckForUpdateSilent
@@ -72,7 +72,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
 #End If
         If MaxProc.ErrCode > 0 Then
             MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
-            GoTo Fejl
+            GoTo fejl
         End If
     End If
 #If Mac Then
@@ -92,9 +92,9 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
             Set MaxProcUnit = GetMaxProc() 'CreateObject("MaximaProcessClass")
             If Err.Number <> 0 Then
                 MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-                GoTo Slut
+                GoTo slut
             End If
-            On Error GoTo Fejl
+            On Error GoTo fejl
             MaxProcUnit.Units = 1
             MaxProcUnit.OutUnits = omax.ConvertUnits(OutUnits)
             MaxProcUnit.StartMaximaProcess
@@ -110,11 +110,11 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         d.Activate
 #End If
     End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     On Error Resume Next
     Unload ufwait2
-Slut:
+slut:
 End Sub
 #If Mac Then
 Function GetMaxProc() As MaximaProcess
@@ -134,7 +134,7 @@ Sub WaitForMaximaUntil(Optional StopTime As Integer = 500)
         Wait (0.1)
         i = i + 1
     Loop
-Slut:
+slut:
 End Sub
 Sub WaitForMaximaUnitUntil(Optional StopTime As Integer = 500)
     Dim i As Integer
@@ -148,11 +148,11 @@ Sub WaitForMaximaUnitUntil(Optional StopTime As Integer = 500)
         Wait (0.1)
         i = i + 1
     Loop
-Slut:
+slut:
 End Sub
 
 Public Sub PrepareMaximaNoSplash()
-    On Error GoTo Slut
+    On Error GoTo slut
     If Not SettingsRead Then ReadAllSettingsFromRegistry
     If omax Is Nothing Then
         LavRCMenu    ' højreklikmenu på ligninger
@@ -163,9 +163,9 @@ Public Sub PrepareMaximaNoSplash()
                 On Error Resume Next
                 If Err.Number <> 0 Then
                     MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-                    GoTo Slut
+                    GoTo slut
                 End If
-                On Error GoTo Fejl
+                On Error GoTo fejl
             MaxProc.Units = 0
             MaxProc.StartMaximaProcess
             If SettCheckForUpdate Then CheckForUpdateSilent
@@ -180,9 +180,9 @@ Public Sub PrepareMaximaNoSplash()
                 On Error Resume Next
                 If Err.Number <> 0 Then
                     MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-                    GoTo Slut
+                    GoTo slut
                 End If
-                On Error GoTo Fejl
+                On Error GoTo fejl
                 MaxProcUnit.Units = 1
                 MaxProcUnit.OutUnits = omax.ConvertUnits(OutUnits)
                 MaxProcUnit.StartMaximaProcess
@@ -193,8 +193,8 @@ Public Sub PrepareMaximaNoSplash()
     End If
     omax.PrepareNewCommand    ' nulstiller og finder definitioner
     '    WaitForMaximaUntil
-Fejl:
-Slut:
+fejl:
+slut:
 End Sub
 Sub RestartMaxima()
 
@@ -208,9 +208,9 @@ Sub RestartMaxima()
         Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
         If Err.Number <> 0 Then
             MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
-        On Error GoTo Fejl
+        On Error GoTo fejl
         If omax Is Nothing Then
             Set omax = New CMaxima
         End If
@@ -223,15 +223,15 @@ Sub RestartMaxima()
     End If
 #End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
      MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub MaximaCommand()
     Dim scrollpos As Double
     Dim sstart As Long, sslut As Long
-    On Error GoTo Fejl
+    On Error GoTo fejl
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -239,27 +239,27 @@ Sub MaximaCommand()
     '    Set UFWait = New UserFormWaitForMaxima
     PrepareMaxima
     omax.prevspr = ""
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     '    UFWait.Show vbModeless
     omax.ExecuteMaximaCommand
 
-    If omax.CheckForError Then GoTo Slut
+    If omax.CheckForError Then GoTo slut
 
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     omax.InsertMaximaOutput
     '   UFWait.Hide
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -268,7 +268,7 @@ Slut:
 End Sub
 Sub MaximaSolveInequality()
 ' løser een ulighed
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim eqs As Boolean
@@ -279,7 +279,7 @@ Sub MaximaSolveInequality()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    Set UFWait = New UserFormWaitForMaxima
     Set UFSelectVar = New UserFormSelectVar
 
@@ -288,7 +288,7 @@ Sub MaximaSolveInequality()
         omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
         eqs = False
         If InStr(omax.Kommando, VBA.ChrW(8804)) > 0 Or InStr(omax.Kommando, VBA.ChrW(8805)) > 0 Then
@@ -301,12 +301,12 @@ Sub MaximaSolveInequality()
         UFSelectVar.Show
         variabel = UFSelectVar.SelectedVar
         If variabel = "" Then
-            GoTo Slut
+            GoTo slut
         End If
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.MaximaSolveInequality (variabel)
 
-        If omax.CheckForError Then GoTo Slut
+        If omax.CheckForError Then GoTo slut
 
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
@@ -343,11 +343,11 @@ Sub MaximaSolveInequality()
     Else    ' ligningssystem
         MsgBox (Sprog.A(376))
     End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -364,7 +364,7 @@ End Sub
 Sub MaximaSolvePar(Optional variabel As String)
     Dim arr As Variant
     Dim fejlm As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
     '    LockWindow
     Dim IsSolved As Boolean
@@ -379,7 +379,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     Set UFSelectVar = New UserFormSelectVar
     Set UFSelectVars = New UserFormSelectVars
     Dim sstart As Long, sslut As Long
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    If UFWait Is Nothing Then Set UFWait = New UserFormWaitForMaxima
     '    Set UFWait = New UserFormWaitForMaxima
     sstart = Selection.start
@@ -387,33 +387,33 @@ Sub MaximaSolvePar(Optional variabel As String)
 
     If omax.deffejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8805)) > 1 Then
         MaximaSolveInequality
-        GoTo Slut
+        GoTo slut
     End If
     If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
         Dim Result As VbMsgBoxResult
         Result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If Result = vbNo Then GoTo Slut
+        If Result = vbNo Then GoTo slut
     End If
 
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8743)) < 1 Then
         ' kun 1 ligning
@@ -428,17 +428,17 @@ Sub MaximaSolvePar(Optional variabel As String)
         variabel = UFSelectVar.SelectedVar
         End If
         If variabel = "" Then
-            GoTo Slut
+            GoTo slut
         End If
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.tempDefs = UFSelectVar.tempDefs
         omax.MaximaSolve (variabel)
         If omax.StopNow Then
             If omax.AntalVars > 1 Then
-                GoTo Slut
+                GoTo slut
             End If
         End If
-        If omax.CheckForError Then GoTo Slut
+        If omax.CheckForError Then GoTo slut
 
 #If Mac Then
 #Else
@@ -451,7 +451,7 @@ Sub MaximaSolvePar(Optional variabel As String)
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
             resultat = MsgBox(Sprog.A(127) & vbCrLf & vbCrLf & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
-            If resultat = vbCancel Then GoTo Slut
+            If resultat = vbCancel Then GoTo slut
         End If
 
         variabel = omax.ConvertToWordSymbols(variabel)
@@ -487,7 +487,7 @@ Sub MaximaSolvePar(Optional variabel As String)
             GoTo stophop
             If omax.AntalVars > 1 Then
                 MsgBox Sprog.A(131), vbOKOnly, "WordMat"
-                GoTo Slut
+                GoTo slut
             End If
             omax.PrepareNewCommand
             omax.tempDefs = UFSelectVar.tempDefs
@@ -562,7 +562,7 @@ stophop:             If omax.AntalVars > 1 Then
 
         '    variabel = InputBox("Indtast variable som ligningssystemet skal løses for adskilt af komma", "Variable", "x,y")
 
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.tempDefs = UFSelectVars.tempDefs
         '    UFWait.ActionToPerform = "solvesystem"
         '    UFWait.VarParam = variabel
@@ -570,22 +570,22 @@ stophop:             If omax.AntalVars > 1 Then
         '    Set UFWait.omax = omax
         '    UFWait.Show
         omax.SolveSystem (variabel)
-        If omax.StopNow Then GoTo Slut
-        If omax.CheckForError Then GoTo Slut
+        If omax.StopNow Then GoTo slut
+        If omax.CheckForError Then GoTo slut
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
-        If omax.StopNow Then GoTo Slut
+        If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
 
         If omax.MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
             MsgBox Sprog.A(133), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
 
         If (omax.deffejl = True) Then
             MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
 
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
@@ -648,11 +648,11 @@ stophop:             If omax.AntalVars > 1 Then
             End If
         End If
     End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     '    omax.Luk
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
@@ -729,7 +729,7 @@ Sub MaximaEliminate()
     Dim tdefs As String
     Dim mo As Range
     Dim fejlm As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
     '    LockWindow
     Dim scrollpos As Double
@@ -741,7 +741,7 @@ Sub MaximaEliminate()
     Set UFSelectVars = New UserFormSelectVars
     Dim variabel As String
     Dim sstart As Long, sslut As Long
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    If UFWait Is Nothing Then Set UFWait = New UserFormWaitForMaxima
     '    Set UFWait = New UserFormWaitForMaxima
     sstart = Selection.start
@@ -749,12 +749,12 @@ Sub MaximaEliminate()
 
     If omax.deffejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -762,11 +762,11 @@ Sub MaximaEliminate()
     If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
         Dim Result As VbMsgBoxResult
         Result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If Result = vbNo Then GoTo Slut
+        If Result = vbNo Then GoTo slut
     End If
 
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8743)) < 1 Then
-        GoTo Slut
+        GoTo slut
     Else    ' ligningssystem
 
         omax.ReadSelection
@@ -781,29 +781,29 @@ Sub MaximaEliminate()
 
         '    variabel = InputBox("Indtast variable som ligningssystemet skal løses for adskilt af komma", "Variable", "x,y")
 
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.tempDefs = UFSelectVars.tempDefs
         '    UFWait.ActionToPerform = "solvesystem"
         '    UFWait.VarParam = variabel
         '    Set UFWait.omax = omax
         '    UFWait.Show
         omax.Eliminate (variabel)
-        If omax.StopNow Then GoTo Slut
-        If omax.CheckForError Then GoTo Slut
+        If omax.StopNow Then GoTo slut
+        If omax.CheckForError Then GoTo slut
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
-        If omax.StopNow Then GoTo Slut
+        If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
 
         If omax.MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
             MsgBox Sprog.A(133), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
 
         If (omax.deffejl = True) Then
             MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
 
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
@@ -866,11 +866,11 @@ Sub MaximaEliminate()
             End If
         End If
     End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     '    omax.Luk
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
@@ -897,7 +897,7 @@ Sub MaximaNsolve()
     Set UFSelectVars = New UserFormSelectVars
     Dim variabel As String
     Dim sstart As Long, sslut As Long
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    If UFWait Is Nothing Then Set UFWait = New UserFormWaitForMaxima
     '    Set UFWait = New UserFormWaitForMaxima
     sstart = Selection.start
@@ -905,30 +905,30 @@ Sub MaximaNsolve()
 
     If omax.deffejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8805)) > 1 Then
         MaximaSolveInequality
-        GoTo Slut
+        GoTo slut
     End If
     If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
         Dim Result As VbMsgBoxResult
         Result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If Result = vbNo Then GoTo Slut
+        If Result = vbNo Then GoTo slut
     End If
 
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8743)) < 1 Then
@@ -943,9 +943,9 @@ Sub MaximaNsolve()
         
         variabel = UFSelectVar.SelectedVar
         If variabel = "" Then
-            GoTo Slut
+            GoTo slut
         End If
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.tempDefs = UFSelectVar.tempDefs
 
         UFnsolve.Label_overskrift.Caption = ""
@@ -954,9 +954,9 @@ Sub MaximaNsolve()
         UFnsolve.variabel = variabel
         UFnsolve.Show
 
-        If omax.StopNow Then GoTo Slut
-        If omax.CheckForError Then GoTo Slut
-        If UFnsolve.Result = "afbryd" Then GoTo Slut
+        If omax.StopNow Then GoTo slut
+        If omax.CheckForError Then GoTo slut
+        If UFnsolve.Result = "afbryd" Then GoTo slut
 
         If UFnsolve.Result = "num" Then
             Selection.End = sslut    ' slut skal være først ellers går det galt
@@ -964,7 +964,7 @@ Sub MaximaNsolve()
             ActiveWindow.VerticalPercentScrolled = scrollpos
             Unload UFnsolve
             MaximaSolveNumeric UFSelectVar.ListBox_vars.text
-            GoTo Slut
+            GoTo slut
         End If
 
         omax.GoToEndOfSelectedMaths
@@ -984,7 +984,7 @@ Sub MaximaNsolve()
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
             resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
-            If resultat = vbCancel Then GoTo Slut
+            If resultat = vbCancel Then GoTo slut
         End If
 
         variabel = omax.ConvertToWordSymbols(variabel)
@@ -1015,7 +1015,7 @@ Sub MaximaNsolve()
         Variable = Replace(Variable, ",", "=1" & ListSeparator)
         Variable = Variable & "=1"
         inp = InputBox(Sprog.A(379), Sprog.A(380), Variable)
-        If inp = "" Then GoTo Slut    ' trykket cancel
+        If inp = "" Then GoTo slut    ' trykket cancel
         arr = Split(inp, ListSeparator)
 
         Variable = ""
@@ -1032,7 +1032,7 @@ Sub MaximaNsolve()
         guess = Left(guess, Len(guess) - 1)
 
 
-        If Variable = "" Then GoTo Slut
+        If Variable = "" Then GoTo slut
 
         '    UFWait.ActionToPerform = "solvesystemnumeric"
         '    Set UFWait.omax = omax
@@ -1062,11 +1062,11 @@ Sub MaximaNsolve()
             MsgBox fejlm & Sprog.A(384) & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
         End If
     End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     '    omax.Luk
     On Error Resume Next
     Unload UFnsolve
@@ -1079,7 +1079,7 @@ End Sub
 Sub MaximaSolveNumeric(Optional var As String)
 ' grafisk løsning + newton + intervalmetode
 ' var indsættes som den variabel der løses for
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim variabel As String
@@ -1095,7 +1095,7 @@ Sub MaximaSolveNumeric(Optional var As String)
     sstart = Selection.start
     sslut = Selection.End
 
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    Set UFWait = New UserFormWaitForMaxima
     Dim UFSolvenumeric As New UserFormSolveNumeric
 
@@ -1111,7 +1111,7 @@ Sub MaximaSolveNumeric(Optional var As String)
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1119,7 +1119,7 @@ Sub MaximaSolveNumeric(Optional var As String)
     If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
         Dim Result As VbMsgBoxResult
         Result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If Result = vbNo Then GoTo Slut
+        If Result = vbNo Then GoTo slut
     End If
 
     If Selection.OMaths.Count < 2 Then
@@ -1138,12 +1138,12 @@ Sub MaximaSolveNumeric(Optional var As String)
         omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
         omax.FindVariable
         omax.tempDefs = UFSelectVar.tempDefs
 
-        If UFSolvenumeric.SelectedVar = "" Then GoTo Slut
+        If UFSolvenumeric.SelectedVar = "" Then GoTo slut
         If UFSolvenumeric.Method = "newton" Then
             '        UFWait.ActionToPerform = "solvenumeric"
             '        varguess = UFSolvenumeric.SelectedVar & "=" & UFSolvenumeric.TextBox_guess.text
@@ -1168,8 +1168,8 @@ Sub MaximaSolveNumeric(Optional var As String)
 
         '    Set UFWait.omax = omax
         '    UFWait.Show
-        If omax.StopNow Then GoTo Slut
-        If omax.CheckForError Then GoTo Slut
+        If omax.StopNow Then GoTo slut
+        If omax.CheckForError Then GoTo slut
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
         If InStr(omax.MaximaOutput, VBA.ChrW(8776) & "false") > 0 Then
             omax.MaximaOutput = ""
@@ -1182,7 +1182,7 @@ Sub MaximaSolveNumeric(Optional var As String)
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
             resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
-            If resultat = vbCancel Then GoTo Slut
+            If resultat = vbCancel Then GoTo slut
         End If
 
         If Len(omax.MaximaOutput) > 1 And InStr(omax.MaximaOutput, "Lisperror") < 1 Then
@@ -1219,11 +1219,11 @@ Sub MaximaSolveNumeric(Optional var As String)
 
     End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1233,7 +1233,7 @@ Sub beregn()
 '    MsgBox WordWindowNavn
 '    Dim omax As New CMaxima
     Dim fejlm As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     '    Application.ScreenUpdating = False
     '   LockWindow
 #If Mac Then
@@ -1254,30 +1254,30 @@ Sub beregn()
     PrepareMaxima
     omax.prevspr = ""
 
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If Selection.OMaths.Count > 1 Then
         MsgBox Sprog.A(149), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
-    If omax.Kommando = "" Then GoTo Slut
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If omax.Kommando = "" Then GoTo slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
     '    Set UFWait.omax = omax
     '    UFWait.ActionToPerform = "beregn"
     '    UFWait.Show
     '    If omax.StopNow Then GoTo slut
     omax.beregn
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
     '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
 
 #If Mac Then
@@ -1302,11 +1302,11 @@ Sub beregn()
         Oundo.EndCustomRecord
 #End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
 #If Mac Then
     d.Activate
 #End If
@@ -1319,7 +1319,7 @@ Slut:
 
 End Sub
 Sub Omskriv()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim s As String
     Dim UFomskriv As New UserFormOmskriv
     PrepareMaxima
@@ -1337,12 +1337,12 @@ Sub Omskriv()
     SaveSettingsExact = MaximaExact
     SaveSettingsOutunits = OutUnits
     SaveSettingsLog = MaximaLogOutput
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1350,21 +1350,21 @@ Sub Omskriv()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    omax.OpenCmd
     omax.FindVariable
     UFomskriv.vars = omax.vars
     UFomskriv.Show
-    If UFomskriv.annuller Then GoTo Slut
+    If UFomskriv.annuller Then GoTo slut
 
     omax.tempDefs = UFomskriv.tempDefs
     omax.Omskriv UFomskriv.CheckBox_vidnotation.Value, UFomskriv.CheckBox_auto.Value, UFomskriv.CheckBox_factor.Value, UFomskriv.CheckBox_expand.Value, UFomskriv.CheckBox_rationaliser.Value, UFomskriv.CheckBox_trigreduce.Value
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
 
     If Not (UFomskriv.SammeLinje) Then
         omax.GoToEndOfSelectedMaths
@@ -1402,11 +1402,11 @@ Sub Omskriv()
         InsertOutput "=" & omax.MaximaOutput
     End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     MaximaCifre = SaveSettingsCifre
     MaximaExact = SaveSettingsExact
     OutUnits = SaveSettingsOutunits
@@ -1418,7 +1418,7 @@ Slut:
 
 End Sub
 Sub reducer()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim scrollpos As Double
@@ -1426,12 +1426,12 @@ Sub reducer()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1439,15 +1439,15 @@ Sub reducer()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    omax.OpenCmd
     omax.Reduce
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
 
@@ -1464,11 +1464,11 @@ Sub reducer()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1476,7 +1476,7 @@ Slut:
 
 End Sub
 Sub CompareTest()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim scrollpos As Double
@@ -1484,12 +1484,12 @@ Sub CompareTest()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1497,15 +1497,15 @@ Sub CompareTest()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    omax.OpenCmd
     omax.CompareTest
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -1529,11 +1529,11 @@ Sub CompareTest()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1541,7 +1541,7 @@ Slut:
 
 End Sub
 Sub faktoriser()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim scrollpos As Double
@@ -1549,12 +1549,12 @@ Sub faktoriser()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1562,15 +1562,15 @@ Sub faktoriser()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    omax.OpenCmd
     omax.Factor
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -1586,11 +1586,11 @@ Sub faktoriser()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1598,7 +1598,7 @@ Slut:
 
 End Sub
 Sub udvid()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim sstart As Long, sslut As Long
@@ -1606,7 +1606,7 @@ Sub udvid()
     sslut = Selection.End
     Dim scrollpos As Double
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
     '    Set UFWait = New UserFormWaitForMaxima
 
@@ -1616,20 +1616,20 @@ Sub udvid()
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    omax.OpenCmd
     omax.Expand
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -1644,11 +1644,11 @@ Sub udvid()
 
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1656,7 +1656,7 @@ Slut:
 
 End Sub
 Sub Differentier()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim variabel As String
@@ -1665,7 +1665,7 @@ Sub Differentier()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1673,22 +1673,22 @@ Sub Differentier()
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     variabel = InputBox(Sprog.A(51), Sprog.Variable, "x")
-    If variabel = "" Then GoTo Slut
+    If variabel = "" Then GoTo slut
     '    omax.OpenCmd
     omax.Differentier variabel
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    Selection.TypeParagraph
@@ -1705,11 +1705,11 @@ Sub Differentier()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1717,7 +1717,7 @@ Slut:
 
 End Sub
 Sub Integrer()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim variabel As String
@@ -1727,11 +1727,11 @@ Sub Integrer()
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    MsgBox WordWindowNavn
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1739,17 +1739,17 @@ Sub Integrer()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     variabel = InputBox(Sprog.A(51), Sprog.Variable, "x")
-    If variabel = "" Then GoTo Slut
+    If variabel = "" Then GoTo slut
     '    omax.OpenCmd
     omax.Integrer variabel
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    Selection.TypeParagraph
@@ -1767,11 +1767,11 @@ Sub Integrer()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1785,7 +1785,7 @@ Sub SolveDENumeric()
     Dim xmin As String, xmax As String, xstep As String, DElist As String, varlist As String, guesslist As String
     Dim ea As New ExpressionAnalyser
     Dim UFdiffeq As New UserFormDeSolveNumeric
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     ea.SetNormalBrackets
 
@@ -1795,7 +1795,7 @@ Sub SolveDENumeric()
 
     PrepareMaxima
 
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count > 0 And sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1803,7 +1803,7 @@ Sub SolveDENumeric()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     omax.FindVariable
@@ -1878,7 +1878,7 @@ Sub SolveDENumeric()
     UFdiffeq.TextBox_varx.text = variabel
 
     UFdiffeq.Show
-    If UFdiffeq.luk Then GoTo Slut
+    If UFdiffeq.luk Then GoTo slut
 
 
     '    MsgBox omax.MaximaOutput
@@ -1891,11 +1891,11 @@ Sub SolveDENumeric()
     End If
 
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1937,7 +1937,7 @@ Sub SolveDE()
     SolveDEpar
 End Sub
 Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim vars As String
@@ -1952,11 +1952,11 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    MsgBox WordWindowNavn
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 '    If MaximaUnits Then ' ikke et problem for unitimage
 '        MsgBox Sprog.A(159), vbOKOnly, Sprog.Error
@@ -1968,10 +1968,10 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    funktion = InputBox("Indtast funktion som udtrykket skal løses for", "Variabel", "y")
     '    variabel = InputBox("Indtast variabel som funktionen afhænger af", "Variabel", "x")
@@ -2011,16 +2011,16 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         UFdiffeq.TextBox_variabel.text = variabel
         UFdiffeq.Label_ligning.Caption = Replace(omax.ConvertToAscii(omax.Kommando), " ", "")
         UFdiffeq.Show
-        If UFdiffeq.luk Then GoTo Slut
+        If UFdiffeq.luk Then GoTo slut
         variabel = UFdiffeq.TextBox_variabel.text
         funktion = UFdiffeq.TextBox_funktion.text
     End If
-    If variabel = "" Then GoTo Slut
+    If variabel = "" Then GoTo slut
     '    omax.OpenCmd
     omax.tempDefs = UFdiffeq.tempDefs
     omax.SolveDE funktion, variabel, UFdiffeq.TextBox_startx, UFdiffeq.TextBox_starty, UFdiffeq.TextBox_starty2, UFdiffeq.TextBox_bcx, UFdiffeq.TextBox_bcy
-    If omax.StopNow Then GoTo Slut
-    If omax.CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If omax.CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2046,11 +2046,11 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først ellers går det galt
     Selection.start = sstart

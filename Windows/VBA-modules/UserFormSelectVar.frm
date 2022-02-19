@@ -29,7 +29,7 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo Fejl
+On Error GoTo fejl
 Dim arr As Variant
 Dim i As Integer
     If OptionButton_numonly.Value = True Then
@@ -86,10 +86,10 @@ Dim i As Integer
     End If
     End If
     
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     SelectedVar = ""
-Slut:
+slut:
     UFSelectVar.hide
     Application.ScreenUpdating = False
 End Sub

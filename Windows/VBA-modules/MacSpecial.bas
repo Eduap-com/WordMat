@@ -180,6 +180,37 @@ Function CheckAppleScriptTaskWordScriptFile(ScriptFileName As String) As Boolean
     End If
 End Function
 
+Function DataFolder() As String
+    If mDataFolder <> "" Then
+        DataFolder = mDataFolder
+        Exit Function
+   End If
+    DataFolder = MacScript("return POSIX path of (path to desktop folder) as string")
+    DataFolder = Replace(DataFolder, "/Desktop", "") & "Library/containers/com.microsoft.Word/Data/"
+    mDataFolder = DataFolder
+End Function
+Public Function ExecuteMaximaViaFile(MaximaCommand As String, Optional ByVal MaxWait As Integer = 10, Optional UnitCore As Boolean = False) As String
+' M1 via textfiler
+' scriptfile must be placed in ~/Library/Application Scripts/com.microsoft.Word/
+' ~/library is a hidden folder in the user folder
+' filetype: .scpt or .applescript
+On Error GoTo fejl
+'    SaveCommandFile MaximaCommand
+    If UnitCore Then
+'        AppleScriptTask "WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait)
+        ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "§" & MaximaCommand)
+    Else
+        ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaxima", CStr(MaxWait) & "§" & MaximaCommand)
+    End If
+'    ExecuteMaximaViaFile = ReadMaximaOutputFile()
+'MsgBox ExecuteMaximaViaFile
+    GoTo slut
+fejl:
+    ExecuteMaximaViaFile = "Fejln" & Err.Number
+slut:
+    
+End Function
+
 #End If
 
 

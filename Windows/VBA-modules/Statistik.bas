@@ -105,7 +105,7 @@ End Function
 'End Function
 
 Sub GrupperIntervaller()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim Sdata As String
     Dim Sintervaller As String
     
@@ -126,5 +126,5 @@ Sub GrupperIntervaller()
     Selection.Collapse wdCollapseEnd
     Selection.TypeParagraph
     UFgrupper.Show vbModeless
-Fejl:
+fejl:
 End Sub

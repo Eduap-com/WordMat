@@ -33,7 +33,7 @@ Dim arrdata As Variant
 Dim arrint As Variant
 Dim i As Integer
 Dim j As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 Me.hide
 'Application.ScreenUpdating = False
 Data = TextBox_data.text
@@ -83,7 +83,7 @@ For i = 0 To n
         If Trim(arr(0)) = "" Then
             
         Else
-            GoTo Fejl
+            GoTo fejl
         End If
     End If
     Max = arr(1)
@@ -96,7 +96,7 @@ For i = 0 To n
             arrdata(j) = Replace(arrdata(j), ",", ".")
             v = CDbl(arrdata(j))
             v = val(arrdata(j))
-            On Error GoTo Fejl
+            On Error GoTo fejl
             If v > Min And v <= Max Then
                 Tabel.Cell(i + 2, 3).Range.text = val(Tabel.Cell(i + 2, 3).Range.text) + 1
             End If
@@ -105,10 +105,10 @@ For i = 0 To n
 Next
 End If
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox "Der er en fejl i dine intervaller. Hver linje skal indeholde interval f.eks. 5-10.", vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)

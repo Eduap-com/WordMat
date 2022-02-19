@@ -31,14 +31,14 @@ Public Sub SaveFile(doctype As Integer)
    If Not latexfil.IsMikTexInstalled Then
       MsgBox "MikTex is not installed. You will now be sent to miktex.org where you can download. After the download you will also be prompted to download some packages the first time you run the converter. Just click ok.", vbOKOnly, Sprog.Error
       OpenLink "https://miktex.org/download"
-      GoTo Slut
+      GoTo slut
    End If
    '***
    
    'Check if document saved
    If ActiveDocument.path = "" Then
       MsgBox "Save your document before attempting to convert to Latex. The Latex files will be placed in a folder next to your document-file.", vbOKOnly, "File not saved"
-      GoTo Slut
+      GoTo slut
    End If
    
    Dim ufwait As New UserFormWaitForMaxima
@@ -235,7 +235,7 @@ Public Sub SaveFile(doctype As Integer)
     
    ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
    If HasBib Then
-      Dim src As Source, srcI As Integer, sXML As String, SrcTitle As String, SrcAuthor As String, SrcYear As String, SrcPubl As String, SrcEdition As String, nl As String, pn As String, fn As String, ln As String
+      Dim src As Source, srcI As Integer, sXML As String, SrcTitle As String, SrcAuthor As String, SrcYear As String, SrcPubl As String, SrcEdition As String, nl As String, pn As String, FN As String, ln As String
       If HiddenDoc.Bibliography.Sources.Count > 0 Then
          srcI = 1
          latexfil.InsertText "\newpage" & vbCrLf
@@ -250,14 +250,14 @@ Public Sub SaveFile(doctype As Integer)
             nl = ExtractTag(sXML, "<b:NameList>", "</b:NameList>")
             Do
                pn = ExtractTag(nl, "<b:Person>", "</b:Person>")
-               fn = ExtractTag(pn, "<b:First>", "</b:First>")
+               FN = ExtractTag(pn, "<b:First>", "</b:First>")
                ln = ExtractTag(pn, "<b:Last>", "</b:Last>")
-               If fn <> "" Or ln <> "" Then
-                  SrcAuthor = SrcAuthor & fn & " " & ln & ", "
+               If FN <> "" Or ln <> "" Then
+                  SrcAuthor = SrcAuthor & FN & " " & ln & ", "
                   p = InStr(nl, "</b:Person>")
                   nl = right(nl, Len(nl) - p - 10)
                End If
-            Loop While fn <> "" And ln <> "" And nl <> ""
+            Loop While FN <> "" And ln <> "" And nl <> ""
             
             '         MsgBox sXML
             If SrcAuthor <> "" Then latexfil.InsertText "  " & SrcAuthor & vbCrLf
@@ -292,7 +292,7 @@ Public Sub SaveFile(doctype As Integer)
    '    d2.Close False
    '    MainDoc.Activate
    SaveSel.Select
-Slut:
+slut:
    Unload ufwait
 End Sub
 Sub ConvertList(l As List)
@@ -412,10 +412,10 @@ Sub ConvertImagesToLatex(d As Document)
       sh2.Delete
    Next
    
-   GoTo Slut
-Fejl:
+   GoTo slut
+fejl:
    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure ConvertImagesToLatex, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
-Slut:
+slut:
 End Sub
 
 Sub SortImagCol(coll As Collection, first As Long, last As Long)

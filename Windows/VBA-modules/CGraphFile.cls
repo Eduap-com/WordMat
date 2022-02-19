@@ -74,7 +74,7 @@ End Sub
 
 Public Sub Save(filnavn As String)
 Dim filnr As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 
 InsertDataSection
 InsertCustomFunctions
@@ -89,10 +89,10 @@ Print #filnr, GraphText  ' print skriver uden " "
 'Write #filnr,    ' Write blank line.
 'Write #filnr, MyError; " is an error value"
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Close #filnr    ' Close file.
 
 End Sub

@@ -29,7 +29,7 @@ End Sub
 
 Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
     Dim n As Long
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If Not EventsOn Then Exit Sub
     EventsOn = False
     n = val(TextBox_eps.text)
@@ -49,11 +49,11 @@ Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shif
 '        Label_epswarning.visible = False
     End If
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
         Label_epswarning.Caption = Sprog.A(46)
         Label_eps.visible = True
-Slut:
+slut:
     EventsOn = True
 
 End Sub

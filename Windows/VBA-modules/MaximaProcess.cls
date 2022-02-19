@@ -55,9 +55,9 @@ Sub StartMaximaProcess(Optional waittime As LongPtr = 15)
     mIndex = 1
         If r < 1 Then
             MsgBox "Error starting Maxima", vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
-Slut:
+slut:
 End Sub
 Sub CloseProcess()
     CloseMaxima
@@ -102,7 +102,7 @@ End Function
 Sub ExecuteMaximaCommand(Command As String, WaitForIt As Integer)
 Dim l As LongPtr, nocmd As LongPtr
 Dim ea As New ExpressionAnalyser
-On Error GoTo Fejl
+On Error GoTo fejl
     mFinished = 0
     mQuestion = 0
     Command = "[" & GuiSettingsString & "]$" & Command & vbLf
@@ -127,10 +127,10 @@ On Error GoTo Fejl
 '        End If
         CheckForQuestion
     End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox "Maxima execute error", vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub AnswerQuestion(answer As String)
 ' check c#
@@ -168,7 +168,7 @@ Dim l As LongPtr
 Dim stoptext As String
 Dim OutputBuffer As String
 Dim t As String
-On Error GoTo Slut
+On Error GoTo slut
     stoptext = "(%i" & mIndex & ")"
     StopTime = StopTime * 10
 If StopTime = 0 Then StopTime = 1
@@ -194,38 +194,38 @@ WaitForMaximaUntil = 1
 '        msgbox stoptext & vbLf & vbLf & lastOutput
         If InStr(lastOutput, stoptext) > 0 Then
             mFinished = 1
-            GoTo Slut
+            GoTo slut
         ElseIf InStr(lastOutput, "Console interrupt.") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo Slut
+            GoTo slut
         ElseIf InStr(lastOutput, "Acceptable answers are") > 0 Then
             mFinished = 1
             mQuestion = 1
-            GoTo Slut
+            GoTo slut
         ElseIf InStr(lastOutput, "Nonalgebraic argument given to 'topoly'") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo Slut
+            GoTo slut
         ElseIf InStr(lastOutput, "log: log(0) has been generated.") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo Slut
+            GoTo slut
         ElseIf InStr(lastOutput, "incorrect syntax:") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo Slut
+            GoTo slut
         ElseIf InStr(lastOutput, "positive, negative or zero?") > 0 Or InStr(lastOutput, "positive or negative?") > 0 Then
             mFinished = 1
             mQuestion = 1
-            GoTo Slut
+            GoTo slut
         ElseIf InStr(lastOutput, "variables to solve for?") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo Slut
+            GoTo slut
         ElseIf InStr(lastOutput, "syntax error") > 0 Then
             mFinished = 1
-            GoTo Slut
+            GoTo slut
         End If
         i = i + 1
         usleep 100000 ' vent 1/10 s
@@ -236,10 +236,10 @@ WaitForMaximaUntil = 1
         MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     End If
 '    End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
         WaitForMaximaUntil = -1 'error
-Slut:
+slut:
 End Function
 
 Public Sub Reset(extrakommando As String)
@@ -315,10 +315,10 @@ Dim c As Long
 '    MsgBox testFunc()
     
 '    c = ForceDivZero()
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox "divzero"
-Slut:
+slut:
 End Sub
 #End If
 

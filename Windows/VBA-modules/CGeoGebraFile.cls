@@ -490,7 +490,7 @@ End Sub
 Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
     Dim pos As Integer
     
-    If InStr(Expr, "matrix") > 0 Then GoTo Slut ' matrix/vektor ikke understøttet endnu
+    If InStr(Expr, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke understøttet endnu
     
     pos = InStr(funkname, "(")
     If pos > 1 Then
@@ -558,7 +558,7 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
     pointSizeelement.setAttribute "thickness", "2"
     pointSizeelement.setAttribute "type", "0"
     
-Slut:
+slut:
 End Sub
 
 'Sub CreateElement()

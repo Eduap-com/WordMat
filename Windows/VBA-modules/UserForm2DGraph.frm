@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm2DGraph 
    Caption         =   "Plot af grafer og punkter i planen"
-   ClientHeight    =   7160
+   ClientHeight    =   7170
    ClientLeft      =   -30
    ClientTop       =   45
    ClientWidth     =   15945
@@ -27,10 +27,13 @@ Private DisableEvents As Boolean
 Private Sub CommandButton_cancel_Click()
     On Error Resume Next
     PicOpen = False
+#If Mac Then
+#Else
     If MaxProc.Finished = 0 Then
         MaxProc.CloseProcess
         MaxProc.StartMaximaProcess
     End If
+#End If
     Unload Me
 End Sub
 
@@ -44,12 +47,12 @@ End Sub
 
 Private Sub Label_symbol_Click()
 Dim ctrl As control
-On Error GoTo Fejl
+On Error GoTo fejl
 Set ctrl = Me.ActiveControl
 If Left(ctrl.Name, 7) <> "TextBox" Then Set ctrl = TextBox_titel
 UserFormSymbol.Show
 ctrl.text = ctrl.text & UserFormSymbol.tegn
-Fejl:
+fejl:
 End Sub
 
 
@@ -579,7 +582,7 @@ End If
 'If TextBox_ligning5.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning5, 4)
 'If TextBox_ligning6.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning6, 5)
 
-On Error GoTo Slut
+On Error GoTo slut
 'If TextBox_ligning1.text <> "" Then Call SetLineStyle(ComboBox_ligning1, 1)
 'If TextBox_ligning2.text <> "" Then Call SetLineStyle(ComboBox_ligning2, 2)
 'If TextBox_ligning3.text <> "" Then Call SetLineStyle(ComboBox_ligning3, 3)
@@ -614,7 +617,7 @@ On Error GoTo Slut
     End If
 
 
-Slut:
+slut:
 On Error GoTo slut2
     ws.Range("p3").Value = Me.TextBox_ymin.text
     ws.Range("q3").Value = Me.TextBox_ymax.text
@@ -742,10 +745,10 @@ If tb.text <> "" Then
     Next
         
 End If
-GoTo Slut:
+GoTo slut:
 fejlindtast:
     MsgBox Sprog.A(300) & " " & col + 1
-Slut:
+slut:
 
 End Sub
 
@@ -876,7 +879,7 @@ Dim arr As Variant
 
 End Function
 Function GetDraw2Dtext(Optional highres As Double = 1) As String
-On Error GoTo Fejl
+On Error GoTo fejl
 Dim grafobj As String
 Dim xmin As String
 Dim xmax As String
@@ -1320,7 +1323,7 @@ End If
         End If
     End If
     
-    If Len(grafobj) = 0 Then GoTo Slut ' ellers fejler når print starter op, men med denne fejler retningsfelt hvis alene
+    If Len(grafobj) = 0 Then GoTo slut ' ellers fejler når print starter op, men med denne fejler retningsfelt hvis alene
 
 ' diverse
     If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
@@ -1370,17 +1373,17 @@ End If
     End If
 
     GetDraw2Dtext = grafobj
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Function
 Private Sub OpdaterGraf(Optional highres As Double = 1)
 Dim text As String
 Dim df As String
 Dim dfsol As String
 Dim pm As String
-On Error GoTo Fejl
+On Error GoTo fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
@@ -1437,7 +1440,7 @@ On Error GoTo Fejl
         If omax.MaximaOutput = "" Then
             Label_wait.Caption = "Fejl!"
             Label_wait.visible = True
-            GoTo Slut
+            GoTo slut
         Else
             DoEvents
 #If Mac Then
@@ -1452,15 +1455,15 @@ On Error GoTo Fejl
         Label_wait.visible = False
     End If
     Label_wait.visible = False
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     On Error Resume Next
     Label_wait.Caption = Sprog.A(94)
     Label_wait.Font.Size = 12
     Label_wait.Width = 150
     Label_wait.visible = True
     Image1.Picture = Nothing
-Slut:
+slut:
 
 End Sub
 Private Sub GnuPlot()
@@ -1475,15 +1478,15 @@ Dim text As String
     DoEvents
     End If
 
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_linregr_Click()
     Dim Cregr As New CRegression
-    On Error GoTo Slut
+    On Error GoTo slut
     Cregr.Datatext = TextBox_punkter.text
     Cregr.ComputeLinRegr
 '    Selection.Collapse
@@ -1506,12 +1509,12 @@ Private Sub CommandButton_linregr_Click()
 
     OpdaterGraf
     Me.Repaint
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_polregr_Click()
     Dim Cregr As New CRegression
-    On Error GoTo Slut
+    On Error GoTo slut
     
     Cregr.Datatext = TextBox_punkter.text
     Cregr.ComputePolRegr
@@ -1535,11 +1538,11 @@ Private Sub CommandButton_polregr_Click()
     
     OpdaterGraf
     Me.Repaint
-Slut:
+slut:
 End Sub
 Private Sub CommandButton_ekspregr_Click()
    Dim Cregr As New CRegression
-    On Error GoTo Slut
+    On Error GoTo slut
     
     Cregr.Datatext = TextBox_punkter.text
     Cregr.ComputeExpRegr
@@ -1563,12 +1566,12 @@ Private Sub CommandButton_ekspregr_Click()
     
     OpdaterGraf
     Me.Repaint
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_potregr_Click()
        Dim Cregr As New CRegression
-    On Error GoTo Slut
+    On Error GoTo slut
     
     Cregr.Datatext = TextBox_punkter.text
     Cregr.ComputePowRegr
@@ -1592,7 +1595,7 @@ Private Sub CommandButton_potregr_Click()
 
     OpdaterGraf
     Me.Repaint
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_nulstil_Click()
@@ -1872,7 +1875,7 @@ Private Sub MMathPlot()
 
     hide
     
-Slut:
+slut:
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
@@ -1993,7 +1996,7 @@ Dim Temp As Single
 Dim s As String
 
 Label_zoom.visible = False
-If Abs(x - gemx) < 5 Then GoTo Slut
+If Abs(x - gemx) < 5 Then GoTo slut
 
 xmin = ConvertStringToNumber(TextBox_xmin.text)
 xmax = ConvertStringToNumber(TextBox_xmax.text)
@@ -2011,7 +2014,7 @@ End If
 OpdaterGraf
 
     Me.Repaint
-Slut:
+slut:
 End Sub
 Private Sub Image1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 Dim xmin As Single
@@ -2049,10 +2052,10 @@ End If
 OpdaterGraf
 
     Me.Repaint
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.A(95), vbOKOnly, Sprog.Error
-Slut:
+slut:
     
 End Sub
 Function ConvertPixelToCoordX(x As Single) As Single
@@ -2080,7 +2083,7 @@ Dim xmin As Single
 Dim xmax As Single
 Dim ymin As Single
 Dim ymax As Single
-On Error GoTo Fejl
+On Error GoTo fejl
 xmin = ConvertStringToNumber(TextBox_xmin.text)
 xmax = ConvertStringToNumber(TextBox_xmax.text)
 ymin = ConvertStringToNumber(TextBox_ymin.text)
@@ -2100,10 +2103,10 @@ End If
 OpdaterGraf
 
 Me.Repaint
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 
 End Sub
@@ -2115,7 +2118,7 @@ Dim xmin As Single
 Dim xmax As Single
 Dim ymin As Single
 Dim ymax As Single
-On Error GoTo Fejl
+On Error GoTo fejl
 xmin = ConvertStringToNumber(TextBox_xmin.text)
 xmax = ConvertStringToNumber(TextBox_xmax.text)
 ymin = ConvertStringToNumber(TextBox_ymin.text)
@@ -2135,17 +2138,17 @@ End If
 OpdaterGraf
  
 Me.Repaint
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Private Sub CommandButton_insertpic_Click()
 Dim ils As InlineShape
 Dim s As String
 Dim sep As String
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
 #Else
     OpdaterGraf 3
@@ -2189,10 +2192,10 @@ s = s & CheckBox_gitter.Value & sep & CheckBox_logx.Value & sep & CheckBox_logy.
 ils.AlternativeText = s
 PicOpen = False
 Unload Me
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -2466,7 +2469,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

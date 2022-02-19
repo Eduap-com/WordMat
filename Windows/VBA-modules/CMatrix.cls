@@ -17,14 +17,14 @@ Private Sub Class_Initialize()
 End Sub
 
 Public Property Get Element(r As Integer, c As Integer) As Variant
-On Error GoTo Fejl
-If c > Columns Or r > Rows Then GoTo Slut
+On Error GoTo fejl
+If c > Columns Or r > Rows Then GoTo slut
 
 Element = Tabel(r, c)
 
-GoTo Slut
-Fejl:
-Slut:
+GoTo slut
+fejl:
+slut:
 
 End Property
 

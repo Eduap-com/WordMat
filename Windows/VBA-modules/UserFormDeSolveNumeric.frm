@@ -39,7 +39,7 @@ Dim ils As InlineShape
 Dim sep As String, s As String
 Dim pointText As String, i As Long
 Dim pointText2 As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     InsertType = 1
     If ListOutput = vbNullString Then SolveDE
     PlotOutput 3
@@ -89,17 +89,17 @@ s = s & "true" & sep & "false" & sep & "false" & sep & "false" & sep
 
 ils.AlternativeText = s
 Unload Me
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
 Private Sub CommandButton_inserttabel_Click()
 Dim Tabel As Table
 Dim i As Long, j As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If ListOutput = vbNullString Then SolveDE
     InsertType = 2
         Application.ScreenUpdating = False
@@ -189,10 +189,10 @@ Dim i As Long, j As Integer
     Next
     
     Unload Me
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -311,7 +311,7 @@ Sub SolveDE()
     DElist = "["
     If TextBox_var1.text = vbNullString Or TextBox_eq1.text = vbNullString Or TextBox_init1.text = vbNullString Then
         MsgBox "Der mangler data", vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     Else
         n = n + 1
         varlist = varlist & TextBox_var1.text & ","
@@ -393,12 +393,12 @@ Sub SolveDE()
         Next
         i = i + 1
     Loop While ea.pos < ea.Length - 1 And i < 1000
-Slut:
+slut:
 End Sub
 
 Sub PlotOutput(Optional highres As Double = 1)
 Dim text As String, yAxislabel As String
-On Error GoTo Fejl
+On Error GoTo fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
@@ -519,7 +519,7 @@ On Error GoTo Fejl
         If omax.MaximaOutput = "" Then
             Label_wait.Caption = "Fejl!"
             Label_wait.visible = True
-            GoTo Slut
+            GoTo slut
         Else
             DoEvents
 #If Mac Then
@@ -534,15 +534,15 @@ On Error GoTo Fejl
         Label_wait.visible = False
     End If
     Label_wait.visible = False
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     On Error Resume Next
     Label_wait.Caption = Sprog.A(94)
     Label_wait.Font.Size = 12
     Label_wait.Width = 150
     Label_wait.visible = True
     Image1.Picture = Nothing
-Slut:
+slut:
 
 End Sub
 

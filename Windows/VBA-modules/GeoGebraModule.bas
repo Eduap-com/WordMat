@@ -9,7 +9,7 @@ Option Explicit
 
 
 Sub GeoGebra()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim geogebrasti As String
     Dim geogebrafilersti As String
     Dim appnr As Integer
@@ -22,7 +22,7 @@ Sub GeoGebra()
     ufwait.Show vbModeless
     
     geogebrasti = GeoGebraPath()
-    If geogebrasti = "" Then GoTo Fejl ' hvis geogebra ikke installeret så fejl
+    If geogebrasti = "" Then GoTo fejl ' hvis geogebra ikke installeret så fejl
 '    geogebrafilersti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     geogebrafilersti = GetTempDir()
     
@@ -35,7 +35,7 @@ Sub GeoGebra()
         geogebrasti = geogebrasti & " """ & geogebrafilersti & """"
     Else
         MsgBox "The GeoGebra.ggb file cannot be located", vbOKOnly, Sprog.Error
-        GoTo Fejl
+        GoTo fejl
     End If
     
 #If Mac Then
@@ -51,14 +51,14 @@ Sub GeoGebra()
     DoEvents
     Unload ufwait
     
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     UserFormGeoGebra.Show
-Slut:
+slut:
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
     If FileExists(GeoGebraPath) Then Exit Function
@@ -95,10 +95,10 @@ On Error GoTo Fejl
         GeoGebraPath = """" & GeoGebraPath & """"
     End If
 #End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     GeoGebraPath = ""
-Slut:
+slut:
 End Function
 Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
@@ -109,7 +109,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Dim dd As New DocData
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ea.SetNormalBrackets
     ea2.SetNormalBrackets
     geogebrafil.Show3D = False
@@ -256,10 +256,10 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     CreateZipFile geogebrasti & "geogebra.zip", geogebrasti & "geogebra.xml"
     Name geogebrasti & "geogebra.zip" As geogebrasti & "geogebra.ggb"
 #End If
-    GoTo Slut
-Fejl:
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 On Error Resume Next
     omax.ConvertLnLog = True
 End Sub
@@ -342,10 +342,10 @@ Sub CreateZipFile(zipfilnavn As Variant, filnavn As Variant, Optional filnavn2 A
     
 '    On Error GoTo 0
 #End If
-GoTo Slut
-Fejl:
+GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
  
