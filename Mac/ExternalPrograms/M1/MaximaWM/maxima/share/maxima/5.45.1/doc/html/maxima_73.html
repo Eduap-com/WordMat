@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for Fortran Output (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for Fortran Output (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for Fortran Output (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_68.html" rel="up" title="File Input and Output">
+<link href="maxima_72.html" rel="prev" title="Functions and Variables for TeX Output">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Functions-and-Variables-for-Fortran-Output">
+<div class="header">
+<p>
+Previous: <a href="maxima_72.html" accesskey="p" rel="prev">Functions and Variables for TeX Output</a>, Up: <a href="maxima_68.html" accesskey="u" rel="up">File Input and Output</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-Fortran-Output-1"></span><h3 class="section">13.5 Functions and Variables for Fortran Output</h3>
+
+<span id="fortindent"></span><span id="Item_003a-Input_002fdefvr_002ffortindent"></span><dl class="def">
+<dt id="index-fortindent"><span class="category">Option variable: </span><span><strong>fortindent</strong><a href='#index-fortindent' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>0</code>
+</p>
+<p><code>fortindent</code> controls the left margin indentation of
+expressions printed out by the <code><a href="#fortran">fortran</a></code> command.  <code>0</code> gives normal
+printout (i.e., 6 spaces), and positive values will causes the
+expressions to be printed farther to the right.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+</div>
+</p></dd></dl>
+
+<span id="fortran"></span><span id="Item_003a-Input_002fdeffn_002ffortran"></span><dl class="def">
+<dt id="index-fortran"><span class="category">Function: </span><span><strong>fortran</strong> <em>(<var>expr</var>)</em><a href='#index-fortran' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Prints <var>expr</var> as a Fortran statement.
+The output line is indented with spaces.
+If the line is too long, <code>fortran</code> prints continuation lines.
+<code>fortran</code> prints the exponentiation operator <code>^</code> as <code>**</code>,
+and prints a complex number <code>a + b %i</code> in the form <code>(a,b)</code>.
+</p>
+<p><var>expr</var> may be an equation.  If so, <code>fortran</code> prints an assignment
+statement, assigning the right-hand side of the equation to the left-hand side.
+In particular, if the right-hand side of <var>expr</var> is the name of a matrix,
+then <code>fortran</code> prints an assignment statement for each element of the
+matrix.
+</p>
+<p>If <var>expr</var> is not something recognized by <code>fortran</code>,
+the expression is printed in <code><a href="maxima_9.html#grind">grind</a></code> format without complaint.
+<code>fortran</code> does not know about lists, arrays, or functions.
+</p>
+<p><code><a href="#fortindent">fortindent</a></code> controls the left margin of the printed lines.
+<code>0</code> is the normal margin (i.e., indented 6 spaces).  Increasing
+<code>fortindent</code> causes expressions to be printed further to the right.
+</p>
+<p>When <code><a href="#fortspaces">fortspaces</a></code> is <code>true</code>, <code>fortran</code> fills out
+each printed line with spaces to 80 columns.
+</p>
+<p><code>fortran</code> evaluates its arguments; quoting an argument defeats evaluation.
+<code>fortran</code> always returns <code>done</code>.
+</p>
+<p>See also the function <code><a href="maxima_235.html#function_005ff90">f90</a></code> for printing one or more
+expressions as a Fortran 90 program.
+</p>
+<p>Examples:
+</p>
+<pre class="verbatim">(%i1) expr: (a + b)^12$
+(%i2) fortran (expr);
+      (b+a)**12                                                                 
+(%o2)                         done
+(%i3) fortran ('x=expr);
+      x = (b+a)**12                                                             
+(%o3)                         done
+(%i4) fortran ('x=expand (expr));
+      x = b**12+12*a*b**11+66*a**2*b**10+220*a**3*b**9+495*a**4*b**8+792
+     1   *a**5*b**7+924*a**6*b**6+792*a**7*b**5+495*a**8*b**4+220*a**9*b
+     2   **3+66*a**10*b**2+12*a**11*b+a**12
+(%o4)                         done
+(%i5) fortran ('x=7+5*%i);
+      x = (7,5)                                                                 
+(%o5)                         done
+(%i6) fortran ('x=[1,2,3,4]);
+      x = [1,2,3,4]                                                             
+(%o6)                         done
+(%i7) f(x) := x^2$
+(%i8) fortran (f);
+      f                                                                         
+(%o8)                         done
+</pre>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+</div>
+</p></dd></dl>
+
+<span id="fortspaces"></span><span id="Item_003a-Input_002fdefvr_002ffortspaces"></span><dl class="def">
+<dt id="index-fortspaces"><span class="category">Option variable: </span><span><strong>fortspaces</strong><a href='#index-fortspaces' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>fortspaces</code> is <code>true</code>, <code>fortran</code> fills out
+each printed line with spaces to 80 columns.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fPolynomials"></span></div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_72.html" accesskey="p" rel="prev">Functions and Variables for TeX Output</a>, Up: <a href="maxima_68.html" accesskey="u" rel="up">File Input and Output</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

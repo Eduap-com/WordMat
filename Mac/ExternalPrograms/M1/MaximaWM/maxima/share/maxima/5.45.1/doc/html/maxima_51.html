@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Root Exponential and Logarithmic Functions (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Root Exponential and Logarithmic Functions (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Root Exponential and Logarithmic Functions (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_47.html" rel="up" title="Mathematical Functions">
+<link href="maxima_52.html" rel="next" title="Trigonometric Functions">
+<link href="maxima_50.html" rel="prev" title="Combinatorial Functions">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Root-Exponential-and-Logarithmic-Functions">
+<div class="header">
+<p>
+Next: <a href="maxima_52.html" accesskey="n" rel="next">Trigonometric Functions</a>, Previous: <a href="maxima_50.html" accesskey="p" rel="prev">Combinatorial Functions</a>, Up: <a href="maxima_47.html" accesskey="u" rel="up">Mathematical Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Root_002c-Exponential-and-Logarithmic-Functions"></span><h3 class="section">10.4 Root, Exponential and Logarithmic Functions</h3>
+
+<span id="g_t_0025e_005fto_005fnumlog"></span><span id="Item_003a-MathFunctions_002fdefvr_002f_0025e_005fto_005fnumlog"></span><dl class="def">
+<dt id="index-_0025e_005fto_005fnumlog"><span class="category">Option variable: </span><span><strong>%e_to_numlog</strong><a href='#index-_0025e_005fto_005fnumlog' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>true</code>, <code>r</code> some rational number, and <code>x</code> some expression,
+<code>%e^(r*log(x))</code> will be simplified into <code>x^r</code> .  It should be noted
+that the <code>radcan</code> command also does this transformation, and more
+complicated transformations of this ilk as well.  The <code>logcontract</code>
+command &quot;contracts&quot; expressions containing <code>log</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_0025emode"></span><span id="Item_003a-MathFunctions_002fdefvr_002f_0025emode"></span><dl class="def">
+<dt id="index-_0025emode"><span class="category">Option variable: </span><span><strong>%emode</strong><a href='#index-_0025emode' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>%emode</code> is <code>true</code>, <code>%e^(%pi %i x)</code> is simplified as
+follows.
+</p>
+<p><code>%e^(%pi %i x)</code> simplifies to <code>cos (%pi x) + %i sin (%pi x)</code> if
+<code>x</code> is a floating point number, an integer, or a multiple of 1/2, 1/3, 1/4,
+or 1/6, and then further simplified.
+</p>
+<p>For other numerical <code>x</code>, <code>%e^(%pi %i x)</code> simplifies to
+<code>%e^(%pi %i y)</code> where <code>y</code> is <code>x - 2 k</code> for some integer <code>k</code>
+such that <code>abs(y) &lt; 1</code>.
+</p>
+<p>When <code>%emode</code> is <code>false</code>, no special simplification of
+<code>%e^(%pi %i x)</code> is carried out.
+</p>
+<div class="example">
+<pre class="example">(%i1) %emode;
+(%o1)                         true
+</pre><pre class="example">(%i2) %e^(%pi*%i*1);
+(%o2)                          - 1
+</pre><pre class="example">(%i3) %e^(%pi*%i*216/144);
+(%o3)                         - %i
+</pre><pre class="example">(%i4) %e^(%pi*%i*192/144);
+                          sqrt(3) %i    1
+(%o4)                  (- ----------) - -
+                              2         2
+</pre><pre class="example">(%i5) %e^(%pi*%i*180/144);
+                           %i          1
+(%o5)                 (- -------) - -------
+                         sqrt(2)    sqrt(2)
+</pre><pre class="example">(%i6) %e^(%pi*%i*120/144);
+                          %i   sqrt(3)
+(%o6)                     -- - -------
+                          2       2
+</pre><pre class="example">(%i7) %e^(%pi*%i*121/144);
+                            121 %i %pi
+                            ----------
+                               144
+(%o7)                     %e
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_0025enumer"></span><span id="Item_003a-MathFunctions_002fdefvr_002f_0025enumer"></span><dl class="def">
+<dt id="index-_0025enumer"><span class="category">Option variable: </span><span><strong>%enumer</strong><a href='#index-_0025enumer' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>%enumer</code> is <code>true</code>, <code>%e</code> is replaced by its numeric value
+2.718&hellip;  whenever <code>numer</code> is <code>true</code>.
+</p>
+<p>When <code>%enumer</code> is <code>false</code>, this substitution is carried out
+only if the exponent in <code>%e^x</code> evaluates to a number.
+</p>
+<p>See also <code><a href="maxima_43.html#ev">ev</a></code> and <code><a href="maxima_13.html#numer">numer</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) %enumer;
+(%o1)                         false
+</pre><pre class="example">(%i2) numer;
+(%o2)                         false
+</pre><pre class="example">(%i3) 2*%e;
+(%o3)                         2 %e
+</pre><pre class="example">(%i4) %enumer: not %enumer;
+(%o4)                         true
+</pre><pre class="example">(%i5) 2*%e;
+(%o5)                         2 %e
+</pre><pre class="example">(%i6) numer: not numer;
+(%o6)                         true
+</pre><pre class="example">(%i7) 2*%e;
+(%o7)                   5.43656365691809
+</pre><pre class="example">(%i8) 2*%e^1;
+(%o8)                   5.43656365691809
+</pre><pre class="example">(%i9) 2*%e^x;
+                                         x
+(%o9)                 2 2.718281828459045
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+</div>
+</p></dd></dl>
+
+
+<span id="exp"></span><span id="Item_003a-MathFunctions_002fdeffn_002fexp"></span><dl class="def">
+<dt id="index-exp"><span class="category">Function: </span><span><strong>exp</strong> <em>(<var>x</var>)</em><a href='#index-exp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Represents the exponential function.  Instances of <code>exp (<var>x</var>)</code> in input
+are simplified to <code>%e^<var>x</var></code>; <code>exp</code> does not appear in simplified
+expressions.
+</p>
+<p><code>demoivre</code> if <code>true</code> causes <code>%e^(a + b %i)</code> to simplify to
+<code>%e^(a (cos(b) + %i sin(b)))</code> if <code>b</code> is free of <code>%i</code>.
+See <code><a href="maxima_46.html#demoivre">demoivre</a></code>.
+</p>
+<p><code>%emode</code>, when <code>true</code>, causes <code>%e^(%pi %i x)</code> to be simplified.
+See <code><a href="#g_t_0025emode">%emode</a></code>.
+</p>
+<p><code>%enumer</code>, when <code>true</code> causes <code>%e</code> to be replaced by
+2.718&hellip; whenever <code>numer</code> is <code>true</code>.  See <code><a href="#g_t_0025enumer">%enumer</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) demoivre;
+(%o1)                         false
+</pre><pre class="example">(%i2) %e^(a + b*%i);
+                             %i b + a
+(%o2)                      %e
+</pre><pre class="example">(%i3) demoivre: not demoivre;
+(%o3)                         true
+</pre><pre class="example">(%i4) %e^(a + b*%i);
+                      a
+(%o4)               %e  (%i sin(b) + cos(b))
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="li"></span><span id="Item_003a-MathFunctions_002fdeffn_002fli"></span><dl class="def">
+<dt id="index-li"><span class="category">Function: </span><span><strong>li</strong> <em>[<var>s</var>] (<var>z</var>)</em><a href='#index-li' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Represents the polylogarithm function of order <var>s</var> and argument <var>z</var>,
+defined by the infinite series
+</p>
+<div class="example">
+<pre class="example">                                 inf
+                                 ====   k
+                                 \     z
+                        Li (z) =  &gt;    --
+                          s      /      s
+                                 ====  k
+                                 k = 1
+</pre></div>
+
+<p><code>li [1]</code> is <code>- log (1 - z)</code>.  <code>li [2]</code> and <code>li [3]</code> are the
+dilogarithm and trilogarithm functions, respectively.
+</p>
+<p>When the order is 1, the polylogarithm simplifies to <code>- log (1 - z)</code>, which
+in turn simplifies to a numerical value if <var>z</var> is a real or complex floating
+point number or the <code>numer</code> evaluation flag is present.
+</p>
+<p>When the order is 2 or 3,
+the polylogarithm simplifies to a numerical value
+if <var>z</var> is a real floating point number
+or the <code>numer</code> evaluation flag is present.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) assume (x &gt; 0);
+(%o1)                        [x &gt; 0]
+</pre><pre class="example">(%i2) integrate ((log (1 - t)) / t, t, 0, x);
+(%o2)                       - li (x)
+                                2
+</pre><pre class="example">(%i3) li [2] (7);
+(%o3)                        li (7)
+                               2
+</pre><pre class="example">(%i4) li [2] (7), numer;
+(%o4)       1.248273182099423 - 6.113257028817991 %i
+</pre><pre class="example">(%i5) li [3] (7);
+(%o5)                        li (7)
+                               3
+</pre><pre class="example">(%i6) li [3] (7), numer;
+(%o6)       5.319257992145674 - 5.94792444808033 %i
+</pre><pre class="example">(%i7) L : makelist (i / 4.0, i, 0, 8);
+(%o7)   [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
+</pre><pre class="example">(%i8) map (lambda ([x], li [2] (x)), L);
+(%o8) [0.0, 0.2676526390827326, 0.5822405264650125, 
+0.978469392930306, 1.644934066848226, 
+2.190177011441645 - 0.7010261415046585 %i, 
+2.37439527027248 - 1.2738062049196 %i, 
+2.448686765338205 - 1.758084848210787 %i, 
+2.467401100272339 - 2.177586090303601 %i]
+</pre><pre class="example">(%i9) map (lambda ([x], li [3] (x)), L);
+(%o9) [0.0, 0.2584613953442624, 0.537213192678042, 
+0.8444258046482203, 1.2020569, 1.642866878950322
+ - 0.07821473130035025 %i, 2.060877505514697
+ - 0.2582419849982037 %i, 2.433418896388322
+ - 0.4919260182322965 %i, 2.762071904015935
+ - 0.7546938285978846 %i]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+</div>
+</p></dd></dl>
+
+<span id="log"></span><span id="Item_003a-MathFunctions_002fdeffn_002flog"></span><dl class="def">
+<dt id="index-log"><span class="category">Function: </span><span><strong>log</strong> <em>(<var>x</var>)</em><a href='#index-log' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Represents the natural (base <em class='math'>e</em>) logarithm of <var>x</var>.
+</p>
+<p>Maxima does not have a built-in function for the base 10 logarithm or other 
+bases. <code>log10(x) := log(x) / log(10)</code> is an useful definition.
+</p>
+<p>Simplification and evaluation of logarithms is governed by several global flags:
+</p>
+<dl compact="compact">
+<dt><span><code><code>logexpand</code></code></span></dt>
+<dd><p>causes <code>log(a^b)</code> to become <code>b*log(a)</code>. If it is 
+set to <code>all</code>, <code>log(a*b)</code> will also simplify to <code>log(a)+log(b)</code>.
+If it is set to <code>super</code>, then <code>log(a/b)</code> will also simplify to 
+<code>log(a)-log(b)</code> for rational numbers <code>a/b</code>, <code>a#1</code>. 
+(<code>log(1/b)</code>, for <code>b</code> integer, always simplifies.) If it is set to 
+<code>false</code>, all of these simplifications will be turned off.
+</p>
+</dd>
+<dt><span><code><code>logsimp</code></code></span></dt>
+<dd><p>if <code>false</code> then no simplification of <code>%e</code> to a power containing 
+<code>log</code>&rsquo;s is done.
+</p>
+</dd>
+<dt><span><code><code>lognegint</code></code></span></dt>
+<dd><p>if <code>true</code> implements the rule <code>log(-n) -&gt; log(n)+%i*%pi</code> for
+<code>n</code> a positive integer.
+</p>
+</dd>
+<dt><span><code><code>%e_to_numlog</code></code></span></dt>
+<dd><p>when <code>true</code>, <code>r</code> some rational number, and <code>x</code> some expression,
+the expression <code>%e^(r*log(x))</code> will be simplified into <code>x^r</code>.  It
+should be noted that the <code>radcan</code> command also does this transformation,
+and more complicated transformations of this as well. The <code>logcontract</code> 
+command &quot;contracts&quot; expressions containing <code>log</code>.
+</p></dd>
+</dl>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+</div>
+</p></dd></dl>
+
+<span id="logabs"></span><span id="Item_003a-MathFunctions_002fdefvr_002flogabs"></span><dl class="def">
+<dt id="index-logabs"><span class="category">Option variable: </span><span><strong>logabs</strong><a href='#index-logabs' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When doing indefinite integration where logs are generated, e.g.
+<code>integrate(1/x,x)</code>, the answer is given in terms of <code>log(abs(...))</code>
+if <code>logabs</code> is <code>true</code>, but in terms of <code>log(...)</code> if
+<code>logabs</code> is <code>false</code>.  For definite integration, the <code>logabs:true</code>
+setting is used, because here &quot;evaluation&quot; of the indefinite integral at the
+endpoints is often needed.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Integral-calculus">Integral calculus</a>
+
+<a href="maxima_369.html#Category_003a-Global-flags">Global flags</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-MathFunctions_002fdeffn_002flogarc"></span><dl class="def">
+<dt id="index-logarc"><span class="category">Function: </span><span><strong>logarc</strong> <em>(<var>expr</var>)</em><a href='#index-logarc' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The function <code>logarc(<var>expr</var>)</code> carries out the replacement of
+inverse circular and hyperbolic functions with equivalent logarithmic
+functions for an expression <var>expr</var> without setting the global
+variable <code>logarc</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-functions">Simplification functions</a>
+</div>
+</p></dd></dl>
+
+<span id="logarc"></span><span id="Item_003a-MathFunctions_002fdefvr_002flogarc"></span><dl class="def">
+<dt id="index-logarc-1"><span class="category">Option variable: </span><span><strong>logarc</strong><a href='#index-logarc-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>When the global variable <code>logarc</code> is <code>true</code>,
+inverse circular and hyperbolic functions are replaced by
+equivalent logarithmic functions.
+The default value of <code>logarc</code> is <code>false</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-functions">Simplification functions</a>
+</div>
+</p></dd></dl>
+
+<span id="logconcoeffp"></span><span id="Item_003a-MathFunctions_002fdefvr_002flogconcoeffp"></span><dl class="def">
+<dt id="index-logconcoeffp"><span class="category">Option variable: </span><span><strong>logconcoeffp</strong><a href='#index-logconcoeffp' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>Controls which coefficients are
+contracted when using <code>logcontract</code>.  It may be set to the name of a
+predicate function of one argument.  E.g. if you like to generate
+SQRTs, you can do <code>logconcoeffp:'logconfun$
+logconfun(m):=featurep(m,integer) or ratnump(m)$</code> .  Then
+<code>logcontract(1/2*log(x));</code> will give <code>log(sqrt(x))</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="logcontract"></span><span id="Item_003a-MathFunctions_002fdeffn_002flogcontract"></span><dl class="def">
+<dt id="index-logcontract"><span class="category">Function: </span><span><strong>logcontract</strong> <em>(<var>expr</var>)</em><a href='#index-logcontract' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Recursively scans the expression <var>expr</var>, transforming
+subexpressions of the form <code>a1*log(b1) + a2*log(b2) + c</code> into
+<code>log(ratsimp(b1^a1 * b2^a2)) + c</code>
+</p>
+<div class="example">
+<pre class="example">(%i1) 2*(a*log(x) + 2*a*log(y))$
+</pre><pre class="example">(%i2) logcontract(%);
+                                 2  4
+(%o2)                     a log(x  y )
+</pre></div>
+
+<p>The declaration <code>declare(n,integer)</code> causes
+<code>logcontract(2*a*n*log(x))</code> to simplify to <code>a*log(x^(2*n))</code>.  The
+coefficients that &quot;contract&quot; in this manner are those such as the 2 and the
+<code>n</code> here which satisfy <code>featurep(coeff,integer)</code>.  The user can
+control which coefficients are contracted by setting the option
+<code>logconcoeffp</code> to the name of a predicate function of one argument.
+E.g. if you like to generate SQRTs, you can do <code>logconcoeffp:'logconfun$
+logconfun(m):=featurep(m,integer) or ratnump(m)$</code> .  Then
+<code>logcontract(1/2*log(x));</code> will give <code>log(sqrt(x))</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+</div>
+</p></dd></dl>
+
+<span id="logexpand"></span><span id="Item_003a-MathFunctions_002fdefvr_002flogexpand"></span><dl class="def">
+<dt id="index-logexpand"><span class="category">Option variable: </span><span><strong>logexpand</strong><a href='#index-logexpand' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>If <code>true</code>, that is the default value, causes <code>log(a^b)</code> to become
+<code>b*log(a)</code>.  If it is set to <code>all</code>, <code>log(a*b)</code> will also simplify
+to <code>log(a)+log(b)</code>.  If it is set to <code>super</code>, then <code>log(a/b)</code>
+will also simplify to <code>log(a)-log(b)</code> for rational numbers <code>a/b</code>,
+<code>a#1</code>.  (<code>log(1/b)</code>, for integer <code>b</code>, always simplifies.) If it
+is set to <code>false</code>, all of these simplifications will be turned off.
+</p>
+<p>When <code>logexpand</code> is set to <code>all</code> or <code>super</code>,
+the logarithm of a product expression simplifies to a summation of logarithms.
+</p>
+<p>Examples:
+</p>
+<p>When <code>logexpand</code> is <code>true</code>,
+<code>log(a^b)</code> simplifies to <code>b*log(a)</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) log(n^2), logexpand=true;
+(%o1)                       2 log(n)
+</pre></div>
+
+<p>When <code>logexpand</code> is <code>all</code>,
+<code>log(a*b)</code> simplifies to <code>log(a)+log(b)</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) log(10*x), logexpand=all;
+(%o1)                   log(x) + log(10)
+</pre></div>
+
+<p>When <code>logexpand</code> is <code>super</code>,
+<code>log(a/b)</code> simplifies to <code>log(a)-log(b)</code>
+for rational numbers <code>a/b</code> with <code>a#1</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) log(a/(n + 1)), logexpand=super;
+(%o1)                  log(a) - log(n + 1)
+</pre></div>
+
+<p>When <code>logexpand</code> is set to <code>all</code> or <code>super</code>,
+the logarithm of a product expression simplifies to a summation of logarithms.
+</p>
+<div class="example">
+<pre class="example">(%i1) my_product : product (X(i), i, 1, n);
+                             n
+                           /===\
+                            ! !
+(%o1)                       ! !  X(i)
+                            ! !
+                           i = 1
+(%i2) log(my_product), logexpand=all;
+                          n
+                         ====
+                         \
+(%o2)                     &gt;    log(X(i))
+                         /
+                         ====
+                         i = 1
+(%i3) log(my_product), logexpand=super;
+                          n
+                         ====
+                         \
+(%o3)                     &gt;    log(X(i))
+                         /
+                         ====
+                         i = 1
+</pre></div>
+
+<p>When <code>logexpand</code> is <code>false</code>,
+these simplifications are disabled.
+</p>
+<div class="example">
+<pre class="example">(%i1) logexpand : false $
+(%i2) log(n^2);
+                                  2
+(%o2)                        log(n )
+(%i3) log(10*x);
+(%o3)                       log(10 x)
+(%i4) log(a/(n + 1));
+                                 a
+(%o4)                      log(-----)
+                               n + 1
+(%i5) log ('product (X(i), i, 1, n));
+                               n
+                             /===\
+                              ! !
+(%o5)                    log( ! !  X(i))
+                              ! !
+                             i = 1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="lognegint"></span><span id="Item_003a-MathFunctions_002fdefvr_002flognegint"></span><dl class="def">
+<dt id="index-lognegint"><span class="category">Option variable: </span><span><strong>lognegint</strong><a href='#index-lognegint' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>If <code>true</code> implements the rule
+<code>log(-n) -&gt; log(n)+%i*%pi</code> for <code>n</code> a positive integer.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="logsimp"></span><span id="Item_003a-MathFunctions_002fdefvr_002flogsimp"></span><dl class="def">
+<dt id="index-logsimp"><span class="category">Option variable: </span><span><strong>logsimp</strong><a href='#index-logsimp' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>If <code>false</code> then no simplification of <code>%e</code> to a
+power containing <code>log</code>&rsquo;s is done.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="plog"></span><span id="Item_003a-MathFunctions_002fdeffn_002fplog"></span><dl class="def">
+<dt id="index-plog"><span class="category">Function: </span><span><strong>plog</strong> <em>(<var>x</var>)</em><a href='#index-plog' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Represents the principal branch of the complex-valued natural
+logarithm with <code>-%pi &lt; carg(<var>x</var>) &lt;= +%pi</code> .
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+
+<a href="maxima_369.html#Category_003a-Complex-variables">Complex variables</a>
+</div>
+</p></dd></dl>
+
+<span id="sqrt"></span><span id="Item_003a-MathFunctions_002fdeffn_002fsqrt"></span><dl class="def">
+<dt id="index-sqrt"><span class="category">Function: </span><span><strong>sqrt</strong> <em>(<var>x</var>)</em><a href='#index-sqrt' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The square root of <var>x</var>.  It is represented internally by
+<code><var>x</var>^(1/2)</code>.  See also <code><a href="maxima_102.html#rootscontract">rootscontract</a></code> and <code><a href="maxima_46.html#radexpand">radexpand</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-MathFunctions_002fnode_002fTrigonometric-Functions"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_52.html" accesskey="n" rel="next">Trigonometric Functions</a>, Previous: <a href="maxima_50.html" accesskey="p" rel="prev">Combinatorial Functions</a>, Up: <a href="maxima_47.html" accesskey="u" rel="up">Mathematical Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

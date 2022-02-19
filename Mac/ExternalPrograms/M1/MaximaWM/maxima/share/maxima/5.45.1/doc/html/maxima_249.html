@@ -1,0 +1,3380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for graphs (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for graphs (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for graphs (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_247.html" rel="up" title="graphs-pkg">
+<link href="maxima_248.html" rel="prev" title="Introduction to graphs">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Functions-and-Variables-for-graphs">
+<div class="header">
+<p>
+Previous: <a href="maxima_248.html" accesskey="p" rel="prev">Introduction to graphs</a>, Up: <a href="maxima_247.html" accesskey="u" rel="up">graphs</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-graphs-1"></span><h3 class="section">62.2 Functions and Variables for graphs</h3>
+
+<ul class="section-toc">
+<li><a href="#Building-graphs" accesskey="1">Building graphs</a></li>
+<li><a href="#Graph-properties" accesskey="2">Graph properties</a></li>
+<li><a href="#Modifying-graphs" accesskey="3">Modifying graphs</a></li>
+<li><a href="#Reading-and-writing-to-files" accesskey="4">Reading and writing to files</a></li>
+<li><a href="#Visualization" accesskey="5">Visualization</a></li>
+</ul>
+<div class="subsection" id="Building-graphs">
+<h4 class="subsection">62.2.1 Building graphs</h4>
+
+<span id="create_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcreate_005fgraph"></span><dl class="def">
+<dt id="index-create_005fgraph"><span class="category">Function: </span><span><strong>create_graph</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>create_graph</tt> (<var>v_list</var>, <var>e_list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>create_graph</tt> (<var>n</var>, <var>e_list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>create_graph</tt> (<var>v_list</var>, <var>e_list</var>, <var>directed</var>)</em><a href='#index-create_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Creates a new graph on the set of vertices <var>v_list</var> and with edges <var>e_list</var>.
+</p>
+<p><var>v_list</var> is a list of vertices (<code>[v1, v2,..., vn]</code>) or a
+list of vertices together with vertex labels (<code>[[v1,l1], [v2,l2],..., [vn,ln]]</code>).
+</p>
+<p><var>n</var> is the number of vertices. Vertices will be identified by integers from 0 to n-1.
+</p>
+<p><var>e_list</var> is a list of edges (<code>[e1, e2,..., em]</code>) or a list of
+edges together with edge-weights (<code>[[e1, w1], ..., [em, wm]]</code>).
+</p>
+<p>If <var>directed</var> is not <code>false</code>, a directed graph will be returned.
+</p>
+<p>Example 1: create a cycle on 3 vertices:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : create_graph([1,2,3], [[1,2], [2,3], [1,3]])$
+(%i3) print_graph(g)$
+Graph on 3 vertices with 3 edges.
+Adjacencies:
+  3 :  1  2
+  2 :  3  1
+  1 :  3  2
+</pre></div>
+
+<p>Example 2: create a cycle on 3 vertices with edge weights:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : create_graph([1,2,3], [[[1,2], 1.0], [[2,3], 2.0],
+                          [[1,3], 3.0]])$
+(%i3) print_graph(g)$
+Graph on 3 vertices with 3 edges.
+Adjacencies:
+  3 :  1  2
+  2 :  3  1
+  1 :  3  2
+</pre></div>
+
+<p>Example 3: create a directed graph:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) d : create_graph(
+        [1,2,3,4],
+        [
+         [1,3], [1,4],
+         [2,3], [2,4]
+        ],
+        'directed = true)$
+(%i3) print_graph(d)$
+Digraph on 4 vertices with 4 arcs.
+Adjacencies:
+  4 :
+  3 :
+  2 :  4  3
+  1 :  4  3
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+</div>
+</p></dd></dl>
+
+<span id="copy_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcopy_005fgraph"></span><dl class="def">
+<dt id="index-copy_005fgraph"><span class="category">Function: </span><span><strong>copy_graph</strong> <em>(<var>g</var>)</em><a href='#index-copy_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a copy of the graph <var>g</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="circulant_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcirculant_005fgraph"></span><dl class="def">
+<dt id="index-circulant_005fgraph"><span class="category">Function: </span><span><strong>circulant_graph</strong> <em>(<var>n</var>, <var>d</var>)</em><a href='#index-circulant_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the circulant graph with parameters <var>n</var> and <var>d</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : circulant_graph(10, [1,3])$
+(%i3) print_graph(g)$
+Graph on 10 vertices with 20 edges.
+Adjacencies:
+  9 :  2  6  0  8
+  8 :  1  5  9  7
+  7 :  0  4  8  6
+  6 :  9  3  7  5
+  5 :  8  2  6  4
+  4 :  7  1  5  3
+  3 :  6  0  4  2
+  2 :  9  5  3  1
+  1 :  8  4  2  0
+  0 :  7  3  9  1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="clebsch_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fclebsch_005fgraph"></span><dl class="def">
+<dt id="index-clebsch_005fgraph"><span class="category">Function: </span><span><strong>clebsch_graph</strong> <em>()</em><a href='#index-clebsch_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the Clebsch graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="complement_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcomplement_005fgraph"></span><dl class="def">
+<dt id="index-complement_005fgraph"><span class="category">Function: </span><span><strong>complement_graph</strong> <em>(<var>g</var>)</em><a href='#index-complement_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the complement of the graph <var>g</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="complete_005fbipartite_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcomplete_005fbipartite_005fgraph"></span><dl class="def">
+<dt id="index-complete_005fbipartite_005fgraph"><span class="category">Function: </span><span><strong>complete_bipartite_graph</strong> <em>(<var>n</var>, <var>m</var>)</em><a href='#index-complete_005fbipartite_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the complete bipartite graph on <var>n+m</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="complete_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcomplete_005fgraph"></span><dl class="def">
+<dt id="index-complete_005fgraph"><span class="category">Function: </span><span><strong>complete_graph</strong> <em>(<var>n</var>)</em><a href='#index-complete_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the complete graph on <var>n</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="cycle_005fdigraph"></span><span id="Item_003a-graphs_002fdeffn_002fcycle_005fdigraph"></span><dl class="def">
+<dt id="index-cycle_005fdigraph"><span class="category">Function: </span><span><strong>cycle_digraph</strong> <em>(<var>n</var>)</em><a href='#index-cycle_005fdigraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the directed cycle on <var>n</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="cycle_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcycle_005fgraph"></span><dl class="def">
+<dt id="index-cycle_005fgraph"><span class="category">Function: </span><span><strong>cycle_graph</strong> <em>(<var>n</var>)</em><a href='#index-cycle_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the cycle on <var>n</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="cuboctahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcuboctahedron_005fgraph"></span><dl class="def">
+<dt id="index-cuboctahedron_005fgraph"><span class="category">Function: </span><span><strong>cuboctahedron_graph</strong> <em>(<var>n</var>)</em><a href='#index-cuboctahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the cuboctahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="cube_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fcube_005fgraph"></span><dl class="def">
+<dt id="index-cube_005fgraph"><span class="category">Function: </span><span><strong>cube_graph</strong> <em>(<var>n</var>)</em><a href='#index-cube_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the <var>n</var>-dimensional cube.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="dodecahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fdodecahedron_005fgraph"></span><dl class="def">
+<dt id="index-dodecahedron_005fgraph"><span class="category">Function: </span><span><strong>dodecahedron_graph</strong> <em>()</em><a href='#index-dodecahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the dodecahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="empty_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fempty_005fgraph"></span><dl class="def">
+<dt id="index-empty_005fgraph"><span class="category">Function: </span><span><strong>empty_graph</strong> <em>(<var>n</var>)</em><a href='#index-empty_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the empty graph on <var>n</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="flower_005fsnark"></span><span id="Item_003a-graphs_002fdeffn_002fflower_005fsnark"></span><dl class="def">
+<dt id="index-flower_005fsnark"><span class="category">Function: </span><span><strong>flower_snark</strong> <em>(<var>n</var>)</em><a href='#index-flower_005fsnark' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the flower graph on <var>4n</var> vertices.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) f5 : flower_snark(5)$
+(%i3) chromatic_index(f5);
+(%o3)                           4
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="from_005fadjacency_005fmatrix"></span><span id="Item_003a-graphs_002fdeffn_002ffrom_005fadjacency_005fmatrix"></span><dl class="def">
+<dt id="index-from_005fadjacency_005fmatrix"><span class="category">Function: </span><span><strong>from_adjacency_matrix</strong> <em>(<var>A</var>)</em><a href='#index-from_005fadjacency_005fmatrix' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the graph represented by its adjacency matrix <var>A</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="frucht_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002ffrucht_005fgraph"></span><dl class="def">
+<dt id="index-frucht_005fgraph"><span class="category">Function: </span><span><strong>frucht_graph</strong> <em>()</em><a href='#index-frucht_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the Frucht graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="graph_005fproduct"></span><span id="Item_003a-graphs_002fdeffn_002fgraph_005fproduct"></span><dl class="def">
+<dt id="index-graph_005fproduct"><span class="category">Function: </span><span><strong>graph_product</strong> <em>(<var>g1</var>, <var>g1</var>)</em><a href='#index-graph_005fproduct' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the direct product of graphs <var>g1</var> and <var>g2</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) grid : graph_product(path_graph(3), path_graph(4))$
+(%i3) draw_graph(grid)$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<img src="figures/graphs01.png" alt="figures/graphs01">
+
+<span id="graph_005funion"></span><span id="Item_003a-graphs_002fdeffn_002fgraph_005funion"></span><dl class="def">
+<dt id="index-graph_005funion"><span class="category">Function: </span><span><strong>graph_union</strong> <em>(<var>g1</var>, <var>g1</var>)</em><a href='#index-graph_005funion' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the union (sum) of graphs <var>g1</var> and <var>g2</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="grid_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fgrid_005fgraph"></span><dl class="def">
+<dt id="index-grid_005fgraph"><span class="category">Function: </span><span><strong>grid_graph</strong> <em>(<var>n</var>, <var>m</var>)</em><a href='#index-grid_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the <var>n x m</var> grid.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="great_005frhombicosidodecahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fgreat_005frhombicosidodecahedron_005fgraph"></span><dl class="def">
+<dt id="index-great_005frhombicosidodecahedron_005fgraph"><span class="category">Function: </span><span><strong>great_rhombicosidodecahedron_graph</strong> <em>()</em><a href='#index-great_005frhombicosidodecahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the great rhombicosidodecahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="great_005frhombicuboctahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fgreat_005frhombicuboctahedron_005fgraph"></span><dl class="def">
+<dt id="index-great_005frhombicuboctahedron_005fgraph"><span class="category">Function: </span><span><strong>great_rhombicuboctahedron_graph</strong> <em>()</em><a href='#index-great_005frhombicuboctahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the great rhombicuboctahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="grotzch_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fgrotzch_005fgraph"></span><dl class="def">
+<dt id="index-grotzch_005fgraph"><span class="category">Function: </span><span><strong>grotzch_graph</strong> <em>()</em><a href='#index-grotzch_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the Grotzch graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="heawood_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fheawood_005fgraph"></span><dl class="def">
+<dt id="index-heawood_005fgraph"><span class="category">Function: </span><span><strong>heawood_graph</strong> <em>()</em><a href='#index-heawood_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the Heawood graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="icosahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002ficosahedron_005fgraph"></span><dl class="def">
+<dt id="index-icosahedron_005fgraph"><span class="category">Function: </span><span><strong>icosahedron_graph</strong> <em>()</em><a href='#index-icosahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the icosahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="icosidodecahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002ficosidodecahedron_005fgraph"></span><dl class="def">
+<dt id="index-icosidodecahedron_005fgraph"><span class="category">Function: </span><span><strong>icosidodecahedron_graph</strong> <em>()</em><a href='#index-icosidodecahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the icosidodecahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="induced_005fsubgraph"></span><span id="Item_003a-graphs_002fdeffn_002finduced_005fsubgraph"></span><dl class="def">
+<dt id="index-induced_005fsubgraph"><span class="category">Function: </span><span><strong>induced_subgraph</strong> <em>(<var>V</var>, <var>g</var>)</em><a href='#index-induced_005fsubgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the graph induced on the subset <var>V</var> of vertices of the graph
+<var>g</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) V : [0,1,2,3,4]$
+(%i4) g : induced_subgraph(V, p)$
+(%i5) print_graph(g)$
+Graph on 5 vertices with 5 edges.
+Adjacencies:
+  4 :  3  0
+  3 :  2  4
+  2 :  1  3
+  1 :  0  2
+  0 :  1  4
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="line_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fline_005fgraph"></span><dl class="def">
+<dt id="index-line_005fgraph"><span class="category">Function: </span><span><strong>line_graph</strong> <em>(<var>g</var>)</em><a href='#index-line_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the line graph of the graph <var>g</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="make_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fmake_005fgraph"></span><dl class="def">
+<dt id="index-make_005fgraph"><span class="category">Function: </span><span><strong>make_graph</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>make_graph</tt> (<var>vrt</var>, <var>f</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>make_graph</tt> (<var>vrt</var>, <var>f</var>, <var>oriented</var>)</em><a href='#index-make_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Creates a graph using a predicate function <var>f</var>.
+</p>
+<p><var>vrt</var> is a list/set of vertices or an integer. If <var>vrt</var> is an
+integer, then vertices of the graph will be integers from 1 to
+<var>vrt</var>.
+</p>
+<p><var>f</var> is a predicate function. Two vertices <var>a</var> and <var>b</var> will
+be connected if <code>f(a,b)=true</code>.
+</p>
+<p>If <var>directed</var> is not <var>false</var>, then the graph will be directed.
+</p>
+<p>Example 1:
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;graphs&quot;)$
+(%i2) g : make_graph(powerset({1,2,3,4,5}, 2), disjointp)$
+(%i3) is_isomorphic(g, petersen_graph());
+(%o3)                         true
+(%i4) get_vertex_label(1, g);
+(%o4)                        {1, 2}
+</pre></div>
+
+<p>Example 2:
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;graphs&quot;)$
+(%i2) f(i, j) := is (mod(j, i)=0)$
+(%i3) g : make_graph(20, f, directed=true)$
+(%i4) out_neighbors(4, g);
+(%o4)                    [8, 12, 16, 20]
+(%i5) in_neighbors(18, g);
+(%o5)                    [1, 2, 3, 6, 9]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="mycielski_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fmycielski_005fgraph"></span><dl class="def">
+<dt id="index-mycielski_005fgraph"><span class="category">Function: </span><span><strong>mycielski_graph</strong> <em>(<var>g</var>)</em><a href='#index-mycielski_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the mycielskian graph of the graph <var>g</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="new_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fnew_005fgraph"></span><dl class="def">
+<dt id="index-new_005fgraph"><span class="category">Function: </span><span><strong>new_graph</strong> <em>()</em><a href='#index-new_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the graph with no vertices and no edges.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="path_005fdigraph"></span><span id="Item_003a-graphs_002fdeffn_002fpath_005fdigraph"></span><dl class="def">
+<dt id="index-path_005fdigraph"><span class="category">Function: </span><span><strong>path_digraph</strong> <em>(<var>n</var>)</em><a href='#index-path_005fdigraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the directed path on <var>n</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="path_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fpath_005fgraph"></span><dl class="def">
+<dt id="index-path_005fgraph"><span class="category">Function: </span><span><strong>path_graph</strong> <em>(<var>n</var>)</em><a href='#index-path_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the path on <var>n</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="petersen_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fpetersen_005fgraph"></span><dl class="def">
+<dt id="index-petersen_005fgraph"><span class="category">Function: </span><span><strong>petersen_graph</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>petersen_graph</tt> () <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>petersen_graph</tt> (<var>n</var>, <var>d</var>)</em><a href='#index-petersen_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the petersen graph <var>P_{n,d}</var>. The default values for
+<var>n</var> and <var>d</var> are <code>n=5</code> and <code>d=2</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="random_005fbipartite_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002frandom_005fbipartite_005fgraph"></span><dl class="def">
+<dt id="index-random_005fbipartite_005fgraph"><span class="category">Function: </span><span><strong>random_bipartite_graph</strong> <em>(<var>a</var>, <var>b</var>, <var>p</var>)</em><a href='#index-random_005fbipartite_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a random bipartite graph on <code>a+b</code> vertices. Each edge is
+present with probability <var>p</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="random_005fdigraph"></span><span id="Item_003a-graphs_002fdeffn_002frandom_005fdigraph"></span><dl class="def">
+<dt id="index-random_005fdigraph"><span class="category">Function: </span><span><strong>random_digraph</strong> <em>(<var>n</var>, <var>p</var>)</em><a href='#index-random_005fdigraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a random directed graph on <var>n</var> vertices. Each arc is present
+with probability <var>p</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="random_005fregular_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002frandom_005fregular_005fgraph"></span><dl class="def">
+<dt id="index-random_005fregular_005fgraph"><span class="category">Function: </span><span><strong>random_regular_graph</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>random_regular_graph</tt> (<var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>random_regular_graph</tt> (<var>n</var>, <var>d</var>)</em><a href='#index-random_005fregular_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a random <var>d</var>-regular graph on <var>n</var> vertices. The default
+value for <var>d</var> is <code>d=3</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="random_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002frandom_005fgraph"></span><dl class="def">
+<dt id="index-random_005fgraph"><span class="category">Function: </span><span><strong>random_graph</strong> <em>(<var>n</var>, <var>p</var>)</em><a href='#index-random_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a random graph on <var>n</var> vertices. Each edge is present with
+probability <var>p</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="random_005fgraph1"></span><span id="Item_003a-graphs_002fdeffn_002frandom_005fgraph1"></span><dl class="def">
+<dt id="index-random_005fgraph1"><span class="category">Function: </span><span><strong>random_graph1</strong> <em>(<var>n</var>, <var>m</var>)</em><a href='#index-random_005fgraph1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a random graph on <var>n</var> vertices and random <var>m</var> edges.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="random_005fnetwork"></span><span id="Item_003a-graphs_002fdeffn_002frandom_005fnetwork"></span><dl class="def">
+<dt id="index-random_005fnetwork"><span class="category">Function: </span><span><strong>random_network</strong> <em>(<var>n</var>, <var>p</var>, <var>w</var>)</em><a href='#index-random_005fnetwork' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a random network on <var>n</var> vertices. Each arc is present with
+probability <var>p</var> and has a weight in the range <code>[0,w]</code>. The
+function returns a list <code>[network, source, sink]</code>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) [net, s, t] : random_network(50, 0.2, 10.0);
+(%o2)                   [DIGRAPH, 50, 51]
+(%i3) max_flow(net, s, t)$
+(%i4) first(%);
+(%o4)                   27.65981397932507
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="random_005ftournament"></span><span id="Item_003a-graphs_002fdeffn_002frandom_005ftournament"></span><dl class="def">
+<dt id="index-random_005ftournament"><span class="category">Function: </span><span><strong>random_tournament</strong> <em>(<var>n</var>)</em><a href='#index-random_005ftournament' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a random tournament on <var>n</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="random_005ftree"></span><span id="Item_003a-graphs_002fdeffn_002frandom_005ftree"></span><dl class="def">
+<dt id="index-random_005ftree"><span class="category">Function: </span><span><strong>random_tree</strong> <em>(<var>n</var>)</em><a href='#index-random_005ftree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a random tree on <var>n</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="small_005frhombicosidodecahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fsmall_005frhombicosidodecahedron_005fgraph"></span><dl class="def">
+<dt id="index-small_005frhombicosidodecahedron_005fgraph"><span class="category">Function: </span><span><strong>small_rhombicosidodecahedron_graph</strong> <em>()</em><a href='#index-small_005frhombicosidodecahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the small rhombicosidodecahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="small_005frhombicuboctahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fsmall_005frhombicuboctahedron_005fgraph"></span><dl class="def">
+<dt id="index-small_005frhombicuboctahedron_005fgraph"><span class="category">Function: </span><span><strong>small_rhombicuboctahedron_graph</strong> <em>()</em><a href='#index-small_005frhombicuboctahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the small rhombicuboctahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="snub_005fcube_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fsnub_005fcube_005fgraph"></span><dl class="def">
+<dt id="index-snub_005fcube_005fgraph"><span class="category">Function: </span><span><strong>snub_cube_graph</strong> <em>()</em><a href='#index-snub_005fcube_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the snub cube graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="snub_005fdodecahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fsnub_005fdodecahedron_005fgraph"></span><dl class="def">
+<dt id="index-snub_005fdodecahedron_005fgraph"><span class="category">Function: </span><span><strong>snub_dodecahedron_graph</strong> <em>()</em><a href='#index-snub_005fdodecahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the snub dodecahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="truncated_005fcube_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002ftruncated_005fcube_005fgraph"></span><dl class="def">
+<dt id="index-truncated_005fcube_005fgraph"><span class="category">Function: </span><span><strong>truncated_cube_graph</strong> <em>()</em><a href='#index-truncated_005fcube_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the truncated cube graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="truncated_005fdodecahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002ftruncated_005fdodecahedron_005fgraph"></span><dl class="def">
+<dt id="index-truncated_005fdodecahedron_005fgraph"><span class="category">Function: </span><span><strong>truncated_dodecahedron_graph</strong> <em>()</em><a href='#index-truncated_005fdodecahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the truncated dodecahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="truncated_005ficosahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002ftruncated_005ficosahedron_005fgraph"></span><dl class="def">
+<dt id="index-truncated_005ficosahedron_005fgraph"><span class="category">Function: </span><span><strong>truncated_icosahedron_graph</strong> <em>()</em><a href='#index-truncated_005ficosahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the truncated icosahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="truncated_005ftetrahedron_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002ftruncated_005ftetrahedron_005fgraph"></span><dl class="def">
+<dt id="index-truncated_005ftetrahedron_005fgraph"><span class="category">Function: </span><span><strong>truncated_tetrahedron_graph</strong> <em>()</em><a href='#index-truncated_005ftetrahedron_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the truncated tetrahedron graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="tutte_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002ftutte_005fgraph"></span><dl class="def">
+<dt id="index-tutte_005fgraph"><span class="category">Function: </span><span><strong>tutte_graph</strong> <em>()</em><a href='#index-tutte_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the Tutte graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="underlying_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002funderlying_005fgraph"></span><dl class="def">
+<dt id="index-underlying_005fgraph"><span class="category">Function: </span><span><strong>underlying_graph</strong> <em>(<var>g</var>)</em><a href='#index-underlying_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the underlying graph of the directed graph <var>g</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+<span id="wheel_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fwheel_005fgraph"></span><dl class="def">
+<dt id="index-wheel_005fgraph"><span class="category">Function: </span><span><strong>wheel_graph</strong> <em>(<var>n</var>)</em><a href='#index-wheel_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the wheel graph on <var>n+1</var> vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-constructions">Package graphs - constructions</a>
+</div>
+</p></dd></dl>
+
+</div>
+<div class="subsection" id="Graph-properties">
+<h4 class="subsection">62.2.2 Graph properties</h4>
+
+<span id="adjacency_005fmatrix"></span><span id="Item_003a-graphs_002fdeffn_002fadjacency_005fmatrix"></span><dl class="def">
+<dt id="index-adjacency_005fmatrix"><span class="category">Function: </span><span><strong>adjacency_matrix</strong> <em>(<var>gr</var>)</em><a href='#index-adjacency_005fmatrix' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the adjacency matrix of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) c5 : cycle_graph(4)$
+(%i3) adjacency_matrix(c5);
+                         [ 0  1  0  1 ]
+                         [            ]
+                         [ 1  0  1  0 ]
+(%o3)                    [            ]
+                         [ 0  1  0  1 ]
+                         [            ]
+                         [ 1  0  1  0 ]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="average_005fdegree"></span><span id="Item_003a-graphs_002fdeffn_002faverage_005fdegree"></span><dl class="def">
+<dt id="index-average_005fdegree"><span class="category">Function: </span><span><strong>average_degree</strong> <em>(<var>gr</var>)</em><a href='#index-average_005fdegree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the average degree of vertices in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) average_degree(grotzch_graph());
+                               40
+(%o2)                          --
+                               11
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="biconnected_005fcomponents"></span><span id="Item_003a-graphs_002fdeffn_002fbiconnected_005fcomponents"></span><dl class="def">
+<dt id="index-biconnected_005fcomponents"><span class="category">Function: </span><span><strong>biconnected_components</strong> <em>(<var>gr</var>)</em><a href='#index-biconnected_005fcomponents' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the (vertex sets of) 2-connected components of the graph
+<var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : create_graph(
+            [1,2,3,4,5,6,7],
+            [
+             [1,2],[2,3],[2,4],[3,4],
+             [4,5],[5,6],[4,6],[6,7]
+            ])$
+(%i3) biconnected_components(g);
+(%o3)        [[6, 7], [4, 5, 6], [1, 2], [2, 3, 4]]
+</pre></div>
+
+<img src="figures/graphs13.png" alt="figures/graphs13">
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="bipartition"></span><span id="Item_003a-graphs_002fdeffn_002fbipartition"></span><dl class="def">
+<dt id="index-bipartition"><span class="category">Function: </span><span><strong>bipartition</strong> <em>(<var>gr</var>)</em><a href='#index-bipartition' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a bipartition of the vertices of the graph <var>gr</var> or an empty
+list if <var>gr</var> is not bipartite.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) h : heawood_graph()$
+(%i3) [A,B]:bipartition(h);
+(%o3)  [[8, 12, 6, 10, 0, 2, 4], [13, 5, 11, 7, 9, 1, 3]]
+(%i4) draw_graph(h, show_vertices=A, program=circular)$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<img src="figures/graphs02.png" alt="figures/graphs02">
+
+<span id="chromatic_005findex"></span><span id="Item_003a-graphs_002fdeffn_002fchromatic_005findex"></span><dl class="def">
+<dt id="index-chromatic_005findex"><span class="category">Function: </span><span><strong>chromatic_index</strong> <em>(<var>gr</var>)</em><a href='#index-chromatic_005findex' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the chromatic index of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) chromatic_index(p);
+(%o3)                           4
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="chromatic_005fnumber"></span><span id="Item_003a-graphs_002fdeffn_002fchromatic_005fnumber"></span><dl class="def">
+<dt id="index-chromatic_005fnumber"><span class="category">Function: </span><span><strong>chromatic_number</strong> <em>(<var>gr</var>)</em><a href='#index-chromatic_005fnumber' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the chromatic number of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) chromatic_number(cycle_graph(5));
+(%o2)                           3
+(%i3) chromatic_number(cycle_graph(6));
+(%o3)                           2
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="clear_005fedge_005fweight"></span><span id="Item_003a-graphs_002fdeffn_002fclear_005fedge_005fweight"></span><dl class="def">
+<dt id="index-clear_005fedge_005fweight"><span class="category">Function: </span><span><strong>clear_edge_weight</strong> <em>(<var>e</var>, <var>gr</var>)</em><a href='#index-clear_005fedge_005fweight' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Removes the weight of the edge  <var>e</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : create_graph(3, [[[0,1], 1.5], [[1,2], 1.3]])$
+(%i3) get_edge_weight([0,1], g);
+(%o3)                          1.5
+(%i4) clear_edge_weight([0,1], g)$
+(%i5) get_edge_weight([0,1], g);
+(%o5)                           1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="clear_005fvertex_005flabel"></span><span id="Item_003a-graphs_002fdeffn_002fclear_005fvertex_005flabel"></span><dl class="def">
+<dt id="index-clear_005fvertex_005flabel"><span class="category">Function: </span><span><strong>clear_vertex_label</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-clear_005fvertex_005flabel' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Removes the label of the vertex <var>v</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : create_graph([[0,&quot;Zero&quot;], [1, &quot;One&quot;]], [[0,1]])$
+(%i3) get_vertex_label(0, g);
+(%o3)                         Zero
+(%i4) clear_vertex_label(0, g);
+(%o4)                         done
+(%i5) get_vertex_label(0, g);
+(%o5)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="connected_005fcomponents"></span><span id="Item_003a-graphs_002fdeffn_002fconnected_005fcomponents"></span><dl class="def">
+<dt id="index-connected_005fcomponents"><span class="category">Function: </span><span><strong>connected_components</strong> <em>(<var>gr</var>)</em><a href='#index-connected_005fcomponents' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the (vertex sets of) connected components of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g: graph_union(cycle_graph(5), path_graph(4))$
+(%i3) connected_components(g);
+(%o3)            [[1, 2, 3, 4, 0], [8, 7, 6, 5]]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="diameter"></span><span id="Item_003a-graphs_002fdeffn_002fdiameter"></span><dl class="def">
+<dt id="index-diameter"><span class="category">Function: </span><span><strong>diameter</strong> <em>(<var>gr</var>)</em><a href='#index-diameter' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the diameter of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) diameter(dodecahedron_graph());
+(%o2)                           5
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="edge_005fcoloring"></span><span id="Item_003a-graphs_002fdeffn_002fedge_005fcoloring"></span><dl class="def">
+<dt id="index-edge_005fcoloring"><span class="category">Function: </span><span><strong>edge_coloring</strong> <em>(<var>gr</var>)</em><a href='#index-edge_005fcoloring' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns an optimal coloring of the edges of the graph <var>gr</var>.
+</p>
+<p>The function returns the chromatic index and a list representing the
+coloring of the edges of <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) [ch_index, col] : edge_coloring(p);
+(%o3) [4, [[[0, 5], 3], [[5, 7], 1], [[0, 1], 1], [[1, 6], 2], 
+[[6, 8], 1], [[1, 2], 3], [[2, 7], 4], [[7, 9], 2], [[2, 3], 2], 
+[[3, 8], 3], [[5, 8], 2], [[3, 4], 1], [[4, 9], 4], [[6, 9], 3], 
+[[0, 4], 2]]]
+(%i4) assoc([0,1], col);
+(%o4)                           1
+(%i5) assoc([0,5], col);
+(%o5)                           3
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="degree_005fsequence"></span><span id="Item_003a-graphs_002fdeffn_002fdegree_005fsequence"></span><dl class="def">
+<dt id="index-degree_005fsequence"><span class="category">Function: </span><span><strong>degree_sequence</strong> <em>(<var>gr</var>)</em><a href='#index-degree_005fsequence' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the list of vertex degrees of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) degree_sequence(random_graph(10, 0.4));
+(%o2)            [2, 2, 2, 2, 2, 2, 3, 3, 3, 3]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="edge_005fconnectivity"></span><span id="Item_003a-graphs_002fdeffn_002fedge_005fconnectivity"></span><dl class="def">
+<dt id="index-edge_005fconnectivity"><span class="category">Function: </span><span><strong>edge_connectivity</strong> <em>(<var>gr</var>)</em><a href='#index-edge_005fconnectivity' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the edge-connectivity of the graph <var>gr</var>.
+</p>
+<p>See also <code><a href="#min_005fedge_005fcut">min_edge_cut</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="edges"></span><span id="Item_003a-graphs_002fdeffn_002fedges"></span><dl class="def">
+<dt id="index-edges"><span class="category">Function: </span><span><strong>edges</strong> <em>(<var>gr</var>)</em><a href='#index-edges' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the list of edges (arcs) in a (directed) graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) edges(complete_graph(4));
+(%o2)   [[2, 3], [1, 3], [1, 2], [0, 3], [0, 2], [0, 1]]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="get_005fedge_005fweight"></span><span id="Item_003a-graphs_002fdeffn_002fget_005fedge_005fweight"></span><dl class="def">
+<dt id="index-get_005fedge_005fweight"><span class="category">Function: </span><span><strong>get_edge_weight</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>get_edge_weight</tt> (<var>e</var>, <var>gr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>get_edge_weight</tt> (<var>e</var>, <var>gr</var>, <var>ifnot</var>)</em><a href='#index-get_005fedge_005fweight' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the weight of the edge <var>e</var> in the graph <var>gr</var>.
+</p>
+<p>If there is no weight assigned to the edge, the function returns 1. If
+the edge is not present in the graph, the function signals an error or
+returns the optional argument <var>ifnot</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) c5 : cycle_graph(5)$
+(%i3) get_edge_weight([1,2], c5);
+(%o3)                           1
+(%i4) set_edge_weight([1,2], 2.0, c5);
+(%o4)                         done
+(%i5) get_edge_weight([1,2], c5);
+(%o5)                          2.0
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="get_005fvertex_005flabel"></span><span id="Item_003a-graphs_002fdeffn_002fget_005fvertex_005flabel"></span><dl class="def">
+<dt id="index-get_005fvertex_005flabel"><span class="category">Function: </span><span><strong>get_vertex_label</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-get_005fvertex_005flabel' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the label of the vertex <var>v</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : create_graph([[0,&quot;Zero&quot;], [1, &quot;One&quot;]], [[0,1]])$
+(%i3) get_vertex_label(0, g);
+(%o3)                         Zero
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="graph_005fcharpoly"></span><span id="Item_003a-graphs_002fdeffn_002fgraph_005fcharpoly"></span><dl class="def">
+<dt id="index-graph_005fcharpoly"><span class="category">Function: </span><span><strong>graph_charpoly</strong> <em>(<var>gr</var>, <var>x</var>)</em><a href='#index-graph_005fcharpoly' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the characteristic polynomial (in variable <var>x</var>) of the graph
+<var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) graph_charpoly(p, x), factor;
+                                   5        4
+(%o3)               (x - 3) (x - 1)  (x + 2)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="graph_005fcenter"></span><span id="Item_003a-graphs_002fdeffn_002fgraph_005fcenter"></span><dl class="def">
+<dt id="index-graph_005fcenter"><span class="category">Function: </span><span><strong>graph_center</strong> <em>(<var>gr</var>)</em><a href='#index-graph_005fcenter' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the center of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : grid_graph(5,5)$
+(%i3) graph_center(g);
+(%o3)                         [12]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="graph_005feigenvalues"></span><span id="Item_003a-graphs_002fdeffn_002fgraph_005feigenvalues"></span><dl class="def">
+<dt id="index-graph_005feigenvalues"><span class="category">Function: </span><span><strong>graph_eigenvalues</strong> <em>(<var>gr</var>)</em><a href='#index-graph_005feigenvalues' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the eigenvalues of the graph <var>gr</var>. The function returns
+eigenvalues in the same format as maxima <code><a href="maxima_119.html#eigenvalues">eigenvalues</a></code> function.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) graph_eigenvalues(p);
+(%o3)               [[3, - 2, 1], [1, 4, 5]]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="graph_005fperiphery"></span><span id="Item_003a-graphs_002fdeffn_002fgraph_005fperiphery"></span><dl class="def">
+<dt id="index-graph_005fperiphery"><span class="category">Function: </span><span><strong>graph_periphery</strong> <em>(<var>gr</var>)</em><a href='#index-graph_005fperiphery' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the periphery of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : grid_graph(5,5)$
+(%i3) graph_periphery(g);
+(%o3)                    [24, 20, 4, 0]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="graph_005fsize"></span><span id="Item_003a-graphs_002fdeffn_002fgraph_005fsize"></span><dl class="def">
+<dt id="index-graph_005fsize"><span class="category">Function: </span><span><strong>graph_size</strong> <em>(<var>gr</var>)</em><a href='#index-graph_005fsize' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the number of edges in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) graph_size(p);
+(%o3)                          15
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="graph_005forder"></span><span id="Item_003a-graphs_002fdeffn_002fgraph_005forder"></span><dl class="def">
+<dt id="index-graph_005forder"><span class="category">Function: </span><span><strong>graph_order</strong> <em>(<var>gr</var>)</em><a href='#index-graph_005forder' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the number of vertices in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) graph_order(p);
+(%o3)                          10
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="girth"></span><span id="Item_003a-graphs_002fdeffn_002fgirth"></span><dl class="def">
+<dt id="index-girth"><span class="category">Function: </span><span><strong>girth</strong> <em>(<var>gr</var>)</em><a href='#index-girth' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the length of the shortest cycle in <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : heawood_graph()$
+(%i3) girth(g);
+(%o3)                           6
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="hamilton_005fcycle"></span><span id="Item_003a-graphs_002fdeffn_002fhamilton_005fcycle"></span><dl class="def">
+<dt id="index-hamilton_005fcycle"><span class="category">Function: </span><span><strong>hamilton_cycle</strong> <em>(<var>gr</var>)</em><a href='#index-hamilton_005fcycle' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the Hamilton cycle of the graph <var>gr</var> or an empty list if
+<var>gr</var> is not hamiltonian.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) c : cube_graph(3)$
+(%i3) hc : hamilton_cycle(c);
+(%o3)              [7, 3, 2, 6, 4, 0, 1, 5, 7]
+(%i4) draw_graph(c, show_edges=vertices_to_cycle(hc))$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<img src="figures/graphs03.png" alt="figures/graphs03">
+
+<span id="hamilton_005fpath"></span><span id="Item_003a-graphs_002fdeffn_002fhamilton_005fpath"></span><dl class="def">
+<dt id="index-hamilton_005fpath"><span class="category">Function: </span><span><strong>hamilton_path</strong> <em>(<var>gr</var>)</em><a href='#index-hamilton_005fpath' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the Hamilton path of the graph <var>gr</var> or an empty list if
+<var>gr</var> does not have a Hamilton path.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) hp : hamilton_path(p);
+(%o3)            [0, 5, 7, 2, 1, 6, 8, 3, 4, 9]
+(%i4) draw_graph(p, show_edges=vertices_to_path(hp))$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<img src="figures/graphs04.png" alt="figures/graphs04">
+
+<span id="isomorphism"></span><span id="Item_003a-graphs_002fdeffn_002fisomorphism"></span><dl class="def">
+<dt id="index-isomorphism"><span class="category">Function: </span><span><strong>isomorphism</strong> <em>(<var>gr1</var>, <var>gr2</var>)</em><a href='#index-isomorphism' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a an isomorphism between graphs/digraphs <var>gr1</var> and
+<var>gr2</var>. If <var>gr1</var> and <var>gr2</var> are not isomorphic, it returns
+an empty list.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) clk5:complement_graph(line_graph(complete_graph(5)))$
+(%i3) isomorphism(clk5, petersen_graph());
+(%o3) [9 -&gt; 0, 2 -&gt; 1, 6 -&gt; 2, 5 -&gt; 3, 0 -&gt; 4, 1 -&gt; 5, 3 -&gt; 6, 
+                                          4 -&gt; 7, 7 -&gt; 8, 8 -&gt; 9]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="in_005fneighbors"></span><span id="Item_003a-graphs_002fdeffn_002fin_005fneighbors"></span><dl class="def">
+<dt id="index-in_005fneighbors"><span class="category">Function: </span><span><strong>in_neighbors</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-in_005fneighbors' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the list of in-neighbors of the vertex <var>v</var> in the directed
+graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : path_digraph(3)$
+(%i3) in_neighbors(2, p);
+(%o3)                          [1]
+(%i4) out_neighbors(2, p);
+(%o4)                          []
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fbiconnected"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fbiconnected"></span><dl class="def">
+<dt id="index-is_005fbiconnected"><span class="category">Function: </span><span><strong>is_biconnected</strong> <em>(<var>gr</var>)</em><a href='#index-is_005fbiconnected' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if <var>gr</var> is 2-connected and <code>false</code> otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_biconnected(cycle_graph(5));
+(%o2)                         true
+(%i3) is_biconnected(path_graph(5));
+(%o3)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fbipartite"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fbipartite"></span><dl class="def">
+<dt id="index-is_005fbipartite"><span class="category">Function: </span><span><strong>is_bipartite</strong> <em>(<var>gr</var>)</em><a href='#index-is_005fbipartite' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if <var>gr</var> is bipartite (2-colorable) and <code>false</code> otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_bipartite(petersen_graph());
+(%o2)                         false
+(%i3) is_bipartite(heawood_graph());
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fconnected"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fconnected"></span><dl class="def">
+<dt id="index-is_005fconnected"><span class="category">Function: </span><span><strong>is_connected</strong> <em>(<var>gr</var>)</em><a href='#index-is_005fconnected' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if the graph <var>gr</var> is connected and <code>false</code> otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_connected(graph_union(cycle_graph(4), path_graph(3)));
+(%o2)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fdigraph"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fdigraph"></span><dl class="def">
+<dt id="index-is_005fdigraph"><span class="category">Function: </span><span><strong>is_digraph</strong> <em>(<var>gr</var>)</em><a href='#index-is_005fdigraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if <var>gr</var> is a directed graph and <code>false</code> otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_digraph(path_graph(5));
+(%o2)                         false
+(%i3) is_digraph(path_digraph(5));
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fedge_005fin_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fedge_005fin_005fgraph"></span><dl class="def">
+<dt id="index-is_005fedge_005fin_005fgraph"><span class="category">Function: </span><span><strong>is_edge_in_graph</strong> <em>(<var>e</var>, <var>gr</var>)</em><a href='#index-is_005fedge_005fin_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if <var>e</var> is an edge (arc) in the (directed) graph <var>g</var>
+and <code>false</code> otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) c4 : cycle_graph(4)$
+(%i3) is_edge_in_graph([2,3], c4);
+(%o3)                         true
+(%i4) is_edge_in_graph([3,2], c4);
+(%o4)                         true
+(%i5) is_edge_in_graph([2,4], c4);
+(%o5)                         false
+(%i6) is_edge_in_graph([3,2], cycle_digraph(4));
+(%o6)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fgraph"></span><dl class="def">
+<dt id="index-is_005fgraph"><span class="category">Function: </span><span><strong>is_graph</strong> <em>(<var>gr</var>)</em><a href='#index-is_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if <var>gr</var> is a graph and <code>false</code> otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_graph(path_graph(5));
+(%o2)                         true
+(%i3) is_graph(path_digraph(5));
+(%o3)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fgraph_005for_005fdigraph"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fgraph_005for_005fdigraph"></span><dl class="def">
+<dt id="index-is_005fgraph_005for_005fdigraph"><span class="category">Function: </span><span><strong>is_graph_or_digraph</strong> <em>(<var>gr</var>)</em><a href='#index-is_005fgraph_005for_005fdigraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if <var>gr</var> is a graph or a directed graph and <code>false</code> otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_graph_or_digraph(path_graph(5));
+(%o2)                         true
+(%i3) is_graph_or_digraph(path_digraph(5));
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fisomorphic"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fisomorphic"></span><dl class="def">
+<dt id="index-is_005fisomorphic"><span class="category">Function: </span><span><strong>is_isomorphic</strong> <em>(<var>gr1</var>, <var>gr2</var>)</em><a href='#index-is_005fisomorphic' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <code>true</code> if graphs/digraphs <var>gr1</var> and <var>gr2</var> are isomorphic
+and <code>false</code> otherwise.
+</p>
+<p>See also <code><a href="#isomorphism">isomorphism</a></code>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) clk5:complement_graph(line_graph(complete_graph(5)))$
+(%i3) is_isomorphic(clk5, petersen_graph());
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fplanar"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fplanar"></span><dl class="def">
+<dt id="index-is_005fplanar"><span class="category">Function: </span><span><strong>is_planar</strong> <em>(<var>gr</var>)</em><a href='#index-is_005fplanar' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns <code>true</code> if <var>gr</var> is a planar graph and <code>false</code> otherwise.
+</p>
+<p>The algorithm used is the Demoucron&rsquo;s algorithm, which is a quadratic time
+algorithm.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_planar(dodecahedron_graph());
+(%o2)                         true
+(%i3) is_planar(petersen_graph());
+(%o3)                         false
+(%i4) is_planar(petersen_graph(10,2));
+(%o4)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fsconnected"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fsconnected"></span><dl class="def">
+<dt id="index-is_005fsconnected"><span class="category">Function: </span><span><strong>is_sconnected</strong> <em>(<var>gr</var>)</em><a href='#index-is_005fsconnected' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if the directed graph <var>gr</var> is strongly connected and
+<code>false</code> otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_sconnected(cycle_digraph(5));
+(%o2)                         true
+(%i3) is_sconnected(path_digraph(5));
+(%o3)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005fvertex_005fin_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fis_005fvertex_005fin_005fgraph"></span><dl class="def">
+<dt id="index-is_005fvertex_005fin_005fgraph"><span class="category">Function: </span><span><strong>is_vertex_in_graph</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-is_005fvertex_005fin_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if <var>v</var> is a vertex in the graph <var>g</var> and <code>false</code>  otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) c4 : cycle_graph(4)$
+(%i3) is_vertex_in_graph(0, c4);
+(%o3)                         true
+(%i4) is_vertex_in_graph(6, c4);
+(%o4)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="is_005ftree"></span><span id="Item_003a-graphs_002fdeffn_002fis_005ftree"></span><dl class="def">
+<dt id="index-is_005ftree"><span class="category">Function: </span><span><strong>is_tree</strong> <em>(<var>gr</var>)</em><a href='#index-is_005ftree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns <code>true</code> if <var>gr</var> is a tree and <code>false</code>  otherwise.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) is_tree(random_tree(4));
+(%o2)                         true
+(%i3) is_tree(graph_union(random_tree(4), random_tree(5)));
+(%o3)                         false
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="laplacian_005fmatrix"></span><span id="Item_003a-graphs_002fdeffn_002flaplacian_005fmatrix"></span><dl class="def">
+<dt id="index-laplacian_005fmatrix"><span class="category">Function: </span><span><strong>laplacian_matrix</strong> <em>(<var>gr</var>)</em><a href='#index-laplacian_005fmatrix' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the laplacian matrix of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) laplacian_matrix(cycle_graph(5));
+                   [  2   - 1   0    0   - 1 ]
+                   [                         ]
+                   [ - 1   2   - 1   0    0  ]
+                   [                         ]
+(%o2)              [  0   - 1   2   - 1   0  ]
+                   [                         ]
+                   [  0    0   - 1   2   - 1 ]
+                   [                         ]
+                   [ - 1   0    0   - 1   2  ]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="max_005fclique"></span><span id="Item_003a-graphs_002fdeffn_002fmax_005fclique"></span><dl class="def">
+<dt id="index-max_005fclique"><span class="category">Function: </span><span><strong>max_clique</strong> <em>(<var>gr</var>)</em><a href='#index-max_005fclique' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a maximum clique of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : random_graph(100, 0.5)$
+(%i3) max_clique(g);
+(%o3)          [6, 12, 31, 36, 52, 59, 62, 63, 80]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="max_005fdegree"></span><span id="Item_003a-graphs_002fdeffn_002fmax_005fdegree"></span><dl class="def">
+<dt id="index-max_005fdegree"><span class="category">Function: </span><span><strong>max_degree</strong> <em>(<var>gr</var>)</em><a href='#index-max_005fdegree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the maximal degree of vertices of the graph <var>gr</var> and a
+vertex of maximal degree.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : random_graph(100, 0.02)$
+(%i3) max_degree(g);
+(%o3)                        [6, 79]
+(%i4) vertex_degree(95, g);
+(%o4)                           2
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="max_005fflow"></span><span id="Item_003a-graphs_002fdeffn_002fmax_005fflow"></span><dl class="def">
+<dt id="index-max_005fflow"><span class="category">Function: </span><span><strong>max_flow</strong> <em>(<var>net</var>, <var>s</var>, <var>t</var>)</em><a href='#index-max_005fflow' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a maximum flow through the network <var>net</var> with the source
+<var>s</var> and the sink <var>t</var>.
+</p>
+<p>The function returns the value of the maximal flow and a list
+representing the weights of the arcs in the optimal flow.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) net : create_graph(
+  [1,2,3,4,5,6],
+  [[[1,2], 1.0],
+   [[1,3], 0.3],
+   [[2,4], 0.2],
+   [[2,5], 0.3],
+   [[3,4], 0.1],
+   [[3,5], 0.1],
+   [[4,6], 1.0],
+   [[5,6], 1.0]],
+  directed=true)$
+(%i3) [flow_value, flow] : max_flow(net, 1, 6);
+(%o3) [0.7, [[[1, 2], 0.5], [[1, 3], 0.2], [[2, 4], 0.2], 
+[[2, 5], 0.3], [[3, 4], 0.1], [[3, 5], 0.1], [[4, 6], 0.3], 
+[[5, 6], 0.4]]]
+(%i4) fl : 0$
+(%i5) for u in out_neighbors(1, net)
+     do fl : fl + assoc([1, u], flow)$
+(%i6) fl;
+(%o6)                          0.7
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="max_005findependent_005fset"></span><span id="Item_003a-graphs_002fdeffn_002fmax_005findependent_005fset"></span><dl class="def">
+<dt id="index-max_005findependent_005fset"><span class="category">Function: </span><span><strong>max_independent_set</strong> <em>(<var>gr</var>)</em><a href='#index-max_005findependent_005fset' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a maximum independent set of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) d : dodecahedron_graph()$
+(%i3) mi : max_independent_set(d);
+(%o3)             [0, 3, 5, 9, 10, 11, 18, 19]
+(%i4) draw_graph(d, show_vertices=mi)$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<img src="figures/graphs05.png" alt="figures/graphs05">
+
+<span id="max_005fmatching"></span><span id="Item_003a-graphs_002fdeffn_002fmax_005fmatching"></span><dl class="def">
+<dt id="index-max_005fmatching"><span class="category">Function: </span><span><strong>max_matching</strong> <em>(<var>gr</var>)</em><a href='#index-max_005fmatching' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns a maximum matching of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) d : dodecahedron_graph()$
+(%i3) m : max_matching(d);
+(%o3) [[5, 7], [8, 9], [6, 10], [14, 19], [13, 18], [12, 17], 
+                               [11, 16], [0, 15], [3, 4], [1, 2]]
+(%i4) draw_graph(d, show_edges=m)$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<img src="figures/graphs06.png" alt="figures/graphs06">
+
+<span id="min_005fdegree"></span><span id="Item_003a-graphs_002fdeffn_002fmin_005fdegree"></span><dl class="def">
+<dt id="index-min_005fdegree"><span class="category">Function: </span><span><strong>min_degree</strong> <em>(<var>gr</var>)</em><a href='#index-min_005fdegree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the minimum degree of vertices of the graph <var>gr</var> and a
+vertex of minimum degree.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : random_graph(100, 0.1)$
+(%i3) min_degree(g);
+(%o3)                        [3, 49]
+(%i4) vertex_degree(21, g);
+(%o4)                           9
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="min_005fedge_005fcut"></span><span id="Item_003a-graphs_002fdeffn_002fmin_005fedge_005fcut"></span><dl class="def">
+<dt id="index-min_005fedge_005fcut"><span class="category">Function: </span><span><strong>min_edge_cut</strong> <em>(<var>gr</var>)</em><a href='#index-min_005fedge_005fcut' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the minimum edge cut in the graph <var>gr</var>.
+</p>
+<p>See also <code><a href="#edge_005fconnectivity">edge_connectivity</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="min_005fvertex_005fcover"></span><span id="Item_003a-graphs_002fdeffn_002fmin_005fvertex_005fcover"></span><dl class="def">
+<dt id="index-min_005fvertex_005fcover"><span class="category">Function: </span><span><strong>min_vertex_cover</strong> <em>(<var>gr</var>)</em><a href='#index-min_005fvertex_005fcover' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the minimum vertex cover of the graph <var>gr</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="min_005fvertex_005fcut"></span><span id="Item_003a-graphs_002fdeffn_002fmin_005fvertex_005fcut"></span><dl class="def">
+<dt id="index-min_005fvertex_005fcut"><span class="category">Function: </span><span><strong>min_vertex_cut</strong> <em>(<var>gr</var>)</em><a href='#index-min_005fvertex_005fcut' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the minimum vertex cut in the graph <var>gr</var>.
+</p>
+<p>See also <code><a href="#vertex_005fconnectivity">vertex_connectivity</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="minimum_005fspanning_005ftree"></span><span id="Item_003a-graphs_002fdeffn_002fminimum_005fspanning_005ftree"></span><dl class="def">
+<dt id="index-minimum_005fspanning_005ftree"><span class="category">Function: </span><span><strong>minimum_spanning_tree</strong> <em>(<var>gr</var>)</em><a href='#index-minimum_005fspanning_005ftree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the minimum spanning tree of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : graph_product(path_graph(10), path_graph(10))$
+(%i3) t : minimum_spanning_tree(g)$
+(%i4) draw_graph(g, show_edges=edges(t))$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<img src="figures/graphs07.png" alt="figures/graphs07">
+
+<span id="neighbors"></span><span id="Item_003a-graphs_002fdeffn_002fneighbors"></span><dl class="def">
+<dt id="index-neighbors"><span class="category">Function: </span><span><strong>neighbors</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-neighbors' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the list of neighbors of the vertex <var>v</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : petersen_graph()$
+(%i3) neighbors(3, p);
+(%o3)                       [4, 8, 2]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="odd_005fgirth"></span><span id="Item_003a-graphs_002fdeffn_002fodd_005fgirth"></span><dl class="def">
+<dt id="index-odd_005fgirth"><span class="category">Function: </span><span><strong>odd_girth</strong> <em>(<var>gr</var>)</em><a href='#index-odd_005fgirth' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the length of the shortest odd cycle in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : graph_product(cycle_graph(4), cycle_graph(7))$
+(%i3) girth(g);
+(%o3)                           4
+(%i4) odd_girth(g);
+(%o4)                           7
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="out_005fneighbors"></span><span id="Item_003a-graphs_002fdeffn_002fout_005fneighbors"></span><dl class="def">
+<dt id="index-out_005fneighbors"><span class="category">Function: </span><span><strong>out_neighbors</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-out_005fneighbors' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the list of out-neighbors of the vertex <var>v</var> in the directed
+graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : path_digraph(3)$
+(%i3) in_neighbors(2, p);
+(%o3)                          [1]
+(%i4) out_neighbors(2, p);
+(%o4)                          []
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="planar_005fembedding"></span><span id="Item_003a-graphs_002fdeffn_002fplanar_005fembedding"></span><dl class="def">
+<dt id="index-planar_005fembedding"><span class="category">Function: </span><span><strong>planar_embedding</strong> <em>(<var>gr</var>)</em><a href='#index-planar_005fembedding' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the list of facial walks in a planar embedding of <var>gr</var> and
+<code>false</code> if <var>gr</var> is not a planar graph.
+</p>
+<p>The graph <var>gr</var> must be biconnected.
+</p>
+<p>The algorithm used is the Demoucron&rsquo;s algorithm, which is a quadratic time
+algorithm.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) planar_embedding(grid_graph(3,3));
+(%o2) [[3, 6, 7, 8, 5, 2, 1, 0], [4, 3, 0, 1], [3, 4, 7, 6], 
+                                      [8, 7, 4, 5], [1, 2, 5, 4]]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="print_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fprint_005fgraph"></span><dl class="def">
+<dt id="index-print_005fgraph"><span class="category">Function: </span><span><strong>print_graph</strong> <em>(<var>gr</var>)</em><a href='#index-print_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Prints some information about the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) c5 : cycle_graph(5)$
+(%i3) print_graph(c5)$
+Graph on 5 vertices with 5 edges.
+Adjacencies:
+  4 :  0  3
+  3 :  4  2
+  2 :  3  1
+  1 :  2  0
+  0 :  4  1
+(%i4) dc5 : cycle_digraph(5)$
+(%i5) print_graph(dc5)$
+Digraph on 5 vertices with 5 arcs.
+Adjacencies:
+  4 :  0
+  3 :  4
+  2 :  3
+  1 :  2
+  0 :  1
+(%i6) out_neighbors(0, dc5);
+(%o6)                          [1]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+</div>
+</p></dd></dl>
+
+<span id="radius"></span><span id="Item_003a-graphs_002fdeffn_002fradius"></span><dl class="def">
+<dt id="index-radius"><span class="category">Function: </span><span><strong>radius</strong> <em>(<var>gr</var>)</em><a href='#index-radius' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the radius of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) radius(dodecahedron_graph());
+(%o2)                           5
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="set_005fedge_005fweight"></span><span id="Item_003a-graphs_002fdeffn_002fset_005fedge_005fweight"></span><dl class="def">
+<dt id="index-set_005fedge_005fweight"><span class="category">Function: </span><span><strong>set_edge_weight</strong> <em>(<var>e</var>, <var>w</var>, <var>gr</var>)</em><a href='#index-set_005fedge_005fweight' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Assigns the weight <var>w</var> to the edge <var>e</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : create_graph([1, 2], [[[1,2], 1.2]])$
+(%i3) get_edge_weight([1,2], g);
+(%o3)                          1.2
+(%i4) set_edge_weight([1,2], 2.1, g);
+(%o4)                         done
+(%i5) get_edge_weight([1,2], g);
+(%o5)                          2.1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="set_005fvertex_005flabel"></span><span id="Item_003a-graphs_002fdeffn_002fset_005fvertex_005flabel"></span><dl class="def">
+<dt id="index-set_005fvertex_005flabel"><span class="category">Function: </span><span><strong>set_vertex_label</strong> <em>(<var>v</var>, <var>l</var>, <var>gr</var>)</em><a href='#index-set_005fvertex_005flabel' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Assigns the label <var>l</var> to the vertex <var>v</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : create_graph([[1, &quot;One&quot;], [2, &quot;Two&quot;]], [[1,2]])$
+(%i3) get_vertex_label(1, g);
+(%o3)                          One
+(%i4) set_vertex_label(1, &quot;oNE&quot;, g);
+(%o4)                         done
+(%i5) get_vertex_label(1, g);
+(%o5)                          oNE
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="shortest_005fpath"></span><span id="Item_003a-graphs_002fdeffn_002fshortest_005fpath"></span><dl class="def">
+<dt id="index-shortest_005fpath"><span class="category">Function: </span><span><strong>shortest_path</strong> <em>(<var>u</var>, <var>v</var>, <var>gr</var>)</em><a href='#index-shortest_005fpath' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the shortest path from <var>u</var> to <var>v</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) d : dodecahedron_graph()$
+(%i3) path : shortest_path(0, 7, d);
+(%o3)                   [0, 1, 19, 13, 7]
+(%i4) draw_graph(d, show_edges=vertices_to_path(path))$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<img src="figures/graphs08.png" alt="figures/graphs08">
+
+<span id="shortest_005fweighted_005fpath"></span><span id="Item_003a-graphs_002fdeffn_002fshortest_005fweighted_005fpath"></span><dl class="def">
+<dt id="index-shortest_005fweighted_005fpath"><span class="category">Function: </span><span><strong>shortest_weighted_path</strong> <em>(<var>u</var>, <var>v</var>, <var>gr</var>)</em><a href='#index-shortest_005fweighted_005fpath' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the length of the shortest weighted path and the shortest
+weighted path from <var>u</var> to <var>v</var> in the graph <var>gr</var>.
+</p>
+<p>The length of a weighted path is the sum of edge weights of edges in the
+path. If an edge has no weight, then it has a default weight 1.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g: petersen_graph(20, 2)$
+(%i3) for e in edges(g) do set_edge_weight(e, random(1.0), g)$
+(%i4) shortest_weighted_path(0, 10, g);
+(%o4) [2.575143920268482, [0, 20, 38, 36, 34, 32, 30, 10]]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="strong_005fcomponents"></span><span id="Item_003a-graphs_002fdeffn_002fstrong_005fcomponents"></span><dl class="def">
+<dt id="index-strong_005fcomponents"><span class="category">Function: </span><span><strong>strong_components</strong> <em>(<var>gr</var>)</em><a href='#index-strong_005fcomponents' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the strong components of a directed graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) t : random_tournament(4)$
+(%i3) strong_components(t);
+(%o3)                 [[1], [0], [2], [3]]
+(%i4) vertex_out_degree(3, t);
+(%o4)                           3
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="topological_005fsort"></span><span id="Item_003a-graphs_002fdeffn_002ftopological_005fsort"></span><dl class="def">
+<dt id="index-topological_005fsort"><span class="category">Function: </span><span><strong>topological_sort</strong> <em>(<var>dag</var>)</em><a href='#index-topological_005fsort' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a topological sorting of the vertices of a directed graph
+<var>dag</var> or an empty list if <var>dag</var> is not a directed acyclic graph.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g:create_graph(
+         [1,2,3,4,5],
+         [
+          [1,2], [2,5], [5,3],
+          [5,4], [3,4], [1,3]
+         ],
+         directed=true)$
+(%i3) topological_sort(g);
+(%o3)                    [1, 2, 5, 3, 4]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fconnectivity"></span><span id="Item_003a-graphs_002fdeffn_002fvertex_005fconnectivity"></span><dl class="def">
+<dt id="index-vertex_005fconnectivity"><span class="category">Function: </span><span><strong>vertex_connectivity</strong> <em>(<var>g</var>)</em><a href='#index-vertex_005fconnectivity' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the vertex connectivity of the graph <var>g</var>.
+</p>
+<p>See also <code><a href="#min_005fvertex_005fcut">min_vertex_cut</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fdegree"></span><span id="Item_003a-graphs_002fdeffn_002fvertex_005fdegree"></span><dl class="def">
+<dt id="index-vertex_005fdegree"><span class="category">Function: </span><span><strong>vertex_degree</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-vertex_005fdegree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the degree of the vertex <var>v</var> in the graph <var>gr</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fdistance"></span><span id="Item_003a-graphs_002fdeffn_002fvertex_005fdistance"></span><dl class="def">
+<dt id="index-vertex_005fdistance"><span class="category">Function: </span><span><strong>vertex_distance</strong> <em>(<var>u</var>, <var>v</var>, <var>gr</var>)</em><a href='#index-vertex_005fdistance' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the length of the shortest path between <var>u</var> and <var>v</var> in
+the (directed) graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) d : dodecahedron_graph()$
+(%i3) vertex_distance(0, 7, d);
+(%o3)                           4
+(%i4) shortest_path(0, 7, d);
+(%o4)                   [0, 1, 19, 13, 7]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005feccentricity"></span><span id="Item_003a-graphs_002fdeffn_002fvertex_005feccentricity"></span><dl class="def">
+<dt id="index-vertex_005feccentricity"><span class="category">Function: </span><span><strong>vertex_eccentricity</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-vertex_005feccentricity' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the eccentricity of the vertex <var>v</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g:cycle_graph(7)$
+(%i3) vertex_eccentricity(0, g);
+(%o3)                           3
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fin_005fdegree"></span><span id="Item_003a-graphs_002fdeffn_002fvertex_005fin_005fdegree"></span><dl class="def">
+<dt id="index-vertex_005fin_005fdegree"><span class="category">Function: </span><span><strong>vertex_in_degree</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-vertex_005fin_005fdegree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the in-degree of the vertex <var>v</var> in the directed graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p5 : path_digraph(5)$
+(%i3) print_graph(p5)$
+Digraph on 5 vertices with 4 arcs.
+Adjacencies:
+  4 :
+  3 :  4
+  2 :  3
+  1 :  2
+  0 :  1
+(%i4) vertex_in_degree(4, p5);
+(%o4)                           1
+(%i5) in_neighbors(4, p5);
+(%o5)                          [3]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fout_005fdegree"></span><span id="Item_003a-graphs_002fdeffn_002fvertex_005fout_005fdegree"></span><dl class="def">
+<dt id="index-vertex_005fout_005fdegree"><span class="category">Function: </span><span><strong>vertex_out_degree</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-vertex_005fout_005fdegree' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the out-degree of the vertex <var>v</var> in the directed graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) t : random_tournament(10)$
+(%i3) vertex_out_degree(0, t);
+(%o3)                           2
+(%i4) out_neighbors(0, t);
+(%o4)                        [7, 1]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="vertices"></span><span id="Item_003a-graphs_002fdeffn_002fvertices"></span><dl class="def">
+<dt id="index-vertices"><span class="category">Function: </span><span><strong>vertices</strong> <em>(<var>gr</var>)</em><a href='#index-vertices' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the list of vertices in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) vertices(complete_graph(4));
+(%o2)                     [3, 2, 1, 0]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fcoloring"></span><span id="Item_003a-graphs_002fdeffn_002fvertex_005fcoloring"></span><dl class="def">
+<dt id="index-vertex_005fcoloring"><span class="category">Function: </span><span><strong>vertex_coloring</strong> <em>(<var>gr</var>)</em><a href='#index-vertex_005fcoloring' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns an optimal coloring of the vertices of the graph <var>gr</var>.
+</p>
+<p>The function returns the chromatic number and a list representing the
+coloring of the vertices of <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p:petersen_graph()$
+(%i3) vertex_coloring(p);
+(%o3) [3, [[0, 2], [1, 3], [2, 2], [3, 3], [4, 1], [5, 3], 
+                                 [6, 1], [7, 1], [8, 2], [9, 2]]]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+<span id="wiener_005findex"></span><span id="Item_003a-graphs_002fdeffn_002fwiener_005findex"></span><dl class="def">
+<dt id="index-wiener_005findex"><span class="category">Function: </span><span><strong>wiener_index</strong> <em>(<var>gr</var>)</em><a href='#index-wiener_005findex' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Returns the Wiener index of the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i2) wiener_index(dodecahedron_graph());
+(%o2)                          500
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-properties">Package graphs - properties</a>
+</div>
+</p></dd></dl>
+
+</div>
+<div class="subsection" id="Modifying-graphs">
+<h4 class="subsection">62.2.3 Modifying graphs</h4>
+
+<span id="add_005fedge"></span><span id="Item_003a-graphs_002fdeffn_002fadd_005fedge"></span><dl class="def">
+<dt id="index-add_005fedge"><span class="category">Function: </span><span><strong>add_edge</strong> <em>(<var>e</var>, <var>gr</var>)</em><a href='#index-add_005fedge' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Adds the edge <var>e</var> to the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) p : path_graph(4)$
+(%i3) neighbors(0, p);
+(%o3)                          [1]
+(%i4) add_edge([0,3], p);
+(%o4)                         done
+(%i5) neighbors(0, p);
+(%o5)                        [3, 1]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-modifications">Package graphs - modifications</a>
+</div>
+</p></dd></dl>
+
+<span id="add_005fedges"></span><span id="Item_003a-graphs_002fdeffn_002fadd_005fedges"></span><dl class="def">
+<dt id="index-add_005fedges"><span class="category">Function: </span><span><strong>add_edges</strong> <em>(<var>e_list</var>, <var>gr</var>)</em><a href='#index-add_005fedges' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Adds all edges in the list <var>e_list</var> to the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : empty_graph(3)$
+(%i3) add_edges([[0,1],[1,2]], g)$
+(%i4) print_graph(g)$
+Graph on 3 vertices with 2 edges.
+Adjacencies:
+  2 :  1
+  1 :  2  0
+  0 :  1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-modifications">Package graphs - modifications</a>
+</div>
+</p></dd></dl>
+
+<span id="add_005fvertex"></span><span id="Item_003a-graphs_002fdeffn_002fadd_005fvertex"></span><dl class="def">
+<dt id="index-add_005fvertex"><span class="category">Function: </span><span><strong>add_vertex</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-add_005fvertex' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Adds the vertex <var>v</var> to the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : path_graph(2)$
+(%i3) add_vertex(2, g)$
+(%i4) print_graph(g)$
+Graph on 3 vertices with 1 edges.
+Adjacencies:
+  2 :
+  1 :  0
+  0 :  1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-modifications">Package graphs - modifications</a>
+</div>
+</p></dd></dl>
+
+<span id="add_005fvertices"></span><span id="Item_003a-graphs_002fdeffn_002fadd_005fvertices"></span><dl class="def">
+<dt id="index-add_005fvertices"><span class="category">Function: </span><span><strong>add_vertices</strong> <em>(<var>v_list</var>, <var>gr</var>)</em><a href='#index-add_005fvertices' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Adds all vertices in the list <var>v_list</var> to the graph <var>gr</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-modifications">Package graphs - modifications</a>
+</div>
+</p></dd></dl>
+
+<span id="connect_005fvertices"></span><span id="Item_003a-graphs_002fdeffn_002fconnect_005fvertices"></span><dl class="def">
+<dt id="index-connect_005fvertices"><span class="category">Function: </span><span><strong>connect_vertices</strong> <em>(<var>v_list</var>, <var>u_list</var>, <var>gr</var>)</em><a href='#index-connect_005fvertices' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Connects all vertices from the list <var>v_list</var> with the vertices in
+the list <var>u_list</var> in the graph <var>gr</var>.
+</p>
+<p><var>v_list</var> and <var>u_list</var> can be single vertices or lists of
+vertices.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g : empty_graph(4)$
+(%i3) connect_vertices(0, [1,2,3], g)$
+(%i4) print_graph(g)$
+Graph on 4 vertices with 3 edges.
+Adjacencies:
+  3 :  0
+  2 :  0
+  1 :  0
+  0 :  3  2  1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-modifications">Package graphs - modifications</a>
+</div>
+</p></dd></dl>
+
+<span id="contract_005fedge"></span><span id="Item_003a-graphs_002fdeffn_002fcontract_005fedge"></span><dl class="def">
+<dt id="index-contract_005fedge"><span class="category">Function: </span><span><strong>contract_edge</strong> <em>(<var>e</var>, <var>gr</var>)</em><a href='#index-contract_005fedge' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Contracts the edge <var>e</var> in the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g: create_graph(
+      8, [[0,3],[1,3],[2,3],[3,4],[4,5],[4,6],[4,7]])$
+(%i3) print_graph(g)$
+Graph on 8 vertices with 7 edges.
+Adjacencies:
+  7 :  4
+  6 :  4
+  5 :  4
+  4 :  7  6  5  3
+  3 :  4  2  1  0
+  2 :  3
+  1 :  3
+  0 :  3
+(%i4) contract_edge([3,4], g)$
+(%i5) print_graph(g)$
+Graph on 7 vertices with 6 edges.
+Adjacencies:
+  7 :  3
+  6 :  3
+  5 :  3
+  3 :  5  6  7  2  1  0
+  2 :  3
+  1 :  3
+  0 :  3
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-modifications">Package graphs - modifications</a>
+</div>
+</p></dd></dl>
+
+<span id="remove_005fedge"></span><span id="Item_003a-graphs_002fdeffn_002fremove_005fedge"></span><dl class="def">
+<dt id="index-remove_005fedge"><span class="category">Function: </span><span><strong>remove_edge</strong> <em>(<var>e</var>, <var>gr</var>)</em><a href='#index-remove_005fedge' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Removes the edge <var>e</var> from the graph <var>gr</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) c3 : cycle_graph(3)$
+(%i3) remove_edge([0,1], c3)$
+(%i4) print_graph(c3)$
+Graph on 3 vertices with 2 edges.
+Adjacencies:
+  2 :  0  1
+  1 :  2
+  0 :  2
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-modifications">Package graphs - modifications</a>
+</div>
+</p></dd></dl>
+
+<span id="remove_005fvertex"></span><span id="Item_003a-graphs_002fdeffn_002fremove_005fvertex"></span><dl class="def">
+<dt id="index-remove_005fvertex"><span class="category">Function: </span><span><strong>remove_vertex</strong> <em>(<var>v</var>, <var>gr</var>)</em><a href='#index-remove_005fvertex' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Removes the vertex <var>v</var> from the graph <var>gr</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+</div>
+</p></dd></dl>
+
+</div>
+<div class="subsection" id="Reading-and-writing-to-files">
+<h4 class="subsection">62.2.4 Reading and writing to files</h4>
+
+<span id="dimacs_005fexport"></span><span id="Item_003a-graphs_002fdeffn_002fdimacs_005fexport"></span><dl class="def">
+<dt id="index-dimacs_005fexport"><span class="category">Function: </span><span><strong>dimacs_export</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>dimacs_export</tt> (<var>gr</var>, <var>fl</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>dimacs_export</tt> (<var>gr</var>, <var>fl</var>, <var>comment1</var>, ..., <var>commentn</var>)</em><a href='#index-dimacs_005fexport' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Exports the graph into the file <var>fl</var> in the DIMACS format. Optional
+comments will be added to the top of the file.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="dimacs_005fimport"></span><span id="Item_003a-graphs_002fdeffn_002fdimacs_005fimport"></span><dl class="def">
+<dt id="index-dimacs_005fimport"><span class="category">Function: </span><span><strong>dimacs_import</strong> <em>(<var>fl</var>)</em><a href='#index-dimacs_005fimport' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the graph from file <var>fl</var> in the DIMACS format.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="graph6_005fdecode"></span><span id="Item_003a-graphs_002fdeffn_002fgraph6_005fdecode"></span><dl class="def">
+<dt id="index-graph6_005fdecode"><span class="category">Function: </span><span><strong>graph6_decode</strong> <em>(<var>str</var>)</em><a href='#index-graph6_005fdecode' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the graph encoded in the graph6 format in the string <var>str</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="graph6_005fencode"></span><span id="Item_003a-graphs_002fdeffn_002fgraph6_005fencode"></span><dl class="def">
+<dt id="index-graph6_005fencode"><span class="category">Function: </span><span><strong>graph6_encode</strong> <em>(<var>gr</var>)</em><a href='#index-graph6_005fencode' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a string which encodes the graph <var>gr</var> in the graph6 format.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="graph6_005fexport"></span><span id="Item_003a-graphs_002fdeffn_002fgraph6_005fexport"></span><dl class="def">
+<dt id="index-graph6_005fexport"><span class="category">Function: </span><span><strong>graph6_export</strong> <em>(<var>gr_list</var>, <var>fl</var>)</em><a href='#index-graph6_005fexport' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Exports graphs in the list <var>gr_list</var> to the file <var>fl</var> in the
+graph6 format.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="graph6_005fimport"></span><span id="Item_003a-graphs_002fdeffn_002fgraph6_005fimport"></span><dl class="def">
+<dt id="index-graph6_005fimport"><span class="category">Function: </span><span><strong>graph6_import</strong> <em>(<var>fl</var>)</em><a href='#index-graph6_005fimport' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of graphs from the file <var>fl</var> in the graph6 format.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="sparse6_005fdecode"></span><span id="Item_003a-graphs_002fdeffn_002fsparse6_005fdecode"></span><dl class="def">
+<dt id="index-sparse6_005fdecode"><span class="category">Function: </span><span><strong>sparse6_decode</strong> <em>(<var>str</var>)</em><a href='#index-sparse6_005fdecode' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the graph encoded in the sparse6 format in the string <var>str</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="sparse6_005fencode"></span><span id="Item_003a-graphs_002fdeffn_002fsparse6_005fencode"></span><dl class="def">
+<dt id="index-sparse6_005fencode"><span class="category">Function: </span><span><strong>sparse6_encode</strong> <em>(<var>gr</var>)</em><a href='#index-sparse6_005fencode' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a string which encodes the graph <var>gr</var> in the sparse6 format.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="sparse6_005fexport"></span><span id="Item_003a-graphs_002fdeffn_002fsparse6_005fexport"></span><dl class="def">
+<dt id="index-sparse6_005fexport"><span class="category">Function: </span><span><strong>sparse6_export</strong> <em>(<var>gr_list</var>, <var>fl</var>)</em><a href='#index-sparse6_005fexport' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Exports graphs in the list <var>gr_list</var> to the file <var>fl</var> in the
+sparse6 format.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+<span id="sparse6_005fimport"></span><span id="Item_003a-graphs_002fdeffn_002fsparse6_005fimport"></span><dl class="def">
+<dt id="index-sparse6_005fimport"><span class="category">Function: </span><span><strong>sparse6_import</strong> <em>(<var>fl</var>)</em><a href='#index-sparse6_005fimport' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of graphs from the file <var>fl</var> in the sparse6 format.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-io">Package graphs - io</a>
+</div>
+</p></dd></dl>
+
+</div>
+<div class="subsection" id="Visualization">
+<h4 class="subsection">62.2.5 Visualization</h4>
+
+<span id="draw_005fgraph"></span><span id="Item_003a-graphs_002fdeffn_002fdraw_005fgraph"></span><dl class="def">
+<dt id="index-draw_005fgraph"><span class="category">Function: </span><span><strong>draw_graph</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>draw_graph</tt> (<var>graph</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>draw_graph</tt> (<var>graph</var>, <var>option1</var>, ..., <var>optionk</var>)</em><a href='#index-draw_005fgraph' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Draws the graph using the <a href="maxima_216.html">draw</a> package.
+</p>
+<p>The algorithm used to position vertices is specified by the optional
+argument <var>program</var>. The default value is
+<code>program=spring_embedding</code>. <var>draw_graph</var> can also use the
+graphviz programs for positioning vertices, but graphviz must be
+installed separately.
+</p>
+<p>Example 1:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g:grid_graph(10,10)$
+(%i3) m:max_matching(g)$
+(%i4) draw_graph(g,
+   spring_embedding_depth=100,
+   show_edges=m, edge_type=dots,
+   vertex_size=0)$
+</pre></div>
+
+<img src="figures/graphs09.png" alt="figures/graphs09">
+
+<p>Example 2:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g:create_graph(16,
+    [
+     [0,1],[1,3],[2,3],[0,2],[3,4],[2,4],
+     [5,6],[6,4],[4,7],[6,7],[7,8],[7,10],[7,11],
+     [8,10],[11,10],[8,9],[11,12],[9,15],[12,13],
+     [10,14],[15,14],[13,14]
+    ])$
+(%i3) t:minimum_spanning_tree(g)$
+(%i4) draw_graph(
+    g,
+    show_edges=edges(t),
+    show_edge_width=4,
+    show_edge_color=green,
+    vertex_type=filled_square,
+    vertex_size=2
+    )$
+</pre></div>
+
+<img src="figures/graphs10.png" alt="figures/graphs10">
+
+<p>Example 3:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) g:create_graph(16,
+    [
+     [0,1],[1,3],[2,3],[0,2],[3,4],[2,4],
+     [5,6],[6,4],[4,7],[6,7],[7,8],[7,10],[7,11],
+     [8,10],[11,10],[8,9],[11,12],[9,15],[12,13],
+     [10,14],[15,14],[13,14]
+    ])$
+(%i3) mi : max_independent_set(g)$
+(%i4) draw_graph(
+    g,
+    show_vertices=mi,
+    show_vertex_type=filled_up_triangle,
+    show_vertex_size=2,
+    edge_color=cyan,
+    edge_width=3,
+    show_id=true,
+    text_color=brown
+    )$
+</pre></div>
+
+<img src="figures/graphs11.png" alt="figures/graphs11">
+
+<p>Example 4:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;graphs&quot;)$
+(%i2) net : create_graph(
+    [0,1,2,3,4,5],
+    [
+     [[0,1], 3], [[0,2], 2],
+     [[1,3], 1], [[1,4], 3],
+     [[2,3], 2], [[2,4], 2],
+     [[4,5], 2], [[3,5], 2]
+    ],
+    directed=true
+    )$
+(%i3) draw_graph(
+    net,
+    show_weight=true,
+    vertex_size=0,
+    show_vertices=[0,5],
+    show_vertex_type=filled_square,
+    head_length=0.2,
+    head_angle=10,
+    edge_color=&quot;dark-green&quot;,
+    text_color=blue
+    )$
+</pre></div>
+
+<img src="figures/graphs12.png" alt="figures/graphs12">
+
+<p>Example 5:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;graphs&quot;)$
+(%i2) g: petersen_graph(20, 2);
+(%o2)                         GRAPH
+(%i3) draw_graph(g, redraw=true, program=planar_embedding);
+(%o3)                         done
+</pre></div>
+
+<img src="figures/graphs14.png" alt="figures/graphs14">
+
+<p>Example 6:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;graphs&quot;)$
+(%i2) t: tutte_graph();
+(%o2)                         GRAPH
+(%i3) draw_graph(t, redraw=true, 
+                    fixed_vertices=[1,2,3,4,5,6,7,8,9]);
+(%o3)                         done
+</pre></div>
+
+<img src="figures/graphs15.png" alt="figures/graphs15">
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+</div>
+</p></dd></dl>
+
+<span id="draw_005fgraph_005fprogram"></span><span id="Item_003a-graphs_002fdefvr_002fdraw_005fgraph_005fprogram"></span><dl class="def">
+<dt id="index-draw_005fgraph_005fprogram"><span class="category">Option variable: </span><span><strong>draw_graph_program</strong><a href='#index-draw_005fgraph_005fprogram' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <var>spring_embedding</var>
+</p>
+<p>The default value for the program used to position vertices in
+<code>draw_graph</code> program.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fid"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fid"></span><dl class="def">
+<dt id="index-show_005fid"><span class="category">draw_graph option: </span><span><strong>show_id</strong><a href='#index-show_005fid' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <var>false</var>
+</p>
+<p>If <var>true</var> then ids of the vertices are displayed.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005flabel"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005flabel"></span><dl class="def">
+<dt id="index-show_005flabel"><span class="category">draw_graph option: </span><span><strong>show_label</strong><a href='#index-show_005flabel' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <var>false</var>
+</p>
+<p>If <var>true</var> then labels of the vertices are displayed.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="label_005falignment_005fgraphs"></span><span id="Item_003a-graphs_002fdefvr_002flabel_005falignment"></span><dl class="def">
+<dt id="index-label_005falignment-1"><span class="category">draw_graph option: </span><span><strong>label_alignment</strong><a href='#index-label_005falignment-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <var>center</var>
+</p>
+<p>Determines how to align the labels/ids of the vertices. Can
+be <code>left</code>, <code>center</code> or <code>right</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fweight"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fweight"></span><dl class="def">
+<dt id="index-show_005fweight"><span class="category">draw_graph option: </span><span><strong>show_weight</strong><a href='#index-show_005fweight' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <var>false</var>
+</p>
+<p>If <var>true</var> then weights of the edges are displayed.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005ftype"></span><span id="Item_003a-graphs_002fdefvr_002fvertex_005ftype"></span><dl class="def">
+<dt id="index-vertex_005ftype"><span class="category">draw_graph option: </span><span><strong>vertex_type</strong><a href='#index-vertex_005ftype' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <var>circle</var>
+</p>
+<p>Defines how vertices are displayed. See the <var>point_type</var> option for
+the <code>draw</code> package for possible values.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fsize"></span><span id="Item_003a-graphs_002fdefvr_002fvertex_005fsize"></span><dl class="def">
+<dt id="index-vertex_005fsize"><span class="category">draw_graph option: </span><span><strong>vertex_size</strong><a href='#index-vertex_005fsize' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The size of vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fcolor"></span><span id="Item_003a-graphs_002fdefvr_002fvertex_005fcolor"></span><dl class="def">
+<dt id="index-vertex_005fcolor"><span class="category">draw_graph option: </span><span><strong>vertex_color</strong><a href='#index-vertex_005fcolor' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The color used for displaying vertices.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fvertices"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fvertices"></span><dl class="def">
+<dt id="index-show_005fvertices"><span class="category">draw_graph option: </span><span><strong>show_vertices</strong><a href='#index-show_005fvertices' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: []
+</p>
+<p>Display selected vertices in the using a different color.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fvertex_005ftype"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fvertex_005ftype"></span><dl class="def">
+<dt id="index-show_005fvertex_005ftype"><span class="category">draw_graph option: </span><span><strong>show_vertex_type</strong><a href='#index-show_005fvertex_005ftype' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Defines how vertices specified in <var>show_vertices</var> are displayed.
+See the <var>point_type</var> option for the <code>draw</code> package for possible
+values.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fvertex_005fsize"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fvertex_005fsize"></span><dl class="def">
+<dt id="index-show_005fvertex_005fsize"><span class="category">draw_graph option: </span><span><strong>show_vertex_size</strong><a href='#index-show_005fvertex_005fsize' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The size of vertices in <var>show_vertices</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fvertex_005fcolor"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fvertex_005fcolor"></span><dl class="def">
+<dt id="index-show_005fvertex_005fcolor"><span class="category">draw_graph option: </span><span><strong>show_vertex_color</strong><a href='#index-show_005fvertex_005fcolor' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The color used for displaying vertices in the <var>show_vertices</var> list.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fpartition"></span><span id="Item_003a-graphs_002fdefvr_002fvertex_005fpartition"></span><dl class="def">
+<dt id="index-vertex_005fpartition"><span class="category">draw_graph option: </span><span><strong>vertex_partition</strong><a href='#index-vertex_005fpartition' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: []
+</p>
+<p>A partition <code>[[v1,v2,...],...,[vk,...,vn]]</code> of the vertices of the
+graph. The vertices of each list in the partition will be drawn in a
+different color.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="vertex_005fcoloring_005fvariable"></span><span id="Item_003a-graphs_002fdefvr_002fvertex_005fcoloring"></span><dl class="def">
+<dt id="index-vertex_005fcoloring-1"><span class="category">draw_graph option: </span><span><strong>vertex_coloring</strong><a href='#index-vertex_005fcoloring-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Specifies coloring of the vertices. The coloring <var>col</var> must be
+specified in the format as returned by <var>vertex_coloring</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="edge_005fcolor"></span><span id="Item_003a-graphs_002fdefvr_002fedge_005fcolor"></span><dl class="def">
+<dt id="index-edge_005fcolor"><span class="category">draw_graph option: </span><span><strong>edge_color</strong><a href='#index-edge_005fcolor' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The color used for displaying edges.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="edge_005fwidth"></span><span id="Item_003a-graphs_002fdefvr_002fedge_005fwidth"></span><dl class="def">
+<dt id="index-edge_005fwidth"><span class="category">draw_graph option: </span><span><strong>edge_width</strong><a href='#index-edge_005fwidth' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The width of edges.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="edge_005ftype"></span><span id="Item_003a-graphs_002fdefvr_002fedge_005ftype"></span><dl class="def">
+<dt id="index-edge_005ftype"><span class="category">draw_graph option: </span><span><strong>edge_type</strong><a href='#index-edge_005ftype' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Defines how edges are displayed. See the <var>line_type</var> option for the
+<code>draw</code> package.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fedges"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fedges"></span><dl class="def">
+<dt id="index-show_005fedges"><span class="category">draw_graph option: </span><span><strong>show_edges</strong><a href='#index-show_005fedges' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Display edges specified in the list <var>e_list</var> using a different
+color.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fedge_005fcolor"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fedge_005fcolor"></span><dl class="def">
+<dt id="index-show_005fedge_005fcolor"><span class="category">draw_graph option: </span><span><strong>show_edge_color</strong><a href='#index-show_005fedge_005fcolor' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The color used for displaying edges in the <var>show_edges</var> list.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fedge_005fwidth"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fedge_005fwidth"></span><dl class="def">
+<dt id="index-show_005fedge_005fwidth"><span class="category">draw_graph option: </span><span><strong>show_edge_width</strong><a href='#index-show_005fedge_005fwidth' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The width of edges in <var>show_edges</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="show_005fedge_005ftype"></span><span id="Item_003a-graphs_002fdefvr_002fshow_005fedge_005ftype"></span><dl class="def">
+<dt id="index-show_005fedge_005ftype"><span class="category">draw_graph option: </span><span><strong>show_edge_type</strong><a href='#index-show_005fedge_005ftype' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Defines how edges in <var>show_edges</var> are displayed. See the
+<var>line_type</var> option for the <code>draw</code> package.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="edge_005fpartition"></span><span id="Item_003a-graphs_002fdefvr_002fedge_005fpartition"></span><dl class="def">
+<dt id="index-edge_005fpartition"><span class="category">draw_graph option: </span><span><strong>edge_partition</strong><a href='#index-edge_005fpartition' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>A partition <code>[[e1,e2,...],...,[ek,...,em]]</code> of edges of the
+graph. The edges of each list in the partition will be drawn using a
+different color.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="edge_005fcoloring_005fvariable"></span><span id="Item_003a-graphs_002fdefvr_002fedge_005fcoloring"></span><dl class="def">
+<dt id="index-edge_005fcoloring-1"><span class="category">draw_graph option: </span><span><strong>edge_coloring</strong><a href='#index-edge_005fcoloring-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The coloring of edges. The coloring must be specified in the
+format as returned by the function <var>edge_coloring</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="redraw"></span><span id="Item_003a-graphs_002fdefvr_002fredraw"></span><dl class="def">
+<dt id="index-redraw"><span class="category">draw_graph option: </span><span><strong>redraw</strong><a href='#index-redraw' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <var>false</var>
+</p>
+<p>If <code>true</code>, vertex positions are recomputed even if the positions
+have been saved from a previous drawing of the graph.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="head_005fangle_005fgraphs"></span><span id="Item_003a-graphs_002fdefvr_002fhead_005fangle"></span><dl class="def">
+<dt id="index-head_005fangle-1"><span class="category">draw_graph option: </span><span><strong>head_angle</strong><a href='#index-head_005fangle-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: 15
+</p>
+<p>The angle for the arrows displayed on arcs (in directed graphs).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="head_005flength_005fgraphs"></span><span id="Item_003a-graphs_002fdefvr_002fhead_005flength"></span><dl class="def">
+<dt id="index-head_005flength-1"><span class="category">draw_graph option: </span><span><strong>head_length</strong><a href='#index-head_005flength-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: 0.1
+</p>
+<p>The length for the arrows displayed on arcs (in directed graphs).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="spring_005fembedding_005fdepth"></span><span id="Item_003a-graphs_002fdefvr_002fspring_005fembedding_005fdepth"></span><dl class="def">
+<dt id="index-spring_005fembedding_005fdepth"><span class="category">draw_graph option: </span><span><strong>spring_embedding_depth</strong><a href='#index-spring_005fembedding_005fdepth' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: 50
+</p>
+<p>The number of iterations in the spring embedding graph drawing
+algorithm.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="terminal_005fgraphs"></span><span id="Item_003a-graphs_002fdefvr_002fterminal"></span><dl class="def">
+<dt id="index-terminal-1"><span class="category">draw_graph option: </span><span><strong>terminal</strong><a href='#index-terminal-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The terminal used for drawing (see the <var>terminal</var> option in the
+<code>draw</code> package).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="file_005fname_005fgraphs"></span><span id="Item_003a-graphs_002fdefvr_002ffile_005fname"></span><dl class="def">
+<dt id="index-file_005fname-1"><span class="category">draw_graph option: </span><span><strong>file_name</strong><a href='#index-file_005fname-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>The filename of the drawing if terminal is not screen.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="program"></span><span id="Item_003a-graphs_002fdefvr_002fprogram"></span><dl class="def">
+<dt id="index-program"><span class="category">draw_graph option: </span><span><strong>program</strong><a href='#index-program' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Defines the program used for positioning vertices of the graph. Can be
+one of the graphviz programs (dot, neato, twopi, circ, fdp),
+<var>circular</var>, <var>spring_embedding</var> or
+<var>planar_embedding</var>. <var>planar_embedding</var> is only available for
+2-connected planar graphs. When <code>program=spring_embedding</code>, a set
+of vertices with fixed position can be specified with the
+<var>fixed_vertices</var> option.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="fixed_005fvertices"></span><span id="Item_003a-graphs_002fdefvr_002ffixed_005fvertices"></span><dl class="def">
+<dt id="index-fixed_005fvertices"><span class="category">draw_graph option: </span><span><strong>fixed_vertices</strong><a href='#index-fixed_005fvertices' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Specifies a list of vertices which will have positions fixed along a regular polygon.
+Can be used when <code>program=spring_embedding</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs-_002d-draw_005fgraphs-options">Package graphs - draw_graphs options</a>
+</div>
+</p></dd></dl>
+
+<span id="vertices_005fto_005fpath"></span><span id="Item_003a-graphs_002fdeffn_002fvertices_005fto_005fpath"></span><dl class="def">
+<dt id="index-vertices_005fto_005fpath"><span class="category">Function: </span><span><strong>vertices_to_path</strong> <em>(<var>v_list</var>)</em><a href='#index-vertices_005fto_005fpath' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Converts a list <var>v_list</var> of vertices to a list of edges of the path
+defined by <var>v_list</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+</div>
+</p></dd></dl>
+
+<span id="vertices_005fto_005fcycle"></span><span id="Item_003a-graphs_002fdeffn_002fvertices_005fto_005fcycle"></span><dl class="def">
+<dt id="index-vertices_005fto_005fcycle"><span class="category">Function: </span><span><strong>vertices_to_cycle</strong> <em>(<var>v_list</var>)</em><a href='#index-vertices_005fto_005fcycle' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Converts a list <var>v_list</var> of vertices to a list of edges of the cycle
+defined by <var>v_list</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fgrobner_002dpkg"></span></div>
+</div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_248.html" accesskey="p" rel="prev">Introduction to graphs</a>, Up: <a href="maxima_247.html" accesskey="u" rel="up">graphs</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
