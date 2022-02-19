@@ -18,9 +18,7 @@ Be aware that if you are building a new version there are a number of things you
 ## Mac
 First install [Packages](http://s.sudre.free.fr/Software/Packages/about.html) (The program that generates the installer-file)
 
-Currently the Mac folder is missing a file/folder called **maxima.app** in ExternalProgram before it can be compiled as it exceeds the GitHub limit of 100 MB.
-You can get this file from the most recent installer. Then place it in the Mac/ExternalPrograms folder. Once installed, the maxima.app file will be placed in the folder: '/Library/Application support/Microsoft/Office365/User Content/Add-ins/WordMat/' Where Word has execute privileges.
-Also the paths in the pkgproj file probably needs to be set manually on a new computer. A work in progress.
+Some paths in the pkgproj file probably needs to be set manually on a new computer. A work in progress.
 
 To build do the following
 1. Open WordMat.pkgproj
@@ -33,9 +31,9 @@ See section *New release checklist*
 
 If the build fails because of permission issues a reboot often helps.
 
-# Creating the MaximaWM folder
-You can't download Maxima and just use it any more. A special folder called 'MaximaWM' with all the needed files to run maxima via WordMat must be used.
-This must be done for intel and M1 separately. These folders are already made, but in the case they break because of a new Mac update:
+# Creating the MaximaWM folder for Mac
+A special folder called 'MaximaWM' with all the needed files to run maxima via WordMat must be used.
+This must be done for intel and M1 Macs separately. These folders are already made, but in the case they break because of a new Mac update:
 1. Install Xcode
 2. Install Macports.  macports.org. 
     If already installed just update 'sudo port selfupdate' A new MacOS might require a new install though
@@ -45,8 +43,8 @@ This must be done for intel and M1 separately. These folders are already made, b
 6. From /opt/local/bin find the folowing files:
 sbcl
 gtimeout
-gnuplot
-maxima
+(gnuplot)
+(maxima)
 and copy to MaximaWM/maxima/bin
 7. Rename gtimeout to 'Maximatimeout'
 8. Start maxima:
@@ -57,11 +55,11 @@ and copy to MaximaWM/maxima/bin
 9. Place the core-files in MaximaWM/maxima/lib/maxima/5.45.1/binary-sbcl/
 
 **Structure of MaximaWM**
-maxima/bin      contains all executables
+maxima/bin      contains all executables(sbcl,Maximatimeout)
 maxima/info     Must be present for maxima to run
 maxima/lib/maxima/5.45.1/binary-sbcl/   maxima.core and maximaunit.core files
 maxima/share    Contains math-files that can be loaded into Maxima.
-root            scripts to test maxima
+root            maxima.sh used by WordMat to run Maxima (and maybe other scripts to test maxima)
 
 # New release checklist
 Whenever a new release is compiled the following checklist must be followed
@@ -122,31 +120,33 @@ linenum:-1;
 The version of Maxima used is the most recent version which I could get to work on both Windows and Mac. Both version are SBCL compiled versions, hence they should behave almost identical.
 
 ### Compiling maxima.core on Mac
-- In the following use a normal maxima 5.38.0 installation from the programs folder and not from the GitHub repository
-- Right click the maxima.app and choose show contents to navigate the contents
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *maxima.app/Contents/Resourcecs/maxima/share/maxima/5.38.0/share/contrib/*
-   from v. 39:  'maxima.app/Contents/Resources/opt/share/maxima/5.43.0/share/contrib/'
+Must be done separately on intel and M1
+- Ensure you have a functioning MaximaWM folder. (See above)
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *MaximaWM/maxima/share/maxima/5.45.1/share/contrib/*
+    From Shared/Maxima-files
 - Copy unit.mac to the subfolder unit of the contrib-folder
-…- Run maxima.app.
-  (If it fails to open: Open terminal, right click maxima.app, show contents, navigate to find Resources/maxima.sh, dragn drop maxima.sh to terminal and press enter)
-- Run the following commands in the terminal window
+- Run maxima
+    Open terminal 
+    cd to MaximaWM
+    ./maxima/bin/maxima 
+- Run the following commands in the terminal window (Make sure to adjust the path in the last line to your user)
 ```
-load(solvereal)$
+*Open solvereal.mac and copy paste content to terminal*
 load(draw)$
 gnuplot_command:"/Applications/WordMat/gnuplot/gnuplot";
 set_plot_option([gnuplot_term, aqua])$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
-:lisp (sb-ext:save-lisp-and-die "/users/test/maxima.core" :toplevel #'cl-user::run)
+:lisp (sb-ext:save-lisp-and-die "/users/youruser/maxima.core" :toplevel #'cl-user::run)
 ```
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *Users/youruser* or same dir as maxima
-- Copy *Users/youruser/maxima.core* to  *maxima.app/Contents/Resources/maxima/lib/maxima/5.38.0/binary-sbcl/* in the Mac folder in the GitHub repository
+- Copy *Users/youruser/maxima.core* to  *MaximaWM/maxima/lib/maxima/5.45.1/binary-sbcl/* in the Mac folder in the GitHub repository
 - The new maxima.core file can be run using the command 'sbcl --core maxima.core'
-
-**Notes**
->If load(solvereal) fails the contents of the file can be copy/pasted to the terminal window in stead.
+    This is handled by maxima.sh
+    
+Repeat the process to generate the maximaunit.core, but also copy the content from WordMatUnitaddon.mac into the terminal, after copying from solvereal.mac
 
 ## Creating WordMatMac.dotm for Mac
 Whenever there are changes to the VBA code in WordMat.dotm a new Mac-version of the same file must be prepared. This file is called *WordMatMac.dotm*
