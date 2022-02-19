@@ -33,6 +33,36 @@ See section *New release checklist*
 
 If the build fails because of permission issues a reboot often helps.
 
+# Creating the MaximaWM folder
+You can't download Maxima and just use it any more. A special folder called 'MaximaWM' with all the needed files to run maxima via WordMat must be used.
+This must be done for intel and M1 separately. These folders are already made, but in the case they break because of a new Mac update:
+1. Install Xcode
+2. Install Macports.  macports.org. 
+    If already installed just update 'sudo port selfupdate' A new MacOS might require a new install though
+3. Install Maxima through Macports 'sudo port install maxima'. (Also see instructions in dmg download from maxima.sourceforge.io if you have problems)
+4. Install gnuplot via macport 'sudo port install gnuplot'
+5. Install gnu core utils using macport 'sudo port install coreutils'
+6. From /opt/local/bin find the folowing files:
+sbcl
+gtimeout
+gnuplot
+maxima
+and copy to MaximaWM/maxima/bin
+7. Rename gtimeout to 'Maximatimeout'
+8. Start maxima:
+    Open terminal
+    cd to MaximaWM by dragging the path from finder
+    './maxima/bin/maxima'
+    create maxima.core and maximaunit.core(see description below)
+9. Place the core-files in MaximaWM/maxima/lib/maxima/5.45.1/binary-sbcl/
+
+**Structure of MaximaWM**
+maxima/bin      contains all executables
+maxima/info     Must be present for maxima to run
+maxima/lib/maxima/5.45.1/binary-sbcl/   maxima.core and maximaunit.core files
+maxima/share    Contains math-files that can be loaded into Maxima.
+root            scripts to test maxima
+
 # New release checklist
 Whenever a new release is compiled the following checklist must be followed
 1. If any changes have been made to SolveReal.mac or WordMatunitAddon.mac a new maxima.core and/or maximaunit.core must be built for both Windows and Mac. See section *Buidling a new maxima.core*

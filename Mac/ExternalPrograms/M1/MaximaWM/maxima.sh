@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 #SCRIPT="${BASH_SOURCE[0]}"
 #while [ -L "$SCRIPT" ] ; do SCRIPT=`(readlink "$SCRIPT")` ; done
@@ -12,5 +12,14 @@ PATH="$MAXIMA_PREFIX/bin:$PATH"
 export PATH
 #function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 echo Starting Maxima M1-compiled
+
+MaxTime=$1
+
+if [[ -z "$MaxTime" ]] 
+then 
+	MaxTime="10"
+fi
+
 #exec "$MAXIMA_PREFIX/bin/maxima" "$1" "$2" "$3" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
-"$MAXIMA_PREFIX/bin/Maximatimeout" 10 "$MAXIMA_PREFIX/bin/sbcl" --core "$MAXIMA_PREFIX/lib/maxima/5.45.1/binary-sbcl/maxima.core"
+# "$MAXIMA_PREFIX/bin/Maximatimeout" 10
+"$MAXIMA_PREFIX/bin/Maximatimeout" --signal=0 --kill-after=$MaxTime $MaxTime "$MAXIMA_PREFIX/bin/sbcl" --core "$MAXIMA_PREFIX/lib/maxima/5.45.1/binary-sbcl/maxima.core" --batch-string="$2"
