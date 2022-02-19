@@ -131,9 +131,9 @@ Must be done separately on intel and M1
     ./maxima/bin/maxima 
 - Run the following commands in the terminal window (Make sure to adjust the path in the last line to your user)
 ```
-*Open solvereal.mac and copy paste content to terminal*
+*Open solvereal.mac and copy/paste content to terminal*
 load(draw)$
-gnuplot_command:"/Applications/WordMat/gnuplot/gnuplot";
+gnuplot_command:"/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot";
 set_plot_option([gnuplot_term, aqua])$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
