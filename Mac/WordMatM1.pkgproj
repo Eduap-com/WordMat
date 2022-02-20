@@ -45,7 +45,7 @@
 									<key>GID</key>
 									<integer>80</integer>
 									<key>PATH</key>
-									<string>ExternalPrograms/Intel/GeoGebra 5.app</string>
+									<string>ExternalPrograms/GeoGebra 5.app</string>
 									<key>PATH_TYPE</key>
 									<integer>1</integer>
 									<key>PERMISSIONS</key>
@@ -160,7 +160,7 @@
 																					<key>GID</key>
 																					<integer>80</integer>
 																					<key>PATH</key>
-																					<string>ExternalPrograms/Intel/MaximaWM</string>
+																					<string>ExternalPrograms/M1/MaximaWM</string>
 																					<key>PATH_TYPE</key>
 																					<integer>1</integer>
 																					<key>PERMISSIONS</key>
