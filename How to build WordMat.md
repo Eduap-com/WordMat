@@ -172,4 +172,13 @@ To avoid this, follow this procedure:
 7. Check if the VBA code will compile on Mac by pressing fn+Alt+F11 to open the VBE then click in the menu *Debug | Compile project*
 8. Place the *WordMatMac.dotm* file in the root of the Mac folder
 
+## Creating Excel-files
+There is a 'Excel-files' folder in both Windows and Mac folders.
+Excel-files must be changed/coded on Windows.
+To make a 'Mac'-copy do the following:
+- Copy the Excel-book
+- Open it on a Windows computer and Run Macro 'ReplaceToNonUnicode' 
+- On a Mac open the file and run macro 'ReplaceToUnicode'
+*(Make sure to add reference 'Microsoft Visual Basic for Applications Extensibility 5.3')*
+
 
