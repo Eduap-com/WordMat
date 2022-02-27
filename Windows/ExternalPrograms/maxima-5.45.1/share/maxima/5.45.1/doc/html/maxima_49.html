@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions for Complex Numbers (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions for Complex Numbers (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions for Complex Numbers (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_47.html" rel="up" title="Mathematical Functions">
+<link href="maxima_50.html" rel="next" title="Combinatorial Functions">
+<link href="maxima_48.html" rel="prev" title="Functions for Numbers">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Functions-for-Complex-Numbers"></span><div class="header">
+<p>
+Next: <a href="maxima_50.html" accesskey="n" rel="next">Combinatorial Functions</a>, Previous: <a href="maxima_48.html" accesskey="p" rel="prev">Functions for Numbers</a>, Up: <a href="maxima_47.html" accesskey="u" rel="up">Mathematical Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-for-Complex-Numbers-1"></span><h3 class="section">10.2 Functions for Complex Numbers</h3>
+
+<span id="cabs"></span><span id="Item_003a-MathFunctions_002fdeffn_002fcabs"></span><dl>
+<dt id="index-cabs">Function: <strong>cabs</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Calculates the absolute value of an expression representing a complex
+number.  Unlike the function <code><a href="maxima_48.html#abs">abs</a></code>, the <code>cabs</code> function always
+decomposes its argument into a real and an imaginary part.  If <code>x</code> and
+<code>y</code> represent real variables or expressions, the <code>cabs</code> function
+calculates the absolute value of <code>x + %i*y</code> as
+</p>
+<div class="example">
+<pre class="example">(%i1) cabs (1);
+(%o1)                           1
+</pre><pre class="example">(%i2) cabs (1 + %i);
+(%o2)                        sqrt(2)
+</pre><pre class="example">(%i3) cabs (exp (%i));
+(%o3)                           1
+</pre><pre class="example">(%i4) cabs (exp (%pi * %i));
+(%o4)                           1
+</pre><pre class="example">(%i5) cabs (exp (3/2 * %pi * %i));
+(%o5)                           1
+</pre><pre class="example">(%i6) cabs (17 * exp (2 * %i));
+(%o6)                          17
+</pre></div>
+
+<p>If <code>cabs</code> returns a noun form this most commonly is caused by
+some properties of the variables involved not being known:
+</p>
+<div class="example">
+<pre class="example">(%i1) cabs (a+%i*b);
+                                2    2
+(%o1)                     sqrt(b  + a )
+</pre><pre class="example">(%i2) declare(a,real,b,real);
+(%o2)                         done
+</pre><pre class="example">(%i3) cabs (a+%i*b);
+                                2    2
+(%o3)                     sqrt(b  + a )
+</pre><pre class="example">(%i4) assume(a&gt;0,b&gt;0);
+(%o4)                    [a &gt; 0, b &gt; 0]
+</pre><pre class="example">(%i5) cabs (a+%i*b);
+                                2    2
+(%o5)                     sqrt(b  + a )
+</pre></div>
+
+<p>The <code>cabs</code> function can use known properties like symmetry properties of
+complex functions to help it calculate the absolute value of an expression.  If
+such identities exist, they can be advertised to <code>cabs</code> using function
+properties.  The symmetries that <code>cabs</code> understands are: mirror symmetry,
+conjugate function and complex characteristic.
+</p>
+<p><code>cabs</code> is a verb function and is not suitable for symbolic
+calculations.  For such calculations (including integration,
+differentiation and taking limits of expressions containing absolute
+values), use <code><a href="maxima_48.html#abs">abs</a></code>.
+</p>
+<p>The result of <code>cabs</code> can include the absolute value function,
+<code><a href="maxima_48.html#abs">abs</a></code>, and the arc tangent, <code><a href="maxima_54.html#atan2">atan2</a></code>.
+</p>
+<p>When applied to a list or matrix, <code>cabs</code> automatically distributes over
+the terms.  Similarly, it distributes over both sides of an equation.
+</p>
+<p>For further ways to compute with complex numbers, see the functions
+<code><a href="#rectform">rectform</a></code>, <code><a href="#realpart">realpart</a></code>, <code><a href="#imagpart">imagpart</a></code>,<!-- /@w -->
+<code><a href="#carg">carg</a></code>, <code><a href="#conjugate">conjugate</a></code> and <code><a href="#polarform">polarform</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Examples with <code><a href="maxima_51.html#sqrt">sqrt</a></code> and <code><a href="maxima_54.html#sin">sin</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) cabs(sqrt(1+%i*x));
+                             2     1/4
+(%o1)                      (x  + 1)
+(%i2) cabs(sin(x+%i*y));
+                    2        2         2        2
+(%o2)       sqrt(cos (x) sinh (y) + sin (x) cosh (y))
+</pre></div>
+
+<p>The error function, <code><a href="maxima_83.html#erf">erf</a></code>, has mirror symmetry, which is used here in
+the calculation of the absolute value with a complex argument:
+</p>
+<div class="example">
+<pre class="example">(%i3) cabs(erf(x+%i*y));
+                                          2
+           (erf(%i y + x) - erf(%i y - x))
+(%o3) sqrt(--------------------------------
+                          4
+                                                               2
+                                (erf(%i y + x) + erf(%i y - x))
+                              - --------------------------------)
+                                               4
+</pre></div>
+
+<p>Maxima knows complex identities for the Bessel functions, which allow
+it to compute the absolute value for complex arguments.  Here is an
+example for <code><a href="maxima_79.html#bessel_005fj">bessel_j</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i4) cabs(bessel_j(1,%i));
+(%o4)                 abs(bessel_j(1, %i))
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Complex-variables">Complex variables</a>
+</div>
+</p></dd></dl>
+
+<span id="carg"></span><span id="Item_003a-MathFunctions_002fdeffn_002fcarg"></span><dl>
+<dt id="index-carg">Function: <strong>carg</strong> <em>(<var>z</var>)</em></dt>
+<dd>
+<p>Returns the complex argument of <var>z</var>.  The complex argument is an angle
+<code>theta</code> in <code>(-%pi, %pi]</code> such that <code>r exp (theta %i) = <var>z</var></code>
+where <code>r</code> is the magnitude of <var>z</var>.
+</p>
+<p><code>carg</code> is a computational function, not a simplifying function.
+</p>
+<p>See also <code><a href="maxima_48.html#abs">abs</a></code> (complex magnitude), <code><a href="#polarform">polarform</a></code>,<!-- /@w -->
+<code><a href="#rectform">rectform</a></code>, <code><a href="#realpart">realpart</a></code>, and <code><a href="#imagpart">imagpart</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) carg (1);
+(%o1)                           0
+</pre><pre class="example">(%i2) carg (1 + %i);
+                               %pi
+(%o2)                          ---
+                                4
+</pre><pre class="example">(%i3) carg (exp (%i));
+                               sin(1)
+(%o3)                     atan(------)
+                               cos(1)
+</pre><pre class="example">(%i4) carg (exp (%pi * %i));
+(%o4)                          %pi
+</pre><pre class="example">(%i5) carg (exp (3/2 * %pi * %i));
+                                %pi
+(%o5)                         - ---
+                                 2
+</pre><pre class="example">(%i6) carg (17 * exp (2 * %i));
+                            sin(2)
+(%o6)                  atan(------) + %pi
+                            cos(2)
+</pre></div>
+
+<p>If <code>carg</code> returns a noun form this most commonly is caused by
+some properties of the variables involved not being known:
+</p>
+<div class="example">
+<pre class="example">(%i1) carg (a+%i*b);
+(%o1)                      atan2(b, a)
+</pre><pre class="example">(%i2) declare(a,real,b,real);
+(%o2)                         done
+</pre><pre class="example">(%i3) carg (a+%i*b);
+(%o3)                      atan2(b, a)
+</pre><pre class="example">(%i4) assume(a&gt;0,b&gt;0);
+(%o4)                    [a &gt; 0, b &gt; 0]
+</pre><pre class="example">(%i5) carg (a+%i*b);
+                                  b
+(%o5)                        atan(-)
+                                  a
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Complex-variables">Complex variables</a>
+</div>
+</p></dd></dl>
+
+<span id="conjugate"></span><span id="Item_003a-MathFunctions_002fdeffn_002fconjugate"></span><dl>
+<dt id="index-conjugate">Function: <strong>conjugate</strong> <em>(<var>x</var>)</em></dt>
+<dd>
+<p>Returns the complex conjugate of <var>x</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) declare ([aa, bb], real, cc, complex, ii, imaginary);
+(%o1)                         done
+</pre><pre class="example">(%i2) conjugate (aa + bb*%i);
+(%o2)                      aa - %i bb
+</pre><pre class="example">(%i3) conjugate (cc);
+(%o3)                     conjugate(cc)
+</pre><pre class="example">(%i4) conjugate (ii);
+(%o4)                         - ii
+</pre><pre class="example">(%i5) conjugate (xx + yy);
+(%o5)                        yy + xx
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Complex-variables">Complex variables</a>
+</div>
+</p></dd></dl>
+
+<span id="imagpart"></span><span id="Item_003a-MathFunctions_002fdeffn_002fimagpart"></span><dl>
+<dt id="index-imagpart">Function: <strong>imagpart</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns the imaginary part of the expression <var>expr</var>.
+</p>
+<p><code>imagpart</code> is a computational function, not a simplifying function.
+</p>
+<p>See also <code><a href="maxima_48.html#abs">abs</a></code>, <code><a href="#carg">carg</a></code>, <code><a href="#polarform">polarform</a></code>,<!-- /@w -->
+<code><a href="#rectform">rectform</a></code>, and <code><a href="#realpart">realpart</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) imagpart (a+b*%i);
+(%o1)                           b
+</pre><pre class="example">(%i2) imagpart (1+sqrt(2)*%i);
+(%o2)                        sqrt(2)
+</pre><pre class="example">(%i3) imagpart (1);
+(%o3)                           0
+</pre><pre class="example">(%i4) imagpart (sqrt(2)*%i);
+(%o4)                        sqrt(2)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Complex-variables">Complex variables</a>
+</div>
+</p></dd></dl>
+
+
+<span id="polarform"></span><span id="Item_003a-MathFunctions_002fdeffn_002fpolarform"></span><dl>
+<dt id="index-polarform">Function: <strong>polarform</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns an expression <code>r %e^(%i theta)</code> equivalent to <var>expr</var>,
+such that <code>r</code> and <code>theta</code> are purely real.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) polarform(a+b*%i);
+                       2    2    %i atan2(b, a)
+(%o1)            sqrt(b  + a ) %e
+</pre><pre class="example">(%i2) polarform(1+%i);
+                                  %i %pi
+                                  ------
+                                    4
+(%o2)                   sqrt(2) %e
+</pre><pre class="example">(%i3) polarform(1+2*%i);
+                                %i atan(2)
+(%o3)                 sqrt(5) %e
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Complex-variables">Complex variables</a>
+
+<a href="maxima_369.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+</div>
+</p></dd></dl>
+
+<span id="realpart"></span><span id="Item_003a-MathFunctions_002fdeffn_002frealpart"></span><dl>
+<dt id="index-realpart">Function: <strong>realpart</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns the real part of <var>expr</var>.  <code>realpart</code> and <code><a href="#imagpart">imagpart</a></code> will
+work on expressions involving trigonometric and hyperbolic functions,
+as well as square root, logarithm, and exponentiation.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) realpart (a+b*%i);
+(%o1)                           a
+</pre><pre class="example">(%i2) realpart (1+sqrt(2)*%i);
+(%o2)                           1
+</pre><pre class="example">(%i3) realpart (sqrt(2)*%i);
+(%o3)                           0
+</pre><pre class="example">(%i4) realpart (1);
+(%o4)                           1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Complex-variables">Complex variables</a>
+</div>
+</p></dd></dl>
+
+<span id="rectform"></span><span id="Item_003a-MathFunctions_002fdeffn_002frectform"></span><dl>
+<dt id="index-rectform">Function: <strong>rectform</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns an expression <code>a + b %i</code> equivalent to <var>expr</var>,
+such that <var>a</var> and <var>b</var> are purely real.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) rectform(sqrt(2)*%e^(%i*%pi/4));
+(%o1)                        %i + 1
+</pre><pre class="example">(%i2) rectform(sqrt(b^2+a^2)*%e^(%i*atan2(b, a)));
+(%o2)                       %i b + a
+</pre><pre class="example">(%i3) rectform(sqrt(5)*%e^(%i*atan(2)));
+(%o3)                       2 %i + 1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Complex-variables">Complex variables</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-MathFunctions_002fnode_002fCombinatorial-Functions"></span><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_50.html" accesskey="n" rel="next">Combinatorial Functions</a>, Previous: <a href="maxima_48.html" accesskey="p" rel="prev">Functions for Numbers</a>, Up: <a href="maxima_47.html" accesskey="u" rel="up">Mathematical Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,2436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for Polynomials (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for Polynomials (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for Polynomials (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_77.html" rel="next" title="Special Functions">
+<link href="maxima_75.html" rel="prev" title="Introduction to Polynomials">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Functions-and-Variables-for-Polynomials"></span><div class="header">
+<p>
+Previous: <a href="maxima_75.html" accesskey="p" rel="prev">Introduction to Polynomials</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-Polynomials-1"></span><h3 class="section">14.2 Functions and Variables for Polynomials</h3>
+
+<span id="algebraic"></span><span id="Item_003a-Polynomials_002fdefvr_002falgebraic"></span><dl>
+<dt id="index-algebraic">Option variable: <strong>algebraic</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p><code>algebraic</code> must be set to <code>true</code> in order for the simplification of
+algebraic integers to take effect.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="berlefact"></span><span id="Item_003a-Polynomials_002fdefvr_002fberlefact"></span><dl>
+<dt id="index-berlefact">Option variable: <strong>berlefact</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>berlefact</code> is <code>false</code> then the Kronecker factoring
+algorithm will be used otherwise the Berlekamp algorithm, which is the
+default, will be used.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+
+<span id="bezout"></span><span id="Item_003a-Polynomials_002fdeffn_002fbezout"></span><dl>
+<dt id="index-bezout">Function: <strong>bezout</strong> <em>(<var>p1</var>, <var>p2</var>, <var>x</var>)</em></dt>
+<dd>
+<p>an alternative to the <code><a href="#resultant">resultant</a></code> command.  It
+returns a matrix.  <code>determinant</code> of this matrix is the desired resultant.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) bezout(a*x+b, c*x^2+d, x);
+                         [ b c  - a d ]
+(%o1)                    [            ]
+                         [  a     b   ]
+(%i2) determinant(%);
+                            2      2
+(%o2)                      a  d + b  c
+(%i3) resultant(a*x+b, c*x^2+d, x);
+                            2      2
+(%o3)                      a  d + b  c
+</pre></div>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+
+<span id="bothcoef"></span><span id="Item_003a-Polynomials_002fdeffn_002fbothcoef"></span><dl>
+<dt id="index-bothcoef">Function: <strong>bothcoef</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns a list whose first member is the coefficient of <var>x</var> in <var>expr</var>
+(as found by <code>ratcoef</code> if <var>expr</var> is in CRE form
+otherwise by <code>coeff</code>) and whose second member is the remaining part of
+<var>expr</var>.  That is, <code>[A, B]</code> where <code><var>expr</var> = A*<var>x</var> + B</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) islinear (expr, x) := block ([c],
+        c: bothcoef (rat (expr, x), x),
+        is (freeof (x, c) and c[1] # 0))$
+(%i2) islinear ((r^2 - (x - r)^2)/x, x);
+(%o2)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdeffn_002fcoeff"></span><dl>
+<dt id="index-coeff">Function: <strong>coeff</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>coeff</tt> (<var>expr</var>, <var>x</var>, <var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>coeff</tt> (<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns the coefficient of <code><var>x</var>^<var>n</var></code> in <var>expr</var>,
+where <var>expr</var> is a polynomial or a monomial term in <var>x</var>.
+Other than <code><a href="#ratcoef">ratcoef</a></code> <code>coeff</code> is a strictly syntactical
+operation and will only find literal instances of
+<code><var>x</var>^<var>n</var></code> in the internal representation of <var>expr</var>.
+</p>
+<p><code>coeff(<var>expr</var>, <var>x</var>^<var>n</var>)</code> is equivalent
+to <code>coeff(<var>expr</var>, <var>x</var>, <var>n</var>)</code>.
+<code>coeff(<var>expr</var>, <var>x</var>, 0)</code> returns the remainder of <var>expr</var>
+which is free of <var>x</var>.
+If omitted, <var>n</var> is assumed to be 1.
+</p>
+<p><var>x</var> may be a simple variable or a subscripted variable,
+or a subexpression of <var>expr</var> which
+comprises an operator and all of its arguments.
+</p>
+<p>It may be possible to compute coefficients of expressions which are equivalent
+to <var>expr</var> by applying <code>expand</code> or <code>factor</code>.  <code>coeff</code> itself
+does not apply <code>expand</code> or <code>factor</code> or any other function.
+</p>
+<p><code>coeff</code> distributes over lists, matrices, and equations.
+</p>
+<p>See also <code><a href="#ratcoef">ratcoef</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code>coeff</code> returns the coefficient <code><var>x</var>^<var>n</var></code> in <var>expr</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) coeff (b^3*a^3 + b^2*a^2 + b*a + 1, a^3);
+                                3
+(%o1)                          b
+</pre></div>
+
+<p><code>coeff(<var>expr</var>, <var>x</var>^<var>n</var>)</code> is equivalent
+to <code>coeff(<var>expr</var>, <var>x</var>, <var>n</var>)</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) coeff (c[4]*z^4 - c[3]*z^3 - c[2]*z^2 + c[1]*z, z, 3);
+(%o1)                         - c
+                                 3
+</pre><pre class="example">(%i2) coeff (c[4]*z^4 - c[3]*z^3 - c[2]*z^2 + c[1]*z, z^3);
+(%o2)                         - c
+                                 3
+</pre></div>
+
+<p><code>coeff(<var>expr</var>, <var>x</var>, 0)</code> returns the remainder of <var>expr</var>
+which is free of <var>x</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) coeff (a*u + b^2*u^2 + c^3*u^3, b, 0);
+                            3  3
+(%o1)                      c  u  + a u
+</pre></div>
+
+<p><var>x</var> may be a simple variable or a subscripted variable,
+or a subexpression of <var>expr</var> which
+comprises an operator and all of its arguments.
+</p>
+<div class="example">
+<pre class="example">(%i1) coeff (h^4 - 2*%pi*h^2 + 1, h, 2);
+(%o1)                        - 2 %pi
+</pre><pre class="example">(%i2) coeff (v[1]^4 - 2*%pi*v[1]^2 + 1, v[1], 2);
+(%o2)                        - 2 %pi
+</pre><pre class="example">(%i3) coeff (sin(1+x)*sin(x) + sin(1+x)^3*sin(x)^3, sin(1+x)^3);
+                                3
+(%o3)                        sin (x)
+</pre><pre class="example">(%i4) coeff ((d - a)^2*(b + c)^3 + (a + b)^4*(c - d), a + b, 4);
+(%o4)                         c - d
+</pre></div>
+
+<p><code>coeff</code> itself does not apply <code>expand</code> or <code>factor</code> or any other
+function.
+</p>
+<div class="example">
+<pre class="example">(%i1) coeff (c*(a + b)^3, a);
+(%o1)                           0
+</pre><pre class="example">(%i2) expand (c*(a + b)^3);
+                 3          2        2        3
+(%o2)           b  c + 3 a b  c + 3 a  b c + a  c
+</pre><pre class="example">(%i3) coeff (%, a);
+                                2
+(%o3)                        3 b  c
+</pre><pre class="example">(%i4) coeff (b^3*c + 3*a*b^2*c + 3*a^2*b*c + a^3*c, (a + b)^3);
+(%o4)                           0
+</pre><pre class="example">(%i5) factor (b^3*c + 3*a*b^2*c + 3*a^2*b*c + a^3*c);
+                                  3
+(%o5)                      (b + a)  c
+</pre><pre class="example">(%i6) coeff (%, (a + b)^3);
+(%o6)                           c
+</pre></div>
+
+<p><code>coeff</code> distributes over lists, matrices, and equations.
+</p>
+<div class="example">
+<pre class="example">(%i1) coeff ([4*a, -3*a, 2*a], a);
+(%o1)                      [4, - 3, 2]
+</pre><pre class="example">(%i2) coeff (matrix ([a*x, b*x], [-c*x, -d*x]), x);
+                          [  a    b  ]
+(%o2)                     [          ]
+                          [ - c  - d ]
+</pre><pre class="example">(%i3) coeff (a*u - b*v = 7*u + 3*v, u);
+(%o3)                         a = 7
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="content"></span><span id="Item_003a-Polynomials_002fdeffn_002fcontent"></span><dl>
+<dt id="index-content">Function: <strong>content</strong> <em>(<var>p_1</var>, <var>x_1</var>, &hellip;, <var>x_n</var>)</em></dt>
+<dd>
+<p>Returns a list whose first element is
+the greatest common divisor of the coefficients of the terms of the
+polynomial <var>p_1</var> in the variable <var>x_n</var> (this is the content) and whose
+second element is the polynomial <var>p_1</var> divided by the content.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) content (2*x*y + 4*x^2*y^2, y);
+</pre><pre class="example">                                   2
+(%o1)                   [2 x, 2 x y  + y]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="denom"></span><span id="Item_003a-Polynomials_002fdeffn_002fdenom"></span><dl>
+<dt id="index-denom">Function: <strong>denom</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns the denominator of the rational expression <var>expr</var>.
+</p>
+<p>See also <code><a href="#num">num</a></code>
+</p>
+<div class="example">
+<pre class="example">(%i1) g1:(x+2)*(x+1)/((x+3)^2);
+                         (x + 1) (x + 2)
+(%o1)                    ---------------
+                                   2
+                            (x + 3)
+</pre><pre class="example">(%i2) denom(g1);
+                                   2
+(%o2)                       (x + 3)
+</pre><pre class="example">(%i3) g2:sin(x)/10*cos(x)/y;
+                          cos(x) sin(x)
+(%o3)                     -------------
+                              10 y
+</pre><pre class="example">(%i4) denom(g2);
+(%o4)                         10 y
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="divide"></span><span id="Item_003a-Polynomials_002fdeffn_002fdivide"></span><dl>
+<dt id="index-divide">Function: <strong>divide</strong> <em>(<var>p_1</var>, <var>p_2</var>, <var>x_1</var>, &hellip;, <var>x_n</var>)</em></dt>
+<dd>
+<p>computes the quotient and remainder
+of the polynomial <var>p_1</var> divided by the polynomial <var>p_2</var>, in a main
+polynomial variable, <var>x_n</var>.
+The other variables are as in the <code>ratvars</code> function.
+The result is a list whose first element is the quotient
+and whose second element is the remainder.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) divide (x + y, x - y, x);
+(%o1)                       [1, 2 y]
+(%i2) divide (x + y, x - y);
+(%o2)                      [- 1, 2 x]
+</pre></div>
+
+<p>Note that <code>y</code> is the main variable in the second example.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="eliminate"></span><span id="Item_003a-Polynomials_002fdeffn_002feliminate"></span><dl>
+<dt id="index-eliminate">Function: <strong>eliminate</strong> <em>([<var>eqn_1</var>, &hellip;, <var>eqn_n</var>], [<var>x_1</var>, &hellip;, <var>x_k</var>])</em></dt>
+<dd>
+<p>Eliminates variables from equations (or expressions assumed equal to zero) by
+taking successive resultants. This returns a list of <code><var>n</var> - <var>k</var></code>
+expressions with the <var>k</var> variables <var>x_1</var>, &hellip;, <var>x_k</var> eliminated.
+First <var>x_1</var> is eliminated yielding <code><var>n</var> - 1</code> expressions, then
+<code>x_2</code> is eliminated, etc.  If <code><var>k</var> = <var>n</var></code> then a single
+expression in a list is returned free of the variables <var>x_1</var>, &hellip;,
+<var>x_k</var>.  In this case <code>solve</code> is called to solve the last resultant for
+the last variable.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) expr1: 2*x^2 + y*x + z;
+                                      2
+(%o1)                    z + x y + 2 x
+(%i2) expr2: 3*x + 5*y - z - 1;
+(%o2)                  - z + 5 y + 3 x - 1
+(%i3) expr3: z^2 + x - y^2 + 5;
+                          2    2
+(%o3)                    z  - y  + x + 5
+(%i4) eliminate ([expr3, expr2, expr1], [y, z]);
+             8         7         6          5          4
+(%o4) [7425 x  - 1170 x  + 1299 x  + 12076 x  + 22887 x
+
+                                    3         2
+                            - 5154 x  - 1291 x  + 7688 x + 15376]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+</div>
+</p></dd></dl>
+
+<span id="ezgcd"></span><span id="Item_003a-Polynomials_002fdeffn_002fezgcd"></span><dl>
+<dt id="index-ezgcd">Function: <strong>ezgcd</strong> <em>(<var>p_1</var>, <var>p_2</var>, <var>p_3</var>, &hellip;)</em></dt>
+<dd>
+<p>Returns a list whose first element is the greatest common divisor of the
+polynomials <var>p_1</var>, <var>p_2</var>, <var>p_3</var>, &hellip; and whose remaining
+elements are the polynomials divided by the greatest common divisor.  This
+always uses the <code>ezgcd</code> algorithm.
+</p>
+<p>See also <code><a href="#gcd">gcd</a></code>, <code><a href="#gcdex">gcdex</a></code>, <code><a href="maxima_316.html#gcdivide">gcdivide</a></code>, and
+<code><a href="maxima_252.html#poly_005fgcd">poly_gcd</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>The three polynomials have the greatest common divisor <code>2*x-3</code>.  The
+gcd is first calculated with the function <code>gcd</code> and then with the function
+<code>ezgcd</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) p1 : 6*x^3-17*x^2+14*x-3;
+                        3       2
+(%o1)                6 x  - 17 x  + 14 x - 3
+(%i2) p2 : 4*x^4-14*x^3+12*x^2+2*x-3;
+                    4       3       2
+(%o2)            4 x  - 14 x  + 12 x  + 2 x - 3
+(%i3) p3 : -8*x^3+14*x^2-x-3;
+                          3       2
+(%o3)                - 8 x  + 14 x  - x - 3
+
+(%i4) gcd(p1, gcd(p2, p3));
+(%o4)                        2 x - 3
+
+(%i5) ezgcd(p1, p2, p3);
+                   2               3      2           2
+(%o5) [2 x - 3, 3 x  - 4 x + 1, 2 x  - 4 x  + 1, - 4 x  + x + 1]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002ffacexpand"></span><dl>
+<dt id="index-facexpand">Option variable: <strong>facexpand</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p><code>facexpand</code> controls whether the irreducible factors returned by
+<code>factor</code> are in expanded (the default) or recursive (normal CRE) form.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="factor"></span><span id="Item_003a-Polynomials_002fdeffn_002ffactor"></span><dl>
+<dt id="index-factor">Function: <strong>factor</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>factor</tt> (<var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>factor</tt> (<var>expr</var>, <var>p</var>)</em></dt>
+<dd>
+<p>Factors the expression <var>expr</var>, containing any number of variables or 
+functions, into factors irreducible over the integers.
+<code>factor (<var>expr</var>, <var>p</var>)</code> factors <var>expr</var> over the field of 
+rationals with an element adjoined whose minimum polynomial is <var>p</var>.
+</p>
+<p><code>factor</code> uses <code><a href="maxima_140.html#ifactors">ifactors</a></code> function for factoring integers.
+</p>
+<p><code><a href="#factorflag">factorflag</a></code> if <code>false</code> suppresses the factoring of integer factors
+of rational expressions.
+</p>
+<p><code><a href="maxima_119.html#dontfactor">dontfactor</a></code> may be set to a list of variables with respect to which
+factoring is not to occur.  (It is initially empty).  Factoring also
+will not take place with respect to any variables which are less
+important (using the variable ordering assumed for CRE form) than
+those on the <code>dontfactor</code> list.
+</p>
+<p><code><a href="#savefactors">savefactors</a></code> if <code>true</code> causes the factors of an expression which
+is a product of factors to be saved by certain functions in order to
+speed up later factorizations of expressions containing some of the
+same factors.
+</p>
+<p><code><a href="#berlefact">berlefact</a></code> if <code>false</code> then the Kronecker factoring algorithm will
+be used otherwise the Berlekamp algorithm, which is the default, will
+be used.
+</p>
+<p><code><a href="#intfaclim">intfaclim</a></code> if <code>true</code> maxima will give up factorization of
+integers if no factor is found after trial divisions and Pollard&rsquo;s rho
+method.  If set to <code>false</code> (this is the case when the user calls
+<code>factor</code> explicitly), complete factorization of the integer will be
+attempted.  The user&rsquo;s setting of <code>intfaclim</code> is used for internal
+calls to <code>factor</code>.  Thus, <code>intfaclim</code> may be reset to prevent
+Maxima from taking an inordinately long time factoring large integers.
+</p>
+<p><code><a href="#factor_005fmax_005fdegree">factor_max_degree</a></code> if set to a positive integer <code>n</code> will
+prevent certain polynomials from being factored if their degree in any
+variable exceeds <code>n</code>.
+</p>
+<p>See also <code><a href="maxima_315.html#collectterms">collectterms</a></code> and <code><a href="#sqfr">sqfr</a></code>
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) factor (2^63 - 1);
+                    2
+(%o1)              7  73 127 337 92737 649657
+(%i2) factor (-8*y - 4*x + z^2*(2*y + x));
+(%o2)               (2 y + x) (z - 2) (z + 2)
+(%i3) -1 - 2*x - x^2 + y^2 + 2*x*y^2 + x^2*y^2;
+                2  2        2    2    2
+(%o3)          x  y  + 2 x y  + y  - x  - 2 x - 1
+(%i4) block ([dontfactor: [x]], factor (%/36/(1 + 2*y + y^2)));
+</pre><pre class="example">                       2
+                     (x  + 2 x + 1) (y - 1)
+(%o4)                ----------------------
+                           36 (y + 1)
+</pre><pre class="example">(%i5) factor (1 + %e^(3*x));
+                      x         2 x     x
+(%o5)              (%e  + 1) (%e    - %e  + 1)
+(%i6) factor (1 + x^4, a^2 - 2);
+                    2              2
+(%o6)             (x  - a x + 1) (x  + a x + 1)
+(%i7) factor (-y^2*z^2 - x*z^2 + x^2*y^2 + x^3);
+                       2
+(%o7)              - (y  + x) (z - x) (z + x)
+(%i8) (2 + x)/(3 + x)/(b + x)/(c + x)^2;
+                             x + 2
+(%o8)               ------------------------
+                                           2
+                    (x + 3) (x + b) (x + c)
+(%i9) ratsimp (%);
+</pre><pre class="example">                4                  3
+(%o9) (x + 2)/(x  + (2 c + b + 3) x
+
+     2                       2             2                   2
+ + (c  + (2 b + 6) c + 3 b) x  + ((b + 3) c  + 6 b c) x + 3 b c )
+</pre><pre class="example">(%i10) partfrac (%, x);
+           2                   4                3
+(%o10) - (c  - 4 c - b + 6)/((c  + (- 2 b - 6) c
+
+     2              2         2                2
+ + (b  + 12 b + 9) c  + (- 6 b  - 18 b) c + 9 b ) (x + c))
+
+                 c - 2
+ - ---------------------------------
+     2                             2
+   (c  + (- b - 3) c + 3 b) (x + c)
+
+                         b - 2
+ + -------------------------------------------------
+             2             2       3      2
+   ((b - 3) c  + (6 b - 2 b ) c + b  - 3 b ) (x + b)
+
+                         1
+ - ----------------------------------------------
+             2
+   ((b - 3) c  + (18 - 6 b) c + 9 b - 27) (x + 3)
+(%i11) map ('factor, %);
+</pre><pre class="example">              2
+             c  - 4 c - b + 6                 c - 2
+(%o11) - ------------------------- - ------------------------
+                2        2                                  2
+         (c - 3)  (c - b)  (x + c)   (c - 3) (c - b) (x + c)
+
+                       b - 2                        1
+            + ------------------------ - ------------------------
+                             2                          2
+              (b - 3) (c - b)  (x + b)   (b - 3) (c - 3)  (x + 3)
+</pre><pre class="example">(%i12) ratsimp ((x^5 - 1)/(x - 1));
+                       4    3    2
+(%o12)                x  + x  + x  + x + 1
+(%i13) subst (a, x, %);
+                       4    3    2
+(%o13)                a  + a  + a  + a + 1
+(%i14) factor (%th(2), %);
+                       2        3        3    2
+(%o14)   (x - a) (x - a ) (x - a ) (x + a  + a  + a + 1)
+(%i15) factor (1 + x^12);
+                       4        8    4
+(%o15)               (x  + 1) (x  - x  + 1)
+(%i16) factor (1 + x^99);
+                 2            6    3
+(%o16) (x + 1) (x  - x + 1) (x  - x  + 1)
+
+   10    9    8    7    6    5    4    3    2
+ (x   - x  + x  - x  + x  - x  + x  - x  + x  - x + 1)
+
+   20    19    17    16    14    13    11    10    9    7    6
+ (x   + x   - x   - x   + x   + x   - x   - x   - x  + x  + x
+
+    4    3            60    57    51    48    42    39    33
+ - x  - x  + x + 1) (x   + x   - x   - x   + x   + x   - x
+
+    30    27    21    18    12    9    3
+ - x   - x   + x   + x   - x   - x  + x  + 1)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="factor_005fmax_005fdegree"></span>
+
+<span id="Item_003a-Polynomials_002fdefvr_002ffactor_005fmax_005fdegree"></span><dl>
+<dt id="index-factor_005fmax_005fdegree">Option variable: <strong>factor_max_degree</strong></dt>
+<dd><p>Default value: <code>1000</code>
+</p>
+<p>When factor_max_degree is set to a positive integer <code>n</code>, it will prevent
+Maxima from attempting to factor certain polynomials whose degree in any
+variable exceeds <code>n</code>. If <code><a href="#factor_005fmax_005fdegree_005fprint_005fwarning">factor_max_degree_print_warning</a></code> is true,
+a warning message will be printed. <code>factor_max_degree</code> can be used to
+prevent excessive memory usage and/or computation time and stack overflows.
+Note that &quot;obvious&quot; factoring of polynomials such as <code>x^2000+x^2001</code> to
+<code>x^2000*(x+1)</code> will still take place. To disable this behavior, set
+<code>factor_max_degree</code> to <code>0</code>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) factor_max_degree : 100$
+</pre><pre class="example">(%i2) factor(x^100-1);
+                        2        4    3    2
+(%o2) (x - 1) (x + 1) (x  + 1) (x  - x  + x  - x + 1)
+   4    3    2            8    6    4    2
+ (x  + x  + x  + x + 1) (x  - x  + x  - x  + 1)
+   20    15    10    5        20    15    10    5
+ (x   - x   + x   - x  + 1) (x   + x   + x   + x  + 1)
+   40    30    20    10
+ (x   - x   + x   - x   + 1)
+</pre><pre class="example">(%i3) factor(x^101-1);
+                               101
+Refusing to factor polynomial x    - 1
+               because its degree exceeds factor_max_degree (100)
+                             101
+(%o3)                       x    - 1
+</pre></div>
+
+<p>See also: <code><a href="#factor_005fmax_005fdegree_005fprint_005fwarning">factor_max_degree_print_warning</a></code>
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="factor_005fmax_005fdegree_005fprint_005fwarning"></span><span id="Item_003a-Polynomials_002fdefvr_002ffactor_005fmax_005fdegree_005fprint_005fwarning"></span><dl>
+<dt id="index-factor_005fmax_005fdegree_005fprint_005fwarning">Option variable: <strong>factor_max_degree_print_warning</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When factor_max_degree_print_warning is true, then Maxima will print a
+warning message when the factoring of a polynomial is prevented because
+its degree exceeds the value of factor_max_degree.
+</p>
+<p>See also: <code><a href="#factor_005fmax_005fdegree">factor_max_degree</a></code>
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="factorflag"></span><span id="Item_003a-Polynomials_002fdefvr_002ffactorflag"></span><dl>
+<dt id="index-factorflag">Option variable: <strong>factorflag</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>factorflag</code> is <code>false</code>, suppresses the factoring of
+integer factors of rational expressions.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="factorout"></span><span id="Item_003a-Polynomials_002fdeffn_002ffactorout"></span><dl>
+<dt id="index-factorout">Function: <strong>factorout</strong> <em>(<var>expr</var>, <var>x_1</var>, <var>x_2</var>, &hellip;)</em></dt>
+<dd>
+<p>Rearranges the sum <var>expr</var> into a sum of terms of the form 
+<code>f (<var>x_1</var>, <var>x_2</var>, &hellip;)*g</code> where <code>g</code> is a product of 
+expressions not containing any <var>x_i</var> and <code>f</code> is factored.
+</p>
+<p>Note that the option variable <code>keepfloat</code> is ignored by <code>factorout</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) expand (a*(x+1)*(x-1)*(u+1)^2);
+             2  2          2      2      2
+(%o1)     a u  x  + 2 a u x  + a x  - a u  - 2 a u - a
+</pre><pre class="example">(%i2) factorout(%,x);
+         2
+(%o2) a u  (x - 1) (x + 1) + 2 a u (x - 1) (x + 1)
+                                              + a (x - 1) (x + 1)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="factorsum"></span><span id="Item_003a-Polynomials_002fdeffn_002ffactorsum"></span><dl>
+<dt id="index-factorsum">Function: <strong>factorsum</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Tries to group terms in factors of <var>expr</var> which are sums into groups of
+terms such that their sum is factorable.  <code>factorsum</code> can recover the
+result of <code>expand ((x + y)^2 + (z + w)^2)</code> but it can&rsquo;t recover
+<code>expand ((x + 1)^2 + (x + y)^2)</code> because the terms have variables in
+common.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) expand ((x + 1)*((u + v)^2 + a*(w + z)^2));
+           2      2                            2      2
+(%o1) a x z  + a z  + 2 a w x z + 2 a w z + a w  x + v  x
+
+                                     2        2    2            2
+                        + 2 u v x + u  x + a w  + v  + 2 u v + u
+(%i2) factorsum (%);
+                                   2          2
+(%o2)            (x + 1) (a (z + w)  + (v + u) )
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="fasttimes"></span><span id="Item_003a-Polynomials_002fdeffn_002ffasttimes"></span><dl>
+<dt id="index-fasttimes">Function: <strong>fasttimes</strong> <em>(<var>p_1</var>, <var>p_2</var>)</em></dt>
+<dd>
+<p>Returns the product of the polynomials <var>p_1</var> and <var>p_2</var> by using a
+special algorithm for multiplication of polynomials.  <code>p_1</code> and <code>p_2</code>
+should be multivariate, dense, and nearly the same size.  Classical
+multiplication is of order <code>n_1 n_2</code> where
+<code>n_1</code> is the degree of <code>p_1</code>
+and <code>n_2</code> is the degree of <code>p_2</code>.
+<code>fasttimes</code> is of order <code>max (n_1, n_2)^1.585</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="fullratsimp"></span><span id="Item_003a-Polynomials_002fdeffn_002ffullratsimp"></span><dl>
+<dt id="index-fullratsimp">Function: <strong>fullratsimp</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p><code>fullratsimp</code> repeatedly
+applies <code>ratsimp</code> followed by non-rational simplification to an
+expression until no further change occurs,
+and returns the result.
+</p>
+<p>When non-rational expressions are involved, one call
+to <code>ratsimp</code> followed as is usual by non-rational (&quot;general&quot;)
+simplification may not be sufficient to return a simplified result.
+Sometimes, more than one such call may be necessary.
+<code>fullratsimp</code> makes this process convenient.
+</p>
+<p><code>fullratsimp (<var>expr</var>, <var>x_1</var>, ..., <var>x_n</var>)</code> takes one or more
+arguments similar to <code>ratsimp</code> and <code>rat</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: (x^(a/2) + 1)^2*(x^(a/2) - 1)^2/(x^a - 1);
+                       a/2     2   a/2     2
+                     (x    - 1)  (x    + 1)
+(%o1)                -----------------------
+                              a
+                             x  - 1
+(%i2) ratsimp (expr);
+                          2 a      a
+                         x    - 2 x  + 1
+(%o2)                    ---------------
+                              a
+                             x  - 1
+(%i3) fullratsimp (expr);
+                              a
+(%o3)                        x  - 1
+(%i4) rat (expr);
+                       a/2 4       a/2 2
+                     (x   )  - 2 (x   )  + 1
+(%o4)/R/             -----------------------
+                              a
+                             x  - 1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Simplification-functions">Simplification functions</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="fullratsubst"></span><span id="Item_003a-Polynomials_002fdeffn_002ffullratsubst"></span><dl>
+<dt id="index-fullratsubst">Function: <strong>fullratsubst</strong> <em>(<var>new</var>, <var>old</var>, <var>expr</var>)</em></dt>
+<dd><br><p>&nbsp;&nbsp;&nbsp;&nbsp;<tt>fullratsubst</tt> (<code><var>old</var> = <var>new</var></code>, <var>expr</var>) &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>fullratsubst</tt> (<code>[ <var>old_1</var> = <var>new_1</var>, &hellip;, <var>old_n</var> = <var>new_n</var> ]</code>, <var>expr</var>)
+</p>
+<p><code>fullratsubst</code> applies <code><a href="#lratsubst">lratsubst</a></code> repeatedly until <var>expr</var>
+stops changing (or <code><a href="#lrats_005fmax_005fiter">lrats_max_iter</a></code> is reached). This function is
+useful when the replacement expression and the replaced expression have
+one or more variables in common.
+</p>
+<p><code>fullratsubst</code> accepts its arguments in the format of
+<code><a href="#ratsubst">ratsubst</a></code> or <code><a href="#lratsubst">lratsubst</a></code>.
+</p>
+<p>Examples:
+</p>
+<ul>
+<li> <code>subst</code> can carry out multiple substitutions.
+<code>lratsubst</code> is analogous to <code>subst</code>.
+</li></ul>
+<div class="example">
+<pre class="example">(%i2) subst ([a = b, c = d], a + c);
+(%o2)                         d + b
+(%i3) lratsubst ([a^2 = b, c^2 = d], (a + e)*c*(a + c));
+(%o3)                (d + a c) e + a d + b c
+</pre></div>
+<ul>
+<li> If only one substitution is desired, then a single
+equation may be given as first argument.
+</li></ul>
+<div class="example">
+<pre class="example">(%i4) lratsubst (a^2 = b, a^3);
+(%o4)                          a b
+</pre></div>
+<ul>
+<li> <code>fullratsubst</code> is equivalent to <code>ratsubst</code>
+except that it recurses until its result stops changing.
+</li></ul>
+<div class="example">
+<pre class="example">(%i5) ratsubst (b*a, a^2, a^3);
+                               2
+(%o5)                         a  b
+(%i6) fullratsubst (b*a, a^2, a^3);
+                                 2
+(%o6)                         a b
+</pre></div>
+<ul>
+<li> <code>fullratsubst</code> also accepts a list of equations or a single
+equation as first argument.
+</li></ul>
+<div class="example">
+<pre class="example">(%i7) fullratsubst ([a^2 = b, b^2 = c, c^2 = a], a^3*b*c);
+(%o7)                           b
+(%i8) fullratsubst (a^2 = b*a, a^3);
+                                 2
+(%o8)                         a b
+</pre></div>
+<ul>
+<li> <code>fullratsubst</code> catches potential infinite recursions. <a href="#lrats_005fmax_005fiter">lrats_max_iter</a>.
+</li></ul>
+<div class="example">
+<pre class="example">(%i9) fullratsubst (b*a^2, a^2, a^3), lrats_max_iter=15;
+Warning: fullratsubst1(substexpr,forexpr,expr): reached maximum iterations of 15 . Increase `lrats_max_iter' to increase this limit.
+                                     3  15
+(%o7)                               a  b
+</pre></div>
+
+<p>See also <code><a href="#lrats_005fmax_005fiter">lrats_max_iter</a></code> and <code><a href="#fullratsubstflag">fullratsubstflag</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="fullratsubstflag"></span><span id="Item_003a-Polynomials_002fdefvr_002ffullratsubstflag"></span><dl>
+<dt id="index-fullratsubstflag">Option variable: <strong>fullratsubstflag</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>An option variable that is set to <code>true</code> in <code><a href="#fullratsubst">fullratsubst</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+
+
+
+<span id="gcd"></span><span id="Item_003a-Polynomials_002fdeffn_002fgcd"></span><dl>
+<dt id="index-gcd">Function: <strong>gcd</strong> <em>(<var>p_1</var>, <var>p_2</var>, <var>x_1</var>, &hellip;)</em></dt>
+<dd>
+<p>Returns the greatest common divisor of <var>p_1</var> and <var>p_2</var>.  The flag
+<code>gcd</code> determines which algorithm is employed.  Setting <code>gcd</code> to
+<code>ez</code>, <code>subres</code>, <code>red</code>, or <code>spmod</code> selects the <code>ezgcd</code>,
+subresultant <code>prs</code>, reduced, or modular algorithm, respectively.  If
+<code>gcd</code> <code>false</code> then <code>gcd (<var>p_1</var>, <var>p_2</var>, <var>x</var>)</code> always
+returns 1 for all <var>x</var>.  Many functions (e.g. <code><a href="#ratsimp">ratsimp</a></code>,<!-- /@w -->
+<code><a href="#factor">factor</a></code>, etc.) cause gcd&rsquo;s to be taken implicitly.  For homogeneous
+polynomials it is recommended that <code>gcd</code> equal to <code>subres</code> be used.
+To take the gcd when an algebraic is present, e.g.,
+<code>gcd (<var>x</var>^2 - 2*sqrt(2)* <var>x</var> + 2, <var>x</var> - sqrt(2))</code>, the option
+variable <code><a href="#algebraic">algebraic</a></code> must be <code>true</code> and <code>gcd</code> must not be
+<code>ez</code>.
+</p>
+<p>The <code>gcd</code> flag, default: <code>spmod</code>, if <code>false</code> will also prevent
+the greatest common divisor from being taken when expressions are converted to
+canonical rational expression (CRE) form.  This will sometimes speed the
+calculation if gcds are not required.
+</p>
+<p>See also <code><a href="#ezgcd">ezgcd</a></code>, <code><a href="#gcdex">gcdex</a></code>, <code><a href="maxima_316.html#gcdivide">gcdivide</a></code>, and
+<code><a href="maxima_252.html#poly_005fgcd">poly_gcd</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) p1:6*x^3+19*x^2+19*x+6; 
+                        3       2
+(%o1)                6 x  + 19 x  + 19 x + 6
+(%i2) p2:6*x^5+13*x^4+12*x^3+13*x^2+6*x;
+                  5       4       3       2
+(%o2)          6 x  + 13 x  + 12 x  + 13 x  + 6 x
+(%i3) gcd(p1, p2);
+                            2
+(%o3)                    6 x  + 13 x + 6
+(%i4) p1/gcd(p1, p2), ratsimp;
+(%o4)                         x + 1
+(%i5) p2/gcd(p1, p2), ratsimp;
+                              3
+(%o5)                        x  + x
+</pre></div>
+
+<p><code><a href="#ezgcd">ezgcd</a></code> returns a list whose first element is the greatest common divisor
+of the polynomials <var>p_1</var> and <var>p_2</var>, and whose remaining elements are
+the polynomials divided by the greatest common divisor.
+</p>
+<div class="example">
+<pre class="example">(%i6) ezgcd(p1, p2);
+                    2                     3
+(%o6)           [6 x  + 13 x + 6, x + 1, x  + x]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="gcdex"></span><span id="Item_003a-Polynomials_002fdeffn_002fgcdex"></span><dl>
+<dt id="index-gcdex">Function: <strong>gcdex</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>gcdex</tt> (<var>f</var>, <var>g</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>gcdex</tt> (<var>f</var>, <var>g</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns a list <code>[<var>a</var>, <var>b</var>, <var>u</var>]</code> where <var>u</var> is the greatest
+common divisor (gcd) of <var>f</var> and <var>g</var>, and <var>u</var> is equal to
+<code><var>a</var> <var>f</var> + <var>b</var> <var>g</var></code>.  The arguments <var>f</var> and <var>g</var>
+should be univariate polynomials, or else polynomials in <var>x</var> a supplied
+main variable since we need to be in a principal ideal domain for this to
+work.  The gcd means the gcd regarding <var>f</var> and <var>g</var> as univariate
+polynomials with coefficients being rational functions in the other variables.
+</p>
+<p><code>gcdex</code> implements the Euclidean algorithm, where we have a sequence of
+<code>L[i]: [a[i], b[i], r[i]]</code> which are all perpendicular to <code>[f, g, -1]</code>
+and the next one is built as if <code>q = quotient(r[i]/r[i+1])</code> then
+<code>L[i+2]: L[i] - q L[i+1]</code>, and it terminates at <code>L[i+1]</code> when the
+remainder <code>r[i+2]</code> is zero.
+</p>
+<p>The arguments <var>f</var> and <var>g</var> can be integers.  For this case the function
+<code><a href="maxima_140.html#igcdex">igcdex</a></code> is called by <code>gcdex</code>.
+</p>
+<p>See also <code><a href="#ezgcd">ezgcd</a></code>, <code><a href="#gcd">gcd</a></code>, <code><a href="maxima_316.html#gcdivide">gcdivide</a></code>, and
+<code><a href="maxima_252.html#poly_005fgcd">poly_gcd</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) gcdex (x^2 + 1, x^3 + 4);
+                       2
+                      x  + 4 x - 1  x + 4
+(%o1)/R/           [- ------------, -----, 1]
+                           17        17
+</pre><pre class="example">(%i2) % . [x^2 + 1, x^3 + 4, -1];
+(%o2)/R/                        0
+</pre></div>
+
+<p>Note that the gcd in the following is <code>1</code> since we work in <code>k(y)[x]</code>,
+not the  <code>y+1</code> we would expect in <code>k[y, x]</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) gcdex (x*(y + 1), y^2 - 1, x);
+                               1
+(%o1)/R/                 [0, ------, 1]
+                              2
+                             y  - 1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="gcfactor"></span><span id="Item_003a-Polynomials_002fdeffn_002fgcfactor"></span><dl>
+<dt id="index-gcfactor">Function: <strong>gcfactor</strong> <em>(<var>n</var>)</em></dt>
+<dd>
+<p>Factors the Gaussian integer <var>n</var> over the Gaussian integers, i.e., numbers
+of the form <code><var>a</var> + <var>b</var> <code>%i</code></code> where <var>a</var> and <var>b</var> are
+rational integers (i.e.,  ordinary integers).  Factors are normalized by making
+<var>a</var> and <var>b</var> non-negative.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Integers">Integers</a>
+</div>
+</p></dd></dl>
+
+
+<span id="gfactor"></span><span id="Item_003a-Polynomials_002fdeffn_002fgfactor"></span><dl>
+<dt id="index-gfactor">Function: <strong>gfactor</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Factors the polynomial <var>expr</var> over the Gaussian integers
+(that is, the integers with the imaginary unit <code>%i</code> adjoined).
+This is like <code>factor (<var>expr</var>, <var>a</var>^2+1)</code> where <var>a</var> is <code>%i</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) gfactor (x^4 - 1);
+(%o1)           (x - 1) (x + 1) (x - %i) (x + %i)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+
+<span id="gfactorsum"></span><span id="Item_003a-Polynomials_002fdeffn_002fgfactorsum"></span><dl>
+<dt id="index-gfactorsum">Function: <strong>gfactorsum</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>is similar to <code>factorsum</code> but applies <code>gfactor</code> instead
+of <code>factor</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="hipow"></span><span id="Item_003a-Polynomials_002fdeffn_002fhipow"></span><dl>
+<dt id="index-hipow">Function: <strong>hipow</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns the highest explicit exponent of <var>x</var> in <var>expr</var>.
+<var>x</var> may be a variable or a general expression.
+If <var>x</var> does not appear in <var>expr</var>,
+<code>hipow</code> returns <code>0</code>.
+</p>
+<p><code>hipow</code> does not consider expressions equivalent to <code>expr</code>.  In
+particular, <code>hipow</code> does not expand <code>expr</code>, so 
+<code>hipow (<var>expr</var>, <var>x</var>)</code> and
+<code>hipow (expand (<var>expr</var>, <var>x</var>))</code> may yield different results.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) hipow (y^3 * x^2 + x * y^4, x);
+(%o1)                           2
+(%i2) hipow ((x + y)^5, x);
+(%o2)                           1
+(%i3) hipow (expand ((x + y)^5), x);
+(%o3)                           5
+(%i4) hipow ((x + y)^5, x + y);
+(%o4)                           5
+(%i5) hipow (expand ((x + y)^5), x + y);
+(%o5)                           0
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="intfaclim"></span><span id="Item_003a-Polynomials_002fdefvr_002fintfaclim"></span><dl>
+<dt id="index-intfaclim">Option variable: <strong>intfaclim</strong></dt>
+<dd><p>Default value: true
+</p>
+<p>If <code>true</code>, maxima will give up factorization of
+integers if no factor is found after trial divisions and Pollard&rsquo;s rho
+method and factorization will not be complete.
+</p>
+<p>When <code>intfaclim</code> is <code>false</code> (this is the case when the user
+calls <code>factor</code> explicitly), complete factorization will be
+attempted.  <code>intfaclim</code> is set to <code>false</code> when factors are
+computed in <code>divisors</code>, <code>divsum</code> and <code>totient</code>.
+</p>
+<p>Internal calls to <code>factor</code> respect the user-specified value of
+<code>intfaclim</code>.  Setting <code>intfaclim</code> to <code>true</code> may reduce
+the time spent factoring large integers.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Integers">Integers</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002fkeepfloat"></span><dl>
+<dt id="index-keepfloat">Option variable: <strong>keepfloat</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>keepfloat</code> is <code>true</code>, prevents floating
+point numbers from being rationalized when expressions which contain
+them are converted to canonical rational expression (CRE) form.
+</p>
+<p>Note that the function <code>solve</code> and those functions calling it 
+(<code>eigenvalues</code>, for example) currently ignore this flag, converting 
+floating point numbers anyway.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) rat(x/2.0);
+
+rat: replaced 0.5 by 1/2 = 0.5
+                                x
+(%o1)/R/                        -
+                                2
+</pre><pre class="example">(%i2) rat(x/2.0), keepfloat;
+(%o2)/R/                      0.5 x
+</pre></div>
+
+<p><code>solve</code> ignores <code>keepfloat</code>:
+</p>
+<div class="example">
+<pre class="example">(%i1) solve(1.0-x,x), keepfloat;
+
+rat: replaced 1.0 by 1/1 = 1.0
+(%o1)                        [x = 1]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Numerical-evaluation">Numerical evaluation</a>
+</div>
+</p></dd></dl>
+
+<span id="lowpow"></span><span id="Item_003a-Polynomials_002fdeffn_002flopow"></span><dl>
+<dt id="index-lopow">Function: <strong>lopow</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns the lowest exponent of <var>x</var> which explicitly appears in
+<var>expr</var>.  Thus
+</p>
+<div class="example">
+<pre class="example">(%i1) lopow ((x+y)^2 + (x+y)^a, x+y);
+(%o1)                       min(a, 2)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="lratsubst"></span><span id="Item_003a-Polynomials_002fdeffn_002flratsubst"></span><dl>
+<dt id="index-lratsubst">Function: <strong>lratsubst</strong> <em>(<var>new</var>, <var>old</var>, <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lratsubst</tt> (<code><var>old</var> = <var>new</var></code>, <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lratsubst</tt> (<code>[ <var>old_1</var> = <var>new_1</var>, &hellip;, <var>old_n</var> = <var>new_n</var> ]</code>, <var>expr</var>)</em></dt>
+<dd>
+<p><code>lratsubst</code> is analogous to <code><a href="maxima_33.html#subst">subst</a></code> except that it uses
+<code>ratsubst</code> to perform substitutions.
+</p>
+<p>The first argument of <code>lratsubst</code> is an equation, a list of
+equations or a list of unit length whose first element is a list of
+equations (that is, the first argument is identical in format to that
+accepted by <code>subst</code>). The substitutions are made in the order given
+by the list of equations, that is, from left to right.
+</p>
+<p>Examples:
+</p>
+
+
+<ul>
+<li> <code>subst</code> can carry out multiple substitutions.
+<code>lratsubst</code> is analogous to <code>subst</code>.
+</li></ul>
+<div class="example">
+<pre class="example">(%i2) lratsubst ([a = b, c = d], a + c);
+(%o2)                         d + b
+(%i3) lratsubst ([a^2 = b, c^2 = d], (a + e)*c*(a + c));
+(%o3)                (d + a c) e + a d + b c
+</pre></div>
+<ul>
+<li> If only one substitution is desired, then a single
+equation may be given as first argument.
+</li></ul>
+<div class="example">
+<pre class="example">(%i4) lratsubst (a^2 = b, a^3);
+(%o4)                          a b
+</pre></div>
+<ul>
+<li> A nested list of substitutions can be used&ndash;but it must contain only one list.
+</li></ul>
+<div class="example">
+<pre class="example">(%i5) lratsubst ([[a^2=b*a, b=c]], a^3);
+
+                                      2
+(%o5)                               a  c
+(%i6) lratsubst ([[a^2=b*a, b=c],[a=b]], a^3);
+
+
+                                 2
+lratsubst: improper argument: [[a  = a b, b = c], [a = b]]
+#0: lratsubst(listofeqns=[[a^2 = a*b,b = c],[a = b]],expr=a^3)
+ -- an error. To debug this try: debugmode(true);
+
+</pre></div>
+
+<p>See also <code><a href="#fullratsubst">fullratsubst</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="lrats_005fmax_005fiter"></span><span id="Item_003a-Polynomials_002fdefvr_002flrats_005fmax_005fiter"></span><dl>
+<dt id="index-lrats_005fmax_005fiter">Option variable: <strong>lrats_max_iter</strong></dt>
+<dd><p>Default value: <code>100000</code>
+</p>
+<p>The upper limit on the number of iterations that <code><a href="#fullratsubst">fullratsubst</a></code> and
+<code><a href="#lratsubst">lratsubst</a></code> may perform. It must be set to a positive integer. See
+the example for <code><a href="#fullratsubst">fullratsubst</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="modulus"></span><span id="Item_003a-Polynomials_002fdefvr_002fmodulus"></span><dl>
+<dt id="index-modulus">Option variable: <strong>modulus</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>modulus</code> is a positive number <var>p</var>, operations on canonical rational
+expressions (CREs, as returned by <code>rat</code> and related functions) are carried out
+modulo <var>p</var>, using the so-called &quot;balanced&quot; modulus system in which <code><var>n</var>
+modulo <var>p</var></code> is defined as an integer <var>k</var> in
+<code>[-(<var>p</var>-1)/2, ..., 0, ..., (<var>p</var>-1)/2]</code> when <var>p</var> is odd, or
+<code>[-(<var>p</var>/2 - 1), ..., 0, ...., <var>p</var>/2]</code> when <var>p</var> is even, such
+that <code><var>a</var> <var>p</var> + <var>k</var></code> equals <var>n</var> for some integer <var>a</var>.
+</p>
+<p>If <var>expr</var> is already in canonical rational expression (CRE) form when
+<code>modulus</code> is reset, then you may need to re-rat <var>expr</var>, e.g.,
+<code>expr: rat (ratdisrep (expr))</code>, in order to get correct results.
+</p>
+<p>Typically <code>modulus</code> is set to a prime number.  If <code>modulus</code> is set to
+a positive non-prime integer, this setting is accepted, but a warning message is
+displayed.  Maxima signals an error, when zero or a negative integer is
+assigned to <code>modulus</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) modulus:7;
+(%o1)                           7
+(%i2) polymod([0,1,2,3,4,5,6,7]);
+(%o2)            [0, 1, 2, 3, - 3, - 2, - 1, 0]
+(%i3) modulus:false;
+(%o3)                         false
+(%i4) poly:x^6+x^2+1;
+                            6    2
+(%o4)                      x  + x  + 1
+(%i5) factor(poly);
+                            6    2
+(%o5)                      x  + x  + 1
+(%i6) modulus:13;
+(%o6)                          13
+(%i7) factor(poly);
+                      2        4      2
+(%o7)               (x  + 6) (x  - 6 x  - 2)
+(%i8) polymod(%);
+                            6    2
+(%o8)                      x  + x  + 1
+</pre></div>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Integers">Integers</a>
+</div>
+</p></dd></dl>
+
+
+<span id="num"></span><span id="Item_003a-Polynomials_002fdeffn_002fnum"></span><dl>
+<dt id="index-num">Function: <strong>num</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns the numerator of <var>expr</var> if it is a ratio.
+If <var>expr</var> is not a ratio, <var>expr</var> is returned.
+</p>
+<p><code>num</code> evaluates its argument.
+</p>
+<p>See also <code><a href="#denom">denom</a></code>
+</p>
+<div class="example">
+<pre class="example">(%i1) g1:(x+2)*(x+1)/((x+3)^2);
+                         (x + 1) (x + 2)
+(%o1)                    ---------------
+                                   2
+                            (x + 3)
+</pre><pre class="example">(%i2) num(g1);
+(%o2)                    (x + 1) (x + 2)
+</pre><pre class="example">(%i3) g2:sin(x)/10*cos(x)/y;
+                          cos(x) sin(x)
+(%o3)                     -------------
+                              10 y
+</pre><pre class="example">(%i4) num(g2);
+(%o4)                     cos(x) sin(x)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Expressions">Expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="polydecomp"></span><span id="Item_003a-Polynomials_002fdeffn_002fpolydecomp"></span><dl>
+<dt id="index-polydecomp">Function: <strong>polydecomp</strong> <em>(<var>p</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Decomposes the polynomial <var>p</var> in the variable <var>x</var>
+into the functional composition of polynomials in <var>x</var>.
+<code>polydecomp</code> returns a list <code>[<var>p_1</var>, ..., <var>p_n</var>]</code> such that
+</p>
+<div class="example">
+<pre class="example">lambda ([x], p_1) (lambda ([x], p_2) (... (lambda ([x], p_n) (x))
+  ...))
+</pre></div>
+
+<p>is equal to <var>p</var>.
+The degree of <var>p_i</var> is greater than 1 for <var>i</var> less than <var>n</var>.
+</p>
+<p>Such a decomposition is not unique.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) polydecomp (x^210, x);
+                          7   5   3   2
+(%o1)                   [x , x , x , x ]
+</pre><pre class="example">(%i2) p : expand (subst (x^3 - x - 1, x, x^2 - a));
+                6      4      3    2
+(%o2)          x  - 2 x  - 2 x  + x  + 2 x - a + 1
+</pre><pre class="example">(%i3) polydecomp (p, x);
+                        2       3
+(%o3)                 [x  - a, x  - x - 1]
+</pre></div>
+
+<p>The following function composes <code>L = [e_1, ..., e_n]</code> as functions in
+<code>x</code>; it is the inverse of polydecomp:
+</p>
+<div class="example">
+<pre class="example">(%i1) compose (L, x) :=
+  block ([r : x], for e in L do r : subst (e, x, r), r) $
+</pre></div>
+
+<p>Re-express above example using <code>compose</code>:
+</p>
+<div class="example">
+<pre class="example">(%i1) polydecomp (compose ([x^2 - a, x^3 - x - 1], x), x);
+                          2       3
+(%o1)          [compose([x  - a, x  - x - 1], x)]
+</pre></div>
+
+<p>Note that though <code>compose (polydecomp (<var>p</var>, <var>x</var>), <var>x</var>)</code> always
+returns <var>p</var> (unexpanded), <code>polydecomp (compose ([<var>p_1</var>, ...,
+<var>p_n</var>], <var>x</var>), <var>x</var>)</code> does <i>not</i> necessarily return
+<code>[<var>p_1</var>, ..., <var>p_n</var>]</code>:
+</p>
+<div class="example">
+<pre class="example">(%i1) polydecomp (compose ([x^2 + 2*x + 3, x^2], x), x);
+                           2             2
+(%o1)           [compose([x  + 2 x + 3, x ], x)]
+</pre><pre class="example">(%i2) polydecomp (compose ([x^2 + x + 1, x^2 + x + 1], x), x);
+                        2           2
+(%o2)        [compose([x  + x + 1, x  + x + 1], x)]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="polymod"></span><span id="Item_003a-Polynomials_002fdeffn_002fpolymod"></span><dl>
+<dt id="index-polymod">Function: <strong>polymod</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>polymod</tt> (<var>p</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>polymod</tt> (<var>p</var>, <var>m</var>)</em></dt>
+<dd>
+<p>Converts the polynomial <var>p</var> to a modular representation with respect to the
+current modulus which is the value of the variable <code>modulus</code>.
+</p>
+<p><code>polymod (<var>p</var>, <var>m</var>)</code> specifies a modulus <var>m</var> to be used 
+instead of the current value of <code>modulus</code>.
+</p>
+<p>See <code><a href="#modulus">modulus</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+
+<span id="polynomialp"></span><span id="Item_003a-Polynomials_002fdeffn_002fpolynomialp"></span><dl>
+<dt id="index-polynomialp">Function: <strong>polynomialp</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>polynomialp</tt> (<var>p</var>, <var>L</var>, <var>coeffp</var>, <var>exponp</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>polynomialp</tt> (<var>p</var>, <var>L</var>, <var>coeffp</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>polynomialp</tt> (<var>p</var>, <var>L</var>)</em></dt>
+<dd>
+<p>Return <code>true</code> if <var>p</var> is a polynomial in the variables in the list
+<var>L</var>.  The predicate <var>coeffp</var> must evaluate to <code>true</code> for each
+coefficient, and the predicate <var>exponp</var> must evaluate to <code>true</code> for all
+exponents of the variables in <var>L</var>.  If you want to use a non-default value
+for <var>exponp</var>, you must supply <var>coeffp</var> with a value even if you want
+to use the default for <var>coeffp</var>.
+</p>
+<p>The command <code>polynomialp (<var>p</var>, <var>L</var>, <var>coeffp</var>)</code> is equivalent to
+<code>polynomialp (<var>p</var>, <var>L</var>, <var>coeffp</var>, 'nonnegintegerp)</code> and the
+command <code>polynomialp (<var>p</var>, <var>L</var>)</code> is equivalent to
+<code>polynomialp (<var>p</var>, L<var>,</var> 'constantp, 'nonnegintegerp)</code>.
+</p>
+<p>The polynomial needn&rsquo;t be expanded:
+</p>
+<div class="example">
+<pre class="example">(%i1) polynomialp ((x + 1)*(x + 2), [x]);
+(%o1)                         true
+(%i2) polynomialp ((x + 1)*(x + 2)^a, [x]);
+(%o2)                         false
+</pre></div>
+
+<p>An example using non-default values for coeffp and exponp:
+</p>
+<div class="example">
+<pre class="example">(%i1) polynomialp ((x + 1)*(x + 2)^(3/2), [x], numberp, numberp);
+(%o1)                         true
+(%i2) polynomialp ((x^(1/2) + 1)*(x + 2)^(3/2), [x], numberp,
+                                                        numberp);
+(%o2)                         true
+</pre></div>
+
+<p>Polynomials with two variables:
+</p>
+<div class="example">
+<pre class="example">(%i1) polynomialp (x^2 + 5*x*y + y^2, [x]);
+(%o1)                         false
+(%i2) polynomialp (x^2 + 5*x*y + y^2, [x, y]);
+(%o2)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="quotient"></span><span id="Item_003a-Polynomials_002fdeffn_002fquotient"></span><dl>
+<dt id="index-quotient">Function: <strong>quotient</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quotient</tt> (<var>p_1</var>, <var>p_2</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quotient</tt> (<var>p_1</var>, <var>p_2</var>, <var>x_1</var>, &hellip;, <var>x_n</var>)</em></dt>
+<dd>
+<p>Returns the polynomial <var>p_1</var> divided by the polynomial <var>p_2</var>.  The
+arguments <var>x_1</var>, &hellip;, <var>x_n</var> are interpreted as in <code>ratvars</code>.
+</p>
+<p><code>quotient</code> returns the first element of the two-element list returned by
+<code><a href="#divide">divide</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+
+<span id="rat"></span><span id="Item_003a-Polynomials_002fdeffn_002frat"></span><dl>
+<dt id="index-rat">Function: <strong>rat</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>rat</tt> (<var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>rat</tt> (<var>expr</var>, <var>x_1</var>, &hellip;, <var>x_n</var>)</em></dt>
+<dd>
+<p>Converts <var>expr</var> to canonical rational expression (CRE) form by expanding and
+combining all terms over a common denominator and cancelling out the
+greatest common divisor of the numerator and denominator, as well as
+converting floating point numbers to rational numbers within a
+tolerance of <code>ratepsilon</code>.
+The variables are ordered according
+to the <var>x_1</var>, &hellip;, <var>x_n</var>, if specified, as in <code>ratvars</code>.
+</p>
+<p><code>rat</code> does not generally simplify functions other than addition <code>+</code>,
+subtraction <code>-</code>, multiplication <code>*</code>, division <code>/</code>, and
+exponentiation to an integer power,
+whereas <code>ratsimp</code> does handle those cases.
+Note that atoms (numbers and variables) in CRE form are not the
+same as they are in the general form.
+For example, <code>rat(x)- x</code> yields 
+<code>rat(0)</code> which has a different internal representation than 0.
+</p>
+<p>When <code>ratfac</code> is <code>true</code>, <code>rat</code> yields a partially factored
+form for CRE.  During rational operations the expression is
+maintained as fully factored as possible without an actual call to the
+factor package.  This should always save space and may save some time
+in some computations.  The numerator and denominator are still made
+relatively prime
+(e.g.,  <code>rat((x^2 - 1)^4/(x + 1)^2)</code> yields <code>(x - 1)^4 (x + 1)^2</code>
+when <code>ratfac</code> is <code>true</code>),
+but the factors within each part may not be relatively prime.
+</p>
+<p><code>ratprint</code> if <code>false</code> suppresses the printout of the message
+informing the user of the conversion of floating point numbers to
+rational numbers.
+</p>
+<p><code>keepfloat</code> if <code>true</code> prevents floating point numbers from being
+converted to rational numbers.
+</p>
+<p>See also <code>ratexpand</code> and  <code>ratsimp</code>.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example">(%i1) ((x - 2*y)^4/(x^2 - 4*y^2)^2 + 1)*(y + a)*(2*y + x) /
+      (4*y^2 + x^2);
+                                           4
+                                  (x - 2 y)
+              (y + a) (2 y + x) (------------ + 1)
+                                   2      2 2
+                                 (x  - 4 y )
+(%o1)         ------------------------------------
+                              2    2
+                           4 y  + x
+</pre><pre class="example">(%i2) rat (%, y, a, x);
+                            2 a + 2 y
+(%o2)/R/                    ---------
+                             x + 2 y
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002fratalgdenom"></span><dl>
+<dt id="index-ratalgdenom">Option variable: <strong>ratalgdenom</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>ratalgdenom</code> is <code>true</code>, allows rationalization of denominators
+with respect to radicals to take effect.  <code>ratalgdenom</code> has an effect only
+when canonical rational expressions (CRE) are used in algebraic mode.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+
+<span id="ratcoef"></span><span id="Item_003a-Polynomials_002fdeffn_002fratcoef"></span><dl>
+<dt id="index-ratcoef">Function: <strong>ratcoef</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ratcoef</tt> (<var>expr</var>, <var>x</var>, <var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ratcoef</tt> (<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns the coefficient of the expression <code><var>x</var>^<var>n</var></code>
+in the expression <var>expr</var>.
+If omitted, <var>n</var> is assumed to be 1.
+</p>
+<p>The return value is free
+(except possibly in a non-rational sense) of the variables in <var>x</var>.
+If no coefficient of this type exists, 0 is returned.
+</p>
+<p><code>ratcoef</code>
+expands and rationally simplifies its first argument and thus it may
+produce answers different from those of <code>coeff</code> which is purely
+syntactic.
+Thus <code>ratcoef ((x + 1)/y + x, x)</code> returns <code>(y + 1)/y</code> whereas
+<code>coeff</code> returns 1.
+</p>
+<p><code>ratcoef (<var>expr</var>, <var>x</var>, 0)</code>, viewing <var>expr</var> as a sum,
+returns a sum of those terms which do not contain <var>x</var>.
+Therefore if <var>x</var> occurs to any negative powers, <code>ratcoef</code> should not
+be used.
+</p>
+<p>Since <var>expr</var> is rationally
+simplified before it is examined, coefficients may not appear quite
+the way they were envisioned.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) s: a*x + b*x + 5$
+(%i2) ratcoef (s, a + b);
+(%o2)                           x
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ratdenom"></span><span id="Item_003a-Polynomials_002fdeffn_002fratdenom"></span><dl>
+<dt id="index-ratdenom">Function: <strong>ratdenom</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns the denominator of <var>expr</var>,
+after coercing <var>expr</var> to a canonical rational expression (CRE).
+The return value is a CRE.
+</p>
+<p><var>expr</var> is coerced to a CRE by <code>rat</code>
+if it is not already a CRE.
+This conversion may change the form of <var>expr</var> by putting all terms
+over a common denominator.
+</p>
+<p><code>denom</code> is similar, but returns an ordinary expression instead of a CRE.
+Also, <code>denom</code> does not attempt to place all terms over a common
+denominator, and thus some expressions which are considered ratios by
+<code>ratdenom</code> are not considered ratios by <code>denom</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002fratdenomdivide"></span><dl>
+<dt id="index-ratdenomdivide">Option variable: <strong>ratdenomdivide</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>ratdenomdivide</code> is <code>true</code>,
+<code>ratexpand</code> expands a ratio in which the numerator is a sum 
+into a sum of ratios,
+all having a common denominator.
+Otherwise, <code>ratexpand</code> collapses a sum of ratios into a single ratio,
+the numerator of which is the sum of the numerators of each ratio.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: (x^2 + x + 1)/(y^2 + 7);
+                            2
+                           x  + x + 1
+(%o1)                      ----------
+                              2
+                             y  + 7
+(%i2) ratdenomdivide: true$
+(%i3) ratexpand (expr);
+                       2
+                      x        x        1
+(%o3)               ------ + ------ + ------
+                     2        2        2
+                    y  + 7   y  + 7   y  + 7
+(%i4) ratdenomdivide: false$
+(%i5) ratexpand (expr);
+</pre><pre class="example">                            2
+                           x  + x + 1
+(%o5)                      ----------
+                              2
+                             y  + 7
+</pre><pre class="example">(%i6) expr2: a^2/(b^2 + 3) + b/(b^2 + 3);
+                                     2
+                           b        a
+(%o6)                    ------ + ------
+                          2        2
+                         b  + 3   b  + 3
+(%i7) ratexpand (expr2);
+                                  2
+                             b + a
+(%o7)                        ------
+                              2
+                             b  + 3
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ratdiff"></span><span id="Item_003a-Polynomials_002fdeffn_002fratdiff"></span><dl>
+<dt id="index-ratdiff">Function: <strong>ratdiff</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Differentiates the rational expression <var>expr</var> with respect to <var>x</var>.
+<var>expr</var> must be a ratio of polynomials or a polynomial in <var>x</var>.
+The argument <var>x</var> may be a variable or a subexpression of <var>expr</var>.
+</p>
+<p>The result is equivalent to <code>diff</code>, although perhaps in a different form.
+<code>ratdiff</code> may be faster than <code>diff</code>, for rational expressions.
+</p>
+<p><code>ratdiff</code> returns a canonical rational expression (CRE) if <code>expr</code> is
+a CRE.  Otherwise, <code>ratdiff</code> returns a general expression.
+</p>
+<p><code>ratdiff</code> considers only the dependence of <var>expr</var> on <var>x</var>,
+and ignores any dependencies established by <code>depends</code>.
+</p>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: (4*x^3 + 10*x - 11)/(x^5 + 5);
+</pre><pre class="example">                           3
+                        4 x  + 10 x - 11
+(%o1)                   ----------------
+                              5
+                             x  + 5
+</pre><pre class="example">(%i2) ratdiff (expr, x);
+                    7       5       4       2
+                 8 x  + 40 x  - 55 x  - 60 x  - 50
+(%o2)          - ---------------------------------
+                          10       5
+                         x   + 10 x  + 25
+(%i3) expr: f(x)^3 - f(x)^2 + 7;
+                         3       2
+(%o3)                   f (x) - f (x) + 7
+(%i4) ratdiff (expr, f(x));
+                           2
+(%o4)                   3 f (x) - 2 f(x)
+(%i5) expr: (a + b)^3 + (a + b)^2;
+                              3          2
+(%o5)                  (b + a)  + (b + a)
+(%i6) ratdiff (expr, a + b);
+                    2                    2
+(%o6)            3 b  + (6 a + 2) b + 3 a  + 2 a
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ratdisrep"></span><span id="Item_003a-Polynomials_002fdeffn_002fratdisrep"></span><dl>
+<dt id="index-ratdisrep">Function: <strong>ratdisrep</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns its argument as a general expression.
+If <var>expr</var> is a general expression, it is returned unchanged.
+</p>
+<p>Typically <code>ratdisrep</code> is called to convert a canonical rational expression
+(CRE) into a general expression.
+This is sometimes convenient if one wishes to stop the &quot;contagion&quot;, or
+use rational functions in non-rational contexts.
+</p>
+<p>See also <code><a href="#totaldisrep">totaldisrep</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ratexpand"></span><span id="Item_003a-Polynomials_002fdeffn_002fratexpand"></span><dl>
+<dt id="index-ratexpand">Function: <strong>ratexpand</strong> <em>(<var>expr</var>)</em></dt>
+<dt id="index-ratexpand-1">Option variable: <strong>ratexpand</strong></dt>
+<dd>
+<p>Expands <var>expr</var> by multiplying out products of sums and
+exponentiated sums, combining fractions over a common denominator,
+cancelling the greatest common divisor of the numerator and
+denominator, then splitting the numerator (if a sum) into its
+respective terms divided by the denominator.
+</p>
+<p>The return value of <code>ratexpand</code> is a general expression,
+even if <var>expr</var> is a canonical rational expression (CRE).
+</p>
+<p>The switch <code>ratexpand</code> if <code>true</code> will cause CRE
+expressions to be fully expanded when they are converted back to
+general form or displayed, while if it is <code>false</code> then they will be put
+into a recursive form.
+See also <code><a href="#ratsimp">ratsimp</a></code>.
+</p>
+<p>When <code>ratdenomdivide</code> is <code>true</code>,
+<code>ratexpand</code> expands a ratio in which the numerator is a sum 
+into a sum of ratios,
+all having a common denominator.
+Otherwise, <code>ratexpand</code> collapses a sum of ratios into a single ratio,
+the numerator of which is the sum of the numerators of each ratio.
+</p>
+<p>When <code>keepfloat</code> is <code>true</code>, prevents floating
+point numbers from being rationalized when expressions which contain
+them are converted to canonical rational expression (CRE) form.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) ratexpand ((2*x - 3*y)^3);
+                     3         2       2        3
+(%o1)          - 27 y  + 54 x y  - 36 x  y + 8 x
+(%i2) expr: (x - 1)/(x + 1)^2 + 1/(x - 1);
+                         x - 1       1
+(%o2)                   -------- + -----
+                               2   x - 1
+                        (x + 1)
+(%i3) expand (expr);
+</pre><pre class="example">                    x              1           1
+(%o3)          ------------ - ------------ + -----
+                2              2             x - 1
+               x  + 2 x + 1   x  + 2 x + 1
+</pre><pre class="example">(%i4) ratexpand (expr);
+                        2
+                     2 x                 2
+(%o4)           --------------- + ---------------
+                 3    2            3    2
+                x  + x  - x - 1   x  + x  - x - 1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ratfac"></span><span id="Item_003a-Polynomials_002fdefvr_002fratfac"></span><dl>
+<dt id="index-ratfac">Option variable: <strong>ratfac</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>ratfac</code> is <code>true</code>, canonical rational expressions (CRE) are
+manipulated in a partially factored form.
+</p>
+<p>During rational operations the expression is maintained as fully factored as
+possible without calling <code>factor</code>.
+This should always save space and may save time in some computations.
+The numerator and denominator are made relatively prime, for example
+<code>factor ((x^2 - 1)^4/(x + 1)^2)</code> yields <code>(x - 1)^4 (x + 1)^2</code>,
+but the factors within each part may not be relatively prime.
+</p>
+<p>In the <code>ctensor</code> (Component Tensor Manipulation) package,
+Ricci, Einstein, Riemann, and Weyl tensors and the scalar curvature 
+are factored automatically when <code>ratfac</code> is <code>true</code>.
+<i><code>ratfac</code> should only be
+set for cases where the tensorial components are known to consist of
+few terms.</i>
+</p>
+<p>The <code>ratfac</code> and <code>ratweight</code> schemes are incompatible and may not
+both be used at the same time.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ratnumer"></span><span id="Item_003a-Polynomials_002fdeffn_002fratnumer"></span><dl>
+<dt id="index-ratnumer">Function: <strong>ratnumer</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns the numerator of <var>expr</var>,
+after coercing <var>expr</var> to a canonical rational expression (CRE).
+The return value is a CRE.
+</p>
+<p><var>expr</var> is coerced to a CRE by <code>rat</code>
+if it is not already a CRE.
+This conversion may change the form of <var>expr</var> by putting all terms
+over a common denominator.
+</p>
+<p><code>num</code> is similar, but returns an ordinary expression instead of a CRE.
+Also, <code>num</code> does not attempt to place all terms over a common denominator,
+and thus some expressions which are considered ratios by <code>ratnumer</code>
+are not considered ratios by <code>num</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ratp"></span><span id="Item_003a-Polynomials_002fdeffn_002fratp"></span><dl>
+<dt id="index-ratp">Function: <strong>ratp</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <var>expr</var> is a canonical rational expression (CRE) or
+extended CRE, otherwise <code>false</code>.
+</p>
+<p>CRE are created by <code>rat</code> and related functions.
+Extended CRE are created by <code>taylor</code> and related functions.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002fratprint"></span><dl>
+<dt id="index-ratprint">Option variable: <strong>ratprint</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>ratprint</code> is <code>true</code>,
+a message informing the user of the conversion of floating point numbers
+to rational numbers is displayed.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+
+<a href="maxima_369.html#Category_003a-Numerical-evaluation">Numerical evaluation</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="ratsimp"></span><span id="Item_003a-Polynomials_002fdeffn_002fratsimp"></span><dl>
+<dt id="index-ratsimp">Function: <strong>ratsimp</strong> <em>(<var>expr</var>)</em></dt>
+<dt id="index-ratsimp-1">Function: <strong>ratsimp</strong> <em>(<var>expr</var>, <var>x_1</var>, &hellip;, <var>x_n</var>)</em></dt>
+<dd>
+<p>Simplifies the expression <var>expr</var> and all of its subexpressions, including
+the arguments to non-rational functions.  The result is returned as the quotient
+of two polynomials in a recursive form, that is, the coefficients of the main
+variable are polynomials in the other variables.  Variables may include
+non-rational functions (e.g., <code>sin (x^2 + 1)</code>) and the arguments to any
+such functions are also rationally simplified.
+</p>
+<p><code>ratsimp (<var>expr</var>, <var>x_1</var>, ..., <var>x_n</var>)</code>
+enables rational simplification with the
+specification of variable ordering as in <code>ratvars</code>.
+</p>
+<p>When <code>ratsimpexpons</code> is <code>true</code>,
+<code>ratsimp</code> is applied to the exponents of expressions during simplification.
+</p>
+<p>See also <code><a href="#ratexpand">ratexpand</a></code>.
+Note that <code>ratsimp</code> is affected by some of the
+flags which affect <code>ratexpand</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) sin (x/(x^2 + x)) = exp ((log(x) + 1)^2 - log(x)^2);
+</pre><pre class="example">                                         2      2
+                   x         (log(x) + 1)  - log (x)
+(%o1)        sin(------) = %e
+                  2
+                 x  + x
+</pre><pre class="example">(%i2) ratsimp (%);
+                             1          2
+(%o2)                  sin(-----) = %e x
+                           x + 1
+(%i3) ((x - 1)^(3/2) - (x + 1)*sqrt(x - 1))/sqrt((x - 1)*(x + 1));
+</pre><pre class="example">                       3/2
+                (x - 1)    - sqrt(x - 1) (x + 1)
+(%o3)           --------------------------------
+                     sqrt((x - 1) (x + 1))
+</pre><pre class="example">(%i4) ratsimp (%);
+                           2 sqrt(x - 1)
+(%o4)                    - -------------
+                                 2
+                           sqrt(x  - 1)
+(%i5) x^(a + 1/a), ratsimpexpons: true;
+                               2
+                              a  + 1
+                              ------
+                                a
+(%o5)                        x
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Simplification-functions">Simplification functions</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002fratsimpexpons"></span><dl>
+<dt id="index-ratsimpexpons">Option variable: <strong>ratsimpexpons</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>ratsimpexpons</code> is <code>true</code>,
+<code>ratsimp</code> is applied to the exponents of expressions during simplification.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="radsubstflag"></span><span id="Item_003a-Polynomials_002fdefvr_002fradsubstflag"></span><dl>
+<dt id="index-radsubstflag">Option variable: <strong>radsubstflag</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p><code>radsubstflag</code>, if <code>true</code>, permits <code>ratsubst</code> to make
+substitutions such as <code>u</code> for <code>sqrt (x)</code> in <code>x</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="ratsubst"></span><span id="Item_003a-Polynomials_002fdeffn_002fratsubst"></span><dl>
+<dt id="index-ratsubst">Function: <strong>ratsubst</strong> <em>(<var>a</var>, <var>b</var>, <var>c</var>)</em></dt>
+<dd>
+<p>Substitutes <var>a</var> for <var>b</var> in <var>c</var> and returns the resulting expression.
+<var>b</var> may be a sum, product, power, etc.
+</p>
+<p><code>ratsubst</code> knows something of the meaning of expressions
+whereas <code>subst</code> does a purely syntactic substitution.
+Thus <code>subst (a, x + y, x + y + z)</code> returns <code>x + y + z</code>
+whereas <code>ratsubst</code> returns <code>z + a</code>.
+</p>
+<p>When <code>radsubstflag</code> is <code>true</code>,
+<code>ratsubst</code> makes substitutions for radicals in expressions
+which don&rsquo;t explicitly contain them.
+</p>
+<p><code>ratsubst</code> ignores the value <code>true</code> of the option variables
+<code>keepfloat</code>, <code>float</code>, and <code>numer</code>.
+</p>
+<p>Examples:
+</p>
+
+<div class="example">
+<pre class="example">(%i1) ratsubst (a, x*y^2, x^4*y^3 + x^4*y^8);
+                              3      4
+(%o1)                      a x  y + a
+</pre><pre class="example">(%i2) cos(x)^4 + cos(x)^3 + cos(x)^2 + cos(x) + 1;
+               4         3         2
+(%o2)       cos (x) + cos (x) + cos (x) + cos(x) + 1
+</pre><pre class="example">(%i3) ratsubst (1 - sin(x)^2, cos(x)^2, %);
+            4           2                     2
+(%o3)    sin (x) - 3 sin (x) + cos(x) (2 - sin (x)) + 3
+</pre><pre class="example">(%i4) ratsubst (1 - cos(x)^2, sin(x)^2, sin(x)^4);
+                        4           2
+(%o4)                cos (x) - 2 cos (x) + 1
+</pre><pre class="example">(%i5) radsubstflag: false$
+</pre><pre class="example">(%i6) ratsubst (u, sqrt(x), x);
+(%o6)                           x
+</pre><pre class="example">(%i7) radsubstflag: true$
+</pre><pre class="example">(%i8) ratsubst (u, sqrt(x), x);
+                                2
+(%o8)                          u
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="ratvars"></span><span id="Item_003a-Polynomials_002fdeffn_002fratvars"></span><dl>
+<dt id="index-ratvars">Function: <strong>ratvars</strong> <em>(<var>x_1</var>, &hellip;, <var>x_n</var>)</em></dt>
+<dt id="index-ratvars-1">Function: <strong>ratvars</strong> <em>()</em></dt>
+<dt id="index-ratvars-2">System variable: <strong>ratvars</strong></dt>
+<dd>
+<p>Declares main variables <var>x_1</var>, &hellip;, <var>x_n</var> for rational expressions.
+<var>x_n</var>, if present in a rational expression, is considered the main variable.
+Otherwise, <var>x_[n-1]</var> is considered the main variable if present, and so on
+through the preceding variables to <var>x_1</var>, which is considered the main
+variable only if none of the succeeding variables are present.
+</p>
+<p>If a variable in a rational expression is not present in the <code>ratvars</code>
+list, it is given a lower priority than <var>x_1</var>.
+</p>
+<p>The arguments to <code>ratvars</code> can be either variables or non-rational
+functions such as <code>sin(x)</code>.
+</p>
+<p>The variable <code>ratvars</code> is a list of the arguments of 
+the function <code>ratvars</code> when it was called most recently.
+Each call to the function <code>ratvars</code> resets the list.
+<code>ratvars ()</code> clears the list.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002fratvarswitch"></span><dl>
+<dt id="index-ratvarswitch">Option variable: <strong>ratvarswitch</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>Maxima keeps an internal list in the Lisp variable <code>VARLIST</code> of the main
+variables for rational expressions.  If <code>ratvarswitch</code> is <code>true</code>, 
+every evaluation starts with a fresh list <code>VARLIST</code>.  This is the default
+behavior.  Otherwise, the main variables from previous evaluations are not 
+removed from the internal list <code>VARLIST</code>.
+</p>
+<p>The main variables, which are declared with the function <code>ratvars</code> are
+not affected by the option variable <code>ratvarswitch</code>.
+</p>
+<p>Examples:
+</p>
+<p>If <code>ratvarswitch</code> is <code>true</code>, every evaluation starts with a fresh
+list <code>VARLIST</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) ratvarswitch:true$
+
+(%i2) rat(2*x+y^2);
+                             2
+(%o2)/R/                    y  + 2 x
+(%i3) :lisp varlist
+($X $Y)
+
+(%i3) rat(2*a+b^2);
+                             2
+(%o3)/R/                    b  + 2 a
+
+(%i4) :lisp varlist
+($A $B)
+</pre></div>
+
+<p>If <code>ratvarswitch</code> is <code>false</code>, the main variables from the last 
+evaluation are still present.
+</p>
+<div class="example">
+<pre class="example">(%i4) ratvarswitch:false$
+
+(%i5) rat(2*x+y^2);
+                             2
+(%o5)/R/                    y  + 2 x
+(%i6) :lisp varlist
+($X $Y)
+
+(%i6) rat(2*a+b^2);
+                             2
+(%o6)/R/                    b  + 2 a
+
+(%i7) :lisp varlist
+($A $B $X $Y)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+
+<a href="maxima_369.html#Category_003a-Global-flags">Global flags</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdeffn_002fratweight"></span><dl>
+<dt id="index-ratweight">Function: <strong>ratweight</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ratweight</tt> (<var>x_1</var>, <var>w_1</var>, &hellip;, <var>x_n</var>, <var>w_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ratweight</tt> ()</em></dt>
+<dd>
+<p>Assigns a weight <var>w_i</var> to the variable <var>x_i</var>.
+This causes a term to be replaced by 0 if its weight exceeds the
+value of the variable <code>ratwtlvl</code> (default yields no truncation).
+The weight of a term is the sum of the products of the
+weight of a variable in the term times its power.
+For example, the weight of <code>3 x_1^2 x_2</code> is <code>2 w_1 + w_2</code>.
+Truncation according to <code>ratwtlvl</code> is carried out only when multiplying
+or exponentiating canonical rational expressions (CRE).
+</p>
+<p><code>ratweight ()</code> returns the cumulative list of weight assignments.
+</p>
+<p>Note: The <code>ratfac</code> and <code>ratweight</code> schemes are incompatible and may
+not both be used at the same time.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) ratweight (a, 1, b, 1);
+(%o1)                     [a, 1, b, 1]
+(%i2) expr1: rat(a + b + 1)$
+(%i3) expr1^2;
+                  2                  2
+(%o3)/R/         b  + (2 a + 2) b + a  + 2 a + 1
+(%i4) ratwtlvl: 1$
+(%i5) expr1^2;
+(%o5)/R/                  2 b + 2 a + 1
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002fratweights"></span><dl>
+<dt id="index-ratweights">System variable: <strong>ratweights</strong></dt>
+<dd><p>Default value: <code>[]</code>
+</p>
+<p><code>ratweights</code> is the list of weights assigned by <code>ratweight</code>.
+The list is cumulative:
+each call to <code>ratweight</code> places additional items in the list.
+</p>
+<p><code>kill (ratweights)</code> and <code>save (ratweights)</code> both work as expected.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdefvr_002fratwtlvl"></span><dl>
+<dt id="index-ratwtlvl">Option variable: <strong>ratwtlvl</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p><code>ratwtlvl</code> is used in combination with the <code>ratweight</code>
+function to control the truncation of canonical rational expressions (CRE).
+For the default value of <code>false</code>, no truncation occurs.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Polynomials_002fdeffn_002fremainder"></span><dl>
+<dt id="index-remainder">Function: <strong>remainder</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>remainder</tt> (<var>p_1</var>, <var>p_2</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>remainder</tt> (<var>p_1</var>, <var>p_2</var>, <var>x_1</var>, &hellip;, <var>x_n</var>)</em></dt>
+<dd>
+<p>Returns the remainder of the polynomial <var>p_1</var> divided by the polynomial
+<var>p_2</var>.  The arguments <var>x_1</var>, &hellip;, <var>x_n</var> are interpreted as in
+<code>ratvars</code>.
+</p>
+<p><code>remainder</code> returns the second element
+of the two-element list returned by <code>divide</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="resultant"></span><span id="Item_003a-Polynomials_002fdeffn_002fresultant"></span><dl>
+<dt id="index-resultant">Function: <strong>resultant</strong> <em>(<var>p_1</var>, <var>p_2</var>, <var>x</var>)</em></dt>
+<dd>
+<p>The function <code>resultant</code> computes the resultant of the two polynomials
+<var>p_1</var> and <var>p_2</var>, eliminating the variable <var>x</var>.  The resultant is a
+determinant of the coefficients of <var>x</var> in <var>p_1</var> and <var>p_2</var>, which
+equals zero if and only if <var>p_1</var> and <var>p_2</var> have a non-constant factor
+in common.
+</p>
+<p>If <var>p_1</var> or <var>p_2</var> can be factored, it may be desirable to call
+<code><a href="#factor">factor</a></code> before calling <code>resultant</code>.
+</p>
+<p>The option variable <code>resultant</code> controls which algorithm will be used to
+compute the resultant.  See the option variable
+<code><a href="#option_005fresultant">resultant</a></code>.
+</p>
+<p>The function <code><a href="#bezout">bezout</a></code> takes the same arguments as <code>resultant</code> and
+returns a matrix.  The determinant of the return value is the desired resultant.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) resultant(2*x^2+3*x+1, 2*x^2+x+1, x);
+(%o1)                           8
+(%i2) resultant(x+1, x+1, x);
+(%o2)                           0
+(%i3) resultant((x+1)*x, (x+1), x);
+(%o3)                           0
+(%i4) resultant(a*x^2+b*x+1, c*x + 2, x);
+                         2
+(%o4)                   c  - 2 b c + 4 a
+
+(%i5) bezout(a*x^2+b*x+1, c*x+2, x);
+</pre><pre class="example">                        [ 2 a  2 b - c ]
+(%o5)                   [              ]
+                        [  c      2    ]
+</pre><pre class="example">(%i6) determinant(%);
+(%o6)                   4 a - (2 b - c) c
+</pre></div>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="option_005fresultant"></span><span id="Item_003a-Polynomials_002fdefvr_002fresultant"></span><dl>
+<dt id="index-resultant-1">Option variable: <strong>resultant</strong></dt>
+<dd><p>Default value: <code>subres</code>
+</p>
+<p>The option variable <code>resultant</code> controls which algorithm will be used to
+compute the resultant with the function <code><a href="#resultant">resultant</a></code>.  The possible
+values are:
+</p>
+<dl compact="compact">
+<dt><code>subres</code></dt>
+<dd><p>for the subresultant polynomial remainder sequence (PRS) algorithm,
+</p></dd>
+<dt><code>mod</code></dt>
+<dd><p>(not enabled) for the modular resultant algorithm, and 
+</p></dd>
+<dt><code>red</code></dt>
+<dd><p>for the reduced polynomial remainder sequence (PRS) algorithm.
+</p></dd>
+</dl>
+
+<p>On most problems the default value <code>subres</code> should be best.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="savefactors"></span><span id="Item_003a-Polynomials_002fdefvr_002fsavefactors"></span><dl>
+<dt id="index-savefactors">Option variable: <strong>savefactors</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>savefactors</code> is <code>true</code>, causes the factors of an
+expression which is a product of factors to be saved by certain
+functions in order to speed up later factorizations of expressions
+containing some of the same factors.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+<span id="showratvars"></span><span id="Item_003a-Polynomials_002fdeffn_002fshowratvars"></span><dl>
+<dt id="index-showratvars">Function: <strong>showratvars</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns a list of the canonical rational expression (CRE) variables in
+expression <code>expr</code>.
+</p>
+<p>See also <code><a href="#ratvars">ratvars</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+
+<a href="maxima_369.html#Category_003a-Display-functions">Display functions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="sqfr"></span><span id="Item_003a-Polynomials_002fdeffn_002fsqfr"></span><dl>
+<dt id="index-sqfr">Function: <strong>sqfr</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>is similar to <code><a href="#factor">factor</a></code> except that the polynomial factors are
+&quot;square-free.&quot;  That is, they have factors only of degree one.
+This algorithm, which is also used by the first stage of <code><a href="#factor">factor</a></code>, utilizes
+the fact that a polynomial has in common with its n&rsquo;th derivative all
+its factors of degree greater than n.  Thus by taking greatest common divisors
+with the polynomial of
+the derivatives with respect to each variable in the polynomial, all
+factors of degree greater than 1 can be found.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) sqfr (4*x^4 + 4*x^3 - 3*x^2 - 4*x - 1);
+                                2   2
+(%o1)                  (2 x + 1)  (x  - 1)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-Polynomials_002fdeffn_002ftellrat"></span><dl>
+<dt id="index-tellrat">Function: <strong>tellrat</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>tellrat</tt> (<var>p_1</var>, &hellip;, <var>p_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>tellrat</tt> ()</em></dt>
+<dd>
+<p>Adds to the ring of algebraic integers known to Maxima
+the elements which are the solutions of the polynomials <var>p_1</var>, &hellip;,
+<var>p_n</var>.  Each argument <var>p_i</var> is a polynomial with integer coefficients.
+</p>
+<p><code>tellrat (<var>x</var>)</code> effectively means substitute 0 for <var>x</var> in rational
+functions.
+</p>
+<p><code>tellrat ()</code> returns a list of the current substitutions.
+</p>
+<p><code>algebraic</code> must be set to <code>true</code> in order for the simplification of
+algebraic integers to take effect.
+</p>
+<p>Maxima initially knows about the imaginary unit <code>%i</code>
+and all roots of integers.
+</p>
+<p>There is a command <code>untellrat</code> which takes kernels and
+removes <code>tellrat</code> properties.
+</p>
+<p>When <code>tellrat</code>&rsquo;ing a multivariate
+polynomial, e.g., <code>tellrat (x^2 - y^2)</code>, there would be an ambiguity as to
+whether to substitute <code><var>y</var>^2</code> for <code><var>x</var>^2</code>
+or vice versa.  
+Maxima picks a particular ordering, but if the user wants to specify which, e.g.
+<code>tellrat (y^2 = x^2)</code> provides a syntax which says replace
+<code><var>y</var>^2</code> by <code><var>x</var>^2</code>.
+</p>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) 10*(%i + 1)/(%i + 3^(1/3));
+                           10 (%i + 1)
+(%o1)                      -----------
+                                  1/3
+                            %i + 3
+(%i2) ev (ratdisrep (rat(%)), algebraic);
+             2/3      1/3              2/3      1/3
+(%o2)    (4 3    - 2 3    - 4) %i + 2 3    + 4 3    - 2
+(%i3) tellrat (1 + a + a^2);
+                            2
+(%o3)                     [a  + a + 1]
+(%i4) 1/(a*sqrt(2) - 1) + a/(sqrt(3) + sqrt(2));
+                      1                 a
+(%o4)           ------------- + -----------------
+                sqrt(2) a - 1   sqrt(3) + sqrt(2)
+(%i5) ev (ratdisrep (rat(%)), algebraic);
+         (7 sqrt(3) - 10 sqrt(2) + 2) a - 2 sqrt(2) - 1
+(%o5)    ----------------------------------------------
+                               7
+(%i6) tellrat (y^2 = x^2);
+                        2    2   2
+(%o6)                 [y  - x , a  + a + 1]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="totaldisrep"></span><span id="Item_003a-Polynomials_002fdeffn_002ftotaldisrep"></span><dl>
+<dt id="index-totaldisrep">Function: <strong>totaldisrep</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Converts every subexpression of <var>expr</var> from canonical rational expressions
+(CRE) to general form and returns the result.
+If <var>expr</var> is itself in CRE form then <code>totaldisrep</code> is identical to
+<code>ratdisrep</code>.
+</p>
+<p><code>totaldisrep</code> may be useful for
+ratdisrepping expressions such as equations, lists, matrices, etc., which
+have some subexpressions in CRE form.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+<span id="untelltat"></span><span id="Item_003a-Polynomials_002fdeffn_002funtellrat"></span><dl>
+<dt id="index-untellrat">Function: <strong>untellrat</strong> <em>(<var>x_1</var>, &hellip;, <var>x_n</var>)</em></dt>
+<dd>
+<p>Removes <code>tellrat</code> properties from <var>x_1</var>, &hellip;, <var>x_n</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fSpecial-Functions"></span><hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_75.html" accesskey="p" rel="prev">Introduction to Polynomials</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

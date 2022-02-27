@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for ggf (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for ggf (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for ggf (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_245.html" rel="up" title="ggf-pkg">
+<link href="maxima_247.html" rel="next" title="graphs-pkg">
+<link href="maxima_245.html" rel="prev" title="ggf-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Functions-and-Variables-for-ggf"></span><div class="header">
+<p>
+Previous: <a href="maxima_245.html" accesskey="p" rel="prev">ggf-pkg</a>, Up: <a href="maxima_245.html" accesskey="u" rel="up">ggf-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-ggf-1"></span><h3 class="section">61.1 Functions and Variables for ggf</h3>
+
+<span id="Item_003a-ggf_002fdefvr_002fGGFINFINITY"></span><dl>
+<dt id="index-GGFINFINITY">Option variable: <strong>GGFINFINITY</strong></dt>
+<dd><p>Default value: 3
+</p>
+<p>This is an option variable for function <code>ggf</code>.
+</p>
+<p>When computing the continued fraction of the
+generating function, a partial quotient having a degree
+(strictly) greater than <var>GGFINFINITY</var> will be discarded and
+the current convergent will be considered as the exact value
+of the generating function; most often the degree of all
+partial quotients will be 0 or 1; if you use a greater value,
+then you should give enough terms in order to make the
+computation accurate enough.
+</p>
+
+<p>See also <code><a href="#ggf">ggf</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-ggf">Package ggf</a>
+</div>
+</p>
+</dd></dl>
+
+
+<span id="Item_003a-ggf_002fdefvr_002fGGFCFMAX"></span><dl>
+<dt id="index-GGFCFMAX">Option variable: <strong>GGFCFMAX</strong></dt>
+<dd><p>Default value: 3
+</p>
+<p>This is an option variable for function <code>ggf</code>.
+</p>
+<p>When computing the continued fraction of the
+generating function, if no good result has been found (see
+the <var>GGFINFINITY</var> flag) after having computed <var>GGFCFMAX</var> partial
+quotients, the generating function will be considered as
+not being a fraction of two polynomials and the function will
+exit. Put freely a greater value for more complicated
+generating functions.
+</p>
+<p>See also <code><a href="#ggf">ggf</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-ggf">Package ggf</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="ggf"></span><span id="Item_003a-ggf_002fdeffn_002fggf"></span><dl>
+<dt id="index-ggf">Function: <strong>ggf</strong> <em>(<var>l</var>)</em></dt>
+<dd><p>Compute the generating function (if it is a fraction of two
+polynomials) of a sequence, its first terms being given. <var>l</var>
+is a list of numbers.
+</p>
+<p>The solution is returned as a fraction of two polynomials.
+If no solution has been found, it returns with <code>done</code>.
+</p>
+<p>This function is controlled by global variables <var>GGFINFINITY</var> and <var>GGFCFMAX</var>. See also <var>GGFINFINITY</var> and <var>GGFCFMAX</var>.
+</p>
+<p>To use this function write first <code>load(&quot;ggf&quot;)</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Generating-functions">Generating functions</a>
+
+<a href="maxima_369.html#Category_003a-Share-packages">Share packages</a>
+
+<a href="maxima_369.html#Category_003a-Package-ggf">Package ggf</a>
+</div>
+</p>
+</dd></dl>
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fgraphs_002dpkg"></span><hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_245.html" accesskey="p" rel="prev">ggf-pkg</a>, Up: <a href="maxima_245.html" accesskey="u" rel="up">ggf-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

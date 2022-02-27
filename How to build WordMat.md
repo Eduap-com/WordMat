@@ -88,6 +88,7 @@ If you fail to run as administrator you will recieve a permission denied error i
 ```
 load(solvereal)$
 load(draw)$
+solvereal(x^2=9,x);
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
 :lisp (sb-ext:save-lisp-and-die "maxima.core" :toplevel #'cl-user::run)

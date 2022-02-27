@@ -14,13 +14,13 @@ Is not easy to update. The version must match the Mac-version to ensure similar 
 Also new versions of maxima could potentially require changes to solvereal.mac and wordmat.dotm
 
 This maxima installation is changed from the original.
-- unit.mac is changed in Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib\unit
-- maxima.core is changed in Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl
+- unit.mac is replaced in Maxima-5.45.1\share\maxima\5.45.1\share\contrib\unit by the file in shared/Maxima-files
+- WordMat/shared/Maxima-files/solvereal.mac added to contrib
+- WordMat/shared/Maxima-files/Wordmatunitaddon.mac added to contrib
+- maxima.bat changed in Maxima-5.45.1  (A section setting maxima-prefix is copied in)
+- maximaunit.bat added     (copy of maxima.bat with maxima.core changed to maximaunit.core in the sbcl.exe line)
+- maxima.core is changed in Maxima-5.45.1\lib\maxima\5.45.1\binary-sbcl    (see 'how to build WordMat.md' on how to create the new core)
 - maximaunit.core is added
-- maxima.bat changed in Maxima-sbcl-5.38.1
-- maximaunit.bat added
-- solvereal.mac added to contrib
-- Wordmatunitaddon.mac added to contrib
 
 **dotnet...**
 .net installer used by the installer if the computer does not have .net. 4.0

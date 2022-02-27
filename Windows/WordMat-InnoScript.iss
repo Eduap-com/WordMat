@@ -6,8 +6,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
 AppName=WordMat
-AppVerName=WordMat v. 1.23
-VersionInfoVersion=1.23.0.0
+AppVerName=WordMat v. 1.24
+VersionInfoVersion=1.24.0.0
 AppMutex=WordMatMutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
@@ -164,7 +164,7 @@ Source: WordMat.dotm; DestDir: {code:VStartupFolderAll16}; Check: VOffice16Insta
 Source: WordMat.dotm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: Other\WordMatLommeregner.docm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: ExternalPrograms\SetupGraph-4.4.2.exe; DestDir: {app}; Components: Graph ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
-Source: ExternalPrograms\GeoGebra-Windows-Installer-5-0-574-0.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
+Source: ExternalPrograms\GeoGebra-Windows-Installer-5-0-689-0.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 ;Source: GeoGebra-Windows-Installer-4-4-10-0.msi; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 Source: ..\Shared\WordDocs\FormelSamling.dotx; DestDir: {%appdata}\Microsoft\Document Building Blocks\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: Excelfiles\*; DestDir: {app}\ExcelFiles; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
@@ -206,7 +206,7 @@ Source: MathMenu.dll\MathMenu.tlb; DestDir: {app}; Flags: ignoreversion regtypel
 
 Source: ExternalPrograms\dotNetFx40_Client_setup.exe; DestDir: {tmp}; Flags: dontcopy
 
-Source: ExternalPrograms\Maxima-sbcl-5.38.1\*; DestDir: {app}\Maxima-sbcl-5.38.1; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; AfterInstall: ReplacePathInBat(); 
+Source: ExternalPrograms\Maxima-5.45.1\*; DestDir: {app}\Maxima-5.45.1; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; AfterInstall: ReplacePathInBat(); 
 ;Source: Maxima-5.23.2\*; DestDir: {app}\Maxima-5.23.2; Flags: ignoreversion
 ;Source: Maxima-5.23.2\bin\*; DestDir: {app}\Maxima-5.23.2\bin; Flags: ignoreversion recursesubdirs
 ;Source: Maxima-5.23.2\gnuplot\*; DestDir: {app}\Maxima-5.23.2\gnuplot; Flags: ignoreversion recursesubdirs
@@ -218,9 +218,9 @@ Source: ExternalPrograms\Maxima-sbcl-5.38.1\*; DestDir: {app}\Maxima-sbcl-5.38.1
                                       
 ;egne mac-filer
 ;Source: mac-files\*; DestDir: {app}\Maxima-5.25.1-gcl\share\maxima\5.25.1\share; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\SolveReal.mac; DestDir: {app}Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\WordMatUnitAddon.mac; DestDir: {app}Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\unit.mac; DestDir: {app}Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib\unit; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\SolveReal.mac; DestDir: {app}Maxima-5.45.1\share\maxima\5.45.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\WordMatUnitAddon.mac; DestDir: {app}Maxima-5.45.1\share\maxima\5.45.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\unit.mac; DestDir: {app}Maxima-5.45.1\share\maxima\5.45.1\share\contrib\unit; Flags: ignoreversion overwritereadonly uninsremovereadonly
 
 ;Source: C:\Users\Mikael\Documents\Eduap\MathMenu\MathMenu.dll; DestDir: {app}; Flags: ignoreversion gacinstall ; StrongAssemblyName: "MathMenu, Version=1.0.0.1, Culture=neutral, PublicKeyToken=89e88f8548e16f37, ProcessorArchitecture=MSIL"
 
@@ -357,7 +357,7 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Options"; ValueType: st
 ;Filename:"{dotnet40}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
 Filename: {app}\SetupGraph-4.4.2.exe; Parameters: "/verysilent /SUPPRESSMSGBOXES"; StatusMsg: "Installerer Graph..."; check:InstallGraph; Components: Graph ; Flags: nowait
-Filename: {app}\GeoGebra-Windows-Installer-5-0-574-0.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;
+Filename: {app}\GeoGebra-Windows-Installer-5-0-689-0.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;
 ;Filename: msiexec; Parameters: "/i ""{app}\GeoGebra-Windows-Installer-4-4-10-0.msi"" /quiet";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra..."; Components: GeoGebra ;
 ;Filename: javaws ; Parameters: "-import -system -silent -association -shortcut http://www.geogebra.org/webstart/geogebra.jnlp"; StatusMsg: "Installerer GeoGebra...";
 
@@ -385,7 +385,6 @@ Type: files; Name: "{code:VStartupFolderAll16}\WordMat.dotm"
 [Icons]
 Name: "{group}\{cm:InstallThisUser}"; Filename: "{app}\OpretWordMenu.vbs"; WorkingDir: "{app}"
 Name: "{group}\{cm:ReactivateWordMat}"; Filename: "{app}\ReaktiverWordMat.vbs"; WorkingDir: "{app}"
-Name: "{group}\wxMaxima"; Filename: "{app}\Maxima-sbcl-5.38.1\wxMaxima\wxMaxima.exe"; WorkingDir: "{app}"
 ;Name: "{group}\GeoGebra"; Filename: "{app}\GeoGebra\geogebra.exe"; WorkingDir: "{app}" 
 ;Name: "{group}\GeoGebra"; Filename: "javaws.exe";Parameters: "-system http://www.geogebra.org/webstart/geogebra.jnlp"; WorkingDir: "{app}"
 Name: "{group}\{cm:QuickWordMat}"; Filename: "{app}\WordMatLommeregner.docm"; WorkingDir: "{app}"
@@ -1458,7 +1457,7 @@ begin
 {  strFilename := strApp + '\Maxima-5.30.0\bin\maxima.bat';}
   strFilename := strApp + '\' + MaximaPath;
   strFind := 'set maxima_prefix';
-  strApp := strApp + '\Maxima-sbcl-5.38.1\';
+  strApp := strApp + '\Maxima-5.45.1\';
   strNewLine := 'set maxima_prefix='+PathWithoutSpaces(strApp);
   
   { Load textfile into string array }
@@ -1480,7 +1479,7 @@ end;
 
 procedure ReplacePathInBat();
 begin
-  ReplaceApp('Maxima-sbcl-5.38.1\bin\maxima.bat');
-  ReplaceApp('Maxima-sbcl-5.38.1\bin\maximaunit.bat');  
+  ReplaceApp('Maxima-5.45.1\bin\maxima.bat');
+  ReplaceApp('Maxima-5.45.1\bin\maximaunit.bat');  
 end;
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Introduction to Plotting (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Introduction to Plotting (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Introduction to Plotting (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_61.html" rel="up" title="Plotting">
+<link href="maxima_63.html" rel="next" title="Plotting Formats">
+<link href="maxima_61.html" rel="prev" title="Plotting">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Introduction-to-Plotting"></span><div class="header">
+<p>
+Next: <a href="maxima_63.html" accesskey="n" rel="next">Plotting Formats</a>, Previous: <a href="maxima_61.html" accesskey="p" rel="prev">Plotting</a>, Up: <a href="maxima_61.html" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Introduction-to-Plotting-1"></span><h3 class="section">12.1 Introduction to Plotting</h3>
+
+<p>To make the plots, Maxima can use an external plotting package or its
+own graphical interface Xmaxima (see the section on <code><a href="maxima_63.html">Plotting Formats</a></code>). The plotting functions calculate a set of points and pass
+them to the plotting package together with a set of commands specific to
+that graphic program. In some cases those commands and data are saved in
+a file and the graphic program is executed giving it the name of that
+file to be parsed.
+</p>
+<p>When a file is created, it will begiven the name
+<code>maxout_xxx.format</code>, where <code>xxx</code> is a number that is unique to
+every concurrently-running instance of Maxima and <code>format</code> is the
+name of the plotting format being used (<code>gnuplot</code>, <code>xmaxima</code>,
+<code>mgnuplot</code> or <code>geomview</code>).
+</p>
+<p>There are commands to save the plot in a graphic format file, rather
+than showing it in the screen. The default name for that graphic file is
+<code>maxplot.extension</code>, where <code>extension</code> is the extension
+normally used for the kind of graphic file selected, but that name can
+also be specified by the user.
+</p>
+<p>The <code>maxout_xxx.format</code> and <code>maxplot.extension</code> files are created
+in the directory specified by the system variable
+<code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code>. That location can be changed by assigning to
+that variable (or to the environment variable <code>MAXIMA_TEMPDIR</code>) a string
+that represents a valid directory where Maxima can create new files. The
+output of the Maxima plotting command will be a list with the names of
+the file(s) created, including their complete path, or empty if no files
+are created. Those files should be deleted after the maxima session ends.
+</p>
+<p>If the format used is either <code>gnuplot</code> or <code>xmaxima</code>, and the
+<code>maxout_xxx.gnuplot</code> or <code>maxout_xxx.xmaxima</code> was saved,
+<code>gnuplot</code> or <code>xmaxima</code> can be run, giving it the name of that
+file as argument, in order to view again a plot previously created in
+Maxima. Thus, when a Maxima plotting command fails, the format can be
+set to <code>gnuplot</code> or <code>xmaxima</code> and the plain-text file
+<code>maxout_xxx.gnuplot</code> (or <code>maxout_xxx.xmaxima</code>) can be
+inspected to look for the source of the problem.
+</p>
+<p>The additional package <a href="maxima_218.html#draw">draw</a> provides functions similar to the ones
+described in this section with some extra features, but it only works
+with <code>gnuplot</code>. Note that some plotting options have the same name
+in both plotting packages, but their syntax and behavior is
+different. To view the documentation for a graphic option <code>opt</code>,
+type <code>?? opt</code> in order to choose the information for either of
+those two packages.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p>
+<span id="Item_003a-Plotting_002fnode_002fPlotting-Formats"></span><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_63.html" accesskey="n" rel="next">Plotting Formats</a>, Previous: <a href="maxima_61.html" accesskey="p" rel="prev">Plotting</a>, Up: <a href="maxima_61.html" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Arithmetic operators (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Arithmetic operators (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Arithmetic operators (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_34.html" rel="up" title="Operators">
+<link href="maxima_37.html" rel="next" title="Relational operators">
+<link href="maxima_35.html" rel="prev" title="Introduction to operators">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Arithmetic-operators"></span><div class="header">
+<p>
+Next: <a href="maxima_37.html" accesskey="n" rel="next">Relational operators</a>, Previous: <a href="maxima_35.html" accesskey="p" rel="prev">Introduction to operators</a>, Up: <a href="maxima_34.html" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Arithmetic-operators-1"></span><h3 class="section">7.2 Arithmetic operators</h3>
+
+<span id="g_t_002b"></span><span id="g_t_002d"></span><span id="g_t_002a"></span><span id="g_t_002f"></span><span id="g_t_005e"></span><span id="index-Addition"></span>
+<span id="index-Subtraction"></span>
+<span id="index-Multiplication"></span>
+<span id="index-Division"></span>
+<span id="index-Exponentiation"></span>
+
+<span id="Item_003a-Operators_002fdeffn_002f_002b"></span><dl>
+<dt id="index-_002b">Operator: <strong>+</strong></dt>
+<dd><span id="Item_003a-Operators_002fdeffn_002f_002d"></span></dd><dt id="index-_002d">Operator: <strong>-</strong></dt>
+<dd><span id="Item_003a-Operators_002fdeffn_002f_002a"></span></dd><dt id="index-_002a">Operator: <strong>*</strong></dt>
+<dd><span id="Item_003a-Operators_002fdeffn_002f_002f"></span></dd><dt id="index-_002f">Operator: <strong>/</strong></dt>
+<dd><span id="Item_003a-Operators_002fdeffn_002f_005e"></span></dd><dt id="index-_005e">Operator: <strong>^</strong></dt>
+<dd>
+<p>The symbols <code>+</code> <code>*</code> <code>/</code> and <code>^</code> represent addition,
+multiplication, division, and exponentiation, respectively.  The names of these
+operators are <code>&quot;+&quot;</code> <code>&quot;*&quot;</code> <code>&quot;/&quot;</code> and <code>&quot;^&quot;</code>, which may appear
+where the name of a function or operator is required.
+</p>
+<p>The symbols <code>+</code> and <code>-</code> represent unary addition and negation,
+respectively, and the names of these operators are <code>&quot;+&quot;</code> and <code>&quot;-&quot;</code>,
+respectively.
+</p>
+<p>Subtraction <code>a - b</code> is represented within Maxima as addition,
+<code>a + (- b)</code>.  Expressions such as <code>a + (- b)</code> are displayed as
+subtraction.  Maxima recognizes <code>&quot;-&quot;</code> only as the name of the unary
+negation operator, and not as the name of the binary subtraction operator.
+</p>
+<p>Division <code>a / b</code> is represented within Maxima as multiplication,
+<code>a * b^(- 1)</code>.  Expressions such as <code>a * b^(- 1)</code> are displayed as
+division.  Maxima recognizes <code>&quot;/&quot;</code> as the name of the division operator.
+</p>
+<p>Addition and multiplication are n-ary, commutative operators.
+Division and exponentiation are binary, noncommutative operators.
+</p>
+<p>Maxima sorts the operands of commutative operators to construct a canonical
+representation.  For internal storage, the ordering is determined by
+<code><a href="maxima_33.html#orderlessp">orderlessp</a></code>.  For display, the ordering for addition is determined by
+<code><a href="maxima_33.html#ordergreatp">ordergreatp</a></code>, and for multiplication, it is the same as the internal
+ordering.
+</p>
+<p>Arithmetic computations are carried out on literal numbers (integers, rationals,
+ordinary floats, and bigfloats).  Except for exponentiation, all arithmetic
+operations on numbers are simplified to numbers.  Exponentiation is simplified
+to a number if either operand is an ordinary float or bigfloat or if the result
+is an exact integer or rational; otherwise an exponentiation may be simplified
+to <code><a href="maxima_51.html#sqrt">sqrt</a></code> or another exponentiation or left unchanged.
+</p>
+<p>Floating-point contagion applies to arithmetic computations: if any operand is
+a bigfloat, the result is a bigfloat; otherwise, if any operand is an ordinary
+float, the result is an ordinary float; otherwise, the operands are rationals
+or integers and the result is a rational or integer.
+</p>
+<p>Arithmetic computations are a simplification, not an evaluation.
+Thus arithmetic is carried out in quoted (but simplified) expressions.
+</p>
+<p>Arithmetic operations are applied element-by-element to lists when the global
+flag <code><a href="maxima_21.html#listarith">listarith</a></code> is <code>true</code>, and always applied element-by-element to
+matrices.  When one operand is a list or matrix and another is an operand of
+some other type, the other operand is combined with each of the elements of the
+list or matrix.
+</p>
+<p>Examples:
+</p>
+<p>Addition and multiplication are n-ary, commutative operators.
+Maxima sorts the operands to construct a canonical representation.
+The names of these operators are <code>&quot;+&quot;</code> and <code>&quot;*&quot;</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) c + g + d + a + b + e + f;
+(%o1)               g + f + e + d + c + b + a
+(%i2) [op (%), args (%)];
+(%o2)              [+, [g, f, e, d, c, b, a]]
+(%i3) c * g * d * a * b * e * f;
+(%o3)                     a b c d e f g
+(%i4) [op (%), args (%)];
+(%o4)              [*, [a, b, c, d, e, f, g]]
+(%i5) apply (&quot;+&quot;, [a, 8, x, 2, 9, x, x, a]);
+(%o5)                    3 x + 2 a + 19
+(%i6) apply (&quot;*&quot;, [a, 8, x, 2, 9, x, x, a]);
+                                 2  3
+(%o6)                       144 a  x
+</pre></div>
+
+<p>Division and exponentiation are binary, noncommutative operators.
+The names of these operators are <code>&quot;/&quot;</code> and <code>&quot;^&quot;</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) [a / b, a ^ b];
+                              a   b
+(%o1)                        [-, a ]
+                              b
+(%i2) [map (op, %), map (args, %)];
+(%o2)              [[/, ^], [[a, b], [a, b]]]
+(%i3) [apply (&quot;/&quot;, [a, b]), apply (&quot;^&quot;, [a, b])];
+                              a   b
+(%o3)                        [-, a ]
+                              b
+</pre></div>
+
+<p>Subtraction and division are represented internally
+in terms of addition and multiplication, respectively.
+</p>
+<div class="example">
+<pre class="example">(%i1) [inpart (a - b, 0), inpart (a - b, 1), inpart (a - b, 2)];
+(%o1)                      [+, a, - b]
+(%i2) [inpart (a / b, 0), inpart (a / b, 1), inpart (a / b, 2)];
+                                   1
+(%o2)                       [*, a, -]
+                                   b
+</pre></div>
+
+<p>Computations are carried out on literal numbers.
+Floating-point contagion applies.
+</p>
+<div class="example">
+<pre class="example">(%i1) 17 + b - (1/2)*29 + 11^(2/4);
+                                       5
+(%o1)                   b + sqrt(11) + -
+                                       2
+(%i2) [17 + 29, 17 + 29.0, 17 + 29b0];
+(%o2)                   [46, 46.0, 4.6b1]
+</pre></div>
+
+<p>Arithmetic computations are a simplification, not an evaluation.
+</p>
+<div class="example">
+<pre class="example">(%i1) simp : false;
+(%o1)                         false
+(%i2) '(17 + 29*11/7 - 5^3);
+                              29 11    3
+(%o2)                    17 + ----- - 5
+                                7
+(%i3) simp : true;
+(%o3)                         true
+(%i4) '(17 + 29*11/7 - 5^3);
+                                437
+(%o4)                         - ---
+                                 7
+</pre></div>
+
+<p>Arithmetic is carried out element-by-element for lists (depending on
+<code>listarith</code>) and matrices.
+</p>
+<div class="example">
+<pre class="example">(%i1) matrix ([a, x], [h, u]) - matrix ([1, 2], [3, 4]);
+</pre><pre class="example">                        [ a - 1  x - 2 ]
+(%o1)                   [              ]
+                        [ h - 3  u - 4 ]
+</pre><pre class="example">(%i2) 5 * matrix ([a, x], [h, u]);
+                          [ 5 a  5 x ]
+(%o2)                     [          ]
+                          [ 5 h  5 u ]
+(%i3) listarith : false;
+(%o3)                         false
+(%i4) [a, c, m, t] / [1, 7, 2, 9];
+                          [a, c, m, t]
+(%o4)                     ------------
+                          [1, 7, 2, 9]
+(%i5) [a, c, m, t] ^ x;
+                                      x
+(%o5)                     [a, c, m, t]
+(%i6) listarith : true;
+(%o6)                         true
+(%i7) [a, c, m, t] / [1, 7, 2, 9];
+                              c  m  t
+(%o7)                     [a, -, -, -]
+                              7  2  9
+(%i8) [a, c, m, t] ^ x;
+                          x   x   x   x
+(%o8)                   [a , c , m , t ]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_002a_002a"></span><span id="Item_003a-Operators_002fdeffn_002f_002a_002a"></span><dl>
+<dt id="index-_002a_002a">Operator: <strong>**</strong></dt>
+<dd>
+<p>Exponentiation operator.
+Maxima recognizes <code>**</code> as the same operator as <code><a href="#g_t_005e">^</a></code> in input,
+and it is displayed as <code>^</code> in 1-dimensional output,
+or by placing the exponent as a superscript in 2-dimensional output.
+</p>
+<p>The <code><a href="maxima_73.html#fortran">fortran</a></code> function displays the exponentiation operator as <code>**</code>,
+whether it was input as <code>**</code> or <code>^</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) is (a**b = a^b);
+(%o1)                         true
+(%i2) x**y + x^z;
+                              z    y
+(%o2)                        x  + x
+(%i3) string (x**y + x^z);
+(%o3)                        x^z+x^y
+(%i4) fortran (x**y + x^z);
+      x**z+x**y
+(%o4)                         done
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_005e_005e"></span><span id="Item_003a-Operators_002fdeffn_002f_005e_005e"></span><dl>
+<dt id="index-_005e_005e">Operator: <strong>^^</strong></dt>
+<dd>
+<p>Noncommutative exponentiation operator.
+<code>^^</code> is the exponentiation operator corresponding to noncommutative
+multiplication <code>.</code>, just as the ordinary exponentiation operator <code>^</code>
+corresponds to commutative multiplication <code>*</code>.
+</p>
+<p>Noncommutative exponentiation is displayed by <code>^^</code> in 1-dimensional output,
+and by placing the exponent as a superscript within angle brackets <code>&lt; &gt;</code>
+in 2-dimensional output.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) a . a . b . b . b + a * a * a * b * b;
+                        3  2    &lt;2&gt;    &lt;3&gt;
+(%o1)                  a  b  + a    . b
+(%i2) string (a . a . b . b . b + a * a * a * b * b);
+(%o2)                  a^3*b^2+a^^2 . b^^3
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_002e"></span><span id="Item_003a-Operators_002fdeffn_002f_002e"></span><dl>
+<dt id="index-_002e">Operator: <strong>.</strong></dt>
+<dd>
+<p>The dot operator, for matrix (non-commutative) multiplication.
+When <code>&quot;.&quot;</code> is used in this way, spaces should be left on both sides of
+it, e.g.  <code>A . B</code>  This distinguishes it plainly from a decimal point in
+a floating point number.
+</p>
+<p>See also
+<code><a href="maxima_115.html">Dot</a></code>,
+<code><a href="maxima_119.html#dot0nscsimp">dot0nscsimp</a></code>,
+<code><a href="maxima_119.html#dot0simp">dot0simp</a></code>,
+<code><a href="maxima_119.html#dot1simp">dot1simp</a></code>,
+<code><a href="maxima_119.html#dotassoc">dotassoc</a></code>,
+<code><a href="maxima_119.html#dotconstrules">dotconstrules</a></code>,
+<code><a href="maxima_119.html#dotdistrib">dotdistrib</a></code>,
+<code><a href="maxima_119.html#dotexptsimp">dotexptsimp</a></code>,
+<code><a href="maxima_119.html#dotident">dotident</a></code>,
+and
+<code><a href="maxima_119.html#dotscrules">dotscrules</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Operators_002fnode_002fRelational-operators"></span><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_37.html" accesskey="n" rel="next">Relational operators</a>, Previous: <a href="maxima_35.html" accesskey="p" rel="prev">Introduction to operators</a>, Up: <a href="maxima_34.html" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

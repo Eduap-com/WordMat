@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Introduction to operators (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Introduction to operators (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Introduction to operators (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_34.html" rel="up" title="Operators">
+<link href="maxima_36.html" rel="next" title="Arithmetic operators">
+<link href="maxima_34.html" rel="prev" title="Operators">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Introduction-to-operators"></span><div class="header">
+<p>
+Next: <a href="maxima_36.html" accesskey="n" rel="next">Arithmetic operators</a>, Previous: <a href="maxima_34.html" accesskey="p" rel="prev">Operators</a>, Up: <a href="maxima_34.html" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Introduction-to-operators-1"></span><h3 class="section">7.1 Introduction to operators</h3>
+
+<p>It is possible to define new operators with specified precedence, to undefine
+existing operators, or to redefine the precedence of existing operators.  An
+operator may be unary prefix or unary postfix, binary infix, n-ary infix,
+matchfix, or nofix.  &quot;Matchfix&quot; means a pair of symbols which enclose their
+argument or arguments, and &quot;nofix&quot; means an operator which takes no arguments.
+As examples of the different types of operators, there are the following.
+</p>
+<dl compact="compact">
+<dt>unary prefix</dt>
+<dd><p>negation <code>- a</code>
+</p></dd>
+<dt>unary postfix</dt>
+<dd><p>factorial <code>a!</code>
+</p></dd>
+<dt>binary infix</dt>
+<dd><p>exponentiation <code>a^b</code>
+</p></dd>
+<dt>n-ary infix</dt>
+<dd><p>addition <code>a + b</code>
+</p></dd>
+<dt>matchfix</dt>
+<dd><p>list construction <code>[a, b]</code>
+</p></dd>
+</dl>
+
+<p>(There are no built-in nofix operators; for an example of such an operator,
+see <code>nofix</code>.)
+</p>
+<p>The mechanism to define a new operator is straightforward.  It is only necessary
+to declare a function as an operator; the operator function might or might not
+be defined.
+</p>
+<p>An example of user-defined operators is the following.  Note that the explicit
+function call <code>&quot;dd&quot; (a)</code> is equivalent to <code>dd a</code>, likewise
+<code>&quot;&lt;-&quot; (a, b)</code> is equivalent to <code>a &lt;- b</code>.  Note also that the functions
+<code>&quot;dd&quot;</code> and <code>&quot;&lt;-&quot;</code> are undefined in this example.
+</p>
+<div class="example">
+<pre class="example">(%i1) prefix (&quot;dd&quot;);
+(%o1)                          dd
+(%i2) dd a;
+(%o2)                         dd a
+(%i3) &quot;dd&quot; (a);
+(%o3)                         dd a
+(%i4) infix (&quot;&lt;-&quot;);
+(%o4)                          &lt;-
+(%i5) a &lt;- dd b;
+(%o5)                      a &lt;- dd b
+(%i6) &quot;&lt;-&quot; (a, &quot;dd&quot; (b));
+(%o6)                      a &lt;- dd b
+</pre></div>
+
+<p>The Maxima functions which define new operators are summarized in this table,
+stating the default left and right binding powers (lbp and rbp, respectively).
+(Binding power determines operator precedence.  However, since left and right
+binding powers can differ, binding power is somewhat more complicated than
+precedence.) Some of the operation definition functions take additional
+arguments; see the function descriptions for details.
+</p>
+<dl compact="compact">
+<dt><code>prefix</code></dt>
+<dd><p>rbp=180
+</p></dd>
+<dt><code>postfix</code></dt>
+<dd><p>lbp=180
+</p></dd>
+<dt><code>infix</code></dt>
+<dd><p>lbp=180, rbp=180
+</p></dd>
+<dt><code>nary</code></dt>
+<dd><p>lbp=180, rbp=180
+</p></dd>
+<dt><code>matchfix</code></dt>
+<dd><p>(binding power not applicable)
+</p></dd>
+<dt><code>nofix</code></dt>
+<dd><p>(binding power not applicable)
+</p></dd>
+</dl>
+
+<p>For comparison, here are some built-in operators and their left and right
+binding powers.
+</p>
+<div class="example">
+<pre class="example">Operator   lbp     rbp
+
+  :        180     20 
+  ::       180     20 
+  :=       180     20 
+  ::=      180     20 
+  !        160
+  !!       160
+  ^        140     139 
+  .        130     129 
+  *        120
+  /        120     120 
+  +        100     100 
+  -        100     134 
+  =        80      80 
+  #        80      80 
+  &gt;        80      80 
+  &gt;=       80      80 
+  &lt;        80      80 
+  &lt;=       80      80 
+  not              70 
+  and      65
+  or       60
+  ,        10
+  $        -1
+  ;        -1
+</pre></div>
+
+<p><code><a href="maxima_58.html#remove">remove</a></code> and <code><a href="maxima_8.html#kill">kill</a></code> remove operator properties from an atom.
+<code>remove (&quot;<var>a</var>&quot;, op)</code> removes only the operator properties of <var>a</var>.
+<code>kill (&quot;<var>a</var>&quot;)</code> removes all properties of <var>a</var>, including the
+operator properties.  Note that the name of the operator must be enclosed in
+quotation marks.
+</p>
+<div class="example">
+<pre class="example">(%i1) infix (&quot;##&quot;);
+(%o1)                          ##
+(%i2) &quot;##&quot; (a, b) := a^b;
+                                     b
+(%o2)                     a ## b := a
+(%i3) 5 ## 3;
+(%o3)                          125
+(%i4) remove (&quot;##&quot;, op);
+(%o4)                         done
+(%i5) 5 ## 3;
+Incorrect syntax: # is not a prefix operator
+5 ##
+  ^
+(%i5) &quot;##&quot; (5, 3);
+(%o5)                          125
+(%i6) infix (&quot;##&quot;);
+(%o6)                          ##
+(%i7) 5 ## 3;
+(%o7)                          125
+(%i8) kill (&quot;##&quot;);
+(%o8)                         done
+(%i9) 5 ## 3;
+Incorrect syntax: # is not a prefix operator
+5 ##
+  ^
+(%i9) &quot;##&quot; (5, 3);
+(%o9)                       ##(5, 3)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+
+<a href="maxima_369.html#Category_003a-Syntax">Syntax</a>
+</div>
+</p>
+<span id="Item_003a-Operators_002fnode_002fArithmetic-operators"></span><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_36.html" accesskey="n" rel="next">Arithmetic operators</a>, Previous: <a href="maxima_34.html" accesskey="p" rel="prev">Operators</a>, Up: <a href="maxima_34.html" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

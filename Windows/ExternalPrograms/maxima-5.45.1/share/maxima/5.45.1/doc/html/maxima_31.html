@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Identifiers (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Identifiers (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Identifiers (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_28.html" rel="up" title="Expressions">
+<link href="maxima_32.html" rel="next" title="Inequality">
+<link href="maxima_30.html" rel="prev" title="Nouns and Verbs">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Identifiers"></span><div class="header">
+<p>
+Next: <a href="maxima_32.html" accesskey="n" rel="next">Inequality</a>, Previous: <a href="maxima_30.html" accesskey="p" rel="prev">Nouns and Verbs</a>, Up: <a href="maxima_28.html" accesskey="u" rel="up">Expressions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Identifiers-1"></span><h3 class="section">6.3 Identifiers</h3>
+
+<p>Maxima identifiers may comprise alphabetic characters, plus the numerals 0
+through 9, plus any special character preceded by the backslash <code>\</code>
+character.
+</p>
+<p>A numeral may be the first character of an identifier if it is preceded by a
+backslash.  Numerals which are the second or later characters need not be
+preceded by a backslash.
+</p>
+<p>Characters may be declared alphabetic by the <code>declare</code> function.
+If so declared, they need not be preceded by a backslash in an identifier.
+The alphabetic characters are initially <code>A</code> through <code>Z</code>, <code>a</code>
+through <code>z</code>, <code>%</code>, and <code>_</code>.
+</p>
+<p>Maxima is case-sensitive.  The identifiers <code>foo</code>, <code>FOO</code>, and
+<code>Foo</code> are distinct.  See <a href="maxima_166.html">Lisp and Maxima</a> for more on this point.
+</p>
+<p>A Maxima identifier is a Lisp symbol which begins with a dollar sign <code>$</code>.
+Any other Lisp symbol is preceded by a question mark <code>?</code> when it appears
+in Maxima.  See <a href="maxima_166.html">Lisp and Maxima</a> for more on this point.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) %an_ordinary_identifier42;
+(%o1)               %an_ordinary_identifier42
+</pre><pre class="example">(%i2) embedded\ spaces\ in\ an\ identifier;
+(%o2)           embedded spaces in an identifier
+</pre><pre class="example">(%i3) symbolp (%);
+(%o3)                         true
+</pre><pre class="example">(%i4) [foo+bar, foo\+bar];
+(%o4)                 [foo + bar, foo+bar]
+</pre><pre class="example">(%i5) [1729, \1729];
+(%o5)                     [1729, 1729]
+</pre><pre class="example">(%i6) [symbolp (foo\+bar), symbolp (\1729)];
+(%o6)                     [true, true]
+</pre><pre class="example">(%i7) [is (foo\+bar = foo+bar), is (\1729 = 1729)];
+(%o7)                    [false, false]
+</pre><pre class="example">(%i8) baz\~quux;
+(%o8)                       baz~quux
+</pre><pre class="example">(%i9) declare (&quot;~&quot;, alphabetic);
+(%o9)                         done
+</pre><pre class="example">(%i10) baz~quux;
+(%o10)                      baz~quux
+</pre><pre class="example">(%i11) [is (foo = FOO), is (FOO = Foo), is (Foo = foo)];
+(%o11)                [false, false, false]
+</pre><pre class="example">(%i12) :lisp (defvar *my-lisp-variable* '$foo)
+*MY-LISP-VARIABLE*
+</pre><pre class="example">(%i12) ?\*my\-lisp\-variable\*;
+(%o12)                         foo
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Syntax">Syntax</a>
+</div>
+</p>
+<span id="Item_003a-Expressions_002fnode_002fInequality"></span><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_32.html" accesskey="n" rel="next">Inequality</a>, Previous: <a href="maxima_30.html" accesskey="p" rel="prev">Nouns and Verbs</a>, Up: <a href="maxima_28.html" accesskey="u" rel="up">Expressions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

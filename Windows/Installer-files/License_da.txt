@@ -3,8 +3,8 @@ WordMat er et tilføjelsesprogram til Word, der gør det muligt at udføre en lang 
 Programmet er gratis og frigivet under GNU General Public License. http://www.gnu.org/licenses/gpl.html
 Enhver brug af programmet er på eget ansvar. Jeg kan ikke stilles til ansvar for tabt data eller resultat af forkerte beregninger.
 
-Programmet kan ikke anvendes uden Microsoft Office 2010, 2013 eller 2016.
-Der findes tilsvarende versioner til Mac Office 2011 og 2016.
+Programmet kan ikke anvendes uden Microsoft Office 2010, 2013, 2016, 2019, o365.
+Der findes tilsvarende versioner til Mac Office 2011 og 2016, 2019, o365.
 Den nyeste version der understøtter Office 2007 er v. 1.10
 
 Sammen med WordMat installeres en række andre programmer som også er under GNU General Public Licens eller lignende

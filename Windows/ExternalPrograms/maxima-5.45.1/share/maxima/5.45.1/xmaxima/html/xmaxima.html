@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>1 Command-line options (Xmaxima Manual)</title>
+
+<meta name="description" content="1 Command-line options (Xmaxima Manual)">
+<meta name="keywords" content="1 Command-line options (Xmaxima Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<h1>Xmaxima Manual</h1>
+<strong>Jaime E. Villate</strong><br>
+<p>Copyright &copy; 2006 Jaime E. Villate
+</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+</p>
+<p>You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301, USA.
+</p>
+<hr>
+
+
+
+
+<span id="Top"></span><table class="header" cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[ &lt; ]</td>
+<td valign="middle" align="left">[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="xmaxima_1.html" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left">[<a href="xmaxima_1.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="xmaxima_10.html" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+
+<p><em>Xmaxima</em> is a graphical interface for <em>Maxima</em>, written in
+<em>Tcl/Tk</em>. It also provides the <em>openmath</em> plotting program for
+Maxima, which can do some of the plots done by Maxima&rsquo;s default plotter
+(<em>gnuplot</em>) and a few more that gnuplot cannot do.
+</p>
+<p>This manual was written for version 5.11.0 of Xmaxima. Some familiarity
+with Maxima 5.11.0 is assumed. There is a separate reference manual for
+Maxima, which can be browsed and studied from Xmaxima.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Command_002dline-options">1 Command-line options</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="xmaxima_1.html">2 Xmaxima Window</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="xmaxima_2.html">3 Entering commands</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="xmaxima_6.html">4 Session control</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="xmaxima_7.html">5 Openmath plots</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="xmaxima_8.html">6 The browser</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="xmaxima_9.html">7 Getting Help</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="xmaxima_10.html" rel="index">Concept Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+<span id="Command_002dline-options"></span><span id="Command_002dline-options-1"></span><h1 class="chapter">1 Command-line options</h1>
+
+<p>The executable program, xmaxima, accepts the following command-line
+options:
+</p>
+<dl compact="compact">
+<dt><samp>-help</samp></dt>
+<dt><samp>-h</samp></dt>
+<dd><p>Displays a brief usage summary.
+</p></dd>
+<dt><samp>-url site</samp></dt>
+<dd><p>Start Xmaxima&rsquo;s browser with the page at the URL &lsquo;<samp>site</samp>&rsquo;
+</p></dd>
+<dt><samp>-use-version ver</samp></dt>
+<dt><samp>-u ver</samp></dt>
+<dd><p>Launch version &lsquo;<samp>ver</samp>&rsquo; of Maxima.
+</p></dd>
+<dt><samp>-lisp flavor</samp></dt>
+<dt><samp>-l flavor</samp></dt>
+<dd><p>Use the lisp implementation &lsquo;<samp>flavor</samp>&rsquo; of Maxima.
+</p></dd>
+</dl>
+
+<hr>
+<table class="header" cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[<a href="xmaxima_1.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="xmaxima_10.html" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p><font size="-1">
+  This document was generated on <em>July 4, 2021</em> using <a href="http://www.gnu.org/software/texinfo/"><em>makeinfo</em></a>.
+</font></p>
+
+
+</body>
+</html>

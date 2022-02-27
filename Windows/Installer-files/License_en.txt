@@ -3,8 +3,8 @@ WordMat is an add-on to Word, providing advanced mathematical feautures from wit
 The program is free and released under GNU General Public License. http://www.gnu.org/licenses/gpl.html
 Any use of the program is your own responsibility. The developer(s) cannot be held responsible for the result of any data loss or incorrect calculation.
 
-You need Microsoft Office 2010, 2013 or 2016 to run WordMat.
-There are corresponding versions for Mac Office 2011 og 2016.
+You need Microsoft Office 2010, 2013, 2016, 2019, o365 to run WordMat.
+There are corresponding versions for Mac Office 2011 and 2016, 2019.
 The most recent version supporting Office 2007 is v. 1.10
 
 WordMat also installs the following programs also under GNU General Public Licens or similar.

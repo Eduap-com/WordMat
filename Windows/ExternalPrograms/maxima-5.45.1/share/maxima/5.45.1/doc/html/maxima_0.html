@@ -1,0 +1,994 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.45.1 Manual: Top</title>
+
+<meta name="description" content="Maxima 5.45.1 Manual: Top">
+<meta name="keywords" content="Maxima 5.45.1 Manual: Top">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="#Top" rel="start" title="Top">
+<link href="maxima_368.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="../dir/index.html" rel="up" title="(dir)">
+<link href="maxima.html#Introduction-to-Maxima" rel="next" title="Introduction to Maxima">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<h1 class="settitle" align="center">Maxima 5.45.1 Manual</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="Top"></a>
+<div class="header">
+<p>
+Next: <a href="maxima.html#Introduction-to-Maxima" accesskey="n" rel="next">Introduction to Maxima</a>, Previous: <a href="../dir/index.html" accesskey="p" rel="previous">(dir)</a>, Up: <a href="../dir/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="SEC_Top"></a>
+
+<p>Maxima is a computer algebra system, implemented in Lisp.
+</p>
+<p>Maxima is derived from the Macsyma system,
+developed at MIT in the years 1968 through 1982 as part of Project MAC.
+MIT turned over a copy of the Macsyma source code to the Department of Energy
+in 1982; that version is now known as DOE Macsyma.
+A copy of DOE Macsyma was maintained by Professor William F. Schelter
+of the University of Texas from 1982 until his death in 2001.
+In 1998, Schelter obtained permission from the Department of Energy
+to release the DOE Macsyma source code under the GNU Public License,
+and in 2000 he initiated the Maxima project at SourceForge to maintain
+and develop DOE Macsyma, now called Maxima.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<b>Maxima infrastructure</b>
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima.html#Introduction-to-Maxima" accesskey="1">Introduction to Maxima</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Sample Maxima sessions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_1.html#Bug-Detection-and-Reporting" accesskey="2">Bug Detection and Reporting</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Finding and reporting bugs in Maxima.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_3.html#Help" accesskey="3">Help</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Asking for help from within a Maxima session.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_6.html#Command-Line" accesskey="4">Command Line</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Maxima command line syntax, Input, and Output.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_10.html#Data-Types-and-Structures" accesskey="5">Data Types and Structures</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Numbers, Strings, Lists, Arrays, and Structures.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_28.html#Expressions" accesskey="6">Expressions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Expressions in Maxima.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_34.html#Operators" accesskey="7">Operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Operators used in Maxima expressions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_42.html#Evaluation" accesskey="8">Evaluation</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Evaluating expressions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_44.html#Simplification" accesskey="9">Simplification</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Simplifying expressions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_47.html#Mathematical-Functions">Mathematical Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Mathematical functions in Maxima.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_56.html#Maxima_0027s-Database">Maxima's Database</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Declarations, Contexts, Facts, and Properties.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_61.html#Plotting">Plotting</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">2D and 3D graphical output.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_68.html#File-Input-and-Output">File Input and Output</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">File input and output.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<b>Support for specific areas of mathematics</b>
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_74.html#Polynomials">Polynomials</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Standard forms for polynomials, and
+                                functions operating on them.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_77.html#Special-Functions">Special Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Special functions
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_88.html#Elliptic-Functions">Elliptic Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Elliptic Functions and Integrals
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_92.html#Limits">Limits</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Limits of expressions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_94.html#Differentiation">Differentiation</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Differential calculus.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_96.html#Integration">Integration</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Integral calculus.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_101.html#Equations">Equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Defining and solving equations.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_103.html#Differential-Equations">Differential Equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Defining and solving differential equations.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_106.html#Numerical">Numerical</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Numerical integration, Fourier
+                                transforms, Equations, ODE&rsquo;s, etc.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_113.html#Matrices-and-Linear-Algebra">Matrices and Linear Algebra</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Matrix operations.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_120.html#Affine">Affine</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_123.html#itensor">itensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Indicial Tensor Manipulation.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_126.html#ctensor">ctensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Component Tensor Manipulation.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_129.html#atensor">atensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Algebraic Tensor Manipulation.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_132.html#Sums-Products-and-Series">Sums Products and Series</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Sums, Products, Taylor and power series.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_139.html#Number-Theory">Number Theory</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Number theory.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_141.html#Symmetries">Symmetries</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_144.html#Groups">Groups</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Abstract algebra.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<b>Advanced facilities and programming</b>
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_146.html#Runtime-Environment">Runtime Environment</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customization of the Maxima environment.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_150.html#Miscellaneous-Options">Miscellaneous Options</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Options with a global effect on Maxima.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_154.html#Rules-and-Patterns">Rules and Patterns</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">User defined pattern matching and
+                                simplification rules.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_157.html#Sets">Sets</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Manipulation of sets.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_160.html#Function-Definition">Function Definition</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Defining functions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_165.html#Program-Flow">Program Flow</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Defining Maxima programs.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_170.html#Debugging">Debugging</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Debugging Maxima programs.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<b>Additional packages</b>
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_174.html#alt_002ddisplay_002dpkg">alt-display-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Alternative display package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_177.html#asympa_002dpkg">asympa-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Asymptotic analysis package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_180.html#augmented_005flagrangian_002dpkg">augmented_lagrangian-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">augmented_lagrangian package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_182.html#Bernstein_002dpkg">Bernstein-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Bernstein polynomials.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_184.html#bitwise_002dpkg">bitwise-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Manipulate bits of integers.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_186.html#bode_002dpkg">bode-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Bode gain and phase plots.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_188.html#celine_002dpkg">celine-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Sister Celine&rsquo;s method 
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_190.html#clebsch_005fgordan_002dpkg">clebsch_gordan-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Clebsch-Gordan and Wigner coefficients
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_192.html#cobyla_002dpkg">cobyla-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Nonlinear optimization with inequality constraints.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_196.html#combinatorics_002dpkg">combinatorics-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Functions to work with permutations.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_199.html#contrib_005fode_002dpkg">contrib_ode-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Additional routines for ODEs
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_205.html#descriptive_002dpkg">descriptive-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Descriptive statistics.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_210.html#diag_002dpkg">diag-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Jordan matrices.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_212.html#distrib_002dpkg">distrib-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Probability distributions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_216.html#draw_002dpkg">draw-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">A Maxima-Gnuplot interface.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_221.html#drawdf_002dpkg">drawdf-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Direction fields with Gnuplot.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_224.html#dynamics_002dpkg">dynamics-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">3D visualization, animations and dynamical systems.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_228.html#engineering_002dformat_002dpkg">engineering-format-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Display floats as a*10^b with b mod 3 = 0.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_230.html#ezunits_002dpkg">ezunits-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Dimensional quantities.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_234.html#f90_002dpkg">f90-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Maxima to fortran translator.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_236.html#finance_002dpkg">finance-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Financial package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_239.html#fractals_002dpkg">fractals-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Fractals.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_245.html#ggf_002dpkg">ggf-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Generating function of sequences.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_247.html#graphs_002dpkg">graphs-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Graph theory package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_250.html#grobner_002dpkg">grobner-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Functions for working with Groebner bases.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_253.html#hompack_002dpkg">hompack-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">HOMPACK solver for systems of polynomial equations.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_256.html#impdiff_002dpkg">impdiff-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Implicit derivatives.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_258.html#interpol_002dpkg">interpol-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Interpolation package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_261.html#lapack_002dpkg">lapack-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">LAPACK functions for linear algebra.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_264.html#lbfgs_002dpkg">lbfgs-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">L-BFGS unconstrained minimization package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_267.html#lindstedt_002dpkg">lindstedt-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Lindstedt package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_269.html#linearalgebra_002dpkg">linearalgebra-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Functions for linear algebra.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_272.html#lsquares_002dpkg">lsquares-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Least squares.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_278.html#makeOrders_002dpkg">makeOrders-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Polynomial utility.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_275.html#minpack_002dpkg">minpack-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">MINPACK functions for minimization and roots
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_280.html#mnewton_002dpkg">mnewton-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Newton&rsquo;s method.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_283.html#numericalio_002dpkg">numericalio-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Reading and writing files.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_287.html#odepack_002dpkg">odepack-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Numerical ODE solver
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_291.html#operatingsystem_002dpkg">operatingsystem-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Common operating system tasks (create/remove dirs+files,...).
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_296.html#opsubst_002dpkg">opsubst-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Substitutions utility.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_298.html#orthopoly_002dpkg">orthopoly-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Orthogonal polynomials.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_301.html#pytranslate">pytranslate</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Maxima to Python Translation
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_305.html#ratpow_002dpkg">ratpow-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Determine the coefficients of polynoms.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_307.html#romberg_002dpkg">romberg-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Romberg method for numerical integration.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_309.html#simplex_002dpkg">simplex-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Linear programming.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_312.html#simplification_002dpkg">simplification-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Simplification rules and functions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_320.html#solve_005frec_002dpkg">solve_rec-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Linear recurrences.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_323.html#stats_002dpkg">stats-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Statistical inference package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_328.html#stirling_002dpkg">stirling-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Stirling formula.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_330.html#stringproc_002dpkg">stringproc-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">String processing.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_336.html#to_005fpoly_005fsolve_002dpkg">to_poly_solve-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">to_poly_solve package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_338.html#unit_002dpkg">unit-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Units and dimensions package.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_341.html#wrstcse_002dpkg">wrstcse-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Worstcase calculations for engineering.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_344.html#zeilberger_002dpkg">zeilberger-pkg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Functions for hypergeometric summation.
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<b>Understanding maxima&rsquo;s output</b>
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_347.html#Error-and-warning-messages">Error and warning messages</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Error and warning messages
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<b>Maxima&rsquo;s command-line options</b>
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_366.html#Command_002dline-options">Command-line options</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Which command-line options does Maxima support?
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<b>Index</b>
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_368.html#Function-and-Variable-Index">Function and Variable Index</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Index.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_369.html#Documentation-Categories">Documentation Categories</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Documentation categories
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+<b> &mdash; The Detailed Node Listing &mdash; </b>
+
+Introduction
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima.html#Introduction-to-Maxima">Introduction to Maxima</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Bugs
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_1.html#Bug-Detection-and-Reporting">Bug Detection and Reporting</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Help
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_4.html#Documentation">Documentation</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_5.html#Functions-and-Variables-for-Help">Functions and Variables for Help</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Command Line
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_7.html#Introduction-to-Command-Line">Introduction to Command Line</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_8.html#Functions-and-Variables-for-Command-Line">Functions and Variables for Command Line</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_9.html#Functions-and-Variables-for-Display">Functions and Variables for Display</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Data Types and Structures
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_11.html#Numbers">Numbers</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_14.html#Strings">Strings</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_17.html#Constants">Constants</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_19.html#Lists">Lists</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_23.html#Arrays">Arrays</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_25.html#Structures">Structures</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Expressions
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_29.html#Introduction-to-Expressions">Introduction to Expressions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_30.html#Nouns-and-Verbs">Nouns and Verbs</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_31.html#Identifiers">Identifiers</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_32.html#Inequality">Inequality</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_33.html#Functions-and-Variables-for-Expressions">Functions and Variables for Expressions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Operators
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_35.html#Introduction-to-operators">Introduction to operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_36.html#Arithmetic-operators">Arithmetic operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_37.html#Relational-operators">Relational operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_38.html#Logical-operators">Logical operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_39.html#Operators-for-Equations">Operators for Equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_40.html#Assignment-operators">Assignment operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_41.html#User-defined-operators">User defined operators</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Evaluation
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_43.html#Functions-and-Variables-for-Evaluation">Functions and Variables for Evaluation</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Simplification
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_46.html#Functions-and-Variables-for-Simplification">Functions and Variables for Simplification</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Mathematical Functions
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_48.html#Functions-for-Numbers">Functions for Numbers</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_49.html#Functions-for-Complex-Numbers">Functions for Complex Numbers</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_50.html#Combinatorial-Functions">Combinatorial Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_51.html#Root-Exponential-and-Logarithmic-Functions">Root Exponential and Logarithmic Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_52.html#Trigonometric-Functions">Trigonometric Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_55.html#Random-Numbers">Random Numbers</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Maxima&rsquo;s Database
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_57.html#Introduction-to-Maxima_0027s-Database">Introduction to Maxima's Database</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_58.html#Functions-and-Variables-for-Properties">Functions and Variables for Properties</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_59.html#Functions-and-Variables-for-Facts">Functions and Variables for Facts</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_60.html#Functions-and-Variables-for-Predicates">Functions and Variables for Predicates</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Plotting
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_62.html#Introduction-to-Plotting">Introduction to Plotting</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_63.html#Plotting-Formats">Plotting Formats</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_64.html#Functions-and-Variables-for-Plotting">Functions and Variables for Plotting</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_65.html#Plotting-Options">Plotting Options</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_66.html#Gnuplot-Options">Gnuplot Options</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_67.html#Gnuplot_005fpipes-Format-Functions">Gnuplot_pipes Format Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+File Input and Output
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_69.html#Comments">Comments</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_70.html#Files">Files</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_71.html#Functions-and-Variables-for-File-Input-and-Output">Functions and Variables for File Input and Output</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_72.html#Functions-and-Variables-for-TeX-Output">Functions and Variables for TeX Output</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_73.html#Functions-and-Variables-for-Fortran-Output">Functions and Variables for Fortran Output</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Polynomials
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_75.html#Introduction-to-Polynomials">Introduction to Polynomials</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_76.html#Functions-and-Variables-for-Polynomials">Functions and Variables for Polynomials</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Special Functions
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_78.html#Introduction-to-Special-Functions">Introduction to Special Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_79.html#Bessel-Functions">Bessel Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_80.html#Airy-Functions">Airy Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_81.html#Gamma-and-factorial-Functions">Gamma and factorial Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_82.html#Exponential-Integrals">Exponential Integrals</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_83.html#Error-Function">Error Function</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_84.html#Struve-Functions">Struve Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_85.html#Hypergeometric-Functions">Hypergeometric Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_86.html#Parabolic-Cylinder-Functions">Parabolic Cylinder Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_87.html#Functions-and-Variables-for-Special-Functions">Functions and Variables for Special Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Elliptic Functions
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_89.html#Introduction-to-Elliptic-Functions-and-Integrals">Introduction to Elliptic Functions and Integrals</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_90.html#Functions-and-Variables-for-Elliptic-Functions">Functions and Variables for Elliptic Functions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_91.html#Functions-and-Variables-for-Elliptic-Integrals">Functions and Variables for Elliptic Integrals</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Limits
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_93.html#Functions-and-Variables-for-Limits">Functions and Variables for Limits</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Differentiation
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_95.html#Functions-and-Variables-for-Differentiation">Functions and Variables for Differentiation</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Integration
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_97.html#Introduction-to-Integration">Introduction to Integration</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_98.html#Functions-and-Variables-for-Integration">Functions and Variables for Integration</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Equations
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_102.html#Functions-and-Variables-for-Equations">Functions and Variables for Equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Differential Equations
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_104.html#Introduction-to-Differential-Equations">Introduction to Differential Equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_105.html#Functions-and-Variables-for-Differential-Equations">Functions and Variables for Differential Equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Numerical
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_107.html#Introduction-to-fast-Fourier-transform">Introduction to fast Fourier transform</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_108.html#Functions-and-Variables-for-fast-Fourier-transform">Functions and Variables for fast Fourier transform</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_110.html#Functions-for-numerical-solution-of-equations">Functions for numerical solution of equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_111.html#Introduction-to-numerical-solution-of-differential-equations">Introduction to numerical solution of differential equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_112.html#Functions-for-numerical-solution-of-differential-equations">Functions for numerical solution of differential equations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Matrices and Linear Algebra
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_114.html#Introduction-to-Matrices-and-Linear-Algebra">Introduction to Matrices and Linear Algebra</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_115.html#Dot">Dot</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_117.html#Vectors">Vectors</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_118.html#eigen">eigen</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_119.html#Functions-and-Variables-for-Matrices-and-Linear-Algebra">Functions and Variables for Matrices and Linear Algebra</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Affine
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_121.html#Introduction-to-Affine">Introduction to Affine</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_122.html#Functions-and-Variables-for-Affine">Functions and Variables for Affine</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+itensor
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_124.html#Introduction-to-itensor">Introduction to itensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_125.html#Functions-and-Variables-for-itensor">Functions and Variables for itensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+ctensor
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_127.html#Introduction-to-ctensor">Introduction to ctensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_128.html#Functions-and-Variables-for-ctensor">Functions and Variables for ctensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+atensor
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_130.html#Introduction-to-atensor">Introduction to atensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_131.html#Functions-and-Variables-for-atensor">Functions and Variables for atensor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Sums, Products, and Series
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_133.html#Functions-and-Variables-for-Sums-and-Products">Functions and Variables for Sums and Products</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_134.html#Introduction-to-Series">Introduction to Series</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_135.html#Functions-and-Variables-for-Series">Functions and Variables for Series</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_136.html#Introduction-to-Fourier-series">Introduction to Fourier series</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_137.html#Functions-and-Variables-for-Fourier-series">Functions and Variables for Fourier series</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Number Theory
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_140.html#Functions-and-Variables-for-Number-Theory">Functions and Variables for Number Theory</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Symmetries
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_142.html#Introduction-to-Symmetries">Introduction to Symmetries</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_143.html#Functions-and-Variables-for-Symmetries">Functions and Variables for Symmetries</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Groups
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_145.html#Functions-and-Variables-for-Groups">Functions and Variables for Groups</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Runtime Environment
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_147.html#Introduction-for-Runtime-Environment">Introduction for Runtime Environment</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_148.html#Interrupts">Interrupts</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_149.html#Functions-and-Variables-for-Runtime-Environment">Functions and Variables for Runtime Environment</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Miscellaneous Options
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_151.html#Introduction-to-Miscellaneous-Options">Introduction to Miscellaneous Options</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_152.html#Share">Share</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_153.html#Functions-and-Variables-for-Miscellaneous-Options">Functions and Variables for Miscellaneous Options</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Rules and Patterns
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_155.html#Introduction-to-Rules-and-Patterns">Introduction to Rules and Patterns</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_156.html#Functions-and-Variables-for-Rules-and-Patterns">Functions and Variables for Rules and Patterns</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Sets
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_158.html#Introduction-to-Sets">Introduction to Sets</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_159.html#Functions-and-Variables-for-Sets">Functions and Variables for Sets</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Function Definition
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_161.html#Introduction-to-Function-Definition">Introduction to Function Definition</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_162.html#Function">Function</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_163.html#Macros">Macros</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_164.html#Functions-and-Variables-for-Function-Definition">Functions and Variables for Function Definition</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Program Flow
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_166.html#Lisp-and-Maxima">Lisp and Maxima</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_167.html#Garbage-Collection">Garbage Collection</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_168.html#Introduction-to-Program-Flow">Introduction to Program Flow</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_169.html#Functions-and-Variables-for-Program-Flow">Functions and Variables for Program Flow</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Debugging
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_173.html#Functions-and-Variables-for-Debugging">Functions and Variables for Debugging</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+alt-display
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_175.html#Introduction-to-alt_002ddisplay">Introduction to alt-display</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_176.html#Functions-and-Variables-for-alt_002ddisplay">Functions and Variables for alt-display</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+asympa
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_178.html#Introduction-to-asympa">Introduction to asympa</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_179.html#Functions-and-variables-for-asympa">Functions and variables for asympa</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+augmented_lagrangian
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_181.html#Functions-and-Variables-for-augmented_005flagrangian">Functions and Variables for augmented_lagrangian</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Bernstein
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_183.html#Functions-and-Variables-for-Bernstein">Functions and Variables for Bernstein</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Bitwise
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_185.html#Functions-and-Variables-for-bitwise">Functions and Variables for bitwise</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+bode
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_187.html#Functions-and-Variables-for-bode">Functions and Variables for bode</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+clebsch_gordan
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_191.html#Functions-and-Variables-for-clebsch_005fgordan">Functions and Variables for clebsch_gordan</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+cobyla
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_193.html#Introduction-to-cobyla">Introduction to cobyla</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_194.html#Functions-and-Variables-for-cobyla">Functions and Variables for cobyla</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_195.html#Examples-for-cobyla">Examples for cobyla</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+combinatorics
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_197.html#Package-combinatorics">Package combinatorics</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_198.html#Functions-and-Variables-for-Combinatorics">Functions and Variables for Combinatorics</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+contrib_ode
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_200.html#Introduction-to-contrib_005fode">Introduction to contrib_ode</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_201.html#Functions-and-Variables-for-contrib_005fode">Functions and Variables for contrib_ode</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_202.html#Possible-improvements-to-contrib_005fode">Possible improvements to contrib_ode</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_203.html#Test-cases-for-contrib_005fode">Test cases for contrib_ode</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_204.html#References-for-contrib_005fode">References for contrib_ode</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+descriptive
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_206.html#Introduction-to-descriptive">Introduction to descriptive</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_207.html#Functions-and-Variables-for-data-manipulation">Functions and Variables for data manipulation</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_208.html#Functions-and-Variables-for-descriptive-statistics">Functions and Variables for descriptive statistics</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_209.html#Functions-and-Variables-for-statistical-graphs">Functions and Variables for statistical graphs</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+diag
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_211.html#Functions-and-Variables-for-diag">Functions and Variables for diag</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+distrib
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_213.html#Introduction-to-distrib">Introduction to distrib</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_214.html#Functions-and-Variables-for-continuous-distributions">Functions and Variables for continuous distributions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_215.html#Functions-and-Variables-for-discrete-distributions">Functions and Variables for discrete distributions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+draw
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_217.html#Introduction-to-draw">Introduction to draw</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_218.html#Functions-and-Variables-for-draw">Functions and Variables for draw</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_219.html#Functions-and-Variables-for-pictures">Functions and Variables for pictures</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_220.html#Functions-and-Variables-for-worldmap">Functions and Variables for worldmap</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+drawdf
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_222.html#Introduction-to-drawdf">Introduction to drawdf</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_223.html#Functions-and-Variables-for-drawdf">Functions and Variables for drawdf</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+dynamics
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_225.html#The-dynamics-package">The dynamics package</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_226.html#Graphical-analysis-of-discrete-dynamical-systems">Graphical analysis of discrete dynamical systems</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_227.html#Visualization-with-VTK">Visualization with VTK</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+ezunits
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_231.html#Introduction-to-ezunits">Introduction to ezunits</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_232.html#Introduction-to-physical_005fconstants">Introduction to physical_constants</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_233.html#Functions-and-Variables-for-ezunits">Functions and Variables for ezunits</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+f90
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_235.html#Package-f90">Package f90</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+finance
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_237.html#Introduction-to-finance">Introduction to finance</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_238.html#Functions-and-Variables-for-finance">Functions and Variables for finance</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+fractals
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_240.html#Introduction-to-fractals">Introduction to fractals</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_241.html#Definitions-for-IFS-fractals">Definitions for IFS fractals</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_242.html#Definitions-for-complex-fractals">Definitions for complex fractals</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_243.html#Definitions-for-Koch-snowflakes">Definitions for Koch snowflakes</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_244.html#Definitions-for-Peano-maps">Definitions for Peano maps</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+ggf
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_246.html#Functions-and-Variables-for-ggf">Functions and Variables for ggf</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+graphs
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_248.html#Introduction-to-graphs">Introduction to graphs</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_249.html#Functions-and-Variables-for-graphs">Functions and Variables for graphs</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+grobner
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_251.html#Introduction-to-grobner">Introduction to grobner</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_252.html#Functions-and-Variables-for-grobner">Functions and Variables for grobner</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+hompack
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_254.html#Introduction-to-hompack">Introduction to hompack</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_255.html#Functions-and-Variables-for-hompack">Functions and Variables for hompack</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+impdiff
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_257.html#Functions-and-Variables-for-impdiff">Functions and Variables for impdiff</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+interpol
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_259.html#Introduction-to-interpol">Introduction to interpol</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_260.html#Functions-and-Variables-for-interpol">Functions and Variables for interpol</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+lapack
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_262.html#Introduction-to-lapack">Introduction to lapack</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_263.html#Functions-and-Variables-for-lapack">Functions and Variables for lapack</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+lbfgs
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_265.html#Introduction-to-lbfgs">Introduction to lbfgs</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_266.html#Functions-and-Variables-for-lbfgs">Functions and Variables for lbfgs</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+lindstedt
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_268.html#Functions-and-Variables-for-lindstedt">Functions and Variables for lindstedt</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+linearalgebra
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_270.html#Introduction-to-linearalgebra">Introduction to linearalgebra</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_271.html#Functions-and-Variables-for-linearalgebra">Functions and Variables for linearalgebra</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+lsquares
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_273.html#Introduction-to-lsquares">Introduction to lsquares</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_274.html#Functions-and-Variables-for-lsquares">Functions and Variables for lsquares</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+makeOrders
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_279.html#Functions-and-Variables-for-makeOrders">Functions and Variables for makeOrders</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+minpack
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_276.html#Introduction-to-minpack">Introduction to minpack</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_277.html#Functions-and-Variables-for-minpack">Functions and Variables for minpack</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+mnewton
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_281.html#Introduction-to-mnewton">Introduction to mnewton</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_282.html#Functions-and-Variables-for-mnewton">Functions and Variables for mnewton</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+numericalio
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_284.html#Introduction-to-numericalio">Introduction to numericalio</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_285.html#Functions-and-Variables-for-plain_002dtext-input-and-output">Functions and Variables for plain-text input and output</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_286.html#Functions-and-Variables-for-binary-input-and-output">Functions and Variables for binary input and output</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+odepack
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_288.html#Introduction-to-ODEPACK">Introduction to ODEPACK</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_290.html#Functions-and-Variables-for-odepack">Functions and Variables for odepack</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+operatingsystem
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_292.html#Introduction-to-operatingsystem">Introduction to operatingsystem</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_293.html#Directory-operations">Directory operations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_295.html#Environment-operations">Environment operations</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+opsubst
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_297.html#Functions-and-Variables-for-opsubst">Functions and Variables for opsubst</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+orthopoly
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_299.html#Introduction-to-orthogonal-polynomials">Introduction to orthogonal polynomials</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_300.html#Functions-and-Variables-for-orthogonal-polynomials">Functions and Variables for orthogonal polynomials</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+pytranslate
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_302.html#Introduction-to-pytranslate">Introduction to pytranslate</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_303.html#Functions-in-pytranslate">Functions in pytranslate</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_304.html#Extending-pytranslate">Extending pytranslate</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+ratpow
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_306.html#Functions-and-Variables-for-ratpow">Functions and Variables for ratpow</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+romberg
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_308.html#Functions-and-Variables-for-romberg">Functions and Variables for romberg</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+simplex
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_310.html#Introduction-to-simplex">Introduction to simplex</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_311.html#Functions-and-Variables-for-simplex">Functions and Variables for simplex</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+simplification
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_313.html#Introduction-to-simplification">Introduction to simplification</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_314.html#Package-absimp">Package absimp</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_315.html#Package-facexp">Package facexp</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_316.html#Package-functs">Package functs</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_317.html#Package-ineq">Package ineq</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_318.html#Package-rducon">Package rducon</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_319.html#Package-scifac">Package scifac</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+solve_rec
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_321.html#Introduction-to-solve_005frec">Introduction to solve_rec</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_322.html#Functions-and-Variables-for-solve_005frec">Functions and Variables for solve_rec</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+stats
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_324.html#Introduction-to-stats">Introduction to stats</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_325.html#Functions-and-Variables-for-inference_005fresult">Functions and Variables for inference_result</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_326.html#Functions-and-Variables-for-stats">Functions and Variables for stats</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_327.html#Functions-and-Variables-for-special-distributions">Functions and Variables for special distributions</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+stirling
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_329.html#Functions-and-Variables-for-stirling">Functions and Variables for stirling</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+stringproc
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_331.html#Introduction-to-String-Processing">Introduction to String Processing</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_332.html#Input-and-Output">Input and Output</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_333.html#Characters">Characters</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_334.html#String-Processing">String Processing</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_335.html#Octets-and-Utilities-for-Cryptography">Octets and Utilities for Cryptography</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+to_poly_solve
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_337.html#Functions-and-Variables-for-to_005fpoly_005fsolve">Functions and Variables for to_poly_solve</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+unit
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_339.html#Introduction-to-Units">Introduction to Units</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_340.html#Functions-and-Variables-for-Units">Functions and Variables for Units</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+zeilberger
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_345.html#Introduction-to-zeilberger">Introduction to zeilberger</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_346.html#Functions-and-Variables-for-zeilberger">Functions and Variables for zeilberger</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Understanding maxima&rsquo;s output
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="maxima_348.html#Error-messages">Error messages</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="maxima_363.html#Warning-messages">Warning messages</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+<a name="Item_003a-include_002dmaxima_002fnode_002fIntroduction-to-Maxima"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima.html#Introduction-to-Maxima" accesskey="n" rel="next">Introduction to Maxima</a>, Previous: <a href="../dir/index.html" accesskey="p" rel="previous">(dir)</a>, Up: <a href="../dir/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

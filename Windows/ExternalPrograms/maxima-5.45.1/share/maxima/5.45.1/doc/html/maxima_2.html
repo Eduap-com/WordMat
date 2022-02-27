@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for Bug Detection and Reporting (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for Bug Detection and Reporting (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for Bug Detection and Reporting (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_1.html" rel="up" title="Bug Detection and Reporting">
+<link href="maxima_3.html" rel="next" title="Help">
+<link href="maxima_1.html" rel="prev" title="Bug Detection and Reporting">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Functions-and-Variables-for-Bug-Detection-and-Reporting"></span><div class="header">
+<p>
+Up: <a href="maxima_1.html" accesskey="u" rel="up">Bug Detection and Reporting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-Bug-Detection-and-Reporting-1"></span><h3 class="section">2.1 Functions and Variables for Bug Detection and Reporting</h3>
+
+<span id="run_005ftestsuite"></span><span id="Item_003a-Bugs_002fdeffn_002frun_005ftestsuite"></span><dl>
+<dt id="index-run_005ftestsuite">Function: <strong>run_testsuite</strong> <em>([<var>options</var>])</em></dt>
+<dd>
+<p>Run the Maxima test suite.  Tests producing the desired answer are
+considered &ldquo;passes,&rdquo; as are tests that do not produce the desired
+answer, but are marked as known bugs.
+</p>
+<p><code>run_testsuite</code> takes the following optional keyword arguments
+</p>
+<dl compact="compact">
+<dt><code>display_all</code></dt>
+<dd><p>Display all tests.  Normally, the tests are not displayed, unless the test
+fails.  (Defaults to <code>false</code>).
+</p></dd>
+<dt><code>display_known_bugs</code></dt>
+<dd><p>Displays tests that are marked as known bugs.  (Default is <code>false</code>).
+</p></dd>
+<dt><code>tests</code></dt>
+<dd><p>This is a single test or a list of tests that should be run.  Each test can be specified by
+either a string or a symbol.  By default, all tests are run.  The complete set
+of tests is specified by <code><a href="#testsuite_005ffiles">testsuite_files</a></code>.
+</p></dd>
+<dt><code>time</code></dt>
+<dd><p>Display time information.  If <code>true</code>, the time taken for each
+test file is displayed.  If <code>all</code>, the time for each individual
+test is shown if <code>display_all</code> is <code>true</code>.  The default is
+<code>false</code>, so no timing information is shown.
+</p></dd>
+<dt><code>share_tests</code></dt>
+<dd><p>Load additional tests for the <code>share</code> directory.  If <code>true</code>,
+these additional tests are run as a part of the testsuite.  If
+<code>false</code>, no tests from the <code>share</code> directory are run.  If
+<code>only</code>, only the tests from the <code>share</code> directory are run.
+Of course, the actual set of test that are run can be controlled by
+the <code>tests</code> option. The default is <code>false</code>.
+</p></dd>
+</dl>
+
+<p>For example <code>run_testsuite(display_known_bugs = true, tests=[rtest5])</code>
+runs just test <code>rtest5</code> and displays the test that are marked as
+known bugs.
+</p>
+<p><code>run_testsuite(display_all = true, tests=[&quot;rtest1&quot;, rtest1a])</code> will
+run tests <code>rtest1</code> and <code>rtest2</code>, and displays each test.
+</p>
+<p><code>run_testsuite</code> changes the Maxima environment.
+Typically a test script executes <code><a href="maxima_8.html#kill">kill</a></code> to establish a known environment
+(namely one without user-defined functions and variables)
+and then defines functions and variables appropriate to the test.
+</p>
+<p><code>run_testsuite</code> returns <code>done</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Debugging">Debugging</a>
+</div>
+</p></dd></dl>
+
+<span id="testsuite_005ffiles"></span><span id="Item_003a-Bugs_002fdefvr_002ftestsuite_005ffiles"></span><dl>
+<dt id="index-testsuite_005ffiles">Option variable: <strong>testsuite_files</strong></dt>
+<dd>
+<p><code>testsuite_files</code> is the set of tests to be run by
+<code><a href="#run_005ftestsuite">run_testsuite</a></code>.  It is a list of names of the files containing
+the tests to run.  If some of the tests in a file are known to fail,
+then instead of listing the name of the file, a list containing the
+file name and the test numbers that fail is used.
+</p>
+<p>For example, this is a part of the default set of tests:
+</p>
+<div class="example">
+<pre class="example"> [&quot;rtest13s&quot;, [&quot;rtest14&quot;, 57, 63]]
+</pre></div>
+
+<p>This specifies the testsuite consists of the files &quot;rtest13s&quot; and
+&quot;rtest14&quot;, but &quot;rtest14&quot; contains two tests that are known to fail: 57
+and 63.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Debugging">Debugging</a>
+
+<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Bugs_002fdefvr_002fshare_005ftestsuite_005ffiles"></span><dl>
+<dt id="index-share_005ftestsuite_005ffiles">Option variable: <strong>share_testsuite_files</strong></dt>
+<dd>
+<p><code>share_testsuite_files</code> is the set of tests from the <code>share</code>
+directory that is run as a part of the test suite by
+<code><a href="#run_005ftestsuite">run_testsuite</a></code>..
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Debugging">Debugging</a>
+
+<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+<span id="bug_005freport"></span><span id="Item_003a-Bugs_002fdeffn_002fbug_005freport"></span><dl>
+<dt id="index-bug_005freport">Function: <strong>bug_report</strong> <em>()</em></dt>
+<dd>
+<p>Prints out Maxima and Lisp version numbers, and gives a link
+to the Maxima project bug report web page.
+The version information is the same as reported by <code><a href="#build_005finfo">build_info</a></code>.
+</p>
+<p>When a bug is reported, it is helpful to copy the Maxima
+and Lisp version information into the bug report.
+</p>
+<p><code>bug_report</code> returns an empty string <code>&quot;&quot;</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Debugging">Debugging</a>
+</div>
+</p></dd></dl>
+
+<span id="build_005finfo"></span><span id="Item_003a-Bugs_002fdeffn_002fbuild_005finfo"></span><dl>
+<dt id="index-build_005finfo">Function: <strong>build_info</strong> <em>()</em></dt>
+<dd>
+<p>Returns a summary of the parameters of the Maxima build,
+as a Maxima structure (defined by <code>defstruct</code>).
+The fields of the structure are:
+<code>version</code>, <code>timestamp</code>, <code>host</code>, <code>lisp_name</code>, and <code>lisp_version</code>.
+When the pretty-printer is enabled (via <code><a href="maxima_9.html#display2d">display2d</a></code>),
+the structure is displayed as a short table.
+</p>
+<p>See also <code><a href="#bug_005freport">bug_report</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) build_info ();
+(%o1) 
+Maxima version: &quot;5.36.1&quot;
+Maxima build date: &quot;2015-06-02 11:26:48&quot;
+Host type: &quot;x86_64-unknown-linux-gnu&quot;
+Lisp implementation type: &quot;GNU Common Lisp (GCL)&quot;
+Lisp implementation version: &quot;GCL 2.6.12&quot;
+</pre><pre class="example">(%i2) x : build_info ()$
+</pre><pre class="example">(%i3) x@version;
+(%o3)                               5.36.1
+</pre><pre class="example">(%i4) x@timestamp;
+(%o4)                         2015-06-02 11:26:48
+</pre><pre class="example">(%i5) x@host;
+(%o5)                      x86_64-unknown-linux-gnu
+</pre><pre class="example">(%i6) x@lisp_name;
+(%o6)                        GNU Common Lisp (GCL)
+</pre><pre class="example">(%i7) x@lisp_version;
+(%o7)                             GCL 2.6.12
+</pre><pre class="example">(%i8) x;
+(%o8) 
+Maxima version: &quot;5.36.1&quot;
+Maxima build date: &quot;2015-06-02 11:26:48&quot;
+Host type: &quot;x86_64-unknown-linux-gnu&quot;
+Lisp implementation type: &quot;GNU Common Lisp (GCL)&quot;
+Lisp implementation version: &quot;GCL 2.6.12&quot;
+</pre></div>
+
+<p>The Maxima version string can (here 5.36.1) can look very different:
+</p>
+<div class="example">
+<pre class="example">(%i1) build_info();
+(%o1) 
+Maxima version: &quot;branch_5_37_base_331_g8322940_dirty&quot;
+Maxima build date: &quot;2016-01-01 15:37:35&quot;
+Host type: &quot;x86_64-unknown-linux-gnu&quot;
+Lisp implementation type: &quot;CLISP&quot;
+Lisp implementation version: &quot;2.49 (2010-07-07) (built 3605577779) (memory 3660647857)&quot;
+</pre></div>
+
+<p>In that case, Maxima was not build from a released sourcecode, 
+but directly from the GIT-checkout of the sourcecode.
+In the example, the checkout is 331 commits after the latest GIT tag
+(usually a Maxima (major) release (5.37 in our example)) and the 
+abbreviated commit hash of the last commit was &quot;8322940&quot;.
+</p>
+<p>Front-ends for maxima can add information about currently being used
+by setting the variables <code>maxima_frontend</code> and
+<code>maxima_frontend_version</code> accordingly.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Debugging">Debugging</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fHelp"></span><hr>
+<div class="header">
+<p>
+Up: <a href="maxima_1.html" accesskey="u" rel="up">Bug Detection and Reporting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

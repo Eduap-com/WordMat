@@ -1,0 +1,978 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Plotting Options (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Plotting Options (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Plotting Options (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_61.html" rel="up" title="Plotting">
+<link href="maxima_66.html" rel="next" title="Gnuplot Options">
+<link href="maxima_64.html" rel="prev" title="Functions and Variables for Plotting">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Plotting-Options"></span><div class="header">
+<p>
+Next: <a href="maxima_66.html" accesskey="n" rel="next">Gnuplot Options</a>, Previous: <a href="maxima_64.html" accesskey="p" rel="prev">Functions and Variables for Plotting</a>, Up: <a href="maxima_61.html" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Plotting-Options-1"></span><h3 class="section">12.4 Plotting Options</h3>
+
+<p>All options consist of a list starting with one of the keywords in this
+section, followed by one or more values. If the option appears inside
+one of the plotting commands, its value will be local for that
+command. It the option is given as argument to
+<code><a href="maxima_64.html#set_005fplot_005foption">set_plot_option</a></code>, its value will be global and used in all
+plots, unless it is overridden by a local value.
+</p>
+<p>Some of the options may have different effects in different plotting
+commands as it will be pointed out in the following list. The options
+that accept among their possible values true or false, can also be set
+to true by simply writing their names, and false by writing their names
+with the prefix no. For instance, typing <code>logx</code> as an option is
+equivalent to writing <code>[logx, true]</code> and <code>nobox</code> is equivalent
+to <code>[box, false]</code>. When just the name of the option is used for an
+option which cannot have a value <code>true</code>, it means that any value
+previously assigned to that option will be removed, leaving it to the
+graphic program to decide what to do.
+</p>
+<span id="adapt_005fdepth"></span><span id="Item_003a-Plotting_002fdefvr_002fadapt_005fdepth"></span><dl>
+<dt id="index-adapt_005fdepth">Plot option: <strong>adapt_depth</strong> <em>[adapt_depth, <var>integer</var>]</em></dt>
+<dd><p>Default value: <code>5</code>
+</p>
+<p>The maximum number of splittings used by the adaptive plotting routine
+of <code><a href="maxima_64.html#plot2d">plot2d</a></code>; <var>integer</var> must be a non-negative integer. A value
+of zero means that adaptive plotting will not be used and the resulting
+plot will have 1+4*<var>nticks</var> points (see option <code><a href="#nticks">nticks</a></code>). To
+have more control on the number of points and their positions, a list of
+points can be created and then plotted using the <code>discrete</code> method
+of <code>plot2d</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="axes"></span><span id="Item_003a-Plotting_002fdefvr_002faxes"></span><dl>
+<dt id="index-axes">Plot option: <strong>axes</strong> <em>[axes, <var>symbol</var>], axes, noaxes</em></dt>
+<dd>
+<p>Default value: <code>true</code>
+</p>
+<p>Where <var>symbol</var> can be either <code>true</code>, <code>false</code>, <code>x</code>,
+<code>y</code> or <code>solid</code>. If <code>false</code>, no axes are shown; if equal
+to <code>x</code> or <code>y</code> only the x or y axis will be shown; if it is
+equal to <code>true</code>, both axes will be shown and <code>solid</code> will show
+the two axes with a solid line, rather than the default broken
+line. This option does not have any effect in the 3 dimensional plots.
+The single keywords <code>axes</code> and <code>noaxes</code> can be used as
+synonyms for <code>[axes, true]</code> and <code>[axes, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="azimuth"></span><span id="Item_003a-Plotting_002fdefvr_002fazimuth"></span><dl>
+<dt id="index-azimuth">Plot option: <strong>azimuth</strong> <em>[azimuth, <var>number</var>]</em></dt>
+<dd>
+<p>Default value: <code>30</code>
+</p>
+<p>A plot3d plot can be thought of as starting with the x and y axis in the
+horizontal and vertical axis, as in plot2d, and the z axis coming out of
+the screen.  The z axis is then rotated around the x axis through an
+angle equal to <code><a href="#elevation">elevation</a></code> and then the new xy plane is rotated
+around the new z axis through an angle <code><a href="#azimuth">azimuth</a></code>. This option sets
+the value for the azimuth, in degrees.
+</p>
+<p>See also <code><a href="#elevation">elevation</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="option_005fbox"></span><span id="Item_003a-Plotting_002fdefvr_002fbox"></span><dl>
+<dt id="index-box-1">Plot option: <strong>box</strong> <em>[box, <var>symbol</var>], box, nobox</em></dt>
+<dd>
+<p>Default value: <code>true</code>
+</p>
+<p>If set to <code>true</code>, a bounding box will be drawn for the plot; if set
+to <code>false</code>, no box will be drawn.
+The single keywords <code>box</code> and <code>nobox</code> can be used as
+synonyms for <code>[box, true]</code> and <code>[box, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="color"></span><span id="Item_003a-Plotting_002fdefvr_002fcolor"></span><dl>
+<dt id="index-color">Plot option: <strong>color</strong> <em>[color, <var>color_1</var>, &hellip;, <var>color_n</var>]</em></dt>
+<dd>
+<p>In 2d plots it defines the color (or colors) for the various curves.  In
+<code><a href="maxima_64.html#plot3d">plot3d</a></code>, it defines the colors used for the mesh lines of the
+surfaces, when no palette is being used.
+</p>
+<p>If there are more curves or surfaces than colors, the colors will be
+repeated in sequence. The valid colors are <code>red</code>, <code>green</code>,
+<code>blue</code>, <code>magenta</code>, <code>cyan</code>, <code>yellow</code>, <code>orange</code>,
+<code>violet</code>, <code>brown</code>, <code>gray</code>, <code>black</code>, <code>white</code>, or
+a string starting with the character # and followed by six hexadecimal
+digits: two for the red component, two for green component and two for
+the blue component. If the name of a given color is unknown color, black
+will be used instead.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="color_005fbar"></span><span id="Item_003a-Plotting_002fdefvr_002fcolor_005fbar"></span><dl>
+<dt id="index-color_005fbar">Plot option: <strong>color_bar</strong> <em>[color_bar, <var>symbol</var>], color_bar, nocolor_bar</em></dt>
+<dd>
+<p>Default value: <code>false</code> in plot3d, <code>true</code> in mandelbrot and julia
+</p>
+<p>Where <var>symbol</var> can be either <code>true</code> or <code>false</code>.  If
+<code>true</code>, whenever <code><a href="maxima_64.html#plot3d">plot3d</a></code>, <code><a href="maxima_64.html#mandelbrot">mandelbrot</a></code> or
+<code><a href="maxima_64.html#julia">julia</a></code> use a palette to represent different values, a box will be
+shown on the right, showing the corresponding between colors and values.
+The single keywords <code>color_bar</code> and <code>nocolor_bar</code> can be used
+as synonyms for <code>[color_bar, true]</code> and <code>[color_bar, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="color_005fbar_005ftics"></span><span id="Item_003a-Plotting_002fdefvr_002fcolor_005fbar_005ftics"></span><dl>
+<dt id="index-color_005fbar_005ftics">Plot option: <strong>color_bar_tics</strong> <em>[color_bar_tics, <var>x1</var>, <var>x2</var>, <var>x3</var>], color_bar_tics, nocolor_bar_tics</em></dt>
+<dd>
+<p>Defines the values at which a mark and a number will be placed in the
+color bar. The first number is the initial value, the second the
+increments and the third is the last value where a mark is placed. The
+second and third numbers can be omitted. When only one number is given,
+it will be used as the increment from an initial value that will be
+chosen automatically. The single keyword <code>color_bar_tics</code> removes a
+value given previously, making the graphic program use its default for
+the values of the tics and <code>nocolor_bar_tics</code> will not show any
+tics on the color bar.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="elevation"></span><span id="Item_003a-Plotting_002fdefvr_002felevation"></span><dl>
+<dt id="index-elevation">Plot option: <strong>elevation</strong> <em>[elevation, <var>number</var>]</em></dt>
+<dd>
+<p>Default value: <code>60</code>
+</p>
+<p>A plot3d plot can be thought of as starting with the x and y axis in the
+horizontal and vertical axis, as in plot2d, and the z axis coming out of
+the screen.  The z axis is then rotated around the x axis through an
+angle equal to <code><a href="#elevation">elevation</a></code> and then the new xy plane is rotated
+around the new z axis through an angle <code><a href="#azimuth">azimuth</a></code>. This option sets
+the value for the elevation, in degrees.
+</p>
+<p>See also <code><a href="#azimuth">azimuth</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="grid"></span><span id="Item_003a-Plotting_002fdefvr_002fgrid"></span><dl>
+<dt id="index-grid">Plot option: <strong>grid</strong> <em>[grid, <var>integer</var>, <var>integer</var>]</em></dt>
+<dd><p>Default value: <code>30</code>, <code>30</code>
+</p>
+<p>Sets the number of grid points to use in the x- and y-directions for
+three-dimensional plotting or for the <code><a href="maxima_64.html#julia">julia</a></code> and <code><a href="maxima_64.html#mandelbrot">mandelbrot</a></code>
+programs.
+</p>
+<p>For a way to actually draw a grid See <code><a href="#grid2d">grid2d</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="grid2d"></span><span id="Item_003a-Plotting_002fdefvr_002fgrid2d"></span><dl>
+<dt id="index-grid2d">Plot option: <strong>grid2d</strong> <em>[grid2d, <var>value</var>], grid2d, nogrid2d</em></dt>
+<dd>
+<p>Default value: <code>false</code>
+</p>
+<p>Shows a grid of lines on the xy plane. The points where the grid lines
+are placed are the same points where tics are marked in the x and y
+axes, which can be controlled with the <code><a href="#xtics">xtics</a></code> and <code><a href="#ytics">ytics</a></code>
+options.  The single keywords <code>grid2d</code> and <code>nogrid2d</code> can be
+used as synonyms for <code>[grid2d, true]</code> and <code>[grid2d, false]</code>.
+</p>
+<p>See also <code><a href="#grid">grid</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="iterations"></span><span id="Item_003a-Plotting_002fdefvr_002fiterations"></span><dl>
+<dt id="index-iterations">Plot option: <strong>iterations</strong> <em>[iterations, <var>value</var>]</em></dt>
+<dd>
+<p>Default value: <code>9</code>
+</p>
+<p>Number of iterations made by the programs mandelbrot and julia.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="label"></span><span id="Item_003a-Plotting_002fdefvr_002flabel"></span><dl>
+<dt id="index-label-1">Plot option: <strong>label</strong> <em>[label, [<var>string</var>, <var>x</var>, <var>y</var>], &hellip;]</em></dt>
+<dd>
+<p>Writes one or several labels in the points with <var>x</var>, <var>y</var>
+coordinates indicated after each label.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="legend"></span><span id="Item_003a-Plotting_002fdefvr_002flegend"></span><dl>
+<dt id="index-legend">Plot option: <strong>legend</strong> <em>[legend, <var>string_1</var>, &hellip;, <var>string_n</var>], legend, nolegend</em></dt>
+<dd>
+<p>It specifies the labels for the plots when various plots are shown.  If
+there are more plots than the number of labels given, they will be
+repeated.  If given the value <code>false</code>, no legends will be shown.
+By default, the names of the expressions or functions will be used, or
+the words discrete1, discrete2, &hellip;, for discrete sets of points.
+The single keyword <code>legend</code> removes any previously defined legends,
+leaving it to the plotting program to set up a legend. The keyword
+<code>nolegend</code> is a synonym for <code>[legend, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="levels"></span><span id="Item_003a-Plotting_002fdefvr_002flevels"></span><dl>
+<dt id="index-levels">Plot option: <strong>levels</strong> <em>[levels, <var>number</var>, &hellip;]</em></dt>
+<dd>
+<p>This option is used by <code><a href="maxima_64.html#plot2d">plot2d</a></code> to do contour plots. If only one
+number is given after the keyword <code>levels</code>, it must be a natural
+number; <code>plot2d</code> will try to plot that number of contours with
+values between the minimum and maximum value of the expression given,
+with the form d*10^n, where d is either 1, 2 or 5. Since not always it will
+be possible to find that number of levels in that interval, the number of
+contour lines show will be smaller than the number specified by this
+option.
+</p>
+<p>If more than one number are given after the keyword <code>levels</code>,
+<code><a href="maxima_64.html#plot2d">plot2d</a></code>. will show the contour lines corresponding to those
+values of the expression plotted, if they exist within the domain used.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="logx"></span><span id="Item_003a-Plotting_002fdefvr_002flogx"></span><dl>
+<dt id="index-logx">Plot option: <strong>logx</strong> <em>[logx, <var>value</var>], logx, nologx</em></dt>
+<dd>
+<p>Default value: <code>false</code>
+</p>
+<p>Makes the horizontal axes to be scaled logarithmically. It can be either
+true or false. The single keywords <code>logx</code> and <code>nologx</code> can be
+used as synonyms for <code>[logx, true]</code> and <code>[logx, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="logy"></span><span id="Item_003a-Plotting_002fdefvr_002flogy"></span><dl>
+<dt id="index-logy">Plot option: <strong>logy</strong> <em>[logy, <var>value</var>], logy, nology</em></dt>
+<dd>
+<p>Default value: <code>false</code>
+</p>
+<p>Makes the vertical axes to be scaled logarithmically. It can be either
+true or false.
+The single keywords <code>logy</code> and <code>nology</code> can be used as
+synonyms for <code>[logy, true]</code> and <code>[logy, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="mesh_005flines_005fcolor"></span><span id="Item_003a-Plotting_002fdefvr_002fmesh_005flines_005fcolor"></span><dl>
+<dt id="index-mesh_005flines_005fcolor">Plot option: <strong>mesh_lines_color</strong> <em>[mesh_lines_color, <var>color</var>], mesh_lines_color, no_mesh_lines</em></dt>
+<dd>
+<p>Default value: <code>black</code>
+</p>
+<p>It sets the color used by plot3d to draw the mesh lines, when a palette
+is being used.  It accepts the same colors as for the option
+<code><a href="#color">color</a></code><!-- /@w --> (see the list of allowed colors in <code><a href="#color">color</a></code>).  It
+can also be given a value <code>false</code> to eliminate completely the mesh
+lines. The single keyword <code>mesh_lines_color</code> removes any previously
+defined colors, leaving it to the graphic program to decide what color
+to use. The keyword <code>no_mesh_lines</code> is a synonym for
+<code>[mesh_lines_color, false]</code>
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="nticks"></span><span id="Item_003a-Plotting_002fdefvr_002fnticks"></span><dl>
+<dt id="index-nticks">Plot option: <strong>nticks</strong> <em>[nticks, <var>integer</var>]</em></dt>
+<dd>
+<p>Default value: <code>29</code>
+</p>
+<p>When plotting functions with <code><a href="maxima_64.html#plot2d">plot2d</a></code>, it is gives the initial
+number of points used by the adaptive plotting routine for plotting
+functions. When plotting parametric functions with <code><a href="maxima_64.html#plot3d">plot3d</a></code>,
+it sets the number of points that will be shown for the plot.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="palette"></span><span id="Item_003a-Plotting_002fdefvr_002fpalette"></span><dl>
+<dt id="index-palette">Plot option: <strong>palette</strong> <em>[palette, [<var>palette_1</var>], &hellip;, [<var>palette_n</var>]], palette, nopalette</em></dt>
+<dd>
+<p>It can consist of one palette or a list of several palettes.  Each
+palette is a list with a keyword followed by values. If the keyword is
+gradient, it should be followed by a list of valid colors.
+</p>
+<p>If the keyword is hue, saturation or value, it must be followed by 4
+numbers. The first three numbers, which must be between 0 and 1, define
+the hue, saturation and value of a basic color to be assigned to the
+minimum value of z. The keyword specifies which of the three attributes
+(hue, saturation or value) will be increased according to the values of
+z.  The last number indicates the increase corresponding to the maximum
+value of z.  That last number can be bigger than 1 or negative; the
+corresponding values of the modified attribute will be rounded modulo 1.
+</p>
+<p>Gnuplot only uses the first palette in the list; xmaxima will use the
+palettes in the list sequentially, when several surfaces are plotted
+together; if the number of palettes is exhausted, they will be repeated
+sequentially.
+</p>
+<p>The color of the mesh lines will be given by the option
+<code><a href="#mesh_005flines_005fcolor">mesh_lines_color</a></code>. If <code>palette</code> is given the value
+<code>false</code>, the surfaces will not be shaded but represented with a
+mesh of curves only. In that case, the colors of the lines will be
+determined by the option <code><a href="#color">color</a></code>.
+</p>
+<p>The single keyword <code>palette</code> removes any palette previously
+defined, leaving it to the graphic program to decide the palette to use
+and <code>nopalette</code> is a synonym for <code>[palette, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="plotepsilon"></span><span id="Item_003a-Plotting_002fdefvr_002fplotepsilon"></span><dl>
+<dt id="index-plotepsilon">Plot option: <strong>plotepsilon</strong> <em>[plotepsilon, <var>value</var>]</em></dt>
+<dd>
+<p>Default value: 1e-6
+</p>
+<p>This value is used by <code><a href="maxima_64.html#plot2d">plot2d</a></code> when plotting implicit functions or
+contour lines. When plotting an explicit function <code>expr_1=expr_2</code>,
+it is converted into <code>expr_1-expr_2</code> and the points where that equals
+zero are searched. When a contour line for <code>expr</code> equal to some value
+is going to be plotted, the points where <code>expr</code> minus that value
+are equal to zero are searched. The search is done by computing those
+expressions at a grid of points (see <code><a href="#sample">sample</a></code>). If at one of the
+points in that grid the absolute value of the expression is less than
+the value of <code>plotepsilon</code>, it will be assumed to be zero, and
+therefore, as being part of the curve to be plotted.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="plot_005fformat"></span><span id="Item_003a-Plotting_002fdefvr_002fplot_005fformat"></span><dl>
+<dt id="index-plot_005fformat">Plot option: <strong>plot_format</strong> <em>[plot_format, <var>format</var>]</em></dt>
+<dd>
+<p>Default value: <code>gnuplot</code>, in Windows systems, or <code>gnuplot_pipes</code> in
+other systems.
+</p>
+<p>Where <var>format</var> is one of the following: gnuplot, xmaxima, mgnuplot,
+gnuplot_pipes or geomview.
+</p>
+<p>It sets the format to be used for plotting as explained in
+<code><a href="maxima_63.html">Plotting Formats</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="plot_005freal_005fpart"></span><span id="Item_003a-Plotting_002fdefvr_002fplot_005frealpart"></span><dl>
+<dt id="index-plot_005frealpart">Plot option: <strong>plot_realpart</strong> <em>[plot_realpart, <var>symbol</var>], plot_realpart, noplot_realpart</em></dt>
+<dd>
+<p>Default value: <code>false</code>
+</p>
+<p>If set to <code>true</code>, the functions to be plotted will be considered as
+complex functions whose real value should be plotted; this is equivalent
+to plotting <code>realpart(<var>function</var>)</code>.  If set to <code>false</code>,
+nothing will be plotted when the function does not give a real value.
+For instance, when <code>x</code> is negative, <code>log(x)</code> gives a complex
+value, with real value equal to <code>log(abs(x))</code>; if
+<code>plot_realpart</code> were <code>true</code>, <code>log(-5)</code> would be plotted
+as <code>log(5)</code>, while nothing would be plotted if <code>plot_realpart</code>
+were <code>false</code>. The single keyword <code>plot_realpart</code> can be used
+as a synonym for <code>[plot_realpart, true]</code> and <code>noplot_realpart</code>
+is a synonym for <code>[plot_realpart, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="point_005ftype"></span><span id="Item_003a-Plotting_002fdefvr_002fpoint_005ftype"></span><dl>
+<dt id="index-point_005ftype">Plot option: <strong>point_type</strong> <em>[point_type, <var>type_1</var>, &hellip;, <var>type_n</var>]</em></dt>
+<dd>
+<p>In gnuplot, each set of points to be plotted with the style &ldquo;points&rdquo;
+or &ldquo;linespoints&rdquo; will be represented with objects taken from this
+list, in sequential order.  If there are more sets of points than objects
+in this list, they will be repeated sequentially.
+The possible objects that can be used are: <code>bullet</code>, <code>circle</code>,
+<code>plus</code>, <code>times</code>, <code>asterisk</code>, <code>box</code>, <code>square</code>,
+<code>triangle</code>, <code>delta</code>, <code>wedge</code>, <code>nabla</code>, <code>diamond</code>,
+<code>lozenge</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="pdf_005ffile"></span><span id="Item_003a-Plotting_002fdefvr_002fpdf_005ffile"></span><dl>
+<dt id="index-pdf_005ffile">Plot option: <strong>pdf_file</strong> <em>[pdf_file, <var>file_name</var>]</em></dt>
+<dd>
+<p>Saves the plot into a PDF file with name equal to <var>file_name</var>,
+rather than showing it in the screen.  By default, the file will be
+created in the directory defined by the variable
+<code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code>, unless <var>file_name</var> contains the character
+&ldquo;/&rdquo;, in which case it will be assumed to contain the complete path where
+the file should be created. The value of <code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code> can be changed
+to save the file in a different directory. When the option
+<code><a href="maxima_66.html#gnuplot_005fpdf_005fterm_005fcommand">gnuplot_pdf_term_command</a></code> is also given, it will be used to set up
+Gnuplot&rsquo;s PDF terminal; otherwise, Gnuplot&rsquo;s pdfcairo terminal
+will be used with solid colored lines of width 3, plot
+size of 17.2 cm by 12.9 cm and font of 18 points.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="png_005ffile"></span><span id="Item_003a-Plotting_002fdefvr_002fpng_005ffile"></span><dl>
+<dt id="index-png_005ffile">Plot option: <strong>png_file</strong> <em>[png_file, <var>file_name</var>]</em></dt>
+<dd>
+<p>Saves the plot into a PNG graphics file with name equal to <var>file_name</var>,
+rather than showing it in the screen. By default, the file will be
+created in the directory defined by the variable
+<code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code>, unless <var>file_name</var> contains the character
+&ldquo;/&rdquo;, in which case it will be assumed to contain the complete path where
+the file should be created. The value of <code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code> can be changed
+to save the file in a different directory. When the option
+<code><a href="maxima_66.html#gnuplot_005fpng_005fterm_005fcommand">gnuplot_png_term_command</a></code> is also given, it will be used to set up
+Gnuplot&rsquo;s PNG terminal; otherwise, Gnuplot&rsquo;s pngcairo terminal
+will be used, with a font of size 12. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="ps_005ffile"></span><span id="Item_003a-Plotting_002fdefvr_002fps_005ffile"></span><dl>
+<dt id="index-ps_005ffile">Plot option: <strong>ps_file</strong> <em>[ps_file, <var>file_name</var>]</em></dt>
+<dd>
+<p>Saves the plot into a Postscript file with name equal to <var>file_name</var>,
+rather than showing it in the screen.  By default, the file will be
+created in the directory defined by the variable
+<code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code>, unless <var>file_name</var> contains the character
+&ldquo;/&rdquo;, in which case it will be assumed to contain the complete path where
+the file should be created. The value of <code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code> can be changed
+to save the file in a different directory. When the option
+<code><a href="maxima_66.html#gnuplot_005fps_005fterm_005fcommand">gnuplot_ps_term_command</a></code> is also given, it will be used to set up
+Gnuplot&rsquo;s Postscript terminal; otherwise, Gnuplot&rsquo;s postscript terminal
+will be used with the EPS option, solid colored lines of width 2, plot
+size of 16.4 cm by 12.3 cm and font of 24 points.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="run_005fviewer"></span><span id="Item_003a-Plotting_002fdefvr_002frun_005fviewer"></span><dl>
+<dt id="index-run_005fviewer">Plot option: <strong>run_viewer</strong> <em>[run_viewer, <var>symbol</var>], run_viewer, norun_viewer</em></dt>
+<dd>
+<p>Default value: <code>true</code>
+</p>
+<p>This option is only used when the plot format is <code>gnuplot</code> and the
+terminal is <code>default</code> or when the Gnuplot terminal is set to
+<code>dumb</code> (see <code><a href="maxima_66.html#gnuplot_005fterm">gnuplot_term</a></code>) and can have a true or false
+value.
+</p>
+<p>If the terminal is <code>default</code>, a file <code>maxout_xxx.gnuplot</code> (or
+other name specified with <code><a href="maxima_66.html#gnuplot_005fout_005ffile">gnuplot_out_file</a></code>) is created with the
+gnuplot commands necessary to generate the plot. Option <code>run_viewer</code>
+controls whether or not Gnuplot will be launched to execute those
+commands and show the plot.
+</p>
+<p>If the terminal is <code>default</code>, gnuplot is run to execute the
+commands in <code>maxout_xxx.gnuplot</code>, producing another file
+<code>maxplot.txt</code> (or other name specified with
+<code><a href="maxima_66.html#gnuplot_005fout_005ffile">gnuplot_out_file</a></code>). Option <code>run_viewer</code> controls whether or
+not that file, with an ASCII representation of the plot, will be shown
+in the Maxima or Xmaxima console.
+</p>
+<p>Its default value, true, makes the plots appear in either the console or
+a separate graphics window. <code>run_viewer</code> and <code>norun_viewer</code>
+are synonyms for <code>[run_viewer, true]</code> and <code>[run_viewer,
+false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="same_005fxy"></span><span id="Item_003a-Plotting_002fdefvr_002fsame_005fxy"></span><dl>
+<dt id="index-same_005fxy">Plot option: <strong>same_xy</strong> <em>[same_xy , <var>value</var>], same_xy, nosame_xy</em></dt>
+<dd>
+<p>It can be either true or false. If true, the scales used in the x and y
+axes will be the same, in either 2d or 3d plots. See also
+<code><a href="#yx_005fratio">yx_ratio</a></code>. <code>same_xy</code> and <code>nosame_xy</code> are synonyms for
+<code>[same_xy, true]</code> and <code>[same_xy, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="same_005fxyz"></span><span id="Item_003a-Plotting_002fdefvr_002fsame_005fxyz"></span><dl>
+<dt id="index-same_005fxyz">Plot option: <strong>same_xyz</strong> <em>[same_xyz , <var>value</var>], same_xyz, nosame_xyz</em></dt>
+<dd>
+<p>It can be either true or false. If true, the scales used in the 3 axes
+of a 3d plot will be the same. <code>same_xyz</code> and <code>nosame_xyz</code> are
+synonyms for <code>[same_xyz, true]</code> and <code>[same_xyz, false]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="sample"></span><span id="Item_003a-Plotting_002fdefvr_002fsample"></span><dl>
+<dt id="index-sample">Plot option: <strong>sample</strong> <em>[sample, <var>nx</var>, <var>ny</var>]</em></dt>
+<dd>
+<p>Default value: <code>[sample, 50, 50]</code>
+</p>
+<p><var>nx</var> and <var>ny</var> must be two natural numbers that will be used by
+<code><a href="maxima_64.html#plot2d">plot2d</a></code> to look for the points that make part of the plot of an
+implicit function or a contour line. The domain is divided into <var>nx</var>
+intervals in the horizontal axis and <var>ny</var> intervals in the vertical
+axis and the numerical value of the expression is computed at the
+borders of those intervals. Higher values of <var>nx</var> and <var>ny</var> will
+give smoother curves, but will increase the time needed to trace the
+plot. When there are critical points in the plot where the curve changes
+direction, to get better results it is more important to try to make
+those points to be at the border of the intervals, rather than
+increasing <var>nx</var> and <var>ny</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="style"></span><span id="Item_003a-Plotting_002fdefvr_002fstyle"></span><dl>
+<dt id="index-style">Plot option: <strong>style</strong> <em>[style, <var>type_1</var>, &hellip;, <var>type_n</var>], [style, [<var>style_1</var>], &hellip;, [<var>style_n</var>]]</em></dt>
+<dd>
+<p>The styles that will be used for the various functions or sets of data
+in a 2d plot.  The word <var>style</var> must be followed by one or more
+styles.  If there are more functions and data sets than the styles
+given, the styles will be repeated.  Each style can be either
+<var>lines</var> for line segments, <var>points</var> for isolated points,
+<var>linespoints</var> for segments and points, or <var>dots</var> for small
+isolated dots.  Gnuplot accepts also an <var>impulses</var> style.
+</p>
+<p>Each of the styles can be enclosed inside a list with some additional
+parameters.  <var>lines</var> accepts one or two numbers: the width of the
+line and an integer that identifies a color.  The default color codes
+are: 1: blue, 2: red, 3: magenta, 4: orange, 5: brown, 6: lime and 7:
+aqua.  If you use Gnuplot with a terminal different than X11,
+those colors might be different; for example, if you use the option
+[<var>gnuplot_term</var>, <var>ps</var>], color index 4 will correspond to black,
+instead of orange.
+</p>
+<p><var>points</var> accepts one two or three parameters; the first parameter
+is the radius of the points, the second parameter is an integer that
+selects the color, using the same code used for <var>lines</var> and the
+third parameter is currently used only by Gnuplot and it corresponds
+to several objects instead of points.  The default types of
+objects are: 1: filled circles, 2: open circles, 3: plus signs, 4: x,
+5: *, 6: filled squares, 7: open squares, 8: filled triangles, 9: open
+triangles, 10: filled inverted triangles, 11: open inverted triangles,
+12: filled lozenges and 13: open lozenges.
+</p>
+<p><var>linespoints</var> accepts up to four parameters: line width, points
+radius, color and type of object to replace the points.
+</p>
+<p>See also <code><a href="#color">color</a></code> and <code><a href="#point_005ftype">point_type</a></code>.
+</p> 
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="svg_005ffile"></span><span id="Item_003a-Plotting_002fdefvr_002fsvg_005ffile"></span><dl>
+<dt id="index-svg_005ffile">Plot option: <strong>svg_file</strong> <em>[svg_file, <var>file_name</var>]</em></dt>
+<dd>
+<p>Saves the plot into an SVG file with name equal to <var>file_name</var>,
+rather than showing it in the screen.  By default, the file will be
+created in the directory defined by the variable
+<code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code>, unless <var>file_name</var> contains the character
+&ldquo;/&rdquo;, in which case it will be assumed to contain the complete path where
+the file should be created. The value of <code><a href="maxima_149.html#maxima_005ftempdir">maxima_tempdir</a></code> can be changed
+to save the file in a different directory. When the option
+<code><a href="maxima_66.html#gnuplot_005fsvg_005fterm_005fcommand">gnuplot_svg_term_command</a></code> is also given, it will be used to set up
+Gnuplot&rsquo;s SVG terminal; otherwise, Gnuplot&rsquo;s svg terminal
+will be used with font of 14 points.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="t"></span><span id="Item_003a-Plotting_002fdefvr_002ft"></span><dl>
+<dt id="index-t">Plot option: <strong>t</strong> <em>[t, <var>min</var>, <var>max</var>]</em></dt>
+<dd>
+<p>Default range for parametric plots.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="title"></span><span id="Item_003a-Plotting_002fdefvr_002ftitle"></span><dl>
+<dt id="index-title">Plot option: <strong>title</strong> <em>[title, <var>text</var>]</em></dt>
+<dd>
+<p>Defines a title that will be written at the top of the plot.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="transform_005fxy"></span><span id="Item_003a-Plotting_002fdefvr_002ftransform_005fxy"></span><dl>
+<dt id="index-transform_005fxy">Plot option: <strong>transform_xy</strong> <em>[transform_xy, <var>symbol</var>], notransform_xy</em></dt>
+<dd>
+<p>Where <var>symbol</var> is either <code>false</code> or the result obtained by
+using the function <code>transform_xy</code>.  If different from <code>false</code>,
+it will be used to transform the 3 coordinates in
+plot3d. <code>notransform_xy</code> removes any transformation function
+previously defined.
+</p>
+<p>See <code><a href="maxima_64.html#make_005ftransform">make_transform</a></code>, <code><a href="maxima_64.html#polar_005fto_005fxy">polar_to_xy</a></code> and
+<code><a href="maxima_64.html#spherical_005fto_005fxyz">spherical_to_xyz</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="x"></span><span id="Item_003a-Plotting_002fdefvr_002fx"></span><dl>
+<dt id="index-x">Plot option: <strong>x</strong> <em>[x, <var>min</var>, <var>max</var>]</em></dt>
+<dd>
+<p>When used as the first option in a <code><a href="maxima_64.html#plot2d">plot2d</a></code> command (or any of the
+first two in <code><a href="maxima_64.html#plot3d">plot3d</a></code>), it indicates that the first independent variable
+is x and it sets its range.  It can also be used again after the first
+option (or after the second option in plot3d) to define the effective
+horizontal domain that will be shown in the plot.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="xlabel"></span><span id="Item_003a-Plotting_002fdefvr_002fxlabel"></span><dl>
+<dt id="index-xlabel">Plot option: <strong>xlabel</strong> <em>[xlabel, <var>string</var>]</em></dt>
+<dd>
+<p>Specifies the <var>string</var> that will label the first axis; if this
+option is not used, that label will be the name of the independent
+variable, when plotting functions with <code><a href="maxima_64.html#plot2d">plot2d</a></code> the name of the
+first variable, when plotting surfaces with <code><a href="maxima_64.html#plot3d">plot3d</a></code>, or the first
+expression in the case of a parametric plot.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="xtics"></span><span id="Item_003a-Plotting_002fdefvr_002fxtics"></span><dl>
+<dt id="index-xtics">Plot option: <strong>xtics</strong> <em>[xtics, <var>x1</var>, <var>x2</var>, <var>x3</var>], [xtics, <code>false</code>], xtics, noxtics</em></dt>
+<dd>
+<p>Defines the values at which a mark and a number will be placed in the x
+axis. The first number is the initial value, the second the increments
+and the third is the last value where a mark is placed. The second and
+third numbers can be omitted, in which case the first number is the
+increment from an initial value that will be chosen by the graphic
+program. If <code>[xtics, false]</code> is used, no marks or numbers will be
+shown along the x axis.
+</p>
+<p>The single keyword <code>xtics</code> removes any values previously
+defined, leaving it to the graphic program to decide the values to use
+and <code>noxtics</code> is a synonym for <code>[xtics, false]</code>
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="xy_005fscale"></span><span id="Item_003a-Plotting_002fdefvr_002fxy_005fscale"></span><dl>
+<dt id="index-xy_005fscale">Plot option: <strong>xy_scale</strong> <em>[xy_scale, <var>sx</var>, <var>sy</var>]</em></dt>
+<dd>
+<p>In a 2d plot, it defines the ratio of the total size of the Window to
+the size that will be used for the plot. The two numbers given as
+arguments are the scale factors for the x and y axes.
+</p>
+<p>This option does not change the size of the graphic window or the placement
+of the graph in the window. If you want to change the aspect ratio of the
+plot, it is better to use option <code><a href="#yx_005fratio">yx_ratio</a></code>. For instance,
+<code>[yx_ratio, 10]</code> instead of <code>[xy_scale, 0.1, 1]</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="y"></span><span id="Item_003a-Plotting_002fdefvr_002fy"></span><dl>
+<dt id="index-y">Plot option: <strong>y</strong> <em>[y, <var>min</var>, <var>max</var>]</em></dt>
+<dd>
+<p>When used as one of the first two options in <code><a href="maxima_64.html#plot3d">plot3d</a></code>, it indicates
+that one of the independent variables is y and it sets its range.  Otherwise,
+it defines the effective domain of the second variable that will be
+shown in the plot.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="ylabel"></span><span id="Item_003a-Plotting_002fdefvr_002fylabel"></span><dl>
+<dt id="index-ylabel">Plot option: <strong>ylabel</strong> <em>[ylabel, <var>string</var>]</em></dt>
+<dd>
+<p>Specifies the <var>string</var> that will label the second axis; if this
+option is not used, that label will be &ldquo;y&rdquo;, when plotting explicit
+functions with <code><a href="maxima_64.html#plot2d">plot2d</a></code>, or the name of the second variable, when
+plotting surfaces with <code><a href="maxima_64.html#plot3d">plot3d</a></code>, or the second expression in the
+case of a parametric plot.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="ytics"></span><span id="Item_003a-Plotting_002fdefvr_002fytics"></span><dl>
+<dt id="index-ytics">Plot option: <strong>ytics</strong> <em>[ytics, <var>y1</var>, <var>y2</var>, <var>y3</var>], [ytics, <code>false</code>], ytics, noytics</em></dt>
+<dd>
+<p>Defines the values at which a mark and a number will be placed in the y
+axis. The first number is the initial value, the second the increments
+and the third is the last value where a mark is placed. The second and
+third numbers can be omitted, in which case the first number is the
+increment from an initial value that will be chosen by the graphic
+program. If <code>[ytics, false]</code> is used, no marks or numbers will be
+shown along the y axis.
+</p>
+<p>The single keyword <code>ytics</code> removes any values previously
+defined, leaving it to the graphic program to decide the values to use
+and <code>noytics</code> is a synonym for <code>[ytics, false]</code>
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="yx_005fratio"></span><span id="Item_003a-Plotting_002fdefvr_002fyx_005fratio"></span><dl>
+<dt id="index-yx_005fratio">Plot option: <strong>yx_ratio</strong> <em>[yx_ratio, <var>r</var>]</em></dt>
+<dd>
+<p>In a 2d plot, the ratio between the vertical and the horizontal sides of
+the rectangle used to make the plot. See also <code><a href="#same_005fxy">same_xy</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="z"></span><span id="Item_003a-Plotting_002fdefvr_002fz"></span><dl>
+<dt id="index-z">Plot option: <strong>z</strong> <em>[z, <var>min</var>, <var>max</var>]</em></dt>
+<dd>
+<p>Used in <code><a href="maxima_64.html#plot3d">plot3d</a></code> to set the effective range of values of z that will be
+shown in the plot.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="zlabel"></span><span id="Item_003a-Plotting_002fdefvr_002fzlabel"></span><dl>
+<dt id="index-zlabel">Plot option: <strong>zlabel</strong> <em>[zlabel, <var>string</var>]</em></dt>
+<dd>
+<p>Specifies the <var>string</var> that will label the third axis, when using
+<code><a href="maxima_64.html#plot3d">plot3d</a></code>.  If this option is not used, that label will be &ldquo;z&rdquo;, when
+plotting surfaces, or the third expression in the case of a parametric
+plot.  It can not be used with <code><a href="maxima_64.html#set_005fplot_005foption">set_plot_option</a></code> and it will be
+ignored by <code><a href="maxima_64.html#plot2d">plot2d</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="zmin"></span><span id="Item_003a-Plotting_002fdefvr_002fzmin"></span><dl>
+<dt id="index-zmin">Plot option: <strong>zmin</strong> <em>[zmin, <var>z</var>], zmin</em></dt>
+<dd>
+<p>In 3d plots, the value of z that will be at the bottom of the plot box.
+</p>
+<p>The single keyword <code>zmin</code> removes any value previously
+defined, leaving it to the graphic program to decide the value to use.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="ztics"></span><span id="Item_003a-Plotting_002fdefvr_002fztics"></span><dl>
+<dt id="index-ztics">Plot option: <strong>ztics</strong> <em>[ztics, <var>z1</var>, <var>z2</var>, <var>z3</var>], [ztics, <code>false</code>], ztics, noztics</em></dt>
+<dd>
+<p>Defines the values at which a mark and a number will be placed in the z
+axis. The first number is the initial value, the second the increments
+and the third is the last value where a mark is placed. The second and
+third numbers can be omitted, in which case the first number is the
+increment from an initial value that will be chosen by the graphic
+program. If <code>[ztics, false]</code> is used, no marks or numbers will be
+shown along the z axis. 
+</p>
+<p>The single keyword <code>ztics</code> removes any values previously
+defined, leaving it to the graphic program to decide the values to use
+and <code>noztics</code> is a synonym for <code>[ztics, false]</code>
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Plotting_002fnode_002fGnuplot-Options"></span><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_66.html" accesskey="n" rel="next">Gnuplot Options</a>, Previous: <a href="maxima_64.html" accesskey="p" rel="prev">Functions and Variables for Plotting</a>, Up: <a href="maxima_61.html" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for Predicates (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for Predicates (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for Predicates (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_56.html" rel="up" title="Maxima's Database">
+<link href="maxima_61.html" rel="next" title="Plotting">
+<link href="maxima_59.html" rel="prev" title="Functions and Variables for Facts">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Functions-and-Variables-for-Predicates"></span><div class="header">
+<p>
+Previous: <a href="maxima_59.html" accesskey="p" rel="prev">Functions and Variables for Facts</a>, Up: <a href="maxima_56.html" accesskey="u" rel="up">Maxima's Database</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-Predicates-1"></span><h3 class="section">11.4 Functions and Variables for Predicates</h3>
+
+<span id="charfun"></span><span id="Item_003a-Database_002fdeffn_002fcharfun"></span><dl>
+<dt id="index-charfun">Function: <strong>charfun</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Return 0 when the predicate <var>p</var> evaluates to <code>false</code>; return 1 when
+the predicate evaluates to <code>true</code>.  When the predicate evaluates to
+something other than <code>true</code> or <code>false</code> (unknown),  return a noun form.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) charfun (x &lt; 1);
+(%o1)                    charfun(x &lt; 1)
+(%i2) subst (x = -1, %);
+(%o2)                           1
+(%i3) e : charfun ('&quot;and&quot; (-1 &lt; x, x &lt; 1))$
+(%i4) [subst (x = -1, e), subst (x = 0, e), subst (x = 1, e)];
+(%o4)                       [0, 1, 0]
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+</div>
+</p></dd></dl>
+
+<span id="compare"></span><span id="Item_003a-Database_002fdeffn_002fcompare"></span><dl>
+<dt id="index-compare">Function: <strong>compare</strong> <em>(<var>x</var>, <var>y</var>)</em></dt>
+<dd>
+<p>Return a comparison operator <var>op</var> (<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>,
+<code>=</code>, or <code>#</code>) such that <code>is (<var>x</var> <var>op</var> <var>y</var>)</code> evaluates
+to <code>true</code>; when either <var>x</var> or <var>y</var> depends on <code>%i</code> and
+<code><var>x</var> # <var>y</var></code>, return <code>notcomparable</code>; when there is no such
+operator or Maxima isn&rsquo;t able to determine the operator, return <code>unknown</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) compare (1, 2);
+(%o1)                           &lt;
+(%i2) compare (1, x);
+(%o2)                        unknown
+(%i3) compare (%i, %i);
+(%o3)                           =
+(%i4) compare (%i, %i + 1);
+(%o4)                     notcomparable
+(%i5) compare (1/x, 0);
+(%o5)                           #
+(%i6) compare (x, abs(x));
+(%o6)                          &lt;=
+</pre></div>
+
+<p>The function <code>compare</code> doesn&rsquo;t try to determine whether the real domains of
+its arguments are nonempty; thus
+</p>
+<div class="example">
+<pre class="example">(%i1) compare (acos (x^2 + 1), acos (x^2 + 1) + 1);
+(%o1)                           &lt;
+</pre></div>
+
+<p>The real domain of <code>acos (x^2 + 1)</code> is empty.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="equal"></span><span id="Item_003a-Database_002fdeffn_002fequal"></span><dl>
+<dt id="index-equal">Function: <strong>equal</strong> <em>(<var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>Represents equivalence, that is, equal value.
+</p>
+<p>By itself, <code>equal</code> does not evaluate or simplify.
+The function <code><a href="maxima_59.html#is">is</a></code> attempts to evaluate <code>equal</code> to a Boolean value.
+<code>is(equal(<var>a</var>, <var>b</var>))</code> returns <code>true</code> (or <code>false</code>) if
+and only if <var>a</var> and <var>b</var> are equal (or not equal) for all possible
+values of their variables, as determined by evaluating
+<code>ratsimp(<var>a</var> - <var>b</var>)</code>; if <code><a href="maxima_76.html#ratsimp">ratsimp</a></code> returns 0, the two
+expressions are considered equivalent.  Two expressions may be equivalent even
+if they are not syntactically equal (i.e., identical).
+</p>
+<p>When <code>is</code> fails to reduce <code>equal</code> to <code>true</code> or <code>false</code>, the
+result is governed by the global flag <code><a href="maxima_169.html#prederror">prederror</a></code>.  When <code>prederror</code>
+is <code>true</code>, <code>is</code> complains with an error message.  Otherwise, <code>is</code>
+returns <code>unknown</code>.
+</p>
+<p>In addition to <code>is</code>, some other operators evaluate <code>equal</code> and
+<code>notequal</code> to <code>true</code> or <code>false</code>, namely <code><a href="maxima_169.html#if">if</a></code>,<!-- /@w -->
+<code><a href="maxima_38.html#and">and</a></code>, <code><a href="maxima_38.html#or">or</a></code>, and <code><a href="maxima_38.html#not">not</a></code>.
+</p>
+
+<p>The negation of <code>equal</code> is <code><a href="#notequal">notequal</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>By itself, <code>equal</code> does not evaluate or simplify.
+</p>
+<div class="example">
+<pre class="example">(%i1) equal (x^2 - 1, (x + 1) * (x - 1));
+                        2
+(%o1)            equal(x  - 1, (x - 1) (x + 1))
+(%i2) equal (x, x + 1);
+(%o2)                    equal(x, x + 1)
+(%i3) equal (x, y);
+(%o3)                      equal(x, y)
+</pre></div>
+
+<p>The function <code>is</code> attempts to evaluate <code>equal</code> to a Boolean value.
+<code>is(equal(<var>a</var>, <var>b</var>))</code> returns <code>true</code> when
+<code>ratsimp(<var>a</var> - <var>b</var>)</code> returns 0.  Two expressions may be equivalent
+even if they are not syntactically equal (i.e., identical).
+</p>
+<div class="example">
+<pre class="example">(%i1) ratsimp (x^2 - 1 - (x + 1) * (x - 1));
+(%o1)                           0
+(%i2) is (equal (x^2 - 1, (x + 1) * (x - 1)));
+(%o2)                         true
+(%i3) is (x^2 - 1 = (x + 1) * (x - 1));
+(%o3)                         false
+(%i4) ratsimp (x - (x + 1));
+(%o4)                          - 1
+(%i5) is (equal (x, x + 1));
+(%o5)                         false
+(%i6) is (x = x + 1);
+(%o6)                         false
+(%i7) ratsimp (x - y);
+(%o7)                         x - y
+(%i8) is (equal (x, y));
+(%o8)                        unknown
+(%i9) is (x = y);
+(%o9)                         false
+</pre></div>
+
+<p>When <code>is</code> fails to reduce <code>equal</code> to <code>true</code> or <code>false</code>,
+the result is governed by the global flag <code>prederror</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) [aa : x^2 + 2*x + 1, bb : x^2 - 2*x - 1];
+                    2             2
+(%o1)             [x  + 2 x + 1, x  - 2 x - 1]
+(%i2) ratsimp (aa - bb);
+(%o2)                        4 x + 2
+(%i3) prederror : true;
+(%o3)                         true
+(%i4) is (equal (aa, bb));
+Maxima was unable to evaluate the predicate:
+       2             2
+equal(x  + 2 x + 1, x  - 2 x - 1)
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i5) prederror : false;
+(%o5)                         false
+(%i6) is (equal (aa, bb));
+(%o6)                        unknown
+</pre></div>
+
+<p>Some operators evaluate <code>equal</code> and <code>notequal</code> to <code>true</code> or
+<code>false</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) if equal (y, y - 1) then FOO else BAR;
+(%o1)                          BAR
+(%i2) eq_1 : equal (x, x + 1);
+(%o2)                    equal(x, x + 1)
+(%i3) eq_2 : equal (y^2 + 2*y + 1, (y + 1)^2);
+                         2                   2
+(%o3)             equal(y  + 2 y + 1, (y + 1) )
+(%i4) [eq_1 and eq_2, eq_1 or eq_2, not eq_1];
+(%o4)                  [false, true, true]
+</pre></div>
+
+<p>Because <code>not <var>expr</var></code> causes evaluation of <var>expr</var>,
+<code>not equal(<var>a</var>, <var>b</var>)</code> is equivalent to
+<code>is(notequal(<var>a</var>, <var>b</var>))</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) [notequal (2*z, 2*z - 1), not equal (2*z, 2*z - 1)];
+(%o1)            [notequal(2 z, 2 z - 1), true]
+(%i2) is (notequal (2*z, 2*z - 1));
+(%o2)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+<span id="notequal"></span><span id="Item_003a-Database_002fdeffn_002fnotequal"></span><dl>
+<dt id="index-notequal">Function: <strong>notequal</strong> <em>(<var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>Represents the negation of <code>equal(<var>a</var>, <var>b</var>)</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) equal (a, b);
+(%o1)                      equal(a, b)
+(%i2) maybe (equal (a, b));
+(%o2)                        unknown
+(%i3) notequal (a, b);
+(%o3)                    notequal(a, b)
+(%i4) not equal (a, b);
+(%o4)                    notequal(a, b)
+(%i5) maybe (notequal (a, b));
+(%o5)                        unknown
+(%i6) assume (a &gt; b);
+(%o6)                        [a &gt; b]
+(%i7) equal (a, b);
+(%o7)                      equal(a, b)
+(%i8) maybe (equal (a, b));
+(%o8)                         false
+(%i9) notequal (a, b);
+(%o9)                    notequal(a, b)
+(%i10) maybe (notequal (a, b));
+(%o10)                        true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Operators">Operators</a>
+</div>
+</p></dd></dl>
+
+<span id="unknown"></span><span id="Item_003a-Database_002fdeffn_002funknown"></span><dl>
+<dt id="index-unknown">Function: <strong>unknown</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns <code>true</code> if and only if <var>expr</var> contains an operator or function
+not recognized by the Maxima simplifier.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-functions">Simplification functions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="zeroequiv"></span><span id="Item_003a-Database_002fdeffn_002fzeroequiv"></span><dl>
+<dt id="index-zeroequiv">Function: <strong>zeroequiv</strong> <em>(<var>expr</var>, <var>v</var>)</em></dt>
+<dd>
+<p>Tests whether the expression <var>expr</var> in the variable <var>v</var> is equivalent
+to zero, returning <code>true</code>, <code>false</code>, or <code>dontknow</code>.
+</p>
+<p><code>zeroequiv</code> has these restrictions:
+</p>
+<ol>
+<li> Do not use functions that Maxima does not know how to
+differentiate and evaluate.
+</li><li> If the expression has poles on the real line, there may be errors
+in the result (but this is unlikely to occur).
+</li><li> If the expression contains functions which are not solutions to first order
+differential equations (e.g. Bessel functions) there may be incorrect results.
+</li><li> The algorithm uses evaluation at randomly chosen points for carefully selected
+subexpressions.  This is always a somewhat hazardous business, although the
+algorithm tries to minimize the potential for error.
+</li></ol>
+
+<p>For example <code>zeroequiv (sin(2 * x) - 2 * sin(x) * cos(x), x)</code> returns
+<code>true</code> and <code>zeroequiv (%e^x + x, x)</code> returns <code>false</code>.
+On the other hand <code>zeroequiv (log(a * b) - log(a) - log(b), a)</code> returns 
+<code>dontknow</code> because of the presence of an extra parameter <code>b</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fPlotting"></span><hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_59.html" accesskey="p" rel="prev">Functions and Variables for Facts</a>, Up: <a href="maxima_56.html" accesskey="u" rel="up">Maxima's Database</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

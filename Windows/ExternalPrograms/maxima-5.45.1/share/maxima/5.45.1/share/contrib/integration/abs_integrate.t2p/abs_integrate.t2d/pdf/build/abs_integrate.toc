@@ -1,0 +1,5 @@
+@unnchapentry{}{10001}{Top}{1}
+@numchapentry{abs_integrate}{1}{}{2}
+@numsecentry{Introduction to abs_integrate}{1.1}{Introduction to abs_integrate}{2}
+@numsecentry{Definitions for abs_integrate}{1.2}{Definitions for abs_integrate}{3}
+@appentry{Function and variable index}{A}{Function and variable index}{7}

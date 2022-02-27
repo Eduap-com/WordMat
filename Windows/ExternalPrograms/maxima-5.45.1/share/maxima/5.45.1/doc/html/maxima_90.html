@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for Elliptic Functions (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for Elliptic Functions (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for Elliptic Functions (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="maxima_91.html" rel="next" title="Functions and Variables for Elliptic Integrals">
+<link href="maxima_89.html" rel="prev" title="Introduction to Elliptic Functions and Integrals">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Functions-and-Variables-for-Elliptic-Functions"></span><div class="header">
+<p>
+Next: <a href="maxima_91.html" accesskey="n" rel="next">Functions and Variables for Elliptic Integrals</a>, Previous: <a href="maxima_89.html" accesskey="p" rel="prev">Introduction to Elliptic Functions and Integrals</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+<span id="Functions-and-Variables-for-Elliptic-Functions-1"></span><h3 class="section">16.2 Functions and Variables for Elliptic Functions</h3>
+
+<span id="jacobi_005fsn"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fsn"></span><dl>
+<dt id="index-jacobi_005fsn">Function: <strong>jacobi_sn</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>sn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fcn"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fcn"></span><dl>
+<dt id="index-jacobi_005fcn">Function: <strong>jacobi_cn</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>cn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fdn"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fdn"></span><dl>
+<dt id="index-jacobi_005fdn">Function: <strong>jacobi_dn</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>dn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fns"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fns"></span><dl>
+<dt id="index-jacobi_005fns">Function: <strong>jacobi_ns</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>ns(u,m) = 1/sn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fsc"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fsc"></span><dl>
+<dt id="index-jacobi_005fsc">Function: <strong>jacobi_sc</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>sc(u,m) = sn(u,m)/cn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fsd"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fsd"></span><dl>
+<dt id="index-jacobi_005fsd">Function: <strong>jacobi_sd</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>sd(u,m) = sn(u,m)/dn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fnc"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fnc"></span><dl>
+<dt id="index-jacobi_005fnc">Function: <strong>jacobi_nc</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>nc(u,m) = 1/cn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fcs"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fcs"></span><dl>
+<dt id="index-jacobi_005fcs">Function: <strong>jacobi_cs</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>cs(u,m) = cn(u,m)/sn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fcd"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fcd"></span><dl>
+<dt id="index-jacobi_005fcd">Function: <strong>jacobi_cd</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>cd(u,m) = cn(u,m)/dn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fnd"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fnd"></span><dl>
+<dt id="index-jacobi_005fnd">Function: <strong>jacobi_nd</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>nd(u,m) = 1/dn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fds"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fds"></span><dl>
+<dt id="index-jacobi_005fds">Function: <strong>jacobi_ds</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>ds(u,m) = dn(u,m)/sn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="jacobi_005fdc"></span><span id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fdc"></span><dl>
+<dt id="index-jacobi_005fdc">Function: <strong>jacobi_dc</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The Jacobian elliptic function <em>dc(u,m) = dn(u,m)/cn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fsn"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fsn"></span><dl>
+<dt id="index-inverse_005fjacobi_005fsn">Function: <strong>inverse_jacobi_sn</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>sn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fcn"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fcn"></span><dl>
+<dt id="index-inverse_005fjacobi_005fcn">Function: <strong>inverse_jacobi_cn</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>cn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fdn"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fdn"></span><dl>
+<dt id="index-inverse_005fjacobi_005fdn">Function: <strong>inverse_jacobi_dn</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>dn(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fns"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fns"></span><dl>
+<dt id="index-inverse_005fjacobi_005fns">Function: <strong>inverse_jacobi_ns</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>ns(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fsc"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fsc"></span><dl>
+<dt id="index-inverse_005fjacobi_005fsc">Function: <strong>inverse_jacobi_sc</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>sc(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fsd"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fsd"></span><dl>
+<dt id="index-inverse_005fjacobi_005fsd">Function: <strong>inverse_jacobi_sd</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>sd(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fnc"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fnc"></span><dl>
+<dt id="index-inverse_005fjacobi_005fnc">Function: <strong>inverse_jacobi_nc</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>nc(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fcs"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fcs"></span><dl>
+<dt id="index-inverse_005fjacobi_005fcs">Function: <strong>inverse_jacobi_cs</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>cs(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fcd"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fcd"></span><dl>
+<dt id="index-inverse_005fjacobi_005fcd">Function: <strong>inverse_jacobi_cd</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>cd(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fnd"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fnd"></span><dl>
+<dt id="index-inverse_005fjacobi_005fnd">Function: <strong>inverse_jacobi_nd</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>nd(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fds"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fds"></span><dl>
+<dt id="index-inverse_005fjacobi_005fds">Function: <strong>inverse_jacobi_ds</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>ds(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+<span id="inverse_005fjacobi_005fdc"></span><span id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fdc"></span><dl>
+<dt id="index-inverse_005fjacobi_005fdc">Function: <strong>inverse_jacobi_dc</strong> <em>(<var>u</var>, <var>m</var>)</em></dt>
+<dd><p>The inverse of the Jacobian elliptic function <em>dc(u,m)</em>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-Elliptic_002fnode_002fFunctions-and-Variables-for-Elliptic-Integrals"></span><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_91.html" accesskey="n" rel="next">Functions and Variables for Elliptic Integrals</a>, Previous: <a href="maxima_89.html" accesskey="p" rel="prev">Introduction to Elliptic Functions and Integrals</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

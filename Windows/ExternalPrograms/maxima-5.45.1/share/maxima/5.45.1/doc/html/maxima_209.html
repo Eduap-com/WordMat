@@ -1,0 +1,799 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for statistical graphs (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for statistical graphs (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for statistical graphs (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_205.html" rel="up" title="descriptive-pkg">
+<link href="maxima_210.html" rel="next" title="diag-pkg">
+<link href="maxima_208.html" rel="prev" title="Functions and Variables for descriptive statistics">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<span id="Functions-and-Variables-for-statistical-graphs"></span><div class="header">
+<p>
+Previous: <a href="maxima_208.html" accesskey="p" rel="prev">Functions and Variables for descriptive statistics</a>, Up: <a href="maxima_205.html" accesskey="u" rel="up">descriptive-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-statistical-graphs-1"></span><h3 class="section">50.4 Functions and Variables for statistical graphs</h3>
+
+
+
+<span id="barsplot"></span><span id="Item_003a-descriptive_002fdeffn_002fbarsplot"></span><dl>
+<dt id="index-barsplot">Function: <strong>barsplot</strong> <em>(<var>data1</var>, <var>data2</var>, &hellip;, <var>option_1</var>, <var>option_2</var>, &hellip;)</em></dt>
+<dd>
+<p>Plots bars diagrams for discrete statistical variables,
+both for one or multiple samples.
+</p>
+<p><var>data</var> can be a list of outcomes representing one sample, or a 
+matrix of <var>m</var> rows and <var>n</var> columns, representing <var>n</var> samples of size 
+<var>m</var> each.
+</p>
+<p>Available options are:
+</p>
+<ul>
+<li> <var>box_width</var> (default, <code>3/4</code>): relative width of rectangles. This 
+value must be in the range <code>[0,1]</code>.
+
+</li><li> <var>grouping</var> (default, <code>clustered</code>): indicates how multiple samples are
+shown. Valid values are: <code>clustered</code> and <code>stacked</code>.
+
+</li><li> <var>groups_gap</var> (default, <code>1</code>): a positive integer number representing 
+the gap between two consecutive groups of bars.
+
+</li><li> <var>bars_colors</var> (default, <code>[]</code>): a list of colors for multiple samples.
+When there are more samples than specified colors, the extra necessary colors 
+are chosen at random. See <code>color</code> to learn more about them.
+
+</li><li> <var>frequency</var> (default, <code>absolute</code>): indicates the scale of the
+ordinates. Possible values are:  <code>absolute</code>, <code>relative</code>, 
+and <code>percent</code>.
+
+</li><li> <var>ordering</var> (default, <code>orderlessp</code>): possible values are <code>orderlessp</code> or <code>ordergreatp</code>,
+indicating how statistical outcomes should be ordered on the <var>x</var>-axis.
+
+</li><li> <var>sample_keys</var> (default, <code>[]</code>): a list with the strings to be used in the legend.
+When the list length is other than 0 or the number of samples, an error message is returned.
+
+</li><li> <var>start_at</var> (default, <code>0</code>): indicates where the plot begins to be plotted on the
+x axis.
+
+</li><li> All global <code>draw</code> options, except <code>xtics</code>, which is 
+internally assigned by <code>barsplot</code>.
+If you want to set your own values for this option or want to build
+complex scenes, make use of <code>barsplot_description</code>. See example below.
+
+</li><li> The following local <a href="maxima_216.html">draw-pkg</a> options: <code><a href="maxima_218.html#key">key</a></code>, <code><a href="maxima_218.html#color_005fdraw">color_draw</a></code>,
+<code><a href="maxima_218.html#fill_005fcolor">fill_color</a></code>, <code><a href="maxima_218.html#fill_005fdensity">fill_density</a></code> and <code><a href="maxima_218.html#line_005fwidth">line_width</a></code>.
+See also
+<code><a href="#barsplot">barsplot</a></code>.
+
+</li></ul>
+
+<p>There is also a function <code>wxbarsplot</code> for creating embedded
+histograms in interfaces wxMaxima and iMaxima.  <code>barsplot</code> in a
+multiplot context.
+</p>
+<p>Examples:
+</p>
+<p>Univariate sample in matrix form. Absolute frequencies.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) m : read_matrix (file_search (&quot;biomed.data&quot;))$
+</pre><pre class="example">(%i3) barsplot(
+        col(m,2),
+        title        = &quot;Ages&quot;,
+        xlabel       = &quot;years&quot;,
+        box_width    = 1/2,
+        fill_density = 3/4)$
+</pre></div>
+
+<p>Two samples of different sizes, with
+relative frequencies and user declared colors.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) l1:makelist(random(10),k,1,50)$
+(%i3) l2:makelist(random(10),k,1,100)$
+</pre><pre class="example">(%i4) barsplot(
+        l1,l2,
+        box_width    = 1,
+        fill_density = 1,
+        bars_colors  = [black, grey],
+        frequency = relative,
+        sample_keys = [&quot;A&quot;, &quot;B&quot;])$
+</pre></div>
+
+<p>Four non numeric samples of equal size.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+</pre><pre class="example">(%i2) barsplot(
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        title  = &quot;Asking for something to four groups&quot;,
+        ylabel = &quot;# of individuals&quot;,
+        groups_gap   = 3,
+        fill_density = 0.5,
+        ordering     = ordergreatp)$
+</pre></div>
+
+<p>Stacked bars.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+</pre><pre class="example">(%i2) barsplot(
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        title  = &quot;Asking for something to four groups&quot;,
+        ylabel = &quot;# of individuals&quot;,
+        grouping     = stacked,
+        fill_density = 0.5,
+        ordering     = ordergreatp)$
+</pre></div>
+
+<p>For bars diagrams related options, see <code><a href="#barsplot">barsplot</a></code> of package <a href="maxima_216.html">draw-pkg</a>
+See also functions <code><a href="#histogram">histogram</a></code> and <code><a href="#piechart">piechart</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="barsplot_005fdescription"></span><span id="Item_003a-descriptive_002fdeffn_002fbarsplot_005fdescription"></span><dl>
+<dt id="index-barsplot_005fdescription">Function: <strong>barsplot_description</strong> <em>(&hellip;)</em></dt>
+<dd>
+<p>Function <code>barsplot_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects.
+</p>
+<p>Example: <code>barsplot</code> in a multiplot context.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) l1:makelist(random(10),k,1,50)$
+(%i3) l2:makelist(random(10),k,1,100)$
+(%i4) bp1 : 
+        barsplot_description(
+         l1,
+         box_width = 1,
+         fill_density = 0.5,
+         bars_colors = [blue],
+         frequency = relative)$
+(%i5) bp2 : 
+        barsplot_description(
+         l2,
+         box_width = 1,
+         fill_density = 0.5,
+         bars_colors = [red],
+         frequency = relative)$
+(%i6) draw(gr2d(bp1), gr2d(bp2))$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="boxplot"></span><span id="Item_003a-descriptive_002fdeffn_002fboxplot"></span><dl>
+<dt id="index-boxplot">Function: <strong>boxplot</strong> <em>(<var>data</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>boxplot</tt> (<var>data</var>, <var>option_1</var>, <var>option_2</var>, &hellip;)</em></dt>
+<dd>
+<p>This function plots box-and-whisker diagrams. Argument <var>data</var> can be a list,
+which is not of great interest, since these diagrams are mainly used for
+comparing different samples, or a matrix, so it is possible to compare
+two or more components of a multivariate statistical variable. 
+But it is also allowed <var>data</var> to be a list of samples with 
+possible different sample sizes, in fact this is the only function 
+in package <code>descriptive</code> that admits this type of data structure.
+</p>
+<p>The box is plotted from the first quartile to the third, with an horizontal
+segment situated at the second quartile or median. By default, lower and 
+upper whiskers are plotted at the minimum and maximum values,
+respectively. Option <var>range</var> can be used to indicate that values greater
+than <code>quantile(x,3/4)+range*(quantile(x,3/4)-quantile(x,1/4))</code> or 
+less than <code>quantile(x,1/4)-range*(quantile(x,3/4)-quantile(x,1/4))</code>
+must be considered as outliers, in which case they are plotted as
+isolated points, and the whiskers are located at the extremes of the rest of
+the sample.
+</p>
+<p>Available options are:
+</p>
+<ul>
+<li> <var>box_width</var> (default, <code>3/4</code>): relative width of boxes.
+This  value must be in the range <code>[0,1]</code>.
+
+</li><li> <var>box_orientation</var> (default, <code>vertical</code>): possible values: <code>vertical</code>
+and <code>horizontal</code>.
+
+</li><li> <var>range</var> (default, <code>inf</code>): positive coefficient of the interquartilic range
+to set outliers boundaries.
+
+</li><li> <var>outliers_size</var> (default, <code>1</code>): circle size for isolated outliers.
+
+</li><li> All <code>draw</code> options, except <code>points_joined</code>, <code>point_size</code>, <code>point_type</code>,
+<code>xtics</code>, <code>ytics</code>, <code>xrange</code>, and <code>yrange</code>, which are
+internally assigned by <code>boxplot</code>.
+If you want to set your own values for this options or want to build
+complex scenes, make use of <code>boxplot_description</code>.
+
+</li><li> The following local <code>draw</code> options: <code>key</code>, <code>color</code>, 
+and <code>line_width</code>.
+
+</li></ul>
+
+<p>There is also a function <code>wxboxplot</code> for creating embedded
+histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Examples:
+</p>
+<p>Box-and-whisker diagram from a multivariate sample.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix(file_search(&quot;wind.data&quot;))$
+</pre><pre class="example">(%i3) boxplot(s2,
+        box_width  = 0.2,
+        title      = &quot;Windspeed in knots&quot;,
+        xlabel     = &quot;Stations&quot;,
+        color      = red,
+        line_width = 2)$
+</pre></div>
+
+<p>Box-and-whisker diagram from three samples of different sizes.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+</pre><pre class="example">(%i2) A :
+       [[6, 4, 6, 2, 4, 8, 6, 4, 6, 4, 3, 2],
+        [8, 10, 7, 9, 12, 8, 10],
+        [16, 13, 17, 12, 11, 18, 13, 18, 14, 12]]$
+</pre><pre class="example">(%i3) boxplot (A, box_orientation = horizontal)$
+</pre></div>
+
+<p>Option <var>range</var> can be used to handle outliers.
+</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) B: [[7, 15, 5, 8, 6, 5, 7, 3, 1],
+          [10, 8, 12, 8, 11, 9, 20],
+          [23, 17, 19, 7, 22, 19]] $
+</pre><pre class="example">(%i3) boxplot (B, range=1)$
+(%i4) boxplot (B, range=1.5, box_orientation = horizontal)$
+</pre><pre class="example">(%i5) draw2d(
+        boxplot_description(
+          B,
+          range            = 1.5,
+          line_width       = 3,
+          outliers_size    = 2,
+          color            = red,
+          background_color = light_gray),
+        xtics = {[&quot;Low&quot;,1],[&quot;Medium&quot;,2],[&quot;High&quot;,3]}) $
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="boxplot_005fdescription"></span><span id="Item_003a-descriptive_002fdeffn_002fboxplot_005fdescription"></span><dl>
+<dt id="index-boxplot_005fdescription">Function: <strong>boxplot_description</strong> <em>(&hellip;)</em></dt>
+<dd>
+<p>Function <code>boxplot_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="histogram"></span><span id="Item_003a-descriptive_002fdeffn_002fhistogram"></span><dl>
+<dt id="index-histogram">Function: <strong>histogram</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>histogram</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>histogram</tt> (<var>list</var>, <var>option_1</var>, <var>option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>histogram</tt> (<var>one_column_matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>histogram</tt> (<var>one_column_matrix</var>, <var>option_1</var>, <var>option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>histogram</tt> (<var>one_row_matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>histogram</tt> (<var>one_row_matrix</var>, <var>option_1</var>, <var>option_2</var>, &hellip;)</em></dt>
+<dd>
+<p>This function plots an histogram from a continuous sample.
+Sample data must be stored in a list of numbers or an one dimensional matrix.
+</p>
+<p>Available options are:
+</p>
+<ul>
+<li> <var>nclasses</var> (default, <code>10</code>): number of classes of the histogram, or
+a list indicating the limits of the classes and the number of them, or
+only the limits. This option also accepts bounds for varying bin widths, or
+a symbol with the name of one of the three optimal algorithms available for
+the number of classes: <code>'fd</code> (Freedman, D. and Diaconis, P. (1981) On the 
+histogram as a density estimator: L_2 theory. Zeitschrift f&uuml;r
+Wahrscheinlichkeitstheorie und verwandte Gebiete 57, 453-476.), <code>'scott</code>
+(Scott, D. W. (1979) On optimal and data-based histograms. Biometrika 66, 
+605-610.), and <code>'sturges</code> (Sturges, H. A. (1926) The choice of a class
+interval. Journal of the American Statistical Association 21, 65-66).
+
+</li><li> <var>frequency</var> (default, <code>absolute</code>): indicates the scale of the
+ordinates. Possible values are:  <code>absolute</code>, <code>relative</code>,  <code>percent</code>,
+and <code>density</code>. With <code>density</code>, the histogram area has a total area of one.
+
+</li><li> <var>htics</var> (default, <code>auto</code>): format of the histogram tics. Possible
+values are: <code>auto</code>, <code>endpoints</code>, <code>intervals</code>, or a list
+of labels. 
+
+</li><li> All global <code>draw</code> options, except <code>xrange</code>, <code>yrange</code>, 
+and <code>xtics</code>, which are internally assigned by <code>histogram</code>.
+If you want to set your own values for these options, make use of 
+<code>histogram_description</code>. See examples bellow.
+
+</li><li> The following local <a href="maxima_216.html">draw-pkg</a> options: <code><a href="maxima_218.html#key">key</a></code>, <code><a href="maxima_65.html#color">color</a></code>,
+<code><a href="maxima_218.html#fill_005fcolor">fill_color</a></code>, <code><a href="maxima_218.html#fill_005fdensity">fill_density</a></code> and <code><a href="maxima_218.html#line_005fwidth">line_width</a></code>. See also
+<code><a href="#barsplot">barsplot</a></code>.
+
+</li></ul>
+
+<p>There is also a function <code>wxhistogram</code> for creating embedded
+histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Examples:
+</p>
+<p>A simple with eight classes:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) histogram (
+           s1,
+           nclasses     = 8,
+           title        = &quot;pi digits&quot;,
+           xlabel       = &quot;digits&quot;,
+           ylabel       = &quot;Absolute frequency&quot;,
+           fill_color   = grey,
+           fill_density = 0.6)$
+</pre></div>
+
+<p>Setting the limits of the histogram to -2 and 12, with 3 classes.
+Also, we introduce predefined tics:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) histogram (
+           s1,
+           nclasses     = [-2,12,3],
+           htics        = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;],
+           terminal     = png,
+           fill_color   = &quot;#23afa0&quot;,
+           fill_density = 0.6)$
+</pre></div>
+
+<p>Bounds for varying bin widths.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) histogram (s1, nclasses = {0,3,6,7,11})$
+</pre></div>
+
+<p>Freedmann - Diakonis robust method for optimal search of the number of classes.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) histogram(s1, nclasses=fd) $
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="histogram_005fdescription"></span><span id="Item_003a-descriptive_002fdeffn_002fhistogram_005fdescription"></span><dl>
+<dt id="index-histogram_005fdescription">Function: <strong>histogram_description</strong> <em>(&hellip;)</em></dt>
+<dd>
+<p>Function <code>histogram_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects. We make use of <code>histogram_description</code> for setting 
+the <code>xrange</code> and adding an explicit curve into the scene:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) ( load(&quot;distrib&quot;),
+        m: 14, s: 2,
+        s2: random_normal(m, s, 1000) ) $
+(%i3) draw2d(
+        grid   = true,
+        xrange = [5, 25],
+        histogram_description(
+          s2,
+          nclasses     = 9,
+          frequency    = density,
+          fill_density = 0.5),
+        explicit(pdf_normal(x,m,s), x, m - 3*s, m + 3* s))$
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="piechart"></span><span id="Item_003a-descriptive_002fdeffn_002fpiechart"></span><dl>
+<dt id="index-piechart">Function: <strong>piechart</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>piechart</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>piechart</tt> (<var>list</var>, <var>option_1</var>, <var>option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>piechart</tt> (<var>one_column_matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>piechart</tt> (<var>one_column_matrix</var>, <var>option_1</var>, <var>option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>piechart</tt> (<var>one_row_matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>piechart</tt> (<var>one_row_matrix</var>, <var>option_1</var>, <var>option_2</var>, &hellip;)</em></dt>
+<dd>
+<p>Similar to <code>barsplot</code>, but plots sectors instead of rectangles.
+</p>
+<p>Available options are:
+</p>
+<ul>
+<li> <var>sector_colors</var> (default, <code>[]</code>): a list of colors for sectors.
+When there are more sectors than specified colors, the extra necessary colors 
+are chosen at random. See <code>color</code> to learn more about them.
+
+</li><li> <var>pie_center</var> (default, <code>[0,0]</code>): diagram&rsquo;s center.
+
+</li><li> <var>pie_radius</var> (default, <code>1</code>): diagram&rsquo;s radius.
+
+</li><li> All global <code>draw</code> options, except <code>key</code>, which is 
+internally assigned by <code>piechart</code>.
+If you want to set your own values for this option or want to build
+complex scenes, make use of <code>piechart_description</code>.
+
+</li><li> The following local <code>draw</code> options: <code>key</code>, <code>color</code>, 
+<code>fill_density</code> and <code>line_width</code>. See also
+<code>ellipse</code>
+
+</li></ul>
+
+<p>There is also a function <code>wxpiechart</code> for 
+creating embedded histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) piechart(
+        s1,
+        xrange  = [-1.1, 1.3],
+        yrange  = [-1.1, 1.1],
+        title   = &quot;Digit frequencies in pi&quot;)$
+</pre></div>
+
+<p>See also function <code><a href="#barsplot">barsplot</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="piechart_005fdescription"></span><span id="Item_003a-descriptive_002fdeffn_002fpiechart_005fdescription"></span><dl>
+<dt id="index-piechart_005fdescription">Function: <strong>piechart_description</strong> <em>(&hellip;)</em></dt>
+<dd>
+<p>Function <code>piechart_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="scatterplot"></span><span id="Item_003a-descriptive_002fdeffn_002fscatterplot"></span><dl>
+<dt id="index-scatterplot">Function: <strong>scatterplot</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>scatterplot</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>scatterplot</tt> (<var>list</var>, <var>option_1</var>, <var>option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>scatterplot</tt> (<var>matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>scatterplot</tt> (<var>matrix</var>, <var>option_1</var>, <var>option_2</var>, &hellip;)</em></dt>
+<dd>
+<p>Plots scatter diagrams both for univariate (<var>list</var>) and multivariate 
+(<var>matrix</var>) samples.
+</p>
+<p>Available options are the same admitted by <code>histogram</code>.
+</p>
+<p>There is also a function <code>wxscatterplot</code> for 
+creating embedded histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Examples:
+</p>
+<p>Univariate scatter diagram from a simulated Gaussian sample. 
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i3) scatterplot(
+        random_normal(0,1,200),
+        xaxis      = true,
+        point_size = 2,
+        dimensions = [600,150])$
+</pre></div>
+
+<p>Two dimensional scatter plot.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i3) scatterplot(
+       submatrix(s2, 1,2,3),
+       title      = &quot;Data from stations #4 and #5&quot;,
+       point_type = diamant,
+       point_size = 2,
+       color      = blue)$
+</pre></div>
+
+<p>Three dimensional scatter plot.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) scatterplot(submatrix (s2, 1,2), nclasses=4)$
+</pre></div>
+
+<p>Five dimensional scatter plot, with five classes histograms.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i3) scatterplot(
+        s2,
+        nclasses     = 5,
+        frequency    = relative,
+        fill_color   = blue,
+        fill_density = 0.3,
+        xtics        = 5)$
+</pre></div>
+
+<p>For plotting isolated or line-joined points in two and three dimensions,
+see <code>points</code>. See also <code><a href="#histogram">histogram</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="scatterplot_005fdescription"></span><span id="Item_003a-descriptive_002fdeffn_002fscatterplot_005fdescription"></span><dl>
+<dt id="index-scatterplot_005fdescription">Function: <strong>scatterplot_description</strong> <em>(&hellip;)</em></dt>
+<dd>
+<p>Function <code>scatterplot_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="starplot"></span><span id="Item_003a-descriptive_002fdeffn_002fstarplot"></span><dl>
+<dt id="index-starplot">Function: <strong>starplot</strong> <em>(<var>data1</var>, <var>data2</var>, &hellip;, <var>option_1</var>, <var>option_2</var>, &hellip;)</em></dt>
+<dd>
+<p>Plots star diagrams for discrete statistical variables,
+both for one or multiple samples.
+</p>
+<p><var>data</var> can be a list of outcomes representing one sample, or a 
+matrix of <var>m</var> rows and <var>n</var> columns, representing <var>n</var> samples of size 
+<var>m</var> each.
+</p>
+<p>Available options are:
+</p>
+<ul>
+<li> <var>stars_colors</var> (default, <code>[]</code>): a list of colors for multiple samples.
+When there are more samples than specified colors, the extra necessary colors 
+are chosen at random. See <code>color</code> to learn more about them.
+
+</li><li> <var>frequency</var> (default, <code>absolute</code>): indicates the scale of the
+radii. Possible values are:  <code>absolute</code> and <code>relative</code>.
+
+</li><li> <var>ordering</var> (default, <code>orderlessp</code>): possible values are <code>orderlessp</code> or <code>ordergreatp</code>,
+indicating how statistical outcomes should be ordered.
+
+</li><li> <var>sample_keys</var> (default, <code>[]</code>): a list with the strings to be used in the legend.
+When the list length is other than 0 or the number of samples, an error message is returned.
+
+
+</li><li> <var>star_center</var> (default, <code>[0,0]</code>): diagram&rsquo;s center.
+
+</li><li> <var>star_radius</var> (default, <code>1</code>): diagram&rsquo;s radius.
+
+</li><li> All global <code>draw</code> options, except <code>points_joined</code>, <code>point_type</code>, 
+and <code>key</code>, which are internally assigned by <code>starplot</code>.
+If you want to set your own values for this options or want to build
+complex scenes, make use of <code>starplot_description</code>.
+
+</li><li> The following local <code>draw</code> option: <code>line_width</code>.
+
+</li></ul>
+
+<p>There is also a function <code>wxstarplot</code> for 
+creating embedded histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Example:
+</p>
+<p>Plot based on absolute frequencies.
+Location and radius defined by the user. 
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) l1: makelist(random(10),k,1,50)$
+(%i3) l2: makelist(random(10),k,1,200)$
+</pre><pre class="example">(%i4) starplot(
+        l1, l2,
+        stars_colors = [blue,red],
+        sample_keys = [&quot;1st sample&quot;, &quot;2nd sample&quot;],
+        star_center = [1,2],
+        star_radius = 4,
+        proportional_axes = xy,
+        line_width = 2 ) $ 
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="starplot_005fdescription"></span><span id="Item_003a-descriptive_002fdeffn_002fstarplot_005fdescription"></span><dl>
+<dt id="index-starplot_005fdescription">Function: <strong>starplot_description</strong> <em>(&hellip;)</em></dt>
+<dd>
+<p>Function <code>starplot_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects. 
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+<span id="stemplot"></span><span id="Item_003a-descriptive_002fdeffn_002fstemplot"></span><dl>
+<dt id="index-stemplot">Function: <strong>stemplot</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>stemplot</tt> (<var>data</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>stemplot</tt> (<var>data</var>, <var>option</var>)</em></dt>
+<dd>
+<p>Plots stem and leaf diagrams.
+</p>
+<p>Unique available option is:
+</p>
+<ul>
+<li> <var>leaf_unit</var> (default, <code>1</code>): indicates the unit of the leaves; must be a
+power of 10.
+
+</li></ul>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) load(distrib)$
+</pre><pre class="example">(%i3) stemplot(
+        random_normal(15, 6, 100),
+        leaf_unit = 0.1);
+-5|4
+ 0|37
+ 1|7
+ 3|6
+ 4|4
+ 5|4
+ 6|57
+ 7|0149
+ 8|3
+ 9|1334588
+10|07888
+11|01144467789
+12|12566889
+13|24778
+14|047
+15|223458
+16|4
+17|11557
+18|000247
+19|4467799
+20|00
+21|1
+22|2335
+23|01457
+24|12356
+25|455
+27|79
+key: 6|3 =  6.3
+(%o3)                  done
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Package-descriptive">Package descriptive</a>
+
+<a href="maxima_369.html#Category_003a-Plotting">Plotting</a>
+</div>
+</p></dd></dl>
+
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fdiag_002dpkg"></span><hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_208.html" accesskey="p" rel="prev">Functions and Variables for descriptive statistics</a>, Up: <a href="maxima_205.html" accesskey="u" rel="up">descriptive-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

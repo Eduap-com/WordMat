@@ -1,0 +1,17 @@
+\entry{logic_simp}{2}{\code {logic_simp}}
+\entry{characteristic_vector}{2}{\code {characteristic_vector}}
+\entry{zhegalkin_form}{3}{\code {zhegalkin_form}}
+\entry{logic_equiv}{3}{\code {logic_equiv}}
+\entry{dual_function}{3}{\code {dual_function}}
+\entry{self_dual}{4}{\code {self_dual}}
+\entry{closed_under_f}{4}{\code {closed_under_f}}
+\entry{closed_under_t}{4}{\code {closed_under_t}}
+\entry{monotonic}{4}{\code {monotonic}}
+\entry{linear}{5}{\code {linear}}
+\entry{functionally_complete}{5}{\code {functionally_complete}}
+\entry{logic_basis}{5}{\code {logic_basis}}
+\entry{logic_diff}{6}{\code {logic_diff}}
+\entry{boolean_form}{6}{\code {boolean_form}}
+\entry{demorgan}{7}{\code {demorgan}}
+\entry{pdnf}{7}{\code {pdnf}}
+\entry{pcnf}{7}{\code {pcnf}}

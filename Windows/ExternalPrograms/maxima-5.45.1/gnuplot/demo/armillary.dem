@@ -1,0 +1,65 @@
+#
+# Show placement of circles in 3D using
+# - sampling
+# - circle objects in axis coordinates
+# - circle objects and labels in polar (cylindrical) coordinates
+#
+save_encoding = GPVAL_ENCODING
+set encoding utf8
+
+unset border
+unset key
+set angles degrees
+set view 64, 302, 1.62, 1.0
+set view azimuth 23.4
+set view  equal xyz
+set style data lines
+set xzeroaxis
+set yzeroaxis
+set zzeroaxis
+set xyplane at 0
+unset tics
+set xrange [ -1.1  : 1.1  ]
+set yrange [ -1.1  : 1.1  ]
+set zrange [ -1.1  : 1.1  ]
+#
+set title "Circles and polygons in 3D" font ",20"
+set arrow from 0,0,-1.2 to 0,0,1.2 lw 2 filled
+#
+# Place circles as objects using Cartesian axis coordinates
+#
+set object 21 circle at 0,0,0  radius 1.0 fs empty border lc "black" lw 3 front
+set object 22 circle at 0,0,1  radius 0.1 fs transparent solid 0.5 fc "slategray"
+set object 23 circle at 0,0,-1 radius 0.1 fs transparent solid 0.5 fc "slategray"
+
+#
+# Pentagonal "base"
+#
+set obj 24 polygon from polar 0, 0.5, -1.2 to polar 72, 0.5, -1.2 to polar 144, 0.5, -1.2 to polar 216, 0.5, -1.2 to polar 288, 0.5, -1.2 to polar 0, 0.5, -1.2
+set obj 24 fillstyle solid border border lc "black" back fc "olive"
+
+
+#
+# Plot symbols for Zodiac constellations in polar (actually cylindrical) coordinates
+# Place a circle around the corresponding glyph
+# Note: Many fonts do not provide glyphs for these symbols
+#
+array Zodiac[13] = ["♐", "♑", "♒", "♓", "♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "⛎"] 
+array Longitude[13] = [267., 300., 328., 352., 29., 53., 90., 118., 138., 174., 218., 241., 248.]
+do for [i=1:13] {
+    set label i Zodiac[i] at polar Longitude[i], 1.1, 0 center font ",15"
+    set obj i circle at polar Longitude[i], 1.1, 0 radius char 1.5
+    set obj i fs solid fc rgb hsv2rgb( Longitude[i]/360., 0.5, 1.0)
+}
+
+#
+# plot sampled parametric circles
+#
+splot sample [u=0:360] '+' using (cos(u)):(0):(sin(u)) lw 2, \
+             [u=0:360] '+' using (cos(u)):(sin(u)):(0) lw 2, \
+             [u=0:360] '+' using (0):(cos(u)):(sin(u)) lw 2
+
+pause -1 "Hit <cr> to continue"
+
+set encoding save_encoding
+reset
