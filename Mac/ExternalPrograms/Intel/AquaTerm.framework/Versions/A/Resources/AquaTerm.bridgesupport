@@ -1,0 +1,247 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+<depends_on path='/System/Library/Frameworks/Foundation.framework'/>
+<depends_on path='/System/Library/Frameworks/AppKit.framework'/>
+<depends_on path='/System/Library/Frameworks/CoreServices.framework'/>
+<depends_on path='/System/Library/Frameworks/CoreFoundation.framework'/>
+<depends_on path='/System/Library/Frameworks/ApplicationServices.framework'/>
+<constant name='AQTAlignBaseline' type='i'/>
+<constant name='AQTAlignBottom' type='i'/>
+<constant name='AQTAlignCenter' type='i'/>
+<constant name='AQTAlignLeft' type='i'/>
+<constant name='AQTAlignMiddle' type='i'/>
+<constant name='AQTAlignRight' type='i'/>
+<constant name='AQTAlignTop' type='i'/>
+<constant name='AQTButtLineCapStyle' type='i'/>
+<constant name='AQTRoundLineCapStyle' type='i'/>
+<constant name='AQTSquareLineCapStyle' type='i'/>
+<enum name='AQT_EVENTBUF_SIZE' value='128'/>
+<function name='aqtAddEdgeToVertex'>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtAddFilledRect'>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtAddImageWithBitmap'>
+<arg type='^v'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtAddLabel'>
+<arg type='*'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='i'/>
+</function>
+<function name='aqtAddLineTo'>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtAddPolygon'>
+<arg type='^f'/>
+<arg type='^f'/>
+<arg type='i'/>
+</function>
+<function name='aqtAddPolyline'>
+<arg type='^f'/>
+<arg type='^f'/>
+<arg type='i'/>
+</function>
+<function name='aqtAddShearedLabel'>
+<arg type='*'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='i'/>
+</function>
+<function name='aqtAddTransformedImageWithBitmap'>
+<arg type='^v'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtClearPlot'/>
+<function name='aqtClosePlot'/>
+<function name='aqtColormapSize'>
+<retval type='i'/>
+</function>
+<function name='aqtEraseRect'>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtGetBackgroundColor'>
+<arg type='^f'/>
+<arg type='^f'/>
+<arg type='^f'/>
+</function>
+<function name='aqtGetColor'>
+<arg type='^f'/>
+<arg type='^f'/>
+<arg type='^f'/>
+</function>
+<function name='aqtGetColormapEntry'>
+<arg type='i'/>
+<arg type='^f'/>
+<arg type='^f'/>
+<arg type='^f'/>
+</function>
+<function name='aqtGetLastEvent'>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='aqtInit'>
+<retval type='i'/>
+</function>
+<function name='aqtMoveTo'>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtMoveToVertex'>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtOpenPlot'>
+<arg type='i'/>
+</function>
+<function name='aqtRenderPlot'/>
+<function name='aqtResetImageTransform'/>
+<function name='aqtSelectPlot'>
+<arg type='i'/>
+<retval type='i'/>
+</function>
+<function name='aqtSetAcceptingEvents'>
+<arg type='i'/>
+</function>
+<function name='aqtSetBackgroundColor'>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtSetClipRect'>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtSetColor'>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtSetColormapEntry'>
+<arg type='i'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtSetDefaultClipRect'/>
+<function name='aqtSetFontname'>
+<arg type='*'/>
+</function>
+<function name='aqtSetFontsize'>
+<arg type='f'/>
+</function>
+<function name='aqtSetImageTransform'>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtSetLineCapStyle'>
+<arg type='i'/>
+</function>
+<function name='aqtSetLinestylePattern'>
+<arg type='^f'/>
+<arg type='i'/>
+<arg type='f'/>
+</function>
+<function name='aqtSetLinestyleSolid'/>
+<function name='aqtSetLinewidth'>
+<arg type='f'/>
+</function>
+<function name='aqtSetPlotSize'>
+<arg type='f'/>
+<arg type='f'/>
+</function>
+<function name='aqtSetPlotTitle'>
+<arg type='*'/>
+</function>
+<function name='aqtTakeBackgroundColorFromColormapEntry'>
+<arg type='i'/>
+</function>
+<function name='aqtTakeColorFromColormapEntry'>
+<arg type='i'/>
+</function>
+<function name='aqtTerminate'/>
+<function name='aqtWaitNextEvent'>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<class name='AQTAdapter'>
+<method selector='selectPlotWithIndex:'>
+<retval type='B'/>
+</method>
+<method selector='addPolygonWithVertexPoints:pointCount:'>
+<arg index='0' c_array_length_in_arg='1' type_modifier='n'/>
+</method>
+<method selector='addPolylineWithPoints:pointCount:'>
+<arg index='0' c_array_length_in_arg='1' type_modifier='n'/>
+</method>
+<method selector='addImageWithBitmap:size:bounds:'>
+<arg index='0' c_array_delimited_by_null='true' type='^C' type_modifier='n'/>
+</method>
+<method selector='addTransformedImageWithBitmap:size:'>
+<arg index='0' c_array_delimited_by_null='true' type='^C' type_modifier='n'/>
+</method>
+<method selector='addTransformedImageWithBitmap:size:clipRect:'>
+<arg index='0' c_array_delimited_by_null='true' type='^C' type_modifier='n'/>
+</method>
+<method selector='setLinestylePattern:count:phase:'>
+<arg index='0' c_array_length_in_arg='1' type_modifier='n'/>
+</method>
+<method selector='getBackgroundColorRed:green:blue:'>
+<arg index='0' type_modifier='o'/>
+<arg index='1' type_modifier='o'/>
+<arg index='2' type_modifier='o'/>
+</method>
+<method selector='getColorRed:green:blue:'>
+<arg index='0' type_modifier='o'/>
+<arg index='1' type_modifier='o'/>
+<arg index='2' type_modifier='o'/>
+</method>
+<method selector='getColormapEntry:red:green:blue:'>
+<arg index='0' type_modifier='o'/>
+<arg index='1' type_modifier='o'/>
+<arg index='2' type_modifier='o'/>
+</method>
+<method selector='setAcceptingEvents:'>
+<arg type='B' index='0'/>
+</method>
+<method selector='setErrorHandler:'>
+<arg function_pointer='true' type='^?' index='0'/>
+<retval type='v'/>
+</method>
+<method selector='setEventHandler:'>
+<arg function_pointer='true' type='^?' index='0'/>
+<retval type='v'/>
+</method>
+</class>
+</signatures>
