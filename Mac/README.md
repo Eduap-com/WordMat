@@ -16,5 +16,9 @@ To make a 'Mac'-copy do the following:
 - Open it on a Windows computer and Run Macro 'ReplaceToNonUnicode 
 - On a Mac open the file and run macro 'ReplaceToUnicode'
 *(Make sure to add reference 'Microsoft Visual Basic for Applications Extensibility 5.3')*
+*This macro will only run if you have set Word to trust the VBA project object model*
+   *Files | Settings | Trust Center | Trust Center Settings | Macro Settings | Trust access to the VBA project object model *
+   (The macro replaces special charcters by other text sequences like *ae* for æ)
+
 
 See more details in [How to build WordMat](https://github.com/Eduap-com/WordMat/blob/master/How%20to%20build%20WordMat.docx)

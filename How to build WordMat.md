@@ -161,6 +161,7 @@ However there are a couple of caveats:
 To avoid this, follow this procedure:
 1. On Windows: Copy WordMat.dotm and rename to WordMatMac.dotm
 2. On Windows: Run the macro *'ReplaceToNonUnicode'* (Press Alt+F8)
+*(Make sure to add reference 'Microsoft Visual Basic for Applications Extensibility 5.3')*
 *This macro will only run if you have set Word to trust the VBA project object model*
    *Files | Settings | Trust Center | Trust Center Settings | Macro Settings | Trust access to the VBA project object model *
    (The macro replaces special charcters by other text sequences like *ae* for æ)
@@ -180,5 +181,7 @@ To make a 'Mac'-copy do the following:
 - Open it on a Windows computer and Run Macro 'ReplaceToNonUnicode' 
 - On a Mac open the file and run macro 'ReplaceToUnicode'
 *(Make sure to add reference 'Microsoft Visual Basic for Applications Extensibility 5.3')*
-
+*This macro will only run if you have set Word to trust the VBA project object model*
+   *Files | Settings | Trust Center | Trust Center Settings | Macro Settings | Trust access to the VBA project object model *
+   (The macro replaces special charcters by other text sequences like *ae* for æ)
 
