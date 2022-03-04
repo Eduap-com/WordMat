@@ -4,33 +4,16 @@ L¾s mere pŒ www.eduap.com
 Programmet er gratis og frigivet under GNU General Public License. http://www.gnu.org/licenses/gpl.html
 Enhver brug af programmet er pŒ eget ansvar. Udviklerne kan ikke stilles til ansvar for tabt data, resultat af forkerte beregninger eller anden brug af programmet.
 
-Programmet kan ikke anvendes uden Microsoft Office 2016 til Mac. 
-Der findes en tilsvarende version til Word 2011 til Mac og til Word 2007,2010,2013,2016 til Windows.
+Programmet kan ikke anvendes uden Microsoft Office 2016, 2019, o365 til Mac. 
+Der findes en tilsvarende version til Word til Windows.
 
 Sammen med WordMat installeres en r¾kke andre programmer som ogsŒ er under GNU General Public Licens eller lignende
 
 	Maxima 		- http://maxima.sourceforge.net/
+	sbcl		- http://www.sbcl.org
 	GnuPlot		- http://gnuplot.sourceforge.net
+	gtimeout		- Gnu core utils
 	GeoGebra 5	- http://geogebra.org
-	binutils	- http://prdownloads.sf.net/mingw/
-	gcc		- http://prdownloads.sf.net/mingw/
-
-
-Data Execution Prevention (DEP)
--------------------------------
-Sometimes not only Maxima GUI but also command line Maxima
-doesn't work (maxima.bat starts and immediately quits).
-Quite probably the problem is caused by Windows DEP.
-Some Lisp implementations execute code in data areas of memory. 
-Windows DEP sees that and blocks it (because some malicious programs 
-execute code in data areas too).
-
-Solution:  
-
-  Include the full program path of the Maxima executable, for example: 
-  C:\Program Files\Maxima-5.23.0\lib\maxima\5.23.0\binary-gcl\maxima.exe 
-  in the list of DEP exceptions 
-  (Control Panel -> System -> Advanced -> Performance -> DEP)
 
 
 
