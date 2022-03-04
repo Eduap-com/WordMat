@@ -75,14 +75,14 @@ Whenever a new release is compiled the following checklist must be followed
 
 ## Buidling a new maxima.core
 The default installation of Maxima loads the compiled *maxima.core* file from this location:
-*Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\\*
+*Maxima-sbcl-5.45.1\lib\maxima\5.45.1\binary-sbcl\\*
 It is however posible to load maxima, make some changes and save a new maxima.core file.
 This makes it much faster to start up Maxima, instead of having to load all special function and settings upon startup.
 
 ### Compiling maxima.core on Windows
-- In the following use a normal maxima 5.38.1 installation from the programs folder and not from the GitHub repository
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib*
-- run *Maxima-sbcl-5.38.1\bin\maxima.bat* by right clicking and choosing *'run as administrator'*
+- In the following use a normal maxima 5.45.1 installation from the programs folder and not from the GitHub repository
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.45.1\share\maxima\5.45.1\share\contrib*
+- run *Maxima-sbcl-5.45.1\bin\maxima.bat* by right clicking and choosing *'run as administrator'*
 If you fail to run as administrator you will recieve a permission denied error in the last step.
 - Run the following commands in the command window (You can copy/paste all in one go)
 ```
@@ -96,9 +96,9 @@ linenum:-1;
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *C:\Windows\System32* or possibly in the same folder as maxima.bat
-- Copy *C:\Windows\System32\maxima.core* to *Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl* in the GitHub repository
+- Copy *C:\Windows\System32\maxima.core* to *Maxima-sbcl-5.45.1\lib\maxima\5.45.1\binary-sbcl* in the GitHub repository
 
-- Again run *Maxima-sbcl-5.38.1\bin\maxima.bat* as administrator
+- Again run *Maxima-sbcl-5.45.1\bin\maxima.bat* as administrator
 - Run the following commands in the command window
 ```
 load(solvereal)$
@@ -123,8 +123,7 @@ The version of Maxima used is the most recent version which I could get to work 
 ### Compiling maxima.core on Mac
 Must be done separately on intel and M1
 - Ensure you have a functioning MaximaWM folder. (See above)
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *MaximaWM/maxima/share/maxima/5.45.1/share/contrib/*
-    From Shared/Maxima-files
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac From Shared/Maxima-files to *MaximaWM/maxima/share/maxima/5.45.1/share/contrib/*
 - Copy unit.mac to the subfolder unit of the contrib-folder
 - Run maxima
     Open terminal 
@@ -146,6 +145,7 @@ linenum:-1;
 - Copy *Users/youruser/maxima.core* to  *MaximaWM/maxima/lib/maxima/5.45.1/binary-sbcl/* in the Mac folder in the GitHub repository
 - The new maxima.core file can be run using the command 'sbcl --core maxima.core'
     This is handled by maxima.sh
+    You can test the new core by cd to MaximaWM. Then run 'sh maximatext.sh'
     
 Repeat the process to generate the maximaunit.core, but also copy the content from WordMatUnitaddon.mac into the terminal, after copying from solvereal.mac
 
