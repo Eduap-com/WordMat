@@ -4,35 +4,16 @@ Read more here: www.eduap.com
 The program is free released under GNU General Public License. http://www.gnu.org/licenses/gpl.html
 Any use of this program is entirely at your own risk. The developers cannot be held reliable for any loss of data, incorrect calculations or any other use of the application.
 
-This program requires Microsoft Word 2016 for Mac. (or o365 subscription)
-You can find versions for Word 2011 for Mac and for Word 2007,2010,2013,2016 for Windows on the website www.eduap.com
+This program requires Microsoft Word for Mac. (2016, 2019 or o365 subscription, probably also newer)
+You can find versions for Word for Windows on the website www.eduap.com
 
 WordMat installs a number of other programs also released under GNU General Public Licens or similar
 
 	Maxima 		- http://maxima.sourceforge.net/
+	sbcl		- http://www.sbcl.org
 	GnuPlot		- http://gnuplot.sourceforge.net
+	gtimeout		- Gnu core utils
 	GeoGebra 5	- http://geogebra.org
-	binutils	- http://prdownloads.sf.net/mingw/
-	gcc		- http://prdownloads.sf.net/mingw/
-
-
-Data Execution Prevention (DEP)
--------------------------------
-Sometimes not only Maxima GUI but also command line Maxima
-doesn't work (maxima.bat starts and immediately quits).
-Quite probably the problem is caused by Windows DEP.
-Some Lisp implementations execute code in data areas of memory. 
-Windows DEP sees that and blocks it (because some malicious programs 
-execute code in data areas too).
-
-Solution:  
-
-  Include the full program path of the Maxima executable, for example: 
-  C:\Program Files\Maxima-5.23.0\lib\maxima\5.23.0\binary-gcl\maxima.exe 
-  in the list of DEP exceptions 
-  (Control Panel -> System -> Advanced -> Performance -> DEP)
-
-
 
 Maxima is dedicated to the memory of William F. Schelter. On 6 October
 1998 William F. Schelter was formally notified that he could distribute
