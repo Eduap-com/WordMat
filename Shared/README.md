@@ -25,3 +25,9 @@ The ribbon is in the WordMat.dotm file. This folder folds icons used in the ribb
 ## Testing
 Files used to test WordMat before a new release
 
+## GeoGebra math apps bundle
+Javascript bundle to run GeoGebra in a browser
+Version 5-0-691 used win v. 1.24
+
+
+
