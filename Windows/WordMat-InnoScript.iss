@@ -198,6 +198,7 @@ Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {%appdata}\WordMat\WordDoc
 Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
 Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\geogebra-math-apps\*; DestDir: {app}\geogebra-math-apps\; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
 Source: MathMenu.dll\MathMenu.dll; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: MathMenu.dll\MathMenu.tlb; DestDir: {app}; Flags: ignoreversion regtypelib overwritereadonly uninsremovereadonly
 
