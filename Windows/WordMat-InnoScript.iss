@@ -246,6 +246,7 @@ Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {reg:HKCU\Software\M
 ;Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\WordDocs\BibWord_Stylesheet.xsl; DestDir: {code:WordInstallFolder|15}\Bibliography\Style; Flags: ignoreversion overwritereadonly uninsremovereadonly
         
+Source: WebViewWrap\*; DestDir: {app}\WebViewWrap; Flags: ignoreversion overwritereadonly uninsremovereadonly recursesubdirs
 
 [Components]
 Name: "GeoGebra"; Description: "Installs GeoGebra compatible with WordMat"; Types: full
@@ -362,10 +363,13 @@ Filename: {app}\SetupGraph-4.4.2.exe; Parameters: "/verysilent /SUPPRESSMSGBOXES
 Filename: {app}\GeoGebra-Windows-Installer-5-0-689-0.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;
 ;Filename: msiexec; Parameters: "/i ""{app}\GeoGebra-Windows-Installer-4-4-10-0.msi"" /quiet";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra..."; Components: GeoGebra ;
 ;Filename: javaws ; Parameters: "-import -system -silent -association -shortcut http://www.geogebra.org/webstart/geogebra.jnlp"; StatusMsg: "Installerer GeoGebra...";
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
+
 
 [UninstallRun]
 ;Filename:"{dotnet40}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /u " ; WorkingDir: "{app}"; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /u " ; WorkingDir: "{app}"; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /u " ; WorkingDir: "{app}"; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
 
 [UninstallDelete]
 ;Type: files; Name: "{code:VUserStartupFolder12}\MathMenu.dotm"
