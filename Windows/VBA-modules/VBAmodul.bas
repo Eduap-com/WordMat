@@ -115,7 +115,7 @@ Public Sub ExportAllModules()
     Dim szFileName As String, FileList As String
     Dim cmpComponent As VBIDE.VBComponent
 
-   If MsgBox("Do you really want to export all VBA modules to folder " & VBAModulesFolder & "?" & vbCrLf & "(all current files in folder are deleted)", vbOKCancel) = vbCancel Then Exit Sub
+   If MsgBox("Do you really want to export all VBA modules to folder '" & VBAModulesFolder & "'?" & vbCrLf & "(all current files in folder are deleted)", vbOKCancel) = vbCancel Then Exit Sub
     
     ''' The code modules will be exported in a folder named.
     ''' VBAProjectFiles in the Documents folder.
@@ -140,12 +140,16 @@ Public Sub ExportAllModules()
     Exit Sub
     End If
     
-    szExportPath = FolderWithVBAProjectFiles & "\"
+    szExportPath = FolderWithVBAProjectFiles '& "\"
     
     For Each cmpComponent In wkbSource.VBProject.VBComponents
         
         bExport = True
         szFileName = cmpComponent.Name
+
+    ' når der importeres oveni VBAmodul omdøbes til VBAmodul1. Det ændres tilbage
+        If cmpComponent.Name = "VBAmodul1" Then cmpComponent.Name = "VBAmodul"
+        If cmpComponent.Name = "VBAmodul11" Then cmpComponent.Name = "VBAmodul"
 
         ''' Concatenate the correct filename for export.
         Select Case cmpComponent.Type
@@ -171,17 +175,24 @@ Public Sub ExportAllModules()
         End If
    
     Next cmpComponent
+    
+    ' save datefile
+    Dim fs As Object, A As Variant
+    Set fs = CreateObject("Scripting.FileSystemObject")
+    Set A = fs.CreateTextFile(szExportPath & "A-ExportCreated " & Replace(Now(), ":", "") & ".txt", True)
+    A.WriteLine ("VBA-exported of Project " & wkbSource.VBProject.Name & " created " & Now())
+    A.Close
 
-    MsgBox "Export is done. Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & FileList, vbOKOnly, "Export complete"
+    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
 End Sub
 Sub ImportAllModules()
-    Dim bExport As Boolean
+    Dim bExport As Boolean, d As String, q As String
     Dim wkbSource As Document
     Dim szSourceWorkbook As String
     Dim szExportPath As String
     Dim szFileName As String
     Dim StrFile As String, i As Integer
-    Dim Arr() As String, FileList As String
+    Dim Arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
 
     ''' The code modules will be exported in a folder named.
@@ -204,39 +215,55 @@ Sub ImportAllModules()
     
     szExportPath = FolderWithVBAProjectFiles & "\"
     
+    StrFile = Dir(szExportPath & "A-ExportCreated*")
+    If StrFile <> "" Then d = Mid(StrFile, 17, Len(StrFile) - 20)
+    d = Left(d, 13) & ":" & Mid(d, 14, 2) & ":" & right(d, 2)
+    
     
     StrFile = Dir(szExportPath & "*")
     Do While Len(StrFile) > 0
-        If StrFile <> "VBAmodul.bas" Then
+        If Left(StrFile, 15) <> "A-ExportCreated" Then 'StrFile <> "VBAmodul.bas"
             FileList = FileList & StrFile & vbCrLf
         End If
         StrFile = Dir
     Loop
     Arr = Split(FileList, vbCrLf)
-
-   If MsgBox("Do you really want to import all VBA modules from folder " & VBAModulesFolder & "? (VBAmodul.bas is not imported)" & vbCrLf & vbCrLf & FileList, vbOKCancel) = vbCancel Then Exit Sub
+'    FileList = Replace(FileList, vbCrLf, " | ")
+    q = ""
+    If Not ActiveDocument.Saved Then
+        q = "You have unsaved changes!" & vbCrLf & vbCrLf
+        MBP = vbExclamation
+    End If
+    
+    If GetTimeString(ActiveDocument.BuiltInDocumentProperties("Last Save Time")) - 100 > GetTimeString(d) Then
+        q = q & "Your document is newer than the export in '" & VBAModulesFolder & "'" & vbCrLf & "Export date: " & d & vbCrLf & "Save date: " & ActiveDocument.BuiltInDocumentProperties("Last Save Time") & vbCrLf
+        If MBP = vbExclamation Then
+            MBP = vbCritical
+        Else
+            MBP = vbExclamation
+        End If
+    End If
+    
+    q = q & vbCrLf & "Do you really want to import all VBA modules from folder " & VBAModulesFolder & "? (All existing VBA-modules will be removed before importing)" & vbCrLf
+    If d <> "" Then q = q & "Export date: " & d & vbCrLf & vbCrLf
+    q = q & "File list to import:" & vbCrLf & FileList
+    
+   If MsgBox(q, vbOKCancel + MBP, "Continue?") = vbCancel Then Exit Sub
+    
+   DeleteAllModules False
     
     For i = 0 To UBound(Arr)
-        If Arr(i) <> "VBAmodul.bas" And Arr(i) <> "" Then
+        If Arr(i) <> "" And InStr(Arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
             wkbSource.VBProject.VBComponents.Import szExportPath & Arr(i)
         End If
     Next
     
-    
-'    StrFile = Dir(szExportPath & "*")
-'    Do While Len(StrFile) > 0
-'        Debug.Print StrFile
-'        If StrFile <> "VBAmodul.bas" Then
-'            wkbSource.VBProject.VBComponents.Import szExportPath & StrFile
-'        End If
-'        StrFile = Dir
-'    Loop
-    
-    MsgBox "Import is done. Files importes from folder '" & VBAModulesFolder & "':" & vbCrLf & FileList, vbOKOnly, "Import complete"
-
-
+    MsgBox "Files imported from folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Import complete"
 End Sub
-Public Sub DeleteAllModules()
+Public Sub RemoveAllModules()
+    DeleteAllModules True
+End Sub
+Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
     Dim bExport As Boolean
     Dim wkbSource As Document
     Dim szSourceWorkbook As String
@@ -244,8 +271,10 @@ Public Sub DeleteAllModules()
     Dim szFileName As String
     Dim cmpComponent As VBIDE.VBComponent
 
-   If MsgBox("Do you really want to remove all VBA modules in this document?" & vbCrLf & "(Except VBAmodul.bas)", vbOKCancel) = vbCancel Then Exit Sub
-
+    If PromptOk Then
+        If MsgBox("Do you really want to remove all VBA modules in this document?" & vbCrLf & "(Except VBAmodul.bas)", vbOKCancel) = vbCancel Then Exit Sub
+    End If
+    
     szSourceWorkbook = ActiveDocument.Name
     Set wkbSource = Application.ActiveDocument
     
@@ -269,14 +298,28 @@ Public Sub DeleteAllModules()
             Case vbext_ct_Document
                 bExport = False
         End Select
-        If szFileName = "VBAmodul.bas" Then bExport = False
+        If PromptOk Then
+            If szFileName = "VBAmodul.bas" Then bExport = False
+        End If
         
         If bExport Then
             wkbSource.VBProject.VBComponents.Remove cmpComponent
         End If
     Next cmpComponent
-
-    MsgBox "All modules has been removed (Except VBAmodul)"
+    
+    If PromptOk Then MsgBox "All modules has been removed (Except VBAmodul)"
 End Sub
 
+Function GetTimeString(ByVal d As Date) As String
 
+GetTimeString = Year(d) & Month(d) & Day(d) & AddZero(Hour(d)) & AddZero(Minute(d)) & AddZero(Second(d))
+
+End Function
+
+Function AddZero(n As Integer) As String
+If n < 10 Then
+    AddZero = "0" & n
+Else
+    AddZero = n
+End If
+End Function

@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormChooseCAS
    Caption         =   "Choose CAS"
    ClientHeight    =   2760
    ClientLeft      =   120
-   ClientTop       =   470
+   ClientTop       =   465
    ClientWidth     =   5100
    OleObjectBlob   =   "UserFormChooseCAS.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 Public ChosenCAS As Integer
 
 Private Sub CommandButton_cancel_Click()

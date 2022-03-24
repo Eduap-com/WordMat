@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormTabel
    Caption         =   "Punkter"
    ClientHeight    =   4470
    ClientLeft      =   -30
-   ClientTop       =   80
-   ClientWidth     =   4570
+   ClientTop       =   75
+   ClientWidth     =   4575
    OleObjectBlob   =   "UserFormTabel.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 
 Public raekker As Integer
 Public kolonner As Integer

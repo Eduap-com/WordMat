@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm2DGraph
    Caption         =   "Plot af grafer og punkter i planen"
    ClientHeight    =   7170
    ClientLeft      =   -30
-   ClientTop       =   50
-   ClientWidth     =   15950
+   ClientTop       =   45
+   ClientWidth     =   15945
    OleObjectBlob   =   "UserForm2DGraph.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 
 
 Option Explicit
@@ -2472,7 +2480,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormTest
    Caption         =   "UserForm1"
    ClientHeight    =   7650
    ClientLeft      =   30
-   ClientTop       =   160
-   ClientWidth     =   13210
+   ClientTop       =   165
+   ClientWidth     =   13215
    OleObjectBlob   =   "UserFormTest.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 
 
 Option Explicit

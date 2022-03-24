@@ -4337,7 +4337,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     On Error GoTo fejl
     Dim gtegn As String
     Dim ea As New ExpressionAnalyser
-    Dim pos As Integer
+    Dim pos As Integer, pos2 As Integer
     Dim udtryk As String
     Dim possep As Integer
     Dim Arr As Variant

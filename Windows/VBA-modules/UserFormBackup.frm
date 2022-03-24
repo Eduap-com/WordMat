@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormBackup
    Caption         =   "Backup?"
    ClientHeight    =   1860
    ClientLeft      =   60
-   ClientTop       =   170
+   ClientTop       =   165
    ClientWidth     =   3450
    OleObjectBlob   =   "UserFormBackup.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 
 Public Backup As Boolean
 

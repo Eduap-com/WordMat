@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormOmskriv
    Caption         =   "Omskriv"
    ClientHeight    =   5475
    ClientLeft      =   -30
-   ClientTop       =   80
+   ClientTop       =   75
    ClientWidth     =   9480.001
    OleObjectBlob   =   "UserFormOmskriv.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 
 
 Public annuller As Boolean
