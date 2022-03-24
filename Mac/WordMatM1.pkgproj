@@ -144,6 +144,22 @@
 																					<key>GID</key>
 																					<integer>80</integer>
 																					<key>PATH</key>
+																					<string>../Shared/geogebra-math-apps</string>
+																					<key>PATH_TYPE</key>
+																					<integer>1</integer>
+																					<key>PERMISSIONS</key>
+																					<integer>448</integer>
+																					<key>TYPE</key>
+																					<integer>3</integer>
+																					<key>UID</key>
+																					<integer>0</integer>
+																				</dict>
+																				<dict>
+																					<key>CHILDREN</key>
+																					<array/>
+																					<key>GID</key>
+																					<integer>80</integer>
+																					<key>PATH</key>
 																					<string>ExternalPrograms/Intel/libpicture.dylib</string>
 																					<key>PATH_TYPE</key>
 																					<integer>1</integer>
