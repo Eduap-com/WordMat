@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormNumericQuestion 
    Caption         =   "Numerisk løsning"
-   ClientHeight    =   4700
+   ClientHeight    =   4710
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   8955.001
@@ -13,6 +13,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
+
 
 
 Option Explicit
@@ -29,8 +38,10 @@ Private Sub CommandButton_cancel_Click()
     Kommentar = ""
     omax.StopNow = True
     Finished = True
-    MaxProc.CloseProcess
-    MaxProc.StartMaximaProcess
+    If CASengine = 0 Then
+        MaxProc.CloseProcess
+        MaxProc.StartMaximaProcess
+    End If
     
 '    If MaxProc.Finished = 0 Then
     Me.hide
@@ -80,8 +91,17 @@ End Sub
 
 Private Sub UserForm_Activate()
 '    PrepareMaximaNoSplash
-    Dim tempDefs As String
-    tempDefs = omax.tempDefs
+
+    If CASengine > 0 Then
+        Label2.Caption = ""
+        Label_overskrift.Caption = "Hvordan vil du løse ligningen numerisk?"
+        Label_omskrevet.Caption = ""
+        Finished = True
+        CommandButton_Omskrevet.visible = False
+        Exit Sub
+    End If
+    Dim TempDefs As String
+    TempDefs = omax.TempDefs
     SetCaptions
     Finished = False
     CommandButton_nsolve.visible = False
@@ -115,7 +135,7 @@ Private Sub UserForm_Activate()
     If Finished Then GoTo slut
     omax.PrepareNewCommand
     omax.Kommando = Ligning
-    omax.tempDefs = tempDefs
+    omax.TempDefs = TempDefs
     omax.Nsolve variabel, -3, 3, 15, 5, 0, 0
     If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
@@ -133,7 +153,7 @@ Private Sub UserForm_Activate()
     If Finished Then GoTo slut
     omax.PrepareNewCommand
     omax.Kommando = Ligning
-    omax.tempDefs = tempDefs
+    omax.TempDefs = TempDefs
     omax.Nsolve variabel, -6, 6, 15, 20, 0, 0
     If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
@@ -151,7 +171,7 @@ Private Sub UserForm_Activate()
     If Finished Then GoTo slut
     omax.PrepareNewCommand
     omax.Kommando = Ligning
-    omax.tempDefs = tempDefs
+    omax.TempDefs = TempDefs
     omax.Nsolve variabel, -15, 15, 15, 20, 30, 30, True
     If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut

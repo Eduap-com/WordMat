@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVars 
    Caption         =   "Løs ligningssystem"
-   ClientHeight    =   4460
+   ClientHeight    =   4470
    ClientLeft      =   -15
    ClientTop       =   75
    ClientWidth     =   7395
@@ -15,10 +15,19 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
+
+
+
+
+
+
+
+
 Option Explicit
 Public vars As String
-Public defs As String
-Public tempDefs As String
+Public DefS As String
+Public TempDefs As String
 Public SelectedVar As String
 Public NoEq As Integer ' no of equations to solve for
 Public Eliminate As Boolean
@@ -33,7 +42,7 @@ Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
     Dim i As Integer
     Dim c As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     
     For i = 0 To ListBox_vars.ListCount - 1
         If ListBox_vars.Selected(i) Then
@@ -43,9 +52,9 @@ On Error GoTo fejl
         End If
     Next
     If Len(TextBox_variabel.text) > 0 Then
-    arr = Split(TextBox_variabel.text, ",")
-    For i = 0 To UBound(arr)
-            SelectedVar = SelectedVar & arr(i) & ","
+    Arr = Split(TextBox_variabel.text, ",")
+    For i = 0 To UBound(Arr)
+            SelectedVar = SelectedVar & Arr(i) & ","
             c = c + 1
     Next
     End If
@@ -68,19 +77,19 @@ On Error GoTo fejl
             End If
         End If
     
-    tempDefs = TextBox_def.text
-    tempDefs = Trim(tempDefs)
-    If Len(tempDefs) > 2 Then
-    tempDefs = Replace(tempDefs, ",", ".")
-    arr = Split(tempDefs, VbCrLfMac)
-    tempDefs = ""
-    For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
-            tempDefs = tempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
+    TempDefs = TextBox_def.text
+    TempDefs = Trim(TempDefs)
+    If Len(TempDefs) > 2 Then
+    TempDefs = Replace(TempDefs, ",", ".")
+    Arr = Split(TempDefs, VbCrLfMac)
+    TempDefs = ""
+    For i = 0 To UBound(Arr)
+        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+            TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
         End If
     Next
-    If right(tempDefs, 1) = ListSeparator Then
-        tempDefs = Left(tempDefs, Len(tempDefs) - 1)
+    If right(TempDefs, 1) = ListSeparator Then
+        TempDefs = Left(TempDefs, Len(TempDefs) - 1)
     End If
     End If
     
@@ -125,18 +134,18 @@ On Error Resume Next
     
     
     ' definitioner vises
-    If Len(defs) > 3 Then
+    If Len(DefS) > 3 Then
 '    defs = Mid(defs, 2, Len(defs) - 3)
-    defs = omax.ConvertToAscii(defs)
-    defs = Replace(defs, "$", vbCrLf)
-    defs = Replace(defs, ":=", vbTab & "= ")
-    defs = Replace(defs, ":", vbTab & "= ")
+    DefS = omax.ConvertToAscii(DefS)
+    DefS = Replace(DefS, "$", vbCrLf)
+    DefS = Replace(DefS, ":=", vbTab & "= ")
+    DefS = Replace(DefS, ":", vbTab & "= ")
     If DecSeparator = "," Then
-        defs = Replace(defs, ",", ";")
-        defs = Replace(defs, ".", ",")
+        DefS = Replace(DefS, ",", ";")
+        DefS = Replace(DefS, ".", ",")
     End If
     End If
-    Label_def.Caption = defs
+    Label_def.Caption = DefS
     
     If Eliminate Then
         For i = 0 To NoEq - 2
@@ -160,7 +169,7 @@ Private Sub SetCaptions()
     CommandButton_cancel.Caption = Sprog.Cancel
     Label_unitwarning.Caption = Sprog.UnitWarning
     Label1.Caption = Sprog.PresentDefs
-    Label3.Caption = Sprog.tempDefs
+    Label3.Caption = Sprog.TempDefs
     Label_choose.Caption = Sprog.ChooseVariables
     Label_tast.Caption = ""
     

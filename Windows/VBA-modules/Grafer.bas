@@ -11,16 +11,29 @@ Public Sub StandardPlot()
         GeoGebra
     ElseIf GraphApp = 3 Then
         InsertChart
+    ElseIf GraphApp = 4 Then
+        GeoGebraWeb
     End If
 End Sub
 Public Sub Plot2DGraph()
+' gnuplot
 '    Dim omax As New CMaxima
     Dim forskrifter As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     Dim j As Integer
     On Error GoTo fejl
     Dim sstart As Long, sslut As Long
+    
+#If Mac Then
+    If MsgBox("Support for gnuplot on Mac has ended. You will be redirected to GeoGebra", vbOKCancel, "No GnuPlot") = vbOK Then
+        GraphApp = 2
+        GeoGebra
+    End If
+    Exit Sub
+#End If
+
+    
     sstart = Selection.start
     sslut = Selection.End
 
@@ -51,10 +64,10 @@ Public Sub Plot2DGraph()
     forskrifter = omax.KommandoerStreng
     
     If Len(forskrifter) > 1 Then
-    arr = Split(forskrifter, ListSeparator)
-    For i = 0 To UBound(arr)
-        arr(i) = Trim(Replace(arr(i), "  ", " ")) ' må ikke fjerne alle mellemrum da f.eks 1/x 3 så bliver 1/x3 hvor x3 er variabel
-        If arr(i) <> "" Then InsertNextEquation (arr(i))
+    Arr = Split(forskrifter, ListSeparator)
+    For i = 0 To UBound(Arr)
+        Arr(i) = Trim(Replace(Arr(i), "  ", " ")) ' må ikke fjerne alle mellemrum da f.eks 1/x 3 så bliver 1/x3 hvor x3 er variabel
+        If Arr(i) <> "" Then InsertNextEquation (Arr(i))
     Next
     End If
     
@@ -86,19 +99,19 @@ fejl:
 slut:
 End Sub
 Sub InsertNextEquation(Ligning As String)
-Dim arr As Variant
+Dim Arr As Variant
 On Error GoTo fejl
 Ligning = Replace(Ligning, VBA.ChrW(8788), "=") ' :=
 Ligning = Replace(Ligning, VBA.ChrW(8797), "=") ' tripel =
 Ligning = Replace(Ligning, VBA.ChrW(8801), "=") ' def =
 
-arr = Split(Ligning, "=")
+Arr = Split(Ligning, "=")
 
 If Not (InStr(Ligning, VBA.ChrW(9608)) > 0 And InStr(Ligning, VBA.ChrW(9508)) > 0) Then ' tuborg
-   arr = Split(arr(UBound(arr)), VBA.ChrW(8776)) ' til indsættelse af selve forskrift i stedet for f(x)
-   Ligning = omax.ConvertToAscii(arr(UBound(arr)))
+   Arr = Split(Arr(UBound(Arr)), VBA.ChrW(8776)) ' til indsættelse af selve forskrift i stedet for f(x)
+   Ligning = omax.ConvertToAscii(Arr(UBound(Arr)))
 End If
-Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
+Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(Arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
 
 If UF2Dgraph.TextBox_ligning1.text = Ligning Then
     Exit Sub
@@ -186,8 +199,8 @@ slut:
 End Sub
 Sub PlotDF()
 ' plot retningsfelt
-    Dim forskrifter As String
-    Dim arr As Variant
+    Dim forskrifter As String, s As String, v As String
+    Dim Arr As Variant
     Dim i As Integer
     Dim j As Integer
     Dim ea As New ExpressionAnalyser
@@ -198,14 +211,39 @@ Sub PlotDF()
         
     PrepareMaxima
     omax.ReadSelection
+#If Mac Then
+#Else
+    If CASengine > 0 Then
+#End If
+        s = Trim(omax.Kommando)
+        s = GetCmdAfterEqualSign(s)
+        ea.text = s
+        v = ea.GetNextVar
+        If v <> "x" And v <> "y" Then
+            If v = "t" Then
+                ea.ReplaceVar "t", "x"
+            ElseIf v = "N" Then
+                ea.ReplaceVar v, "y"
+            Else
+                ea.ReplaceVar v, "y"
+            End If
+        End If
+        s = ea.text
+        s = "SlopeField(" & s & ")"
+        OpenGeoGebraWeb s, "CAS", True, True
+        GoTo slut
+#If Mac Then
+#Else
+    End If
+#End If
     Set UF2Dgraph = New UserForm2DGraph
        
 '    forskrifter = omax.KommandoerStreng
     
         
     If Len(omax.Kommando) > 0 Then
-    arr = Split(omax.Kommando, "=")
-    omax.Kommando = arr(UBound(arr))
+    Arr = Split(omax.Kommando, "=")
+    omax.Kommando = Arr(UBound(Arr))
     End If
     UF2Dgraph.TextBox_dfligning.text = omax.ConvertToAscii(omax.Kommando)
     
@@ -277,8 +315,8 @@ Sub InsertGraphOleObject()
 Dim path As String
 Dim ils As InlineShape
 Dim fkt As String
-Dim arr As Variant
-Dim fktnavn As String, udtryk As String, lhs As String, RHS As String, varnavn As String, fktudtryk As String
+Dim Arr As Variant
+Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim dd As New DocData
 Dim listform As String
 Dim ea As New ExpressionAnalyser
@@ -309,7 +347,7 @@ path = Environ("TEMP") & "\" & "wordmatgraph.grf"
 'path = "c:\wordmatgraph.grf" ' til test
 
 Dim graphfil As New CGraphFile
-Dim deflist As String, deflist2 As String
+Dim DefList As String, deflist2 As String
 Dim i As Integer
     PrepareMaxima
     omax.ConvertLnLog = False
@@ -318,7 +356,7 @@ Dim i As Integer
     omax.ConvertLnLog = True
         
     For i = omax.defindex - 1 To 0 Step -1
-        deflist = deflist & "," & omax.DefName(i)
+        DefList = DefList & "," & omax.DefName(i)
     Next
     
     For i = omax.defindex - 1 To 0 Step -1
@@ -333,7 +371,7 @@ Dim i As Integer
                 Else
                     graphfil.InsertFunction omax.DefName(i), 0
                 End If
-                DefinerKonstanterGraph omax.DefValue(i), deflist, graphfil
+                DefinerKonstanterGraph omax.DefValue(i), DefList, graphfil
             End If
         End If
     Next
@@ -352,21 +390,21 @@ Dim i As Integer
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    arr = Split(udtryk, "=")
-                    lhs = arr(0)
-                    RHS = arr(1)
+                    Arr = Split(udtryk, "=")
+                    lhs = Arr(0)
+                    rhs = Arr(1)
                     ea.text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     If lhs = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = RHS
+                        ea.text = rhs
                         ea.pos = 1
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
-                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
+                        DefinerKonstanterGraph fktudtryk, DefList, graphfil
                         graphfil.InsertFunction fktudtryk
                     Else
-                        DefinerKonstanterGraph udtryk, deflist, graphfil, True
+                        DefinerKonstanterGraph udtryk, DefList, graphfil, True
                         graphfil.InsertRelation udtryk
                         ' blev brugt før relation
 '                        fktudtryk = ReplaceIndepvarX(rhs)
@@ -374,11 +412,11 @@ Dim i As Integer
 '                        graphfil.InsertFunction fktudtryk
                     End If
                 ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
-                    DefinerKonstanterGraph udtryk, deflist, graphfil, True
+                    DefinerKonstanterGraph udtryk, DefList, graphfil, True
                     graphfil.InsertRelation udtryk
                 Else
                     udtryk = ReplaceIndepvarX(udtryk)
-                    DefinerKonstanterGraph udtryk, deflist, graphfil
+                    DefinerKonstanterGraph udtryk, DefList, graphfil
                     graphfil.InsertFunction udtryk
                End If
             End If
@@ -455,13 +493,13 @@ slut:
 End Sub
 #If Mac Then
 #Else
-Sub DefinerKonstanterGraph(Expr As String, deflist As String, ByRef graphfil As CGraphFile, Optional noty As Boolean = False)
+Sub DefinerKonstanterGraph(Expr As String, DefList As String, ByRef graphfil As CGraphFile, Optional noty As Boolean = False)
 ' definer variable der ikke er defineret i expr
 ' deflist er en liste af variable der er defineret
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim var As String
-    ea.text = deflist
+    ea.text = DefList
     If noty Then ea.text = ea.text & ",y"
     ea2.text = Expr
     ea2.pos = 0
@@ -470,7 +508,7 @@ Dim var As String
         ea2.pos = ea2.pos + 1
         If Not (ea2.ChrByIndex(ea2.pos) = "(") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "e" And var <> "pi" And var <> "matrix" Then ' måske ikke y? kopieret fra geogebra
             graphfil.AddCustomFunction var & "=" & InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(367), Sprog.A(365), "1")
-            deflist = deflist & "," & var
+            DefList = DefList & "," & var
         End If
     Loop While var <> ""
 
@@ -485,7 +523,7 @@ Dim uvar As String
 ea.text = fkt
 var = ea.GetNextVar
 ReplacedVar = "x"
-If Not (ea.ContainsVar("x")) And var <> "" Then
+If Not (ea.ContainsVar("x")) And var <> "" And var <> "matrix" Then
     If ea.ContainsVar("t") Then
         uvar = "t"
     Else
@@ -506,7 +544,7 @@ Dim path As String
 Dim ils As InlineShape
 'Dim ws As Worksheet
 'Dim wb As Workbook
-Dim wb As Object
+Dim WB As Object
 Dim ws As Object
 'Dim xlap As Excel.Application
 Dim xlap As Object 'Excel.Application
@@ -516,8 +554,8 @@ Dim xmin As Double, xmax As Double
 Dim plinjer As Variant
 Dim linje As Variant
 Dim i As Integer
-Dim fktnavn As String, udtryk As String, lhs As String, RHS As String, varnavn As String, fktudtryk As String
-Dim arr As Variant
+Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+Dim Arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
 Dim srange As Range
@@ -547,7 +585,7 @@ If Not ExcelIndlejret Then ' åben i excel
     If cxl Is Nothing Then Set cxl = New CExcel
     cxl.LoadFile ("Graphs.xltm")
     ufwait2.Label_progress = ufwait2.Label_progress & "***"
-    Set wb = cxl.xlwb
+    Set WB = cxl.xlwb
 '    Set ws = cxl.xlwb.worksheets(1)
     Set ws = cxl.XLapp.ActiveSheet
 
@@ -556,9 +594,9 @@ Else ' indlejret
     GoToInsertPoint
     Selection.TypeParagraph
 '    Set xlap = New Excel.Application
-    Set wb = InsertIndlejret("Graphs.xltm", Sprog.A(633)) ' "tabel"
-    Set ws = wb.Sheets(1)
-    Set xlap = wb.Application
+    Set WB = InsertIndlejret("Graphs.xltm", Sprog.A(633)) ' "tabel"
+    Set ws = WB.Sheets(1)
+    Set xlap = WB.Application
 End If
     
 
@@ -591,19 +629,19 @@ End If
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    arr = Split(udtryk, "=")
-                    lhs = arr(0)
-                    RHS = arr(1)
+                    Arr = Split(udtryk, "=")
+                    lhs = Arr(0)
+                    rhs = Arr(1)
                     ea.text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
 '                    If varnavn = "" And fktnavn = Y Then varnavn = X
                     If lhs = fktnavn & "(" & varnavn & ")" Then
-                        ws.Range("B4").Offset(0, i).Value = RHS
+                        ws.Range("B4").Offset(0, i).Value = rhs
                         ws.Range("B1").Offset(0, i).Value = varnavn
                     Else
 '                        DefinerKonstanterGraph udtryk, deflist, graphfil, True
-                        ws.Range("B4").Offset(0, i).Value = RHS
+                        ws.Range("B4").Offset(0, i).Value = rhs
                         ws.Range("B1").Offset(0, i).Value = "x"
                         ' blev brugt før relation
 '                        fktudtryk = ReplaceIndepvarX(rhs)
@@ -692,13 +730,13 @@ Sub InsertChartG()
 'indsætter exceldokument som indlejret dokument
 'Dim wb As Workbook
 'Dim ws As Worksheet
-Dim wb As Object 'Workbook
+Dim WB As Object 'Workbook
 Dim ws As Object
-Dim fktnavn As String, udtryk As String, lhs As String, RHS As String, varnavn As String, fktudtryk As String
+Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim dd As New DocData
 Dim listform As String
 Dim i As Integer
-Dim arr As Variant
+Dim Arr As Variant
 Dim ea As New ExpressionAnalyser
 Dim path As String
 Dim ils As InlineShape
@@ -722,15 +760,15 @@ Set ils = ActiveDocument.InlineShapes.AddOLEObject(FileName:=path, LinkToFile:=F
 DisplayAsIcon:=False, Range:=Selection.Range)
 
 ils.OLEFormat.DoVerb (wdOLEVerbShow)
-Set wb = ils.OLEFormat.Object
+Set WB = ils.OLEFormat.Object
 DisableExcelMacros
 
 
 
 Else
-    Set wb = InsertOpenExcel("Graphs.xltm", "Tabel")
+    Set WB = InsertOpenExcel("Graphs.xltm", "Tabel")
 End If
-Set ws = wb.Sheets("Tabel")
+Set ws = WB.Sheets("Tabel")
 'Excel.Application.EnableEvents = False
 'Excel.Application.ScreenUpdating = False
 XLapp.Application.EnableEvents = False
@@ -759,14 +797,14 @@ End If
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    arr = Split(udtryk, "=")
-                    lhs = arr(0)
-                    RHS = arr(1)
+                    Arr = Split(udtryk, "=")
+                    lhs = Arr(0)
+                    rhs = Arr(1)
                     ea.text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     If lhs = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = RHS
+                        ea.text = rhs
                         ea.pos = 1
 '                        ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
@@ -805,7 +843,7 @@ hop:
 ' Opdater Excel med ændringer
 On Error Resume Next
 'wb.Application.Run ("UpDateAll")
-wb.Charts(1).Activate
+WB.Charts(1).Activate
 'Excel.Application.EnableEvents = True
 'Excel.Application.ScreenUpdating = True
 'Excel.Run ("UpDateAll")
@@ -834,8 +872,8 @@ DisplayAsIcon:=False, Range:=Selection.Range)
 'ils.OLEFormat.DoVerb (wdOLEVerbShow)
 ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 
-Set wb = ils.OLEFormat.Object
-Set ws = wb.Sheets("Tabel")
+Set WB = ils.OLEFormat.Object
+Set ws = WB.Sheets("Tabel")
 ws.Activate
 
 

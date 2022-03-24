@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormEnterEquationRef 
    Caption         =   "Indtast navn på ligning"
-   ClientHeight    =   5530
+   ClientHeight    =   5535
    ClientLeft      =   30
    ClientTop       =   165
    ClientWidth     =   6435
@@ -13,6 +13,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
+
 
 
 Option Explicit
@@ -77,7 +86,7 @@ Sub SetCaptions()
     Label_name.Caption = Sprog.A(5)
     CommandButton_cancel.Caption = Sprog.Cancel
     CommandButton_ok.Caption = Sprog.OK
-    Label_ligninger.Caption = Sprog.A(10)
+    Label_Ligninger.Caption = Sprog.A(10)
     Label_help.Caption = Sprog.A(11)
     Label_error.Caption = Sprog.A(12)
 End Sub

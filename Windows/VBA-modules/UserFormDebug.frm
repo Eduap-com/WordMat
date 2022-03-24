@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDebug 
    Caption         =   "Debug"
-   ClientHeight    =   9350.001
+   ClientHeight    =   9360.001
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   16725
@@ -13,6 +13,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
+
 
 
 Private Sub CommandButton_ok_Click()

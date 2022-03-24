@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormEquationReference 
    Caption         =   "Ligningsreference"
-   ClientHeight    =   5500
+   ClientHeight    =   5505
    ClientLeft      =   30
    ClientTop       =   165
    ClientWidth     =   4890
@@ -13,6 +13,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
+
 
 
 Option Explicit
@@ -47,6 +56,6 @@ Sub SetCaptions()
     Me.Caption = Sprog.A(15)
     CommandButton_ok.Caption = Sprog.OK
     CommandButton_cancel.Caption = Sprog.Cancel
-    Label_ligninger.Caption = Sprog.Equations
+    Label_Ligninger.Caption = Sprog.Equations
     
 End Sub

@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMaximaSettings
    ClientHeight    =   5340
    ClientLeft      =   -15
    ClientTop       =   45
-   ClientWidth     =   7395
+   ClientWidth     =   9780.001
    OleObjectBlob   =   "UserFormMaximaSettings.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,6 +13,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
+
 
 
 Option Explicit
@@ -149,6 +158,8 @@ On Error Resume Next
         GraphApp = 2
     ElseIf OptionButton_excel.Value Then
         GraphApp = 3
+    ElseIf OptionButton_geogebraweb.Value Then
+        GraphApp = 4
     End If
     
     If OptionButton_placementright.Value = True Then
@@ -163,6 +174,16 @@ On Error Resume Next
         EqNumType = True
     End If
     
+    If OptionButton_casmaxima.Value = True Then
+        CASengine = 0
+    ElseIf OptionButton_casgeogebra.Value = True Then
+        CASengine = 1
+    ElseIf OptionButton_casgeogebradirect.Value = True Then
+        CASengine = 2
+    Else
+        CASengine = 0
+    End If
+
     
     LanguageSetting = ComboBox_language.ListIndex
     Sprog.LoadSprogArray
@@ -214,15 +235,15 @@ On Error Resume Next
 '    If LangChange Then MsgBox Sprog.A(671)
 '#End If
 
-#If Mac Then
+#If Mac Then ' fjernet v. 1.23
 ' håndteres nu af unitimage for windows
-        If MustRestart Then
-            TurnUnitsOff
-        ElseIf LoadUnits And MaximaUnits Then
-            TurnUnitsOn
-        ElseIf UserUnits And MaximaUnits Then
-            UpdateUnits
-        End If
+''        If MustRestart Then
+''            TurnUnitsOff
+''        ElseIf LoadUnits And MaximaUnits Then
+''            TurnUnitsOn
+''        ElseIf UserUnits And MaximaUnits Then
+''            UpdateUnits
+''        End If
 '        If MustRestart Then
 '            MaxProc.CloseProcess
 '            If MaximaUnits Then
@@ -278,6 +299,11 @@ End Sub
 
 
 
+Private Sub OptionButton_casmaxima_Change()
+    SetCasButtons
+End Sub
+
+
 Private Sub UserForm_Activate()
     On Error Resume Next
     Dim sett As String
@@ -290,10 +316,14 @@ Private Sub UserForm_Activate()
     
 #If Mac Then
     OptionButton_graph.visible = False
+    OptionButton_gnuplot.visible = False
     CommandButton_nulstilfigurer.visible = False
     CommandButton_nulstilfysik.visible = False
     CommandButton_nulstilkemiformler.visible = False
     CommandButton_nulstilmatformler.visible = False
+    OptionButton_casgeogebradirect.visible = True
+#Else
+'    OptionButton_casgeogebradirect.visible = False
 #End If
 
     ReadAllSettingsFromRegistry
@@ -390,6 +420,8 @@ Private Sub UserForm_Activate()
         OptionButton_geogebra.Value = True
     ElseIf GraphApp = 3 Then
         OptionButton_excel.Value = True
+    ElseIf GraphApp = 4 Then
+        OptionButton_geogebraweb.Value = True
     End If
     
     If EqNumPlacement Then
@@ -404,11 +436,37 @@ Private Sub UserForm_Activate()
         OptionButton_eqnumone.Value = True
     End If
     
+    If CASengine = 0 Then
+        OptionButton_casmaxima.Value = True
+    ElseIf CASengine = 1 Then
+        OptionButton_casgeogebra.Value = True
+    ElseIf CASengine = 2 Then
+        OptionButton_casgeogebradirect.Value = True
+    Else
+        OptionButton_casmaxima.Value = True
+    End If
+    
     MustRestart = False
     LoadUnits = False
     UserUnits = False
     LangChange = False
+    
+    SetCasButtons
 
+End Sub
+
+Sub SetCasButtons()
+If OptionButton_casmaxima.Value Then
+    FrameLog.visible = True
+    CheckBox_units.visible = True
+    CheckBox_bigfloat.visible = True
+    CheckBox_showassum.visible = True
+Else
+    FrameLog.visible = False
+    CheckBox_units.visible = False
+    CheckBox_bigfloat.visible = False
+    CheckBox_showassum.visible = False
+End If
 End Sub
 
 Sub FillComboBoxCifre()
@@ -502,8 +560,8 @@ Sub SetCaptions()
     CommandButton_sletenheder.Caption = Sprog.Clear
     Label_unithelp.Caption = Sprog.UnitHelp
     Label_unitexamples.Caption = Sprog.UnitExamples
-    Frame6.Caption = Sprog.Logarithm & " output"
-    Frame7.Caption = Sprog.TrigEquations
+    FrameLog.Caption = Sprog.Logarithm & " output"
+    FrameTrig.Caption = Sprog.TrigEquations
     OptionButton_trigall.Caption = Sprog.AllSolutions
     OptionButton_trigone.Caption = Sprog.OnlyOneSolution
     CheckBox_autostart2.Caption = Sprog.AutoStart

@@ -15,6 +15,15 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
+
+
+
+
+
+
+
+
 Option Explicit
 Private gemx As Single
 Private gemy As Single
@@ -23,6 +32,7 @@ Private etikettext As String
 Private nytpunkt As Boolean
 Private nytmarkerpunkt As Boolean
 Private DisableEvents As Boolean
+Private Opened As Boolean
 
 Private Sub CommandButton_cancel_Click()
     On Error Resume Next
@@ -118,10 +128,12 @@ Dim d As String, nd As String
 Dim ea As New ExpressionAnalyser
 Dim s As String
 Dim xmin As String, xmax As String
-Dim arr As Variant, i As Integer
+Dim Arr As Variant, i As Integer
 On Error Resume Next
     SetCaptions
 #If Mac Then
+    If Opened Then Exit Sub
+    Opened = True
     Me.Left = 10
     Me.top = 80
     Label_wait.Left = 180
@@ -134,7 +146,7 @@ On Error Resume Next
 
 If Not PicOpen Then
     omax.PrepareNewCommand '
-    If Len(omax.defstring) > 1 Then
+    If Len(omax.DefString) > 1 Then
     d = omax.defstringtext
 
     d = Replace(d, "assume", "")
@@ -144,10 +156,10 @@ If Not PicOpen Then
     d = Trim(d)
     
     ' reverse definition order
-    arr = Split(d, "$")
-    nd = arr(0)
-    For i = 1 To UBound(arr)
-        If Len(arr(i)) > 0 Then nd = Trim(arr(i)) & VbCrLfMac & nd
+    Arr = Split(d, "$")
+    nd = Arr(0)
+    For i = 1 To UBound(Arr)
+        If Len(Arr(i)) > 0 Then nd = Trim(Arr(i)) & VbCrLfMac & nd
     Next
     
 '    d = Replace(d, "$", vbCrLf)
@@ -466,7 +478,7 @@ Sub ExcelPlot()
 'Dim ws As Worksheet
 'Dim wb As Workbook
 Dim ws As Object
-Dim wb As Object
+Dim WB As Object
 
 Dim path As String
 Dim ils As InlineShape
@@ -488,7 +500,7 @@ Me.hide
 
 If Not embed Then
 cxl.LoadFile ("Graphs.xltm")
-Set wb = cxl.xlwb
+Set WB = cxl.xlwb
 Set ws = cxl.xlwb.Sheets("Tabel")
     ufwait2.Label_progress = ufwait2.Label_progress & "***"
 
@@ -519,8 +531,8 @@ DisplayAsIcon:=False, Range:=Selection.Range)
 
 'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
 ils.OLEFormat.DoVerb (wdOLEVerbShow)
-Set wb = ils.OLEFormat.Object
-Set ws = wb.Sheets("Tabel")
+Set WB = ils.OLEFormat.Object
+Set ws = WB.Sheets("Tabel")
 'ws.Activate
 DisableExcelMacros
 End If
@@ -599,16 +611,16 @@ On Error GoTo slut
 
     'datapunkter
     If TextBox_punkter.text <> "" Then
-        Dim punkttekst As String, sep As String
+        Dim punkttekst As String, Sep As String
         punkttekst = Me.TextBox_punkter.text
         plinjer = Split(punkttekst, VbCrLfMac)
         For i = 0 To UBound(plinjer)
             If InStr(plinjer(i), ";") > 0 Then
-                sep = ";"
+                Sep = ";"
             Else
-                sep = ","
+                Sep = ","
             End If
-            linje = Split(plinjer(i), sep)
+            linje = Split(plinjer(i), Sep)
             If UBound(linje) > 0 Then
                 ws.Range("H7").Offset(i, 0).Value = Replace(linje(0), ",", ".")
                 ws.Range("I7").Offset(i, 0).Value = Replace(linje(1), ",", ".")
@@ -623,11 +635,11 @@ On Error GoTo slut2
     ws.Range("q3").Value = Me.TextBox_ymax.text
 'wb.Charts(1).Activate
 If TextBox_xaksetitel.text <> "" Then
-    wb.Charts(1).Axes(xlCategory, xlPrimary).AxisTitle.text = Me.TextBox_xaksetitel.text
+    WB.Charts(1).Axes(xlCategory, xlPrimary).AxisTitle.text = Me.TextBox_xaksetitel.text
     ws.ChartObjects(1).Chart.Axes(xlCategory, xlPrimary).AxisTitle.text = Me.TextBox_xaksetitel.text
 End If
 If TextBox_yaksetitel.text <> "" Then
-    wb.Charts(1).Axes(xlValue, xlPrimary).AxisTitle.text = Me.TextBox_yaksetitel.text
+    WB.Charts(1).Axes(xlValue, xlPrimary).AxisTitle.text = Me.TextBox_yaksetitel.text
     ws.ChartObjects(1).Chart.Axes(xlValue, xlPrimary).AxisTitle.text = Me.TextBox_yaksetitel.text
 End If
     ufwait2.Label_progress = ufwait2.Label_progress & "**"
@@ -636,7 +648,7 @@ End If
 XLapp.Run ("UpDateAll")
     
     ufwait2.Label_progress = ufwait2.Label_progress & "***"
-wb.Charts(1).Activate
+WB.Charts(1).Activate
 'excel.Application.EnableEvents = True
 'excel.Application.ScreenUpdating = True
 XLapp.Application.EnableEvents = True
@@ -671,7 +683,7 @@ End If
 
 End Sub
 'Sub InsertFormula(ws As Worksheet, wb As Workbook, tb As TextBox, col As Integer)
-Sub InsertFormula(ws As Variant, wb As Variant, tb As TextBox, col As Integer)
+Sub InsertFormula(ws As Variant, WB As Variant, tb As TextBox, col As Integer)
 ' indsætter formel fra textbox i kolonne col
 Dim ea As New ExpressionAnalyser
     Dim varnavn As String
@@ -715,7 +727,7 @@ If tb.text <> "" Then
         If j = i Then
         ws.Range("N6").Offset(i, 0).Value = varnavn & "="
         ws.Range("N6").Offset(i, 1).Value = 1
-        wb.Names.Add Name:="matm" & varnavn, RefersToR1C1:="=Tabel!R" & i + 6 & "C15"
+        WB.Names.Add Name:="matm" & varnavn, RefersToR1C1:="=Tabel!R" & i + 6 & "C15"
         i = i + 1
         End If
         Else
@@ -761,7 +773,7 @@ Dim pos2 As Integer
 Dim pos4 As Integer
 Dim pos5 As Integer
 Dim posog As Integer
-Dim arr As Variant
+Dim Arr As Variant
 
     ea.SetNormalBrackets
 
@@ -833,12 +845,12 @@ Dim arr As Variant
         Else
             ea.text = forskrift
             ea.pos = pos
-            arr = Split(ea.GetNextBracketContent, "&")
+            Arr = Split(ea.GetNextBracketContent, "&")
             pos2 = ea.pos
-            If UBound(arr) = 0 Then
+            If UBound(Arr) = 0 Then
                 forskrift = Replace(forskrift, VBA.ChrW(8730), "sqrt", 1, 1)
-            ElseIf UBound(arr) = 1 Then
-                rod = arr(0)
+            ElseIf UBound(Arr) = 1 Then
+                rod = Arr(0)
                 Call ea.InsertBeforePos("^(1/(" & rod & "))")
                 ea.text = Replace(ea.text, VBA.ChrW(8730), "", 1, 1)
                 posog = ea.FindChr("&", 1)
@@ -894,7 +906,7 @@ Dim ymaxg As String
 Dim labeltext As String
 Dim lign As String
 Dim punkttekst As String
-Dim arr As Variant
+Dim Arr As Variant
 Dim arr2 As Variant
 Dim i As Integer
 Dim vekt As String
@@ -1178,26 +1190,26 @@ End If
 'punkter
 If TextBox_punkter.text <> "" Then
     grafobj = grafobj & "key="""",color=black,"
-    arr = Split(TextBox_punkter.text, VbCrLfMac)
-    For i = 0 To UBound(arr)
-    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
-        arr(i) = Replace(arr(i), ",", ".")
-        arr(i) = Replace(arr(i), ";", ",")
+    Arr = Split(TextBox_punkter.text, VbCrLfMac)
+    For i = 0 To UBound(Arr)
+    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
+        Arr(i) = Replace(Arr(i), ",", ".")
+        Arr(i) = Replace(Arr(i), ";", ",")
     End If
-        arr(i) = Replace(arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
-        arr(i) = Replace(arr(i), " ", "")
-        If Len(arr(i)) > 0 Then
-        If Left(arr(i), 1) <> "(" Then
-            arr(i) = "(" & arr(i)
+        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        Arr(i) = Replace(Arr(i), " ", "")
+        If Len(Arr(i)) > 0 Then
+        If Left(Arr(i), 1) <> "(" Then
+            Arr(i) = "(" & Arr(i)
         End If
-        If right(arr(i), 1) <> ")" Then
-            arr(i) = arr(i) & ")"
+        If right(Arr(i), 1) <> ")" Then
+            Arr(i) = Arr(i) & ")"
         End If
-        arr(i) = Replace(arr(i), "),(", "],[")
-        arr(i) = Replace(arr(i), ");(", "],[")
-        arr(i) = Replace(arr(i), "(", "[")
-        arr(i) = Replace(arr(i), ")", "]")
-        punkttekst = punkttekst & arr(i) & ","
+        Arr(i) = Replace(Arr(i), "),(", "],[")
+        Arr(i) = Replace(Arr(i), ");(", "],[")
+        Arr(i) = Replace(Arr(i), "(", "[")
+        Arr(i) = Replace(Arr(i), ")", "]")
+        punkttekst = punkttekst & Arr(i) & ","
         End If
     Next
     If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
@@ -1209,26 +1221,26 @@ End If
 If TextBox_punkter2.text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=blue,"
-    arr = Split(TextBox_punkter2.text, VbCrLfMac)
-    For i = 0 To UBound(arr)
-    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
-        arr(i) = Replace(arr(i), ",", ".")
-        arr(i) = Replace(arr(i), ";", ",")
+    Arr = Split(TextBox_punkter2.text, VbCrLfMac)
+    For i = 0 To UBound(Arr)
+    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
+        Arr(i) = Replace(Arr(i), ",", ".")
+        Arr(i) = Replace(Arr(i), ";", ",")
     End If
-        arr(i) = Replace(arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
-        arr(i) = Replace(arr(i), " ", "")
-        If Len(arr(i)) > 0 Then
-        If Left(arr(i), 1) <> "(" Then
-            arr(i) = "(" & arr(i)
+        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        Arr(i) = Replace(Arr(i), " ", "")
+        If Len(Arr(i)) > 0 Then
+        If Left(Arr(i), 1) <> "(" Then
+            Arr(i) = "(" & Arr(i)
         End If
-        If right(arr(i), 1) <> ")" Then
-            arr(i) = arr(i) & ")"
+        If right(Arr(i), 1) <> ")" Then
+            Arr(i) = Arr(i) & ")"
         End If
-        arr(i) = Replace(arr(i), "),(", "],[")
-        arr(i) = Replace(arr(i), ");(", "],[")
-        arr(i) = Replace(arr(i), "(", "[")
-        arr(i) = Replace(arr(i), ")", "]")
-        punkttekst = punkttekst & arr(i) & ","
+        Arr(i) = Replace(Arr(i), "),(", "],[")
+        Arr(i) = Replace(Arr(i), ");(", "],[")
+        Arr(i) = Replace(Arr(i), "(", "[")
+        Arr(i) = Replace(Arr(i), ")", "]")
+        punkttekst = punkttekst & Arr(i) & ","
         End If
     Next
     If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
@@ -1240,22 +1252,22 @@ End If
 If TextBox_markerpunkter.text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=red,"
-    arr = Split(TextBox_markerpunkter.text, VbCrLfMac)
-    For i = 0 To UBound(arr)
-    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
-        arr(i) = Replace(arr(i), ",", ".")
-        arr(i) = Replace(arr(i), ";", ",")
+    Arr = Split(TextBox_markerpunkter.text, VbCrLfMac)
+    For i = 0 To UBound(Arr)
+    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
+        Arr(i) = Replace(Arr(i), ",", ".")
+        Arr(i) = Replace(Arr(i), ";", ",")
     End If
-        arr(i) = Replace(arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
-        arr(i) = Replace(arr(i), " ", "")
-        If Len(arr(i)) > 0 Then
+        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        Arr(i) = Replace(Arr(i), " ", "")
+        If Len(Arr(i)) > 0 Then
 '        If Left(arr(i), 1) = "(" Then
 '            arr(i) = Right(arr(i), Len(arr(i)) - 1)
 '        End If
 '        If Right(arr(i), 1) = ")" Then
 '            arr(i) = Left(arr(i), Len(arr(i)) - 1)
 '        End If
-        arr2 = Split(arr(i), ",")
+        arr2 = Split(Arr(i), ",")
         If UBound(arr2) = 1 Then
             x = arr2(0)
             Y = arr2(1)
@@ -1272,42 +1284,42 @@ End If
 'vektorer
 If TextBox_vektorer.text <> "" Then
     vekt = TextBox_vektorer.text
-    arr = Split(vekt, VbCrLfMac)
-    For i = 0 To UBound(arr)
-        If arr(i) <> "" Then
-    If InStr(arr(i), ";") > 0 Then
-        arr(i) = Replace(arr(i), ",", ".")
-        arr(i) = Replace(arr(i), ";", ",")
+    Arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(Arr)
+        If Arr(i) <> "" Then
+    If InStr(Arr(i), ";") > 0 Then
+        Arr(i) = Replace(Arr(i), ",", ".")
+        Arr(i) = Replace(Arr(i), ";", ",")
     End If
-    If InStr(arr(i), ")-(") > 0 Then
-        arr(i) = Replace(arr(i), ")-(", "],[")
-    ElseIf InStr(arr(i), ")(") > 0 Then
-        arr(i) = Replace(arr(i), ")(", "],[")
+    If InStr(Arr(i), ")-(") > 0 Then
+        Arr(i) = Replace(Arr(i), ")-(", "],[")
+    ElseIf InStr(Arr(i), ")(") > 0 Then
+        Arr(i) = Replace(Arr(i), ")(", "],[")
     Else
-        arr(i) = "[0,0]," & arr(i)
+        Arr(i) = "[0,0]," & Arr(i)
     End If
-    arr(i) = Replace(arr(i), "(", "[")
-    arr(i) = Replace(arr(i), ")", "]")
+    Arr(i) = Replace(Arr(i), "(", "[")
+    Arr(i) = Replace(Arr(i), ")", "]")
             If CheckBox_visforklaring.Value Then
-                grafobj = grafobj & "key=""Vektor: " & arr(i) & ""","
+                grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
             End If
             grafobj = grafobj & "color=" & GetNextColor & ","
             grafobj = grafobj & "line_type=solid,line_width=" & Replace(highres, ",", ".") & ",head_angle=25,head_length=" & Replace((ConvertStringToNumber(TextBox_xmax.text) - ConvertStringToNumber(TextBox_xmin.text)) / 40, ",", ".") & ","
-            grafobj = grafobj & "vector(" & arr(i) & "),"
+            grafobj = grafobj & "vector(" & Arr(i) & "),"
         End If
     Next
 End If
 
     'labels
     If Len(TextBox_labels.text) > 0 Then
-        arr = Split(TextBox_labels.text, VbCrLfMac)
-        For i = 0 To UBound(arr)
-            If InStr(arr(i), ";") > 0 Then
-                arr2 = Split(arr(i), ";")
+        Arr = Split(TextBox_labels.text, VbCrLfMac)
+        For i = 0 To UBound(Arr)
+            If InStr(Arr(i), ";") > 0 Then
+                arr2 = Split(Arr(i), ";")
             Else
-                arr2 = Split(arr(i), ",")
+                arr2 = Split(Arr(i), ",")
             End If
             If UBound(arr2) >= 2 Then
             labeltext = labeltext & "["
@@ -2147,7 +2159,7 @@ End Sub
 Private Sub CommandButton_insertpic_Click()
 Dim ils As InlineShape
 Dim s As String
-Dim sep As String
+Dim Sep As String
 On Error GoTo fejl
 #If Mac Then
 #Else
@@ -2170,23 +2182,23 @@ PicOpen = False
 #Else
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.gif", False, True)
 #End If
-sep = "|"
-s = "WordMat" & sep & AppVersion & sep & TextBox_definitioner.text & sep & TextBox_titel.text & sep & TextBox_xaksetitel.text & sep & TextBox_yaksetitel.text & sep
-s = s & TextBox_xmin.text & sep & TextBox_xmax.text & sep & TextBox_ymin.text & sep & TextBox_ymax.text & sep
-s = s & TextBox_ligning1.text & sep & TextBox_var1.text & sep & TextBox_xmin1.text & sep & TextBox_xmax1.text & sep & ComboBox_ligning1.ListIndex & sep
-s = s & TextBox_ligning2.text & sep & TextBox_var2.text & sep & TextBox_xmin2.text & sep & TextBox_xmax2.text & sep & ComboBox_ligning2.ListIndex & sep
-s = s & TextBox_ligning3.text & sep & TextBox_var3.text & sep & TextBox_xmin3.text & sep & TextBox_xmax3.text & sep & ComboBox_ligning3.ListIndex & sep
-s = s & TextBox_ligning4.text & sep & TextBox_var4.text & sep & TextBox_xmin4.text & sep & TextBox_xmax4.text & sep & ComboBox_ligning4.ListIndex & sep
-s = s & TextBox_ligning5.text & sep & TextBox_var5.text & sep & TextBox_xmin5.text & sep & TextBox_xmax5.text & sep & ComboBox_ligning5.ListIndex & sep
-s = s & TextBox_ligning6.text & sep & TextBox_var6.text & sep & TextBox_xmin6.text & sep & TextBox_xmax6.text & sep & ComboBox_ligning6.ListIndex & sep
-s = s & TextBox_lig1.text & sep & TextBox_lig2.text & sep & TextBox_Lig3.text & sep
-s = s & TextBox_parametric1x.text & sep & TextBox_parametric1y.text & sep & TextBox_tmin1.text & sep & TextBox_tmax1.text & sep
-s = s & TextBox_parametric2x.text & sep & TextBox_parametric2y.text & sep & TextBox_tmin2.text & sep & TextBox_tmax2.text & sep
-s = s & TextBox_parametric3x.text & sep & TextBox_parametric3y.text & sep & TextBox_tmin3.text & sep & TextBox_tmax3.text & sep
-s = s & TextBox_punkter.text & sep & TextBox_punkter2.text & sep & TextBox_markerpunkter.text & sep & CheckBox_pointsjoined.Value & sep & CheckBox_pointsjoined2.Value & sep & TextBox_pointsize.text & sep & TextBox_pointsize2.text & sep
-s = s & TextBox_vektorer.text & sep
-s = s & TextBox_labels.text & sep
-s = s & CheckBox_gitter.Value & sep & CheckBox_logx.Value & sep & CheckBox_logy.Value & sep & CheckBox_visforklaring.Value & sep
+Sep = "|"
+s = "WordMat" & Sep & AppVersion & Sep & TextBox_definitioner.text & Sep & TextBox_titel.text & Sep & TextBox_xaksetitel.text & Sep & TextBox_yaksetitel.text & Sep
+s = s & TextBox_xmin.text & Sep & TextBox_xmax.text & Sep & TextBox_ymin.text & Sep & TextBox_ymax.text & Sep
+s = s & TextBox_ligning1.text & Sep & TextBox_var1.text & Sep & TextBox_xmin1.text & Sep & TextBox_xmax1.text & Sep & ComboBox_ligning1.ListIndex & Sep
+s = s & TextBox_ligning2.text & Sep & TextBox_var2.text & Sep & TextBox_xmin2.text & Sep & TextBox_xmax2.text & Sep & ComboBox_ligning2.ListIndex & Sep
+s = s & TextBox_ligning3.text & Sep & TextBox_var3.text & Sep & TextBox_xmin3.text & Sep & TextBox_xmax3.text & Sep & ComboBox_ligning3.ListIndex & Sep
+s = s & TextBox_ligning4.text & Sep & TextBox_var4.text & Sep & TextBox_xmin4.text & Sep & TextBox_xmax4.text & Sep & ComboBox_ligning4.ListIndex & Sep
+s = s & TextBox_ligning5.text & Sep & TextBox_var5.text & Sep & TextBox_xmin5.text & Sep & TextBox_xmax5.text & Sep & ComboBox_ligning5.ListIndex & Sep
+s = s & TextBox_ligning6.text & Sep & TextBox_var6.text & Sep & TextBox_xmin6.text & Sep & TextBox_xmax6.text & Sep & ComboBox_ligning6.ListIndex & Sep
+s = s & TextBox_lig1.text & Sep & TextBox_lig2.text & Sep & TextBox_Lig3.text & Sep
+s = s & TextBox_parametric1x.text & Sep & TextBox_parametric1y.text & Sep & TextBox_tmin1.text & Sep & TextBox_tmax1.text & Sep
+s = s & TextBox_parametric2x.text & Sep & TextBox_parametric2y.text & Sep & TextBox_tmin2.text & Sep & TextBox_tmax2.text & Sep
+s = s & TextBox_parametric3x.text & Sep & TextBox_parametric3y.text & Sep & TextBox_tmin3.text & Sep & TextBox_tmax3.text & Sep
+s = s & TextBox_punkter.text & Sep & TextBox_punkter2.text & Sep & TextBox_markerpunkter.text & Sep & CheckBox_pointsjoined.Value & Sep & CheckBox_pointsjoined2.Value & Sep & TextBox_pointsize.text & Sep & TextBox_pointsize2.text & Sep
+s = s & TextBox_vektorer.text & Sep
+s = s & TextBox_labels.text & Sep
+s = s & CheckBox_gitter.Value & Sep & CheckBox_logx.Value & Sep & CheckBox_logy.Value & Sep & CheckBox_visforklaring.Value & Sep
 
 
 ils.AlternativeText = s
@@ -2201,34 +2213,34 @@ End Sub
 
 Sub InsertDefinitioner()
 ' indsætter definitioner fra textboxen i maximainputstring
-Dim defstring As String
+Dim DefString As String
 
 omax.InsertKillDef
 
-defstring = GetDefString
+DefString = GetDefString
 
-If Len(defstring) > 0 Then
+If Len(DefString) > 0 Then
 'defstring = Replace(defstring, ",", ".")
 'defstring = Replace(defstring, ";", ",")
 'defstring = Replace(defstring, "=", ":")
-If right(defstring, 1) = "," Then defstring = Left(defstring, Len(defstring) - 1)
+If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
 
 'omax.MaximaInputStreng = omax.MaximaInputStreng & "[" & defstring & "]$"
-omax.MaximaInputStreng = omax.MaximaInputStreng & defstring
+omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
 End If
 End Sub
 Function GetDefString()
-Dim defstring As String
+Dim DefString As String
 omax.ResetDefinitions
-defstring = TextBox_definitioner.text
-If Len(defstring) > 0 Then
-defstring = Replace(defstring, VbCrLfMac, ListSeparator)
-    defstring = TrimB(defstring, ListSeparator)
-Do While InStr(defstring, ListSeparator & ListSeparator) > 0
-    defstring = Replace(defstring, ListSeparator & ListSeparator, ListSeparator) ' dobbelt ;; fjernes
+DefString = TextBox_definitioner.text
+If Len(DefString) > 0 Then
+DefString = Replace(DefString, VbCrLfMac, ListSeparator)
+    DefString = TrimB(DefString, ListSeparator)
+Do While InStr(DefString, ListSeparator & ListSeparator) > 0
+    DefString = Replace(DefString, ListSeparator & ListSeparator, ListSeparator) ' dobbelt ;; fjernes
 Loop
-defstring = omax.AddDefinition("definer:" & defstring)
-GetDefString = defstring
+DefString = omax.AddDefinition("definer:" & DefString)
+GetDefString = DefString
 End If
 End Function
 Sub OpdaterDefinitioner()
@@ -2237,7 +2249,7 @@ Dim vars As String
 Dim var As String, var2 As String
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim arr As Variant
+Dim Arr As Variant
 Dim arr2 As Variant
 Dim i As Integer
     
@@ -2261,14 +2273,14 @@ Dim i As Integer
     Do While right(TextBox_definitioner.text, 2) = VbCrLfMac
         TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
     Loop
-    arr = Split(TextBox_definitioner.text, VbCrLfMac)
+    Arr = Split(TextBox_definitioner.text, VbCrLfMac)
     
     Do
     var = ea.GetNextListItem
     var = Replace(var, VbCrLfMac, "")
-    For i = 0 To UBound(arr)
-        If arr(i) <> "" Then
-        var2 = Split(arr(i), "=")(0)
+    For i = 0 To UBound(Arr)
+        If Arr(i) <> "" Then
+        var2 = Split(Arr(i), "=")(0)
         If var2 = var Then
             var = ""
             Exit For
@@ -2382,7 +2394,7 @@ End Sub
 
 Sub CheckForAssume()
 ' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begrænsninger på xmin og xmax
-Dim defs As String
+Dim DefS As String
 Dim pos As Integer
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
@@ -2390,7 +2402,7 @@ Dim s As String, l As String
 Dim assumelist As String
 ea.SetNormalBrackets
 ea2.SetNormalBrackets
-    defs = GetDefString()
+    DefS = GetDefString()
     TextBox_xmin1.text = ""
     TextBox_xmin2.text = ""
     TextBox_xmin3.text = ""
@@ -2404,7 +2416,7 @@ ea2.SetNormalBrackets
     TextBox_xmax5.text = ""
     TextBox_xmax6.text = ""
     
-    ea.text = defs
+    ea.text = DefS
     pos = InStr(ea.text, "assume(")
     Do While pos > 0
         s = ea.GetNextBracketContent(pos)
@@ -2426,21 +2438,21 @@ End Sub
 
 Sub InsertBoundary(var As String, assumetext As String, tbmin As TextBox, tbmax As TextBox)
 Dim dlhs As String, drhs As String
-Dim arr As Variant
-    arr = Split(assumetext, "<")
-    If UBound(arr) > 0 Then
-        dlhs = Replace(arr(0), "=", "")
-        drhs = Replace(arr(1), "=", "")
+Dim Arr As Variant
+    Arr = Split(assumetext, "<")
+    If UBound(Arr) > 0 Then
+        dlhs = Replace(Arr(0), "=", "")
+        drhs = Replace(Arr(1), "=", "")
         If dlhs = var Then
             tbmax.text = drhs
         ElseIf drhs = var Then
             tbmin.text = dlhs
         End If
     End If
-    arr = Split(assumetext, ">")
-    If UBound(arr) > 0 Then
-        dlhs = Replace(arr(0), "=", "")
-        drhs = Replace(arr(1), "=", "")
+    Arr = Split(assumetext, ">")
+    If UBound(Arr) > 0 Then
+        dlhs = Replace(Arr(0), "=", "")
+        drhs = Replace(Arr(1), "=", "")
         If dlhs = var Then
             tbmin.text = drhs
         ElseIf drhs = var Then
@@ -2469,7 +2481,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

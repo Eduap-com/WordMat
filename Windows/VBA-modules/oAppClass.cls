@@ -20,7 +20,12 @@ If Application.Documents.Count <= 2 Then
 LukTempDoc
 MaxProc.CloseProcess
 cxl.CloseExcel
-
+#If Mac Then
+#Else
+    Set WebV = Nothing
+    Set MaxProc = Nothing
+    Set MaxProcUnit = Nothing
+#End If
 '    For Each d In Application.Documents ' får WOrd til altid at spørge om der ikke skal gemmes
 '       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
 '           d.Close (False)
@@ -38,96 +43,96 @@ End Sub
 
 Private Sub oapp_WindowBeforeDoubleClick(ByVal Sel As Selection, Cancel As Boolean)
 Dim s As String
-Dim arr As Variant
+Dim Arr As Variant
 On Error GoTo slut
 If Sel.InlineShapes.Count = 0 Then GoTo slut
 If Sel.InlineShapes(1).Type = wdInlineShapePicture Then
     Set UF2Dgraph = New UserForm2DGraph
     s = Sel.InlineShapes(1).AlternativeText
-    arr = Split(s, "|")
+    Arr = Split(s, "|")
     PicOpen = False
-    If arr(0) = "WordMat" Then
+    If Arr(0) = "WordMat" Then
         ' arr(1) indeholder version. Hvis der kommer flere felter kræves nok check
         PrepareMaxima
         On Error Resume Next
-        UF2Dgraph.TextBox_definitioner.text = arr(2)
-        UF2Dgraph.TextBox_titel.text = arr(3)
-        UF2Dgraph.TextBox_xaksetitel.text = arr(4)
-        UF2Dgraph.TextBox_yaksetitel.text = arr(5)
+        UF2Dgraph.TextBox_definitioner.text = Arr(2)
+        UF2Dgraph.TextBox_titel.text = Arr(3)
+        UF2Dgraph.TextBox_xaksetitel.text = Arr(4)
+        UF2Dgraph.TextBox_yaksetitel.text = Arr(5)
         
-        UF2Dgraph.TextBox_xmin.text = arr(6)
-        UF2Dgraph.TextBox_xmax.text = arr(7)
-        UF2Dgraph.TextBox_ymin.text = arr(8)
-        UF2Dgraph.TextBox_ymax.text = arr(9)
+        UF2Dgraph.TextBox_xmin.text = Arr(6)
+        UF2Dgraph.TextBox_xmax.text = Arr(7)
+        UF2Dgraph.TextBox_ymin.text = Arr(8)
+        UF2Dgraph.TextBox_ymax.text = Arr(9)
         
-        UF2Dgraph.TextBox_ligning1.text = arr(10)
-        UF2Dgraph.TextBox_var1.text = arr(11)
-        UF2Dgraph.TextBox_xmin1.text = arr(12)
-        UF2Dgraph.TextBox_xmax1.text = arr(13)
-        UF2Dgraph.ComboBox_ligning1.ListIndex = CInt(arr(14))
+        UF2Dgraph.TextBox_ligning1.text = Arr(10)
+        UF2Dgraph.TextBox_var1.text = Arr(11)
+        UF2Dgraph.TextBox_xmin1.text = Arr(12)
+        UF2Dgraph.TextBox_xmax1.text = Arr(13)
+        UF2Dgraph.ComboBox_ligning1.ListIndex = CInt(Arr(14))
         
-        UF2Dgraph.TextBox_ligning2.text = arr(15)
-        UF2Dgraph.TextBox_var2.text = arr(16)
-        UF2Dgraph.TextBox_xmin2.text = arr(17)
-        UF2Dgraph.TextBox_xmax2.text = arr(18)
-        UF2Dgraph.ComboBox_ligning2.ListIndex = CInt(arr(19))
+        UF2Dgraph.TextBox_ligning2.text = Arr(15)
+        UF2Dgraph.TextBox_var2.text = Arr(16)
+        UF2Dgraph.TextBox_xmin2.text = Arr(17)
+        UF2Dgraph.TextBox_xmax2.text = Arr(18)
+        UF2Dgraph.ComboBox_ligning2.ListIndex = CInt(Arr(19))
         
-        UF2Dgraph.TextBox_ligning3.text = arr(20)
-        UF2Dgraph.TextBox_var3.text = arr(21)
-        UF2Dgraph.TextBox_xmin3.text = arr(22)
-        UF2Dgraph.TextBox_xmax3.text = arr(23)
-        UF2Dgraph.ComboBox_ligning3.ListIndex = CInt(arr(24))
+        UF2Dgraph.TextBox_ligning3.text = Arr(20)
+        UF2Dgraph.TextBox_var3.text = Arr(21)
+        UF2Dgraph.TextBox_xmin3.text = Arr(22)
+        UF2Dgraph.TextBox_xmax3.text = Arr(23)
+        UF2Dgraph.ComboBox_ligning3.ListIndex = CInt(Arr(24))
         
-        UF2Dgraph.TextBox_ligning4.text = arr(25)
-        UF2Dgraph.TextBox_var4.text = arr(26)
-        UF2Dgraph.TextBox_xmin4.text = arr(27)
-        UF2Dgraph.TextBox_xmax4.text = arr(28)
-        UF2Dgraph.ComboBox_ligning4.ListIndex = CInt(arr(29))
+        UF2Dgraph.TextBox_ligning4.text = Arr(25)
+        UF2Dgraph.TextBox_var4.text = Arr(26)
+        UF2Dgraph.TextBox_xmin4.text = Arr(27)
+        UF2Dgraph.TextBox_xmax4.text = Arr(28)
+        UF2Dgraph.ComboBox_ligning4.ListIndex = CInt(Arr(29))
         
-        UF2Dgraph.TextBox_ligning5.text = arr(30)
-        UF2Dgraph.TextBox_var5.text = arr(31)
-        UF2Dgraph.TextBox_xmin5.text = arr(32)
-        UF2Dgraph.TextBox_xmax5.text = arr(33)
-        UF2Dgraph.ComboBox_ligning5.ListIndex = CInt(arr(34))
+        UF2Dgraph.TextBox_ligning5.text = Arr(30)
+        UF2Dgraph.TextBox_var5.text = Arr(31)
+        UF2Dgraph.TextBox_xmin5.text = Arr(32)
+        UF2Dgraph.TextBox_xmax5.text = Arr(33)
+        UF2Dgraph.ComboBox_ligning5.ListIndex = CInt(Arr(34))
         
-        UF2Dgraph.TextBox_ligning6.text = arr(35)
-        UF2Dgraph.TextBox_var6.text = arr(36)
-        UF2Dgraph.TextBox_xmin6.text = arr(37)
-        UF2Dgraph.TextBox_xmax6.text = arr(38)
-        UF2Dgraph.ComboBox_ligning6.ListIndex = CInt(arr(39))
+        UF2Dgraph.TextBox_ligning6.text = Arr(35)
+        UF2Dgraph.TextBox_var6.text = Arr(36)
+        UF2Dgraph.TextBox_xmin6.text = Arr(37)
+        UF2Dgraph.TextBox_xmax6.text = Arr(38)
+        UF2Dgraph.ComboBox_ligning6.ListIndex = CInt(Arr(39))
         
-        UF2Dgraph.TextBox_lig1.text = arr(40)
-        UF2Dgraph.TextBox_lig2.text = arr(41)
-        UF2Dgraph.TextBox_Lig3.text = arr(42)
+        UF2Dgraph.TextBox_lig1.text = Arr(40)
+        UF2Dgraph.TextBox_lig2.text = Arr(41)
+        UF2Dgraph.TextBox_Lig3.text = Arr(42)
         
-        UF2Dgraph.TextBox_parametric1x.text = arr(43)
-        UF2Dgraph.TextBox_parametric1y.text = arr(44)
-        UF2Dgraph.TextBox_tmin1.text = arr(45)
-        UF2Dgraph.TextBox_tmax1.text = arr(46)
-        UF2Dgraph.TextBox_parametric2x.text = arr(47)
-        UF2Dgraph.TextBox_parametric2y.text = arr(48)
-        UF2Dgraph.TextBox_tmin2.text = arr(49)
-        UF2Dgraph.TextBox_tmax2.text = arr(50)
-        UF2Dgraph.TextBox_parametric3x.text = arr(51)
-        UF2Dgraph.TextBox_parametric3y.text = arr(51)
-        UF2Dgraph.TextBox_tmin3.text = arr(53)
-        UF2Dgraph.TextBox_tmax3.text = arr(54)
+        UF2Dgraph.TextBox_parametric1x.text = Arr(43)
+        UF2Dgraph.TextBox_parametric1y.text = Arr(44)
+        UF2Dgraph.TextBox_tmin1.text = Arr(45)
+        UF2Dgraph.TextBox_tmax1.text = Arr(46)
+        UF2Dgraph.TextBox_parametric2x.text = Arr(47)
+        UF2Dgraph.TextBox_parametric2y.text = Arr(48)
+        UF2Dgraph.TextBox_tmin2.text = Arr(49)
+        UF2Dgraph.TextBox_tmax2.text = Arr(50)
+        UF2Dgraph.TextBox_parametric3x.text = Arr(51)
+        UF2Dgraph.TextBox_parametric3y.text = Arr(51)
+        UF2Dgraph.TextBox_tmin3.text = Arr(53)
+        UF2Dgraph.TextBox_tmax3.text = Arr(54)
         
-        UF2Dgraph.TextBox_punkter.text = arr(55)
-        UF2Dgraph.TextBox_punkter2.text = arr(56)
-        UF2Dgraph.TextBox_markerpunkter.text = arr(57)
-        UF2Dgraph.CheckBox_pointsjoined.Value = CBool(arr(58))
-        UF2Dgraph.CheckBox_pointsjoined2.Value = CBool(arr(59))
-        UF2Dgraph.TextBox_pointsize.text = arr(60)
-        UF2Dgraph.TextBox_pointsize2.text = arr(61)
+        UF2Dgraph.TextBox_punkter.text = Arr(55)
+        UF2Dgraph.TextBox_punkter2.text = Arr(56)
+        UF2Dgraph.TextBox_markerpunkter.text = Arr(57)
+        UF2Dgraph.CheckBox_pointsjoined.Value = CBool(Arr(58))
+        UF2Dgraph.CheckBox_pointsjoined2.Value = CBool(Arr(59))
+        UF2Dgraph.TextBox_pointsize.text = Arr(60)
+        UF2Dgraph.TextBox_pointsize2.text = Arr(61)
         
-        UF2Dgraph.TextBox_vektorer.text = arr(62)
-        UF2Dgraph.TextBox_labels.text = arr(63)
+        UF2Dgraph.TextBox_vektorer.text = Arr(62)
+        UF2Dgraph.TextBox_labels.text = Arr(63)
         
-        UF2Dgraph.CheckBox_gitter.Value = CBool(arr(64))
-        UF2Dgraph.CheckBox_logx.Value = CBool(arr(65))
-        UF2Dgraph.CheckBox_logy.Value = CBool(arr(66))
-        UF2Dgraph.CheckBox_visforklaring.Value = CBool(arr(67))
+        UF2Dgraph.CheckBox_gitter.Value = CBool(Arr(64))
+        UF2Dgraph.CheckBox_logx.Value = CBool(Arr(65))
+        UF2Dgraph.CheckBox_logy.Value = CBool(Arr(66))
+        UF2Dgraph.CheckBox_visforklaring.Value = CBool(Arr(67))
                 
         
         Sel.InlineShapes(1).Select

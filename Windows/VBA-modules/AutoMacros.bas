@@ -65,6 +65,10 @@ LukTempDoc
        End If
     Next
 
+'    Set WebV = Nothing
+'    Set MaxProc = Nothing
+'    Set MaxProcUnit = Nothing
+
 End Sub
 
 

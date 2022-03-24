@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormOmskriv 
    Caption         =   "Omskriv"
-   ClientHeight    =   5470
+   ClientHeight    =   5475
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   9480.001
@@ -15,8 +15,17 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
+
+
+
+
+
+
+
+
 Public annuller As Boolean
-Public tempDefs As String
+Public TempDefs As String
 Public vars As String
 Public SammeLinje As Boolean
 
@@ -51,19 +60,19 @@ Sub ExecuteOK()
     End If
 
 
-    tempDefs = TextBox_def.text
-    tempDefs = Trim(tempDefs)
-    If Len(tempDefs) > 2 Then
-    tempDefs = Replace(tempDefs, ",", ".")
-    arr = Split(tempDefs, VbCrLfMac)
-    tempDefs = ""
-    For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
-            tempDefs = tempDefs & arr(i) & ListSeparator
+    TempDefs = TextBox_def.text
+    TempDefs = Trim(TempDefs)
+    If Len(TempDefs) > 2 Then
+    TempDefs = Replace(TempDefs, ",", ".")
+    Arr = Split(TempDefs, VbCrLfMac)
+    TempDefs = ""
+    For i = 0 To UBound(Arr)
+        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+            TempDefs = TempDefs & Arr(i) & ListSeparator
         End If
     Next
-    If right(tempDefs, 1) = ListSeparator Then
-        tempDefs = Left(tempDefs, Len(tempDefs) - 1)
+    If right(TempDefs, 1) = ListSeparator Then
+        TempDefs = Left(TempDefs, Len(TempDefs) - 1)
     End If
     End If
 
@@ -83,7 +92,7 @@ Private Sub CommandButton_oksammelinje_Click()
 End Sub
 
 Private Sub UserForm_Activate()
-Dim arr As Variant
+Dim Arr As Variant
     SetCaptions
     If MaximaUnits Then
         Label_enheder.visible = True
@@ -115,14 +124,23 @@ Dim arr As Variant
 
     
     
-    arr = Split(vars, ";")
+    Arr = Split(vars, ";")
     ' definitioner vises
     
-    For i = 0 To UBound(arr)
-        If arr(i) <> "" Then
-            TextBox_def.text = TextBox_def.text & arr(i) & "=" & VbCrLfMac    ' midlertidige definitioner
+    For i = 0 To UBound(Arr)
+        If Arr(i) <> "" Then
+            TextBox_def.text = TextBox_def.text & Arr(i) & "=" & VbCrLfMac    ' midlertidige definitioner
         End If
     Next
+    
+    If CASengine = 0 Then
+        CheckBox_rationaliser.visible = True
+        Label_rationaliser.visible = True
+    Else
+        CheckBox_rationaliser.visible = False
+        Label_rationaliser.visible = False
+    End If
+    
     Application.ScreenUpdating = True
 
 End Sub
@@ -140,7 +158,7 @@ End Sub
 
 Private Sub SetCaptions()
     Me.Caption = Sprog.RibReduce
-    Label5.Caption = Sprog.tempDefs
+    Label5.Caption = Sprog.TempDefs
     Frame6.Caption = Sprog.Logarithm & " output"
     CommandButton_annuller.Caption = Sprog.Cancel
     Label_enheder.Caption = Sprog.OutputUnits

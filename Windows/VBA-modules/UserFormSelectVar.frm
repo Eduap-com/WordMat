@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar 
    Caption         =   "Løs ligning"
-   ClientHeight    =   4180
+   ClientHeight    =   4185
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   9360.001
@@ -15,10 +15,19 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
+
+
+
+
+
+
+
+
 Option Explicit
 Public vars As String
-Public defs As String
-Public tempDefs As String
+Public DefS As String
+Public TempDefs As String
 Public SelectedVar As String
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
 
@@ -30,7 +39,7 @@ End Sub
 
 Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
-Dim arr As Variant
+Dim Arr As Variant
 Dim i As Integer
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
@@ -39,6 +48,8 @@ Dim i As Integer
     Else
         MaximaExact = 0
     End If
+
+    
     MaximaVidNotation = CheckBox_vidnotation.Value
     MaximaCifre = ComboBox_cifre.Value
     If MaximaUnits Then
@@ -56,17 +67,17 @@ Dim i As Integer
         SelectedVar = TextBox_variabel.text
     End If
     
-    tempDefs = TextBox_def.text
-    tempDefs = Trim(tempDefs)
-    If Len(tempDefs) > 2 Then
-    tempDefs = Replace(tempDefs, ",", ".")
-    arr = Split(tempDefs, VbCrLfMac)
+    TempDefs = TextBox_def.text
+    TempDefs = Trim(TempDefs)
+    If Len(TempDefs) > 2 Then
+    TempDefs = Replace(TempDefs, ",", ".")
+    Arr = Split(TempDefs, VbCrLfMac)
 
-    tempDefs = ""
-    For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
-            If Split(arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
-                tempDefs = tempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
+    TempDefs = ""
+    For i = 0 To UBound(Arr)
+        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+            If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
+                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & SelectedVar & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
@@ -81,9 +92,20 @@ Dim i As Integer
         End If
     End If
     
-    If right(tempDefs, 1) = ListSeparator Then
-        tempDefs = Left(tempDefs, Len(tempDefs) - 1)
+    If right(TempDefs, 1) = ListSeparator Then
+        TempDefs = Left(TempDefs, Len(TempDefs) - 1)
     End If
+    End If
+    
+    If ComboBox_cas.ListIndex = 0 Then
+        If CASengine <> 0 Then
+            CASengine = 0
+'            PrepareMaxima
+        End If
+    ElseIf ComboBox_cas.ListIndex = 1 Then
+        CASengine = 2
+    Else
+        CASengine = 1
     End If
     
     GoTo slut
@@ -137,6 +159,13 @@ Dim i As Integer, svar As String
     CheckBox_vidnotation.Value = MaximaVidNotation
     ComboBox_cifre.Value = MaximaCifre
 
+    If CASengine = 0 Then
+        ComboBox_cas.ListIndex = 0
+    ElseIf CASengine = 1 Then
+        ComboBox_cas.ListIndex = 2
+    Else
+        ComboBox_cas.ListIndex = 1
+    End If
 
     SelectedVar = ""
     ListBox_vars.Clear
@@ -144,27 +173,26 @@ Dim i As Integer, svar As String
     Svars = Split(vars, ";")
     
     ' definitioner vises
-    If Len(defs) > 3 Then
+    If Len(DefS) > 3 Then
 '    defs = Mid(defs, 2, Len(defs) - 3)
-    defs = omax.ConvertToAscii(defs)
-    defs = Replace(defs, "$", vbCrLf)
-    defs = Replace(defs, ":=", vbTab & "= ")
-    defs = Replace(defs, ":", vbTab & "= ")
+    DefS = omax.ConvertToAscii(DefS)
+    DefS = Replace(DefS, "$", vbCrLf)
+    DefS = Replace(DefS, ":=", vbTab & "= ")
+    DefS = Replace(DefS, ":", vbTab & "= ")
     If DecSeparator = "," Then
-        defs = Replace(defs, ",", ";")
-        defs = Replace(defs, ".", ",")
+        DefS = Replace(DefS, ",", ";")
+        DefS = Replace(DefS, ".", ",")
     End If
     End If
-    Label_def.Caption = defs
+    Label_def.Caption = DefS
     
      For i = 0 To UBound(Svars)
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
             ListBox_vars.AddItem (svar)
-            TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac    ' midlertidige definitioner
+            If UBound(Svars) > 0 Then TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac               ' midlertidige definitioner
         End If
     Next
-    
     If ListBox_vars.ListCount > 0 Then
         ListBox_vars.ListIndex = 0
     End If
@@ -176,11 +204,16 @@ Dim i As Integer
     For i = 2 To 16
         ComboBox_cifre.AddItem i
     Next
-
+End Sub
+Sub FillComboBoxCAS()
+    ComboBox_cas.AddItem "Maxima"
+    ComboBox_cas.AddItem "GeoGebra"
+    ComboBox_cas.AddItem "GeoGebra Browser"
 End Sub
 
 Private Sub UserForm_Initialize()
     FillComboBoxCifre
+    FillComboBoxCAS
 End Sub
 Private Sub SetCaptions()
     Me.Caption = Sprog.SolveEquation
@@ -189,7 +222,7 @@ Private Sub SetCaptions()
     CommandButton_ok.Caption = Sprog.OK
     CommandButton_cancel.Caption = Sprog.Cancel
     Label4.Caption = Sprog.PresentDefs
-    Label5.Caption = Sprog.tempDefs
+    Label5.Caption = Sprog.TempDefs
     Label8.Caption = Sprog.RibSettings
     Frame5.Caption = Sprog.Exact & " ?"
     OptionButton_exactandnum.Caption = Sprog.Auto
