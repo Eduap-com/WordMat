@@ -112,13 +112,16 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                     Else
                         fktudtryk = ReplaceIndepvarX(rhs)
                         DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                        Cmd = fktnavn & "(x)=" & fktudtryk
+                        If fktnavn = "y" Then
+                            Cmd = fktnavn & "=" & fktudtryk
+                        Else
+                            Cmd = fktnavn & "(x)=" & fktudtryk
+                        End If
                         Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
                         UrlLink = UrlLink & Cmd
                         j = j + 1
                     End If
                 ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
-                ' kan først bruges med GeoGebra 4.0
                     DefinerKonstanter udtryk, DefList, Nothing, UrlLink
                     Cmd = "u" & j & "=" & udtryk
                     Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
@@ -471,6 +474,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
     
    
    ea.text = text
+   ea.ReplaceVar "NIntegrate", "NIntegral"
    ea.ReplaceVar "Integrate", "Integral"
    ea.ReplaceVar "minf", "-infinity"
    ea.ReplaceVar "inf", "infinity"

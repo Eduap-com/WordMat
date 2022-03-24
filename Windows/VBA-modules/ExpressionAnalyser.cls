@@ -1039,6 +1039,8 @@ Else
     pos = spos
 End If
 
+If pos > Len(text) Then Exit Function
+
 Do
     Do
         c = ChrByIndex(pos)
@@ -1080,6 +1082,7 @@ GetNextListItem = Mid(text, spos, pos - spos)
 If right(GetNextListItem, 1) = Sep Then
     GetNextListItem = Left(GetNextListItem, Len(GetNextListItem) - 1)
 End If
+
 End Function
 Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
     Dim s As String, t As String

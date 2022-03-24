@@ -3105,7 +3105,11 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
                 If c = "|" Then
                     If Not (ea.IsOperator(ea.ChrByIndex(posb - 1), 4)) Then
                         If matvekt Or InStr(ea.text, VBA.ChrW(9632)) > 0 Then
-                            ea.text = Left(ea.text, pos - 1) & "vecmag(" & Mid(ea.text, pos + 1, posb - pos - 1) & ")" & right(ea.text, Len(ea.text) - posb)
+                            If CasType = 0 Then
+                                ea.text = Left(ea.text, pos - 1) & "vecmag(" & Mid(ea.text, pos + 1, posb - pos - 1) & ")" & right(ea.text, Len(ea.text) - posb)
+                            Else
+                                ea.text = Left(ea.text, pos - 1) & "length(" & Mid(ea.text, pos + 1, posb - pos - 1) & ")" & right(ea.text, Len(ea.text) - posb)
+                            End If
                         Else
                             ea.text = Left(ea.text, pos - 1) & "abs(" & Mid(ea.text, pos + 1, posb - pos - 1) & ")" & right(ea.text, Len(ea.text) - posb)
                         End If
@@ -7094,7 +7098,7 @@ Function GetAssumeText(defenk) As String
             defenk = ""
             ea.SetNormalBrackets
             Do
-                s = ea.GetNextListItem
+                s = ea.GetNextListItem(ea.pos)
                 If InStr(s, "#") > 0 Then
                     Arr = Split(s, "#")
                     s = "notequal(" & Arr(0) & "," & Arr(1) & ")"
@@ -7103,10 +7107,12 @@ Function GetAssumeText(defenk) As String
                     p1 = ea2.FindNextGreaterOrLower(1)
                     p2 = ea2.FindNextGreaterOrLower(p1 + 1)
                     If p2 > 0 Then    ' 2<=x<=3
-                        If ea.ChrByIndex(p1 + 1) = "=" Then
-                            s = Left(s, p2 - 1) & "," & right(s, Len(s) - p1 - 1)
-                        Else
-                            s = Left(s, p2 - 1) & "," & right(s, Len(s) - p1)
+                        If CASengine = 0 Then
+                            If ea.ChrByIndex(p1 + 1) = "=" Then
+                                s = Left(s, p2 - 1) & "," & right(s, Len(s) - p1 - 1)
+                            Else
+                                s = Left(s, p2 - 1) & "," & right(s, Len(s) - p1)
+                            End If
                         End If
                     End If
                 End If

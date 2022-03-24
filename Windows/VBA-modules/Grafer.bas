@@ -199,7 +199,7 @@ slut:
 End Sub
 Sub PlotDF()
 ' plot retningsfelt
-    Dim forskrifter As String
+    Dim forskrifter As String, s As String, v As String
     Dim Arr As Variant
     Dim i As Integer
     Dim j As Integer
@@ -211,6 +211,31 @@ Sub PlotDF()
         
     PrepareMaxima
     omax.ReadSelection
+#If Mac Then
+#Else
+    If CASengine > 0 Then
+#End If
+        s = Trim(omax.Kommando)
+        s = GetCmdAfterEqualSign(s)
+        ea.text = s
+        v = ea.GetNextVar
+        If v <> "x" And v <> "y" Then
+            If v = "t" Then
+                ea.ReplaceVar "t", "x"
+            ElseIf v = "N" Then
+                ea.ReplaceVar v, "y"
+            Else
+                ea.ReplaceVar v, "y"
+            End If
+        End If
+        s = ea.text
+        s = "SlopeField(" & s & ")"
+        OpenGeoGebraWeb s, "CAS", True, True
+        GoTo slut
+#If Mac Then
+#Else
+    End If
+#End If
     Set UF2Dgraph = New UserForm2DGraph
        
 '    forskrifter = omax.KommandoerStreng

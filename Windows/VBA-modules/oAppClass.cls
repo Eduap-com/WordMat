@@ -20,11 +20,12 @@ If Application.Documents.Count <= 2 Then
 LukTempDoc
 MaxProc.CloseProcess
 cxl.CloseExcel
-
+#If Mac Then
+#Else
     Set WebV = Nothing
     Set MaxProc = Nothing
     Set MaxProcUnit = Nothing
-
+#End If
 '    For Each d In Application.Documents ' får WOrd til altid at spørge om der ikke skal gemmes
 '       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
 '           d.Close (False)
