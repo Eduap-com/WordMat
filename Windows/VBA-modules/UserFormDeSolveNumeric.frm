@@ -23,6 +23,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Option Explicit
 Public luk As Boolean
 Public InsertType As Integer
