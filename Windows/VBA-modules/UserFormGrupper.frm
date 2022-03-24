@@ -15,6 +15,14 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
+
+
+
+
+
+
+
 Option Explicit
 Private Sub CommandButton_nulstil_Click()
     TextBox_data.text = ""
@@ -28,7 +36,7 @@ Dim v As Double
 Dim Min As Double
 Dim Max As Double
 Dim n As Integer
-Dim arr As Variant
+Dim Arr As Variant
 Dim arrdata As Variant
 Dim arrint As Variant
 Dim i As Integer
@@ -77,16 +85,16 @@ Tabel.Columns.Width = 50
 
 ' fyld tabel med data
 For i = 0 To n
-    arr = Split(arrint(i), "-")
-    Min = arr(0)
-    If UBound(arr) = 0 Then
-        If Trim(arr(0)) = "" Then
+    Arr = Split(arrint(i), "-")
+    Min = Arr(0)
+    If UBound(Arr) = 0 Then
+        If Trim(Arr(0)) = "" Then
             
         Else
             GoTo fejl
         End If
     End If
-    Max = arr(1)
+    Max = Arr(1)
     Tabel.Cell(i + 2, 1).Range.text = Min
     Tabel.Cell(i + 2, 2).Range.text = Max
     Tabel.Cell(i + 2, 3).Range.text = 0

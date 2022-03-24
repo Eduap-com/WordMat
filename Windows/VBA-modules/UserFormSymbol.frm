@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSymbol 
    Caption         =   "Symbol"
-   ClientHeight    =   4880
+   ClientHeight    =   4875
    ClientLeft      =   -15
    ClientTop       =   30
    ClientWidth     =   4710
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 
 
 Public tegn As String

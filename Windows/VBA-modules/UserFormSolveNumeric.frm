@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSolveNumeric 
    Caption         =   "Løsning af ligning med grafiske og numeriske metoder"
-   ClientHeight    =   7390
+   ClientHeight    =   7395
    ClientLeft      =   -15
    ClientTop       =   75
    ClientWidth     =   14250
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 
 Option Explicit
 Public udtryk As String
@@ -61,22 +69,22 @@ End Sub
 
 Private Sub CommandButton_insertpic_Click()
 Dim ils As InlineShape
-Dim s As String, arr As Variant, sep As String
+Dim s As String, Arr As Variant, Sep As String
 On Error GoTo fejl
 omax.GoToEndOfSelectedMaths
 Selection.TypeParagraph
-arr = Split(Label_ligning.Caption, "=")
+Arr = Split(Label_ligning.Caption, "=")
 #If Mac Then
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.pdf", False, True)
 #Else
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.gif", False, True)
 #End If
 'Set ils = Selection.InlineShapes.AddPicture(Environ("TEMP") & "\WordMatGraf.gif", False, True)
-sep = "|"
-s = "WordMat" & sep & AppVersion & sep & "" & sep & "" & sep & TextBox_variabel.text & sep & "" & sep
-s = s & TextBox_xmin.text & sep & TextBox_xmax.text & sep & "" & sep & "" & sep
-s = s & arr(0) & sep & TextBox_variabel.text & sep & "" & sep & "" & sep & "" & sep
-s = s & arr(1) & sep & TextBox_variabel.text & sep & "" & sep & "" & sep & "" & sep
+Sep = "|"
+s = "WordMat" & Sep & AppVersion & Sep & "" & Sep & "" & Sep & TextBox_variabel.text & Sep & "" & Sep
+s = s & TextBox_xmin.text & Sep & TextBox_xmax.text & Sep & "" & Sep & "" & Sep
+s = s & Arr(0) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & Arr(1) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
 ils.AlternativeText = s
 GoTo slut
 fejl:
@@ -289,11 +297,11 @@ Sub OpdaterGraf()
 On Error GoTo fejl
 #If Mac Then
 Dim text As String
-Dim arr As Variant
-    arr = Split(Label_ligning.Caption, "=")
+Dim Arr As Variant
+    Arr = Split(Label_ligning.Caption, "=")
     
-    text = "line_width=2,color=green,explicit(" & arr(0) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & "),"
-    text = text & "color=red,explicit(" & arr(1) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & ")"
+    text = "line_width=2,color=green,explicit(" & Arr(0) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & "),"
+    text = text & "color=red,explicit(" & Arr(1) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & ")"
 '    If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
 '        text = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.text) & "," & ConvertNumberToMaxima(TextBox_xmax.text) & "]"
 '    End If
@@ -324,7 +332,7 @@ slut:
 
 End Sub
 Private Sub UserForm_Activate()
-Dim arr As Variant
+Dim Arr As Variant
 Dim i As Integer
 On Error Resume Next
     SetCaptions
@@ -359,7 +367,7 @@ On Error GoTo fejl
     TextBox_xmin.text = "-5"
     TextBox_xmax.text = "5"
     Label_ligning.Caption = omax.ConvertToAscii(udtryk)
-    arr = Split(vars, ";")
+    Arr = Split(vars, ";")
     Set gemr = Selection.Range
     gemstartr = Selection.Range.start
     gemslutr = Selection.Range.End
@@ -371,8 +379,8 @@ On Error GoTo fejl
 '    If ListBox_vars.ListCount > 0 Then
 '        ListBox_vars.ListIndex = SelVarIndex
 '    End If
-    If UBound(arr) >= 0 And TextBox_variabel.text = vbNullString Then
-        TextBox_variabel.text = arr(0)
+    If UBound(Arr) >= 0 And TextBox_variabel.text = vbNullString Then
+        TextBox_variabel.text = Arr(0)
     End If
     
 '    If omax Is Nothing Then

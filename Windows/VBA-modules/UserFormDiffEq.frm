@@ -15,10 +15,18 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
+
+
+
+
+
+
+
 Option Explicit
-Public defs As String
+Public DefS As String
 Public vars As String
-Public tempDefs As String
+Public TempDefs As String
 Public luk As Boolean
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
 
@@ -28,28 +36,28 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-Dim arr As Variant
+Dim Arr As Variant
 Dim i As Integer
     
     
-    tempDefs = TextBox_def.text
-    tempDefs = Trim(tempDefs)
-    If Len(tempDefs) > 2 Then
-    tempDefs = Replace(tempDefs, ",", ".")
-    arr = Split(tempDefs, VbCrLfMac)
-    tempDefs = ""
-    For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
-            If Split(arr(i), "=")(0) <> TextBox_funktion.text Then ' kan ikke definere variabel der løses for
-                tempDefs = tempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
+    TempDefs = TextBox_def.text
+    TempDefs = Trim(TempDefs)
+    If Len(TempDefs) > 2 Then
+    TempDefs = Replace(TempDefs, ",", ".")
+    Arr = Split(TempDefs, VbCrLfMac)
+    TempDefs = ""
+    For i = 0 To UBound(Arr)
+        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+            If Split(Arr(i), "=")(0) <> TextBox_funktion.text Then ' kan ikke definere variabel der løses for
+                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & TextBox_funktion.text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
             End If
         End If
     Next
-    If right(tempDefs, 1) = ListSeparator Then
-        tempDefs = Left(tempDefs, Len(tempDefs) - 1)
+    If right(TempDefs, 1) = ListSeparator Then
+        TempDefs = Left(TempDefs, Len(TempDefs) - 1)
     End If
     End If
     
@@ -122,7 +130,7 @@ Sub SetCaptions()
     Label2.Caption = Sprog.DepVar
     Label4.Caption = Sprog.StartCond
     Label8.Caption = Sprog.A(297)
-    Label_temp.Caption = Sprog.tempDefs
+    Label_temp.Caption = Sprog.TempDefs
     CommandButton_cancel.Caption = Sprog.Cancel
     CommandButton_ok.Caption = Sprog.OK
 End Sub

@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDeSolveNumeric 
    Caption         =   "Løs differentialligning(er) numerisk"
-   ClientHeight    =   7460
+   ClientHeight    =   7455
    ClientLeft      =   45
    ClientTop       =   150
    ClientWidth     =   16050
@@ -13,6 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
+
+
+
+
+
+
 
 
 Option Explicit
@@ -36,7 +44,7 @@ End Sub
 
 Private Sub CommandButton_insertgraph_Click()
 Dim ils As InlineShape
-Dim sep As String, s As String
+Dim Sep As String, s As String
 Dim pointText As String, i As Long
 Dim pointText2 As String
     On Error GoTo fejl
@@ -68,23 +76,23 @@ Dim pointText2 As String
 #Else
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.gif", False, True)
 #End If
-sep = "|"
-s = "WordMat" & sep & AppVersion & sep & TextBox_definitioner.text & sep & "" & sep & TextBox_varx.text & sep & TextBox_var1.text & sep
-s = s & TextBox_xmin.text & sep & TextBox_xmax.text & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep & TextBox_ymin.text & sep & TextBox_ymax.text & sep
-s = s & "" & sep & "" & sep & "" & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep & "" & sep
-s = s & "" & sep & "" & sep & "" & sep & "" & sep
-s = s & pointText & sep & pointText2 & sep & "" & sep & CheckBox_pointsjoined.Value & sep & CheckBox_pointsjoined.Value & sep & "2" & sep & "2" & sep
-s = s & "" & sep
-s = s & "" & sep
-s = s & "true" & sep & "false" & sep & "false" & sep & "false" & sep
+Sep = "|"
+s = "WordMat" & Sep & AppVersion & Sep & TextBox_definitioner.text & Sep & "" & Sep & TextBox_varx.text & Sep & TextBox_var1.text & Sep
+s = s & TextBox_xmin.text & Sep & TextBox_xmax.text & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & TextBox_ymin.text & Sep & TextBox_ymax.text & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & pointText & Sep & pointText2 & Sep & "" & Sep & CheckBox_pointsjoined.Value & Sep & CheckBox_pointsjoined.Value & Sep & "2" & Sep & "2" & Sep
+s = s & "" & Sep
+s = s & "" & Sep
+s = s & "true" & Sep & "false" & Sep & "false" & Sep & "false" & Sep
 
 
 ils.AlternativeText = s
@@ -378,7 +386,7 @@ Sub SolveDE()
     ListOutput = omax.MaximaOutput
     
     Dim s As String, i As Long, j As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     ReDim PointArr(Npoints, n)
     ea.text = ListOutput
     ea.SetSquareBrackets
@@ -387,9 +395,9 @@ Sub SolveDE()
     End If
     Do
         s = ea.GetNextBracketContent(0)
-        arr = Split(s, ListSeparator)
-        For j = 0 To UBound(arr)
-            PointArr(i, j) = arr(j)
+        Arr = Split(s, ListSeparator)
+        For j = 0 To UBound(Arr)
+            PointArr(i, j) = Arr(j)
         Next
         i = i + 1
     Loop While ea.pos < ea.Length - 1 And i < 1000
@@ -548,34 +556,34 @@ End Sub
 
 Sub InsertDefinitioner()
 ' indsætter definitioner fra textboxen i maximainputstring
-Dim defstring As String
+Dim DefString As String
 
 omax.InsertKillDef
 
-defstring = GetDefString
+DefString = GetDefString
 
-If Len(defstring) > 0 Then
+If Len(DefString) > 0 Then
 'defstring = Replace(defstring, ",", ".")
 'defstring = Replace(defstring, ";", ",")
 'defstring = Replace(defstring, "=", ":")
-If right(defstring, 1) = "," Then defstring = Left(defstring, Len(defstring) - 1)
+If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
 
 'omax.MaximaInputStreng = omax.MaximaInputStreng & "[" & defstring & "]$"
-omax.MaximaInputStreng = omax.MaximaInputStreng & defstring
+omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
 End If
 End Sub
 Function GetDefString()
-Dim defstring As String
+Dim DefString As String
 omax.ResetDefinitions
-defstring = TextBox_definitioner.text
-If Len(defstring) > 0 Then
-defstring = Replace(defstring, vbCrLf, ListSeparator)
-    defstring = TrimB(defstring, ListSeparator)
-Do While InStr(defstring, ListSeparator & ListSeparator) > 0
-    defstring = Replace(defstring, ListSeparator & ListSeparator, ListSeparator) ' dobbelt ;; fjernes
+DefString = TextBox_definitioner.text
+If Len(DefString) > 0 Then
+DefString = Replace(DefString, vbCrLf, ListSeparator)
+    DefString = TrimB(DefString, ListSeparator)
+Do While InStr(DefString, ListSeparator & ListSeparator) > 0
+    DefString = Replace(DefString, ListSeparator & ListSeparator, ListSeparator) ' dobbelt ;; fjernes
 Loop
-defstring = omax.AddDefinition("definer:" & defstring)
-GetDefString = defstring
+DefString = omax.AddDefinition("definer:" & DefString)
+GetDefString = DefString
 End If
 End Function
 
@@ -585,7 +593,7 @@ Dim vars As String
 Dim var As String, var2 As String
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim arr As Variant
+Dim Arr As Variant
 Dim arr2 As Variant
 Dim i As Integer
     
@@ -618,14 +626,14 @@ Dim i As Integer
     Do While right(TextBox_definitioner.text, 2) = vbCrLf
         TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
     Loop
-    arr = Split(TextBox_definitioner.text, vbCrLf)
+    Arr = Split(TextBox_definitioner.text, vbCrLf)
     
     Do
     var = ea.GetNextListItem
     var = Replace(var, vbCrLf, "")
-    For i = 0 To UBound(arr)
-        If arr(i) <> "" Then
-        var2 = Split(arr(i), "=")(0)
+    For i = 0 To UBound(Arr)
+        If Arr(i) <> "" Then
+        var2 = Split(Arr(i), "=")(0)
         If var2 = var Then
             var = ""
             Exit For

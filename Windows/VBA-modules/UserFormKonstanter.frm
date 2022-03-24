@@ -15,6 +15,14 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
+
+
+
+
+
+
+
 Option Explicit
 
 Private Sub CommandButton_annuller_Click()
@@ -123,7 +131,7 @@ Sub SetCaptions()
     CheckBox_G.Caption = "G = 6" & DecSeparator & "67428 " & g & " 10" & ChrW(&H207B) & ChrW(185) & ChrW(185) & " Nm" & ChrW(178) & " kg" & ChrW(&H207B) & ChrW(178) & "   -   " & Sprog.A(269)
     CheckBox_ge.Caption = "g_" & Sprog.A(255) & " = 9" & DecSeparator & "82 m s" & ChrW(&H207B) & ChrW(178) & "   -   " & Sprog.A(270)
     CheckBox_e.Caption = "e" & ChrW(&H2097) & " = 1" & DecSeparator & "602176487 " & g & " 10" & ChrW(&H207B) & ChrW(185) & ChrW(&H2079) & " C    -   " & Sprog.A(271)
-    CheckBox_NA.Caption = "N_A = 6" & DecSeparator & "02214179 " & g & " 10" & ChrW(185) & ChrW(179) & " mol" & ChrW(&H207B) & ChrW(185) & "   -   " & Sprog.A(272)
+    CheckBox_NA.Caption = "N_A = 6" & DecSeparator & "02214179 " & g & " 10" & ChrW(178) & ChrW(179) & " mol" & ChrW(&H207B) & ChrW(185) & "   -   " & Sprog.A(272)
     CheckBox_R.Caption = "R = 8" & DecSeparator & "314472 J/(mol K)    -    " & Sprog.A(273)
     CheckBox_R2.Caption = "R = 0" & DecSeparator & "0821 l atm/(mol K)    -    " & Sprog.A(273)
     CheckBox_k.Caption = "k = 1" & DecSeparator & "3806504 " & g & " 10" & ChrW(&H207B) & ChrW(178) & ChrW(179) & " J K" & ChrW(&H207B) & ChrW(185) & "   -   " & Sprog.A(274)
