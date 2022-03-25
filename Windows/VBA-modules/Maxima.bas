@@ -107,6 +107,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         End If
     End If
 #End If
+    omax.ConvertLnLog = True ' andre funktioner kan ændre denne. den nulstilles
     omax.PrepareNewCommand    ' nulstiller og finder definitioner
 
     If op Then
