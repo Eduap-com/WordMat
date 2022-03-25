@@ -24,6 +24,7 @@ Public Sub Plot2DGraph()
     Dim j As Integer
     On Error GoTo fejl
     Dim sstart As Long, sslut As Long
+    Dim TempCas As Integer
     
 #If Mac Then
     If MsgBox("Support for gnuplot on Mac has ended. You will be redirected to GeoGebra", vbOKCancel, "No GnuPlot") = vbOK Then
@@ -36,7 +37,9 @@ Public Sub Plot2DGraph()
     
     sstart = Selection.start
     sslut = Selection.End
-
+    
+    TempCas = CASengine
+    CASengine = 0
     PrepareMaxima
     omax.ReadSelection
 '    If UF2Dgraph Is Nothing Then
@@ -97,6 +100,7 @@ Public Sub Plot2DGraph()
 fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
+    CASengine = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
 Dim Arr As Variant
@@ -576,15 +580,15 @@ dd.ReadSelection
     DoEvents
 
 Application.ScreenUpdating = False
-    Dim ufwait2 As New UserFormWaitForMaxima
-    ufwait2.Show vbModeless
+    Dim UfWait2 As New UserFormWaitForMaxima
+    UfWait2.Show vbModeless
     DoEvents
-    ufwait2.Label_progress = "***"
+    UfWait2.Label_progress = "***"
 
 If Not ExcelIndlejret Then ' åben i excel
     If cxl Is Nothing Then Set cxl = New CExcel
     cxl.LoadFile ("Graphs.xltm")
-    ufwait2.Label_progress = ufwait2.Label_progress & "***"
+    UfWait2.Label_progress = UfWait2.Label_progress & "***"
     Set WB = cxl.xlwb
 '    Set ws = cxl.xlwb.worksheets(1)
     Set ws = cxl.XLapp.ActiveSheet
@@ -603,7 +607,7 @@ End If
 'excel.Application.EnableEvents = False
 'excel.Application.ScreenUpdating = False
 
-    ufwait2.Label_progress = ufwait2.Label_progress & "*****"
+    UfWait2.Label_progress = UfWait2.Label_progress & "*****"
 
 ' indstillinger
 If Radians Then
@@ -699,11 +703,11 @@ fejl:
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 slut:
 On Error GoTo slut2
-    ufwait2.Label_progress = ufwait2.Label_progress & "**"
+    UfWait2.Label_progress = UfWait2.Label_progress & "**"
     xlap.Run ("Auto_open")
 xlap.Run ("UpDateAll")
 'excel.Run ("UpDateAll")
-ufwait2.Label_progress = ufwait2.Label_progress & "***"
+UfWait2.Label_progress = UfWait2.Label_progress & "***"
 
 'If Not wb Is Nothing Then ' start på tabel sheet, ikke graph
 '    wb.Charts(1).Activate
@@ -714,7 +718,7 @@ slut2:
 '    excel.Application.EnableEvents = True
 '    excel.Application.ScreenUpdating = True
 '    excel.Application.DisplayAlerts = True
-    Unload ufwait2
+    Unload UfWait2
     xlap.EnableEvents = True
     xlap.ScreenUpdating = True
 
@@ -954,13 +958,13 @@ On Error GoTo fejl
 Application.ScreenUpdating = False
 EnableExcelMacros
     
-    Dim ufwait2 As New UserFormWaitForMaxima
-    ufwait2.CommandButton_stop.visible = False
-    ufwait2.Label_tip.Caption = "      " & Sprog.A(372) & "..."
-    ufwait2.Label_progress.Caption = Sprog.A(373) ' "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
-    ufwait2.Show vbModeless
+    Dim UfWait2 As New UserFormWaitForMaxima
+    UfWait2.CommandButton_stop.visible = False
+    UfWait2.Label_tip.Caption = "      " & Sprog.A(372) & "..."
+    UfWait2.Label_progress.Caption = Sprog.A(373) ' "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
+    UfWait2.Show vbModeless
         DoEvents
-        ufwait2.Label_progress = "***"
+        UfWait2.Label_progress = "***"
 #If Mac Then
 path = GetWordMatDir() & "Excelfiles/" & filnavn
 #Else
@@ -992,7 +996,7 @@ End If
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.SheetMacroEnabled" & vers & Application.Version, _
 FileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
         
-        ufwait2.Label_progress = "***************************************"
+        UfWait2.Label_progress = "***************************************"
 'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
 'ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 'ils.OLEFormat.DoVerb (wdOLEVerbShow)
@@ -1008,7 +1012,7 @@ If startark <> "" Then
 '    oWS.ActiveSheet.Application.Selection.Paste ' virker ikke
 '    oWS.Selection.Paste
 End If
-Unload ufwait2
+Unload UfWait2
 'Ils.OLEFormat.DoVerb (wdOLEVerbUIActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
@@ -1017,7 +1021,7 @@ GoTo slut
 fejl:
     On Error Resume Next
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-    Unload ufwait2
+    Unload UfWait2
 slut:
 End Function
 

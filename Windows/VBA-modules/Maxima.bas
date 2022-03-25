@@ -6,7 +6,7 @@ Public UFSelectVars As UserFormSelectVars
 Public omax As CMaxima
 Public tid As Double
 Private DeVarList As String
-Private TempCAS As Integer
+Private TempCas As Integer
 
 Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     '    Dim UFwait2 As UserFormWaitForMaxima
@@ -23,15 +23,15 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     
     SaveBackup
     
-    Dim ufwait2 As UserFormWaitStartup
+    Dim UfWait2 As UserFormWaitStartup
     op = False
     If Not SettingsRead Then ReadAllSettingsFromRegistry
 
     If omax Is Nothing Then
         LavRCMenu    ' højreklikmenu på ligninger
         SetMathAutoCorrect
-        If ufwait2 Is Nothing Then Set ufwait2 = New UserFormWaitStartup
-        ufwait2.Show vbModeless
+        If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+        UfWait2.Show vbModeless
         op = True
 #If Mac Then
         Set d = ActiveDocument
@@ -45,8 +45,8 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         '        Set MaxProc = New MathMenu.MaximaProcessClass
         If Not op Then
             '                Set ufwait2 = New UserFormWaitStartup
-            If ufwait2 Is Nothing Then Set ufwait2 = New UserFormWaitStartup
-            ufwait2.Show vbModeless
+            If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+            UfWait2.Show vbModeless
             op = True
 #If Mac Then
             Set d = ActiveDocument
@@ -85,8 +85,8 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     If MaximaUnits Then
         If MaxProcUnit Is Nothing Then
             If Not op Then
-                If ufwait2 Is Nothing Then Set ufwait2 = New UserFormWaitStartup
-                ufwait2.Show vbModeless
+                If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+                UfWait2.Show vbModeless
                 op = True
 #If Mac Then
                 Set d = ActiveDocument
@@ -110,7 +110,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     omax.PrepareNewCommand    ' nulstiller og finder definitioner
 
     If op Then
-        Unload ufwait2
+        Unload UfWait2
 #If Mac Then
         d.Activate
 #End If
@@ -118,7 +118,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     GoTo slut
 fejl:
     On Error Resume Next
-    Unload ufwait2
+    Unload UfWait2
 slut:
 End Sub
 #If Mac Then
@@ -447,7 +447,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim UFSolvenumeric As New UserFormNumericQuestion
     Dim ea As New ExpressionAnalyser
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    TempCAS = CASengine
+    TempCas = CASengine
     '    PrepareMaximaNoSplash  ' ved ikke hvorfor det var nosplash, erstattet
     PrepareMaxima
     omax.prevspr = ""
@@ -651,21 +651,21 @@ newcas:
                 CASengine = 2
                 GoTo newcas
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
-                TempCAS = CASengine
+                TempCas = CASengine
                 CASengine = 2
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
-                CASengine = TempCAS
+                CASengine = TempCas
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
                 CASengine = 1
                 GoTo newcas
             Else ' grafisk geogebra
-                TempCAS = CASengine
+                TempCas = CASengine
                 CASengine = 1
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                CASengine = TempCAS
+                CASengine = TempCas
                 GoTo slut
             End If
         ElseIf False Then
@@ -799,21 +799,21 @@ newcassys:
                 CASengine = 2
                 GoTo newcassys
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
-                TempCAS = CASengine
+                TempCas = CASengine
                 CASengine = 2
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
-                CASengine = TempCAS
+                CASengine = TempCas
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
                 CASengine = 1
                 GoTo newcassys
             Else ' grafisk geogebra
-                TempCAS = CASengine
+                TempCas = CASengine
                 CASengine = 1
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                CASengine = TempCAS
+                CASengine = TempCas
                 GoTo slut
             End If
         ElseIf Len(omax.MaximaOutput) > 1 Then
@@ -881,7 +881,7 @@ fejl:
 slut:
     '    omax.Luk
     On Error Resume Next
-    CASengine = TempCAS
+    CASengine = TempCas
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos

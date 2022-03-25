@@ -217,7 +217,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     Dim svar As String
     Dim spr As Boolean
     
-    If CASengine > 0 Then Exit Sub
+'    If CASengine > 0 Then Exit Sub  ' giver problemer med gnuplot
     
 #If Mac Then
     RunMaximaFile
@@ -256,8 +256,8 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     '        MaxProc.Units = 0
     '    End If
     i = 0
-    Dim ufwait2 As UserFormWaitForMaxima
-    Set ufwait2 = New UserFormWaitForMaxima
+    Dim UfWait2 As UserFormWaitForMaxima
+    Set UfWait2 = New UserFormWaitForMaxima
 
 '    Dim UFStartup As New UserFormWaitStartup  ' slettet 18/2 2017 Hvad skulle den?
     If StopTime < -2 Then    ' ved grafer og enkelte andre nsolve
@@ -288,12 +288,12 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         '    MsgBox (MaxProc.LastMaximaOutput)
         Exit Sub
     ElseIf StopTime < 0 Then
-        ufwait2.Show vbModeless
+        UfWait2.Show vbModeless
         DoEvents
         MaxProc.ExecuteMaximaCommand MaximaInputStreng, 1
         FindLastMaximaOutput
         ResetMaxima
-        Unload ufwait2
+        Unload UfWait2
         '        MaxProc.CloseProcess ' gør at den hænger lidt, måske nødvendig
         ShowDebug
         Exit Sub
@@ -301,28 +301,28 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     Else
 
         If MaxProc.Finished = 0 Then
-            ufwait2.Show vbModeless
+            UfWait2.Show vbModeless
             DoEvents
             Do While MaxProc.Finished = 0 And i < 50
                 If Round(i / 8) = i / 8 Then
-                    ufwait2.Label_progress.Caption = ufwait2.Label_progress.Caption & "*"
+                    UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
                 End If
                 Wait (0.1)
                 i = i + 1
             Loop
-            ufwait2.Label_tip.Font.Size = 10
-            ufwait2.Label_tip.Font.Italic = False
-            ufwait2.Label_tip.Caption = GetRandomTip
+            UfWait2.Label_tip.Font.Size = 10
+            UfWait2.Label_tip.Font.Italic = False
+            UfWait2.Label_tip.Caption = GetRandomTip
         End If
         If StopNow Then
-            Unload ufwait2
+            Unload UfWait2
             MaxProc.CloseProcess
             MaxProc.StartMaximaProcess
             Exit Sub
         End If
 
         MaxProc.ExecuteMaximaCommand MaximaInputStreng, 0
-        ufwait2.Label_progress.Caption = ufwait2.Label_progress.Caption & "*"
+        UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
     End If
 
 
@@ -350,7 +350,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         ResetMaxima
     End If
     On Error Resume Next
-    Unload ufwait2
+    Unload UfWait2
     GoTo slut
 fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -394,7 +394,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
 End Function
 Sub WaitForMaximaForm(StopTime As Integer)
     Dim i As Integer
-    Dim ufwait2 As New UserFormWaitForMaxima
+    Dim UfWait2 As New UserFormWaitForMaxima
     
     i = 0
 #If Mac Then
@@ -408,7 +408,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
     If MaxProc.Finished = 0 Then
         '    ufwait2.omax = omax
         On Error Resume Next
-        ufwait2.Show vbModeless
+        UfWait2.Show vbModeless
         DoEvents
         On Error GoTo fejl
         i = 0
@@ -421,13 +421,13 @@ Sub WaitForMaximaForm(StopTime As Integer)
             i = i + 1
 #End If
             If Round(i / 8) = i / 8 Then
-                ufwait2.Label_progress.Caption = ufwait2.Label_progress.Caption & "*"
+                UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
             ElseIf Round(i / 60) = i / 60 Then
-                ufwait2.Label_tip.Font.Size = 10
-                ufwait2.Label_tip.Font.Italic = False
-                ufwait2.Label_tip.Caption = GetRandomTip
-            ElseIf Len(ufwait2.Label_progress.Caption) > 33 Then
-                ufwait2.Label_progress.Caption = "*"
+                UfWait2.Label_tip.Font.Size = 10
+                UfWait2.Label_tip.Font.Italic = False
+                UfWait2.Label_tip.Caption = GetRandomTip
+            ElseIf Len(UfWait2.Label_progress.Caption) > 33 Then
+                UfWait2.Label_progress.Caption = "*"
             End If
             '        If i = 50 Then
             '            ufwait2.Label_tip.Caption = "         Regner stadig..."
@@ -441,19 +441,19 @@ Sub WaitForMaximaForm(StopTime As Integer)
             '        ElseIf stoptime > 450 Then
             '            DoEvents
             If i = StopTime - 200 Then
-                ufwait2.Label_tip.Caption = "om 20s stoppes automatisk."
+                UfWait2.Label_tip.Caption = "om 20s stoppes automatisk."
             ElseIf i = StopTime - 150 Then
-                ufwait2.Label_tip.Caption = "om 15s stoppes automatisk."
+                UfWait2.Label_tip.Caption = "om 15s stoppes automatisk."
             ElseIf i = StopTime - 100 Then
-                ufwait2.Label_tip.Caption = "om 10s stoppes automatisk."
+                UfWait2.Label_tip.Caption = "om 10s stoppes automatisk."
             ElseIf i = StopTime - 50 Then
-                ufwait2.Label_tip.Caption = "om 5s stoppes automatisk."
+                UfWait2.Label_tip.Caption = "om 5s stoppes automatisk."
             ElseIf i = StopTime Then
-                ufwait2.Label_tip.Caption = "Det lykkedes ikke. Stopper."
+                UfWait2.Label_tip.Caption = "Det lykkedes ikke. Stopper."
             End If
             If StopNow Then
                 '            MaxProc.ConsoleInterrupt
-                Unload ufwait2
+                Unload UfWait2
                 ShowDebug
                 Dim tmis As String
                 tmis = MaximaInputStreng
@@ -464,11 +464,11 @@ Sub WaitForMaximaForm(StopTime As Integer)
         Loop
         If i >= StopTime Then
             StopNow = True
-            Unload ufwait2
+            Unload UfWait2
             MaxProc.CloseProcess
             Exit Sub
         Else
-            Unload ufwait2
+            Unload UfWait2
         End If
     End If
     GoTo slut
@@ -568,20 +568,20 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 
     Dim s As String, i As Integer, WT As String
     Dim FN As String
-    Dim ufwait2 As UserFormWaitForMaxima
+    Dim UfWait2 As UserFormWaitForMaxima
     If StopTime > 0 Then
         WT = StopTime
     Else
         WT = "10"
     End If
-    Set ufwait2 = New UserFormWaitForMaxima
+    Set UfWait2 = New UserFormWaitForMaxima
     On Error Resume Next ' hvis en form allerede er åben giver det fejl
-    ufwait2.Show vbModeless
-    ufwait2.Label_tip.Font.Size = 10
-    ufwait2.Label_tip.Font.Italic = False
+    UfWait2.Show vbModeless
+    UfWait2.Label_tip.Font.Size = 10
+    UfWait2.Label_tip.Font.Italic = False
     On Error GoTo 0
 start:
-    ufwait2.Label_tip.Caption = GetRandomTip
+    UfWait2.Label_tip.Caption = GetRandomTip
     DoEvents
   FN = DataFolder & "output.txt"
     s = ExecuteMaximaViaFile(MaximaInputStreng, WT, MaximaUnits)
@@ -601,7 +601,7 @@ start:
 '    Loop
     FindLastMaximaOutput ConvertWordSymbols, s
 '    GenerateOutputArray (s)
-    Unload ufwait2
+    Unload UfWait2
 #End If
 End Sub
 Public Sub RunMaximaFileOld()
