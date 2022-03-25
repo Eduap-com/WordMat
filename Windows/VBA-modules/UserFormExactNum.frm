@@ -2,7 +2,7 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormExactNum 
    ClientHeight    =   1215
    ClientLeft      =   30
-   ClientTop       =   165
+   ClientTop       =   170
    ClientWidth     =   2040
    OleObjectBlob   =   "UserFormExactNum.frx":0000
    StartUpPosition =   1  'CenterOwner

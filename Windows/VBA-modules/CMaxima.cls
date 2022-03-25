@@ -6470,7 +6470,7 @@ Arr = Split(s, VbCrLfMac) ' ændret v. 1.23
     ant = UBound(Arr)
     If ant > 0 Then
         t = Trim(Arr(ant))
-        If t = "true" Or t = "false" Or t = "unknown" Then
+        If t = "true" Or t = "false" Or t = "unknown" Or t = "expt: undefined: 0 to a negative exponent." Then
             s = vbNullString
             For i = 0 To ant - 1
                 s = s & Arr(i)

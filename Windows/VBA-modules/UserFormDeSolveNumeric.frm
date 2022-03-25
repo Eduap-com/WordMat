@@ -2,7 +2,7 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDeSolveNumeric 
    Caption         =   "Løs differentialligning(er) numerisk"
    ClientHeight    =   7455
-   ClientLeft      =   45
+   ClientLeft      =   50
    ClientTop       =   150
    ClientWidth     =   16050
    OleObjectBlob   =   "UserFormDeSolveNumeric.frx":0000
