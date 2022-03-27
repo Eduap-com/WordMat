@@ -3353,6 +3353,10 @@ SA(685, 0) = "Problemet kunne ikke løses. Vil du prøve med en anden metode eller
 SA(685, 1) = "The problem copuld not be solved. Do you want to try another method or CAS-engine?"
 SA(685, 2) = ""
 
+SA(686, 0) = "CAS motor"
+SA(686, 1) = "CAS engine"
+SA(686, 2) = ""
+
 'Problemet kunne ikke løses. Vil du prøve med en anden CAS motor?
 End Sub
 

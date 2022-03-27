@@ -9,6 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 Public Kommando As String    ' kommando som maxima skal udføre
+Public KommandoForklaring As String ' til skrivning af kommando
 Private Kommandoer() As String    ' kommandoer som maxima skal udføre. KommandoerStreng må bruges public
 Public MaximaOutput As String    ' resultat fra Maxima
 Public KommentarOutput As String    ' evt. kommentar fra Maxima
@@ -889,7 +890,7 @@ Sub MaximaSolve(variabel As String)
 
     ikommando = Kommando    ' kommando gemmes. Denne pilles der ikke ved
 start:
-    Kommando = "Solve(" & Kommando & "," & variabel & ")"    ' kun til output af kommando forklaring
+    KommandoForklaring = "Solve(" & Kommando & "," & variabel & ")"    ' kun til output af kommando forklaring
 
     ckommando = CodeForMaxima(ikommando)    ' coded kommando
 
@@ -1624,7 +1625,10 @@ start:
     Dim eql As String
     nr = UBound(Minput)
 
-    If MaximaExact = 0 And Not MaximaVidNotation And Not MaximaUnits Then
+    If nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = moutput(1)
+    ElseIf MaximaExact = 0 And Not MaximaVidNotation And Not MaximaUnits Then
         Dim exactres As String
         Dim numres As String
         moutput(nr - 1) = Replace(moutput(nr - 1), vbLf, "")

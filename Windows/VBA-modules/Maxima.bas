@@ -446,7 +446,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim IsSolved As Boolean
     Dim scrollpos As Double
     Dim UFSolvenumeric As New UserFormNumericQuestion
-    Dim ea As New ExpressionAnalyser
+    Dim ea As New ExpressionAnalyser, SaveKommando As String
     scrollpos = ActiveWindow.VerticalPercentScrolled
     TempCas = CASengine
     '    PrepareMaximaNoSplash  ' ved ikke hvorfor det var nosplash, erstattet
@@ -498,12 +498,14 @@ Sub MaximaSolvePar(Optional variabel As String)
         UFSolvenumeric.Ligning = omax.Kommando
 
         omax.FindVariable
+        SaveKommando = omax.Kommando
 newcas:
+        omax.Kommando = SaveKommando
         If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
             If Not InStr(omax.vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
-                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
                 ea.text = omax.Kommando
+                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
                 s = ""
                 Do
                     v = ea.GetNextVar()
@@ -514,7 +516,10 @@ newcas:
                     ea.pos = ea.pos + 1
                 Loop While v <> ""
                 If s <> "" And Radians Then s = "pi/2"
-                If s <> "" Then UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
+                If s <> "" Then
+                    UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TempDefs = "0<=" & omax.vars & "<=" & s
+                End If
             End If
         End If
         If variabel = vbNullString Then
@@ -642,6 +647,7 @@ newcas:
         ElseIf omax.MaximaOutput = "?" Or omax.MaximaOutput = "" Or InStr(omax.KommentarOutput, "Lisp error") > 0 Or (Not LmSet And Not IsSolved) Then
             UserFormChooseCAS.Show
             If UserFormChooseCAS.ChosenCAS = 2 Then ' maxima num
+                CASengine = 0
                 GoTo stophop
             ElseIf UserFormChooseCAS.ChosenCAS = -1 Then
                 GoTo slut
@@ -652,21 +658,17 @@ newcas:
                 CASengine = 2
                 GoTo newcas
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
-                TempCas = CASengine
                 CASengine = 2
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
-                CASengine = TempCas
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
                 CASengine = 1
                 GoTo newcas
             Else ' grafisk geogebra
-                TempCas = CASengine
                 CASengine = 1
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                CASengine = TempCas
                 GoTo slut
             End If
         ElseIf False Then
@@ -835,7 +837,7 @@ newcassys:
                         Selection.TypeText Sprog.A(136)
                     End If
                 End If
-            ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8709)) > 0 Then
+            ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8709)) > 0 And CASengine > 0 Then
                 Selection.TypeParagraph
                 Selection.TypeText "GeoGebra har været anvendt til at løse ligningssystemet. Det er usikkert om der kan være løsninger. Det anbefales at forsøge med anden metode. Fx Maxima, eller numerisk/grafisk"
             End If
@@ -1126,6 +1128,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     '    LockWindow
     Dim IsSolved As Boolean
     Dim scrollpos As Double
+    Dim ea As New ExpressionAnalyser, s As String, v As String, t As String
     scrollpos = ActiveWindow.VerticalPercentScrolled
 
     '    PrepareMaximaNoSplash
@@ -1173,23 +1176,40 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         ' kun 1 ligning
 
         UFnsolve.Ligning = omax.Kommando
+        omax.FindVariable
         
+        If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
+            If Not InStr(omax.vars, ";") > 0 Then ' metoden virker kun med 1 variabel
+                ea.SetNormalBrackets
+                ea.text = omax.Kommando
+                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
+                s = ""
+                Do
+                    v = ea.GetNextVar()
+                    If v = "sin" Or v = "cos" Or v = "tan" Then
+                        t = ea.GetNextBracketContent()
+                        If InStr(t, omax.vars) > 0 Then s = "90"
+                    End If
+                    ea.pos = ea.pos + 1
+                Loop While v <> ""
+                If s <> "" And Radians Then s = "pi/2"
+                If s <> "" Then
+                    UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TempDefs = "0<=" & omax.vars & "<=" & s
+                End If
+            End If
+        End If
         If variabel = vbNullString Then
-            omax.FindVariable
             UFSelectVar.vars = omax.vars
             UFSelectVar.DefS = omax.DefString
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
         End If
         
-        If variabel = "" Then
-            GoTo slut
-        End If
         If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVar.TempDefs
         
-        Dim s As String
-        Dim lhs As String, rhs As String, ea As New ExpressionAnalyser
+        Dim lhs As String, rhs As String
         If CASengine = 1 Or CASengine = 2 Then
             s = Trim(omax.Kommando)
             s = Replace(s, vbCrLf, "")

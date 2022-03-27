@@ -91,7 +91,7 @@ Dim Res As String
     Dim JS As String, Arr() As String, ArrDef() As String, ArrCas() As String, Cmd As String, s As String, i As Integer, AssumeCol As New Collection, AssumeString As String, AE As Variant
     Dim FC As Integer
     If WebV Is Nothing Then PrepareGeoGebraCAS
-    JS = "ggbApplet.reset();"
+    JS = "ggbApplet.reset();" 'ggbApplet.setRounding(""" & MaximaCifre & "s"");"
     If UseDefs Then
         If GeoGebraDefs <> "" Then
             ArrDef = Split(GeoGebraDefs, ";")
