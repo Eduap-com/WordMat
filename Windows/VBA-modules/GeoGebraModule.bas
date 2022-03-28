@@ -318,7 +318,7 @@ End Function
 Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = True) As String
 '        If Defliste <> "" Then Defliste = Defliste & ";"
         Dim Res As String, i As Integer, s As String
-        Dim ufwait2 As UserFormWaitForMaxima
+        Dim UfWait2 As UserFormWaitForMaxima
 '        On Error Resume Next
 
         If UseDefs Then FindGeoGebraDefsAndAssumes
@@ -330,38 +330,38 @@ Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = Tr
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd)
         i = 0
         If Left(Res, 9) = "reloading" Then
-            Set ufwait2 = New UserFormWaitForMaxima
-            ufwait2.Label_tip.Font.Size = 10
-            ufwait2.Label_tip.Font.Italic = False
-            ufwait2.Show vbModeless
-            ufwait2.Label_tip.Caption = Sprog.A(684)
-            ufwait2.Label_progress.Caption = "*"
+            Set UfWait2 = New UserFormWaitForMaxima
+            UfWait2.Label_tip.Font.Size = 10
+            UfWait2.Label_tip.Font.Italic = False
+            UfWait2.Show vbModeless
+            UfWait2.Label_tip.Caption = Sprog.A(684)
+            UfWait2.Label_progress.Caption = "*"
 #If Mac Then
             Do
                 Wait (0.2)
-                ufwait2.Label_progress.Caption = ufwait2.Label_progress.Caption & "*"
-                If ufwait2.StopNow Then GoTo slut
+                UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
             Loop Until i > 50
             Wait (1)
 #End If
-            ufwait2.Label_tip.Caption = "Executing GeoGebra command"
+            UfWait2.Label_tip.Caption = "Executing GeoGebra command"
             Res = ExecuteGeoGebraCasCommand(Cmd)
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#€" & Defliste)
         ElseIf Left(Res, 7) = "opening" Or Res = "null" Then
-            Set ufwait2 = New UserFormWaitForMaxima
-            ufwait2.Label_tip.Font.Size = 10
-            ufwait2.Label_tip.Font.Italic = False
-            ufwait2.Show vbModeless
-            ufwait2.Label_tip.Caption = Sprog.A(684)
-            ufwait2.Label_progress.Caption = "*"
+            Set UfWait2 = New UserFormWaitForMaxima
+            UfWait2.Label_tip.Font.Size = 10
+            UfWait2.Label_tip.Font.Italic = False
+            UfWait2.Show vbModeless
+            UfWait2.Label_tip.Caption = Sprog.A(684)
+            UfWait2.Label_progress.Caption = "*"
 #If Mac Then
             Do
                 Wait (0.2)
-                ufwait2.Label_progress.Caption = ufwait2.Label_progress.Caption & "*"
-                If ufwait2.StopNow Then GoTo slut
+                UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -370,7 +370,7 @@ Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = Tr
 #Else
 '            Wait (1)
 #End If
-            ufwait2.Label_tip.Caption = "Executing GeoGebra command"
+            UfWait2.Label_tip.Caption = "Executing GeoGebra command"
             Res = ExecuteGeoGebraCasCommand(Cmd)
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#€" & Defliste)
         ElseIf Left(Res, 5) = "error" Then
@@ -382,7 +382,7 @@ Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = Tr
         omax.MaximaOutput = Res
         RunGeoGebraDirect = Res
 slut:
-     If Not ufwait2 Is Nothing Then Unload ufwait2
+     If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
 
 Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As Boolean = True, Optional HtmlReady As Boolean = False) As String

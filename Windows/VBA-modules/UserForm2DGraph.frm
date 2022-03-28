@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Private gemx As Single
 Private gemy As Single
@@ -492,17 +481,17 @@ Dim i As Integer
 If cxl Is Nothing Then Set cxl = New CExcel
 Application.ScreenUpdating = False
 Me.hide
-    Dim ufwait2 As New UserFormWaitForMaxima
-    ufwait2.Show vbModeless
+    Dim UfWait2 As New UserFormWaitForMaxima
+    UfWait2.Show vbModeless
     DoEvents
-    ufwait2.Label_progress = "***"
+    UfWait2.Label_progress = "***"
 
 
 If Not embed Then
 cxl.LoadFile ("Graphs.xltm")
 Set WB = cxl.xlwb
 Set ws = cxl.xlwb.Sheets("Tabel")
-    ufwait2.Label_progress = ufwait2.Label_progress & "***"
+    UfWait2.Label_progress = UfWait2.Label_progress & "***"
 
 'Dim excl As Object
 
@@ -517,7 +506,7 @@ PrepareMaximaNoSplash
 omax.GoToEndOfSelectedMaths
 'Selection.Collapse wdCollapseEnd
 Selection.TypeParagraph
-    ufwait2.Label_progress = ufwait2.Label_progress & "**"
+    UfWait2.Label_progress = UfWait2.Label_progress & "**"
 
 EnableExcelMacros
 
@@ -526,7 +515,7 @@ DisplayAsIcon:=False, Range:=Selection.Range)
 
 'Ils.Height = 300
 'Ils.Width = 500
-    ufwait2.Label_progress = ufwait2.Label_progress & "***********"
+    UfWait2.Label_progress = UfWait2.Label_progress & "***********"
 
 
 'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
@@ -542,7 +531,7 @@ XLapp.Application.ScreenUpdating = False
 'excel.Application.EnableEvents = False
 'excel.Application.ScreenUpdating = False
 
-    ufwait2.Label_progress = ufwait2.Label_progress & "*****"
+    UfWait2.Label_progress = UfWait2.Label_progress & "*****"
 xmin = val(TextBox_xmin.text)
 xmax = val(TextBox_xmax.text)
 If xmin < xmax Then
@@ -642,19 +631,19 @@ If TextBox_yaksetitel.text <> "" Then
     WB.Charts(1).Axes(xlValue, xlPrimary).AxisTitle.text = Me.TextBox_yaksetitel.text
     ws.ChartObjects(1).Chart.Axes(xlValue, xlPrimary).AxisTitle.text = Me.TextBox_yaksetitel.text
 End If
-    ufwait2.Label_progress = ufwait2.Label_progress & "**"
+    UfWait2.Label_progress = UfWait2.Label_progress & "**"
 
 'excel.Run ("UpDateAll")
 XLapp.Run ("UpDateAll")
     
-    ufwait2.Label_progress = ufwait2.Label_progress & "***"
+    UfWait2.Label_progress = UfWait2.Label_progress & "***"
 WB.Charts(1).Activate
 'excel.Application.EnableEvents = True
 'excel.Application.ScreenUpdating = True
 XLapp.Application.EnableEvents = True
 XLapp.Application.ScreenUpdating = True
 slut2:
-    Unload ufwait2
+    Unload UfWait2
 
 'Excel.Application.ScreenUpdating = True
 
@@ -2481,7 +2470,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

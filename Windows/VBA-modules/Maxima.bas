@@ -6,7 +6,7 @@ Public UFSelectVars As UserFormSelectVars
 Public omax As CMaxima
 Public tid As Double
 Private DeVarList As String
-Private TempCAS As Integer
+Private TempCas As Integer
 
 Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     '    Dim UFwait2 As UserFormWaitForMaxima
@@ -23,15 +23,15 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     
     SaveBackup
     
-    Dim ufwait2 As UserFormWaitStartup
+    Dim UfWait2 As UserFormWaitStartup
     op = False
     If Not SettingsRead Then ReadAllSettingsFromRegistry
 
     If omax Is Nothing Then
         LavRCMenu    ' højreklikmenu på ligninger
         SetMathAutoCorrect
-        If ufwait2 Is Nothing Then Set ufwait2 = New UserFormWaitStartup
-        ufwait2.Show vbModeless
+        If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+        UfWait2.Show vbModeless
         op = True
 #If Mac Then
         Set d = ActiveDocument
@@ -45,8 +45,8 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         '        Set MaxProc = New MathMenu.MaximaProcessClass
         If Not op Then
             '                Set ufwait2 = New UserFormWaitStartup
-            If ufwait2 Is Nothing Then Set ufwait2 = New UserFormWaitStartup
-            ufwait2.Show vbModeless
+            If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+            UfWait2.Show vbModeless
             op = True
 #If Mac Then
             Set d = ActiveDocument
@@ -85,8 +85,8 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     If MaximaUnits Then
         If MaxProcUnit Is Nothing Then
             If Not op Then
-                If ufwait2 Is Nothing Then Set ufwait2 = New UserFormWaitStartup
-                ufwait2.Show vbModeless
+                If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+                UfWait2.Show vbModeless
                 op = True
 #If Mac Then
                 Set d = ActiveDocument
@@ -107,10 +107,11 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         End If
     End If
 #End If
+    omax.ConvertLnLog = True ' andre funktioner kan ændre denne. den nulstilles
     omax.PrepareNewCommand    ' nulstiller og finder definitioner
 
     If op Then
-        Unload ufwait2
+        Unload UfWait2
 #If Mac Then
         d.Activate
 #End If
@@ -118,7 +119,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     GoTo slut
 fejl:
     On Error Resume Next
-    Unload ufwait2
+    Unload UfWait2
 slut:
 End Sub
 #If Mac Then
@@ -445,9 +446,9 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim IsSolved As Boolean
     Dim scrollpos As Double
     Dim UFSolvenumeric As New UserFormNumericQuestion
-    Dim ea As New ExpressionAnalyser
+    Dim ea As New ExpressionAnalyser, SaveKommando As String
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    TempCAS = CASengine
+    TempCas = CASengine
     '    PrepareMaximaNoSplash  ' ved ikke hvorfor det var nosplash, erstattet
     PrepareMaxima
     omax.prevspr = ""
@@ -497,12 +498,14 @@ Sub MaximaSolvePar(Optional variabel As String)
         UFSolvenumeric.Ligning = omax.Kommando
 
         omax.FindVariable
+        SaveKommando = omax.Kommando
 newcas:
+        omax.Kommando = SaveKommando
         If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
             If Not InStr(omax.vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
-                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
                 ea.text = omax.Kommando
+                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
                 s = ""
                 Do
                     v = ea.GetNextVar()
@@ -513,7 +516,10 @@ newcas:
                     ea.pos = ea.pos + 1
                 Loop While v <> ""
                 If s <> "" And Radians Then s = "pi/2"
-                If s <> "" Then UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
+                If s <> "" Then
+                    UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TempDefs = "0<=" & omax.vars & "<=" & s
+                End If
             End If
         End If
         If variabel = vbNullString Then
@@ -641,6 +647,7 @@ newcas:
         ElseIf omax.MaximaOutput = "?" Or omax.MaximaOutput = "" Or InStr(omax.KommentarOutput, "Lisp error") > 0 Or (Not LmSet And Not IsSolved) Then
             UserFormChooseCAS.Show
             If UserFormChooseCAS.ChosenCAS = 2 Then ' maxima num
+                CASengine = 0
                 GoTo stophop
             ElseIf UserFormChooseCAS.ChosenCAS = -1 Then
                 GoTo slut
@@ -651,21 +658,17 @@ newcas:
                 CASengine = 2
                 GoTo newcas
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
-                TempCAS = CASengine
                 CASengine = 2
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
-                CASengine = TempCAS
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
                 CASengine = 1
                 GoTo newcas
             Else ' grafisk geogebra
-                TempCAS = CASengine
                 CASengine = 1
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                CASengine = TempCAS
                 GoTo slut
             End If
         ElseIf False Then
@@ -799,21 +802,21 @@ newcassys:
                 CASengine = 2
                 GoTo newcassys
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
-                TempCAS = CASengine
+                TempCas = CASengine
                 CASengine = 2
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
-                CASengine = TempCAS
+                CASengine = TempCas
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
                 CASengine = 1
                 GoTo newcassys
             Else ' grafisk geogebra
-                TempCAS = CASengine
+                TempCas = CASengine
                 CASengine = 1
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                CASengine = TempCAS
+                CASengine = TempCas
                 GoTo slut
             End If
         ElseIf Len(omax.MaximaOutput) > 1 Then
@@ -834,7 +837,7 @@ newcassys:
                         Selection.TypeText Sprog.A(136)
                     End If
                 End If
-            ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8709)) > 0 Then
+            ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8709)) > 0 And CASengine > 0 Then
                 Selection.TypeParagraph
                 Selection.TypeText "GeoGebra har været anvendt til at løse ligningssystemet. Det er usikkert om der kan være løsninger. Det anbefales at forsøge med anden metode. Fx Maxima, eller numerisk/grafisk"
             End If
@@ -881,7 +884,7 @@ fejl:
 slut:
     '    omax.Luk
     On Error Resume Next
-    CASengine = TempCAS
+    CASengine = TempCas
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
@@ -1125,6 +1128,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     '    LockWindow
     Dim IsSolved As Boolean
     Dim scrollpos As Double
+    Dim ea As New ExpressionAnalyser, s As String, v As String, t As String
     scrollpos = ActiveWindow.VerticalPercentScrolled
 
     '    PrepareMaximaNoSplash
@@ -1172,23 +1176,40 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         ' kun 1 ligning
 
         UFnsolve.Ligning = omax.Kommando
+        omax.FindVariable
         
+        If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
+            If Not InStr(omax.vars, ";") > 0 Then ' metoden virker kun med 1 variabel
+                ea.SetNormalBrackets
+                ea.text = omax.Kommando
+                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
+                s = ""
+                Do
+                    v = ea.GetNextVar()
+                    If v = "sin" Or v = "cos" Or v = "tan" Then
+                        t = ea.GetNextBracketContent()
+                        If InStr(t, omax.vars) > 0 Then s = "90"
+                    End If
+                    ea.pos = ea.pos + 1
+                Loop While v <> ""
+                If s <> "" And Radians Then s = "pi/2"
+                If s <> "" Then
+                    UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TempDefs = "0<=" & omax.vars & "<=" & s
+                End If
+            End If
+        End If
         If variabel = vbNullString Then
-            omax.FindVariable
             UFSelectVar.vars = omax.vars
             UFSelectVar.DefS = omax.DefString
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
         End If
         
-        If variabel = "" Then
-            GoTo slut
-        End If
         If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVar.TempDefs
         
-        Dim s As String
-        Dim lhs As String, rhs As String, ea As New ExpressionAnalyser
+        Dim lhs As String, rhs As String
         If CASengine = 1 Or CASengine = 2 Then
             s = Trim(omax.Kommando)
             s = Replace(s, vbCrLf, "")

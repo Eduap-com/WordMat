@@ -586,6 +586,12 @@ Sub SetCaptions()
     Label_savebackup.Caption = Sprog.A(170)
     Label_backupmaxno.Caption = Sprog.A(171)
     CommandButton_openbackup.Caption = Sprog.A(174)
+    Frame_casengine.Caption = Sprog.A(686)
+#If Mac Then
+    Label_casexplain.visible = True
+#Else
+    Label_casexplain.visible = False
+#End If
     
 End Sub
 
