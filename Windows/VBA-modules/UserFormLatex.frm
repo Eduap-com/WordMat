@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Public EventsOn As Boolean
 
 Private Sub CheckBox_contents_Change()
@@ -61,10 +50,10 @@ Private Sub ComboBox_fontsize_Change()
 End Sub
 
 Private Sub CommandButton_convertall_Click()
-    Me.hide
+    Me.Hide
     SaveSet
     ConvertAllEquations
-    Me.hide
+    Me.Hide
 
 End Sub
 
@@ -143,7 +132,7 @@ Obj.PutInClipboard
 End Sub
 
 Private Sub CommandButton_latex_Click()
-   Me.hide
+   Me.Hide
     SaveFile 2
     'open latex
 End Sub
@@ -153,7 +142,7 @@ Private Sub CommandButton_next_Click()
         Selection.OMaths(1).Range.text = ""
         Selection.InsertAfter TextBox_latex.text
     End If
-    Me.hide
+    Me.Hide
     Selection.End = ActiveDocument.Range.End
     If Selection.OMaths.Count > 0 Then
         Selection.OMaths(1).Range.Select
@@ -178,7 +167,7 @@ Private Sub CommandButton_ok_Click()
 '    Selection.InsertAfter TextBox_latex.text
 'End If
 
-Me.hide
+Me.Hide
 End Sub
 Private Sub CommandButton_onlinelatex_Click()
 'http://latex.codecogs.com/emf.latex?%5Cint_0%5E1%20x%5E2%20dx
@@ -201,7 +190,7 @@ Private Sub CommandButton_dvi_Click()
 End Sub
 
 Private Sub CommandButton_pdflatex_Click()
-   Me.hide
+   Me.Hide
     SaveFile (0)
 End Sub
 

@@ -13,16 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 
     Dim vA As Double
@@ -276,7 +266,7 @@ slut:
 #If Mac Then
     Unload Me
 #Else
-    Me.hide
+    Me.Hide
 #End If
 
 End Sub

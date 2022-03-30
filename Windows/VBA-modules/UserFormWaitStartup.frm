@@ -12,17 +12,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 
 Private Sub UserForm_Initialize()
@@ -35,5 +24,4 @@ End Sub
 Private Sub SetCaptions()
     Label1.Caption = Sprog.WordMatStarting
     Label2.Caption = Sprog.PleaseWait
-    
 End Sub

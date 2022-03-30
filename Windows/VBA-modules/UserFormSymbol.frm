@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Public tegn As String
 
 Private Sub CommandButton1_Click()
@@ -75,7 +64,7 @@ ElseIf OptionButton22.Value = True Then
   tegn = ChrW(136)
 End If
 
-Me.hide
+Me.Hide
 
 GoTo slut
 fejl:

@@ -41,10 +41,10 @@ Public Sub SaveFile(doctype As Integer)
       GoTo slut
    End If
    
-   Dim ufwait As New UserFormWaitForMaxima
-   Set latexfil.ufwait = ufwait
-   ufwait.Label_tip.Caption = "konverterer"
-   ufwait.Show vbModeless
+   Dim UFwait As New UserFormWaitForMaxima
+   Set latexfil.UFwait = UFwait
+   UFwait.Label_tip.Caption = "konverterer"
+   UFwait.Show vbModeless
    UserFormLatex.EventsOn = True
    latexfil.Reset
    latexfil.TitlePage = UserFormLatex.CheckBox_title.Value
@@ -63,7 +63,7 @@ Public Sub SaveFile(doctype As Integer)
    Selection.Copy
    'd.Range.Copy
    OpretHiddendoc
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    '    If HiddenDoc Is Nothing Then Set HiddenDoc = Documents.Add(, , , False)
    '    HiddenDoc.BuiltInDocumentProperties("Title") = "WordMatLatexHiddenDoc"
    DoEvents
@@ -75,18 +75,18 @@ Public Sub SaveFile(doctype As Integer)
    Selection.PasteAndFormat wdPasteDefault  ' kan fejle hvis d2 ikke er klar
    'Selection.Paste
 
-   ufwait.Label_tip.Caption = "Konverterer ligninger"
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_tip.Caption = "Konverterer ligninger"
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    ConvertAllEquations False
     
-   ufwait.Label_tip.Caption = "Konverterer formattering"
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_tip.Caption = "Konverterer formattering"
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    ConvertFormattingToLatex HiddenDoc.Range
     
    '    ConvertRangeToLatex HiddenDoc.Range
     
-   ufwait.Label_tip.Caption = "Konverterer billeder"
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_tip.Caption = "Konverterer billeder"
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    ConvertImagesToLatex HiddenDoc
     
    Dim bm As Bookmark ' virker ikke
@@ -107,7 +107,7 @@ Public Sub SaveFile(doctype As Integer)
       toc.Delete ' det hele bliver ikke slettet
    Next
    
-   ufwait.Label_tip.Caption = "Konverterer bibliografi"
+   UFwait.Label_tip.Caption = "Konverterer bibliografi"
    ' Fields
    Dim f As Field, CiteName As String, CiteP As String, p2 As Integer, fr As Range
    For Each f In HiddenDoc.Fields
@@ -136,8 +136,8 @@ Public Sub SaveFile(doctype As Integer)
       End If
    Next
    
-   ufwait.Label_tip.Caption = "Konverterer tabeller"
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_tip.Caption = "Konverterer tabeller"
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    Dim t As Table, r As Row, c As Cell
    For Each t In HiddenDoc.Tables
       s = ""
@@ -171,8 +171,8 @@ Public Sub SaveFile(doctype As Integer)
       t.Delete
    Next
     
-   ufwait.Label_tip.Caption = "Konverterer sektioner, paragrafer, ..."
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_tip.Caption = "Konverterer sektioner, paragrafer, ..."
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    HiddenDoc.Activate
     
    '    For Each l In HiddenDoc.Lists ' giver problemer da en liste kan deles i to, med normal paragraf imellem. De to dele er dog stadig een liste, så paragrafen imellem bliver slettet. Erstattet af anden metode
@@ -233,7 +233,7 @@ Public Sub SaveFile(doctype As Integer)
       End If
    Next
     
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    If HasBib Then
       Dim src As Source, srcI As Integer, sXML As String, SrcTitle As String, SrcAuthor As String, SrcYear As String, SrcPubl As String, SrcEdition As String, nl As String, pn As String, FN As String, ln As String
       If HiddenDoc.Bibliography.Sources.Count > 0 Then
@@ -273,9 +273,9 @@ Public Sub SaveFile(doctype As Integer)
    End If
    
     
-   ufwait.Label_tip.Caption = "Gemmer fil"
+   UFwait.Label_tip.Caption = "Gemmer fil"
    latexfil.CreateHeader
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    If doctype = 0 Then
       latexfil.SavePdf LatexFilePath, Split(MainDoc.Name, ".")(0) 'Environ("TEMP")
    ElseIf doctype = 1 Then
@@ -293,7 +293,7 @@ Public Sub SaveFile(doctype As Integer)
    '    MainDoc.Activate
    SaveSel.Select
 slut:
-   Unload ufwait
+   Unload UFwait
 End Sub
 Sub ConvertList(l As List)
    Dim p As Paragraph, s As String, i As Long

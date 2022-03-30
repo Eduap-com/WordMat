@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Public vars As String
 Public DefS As String
@@ -34,7 +23,7 @@ Public Eliminate As Boolean
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
 
 Private Sub CommandButton_cancel_Click()
-    UFSelectVars.hide
+    UFSelectVars.Hide
     Application.ScreenUpdating = False
 End Sub
 
@@ -98,7 +87,7 @@ On Error GoTo fejl
 fejl:
     SelectedVar = ""
 slut:
-    UFSelectVars.hide
+    UFSelectVars.Hide
     Application.ScreenUpdating = False
 End Sub
 

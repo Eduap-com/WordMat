@@ -3,6 +3,62 @@ Option Explicit
 ' add reference 'Microsoft Visual Basic for Applications Extensibility 5.3'
 Const VBAModulesFolder = "VBA-modules" ' the subfolder to import and export modules from/to
 
+Sub ConvertVBECharactersFromMacToWindows()
+    ' if document has been edited on Mac this function must be run on Windows to convert
+    ' special characters in the code. (ANSI-Unicode problem)
+    Dim VBC As Object  'VBComponent
+    Dim i As Long, s As String
+    For Each VBC In ActiveDocument.VBProject.VBComponents
+        If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
+            If VBC.CodeModule.CountOfLines > 0 Then
+                If VBC.CodeModule.Lines(1, 1) = "" Then VBC.CodeModule.DeleteLines 1, 1 ' Userforms introduces a blank line at the top when importing. This corrects the problem
+            End If
+            For i = 1 To VBC.CodeModule.CountOfLines
+                s = ReplaceANSIString(VBC.CodeModule.Lines(i, 1))
+                VBC.CodeModule.DeleteLines i, 1
+                VBC.CodeModule.InsertLines i, s
+            Next
+        End If
+    Next
+    MsgBox "Convertion complete", vbOKOnly, "Done"
+End Sub
+
+Function ReplaceANSIString(s As String) As String
+Dim i As Long
+Dim x() As Byte
+x = StrConv(s, vbFromUnicode)    ' Convert string.
+For i = 0 To UBound(x)
+    ReplaceANSIString = ReplaceANSIString & ChrW(ConvertFromUnicodeToANSI(x(i)))
+'    Debug.Print ChrW(x(i)) & ": " & x(i)
+Next
+End Function
+Function ConvertFromUnicodeToANSI(ByVal n As Integer) As Integer
+Select Case n
+    Case 190 ' æ
+        n = 230
+    Case 191 ' ø
+        n = 248
+    Case 140 ' å
+        n = 229
+    Case 174 ' Æ
+        n = 198
+    Case 175 ' Ø
+        n = 216
+    Case 197 ' Å
+        n = 197
+    Case 135 ' á (a´)
+        n = 225
+    Case 142 ' é (e´)
+        n = 233
+    Case 151 ' ó (o´)
+        n = 243
+    Case 191 ' À (A`)
+        n = 192
+    Case 146 ' tegn for … (...)
+        n = 8230
+End Select
+ConvertFromUnicodeToANSI = n
+End Function
 Sub ReplaceToNonUnicode()
    Dim VBC As Object  'VBComponent
    Dim i As Long, s As String
@@ -213,7 +269,9 @@ Sub ImportAllModules()
         Exit Sub
     End If
     
-    szExportPath = FolderWithVBAProjectFiles & "\"
+    szExportPath = FolderWithVBAProjectFiles
+    
+    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     StrFile = Dir(szExportPath & "A-ExportCreated*")
     If StrFile <> "" Then d = Mid(StrFile, 17, Len(StrFile) - 20)
@@ -283,7 +341,8 @@ Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
         Exit Sub
     End If
     
-    szExportPath = FolderWithVBAProjectFiles & "\"
+    szExportPath = FolderWithVBAProjectFiles
+    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     For Each cmpComponent In wkbSource.VBProject.VBComponents
         bExport = True

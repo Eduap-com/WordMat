@@ -213,7 +213,7 @@ SA(22, 0) = "Vil du hente den nye version nu?"
 SA(22, 1) = "Do you want to download the new version now?"
 SA(22, 4) = ""
 SA(22, 3) = ""
-SA(22, 2) = "¿Desea descargar ahora la nueva versión?"
+SA(22, 2) = "øDesea descargar ahora la nueva versión?"
 SA(22, 5) = ""
 
 SA(23, 0) = "Ny version"
@@ -502,7 +502,7 @@ SA(63, 0) = "Vil du oprette tastaturgenveje?" & VbCrLfMac & "Som standard er de 
 SA(63, 1) = "Do you want to create keyboard shortcuts?" & VbCrLfMac & "They are created by default, but they can be overwritten by other programs. You can restore them now."
 SA(63, 4) = ""
 SA(63, 3) = ""
-SA(63, 2) = "¿Desea crear un atajo de teclas?" & VbCrLfMac & "Este se crea por defecto, pero puede sobreescribirse por otros programas. Usted debe restablecerlo ahora"
+SA(63, 2) = "øDesea crear un atajo de teclas?" & VbCrLfMac & "Este se crea por defecto, pero puede sobreescribirse por otros programas. Usted debe restablecerlo ahora"
 SA(63, 5) = ""
 
 SA(64, 0) = "Tasturgenveje"
@@ -949,7 +949,7 @@ SA(127, 0) = "Udtrykket er meget langt. Vil du indsætte det i Word?" & VbCrLfMac
 SA(127, 1) = "The expression is very long. Do you want to insert it into word?" & VbCrLfMac & "This can affect the speed of Word. Long equations can bring Word to a halt on slow computers. Consider solving using numerical methods" & VbCrLfMac & "You can see the output below:"
 SA(127, 4) = ""
 SA(127, 3) = ""
-SA(127, 2) = "La expresión es muy larga.¿Prefiere insertarla en Word?" & VbCrLfMac & "Esto puede afectar la velocidad de Word. Ecuaciones largas pueden llevar a Word a detenerse en computadores lentos. Considere la resolución mdiante métodos numéricos" & VbCrLfMac & "Se puede ver el resultado a continuación: "
+SA(127, 2) = "La expresión es muy larga.øPrefiere insertarla en Word?" & VbCrLfMac & "Esto puede afectar la velocidad de Word. Ecuaciones largas pueden llevar a Word a detenerse en computadores lentos. Considere la resolución mdiante métodos numéricos" & VbCrLfMac & "Se puede ver el resultado a continuación: "
 SA(127, 5) = ""
 
 SA(128, 0) = "Udtrykket kunne ikke beregnes."
@@ -1187,7 +1187,7 @@ SA(161, 0) = "Har du glemt et gangetegn?" & VbCrLfMac & "Der indsættes ikke auto
 SA(161, 1) = "Did you forget a multiplication sign?" & VbCrLfMac & "multiplication signs are not inserted automatically between variables or between variables and start bracket" & VbCrLfMac & " xy -> x*y" & VbCrLfMac & "y(x+1)  -> y*(x+1)" & VbCrLfMac & "Because these situations are ambiguous. Variables can be more than 1 letter and y(x) can be a function."
 SA(161, 4) = ""
 SA(161, 3) = ""
-SA(161, 2) = "¿Olvidó un signo de multiplicación?" & VbCrLfMac & "Los signos de multiplicación no se insertan automáticamente entre variables o entre variables y paréntesis de inicio" & VbCrLfMac & " xy -> x*y" & VbCrLfMac & "y(x+1)  -> y*(x+1)" & VbCrLfMac & "Estas situaciones son ambiguas. Las variables pueden quedar de más de una letra y también y(x) puede verse como una función."
+SA(161, 2) = "øOlvidó un signo de multiplicación?" & VbCrLfMac & "Los signos de multiplicación no se insertan automáticamente entre variables o entre variables y paréntesis de inicio" & VbCrLfMac & " xy -> x*y" & VbCrLfMac & "y(x+1)  -> y*(x+1)" & VbCrLfMac & "Estas situaciones son ambiguas. Las variables pueden quedar de más de una letra y también y(x) puede verse como una función."
 SA(161, 5) = ""
 
 SA(162, 0) = "Integrationsgrænserne skal være reelle. Måske mangler du en antagelse."
@@ -1344,8 +1344,8 @@ SA(186, 0) = "Forskrift"
 SA(186, 1) = "Equation"
 SA(186, 2) = ""
 
-SA(187, 0) = "Vent…"
-SA(187, 1) = "Wait…"
+SA(187, 0) = "Vent?"
+SA(187, 1) = "Wait?"
 SA(187, 2) = ""
 
 SA(188, 0) = "Maks"
@@ -2681,7 +2681,7 @@ SA(517, 1) = "Solve system of differential equations numerically"
 SA(517, 2) = ""
 
 SA(518, 0) = "Skal stå på formen y'=..."
-SA(518, 1) = "Must be in the form y'=…"
+SA(518, 1) = "Must be in the form y'=?"
 SA(518, 2) = ""
 
 SA(519, 0) = "Vis definitioner"
@@ -3305,8 +3305,8 @@ SA(673, 0) = "Regner"
 SA(673, 1) = "Calculating"
 SA(673, 2) = ""
 
-SA(674, 0) = "Jeg regner…"
-SA(674, 1) = "I'm calculating…"
+SA(674, 0) = "Jeg regner?"
+SA(674, 1) = "I'm calculating?"
 SA(674, 2) = ""
 
 SA(675, 0) = "Denne metode kræver et interval omkring en løsning. Der må kun være en løsning i intervallet. Se på grafen for at finde intervallet. Fordelen ved denne metode er at man ved hvilken løsningen der findes."
@@ -5682,7 +5682,7 @@ Public Property Get RetryNum() As String
 Dim s As String
 Select Case SprogNr
 Case 1: s = "Komplicerede beregninger der udføres eksakt kan tage meget lang tid. Vil du istedet prøve at regne numerisk?"
-Case 3: s = "Cálculos complicados se realizan exactamente y puede tomar un tiempo mulargo. ¿Prefiere intentar numéricamente?"
+Case 3: s = "Cálculos complicados se realizan exactamente y puede tomar un tiempo mulargo. øPrefiere intentar numéricamente?"
 Case 4: s = ""
 Case Else: s = "Complex calculation done exactly can take a very long time. Do you want to retry numerically?"
 End Select

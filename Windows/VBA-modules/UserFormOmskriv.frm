@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Public annuller As Boolean
 Public TempDefs As String
 Public vars As String
@@ -31,7 +20,7 @@ Public SammeLinje As Boolean
 
 Private Sub CommandButton_annuller_Click()
     annuller = True
-    Me.hide
+    Me.Hide
 End Sub
 Sub ExecuteOK()
     If OptionButton_numonly.Value = True Then
@@ -77,7 +66,7 @@ Sub ExecuteOK()
     End If
 
 
-    Me.hide
+    Me.Hide
     Application.ScreenUpdating = falses
 
 End Sub

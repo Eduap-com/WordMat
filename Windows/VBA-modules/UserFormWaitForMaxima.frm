@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 'Public VarParam As String
 'Public Param2 As String
@@ -34,7 +23,7 @@ On Error Resume Next
     omax.StopNow = True
     StopNow = True
 '    omax.CloseCmd
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()
@@ -56,6 +45,5 @@ Private Sub SetCaptions()
     Frame1.Caption = Sprog.Activity
     CommandButton_stop.Caption = Sprog.StopLabel
     Label1.Caption = Sprog.Wait
-    
 End Sub
 

@@ -4918,7 +4918,6 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         pos = InStr(ea.text, "generalized_lambert_w")
         If pos > 0 Then
         s = ea.GetNextBracketContent(pos + 20)
-        ea.GetNextListItem
         Arr = Split(s, ListSeparator)
         If UBound(Arr) = 0 Then
             Arr = Split(s, ",")
@@ -7200,6 +7199,10 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
     Dim i As Integer
     oneSolved = False
     allsolved = True
+    If ligninger = "" Then
+        IsAllSolved = "false"
+        Exit Function
+    End If
 
     If Not LmSet Then
         If InStr(ligninger, "%if(") > 0 Then GoTo slut

@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Private Sub CommandButton_nulstil_Click()
     TextBox_data.text = ""
@@ -43,7 +32,7 @@ Dim arrint As Variant
 Dim i As Integer
 Dim j As Integer
 On Error GoTo fejl
-Me.hide
+Me.Hide
 'Application.ScreenUpdating = False
 Data = TextBox_data.text
 intervaller = TextBox_intervaller.text

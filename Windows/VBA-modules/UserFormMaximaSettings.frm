@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Private MustRestart As Boolean
 Private LoadUnits As Boolean
@@ -43,7 +32,7 @@ Private Sub ComboBox_language_Change()
 End Sub
 
 Private Sub CommandButton_annuller_Click()
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub NulstilWordDoc(filnavn As String)
@@ -227,7 +216,7 @@ On Error Resume Next
         
     SetMathAutoCorrect
     
-    UFMSettings.hide
+    UFMSettings.Hide
     Sprog.CheckSetting
     RibbonSubs.RefreshRibbon
     GenerateKeyboardShortcuts

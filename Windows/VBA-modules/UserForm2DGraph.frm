@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Private gemx As Single
 Private gemy As Single
@@ -480,7 +481,7 @@ Dim i As Integer
 
 If cxl Is Nothing Then Set cxl = New CExcel
 Application.ScreenUpdating = False
-Me.hide
+Me.Hide
     Dim UfWait2 As New UserFormWaitForMaxima
     UfWait2.Show vbModeless
     DoEvents
@@ -1874,7 +1875,7 @@ Private Sub MMathPlot()
 '    objEq.BuildUp
     Selection.TypeParagraph
 
-    hide
+    Hide
     
 slut:
 End Sub

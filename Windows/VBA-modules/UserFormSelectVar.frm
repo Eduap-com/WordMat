@@ -22,7 +22,7 @@ Private Svars As Variant ' array der holder variabelnavne som de skal returneres
 
 
 Private Sub CommandButton_cancel_Click()
-    UFSelectVar.hide
+    UFSelectVar.Hide
     Application.ScreenUpdating = False
 End Sub
 
@@ -101,7 +101,7 @@ Dim i As Integer
 fejl:
     SelectedVar = ""
 slut:
-    UFSelectVar.hide
+    UFSelectVar.Hide
     Application.ScreenUpdating = False
 End Sub
 

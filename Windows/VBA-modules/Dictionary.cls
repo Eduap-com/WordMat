@@ -78,7 +78,6 @@ Public Property Let CompareMode(Value As CompareMethod)
 End Property
 
 Public Property Get Count() As Long
-Attribute Count.VB_Description = "Get the number of items in the dictionary.\n"
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     Count = dict_pKeyValues.Count
 #Else
@@ -134,7 +133,6 @@ Public Property Set Item(Key As Variant, Value As Variant)
 End Property
 
 Public Property Let Key(Previous As Variant, Updated As Variant)
-Attribute Key.VB_Description = "Change a key to a different key."
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     Dim dict_KeyValue As Variant
     dict_KeyValue = dict_GetKeyValue(Previous)
@@ -158,7 +156,6 @@ End Property
 ' @param {Variant} Item
 ' --------------------------------------------- '
 Public Sub Add(Key As Variant, Item As Variant)
-Attribute Add.VB_Description = "Add a new key and item to the dictionary."
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     If Not Me.Exists(Key) Then
         dict_AddKeyValue Key, Item
@@ -178,7 +175,6 @@ End Sub
 ' @return {Boolean}
 ' --------------------------------------------- '
 Public Function Exists(Key As Variant) As Boolean
-Attribute Exists.VB_Description = "Determine if a given key is in the dictionary."
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     Exists = Not IsEmpty(dict_GetKeyValue(Key))
 #Else
@@ -192,7 +188,6 @@ End Function
 ' @return {Variant}
 ' --------------------------------------------- '
 Public Function Items() As Variant
-Attribute Items.VB_Description = "Get an array containing all items in the dictionary."
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     If Me.Count > 0 Then
         Items = dict_pItems
@@ -211,7 +206,6 @@ End Function
 ' @return {Variant}
 ' --------------------------------------------- '
 Public Function Keys() As Variant
-Attribute Keys.VB_Description = "Get an array containing all keys in the dictionary."
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     If Me.Count > 0 Then
         Keys = dict_pKeys
@@ -230,7 +224,6 @@ End Function
 ' @param {Variant} Key
 ' --------------------------------------------- '
 Public Sub Remove(Key As Variant)
-Attribute Remove.VB_Description = "Remove a given key from the dictionary."
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     Dim dict_KeyValue As Variant
     dict_KeyValue = dict_GetKeyValue(Key)
@@ -250,7 +243,6 @@ End Sub
 ' Remove all items
 ' --------------------------------------------- '
 Public Sub RemoveAll()
-Attribute RemoveAll.VB_Description = "Remove all information from the dictionary."
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     Set dict_pKeyValues = New Collection
 

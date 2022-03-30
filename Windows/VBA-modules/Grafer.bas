@@ -329,11 +329,11 @@ Dim p As Integer
     sslut = Selection.End
 
 ea.SetNormalBrackets
-    Dim ufwait As New UserFormWaitForMaxima
-    ufwait.Label_tip.Caption = Sprog.A(371)
-    ufwait.Label_progress.Caption = "***"
-    ufwait.CommandButton_stop.visible = False
-    ufwait.Show vbModeless
+    Dim UFwait As New UserFormWaitForMaxima
+    UFwait.Label_tip.Caption = Sprog.A(371)
+    UFwait.Label_progress.Caption = "***"
+    UFwait.CommandButton_stop.visible = False
+    UFwait.Show vbModeless
 On Error GoTo fejl
 Application.ScreenUpdating = False
 
@@ -467,7 +467,7 @@ Dim i As Integer
     Selection.TypeParagraph
     
     
-    ufwait.Label_progress.Caption = "******"
+    UFwait.Label_progress.Caption = "******"
 
     If graphfil.funkno > 0 Or Len(graphfil.CustomFunctions) > 0 Or graphfil.relationno > 0 Or graphfil.pointno > 0 Then
         graphfil.Save path
@@ -482,14 +482,14 @@ Dim i As Integer
     End If
 
     DoEvents
-    Unload ufwait
+    Unload UFwait
 
 Application.ScreenUpdating = True
 GoTo slut
 fejl:
     MsgBox Sprog.A(97), vbOKOnly, Sprog.Error
     omax.ConvertLnLog = True
-    Unload ufwait
+    Unload UFwait
 slut:
     omax.ConvertLnLog = True
     

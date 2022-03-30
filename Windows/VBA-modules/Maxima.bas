@@ -74,11 +74,11 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         End If
 #Else
         WaitForMaximaUntil
-#End If
         If MaxProc.ErrCode > 0 Then
             MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
             GoTo fejl
         End If
+#End If
     End If
 #If Mac Then
 #Else

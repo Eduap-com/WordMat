@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 
 Private Sub CommandButton_annuller_Click()
@@ -89,7 +78,7 @@ If CheckBox_msol.Value = True Then text = text & "m_" & Sprog.A(260) & "=1" & De
 'End If
 
 slut:
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label1_Click()

@@ -2008,7 +2008,7 @@ Sub SaveBackup()
     On Error GoTo fejl
     Dim path As String
     Dim UFbackup As UserFormBackup
-    
+    Dim UFwait As UserFormWaitForMaxima
     Const lCancelled_c As Long = 0
     Dim tempDoc2 As Document
     
@@ -2033,8 +2033,17 @@ Sub SaveBackup()
         MsgBox Sprog.A(679)
         Exit Sub
     End If
-    Application.ScreenUpdating = False
+    Set UFwait = New UserFormWaitForMaxima
+    UFwait.Show vbModeless
+    UFwait.Label_tip.Caption = "Saving backup" ' to " & VbCrLfMac & "documents\WordMat-Backup"
+    UFwait.Label_progress.Caption = "*"
+    DoEvents
+   
+    
+'    Application.ScreenUpdating = False
     If ActiveDocument.Saved = False Then ActiveDocument.Save
+    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+    DoEvents
     BackupNo = BackupNo + 1
     If BackupNo > BackupMaxNo Then BackupNo = 1
 #If Mac Then
@@ -2044,22 +2053,30 @@ Sub SaveBackup()
 #End If
 '    If Dir(path, vbDirectory) = "" Then MkDir path
     If Not FileExists(path) Then MkDir path
+    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+    DoEvents
     path = path & "WordMatBackup" & BackupNo & ".docx"
     If VBA.LenB(path) = lCancelled_c Then Exit Sub
     
     Set tempDoc2 = Application.Documents.Add(Template:=ActiveDocument.FullName, visible:=False)
+    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+    DoEvents
 #If Mac Then
     tempDoc2.ActiveWindow.Left = 2000
     tempDoc2.SaveAs path
 #Else
     tempDoc2.SaveAs2 path
 #End If
+    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+    DoEvents
     tempDoc2.Close
 
 GoTo slut
 fejl:
     MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
 slut:
+On Error Resume Next
+    If Not UFwait Is Nothing Then Unload UFwait
     Application.ScreenUpdating = True
 End Sub
 

@@ -13,50 +13,41 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
 Public ChosenCAS As Integer
 
 Private Sub CommandButton_cancel_Click()
     ChosenCAS = -1
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_GeoGebraBrowser_Click()
     ChosenCAS = 5
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_GeoGebraGrafisk_Click()
     ChosenCAS = 6
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_GeoGebraNum_Click()
     ChosenCAS = 4
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_GeoGebraSym_Click()
     ChosenCAS = 3
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_maximaNum_Click()
     ChosenCAS = 2
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_MaximaSym_Click()
     ChosenCAS = 1
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()

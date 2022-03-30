@@ -159,9 +159,9 @@ Function ExecuteGeogebraCmdViaJS(JS As String) As String
     Else
         ExecuteGeogebraCmdViaJS = WebV.GetJSReturnVal()
     End If
-#End If
 slut:
     If Not UfWait2 Is Nothing Then Unload UfWait2
+#End If
 End Function
 
 

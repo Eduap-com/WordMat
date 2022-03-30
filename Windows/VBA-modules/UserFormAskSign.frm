@@ -13,20 +13,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Private Sub CommandButton_ok_Click()
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()

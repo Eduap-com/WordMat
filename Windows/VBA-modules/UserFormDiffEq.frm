@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Public DefS As String
 Public vars As String
@@ -33,7 +22,7 @@ Private Svars As Variant ' array der holder variabelnavne som de skal returneres
 
 Private Sub CommandButton_cancel_Click()
     luk = True
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
@@ -62,7 +51,7 @@ Dim i As Integer
     End If
     End If
     
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub TextBox_funktion_Change()

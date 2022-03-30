@@ -19,7 +19,7 @@ Public Fontsize As String
 Public UseWordMargins As Boolean
 Private Log As String
 
-Public ufwait As UserFormWaitForMaxima
+Public UFwait As UserFormWaitForMaxima
 
 Private MikTex64bit As Boolean
 
@@ -240,7 +240,7 @@ Dim filnr As Integer, filren As String, s As String
 Dim fsT As Object
 'On Error GoTo fejl
 
-   ufwait.Label_tip.Caption = "Gemmer Tex-fil"
+   UFwait.Label_tip.Caption = "Gemmer Tex-fil"
 LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
 filren = Split(filnavn, ".")(0)
 On Error Resume Next
@@ -347,16 +347,16 @@ Sub SavePdf(ByVal Mappe As String, ByVal filnavn As String)
 #Else
    Dim x64 As String
    
-   ufwait.Label_tip.Caption = "Gemmer pdf-fil"
+   UFwait.Label_tip.Caption = "Gemmer pdf-fil"
    
    MikTexPath ' called to set miktex64bit
    If MikTex64bit Then
       x64 = "x64\"
    End If
    
-   Set ufwait = New UserFormWaitForMaxima
+   Set UFwait = New UserFormWaitForMaxima
    
-   ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "*"
+   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    mtpath = MikTexPath
    If mtpath = "" Then
       MsgBox Sprog.A(409), vbOKOnly
@@ -369,8 +369,8 @@ Sub SavePdf(ByVal Mappe As String, ByVal filnavn As String)
    'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
    shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & filnavn & ".tex" '/K holder cmd åben /C lukker
    Do
-      ufwait.Label_progress.Caption = ufwait.Label_progress.Caption & "**"
-      ufwait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
+      UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "**"
+      UFwait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
       ReRun = False
       On Error Resume Next
       If Dir(Mappe & "\" & filnavn & ".pdf") <> "" Then Kill Mappe & "\" & filnavn & ".pdf"
