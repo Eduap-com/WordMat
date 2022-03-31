@@ -12,17 +12,17 @@ Sub Chi2Fordeling()
     k = val(kstring)
     If (k > 0 And k <= 20) Or (k > 20 And Int(k / 2) = k / 2) Then
         g = Gamma(k / 2)
-        ut = ("f(x)" & VBA.ChrW(8801) & ConvertNumberToString(1 / (2 ^ (k / 2) * g)) & "·x^(" & k / 2 - 1 & ")·e^(-x/2)")
+        ut = ("f(x)" & VBA.ChrW(8801) & ConvertNumberToString(1 / (2 ^ (k / 2) * g)) & "áx^(" & k / 2 - 1 & ")áe^(-x/2)")
         ut = Replace(ut, ",", ".")
     Else
-        ut = "f(x)" & VBA.ChrW(8801) & "1/(2^(n/2)·" & VBA.ChrW(915) & "(n/2) )·x^(n/2-1)·e^(-x/2)"
+        ut = "f(x)" & VBA.ChrW(8801) & "1/(2^(n/2)á" & VBA.ChrW(915) & "(n/2) )áx^(n/2-1)áe^(-x/2)"
     End If
     Selection.InsertAfter (VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & " - " & Sprog.A(399) & " " & kstring & " " & Sprog.A(360))
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
     
     Selection.InsertAfter ut
-'    Selection.InsertAfter ("p(x)=1/(2^(" & k & "/2)·" & G & ")·x^(" & k & "/2-1)·e^(-x/2)")
+'    Selection.InsertAfter ("p(x)=1/(2^(" & k & "/2)á" & G & ")áx^(" & k & "/2-1)áe^(-x/2)")
     Selection.OMaths.Add Range:=Selection.Range
     Selection.OMaths(1).BuildUp
     Selection.MoveRight Unit:=wdCharacter, Count:=2

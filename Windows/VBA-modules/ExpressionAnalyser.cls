@@ -1090,11 +1090,11 @@ Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
     Do
         s = GetNextListItem(pos, Sep)
         If s <> "" Then
-            t = t & s & "$¤q"
+            t = t & s & "$_q"
         End If
     Loop While s <> ""
     If t <> "" Then t = Left(t, Len(t) - 3)
-    Arr = Split(t, "$¤q")
+    Arr = Split(t, "$_q")
     
 End Sub
 

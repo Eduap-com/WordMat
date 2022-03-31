@@ -170,7 +170,7 @@ Sub Rib_FSekspligning3(control As IRibbonControl)
 End Sub
 'Callback for eksp6 onAction
 Sub Rib_FSekspligning4(control As IRibbonControl)
-    insertribformel "", "y=b" & VBA.ChrW(183) & "(1/2)^(x/T_½)"
+    insertribformel "", "y=b" & VBA.ChrW(183) & "(1/2)^(x/T__)"
 End Sub
 
 'Callback for eksp2 onAction
@@ -187,7 +187,7 @@ Sub Rib_FShalv(control As IRibbonControl)
 #If Mac Then
     insertribformel "", "T_(1/2) =ln" & VBA.ChrW(8289) & "(1/2)/(ln" & VBA.ChrW(8289) & "(a))=ln" & VBA.ChrW(8289) & "(1/2)/k"
 #Else
-    insertribformel "", "T_½=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
+    insertribformel "", "T__=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
 #End If
 End Sub
 
@@ -309,7 +309,7 @@ End Sub
 Sub Rib_FSrumpunktlinje(control As IRibbonControl)
     insertribformel "", "definer: r" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(r_1@r_2@r_3)) ,  (P_0 P)" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0))"
     Selection.TypeParagraph
-    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & "×(P_0 P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & "_(P_0 P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
 End Sub
 
 'Callback for rumligningplan onAction
@@ -321,17 +321,17 @@ End Sub
 
 'Callback for rumligningplan2 onAction
 Sub Rib_FSrumligningplan2(control As IRibbonControl)
-    insertribformel "", "a·(x-x_0)+b·(y-y_0)+c·(z-z_0)=0"
+    insertribformel "", "aá(x-x_0)+bá(y-y_0)+cá(z-z_0)=0"
 End Sub
 
 'Callback for rumafstandpunktplan onAction
 Sub Rib_FSrumafstandpunktplan(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & "·(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & "á(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
 End Sub
 
 'Callback for rumafstandpunktplan2 onAction
 Sub Rib_FSrumafstandpunktplan2(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|a·x_1+b·y_1+c·z_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|aáx_1+báy_1+cáz_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
 End Sub
 
 'Callback for kugleligning onAction

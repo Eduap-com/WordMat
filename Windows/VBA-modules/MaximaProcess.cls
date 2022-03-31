@@ -47,7 +47,7 @@ Sub StartMaximaProcess(Optional waittime As LongPtr = 15)
         r = StartMaxima()
     Else
         r = StartMaximaWait(waittime)
-    ' Mac: pga ændring af operator §, som ikke  virker på Mac. Skal vel være i image. Er nu puttet i image v. 1.03.
+    ' Mac: pga ændring af operator ¤, som ikke  virker på Mac. Skal vel være i image. Er nu puttet i image v. 1.03.
 '        Dim Command As String
 '        Command = "infix(""##"",115,115)$""##""(qwa,qwb):=block(if scalarp(qwa) or scalarp(qwb) then return(qwa*qwb) else return(qwa.qwb))$" & Command
 '        ExecuteMaximaCommand Command, 5

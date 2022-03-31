@@ -213,7 +213,7 @@ SA(22, 0) = "Vil du hente den nye version nu?"
 SA(22, 1) = "Do you want to download the new version now?"
 SA(22, 4) = ""
 SA(22, 3) = ""
-SA(22, 2) = "¯Desea descargar ahora la nueva versiÛn?"
+SA(22, 2) = "øDesea descargar ahora la nueva versiÛn?"
 SA(22, 5) = ""
 
 SA(23, 0) = "Ny version"
@@ -231,7 +231,7 @@ SA(24, 2) = "Indique el n˙mero de puntos con el que desea ejecutar la regresiÛn.
 SA(24, 5) = ""
 
 SA(25, 0) = "Det anbefales ikke at lave regression med mere end 200 punkter i en Word-tabel. Brug Excel hvis du vil lave regression pÂ sÂ mange punkter."
-SA(25, 1) = " It is not recommened to do regression on more than 200 points in a Word-table. Use Excel if you want to do regression on that many points"
+SA(25, 1) = "It is not recommened to do regression on more than 200 points in a Word-table. Use Excel if you want to do regression on that many points"
 SA(25, 4) = ""
 SA(25, 3) = ""
 SA(25, 2) = "No es recomendable ejecutar una regresiÛn con m·s de 200 puntos en una tabla de Word. Use Excel si desea ejecutar una regresiÛn con muchos puntos."
@@ -1183,7 +1183,7 @@ SA(160, 3) = ""
 SA(160, 2) = "Las ecuaciones diferenciales no se pueden resolver"
 SA(160, 5) = ""
 
-SA(161, 0) = "Har du glemt et gangetegn?" & VbCrLfMac & "Der indsÊttes ikke automatisk gangetegn mellem variable eller mellem variable og parantesstart" & VbCrLfMac & " xy -> x*y" & VbCrLfMac & "y(x+1)  -> y*(x+1)" & VbCrLfMac & "≈rsagen er at det er tvetydigt. Variable kan vÊre pÂ mere end 1 bogstav og y(x) kan vÊre en funktion."
+SA(161, 0) = "Har du glemt et gangetegn?" & VbCrLfMac & "Der indsÊttes ikke automatisk gangetegn mellem variable eller mellem variable og parantesstart" & VbCrLfMac & " xy -> x*y" & VbCrLfMac & "y(x+1)  -> y*(x+1)" & VbCrLfMac & "Årsagen er at det er tvetydigt. Variable kan vÊre pÂ mere end 1 bogstav og y(x) kan vÊre en funktion."
 SA(161, 1) = "Did you forget a multiplication sign?" & VbCrLfMac & "multiplication signs are not inserted automatically between variables or between variables and start bracket" & VbCrLfMac & " xy -> x*y" & VbCrLfMac & "y(x+1)  -> y*(x+1)" & VbCrLfMac & "Because these situations are ambiguous. Variables can be more than 1 letter and y(x) can be a function."
 SA(161, 4) = ""
 SA(161, 3) = ""
@@ -2048,7 +2048,7 @@ SA(361, 0) = "AflÊs"
 SA(361, 1) = "Read"
 SA(361, 2) = ""
 
-SA(362, 0) = "≈bner GeoGebra"
+SA(362, 0) = "Åbner GeoGebra"
 SA(362, 1) = "Opening GeoGebra"
 SA(362, 2) = ""
 
@@ -2084,7 +2084,7 @@ SA(370, 0) = "Denne funktion krÊver at GeoGebra installeres"
 SA(370, 1) = "This function requires GeoGebra to be installed"
 SA(370, 2) = ""
 
-SA(371, 0) = "≈bner Graph"
+SA(371, 0) = "Åbner Graph"
 SA(371, 1) = "Opening Graph"
 SA(371, 2) = ""
 
@@ -2384,8 +2384,8 @@ SA(443, 0) = "y=b" & ChrW(183) & "2^(x/T" & ChrW(&H2082) & ")                  E
 SA(443, 1) = "y=b" & ChrW(183) & "2^(x/T" & ChrW(&H2082) & ")                  Exponentiel function"
 SA(443, 2) = ""
 
-SA(444, 0) = "y=b" & ChrW(183) & "Ω^(x/TΩ)                  Eksponentiel funktion"
-SA(444, 1) = "y=b" & ChrW(183) & "Ω^(x/TΩ)                  Exponentiel function"
+SA(444, 0) = "y=b" & ChrW(183) & "_^(x/T_)                  Eksponentiel funktion"
+SA(444, 1) = "y=b" & ChrW(183) & "_^(x/T_)                  Exponentiel function"
 SA(444, 2) = ""
 
 SA(445, 0) = "a=(x" & ChrW(&H2082) & "-x" & ChrW(&H2081) & ")" & ChrW(&H221A) & "(y" & ChrW(&H2082) & "/y" & ChrW(&H2081) & ")   Beregning af a ud fra to kendte punkter (x" & ChrW(&H2081) & ",y" & ChrW(&H2081) & ") og (x" & ChrW(&H2082) & ",y" & ChrW(&H2082) & ")"
@@ -2396,8 +2396,8 @@ SA(446, 0) = "T" & ChrW(&H2082) & "=ln(2)/ln(a)=ln(2)/k         Fordoblingskonst
 SA(446, 1) = "T" & ChrW(&H2082) & "=ln(2)/ln(a)=ln(2)/k         Double time"
 SA(446, 2) = ""
 
-SA(447, 0) = "TΩ=ln(Ω)/ln(a)=ln(Ω)/k             Halveringskonstant"
-SA(447, 1) = "TΩ=ln(Ω)/ln(a)=ln(Ω)/k             Half life"
+SA(447, 0) = "T_=ln(_)/ln(a)=ln(_)/k             Halveringskonstant"
+SA(447, 1) = "T_=ln(_)/ln(a)=ln(_)/k             Half life"
 SA(447, 2) = ""
 
 SA(448, 0) = "y=b" & ChrW(183) & "x" & ChrW(&HAA) & "                          potensfunktion ligning"
@@ -2424,8 +2424,8 @@ SA(453, 0) = "c" & ChrW(&HB2) & "=a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "-2" & C
 SA(453, 1) = "c" & ChrW(&HB2) & "=a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "-2" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "cos(C)    Law of cosines"
 SA(453, 2) = ""
 
-SA(454, 0) = "T=Ω" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Areal af trekant givet vinkel og to sider omkring"
-SA(454, 1) = "T=Ω" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Area of triangle from known angle and two neighbouring sides"
+SA(454, 0) = "T=_" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Areal af trekant givet vinkel og to sider omkring"
+SA(454, 1) = "T=_" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Area of triangle from known angle and two neighbouring sides"
 SA(454, 2) = ""
 
 SA(455, 0) = "K(n,r)" & ChrW(&H2261) & "n!/(r!" & ChrW(183) & "(n-r)!)    Binomialkoefficient"
@@ -2448,16 +2448,16 @@ SA(459, 0) = "" & ChrW(&H3C3) & "=" & ChrW(&H221A) & "(n" & ChrW(183) & "p" & Ch
 SA(459, 1) = "" & ChrW(&H3C3) & "=" & ChrW(&H221A) & "(n" & ChrW(183) & "p" & ChrW(183) & "(1-p))   Standard deviation"
 SA(459, 2) = ""
 
-SA(460, 0) = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-Ω(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frekvensfunktion"
-SA(460, 1) = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-Ω(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frequency function"
+SA(460, 0) = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frekvensfunktion"
+SA(460, 1) = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frequency function"
 SA(460, 2) = ""
 
-SA(461, 0) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-Ω(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Kumuleret frekvensfunktion"
-SA(461, 1) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-Ω(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Cumulative frequency function"
+SA(461, 0) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Kumuleret frekvensfunktion"
+SA(461, 1) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Cumulative frequency function"
 SA(461, 2) = ""
 
-SA(462, 0) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "¥" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "¥" & ChrW(&HB2) & "  frekvensfunktion med frihedsgrad n"
-SA(462, 1) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "¥" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "¥" & ChrW(&HB2) & "  frequency function with n degrees of freedom"
+SA(462, 0) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "´" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "´" & ChrW(&HB2) & "  frekvensfunktion med frihedsgrad n"
+SA(462, 1) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "´" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "´" & ChrW(&HB2) & "  frequency function with n degrees of freedom"
 SA(462, 2) = ""
 
 SA(463, 0) = "V=" & ChrW(&H3C0) & ChrW(&H222B) & "f(x)" & ChrW(&HB2) & "dx     Rumfang af omdrejningslegeme"
@@ -2552,15 +2552,15 @@ SA(485, 0) = "Rumgeometri"
 SA(485, 1) = "3D Geometry"
 SA(485, 2) = ""
 
-SA(486, 0) = "≈bner matematikformelsamling"
+SA(486, 0) = "Åbner matematikformelsamling"
 SA(486, 1) = "Opens math formula booklet"
 SA(486, 2) = ""
 
-SA(487, 0) = "≈bner fysikformelsamling"
+SA(487, 0) = "Åbner fysikformelsamling"
 SA(487, 1) = "Opens physics formula booklet"
 SA(487, 2) = ""
 
-SA(488, 0) = "≈bner kemiformelsamling"
+SA(488, 0) = "Åbner kemiformelsamling"
 SA(488, 1) = "Opens chemistry formula booklet"
 SA(488, 2) = ""
 
@@ -2776,7 +2776,7 @@ SA(541, 0) = "Wolfram Alpha"
 SA(541, 1) = "Wolfram Alpha"
 SA(541, 2) = ""
 
-SA(542, 0) = "≈bner hjemmesiden Wolfram Alpha, med det valgte udtryk som input."
+SA(542, 0) = "Åbner hjemmesiden Wolfram Alpha, med det valgte udtryk som input."
 SA(542, 1) = "Opens Wolfram Alpha with the selected expression as input"
 SA(542, 2) = ""
 
@@ -2816,7 +2816,7 @@ SA(551, 0) = "GeoGebra"
 SA(551, 1) = "GeoGebra"
 SA(551, 2) = ""
 
-SA(552, 0) = "≈bner GeoGebra og overf¯rer den valgte funktion samt definitioner. GeoGebra er det grafprogram der giver de fleste muligheder, og en rigtig pÊn graf, men der er nogle begrÊnsninger: Det er ret langtsomt at Âbne og billedet overf¯res ikke automatisk til Word. Det skal kopieres ind manuelt, via rediger-menuen og 'kopier tegningen'.Grafen kan ikke redigeres igen, nÂr den er indsat."
+SA(552, 0) = "Åbner GeoGebra og overf¯rer den valgte funktion samt definitioner. GeoGebra er det grafprogram der giver de fleste muligheder, og en rigtig pÊn graf, men der er nogle begrÊnsninger: Det er ret langtsomt at Âbne og billedet overf¯res ikke automatisk til Word. Det skal kopieres ind manuelt, via rediger-menuen og 'kopier tegningen'.Grafen kan ikke redigeres igen, nÂr den er indsat."
 SA(552, 1) = "Opens GeoGebra and transfers the selected function(s)/equation(s) to GeoGebra, as well as any definitions. GeoGebra is the most feature rich graph program. It also creates a high quality graph. Downsides are: It is slow to open and the graph is not automatically transfered to Word. It has to copied manually to Word using the edit-menu/'Copy Graphics view to clipboard'. The graph cannot be edited again once inserted."
 SA(552, 2) = ""
 
@@ -2864,7 +2864,7 @@ SA(563, 0) = "Statistik"
 SA(563, 1) = "Statistics"
 SA(563, 2) = ""
 
-SA(564, 0) = "≈bner regneark der bl.a. kan deskriptiv statistik"
+SA(564, 0) = "Åbner regneark der bl.a. kan deskriptiv statistik"
 SA(564, 1) = "Opens excel workbook designed for one variable statistics. Look at the sheets to see all the functions."
 SA(564, 2) = ""
 
@@ -3128,7 +3128,7 @@ SA(629, 0) = "Figurer"
 SA(629, 1) = "Math shapes, diagrams & images"
 SA(629, 2) = ""
 
-SA(630, 0) = "≈bner dokument med figurer som kan kopieres ind i det dokument. Trekanter, Monotoniforhold mm."
+SA(630, 0) = "Åbner dokument med figurer som kan kopieres ind i det dokument. Trekanter, Monotoniforhold mm."
 SA(630, 1) = "Opens document with typical Math shapes, diagrams etc. These can then be copied into your document and manipulated to your desire."
 SA(630, 2) = ""
 
@@ -3136,7 +3136,7 @@ SA(631, 0) = "Tegn"
 SA(631, 1) = "Draw"
 SA(631, 2) = ""
 
-SA(632, 0) = "≈bner Paint og indsÊtter det tegnede i dokumentet."
+SA(632, 0) = "Åbner Paint og indsÊtter det tegnede i dokumentet."
 SA(632, 1) = "Opens Paint for drawing. The result is automatically inserted into Word."
 SA(632, 2) = ""
 
@@ -3184,7 +3184,7 @@ SA(643, 0) = "Word manual"
 SA(643, 1) = "Word Manual"
 SA(643, 2) = ""
 
-SA(644, 0) = "≈bner dokument med hjÊlp."
+SA(644, 0) = "Åbner dokument med hjÊlp."
 SA(644, 1) = "Opens manual as Word document"
 SA(644, 2) = ""
 
@@ -3192,7 +3192,7 @@ SA(645, 0) = "Webmanual"
 SA(645, 1) = "Web manual"
 SA(645, 2) = ""
 
-SA(646, 0) = "≈bner Hjemmesidemanual. Har bedre navigation og videoer end Word-manualen, men ikke komplet endnu."
+SA(646, 0) = "Åbner Hjemmesidemanual. Har bedre navigation og videoer end Word-manualen, men ikke komplet endnu."
 SA(646, 1) = "Opens the online web manual. Has better navigation and videos than the Word manual, but a work in progress."
 SA(646, 2) = ""
 
@@ -3236,7 +3236,7 @@ SA(656, 0) = "LaTex skabelon"
 SA(656, 1) = "LaTex template"
 SA(656, 2) = ""
 
-SA(657, 0) = "≈bner Worddokument der er en nÊsten tro kopi af LaTex dokument. "
+SA(657, 0) = "Åbner Worddokument der er en nÊsten tro kopi af LaTex dokument. "
 SA(657, 1) = "Opens a Word document which is styled like a LaTex document, but as easy to write as a Word document."
 SA(657, 2) = ""
 

@@ -440,7 +440,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
       text = Replace(text, "zeta", VBA.ChrW(950))
       text = Replace(text, "eta", VBA.ChrW(951)) ' skal være sidst da eta indgår i andre
       text = Replace(text, "increment", VBA.ChrW(8710))  ' specielt delta increment
-      text = Replace(text, "Symhalf", VBA.ChrW(189)) ' ½
+      text = Replace(text, "Symhalf", VBA.ChrW(189)) ' _
       text = Replace(text, "degC", VBA.ChrW(8451))   ' specielt oC tegn
       text = Replace(text, "<=", VBA.ChrW(8804))  '
       text = Replace(text, ">=", VBA.ChrW(8805)) '
@@ -527,8 +527,10 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
          Next
          text = Left(text, sp - 1) & gexpr & right(text, Len(text) - ep + 1)
          If Left(text, 1) = "(" Then text = right(text, Len(text) - 1)
-         text = Replace(text, " and ", " â?§ ") '&&
-         text = Replace(text, " or ", " â?¨ ") '||
+'         text = Replace(text, " and ", " ??¤ ") '&& der må være sket noget fejlkonvertering
+'         text = Replace(text, " or ", " ??¬ ") '||
+         text = Replace(text, " and ", " && ") '&&
+         text = Replace(text, " or ", " || ") '||
       End If
 
    ConvertToGeogebraSyntax = text

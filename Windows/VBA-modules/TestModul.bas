@@ -15,7 +15,7 @@ Sub TestSub()
 
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
     TestSolve VBA.ChrW(8747) & "_0^a" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "x^2 dx=4""", "a", "a=9334/4077"
-    TestBeregn VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^" & VBA.ChrW(8734) & "" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "·3)·e^(-1/2·((y-1)/3)^2 ) dy", "=1"
+    TestBeregn VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^" & VBA.ChrW(8734) & "" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "á3)áe^(-1/2á((y-1)/3)^2 ) dy", "=1"
     
     ' slut
     Selection.TypeText (" - Test f*ae*rdig - ")
