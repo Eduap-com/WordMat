@@ -104,13 +104,13 @@ End If
 End If
 GoTo slut
 fejl:
-'    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
+'    Call MsgBox("Du skal v*ae*lge en tabel. Bogstaver ignoreres.")
     ReadSelection = False
 slut:
 
 End Function
 Public Function ReadSelectionS() As Boolean
-' læser som strenge
+' l*ae*ser som strenge
 Dim cellval As String
 Dim r As Integer
 Dim i As Integer, j As Integer, k As Integer, l As Integer, c As Integer
@@ -166,7 +166,7 @@ End If
 End If
 GoTo slut
 fejl:
-'    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
+'    Call MsgBox("Du skal v*ae*lge en tabel. Bogstaver ignoreres.")
     ReadSelectionS = False
 slut:
 
@@ -211,7 +211,7 @@ MsgBox t
 End Sub
 
 Public Function GetSetForm(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
+' returnerer data som m*ae*ngde {(1,2),(3,4)}
 ' 0 punktum decseparator
 ' 1 komma decseparator
 
@@ -235,7 +235,7 @@ GetSetForm = t
 
 End Function
 Public Function GetSetFormS(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
+' returnerer data som m*ae*ngde {(1,2),(3,4)}
 ' 0 punktum decseparator
 ' 1 komma decseparator
 
@@ -259,7 +259,7 @@ GetSetFormS = t
 
 End Function
 Public Function GetListFormS(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
+' returnerer data som m*ae*ngde {(1,2),(3,4)}
 ' 0 punktum decseparator
 ' 1 komma decseparator
 
@@ -298,7 +298,7 @@ Function ConvertToKomma(ByVal t As String) As String
 End Function
 
 Public Sub GetSetData()
-' læser mængde {(2,1),(3,4)} eller liste fra mathbox ind i tabel
+' l*ae*ser m*ae*ngde {(2,1),(3,4)} eller liste fra mathbox ind i tabel
 Dim p As String
 Dim xs As String
 Dim ys As String
@@ -319,7 +319,7 @@ If Selection.OMaths.Count > 0 Then
 Else
     text = Selection.Range.text
 End If
-ea.text = Replace(text, VBA.ChrW(8722), "-") ' nødvendigt
+ea.text = Replace(text, VBA.ChrW(8722), "-") ' n*oe*dvendigt
 
 If InStr(text, "[") > 0 Then
     ea.SetSquareBrackets
@@ -380,7 +380,7 @@ For i = 1 To nrows
     Loop While ea.pos < Len(ea.text) And n < 1000
 Next
     
-If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt så er det formentlig kun et matematikfelt og ikke en liste eller tabel
+If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt s*aa* er det formentlig kun et matematikfelt og ikke en liste eller tabel
     ReDim Preserve tabels(1 To 1, 1 To 1) As String
     nrows = 0
     ncolumns = 0
@@ -393,7 +393,7 @@ End Sub
 
 Function ReadEquation(Optional ir As Range) As String
 ' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
-' Oversætter selection der er omath til streng
+' Overs*ae*tter selection der er omath til streng
     Dim sr As Range, r As Range
 '    Dim t As Variant
 '    t = Timer
@@ -401,7 +401,7 @@ Function ReadEquation(Optional ir As Range) As String
         
     End If
     
-'    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
+'    copytext = Selection.Range.text ' fors*oe*g med ikke at klippe og kopiere problemet er at man er n*oe*dt til at konvertere til text for at l*ae*se ordentlig
     Set sr = Selection.Range
     
     Selection.Copy
@@ -422,12 +422,12 @@ Function ReadEquation(Optional ir As Range) As String
     r.Delete
 '    ClearClipboard
     
-'    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
+'    tempDoc.Range.Delete ' dette afhj*ae*lper muligvis at word bliver langsom
 '    MsgBox Timer - t
 End Function
 
 Sub ReadMathBoxes()
-' indsætter de markerede ligningsfelter som mboxes array
+' inds*ae*tter de markerede ligningsfelter som mboxes array
 Dim mtext As String, copytext As String
 Dim antal As Integer
 Dim sstart As Long

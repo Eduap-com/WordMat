@@ -65,7 +65,7 @@ Dim i As Integer
     TempDefs = ""
     For i = 0 To UBound(Arr)
         If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
+            If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der l*oe*ses for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & SelectedVar & " " & Sprog.A(253), vbOKOnly, Sprog.Error
@@ -74,7 +74,7 @@ Dim i As Integer
         End If
     Next
     
-    ' Hvis units er on så må man ikke løse for en enhed
+    ' Hvis units er on s*aa* m*aa* man ikke l*oe*se for en enhed
     If MaximaUnits Then
         If InStr("A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s", SelectedVar) Then
             MsgBox Sprog.A(254), vbOKOnly, Sprog.Warning

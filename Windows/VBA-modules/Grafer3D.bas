@@ -31,7 +31,7 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
     
     
     
-        ' indsæt de markerede funktioner
+        ' inds*ae*t de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
         udtryk = omax.KommandoArray(i)
         udtryk = Replace(udtryk, "definer:", "")
@@ -70,7 +70,7 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
                         j = j + 1
                     End If
                 ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
-                ' kan først bruges med GeoGebra 4.0
+                ' kan f*oe*rst bruges med GeoGebra 4.0
                     DefinerKonstanter udtryk, DefList, Nothing, UrlLink
                     Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
                     Cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
@@ -82,7 +82,7 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
                     udtryk = Replace(udtryk, vbCr, "")
                     udtryk = Replace(udtryk, vbLf, "")
                     DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                    If Trim(udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
+                    If Trim(udtryk) = "x" Then 'line*ae*re funktioner kan plottes implicit og bliver meget p*ae*nere
                         Cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & Cmd
                     Else

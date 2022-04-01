@@ -26,7 +26,7 @@ cxl.CloseExcel
     Set MaxProc = Nothing
     Set MaxProcUnit = Nothing
 #End If
-'    For Each d In Application.Documents ' får WOrd til altid at spørge om der ikke skal gemmes
+'    For Each d In Application.Documents ' f*aa*r WOrd til altid at sp*oe*rge om der ikke skal gemmes
 '       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
 '           d.Close (False)
 '       End If
@@ -52,7 +52,7 @@ If Sel.InlineShapes(1).Type = wdInlineShapePicture Then
     Arr = Split(s, "|")
     PicOpen = False
     If Arr(0) = "WordMat" Then
-        ' arr(1) indeholder version. Hvis der kommer flere felter kræves nok check
+        ' arr(1) indeholder version. Hvis der kommer flere felter kr*ae*ves nok check
         PrepareMaxima
         On Error Resume Next
         UF2Dgraph.TextBox_definitioner.text = Arr(2)

@@ -490,7 +490,7 @@ End Sub
 Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
     Dim pos As Integer
     
-    If InStr(Expr, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke understøttet endnu
+    If InStr(Expr, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke underst*oe*ttet endnu
     
     pos = InStr(funkname, "(")
     If pos > 1 Then

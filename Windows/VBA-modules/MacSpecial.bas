@@ -33,7 +33,7 @@ End Function
 'Function LoadPictureMac(pathPict) As IPictureDisp
 '    On Error GoTo Err
 '    Dim pathBmp As String
-'    Const sIID_IPicture As String = "{7BF80980-BF32-101A-8BBB-00AA00300CAB}" ' der var fejl om manglende def af denne. Er fundet på nettet så ikke sikker på om den er korrekt
+'    Const sIID_IPicture As String = "{7BF80980-BF32-101A-8BBB-00AA00300CAB}" ' der var fejl om manglende def af denne. Er fundet p*aa* nettet s*aa* ikke sikker p*aa* om den er korrekt
 '
 '    If (LCase(Right(pathPict, 4)) = ".bmp") Then
 '        pathBmp = pathPict
@@ -219,7 +219,7 @@ Function RunScript(ScriptName As String, Param As String) As String
 End Function
 #Else
 Function RunScript(ScriptName As String, Param As String) As String
-' lige nu en dummy shell så der ikke kommer compilefejl
+' lige nu en dummy shell s*aa* der ikke kommer compilefejl
 '    RunScript = Shell("WordMatScripts.scpt", ScriptName, Param)
 End Function
 #End If

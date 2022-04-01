@@ -418,9 +418,9 @@ End If
 'grafobj = "xu_grid=" & gridno & ",yv_grid=" & gridno & ",x_voxel=" & gridno & ",y_voxel=" & gridno & ",z_voxel=" & gridno & "," & grafobj
 If ComboBox_kvalitet.ListIndex = 0 Then 'super
     grafobj = "xu_grid=200,yv_grid=200,x_voxel=18,y_voxel=18,z_voxel=18," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'meget høj
+ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'meget h*oe*j
     grafobj = "xu_grid=100,yv_grid=100,x_voxel=15,y_voxel=15,z_voxel=15," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' høj
+ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' h*oe*j
     grafobj = "xu_grid=50,yv_grid=50,x_voxel=12,y_voxel=12,z_voxel=12," & grafobj
 ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'lav
     grafobj = "xu_grid=15,yv_grid=15,x_voxel=5,y_voxel=5,z_voxel=5," & grafobj
@@ -434,11 +434,11 @@ End If
 
 If ComboBox_farver.ListIndex = 0 Then ' standard
     grafobj = grafobj & "palette=color,"
-ElseIf ComboBox_farver.ListIndex = 1 Then ' blå
+ElseIf ComboBox_farver.ListIndex = 1 Then ' bl*aa*
     grafobj = grafobj & "palette=[4,5,7],"
 ElseIf ComboBox_farver.ListIndex = 2 Then ' brun
     grafobj = grafobj & "palette=[4,5,6],"
-ElseIf ComboBox_farver.ListIndex = 3 Then ' Grå
+ElseIf ComboBox_farver.ListIndex = 3 Then ' Gr*aa*
     grafobj = grafobj & "palette=gray,"
 End If
 
@@ -540,16 +540,16 @@ Private Sub UserForm_Initialize()
     colindex = 0
     palindex = 0
     ComboBox_kvalitet.AddItem Sprog.A(185)
-    ComboBox_kvalitet.AddItem Sprog.A(184) '("Meget høj")
-    ComboBox_kvalitet.AddItem Sprog.A(183) '("Høj")
+    ComboBox_kvalitet.AddItem Sprog.A(184) '("Meget h*oe*j")
+    ComboBox_kvalitet.AddItem Sprog.A(183) '("H*oe*j")
     ComboBox_kvalitet.AddItem Sprog.A(182) '("Normal")
     ComboBox_kvalitet.AddItem Sprog.A(181) '("Lav")
     ComboBox_kvalitet.ListIndex = 3
     
-    ComboBox_farver.AddItem Sprog.A(321) '("Gul/rød/lilla")
-    ComboBox_farver.AddItem Sprog.A(322) '("Blå")
+    ComboBox_farver.AddItem Sprog.A(321) '("Gul/r*oe*d/lilla")
+    ComboBox_farver.AddItem Sprog.A(322) '("Bl*aa*")
     ComboBox_farver.AddItem Sprog.A(323) '("Brun")
-    ComboBox_farver.AddItem Sprog.A(324) '("Grå")
+    ComboBox_farver.AddItem Sprog.A(324) '("Gr*aa*")
     ComboBox_farver.ListIndex = 0
 
 End Sub

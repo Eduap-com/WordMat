@@ -26,7 +26,7 @@ Private mshowassum As Boolean
 Private mpolaroutput As Boolean
 Private mgraphapp As Integer
 Private mlanguage As Integer
-Private mlmset As Boolean ' løsninger som løsningsmængde
+Private mlmset As Boolean ' l*oe*sninger som l*oe*sningsm*ae*ngde
 Private mdasdiffchr As Boolean
 Private mlatexstart As String
 Private mlatexslut As String
@@ -75,7 +75,7 @@ On Error Resume Next
     mpolaroutput = CBool(GetRegSetting("PolarOutput"))
     mgraphapp = CInt(GetRegSettingLong("GraphApp"))
 #If Mac Then
-    If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot er pt afskaffet, så der bruges webapp
+    If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot er pt afskaffet, s*aa* der bruges webapp
 #End If
     mlanguage = CInt(GetRegSettingLong("Language"))
     mdasdiffchr = CBool(GetRegSetting("dAsDiffChr"))
@@ -126,7 +126,7 @@ On Error Resume Next
     SettingsRead = True
 End Sub
 Public Sub SetAllDefaultRegistrySettings()
-' sætter alle indstillinger til default, men kun hvis de ikke eksisterer i forvejen
+' s*ae*tter alle indstillinger til default, men kun hvis de ikke eksisterer i forvejen
 On Error Resume Next
     If Not RegKeyExists("HKCU\SOFTWARE\WORDMAT\Settings\Forklaring") Then
 '    If MsgBox("Indstillingerne kan ikke findes. Vil du genoprette og nulstille alle indstillinger?", vbOKCancel, Sprog.Error) Then

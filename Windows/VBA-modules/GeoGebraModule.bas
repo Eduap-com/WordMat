@@ -33,7 +33,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     omax.ReadSelection
 
     
-    ' sæt definitioner i rigtig rækkefølge
+    ' s*ae*t definitioner i rigtig r*ae*kkef*oe*lge
     For i = 0 To omax.defindex - 1
         DefList = DefList & "," & omax.DefName(i)
         ea.text = omax.DefValue(i)
@@ -74,7 +74,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Next
     
     j = 1
-    ' indsæt de markerede funktioner
+    ' inds*ae*t de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
         udtryk = omax.KommandoArray(i)
         udtryk = Replace(udtryk, "definer:", "")
@@ -221,7 +221,7 @@ Sub OpenGeoGebraWeb(ByVal Cmd As String, Gtype As String, Optional ConvertSyntax
 End Sub
 
 Sub FindGeoGebraDefsAndAssumes()
-' sætter stregene GeoGebraDefs og GeoGebraAssumes ud fra omax
+' s*ae*tter stregene GeoGebraDefs og GeoGebraAssumes ud fra omax
 Dim Arr() As String, i As Integer
 '    MsgBox omax.DefString
 '    MsgBox omax.defstringtext ' alle definitioner og assumes, men i maxima syntaks
@@ -229,7 +229,7 @@ Dim Arr() As String, i As Integer
     GeoGebraAssumes = ""
     GeoGebraDefs = ""
     
-    ' Tilføj definitioner og assumes der er skrevet i mat-felter
+    ' Tilf*oe*j definitioner og assumes der er skrevet i mat-felter
     Arr = Split(omax.DefString, "$")
     For i = 0 To UBound(Arr) - 1
         If Left(Arr(i), 7) = "assume(" Then
@@ -239,7 +239,7 @@ Dim Arr() As String, i As Integer
         End If
     Next
     
-    ' Tilføj midlertidige definitioner og assumes
+    ' Tilf*oe*j midlertidige definitioner og assumes
     Arr = Split(omax.TempDefs, ";") ' alle midlertidige definitioner og assumes adskilt ad semikolon
     For i = 0 To UBound(Arr)
         If InStr(Arr(i), ">") > 0 Or InStr(Arr(i), "<") > 0 Then
@@ -254,7 +254,7 @@ Dim Arr() As String, i As Integer
 End Sub
 
 Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As String
-' bruges ikke mere, men måske er metoden bedre, da den gør noget med rækkefølgen
+' bruges ikke mere, men m*aa*ske er metoden bedre, da den g*oe*r noget med r*ae*kkef*oe*lgen
     Dim Cmd As String, i As Integer, k As Integer, j As Integer, fktudtryk As String, UrlLink As String, p As Integer
     Dim sl As New CSortList
     Dim var As String, DefList As String
@@ -263,7 +263,7 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
     
     ea.SetNormalBrackets
 
-    ' sæt definitioner i rigtig rækkefølge
+    ' s*ae*t definitioner i rigtig r*ae*kkef*oe*lge
     For i = 0 To omax.defindex - 1
         ea.text = omax.DefValue(i)
         DefList = DefList & "," & omax.DefName(i)
@@ -385,7 +385,7 @@ End Function
 
 Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As Boolean = True, Optional HtmlReady As Boolean = False) As String
 '    Dim geogebrafil As New CGeoGebraFile
-' definitioner vil allerede være kørt igennem codeforMaxima, så der skal convertmaxima være false
+' definitioner vil allerede v*ae*re k*oe*rt igennem codeforMaxima, s*aa* der skal convertmaxima v*ae*re false
 
    Dim p As Integer, p2 As Integer, Arr() As String, p3 As Integer, sp As Integer, ep As Integer
    Dim ea As ExpressionAnalyser, s As String, t As String, gexpr As String, i As Integer, n As Integer
@@ -403,7 +403,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
       text = omax.CodeForMaxima(text, CASengine)
    End If
 
-      'græske bogstaver
+      'gr*ae*ske bogstaver
       text = Replace(text, "Delta", VBA.ChrW(916))
       text = Replace(text, "delta", VBA.ChrW(948))
       text = Replace(text, "alpha", VBA.ChrW(945))
@@ -438,7 +438,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
       text = Replace(text, "greek-nu", VBA.ChrW(957))
       text = Replace(text, "kappa", VBA.ChrW(954))
       text = Replace(text, "zeta", VBA.ChrW(950))
-      text = Replace(text, "eta", VBA.ChrW(951)) ' skal være sidst da eta indgår i andre
+      text = Replace(text, "eta", VBA.ChrW(951)) ' skal v*ae*re sidst da eta indg*aa*r i andre
       text = Replace(text, "increment", VBA.ChrW(8710))  ' specielt delta increment
       text = Replace(text, "Symhalf", VBA.ChrW(189)) ' _
       text = Replace(text, "degC", VBA.ChrW(8451))   ' specielt oC tegn
@@ -457,8 +457,8 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
       'Else
       '    text = Replace(text, "log", "ln")
    
-      ' integrate erstattes med Integral. I GeoGebra oversættes Integral automatisk til NItegral eller IntegralSymbolic afh af omstændigheder.
-      ' Der ser dog ud til at være et problem med Integral(f(x),x,0,1)  man kan ikke selv angive en variabel, selvom det står at det er en mulighed
+      ' integrate erstattes med Integral. I GeoGebra overs*ae*ttes Integral automatisk til NItegral eller IntegralSymbolic afh af omst*ae*ndigheder.
+      ' Der ser dog ud til at v*ae*re et problem med Integral(f(x),x,0,1)  man kan ikke selv angive en variabel, selvom det st*aa*r at det er en mulighed
 '   p = InStr(text, "Integrate")
 '   Do While p > 0
 '      If p > 0 Then
@@ -527,7 +527,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
          Next
          text = Left(text, sp - 1) & gexpr & right(text, Len(text) - ep + 1)
          If Left(text, 1) = "(" Then text = right(text, Len(text) - 1)
-'         text = Replace(text, " and ", " ??¤ ") '&& der må være sket noget fejlkonvertering
+'         text = Replace(text, " and ", " ??¤ ") '&& der m*aa* v*ae*re sket noget fejlkonvertering
 '         text = Replace(text, " or ", " ??¬ ") '||
          text = Replace(text, " and ", " && ") '&&
          text = Replace(text, " or ", " || ") '||
@@ -557,7 +557,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
         p = InStr(p + 1, ea.text, " ")
     Loop
     
-    'potenser kan være skrevet som specialtegn for 0,1,2,3    p = InStr(ea.text, VBA.ChrW(176)) ' hævet 0
+    'potenser kan v*ae*re skrevet som specialtegn for 0,1,2,3    p = InStr(ea.text, VBA.ChrW(176)) ' h*ae*vet 0
     ReplaceSuperScriptNo ea, 8314, "+"
     ReplaceSuperScriptNo ea, 8315, "-"
     ReplaceSuperScriptNo ea, 8317, "("
@@ -572,7 +572,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
     
     
     text = ea.text
-    text = Replace(text, "\u003C", "<") ' mærkeligt at lige præcis denne står sådan
+    text = Replace(text, "\u003C", "<") ' m*ae*rkeligt at lige pr*ae*cis denne st*aa*r s*aa*dan
     text = Replace(text, " = ", "=") ' mellemrum omkring =
     text = Replace(text, " < ", "<")
     text = Replace(text, " > ", ">")
@@ -596,7 +596,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
     p = InStr(ea.text, "{{")
     Do While p > 0
         mtext = ea.GetNextBracketContent(p)
-        mtext = Replace(mtext, " ", "") ' mellem efter ; giver problemer i næste linje
+        mtext = Replace(mtext, " ", "") ' mellem efter ; giver problemer i n*ae*ste linje
         mtext = Replace(mtext, "}" & ListSeparator & "{", "@")
         mtext = Replace(mtext, ListSeparator, "&")
 
@@ -619,7 +619,7 @@ End Function
 
 Sub ReplaceSuperScriptNo(ByRef ea As ExpressionAnalyser, ChrNo As Integer, ChrS As String)
     Dim p As Integer
-    p = InStr(ea.text, VBA.ChrW(ChrNo)) ' hævet -
+    p = InStr(ea.text, VBA.ChrW(ChrNo)) ' h*ae*vet -
     Do While p > 0
         If p > 0 Then
             ea.ReplaceStringAt ChrS, p
@@ -627,12 +627,12 @@ Sub ReplaceSuperScriptNo(ByRef ea As ExpressionAnalyser, ChrNo As Integer, ChrS 
                 ea.InsertBeforePos "^", p
             End If
         End If
-        p = InStr(ea.text, VBA.ChrW(ChrNo)) ' hævet -
+        p = InStr(ea.text, VBA.ChrW(ChrNo)) ' h*ae*vet -
     Loop
 End Sub
 Sub ReplaceTrigSuperscript(ByRef ea As ExpressionAnalyser, Trig As String)
 ' erstatter fx sin & chrw(8289) & "^2" med "sin" & "^2" & chrw(8289)
-' altså retter op på output fra converttowordsymols
+' alts*aa* retter op p*aa* output fra converttowordsymols
 Dim p As Integer, p2 As Integer
     p = InStr(ea.text, Trig & VBA.ChrW(8289) & "^")
     Do While p > 0
@@ -663,7 +663,7 @@ Sub GeoGebra()
     UFwait.Show vbModeless
     
     geogebrasti = GeoGebraPath()
-    If geogebrasti = "" Then GoTo fejl ' hvis geogebra ikke installeret så fejl
+    If geogebrasti = "" Then GoTo fejl ' hvis geogebra ikke installeret s*aa* fejl
 '    geogebrafilersti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     geogebrafilersti = GetTempDir()
     
@@ -758,7 +758,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     'geogebrasti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     omax.ConvertLnLog = False
 #If Mac Then
-    Wait 1 ' anden gang man åbner geogebra på mac låser word hvis denne ikke er der. Det har noget med finddefinitions at gøre, men har ikke kunnet se hvad
+    Wait 1 ' anden gang man *aa*bner geogebra p*aa* mac l*aa*ser word hvis denne ikke er der. Det har noget med finddefinitions at g*oe*re, men har ikke kunnet se hvad
 #End If
 
     PrepareMaxima
@@ -771,7 +771,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Dim var As String, DefList As String
     Dim k As Integer
     
-    ' sæt definitioner i rigtig rækkefølge
+    ' s*ae*t definitioner i rigtig r*ae*kkef*oe*lge
     For i = 0 To omax.defindex - 1
         ea.text = omax.DefValue(i)
         DefList = DefList & "," & omax.DefName(i)
@@ -807,7 +807,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
 '    Next
     
     j = 1
-    ' indsæt de markerede funktioner
+    ' inds*ae*t de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
         udtryk = omax.KommandoArray(i)
         udtryk = Replace(udtryk, "definer:", "")
@@ -842,7 +842,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                         j = j + 1
                     End If
                 ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
-                ' kan først bruges med GeoGebra 4.0
+                ' kan f*oe*rst bruges med GeoGebra 4.0
                     DefinerKonstanter udtryk, DefList, geogebrafil
                     geogebrafil.CreateFunction "u" & j, udtryk, True
                 Else
@@ -870,7 +870,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
         geogebrafil.CreateList "punkter", setdata
     End If
     
-' Problemet med dette er at tabellen skal være lodret
+' Problemet med dette er at tabellen skal v*ae*re lodret
 '    dd.ReadSelection
 '    If Len(dd.GetSetForm) > 4 Then
 '        geogebrafil.CreateList "punkter", dd.GetSetForm

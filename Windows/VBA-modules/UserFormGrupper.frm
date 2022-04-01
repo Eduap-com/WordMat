@@ -41,16 +41,16 @@ arrint = Split(intervaller, vbCrLf)
 n = UBound(arrint)
 
 If n > 0 Then
-' indsæt data
+' inds*ae*t data
 If CheckBox_data.Value = True Then
     Dim t As String
-    t = AppNavn & " grupperede talmængden: { " & Replace(Data, vbCrLf, " " & ListSeparator & " ") & " }" & vbCrLf
+    t = AppNavn & " grupperede talm*ae*ngden: { " & Replace(Data, vbCrLf, " " & ListSeparator & " ") & " }" & vbCrLf
     t = t & "i intervallerne: " & Replace(intervaller, vbCrLf, " " & ListSeparator & " ") & vbCrLf
     Selection.TypeText t
     Selection.Collapse wdCollapseEnd
 End If
 
-' indsæt tabel
+' inds*ae*t tabel
 Dim Tabel As Table
     ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=UBound(arrint) + 2, NumColumns:= _
         3, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _

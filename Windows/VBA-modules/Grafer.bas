@@ -69,7 +69,7 @@ Public Sub Plot2DGraph()
     If Len(forskrifter) > 1 Then
     Arr = Split(forskrifter, ListSeparator)
     For i = 0 To UBound(Arr)
-        Arr(i) = Trim(Replace(Arr(i), "  ", " ")) ' må ikke fjerne alle mellemrum da f.eks 1/x 3 så bliver 1/x3 hvor x3 er variabel
+        Arr(i) = Trim(Replace(Arr(i), "  ", " ")) ' m*aa* ikke fjerne alle mellemrum da f.eks 1/x 3 s*aa* bliver 1/x3 hvor x3 er variabel
         If Arr(i) <> "" Then InsertNextEquation (Arr(i))
     Next
     End If
@@ -92,7 +92,7 @@ Public Sub Plot2DGraph()
     End If
     
 '    UserForm2DGraph.Show vbModeless
-    Selection.End = sslut ' slut skal være først ellers går det galt
+    Selection.End = sslut ' slut skal v*ae*re f*oe*rst ellers g*aa*r det galt
     Selection.start = sstart
     UF2Dgraph.Show vbModeless
     
@@ -112,7 +112,7 @@ Ligning = Replace(Ligning, VBA.ChrW(8801), "=") ' def =
 Arr = Split(Ligning, "=")
 
 If Not (InStr(Ligning, VBA.ChrW(9608)) > 0 And InStr(Ligning, VBA.ChrW(9508)) > 0) Then ' tuborg
-   Arr = Split(Arr(UBound(Arr)), VBA.ChrW(8776)) ' til indsættelse af selve forskrift i stedet for f(x)
+   Arr = Split(Arr(UBound(Arr)), VBA.ChrW(8776)) ' til inds*ae*ttelse af selve forskrift i stedet for f(x)
    Ligning = omax.ConvertToAscii(Arr(UBound(Arr)))
 End If
 Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(Arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
@@ -150,57 +150,6 @@ fejl:
 slut:
 End Sub
 
-Sub Indsæt2DPlot(ByVal udtryk As String, x() As Double, Y() As Double)
-    Dim MathSyntax As String
-    Dim objEq As OMath
-    Dim objRange As Range
-    Dim i As Integer
-
-    Set objRange = Selection.Range
-    MathSyntax = "show("
-    
-    If udtryk <> "" Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(udtryk, "=") Then
-            MathSyntax = MathSyntax & "ploteq("
-        Else
-            MathSyntax = MathSyntax & "plot("
-        End If
-        MathSyntax = MathSyntax & udtryk
-        MathSyntax = MathSyntax + ")"
-    End If
-    
-    'datapunkter
-    If UBound(x) > 1 Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        MathSyntax = MathSyntax + "plotdataset({"
-        For i = 1 To UBound(x)
-            MathSyntax = MathSyntax + "{" & Replace(x(i), ",", ".") & "," & Replace(Y(i), ",", ".") & "},"
-        Next
-        MathSyntax = Left(MathSyntax, Len(MathSyntax) - 1)
-        
-        MathSyntax = MathSyntax + "})"
-    End If
-    
-       
-    
-    MathSyntax = MathSyntax + ")"
-'    Selection.Range.Collapse (wdCollapseEnd)
-'    Selection.MoveRight Unit:=wdWord, Count:=1
-'    Selection.TypeParagraph
-    
-   Selection.OMaths.Add Range:=Selection.Range
-     Selection.TypeText text:=MathSyntax
-    Selection.OMaths.BuildUp
-'    Set objEq = objRange.OMaths(1)
-'    objEq.BuildUp
-    Selection.TypeParagraph
-
-'    UserForm2DGraph.Hide
-    
-slut:
-
-End Sub
 Sub PlotDF()
 ' plot retningsfelt
     Dim forskrifter As String, s As String, v As String
@@ -271,7 +220,7 @@ Sub PlotDF()
 
 
 
-    Selection.End = sslut ' slut skal være først ellers går det galt
+    Selection.End = sslut ' slut skal v*ae*re f*oe*rst ellers g*aa*r det galt
     Selection.start = sstart
     UF2Dgraph.MultiPage1.Value = 5
     UF2Dgraph.MultiPage1.SetFocus
@@ -284,7 +233,7 @@ slut:
 End Sub
 
 Sub InsertEmptyGraphOleObject()
-' indsætter graph object www.padowan.dk
+' inds*ae*tter graph object www.padowan.dk
 Dim path As String
 Dim ils As InlineShape
 Application.ScreenUpdating = False
@@ -300,10 +249,10 @@ End If
 
 'path = """" & GetProgramFilesDir & "\WordMat\graphtemplate.grf"""
 
-' indsæt vha. classname
+' inds*ae*t vha. classname
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="GraphFile", FileName:="", Range:=Selection.Range, LinkToFile:=False, DisplayAsIcon:=False)
 
-'indsæt vha. tom graphfil. Nok lidt langsommere, men kan på et tidspunkt måske bruges til kommunikation
+'inds*ae*t vha. tom graphfil. Nok lidt langsommere, men kan p*aa* et tidspunkt m*aa*ske bruges til kommunikation
 'Set ils = ActiveDocument.InlineShapes.AddOLEObject(FileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 'ils.OLEFormat.DoVerb (wdOLEVerbShow)
 
@@ -311,7 +260,7 @@ Application.ScreenUpdating = True
 
 End Sub
 Sub InsertGraphOleObject()
-' indsætter graph object www.padowan.dk
+' inds*ae*tter graph object www.padowan.dk
 #If Mac Then
     MsgBox "Sorry. Graph is not supported on Mac. There is a beta version you could try though. You will now be forwarded to the download page", vbOKOnly, Sprog.Error
     OpenLink "http://www.padowan.dk/mac/"
@@ -410,7 +359,7 @@ Dim i As Integer
                     Else
                         DefinerKonstanterGraph udtryk, DefList, graphfil, True
                         graphfil.InsertRelation udtryk
-                        ' blev brugt før relation
+                        ' blev brugt f*oe*r relation
 '                        fktudtryk = ReplaceIndepvarX(rhs)
 '                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
 '                        graphfil.InsertFunction fktudtryk
@@ -472,12 +421,12 @@ Dim i As Integer
     If graphfil.funkno > 0 Or Len(graphfil.CustomFunctions) > 0 Or graphfil.relationno > 0 Or graphfil.pointno > 0 Then
         graphfil.Save path
 
-        'indsæt vha. tom graphfil. Nok lidt langsommere, men kan på et tidspunkt måske bruges til kommunikation
+        'inds*ae*t vha. tom graphfil. Nok lidt langsommere, men kan p*aa* et tidspunkt m*aa*ske bruges til kommunikation
         Set ils = ActiveDocument.InlineShapes.AddOLEObject(FileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
         ils.OLEFormat.DoVerb (wdOLEVerbShow)
 
     Else
-        ' indsæt vha. classname
+        ' inds*ae*t vha. classname
         Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="GraphFile", FileName:="", Range:=Selection.Range, LinkToFile:=False, DisplayAsIcon:=False)
     End If
 
@@ -510,7 +459,7 @@ Dim var As String
     Do
         var = ea2.GetNextVar
         ea2.pos = ea2.pos + 1
-        If Not (ea2.ChrByIndex(ea2.pos) = "(") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "e" And var <> "pi" And var <> "matrix" Then ' måske ikke y? kopieret fra geogebra
+        If Not (ea2.ChrByIndex(ea2.pos) = "(") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "e" And var <> "pi" And var <> "matrix" Then ' m*aa*ske ikke y? kopieret fra geogebra
             graphfil.AddCustomFunction var & "=" & InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(367), Sprog.A(365), "1")
             DefList = DefList & "," & var
         End If
@@ -519,8 +468,8 @@ Dim var As String
 End Sub
 #End If
 Function ReplaceIndepvarX(fkt As String) As String
-' sørger for at indsætte x som uafh variabel
-' hvis den ikke er i udtrykket spørges
+' s*oe*rger for at inds*ae*tte x som uafh variabel
+' hvis den ikke er i udtrykket sp*oe*rges
 Dim ea As New ExpressionAnalyser
 Dim var As String
 Dim uvar As String
@@ -585,7 +534,7 @@ Application.ScreenUpdating = False
     DoEvents
     UfWait2.Label_progress = "***"
 
-If Not ExcelIndlejret Then ' åben i excel
+If Not ExcelIndlejret Then ' *aa*ben i excel
     If cxl Is Nothing Then Set cxl = New CExcel
     cxl.LoadFile ("Graphs.xltm")
     UfWait2.Label_progress = UfWait2.Label_progress & "***"
@@ -647,7 +596,7 @@ End If
 '                        DefinerKonstanterGraph udtryk, deflist, graphfil, True
                         ws.Range("B4").Offset(0, i).Value = rhs
                         ws.Range("B1").Offset(0, i).Value = "x"
-                        ' blev brugt før relation
+                        ' blev brugt f*oe*r relation
 '                        fktudtryk = ReplaceIndepvarX(rhs)
 '                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
 '                        graphfil.InsertFunction fktudtryk
@@ -709,7 +658,7 @@ xlap.Run ("UpDateAll")
 'excel.Run ("UpDateAll")
 UfWait2.Label_progress = UfWait2.Label_progress & "***"
 
-'If Not wb Is Nothing Then ' start på tabel sheet, ikke graph
+'If Not wb Is Nothing Then ' start p*aa* tabel sheet, ikke graph
 '    wb.Charts(1).Activate
 'End If
 
@@ -731,7 +680,7 @@ slut2:
 'Selection.PasteSpecial DataType:=wdPasteShape
 End Sub
 Sub InsertChartG()
-'indsætter exceldokument som indlejret dokument
+'inds*ae*tter exceldokument som indlejret dokument
 'Dim wb As Workbook
 'Dim ws As Worksheet
 Dim WB As Object 'Workbook
@@ -819,7 +768,7 @@ End If
 '                        DefinerKonstanterGraph udtryk, deflist, graphfil, True
                         ws.Range("b4").Offset(0, i).Value = udtryk
                         ws.Range("B1").Offset(0, i).Value = "x"
-                        ' blev brugt før relation
+                        ' blev brugt f*oe*r relation
 '                        fktudtryk = ReplaceIndepvarX(rhs)
 '                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
 '                        graphfil.InsertFunction fktudtryk
@@ -844,7 +793,7 @@ End If
 
 
 hop:
-' Opdater Excel med ændringer
+' Opdater Excel med *ae*ndringer
 On Error Resume Next
 'wb.Application.Run ("UpDateAll")
 WB.Charts(1).Activate
@@ -903,7 +852,7 @@ Dim ils As InlineShape
     MsgBox "This function is not supported on Mac", vbOKOnly, "Mac"
 #Else
     If InStr(GeoGebraPath, AppNavn) > 0 Then
-        MsgBox "Denne funktion kræver at GeoGebra installeres separat", vbOKOnly, Sprog.Error
+        MsgBox "Denne funktion kr*ae*ver at GeoGebra installeres separat", vbOKOnly, Sprog.Error
         UserFormGeoGebra.Show
     Else
         CreateGeoGebraFil GetTempDir()
@@ -949,8 +898,8 @@ DisplayAsIcon:=False, Range:=Selection.Range)
 
 End Sub
 Function InsertIndlejret(filnavn As String, Optional startark As String) As Object
-'indsætter exceldokument som indlejret dokument
-' bemærk fejler hvis google cloud connect installeret
+'inds*ae*tter exceldokument som indlejret dokument
+' bem*ae*rk fejler hvis google cloud connect installeret
 Dim path As String
 Dim ils As InlineShape
 Dim vers As String
@@ -961,7 +910,7 @@ EnableExcelMacros
     Dim UfWait2 As New UserFormWaitForMaxima
     UfWait2.CommandButton_stop.visible = False
     UfWait2.Label_tip.Caption = "      " & Sprog.A(372) & "..."
-    UfWait2.Label_progress.Caption = Sprog.A(373) ' "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
+    UfWait2.Label_progress.Caption = Sprog.A(373) ' "Inds*ae*tning af indlejrede objekter kan tage tid. Dobbeltklik p*aa* objektet for at redigere det."
     UfWait2.Show vbModeless
         DoEvents
         UfWait2.Label_progress = "***"
@@ -990,7 +939,7 @@ End If
 
 'Set ils = ActiveDocument.InlineShapes.AddOLEObject(FileName:=path, LinkToFile:=False, _
 'DisplayAsIcon:=False, Range:=Selection.Range)
-' forsøg uden classtype. prøv evt med classtype:=Excel.SheetMacroEnabled.12
+' fors*oe*g uden classtype. pr*oe*v evt med classtype:=Excel.SheetMacroEnabled.12
 'Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.Sheet" & vers & Application.Version, _
 'FileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.SheetMacroEnabled" & vers & Application.Version, _

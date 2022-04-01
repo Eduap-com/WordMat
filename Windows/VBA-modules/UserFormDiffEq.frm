@@ -38,7 +38,7 @@ Dim i As Integer
     TempDefs = ""
     For i = 0 To UBound(Arr)
         If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> TextBox_funktion.text Then ' kan ikke definere variabel der løses for
+            If Split(Arr(i), "=")(0) <> TextBox_funktion.text Then ' kan ikke definere variabel der l*oe*ses for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & TextBox_funktion.text & " " & Sprog.A(253), vbOKOnly, Sprog.Error

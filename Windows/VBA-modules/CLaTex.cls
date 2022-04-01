@@ -271,7 +271,7 @@ WriteTextfileToString Mappe & "\" & filnavn, LaTexDoc
 
 GoTo slut
 fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
+    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i fors*oe*get p*aa* at gemme LaTex-filen"
 slut:
 
 End Sub
@@ -298,8 +298,8 @@ Sub Savedvi(ByVal Mappe As String, ByVal filnavn As String)
 
    SaveTex Mappe, filnavn & ".tex"
 
-   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
-   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & filnavn & ".tex" '/K holder cmd åben /C lukker
+   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd *aa*ben /C lukker
+   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & filnavn & ".tex" '/K holder cmd *aa*ben /C lukker
    ' x64 er for 64bit installtion af miktex
 
    For j = 0 To 1
@@ -310,7 +310,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal filnavn As String)
 
       appnr = Shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
 
-      ' vent på maxima har genereret outputfil
+      ' vent p*aa* maxima har genereret outputfil
       i = 0
       Do
          i = i + 1
@@ -366,11 +366,11 @@ Sub SavePdf(ByVal Mappe As String, ByVal filnavn As String)
 
    SaveTex Mappe, filnavn & ".tex"
    
-   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
-   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & filnavn & ".tex" '/K holder cmd åben /C lukker
+   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd *aa*ben /C lukker
+   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & filnavn & ".tex" '/K holder cmd *aa*ben /C lukker
    Do
       UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "**"
-      UFwait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
+      UFwait.Label_tip = "K*oe*rer pdflatex " & j + 1 & ". gang"
       ReRun = False
       On Error Resume Next
       If Dir(Mappe & "\" & filnavn & ".pdf") <> "" Then Kill Mappe & "\" & filnavn & ".pdf"
@@ -379,7 +379,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal filnavn As String)
 
       Shell shellcmd, vbNormal
       'appnr = Shell(shellcmd, vbNormal) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
-      ' vent på maxima har genereret outputfil
+      ' vent p*aa* maxima har genereret outputfil
       i = 0
       Do
          i = i + 1

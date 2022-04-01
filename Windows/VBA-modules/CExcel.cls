@@ -10,9 +10,9 @@ Attribute VB_Exposed = False
 Option Explicit
 'Public XLapp As excel.Application
 Public XLapp As Object ' getobject metoden gav problemer med at man ikke vidste hvilken
-                        ' excel app der kom retur. Fidusen var ellers at gøre det hurtigere
-                        ' hvis Excel allerede var åben.
-                        ' men det virker ikke stabilt. WordMat skal have sin egen excel.app kørende
+                        ' excel app der kom retur. Fidusen var ellers at g*oe*re det hurtigere
+                        ' hvis Excel allerede var *aa*ben.
+                        ' men det virker ikke stabilt. WordMat skal have sin egen excel.app k*oe*rende
                         
 'Public xlwb As Excel.Workbook
 Public xlwb As Object
@@ -121,7 +121,7 @@ On Error Resume Next
     XLapp.DisplayAlerts = True
 End Sub
 Function InsertIndlejret(filnavn As String, Optional startark As String)
-'indsætter exceldokument som indlejret dokument
+'inds*ae*tter exceldokument som indlejret dokument
 Dim path As String
 Dim ils As InlineShape
 Dim vers As String
@@ -137,8 +137,8 @@ EnableExcelMacros
     
 '    Dim ufwait2 As New UserFormWaitForMaxima
 '    ufwait2.CommandButton_stop.visible = False
-'    ufwait2.Label_tip.Caption = "      Indsætter indlejret..."
-'    ufwait2.Label_progress.Caption = "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
+'    ufwait2.Label_tip.Caption = "      Inds*ae*tter indlejret..."
+'    ufwait2.Label_progress.Caption = "Inds*ae*tning af indlejrede objekter kan tage tid. Dobbeltklik p*aa* objektet for at redigere det."
 '    ufwait2.Show vbModeless
         DoEvents
 '        ufwait2.Label_progress = "***"
@@ -225,13 +225,13 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
 '    Next
 '    Next
     
-    'tæl rækker sammen
+    't*ae*l r*ae*kker sammen
     For i = 1 To r
         ws.Cells(i + 2, c + 2).Formula = "=sum(R" & i + 2 & "C2:R" & i + 2 & "C" & c + 1 & ")"
         ws.Range(ws.Cells(i + 2, c + 2), ws.Cells(i + 2, c + 2)).BorderAround ColorIndex:=1, Weight:=xlThin
     Next
     
-    'tæl kolonner sammen
+    't*ae*l kolonner sammen
     For i = 1 To c
         ws.Cells(r + 3, i + 1).Formula = "=sum(R3C" & i + 1 & ":R" & r + 2 & "C" & i + 1 & ")"
         ws.Range(ws.Cells(r + 3, i + 1), ws.Cells(r + 3, i + 1)).BorderAround ColorIndex:=1, Weight:=xlThin
@@ -240,7 +240,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     ws.Cells(r + 3, c + 2).Formula = "=sum(R" & r + 3 & "C2:R" & r + 3 & "C" & c + 1 & ")"
     ws.Range(ws.Cells(r + 3, c + 2), ws.Cells(r + 3, c + 2)).BorderAround ColorIndex:=1, Weight:=xlThin
     
-    ' forventede værdier
+    ' forventede v*ae*rdier
     For i = 3 To r + 2
     For j = 2 To c + 1
 '        ws.Cells(i, c + 2 + j).Formula = ws.Cells(r + 1, j).Value * ws.Cells(i, c + 1).Value / ws.Cells(r + 1, c + 1).Value
@@ -250,13 +250,13 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     Next
     Next
     
-    'tæl rækker sammen
+    't*ae*l r*ae*kker sammen
     For i = 1 To r
         ws.Cells(i + 2, 2 * c + 4).Formula = "=sum(R" & i + 2 & "C" & c + 4 & ":R" & i + 2 & "C" & 2 * c + 3 & ")"
         ws.Range(ws.Cells(i + 2, 2 * c + 4), ws.Cells(i + 2, 2 * c + 4)).BorderAround ColorIndex:=1, Weight:=xlThin
     Next
     
-    'tæl kolonner sammen
+    't*ae*l kolonner sammen
     For i = 1 To c + 1
         ws.Cells(r + 3, i + 3 + c).Formula = "=sum(R3C" & i + 3 + c & ":R" & r + 2 & "C" & i + 3 + c & ")"
         ws.Range(ws.Cells(r + 3, i + 3 + c), ws.Cells(r + 3, i + 3 + c)).BorderAround ColorIndex:=1, Weight:=xlThin
@@ -265,7 +265,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
 '    ws.Cells(r + 3, c + 2).Formula = "=sum(R" & r + 3 & "C2:R" & r + 3 & "C" & c + 1 & ")"
     
     ws.Calculate
-    ' Chi2 beregning af p-værdi
+    ' Chi2 beregning af p-v*ae*rdi
 '    ws.Cells(2, 2 * c + 4).Formula = "=a1"
 '    ws.Cells(2, 2 * c + 4).Formula = "=CHITEST(R1C1:R2C2;R1C5:R2C6)"
 '    ws.Cells(2, 8).Formula = "=sum(A1:B2)"
@@ -364,16 +364,16 @@ If Selection.Range.End > Selection.Tables(1).Range.End Then
     Selection.End = Selection.Tables(1).Range.End
 End If
 
-If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel også er valgt
+If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel ogs*aa* er valgt
     Set rws = Selection.Rows
     oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
 Else
     Set rws = Selection.Columns
-    oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
+    oFS = Selection.Cells(1).Row.Index - 1 ' r*ae*kke hvor selection starter
 End If
 n = rws.Count
 
-If n < 2 Then ' hvis intet valgt på forhånd
+If n < 2 Then ' hvis intet valgt p*aa* forh*aa*nd
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
         oFS = 0

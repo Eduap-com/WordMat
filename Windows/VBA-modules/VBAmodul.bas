@@ -3,6 +3,7 @@ Option Explicit
 ' To run these macros you need these two settings:
 ' * add reference 'Microsoft Visual Basic for Applications Extensibility 5.3'
 ' * Settings | Trust center | Settings for macros | always trust VBA project object model
+' Don't reference other modules or userforms. This module must be self contained
 Const VBAModulesFolder = "VBA-modules" ' the subfolder to import and export modules from/to
 
 Sub TestVBE()
@@ -16,29 +17,9 @@ Sub TestVBE()
         End If
     Next
 End Sub
-Sub ConvertVBECharactersFromMacToWindows()
-    ' if document has been edited on Mac this function must be run on Windows to convert
-    ' special characters in the code. (ANSI-Unicode problem)
-    ' There are few problems with characters from Windows to Mac. Only _ (shift 4) seems to be a problem. Just dont use it.
-    Dim VBC As Object  'VBComponent
-    Dim i As Long, s As String
-    For Each VBC In ActiveDocument.VBProject.VBComponents
-        If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
-'        If VBC.Name = "Module1" Then
-            If VBC.CodeModule.CountOfLines > 0 Then
-                If VBC.CodeModule.Lines(1, 1) = "" Then VBC.CodeModule.DeleteLines 1, 1 ' Userforms introduces a blank line at the top when importing. This corrects the problem
-            End If
-            For i = 1 To VBC.CodeModule.CountOfLines
-                s = ReplaceANSIString(VBC.CodeModule.Lines(i, 1))
-                VBC.CodeModule.DeleteLines i, 1
-                VBC.CodeModule.InsertLines i, s
-            Next
-        End If
-    Next
-    MsgBox "Convertion complete", vbOKOnly, "Done"
-End Sub
 
 Function ReplaceANSIString(s As String) As String
+' only for test
 Dim i As Long
 Dim x() As Byte
 
@@ -49,45 +30,48 @@ For i = 0 To UBound(x)
 Next
 End Function
 Function ConvertFromUnicodeToANSI(ByVal n As Integer) As Integer
-Select Case n
-    Case 190 ' _
-        n = 230
-    Case 191 ' ¿
-        n = 248
-    Case 140 ' Œ
-        n = 229
-    Case 174 ' ®
-        n = 198
-    Case 175 ' ¯
-        n = 216
-'    Case 197 ' Å
-'        n = 197
-    Case 135 ' ‡ (a«)
-        n = 225
-    Case 142 ' _ (e«)
-        n = 233
-    Case 151 ' — (o«)
-        n = 243
-    Case 150 ' – (n~)
-        n = 241
-    Case 146 ' ’ (i«)
-        n = 237
-    Case 156 ' œ (u«)
-        n = 250
-    Case 161 ' ¡ (o lille)
-        n = 176
-    Case 191 ' Ë (A`)
-        n = 192
-    Case 1 ' tegn for É (...)
-        n = 8230
-End Select
-ConvertFromUnicodeToANSI = n
+    Select Case n
+        Case 190 ' _
+                   n = 230
+        Case 191 ' ¿
+            n = 248
+        Case 140 ' Œ
+            n = 229
+        Case 174 ' ®
+            n = 198
+        Case 175 ' ¯
+            n = 216
+            '    Case 197 ' Å
+            '        n = 197
+        Case 135 ' ‡ (a«)
+            n = 225
+        Case 142 ' _ (e«)
+            n = 233
+        Case 151 ' — (o«)
+            n = 243
+        Case 150 ' – (n~)
+            n = 241
+        Case 146 ' ’ (i«)
+            n = 237
+        Case 156 ' œ (u«)
+            n = 250
+        Case 161 ' ¡ (o lille)
+            n = 176
+        Case 191 ' Ë (A`)
+            n = 192
+        Case 1 ' tegn for É (...)
+            n = 8230
+    End Select
+    ConvertFromUnicodeToANSI = n
 End Function
 
 Sub ReplaceToANSI()
-' A document edited on mac, which then is opened on windows must have some special characters replaced
+' if document has been edited on Mac this function must be run on Windows to convert
+' special characters in the code. (ANSI-Unicode problem)
+' There are few problems with characters from Windows to Mac. Only _ (shift 4) seems to be a problem. Just dont use it.
    Dim VBC As Object  'VBComponent
    Dim i As Long, s As String
+   If MsgBox("Do you want to replace all codetext to ANSI?", vbOKCancel, "Comfirm") = vbCancel Then Exit Sub
    
    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
@@ -106,6 +90,8 @@ Sub ReplaceToASCIIseq()
    Dim VBC As Object  'VBComponent
    Dim i As Long, s As String
    
+   If MsgBox("Do you want to replace all codetext to ASCII-sequences of 4 characters?" & vbCrLf & vbCrLf & "After use you can open on both Mac and Windows" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
+   
    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
 '      If VBC.Name = "CSprog" Then
@@ -122,6 +108,8 @@ End Sub
 Sub ReplaceToExtendedASCII()
    Dim VBC As Object  'VBComponent
    Dim i As Long, s As String
+   
+   If MsgBox("Do you want to replace all codetext to extended ASCII?" & vbCrLf & vbCrLf & "After use you can distribute the document" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
    
    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
@@ -182,15 +170,15 @@ Private Function ReplaceLineToASCIIseq(s As String) As String
    ReplaceLineToASCIIseq = s
 End Function
 Private Function ReplaceLineToExtendedASCII(s As String) As String
-   s = Replace(s, "*ae*", ChrW(230))
-   s = Replace(s, "*oe*", ChrW(248))
-   s = Replace(s, "*aa*", ChrW(229))
-   s = Replace(s, "*AE*", ChrW(198))
-   s = Replace(s, "*OE*", ChrW(216))
-   s = Replace(s, "*AA*", ChrW(197))
-   s = Replace(s, "*a-*", ChrW(225))
-   s = Replace(s, "*e-*", ChrW(233))
-   s = Replace(s, "*o-*", ChrW(243))
+   s = Replace(s, "*ae*", ChrW(230)) ' ae
+   s = Replace(s, "*oe*", ChrW(248)) ' oe
+   s = Replace(s, "*aa*", ChrW(229)) ' aa
+   s = Replace(s, "*AE*", ChrW(198)) ' AE
+   s = Replace(s, "*OE*", ChrW(216)) ' OE
+   s = Replace(s, "*AA*", ChrW(197)) ' AA
+   s = Replace(s, "*a-*", ChrW(225)) ' a'
+   s = Replace(s, "*e-*", ChrW(233)) ' e'
+   s = Replace(s, "*o-*", ChrW(243)) ' o'
    s = Replace(s, "*A~*", ChrW(192)) ' A~
    s = Replace(s, "*?-*", ChrW(191)) ' (omvendt ?)
    s = Replace(s, "*n-*", ChrW(241)) ' (n~)
@@ -199,7 +187,7 @@ Private Function ReplaceLineToExtendedASCII(s As String) As String
    s = Replace(s, "*gr*", ChrW(176)) ' (gradtegn)
    s = Replace(s, "*pa*", ChrW(167)) ' (paragraf)
    s = Replace(s, "*eu*", ChrW(8364)) ' (euro)
-   s = Replace(s, "*._.*", ChrW(8230))
+   s = Replace(s, "*._.*", ChrW(8230)) ' ...
    ReplaceLineToExtendedASCII = s
 End Function
 Function FolderExists(FolderPath As String) As Boolean
@@ -250,6 +238,12 @@ Public Sub ExportAllModules()
     Dim szExportPath As String
     Dim szFileName As String, FileList As String
     Dim cmpComponent As VBIDE.VBComponent
+
+#If Mac Then
+    MsgBox "This function is not meant to be run on Mac, as the export will not be Windows compatible", vbOKOnly, "No Mac"
+    Exit Sub
+#End If
+
 
    If MsgBox("Do you really want to export all VBA modules to folder '" & VBAModulesFolder & "'?" & vbCrLf & "(all current files in folder are deleted)", vbOKCancel) = vbCancel Then Exit Sub
     
@@ -330,6 +324,11 @@ Sub ImportAllModules()
     Dim StrFile As String, i As Integer
     Dim Arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
+
+#If Mac Then
+    MsgBox "This function is not meant to be run on Mac, as the import is not Mac to Windows compatible", vbOKOnly, "No Mac"
+    Exit Sub
+#End If
 
     ''' The code modules will be exported in a folder named.
     ''' VBAProjectFiles in the Documents folder.

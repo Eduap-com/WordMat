@@ -159,7 +159,7 @@ If Not PicOpen Then
 End If
     OpdaterDefinitioner
     CheckForAssume
-    ' indsæt xmin og xmax hvis der var definerede
+    ' inds*ae*t xmin og xmax hvis der var definerede
     xmin = TextBox_xmin1.text
     If Len(TextBox_xmin2.text) And ConvertStringToNumber(TextBox_xmin2.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin2.text
     If Len(TextBox_xmin3.text) And ConvertStringToNumber(TextBox_xmin3.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin3.text
@@ -654,7 +654,7 @@ slut2:
 'Selection.PasteSpecial DataType:=wdPasteShape
 End Sub
 Sub SetLineStyle(cb As ComboBox, n As Integer)
-' sætter linestyle efter hvad comboxen er sat til
+' s*ae*tter linestyle efter hvad comboxen er sat til
 
 If cb.ListIndex = 0 Then
 XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlContinuous '
@@ -673,7 +673,7 @@ End If
 End Sub
 'Sub InsertFormula(ws As Worksheet, wb As Workbook, tb As TextBox, col As Integer)
 Sub InsertFormula(ws As Variant, WB As Variant, tb As TextBox, col As Integer)
-' indsætter formel fra textbox i kolonne col
+' inds*ae*tter formel fra textbox i kolonne col
 Dim ea As New ExpressionAnalyser
     Dim varnavn As String
     Dim i As Integer
@@ -730,7 +730,7 @@ If tb.text <> "" Then
     Call ea.ReplaceVar("x", "A7")
     forskrift = ea.text
      
-     ' indsæt forskrift i regneark
+     ' inds*ae*t forskrift i regneark
     ws.Range("b7").Offset(0, col).Formula = "=" & forskrift
 '    If TypeName(ws.Range("b7").Offset(0, col).value) = "Error" Then GoTo fejlindtast
 
@@ -773,7 +773,7 @@ Dim Arr As Variant
     forskrift = Replace(forskrift, "e", "2.718281828")
     forskrift = Replace(forskrift, VBA.ChrW(12310), "") ' specielle usynlige paranteser fjernes
     forskrift = Replace(forskrift, VBA.ChrW(12311), "") ' specielle usynlige paranteser fjernes
-'    forskrift = Replace(forskrift, VBA.ChrW(11), "") ' en af de nedenstående?
+'    forskrift = Replace(forskrift, VBA.ChrW(11), "") ' en af de nedenst*aa*ende?
     forskrift = Replace(forskrift, vbLf, "") ' shift-enter og enter
     forskrift = Replace(forskrift, vbCrLf, "")
     forskrift = Replace(forskrift, vbCr, "")
@@ -861,7 +861,7 @@ Dim Arr As Variant
         forskrift = ConvertDegreeToRad(forskrift, "csc")
     End If
     
-    ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma)
+    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma)
     ea.text = forskrift
     ea.InsertBracketAfter ("^")
     ea.InsertBracketAfter ("/")
@@ -870,7 +870,7 @@ Dim Arr As Variant
     ' mellemrum fjernes
     forskrift = Replace(forskrift, " ", "")
 
-    ' indsæt underforståede gangetegn ' skal være efter fjern mellem
+    ' inds*ae*t underforst*aa*ede gangetegn ' skal v*ae*re efter fjern mellem
     ea.text = forskrift
     ea.pos = 1
     ea.InsertMultSigns
@@ -1324,7 +1324,7 @@ End If
         End If
     End If
     
-    If Len(grafobj) = 0 Then GoTo slut ' ellers fejler når print starter op, men med denne fejler retningsfelt hvis alene
+    If Len(grafobj) = 0 Then GoTo slut ' ellers fejler n*aa*r print starter op, men med denne fejler retningsfelt hvis alene
 
 ' diverse
     If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
@@ -1340,7 +1340,7 @@ End If
     grafobj = "font=""Arial"",font_size=8," & grafobj
     grafobj = "nticks=100," & grafobj
     grafobj = "ip_grid=[70,70]," & grafobj
-'    grafobj = "xu_grid=50,yv_grid=50," & grafobj ' ser ikke ud til at være nødv
+'    grafobj = "xu_grid=50,yv_grid=50," & grafobj ' ser ikke ud til at v*ae*re n*oe*dv
     grafobj = "xtics_axis = true," & grafobj
     grafobj = "ytics_axis = true," & grafobj
     grafobj = "line_width=" & Replace(highres, ",", ".") & "," & grafobj
@@ -1350,14 +1350,14 @@ End If
         If ConvertStringToNumber(TextBox_xmin.text) > 0 Then
             grafobj = "logx=true," & grafobj
         Else
-            MsgBox "xmin skal være >0 for at bruge logaritmisk x-akse."
+            MsgBox "xmin skal v*ae*re >0 for at bruge logaritmisk x-akse."
         End If
     End If
     If CheckBox_logy.Value Then
         If ConvertStringToNumber(TextBox_ymin.text) > 0 Then
             grafobj = "logy=true," & grafobj
         Else
-            MsgBox "ymin skal være >0 for at bruge logaritmisk y-akse."
+            MsgBox "ymin skal v*ae*re >0 for at bruge logaritmisk y-akse."
         End If
     End If
     
@@ -1388,7 +1388,7 @@ On Error GoTo fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
     text = GetDraw2Dtext(highres)
     If Len(TextBox_dfligning.text) > 0 Then
@@ -1422,7 +1422,7 @@ On Error GoTo fejl
             dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol5x.text) & "," & ConvertNumberToMaxima(TextBox_dfsol5y.text) & "]"
         End If
         If Len(dfsol) > 0 Then
-            df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat er 10. ved at øge plottes længere og tættere på asymptoter
+            df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat er 10. ved at *oe*ge plottes l*ae*ngere og t*ae*ttere p*aa* asymptoter
         End If
         If CheckBox_onlykurver.Value Then
             df = df & ",show_field=false"
@@ -1469,7 +1469,7 @@ slut:
 End Sub
 Private Sub GnuPlot()
 Dim text As String
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
 
     text = GetDraw2Dtext()
@@ -1851,7 +1851,7 @@ Private Sub MMathPlot()
     
     MathSyntax = MathSyntax + ",{ShowBox,false}"
 '    MathSyntax = MathSyntax + ",{color,""00ff00""}"
-'    MathSyntax = MathSyntax + ",{color,""ff00ff00""}" ' første er opaque 00 gennemsigtig ff uigennemsigtig
+'    MathSyntax = MathSyntax + ",{color,""ff00ff00""}" ' f*oe*rste er opaque 00 gennemsigtig ff uigennemsigtig
 '    MathSyntax = MathSyntax + ",{ShowGrid,true}"
 '    MathSyntax = MathSyntax + ",{ShowAxis,true}"
 '    MathSyntax = MathSyntax + ",{ShowWireframe,false}"
@@ -1880,7 +1880,7 @@ slut:
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-' skjuler istedet for at lukke, så funktioner gemmes.
+' skjuler istedet for at lukke, s*aa* funktioner gemmes.
 'If CloseMode = vbFormControlMenu Then
 '    Cancel = 1
 '    Hide
@@ -2201,7 +2201,7 @@ Application.ScreenUpdating = True
 End Sub
 
 Sub InsertDefinitioner()
-' indsætter definitioner fra textboxen i maximainputstring
+' inds*ae*tter definitioner fra textboxen i maximainputstring
 Dim DefString As String
 
 omax.InsertKillDef
@@ -2233,7 +2233,7 @@ GetDefString = DefString
 End If
 End Function
 Sub OpdaterDefinitioner()
-' ser efter variable i textboxene og indsætter under definitioner
+' ser efter variable i textboxene og inds*ae*tter under definitioner
 Dim vars As String
 Dim var As String, var2 As String
 Dim ea As New ExpressionAnalyser
@@ -2344,7 +2344,7 @@ Dim text As String
 Dim pm As String
 Dim sl As String
     Label_vent.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
     If Len(TextBox_skyd1k.text) > 0 And Len(TextBox_skyd1f.text) > 0 And Len(TextBox_skyd1t.text) > 0 Then
         If Len(pm) > 0 Then pm = pm & ","
@@ -2382,7 +2382,7 @@ Private Sub TextBox_dfy_Change()
 End Sub
 
 Sub CheckForAssume()
-' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begrænsninger på xmin og xmax
+' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begr*ae*nsninger p*aa* xmin og xmax
 Dim DefS As String
 Dim pos As Integer
 Dim ea As New ExpressionAnalyser
@@ -2470,7 +2470,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset
