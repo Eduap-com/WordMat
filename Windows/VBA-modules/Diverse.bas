@@ -319,11 +319,11 @@ End If
         wdKeyCategoryCommand, Command:="InsertDefiner"
     
 If Sprog.SprogNr = 1 Then
-#If Mac Then ' alt+i bruges til numerisk tegn p*aa* mac, s*aa* hellere ikke genvej til indstillinger
-#Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyI, Wd), KeyCategory:= _
+'#If Mac Then ' alt+i bruges til numerisk tegn p*aa* mac, s*aa* hellere ikke genvej til indstillinger
+'#Else
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyJ, Wd), KeyCategory:= _
         wdKeyCategoryCommand, Command:="MaximaSettings"
-#End If
+'#End If
 Else
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyO, Wd), KeyCategory:= _
         wdKeyCategoryCommand, Command:="MaximaSettings"
@@ -363,63 +363,7 @@ End If
         
 
 End Sub
-Sub SetMathAutoCorrect()
-' unfortunately cant be run from autoexec.
-    If MaximaGangeTegn = VBA.ChrW(183) Then
-        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(183))
-    ElseIf MaximaGangeTegn = VBA.ChrW(215) Then
-        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(215))
-    Else
-        Call Application.OMathAutoCorrect.Entries("*").Delete
-    End If
-End Sub
-Sub NewEquation()
-    Dim r As Range
-    On Error GoTo fejl
-    If Selection.OMaths.Count = 0 Then
-        Set r = Selection.OMaths.Add(Selection.Range)
-    ElseIf Selection.Tables.Count = 0 Then
-        If Selection.OMaths(1).Range.text = vbNullString Then
-            Set r = Selection.OMaths.Add(Selection.Range)
-        Else
-            If Not Selection.Range.ListFormat.ListValue = 0 Then
-                Selection.Range.ListFormat.RemoveNumbers
-            End If
-            InsertNumberedEquation EqAskRef
-        End If
-    ElseIf Selection.Tables(1).Columns.Count = 3 And Selection.Tables(1).Cell(1, 3).Range.Fields.Count > 0 Then
-        Selection.Tables(1).Cell(1, 2).Range.OMaths(1).Range.Cut
-        Selection.Tables(1).Select
-'        Selection.MoveEnd unit:=wdCharacter, count:=2
-        Selection.Tables(1).Delete
-        Selection.Paste
-        Selection.TypeParagraph
-        Selection.MoveLeft Unit:=wdCharacter, Count:=2
-    End If
-GoTo slut
-fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
-End Sub
-Function ConvertNumber(ByVal n As String) As String
-' s*oe*rger for at streng har maximaindstilling med separatorer
 
-If DecSeparator = "," Then
-'    n = Replace(n, ",", ";")
-    ConvertNumber = Replace(n, ".", ",")
-Else
-    ConvertNumber = Replace(n, ",", ".")
-'    n = Replace(n, ";", ",")
-End If
-
-End Function
-Function GetWordMatDir() As String
-#If Mac Then
-    GetWordMatDir = "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/"
-#Else
-    GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
-#End If
-End Function
 
 Function GetProgramFilesDir() As String
 ' bruges ikke af maxima mere da det er dll-filen der st*aa*r for det nu.
@@ -635,6 +579,8 @@ Sub InsertSletDef()
     End With
 
 End Sub
+
+
 Sub InsertDefiner()
     On Error GoTo fejl
 
@@ -1016,9 +962,7 @@ Function GetRandomTip()
 End Function
 Sub ShowTip()
     MsgBox GetRandomTip
-
 End Sub
-
 Sub ToggleUnits()
     Dim ufq As UserFormQuick
     
@@ -2252,3 +2196,62 @@ Function ExtractTag(s As String, StartTag As String, EndTag As String) As String
    
 End Function
 
+Sub SetMathAutoCorrect()
+' unfortunately cant be run from autoexec.
+    If MaximaGangeTegn = VBA.ChrW(183) Then
+        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(183))
+    ElseIf MaximaGangeTegn = VBA.ChrW(215) Then
+        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(215))
+    Else
+        Call Application.OMathAutoCorrect.Entries("*").Delete
+    End If
+End Sub
+
+Function ConvertNumber(ByVal n As String) As String
+' s*oe*rger for at streng har maximaindstilling med separatorer
+
+If DecSeparator = "," Then
+'    n = Replace(n, ",", ";")
+    ConvertNumber = Replace(n, ".", ",")
+Else
+    ConvertNumber = Replace(n, ",", ".")
+'    n = Replace(n, ";", ",")
+End If
+
+End Function
+Function GetWordMatDir() As String
+#If Mac Then
+    GetWordMatDir = "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/"
+#Else
+    GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
+#End If
+End Function
+
+Sub NewEquation()
+    Dim r As Range
+    On Error GoTo fejl
+    If Selection.OMaths.Count = 0 Then
+        Set r = Selection.OMaths.Add(Selection.Range)
+    ElseIf Selection.Tables.Count = 0 Then
+        If Selection.OMaths(1).Range.text = vbNullString Then
+            Set r = Selection.OMaths.Add(Selection.Range)
+        Else
+            If Not Selection.Range.ListFormat.ListValue = 0 Then
+                Selection.Range.ListFormat.RemoveNumbers
+            End If
+            InsertNumberedEquation EqAskRef
+        End If
+    ElseIf Selection.Tables(1).Columns.Count = 3 And Selection.Tables(1).Cell(1, 3).Range.Fields.Count > 0 Then
+        Selection.Tables(1).Cell(1, 2).Range.OMaths(1).Range.Cut
+        Selection.Tables(1).Select
+'        Selection.MoveEnd unit:=wdCharacter, count:=2
+        Selection.Tables(1).Delete
+        Selection.Paste
+        Selection.TypeParagraph
+        Selection.MoveLeft Unit:=wdCharacter, Count:=2
+    End If
+GoTo slut
+fejl:
+    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+slut:
+End Sub

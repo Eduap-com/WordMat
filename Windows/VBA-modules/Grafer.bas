@@ -14,6 +14,7 @@ Public Sub StandardPlot()
     ElseIf GraphApp = 4 Then
         GeoGebraWeb
     End If
+    
 End Sub
 Public Sub Plot2DGraph()
 ' gnuplot

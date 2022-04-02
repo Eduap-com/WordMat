@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Public DefS As String
 Public vars As String
@@ -67,7 +68,7 @@ Dim i As Integer
 Dim svar As String
     SetCaptions
 
-    If InStr(Label_ligning.Caption, "««") > 0 Then
+    If InStr(Label_ligning.Caption, "ÇÇ") > 0 Then
         Label_diffy.visible = True
         TextBox_starty2.visible = True
         Label_y2.visible = True

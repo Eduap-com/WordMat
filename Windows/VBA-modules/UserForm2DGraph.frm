@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Private gemx As Single
 Private gemy As Single
@@ -914,7 +915,7 @@ ymaxg = ConvertNumberToMaxima(TextBox_ymax.text)
 
 'forskrifter
 If TextBox_ligning1.text <> "" Then
-    lign = Replace(TextBox_ligning1.text, "'", "«")
+    lign = Replace(TextBox_ligning1.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -942,7 +943,7 @@ If TextBox_ligning1.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var1.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning2.text <> "" Then
-    lign = Replace(TextBox_ligning2.text, "'", "«")
+    lign = Replace(TextBox_ligning2.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -970,7 +971,7 @@ If TextBox_ligning2.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var2.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning3.text <> "" Then
-    lign = Replace(TextBox_ligning3.text, "'", "«")
+    lign = Replace(TextBox_ligning3.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -997,7 +998,7 @@ If TextBox_ligning3.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var3.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning4.text <> "" Then
-    lign = Replace(TextBox_ligning4.text, "'", "«")
+    lign = Replace(TextBox_ligning4.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1024,7 +1025,7 @@ If TextBox_ligning4.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var4.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning5.text <> "" Then
-    lign = Replace(TextBox_ligning5.text, "'", "«")
+    lign = Replace(TextBox_ligning5.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1051,7 +1052,7 @@ If TextBox_ligning5.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var5.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning6.text <> "" Then
-    lign = Replace(TextBox_ligning6.text, "'", "«")
+    lign = Replace(TextBox_ligning6.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1080,7 +1081,7 @@ End If
 
 'ligninger
 If TextBox_lig1.text <> "" Then
-    lign = Replace(TextBox_lig1.text, "'", "«")
+    lign = Replace(TextBox_lig1.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1098,7 +1099,7 @@ If TextBox_lig1.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
 If TextBox_lig2.text <> "" Then
-    lign = Replace(TextBox_lig2.text, "'", "«")
+    lign = Replace(TextBox_lig2.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1116,7 +1117,7 @@ If TextBox_lig2.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
 If TextBox_Lig3.text <> "" Then
-    lign = Replace(TextBox_Lig3.text, "'", "«")
+    lign = Replace(TextBox_Lig3.text, "'", "Ç")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -2470,7 +2471,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

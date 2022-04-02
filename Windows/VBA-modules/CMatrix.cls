@@ -25,7 +25,6 @@ Element = Tabel(r, c)
 GoTo slut
 fejl:
 slut:
-
 End Property
 
 Public Property Let Element(r As Integer, c As Integer, nval As Variant)

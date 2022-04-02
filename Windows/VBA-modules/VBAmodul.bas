@@ -6,86 +6,6 @@ Option Explicit
 ' Don't reference other modules or userforms. This module must be self contained
 Const VBAModulesFolder = "VBA-modules" ' the subfolder to import and export modules from/to
 
-Sub TestVBE()
-    Dim VBC As Object  'VBComponent
-    Dim i As Long, s As String
-    For Each VBC In ActiveDocument.VBProject.VBComponents
-        If VBC.Name = "ModuleChrText" Then
-            For i = 1 To 1 'VBC.CodeModule.CountOfLines
-                s = ReplaceANSIString(VBC.CodeModule.Lines(i, 1))
-            Next
-        End If
-    Next
-End Sub
-
-Function ReplaceANSIString(s As String) As String
-' only for test
-Dim i As Long
-Dim x() As Byte
-
-x = StrConv(s, vbFromUnicode) ' Convert string.
-For i = 0 To UBound(x)
-    ReplaceANSIString = ReplaceANSIString & ChrW(ConvertFromUnicodeToANSI(x(i)))
-    Debug.Print ChrW(x(i)) & ": " & x(i)
-Next
-End Function
-Function ConvertFromUnicodeToANSI(ByVal n As Integer) As Integer
-    Select Case n
-        Case 190 ' _
-                   n = 230
-        Case 191 ' ¿
-            n = 248
-        Case 140 ' Œ
-            n = 229
-        Case 174 ' ®
-            n = 198
-        Case 175 ' ¯
-            n = 216
-            '    Case 197 ' Å
-            '        n = 197
-        Case 135 ' ‡ (a«)
-            n = 225
-        Case 142 ' _ (e«)
-            n = 233
-        Case 151 ' — (o«)
-            n = 243
-        Case 150 ' – (n~)
-            n = 241
-        Case 146 ' ’ (i«)
-            n = 237
-        Case 156 ' œ (u«)
-            n = 250
-        Case 161 ' ¡ (o lille)
-            n = 176
-        Case 191 ' Ë (A`)
-            n = 192
-        Case 1 ' tegn for É (...)
-            n = 8230
-    End Select
-    ConvertFromUnicodeToANSI = n
-End Function
-
-Sub ReplaceToANSI()
-' if document has been edited on Mac this function must be run on Windows to convert
-' special characters in the code. (ANSI-Unicode problem)
-' There are few problems with characters from Windows to Mac. Only _ (shift 4) seems to be a problem. Just dont use it.
-   Dim VBC As Object  'VBComponent
-   Dim i As Long, s As String
-   If MsgBox("Do you want to replace all codetext to ANSI?", vbOKCancel, "Comfirm") = vbCancel Then Exit Sub
-   
-   For Each VBC In ActiveDocument.VBProject.VBComponents
-        If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
-'      If VBC.Name = "CSprog" Then
-         For i = 2 To VBC.CodeModule.CountOfLines
-            s = ReplaceLineToANSI(VBC.CodeModule.Lines(i, 1))
-            VBC.CodeModule.DeleteLines i, 1
-            VBC.CodeModule.InsertLines i, s
-         Next
-      End If
-   Next
-'   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
-    MsgBox "Conversion Done", vbOKOnly, "Done"
-End Sub
 Sub ReplaceToASCIIseq()
    Dim VBC As Object  'VBComponent
    Dim i As Long, s As String
@@ -95,6 +15,7 @@ Sub ReplaceToASCIIseq()
    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
 '      If VBC.Name = "CSprog" Then
+'        If MsgBox(VBC.Name, vbOKCancel, "Continue") = vbCancel Then Exit Sub
          For i = 2 To VBC.CodeModule.CountOfLines
             s = ReplaceLineToASCIIseq(VBC.CodeModule.Lines(i, 1))
             VBC.CodeModule.DeleteLines i, 1
@@ -102,6 +23,7 @@ Sub ReplaceToASCIIseq()
          Next
       End If
    Next
+'   GenerateKeyboardShortcuts
 '   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
@@ -114,6 +36,7 @@ Sub ReplaceToExtendedASCII()
    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
 '      If VBC.Name = "CSprog" Then
+        
          For i = 2 To VBC.CodeModule.CountOfLines
             s = ReplaceLineToExtendedASCII(VBC.CodeModule.Lines(i, 1))
             VBC.CodeModule.DeleteLines i, 1
@@ -125,35 +48,13 @@ Sub ReplaceToExtendedASCII()
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
 
-Private Function ReplaceLineToANSI(s As String) As String
-   s = Replace(s, ChrW(190), ChrW(230)) ' ae
-   s = Replace(s, ChrW(191), ChrW(248)) ' oe
-   s = Replace(s, ChrW(338), ChrW(229)) ' aa
-   s = Replace(s, ChrW(174), ChrW(198)) ' AE
-   s = Replace(s, ChrW(175), ChrW(216)) ' OE
-   s = Replace(s, ChrW(129), ChrW(197)) ' AA
-   s = Replace(s, ChrW(8225), ChrW(225)) '(a')
-   s = Replace(s, ChrW(381), ChrW(233)) '(e')
-   s = Replace(s, ChrW(8212), ChrW(243)) '(o')
-   s = Replace(s, ChrW(191), ChrW(192)) '(A') (Fra omvendt ?)
-   s = Replace(s, ChrW(203), ChrW(192)) '(A')
-'   s = Replace(s, ChrW(192), ChrW(191)) '(omvendt ?) karambolerer med A' ovenfor
-   s = Replace(s, ChrW(8211), ChrW(241)) '(n~)
-   s = Replace(s, ChrW(8217), ChrW(237)) '(i')
-   s = Replace(s, ChrW(339), ChrW(250)) '(u')
-   s = Replace(s, ChrW(161), ChrW(176)) '(gradtegn)
-   s = Replace(s, ChrW(164), ChrW(167)) ' paragraf (fra sol)
-   s = Replace(s, ChrW(219), ChrW(8364)) ' Euro
-'   s = Replace(s, "*._.*", ChrW(8230)) ' tre prikker
-   ReplaceLineToANSI = s
-End Function
 Private Function ReplaceLineToASCIIseq(s As String) As String
    s = Replace(s, ChrW(230), "*ae*") ' ae
    s = Replace(s, ChrW(248), "*oe*") ' oe
    s = Replace(s, ChrW(229), "*aa*") ' aa
    s = Replace(s, ChrW(198), "*AE*") ' AE
    s = Replace(s, ChrW(216), "*OE*") ' OE
-   s = Replace(s, ChrW(197), "*AA*") ' ÅAA
+   s = Replace(s, ChrW(197), "*AA*") ' AAA
    s = Replace(s, ChrW(225), "*a-*") ' a'
    s = Replace(s, ChrW(233), "*e-*") ' e'
    s = Replace(s, ChrW(243), "*o-*") ' o'
@@ -189,6 +90,49 @@ Private Function ReplaceLineToExtendedASCII(s As String) As String
    s = Replace(s, "*eu*", ChrW(8364)) ' (euro)
    s = Replace(s, "*._.*", ChrW(8230)) ' ...
    ReplaceLineToExtendedASCII = s
+End Function
+Sub ReplaceToANSI()
+' if document has been edited on Mac this function must be run on Windows to convert
+' special characters in the code. (ANSI-Unicode problem)
+' There are few problems with characters from Windows to Mac. Only _ (shift 4) seems to be a problem. Just dont use it.
+   Dim VBC As Object  'VBComponent
+   Dim i As Long, s As String
+   If MsgBox("Do you want to replace all codetext to ANSI?", vbOKCancel, "Comfirm") = vbCancel Then Exit Sub
+   
+   For Each VBC In ActiveDocument.VBProject.VBComponents
+        If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
+'      If VBC.Name = "CSprog" Then
+         For i = 2 To VBC.CodeModule.CountOfLines
+            s = ReplaceLineToANSI(VBC.CodeModule.Lines(i, 1))
+            VBC.CodeModule.DeleteLines i, 1
+            VBC.CodeModule.InsertLines i, s
+         Next
+      End If
+   Next
+'   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
+    MsgBox "Conversion Done", vbOKOnly, "Done"
+End Sub
+Private Function ReplaceLineToANSI(s As String) As String
+    s = Replace(s, ChrW(190), ChrW(230)) ' ae
+    s = Replace(s, ChrW(191), ChrW(248)) ' oe
+    s = Replace(s, ChrW(338), ChrW(229)) ' aa
+    s = Replace(s, ChrW(174), ChrW(198)) ' AE
+    s = Replace(s, ChrW(175), ChrW(216)) ' OE
+    s = Replace(s, ChrW(129), ChrW(197)) ' AA
+    s = Replace(s, ChrW(8225), ChrW(225)) '(a')
+    s = Replace(s, ChrW(381), ChrW(233)) '(e')
+    s = Replace(s, ChrW(8212), ChrW(243)) '(o')
+    s = Replace(s, ChrW(191), ChrW(192)) '(A') (Fra omvendt ?)
+    s = Replace(s, ChrW(203), ChrW(192)) '(A')
+    '   s = Replace(s, ChrW(192), ChrW(191)) '(omvendt ?) karambolerer med A' ovenfor
+    s = Replace(s, ChrW(8211), ChrW(241)) '(n~)
+    s = Replace(s, ChrW(8217), ChrW(237)) '(i')
+    s = Replace(s, ChrW(339), ChrW(250)) '(u')
+    s = Replace(s, ChrW(161), ChrW(176)) '(gradtegn)
+    s = Replace(s, ChrW(164), ChrW(167)) ' paragraf (fra sol)
+    s = Replace(s, ChrW(219), ChrW(8364)) ' Euro
+    '   s = Replace(s, "*._.*", ChrW(8230)) ' tre prikker
+    ReplaceLineToANSI = s
 End Function
 Function FolderExists(FolderPath As String) As Boolean
 
@@ -277,7 +221,7 @@ Public Sub ExportAllModules()
         bExport = True
         szFileName = cmpComponent.Name
 
-    ' nŒr der importeres oveni VBAmodul omd¿bes til VBAmodul1. Det _ndres tilbage
+    ' nÎr der importeres oveni VBAmodul omdÀbes til VBAmodul1. Det _ndres tilbage
         If cmpComponent.Name = "VBAmodul1" Then cmpComponent.Name = "VBAmodul"
         If cmpComponent.Name = "VBAmodul11" Then cmpComponent.Name = "VBAmodul"
 

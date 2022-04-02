@@ -2706,10 +2706,10 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     text = Replace(text, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
     text = Replace(text, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
     text = Replace(text, VBA.ChrW(247), "/")    '
-    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '´` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '´`
-    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '´` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '´`
+    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '«` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '«`
+    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '«` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '«`
     text = Replace(text, VBA.ChrW(&H393) & "_incomplete ", "gamma_incomplete")
     text = Replace(text, VBA.ChrW(915), "gamma")    ' stort gammategn
     text = Replace(text, VBA.ChrW(8800), "#")    ' ikkeligmed
@@ -2730,7 +2730,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     End If
 
     ' som test flyttes disse fra slutningen til starten
-    ' *oe**ae**aa* *AE**OE*Å ' *ae*ndres ikke tilbage
+    ' *oe**ae**aa* *AE**OE* ' *ae*ndres ikke tilbagee
     text = Replace(text, "*ae*", "ae")
     text = Replace(text, "*oe*", "oe")
     text = Replace(text, "*aa*", "aa")
@@ -3985,7 +3985,7 @@ spring:
         text = Replace(text, "^", "^^")  ' definerede matricer blev ikke h*aa*ndteret korrekt med ovenst*aa*ende. Fors*oe*ger nu at erstatte alle og h*aa*ber det ikke giver andre problemer
 '#If Mac Then ' from 1.18  windows is also sbcl
         text = Replace(text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
-        text = Replace(text, "§", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
+        text = Replace(text, "_", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
 '#Else
 '        text = Replace(text, "*", " _ ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
 '#End If
@@ -4313,8 +4313,8 @@ Function ConvertToAscii(ByVal text As String) As String
     text = Replace(text, """", "")    ' apostrof fjernes
 '#If Mac Then
 '#Else
-    text = Replace(text, "^'", "´")    ' alm apostrof kan ikke bruges
-    text = Replace(text, "'", "´")    ' alm apostrof kan ikke bruges
+    text = Replace(text, "^'", "«")    ' alm apostrof kan ikke bruges
+    text = Replace(text, "'", "«")    ' alm apostrof kan ikke bruges
 '#End If
     text = Replace(text, "+-", "-")    ' plus-minus giver minus
     text = Replace(text, VBA.ChrW(8289), "")    ' symbol der definerer funktion fjernes fra word syntaks
@@ -4324,8 +4324,8 @@ Function ConvertToAscii(ByVal text As String) As String
     '    text = Replace(text, VBA.ChrW(8901), "*") ' \cdot , ved ikke hvorfor der tilsyneladende er to
     '    text = Replace(text, VBA.ChrW(8729), "*") ' prik \cdot erstattes med gange
     '    text = Replace(text, VBA.ChrW(8226), "*") ' tyk prik erstattes med gange
-    '    text = Replace(text, VBA.ChrW(180), "^'") ' der er tre forskellige '´` apostrof lignende de forst*aa*es alle som diff
-    '    text = Replace(text, VBA.ChrW(96), "^'") ' der er tre forskellige '´`
+    '    text = Replace(text, VBA.ChrW(180), "^'") ' der er tre forskellige '«` apostrof lignende de forst*aa*es alle som diff
+    '    text = Replace(text, VBA.ChrW(96), "^'") ' der er tre forskellige '«`
 
     text = Replace(text, ChrW(183), "*")  ' Siden 1.18 (SBCL) kan alm gangetegn ikke vises
     text = Replace(text, ChrW(215), "*")  '
@@ -5056,10 +5056,10 @@ Function ConvertToLatex(text As String) As String
     text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
     text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
     text = Replace(text, """", "")    ' apostrof fjernes
-    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '´` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '´`
-    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '´` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '´`
+    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '«` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '«`
+    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '«` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '«`
     '    text = Replace(text, VBA.ChrW(176), "\circ ") ' gradtegn
     text = Replace(text, VBA.ChrW(189), "\frac{1}{2} ")    ' _
     text = Replace(text, VBA.ChrW(8800), "\neq ")    ' ikkeligmed

@@ -1,5 +1,5 @@
 Attribute VB_Name = "ModuleChrText"
-'… tre prikker
+'É tre prikker
 ' Problemfri begge veje:
 '|
 '\
@@ -7,14 +7,14 @@ Attribute VB_Name = "ModuleChrText"
 '£
 
 ' Problemer begge veje
-'¤  (sol)
+'_  (sol)
 
 'problemer fra mac til windows
 '*pa*  (paragraf)
 '*eu* (euro alt 5)
 
 'Problemer fra windows til mac
-'½ (halv)
+'_ (halv)
 '
 
 'Test
