@@ -57,10 +57,13 @@ CommandButton_GeoGebraSym.Enabled = True
 CommandButton_GeoGebraBrowser.Enabled = True
 If CASengine = 0 Then
     CommandButton_MaximaSym.Enabled = False
+    CommandButton_GeoGebraSym.SetFocus
 ElseIf CASengine = 1 Then
     CommandButton_GeoGebraBrowser.Enabled = False
+    CommandButton_MaximaSym.SetFocus
 ElseIf CASengine = 2 Then
     CommandButton_GeoGebraSym.Enabled = False
+    CommandButton_MaximaSym.SetFocus
 End If
     SetCaptions
 End Sub

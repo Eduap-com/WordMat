@@ -183,8 +183,10 @@ Sub PlotDF()
             End If
         End If
         s = ea.text
-        s = "SlopeField(" & s & ")"
-        OpenGeoGebraWeb s, "CAS", True, True
+        s = "SlopeField(" & s & ");"
+        s = s & "A=(-10, 2);B=(10, 0);"
+        s = s & "SolveODE(" & ea.text & ", x(A), y(A), x(B), 0.1)" ' y(A) virker ikke
+        OpenGeoGebraWeb s, "Classic", True, True
         GoTo slut
 #If Mac Then
 #Else

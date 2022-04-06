@@ -188,7 +188,7 @@ Sub OpenGeoGebraWeb(ByVal Cmd As String, Gtype As String, Optional ConvertSyntax
         End If
     End If
     
-    If Gtype = "CAS" Then
+    If Gtype = "CAS" Or Gtype = "Classic" Then
         ArrCas = Split(Cmd, ";")
         Cmd = ""
         For i = 0 To UBound(ArrCas)
@@ -323,6 +323,7 @@ Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = Tr
         
         If Cmd = "" Then Cmd = omax.Kommando
         Cmd = ConvertToGeogebraSyntax(Cmd)
+        omax.StartKommando = Cmd
         Res = ExecuteGeoGebraCasCommand(Cmd, UseDefs)
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#?" & Defliste)
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd)
@@ -473,6 +474,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
    
    ea.text = text
    ea.ReplaceVar "NIntegrate", "NIntegral"
+   ea.ReplaceVar "integrate", "Integral"
    ea.ReplaceVar "Integrate", "Integral"
    ea.ReplaceVar "minf", "-infinity"
    ea.ReplaceVar "inf", "infinity"

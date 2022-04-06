@@ -114,7 +114,6 @@ Dim Res As String
         End If
     Next
     Res = ExecuteGeogebraCmdViaJS(JS)
-
     If Res = "xQw6rT" Then
         Wait 1
         Res = ExecuteGeogebraCmdViaJS(JS)
@@ -133,18 +132,22 @@ Dim Res As String
 End Function
 
 Function ExecuteGeogebraCmdViaJS(JS As String) As String
+Dim FejlC As Integer
 #If Mac Then
     ExecuteGeogebraCmdViaJS = RunScript("ExecuteGeoGebraCASCommand", JS)
 #Else
  '   ExecuteGeogebraCmdViaJS = WebV.ExecuteScriptWaitTime(JS, 10000)
     Dim j As Integer
     Dim UfWait2 As UserFormWaitForMaxima
+start1:
     WebV.ExecuteScriptNonBlock JS
-    Do Until WebV.WaitUntilScriptFinished(1000) Or j >= 15
+    Do Until WebV.WaitUntilScriptFinished(200) Or j >= 75
+'    Do Until WebV.GetJSReturnVal() <> "xQw6rT" Or j >= 75
         If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
         If omax.StopNow Then GoTo slut
+'        Wait (0.2)
         j = j + 1
-        If j = 2 Then
+        If j = 10 And UfWait2 Is Nothing Then
             Set UfWait2 = New UserFormWaitForMaxima
             UfWait2.Label_tip.Font.Size = 10
             UfWait2.Label_tip.Font.Italic = False
@@ -153,9 +156,31 @@ Function ExecuteGeogebraCmdViaJS(JS As String) As String
             UfWait2.Label_progress.Caption = "*"
         End If
     Loop
-    If j >= 15 Then
+    If j >= 75 Then
         WebV.Reload
         ExecuteGeogebraCmdViaJS = ""
+    ElseIf (WebV.GetJSReturnVal() = """?""" Or WebV.GetJSReturnVal() = "null") And FejlC = 0 Then
+        If UfWait2 Is Nothing Then
+            Set UfWait2 = New UserFormWaitForMaxima
+            UfWait2.Label_tip.Font.Size = 10
+            UfWait2.Label_tip.Font.Italic = False
+            UfWait2.Show vbModeless
+            UfWait2.Label_tip.Caption = Sprog.A(684)
+            UfWait2.Label_progress.Caption = "*"
+        End If
+        WebV.Reload
+        WebV.WaitWV
+        If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        FejlC = FejlC + 1
+        Wait 1
+        If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        Wait 1
+        If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        GoTo start1
+'    ElseIf (WebV.GetJSReturnVal() = """?""" Or WebV.GetJSReturnVal() = "null") And FejlC = 1 Then
+'        Wait 2
+'        FejlC = FejlC + 1
+'        GoTo start1
     Else
         ExecuteGeogebraCmdViaJS = WebV.GetJSReturnVal()
     End If

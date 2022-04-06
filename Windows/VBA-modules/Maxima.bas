@@ -730,9 +730,9 @@ stophop:     If omax.AntalVars > 1 Then
 newcassys:
         If CASengine = 1 Or CASengine = 2 Then
             If MaximaComplex Then
-                s = "Csolve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(omax.vars, ";", ",") & "})"
+                s = "Csolve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(variabel, ";", ",") & "})"
             Else
-                s = "solve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(omax.vars, ";", ",") & "})"
+                s = "solve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(variabel, ";", ",") & "})"
             End If
             If MaximaVidNotation Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
@@ -760,7 +760,7 @@ newcassys:
                 omax.MaximaOutput = variabel & VBA.ChrW(8712) & VBA.ChrW(8709)
             ElseIf omax.MaximaOutput = "{" & variabel & "=" & variabel & "}" Or omax.MaximaOutput = "{x=x}" Then
                 omax.MaximaOutput = variabel & VBA.ChrW(8712) & VBA.ChrW(8477)
-            Else
+            ElseIf omax.MaximaOutput <> "?" And omax.MaximaOutput <> "" Then
                 omax.ConvertOutputToSolvedGGB ' burde m*aa*ske forbedres med ea.getnextlistitem ligesom solve
             End If
             Application.Activate
@@ -768,8 +768,6 @@ newcassys:
         
         If omax.StopNow Then GoTo slut
         If omax.CheckForError Then GoTo slut
-        omax.GoToEndOfSelectedMaths
-        Selection.TypeParagraph
         If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
@@ -785,9 +783,6 @@ newcassys:
         End If
 
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
-        If MaximaForklaring Then
-            InsertForklaring Sprog.A(134) & variabel & Sprog.A(135)
-        End If
         
         If omax.MaximaOutput = "?" Or omax.MaximaOutput = "" Or InStr(omax.KommentarOutput, "Lisp error") > 0 Then
             UserFormChooseCAS.Show
@@ -804,7 +799,7 @@ newcassys:
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
                 TempCas = CASengine
                 CASengine = 2
-                Selection.MoveLeft wdCharacter, 1
+'                Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
                 CASengine = TempCas
@@ -820,6 +815,11 @@ newcassys:
                 GoTo slut
             End If
         ElseIf Len(omax.MaximaOutput) > 1 Then
+            omax.GoToEndOfSelectedMaths
+            Selection.TypeParagraph
+            If MaximaForklaring Then
+                InsertForklaring Sprog.A(134) & variabel & Sprog.A(135)
+            End If
             omax.InsertMaximaOutput
             Arr = Split(omax.MaximaOutput, "=")
             If UBound(Arr) = 1 Then
@@ -842,6 +842,8 @@ newcassys:
                 Selection.TypeText "GeoGebra har v*ae*ret anvendt til at l*oe*se ligningssystemet. Det er usikkert om der kan v*ae*re l*oe*sninger. Det anbefales at fors*oe*ge med anden metode. Fx Maxima, eller numerisk/grafisk"
             End If
         Else    ' ingen l*oe*sninger
+            omax.GoToEndOfSelectedMaths
+            Selection.TypeParagraph
             If Len(omax.KommentarOutput) <= 1 Then
                 omax.MaximaOutput = "L=" & VBA.ChrW(8709)
                 '               omax.GoToEndOfSelectedMaths
@@ -1358,7 +1360,7 @@ ghop:
 
 
         If CASengine = 1 Or CASengine = 2 Then
-            s = "nsolve({" & Replace(omax.KommandoerStreng, ";", ",") & "},{" & Replace(inp, ";", " , ") & "})"
+            s = "nsolve({" & Replace(omax.KommandoerStreng, ";", " , ") & "},{" & Replace(inp, ";", " , ") & "})"
         End If
         
         If CASengine = 0 Then
@@ -1654,10 +1656,21 @@ Sub beregn()
     ElseIf CASengine = 2 Then
         fo = RunGeoGebraDirect(s)
         If MaximaExact = 0 And Not MaximaVidNotation Then
-            s = "numeric(" & fo & " , " & MaximaCifre & ")"
-'            s = "numeric(" & s & " , " & MaximaCifre & ")"
+            If fo = "?" Or fo = "null" Or fo = "" Then
+                s = "numeric(" & s & " , " & MaximaCifre & ")"
+            Else
+                s = "numeric(" & fo & " , " & MaximaCifre & ")"
+            End If
+            MaximaExact = 2
             t = RunGeoGebraDirect(s)
-            If fo <> t Then
+            MaximaExact = 0
+            If (fo = "?" Or fo = "null" Or fo = "") And (t = "?" Or t = "null" Or t = "") Then
+                omax.MaximaOutput = fo
+            ElseIf (fo = "?" Or fo = "null" Or fo = "") Then
+                omax.MaximaOutput = t
+            ElseIf (t = "?" Or t = "null" Or t = "") Or fo = t Or t = "" Then
+                omax.MaximaOutput = fo
+            Else
                 omax.MaximaOutput = fo & VBA.ChrW(&H2248) & t
             End If
         End If

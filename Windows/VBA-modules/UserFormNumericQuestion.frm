@@ -88,6 +88,7 @@ Private Sub UserForm_Activate()
         Label_omskrevet.Caption = ""
         Finished = True
         CommandButton_Omskrevet.visible = False
+        CommandButton_nsolve.SetFocus
         Exit Sub
     End If
     Dim TempDefs As String
@@ -186,6 +187,7 @@ afslut:
     Else
         Label2.Caption = Sprog.NoNumericSolution2
     End If
+    CommandButton_nsolve.SetFocus
 slut:
     Finished = True
     

@@ -9,6 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 Public Kommando As String    ' kommando som maxima skal udf*oe*re
+Public StartKommando As String
 Public KommandoForklaring As String ' til skrivning af kommando
 Private Kommandoer() As String    ' kommandoer som maxima skal udf*oe*re. KommandoerStreng m*aa* bruges public
 Public MaximaOutput As String    ' resultat fra Maxima
@@ -1470,7 +1471,7 @@ Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional
 slut:
 End Sub
 Sub beregn()
-    Dim inkom As String, pkommando As String, StartKommando As String, StartKommando2 As String, StartKommando3 As String
+    Dim inkom As String, pkommando As String, StartKommando2 As String, StartKommando3 As String
     Dim posca As Integer
     Dim posligmed As Integer
     Dim possumtegn As Integer
