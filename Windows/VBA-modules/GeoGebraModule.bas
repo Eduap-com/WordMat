@@ -33,45 +33,45 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     omax.ReadSelection
 
     
-    ' s*ae*t definitioner i rigtig r*ae*kkef*oe*lge
-    For i = 0 To omax.defindex - 1
-        DefList = DefList & "," & omax.DefName(i)
-        ea.text = omax.DefValue(i)
-        var = ea.GetNextVar
-        If var = "" Then
-            sl.Add omax.DefName(i), omax.DefValue(i), 0
-        Else
-            k = 0
-            For j = 0 To sl.Length - 1
-                ea.text = sl.GetVal(j)
-                If ea.ContainsVar(omax.DefName(i)) Then
-                    Exit For
-                End If
-                k = k + 1
-            Next
-            sl.Add omax.DefName(i), omax.DefValue(i), k
-        End If
-    Next
-    
-    ' definer variable der ikke er defineret
-    omax.FindVariable
-    ea.text = DefList
-    For i = 0 To sl.Length - 1
-        fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
-        If sl.GetVal(i) <> ReplacedVar Then
-            DefinerKonstanter sl.GetVal(i), DefList, Nothing, UrlLink
-            p = InStr(sl.GetName(i), "(")
-            If p > 0 Then
-                Cmd = Left(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
-            Else
-                Cmd = sl.GetName(i) & "=" & fktudtryk
-            End If
-        Else
-            Cmd = sl.GetName(i) & "=" & fktudtryk
-        End If
-        Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
-        UrlLink = UrlLink & Cmd
-    Next
+'    ' s*ae*t definitioner i rigtig r*ae*kkef*oe*lge
+'    For i = 0 To omax.defindex - 1
+'        DefList = DefList & "," & omax.DefName(i)
+'        ea.text = omax.DefValue(i)
+'        var = ea.GetNextVar
+'        If var = "" Then
+'            sl.Add omax.DefName(i), omax.DefValue(i), 0
+'        Else
+'            k = 0
+'            For j = 0 To sl.Length - 1
+'                ea.text = sl.GetVal(j)
+'                If ea.ContainsVar(omax.DefName(i)) Then
+'                    Exit For
+'                End If
+'                k = k + 1
+'            Next
+'            sl.Add omax.DefName(i), omax.DefValue(i), k
+'        End If
+'    Next
+'
+'    ' definer variable der ikke er defineret
+'    omax.FindVariable
+'    ea.text = DefList
+'    For i = 0 To sl.Length - 1
+'        fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
+'        If sl.GetVal(i) <> ReplacedVar Then
+'            DefinerKonstanter sl.GetVal(i), DefList, Nothing, UrlLink
+'            p = InStr(sl.GetName(i), "(")
+'            If p > 0 Then
+'                Cmd = Left(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
+'            Else
+'                Cmd = sl.GetName(i) & "=" & fktudtryk
+'            End If
+'        Else
+'            Cmd = sl.GetName(i) & "=" & fktudtryk
+'        End If
+'        Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
+'        UrlLink = UrlLink & Cmd
+'    Next
     
     j = 1
     ' inds*ae*t de markerede funktioner
@@ -85,6 +85,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
         udtryk = Replace(udtryk, VBA.ChrW(8797), "=") ' tripel =
         udtryk = Replace(udtryk, VBA.ChrW(8801), "=") ' def =
         udtryk = Trim(udtryk)
+        udtryk = ConvertToGeogebraSyntax(udtryk)
         If Gtype <> "CAS" Then
             If Len(udtryk) > 0 Then
                 If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
@@ -104,7 +105,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                             DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
                             Cmd = fktnavn & "(x)=" & fktudtryk
-                            Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
+                            Cmd = Replace(Cmd, "+", "%2B") & ";"
                             UrlLink = UrlLink & Cmd
 
                         Else
@@ -115,21 +116,21 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                             Else
                                 Cmd = fktnavn & "(x)=" & fktudtryk
                             End If
-                            Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
+                            Cmd = Replace(Cmd, "+", "%2B") & ";"
                             UrlLink = UrlLink & Cmd
                             j = j + 1
                         End If
                     ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
                         DefinerKonstanter udtryk, DefList, Nothing, UrlLink
                         Cmd = "u" & j & "=" & udtryk
-                        Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
+                        Cmd = Replace(Cmd, "+", "%2B") & ";"
                         UrlLink = UrlLink & Cmd
                         '                    geogebrafil.CreateFunction "u" & j, udtryk, True
                     Else
                         udtryk = ReplaceIndepvarX(udtryk)
                         DefinerKonstanter udtryk, DefList, Nothing, UrlLink
                         Cmd = "f" & j & "=" & udtryk
-                        Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
+                        Cmd = Replace(Cmd, "+", "%2B") & ";"
                         UrlLink = UrlLink & Cmd
 
                         '                    geogebrafil.CreateFunction "f" & j, udtryk, False
@@ -165,6 +166,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
             
     '    MsgBox UrlLink & cmd
     '    OpenLink UrlLink, True
+    
     OpenGeoGebraWeb UrlLink, Gtype
 fejl:
 
@@ -529,7 +531,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
 '            gexpr = gexpr & "]"
             gexpr = gexpr & ")"
          Next
-         text = Left(text, sp - 1) & gexpr & right(text, Len(text) - ep + 1)
+         text = Left(text, sp - 1) & gexpr & right(text, Len(text) - ep + 2)
          If Left(text, 1) = "(" Then text = right(text, Len(text) - 1)
 '         text = Replace(text, " and ", " ??_ ") '&& der m*aa* v*ae*re sket noget fejlkonvertering
 '         text = Replace(text, " or ", " ??Â ") '||
