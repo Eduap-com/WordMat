@@ -518,14 +518,16 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
             p2 = InStr(p3, s, "then")
             p3 = InStr(p3, s, "else")
             If p3 <= 0 Then p3 = Len(s) + 1
-            gexpr = gexpr & "If[" & Trim(Mid(s, p + 2, p2 - p - 2)) & "," & Trim(Mid(s, p2 + 4, p3 - p2 - 4)) & ","
+'            gexpr = gexpr & "If[" & Trim(Mid(s, p + 2, p2 - p - 2)) & "," & Trim(Mid(s, p2 + 4, p3 - p2 - 4)) & ","
+            gexpr = gexpr & "If(" & Trim(Mid(s, p + 2, p2 - p - 2)) & "," & Trim(Mid(s, p2 + 4, p3 - p2 - 4)) & ","
             n = n + 1
             If p3 = Len(s) + 1 Then Exit Do
             p3 = p3 + 1
          Loop While p3 < Len(s)
          If right(gexpr, 1) = "," Then gexpr = Left(gexpr, Len(gexpr) - 1)
          For i = 1 To n
-            gexpr = gexpr & "]"
+'            gexpr = gexpr & "]"
+            gexpr = gexpr & ")"
          Next
          text = Left(text, sp - 1) & gexpr & right(text, Len(text) - ep + 1)
          If Left(text, 1) = "(" Then text = right(text, Len(text) - 1)

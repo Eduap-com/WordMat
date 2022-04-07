@@ -574,7 +574,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
     If StopTime > 0 Then
         WT = StopTime
     Else
-        WT = "10"
+        WT = "5"
     End If
     Set UfWait2 = New UserFormWaitForMaxima
     On Error Resume Next ' hvis en form allerede er *aa*ben giver det fejl
@@ -588,7 +588,7 @@ start:
   FN = DataFolder & "output.txt"
     s = ExecuteMaximaViaFile(MaximaInputStreng, WT, MaximaUnits)
     If Left(s, 5) = "Fejln" Then
-        WT = InputBox("Kommandoen blev afbrudt efter 10s. Vil du pr*oe*ve igen, og hvor lang tid vil du vente. (sekunder) Computeren l*aa*ses i ventetiden.", "Afbrudt", 30)
+        WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du pr*oe*ve igen, og hvor lang tid vil du vente. (sekunder) Computeren l*aa*ses i ventetiden.", "Afbrudt", 20)
         If Trim(WT) <> "" Then
             WT = Trim(WT)
             GoTo start
@@ -3940,7 +3940,12 @@ spring:
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & ")"
             End If
-            text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos)
+            
+            If Len(text) - slpos >= 0 Then
+                text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos)
+            Else
+                text = Left(text, stpos - 1) & mtext
+            End If
         End If
     Loop While pos > 0
 
