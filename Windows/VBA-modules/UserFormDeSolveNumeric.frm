@@ -422,7 +422,7 @@ Function SolveDE() As Boolean
     ListOutput = omax.MaximaOutput
     
     Dim s As String, i As Long, j As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     ReDim PointArr(Npoints, n)
     ea.text = ListOutput
     ea.SetSquareBrackets
@@ -431,9 +431,9 @@ Function SolveDE() As Boolean
     End If
     Do
         s = ea.GetNextBracketContent(0)
-        Arr = Split(s, ListSeparator)
+        arr = Split(s, ListSeparator)
         For j = 0 To n 'UBound(Arr)
-            PointArr(i, j) = Arr(j)
+            PointArr(i, j) = arr(j)
         Next
         i = i + 1
     Loop While ea.pos < ea.Length - 1 And i < 1000
@@ -633,7 +633,7 @@ Dim vars As String
 Dim var As String, var2 As String
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim Arr As Variant
+Dim arr As Variant
 Dim arr2 As Variant
 Dim i As Integer
     
@@ -666,14 +666,14 @@ Dim i As Integer
     Do While right(TextBox_definitioner.text, 2) = vbCrLf
         TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
     Loop
-    Arr = Split(TextBox_definitioner.text, vbCrLf)
+    arr = Split(TextBox_definitioner.text, vbCrLf)
     
     Do
     var = ea.GetNextListItem
     var = Replace(var, vbCrLf, "")
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-        var2 = Split(Arr(i), "=")(0)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+        var2 = Split(arr(i), "=")(0)
         If var2 = var Then
             var = ""
             Exit For

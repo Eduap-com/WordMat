@@ -221,7 +221,7 @@ Public Sub ExportAllModules()
         bExport = True
         szFileName = cmpComponent.Name
 
-    ' nër der importeres oveni VBAmodul omdËbes til VBAmodul1. Det _ndres tilbage
+    ' n‘r der importeres oveni VBAmodul omdèbes til VBAmodul1. Det _ndres tilbage
         If cmpComponent.Name = "VBAmodul1" Then cmpComponent.Name = "VBAmodul"
         If cmpComponent.Name = "VBAmodul11" Then cmpComponent.Name = "VBAmodul"
 
@@ -266,7 +266,7 @@ Sub ImportAllModules()
     Dim szExportPath As String
     Dim szFileName As String
     Dim StrFile As String, i As Integer
-    Dim Arr() As String, FileList As String, MBP As Integer
+    Dim arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
 
 #If Mac Then
@@ -308,7 +308,7 @@ Sub ImportAllModules()
         End If
         StrFile = Dir
     Loop
-    Arr = Split(FileList, vbCrLf)
+    arr = Split(FileList, vbCrLf)
 '    FileList = Replace(FileList, vbCrLf, " | ")
     q = ""
     If Not ActiveDocument.Saved Then
@@ -333,9 +333,9 @@ Sub ImportAllModules()
     
    DeleteAllModules False
     
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" And InStr(Arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
-            wkbSource.VBProject.VBComponents.Import szExportPath & Arr(i)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" And InStr(arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
+            wkbSource.VBProject.VBComponents.Import szExportPath & arr(i)
         End If
     Next
     

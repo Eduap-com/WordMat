@@ -28,7 +28,7 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer
     
     
@@ -36,12 +36,12 @@ Dim i As Integer
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> TextBox_funktion.text Then ' kan ikke definere variabel der l*oe*ses for
-                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
+            If Split(arr(i), "=")(0) <> TextBox_funktion.text Then ' kan ikke definere variabel der l*oe*ses for
+                TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & TextBox_funktion.text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
@@ -69,7 +69,7 @@ Dim i As Integer
 Dim svar As String
     SetCaptions
 
-    If InStr(Label_ligning.Caption, "ÇÇ") > 0 Then
+    If InStr(Label_ligning.Caption, "‚‚") > 0 Then
         Label_diffy.visible = True
         TextBox_starty2.visible = True
         Label_y2.visible = True

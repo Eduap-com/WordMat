@@ -18,6 +18,102 @@ Attribute VB_Exposed = False
 Option Explicit
 Private palindex As Integer
 
+Private Sub CommandButton_geogebra_Click()
+Dim s As String, vekt As String, arr() As String, i As Integer, j As Integer
+Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String
+
+' forskrifter
+    If TextBox_forskrift1.text <> "" Then
+        s = s & TextBox_forskrift1.text & ";"
+    End If
+    If TextBox_forskrift2.text <> "" Then
+        s = s & TextBox_forskrift2.text & ";"
+    End If
+    If TextBox_forskrift3.text <> "" Then
+        s = s & TextBox_forskrift3.text & ";"
+    End If
+
+'ligninger
+    If TextBox_ligning1.text <> "" Then
+        s = s & TextBox_ligning1.text & ";"
+    End If
+    If TextBox_ligning2.text <> "" Then
+        s = s & TextBox_ligning1.text & ";"
+    End If
+    If TextBox_ligning3.text <> "" Then
+        s = s & TextBox_ligning1.text & ";"
+    End If
+    
+'vektorer
+If TextBox_vektorer.text <> "" Then
+    vekt = TextBox_vektorer.text
+    arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+            If InStr(arr(i), ";") > 0 Then
+                arr(i) = Replace(arr(i), ",", ".")
+                arr(i) = Replace(arr(i), ";", ",")
+            Else
+                ea.text = arr(i)
+                j = ea.CountText(",")
+                If Not (j = 2 Or j = 4) Then
+                    ea.ConvertDecSeparator
+                    arr(i) = ea.text
+                End If
+            End If
+            If InStr(arr(i), ")(") > 0 Then
+                arr(i) = Replace(arr(i), ")(", "),(")
+            Else
+                arr(i) = "(0,0,0)," & arr(i)
+            End If
+            arr(i) = Replace(arr(i), "(", "(")
+            arr(i) = Replace(arr(i), ")", ")")
+            
+            s = s & "vector(" & arr(i) & ");"
+        End If
+    Next
+End If
+
+'parameterfremstillinger
+If TextBox_parametric1x.text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric1x.text)
+    pary = omax.CodeForMaxima(TextBox_parametric1y.text)
+    parz = omax.CodeForMaxima(TextBox_parametric1z.text)
+     s = s & "(" & parx & "," & pary & "," & parz & ");"
+End If
+If TextBox_parametric2x.text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric2x.text)
+    pary = omax.CodeForMaxima(TextBox_parametric2y.text)
+    parz = omax.CodeForMaxima(TextBox_parametric2z.text)
+     s = s & "(" & parx & "," & pary & "," & parz & ");"
+End If
+If TextBox_parametric3x.text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric3x.text)
+    pary = omax.CodeForMaxima(TextBox_parametric3y.text)
+    parz = omax.CodeForMaxima(TextBox_parametric3z.text)
+     s = s & "(" & parx & "," & pary & "," & parz & ");"
+End If
+
+'punkter
+If TextBox_punkter.text <> "" Then
+    punkttekst = TextBox_punkter.text
+    If InStr(punkttekst, ";") > 0 Then
+        punkttekst = Replace(punkttekst, ",", ".")
+        punkttekst = Replace(punkttekst, ";", ",")
+    End If
+    punkttekst = Replace(punkttekst, ")(", ");(")
+    punkttekst = Replace(punkttekst, vbCrLf, ";")
+    punkttekst = Replace(punkttekst, vbCr, ";")
+    punkttekst = Replace(punkttekst, " ", "")
+    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    s = s & punkttekst & ";"
+End If
+    s = Left(s, Len(s) - 1)
+    
+    OpenGeoGebraWeb s, "3d", False, False
+    
+End Sub
+
 Private Sub CommandButton_insertplan_Click()
 Dim plan As String
 '    plan = "a*(x-x0)+b*(y-y0)+c*(z-z0)=0"
@@ -192,7 +288,7 @@ Dim smax As String
 Dim gridno As String
 Dim punkttekst As String
 Dim antalobj As Integer
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser
 
@@ -342,35 +438,35 @@ If TextBox_vektorer.text <> "" Then
         grafobj = grafobj & "surface_hide = false,"
     End If
     vekt = TextBox_vektorer.text
-    Arr = Split(vekt, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-            If InStr(Arr(i), ";") > 0 Then
-                Arr(i) = Replace(Arr(i), ",", ".")
-                Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+            If InStr(arr(i), ";") > 0 Then
+                arr(i) = Replace(arr(i), ",", ".")
+                arr(i) = Replace(arr(i), ";", ",")
             Else
-                ea.text = Arr(i)
+                ea.text = arr(i)
                 j = ea.CountText(",")
                 If Not (j = 2 Or j = 4) Then
                     ea.ConvertDecSeparator
-                    Arr(i) = ea.text
+                    arr(i) = ea.text
                 End If
             End If
-            If InStr(Arr(i), ")(") > 0 Then
-                Arr(i) = Replace(Arr(i), ")(", "],[")
+            If InStr(arr(i), ")(") > 0 Then
+                arr(i) = Replace(arr(i), ")(", "],[")
             Else
-                Arr(i) = "[0,0,0]," & Arr(i)
+                arr(i) = "[0,0,0]," & arr(i)
             End If
-            Arr(i) = Replace(Arr(i), "(", "[")
-            Arr(i) = Replace(Arr(i), ")", "]")
+            arr(i) = Replace(arr(i), "(", "[")
+            arr(i) = Replace(arr(i), ")", "]")
             
             If CheckBox_udtryk.Value Then
-                grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
+                grafobj = grafobj & "key=""Vektor: " & arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
             End If
             grafobj = grafobj & "color=" & GetNextColor & ","
-            grafobj = grafobj & "vector(" & Arr(i) & "),"
+            grafobj = grafobj & "vector(" & arr(i) & "),"
         End If
     Next
     antalobj = antalobj + 1
@@ -565,7 +661,7 @@ End Sub
 
 Sub SetCaptions()
     Me.Caption = Sprog.A(302)
-    CommandButton_ok.Caption = Sprog.OK
+'    CommandButton_ok.Caption = Sprog.OK ' gnuplot not ok
     Label6.Caption = Sprog.Equation & " 1"
     Label7.Caption = Sprog.Equation & " 2"
     Label8.Caption = Sprog.Equation & " 3"

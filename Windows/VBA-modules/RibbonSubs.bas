@@ -616,11 +616,11 @@ Sub Rib_omdrejningslegeme(control As IRibbonControl)
 End Sub
 'Callback for retningsfeltm onAction
 Sub Rib_retningsfelt(control As IRibbonControl)
-#If Mac Then
-    MsgBox "This function is not avaiable on Mac. Use GeoGebra", vbOKOnly, "Mac issue"
-#Else
+'#If Mac Then
+'    MsgBox "This function is not avaiable on Mac. Use GeoGebra", vbOKOnly, "Mac issue"
+'#Else
     PlotDF
-#End If
+'#End If
 End Sub
 'Callback for regrtabel onAction
 Sub Rib_regrtabel(control As IRibbonControl)

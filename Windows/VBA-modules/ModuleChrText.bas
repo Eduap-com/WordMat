@@ -1,5 +1,5 @@
 Attribute VB_Name = "ModuleChrText"
-'É tre prikker
+'ƒ tre prikker
 ' Problemfri begge veje:
 '|
 '\

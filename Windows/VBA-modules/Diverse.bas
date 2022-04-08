@@ -723,7 +723,7 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     Dim posca As Integer
     Dim poseller As Integer
     Dim pos As Integer
-    Dim Arr(20) As String
+    Dim arr(20) As String
     Dim i As Integer
     
     Do ' g*aa* tilbage til n*ae*rmeste ligmed
@@ -743,11 +743,11 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     End If
     If pos = Len(text) Then pos = 0
     If pos > 0 Then
-        Arr(i) = Left(text, pos - 1)
+        arr(i) = Left(text, pos - 1)
         text = right(text, Len(text) - pos)
         i = i + 1
     Else
-        Arr(i) = text
+        arr(i) = text
     End If
     Loop While pos > 0
     
@@ -756,7 +756,7 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
         KlipTilLigmed = text
         ResIndex = -1
     Else
-        KlipTilLigmed = Arr(i - indeks)
+        KlipTilLigmed = arr(i - indeks)
     End If
     
     ' fjern retur og mellemrum mm.
@@ -966,7 +966,6 @@ End Sub
 Sub ToggleUnits()
     Dim ufq As UserFormQuick
     
-
     If MaximaUnits Then
         Set ufq = New UserFormQuick
         ufq.Label_text.Caption = Sprog.A(166) 'unit off
@@ -977,25 +976,24 @@ Sub ToggleUnits()
         MaximaUnits = True
         DoEvents
         PrepareMaximaNoSplash
-        If Not MaxProc Is Nothing Then
+#If Mac Then
+#Else
+        If MaxProc Is Nothing Then Exit Sub
+#End If
 chosunit:
             OutUnits = InputBox(Sprog.A(167), Sprog.A(168), OutUnits)
             If InStr(OutUnits, "/") > 0 Or InStr(OutUnits, "*") > 0 Or InStr(OutUnits, "^") > 0 Then
                 MsgBox Sprog.A(343), vbOKOnly, Sprog.Error
                 GoTo chosunit
             End If
-            
-    On Error Resume Next
-#If Mac Then
+            On Error Resume Next
             TurnUnitsOn
-#End If
 '            TurnUnitsOn
 '            MaxProc.OutUnits = omax.ConvertUnits(OutUnits)
 '            MaxProc.Units = 1
 '            MaxProc.CloseProcess
 '            MaxProc.StartMaximaProcess
         End If
-    End If
     
 '    UserFormQuick.Hide
 '    Unload ufq
@@ -1827,7 +1825,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo fejl
     Application.ScreenUpdating = False
-    Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, Arr As Variant
+    Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox Sprog.A(345), vbOKOnly, Sprog.Error
@@ -1847,12 +1845,12 @@ On Error GoTo fejl
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(Sprog.A(346), Sprog.A(6), f.Result & "." & f2.Result)
-            Arr = Split(n, ".")
-            If UBound(Arr) > 0 Then
-                SetFieldNo f, CStr(Arr(0))
-                SetFieldNo f2, CStr(Arr(1))
+            arr = Split(n, ".")
+            If UBound(arr) > 0 Then
+                SetFieldNo f, CStr(arr(0))
+                SetFieldNo f2, CStr(arr(1))
             Else
-                SetFieldNo f, CStr(Arr(0))
+                SetFieldNo f, CStr(arr(0))
             End If
         Else
             n = InputBox(Sprog.A(346), Sprog.A(6), f.Result)
