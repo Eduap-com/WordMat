@@ -21,24 +21,24 @@ Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As 
 
 ' forskrifter
     If TextBox_forskrift1.text <> "" Then
-        s = s & TextBox_forskrift1.text & ";"
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift1.text) & ";"
     End If
     If TextBox_forskrift2.text <> "" Then
-        s = s & TextBox_forskrift2.text & ";"
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift2.text) & ";"
     End If
     If TextBox_forskrift3.text <> "" Then
-        s = s & TextBox_forskrift3.text & ";"
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift3.text) & ";"
     End If
 
 'ligninger
     If TextBox_ligning1.text <> "" Then
-        s = s & TextBox_ligning1.text & ";"
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.text) & ";"
     End If
     If TextBox_ligning2.text <> "" Then
-        s = s & TextBox_ligning1.text & ";"
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.text) & ";"
     End If
     If TextBox_ligning3.text <> "" Then
-        s = s & TextBox_ligning1.text & ";"
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.text) & ";"
     End If
     
 'vektorer
@@ -73,22 +73,22 @@ End If
 
 'parameterfremstillinger
 If TextBox_parametric1x.text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric1x.text)
-    pary = omax.CodeForMaxima(TextBox_parametric1y.text)
-    parz = omax.CodeForMaxima(TextBox_parametric1z.text)
-     s = s & "(" & parx & "," & pary & "," & parz & ");"
+    parx = ConvertToGeogebraSyntax(TextBox_parametric1x.text)
+    pary = ConvertToGeogebraSyntax(TextBox_parametric1y.text)
+    parz = ConvertToGeogebraSyntax(TextBox_parametric1z.text)
+     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
 End If
 If TextBox_parametric2x.text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric2x.text)
-    pary = omax.CodeForMaxima(TextBox_parametric2y.text)
-    parz = omax.CodeForMaxima(TextBox_parametric2z.text)
-     s = s & "(" & parx & "," & pary & "," & parz & ");"
+    parx = ConvertToGeogebraSyntax(TextBox_parametric2x.text)
+    pary = ConvertToGeogebraSyntax(TextBox_parametric2y.text)
+    parz = ConvertToGeogebraSyntax(TextBox_parametric2z.text)
+     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
 End If
 If TextBox_parametric3x.text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric3x.text)
-    pary = omax.CodeForMaxima(TextBox_parametric3y.text)
-    parz = omax.CodeForMaxima(TextBox_parametric3z.text)
-     s = s & "(" & parx & "," & pary & "," & parz & ");"
+    parx = ConvertToGeogebraSyntax(TextBox_parametric3x.text)
+    pary = ConvertToGeogebraSyntax(TextBox_parametric3y.text)
+    parz = ConvertToGeogebraSyntax(TextBox_parametric3z.text)
+     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
 End If
 
 'punkter
@@ -107,7 +107,7 @@ If TextBox_punkter.text <> "" Then
 End If
     s = Left(s, Len(s) - 1)
     
-    OpenGeoGebraWeb s, "3d", False, False
+    OpenGeoGebraWeb s, "3d", True, False
     
 End Sub
 
@@ -652,6 +652,8 @@ Private Sub UserForm_Activate()
     Label12.visible = False
     Label15.visible = False
     Label14.visible = False
+    Label146.visible = False
+    ComboBox_farver.visible = False
     TextBox_tmin1.visible = False
     TextBox_tmax1.visible = False
     TextBox_smin1.visible = False
