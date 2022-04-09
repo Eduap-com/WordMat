@@ -1,7 +1,6 @@
 Attribute VB_Name = "Statistik"
 Option Explicit
 Public UFgrupper As UserFormGrupper
-
 Sub Chi2Fordeling()
     Dim k As Integer
     Dim g As Variant

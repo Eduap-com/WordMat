@@ -1,6 +1,5 @@
 Attribute VB_Name = "GlobaleVariable"
 Option Explicit
-
 'Public DebugWM As Boolean = True
 Public DebugWM As Boolean ' brug toggledebug funktion
 Public Const PI As Double = 3.14159265358979

@@ -13,11 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
 Option Explicit
 Private EventsOn As Boolean
-
 Private Sub CommandButton_cancel_Click()
     TextBox_function.text = ""
     Me.Hide

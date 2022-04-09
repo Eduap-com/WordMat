@@ -1,7 +1,6 @@
 Attribute VB_Name = "WebViewModule"
 Public WebV As Object ' WebViewWrap.Browser
 Public GeoGebraWindowOpen As Boolean
-
 Sub OpenWebV()
     Set UfWait2 = New UserFormWaitForMaxima
     UfWait2.Label_tip.Font.Size = 10

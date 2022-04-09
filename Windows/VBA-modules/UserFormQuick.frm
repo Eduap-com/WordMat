@@ -13,11 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
 Option Explicit
 Dim start
-
 Private Sub UserForm_Activate()
     start = Timer    ' Set start time.
     Do While Timer < start + 2

@@ -1,7 +1,6 @@
 Attribute VB_Name = "AutoMacros"
 Option Explicit
 Dim oAppClass As New oAppClass
-
 #If Mac Then
 #Else
 Private Declare PtrSafe Function CreateMutex Lib "kernel32" _

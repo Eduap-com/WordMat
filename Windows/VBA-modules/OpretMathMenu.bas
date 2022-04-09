@@ -1,6 +1,5 @@
 Attribute VB_Name = "OpretMathMenu"
 Option Explicit
-
 'Sub IndsaetFraScanner()
 '    Application.Run MacroName:="Inds*ae*tImagerScan"
 'End Sub

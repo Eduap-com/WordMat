@@ -13,11 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
 Option Explicit
 Private palindex As Integer
-
 Private Sub CommandButton_geogebra_Click()
 Dim s As String, vekt As String, arr() As String, i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String
@@ -632,6 +629,55 @@ Private Sub UserForm_Activate()
     SetCaptions
     colindex = 0
     palindex = 0
+#If Mac Then
+    CommandButton_ok.visible = False
+    CheckBox_maximakommando.visible = False
+    Frame1.visible = False
+    CheckBox_transp.visible = False
+    CheckBox_udtryk.visible = False
+    CheckBox_grid.visible = False
+    ComboBox_kvalitet.visible = False
+    Label45.visible = False
+    TextBox_titel.visible = False
+    Label42.visible = False
+    TextBox_xmin.visible = False
+    TextBox_ymin.visible = False
+    TextBox_zmin.visible = False
+    TextBox_xmax.visible = False
+    TextBox_ymax.visible = False
+    TextBox_zmax.visible = False
+    Label10.visible = False
+    Label11.visible = False
+    Label13.visible = False
+    Label12.visible = False
+    Label15.visible = False
+    Label14.visible = False
+    TextBox_tmin1.visible = False
+    TextBox_tmax1.visible = False
+    TextBox_smin1.visible = False
+    TextBox_smax1.visible = False
+    TextBox_tmin2.visible = False
+    TextBox_tmax2.visible = False
+    TextBox_smin2.visible = False
+    TextBox_smax2.visible = False
+    TextBox_tmin3.visible = False
+    TextBox_tmax3.visible = False
+    TextBox_smin3.visible = False
+    TextBox_smax3.visible = False
+    Label23.visible = False
+    Label24.visible = False
+    Label36.visible = False
+    Label37.visible = False
+    Label28.visible = False
+    Label29.visible = False
+    Label38.visible = False
+    Label39.visible = False
+    Label33.visible = False
+    Label34.visible = False
+    Label40.visible = False
+    Label41.visible = False
+#Else
+#End If
 End Sub
 
 Private Sub UserForm_Initialize()

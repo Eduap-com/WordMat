@@ -1,7 +1,6 @@
 Attribute VB_Name = "RibbonSubs"
 Option Explicit
 Public WoMatRibbon As IRibbonUI
-
 #If Mac Then
 ' not testet. Taken from a forum on macrumors.com. dest and source set to longptr but try any without byval. libc.dylib is a guess.
 '    Private Declare PtrSafe Function memcpy Lib "libsystem_c.dylib" Alias "CopyMemory" (Dest As Any, source As Any, ByVal length As LongPtr) As LongPtr
@@ -600,11 +599,11 @@ Sub Rib_Statistik(control As IRibbonControl)
     InsertOpenExcel filnavn:="statistik.xltm", WorkBookName:=Sprog.A(563)
 End Sub
 Sub Rib_plot3D(control As IRibbonControl)
-#If Mac Then
-    MsgBox "This function is not avaiable on Mac. Use the 3D functions in GeoGebra", vbOKOnly, "Mac issue"
-#Else
+'#If Mac Then
+'    MsgBox "This function is not avaiable on Mac. Use the 3D functions in GeoGebra", vbOKOnly, "Mac issue"
+'#Else
     Plot3DGraph
-#End If
+'#End If
 End Sub
 'Callback for omdrejlegm onAction
 Sub Rib_omdrejningslegeme(control As IRibbonControl)

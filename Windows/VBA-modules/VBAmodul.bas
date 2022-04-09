@@ -7,7 +7,7 @@ Option Explicit
 Const VBAModulesFolder = "VBA-modules" ' the subfolder to import and export modules from/to
 
 Sub ReplaceToASCIIseq()
-   Dim VBC As Object  'VBComponent
+   Dim VBC As Object 'VBComponent
    Dim i As Long, s As String
    
    If MsgBox("Do you want to replace all codetext to ASCII-sequences of 4 characters?" & vbCrLf & vbCrLf & "After use you can open on both Mac and Windows" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
@@ -16,10 +16,15 @@ Sub ReplaceToASCIIseq()
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
 '      If VBC.Name = "CSprog" Then
 '        If MsgBox(VBC.Name, vbOKCancel, "Continue") = vbCancel Then Exit Sub
-         For i = 2 To VBC.CodeModule.CountOfLines
+         For i = 1 To VBC.CodeModule.CountOfLines
+            If i > VBC.CodeModule.CountOfLines Then Exit For
             s = ReplaceLineToASCIIseq(VBC.CodeModule.Lines(i, 1))
-            VBC.CodeModule.DeleteLines i, 1
-            VBC.CodeModule.InsertLines i, s
+            If s <> "" Or i > 3 Then
+                VBC.CodeModule.DeleteLines i, 1
+                VBC.CodeModule.InsertLines i, s
+            Else
+                VBC.CodeModule.DeleteLines i, 1 ' import/export introduces a blank line at the top of the code for forms. This removes these blank lines
+            End If
          Next
       End If
    Next
@@ -37,10 +42,10 @@ Sub ReplaceToExtendedASCII()
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
 '      If VBC.Name = "CSprog" Then
         
-         For i = 2 To VBC.CodeModule.CountOfLines
+         For i = 1 To VBC.CodeModule.CountOfLines
             s = ReplaceLineToExtendedASCII(VBC.CodeModule.Lines(i, 1))
             VBC.CodeModule.DeleteLines i, 1
-            VBC.CodeModule.InsertLines i, s
+            If s <> "" Or i > 3 Then VBC.CodeModule.InsertLines i, s
          Next
       End If
    Next

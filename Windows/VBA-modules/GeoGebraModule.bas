@@ -534,7 +534,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
          text = Left(text, sp - 1) & gexpr & right(text, Len(text) - ep + 2)
          If Left(text, 1) = "(" Then text = right(text, Len(text) - 1)
 '         text = Replace(text, " and ", " ??_ ") '&& der m*aa* v*ae*re sket noget fejlkonvertering
-'         text = Replace(text, " or ", " ??å ") '||
+'         text = Replace(text, " or ", " ??*aa* ") '||
          text = Replace(text, " and ", " && ") '&&
          text = Replace(text, " or ", " || ") '||
       End If
