@@ -788,10 +788,6 @@ Sub Rib_figurer(control As IRibbonControl)
         OpenWordFile ("Figurer_english.docx")
     End If
 End Sub
-'Callback for Bitmaptegning onAction
-Sub Rib_tegn(control As IRibbonControl)
-    InsertBitmap
-End Sub
 'Callback for InsertExcel onAction
 Sub Rib_insertexcel(control As IRibbonControl)
     Call InsertIndlejretExcel
@@ -1282,17 +1278,6 @@ End Sub
 Sub Rib_GetLabelFigurs(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.RibFigurs
 End Sub
-Sub Rib_GetLabelDraw(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDraw
-End Sub
-'Callback for Bitmaptegning getVisible
-Sub Rib_getVisibleDraw(control As IRibbonControl, ByRef returnedVal)
-#If Mac Then
-    returnedVal = False
-#Else
-    returnedVal = True
-#End If
-End Sub
 Sub Rib_GetLabelTable(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.RibTable
 End Sub
@@ -1781,12 +1766,6 @@ Sub Rib_STfigur1(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_STfigur2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(630)
-End Sub
-Sub Rib_STdraw1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(631)
-End Sub
-Sub Rib_STdraw2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(632)
 End Sub
 Sub Rib_STtables1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(633)

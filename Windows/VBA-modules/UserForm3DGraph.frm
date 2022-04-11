@@ -652,7 +652,7 @@ Private Sub UserForm_Activate()
     Label12.visible = False
     Label15.visible = False
     Label14.visible = False
-    Label146.visible = False
+    Label16.visible = False
     ComboBox_farver.visible = False
     TextBox_tmin1.visible = False
     TextBox_tmax1.visible = False
