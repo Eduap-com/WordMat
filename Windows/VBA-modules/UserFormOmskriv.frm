@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Public annuller As Boolean
 Public TempDefs As String
 Public vars As String
@@ -31,7 +20,7 @@ Public SammeLinje As Boolean
 
 Private Sub CommandButton_annuller_Click()
     annuller = True
-    Me.hide
+    Me.Hide
 End Sub
 Sub ExecuteOK()
     If OptionButton_numonly.Value = True Then
@@ -64,11 +53,11 @@ Sub ExecuteOK()
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            TempDefs = TempDefs & Arr(i) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
+            TempDefs = TempDefs & arr(i) & ListSeparator
         End If
     Next
     If right(TempDefs, 1) = ListSeparator Then
@@ -77,7 +66,7 @@ Sub ExecuteOK()
     End If
 
 
-    Me.hide
+    Me.Hide
     Application.ScreenUpdating = falses
 
 End Sub
@@ -92,7 +81,7 @@ Private Sub CommandButton_oksammelinje_Click()
 End Sub
 
 Private Sub UserForm_Activate()
-Dim Arr As Variant
+Dim arr As Variant
     SetCaptions
     If MaximaUnits Then
         Label_enheder.visible = True
@@ -124,12 +113,12 @@ Dim Arr As Variant
 
     
     
-    Arr = Split(vars, ";")
+    arr = Split(vars, ";")
     ' definitioner vises
     
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-            TextBox_def.text = TextBox_def.text & Arr(i) & "=" & VbCrLfMac    ' midlertidige definitioner
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+            TextBox_def.text = TextBox_def.text & arr(i) & "=" & VbCrLfMac    ' midlertidige definitioner
         End If
     Next
     

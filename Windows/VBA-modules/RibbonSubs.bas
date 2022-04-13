@@ -1,7 +1,6 @@
 Attribute VB_Name = "RibbonSubs"
 Option Explicit
 Public WoMatRibbon As IRibbonUI
-
 #If Mac Then
 ' not testet. Taken from a forum on macrumors.com. dest and source set to longptr but try any without byval. libc.dylib is a guess.
 '    Private Declare PtrSafe Function memcpy Lib "libsystem_c.dylib" Alias "CopyMemory" (Dest As Any, source As Any, ByVal length As LongPtr) As LongPtr
@@ -72,7 +71,7 @@ fejl:
 slut:
 #End If
 End Sub
-' events der fyres når der trykkes på ribbon
+' events der fyres n*aa*r der trykkes p*aa* ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
     On Error GoTo fejl
 #If Mac Then
@@ -170,7 +169,7 @@ Sub Rib_FSekspligning3(control As IRibbonControl)
 End Sub
 'Callback for eksp6 onAction
 Sub Rib_FSekspligning4(control As IRibbonControl)
-    insertribformel "", "y=b" & VBA.ChrW(183) & "(1/2)^(x/T_½)"
+    insertribformel "", "y=b" & VBA.ChrW(183) & "(1/2)^(x/T__)"
 End Sub
 
 'Callback for eksp2 onAction
@@ -187,7 +186,7 @@ Sub Rib_FShalv(control As IRibbonControl)
 #If Mac Then
     insertribformel "", "T_(1/2) =ln" & VBA.ChrW(8289) & "(1/2)/(ln" & VBA.ChrW(8289) & "(a))=ln" & VBA.ChrW(8289) & "(1/2)/k"
 #Else
-    insertribformel "", "T_½=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
+    insertribformel "", "T__=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
 #End If
 End Sub
 
@@ -309,7 +308,7 @@ End Sub
 Sub Rib_FSrumpunktlinje(control As IRibbonControl)
     insertribformel "", "definer: r" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(r_1@r_2@r_3)) ,  (P_0 P)" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0))"
     Selection.TypeParagraph
-    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & "×(P_0 P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & "_(P_0 P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
 End Sub
 
 'Callback for rumligningplan onAction
@@ -321,17 +320,17 @@ End Sub
 
 'Callback for rumligningplan2 onAction
 Sub Rib_FSrumligningplan2(control As IRibbonControl)
-    insertribformel "", "a·(x-x_0)+b·(y-y_0)+c·(z-z_0)=0"
+    insertribformel "", "a*a-*(x-x_0)+b*a-*(y-y_0)+c*a-*(z-z_0)=0"
 End Sub
 
 'Callback for rumafstandpunktplan onAction
 Sub Rib_FSrumafstandpunktplan(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & "·(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & "*a-*(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
 End Sub
 
 'Callback for rumafstandpunktplan2 onAction
 Sub Rib_FSrumafstandpunktplan2(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|a·x_1+b·y_1+c·z_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|a*a-*x_1+b*a-*y_1+c*a-*z_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
 End Sub
 
 'Callback for kugleligning onAction
@@ -600,11 +599,11 @@ Sub Rib_Statistik(control As IRibbonControl)
     InsertOpenExcel filnavn:="statistik.xltm", WorkBookName:=Sprog.A(563)
 End Sub
 Sub Rib_plot3D(control As IRibbonControl)
-#If Mac Then
-    MsgBox "This function is not avaiable on Mac. Use the 3D functions in GeoGebra", vbOKOnly, "Mac issue"
-#Else
+'#If Mac Then
+'    MsgBox "This function is not avaiable on Mac. Use the 3D functions in GeoGebra", vbOKOnly, "Mac issue"
+'#Else
     Plot3DGraph
-#End If
+'#End If
 End Sub
 'Callback for omdrejlegm onAction
 Sub Rib_omdrejningslegeme(control As IRibbonControl)
@@ -616,11 +615,11 @@ Sub Rib_omdrejningslegeme(control As IRibbonControl)
 End Sub
 'Callback for retningsfeltm onAction
 Sub Rib_retningsfelt(control As IRibbonControl)
-#If Mac Then
-    MsgBox "This function is not avaiable on Mac. Use GeoGebra", vbOKOnly, "Mac issue"
-#Else
+'#If Mac Then
+'    MsgBox "This function is not avaiable on Mac. Use GeoGebra", vbOKOnly, "Mac issue"
+'#Else
     PlotDF
-#End If
+'#End If
 End Sub
 'Callback for regrtabel onAction
 Sub Rib_regrtabel(control As IRibbonControl)
@@ -789,10 +788,6 @@ Sub Rib_figurer(control As IRibbonControl)
         OpenWordFile ("Figurer_english.docx")
     End If
 End Sub
-'Callback for Bitmaptegning onAction
-Sub Rib_tegn(control As IRibbonControl)
-    InsertBitmap
-End Sub
 'Callback for InsertExcel onAction
 Sub Rib_insertexcel(control As IRibbonControl)
     Call InsertIndlejretExcel
@@ -828,7 +823,7 @@ Sub Rib_Help(control As IRibbonControl)
     Else
         OpenWordFile ("WordMatManual_english.docx")
     End If
-'    hjælpeMenu
+'    hj*ae*lpeMenu
 End Sub
 Sub Rib_HelpOnline(control As IRibbonControl)
     OpenLink "https://sites.google.com/site/wordmat/"
@@ -880,7 +875,7 @@ Sub Rib_FSpercentage3(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "A=b" & ChrW(183) & "((1+r)" & ChrW(&H207F) & "- 1) / r" & "     Annuitetsopsparing"
 End Sub
 Sub Rib_FSpercentage4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=G" & ChrW(183) & "r/(1-(1+r)" & ChrW(&H207B) & ChrW(&H207F) & ")     Annuitetslån"
+    returnedVal = "y=G" & ChrW(183) & "r/(1-(1+r)" & ChrW(&H207B) & ChrW(&H207F) & ")     Annuitetsl*aa*n"
 End Sub
 
 Sub Rib_GetLabelFunctions(control As IRibbonControl, ByRef returnedVal)
@@ -1282,17 +1277,6 @@ Sub Rib_GetLabelMultSign(control As IRibbonControl, ByRef returnedVal As Variant
 End Sub
 Sub Rib_GetLabelFigurs(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.RibFigurs
-End Sub
-Sub Rib_GetLabelDraw(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDraw
-End Sub
-'Callback for Bitmaptegning getVisible
-Sub Rib_getVisibleDraw(control As IRibbonControl, ByRef returnedVal)
-#If Mac Then
-    returnedVal = False
-#Else
-    returnedVal = True
-#End If
 End Sub
 Sub Rib_GetLabelTable(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.RibTable
@@ -1782,12 +1766,6 @@ Sub Rib_STfigur1(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_STfigur2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(630)
-End Sub
-Sub Rib_STdraw1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(631)
-End Sub
-Sub Rib_STdraw2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(632)
 End Sub
 Sub Rib_STtables1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(633)

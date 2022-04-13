@@ -13,16 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Public udtryk As String
 Public dispudtryk As String
@@ -64,17 +54,17 @@ slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
-    Me.hide
+    Me.Hide
 
 End Sub
 
 Private Sub CommandButton_insertpic_Click()
 Dim ils As InlineShape
-Dim s As String, Arr As Variant, Sep As String
+Dim s As String, arr As Variant, Sep As String
 On Error GoTo fejl
 omax.GoToEndOfSelectedMaths
 Selection.TypeParagraph
-Arr = Split(Label_ligning.Caption, "=")
+arr = Split(Label_ligning.Caption, "=")
 #If Mac Then
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.pdf", False, True)
 #Else
@@ -84,8 +74,8 @@ Arr = Split(Label_ligning.Caption, "=")
 Sep = "|"
 s = "WordMat" & Sep & AppVersion & Sep & "" & Sep & "" & Sep & TextBox_variabel.text & Sep & "" & Sep
 s = s & TextBox_xmin.text & Sep & TextBox_xmax.text & Sep & "" & Sep & "" & Sep
-s = s & Arr(0) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
-s = s & Arr(1) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & arr(0) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & arr(1) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
 ils.AlternativeText = s
 GoTo slut
 fejl:
@@ -105,7 +95,7 @@ slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
-    Me.hide
+    Me.Hide
 
 End Sub
 
@@ -138,7 +128,7 @@ On Error GoTo fejl
 '    Me.Hide
     Call omax.Plot2D(udtryk, "", TextBox_variabel.text, Replace(TextBox_xmin.text, ",", "."), Replace(TextBox_xmax.text, ",", "."), "", "", "", "")
        
-    omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
+    omax.PrepareNewCommand ' n*oe*dvendigt da der efterf*oe*lgende skal k*oe*res newton el lign eller vises grafen igen
     DoEvents
 '    Me.Show
 GoTo slut
@@ -228,7 +218,7 @@ OpdaterGraf
     Me.Repaint
 GoTo slut
 fejl:
-    MsgBox "Der skete en fejl. Se på tallene ved xmin og xmax", vbOKOnly, Sprog.Error
+    MsgBox "Der skete en fejl. Se p*aa* tallene ved xmin og xmax", vbOKOnly, Sprog.Error
 slut:
     
 End Sub
@@ -298,11 +288,11 @@ Sub OpdaterGraf()
 On Error GoTo fejl
 #If Mac Then
 Dim text As String
-Dim Arr As Variant
-    Arr = Split(Label_ligning.Caption, "=")
+Dim arr As Variant
+    arr = Split(Label_ligning.Caption, "=")
     
-    text = "line_width=2,color=green,explicit(" & Arr(0) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & "),"
-    text = text & "color=red,explicit(" & Arr(1) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & ")"
+    text = "line_width=2,color=green,explicit(" & arr(0) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & "),"
+    text = text & "color=red,explicit(" & arr(1) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & ")"
 '    If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
 '        text = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.text) & "," & ConvertNumberToMaxima(TextBox_xmax.text) & "]"
 '    End If
@@ -318,7 +308,7 @@ Dim Arr As Variant
     TextBox_lval.text = TextBox_xmin.text
     TextBox_hval.text = TextBox_xmax.text
     
-    omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
+    omax.PrepareNewCommand ' n*oe*dvendigt da der efterf*oe*lgende skal k*oe*res newton el lign eller vises grafen igen
     DoEvents
 #If Mac Then
     ShowPreviewMac
@@ -328,12 +318,12 @@ Dim Arr As Variant
 '    Image1.Picture = LoadPicture(Environ("TEMP") & "\WordMatGraf.gif")
 GoTo slut
 fejl:
-    MsgBox "Der skete en fejl. Prøv at trykke Opdater.", vbOKOnly, Sprog.Error
+    MsgBox "Der skete en fejl. Pr*oe*v at trykke Opdater.", vbOKOnly, Sprog.Error
 slut:
 
 End Sub
 Private Sub UserForm_Activate()
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer
 On Error Resume Next
     SetCaptions
@@ -368,7 +358,7 @@ On Error GoTo fejl
     TextBox_xmin.text = "-5"
     TextBox_xmax.text = "5"
     Label_ligning.Caption = omax.ConvertToAscii(udtryk)
-    Arr = Split(vars, ";")
+    arr = Split(vars, ";")
     Set gemr = Selection.Range
     gemstartr = Selection.Range.start
     gemslutr = Selection.Range.End
@@ -380,8 +370,8 @@ On Error GoTo fejl
 '    If ListBox_vars.ListCount > 0 Then
 '        ListBox_vars.ListIndex = SelVarIndex
 '    End If
-    If UBound(Arr) >= 0 And TextBox_variabel.text = vbNullString Then
-        TextBox_variabel.text = Arr(0)
+    If UBound(arr) >= 0 And TextBox_variabel.text = vbNullString Then
+        TextBox_variabel.text = arr(0)
     End If
     
 '    If omax Is Nothing Then

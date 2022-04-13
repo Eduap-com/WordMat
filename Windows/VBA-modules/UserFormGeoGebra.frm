@@ -13,19 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
-
 Private Sub CommandButton_Installer_Click()
 'Dim explorersti As String
 'Dim appnr As Integer
@@ -39,7 +27,7 @@ Private Sub CommandButton_Installer_Click()
 '    explorersti = """" & Environ("ProgramFiles") & "\Internet Explorer\iexplore.exe"" http://www.geogebra.org/cms/da/installers"
 
 '    appnr = Shell(explorersti, vbMaximizedFocus) 'vbNormalFocus vbMinimizedFocus
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_webstart_Click()
@@ -48,7 +36,7 @@ Private Sub CommandButton_webstart_Click()
     OpenLink "https://www.geogebra.org/classic/"
 '    explorersti = """" & Environ("ProgramFiles") & "\Internet Explorer\iexplore.exe"" http://www.geogebra.org/webstart/geogebra.html"
 '    appnr = Shell(explorersti, vbMaximizedFocus) 'vbNormalFocus vbMinimizedFocus
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()

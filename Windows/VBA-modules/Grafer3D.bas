@@ -4,7 +4,7 @@ Sub OmdrejningsLegeme()
     Dim geogebrafil As New CGeoGebraFile
 Dim Kommando As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
     Dim var As String, DefList As String
 
@@ -31,7 +31,7 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
     
     
     
-        ' indsæt de markerede funktioner
+        ' inds*ae*t de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
         udtryk = omax.KommandoArray(i)
         udtryk = Replace(udtryk, "definer:", "")
@@ -45,9 +45,9 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
-                    lhs = Arr(0)
-                    rhs = Arr(1)
+                    arr = Split(udtryk, "=")
+                    lhs = arr(0)
+                    rhs = arr(1)
                     ea.text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
@@ -70,7 +70,7 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
                         j = j + 1
                     End If
                 ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
-                ' kan først bruges med GeoGebra 4.0
+                ' kan f*oe*rst bruges med GeoGebra 4.0
                     DefinerKonstanter udtryk, DefList, Nothing, UrlLink
                     Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
                     Cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
@@ -82,7 +82,7 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
                     udtryk = Replace(udtryk, vbCr, "")
                     udtryk = Replace(udtryk, vbLf, "")
                     DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                    If Trim(udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
+                    If Trim(udtryk) = "x" Then 'line*ae*re funktioner kan plottes implicit og bliver meget p*ae*nere
                         Cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & Cmd
                     Else
@@ -111,8 +111,8 @@ Exit Sub
     i = 0
     Do While i < omax.KommandoArrayLength + 1
         Kommando = omax.KommandoArray(i)
-        Arr = Split(Kommando, "=")
-        If Len(Kommando) > 0 Then Kommando = Arr(UBound(Arr))
+        arr = Split(Kommando, "=")
+        If Len(Kommando) > 0 Then Kommando = arr(UBound(arr))
         
         Kommando = Replace(Kommando, vbLf, "")
         Kommando = Replace(Kommando, vbCrLf, "")
@@ -139,7 +139,7 @@ End Sub
 Sub Plot3DGraph()
     Dim forskrifter As String
     Dim Result As Variant
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer
     On Error GoTo fejl
     
@@ -150,12 +150,12 @@ Sub Plot3DGraph()
     forskrifter = omax.FindDefinitions
     If Len(forskrifter) > 3 Then
     forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3)
-    Arr = Split(forskrifter, ListSeparator)
+    arr = Split(forskrifter, ListSeparator)
     forskrifter = ""
     
-    For i = 0 To UBound(Arr)
-        If InStr(Arr(i), "):") > 0 Then
-            forskrifter = forskrifter & omax.ConvertToWordSymbols(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If InStr(arr(i), "):") > 0 Then
+            forskrifter = forskrifter & omax.ConvertToWordSymbols(arr(i)) & ListSeparator
         End If
     Next
     End If
@@ -166,12 +166,12 @@ Sub Plot3DGraph()
     forskrifter = omax.KommandoerStreng & ListSeparator & forskrifter
     
     If Len(forskrifter) > 1 Then
-    Arr = Split(forskrifter, ListSeparator)
-    For i = 0 To UBound(Arr)
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Arr(i) <> "" Then
-            If MsgBox(Sprog.A(374) & ": " & Arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
-                Insert3DEquation (Arr(i))
+    arr = Split(forskrifter, ListSeparator)
+    For i = 0 To UBound(arr)
+        arr(i) = Replace(arr(i), " ", "")
+        If arr(i) <> "" Then
+            If MsgBox(Sprog.A(374) & ": " & arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
+                Insert3DEquation (arr(i))
             End If
         End If
     Next

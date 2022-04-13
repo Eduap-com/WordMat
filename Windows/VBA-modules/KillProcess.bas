@@ -1,6 +1,5 @@
 Attribute VB_Name = "KillProcess"
 Option Explicit
-
 #If Mac Then
 Sub KillMaxima()
 End Sub

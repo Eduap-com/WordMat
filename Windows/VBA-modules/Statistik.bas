@@ -1,7 +1,6 @@
 Attribute VB_Name = "Statistik"
 Option Explicit
 Public UFgrupper As UserFormGrupper
-
 Sub Chi2Fordeling()
     Dim k As Integer
     Dim g As Variant
@@ -12,17 +11,17 @@ Sub Chi2Fordeling()
     k = val(kstring)
     If (k > 0 And k <= 20) Or (k > 20 And Int(k / 2) = k / 2) Then
         g = Gamma(k / 2)
-        ut = ("f(x)" & VBA.ChrW(8801) & ConvertNumberToString(1 / (2 ^ (k / 2) * g)) & "·x^(" & k / 2 - 1 & ")·e^(-x/2)")
+        ut = ("f(x)" & VBA.ChrW(8801) & ConvertNumberToString(1 / (2 ^ (k / 2) * g)) & "*a-*x^(" & k / 2 - 1 & ")*a-*e^(-x/2)")
         ut = Replace(ut, ",", ".")
     Else
-        ut = "f(x)" & VBA.ChrW(8801) & "1/(2^(n/2)·" & VBA.ChrW(915) & "(n/2) )·x^(n/2-1)·e^(-x/2)"
+        ut = "f(x)" & VBA.ChrW(8801) & "1/(2^(n/2)*a-*" & VBA.ChrW(915) & "(n/2) )*a-*x^(n/2-1)*a-*e^(-x/2)"
     End If
     Selection.InsertAfter (VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & " - " & Sprog.A(399) & " " & kstring & " " & Sprog.A(360))
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
     
     Selection.InsertAfter ut
-'    Selection.InsertAfter ("p(x)=1/(2^(" & k & "/2)·" & G & ")·x^(" & k & "/2-1)·e^(-x/2)")
+'    Selection.InsertAfter ("p(x)=1/(2^(" & k & "/2)*a-*" & G & ")*a-*x^(" & k & "/2-1)*a-*e^(-x/2)")
     Selection.OMaths.Add Range:=Selection.Range
     Selection.OMaths(1).BuildUp
     Selection.MoveRight Unit:=wdCharacter, Count:=2
@@ -30,10 +29,10 @@ Sub Chi2Fordeling()
 End Sub
 
 Function Gamma(z As Variant) As Variant
-' begrænset implementation af gammafunktion
+' begr*ae*nset implementation af gammafunktion
     If z = Int(z) Then ' hvis z er heltal er det bare fakultet
         Gamma = Factorial(z - 1)
-    ElseIf z = 0.5 Then ' for specielle halvtallige er løsningen kendt
+    ElseIf z = 0.5 Then ' for specielle halvtallige er l*oe*sningen kendt
         Gamma = 1.77245384774943
     ElseIf z = 1.5 Then
         Gamma = 0.88622692387471
@@ -68,10 +67,10 @@ Function Factorial(n)
 End Function
 
 Function Lgamma(z As Variant) As Variant
-' begrænset implementation af Lower gammafunktion
+' begr*ae*nset implementation af Lower gammafunktion
     If z = Int(z) Then ' hvis z er heltal er det bare faktor
         Lgamma = Factorial(z)
-    ElseIf z = 0.5 Then ' for specielle halvtallige er løsningen kendt
+    ElseIf z = 0.5 Then ' for specielle halvtallige er l*oe*sningen kendt
         Lgamma = 1.77245384774943
     ElseIf z = 1.5 Then
         Lgamma = 0.88622692387471

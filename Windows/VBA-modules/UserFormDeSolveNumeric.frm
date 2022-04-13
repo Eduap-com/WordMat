@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Public luk As Boolean
 Public InsertType As Integer
@@ -41,6 +30,39 @@ Private Sub CommandButton_cancel_Click()
         MaxProc.StartMaximaProcess
     End If
     Unload Me
+End Sub
+
+Private Sub CommandButton_geogebra_Click()
+    Dim s As String, i As Long, xl As String, yl As String, j As Long
+    If Not SolveDE Then
+        MsgBox Err.Description, vbOKOnly, "Error calculating points"
+        Exit Sub
+    End If
+'    s = "{"
+'    For i = 0 To UBound(PointArr)
+'        s = s & "(" & Replace(PointArr(i, 1), ",", ".") & "," & Replace(PointArr(i, 2), ",", ".") & "),"
+'    Next
+'    s = Left(s, Len(s) - 1)
+'    s = s & "}"
+    For i = 0 To UBound(PointArr)
+        xl = xl & Trim(Replace(Replace(PointArr(i, 0), ",", "."), ChrW(183), "*")) & ","
+    Next
+    If Len(xl) > 1 Then xl = Left(xl, Len(xl) - 1)
+    For j = 1 To UBound(PointArr, 2)
+        yl = ""
+        For i = 0 To UBound(PointArr)
+            yl = yl & Trim(Replace(Replace(PointArr(i, j), ",", "."), ChrW(183), "*")) & ","
+        Next
+        yl = Left(yl, Len(yl) - 1)
+        s = s & "LineGraph({" & xl & "},{" & yl & "});"
+    Next
+    s = Left(s, Len(s) - 1)
+    If Len(xl) > 1 Then
+        OpenGeoGebraWeb s, "", False, False
+        Label_wait.Caption = "GeoGebra opened"
+    Else
+        Label_wait.Caption = "No point calculated"
+    End If
 End Sub
 
 Private Sub CommandButton_insertgraph_Click()
@@ -119,10 +141,10 @@ Dim i As Long, j As Integer
         UBound(PointArr, 2) + 1, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
         wdAutoFitFixed)
         With Tabel
-'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' på 2013 giver det ingen kanter
+'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' p*aa* 2013 giver det ingen kanter
 '        If .Style <> "Tabel - Gitter" And InStr(.Style, "Table") < 0 Then
 '            On Error Resume Next
-'            .Style = "Tabel - Gitter" ' duer ikke på udenlandsk
+'            .Style = "Tabel - Gitter" ' duer ikke p*aa* udenlandsk
 '        End If
         .ApplyStyleHeadingRows = True
         .ApplyStyleLastRow = False
@@ -296,6 +318,16 @@ InsertType = 0
 #If Mac Then
     Me.Left = 0
     Me.top = 350
+    CommandButton_opdater.visible = False
+    CommandButton_toExcel.visible = False
+    CommandButton_insertgraph.visible = False
+    CheckBox_pointsjoined.visible = False
+    CheckBox_visforklaring.visible = False
+    TextBox_ymin.visible = False
+    TextBox_ymax.visible = False
+    Label16.visible = False
+    Label17.visible = False
+    Label_wait.Caption = ""
     Kill GetTempDir() & "WordMatGraf.pdf"
 #Else
     Kill GetTempDir() & "\WordMatGraf.gif"
@@ -307,10 +339,11 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
     luk = True
 End Sub
 
-Sub SolveDE()
+Function SolveDE() As Boolean
     Dim variabel As String, xmin As String, xmax As String, xstep As String, DElist As String, varlist As String, guesslist As String
     Dim ea As New ExpressionAnalyser
     Dim n As Integer, Npoints As Long
+    On Error GoTo fejl
     variabel = TextBox_varx.text
     xmin = Replace(TextBox_xmin.text, ",", ".")
     xmax = Replace(TextBox_xmax.text, ",", ".")
@@ -381,13 +414,13 @@ Sub SolveDE()
     guesslist = Left(guesslist, Len(guesslist) - 1) & "]"
     DElist = Left(DElist, Len(DElist) - 1) & "]"
     
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
     omax.SolveDENumeric variabel, xmin, xmax, xstep, varlist, guesslist, DElist
     ListOutput = omax.MaximaOutput
     
     Dim s As String, i As Long, j As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     ReDim PointArr(Npoints, n)
     ea.text = ListOutput
     ea.SetSquareBrackets
@@ -396,14 +429,18 @@ Sub SolveDE()
     End If
     Do
         s = ea.GetNextBracketContent(0)
-        Arr = Split(s, ListSeparator)
-        For j = 0 To UBound(Arr)
-            PointArr(i, j) = Arr(j)
+        arr = Split(s, ListSeparator)
+        For j = 0 To n 'UBound(Arr)
+            PointArr(i, j) = arr(j)
         Next
         i = i + 1
     Loop While ea.pos < ea.Length - 1 And i < 1000
+SolveDE = True
+GoTo slut
+fejl:
+    SolveDE = False
 slut:
-End Sub
+End Function
 
 Sub PlotOutput(Optional highres As Double = 1)
 Dim text As String, yAxislabel As String
@@ -411,7 +448,7 @@ On Error GoTo fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     
 '    text = "explicit(x^2,x,-1,1)"
     If Len(TextBox_ymin.text) > 0 And Len(TextBox_ymax.text) > 0 Then
@@ -423,7 +460,7 @@ On Error GoTo fejl
         text = text & "point_size=" & Replace(highres * 1, ",", ".") & ","
     Else
 #If Mac Then
-        text = text & "point_size=0.1," ' fejler med 0 på mac
+        text = text & "point_size=0.1," ' fejler med 0 p*aa* mac
 #Else
         text = text & "point_size=0,"
 #End If
@@ -556,7 +593,7 @@ slut:
 End Sub
 
 Sub InsertDefinitioner()
-' indsætter definitioner fra textboxen i maximainputstring
+' inds*ae*tter definitioner fra textboxen i maximainputstring
 Dim DefString As String
 
 omax.InsertKillDef
@@ -589,12 +626,12 @@ End If
 End Function
 
 Sub OpdaterDefinitioner()
-' ser efter variable i textboxene og indsætter under definitioner
+' ser efter variable i textboxene og inds*ae*tter under definitioner
 Dim vars As String
 Dim var As String, var2 As String
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim Arr As Variant
+Dim arr As Variant
 Dim arr2 As Variant
 Dim i As Integer
     
@@ -627,14 +664,14 @@ Dim i As Integer
     Do While right(TextBox_definitioner.text, 2) = vbCrLf
         TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
     Loop
-    Arr = Split(TextBox_definitioner.text, vbCrLf)
+    arr = Split(TextBox_definitioner.text, vbCrLf)
     
     Do
     var = ea.GetNextListItem
     var = Replace(var, vbCrLf, "")
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-        var2 = Split(Arr(i), "=")(0)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+        var2 = Split(arr(i), "=")(0)
         If var2 = var Then
             var = ""
             Exit For

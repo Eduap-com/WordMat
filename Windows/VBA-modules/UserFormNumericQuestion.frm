@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Public Result As String
 Public variabel As String
@@ -44,7 +33,7 @@ Private Sub CommandButton_cancel_Click()
     End If
     
 '    If MaxProc.Finished = 0 Then
-    Me.hide
+    Me.Hide
 '    End If
 End Sub
 
@@ -58,7 +47,7 @@ Private Sub CommandButton_nsolve_Click()
     Result = "nsolve"
     FejlMeld = ""
     Kommentar = Sprog.FoundNumericSolutions
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_numeric_Click()
@@ -72,7 +61,7 @@ Private Sub CommandButton_numeric_Click()
     Result = "num"
     FejlMeld = ""
     Kommentar = ""
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_Omskrevet_Click()
@@ -86,7 +75,7 @@ Private Sub CommandButton_Omskrevet_Click()
     Finished = True
     Kommentar = Sprog.NoNumericSolution
     omax.MaximaOutput = Label_omskrevet.Caption
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()
@@ -94,10 +83,11 @@ Private Sub UserForm_Activate()
 
     If CASengine > 0 Then
         Label2.Caption = ""
-        Label_overskrift.Caption = "Hvordan vil du løse ligningen numerisk?"
+        Label_overskrift.Caption = "Hvordan vil du l*oe*se ligningen numerisk?"
         Label_omskrevet.Caption = ""
         Finished = True
         CommandButton_Omskrevet.visible = False
+        CommandButton_nsolve.SetFocus
         Exit Sub
     End If
     Dim TempDefs As String
@@ -189,13 +179,14 @@ afslut:
     omax.MaximaOutput = Label_nsolve.Caption
     
     If Len(Label_nsolve.Caption) > 0 Then
-'        Label2.Caption = "Der blev fundet løsninger vha. automatiske numeriske metoder, men der findes måske flere. Du kan enten nøjes med de fundne løsninger eller forsøge at finde flere grafisk."
+'        Label2.Caption = "Der blev fundet l*oe*sninger vha. automatiske numeriske metoder, men der findes m*aa*ske flere. Du kan enten n*oe*jes med de fundne l*oe*sninger eller fors*oe*ge at finde flere grafisk."
         Label2.Caption = Sprog.FoundNumericSolutions
         CommandButton_nsolve.visible = True
         CommandButton_nsolve.SetFocus
     Else
         Label2.Caption = Sprog.NoNumericSolution2
     End If
+    CommandButton_nsolve.SetFocus
 slut:
     Finished = True
     

@@ -117,7 +117,7 @@ Dim d As String, nd As String
 Dim ea As New ExpressionAnalyser
 Dim s As String
 Dim xmin As String, xmax As String
-Dim Arr As Variant, i As Integer
+Dim arr As Variant, i As Integer
 On Error Resume Next
     SetCaptions
 #If Mac Then
@@ -145,10 +145,10 @@ If Not PicOpen Then
     d = Trim(d)
     
     ' reverse definition order
-    Arr = Split(d, "$")
-    nd = Arr(0)
-    For i = 1 To UBound(Arr)
-        If Len(Arr(i)) > 0 Then nd = Trim(Arr(i)) & VbCrLfMac & nd
+    arr = Split(d, "$")
+    nd = arr(0)
+    For i = 1 To UBound(arr)
+        If Len(arr(i)) > 0 Then nd = Trim(arr(i)) & VbCrLfMac & nd
     Next
     
 '    d = Replace(d, "$", vbCrLf)
@@ -159,7 +159,7 @@ If Not PicOpen Then
 End If
     OpdaterDefinitioner
     CheckForAssume
-    ' indsæt xmin og xmax hvis der var definerede
+    ' inds*ae*t xmin og xmax hvis der var definerede
     xmin = TextBox_xmin1.text
     If Len(TextBox_xmin2.text) And ConvertStringToNumber(TextBox_xmin2.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin2.text
     If Len(TextBox_xmin3.text) And ConvertStringToNumber(TextBox_xmin3.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin3.text
@@ -480,7 +480,7 @@ Dim i As Integer
 
 If cxl Is Nothing Then Set cxl = New CExcel
 Application.ScreenUpdating = False
-Me.hide
+Me.Hide
     Dim UfWait2 As New UserFormWaitForMaxima
     UfWait2.Show vbModeless
     DoEvents
@@ -654,7 +654,7 @@ slut2:
 'Selection.PasteSpecial DataType:=wdPasteShape
 End Sub
 Sub SetLineStyle(cb As ComboBox, n As Integer)
-' sætter linestyle efter hvad comboxen er sat til
+' s*ae*tter linestyle efter hvad comboxen er sat til
 
 If cb.ListIndex = 0 Then
 XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlContinuous '
@@ -673,7 +673,7 @@ End If
 End Sub
 'Sub InsertFormula(ws As Worksheet, wb As Workbook, tb As TextBox, col As Integer)
 Sub InsertFormula(ws As Variant, WB As Variant, tb As TextBox, col As Integer)
-' indsætter formel fra textbox i kolonne col
+' inds*ae*tter formel fra textbox i kolonne col
 Dim ea As New ExpressionAnalyser
     Dim varnavn As String
     Dim i As Integer
@@ -730,7 +730,7 @@ If tb.text <> "" Then
     Call ea.ReplaceVar("x", "A7")
     forskrift = ea.text
      
-     ' indsæt forskrift i regneark
+     ' inds*ae*t forskrift i regneark
     ws.Range("b7").Offset(0, col).Formula = "=" & forskrift
 '    If TypeName(ws.Range("b7").Offset(0, col).value) = "Error" Then GoTo fejlindtast
 
@@ -762,7 +762,7 @@ Dim pos2 As Integer
 Dim pos4 As Integer
 Dim pos5 As Integer
 Dim posog As Integer
-Dim Arr As Variant
+Dim arr As Variant
 
     ea.SetNormalBrackets
 
@@ -773,7 +773,7 @@ Dim Arr As Variant
     forskrift = Replace(forskrift, "e", "2.718281828")
     forskrift = Replace(forskrift, VBA.ChrW(12310), "") ' specielle usynlige paranteser fjernes
     forskrift = Replace(forskrift, VBA.ChrW(12311), "") ' specielle usynlige paranteser fjernes
-'    forskrift = Replace(forskrift, VBA.ChrW(11), "") ' en af de nedenstående?
+'    forskrift = Replace(forskrift, VBA.ChrW(11), "") ' en af de nedenst*aa*ende?
     forskrift = Replace(forskrift, vbLf, "") ' shift-enter og enter
     forskrift = Replace(forskrift, vbCrLf, "")
     forskrift = Replace(forskrift, vbCr, "")
@@ -834,12 +834,12 @@ Dim Arr As Variant
         Else
             ea.text = forskrift
             ea.pos = pos
-            Arr = Split(ea.GetNextBracketContent, "&")
+            arr = Split(ea.GetNextBracketContent, "&")
             pos2 = ea.pos
-            If UBound(Arr) = 0 Then
+            If UBound(arr) = 0 Then
                 forskrift = Replace(forskrift, VBA.ChrW(8730), "sqrt", 1, 1)
-            ElseIf UBound(Arr) = 1 Then
-                rod = Arr(0)
+            ElseIf UBound(arr) = 1 Then
+                rod = arr(0)
                 Call ea.InsertBeforePos("^(1/(" & rod & "))")
                 ea.text = Replace(ea.text, VBA.ChrW(8730), "", 1, 1)
                 posog = ea.FindChr("&", 1)
@@ -861,7 +861,7 @@ Dim Arr As Variant
         forskrift = ConvertDegreeToRad(forskrift, "csc")
     End If
     
-    ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma)
+    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma)
     ea.text = forskrift
     ea.InsertBracketAfter ("^")
     ea.InsertBracketAfter ("/")
@@ -870,7 +870,7 @@ Dim Arr As Variant
     ' mellemrum fjernes
     forskrift = Replace(forskrift, " ", "")
 
-    ' indsæt underforståede gangetegn ' skal være efter fjern mellem
+    ' inds*ae*t underforst*aa*ede gangetegn ' skal v*ae*re efter fjern mellem
     ea.text = forskrift
     ea.pos = 1
     ea.InsertMultSigns
@@ -895,7 +895,7 @@ Dim ymaxg As String
 Dim labeltext As String
 Dim lign As String
 Dim punkttekst As String
-Dim Arr As Variant
+Dim arr As Variant
 Dim arr2 As Variant
 Dim i As Integer
 Dim vekt As String
@@ -914,7 +914,7 @@ ymaxg = ConvertNumberToMaxima(TextBox_ymax.text)
 
 'forskrifter
 If TextBox_ligning1.text <> "" Then
-    lign = Replace(TextBox_ligning1.text, "'", "´")
+    lign = Replace(TextBox_ligning1.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -942,7 +942,7 @@ If TextBox_ligning1.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var1.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning2.text <> "" Then
-    lign = Replace(TextBox_ligning2.text, "'", "´")
+    lign = Replace(TextBox_ligning2.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -970,7 +970,7 @@ If TextBox_ligning2.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var2.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning3.text <> "" Then
-    lign = Replace(TextBox_ligning3.text, "'", "´")
+    lign = Replace(TextBox_ligning3.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -997,7 +997,7 @@ If TextBox_ligning3.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var3.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning4.text <> "" Then
-    lign = Replace(TextBox_ligning4.text, "'", "´")
+    lign = Replace(TextBox_ligning4.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1024,7 +1024,7 @@ If TextBox_ligning4.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var4.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning5.text <> "" Then
-    lign = Replace(TextBox_ligning5.text, "'", "´")
+    lign = Replace(TextBox_ligning5.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1051,7 +1051,7 @@ If TextBox_ligning5.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var5.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning6.text <> "" Then
-    lign = Replace(TextBox_ligning6.text, "'", "´")
+    lign = Replace(TextBox_ligning6.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1080,7 +1080,7 @@ End If
 
 'ligninger
 If TextBox_lig1.text <> "" Then
-    lign = Replace(TextBox_lig1.text, "'", "´")
+    lign = Replace(TextBox_lig1.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1098,7 +1098,7 @@ If TextBox_lig1.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
 If TextBox_lig2.text <> "" Then
-    lign = Replace(TextBox_lig2.text, "'", "´")
+    lign = Replace(TextBox_lig2.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1116,7 +1116,7 @@ If TextBox_lig2.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
 If TextBox_Lig3.text <> "" Then
-    lign = Replace(TextBox_Lig3.text, "'", "´")
+    lign = Replace(TextBox_Lig3.text, "'", "‚")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1179,26 +1179,26 @@ End If
 'punkter
 If TextBox_punkter.text <> "" Then
     grafobj = grafobj & "key="""",color=black,"
-    Arr = Split(TextBox_punkter.text, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
-        Arr(i) = Replace(Arr(i), ",", ".")
-        Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(TextBox_punkter.text, VbCrLfMac)
+    For i = 0 To UBound(arr)
+    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
+        arr(i) = Replace(arr(i), ",", ".")
+        arr(i) = Replace(arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Len(Arr(i)) > 0 Then
-        If Left(Arr(i), 1) <> "(" Then
-            Arr(i) = "(" & Arr(i)
+        arr(i) = Replace(arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        arr(i) = Replace(arr(i), " ", "")
+        If Len(arr(i)) > 0 Then
+        If Left(arr(i), 1) <> "(" Then
+            arr(i) = "(" & arr(i)
         End If
-        If right(Arr(i), 1) <> ")" Then
-            Arr(i) = Arr(i) & ")"
+        If right(arr(i), 1) <> ")" Then
+            arr(i) = arr(i) & ")"
         End If
-        Arr(i) = Replace(Arr(i), "),(", "],[")
-        Arr(i) = Replace(Arr(i), ");(", "],[")
-        Arr(i) = Replace(Arr(i), "(", "[")
-        Arr(i) = Replace(Arr(i), ")", "]")
-        punkttekst = punkttekst & Arr(i) & ","
+        arr(i) = Replace(arr(i), "),(", "],[")
+        arr(i) = Replace(arr(i), ");(", "],[")
+        arr(i) = Replace(arr(i), "(", "[")
+        arr(i) = Replace(arr(i), ")", "]")
+        punkttekst = punkttekst & arr(i) & ","
         End If
     Next
     If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
@@ -1210,26 +1210,26 @@ End If
 If TextBox_punkter2.text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=blue,"
-    Arr = Split(TextBox_punkter2.text, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
-        Arr(i) = Replace(Arr(i), ",", ".")
-        Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(TextBox_punkter2.text, VbCrLfMac)
+    For i = 0 To UBound(arr)
+    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
+        arr(i) = Replace(arr(i), ",", ".")
+        arr(i) = Replace(arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Len(Arr(i)) > 0 Then
-        If Left(Arr(i), 1) <> "(" Then
-            Arr(i) = "(" & Arr(i)
+        arr(i) = Replace(arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        arr(i) = Replace(arr(i), " ", "")
+        If Len(arr(i)) > 0 Then
+        If Left(arr(i), 1) <> "(" Then
+            arr(i) = "(" & arr(i)
         End If
-        If right(Arr(i), 1) <> ")" Then
-            Arr(i) = Arr(i) & ")"
+        If right(arr(i), 1) <> ")" Then
+            arr(i) = arr(i) & ")"
         End If
-        Arr(i) = Replace(Arr(i), "),(", "],[")
-        Arr(i) = Replace(Arr(i), ");(", "],[")
-        Arr(i) = Replace(Arr(i), "(", "[")
-        Arr(i) = Replace(Arr(i), ")", "]")
-        punkttekst = punkttekst & Arr(i) & ","
+        arr(i) = Replace(arr(i), "),(", "],[")
+        arr(i) = Replace(arr(i), ");(", "],[")
+        arr(i) = Replace(arr(i), "(", "[")
+        arr(i) = Replace(arr(i), ")", "]")
+        punkttekst = punkttekst & arr(i) & ","
         End If
     Next
     If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
@@ -1241,22 +1241,22 @@ End If
 If TextBox_markerpunkter.text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=red,"
-    Arr = Split(TextBox_markerpunkter.text, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
-        Arr(i) = Replace(Arr(i), ",", ".")
-        Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(TextBox_markerpunkter.text, VbCrLfMac)
+    For i = 0 To UBound(arr)
+    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
+        arr(i) = Replace(arr(i), ",", ".")
+        arr(i) = Replace(arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Len(Arr(i)) > 0 Then
+        arr(i) = Replace(arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        arr(i) = Replace(arr(i), " ", "")
+        If Len(arr(i)) > 0 Then
 '        If Left(arr(i), 1) = "(" Then
 '            arr(i) = Right(arr(i), Len(arr(i)) - 1)
 '        End If
 '        If Right(arr(i), 1) = ")" Then
 '            arr(i) = Left(arr(i), Len(arr(i)) - 1)
 '        End If
-        arr2 = Split(Arr(i), ",")
+        arr2 = Split(arr(i), ",")
         If UBound(arr2) = 1 Then
             x = arr2(0)
             Y = arr2(1)
@@ -1273,42 +1273,42 @@ End If
 'vektorer
 If TextBox_vektorer.text <> "" Then
     vekt = TextBox_vektorer.text
-    Arr = Split(vekt, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-    If InStr(Arr(i), ";") > 0 Then
-        Arr(i) = Replace(Arr(i), ",", ".")
-        Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+    If InStr(arr(i), ";") > 0 Then
+        arr(i) = Replace(arr(i), ",", ".")
+        arr(i) = Replace(arr(i), ";", ",")
     End If
-    If InStr(Arr(i), ")-(") > 0 Then
-        Arr(i) = Replace(Arr(i), ")-(", "],[")
-    ElseIf InStr(Arr(i), ")(") > 0 Then
-        Arr(i) = Replace(Arr(i), ")(", "],[")
+    If InStr(arr(i), ")-(") > 0 Then
+        arr(i) = Replace(arr(i), ")-(", "],[")
+    ElseIf InStr(arr(i), ")(") > 0 Then
+        arr(i) = Replace(arr(i), ")(", "],[")
     Else
-        Arr(i) = "[0,0]," & Arr(i)
+        arr(i) = "[0,0]," & arr(i)
     End If
-    Arr(i) = Replace(Arr(i), "(", "[")
-    Arr(i) = Replace(Arr(i), ")", "]")
+    arr(i) = Replace(arr(i), "(", "[")
+    arr(i) = Replace(arr(i), ")", "]")
             If CheckBox_visforklaring.Value Then
-                grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
+                grafobj = grafobj & "key=""Vektor: " & arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
             End If
             grafobj = grafobj & "color=" & GetNextColor & ","
             grafobj = grafobj & "line_type=solid,line_width=" & Replace(highres, ",", ".") & ",head_angle=25,head_length=" & Replace((ConvertStringToNumber(TextBox_xmax.text) - ConvertStringToNumber(TextBox_xmin.text)) / 40, ",", ".") & ","
-            grafobj = grafobj & "vector(" & Arr(i) & "),"
+            grafobj = grafobj & "vector(" & arr(i) & "),"
         End If
     Next
 End If
 
     'labels
     If Len(TextBox_labels.text) > 0 Then
-        Arr = Split(TextBox_labels.text, VbCrLfMac)
-        For i = 0 To UBound(Arr)
-            If InStr(Arr(i), ";") > 0 Then
-                arr2 = Split(Arr(i), ";")
+        arr = Split(TextBox_labels.text, VbCrLfMac)
+        For i = 0 To UBound(arr)
+            If InStr(arr(i), ";") > 0 Then
+                arr2 = Split(arr(i), ";")
             Else
-                arr2 = Split(Arr(i), ",")
+                arr2 = Split(arr(i), ",")
             End If
             If UBound(arr2) >= 2 Then
             labeltext = labeltext & "["
@@ -1324,7 +1324,7 @@ End If
         End If
     End If
     
-    If Len(grafobj) = 0 Then GoTo slut ' ellers fejler når print starter op, men med denne fejler retningsfelt hvis alene
+    If Len(grafobj) = 0 Then GoTo slut ' ellers fejler n*aa*r print starter op, men med denne fejler retningsfelt hvis alene
 
 ' diverse
     If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
@@ -1340,7 +1340,7 @@ End If
     grafobj = "font=""Arial"",font_size=8," & grafobj
     grafobj = "nticks=100," & grafobj
     grafobj = "ip_grid=[70,70]," & grafobj
-'    grafobj = "xu_grid=50,yv_grid=50," & grafobj ' ser ikke ud til at være nødv
+'    grafobj = "xu_grid=50,yv_grid=50," & grafobj ' ser ikke ud til at v*ae*re n*oe*dv
     grafobj = "xtics_axis = true," & grafobj
     grafobj = "ytics_axis = true," & grafobj
     grafobj = "line_width=" & Replace(highres, ",", ".") & "," & grafobj
@@ -1350,14 +1350,14 @@ End If
         If ConvertStringToNumber(TextBox_xmin.text) > 0 Then
             grafobj = "logx=true," & grafobj
         Else
-            MsgBox "xmin skal være >0 for at bruge logaritmisk x-akse."
+            MsgBox "xmin skal v*ae*re >0 for at bruge logaritmisk x-akse."
         End If
     End If
     If CheckBox_logy.Value Then
         If ConvertStringToNumber(TextBox_ymin.text) > 0 Then
             grafobj = "logy=true," & grafobj
         Else
-            MsgBox "ymin skal være >0 for at bruge logaritmisk y-akse."
+            MsgBox "ymin skal v*ae*re >0 for at bruge logaritmisk y-akse."
         End If
     End If
     
@@ -1388,7 +1388,7 @@ On Error GoTo fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
     text = GetDraw2Dtext(highres)
     If Len(TextBox_dfligning.text) > 0 Then
@@ -1422,7 +1422,7 @@ On Error GoTo fejl
             dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol5x.text) & "," & ConvertNumberToMaxima(TextBox_dfsol5y.text) & "]"
         End If
         If Len(dfsol) > 0 Then
-            df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat er 10. ved at øge plottes længere og tættere på asymptoter
+            df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat er 10. ved at *oe*ge plottes l*ae*ngere og t*ae*ttere p*aa* asymptoter
         End If
         If CheckBox_onlykurver.Value Then
             df = df & ",show_field=false"
@@ -1469,7 +1469,7 @@ slut:
 End Sub
 Private Sub GnuPlot()
 Dim text As String
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
 
     text = GetDraw2Dtext()
@@ -1851,7 +1851,7 @@ Private Sub MMathPlot()
     
     MathSyntax = MathSyntax + ",{ShowBox,false}"
 '    MathSyntax = MathSyntax + ",{color,""00ff00""}"
-'    MathSyntax = MathSyntax + ",{color,""ff00ff00""}" ' første er opaque 00 gennemsigtig ff uigennemsigtig
+'    MathSyntax = MathSyntax + ",{color,""ff00ff00""}" ' f*oe*rste er opaque 00 gennemsigtig ff uigennemsigtig
 '    MathSyntax = MathSyntax + ",{ShowGrid,true}"
 '    MathSyntax = MathSyntax + ",{ShowAxis,true}"
 '    MathSyntax = MathSyntax + ",{ShowWireframe,false}"
@@ -1874,13 +1874,13 @@ Private Sub MMathPlot()
 '    objEq.BuildUp
     Selection.TypeParagraph
 
-    hide
+    Hide
     
 slut:
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-' skjuler istedet for at lukke, så funktioner gemmes.
+' skjuler istedet for at lukke, s*aa* funktioner gemmes.
 'If CloseMode = vbFormControlMenu Then
 '    Cancel = 1
 '    Hide
@@ -2201,7 +2201,7 @@ Application.ScreenUpdating = True
 End Sub
 
 Sub InsertDefinitioner()
-' indsætter definitioner fra textboxen i maximainputstring
+' inds*ae*tter definitioner fra textboxen i maximainputstring
 Dim DefString As String
 
 omax.InsertKillDef
@@ -2233,12 +2233,12 @@ GetDefString = DefString
 End If
 End Function
 Sub OpdaterDefinitioner()
-' ser efter variable i textboxene og indsætter under definitioner
+' ser efter variable i textboxene og inds*ae*tter under definitioner
 Dim vars As String
 Dim var As String, var2 As String
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim Arr As Variant
+Dim arr As Variant
 Dim arr2 As Variant
 Dim i As Integer
     
@@ -2262,14 +2262,14 @@ Dim i As Integer
     Do While right(TextBox_definitioner.text, 2) = VbCrLfMac
         TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
     Loop
-    Arr = Split(TextBox_definitioner.text, VbCrLfMac)
+    arr = Split(TextBox_definitioner.text, VbCrLfMac)
     
     Do
     var = ea.GetNextListItem
     var = Replace(var, VbCrLfMac, "")
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-        var2 = Split(Arr(i), "=")(0)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+        var2 = Split(arr(i), "=")(0)
         If var2 = var Then
             var = ""
             Exit For
@@ -2344,7 +2344,7 @@ Dim text As String
 Dim pm As String
 Dim sl As String
     Label_vent.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
     If Len(TextBox_skyd1k.text) > 0 And Len(TextBox_skyd1f.text) > 0 And Len(TextBox_skyd1t.text) > 0 Then
         If Len(pm) > 0 Then pm = pm & ","
@@ -2382,7 +2382,7 @@ Private Sub TextBox_dfy_Change()
 End Sub
 
 Sub CheckForAssume()
-' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begrænsninger på xmin og xmax
+' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begr*ae*nsninger p*aa* xmin og xmax
 Dim DefS As String
 Dim pos As Integer
 Dim ea As New ExpressionAnalyser
@@ -2427,21 +2427,21 @@ End Sub
 
 Sub InsertBoundary(var As String, assumetext As String, tbmin As TextBox, tbmax As TextBox)
 Dim dlhs As String, drhs As String
-Dim Arr As Variant
-    Arr = Split(assumetext, "<")
-    If UBound(Arr) > 0 Then
-        dlhs = Replace(Arr(0), "=", "")
-        drhs = Replace(Arr(1), "=", "")
+Dim arr As Variant
+    arr = Split(assumetext, "<")
+    If UBound(arr) > 0 Then
+        dlhs = Replace(arr(0), "=", "")
+        drhs = Replace(arr(1), "=", "")
         If dlhs = var Then
             tbmax.text = drhs
         ElseIf drhs = var Then
             tbmin.text = dlhs
         End If
     End If
-    Arr = Split(assumetext, ">")
-    If UBound(Arr) > 0 Then
-        dlhs = Replace(Arr(0), "=", "")
-        drhs = Replace(Arr(1), "=", "")
+    arr = Split(assumetext, ">")
+    If UBound(arr) > 0 Then
+        dlhs = Replace(arr(0), "=", "")
+        drhs = Replace(arr(1), "=", "")
         If dlhs = var Then
             tbmin.text = drhs
         ElseIf drhs = var Then

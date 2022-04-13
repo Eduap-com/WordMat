@@ -13,19 +13,103 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Private palindex As Integer
+Private Sub CommandButton_geogebra_Click()
+Dim s As String, vekt As String, arr() As String, i As Integer, j As Integer
+Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String
+
+' forskrifter
+    If TextBox_forskrift1.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift1.text) & ";"
+    End If
+    If TextBox_forskrift2.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift2.text) & ";"
+    End If
+    If TextBox_forskrift3.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift3.text) & ";"
+    End If
+
+'ligninger
+    If TextBox_ligning1.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.text) & ";"
+    End If
+    If TextBox_ligning2.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.text) & ";"
+    End If
+    If TextBox_ligning3.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.text) & ";"
+    End If
+    
+'vektorer
+If TextBox_vektorer.text <> "" Then
+    vekt = TextBox_vektorer.text
+    arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+            If InStr(arr(i), ";") > 0 Then
+                arr(i) = Replace(arr(i), ",", ".")
+                arr(i) = Replace(arr(i), ";", ",")
+            Else
+                ea.text = arr(i)
+                j = ea.CountText(",")
+                If Not (j = 2 Or j = 4) Then
+                    ea.ConvertDecSeparator
+                    arr(i) = ea.text
+                End If
+            End If
+            If InStr(arr(i), ")(") > 0 Then
+                arr(i) = Replace(arr(i), ")(", "),(")
+            Else
+                arr(i) = "(0,0,0)," & arr(i)
+            End If
+            arr(i) = Replace(arr(i), "(", "(")
+            arr(i) = Replace(arr(i), ")", ")")
+            
+            s = s & "vector(" & arr(i) & ");"
+        End If
+    Next
+End If
+
+'parameterfremstillinger
+If TextBox_parametric1x.text <> "" Then
+    parx = ConvertToGeogebraSyntax(TextBox_parametric1x.text)
+    pary = ConvertToGeogebraSyntax(TextBox_parametric1y.text)
+    parz = ConvertToGeogebraSyntax(TextBox_parametric1z.text)
+     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
+End If
+If TextBox_parametric2x.text <> "" Then
+    parx = ConvertToGeogebraSyntax(TextBox_parametric2x.text)
+    pary = ConvertToGeogebraSyntax(TextBox_parametric2y.text)
+    parz = ConvertToGeogebraSyntax(TextBox_parametric2z.text)
+     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
+End If
+If TextBox_parametric3x.text <> "" Then
+    parx = ConvertToGeogebraSyntax(TextBox_parametric3x.text)
+    pary = ConvertToGeogebraSyntax(TextBox_parametric3y.text)
+    parz = ConvertToGeogebraSyntax(TextBox_parametric3z.text)
+     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
+End If
+
+'punkter
+If TextBox_punkter.text <> "" Then
+    punkttekst = TextBox_punkter.text
+    If InStr(punkttekst, ";") > 0 Then
+        punkttekst = Replace(punkttekst, ",", ".")
+        punkttekst = Replace(punkttekst, ";", ",")
+    End If
+    punkttekst = Replace(punkttekst, ")(", ");(")
+    punkttekst = Replace(punkttekst, vbCrLf, ";")
+    punkttekst = Replace(punkttekst, vbCr, ";")
+    punkttekst = Replace(punkttekst, " ", "")
+    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    s = s & punkttekst & ";"
+End If
+    s = Left(s, Len(s) - 1)
+    
+    OpenGeoGebraWeb s, "3d", True, False
+    
+End Sub
 
 Private Sub CommandButton_insertplan_Click()
 Dim plan As String
@@ -201,7 +285,7 @@ Dim smax As String
 Dim gridno As String
 Dim punkttekst As String
 Dim antalobj As Integer
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser
 
@@ -351,35 +435,35 @@ If TextBox_vektorer.text <> "" Then
         grafobj = grafobj & "surface_hide = false,"
     End If
     vekt = TextBox_vektorer.text
-    Arr = Split(vekt, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-            If InStr(Arr(i), ";") > 0 Then
-                Arr(i) = Replace(Arr(i), ",", ".")
-                Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+            If InStr(arr(i), ";") > 0 Then
+                arr(i) = Replace(arr(i), ",", ".")
+                arr(i) = Replace(arr(i), ";", ",")
             Else
-                ea.text = Arr(i)
+                ea.text = arr(i)
                 j = ea.CountText(",")
                 If Not (j = 2 Or j = 4) Then
                     ea.ConvertDecSeparator
-                    Arr(i) = ea.text
+                    arr(i) = ea.text
                 End If
             End If
-            If InStr(Arr(i), ")(") > 0 Then
-                Arr(i) = Replace(Arr(i), ")(", "],[")
+            If InStr(arr(i), ")(") > 0 Then
+                arr(i) = Replace(arr(i), ")(", "],[")
             Else
-                Arr(i) = "[0,0,0]," & Arr(i)
+                arr(i) = "[0,0,0]," & arr(i)
             End If
-            Arr(i) = Replace(Arr(i), "(", "[")
-            Arr(i) = Replace(Arr(i), ")", "]")
+            arr(i) = Replace(arr(i), "(", "[")
+            arr(i) = Replace(arr(i), ")", "]")
             
             If CheckBox_udtryk.Value Then
-                grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
+                grafobj = grafobj & "key=""Vektor: " & arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
             End If
             grafobj = grafobj & "color=" & GetNextColor & ","
-            grafobj = grafobj & "vector(" & Arr(i) & "),"
+            grafobj = grafobj & "vector(" & arr(i) & "),"
         End If
     Next
     antalobj = antalobj + 1
@@ -429,9 +513,9 @@ End If
 'grafobj = "xu_grid=" & gridno & ",yv_grid=" & gridno & ",x_voxel=" & gridno & ",y_voxel=" & gridno & ",z_voxel=" & gridno & "," & grafobj
 If ComboBox_kvalitet.ListIndex = 0 Then 'super
     grafobj = "xu_grid=200,yv_grid=200,x_voxel=18,y_voxel=18,z_voxel=18," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'meget høj
+ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'meget h*oe*j
     grafobj = "xu_grid=100,yv_grid=100,x_voxel=15,y_voxel=15,z_voxel=15," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' høj
+ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' h*oe*j
     grafobj = "xu_grid=50,yv_grid=50,x_voxel=12,y_voxel=12,z_voxel=12," & grafobj
 ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'lav
     grafobj = "xu_grid=15,yv_grid=15,x_voxel=5,y_voxel=5,z_voxel=5," & grafobj
@@ -445,11 +529,11 @@ End If
 
 If ComboBox_farver.ListIndex = 0 Then ' standard
     grafobj = grafobj & "palette=color,"
-ElseIf ComboBox_farver.ListIndex = 1 Then ' blå
+ElseIf ComboBox_farver.ListIndex = 1 Then ' bl*aa*
     grafobj = grafobj & "palette=[4,5,7],"
 ElseIf ComboBox_farver.ListIndex = 2 Then ' brun
     grafobj = grafobj & "palette=[4,5,6],"
-ElseIf ComboBox_farver.ListIndex = 3 Then ' Grå
+ElseIf ComboBox_farver.ListIndex = 3 Then ' Gr*aa*
     grafobj = grafobj & "palette=gray,"
 End If
 
@@ -545,22 +629,73 @@ Private Sub UserForm_Activate()
     SetCaptions
     colindex = 0
     palindex = 0
+#If Mac Then
+    CommandButton_ok.visible = False
+    CheckBox_maximakommando.visible = False
+    Frame1.visible = False
+    CheckBox_transp.visible = False
+    CheckBox_udtryk.visible = False
+    CheckBox_grid.visible = False
+    ComboBox_kvalitet.visible = False
+    Label45.visible = False
+    TextBox_titel.visible = False
+    Label42.visible = False
+    TextBox_xmin.visible = False
+    TextBox_ymin.visible = False
+    TextBox_zmin.visible = False
+    TextBox_xmax.visible = False
+    TextBox_ymax.visible = False
+    TextBox_zmax.visible = False
+    Label10.visible = False
+    Label11.visible = False
+    Label13.visible = False
+    Label12.visible = False
+    Label15.visible = False
+    Label14.visible = False
+    Label16.visible = False
+    ComboBox_farver.visible = False
+    TextBox_tmin1.visible = False
+    TextBox_tmax1.visible = False
+    TextBox_smin1.visible = False
+    TextBox_smax1.visible = False
+    TextBox_tmin2.visible = False
+    TextBox_tmax2.visible = False
+    TextBox_smin2.visible = False
+    TextBox_smax2.visible = False
+    TextBox_tmin3.visible = False
+    TextBox_tmax3.visible = False
+    TextBox_smin3.visible = False
+    TextBox_smax3.visible = False
+    Label23.visible = False
+    Label24.visible = False
+    Label36.visible = False
+    Label37.visible = False
+    Label28.visible = False
+    Label29.visible = False
+    Label38.visible = False
+    Label39.visible = False
+    Label33.visible = False
+    Label34.visible = False
+    Label40.visible = False
+    Label41.visible = False
+#Else
+#End If
 End Sub
 
 Private Sub UserForm_Initialize()
     colindex = 0
     palindex = 0
     ComboBox_kvalitet.AddItem Sprog.A(185)
-    ComboBox_kvalitet.AddItem Sprog.A(184) '("Meget høj")
-    ComboBox_kvalitet.AddItem Sprog.A(183) '("Høj")
+    ComboBox_kvalitet.AddItem Sprog.A(184) '("Meget h*oe*j")
+    ComboBox_kvalitet.AddItem Sprog.A(183) '("H*oe*j")
     ComboBox_kvalitet.AddItem Sprog.A(182) '("Normal")
     ComboBox_kvalitet.AddItem Sprog.A(181) '("Lav")
     ComboBox_kvalitet.ListIndex = 3
     
-    ComboBox_farver.AddItem Sprog.A(321) '("Gul/rød/lilla")
-    ComboBox_farver.AddItem Sprog.A(322) '("Blå")
+    ComboBox_farver.AddItem Sprog.A(321) '("Gul/r*oe*d/lilla")
+    ComboBox_farver.AddItem Sprog.A(322) '("Bl*aa*")
     ComboBox_farver.AddItem Sprog.A(323) '("Brun")
-    ComboBox_farver.AddItem Sprog.A(324) '("Grå")
+    ComboBox_farver.AddItem Sprog.A(324) '("Gr*aa*")
     ComboBox_farver.ListIndex = 0
 
 End Sub
@@ -568,13 +703,13 @@ End Sub
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
   If CloseMode = 0 Then
     Cancel = 1
-    Me.hide
+    Me.Hide
   End If
 End Sub
 
 Sub SetCaptions()
     Me.Caption = Sprog.A(302)
-    CommandButton_ok.Caption = Sprog.OK
+'    CommandButton_ok.Caption = Sprog.OK ' gnuplot not ok
     Label6.Caption = Sprog.Equation & " 1"
     Label7.Caption = Sprog.Equation & " 2"
     Label8.Caption = Sprog.Equation & " 3"

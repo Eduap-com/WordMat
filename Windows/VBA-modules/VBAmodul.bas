@@ -1,70 +1,143 @@
 Attribute VB_Name = "VBAmodul"
 Option Explicit
-' add reference 'Microsoft Visual Basic for Applications Extensibility 5.3'
+' To run these macros you need these two settings:
+' * add reference 'Microsoft Visual Basic for Applications Extensibility 5.3'
+' * Settings | Trust center | Settings for macros | always trust VBA project object model
+' Don't reference other modules or userforms. This module must be self contained
 Const VBAModulesFolder = "VBA-modules" ' the subfolder to import and export modules from/to
 
-Sub ReplaceToNonUnicode()
+Sub ReplaceToASCIIseq()
+   Dim VBC As Object 'VBComponent
+   Dim i As Long, s As String
+   
+   If MsgBox("Do you want to replace all codetext to ASCII-sequences of 4 characters?" & vbCrLf & vbCrLf & "After use you can open on both Mac and Windows" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
+   
+   For Each VBC In ActiveDocument.VBProject.VBComponents
+        If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
+'      If VBC.Name = "CSprog" Then
+'        If MsgBox(VBC.Name, vbOKCancel, "Continue") = vbCancel Then Exit Sub
+         For i = 1 To VBC.CodeModule.CountOfLines
+            If i > VBC.CodeModule.CountOfLines Then Exit For
+            s = ReplaceLineToASCIIseq(VBC.CodeModule.Lines(i, 1))
+            If s <> "" Or i > 3 Then
+                VBC.CodeModule.DeleteLines i, 1
+                VBC.CodeModule.InsertLines i, s
+            Else
+                VBC.CodeModule.DeleteLines i, 1 ' import/export introduces a blank line at the top of the code for forms. This removes these blank lines
+            End If
+         Next
+      End If
+   Next
+'   GenerateKeyboardShortcuts
+'   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
+    MsgBox "Conversion Done", vbOKOnly, "Done"
+End Sub
+Sub ReplaceToExtendedASCII()
    Dim VBC As Object  'VBComponent
    Dim i As Long, s As String
    
+   If MsgBox("Do you want to replace all codetext to extended ASCII?" & vbCrLf & vbCrLf & "After use you can distribute the document" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
+   
    For Each VBC In ActiveDocument.VBProject.VBComponents
-      If VBC.Name = "CSprog" Then
-         For i = 2 To VBC.CodeModule.CountOfLines
-            s = ReplaceLineToNonUnicode(VBC.CodeModule.Lines(i, 1))
+        If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
+'      If VBC.Name = "CSprog" Then
+        
+         For i = 1 To VBC.CodeModule.CountOfLines
+            s = ReplaceLineToExtendedASCII(VBC.CodeModule.Lines(i, 1))
             VBC.CodeModule.DeleteLines i, 1
-            VBC.CodeModule.InsertLines i, s
+            If s <> "" Or i > 3 Then VBC.CodeModule.InsertLines i, s
          Next
       End If
    Next
 '   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
-
-End Sub
-Sub ReplaceToUnicode()
-   Dim VBC As Object  'VBComponent
-   Dim i As Long, s As String
-   
-   For Each VBC In ActiveDocument.VBProject.VBComponents
-      If VBC.Name = "CSprog" Then
-         For i = 2 To VBC.CodeModule.CountOfLines
-            s = ReplaceLineToUnicode(VBC.CodeModule.Lines(i, 1))
-            VBC.CodeModule.DeleteLines i, 1
-            VBC.CodeModule.InsertLines i, s
-         Next
-      End If
-   Next
-'   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
-
+    MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
 
-
-Private Function ReplaceLineToNonUnicode(s As String) As String
-   s = Replace(s, ChrW(230), "*ae*") 'æ
-   s = Replace(s, ChrW(248), "*oe*") 'ø
-   s = Replace(s, ChrW(229), "*aa*") 'å
-   s = Replace(s, ChrW(198), "*AE*") ' Æ
-   s = Replace(s, ChrW(216), "*OE*") ' Ø
-   s = Replace(s, ChrW(197), "*AA*") ' Å
-   s = Replace(s, ChrW(225), "*a-*") ' á
-   s = Replace(s, ChrW(233), "*e-*") ' é
-   s = Replace(s, ChrW(243), "*o-*") ' ó
-   s = Replace(s, ChrW(191), "*?-*") ' ¿
+Private Function ReplaceLineToASCIIseq(s As String) As String
+   s = Replace(s, ChrW(230), "*ae*") ' ae
+   s = Replace(s, ChrW(248), "*oe*") ' oe
+   s = Replace(s, ChrW(229), "*aa*") ' aa
+   s = Replace(s, ChrW(198), "*AE*") ' AE
+   s = Replace(s, ChrW(216), "*OE*") ' OE
+   s = Replace(s, ChrW(197), "*AA*") ' AAA
+   s = Replace(s, ChrW(225), "*a-*") ' a'
+   s = Replace(s, ChrW(233), "*e-*") ' e'
+   s = Replace(s, ChrW(243), "*o-*") ' o'
+   s = Replace(s, ChrW(192), "*A~*") ' A~
+   s = Replace(s, ChrW(191), "*?-*") ' (omvendt ?)
+   s = Replace(s, ChrW(241), "*n-*") ' (n~)
+   s = Replace(s, ChrW(237), "*i-*") ' (i')
+   s = Replace(s, ChrW(250), "*u-*") ' (u')
+   s = Replace(s, ChrW(176), "*gr*") ' (gradtegn)
+   s = Replace(s, ChrW(167), "*pa*") ' (paragraf)
+   s = Replace(s, ChrW(8364), "*eu*") ' (euro)
    s = Replace(s, ChrW(8230), "*._.*") ' ...
    '
-   ReplaceLineToNonUnicode = s
+   ReplaceLineToASCIIseq = s
 End Function
-Private Function ReplaceLineToUnicode(s As String) As String
-   s = Replace(s, "*ae*", ChrW(230))
-   s = Replace(s, "*oe*", ChrW(248))
-   s = Replace(s, "*aa*", ChrW(229))
-   s = Replace(s, "*AE*", ChrW(198))
-   s = Replace(s, "*OE*", ChrW(216))
-   s = Replace(s, "*AA*", ChrW(197))
-   s = Replace(s, "*a-*", ChrW(225))
-   s = Replace(s, "*e-*", ChrW(233))
-   s = Replace(s, "*o-*", ChrW(243))
-   s = Replace(s, "*?-*", ChrW(191))
-   s = Replace(s, "*._.*", ChrW(8230))
-   ReplaceLineToUnicode = s
+Private Function ReplaceLineToExtendedASCII(s As String) As String
+   s = Replace(s, "*ae*", ChrW(230)) ' ae
+   s = Replace(s, "*oe*", ChrW(248)) ' oe
+   s = Replace(s, "*aa*", ChrW(229)) ' aa
+   s = Replace(s, "*AE*", ChrW(198)) ' AE
+   s = Replace(s, "*OE*", ChrW(216)) ' OE
+   s = Replace(s, "*AA*", ChrW(197)) ' AA
+   s = Replace(s, "*a-*", ChrW(225)) ' a'
+   s = Replace(s, "*e-*", ChrW(233)) ' e'
+   s = Replace(s, "*o-*", ChrW(243)) ' o'
+   s = Replace(s, "*A~*", ChrW(192)) ' A~
+   s = Replace(s, "*?-*", ChrW(191)) ' (omvendt ?)
+   s = Replace(s, "*n-*", ChrW(241)) ' (n~)
+   s = Replace(s, "*i-*", ChrW(237)) ' (i')
+   s = Replace(s, "*u-*", ChrW(250)) ' (u')
+   s = Replace(s, "*gr*", ChrW(176)) ' (gradtegn)
+   s = Replace(s, "*pa*", ChrW(167)) ' (paragraf)
+   s = Replace(s, "*eu*", ChrW(8364)) ' (euro)
+   s = Replace(s, "*._.*", ChrW(8230)) ' ...
+   ReplaceLineToExtendedASCII = s
+End Function
+Sub ReplaceToANSI()
+' if document has been edited on Mac this function must be run on Windows to convert
+' special characters in the code. (ANSI-Unicode problem)
+' There are few problems with characters from Windows to Mac. Only _ (shift 4) seems to be a problem. Just dont use it.
+   Dim VBC As Object  'VBComponent
+   Dim i As Long, s As String
+   If MsgBox("Do you want to replace all codetext to ANSI?", vbOKCancel, "Comfirm") = vbCancel Then Exit Sub
+   
+   For Each VBC In ActiveDocument.VBProject.VBComponents
+        If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
+'      If VBC.Name = "CSprog" Then
+         For i = 2 To VBC.CodeModule.CountOfLines
+            s = ReplaceLineToANSI(VBC.CodeModule.Lines(i, 1))
+            VBC.CodeModule.DeleteLines i, 1
+            VBC.CodeModule.InsertLines i, s
+         Next
+      End If
+   Next
+'   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
+    MsgBox "Conversion Done", vbOKOnly, "Done"
+End Sub
+Private Function ReplaceLineToANSI(s As String) As String
+    s = Replace(s, ChrW(190), ChrW(230)) ' ae
+    s = Replace(s, ChrW(191), ChrW(248)) ' oe
+    s = Replace(s, ChrW(338), ChrW(229)) ' aa
+    s = Replace(s, ChrW(174), ChrW(198)) ' AE
+    s = Replace(s, ChrW(175), ChrW(216)) ' OE
+    s = Replace(s, ChrW(129), ChrW(197)) ' AA
+    s = Replace(s, ChrW(8225), ChrW(225)) '(a')
+    s = Replace(s, ChrW(381), ChrW(233)) '(e')
+    s = Replace(s, ChrW(8212), ChrW(243)) '(o')
+    s = Replace(s, ChrW(191), ChrW(192)) '(A') (Fra omvendt ?)
+    s = Replace(s, ChrW(203), ChrW(192)) '(A')
+    '   s = Replace(s, ChrW(192), ChrW(191)) '(omvendt ?) karambolerer med A' ovenfor
+    s = Replace(s, ChrW(8211), ChrW(241)) '(n~)
+    s = Replace(s, ChrW(8217), ChrW(237)) '(i')
+    s = Replace(s, ChrW(339), ChrW(250)) '(u')
+    s = Replace(s, ChrW(161), ChrW(176)) '(gradtegn)
+    s = Replace(s, ChrW(164), ChrW(167)) ' paragraf (fra sol)
+    s = Replace(s, ChrW(219), ChrW(8364)) ' Euro
+    '   s = Replace(s, "*._.*", ChrW(8230)) ' tre prikker
+    ReplaceLineToANSI = s
 End Function
 Function FolderExists(FolderPath As String) As Boolean
 
@@ -115,6 +188,12 @@ Public Sub ExportAllModules()
     Dim szFileName As String, FileList As String
     Dim cmpComponent As VBIDE.VBComponent
 
+#If Mac Then
+    MsgBox "This function is not meant to be run on Mac, as the export will not be Windows compatible", vbOKOnly, "No Mac"
+    Exit Sub
+#End If
+
+
    If MsgBox("Do you really want to export all VBA modules to folder '" & VBAModulesFolder & "'?" & vbCrLf & "(all current files in folder are deleted)", vbOKCancel) = vbCancel Then Exit Sub
     
     ''' The code modules will be exported in a folder named.
@@ -147,7 +226,7 @@ Public Sub ExportAllModules()
         bExport = True
         szFileName = cmpComponent.Name
 
-    ' når der importeres oveni VBAmodul omdøbes til VBAmodul1. Det ændres tilbage
+    ' n‘r der importeres oveni VBAmodul omdèbes til VBAmodul1. Det _ndres tilbage
         If cmpComponent.Name = "VBAmodul1" Then cmpComponent.Name = "VBAmodul"
         If cmpComponent.Name = "VBAmodul11" Then cmpComponent.Name = "VBAmodul"
 
@@ -192,8 +271,13 @@ Sub ImportAllModules()
     Dim szExportPath As String
     Dim szFileName As String
     Dim StrFile As String, i As Integer
-    Dim Arr() As String, FileList As String, MBP As Integer
+    Dim arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
+
+#If Mac Then
+    MsgBox "This function is not meant to be run on Mac, as the import is not Mac to Windows compatible", vbOKOnly, "No Mac"
+    Exit Sub
+#End If
 
     ''' The code modules will be exported in a folder named.
     ''' VBAProjectFiles in the Documents folder.
@@ -213,7 +297,9 @@ Sub ImportAllModules()
         Exit Sub
     End If
     
-    szExportPath = FolderWithVBAProjectFiles & "\"
+    szExportPath = FolderWithVBAProjectFiles
+    
+    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     StrFile = Dir(szExportPath & "A-ExportCreated*")
     If StrFile <> "" Then d = Mid(StrFile, 17, Len(StrFile) - 20)
@@ -227,7 +313,7 @@ Sub ImportAllModules()
         End If
         StrFile = Dir
     Loop
-    Arr = Split(FileList, vbCrLf)
+    arr = Split(FileList, vbCrLf)
 '    FileList = Replace(FileList, vbCrLf, " | ")
     q = ""
     If Not ActiveDocument.Saved Then
@@ -252,9 +338,9 @@ Sub ImportAllModules()
     
    DeleteAllModules False
     
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" And InStr(Arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
-            wkbSource.VBProject.VBComponents.Import szExportPath & Arr(i)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" And InStr(arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
+            wkbSource.VBProject.VBComponents.Import szExportPath & arr(i)
         End If
     Next
     
@@ -283,7 +369,8 @@ Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
         Exit Sub
     End If
     
-    szExportPath = FolderWithVBAProjectFiles & "\"
+    szExportPath = FolderWithVBAProjectFiles
+    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     For Each cmpComponent In wkbSource.VBProject.VBComponents
         bExport = True
@@ -323,3 +410,5 @@ Else
     AddZero = n
 End If
 End Function
+
+

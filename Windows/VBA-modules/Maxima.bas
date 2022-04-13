@@ -28,7 +28,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     If Not SettingsRead Then ReadAllSettingsFromRegistry
 
     If omax Is Nothing Then
-        LavRCMenu    ' højreklikmenu på ligninger
+        LavRCMenu    ' h*oe*jreklikmenu p*aa* ligninger
         SetMathAutoCorrect
         If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
         UfWait2.Show vbModeless
@@ -74,11 +74,11 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         End If
 #Else
         WaitForMaximaUntil
-#End If
         If MaxProc.ErrCode > 0 Then
             MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
             GoTo fejl
         End If
+#End If
     End If
 #If Mac Then
 #Else
@@ -107,7 +107,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         End If
     End If
 #End If
-    omax.ConvertLnLog = True ' andre funktioner kan ændre denne. den nulstilles
+    omax.ConvertLnLog = True ' andre funktioner kan *ae*ndre denne. den nulstilles
     omax.PrepareNewCommand    ' nulstiller og finder definitioner
 
     If op Then
@@ -161,7 +161,7 @@ Public Sub PrepareMaximaNoSplash()
     On Error GoTo slut
     If Not SettingsRead Then ReadAllSettingsFromRegistry
     If omax Is Nothing Then
-        LavRCMenu    ' højreklikmenu på ligninger
+        LavRCMenu    ' h*oe*jreklikmenu p*aa* ligninger
         Set omax = New CMaxima
         If MaxProc Is Nothing Then
             '        Set MaxProc = New MathMenu.MaximaProcessClass
@@ -250,7 +250,7 @@ Sub MaximaCommand()
     omax.prevspr = ""
     If Not omax.MaximaInstalled Then GoTo slut
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -278,13 +278,13 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
 End Sub
 Sub MaximaSolveInequality()
-' løser een ulighed
+' l*oe*ser een ulighed
     On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
@@ -304,7 +304,7 @@ Sub MaximaSolveInequality()
     If Selection.OMaths.Count < 2 Then
 
         omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -419,13 +419,13 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
 End Sub
 Sub MaximaSolve()
-' Denne konstruktion er nødvendig for at kunne kalde MaximaSolve med parametre fra TestTabel
+' Denne konstruktion er n*oe*dvendig for at kunne kalde MaximaSolve med parametre fra TestTabel
 ' Man kan ikke tilknytte genveje subs der tager parametre selvom de optional
     
 '    If CASengine = 1 Then
@@ -438,7 +438,7 @@ Sub MaximaSolve()
 End Sub
 'Sub MaximaSolve(Optional variabel As String)
 Sub MaximaSolvePar(Optional variabel As String)
-    Dim Arr As Variant, s As String, t As String, v As String
+    Dim arr As Variant, s As String, t As String, v As String
     Dim fejlm As String
     On Error GoTo fejl
     Application.ScreenUpdating = False
@@ -485,7 +485,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     End If
 
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -500,8 +500,9 @@ Sub MaximaSolvePar(Optional variabel As String)
         omax.FindVariable
         SaveKommando = omax.Kommando
 newcas:
+        omax.StopNow = False
         omax.Kommando = SaveKommando
-        If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
+        If CASengine > 0 And Not AllTrig Then ' P*aa* geogebra skal der via vba genkendes om det er trigonometrisk ligning
             If Not InStr(omax.vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
                 ea.text = omax.Kommando
@@ -620,9 +621,9 @@ newcas:
             IsSolved = True
         End If
 
-        ' indsæt forklaring hvis ønsket
+        ' inds*ae*t forklaring hvis *oe*nsket
         If MaximaForklaring And (IsSolved Or InStr(omax.KommentarOutput, "solving system of equations")) Then
-            '            InsertForklaring "Ligningen løses for " & variabel & " vha. CAS-værktøjet " & AppNavn & ". "
+            '            InsertForklaring "Ligningen l*oe*ses for " & variabel & " vha. CAS-v*ae*rkt*oe*jet " & AppNavn & ". "
             InsertForklaring Sprog.EquationSolvedFor & variabel & Sprog.ByCAS
         End If
 
@@ -632,7 +633,7 @@ newcas:
             fejlm = Sprog.A(128) & vbCrLf & fejlm
             MsgBox fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
             RestartMaxima
-        ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8709)) Then    ' ingen løsning
+        ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8709)) Then    ' ingen l*oe*sning
             omax.InsertMaximaOutput
             Selection.TypeParagraph
             If MaximaComplex Then
@@ -640,7 +641,7 @@ newcas:
             Else
                 Selection.TypeText Sprog.A(130) & variabel
             End If
-        ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8477)) > 0 Then  ' alle er løsning
+        ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8477)) > 0 Then  ' alle er l*oe*sning
             omax.InsertMaximaOutput
             Selection.TypeParagraph
             Selection.TypeText Sprog.A(132)
@@ -683,7 +684,7 @@ stophop:     If omax.AntalVars > 1 Then
                 UFSolvenumeric.Show
             End If
             If UFSolvenumeric.Result = "num" Then
-                Selection.End = sslut    ' slut skal være først eller går det galt
+                Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
                 Selection.start = sstart
                 ActiveWindow.VerticalPercentScrolled = scrollpos
                 MaximaSolveNumeric UFSelectVar.ListBox_vars.text
@@ -700,7 +701,7 @@ stophop:     If omax.AntalVars > 1 Then
                 Selection.TypeText UFSolvenumeric.Kommentar
             End If
 
-        Else    ' hvis der er løsning
+        Else    ' hvis der er l*oe*sning
             omax.InsertMaximaOutput
         End If
 #If Mac Then
@@ -717,7 +718,7 @@ stophop:     If omax.AntalVars > 1 Then
         UFSelectVars.Show
         variabel = UFSelectVars.SelectedVar
 
-        '    variabel = InputBox("Indtast variable som ligningssystemet skal løses for adskilt af komma", "Variable", "x,y")
+        '    variabel = InputBox("Indtast variable som ligningssystemet skal l*oe*ses for adskilt af komma", "Variable", "x,y")
 
         If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVars.TempDefs
@@ -730,9 +731,9 @@ stophop:     If omax.AntalVars > 1 Then
 newcassys:
         If CASengine = 1 Or CASengine = 2 Then
             If MaximaComplex Then
-                s = "Csolve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(omax.vars, ";", ",") & "})"
+                s = "Csolve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(variabel, ";", ",") & "})"
             Else
-                s = "solve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(omax.vars, ";", ",") & "})"
+                s = "solve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(variabel, ";", ",") & "})"
             End If
             If MaximaVidNotation Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
@@ -760,16 +761,14 @@ newcassys:
                 omax.MaximaOutput = variabel & VBA.ChrW(8712) & VBA.ChrW(8709)
             ElseIf omax.MaximaOutput = "{" & variabel & "=" & variabel & "}" Or omax.MaximaOutput = "{x=x}" Then
                 omax.MaximaOutput = variabel & VBA.ChrW(8712) & VBA.ChrW(8477)
-            Else
-                omax.ConvertOutputToSolvedGGB ' burde måske forbedres med ea.getnextlistitem ligesom solve
+            ElseIf omax.MaximaOutput <> "?" And omax.MaximaOutput <> "" Then
+                omax.ConvertOutputToSolvedGGB ' burde m*aa*ske forbedres med ea.getnextlistitem ligesom solve
             End If
             Application.Activate
         End If
         
         If omax.StopNow Then GoTo slut
         If omax.CheckForError Then GoTo slut
-        omax.GoToEndOfSelectedMaths
-        Selection.TypeParagraph
         If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
@@ -785,9 +784,6 @@ newcassys:
         End If
 
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
-        If MaximaForklaring Then
-            InsertForklaring Sprog.A(134) & variabel & Sprog.A(135)
-        End If
         
         If omax.MaximaOutput = "?" Or omax.MaximaOutput = "" Or InStr(omax.KommentarOutput, "Lisp error") > 0 Then
             UserFormChooseCAS.Show
@@ -804,7 +800,7 @@ newcassys:
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
                 TempCas = CASengine
                 CASengine = 2
-                Selection.MoveLeft wdCharacter, 1
+'                Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
                 CASengine = TempCas
@@ -820,15 +816,20 @@ newcassys:
                 GoTo slut
             End If
         ElseIf Len(omax.MaximaOutput) > 1 Then
+            omax.GoToEndOfSelectedMaths
+            Selection.TypeParagraph
+            If MaximaForklaring Then
+                InsertForklaring Sprog.A(134) & variabel & Sprog.A(135)
+            End If
             omax.InsertMaximaOutput
-            Arr = Split(omax.MaximaOutput, "=")
-            If UBound(Arr) = 1 Then
-                If InStr(Arr(0), variabel) > 0 And InStr(Arr(1), variabel) > 0 Then
-                    '                    Result = MsgBox("Maxima kunne ikke løse ligningssystemet. Den var for kompleks." & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & vbCrLf & "Tryk OK hvis du vil forsøge at løse ligningen numerisk.", vbOKCancel, "Fejl")
+            arr = Split(omax.MaximaOutput, "=")
+            If UBound(arr) = 1 Then
+                If InStr(arr(0), variabel) > 0 And InStr(arr(1), variabel) > 0 Then
+                    '                    Result = MsgBox("Maxima kunne ikke l*oe*se ligningssystemet. Den var for kompleks." & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & vbCrLf & "Tryk OK hvis du vil fors*oe*ge at l*oe*se ligningen numerisk.", vbOKCancel, "Fejl")
                     UFSolvenumeric.FejlMeld = omax.KommentarOutput
                     UFSolvenumeric.Show
                     If UFSolvenumeric.Result = "num" Then
-                        Selection.End = sslut    ' slut skal være først eller går det galt
+                        Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
                         Selection.start = sstart
                         ActiveWindow.VerticalPercentScrolled = scrollpos
                         MaximaSolveNumeric
@@ -839,9 +840,11 @@ newcassys:
                 End If
             ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8709)) > 0 And CASengine > 0 Then
                 Selection.TypeParagraph
-                Selection.TypeText "GeoGebra har været anvendt til at løse ligningssystemet. Det er usikkert om der kan være løsninger. Det anbefales at forsøge med anden metode. Fx Maxima, eller numerisk/grafisk"
+                Selection.TypeText "GeoGebra har v*ae*ret anvendt til at l*oe*se ligningssystemet. Det er usikkert om der kan v*ae*re l*oe*sninger. Det anbefales at fors*oe*ge med anden metode. Fx Maxima, eller numerisk/grafisk"
             End If
-        Else    ' ingen løsninger
+        Else    ' ingen l*oe*sninger
+            omax.GoToEndOfSelectedMaths
+            Selection.TypeParagraph
             If Len(omax.KommentarOutput) <= 1 Then
                 omax.MaximaOutput = "L=" & VBA.ChrW(8709)
                 '               omax.GoToEndOfSelectedMaths
@@ -865,7 +868,7 @@ newcassys:
                 UFSolvenumeric.FejlMeld = omax.KommentarOutput
                 UFSolvenumeric.Show
                 If UFSolvenumeric.Result = "num" Then
-                    Selection.End = sslut    ' slut skal være først eller går det galt
+                    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
                     Selection.start = sstart
                     ActiveWindow.VerticalPercentScrolled = scrollpos
                     MaximaSolveNumeric
@@ -885,7 +888,7 @@ slut:
     '    omax.Luk
     On Error Resume Next
     CASengine = TempCas
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
     '   UnLockWindow
@@ -1009,7 +1012,7 @@ Sub MaximaEliminate()
         UFSelectVars.Show
         variabel = UFSelectVars.SelectedVar
 
-        '    variabel = InputBox("Indtast variable som ligningssystemet skal løses for adskilt af komma", "Variable", "x,y")
+        '    variabel = InputBox("Indtast variable som ligningssystemet skal l*oe*ses for adskilt af komma", "Variable", "x,y")
 
         If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVars.TempDefs
@@ -1070,7 +1073,7 @@ Sub MaximaEliminate()
 
         If Len(omax.MaximaOutput) > 1 Then
             omax.InsertMaximaOutput
-        Else    ' ingen løsninger
+        Else    ' ingen l*oe*sninger
             If Len(omax.KommentarOutput) <= 1 Then
                 omax.MaximaOutput = "L=" & VBA.ChrW(8709)
                 '               omax.GoToEndOfSelectedMaths
@@ -1094,7 +1097,7 @@ Sub MaximaEliminate()
                 UserFormNumericQuestion.FejlMeld = omax.KommentarOutput
                 UserFormNumericQuestion.Show
                 If UserFormNumericQuestion.Result = "num" Then
-                    Selection.End = sslut    ' slut skal være først eller går det galt
+                    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
                     Selection.start = sstart
                     ActiveWindow.VerticalPercentScrolled = scrollpos
                     MaximaSolveNumeric
@@ -1113,13 +1116,13 @@ fejl:
 slut:
     '    omax.Luk
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
     '   UnLockWindow
 End Sub
 Sub MaximaNsolve(Optional ByVal variabel As String)
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim fejlm As String
     Dim solutions As String
     Dim UFnsolve As New UserFormNumericQuestion
@@ -1167,7 +1170,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     End If
 
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -1178,7 +1181,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         UFnsolve.Ligning = omax.Kommando
         omax.FindVariable
         
-        If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
+        If CASengine > 0 And Not AllTrig Then ' P*aa* geogebra skal der via vba genkendes om det er trigonometrisk ligning
             If Not InStr(omax.vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
                 ea.text = omax.Kommando
@@ -1222,13 +1225,13 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             If MaximaForklaring Then
                 omax.GoToEndOfSelectedMaths
                 Selection.TypeParagraph
-                InsertForklaring "Ligningen blev løst med GeoGebra:", False
+                InsertForklaring "Ligningen blev l*oe*st med GeoGebra:", False
                 Selection.TypeParagraph
             End If
             s = Replace(omax.Kommando, ",", ".")
-            Arr = Split(s, "=")
-            lhs = Arr(0)
-            rhs = Arr(1)
+            arr = Split(s, "=")
+            lhs = arr(0)
+            rhs = arr(1)
             If variabel <> "x" Then
                 ea.text = lhs
                 ea.ReplaceVar variabel, "x"
@@ -1265,7 +1268,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         If UFnsolve.Result = "afbryd" Then GoTo slut
 
         If UFnsolve.Result = "num" Then
-            Selection.End = sslut    ' slut skal være først ellers går det galt
+            Selection.End = sslut    ' slut skal v*ae*re f*oe*rst ellers g*aa*r det galt
             Selection.start = sstart
             ActiveWindow.VerticalPercentScrolled = scrollpos
             Unload UFnsolve
@@ -1273,9 +1276,9 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
                 MaximaSolveNumeric UFSelectVar.ListBox_vars.text
             Else
       s = Replace(omax.Kommando, ",", ".")
-            Arr = Split(s, "=")
-            lhs = Arr(0)
-            rhs = Arr(1)
+            arr = Split(s, "=")
+            lhs = arr(0)
+            rhs = arr(1)
             If variabel <> "x" Then
                 ea.text = lhs
                 ea.ReplaceVar variabel, "x"
@@ -1317,7 +1320,7 @@ ghop:
             IsSolved = True
         End If
 
-        ' indsæt forklaring hvis ønsket
+        ' inds*ae*t forklaring hvis *oe*nsket
         If MaximaForklaring And IsSolved Then
             InsertForklaring Sprog.EquationSolvedNumFor & variabel & Sprog.A(57)
         End If
@@ -1338,11 +1341,11 @@ ghop:
         Variable = Variable & "=1"
         inp = InputBox(Sprog.A(379), Sprog.A(380), Variable)
         If inp = "" Then GoTo slut    ' trykket cancel
-        Arr = Split(inp, ListSeparator)
+        arr = Split(inp, ListSeparator)
 
         Variable = ""
-        For j = 0 To UBound(Arr)
-            arr2 = Split(Arr(j), "=")
+        For j = 0 To UBound(arr)
+            arr2 = Split(arr(j), "=")
             Variable = Variable & Trim(arr2(0)) & ","
             If UBound(arr2) = 0 Or Trim(arr2(1)) = "" Then
                 guess = guess & ",1"
@@ -1358,7 +1361,7 @@ ghop:
 
 
         If CASengine = 1 Or CASengine = 2 Then
-            s = "nsolve({" & Replace(omax.KommandoerStreng, ";", ",") & "},{" & Replace(inp, ";", " , ") & "})"
+            s = "nsolve({" & Replace(omax.KommandoerStreng, ";", " , ") & "},{" & Replace(inp, ";", " , ") & "})"
         End If
         
         If CASengine = 0 Then
@@ -1367,7 +1370,7 @@ ghop:
             If MaximaForklaring Then
                 omax.GoToEndOfSelectedMaths
                 Selection.TypeParagraph
-                InsertForklaring "Ligningsystemet blev løst med GeoGebra:", False
+                InsertForklaring "Ligningsystemet blev l*oe*st med GeoGebra:", False
                 Selection.TypeParagraph
             End If
             If InStr(Variable, "x") > 0 And InStr(Variable, "y") > 0 Then s = omax.KommandoerStreng & ";intersect(" & Replace(omax.KommandoerStreng, ";", " , ") & ");" & s
@@ -1419,14 +1422,14 @@ slut:
     On Error Resume Next
     Unload UFnsolve
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
     '   UnLockWindow
 End Sub
 Sub MaximaSolveNumeric(Optional var As String)
-' grafisk løsning + newton + intervalmetode
-' var indsættes som den variabel der løses for
+' grafisk l*oe*sning + newton + intervalmetode
+' var inds*ae*ttes som den variabel der l*oe*ses for
     On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
@@ -1434,7 +1437,7 @@ Sub MaximaSolveNumeric(Optional var As String)
     Dim t As String
     Dim scrollpos As Double
     Dim VarGuess As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim arr2 As Variant
     Dim j As Integer
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -1484,7 +1487,7 @@ Sub MaximaSolveNumeric(Optional var As String)
         UFSolvenumeric.Show
         '    Set omax = New CMaxima
         omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -1573,7 +1576,7 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
@@ -1614,7 +1617,7 @@ Sub beregn()
     End If
 
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -1625,7 +1628,7 @@ Sub beregn()
     '    UFWait.Show
     '    If omax.StopNow Then GoTo slut
     
-    Dim s As String, Res As String, def As String, Arr() As String, i As Integer, ms As String, t As String, fo As String
+    Dim s As String, Res As String, def As String, arr() As String, i As Integer, ms As String, t As String, fo As String
     
     If CASengine > 0 Then
         s = Trim(omax.Kommando)
@@ -1654,10 +1657,21 @@ Sub beregn()
     ElseIf CASengine = 2 Then
         fo = RunGeoGebraDirect(s)
         If MaximaExact = 0 And Not MaximaVidNotation Then
-            s = "numeric(" & fo & " , " & MaximaCifre & ")"
-'            s = "numeric(" & s & " , " & MaximaCifre & ")"
+            If fo = "?" Or fo = "null" Or fo = "" Then
+                s = "numeric(" & s & " , " & MaximaCifre & ")"
+            Else
+                s = "numeric(" & fo & " , " & MaximaCifre & ")"
+            End If
+            MaximaExact = 2
             t = RunGeoGebraDirect(s)
-            If fo <> t Then
+            MaximaExact = 0
+            If (fo = "?" Or fo = "null" Or fo = "") And (t = "?" Or t = "null" Or t = "") Then
+                omax.MaximaOutput = fo
+            ElseIf (fo = "?" Or fo = "null" Or fo = "") Then
+                omax.MaximaOutput = t
+            ElseIf (t = "?" Or t = "null" Or t = "") Or fo = t Or t = "" Then
+                omax.MaximaOutput = fo
+            Else
                 omax.MaximaOutput = fo & VBA.ChrW(&H2248) & t
             End If
         End If
@@ -1682,8 +1696,14 @@ Sub beregn()
         '        If InStr(omax.KommentarOutput, "infix") > 0 Then
         '            fejlm = fejlm & "Husk at alle gangetegn skal laves. 2*x ikke 2x" & vbCrLf
         '        End If
-        MsgBox fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
+#If Mac Then
+        fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf
+        MsgBox fejlm, vbOKOnly, Sprog.Error
+#Else
+        fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput
+        MsgBox fejlm, vbOKOnly, Sprog.Error
         RestartMaxima
+#End If
     End If
 #If Mac Then
 #Else
@@ -1709,7 +1729,7 @@ End Sub
 
 Function GetCmdAfterEqualSign(Kommando As String) As String
     Dim posligmed As Integer, possumtegn As Integer, posca As Integer
-    Do    ' gå tilbage til nærmeste ligmed
+    Do    ' g*aa* tilbage til n*ae*rmeste ligmed
         posligmed = InStr(Kommando, "=")
         possumtegn = InStr(Kommando, VBA.ChrW(8721))
         '    posprodtegn = InStr(Kommando, VBA.ChrW(8719))
@@ -1755,7 +1775,7 @@ Sub Omskriv()
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -1848,7 +1868,7 @@ slut:
     OutUnits = SaveSettingsOutunits
     MaximaLogOutput = SaveSettingsLog
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -1873,7 +1893,7 @@ Sub reducer()
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -1929,7 +1949,7 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -1954,7 +1974,7 @@ Sub CompareTest()
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -1994,7 +2014,7 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -2019,7 +2039,7 @@ Sub faktoriser()
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2077,7 +2097,7 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -2104,7 +2124,7 @@ Sub udvid()
         GoTo slut
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2157,7 +2177,7 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -2183,7 +2203,7 @@ Sub Differentier()
         GoTo slut
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2244,7 +2264,7 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -2270,7 +2290,7 @@ Sub Integrer()
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2331,7 +2351,7 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -2359,7 +2379,7 @@ Sub SolveDENumeric()
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2455,22 +2475,22 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst eller g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Function GetRHS(s As String) As String
-    Dim Arr As Variant
+    Dim arr As Variant
     s = omax.ConvertToAscii(s)
-    Arr = Split(s, "=")
-    If UBound(Arr) > 0 Then
-        GetRHS = Arr(UBound(Arr))
+    arr = Split(s, "=")
+    If UBound(arr) > 0 Then
+        GetRHS = arr(UBound(arr))
     Else
         GetRHS = s
     End If
 End Function
 Function GetLHSvar(s As String) As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim ea As New ExpressionAnalyser
     Dim var As String, i As Integer
     If s = vbNullString Then
@@ -2478,8 +2498,8 @@ Function GetLHSvar(s As String) As String
         Exit Function
     End If
     s = omax.ConvertToAscii(s)
-    Arr = Split(s, "=")
-    s = Arr(0)
+    arr = Split(s, "=")
+    s = arr(0)
     ea.text = s
     Do
         var = ea.GetNextVar()
@@ -2502,7 +2522,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     Dim scrollpos As Double
     Dim sstart As Long, sslut As Long
     Dim t As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim UFdiffeq As New UserFormDiffEq
     Dim ea As New ExpressionAnalyser
     ea.SetNormalBrackets
@@ -2524,15 +2544,15 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se p*aa* felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
-    '    funktion = InputBox("Indtast funktion som udtrykket skal løses for", "Variabel", "y")
-    '    variabel = InputBox("Indtast variabel som funktionen afhænger af", "Variabel", "x")
+    '    funktion = InputBox("Indtast funktion som udtrykket skal l*oe*ses for", "Variabel", "y")
+    '    variabel = InputBox("Indtast variabel som funktionen afh*ae*nger af", "Variabel", "x")
     If funktion = vbNullString And variabel = vbNullString Then
         omax.FindVariable
         If InStr(omax.vars, "t") > 0 Then
@@ -2620,7 +2640,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     ElseIf CASengine = 2 Then
             Call RunGeoGebraDirect(s)
             omax.MaximaOutput = Replace(omax.MaximaOutput, "{", "")
-            omax.MaximaOutput = Replace(omax.MaximaOutput, "}", " ") ' mellemrummet sikrer afstand så det bliver gange efter c_1
+            omax.MaximaOutput = Replace(omax.MaximaOutput, "}", " ") ' mellemrummet sikrer afstand s*aa* det bliver gange efter c_1
 '            If Left(omax.MaximaOutput, 1) = "{" Then omax.MaximaOutput = Mid(omax.MaximaOutput, 2, Len(omax.MaximaOutput) - 2)
             omax.MaximaOutput = Replace(omax.MaximaOutput, ";", "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
             Application.Activate
@@ -2660,7 +2680,7 @@ fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først ellers går det galt
+    Selection.End = sslut    ' slut skal v*ae*re f*oe*rst ellers g*aa*r det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -2682,12 +2702,12 @@ Function TranslateComment(comm As String) As String
 End Function
 Function TranslateReplaceOutput(comm As String) As String
 
-    comm = Replace(comm, "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")", "Fejl: Du har bedt om at løse en ligning for en variabel der allerede er defineret." & vbCrLf & "Sæt en 'slet def:' kommando ind før ligningen.")
+    comm = Replace(comm, "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")", "Fejl: Du har bedt om at l*oe*se en ligning for en variabel der allerede er defineret." & vbCrLf & "S*ae*t en 'slet def:' kommando ind f*oe*r ligningen.")
 
     TranslateReplaceOutput = comm
 End Function
 Sub InsertOutput(text As String)
-' indsætter text efter den mathobj cursoren er i på sikker måde
+' inds*ae*tter text efter den mathobj cursoren er i p*aa* sikker m*aa*de
 
     If Selection.start = Selection.End Then
         omax.GoToEndOfSelectedMaths
@@ -2699,7 +2719,7 @@ Sub InsertOutput(text As String)
         Selection.Collapse wdCollapseEnd
     Else
     End If
-    Selection.TypeText text    ' giver problemer med at =tegn kommer under brøkstreg
+    Selection.TypeText text    ' giver problemer med at =tegn kommer under br*oe*kstreg
     Selection.Move wdCharacter, -1
     Selection.OMaths.BuildUp
     omax.GoToEndOfSelectedMaths

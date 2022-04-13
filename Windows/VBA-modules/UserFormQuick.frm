@@ -13,31 +13,19 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Dim start
-
 Private Sub UserForm_Activate()
     start = Timer    ' Set start time.
     Do While Timer < start + 2
         DoEvents    ' Yield to other processes.
     Loop
-    Me.hide
+    Me.Hide
 
 End Sub
 
 Private Sub UserForm_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -66,7 +54,7 @@ On Error GoTo slut
         start = Timer    ' Set start time.
     End If
     Else
-        Me.hide
+        Me.Hide
     End If
     If Not (WoMatRibbon Is Nothing) Then
         WoMatRibbon.Invalidate

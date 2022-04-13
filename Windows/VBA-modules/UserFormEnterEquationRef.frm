@@ -13,24 +13,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
-
 Public EquationName As String
-
 Private Sub CommandButton_cancel_Click()
     EquationName = ""
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
@@ -53,7 +40,7 @@ For i = 1 To ActiveDocument.Bookmarks.Count
     End If
 Next
     
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)

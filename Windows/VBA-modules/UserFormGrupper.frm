@@ -13,17 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Private Sub CommandButton_nulstil_Click()
     TextBox_data.text = ""
@@ -37,13 +26,13 @@ Dim v As Double
 Dim Min As Double
 Dim Max As Double
 Dim n As Integer
-Dim Arr As Variant
+Dim arr As Variant
 Dim arrdata As Variant
 Dim arrint As Variant
 Dim i As Integer
 Dim j As Integer
 On Error GoTo fejl
-Me.hide
+Me.Hide
 'Application.ScreenUpdating = False
 Data = TextBox_data.text
 intervaller = TextBox_intervaller.text
@@ -52,16 +41,16 @@ arrint = Split(intervaller, vbCrLf)
 n = UBound(arrint)
 
 If n > 0 Then
-' indsæt data
+' inds*ae*t data
 If CheckBox_data.Value = True Then
     Dim t As String
-    t = AppNavn & " grupperede talmængden: { " & Replace(Data, vbCrLf, " " & ListSeparator & " ") & " }" & vbCrLf
+    t = AppNavn & " grupperede talm*ae*ngden: { " & Replace(Data, vbCrLf, " " & ListSeparator & " ") & " }" & vbCrLf
     t = t & "i intervallerne: " & Replace(intervaller, vbCrLf, " " & ListSeparator & " ") & vbCrLf
     Selection.TypeText t
     Selection.Collapse wdCollapseEnd
 End If
 
-' indsæt tabel
+' inds*ae*t tabel
 Dim Tabel As Table
     ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=UBound(arrint) + 2, NumColumns:= _
         3, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
@@ -86,16 +75,16 @@ Tabel.Columns.Width = 50
 
 ' fyld tabel med data
 For i = 0 To n
-    Arr = Split(arrint(i), "-")
-    Min = Arr(0)
-    If UBound(Arr) = 0 Then
-        If Trim(Arr(0)) = "" Then
+    arr = Split(arrint(i), "-")
+    Min = arr(0)
+    If UBound(arr) = 0 Then
+        If Trim(arr(0)) = "" Then
             
         Else
             GoTo fejl
         End If
     End If
-    Max = Arr(1)
+    Max = arr(1)
     Tabel.Cell(i + 2, 1).Range.text = Min
     Tabel.Cell(i + 2, 2).Range.text = Max
     Tabel.Cell(i + 2, 3).Range.text = 0

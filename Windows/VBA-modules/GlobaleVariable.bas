@@ -1,6 +1,5 @@
 Attribute VB_Name = "GlobaleVariable"
 Option Explicit
-
 'Public DebugWM As Boolean = True
 Public DebugWM As Boolean ' brug toggledebug funktion
 Public Const PI As Double = 3.14159265358979
@@ -13,7 +12,7 @@ Public Const PI As Double = 3.14159265358979
 
 #If Mac Then
 #Else
-    Public tempDoc As Document ' dokument hvor ligning kopieres over og læses. På mac er der lavet en function
+    Public tempDoc As Document ' dokument hvor ligning kopieres over og l*ae*ses. P*aa* mac er der lavet en function
 #End If
 
 'Public XLapp As Excel.Application
@@ -57,7 +56,7 @@ Public ExcelVBAWarning As Integer
 
 Public colindex As Integer
 
-Public PicOpen As Boolean ' markerer at grafbillede er åbent så det skal overskrives
+Public PicOpen As Boolean ' markerer at grafbillede er *aa*bent s*aa* det skal overskrives
 Public Sprog As New CSprog
 
 Public latexfil As New CLaTex

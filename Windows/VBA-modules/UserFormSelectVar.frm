@@ -22,13 +22,13 @@ Private Svars As Variant ' array der holder variabelnavne som de skal returneres
 
 
 Private Sub CommandButton_cancel_Click()
-    UFSelectVar.hide
+    UFSelectVar.Hide
     Application.ScreenUpdating = False
 End Sub
 
 Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
@@ -60,13 +60,13 @@ Dim i As Integer
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
 
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
-                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
+            If Split(arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der l*oe*ses for
+                TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & SelectedVar & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
@@ -74,7 +74,7 @@ Dim i As Integer
         End If
     Next
     
-    ' Hvis units er on så må man ikke løse for en enhed
+    ' Hvis units er on s*aa* m*aa* man ikke l*oe*se for en enhed
     If MaximaUnits Then
         If InStr("A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s", SelectedVar) Then
             MsgBox Sprog.A(254), vbOKOnly, Sprog.Warning
@@ -101,7 +101,7 @@ Dim i As Integer
 fejl:
     SelectedVar = ""
 slut:
-    UFSelectVar.hide
+    UFSelectVar.Hide
     Application.ScreenUpdating = False
 End Sub
 

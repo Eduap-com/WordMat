@@ -13,24 +13,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
-
-
-
-
-
 Option Explicit
 Dim ErrorCount As Long, OkCount As Long
 Dim i As Integer, TabNo As Integer, j As Integer, RowNo As Integer
 Dim StopTest As Boolean
 
 Private Sub CommandButton_luk_Click()
-    Me.hide
+    Me.Hide
 End Sub
 
 
@@ -91,13 +80,13 @@ End Sub
 Sub AllTables()
     Dim Tabel As Table
 
-    TextBox_status.text = "ok/fejl | Tabel | Række | Kommando " & vbCrLf
+    TextBox_status.text = "ok/fejl | Tabel | R*ae*kke | Kommando " & vbCrLf
     For TabNo = 1 To ActiveDocument.Tables.Count
         Set Tabel = ActiveDocument.Tables(TabNo)
         TestTable Tabel
     Next
 
-    TextBox_status.text = TextBox_status.text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemført " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
+    TextBox_status.text = TextBox_status.text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemf*oe*rt " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
 
 
 fejl:
