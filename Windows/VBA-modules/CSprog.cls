@@ -2456,8 +2456,8 @@ SA(461, 0) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) &
 SA(461, 1) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Cumulative frequency function"
 SA(461, 2) = ""
 
-SA(462, 0) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "‚" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "‚" & ChrW(&HB2) & "  frekvensfunktion med frihedsgrad n"
-SA(462, 1) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "‚" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "‚" & ChrW(&HB2) & "  frequency function with n degrees of freedom"
+SA(462, 0) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "‰" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "‰" & ChrW(&HB2) & "  frekvensfunktion med frihedsgrad n"
+SA(462, 1) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "‰" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "‰" & ChrW(&HB2) & "  frequency function with n degrees of freedom"
 SA(462, 2) = ""
 
 SA(463, 0) = "V=" & ChrW(&H3C0) & ChrW(&H222B) & "f(x)" & ChrW(&HB2) & "dx     Rumfang af omdrejningslegeme"

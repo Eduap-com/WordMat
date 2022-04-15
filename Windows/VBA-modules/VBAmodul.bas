@@ -226,7 +226,7 @@ Public Sub ExportAllModules()
         bExport = True
         szFileName = cmpComponent.Name
 
-    ' n‘r der importeres oveni VBAmodul omdèbes til VBAmodul1. Det _ndres tilbage
+    ' nïr der importeres oveni VBAmodul omdbes til VBAmodul1. Det _ndres tilbagee
         If cmpComponent.Name = "VBAmodul1" Then cmpComponent.Name = "VBAmodul"
         If cmpComponent.Name = "VBAmodul11" Then cmpComponent.Name = "VBAmodul"
 

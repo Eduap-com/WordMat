@@ -17,7 +17,56 @@ Option Explicit
 Private palindex As Integer
 Private Sub CommandButton_geogebra_Click()
 Dim s As String, vekt As String, arr() As String, i As Integer, j As Integer
-Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String
+Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String, cmd As String
+    Dim sl As New CSortList, DefList As String, var As String, k As Integer, fktudtryk As String, UrlLink As String, p As Integer
+    
+    ea.SetNormalBrackets
+
+'PrepareMaxima
+'    omax.ConvertLnLog = False
+
+'definitioner
+    For i = 0 To omax.defindex - 1
+        DefList = DefList & "," & omax.DefName(i)
+        ea.text = omax.DefValue(i)
+        var = ea.GetNextVar
+        If var = "" Then
+            sl.Add omax.DefName(i), omax.DefValue(i), 0
+        Else
+            k = 0
+            For j = 0 To sl.Length - 1
+                ea.text = sl.GetVal(j)
+                If ea.ContainsVar(omax.DefName(i)) Then
+                    Exit For
+                End If
+                k = k + 1
+            Next
+            sl.Add omax.DefName(i), omax.DefValue(i), k
+        End If
+    Next
+
+'    ' definer variable der ikke er defineret
+    omax.FindVariable
+    ea.text = DefList
+    For i = 0 To sl.Length - 1
+        fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
+        If sl.GetVal(i) <> ReplacedVar Then
+            DefinerKonstanter sl.GetVal(i), DefList, Nothing, UrlLink
+            p = InStr(sl.GetName(i), "(")
+            If p > 0 Then
+                cmd = Left(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
+            Else
+                cmd = sl.GetName(i) & "=" & fktudtryk
+            End If
+        Else
+            cmd = sl.GetName(i) & "=" & fktudtryk
+        End If
+        cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
+        UrlLink = UrlLink & cmd
+   Next
+
+
+s = UrlLink
 
 ' forskrifter
     If TextBox_forskrift1.text <> "" Then
@@ -652,7 +701,8 @@ Private Sub UserForm_Activate()
     Label12.visible = False
     Label15.visible = False
     Label14.visible = False
-    Label16.visible = False
+'    Label16.visible = False
+    Label46.visible = False
     ComboBox_farver.visible = False
     TextBox_tmin1.visible = False
     TextBox_tmax1.visible = False
@@ -678,6 +728,9 @@ Private Sub UserForm_Activate()
     Label34.visible = False
     Label40.visible = False
     Label41.visible = False
+    CheckBox_pointsjoined.visible = False
+    TextBox_pointsize.visible = False
+    Label44.visible = False
 #Else
 #End If
 End Sub

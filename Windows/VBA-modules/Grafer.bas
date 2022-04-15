@@ -474,12 +474,12 @@ Dim var As String
 
 End Sub
 #End If
-Function ReplaceIndepvarX(fkt As String) As String
+Function ReplaceIndepvarX(fkt As String, Optional ByRef uvar = "") As String
 ' s*oe*rger for at inds*ae*tte x som uafh variabel
 ' hvis den ikke er i udtrykket sp*oe*rges
 Dim ea As New ExpressionAnalyser
 Dim var As String
-Dim uvar As String
+'Dim uvar As String
 ea.text = fkt
 var = ea.GetNextVar
 ReplacedVar = "x"

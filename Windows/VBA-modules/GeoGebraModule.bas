@@ -12,12 +12,12 @@ Public GeoGebraAssumes As String
 
 Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     ' gtype="", "3d", "CAS"
-    Dim Cmd As String, UrlLink As String
+    Dim cmd As String, UrlLink As String
     Dim sl As New CSortList
     Dim var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
     Dim DefS As String
-    Dim arr As Variant
+    Dim arr As Variant, uvar As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 
     Dim ea As New ExpressionAnalyser
@@ -32,47 +32,48 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     omax.ConvertLnLog = False
     omax.ReadSelection
 
-    
-'    ' s*ae*t definitioner i rigtig r*ae*kkef*oe*lge
-'    For i = 0 To omax.defindex - 1
-'        DefList = DefList & "," & omax.DefName(i)
-'        ea.text = omax.DefValue(i)
-'        var = ea.GetNextVar
-'        If var = "" Then
-'            sl.Add omax.DefName(i), omax.DefValue(i), 0
-'        Else
-'            k = 0
-'            For j = 0 To sl.Length - 1
-'                ea.text = sl.GetVal(j)
-'                If ea.ContainsVar(omax.DefName(i)) Then
-'                    Exit For
-'                End If
-'                k = k + 1
-'            Next
-'            sl.Add omax.DefName(i), omax.DefValue(i), k
-'        End If
-'    Next
-'
+    If Gtype <> "CAS" Then
+    ' s*ae*t definitioner i rigtig r*ae*kkef*oe*lge
+    For i = 0 To omax.defindex - 1
+        DefList = DefList & "," & omax.DefName(i)
+        ea.text = omax.DefValue(i)
+        var = ea.GetNextVar
+        If var = "" Then
+            sl.Add omax.DefName(i), omax.DefValue(i), 0
+        Else
+            k = 0
+            For j = 0 To sl.Length - 1
+                ea.text = sl.GetVal(j)
+                If ea.ContainsVar(omax.DefName(i)) Then
+                    Exit For
+                End If
+                k = k + 1
+            Next
+            sl.Add omax.DefName(i), omax.DefValue(i), k
+        End If
+    Next
+
 '    ' definer variable der ikke er defineret
-'    omax.FindVariable
-'    ea.text = DefList
-'    For i = 0 To sl.Length - 1
-'        fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
-'        If sl.GetVal(i) <> ReplacedVar Then
-'            DefinerKonstanter sl.GetVal(i), DefList, Nothing, UrlLink
-'            p = InStr(sl.GetName(i), "(")
-'            If p > 0 Then
-'                Cmd = Left(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
-'            Else
-'                Cmd = sl.GetName(i) & "=" & fktudtryk
-'            End If
-'        Else
-'            Cmd = sl.GetName(i) & "=" & fktudtryk
-'        End If
-'        Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
-'        UrlLink = UrlLink & Cmd
-'    Next
-    
+    omax.FindVariable
+    ea.text = DefList
+    For i = 0 To sl.Length - 1
+        fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
+        If sl.GetVal(i) <> ReplacedVar Then
+            DefinerKonstanter sl.GetVal(i), DefList, Nothing, UrlLink
+            p = InStr(sl.GetName(i), "(")
+            If p > 0 Then
+                cmd = Left(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
+            Else
+                cmd = sl.GetName(i) & "=" & fktudtryk
+            End If
+        Else
+            cmd = sl.GetName(i) & "=" & fktudtryk
+        End If
+        cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
+        UrlLink = UrlLink & cmd
+   Next
+End If
+
     j = 1
     ' inds*ae*t de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
@@ -104,34 +105,37 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                             fktudtryk = ea.text
                             DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
-                            Cmd = fktnavn & "(x)=" & fktudtryk
-                            Cmd = Replace(Cmd, "+", "%2B") & ";"
-                            UrlLink = UrlLink & Cmd
+                            cmd = fktnavn & "(x)=" & fktudtryk
+                            cmd = Replace(cmd, "+", "%2B") & ";"
+                            UrlLink = UrlLink & cmd
 
                         Else
-                            fktudtryk = ReplaceIndepvarX(rhs)
-                            DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                            If fktnavn = "y" Then
-                                Cmd = fktnavn & "=" & fktudtryk
-                            Else
-                                Cmd = fktnavn & "(x)=" & fktudtryk
+                            fktudtryk = ReplaceIndepvarX(rhs, uvar)
+                            If Not (uvar = "" Or uvar = "x") Then  'Or uvar = "t"
+                                DefList = DefList & uvar & ","
                             End If
-                            Cmd = Replace(Cmd, "+", "%2B") & ";"
-                            UrlLink = UrlLink & Cmd
+                            DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
+                            If fktnavn = "y" Then
+                                cmd = fktnavn & "=" & fktudtryk
+                            Else
+                                cmd = fktnavn & "(x)=" & fktudtryk
+                            End If
+                            cmd = Replace(cmd, "+", "%2B") & ";"
+                            UrlLink = UrlLink & cmd
                             j = j + 1
                         End If
                     ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
                         DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                        Cmd = "u" & j & "=" & udtryk
-                        Cmd = Replace(Cmd, "+", "%2B") & ";"
-                        UrlLink = UrlLink & Cmd
+                        cmd = "u" & j & "=" & udtryk
+                        cmd = Replace(cmd, "+", "%2B") & ";"
+                        UrlLink = UrlLink & cmd
                         '                    geogebrafil.CreateFunction "u" & j, udtryk, True
                     Else
                         udtryk = ReplaceIndepvarX(udtryk)
                         DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                        Cmd = "f" & j & "=" & udtryk
-                        Cmd = Replace(Cmd, "+", "%2B") & ";"
-                        UrlLink = UrlLink & Cmd
+                        cmd = "f" & j & "=" & udtryk
+                        cmd = Replace(cmd, "+", "%2B") & ";"
+                        UrlLink = UrlLink & cmd
 
                         '                    geogebrafil.CreateFunction "f" & j, udtryk, False
                         j = j + 1
@@ -142,8 +146,8 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
             If CASfunc <> "" Then
                 udtryk = CASfunc & "(" & udtryk & ")"
             End If
-            Cmd = Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ";"
-            UrlLink = UrlLink & Cmd
+            cmd = Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ";"
+            UrlLink = UrlLink & cmd
         End If
     Next
 
@@ -154,9 +158,9 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
         For j = 1 To UBound(Cregr.XValues)
             '            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & CStr(Cregr.XValues(j)) & ListSeparator & CStr(Cregr.YValues(j)) & vbCrLf
             '            cmd = "(" & Replace(Replace(geogebrafil.ConvertToGeoGebraSyntax(Cregr.XValues(j)), "+", "%2B"), ",", ".") & "," & Replace(Replace(geogebrafil.ConvertToGeoGebraSyntax(Cregr.YValues(j)), "+", "%2B"), ",", ".") & ")"
-            Cmd = "(" & Replace(ConvertToGeogebraSyntax(Cregr.XValues(j)), "+", "%2B") & "," & Replace(ConvertToGeogebraSyntax(Cregr.YValues(j)), "+", "%2B") & ")"
-            setdata = setdata & Cmd & ","
-            UrlLink = UrlLink & Cmd & ";"
+            cmd = "(" & Replace(ConvertToGeogebraSyntax(Cregr.XValues(j)), "+", "%2B") & "," & Replace(ConvertToGeogebraSyntax(Cregr.YValues(j)), "+", "%2B") & ")"
+            setdata = setdata & cmd & ","
+            UrlLink = UrlLink & cmd & ";"
         Next
         setdata = Left(setdata, Len(setdata) - 1)
         setdata = "{" & setdata & "}"
@@ -173,7 +177,7 @@ fejl:
 slut:
 End Sub
 
-Sub OpenGeoGebraWeb(ByVal Cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True)
+Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True)
     Dim UrlLink As String, arr() As String, c As Variant, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
     Dim DefS As String
        
@@ -191,22 +195,22 @@ Sub OpenGeoGebraWeb(ByVal Cmd As String, Gtype As String, Optional ConvertSyntax
     End If
     
     If Gtype = "CAS" Or Gtype = "Classic" Then
-        ArrCas = Split(Cmd, ";")
-        Cmd = ""
+        ArrCas = Split(cmd, ";")
+        cmd = ""
         For i = 0 To UBound(ArrCas)
             ArrCas(i) = ConvertToGeogebraSyntax(ArrCas(i), ConvertSyntax)
             If AssumeString <> "" Then
-                    Cmd = Cmd & AssumeString & " , " & ArrCas(i) & ");"
+                    cmd = cmd & AssumeString & " , " & ArrCas(i) & ");"
             Else
-                    Cmd = Cmd & ArrCas(i) & ";"
+                    cmd = cmd & ArrCas(i) & ";"
             End If
         Next
     End If
     
-    If Len(Cmd) > 0 Then If right(Cmd, 1) = ";" Then Cmd = Left(Cmd, Len(Cmd) - 1)
+    If Len(cmd) > 0 Then If right(cmd, 1) = ";" Then cmd = Left(cmd, Len(cmd) - 1)
 '    If ConvertSyntax Then Cmd = ConvertToGeogebraSyntax(Cmd, True)
-    Cmd = DefS & Cmd
-    Cmd = Replace(Cmd, "+", "%2B")
+    cmd = DefS & cmd
+    cmd = Replace(cmd, "+", "%2B")
         
 #If Mac Then
 '    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html"
@@ -216,7 +220,7 @@ Sub OpenGeoGebraWeb(ByVal Cmd As String, Gtype As String, Optional ConvertSyntax
 '    UrlLink = "file:///C:/Program%20Files%20(x86)/WordMat/geogebra-math-apps/GeoGebraApplet.html"
     UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
 #End If
-    UrlLink = UrlLink & "?command=" & Cmd
+    UrlLink = UrlLink & "?command=" & cmd
 
     OpenLink UrlLink, True
 
@@ -257,7 +261,7 @@ End Sub
 
 Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As String
 ' bruges ikke mere, men m*aa*ske er metoden bedre, da den g*oe*r noget med r*ae*kkef*oe*lgen
-    Dim Cmd As String, i As Integer, k As Integer, j As Integer, fktudtryk As String, UrlLink As String, p As Integer
+    Dim cmd As String, i As Integer, k As Integer, j As Integer, fktudtryk As String, UrlLink As String, p As Integer
     Dim sl As New CSortList
     Dim var As String, DefList As String
     Dim ea As New ExpressionAnalyser, arr() As String
@@ -296,17 +300,17 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
                 DefinerKonstanter sl.GetVal(i), DefList, Nothing, UrlLink
                 p = InStr(sl.GetName(i), "(")
                 If p > 0 Then
-                    Cmd = Left(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
+                    cmd = Left(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
                 Else
-                    Cmd = sl.GetName(i) & "=" & fktudtryk
+                    cmd = sl.GetName(i) & "=" & fktudtryk
                 End If
             Else
-                Cmd = sl.GetName(i) & "=" & fktudtryk
+                cmd = sl.GetName(i) & "=" & fktudtryk
             End If
-            Cmd = ConvertToGeogebraSyntax(Cmd, False)
-            If ConvertHTML Then Cmd = Replace(Cmd, "+", "%2B")
-            Cmd = Cmd & ";"
-            UrlLink = UrlLink & Cmd
+            cmd = ConvertToGeogebraSyntax(cmd, False)
+            If ConvertHTML Then cmd = Replace(cmd, "+", "%2B")
+            cmd = cmd & ";"
+            UrlLink = UrlLink & cmd
 '        End If
     Next
     
@@ -315,7 +319,7 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
     End If
     GetDefsForGeoGebra = UrlLink
 End Function
-Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = True) As String
+Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = True) As String
 '        If Defliste <> "" Then Defliste = Defliste & ";"
         Dim Res As String, i As Integer, s As String
         Dim UfWait2 As UserFormWaitForMaxima
@@ -323,10 +327,10 @@ Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = Tr
 
         If UseDefs Then FindGeoGebraDefsAndAssumes
         
-        If Cmd = "" Then Cmd = omax.Kommando
-        Cmd = ConvertToGeogebraSyntax(Cmd)
-        omax.StartKommando = Cmd
-        Res = ExecuteGeoGebraCasCommand(Cmd, UseDefs)
+        If cmd = "" Then cmd = omax.Kommando
+        cmd = ConvertToGeogebraSyntax(cmd)
+        omax.StartKommando = cmd
+        Res = ExecuteGeoGebraCasCommand(cmd, UseDefs)
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#?" & Defliste)
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd)
         i = 0
@@ -349,7 +353,7 @@ Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = Tr
             Wait (1)
 #End If
             UfWait2.Label_tip.Caption = "Executing GeoGebra command"
-            Res = ExecuteGeoGebraCasCommand(Cmd)
+            Res = ExecuteGeoGebraCasCommand(cmd)
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#?" & Defliste)
         ElseIf Left(Res, 7) = "opening" Or Res = "null" Then
             Set UfWait2 = New UserFormWaitForMaxima
@@ -372,7 +376,7 @@ Function RunGeoGebraDirect(ByVal Cmd As String, Optional UseDefs As Boolean = Tr
 '            Wait (1)
 #End If
             UfWait2.Label_tip.Caption = "Executing GeoGebra command"
-            Res = ExecuteGeoGebraCasCommand(Cmd)
+            Res = ExecuteGeoGebraCasCommand(cmd)
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#?" & Defliste)
         ElseIf Left(Res, 5) = "error" Then
 '            Wait (1)
@@ -843,8 +847,8 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                         geogebrafil.CreateFunction fktnavn, fktudtryk, False, True
                     Else
                         fktudtryk = ReplaceIndepvarX(rhs)
-                        DefinerKonstanter udtryk, DefList, geogebrafil
-                        geogebrafil.CreateFunction "f" & j, udtryk, False
+                        DefinerKonstanter fktudtryk, DefList, geogebrafil
+                        geogebrafil.CreateFunction "f" & j, fktudtryk, False
                         j = j + 1
                     End If
                 ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
@@ -857,8 +861,6 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                     geogebrafil.CreateFunction "f" & j, udtryk, False
                     j = j + 1
                 End If
-
-                
             End If
         End If
     Next
@@ -934,22 +936,23 @@ Dim varval As String
                     UrlLink = UrlLink & var & "=" & varval & ";"
                 End If
                 DefList = DefList & "," & var
+                ea.text = DefList
                 i = i + 1
             End If
         End If
     Loop While var <> ""
     
-    If i > 1 Then
-        var = Split(DefList, ",")(0)
-            varval = InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(364), Sprog.A(365), "1")
-            If Len(varval) > 0 Then
-                If Not geogebrafil Is Nothing Then
-                    geogebrafil.CreateFunction var, varval, False, False
-                Else
-                    UrlLink = UrlLink & var & "=" & varval & ";"
-                End If
-            End If
-    End If
+'    If i > 1 Then ' kan ikke lige se hvad denne sektion er nÀdvendig for
+'        var = Split(DefList, ",")(0)
+'            varval = InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(364), Sprog.A(365), "1")
+'            If Len(varval) > 0 Then
+'                If Not geogebrafil Is Nothing Then
+'                    geogebrafil.CreateFunction var, varval, False, False
+'                Else
+'                    UrlLink = UrlLink & var & "=" & varval & ";"
+'                End If
+'            End If
+'    End If
     
     DefinerKonstanter = var
 End Function

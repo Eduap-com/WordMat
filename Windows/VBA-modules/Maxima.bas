@@ -42,14 +42,13 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     End If
 
     If MaxProc Is Nothing And CASengine = 0 Then
-        '        Set MaxProc = New MathMenu.MaximaProcessClass
         If Not op Then
-            '                Set ufwait2 = New UserFormWaitStartup
+#If Mac Then
+            Set d = ActiveDocument
+#Else
             If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
             UfWait2.Show vbModeless
             op = True
-#If Mac Then
-            Set d = ActiveDocument
 #End If
             DoEvents
         End If
@@ -110,6 +109,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     omax.ConvertLnLog = True ' andre funktioner kan *ae*ndre denne. den nulstilles
     omax.PrepareNewCommand    ' nulstiller og finder definitioner
 
+    On Error Resume Next
     If op Then
         Unload UfWait2
 #If Mac Then

@@ -2707,10 +2707,10 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     text = Replace(text, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
     text = Replace(text, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
     text = Replace(text, VBA.ChrW(247), "/")    '
-    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‚` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '‚`
-    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‚` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '‚`
+    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '‰`
+    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '‰`
     text = Replace(text, VBA.ChrW(&H393) & "_incomplete ", "gamma_incomplete")
     text = Replace(text, VBA.ChrW(915), "gamma")    ' stort gammategn
     text = Replace(text, VBA.ChrW(8800), "#")    ' ikkeligmed
@@ -4319,8 +4319,8 @@ Function ConvertToAscii(ByVal text As String) As String
     text = Replace(text, """", "")    ' apostrof fjernes
 '#If Mac Then
 '#Else
-    text = Replace(text, "^'", "‚")    ' alm apostrof kan ikke bruges
-    text = Replace(text, "'", "‚")    ' alm apostrof kan ikke bruges
+    text = Replace(text, "^'", "‰")    ' alm apostrof kan ikke bruges
+    text = Replace(text, "'", "‰")    ' alm apostrof kan ikke bruges
 '#End If
     text = Replace(text, "+-", "-")    ' plus-minus giver minus
     text = Replace(text, VBA.ChrW(8289), "")    ' symbol der definerer funktion fjernes fra word syntaks
@@ -4330,8 +4330,8 @@ Function ConvertToAscii(ByVal text As String) As String
     '    text = Replace(text, VBA.ChrW(8901), "*") ' \cdot , ved ikke hvorfor der tilsyneladende er to
     '    text = Replace(text, VBA.ChrW(8729), "*") ' prik \cdot erstattes med gange
     '    text = Replace(text, VBA.ChrW(8226), "*") ' tyk prik erstattes med gange
-    '    text = Replace(text, VBA.ChrW(180), "^'") ' der er tre forskellige '‚` apostrof lignende de forst*aa*es alle som diff
-    '    text = Replace(text, VBA.ChrW(96), "^'") ' der er tre forskellige '‚`
+    '    text = Replace(text, VBA.ChrW(180), "^'") ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    '    text = Replace(text, VBA.ChrW(96), "^'") ' der er tre forskellige '‰`
 
     text = Replace(text, ChrW(183), "*")  ' Siden 1.18 (SBCL) kan alm gangetegn ikke vises
     text = Replace(text, ChrW(215), "*")  '
@@ -5062,10 +5062,10 @@ Function ConvertToLatex(text As String) As String
     text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
     text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
     text = Replace(text, """", "")    ' apostrof fjernes
-    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‚` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '‚`
-    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‚` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '‚`
+    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '‰`
+    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '‰`
     '    text = Replace(text, VBA.ChrW(176), "\circ ") ' gradtegn
     text = Replace(text, VBA.ChrW(189), "\frac{1}{2} ")    ' _
     text = Replace(text, VBA.ChrW(8800), "\neq ")    ' ikkeligmed
@@ -6711,7 +6711,7 @@ Function FindDefinitions() As String
 
         If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then    ' kun se p*aa* felter med :  tripelligmed def= og specielt := tegn
 #If Mac Then
-            s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range) ' kan ikke huske hvad forskel p*aa* readeq1 og 2 er. Ihvert et tilf*ae*lde p*aa* mac numerisk grafisk ligningsl*oe*sning med foreg*aa*ende definition fejler. s*aa* derfor alm. readeq p*aa* mac. april2022 skiftet tilbage til readeq2, da der opstod problemer med definitioner anden gang de blev l¾st. De kom ind som tekst med en masse "" og mellemrum
+            s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range) ' kan ikke huske hvad forskel p*aa* readeq1 og 2 er. Ihvert et tilf*ae*lde p*aa* mac numerisk grafisk ligningsl*oe*sning med foreg*aa*ende definition fejler. s*aa* derfor alm. readeq p*aa* mac. april2022 skiftet tilbage til readeq2, da der opstod problemer med definitioner anden gang de blev l_st. De kom ind som tekst med en masse "" og mellemrum
 #Else
             s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range)
 #End If

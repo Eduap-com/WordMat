@@ -914,7 +914,7 @@ ymaxg = ConvertNumberToMaxima(TextBox_ymax.text)
 
 'forskrifter
 If TextBox_ligning1.text <> "" Then
-    lign = Replace(TextBox_ligning1.text, "'", "‚")
+    lign = Replace(TextBox_ligning1.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -942,7 +942,7 @@ If TextBox_ligning1.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var1.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning2.text <> "" Then
-    lign = Replace(TextBox_ligning2.text, "'", "‚")
+    lign = Replace(TextBox_ligning2.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -970,7 +970,7 @@ If TextBox_ligning2.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var2.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning3.text <> "" Then
-    lign = Replace(TextBox_ligning3.text, "'", "‚")
+    lign = Replace(TextBox_ligning3.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -997,7 +997,7 @@ If TextBox_ligning3.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var3.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning4.text <> "" Then
-    lign = Replace(TextBox_ligning4.text, "'", "‚")
+    lign = Replace(TextBox_ligning4.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1024,7 +1024,7 @@ If TextBox_ligning4.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var4.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning5.text <> "" Then
-    lign = Replace(TextBox_ligning5.text, "'", "‚")
+    lign = Replace(TextBox_ligning5.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1051,7 +1051,7 @@ If TextBox_ligning5.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var5.text & "," & xmin & "," & xmax & "),"
 End If
 If TextBox_ligning6.text <> "" Then
-    lign = Replace(TextBox_ligning6.text, "'", "‚")
+    lign = Replace(TextBox_ligning6.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1080,7 +1080,7 @@ End If
 
 'ligninger
 If TextBox_lig1.text <> "" Then
-    lign = Replace(TextBox_lig1.text, "'", "‚")
+    lign = Replace(TextBox_lig1.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1098,7 +1098,7 @@ If TextBox_lig1.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
 If TextBox_lig2.text <> "" Then
-    lign = Replace(TextBox_lig2.text, "'", "‚")
+    lign = Replace(TextBox_lig2.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1116,7 +1116,7 @@ If TextBox_lig2.text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
 If TextBox_Lig3.text <> "" Then
-    lign = Replace(TextBox_Lig3.text, "'", "‚")
+    lign = Replace(TextBox_Lig3.text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If

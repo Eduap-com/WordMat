@@ -5,7 +5,7 @@ Sub OmdrejningsLegeme()
 Dim Kommando As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim arr As Variant
-Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
+Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim var As String, DefList As String
 
     Dim ea As New ExpressionAnalyser
@@ -59,22 +59,22 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
                         fktudtryk = ea.text
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
-                        Cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
-                        UrlLink = UrlLink & Cmd
+                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        UrlLink = UrlLink & cmd
 
                     Else
                         fktudtryk = ReplaceIndepvarX(rhs)
-                        DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                        Cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
-                        UrlLink = UrlLink & Cmd
+                        DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
+                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        UrlLink = UrlLink & cmd
                         j = j + 1
                     End If
                 ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
                 ' kan f*oe*rst bruges med GeoGebra 4.0
                     DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                    Cmd = Replace(ConvertToGeogebraSyntax(Cmd), "+", "%2B") & ";"
-                    Cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
-                    UrlLink = UrlLink & Cmd
+                    cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
+                    cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
+                    UrlLink = UrlLink & cmd
 '                    geogebrafil.CreateFunction "u" & j, udtryk, True
                 Else
                     udtryk = ReplaceIndepvarX(udtryk)
@@ -83,13 +83,13 @@ Dim i As Integer, UrlLink As String, Cmd As String, j As Integer
                     udtryk = Replace(udtryk, vbLf, "")
                     DefinerKonstanter udtryk, DefList, Nothing, UrlLink
                     If Trim(udtryk) = "x" Then 'line*ae*re funktioner kan plottes implicit og bliver meget p*ae*nere
-                        Cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
-                        UrlLink = UrlLink & Cmd
+                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        UrlLink = UrlLink & cmd
                     Else
-                        Cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2)" & ";"
-                        UrlLink = UrlLink & Cmd
-                        Cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2)" & ";"
-                        UrlLink = UrlLink & Cmd
+                        cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2)" & ";"
+                        UrlLink = UrlLink & cmd
+                        cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2)" & ";"
+                        UrlLink = UrlLink & cmd
                     End If
 
 '                    geogebrafil.CreateFunction "f" & j, udtryk, False

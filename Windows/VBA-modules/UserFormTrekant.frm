@@ -104,14 +104,14 @@ Private Sub CommandButton_ok_Click()
     
     Set t = ActiveDocument.Tables.Add(Selection.Range, 1, 2)
 '    t.Borders(wdBorderVertical).Visible = True
-#If Mac Then
-    t.Borders(wdBorderVertical).visible = False
-    t.Borders(wdBorderBottom).visible = False
-    t.Borders(wdBorderHorizontal).visible = False
-    t.Borders(wdBorderRight).visible = False
-    t.Borders(wdBorderLeft).visible = False
-    t.Borders(wdBorderTop).visible = False
-#End If
+'#If Mac Then
+'    t.Borders(wdBorderVertical).visible = False
+'    t.Borders(wdBorderBottom).visible = False
+'    t.Borders(wdBorderHorizontal).visible = False
+'    t.Borders(wdBorderRight).visible = False
+'    t.Borders(wdBorderLeft).visible = False
+'    t.Borders(wdBorderTop).visible = False
+'#End If
     
 
 
@@ -124,11 +124,11 @@ Private Sub CommandButton_ok_Click()
     TypeLine TextBox_captionsa.text & " = " & ConvertNumberToStringBC(SA), Not (CBool(ConvertStringToNumber(TextBox_sa.text)))
     TypeLine TextBox_captionsb.text & " = " & ConvertNumberToStringBC(sb), Not (CBool(ConvertStringToNumber(TextBox_sb.text)))
     TypeLine TextBox_captionsc.text & " = " & ConvertNumberToStringBC(sc), Not (CBool(ConvertStringToNumber(TextBox_sc.text)))
-#If Mac Then ' ensures that the bottom line remains in the table. The extra space is then removed after the triangle is inserted
-    TypeLine vbCrLf, False
-    TypeLine vbCrLf, False
-    TypeLine vbCrLf, False
-#End If
+'#If Mac Then ' ensures that the bottom line remains in the table. The extra space is then removed after the triangle is inserted
+'    TypeLine vbCrLf, False
+'    TypeLine vbCrLf, False
+'    TypeLine vbCrLf, False
+'#End If
     
 
     If CheckBox_tal.Value Then
@@ -137,29 +137,29 @@ Private Sub CommandButton_ok_Click()
         If Log10(sb) > bc Then bc = Int(Log10(sb)) + 1
         If Log10(sc) > bc Then bc = Int(Log10(sc)) + 1
         If bc > MaximaCifre Then bc = MaximaCifre
-#If Mac Then
-        InsertTriangle r, vA, sb, sc, ConvertNumberToStringBC(vA, 3) & ChrW(176), ConvertNumberToStringBC(vB, 3) & ChrW(176), ConvertNumberToStringBC(vC, 3) & ChrW(176), ConvertNumberToStringBC(SA, bc), ConvertNumberToStringBC(sb, bc), ConvertNumberToStringBC(sc, bc), t.Cell(1, 1).Range
-#Else
+'#If Mac Then
+'        InsertTriangle r, vA, sb, sc, ConvertNumberToStringBC(vA, 3) & ChrW(176), ConvertNumberToStringBC(vB, 3) & ChrW(176), ConvertNumberToStringBC(vC, 3) & ChrW(176), ConvertNumberToStringBC(SA, bc), ConvertNumberToStringBC(sb, bc), ConvertNumberToStringBC(sc, bc), t.Cell(1, 1).Range
+'#Else
         InsertTriangle r, vA, sb, sc, ConvertNumberToStringBC(vA, 3) & VBA.ChrW(176), ConvertNumberToStringBC(vB, 3) & VBA.ChrW(176), ConvertNumberToStringBC(vC, 3) & VBA.ChrW(176), ConvertNumberToStringBC(SA, bc), ConvertNumberToStringBC(sb, bc), ConvertNumberToStringBC(sc, bc)
-#End If
+'#End If
     Else
-#If Mac Then
-        InsertTriangle r, vA, sb, sc, TextBox_captionA.text, TextBox_captionB.text, TextBox_captionC.text, TextBox_captionsa.text, TextBox_captionsb.text, TextBox_captionsc.text, t.Cell(1, 1).Range
-#Else
+'#If Mac Then
+'        InsertTriangle r, vA, sb, sc, TextBox_captionA.text, TextBox_captionB.text, TextBox_captionC.text, TextBox_captionsa.text, TextBox_captionsb.text, TextBox_captionsc.text, t.Cell(1, 1).Range
+'#Else
         InsertTriangle r, vA, sb, sc, TextBox_captionA.text, TextBox_captionB.text, TextBox_captionC.text, TextBox_captionsa.text, TextBox_captionsb.text, TextBox_captionsc.text
-#End If
+'#End If
     End If
 
-#If Mac Then
-    t.Cell(1, 2).Select
-    Selection.Collapse wdCollapseEnd
-    Selection.MoveLeft wdCharacter, 1
-    i = 0
-    Do While i < Int(vB / 4) And i < 6
-        Selection.TypeBackspace
-        i = i + 1
-    Loop
-#End If
+'#If Mac Then
+'    t.Cell(1, 2).Select
+'    Selection.Collapse wdCollapseEnd
+'    Selection.MoveLeft wdCharacter, 1
+'    i = 0
+'    Do While i < Int(vB / 4) And i < 6
+'        Selection.TypeBackspace
+'        i = i + 1
+'    Loop
+'#End If
     
     
     t.Range.Select
@@ -171,14 +171,14 @@ Private Sub CommandButton_ok_Click()
     MsgBox Sprog.TS2Solutions, vbOKOnly, Sprog.TS2Solutions2
     Set t = ActiveDocument.Tables.Add(Selection.Range, 1, 2)
 '    t.Borders(wdBorderVertical).Visible = True
-#If Mac Then
-    t.Borders(wdBorderVertical).visible = False
-    t.Borders(wdBorderBottom).visible = False
-    t.Borders(wdBorderHorizontal).visible = False
-    t.Borders(wdBorderRight).visible = False
-    t.Borders(wdBorderLeft).visible = False
-    t.Borders(wdBorderTop).visible = False
-#End If
+'#If Mac Then
+'    t.Borders(wdBorderVertical).visible = False
+'    t.Borders(wdBorderBottom).visible = False
+'    t.Borders(wdBorderHorizontal).visible = False
+'    t.Borders(wdBorderRight).visible = False
+'    t.Borders(wdBorderLeft).visible = False
+'    t.Borders(wdBorderTop).visible = False
+'#End If
     
     Set r = t.Cell(1, 1).Range
     t.Cell(1, 2).Select
@@ -189,11 +189,11 @@ Private Sub CommandButton_ok_Click()
     TypeLine TextBox_captionsa.text & " = " & ConvertNumberToStringBC(sa2), Not (CBool(ConvertStringToNumber(TextBox_sa.text)))
     TypeLine TextBox_captionsb.text & " = " & ConvertNumberToStringBC(sb2), Not (CBool(ConvertStringToNumber(TextBox_sb.text)))
     TypeLine TextBox_captionsc.text & " = " & ConvertNumberToStringBC(sc2), Not (CBool(ConvertStringToNumber(TextBox_sc.text)))
-#If Mac Then
-    TypeLine vbCrLf, False
-    TypeLine vbCrLf, False
-    TypeLine vbCrLf, False
-#End If
+'#If Mac Then
+'    TypeLine vbCrLf, False
+'    TypeLine vbCrLf, False
+'    TypeLine vbCrLf, False
+'#End If
         
     If CheckBox_tal.Value Then
         bc = 3 ' antal betydende cifre p*aa* sidel*ae*ngde p*aa* figur
@@ -201,29 +201,29 @@ Private Sub CommandButton_ok_Click()
         If Log10(sb2) > bc Then bc = Int(Log10(sb2)) + 1
         If Log10(sc2) > bc Then bc = Int(Log10(sc2)) + 1
         If bc > MaximaCifre Then bc = MaximaCifre
-#If Mac Then
-        InsertTriangle r, vA2, sb2, sc2, ConvertNumberToStringBC(vA2, 3) & ChrW(176), ConvertNumberToStringBC(vB2, 3) & ChrW(176), ConvertNumberToStringBC(vC2, 3) & ChrW(176), ConvertNumberToStringBC(sa2, bc), ConvertNumberToStringBC(sb2, bc), ConvertNumberToStringBC(sc2, bc), t.Cell(1, 1).Range
-#Else
+'#If Mac Then
+'        InsertTriangle r, vA2, sb2, sc2, ConvertNumberToStringBC(vA2, 3) & ChrW(176), ConvertNumberToStringBC(vB2, 3) & ChrW(176), ConvertNumberToStringBC(vC2, 3) & ChrW(176), ConvertNumberToStringBC(sa2, bc), ConvertNumberToStringBC(sb2, bc), ConvertNumberToStringBC(sc2, bc), t.Cell(1, 1).Range
+'#Else
         InsertTriangle r, vA2, sb2, sc2, ConvertNumberToStringBC(vA2, 3) & VBA.ChrW(176), ConvertNumberToStringBC(vB2, 3) & VBA.ChrW(176), ConvertNumberToStringBC(vC2, 3) & VBA.ChrW(176), ConvertNumberToStringBC(sa2, bc), ConvertNumberToStringBC(sb2, bc), ConvertNumberToStringBC(sc2, bc)
-#End If
+'#End If
     Else
-#If Mac Then
-        InsertTriangle r, vA2, sb2, sc2, TextBox_captionA.text, TextBox_captionB.text, TextBox_captionC.text, TextBox_captionsa.text, TextBox_captionsb.text, TextBox_captionsc.text, t.Cell(1, 1).Range
-#Else
+'#If Mac Then
+'        InsertTriangle r, vA2, sb2, sc2, TextBox_captionA.text, TextBox_captionB.text, TextBox_captionC.text, TextBox_captionsa.text, TextBox_captionsb.text, TextBox_captionsc.text, t.Cell(1, 1).Range
+'#Else
         InsertTriangle r, vA2, sb2, sc2, TextBox_captionA.text, TextBox_captionB.text, TextBox_captionC.text, TextBox_captionsa.text, TextBox_captionsb.text, TextBox_captionsc.text
-#End If
+'#End If
     End If
 
-#If Mac Then
-    t.Cell(1, 2).Select
-    Selection.Collapse wdCollapseEnd
-    Selection.MoveLeft wdCharacter, 1
-    i = 0
-    Do While i < Int(vB / 4) And i < 6
-        Selection.TypeBackspace
-        i = i + 1
-    Loop
-#End If
+'#If Mac Then
+'    t.Cell(1, 2).Select
+'    Selection.Collapse wdCollapseEnd
+'    Selection.MoveLeft wdCharacter, 1
+'    i = 0
+'    Do While i < Int(vB / 4) And i < 6
+'        Selection.TypeBackspace
+'        i = i + 1
+'    Loop
+'#End If
     t.Range.Select
     Selection.Collapse wdCollapseEnd
     Selection.TypeParagraph
@@ -733,11 +733,11 @@ slut:
 
 End Sub
 
-#If Mac Then
-Sub InsertTriangle(r As Range, ByVal vA As Double, ByVal sb As Double, ByVal sc As Double, NameA As String, NameB As String, NameC As String, Namesa As String, Namesb As String, Namesc As String, Anch As Range)
-#Else
+'#If Mac Then
+'Sub InsertTriangle(r As Range, ByVal vA As Double, ByVal sb As Double, ByVal sc As Double, NameA As String, NameB As String, NameC As String, Namesa As String, Namesb As String, Namesc As String, Anch As Range)
+'#Else
 Sub InsertTriangle(r As Range, ByVal vA As Double, ByVal sb As Double, ByVal sc As Double, NameA As String, NameB As String, NameC As String, Namesa As String, Namesb As String, Namesc As String)
-#End If
+'#End If
 
 ' givet vinkel A og siderne b og c tegner trekanten skaleret
 Dim norm As Double
@@ -800,51 +800,51 @@ yc = yc + 15
     Dim cv As Shape
     Dim lbl As Shape
     Dim l As Shape
-#If Mac Then
-    Dim l2 As Shape
-    Dim l3 As Shape
-#Else
+'#If Mac Then
+'    Dim l2 As Shape
+'    Dim l3 As Shape
+'#Else
     Set cv = ActiveDocument.Shapes.AddCanvas(0, 0, CSng(Maks(xb, xc) + 30), CSng(yc + 30), r)
     cv.WrapFormat.Type = wdWrapInline
-#End If
+'#End If
 
 
-#If Mac Then
-    ' sidel*ae*ngder
-    AddLabel Namesa, (xc + xb) / 2 + 7 + ActiveDocument.PageSetup.LeftMargin, yc / 2 - 4 + Anch.Information(wdVerticalPositionRelativeToPage), Anch
-    AddLabel Namesb, (xc + xa) / 2 - 3 + ActiveDocument.PageSetup.LeftMargin, yc + Anch.Information(wdVerticalPositionRelativeToPage), Anch
-    AddLabel Namesc, (xb + xa) / 2 - 10 + ActiveDocument.PageSetup.LeftMargin, yc / 2 - 4 + Anch.Information(wdVerticalPositionRelativeToPage), Anch
-    
-    ya = ya + Anch.Information(wdVerticalPositionRelativeToPage)
-    yb = yb + Anch.Information(wdVerticalPositionRelativeToPage)
-    yc = yc + Anch.Information(wdVerticalPositionRelativeToPage)
-    xa = xa + ActiveDocument.PageSetup.LeftMargin
-    xb = xb + ActiveDocument.PageSetup.LeftMargin
-    xc = xc + ActiveDocument.PageSetup.LeftMargin
-
-    'vinkler
-    AddLabel NameA, xa - 10, yc, Anch  ' yc-5 fjernet for at ikke skal st*aa* oveni figur
-    AddLabel NameB, xb - 4, Anch.Information(wdVerticalPositionRelativeToPage), Anch
-    AddLabel NameC, xc + 5, yc, Anch
-
-    Set l = ActiveDocument.Shapes.AddLine(CSng(xa), CSng(ya), CSng(xb), CSng(yb), Anch)  'Selection.Range
-    l.Line.Weight = 1
-    l.Line.Style = msoLineSingle
-    l.Shadow.visible = msoFalse
-'    l.Line.ForeColor = RGB(0, 0, 0)
-'    l.Left = CSng(xa)
-'    l.Top = CSng(ya)
-    Set l2 = ActiveDocument.Shapes.AddLine(CSng(xa), CSng(ya), CSng(xc), CSng(yc), Anch) 'Selection.Range
-    l2.Line.Weight = 1
-    l2.Line.Style = msoLineSingle
-    l2.Shadow.visible = msoFalse
-    Set l3 = ActiveDocument.Shapes.AddLine(CSng(xc), CSng(yc), CSng(xb), CSng(yb), Anch) 'Selection.Range
-    l3.Line.Weight = 1
-    l3.Line.Style = msoLineSingle
-    l3.Shadow.visible = msoFalse
-    On Error GoTo slut
-
-#Else
+'#If Mac Then
+'    ' sidel*ae*ngder
+'    AddLabel Namesa, (xc + xb) / 2 + 7 + ActiveDocument.PageSetup.LeftMargin, yc / 2 - 4 + Anch.Information(wdVerticalPositionRelativeToPage), Anch
+'    AddLabel Namesb, (xc + xa) / 2 - 3 + ActiveDocument.PageSetup.LeftMargin, yc + Anch.Information(wdVerticalPositionRelativeToPage), Anch
+'    AddLabel Namesc, (xb + xa) / 2 - 10 + ActiveDocument.PageSetup.LeftMargin, yc / 2 - 4 + Anch.Information(wdVerticalPositionRelativeToPage), Anch
+'
+'    ya = ya + Anch.Information(wdVerticalPositionRelativeToPage)
+'    yb = yb + Anch.Information(wdVerticalPositionRelativeToPage)
+'    yc = yc + Anch.Information(wdVerticalPositionRelativeToPage)
+'    xa = xa + ActiveDocument.PageSetup.LeftMargin
+'    xb = xb + ActiveDocument.PageSetup.LeftMargin
+'    xc = xc + ActiveDocument.PageSetup.LeftMargin
+'
+'    'vinkler
+'    AddLabel NameA, xa - 10, yc, Anch  ' yc-5 fjernet for at ikke skal st*aa* oveni figur
+'    AddLabel NameB, xb - 4, Anch.Information(wdVerticalPositionRelativeToPage), Anch
+'    AddLabel NameC, xc + 5, yc, Anch
+'
+'    Set l = ActiveDocument.Shapes.AddLine(CSng(xa), CSng(ya), CSng(xb), CSng(yb), Anch)  'Selection.Range
+'    l.Line.Weight = 1
+'    l.Line.Style = msoLineSingle
+'    l.Shadow.visible = msoFalse
+''    l.Line.ForeColor = RGB(0, 0, 0)
+''    l.Left = CSng(xa)
+''    l.Top = CSng(ya)
+'    Set l2 = ActiveDocument.Shapes.AddLine(CSng(xa), CSng(ya), CSng(xc), CSng(yc), Anch) 'Selection.Range
+'    l2.Line.Weight = 1
+'    l2.Line.Style = msoLineSingle
+'    l2.Shadow.visible = msoFalse
+'    Set l3 = ActiveDocument.Shapes.AddLine(CSng(xc), CSng(yc), CSng(xb), CSng(yb), Anch) 'Selection.Range
+'    l3.Line.Weight = 1
+'    l3.Line.Style = msoLineSingle
+'    l3.Shadow.visible = msoFalse
+'    On Error GoTo slut
+'
+'#Else
 
     AddLabel NameA, xa - 10, yc, cv  ' yc-5 fjernet for at ikke skal st*aa* oveni figur
     AddLabel NameB, xb - 4, 0, cv
@@ -870,7 +870,7 @@ v12:
         cv.CanvasItems.AddConnector msoConnectorStraight, CSng(xa), CSng(ya), CSng(xb - xa), CSng(yb - ya)
         cv.CanvasItems.AddConnector msoConnectorStraight, CSng(xc), CSng(yc), CSng(xb - xc), CSng(yb - yc)
     End If
-#End If
+'#End If
     
     
     
@@ -883,21 +883,21 @@ slut:
 
 
 End Sub
-#If Mac Then
-    Function AddLabel(text As String, x As Double, Y As Double, Anch As Range) As Shape
-    Dim lbl As Shape
-    Set lbl = ActiveDocument.Shapes.AddLabel(msoTextOrientationHorizontal, CSng(x), CSng(Y), 8, 14, Anch)
-#Else
+'#If Mac Then
+'    Function AddLabel(text As String, x As Double, Y As Double, Anch As Range) As Shape
+'    Dim lbl As Shape
+'    Set lbl = ActiveDocument.Shapes.AddLabel(msoTextOrientationHorizontal, CSng(x), CSng(Y), 8, 14, Anch)
+'#Else
     Function AddLabel(text As String, x As Double, Y As Double, s As Shape) As Shape
     Dim lbl As Shape
     Set lbl = s.CanvasItems.AddLabel(msoTextOrientationHorizontal, CSng(x), CSng(Y), 8, 14)
     lbl.TextFrame.AutoSize = msoTrue
-#End If
+'#End If
 '    lbl.Height = 18
 '    lbl.Width = 8
-#If Mac Then
-    lbl.WrapFormat.Type = 3 'wdwrapfront
-#End If
+'#If Mac Then
+'    lbl.WrapFormat.Type = 3 'wdwrapfront
+'#End If
 
     lbl.TextFrame.WordWrap = False
     lbl.TextFrame.TextRange.text = text

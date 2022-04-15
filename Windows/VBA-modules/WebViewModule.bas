@@ -50,7 +50,32 @@ End Sub
 
 Sub PrepareGeoGebraCAS()
 #If Mac Then
-    If Not GeoGebraWindowOpen Then RunScript "ExecuteGeoGebraCASCommand", "ggbApplet.reset();ggbApplet.evalCommandCAS('2+3');"
+    Dim Res As String, i As Integer
+    Dim UfWait2 As UserFormWaitForMaxima
+    
+    If Not GeoGebraWindowOpen Then
+        Set UfWait2 = New UserFormWaitForMaxima
+        UfWait2.Label_tip.Font.Size = 10
+        UfWait2.Label_tip.Font.Italic = False
+        UfWait2.Show vbModeless
+        UfWait2.Label_tip.Caption = Sprog.A(684)
+        UfWait2.Label_progress.Caption = "*"
+        UfWait2.Show vbModeless
+        UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        Do
+            Res = RunScript("ExecuteGeoGebraCASCommand", "ggbApplet.reset();ggbApplet.evalCommandCAS('2+3');")
+            If Res <> "5" Then
+                UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+                Wait (1)
+                UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+                Wait (1)
+            End If
+            i = i + 1
+        Loop While Res <> "5" And i < 5
+        Unload UfWait2
+        If Res <> "5" Then GGBJSGuidance
+'        MsgBox Res
+    End If
 #Else
     Dim JS As String, Res As String
     If WebV Is Nothing Then OpenWebV
@@ -87,7 +112,7 @@ End Sub
 Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Boolean = True) As String
 Dim Res As String
 
-    Dim JS As String, arr() As String, ArrDef() As String, ArrCas() As String, Cmd As String, s As String, i As Integer, AssumeCol As New Collection, AssumeString As String, AE As Variant
+    Dim JS As String, arr() As String, ArrDef() As String, ArrCas() As String, cmd As String, s As String, i As Integer, AssumeCol As New Collection, AssumeString As String, AE As Variant
     Dim FC As Integer
     If WebV Is Nothing Then PrepareGeoGebraCAS
     JS = "ggbApplet.reset();" 'ggbApplet.setRounding(""" & MaximaCifre & "s"");"
@@ -125,10 +150,23 @@ Dim Res As String
                 Res = "Fejl ved GeoGebra"
             End If
         End If
+    ElseIf Res = "ScriptError" Then
+        GGBJSGuidance
     End If
     ExecuteGeoGebraCasCommand = Res
 '    MsgBox Res
 End Function
+Sub GGBJSGuidance()
+    If Sprog.SprogNr = 1 Then
+        If MsgBox("WordMat kan ikke kommunikere med GeoGebra. Det skyldes formentlig at du ikke har sat de rigtige sikkerhedsindstillinger i Safari. Klik ok for at få instruktionerne", vbOKCancel, "Error") = vbOK Then
+            OpenLink "https://eduap.com/geogebra-som-cas-motor-pa-mac/"
+        End If
+    Else
+        If MsgBox("WordMath cannot communicate with GeoGebra. This is probably because you have not set the required security settings in Safari. Click ok to get the instructions.", vbOKCancel, "Error") = vbOK Then
+            OpenLink "https://eduap.com/geogebra-as-cas-engine-on-mac/"
+        End If
+    End If
+End Sub
 
 Function ExecuteGeogebraCmdViaJS(JS As String) As String
 Dim FejlC As Integer

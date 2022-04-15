@@ -215,7 +215,12 @@ Function RunScript(ScriptName As String, Param As String) As String
 ' scriptfile must be placed in ~/Library/Application Scripts/com.microsoft.Word/
 ' ~/library is a hidden folder in the user folder
 ' filetype: .scpt or .applescript
+On Error GoTo fejl
     RunScript = AppleScriptTask("WordMatScripts.scpt", ScriptName, Param)
+GoTo slut
+fejl:
+    RunScript = "ScriptError"
+slut:
 End Function
 #Else
 Function RunScript(ScriptName As String, Param As String) As String
