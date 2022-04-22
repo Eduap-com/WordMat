@@ -220,9 +220,9 @@ Source: ExternalPrograms\Maxima-5.45.1\*; DestDir: {app}\Maxima-5.45.1; Flags: i
                                       
 ;egne mac-filer
 ;Source: mac-files\*; DestDir: {app}\Maxima-5.25.1-gcl\share\maxima\5.25.1\share; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\SolveReal.mac; DestDir: {app}Maxima-5.45.1\share\maxima\5.45.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\WordMatUnitAddon.mac; DestDir: {app}Maxima-5.45.1\share\maxima\5.45.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\unit.mac; DestDir: {app}Maxima-5.45.1\share\maxima\5.45.1\share\contrib\unit; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\SolveReal.mac; DestDir: {app}\Maxima-5.45.1\share\maxima\5.45.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\WordMatUnitAddon.mac; DestDir: {app}\Maxima-5.45.1\share\maxima\5.45.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\unit.mac; DestDir: {app}\Maxima-5.45.1\share\maxima\5.45.1\share\contrib\unit; Flags: ignoreversion overwritereadonly uninsremovereadonly
 
 ;Source: C:\Users\Mikael\Documents\Eduap\MathMenu\MathMenu.dll; DestDir: {app}; Flags: ignoreversion gacinstall ; StrongAssemblyName: "MathMenu, Version=1.0.0.1, Culture=neutral, PublicKeyToken=89e88f8548e16f37, ProcessorArchitecture=MSIL"
 
