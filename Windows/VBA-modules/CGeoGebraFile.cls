@@ -488,13 +488,13 @@ Public Sub CreateList(listname As String, List As String)
 
 End Sub
 Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
-    Dim pos As Integer
+    Dim Pos As Integer
     
     If InStr(Expr, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke underst*oe*ttet endnu
     
-    pos = InStr(funkname, "(")
-    If pos > 1 Then
-        funkname = Left(funkname, pos - 1)
+    Pos = InStr(funkname, "(")
+    If Pos > 1 Then
+        funkname = Left(funkname, Pos - 1)
     End If
     
     Expr = ConvertToGeogebraSyntax(Expr, ConvertMaxima)

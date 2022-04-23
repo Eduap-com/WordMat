@@ -365,9 +365,9 @@ Sub MaximaSolveInequality()
                 If Left(omax.MaximaOutput, 1) = "{" Then omax.MaximaOutput = Mid(omax.MaximaOutput, 2, Len(omax.MaximaOutput) - 2)
                 ea.text = omax.MaximaOutput
                 omax.MaximaOutput = ""
-                ea.pos = 1
+                ea.Pos = 1
                 Do
-                    s = ea.GetNextListItem(ea.pos, ";")
+                    s = ea.GetNextListItem(ea.Pos, ";")
                     If s <> "" Then omax.MaximaOutput = omax.MaximaOutput & s & "    " & VBA.ChrW(8744) & "    "
                 Loop While s <> ""
                 If omax.MaximaOutput <> "" Then omax.MaximaOutput = Left(omax.MaximaOutput, Len(omax.MaximaOutput) - 9)
@@ -512,11 +512,23 @@ newcas:
                     v = ea.GetNextVar()
                     If v = "sin" Or v = "cos" Or v = "tan" Then
                         t = ea.GetNextBracketContent()
-                        If InStr(t, omax.vars) > 0 Then s = "90"
+                        If InStr(t, omax.vars) > 0 Then
+                            If v = "cos" Then
+                                s = "180"
+                            Else
+                                s = "90"
+                            End If
+                        End If
                     End If
-                    ea.pos = ea.pos + 1
+                    ea.Pos = ea.Pos + 1
                 Loop While v <> ""
-                If s <> "" And Radians Then s = "pi/2"
+                If s <> "" And Radians Then
+                    If s = "90" Then
+                        s = "pi/2"
+                    Else
+                        s = "pi"
+                    End If
+                End If
                 If s <> "" Then
                     UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
                     UFSelectVar.TempDefs = "0<=" & omax.vars & "<=" & s
@@ -574,9 +586,9 @@ newcas:
                 If Left(omax.MaximaOutput, 1) = "{" Then omax.MaximaOutput = Mid(omax.MaximaOutput, 2, Len(omax.MaximaOutput) - 2)
                 ea.text = omax.MaximaOutput
                 omax.MaximaOutput = ""
-                ea.pos = 1
+                ea.Pos = 1
                 Do
-                    s = ea.GetNextListItem(ea.pos, ";")
+                    s = ea.GetNextListItem(ea.Pos, ";")
                     If s <> "" Then omax.MaximaOutput = omax.MaximaOutput & s & "    " & VBA.ChrW(8744) & "    "
                 Loop While s <> ""
                 If omax.MaximaOutput <> "" Then omax.MaximaOutput = Left(omax.MaximaOutput, Len(omax.MaximaOutput) - 9)
@@ -1193,7 +1205,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
                         t = ea.GetNextBracketContent()
                         If InStr(t, omax.vars) > 0 Then s = "90"
                     End If
-                    ea.pos = ea.pos + 1
+                    ea.Pos = ea.Pos + 1
                 Loop While v <> ""
                 If s <> "" And Radians Then s = "pi/2"
                 If s <> "" Then
@@ -2708,7 +2720,7 @@ Function TranslateReplaceOutput(comm As String) As String
 End Function
 Sub InsertOutput(text As String)
 ' inds*ae*tter text efter den mathobj cursoren er i p*aa* sikker m*aa*de
-
+    Dim IsBold As Boolean
     If Selection.start = Selection.End Then
         omax.GoToEndOfSelectedMaths
     Else
@@ -2721,7 +2733,12 @@ Sub InsertOutput(text As String)
     End If
     Selection.TypeText text    ' giver problemer med at =tegn kommer under br*oe*kstreg
     Selection.Move wdCharacter, -1
+    If Selection.OMaths(1).Range.Font.Bold Then
+        IsBold = True
+        Selection.OMaths(1).Range.Font.Bold = False
+    End If
     Selection.OMaths.BuildUp
+    If IsBold Then Selection.OMaths(1).Range.Font.Bold = True
     omax.GoToEndOfSelectedMaths
 End Sub
 Sub unicodevals()

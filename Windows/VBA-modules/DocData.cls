@@ -331,7 +331,7 @@ Else
     ea.text = text
 End If
 ea.SetNormalBrackets
-ea.pos = 1
+ea.Pos = 1
 nrows = 0
     ea.text = Replace(ea.text, ";", " , ")
     ea.ConvertDecSeparator
@@ -344,7 +344,7 @@ Do
 '        ea.SetToNextBracket
 '        p = ea.GetNextBracketContent()
 '    End If
-    p = Trim(ea.GetNextListItem(ea.pos, ","))
+    p = Trim(ea.GetNextListItem(ea.Pos, ","))
     If Left(p, 1) = "[" And right(p, 1) = "]" Then
         If Len(p) > 2 Then p = Mid(p, 2, Len(p) - 2)
     End If
@@ -367,7 +367,7 @@ End If
 
 For i = 1 To nrows
     ea.text = r(i)
-    ea.pos = 1
+    ea.Pos = 1
     n = 0
     Do
         p = ea.GetNextListItem(0, ",")
@@ -377,7 +377,7 @@ For i = 1 To nrows
         End If
         If Not (MaximaSeparator) Then p = Replace(p, ".", ",")
         tabels(i, n) = omax.ConvertToAscii(p)
-    Loop While ea.pos < Len(ea.text) And n < 1000
+    Loop While ea.Pos < Len(ea.text) And n < 1000
 Next
     
 If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt s*aa* er det formentlig kun et matematikfelt og ikke en liste eller tabel

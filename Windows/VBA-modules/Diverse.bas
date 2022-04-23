@@ -723,7 +723,7 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     Dim possumtegn As Integer
     Dim posca As Integer
     Dim poseller As Integer
-    Dim pos As Integer
+    Dim Pos As Integer
     Dim arr(20) As String
     Dim i As Integer
     
@@ -733,24 +733,24 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     posca = InStr(text, VBA.ChrW(8776))
     poseller = InStr(text, VBA.ChrW(8744))
     
-    pos = Len(text)
+    Pos = Len(text)
 '    pos = posligmed
-    If posligmed > 0 And posligmed < pos Then pos = posligmed
-    If posca > 0 And posca < pos Then pos = posca
-    If poseller > 0 And poseller < pos Then pos = poseller
+    If posligmed > 0 And posligmed < Pos Then Pos = posligmed
+    If posca > 0 And posca < Pos Then Pos = posca
+    If poseller > 0 And poseller < Pos Then Pos = poseller
     
-    If possumtegn > 0 And possumtegn < pos Then ' hvis sumtegn er der =tegn som del deraf
-        pos = 0
+    If possumtegn > 0 And possumtegn < Pos Then ' hvis sumtegn er der =tegn som del deraf
+        Pos = 0
     End If
-    If pos = Len(text) Then pos = 0
-    If pos > 0 Then
-        arr(i) = Left(text, pos - 1)
-        text = right(text, Len(text) - pos)
+    If Pos = Len(text) Then Pos = 0
+    If Pos > 0 Then
+        arr(i) = Left(text, Pos - 1)
+        text = right(text, Len(text) - Pos)
         i = i + 1
     Else
         arr(i) = text
     End If
-    Loop While pos > 0
+    Loop While Pos > 0
     
     If indeks = i Then ResIndex = -1  ' global variabel markerer at der ikke er flere til venstre
     If i = 0 Then

@@ -100,7 +100,7 @@ End If
                     
                         If lhs = fktnavn & "(" & varnavn & ")" Then
                             ea.text = rhs
-                            ea.pos = 1
+                            ea.Pos = 1
                             ea.ReplaceVar varnavn, "x"
                             fktudtryk = ea.text
                             DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
@@ -514,7 +514,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
       If p > 0 And p2 > 0 Then
          sp = p
          ea.text = text
-         ea.pos = p - 1
+         ea.Pos = p - 1
          s = ea.GetNextBracketContent()
          ep = p + Len(s) + 1
          p3 = 1
@@ -568,18 +568,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
     Loop
     
     'potenser kan v*ae*re skrevet som specialtegn for 0,1,2,3    p = InStr(ea.text, VBA.ChrW(176)) ' h*ae*vet 0
-    ReplaceSuperScriptNo ea, 8314, "+"
-    ReplaceSuperScriptNo ea, 8315, "-"
-    ReplaceSuperScriptNo ea, 8317, "("
-    ReplaceSuperScriptNo ea, 8318, ")"
-    ReplaceSuperScriptNo ea, 8304, "0"
-    ReplaceSuperScriptNo ea, 185, "1"
-    ReplaceSuperScriptNo ea, 178, "2"
-    ReplaceSuperScriptNo ea, 179, "3"
-    For n = 4 To 9
-        ReplaceSuperScriptNo ea, 8304 + n, CStr(n)
-    Next
-    
+    ReplaceSuperScripts ea
     
     text = ea.text
     text = Replace(text, "\u003C", "<") ' m*ae*rkeligt at lige pr*ae*cis denne st*aa*r s*aa*dan
@@ -611,7 +600,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
         mtext = Replace(mtext, ListSeparator, "&")
 
         mtext = omax.matrixstartbracket & VBA.ChrW(9632) & "(" & Mid(mtext, 2, Len(mtext) - 2) & ")" & omax.matrixendbracket
-        ea.text = Left(ea.text, p - 1) & mtext & right(ea.text, Len(ea.text) - ea.pos + 1)
+        ea.text = Left(ea.text, p - 1) & mtext & right(ea.text, Len(ea.text) - ea.Pos + 1)
 
         p = InStr(p + 1, ea.text, "{{")
     Loop
@@ -627,19 +616,65 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
     ConvertGeoGebraSyntaxToWord = text
 End Function
 
-Sub ReplaceSuperScriptNo(ByRef ea As ExpressionAnalyser, ChrNo As Integer, ChrS As String)
-    Dim p As Integer
-    p = InStr(ea.text, VBA.ChrW(ChrNo)) ' h*ae*vet -
-    Do While p > 0
-        If p > 0 Then
-            ea.ReplaceStringAt ChrS, p
-            If Not ea.IsNumberOrSign(p - 1) And Not ea.IsSuperScriptNoPos(p - 1) Then
+Sub ReplaceSuperScripts(ByRef ea As ExpressionAnalyser)
+    Dim p As Integer, Maxp As Integer
+    Dim FirstSup As Boolean
+    
+    Maxp = ea.Length
+    FirstSup = True
+    Do
+        If ea.IsSuperScriptNoPos(p) Then
+            If FirstSup Then
+                ReplaceSuperScriptNoAtPos ea, p
                 ea.InsertBeforePos "^", p
+                Maxp = Maxp + 1
+                p = p + 1
+                FirstSup = False
+            Else
+                ReplaceSuperScriptNoAtPos ea, p
             End If
+        Else
+            FirstSup = True
         End If
-        p = InStr(ea.text, VBA.ChrW(ChrNo)) ' h*ae*vet -
-    Loop
+        p = p + 1
+    Loop While p <= Maxp
+    
 End Sub
+Sub ReplaceSuperScriptNoAtPos(ByRef ea As ExpressionAnalyser, Pos As Integer)
+    Dim c As Integer
+    c = AscW(ea.ChrByIndex(Pos))
+    If c = 8314 Then
+        ea.ReplaceStringAt "+", Pos
+    ElseIf c = 8315 Then
+        ea.ReplaceStringAt "-", Pos
+    ElseIf c = 8317 Then
+        ea.ReplaceStringAt "(", Pos
+    ElseIf c = 8318 Then
+        ea.ReplaceStringAt ")", Pos
+    ElseIf c = 8304 Then
+        ea.ReplaceStringAt "0", Pos
+    ElseIf c = 185 Then
+        ea.ReplaceStringAt "1", Pos
+    ElseIf c = 178 Then
+        ea.ReplaceStringAt "2", Pos
+    ElseIf c = 179 Then
+        ea.ReplaceStringAt "3", Pos
+    ElseIf c = 8308 Then
+        ea.ReplaceStringAt "4", Pos
+    ElseIf c = 8309 Then
+        ea.ReplaceStringAt "5", Pos
+    ElseIf c = 8310 Then
+        ea.ReplaceStringAt "6", Pos
+    ElseIf c = 8311 Then
+        ea.ReplaceStringAt "7", Pos
+    ElseIf c = 8312 Then
+        ea.ReplaceStringAt "8", Pos
+    ElseIf c = 8313 Then
+        ea.ReplaceStringAt "9", Pos
+    End If
+End Sub
+
+
 Sub ReplaceTrigSuperscript(ByRef ea As ExpressionAnalyser, Trig As String)
 ' erstatter fx sin & chrw(8289) & "^2" med "sin" & "^2" & chrw(8289)
 ' alts*aa* retter op p*aa* output fra converttowordsymols
@@ -840,7 +875,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                     
                     If lhs = fktnavn & "(" & varnavn & ")" Then
                         ea.text = rhs
-                        ea.pos = 1
+                        ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
                         DefinerKonstanter fktudtryk, DefList, geogebrafil
@@ -921,13 +956,13 @@ Dim var As String, var2 As String, i As Integer, p As Integer
 Dim varval As String
     ea.text = DefList
     ea2.text = Expr
-    ea2.pos = 0
+    ea2.Pos = 0
     Do
         var = ea2.GetNextVar
 '        MsgBox AscW(var) & vbCrLf & VBA.ChrW(960)
-        ea2.pos = ea2.pos + 1
+        ea2.Pos = ea2.Pos + 1
 '        If var = "z" Then geogebrafil.Show3D = True  ' ikke implementeret endnu
-        If Not (ea2.ChrByIndex(ea2.pos) = "(") And Not (Left(var, 1) = "_") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "z" And var <> "e" And var <> "pi" And var <> "matrix" And var <> "if" And var <> "elseif" And var <> "then" And var <> "and" And var <> "or" And var <> "else" And var <> VBA.ChrW(960) Then  ' 960=pi
+        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (Left(var, 1) = "_") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "z" And var <> "e" And var <> "pi" And var <> "matrix" And var <> "if" And var <> "elseif" And var <> "then" And var <> "and" And var <> "or" And var <> "else" And var <> VBA.ChrW(960) Then  ' 960=pi
             varval = InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(364), Sprog.A(365), "1")
             If Len(varval) > 0 Then
                 If Not geogebrafil Is Nothing Then

@@ -54,7 +54,7 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                     
                     If lhs = fktnavn & "(" & varnavn & ")" Then
                         ea.text = rhs
-                        ea.pos = 1
+                        ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink

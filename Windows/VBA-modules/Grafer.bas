@@ -358,7 +358,7 @@ Dim i As Integer
                     varnavn = ea.GetNextBracketContent(1)
                     If lhs = fktnavn & "(" & varnavn & ")" Then
                         ea.text = rhs
-                        ea.pos = 1
+                        ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
                         DefinerKonstanterGraph fktudtryk, DefList, graphfil
@@ -462,11 +462,11 @@ Dim var As String
     ea.text = DefList
     If noty Then ea.text = ea.text & ",y"
     ea2.text = Expr
-    ea2.pos = 0
+    ea2.Pos = 0
     Do
         var = ea2.GetNextVar
-        ea2.pos = ea2.pos + 1
-        If Not (ea2.ChrByIndex(ea2.pos) = "(") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "e" And var <> "pi" And var <> "matrix" Then ' m*aa*ske ikke y? kopieret fra geogebra
+        ea2.Pos = ea2.Pos + 1
+        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "e" And var <> "pi" And var <> "matrix" Then ' m*aa*ske ikke y? kopieret fra geogebra
             graphfil.AddCustomFunction var & "=" & InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(367), Sprog.A(365), "1")
             DefList = DefList & "," & var
         End If
@@ -765,7 +765,7 @@ End If
                     varnavn = ea.GetNextBracketContent(1)
                     If lhs = fktnavn & "(" & varnavn & ")" Then
                         ea.text = rhs
-                        ea.pos = 1
+                        ea.Pos = 1
 '                        ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
 '                        DefinerKonstanterGraph fktudtryk, deflist, graphfil

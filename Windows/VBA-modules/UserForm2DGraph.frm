@@ -691,7 +691,7 @@ If tb.text <> "" Then
     
     'find variable
     ea.text = forskrift
-    ea.pos = 1
+    ea.Pos = 1
     varnavn = ea.GetNextVar
     i = 0
     ' find ledig variabel plads
@@ -708,7 +708,7 @@ If tb.text <> "" Then
 
         If varnavn <> "x" And Left(varnavn, 4) <> "matm" And Not (ea.IsFunction(varnavn)) Then
         Call ea.ReplaceVar(varnavn, "matm" & varnavn)
-        ea.pos = ea.pos + Len(varnavn) + 4
+        ea.Pos = ea.Pos + Len(varnavn) + 4
         j = 0
         Do While ws.Range("N6").Offset(j, 0).Value <> varnavn & "=" And j < i ' check om findes
           j = j + 1
@@ -720,13 +720,13 @@ If tb.text <> "" Then
         i = i + 1
         End If
         Else
-            ea.pos = ea.pos + Len(varnavn)
+            ea.Pos = ea.Pos + Len(varnavn)
         End If
         varnavn = ea.GetNextVar
     Loop
 
     On Error GoTo fejlindtast
-    ea.pos = 1
+    ea.Pos = 1
     Call ea.ReplaceVar("x", "A7")
     forskrift = ea.text
      
@@ -755,7 +755,7 @@ End Sub
 
 Function ConvertToExcelFormula(ByVal forskrift As String)
 Dim ea As New ExpressionAnalyser
-Dim pos As Integer
+Dim Pos As Integer
 Dim posb As Integer
 Dim rod As Integer
 Dim pos2 As Integer
@@ -794,48 +794,48 @@ Dim arr As Variant
     forskrift = Replace(forskrift, "tan^(-1)", "ARCTAN")
       
     Do
-    pos = InStr(forskrift, VBA.ChrW(124))
-    If pos > 0 Then
-        posb = InStr(pos + 1, forskrift, VBA.ChrW(124))
-        forskrift = Left(forskrift, pos - 1) & "abs(" & Mid(forskrift, pos + 1, posb - pos - 1) & ")" & right(forskrift, Len(forskrift) - posb)
+    Pos = InStr(forskrift, VBA.ChrW(124))
+    If Pos > 0 Then
+        posb = InStr(Pos + 1, forskrift, VBA.ChrW(124))
+        forskrift = Left(forskrift, Pos - 1) & "abs(" & Mid(forskrift, Pos + 1, posb - Pos - 1) & ")" & right(forskrift, Len(forskrift) - posb)
     End If
-    Loop While pos > 0
+    Loop While Pos > 0
     
     ' 3 og 4 rod
     For rod = 3 To 4
     Do
-    pos = InStr(forskrift, VBA.ChrW(8728 + rod))
-    If pos > 0 Or pos4 > 0 Or pos5 > 0 Then
+    Pos = InStr(forskrift, VBA.ChrW(8728 + rod))
+    If Pos > 0 Or pos4 > 0 Or pos5 > 0 Then
         ea.text = forskrift
-        ea.pos = pos + 1
-        If Mid(forskrift, pos + 1, 1) <> "(" Then
+        ea.Pos = Pos + 1
+        If Mid(forskrift, Pos + 1, 1) <> "(" Then
             ea.InsertUnderstoodBracketPair
         End If
-        ea.pos = pos
+        ea.Pos = Pos
         Call ea.GetNextBracketContent ' bare for at finde slut parantes
         Call ea.InsertBeforePos("^(1/" & rod & ")")
         ea.text = Replace(ea.text, VBA.ChrW(8728 + rod), "", 1, 1)
         forskrift = ea.text
     End If
-    Loop While pos > 0
+    Loop While Pos > 0
     Next
     
     'kvadratrod
     Do
-    pos = InStr(forskrift, VBA.ChrW(8730))
-    If pos > 0 Then
-        If Mid(forskrift, pos + 1, 1) <> "(" Then
+    Pos = InStr(forskrift, VBA.ChrW(8730))
+    If Pos > 0 Then
+        If Mid(forskrift, Pos + 1, 1) <> "(" Then
             forskrift = Replace(forskrift, VBA.ChrW(8730), "sqrt", 1, 1)
-            pos = pos + 4
+            Pos = Pos + 4
             ea.text = forskrift
-            ea.pos = pos
+            ea.Pos = Pos
             ea.InsertUnderstoodBracketPair
             forskrift = ea.text
         Else
             ea.text = forskrift
-            ea.pos = pos
+            ea.Pos = Pos
             arr = Split(ea.GetNextBracketContent, "&")
-            pos2 = ea.pos
+            pos2 = ea.Pos
             If UBound(arr) = 0 Then
                 forskrift = Replace(forskrift, VBA.ChrW(8730), "sqrt", 1, 1)
             ElseIf UBound(arr) = 1 Then
@@ -843,12 +843,12 @@ Dim arr As Variant
                 Call ea.InsertBeforePos("^(1/(" & rod & "))")
                 ea.text = Replace(ea.text, VBA.ChrW(8730), "", 1, 1)
                 posog = ea.FindChr("&", 1)
-                forskrift = Left(ea.text, pos) & right(ea.text, Len(ea.text) - posog)
+                forskrift = Left(ea.text, Pos) & right(ea.text, Len(ea.text) - posog)
                
             End If
         End If
     End If
-    Loop While pos > 0
+    Loop While Pos > 0
     
     
     'trigfunktioner hvis 360 grader
@@ -872,7 +872,7 @@ Dim arr As Variant
 
     ' inds*ae*t underforst*aa*ede gangetegn ' skal v*ae*re efter fjern mellem
     ea.text = forskrift
-    ea.pos = 1
+    ea.Pos = 1
     ea.InsertMultSigns
     forskrift = ea.text
     
@@ -1890,7 +1890,7 @@ PicOpen = False
 End Sub
 
 Function ConvertDegreeToRad(text As String, trigfunc As String) As String
-    Dim pos, spos As Integer
+    Dim Pos, spos As Integer
     Dim ea As New ExpressionAnalyser
     ea.StartBracket = "("
     ea.EndBracket = ")"
@@ -1898,31 +1898,31 @@ Function ConvertDegreeToRad(text As String, trigfunc As String) As String
     spos = 1
     
     Do
-    pos = ea.FindChr("arc" & trigfunc, spos)
-    If pos > 0 Then
+    Pos = ea.FindChr("arc" & trigfunc, spos)
+    If Pos > 0 Then
         ea.GetNextBracketContent
         ea.InsertBeforePos (")")
-        ea.pos = pos
+        ea.Pos = Pos
         ea.InsertBeforePos ("180/PI()*(")
-        spos = pos + 13
+        spos = Pos + 13
     End If
-    Loop While pos > 0
+    Loop While Pos > 0
     
     spos = 1
     Do
-    pos = ea.FindChr(trigfunc, spos)
-    If pos > 0 Then
-        If Not (ea.ChrByIndex(pos - 1) = "a") Then
+    Pos = ea.FindChr(trigfunc, spos)
+    If Pos > 0 Then
+        If Not (ea.ChrByIndex(Pos - 1) = "a") Then
         ea.GetNextBracketContent
         ea.InsertBeforePos (")")
-        ea.pos = pos + Len(trigfunc)
+        ea.Pos = Pos + Len(trigfunc)
         ea.InsertAfterPos ("PI()/180*(")
-        spos = pos + 13
+        spos = Pos + 13
         Else
-            spos = pos + 3
+            spos = Pos + 3
         End If
     End If
-    Loop While pos > 0
+    Loop While Pos > 0
     
     ConvertDegreeToRad = ea.text
 
@@ -2283,7 +2283,7 @@ Dim i As Integer
         End If
         TextBox_definitioner.text = TextBox_definitioner.text & var & "=1"
     End If
-    Loop While ea.pos <= Len(ea.text)
+    Loop While ea.Pos <= Len(ea.text)
 
     
 End Sub
@@ -2384,7 +2384,7 @@ End Sub
 Sub CheckForAssume()
 ' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begr*ae*nsninger p*aa* xmin og xmax
 Dim DefS As String
-Dim pos As Integer
+Dim Pos As Integer
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim s As String, l As String
@@ -2406,9 +2406,9 @@ ea2.SetNormalBrackets
     TextBox_xmax6.text = ""
     
     ea.text = DefS
-    pos = InStr(ea.text, "assume(")
-    Do While pos > 0
-        s = ea.GetNextBracketContent(pos)
+    Pos = InStr(ea.text, "assume(")
+    Do While Pos > 0
+        s = ea.GetNextBracketContent(Pos)
         ea2.text = s
         l = ea2.GetNextListItem(1, ",")
         Do While Len(l) > 0
@@ -2418,9 +2418,9 @@ ea2.SetNormalBrackets
             InsertBoundary TextBox_var4.text, l, TextBox_xmin4, TextBox_xmax4
             InsertBoundary TextBox_var5.text, l, TextBox_xmin5, TextBox_xmax5
             InsertBoundary TextBox_var6.text, l, TextBox_xmin6, TextBox_xmax6
-            l = ea2.GetNextListItem(ea2.pos, ",")
+            l = ea2.GetNextListItem(ea2.Pos, ",")
         Loop
-        pos = InStr(pos + 8, ea.text, "assume(")
+        Pos = InStr(Pos + 8, ea.text, "assume(")
     Loop
     
 End Sub
@@ -2470,7 +2470,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

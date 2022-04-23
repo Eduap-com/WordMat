@@ -1,5 +1,13 @@
 Attribute VB_Name = "GlobaleVariable"
 Option Explicit
+
+Public Const AppNavn = "WordMat"
+Public Const AppVersion = "1.24"
+#If Mac Then ' WordMat shows patchVersion attached to AppVersion. if ".1" then shows as 1.24.1. or " beta" -> "1.24 beta" A new PatchVersion does not trigger autoupdate
+    Public Const PatchVersion = ".2" ' Mac
+#Else
+    Public Const PatchVersion = ".1" ' Windows
+#End If
 'Public DebugWM As Boolean = True
 Public DebugWM As Boolean ' brug toggledebug funktion
 Public Const PI As Double = 3.14159265358979
@@ -25,9 +33,6 @@ Public MaxProc As MaximaProcess
 Public MaxProc As Object
 Public MaxProcUnit As Object
 #End If
-
-Public Const AppNavn = "WordMat"
-Public Const AppVersion = "1.24"
 
 Public ResFeltIndex As Integer
 Public ResIndex As Integer

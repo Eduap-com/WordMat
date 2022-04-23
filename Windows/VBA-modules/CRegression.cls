@@ -284,7 +284,7 @@ text = Selection.OMaths(1).Range.text
 ea.text = Replace(text, VBA.ChrW(8722), "-") ' n*oe*dvendigt
 ea.text = ea.GetNextBracketContent()
 ea.SetNormalBrackets
-ea.pos = 1
+ea.Pos = 1
 Do
 p = ea.GetNextBracketContent()
 If InStr(p, ";") Then

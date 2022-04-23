@@ -434,7 +434,7 @@ Function SolveDE() As Boolean
             PointArr(i, j) = arr(j)
         Next
         i = i + 1
-    Loop While ea.pos < ea.Length - 1 And i < 1000
+    Loop While ea.Pos < ea.Length - 1 And i < 1000
 SolveDE = True
 GoTo slut
 fejl:
@@ -685,7 +685,7 @@ Dim i As Integer
         End If
         TextBox_definitioner.text = TextBox_definitioner.text & var & "=1"
     End If
-    Loop While ea.pos <= Len(ea.text)
+    Loop While ea.Pos <= Len(ea.text)
 
     
 End Sub

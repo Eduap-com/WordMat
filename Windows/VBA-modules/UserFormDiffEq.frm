@@ -101,12 +101,12 @@ End Sub
 
 Sub opdaterLabels()
 Dim fkt As String
-Dim pos As Integer
+Dim Pos As Integer
 On Error Resume Next
     fkt = TextBox_funktion.text
-    pos = InStr(fkt, "(")
-    If pos > 0 Then
-        fkt = Left(fkt, pos - 1)
+    Pos = InStr(fkt, "(")
+    If Pos > 0 Then
+        fkt = Left(fkt, Pos - 1)
     End If
     Label_diffy.Caption = fkt & "'(" & TextBox_startx.text & ")="
     Label_y.Caption = fkt & "("

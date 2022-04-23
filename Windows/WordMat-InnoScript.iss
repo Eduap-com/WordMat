@@ -6,8 +6,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
 AppName=WordMat
-AppVerName=WordMat v. 1.24
-VersionInfoVersion=1.24.0.0
+AppVerName=WordMat v. 1.24.1
+VersionInfoVersion=1.24.1.0
 AppMutex=WordMatMutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/

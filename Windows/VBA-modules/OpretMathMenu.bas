@@ -471,7 +471,12 @@ Sub OpretMathMenu()
     myCB.visible = True
 End Sub
 Sub OmMathMenu()
-    MsgBox Sprog.A(20), vbOKOnly, AppNavn & " version " & AppVersion
+    Dim v As String
+    v = AppVersion
+    If PatchVersion <> "" Then
+        v = v & PatchVersion
+    End If
+    MsgBox Sprog.A(20), vbOKOnly, AppNavn & " version " & v
 End Sub
 Sub hjaelpeMenu()
 Dim filnavn As String
