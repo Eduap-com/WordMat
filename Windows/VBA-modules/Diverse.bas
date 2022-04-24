@@ -555,6 +555,12 @@ Sub InsertSletDef()
     Dim gemsb As Integer
     Dim gemsa As Integer
     Dim mo As Range
+#If Mac Then
+#Else
+        Dim Oundo As UndoRecord
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
+#End If
             
     gemfontsize = Selection.Font.Size
     gemitalic = Selection.Font.Italic
@@ -578,7 +584,10 @@ Sub InsertSletDef()
         .SpaceAfter = gemsa
 '        .SpaceAfterAuto = False
     End With
-
+#If Mac Then
+#Else
+        Oundo.EndCustomRecord
+#End If
 End Sub
 
 

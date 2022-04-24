@@ -1368,9 +1368,7 @@ ghop:
         Variable = Left(Variable, Len(Variable) - 1)
         guess = Left(guess, Len(guess) - 1)
 
-
         If Variable = "" Then GoTo slut
-
 
         If CASengine = 1 Or CASengine = 2 Then
             s = "nsolve({" & Replace(omax.KommandoerStreng, ";", " , ") & "},{" & Replace(inp, ";", " , ") & "})"
@@ -1401,8 +1399,6 @@ ghop:
             Application.Activate
         End If
         
-
-
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
 
@@ -2773,30 +2769,66 @@ Sub unicodevals2()
     MsgBox s
 
 End Sub
-Sub unicodevals3()
+Sub UnicodeValsToString()
+' laver alle Omaths i selection om til en streng der kan indsættes i VBA-kode. Bruges primært til testmodul
+' Strengene indsættes efter selection i rækkefølge. Hver på ny linje
     Dim text As String
     Dim j As Integer
     Dim i As Integer
+    Dim k As Integer, n As Integer
     Dim s As String
+    Dim mo As OMath
+    Dim arr() As String
+    Dim MoArr() As Variant
 
-    Selection.OMaths.Linearize
-    Selection.OMaths(1).ConvertToNormalText
-    text = Selection.text
-    Selection.OMaths(1).ConvertToMathText
-    Selection.OMaths(1).Range.Select
-    Selection.OMaths.BuildUp
-
-    For j = 1 To Len(text)
-        i = AscW(Mid(text, j, 1))
-        If i > 200 Then
-            s = s & """ & VBA.ChrW(" & i & ") & """
-        Else
-            s = s & Mid(text, j, 1)
-        End If
+    n = Selection.OMaths.Count
+    If n = 0 Then
+        MsgBox "You must select an equation", vbOKOnly, "Error"
+        Exit Sub
+    End If
+    ReDim arr(n - 1)
+    ReDim MoArr(n - 1)
+'    Selection.OMaths.Linearize
+    For k = 0 To n - 1
+        Set MoArr(k) = Selection.OMaths(k + 1)
+    Next
+    For k = 0 To n - 1
+        Set mo = MoArr(k)
+        mo.Linearize
+        mo.ConvertToNormalText
+        arr(k) = mo.Range.text
+        mo.ConvertToMathText
+        mo.Range.Select
+        mo.BuildUp
     Next
     Selection.Collapse wdCollapseEnd
-    Selection.TypeParagraph
-    Selection.TypeText (s)
+    Selection.EndKey Unit:=wdLine
+
+    For k = 0 To UBound(arr)
+        text = arr(k)
+        s = ""
+        For j = 1 To Len(text)
+            i = AscW(Mid(text, j, 1))
+            If i > 200 Or i = 183 Then
+                s = s & """ & VBA.ChrW(" & i & ") & """
+            Else
+                s = s & Mid(text, j, 1)
+            End If
+        Next
+        If Left(s, 4) = """ & " Then
+            s = right(s, Len(s) - 4)
+        ElseIf Left(s, 1) <> """" Then
+            s = """" & s
+        End If
+        If right(s, 4) = " & """ Then
+            s = Left(s, Len(s) - 4)
+        ElseIf right(s, 1) <> """" Then
+            s = s & """"
+        End If
+        Selection.Collapse wdCollapseEnd
+        Selection.TypeParagraph
+        Selection.TypeText (s)
+    Next
 
 End Sub
 

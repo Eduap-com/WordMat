@@ -525,7 +525,7 @@ Public Property Get FormattedResource() As String
 
     ' Add querystring
     If Me.QuerystringParams.Count > 0 Then
-        If VBA.InStr(FormattedResource, "?") <= 0 Then
+        If VBA.Instr(FormattedResource, "?") <= 0 Then
             FormattedResource = FormattedResource & "?"
         Else
             FormattedResource = FormattedResource & "&"

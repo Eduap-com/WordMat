@@ -2399,7 +2399,7 @@ Private Function json_ParseValue(json_String As String, ByRef json_Index As Long
         ElseIf VBA.Mid$(json_String, json_Index, 4) = "null" Then
             json_ParseValue = Null
             json_Index = json_Index + 4
-        ElseIf VBA.InStr("+-0123456789", VBA.Mid$(json_String, json_Index, 1)) Then
+        ElseIf VBA.Instr("+-0123456789", VBA.Mid$(json_String, json_Index, 1)) Then
             json_ParseValue = json_ParseNumber(json_String, json_Index)
         Else
             Err.Raise 10001, "JSONConverter", json_ParseErrorMessage(json_String, json_Index, "Expecting 'STRING', 'NUMBER', null, true, false, '{', or '['")
@@ -2477,7 +2477,7 @@ Private Function json_ParseNumber(json_String As String, ByRef json_Index As Lon
     Do While json_Index > 0 And json_Index <= Len(json_String)
         json_Char = VBA.Mid$(json_String, json_Index, 1)
 
-        If VBA.InStr("+-0123456789.eE", json_Char) Then
+        If VBA.Instr("+-0123456789.eE", json_Char) Then
             ' Unlikely to have massive number, so use simple append rather than buffer here
             json_Value = json_Value & json_Char
             json_Index = json_Index + 1
@@ -2831,13 +2831,13 @@ Public Function ParseIso(utc_IsoString As String) As Date
     ParseIso = VBA.DateSerial(VBA.CInt(utc_DateParts(0)), VBA.CInt(utc_DateParts(1)), VBA.CInt(utc_DateParts(2)))
 
     If UBound(utc_Parts) > 0 Then
-        If VBA.InStr(utc_Parts(1), "Z") Then
+        If VBA.Instr(utc_Parts(1), "Z") Then
             utc_TimeParts = VBA.Split(VBA.Replace(utc_Parts(1), "Z", ""), ":")
         Else
-            utc_OffsetIndex = VBA.InStr(1, utc_Parts(1), "+")
+            utc_OffsetIndex = VBA.Instr(1, utc_Parts(1), "+")
             If utc_OffsetIndex = 0 Then
                 utc_NegativeOffset = True
-                utc_OffsetIndex = VBA.InStr(1, utc_Parts(1), "-")
+                utc_OffsetIndex = VBA.Instr(1, utc_Parts(1), "-")
             End If
 
             If utc_OffsetIndex > 0 Then
