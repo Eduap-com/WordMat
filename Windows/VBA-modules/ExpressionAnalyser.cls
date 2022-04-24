@@ -1084,7 +1084,7 @@ If right(GetNextListItem, 1) = Sep Then
 End If
 
 End Function
-Sub SplitNonBracket(ByRef arr As Variant, Optional Sep As String = "")
+Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
     Dim s As String, t As String
     Pos = 1
     Do
@@ -1094,7 +1094,7 @@ Sub SplitNonBracket(ByRef arr As Variant, Optional Sep As String = "")
         End If
     Loop While s <> ""
     If t <> "" Then t = Left(t, Len(t) - 3)
-    arr = Split(t, "$_q")
+    Arr = Split(t, "$_q")
     
 End Sub
 
@@ -1468,7 +1468,7 @@ Function GetFirstMatrix() As CMatrix
 ' finder n*ae*ste matrix fra pos
 Dim p As Integer
 Dim s As String
-Dim arr As Variant
+Dim Arr As Variant
 Dim arr2 As Variant
 Dim i As Integer, j As Integer
 Dim M As New CMatrix
@@ -1478,9 +1478,9 @@ Dim M As New CMatrix
     p = InStr(Pos, text, VBA.ChrW(9608)) ' vektor
     s = GetNextBracketContent(p)
     If Len(s) > 0 Then
-    arr = Split(s, "@")
-    For i = 0 To UBound(arr)
-        arr2 = Split(arr(i), "&")
+    Arr = Split(s, "@")
+    For i = 0 To UBound(Arr)
+        arr2 = Split(Arr(i), "&")
         For j = 0 To UBound(arr2)
             M.Element(i, j) = arr2(j)
         Next

@@ -1483,9 +1483,10 @@ begin
 
 end;
 
+// this I believe is deprecated
 procedure ReplacePathInBat();
 begin
-  ReplaceApp('Maxima-5.45.1\bin\maxima.bat');
-  ReplaceApp('Maxima-5.45.1\bin\maximaunit.bat');  
+//  ReplaceApp('Maxima-5.45.1\bin\maxima.bat');
+//  ReplaceApp('Maxima-5.45.1\bin\maximaunit.bat');  
 end;
 

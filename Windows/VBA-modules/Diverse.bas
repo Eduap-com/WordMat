@@ -733,7 +733,7 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     Dim posca As Integer
     Dim poseller As Integer
     Dim Pos As Integer
-    Dim arr(20) As String
+    Dim Arr(20) As String
     Dim i As Integer
     
     Do ' g*aa* tilbage til n*ae*rmeste ligmed
@@ -753,11 +753,11 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     End If
     If Pos = Len(text) Then Pos = 0
     If Pos > 0 Then
-        arr(i) = Left(text, Pos - 1)
+        Arr(i) = Left(text, Pos - 1)
         text = right(text, Len(text) - Pos)
         i = i + 1
     Else
-        arr(i) = text
+        Arr(i) = text
     End If
     Loop While Pos > 0
     
@@ -766,7 +766,7 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
         KlipTilLigmed = text
         ResIndex = -1
     Else
-        KlipTilLigmed = arr(i - indeks)
+        KlipTilLigmed = Arr(i - indeks)
     End If
     
     ' fjern retur og mellemrum mm.
@@ -1835,7 +1835,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo fejl
     Application.ScreenUpdating = False
-    Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, arr As Variant
+    Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, Arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox Sprog.A(345), vbOKOnly, Sprog.Error
@@ -1855,12 +1855,12 @@ On Error GoTo fejl
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(Sprog.A(346), Sprog.A(6), f.Result & "." & f2.Result)
-            arr = Split(n, ".")
-            If UBound(arr) > 0 Then
-                SetFieldNo f, CStr(arr(0))
-                SetFieldNo f2, CStr(arr(1))
+            Arr = Split(n, ".")
+            If UBound(Arr) > 0 Then
+                SetFieldNo f, CStr(Arr(0))
+                SetFieldNo f2, CStr(Arr(1))
             Else
-                SetFieldNo f, CStr(arr(0))
+                SetFieldNo f, CStr(Arr(0))
             End If
         Else
             n = InputBox(Sprog.A(346), Sprog.A(6), f.Result)

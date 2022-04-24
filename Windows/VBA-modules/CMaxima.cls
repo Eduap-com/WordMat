@@ -363,7 +363,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
 #If Mac Then ' noget af nedenst*aa*ende m*aa* kunne bruges, men f*oe*rst pr*oe*ves dette
     ConvertMaximaUnits = Expr
 #Else
-    Dim i As Integer, k As String, arr As Variant
+    Dim i As Integer, k As String, Arr As Variant
     
     Expr = Replace(Expr, """", "") ' svaret vil typisk v*ae*re k*oe*rt igennem num-funktion der tilf*oe*jer "" om tal
     
@@ -373,9 +373,9 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         k = "numer:true$uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
         k = k & "setunits(usersetunits);"
         If Not OutUnits = vbNullString Then
-            arr = Split(OutUnits, ",")
-            For i = 0 To UBound(arr) ' Det skal g*oe*res p*aa* denne m*aa*de fordi man ikke kan k*oe*re setunits p*aa* en liste hvor der optr*ae*der den samme type enhed to gange. fx eV og J
-                k = k & "setunits(" & omax.ConvertUnits(arr(i)) & ")$"
+            Arr = Split(OutUnits, ",")
+            For i = 0 To UBound(Arr) ' Det skal g*oe*res p*aa* denne m*aa*de fordi man ikke kan k*oe*re setunits p*aa* en liste hvor der optr*ae*der den samme type enhed to gange. fx eV og J
+                k = k & "setunits(" & omax.ConvertUnits(Arr(i)) & ")$"
             Next
         End If
 '        k = k & expr & ",numer;applyb1(%,unitrule),numer;scanmap(processunits,%);dectalallNum(%),numer;"
@@ -710,7 +710,7 @@ Public Function WaitForMaxima(t As Integer) As Boolean
     Dim i As Integer
     Dim filtext As String
     Dim NoRuns As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim MaximaInputStrengNonInteractive As String
     i = 0
     StopNow = False
@@ -731,7 +731,7 @@ Public Function WaitForMaxima(t As Integer) As Boolean
 
     If fillen > 4000 And NoRuns = 0 Then
         CloseCmd
-        arr = Split(vars, ";")
+        Arr = Split(vars, ";")
         Dim decl As String
         decl = "declare(["
         decl = decl & Replace(vars, ";", ",")
@@ -1048,7 +1048,7 @@ slut:
 End Sub
 Sub MaximaSolveInequality(variabel As String)
     Dim nr As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     If variabel = "" Then Exit Sub
 
@@ -1120,12 +1120,12 @@ Sub MaximaSolveInequality(variabel As String)
         Else    ' notation med x=...
             MaximaOutput = RemoveBrackets(MaximaOutput)
             If Not MaximaComplex Then
-                arr = Split(MaximaOutput, ListSeparator)
+                Arr = Split(MaximaOutput, ListSeparator)
                 MaximaOutput = ""
-                For i = 0 To UBound(arr)
-                    If InStr(arr(i), "%i") < 1 Then     'kun reelle l*oe*sninger
+                For i = 0 To UBound(Arr)
+                    If InStr(Arr(i), "%i") < 1 Then     'kun reelle l*oe*sninger
                         If MaximaOutput <> "" Then MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    "
-                        MaximaOutput = MaximaOutput & arr(i)
+                        MaximaOutput = MaximaOutput & Arr(i)
                     End If
                 Next
             Else
@@ -1367,7 +1367,7 @@ End Sub
 Sub Eliminate(Variable As String)
     Dim Kommentar As String
     Dim i As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
         Kommentar = Sprog.A(139) '"Der skal v*ae*re et ligmed tegn i en ligning."
@@ -1413,17 +1413,17 @@ Sub Eliminate(Variable As String)
     If StopNow Then GoTo slut
 
     MaximaOutput = Mid(MaximaOutput, 2, Len(MaximaOutput) - 2)
-    arr = Split(MaximaOutput, ListSeparator)
-    If Not (InStr(arr(0), "=") > 0) Then
-        MaximaOutput = arr(0) & "=0"
+    Arr = Split(MaximaOutput, ListSeparator)
+    If Not (InStr(Arr(0), "=") > 0) Then
+        MaximaOutput = Arr(0) & "=0"
     Else
-        MaximaOutput = arr(0)
+        MaximaOutput = Arr(0)
     End If
-    For i = 1 To UBound(arr)
-        If Not (InStr(arr(i), "=") > 0) Then
-            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & arr(i) & "=0"
+    For i = 1 To UBound(Arr)
+        If Not (InStr(Arr(i), "=") > 0) Then
+            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & Arr(i) & "=0"
         Else
-            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & arr(i)
+            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & Arr(i)
         End If
     Next
 
@@ -1734,7 +1734,7 @@ Sub ConvertOutputToSolved()
 ' konverterer output fra [1,3] til x=1 v x=3 eller L={1,3}
 ' kun beregnet til numerisk l*oe*sning
     Dim Variable As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     Dim Sep As String
     If LmSet Then
@@ -1745,9 +1745,9 @@ Sub ConvertOutputToSolved()
             MaximaOutput = Replace(MaximaOutput, "[", "(")
             MaximaOutput = Replace(MaximaOutput, "]", ")")
             MaximaOutput = Replace(MaximaOutput, "=", "")
-            arr = Split(Mid(Variable, 2, Len(Variable) - 2), ",")
-            For i = 0 To UBound(arr)
-                MaximaOutput = Replace(MaximaOutput, arr(i), "")
+            Arr = Split(Mid(Variable, 2, Len(Variable) - 2), ",")
+            For i = 0 To UBound(Arr)
+                MaximaOutput = Replace(MaximaOutput, Arr(i), "")
             Next
             MaximaOutput = "L={" & MaximaOutput & "}"
         End If
@@ -1786,7 +1786,7 @@ Sub ConvertOutputToSolvedGGB()
     ' til geogebraoutput ved ligningssystemer
     Dim p As Integer, s As String, i As Integer, j As Integer
     Dim ea As New ExpressionAnalyser
-    Dim arr() As String, arr2() As String
+    Dim Arr() As String, arr2() As String
     
     If MaximaOutput = "?" Or MaximaOutput = "" Then
         Exit Sub
@@ -1796,18 +1796,18 @@ Sub ConvertOutputToSolvedGGB()
 '    p = InStr(ea.text, "(_")
     p = 1
     s = ea.GetNextBracketContent(p + 1)
-    arr = Split(s, "@")
+    Arr = Split(s, "@")
     MaximaOutput = ""
     
-    For i = 0 To UBound(arr)
-        arr2 = Split(arr(i), "&")
+    For i = 0 To UBound(Arr)
+        arr2 = Split(Arr(i), "&")
         If UBound(arr2) > 0 Then
-            If UBound(arr) > 0 Then MaximaOutput = MaximaOutput & "("
+            If UBound(Arr) > 0 Then MaximaOutput = MaximaOutput & "("
             For j = 0 To UBound(arr2)
                 MaximaOutput = MaximaOutput & arr2(j) & "    " & VBA.ChrW(8743) & "    "
             Next
             MaximaOutput = Left(MaximaOutput, Len(MaximaOutput) - 9)
-            If UBound(arr) > 0 Then MaximaOutput = MaximaOutput & ")"
+            If UBound(Arr) > 0 Then MaximaOutput = MaximaOutput & ")"
         End If
         MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8744) & "    "
     Next
@@ -1817,7 +1817,7 @@ End Sub
 Sub ConvertOutputToSolved2(Optional Variable As String)
 ' konverterer output fra [[x=1,y=3],[x=3,y=5]] til (x=1 og x=3) v ... eller L={(1,3),(3,5)}
 ' kun beregnet til symbolsk l*oe*sning og mnewton og SolveIneq
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
 
 
@@ -1846,9 +1846,9 @@ Sub ConvertOutputToSolved2(Optional Variable As String)
                 MaximaOutput = Replace(MaximaOutput, "[", "(")
                 MaximaOutput = Replace(MaximaOutput, "]", ")")
                 MaximaOutput = Replace(MaximaOutput, "=", "")
-                arr = Split(Mid(Variable, 2, Len(Variable) - 2), ",")
-                For i = 0 To UBound(arr)
-                    MaximaOutput = Replace(MaximaOutput, arr(i), "")
+                Arr = Split(Mid(Variable, 2, Len(Variable) - 2), ",")
+                For i = 0 To UBound(Arr)
+                    MaximaOutput = Replace(MaximaOutput, Arr(i), "")
                 Next
                 MaximaOutput = "L={" & MaximaOutput & "}"
             End If
@@ -2355,7 +2355,7 @@ Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As Stri
 ' forskrifter adskilt ad komma
 '    text = "load(draw)$draw2d("
     Dim text As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     Dim fkt As String
     colindex = 0
@@ -2373,10 +2373,10 @@ Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As Stri
 '            fkt = "'RealOnly(" & fkt & ")"
         text = text & ",draw_realpart = false"
     End If
-    arr = Split(forskrifter, ";")
-    For i = 0 To UBound(arr)
-        fkt = omax.CodeForMaxima(arr(i))
-        text = text & ",key=""" & ConvertToAscii(arr(i)) & """,color=" & GetNextColor() & ",explicit(" & fkt & "," & var & "," & xmin & "," & xmax & ")"
+    Arr = Split(forskrifter, ";")
+    For i = 0 To UBound(Arr)
+        fkt = omax.CodeForMaxima(Arr(i))
+        text = text & ",key=""" & ConvertToAscii(Arr(i)) & """,color=" & GetNextColor() & ",explicit(" & fkt & "," & var & "," & xmin & "," & xmax & ")"
     Next
     If punkter <> "" Then
         text = text & ",key=""punkter"",point_type=filled_circle,point_size=1,points(" & punkter & ")"
@@ -2646,7 +2646,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     Dim pos4 As Integer
     Dim pos5 As Integer
     Dim posog As Integer
-    Dim arr As Variant, arr2() As String, arr3() As String
+    Dim Arr As Variant, arr2() As String, arr3() As String
     Dim var As String
     Dim startn As String
     Dim slutn As String
@@ -3161,17 +3161,20 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '    Loop While pos > 0
     '    text = ea.text
 
-    ' inds*ae*t underforst*aa*ede gangetegn ' den køres også til slut efter alle mellemrum er fjernet, da der så kan opstå flere. Indført her også for at omgå problem med fx at underforstået gangetegn ved 3(x+1) ikke bliver håndteret af findhierarkibreak
-    ea.text = text
-    ea.Pos = 1
-    ea.InsertMultSigns
-    text = ea.text
 
     ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma)
     ea.text = text
     ea.InsertBracketAfter ("/")
     ea.InsertBracketBefore ("/")
     text = ea.text
+    
+    ' inds*ae*t underforst*aa*ede gangetegn ' den køres også til slut efter alle mellemrum er fjernet, da der så kan opstå flere.
+    'Indført her også for at omgå problem med fx at underforstået gangetegn ved 3(x+1) ikke bliver håndteret af findhierarkibreak
+    ' Det giver dog problemer for 2^2x da
+'    ea.text = text
+'    ea.Pos = 1
+'    ea.InsertMultSigns
+'    text = ea.text
     
     ' d/dx notation
     text = ConvertDifferentials(text, VBA.ChrW(8518)) ' \dd
@@ -3315,16 +3318,16 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
             Else
                 ea.text = text
                 ea.Pos = Pos
-                arr = Split(ea.GetNextBracketContent, "&")
+                Arr = Split(ea.GetNextBracketContent, "&")
                 pos2 = ea.Pos
-                If UBound(arr) = 0 Then
+                If UBound(Arr) = 0 Then
                     text = Replace(text, VBA.ChrW(8730), "sqrt", 1, 1)
-                ElseIf UBound(arr) = 1 Then
-                    Call ea.InsertBeforePos("^(1/(" & arr(0) & ")))")
+                ElseIf UBound(Arr) = 1 Then
+                    Call ea.InsertBeforePos("^(1/(" & Arr(0) & ")))")
                     ea.text = Replace(ea.text, VBA.ChrW(8730), "(", 1, 1)
                     posog = ea.FindChr("&", 1)
                     text = Left(ea.text, Pos + 1) & right(ea.text, Len(ea.text) - posog)
-                ElseIf UBound(arr) = -1 Then ' tilf*oe*jet v1.09 pga uendelig l*oe*kke ved mangl parentes
+                ElseIf UBound(Arr) = -1 Then ' tilf*oe*jet v1.09 pga uendelig l*oe*kke ved mangl parentes
                     MsgBox Sprog.A(169), vbOKOnly, Sprog.Error
                     GoTo fejl
                 End If
@@ -3341,16 +3344,16 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
             subs = ea.FindChr("_")
             sups = ea.FindChr("^")
             ends = ea.FindChr(VBA.ChrW(9618))
-            arr = Split(Mid(text, subs + 2, sups - subs - 3), "=")
-            If UBound(arr) < 1 Then    ' hvis definition er = oversat til :
-                arr = Split(Mid(text, subs + 2, sups - subs - 3), ":")
+            Arr = Split(Mid(text, subs + 2, sups - subs - 3), "=")
+            If UBound(Arr) < 1 Then    ' hvis definition er = oversat til :
+                Arr = Split(Mid(text, subs + 2, sups - subs - 3), ":")
             End If
-            If UBound(arr) < 1 Then
+            If UBound(Arr) < 1 Then
                 MsgBox Sprog.A(425), vbOKOnly, Sprog.Error '"Notationen for sumtegnet er ikke korrekt. Den nedre gr*ae*nse skal skrives f.eks. i=1"
                 GoTo videre
             End If
-            var = arr(0)
-            startn = arr(1)
+            var = Arr(0)
+            startn = Arr(1)
             slutn = Mid(text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
             If ea.ChrByIndex(ea.Pos) = "+" Or ea.ChrByIndex(ea.Pos) = "-" Or ea.ChrByIndex(ea.Pos) = "*" Or ea.ChrByIndex(ea.Pos) = "/" Then sluts = sluts - 1
@@ -3380,16 +3383,16 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
             subs = ea.FindChr("_")
             sups = ea.FindChr("^")
             ends = ea.FindChr(VBA.ChrW(9618))
-            arr = Split(Mid(text, subs + 2, sups - subs - 3), "=")
-            If UBound(arr) < 1 Then    ' hvis definition er = oversat til :
-                arr = Split(Mid(text, subs + 2, sups - subs - 3), ":")
+            Arr = Split(Mid(text, subs + 2, sups - subs - 3), "=")
+            If UBound(Arr) < 1 Then    ' hvis definition er = oversat til :
+                Arr = Split(Mid(text, subs + 2, sups - subs - 3), ":")
             End If
-            If UBound(arr) < 1 Then
+            If UBound(Arr) < 1 Then
                 MsgBox Sprog.A(426)
                 GoTo videre
             End If
-            var = arr(0)
-            startn = arr(1)
+            var = Arr(0)
+            startn = Arr(1)
             slutn = Mid(text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
             Expr = Mid(text, ends + 1, sluts - ends)
@@ -3436,10 +3439,10 @@ videre:
                 sluts = ea.FindHierakiBreak(2)
                 Expr = Mid(text, ends, sluts - ends + 1)
 
-                arr = Split(var, VBA.ChrW(8594))
-                var = Trim(arr(0))
+                Arr = Split(var, VBA.ChrW(8594))
+                var = Trim(Arr(0))
                 DiffEqVar = var
-                app = Trim(arr(1))
+                app = Trim(Arr(1))
                 If right(app, 2) = "^+" Then
                     app = Left(app, Len(app) - 2) & ",plus"
                 ElseIf right(app, 2) = "^-" Then
@@ -3873,7 +3876,7 @@ msat:
     '        Loop While pos > 0
 
 
-    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma)
+    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma). Skal være før ea.InsertMultSigns
     ' flyttet op for at tage h*oe*jde for skjulte parenteser
     ea.text = text
     ea.SetNormalBrackets
@@ -3931,17 +3934,17 @@ spring:
             If ea.ChrByIndex(slpos + 1) = "*" Then
                 text = Left(text, slpos) & " ## " & right(text, Len(text) - slpos - 1)
             End If
-            arr = Split(matrix, "@")
+            Arr = Split(matrix, "@")
             If CasType = 1 Or CasType = 2 Then
                 mtext = "{"
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "{" & Replace(arr(i), "&", ",") & "},"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "{" & Replace(Arr(i), "&", ",") & "},"
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & "}"
             Else
                 mtext = "matrix("
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "[" & Replace(arr(i), "&", ",") & "],"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "[" & Replace(Arr(i), "&", ",") & "],"
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & ")"
             End If
@@ -3959,17 +3962,17 @@ spring:
             ea.Pos = Pos
             matrix = ea.GetNextBracketContent
             slpos = ea.Pos
-            arr = Split(matrix, "@")
+            Arr = Split(matrix, "@")
             If CasType = 1 Or CasType = 2 Then
                 mtext = "{"
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "{" & arr(i) & "},"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "{" & Arr(i) & "},"
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & "}"
             Else
                 mtext = "matrix("
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "[" & arr(i) & "],"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "[" & Arr(i) & "],"
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & ")"
             End If
@@ -4387,7 +4390,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     Dim Pos As Integer, pos2 As Integer
     Dim udtryk As String
     Dim possep As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim mtext As String
     Dim slutp As Integer
     Dim s As String, s2 As String
@@ -4619,9 +4622,9 @@ Function ConvertToWordSymbols(ByVal text As String) As String
             pos2 = ea.Pos
 '            Arr = Split(udtryk, ";")
             ea.text = udtryk
-            ea.SplitNonBracket arr, ";"
-            If UBound(arr) > 0 Then
-                text = Left(text, Pos - 1) & "" & VBA.ChrW(8730) & "(" & arr(1) & "&" & arr(0) & ")" & right(text, Len(text) - pos2 + 1)
+            ea.SplitNonBracket Arr, ";"
+            If UBound(Arr) > 0 Then
+                text = Left(text, Pos - 1) & "" & VBA.ChrW(8730) & "(" & Arr(1) & "&" & Arr(0) & ")" & right(text, Len(text) - pos2 + 1)
             Else
                 GoTo fejl
             End If
@@ -4697,11 +4700,11 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.text = text
         ea.Pos = Pos + 8
         udt = ea.GetNextBracketContent()
-        arr = Split(udt, ListSeparator)
-        If UBound(arr) > 1 Then
-            text = Left(text, Pos - 1) & VBA.ChrW(8747) & "_" & arr(2) & "^" & arr(3) & VBA.ChrW(9618) & arr(0) & "  d" & arr(1) & " " & right(text, Len(text) - Pos - Len(udt) - 10)
+        Arr = Split(udt, ListSeparator)
+        If UBound(Arr) > 1 Then
+            text = Left(text, Pos - 1) & VBA.ChrW(8747) & "_" & Arr(2) & "^" & Arr(3) & VBA.ChrW(9618) & Arr(0) & "  d" & Arr(1) & " " & right(text, Len(text) - Pos - Len(udt) - 10)
         Else
-            text = Left(text, Pos - 1) & VBA.ChrW(8747) & VBA.ChrW(9618) & arr(0) & "  d" & arr(1) & " " & right(text, Len(text) - Pos - Len(udt) - 10)
+            text = Left(text, Pos - 1) & VBA.ChrW(8747) & VBA.ChrW(9618) & Arr(0) & "  d" & Arr(1) & " " & right(text, Len(text) - Pos - Len(udt) - 10)
         End If
         Pos = InStr(Pos, text, "integrate")
     Loop
@@ -4716,12 +4719,12 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.text = text
         ea.Pos = Pos + 4
         udt = ea.GetNextBracketContent()
-        arr = Split(udt, ListSeparator)
-        If UBound(arr) > 1 Then
-            If arr(2) = "1" Then
-                text = Left(text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & arr(1) & ") (" & arr(0) & ")" & " " & right(text, Len(text) - Len(udt) - 5 - Pos)
+        Arr = Split(udt, ListSeparator)
+        If UBound(Arr) > 1 Then
+            If Arr(2) = "1" Then
+                text = Left(text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & Arr(1) & ") (" & Arr(0) & ")" & " " & right(text, Len(text) - Len(udt) - 5 - Pos)
             Else
-                text = Left(text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & "^" & arr(2) & " " & arr(1) & ") (" & arr(0) & ")" & " " & right(text, Len(text) - Len(udt) - 6)
+                text = Left(text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & "^" & Arr(2) & " " & Arr(1) & ") (" & Arr(0) & ")" & " " & right(text, Len(text) - Len(udt) - 6)
             End If
         Else
             Pos = Pos + 4
@@ -4739,9 +4742,9 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.text = text
         ea.Pos = Pos + 4
         udt = ea.GetNextBracketContent()
-        arr = Split(udt, ListSeparator)
+        Arr = Split(udt, ListSeparator)
         'lim" & VBA.ChrW(9516) & "(x" & VBA.ChrW(8594) & "1)" & VBA.ChrW(8289) & "(x+1)
-        text = Left(text, Pos - 1) & "lim" & VBA.ChrW(9516) & "(" & arr(1) & VBA.ChrW(8594) & arr(2) & ")" & VBA.ChrW(8289) & "(" & arr(0) & ") " & right(text, Len(text) - Pos - Len(udt) - 6)
+        text = Left(text, Pos - 1) & "lim" & VBA.ChrW(9516) & "(" & Arr(1) & VBA.ChrW(8594) & Arr(2) & ")" & VBA.ChrW(8289) & "(" & Arr(0) & ") " & right(text, Len(text) - Pos - Len(udt) - 6)
         Pos = InStr(Pos, text, "limit")
     Loop
 
@@ -4820,8 +4823,8 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.text = text
         mtext = ea.GetNextBracketContent(Pos + 2)
         slutp = ea.Pos
-        arr = Split(mtext, ListSeparator)
-        text = Left(text, Pos - 1) & arr(1) & "   for   " & arr(0) & right(text, Len(text) - slutp + 1)
+        Arr = Split(mtext, ListSeparator)
+        text = Left(text, Pos - 1) & Arr(1) & "   for   " & Arr(0) & right(text, Len(text) - slutp + 1)
         Pos = InStr(text, "%if")
     Loop
 
@@ -4958,13 +4961,13 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         Pos = InStr(ea.text, "generalized_lambert_w")
         If Pos > 0 Then
         s = ea.GetNextBracketContent(Pos + 20)
-        arr = Split(s, ListSeparator)
-        If UBound(arr) = 0 Then
-            arr = Split(s, ",")
+        Arr = Split(s, ListSeparator)
+        If UBound(Arr) = 0 Then
+            Arr = Split(s, ",")
         End If
-        s2 = Trim(arr(0))
-        If (s2 = "0" Or s2 = "-1") And UBound(arr) = 1 Then
-            ea.text = Left(ea.text, Pos - 1) & "W_(" & s2 & ") (" & arr(1) & ")" & right(ea.text, Len(ea.text) - ea.Pos + 1)
+        s2 = Trim(Arr(0))
+        If (s2 = "0" Or s2 = "-1") And UBound(Arr) = 1 Then
+            ea.text = Left(ea.text, Pos - 1) & "W_(" & s2 & ") (" & Arr(1) & ")" & right(ea.text, Len(ea.text) - ea.Pos + 1)
         End If
         End If
     Loop While Pos > 0
@@ -5039,16 +5042,16 @@ Function ConvertRadToDegree(text As String, trigfunc As String) As String
 End Function
 Sub RemoveComplexSolutions()
 'kun reelle l*oe*sninger ' problem at selvom der er i i kan det m*aa*ske reduceres til reelt
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     If Not MaximaComplex Then
         '        If InStr(MaximaOutput, "%i") Then
-        arr = Split(MaximaOutput, ListSeparator)
+        Arr = Split(MaximaOutput, ListSeparator)
         MaximaOutput = ""
-        For i = 0 To UBound(arr)
-            If InStr(arr(i), "%i") < 1 Then
+        For i = 0 To UBound(Arr)
+            If InStr(Arr(i), "%i") < 1 Then
                 If MaximaOutput <> "" Then MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8744) & "    "
-                MaximaOutput = MaximaOutput & arr(i)
+                MaximaOutput = MaximaOutput & Arr(i)
             End If
         Next
         '        End If
@@ -5062,7 +5065,7 @@ Function ConvertToLatex(text As String) As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     Dim s As String, t As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim ib As Boolean
     Dim rod As Integer
     Dim ends As Integer
@@ -5527,13 +5530,13 @@ Function ConvertToLatex(text As String) As String
                 ea.InsertUnderstoodBracketPair
             Else
                 ea.Pos = Pos
-                arr = Split(ea.GetNextBracketContent, "&")
+                Arr = Split(ea.GetNextBracketContent, "&")
                 pos2 = ea.Pos
-                If UBound(arr) = 0 Then
+                If UBound(Arr) = 0 Then
 '                    ea.text = Replace(ea.text, VBA.ChrW(8730), "\sqrt ", 1, 1)
-                    ea.text = Left(ea.text, Pos - 1) & "\sqrt{" & arr(0) & "}" & right(ea.text, NotZero(ea.Length - ea.Pos + 1))
-                ElseIf UBound(arr) = 1 Then
-                    ea.text = Left(ea.text, Pos - 1) & "\sqrt[" & arr(0) & "]{" & arr(1) & "}" & right(ea.text, NotZero(ea.Length - ea.Pos + 1))
+                    ea.text = Left(ea.text, Pos - 1) & "\sqrt{" & Arr(0) & "}" & right(ea.text, NotZero(ea.Length - ea.Pos + 1))
+                ElseIf UBound(Arr) = 1 Then
+                    ea.text = Left(ea.text, Pos - 1) & "\sqrt[" & Arr(0) & "]{" & Arr(1) & "}" & right(ea.text, NotZero(ea.Length - ea.Pos + 1))
                 End If
             End If
         End If
@@ -6142,7 +6145,7 @@ slut:
 End Sub
 Sub InsertMaximaOutput()
 ' inds*ae*tter maxima output i word document
-    Dim mo As Range, IsBold As Boolean
+    Dim mo As Range, IsBold As Boolean, s As String
 
     Selection.Range.Font.Bold = False
     If MaximaKommando Then
@@ -6175,14 +6178,13 @@ Sub InsertMaximaOutput()
     InsertAssumptions
 
     If Len(KommentarOutput) > 3 Then
-        '        Selection.Collapse (wdCollapseEnd)
-        Selection.TypeParagraph
-        Selection.InsertAfter TranslateReplaceComment(KommentarOutput)
-        '        Selection.TypeText KommentarOutput
-        Selection.Collapse (wdCollapseEnd)
+        s = TranslateReplaceComment(KommentarOutput)
+        If Len(s) > 3 Then
+            Selection.TypeParagraph
+            Selection.InsertAfter s
+            Selection.Collapse (wdCollapseEnd)
+        End If
     End If
-
-    '        Selection.TypeParagraph
 
 End Sub
 Function TranslateReplaceComment(comm As String) As String
@@ -6508,7 +6510,7 @@ End Function
 Function RemovePrintetBool(s As String) As String
 ' removes the true/false which can be printed in output on Mac
 ' mac auto. Der kan blive printet et true eller false i slutningen
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim t As String, ant As Integer, i As Integer
     On Error GoTo fejl
     s = TrimR(Trim(s), vbLf)
@@ -6518,15 +6520,15 @@ Function RemovePrintetBool(s As String) As String
 '#Else
 '    arr = Split(s, vbLf)
 '#End If
-arr = Split(s, VbCrLfMac) ' *ae*ndret v. 1.23
+Arr = Split(s, VbCrLfMac) ' *ae*ndret v. 1.23
 
-    ant = UBound(arr)
+    ant = UBound(Arr)
     If ant > 0 Then
-        t = Trim(arr(ant))
+        t = Trim(Arr(ant))
         If t = "true" Or t = "false" Or t = "unknown" Or t = "expt: undefined: 0 to a negative exponent." Then
             s = vbNullString
             For i = 0 To ant - 1
-                s = s & arr(i)
+                s = s & Arr(i)
             Next
         End If
     End If
@@ -6791,7 +6793,7 @@ Function AddDefinition(s As String) As String
    Dim ea As New ExpressionAnalyser
    Dim ea2 As New ExpressionAnalyser
    Dim defenk As String, ass As String
-   Dim arr As Variant, arr2() As String, arr3() As String
+   Dim Arr As Variant, arr2() As String, arr3() As String
    Dim deflign As Boolean
 
    ea.SetNormalBrackets
@@ -6950,22 +6952,22 @@ Function AddDefinition(s As String) As String
                   defenk = Replace(defenk, "):", "):=")
                End If
             End If
-            arr = Split(defenk, ":")
-            If UBound(arr) = 0 Then
+            Arr = Split(defenk, ":")
+            If UBound(Arr) = 0 Then
                '                    If InStr(defenk, "setunits") > 0 Or InStr(defenk, "assume") > 0 Then
                GoTo hop2
                '                    End If
             End If
-            If Not ValidateDef(arr(0), arr(1)) Then GoTo hop
+            If Not ValidateDef(Arr(0), Arr(1)) Then GoTo hop
 
-            If Left(arr(1), 1) = "=" Then arr(1) = right(arr(1), Len(arr(1)) - 1)
-            If arr(1) = "" Then GoTo hop
+            If Left(Arr(1), 1) = "=" Then Arr(1) = right(Arr(1), Len(Arr(1)) - 1)
+            If Arr(1) = "" Then GoTo hop
             If UBound(ldefname) < defindex Then
                ReDim Preserve ldefname(defindex)
                ReDim Preserve ldefvalue(defindex)
             End If
-            ldefname(defindex) = arr(0)
-            ldefvalue(defindex) = arr(1)
+            ldefname(defindex) = Arr(0)
+            ldefvalue(defindex) = Arr(1)
             defindex = defindex + 1
 hop2:                    ' hvis setunit eller assume eller declare
             ea2.text = defenk
@@ -7041,7 +7043,7 @@ End Function
 Function sqbrAssump(s As String) As String
    Dim ea As ExpressionAnalyser, t As String
    Dim v As String, p As Integer, p2 As Integer, c As String
-   Dim pre As String, pst As String, arr() As String, l1 As String, l2 As String
+   Dim pre As String, pst As String, Arr() As String, l1 As String, l2 As String
    t = s
    p = InStr(s, VBA.ChrW(8712))
    If p <= 0 Then
@@ -7088,9 +7090,9 @@ Function sqbrAssump(s As String) As String
    Else
       c = ","
    End If
-   arr = Split(s, c)
-   If UBound(arr) = 1 Then
-      sqbrAssump = v & l1 & arr(0) & " and " & arr(1) & l2 & v
+   Arr = Split(s, c)
+   If UBound(Arr) = 1 Then
+      sqbrAssump = v & l1 & Arr(0) & " and " & Arr(1) & l2 & v
    Else
       sqbrAssump = t
    End If
@@ -7134,7 +7136,7 @@ Function GetAssumeText(defenk) As String
     Dim ea As ExpressionAnalyser
     Dim ea2 As ExpressionAnalyser
     Dim s As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim p1 As Integer, p2 As Integer
     If Len(defenk) > 0 Then
         If Left(defenk, 6) = "assume" Then
@@ -7153,8 +7155,8 @@ Function GetAssumeText(defenk) As String
             Do
                 s = ea.GetNextListItem(ea.Pos)
                 If InStr(s, "#") > 0 Then
-                    arr = Split(s, "#")
-                    s = "notequal(" & arr(0) & "," & arr(1) & ")"
+                    Arr = Split(s, "#")
+                    s = "notequal(" & Arr(0) & "," & Arr(1) & ")"
                 ElseIf Len(s) > 0 Then
                     ea2.text = s
                     p1 = ea2.FindNextGreaterOrLower(1)
@@ -7181,13 +7183,13 @@ End Function
 
 
 Sub AddToKillDefs(DefS As String)
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim j As Integer
     Dim s As String
     If DefS <> "" Then
-        arr = Split(DefS, ListSeparator)
-        For j = 0 To UBound(arr)
-            s = arr(j)
+        Arr = Split(DefS, ListSeparator)
+        For j = 0 To UBound(Arr)
+            s = Arr(j)
             s = Split(s, "=")(0)
             s = Split(s, "(")(0)
             KillDef = KillDef & s & ","
@@ -7204,15 +7206,15 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
     Dim NotSolved As Boolean
     Dim ea As New ExpressionAnalyser
     Dim var As String
-    Dim arr As Variant
+    Dim Arr As Variant
     If CASengine > 0 Then
         ea.SetTuborgBrackets
     End If
     Ligning = RemoveBrackets(Ligning)
-    arr = Split(Ligning, "=")
+    Arr = Split(Ligning, "=")
 
-    If UBound(arr) = 1 Then    ' der er pr*ae*cis et =tegn
-        ea.text = arr(1)    'h*oe*jresiden
+    If UBound(Arr) = 1 Then    ' der er pr*ae*cis et =tegn
+        ea.text = Arr(1)    'h*oe*jresiden
         IsSolved = True
         Do
             var = ea.GetNextVar
@@ -7245,7 +7247,7 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
 ' true hvis en er l*oe*st, false hvis ingen. All hvis alle.
     Dim oneSolved As Boolean
     Dim allsolved As Boolean
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     oneSolved = False
     allsolved = True
@@ -7258,10 +7260,10 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
         If InStr(ligninger, "%if(") > 0 Then GoTo slut
 
         ligninger = RemoveBrackets(ligninger)
-        arr = Split(ligninger, Sep)
+        Arr = Split(ligninger, Sep)
 
-        For i = 0 To UBound(arr)
-            If IsSolved(arr(i), variabel) Then
+        For i = 0 To UBound(Arr)
+            If IsSolved(Arr(i), variabel) Then
                 oneSolved = True
             Else
                 allsolved = False
