@@ -6,8 +6,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
 AppName=WordMat
-AppVerName=WordMat v. 1.24.1
-VersionInfoVersion=1.24.1.0
+AppVerName=WordMat v. 1.24.2
+VersionInfoVersion=1.24.2.0
 AppMutex=WordMatMutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
@@ -96,9 +96,9 @@ da.MakroDeakt2=Det anbefales at ændre denne indstilling, da WordMat ellers ikke 
 en.MakroDeakt2=It is recommended to change this setting, otherwise WordMat will not function. Press OK to change the setting to 'macros enabled with message', or cancel to continue without any change.
 sp.MakroDeakt2=Se recomienda cambiar esta configuración, de lo contrario WordMat no funcionará. Pulse Aceptar para cambiar el ajuste a 'macros habilitados con el mensaje', o en Cancelar para continuar sin ningún cambio.
 
-da.NoWord=Det ser ikke ud til at du har installeret Word 2007, 2010, 2013 eller 2016, og WordMat vil ikke fungere uden Word. Vil du alligevel fortsætte installationen?
-en.NoWord=Word 2007, 2010, 2013 or 2016 is not installed. The installation will terminate.
-sp.NoWord=Word 2007, 2010, 2013 o 2016 no está instalado. La instalación finalizará
+da.NoWord=Det ser ikke ud til at du har installeret Microsoft Word, og WordMat vil ikke fungere uden Word. Vil du alligevel fortsætte installationen?
+en.NoWord=Microsoft Word is not installed. WordMat will not function without it. Do you wish to continue?
+sp.NoWord=Word no está instalado. La instalación finalizará
 
 da.NoExcel=Du har ikke installeret Excel 2007, 2010, 2013 eller 2016. Installationen afsluttes.
 en.NoExcel=Excel 2007, 2010, 2013 or 2016 is not installed. The installation will terminate.
@@ -858,6 +858,18 @@ begin
       foldername := ExpandConstant('{pf64}\Microsoft Office\Office' + Param + '\');
       except
       end;
+
+    if not(FileExists(foldername + 'winword.exe')) then
+      try
+      foldername := ExpandConstant('{pf64}\Microsoft Office\root\Office' + Param + '\');
+      except
+      end;
+
+    if not(FileExists(foldername + 'winword.exe')) then
+      try
+      foldername := ExpandConstant('{pf32}\Microsoft Office\root\Office' + Param + '\');
+      except
+      end;
   
   if not(FileExists(foldername + 'winword.exe')) then
       foldername := ExpandConstant('{pf32}\Microsoft Office\Office' + Param + '\');
@@ -1313,7 +1325,12 @@ begin
   Result := True;
   if not (Word12Installed or Word14Installed or Word15Installed or Word16Installed) then begin
     if MsgBox(ExpandConstant('{cm:NoWord}'), mbInformation, MB_YESNO) = IDYES then
-      Result := True
+      begin
+      Result := True;
+      Office16Installed:=true;
+      Word16Installed:=true;
+      Excel16Installed:=true;
+      end
     else
       Result := False;
   end

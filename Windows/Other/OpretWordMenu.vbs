@@ -1,7 +1,7 @@
 '' OpretWordMenu.vbs
 '' Mikael Sørensen, Nyborg Gymnasium
 '' 20/8-2010
-''
+'' Bruges ikke længere
 
 Dim fso, objnet, filnavn, vistadir, XPdir, usrname, dir, strPath
 dim strRegkey, startupmappe
