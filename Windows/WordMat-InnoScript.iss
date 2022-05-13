@@ -171,8 +171,8 @@ Source: Excelfiles\*; DestDir: {app}\ExcelFiles; Flags: ignoreversion overwriter
 Source: Images\*; DestDir: {app}\Images; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: ExternalPrograms\GeoGebra.ggb; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 ;Source: GeoGebraFiler\geogebra_thumbnail.png; DestDir: {app}\GeoGebraFiler\; Flags: ignoreversion
-Source: ExternalPrograms\graphtemplate.grf; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly 
-Source: Other\OpretWordMenu.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ExternalPrograms\graphtemplate.grf; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly  
+;Source: Other\OpretWordMenu.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\ReaktiverWordMat.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 ; These files are in a folder a level up from the Windows folder as they are shared with the Mac version
 Source: ..\Shared\WordDocs\WordMatManual.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
@@ -291,6 +291,10 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Options\"; ValueType: n
 Root: HKCU; Subkey: "Software\Microsoft\Office\15.0\Word\Options\"; ValueType: none; ValueName:"DefaultFormat"; ValueData: none ; Flags: deletekey dontcreatekey uninsdeletekey 
 Root: HKCU; Subkey: "Software\Microsoft\Office\14.0\Word\Options\"; ValueType: none; ValueName:"DefaultFormat"; ValueData: none ; Flags: deletekey dontcreatekey uninsdeletekey 
 Root: HKCU; Subkey: "Software\Microsoft\Office\12.0\Word\Options\"; ValueType: none; ValueName:"CompatMode"; ValueData: none ; Flags: deletekey dontcreatekey uninsdeletekey 
+; Dont disable. Måske er det ikke nok at kalde den WordMat. Den skal måske have hele stien
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"WordMat"; ValueData: 1 
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"WordMat.dotm"; ValueData: 1 
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"C:\Program Files\Microsoft Office\Root\Office16\STARTUP\WordMat.dotm"; ValueData: 1 
 
 
 ; WordMat settings

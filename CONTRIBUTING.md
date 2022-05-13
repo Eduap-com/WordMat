@@ -29,10 +29,8 @@ The installer is created using Inno setup and written in pascal.
 Most of the code is VBA and can be found in the Word template WordMat.dotm which is located in the install folder when the application is installed. Open file templatefile in Word and press alt+F11
 Some VBA-code is also found in the Excel-files for graph-plotting, statistics etc...
 
-The API library which handles the communication with Maxima is called MathMenu.dll and is written in c# using .Net framework 4.0
+The API library which handles the communication with Maxima on Windows is called MathMenu.dll and is written in c# using .Net framework 4.0
 The MathMenu sourcecode is found in this folder.
-
-For Mac the API is called LibMaximaConnection.dylib and is written in c using xcode.
 
 Maxima comes with a Maxima-installation which is not standard. Significant changes has been made to it
 - new images with a lot of specific setup changes
@@ -51,11 +49,10 @@ Pull requests are welcome, but it is always better if there is no duplication of
   beforehand, in case I have some reservations about it
 
 Changes to WordMat.dotm can be a problem as it holds the main code and if several people are working on different versions of the file they cannot be merged.
-It must be coordinated.
+To circumvent this modules must be imported/exported with each edit. More info in the WordMat.dotm file
 Creating a new Excel-template is no problem.
 
 
 Coding guidelines
 -----------------
-WordMat is 15 years in development, and I am not a professional programmer.
-No design patterns etc has been applied. Just try to comment the code.
+Try to comment the code:-)
