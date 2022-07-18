@@ -6,8 +6,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
 AppName=WordMat
-AppVerName=WordMat v. 1.24.2
-VersionInfoVersion=1.24.2.0
+AppVerName=WordMat v. 1.25.0
+VersionInfoVersion=1.25.0.0
 AppMutex=WordMatMutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
@@ -565,14 +565,14 @@ begin
 end;
 function VStartupFolderAll15(Param:String):String;
 begin
-  if ClickToRun then
+  if ClickToRun15 then
     Result:= UserStartupFolder15
   else
     Result:=Office15Folder + 'STARTUP';
 end;
 function VStartupFolderAll16(Param:String):String;
 begin
-  if ClickToRun then
+  if ClickToRun16 then
     Result:= UserStartupFolder16
   else
     Result:=Office16Folder + 'STARTUP';
@@ -1398,7 +1398,7 @@ begin
     //            if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
     if AntalBeregninger>0 then
     begin
-    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);
+//    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
 //    if IsTaskSelected('AutoStart') then
       RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AutoStart', AutoStart);
 //    if IsTaskSelected('CheckForUpdate') then
