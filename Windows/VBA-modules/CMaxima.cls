@@ -3297,7 +3297,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
                 End If
                 ea.Pos = Pos
                 Call ea.GetNextBracketContent    ' bare for at finde slut parantes
-                Call ea.InsertBeforePos("^(1/" & rod & ")")
+                Call ea.InsertBeforePos("^(1/" & rod & ")") ' metoden her kan faktisk give problemer ved fx \cbrt(4)^2 da denne skal fortolkes cbrt(4^2) og ikke cbrt(4)^2
                 ea.text = Replace(ea.text, VBA.ChrW(8728 + rod), "", 1, 1)
                 text = ea.text
             End If
@@ -6014,6 +6014,31 @@ Function ReadEquation2(ir As Range) As String
 
     tempDoc.Range.Delete    ' dette afhj*ae*lper muligvis at word bliver langsom
 
+End Function
+Function ReadFromWord(Expr As String) As String
+' tager udtryk som streng. Indsætter i word, bygger op og returnerer
+
+    Dim r As Range, oldr As Range
+
+    Set oldr = Selection.Range
+
+    Set r = tempDoc.Range
+    r.Delete
+    Set r = tempDoc.Range
+    With r
+        .OMaths.Add r
+        .OMaths(1).Range.text = Expr
+        .OMaths(1).Range.Font.Bold = False
+        .OMaths.BuildUp
+        .OMaths.Linearize
+        .OMaths(1).ConvertToNormalText
+    End With
+
+    ReadFromWord = r.text
+
+    r.Delete
+    
+    oldr.Select
 End Function
 Sub ReadSelectionOld()
 ' inds*ae*tter det markerede som kommando

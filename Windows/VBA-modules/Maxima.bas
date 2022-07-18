@@ -283,7 +283,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
 End Sub
-Sub MaximaSolveInequality()
+Sub MaximaSolveInequality(Optional variabel As String)
 ' l*oe*ser een ulighed
     On Error GoTo fejl
     PrepareMaxima
@@ -292,13 +292,14 @@ Sub MaximaSolveInequality()
     Dim scrollpos As Double
     Dim sstart As Long
     Dim sslut As Long
-    Dim variabel As String, s As String
+    Dim s As String
     Dim ea As New ExpressionAnalyser
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    Set UFWait = New UserFormWaitForMaxima
+    
     Set UFSelectVar = New UserFormSelectVar
 
     If Selection.OMaths.Count < 2 Then
@@ -315,9 +316,13 @@ Sub MaximaSolveInequality()
             eqs = True
         End If
         omax.FindVariable
-        UFSelectVar.vars = omax.vars
-        UFSelectVar.Show
-        variabel = UFSelectVar.SelectedVar
+        If variabel = vbNullString Then
+            UFSelectVar.vars = omax.vars
+            UFSelectVar.DefS = omax.DefString
+            UFSelectVar.Show
+            variabel = UFSelectVar.SelectedVar
+        End If
+        
         If variabel = "" Then
             GoTo slut
         End If
@@ -475,7 +480,7 @@ Sub MaximaSolvePar(Optional variabel As String)
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8805)) > 1 Then
-        MaximaSolveInequality
+        MaximaSolveInequality variabel
         GoTo slut
     End If
     If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
@@ -1668,7 +1673,10 @@ Sub beregn()
             If fo = "?" Or fo = "null" Or fo = "" Then
                 s = "numeric(" & s & " , " & MaximaCifre & ")"
             Else
-                s = "numeric(" & fo & " , " & MaximaCifre & ")"
+            ' det første resultat kan ikke bare fødes ind i GeoGebra igen. Det giver problemer i særlige tilfælde. Eksempel: '\cbrt(79/138)^(2)' Her burde være parentes. Den rigtige fortolkning er cbrt((79/138)^2), som kommer frem hvis den tastes og læses i Word. Hvis den køres direkte i WordMat oversætteren indsættes ikke korrekt parentes. Normalt ikke et problem, da alt normalt læses fra Word
+'                fo = omax.ReadFromWord(fo) ' forsøg på at omgå problem med at føde resulkat direkte ind i geogebra igen
+'                s = "numeric(" & fo & " , " & MaximaCifre & ")"
+                s = "numeric(" & s & " , " & MaximaCifre & ")" ' Der er eksempler, hvor det er bedre at beregne numerisk videre på det eksakte resultat istedet for direkte på det originale, men pga ovenstående problematik
             End If
             MaximaExact = 2
             t = RunGeoGebraDirect(s)

@@ -71,8 +71,8 @@ Sub RunTestSequence()
 'GoTo ggbtest
 'GoTo slut
     
-    ' brug UnicodeValsToString for at finde streng fra et matematikfelt. Både til kommando og resultat
-    ' Insert equation, solve it. Select all and execute 'UnicodeValsToString'. Then copy the string for command and result
+    ' når der skal laves nye test, er det nemmest bare at køre testen med et tomt expected result. Der skrives hvilken teststreng der skal bruges hvis resultat er korrekt
+    ' ellers brug GetTestString' eller UnicodeValsToString for at finde streng fra et matematikfelt for kommandoen.
     ' the result may have to be adjusted for calculations (not solve). Often brackets of exponents are different and spaces must be removed
     ' Multiple correct answers can be separated by @
 '    DoEvents ' virker ikke
@@ -298,6 +298,34 @@ ggbtest:
     
     TestBeregn "2+3", "=5"
     If StopNow Then GoTo slut
+    ' Denne er ikke justeret
+    TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=-cos" & VBA.ChrW(8289) & "(14/45 " & VBA.ChrW(960) & ")+27" & VBA.ChrW(8730) & "(5&3)^(2)/(ln(889)/ln(10))+2"
+    If StopNow Then GoTo slut
+    TestBeregn "1/5 2", "=2/5"
+    If StopNow Then GoTo slut
+    TestBeregn VBA.ChrW(8731) & "(-8)", "=-2"
+    If StopNow Then GoTo slut
+    
+    TestBeregn "a b/c+a b+f_a (x)", "=a" & VBA.ChrW(183) & "b+a" & VBA.ChrW(183) & "b/c+f_a (x)"
+    If StopNow Then GoTo slut
+    TestBeregn "f_a (x)+a (b+d)/c+f_c+2+a^x (2)", "=a" & VBA.ChrW(183) & "(b+d)/c+f_a (x)+f_c+2a^(x)+2"
+    If StopNow Then GoTo slut
+    TestBeregn "2^2x+23/2x", "=(2^(x))^(2)+23/(2x)" ' fails if 2^2x is not interpreted as 2^(2*x)
+    If StopNow Then GoTo slut
+    TestBeregn "log" & VBA.ChrW(8289) & "(a)", "=ln(a)/ln(10)"
+    If StopNow Then GoTo slut
+    
+    TestBeregn "log_2" & VBA.ChrW(8289) & "(4)", "=ln(4)/ln(2)@2" ' reducerer ikke eksakt med ggb
+    If StopNow Then GoTo slut
+    TestBeregn "ln" & VBA.ChrW(8289) & "(a)", "=ln(a)"
+    If StopNow Then GoTo slut
+    TestBeregn "log_4" & VBA.ChrW(8289) & "a", "=ln(a)/ln(4)"
+    If StopNow Then GoTo slut
+    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(x_0)+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)" ' Test af forkert placerede skjulte parenteser
+    If StopNow Then GoTo slut
+    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(x_0)-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
+    If StopNow Then GoTo slut
+        
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
     If StopNow Then GoTo slut
 
@@ -353,9 +381,9 @@ End Function
 Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional var As String, Optional Instruk As String)
     Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
     If TestType = 1 Then
-        TypeText = "Calculating"
+        TypeText = "Calculate"
     ElseIf TestType = 2 Then
-        TypeText = "Solving equation"
+        TypeText = "Solve"
     End If
     s = TestCount & ": " & TypeText & vbCrLf & "Error count: " & ErrCount
     UfWait2.Label1.Caption = s
@@ -392,30 +420,38 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
     If Not ResultOK Then 'omax.MaximaOutput
         Selection.Font.ColorIndex = wdRed
         Selection.Font.Bold = True
-        Selection.TypeText ("Error " & TypeText & ". Expected result: ")
+        Selection.TypeText (TypeText & " error. Expected result: ")
         Selection.Font.Bold = False
         Selection.Font.ColorIndex = wdAuto
         Selection.TypeText ("  ")
         If TestType = 1 Then
             Selection.TypeParagraph
-            Selection.TypeText "resul:   " & resul
+            Selection.TypeText "resul(forventet resultat):   " & resul
             Selection.TypeParagraph
-            Selection.TypeText "Oresul:  " & Oresul
+            Selection.TypeText "Oresul(egentlige resultat):  " & Oresul
+            Selection.TypeParagraph
+            Selection.TypeText "Brug denne streng i koden:"
+            Selection.TypeParagraph
+            Selection.TypeText "TestBeregn " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
         Else
-            InsertTestMath resul
+'            InsertTestMath resul
+'            Selection.TypeParagraph
+'            InsertTestMath Oresul
+'            UnicodeValsToString
+'            GotoPrevEq
+'            Selection.OMaths(1).Range.Delete
+'            Selection.GoToNext (wdGoToLine)
             Selection.TypeParagraph
-            InsertTestMath Oresul
-            UnicodeValsToString
-            GotoPrevEq
-            Selection.OMaths(1).Range.Delete
-            Selection.GoToNext (wdGoToLine)
+            Selection.TypeText "Brug denne streng i koden:"
+            Selection.TypeParagraph
+            Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
         End If
         Selection.TypeParagraph
         ErrCount = ErrCount + 1
     ElseIf visok Then
         Selection.Font.ColorIndex = wdGreen
         Selection.Font.Bold = True
-        Selection.TypeText ("Test OK: " & TypeText)
+        Selection.TypeText (TypeText & " test was succesful")
         Selection.Font.Bold = False
         Selection.Font.ColorIndex = wdAuto
         Selection.TypeParagraph
@@ -423,6 +459,43 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
     UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
     TestCount = TestCount + 1
 End Sub
+Sub GetTestString()
+    ' placer cursoren i resultat af en beregning, så giver denne sub det udtryk som performtest skal have som resultat
+    Dim Oresul As String, text As String, s As String
+    omax.ReadSelection
+    Oresul = TrimR(omax.Kommando, vbCr)
+    
+   s = ConvertToVBAString(Oresul)
+    
+    Selection.Collapse wdCollapseEnd
+    Selection.EndKey Unit:=wdLine
+    Selection.TypeParagraph
+    Selection.TypeText (s)
+
+End Sub
+Function ConvertToVBAString(text As String) As String
+    Dim s As String, j As Integer, i As Integer
+    s = ""
+    For j = 1 To Len(text)
+        i = AscW(Mid(text, j, 1))
+        If i > 200 Or i = 183 Then
+            s = s & """ & VBA.ChrW(" & i & ") & """
+        Else
+            s = s & Mid(text, j, 1)
+        End If
+    Next
+    If Left(s, 4) = """ & " Then
+        s = right(s, Len(s) - 4)
+    ElseIf Left(s, 1) <> """" Then
+        s = """" & s
+    End If
+    If right(s, 4) = " & """ Then
+        s = Left(s, Len(s) - 4)
+    ElseIf right(s, 1) <> """" Then
+        s = s & """"
+    End If
+    ConvertToVBAString = s
+End Function
 Sub TestBeregn(komm As String, resul As String)
     PerformTest 1, komm, resul
 End Sub
