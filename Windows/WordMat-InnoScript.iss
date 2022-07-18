@@ -43,8 +43,8 @@ da.WelcomeLabel2=Denne guide installerer [name/ver] på computeren.%n%n Det anbef
 en.WelcomeLabel2=This guide installs [name/ver].%n%n It is recommended to close all programs.
 sp.WelcomeLabel2=Esta guía le instalará [name / ver] en su equipo.% N% n Se recomienda cerrar todas las aplicaciones que se ejecutan.
 
-da.FinishedLabel=Du vil nu have en ny værktøjslinje i Word.
-en.FinishedLabel=You will now have a new Ribbon in Word
+da.FinishedLabel=Du finder WordMat som en værktøjslinje i Word.
+en.FinishedLabel=You will find WordMat as a Ribbon in Word.
 sp.FinishedLabel=Ahora dispone de una nueva barra de herramientas en Word.
 
 [CustomMessages]
