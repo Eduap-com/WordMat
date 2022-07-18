@@ -748,9 +748,9 @@ stophop:     If omax.AntalVars > 1 Then
 newcassys:
         If CASengine = 1 Or CASengine = 2 Then
             If MaximaComplex Then
-                s = "Csolve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(variabel, ";", ",") & "})"
+                s = "Csolve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", " , ") & "},{" & Replace(variabel, ";", " , ") & "})"
             Else
-                s = "solve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", ",") & "},{" & Replace(variabel, ";", ",") & "})"
+                s = "solve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", " , ") & "},{" & Replace(variabel, ";", " , ") & "})"
             End If
             If MaximaVidNotation Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
