@@ -65,8 +65,8 @@ root            maxima.sh used by WordMat to run Maxima (and maybe other scripts
 Whenever a new release is compiled the following checklist must be followed
 1. If any changes have been made to SolveReal.mac or WordMatunitAddon.mac a new maxima.core and/or maximaunit.core must be built for both Windows and Mac. See section *Buidling a new maxima.core*
 2. Update the version number in WordMat.dotm, the inno script and Package script
-3. Make a copy of wordmatascii.dotm and rename the copy to wordmat.dotm
-4. Open WordMat.domt and run VBA functions: ‘ReplacetoExtendedASCII’ & ‘GenerateKeyboardShortcuts’
+3. Make a copy of WordMatAscii.dotm and rename the copy to WordMat.dotm
+4. Open WordMat.dotm and run VBA functions: ‘ReplacetoExtendedASCII’ & ‘GenerateKeyboardShortcuts’
 *(Make sure to add reference 'Microsoft Visual Basic for Applications Extensibility 5.3')*
 *This macros will only run if you have set Word to trust the VBA project object model*
    *Files | Settings | Trust Center | Trust Center Settings | Macro Settings | Trust access to the VBA project object model *
