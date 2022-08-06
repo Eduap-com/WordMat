@@ -72,11 +72,12 @@ Whenever a new release is compiled the following checklist must be followed
    *Files | Settings | Trust Center | Trust Center Settings | Macro Settings | Trust access to the VBA project object model *
 5. If any changes have been made to WordMat.dotm a new WordMatMac.dotm must be created. See section *Creating WordMatMac.dotm for Mac*
 6. If any changes has been made to Excelfiles in Windows it must be copied to the corresponding Mac-folder. To avoid special character problems. The copied excel files must first be opened on windows. Then the VBA function 'replacetononunicode' must be run. Then it must opened on Mac, where you run 'replacetounicode'
-7. If a new version of GeoGebra is in the release the filenames must be changed in the inno script file 
-8. Build the Windows version
-9. Codesign the installer (Project owner only)
-10. Build the Mac version
-11. Create a new release on GitHub and upload the two installers
+7. Download a new GeoGebra 5 installer and place it in Externalprograms. The filenames must be changed in the inno script file to reflect the new file.
+8. Download a new version of GeoGebra Math apps bundle: https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding and place in Shared
+9. Build the Windows version
+10. Codesign the installer (Project owner only)
+11. Build the Mac version
+12. Create a new release on GitHub and upload the two installers
 
 ## Buidling a new maxima.core
 The default installation of Maxima loads the compiled *maxima.core* file from this location:
