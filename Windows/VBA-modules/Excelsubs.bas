@@ -11,7 +11,7 @@ Dim oOLEWd As Object 'OLEObject ' OLE Word Object
 Dim ils As InlineShape
 Dim oWD As Document ' Word Document Object (Use Microsoft Word Reference)
 Set oWD = ActiveDocument
-'Set ils = oWD.InlineShapes.AddOLEObject("Excel.Sheet") ' virkede ikke altid. Nu fors*oe*ges nedenunder fra optag makro
+'Set ils = oWD.InlineShapes.AddOLEObject("Excel.Sheet") ' virkede ikke altid. Nu forsøges nedenunder fra optag makro
 If val(Application.Version) = 12 Then
     vers = ".12"
 Else
@@ -103,7 +103,7 @@ Dim i As Integer
 ' hvis indlejret
 'Set xlwb = InsertIndlejretExcel
 
-' hvis selvst*ae*ndigt ark
+' hvis selvstændigt ark
 On Error Resume Next
 Set XLapp = GetObject(, "Excel.Application")
 If Err.Number <> 0 Then
@@ -143,7 +143,7 @@ On Error Resume Next
 Err.Number = 0
 xlsh.Range("A2").AutoFill Destination:=xlsh.Range("A2:A100"), Type:=0 'xlFillDefault
 xlsh.Range("B1").AutoFill Destination:=xlsh.Range("B1:B100"), Type:=0 'xlFillDefault
-If Err.Number <> 0 Then ' af ukendte *aa*rsager kan autofill fejle hver anden gang s*aa* m*aa* det g*oe*res manuelt, men det er langsommere
+If Err.Number <> 0 Then ' af ukendte årsager kan autofill fejle hver anden gang så må det gøres manuelt, men det er langsommere
     Err.Number = 0
     For i = 1 To 100
         xlsh.Cells(1 + i, 1).Formula = "=G$3/100+A" & i
@@ -220,7 +220,7 @@ slut:
 End Function
 
 Sub OpenSpreadSheet()
-' denne metode er problematisk da der *aa*bnes ny instans af excel hver gang. Brug OpenExcelWB
+' denne metode er problematisk da der åbnes ny instans af excel hver gang. Brug OpenExcelWB
 Dim excelsti As String
 Dim appnr As Integer
 Dim statistiksti As String
@@ -277,7 +277,7 @@ Function GetExcelSti() As String
     End If
 End Function
 Function InsertOpenExcel(filnavn As String, Optional startark As String = "", Optional WorkBookName As String) As Object
-' inds*ae*tter indlejret eller *aa*bner afh*ae*ngig af indstilling
+' indsætter indlejret eller åbner afhængig af indstilling
 On Error GoTo fejl
     If ExcelIndlejret Then
         Set InsertOpenExcel = InsertIndlejret(filnavn, startark)

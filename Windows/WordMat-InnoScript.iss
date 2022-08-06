@@ -164,7 +164,7 @@ Source: WordMat.dotm; DestDir: {code:VStartupFolderAll16}; Check: VOffice16Insta
 Source: WordMat.dotm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: Other\WordMatLommeregner.docm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: ExternalPrograms\SetupGraph-4.4.2.exe; DestDir: {app}; Components: Graph ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
-Source: ExternalPrograms\GeoGebra-Windows-Installer-5-0-700-0.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
+Source: ExternalPrograms\GeoGebra-Windows-Installer-5-0-723-0.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 ;Source: GeoGebra-Windows-Installer-4-4-10-0.msi; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 Source: ..\Shared\WordDocs\FormelSamling.dotx; DestDir: {%appdata}\Microsoft\Document Building Blocks\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: Excelfiles\*; DestDir: {app}\ExcelFiles; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
@@ -364,7 +364,7 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Options"; ValueType: st
 ;Filename:"{dotnet40}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
 Filename: {app}\SetupGraph-4.4.2.exe; Parameters: "/verysilent /SUPPRESSMSGBOXES"; StatusMsg: "Installerer Graph..."; check:InstallGraph; Components: Graph ; Flags: nowait
-Filename: {app}\GeoGebra-Windows-Installer-5-0-700-0.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;
+Filename: {app}\GeoGebra-Windows-Installer-5-0-723-0.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;
 ;Filename: msiexec; Parameters: "/i ""{app}\GeoGebra-Windows-Installer-4-4-10-0.msi"" /quiet";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra..."; Components: GeoGebra ;
 ;Filename: javaws ; Parameters: "-import -system -silent -association -shortcut http://www.geogebra.org/webstart/geogebra.jnlp"; StatusMsg: "Installerer GeoGebra...";
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;

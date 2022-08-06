@@ -249,7 +249,7 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     
     End If '****** Interactive end *******
-'    TestBeregn VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^" & VBA.ChrW(8734) & "" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "*a-*3)*a-*e^(-1/2*a-*((y-1)/3)^2 ) dy", "=1"
+'    TestBeregn VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^" & VBA.ChrW(8734) & "" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "á3)áe^(-1/2á((y-1)/3)^2 ) dy", "=1"
     
     
     ' Numrerisk test
@@ -567,7 +567,7 @@ MsgBox ea.GetNextListItem()
 
 End Sub
 Sub InsertTestMath(s As String)
-' inds*ae*tter maxima output i word document
+' indsætter maxima output i word document
     Dim mo As Range
 
     Selection.Range.Font.Bold = False

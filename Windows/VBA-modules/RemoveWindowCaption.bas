@@ -33,7 +33,7 @@ Private Declare PtrSafe Function DrawMenuBar Lib "user32" ( _
 ByVal hwnd As LongPtr) As LongPtr
 
 Sub RemoveCaption(objForm As Object)
-' skal k*oe*res i initialize af form
+' skal køres i initialize af form
 ' Call RemoveCaption(Me)
 Dim mhWndForm As Variant
 Dim lStyle As Variant
@@ -41,7 +41,7 @@ On Error GoTo slut
 
 '    Dim lStyle          As LongPtr
 '    Dim hMenu           As LongPtr
-'    Dim mhWndForm       As Long ' bedre som variant da den underst*oe*ttes af alle word
+'    Dim mhWndForm       As Long ' bedre som variant da den understøttes af alle word
 
     If val(Application.Version) < 14 Then
 '        mhWndForm = FindWindow("ThunderXFrame", objForm.Caption) 'XL97
@@ -62,7 +62,7 @@ slut:
 End Sub
 
 Sub RemoveCaption64bit(objForm As Object)
-' skal k*oe*res i initialize af form
+' skal køres i initialize af form
 ' Call RemoveCaption(Me)
 'Dim mhWndForm As Variant
 Dim lStyle As Variant

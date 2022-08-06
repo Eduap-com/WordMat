@@ -10,14 +10,14 @@ Attribute VB_Name = "ModuleChrText"
 '_  (sol)
 
 'problemer fra mac til windows
-'*pa*  (paragraf)
-'*eu* (euro alt 5)
+'§  (paragraf)
+'€ (euro alt 5)
 
 'Problemer fra windows til mac
 '_ (halv)
 '
 
 'Test
-'*oe* *ae* *aa* *a-* *e-* *o-* *A~*
-'*OE* *AE* *AA*
-'*gr* *u-* *n-* *i-* *?-*
+'ø æ å á é ó À
+'Ø Æ Å
+'° ú ñ í ¿
