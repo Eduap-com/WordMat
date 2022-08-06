@@ -76,8 +76,8 @@ Whenever a new release is compiled the following checklist must be followed
 8. Download a new version of GeoGebra Math apps bundle: https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding and place in Shared
 9. Build the Windows version
 10. Codesign the installer (Project owner only)
-11. Build the Mac version
-12. Create a new release on GitHub and upload the two installers
+11. Build the Mac M1 and intel versions
+12. Create a new release on GitHub and upload the 3 installers
 
 ## Buidling a new maxima.core
 The default installation of Maxima loads the compiled *maxima.core* file from this location:
