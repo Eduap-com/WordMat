@@ -6,8 +6,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
 AppName=WordMat
-AppVerName=WordMat v. 1.25.1
-VersionInfoVersion=1.25.1.0
+AppVerName=WordMat v. 1.25.2
+VersionInfoVersion=1.25.2.0
 AppMutex=WordMatMutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
@@ -197,8 +197,8 @@ Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {app}\WordDocs; Flags: ign
 Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
 Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\geogebra-math-apps\*; DestDir: {app}\geogebra-math-apps\; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\geogebra-math-apps\*; DestDir: {app}\geogebra-math-apps\; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: MathMenu.dll\MathMenu.dll; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: MathMenu.dll\MathMenu.tlb; DestDir: {app}; Flags: ignoreversion regtypelib overwritereadonly uninsremovereadonly
 
@@ -298,8 +298,8 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisable
 
 
 ; WordMat settings
-Root: HKCU; Subkey: "Software\WordMat"; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\WordMat"; Flags: 
+Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: 
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AllTrig"; ValueData: 0 ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Exact"; ValueData: 0 ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Separator"; ValueData: 0 ; Flags: uninsdeletekey
@@ -316,7 +316,7 @@ Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "E
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Gangetegn"; ValueData: 0 ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "OutUnits"; ValueData: "" ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Index"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Antalberegninger"; ValueData: 0 ; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AntalBeregninger"; ValueData: 0 ; Flags: createvalueifdoesntexist
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 0 ; Flags: uninsdeletekey
 ;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: TaskAutoStart
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey
@@ -386,6 +386,11 @@ Type: files; Name: "{code:VStartupFolderAll12}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll14}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll15}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll16}\WordMat.dotm"
+Type: filesandordirs; Name: "{app}\WebViewWrap"
+Type: filesandordirs; Name: "{app}\geogebra-math-apps"
+Type: filesandordirs; Name: "{app}\Maxima*"
+Type: dirifempty; Name: "{app}\WordDocs"
+Type: dirifempty; Name: "{app}"
 ;Type: files; Name: "{code:VUserStartupFolder12}\WordMat2.dotm"
 ;Type: files; Name: "{code:VUserStartupFolder14}\WordMat2.dotm"
 ;Type: files; Name: "{code:VStartupFolderAll12}\WordMat2.dotm"
@@ -1398,7 +1403,7 @@ begin
     //            if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
     if AntalBeregninger>0 then
     begin
-//    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
+    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
 //    if IsTaskSelected('AutoStart') then
       RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AutoStart', AutoStart);
 //    if IsTaskSelected('CheckForUpdate') then
