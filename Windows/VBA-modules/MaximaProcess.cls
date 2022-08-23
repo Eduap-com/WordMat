@@ -47,7 +47,7 @@ Sub StartMaximaProcess(Optional waittime As LongPtr = 15)
         r = StartMaxima()
     Else
         r = StartMaximaWait(waittime)
-    ' Mac: pga *ae*ndring af operator _, som ikke  virker p*aa* Mac. Skal vel v*ae*re i image. Er nu puttet i image v. 1.03.
+    ' Mac: pga ændring af operator _, som ikke  virker på Mac. Skal vel være i image. Er nu puttet i image v. 1.03.
 '        Dim Command As String
 '        Command = "infix(""##"",115,115)$""##""(qwa,qwb):=block(if scalarp(qwa) or scalarp(qwb) then return(qwa*qwb) else return(qwa.qwb))$" & Command
 '        ExecuteMaximaCommand Command, 5
@@ -243,7 +243,7 @@ slut:
 End Function
 
 Public Sub Reset(extrakommando As String)
-' bruges til at k*oe*re killdefs
+' bruges til at køre killdefs
 Dim Command As String
 
     If extrakommando <> vbNullString Then
@@ -253,7 +253,7 @@ Dim Command As String
     Command = "[" & Command & "reset(linenum,features,%rnum)]$"
     mIndex = 0 '    SetCommandIndex 0
     
-    ExecuteMaximaCommand Command, 1 ' *ae*ndret fra 5
+    ExecuteMaximaCommand Command, 1 ' ændret fra 5
 End Sub
 Function GetEmptyString() As String
 '    GetEmptyString = String(2000, vbNullChar)  'this will make strlen not work in c

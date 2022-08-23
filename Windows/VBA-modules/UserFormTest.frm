@@ -80,13 +80,13 @@ End Sub
 Sub AllTables()
     Dim Tabel As Table
 
-    TextBox_status.text = "ok/fejl | Tabel | R*ae*kke | Kommando " & vbCrLf
+    TextBox_status.text = "ok/fejl | Tabel | Række | Kommando " & vbCrLf
     For TabNo = 1 To ActiveDocument.Tables.Count
         Set Tabel = ActiveDocument.Tables(TabNo)
         TestTable Tabel
     Next
 
-    TextBox_status.text = TextBox_status.text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemf*oe*rt " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
+    TextBox_status.text = TextBox_status.text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemført " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
 
 
 fejl:

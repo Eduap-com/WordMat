@@ -54,9 +54,9 @@ If Not CheckBox_linjer.Value Then
 End If
 If ComboBox_kvalitet.ListIndex = 0 Then 'super
     grafobj = "x_voxel=18,y_voxel=18,z_voxel=18," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'meget h*oe*j
+ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'meget høj
     grafobj = "x_voxel=15,y_voxel=15,z_voxel=15," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' h*oe*j
+ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' høj
     grafobj = "x_voxel=12,y_voxel=12,z_voxel=12," & grafobj
 ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'lav
     grafobj = "x_voxel=5,y_voxel=5,z_voxel=5," & grafobj
@@ -90,8 +90,8 @@ End Sub
 Private Sub UserForm_Initialize()
     Me.Caption = Sprog.A(194) 'omdrejningslegeme
     ComboBox_kvalitet.AddItem Sprog.A(185) '("Super (Langsom)")
-    ComboBox_kvalitet.AddItem Sprog.A(184) '("Meget h*oe*j")
-    ComboBox_kvalitet.AddItem Sprog.A(183) '("H*oe*j")
+    ComboBox_kvalitet.AddItem Sprog.A(184) '("Meget høj")
+    ComboBox_kvalitet.AddItem Sprog.A(183) '("Høj")
     ComboBox_kvalitet.AddItem Sprog.A(182) '("Normal")
     ComboBox_kvalitet.AddItem Sprog.A(181) '("Lav")
     ComboBox_kvalitet.ListIndex = 3
@@ -105,9 +105,9 @@ Private Sub UserForm_Initialize()
     Label_quality.Caption = Sprog.A(191) ' quality
 #If Mac Then
     Label7.Caption = "" ' forklaring...
-    Label9.Caption = "" 'P*aa*virker rotationshastighed
+    Label9.Caption = "" 'Påvirker rotationshastighed
 #Else
-    Label9.Caption = Sprog.A(192) 'P*aa*virker rotationshastighed
+    Label9.Caption = Sprog.A(192) 'Påvirker rotationshastighed
     Label7.Caption = Sprog.A(193) ' forklaring...
 #End If
 End Sub

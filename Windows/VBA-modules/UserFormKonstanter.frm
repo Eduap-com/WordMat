@@ -89,18 +89,18 @@ Private Sub UserForm_Activate()
 End Sub
 
 Sub SetCaptions()
-' ChrW(&H2070)  opl*oe*ftet 0
-' 185  opl*oe*ftet i 1.
-' 178  opl*oe*ftet i 2.
-' chrw(179)  opl*oe*ftet i 3.
-' ChrW(&H207B)  opl*oe*ftet -
-' ChrW(&H2074)  opl*oe*ftet 4
-' ChrW(&H2075)  opl*oe*ftet 5
-' ChrW(&H2076)  opl*oe*ftet 6
-' ChrW(&H2077)  opl*oe*ftet 7
-' ChrW(&H2078)  opl*oe*ftet 8
-' ChrW(&H2079)  opl*oe*ftet 9
-' ChrW(&H2092)  s*ae*nket 0
+' ChrW(&H2070)  opløftet 0
+' 185  opløftet i 1.
+' 178  opløftet i 2.
+' chrw(179)  opløftet i 3.
+' ChrW(&H207B)  opløftet -
+' ChrW(&H2074)  opløftet 4
+' ChrW(&H2075)  opløftet 5
+' ChrW(&H2076)  opløftet 6
+' ChrW(&H2077)  opløftet 7
+' ChrW(&H2078)  opløftet 8
+' ChrW(&H2079)  opløftet 9
+' ChrW(&H2092)  sænket 0
     Dim g As String
     g = MaximaGangeTegn
     

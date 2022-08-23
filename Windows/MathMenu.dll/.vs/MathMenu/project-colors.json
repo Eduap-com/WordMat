@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "6c0b02f6-6afa-4e57-9e01-0be8d7efa2e6": {
+      "ProjectGuid": "6c0b02f6-6afa-4e57-9e01-0be8d7efa2e6",
+      "DisplayName": "MathFormForm",
+      "ColorIndex": 0
+    },
+    "4479921b-5f7d-4650-b540-b01f7fa13503": {
+      "ProjectGuid": "4479921b-5f7d-4650-b540-b01f7fa13503",
+      "DisplayName": "MathMenu",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

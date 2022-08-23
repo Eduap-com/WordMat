@@ -6,8 +6,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
 AppName=WordMat
-AppVerName=WordMat v. 1.24.1
-VersionInfoVersion=1.24.1.0
+AppVerName=WordMat v. 1.25.0
+VersionInfoVersion=1.25.0.0
 AppMutex=WordMatMutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
@@ -43,8 +43,8 @@ da.WelcomeLabel2=Denne guide installerer [name/ver] på computeren.%n%n Det anbef
 en.WelcomeLabel2=This guide installs [name/ver].%n%n It is recommended to close all programs.
 sp.WelcomeLabel2=Esta guía le instalará [name / ver] en su equipo.% N% n Se recomienda cerrar todas las aplicaciones que se ejecutan.
 
-da.FinishedLabel=Du vil nu have en ny værktøjslinje i Word.
-en.FinishedLabel=You will now have a new Ribbon in Word
+da.FinishedLabel=Du finder WordMat som en værktøjslinje i Word.
+en.FinishedLabel=You will find WordMat as a Ribbon in Word.
 sp.FinishedLabel=Ahora dispone de una nueva barra de herramientas en Word.
 
 [CustomMessages]
@@ -96,9 +96,9 @@ da.MakroDeakt2=Det anbefales at ændre denne indstilling, da WordMat ellers ikke 
 en.MakroDeakt2=It is recommended to change this setting, otherwise WordMat will not function. Press OK to change the setting to 'macros enabled with message', or cancel to continue without any change.
 sp.MakroDeakt2=Se recomienda cambiar esta configuración, de lo contrario WordMat no funcionará. Pulse Aceptar para cambiar el ajuste a 'macros habilitados con el mensaje', o en Cancelar para continuar sin ningún cambio.
 
-da.NoWord=Det ser ikke ud til at du har installeret Word 2007, 2010, 2013 eller 2016, og WordMat vil ikke fungere uden Word. Vil du alligevel fortsætte installationen?
-en.NoWord=Word 2007, 2010, 2013 or 2016 is not installed. The installation will terminate.
-sp.NoWord=Word 2007, 2010, 2013 o 2016 no está instalado. La instalación finalizará
+da.NoWord=Det ser ikke ud til at du har installeret Microsoft Word, og WordMat vil ikke fungere uden Word. Vil du alligevel fortsætte installationen?
+en.NoWord=Microsoft Word is not installed. WordMat will not function without it. Do you wish to continue?
+sp.NoWord=Word no está instalado. La instalación finalizará
 
 da.NoExcel=Du har ikke installeret Excel 2007, 2010, 2013 eller 2016. Installationen afsluttes.
 en.NoExcel=Excel 2007, 2010, 2013 or 2016 is not installed. The installation will terminate.
@@ -164,7 +164,7 @@ Source: WordMat.dotm; DestDir: {code:VStartupFolderAll16}; Check: VOffice16Insta
 Source: WordMat.dotm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: Other\WordMatLommeregner.docm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: ExternalPrograms\SetupGraph-4.4.2.exe; DestDir: {app}; Components: Graph ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
-Source: ExternalPrograms\GeoGebra-Windows-Installer-5-0-700-0.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
+Source: ExternalPrograms\GeoGebra-Windows-Installer-5-0-723-0.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 ;Source: GeoGebra-Windows-Installer-4-4-10-0.msi; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 Source: ..\Shared\WordDocs\FormelSamling.dotx; DestDir: {%appdata}\Microsoft\Document Building Blocks\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
 Source: Excelfiles\*; DestDir: {app}\ExcelFiles; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly
@@ -364,7 +364,7 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Options"; ValueType: st
 ;Filename:"{dotnet40}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
 Filename: {app}\SetupGraph-4.4.2.exe; Parameters: "/verysilent /SUPPRESSMSGBOXES"; StatusMsg: "Installerer Graph..."; check:InstallGraph; Components: Graph ; Flags: nowait
-Filename: {app}\GeoGebra-Windows-Installer-5-0-700-0.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;
+Filename: {app}\GeoGebra-Windows-Installer-5-0-723-0.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;
 ;Filename: msiexec; Parameters: "/i ""{app}\GeoGebra-Windows-Installer-4-4-10-0.msi"" /quiet";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra..."; Components: GeoGebra ;
 ;Filename: javaws ; Parameters: "-import -system -silent -association -shortcut http://www.geogebra.org/webstart/geogebra.jnlp"; StatusMsg: "Installerer GeoGebra...";
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
@@ -565,14 +565,14 @@ begin
 end;
 function VStartupFolderAll15(Param:String):String;
 begin
-  if ClickToRun then
+  if ClickToRun15 then
     Result:= UserStartupFolder15
   else
     Result:=Office15Folder + 'STARTUP';
 end;
 function VStartupFolderAll16(Param:String):String;
 begin
-  if ClickToRun then
+  if ClickToRun16 then
     Result:= UserStartupFolder16
   else
     Result:=Office16Folder + 'STARTUP';
@@ -860,6 +860,18 @@ begin
     if not(FileExists(foldername + 'winword.exe')) then
       try
       foldername := ExpandConstant('{pf64}\Microsoft Office\Office' + Param + '\');
+      except
+      end;
+
+    if not(FileExists(foldername + 'winword.exe')) then
+      try
+      foldername := ExpandConstant('{pf64}\Microsoft Office\root\Office' + Param + '\');
+      except
+      end;
+
+    if not(FileExists(foldername + 'winword.exe')) then
+      try
+      foldername := ExpandConstant('{pf32}\Microsoft Office\root\Office' + Param + '\');
       except
       end;
   
@@ -1317,7 +1329,12 @@ begin
   Result := True;
   if not (Word12Installed or Word14Installed or Word15Installed or Word16Installed) then begin
     if MsgBox(ExpandConstant('{cm:NoWord}'), mbInformation, MB_YESNO) = IDYES then
-      Result := True
+      begin
+      Result := True;
+      Office16Installed:=true;
+      Word16Installed:=true;
+      Excel16Installed:=true;
+      end
     else
       Result := False;
   end
@@ -1381,7 +1398,7 @@ begin
     //            if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
     if AntalBeregninger>0 then
     begin
-    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);
+//    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
 //    if IsTaskSelected('AutoStart') then
       RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AutoStart', AutoStart);
 //    if IsTaskSelected('CheckForUpdate') then

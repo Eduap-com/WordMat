@@ -83,7 +83,7 @@ Private Sub UserForm_Activate()
 
     If CASengine > 0 Then
         Label2.Caption = ""
-        Label_overskrift.Caption = "Hvordan vil du l*oe*se ligningen numerisk?"
+        Label_overskrift.Caption = "Hvordan vil du løse ligningen numerisk?"
         Label_omskrevet.Caption = ""
         Finished = True
         CommandButton_Omskrevet.visible = False
@@ -179,7 +179,7 @@ afslut:
     omax.MaximaOutput = Label_nsolve.Caption
     
     If Len(Label_nsolve.Caption) > 0 Then
-'        Label2.Caption = "Der blev fundet l*oe*sninger vha. automatiske numeriske metoder, men der findes m*aa*ske flere. Du kan enten n*oe*jes med de fundne l*oe*sninger eller fors*oe*ge at finde flere grafisk."
+'        Label2.Caption = "Der blev fundet løsninger vha. automatiske numeriske metoder, men der findes måske flere. Du kan enten nøjes med de fundne løsninger eller forsøge at finde flere grafisk."
         Label2.Caption = Sprog.FoundNumericSolutions
         CommandButton_nsolve.visible = True
         CommandButton_nsolve.SetFocus

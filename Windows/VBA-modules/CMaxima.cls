@@ -8,13 +8,13 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
-Public Kommando As String    ' kommando som maxima skal udf*oe*re
+Public Kommando As String    ' kommando som maxima skal udføre
 Public StartKommando As String
 Public KommandoForklaring As String ' til skrivning af kommando
-Private Kommandoer() As String    ' kommandoer som maxima skal udf*oe*re. KommandoerStreng m*aa* bruges public
+Private Kommandoer() As String    ' kommandoer som maxima skal udføre. KommandoerStreng må bruges public
 Public MaximaOutput As String    ' resultat fra Maxima
 Public KommentarOutput As String    ' evt. kommentar fra Maxima
-Private AntalKommandoer As Integer    ' bruges af runmaxima til at se hvorn*aa*r f*ae*rdig
+Private AntalKommandoer As Integer    ' bruges af runmaxima til at se hvornår færdig
 Public vars As String    ' variable i udtryk adskilt ad ;
 Public AntalVars As Integer    ' antal variable fundet af findvariable
 Private IntegrationVars As String    ' variable der bruges til integration skal ikke med i varlisten
@@ -23,8 +23,8 @@ Public MaximaInstalled As Boolean
 Public CmdTask As Task
 Public StopNow As Boolean
 Public TempDefs As String    ' midlertidige definitioner kun for denne kommando
-Public deffejl As Boolean    ' s*ae*ttes hvis der er fejl i definitioner
-Public Definitions As Boolean    ' s*ae*ttes hvis der er definitioner i dokumentet
+Public deffejl As Boolean    ' sættes hvis der er fejl i definitioner
+Public Definitions As Boolean    ' sættes hvis der er definitioner i dokumentet
 Public DefString As String    ' contains the output from finddefinition
 Public defstringtext As String    ' contains definitions from finddefinitions before ConvertToMaxima
 Private ldefname() As String    ' array med alle definitioner
@@ -34,15 +34,15 @@ Public KillDef As String    'indeholder listseparatoret liste over sidste defini
 Public ForgetList As String    ' indeholder liste over assumes der skal slettes
 Private Minput() As String
 Private moutput() As String
-Public ConvertErrorText As String    ' hvis der opst*aa*r fejl i fors*oe*get p*aa* at overs*ae*tte syntaks indeholder denne fejlteksten
+Public ConvertErrorText As String    ' hvis der opstår fejl i forsøget på at oversætte syntaks indeholder denne fejlteksten
 Public MaximaInputStreng As String
 Public MaximaInputStrengSec As String    ' secondary inputstring to be run after question
-Private matvekt As Boolean    ' s*ae*ttes hvis der registreres matricer. S*aa* aktiveres prik og krydsprodukt.
+Private matvekt As Boolean    ' sættes hvis der registreres matricer. Så aktiveres prik og krydsprodukt.
 Public matrixstartbracket As String
 Public matrixendbracket As String
 Private at As AutoTextEntry
 Public ConvertLnLog As Boolean    ' whethter converttomaxima converts ln(x) -> log(x) and log(x)-> log(x)/log(10)
-Public prevspr As String    ' bruges til n*aa*r Maxima spr. gentagne gange om det samme
+Public prevspr As String    ' bruges til når Maxima spr. gentagne gange om det samme
 Public prevsvar As String
 
 
@@ -70,14 +70,14 @@ Private Sub Class_Initialize()
     End If
     OpretTempdoc
 #End If
-    'If at Is Nothing Then ' giver fejl hvis k*oe*res i autoexec
+    'If at Is Nothing Then ' giver fejl hvis køres i autoexec
     '    Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
     'End If
 End Sub
 Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
     Dim DefS As String
     On Error Resume Next    ' der kommer fejl ved autoexec
-'    If at Is Nothing Then    ' giver fejl hvis k*oe*res i autoexec s*aa* skal ogs*aa* pr*oe*ves her . 19/2  bruges vel ikke mere
+'    If at Is Nothing Then    ' giver fejl hvis køres i autoexec så skal også prøves her . 19/2  bruges vel ikke mere
 '        Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
 '    End If
     StopNow = False
@@ -115,43 +115,43 @@ Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
 
     Exit Sub
 
-    ' skal nok bruges til mac p*aa* et tidspunkt:
+    ' skal nok bruges til mac på et tidspunkt:
     Dim fkommando As String
     MaximaInputStreng = "["
     'MaximaInputStreng = MaximaInputStreng & "display2d:false,"
     'MaximaInputStreng = MaximaInputStreng & "breakup:false$"  ' ikke dele udtryk op
-    'MaximaInputStreng = MaximaInputStreng & "fpprec:5$" 'antal cifre der skal bruges i beregninger, default 16 mindre g*oe*r beregninger upr*ae*cise
+    'MaximaInputStreng = MaximaInputStreng & "fpprec:5$" 'antal cifre der skal bruges i beregninger, default 16 mindre gør beregninger upræcise
     MaximaInputStreng = MaximaInputStreng & "fpprintprec:" & MaximaCifre & ","    ' antal cifre der skal vises fpprec styrer hvor mange der skal bruges i beregninger
-    MaximaInputStreng = MaximaInputStreng & "ratprint:false,"    'ingen advarsel om konvertering fra decimal til br*oe*k
-    MaximaInputStreng = MaximaInputStreng & "ratsimpexpons:true,"  ' simplificer ogs*aa* eksponenter,
-    MaximaInputStreng = MaximaInputStreng & "algebraic:false,"  ' false er default value, simplifikation af algebraiske heltal bl.a. noget med %i. Udtryk der er relle bliver ikke reduceret s*aa* %i fjernes helt hvis denne er false
+    MaximaInputStreng = MaximaInputStreng & "ratprint:false,"    'ingen advarsel om konvertering fra decimal til brøk
+    MaximaInputStreng = MaximaInputStreng & "ratsimpexpons:true,"  ' simplificer også eksponenter,
+    MaximaInputStreng = MaximaInputStreng & "algebraic:false,"  ' false er default value, simplifikation af algebraiske heltal bl.a. noget med %i. Udtryk der er relle bliver ikke reduceret så %i fjernes helt hvis denne er false
     MaximaInputStreng = MaximaInputStreng & "logexpand:super,"  ' alle log regneregler
-    'MaximaInputStreng = MaximaInputStreng & "realonly:" & VBA.LCase(MaximaComplex) & "," 'reelle eller komplekse l*oe*sninger, men kun til algsys
+    'MaximaInputStreng = MaximaInputStreng & "realonly:" & VBA.LCase(MaximaComplex) & "," 'reelle eller komplekse løsninger, men kun til algsys
     If MaximaComplex Then
         MaximaInputStreng = MaximaInputStreng & "domain:complex,"  '
     Else
-        MaximaInputStreng = MaximaInputStreng & "realonly:true,"    'reelle eller komplekse l*oe*sninger, men kun til algsys
+        MaximaInputStreng = MaximaInputStreng & "realonly:true,"    'reelle eller komplekse løsninger, men kun til algsys
     End If
     If MaximaExact = 2 Then
-        MaximaInputStreng = MaximaInputStreng & "numer:true,"  ' numeriske l*oe*sninger
+        MaximaInputStreng = MaximaInputStreng & "numer:true,"  ' numeriske løsninger
     Else
         MaximaInputStreng = MaximaInputStreng & "numer:false,"  ' exact
     End If
     If MaximaUnits Then
         MaximaInputStreng = MaximaInputStreng & "load(unit),setunits([N,J,W]),"    'enheder har nok bugs
     Else
-        '    MaximaInputStreng = MaximaInputStreng & "load(noninteractive)," 'nogle gange sp*oe*rges om fortegn p*aa* variable. giver output differentieret. er vidst ikke stabil
+        '    MaximaInputStreng = MaximaInputStreng & "load(noninteractive)," 'nogle gange spørges om fortegn på variable. giver output differentieret. er vidst ikke stabil
     End If
     If Not Radians Then
-        '    MaximaInputStreng = MaximaInputStreng & "HasInvTrig(udt):=block([i,del],partswitch:true,i:0,start,del:inpart(udt,i),if del=end then return (false),if del=asin then return (true),if del=acos then return (true),if del=atan then return (true), i:i+1, go (start))," ' n*oe*dvendigt at checke for inverse trig da det tager ca. 0,5s ekstra at implicere inverse trig funktioner uden grund
+        '    MaximaInputStreng = MaximaInputStreng & "HasInvTrig(udt):=block([i,del],partswitch:true,i:0,start,del:inpart(udt,i),if del=end then return (false),if del=asin then return (true),if del=acos then return (true),if del=atan then return (true), i:i+1, go (start))," ' nødvendigt at checke for inverse trig da det tager ca. 0,5s ekstra at implicere inverse trig funktioner uden grund
         '    MaximaInputStreng = MaximaInputStreng & "ConvertToDegr(udt):=block([aliz],remfunction(sing),matchdeclare(aliz,all),tellsimp(sin(aliz),sing(180/%pi*aliz)),tellsimp(cos(aliz),cosg(180/%pi*aliz)),tellsimp(tan(aliz),tang(180/%pi*aliz)),if not(HasInvTrig(udt)) then go(slut),tellsimp(asin(aliz),%pi/180*asing(aliz)),tellsimp(acos(aliz),%pi/180*acosg(aliz)),tellsimp(atan(aliz),%pi/180*atang(aliz)),slut,udt:ev(udt,simp),clear_rules(),udt),"
     End If
 
     'MaximaInputStreng = MaximaInputStreng & "assume_pos_pred:true," '
-    'MaximaInputStreng = MaximaInputStreng & "assume_pos:true," 'nogle gange sp*oe*rges om fortegn p*aa* variable. Nu antages pos. Men s*aa* kan den ikke l*oe*se y2/y1=(x2/x1)^a for a
-    MaximaInputStreng = MaximaInputStreng & "radexpand:true,"  ' default true, styrer reduktion af r*oe*dder. hvis all er sqrt(x^2)=x hvis true sqrt(x^2)=abs(x) ' all giver problemer ved reduktion af imagin*ae*re udtryk til reelle
-    MaximaInputStreng = MaximaInputStreng & "listconstvars:true,"  ' for at %i ogs*aa* kommer med blandt variable s*aa* kompleks kan findes
-    MaximaInputStreng = MaximaInputStreng & "solveradcan:false"    'default false, kan l*oe*se flere ligninger men langsommere. Bl.a. bruges log nu som l*oe*sning. Men kan ikke l*oe*se f.eks. 20=3*x^2.9 s*aa*
+    'MaximaInputStreng = MaximaInputStreng & "assume_pos:true," 'nogle gange spørges om fortegn på variable. Nu antages pos. Men så kan den ikke løse y2/y1=(x2/x1)^a for a
+    MaximaInputStreng = MaximaInputStreng & "radexpand:true,"  ' default true, styrer reduktion af rødder. hvis all er sqrt(x^2)=x hvis true sqrt(x^2)=abs(x) ' all giver problemer ved reduktion af imaginære udtryk til reelle
+    MaximaInputStreng = MaximaInputStreng & "listconstvars:true,"  ' for at %i også kommer med blandt variable så kompleks kan findes
+    MaximaInputStreng = MaximaInputStreng & "solveradcan:false"    'default false, kan løse flere ligninger men langsommere. Bl.a. bruges log nu som løsning. Men kan ikke løse f.eks. 20=3*x^2.9 så
     MaximaInputStreng = MaximaInputStreng & "]$"
     'If MaximaUnits Then
     '    MaximaInputStreng = MaximaInputStreng & "setunits([N,J])$"  '
@@ -184,7 +184,7 @@ End Sub
 Public Sub ResetMaxima()
     Dim kd As String
     
-#If Mac Then ' indf*oe*rt fra version 1.23
+#If Mac Then ' indført fra version 1.23
     KillDef = ""
     ForgetList = ""
     Exit Sub
@@ -273,7 +273,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         '        Wait (2)
         If StopNow Then GoTo slut
         If MaxProc.Question = 1 Then
-            AnswerQuestion StopTime, False ' muligvis problematisk efter *ae*ndret til at form kan vises med answerquestion
+            AnswerQuestion StopTime, False ' muligvis problematisk efter ændret til at form kan vises med answerquestion
 #If Mac Then
             MaxProc.WaitForMaximaUntil (-1 * StopTime)
 #Else
@@ -296,7 +296,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         FindLastMaximaOutput
         ResetMaxima
         Unload UfWait2
-        '        MaxProc.CloseProcess ' g*oe*r at den h*ae*nger lidt, m*aa*ske n*oe*dvendig
+        '        MaxProc.CloseProcess ' gør at den hænger lidt, måske nødvendig
         ShowDebug
         Exit Sub
         GoTo slut
@@ -360,12 +360,12 @@ slut:
 End Sub
 Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) As String
 ' Converts a maxima expression, using the maxima-image with units loaded
-#If Mac Then ' noget af nedenst*aa*ende m*aa* kunne bruges, men f*oe*rst pr*oe*ves dette
+#If Mac Then ' noget af nedenstående må kunne bruges, men først prøves dette
     ConvertMaximaUnits = Expr
 #Else
     Dim i As Integer, k As String, Arr As Variant
     
-    Expr = Replace(Expr, """", "") ' svaret vil typisk v*ae*re k*oe*rt igennem num-funktion der tilf*oe*jer "" om tal
+    Expr = Replace(Expr, """", "") ' svaret vil typisk være kørt igennem num-funktion der tilføjer "" om tal
     
     If basedim Then ' all units are reverted to base SI-units
         k = Expr & ",numer;applyb1(%,unitrule),numer;dectalallNum(%),numer;"
@@ -374,7 +374,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         k = k & "setunits(usersetunits);"
         If Not OutUnits = vbNullString Then
             Arr = Split(OutUnits, ",")
-            For i = 0 To UBound(Arr) ' Det skal g*oe*res p*aa* denne m*aa*de fordi man ikke kan k*oe*re setunits p*aa* en liste hvor der optr*ae*der den samme type enhed to gange. fx eV og J
+            For i = 0 To UBound(Arr) ' Det skal gøres på denne måde fordi man ikke kan køre setunits på en liste hvor der optræder den samme type enhed to gange. fx eV og J
                 k = k & "setunits(" & omax.ConvertUnits(Arr(i)) & ")$"
             Next
         End If
@@ -383,7 +383,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         If MaximaVidNotation Then
             k = k & "scinotall(%);"
         Else
-'            k = k & "dectalallNum(%),numer;" ' giver problemer for enheder med % prefix da enhederne s*aa* vises f*oe*rst.
+'            k = k & "dectalallNum(%),numer;" ' giver problemer for enheder med % prefix da enhederne så vises først.
             k = k & "%,numer;"
         End If
     End If
@@ -437,7 +437,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
             '            ufwait2.Label_tip.Caption = "       Det tager sin tid..."
             '        ElseIf i = 250 Then
             '            ufwait2.Label_progress.Caption = "**"
-            '            ufwait2.Label_tip.Caption = " Jeg arbejder stadig p*aa* det."
+            '            ufwait2.Label_tip.Caption = " Jeg arbejder stadig på det."
             '        ElseIf i = 350 Then
             '            ufwait2.Label_tip.Caption = "Tryk evt. stop nu."
             '        ElseIf stoptime > 450 Then
@@ -522,7 +522,7 @@ Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
         ElseIf InStr(MaxProc.LastMaximaOutput, " integer?") And MaximaComplex = False Then
             svar = "y"
         ElseIf InStr(MaxProc.LastMaximaOutput, "Is the matrix  1. Diagonal  2. Symmetric  3. Antisymmetric  4. General") Then
-            svar = InputBox(MaxProc.LastMaximaOutput, "spr", "")    ' MaxProc.Question skal f*oe*rst til passes
+            svar = InputBox(MaxProc.LastMaximaOutput, "spr", "")    ' MaxProc.Question skal først til passes
         ElseIf InStr(MaxProc.LastMaximaOutput, "variables to solve for?") Then
             Dim antalvar As Integer, var As String, ea As New ExpressionAnalyser, sprtext As String
             Pos = InStr(MaxProc.LastMaximaOutput, " variables to solve for?")
@@ -556,7 +556,7 @@ igen:
 
     If answered And MaximaInputStrengSec <> "" Then
         MaximaInputStrengSec = "%th(2);" & MaximaInputStrengSec    ' pga. slutprut skal hoppes over.
-        If right(MaximaInputStrengSec, 1) = ";" Then    ' ved answerquestion s*ae*ttes automatisk ;
+        If right(MaximaInputStrengSec, 1) = ";" Then    ' ved answerquestion sættes automatisk ;
             MaximaInputStrengSec = Left(MaximaInputStrengSec, Len(MaximaInputStrengSec) - 1)
         End If
         MaxProc.AnswerQuestion (MaximaInputStrengSec)
@@ -577,7 +577,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
         WT = "5"
     End If
     Set UfWait2 = New UserFormWaitForMaxima
-    On Error Resume Next ' hvis en form allerede er *aa*ben giver det fejl
+    On Error Resume Next ' hvis en form allerede er åben giver det fejl
     UfWait2.Show vbModeless
     UfWait2.Label_tip.Font.Size = 10
     UfWait2.Label_tip.Font.Italic = False
@@ -588,7 +588,7 @@ start:
   FN = DataFolder & "output.txt"
     s = ExecuteMaximaViaFile(MaximaInputStreng, WT, MaximaUnits)
     If Left(s, 5) = "Fejln" Then
-        WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du pr*oe*ve igen, og hvor lang tid vil du vente. (sekunder) Computeren l*aa*ses i ventetiden.", "Afbrudt", 20)
+        WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.", "Afbrudt", 20)
         If Trim(WT) <> "" Then
             WT = Trim(WT)
             GoTo start
@@ -620,12 +620,12 @@ Public Sub RunMaximaFileOld()
     Dim i As Integer
 
     'UserFormWaitForMaxima.sh
-    shellcmd = "cmd /C " & maximasti & " < " & inputfil & " > " & outputfil   '/K holder cmd *aa*ben
-    'shellcmd = "cmd /C " & maximasti & " maxima.bat < " & InputFil & " > " & OutputFil   '/K holder cmd *aa*ben
-    'shellcmd = "cmd /C " & maximasti & " start /high ""maxima.bat < " & InputFil & " > " & OutputFil & """"   '/K holder cmd *aa*ben
+    shellcmd = "cmd /C " & maximasti & " < " & inputfil & " > " & outputfil   '/K holder cmd åben
+    'shellcmd = "cmd /C " & maximasti & " maxima.bat < " & InputFil & " > " & OutputFil   '/K holder cmd åben
+    'shellcmd = "cmd /C " & maximasti & " start /high ""maxima.bat < " & InputFil & " > " & OutputFil & """"   '/K holder cmd åben
     appnr = Shell(shellcmd, vbHide)    'vbNormalFocus vbMinimizedNoFocus vbhide
 
-    ' vent p*aa* maxima har genereret outputfil
+    ' vent på maxima har genereret outputfil
     i = 0
     Do
         i = i + 1
@@ -634,7 +634,7 @@ Public Sub RunMaximaFileOld()
 
     FindCmdTask    ' find kommandoprompten mens der ventes alligevel
 
-    ' vent p*aa* outputfilen er skrevet f*ae*rdig
+    ' vent på outputfilen er skrevet færdig
 ventmere:
     If WaitForMaxima(30) Then
         FindLastMaximaOutput
@@ -651,11 +651,11 @@ ventmere:
         '    End If
         CloseCmd
 
-        '    MsgBox "Maxima tog meget lang tid om beregningen. S*aa* den blev afsluttet inden den var f*ae*rdig.", vbOKOnly, "Fejl"
+        '    MsgBox "Maxima tog meget lang tid om beregningen. Så den blev afsluttet inden den var færdig.", vbOKOnly, "Fejl"
     End If
 
 
-    ' vent p*aa* maximakommandoprompt er lukket
+    ' vent på maximakommandoprompt er lukket
     'Dim maximaopen As Boolean
     'maximaopen = False
     'Do
@@ -694,7 +694,7 @@ Public Sub RunwxMaxima()
 
     shellcmd = maximasti & " /o " & inputfil
 
-    Result = MsgBox("Det er ikke muligt at l*oe*se problemet uden at stille nogle sp*oe*rgsm*aa*l." & vbCrLf & "Du bliver nu sendt til wxMaxima hvor du skal svare p*aa* et eller flere sp*oe*rgsm*aa*l. Angiv svar som y for yes eller n for no etc. tryk shift-enter efter svarene." & vbCrLf & vbCrLf & "Det resulterende udtryk kan s*aa* kopieres til Word igen.", vbOKCancel, "wxMaxima")
+    Result = MsgBox("Det er ikke muligt at løse problemet uden at stille nogle spørgsmål." & vbCrLf & "Du bliver nu sendt til wxMaxima hvor du skal svare på et eller flere spørgsmål. Angiv svar som y for yes eller n for no etc. tryk shift-enter efter svarene." & vbCrLf & vbCrLf & "Det resulterende udtryk kan så kopieres til Word igen.", vbOKCancel, "wxMaxima")
 
     If Result = vbOK Then
         appnr = Shell(shellcmd, vbNormalFocus)    'vbNormalFocus vbMinimizedNoFocus vbhide
@@ -703,8 +703,8 @@ Public Sub RunwxMaxima()
 End Sub
 
 Public Function WaitForMaxima(t As Integer) As Boolean
-' vent p*aa* outputfil er genereret f*ae*rdig eller indtil der er g*aa*et t sekunder
-' returnerer true hvis den er f*ae*rdig
+' vent på outputfil er genereret færdig eller indtil der er gået t sekunder
+' returnerer true hvis den er færdig
     Dim fillen As Integer
     Dim fillen2 As Integer
     Dim i As Integer
@@ -725,7 +725,7 @@ Public Function WaitForMaxima(t As Integer) As Boolean
             CloseCmd
             Exit Function
         End If
-    Loop Until (fillen >= 297 And InStr(280, filtext, "(%i" & AntalKommandoer & ")") > 0) Or i > t * 10 Or fillen > 4000 Or InStr(279, filtext, "Incorrect syntax")  ' 301 er korteste mulige outputfil der er f*ae*rdig
+    Loop Until (fillen >= 297 And InStr(280, filtext, "(%i" & AntalKommandoer & ")") > 0) Or i > t * 10 Or fillen > 4000 Or InStr(279, filtext, "Incorrect syntax")  ' 301 er korteste mulige outputfil der er færdig
     'ekstra sikkerhed fjernet: fillen = fillen2 And
     'MsgBox Len(FilOutput)
 
@@ -818,8 +818,8 @@ Sub InsertKillDef()
 
 End Sub
 Sub AddStandardSecondary()
-' typisk skal denne k*oe*res efter maximastregen er sat op til at k*oe*re kommandoen
-' denne s*oe*rger s*aa* for at output kommer som anvist i indstillinger
+' typisk skal denne køres efter maximastregen er sat op til at køre kommandoen
+' denne sørger så for at output kommer som anvist i indstillinger
 
     If MaximaVidNotation Then     ' videnskabelig notation
         MaximaInputStrengSec = MaximaInputStrengSec & "scinotall(%),numer"    ' uden ,numer bliver der ikke reduceret i udtrykket sqrt(2) f.eks.
@@ -836,10 +836,10 @@ Sub AddStandardSecondary()
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec & ";"
 End Sub
 Public Sub ExecuteMaximaCommand(Optional MaxCmd As String, Optional TranslateToMaxima As Boolean = False)
-' udf*oe*rer den kommando som er i kommando-strengen eller angives som parameter
+' udfører den kommando som er i kommando-strengen eller angives som parameter
     Dim text As String
     If MaxCmd <> "" Then
-        Kommando = MaxCmd    ' VBA.LCase m*aa*ske
+        Kommando = MaxCmd    ' VBA.LCase måske
     End If
 
 
@@ -848,7 +848,7 @@ Public Sub ExecuteMaximaCommand(Optional MaxCmd As String, Optional TranslateToM
         MaximaInputStreng = MaximaInputStreng & CodeForMaxima(Kommando) & ";"
     Else
         text = Kommando
-        text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
+        text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
         text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
         text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
         text = Replace(text, vbLf, "")    ' shift-enter og enter
@@ -909,14 +909,14 @@ start:
     End If
 
     If MaximaExact = 2 Then
-        rkommando = "ev(%,numer)"    ' fors*oe*g p*aa* at l*oe*se : 6^2=5^2+3^2-2*5*3*cos(C) l*oe*s for C med numer, giver delvist eksakt
+        rkommando = "ev(%,numer)"    ' forsøg på at løse : 6^2=5^2+3^2-2*5*3*cos(C) løs for C med numer, giver delvist eksakt
     Else
         rkommando = "ev(%)"    ' kommando hvor log og sin konverteres
     End If
-    '    rkommando = "ev(%th(2))" ' kommando hvor log og sin konverteres  th2 pga slutprut n*aa*r der bruges answerquestion
+    '    rkommando = "ev(%th(2))" ' kommando hvor log og sin konverteres  th2 pga slutprut når der bruges answerquestion
 
 
-    '    If Not Radians And Not MaximaExact = 2 Then ' kan ikke huske hvorfor  not num, men det er et problem n*aa*r der kommer udtryk med variabel
+    '    If Not Radians And Not MaximaExact = 2 Then ' kan ikke huske hvorfor  not num, men det er et problem når der kommer udtryk med variabel
     If Not Radians Then
         rkommando = "ConvertToDegr(" & rkommando & ")"
     End If
@@ -932,15 +932,15 @@ start:
 
     ' inputstrengen bygges op**************
 
-    ' f*oe*rst en simpel reducering af ligningen. nok ikke n*oe*dvendig. Giver problemer med sp*oe*rgsm*aa*l da kommando med spr. er sidste der udf*oe*res
+    ' først en simpel reducering af ligningen. nok ikke nødvendig. Giver problemer med spørgsmål da kommando med spr. er sidste der udføres
     '    If MaximaExact = 2 Then
     '        MaximaInputStreng = MaximaInputStreng & "fullratsimp(" & ckommando & "),numer;"
     '    Else
     '        MaximaInputStreng = MaximaInputStreng & ckommando & ";"
     '    End If
     
-    If MaximaUnits Then 'reducer f*oe*rst enheder p*aa* udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
-        If Not (InStr(ckommando, "diff") > 0 And InStr(ckommando, "subst") > 0) Then ' hvis der indg*aa*r noget f' m*aa* det ikke reduceres inden
+    If MaximaUnits Then 'reducer først enheder på udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
+        If Not (InStr(ckommando, "diff") > 0 And InStr(ckommando, "subst") > 0) Then ' hvis der indgår noget f' må det ikke reduceres inden
             ckommando = Replace(ConvertMaximaUnits(ckommando), """", "")
         End If
     End If
@@ -949,10 +949,10 @@ start:
 '        MaximaInputStreng = MaximaInputStreng & "rhs(" & ckommando & ");"    ' kryptisk, men ellers kan komme lisp fejl f.eks. (-t+1)*m/s=0
 '        MaximaInputStreng = MaximaInputStreng & "lhs(" & ckommando & ");"    ' kryptisk, men ellers kan komme lisp fejl f.eks. -(252178095*m*x-206157266*m)/(342482374*s)=0
 '        MaximaInputStreng = MaximaInputStreng & "%=%th(2);"    ' kryptisk, men ellers kan komme lisp fejl f.eks. (-t+1)*m/s=0
-'        MaximaInputStreng = MaximaInputStreng & "fullratsimp(%),numer;"    ' hvis lisp fejl p*aa* denne bliver % bare lig forrige
+'        MaximaInputStreng = MaximaInputStreng & "fullratsimp(%),numer;"    ' hvis lisp fejl på denne bliver % bare lig forrige
 '        MaximaInputStreng = MaximaInputStreng & "applyunitrule(lhs(%)-rhs(%))=0;"
 '        MaximaInputStreng = MaximaInputStreng & "CSolve(%," & variabel & ");"
-    If MaximaExact = 2 Then    ' n*oe*dvendigt for at trig ligninger med sing ikke l*oe*ses eksakt
+    If MaximaExact = 2 Then    ' nødvendigt for at trig ligninger med sing ikke løses eksakt
         MaximaInputStreng = MaximaInputStreng & "Solve(ev(" & ckommando & ",numer)," & variabel & ");"
     Else
         MaximaInputStreng = MaximaInputStreng & "Solve(" & ckommando & "," & variabel & ");"
@@ -962,7 +962,7 @@ start:
     '    RunMaxima reset:=False
     '    MaximaInputStreng = ""
 
-    MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    's*aa* log og trig konverteringer
+    MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    'så log og trig konverteringer
 
 
     AddStandardSecondary
@@ -1040,7 +1040,7 @@ start:
         End If
 
         '    MaximaOutput = Replace(MaximaOutput, "%i", "i")
-    End If    ' slut p*aa* L=*oe*
+    End If    ' slut på L=ø
     ResetMaxima
 
     If gemMaxExct >= 0 Then MaximaExact = gemMaxExct
@@ -1079,7 +1079,7 @@ Sub MaximaSolveInequality(variabel As String)
 
     nr = UBound(Minput)
     If Not MaximaExact = 2 Then
-        If InStr(moutput(nr - 1), variabel & " = ") > 0 Then    ' hvis l*oe*st analytisk skal analytisk l*oe*sning bruges ellers numerisk
+        If InStr(moutput(nr - 1), variabel & " = ") > 0 Then    ' hvis løst analytisk skal analytisk løsning bruges ellers numerisk
             MaximaOutput = ConvertToWordSymbols(moutput(nr - 1))
         Else
             MaximaOutput = ConvertToWordSymbols(MaximaOutput)
@@ -1123,7 +1123,7 @@ Sub MaximaSolveInequality(variabel As String)
                 Arr = Split(MaximaOutput, ListSeparator)
                 MaximaOutput = ""
                 For i = 0 To UBound(Arr)
-                    If InStr(Arr(i), "%i") < 1 Then     'kun reelle l*oe*sninger
+                    If InStr(Arr(i), "%i") < 1 Then     'kun reelle løsninger
                         If MaximaOutput <> "" Then MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    "
                         MaximaOutput = MaximaOutput & Arr(i)
                     End If
@@ -1149,14 +1149,14 @@ Sub MaximaSolveNumeric(ByVal variabel As String, ByVal guess As String, Optional
         eps = "10^-" & eps
     End If
     If InStr(Kommando, "=") < 1 Then
-        Kommentar = "Der skal v*ae*re et ligmed tegn i en ligning."
+        Kommentar = "Der skal være et ligmed tegn i en ligning."
         MaximaOutput = ""
         Exit Sub
     End If
-    Kommando = Replace(Kommando, "=", "-(") & ")"    ' skal v*ae*re udtryk ikke ligning. Dette s*ae*ttes lig nul
+    Kommando = Replace(Kommando, "=", "-(") & ")"    ' skal være udtryk ikke ligning. Dette sættes lig nul
     Kommando = "newton(" & CodeForMaxima(Kommando) & "," & variabel & "," & guess & "," & eps & ")"
     MaximaInputStreng = MaximaInputStreng & "[ratsimpexpons:false,load(""newton1"")]$" & Kommando & ";"
-    ' af uransagelige *aa*rsager kan der komme eksakte l*oe*sninger ud
+    ' af uransagelige årsager kan der komme eksakte løsninger ud
 
     If MaximaVidNotation Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer"  ' uden ,numer bliver der ikke reduceret i udtrykket sqrt(2) f.eks.
@@ -1194,7 +1194,7 @@ Sub MaximaFindRoot(ByVal variabel As String, ByVal xmin As String, ByVal xmax As
     If eps = "" Then
         eps = "10^-" & MaximaCifre
     End If
-    Kommando = Replace(Kommando, "=", "-(") & ")"    ' skal v*ae*re udtryk ikke ligning. Dette s*ae*ttes lig nul
+    Kommando = Replace(Kommando, "=", "-(") & ")"    ' skal være udtryk ikke ligning. Dette sættes lig nul
     Kommando = "find_root(" & CodeForMaxima(Kommando) & "," & variabel & "," & xmin & "," & xmax & ")"
     MaximaInputStreng = MaximaInputStreng & "[ratsimpexpons:false]$" & Kommando & ";"
 
@@ -1283,7 +1283,7 @@ Sub SolveSystem(Variable As String)
 
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139) & "Der skal v*ae*re et ligmed tegn i en ligning."
+        Kommentar = Sprog.A(139) & "Der skal være et ligmed tegn i en ligning."
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1294,7 +1294,7 @@ Sub SolveSystem(Variable As String)
     End If
 
     rkommando = "ev(%)"    ' kommando hvor log og sin konverteres
-    '    If Not Radians And Not MaximaExact = 2 Then ' kan ikke huske hvorfor  not num, men det er et problem n*aa*r der kommer udtryk med variabel
+    '    If Not Radians And Not MaximaExact = 2 Then ' kan ikke huske hvorfor  not num, men det er et problem når der kommer udtryk med variabel
     If Not Radians Then
         rkommando = "ConvertToDegr(" & rkommando & ")"
     End If
@@ -1315,8 +1315,8 @@ Sub SolveSystem(Variable As String)
         Kommando = Kommando & "," & CodeForMaxima(Kommandoer(i))
     Next
 
-    ' ikke sikker p*aa* at dette er godt ved ligningssystemer
-'    If MaximaUnits Then 'reducer f*oe*rst enheder p*aa* udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
+    ' ikke sikker på at dette er godt ved ligningssystemer
+'    If MaximaUnits Then 'reducer først enheder på udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
 '        ckommando = Replace(ConvertMaximaUnits(ckommando), """", "")
 '    End If
     
@@ -1332,7 +1332,7 @@ Sub SolveSystem(Variable As String)
     Kommando = Kommando & "]"
     Variable = "[" & Variable & "]"
 
-    If MaximaExact = 2 Then    ' n*oe*dvendigt for at trig ligninger med sing ikke l*oe*ses eksakt
+    If MaximaExact = 2 Then    ' nødvendigt for at trig ligninger med sing ikke løses eksakt
         Kommando = "Solve(ev(" & Kommando & ",numer)," & Variable & ")"
     Else
         Kommando = "Solve(" & Kommando & "," & Variable & ")"
@@ -1353,7 +1353,7 @@ Sub SolveSystem(Variable As String)
         MaximaInputStreng = MaximaInputStreng & ",autonsolve=true;"
     End If
 
-    MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    's*aa* log og trig konverteringer
+    MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    'så log og trig konverteringer
 
     AddStandardSecondary
 
@@ -1370,7 +1370,7 @@ Sub Eliminate(Variable As String)
     Dim Arr As Variant
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139) '"Der skal v*ae*re et ligmed tegn i en ligning."
+        Kommentar = Sprog.A(139) '"Der skal være et ligmed tegn i en ligning."
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1434,7 +1434,7 @@ Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional
     Dim i As Integer
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139) '"Der skal v*ae*re et ligmed tegn i en ligning."
+        Kommentar = Sprog.A(139) '"Der skal være et ligmed tegn i en ligning."
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1484,11 +1484,11 @@ Sub beregn()
     '    kommando = Replace(kommando, VBA.ChrW(12311), "") ' specielle usynlige paranteser fjernes
     Kommando = Trim(Kommando)    ' fjern mellemrum duer ikke da 1/5 2 bliver til 1/52
 
-    If right(Kommando, 1) = "=" Then    ' fjern ligmed hvis det er yderst til h*oe*jre
+    If right(Kommando, 1) = "=" Then    ' fjern ligmed hvis det er yderst til højre
         Kommando = Left(Kommando, Len(Kommando) - 1)
     End If
 
-    Do    ' g*aa* tilbage til n*ae*rmeste ligmed
+    Do    ' gå tilbage til nærmeste ligmed
         posligmed = InStr(Kommando, "=")
         possumtegn = InStr(Kommando, VBA.ChrW(8721))
         '    posprodtegn = InStr(Kommando, VBA.ChrW(8719))
@@ -1504,13 +1504,13 @@ Sub beregn()
     Loop While posligmed > 0
 
 start:
-    StartKommando = Kommando    ' kommando f*oe*r der bliver pillet ved den
+    StartKommando = Kommando    ' kommando før der bliver pillet ved den
     StartKommando3 = Kommando
     
-    pkommando = Kommando    ' kommando f*oe*r der bliver pillet ved den
+    pkommando = Kommando    ' kommando før der bliver pillet ved den
     pkommando = Replace(pkommando, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes, giver problemer at fjerne her
     pkommando = Replace(pkommando, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
-    '    pkommando = Replace(pkommando, " ", "") ' ikke altid optimalt men nok det bedste. nej ikke efter underforst*aa*ede gangetegn
+    '    pkommando = Replace(pkommando, " ", "") ' ikke altid optimalt men nok det bedste. nej ikke efter underforståede gangetegn
 
 '    StartKommando2 = pkommando ' til at sammenligne om numerisk resultat er lig input
 '    StartKommando2 = Replace(StartKommando2, "sin", "sing")
@@ -1519,7 +1519,7 @@ start:
 '    StartKommando2 = Replace(StartKommando2, "log10", "lgog")
 
 
-' *ae*ndret pga maximaimage
+' ændret pga maximaimage
 '    If MaximaUnits Then
 '        '        kommando = CodeForMaxima(kommando) & ";applyunitrule(%)"
 '        Kommando = "applyunitrule(" & CodeForMaxima(Kommando) & ")"
@@ -1539,7 +1539,7 @@ start:
     If Not Radians Then
         inkom = "ConvertToDegr(" & inkom & ")"
     End If
-    '    If Not MaximaExact = 2 Then ' kan give m*ae*rkelig resultat #1,INF med ,numer   72*e^((0.619/0.22*(e^22-e^0.22*t )) )
+    '    If Not MaximaExact = 2 Then ' kan give mærkelig resultat #1,INF med ,numer   72*e^((0.619/0.22*(e^22-e^0.22*t )) )
     ''        inkom = "fullratsimp(" & inkom & ")"
     '        inkom = "simplify(" & inkom & ")"
     '    End If
@@ -1558,20 +1558,20 @@ start:
         MaximaInputStrengSec = "ev(" & inkom & ",numer);scinotall(%);ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"    ' ,numer fjernet fra scinot
         MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
     ElseIf MaximaExact = 2 Or MaximaUnits Then    ' enheder overrider, overrider auto,exact,num
-        '        MaximaInputStreng = MaximaInputStreng & kommando & ",numer;" & inkom & ";%,numer;" ' m*aa*ske bruge dectalall for at f*aa* mere pr*ae*cis antal bet cifre
+        '        MaximaInputStreng = MaximaInputStreng & kommando & ",numer;" & inkom & ";%,numer;" ' måske bruge dectalall for at få mere præcis antal bet cifre
         If MaximaBigFloat Then
             MaximaInputStreng = MaximaInputStreng & "fpprec:50$convertbfloat(" & Kommando & ");"
         Else
             MaximaInputStreng = MaximaInputStreng & Kommando & ",numer;"
         End If
-'        MaximaInputStrengSec = "simplifynum(" & inkom & ");dectalallNum(%),numer;ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns)," & StartKommando2 & ")),numer);"    ' dectal er n*oe*dvendig for enheder og korrekt antal bet cif. . fors*oe*g med ,numer
-'        MaximaInputStrengSec = "simplifynum(" & inkom & ");dectalallNum(%),numer;ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"    ' dectal er n*oe*dvendig for enheder og korrekt antal bet cif. . fors*oe*g med ,numer
-        MaximaInputStrengSec = "simplifynum(" & inkom & ");"    ' dectal er n*oe*dvendig for enheder og korrekt antal bet cif. . fors*oe*g med ,numer
+'        MaximaInputStrengSec = "simplifynum(" & inkom & ");dectalallNum(%),numer;ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns)," & StartKommando2 & ")),numer);"    ' dectal er nødvendig for enheder og korrekt antal bet cif. . forsøg med ,numer
+'        MaximaInputStrengSec = "simplifynum(" & inkom & ");dectalallNum(%),numer;ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"    ' dectal er nødvendig for enheder og korrekt antal bet cif. . forsøg med ,numer
+        MaximaInputStrengSec = "simplifynum(" & inkom & ");"    ' dectal er nødvendig for enheder og korrekt antal bet cif. . forsøg med ,numer
 #If Mac Then
         If MaximaUnits Then
-'            MaximaInputStrengSec = "applyb1(%,unitrule),numer;" 'g*oe*r det ikke bedre
-            If InStr(ConvertUnits(OutUnits), "%") > 0 Then ' hvis % i outunits giver det muligvis enhed der placeres f*oe*r tal
-                MaximaInputStrengSec = MaximaInputStrengSec & "%,numer;" ' dectalall placerer enheder med %m prefix foran tal, s*aa* hellere forkert antal betcif?
+'            MaximaInputStrengSec = "applyb1(%,unitrule),numer;" 'gør det ikke bedre
+            If InStr(ConvertUnits(OutUnits), "%") > 0 Then ' hvis % i outunits giver det muligvis enhed der placeres før tal
+                MaximaInputStrengSec = MaximaInputStrengSec & "%,numer;" ' dectalall placerer enheder med %m prefix foran tal, så hellere forkert antal betcif?
             Else
                 MaximaInputStrengSec = MaximaInputStrengSec & "dectalallNum(%),numer;"
             End If
@@ -1582,7 +1582,7 @@ start:
 #Else
         MaximaInputStrengSec = MaximaInputStrengSec & "dectalallNum(%),numer;"
 #End If
-        MaximaInputStrengSec = MaximaInputStrengSec & "ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"     ' dectal er n*oe*dvendig for enheder og korrekt antal bet cif. . fors*oe*g med ,numer
+        MaximaInputStrengSec = MaximaInputStrengSec & "ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"     ' dectal er nødvendig for enheder og korrekt antal bet cif. . forsøg med ,numer
         MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
     ElseIf MaximaExact = 0 Then    ' auto
         '        MaximaInputStreng = MaximaInputStreng & inkom & ",numer:false;" & inkom & ",numer;is(%=%th(2));"
@@ -1634,11 +1634,11 @@ start:
         Dim numres As String
         If nr > 1 Then moutput(nr - 1) = Replace(moutput(nr - 1), vbLf, "")
         If nr > 2 Then moutput(nr - 2) = Replace(moutput(nr - 2), vbLf, "")
-'        numres = Replace(moutput(nr - 1), """", "") ' for upr*ae*cist.
+'        numres = Replace(moutput(nr - 1), """", "") ' for upræcist.
 '        exactres = Replace(moutput(nr - 3), """", "")
         numres = ConvertToWordSymbols(moutput(nr - 1))
         If UBound(moutput) > 3 Then exactres = ConvertToWordSymbols(moutput(nr - 3))
-        If exactres = "" And numres = "" Then exactres = MaximaOutput    ' hvis der har v*ae*ret sp*oe*rgsm*aa*l
+        If exactres = "" And numres = "" Then exactres = MaximaOutput    ' hvis der har været spørgsmål
         eql = MaximaOutput
         If eql = "true" Or StartKommando3 = numres Then
              eql = "="
@@ -1646,7 +1646,7 @@ start:
              eql = VBA.ChrW(&H2248)
         End If
         MaximaOutput = ""
-        pkommando = ConvertToWordSymbols(Replace(pkommando, DecSeparator, ".")) ' pkommando kan ikke sammenlignes 100% med output f*oe*r den ogs*aa* er k*oe*rt igennem
+        pkommando = ConvertToWordSymbols(Replace(pkommando, DecSeparator, ".")) ' pkommando kan ikke sammenlignes 100% med output før den også er kørt igennem
         If exactres <> "" Then
             '    MsgBox "pkommando:" & pkommando & vbCrLf & " exactres:" & ConvertToWordSymbols(exactres)
             If exactres = numres Or pkommando = exactres Or StartKommando3 = exactres Then ' hvis numerisk og eksakt ens eller eksakt lig input
@@ -1704,14 +1704,14 @@ start:
     '    End If
     'End If
     'If MaximaOutput = "" Then
-    '    KommentarOutput = "Der kom f*oe*lgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
+    '    KommentarOutput = "Der kom følgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
     'End If
     
     If gemMaxExct >= 0 Then MaximaExact = gemMaxExct
 slut:
 End Sub
 Sub PolySolve(ByVal variabel As String)
-' l*oe*ser polynomium numerisk vha. speciel metode der giver alle l*oe*sninger
+' løser polynomium numerisk vha. speciel metode der giver alle løsninger
     Kommando = "algsys([" & CodeForMaxima(Kommando) & "],[" & variabel & "])"
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
@@ -1732,7 +1732,7 @@ slut:
 End Sub
 Sub ConvertOutputToSolved()
 ' konverterer output fra [1,3] til x=1 v x=3 eller L={1,3}
-' kun beregnet til numerisk l*oe*sning
+' kun beregnet til numerisk løsning
     Dim Variable As String
     Dim Arr As Variant
     Dim i As Integer
@@ -1767,7 +1767,7 @@ Sub ConvertOutputToSolved()
         MaximaOutput = o
         MaximaOutput = Replace(MaximaOutput, Sep, "    " & VBA.ChrW(8743) & "    ")
         o = ea.GetNextBracketContent
-        If o = "" Then Exit Sub    ' kun en l*oe*sning
+        If o = "" Then Exit Sub    ' kun en løsning
 
         MaximaOutput = "(" & MaximaOutput & ")"
         o = "(" & Replace(o, Sep, "    " & VBA.ChrW(8743) & "    ") & ")"
@@ -1816,7 +1816,7 @@ Sub ConvertOutputToSolvedGGB()
 End Sub
 Sub ConvertOutputToSolved2(Optional Variable As String)
 ' konverterer output fra [[x=1,y=3],[x=3,y=5]] til (x=1 og x=3) v ... eller L={(1,3),(3,5)}
-' kun beregnet til symbolsk l*oe*sning og mnewton og SolveIneq
+' kun beregnet til symbolsk løsning og mnewton og SolveIneq
     Dim Arr As Variant
     Dim i As Integer
 
@@ -1871,7 +1871,7 @@ Sub ConvertOutputToSolved2(Optional Variable As String)
             MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8743) & "    ")
 
             o = ea.GetNextBracketContent
-            If o = "" Then Exit Sub    ' kun en l*oe*sning
+            If o = "" Then Exit Sub    ' kun en løsning
 
             If InStr(MaximaOutput, VBA.ChrW(8743)) > 0 Then    ' kun parentes hvis og tegn
                 MaximaOutput = "(" & MaximaOutput & ")"
@@ -1908,7 +1908,7 @@ Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid
         MaximaInputStreng = MaximaInputStreng & AddDefinition("definer:" & TempDefs)
     End If
 
-    If MaximaUnits Then 'reducer f*oe*rst enheder p*aa* udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
+    If MaximaUnits Then 'reducer først enheder på udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
         Kommando = Replace(ConvertMaximaUnits(Kommando), """", "")
     End If
 '    If MaximaUnits Then
@@ -1971,7 +1971,7 @@ Sub Reduce()
     pkommando = Kommando
 
     Kommando = CodeForMaxima(Kommando)
-    If MaximaUnits Then 'reducer f*oe*rst enheder p*aa* udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
+    If MaximaUnits Then 'reducer først enheder på udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
         Kommando = Replace(ConvertMaximaUnits(Kommando), """", "")
     End If
 '    If MaximaUnits Then
@@ -2020,7 +2020,7 @@ Sub CompareTest()
 '    End If
     Kommando = "TestTF(" & Kommando & ")"
     If Not Radians Then
-        Kommando = "ConvertToDegr(" & Kommando & ")"    ' Det er m*aa*ske problematisk at ratsimp ikke kan kaldes da der expandes igen. converttodegree s*aa* virker ikke?
+        Kommando = "ConvertToDegr(" & Kommando & ")"    ' Det er måske problematisk at ratsimp ikke kan kaldes da der expandes igen. converttodegree så virker ikke?
     End If
     If MaximaLogOutput = 0 And Not MaximaExact = 2 Then
         If (InStr(pkommando, "log" & VBA.ChrW(8289)) > 0 Or InStr(pkommando, "10" & VBA.ChrW(12311) & "^") > 0) Then
@@ -2059,7 +2059,7 @@ Sub Factor()
 '    End If
     Kommando = "factor(" & Kommando & ")"
     If Not Radians Then
-        Kommando = "ConvertToDegr(" & Kommando & ")"    ' Det er m*aa*ske problematisk at ratsimp ikke kan kaldes da der expandes igen. converttodegree s*aa* virker ikke?
+        Kommando = "ConvertToDegr(" & Kommando & ")"    ' Det er måske problematisk at ratsimp ikke kan kaldes da der expandes igen. converttodegree så virker ikke?
     End If
     If MaximaLogOutput = 0 And Not MaximaExact = 2 Then
         If (InStr(pkommando, "log" & VBA.ChrW(8289)) > 0 Or InStr(pkommando, "10" & VBA.ChrW(12311) & "^") > 0) Then
@@ -2281,13 +2281,13 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
 '        Kommando = "applyunitrule(" & Kommando & ")"
 '    End If
 
-    '    kommando = "ev(ode2(" & Replace(kommando, "diff(", "'diff(") & "," & funktion & "," & variabel & "),logabs=false)" ' logabs=false fjernet da logistisk ikke l*oe*ses korrekt s*aa*
+    '    kommando = "ev(ode2(" & Replace(kommando, "diff(", "'diff(") & "," & funktion & "," & variabel & "),logabs=false)" ' logabs=false fjernet da logistisk ikke løses korrekt så
     If InStr(funktion, "(") > 0 Then    ' hvis funktion
         Kommando = Replace(Kommando, funktion, "qvar")
         ea.text = Kommando
         ea.ReplaceVar Split(funktion, "(")(0), "qvar"
         Kommando = ea.text
-        '        Kommando = Replace(Kommando, Split(funktion, "(")(0), "qvar") ' hvis b*aa*de N(t) og N indg*aa*r
+        '        Kommando = Replace(Kommando, Split(funktion, "(")(0), "qvar") ' hvis både N(t) og N indgår
         funktion = "qvar"
     End If
 
@@ -2446,10 +2446,10 @@ Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As
         If resolution = 1 Then
             text = text & ",grid=true"
         Else
-            '    text = text & ",user_preamble = ""set arrow from graph 0.95, first 0 to graph 1, first 0""" ' pil p*aa* x-akse ikke p*ae*n
+            '    text = text & ",user_preamble = ""set arrow from graph 0.95, first 0 to graph 1, first 0""" ' pil på x-akse ikke pæn
             '            text = text & ",user_preamble = ""set grid lt -1 """ ' sorte linjer solid
             text = text & ",user_preamble = ""set grid lt 0 lc -1 lw 1"""    ' sorte dottede linjer
-            '           text = text & ",user_preamble = ""set grid lt 0 lw " & resolution & """" ' linewidth>1 vises ikke korrekt p*aa* vandrette linjer
+            '           text = text & ",user_preamble = ""set grid lt 0 lw " & resolution & """" ' linewidth>1 vises ikke korrekt på vandrette linjer
             ' lw 2 er linewidth 2, lt er linetype, lc er linecolor
         End If
     End If
@@ -2460,7 +2460,7 @@ Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As
         text = text & ",ylabel=""" & yaksetitel & """"
     End If
 
-    text = text & "),numer;" ' numer indf*oe*rt fordi der var et udtryk med numerisk integrale, hvor den bare ventede uden. Der er ingen grund til eksakt udtryk n*aa*r der skal plottes.
+    text = text & "),numer;" ' numer indført fordi der var et udtryk med numerisk integrale, hvor den bare ventede uden. Der er ingen grund til eksakt udtryk når der skal plottes.
     MaximaInputStreng = MaximaInputStreng & text
     
 #If Mac Then
@@ -2690,7 +2690,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '    MsgBox s
 
 
-    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
+    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
     text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
     text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
     text = Replace(text, vbLf, "")    ' shift-enter og enter
@@ -2708,9 +2708,9 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     text = Replace(text, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
     text = Replace(text, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
     text = Replace(text, VBA.ChrW(247), "/")    '
-    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
     text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '‰`
-    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
     text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '‰`
     text = Replace(text, VBA.ChrW(&H393) & "_incomplete ", "gamma_incomplete")
     text = Replace(text, VBA.ChrW(915), "gamma")    ' stort gammategn
@@ -2732,15 +2732,15 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     End If
 
     ' som test flyttes disse fra slutningen til starten
-    ' *oe**ae**aa* *AE**OE* ' *ae*ndres ikke tilbagee
-    text = Replace(text, "*ae*", "ae")
-    text = Replace(text, "*oe*", "oe")
-    text = Replace(text, "*aa*", "aa")
-    text = Replace(text, "*AE*", "AE")
-    text = Replace(text, "*OE*", "OE")
-    text = Replace(text, "*AA*", "AA")
+    ' øæå ÆØ ' ændres ikke tilbagee
+    text = Replace(text, "æ", "ae")
+    text = Replace(text, "ø", "oe")
+    text = Replace(text, "å", "aa")
+    text = Replace(text, "Æ", "AE")
+    text = Replace(text, "Ø", "OE")
+    text = Replace(text, "Å", "AA")
 
-    'gr*ae*ske bogstaver
+    'græske bogstaver
     text = Replace(text, VBA.ChrW(916), "Delta")
     text = Replace(text, VBA.ChrW(948), "delta")
     text = Replace(text, VBA.ChrW(945), "alpha")
@@ -2822,7 +2822,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
         matrixendbracket = "]"
     End If
 
-    ' nu overfl*oe*dig: virker ikke med (ab)\vec
+    ' nu overflødig: virker ikke med (ab)\vec
     '    text = Replace(text, VBA.ChrW(8407), "SymVecta") ' vektorpil
     '    text = Replace(text, VBA.ChrW(8401), "SymVectb") ' vektorpil men ikke hel pil
     '    text = Replace(text, VBA.ChrW(773), "SymVectc") ' matrixtegn
@@ -2914,7 +2914,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
         text = Replace(text, VBA.ChrW(215), "*")    ' kryds erstattes med gange
     End If
 
-    'tv*ae*rvektor \hat
+    'tværvektor \hat
     Pos = 1
     Do
         Pos = InStr(Pos, text, VBA.ChrW(770))
@@ -2934,7 +2934,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
 
     '    text = Replace(text, VBA.ChrW(&H393) & " ", "Gamma")
 
-    '   Fjern problematiske usynlige paranteser foran / ' l*oe*ses af den efterf*oe*lgende ogs*aa*
+    '   Fjern problematiske usynlige paranteser foran / ' løses af den efterfølgende også
     '    Do
     '    pos = InStr(text, VBA.ChrW(12311) & "/")
     '    If pos > 0 Then
@@ -2963,7 +2963,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '        ea2.FindPrevBreak
     '        pos2 = ea2.pos
     '        ea.text = ea2.GetNextBracketContent(pos)
-    '        If ea.ValidateBrackets And InStr(ea.text, "=") < 1 Then ' fors*oe*ger at l*oe*se problem hvor skjulte og alm paranteser er blandet som f.eks.[( ])
+    '        If ea.ValidateBrackets And InStr(ea.text, "=") < 1 Then ' forsøger at løse problem hvor skjulte og alm paranteser er blandet som f.eks.[( ])
     '            If ea2.ChrByIndex(ea2.pos) = "/" Or ea2.ChrByIndex(pos2 - 1) = "/" Then
     '            ea2.InsertTextAt "(", pos2
     '            ea2.FindNextBreak
@@ -3007,7 +3007,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
         text = ea.text
     End If
 
-    ''  her var disse f*oe*r men nu flyttet efter 8289 fjernes  text = Replace(text, "cosh^(-1)", "acosh")
+    ''  her var disse før men nu flyttet efter 8289 fjernes  text = Replace(text, "cosh^(-1)", "acosh")
 
 
     ' fjern +- symbol
@@ -3070,7 +3070,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '    Loop While pos > 0
 
 
-'    ' stykkevise funktioner defineret med en tuborg parantes. Ikke f*ae*rdig. Et problem at der inds*ae*ttes gangetegn i koden senere hen
+'    ' stykkevise funktioner defineret med en tuborg parantes. Ikke færdig. Et problem at der indsættes gangetegn i koden senere hen
 '    ea.Text = Text
 '    ea.SetNormalBrackets
 '    i = 0
@@ -3110,7 +3110,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
         If Pos > 0 Then
             posb = Pos
             Do
-                i = i + 1    ' forkert input kan ellers skabe uendelig l*oe*kke
+                i = i + 1    ' forkert input kan ellers skabe uendelig løkke
                 posb = posb + 1
                 c = ea.ChrByIndex(posb)
                 If c = "|" Then
@@ -3144,7 +3144,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     i = 0
     text = ea.text
 
-    ' |x| -> abs(x) ' men der tages ikke h*oe*jde for paranteser
+    ' |x| -> abs(x) ' men der tages ikke højde for paranteser
     '    ea.text = text
     '    Do
     '    pos = InStr(ea.text, VBA.ChrW(124))
@@ -3162,13 +3162,13 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '    text = ea.text
 
 
-    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma)
+    ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma)
     ea.text = text
     ea.InsertBracketAfter ("/")
     ea.InsertBracketBefore ("/")
     text = ea.text
     
-    ' inds*ae*t underforst*aa*ede gangetegn ' den køres også til slut efter alle mellemrum er fjernet, da der så kan opstå flere.
+    ' indsæt underforståede gangetegn ' den køres også til slut efter alle mellemrum er fjernet, da der så kan opstå flere.
     'Indført her også for at omgå problem med fx at underforstået gangetegn ved 3(x+1) ikke bliver håndteret af findhierarkibreak
     ' Det giver dog problemer for 2^2x da
 '    ea.text = text
@@ -3198,10 +3198,10 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
         End If
     End If
     
-    ' inds*ae*t parentes ved f.eks. log 2 -> log(2)
+    ' indsæt parentes ved f.eks. log 2 -> log(2)
     ea.text = text
     ea.InsertFunctionBrackets
-    ' {rod(5&3)}^2  hvor rod er rodtegn og {} er usynlig paranteser. Indf*oe*rt med geogebra, men nu l*oe*st i potensdelen
+    ' {rod(5&3)}^2  hvor rod er rodtegn og {} er usynlig paranteser. Indført med geogebra, men nu løst i potensdelen
 '    pos = InStr(ea.text, VBA.ChrW(12311) & "^")
 '    Do While pos > 0
 '        ea.SetInvisibleBrackets
@@ -3215,20 +3215,20 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
 '        ea.SetNormalBrackets
 '    Loop
     
-    ea.text = Replace(ea.text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes   flyttet fra f*oe*r trig med store bogstaver for at f*aa* insertfunctionbrackets til at virke
+    ea.text = Replace(ea.text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes   flyttet fra før trig med store bogstaver for at få insertfunctionbrackets til at virke
     ea.text = Replace(ea.text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
 
     ea.text = Replace(ea.text, "cosh^(-1)", "acosh")
     ea.text = Replace(ea.text, "sinh^(-1)", "asinh")
     ea.text = Replace(ea.text, "tanh^(-1)", "atanh")
-    ea.text = Replace(ea.text, "cos^(-1) ", "acos")    ' under sj*ae*ldne omst*ae*ndigheder kan der v*ae*re et mellemrum istedet for et 8289 tegn efter
-    ea.text = Replace(ea.text, "sin^(-1) ", "asin")    ' det blive forst*aa*et som et gangetegn hvis ikke fjernes
+    ea.text = Replace(ea.text, "cos^(-1) ", "acos")    ' under sjældne omstændigheder kan der være et mellemrum istedet for et 8289 tegn efter
+    ea.text = Replace(ea.text, "sin^(-1) ", "asin")    ' det blive forstået som et gangetegn hvis ikke fjernes
     ea.text = Replace(ea.text, "tan^(-1) ", "atan")
     ea.text = Replace(ea.text, "cos^(-1)", "acos")
     ea.text = Replace(ea.text, "sin^(-1)", "asin")
     ea.text = Replace(ea.text, "tan^(-1)", "atan")
 
-    ea.ConvertTrigPow ("sin")    ' skal v*ae*re efter inverse trig
+    ea.ConvertTrigPow ("sin")    ' skal være efter inverse trig
     ea.ConvertTrigPow ("cos")
     ea.ConvertTrigPow ("tan")
     text = ea.text
@@ -3297,7 +3297,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
                 End If
                 ea.Pos = Pos
                 Call ea.GetNextBracketContent    ' bare for at finde slut parantes
-                Call ea.InsertBeforePos("^(1/" & rod & ")")
+                Call ea.InsertBeforePos("^(1/" & rod & ")") ' metoden her kan faktisk give problemer ved fx \cbrt(4)^2 da denne skal fortolkes cbrt(4^2) og ikke cbrt(4)^2
                 ea.text = Replace(ea.text, VBA.ChrW(8728 + rod), "", 1, 1)
                 text = ea.text
             End If
@@ -3327,7 +3327,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
                     ea.text = Replace(ea.text, VBA.ChrW(8730), "(", 1, 1)
                     posog = ea.FindChr("&", 1)
                     text = Left(ea.text, Pos + 1) & right(ea.text, Len(ea.text) - posog)
-                ElseIf UBound(Arr) = -1 Then ' tilf*oe*jet v1.09 pga uendelig l*oe*kke ved mangl parentes
+                ElseIf UBound(Arr) = -1 Then ' tilføjet v1.09 pga uendelig løkke ved mangl parentes
                     MsgBox Sprog.A(169), vbOKOnly, Sprog.Error
                     GoTo fejl
                 End If
@@ -3349,7 +3349,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
                 Arr = Split(Mid(text, subs + 2, sups - subs - 3), ":")
             End If
             If UBound(Arr) < 1 Then
-                MsgBox Sprog.A(425), vbOKOnly, Sprog.Error '"Notationen for sumtegnet er ikke korrekt. Den nedre gr*ae*nse skal skrives f.eks. i=1"
+                MsgBox Sprog.A(425), vbOKOnly, Sprog.Error '"Notationen for sumtegnet er ikke korrekt. Den nedre grænse skal skrives f.eks. i=1"
                 GoTo videre
             End If
             var = Arr(0)
@@ -3402,7 +3402,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
 
 videre:
 
-    'gr*ae*nsev*ae*rdier
+    'grænseværdier
     Pos = 1
     Do
         Pos = InStr(Pos, text, "lim")
@@ -3493,7 +3493,7 @@ videre:
                 If DiffEqVar = "" Then
                     var = "x"    ' hvis ingen variabel antages x
                 Else
-                    var = DiffEqVar    ' hvis diffligning s*aa* antages diffeqvar
+                    var = DiffEqVar    ' hvis diffligning så antages diffeqvar
                 End If
                 varl = 0
             End If
@@ -3516,7 +3516,7 @@ videre:
                 If ea.ChrByIndex(ea.Pos - 2) = "_" Then    '  f_(...)'(x)
                     f = ea.GetPrevVar(ea.Pos - 1) & "(" & udtryk & ")"
                     GoTo msat
-                    '                MsgBox "Der er s*ae*nket skrift som ikke kan fortolkes", vbOKOnly, "Fejl"
+                    '                MsgBox "Der er sænket skrift som ikke kan fortolkes", vbOKOnly, "Fejl"
                     '                GoTo fejl
                 ElseIf ea.IsLetterPos(ea.Pos - 2) Then    ' sin(x)'
                     f = ea.GetPrevVar(ea.Pos - 1)
@@ -3544,7 +3544,7 @@ videre:
                End If
             ElseIf ea.ChrByIndex(Pos + antalm + 1) = "(" Then    ' hvis f'(x)
 msat:
-                If DiffEqVar = var Or CasType = 1 Or CasType = 2 Then  'hvis diffligning s*aa* ingen subst
+                If DiffEqVar = var Or CasType = 1 Or CasType = 2 Then  'hvis diffligning så ingen subst
                   If Len(subt) > 0 And Len(subt) = antalm Then ' hvis partiel
                         text = Left(text, Pos - 1 - Len(f)) & "diff(" & f & "(" & var & ")," & var & "," & antalmS & ")" & right(text, Len(text) - Pos - varl - antalm)
                     Else
@@ -3601,14 +3601,14 @@ msat:
             ea.StartBracket = VBA.ChrW(8747)
             ea.EndBracket = VBA.ChrW(8518)    'differential d
             integrand = ea.GetNextBracketContent
-            Pos = ea.Pos - Len(integrand)    'pos s*ae*ttes til start-integraltegnet
+            Pos = ea.Pos - Len(integrand)    'pos sættes til start-integraltegnet
             pos2 = ea.Pos
             If Len(integrand) = 0 Then
                 ea.EndBracket = "d"
                 integrand = ea.GetNextBracketContent(Pos)
-                Pos = ea.Pos - Len(integrand) - 2    'pos s*ae*ttes til start-integraltegnet
+                Pos = ea.Pos - Len(integrand) - 2    'pos sættes til start-integraltegnet
                 pos2 = ea.Pos
-                If Not (ea.IsLetterPos(ea.Pos, False) And Not (ea.IsLetterPos(ea.Pos - 2, False))) Then ' hvis enligt d eller som af variabel/funktion der ikke starter med d, s*aa* er det ikke slutningen af integralet. Derfor fors*oe*ges med simplere metode til at finde d
+                If Not (ea.IsLetterPos(ea.Pos, False) And Not (ea.IsLetterPos(ea.Pos - 2, False))) Then ' hvis enligt d eller som af variabel/funktion der ikke starter med d, så er det ikke slutningen af integralet. Derfor forsøges med simplere metode til at finde d
                     j = 0
                     Do
                         j = j + 1
@@ -3689,12 +3689,12 @@ msat:
             ea.StartBracket = VBA.ChrW(8748)
             ea.EndBracket = VBA.ChrW(8518)    'differential d
             integrand = ea.GetNextBracketContent
-            Pos = ea.Pos - Len(integrand)    'pos s*ae*ttes til start-integraltegnet
+            Pos = ea.Pos - Len(integrand)    'pos sættes til start-integraltegnet
             pos2 = ea.Pos
             If Len(integrand) = 0 Then
                 ea.EndBracket = "d"
                 integrand = ea.GetNextBracketContent
-                Pos = ea.Pos - Len(integrand) - 2    'pos s*ae*ttes til start-integraltegnet
+                Pos = ea.Pos - Len(integrand) - 2    'pos sættes til start-integraltegnet
                 pos2 = ea.Pos
             End If
             If Len(integrand) > 0 Then
@@ -3755,12 +3755,12 @@ msat:
             ea.StartBracket = VBA.ChrW(8749)
             ea.EndBracket = VBA.ChrW(8518)    'differential d
             integrand = ea.GetNextBracketContent()
-            Pos = ea.Pos - Len(integrand)    'pos s*ae*ttes til start-integraltegnet
+            Pos = ea.Pos - Len(integrand)    'pos sættes til start-integraltegnet
             pos2 = ea.Pos
             If Len(integrand) = 0 Then
                 ea.EndBracket = "d"
                 integrand = ea.GetNextBracketContent
-                Pos = ea.Pos - Len(integrand) - 2    'pos s*ae*ttes til start-integraltegnet
+                Pos = ea.Pos - Len(integrand) - 2    'pos sættes til start-integraltegnet
                 pos2 = ea.Pos
             End If
             If Len(integrand) > 0 Then
@@ -3772,13 +3772,13 @@ msat:
                 var = right(var, Len(var) - 1)
                 var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
-                    ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. M*aa*ske har du brugt d i anden sammenh*ae*ng. Brug da differential d \dd"
+                    ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. Måske har du brugt d i anden sammenhæng. Brug da differential d \dd"
                     GoTo slut
                 End If
                 var2 = right(var2, Len(var2) - 1)
                 var3 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var3) < 2 Or (Left(var3, 1) <> "d" And Left(var3, 1) <> VBA.ChrW(8518)) Then
-                    ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. M*aa*ske har du brugt d i anden sammenh*ae*ng. Brug da differential d \dd"
+                    ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. Måske har du brugt d i anden sammenhæng. Brug da differential d \dd"
                     GoTo slut
                 End If
                 var3 = right(var3, Len(var3) - 1)
@@ -3836,7 +3836,7 @@ msat:
     '                    pos2 = pos2d
     '                End If
     '                ea.pos = pos2
-    '                If ea.IsLetterPos(pos2 - 1, False) Then    ' hvis bogstav foran d, s*aa* indg*aa*r det i variabel
+    '                If ea.IsLetterPos(pos2 - 1, False) Then    ' hvis bogstav foran d, så indgår det i variabel
     '                    pos2 = pos2 + i
     '                    GoTo findslut
     '                End If
@@ -3845,7 +3845,7 @@ msat:
     '                    i = i + 1
     '                Loop While ea.IsLetterPos(pos2 + i, False) And i < 50
     '                var = Mid(text, pos2 + 1, i - 1)
-    '                If var = "" Or var = "iff" Then    ' der vil v*ae*re d hvis diff under integraltegn
+    '                If var = "" Or var = "iff" Then    ' der vil være d hvis diff under integraltegn
     '                    pos2 = pos2 + i
     '                    GoTo findslut
     '                End If
@@ -3876,8 +3876,8 @@ msat:
     '        Loop While pos > 0
 
 
-    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma). Skal være før ea.InsertMultSigns
-    ' flyttet op for at tage h*oe*jde for skjulte parenteser
+    ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma). Skal være før ea.InsertMultSigns
+    ' flyttet op for at tage højde for skjulte parenteser
     ea.text = text
     ea.SetNormalBrackets
     ea.InsertBracketAfter ("^")
@@ -3896,7 +3896,7 @@ msat:
                         Expr = ea.GetNextBracketContent()
                         ea.text = Left(ea.text, Pos - 1) & "[" & Expr & "]" & right(ea.text, Len(ea.text) - Pos - Len(Expr) - 1)
                     Else
-                        posb = ea.FindHierakiBreak(5)    ' *ae*ndret 5 pga f_1^'(x)
+                        posb = ea.FindHierakiBreak(5)    ' ændret 5 pga f_1^'(x)
                         Expr = ea.GetTextInterval(Pos, posb)
                         ea.text = Left(ea.text, Pos - 1) & "[" & Expr & "]" & right(ea.text, Len(ea.text) - Pos - Len(Expr) + 1)
                     End If
@@ -3917,10 +3917,10 @@ spring:
     text = ea.text
 
     text = Replace(text, " ", "")     ' evt. resterende mellemrum fjernes
-    '    text = Replace(text, " ", "*")     ' skal v*ae*re efter diff og integral ' problematisk ved (x^2 )' -> diff(x^2*,x,1)
+    '    text = Replace(text, " ", "*")     ' skal være efter diff og integral ' problematisk ved (x^2 )' -> diff(x^2*,x,1)
 
 
-    text = Replace(text, "det(", "determinant2(")    ' lidt usikker da der kan v*ae*re funktioner der slutter p*aa* "det"
+    text = Replace(text, "det(", "determinant2(")    ' lidt usikker da der kan være funktioner der slutter på "det"
     ' Matricer
     Do
         Pos = InStr(text, VBA.ChrW(9632))
@@ -3988,8 +3988,8 @@ spring:
 
 
 
-    ' inds*ae*t underforst*aa*ede gangetegn mellem bogstav mellemrum og bogstav
-    ' virker men s*aa* kan man ikke lave funktioner med s*ae*nket skrift da der da er mellemrum
+    ' indsæt underforståede gangetegn mellem bogstav mellemrum og bogstav
+    ' virker men så kan man ikke lave funktioner med sænket skrift da der da er mellemrum
     '    ea.text = text
     '    pos = 1
     '    Do
@@ -4004,15 +4004,15 @@ spring:
     '    text = ea.text
 
 
-    ' inds*ae*t underforst*aa*ede gangetegn ' skal v*ae*re efter fjern mellemrum
+    ' indsæt underforståede gangetegn ' skal være efter fjern mellemrum
     ea.text = text
     ea.Pos = 1
     ea.InsertMultSigns
     text = ea.text
     If Radians Then
-        text = Replace(text, VBA.ChrW(8736), " CVinkel ")    ' hvis complex s*aa* er vinkel pol*ae*r notation
+        text = Replace(text, VBA.ChrW(8736), " CVinkel ")    ' hvis complex så er vinkel polær notation
     Else
-        text = Replace(text, VBA.ChrW(8736), " CVinkelgrad ")    ' hvis complex s*aa* er vinkel pol*ae*r notation
+        text = Replace(text, VBA.ChrW(8736), " CVinkelgrad ")    ' hvis complex så er vinkel polær notation
     End If
 
     text = Replace(text, "gradq*", "gradq ")
@@ -4023,13 +4023,13 @@ spring:
 
     If matvekt Then
         If CASengine = 0 Then
-        '        text = Replace(text, "])^", "])^^")  ' matrix ^ enkelt ^ opl*oe*fter kun hvert enkelt element
-        text = Replace(text, "^", "^^")  ' definerede matricer blev ikke h*aa*ndteret korrekt med ovenst*aa*ende. Fors*oe*ger nu at erstatte alle og h*aa*ber det ikke giver andre problemer
+        '        text = Replace(text, "])^", "])^^")  ' matrix ^ enkelt ^ opløfter kun hvert enkelt element
+        text = Replace(text, "^", "^^")  ' definerede matricer blev ikke håndteret korrekt med ovenstående. Forsøger nu at erstatte alle og håber det ikke giver andre problemer
 '#If Mac Then ' from 1.18  windows is also sbcl
-        text = Replace(text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
-        text = Replace(text, "_", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
+        text = Replace(text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
+        text = Replace(text, "_", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
 '#Else
-'        text = Replace(text, "*", " _ ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
+'        text = Replace(text, "*", " _ ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
 '#End If
         '        text = Replace(text, "*matrix", " . matrix")  ' matrix gangetegn og prikprodukt
         '        text = Replace(text, "*vect", " . vect")
@@ -4039,7 +4039,7 @@ spring:
         End If
     End If
 
-    'erstat e med %e og i med %i      er flyttet til efter underforst*aa*ede gangetegn da % ikke g*ae*lder som bogstav
+    'erstat e med %e og i med %i      er flyttet til efter underforståede gangetegn da % ikke gælder som bogstav
     text = CodeConstantPercentSign(text, "e")
     If MaximaComplex Then
         If CASengine = 0 Then
@@ -4087,7 +4087,7 @@ spring:
         text = ConvertDegreeToRad(text, "csc")
     End If
 
-    ' her var *ae**oe**aa* og gr*ae*ske f*oe*r
+    ' her var æøå og græske før
     If CasType = 0 Then
         text = Replace(text, VBA.ChrW(960), "%pi")
         text = Replace(text, "-" & VBA.ChrW(8734), "minf")
@@ -4123,7 +4123,7 @@ End Function
 Function ConvertDifferentials(text As String, DiffChr As String) As String
     ' d/dx notation
     ' konverterer d/dx til maxima diff(...,x) notation
-    ' DiffChr er symbolet for d. Det kan fx v*ae*re VBA.ChrW(8518) (\dd) eller VBA.ChrW(...)(\partial) eller m*aa*ske et almindeligt d
+    ' DiffChr er symbolet for d. Det kan fx være VBA.ChrW(8518) (\dd) eller VBA.ChrW(...)(\partial) eller måske et almindeligt d
     
     Dim num As String, dem As String, vararr(9) As String, varind As Integer, antalm2 As Integer
     Dim udtryk1 As String, udtryk2 As String, Pos As Integer, pos3 As Integer, antalm As Integer
@@ -4185,7 +4185,7 @@ Function ConvertDifferentials(text As String, DiffChr As String) As String
                 udtryk = ea.GetNextBracketContent(pos3)
                 text = Left(text, Pos - 2) & udtryk1 & udtryk & udtryk2 & right(text, Len(text) - ea.Pos + 1)
                 ' Her mangler notation for df(x)/dx
-            Else ' ingen parentes efter d/dx operator s*aa* udtrykket m*aa* findes via hieraki
+            Else ' ingen parentes efter d/dx operator så udtrykket må findes via hieraki
                 posstart = pos3
                 ea.Pos = pos3 + 1
                 posslut = ea.FindHierakiBreak(2)
@@ -4218,7 +4218,7 @@ slut:
 End Function
 Function ConvertUnits(ByVal text As String) As String
     Dim ea As New ExpressionAnalyser
-    text = Replace(text, VBA.ChrW(937), "Ohm")    ' Omega er s*aa* ohm
+    text = Replace(text, VBA.ChrW(937), "Ohm")    ' Omega er så ohm
     ea.text = text
     ea.ReplaceVar VBA.ChrW(176) & "C", "degC"  ' grad tegn og C
     ea.ReplaceVar "timer", "%timer"
@@ -4290,7 +4290,7 @@ Function ConvertDegreeToRad(text As String, trigfunc As String) As String
                     ea.InsertBeforePos (")")
                     ea.Pos = Pos + Len(trigfunc)
                     ea.InsertAfterPos ("%pi/180*(")
-                Else ' geogebra. Her fors*oe*ges at inds*ae*tte gradtegn, hvis der ikke indg*aa*r variabel indenfor parentes
+                Else ' geogebra. Her forsøges at indsætte gradtegn, hvis der ikke indgår variabel indenfor parentes
                     If InStr(s, VBA.ChrW(176)) <= 0 Then
 '                        ea2.text = s
 '                        f = False
@@ -4321,7 +4321,7 @@ Function ConvertDegreeToRad(text As String, trigfunc As String) As String
 End Function
 
 Function CodeConstantPercentSign(text As String, tegn As String) As String
-' inds*ae*tter % foran konstant i udtryk hvis der ikke er bogstav foran eller bag
+' indsætter % foran konstant i udtryk hvis der ikke er bogstav foran eller bag
     Dim Pos As Integer
     Dim ea As New ExpressionAnalyser
 
@@ -4346,7 +4346,7 @@ Function ConvertToAscii(ByVal text As String) As String
 
     text = Replace(text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes
     text = Replace(text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
-    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
+    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
     text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
     text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
     text = Replace(text, vbLf, "")    ' shift-enter og enter
@@ -4366,19 +4366,19 @@ Function ConvertToAscii(ByVal text As String) As String
     '    text = Replace(text, VBA.ChrW(8901), "*") ' \cdot , ved ikke hvorfor der tilsyneladende er to
     '    text = Replace(text, VBA.ChrW(8729), "*") ' prik \cdot erstattes med gange
     '    text = Replace(text, VBA.ChrW(8226), "*") ' tyk prik erstattes med gange
-    '    text = Replace(text, VBA.ChrW(180), "^'") ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    '    text = Replace(text, VBA.ChrW(180), "^'") ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
     '    text = Replace(text, VBA.ChrW(96), "^'") ' der er tre forskellige '‰`
 
     text = Replace(text, ChrW(183), "*")  ' Siden 1.18 (SBCL) kan alm gangetegn ikke vises
     text = Replace(text, ChrW(215), "*")  '
     text = Replace(text, "  ", " ")
-    '    text = Replace(text, " ", "") ' mellemrum fjernes ' problematisk n*aa*r , bruges som ; separator f(0 , 1) -> f(0,1)
+    '    text = Replace(text, " ", "") ' mellemrum fjernes ' problematisk når , bruges som ; separator f(0 , 1) -> f(0,1)
     text = Replace(text, """", "")    ' apostrof fjernes
     text = Replace(text, "+-", "-")    ' plus-minus giver minus
     text = Replace(text, "%e", "e")    '
-    '    text = Replace(text, "*ae*", "ae") '
-    '    text = Replace(text, "*oe*", "oe") '
-    '    text = Replace(text, "*aa*", "aa") '
+    '    text = Replace(text, "æ", "ae") '
+    '    text = Replace(text, "ø", "oe") '
+    '    text = Replace(text, "å", "aa") '
 
 
     ConvertToAscii = text
@@ -4435,7 +4435,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     ea.InsertBracketAfter ("^")
 
 
-    ' eksponentiel notation positiv   ' f*oe*r insertbracketbefore da ellers 4E-13/x -> 4E-(13)/x men c^5.0E-1 -> c^0.5*10^-1 duer ikke
+    ' eksponentiel notation positiv   ' før insertbracketbefore da ellers 4E-13/x -> 4E-(13)/x men c^5.0E-1 -> c^0.5*10^-1 duer ikke
     Pos = 0
     Do
 '#If Mac Then ' SBCL
@@ -4449,7 +4449,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
                 Do
                     ea.Pos = ea.Pos + 1
                 Loop While ea.IsNumber(ea.Pos)
-                ' mellemrum fjernet for at f*aa* insertbracket til at virke
+                ' mellemrum fjernet for at få insertbracket til at virke
                 ea.text = Left(ea.text, Pos - 1) & gtegn & "10^" & Mid(ea.text, Pos + 2, ea.Pos - Pos - 2) & " " & right(ea.text, Len(ea.text) - ea.Pos + 1)
                 'ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 2, ea.pos - pos - 2) & Right(text, Len(ea.text) - ea.pos + 1)
             End If
@@ -4476,27 +4476,27 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         End If
     Loop While Pos > 1
 
-    ' efter eksponentiel da 1E-1*x g*aa*r galt
+    ' efter eksponentiel da 1E-1*x går galt
     ' 1* fjernes
     Pos = InStr(ea.text, "1*")
     Do While Pos > 0
         If Pos = 1 Then
             ea.text = Left(ea.text, Pos - 1) & right(ea.text, Len(ea.text) - Pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, Pos - 1, 1) = "*" Then  ' gange foran s*aa* fjern altid
+        ElseIf Mid(ea.text, Pos - 1, 1) = "*" Then  ' gange foran så fjern altid
             ea.text = Left(ea.text, Pos - 1) & right(ea.text, Len(ea.text) - Pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, Pos - 1, 1) = "(" Then  ' parentes foran s*aa* fjern altid
+        ElseIf Mid(ea.text, Pos - 1, 1) = "(" Then  ' parentes foran så fjern altid
             ea.text = Left(ea.text, Pos - 1) & right(ea.text, Len(ea.text) - Pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, Pos - 1, 1) = ")" Then  ' parentes foran s*aa* fjern altid
+        ElseIf Mid(ea.text, Pos - 1, 1) = ")" Then  ' parentes foran så fjern altid
             ea.text = Left(ea.text, Pos - 1) & right(ea.text, Len(ea.text) - Pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, Pos - 1, 1) = "=" Then  ' ligmed foran s*aa* fjern altid
+        ElseIf Mid(ea.text, Pos - 1, 1) = "=" Then  ' ligmed foran så fjern altid
             ea.text = Left(ea.text, Pos - 1) & right(ea.text, Len(ea.text) - Pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, Pos - 1, 1) = VBA.ChrW(8776) Then  ' ca. ligmed foran s*aa* fjern altid
+        ElseIf Mid(ea.text, Pos - 1, 1) = VBA.ChrW(8776) Then  ' ca. ligmed foran så fjern altid
             ea.text = Left(ea.text, Pos - 1) & right(ea.text, Len(ea.text) - Pos - 1)    ' fjern 1*
-        ElseIf ea.IsNumber(Pos - 1) Then    ' tal foran s*aa* ingenting
+        ElseIf ea.IsNumber(Pos - 1) Then    ' tal foran så ingenting
 
-        ElseIf ea.IsLetterPos(Pos - 1, True) Then    ' bogstav foran s*aa* ingenting
+        ElseIf ea.IsLetterPos(Pos - 1, True) Then    ' bogstav foran så ingenting
 
-        ElseIf Mid(ea.text, Pos - 1, 1) = "." Then    ' .1* s*aa* ingenting
+        ElseIf Mid(ea.text, Pos - 1, 1) = "." Then    ' .1* så ingenting
 
         ElseIf Pos > 2 Then
             If Mid(ea.text, Pos - 2, 2) = "^-" Then    ' ^-1 fjern ikke
@@ -4524,10 +4524,10 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         Pos = InStr(Pos + 1, ea.text, ".0*")
     Loop
     ' tal,ikketal fjernes  f.eks. 240, -> 240  samt x*,45  ->x*0,45
-    ' test: 2,0*a-*10^3*a-*g
+    ' test: 2,0á10^3ág
     
 '#If Mac Then
-'** MAC   .0 p*aa* alle tal, fordi der bruges float istedet for dectalallnum
+'** MAC   .0 på alle tal, fordi der bruges float istedet for dectalallnum
     Pos = InStr(ea.text, ".0")
     Do While Pos > 0
             If Not (ea.IsNumber(Pos + 2)) Then
@@ -4555,14 +4555,14 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     End If
 
 
-    ' fjern gangetegn der er underforst*aa*ede
-    ' giver desv*ae*rre problemer bla. foran inverse trig  180sin^-1(12)/\pi og (1+x)=2 sin^(-1)(1/2)/\pi konvertes forkert til prof
+    ' fjern gangetegn der er underforståede
+    ' giver desværre problemer bla. foran inverse trig  180sin^-1(12)/\pi og (1+x)=2 sin^(-1)(1/2)/\pi konvertes forkert til prof
     ' virker hverken hvis * erstattes med mellemrum eller fjernes
-    ' r*ae*kkef*oe*lgen p*aa* disse to skal muligvis byttes om da det giver problemer ved identifikation af identitiske udtryk for beregn auto
+    ' rækkefølgen på disse to skal muligvis byttes om da det giver problemer ved identifikation af identitiske udtryk for beregn auto
 
     '    ea.InsertBracketBefore ("/") ' skal bruges for at removemultsign virker, men problem ved f.eks. matrix([5/6];[13/10]) -> matrix([5/6];([13)/10])
-    If MaximaUnits Then ' version 1.07 fors*oe*ges n*aa*r enheder er sl*aa*et til
-        ea.RemoveMultSign ' stadig problematisk ved f.eks. e^-x^2*(e^(x^2)+2*a-*c)/2
+    If MaximaUnits Then ' version 1.07 forsøges når enheder er slået til
+        ea.RemoveMultSign ' stadig problematisk ved f.eks. e^-x^2*(e^(x^2)+2ác)/2
     End If
     If CASengine = 0 Then
         ea.SetNormalBrackets
@@ -4587,14 +4587,14 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     text = Replace(text, "#", VBA.ChrW(8800))    ' ikke ligmed
 
     If MaximaUnits Then
-        text = Replace(text, VBA.ChrW(937), "Ohm")    ' Omega er s*aa* ohm
+        text = Replace(text, VBA.ChrW(937), "Ohm")    ' Omega er så ohm
         text = Replace(text, "%%m", "m")
         text = Replace(text, "%mu", VBA.ChrW(956))
         ea.text = text
         ea.ReplaceVar "degC", VBA.ChrW(176) & "C"  ' grad tegn og C
         ea.ReplaceVar "%timer", "timer"
         ea.ReplaceVar "%min", "min"
-        ea.ReplaceVar "aar", "*aa*r"
+        ea.ReplaceVar "aar", "år"
         text = ea.text
     End If
 
@@ -4612,7 +4612,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     '    text = Replace(text, "E+", gtegn & "10^")
     '    text = Replace(text, "E-", gtegn & "10^-")
         
-    'rod af h*oe*jere grad.
+    'rod af højere grad.
     If CASengine > 0 Then 'Kun til GeoGebra
     Do
         Pos = InStr(text, "nroot(")
@@ -4653,7 +4653,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     Loop While Pos > 0
 
     '    text = Replace(text, "if", vbCrLf & "hvis  ")
-    '    text = Replace(text, "then", "  s*aa*  ")
+    '    text = Replace(text, "then", "  så  ")
     '    text = Replace(text, "else", vbCrLf & "ellers  ")
 
     ' abs(x) -> |x|
@@ -4681,7 +4681,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     Do While Pos > 0
         ea.text = text
         ea.GetNextBracketContent (Pos)
-        text = Left(text, ea.Pos - 1) & ")" & right(text, Len(text) - ea.Pos + 1)    ' slutparantes i n*ae*vner
+        text = Left(text, ea.Pos - 1) & ")" & right(text, Len(text) - ea.Pos + 1)    ' slutparantes i nævner
         text = Left(text, Pos + 3) & "(" & right(text, Len(text) - Pos - 4)    ' , atan2 til atan(
         possep = InStr(Pos + 4, text, ListSeparator)
         text = Left(text, possep - 1) & ")/(" & right(text, Len(text) - possep)    ' , til /
@@ -4783,7 +4783,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     ea.ReplaceVar "tanh", "tanh" & VBA.ChrW(8289)
     text = ea.text
 
-    '        text = Replace(text, "acos(", "cos^(-1)" & VBA.ChrW(8289) & "(") ' parentes fors*oe*g ved invers ogs*aa*
+    '        text = Replace(text, "acos(", "cos^(-1)" & VBA.ChrW(8289) & "(") ' parentes forsøg ved invers også
     '        text = Replace(text, "asin(", "sin^(-1)" & VBA.ChrW(8289) & "(")
     '        text = Replace(text, "atan(", "tan^(-1)" & VBA.ChrW(8289) & "(")
     '        text = Replace(text, "cos(", "cos" & VBA.ChrW(8289) & "(")
@@ -4853,7 +4853,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         Pos = InStr(text, "vectc_")
     Loop
 
-    'gr*ae*ske bogstaver
+    'græske bogstaver
     text = Replace(text, "Delta", VBA.ChrW(916))
     text = Replace(text, "delta", VBA.ChrW(948))
     text = Replace(text, "alpha", VBA.ChrW(945))
@@ -4888,7 +4888,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     text = Replace(text, "greek-nu", VBA.ChrW(957))
     text = Replace(text, "kappa", VBA.ChrW(954))
     text = Replace(text, "zeta", VBA.ChrW(950))
-    text = Replace(text, "eta", VBA.ChrW(951))    ' skal v*ae*re sidst da eta indg*aa*r i andre
+    text = Replace(text, "eta", VBA.ChrW(951))    ' skal være sidst da eta indgår i andre
     text = Replace(text, "increment", VBA.ChrW(8710))  ' specielt delta increment
     text = Replace(text, "Symhalf", VBA.ChrW(189))    ' _
     text = Replace(text, "degC", VBA.ChrW(8451))   ' specielt oC tegn
@@ -4974,12 +4974,12 @@ Function ConvertToWordSymbols(ByVal text As String) As String
 
 
 
-    ' Disse kan v*ae*re resultat fra gr*ae*nsev*ae*rdi
+    ' Disse kan være resultat fra grænseværdi
     ea.ReplaceVar "inf", VBA.ChrW(8734)
     ea.ReplaceVar "minf", "-" & VBA.ChrW(8734)
     ea.ReplaceVar "infinity", VBA.ChrW(8734)
     ea.ReplaceVar "und", Sprog.A(431) '"ikke defineret"
-    ea.ReplaceVar "ind", Sprog.A(432) ' "ikke defineret men begr*ae*nset"
+    ea.ReplaceVar "ind", Sprog.A(432) ' "ikke defineret men begrænset"
     ea.ReplaceVar "tgrader", VBA.ChrW(176)     ' gradtegn
     text = ea.text
 
@@ -5041,7 +5041,7 @@ Function ConvertRadToDegree(text As String, trigfunc As String) As String
 
 End Function
 Sub RemoveComplexSolutions()
-'kun reelle l*oe*sninger ' problem at selvom der er i i kan det m*aa*ske reduceres til reelt
+'kun reelle løsninger ' problem at selvom der er i i kan det måske reduceres til reelt
     Dim Arr As Variant
     Dim i As Integer
     If Not MaximaComplex Then
@@ -5095,13 +5095,13 @@ Function ConvertToLatex(text As String) As String
     text = Replace(text, vbCr, "")
     text = Replace(text, vbLf, "")
 
-    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
+    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
     text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
     text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
     text = Replace(text, """", "")    ' apostrof fjernes
-    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
     text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '‰`
-    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‰` apostrof lignende de forst*aa*es alle som diff
+    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
     text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige '‰`
     '    text = Replace(text, VBA.ChrW(176), "\circ ") ' gradtegn
     text = Replace(text, VBA.ChrW(189), "\frac{1}{2} ")    ' _
@@ -5129,36 +5129,36 @@ Function ConvertToLatex(text As String) As String
     text = Replace(text, VBA.ChrW(8450), "\mathbb{C} ")    ' symbol for komplekse tal
     text = Replace(text, VBA.ChrW(8463), "\hbar ")    ' planck konstant/2pi
     text = Replace(text, VBA.ChrW(8704), "\forall ")    ' for alle tegn
-    text = Replace(text, VBA.ChrW(8712), "\in ")    ' tilh*oe*rer tegn
+    text = Replace(text, VBA.ChrW(8712), "\in ")    ' tilhører tegn
     text = Replace(text, VBA.ChrW(8733), "\propto ")    ' propotionel tegn
     text = Replace(text, VBA.ChrW(8810), "\ll ")    ' <<
     text = Replace(text, VBA.ChrW(8811), "\gg ")    ' >>
     text = Replace(text, VBA.ChrW(8704), "\exists ")    ' eksisterer tegn
     text = Replace(text, VBA.ChrW(8708), "\exists ")    ' eksisterer tegn
-    text = Replace(text, VBA.ChrW(8713), "\notin ")    ' tilh*oe*rer ikke
-    text = Replace(text, VBA.ChrW(8709), "\emptyset ")    ' *OE* tomme m*ae*ngde
+    text = Replace(text, VBA.ChrW(8713), "\notin ")    ' tilhører ikke
+    text = Replace(text, VBA.ChrW(8709), "\emptyset ")    ' Ø tomme mængde
     text = Replace(text, VBA.ChrW(8711), "\nabla ")    ' nabla operator
     text = Replace(text, VBA.ChrW(8801), "\equiv ")    ' ligmed 3 streger
     text = Replace(text, VBA.ChrW(8710), "\inc ")    ' specielt delta increment
     text = Replace(text, VBA.ChrW(8943), "\ldots ")    ' ...
     text = Replace(text, VBA.ChrW(8942), "\vdots ")    ' 3 prikker lodret
-    text = Replace(text, VBA.ChrW(8944), "\rddots ")    ' 3 prikker skr*aa*t op til h*oe*jre
-    text = Replace(text, VBA.ChrW(8945), "\ddots ")    ' 3 prikker skr*aa*t ned til h*oe*jre
+    text = Replace(text, VBA.ChrW(8944), "\rddots ")    ' 3 prikker skråt op til højre
+    text = Replace(text, VBA.ChrW(8945), "\ddots ")    ' 3 prikker skråt ned til højre
     text = Replace(text, VBA.ChrW(8756), "\therefore ")    ' 3 prikker i trekant
     text = Replace(text, VBA.ChrW(8757), "\because ")    ' 3 prikker i trekant
-    text = Replace(text, VBA.ChrW(8834), "\subset ")    ' tilh*oe*rer m*ae*ngde (*ae*gte delm*ae*ngde)
-    text = Replace(text, VBA.ChrW(8838), "\subseteq ")    ' tilh*oe*rer lig m*ae*ngde
-    text = Replace(text, VBA.ChrW(8745), "\cap ")    ' foreningsm*ae*ngde
-    text = Replace(text, VBA.ChrW(8746), "\cup ")    ' f*ae*llesm*ae*ngde
-    text = Replace(text, VBA.ChrW(8764), "\sim ")    'ca ligmed en b*oe*lge
-    text = Replace(text, VBA.ChrW(8771), "\simeq ")    ' ca ligmed en b*oe*lge en lige
-    text = Replace(text, VBA.ChrW(8855), "\otimes ")    ' m*ae*ngdeprodukt
+    text = Replace(text, VBA.ChrW(8834), "\subset ")    ' tilhører mængde (ægte delmængde)
+    text = Replace(text, VBA.ChrW(8838), "\subseteq ")    ' tilhører lig mængde
+    text = Replace(text, VBA.ChrW(8745), "\cap ")    ' foreningsmængde
+    text = Replace(text, VBA.ChrW(8746), "\cup ")    ' fællesmængde
+    text = Replace(text, VBA.ChrW(8764), "\sim ")    'ca ligmed en bølge
+    text = Replace(text, VBA.ChrW(8771), "\simeq ")    ' ca ligmed en bølge en lige
+    text = Replace(text, VBA.ChrW(8855), "\otimes ")    ' mængdeprodukt
     text = Replace(text, VBA.ChrW(8614), "\mapsto ")    ' pil til funktionsdef
-    text = Replace(text, VBA.ChrW(8640), "\rightharpoonup ")    ' pil h*oe*jre med kun halv pil
-    text = Replace(text, VBA.ChrW(8651), "\lrhar ")    ' harpun h*oe*jre/venstre
+    text = Replace(text, VBA.ChrW(8640), "\rightharpoonup ")    ' pil højre med kun halv pil
+    text = Replace(text, VBA.ChrW(8651), "\lrhar ")    ' harpun højre/venstre
     text = Replace(text, VBA.ChrW(8598), "\nwarrow ")    ' pil op til venstre
-    text = Replace(text, VBA.ChrW(8599), "\nearrow ")    ' pil op til h*oe*jre
-    text = Replace(text, VBA.ChrW(8600), "\nwarrow ")    ' pil ned h*oe*jre
+    text = Replace(text, VBA.ChrW(8599), "\nearrow ")    ' pil op til højre
+    text = Replace(text, VBA.ChrW(8600), "\nwarrow ")    ' pil ned højre
     text = Replace(text, VBA.ChrW(8601), "\swarrow ")    ' pil ned venstre
     text = Replace(text, VBA.ChrW(8728), "\circ ")    ' grad-tegn
     text = Replace(text, VBA.ChrW(8451), "^\circ\text{C} ")    ' specielt oC tegn
@@ -5169,14 +5169,14 @@ Function ConvertToLatex(text As String) As String
     text = Replace(text, VBA.ChrW(8743), "\wedge ")    ' og
     text = Replace(text, VBA.ChrW(8744), "\vee ")    ' eller
 
-'    text = Replace(text, VBA.ChrW(8721), "\sum ")    ' sumtegn. Skal m*aa*ske nok laves mere avanceret
-'    text = Replace(text, VBA.ChrW(8719), "\prod ")    ' produkttegn. Skal m*aa*ske nok laves mere avanceret
-    text = Replace(text, VBA.ChrW(8748), "\iint ")    ' dobbeltintegraltegn. Skal m*aa*ske nok laves mere avanceret
-    text = Replace(text, VBA.ChrW(8749), "\iiint ")    ' tripelintegraltegn. Skal m*aa*ske nok laves mere avanceret
-    text = Replace(text, VBA.ChrW(8750), "\oint ")    ' kurveintegraltegn. Skal m*aa*ske nok laves mere avanceret
+'    text = Replace(text, VBA.ChrW(8721), "\sum ")    ' sumtegn. Skal måske nok laves mere avanceret
+'    text = Replace(text, VBA.ChrW(8719), "\prod ")    ' produkttegn. Skal måske nok laves mere avanceret
+    text = Replace(text, VBA.ChrW(8748), "\iint ")    ' dobbeltintegraltegn. Skal måske nok laves mere avanceret
+    text = Replace(text, VBA.ChrW(8749), "\iiint ")    ' tripelintegraltegn. Skal måske nok laves mere avanceret
+    text = Replace(text, VBA.ChrW(8750), "\oint ")    ' kurveintegraltegn. Skal måske nok laves mere avanceret
 
 
-    '   Fjern problematiske usynlige paranteser efter og foran / m*aa*ske ikke n*oe*dvendig for latex? ihvertfald problematisk for x/10^2 -> x/(10)^2
+    '   Fjern problematiske usynlige paranteser efter og foran / måske ikke nødvendig for latex? ihvertfald problematisk for x/10^2 -> x/(10)^2
     '    ea2.StartBracket = VBA.ChrW(12310)
     '    ea2.EndBracket = VBA.ChrW(12311)
     '    pos = 1
@@ -5189,7 +5189,7 @@ Function ConvertToLatex(text As String) As String
     '        ea2.FindPrevBreak
     '        pos2 = ea2.pos
     '        ea.text = ea2.GetNextBracketContent(pos)
-    '        If ea.ValidateBrackets And InStr(ea.text, "=") < 1 Then ' fors*oe*ger at l*oe*se problem hvor skjulte og alm paranteser er blandet som f.eks.[( ])
+    '        If ea.ValidateBrackets And InStr(ea.text, "=") < 1 Then ' forsøger at løse problem hvor skjulte og alm paranteser er blandet som f.eks.[( ])
     '            If ea2.ChrByIndex(ea2.pos) = "/" Or ea2.ChrByIndex(pos2 - 1) = "/" Then
     '            ea2.InsertTextAt "(", pos2
     '            ea2.FindNextBreak
@@ -5207,7 +5207,7 @@ Function ConvertToLatex(text As String) As String
     ea2.SetTuborgBrackets
     ea.text = text
 
-    ea.text = Replace(ea.text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes   flyttet fra f*oe*r trig med store bogstaver for at f*aa* insertfunctionbrackets til at virke
+    ea.text = Replace(ea.text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes   flyttet fra før trig med store bogstaver for at få insertfunctionbrackets til at virke
     ea.text = Replace(ea.text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
 
 'lim
@@ -5243,16 +5243,16 @@ Function ConvertToLatex(text As String) As String
 '    ea.text = Replace(ea.text, "cosh^(-1)", "cosh^{-1}")
 '    ea.text = Replace(ea.text, "sinh^(-1)", "sinh^{-1}")
 '    ea.text = Replace(ea.text, "tanh^(-1)", "tanh^{-1}")
-'    ea.text = Replace(ea.text, "cos^(-1) ", "cos^{-1}")    ' under sj*ae*ldne omst*ae*ndigheder kan der v*ae*re et mellemrum istedet for et 8289 tegn efter
-'    ea.text = Replace(ea.text, "sin^(-1) ", "sin^{-1}")    ' det blive forst*aa*et som et gangetegn hvis ikke fjernes
+'    ea.text = Replace(ea.text, "cos^(-1) ", "cos^{-1}")    ' under sjældne omstændigheder kan der være et mellemrum istedet for et 8289 tegn efter
+'    ea.text = Replace(ea.text, "sin^(-1) ", "sin^{-1}")    ' det blive forstået som et gangetegn hvis ikke fjernes
 '    ea.text = Replace(ea.text, "tan^(-1) ", "tan^{-1}")
 '    ea.text = Replace(ea.text, "cos^(-1)", "cos^{-1}")
 '    ea.text = Replace(ea.text, "sin^(-1)", "sin^{-1}")
 '    ea.text = Replace(ea.text, "tan^(-1)", "tan^{-1}")
 
-    ea.text = ConvertTrigPowLatex("sin", ea.text) ' skal v*ae*re f*oe*r funktionstegn fjernes
-    ea.text = ConvertTrigPowLatex("cos", ea.text) ' skal v*ae*re f*oe*r funktionstegn fjernes
-    ea.text = ConvertTrigPowLatex("tan", ea.text) ' skal v*ae*re f*oe*r funktionstegn fjernes
+    ea.text = ConvertTrigPowLatex("sin", ea.text) ' skal være før funktionstegn fjernes
+    ea.text = ConvertTrigPowLatex("cos", ea.text) ' skal være før funktionstegn fjernes
+    ea.text = ConvertTrigPowLatex("tan", ea.text) ' skal være før funktionstegn fjernes
 
     ea.text = Replace(ea.text, VBA.ChrW(8289), "") ' funktionstegn
 
@@ -5269,7 +5269,7 @@ Function ConvertToLatex(text As String) As String
     'vektor-notation med pil over bogstav
     ea.text = ConvertAccent(ea.text, VBA.ChrW(8407), "\overrightarrow{", "}")
 
-    'tv*ae*rvektor \hat
+    'tværvektor \hat
     ea.text = ConvertAccent(ea.text, VBA.ChrW(770), "\widehat{", "}")
     
     '\overline
@@ -5396,7 +5396,7 @@ Function ConvertToLatex(text As String) As String
             Dim ul As String, ll As String
             ll = Mid(ea.text, pos1 + 1, pos2 - pos1 - 1)
             ul = Mid(ea.text, pos2 + 1, pos3 - pos2 - 1)
-            If Left(ll, 1) = "(" And right(ll, 1) = ")" Then ll = Mid(ll, 2, Len(ll) - 2) ' Word alm inds*ae*tter parenteser som ikke skal ses. Hvis der skal v*ae*re parenteser s*aa* er der dobbelt
+            If Left(ll, 1) = "(" And right(ll, 1) = ")" Then ll = Mid(ll, 2, Len(ll) - 2) ' Word alm indsætter parenteser som ikke skal ses. Hvis der skal være parenteser så er der dobbelt
             If Left(ul, 1) = "(" And right(ul, 1) = ")" Then ul = Mid(ul, 2, Len(ul) - 2)
             ea.text = Left(ea.text, Pos - 1) & "\int_{" & ll & "}^{" & ul & "} " & right(ea.text, Len(ea.text) - pos3)
         Else    ' ubestemt
@@ -5586,7 +5586,7 @@ Function ConvertToLatex(text As String) As String
     Loop While s <> ""
     End If
 
-    'gr*ae*ske bogstaver
+    'græske bogstaver
     ea.text = Replace(ea.text, VBA.ChrW(916), "\Delta ")
     ea.text = Replace(ea.text, VBA.ChrW(948), "\delta ")
     ea.text = Replace(ea.text, VBA.ChrW(945), "\alpha ")
@@ -5628,13 +5628,13 @@ Function ConvertToLatex(text As String) As String
     ea.text = Replace(ea.text, VBA.ChrW(8641), "\rightharpoondown ")    '
     ea.text = Replace(ea.text, VBA.ChrW(183), "\cdot ")    ' prik erstattes med gange
     ea.text = Replace(ea.text, VBA.ChrW(215), "\times ")    ' x gangetegn
-    ea.text = Replace(ea.text, " \", "\") ' i Moodle bliver mellemrum lavet. Derfor skal de helst fjernes. mellemrum f*oe*r \ er ihvertfald ikke n*oe*dvendigt
+    ea.text = Replace(ea.text, " \", "\") ' i Moodle bliver mellemrum lavet. Derfor skal de helst fjernes. mellemrum før \ er ihvertfald ikke nødvendigt
 
     ' parenteser
     ea.text = Replace(ea.text, "(", "\left(")    '
     ea.text = Replace(ea.text, ")", "\right)")    '
     
-    'kantede parenteser ' ikke s*aa* simpelt fordi de indg*aa*r i latex syntaks
+    'kantede parenteser ' ikke så simpelt fordi de indgår i latex syntaks
     ea.SetSquareBrackets
     pos1 = 1
     Do
@@ -5688,7 +5688,7 @@ Dim ea As New ExpressionAnalyser, Pos As Integer, pos1 As Integer, s As String
     ea.text = text
     Pos = InStr(ea.text, Accent)
     Do While Pos > 0
-        If ea.ChrByIndex(Pos + 1) = " " Then ea.RemoveChar (Pos + 1) ' der kan v*ae*re mellemrum efter pilen som kan forstyrre
+        If ea.ChrByIndex(Pos + 1) = " " Then ea.RemoveChar (Pos + 1) ' der kan være mellemrum efter pilen som kan forstyrre
         If Mid(ea.text, Pos - 1, 1) = ")" Then
             ea.SetNormalBrackets
             s = ea.GetPrevBracketContent(Pos)
@@ -5774,7 +5774,7 @@ Function ConvertLatexToWord(text As String) As String
     text = Replace(text, "\infty", VBA.ChrW(8734))    '
     text = Replace(text, "\cdot", VBA.ChrW(183))    'prik gange
 
-    'gr*ae*ske bogstaver
+    'græske bogstaver
     text = Replace(text, "\Delta", VBA.ChrW(916))
     text = Replace(text, "\delta", VBA.ChrW(948))
     text = Replace(text, "\alpha", VBA.ChrW(945))
@@ -5806,7 +5806,7 @@ Function ConvertLatexToWord(text As String) As String
     '    text = Replace(text, "\greek-nu", VBA.ChrW(957))
     text = Replace(text, "\kappa", VBA.ChrW(954))
     text = Replace(text, "\zeta", VBA.ChrW(950))
-    text = Replace(text, "\eta", VBA.ChrW(951))    ' skal v*ae*re sidst da eta indg*aa*r i andre
+    text = Replace(text, "\eta", VBA.ChrW(951))    ' skal være sidst da eta indgår i andre
     text = Replace(text, "\inc", VBA.ChrW(8710))  ' specielt delta increment
     '    text = Replace(text, "degC", VBA.ChrW(8451))   ' specielt oC tegn
     '    text = Replace(text, "Symangle", VBA.ChrW(8736))  '
@@ -5825,7 +5825,7 @@ Function ConvertLatexToWord(text As String) As String
 
 End Function
 Sub ReadSelection()
-    ' inds*ae*tter det markerede som kommando
+    ' indsætter det markerede som kommando
     Dim mtext As String, copytext As String
     Dim antal As Integer
     Dim sstart As Long
@@ -5856,12 +5856,12 @@ Sub ReadSelection()
         '    If Selection.OMaths(1).Range.End < Selection.Range.End Then
         '        Selection.OMaths(1).Range.Select
         '    End If
-        Selection.OMaths(1).Range.Select    ' ovenst*aa*ende var ikke nok, men hvorfor var det der?
+        Selection.OMaths(1).Range.Select    ' ovenstående var ikke nok, men hvorfor var det der?
 
         antalgenstart = 0
 genstart:
         Kommando = ReadEquationCopy()
-        If Kommando = "" And antalgenstart = 0 Then    ' fors*oe*g p*aa* at rette sj*ae*ldent problem hvor alt l*ae*ses som "" m*aa*ske skyldes det tempdoc
+        If Kommando = "" And antalgenstart = 0 Then    ' forsøg på at rette sjældent problem hvor alt læses som "" måske skyldes det tempdoc
             '            tempDoc.Close (False)
             '            Set tempDoc = Nothing
             LukTempDoc
@@ -5887,11 +5887,11 @@ genstart:
     ElseIf antal > 1 Then
         ReDim Kommandoer(0 To 100)
         '    For j = 1 To antal
-        '        Selection.OMaths(j).Range.Select ' ovenst*aa*ende var ikke nok, men hvorfor var det der?
+        '        Selection.OMaths(j).Range.Select ' ovenstående var ikke nok, men hvorfor var det der?
         '        Kommandoer(j - 1) = Replace(ReadEquationCopy(), Chr(11), "") ' fjern shift-enter
         '    Next
 
-        '    GoTo hop ' fors*oe*g
+        '    GoTo hop ' forsøg
 
         Set sr = Selection.Range
         Selection.Copy
@@ -5930,10 +5930,10 @@ slut:
 
 End Sub
 Function ReadEquation(Optional ir As Range) As String
-    ' Overs*ae*tter selection der er omath til streng
-    ' kan g*oe*res hurtigere hvis der kopieres indenfor samme document, men virker ikke 100%
-    ' autotextentries kan kopiere istedet for clipboard, og er m*aa*ske hurtigere, men det er meget tvivlsomt.
-    ' har dog oplevet at det giver problemer. Ligningssystem tan(30)=h/x og tan(25)=h/(x+34) p*aa* l*oe*sningen beregnes i enden. Det g*aa*r helt galt, men virker n*aa*r autotextentries ikke anvendes
+    ' Oversætter selection der er omath til streng
+    ' kan gøres hurtigere hvis der kopieres indenfor samme document, men virker ikke 100%
+    ' autotextentries kan kopiere istedet for clipboard, og er måske hurtigere, men det er meget tvivlsomt.
+    ' har dog oplevet at det giver problemer. Ligningssystem tan(30)=h/x og tan(25)=h/(x+34) på løsningen beregnes i enden. Det går helt galt, men virker når autotextentries ikke anvendes
 
     Dim sr As Range, r As Range
     If ir Is Nothing Then
@@ -5954,14 +5954,14 @@ Function ReadEquation(Optional ir As Range) As String
     End With
 
     ReadEquation = r.text
-    r.Delete    ' dette afhj*ae*lper muligvis at word bliver langsom
+    r.Delete    ' dette afhjælper muligvis at word bliver langsom
 
     sr.Select
 
 End Function
 Function ReadEquationCopy(Optional ir As Range) As String
 ' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
-' Overs*ae*tter selection der er omath til streng
+' Oversætter selection der er omath til streng
     Dim sr As Range, r As Range
     '    Dim t As Variant
     '    t = Timer
@@ -5969,7 +5969,7 @@ Function ReadEquationCopy(Optional ir As Range) As String
 
     End If
 
-    '    copytext = Selection.Range.text ' fors*oe*g med ikke at klippe og kopiere problemet er at man er n*oe*dt til at konvertere til text for at l*ae*se ordentlig
+    '    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
     Set sr = Selection.Range
 
     Selection.Copy
@@ -5990,7 +5990,7 @@ Function ReadEquationCopy(Optional ir As Range) As String
     r.Delete
     '    ClearClipboard
 
-    '    tempDoc.Range.Delete ' dette afhj*ae*lper muligvis at word bliver langsom
+    '    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
     '    MsgBox Timer - t
 End Function
 Function ReadEquation2(ir As Range) As String
@@ -6012,11 +6012,36 @@ Function ReadEquation2(ir As Range) As String
     ReadEquation2 = r.text
     sr.Select
 
-    tempDoc.Range.Delete    ' dette afhj*ae*lper muligvis at word bliver langsom
+    tempDoc.Range.Delete    ' dette afhjælper muligvis at word bliver langsom
 
 End Function
+Function ReadFromWord(Expr As String) As String
+' tager udtryk som streng. Indsætter i word, bygger op og returnerer
+
+    Dim r As Range, oldr As Range
+
+    Set oldr = Selection.Range
+
+    Set r = tempDoc.Range
+    r.Delete
+    Set r = tempDoc.Range
+    With r
+        .OMaths.Add r
+        .OMaths(1).Range.text = Expr
+        .OMaths(1).Range.Font.Bold = False
+        .OMaths.BuildUp
+        .OMaths.Linearize
+        .OMaths(1).ConvertToNormalText
+    End With
+
+    ReadFromWord = r.text
+
+    r.Delete
+    
+    oldr.Select
+End Function
 Sub ReadSelectionOld()
-' inds*ae*tter det markerede som kommando
+' indsætter det markerede som kommando
     Dim mtext As String
     Dim antal As Integer
     Dim sstart As Integer
@@ -6035,7 +6060,7 @@ Sub ReadSelectionOld()
     If antal = 0 Then
         If Len(Selection.text) < 2 Then
             Kommando = ""
-            MsgBox "Marker det der skal evalueres af Maxima.", vbOKOnly, "V*ae*lg"
+            MsgBox "Marker det der skal evalueres af Maxima.", vbOKOnly, "Vælg"
             Exit Sub
         End If
         Kommando = Selection.text
@@ -6055,7 +6080,7 @@ Sub ReadSelectionOld()
         Selection.text = Replace(Selection.text, VBA.ChrW(8727), MaximaGangeTegn)    'fjern *
         Selection.text = Replace(Selection.text, "*", MaximaGangeTegn)    'fjern *
         If DecSeparator = "," Then
-            Selection.text = Replace(Selection.text, ".", ",")    'N*aa*r komma er decseparator kan . *ae*ndres til komma
+            Selection.text = Replace(Selection.text, ".", ",")    'Når komma er decseparator kan . ændres til komma
         End If
         Selection.OMaths(1).ConvertToMathText
         Selection.OMaths(1).Range.Select
@@ -6092,9 +6117,9 @@ Sub GoToEndOfSelectedMaths2()
     Dim mc As OMaths
     Set mc = Selection.OMaths
     On Error Resume Next
-    mc(mc.Count).ParentOMath.Range.Select    ' parentomath n*oe*dvendig hvis cursor st*aa*r i lysebl*aa* firkant
+    mc(mc.Count).ParentOMath.Range.Select    ' parentomath nødvendig hvis cursor står i lyseblå firkant
     On Error GoTo slut
-    '        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgeng*ae*ld problemer. Hmm problem med valgt del af udtryk og reducer
+    '        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
 slut:
     Selection.Collapse wdCollapseEnd
     Dim r As Range
@@ -6125,7 +6150,7 @@ Sub GoToEndOfSelectedMaths()
         On Error Resume Next
         mc(mc.Count).ParentOMath.Range.Select
         On Error GoTo slut
-        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgeng*ae*ld problemer. Hmm problem med valgt del af udtryk og reducer
+        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
     Else
         i = 0
         Do While Selection.OMaths.Count = 0 And i < 100
@@ -6144,7 +6169,7 @@ slut:
     End If
 End Sub
 Sub InsertMaximaOutput()
-' inds*ae*tter maxima output i word document
+' indsætter maxima output i word document
     Dim mo As Range, IsBold As Boolean, s As String
 
     Selection.Range.Font.Bold = False
@@ -6242,9 +6267,9 @@ Function TranslateReplaceComment(comm As String) As String
 
 
 
-    'comm = Replace(comm, "solve: using arc-trig functions to get a solution.", "Da det er en trigonometrisk ligning er der uendeligt mange l*oe*sninger. Kun en af disse l*oe*sninger er angivet.")
-    'comm = Replace(comm, "Some solutions will be lost.", " Alle l*oe*sninger er ikke fundet.")
-    'comm = Replace(comm, "A number was found where a variable was expected -`solve'", "Du har bedt om at l*oe*se en ligning for en variabel der er defineret til en v*ae*rdi. Lav en 'slet def:'  kommando f*oe*r du l*oe*ser for denne variabel.")
+    'comm = Replace(comm, "solve: using arc-trig functions to get a solution.", "Da det er en trigonometrisk ligning er der uendeligt mange løsninger. Kun en af disse løsninger er angivet.")
+    'comm = Replace(comm, "Some solutions will be lost.", " Alle løsninger er ikke fundet.")
+    'comm = Replace(comm, "A number was found where a variable was expected -`solve'", "Du har bedt om at løse en ligning for en variabel der er defineret til en værdi. Lav en 'slet def:'  kommando før du løser for denne variabel.")
     'comm = Replace(comm, " -- an error. To debug this try: debugmode(true);", "Der skete en fejl.")
     'comm = Replace(comm, "Division by 0", "Fejl: Division med nul.")
 
@@ -6291,7 +6316,7 @@ Sub InsertAssumptions()
     Selection.Font.Italic = True
 
     Selection.TypeParagraph
-    Selection.TypeText "L*oe*sningsbetingelser:  "
+    Selection.TypeText "Løsningsbetingelser:  "
     '            Selection.TypeText text:=vbTab
     Set mo = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText assum
@@ -6375,7 +6400,7 @@ Dim same As Boolean
     End If
 
     'If MaximaOutput = "" Then
-    '    KommentarOutput = "Der kom f*oe*lgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
+    '    KommentarOutput = "Der kom følgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
     'End If
 
     GoTo slut
@@ -6433,19 +6458,19 @@ Sub GenerateOutputArray(Optional text As String)
         Output = Replace(Trim(Output), VbCrLfMac, "")
 '#If Mac Then ' SBCL
         If Mid(text, Pos + 3, 1) = "i" Then
-            ' n*ae*ste er input
+            ' næste er input
             Minput(ArrIndex) = Minput(ArrIndex) & Output
         Else
-            ' n*ae*ste er output
+            ' næste er output
             moutput(ArrIndex) = moutput(ArrIndex) & Output
             ArrIndex = ArrIndex + 1 'mac
         End If
 '#Else ' GCL
 '        If Mid(text, pos + 3, 1) = "i" Then
-'            ' n*ae*ste er input
+'            ' næste er input
 '            Minput(nr) = Minput(nr) & Output
 '        Else
-'            ' n*ae*ste er output
+'            ' næste er output
 '            moutput(nr) = moutput(nr) & Output
 '        End If
 '#End If
@@ -6515,12 +6540,12 @@ Function RemovePrintetBool(s As String) As String
     On Error GoTo fejl
     s = TrimR(Trim(s), vbLf)
     s = TrimR(Trim(s), vbCr)
-'#If Mac Then ' vbcrlfmac can ikke bruges her, da det er lf p*aa* mac. Ikke efter 1.23
+'#If Mac Then ' vbcrlfmac can ikke bruges her, da det er lf på mac. Ikke efter 1.23
 '    arr = Split(s, vbCr)
 '#Else
 '    arr = Split(s, vbLf)
 '#End If
-Arr = Split(s, VbCrLfMac) ' *ae*ndret v. 1.23
+Arr = Split(s, VbCrLfMac) ' ændret v. 1.23
 
     ant = UBound(Arr)
     If ant > 0 Then
@@ -6587,10 +6612,10 @@ Function GetMaximaUnitOutput() As String
         Output = Replace(Trim(Mid(text, posb + 1, pos2 - Pos - 4 - AntalCifre)), vbCrLf, "")
 
         If Mid(text, Pos + 3, 1) = "i" Then
-            ' n*ae*ste er input
+            ' næste er input
             MinputU(nr) = MinputU(nr) & Output
         Else
-            ' n*ae*ste er output
+            ' næste er output
             moutputU(nr) = moutputU(nr) & Output
         End If
         Pos = pos2
@@ -6674,7 +6699,7 @@ Sub FindVariable(Optional text As String, Optional MaximaCode As Boolean = True)
         If text = "" Then
             On Error GoTo fejl
             For j = 0 To UBound(Kommandoer)
-                text = text & "+" & Kommandoer(j)    ' der skal bare v*ae*re tegn mellem som ikke kan indg*aa* i variabel
+                text = text & "+" & Kommandoer(j)    ' der skal bare være tegn mellem som ikke kan indgå i variabel
             Next
         End If
     End If
@@ -6689,7 +6714,7 @@ Sub FindVariable(Optional text As String, Optional MaximaCode As Boolean = True)
     Dim varind As Integer
     Dim varexists As Boolean
 
-    ' f*oe*rst tils*ae*t integrationsvariable
+    ' først tilsæt integrationsvariable
     varind = 1
     If Len(IntegrationVars) > 0 Then
         arrint = Split(IntegrationVars, ";")
@@ -6755,9 +6780,9 @@ Function FindDefinitions() As String
         s = ActiveDocument.Range.OMaths(i).Range.text
         '        If ActiveDocument.Range.OMaths(i).Range.start > start Then GoTo slut
 
-        If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then    ' kun se p*aa* felter med :  tripelligmed def= og specielt := tegn
+        If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then    ' kun se på felter med :  tripelligmed def= og specielt := tegn
 #If Mac Then
-            s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range) ' kan ikke huske hvad forskel p*aa* readeq1 og 2 er. Ihvert et tilf*ae*lde p*aa* mac numerisk grafisk ligningsl*oe*sning med foreg*aa*ende definition fejler. s*aa* derfor alm. readeq p*aa* mac. april2022 skiftet tilbage til readeq2, da der opstod problemer med definitioner anden gang de blev l_st. De kom ind som tekst med en masse "" og mellemrum
+            s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range) ' kan ikke huske hvad forskel på readeq1 og 2 er. Ihvert et tilfælde på mac numerisk grafisk ligningsløsning med foregående definition fejler. så derfor alm. readeq på mac. april2022 skiftet tilbage til readeq2, da der opstod problemer med definitioner anden gang de blev l_st. De kom ind som tekst med en masse "" og mellemrum
 #Else
             s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range)
 #End If
@@ -6844,7 +6869,7 @@ Function AddDefinition(s As String) As String
       Else    ' gem definitioner
          '            FindDefinitions = CodeForMaxima(s) & "," & FindDefinitions
          defstringtext = defstringtext & s & "$"
-         ea.text = Replace(s, ";", " , ")    ' fors*oe*g med at fjerne semikolon
+         ea.text = Replace(s, ";", " , ")    ' forsøg med at fjerne semikolon
          ea.ConvertDecSeparator
          ea.Pos = 1
          Do
@@ -6852,7 +6877,7 @@ Function AddDefinition(s As String) As String
             If Len(defenk) = 0 Then GoTo hop
             If InStr(defenk, "block") > 0 Then
                defenk = Replace(defenk, ";", ",")
-               defenk = Replace(defenk, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
+               defenk = Replace(defenk, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
                defenk = Replace(defenk, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
                defenk = Replace(defenk, VBA.ChrW(11), "")    ' shift-enter
                defenk = Replace(defenk, vbLf, "")    ' shift-enter og enter
@@ -6905,7 +6930,7 @@ Function AddDefinition(s As String) As String
                         If UBound(arr3) > 1 Then
                            k = 1
                            ass = ""
-                           Do While k <= UBound(arr3) ' hvis delt op forkert s*aa* repareres
+                           Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
                               If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
                                  If ass = "" Then
                                     ass = arr3(k)
@@ -6938,7 +6963,7 @@ Function AddDefinition(s As String) As String
             Else
                defenk = Replace(defenk, VBA.ChrW(34), "")    ' apostrof
                defenk = CodeForMaxima(defenk, CASengine)
-'#If Mac Then ' p*aa* mac bruges ## som multiplikator ved vektorer, s*aa* ikke n*oe*dvendigvis 'ikke ligmed'  nu ogs*aa* p*aa* windows 1.18
+'#If Mac Then ' på mac bruges ## som multiplikator ved vektorer, så ikke nødvendigvis 'ikke ligmed'  nu også på windows 1.18
                If InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0 Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
 '#Else
 '               If InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0 Or InStr(defenk, "#") > 0 Then
@@ -7116,7 +7141,7 @@ Function ValidateDef(ByVal lhs As String, ByVal rhs As String) As Boolean
         lhs = Left(lhs, Pos - 1)
     End If
 
-    ' If Not ea.IsAllText Then ikke god nok da , og ; ikke bliver taget h*oe*jde for
+    ' If Not ea.IsAllText Then ikke god nok da , og ; ikke bliver taget højde for
     If InStr(lhs, "+") > 0 Or InStr(lhs, "-") > 0 Or InStr(lhs, "*") > 0 Or InStr(lhs, "/") > 0 Then
         MsgBox Sprog.A(117) & vbCrLf & vbTab & ConvertToAscii(lhs & "=" & rhs) & vbCrLf & Sprog.A(118), vbOKOnly, Sprog.Error
         Exit Function
@@ -7132,7 +7157,7 @@ Function ValidateDef(ByVal lhs As String, ByVal rhs As String) As Boolean
 fejl:
 End Function
 Function GetAssumeText(defenk) As String
-' tager text fra word og omdanner til assume samt inds*ae*tter til forget
+' tager text fra word og omdanner til assume samt indsætter til forget
     Dim ea As ExpressionAnalyser
     Dim ea2 As ExpressionAnalyser
     Dim s As String
@@ -7199,9 +7224,9 @@ Sub AddToKillDefs(DefS As String)
 End Sub
 
 Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
-' checker om ligningen er helt l*oe*st for variabelen
+' checker om ligningen er helt løst for variabelen
 ' starter den med variabel= ?
-' indg*aa*r variabel p*aa* h*oe*jresiden af =tegn
+' indgår variabel på højresiden af =tegn
     On Error GoTo slut
     Dim NotSolved As Boolean
     Dim ea As New ExpressionAnalyser
@@ -7213,23 +7238,23 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
     Ligning = RemoveBrackets(Ligning)
     Arr = Split(Ligning, "=")
 
-    If UBound(Arr) = 1 Then    ' der er pr*ae*cis et =tegn
-        ea.text = Arr(1)    'h*oe*jresiden
+    If UBound(Arr) = 1 Then    ' der er præcis et =tegn
+        ea.text = Arr(1)    'højresiden
         IsSolved = True
         Do
             var = ea.GetNextVar
             ea.Pos = ea.Pos + 1
             If var = variabel Then
-                IsSolved = False    'variabel fundet p*aa* h*oe*jresiden s*aa* er det ihvertfald ikke l*oe*st
+                IsSolved = False    'variabel fundet på højresiden så er det ihvertfald ikke løst
                 GoTo slut
             End If
         Loop Until var = ""
 
         If Left(Ligning, 1 + Len(variabel)) = variabel & "=" Then  '  ikke nok alene
             IsSolved = True
-        ElseIf Len(variabel) > 1 And Mid(Ligning, Len(variabel) + 1, 1) = "=" Then    ' hvis l*ae*ngde af variabel samme som venstresiden. N*oe*dvendig for variable som f.eks. 1+r da det kan *ae*ndres til r+1. Men nok ikke 100% sikker
+        ElseIf Len(variabel) > 1 And Mid(Ligning, Len(variabel) + 1, 1) = "=" Then    ' hvis længde af variabel samme som venstresiden. Nødvendig for variable som f.eks. 1+r da det kan ændres til r+1. Men nok ikke 100% sikker
             IsSolved = True
-        Else    ' det m*aa* antages at den ikke er l*oe*st hvis den ikke passer med noget ovenfor
+        Else    ' det må antages at den ikke er løst hvis den ikke passer med noget ovenfor
             IsSolved = False
         End If
     Else
@@ -7243,8 +7268,8 @@ slut:
 End Function
 
 Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Optional ByVal Sep As String = ",") As String
-' checker om en liste af ligninger er l*oe*st helt
-' true hvis en er l*oe*st, false hvis ingen. All hvis alle.
+' checker om en liste af ligninger er løst helt
+' true hvis en er løst, false hvis ingen. All hvis alle.
     Dim oneSolved As Boolean
     Dim allsolved As Boolean
     Dim Arr As Variant
@@ -7384,7 +7409,7 @@ Function CheckForError() As Boolean
         fejltekst = Sprog.LispError
         CheckForError = True
     ElseIf MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
-        fejltekst = Sprog.A(133) '"Du har bedt om at l*oe*se ligningen for en variabel der allerede er defineret. Inds*ae*t en 'slet def:' kommando f*oe*r ligningen"
+        fejltekst = Sprog.A(133) '"Du har bedt om at løse ligningen for en variabel der allerede er defineret. Indsæt en 'slet def:' kommando før ligningen"
         CheckForError = True
     ElseIf (omax.deffejl = True) Then
         fejltekst = Sprog.DefError & vbCrLf & VisDef

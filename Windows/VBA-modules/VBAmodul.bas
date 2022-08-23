@@ -19,7 +19,7 @@ Sub ReplaceToASCIIseq()
          For i = 1 To VBC.CodeModule.CountOfLines
             If i > VBC.CodeModule.CountOfLines Then Exit For
             s = ReplaceLineToASCIIseq(VBC.CodeModule.Lines(i, 1))
-            If s <> "" Or i > 3 Then
+            If s <> "" Or i > 2 Then
                 VBC.CodeModule.DeleteLines i, 1
                 VBC.CodeModule.InsertLines i, s
             Else
@@ -33,23 +33,24 @@ Sub ReplaceToASCIIseq()
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
 Sub ReplaceToExtendedASCII()
-   Dim VBC As Object  'VBComponent
-   Dim i As Long, s As String
+    Dim VBC As Object  'VBComponent
+    Dim i As Long, s As String
    
-   If MsgBox("Do you want to replace all codetext to extended ASCII?" & vbCrLf & vbCrLf & "After use you can distribute the document" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
+    If MsgBox("Do you want to replace all codetext to extended ASCII?" & vbCrLf & vbCrLf & "After use you can distribute the document" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
    
-   For Each VBC In ActiveDocument.VBProject.VBComponents
+    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
-'      If VBC.Name = "CSprog" Then
+            '      If VBC.Name = "CSprog" Then
         
-         For i = 1 To VBC.CodeModule.CountOfLines
-            s = ReplaceLineToExtendedASCII(VBC.CodeModule.Lines(i, 1))
-            VBC.CodeModule.DeleteLines i, 1
-            If s <> "" Or i > 3 Then VBC.CodeModule.InsertLines i, s
-         Next
-      End If
-   Next
-'   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
+            For i = 1 To VBC.CodeModule.CountOfLines
+                If i > VBC.CodeModule.CountOfLines Then Exit For
+                s = ReplaceLineToExtendedASCII(VBC.CodeModule.Lines(i, 1))
+                VBC.CodeModule.DeleteLines i, 1
+                If s <> "" Or i > 2 Then VBC.CodeModule.InsertLines i, s
+            Next
+        End If
+    Next
+    '   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
 
