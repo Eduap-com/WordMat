@@ -47,7 +47,7 @@ Sub StartMaximaProcess(Optional waittime As LongPtr = 15)
         r = StartMaxima()
     Else
         r = StartMaximaWait(waittime)
-    ' Mac: pga ændring af operator _, som ikke  virker på Mac. Skal vel være i image. Er nu puttet i image v. 1.03.
+    ' Mac: pga *ae*ndring af operator _, som ikke  virker p*aa* Mac. Skal vel v*ae*re i image. Er nu puttet i image v. 1.03.
 '        Dim Command As String
 '        Command = "infix(""##"",115,115)$""##""(qwa,qwb):=block(if scalarp(qwa) or scalarp(qwb) then return(qwa*qwb) else return(qwa.qwb))$" & Command
 '        ExecuteMaximaCommand Command, 5
@@ -55,9 +55,9 @@ Sub StartMaximaProcess(Optional waittime As LongPtr = 15)
     mIndex = 1
         If r < 1 Then
             MsgBox "Error starting Maxima", vbOKOnly, Sprog.Error
-            GoTo slut
+            GoTo Slut
         End If
-slut:
+Slut:
 End Sub
 Sub CloseProcess()
     CloseMaxima
@@ -102,14 +102,14 @@ End Function
 Sub ExecuteMaximaCommand(Command As String, WaitForIt As Integer)
 Dim l As LongPtr, nocmd As LongPtr
 Dim ea As New ExpressionAnalyser
-On Error GoTo fejl
+On Error GoTo Fejl
     mFinished = 0
     mQuestion = 0
     Command = "[" & GuiSettingsString & "]$" & Command & vbLf
 
     lastOutput = ""
     
-    ea.text = Command
+    ea.Text = Command
     nocmd = ea.CountText(";") + ea.CountText("$")
     mIndex = mIndex + nocmd
         
@@ -127,10 +127,10 @@ On Error GoTo fejl
 '        End If
         CheckForQuestion
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox "Maxima execute error", vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub AnswerQuestion(answer As String)
 ' check c#
@@ -168,7 +168,7 @@ Dim l As LongPtr
 Dim stoptext As String
 Dim OutputBuffer As String
 Dim t As String
-On Error GoTo slut
+On Error GoTo Slut
     stoptext = "(%i" & mIndex & ")"
     StopTime = StopTime * 10
 If StopTime = 0 Then StopTime = 1
@@ -194,38 +194,38 @@ WaitForMaximaUntil = 1
 '        msgbox stoptext & vbLf & vbLf & lastOutput
         If InStr(lastOutput, stoptext) > 0 Then
             mFinished = 1
-            GoTo slut
+            GoTo Slut
         ElseIf InStr(lastOutput, "Console interrupt.") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo slut
+            GoTo Slut
         ElseIf InStr(lastOutput, "Acceptable answers are") > 0 Then
             mFinished = 1
             mQuestion = 1
-            GoTo slut
+            GoTo Slut
         ElseIf InStr(lastOutput, "Nonalgebraic argument given to 'topoly'") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo slut
+            GoTo Slut
         ElseIf InStr(lastOutput, "log: log(0) has been generated.") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo slut
+            GoTo Slut
         ElseIf InStr(lastOutput, "incorrect syntax:") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo slut
+            GoTo Slut
         ElseIf InStr(lastOutput, "positive, negative or zero?") > 0 Or InStr(lastOutput, "positive or negative?") > 0 Then
             mFinished = 1
             mQuestion = 1
-            GoTo slut
+            GoTo Slut
         ElseIf InStr(lastOutput, "variables to solve for?") > 0 Then
             mFinished = 1
             mError = 1
-            GoTo slut
+            GoTo Slut
         ElseIf InStr(lastOutput, "syntax error") > 0 Then
             mFinished = 1
-            GoTo slut
+            GoTo Slut
         End If
         i = i + 1
         uSleep 100000 ' vent 1/10 s
@@ -236,14 +236,14 @@ WaitForMaximaUntil = 1
         MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     End If
 '    End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
         WaitForMaximaUntil = -1 'error
-slut:
+Slut:
 End Function
 
 Public Sub Reset(extrakommando As String)
-' bruges til at køre killdefs
+' bruges til at k*oe*re killdefs
 Dim Command As String
 
     If extrakommando <> vbNullString Then
@@ -253,7 +253,7 @@ Dim Command As String
     Command = "[" & Command & "reset(linenum,features,%rnum)]$"
     mIndex = 0 '    SetCommandIndex 0
     
-    ExecuteMaximaCommand Command, 1 ' ændret fra 5
+    ExecuteMaximaCommand Command, 1 ' *ae*ndret fra 5
 End Sub
 Function GetEmptyString() As String
 '    GetEmptyString = String(2000, vbNullChar)  'this will make strlen not work in c
@@ -315,10 +315,10 @@ Dim c As Long
 '    MsgBox testFunc()
     
 '    c = ForceDivZero()
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox "divzero"
-slut:
+Slut:
 End Sub
 #End If
 

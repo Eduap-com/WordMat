@@ -33,7 +33,7 @@ End Function
 'Function LoadPictureMac(pathPict) As IPictureDisp
 '    On Error GoTo Err
 '    Dim pathBmp As String
-'    Const sIID_IPicture As String = "{7BF80980-BF32-101A-8BBB-00AA00300CAB}" ' der var fejl om manglende def af denne. Er fundet på nettet så ikke sikker på om den er korrekt
+'    Const sIID_IPicture As String = "{7BF80980-BF32-101A-8BBB-00AA00300CAB}" ' der var fejl om manglende def af denne. Er fundet p*aa* nettet s*aa* ikke sikker p*aa* om den er korrekt
 '
 '    If (LCase(Right(pathPict, 4)) = ".bmp") Then
 '        pathBmp = pathPict
@@ -191,7 +191,7 @@ Public Function ExecuteMaximaViaFile(MaximaCommand As String, Optional ByVal Max
 ' scriptfile must be placed in ~/Library/Application Scripts/com.microsoft.Word/
 ' ~/library is a hidden folder in the user folder
 ' filetype: .scpt or .applescript
-On Error GoTo fejl
+On Error GoTo Fejl
 '    SaveCommandFile MaximaCommand
     If UnitCore Then
 '        AppleScriptTask "WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait)
@@ -205,26 +205,26 @@ On Error GoTo fejl
     End If
 '    ExecuteMaximaViaFile = ReadMaximaOutputFile()
 'MsgBox ExecuteMaximaViaFile
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     ExecuteMaximaViaFile = "Fejln" & Err.Number
-slut:
+Slut:
     
 End Function
 Function RunScript(ScriptName As String, Param As String) As String
 ' scriptfile must be placed in ~/Library/Application Scripts/com.microsoft.Word/
 ' ~/library is a hidden folder in the user folder
 ' filetype: .scpt or .applescript
-On Error GoTo fejl
+On Error GoTo Fejl
     RunScript = AppleScriptTask("WordMatScripts.scpt", ScriptName, Param)
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     RunScript = "ScriptError"
-slut:
+Slut:
 End Function
 #Else
 Function RunScript(ScriptName As String, Param As String) As String
-' lige nu en dummy shell så der ikke kommer compilefejl
+' lige nu en dummy shell s*aa* der ikke kommer compilefejl
 '    RunScript = Shell("WordMatScripts.scpt", ScriptName, Param)
 End Function
 #End If

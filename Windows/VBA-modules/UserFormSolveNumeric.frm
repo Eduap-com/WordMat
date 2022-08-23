@@ -26,31 +26,31 @@ Private gemstartr As Integer
 Private gemr As Range
 
 Private Sub SaveVar()
-On Error GoTo fejl
+On Error GoTo Fejl
 '    If TextBox_variabel.text = "" Then
 '        SelectedVar = ListBox_vars.value
 '    Else
 '        SelectedVar = TextBox_variabel.text
 '    End If
-        SelectedVar = TextBox_variabel.text
+        SelectedVar = TextBox_variabel.Text
     
-    TextBox_guess.text = Replace(TextBox_guess.text, ",", ".")
-    TextBox_lval.text = Replace(TextBox_lval.text, ",", ".")
-    TextBox_hval.text = Replace(TextBox_hval.text, ",", ".")
+    TextBox_guess.Text = Replace(TextBox_guess.Text, ",", ".")
+    TextBox_lval.Text = Replace(TextBox_lval.Text, ",", ".")
+    TextBox_hval.Text = Replace(TextBox_hval.Text, ",", ".")
     
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     SelectedVar = ""
-slut:
+Slut:
 End Sub
 
 Private Sub CommandButton_findroot_Click()
     SaveVar
     Method = "findroot"
     
-    GoTo slut
-fejl:
-slut:
+    GoTo Slut
+Fejl:
+Slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
@@ -61,7 +61,7 @@ End Sub
 Private Sub CommandButton_insertpic_Click()
 Dim ils As InlineShape
 Dim s As String, Arr As Variant, Sep As String
-On Error GoTo fejl
+On Error GoTo Fejl
 omax.GoToEndOfSelectedMaths
 Selection.TypeParagraph
 Arr = Split(Label_ligning.Caption, "=")
@@ -72,15 +72,15 @@ Arr = Split(Label_ligning.Caption, "=")
 #End If
 'Set ils = Selection.InlineShapes.AddPicture(Environ("TEMP") & "\WordMatGraf.gif", False, True)
 Sep = "|"
-s = "WordMat" & Sep & AppVersion & Sep & "" & Sep & "" & Sep & TextBox_variabel.text & Sep & "" & Sep
-s = s & TextBox_xmin.text & Sep & TextBox_xmax.text & Sep & "" & Sep & "" & Sep
-s = s & Arr(0) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
-s = s & Arr(1) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
+s = "WordMat" & Sep & AppVersion & Sep & "" & Sep & "" & Sep & TextBox_variabel.Text & Sep & "" & Sep
+s = s & TextBox_xmin.Text & Sep & TextBox_xmax.Text & Sep & "" & Sep & "" & Sep
+s = s & Arr(0) & Sep & TextBox_variabel.Text & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & Arr(1) & Sep & TextBox_variabel.Text & Sep & "" & Sep & "" & Sep & "" & Sep
 ils.AlternativeText = s
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -89,9 +89,9 @@ Private Sub CommandButton_ok_Click()
     SaveVar
     Method = "newton"
     
-    GoTo slut
-fejl:
-slut:
+    GoTo Slut
+Fejl:
+Slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
@@ -109,8 +109,8 @@ OpdaterGraf
 End Sub
 
 Private Sub CommandButton_visgraf_Click()
-Dim text As String
-On Error GoTo fejl
+Dim Text As String
+On Error GoTo Fejl
 'Dim omax As New CMaxima
     If omax Is Nothing Then
         Set omax = New CMaxima
@@ -121,20 +121,20 @@ On Error GoTo fejl
     End If
     omax.PrepareNewCommand ' nulstiller og finder definitioner
     
-    If TextBox_xmin.text = "" Then TextBox_xmin = -5
-    If TextBox_xmax.text = "" Then TextBox_xmax = 5
+    If TextBox_xmin.Text = "" Then TextBox_xmin = -5
+    If TextBox_xmax.Text = "" Then TextBox_xmax = 5
     
     udtryk = Replace(udtryk, "=", ";")
 '    Me.Hide
-    Call omax.Plot2D(udtryk, "", TextBox_variabel.text, Replace(TextBox_xmin.text, ",", "."), Replace(TextBox_xmax.text, ",", "."), "", "", "", "")
+    Call omax.Plot2D(udtryk, "", TextBox_variabel.Text, Replace(TextBox_xmin.Text, ",", "."), Replace(TextBox_xmax.Text, ",", "."), "", "", "", "")
        
-    omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
+    omax.PrepareNewCommand ' n*oe*dvendigt da der efterf*oe*lgende skal k*oe*res newton el lign eller vises grafen igen
     DoEvents
 '    Me.Show
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Private Sub CommandButton_zoom_Click()
@@ -142,22 +142,22 @@ Dim dx As Single
 Dim midt As Single
 Dim xmin As Single
 Dim xmax As Single
-On Error GoTo fejl
-xmin = CSng(TextBox_xmin.text)
-xmax = CSng(TextBox_xmax.text)
+On Error GoTo Fejl
+xmin = CSng(TextBox_xmin.Text)
+xmax = CSng(TextBox_xmax.Text)
 
 midt = (xmax + xmin) / 2
 dx = (xmax - xmin) * 0.3
 
-TextBox_xmin.text = xmin + dx
-TextBox_xmax.text = xmax - dx
+TextBox_xmin.Text = xmin + dx
+TextBox_xmax.Text = xmax - dx
 OpdaterGraf
 
 Me.Repaint
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 
 End Sub
@@ -167,22 +167,22 @@ Dim dx As Single
 Dim midt As Single
 Dim xmin As Single
 Dim xmax As Single
-On Error GoTo fejl
-xmin = CSng(TextBox_xmin.text)
-xmax = CSng(TextBox_xmax.text)
+On Error GoTo Fejl
+xmin = CSng(TextBox_xmin.Text)
+xmax = CSng(TextBox_xmax.Text)
 
 midt = (xmax + xmin) / 2
 dx = (xmax - xmin) * 0.4
 
-TextBox_xmin.text = xmin - dx
-TextBox_xmax.text = xmax + dx
+TextBox_xmin.Text = xmin - dx
+TextBox_xmax.Text = xmax + dx
 OpdaterGraf
 
 Me.Repaint
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 End Sub
 
@@ -203,23 +203,23 @@ Dim midt As Single
 Dim x As Single
 Label_zoom.visible = False
 
-xmin = CSng(TextBox_xmin.text)
-xmax = CSng(TextBox_xmax.text)
+xmin = CSng(TextBox_xmin.Text)
+xmax = CSng(TextBox_xmax.Text)
 dx = (xmax - xmin) * 0.3
 cfakt = (xmax - xmin) / (Image1.Width * 0.85)
 'MsgBox Image1.Picture.Width
 'MsgBox "xmax  -  " & xmax & "  xmin-  " & xmin & " gemx-" & gemx & "x-" & X & " cfakt " & cfakt & "cfakt*x" & cfakt * X
 x = gemx - Image1.Width * 0.1
 gemx = gemx - Image1.Width * 0.1
-TextBox_xmin.text = xmin + cfakt * x - dx
-TextBox_xmax.text = xmin + cfakt * x + dx
+TextBox_xmin.Text = xmin + cfakt * x - dx
+TextBox_xmax.Text = xmin + cfakt * x + dx
 OpdaterGraf
 
     Me.Repaint
-GoTo slut
-fejl:
-    MsgBox "Der skete en fejl. Se på tallene ved xmin og xmax", vbOKOnly, Sprog.Error
-slut:
+GoTo Slut
+Fejl:
+    MsgBox "Der skete en fejl. Se p*aa* tallene ved xmin og xmax", vbOKOnly, Sprog.Error
+Slut:
     
 End Sub
 
@@ -251,21 +251,21 @@ Dim xmax As Single
 Dim cfakt As Single
 
 Label_zoom.visible = False
-If Abs(x - gemx) < 5 Then GoTo slut
+If Abs(x - gemx) < 5 Then GoTo Slut
 
-xmin = CSng(TextBox_xmin.text)
-xmax = CSng(TextBox_xmax.text)
+xmin = CSng(TextBox_xmin.Text)
+xmax = CSng(TextBox_xmax.Text)
 cfakt = (xmax - xmin) / (Image1.Width * 0.85)
 'MsgBox Image1.Picture.Width
 'MsgBox "xmax  -  " & xmax & "  xmin-  " & xmin & " gemx-" & gemx & "x-" & X & " cfakt " & cfakt & "cfakt*x" & cfakt * X
 x = x - Image1.Width * 0.1
 gemx = gemx - Image1.Width * 0.1
-TextBox_xmax.text = xmin + cfakt * x
-TextBox_xmin.text = xmin + cfakt * gemx
+TextBox_xmax.Text = xmin + cfakt * x
+TextBox_xmin.Text = xmin + cfakt * gemx
 OpdaterGraf
 
     Me.Repaint
-slut:
+Slut:
 End Sub
 
 Private Sub Label_intervalhelp_Click()
@@ -285,30 +285,30 @@ Private Sub TextBox_xmin_AfterUpdate()
 
 End Sub
 Sub OpdaterGraf()
-On Error GoTo fejl
+On Error GoTo Fejl
 #If Mac Then
-Dim text As String
+Dim Text As String
 Dim Arr As Variant
     Arr = Split(Label_ligning.Caption, "=")
     
-    text = "line_width=2,color=green,explicit(" & Arr(0) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & "),"
-    text = text & "color=red,explicit(" & Arr(1) & "," & TextBox_variabel.text & "," & TextBox_xmin.text & "," & TextBox_xmax.text & ")"
+    Text = "line_width=2,color=green,explicit(" & Arr(0) & "," & TextBox_variabel.Text & "," & TextBox_xmin.Text & "," & TextBox_xmax.Text & "),"
+    Text = Text & "color=red,explicit(" & Arr(1) & "," & TextBox_variabel.Text & "," & TextBox_xmin.Text & "," & TextBox_xmax.Text & ")"
 '    If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
 '        text = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.text) & "," & ConvertNumberToMaxima(TextBox_xmax.text) & "]"
 '    End If
 '    If Len(TextBox_ymin.text) > 0 And Len(TextBox_ymax.text) > 0 And Len(TextBox_dfligning.text) = 0 Then
 '        text = text & ",yrange=[" & ConvertNumberToMaxima(TextBox_ymin.text) & "," & ConvertNumberToMaxima(TextBox_ymax.text) & "]"
 '    End If
-    Call omax.Draw2D(text, "", TextBox_variabel.text, "y", True, True, 3)
+    Call omax.Draw2D(Text, "", TextBox_variabel.Text, "y", True, True, 3)
 #Else
-    Call omax.Plot2D(udtryk, "", TextBox_variabel.text, Replace(TextBox_xmin.text, ",", "."), Replace(TextBox_xmax.text, ",", "."), "", "", "", "", True)
+    Call omax.Plot2D(udtryk, "", TextBox_variabel.Text, Replace(TextBox_xmin.Text, ",", "."), Replace(TextBox_xmax.Text, ",", "."), "", "", "", "", True)
 #End If
     
-    TextBox_guess.text = (CSng(TextBox_xmax.text) + CSng(TextBox_xmin.text)) / 2
-    TextBox_lval.text = TextBox_xmin.text
-    TextBox_hval.text = TextBox_xmax.text
+    TextBox_guess.Text = (CSng(TextBox_xmax.Text) + CSng(TextBox_xmin.Text)) / 2
+    TextBox_lval.Text = TextBox_xmin.Text
+    TextBox_hval.Text = TextBox_xmax.Text
     
-    omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
+    omax.PrepareNewCommand ' n*oe*dvendigt da der efterf*oe*lgende skal k*oe*res newton el lign eller vises grafen igen
     DoEvents
 #If Mac Then
     ShowPreviewMac
@@ -316,10 +316,10 @@ Dim Arr As Variant
     Image1.Picture = LoadPicture(GetTempDir() & "WordMatGraf.gif")
 #End If
 '    Image1.Picture = LoadPicture(Environ("TEMP") & "\WordMatGraf.gif")
-GoTo slut
-fejl:
-    MsgBox "Der skete en fejl. Prøv at trykke Opdater.", vbOKOnly, Sprog.Error
-slut:
+GoTo Slut
+Fejl:
+    MsgBox "Der skete en fejl. Pr*oe*v at trykke Opdater.", vbOKOnly, Sprog.Error
+Slut:
 
 End Sub
 Private Sub UserForm_Activate()
@@ -351,12 +351,12 @@ On Error Resume Next
     Kill GetTempDir() & "\WordMatGraf.gif"
 #End If
 
-On Error GoTo fejl
+On Error GoTo Fejl
     SelectedVar = ""
     ListBox_vars.Clear
-    TextBox_guess.text = "1"
-    TextBox_xmin.text = "-5"
-    TextBox_xmax.text = "5"
+    TextBox_guess.Text = "1"
+    TextBox_xmin.Text = "-5"
+    TextBox_xmax.Text = "5"
     Label_ligning.Caption = omax.ConvertToAscii(udtryk)
     Arr = Split(vars, ";")
     Set gemr = Selection.Range
@@ -370,8 +370,8 @@ On Error GoTo fejl
 '    If ListBox_vars.ListCount > 0 Then
 '        ListBox_vars.ListIndex = SelVarIndex
 '    End If
-    If UBound(Arr) >= 0 And TextBox_variabel.text = vbNullString Then
-        TextBox_variabel.text = Arr(0)
+    If UBound(Arr) >= 0 And TextBox_variabel.Text = vbNullString Then
+        TextBox_variabel.Text = Arr(0)
     End If
     
 '    If omax Is Nothing Then
@@ -390,10 +390,10 @@ On Error GoTo fejl
     
     CommandButton_ok.SetFocus
 
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 '    newton.Select
 
 End Sub

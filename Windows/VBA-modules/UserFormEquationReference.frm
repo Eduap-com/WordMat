@@ -21,12 +21,12 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-    EqName = ListBox1.text
+    EqName = ListBox1.Text
     Me.Hide
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    EqName = ListBox1.text
+    EqName = ListBox1.Text
     Me.Hide
 End Sub
 
@@ -44,6 +44,6 @@ Sub SetCaptions()
     Me.Caption = Sprog.A(15)
     CommandButton_ok.Caption = Sprog.OK
     CommandButton_cancel.Caption = Sprog.Cancel
-    Label_Ligninger.Caption = Sprog.Equations
+    Label_ligninger.Caption = Sprog.Equations
     
 End Sub

@@ -50,10 +50,10 @@ CreateConstructionElement
 End Sub
 
 
-Public Sub Save(filnavn As String)
+Public Sub Save(Filnavn As String)
     If Show3D Then CreateEuclidianView3DElement
     CreateKernelElement
-    GeoXMLdom.Save (filnavn)
+    GeoXMLdom.Save (Filnavn)
 End Sub
 
 Sub CreateGuiElement()
@@ -490,7 +490,7 @@ End Sub
 Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
     Dim Pos As Integer
     
-    If InStr(Expr, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke understøttet endnu
+    If InStr(Expr, "matrix") > 0 Then GoTo Slut ' matrix/vektor ikke underst*oe*ttet endnu
     
     Pos = InStr(funkname, "(")
     If Pos > 1 Then
@@ -558,7 +558,7 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
     pointSizeelement.setAttribute "thickness", "2"
     pointSizeelement.setAttribute "type", "0"
     
-slut:
+Slut:
 End Sub
 
 'Sub CreateElement()
@@ -569,9 +569,9 @@ End Sub
 
 'End Sub
 
-Function ConvertToGeogebraSyntaxFile(ByVal text As String, Optional ConvertMaxima As Boolean = True) As String
+Function ConvertToGeogebraSyntaxFile(ByVal Text As String, Optional ConvertMaxima As Boolean = True) As String
 
-   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(text, ConvertMaxima, False)
+   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(Text, ConvertMaxima, False)
 End Function
 
 
