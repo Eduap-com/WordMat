@@ -1343,9 +1343,14 @@ begin
     else
       Result := False;
   end
-  else if not (Excel12Installed or Excel14Installed or Excel15Installed or Excel16Installed) then begin
-    MsgBox(ExpandConstant('{cm:NoExcel}'), mbInformation, MB_OK);
-    Result := False;
+  else if not (Excel12Installed or Excel14Installed or Excel15Installed or Excel16Installed) then begin 
+    if MsgBox(ExpandConstant('{cm:NoExcel}'), mbInformation, MB_YESNO) = IDYES then
+      begin
+      Result := True;
+      Excel16Installed:=true;
+      end
+    else
+      Result := False; 
   end
   else if (not IsAdminLoggedOn()) then
      begin
