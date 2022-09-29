@@ -46,12 +46,12 @@ End Sub
 
 Private Sub Label_symbol_Click()
 Dim ctrl As control
-On Error GoTo fejl
+On Error GoTo Fejl
 Set ctrl = Me.ActiveControl
 If Left(ctrl.Name, 7) <> "TextBox" Then Set ctrl = TextBox_titel
 UserFormSymbol.Show
-ctrl.text = ctrl.text & UserFormSymbol.tegn
-fejl:
+ctrl.Text = ctrl.Text & UserFormSymbol.tegn
+Fejl:
 End Sub
 
 
@@ -62,12 +62,12 @@ End Sub
 
 Private Sub TextBox_xmin_Exit(ByVal Cancel As MSForms.ReturnBoolean)
     If ToggleButton_propto.Value Then
-        TextBox_ymin.text = TextBox_xmin.text
+        TextBox_ymin.Text = TextBox_xmin.Text
     End If
 End Sub
 Private Sub TextBox_xmax_Exit(ByVal Cancel As MSForms.ReturnBoolean)
     If ToggleButton_propto.Value Then
-        TextBox_ymax.text = TextBox_xmax.text
+        TextBox_ymax.Text = TextBox_xmax.Text
     End If
 End Sub
 Private Sub ToggleButton_auto_Click()
@@ -75,8 +75,8 @@ If DisableEvents Then Exit Sub
 DisableEvents = True
 ToggleButton_propto.Value = False
 ToggleButton_manuel.Value = False
-TextBox_ymin.text = ""
-TextBox_ymax.text = ""
+TextBox_ymin.Text = ""
+TextBox_ymax.Text = ""
 DisableEvents = False
 OpdaterGraf
 Me.Repaint
@@ -87,11 +87,11 @@ If DisableEvents Then Exit Sub
 DisableEvents = True
 ToggleButton_auto.Value = False
 ToggleButton_propto.Value = False
-If TextBox_ymin.text = "" Then
-    TextBox_ymin.text = TextBox_xmin.text
+If TextBox_ymin.Text = "" Then
+    TextBox_ymin.Text = TextBox_xmin.Text
 End If
-If TextBox_ymax.text = "" Then
-    TextBox_ymax.text = TextBox_xmax.text
+If TextBox_ymax.Text = "" Then
+    TextBox_ymax.Text = TextBox_xmax.Text
 End If
 DisableEvents = False
 End Sub
@@ -101,11 +101,11 @@ If DisableEvents Then Exit Sub
 DisableEvents = True
 ToggleButton_auto.Value = False
 ToggleButton_manuel.Value = False
-If TextBox_ymin.text = "" Then
-    TextBox_ymin.text = TextBox_xmin.text
+If TextBox_ymin.Text = "" Then
+    TextBox_ymin.Text = TextBox_xmin.Text
 Else
 End If
-TextBox_ymax.text = TextBox_ymin.text + (TextBox_xmax.text - TextBox_xmin.text) * 23 / 33
+TextBox_ymax.Text = TextBox_ymin.Text + (TextBox_xmax.Text - TextBox_xmin.Text) * 23 / 33
 
 DisableEvents = False
 OpdaterGraf
@@ -153,31 +153,31 @@ If Not PicOpen Then
     
 '    d = Replace(d, "$", vbCrLf)
     
-    TextBox_definitioner.text = nd
+    TextBox_definitioner.Text = nd
     
     End If
 End If
     OpdaterDefinitioner
     CheckForAssume
-    ' indsæt xmin og xmax hvis der var definerede
-    xmin = TextBox_xmin1.text
-    If Len(TextBox_xmin2.text) And ConvertStringToNumber(TextBox_xmin2.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin2.text
-    If Len(TextBox_xmin3.text) And ConvertStringToNumber(TextBox_xmin3.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin3.text
-    If Len(TextBox_xmin4.text) And ConvertStringToNumber(TextBox_xmin4.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin4.text
-    If Len(TextBox_xmin5.text) And ConvertStringToNumber(TextBox_xmin5.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin5.text
-    If Len(TextBox_xmin6.text) And ConvertStringToNumber(TextBox_xmin6.text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin6.text
-    xmax = TextBox_xmax1.text
-    If Len(TextBox_xmax2.text) And ConvertStringToNumber(TextBox_xmax2.text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax2.text
-    If Len(TextBox_xmax3.text) And ConvertStringToNumber(TextBox_xmax3.text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax3.text
-    If Len(TextBox_xmax4.text) And ConvertStringToNumber(TextBox_xmax4.text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax4.text
-    If Len(TextBox_xmax5.text) And ConvertStringToNumber(TextBox_xmax5.text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax5.text
-    If Len(TextBox_xmax6.text) And ConvertStringToNumber(TextBox_xmax6.text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax6.text
+    ' inds*ae*t xmin og xmax hvis der var definerede
+    xmin = TextBox_xmin1.Text
+    If Len(TextBox_xmin2.Text) And ConvertStringToNumber(TextBox_xmin2.Text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin2.Text
+    If Len(TextBox_xmin3.Text) And ConvertStringToNumber(TextBox_xmin3.Text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin3.Text
+    If Len(TextBox_xmin4.Text) And ConvertStringToNumber(TextBox_xmin4.Text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin4.Text
+    If Len(TextBox_xmin5.Text) And ConvertStringToNumber(TextBox_xmin5.Text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin5.Text
+    If Len(TextBox_xmin6.Text) And ConvertStringToNumber(TextBox_xmin6.Text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin6.Text
+    xmax = TextBox_xmax1.Text
+    If Len(TextBox_xmax2.Text) And ConvertStringToNumber(TextBox_xmax2.Text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax2.Text
+    If Len(TextBox_xmax3.Text) And ConvertStringToNumber(TextBox_xmax3.Text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax3.Text
+    If Len(TextBox_xmax4.Text) And ConvertStringToNumber(TextBox_xmax4.Text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax4.Text
+    If Len(TextBox_xmax5.Text) And ConvertStringToNumber(TextBox_xmax5.Text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax5.Text
+    If Len(TextBox_xmax6.Text) And ConvertStringToNumber(TextBox_xmax6.Text) > ConvertStringToNumber(xmax) Then xmax = TextBox_xmax6.Text
     
-    If Len(xmin) > 0 Then TextBox_xmin.text = xmin
-    If Len(xmax) > 0 Then TextBox_xmax.text = xmax
-    If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
-        If ConvertStringToNumber(TextBox_xmin.text) > ConvertStringToNumber(TextBox_xmax.text) Then
-            TextBox_xmax.text = ConvertNumberToString(ConvertStringToNumber(TextBox_xmin.text) + 10)
+    If Len(xmin) > 0 Then TextBox_xmin.Text = xmin
+    If Len(xmax) > 0 Then TextBox_xmax.Text = xmax
+    If Len(TextBox_xmin.Text) > 0 And Len(TextBox_xmax.Text) > 0 Then
+        If ConvertStringToNumber(TextBox_xmin.Text) > ConvertStringToNumber(TextBox_xmax.Text) Then
+            TextBox_xmax.Text = ConvertNumberToString(ConvertStringToNumber(TextBox_xmin.Text) + 10)
         End If
     End If
 '    TextBox_xmin.text = "-5"
@@ -207,12 +207,12 @@ Private Sub CommandButton_insertplan_Click()
 Dim linje As String
 '    plan = "a*(x-x0)+b*(y-y0)=0"
     linje = "1*(x-0)+1*(y-0)=0"
-    If TextBox_lig1.text = "" Then
-        TextBox_lig1.text = linje
-    ElseIf TextBox_lig2.text = "" Then
-        TextBox_lig2.text = linje
-    ElseIf TextBox_Lig3.text = "" Then
-        TextBox_Lig3.text = linje
+    If TextBox_lig1.Text = "" Then
+        TextBox_lig1.Text = linje
+    ElseIf TextBox_lig2.Text = "" Then
+        TextBox_lig2.Text = linje
+    ElseIf TextBox_Lig3.Text = "" Then
+        TextBox_Lig3.Text = linje
     End If
 
 End Sub
@@ -220,54 +220,54 @@ End Sub
 Private Sub CommandButton_kugle_Click()
 Dim cirkel As String
     cirkel = "(x-0)^2+(y-0)^2=1^2"
-    If TextBox_lig1.text = "" Then
-        TextBox_lig1.text = cirkel
-    ElseIf TextBox_lig2.text = "" Then
-        TextBox_lig2.text = cirkel
-    ElseIf TextBox_Lig3.text = "" Then
-        TextBox_Lig3.text = cirkel
+    If TextBox_lig1.Text = "" Then
+        TextBox_lig1.Text = cirkel
+    ElseIf TextBox_lig2.Text = "" Then
+        TextBox_lig2.Text = cirkel
+    ElseIf TextBox_Lig3.Text = "" Then
+        TextBox_Lig3.Text = cirkel
     End If
 
 End Sub
 
 Private Sub CommandButton_nulstillign1_Click()
-TextBox_lig1.text = ""
+TextBox_lig1.Text = ""
 End Sub
 
 Private Sub CommandButton_nulstillign3_Click()
-TextBox_Lig3.text = ""
+TextBox_Lig3.Text = ""
 End Sub
 
 Private Sub CommandButton_nulstilligning2_Click()
-TextBox_lig2.text = ""
+TextBox_lig2.Text = ""
 End Sub
 
 Private Sub CommandButton_nulstilpar1_Click()
-TextBox_parametric1x.text = ""
-TextBox_parametric1y.text = ""
-TextBox_tmin1.text = ""
-TextBox_tmax1.text = ""
+TextBox_parametric1x.Text = ""
+TextBox_parametric1y.Text = ""
+TextBox_tmin1.Text = ""
+TextBox_tmax1.Text = ""
 
 End Sub
 
 Private Sub CommandButton_nulstilpar2_Click()
-TextBox_parametric2x.text = ""
-TextBox_parametric2y.text = ""
-TextBox_tmin2.text = ""
-TextBox_tmax2.text = ""
+TextBox_parametric2x.Text = ""
+TextBox_parametric2y.Text = ""
+TextBox_tmin2.Text = ""
+TextBox_tmax2.Text = ""
 
 End Sub
 
 Private Sub CommandButton_nulstilpar3_Click()
-TextBox_parametric3x.text = ""
-TextBox_parametric3y.text = ""
-TextBox_tmin3.text = ""
-TextBox_tmax3.text = ""
+TextBox_parametric3x.Text = ""
+TextBox_parametric3y.Text = ""
+TextBox_tmin3.Text = ""
+TextBox_tmax3.Text = ""
 
 End Sub
 
 Private Sub CommandButton_nulstilvektorer_Click()
-    TextBox_vektorer.text = ""
+    TextBox_vektorer.Text = ""
 End Sub
 
 Private Sub CommandButton_nyetiket_Click()
@@ -281,10 +281,10 @@ Private Sub CommandButton_nytpunkt_Click()
 End Sub
 
 Private Sub CommandButton_nyvektor_Click()
-    If TextBox_vektorer.text <> "" Then
-        TextBox_vektorer.text = TextBox_vektorer.text & VbCrLfMac
+    If TextBox_vektorer.Text <> "" Then
+        TextBox_vektorer.Text = TextBox_vektorer.Text & VbCrLfMac
     End If
-    TextBox_vektorer.text = TextBox_vektorer.text & "(0;0)-(1;1)"
+    TextBox_vektorer.Text = TextBox_vektorer.Text & "(0;0)-(1;1)"
 
 End Sub
 
@@ -294,21 +294,21 @@ Dim py As String
 px = "0+1*t"
 py = "0+1*t"
 
-If TextBox_parametric1x.text = "" Then
-    TextBox_parametric1x.text = px
-    TextBox_parametric1y.text = py
-    TextBox_tmin1.text = "0"
-    TextBox_tmax1.text = "1"
-ElseIf TextBox_parametric2x.text = "" Then
-    TextBox_parametric2x.text = px
-    TextBox_parametric2y.text = py
-    TextBox_tmin2.text = "0"
-    TextBox_tmax2.text = "1"
-ElseIf TextBox_parametric3x.text = "" Then
-    TextBox_parametric3x.text = px
-    TextBox_parametric3y.text = py
-    TextBox_tmin3.text = "0"
-    TextBox_tmax3.text = "1"
+If TextBox_parametric1x.Text = "" Then
+    TextBox_parametric1x.Text = px
+    TextBox_parametric1y.Text = py
+    TextBox_tmin1.Text = "0"
+    TextBox_tmax1.Text = "1"
+ElseIf TextBox_parametric2x.Text = "" Then
+    TextBox_parametric2x.Text = px
+    TextBox_parametric2y.Text = py
+    TextBox_tmin2.Text = "0"
+    TextBox_tmax2.Text = "1"
+ElseIf TextBox_parametric3x.Text = "" Then
+    TextBox_parametric3x.Text = px
+    TextBox_parametric3y.Text = py
+    TextBox_tmin3.Text = "0"
+    TextBox_tmax3.Text = "1"
 End If
 
 
@@ -369,46 +369,46 @@ Private Sub Label_punkterhelp_Click()
 End Sub
 
 Private Sub CommandButton_nulstil1_Click()
-    TextBox_ligning1.text = ""
-    TextBox_var1.text = "x"
-    TextBox_xmin1.text = ""
-    TextBox_xmax1.text = ""
-    ComboBox_ligning1.text = ""
+    TextBox_ligning1.Text = ""
+    TextBox_var1.Text = "x"
+    TextBox_xmin1.Text = ""
+    TextBox_xmax1.Text = ""
+    ComboBox_ligning1.Text = ""
 End Sub
 Private Sub CommandButton_nulstil2_Click()
-    TextBox_ligning2.text = ""
-    TextBox_var2.text = "x"
-    TextBox_xmin2.text = ""
-    TextBox_xmax2.text = ""
-    ComboBox_ligning2.text = ""
+    TextBox_ligning2.Text = ""
+    TextBox_var2.Text = "x"
+    TextBox_xmin2.Text = ""
+    TextBox_xmax2.Text = ""
+    ComboBox_ligning2.Text = ""
 End Sub
 Private Sub CommandButton_nulstil3_Click()
-    TextBox_ligning3.text = ""
-    TextBox_var3.text = "x"
-    TextBox_xmin3.text = ""
-    TextBox_xmax3.text = ""
-    ComboBox_ligning3.text = ""
+    TextBox_ligning3.Text = ""
+    TextBox_var3.Text = "x"
+    TextBox_xmin3.Text = ""
+    TextBox_xmax3.Text = ""
+    ComboBox_ligning3.Text = ""
 End Sub
 Private Sub CommandButton_nulstil4_Click()
-    TextBox_ligning4.text = ""
-    TextBox_var4.text = "x"
-    TextBox_xmin4.text = ""
-    TextBox_xmax4.text = ""
-    ComboBox_ligning4.text = ""
+    TextBox_ligning4.Text = ""
+    TextBox_var4.Text = "x"
+    TextBox_xmin4.Text = ""
+    TextBox_xmax4.Text = ""
+    ComboBox_ligning4.Text = ""
 End Sub
 Private Sub CommandButton_nulstil5_Click()
-    TextBox_ligning5.text = ""
-    TextBox_var5.text = "x"
-    TextBox_xmin5.text = ""
-    TextBox_xmax5.text = ""
-    ComboBox_ligning5.text = ""
+    TextBox_ligning5.Text = ""
+    TextBox_var5.Text = "x"
+    TextBox_xmin5.Text = ""
+    TextBox_xmax5.Text = ""
+    ComboBox_ligning5.Text = ""
 End Sub
 Private Sub CommandButton_nulstil6_Click()
-    TextBox_ligning6.text = ""
-    TextBox_var6.text = "x"
-    TextBox_xmin6.text = ""
-    TextBox_xmax6.text = ""
-    ComboBox_ligning6.text = ""
+    TextBox_ligning6.Text = ""
+    TextBox_var6.Text = "x"
+    TextBox_xmin6.Text = ""
+    TextBox_xmax6.Text = ""
+    ComboBox_ligning6.Text = ""
 End Sub
 
 
@@ -532,43 +532,43 @@ XLapp.Application.ScreenUpdating = False
 'excel.Application.ScreenUpdating = False
 
     UfWait2.Label_progress = UfWait2.Label_progress & "*****"
-xmin = val(TextBox_xmin.text)
-xmax = val(TextBox_xmax.text)
+xmin = val(TextBox_xmin.Text)
+xmax = val(TextBox_xmax.Text)
 If xmin < xmax Then
-    ws.Range("n3").Value = Me.TextBox_xmin.text
-    ws.Range("o3").Value = Me.TextBox_xmax.text
+    ws.Range("n3").Value = Me.TextBox_xmin.Text
+    ws.Range("o3").Value = Me.TextBox_xmax.Text
 Else
     ws.Range("n3").Value = -5
     ws.Range("o3").Value = 5
 End If
 
     
-ws.Range("b4").Value = Me.TextBox_ligning1.text
-ws.Range("c4").Value = Me.TextBox_ligning2.text
-ws.Range("d4").Value = Me.TextBox_ligning3.text
-ws.Range("e4").Value = Me.TextBox_ligning4.text
-ws.Range("f4").Value = Me.TextBox_ligning5.text
-ws.Range("g4").Value = Me.TextBox_ligning6.text
+ws.Range("b4").Value = Me.TextBox_ligning1.Text
+ws.Range("c4").Value = Me.TextBox_ligning2.Text
+ws.Range("d4").Value = Me.TextBox_ligning3.Text
+ws.Range("e4").Value = Me.TextBox_ligning4.Text
+ws.Range("f4").Value = Me.TextBox_ligning5.Text
+ws.Range("g4").Value = Me.TextBox_ligning6.Text
 'xmin og xmax kopieres over
-ws.Range("B2").Value = Me.TextBox_xmin1.text
-ws.Range("B3").Value = Me.TextBox_xmax1.text
-ws.Range("C2").Value = Me.TextBox_xmin2.text
-ws.Range("C3").Value = Me.TextBox_xmax2.text
-ws.Range("D2").Value = Me.TextBox_xmin3.text
-ws.Range("D3").Value = Me.TextBox_xmax3.text
-ws.Range("E2").Value = Me.TextBox_xmin4.text
-ws.Range("E3").Value = Me.TextBox_xmax4.text
-ws.Range("F2").Value = Me.TextBox_xmin5.text
-ws.Range("F3").Value = Me.TextBox_xmax5.text
-ws.Range("G2").Value = Me.TextBox_xmin6.text
-ws.Range("G3").Value = Me.TextBox_xmax6.text
+ws.Range("B2").Value = Me.TextBox_xmin1.Text
+ws.Range("B3").Value = Me.TextBox_xmax1.Text
+ws.Range("C2").Value = Me.TextBox_xmin2.Text
+ws.Range("C3").Value = Me.TextBox_xmax2.Text
+ws.Range("D2").Value = Me.TextBox_xmin3.Text
+ws.Range("D3").Value = Me.TextBox_xmax3.Text
+ws.Range("E2").Value = Me.TextBox_xmin4.Text
+ws.Range("E3").Value = Me.TextBox_xmax4.Text
+ws.Range("F2").Value = Me.TextBox_xmin5.Text
+ws.Range("F3").Value = Me.TextBox_xmax5.Text
+ws.Range("G2").Value = Me.TextBox_xmin6.Text
+ws.Range("G3").Value = Me.TextBox_xmax6.Text
 'variabelnavn kopieres over
-ws.Range("B1").Value = Me.TextBox_var1.text
-ws.Range("C1").Value = Me.TextBox_var2.text
-ws.Range("D1").Value = Me.TextBox_var3.text
-ws.Range("E1").Value = Me.TextBox_var4.text
-ws.Range("F1").Value = Me.TextBox_var5.text
-ws.Range("G1").Value = Me.TextBox_var6.text
+ws.Range("B1").Value = Me.TextBox_var1.Text
+ws.Range("C1").Value = Me.TextBox_var2.Text
+ws.Range("D1").Value = Me.TextBox_var3.Text
+ws.Range("E1").Value = Me.TextBox_var4.Text
+ws.Range("F1").Value = Me.TextBox_var5.Text
+ws.Range("G1").Value = Me.TextBox_var6.Text
 ' indstillinger
 If Radians Then
     ws.Range("A4").Value = "rad"
@@ -583,7 +583,7 @@ End If
 'If TextBox_ligning5.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning5, 4)
 'If TextBox_ligning6.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning6, 5)
 
-On Error GoTo slut
+On Error GoTo Slut
 'If TextBox_ligning1.text <> "" Then Call SetLineStyle(ComboBox_ligning1, 1)
 'If TextBox_ligning2.text <> "" Then Call SetLineStyle(ComboBox_ligning2, 2)
 'If TextBox_ligning3.text <> "" Then Call SetLineStyle(ComboBox_ligning3, 3)
@@ -599,9 +599,9 @@ On Error GoTo slut
 'tb.text = "hej"
 
     'datapunkter
-    If TextBox_punkter.text <> "" Then
+    If TextBox_punkter.Text <> "" Then
         Dim punkttekst As String, Sep As String
-        punkttekst = Me.TextBox_punkter.text
+        punkttekst = Me.TextBox_punkter.Text
         plinjer = Split(punkttekst, VbCrLfMac)
         For i = 0 To UBound(plinjer)
             If InStr(plinjer(i), ";") > 0 Then
@@ -618,18 +618,18 @@ On Error GoTo slut
     End If
 
 
-slut:
+Slut:
 On Error GoTo slut2
-    ws.Range("p3").Value = Me.TextBox_ymin.text
-    ws.Range("q3").Value = Me.TextBox_ymax.text
+    ws.Range("p3").Value = Me.TextBox_ymin.Text
+    ws.Range("q3").Value = Me.TextBox_ymax.Text
 'wb.Charts(1).Activate
-If TextBox_xaksetitel.text <> "" Then
-    WB.Charts(1).Axes(xlCategory, xlPrimary).AxisTitle.text = Me.TextBox_xaksetitel.text
-    ws.ChartObjects(1).Chart.Axes(xlCategory, xlPrimary).AxisTitle.text = Me.TextBox_xaksetitel.text
+If TextBox_xaksetitel.Text <> "" Then
+    WB.Charts(1).Axes(xlCategory, xlPrimary).AxisTitle.Text = Me.TextBox_xaksetitel.Text
+    ws.ChartObjects(1).Chart.Axes(xlCategory, xlPrimary).AxisTitle.Text = Me.TextBox_xaksetitel.Text
 End If
-If TextBox_yaksetitel.text <> "" Then
-    WB.Charts(1).Axes(xlValue, xlPrimary).AxisTitle.text = Me.TextBox_yaksetitel.text
-    ws.ChartObjects(1).Chart.Axes(xlValue, xlPrimary).AxisTitle.text = Me.TextBox_yaksetitel.text
+If TextBox_yaksetitel.Text <> "" Then
+    WB.Charts(1).Axes(xlValue, xlPrimary).AxisTitle.Text = Me.TextBox_yaksetitel.Text
+    ws.ChartObjects(1).Chart.Axes(xlValue, xlPrimary).AxisTitle.Text = Me.TextBox_yaksetitel.Text
 End If
     UfWait2.Label_progress = UfWait2.Label_progress & "**"
 
@@ -654,7 +654,7 @@ slut2:
 'Selection.PasteSpecial DataType:=wdPasteShape
 End Sub
 Sub SetLineStyle(cb As ComboBox, n As Integer)
-' sætter linestyle efter hvad comboxen er sat til
+' s*ae*tter linestyle efter hvad comboxen er sat til
 
 If cb.ListIndex = 0 Then
 XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlContinuous '
@@ -673,24 +673,24 @@ End If
 End Sub
 'Sub InsertFormula(ws As Worksheet, wb As Workbook, tb As TextBox, col As Integer)
 Sub InsertFormula(ws As Variant, WB As Variant, tb As TextBox, col As Integer)
-' indsætter formel fra textbox i kolonne col
+' inds*ae*tter formel fra textbox i kolonne col
 Dim ea As New ExpressionAnalyser
     Dim varnavn As String
     Dim i As Integer
     Dim j As Integer
     Dim forskrift As String
 
-If tb.text <> "" Then
-    forskrift = tb.text
+If tb.Text <> "" Then
+    forskrift = tb.Text
     forskrift = ConvertToExcelFormula(forskrift)
-    ea.text = forskrift
-    forskrift = ea.text
+    ea.Text = forskrift
+    forskrift = ea.Text
     
     ws.Range("b4").Offset(0, col).Value = forskrift
     
     
     'find variable
-    ea.text = forskrift
+    ea.Text = forskrift
     ea.Pos = 1
     varnavn = ea.GetNextVar
     i = 0
@@ -728,9 +728,9 @@ If tb.text <> "" Then
     On Error GoTo fejlindtast
     ea.Pos = 1
     Call ea.ReplaceVar("x", "A7")
-    forskrift = ea.text
+    forskrift = ea.Text
      
-     ' indsæt forskrift i regneark
+     ' inds*ae*t forskrift i regneark
     ws.Range("b7").Offset(0, col).Formula = "=" & forskrift
 '    If TypeName(ws.Range("b7").Offset(0, col).value) = "Error" Then GoTo fejlindtast
 
@@ -746,10 +746,10 @@ If tb.text <> "" Then
     Next
         
 End If
-GoTo slut:
+GoTo Slut:
 fejlindtast:
     MsgBox Sprog.A(300) & " " & col + 1
-slut:
+Slut:
 
 End Sub
 
@@ -773,7 +773,7 @@ Dim Arr As Variant
     forskrift = Replace(forskrift, "e", "2.718281828")
     forskrift = Replace(forskrift, VBA.ChrW(12310), "") ' specielle usynlige paranteser fjernes
     forskrift = Replace(forskrift, VBA.ChrW(12311), "") ' specielle usynlige paranteser fjernes
-'    forskrift = Replace(forskrift, VBA.ChrW(11), "") ' en af de nedenstående?
+'    forskrift = Replace(forskrift, VBA.ChrW(11), "") ' en af de nedenst*aa*ende?
     forskrift = Replace(forskrift, vbLf, "") ' shift-enter og enter
     forskrift = Replace(forskrift, vbCrLf, "")
     forskrift = Replace(forskrift, vbCr, "")
@@ -806,7 +806,7 @@ Dim Arr As Variant
     Do
     Pos = InStr(forskrift, VBA.ChrW(8728 + rod))
     If Pos > 0 Or pos4 > 0 Or pos5 > 0 Then
-        ea.text = forskrift
+        ea.Text = forskrift
         ea.Pos = Pos + 1
         If Mid(forskrift, Pos + 1, 1) <> "(" Then
             ea.InsertUnderstoodBracketPair
@@ -814,8 +814,8 @@ Dim Arr As Variant
         ea.Pos = Pos
         Call ea.GetNextBracketContent ' bare for at finde slut parantes
         Call ea.InsertBeforePos("^(1/" & rod & ")")
-        ea.text = Replace(ea.text, VBA.ChrW(8728 + rod), "", 1, 1)
-        forskrift = ea.text
+        ea.Text = Replace(ea.Text, VBA.ChrW(8728 + rod), "", 1, 1)
+        forskrift = ea.Text
     End If
     Loop While Pos > 0
     Next
@@ -827,12 +827,12 @@ Dim Arr As Variant
         If Mid(forskrift, Pos + 1, 1) <> "(" Then
             forskrift = Replace(forskrift, VBA.ChrW(8730), "sqrt", 1, 1)
             Pos = Pos + 4
-            ea.text = forskrift
+            ea.Text = forskrift
             ea.Pos = Pos
             ea.InsertUnderstoodBracketPair
-            forskrift = ea.text
+            forskrift = ea.Text
         Else
-            ea.text = forskrift
+            ea.Text = forskrift
             ea.Pos = Pos
             Arr = Split(ea.GetNextBracketContent, "&")
             pos2 = ea.Pos
@@ -841,9 +841,9 @@ Dim Arr As Variant
             ElseIf UBound(Arr) = 1 Then
                 rod = Arr(0)
                 Call ea.InsertBeforePos("^(1/(" & rod & "))")
-                ea.text = Replace(ea.text, VBA.ChrW(8730), "", 1, 1)
+                ea.Text = Replace(ea.Text, VBA.ChrW(8730), "", 1, 1)
                 posog = ea.FindChr("&", 1)
-                forskrift = Left(ea.text, Pos) & right(ea.text, Len(ea.text) - posog)
+                forskrift = Left(ea.Text, Pos) & right(ea.Text, Len(ea.Text) - posog)
                
             End If
         End If
@@ -861,26 +861,26 @@ Dim Arr As Variant
         forskrift = ConvertDegreeToRad(forskrift, "csc")
     End If
     
-    ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma)
-    ea.text = forskrift
+    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma)
+    ea.Text = forskrift
     ea.InsertBracketAfter ("^")
     ea.InsertBracketAfter ("/")
-    forskrift = ea.text
+    forskrift = ea.Text
     
     ' mellemrum fjernes
     forskrift = Replace(forskrift, " ", "")
 
-    ' indsæt underforståede gangetegn ' skal være efter fjern mellem
-    ea.text = forskrift
+    ' inds*ae*t underforst*aa*ede gangetegn ' skal v*ae*re efter fjern mellem
+    ea.Text = forskrift
     ea.Pos = 1
     ea.InsertMultSigns
-    forskrift = ea.text
+    forskrift = ea.Text
     
     ConvertToExcelFormula = forskrift
 
 End Function
 Function GetDraw2Dtext(Optional highres As Double = 1) As String
-On Error GoTo fejl
+On Error GoTo Fejl
 Dim grafobj As String
 Dim xmin As String
 Dim xmax As String
@@ -907,14 +907,14 @@ Dim x As String
 Dim Y As String
 
 colindex = 0
-xming = ConvertNumberToMaxima(TextBox_xmin.text)
-xmaxg = ConvertNumberToMaxima(TextBox_xmax.text)
-yming = ConvertNumberToMaxima(TextBox_ymin.text)
-ymaxg = ConvertNumberToMaxima(TextBox_ymax.text)
+xming = ConvertNumberToMaxima(TextBox_xmin.Text)
+xmaxg = ConvertNumberToMaxima(TextBox_xmax.Text)
+yming = ConvertNumberToMaxima(TextBox_ymin.Text)
+ymaxg = ConvertNumberToMaxima(TextBox_ymax.Text)
 
 'forskrifter
-If TextBox_ligning1.text <> "" Then
-    lign = Replace(TextBox_ligning1.text, "'", "‰")
+If TextBox_ligning1.Text <> "" Then
+    lign = Replace(TextBox_ligning1.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -927,22 +927,22 @@ If TextBox_ligning1.text <> "" Then
     Else
         grafobj = grafobj & "line_type=solid,"
     End If
-    If Len(TextBox_xmin1.text) = 0 Then
+    If Len(TextBox_xmin1.Text) = 0 Then
         xmin = xming
     Else
-        xmin = ConvertNumberToMaxima(TextBox_xmin1.text)
+        xmin = ConvertNumberToMaxima(TextBox_xmin1.Text)
     End If
-    If Len(TextBox_xmax1.text) = 0 Then
+    If Len(TextBox_xmax1.Text) = 0 Then
         xmax = xmaxg
     Else
-        xmax = ConvertNumberToMaxima(TextBox_xmax1.text)
+        xmax = ConvertNumberToMaxima(TextBox_xmax1.Text)
     End If
 '    If Not MaximaComplex Then lign = "'CheckDef(" & lign & ",""" & TextBox_var1.text & """)"
 '    If Not MaximaComplex Then lign = "'RealOnly(" & lign & ")"
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var1.text & "," & xmin & "," & xmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var1.Text & "," & xmin & "," & xmax & "),"
 End If
-If TextBox_ligning2.text <> "" Then
-    lign = Replace(TextBox_ligning2.text, "'", "‰")
+If TextBox_ligning2.Text <> "" Then
+    lign = Replace(TextBox_ligning2.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -955,22 +955,22 @@ If TextBox_ligning2.text <> "" Then
     Else
         grafobj = grafobj & "line_type=solid,"
     End If
-    If Len(TextBox_xmin2.text) = 0 Then
+    If Len(TextBox_xmin2.Text) = 0 Then
         xmin = xming
     Else
-        xmin = ConvertNumberToMaxima(TextBox_xmin2.text)
+        xmin = ConvertNumberToMaxima(TextBox_xmin2.Text)
     End If
-    If Len(TextBox_xmax2.text) = 0 Then
+    If Len(TextBox_xmax2.Text) = 0 Then
         xmax = xmaxg
     Else
-        xmax = ConvertNumberToMaxima(TextBox_xmax2.text)
+        xmax = ConvertNumberToMaxima(TextBox_xmax2.Text)
     End If
 '    If Not MaximaComplex Then lign = "'CheckDef(" & lign & ",""" & TextBox_var2.text & """)"
 '    If Not MaximaComplex Then lign = "'RealOnly(" & lign & ")"
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var2.text & "," & xmin & "," & xmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var2.Text & "," & xmin & "," & xmax & "),"
 End If
-If TextBox_ligning3.text <> "" Then
-    lign = Replace(TextBox_ligning3.text, "'", "‰")
+If TextBox_ligning3.Text <> "" Then
+    lign = Replace(TextBox_ligning3.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -983,21 +983,21 @@ If TextBox_ligning3.text <> "" Then
     Else
         grafobj = grafobj & "line_type=solid,"
     End If
-    If Len(TextBox_xmin3.text) = 0 Then
+    If Len(TextBox_xmin3.Text) = 0 Then
         xmin = xming
     Else
-        xmin = ConvertNumberToMaxima(TextBox_xmin3.text)
+        xmin = ConvertNumberToMaxima(TextBox_xmin3.Text)
     End If
-    If Len(TextBox_xmax3.text) = 0 Then
+    If Len(TextBox_xmax3.Text) = 0 Then
         xmax = xmaxg
     Else
-        xmax = ConvertNumberToMaxima(TextBox_xmax3.text)
+        xmax = ConvertNumberToMaxima(TextBox_xmax3.Text)
     End If
 '    If Not MaximaComplex Then lign = "'RealOnly(" & lign & ")"
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var3.text & "," & xmin & "," & xmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var3.Text & "," & xmin & "," & xmax & "),"
 End If
-If TextBox_ligning4.text <> "" Then
-    lign = Replace(TextBox_ligning4.text, "'", "‰")
+If TextBox_ligning4.Text <> "" Then
+    lign = Replace(TextBox_ligning4.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1010,21 +1010,21 @@ If TextBox_ligning4.text <> "" Then
     Else
         grafobj = grafobj & "line_type=solid,"
     End If
-    If Len(TextBox_xmin4.text) = 0 Then
+    If Len(TextBox_xmin4.Text) = 0 Then
         xmin = xming
     Else
-        xmin = ConvertNumberToMaxima(TextBox_xmin4.text)
+        xmin = ConvertNumberToMaxima(TextBox_xmin4.Text)
     End If
-    If Len(TextBox_xmax4.text) = 0 Then
+    If Len(TextBox_xmax4.Text) = 0 Then
         xmax = xmaxg
     Else
-        xmax = ConvertNumberToMaxima(TextBox_xmax4.text)
+        xmax = ConvertNumberToMaxima(TextBox_xmax4.Text)
     End If
 '    If Not MaximaComplex Then lign = "'RealOnly(" & lign & ")"
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var4.text & "," & xmin & "," & xmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var4.Text & "," & xmin & "," & xmax & "),"
 End If
-If TextBox_ligning5.text <> "" Then
-    lign = Replace(TextBox_ligning5.text, "'", "‰")
+If TextBox_ligning5.Text <> "" Then
+    lign = Replace(TextBox_ligning5.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1037,21 +1037,21 @@ If TextBox_ligning5.text <> "" Then
     Else
         grafobj = grafobj & "line_type=solid,"
     End If
-    If Len(TextBox_xmin5.text) = 0 Then
+    If Len(TextBox_xmin5.Text) = 0 Then
         xmin = xming
     Else
-        xmin = ConvertNumberToMaxima(TextBox_xmin5.text)
+        xmin = ConvertNumberToMaxima(TextBox_xmin5.Text)
     End If
-    If Len(TextBox_xmax5.text) = 0 Then
+    If Len(TextBox_xmax5.Text) = 0 Then
         xmax = xmaxg
     Else
-        xmax = ConvertNumberToMaxima(TextBox_xmax5.text)
+        xmax = ConvertNumberToMaxima(TextBox_xmax5.Text)
     End If
 '    If Not MaximaComplex Then lign = "'RealOnly(" & lign & ")"
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var5.text & "," & xmin & "," & xmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var5.Text & "," & xmin & "," & xmax & "),"
 End If
-If TextBox_ligning6.text <> "" Then
-    lign = Replace(TextBox_ligning6.text, "'", "‰")
+If TextBox_ligning6.Text <> "" Then
+    lign = Replace(TextBox_ligning6.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
@@ -1064,23 +1064,23 @@ If TextBox_ligning6.text <> "" Then
     Else
         grafobj = grafobj & "line_type=solid,"
     End If
-    If Len(TextBox_xmin6.text) = 0 Then
+    If Len(TextBox_xmin6.Text) = 0 Then
         xmin = xming
     Else
-        xmin = ConvertNumberToMaxima(TextBox_xmin6.text)
+        xmin = ConvertNumberToMaxima(TextBox_xmin6.Text)
     End If
-    If Len(TextBox_xmax6.text) = 0 Then
+    If Len(TextBox_xmax6.Text) = 0 Then
         xmax = xmaxg
     Else
-        xmax = ConvertNumberToMaxima(TextBox_xmax6.text)
+        xmax = ConvertNumberToMaxima(TextBox_xmax6.Text)
     End If
 '    If Not MaximaComplex Then lign = "'RealOnly(" & lign & ")"
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var6.text & "," & xmin & "," & xmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & "," & TextBox_var6.Text & "," & xmin & "," & xmax & "),"
 End If
 
 'ligninger
-If TextBox_lig1.text <> "" Then
-    lign = Replace(TextBox_lig1.text, "'", "‰")
+If TextBox_lig1.Text <> "" Then
+    lign = Replace(TextBox_lig1.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1097,8 +1097,8 @@ If TextBox_lig1.text <> "" Then
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
-If TextBox_lig2.text <> "" Then
-    lign = Replace(TextBox_lig2.text, "'", "‰")
+If TextBox_lig2.Text <> "" Then
+    lign = Replace(TextBox_lig2.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1115,8 +1115,8 @@ If TextBox_lig2.text <> "" Then
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
-If TextBox_Lig3.text <> "" Then
-    lign = Replace(TextBox_Lig3.text, "'", "‰")
+If TextBox_Lig3.Text <> "" Then
+    lign = Replace(TextBox_Lig3.Text, "'", "‰")
     If CheckBox_visforklaring.Value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
@@ -1135,39 +1135,39 @@ If TextBox_Lig3.text <> "" Then
 End If
 
 'parameterfremstillinger
-If TextBox_parametric1x.text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric1x.text)
-    pary = omax.CodeForMaxima(TextBox_parametric1y.text)
-    tmin = ConvertNumberToMaxima(TextBox_tmin1.text)
-    tmax = ConvertNumberToMaxima(TextBox_tmax1.text)
+If TextBox_parametric1x.Text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric1x.Text)
+    pary = omax.CodeForMaxima(TextBox_parametric1y.Text)
+    tmin = ConvertNumberToMaxima(TextBox_tmin1.Text)
+    tmax = ConvertNumberToMaxima(TextBox_tmax1.Text)
     If CheckBox_visforklaring.Value Then
-        grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric1x.text) & "," & omax.ConvertToAscii(TextBox_parametric1y.text) & ")"","
+        grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric1x.Text) & "," & omax.ConvertToAscii(TextBox_parametric1y.Text) & ")"","
     Else
         grafobj = grafobj & "key="""","
     End If
     grafobj = grafobj & "line_type=solid,color=" & GetNextColor & ","
     grafobj = grafobj & "parametric(" & parx & "," & pary & ",t," & tmin & "," & tmax & "),"
 End If
-If TextBox_parametric2x.text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric2x.text)
-    pary = omax.CodeForMaxima(TextBox_parametric2y.text)
-    tmin = ConvertNumberToMaxima(TextBox_tmin2.text)
-    tmax = ConvertNumberToMaxima(TextBox_tmax2.text)
+If TextBox_parametric2x.Text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric2x.Text)
+    pary = omax.CodeForMaxima(TextBox_parametric2y.Text)
+    tmin = ConvertNumberToMaxima(TextBox_tmin2.Text)
+    tmax = ConvertNumberToMaxima(TextBox_tmax2.Text)
     If CheckBox_visforklaring.Value Then
-        grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric2x.text) & "," & omax.ConvertToAscii(TextBox_parametric2y.text) & ")"","
+        grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric2x.Text) & "," & omax.ConvertToAscii(TextBox_parametric2y.Text) & ")"","
     Else
         grafobj = grafobj & "key="""","
     End If
     grafobj = grafobj & "line_type=solid,color=" & GetNextColor & ","
     grafobj = grafobj & "parametric(" & parx & "," & pary & ",t," & tmin & "," & tmax & "),"
 End If
-If TextBox_parametric3x.text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric3x.text)
-    pary = omax.CodeForMaxima(TextBox_parametric3y.text)
-    tmin = ConvertNumberToMaxima(TextBox_tmin3.text)
-    tmax = ConvertNumberToMaxima(TextBox_tmax3.text)
+If TextBox_parametric3x.Text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric3x.Text)
+    pary = omax.CodeForMaxima(TextBox_parametric3y.Text)
+    tmin = ConvertNumberToMaxima(TextBox_tmin3.Text)
+    tmax = ConvertNumberToMaxima(TextBox_tmax3.Text)
     If CheckBox_visforklaring.Value Then
-        grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric3x.text) & "," & omax.ConvertToAscii(TextBox_parametric3y.text) & ")"","
+        grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric3x.Text) & "," & omax.ConvertToAscii(TextBox_parametric3y.Text) & ")"","
     Else
         grafobj = grafobj & "key="""","
     End If
@@ -1177,9 +1177,9 @@ End If
 
 
 'punkter
-If TextBox_punkter.text <> "" Then
+If TextBox_punkter.Text <> "" Then
     grafobj = grafobj & "key="""",color=black,"
-    Arr = Split(TextBox_punkter.text, VbCrLfMac)
+    Arr = Split(TextBox_punkter.Text, VbCrLfMac)
     For i = 0 To UBound(Arr)
     If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
         Arr(i) = Replace(Arr(i), ",", ".")
@@ -1203,14 +1203,14 @@ If TextBox_punkter.text <> "" Then
     Next
     If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
     
-    grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(highres * ConvertStringToNumber(TextBox_pointsize.text), ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
+    grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(highres * ConvertStringToNumber(TextBox_pointsize.Text), ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
 End If
 
 'punkter 2
-If TextBox_punkter2.text <> "" Then
+If TextBox_punkter2.Text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=blue,"
-    Arr = Split(TextBox_punkter2.text, VbCrLfMac)
+    Arr = Split(TextBox_punkter2.Text, VbCrLfMac)
     For i = 0 To UBound(Arr)
     If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
         Arr(i) = Replace(Arr(i), ",", ".")
@@ -1234,14 +1234,14 @@ If TextBox_punkter2.text <> "" Then
     Next
     If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
     
-    grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(TextBox_pointsize2.text, ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined2.Value) & ",points([" & punkttekst & "]),"
+    grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(TextBox_pointsize2.Text, ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined2.Value) & ",points([" & punkttekst & "]),"
 End If
 
 'markerede punkter
-If TextBox_markerpunkter.text <> "" Then
+If TextBox_markerpunkter.Text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=red,"
-    Arr = Split(TextBox_markerpunkter.text, VbCrLfMac)
+    Arr = Split(TextBox_markerpunkter.Text, VbCrLfMac)
     For i = 0 To UBound(Arr)
     If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
         Arr(i) = Replace(Arr(i), ",", ".")
@@ -1271,8 +1271,8 @@ End If
 
 
 'vektorer
-If TextBox_vektorer.text <> "" Then
-    vekt = TextBox_vektorer.text
+If TextBox_vektorer.Text <> "" Then
+    vekt = TextBox_vektorer.Text
     Arr = Split(vekt, VbCrLfMac)
     For i = 0 To UBound(Arr)
         If Arr(i) <> "" Then
@@ -1295,15 +1295,15 @@ If TextBox_vektorer.text <> "" Then
                 grafobj = grafobj & "key="""","
             End If
             grafobj = grafobj & "color=" & GetNextColor & ","
-            grafobj = grafobj & "line_type=solid,line_width=" & Replace(highres, ",", ".") & ",head_angle=25,head_length=" & Replace((ConvertStringToNumber(TextBox_xmax.text) - ConvertStringToNumber(TextBox_xmin.text)) / 40, ",", ".") & ","
+            grafobj = grafobj & "line_type=solid,line_width=" & Replace(highres, ",", ".") & ",head_angle=25,head_length=" & Replace((ConvertStringToNumber(TextBox_xmax.Text) - ConvertStringToNumber(TextBox_xmin.Text)) / 40, ",", ".") & ","
             grafobj = grafobj & "vector(" & Arr(i) & "),"
         End If
     Next
 End If
 
     'labels
-    If Len(TextBox_labels.text) > 0 Then
-        Arr = Split(TextBox_labels.text, VbCrLfMac)
+    If Len(TextBox_labels.Text) > 0 Then
+        Arr = Split(TextBox_labels.Text, VbCrLfMac)
         For i = 0 To UBound(Arr)
             If InStr(Arr(i), ";") > 0 Then
                 arr2 = Split(Arr(i), ";")
@@ -1324,14 +1324,14 @@ End If
         End If
     End If
     
-    If Len(grafobj) = 0 Then GoTo slut ' ellers fejler når print starter op, men med denne fejler retningsfelt hvis alene
+    If Len(grafobj) = 0 Then GoTo Slut ' ellers fejler n*aa*r print starter op, men med denne fejler retningsfelt hvis alene
 
 ' diverse
-    If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
-        grafobj = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.text) & "," & ConvertNumberToMaxima(TextBox_xmax.text) & "]," & grafobj
+    If Len(TextBox_xmin.Text) > 0 And Len(TextBox_xmax.Text) > 0 Then
+        grafobj = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.Text) & "," & ConvertNumberToMaxima(TextBox_xmax.Text) & "]," & grafobj
     End If
-    If Len(TextBox_ymin.text) > 0 And Len(TextBox_ymax.text) > 0 And Len(TextBox_dfligning.text) = 0 Then
-        grafobj = "yrange=[" & ConvertNumberToMaxima(TextBox_ymin.text) & "," & ConvertNumberToMaxima(TextBox_ymax.text) & "]," & grafobj
+    If Len(TextBox_ymin.Text) > 0 And Len(TextBox_ymax.Text) > 0 And Len(TextBox_dfligning.Text) = 0 Then
+        grafobj = "yrange=[" & ConvertNumberToMaxima(TextBox_ymin.Text) & "," & ConvertNumberToMaxima(TextBox_ymax.Text) & "]," & grafobj
     End If
 '    If ToggleButton_propto.value Then
 '        grafobj = "proportional_axes = xy," & grafobj
@@ -1340,29 +1340,29 @@ End If
     grafobj = "font=""Arial"",font_size=8," & grafobj
     grafobj = "nticks=100," & grafobj
     grafobj = "ip_grid=[70,70]," & grafobj
-'    grafobj = "xu_grid=50,yv_grid=50," & grafobj ' ser ikke ud til at være nødv
+'    grafobj = "xu_grid=50,yv_grid=50," & grafobj ' ser ikke ud til at v*ae*re n*oe*dv
     grafobj = "xtics_axis = true," & grafobj
     grafobj = "ytics_axis = true," & grafobj
     grafobj = "line_width=" & Replace(highres, ",", ".") & "," & grafobj
     If Not MaximaComplex Then grafobj = "draw_realpart = false," & grafobj
     
     If CheckBox_logx.Value Then
-        If ConvertStringToNumber(TextBox_xmin.text) > 0 Then
+        If ConvertStringToNumber(TextBox_xmin.Text) > 0 Then
             grafobj = "logx=true," & grafobj
         Else
-            MsgBox "xmin skal være >0 for at bruge logaritmisk x-akse."
+            MsgBox "xmin skal v*ae*re >0 for at bruge logaritmisk x-akse."
         End If
     End If
     If CheckBox_logy.Value Then
-        If ConvertStringToNumber(TextBox_ymin.text) > 0 Then
+        If ConvertStringToNumber(TextBox_ymin.Text) > 0 Then
             grafobj = "logy=true," & grafobj
         Else
-            MsgBox "ymin skal være >0 for at bruge logaritmisk y-akse."
+            MsgBox "ymin skal v*ae*re >0 for at bruge logaritmisk y-akse."
         End If
     End If
     
-    If Len(TextBox_titel.text) > 0 Then
-        grafobj = "title=""" & omax.ConvertToAscii(TextBox_titel.text) & """," & grafobj
+    If Len(TextBox_titel.Text) > 0 Then
+        grafobj = "title=""" & omax.ConvertToAscii(TextBox_titel.Text) & """," & grafobj
     End If
     
 '        grafobj = "user_preamble = ""set grid lc 2""," & grafobj ' lw 2 er linewidth 2, lt er linetype, lc er linecolor
@@ -1374,74 +1374,74 @@ End If
     End If
 
     GetDraw2Dtext = grafobj
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Function
 Private Sub OpdaterGraf(Optional highres As Double = 1)
-Dim text As String
+Dim Text As String
 Dim df As String
 Dim dfsol As String
 Dim pm As String
-On Error GoTo fejl
+On Error GoTo Fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
-    text = GetDraw2Dtext(highres)
-    If Len(TextBox_dfligning.text) > 0 Then
-        df = omax.CodeForMaxima(TextBox_dfligning.text)
-        df = df & ",[" & TextBox_dfx.text & "," & TextBox_dfy.text & "]"
-        If Len(TextBox_xmin.text) > 0 And Len(TextBox_ymin.text) > 0 And Len(TextBox_xmax.text) > 0 And Len(TextBox_ymax.text) > 0 Then
-            df = df & ",[" & TextBox_dfx.text & "," & ConvertNumberToMaxima(TextBox_xmin.text) & "," & ConvertNumberToMaxima(TextBox_xmax.text) & "],[" & TextBox_dfy.text & "," & ConvertNumberToMaxima(TextBox_ymin.text) & "," & ConvertNumberToMaxima(TextBox_ymax.text) & "]"
-        ElseIf Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
-            df = df & ",[" & TextBox_dfx.text & "," & ConvertNumberToMaxima(TextBox_xmin.text) & "," & ConvertNumberToMaxima(TextBox_xmax.text) & "]"
+    Text = GetDraw2Dtext(highres)
+    If Len(TextBox_dfligning.Text) > 0 Then
+        df = omax.CodeForMaxima(TextBox_dfligning.Text)
+        df = df & ",[" & TextBox_dfx.Text & "," & TextBox_dfy.Text & "]"
+        If Len(TextBox_xmin.Text) > 0 And Len(TextBox_ymin.Text) > 0 And Len(TextBox_xmax.Text) > 0 And Len(TextBox_ymax.Text) > 0 Then
+            df = df & ",[" & TextBox_dfx.Text & "," & ConvertNumberToMaxima(TextBox_xmin.Text) & "," & ConvertNumberToMaxima(TextBox_xmax.Text) & "],[" & TextBox_dfy.Text & "," & ConvertNumberToMaxima(TextBox_ymin.Text) & "," & ConvertNumberToMaxima(TextBox_ymax.Text) & "]"
+        ElseIf Len(TextBox_xmin.Text) > 0 And Len(TextBox_xmax.Text) > 0 Then
+            df = df & ",[" & TextBox_dfx.Text & "," & ConvertNumberToMaxima(TextBox_xmin.Text) & "," & ConvertNumberToMaxima(TextBox_xmax.Text) & "]"
         Else
-            df = df & ",[" & TextBox_dfx.text & "," & TextBox_dfy.text & "]"
+            df = df & ",[" & TextBox_dfx.Text & "," & TextBox_dfy.Text & "]"
         End If
         df = df & ",field_arrows=false"
-        If Len(TextBox_dfsol1x.text) > 0 And Len(TextBox_dfsol1x.text) > 0 Then
-            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol1x.text) & "," & ConvertNumberToMaxima(TextBox_dfsol1y.text) & "]"
+        If Len(TextBox_dfsol1x.Text) > 0 And Len(TextBox_dfsol1x.Text) > 0 Then
+            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol1x.Text) & "," & ConvertNumberToMaxima(TextBox_dfsol1y.Text) & "]"
         End If
-        If Len(TextBox_dfsol2x.text) > 0 And Len(TextBox_dfsol2x.text) > 0 Then
+        If Len(TextBox_dfsol2x.Text) > 0 And Len(TextBox_dfsol2x.Text) > 0 Then
             If Len(dfsol) > 0 Then dfsol = dfsol & ","
-            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol2x.text) & "," & ConvertNumberToMaxima(TextBox_dfsol2y.text) & "]"
+            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol2x.Text) & "," & ConvertNumberToMaxima(TextBox_dfsol2y.Text) & "]"
         End If
-        If Len(TextBox_dfsol3x.text) > 0 And Len(TextBox_dfsol3x.text) > 0 Then
+        If Len(TextBox_dfsol3x.Text) > 0 And Len(TextBox_dfsol3x.Text) > 0 Then
             If Len(dfsol) > 0 Then dfsol = dfsol & ","
-            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol3x.text) & "," & ConvertNumberToMaxima(TextBox_dfsol3y.text) & "]"
+            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol3x.Text) & "," & ConvertNumberToMaxima(TextBox_dfsol3y.Text) & "]"
         End If
-        If Len(TextBox_dfsol4x.text) > 0 And Len(TextBox_dfsol4x.text) > 0 Then
+        If Len(TextBox_dfsol4x.Text) > 0 And Len(TextBox_dfsol4x.Text) > 0 Then
             If Len(dfsol) > 0 Then dfsol = dfsol & ","
-            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol4x.text) & "," & ConvertNumberToMaxima(TextBox_dfsol4y.text) & "]"
+            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol4x.Text) & "," & ConvertNumberToMaxima(TextBox_dfsol4y.Text) & "]"
         End If
-        If Len(TextBox_dfsol5x.text) > 0 And Len(TextBox_dfsol5x.text) > 0 Then
+        If Len(TextBox_dfsol5x.Text) > 0 And Len(TextBox_dfsol5x.Text) > 0 Then
             If Len(dfsol) > 0 Then dfsol = dfsol & ","
-            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol5x.text) & "," & ConvertNumberToMaxima(TextBox_dfsol5y.text) & "]"
+            dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol5x.Text) & "," & ConvertNumberToMaxima(TextBox_dfsol5y.Text) & "]"
         End If
         If Len(dfsol) > 0 Then
-            df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat er 10. ved at øge plottes længere og tættere på asymptoter
+            df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat er 10. ved at *oe*ge plottes l*ae*ngere og t*ae*ttere p*aa* asymptoter
         End If
         If CheckBox_onlykurver.Value Then
             df = df & ",show_field=false"
         End If
-        If text = "" Then ' must be range
-            If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
-                text = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.text) & "," & ConvertNumberToMaxima(TextBox_xmax.text) & "]"
+        If Text = "" Then ' must be range
+            If Len(TextBox_xmin.Text) > 0 And Len(TextBox_xmax.Text) > 0 Then
+                Text = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.Text) & "," & ConvertNumberToMaxima(TextBox_xmax.Text) & "]"
             End If
-            If Len(TextBox_ymin.text) > 0 And Len(TextBox_ymax.text) > 0 And Len(TextBox_dfligning.text) = 0 Then
-                text = text & ",yrange=[" & ConvertNumberToMaxima(TextBox_ymin.text) & "," & ConvertNumberToMaxima(TextBox_ymax.text) & "]"
+            If Len(TextBox_ymin.Text) > 0 And Len(TextBox_ymax.Text) > 0 And Len(TextBox_dfligning.Text) = 0 Then
+                Text = Text & ",yrange=[" & ConvertNumberToMaxima(TextBox_ymin.Text) & "," & ConvertNumberToMaxima(TextBox_ymax.Text) & "]"
             End If
         End If
     End If
-    If Len(text) > 0 Then
-        Call omax.Draw2D(text, df, ConvertDrawLabel(TextBox_xaksetitel.text), ConvertDrawLabel(TextBox_yaksetitel.text), CheckBox_gitter.Value, True, highres)
+    If Len(Text) > 0 Then
+        Call omax.Draw2D(Text, df, ConvertDrawLabel(TextBox_xaksetitel.Text), ConvertDrawLabel(TextBox_yaksetitel.Text), CheckBox_gitter.Value, True, highres)
         If omax.MaximaOutput = "" Then
             Label_wait.Caption = "Fejl!"
             Label_wait.visible = True
-            GoTo slut
+            GoTo Slut
         Else
             DoEvents
 #If Mac Then
@@ -1456,182 +1456,182 @@ On Error GoTo fejl
         Label_wait.visible = False
     End If
     Label_wait.visible = False
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     On Error Resume Next
     Label_wait.Caption = Sprog.A(94)
     Label_wait.Font.Size = 12
     Label_wait.Width = 150
     Label_wait.visible = True
     Image1.Picture = Nothing
-slut:
+Slut:
 
 End Sub
 Private Sub GnuPlot()
-Dim text As String
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+Dim Text As String
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
 
-    text = GetDraw2Dtext()
+    Text = GetDraw2Dtext()
     
-    If Len(text) > 0 Then
-    Call omax.Draw2D(text, "", omax.ConvertToAscii(TextBox_xaksetitel.text), omax.ConvertToAscii(TextBox_yaksetitel.text), CheckBox_gitter.Value, False, 1)
+    If Len(Text) > 0 Then
+    Call omax.Draw2D(Text, "", omax.ConvertToAscii(TextBox_xaksetitel.Text), omax.ConvertToAscii(TextBox_yaksetitel.Text), CheckBox_gitter.Value, False, 1)
     DoEvents
     End If
 
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Private Sub CommandButton_linregr_Click()
     Dim Cregr As New CRegression
-    On Error GoTo slut
-    Cregr.Datatext = TextBox_punkter.text
+    On Error GoTo Slut
+    Cregr.Datatext = TextBox_punkter.Text
     Cregr.ComputeLinRegr
 '    Selection.Collapse
 '    Selection.TypeParagraph
 '    Cregr.InsertEquation
 
-    If TextBox_ligning1.text = "" Then
-        TextBox_ligning1.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning2.text = "" Then
-        TextBox_ligning2.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning3.text = "" Then
-        TextBox_ligning3.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning4.text = "" Then
-        TextBox_ligning4.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning5.text = "" Then
-        TextBox_ligning5.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning6.text = "" Then
-        TextBox_ligning6.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    If TextBox_ligning1.Text = "" Then
+        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning2.Text = "" Then
+        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning3.Text = "" Then
+        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning4.Text = "" Then
+        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning5.Text = "" Then
+        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning6.Text = "" Then
+        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
 
     OpdaterGraf
     Me.Repaint
-slut:
+Slut:
 End Sub
 
 Private Sub CommandButton_polregr_Click()
     Dim Cregr As New CRegression
-    On Error GoTo slut
+    On Error GoTo Slut
     
-    Cregr.Datatext = TextBox_punkter.text
+    Cregr.Datatext = TextBox_punkter.Text
     Cregr.ComputePolRegr
 '    Selection.Collapse
 '    Selection.TypeParagraph
 '    Cregr.InsertEquation
 
-    If TextBox_ligning1.text = "" Then
-        TextBox_ligning1.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning2.text = "" Then
-        TextBox_ligning2.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning3.text = "" Then
-        TextBox_ligning3.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning4.text = "" Then
-        TextBox_ligning4.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning5.text = "" Then
-        TextBox_ligning5.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning6.text = "" Then
-        TextBox_ligning6.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    If TextBox_ligning1.Text = "" Then
+        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning2.Text = "" Then
+        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning3.Text = "" Then
+        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning4.Text = "" Then
+        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning5.Text = "" Then
+        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning6.Text = "" Then
+        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
     
     OpdaterGraf
     Me.Repaint
-slut:
+Slut:
 End Sub
 Private Sub CommandButton_ekspregr_Click()
    Dim Cregr As New CRegression
-    On Error GoTo slut
+    On Error GoTo Slut
     
-    Cregr.Datatext = TextBox_punkter.text
+    Cregr.Datatext = TextBox_punkter.Text
     Cregr.ComputeExpRegr
 '    Selection.Collapse
 '    Selection.TypeParagraph
 '    Cregr.InsertEquation
 
-    If TextBox_ligning1.text = "" Then
-        TextBox_ligning1.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning2.text = "" Then
-        TextBox_ligning2.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning3.text = "" Then
-        TextBox_ligning3.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning4.text = "" Then
-        TextBox_ligning4.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning5.text = "" Then
-        TextBox_ligning5.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning6.text = "" Then
-        TextBox_ligning6.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    If TextBox_ligning1.Text = "" Then
+        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning2.Text = "" Then
+        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning3.Text = "" Then
+        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning4.Text = "" Then
+        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning5.Text = "" Then
+        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning6.Text = "" Then
+        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
     
     OpdaterGraf
     Me.Repaint
-slut:
+Slut:
 End Sub
 
 Private Sub CommandButton_potregr_Click()
        Dim Cregr As New CRegression
-    On Error GoTo slut
+    On Error GoTo Slut
     
-    Cregr.Datatext = TextBox_punkter.text
+    Cregr.Datatext = TextBox_punkter.Text
     Cregr.ComputePowRegr
 '    Selection.Collapse
 '    Selection.TypeParagraph
 '    Cregr.InsertEquation
 
-    If TextBox_ligning1.text = "" Then
-        TextBox_ligning1.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning2.text = "" Then
-        TextBox_ligning2.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning3.text = "" Then
-        TextBox_ligning3.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning4.text = "" Then
-        TextBox_ligning4.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning5.text = "" Then
-        TextBox_ligning5.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
-    ElseIf TextBox_ligning6.text = "" Then
-        TextBox_ligning6.text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    If TextBox_ligning1.Text = "" Then
+        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning2.Text = "" Then
+        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning3.Text = "" Then
+        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning4.Text = "" Then
+        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning5.Text = "" Then
+        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+    ElseIf TextBox_ligning6.Text = "" Then
+        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
 
     OpdaterGraf
     Me.Repaint
-slut:
+Slut:
 End Sub
 
 Private Sub CommandButton_nulstil_Click()
-    TextBox_ligning1.text = ""
-    TextBox_ligning2.text = ""
-    TextBox_ligning3.text = ""
-    TextBox_ligning4.text = ""
-    TextBox_ligning5.text = ""
-    TextBox_ligning6.text = ""
-    TextBox_lig1.text = ""
-    TextBox_lig2.text = ""
-    TextBox_Lig3.text = ""
-    TextBox_xmin1.text = ""
-    TextBox_xmin2.text = ""
-    TextBox_xmin3.text = ""
-    TextBox_xmin4.text = ""
-    TextBox_xmin5.text = ""
-    TextBox_xmin6.text = ""
-    TextBox_xmax1.text = ""
-    TextBox_xmax2.text = ""
-    TextBox_xmax3.text = ""
-    TextBox_xmax4.text = ""
-    TextBox_xmax5.text = ""
-    TextBox_xmax6.text = ""
-    TextBox_xmin.text = "-5"
-    TextBox_xmax.text = "5"
-    TextBox_ymin.text = ""
-    TextBox_ymax.text = ""
-    TextBox_xaksetitel.text = ""
-    TextBox_yaksetitel.text = ""
-    TextBox_titel.text = ""
-    TextBox_punkter.text = ""
-    TextBox_punkter2.text = ""
-    TextBox_labels.text = ""
-    TextBox_vektorer.text = ""
+    TextBox_ligning1.Text = ""
+    TextBox_ligning2.Text = ""
+    TextBox_ligning3.Text = ""
+    TextBox_ligning4.Text = ""
+    TextBox_ligning5.Text = ""
+    TextBox_ligning6.Text = ""
+    TextBox_lig1.Text = ""
+    TextBox_lig2.Text = ""
+    TextBox_Lig3.Text = ""
+    TextBox_xmin1.Text = ""
+    TextBox_xmin2.Text = ""
+    TextBox_xmin3.Text = ""
+    TextBox_xmin4.Text = ""
+    TextBox_xmin5.Text = ""
+    TextBox_xmin6.Text = ""
+    TextBox_xmax1.Text = ""
+    TextBox_xmax2.Text = ""
+    TextBox_xmax3.Text = ""
+    TextBox_xmax4.Text = ""
+    TextBox_xmax5.Text = ""
+    TextBox_xmax6.Text = ""
+    TextBox_xmin.Text = "-5"
+    TextBox_xmax.Text = "5"
+    TextBox_ymin.Text = ""
+    TextBox_ymax.Text = ""
+    TextBox_xaksetitel.Text = ""
+    TextBox_yaksetitel.Text = ""
+    TextBox_titel.Text = ""
+    TextBox_punkter.Text = ""
+    TextBox_punkter2.Text = ""
+    TextBox_labels.Text = ""
+    TextBox_vektorer.Text = ""
     Call FillLineStyleCombos
 End Sub
 Private Sub MMathPlot()
@@ -1647,28 +1647,28 @@ Private Sub MMathPlot()
     Set objRange = Selection.Range
     MathSyntax = "show("
     
-    If TextBox_ligning1.text <> "" Then
+    If TextBox_ligning1.Text <> "" Then
         If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning1.text, "=") Then
+        If InStr(TextBox_ligning1.Text, "=") Then
             MathSyntax = MathSyntax & "ploteq("
         Else
             MathSyntax = MathSyntax & "plot("
         End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning1.text, ",", ".")
-        If TextBox_xmin1.text <> "" And TextBox_xmax1.text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & Me.TextBox_xmin1.text & "," & Me.TextBox_xmax1.text & "}"
+        MathSyntax = MathSyntax & Replace(TextBox_ligning1.Text, ",", ".")
+        If TextBox_xmin1.Text <> "" And TextBox_xmax1.Text <> "" Then
+            MathSyntax = MathSyntax + ",{x," & Me.TextBox_xmin1.Text & "," & Me.TextBox_xmax1.Text & "}"
         End If
 '        If Me.TextBox_xmin1.text <> "" And Me.TextBox_ymax1.text <> "" Then
 '            MathSyntax = MathSyntax + ",{y," & Me.TextBox_ymin1.text & "," & Me.TextBox_ymax1.text & "}"
 '        End If
-        If ComboBox_ligning1.text = "---" Then
-        ElseIf ComboBox_ligning1.text = "..." Then
+        If ComboBox_ligning1.Text = "---" Then
+        ElseIf ComboBox_ligning1.Text = "..." Then
             MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning1.text = "- - -" Then
+        ElseIf ComboBox_ligning1.Text = "- - -" Then
             MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning1.text = "-.-.-." Then
+        ElseIf ComboBox_ligning1.Text = "-.-.-." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning1.text = "- . . - . ." Then
+        ElseIf ComboBox_ligning1.Text = "- . . - . ." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
         End If
 '        If TextBox_samplesize.text <> "" Then
@@ -1676,28 +1676,28 @@ Private Sub MMathPlot()
 '        End If
         MathSyntax = MathSyntax + ")"
     End If
-    If TextBox_ligning2.text <> "" Then
+    If TextBox_ligning2.Text <> "" Then
         If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning2.text, "=") Then
+        If InStr(TextBox_ligning2.Text, "=") Then
             MathSyntax = MathSyntax & "ploteq("
         Else
             MathSyntax = MathSyntax & "plot("
         End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning2.text, ",", ".")
-        If TextBox_xmin2.text <> "" And TextBox_xmax2.text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin2.text & "," & TextBox_xmax2.text & "}"
+        MathSyntax = MathSyntax & Replace(TextBox_ligning2.Text, ",", ".")
+        If TextBox_xmin2.Text <> "" And TextBox_xmax2.Text <> "" Then
+            MathSyntax = MathSyntax + ",{x," & TextBox_xmin2.Text & "," & TextBox_xmax2.Text & "}"
         End If
 '        If TextBox_ymin2.text <> "" And TextBox_ymax2.text <> "" Then
 '            MathSyntax = MathSyntax + ",{y," & TextBox_ymin2.text & "," & TextBox_ymax2.text & "}"
 '        End If
-        If ComboBox_ligning2.text = "---" Then
-        ElseIf ComboBox_ligning2.text = "..." Then
+        If ComboBox_ligning2.Text = "---" Then
+        ElseIf ComboBox_ligning2.Text = "..." Then
             MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning2.text = "- - -" Then
+        ElseIf ComboBox_ligning2.Text = "- - -" Then
             MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning2.text = "-.-.-." Then
+        ElseIf ComboBox_ligning2.Text = "-.-.-." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning2.text = "- . . - . ." Then
+        ElseIf ComboBox_ligning2.Text = "- . . - . ." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
         End If
 '        If TextBox_samplesize.text <> "" Then
@@ -1705,28 +1705,28 @@ Private Sub MMathPlot()
 '        End If
         MathSyntax = MathSyntax + ")"
     End If
-    If TextBox_ligning3.text <> "" Then
+    If TextBox_ligning3.Text <> "" Then
         If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning3.text, "=") Then
+        If InStr(TextBox_ligning3.Text, "=") Then
             MathSyntax = MathSyntax & "ploteq("
         Else
             MathSyntax = MathSyntax & "plot("
         End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning3.text, ",", ".")
-        If TextBox_xmin3.text <> "" And TextBox_xmax3.text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin3.text & "," & TextBox_xmax3.text & "}"
+        MathSyntax = MathSyntax & Replace(TextBox_ligning3.Text, ",", ".")
+        If TextBox_xmin3.Text <> "" And TextBox_xmax3.Text <> "" Then
+            MathSyntax = MathSyntax + ",{x," & TextBox_xmin3.Text & "," & TextBox_xmax3.Text & "}"
         End If
 '        If TextBox_ymin3.text <> "" And TextBox_ymax3.text <> "" Then
 '            MathSyntax = MathSyntax + ",{y," & TextBox_ymin3.text & "," & TextBox_ymax3.text & "}"
 '        End If
-        If ComboBox_ligning3.text = "---" Then
-        ElseIf ComboBox_ligning3.text = "..." Then
+        If ComboBox_ligning3.Text = "---" Then
+        ElseIf ComboBox_ligning3.Text = "..." Then
             MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning3.text = "- - -" Then
+        ElseIf ComboBox_ligning3.Text = "- - -" Then
             MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning3.text = "-.-.-." Then
+        ElseIf ComboBox_ligning3.Text = "-.-.-." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning3.text = "- . . - . ." Then
+        ElseIf ComboBox_ligning3.Text = "- . . - . ." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
         End If
 '        If TextBox_samplesize.text <> "" Then
@@ -1734,28 +1734,28 @@ Private Sub MMathPlot()
 '        End If
         MathSyntax = MathSyntax + ")"
     End If
-    If TextBox_ligning4.text <> "" Then
+    If TextBox_ligning4.Text <> "" Then
         If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning4.text, "=") Then
+        If InStr(TextBox_ligning4.Text, "=") Then
             MathSyntax = MathSyntax & "ploteq("
         Else
             MathSyntax = MathSyntax & "plot("
         End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning4.text, ",", ".")
-        If TextBox_xmin4.text <> "" And TextBox_xmax4.text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin4.text & "," & TextBox_xmax4.text & "}"
+        MathSyntax = MathSyntax & Replace(TextBox_ligning4.Text, ",", ".")
+        If TextBox_xmin4.Text <> "" And TextBox_xmax4.Text <> "" Then
+            MathSyntax = MathSyntax + ",{x," & TextBox_xmin4.Text & "," & TextBox_xmax4.Text & "}"
         End If
 '        If TextBox_ymin4.text <> "" And TextBox_ymax4.text <> "" Then
 '            MathSyntax = MathSyntax + ",{y," & TextBox_ymin4.text & "," & TextBox_ymax4.text & "}"
 '        End If
-        If ComboBox_ligning4.text = "---" Then
-        ElseIf ComboBox_ligning4.text = "..." Then
+        If ComboBox_ligning4.Text = "---" Then
+        ElseIf ComboBox_ligning4.Text = "..." Then
             MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning4.text = "- - -" Then
+        ElseIf ComboBox_ligning4.Text = "- - -" Then
             MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning4.text = "-.-.-." Then
+        ElseIf ComboBox_ligning4.Text = "-.-.-." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning4.text = "- . . - . ." Then
+        ElseIf ComboBox_ligning4.Text = "- . . - . ." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
         End If
 '        If TextBox_samplesize.text <> "" Then
@@ -1763,62 +1763,62 @@ Private Sub MMathPlot()
 '        End If
         MathSyntax = MathSyntax + ")"
     End If
-    If TextBox_ligning5.text <> "" Then
+    If TextBox_ligning5.Text <> "" Then
         If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning5.text, "=") Then
+        If InStr(TextBox_ligning5.Text, "=") Then
             MathSyntax = MathSyntax & "ploteq("
         Else
             MathSyntax = MathSyntax & "plot("
         End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning5.text, ",", ".")
-        If TextBox_xmin5.text <> "" And TextBox_xmax5.text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin5.text & "," & TextBox_xmax5.text & "}"
+        MathSyntax = MathSyntax & Replace(TextBox_ligning5.Text, ",", ".")
+        If TextBox_xmin5.Text <> "" And TextBox_xmax5.Text <> "" Then
+            MathSyntax = MathSyntax + ",{x," & TextBox_xmin5.Text & "," & TextBox_xmax5.Text & "}"
         End If
 '        If TextBox_ymin5.text <> "" And TextBox_ymax5.text <> "" Then
 '            MathSyntax = MathSyntax + ",{y," & TextBox_ymin5.text & "," & TextBox_ymax5.text & "}"
 '        End If
-        If ComboBox_ligning5.text = "---" Then
-        ElseIf ComboBox_ligning5.text = "..." Then
+        If ComboBox_ligning5.Text = "---" Then
+        ElseIf ComboBox_ligning5.Text = "..." Then
             MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning5.text = "- - -" Then
+        ElseIf ComboBox_ligning5.Text = "- - -" Then
             MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning5.text = "-.-.-." Then
+        ElseIf ComboBox_ligning5.Text = "-.-.-." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning5.text = "- . . - . ." Then
+        ElseIf ComboBox_ligning5.Text = "- . . - . ." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
         End If
         MathSyntax = MathSyntax + ")"
     End If
-    If TextBox_ligning6.text <> "" Then
+    If TextBox_ligning6.Text <> "" Then
         If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning6.text, "=") Then
+        If InStr(TextBox_ligning6.Text, "=") Then
             MathSyntax = MathSyntax & "ploteq("
         Else
             MathSyntax = MathSyntax & "plot("
         End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning6.text, ",", ".")
-        If TextBox_xmin6.text <> "" And TextBox_xmax6.text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin6.text & "," & TextBox_xmax6.text & "}"
+        MathSyntax = MathSyntax & Replace(TextBox_ligning6.Text, ",", ".")
+        If TextBox_xmin6.Text <> "" And TextBox_xmax6.Text <> "" Then
+            MathSyntax = MathSyntax + ",{x," & TextBox_xmin6.Text & "," & TextBox_xmax6.Text & "}"
         End If
-        If ComboBox_ligning6.text = "---" Then
-        ElseIf ComboBox_ligning6.text = "..." Then
+        If ComboBox_ligning6.Text = "---" Then
+        ElseIf ComboBox_ligning6.Text = "..." Then
             MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning6.text = "- - -" Then
+        ElseIf ComboBox_ligning6.Text = "- - -" Then
             MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning6.text = "-.-.-." Then
+        ElseIf ComboBox_ligning6.Text = "-.-.-." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning6.text = "- . . - . ." Then
+        ElseIf ComboBox_ligning6.Text = "- . . - . ." Then
             MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
         End If
         MathSyntax = MathSyntax + ")"
     End If
     
     'datapunkter
-    If TextBox_punkter.text <> "" Then
+    If TextBox_punkter.Text <> "" Then
         If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
         MathSyntax = MathSyntax + "plotdataset({"
         Dim punkttekst As String
-        punkttekst = TextBox_punkter.text
+        punkttekst = TextBox_punkter.Text
 '        Dim plinjer(20) As String
         plinjer = Split(punkttekst, VbCrLfMac)
         For i = 0 To UBound(plinjer)
@@ -1833,25 +1833,25 @@ Private Sub MMathPlot()
     End If
     
     ' xmin og xmax
-    If TextBox_xmin.text <> "" And TextBox_xmax.text <> "" Then
-        MathSyntax = MathSyntax + ",{x," & TextBox_xmin.text & "," & TextBox_xmax.text & "}"
+    If TextBox_xmin.Text <> "" And TextBox_xmax.Text <> "" Then
+        MathSyntax = MathSyntax + ",{x," & TextBox_xmin.Text & "," & TextBox_xmax.Text & "}"
     End If
     ' ymin og ymax
-    If TextBox_ymin.text <> "" And TextBox_ymax.text <> "" Then
-        MathSyntax = MathSyntax + ",{y," & TextBox_ymin.text & "," & TextBox_ymax.text & "}"
+    If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
+        MathSyntax = MathSyntax + ",{y," & TextBox_ymin.Text & "," & TextBox_ymax.Text & "}"
     End If
     
-    If TextBox_xaksetitel.text <> "" Then
-            MathSyntax = MathSyntax + ",{aliasX," & TextBox_xaksetitel.text & "}"
+    If TextBox_xaksetitel.Text <> "" Then
+            MathSyntax = MathSyntax + ",{aliasX," & TextBox_xaksetitel.Text & "}"
     End If
-    If TextBox_yaksetitel.text <> "" Then
-            MathSyntax = MathSyntax + ",{aliasY," & TextBox_yaksetitel.text & "}"
+    If TextBox_yaksetitel.Text <> "" Then
+            MathSyntax = MathSyntax + ",{aliasY," & TextBox_yaksetitel.Text & "}"
     End If
     
     
     MathSyntax = MathSyntax + ",{ShowBox,false}"
 '    MathSyntax = MathSyntax + ",{color,""00ff00""}"
-'    MathSyntax = MathSyntax + ",{color,""ff00ff00""}" ' første er opaque 00 gennemsigtig ff uigennemsigtig
+'    MathSyntax = MathSyntax + ",{color,""ff00ff00""}" ' f*oe*rste er opaque 00 gennemsigtig ff uigennemsigtig
 '    MathSyntax = MathSyntax + ",{ShowGrid,true}"
 '    MathSyntax = MathSyntax + ",{ShowAxis,true}"
 '    MathSyntax = MathSyntax + ",{ShowWireframe,false}"
@@ -1868,7 +1868,7 @@ Private Sub MMathPlot()
     Selection.TypeParagraph
     
    Selection.OMaths.Add Range:=Selection.Range
-     Selection.TypeText text:=MathSyntax
+     Selection.TypeText Text:=MathSyntax
     Selection.OMaths.BuildUp
 '    Set objEq = objRange.OMaths(1)
 '    objEq.BuildUp
@@ -1876,11 +1876,11 @@ Private Sub MMathPlot()
 
     Hide
     
-slut:
+Slut:
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-' skjuler istedet for at lukke, så funktioner gemmes.
+' skjuler istedet for at lukke, s*aa* funktioner gemmes.
 'If CloseMode = vbFormControlMenu Then
 '    Cancel = 1
 '    Hide
@@ -1889,12 +1889,12 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 PicOpen = False
 End Sub
 
-Function ConvertDegreeToRad(text As String, trigfunc As String) As String
+Function ConvertDegreeToRad(Text As String, trigfunc As String) As String
     Dim Pos, spos As Integer
     Dim ea As New ExpressionAnalyser
     ea.StartBracket = "("
     ea.EndBracket = ")"
-    ea.text = text
+    ea.Text = Text
     spos = 1
     
     Do
@@ -1924,7 +1924,7 @@ Function ConvertDegreeToRad(text As String, trigfunc As String) As String
     End If
     Loop While Pos > 0
     
-    ConvertDegreeToRad = ea.text
+    ConvertDegreeToRad = ea.Text
 
 End Function
 
@@ -1932,37 +1932,37 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
     gemx = x
     gemy = Y
     If Len(etikettext) > 0 Then
-        If Len(TextBox_labels.text) > 0 Then
-        TextBox_labels.text = TextBox_labels.text & VbCrLfMac
+        If Len(TextBox_labels.Text) > 0 Then
+        TextBox_labels.Text = TextBox_labels.Text & VbCrLfMac
         End If
-        If Len(TextBox_ymin.text) = 0 Or Len(TextBox_ymax.text) = 0 Then
+        If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_labels.text = TextBox_labels.text & etikettext & ";" & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_labels.Text = TextBox_labels.Text & etikettext & ";" & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
         etikettext = ""
         OpdaterGraf
         Me.Repaint
         End If
     ElseIf nytpunkt Then
         nytpunkt = False
-        If Len(TextBox_punkter2.text) > 0 Then
-        TextBox_punkter2.text = TextBox_punkter2.text & VbCrLfMac
+        If Len(TextBox_punkter2.Text) > 0 Then
+        TextBox_punkter2.Text = TextBox_punkter2.Text & VbCrLfMac
         End If
-        If Len(TextBox_ymin.text) = 0 Or Len(TextBox_ymax.text) = 0 Then
+        If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_punkter2.text = TextBox_punkter2.text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_punkter2.Text = TextBox_punkter2.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
         OpdaterGraf
         Me.Repaint
         End If
     ElseIf nytmarkerpunkt Then
-        If Len(TextBox_markerpunkter.text) > 0 Then
-        TextBox_markerpunkter.text = TextBox_markerpunkter.text & VbCrLfMac
+        If Len(TextBox_markerpunkter.Text) > 0 Then
+        TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & VbCrLfMac
         End If
-        If Len(TextBox_ymin.text) = 0 Or Len(TextBox_ymax.text) = 0 Then
+        If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_markerpunkter.text = TextBox_markerpunkter.text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
         nytmarkerpunkt = False
         OpdaterGraf
         Me.Repaint
@@ -1997,25 +1997,25 @@ Dim Temp As Single
 Dim s As String
 
 Label_zoom.visible = False
-If Abs(x - gemx) < 5 Then GoTo slut
+If Abs(x - gemx) < 5 Then GoTo Slut
 
-xmin = ConvertStringToNumber(TextBox_xmin.text)
-xmax = ConvertStringToNumber(TextBox_xmax.text)
-ymin = ConvertStringToNumber(TextBox_ymin.text)
-ymax = ConvertStringToNumber(TextBox_ymax.text)
+xmin = ConvertStringToNumber(TextBox_xmin.Text)
+xmax = ConvertStringToNumber(TextBox_xmax.Text)
+ymin = ConvertStringToNumber(TextBox_ymin.Text)
+ymax = ConvertStringToNumber(TextBox_ymax.Text)
 
 s = ConvertPixelToCoordX(gemx)
-TextBox_xmax.text = ConvertPixelToCoordX(x)
-TextBox_xmin.text = s
-If TextBox_ymin.text <> "" And TextBox_ymax.text <> "" Then
+TextBox_xmax.Text = ConvertPixelToCoordX(x)
+TextBox_xmin.Text = s
+If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
     s = ConvertPixelToCoordY(Y)
-    TextBox_ymax.text = ConvertPixelToCoordY(gemy)
-    TextBox_ymin.text = s
+    TextBox_ymax.Text = ConvertPixelToCoordY(gemy)
+    TextBox_ymin.Text = s
 End If
 OpdaterGraf
 
     Me.Repaint
-slut:
+Slut:
 End Sub
 Private Sub Image1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 Dim xmin As Single
@@ -2030,10 +2030,10 @@ Dim x As Single
 Dim s As String
 Label_zoom.visible = False
 
-xmin = ConvertStringToNumber(TextBox_xmin.text)
-xmax = ConvertStringToNumber(TextBox_xmax.text)
-ymin = ConvertStringToNumber(TextBox_ymin.text)
-ymax = ConvertStringToNumber(TextBox_ymax.text)
+xmin = ConvertStringToNumber(TextBox_xmin.Text)
+xmax = ConvertStringToNumber(TextBox_xmax.Text)
+ymin = ConvertStringToNumber(TextBox_ymin.Text)
+ymax = ConvertStringToNumber(TextBox_ymax.Text)
 dx = (xmax - xmin) * 0.3
 dy = (ymax - ymin) * 0.3
 nyy = ConvertPixelToCoordY(gemy)
@@ -2044,25 +2044,25 @@ nyy = ConvertPixelToCoordY(gemy)
 'TextBox_xmin.text = betcif(xmin + cfakt * x - dx, 2, False)
 'TextBox_xmax.text = betcif(xmin + cfakt * x + dx, 2, False)
 s = ConvertPixelToCoordX(gemx) - dx
-TextBox_xmax.text = ConvertPixelToCoordX(gemx) + dx
-TextBox_xmin.text = s
-If TextBox_ymin.text <> "" And TextBox_ymax.text <> "" Then
-TextBox_ymin.text = nyy - dy
-TextBox_ymax.text = nyy + dy
+TextBox_xmax.Text = ConvertPixelToCoordX(gemx) + dx
+TextBox_xmin.Text = s
+If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
+TextBox_ymin.Text = nyy - dy
+TextBox_ymax.Text = nyy + dy
 End If
 OpdaterGraf
 
     Me.Repaint
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(95), vbOKOnly, Sprog.Error
-slut:
+Slut:
     
 End Sub
 Function ConvertPixelToCoordX(x As Single) As Single
 Dim xmin As Single, xmax As Single, cfakt As Single
-xmin = ConvertStringToNumber(TextBox_xmin.text)
-xmax = ConvertStringToNumber(TextBox_xmax.text)
+xmin = ConvertStringToNumber(TextBox_xmin.Text)
+xmax = ConvertStringToNumber(TextBox_xmax.Text)
 cfakt = (xmax - xmin) / (Image1.Width * 0.9)
 x = x - Image1.Width * 0.06
 ConvertPixelToCoordX = xmin + cfakt * x
@@ -2070,8 +2070,8 @@ ConvertPixelToCoordX = xmin + cfakt * x
 End Function
 Function ConvertPixelToCoordY(Y As Single) As Single
 Dim ymin As Single, ymax As Single, cfakt As Single
-ymin = ConvertStringToNumber(TextBox_ymin.text)
-ymax = ConvertStringToNumber(TextBox_ymax.text)
+ymin = ConvertStringToNumber(TextBox_ymin.Text)
+ymax = ConvertStringToNumber(TextBox_ymax.Text)
 cfakt = (ymax - ymin) / (Image1.Height * 0.9)
 Y = Image1.Height - Y
 Y = Y - Image1.Height * 0.08
@@ -2084,30 +2084,30 @@ Dim xmin As Single
 Dim xmax As Single
 Dim ymin As Single
 Dim ymax As Single
-On Error GoTo fejl
-xmin = ConvertStringToNumber(TextBox_xmin.text)
-xmax = ConvertStringToNumber(TextBox_xmax.text)
-ymin = ConvertStringToNumber(TextBox_ymin.text)
-ymax = ConvertStringToNumber(TextBox_ymax.text)
+On Error GoTo Fejl
+xmin = ConvertStringToNumber(TextBox_xmin.Text)
+xmax = ConvertStringToNumber(TextBox_xmax.Text)
+ymin = ConvertStringToNumber(TextBox_ymin.Text)
+ymax = ConvertStringToNumber(TextBox_ymax.Text)
 
 midtx = (xmax + xmin) / 2
 midty = (ymax + ymin) / 2
 dx = (xmax - xmin) * 0.3
 dy = (ymax - ymin) * 0.3
 
-TextBox_xmin.text = betcif(midtx - dx, 5, False)
-TextBox_xmax.text = betcif(midtx + dx, 5, False)
-If TextBox_ymin.text <> "" And TextBox_ymax.text <> "" Then
-TextBox_ymin.text = betcif(midty - dy, 5, False)
-TextBox_ymax.text = betcif(midty + dy, 5, False)
+TextBox_xmin.Text = betcif(midtx - dx, 5, False)
+TextBox_xmax.Text = betcif(midtx + dx, 5, False)
+If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
+TextBox_ymin.Text = betcif(midty - dy, 5, False)
+TextBox_ymax.Text = betcif(midty + dy, 5, False)
 End If
 OpdaterGraf
 
 Me.Repaint
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 
 End Sub
@@ -2119,37 +2119,37 @@ Dim xmin As Single
 Dim xmax As Single
 Dim ymin As Single
 Dim ymax As Single
-On Error GoTo fejl
-xmin = ConvertStringToNumber(TextBox_xmin.text)
-xmax = ConvertStringToNumber(TextBox_xmax.text)
-ymin = ConvertStringToNumber(TextBox_ymin.text)
-ymax = ConvertStringToNumber(TextBox_ymax.text)
+On Error GoTo Fejl
+xmin = ConvertStringToNumber(TextBox_xmin.Text)
+xmax = ConvertStringToNumber(TextBox_xmax.Text)
+ymin = ConvertStringToNumber(TextBox_ymin.Text)
+ymax = ConvertStringToNumber(TextBox_ymax.Text)
 
 midtx = (xmax + xmin) / 2
 midty = (ymax + ymin) / 2
 dx = (xmax - xmin) * 1
 dy = (ymax - ymin) * 1
 
-TextBox_xmin.text = betcif(midtx - dx, 5, False)
-TextBox_xmax.text = betcif(midtx + dx, 5, False)
-If TextBox_ymin.text <> "" And TextBox_ymax.text <> "" Then
-TextBox_ymin.text = betcif(midty - dy, 5, False)
-TextBox_ymax.text = betcif(midty + dy, 5, False)
+TextBox_xmin.Text = betcif(midtx - dx, 5, False)
+TextBox_xmax.Text = betcif(midtx + dx, 5, False)
+If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
+TextBox_ymin.Text = betcif(midty - dy, 5, False)
+TextBox_ymax.Text = betcif(midty + dy, 5, False)
 End If
 OpdaterGraf
  
 Me.Repaint
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 End Sub
 Private Sub CommandButton_insertpic_Click()
 Dim ils As InlineShape
 Dim s As String
 Dim Sep As String
-On Error GoTo fejl
+On Error GoTo Fejl
 #If Mac Then
 #Else
     OpdaterGraf 3
@@ -2172,36 +2172,36 @@ PicOpen = False
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.gif", False, True)
 #End If
 Sep = "|"
-s = "WordMat" & Sep & AppVersion & Sep & TextBox_definitioner.text & Sep & TextBox_titel.text & Sep & TextBox_xaksetitel.text & Sep & TextBox_yaksetitel.text & Sep
-s = s & TextBox_xmin.text & Sep & TextBox_xmax.text & Sep & TextBox_ymin.text & Sep & TextBox_ymax.text & Sep
-s = s & TextBox_ligning1.text & Sep & TextBox_var1.text & Sep & TextBox_xmin1.text & Sep & TextBox_xmax1.text & Sep & ComboBox_ligning1.ListIndex & Sep
-s = s & TextBox_ligning2.text & Sep & TextBox_var2.text & Sep & TextBox_xmin2.text & Sep & TextBox_xmax2.text & Sep & ComboBox_ligning2.ListIndex & Sep
-s = s & TextBox_ligning3.text & Sep & TextBox_var3.text & Sep & TextBox_xmin3.text & Sep & TextBox_xmax3.text & Sep & ComboBox_ligning3.ListIndex & Sep
-s = s & TextBox_ligning4.text & Sep & TextBox_var4.text & Sep & TextBox_xmin4.text & Sep & TextBox_xmax4.text & Sep & ComboBox_ligning4.ListIndex & Sep
-s = s & TextBox_ligning5.text & Sep & TextBox_var5.text & Sep & TextBox_xmin5.text & Sep & TextBox_xmax5.text & Sep & ComboBox_ligning5.ListIndex & Sep
-s = s & TextBox_ligning6.text & Sep & TextBox_var6.text & Sep & TextBox_xmin6.text & Sep & TextBox_xmax6.text & Sep & ComboBox_ligning6.ListIndex & Sep
-s = s & TextBox_lig1.text & Sep & TextBox_lig2.text & Sep & TextBox_Lig3.text & Sep
-s = s & TextBox_parametric1x.text & Sep & TextBox_parametric1y.text & Sep & TextBox_tmin1.text & Sep & TextBox_tmax1.text & Sep
-s = s & TextBox_parametric2x.text & Sep & TextBox_parametric2y.text & Sep & TextBox_tmin2.text & Sep & TextBox_tmax2.text & Sep
-s = s & TextBox_parametric3x.text & Sep & TextBox_parametric3y.text & Sep & TextBox_tmin3.text & Sep & TextBox_tmax3.text & Sep
-s = s & TextBox_punkter.text & Sep & TextBox_punkter2.text & Sep & TextBox_markerpunkter.text & Sep & CheckBox_pointsjoined.Value & Sep & CheckBox_pointsjoined2.Value & Sep & TextBox_pointsize.text & Sep & TextBox_pointsize2.text & Sep
-s = s & TextBox_vektorer.text & Sep
-s = s & TextBox_labels.text & Sep
+s = "WordMat" & Sep & AppVersion & Sep & TextBox_definitioner.Text & Sep & TextBox_titel.Text & Sep & TextBox_xaksetitel.Text & Sep & TextBox_yaksetitel.Text & Sep
+s = s & TextBox_xmin.Text & Sep & TextBox_xmax.Text & Sep & TextBox_ymin.Text & Sep & TextBox_ymax.Text & Sep
+s = s & TextBox_ligning1.Text & Sep & TextBox_var1.Text & Sep & TextBox_xmin1.Text & Sep & TextBox_xmax1.Text & Sep & ComboBox_ligning1.ListIndex & Sep
+s = s & TextBox_ligning2.Text & Sep & TextBox_var2.Text & Sep & TextBox_xmin2.Text & Sep & TextBox_xmax2.Text & Sep & ComboBox_ligning2.ListIndex & Sep
+s = s & TextBox_ligning3.Text & Sep & TextBox_var3.Text & Sep & TextBox_xmin3.Text & Sep & TextBox_xmax3.Text & Sep & ComboBox_ligning3.ListIndex & Sep
+s = s & TextBox_ligning4.Text & Sep & TextBox_var4.Text & Sep & TextBox_xmin4.Text & Sep & TextBox_xmax4.Text & Sep & ComboBox_ligning4.ListIndex & Sep
+s = s & TextBox_ligning5.Text & Sep & TextBox_var5.Text & Sep & TextBox_xmin5.Text & Sep & TextBox_xmax5.Text & Sep & ComboBox_ligning5.ListIndex & Sep
+s = s & TextBox_ligning6.Text & Sep & TextBox_var6.Text & Sep & TextBox_xmin6.Text & Sep & TextBox_xmax6.Text & Sep & ComboBox_ligning6.ListIndex & Sep
+s = s & TextBox_lig1.Text & Sep & TextBox_lig2.Text & Sep & TextBox_Lig3.Text & Sep
+s = s & TextBox_parametric1x.Text & Sep & TextBox_parametric1y.Text & Sep & TextBox_tmin1.Text & Sep & TextBox_tmax1.Text & Sep
+s = s & TextBox_parametric2x.Text & Sep & TextBox_parametric2y.Text & Sep & TextBox_tmin2.Text & Sep & TextBox_tmax2.Text & Sep
+s = s & TextBox_parametric3x.Text & Sep & TextBox_parametric3y.Text & Sep & TextBox_tmin3.Text & Sep & TextBox_tmax3.Text & Sep
+s = s & TextBox_punkter.Text & Sep & TextBox_punkter2.Text & Sep & TextBox_markerpunkter.Text & Sep & CheckBox_pointsjoined.Value & Sep & CheckBox_pointsjoined2.Value & Sep & TextBox_pointsize.Text & Sep & TextBox_pointsize2.Text & Sep
+s = s & TextBox_vektorer.Text & Sep
+s = s & TextBox_labels.Text & Sep
 s = s & CheckBox_gitter.Value & Sep & CheckBox_logx.Value & Sep & CheckBox_logy.Value & Sep & CheckBox_visforklaring.Value & Sep
 
 
 ils.AlternativeText = s
 PicOpen = False
 Unload Me
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 Application.ScreenUpdating = True
 End Sub
 
 Sub InsertDefinitioner()
-' indsætter definitioner fra textboxen i maximainputstring
+' inds*ae*tter definitioner fra textboxen i maximainputstring
 Dim DefString As String
 
 omax.InsertKillDef
@@ -2221,7 +2221,7 @@ End Sub
 Function GetDefString()
 Dim DefString As String
 omax.ResetDefinitions
-DefString = TextBox_definitioner.text
+DefString = TextBox_definitioner.Text
 If Len(DefString) > 0 Then
 DefString = Replace(DefString, VbCrLfMac, ListSeparator)
     DefString = TrimB(DefString, ListSeparator)
@@ -2233,7 +2233,7 @@ GetDefString = DefString
 End If
 End Function
 Sub OpdaterDefinitioner()
-' ser efter variable i textboxene og indsætter under definitioner
+' ser efter variable i textboxene og inds*ae*tter under definitioner
 Dim vars As String
 Dim var As String, var2 As String
 Dim ea As New ExpressionAnalyser
@@ -2258,11 +2258,11 @@ Dim i As Integer
     vars = omax.vars
     If Left(vars, 1) = ";" Then vars = right(vars, Len(vars) - 1)
     
-    ea.text = vars
-    Do While right(TextBox_definitioner.text, 2) = VbCrLfMac
-        TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
+    ea.Text = vars
+    Do While right(TextBox_definitioner.Text, 2) = VbCrLfMac
+        TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
     Loop
-    Arr = Split(TextBox_definitioner.text, VbCrLfMac)
+    Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
     
     Do
     var = ea.GetNextListItem
@@ -2278,33 +2278,33 @@ Dim i As Integer
     Next
     If var <> "" Then
 '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
-        If Len(TextBox_definitioner.text) > 0 Then
-            TextBox_definitioner.text = TextBox_definitioner.text & VbCrLfMac
+        If Len(TextBox_definitioner.Text) > 0 Then
+            TextBox_definitioner.Text = TextBox_definitioner.Text & VbCrLfMac
         End If
-        TextBox_definitioner.text = TextBox_definitioner.text & var & "=1"
+        TextBox_definitioner.Text = TextBox_definitioner.Text & var & "=1"
     End If
-    Loop While ea.Pos <= Len(ea.text)
+    Loop While ea.Pos <= Len(ea.Text)
 
     
 End Sub
 Function GetTextboxVars(tb As TextBox, tbvar As TextBox) As String
 Dim ea As New ExpressionAnalyser
 Dim var As String
-    If Len(tb.text) > 0 Then
+    If Len(tb.Text) > 0 Then
         omax.vars = ""
-        omax.FindVariable (tb.text)
+        omax.FindVariable (tb.Text)
         If InStr(omax.vars, "x") > 0 Then
             var = "x"
         ElseIf InStr(omax.vars, "t") > 0 Then
             var = "t"
         Else
-            ea.text = omax.vars
+            ea.Text = omax.vars
             var = ea.GetNextVar(1)
         End If
         If Len(var) > 0 Then
-            tbvar.text = var
+            tbvar.Text = var
         End If
-        omax.vars = RemoveVar(omax.vars, tbvar.text)
+        omax.vars = RemoveVar(omax.vars, tbvar.Text)
         If Len(omax.vars) > 0 Then
             GetTextboxVars = ";" & omax.vars
         End If
@@ -2313,9 +2313,9 @@ End Function
 Function GetTextboxLignVars(tb As TextBox) As String
 Dim ea As New ExpressionAnalyser
 Dim var As String
-    If Len(tb.text) > 0 Then
+    If Len(tb.Text) > 0 Then
         omax.vars = ""
-        omax.FindVariable (tb.text)
+        omax.FindVariable (tb.Text)
         omax.vars = RemoveVar(omax.vars, "x")
         omax.vars = RemoveVar(omax.vars, "y")
         If Len(omax.vars) > 0 Then
@@ -2323,53 +2323,53 @@ Dim var As String
         End If
     End If
 End Function
-Function RemoveVar(text As String, var As String)
+Function RemoveVar(Text As String, var As String)
 ' fjerner var fra string
 Dim ea As New ExpressionAnalyser
 
-ea.text = text
+ea.Text = Text
 Call ea.ReplaceVar(var, "")
-text = Replace(ea.text, ";;", ";")
-If Left(text, 1) = ";" Then text = right(text, Len(text) - 1)
-If right(text, 1) = ";" Then text = Left(text, Len(text) - 1)
+Text = Replace(ea.Text, ";;", ";")
+If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
+If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
 
-RemoveVar = text
+RemoveVar = Text
 End Function
 
 Sub opdaterLabels()
-    Label_diffy.Caption = TextBox_dfy.text & "'(" & TextBox_dfx.text & ")="
+    Label_diffy.Caption = TextBox_dfy.Text & "'(" & TextBox_dfx.Text & ")="
 End Sub
 Private Sub CommandButton_plotdf_Click()
-Dim text As String
+Dim Text As String
 Dim pm As String
 Dim sl As String
     Label_vent.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
     InsertDefinitioner
-    If Len(TextBox_skyd1k.text) > 0 And Len(TextBox_skyd1f.text) > 0 And Len(TextBox_skyd1t.text) > 0 Then
+    If Len(TextBox_skyd1k.Text) > 0 And Len(TextBox_skyd1f.Text) > 0 And Len(TextBox_skyd1t.Text) > 0 Then
         If Len(pm) > 0 Then pm = pm & ","
         If Len(sl) > 0 Then sl = sl & ","
-        pm = pm & TextBox_skyd1k.text & "=" & ConvertNumberToMaxima(TextBox_skyd1t.text)
-        sl = sl & TextBox_skyd1k.text & "=" & ConvertNumberToMaxima(TextBox_skyd1f.text) & ":" & ConvertNumberToMaxima(TextBox_skyd1t.text)
+        pm = pm & TextBox_skyd1k.Text & "=" & ConvertNumberToMaxima(TextBox_skyd1t.Text)
+        sl = sl & TextBox_skyd1k.Text & "=" & ConvertNumberToMaxima(TextBox_skyd1f.Text) & ":" & ConvertNumberToMaxima(TextBox_skyd1t.Text)
     End If
-    If Len(TextBox_skyd2k.text) > 0 And Len(TextBox_skyd2f.text) > 0 And Len(TextBox_skyd2t.text) > 0 Then
+    If Len(TextBox_skyd2k.Text) > 0 And Len(TextBox_skyd2f.Text) > 0 And Len(TextBox_skyd2t.Text) > 0 Then
         If Len(pm) > 0 Then pm = pm & ","
         If Len(sl) > 0 Then sl = sl & ","
-        pm = pm & TextBox_skyd2k.text & "=" & ConvertNumberToMaxima(TextBox_skyd2t.text)
-        sl = sl & TextBox_skyd2k.text & "=" & ConvertNumberToMaxima(TextBox_skyd2f.text) & ":" & ConvertNumberToMaxima(TextBox_skyd2t.text)
+        pm = pm & TextBox_skyd2k.Text & "=" & ConvertNumberToMaxima(TextBox_skyd2t.Text)
+        sl = sl & TextBox_skyd2k.Text & "=" & ConvertNumberToMaxima(TextBox_skyd2f.Text) & ":" & ConvertNumberToMaxima(TextBox_skyd2t.Text)
     End If
-    If Len(TextBox_skyd3k.text) > 0 And Len(TextBox_skyd3f.text) > 0 And Len(TextBox_skyd3t.text) > 0 Then
+    If Len(TextBox_skyd3k.Text) > 0 And Len(TextBox_skyd3f.Text) > 0 And Len(TextBox_skyd3t.Text) > 0 Then
         If Len(pm) > 0 Then pm = pm & ","
         If Len(sl) > 0 Then sl = sl & ","
-        pm = pm & TextBox_skyd3k.text & "=" & ConvertNumberToMaxima(TextBox_skyd3t.text)
-        sl = sl & TextBox_skyd3k.text & "=" & ConvertNumberToMaxima(TextBox_skyd3f.text) & ":" & ConvertNumberToMaxima(TextBox_skyd3t.text)
+        pm = pm & TextBox_skyd3k.Text & "=" & ConvertNumberToMaxima(TextBox_skyd3t.Text)
+        sl = sl & TextBox_skyd3k.Text & "=" & ConvertNumberToMaxima(TextBox_skyd3f.Text) & ":" & ConvertNumberToMaxima(TextBox_skyd3t.Text)
     End If
     If Len(pm) > 0 Then
         pm = "[parameters,""" & pm & """],"
         pm = pm & "[sliders,""" & sl & """]"
     End If
     
-    Call omax.PlotDF(omax.CodeForMaxima(TextBox_dfligning.text), TextBox_dfx.text, TextBox_dfy.text, ConvertNumberToMaxima(TextBox_xmin.text), ConvertNumberToMaxima(TextBox_xmax.text), ConvertNumberToMaxima(TextBox_ymin.text), ConvertNumberToMaxima(TextBox_ymax.text), ConvertNumberToMaxima(TextBox_dfsol1x.text), ConvertNumberToMaxima(TextBox_dfsol1y.text), pm)
+    Call omax.PlotDF(omax.CodeForMaxima(TextBox_dfligning.Text), TextBox_dfx.Text, TextBox_dfy.Text, ConvertNumberToMaxima(TextBox_xmin.Text), ConvertNumberToMaxima(TextBox_xmax.Text), ConvertNumberToMaxima(TextBox_ymin.Text), ConvertNumberToMaxima(TextBox_ymax.Text), ConvertNumberToMaxima(TextBox_dfsol1x.Text), ConvertNumberToMaxima(TextBox_dfsol1y.Text), pm)
     Label_vent.visible = False
 
 End Sub
@@ -2382,7 +2382,7 @@ Private Sub TextBox_dfy_Change()
 End Sub
 
 Sub CheckForAssume()
-' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begrænsninger på xmin og xmax
+' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begr*ae*nsninger p*aa* xmin og xmax
 Dim DefS As String
 Dim Pos As Integer
 Dim ea As New ExpressionAnalyser
@@ -2392,35 +2392,35 @@ Dim assumelist As String
 ea.SetNormalBrackets
 ea2.SetNormalBrackets
     DefS = GetDefString()
-    TextBox_xmin1.text = ""
-    TextBox_xmin2.text = ""
-    TextBox_xmin3.text = ""
-    TextBox_xmin4.text = ""
-    TextBox_xmin5.text = ""
-    TextBox_xmin6.text = ""
-    TextBox_xmax1.text = ""
-    TextBox_xmax2.text = ""
-    TextBox_xmax3.text = ""
-    TextBox_xmax4.text = ""
-    TextBox_xmax5.text = ""
-    TextBox_xmax6.text = ""
+    TextBox_xmin1.Text = ""
+    TextBox_xmin2.Text = ""
+    TextBox_xmin3.Text = ""
+    TextBox_xmin4.Text = ""
+    TextBox_xmin5.Text = ""
+    TextBox_xmin6.Text = ""
+    TextBox_xmax1.Text = ""
+    TextBox_xmax2.Text = ""
+    TextBox_xmax3.Text = ""
+    TextBox_xmax4.Text = ""
+    TextBox_xmax5.Text = ""
+    TextBox_xmax6.Text = ""
     
-    ea.text = DefS
-    Pos = InStr(ea.text, "assume(")
+    ea.Text = DefS
+    Pos = InStr(ea.Text, "assume(")
     Do While Pos > 0
         s = ea.GetNextBracketContent(Pos)
-        ea2.text = s
+        ea2.Text = s
         l = ea2.GetNextListItem(1, ",")
         Do While Len(l) > 0
-            InsertBoundary TextBox_var1.text, l, TextBox_xmin1, TextBox_xmax1
-            InsertBoundary TextBox_var2.text, l, TextBox_xmin2, TextBox_xmax2
-            InsertBoundary TextBox_var3.text, l, TextBox_xmin3, TextBox_xmax3
-            InsertBoundary TextBox_var4.text, l, TextBox_xmin4, TextBox_xmax4
-            InsertBoundary TextBox_var5.text, l, TextBox_xmin5, TextBox_xmax5
-            InsertBoundary TextBox_var6.text, l, TextBox_xmin6, TextBox_xmax6
+            InsertBoundary TextBox_var1.Text, l, TextBox_xmin1, TextBox_xmax1
+            InsertBoundary TextBox_var2.Text, l, TextBox_xmin2, TextBox_xmax2
+            InsertBoundary TextBox_var3.Text, l, TextBox_xmin3, TextBox_xmax3
+            InsertBoundary TextBox_var4.Text, l, TextBox_xmin4, TextBox_xmax4
+            InsertBoundary TextBox_var5.Text, l, TextBox_xmin5, TextBox_xmax5
+            InsertBoundary TextBox_var6.Text, l, TextBox_xmin6, TextBox_xmax6
             l = ea2.GetNextListItem(ea2.Pos, ",")
         Loop
-        Pos = InStr(Pos + 8, ea.text, "assume(")
+        Pos = InStr(Pos + 8, ea.Text, "assume(")
     Loop
     
 End Sub
@@ -2433,9 +2433,9 @@ Dim Arr As Variant
         dlhs = Replace(Arr(0), "=", "")
         drhs = Replace(Arr(1), "=", "")
         If dlhs = var Then
-            tbmax.text = drhs
+            tbmax.Text = drhs
         ElseIf drhs = var Then
-            tbmin.text = dlhs
+            tbmin.Text = dlhs
         End If
     End If
     Arr = Split(assumetext, ">")
@@ -2443,9 +2443,9 @@ Dim Arr As Variant
         dlhs = Replace(Arr(0), "=", "")
         drhs = Replace(Arr(1), "=", "")
         If dlhs = var Then
-            tbmin.text = drhs
+            tbmin.Text = drhs
         ElseIf drhs = var Then
-            tbmax.text = dlhs
+            tbmax.Text = dlhs
         End If
     End If
         
@@ -2470,7 +2470,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

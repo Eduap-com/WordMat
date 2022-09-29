@@ -56,7 +56,6 @@ End Enum
 ' --------------------------------------------- '
 
 Public Property Get CompareMode() As CompareMethod
-Attribute CompareMode.VB_Description = "Set or get the string comparison method."
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     CompareMode = dict_pCompareMode
 #Else
@@ -86,8 +85,6 @@ Public Property Get Count() As Long
 End Property
 
 Public Property Get Item(Key As Variant) As Variant
-Attribute Item.VB_Description = "Set or get the item for a given key."
-Attribute Item.VB_UserMemId = 0
 #If Mac Or Not UseScriptingDictionaryIfAvailable Then
     Dim dict_KeyValue As Variant
     dict_KeyValue = dict_GetKeyValue(Key)
@@ -464,3 +461,5 @@ Private Sub Class_Terminate()
     Set dict_pDictionary = Nothing
 #End If
 End Sub
+
+

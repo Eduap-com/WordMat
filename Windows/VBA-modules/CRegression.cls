@@ -37,14 +37,14 @@ Public Property Get Datatext() As Variant
 
 End Property
 
-Public Property Let Datatext(ByVal text As Variant)
+Public Property Let Datatext(ByVal Text As Variant)
     Dim i As Integer
     Dim j As Integer
     Dim lsep As String
     Dim Arr As Variant
     Dim arr2 As Variant
     Dim n As Integer
-    Arr = Split(text, VbCrLfMac)
+    Arr = Split(Text, VbCrLfMac)
     n = UBound(Arr)
     ReDim xval(1 To n + 1) As Double
     ReDim yval(1 To n + 1) As Double
@@ -76,7 +76,7 @@ Dim n As Integer
 Dim oFS As Integer
 Dim r As Range
 
-On Error GoTo fejl
+On Error GoTo Fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -88,16 +88,16 @@ If Selection.Range.End > Selection.Tables(1).Range.End Then
     Selection.End = Selection.Tables(1).Range.End
 End If
 
-If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel også er valgt
+If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel ogs*aa* er valgt
     Set rws = Selection.Rows
     oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
 Else
     Set rws = Selection.Columns
-    oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
+    oFS = Selection.Cells(1).Row.Index - 1 ' r*ae*kke hvor selection starter
 End If
 n = rws.Count
 
-If n < 2 Then ' hvis intet valgt på forhånd
+If n < 2 Then ' hvis intet valgt p*aa* forh*aa*nd
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
         oFS = 0
@@ -109,7 +109,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
     On Error Resume Next
     For i = 1 To n ' bestem hvor der ligger tal
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.text
+        cellval = rws(i).Cells(j).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         tal = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
@@ -125,7 +125,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
 End If
 
 If n < 2 Then
-    GoTo fejl
+    GoTo Fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -143,12 +143,12 @@ End If
             omax.beregn
             cellval = Replace(omax.MaximaOutput, "=", "")
         Else
-            cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
+            cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
             cellval = Left(cellval, Len(cellval) - 1)
         End If
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Replace(cellval, "*10^", "E")
-        xval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", "")) ' skal med for at melde fejl , men alene duer ikke da den er afh af sprog indstill. De to replace fjerner . og , da disse ikke genkendes af alle sprog fx norsk bruger ikke . så alle tal med . ville blive ignoreret
+        xval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", "")) ' skal med for at melde fejl , men alene duer ikke da den er afh af sprog indstill. De to replace fjerner . og , da disse ikke genkendes af alle sprog fx norsk bruger ikke . s*aa* alle tal med . ville blive ignoreret
         xval(i) = val(cellval) 'melder ikke fejl ved bogstaver
         
         If rws(j).Cells(2 + oFS).Range.OMaths.Count > 0 Then
@@ -158,7 +158,7 @@ End If
             omax.beregn
             cellval = Replace(omax.MaximaOutput, "=", "")
         Else
-            cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
+            cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
             cellval = Left(cellval, Len(cellval) - 1)
         End If
 
@@ -166,7 +166,7 @@ End If
         cellval = Replace(cellval, "*10^", "E")
         yval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
         yval(i) = val(cellval)
-        If Err.Number > 0 Then ' hvis enten x -eller y-værdien ikke er et tal (fejl fra cdbl) så skal linjen ignoreres
+        If Err.Number > 0 Then ' hvis enten x -eller y-v*ae*rdien ikke er et tal (fejl fra cdbl) s*aa* skal linjen ignoreres
            i = i - 1
             Err.Clear
         End If
@@ -176,10 +176,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 End Sub
 Public Sub GetTableDataOld()
@@ -188,7 +188,7 @@ Dim cellval As String
 Dim i, j, n, oFS As Integer
 'On Error GoTo fejl
 '    If Selection.Tables.Count = 0 Then
-'        Call MsgBox("Du skal lave en tabel med to kolonner. x-værdier i venstre kolonne og y-værdier i højrekolonne")
+'        Call MsgBox("Du skal lave en tabel med to kolonner. x-v*ae*rdier i venstre kolonne og y-v*ae*rdier i h*oe*jrekolonne")
 '        Exit Sub
 '    End If
 Dim r As Range
@@ -197,12 +197,12 @@ If Selection.Tables.Count = 0 Then Exit Sub
 tableonly:
 On Error GoTo heletabel
 
-If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel også er valgt
+If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel ogs*aa* er valgt
     Set rws = Selection.Rows
     oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
 Else
     Set rws = Selection.Columns
-    oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
+    oFS = Selection.Cells(1).Row.Index - 1 ' r*ae*kke hvor selection starter
 End If
 n = rws.Count
 GoTo Prepare
@@ -225,12 +225,12 @@ If n < 2 Then
         oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
     Else
         Set rws = Selection.Tables(1).Columns
-        oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
+        oFS = Selection.Cells(1).Row.Index - 1 ' r*ae*kke hvor selection starter
     End If
     n = rws.Count
 End If
 If n < 2 Then
-    GoTo fejl
+    GoTo Fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -241,11 +241,11 @@ End If
     For j = 1 To n
         i = i + 1
         
-        cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
+        cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         xval(i) = val(cellval)
-        cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
+        cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         yval(i) = val(cellval)
@@ -259,18 +259,18 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 End Sub
 Public Sub GetSetData()
-' læser mængde {(2,1),(3,4)} fra mathbox ind i xval og yval
+' l*ae*ser m*ae*ngde {(2,1),(3,4)} fra mathbox ind i xval og yval
 Dim p As String
 Dim xs As String
 Dim ys As String
-Dim text As String
+Dim Text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim Arr As Variant
@@ -280,9 +280,9 @@ Dim Arr As Variant
 ea.StartBracket = "{"
 ea.EndBracket = "}"
 Selection.OMaths.Linearize
-text = Selection.OMaths(1).Range.text
-ea.text = Replace(text, VBA.ChrW(8722), "-") ' nødvendigt
-ea.text = ea.GetNextBracketContent()
+Text = Selection.OMaths(1).Range.Text
+ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' n*oe*dvendigt
+ea.Text = ea.GetNextBracketContent()
 ea.SetNormalBrackets
 ea.Pos = 1
 Do
@@ -307,12 +307,12 @@ Loop While Not (p = "") And n < 1000
 End Sub
 
 Private Function ComputeRegr(x() As Double, Y() As Double) As Boolean
-'Udfører lineær regression på to arrays og returnerer a,b og R^2
+'Udf*oe*rer line*ae*r regression p*aa* to arrays og returnerer a,b og R^2
 
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
 Dim n As Integer
 Dim i As Integer
-On Error GoTo fejl
+On Error GoTo Fejl
 
 n = UBound(x) - LBound(x) + 1
                
@@ -325,7 +325,7 @@ For i = LBound(x) To UBound(x)
 Next
 
 A = (n * sumxy - sumx * sumy) / (n * sumxx - sumx ^ 2)
-A = betcif(A, 16)   ' sikrer at man ikke får små værdier for b der egentlig er 0
+A = betcif(A, 16)   ' sikrer at man ikke f*aa*r sm*aa* v*ae*rdier for b der egentlig er 0
 b = (sumy - A * sumx) / n
 If n * sumxx - sumx ^ 2 = 0 Or (n * sumyy - sumy ^ 2) = 0 Then
     r = 1
@@ -336,11 +336,11 @@ End If
 If r > 1 Then r = 1
 
 ComputeRegr = True
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     ComputeRegr = False
     MsgBox Sprog.A(28), vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Function
 
 Function Logv(val() As Double) As Variant
@@ -356,10 +356,10 @@ Function Logv(val() As Double) As Variant
             arrlog(j) = Log(val(i))
         Else
             MsgBox Sprog.A(672), vbOKOnly, Sprog.Error
-            GoTo slut
+            GoTo Slut
         End If
     Next
-slut:
+Slut:
     ReDim Preserve arrlog(LBound(val) To j) As Double
 
     Logv = arrlog
@@ -423,7 +423,7 @@ Sub ComputeExpRegr()
 End Sub
 
 Sub ComputePowRegr()
-On Error GoTo fejl
+On Error GoTo Fejl
     Dim n As Integer
     ReDim logx(LBound(xval) To UBound(xval)) As Double
     ReDim logy(LBound(yval) To UBound(yval)) As Double
@@ -446,10 +446,10 @@ On Error GoTo fejl
         c = 0
         r = 0
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(32), vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub ComputeUserRegr()
     Dim fkt As String
@@ -457,7 +457,7 @@ Sub ComputeUserRegr()
     Dim Arr As Variant
     Dim xlist As String, ylist As String
     Dim i As Long, guess As String, var As String, p As Integer, eps As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
     xlist = "["
     For i = LBound(xval) To UBound(xval)
         xlist = xlist & Replace((xval(i)), ",", ".") & ","
@@ -477,7 +477,7 @@ Sub ComputeUserRegr()
             Arr = Split(fkt, "=")
             If UBound(Arr) > 0 Then fkt = Arr(1)
         End If
-        UserFormUserRegression.TextBox_function.text = fkt
+        UserFormUserRegression.TextBox_function.Text = fkt
     End If
     
     If InStr(fkt, "x") > 0 Then
@@ -497,17 +497,17 @@ Sub ComputeUserRegr()
     Else
         var = ""
     End If
-    UserFormUserRegression.TextBox_var.text = var
+    UserFormUserRegression.TextBox_var.Text = var
     
-    UserFormUserRegression.TextBox_eps.text = MaximaCifre
+    UserFormUserRegression.TextBox_eps.Text = MaximaCifre
     
     UserFormUserRegression.Show
     
-    eps = UserFormUserRegression.TextBox_eps.text
-    fkt = UserFormUserRegression.TextBox_function.text
+    eps = UserFormUserRegression.TextBox_eps.Text
+    fkt = UserFormUserRegression.TextBox_function.Text
     fkt = Replace(fkt, "*", MaximaGangeTegn)
     guess = "[" & UserFormUserRegression.TextBox_guess & "]"
-    var = UserFormUserRegression.TextBox_var.text
+    var = UserFormUserRegression.TextBox_var.Text
     If var <> vbNullString And fkt <> vbNullString Then
         omax.UserRegression ConvertSep(fkt), var, xlist, ylist, CInt(eps), ConvertSep(guess)
         p = InStr(omax.KommentarOutput, "R^2=")
@@ -518,21 +518,21 @@ Sub ComputeUserRegr()
         Ligning = omax.MaximaOutput
     End If
     
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
-Function ConvertSep(text As String) As String
+Function ConvertSep(Text As String) As String
     ' kommaer og listeseparator
     Dim ea As New ExpressionAnalyser
     If Not MaximaSeparator Then
-        ea.text = text
+        ea.Text = Text
         ea.ConvertDecSeparator
-        text = ea.text
+        Text = ea.Text
         '        text = Replace(text, ",", ".")
     End If
-    ConvertSep = Replace(text, ";", ",")
+    ConvertSep = Replace(Text, ";", ",")
 
 End Function
 Sub ComputePolRegrKvad()
@@ -568,7 +568,7 @@ Sub ComputePolRegr()
     On Error Resume Next
     n = UBound(xval) - LBound(xval)
     orden = InputBox(Sprog.A(35) & n & ")" & vbCrLf & vbCrLf & Sprog.A(36), Sprog.A(37), "2")
-    On Error GoTo fejl
+    On Error GoTo Fejl
     If orden < 1 Or orden > n Then
         MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, Sprog.Error
         Exit Sub
@@ -623,14 +623,14 @@ Sub ComputePolRegr()
         c = 0
         r = 0
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Function polregr(x() As Double, Y() As Double, orden As Integer, Optional ByVal tving As Boolean = False) As Boolean
-'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2
+'Udf*oe*rer polynomisk regression p*aa* to arrays og returnerer a,b,c og R^2
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
@@ -638,7 +638,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
-On Error GoTo fejl
+On Error GoTo Fejl
 
 If Not (UBound(x) = UBound(Y)) Then
     polregr = False
@@ -658,13 +658,13 @@ ReDim t(orden)
 
 n = UBound(x) - LBound(x) + 1
                
-For j = 0 To orden ' T(i) sættes op (højre kolonne af matrix)
+For j = 0 To orden ' T(i) s*ae*ttes op (h*oe*jre kolonne af matrix)
     For i = 0 To np - 1
         t(j) = t(j) + Y(i + 1) * x(i + 1) ^ j
     Next
 Next
                
-For j = 0 To 2 * orden ' S(i) sættes op (elementer til det indre af matrix)
+For j = 0 To 2 * orden ' S(i) s*ae*ttes op (elementer til det indre af matrix)
     For i = 0 To np - 1
         s(j) = s(j) + x(i + 1) ^ j
     Next
@@ -673,20 +673,20 @@ Next
                
 
 If tving = False Then
-' sæt indre af matrix op
+' s*ae*t indre af matrix op
 For i = 1 To orden + 1
     For j = 1 To orden + 1
         M(i, j) = s(orden + i - j)
     Next
 Next
-'sæt højre kolonne i matrix op
+'s*ae*t h*oe*jre kolonne i matrix op
 For i = 0 To orden
     M(i + 1, orden + 2) = t(i)
 Next
 
-' Der udføres gaussisk eliminination
+' Der udf*oe*res gaussisk eliminination
 For i = 1 To orden + 1
-' dividerer række i med værdien i celle (i,i)
+' dividerer r*ae*kke i med v*ae*rdien i celle (i,i)
   For j = orden + 2 To 1 Step -1
     If M(i, i) = 0 Then
         MsgBox "Divide by zero", vbOKOnly, Sprog.Error
@@ -695,7 +695,7 @@ For i = 1 To orden + 1
         M(i, j) = M(i, j) / M(i, i)
     End If
   Next
-' laver nuller i kolonne i undtagen celle i,i hvor der skal stå et 1
+' laver nuller i kolonne i undtagen celle i,i hvor der skal st*aa* et 1
   For q = 1 To orden + 1
     If q <> i Then
       For j = orden + 2 To 1 Step -1
@@ -729,14 +729,14 @@ Next
 r = SSregr / SStotal
              
 polregr = True
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
   polregr = False
 '  MsgBox Err.Number
-slut:
+Slut:
 End Function
 Function polregrkvad(x() As Double, Y() As Double, Optional ByVal tving As Boolean = False) As Boolean
-'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2 via userdefined datatype
+'Udf*oe*rer polynomisk regression p*aa* to arrays og returnerer a,b,c og R^2 via userdefined datatype
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
@@ -744,7 +744,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M(3, 4)
 
-On Error GoTo fejl
+On Error GoTo Fejl
 
 n = UBound(x) - LBound(x) + 1
                
@@ -773,9 +773,9 @@ M(3, 2) = sumx3
 M(3, 3) = sumxx
 M(3, 4) = sumx2y
 
-' Der udføres gaussisk eliminination
+' Der udf*oe*res gaussisk eliminination
 For i = 1 To 3
-' dividerer række i med værdien i celle (i,i)
+' dividerer r*ae*kke i med v*ae*rdien i celle (i,i)
   For j = 4 To 1 Step -1
     If M(i, i) = 0 Then
 '        MsgBox "nul"
@@ -784,7 +784,7 @@ For i = 1 To 3
         M(i, j) = M(i, j) / M(i, i)
     End If
   Next
-' laver nuller i kolonne i undtagen celle i,i hvor der skal stå et 1
+' laver nuller i kolonne i undtagen celle i,i hvor der skal st*aa* et 1
   For q = 1 To 3
     If q <> i Then
       For j = 4 To 1 Step -1
@@ -815,11 +815,11 @@ Next
 r = SSregr / SStotal
              
 polregrkvad = True
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
   polregrkvad = False
 '  MsgBox Err.Number
-slut:
+Slut:
 End Function
 
 
@@ -834,18 +834,18 @@ Sub InsertEquation()
 #End If
     Selection.TypeText RegressionText
 
-    Selection.TypeText text:="R"
+    Selection.TypeText Text:="R"
     Selection.Font.Superscript = wdToggle
-    Selection.TypeText text:="2"
+    Selection.TypeText Text:="2"
     Selection.Font.Superscript = wdToggle
-    Selection.TypeText text:=" = " & ConvertNumberToString(r)
+    Selection.TypeText Text:=" = " & ConvertNumberToString(r)
     Selection.TypeParagraph
     Selection.Collapse
     Selection.OMaths.Add Range:=Selection.Range
-    Selection.TypeText text:=Ligning
+    Selection.TypeText Text:=Ligning
     Selection.OMaths.BuildUp
     Selection.TypeParagraph
-'    Call Indsæt2DPlot(ligning, xval, yval)
+'    Call Inds*ae*t2DPlot(ligning, xval, yval)
 #If Mac Then
 #Else
         Oundo.EndCustomRecord

@@ -1,36 +1,36 @@
 Attribute VB_Name = "WolframAlpha"
 Option Explicit
 Sub OpenWolframAlpha(Optional pretext As String)
-Dim text As String
-On Error GoTo fejl
+Dim Text As String
+On Error GoTo Fejl
     PrepareMaxima
     omax.ReadSelection
     If omax.AntalKom = 1 Then
-        text = omax.Kommando
+        Text = omax.Kommando
     Else
-        text = omax.KommandoerStreng
+        Text = omax.KommandoerStreng
     End If
-    text = omax.CodeForMaxima(text)
-    text = ConvertToWolfram(text)
-    text = pretext & " " & text
+    Text = omax.CodeForMaxima(Text)
+    Text = ConvertToWolfram(Text)
+    Text = pretext & " " & Text
     
-    OpenLink ("http://www.wolframalpha.com/input/?i=" & text)
-GoTo slut
-fejl:
+    OpenLink ("http://www.wolframalpha.com/input/?i=" & Text)
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
-Function ConvertToWolfram(text As String)
+Function ConvertToWolfram(Text As String)
     
-    text = Replace(text, "%", "") ' først fjernes evt. % fra maxima konstanter
-    text = Replace(text, "+", "%2B") '
-    text = Replace(text, "^", "%5E") ' ikke nødvendig?
-    text = Replace(text, "(", "%28") '
-    text = Replace(text, ")", "%29") '
+    Text = Replace(Text, "%", "") ' f*oe*rst fjernes evt. % fra maxima konstanter
+    Text = Replace(Text, "+", "%2B") '
+    Text = Replace(Text, "^", "%5E") ' ikke n*oe*dvendig?
+    Text = Replace(Text, "(", "%28") '
+    Text = Replace(Text, ")", "%29") '
 '    text = Replace(text, "", "")
 
     
 
-    ConvertToWolfram = text
+    ConvertToWolfram = Text
 End Function

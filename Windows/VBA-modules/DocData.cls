@@ -25,7 +25,7 @@ Dim i As Integer, j As Integer, k As Integer, l As Integer, c As Integer
 Dim startrow As Integer
 Dim startcol As Integer
 Dim d As Double
-On Error GoTo fejl
+On Error GoTo Fejl
 
 r = 1
 c = 1
@@ -40,21 +40,21 @@ On Error GoTo hop
 r = Selection.Rows.Count
 c = Selection.Columns.Count
 hop:
-On Error GoTo fejl
+On Error GoTo Fejl
 If r < 2 Or c < 2 Then
-    If Selection.Tables.Count < 1 Then GoTo fejl
+    If Selection.Tables.Count < 1 Then GoTo Fejl
     Selection.Tables(1).Select
     r = Selection.Rows.Count
     c = Selection.Columns.Count
     If r < 2 Or c < 2 Then
-        GoTo fejl
+        GoTo Fejl
     End If
 End If
     On Error Resume Next
     startrow = 0
     startcol = Selection.Cells(1).Column.Index
     If c > 1 Then
-        cellval = Selection.Rows(1).Cells(startcol + 1).Range.text
+        cellval = Selection.Rows(1).Cells(startcol + 1).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         d = CDbl(cellval)
@@ -65,7 +65,7 @@ End If
         End If
     End If
     If r > 1 Then
-        cellval = Selection.Rows(2).Cells(startcol).Range.text
+        cellval = Selection.Rows(2).Cells(startcol).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         d = CDbl(cellval)
@@ -82,7 +82,7 @@ End If
         i = i + 1
         For k = 1 To c
         l = l + 1
-        cellval = Replace(Selection.Rows(i + startrow).Cells(l + startcol - 1).Range.text, ",", ".")
+        cellval = Replace(Selection.Rows(i + startrow).Cells(l + startcol - 1).Range.Text, ",", ".")
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         Tabel(i, l) = CDbl(cellval)
@@ -102,15 +102,15 @@ End If
     Selection.TypeParagraph
     ReadSelection = True ' ingen fejl
 End If
-GoTo slut
-fejl:
-'    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
+GoTo Slut
+Fejl:
+'    Call MsgBox("Du skal v*ae*lge en tabel. Bogstaver ignoreres.")
     ReadSelection = False
-slut:
+Slut:
 
 End Function
 Public Function ReadSelectionS() As Boolean
-' læser som strenge
+' l*ae*ser som strenge
 Dim cellval As String
 Dim r As Integer
 Dim i As Integer, j As Integer, k As Integer, l As Integer, c As Integer
@@ -127,14 +127,14 @@ On Error GoTo hop
 r = Selection.Rows.Count
 c = Selection.Columns.Count
 hop:
-On Error GoTo fejl
+On Error GoTo Fejl
 If r < 1 Or c < 1 Or (r = 1 And c = 1) Then
-    If Selection.Tables.Count < 1 Then GoTo fejl
+    If Selection.Tables.Count < 1 Then GoTo Fejl
     Selection.Tables(1).Select
     r = Selection.Rows.Count
     c = Selection.Columns.Count
     If r < 1 Or c < 1 Then
-        GoTo fejl
+        GoTo Fejl
     End If
 End If
     On Error Resume Next
@@ -147,7 +147,7 @@ End If
         i = i + 1
         For k = 1 To c
         l = l + 1
-        cellval = Replace(Selection.Rows(i + startrow).Cells(l + startcol - 1).Range.text, ",", ".")
+        cellval = Replace(Selection.Rows(i + startrow).Cells(l + startcol - 1).Range.Text, ",", ".")
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, vbCrLf, "")
         cellval = Replace(cellval, vbCr, "")
@@ -164,34 +164,34 @@ End If
     Selection.TypeParagraph
     ReadSelectionS = True ' ingen fejl
 End If
-GoTo slut
-fejl:
-'    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
+GoTo Slut
+Fejl:
+'    Call MsgBox("Du skal v*ae*lge en tabel. Bogstaver ignoreres.")
     ReadSelectionS = False
-slut:
+Slut:
 
 End Function
 
 Public Function TabelCelle(r, c) As Double
-On Error GoTo fejl
-If c > ncolumns Or r > nrows Then GoTo slut
+On Error GoTo Fejl
+If c > ncolumns Or r > nrows Then GoTo Slut
 
 TabelCelle = Tabel(r, c)
 
-GoTo slut
-fejl:
-slut:
+GoTo Slut
+Fejl:
+Slut:
 
 End Function
 Public Function TabelsCelle(r, c) As String
-On Error GoTo fejl
-If c > ncolumns Or r > nrows Then GoTo slut
+On Error GoTo Fejl
+If c > ncolumns Or r > nrows Then GoTo Slut
 
 TabelsCelle = tabels(r, c)
 
-GoTo slut
-fejl:
-slut:
+GoTo Slut
+Fejl:
+Slut:
 
 End Function
 
@@ -211,7 +211,7 @@ MsgBox t
 End Sub
 
 Public Function GetSetForm(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
+' returnerer data som m*ae*ngde {(1,2),(3,4)}
 ' 0 punktum decseparator
 ' 1 komma decseparator
 
@@ -235,7 +235,7 @@ GetSetForm = t
 
 End Function
 Public Function GetSetFormS(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
+' returnerer data som m*ae*ngde {(1,2),(3,4)}
 ' 0 punktum decseparator
 ' 1 komma decseparator
 
@@ -259,7 +259,7 @@ GetSetFormS = t
 
 End Function
 Public Function GetListFormS(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
+' returnerer data som m*ae*ngde {(1,2),(3,4)}
 ' 0 punktum decseparator
 ' 1 komma decseparator
 
@@ -298,42 +298,42 @@ Function ConvertToKomma(ByVal t As String) As String
 End Function
 
 Public Sub GetSetData()
-' læser mængde {(2,1),(3,4)} eller liste fra mathbox ind i tabel
+' l*ae*ser m*ae*ngde {(2,1),(3,4)} eller liste fra mathbox ind i tabel
 Dim p As String
 Dim xs As String
 Dim ys As String
-Dim text As String
+Dim Text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim r() As String
 Dim Arr As Variant
 Dim i As Integer
-On Error GoTo slut
+On Error GoTo Slut
 
 ReDim r(1 To 1000) As String
 If Selection.OMaths.Count > 0 Then
-    text = mboxes(0)
+    Text = mboxes(0)
 '    Selection.OMaths.Linearize
 '    text = Selection.OMaths(1).Range.text
 Else
-    text = Selection.Range.text
+    Text = Selection.Range.Text
 End If
-ea.text = Replace(text, VBA.ChrW(8722), "-") ' nødvendigt
+ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' n*oe*dvendigt
 
-If InStr(text, "[") > 0 Then
+If InStr(Text, "[") > 0 Then
     ea.SetSquareBrackets
-    ea.text = ea.GetNextBracketContent()
-ElseIf InStr(text, "{") > 0 Then
+    ea.Text = ea.GetNextBracketContent()
+ElseIf InStr(Text, "{") > 0 Then
     ea.SetTuborgBrackets
-    ea.text = ea.GetNextBracketContent()
+    ea.Text = ea.GetNextBracketContent()
 Else
-    ea.text = text
+    ea.Text = Text
 End If
 ea.SetNormalBrackets
 ea.Pos = 1
 nrows = 0
-    ea.text = Replace(ea.text, ";", " , ")
+    ea.Text = Replace(ea.Text, ";", " , ")
     ea.ConvertDecSeparator
 
 
@@ -366,7 +366,7 @@ Else
 End If
 
 For i = 1 To nrows
-    ea.text = r(i)
+    ea.Text = r(i)
     ea.Pos = 1
     n = 0
     Do
@@ -377,10 +377,10 @@ For i = 1 To nrows
         End If
         If Not (MaximaSeparator) Then p = Replace(p, ".", ",")
         tabels(i, n) = omax.ConvertToAscii(p)
-    Loop While ea.Pos < Len(ea.text) And n < 1000
+    Loop While ea.Pos < Len(ea.Text) And n < 1000
 Next
     
-If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt så er det formentlig kun et matematikfelt og ikke en liste eller tabel
+If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt s*aa* er det formentlig kun et matematikfelt og ikke en liste eller tabel
     ReDim Preserve tabels(1 To 1, 1 To 1) As String
     nrows = 0
     ncolumns = 0
@@ -388,12 +388,12 @@ ElseIf nrows > 0 Then
     ReDim Preserve tabels(1 To nrows, 1 To ncolumns) As String
 End If
 
-slut:
+Slut:
 End Sub
 
 Function ReadEquation(Optional ir As Range) As String
 ' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
-' Oversætter selection der er omath til streng
+' Overs*ae*tter selection der er omath til streng
     Dim sr As Range, r As Range
 '    Dim t As Variant
 '    t = Timer
@@ -401,7 +401,7 @@ Function ReadEquation(Optional ir As Range) As String
         
     End If
     
-'    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
+'    copytext = Selection.Range.text ' fors*oe*g med ikke at klippe og kopiere problemet er at man er n*oe*dt til at konvertere til text for at l*ae*se ordentlig
     Set sr = Selection.Range
     
     Selection.Copy
@@ -416,24 +416,24 @@ Function ReadEquation(Optional ir As Range) As String
     .OMaths(1).ConvertToNormalText
     End With
     
-    ReadEquation = r.text
+    ReadEquation = r.Text
     sr.Select
 
     r.Delete
 '    ClearClipboard
     
-'    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
+'    tempDoc.Range.Delete ' dette afhj*ae*lper muligvis at word bliver langsom
 '    MsgBox Timer - t
 End Function
 
 Sub ReadMathBoxes()
-' indsætter de markerede ligningsfelter som mboxes array
+' inds*ae*tter de markerede ligningsfelter som mboxes array
 Dim mtext As String, copytext As String
 Dim antal As Integer
 Dim sstart As Long
 Dim sslut As Long
 Dim j As Integer
-On Error GoTo slut
+On Error GoTo Slut
 
 ' hvis bold giver det buildup problemer
 For j = 1 To Selection.OMaths.Count
@@ -456,7 +456,7 @@ Else
     ReDim mboxes(0 To 100)
     Set sr = Selection.Range
     
-    If Len(Selection.text) < 3 Then
+    If Len(Selection.Text) < 3 Then
         Selection.OMaths(1).Range.Select
     End If
 '    If Selection.OMaths(1).Range.End < Selection.Range.End Then
@@ -478,14 +478,14 @@ Else
     Set mathcol = r.OMaths
     For j = 0 To antal - 1
         mathcol(j + 1).ConvertToNormalText
-        mboxes(j) = Replace(mathcol(j + 1).Range.text, ChrW(11), "") ' fjern shift-enter
+        mboxes(j) = Replace(mathcol(j + 1).Range.Text, ChrW(11), "") ' fjern shift-enter
     Next
     ReDim Preserve mboxes(0 To antal - 1)
     antalmboxes = antal
     sr.Select
 End If
 
-slut:
+Slut:
     
     sr.Select
 ' Selection.start = sstart

@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
 ''
-' WebResponse v4.1.5
+' WebResponse v4.1.6
 ' (c) Tim Hall - https://github.com/VBA-tools/VBA-Web
 '
 ' Wrapper for http/cURL responses that includes parsed Data based on WebRequest.ResponseFormat.
@@ -165,12 +165,12 @@ End Sub
 ' @param {String} Result
 ' @throws 11031 / 80042b17 / -2147210473 - Error creating from cURL
 ''
-Public Sub CreateFromCurl(Client As WebClient, Request As WebRequest, Result As String)
+Public Sub CreateFromCurl(Client As WebClient, Request As WebRequest, result As String)
     On Error GoTo web_ErrorHandling
 
     Dim web_Lines() As String
 
-    web_Lines = VBA.Split(Result, web_CrLf)
+    web_Lines = VBA.Split(result, web_CrLf)
 
     Me.StatusCode = web_ExtractStatusFromCurlResponse(web_Lines)
     Me.StatusDescription = web_ExtractStatusTextFromCurlResponse(web_Lines)
@@ -407,3 +407,7 @@ Private Sub Class_Initialize()
     Set Headers = New Collection
     Set Cookies = New Collection
 End Sub
+
+
+
+

@@ -30,7 +30,7 @@ Dim Arr As Variant
 Dim i As Integer
     
     
-    TempDefs = TextBox_def.text
+    TempDefs = TextBox_def.Text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
@@ -38,10 +38,10 @@ Dim i As Integer
     TempDefs = ""
     For i = 0 To UBound(Arr)
         If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> TextBox_funktion.text Then ' kan ikke definere variabel der løses for
+            If Split(Arr(i), "=")(0) <> TextBox_funktion.Text Then ' kan ikke definere variabel der l*oe*ses for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
-                MsgBox Sprog.A(252) & " " & TextBox_funktion.text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
+                MsgBox Sprog.A(252) & " " & TextBox_funktion.Text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
             End If
         End If
@@ -89,7 +89,7 @@ Dim svar As String
     For i = 0 To UBound(Svars)
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
-            TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac    ' midlertidige definitioner
+            TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac    ' midlertidige definitioner
         End If
     Next
 
@@ -103,12 +103,12 @@ Sub opdaterLabels()
 Dim fkt As String
 Dim Pos As Integer
 On Error Resume Next
-    fkt = TextBox_funktion.text
+    fkt = TextBox_funktion.Text
     Pos = InStr(fkt, "(")
     If Pos > 0 Then
         fkt = Left(fkt, Pos - 1)
     End If
-    Label_diffy.Caption = fkt & "'(" & TextBox_startx.text & ")="
+    Label_diffy.Caption = fkt & "'(" & TextBox_startx.Text & ")="
     Label_y.Caption = fkt & "("
     Label_y2.Caption = fkt & "("
 End Sub

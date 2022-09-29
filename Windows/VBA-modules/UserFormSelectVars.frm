@@ -28,7 +28,7 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo fejl
+On Error GoTo Fejl
     Dim i As Integer
     Dim c As Integer
     Dim Arr As Variant
@@ -40,8 +40,8 @@ On Error GoTo fejl
             c = c + 1
         End If
     Next
-    If Len(TextBox_variabel.text) > 0 Then
-    Arr = Split(TextBox_variabel.text, ",")
+    If Len(TextBox_variabel.Text) > 0 Then
+    Arr = Split(TextBox_variabel.Text, ",")
     For i = 0 To UBound(Arr)
             SelectedVar = SelectedVar & Arr(i) & ","
             c = c + 1
@@ -66,7 +66,7 @@ On Error GoTo fejl
             End If
         End If
     
-    TempDefs = TextBox_def.text
+    TempDefs = TextBox_def.Text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
@@ -83,10 +83,10 @@ On Error GoTo fejl
     End If
     
     
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     SelectedVar = ""
-slut:
+Slut:
     UFSelectVars.Hide
     Application.ScreenUpdating = False
 End Sub
@@ -102,7 +102,7 @@ On Error Resume Next
     SetCaptions
     SelectedVar = ""
     ListBox_vars.Clear
-    TextBox_variabel.text = ""
+    TextBox_variabel.Text = ""
 
     If MaximaUnits Then
         Label_unitwarning.visible = True
@@ -117,7 +117,7 @@ On Error Resume Next
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
             ListBox_vars.AddItem (svar)
-            TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac
+            TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac
         End If
     Next
     

@@ -3245,7 +3245,7 @@ Dim NumRowsResult As Long
 Dim NumColsResult As Long
 
 Dim Done As Boolean
-Dim Result() As Variant
+Dim result() As Variant
 Dim ResultTrans() As Variant
 
 Dim v As Variant
@@ -3335,9 +3335,9 @@ UBoundRowResult = LBound(Arr1, 1) + NumRows1 + NumRows2 - 1
 ' number-of-rows(Arr1) + number-of-rows(Arr2)
 ' and number-of-columns equal to number-of-columns(Arr1)
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-ReDim Result(LBoundRow1 To UBoundRowResult, LBoundColResult To UBoundColResult)
+ReDim result(LBoundRow1 To UBoundRowResult, LBoundColResult To UBoundColResult)
 
-RowNdxResult = LBound(Result, 1) - 1
+RowNdxResult = LBound(result, 1) - 1
 
 Done = False
 Do Until Done
@@ -3348,7 +3348,7 @@ Do Until Done
         RowNdxResult = RowNdxResult + 1
         For ColNdx1 = LBound(Arr1, 2) To UBound(Arr1, 2)
             v = Arr1(RowNdx1, ColNdx1)
-            Result(RowNdxResult, ColNdx1) = v
+            result(RowNdxResult, ColNdx1) = v
         Next ColNdx1
     Next RowNdx1
 
@@ -3359,11 +3359,11 @@ Do Until Done
         RowNdxResult = RowNdxResult + 1
         For ColNdx2 = LBound(arr2, 2) To UBound(arr2, 2)
             v = arr2(RowNdx2, ColNdx2)
-            Result(RowNdxResult, ColNdx2) = v
+            result(RowNdxResult, ColNdx2) = v
         Next ColNdx2
     Next RowNdx2
     
-    If RowNdxResult >= UBound(Result, 1) + (LBoundColResult = 1) Then
+    If RowNdxResult >= UBound(result, 1) + (LBoundColResult = 1) Then
         Done = True
     End If
 '''''''''''''
@@ -3373,7 +3373,7 @@ Loop
 '''''''''''''''''''''''''
 ' Return the Result
 '''''''''''''''''''''''''
-CombineTwoDArrays = Result
+CombineTwoDArrays = result
 
 End Function
 
@@ -3408,7 +3408,7 @@ Function ExpandArray(Arr As Variant, WhichDim As Long, AdditionalElements As Lon
 ' columns on the right of the array.
 '
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Dim Result As Variant
+Dim result As Variant
 Dim RowNdx As Long
 Dim ColNdx As Long
 Dim ResultRowNdx As Long
@@ -3466,35 +3466,35 @@ If WhichDim = ROWS_ Then
     '''''''''''''''
     ' Redim Result.
     '''''''''''''''
-    ReDim Result(LBound(Arr, 1) To UBound(Arr, 1) + AdditionalElements, LBound(Arr, 2) To UBound(Arr, 2))
+    ReDim result(LBound(Arr, 1) To UBound(Arr, 1) + AdditionalElements, LBound(Arr, 2) To UBound(Arr, 2))
     ''''''''''''''''''''''''''''''
     ' Transfer Arr array to Result
     ''''''''''''''''''''''''''''''
     For RowNdx = LBound(Arr, 1) To UBound(Arr, 1)
         For ColNdx = LBound(Arr, 2) To UBound(Arr, 2)
-            Result(RowNdx, ColNdx) = Arr(RowNdx, ColNdx)
+            result(RowNdx, ColNdx) = Arr(RowNdx, ColNdx)
         Next ColNdx
     Next RowNdx
     '''''''''''''''''''''''''''''''
     ' Fill the rest of the result
     ' array with FillValue.
     '''''''''''''''''''''''''''''''
-    For RowNdx = UBound(Arr, 1) + 1 To UBound(Result, 1)
+    For RowNdx = UBound(Arr, 1) + 1 To UBound(result, 1)
         For ColNdx = LBound(Arr, 2) To UBound(Arr, 2)
-            Result(RowNdx, ColNdx) = FillValue
+            result(RowNdx, ColNdx) = FillValue
         Next ColNdx
     Next RowNdx
 Else
     '''''''''''''''
     ' Redim Result.
     '''''''''''''''
-    ReDim Result(LBound(Arr, 1) To UBound(Arr, 1), UBound(Arr, 2) + AdditionalElements)
+    ReDim result(LBound(Arr, 1) To UBound(Arr, 1), UBound(Arr, 2) + AdditionalElements)
     ''''''''''''''''''''''''''''''
     ' Transfer Arr array to Result
     ''''''''''''''''''''''''''''''
     For RowNdx = LBound(Arr, 1) To UBound(Arr, 1)
         For ColNdx = LBound(Arr, 2) To UBound(Arr, 2)
-            Result(RowNdx, ColNdx) = Arr(RowNdx, ColNdx)
+            result(RowNdx, ColNdx) = Arr(RowNdx, ColNdx)
         Next ColNdx
     Next RowNdx
     '''''''''''''''''''''''''''''''
@@ -3502,8 +3502,8 @@ Else
     ' array with FillValue.
     '''''''''''''''''''''''''''''''
     For RowNdx = LBound(Arr, 1) To UBound(Arr, 1)
-        For ColNdx = UBound(Arr, 2) + 1 To UBound(Result, 2)
-            Result(RowNdx, ColNdx) = FillValue
+        For ColNdx = UBound(Arr, 2) + 1 To UBound(result, 2)
+            result(RowNdx, ColNdx) = FillValue
         Next ColNdx
     Next RowNdx
     
@@ -3511,7 +3511,7 @@ End If
 ''''''''''''''''''''
 ' Return the result.
 ''''''''''''''''''''
-ExpandArray = Result
+ExpandArray = result
 
 End Function
 
@@ -3524,7 +3524,7 @@ Function SwapArrayRows(Arr As Variant, Row1 As Long, Row2 As Long) As Variant
 ' It returns the result array or NULL if an error occurred.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Dim v As Variant
-Dim Result As Variant
+Dim result As Variant
 Dim RowNdx As Long
 Dim ColNdx As Long
 
@@ -3539,7 +3539,7 @@ End If
 ''''''''''''''''''''''''''''''''
 ' Set Result to Arr
 ''''''''''''''''''''''''''''''''
-Result = Arr
+result = Arr
 
 ''''''''''''''''''''''''''''''''
 ' Ensure Arr is two-dimensional.
@@ -3577,11 +3577,11 @@ ReDim v(LBound(Arr, 2) To UBound(Arr, 2))
 '''''''''''''''''''''''''''''''''''''''''
 For ColNdx = LBound(Arr, 2) To UBound(Arr, 2)
     v(ColNdx) = Arr(Row1, ColNdx)
-    Result(Row1, ColNdx) = Arr(Row2, ColNdx)
-    Result(Row2, ColNdx) = v(ColNdx)
+    result(Row1, ColNdx) = Arr(Row2, ColNdx)
+    result(Row2, ColNdx) = v(ColNdx)
 Next ColNdx
 
-SwapArrayRows = Result
+SwapArrayRows = result
 
 End Function
 
@@ -3593,7 +3593,7 @@ Function SwapArrayColumns(Arr As Variant, Col1 As Long, Col2 As Long) As Variant
 ' It returns the result array or NULL if an error occurred.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Dim v As Variant
-Dim Result As Variant
+Dim result As Variant
 Dim RowNdx As Long
 Dim ColNdx As Long
 
@@ -3608,7 +3608,7 @@ End If
 ''''''''''''''''''''''''''''''''
 ' Set Result to Arr
 ''''''''''''''''''''''''''''''''
-Result = Arr
+result = Arr
 
 ''''''''''''''''''''''''''''''''
 ' Ensure Arr is two-dimensional.
@@ -3646,11 +3646,11 @@ ReDim v(LBound(Arr, 1) To UBound(Arr, 1))
 '''''''''''''''''''''''''''''''''''''''''
 For RowNdx = LBound(Arr, 1) To UBound(Arr, 1)
     v(RowNdx) = Arr(RowNdx, Col1)
-    Result(RowNdx, Col1) = Arr(RowNdx, Col2)
-    Result(RowNdx, Col2) = v(RowNdx)
+    result(RowNdx, Col1) = Arr(RowNdx, Col2)
+    result(RowNdx, Col2) = v(RowNdx)
 Next RowNdx
 
-SwapArrayColumns = Result
+SwapArrayColumns = result
 
 End Function
 
