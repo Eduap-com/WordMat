@@ -1,37 +1,46 @@
 ; Inno script for creating WordMat installer
 
+#define MyAppName "WordMat"
+#define MyAppVersion "1.25.2"
+
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
-AppName=WordMat
-AppVerName=WordMat v. 1.25.2
-VersionInfoVersion=1.25.2.0
-AppMutex=WordMatMutex
+AppName={#MyAppName}
+AppVerName={#MyAppName} v. {#MyAppVersion}
+VersionInfoVersion={#MyAppVersion}
+AppMutex={#MyAppName}Mutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
 AppSupportURL=http://www.eduap.com/
 AppUpdatesURL=http://www.eduap.com/
 AppCopyright=EDUAP
-DefaultDirName={pf}\WordMat\
+DefaultDirName={pf}\{#MyAppName}\
 DisableDirPage=yes
 DisableReadyMemo=yes
 DisableReadyPage=yes
-DefaultGroupName=WordMat
+DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 SetupIconFile=Installer-files\WordMatIkon.ico
 WizardImageFile=Installer-files\WordMatInstallImage.bmp
 WizardImageStretch=no
 ;SourceDir=.
 OutputDir=.
-OutputBaseFilename=WordMat
+OutputBaseFilename={#MyAppName}
 LicenseFile=Installer-files\License_en.txt
 Compression=lzma
 SolidCompression=yes
 ChangesAssociations=yes
 ShowLanguageDialog=no
 CloseApplications=force
+SignToolRetryCount=1
+SignToolRetryDelay=2000
+SignToolRunMinimized=yes
+SignTool=SignToolExe
+SignedUninstaller=yes 
+; Command: $qC:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool.exe$q sign /f $qC:\Users\mikae\OneDrive\Dokumenter\Eduap\Code signing certificate\EDUAP-certificate.pfx$q /p MyPassword /t http://timestamp.digicert.com /fd SHA256 $f
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl" ; LicenseFile: Installer-files\License_en.txt
