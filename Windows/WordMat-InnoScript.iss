@@ -1,7 +1,7 @@
 ; Inno script for creating WordMat installer
 
 #define MyAppName "WordMat"
-#define MyAppVersion "1.25.2"
+#define MyAppVersion "1.25.3"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -9,8 +9,9 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
 AppName={#MyAppName}
+AppVersion= {#MyAppVersion}
 AppVerName={#MyAppName} v. {#MyAppVersion}
-VersionInfoVersion={#MyAppVersion}
+VersionInfoVersion={#MyAppVersion}.0
 AppMutex={#MyAppName}Mutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
@@ -52,14 +53,14 @@ da.WelcomeLabel2=Denne guide installerer [name/ver] på computeren.%n%n Det anbef
 en.WelcomeLabel2=This guide installs [name/ver].%n%n It is recommended to close all programs.
 sp.WelcomeLabel2=Esta guía le instalará [name / ver] en su equipo.% N% n Se recomienda cerrar todas las aplicaciones que se ejecutan.
 
-da.FinishedLabel=Du finder WordMat som en værktøjslinje i Word.
-en.FinishedLabel=You will find WordMat as a Ribbon in Word.
+da.FinishedLabel=Du finder {#MyAppName} som en værktøjslinje i Word.
+en.FinishedLabel=You will find {#MyAppName} as a Ribbon in Word.
 sp.FinishedLabel=Ahora dispone de una nueva barra de herramientas en Word.
 
 [CustomMessages]
-da.UnInstallLabel=Du har allerede installeret WordMat. Bekræft først at du vil have den gamle version afinstalleret først.
-en.UnInstallLabel=You have already installed WordMat. Confirm that you want to uninstall the old version first.
-sp.UnInstallLabel=Ya ha instalado WordMat. Confirme que primero va a desinstalar la versión antigua.
+da.UnInstallLabel=Du har allerede installeret {#MyAppName}. Bekræft først at du vil have den gamle version afinstalleret først.
+en.UnInstallLabel=You have already installed {#MyAppName}. Confirm that you want to uninstall the old version first.
+sp.UnInstallLabel=Ya ha instalado {#MyAppName}. Confirme que primero va a desinstalar la versión antigua.
 
 da.SettingsLabel=Indstillinger
 en.SettingsLabel=Settings
@@ -125,17 +126,17 @@ da.InstallError=Der skete en fejl under installationen
 en.InstallError=An error occured during installation
 sp.InstallError=Ha ocurrido un error durante la instalación
 
-da.UninstallOK=Den eksisterende version af WordMat blev afinstalleret korrekt. Nu fortsætter installationen af den nye version.
-en.UninstallOK=The existing version of WordMat was uninstalled correct. The installation of the new version will now continue.
-sp.UninstallOK=La versión existente de WordMat se ha desinstalado correctamente. Ahora continuará la instalación de la nueva versión.
+da.UninstallOK=Den eksisterende version af {#MyAppName} blev afinstalleret korrekt. Nu fortsætter installationen af den nye version.
+en.UninstallOK=The existing version of {#MyAppName} was uninstalled correct. The installation of the new version will now continue.
+sp.UninstallOK=La versión existente de {#MyAppName} se ha desinstalado correctamente. Ahora continuará la instalación de la nueva versión.
 
 da.UnInstallError=Der skete en fejl under afinstallationen, men installationen af den nye version fortsætter.
 en.UnInstallError=An error occured during the uninstallation, but the installation of the new version will continue.
 sp.UnInstallError=Ha ocurrido un error durante la desinstalación, pero la instalación de la nueva versión continuará.
 
-da.InstallThisUser=Opret WordMat menu i Word for denne bruger
-en.InstallThisUser=Create WordMat ribbon in Word for this user
-sp.InstallThisUser=Crear cinta WordMat en Word para este usuario
+da.InstallThisUser=Opret {#MyAppName} menu i Word for denne bruger
+en.InstallThisUser=Create {#MyAppName} ribbon in Word for this user
+sp.InstallThisUser=Crear cinta {#MyAppName} en Word para este usuario
 
 da.ReactivateWordMat=Reaktiver WordMat
 en.ReactivateWordMat=Reactivate WordMat
@@ -328,7 +329,7 @@ Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "I
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AntalBeregninger"; ValueData: 0 ; Flags: createvalueifdoesntexist
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 0 ; Flags: uninsdeletekey
 ;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: TaskAutoStart
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 0 ; Flags: uninsdeletekey
 ;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: Taskcheckforupdates;
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "RibbonPointer"; ValueData: 0 ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BigFloat"; ValueData: 0 ; Flags: uninsdeletekey
@@ -592,49 +593,34 @@ begin
     Result:=Office16Folder + 'STARTUP';
 end;
 /////////////////////////////////////////////////////////////////////  custom wizard side til slut der spr om indstillinger 
-var
-  ActionPage: TInputOptionWizardPage;
+//var
+//  ActionPage: TInputOptionWizardPage;
 
-procedure InitializeWizard;
-begin
-  ActionPage := CreateInputOptionPage(wpReady,
-    ExpandConstant('{cm:SettingsLabel}'), ExpandConstant('{cm:SettingsLabel2}'),
-    ExpandConstant('{cm:SettingsLabel3}'),
-    False, False);
-  CheckForUpdate:=1;          
-//  ActionPage.Add(ExpandConstant('{cm:AutoStartCheckbox}'));
-  ActionPage.Add(ExpandConstant('{cm:AutoUpdateCheckbox}'));
- // if AutoStart=0 then
- //   ActionPage.Values[0] := false
- // else
- //   ActionPage.Values[0] := true;
+//procedure InitializeWizard;
+//begin
+//  ActionPage := CreateInputOptionPage(wpReady,
+//    ExpandConstant('{cm:SettingsLabel}'), ExpandConstant('{cm:SettingsLabel2}'),
+//    ExpandConstant('{cm:SettingsLabel3}'),
+//    False, False);
+//  CheckForUpdate:=0;          
+//  ActionPage.Add(ExpandConstant('{cm:AutoUpdateCheckbox}'));
+//
+//  if CheckForUpdate=0 then
+//    ActionPage.Values[0] := false
+//  else
+//    ActionPage.Values[0] := true;
+//end;
 
-  if CheckForUpdate=0 then
-    ActionPage.Values[0] := false
-  else
-    ActionPage.Values[0] := true;
-
-//  ActionPage.Values[2] := False;
-end;
-
-function NextButtonClick(CurPageID: Integer): Boolean;
-begin
-  Result := True;
-  if CurPageID = ActionPage.ID then begin
+//function NextButtonClick(CurPageID: Integer): Boolean;
+//begin
+//  Result := True;
+//  if CurPageID = ActionPage.ID then begin 
 //    if ActionPage.Values[0] then
-//      AutoStart:=1
+//      CheckForUpdate:=1
 //    else
-//      AutoStart:=0;
- 
-    if ActionPage.Values[0] then
-      CheckForUpdate:=1
-    else
-      CheckForUpdate:=0;
-
-//    if ActionPage.Values[2] then
-//      MsgBox('Action 3', mbInformation, MB_OK);
-  end;
-end;
+//      CheckForUpdate:=0;
+//  end;
+//end;
 
 
 /////////////////
@@ -1310,7 +1296,7 @@ begin
 //          MsgBox(GetCmdTail, mbInformation, MB_OK);
 
   AutoStart:=0;
-  CheckForUpdate:=1;
+  CheckForUpdate:=0;
   AntalBeregninger:=0;
 
   ClickToRun:=CheckClickToRun();
