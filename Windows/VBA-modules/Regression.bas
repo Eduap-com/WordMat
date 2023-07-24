@@ -8,7 +8,7 @@ Option Explicit
 'End Type
 
 Sub linregression()
-' udf*oe*res fra menuen. Tabel skal v*ae*re valgt
+' udføres fra menuen. Tabel skal være valgt
     Dim Cregr As New CRegression
     Application.ScreenUpdating = False
 On Error GoTo Fejl
@@ -163,10 +163,10 @@ Sub InsertTabel()
         2, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
         wdAutoFitFixed
         With Selection.Tables(1)
-'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' p*aa* 2013 giver det ingen kanter
+'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' på 2013 giver det ingen kanter
 '        If .Style <> "Tabel - Gitter" And InStr(.Style, "Table") < 0 Then
 '            On Error Resume Next
-'            .Style = "Tabel - Gitter" ' duer ikke p*aa* udenlandsk
+'            .Style = "Tabel - Gitter" ' duer ikke på udenlandsk
 '        End If
 #If Mac Then
 #Else

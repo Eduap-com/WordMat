@@ -141,10 +141,10 @@ Dim i As Long, j As Integer
         UBound(PointArr, 2) + 1, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
         wdAutoFitFixed)
         With Tabel
-'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' p*aa* 2013 giver det ingen kanter
+'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' på 2013 giver det ingen kanter
 '        If .Style <> "Tabel - Gitter" And InStr(.Style, "Table") < 0 Then
 '            On Error Resume Next
-'            .Style = "Tabel - Gitter" ' duer ikke p*aa* udenlandsk
+'            .Style = "Tabel - Gitter" ' duer ikke på udenlandsk
 '        End If
         .ApplyStyleHeadingRows = True
         .ApplyStyleLastRow = False
@@ -414,7 +414,7 @@ Function SolveDE() As Boolean
     guesslist = Left(guesslist, Len(guesslist) - 1) & "]"
     DElist = Left(DElist, Len(DElist) - 1) & "]"
     
-    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
     InsertDefinitioner
     omax.SolveDENumeric variabel, xmin, xmax, xstep, varlist, guesslist, DElist
     ListOutput = omax.MaximaOutput
@@ -448,7 +448,7 @@ On Error GoTo Fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at s*oe*ge efter definitioner i dokument
+    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
     
 '    text = "explicit(x^2,x,-1,1)"
     If Len(TextBox_ymin.Text) > 0 And Len(TextBox_ymax.Text) > 0 Then
@@ -460,7 +460,7 @@ On Error GoTo Fejl
         Text = Text & "point_size=" & Replace(highres * 1, ",", ".") & ","
     Else
 #If Mac Then
-        Text = Text & "point_size=0.1," ' fejler med 0 p*aa* mac
+        Text = Text & "point_size=0.1," ' fejler med 0 på mac
 #Else
         Text = Text & "point_size=0,"
 #End If
@@ -593,7 +593,7 @@ Slut:
 End Sub
 
 Sub InsertDefinitioner()
-' inds*ae*tter definitioner fra textboxen i maximainputstring
+' indsætter definitioner fra textboxen i maximainputstring
 Dim DefString As String
 
 omax.InsertKillDef
@@ -626,7 +626,7 @@ End If
 End Function
 
 Sub OpdaterDefinitioner()
-' ser efter variable i textboxene og inds*ae*tter under definitioner
+' ser efter variable i textboxene og indsætter under definitioner
 Dim vars As String
 Dim var As String, var2 As String
 Dim ea As New ExpressionAnalyser

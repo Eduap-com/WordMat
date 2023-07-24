@@ -71,7 +71,7 @@ Fejl:
 Slut:
 #End If
 End Sub
-' events der fyres n*aa*r der trykkes p*aa* ribbon
+' events der fyres når der trykkes på ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
     On Error GoTo Fejl
 #If Mac Then
@@ -281,7 +281,11 @@ Sub Rib_FSplanparamlinje(control As IRibbonControl) '
 End Sub
 
 Sub Rib_FSvektorvinkel(control As IRibbonControl)
-    insertribformel "", "cos(v)=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "||b" & VBA.ChrW(8407) & "|)"
+   If CASengine = 0 Then
+    insertribformel "", "cos(v)=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
+   Else
+    insertribformel "", "cos(v)=(dot(a" & VBA.ChrW(8407) & ",b" & VBA.ChrW(8407) & "))/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
+   End If
 End Sub
 Sub Rib_FSvektorproj(control As IRibbonControl)
     insertribformel "", "b" & VBA.ChrW(8407) & "_a=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|^2) a" & VBA.ChrW(8407)
@@ -320,17 +324,17 @@ End Sub
 
 'Callback for rumligningplan2 onAction
 Sub Rib_FSrumligningplan2(control As IRibbonControl)
-    insertribformel "", "a*a-*(x-x_0)+b*a-*(y-y_0)+c*a-*(z-z_0)=0"
+    insertribformel "", "aá(x-x_0)+bá(y-y_0)+cá(z-z_0)=0"
 End Sub
 
 'Callback for rumafstandpunktplan onAction
 Sub Rib_FSrumafstandpunktplan(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & "*a-*(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & "á(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
 End Sub
 
 'Callback for rumafstandpunktplan2 onAction
 Sub Rib_FSrumafstandpunktplan2(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|a*a-*x_1+b*a-*y_1+c*a-*z_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|aáx_1+báy_1+cáz_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
 End Sub
 
 'Callback for kugleligning onAction
@@ -823,7 +827,7 @@ Sub Rib_Help(control As IRibbonControl)
     Else
         OpenWordFile ("WordMatManual_english.docx")
     End If
-'    hj*ae*lpeMenu
+'    hjælpeMenu
 End Sub
 Sub Rib_HelpOnline(control As IRibbonControl)
     OpenLink "https://sites.google.com/site/wordmat/"
@@ -875,7 +879,7 @@ Sub Rib_FSpercentage3(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "A=b" & ChrW(183) & "((1+r)" & ChrW(&H207F) & "- 1) / r" & "     Annuitetsopsparing"
 End Sub
 Sub Rib_FSpercentage4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=G" & ChrW(183) & "r/(1-(1+r)" & ChrW(&H207B) & ChrW(&H207F) & ")     Annuitetsl*aa*n"
+    returnedVal = "y=G" & ChrW(183) & "r/(1-(1+r)" & ChrW(&H207B) & ChrW(&H207F) & ")     Annuitetslån"
 End Sub
 
 Sub Rib_GetLabelFunctions(control As IRibbonControl, ByRef returnedVal)

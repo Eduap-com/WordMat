@@ -44,9 +44,9 @@ On Error GoTo Slut
     Set but = Application.CommandBars("Equation Popup").Controls.Add _
     (Type:=msoControlButton)
     With but
-        .Caption = Sprog.RibSolve ' "L*oe*s ligning(er)"
+        .Caption = Sprog.RibSolve ' "Løs ligning(er)"
         .Tag = "cust"
-        .TooltipText = Sprog.A(397)  '"L*oe*ser ligning"
+        .TooltipText = Sprog.A(397)  '"Løser ligning"
         .FaceId = 26 ' kvadratrod a
         .OnAction = "MaximaSolve"
     End With

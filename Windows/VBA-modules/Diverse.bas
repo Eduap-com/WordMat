@@ -1775,9 +1775,8 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
 
     Selection.Collapse wdCollapseEnd
-    Set t = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=1, NumColumns:= _
-                                      3, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
-                                      wdAutoFitFixed)
+    Set t = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=1, NumColumns:=3, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed)
+      DoEvents
 #If Mac Then
 #Else
     With t

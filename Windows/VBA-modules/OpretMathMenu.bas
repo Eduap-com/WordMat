@@ -1,7 +1,7 @@
 Attribute VB_Name = "OpretMathMenu"
 Option Explicit
 'Sub IndsaetFraScanner()
-'    Application.Run MacroName:="Inds*ae*tImagerScan"
+'    Application.Run MacroName:="IndsætImagerScan"
 'End Sub
 
 Sub FjernRetteMenu()
@@ -29,7 +29,7 @@ Sub OpretMathMenu()
     Set myCB = CommandBars.Add(Name:="MathMenu", position:=msoBarFloating)
     CommandBars("Menu Bar").Controls("MathMenu").Caption = "MathMenu"
    
-    'Inds*ae*t formelsamling menu
+    'Indsæt formelsamling menu
     Set myCPup1 = myCB.Controls.Add(Type:=msoControlPopup)
     myCPup1.Caption = "Formelsamling"
     Set myCPup2 = myCPup1.Controls.Add(Type:=msoControlPopup)
@@ -51,7 +51,7 @@ Sub OpretMathMenu()
     Set myCPup2 = myCPup1.Controls.Add(Type:=msoControlPopup)
     myCPup2.Caption = "Funktioner"
     Set myCPup3 = myCPup2.Controls.Add(Type:=msoControlPopup)
-    myCPup3.Caption = "Line*ae*r"
+    myCPup3.Caption = "Lineær"
     With myCPup3.Controls.Add(Type:=msoControlButton)
      .Caption = "ligning: y=a" & VBA.ChrW(183) & "x+b"
      .DescriptionText = ""
@@ -60,7 +60,7 @@ Sub OpretMathMenu()
      .OnAction = "indsaetformel"
     End With
     With myCPup3.Controls.Add(Type:=msoControlButton)
-     .Caption = "h*ae*ldningskoefficient a=(y" & VBA.ChrW(&H2082) & "-y" & VBA.ChrW(&H2081) & ")/(x" & VBA.ChrW(&H2082) & "-x" & VBA.ChrW(&H2081) & ")"
+     .Caption = "hældningskoefficient a=(y" & VBA.ChrW(&H2082) & "-y" & VBA.ChrW(&H2081) & ")/(x" & VBA.ChrW(&H2082) & "-x" & VBA.ChrW(&H2081) & ")"
      .DescriptionText = ""
      .Tag = "a=(y_2-y_1)/(x_2-x_1)"
      .Style = msoButtonCaption
@@ -68,7 +68,7 @@ Sub OpretMathMenu()
     End With
     With myCPup3.Controls.Add(Type:=msoControlButton)
      .Caption = "Ligning ud fra punkt (x" & VBA.ChrW(&H2081) & ",y" & VBA.ChrW(&H2081) & ") og a  y=a(x-x" & VBA.ChrW(&H2081) & ")+y" & VBA.ChrW(&H2081)
-     .DescriptionText = "Ligning til Bestemmelse af ligning for ret linje ud fra kendt punkt (x1,y1) og h*ae*ldningskoefficient a."
+     .DescriptionText = "Ligning til Bestemmelse af ligning for ret linje ud fra kendt punkt (x1,y1) og hældningskoefficient a."
      .Tag = "y=a" & VBA.ChrW(183) & "(x-x_1)+y_1"
      .Style = msoButtonCaption
      .OnAction = "indsaetformel"
@@ -195,7 +195,7 @@ Sub OpretMathMenu()
      .ShortcutText = "Alt + r"
     End With
     With myCPup2.Controls.Add(Type:=msoControlButton)
-     .Caption = "Faktoriser (s*ae*t udenfor parantes)"
+     .Caption = "Faktoriser (sæt udenfor parantes)"
      .Style = msoButtonCaption
      .OnAction = "Faktoriser"
     End With
@@ -208,13 +208,13 @@ Sub OpretMathMenu()
     Set myCPup2 = myCPup1.Controls.Add(Type:=msoControlPopup)
     myCPup2.Caption = "Ligninger"
     With myCPup2.Controls.Add(Type:=msoControlButton)
-     .Caption = "L*oe*s ligning(er)"
+     .Caption = "Løs ligning(er)"
      .Style = msoButtonCaption
      .ShortcutText = "Alt + L"
      .OnAction = "MaximaSolve"
     End With
     With myCPup2.Controls.Add(Type:=msoControlButton)
-     .Caption = "L*oe*s ligning(er) numerisk"
+     .Caption = "Løs ligning(er) numerisk"
      .Style = msoButtonCaption
      .OnAction = "MaximaSolveNumeric"
     End With
@@ -270,7 +270,7 @@ Sub OpretMathMenu()
     End With
     
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = "Udf*oe*r Maxima Kommando"
+     .Caption = "Udfør Maxima Kommando"
      .Style = msoButtonCaption
      .OnAction = "MaximaCommand"
     End With
@@ -278,7 +278,7 @@ Sub OpretMathMenu()
     With myCPup1.Controls.Add(Type:=msoControlButton)
      .Caption = "Maxima Indstillinger"
      .Style = msoButtonCaption
-     .Tag = "false;false;both;false;7;false;prik;false;false;false;false;auto" ' forklaringer;maximakommando;exact;radianer;cifre;separator;gangetegn;kompleks;L*oe*sningsm*ae*ngde;enheder;vidnotation;logoutput
+     .Tag = "false;false;both;false;7;false;prik;false;false;false;false;auto" ' forklaringer;maximakommando;exact;radianer;cifre;separator;gangetegn;kompleks;Løsningsmængde;enheder;vidnotation;logoutput
      .OnAction = "MaximaSettings"
      .ShortcutText = "Alt + i"
     End With
@@ -295,7 +295,7 @@ Sub OpretMathMenu()
      .OnAction = "Plot2DGraph"
     End With
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = "Line*ae*r regression"
+     .Caption = "Lineær regression"
      .Style = msoButtonCaption
      .OnAction = "linregression"
     End With
@@ -325,7 +325,7 @@ Sub OpretMathMenu()
 '     .OnAction = "SimpelUdregning"
 '    End With
 '    With myCPup1.Controls.Add(Type:=msoControlButton)
-'     .Caption = "Omregn decimal til br*oe*k   tofrac()"
+'     .Caption = "Omregn decimal til brøk   tofrac()"
 '     .Style = msoButtonCaption
 '     .OnAction = "tofrac"
 '    End With
@@ -336,38 +336,38 @@ Sub OpretMathMenu()
 '    myCPup1.Tag = ""
 ' Add buttons to popup
 '    With myCPup1.Controls.Add(Type:=msoControlButton)
-'     .Caption = "L*oe*s ligning numerisk"
+'     .Caption = "Løs ligning numerisk"
 '     .Style = msoButtonCaption
 '     .OnAction = "nsolve"
 '    End With
 
-    'Inds*ae*t statistik menu
+    'Indsæt statistik menu
     Set myCPup1 = myCB.Controls.Add(Type:=msoControlPopup)
     myCPup1.Caption = "Statistik"
     myCPup1.Tag = ""
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = "Beregn hvor mange gange man kan udtage k elementer fra n. R*ae*kkef*oe*lgen underordnet. Combination(n,k)"
-     .DescriptionText = "Beregn hvor mange gange man kan udtage k elementer fra n. R*ae*kkef*oe*lgen underordnet."
+     .Caption = "Beregn hvor mange gange man kan udtage k elementer fra n. Rækkefølgen underordnet. Combination(n,k)"
+     .DescriptionText = "Beregn hvor mange gange man kan udtage k elementer fra n. Rækkefølgen underordnet."
      .Tag = "Combination(n,k)"
      .Style = msoButtonCaption
      .OnAction = "indsaetformel"
     End With
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = "Beregn hvor mange gange man kan udtage k elementer fra n. R*ae*kkef*oe*lgen t*ae*ller med. permutation(n,k)"
-     .DescriptionText = "Beregn hvor mange gange man kan udtage k elementer fra n. R*ae*kkef*oe*lgen af de udtagne elementer regnes med."
+     .Caption = "Beregn hvor mange gange man kan udtage k elementer fra n. Rækkefølgen tæller med. permutation(n,k)"
+     .DescriptionText = "Beregn hvor mange gange man kan udtage k elementer fra n. Rækkefølgen af de udtagne elementer regnes med."
      .Tag = "permutation(n,k)"
      .Style = msoButtonCaption
      .OnAction = "indsaetformel"
     End With
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = "Tilf*ae*ldigt tal mellem 0 og n. random(n)"
+     .Caption = "Tilfældigt tal mellem 0 og n. random(n)"
      .DescriptionText = ""
      .Tag = "Random(n)"
      .Style = msoButtonCaption
      .OnAction = "indsaetformel"
     End With
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & " - Test for sammenh*ae*ng"
+     .Caption = VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & " - Test for sammenhæng"
      .DescriptionText = ""
      .Tag = ""
      .Style = msoButtonCaption
@@ -388,7 +388,7 @@ Sub OpretMathMenu()
      .OnAction = "OpenSpreadsheet"
     End With
     
-    'Inds*ae*t Geometri menu
+    'Indsæt Geometri menu
     Set myCPup1 = myCB.Controls.Add(Type:=msoControlPopup)
     myCPup1.Caption = "Geometri"
     myCPup1.Tag = ""
@@ -412,7 +412,7 @@ Sub OpretMathMenu()
     myCPup1.Tag = ""
     ' Add buttons to popup
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = "Inds*ae*t prik gangetegn"
+     .Caption = "Indsæt prik gangetegn"
      .Style = msoButtonCaption
      .OnAction = "Gange"
      .ShortcutText = "Alt+G"
@@ -438,13 +438,13 @@ Sub OpretMathMenu()
      .OnAction = "ReplaceStarMultBack"
     End With
     
-    ' hj*ae*lp
+    ' hjælp
     Set myCPup1 = myCB.Controls.Add(Type:=msoControlPopup)
-    myCPup1.Caption = "Hj*ae*lp"
+    myCPup1.Caption = "Hjælp"
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = "Hj*ae*lp"
+     .Caption = "Hjælp"
      .Style = msoButtonCaption
-     .OnAction = "Hj*ae*lpeMenu"
+     .OnAction = "HjælpeMenu"
     End With
     With myCPup1.Controls.Add(Type:=msoControlButton)
      .Caption = "GeoGebra videovejledninger"
@@ -459,7 +459,7 @@ Sub OpretMathMenu()
     End With
     
     With myCPup1.Controls.Add(Type:=msoControlButton)
-     .Caption = "Hj*ae*lp jeg kan ikke gemme."
+     .Caption = "Hjælp jeg kan ikke gemme."
      .Style = msoButtonCaption
      .OnAction = "SolveCantSaveProblem"
     End With
@@ -554,7 +554,7 @@ End Function
 Sub DefinerVar()
     Dim var As String
     On Error GoTo Fejl
-'    var = InputBox("Indtast definitionen p*aa* den nye variabel" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke f*oe*r. Hvis der inds*ae*ttes en clearvars: kommando l*ae*ngere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes p*aa* 4 forskellige m*aa*der" & vbCrLf & vbCrLf & "definer: variabel=v*ae*rdi" & vbCrLf & "variabel:v*ae*rdi" & vbCrLf & "variabel:=v*ae*rdi" & vbCrLf & "variabel" & VBA.ChrW(&H2261) & "v*ae*rdi  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere variable i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. a:1 ; b:2", "Ny variabel", "a=1")
+'    var = InputBox("Indtast definitionen på den nye variabel" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke før. Hvis der indsættes en clearvars: kommando længere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes på 4 forskellige måder" & vbCrLf & vbCrLf & "definer: variabel=værdi" & vbCrLf & "variabel:værdi" & vbCrLf & "variabel:=værdi" & vbCrLf & "variabel" & VBA.ChrW(&H2261) & "værdi  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere variable i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. a:1 ; b:2", "Ny variabel", "a=1")
     var = InputBox(Sprog.A(120), Sprog.A(121), "a=1")
     var = Replace(var, ":=", "=")
 '    var = Replace(var, "=", VBA.ChrW(&H2261))
@@ -574,7 +574,7 @@ End Sub
 Sub DefinerFunktion()
     Dim var As String
 On Error GoTo Fejl
-'    var = InputBox("Indtast definitionen p*aa* den nye funktion" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke f*oe*r. Hvis der inds*ae*ttes en clearvars: kommando l*ae*ngere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes p*aa* 3 forskellige m*aa*der" & vbCrLf & vbCrLf & "f(x):forskrift" & vbCrLf & "f(x):=forskrift" & vbCrLf & "f(x)" & VBA.ChrW(&H2261) & "forskrift  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere funktioner i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. f(x)=x ; g(x)=2x+1", "Ny funktion", "f(x)=x+1")
+'    var = InputBox("Indtast definitionen på den nye funktion" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke før. Hvis der indsættes en clearvars: kommando længere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes på 3 forskellige måder" & vbCrLf & vbCrLf & "f(x):forskrift" & vbCrLf & "f(x):=forskrift" & vbCrLf & "f(x)" & VBA.ChrW(&H2261) & "forskrift  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere funktioner i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. f(x)=x ; g(x)=2x+1", "Ny funktion", "f(x)=x+1")
     var = InputBox(Sprog.A(122), Sprog.A(123), "f(x)=x+1")
     var = Replace(var, ":=", "=")
 '    var = Replace(var, "=", VBA.ChrW(&H2261))
@@ -707,7 +707,7 @@ Sub Nsolve()
     Dim objRange As Range
 
     Set objRange = Selection.Range
-    Ligning = InputBox("Indtast ligning", "Numerisk Ligningsl*oe*sning")
+    Ligning = InputBox("Indtast ligning", "Numerisk Ligningsløsning")
     Selection.OMaths.Add Range:=Selection.Range
     Selection.TypeText Text:="nsolve(" & Ligning & ")"
     Set objEq = objRange.OMaths(1)
@@ -740,10 +740,10 @@ End Function
 Sub Gange()
 ' prik Gangetegn
 On Error Resume Next
-'    Selection.InsertSymbol Font:="+Br*oe*dtekst", CharacterNumber:=183, Unicode:=True
+'    Selection.InsertSymbol Font:="+Brødtekst", CharacterNumber:=183, Unicode:=True
 
-'    Selection.InsertSymbol Font:="+Br*oe*dtekst", CharacterNumber:=AscW(MaximaGangeTegn), Unicode:=True
-    Selection.InsertSymbol CharacterNumber:=AscW(MaximaGangeTegn), Unicode:=True 'font br*oe*dtekst fjernet for at underst*oe*tte international
+'    Selection.InsertSymbol Font:="+Brødtekst", CharacterNumber:=AscW(MaximaGangeTegn), Unicode:=True
+    Selection.InsertSymbol CharacterNumber:=AscW(MaximaGangeTegn), Unicode:=True 'font brødtekst fjernet for at understøtte international
 
 End Sub
 Sub SimpelUdregning()
@@ -765,7 +765,7 @@ Sub SimpelUdregning()
         Selection.OMaths(1).Linearize
     End If
     If Len(Selection.Text) < 2 Then
-'        MsgBox "Marker det udtryk der skal beregnes. Udtrykket m*aa* kun indeholde tal, de fire regningsarter og ^ ."
+'        MsgBox "Marker det udtryk der skal beregnes. Udtrykket må kun indeholde tal, de fire regningsarter og ^ ."
         Set r = Selection.Range
 
         sindex = 0
@@ -779,7 +779,7 @@ Sub SimpelUdregning()
 '        Selection.End = r.End
     End If
     
-    Call ActiveDocument.Range.Find.Execute(VBA.ChrW(8727), , , , , , , , , "*", wdReplaceAll) ' n*oe*dvendig til mathboxes
+    Call ActiveDocument.Range.Find.Execute(VBA.ChrW(8727), , , , , , , , , "*", wdReplaceAll) ' nødvendig til mathboxes
     Call Selection.Range.Find.Execute(VBA.ChrW(183), , , , , , , , , "*", wdReplaceAll)
     Call Selection.Range.Find.Execute(".", , , , , , , , , ",", wdReplaceAll)
     resultat = Selection.Range.Calculate()
@@ -800,7 +800,7 @@ Dim udtryk As String
     If Len(Selection.Text) > 1 Then
         udtryk = Selection.Text
     Else
-        udtryk = InputBox("Indtast decimaltal", "Fra decimaltal til br*oe*k")
+        udtryk = InputBox("Indtast decimaltal", "Fra decimaltal til brøk")
     End If
 '    Selection
     Selection.InsertAfter ("tofrac(" & udtryk & ")")
@@ -810,12 +810,12 @@ Dim udtryk As String
 
 End Sub
 Sub ReplaceStarMult()
-' fjerner stjerner og inds*ae*tter alm. gangetegn
+' fjerner stjerner og indsætter alm. gangetegn
 Application.ScreenUpdating = False
 On Error GoTo Fejl
 
 '    Call ActiveDocument.Range.Find.Execute(chr(42), , , , , , , , , VBA.ChrW(183), wdReplaceAll)
-    Call ActiveDocument.Range.Find.Execute(VBA.ChrW(8727), , , , , , , , , VBA.ChrW(183), wdReplaceAll) ' n*oe*dvendig til mathboxes
+    Call ActiveDocument.Range.Find.Execute(VBA.ChrW(8727), , , , , , , , , VBA.ChrW(183), wdReplaceAll) ' nødvendig til mathboxes
     Call ActiveDocument.Range.Find.Execute("*", , , , , , , , , VBA.ChrW(183), wdReplaceAll)
 
 '    MsgBox "Alle * er nu lavet om til " & VBA.ChrW(183)
@@ -825,7 +825,7 @@ Fejl:
 Slut:
 End Sub
 Sub ReplaceStarMultBack()
-' fjerner alm gangetegn og inds*ae*tter *
+' fjerner alm gangetegn og indsætter *
 Application.ScreenUpdating = False
 On Error GoTo Fejl
     Call Selection.Range.Find.Execute(VBA.ChrW(183), , , , , , , , , "*", wdReplaceAll)

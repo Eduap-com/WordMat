@@ -86,7 +86,7 @@ Private Sub CommandButton_ok_Click()
     End With
 
     
-    ' inds*ae*t i Word
+    ' indsæt i Word
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -132,7 +132,7 @@ Private Sub CommandButton_ok_Click()
     
 
     If CheckBox_tal.Value Then
-        bc = 3 ' antal betydende cifre p*aa* sidel*ae*ngde p*aa* figur
+        bc = 3 ' antal betydende cifre på sidelængde på figur
         If Log10(SA) > bc Then bc = Int(Log10(SA)) + 1
         If Log10(sb) > bc Then bc = Int(Log10(sb)) + 1
         If Log10(sc) > bc Then bc = Int(Log10(sc)) + 1
@@ -166,7 +166,7 @@ Private Sub CommandButton_ok_Click()
     Selection.Collapse wdCollapseEnd
     Selection.TypeParagraph
     
-    'Hvis 2 l*oe*sninger
+    'Hvis 2 løsninger
     If vA2 > 0 Then
     MsgBox Sprog.TS2Solutions, vbOKOnly, Sprog.TS2Solutions2
     Set t = ActiveDocument.Tables.Add(Selection.Range, 1, 2)
@@ -196,7 +196,7 @@ Private Sub CommandButton_ok_Click()
 '#End If
         
     If CheckBox_tal.Value Then
-        bc = 3 ' antal betydende cifre p*aa* sidel*ae*ngde p*aa* figur
+        bc = 3 ' antal betydende cifre på sidelængde på figur
         If Log10(sa2) > bc Then bc = Int(Log10(sa2)) + 1
         If Log10(sb2) > bc Then bc = Int(Log10(sb2)) + 1
         If Log10(sc2) > bc Then bc = Int(Log10(sc2)) + 1
@@ -365,7 +365,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         End If
     Else
         If nv = 3 And ns = 0 Then
-        statustext = Sprog.A(214) ' "Mindst en side skal v*ae*re kendt. 3 vinkler er ikke nok."
+        statustext = Sprog.A(214) ' "Mindst en side skal være kendt. 3 vinkler er ikke nok."
         If advarsler Then MsgBox Sprog.A(214) & vbCrLf & Sprog.A(213), vbOKOnly, Sprog.Error
         Exit Sub
         End If
@@ -506,7 +506,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         GoTo Slut
     End If
     
-    ' Vilk*aa*rlig trekant
+    ' Vilkårlig trekant
     If ns = 3 Then
         vA = Arccos((sc ^ 2 + sb ^ 2 - SA ^ 2) / (2 * sc * sb)) * 180 / PI
         vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
@@ -542,7 +542,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             ElseIf SA > 0 And sb > 0 Then ' sider ikke om vinkel
                 d = SA ^ 2 - sb ^ 2 * Sin(vA * PI / 180) ^ 2
-                If d < 0 Then ' ingen l*oe*sning
+                If d < 0 Then ' ingen løsning
                     GoTo Fejl
                 End If
                 sc = sb * Cos(vA * PI / 180) + Sqr(d)
@@ -568,7 +568,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 End If
             ElseIf SA > 0 And sc > 0 Then ' sider ikke om vinkel
                 d = SA ^ 2 - sc ^ 2 * Sin(vA * PI / 180) ^ 2
-                If d < 0 Then ' ingen l*oe*sning
+                If d < 0 Then ' ingen løsning
                     GoTo Fejl
                 End If
                 sb = sc * Cos(vA * PI / 180) + Sqr(d)
@@ -603,7 +603,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             ElseIf SA > 0 And sb > 0 Then ' sider ikke om vinkel
                 d = sb ^ 2 - SA ^ 2 * Sin(vB * PI / 180) ^ 2
-                If d < 0 Then ' ingen l*oe*sning
+                If d < 0 Then ' ingen løsning
                     GoTo Fejl
                 End If
                 sc = SA * Cos(vB * PI / 180) + Sqr(d)
@@ -629,7 +629,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 End If
             ElseIf sb > 0 And sc > 0 Then ' sider ikke om vinkel
                 d = sb ^ 2 - sc ^ 2 * Sin(vB * PI / 180) ^ 2
-                If d < 0 Then ' ingen l*oe*sning
+                If d < 0 Then ' ingen løsning
                     GoTo Fejl
                 End If
                 SA = sc * Cos(vB * PI / 180) + Sqr(d)
@@ -664,7 +664,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             ElseIf sc > 0 And sb > 0 Then ' sider ikke om vinkel
                 d = sc ^ 2 - sb ^ 2 * Sin(vC * PI / 180) ^ 2
-                If d < 0 Then ' ingen l*oe*sning
+                If d < 0 Then ' ingen løsning
                     GoTo Fejl
                 End If
                 SA = sb * Cos(vC * PI / 180) + Sqr(d)
@@ -690,7 +690,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 End If
             ElseIf SA > 0 And sc > 0 Then ' sider ikke om vinkel
                 d = sc ^ 2 - SA ^ 2 * Sin(vC * PI / 180) ^ 2
-                If d < 0 Then ' ingen l*oe*sning
+                If d < 0 Then ' ingen løsning
                     GoTo Fejl
                 End If
                 sb = SA * Cos(vC * PI / 180) + Sqr(d)
@@ -810,7 +810,7 @@ yc = yc + 15
 
 
 '#If Mac Then
-'    ' sidel*ae*ngder
+'    ' sidelængder
 '    AddLabel Namesa, (xc + xb) / 2 + 7 + ActiveDocument.PageSetup.LeftMargin, yc / 2 - 4 + Anch.Information(wdVerticalPositionRelativeToPage), Anch
 '    AddLabel Namesb, (xc + xa) / 2 - 3 + ActiveDocument.PageSetup.LeftMargin, yc + Anch.Information(wdVerticalPositionRelativeToPage), Anch
 '    AddLabel Namesc, (xb + xa) / 2 - 10 + ActiveDocument.PageSetup.LeftMargin, yc / 2 - 4 + Anch.Information(wdVerticalPositionRelativeToPage), Anch
@@ -823,7 +823,7 @@ yc = yc + 15
 '    xc = xc + ActiveDocument.PageSetup.LeftMargin
 '
 '    'vinkler
-'    AddLabel NameA, xa - 10, yc, Anch  ' yc-5 fjernet for at ikke skal st*aa* oveni figur
+'    AddLabel NameA, xa - 10, yc, Anch  ' yc-5 fjernet for at ikke skal stå oveni figur
 '    AddLabel NameB, xb - 4, Anch.Information(wdVerticalPositionRelativeToPage), Anch
 '    AddLabel NameC, xc + 5, yc, Anch
 '
@@ -846,7 +846,7 @@ yc = yc + 15
 '
 '#Else
 
-    AddLabel NameA, xa - 10, yc, cv  ' yc-5 fjernet for at ikke skal st*aa* oveni figur
+    AddLabel NameA, xa - 10, yc, cv  ' yc-5 fjernet for at ikke skal stå oveni figur
     AddLabel NameB, xb - 4, 0, cv
     AddLabel NameC, xc + 5, yc, cv
     

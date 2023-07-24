@@ -128,7 +128,7 @@ On Error GoTo Fejl
 '    Me.Hide
     Call omax.Plot2D(udtryk, "", TextBox_variabel.Text, Replace(TextBox_xmin.Text, ",", "."), Replace(TextBox_xmax.Text, ",", "."), "", "", "", "")
        
-    omax.PrepareNewCommand ' n*oe*dvendigt da der efterf*oe*lgende skal k*oe*res newton el lign eller vises grafen igen
+    omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
     DoEvents
 '    Me.Show
 GoTo Slut
@@ -218,7 +218,7 @@ OpdaterGraf
     Me.Repaint
 GoTo Slut
 Fejl:
-    MsgBox "Der skete en fejl. Se p*aa* tallene ved xmin og xmax", vbOKOnly, Sprog.Error
+    MsgBox "Der skete en fejl. Se på tallene ved xmin og xmax", vbOKOnly, Sprog.Error
 Slut:
     
 End Sub
@@ -308,7 +308,7 @@ Dim Arr As Variant
     TextBox_lval.Text = TextBox_xmin.Text
     TextBox_hval.Text = TextBox_xmax.Text
     
-    omax.PrepareNewCommand ' n*oe*dvendigt da der efterf*oe*lgende skal k*oe*res newton el lign eller vises grafen igen
+    omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
     DoEvents
 #If Mac Then
     ShowPreviewMac
@@ -318,7 +318,7 @@ Dim Arr As Variant
 '    Image1.Picture = LoadPicture(Environ("TEMP") & "\WordMatGraf.gif")
 GoTo Slut
 Fejl:
-    MsgBox "Der skete en fejl. Pr*oe*v at trykke Opdater.", vbOKOnly, Sprog.Error
+    MsgBox "Der skete en fejl. Prøv at trykke Opdater.", vbOKOnly, Sprog.Error
 Slut:
 
 End Sub

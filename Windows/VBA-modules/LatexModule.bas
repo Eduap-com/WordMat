@@ -175,7 +175,7 @@ Public Sub SaveFile(doctype As Integer)
    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
    HiddenDoc.Activate
     
-   '    For Each l In HiddenDoc.Lists ' giver problemer da en liste kan deles i to, med normal paragraf imellem. De to dele er dog stadig een liste, s*aa* paragrafen imellem bliver slettet. Erstattet af anden metode
+   '    For Each l In HiddenDoc.Lists ' giver problemer da en liste kan deles i to, med normal paragraf imellem. De to dele er dog stadig een liste, så paragrafen imellem bliver slettet. Erstattet af anden metode
    '      ConvertList l
    '    Next
         
@@ -591,7 +591,7 @@ Public Sub ConvertAllEquations(Optional KeepOriginal As Boolean = False)
             LAlign = 3
          End If
       ElseIf MainDoc.OMaths(mi).AlignPoint > 0 And LAlign = 0 Then
-         LAlign = 1 ' start p*aa* align
+         LAlign = 1 ' start på align
       ElseIf MainDoc.OMaths(mi).AlignPoint > 0 And MainDoc.OMaths(mi + 1).AlignPoint > 0 Then
          LAlign = 2 ' fortsat
       ElseIf MainDoc.OMaths(mi).AlignPoint > 0 And MainDoc.OMaths(mi + 1).AlignPoint < 0 Then
@@ -599,7 +599,7 @@ Public Sub ConvertAllEquations(Optional KeepOriginal As Boolean = False)
       Else
          LAlign = 0
       End If
-'      MainDoc.OMaths(mi).Range.Select ' *oe*del*ae*gger justering
+'      MainDoc.OMaths(mi).Range.Select ' ødelægger justering
       HiddenDoc.OMaths(i).Range.Select
       omax.ReadSelection
       HiddenDoc.OMaths(i).Range.Select

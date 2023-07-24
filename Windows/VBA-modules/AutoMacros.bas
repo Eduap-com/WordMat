@@ -11,8 +11,8 @@ Private Declare PtrSafe Function CreateMutex Lib "kernel32" _
 #End If
 
 Sub AutoExec()
-' denne k*oe*res kun hvis filen er sat som globalskabelon. Alts*aa* ikke hvis den bare *aa*bnes
-ChangeAutoHyphen ' s*aa* 1-(-1) ikke overs*ae*ttes til  1--1 t*ae*nkestreg
+' denne køres kun hvis filen er sat som globalskabelon. Altså ikke hvis den bare åbnes
+ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
 
 Set oAppClass.oApp = Word.Application
 
@@ -23,9 +23,9 @@ Set oAppClass.oApp = Word.Application
     CreateMutex 0&, 0&, "WordMatMutex"
 #End If
 
-'    LavRCMenu ' fjernet da det gav problemer med udskrivning af flere dokumenter p*aa* engang
-                ' det for*aa*rsagede *ae*ndringer i normal.dot. Nu rykket til preparemaxima
-'    CustomizationContext = ActiveDocument.AttachedTemplate ' kan man ikke p*aa* dette tidspunkt i opstart
+'    LavRCMenu ' fjernet da det gav problemer med udskrivning af flere dokumenter på engang
+                ' det forårsagede ændringer i normal.dot. Nu rykket til preparemaxima
+'    CustomizationContext = ActiveDocument.AttachedTemplate ' kan man ikke på dette tidspunkt i opstart
 SetAllDefaultRegistrySettings ' hvis ny bruger
 ReadAllSettingsFromRegistry
 AntalB = Antalberegninger
@@ -52,7 +52,7 @@ End Sub
 Sub AutoClose()
 ' hver gang dokument lukkes
 Dim d As Variant
-Exit Sub  ' n*oe*dvendig n*aa*r der er appclass?
+Exit Sub  ' nødvendig når der er appclass?
 
 On Error Resume Next
 'tempDoc.Close (False)

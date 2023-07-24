@@ -23,9 +23,9 @@ End Sub
 
 Function ConvertToWolfram(Text As String)
     
-    Text = Replace(Text, "%", "") ' f*oe*rst fjernes evt. % fra maxima konstanter
+    Text = Replace(Text, "%", "") ' først fjernes evt. % fra maxima konstanter
     Text = Replace(Text, "+", "%2B") '
-    Text = Replace(Text, "^", "%5E") ' ikke n*oe*dvendig?
+    Text = Replace(Text, "^", "%5E") ' ikke nødvendig?
     Text = Replace(Text, "(", "%28") '
     Text = Replace(Text, ")", "%29") '
 '    text = Replace(text, "", "")
