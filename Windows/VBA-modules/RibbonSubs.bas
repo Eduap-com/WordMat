@@ -246,6 +246,11 @@ End Sub
 Sub Rib_FSbinspred(control As IRibbonControl)
     insertribformel "", VBA.ChrW(963) & "=" & VBA.ChrW(&H221A) & "(n" & VBA.ChrW(183) & "p" & VBA.ChrW(183) & "(1-p))"
 End Sub
+
+Sub Rib_FSbinusik(control As IRibbonControl)
+    insertribformel "", "p" & VBA.ChrW(770) & "±" & VBA.ChrW(8730) & "((p" & VBA.ChrW(770) & "" & VBA.ChrW(183) & "(1-p" & VBA.ChrW(770) & "))/n)"
+End Sub
+
 'Callback for sandnorm1 onAction
 Sub Rib_FSnormfrekvens(control As IRibbonControl)
     insertribformel "", "f(x)" & VBA.ChrW(8797) & "1/(" & VBA.ChrW(&H221A) & "(2" & VBA.ChrW(960) & ")" & VBA.ChrW(183) & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((x-" & VBA.ChrW(956) & ")/" & VBA.ChrW(963) & ")^2)"
@@ -970,6 +975,9 @@ Sub Rib_FSprob4(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_FSprob5(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(459)
+End Sub
+Sub Rib_FSprob5a(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(687)
 End Sub
 Sub Rib_FSprob6(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(460)

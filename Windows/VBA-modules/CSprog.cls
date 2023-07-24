@@ -3357,6 +3357,10 @@ SA(686, 0) = "CAS motor"
 SA(686, 1) = "CAS engine"
 SA(686, 2) = ""
 
+SA(687, 0) = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221A) & "(" & ChrW(&H70) & ChrW(&H302) & ChrW(183) & "(1-" & ChrW(&H70) & ChrW(&H302) & ")/n)       Usikkerhed til 95% konfidensinterval"
+SA(687, 1) = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221A) & "(" & ChrW(&H70) & ChrW(&H302) & ChrW(183) & "(1-" & ChrW(&H70) & ChrW(&H302) & ")/n)       Uncertainty"
+SA(687, 2) = ""
+
 'Problemet kunne ikke løses. Vil du prøve med en anden CAS motor?
 End Sub
 

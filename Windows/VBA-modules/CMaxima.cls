@@ -2926,7 +2926,12 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 Pos = Pos + 4
             Else
                 s = ea.GetPrevVar(Pos)
-                Text = Left(Text, Pos - Len(s) - 2) & "tvvec(" & Mid(Text, Pos - Len(s) - 1, Len(s)) & ")" & right(Text, Len(Text) - Pos)
+                If Pos - Len(s) - 2 < 0 Then
+                  MsgBox "An error orrcured with hat operator. "
+                  GoTo Fejl
+                Else
+                   Text = Left(Text, Pos - Len(s) - 2) & "tvvec(" & Mid(Text, Pos - Len(s) - 1, Len(s)) & ")" & right(Text, Len(Text) - Pos)
+                End If
                 Pos = Pos + 5
             End If
         End If
