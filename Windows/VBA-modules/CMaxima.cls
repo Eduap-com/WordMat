@@ -3103,6 +3103,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     
 
     ' |x| -> abs(x) '
+    If CASengine = 0 Then
     ea.Text = Text
     i = 0
     Do
@@ -3143,7 +3144,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     End If
     i = 0
     Text = ea.Text
-
+   End If
     ' |x| -> abs(x) ' men der tages ikke højde for paranteser
     '    ea.text = text
     '    Do
@@ -4290,23 +4291,13 @@ Function ConvertDegreeToRad(Text As String, trigfunc As String) As String
                     ea.InsertBeforePos (")")
                     ea.Pos = Pos + Len(trigfunc)
                     ea.InsertAfterPos ("%pi/180*(")
-                Else ' geogebra. Her forsøges at indsætte gradtegn, hvis der ikke indgår variabel indenfor parentes
+                Else ' geogebra.
                     If InStr(s, VBA.ChrW(176)) <= 0 Then
-'                        ea2.text = s
-'                        f = False
-'                        Do
-'                            v = ea2.GetNextVar
-'                            If v <> "" Then
-'                                If Not ea2.IsFunction(v) Then
-'                                    f = True
-'                                    Exit Do
-'                                End If
-'                            End If
-'                        Loop While v <> ""
-'                        If Not f Then
-                            ea.Pos = ea.Pos - 1
-                            ea.InsertBeforePos (VBA.ChrW(176))
-'                        End If
+                     ea.InsertBeforePos (")")
+                     ea.Pos = Pos + Len(trigfunc)
+                     ea.InsertAfterPos ("pi/180*(")
+'                            ea.Pos = ea.Pos - 1 ' Her forsøges at indsætte gradtegn, hvis der ikke indgår variabel indenfor parentes. fjernet v. 1.26 da det ikke virkede ved variable og ligningsløsning cos(v grader)=...
+'                            ea.InsertBeforePos (VBA.ChrW(176))
                     End If
                 End If
                 spos = Pos + 13

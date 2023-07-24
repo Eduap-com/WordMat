@@ -1,0 +1,113 @@
+% !TEX encoding = ISO-8859-1
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper}
+\usepackage[USenglish]{babel}
+\usepackage{amsmath}
+
+\title{WordMat}
+\author{Mikael Samsøe Sørensen}
+
+\begin{document}
+\pagestyle{empty}
+\thispagestyle{empty}
+\maketitle
+\thispagestyle{empty}
+\newpage
+\tableofcontents
+\newpage
+
+This file has VBA-code attached. To see/edit the code press Alt+F11 (or Visual Basic in the developer tab. Settings | Customize toolbar | check developer) \newline
+To execute macros press Alt+F8 (Mac: option+fn+F8) or use the developer menu.ImportAllModules  |  ExportAllModules | GenerateKeyboardShortcuts | \textit{ReplaceToASCIIseq} | \textit{ReplacetoExtendedASCII
+RunTestSequence}
+
+If there are problems with keyboard shortcuts run 'GenerateKeyBoardShortcuts' on both Windows and Mac. May be also before running the macro: Reset all keyboard shortcuts. Mac: Tools | customize keyboard
+\textit{Do not upgrade this file to a newer Word-version. It will break menu compatibility.
+}For these VBA-modules to work you need:
+\begin{itemize}
+ \item Add reference 'Microsoft Visual Basic for Applications Extensibility 5.3' in VBA-Ide tools/references \item Settings | Trust center | Settings for macros | always trust VBA project object model\end{itemize}\textbf{Special Character problem when editing on Mac and Windows
+}The VBE-Codefiles on Mac and Windows are not compatible. ASCII-characters(0-127) is not a problem. The problem comes from the extended ASCII-table (128-255), since Windows uses ANSI, while Mac uses xx.
+ASCII-characters: &%_^|\@~\newline
+Extended Characters that \textit{are} compatible: £(163), ©, µ\newline
+Problems both ways: ¤\newline
+Problems windows to mac: ½, .\newline
+Problems Mac to Windows: ø æ å Æ Ø Å á é ó À §There are few problems from Windows to Mac (¤,½). Just don't use those characters in the code or comments, or use ChrW(164) and ChrW(189). There are more problematic characters than the above, but they are the most common. To convert scrambled characters from a Mac-edit back to Windows ANSI, run the macro: \textit{'ReplaceToANSI'\newline
+}The character problem only affects codefiles, not characters in the document.\textbf{Strategy 1 to overcome character problem\newline
+}Run \textit{ReplaceToASCIIseq} to convert all problematic characters to ascii-sequences. You can then open the document on Windows and Mac independently. However the characters will show in the ui scrambled by the ascii-sequences. Before building the installer make sure to run \textit{ReplacetoExtendedASCII}. Preferably independently on Windows and Mac.\newline
+Also if you introduce more non-ascii characters, make sure to run \textit{ReplaceToASCIIseq} again.Run 'GenerateKeyBoardShortcuts' whenever you have run \textit{ReplaceToASCIIseq or ReplacetoExtendedASCII}.\textbf{Strategy 2\newline
+}Make all code changes on Windows. WordMat.dotm can be opened and tested on Mac. Just don't save and overwrite the original and reopen on Windows. If this happens use \textit{ReplaceToANSI}.\newline
+This must be run every time a Mac-edit has been done, or else the characters will convert to random new characters every roundtrip to mac and back, and then it cannot be undone.\textbf{
+How to work with Git-hub and VBA-modules
+}The idea is to always end by exporting all vba-modules to the folder 'VBA-modules'. Whenever you start to code, start by importing. The advantage of this method is that Git can then track changes in the exported modules, and multiple people can work on the VBA-code. It cannot do that within a word-file. \newline
+\textit{Don't use Export/import modules on Mac. It's not compatible with Windows export/import.}
+Functions in VBAmodul:
+\begin{itemize}
+ \item ImportAllModules\newline
+Imports all forms, classes and modules from subfolder 'VBA-modules'. Removes all existing modules before import, including VBAmodul \item ExportAllModules\newline
+Exports all forms, classes and modules from current project to subfolder 'VBA-modules'\newline
+(including VBAmodul) All current content in folder is deleted before export. A logfile with date is added to the folder. \item RemoveAllModules\newline
+Removes all forms, classes and modules from current project, except VBAmodul.bas.\end{itemize}
+The work process is:
+\begin{enumerate}
+ \item You have a WordMat.dotm file you are working on in folder WordMat/Windows \item When done coding run 'ExportAllModules' \item Push to github origin \item When resuming coding start by pulling from github \item Open your WordMat.dotm file and start by running 'ImportAllModules' \item Run 'GenerateKeyBoardShortcuts' as these are lost when importing\end{enumerate}\textbf{Before Building installer\begin{enumerate}
+ \item }Run '\textit{ReplacetoExtendedASCII'} \item Run '\textit{GenerateKeyboardShortcuts}'\end{enumerate}
+1 & 2 must be run separately on Windows and Mac
+
+\newpage\section*{Test section}
+
+
+------------------------------------Quick test--------------------------------------
+\begin{equation*}2+3\end{equation*}
+\begin{equation*}x^{2}=9\end{equation*}
+\begin{equation*}x+y=1\end{equation*}\begin{equation*}x-y=2\end{equation*}
+
+------------------------------------Work in progress--------------------------------------
+
+\begin{equation*}f\left(x\right)={\begin{matrix}x,  x<0\\x^{2,}  x\geq 0\end{matrix}\end{equation*}Problemet: Ved udregning af $\sqrt[1,5]{\frac{39,5}{69}}$ fås forkert resultat med GeoGebra som CAS-motor.
+
+Med Maxima som CAS-motor fås
+\begin{equation*}\sqrt[1,5]{\frac{39,5}{69}}\approx 0,6894435\end{equation*}
+Med GeoGebra som CAS-motor fås
+
+\begin{equation*}\sqrt[1,5]{\frac{39,5}{69}}\end{equation*}
+
+
+------------------------------- Not in testmodule ------------------------------------
+\begin{equation*}|\left(\begin{matrix}\frac{100}{61}\\\frac{791}{61}\end{matrix}\right)-\left(\begin{matrix}c\\\frac{43}{3}-\left(\frac{5}{6}\right)c\end{matrix}\right)|\end{equation*}\begin{equation*}Hovedstol=Ydelse\cdot 1-\left(\frac{1+r\right)^{-n}}{r}\end{equation*}
+
+
+-------------------------------Run testmodule here------------------------------------
+
+Alt+F8: RunTestSequence
+
+
+\begin{equation*}\sin \left(x\right)=\sin \left(2\cdot x+1\right)\end{equation*}
+
+Skal I gang med side 6 numerisk ligningsløsning
+
+\begin{equation*}\sin \left(x\right)=\sin \left(2\cdot x+1\right)\end{equation*}
+
+Denne er nu korrekt:
+\begin{equation*}-4\cdot K+2\cdot \left(2\cdot M\right)+2\cdot K=1\end{equation*}\begin{equation*}-4\cdot M+2\cdot \left(-2\cdot K\right)+2\cdot M=0\end{equation*}\begin{equation*}4\cdot C+2\cdot \left(-2\cdot C\right)+2\cdot \left(C\right)=1\end{equation*}	$\Updownarrow $	\textit{Ligningssystemet l*oe*ses for K,M,C vha. WordMat's 'L*oe*s Ligninger' funktion, }\begin{equation*}K=-\frac{1}{10}   \wedge     M=\frac{1}{5}   \wedge     C=\frac{1}{2}\end{equation*}
+
+
+\begin{equation*}Slet definitioner:\end{equation*}\begin{equation*}Definer:\overrightarrow{a}=\left(\begin{matrix}1\\2\end{matrix}\right),\overrightarrow{b}=\left(\begin{matrix}2\\-3\end{matrix}\right)\end{equation*}\begin{equation*}\cos \left(v\right)=\frac{dot\left(\overrightarrow{a};\overrightarrow{b}\right)}{|\overrightarrow{a}|\cdot |\overrightarrow{b}| }\end{equation*}	$\Updownarrow $	\textit{Ligningen løses for v vha. WordMat. med følgende antagelser/definitioner:  $0\leq v\leq 180$}\begin{equation*}v=119,8056176393\end{equation*}
+
+
+
+\begin{equation*}\cos \left(v\right)=\frac{\overrightarrow{a}\cdot\overrightarrow{b}}{|\overrightarrow{a}|\cdot |\overrightarrow{b}| }\end{equation*}
+
+
+
+
+
+
+
+\begin{equation*}Definer: g\left(x\right)=2,2\cdot\sin \left(0,63\cdot x\right)+2,2\end{equation*}\begin{equation*}Definer: -7,5\leq x\leq 7,5\end{equation*}
+\begin{equation*}g^{'} \left(x\right)=0\end{equation*}
+
+\begin{equation*}Slet definitioner:\end{equation*}
+\begin{equation*}\left(x+1\right)\cdot e^{-x}=0\end{equation*}
+\end{document}
