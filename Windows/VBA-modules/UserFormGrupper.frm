@@ -104,10 +104,10 @@ For i = 0 To n
 Next
 End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox "Der er en fejl i dine intervaller. Hver linje skal indeholde interval f.eks. 5-10.", vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)

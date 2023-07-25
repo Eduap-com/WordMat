@@ -35,10 +35,14 @@ End Sub
 
 Private Sub CommandButton_geogebra_Click()
     Dim s As String, i As Long, xl As String, yl As String, j As Long
-    If Not SolveDE Then
-        MsgBox Err.Description, vbOKOnly, "Error calculating points"
-        Exit Sub
-    End If
+    
+    
+    
+'    If Not SolveDE Then ' fjernet v.1.26 Det giver ikke mening
+'        MsgBox Err.Description, vbOKOnly, "Error calculating points"
+'        Exit Sub
+'    End If
+
 '    s = "{"
 '    For i = 0 To UBound(PointArr)
 '        s = s & "(" & Replace(PointArr(i, 1), ",", ".") & "," & Replace(PointArr(i, 2), ",", ".") & "),"
@@ -121,10 +125,10 @@ s = s & "true" & Sep & "false" & Sep & "false" & Sep & "false" & Sep
 
 ils.AlternativeText = s
 Unload Me
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -221,10 +225,10 @@ Dim i As Long, j As Integer
     Next
     
     Unload Me
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -304,11 +308,111 @@ Private Sub CommandButton_tolist_Click()
     Unload Me
 End Sub
 
+Private Sub TextBox_eq1_AfterUpdate()
+    OpdaterDefinitioner
+End Sub
+
+Private Sub TextBox_eq2_AfterUpdate()
+    OpdaterDefinitioner
+    If TextBox_eq2.Text <> vbNullString And TextBox_init2.Text = vbNullString Then
+      TextBox_init2.Text = "1"
+    End If
+End Sub
+
+Private Sub TextBox_eq3_AfterUpdate()
+    OpdaterDefinitioner
+    If TextBox_eq3.Text <> vbNullString And TextBox_init3.Text = vbNullString Then
+      TextBox_init3.Text = "1"
+    End If
+End Sub
+
+Private Sub TextBox_eq4_AfterUpdate()
+    OpdaterDefinitioner
+    If TextBox_eq4.Text <> vbNullString And TextBox_init4.Text = vbNullString Then
+      TextBox_init4.Text = "1"
+    End If
+End Sub
+
+Private Sub TextBox_eq5_AfterUpdate()
+    OpdaterDefinitioner
+    If TextBox_eq5.Text <> vbNullString And TextBox_init5.Text = vbNullString Then
+      TextBox_init5.Text = "1"
+    End If
+End Sub
+
+Private Sub TextBox_eq6_AfterUpdate()
+    OpdaterDefinitioner
+    If TextBox_eq6.Text <> vbNullString And TextBox_init6.Text = vbNullString Then
+      TextBox_init6.Text = "1"
+    End If
+End Sub
+
+Private Sub TextBox_eq7_AfterUpdate()
+    OpdaterDefinitioner
+    If TextBox_eq7.Text <> vbNullString And TextBox_init7.Text = vbNullString Then
+      TextBox_init7.Text = "1"
+    End If
+End Sub
+
+Private Sub TextBox_eq8_AfterUpdate()
+    OpdaterDefinitioner
+    If TextBox_eq8.Text <> vbNullString And TextBox_init8.Text = vbNullString Then
+      TextBox_init8.Text = "1"
+    End If
+End Sub
+
+Private Sub TextBox_eq9_AfterUpdate()
+    OpdaterDefinitioner
+    If TextBox_eq9.Text <> vbNullString And TextBox_init9.Text = vbNullString Then
+      TextBox_init9.Text = "1"
+    End If
+End Sub
+
+Private Sub TextBox_step_Change()
+   Validate
+End Sub
+
 Private Sub TextBox_var2_AfterUpdate()
     OpdaterDefinitioner
 End Sub
 Private Sub TextBox_var3_AfterUpdate()
     OpdaterDefinitioner
+End Sub
+
+Private Sub TextBox_varx_AfterUpdate()
+   OpdaterDefinitioner
+End Sub
+Private Sub TextBox_xmin_Change()
+   UpdateStep
+End Sub
+
+Private Sub TextBox_xmax_Change()
+   UpdateStep
+End Sub
+
+Private Sub UpdateStep()
+Dim st As Double
+   Validate
+   If CheckBox_autostep.Value And IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) Then
+      st = (TextBox_xmax.Text - TextBox_xmin.Text) / 500
+      TextBox_step.Text = st
+   End If
+End Sub
+
+Private Sub Validate()
+On Error GoTo slut
+   Dim st As Double
+   Label_validate.Caption = ""
+   Label_validate.visible = False
+   If Not IsNumeric(TextBox_xmin.Text) Then Label_validate.Caption = "xmin er ikke et tal"
+   If Not IsNumeric(TextBox_xmax.Text) Then Label_validate.Caption = "xmax er ikke et tal"
+   If Not IsNumeric(TextBox_step.Text) Then Label_validate.Caption = "Skridtlængde er ikke et tal"
+   If IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) And IsNumeric(TextBox_step.Text) Then
+      st = Round((TextBox_xmax.Text - TextBox_xmin.Text) / TextBox_step.Text, 0)
+      If st > 500 Then Label_validate.Caption = "Antal skridt er " & st & ". Det vil formentlig ikke virke med GeoGebra med så mange skridt."
+   End If
+slut:
+   If Label_validate.Caption <> vbNullString Then Label_validate.visible = True
 End Sub
 
 Private Sub UserForm_Activate()
@@ -354,7 +458,7 @@ Function SolveDE() As Boolean
     DElist = "["
     If TextBox_var1.Text = vbNullString Or TextBox_eq1.Text = vbNullString Or TextBox_init1.Text = vbNullString Then
         MsgBox "Der mangler data", vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     Else
         n = n + 1
         varlist = varlist & TextBox_var1.Text & ","
@@ -437,10 +541,10 @@ Function SolveDE() As Boolean
         i = i + 1
     Loop While ea.Pos < ea.Length - 1 And i < 1000
 SolveDE = True
-GoTo Slut
+GoTo slut
 Fejl:
     SolveDE = False
-Slut:
+slut:
 End Function
 
 Sub PlotOutput(Optional highres As Double = 1)
@@ -566,7 +670,7 @@ On Error GoTo Fejl
         If omax.MaximaOutput = "" Then
             Label_wait.Caption = "Fejl!"
             Label_wait.visible = True
-            GoTo Slut
+            GoTo slut
         Else
             DoEvents
 #If Mac Then
@@ -581,7 +685,7 @@ On Error GoTo Fejl
         Label_wait.visible = False
     End If
     Label_wait.visible = False
-GoTo Slut
+GoTo slut
 Fejl:
     On Error Resume Next
     Label_wait.Caption = Sprog.A(94)
@@ -589,7 +693,7 @@ Fejl:
     Label_wait.Width = 150
     Label_wait.visible = True
     Image1.Picture = Nothing
-Slut:
+slut:
 
 End Sub
 
@@ -627,66 +731,81 @@ End If
 End Function
 
 Sub OpdaterDefinitioner()
-' ser efter variable i textboxene og indsætter under definitioner
-Dim vars As String
-Dim var As String, var2 As String
-Dim ea As New ExpressionAnalyser
-Dim ea2 As New ExpressionAnalyser
-Dim Arr As Variant
-Dim arr2 As Variant
-Dim i As Integer
+   ' ser efter variable i textboxene og indsætter under definitioner
+   Dim vars As String
+   Dim var As String, var2 As String
+   Dim ea As New ExpressionAnalyser
+   Dim ea2 As New ExpressionAnalyser
+   Dim Arr As Variant
+   Dim arr2 As Variant
+   Dim i As Integer, s As String
+   Validate
     
+   vars = vars & GetTextboxVars(TextBox_eq1, TextBox_varx)
+   vars = vars & GetTextboxVars(TextBox_eq2, TextBox_varx)
+   vars = vars & GetTextboxVars(TextBox_eq3, TextBox_varx)
+   vars = vars & GetTextboxVars(TextBox_eq4, TextBox_varx)
+   vars = vars & GetTextboxVars(TextBox_eq5, TextBox_varx)
+   vars = vars & GetTextboxVars(TextBox_eq6, TextBox_varx)
+   vars = vars & GetTextboxVars(TextBox_eq7, TextBox_varx)
+   vars = vars & GetTextboxVars(TextBox_eq8, TextBox_varx)
+   vars = vars & GetTextboxVars(TextBox_eq9, TextBox_varx)
     
-    vars = vars & GetTextboxVars(TextBox_eq1, TextBox_varx)
-    vars = vars & GetTextboxVars(TextBox_eq2, TextBox_varx)
-    vars = vars & GetTextboxVars(TextBox_eq3, TextBox_varx)
-    vars = vars & GetTextboxVars(TextBox_eq4, TextBox_varx)
-    vars = vars & GetTextboxVars(TextBox_eq5, TextBox_varx)
-    vars = vars & GetTextboxVars(TextBox_eq6, TextBox_varx)
-    vars = vars & GetTextboxVars(TextBox_eq7, TextBox_varx)
-    vars = vars & GetTextboxVars(TextBox_eq8, TextBox_varx)
-    vars = vars & GetTextboxVars(TextBox_eq9, TextBox_varx)
+   omax.FindVariable vars, False ' fjerner dobbelte
+   vars = omax.vars
+   vars = RemoveVar(vars, TextBox_var1.Text)
+   vars = RemoveVar(vars, TextBox_var2.Text)
+   vars = RemoveVar(vars, TextBox_var3.Text)
+   vars = RemoveVar(vars, TextBox_var4.Text)
+   vars = RemoveVar(vars, TextBox_var5.Text)
+   vars = RemoveVar(vars, TextBox_var6.Text)
+   vars = RemoveVar(vars, TextBox_var7.Text)
+   vars = RemoveVar(vars, TextBox_var8.Text)
+   vars = RemoveVar(vars, TextBox_var9.Text)
     
-    omax.FindVariable vars, False ' fjerner dobbelte
-    vars = omax.vars
-    vars = RemoveVar(vars, TextBox_var1.Text)
-    vars = RemoveVar(vars, TextBox_var2.Text)
-    vars = RemoveVar(vars, TextBox_var3.Text)
-    vars = RemoveVar(vars, TextBox_var4.Text)
-    vars = RemoveVar(vars, TextBox_var5.Text)
-    vars = RemoveVar(vars, TextBox_var6.Text)
-    vars = RemoveVar(vars, TextBox_var7.Text)
-    vars = RemoveVar(vars, TextBox_var8.Text)
-    vars = RemoveVar(vars, TextBox_var9.Text)
+   If Left(vars, 1) = ";" Then vars = right(vars, Len(vars) - 1)
     
-    If Left(vars, 1) = ";" Then vars = right(vars, Len(vars) - 1)
-    
-    ea.Text = vars
-    Do While right(TextBox_definitioner.Text, 2) = vbCrLf
-        TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
-    Loop
-    Arr = Split(TextBox_definitioner.Text, vbCrLf)
-    
-    Do
-    var = ea.GetNextListItem
-    var = Replace(var, vbCrLf, "")
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-        var2 = Split(Arr(i), "=")(0)
-        If var2 = var Then
-            var = ""
-            Exit For
-        End If
-        End If
-    Next
-    If var <> "" Then
-'        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
-        If Len(TextBox_definitioner.Text) > 0 Then
+   ea.Text = vars
+   Do While right(TextBox_definitioner.Text, 2) = vbCrLf
+      TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
+   Loop
+   Arr = Split(TextBox_definitioner.Text, vbCrLf)
+   
+   For i = 0 To UBound(Arr) ' Hvis variabel indgår i def, skal den fjernes
+      If Arr(i) <> "" Then
+         var2 = Split(Arr(i), "=")(0)
+         If var2 = TextBox_varx.Text Then
+            Arr(i) = ""
+         End If
+         If Arr(i) <> "" Then s = s & Arr(i) & vbCrLf
+      End If
+   Next
+   Do While right(s, 2) = vbCrLf
+      s = Left(s, Len(s) - 2)
+   Loop
+   TextBox_definitioner.Text = s
+   
+   Arr = Split(TextBox_definitioner.Text, vbCrLf)
+   Do
+      var = ea.GetNextListItem(ea.Pos)
+      var = Replace(var, vbCrLf, "")
+      For i = 0 To UBound(Arr)
+         If Arr(i) <> "" Then
+            var2 = Split(Arr(i), "=")(0)
+            If var2 = var Then
+               var = ""
+               Exit For
+            End If
+         End If
+      Next
+      If var <> "" Then
+         '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
+         If Len(TextBox_definitioner.Text) > 0 Then
             TextBox_definitioner.Text = TextBox_definitioner.Text & vbCrLf
-        End If
-        TextBox_definitioner.Text = TextBox_definitioner.Text & var & "=1"
-    End If
-    Loop While ea.Pos <= Len(ea.Text)
+         End If
+         TextBox_definitioner.Text = TextBox_definitioner.Text & var & "=1"
+      End If
+   Loop While ea.Pos <= Len(ea.Text)
 
     
 End Sub

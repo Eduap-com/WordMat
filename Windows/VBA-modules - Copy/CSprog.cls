@@ -2384,8 +2384,8 @@ SA(443, 0) = "y=b" & ChrW(183) & "2^(x/T" & ChrW(&H2082) & ")                  E
 SA(443, 1) = "y=b" & ChrW(183) & "2^(x/T" & ChrW(&H2082) & ")                  Exponentiel function"
 SA(443, 2) = ""
 
-SA(444, 0) = "y=b" & ChrW(183) & "_^(x/T_)                  Eksponentiel funktion"
-SA(444, 1) = "y=b" & ChrW(183) & "_^(x/T_)                  Exponentiel function"
+SA(444, 0) = "y=b" & ChrW(183) & ChrW(189) & "^(x/T" & ChrW(189) & ")                  Eksponentiel funktion"
+SA(444, 1) = "y=b" & ChrW(183) & ChrW(189) & "^(x/T" & ChrW(189) & ")                  Exponentiel function"
 SA(444, 2) = ""
 
 SA(445, 0) = "a=(x" & ChrW(&H2082) & "-x" & ChrW(&H2081) & ")" & ChrW(&H221A) & "(y" & ChrW(&H2082) & "/y" & ChrW(&H2081) & ")   Beregning af a ud fra to kendte punkter (x" & ChrW(&H2081) & ",y" & ChrW(&H2081) & ") og (x" & ChrW(&H2082) & ",y" & ChrW(&H2082) & ")"
@@ -2396,8 +2396,8 @@ SA(446, 0) = "T" & ChrW(&H2082) & "=ln(2)/ln(a)=ln(2)/k         Fordoblingskonst
 SA(446, 1) = "T" & ChrW(&H2082) & "=ln(2)/ln(a)=ln(2)/k         Double time"
 SA(446, 2) = ""
 
-SA(447, 0) = "T_=ln(_)/ln(a)=ln(_)/k             Halveringskonstant"
-SA(447, 1) = "T_=ln(_)/ln(a)=ln(_)/k             Half life"
+SA(447, 0) = "T" & ChrW(189) & "=ln(" & ChrW(189) & ")/ln(a)=ln(" & ChrW(189) & ")/k             Halveringskonstant"
+SA(447, 1) = "T" & ChrW(189) & "=ln(" & ChrW(189) & ")/ln(a)=ln(" & ChrW(189) & ")/k             Half life"
 SA(447, 2) = ""
 
 SA(448, 0) = "y=b" & ChrW(183) & "x" & ChrW(&HAA) & "                          potensfunktion ligning"
@@ -2424,8 +2424,8 @@ SA(453, 0) = "c" & ChrW(&HB2) & "=a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "-2" & C
 SA(453, 1) = "c" & ChrW(&HB2) & "=a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "-2" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "cos(C)    Law of cosines"
 SA(453, 2) = ""
 
-SA(454, 0) = "T=_" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Areal af trekant givet vinkel og to sider omkring"
-SA(454, 1) = "T=_" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Area of triangle from known angle and two neighbouring sides"
+SA(454, 0) = "T=" & ChrW(189) & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Areal af trekant givet vinkel og to sider omkring"
+SA(454, 1) = "T=" & ChrW(189) & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Area of triangle from known angle and two neighbouring sides"
 SA(454, 2) = ""
 
 SA(455, 0) = "K(n,r)" & ChrW(&H2261) & "n!/(r!" & ChrW(183) & "(n-r)!)    Binomialkoefficient"
@@ -2448,16 +2448,16 @@ SA(459, 0) = "" & ChrW(&H3C3) & "=" & ChrW(&H221A) & "(n" & ChrW(183) & "p" & Ch
 SA(459, 1) = "" & ChrW(&H3C3) & "=" & ChrW(&H221A) & "(n" & ChrW(183) & "p" & ChrW(183) & "(1-p))   Standard deviation"
 SA(459, 2) = ""
 
-SA(460, 0) = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frekvensfunktion"
-SA(460, 1) = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frequency function"
+SA(460, 0) = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-" & ChrW(189) & "(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frekvensfunktion"
+SA(460, 1) = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-" & ChrW(189) & "(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frequency function"
 SA(460, 2) = ""
 
-SA(461, 0) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Kumuleret frekvensfunktion"
-SA(461, 1) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-_(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Cumulative frequency function"
+SA(461, 0) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-" & ChrW(189) & "(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Kumuleret frekvensfunktion"
+SA(461, 1) = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-" & ChrW(189) & "(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Cumulative frequency function"
 SA(461, 2) = ""
 
-SA(462, 0) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "‰" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "‰" & ChrW(&HB2) & "  frekvensfunktion med frihedsgrad n"
-SA(462, 1) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "‰" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "‰" & ChrW(&HB2) & "  frequency function with n degrees of freedom"
+SA(462, 0) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "" & ChrW(189) & "" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "" & ChrW(189) & "" & ChrW(&HB2) & "  frekvensfunktion med frihedsgrad n"
+SA(462, 1) = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "" & ChrW(189) & "" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "" & ChrW(189) & "" & ChrW(&HB2) & "  frequency function with n degrees of freedom"
 SA(462, 2) = ""
 
 SA(463, 0) = "V=" & ChrW(&H3C0) & ChrW(&H222B) & "f(x)" & ChrW(&HB2) & "dx     Rumfang af omdrejningslegeme"
@@ -3356,6 +3356,10 @@ SA(685, 2) = ""
 SA(686, 0) = "CAS motor"
 SA(686, 1) = "CAS engine"
 SA(686, 2) = ""
+
+SA(687, 0) = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221A) & "(" & ChrW(&H70) & ChrW(&H302) & ChrW(183) & "(1-" & ChrW(&H70) & ChrW(&H302) & ")/n)       Usikkerhed til 95% konfidensinterval"
+SA(687, 1) = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221A) & "(" & ChrW(&H70) & ChrW(&H302) & ChrW(183) & "(1-" & ChrW(&H70) & ChrW(&H302) & ")/n)       Uncertainty"
+SA(687, 2) = ""
 
 'Problemet kunne ikke løses. Vil du prøve med en anden CAS motor?
 End Sub

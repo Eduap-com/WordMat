@@ -2,7 +2,7 @@ Attribute VB_Name = "Excelsubs"
 Option Explicit
 Function InsertIndlejretExcel() As Object
 '    InsertIndlejret "TomExcel.xlsx"
-On Error GoTo Slut
+On Error GoTo slut
 EnableExcelMacros
 Dim vers As String
 Dim oWS As Object ' Worksheet Object
@@ -23,7 +23,7 @@ Set oWS = ils.OLEFormat.Object
 Set InsertIndlejretExcel = oWS
 'oWS.ActiveSheet.Cells(1, 1).value = "Test"
 'ils.OLEFormat.Activate
-Slut:
+slut:
 DisableExcelMacros
 End Function
 
@@ -67,7 +67,7 @@ End If
     cxl.Chi2Test signiv / 100, r, c
 
 'cxl.CloseExcel
-If r > 0 And c > 0 Then GoTo Slut
+If r > 0 And c > 0 Then GoTo slut
 
 Selection.Collapse
 Selection.InsertAfter Sprog.A(353) & vbCrLf
@@ -82,10 +82,10 @@ If cxl.Below5 Or cxl.sum < 50 Then
     Selection.InsertAfter Sprog.A(358) & vbCrLf
 End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 #End If
 End Sub
@@ -172,10 +172,10 @@ xlsh.visible = -1 'xlSheetVisible
 
 'xlapp.EnableEvents = False
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 XLapp.ScreenUpdating = True
 XLapp.EnableEvents = True
 End Sub
@@ -188,7 +188,7 @@ On Error GoTo Fejl
   
   If tal = 0 Then
     betcif = 0
-    GoTo Slut
+    GoTo slut
   End If
   p = Int(Log(Abs(tal)) / Log(10))
 If rundop = 0 Then ' normal afrunding
@@ -213,10 +213,10 @@ Else
   betcif = betcif * 10 ^ (p - cif + 1)
 End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Function
 
 Sub OpenSpreadSheet()
@@ -231,10 +231,10 @@ Dim statistiksti As String
 '    statistiksti = """" & Environ("ProgramFiles") & "\WordMat\Statistik.xltm"""
     On Error GoTo Fejl
     appnr = Shell(excelsti & " /t " & statistiksti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(96) & statistiksti, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Function OpenExcelWB(Filnavn As String, Optional startark As String, Optional WorkBookName As String) As Object

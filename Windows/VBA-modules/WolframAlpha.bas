@@ -15,10 +15,10 @@ On Error GoTo Fejl
     Text = pretext & " " & Text
     
     OpenLink ("http://www.wolframalpha.com/input/?i=" & Text)
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Function ConvertToWolfram(Text As String)

@@ -174,7 +174,7 @@ End If
     OpenGeoGebraWeb UrlLink, Gtype
 Fejl:
 
-Slut:
+slut:
 End Sub
 
 Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True)
@@ -345,7 +345,7 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
             Do
                 Wait (0.2)
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-                If UfWait2.StopNow Then GoTo Slut
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -366,7 +366,7 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
             Do
                 Wait (0.2)
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-                If UfWait2.StopNow Then GoTo Slut
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -380,13 +380,13 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#?" & Defliste)
         ElseIf Left(Res, 5) = "error" Then
 '            Wait (1)
-            GoTo Slut
+            GoTo slut
         End If
 '        Res = Replace(Res, " ", "")
         Res = ConvertGeoGebraSyntaxToWord(Res)
         omax.MaximaOutput = Res
         RunGeoGebraDirect = Res
-Slut:
+slut:
      If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
 
@@ -737,10 +737,10 @@ Sub GeoGebra()
     DoEvents
     Unload UFwait
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     UserFormGeoGebra.Show
-Slut:
+slut:
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found
@@ -781,10 +781,10 @@ On Error GoTo Fejl
         GeoGebraPath = """" & GeoGebraPath & """"
     End If
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     GeoGebraPath = ""
-Slut:
+slut:
 End Function
 Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
@@ -940,10 +940,10 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     CreateZipFile geogebrasti & "geogebra.zip", geogebrasti & "geogebra.xml"
     Name geogebrasti & "geogebra.zip" As geogebrasti & "geogebra.ggb"
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 On Error Resume Next
     omax.ConvertLnLog = True
 End Sub
@@ -1045,10 +1045,10 @@ Sub CreateZipFile(zipfilnavn As Variant, Filnavn As Variant, Optional filnavn2 A
     
 '    On Error GoTo 0
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
  

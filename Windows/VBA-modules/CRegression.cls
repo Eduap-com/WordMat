@@ -176,10 +176,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Public Sub GetTableDataOld()
@@ -259,10 +259,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Public Sub GetSetData()
@@ -336,11 +336,11 @@ End If
 If r > 1 Then r = 1
 
 ComputeRegr = True
-GoTo Slut
+GoTo slut
 Fejl:
     ComputeRegr = False
     MsgBox Sprog.A(28), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Function
 
 Function Logv(val() As Double) As Variant
@@ -356,10 +356,10 @@ Function Logv(val() As Double) As Variant
             arrlog(j) = Log(val(i))
         Else
             MsgBox Sprog.A(672), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
     Next
-Slut:
+slut:
     ReDim Preserve arrlog(LBound(val) To j) As Double
 
     Logv = arrlog
@@ -446,10 +446,10 @@ On Error GoTo Fejl
         c = 0
         r = 0
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(32), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ComputeUserRegr()
     Dim fkt As String
@@ -518,10 +518,10 @@ Sub ComputeUserRegr()
         Ligning = omax.MaximaOutput
     End If
     
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Function ConvertSep(Text As String) As String
     ' kommaer og listeseparator
@@ -623,10 +623,10 @@ Sub ComputePolRegr()
         c = 0
         r = 0
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Function polregr(x() As Double, Y() As Double, orden As Integer, Optional ByVal tving As Boolean = False) As Boolean
@@ -729,11 +729,11 @@ Next
 r = SSregr / SStotal
              
 polregr = True
-GoTo Slut
+GoTo slut
 Fejl:
   polregr = False
 '  MsgBox Err.Number
-Slut:
+slut:
 End Function
 Function polregrkvad(x() As Double, Y() As Double, Optional ByVal tving As Boolean = False) As Boolean
 'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2 via userdefined datatype
@@ -815,11 +815,11 @@ Next
 r = SSregr / SStotal
              
 polregrkvad = True
-GoTo Slut
+GoTo slut
 Fejl:
   polregrkvad = False
 '  MsgBox Err.Number
-Slut:
+slut:
 End Function
 
 

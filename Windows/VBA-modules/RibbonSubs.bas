@@ -63,12 +63,12 @@ Sub RefreshRibbon()
         ' It is exactly what we should have instead of that brute force reload mechanism.
     End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(394), vbOKOnly, Sprog.Error
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
-Slut:
+slut:
 #End If
 End Sub
 ' events der fyres når der trykkes på ribbon
@@ -99,10 +99,10 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
         Oundo.EndCustomRecord
 #End If
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(395), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Public Sub Rib_Settings(control As IRibbonControl)
@@ -712,10 +712,10 @@ Sub Rib_nylign(control As IRibbonControl)
     Selection.OMaths.Add Range:=Selection.Range
 '    Selection.OMaths(1).BuildUp
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 'Callback for ButtonNumEq onAction
 Sub Rib_nynumlign(control As IRibbonControl)
@@ -847,10 +847,10 @@ Dim sti As String
     OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\html\index.html"
 '    sti = "cmd /C """ & GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\chm\maxima.chm"""
 '    ReturnValue = Shell(sti, vbHide)
-GoTo Slut
+GoTo slut
 Fejl:
     OpenLink "http://maxima.sourceforge.net/docs/manual/en/maxima.html"
-Slut:
+slut:
 #End If
 End Sub
 'Callback for ButtonCheckUpdate onAction

@@ -186,7 +186,7 @@ Sub Rib_FShalv(control As IRibbonControl)
 #If Mac Then
     insertribformel "", "T_(1/2) =ln" & VBA.ChrW(8289) & "(1/2)/(ln" & VBA.ChrW(8289) & "(a))=ln" & VBA.ChrW(8289) & "(1/2)/k"
 #Else
-    insertribformel "", "T__=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
+    insertribformel "", "T_" & ChrW(189) & "=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
 #End If
 End Sub
 
@@ -246,6 +246,11 @@ End Sub
 Sub Rib_FSbinspred(control As IRibbonControl)
     insertribformel "", VBA.ChrW(963) & "=" & VBA.ChrW(&H221A) & "(n" & VBA.ChrW(183) & "p" & VBA.ChrW(183) & "(1-p))"
 End Sub
+
+Sub Rib_FSbinusik(control As IRibbonControl)
+    insertribformel "", "p" & VBA.ChrW(770) & "±" & VBA.ChrW(8730) & "((p" & VBA.ChrW(770) & "" & VBA.ChrW(183) & "(1-p" & VBA.ChrW(770) & "))/n)"
+End Sub
+
 'Callback for sandnorm1 onAction
 Sub Rib_FSnormfrekvens(control As IRibbonControl)
     insertribformel "", "f(x)" & VBA.ChrW(8797) & "1/(" & VBA.ChrW(&H221A) & "(2" & VBA.ChrW(960) & ")" & VBA.ChrW(183) & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((x-" & VBA.ChrW(956) & ")/" & VBA.ChrW(963) & ")^2)"
@@ -284,7 +289,7 @@ Sub Rib_FSvektorvinkel(control As IRibbonControl)
    If CASengine = 0 Then
     insertribformel "", "cos(v)=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
    Else
-    insertribformel "", "cos(v)=(dot(a" & VBA.ChrW(8407) & ",b" & VBA.ChrW(8407) & "))/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "cos(v)=(dot(a" & VBA.ChrW(8407) & ";b" & VBA.ChrW(8407) & "))/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
    End If
 End Sub
 Sub Rib_FSvektorproj(control As IRibbonControl)
@@ -324,17 +329,17 @@ End Sub
 
 'Callback for rumligningplan2 onAction
 Sub Rib_FSrumligningplan2(control As IRibbonControl)
-    insertribformel "", "aá(x-x_0)+bá(y-y_0)+cá(z-z_0)=0"
+    insertribformel "", "a" & ChrW(183) & "(x-x_0)+b" & ChrW(183) & "(y-y_0)+c" & ChrW(183) & "(z-z_0)=0"
 End Sub
 
 'Callback for rumafstandpunktplan onAction
 Sub Rib_FSrumafstandpunktplan(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & "á(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & ChrW(183) & "(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
 End Sub
 
 'Callback for rumafstandpunktplan2 onAction
 Sub Rib_FSrumafstandpunktplan2(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|aáx_1+báy_1+cáz_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|a" & ChrW(183) & "x_1+b" & ChrW(183) & "y_1+c" & ChrW(183) & "z_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
 End Sub
 
 'Callback for kugleligning onAction
@@ -970,6 +975,9 @@ Sub Rib_FSprob4(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_FSprob5(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(459)
+End Sub
+Sub Rib_FSprob5a(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(687)
 End Sub
 Sub Rib_FSprob6(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(460)

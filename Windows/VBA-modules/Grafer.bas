@@ -97,10 +97,10 @@ Public Sub Plot2DGraph()
     Selection.start = sstart
     UF2Dgraph.Show vbModeless
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
     CASengine = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
@@ -145,10 +145,10 @@ ElseIf UF2Dgraph.TextBox_ligning5.Text = "" Then
 ElseIf UF2Dgraph.TextBox_ligning6.Text = "" Then
     UF2Dgraph.TextBox_ligning6.Text = Ligning
 End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub PlotDF()
@@ -191,7 +191,7 @@ Sub PlotDF()
         s = s & "A=(-10, 2);B=(10, 0);"
         s = s & "SolveODE(" & ea.Text & ", x(A), y(A), x(B), 0.1)" ' y(A) virker ikke
         OpenGeoGebraWeb s, "Classic", True, True
-        GoTo Slut
+        GoTo slut
 #If Mac Then
 #Else
     End If
@@ -233,10 +233,10 @@ Sub PlotDF()
     UF2Dgraph.MultiPage1.SetFocus
     UF2Dgraph.Show vbModeless
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEmptyGraphOleObject()
@@ -441,12 +441,12 @@ Dim i As Integer
     Unload UFwait
 
 Application.ScreenUpdating = True
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(97), vbOKOnly, Sprog.Error
     omax.ConvertLnLog = True
     Unload UFwait
-Slut:
+slut:
     omax.ConvertLnLog = True
     
 #End If
@@ -654,10 +654,10 @@ End If
     srange.Select
     Selection.Collapse wdCollapseEnd
 
-GoTo Slut:
+GoTo slut:
 Fejl:
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
-Slut:
+slut:
 On Error GoTo slut2
     UfWait2.Label_progress = UfWait2.Label_progress & "**"
     xlap.Run ("Auto_open")
@@ -849,7 +849,7 @@ ws.Activate
 'Dim excel As excel.Application
 'Set excel = CreateObject("Excel.Application")
 'Set wb = excel.Workbooks(excel.Workbooks.Count)
-Slut:
+slut:
 DisableExcelMacros
 End Sub
 
@@ -973,12 +973,12 @@ Unload UfWait2
 'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
-GoTo Slut
+GoTo slut
 Fejl:
     On Error Resume Next
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     Unload UfWait2
-Slut:
+slut:
 End Function
 
 Sub InsertPindeDiagram()

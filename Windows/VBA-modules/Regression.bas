@@ -22,14 +22,14 @@ On Error GoTo Fejl
         Cregr.GetTableData
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputeLinRegr
     Cregr.InsertEquation
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ekspregression()
     Dim Cregr As New CRegression
@@ -45,15 +45,15 @@ On Error GoTo Fejl
         Cregr.GetTableData
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputeExpRegr
     Cregr.InsertEquation
 '    MsgBox cregr.Ligning
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub potregression()
 
@@ -71,15 +71,15 @@ On Error GoTo Fejl
         Cregr.GetTableData
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputePowRegr
     Cregr.InsertEquation
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub polregression()
 
@@ -97,14 +97,14 @@ On Error GoTo Fejl
         Cregr.GetTableData
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputePolRegr
     Cregr.InsertEquation
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub UserRegression()
 On Error GoTo Fejl
@@ -125,7 +125,7 @@ On Error GoTo Fejl
         Selection.TypeParagraph
     Else
         InsertTabel
-        GoTo Slut
+        GoTo slut
     End If
     Cregr.ComputeUserRegr
     If Selection.OMaths.Count > 0 Then
@@ -136,10 +136,10 @@ On Error GoTo Fejl
         Selection.TypeParagraph
     End If
     Cregr.InsertEquation
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub InsertTabel()
         Dim antalp As Integer

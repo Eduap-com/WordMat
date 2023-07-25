@@ -1,7 +1,7 @@
 ; Inno script for creating WordMat installer
 
 #define MyAppName "WordMat"
-#define MyAppVersion "1.25.3"
+#define MyAppVersion "1.26.0"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -110,9 +110,9 @@ da.NoWord=Det ser ikke ud til at du har installeret Microsoft Word, og WordMat v
 en.NoWord=Microsoft Word is not installed. WordMat will not function without it. Do you wish to continue?
 sp.NoWord=Word no está instalado. La instalación finalizará
 
-da.NoExcel=Du har ikke installeret Excel 2007, 2010, 2013 eller 2016. Installationen afsluttes.
-en.NoExcel=Excel 2007, 2010, 2013 or 2016 is not installed. The installation will terminate.
-sp.NoExcel=Excel 2007, 2010, 2013 o 2016 no está instalado. La instalación finalizará
+da.NoExcel=Du har ikke installeret Excel 2010, 2013, 2016 eller 2019. Installationen afsluttes.
+en.NoExcel=Excel 2010, 2013, 2016 or 2019 is not installed. The installation will terminate.
+sp.NoExcel=Excel 2010, 2013, 2016 o 2019 no está instalado. La instalación finalizará
 
 da.NotAdmin=Du skal være Administrator for at installere WordMat.%n%n Installationen afsluttes.
 en.NotAdmin=You need to be administrator to install WordMat.%n%n The installation will terminate.
