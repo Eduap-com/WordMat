@@ -26,7 +26,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     ea.SetNormalBrackets
     ea2.SetNormalBrackets
 
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     PrepareMaxima
     omax.ConvertLnLog = False
@@ -36,14 +36,14 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     ' sæt definitioner i rigtig rækkefølge
     For i = 0 To omax.defindex - 1
         DefList = DefList & "," & omax.DefName(i)
-        ea.text = omax.DefValue(i)
+        ea.Text = omax.DefValue(i)
         var = ea.GetNextVar
         If var = "" Then
             sl.Add omax.DefName(i), omax.DefValue(i), 0
         Else
             k = 0
             For j = 0 To sl.Length - 1
-                ea.text = sl.GetVal(j)
+                ea.Text = sl.GetVal(j)
                 If ea.ContainsVar(omax.DefName(i)) Then
                     Exit For
                 End If
@@ -55,7 +55,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
 
 '    ' definer variable der ikke er defineret
     omax.FindVariable
-    ea.text = DefList
+    ea.Text = DefList
     For i = 0 To sl.Length - 1
         fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
         If sl.GetVal(i) <> ReplacedVar Then
@@ -94,15 +94,15 @@ End If
                         Arr = Split(udtryk, "=")
                         lhs = Arr(0)
                         rhs = Arr(1)
-                        ea.text = lhs
+                        ea.Text = lhs
                         fktnavn = ea.GetNextVar(1)
                         varnavn = ea.GetNextBracketContent(1)
                     
                         If lhs = fktnavn & "(" & varnavn & ")" Then
-                            ea.text = rhs
+                            ea.Text = rhs
                             ea.Pos = 1
                             ea.ReplaceVar varnavn, "x"
-                            fktudtryk = ea.text
+                            fktudtryk = ea.Text
                             DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
                             cmd = fktnavn & "(x)=" & fktudtryk
@@ -172,7 +172,7 @@ End If
     '    OpenLink UrlLink, True
     
     OpenGeoGebraWeb UrlLink, Gtype
-fejl:
+Fejl:
 
 slut:
 End Sub
@@ -271,7 +271,7 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
 
     ' sæt definitioner i rigtig rækkefølge
     For i = 0 To omax.defindex - 1
-        ea.text = omax.DefValue(i)
+        ea.Text = omax.DefValue(i)
         DefList = DefList & "," & omax.DefName(i)
         var = ea.GetNextVar
         If var = "" Then
@@ -279,7 +279,7 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
         Else
             k = 0
             For j = 0 To sl.Length - 1
-                ea.text = sl.GetVal(j)
+                ea.Text = sl.GetVal(j)
                 If ea.ContainsVar(omax.DefName(i)) Then
                     Exit For
                 End If
@@ -292,7 +292,7 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
     
        
     ' definer variable der ikke er defineret
-    ea.text = DefList
+    ea.Text = DefList
     For i = 0 To sl.Length - 1
 '        If InStr(sl.GetVal(i), "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
             fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
@@ -390,7 +390,7 @@ slut:
      If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
 
-Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As Boolean = True, Optional HtmlReady As Boolean = False) As String
+Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As Boolean = True, Optional HtmlReady As Boolean = False) As String
 '    Dim geogebrafil As New CGeoGebraFile
 ' definitioner vil allerede være kørt igennem codeforMaxima, så der skal convertmaxima være false
 
@@ -399,67 +399,67 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
    Set ea = New ExpressionAnalyser
    ea.SetNormalBrackets
     
-    text = Replace(text, vbCrLf, "")
-    text = Replace(text, vbCr, "")
-    text = Replace(text, vbLf, "")
-    text = Trim(text)
+    Text = Replace(Text, vbCrLf, "")
+    Text = Replace(Text, vbCr, "")
+    Text = Replace(Text, vbLf, "")
+    Text = Trim(Text)
     
 
  '  text = Replace(text, "log", "lg")
    If ConvertMaxima Then
-      text = omax.CodeForMaxima(text, CASengine)
+      Text = omax.CodeForMaxima(Text, CASengine)
    End If
 
       'græske bogstaver
-      text = Replace(text, "Delta", VBA.ChrW(916))
-      text = Replace(text, "delta", VBA.ChrW(948))
-      text = Replace(text, "alpha", VBA.ChrW(945))
-      text = Replace(text, "beta", VBA.ChrW(946))
-      text = Replace(text, "gamma_incomplete", "\Gamma_incomplete ")
-      text = Replace(text, "gamma", VBA.ChrW(915))
-      text = Replace(text, "gammaLB", VBA.ChrW(947))
-      text = Replace(text, "theta", VBA.ChrW(952))
-      text = Replace(text, "Theta", VBA.ChrW(920))
-      text = Replace(text, "lambda", VBA.ChrW(955))
-      text = Replace(text, "Lambda", VBA.ChrW(923))
-      text = Replace(text, "rho", VBA.ChrW(961))
-      text = Replace(text, "varphi", VBA.ChrW(966))
-      text = Replace(text, "phi", VBA.ChrW(981))
-      text = Replace(text, "Phi", VBA.ChrW(934))
-      text = Replace(text, "varepsilon", VBA.ChrW(949))
-      text = Replace(text, "epsilon", VBA.ChrW(1013))
-      text = Replace(text, "psi", VBA.ChrW(968))
-      text = Replace(text, "Psi", VBA.ChrW(936))
-      text = Replace(text, "sigma", VBA.ChrW(963))
-      text = Replace(text, "Sigma", VBA.ChrW(931))
-      text = Replace(text, "mu", VBA.ChrW(956))
-      text = Replace(text, "Ohm", VBA.ChrW(937))
-      text = Replace(text, "Omega", VBA.ChrW(937))
-      text = Replace(text, "omega", VBA.ChrW(969))
-      text = Replace(text, "Xi", VBA.ChrW(926))
-      text = Replace(text, "xi", VBA.ChrW(958))
-      text = Replace(text, "Chi", VBA.ChrW(935))
-      text = Replace(text, "chi", VBA.ChrW(967))
-      text = Replace(text, "tau", VBA.ChrW(964))
-      text = Replace(text, "Pi", VBA.ChrW(928))
-      text = Replace(text, "greek-nu", VBA.ChrW(957))
-      text = Replace(text, "kappa", VBA.ChrW(954))
-      text = Replace(text, "zeta", VBA.ChrW(950))
-      text = Replace(text, "eta", VBA.ChrW(951)) ' skal være sidst da eta indgår i andre
-      text = Replace(text, "increment", VBA.ChrW(8710))  ' specielt delta increment
-      text = Replace(text, "Symhalf", VBA.ChrW(189)) ' _
+      Text = Replace(Text, "Delta", VBA.ChrW(916))
+      Text = Replace(Text, "delta", VBA.ChrW(948))
+      Text = Replace(Text, "alpha", VBA.ChrW(945))
+      Text = Replace(Text, "beta", VBA.ChrW(946))
+      Text = Replace(Text, "gamma_incomplete", "\Gamma_incomplete ")
+      Text = Replace(Text, "gamma", VBA.ChrW(915))
+      Text = Replace(Text, "gammaLB", VBA.ChrW(947))
+      Text = Replace(Text, "theta", VBA.ChrW(952))
+      Text = Replace(Text, "Theta", VBA.ChrW(920))
+      Text = Replace(Text, "lambda", VBA.ChrW(955))
+      Text = Replace(Text, "Lambda", VBA.ChrW(923))
+      Text = Replace(Text, "rho", VBA.ChrW(961))
+      Text = Replace(Text, "varphi", VBA.ChrW(966))
+      Text = Replace(Text, "phi", VBA.ChrW(981))
+      Text = Replace(Text, "Phi", VBA.ChrW(934))
+      Text = Replace(Text, "varepsilon", VBA.ChrW(949))
+      Text = Replace(Text, "epsilon", VBA.ChrW(1013))
+      Text = Replace(Text, "psi", VBA.ChrW(968))
+      Text = Replace(Text, "Psi", VBA.ChrW(936))
+      Text = Replace(Text, "sigma", VBA.ChrW(963))
+      Text = Replace(Text, "Sigma", VBA.ChrW(931))
+      Text = Replace(Text, "mu", VBA.ChrW(956))
+      Text = Replace(Text, "Ohm", VBA.ChrW(937))
+      Text = Replace(Text, "Omega", VBA.ChrW(937))
+      Text = Replace(Text, "omega", VBA.ChrW(969))
+      Text = Replace(Text, "Xi", VBA.ChrW(926))
+      Text = Replace(Text, "xi", VBA.ChrW(958))
+      Text = Replace(Text, "Chi", VBA.ChrW(935))
+      Text = Replace(Text, "chi", VBA.ChrW(967))
+      Text = Replace(Text, "tau", VBA.ChrW(964))
+      Text = Replace(Text, "Pi", VBA.ChrW(928))
+      Text = Replace(Text, "greek-nu", VBA.ChrW(957))
+      Text = Replace(Text, "kappa", VBA.ChrW(954))
+      Text = Replace(Text, "zeta", VBA.ChrW(950))
+      Text = Replace(Text, "eta", VBA.ChrW(951)) ' skal være sidst da eta indgår i andre
+      Text = Replace(Text, "increment", VBA.ChrW(8710))  ' specielt delta increment
+      Text = Replace(Text, "Symhalf", VBA.ChrW(189)) ' _
       text = Replace(text, "degC", VBA.ChrW(8451))   ' specielt oC tegn
-      text = Replace(text, "<=", VBA.ChrW(8804))  '
-      text = Replace(text, ">=", VBA.ChrW(8805)) '
-      text = Replace(text, "CVinkelO", VBA.ChrW(8736)) '
-      text = Replace(text, "CVinkel", VBA.ChrW(8736)) '
-      text = Replace(text, "Symangle", VBA.ChrW(8736))  '
-      text = Replace(text, "SymVecta", Sprog.A(683))
+      Text = Replace(Text, "<=", VBA.ChrW(8804))  '
+      Text = Replace(Text, ">=", VBA.ChrW(8805)) '
+      Text = Replace(Text, "CVinkelO", VBA.ChrW(8736)) '
+      Text = Replace(Text, "CVinkel", VBA.ChrW(8736)) '
+      Text = Replace(Text, "Symangle", VBA.ChrW(8736))  '
+      Text = Replace(Text, "SymVecta", Sprog.A(683))
       
 '      text = Replace(text, "Integrate", "Integral")  ' anden variabel end x godtages ikke i NIntegral, men ok i IntegralSymbolic
     
     
-      text = Replace(text, "diff", "Derivative")  ' anden variabel end x godtages ikke i NIntegral, men ok i IntegralSymbolic
+      Text = Replace(Text, "diff", "Derivative")  ' anden variabel end x godtages ikke i NIntegral, men ok i IntegralSymbolic
     
       'Else
       '    text = Replace(text, "log", "ln")
@@ -478,7 +478,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
 '   Loop
     
    
-   ea.text = text
+   ea.Text = Text
    ea.ReplaceVar "NIntegrate", "NIntegral"
    ea.ReplaceVar "integrate", "Integral"
    ea.ReplaceVar "Integrate", "Integral"
@@ -486,34 +486,34 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
    ea.ReplaceVar "inf", "infinity"
    ea.ReplaceVar "log", "ln"
    ea.ReplaceVar "lg10", "log10"
-   text = ea.text
-   text = Replace(text, "%e", "exp(1)") 'VBA.ChrW(101)
-   text = Replace(text, "%pi", VBA.ChrW(960)) '"pi"
-   text = Replace(text, "%", "")
+   Text = ea.Text
+   Text = Replace(Text, "%e", "exp(1)") 'VBA.ChrW(101)
+   Text = Replace(Text, "%pi", VBA.ChrW(960)) '"pi"
+   Text = Replace(Text, "%", "")
 '   text = Replace(text, "[", "{")
 '   text = Replace(text, "]", "}")
-   text = Replace(text, "##", "*") 'prikprodukt
-   text = Replace(text, "~", "*") ' vectorprodukt
+   Text = Replace(Text, "##", "*") 'prikprodukt
+   Text = Replace(Text, "~", "*") ' vectorprodukt
 '   text = Replace(text, "matrix", "")
 
 '
-      p = InStr(text, "logbase(")
+      p = InStr(Text, "logbase(")
       Do While p > 0
         If p > 0 Then
-          ea.text = text
+          ea.Text = Text
           s = ea.GetNextBracketContent(p + 7)
           Arr = Split(s, ",")
-          If UBound(Arr) > 0 Then text = Left(text, p - 1) & "log(" & Arr(1) & "," & Arr(0) & right(text, Len(text) - p - Len(s) - 7)
+          If UBound(Arr) > 0 Then Text = Left(Text, p - 1) & "log(" & Arr(1) & "," & Arr(0) & right(Text, Len(Text) - p - Len(s) - 7)
         End If
-        p = InStr(text, "logbase(")
+        p = InStr(Text, "logbase(")
       Loop
 
 
-      p = InStr(text, "if")
-      p2 = InStr(text, "then")
+      p = InStr(Text, "if")
+      p2 = InStr(Text, "then")
       If p > 0 And p2 > 0 Then
          sp = p
-         ea.text = text
+         ea.Text = Text
          ea.Pos = p - 1
          s = ea.GetNextBracketContent()
          ep = p + Len(s) + 1
@@ -535,15 +535,15 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
 '            gexpr = gexpr & "]"
             gexpr = gexpr & ")"
          Next
-         text = Left(text, sp - 1) & gexpr & right(text, Len(text) - ep + 2)
-         If Left(text, 1) = "(" Then text = right(text, Len(text) - 1)
+         Text = Left(Text, sp - 1) & gexpr & right(Text, Len(Text) - ep + 2)
+         If Left(Text, 1) = "(" Then Text = right(Text, Len(Text) - 1)
 '         text = Replace(text, " and ", " ??_ ") '&& der må være sket noget fejlkonvertering
 '         text = Replace(text, " or ", " ??å ") '||
-         text = Replace(text, " and ", " && ") '&&
-         text = Replace(text, " or ", " || ") '||
+         Text = Replace(Text, " and ", " && ") '&&
+         Text = Replace(Text, " or ", " || ") '||
       End If
 
-   ConvertToGeogebraSyntax = text
+   ConvertToGeogebraSyntax = Text
        
 '    ConvertToGeogebraSyntax = geogebrafil.ConvertToGeogebraSyntax(s, True)
     If HtmlReady Then
@@ -551,39 +551,39 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
     End If
 '    Set geogebrafil = Nothing
 End Function
-Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
+Function ConvertGeoGebraSyntaxToWord(ByVal Text As String) As String
     Dim p As Long, p2 As Long, ea As New ExpressionAnalyser, mtext As String, s As String, n As Integer
     ea.SetNormalBrackets
     
-    text = TrimB(text, """")
+    Text = TrimB(Text, """")
     
     ' mellemrum mellem variable skal have *
-    ea.text = text
-    p = InStr(ea.text, " ")
+    ea.Text = Text
+    p = InStr(ea.Text, " ")
     Do While p > 0
         If ea.IsLetterPos(p - 1) And ea.IsLetterPos(p + 1) Then
             ea.ReplaceStringAt "*", p
         End If
-        p = InStr(p + 1, ea.text, " ")
+        p = InStr(p + 1, ea.Text, " ")
     Loop
     
     'potenser kan være skrevet som specialtegn for 0,1,2,3    p = InStr(ea.text, VBA.ChrW(176)) ' hævet 0
     ReplaceSuperScripts ea
     
-    text = ea.text
-    text = Replace(text, "\u003C", "<") ' mærkeligt at lige præcis denne står sådan
-    text = Replace(text, " = ", "=") ' mellemrum omkring =
-    text = Replace(text, " < ", "<")
-    text = Replace(text, " > ", ">")
+    Text = ea.Text
+    Text = Replace(Text, "\u003C", "<") ' mærkeligt at lige præcis denne står sådan
+    Text = Replace(Text, " = ", "=") ' mellemrum omkring =
+    Text = Replace(Text, " < ", "<")
+    Text = Replace(Text, " > ", ">")
 
 
-    text = Replace(text, "sin^-1", "asin")
-    text = Replace(text, "cos^-1", "acos")
-    text = Replace(text, "tan^-1", "atan")
+    Text = Replace(Text, "sin^-1", "asin")
+    Text = Replace(Text, "cos^-1", "acos")
+    Text = Replace(Text, "tan^-1", "atan")
 
-    text = omax.ConvertToWordSymbols(text)
+    Text = omax.ConvertToWordSymbols(Text)
     
-    ea.text = text
+    ea.Text = Text
     
     ReplaceTrigSuperscript ea, "sin"
     ReplaceTrigSuperscript ea, "cos"
@@ -592,7 +592,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
     
     'matricer og vektorer
      ea.SetTuborgBrackets
-    p = InStr(ea.text, "{{")
+    p = InStr(ea.Text, "{{")
     Do While p > 0
         mtext = ea.GetNextBracketContent(p)
         mtext = Replace(mtext, " ", "") ' mellem efter ; giver problemer i næste linje
@@ -600,20 +600,20 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
         mtext = Replace(mtext, ListSeparator, "&")
 
         mtext = omax.matrixstartbracket & VBA.ChrW(9632) & "(" & Mid(mtext, 2, Len(mtext) - 2) & ")" & omax.matrixendbracket
-        ea.text = Left(ea.text, p - 1) & mtext & right(ea.text, Len(ea.text) - ea.Pos + 1)
+        ea.Text = Left(ea.Text, p - 1) & mtext & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
 
-        p = InStr(p + 1, ea.text, "{{")
+        p = InStr(p + 1, ea.Text, "{{")
     Loop
     
-    p = InStr(ea.text, "_{")
+    p = InStr(ea.Text, "_{")
     Do While p > 0
         s = ea.GetNextBracketContent(p)
-        ea.text = Left(ea.text, p) & s & right(ea.text, Len(ea.text) - Len(s) - p - 2)
-        p = InStr(p + 1, ea.text, "_{")
+        ea.Text = Left(ea.Text, p) & s & right(ea.Text, Len(ea.Text) - Len(s) - p - 2)
+        p = InStr(p + 1, ea.Text, "_{")
     Loop
-    text = ea.text
+    Text = ea.Text
     
-    ConvertGeoGebraSyntaxToWord = text
+    ConvertGeoGebraSyntaxToWord = Text
 End Function
 
 Sub ReplaceSuperScripts(ByRef ea As ExpressionAnalyser)
@@ -679,7 +679,7 @@ Sub ReplaceTrigSuperscript(ByRef ea As ExpressionAnalyser, Trig As String)
 ' erstatter fx sin & chrw(8289) & "^2" med "sin" & "^2" & chrw(8289)
 ' altså retter op på output fra converttowordsymols
 Dim p As Integer, p2 As Integer
-    p = InStr(ea.text, Trig & VBA.ChrW(8289) & "^")
+    p = InStr(ea.Text, Trig & VBA.ChrW(8289) & "^")
     Do While p > 0
         If p > 0 Then
             p2 = p
@@ -690,12 +690,12 @@ Dim p As Integer, p2 As Integer
             ea.InsertTextAt VBA.ChrW(8289), p
             ea.RemoveChar (p2 + Len(Trig))
         End If
-        p = InStr(ea.text, Trig & VBA.ChrW(8289) & "^")
+        p = InStr(ea.Text, Trig & VBA.ChrW(8289) & "^")
     Loop
 End Sub
 
 Sub GeoGebra()
-    On Error GoTo fejl
+    On Error GoTo Fejl
     Dim geogebrasti As String
     Dim geogebrafilersti As String
     Dim appnr As Integer
@@ -708,7 +708,7 @@ Sub GeoGebra()
     UFwait.Show vbModeless
     
     geogebrasti = GeoGebraPath()
-    If geogebrasti = "" Then GoTo fejl ' hvis geogebra ikke installeret så fejl
+    If geogebrasti = "" Then GoTo Fejl ' hvis geogebra ikke installeret så fejl
 '    geogebrafilersti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     geogebrafilersti = GetTempDir()
     
@@ -721,7 +721,7 @@ Sub GeoGebra()
         geogebrasti = geogebrasti & " """ & geogebrafilersti & """"
     Else
         MsgBox "The GeoGebra.ggb file cannot be located", vbOKOnly, Sprog.Error
-        GoTo fejl
+        GoTo Fejl
     End If
     
 #If Mac Then
@@ -738,13 +738,13 @@ Sub GeoGebra()
     Unload UFwait
     
     GoTo slut
-fejl:
+Fejl:
     UserFormGeoGebra.Show
 slut:
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found
-On Error GoTo fejl
+On Error GoTo Fejl
 #If Mac Then
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
     If FileExists(GeoGebraPath) Then Exit Function
@@ -782,7 +782,7 @@ On Error GoTo fejl
     End If
 #End If
     GoTo slut
-fejl:
+Fejl:
     GeoGebraPath = ""
 slut:
 End Function
@@ -795,7 +795,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Dim dd As New DocData
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
-    On Error GoTo fejl
+    On Error GoTo Fejl
     ea.SetNormalBrackets
     ea2.SetNormalBrackets
     geogebrafil.Show3D = False
@@ -818,7 +818,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     
     ' sæt definitioner i rigtig rækkefølge
     For i = 0 To omax.defindex - 1
-        ea.text = omax.DefValue(i)
+        ea.Text = omax.DefValue(i)
         DefList = DefList & "," & omax.DefName(i)
         var = ea.GetNextVar
         If var = "" Then
@@ -826,7 +826,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
         Else
             k = 0
             For j = 0 To sl.Length - 1
-                ea.text = sl.GetVal(j)
+                ea.Text = sl.GetVal(j)
                 If ea.ContainsVar(omax.DefName(i)) Then
                     Exit For
                 End If
@@ -837,7 +837,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Next
     
     ' definer variable der ikke er defineret
-    ea.text = DefList
+    ea.Text = DefList
     For i = 0 To sl.Length - 1
         If InStr(sl.GetVal(i), "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
             fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
@@ -869,15 +869,15 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                     Arr = Split(udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
-                    ea.text = lhs
+                    ea.Text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     
                     If lhs = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = rhs
+                        ea.Text = rhs
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
-                        fktudtryk = ea.text
+                        fktudtryk = ea.Text
                         DefinerKonstanter fktudtryk, DefList, geogebrafil
                         geogebrafil.CreateFunction fktnavn, fktudtryk, False, True
                     Else
@@ -941,7 +941,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Name geogebrasti & "geogebra.zip" As geogebrasti & "geogebra.ggb"
 #End If
     GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 On Error Resume Next
@@ -954,8 +954,8 @@ Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim var As String, var2 As String, i As Integer, p As Integer
 Dim varval As String
-    ea.text = DefList
-    ea2.text = Expr
+    ea.Text = DefList
+    ea2.Text = Expr
     ea2.Pos = 0
     Do
         var = ea2.GetNextVar
@@ -971,7 +971,7 @@ Dim varval As String
                     UrlLink = UrlLink & var & "=" & varval & ";"
                 End If
                 DefList = DefList & "," & var
-                ea.text = DefList
+                ea.Text = DefList
                 i = i + 1
             End If
         End If
@@ -1000,9 +1000,9 @@ End Sub
 
  
 
-Sub CreateZipFile(zipfilnavn As Variant, filnavn As Variant, Optional filnavn2 As Variant = "", Optional filnavn3 As Variant = "", Optional filnavn4 As Variant = "")
+Sub CreateZipFile(zipfilnavn As Variant, Filnavn As Variant, Optional filnavn2 As Variant = "", Optional filnavn3 As Variant = "", Optional filnavn4 As Variant = "")
 #If Mac Then
-    RunScript "ZipFile", zipfilnavn & ";" & filnavn
+    RunScript "ZipFile", zipfilnavn & ";" & Filnavn
 #Else
 '
 ' s. http://www.rondebruin.nl/windowsxpzip.htm
@@ -1022,7 +1022,7 @@ Sub CreateZipFile(zipfilnavn As Variant, filnavn As Variant, Optional filnavn2 A
     Set objFolder = oApp.Namespace(zipfilnavn)
     
     i = 1
-    objFolder.CopyHere filnavn
+    objFolder.CopyHere Filnavn
     If filnavn2 <> "" Then
         objFolder.CopyHere filnavn2
         i = i + 1
@@ -1046,7 +1046,7 @@ Sub CreateZipFile(zipfilnavn As Variant, filnavn As Variant, Optional filnavn2 A
 '    On Error GoTo 0
 #End If
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 

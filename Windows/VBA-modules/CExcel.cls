@@ -45,7 +45,7 @@ End If
 XLapp.visible = vis
 Set xlwb = XLapp.Workbooks.Add
 End Sub
-Sub LoadFile(filnavn As String)
+Sub LoadFile(Filnavn As String)
 Dim wordmatsti As String
 On Error Resume Next
 If XLapp Is Nothing Then
@@ -62,7 +62,7 @@ XLapp.visible = vis
 '    Set XLapp = CreateObject("Excel.Application")
 'End If
     XLapp.visible = True
-wordmatsti = GetProgramFilesDir & "\WordMat\ExcelFiles\" & filnavn & ""
+wordmatsti = GetProgramFilesDir & "\WordMat\ExcelFiles\" & Filnavn & ""
 If Dir(wordmatsti) <> "" Then
     Set xlwb = XLapp.Workbooks.Add(wordmatsti)
 End If
@@ -70,11 +70,11 @@ End If
 
 End Sub
 Public Sub CloseExcel()
-On Error GoTo fejl
+On Error GoTo Fejl
 xlwb.Close False ' close the workbook without saving
 XLapp.quit ' close the Excel application
 
-fejl:
+Fejl:
 Set xlwb = Nothing
 Set XLapp = Nothing
 
@@ -104,7 +104,7 @@ If Err.Number <> 0 Then
 '    Set XLapp = New excel.Application
 End If
 GoTo slut
-fejl:
+Fejl:
     RestartExcel
 slut:
 End Sub
@@ -120,7 +120,7 @@ On Error Resume Next
     XLapp.ScreenUpdating = True
     XLapp.DisplayAlerts = True
 End Sub
-Function InsertIndlejret(filnavn As String, Optional startark As String)
+Function InsertIndlejret(Filnavn As String, Optional startark As String)
 'indsætter exceldokument som indlejret dokument
 Dim path As String
 Dim ils As InlineShape
@@ -142,7 +142,7 @@ EnableExcelMacros
 '    ufwait2.Show vbModeless
         DoEvents
 '        ufwait2.Label_progress = "***"
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & filnavn & """"
+path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & Filnavn & """"
     If Selection.Range.Tables.Count > 0 Then
 '        Selection.Copy
         Selection.Tables(Selection.Tables.Count).Select
@@ -185,7 +185,7 @@ End If
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
 GoTo slut
-fejl:
+Fejl:
     On Error Resume Next
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 '    Unload ufwait2
@@ -352,7 +352,7 @@ Dim n As Integer
 Dim oFS As Integer
 Dim r As Range
 
-On Error GoTo fejl
+On Error GoTo Fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -385,7 +385,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
     On Error Resume Next
     For i = 1 To n ' bestem hvor der ligger tal
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.text
+        cellval = rws(i).Cells(j).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         tal = CDbl(cellval)
@@ -400,7 +400,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
 End If
 
 If n < 2 Then
-    GoTo fejl
+    GoTo Fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -412,13 +412,13 @@ End If
     For j = 1 To n
         i = i + 1
 
-        cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
+        cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         Tabel(i, 1) = CDbl(cellval) ' skal med for at melde fejl , men alene duer ikke da den er afh af sprog indstill
         Tabel(i, 1) = val(cellval) 'melder ikke fejl ved bogstaver
-        cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
+        cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
@@ -435,7 +435,7 @@ End If
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 

@@ -48,15 +48,15 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                     Arr = Split(udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
-                    ea.text = lhs
+                    ea.Text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     
                     If lhs = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = rhs
+                        ea.Text = rhs
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
-                        fktudtryk = ea.text
+                        fktudtryk = ea.Text
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
                         cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
@@ -121,9 +121,9 @@ Exit Sub
         Kommando = omax.ConvertToWordSymbols(Kommando)
         Kommando = Replace(Kommando, ";", ".")
         If Len(Kommando) > 0 And i = 0 Then
-            UserFormOmdrejninglegeme.TextBox_forskrift.text = Kommando
+            UserFormOmdrejninglegeme.TextBox_forskrift.Text = Kommando
         ElseIf Len(Kommando) > 0 And i = 1 Then
-            UserFormOmdrejninglegeme.TextBox_forskrift2.text = Kommando
+            UserFormOmdrejninglegeme.TextBox_forskrift2.Text = Kommando
         End If
         i = i + 1
     Loop
@@ -132,16 +132,16 @@ Exit Sub
     
     UserFormOmdrejninglegeme.Show
     
-fejl:
+Fejl:
 slut:
 End Sub
 
 Sub Plot3DGraph()
     Dim forskrifter As String
-    Dim Result As Variant
+    Dim result As Variant
     Dim Arr As Variant
     Dim i As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
     
     PrepareMaxima
     omax.ReadSelection
@@ -179,7 +179,7 @@ Sub Plot3DGraph()
     
     UserForm3DGraph.Show
     GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -187,15 +187,15 @@ End Sub
 Sub Insert3DEquation(Equation As String)
 
 If InStr(Equation, "=") > 0 Then
-    If UserForm3DGraph.TextBox_ligning1.text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_ligning2.text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_ligning3.text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_ligning1.text = "" Then
-        UserForm3DGraph.TextBox_ligning1.text = Equation
-    ElseIf UserForm3DGraph.TextBox_ligning2.text = "" Then
-        UserForm3DGraph.TextBox_ligning2.text = Equation
-    ElseIf UserForm3DGraph.TextBox_ligning3.text = "" Then
-        UserForm3DGraph.TextBox_ligning3.text = Equation
+    If UserForm3DGraph.TextBox_ligning1.Text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_ligning2.Text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_ligning3.Text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_ligning1.Text = "" Then
+        UserForm3DGraph.TextBox_ligning1.Text = Equation
+    ElseIf UserForm3DGraph.TextBox_ligning2.Text = "" Then
+        UserForm3DGraph.TextBox_ligning2.Text = Equation
+    ElseIf UserForm3DGraph.TextBox_ligning3.Text = "" Then
+        UserForm3DGraph.TextBox_ligning3.Text = Equation
     End If
 ElseIf InStr(Equation, VBA.ChrW(9632)) Then
     Equation = Replace(Equation, VBA.ChrW(9632), "")
@@ -203,22 +203,22 @@ ElseIf InStr(Equation, VBA.ChrW(9632)) Then
     Equation = Replace(Equation, "((", "(")
     Equation = Replace(Equation, "))", ")")
     Equation = "(0,0,0)-" & Equation
-    If UserForm3DGraph.TextBox_vektorer.text <> "" Then
-        If right(UserForm3DGraph.TextBox_vektorer.text, 1) = ")" Then
-            UserForm3DGraph.TextBox_vektorer.text = UserForm3DGraph.TextBox_vektorer.text & vbCr
+    If UserForm3DGraph.TextBox_vektorer.Text <> "" Then
+        If right(UserForm3DGraph.TextBox_vektorer.Text, 1) = ")" Then
+            UserForm3DGraph.TextBox_vektorer.Text = UserForm3DGraph.TextBox_vektorer.Text & vbCr
         End If
     End If
-    UserForm3DGraph.TextBox_vektorer.text = UserForm3DGraph.TextBox_vektorer.text & Equation
+    UserForm3DGraph.TextBox_vektorer.Text = UserForm3DGraph.TextBox_vektorer.Text & Equation
 Else
-    If UserForm3DGraph.TextBox_forskrift1.text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_forskrift2.text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_forskrift3.text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_forskrift1.text = "" Then
-         UserForm3DGraph.TextBox_forskrift1.text = Equation
-    ElseIf UserForm3DGraph.TextBox_forskrift2.text = "" Then
-         UserForm3DGraph.TextBox_forskrift2.text = Equation
-    ElseIf UserForm3DGraph.TextBox_forskrift3.text = "" Then
-         UserForm3DGraph.TextBox_forskrift3.text = Equation
+    If UserForm3DGraph.TextBox_forskrift1.Text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift2.Text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift3.Text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift1.Text = "" Then
+         UserForm3DGraph.TextBox_forskrift1.Text = Equation
+    ElseIf UserForm3DGraph.TextBox_forskrift2.Text = "" Then
+         UserForm3DGraph.TextBox_forskrift2.Text = Equation
+    ElseIf UserForm3DGraph.TextBox_forskrift3.Text = "" Then
+         UserForm3DGraph.TextBox_forskrift3.Text = Equation
     End If
 End If
 

@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Private Sub CommandButton_ok_Click()
     Dim funk As String
@@ -25,18 +26,18 @@ Private Sub CommandButton_ok_Click()
     Dim kunlinjer As Boolean
     Dim gridlines As Integer
     Dim grafobj As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
     
     Label_vent.visible = True
-    Sxmin = Replace(TextBox_xmin.text, ",", ".")
-    Sxmax = Replace(TextBox_xmax.text, ",", ".")
+    Sxmin = Replace(TextBox_xmin.Text, ",", ".")
+    Sxmax = Replace(TextBox_xmax.Text, ",", ".")
     
     xmin = val(Sxmin)
     xmax = val(Sxmax)
 '    funk = InputBox("Indtast forskrift som funktion af x", "Omdrejningslegeme")
-    funk = TextBox_forskrift.text
+    funk = TextBox_forskrift.Text
     funk = omax.CodeForMaxima(funk)
-    funk2 = TextBox_forskrift2.text
+    funk2 = TextBox_forskrift2.Text
     funk2 = omax.CodeForMaxima(funk2)
     dx = (xmax - xmin) / 5
     omax.MaximaInputStreng = omax.MaximaInputStreng & "fomd(x):=" & funk & "$"
@@ -82,7 +83,7 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
     Me.Hide
 #End If
     GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
     Label_vent.visible = False

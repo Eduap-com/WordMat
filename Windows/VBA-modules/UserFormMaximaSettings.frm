@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Private MustRestart As Boolean
 Private LoadUnits As Boolean
@@ -35,30 +36,30 @@ Private Sub CommandButton_annuller_Click()
     Me.Hide
 End Sub
 
-Private Sub NulstilWordDoc(filnavn As String)
+Private Sub NulstilWordDoc(Filnavn As String)
 Dim appdir As String
 Dim fs, f, s
-On Error GoTo fejl
+On Error GoTo Fejl
     
-If MsgBox(Sprog.A(665) & ", " & filnavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo slut
+If MsgBox(Sprog.A(665) & ", " & Filnavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo slut
     
 #If Mac Then
 ' cant
 '    FileCopy "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/" & filnavn, "~/Library/Containers/com.microsoft.Word/Data/WordMat/" & Replace(filnavn, "\", "/")
 #Else
 Set fs = CreateObject("Scripting.FileSystemObject")
-filnavn = GetProgramFilesDir & "\WordMat\" & filnavn
+Filnavn = GetProgramFilesDir & "\WordMat\" & Filnavn
 appdir = Environ("AppData")
-If Dir(filnavn) <> "" And appdir <> "" Then
-  fs.CopyFile filnavn, appdir & "\WordMat\"
-  MsgBox Sprog.A(668) & " " & filnavn & " " & Sprog.A(669), vbOKOnly, Sprog.A(670)
+If Dir(Filnavn) <> "" And appdir <> "" Then
+  fs.CopyFile Filnavn, appdir & "\WordMat\"
+  MsgBox Sprog.A(668) & " " & Filnavn & " " & Sprog.A(669), vbOKOnly, Sprog.A(670)
 Else
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Filen " & filnavn & " kunne ikke findes eller appdata mappen kunne ikke findes"
 End If
 #End If
 
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 
@@ -98,7 +99,7 @@ On Error Resume Next
     Dim knap As CommandBarButton
     Dim UnitChanged As Boolean
     
-    If InStr(TextBox_outunits.text, "/") > 0 Or InStr(TextBox_outunits.text, "*") > 0 Or InStr(TextBox_outunits.text, "^") > 0 Then
+    If InStr(TextBox_outunits.Text, "/") > 0 Or InStr(TextBox_outunits.Text, "*") > 0 Or InStr(TextBox_outunits.Text, "^") > 0 Then
         MsgBox Sprog.A(343)
         MultiPage1.Value = 2
         TextBox_outunits.SetFocus
@@ -196,8 +197,8 @@ On Error Resume Next
     dAsDiffChr = CheckBox_dasdiffchr.Value
     EqAskRef = CheckBox_askref.Value
     BackupType = ComboBox_backup.ListIndex
-    BackupMaxNo = ComboBox_backupno.text
-    BackupTime = ComboBox_backuptime.text
+    BackupMaxNo = ComboBox_backupno.Text
+    BackupTime = ComboBox_backuptime.Text
     
     If MaximaUnits <> CheckBox_units.Value Then
         MaximaUnits = CheckBox_units.Value
@@ -209,8 +210,8 @@ On Error Resume Next
         End If
     End If
     
-    If OutUnits <> TextBox_outunits.text Then
-        OutUnits = TextBox_outunits.text
+    If OutUnits <> TextBox_outunits.Text Then
+        OutUnits = TextBox_outunits.Text
         UserUnits = True
     End If
         
@@ -267,7 +268,7 @@ Private Sub CommandButton_restartmaxima_Click()
 End Sub
 
 Private Sub CommandButton_shortcuts_Click()
-Dim Result As VbMsgBoxResult
+Dim result As VbMsgBoxResult
 
 '    result = MsgBox(Sprog.A(63) & vbCrLf & vbCrLf & "Alt + g    Prik-gangetegn" & vbCrLf & "Alt + b    beregn" & vbCrLf & "AltGr + Enter    beregn" & vbCrLf & "Alt + L    Løs ligning(er)" & vbCrLf & "Alt + S    Slet definitioner" & vbCrLf & "Alt + D    Indsæt Definer:" & vbCrLf & "Alt + i    Indstillinger" & vbCrLf & "alt + r    Indsæt forrige resultat(er)" & vbCrLf & "alt + P    Plot graf" & vbCrLf & "alt + E    Slå enheder til / fra" & vbCrLf & "alt + M    Indsæt ny ligning" & vbCrLf & "alt + O    Omskriv" & vbCrLf & "alt + N    Skift mellem auto, eksakt, num" & vbCrLf & "alt + T   Konverter ligning til/fra LaTex" & vbCrLf & vbCrLf & "Bemærk at der også er genveje til beregn og løs ligning(er) hvis du højreklikker på en ligning.", vbYesNo, Sprog.A(64))
 '    If result = vbYes Then
@@ -281,7 +282,7 @@ Dim Result As VbMsgBoxResult
 End Sub
 
 Private Sub CommandButton_sletenheder_Click()
-    TextBox_outunits.text = ""
+    TextBox_outunits.Text = ""
 End Sub
 
 
@@ -324,7 +325,7 @@ Private Sub UserForm_Activate()
     CheckBox_units.Value = MaximaUnits
     CheckBox_vidnotation.Value = MaximaVidNotation
     CheckBox_indlejret.Value = ExcelIndlejret
-    TextBox_outunits.text = OutUnits
+    TextBox_outunits.Text = OutUnits
     CheckBox_autostart2.Value = AutoStart
     CheckBox_checkupdate.Value = SettCheckForUpdate
     CheckBox_bigfloat.Value = MaximaBigFloat
@@ -337,8 +338,8 @@ Private Sub UserForm_Activate()
     ComboBox_language.ListIndex = LanguageSetting
     
     ComboBox_backup.ListIndex = BackupType
-    ComboBox_backupno.text = BackupMaxNo
-    ComboBox_backuptime.text = BackupTime
+    ComboBox_backupno.Text = BackupMaxNo
+    ComboBox_backuptime.Text = BackupTime
 
     If CheckBox_complex.Value Then
         CheckBox_polaroutput.visible = True

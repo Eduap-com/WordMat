@@ -1,37 +1,47 @@
 ; Inno script for creating WordMat installer
 
+#define MyAppName "WordMat"
+#define MyAppVersion "1.26.0"
+
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{301A8257-D5EF-48B4-AAC2-E86700DDA6FE}
-AppName=WordMat
-AppVerName=WordMat v. 1.25.0
-VersionInfoVersion=1.25.0.0
-AppMutex=WordMatMutex
+AppName={#MyAppName}
+AppVersion= {#MyAppVersion}
+AppVerName={#MyAppName} v. {#MyAppVersion}
+VersionInfoVersion={#MyAppVersion}.0
+AppMutex={#MyAppName}Mutex
 AppPublisher=Eduap
 AppPublisherURL=http://www.eduap.com/
 AppSupportURL=http://www.eduap.com/
 AppUpdatesURL=http://www.eduap.com/
 AppCopyright=EDUAP
-DefaultDirName={pf}\WordMat\
+DefaultDirName={pf}\{#MyAppName}\
 DisableDirPage=yes
 DisableReadyMemo=yes
 DisableReadyPage=yes
-DefaultGroupName=WordMat
+DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 SetupIconFile=Installer-files\WordMatIkon.ico
 WizardImageFile=Installer-files\WordMatInstallImage.bmp
 WizardImageStretch=no
 ;SourceDir=.
 OutputDir=.
-OutputBaseFilename=WordMat
+OutputBaseFilename={#MyAppName}
 LicenseFile=Installer-files\License_en.txt
 Compression=lzma
 SolidCompression=yes
 ChangesAssociations=yes
 ShowLanguageDialog=no
 CloseApplications=force
+SignToolRetryCount=1
+SignToolRetryDelay=2000
+SignToolRunMinimized=yes
+SignTool=SignToolExe
+SignedUninstaller=yes 
+; Command: $qC:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool.exe$q sign /f $qC:\Users\mikae\OneDrive\Dokumenter\Eduap\Code signing certificate\EDUAP-certificate.pfx$q /p MyPassword /t http://timestamp.digicert.com /fd SHA256 $f
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl" ; LicenseFile: Installer-files\License_en.txt
@@ -43,14 +53,14 @@ da.WelcomeLabel2=Denne guide installerer [name/ver] på computeren.%n%n Det anbef
 en.WelcomeLabel2=This guide installs [name/ver].%n%n It is recommended to close all programs.
 sp.WelcomeLabel2=Esta guía le instalará [name / ver] en su equipo.% N% n Se recomienda cerrar todas las aplicaciones que se ejecutan.
 
-da.FinishedLabel=Du finder WordMat som en værktøjslinje i Word.
-en.FinishedLabel=You will find WordMat as a Ribbon in Word.
+da.FinishedLabel=Du finder {#MyAppName} som en værktøjslinje i Word.
+en.FinishedLabel=You will find {#MyAppName} as a Ribbon in Word.
 sp.FinishedLabel=Ahora dispone de una nueva barra de herramientas en Word.
 
 [CustomMessages]
-da.UnInstallLabel=Du har allerede installeret WordMat. Bekræft først at du vil have den gamle version afinstalleret først.
-en.UnInstallLabel=You have already installed WordMat. Confirm that you want to uninstall the old version first.
-sp.UnInstallLabel=Ya ha instalado WordMat. Confirme que primero va a desinstalar la versión antigua.
+da.UnInstallLabel=Du har allerede installeret {#MyAppName}. Bekræft først at du vil have den gamle version afinstalleret først.
+en.UnInstallLabel=You have already installed {#MyAppName}. Confirm that you want to uninstall the old version first.
+sp.UnInstallLabel=Ya ha instalado {#MyAppName}. Confirme que primero va a desinstalar la versión antigua.
 
 da.SettingsLabel=Indstillinger
 en.SettingsLabel=Settings
@@ -100,9 +110,9 @@ da.NoWord=Det ser ikke ud til at du har installeret Microsoft Word, og WordMat v
 en.NoWord=Microsoft Word is not installed. WordMat will not function without it. Do you wish to continue?
 sp.NoWord=Word no está instalado. La instalación finalizará
 
-da.NoExcel=Du har ikke installeret Excel 2007, 2010, 2013 eller 2016. Installationen afsluttes.
-en.NoExcel=Excel 2007, 2010, 2013 or 2016 is not installed. The installation will terminate.
-sp.NoExcel=Excel 2007, 2010, 2013 o 2016 no está instalado. La instalación finalizará
+da.NoExcel=Du har ikke installeret Excel 2010, 2013, 2016 eller 2019. Installationen afsluttes.
+en.NoExcel=Excel 2010, 2013, 2016 or 2019 is not installed. The installation will terminate.
+sp.NoExcel=Excel 2010, 2013, 2016 o 2019 no está instalado. La instalación finalizará
 
 da.NotAdmin=Du skal være Administrator for at installere WordMat.%n%n Installationen afsluttes.
 en.NotAdmin=You need to be administrator to install WordMat.%n%n The installation will terminate.
@@ -116,17 +126,17 @@ da.InstallError=Der skete en fejl under installationen
 en.InstallError=An error occured during installation
 sp.InstallError=Ha ocurrido un error durante la instalación
 
-da.UninstallOK=Den eksisterende version af WordMat blev afinstalleret korrekt. Nu fortsætter installationen af den nye version.
-en.UninstallOK=The existing version of WordMat was uninstalled correct. The installation of the new version will now continue.
-sp.UninstallOK=La versión existente de WordMat se ha desinstalado correctamente. Ahora continuará la instalación de la nueva versión.
+da.UninstallOK=Den eksisterende version af {#MyAppName} blev afinstalleret korrekt. Nu fortsætter installationen af den nye version.
+en.UninstallOK=The existing version of {#MyAppName} was uninstalled correct. The installation of the new version will now continue.
+sp.UninstallOK=La versión existente de {#MyAppName} se ha desinstalado correctamente. Ahora continuará la instalación de la nueva versión.
 
 da.UnInstallError=Der skete en fejl under afinstallationen, men installationen af den nye version fortsætter.
 en.UnInstallError=An error occured during the uninstallation, but the installation of the new version will continue.
 sp.UnInstallError=Ha ocurrido un error durante la desinstalación, pero la instalación de la nueva versión continuará.
 
-da.InstallThisUser=Opret WordMat menu i Word for denne bruger
-en.InstallThisUser=Create WordMat ribbon in Word for this user
-sp.InstallThisUser=Crear cinta WordMat en Word para este usuario
+da.InstallThisUser=Opret {#MyAppName} menu i Word for denne bruger
+en.InstallThisUser=Create {#MyAppName} ribbon in Word for this user
+sp.InstallThisUser=Crear cinta {#MyAppName} en Word para este usuario
 
 da.ReactivateWordMat=Reaktiver WordMat
 en.ReactivateWordMat=Reactivate WordMat
@@ -197,8 +207,8 @@ Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {app}\WordDocs; Flags: ign
 Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
 Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\geogebra-math-apps\*; DestDir: {app}\geogebra-math-apps\; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\geogebra-math-apps\*; DestDir: {app}\geogebra-math-apps\; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: MathMenu.dll\MathMenu.dll; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: MathMenu.dll\MathMenu.tlb; DestDir: {app}; Flags: ignoreversion regtypelib overwritereadonly uninsremovereadonly
 
@@ -298,8 +308,8 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisable
 
 
 ; WordMat settings
-Root: HKCU; Subkey: "Software\WordMat"; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\WordMat"; Flags: 
+Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: 
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AllTrig"; ValueData: 0 ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Exact"; ValueData: 0 ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Separator"; ValueData: 0 ; Flags: uninsdeletekey
@@ -316,10 +326,10 @@ Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "E
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Gangetegn"; ValueData: 0 ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "OutUnits"; ValueData: "" ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Index"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Antalberegninger"; ValueData: 0 ; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AntalBeregninger"; ValueData: 0 ; Flags: createvalueifdoesntexist
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 0 ; Flags: uninsdeletekey
 ;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: TaskAutoStart
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 0 ; Flags: uninsdeletekey
 ;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: Taskcheckforupdates;
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "RibbonPointer"; ValueData: 0 ; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BigFloat"; ValueData: 0 ; Flags: uninsdeletekey
@@ -386,6 +396,11 @@ Type: files; Name: "{code:VStartupFolderAll12}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll14}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll15}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll16}\WordMat.dotm"
+Type: filesandordirs; Name: "{app}\WebViewWrap"
+Type: filesandordirs; Name: "{app}\geogebra-math-apps"
+Type: filesandordirs; Name: "{app}\Maxima*"
+Type: dirifempty; Name: "{app}\WordDocs"
+Type: dirifempty; Name: "{app}"
 ;Type: files; Name: "{code:VUserStartupFolder12}\WordMat2.dotm"
 ;Type: files; Name: "{code:VUserStartupFolder14}\WordMat2.dotm"
 ;Type: files; Name: "{code:VStartupFolderAll12}\WordMat2.dotm"
@@ -578,49 +593,34 @@ begin
     Result:=Office16Folder + 'STARTUP';
 end;
 /////////////////////////////////////////////////////////////////////  custom wizard side til slut der spr om indstillinger 
-var
-  ActionPage: TInputOptionWizardPage;
+//var
+//  ActionPage: TInputOptionWizardPage;
 
-procedure InitializeWizard;
-begin
-  ActionPage := CreateInputOptionPage(wpReady,
-    ExpandConstant('{cm:SettingsLabel}'), ExpandConstant('{cm:SettingsLabel2}'),
-    ExpandConstant('{cm:SettingsLabel3}'),
-    False, False);
-  CheckForUpdate:=1;          
-//  ActionPage.Add(ExpandConstant('{cm:AutoStartCheckbox}'));
-  ActionPage.Add(ExpandConstant('{cm:AutoUpdateCheckbox}'));
- // if AutoStart=0 then
- //   ActionPage.Values[0] := false
- // else
- //   ActionPage.Values[0] := true;
+//procedure InitializeWizard;
+//begin
+//  ActionPage := CreateInputOptionPage(wpReady,
+//    ExpandConstant('{cm:SettingsLabel}'), ExpandConstant('{cm:SettingsLabel2}'),
+//    ExpandConstant('{cm:SettingsLabel3}'),
+//    False, False);
+//  CheckForUpdate:=0;          
+//  ActionPage.Add(ExpandConstant('{cm:AutoUpdateCheckbox}'));
+//
+//  if CheckForUpdate=0 then
+//    ActionPage.Values[0] := false
+//  else
+//    ActionPage.Values[0] := true;
+//end;
 
-  if CheckForUpdate=0 then
-    ActionPage.Values[0] := false
-  else
-    ActionPage.Values[0] := true;
-
-//  ActionPage.Values[2] := False;
-end;
-
-function NextButtonClick(CurPageID: Integer): Boolean;
-begin
-  Result := True;
-  if CurPageID = ActionPage.ID then begin
+//function NextButtonClick(CurPageID: Integer): Boolean;
+//begin
+//  Result := True;
+//  if CurPageID = ActionPage.ID then begin 
 //    if ActionPage.Values[0] then
-//      AutoStart:=1
+//      CheckForUpdate:=1
 //    else
-//      AutoStart:=0;
- 
-    if ActionPage.Values[0] then
-      CheckForUpdate:=1
-    else
-      CheckForUpdate:=0;
-
-//    if ActionPage.Values[2] then
-//      MsgBox('Action 3', mbInformation, MB_OK);
-  end;
-end;
+//      CheckForUpdate:=0;
+//  end;
+//end;
 
 
 /////////////////
@@ -1296,7 +1296,7 @@ begin
 //          MsgBox(GetCmdTail, mbInformation, MB_OK);
 
   AutoStart:=0;
-  CheckForUpdate:=1;
+  CheckForUpdate:=0;
   AntalBeregninger:=0;
 
   ClickToRun:=CheckClickToRun();
@@ -1338,9 +1338,14 @@ begin
     else
       Result := False;
   end
-  else if not (Excel12Installed or Excel14Installed or Excel15Installed or Excel16Installed) then begin
-    MsgBox(ExpandConstant('{cm:NoExcel}'), mbInformation, MB_OK);
-    Result := False;
+  else if not (Excel12Installed or Excel14Installed or Excel15Installed or Excel16Installed) then begin 
+    if MsgBox(ExpandConstant('{cm:NoExcel}'), mbInformation, MB_YESNO) = IDYES then
+      begin
+      Result := True;
+      Excel16Installed:=true;
+      end
+    else
+      Result := False; 
   end
   else if (not IsAdminLoggedOn()) then
      begin
@@ -1398,7 +1403,7 @@ begin
     //            if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
     if AntalBeregninger>0 then
     begin
-//    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
+    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
 //    if IsTaskSelected('AutoStart') then
       RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AutoStart', AutoStart);
 //    if IsTaskSelected('CheckForUpdate') then

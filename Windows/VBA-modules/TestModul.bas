@@ -24,7 +24,7 @@ Sub RunTestSequence()
 '    Application.ScreenUpdating = False
     Dim scrollpos As Double
     
-    On Error GoTo fejl
+    On Error GoTo Fejl
     ErrCount = 0
     TestCount = 0
     visok = True
@@ -331,7 +331,7 @@ ggbtest:
 
     
     GoTo slut
-fejl:
+Fejl:
     MsgBox Err.Description & vbCrLf & vbCrLf & "Error at test no.:" & TestCount + 1, vbOKOnly, "Error during test"
 slut:
     Selection.TypeParagraph
@@ -461,7 +461,7 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
 End Sub
 Sub GetTestString()
     ' placer cursoren i resultat af en beregning, så giver denne sub det udtryk som performtest skal have som resultat
-    Dim Oresul As String, text As String, s As String
+    Dim Oresul As String, Text As String, s As String
     omax.ReadSelection
     Oresul = TrimR(omax.Kommando, vbCr)
     
@@ -473,15 +473,15 @@ Sub GetTestString()
     Selection.TypeText (s)
 
 End Sub
-Function ConvertToVBAString(text As String) As String
+Function ConvertToVBAString(Text As String) As String
     Dim s As String, j As Integer, i As Integer
     s = ""
-    For j = 1 To Len(text)
-        i = AscW(Mid(text, j, 1))
+    For j = 1 To Len(Text)
+        i = AscW(Mid(Text, j, 1))
         If i > 200 Or i = 183 Then
             s = s & """ & VBA.ChrW(" & i & ") & """
         Else
-            s = s & Mid(text, j, 1)
+            s = s & Mid(Text, j, 1)
         End If
     Next
     If Left(s, 4) = """ & " Then
@@ -557,7 +557,7 @@ End Sub
 Sub testGetListItem()
 Dim ea As New ExpressionAnalyser
 
-ea.text = "dette er[ad;sdfs] en test ; hej(a;b{1;2}) ;{a;d} hallo"
+ea.Text = "dette er[ad;sdfs] en test ; hej(a;b{1;2}) ;{a;d} hallo"
 
 MsgBox ea.GetNextListItem()
 MsgBox ea.GetNextListItem()

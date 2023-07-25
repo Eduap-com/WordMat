@@ -13,8 +13,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
-Public Result As String
+Public result As String
 Public variabel As String
 Public FejlMeld As String
 Public Ligning As String
@@ -22,7 +23,7 @@ Public Kommentar As String
 Public Finished As Boolean
 
 Private Sub CommandButton_cancel_Click()
-    Result = "afbryd"
+    result = "afbryd"
     FejlMeld = ""
     Kommentar = ""
     omax.StopNow = True
@@ -44,7 +45,7 @@ Private Sub CommandButton_nsolve_Click()
         Finished = True
         omax.MaximaOutput = Label_nsolve.Caption
     End If
-    Result = "nsolve"
+    result = "nsolve"
     FejlMeld = ""
     Kommentar = Sprog.FoundNumericSolutions
     Me.Hide
@@ -58,7 +59,7 @@ Private Sub CommandButton_numeric_Click()
         omax.MaximaOutput = Label_nsolve.Caption
     End If
 '    omax.StopNow = True
-    Result = "num"
+    result = "num"
     FejlMeld = ""
     Kommentar = ""
     Me.Hide
@@ -70,7 +71,7 @@ Private Sub CommandButton_Omskrevet_Click()
         MaxProc.CloseProcess
         MaxProc.StartMaximaProcess
     End If
-    Result = Sprog.A(180) '"omskriv"
+    result = Sprog.A(180) '"omskriv"
     FejlMeld = ""
     Finished = True
     Kommentar = Sprog.NoNumericSolution
@@ -193,7 +194,7 @@ slut:
 End Sub
 
 Private Sub UserForm_Initialize()
-    Result = ""
+    result = ""
 End Sub
 
 Private Sub SetCaptions()

@@ -50,10 +50,10 @@ CreateConstructionElement
 End Sub
 
 
-Public Sub Save(filnavn As String)
+Public Sub Save(Filnavn As String)
     If Show3D Then CreateEuclidianView3DElement
     CreateKernelElement
-    GeoXMLdom.Save (filnavn)
+    GeoXMLdom.Save (Filnavn)
 End Sub
 
 Sub CreateGuiElement()
@@ -569,9 +569,9 @@ End Sub
 
 'End Sub
 
-Function ConvertToGeogebraSyntaxFile(ByVal text As String, Optional ConvertMaxima As Boolean = True) As String
+Function ConvertToGeogebraSyntaxFile(ByVal Text As String, Optional ConvertMaxima As Boolean = True) As String
 
-   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(text, ConvertMaxima, False)
+   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(Text, ConvertMaxima, False)
 End Function
 
 

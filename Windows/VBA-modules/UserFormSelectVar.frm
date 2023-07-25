@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Public vars As String
 Public DefS As String
@@ -27,7 +28,7 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo fejl
+On Error GoTo Fejl
 Dim Arr As Variant
 Dim i As Integer
     If OptionButton_numonly.Value = True Then
@@ -42,21 +43,21 @@ Dim i As Integer
     MaximaVidNotation = CheckBox_vidnotation.Value
     MaximaCifre = ComboBox_cifre.Value
     If MaximaUnits Then
-        If OutUnits <> TextBox_outunits.text Then
-            OutUnits = TextBox_outunits.text
+        If OutUnits <> TextBox_outunits.Text Then
+            OutUnits = TextBox_outunits.Text
 '            omax.MaximaInputStreng = omax.MaximaInputStreng & "uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
 '            If TextBox_outunits.text <> "" Then omax.MaximaInputStreng = omax.MaximaInputStreng & "setunits(" & omax.ConvertUnits(TextBox_outunits.text) & ")$"
         End If
     End If
     
-    If TextBox_variabel.text = "" Then
+    If TextBox_variabel.Text = "" Then
         SelectedVar = Svars(ListBox_vars.ListIndex)
 '        SelectedVar = ListBox_vars.value
     Else
-        SelectedVar = TextBox_variabel.text
+        SelectedVar = TextBox_variabel.Text
     End If
     
-    TempDefs = TextBox_def.text
+    TempDefs = TextBox_def.Text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
@@ -98,7 +99,7 @@ Dim i As Integer
     End If
     
     GoTo slut
-fejl:
+Fejl:
     SelectedVar = ""
 slut:
     UFSelectVar.Hide
@@ -130,7 +131,7 @@ Dim i As Integer, svar As String
         Label_unitwarning.visible = True
         Label_enheder.visible = True
         TextBox_outunits.visible = True
-        TextBox_outunits.text = OutUnits
+        TextBox_outunits.Text = OutUnits
     Else
         Label_unitwarning.visible = False
         Label_enheder.visible = False
@@ -158,7 +159,7 @@ Dim i As Integer, svar As String
 
     SelectedVar = ""
     ListBox_vars.Clear
-    TextBox_variabel.text = ""
+    TextBox_variabel.Text = ""
     Svars = Split(vars, ";")
     
     ' definitioner vises
@@ -179,7 +180,7 @@ Dim i As Integer, svar As String
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
             ListBox_vars.AddItem (svar)
-            If UBound(Svars) > 0 Then TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac               ' midlertidige definitioner
+            If UBound(Svars) > 0 Then TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac               ' midlertidige definitioner
         End If
     Next
     If ListBox_vars.ListCount > 0 Then

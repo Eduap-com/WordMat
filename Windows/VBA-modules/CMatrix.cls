@@ -16,18 +16,18 @@ Private Sub Class_Initialize()
     Tabel = Array(0, 0)
 End Sub
 
-Public Property Get Element(r As Integer, c As Integer) As Variant
-On Error GoTo fejl
+Public Property Get Element(r As Long, c As Long) As Variant
+On Error GoTo Fejl
 If c > Columns Or r > Rows Then GoTo slut
 
 Element = Tabel(r, c)
 
 GoTo slut
-fejl:
+Fejl:
 slut:
 End Property
 
-Public Property Let Element(r As Integer, c As Integer, nval As Variant)
+Public Property Let Element(r As Long, c As Long, nval As Variant)
     If r > Rows Then
         Rows = r
     End If

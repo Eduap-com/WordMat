@@ -39,7 +39,7 @@ Sub RefreshRibbon()
         WoMatRibbon.Invalidate
     End If
 #Else
-    On Error GoTo fejl
+    On Error GoTo Fejl
    Dim lngRibPtr As LongPtr
    Dim lngRibPtrBackup As LongPtr
    Dim objRibbon As Object
@@ -64,7 +64,7 @@ Sub RefreshRibbon()
     End If
 
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(394), vbOKOnly, Sprog.Error
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
@@ -73,7 +73,7 @@ slut:
 End Sub
 ' events der fyres når der trykkes på ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
-    On Error GoTo fejl
+    On Error GoTo Fejl
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -100,7 +100,7 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
 #End If
     
     GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(395), vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -186,7 +186,7 @@ Sub Rib_FShalv(control As IRibbonControl)
 #If Mac Then
     insertribformel "", "T_(1/2) =ln" & VBA.ChrW(8289) & "(1/2)/(ln" & VBA.ChrW(8289) & "(a))=ln" & VBA.ChrW(8289) & "(1/2)/k"
 #Else
-    insertribformel "", "T__=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
+    insertribformel "", "T_" & ChrW(189) & "=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
 #End If
 End Sub
 
@@ -246,6 +246,11 @@ End Sub
 Sub Rib_FSbinspred(control As IRibbonControl)
     insertribformel "", VBA.ChrW(963) & "=" & VBA.ChrW(&H221A) & "(n" & VBA.ChrW(183) & "p" & VBA.ChrW(183) & "(1-p))"
 End Sub
+
+Sub Rib_FSbinusik(control As IRibbonControl)
+    insertribformel "", "p" & VBA.ChrW(770) & "±" & VBA.ChrW(8730) & "((p" & VBA.ChrW(770) & "" & VBA.ChrW(183) & "(1-p" & VBA.ChrW(770) & "))/n)"
+End Sub
+
 'Callback for sandnorm1 onAction
 Sub Rib_FSnormfrekvens(control As IRibbonControl)
     insertribformel "", "f(x)" & VBA.ChrW(8797) & "1/(" & VBA.ChrW(&H221A) & "(2" & VBA.ChrW(960) & ")" & VBA.ChrW(183) & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((x-" & VBA.ChrW(956) & ")/" & VBA.ChrW(963) & ")^2)"
@@ -281,7 +286,11 @@ Sub Rib_FSplanparamlinje(control As IRibbonControl) '
 End Sub
 
 Sub Rib_FSvektorvinkel(control As IRibbonControl)
-    insertribformel "", "cos(v)=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "||b" & VBA.ChrW(8407) & "|)"
+   If CASengine = 0 Then
+    insertribformel "", "cos(v)=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
+   Else
+    insertribformel "", "cos(v)=(dot(a" & VBA.ChrW(8407) & ";b" & VBA.ChrW(8407) & "))/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
+   End If
 End Sub
 Sub Rib_FSvektorproj(control As IRibbonControl)
     insertribformel "", "b" & VBA.ChrW(8407) & "_a=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|^2) a" & VBA.ChrW(8407)
@@ -320,17 +329,17 @@ End Sub
 
 'Callback for rumligningplan2 onAction
 Sub Rib_FSrumligningplan2(control As IRibbonControl)
-    insertribformel "", "aá(x-x_0)+bá(y-y_0)+cá(z-z_0)=0"
+    insertribformel "", "a" & ChrW(183) & "(x-x_0)+b" & ChrW(183) & "(y-y_0)+c" & ChrW(183) & "(z-z_0)=0"
 End Sub
 
 'Callback for rumafstandpunktplan onAction
 Sub Rib_FSrumafstandpunktplan(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & "á(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & ChrW(183) & "(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
 End Sub
 
 'Callback for rumafstandpunktplan2 onAction
 Sub Rib_FSrumafstandpunktplan2(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|aáx_1+báy_1+cáz_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
+    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|a" & ChrW(183) & "x_1+b" & ChrW(183) & "y_1+c" & ChrW(183) & "z_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
 End Sub
 
 'Callback for kugleligning onAction
@@ -596,7 +605,7 @@ Sub Rib_insertgeogebra(control As IRibbonControl)
 End Sub
 'Callback for ButtonStatistik onAction
 Sub Rib_Statistik(control As IRibbonControl)
-    InsertOpenExcel filnavn:="statistik.xltm", WorkBookName:=Sprog.A(563)
+    InsertOpenExcel Filnavn:="statistik.xltm", WorkBookName:=Sprog.A(563)
 End Sub
 Sub Rib_plot3D(control As IRibbonControl)
 '#If Mac Then
@@ -673,7 +682,7 @@ Sub Rib_goodnessoffit(control As IRibbonControl)
 End Sub
 'Callback for ButtonSimulering onAction
 Sub Rib_simulering(control As IRibbonControl)
-    InsertOpenExcel filnavn:="Simulering.xltm", WorkBookName:=Sprog.A(599)
+    InsertOpenExcel Filnavn:="Simulering.xltm", WorkBookName:=Sprog.A(599)
 End Sub
 'Callback for Buttonbinomialfordeling onAction
 Sub Rib_binomialfordeling(control As IRibbonControl)
@@ -688,7 +697,7 @@ Sub Rib_chi2fordelinggraf(control As IRibbonControl)
     Chi2Graf
 End Sub
 Sub Rib_tfordelinggraf(control As IRibbonControl)
-    InsertOpenExcel filnavn:="studenttFordeling.xltm", WorkBookName:="t" 'Sprog.A(483)
+    InsertOpenExcel Filnavn:="studenttFordeling.xltm", WorkBookName:="t" 'Sprog.A(483)
 End Sub
 'Callback for ButtonGrupper onAction
 Sub Rib_Grupper(control As IRibbonControl)
@@ -697,14 +706,14 @@ End Sub
 
 'Callback for ButtonNyLig onAction
 Sub Rib_nylign(control As IRibbonControl)
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     Application.ScreenUpdating = False
     Selection.OMaths.Add Range:=Selection.Range
 '    Selection.OMaths(1).BuildUp
     
     GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -834,12 +843,12 @@ Sub Rib_HelpMaxima(control As IRibbonControl)
 #Else
 Dim ReturnValue
 Dim sti As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
     OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\html\index.html"
 '    sti = "cmd /C """ & GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\chm\maxima.chm"""
 '    ReturnValue = Shell(sti, vbHide)
 GoTo slut
-fejl:
+Fejl:
     OpenLink "http://maxima.sourceforge.net/docs/manual/en/maxima.html"
 slut:
 #End If
@@ -966,6 +975,9 @@ Sub Rib_FSprob4(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_FSprob5(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(459)
+End Sub
+Sub Rib_FSprob5a(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(687)
 End Sub
 Sub Rib_FSprob6(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(460)

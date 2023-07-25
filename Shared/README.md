@@ -29,6 +29,7 @@ Files used to test WordMat before a new release
 Javascript bundle to run GeoGebra in a browser
 Version 5-0-694 used win v. 1.24
 Version 5-0-723 used win v. 1.25
+Version 5-0-791 used win v. 1.26
 
 Get new version here:
 https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding
