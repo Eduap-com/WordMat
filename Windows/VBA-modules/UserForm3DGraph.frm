@@ -324,8 +324,8 @@ Dim pary As String
 Dim parz As String
 Dim xmin As String
 Dim xmax As String
-Dim ymin As String
-Dim ymax As String
+Dim Ymin As String
+Dim Ymax As String
 Dim zmin As String
 Dim zmax As String
 Dim tmin As String
@@ -347,8 +347,8 @@ palindex = 0
 
 xmin = TextBox_xmin.Text
 xmax = TextBox_xmax.Text
-ymin = TextBox_ymin.Text
-ymax = TextBox_ymax.Text
+Ymin = TextBox_ymin.Text
+Ymax = TextBox_ymax.Text
 zmin = TextBox_zmin.Text
 zmax = TextBox_zmax.Text
 
@@ -358,7 +358,7 @@ If TextBox_forskrift1.Text <> "" Then
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & "),"
     antalobj = antalobj + 1
 End If
 If TextBox_forskrift2.Text <> "" Then
@@ -366,7 +366,7 @@ If TextBox_forskrift2.Text <> "" Then
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & "),"
     antalobj = antalobj + 1
 End If
 If TextBox_forskrift3.Text <> "" Then
@@ -374,7 +374,7 @@ If TextBox_forskrift3.Text <> "" Then
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & "),"
     antalobj = antalobj + 1
 End If
 
@@ -387,7 +387,7 @@ If TextBox_ligning1.Text <> "" Then
     If OptionButton_kunflader.Value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & ",z," & zmin & "," & zmax & "),"
     antalobj = antalobj + 1
 End If
 If TextBox_ligning2.Text <> "" Then
@@ -398,7 +398,7 @@ If TextBox_ligning2.Text <> "" Then
     If OptionButton_kunflader.Value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & ",z," & zmin & "," & zmax & "),"
     antalobj = antalobj + 1
 End If
 If TextBox_ligning3.Text <> "" Then
@@ -409,7 +409,7 @@ If TextBox_ligning3.Text <> "" Then
     If OptionButton_kunflader.Value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & ",z," & zmin & "," & zmax & "),"
     antalobj = antalobj + 1
 End If
 

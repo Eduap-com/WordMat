@@ -2351,7 +2351,7 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
 
 slut:
 End Sub
-Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As String, xmax As String, ymin As String, ymax As String, xaksetitel As String, yaksetitel As String, Optional SaveFile As Boolean = False)
+Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String, Optional SaveFile As Boolean = False)
 ' forskrifter adskilt ad komma
 '    text = "load(draw)$draw2d("
     Dim Text As String
@@ -2476,7 +2476,7 @@ Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As
 #End If
 
 End Sub
-Sub PlotDF(lign As String, IndepVar As String, DepVar As String, xmin As String, xmax As String, ymin As String, ymax As String, xtrajec As String, ytrajec As String, parametre As String)
+Sub PlotDF(lign As String, IndepVar As String, DepVar As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xtrajec As String, ytrajec As String, parametre As String)
 'plot af kurveintegraler
 
     Dim Text As String
@@ -2488,8 +2488,8 @@ Sub PlotDF(lign As String, IndepVar As String, DepVar As String, xmin As String,
     If xmin <> "" And xmax <> "" Then
         Text = Text & ",[" & IndepVar & "," & DepVar & "],[" & IndepVar & "," & xmin & "," & xmax & "]"
     End If
-    If ymin <> "" And ymax <> "" Then
-        Text = Text & ",[" & DepVar & "," & ymin & "," & ymax & "]"
+    If Ymin <> "" And Ymax <> "" Then
+        Text = Text & ",[" & DepVar & "," & Ymin & "," & Ymax & "]"
     End If
     If Len(xtrajec) > 0 And Len(ytrajec) > 0 Then
         Text = Text & ",[trajectory_at," & xtrajec & "," & ytrajec & "]"
@@ -2512,7 +2512,7 @@ Sub PlotDF(lign As String, IndepVar As String, DepVar As String, xmin As String,
         Call RunMaxima(-500)
 #End If
 End Sub
-Sub Plot2Dold(forskrifter As String, xmin As String, xmax As String, ymin As String, ymax As String, xaksetitel As String, yaksetitel As String)
+Sub Plot2Dold(forskrifter As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String)
 ' forskrifter adskilt ad komma
     Dim Text As String
     Text = "plot2d(["
@@ -2539,7 +2539,7 @@ Sub Plot2Dold(forskrifter As String, xmin As String, xmax As String, ymin As Str
     Call RunMaxima
 
 End Sub
-Sub Plot3D(forskrifter As String, xvar As String, xmin As String, xmax As String, yvar As String, ymin As String, ymax As String, xaksetitel As String, yaksetitel As String, kunlinjer As Boolean, gridlines As Integer)
+Sub Plot3D(forskrifter As String, xvar As String, xmin As String, xmax As String, yvar As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String, kunlinjer As Boolean, gridlines As Integer)
 ' forskrifter adskilt ad komma
     Dim Text As String
     Dim tid As Integer
@@ -2549,7 +2549,7 @@ Sub Plot3D(forskrifter As String, xvar As String, xmin As String, xmax As String
     Text = Text & forskrifter
 
     Text = Text & ",[" & xvar & "," & xmin & "," & xmax & "]"
-    Text = Text & ",[" & yvar & "," & ymin & "," & ymax & "]"
+    Text = Text & ",[" & yvar & "," & Ymin & "," & Ymax & "]"
 
     Text = Text & "]"
 

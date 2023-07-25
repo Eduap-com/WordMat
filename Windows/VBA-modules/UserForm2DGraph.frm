@@ -885,8 +885,8 @@ On Error GoTo Fejl
 Dim grafobj As String
 Dim xmin As String
 Dim xmax As String
-Dim ymin As String
-Dim ymax As String
+Dim Ymin As String
+Dim Ymax As String
 Dim ymin2 As String
 Dim ymax2 As String
 Dim xming As String
@@ -905,7 +905,7 @@ Dim pary As String
 Dim tmin As String
 Dim tmax As String
 Dim x As String
-Dim Y As String
+Dim y As String
 
 colindex = 0
 xming = ConvertNumberToMaxima(TextBox_xmin.Text)
@@ -1260,8 +1260,8 @@ If TextBox_markerpunkter.Text <> "" Then
         arr2 = Split(Arr(i), ",")
         If UBound(arr2) = 1 Then
             x = arr2(0)
-            Y = arr2(1)
-            punkttekst = punkttekst & "points([[" & x & ",0],[" & x & "," & Y & "],[0," & Y & "]]),"
+            y = arr2(1)
+            punkttekst = punkttekst & "points([[" & x & ",0],[" & x & "," & y & "],[0," & y & "]]),"
         End If
         End If
     Next
@@ -1929,9 +1929,9 @@ Function ConvertDegreeToRad(Text As String, trigfunc As String) As String
 
 End Function
 
-Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal Y As Single)
+Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     gemx = x
-    gemy = Y
+    gemy = y
     If Len(etikettext) > 0 Then
         If Len(TextBox_labels.Text) > 0 Then
         TextBox_labels.Text = TextBox_labels.Text & VbCrLfMac
@@ -1939,7 +1939,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_labels.Text = TextBox_labels.Text & etikettext & ";" & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_labels.Text = TextBox_labels.Text & etikettext & ";" & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
         etikettext = ""
         OpdaterGraf
         Me.Repaint
@@ -1952,7 +1952,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_punkter2.Text = TextBox_punkter2.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_punkter2.Text = TextBox_punkter2.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
         OpdaterGraf
         Me.Repaint
         End If
@@ -1963,7 +1963,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
         nytmarkerpunkt = False
         OpdaterGraf
         Me.Repaint
@@ -1977,7 +1977,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
     End If
 End Sub
 
-Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal Y As Single)
+Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 On Error Resume Next
 'image1.Picture.Render(image1.Picture.Handle,0,0,600,600,image1.Picture.Width,image1.Picture.Height
 'hDC, 0, 0, ScaleWidth, ScaleHeight, 0, p.Height, p.Width, -p.Height, ByVal 0
@@ -1985,15 +1985,15 @@ On Error Resume Next
     Label_zoom.Left = gemx + Image1.Left
     Label_zoom.top = gemy + Image1.top
     Label_zoom.Width = x - gemx
-    Label_zoom.Height = Y - gemy
+    Label_zoom.Height = y - gemy
     End If
 End Sub
 
-Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal Y As Single)
+Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 Dim xmin As Single
 Dim xmax As Single
-Dim ymin As Single
-Dim ymax As Single
+Dim Ymin As Single
+Dim Ymax As Single
 Dim Temp As Single
 Dim s As String
 
@@ -2002,14 +2002,14 @@ If Abs(x - gemx) < 5 Then GoTo slut
 
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
-ymin = ConvertStringToNumber(TextBox_ymin.Text)
-ymax = ConvertStringToNumber(TextBox_ymax.Text)
+Ymin = ConvertStringToNumber(TextBox_ymin.Text)
+Ymax = ConvertStringToNumber(TextBox_ymax.Text)
 
 s = ConvertPixelToCoordX(gemx)
 TextBox_xmax.Text = ConvertPixelToCoordX(x)
 TextBox_xmin.Text = s
 If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
-    s = ConvertPixelToCoordY(Y)
+    s = ConvertPixelToCoordY(y)
     TextBox_ymax.Text = ConvertPixelToCoordY(gemy)
     TextBox_ymin.Text = s
 End If
@@ -2021,8 +2021,8 @@ End Sub
 Private Sub Image1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 Dim xmin As Single
 Dim xmax As Single
-Dim ymin As Single
-Dim ymax As Single
+Dim Ymin As Single
+Dim Ymax As Single
 Dim cfakt As Single
 Dim dx As Single, dy As Single
 Dim midt As Single
@@ -2033,10 +2033,10 @@ Label_zoom.visible = False
 
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
-ymin = ConvertStringToNumber(TextBox_ymin.Text)
-ymax = ConvertStringToNumber(TextBox_ymax.Text)
+Ymin = ConvertStringToNumber(TextBox_ymin.Text)
+Ymax = ConvertStringToNumber(TextBox_ymax.Text)
 dx = (xmax - xmin) * 0.3
-dy = (ymax - ymin) * 0.3
+dy = (Ymax - Ymin) * 0.3
 nyy = ConvertPixelToCoordY(gemy)
 'MsgBox dy, vbOKOnly, ""
 'cfakt = (xmax - xmin) / (Image1.Width * 0.85)
@@ -2069,32 +2069,32 @@ x = x - Image1.Width * 0.06
 ConvertPixelToCoordX = xmin + cfakt * x
 'MsgBox ConvertPixelToCoordX
 End Function
-Function ConvertPixelToCoordY(Y As Single) As Single
-Dim ymin As Single, ymax As Single, cfakt As Single
-ymin = ConvertStringToNumber(TextBox_ymin.Text)
-ymax = ConvertStringToNumber(TextBox_ymax.Text)
-cfakt = (ymax - ymin) / (Image1.Height * 0.9)
-Y = Image1.Height - Y
-Y = Y - Image1.Height * 0.08
-ConvertPixelToCoordY = ymin + cfakt * Y
+Function ConvertPixelToCoordY(y As Single) As Single
+Dim Ymin As Single, Ymax As Single, cfakt As Single
+Ymin = ConvertStringToNumber(TextBox_ymin.Text)
+Ymax = ConvertStringToNumber(TextBox_ymax.Text)
+cfakt = (Ymax - Ymin) / (Image1.Height * 0.9)
+y = Image1.Height - y
+y = y - Image1.Height * 0.08
+ConvertPixelToCoordY = Ymin + cfakt * y
 End Function
 Private Sub CommandButton_zoom_Click()
 Dim dx As Single, dy As Single
 Dim midtx As Single, midty As Single
 Dim xmin As Single
 Dim xmax As Single
-Dim ymin As Single
-Dim ymax As Single
+Dim Ymin As Single
+Dim Ymax As Single
 On Error GoTo Fejl
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
-ymin = ConvertStringToNumber(TextBox_ymin.Text)
-ymax = ConvertStringToNumber(TextBox_ymax.Text)
+Ymin = ConvertStringToNumber(TextBox_ymin.Text)
+Ymax = ConvertStringToNumber(TextBox_ymax.Text)
 
 midtx = (xmax + xmin) / 2
-midty = (ymax + ymin) / 2
+midty = (Ymax + Ymin) / 2
 dx = (xmax - xmin) * 0.3
-dy = (ymax - ymin) * 0.3
+dy = (Ymax - Ymin) * 0.3
 
 TextBox_xmin.Text = betcif(midtx - dx, 5, False)
 TextBox_xmax.Text = betcif(midtx + dx, 5, False)
@@ -2118,18 +2118,18 @@ Dim dx As Single, dy As Single
 Dim midtx As Single, midty As Single
 Dim xmin As Single
 Dim xmax As Single
-Dim ymin As Single
-Dim ymax As Single
+Dim Ymin As Single
+Dim Ymax As Single
 On Error GoTo Fejl
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
-ymin = ConvertStringToNumber(TextBox_ymin.Text)
-ymax = ConvertStringToNumber(TextBox_ymax.Text)
+Ymin = ConvertStringToNumber(TextBox_ymin.Text)
+Ymax = ConvertStringToNumber(TextBox_ymax.Text)
 
 midtx = (xmax + xmin) / 2
-midty = (ymax + ymin) / 2
+midty = (Ymax + Ymin) / 2
 dx = (xmax - xmin) * 1
-dy = (ymax - ymin) * 1
+dy = (Ymax - Ymin) * 1
 
 TextBox_xmin.Text = betcif(midtx - dx, 5, False)
 TextBox_xmax.Text = betcif(midtx + dx, 5, False)

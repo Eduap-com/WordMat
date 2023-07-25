@@ -744,7 +744,7 @@ Sub InsertTriangle(r As Range, ByVal vA As Double, ByVal sb As Double, ByVal sc 
 Dim norm As Double
 Dim maxs As Double
 Dim xmin As Double
-Dim ymax As Double
+Dim Ymax As Double
 Dim nsa As Double
 Dim nsb As Double
 Dim nsc As Double
@@ -889,9 +889,9 @@ End Sub
 '    Dim lbl As Shape
 '    Set lbl = ActiveDocument.Shapes.AddLabel(msoTextOrientationHorizontal, CSng(x), CSng(Y), 8, 14, Anch)
 '#Else
-    Function AddLabel(Text As String, x As Double, Y As Double, s As Shape) As Shape
+    Function AddLabel(Text As String, x As Double, y As Double, s As Shape) As Shape
     Dim lbl As Shape
-    Set lbl = s.CanvasItems.AddLabel(msoTextOrientationHorizontal, CSng(x), CSng(Y), 8, 14)
+    Set lbl = s.CanvasItems.AddLabel(msoTextOrientationHorizontal, CSng(x), CSng(y), 8, 14)
     lbl.TextFrame.AutoSize = msoTrue
 '#End If
 '    lbl.Height = 18

@@ -224,9 +224,9 @@ slut:
     
 End Sub
 
-Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal Y As Single)
+Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     gemx = x
-    gemy = Y
+    gemy = y
     Label_zoom.Left = gemx + Image1.Left
     Label_zoom.top = gemy + Image1.top
     Label_zoom.Width = 1
@@ -234,7 +234,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
     Label_zoom.visible = True
 End Sub
 
-Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal Y As Single)
+Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 On Error Resume Next
 'image1.Picture.Render(image1.Picture.Handle,0,0,600,600,image1.Picture.Width,image1.Picture.Height
 'hDC, 0, 0, ScaleWidth, ScaleHeight, 0, p.Height, p.Width, -p.Height, ByVal 0
@@ -242,11 +242,11 @@ On Error Resume Next
     Label_zoom.Left = gemx + Image1.Left
     Label_zoom.top = gemy + Image1.top
     Label_zoom.Width = x - gemx
-    Label_zoom.Height = Y - gemy
+    Label_zoom.Height = y - gemy
     End If
 End Sub
 
-Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal Y As Single)
+Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 Dim xmin As Single
 Dim xmax As Single
 Dim cfakt As Single

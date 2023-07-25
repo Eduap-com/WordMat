@@ -23,6 +23,12 @@ Public xlwb As Object
 'Public xlwb As Excel.Workbook
 
 
+Private Sub CheckBox_autostep_Click()
+   If CheckBox_autostep.Value Then
+      UpdateStep
+   End If
+End Sub
+
 Private Sub CommandButton_cancel_Click()
     luk = True
     On Error Resume Next
@@ -35,13 +41,14 @@ End Sub
 
 Private Sub CommandButton_geogebra_Click()
     Dim s As String, i As Long, xl As String, yl As String, j As Long
-    
-    
-    
-'    If Not SolveDE Then ' fjernet v.1.26 Det giver ikke mening
-'        MsgBox Err.Description, vbOKOnly, "Error calculating points"
-'        Exit Sub
-'    End If
+    Dim y As Double, Ymax As Double, Ymin As Double
+    Ymax = -10000000
+    Ymin = 10000000
+    Erase PointArr
+    If Not SolveDE Then ' først beregnes punkter med Maxima
+        MsgBox Err.Description, vbOKOnly, "Error calculating points"
+        Exit Sub
+    End If
 
 '    s = "{"
 '    For i = 0 To UBound(PointArr)
@@ -56,13 +63,29 @@ Private Sub CommandButton_geogebra_Click()
     For j = 1 To UBound(PointArr, 2)
         yl = ""
         For i = 0 To UBound(PointArr)
-            yl = yl & Trim(Replace(Replace(PointArr(i, j), ",", "."), ChrW(183), "*")) & ","
+            y = val(Trim(Replace(Replace(PointArr(i, j), ",", "."), ChrW(183), "*")))
+            If y > Ymax Then
+               Ymax = y
+            End If
+            If y < Ymin Then
+               Ymin = y
+            End If
+            yl = yl & Replace(y, ",", ".") & ","
         Next
         yl = Left(yl, Len(yl) - 1)
         s = s & "LineGraph({" & xl & "},{" & yl & "});"
     Next
     s = Left(s, Len(s) - 1)
-    If Len(xl) > 1 Then
+    If Len(xl) > 9900 Then
+        Label_wait.Caption = "Too many points for GeoGebra. Decrease no of. steps."
+        MsgBox "Too many points for GeoGebra. Decrease no of. steps.", vbOKOnly, "Error"
+    ElseIf Len(xl) > 1 Then
+      If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
+         s = s & ";ZoomIn(" & Replace(TextBox_xmin.Text, ",", ".") & "," & Replace(TextBox_ymin.Text, ",", ".") & "," & Replace(TextBox_xmax.Text, ",", ".") & "," & Replace(TextBox_ymax.Text, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
+      Else
+         If Ymin > 0 And (Ymax - Ymin) > Ymin Then Ymin = 0
+         s = s & ";ZoomIn(" & Replace(TextBox_xmin.Text, ",", ".") & "," & Replace(Ymin, ",", ".") & "," & Replace(TextBox_xmax.Text, ",", ".") & "," & Replace(Ymax, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
+      End If
         OpenGeoGebraWeb s, "", False, False
         Label_wait.Caption = "GeoGebra opened"
     Else
@@ -241,6 +264,13 @@ Private Sub CommandButton_toExcel_Click()
 '    Dim ws As excel.Worksheet
     Dim ws As Object 'excel.Worksheet
     Dim i As Long, j As Integer
+    
+    Erase PointArr
+    If Not SolveDE Then ' først beregnes punkter med Maxima
+        MsgBox Err.Description, vbOKOnly, "Error calculating points"
+        Exit Sub
+    End If
+    
     On Error Resume Next
     InsertType = 4
 If XLapp Is Nothing Then
@@ -394,7 +424,7 @@ Private Sub UpdateStep()
 Dim st As Double
    Validate
    If CheckBox_autostep.Value And IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) Then
-      st = (TextBox_xmax.Text - TextBox_xmin.Text) / 500
+      st = (StrToDbl(TextBox_xmax.Text) - StrToDbl(TextBox_xmin.Text)) / 500
       TextBox_step.Text = st
    End If
 End Sub
@@ -408,13 +438,20 @@ On Error GoTo slut
    If Not IsNumeric(TextBox_xmax.Text) Then Label_validate.Caption = "xmax er ikke et tal"
    If Not IsNumeric(TextBox_step.Text) Then Label_validate.Caption = "Skridtlængde er ikke et tal"
    If IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) And IsNumeric(TextBox_step.Text) Then
-      st = Round((TextBox_xmax.Text - TextBox_xmin.Text) / TextBox_step.Text, 0)
+      st = Round((StrToDbl(TextBox_xmax.Text) - StrToDbl(TextBox_xmin.Text)) / StrToDbl(TextBox_step.Text), 0)
       If st > 500 Then Label_validate.Caption = "Antal skridt er " & st & ". Det vil formentlig ikke virke med GeoGebra med så mange skridt."
    End If
 slut:
    If Label_validate.Caption <> vbNullString Then Label_validate.visible = True
 End Sub
-
+Function StrToDbl(s As String) As Double
+   If IsNumeric(s) Then
+      s = Replace(s, ",", ".")
+      StrToDbl = val(s)
+   Else
+      StrToDbl = Null
+   End If
+End Function
 Private Sub UserForm_Activate()
 On Error Resume Next
 InsertType = 0
@@ -539,11 +576,15 @@ Function SolveDE() As Boolean
             PointArr(i, j) = Arr(j)
         Next
         i = i + 1
-    Loop While ea.Pos < ea.Length - 1 And i < 1000
+    Loop While ea.Pos < ea.Length - 1 And i < 10000
 SolveDE = True
 GoTo slut
 Fejl:
+   If i >= Npoints Then
+    SolveDE = True
+   Else
     SolveDE = False
+    End If
 slut:
 End Function
 

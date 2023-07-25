@@ -77,13 +77,13 @@ End Function
 'End Function
 
 
-Function MacDrawDims(Optional x As Long = 0, Optional Y As Long = 0) As String
+Function MacDrawDims(Optional x As Long = 0, Optional y As Long = 0) As String
 Dim xdrawdim As Long, ydrawdim As Long
     If x > 0 Then
         xdrawdim = x
     End If
-    If Y > 0 Then
-        ydrawdim = Y
+    If y > 0 Then
+        ydrawdim = y
     End If
     
     Dim dx As Long
