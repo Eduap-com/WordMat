@@ -379,7 +379,7 @@ Function StopNow() As Boolean
     StopNow = False
 End Function
 Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional var As String, Optional Instruk As String)
-    Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
+    Dim s As String, TypeText As String, Oresul As String, arr() As String, ResultOK As Boolean, i As Integer
     If TestType = 1 Then
         TypeText = "Calculate"
     ElseIf TestType = 2 Then
@@ -409,9 +409,9 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
     End If
     
     ResultOK = False
-    Arr = Split(resul, "@")
-    For i = 0 To UBound(Arr)
-        If Trim(Arr(i)) = Trim(Oresul) Then
+    arr = Split(resul, "@")
+    For i = 0 To UBound(arr)
+        If Trim(arr(i)) = Trim(Oresul) Then
             ResultOK = True
             Exit For
         End If

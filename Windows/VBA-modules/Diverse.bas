@@ -735,7 +735,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     Dim posca As Integer
     Dim poseller As Integer
     Dim Pos As Integer
-    Dim Arr(20) As String
+    Dim arr(20) As String
     Dim i As Integer
     
     Do ' gå tilbage til nærmeste ligmed
@@ -755,11 +755,11 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     End If
     If Pos = Len(Text) Then Pos = 0
     If Pos > 0 Then
-        Arr(i) = Left(Text, Pos - 1)
+        arr(i) = Left(Text, Pos - 1)
         Text = right(Text, Len(Text) - Pos)
         i = i + 1
     Else
-        Arr(i) = Text
+        arr(i) = Text
     End If
     Loop While Pos > 0
     
@@ -768,7 +768,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
         KlipTilLigmed = Text
         ResIndex = -1
     Else
-        KlipTilLigmed = Arr(i - indeks)
+        KlipTilLigmed = arr(i - indeks)
     End If
     
     ' fjern retur og mellemrum mm.
@@ -1105,10 +1105,10 @@ Sub ToggleNum()
 End Sub
 Sub CheckForUpdateOld()
     Dim result As VbMsgBoxResult
-    On Error GoTo Fejl
+'    On Error GoTo Fejl
 #If Mac Then
-    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com/WordMat/Download.aspx"
-    OpenLink "http://www.eduap.com/WordMat/Download.aspx"
+    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
+    OpenLink "https://www.eduap.com/da/download-wordmat/"
 #Else
     Dim nyversion As String, News As String
     PrepareMaxima
@@ -1124,7 +1124,7 @@ Sub CheckForUpdateOld()
         News = MaxProc.GetVersionNews()
         result = MsgBox(Sprog.A(21) & News & vbCrLf & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
         If result = vbYes Then
-            OpenLink "http://eduap.com/da/download-wordmat/" ' "http://www.eduap.com/wordmat/download.aspx"
+            OpenLink "https://www.eduap.com/da/download-wordmat/"
         End If
     End If
 
@@ -1152,7 +1152,7 @@ Sub CheckForUpdateF(Optional Silent As Boolean = False)
 '    OpenLink "http://eduap.com/download-wordmat/"
 '#Else
     Dim result As VbMsgBoxResult
-    MapsClient.BaseUrl = "http://www.eduap.com/wordmat-version-history/"
+    MapsClient.BaseUrl = "https://www.eduap.com/wordmat-version-history/"
 
     ' Use GetJSON helper to execute simple request and work with response
     Dim Resource As String
@@ -1208,7 +1208,7 @@ Sub CheckForUpdateF(Optional Silent As Boolean = False)
         Else
             result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
             If result = vbYes Then
-                OpenLink "http://eduap.com/download-wordmat/"
+                OpenLink "https://www.eduap.com/da/download-wordmat/"
             End If
         End If
     Else
@@ -1229,12 +1229,13 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     Dim NewVersion As String, p As Integer, p2 As Integer, News As String, s As String, v As String
     Dim Filnavn As String, FilDir As String, FilPath As String, result As VbMsgBoxResult
     
+   
     If GetInternetConnectedState = False Then
         If Not RunSilent Then MsgBox "Ingen internetforbindelse", vbOKOnly, "Fejl"
         Exit Sub
     End If
    
-    s = GetHTML("http://www.eduap.com/wordmat-version-history/")
+    s = GetHTML("https://www.eduap.com/wordmat-version-history/")
     If Len(s) = 0 Then
         If Not RunSilent Then
             MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
@@ -1272,7 +1273,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         '      If UFreminder.Visible = True Then UFreminder.Top = 100
         result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
         If result = vbYes Then
-            OpenLink "http://eduap.com/download-wordmat/"
+            OpenLink "https://eduap.com/da/download-wordmat/"
         End If
     Else
         If Not RunSilent Then
@@ -1284,7 +1285,9 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
 Fejl:
     '   MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure CheckForUpdate, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     If Not RunSilent Then
-        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
+      MsgBox "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com"
+      OpenLink "https://www.eduap.com/da/download-wordmat/"
+'        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     End If
 slut:
 
@@ -1928,7 +1931,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo Fejl
     Application.ScreenUpdating = False
-    Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, Arr As Variant
+    Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox Sprog.A(345), vbOKOnly, Sprog.Error
@@ -1948,12 +1951,12 @@ On Error GoTo Fejl
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(Sprog.A(346), Sprog.A(6), f.result & "." & f2.result)
-            Arr = Split(n, ".")
-            If UBound(Arr) > 0 Then
-                SetFieldNo f, CStr(Arr(0))
-                SetFieldNo f2, CStr(Arr(1))
+            arr = Split(n, ".")
+            If UBound(arr) > 0 Then
+                SetFieldNo f, CStr(arr(0))
+                SetFieldNo f2, CStr(arr(1))
             Else
-                SetFieldNo f, CStr(Arr(0))
+                SetFieldNo f, CStr(arr(0))
             End If
         Else
             n = InputBox(Sprog.A(346), Sprog.A(6), f.result)

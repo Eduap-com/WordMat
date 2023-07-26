@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDeSolveNumeric 
    Caption         =   "Løs differentialligning(er) numerisk"
-   ClientHeight    =   7455
+   ClientHeight    =   7935
    ClientLeft      =   45
    ClientTop       =   150
-   ClientWidth     =   16050
+   ClientWidth     =   16725
    OleObjectBlob   =   "UserFormDeSolveNumeric.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -29,6 +29,21 @@ Private Sub CheckBox_autostep_Click()
    End If
 End Sub
 
+Private Sub ComboBox_graphapp_Change()
+   If ComboBox_graphapp.ListIndex > 0 Then
+      CommandButton_insertgraph.visible = False
+      CheckBox_pointsjoined.visible = False
+      CheckBox_visforklaring.visible = False
+      Me.Width = 345
+   Else
+      CommandButton_insertgraph.visible = True
+      CheckBox_pointsjoined.visible = True
+      CheckBox_visforklaring.visible = True
+      Me.Width = 848
+   End If
+   Validate
+End Sub
+
 Private Sub CommandButton_cancel_Click()
     luk = True
     On Error Resume Next
@@ -39,7 +54,7 @@ Private Sub CommandButton_cancel_Click()
     Unload Me
 End Sub
 
-Private Sub CommandButton_geogebra_Click()
+Private Sub GeoGebraPlot()
     Dim s As String, i As Long, xl As String, yl As String, j As Long
     Dim y As Double, Ymax As Double, Ymin As Double
     Ymax = -10000000
@@ -62,6 +77,7 @@ Private Sub CommandButton_geogebra_Click()
     If Len(xl) > 1 Then xl = Left(xl, Len(xl) - 1)
     For j = 1 To UBound(PointArr, 2)
         yl = ""
+        If (j = 1 And CheckBox1.Value) Or (j = 2 And CheckBox2.Value) Or (j = 3 And CheckBox3.Value) Then
         For i = 0 To UBound(PointArr)
             y = val(Trim(Replace(Replace(PointArr(i, j), ",", "."), ChrW(183), "*")))
             If y > Ymax Then
@@ -74,9 +90,10 @@ Private Sub CommandButton_geogebra_Click()
         Next
         yl = Left(yl, Len(yl) - 1)
         s = s & "LineGraph({" & xl & "},{" & yl & "});"
+        End If
     Next
     s = Left(s, Len(s) - 1)
-    If Len(xl) > 9900 Then
+    If Len(s) > 30000 Then
         Label_wait.Caption = "Too many points for GeoGebra. Decrease no of. steps."
         MsgBox "Too many points for GeoGebra. Decrease no of. steps.", vbOKOnly, "Error"
     ElseIf Len(xl) > 1 Then
@@ -256,6 +273,18 @@ Application.ScreenUpdating = True
 End Sub
 
 Private Sub CommandButton_opdater_Click()
+#If Mac Then
+   GeoGebraPlot
+#Else
+   If ComboBox_graphapp.ListIndex = 0 Then
+      GnuPlotOpdater
+   Else
+      GeoGebraPlot
+   End If
+#End If
+End Sub
+
+Private Sub GnuPlotOpdater()
     SolveDE
     PlotOutput
 End Sub
@@ -437,10 +466,18 @@ On Error GoTo slut
    If Not IsNumeric(TextBox_xmin.Text) Then Label_validate.Caption = "xmin er ikke et tal"
    If Not IsNumeric(TextBox_xmax.Text) Then Label_validate.Caption = "xmax er ikke et tal"
    If Not IsNumeric(TextBox_step.Text) Then Label_validate.Caption = "Skridtlængde er ikke et tal"
-   If IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) And IsNumeric(TextBox_step.Text) Then
-      st = Round((StrToDbl(TextBox_xmax.Text) - StrToDbl(TextBox_xmin.Text)) / StrToDbl(TextBox_step.Text), 0)
-      If st > 500 Then Label_validate.Caption = "Antal skridt er " & st & ". Det vil formentlig ikke virke med GeoGebra med så mange skridt."
+#If Mac Then
+#Else
+   If ComboBox_graphapp.ListIndex > 0 Then
+#End If
+      If IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) And IsNumeric(TextBox_step.Text) Then
+         st = Round((StrToDbl(TextBox_xmax.Text) - StrToDbl(TextBox_xmin.Text)) / StrToDbl(TextBox_step.Text), 0)
+         If st > 1000 Then Label_validate.Caption = "Antal skridt er " & st & ". Det vil formentlig ikke virke med GeoGebra med så mange skridt."
+      End If
+#If Mac Then
+#Else
    End If
+#End If
 slut:
    If Label_validate.Caption <> vbNullString Then Label_validate.visible = True
 End Sub
@@ -453,8 +490,8 @@ Function StrToDbl(s As String) As Double
    End If
 End Function
 Private Sub UserForm_Activate()
-On Error Resume Next
-InsertType = 0
+ On Error Resume Next
+   InsertType = 0
     SetCaptions
     Label_wait.visible = False
 #If Mac Then
@@ -477,8 +514,18 @@ InsertType = 0
     OpdaterDefinitioner
 End Sub
 
+Private Sub UserForm_Initialize()
+#If Mac Then
+   Image1.visible = False
+   Label_wait.visible = False
+   Me.Width = 345
+#End If
+
+End Sub
+
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-    luk = True
+'    luk = True
+    CommandButton_cancel_Click
 End Sub
 
 Function SolveDE() As Boolean
@@ -562,7 +609,7 @@ Function SolveDE() As Boolean
     ListOutput = omax.MaximaOutput
     
     Dim s As String, i As Long, j As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     ReDim PointArr(Npoints, n)
     ea.Text = ListOutput
     ea.SetSquareBrackets
@@ -571,9 +618,9 @@ Function SolveDE() As Boolean
     End If
     Do
         s = ea.GetNextBracketContent(0)
-        Arr = Split(s, ListSeparator)
+        arr = Split(s, ListSeparator)
         For j = 0 To n 'UBound(Arr)
-            PointArr(i, j) = Arr(j)
+            PointArr(i, j) = arr(j)
         Next
         i = i + 1
     Loop While ea.Pos < ea.Length - 1 And i < 10000
@@ -777,7 +824,7 @@ Sub OpdaterDefinitioner()
    Dim var As String, var2 As String
    Dim ea As New ExpressionAnalyser
    Dim ea2 As New ExpressionAnalyser
-   Dim Arr As Variant
+   Dim arr As Variant
    Dim arr2 As Variant
    Dim i As Integer, s As String
    Validate
@@ -810,15 +857,15 @@ Sub OpdaterDefinitioner()
    Do While right(TextBox_definitioner.Text, 2) = vbCrLf
       TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
    Loop
-   Arr = Split(TextBox_definitioner.Text, vbCrLf)
+   arr = Split(TextBox_definitioner.Text, vbCrLf)
    
-   For i = 0 To UBound(Arr) ' Hvis variabel indgår i def, skal den fjernes
-      If Arr(i) <> "" Then
-         var2 = Split(Arr(i), "=")(0)
+   For i = 0 To UBound(arr) ' Hvis variabel indgår i def, skal den fjernes
+      If arr(i) <> "" Then
+         var2 = Split(arr(i), "=")(0)
          If var2 = TextBox_varx.Text Then
-            Arr(i) = ""
+            arr(i) = ""
          End If
-         If Arr(i) <> "" Then s = s & Arr(i) & vbCrLf
+         If arr(i) <> "" Then s = s & arr(i) & vbCrLf
       End If
    Next
    Do While right(s, 2) = vbCrLf
@@ -826,13 +873,13 @@ Sub OpdaterDefinitioner()
    Loop
    TextBox_definitioner.Text = s
    
-   Arr = Split(TextBox_definitioner.Text, vbCrLf)
+   arr = Split(TextBox_definitioner.Text, vbCrLf)
    Do
       var = ea.GetNextListItem(ea.Pos)
       var = Replace(var, vbCrLf, "")
-      For i = 0 To UBound(Arr)
-         If Arr(i) <> "" Then
-            var2 = Split(Arr(i), "=")(0)
+      For i = 0 To UBound(arr)
+         If arr(i) <> "" Then
+            var2 = Split(arr(i), "=")(0)
             If var2 = var Then
                var = ""
                Exit For
@@ -883,8 +930,8 @@ Sub SetCaptions()
     Label6.Caption = Sprog.A(86)
     Label7.Caption = Sprog.A(87)
     Label_Graf.Caption = Sprog.Graph
-    CommandButton_opdater.Caption = Sprog.Update
-    CommandButton_cancel.Caption = Sprog.Cancel
+    CommandButton_opdater.Caption = Sprog.RibShowGraph 'Sprog.Update
+    CommandButton_cancel.Caption = Sprog.A(661)
     Label_var.Caption = Sprog.IndepVar
     Label3.Caption = Sprog.A(88)
     Label5.Caption = Sprog.Definitions
@@ -895,6 +942,18 @@ Sub SetCaptions()
     CommandButton_inserttabel.Caption = Sprog.A(92)
     CommandButton_insertgraph.Caption = Sprog.A(93)
     
+#If Mac Then
+    ComboBox_graphapp.visible = False
+#Else
+    ComboBox_graphapp.Clear
+    ComboBox_graphapp.AddItem "GnuPlot"
+    ComboBox_graphapp.AddItem "GeoGebra"
+    If GraphApp = 0 Then
+       ComboBox_graphapp.ListIndex = 0
+    Else
+       ComboBox_graphapp.ListIndex = 1
+    End If
+#End If
 End Sub
 Sub ShowPreviewMac()
 #If Mac Then

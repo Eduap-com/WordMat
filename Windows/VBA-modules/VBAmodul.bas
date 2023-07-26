@@ -214,11 +214,10 @@ Public Sub ExportAllModules()
     szSourceWorkbook = ActiveDocument.Name
     Set wkbSource = Application.ActiveDocument
     
-    If wkbSource.VBProject.Protection = 1 Then
-    MsgBox "The VBA in this workbook is protected," & _
-        "not possible to export the code"
-    Exit Sub
-    End If
+'    If wkbSource.VBProject.Protection = 1 Then ' dette check kan få Word til at crashe
+'      MsgBox "The VBA in this workbook is protected, not possible to export the code", vbOKOnly, "Error"
+'      Exit Sub
+'    End If
     
     szExportPath = FolderWithVBAProjectFiles '& "\"
     
@@ -272,7 +271,7 @@ Sub ImportAllModules()
     Dim szExportPath As String
     Dim szFileName As String
     Dim StrFile As String, i As Integer
-    Dim Arr() As String, FileList As String, MBP As Integer
+    Dim arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
 
 #If Mac Then
@@ -314,7 +313,7 @@ Sub ImportAllModules()
         End If
         StrFile = Dir
     Loop
-    Arr = Split(FileList, vbCrLf)
+    arr = Split(FileList, vbCrLf)
 '    FileList = Replace(FileList, vbCrLf, " | ")
     q = ""
     If Not ActiveDocument.Saved Then
@@ -339,9 +338,9 @@ Sub ImportAllModules()
     
    DeleteAllModules False
     
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" And InStr(Arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
-            wkbSource.VBProject.VBComponents.Import szExportPath & Arr(i)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" And InStr(arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
+            wkbSource.VBProject.VBComponents.Import szExportPath & arr(i)
         End If
     Next
     
