@@ -29,10 +29,10 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo fejl
+On Error GoTo Fejl
     Dim i As Integer
     Dim c As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     
     For i = 0 To ListBox_vars.ListCount - 1
         If ListBox_vars.Selected(i) Then
@@ -41,10 +41,10 @@ On Error GoTo fejl
             c = c + 1
         End If
     Next
-    If Len(TextBox_variabel.text) > 0 Then
-    Arr = Split(TextBox_variabel.text, ",")
-    For i = 0 To UBound(Arr)
-            SelectedVar = SelectedVar & Arr(i) & ","
+    If Len(TextBox_variabel.Text) > 0 Then
+    arr = Split(TextBox_variabel.Text, ",")
+    For i = 0 To UBound(arr)
+            SelectedVar = SelectedVar & arr(i) & ","
             c = c + 1
     Next
     End If
@@ -67,15 +67,15 @@ On Error GoTo fejl
             End If
         End If
     
-    TempDefs = TextBox_def.text
+    TempDefs = TextBox_def.Text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
+            TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
         End If
     Next
     If right(TempDefs, 1) = ListSeparator Then
@@ -85,7 +85,7 @@ On Error GoTo fejl
     
     
     GoTo slut
-fejl:
+Fejl:
     SelectedVar = ""
 slut:
     UFSelectVars.Hide
@@ -103,7 +103,7 @@ On Error Resume Next
     SetCaptions
     SelectedVar = ""
     ListBox_vars.Clear
-    TextBox_variabel.text = ""
+    TextBox_variabel.Text = ""
 
     If MaximaUnits Then
         Label_unitwarning.visible = True
@@ -118,7 +118,7 @@ On Error Resume Next
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
             ListBox_vars.AddItem (svar)
-            TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac
+            TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac
         End If
     Next
     

@@ -8,10 +8,10 @@ Option Explicit
 'End Type
 
 Sub linregression()
-' udf*oe*res fra menuen. Tabel skal v*ae*re valgt
+' udføres fra menuen. Tabel skal være valgt
     Dim Cregr As New CRegression
     Application.ScreenUpdating = False
-On Error GoTo fejl
+On Error GoTo Fejl
     SaveBackup
     If Selection.OMaths.Count > 0 And Selection.Tables.Count = 0 Then
         Cregr.GetSetData
@@ -27,14 +27,14 @@ On Error GoTo fejl
     Cregr.ComputeLinRegr
     Cregr.InsertEquation
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub ekspregression()
     Dim Cregr As New CRegression
     Application.ScreenUpdating = False
-On Error GoTo fejl
+On Error GoTo Fejl
     SaveBackup
     If Selection.OMaths.Count > 0 And Selection.Tables.Count = 0 Then
         Cregr.GetSetData
@@ -51,13 +51,13 @@ On Error GoTo fejl
     Cregr.InsertEquation
 '    MsgBox cregr.Ligning
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub potregression()
 
-On Error GoTo fejl
+On Error GoTo Fejl
     Dim Cregr As New CRegression
     SaveBackup
     Application.ScreenUpdating = False
@@ -77,13 +77,13 @@ On Error GoTo fejl
     Cregr.InsertEquation
 
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub polregression()
 
-On Error GoTo fejl
+On Error GoTo Fejl
     Dim Cregr As New CRegression
     SaveBackup
     Application.ScreenUpdating = False
@@ -102,12 +102,12 @@ On Error GoTo fejl
     Cregr.ComputePolRegr
     Cregr.InsertEquation
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub UserRegression()
-On Error GoTo fejl
+On Error GoTo Fejl
     Dim Cregr As New CRegression
     Dim sslut As Long
     Application.ScreenUpdating = False
@@ -137,7 +137,7 @@ On Error GoTo fejl
     End If
     Cregr.InsertEquation
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -163,10 +163,10 @@ Sub InsertTabel()
         2, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
         wdAutoFitFixed
         With Selection.Tables(1)
-'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' p*aa* 2013 giver det ingen kanter
+'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' på 2013 giver det ingen kanter
 '        If .Style <> "Tabel - Gitter" And InStr(.Style, "Table") < 0 Then
 '            On Error Resume Next
-'            .Style = "Tabel - Gitter" ' duer ikke p*aa* udenlandsk
+'            .Style = "Tabel - Gitter" ' duer ikke på udenlandsk
 '        End If
 #If Mac Then
 #Else
@@ -177,9 +177,9 @@ Sub InsertTabel()
         .ApplyStyleRowBands = True
         .ApplyStyleColumnBands = False
 #End If
-        .Cell(1, 1).Range.text = "x"
+        .Cell(1, 1).Range.Text = "x"
         .Cell(1, 1).Range.Bold = True
-        .Cell(1, 2).Range.text = "y"
+        .Cell(1, 2).Range.Text = "y"
         .Cell(1, 2).Range.Bold = True
         .Cell(2, 1).Range.Select
         .Columns(1).Width = 65

@@ -15,7 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 Option Explicit
-Public Result As String
+Public result As String
 Public variabel As String
 Public FejlMeld As String
 Public Ligning As String
@@ -23,7 +23,7 @@ Public Kommentar As String
 Public Finished As Boolean
 
 Private Sub CommandButton_cancel_Click()
-    Result = "afbryd"
+    result = "afbryd"
     FejlMeld = ""
     Kommentar = ""
     omax.StopNow = True
@@ -45,7 +45,7 @@ Private Sub CommandButton_nsolve_Click()
         Finished = True
         omax.MaximaOutput = Label_nsolve.Caption
     End If
-    Result = "nsolve"
+    result = "nsolve"
     FejlMeld = ""
     Kommentar = Sprog.FoundNumericSolutions
     Me.Hide
@@ -59,7 +59,7 @@ Private Sub CommandButton_numeric_Click()
         omax.MaximaOutput = Label_nsolve.Caption
     End If
 '    omax.StopNow = True
-    Result = "num"
+    result = "num"
     FejlMeld = ""
     Kommentar = ""
     Me.Hide
@@ -71,7 +71,7 @@ Private Sub CommandButton_Omskrevet_Click()
         MaxProc.CloseProcess
         MaxProc.StartMaximaProcess
     End If
-    Result = Sprog.A(180) '"omskriv"
+    result = Sprog.A(180) '"omskriv"
     FejlMeld = ""
     Finished = True
     Kommentar = Sprog.NoNumericSolution
@@ -84,7 +84,7 @@ Private Sub UserForm_Activate()
 
     If CASengine > 0 Then
         Label2.Caption = ""
-        Label_overskrift.Caption = "Hvordan vil du l*oe*se ligningen numerisk?"
+        Label_overskrift.Caption = "Hvordan vil du løse ligningen numerisk?"
         Label_omskrevet.Caption = ""
         Finished = True
         CommandButton_Omskrevet.visible = False
@@ -180,7 +180,7 @@ afslut:
     omax.MaximaOutput = Label_nsolve.Caption
     
     If Len(Label_nsolve.Caption) > 0 Then
-'        Label2.Caption = "Der blev fundet l*oe*sninger vha. automatiske numeriske metoder, men der findes m*aa*ske flere. Du kan enten n*oe*jes med de fundne l*oe*sninger eller fors*oe*ge at finde flere grafisk."
+'        Label2.Caption = "Der blev fundet løsninger vha. automatiske numeriske metoder, men der findes måske flere. Du kan enten nøjes med de fundne løsninger eller forsøge at finde flere grafisk."
         Label2.Caption = Sprog.FoundNumericSolutions
         CommandButton_nsolve.visible = True
         CommandButton_nsolve.SetFocus
@@ -194,7 +194,7 @@ slut:
 End Sub
 
 Private Sub UserForm_Initialize()
-    Result = ""
+    result = ""
 End Sub
 
 Private Sub SetCaptions()

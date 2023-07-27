@@ -1,6 +1,6 @@
 Attribute VB_Name = "WebHelpers"
 ''
-' WebHelpers v4.1.5
+' WebHelpers v4.1.6
 ' (c) Tim Hall - https://github.com/VBA-tools/VBA-Web
 '
 ' Contains general-purpose helpers that are used throughout VBA-Web. Includes:
@@ -159,13 +159,13 @@ Private Declare PtrSafe Function utc_feof Lib "/usr/lib/libc.dylib" Alias "feof"
 #Else
 
 ' 32-bit Mac
-Private Declare Function utc_popen Lib "/usr/lib/libc.dylib" Alias "popen" _
+Private Declare Function utc_popen Lib "libc.dylib" Alias "popen" _
     (ByVal utc_Command As String, ByVal utc_Mode As String) As Long
-Private Declare Function utc_pclose Lib "/usr/lib/libc.dylib" Alias "pclose" _
+Private Declare Function utc_pclose Lib "libc.dylib" Alias "pclose" _
     (ByVal utc_File As Long) As Long
-Private Declare Function utc_fread Lib "/usr/lib/libc.dylib" Alias "fread" _
+Private Declare Function utc_fread Lib "libc.dylib" Alias "fread" _
     (ByVal utc_Buffer As String, ByVal utc_Size As Long, ByVal utc_Number As Long, ByVal utc_File As Long) As Long
-Private Declare Function utc_feof Lib "/usr/lib/libc.dylib" Alias "feof" _
+Private Declare Function utc_feof Lib "libc.dylib" Alias "feof" _
     (ByVal utc_File As Long) As Long
 
 #End If
@@ -261,14 +261,14 @@ Private Declare PtrSafe Function web_pclose Lib "/usr/lib/libc.dylib" Alias "pcl
 Private Declare PtrSafe Function web_fread Lib "/usr/lib/libc.dylib" Alias "fread" (ByVal web_OutStr As String, ByVal web_Size As LongPtr, ByVal web_Items As LongPtr, ByVal web_Stream As LongPtr) As LongPtr
 Private Declare PtrSafe Function web_feof Lib "/usr/lib/libc.dylib" Alias "feof" (ByVal web_File As LongPtr) As LongPtr
 #Else
-Private Declare Function web_popen Lib "/usr/lib/libc.dylib" Alias "popen" (ByVal web_Command As String, ByVal web_Mode As String) As Long
-Private Declare Function web_pclose Lib "/usr/lib/libc.dylib" Alias "pclose" (ByVal web_File As Long) As Long
-Private Declare Function web_fread Lib "/usr/lib/libc.dylib" Alias "fread" (ByVal web_OutStr As String, ByVal web_Size As Long, ByVal web_Items As Long, ByVal web_Stream As Long) As Long
-Private Declare Function web_feof Lib "/usr/lib/libc.dylib" Alias "feof" (ByVal web_File As Long) As Long
+Private Declare Function web_popen Lib "libc.dylib" Alias "popen" (ByVal web_Command As String, ByVal web_Mode As String) As Long
+Private Declare Function web_pclose Lib "libc.dylib" Alias "pclose" (ByVal web_File As Long) As Long
+Private Declare Function web_fread Lib "libc.dylib" Alias "fread" (ByVal web_OutStr As String, ByVal web_Size As Long, ByVal web_Items As Long, ByVal web_Stream As Long) As Long
+Private Declare Function web_feof Lib "libc.dylib" Alias "feof" (ByVal web_File As Long) As Long
 #End If
 #End If
 
-Public Const WebUserAgent As String = "VBA-Web v4.1.5 (https://github.com/VBA-tools/VBA-Web)"
+Public Const WebUserAgent As String = "VBA-Web v4.1.6 (https://github.com/VBA-tools/VBA-Web)"
 
 ' @internal
 Public Type ShellResult
@@ -872,7 +872,7 @@ End Function
 ' @param {UrlEncodingMode} [EncodingMode = StrictUrlEncoding]
 ' @return {String} Encoded string
 ''
-Public Function UrlEncode(text As Variant, _
+Public Function UrlEncode(Text As Variant, _
     Optional SpaceAsPlus As Boolean = False, Optional EncodeUnsafe As Boolean = True, _
     Optional EncodingMode As UrlEncodingMode = UrlEncodingMode.StrictUrlEncoding) As String
 
@@ -888,7 +888,7 @@ Public Function UrlEncode(text As Variant, _
     Dim web_UrlVal As String
     Dim web_StringLen As Long
 
-    web_UrlVal = VBA.CStr(text)
+    web_UrlVal = VBA.CStr(Text)
     web_StringLen = VBA.Len(web_UrlVal)
 
     If web_StringLen > 0 Then
@@ -1064,15 +1064,15 @@ End Function
 ' @param {Variant} Text Text to encode
 ' @return {String} Encoded string
 ''
-Public Function Base64Encode(text As String) As String
+Public Function Base64Encode(Text As String) As String
 #If Mac Then
     Dim web_Command As String
-    web_Command = "printf " & PrepareTextForPrintf(text) & " | openssl base64"
+    web_Command = "printf " & PrepareTextForPrintf(Text) & " | openssl base64"
     Base64Encode = ExecuteInShell(web_Command).Output
 #Else
     Dim web_Bytes() As Byte
 
-    web_Bytes = VBA.StrConv(text, vbFromUnicode)
+    web_Bytes = VBA.StrConv(Text, vbFromUnicode)
     Base64Encode = web_AnsiBytesToBase64(web_Bytes)
 #End If
 
@@ -1103,7 +1103,7 @@ Public Function Base64Decode(Encoded As Variant) As String
     Set web_Node = web_XmlObj.createElement("b64")
 
     web_Node.DataType = "bin.base64"
-    web_Node.text = Encoded
+    web_Node.Text = Encoded
     Base64Decode = VBA.StrConv(web_Node.nodeTypedValue, vbUnicode)
 
     Set web_Node = Nothing
@@ -1745,10 +1745,10 @@ End Function
 ' @param {String} [Format="Hex"] "Hex" or "Base64" encoding for result
 ' @return {String} HMAC-SHA1
 ''
-Public Function HMACSHA1(text As String, Secret As String, Optional Format As String = "Hex") As String
+Public Function HMACSHA1(Text As String, Secret As String, Optional Format As String = "Hex") As String
 #If Mac Then
     Dim web_Command As String
-    web_Command = "printf " & PrepareTextForPrintf(text) & " | openssl dgst -sha1 -hmac " & PrepareTextForShell(Secret)
+    web_Command = "printf " & PrepareTextForPrintf(Text) & " | openssl dgst -sha1 -hmac " & PrepareTextForShell(Secret)
 
     If Format = "Base64" Then
         web_Command = web_Command & " -binary | openssl enc -base64"
@@ -1761,7 +1761,7 @@ Public Function HMACSHA1(text As String, Secret As String, Optional Format As St
     Dim web_SecretBytes() As Byte
     Dim web_Bytes() As Byte
 
-    web_TextBytes = VBA.StrConv(text, vbFromUnicode)
+    web_TextBytes = VBA.StrConv(Text, vbFromUnicode)
     web_SecretBytes = VBA.StrConv(Secret, vbFromUnicode)
 
     Set web_Crypto = CreateObject("System.Security.Cryptography.HMACSHA1")
@@ -1792,10 +1792,10 @@ End Function
 ' @param {String} [Format="Hex"] "Hex" or "Base64" encoding for result
 ' @return {String} HMAC-SHA256
 ''
-Public Function HMACSHA256(text As String, Secret As String, Optional Format As String = "Hex") As String
+Public Function HMACSHA256(Text As String, Secret As String, Optional Format As String = "Hex") As String
 #If Mac Then
     Dim web_Command As String
-    web_Command = "printf " & PrepareTextForPrintf(text) & " | openssl dgst -sha256 -hmac " & PrepareTextForShell(Secret)
+    web_Command = "printf " & PrepareTextForPrintf(Text) & " | openssl dgst -sha256 -hmac " & PrepareTextForShell(Secret)
 
     If Format = "Base64" Then
         web_Command = web_Command & " -binary | openssl enc -base64"
@@ -1808,7 +1808,7 @@ Public Function HMACSHA256(text As String, Secret As String, Optional Format As 
     Dim web_SecretBytes() As Byte
     Dim web_Bytes() As Byte
 
-    web_TextBytes = VBA.StrConv(text, vbFromUnicode)
+    web_TextBytes = VBA.StrConv(Text, vbFromUnicode)
     web_SecretBytes = VBA.StrConv(Secret, vbFromUnicode)
 
     Set web_Crypto = CreateObject("System.Security.Cryptography.HMACSHA256")
@@ -1841,10 +1841,10 @@ End Function
 ' @param {String} [Format="Hex"] "Hex" or "Base64" encoding for result
 ' @return {String} MD5 Hash
 ''
-Public Function MD5(text As String, Optional Format As String = "Hex") As String
+Public Function MD5(Text As String, Optional Format As String = "Hex") As String
 #If Mac Then
     Dim web_Command As String
-    web_Command = "printf " & PrepareTextForPrintf(text) & " | openssl dgst -md5"
+    web_Command = "printf " & PrepareTextForPrintf(Text) & " | openssl dgst -md5"
 
     If Format = "Base64" Then
         web_Command = web_Command & " -binary | openssl enc -base64"
@@ -1856,7 +1856,7 @@ Public Function MD5(text As String, Optional Format As String = "Hex") As String
     Dim web_TextBytes() As Byte
     Dim web_Bytes() As Byte
 
-    web_TextBytes = VBA.StrConv(text, vbFromUnicode)
+    web_TextBytes = VBA.StrConv(Text, vbFromUnicode)
 
     Set web_Crypto = CreateObject("System.Security.Cryptography.MD5CryptoServiceProvider")
     web_Bytes = web_Crypto.ComputeHash_2(web_TextBytes)
@@ -1936,7 +1936,7 @@ Private Function web_AnsiBytesToBase64(web_Bytes() As Byte)
 
     web_Node.DataType = "bin.base64"
     web_Node.nodeTypedValue = web_Bytes
-    web_AnsiBytesToBase64 = web_Node.text
+    web_AnsiBytesToBase64 = web_Node.Text
 
     Set web_Node = Nothing
     Set web_XmlObj = Nothing
@@ -1977,7 +1977,7 @@ Private Function web_GetUrlEncodedKeyValue(Key As Variant, Value As Variant, Opt
 End Function
 
 ''
-' VBA-JSON v2.3.0
+' VBA-JSON v2.3.1
 ' (c) Tim Hall - https://github.com/VBA-tools/VBA-JSON
 '
 ' JSON Converter for VBA
@@ -2399,7 +2399,7 @@ Private Function json_ParseValue(json_String As String, ByRef json_Index As Long
         ElseIf VBA.Mid$(json_String, json_Index, 4) = "null" Then
             json_ParseValue = Null
             json_Index = json_Index + 4
-        ElseIf VBA.InStr("+-0123456789", VBA.Mid$(json_String, json_Index, 1)) Then
+        ElseIf VBA.Instr("+-0123456789", VBA.Mid$(json_String, json_Index, 1)) Then
             json_ParseValue = json_ParseNumber(json_String, json_Index)
         Else
             Err.Raise 10001, "JSONConverter", json_ParseErrorMessage(json_String, json_Index, "Expecting 'STRING', 'NUMBER', null, true, false, '{', or '['")
@@ -2477,7 +2477,7 @@ Private Function json_ParseNumber(json_String As String, ByRef json_Index As Lon
     Do While json_Index > 0 And json_Index <= Len(json_String)
         json_Char = VBA.Mid$(json_String, json_Index, 1)
 
-        If VBA.InStr("+-0123456789.eE", json_Char) Then
+        If VBA.Instr("+-0123456789.eE", json_Char) Then
             ' Unlikely to have massive number, so use simple append rather than buffer here
             json_Value = json_Value & json_Char
             json_Index = json_Index + 1
@@ -2726,7 +2726,7 @@ Private Function json_BufferToString(ByRef json_Buffer As String, ByVal json_Buf
 End Function
 
 ''
-' VBA-UTC v1.0.5
+' VBA-UTC v1.0.6
 ' (c) Tim Hall - https://github.com/VBA-tools/VBA-UtcConverter
 '
 ' UTC/ISO 8601 Converter for VBA
@@ -2831,13 +2831,13 @@ Public Function ParseIso(utc_IsoString As String) As Date
     ParseIso = VBA.DateSerial(VBA.CInt(utc_DateParts(0)), VBA.CInt(utc_DateParts(1)), VBA.CInt(utc_DateParts(2)))
 
     If UBound(utc_Parts) > 0 Then
-        If VBA.InStr(utc_Parts(1), "Z") Then
+        If VBA.Instr(utc_Parts(1), "Z") Then
             utc_TimeParts = VBA.Split(VBA.Replace(utc_Parts(1), "Z", ""), ":")
         Else
-            utc_OffsetIndex = VBA.InStr(1, utc_Parts(1), "+")
+            utc_OffsetIndex = VBA.Instr(1, utc_Parts(1), "+")
             If utc_OffsetIndex = 0 Then
                 utc_NegativeOffset = True
-                utc_OffsetIndex = VBA.InStr(1, utc_Parts(1), "-")
+                utc_OffsetIndex = VBA.Instr(1, utc_Parts(1), "-")
             End If
 
             If utc_OffsetIndex > 0 Then
@@ -3175,3 +3175,7 @@ AutoProxy_Cleanup:
     End If
 #End If
 End Sub
+
+
+
+

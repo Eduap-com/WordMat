@@ -1,7 +1,6 @@
 Attribute VB_Name = "Statistik"
 Option Explicit
 Public UFgrupper As UserFormGrupper
-
 Sub Chi2Fordeling()
     Dim k As Integer
     Dim g As Variant
@@ -12,17 +11,17 @@ Sub Chi2Fordeling()
     k = val(kstring)
     If (k > 0 And k <= 20) Or (k > 20 And Int(k / 2) = k / 2) Then
         g = Gamma(k / 2)
-        ut = ("f(x)" & VBA.ChrW(8801) & ConvertNumberToString(1 / (2 ^ (k / 2) * g)) & "*a-*x^(" & k / 2 - 1 & ")*a-*e^(-x/2)")
+        ut = ("f(x)" & VBA.ChrW(8801) & ConvertNumberToString(1 / (2 ^ (k / 2) * g)) & ChrW(183) & "x^(" & k / 2 - 1 & ")" & ChrW(183) & "e^(-x/2)")
         ut = Replace(ut, ",", ".")
     Else
-        ut = "f(x)" & VBA.ChrW(8801) & "1/(2^(n/2)*a-*" & VBA.ChrW(915) & "(n/2) )*a-*x^(n/2-1)*a-*e^(-x/2)"
+        ut = "f(x)" & VBA.ChrW(8801) & "1/(2^(n/2)" & ChrW(183) & VBA.ChrW(915) & "(n/2) )" & ChrW(183) & "x^(n/2-1)" & ChrW(183) & "e^(-x/2)"
     End If
     Selection.InsertAfter (VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & " - " & Sprog.A(399) & " " & kstring & " " & Sprog.A(360))
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
     
     Selection.InsertAfter ut
-'    Selection.InsertAfter ("p(x)=1/(2^(" & k & "/2)*a-*" & G & ")*a-*x^(" & k & "/2-1)*a-*e^(-x/2)")
+'    Selection.InsertAfter ("p(x)=1/(2^(" & k & "/2)á" & G & ")áx^(" & k & "/2-1)áe^(-x/2)")
     Selection.OMaths.Add Range:=Selection.Range
     Selection.OMaths(1).BuildUp
     Selection.MoveRight Unit:=wdCharacter, Count:=2
@@ -30,10 +29,10 @@ Sub Chi2Fordeling()
 End Sub
 
 Function Gamma(z As Variant) As Variant
-' begr*ae*nset implementation af gammafunktion
+' begrænset implementation af gammafunktion
     If z = Int(z) Then ' hvis z er heltal er det bare fakultet
         Gamma = Factorial(z - 1)
-    ElseIf z = 0.5 Then ' for specielle halvtallige er l*oe*sningen kendt
+    ElseIf z = 0.5 Then ' for specielle halvtallige er løsningen kendt
         Gamma = 1.77245384774943
     ElseIf z = 1.5 Then
         Gamma = 0.88622692387471
@@ -68,10 +67,10 @@ Function Factorial(n)
 End Function
 
 Function Lgamma(z As Variant) As Variant
-' begr*ae*nset implementation af Lower gammafunktion
+' begrænset implementation af Lower gammafunktion
     If z = Int(z) Then ' hvis z er heltal er det bare faktor
         Lgamma = Factorial(z)
-    ElseIf z = 0.5 Then ' for specielle halvtallige er l*oe*sningen kendt
+    ElseIf z = 0.5 Then ' for specielle halvtallige er løsningen kendt
         Lgamma = 1.77245384774943
     ElseIf z = 1.5 Then
         Lgamma = 0.88622692387471
@@ -105,26 +104,26 @@ End Function
 'End Function
 
 Sub GrupperIntervaller()
-    On Error GoTo fejl
+    On Error GoTo Fejl
     Dim Sdata As String
     Dim Sintervaller As String
     
     If Not (UFgrupper Is Nothing) Then
-        Sdata = UFgrupper.TextBox_data.text
-        Sintervaller = UFgrupper.TextBox_intervaller.text
+        Sdata = UFgrupper.TextBox_data.Text
+        Sintervaller = UFgrupper.TextBox_intervaller.Text
     End If
     Set UFgrupper = New UserFormGrupper
-    UFgrupper.TextBox_data.text = Sdata
-    UFgrupper.TextBox_intervaller.text = Sintervaller
+    UFgrupper.TextBox_data.Text = Sdata
+    UFgrupper.TextBox_intervaller.Text = Sintervaller
     
     Dim t As String
-    t = Selection.text
+    t = Selection.Text
     If Len(t) > 3 Then
         t = Replace(t, ListSeparator, vbCrLf)
-        UFgrupper.TextBox_data.text = t
+        UFgrupper.TextBox_data.Text = t
     End If
     Selection.Collapse wdCollapseEnd
     Selection.TypeParagraph
     UFgrupper.Show vbModeless
-fejl:
+Fejl:
 End Sub

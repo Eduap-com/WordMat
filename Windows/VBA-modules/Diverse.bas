@@ -251,7 +251,7 @@ slut:
 End Sub
 
 Sub Wait(pausetime As Variant)
-'pausetime in milliseconds
+'pausetime in senconds
 Dim start
     start = Timer    ' Set start time.
     Do While Timer < start + pausetime

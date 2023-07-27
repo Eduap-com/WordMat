@@ -16,7 +16,6 @@ Attribute VB_Exposed = False
 
 Option Explicit
 Dim start
-
 Private Sub UserForm_Activate()
     start = Timer    ' Set start time.
     Do While Timer < start + 2

@@ -1,7 +1,6 @@
 Attribute VB_Name = "WindowsFunctions"
 Const SW_SHOW = 1
 Const SW_SHOWMAXIMIZED = 3
-
 #If Mac Then
 #Else
 Public Declare PtrSafe Sub Sleep Lib "kernel32" Alias "usleep" (ByVal dwMilliseconds As LongPtr)

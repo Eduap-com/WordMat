@@ -35,7 +35,6 @@ Public Sub Plot2DGraph()
     Exit Sub
 #End If
 
-    
     sstart = Selection.start
     sslut = Selection.End
     
@@ -112,10 +111,10 @@ Ligning = Replace(Ligning, VBA.ChrW(8801), "=") ' def =
 
 arr = Split(Ligning, "=")
 
-If Not (InStr(Ligning, VBA.ChrW(9608)) > 0 And InStr(Ligning, VBA.ChrW(9508)) > 0) Then ' tuborg
+'If Not (InStr(Ligning, VBA.ChrW(9608)) > 0 And InStr(Ligning, VBA.ChrW(9508)) > 0) Then ' tuborg
    arr = Split(arr(UBound(arr)), VBA.ChrW(8776)) ' til indsættelse af selve forskrift i stedet for f(x)
    Ligning = omax.ConvertToAscii(arr(UBound(arr)))
-End If
+'End If
 Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
 
 If UF2Dgraph.TextBox_ligning1.Text = Ligning Then

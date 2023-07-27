@@ -235,14 +235,14 @@ Public Function FixedLatexPreamble2() As String
    FixedLatexPreamble2 = s
 End Function
 
-Public Sub SaveTex(ByVal Mappe As String, ByVal filnavn As String)
+Public Sub SaveTex(ByVal Mappe As String, ByVal Filnavn As String)
 Dim filnr As Integer, filren As String, s As String
 Dim fsT As Object
 'On Error GoTo fejl
 
    UFwait.Label_tip.Caption = "Gemmer Tex-fil"
 LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
-filren = Split(filnavn, ".")(0)
+filren = Split(Filnavn, ".")(0)
 On Error Resume Next
 s = Mappe & "\" & filren & ".log"
 If Dir(s) <> "" Then Kill Mappe & "\" & filren & ".*"
@@ -251,7 +251,7 @@ If Dir(s) <> "" Then Kill Mappe & "\" & filren & ".*"
 'Kill Mappe & "\*.*"
 On Error GoTo 0
 
-WriteTextfileToString Mappe & "\" & filnavn, LaTexDoc
+WriteTextfileToString Mappe & "\" & Filnavn, LaTexDoc
 
 'Set fsT = CreateObject("ADODB.Stream")
 'fsT.Type = 2 'Specify stream type - we want To save text/string data.
@@ -270,12 +270,12 @@ WriteTextfileToString Mappe & "\" & filnavn, LaTexDoc
 
 
 GoTo slut
-fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i fors*oe*get p*aa* at gemme LaTex-filen"
+Fejl:
+    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
 slut:
 
 End Sub
-Sub Savedvi(ByVal Mappe As String, ByVal filnavn As String)
+Sub Savedvi(ByVal Mappe As String, ByVal Filnavn As String)
    ' skal ikke bruges. pdf er bedre. fx includegraphics skal have flere parametre med denne
    Dim shellcmd As String
    Dim appnr As Integer
@@ -296,45 +296,45 @@ Sub Savedvi(ByVal Mappe As String, ByVal filnavn As String)
       GoTo slut
    End If
 
-   SaveTex Mappe, filnavn & ".tex"
+   SaveTex Mappe, Filnavn & ".tex"
 
-   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd *aa*ben /C lukker
-   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & filnavn & ".tex" '/K holder cmd *aa*ben /C lukker
+   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
+   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & Filnavn & ".tex" '/K holder cmd åben /C lukker
    ' x64 er for 64bit installtion af miktex
 
    For j = 0 To 1
       On Error Resume Next
-      If Dir(Mappe & "\" & filnavn & ".dvi") <> "" Then Kill Mappe & "\" & filnavn & ".dvi"
+      If Dir(Mappe & "\" & Filnavn & ".dvi") <> "" Then Kill Mappe & "\" & Filnavn & ".dvi"
       'Kill Mappe & "\" & filnavn & ".dvi"
-      On Error GoTo fejl
+      On Error GoTo Fejl
 
       appnr = Shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
 
-      ' vent p*aa* maxima har genereret outputfil
+      ' vent på maxima har genereret outputfil
       i = 0
       Do
          i = i + 1
          Wait (0.1)
-      Loop Until Dir(Mappe & "\" & filnavn & ".dvi") <> "" Or i > 80
+      Loop Until Dir(Mappe & "\" & Filnavn & ".dvi") <> "" Or i > 80
    Next
 
    Wait 1
-   If Dir(Mappe & "\" & filnavn & ".dvi") > "" Then
-      RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
+   If Dir(Mappe & "\" & Filnavn & ".dvi") > "" Then
+      RunDefaultProgram Mappe & "\" & Filnavn & ".dvi", Mappe
    Else
       MsgBox "Could not create dvi-file. The tex-file is now opening so you can identify the error", vbOKOnly, Sprog.Error
-      RunDefaultProgram filnavn & ".tex", Mappe
+      RunDefaultProgram Filnavn & ".tex", Mappe
    End If
 
    'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
    GoTo slut
-fejl:
+Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 #End If
 End Sub
 
-Sub SavePdf(ByVal Mappe As String, ByVal filnavn As String)
+Sub SavePdf(ByVal Mappe As String, ByVal Filnavn As String)
    ' filnavn uden extension
    Dim shellcmd As String
    Dim appnr As Integer, p As Long, p2 As Long, ErrorS As String
@@ -364,29 +364,29 @@ Sub SavePdf(ByVal Mappe As String, ByVal filnavn As String)
       GoTo slut
    End If
 
-   SaveTex Mappe, filnavn & ".tex"
+   SaveTex Mappe, Filnavn & ".tex"
    
-   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd *aa*ben /C lukker
-   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & filnavn & ".tex" '/K holder cmd *aa*ben /C lukker
+   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
+   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & Filnavn & ".tex" '/K holder cmd åben /C lukker
    Do
       UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "**"
-      UFwait.Label_tip = "K*oe*rer pdflatex " & j + 1 & ". gang"
+      UFwait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
       ReRun = False
       On Error Resume Next
-      If Dir(Mappe & "\" & filnavn & ".pdf") <> "" Then Kill Mappe & "\" & filnavn & ".pdf"
-      If Dir(Mappe & "\" & filnavn & ".log") <> "" Then Kill Mappe & "\" & filnavn & ".log"
+      If Dir(Mappe & "\" & Filnavn & ".pdf") <> "" Then Kill Mappe & "\" & Filnavn & ".pdf"
+      If Dir(Mappe & "\" & Filnavn & ".log") <> "" Then Kill Mappe & "\" & Filnavn & ".log"
       On Error GoTo 0 'Fejl
 
       Shell shellcmd, vbNormal
       'appnr = Shell(shellcmd, vbNormal) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
-      ' vent p*aa* maxima har genereret outputfil
+      ' vent på maxima har genereret outputfil
       i = 0
       Do
          i = i + 1
          Wait (0.1)
-      Loop Until Dir(Mappe & "\" & filnavn & ".log") > "" Or i > 80
+      Loop Until Dir(Mappe & "\" & Filnavn & ".log") > "" Or i > 80
       Wait 1
-      Log = ReadTextFile(Mappe & "\" & filnavn & ".log")
+      Log = ReadTextFile(Mappe & "\" & Filnavn & ".log")
       If InStr(Log, "Rerun to get cross-references right") > 0 Then ReRun = True
       ErrorS = ""
       p2 = 1
@@ -402,22 +402,22 @@ Sub SavePdf(ByVal Mappe As String, ByVal filnavn As String)
    Loop While ReRun And j < 6
    
    If ErrorS <> "" Then
-      If MsgBox("The tex-document failed to compile with the following error:" & vbCrLf & vbCrLf & ErrorS & vbCrLf & vbCrLf & "Click OK to open the tex-file", vbOKCancel, Sprog.Error) = vbOK Then RunDefaultProgram filnavn & ".tex", Mappe
+      If MsgBox("The tex-document failed to compile with the following error:" & vbCrLf & vbCrLf & ErrorS & vbCrLf & vbCrLf & "Click OK to open the tex-file", vbOKCancel, Sprog.Error) = vbOK Then RunDefaultProgram Filnavn & ".tex", Mappe
    Else
       Wait 1
-      If Dir(Mappe & "\" & filnavn & ".pdf") > "" Then
-         RunDefaultProgram filnavn & ".pdf", Mappe
+      If Dir(Mappe & "\" & Filnavn & ".pdf") > "" Then
+         RunDefaultProgram Filnavn & ".pdf", Mappe
       Else
-         If MsgBox("Could not locate the pdf-file. Click OK to open the tex-file so you can identify the error", vbOKOnly, Sprog.Error) = vbOK Then RunDefaultProgram filnavn & ".tex", Mappe
+         If MsgBox("Could not locate the pdf-file. Click OK to open the tex-file so you can identify the error", vbOKOnly, Sprog.Error) = vbOK Then RunDefaultProgram Filnavn & ".tex", Mappe
       End If
-      If Dir(Mappe & "\" & filnavn & ".log") <> "" Then Kill Mappe & "\" & filnavn & ".log"
-      If Dir(Mappe & "\" & filnavn & ".aux") <> "" Then Kill Mappe & "\" & filnavn & ".aux"
-      If Dir(Mappe & "\" & filnavn & ".aux") <> "" Then Kill Mappe & "\" & filnavn & ".toc"
+      If Dir(Mappe & "\" & Filnavn & ".log") <> "" Then Kill Mappe & "\" & Filnavn & ".log"
+      If Dir(Mappe & "\" & Filnavn & ".aux") <> "" Then Kill Mappe & "\" & Filnavn & ".aux"
+      If Dir(Mappe & "\" & Filnavn & ".aux") <> "" Then Kill Mappe & "\" & Filnavn & ".toc"
       
    End If
 #End If
    GoTo slut
-fejl:
+Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -454,63 +454,63 @@ Else
     IsMikTexInstalled = True
 End If
 End Function
-Sub InsertText(text As String)
-    LaTexDoc = LaTexDoc & text ' & vbCr
+Sub InsertText(Text As String)
+    LaTexDoc = LaTexDoc & Text ' & vbCr
 End Sub
-Sub InsertParagraph(text As String)
-   If text = "" Or text = vbCrLf Or text = vbCr Or text = vbLf Then
+Sub InsertParagraph(Text As String)
+   If Text = "" Or Text = vbCrLf Or Text = vbCr Or Text = vbLf Then
       LaTexDoc = LaTexDoc & vbCrLf
    Else
-    LaTexDoc = LaTexDoc & vbCrLf & text & vbCrLf
+    LaTexDoc = LaTexDoc & vbCrLf & Text & vbCrLf
 '    LaTexDoc = LaTexDoc & "\paragraph{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertChapter(text As String)
-   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
+Sub InsertChapter(Text As String)
+   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
-   If InStr(text, "*") > 0 Then
-      LaTexDoc = LaTexDoc & "\chapter*{" & Replace(text, "*", "") & "}" & vbCrLf
+   If InStr(Text, "*") > 0 Then
+      LaTexDoc = LaTexDoc & "\chapter*{" & Replace(Text, "*", "") & "}" & vbCrLf
    Else
-      LaTexDoc = LaTexDoc & "\chapter{" & text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\chapter{" & Text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSection(text As String)
-   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
+Sub InsertSection(Text As String)
+   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(text, "*") > 0 Then
-         LaTexDoc = LaTexDoc & "\section*{" & Replace(text, "*", "") & "}" & vbCrLf
+      If InStr(Text, "*") > 0 Then
+         LaTexDoc = LaTexDoc & "\section*{" & Replace(Text, "*", "") & "}" & vbCrLf
       Else
-         LaTexDoc = LaTexDoc & "\section{" & text & "}" & vbCrLf
+         LaTexDoc = LaTexDoc & "\section{" & Text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\section*{" & text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\section*{" & Text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSubSection(text As String)
-   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
+Sub InsertSubSection(Text As String)
+   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(text, "*") > 0 Then
-      LaTexDoc = LaTexDoc & "\subsection*{" & Replace(text, "*", "") & "}" & vbCrLf
+      If InStr(Text, "*") > 0 Then
+      LaTexDoc = LaTexDoc & "\subsection*{" & Replace(Text, "*", "") & "}" & vbCrLf
       Else
-      LaTexDoc = LaTexDoc & "\subsection{" & text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsection{" & Text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\subsection*{" & text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsection*{" & Text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSubSubSection(text As String)
-   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
+Sub InsertSubSubSection(Text As String)
+   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(text, "*") > 0 Then
-         LaTexDoc = LaTexDoc & "\subsubsection*{" & Replace(text, "*", "") & "}" & vbCrLf
+      If InStr(Text, "*") > 0 Then
+         LaTexDoc = LaTexDoc & "\subsubsection*{" & Replace(Text, "*", "") & "}" & vbCrLf
       Else
-         LaTexDoc = LaTexDoc & "\subsubsection{" & text & "}" & vbCrLf
+         LaTexDoc = LaTexDoc & "\subsubsection{" & Text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\subsubsection*{" & text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsubsection*{" & Text & "}" & vbCrLf
    End If
 End Sub
 

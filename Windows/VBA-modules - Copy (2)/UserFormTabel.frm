@@ -16,7 +16,6 @@ Attribute VB_Exposed = False
 
 Public raekker As Integer
 Public kolonner As Integer
-
 Private Sub CommandButton_ok_Click()
     Me.Hide
 End Sub
@@ -90,18 +89,18 @@ End Sub
 Public Property Get PunktText() As Variant
 Dim ctrlx As Object
 Dim ctrly As Object
-Dim text As String
+Dim Text As String
 Dim i As Integer
 
 Do
 Set ctrlx = Me.Controls("X" & i)
 Set ctrly = Me.Controls("Y" & i)
-text = text & ctrlx.text & ";" & ctrly.text & "$"
+Text = Text & ctrlx.Text & ";" & ctrly.Text & "$"
 i = i + 1
 Loop While i < raekker
 
 
-PunktText = text
+PunktText = Text
 End Property
 
 Public Property Let PunktText(ByVal vNewValue As Variant)

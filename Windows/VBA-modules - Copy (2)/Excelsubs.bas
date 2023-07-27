@@ -11,7 +11,7 @@ Dim oOLEWd As Object 'OLEObject ' OLE Word Object
 Dim ils As InlineShape
 Dim oWD As Document ' Word Document Object (Use Microsoft Word Reference)
 Set oWD = ActiveDocument
-'Set ils = oWD.InlineShapes.AddOLEObject("Excel.Sheet") ' virkede ikke altid. Nu fors*oe*ges nedenunder fra optag makro
+'Set ils = oWD.InlineShapes.AddOLEObject("Excel.Sheet") ' virkede ikke altid. Nu forsøges nedenunder fra optag makro
 If val(Application.Version) = 12 Then
     vers = ".12"
 Else
@@ -35,11 +35,11 @@ Sub Chi2Test()
     InsertOpenExcel "chi2test.xltm"
 #Else
     Dim s As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim r As Integer
     Dim c As Integer
     
-On Error GoTo fejl
+On Error GoTo Fejl
 'If (Selection.Rows.count < 2 Or Selection.Columns.count < 2) And Selection.Tables.count = 0 Then
 '    GoTo fejl
 'End If
@@ -48,10 +48,10 @@ Dim signiv As Integer
 signiv = InputBox(Sprog.A(349), Sprog.A(350), "5")
 If Selection.Tables.Count = 0 Then
     s = InputBox(Sprog.A(351), Sprog.A(352), "2x2")
-    Arr = Split(s, "x")
-    If UBound(Arr) < 1 Then Arr = Split(s, ",")
-    r = Arr(0)
-    c = Arr(1)
+    arr = Split(s, "x")
+    If UBound(arr) < 1 Then arr = Split(s, ",")
+    r = arr(0)
+    c = arr(1)
 End If
 
 'Application.ScreenUpdating = False
@@ -83,7 +83,7 @@ If cxl.Below5 Or cxl.sum < 50 Then
 End If
 
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 Application.ScreenUpdating = True
@@ -103,7 +103,7 @@ Dim i As Integer
 ' hvis indlejret
 'Set xlwb = InsertIndlejretExcel
 
-' hvis selvst*ae*ndigt ark
+' hvis selvstændigt ark
 On Error Resume Next
 Set XLapp = GetObject(, "Excel.Application")
 If Err.Number <> 0 Then
@@ -143,7 +143,7 @@ On Error Resume Next
 Err.Number = 0
 xlsh.Range("A2").AutoFill Destination:=xlsh.Range("A2:A100"), Type:=0 'xlFillDefault
 xlsh.Range("B1").AutoFill Destination:=xlsh.Range("B1:B100"), Type:=0 'xlFillDefault
-If Err.Number <> 0 Then ' af ukendte *aa*rsager kan autofill fejle hver anden gang s*aa* m*aa* det g*oe*res manuelt, men det er langsommere
+If Err.Number <> 0 Then ' af ukendte årsager kan autofill fejle hver anden gang så må det gøres manuelt, men det er langsommere
     Err.Number = 0
     For i = 1 To 100
         xlsh.Cells(1 + i, 1).Formula = "=G$3/100+A" & i
@@ -173,7 +173,7 @@ xlsh.visible = -1 'xlSheetVisible
 'xlapp.EnableEvents = False
 
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 XLapp.ScreenUpdating = True
@@ -184,7 +184,7 @@ Function betcif(Optional ByVal tal As Double = 1, Optional ByVal cif As Integer 
 ' Returnerer tal med cif betydende cifre.
 ' hvis der ikke angives noget antal betydende cifre bruges 5
 Dim p As Integer
-On Error GoTo fejl
+On Error GoTo Fejl
   
   If tal = 0 Then
     betcif = 0
@@ -214,13 +214,13 @@ Else
 End If
 
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Function
 
 Sub OpenSpreadSheet()
-' denne metode er problematisk da der *aa*bnes ny instans af excel hver gang. Brug OpenExcelWB
+' denne metode er problematisk da der åbnes ny instans af excel hver gang. Brug OpenExcelWB
 Dim excelsti As String
 Dim appnr As Integer
 Dim statistiksti As String
@@ -229,18 +229,18 @@ Dim statistiksti As String
 '    statistiksti = """" & GetProgramFilesDir & "\WordMat\Statistik.xltm"""
     statistiksti = """" & GetProgramFilesDir & "\WordMat\Chi2Fordeling.xltx"""
 '    statistiksti = """" & Environ("ProgramFiles") & "\WordMat\Statistik.xltm"""
-    On Error GoTo fejl
+    On Error GoTo Fejl
     appnr = Shell(excelsti & " /t " & statistiksti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
     GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(96) & statistiksti, vbOKOnly, Sprog.Error
 slut:
 
 End Sub
-Function OpenExcelWB(filnavn As String, Optional startark As String, Optional WorkBookName As String) As Object
+Function OpenExcelWB(Filnavn As String, Optional startark As String, Optional WorkBookName As String) As Object
 On Error Resume Next
 #If Mac Then
-    OpenExcelMac filnavn & ";" & startark
+    OpenExcelMac Filnavn & ";" & startark
 #Else
 'Dim xclapp As Excel.Application
 Dim xclapp As Object 'Excel.Application
@@ -250,7 +250,7 @@ If Err.Number <> 0 Then
 End If
 Dim wordmatsti As String
 xclapp.visible = True
-wordmatsti = GetProgramFilesDir & "\WordMat\Excelfiles\" & filnavn
+wordmatsti = GetProgramFilesDir & "\WordMat\Excelfiles\" & Filnavn
 If Dir(wordmatsti) <> "" Then
     Set OpenExcelWB = xclapp.Workbooks.Add(wordmatsti)
     If WorkBookName <> "" Then
@@ -276,25 +276,25 @@ Function GetExcelSti() As String
         GetExcelSti = ""
     End If
 End Function
-Function InsertOpenExcel(filnavn As String, Optional startark As String = "", Optional WorkBookName As String) As Object
-' inds*ae*tter indlejret eller *aa*bner afh*ae*ngig af indstilling
-On Error GoTo fejl
+Function InsertOpenExcel(Filnavn As String, Optional startark As String = "", Optional WorkBookName As String) As Object
+' indsætter indlejret eller åbner afhængig af indstilling
+On Error GoTo Fejl
     If ExcelIndlejret Then
-        Set InsertOpenExcel = InsertIndlejret(filnavn, startark)
+        Set InsertOpenExcel = InsertIndlejret(Filnavn, startark)
     Else
-        Set InsertOpenExcel = OpenExcelWB(filnavn, startark, WorkBookName)
+        Set InsertOpenExcel = OpenExcelWB(Filnavn, startark, WorkBookName)
     End If
 
-fejl:
+Fejl:
 End Function
 Sub Chi2Graf()
-    InsertOpenExcel filnavn:="Chi2Fordeling.xltm", WorkBookName:=Sprog.A(483)
+    InsertOpenExcel Filnavn:="Chi2Fordeling.xltm", WorkBookName:=Sprog.A(483)
 End Sub
 Sub NormalFordelingGraf()
-    InsertOpenExcel filnavn:="NormalFordeling.xltm", WorkBookName:=Sprog.A(482)
+    InsertOpenExcel Filnavn:="NormalFordeling.xltm", WorkBookName:=Sprog.A(482)
 End Sub
 Sub BinomialFordeling()
-    InsertOpenExcel filnavn:="BinomialFordeling.xltm", WorkBookName:=Sprog.A(585)
+    InsertOpenExcel Filnavn:="BinomialFordeling.xltm", WorkBookName:=Sprog.A(585)
 End Sub
 Sub GoodnessofFit()
 '    InsertOpenExcel "GoodnessofFit.xltm"

@@ -29,7 +29,7 @@ Dim s As String
         If Tabel.Columns.Count >= 5 Then
             For RowNo = 1 To Tabel.Rows.Count
                 If Not StopTest Then
-                    s = VBA.LCase(Tabel.Cell(RowNo, 1).Range.text)
+                    s = VBA.LCase(Tabel.Cell(RowNo, 1).Range.Text)
                     If InStr(s, "auto") > 0 Then
                         MaximaExact = 0
                     ElseIf InStr(s, "exact") > 0 Then
@@ -81,35 +81,35 @@ End Sub
 Sub AllTables()
     Dim Tabel As Table
 
-    TextBox_status.text = "ok/fejl | Tabel | R*ae*kke | Kommando " & vbCrLf
+    TextBox_status.Text = "ok/fejl | Tabel | Række | Kommando " & vbCrLf
     For TabNo = 1 To ActiveDocument.Tables.Count
         Set Tabel = ActiveDocument.Tables(TabNo)
         TestTable Tabel
     Next
 
-    TextBox_status.text = TextBox_status.text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemf*oe*rt " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
+    TextBox_status.Text = TextBox_status.Text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemført " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
 
 
-fejl:
+Fejl:
 slut:
 End Sub
 
 Sub SetRow(t As Table, r As Integer)
 Dim s As String
     
-    s = " | " & TabNo & " | " & r & " | " & Replace(Replace(t.Cell(r, 3).Range.text, vbCrLf, ""), vbCr, "") & vbCrLf
-    If t.Cell(RowNo, 3).Range.text = t.Cell(RowNo, 4).Range.text Then
-        t.Cell(r, 5).Range.text = "OK"
+    s = " | " & TabNo & " | " & r & " | " & Replace(Replace(t.Cell(r, 3).Range.Text, vbCrLf, ""), vbCr, "") & vbCrLf
+    If t.Cell(RowNo, 3).Range.Text = t.Cell(RowNo, 4).Range.Text Then
+        t.Cell(r, 5).Range.Text = "OK"
         t.Cell(r, 5).Range.Font.ColorIndex = wdGreen
         s = " OK " & s
         OkCount = OkCount + 1
     Else
-        t.Cell(r, 5).Range.text = Sprog.Error
+        t.Cell(r, 5).Range.Text = Sprog.Error
         t.Cell(r, 5).Range.Font.ColorIndex = wdRed
         s = Sprog.Error & s
         ErrorCount = ErrorCount + 1
     End If
-    TextBox_status.text = TextBox_status.text & s
+    TextBox_status.Text = TextBox_status.Text & s
     OpdaterAntal
 End Sub
 Sub PrepareRow(t As Table, r As Integer)
@@ -127,7 +127,7 @@ Private Sub CommandButton_stop_Click()
     StopTest = True
 End Sub
 Sub Nulstil()
-    TextBox_status.text = ""
+    TextBox_status.Text = ""
     StopTest = False
     ErrorCount = 0
     OkCount = 0

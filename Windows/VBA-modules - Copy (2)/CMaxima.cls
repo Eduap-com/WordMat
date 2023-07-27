@@ -8,13 +8,13 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
-Public Kommando As String    ' kommando som maxima skal udf*oe*re
+Public Kommando As String    ' kommando som maxima skal udføre
 Public StartKommando As String
 Public KommandoForklaring As String ' til skrivning af kommando
-Private Kommandoer() As String    ' kommandoer som maxima skal udf*oe*re. KommandoerStreng m*aa* bruges public
+Private Kommandoer() As String    ' kommandoer som maxima skal udføre. KommandoerStreng må bruges public
 Public MaximaOutput As String    ' resultat fra Maxima
 Public KommentarOutput As String    ' evt. kommentar fra Maxima
-Private AntalKommandoer As Integer    ' bruges af runmaxima til at se hvorn*aa*r f*ae*rdig
+Private AntalKommandoer As Integer    ' bruges af runmaxima til at se hvornår færdig
 Public vars As String    ' variable i udtryk adskilt ad ;
 Public AntalVars As Integer    ' antal variable fundet af findvariable
 Private IntegrationVars As String    ' variable der bruges til integration skal ikke med i varlisten
@@ -23,8 +23,8 @@ Public MaximaInstalled As Boolean
 Public CmdTask As Task
 Public StopNow As Boolean
 Public TempDefs As String    ' midlertidige definitioner kun for denne kommando
-Public deffejl As Boolean    ' s*ae*ttes hvis der er fejl i definitioner
-Public Definitions As Boolean    ' s*ae*ttes hvis der er definitioner i dokumentet
+Public deffejl As Boolean    ' sættes hvis der er fejl i definitioner
+Public Definitions As Boolean    ' sættes hvis der er definitioner i dokumentet
 Public DefString As String    ' contains the output from finddefinition
 Public defstringtext As String    ' contains definitions from finddefinitions before ConvertToMaxima
 Private ldefname() As String    ' array med alle definitioner
@@ -34,15 +34,15 @@ Public KillDef As String    'indeholder listseparatoret liste over sidste defini
 Public ForgetList As String    ' indeholder liste over assumes der skal slettes
 Private Minput() As String
 Private moutput() As String
-Public ConvertErrorText As String    ' hvis der opst*aa*r fejl i fors*oe*get p*aa* at overs*ae*tte syntaks indeholder denne fejlteksten
+Public ConvertErrorText As String    ' hvis der opstår fejl i forsøget på at oversætte syntaks indeholder denne fejlteksten
 Public MaximaInputStreng As String
 Public MaximaInputStrengSec As String    ' secondary inputstring to be run after question
-Private matvekt As Boolean    ' s*ae*ttes hvis der registreres matricer. S*aa* aktiveres prik og krydsprodukt.
+Private matvekt As Boolean    ' sættes hvis der registreres matricer. Så aktiveres prik og krydsprodukt.
 Public matrixstartbracket As String
 Public matrixendbracket As String
 Private at As AutoTextEntry
 Public ConvertLnLog As Boolean    ' whethter converttomaxima converts ln(x) -> log(x) and log(x)-> log(x)/log(10)
-Public prevspr As String    ' bruges til n*aa*r Maxima spr. gentagne gange om det samme
+Public prevspr As String    ' bruges til når Maxima spr. gentagne gange om det samme
 Public prevsvar As String
 
 
@@ -70,14 +70,14 @@ Private Sub Class_Initialize()
     End If
     OpretTempdoc
 #End If
-    'If at Is Nothing Then ' giver fejl hvis k*oe*res i autoexec
+    'If at Is Nothing Then ' giver fejl hvis køres i autoexec
     '    Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
     'End If
 End Sub
 Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
     Dim DefS As String
     On Error Resume Next    ' der kommer fejl ved autoexec
-'    If at Is Nothing Then    ' giver fejl hvis k*oe*res i autoexec s*aa* skal ogs*aa* pr*oe*ves her . 19/2  bruges vel ikke mere
+'    If at Is Nothing Then    ' giver fejl hvis køres i autoexec så skal også prøves her . 19/2  bruges vel ikke mere
 '        Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
 '    End If
     StopNow = False
@@ -115,50 +115,50 @@ Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
 
     Exit Sub
 
-    ' skal nok bruges til mac p*aa* et tidspunkt:
+    ' skal nok bruges til mac på et tidspunkt:
     Dim fkommando As String
     MaximaInputStreng = "["
     'MaximaInputStreng = MaximaInputStreng & "display2d:false,"
     'MaximaInputStreng = MaximaInputStreng & "breakup:false$"  ' ikke dele udtryk op
-    'MaximaInputStreng = MaximaInputStreng & "fpprec:5$" 'antal cifre der skal bruges i beregninger, default 16 mindre g*oe*r beregninger upr*ae*cise
+    'MaximaInputStreng = MaximaInputStreng & "fpprec:5$" 'antal cifre der skal bruges i beregninger, default 16 mindre gør beregninger upræcise
     MaximaInputStreng = MaximaInputStreng & "fpprintprec:" & MaximaCifre & ","    ' antal cifre der skal vises fpprec styrer hvor mange der skal bruges i beregninger
-    MaximaInputStreng = MaximaInputStreng & "ratprint:false,"    'ingen advarsel om konvertering fra decimal til br*oe*k
-    MaximaInputStreng = MaximaInputStreng & "ratsimpexpons:true,"  ' simplificer ogs*aa* eksponenter,
-    MaximaInputStreng = MaximaInputStreng & "algebraic:false,"  ' false er default value, simplifikation af algebraiske heltal bl.a. noget med %i. Udtryk der er relle bliver ikke reduceret s*aa* %i fjernes helt hvis denne er false
+    MaximaInputStreng = MaximaInputStreng & "ratprint:false,"    'ingen advarsel om konvertering fra decimal til brøk
+    MaximaInputStreng = MaximaInputStreng & "ratsimpexpons:true,"  ' simplificer også eksponenter,
+    MaximaInputStreng = MaximaInputStreng & "algebraic:false,"  ' false er default value, simplifikation af algebraiske heltal bl.a. noget med %i. Udtryk der er relle bliver ikke reduceret så %i fjernes helt hvis denne er false
     MaximaInputStreng = MaximaInputStreng & "logexpand:super,"  ' alle log regneregler
-    'MaximaInputStreng = MaximaInputStreng & "realonly:" & VBA.LCase(MaximaComplex) & "," 'reelle eller komplekse l*oe*sninger, men kun til algsys
+    'MaximaInputStreng = MaximaInputStreng & "realonly:" & VBA.LCase(MaximaComplex) & "," 'reelle eller komplekse løsninger, men kun til algsys
     If MaximaComplex Then
         MaximaInputStreng = MaximaInputStreng & "domain:complex,"  '
     Else
-        MaximaInputStreng = MaximaInputStreng & "realonly:true,"    'reelle eller komplekse l*oe*sninger, men kun til algsys
+        MaximaInputStreng = MaximaInputStreng & "realonly:true,"    'reelle eller komplekse løsninger, men kun til algsys
     End If
     If MaximaExact = 2 Then
-        MaximaInputStreng = MaximaInputStreng & "numer:true,"  ' numeriske l*oe*sninger
+        MaximaInputStreng = MaximaInputStreng & "numer:true,"  ' numeriske løsninger
     Else
         MaximaInputStreng = MaximaInputStreng & "numer:false,"  ' exact
     End If
     If MaximaUnits Then
         MaximaInputStreng = MaximaInputStreng & "load(unit),setunits([N,J,W]),"    'enheder har nok bugs
     Else
-        '    MaximaInputStreng = MaximaInputStreng & "load(noninteractive)," 'nogle gange sp*oe*rges om fortegn p*aa* variable. giver output differentieret. er vidst ikke stabil
+        '    MaximaInputStreng = MaximaInputStreng & "load(noninteractive)," 'nogle gange spørges om fortegn på variable. giver output differentieret. er vidst ikke stabil
     End If
     If Not Radians Then
-        '    MaximaInputStreng = MaximaInputStreng & "HasInvTrig(udt):=block([i,del],partswitch:true,i:0,start,del:inpart(udt,i),if del=end then return (false),if del=asin then return (true),if del=acos then return (true),if del=atan then return (true), i:i+1, go (start))," ' n*oe*dvendigt at checke for inverse trig da det tager ca. 0,5s ekstra at implicere inverse trig funktioner uden grund
+        '    MaximaInputStreng = MaximaInputStreng & "HasInvTrig(udt):=block([i,del],partswitch:true,i:0,start,del:inpart(udt,i),if del=end then return (false),if del=asin then return (true),if del=acos then return (true),if del=atan then return (true), i:i+1, go (start))," ' nødvendigt at checke for inverse trig da det tager ca. 0,5s ekstra at implicere inverse trig funktioner uden grund
         '    MaximaInputStreng = MaximaInputStreng & "ConvertToDegr(udt):=block([aliz],remfunction(sing),matchdeclare(aliz,all),tellsimp(sin(aliz),sing(180/%pi*aliz)),tellsimp(cos(aliz),cosg(180/%pi*aliz)),tellsimp(tan(aliz),tang(180/%pi*aliz)),if not(HasInvTrig(udt)) then go(slut),tellsimp(asin(aliz),%pi/180*asing(aliz)),tellsimp(acos(aliz),%pi/180*acosg(aliz)),tellsimp(atan(aliz),%pi/180*atang(aliz)),slut,udt:ev(udt,simp),clear_rules(),udt),"
     End If
 
     'MaximaInputStreng = MaximaInputStreng & "assume_pos_pred:true," '
-    'MaximaInputStreng = MaximaInputStreng & "assume_pos:true," 'nogle gange sp*oe*rges om fortegn p*aa* variable. Nu antages pos. Men s*aa* kan den ikke l*oe*se y2/y1=(x2/x1)^a for a
-    MaximaInputStreng = MaximaInputStreng & "radexpand:true,"  ' default true, styrer reduktion af r*oe*dder. hvis all er sqrt(x^2)=x hvis true sqrt(x^2)=abs(x) ' all giver problemer ved reduktion af imagin*ae*re udtryk til reelle
-    MaximaInputStreng = MaximaInputStreng & "listconstvars:true,"  ' for at %i ogs*aa* kommer med blandt variable s*aa* kompleks kan findes
-    MaximaInputStreng = MaximaInputStreng & "solveradcan:false"    'default false, kan l*oe*se flere ligninger men langsommere. Bl.a. bruges log nu som l*oe*sning. Men kan ikke l*oe*se f.eks. 20=3*x^2.9 s*aa*
+    'MaximaInputStreng = MaximaInputStreng & "assume_pos:true," 'nogle gange spørges om fortegn på variable. Nu antages pos. Men så kan den ikke løse y2/y1=(x2/x1)^a for a
+    MaximaInputStreng = MaximaInputStreng & "radexpand:true,"  ' default true, styrer reduktion af rødder. hvis all er sqrt(x^2)=x hvis true sqrt(x^2)=abs(x) ' all giver problemer ved reduktion af imaginære udtryk til reelle
+    MaximaInputStreng = MaximaInputStreng & "listconstvars:true,"  ' for at %i også kommer med blandt variable så kompleks kan findes
+    MaximaInputStreng = MaximaInputStreng & "solveradcan:false"    'default false, kan løse flere ligninger men langsommere. Bl.a. bruges log nu som løsning. Men kan ikke løse f.eks. 20=3*x^2.9 så
     MaximaInputStreng = MaximaInputStreng & "]$"
     'If MaximaUnits Then
     '    MaximaInputStreng = MaximaInputStreng & "setunits([N,J])$"  '
     '    AntalKommandoer = AntalKommandoer + 1
     'End If
 
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral & vbCrLf & " preparing maxima", vbOKOnly, Sprog.Error
 
 End Sub
@@ -184,7 +184,7 @@ End Sub
 Public Sub ResetMaxima()
     Dim kd As String
     
-#If Mac Then ' indf*oe*rt fra version 1.23
+#If Mac Then ' indført fra version 1.23
     KillDef = ""
     ForgetList = ""
     Exit Sub
@@ -273,7 +273,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         '        Wait (2)
         If StopNow Then GoTo slut
         If MaxProc.Question = 1 Then
-            AnswerQuestion StopTime, False ' muligvis problematisk efter *ae*ndret til at form kan vises med answerquestion
+            AnswerQuestion StopTime, False ' muligvis problematisk efter ændret til at form kan vises med answerquestion
 #If Mac Then
             MaxProc.WaitForMaximaUntil (-1 * StopTime)
 #Else
@@ -296,7 +296,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         FindLastMaximaOutput
         ResetMaxima
         Unload UfWait2
-        '        MaxProc.CloseProcess ' g*oe*r at den h*ae*nger lidt, m*aa*ske n*oe*dvendig
+        '        MaxProc.CloseProcess ' gør at den hænger lidt, måske nødvendig
         ShowDebug
         Exit Sub
         GoTo slut
@@ -354,18 +354,18 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     On Error Resume Next
     Unload UfWait2
     GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) As String
 ' Converts a maxima expression, using the maxima-image with units loaded
-#If Mac Then ' noget af nedenst*aa*ende m*aa* kunne bruges, men f*oe*rst pr*oe*ves dette
+#If Mac Then ' noget af nedenstående må kunne bruges, men først prøves dette
     ConvertMaximaUnits = Expr
 #Else
-    Dim i As Integer, k As String, Arr As Variant
+    Dim i As Integer, k As String, arr As Variant
     
-    Expr = Replace(Expr, """", "") ' svaret vil typisk v*ae*re k*oe*rt igennem num-funktion der tilf*oe*jer "" om tal
+    Expr = Replace(Expr, """", "") ' svaret vil typisk være kørt igennem num-funktion der tilføjer "" om tal
     
     If basedim Then ' all units are reverted to base SI-units
         k = Expr & ",numer;applyb1(%,unitrule),numer;dectalallNum(%),numer;"
@@ -373,9 +373,9 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         k = "numer:true$uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
         k = k & "setunits(usersetunits);"
         If Not OutUnits = vbNullString Then
-            Arr = Split(OutUnits, ",")
-            For i = 0 To UBound(Arr) ' Det skal g*oe*res p*aa* denne m*aa*de fordi man ikke kan k*oe*re setunits p*aa* en liste hvor der optr*ae*der den samme type enhed to gange. fx eV og J
-                k = k & "setunits(" & omax.ConvertUnits(Arr(i)) & ")$"
+            arr = Split(OutUnits, ",")
+            For i = 0 To UBound(arr) ' Det skal gøres på denne måde fordi man ikke kan køre setunits på en liste hvor der optræder den samme type enhed to gange. fx eV og J
+                k = k & "setunits(" & omax.ConvertUnits(arr(i)) & ")$"
             Next
         End If
 '        k = k & expr & ",numer;applyb1(%,unitrule),numer;scanmap(processunits,%);dectalallNum(%),numer;"
@@ -383,7 +383,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         If MaximaVidNotation Then
             k = k & "scinotall(%);"
         Else
-'            k = k & "dectalallNum(%),numer;" ' giver problemer for enheder med % prefix da enhederne s*aa* vises f*oe*rst.
+'            k = k & "dectalallNum(%),numer;" ' giver problemer for enheder med % prefix da enhederne så vises først.
             k = k & "%,numer;"
         End If
     End If
@@ -412,7 +412,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
         On Error Resume Next
         UfWait2.Show vbModeless
         DoEvents
-        On Error GoTo fejl
+        On Error GoTo Fejl
         i = 0
         Do While MaxProc.Finished = 0 And i < StopTime
 #If Mac Then
@@ -437,7 +437,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
             '            ufwait2.Label_tip.Caption = "       Det tager sin tid..."
             '        ElseIf i = 250 Then
             '            ufwait2.Label_progress.Caption = "**"
-            '            ufwait2.Label_tip.Caption = " Jeg arbejder stadig p*aa* det."
+            '            ufwait2.Label_tip.Caption = " Jeg arbejder stadig på det."
             '        ElseIf i = 350 Then
             '            ufwait2.Label_tip.Caption = "Tryk evt. stop nu."
             '        ElseIf stoptime > 450 Then
@@ -474,7 +474,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
         End If
     End If
     GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -495,16 +495,16 @@ Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
     Dim answered As Boolean
 
     Do While MaxProc.Question = 1
-        Dim pos As Integer
+        Dim Pos As Integer
         Dim pos2 As Integer
-        pos = InStr(MaxProc.LastMaximaOutput, "positive, negative or zero?")
+        Pos = InStr(MaxProc.LastMaximaOutput, "positive, negative or zero?")
         pos2 = InStr(MaxProc.LastMaximaOutput, "positive or negative?")
-        If pos > 0 Or pos2 > 0 Then
+        If Pos > 0 Or pos2 > 0 Then
             Dim udtryk As String
             Dim UF As New UserFormAskSign
-            If pos <= 0 And pos2 > 0 Then pos = pos2
+            If Pos <= 0 And pos2 > 0 Then Pos = pos2
             pos2 = InStr(MaxProc.LastMaximaOutput, "Is ")
-            UF.Label_udtryk.Caption = Mid(MaxProc.LastMaximaOutput, pos2 + 3, pos - pos2 - 4)
+            UF.Label_udtryk.Caption = Mid(MaxProc.LastMaximaOutput, pos2 + 3, Pos - pos2 - 4)
             If UF.Label_udtryk.Caption = prevspr Then
                 svar = prevsvar
             Else
@@ -522,15 +522,15 @@ Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
         ElseIf InStr(MaxProc.LastMaximaOutput, " integer?") And MaximaComplex = False Then
             svar = "y"
         ElseIf InStr(MaxProc.LastMaximaOutput, "Is the matrix  1. Diagonal  2. Symmetric  3. Antisymmetric  4. General") Then
-            svar = InputBox(MaxProc.LastMaximaOutput, "spr", "")    ' MaxProc.Question skal f*oe*rst til passes
+            svar = InputBox(MaxProc.LastMaximaOutput, "spr", "")    ' MaxProc.Question skal først til passes
         ElseIf InStr(MaxProc.LastMaximaOutput, "variables to solve for?") Then
             Dim antalvar As Integer, var As String, ea As New ExpressionAnalyser, sprtext As String
-            pos = InStr(MaxProc.LastMaximaOutput, " variables to solve for?")
-            antalvar = val(Mid(MaxProc.LastMaximaOutput, pos - 2, 2))
+            Pos = InStr(MaxProc.LastMaximaOutput, " variables to solve for?")
+            antalvar = val(Mid(MaxProc.LastMaximaOutput, Pos - 2, 2))
             sprtext = Sprog.A(416) & " " & antalvar & " " & Sprog.A(417)
-            ea.text = right(MaxProc.LastMaximaOutput, Len(MaxProc.LastMaximaOutput) - pos - 24)
+            ea.Text = right(MaxProc.LastMaximaOutput, Len(MaxProc.LastMaximaOutput) - Pos - 24)
             ea.SetSquareBrackets
-            ea.pos = 0
+            ea.Pos = 0
             var = ea.GetNextBracketContent
 igen:
             svar = InputBox(sprtext, "spr", var)
@@ -556,7 +556,7 @@ igen:
 
     If answered And MaximaInputStrengSec <> "" Then
         MaximaInputStrengSec = "%th(2);" & MaximaInputStrengSec    ' pga. slutprut skal hoppes over.
-        If right(MaximaInputStrengSec, 1) = ";" Then    ' ved answerquestion s*ae*ttes automatisk ;
+        If right(MaximaInputStrengSec, 1) = ";" Then    ' ved answerquestion sættes automatisk ;
             MaximaInputStrengSec = Left(MaximaInputStrengSec, Len(MaximaInputStrengSec) - 1)
         End If
         MaxProc.AnswerQuestion (MaximaInputStrengSec)
@@ -577,7 +577,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
         WT = "5"
     End If
     Set UfWait2 = New UserFormWaitForMaxima
-    On Error Resume Next ' hvis en form allerede er *aa*ben giver det fejl
+    On Error Resume Next ' hvis en form allerede er åben giver det fejl
     UfWait2.Show vbModeless
     UfWait2.Label_tip.Font.Size = 10
     UfWait2.Label_tip.Font.Italic = False
@@ -588,7 +588,7 @@ start:
   FN = DataFolder & "output.txt"
     s = ExecuteMaximaViaFile(MaximaInputStreng, WT, MaximaUnits)
     If Left(s, 5) = "Fejln" Then
-        WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du pr*oe*ve igen, og hvor lang tid vil du vente. (sekunder) Computeren l*aa*ses i ventetiden.", "Afbrudt", 20)
+        WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.", "Afbrudt", 20)
         If Trim(WT) <> "" Then
             WT = Trim(WT)
             GoTo start
@@ -620,12 +620,12 @@ Public Sub RunMaximaFileOld()
     Dim i As Integer
 
     'UserFormWaitForMaxima.sh
-    shellcmd = "cmd /C " & maximasti & " < " & inputfil & " > " & outputfil   '/K holder cmd *aa*ben
-    'shellcmd = "cmd /C " & maximasti & " maxima.bat < " & InputFil & " > " & OutputFil   '/K holder cmd *aa*ben
-    'shellcmd = "cmd /C " & maximasti & " start /high ""maxima.bat < " & InputFil & " > " & OutputFil & """"   '/K holder cmd *aa*ben
+    shellcmd = "cmd /C " & maximasti & " < " & inputfil & " > " & outputfil   '/K holder cmd åben
+    'shellcmd = "cmd /C " & maximasti & " maxima.bat < " & InputFil & " > " & OutputFil   '/K holder cmd åben
+    'shellcmd = "cmd /C " & maximasti & " start /high ""maxima.bat < " & InputFil & " > " & OutputFil & """"   '/K holder cmd åben
     appnr = Shell(shellcmd, vbHide)    'vbNormalFocus vbMinimizedNoFocus vbhide
 
-    ' vent p*aa* maxima har genereret outputfil
+    ' vent på maxima har genereret outputfil
     i = 0
     Do
         i = i + 1
@@ -634,7 +634,7 @@ Public Sub RunMaximaFileOld()
 
     FindCmdTask    ' find kommandoprompten mens der ventes alligevel
 
-    ' vent p*aa* outputfilen er skrevet f*ae*rdig
+    ' vent på outputfilen er skrevet færdig
 ventmere:
     If WaitForMaxima(30) Then
         FindLastMaximaOutput
@@ -651,11 +651,11 @@ ventmere:
         '    End If
         CloseCmd
 
-        '    MsgBox "Maxima tog meget lang tid om beregningen. S*aa* den blev afsluttet inden den var f*ae*rdig.", vbOKOnly, "Fejl"
+        '    MsgBox "Maxima tog meget lang tid om beregningen. Så den blev afsluttet inden den var færdig.", vbOKOnly, "Fejl"
     End If
 
 
-    ' vent p*aa* maximakommandoprompt er lukket
+    ' vent på maximakommandoprompt er lukket
     'Dim maximaopen As Boolean
     'maximaopen = False
     'Do
@@ -678,7 +678,7 @@ End Sub
 Public Sub RunwxMaxima()
     Dim shellcmd As String
     Dim i As Integer
-    Dim Result As VbMsgBoxResult
+    Dim result As VbMsgBoxResult
     Dim MaximaInputStrengNonInteractive As String
     Dim maximasti As String
     Dim inputfil As String
@@ -694,23 +694,23 @@ Public Sub RunwxMaxima()
 
     shellcmd = maximasti & " /o " & inputfil
 
-    Result = MsgBox("Det er ikke muligt at l*oe*se problemet uden at stille nogle sp*oe*rgsm*aa*l." & vbCrLf & "Du bliver nu sendt til wxMaxima hvor du skal svare p*aa* et eller flere sp*oe*rgsm*aa*l. Angiv svar som y for yes eller n for no etc. tryk shift-enter efter svarene." & vbCrLf & vbCrLf & "Det resulterende udtryk kan s*aa* kopieres til Word igen.", vbOKCancel, "wxMaxima")
+    result = MsgBox("Det er ikke muligt at løse problemet uden at stille nogle spørgsmål." & vbCrLf & "Du bliver nu sendt til wxMaxima hvor du skal svare på et eller flere spørgsmål. Angiv svar som y for yes eller n for no etc. tryk shift-enter efter svarene." & vbCrLf & vbCrLf & "Det resulterende udtryk kan så kopieres til Word igen.", vbOKCancel, "wxMaxima")
 
-    If Result = vbOK Then
+    If result = vbOK Then
         appnr = Shell(shellcmd, vbNormalFocus)    'vbNormalFocus vbMinimizedNoFocus vbhide
     End If
 
 End Sub
 
 Public Function WaitForMaxima(t As Integer) As Boolean
-' vent p*aa* outputfil er genereret f*ae*rdig eller indtil der er g*aa*et t sekunder
-' returnerer true hvis den er f*ae*rdig
+' vent på outputfil er genereret færdig eller indtil der er gået t sekunder
+' returnerer true hvis den er færdig
     Dim fillen As Integer
     Dim fillen2 As Integer
     Dim i As Integer
     Dim filtext As String
     Dim NoRuns As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim MaximaInputStrengNonInteractive As String
     i = 0
     StopNow = False
@@ -725,13 +725,13 @@ Public Function WaitForMaxima(t As Integer) As Boolean
             CloseCmd
             Exit Function
         End If
-    Loop Until (fillen >= 297 And InStr(280, filtext, "(%i" & AntalKommandoer & ")") > 0) Or i > t * 10 Or fillen > 4000 Or InStr(279, filtext, "Incorrect syntax")  ' 301 er korteste mulige outputfil der er f*ae*rdig
+    Loop Until (fillen >= 297 And InStr(280, filtext, "(%i" & AntalKommandoer & ")") > 0) Or i > t * 10 Or fillen > 4000 Or InStr(279, filtext, "Incorrect syntax")  ' 301 er korteste mulige outputfil der er færdig
     'ekstra sikkerhed fjernet: fillen = fillen2 And
     'MsgBox Len(FilOutput)
 
     If fillen > 4000 And NoRuns = 0 Then
         CloseCmd
-        Arr = Split(vars, ";")
+        arr = Split(vars, ";")
         Dim decl As String
         decl = "declare(["
         decl = decl & Replace(vars, ";", ",")
@@ -763,7 +763,7 @@ Public Sub CloseCmd()
         CmdTask.Close
     End If
     GoTo slut
-fejl:
+Fejl:
     KillMaxima
 slut:
 End Sub
@@ -818,8 +818,8 @@ Sub InsertKillDef()
 
 End Sub
 Sub AddStandardSecondary()
-' typisk skal denne k*oe*res efter maximastregen er sat op til at k*oe*re kommandoen
-' denne s*oe*rger s*aa* for at output kommer som anvist i indstillinger
+' typisk skal denne køres efter maximastregen er sat op til at køre kommandoen
+' denne sørger så for at output kommer som anvist i indstillinger
 
     If MaximaVidNotation Then     ' videnskabelig notation
         MaximaInputStrengSec = MaximaInputStrengSec & "scinotall(%),numer"    ' uden ,numer bliver der ikke reduceret i udtrykket sqrt(2) f.eks.
@@ -836,10 +836,10 @@ Sub AddStandardSecondary()
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec & ";"
 End Sub
 Public Sub ExecuteMaximaCommand(Optional MaxCmd As String, Optional TranslateToMaxima As Boolean = False)
-' udf*oe*rer den kommando som er i kommando-strengen eller angives som parameter
-    Dim text As String
+' udfører den kommando som er i kommando-strengen eller angives som parameter
+    Dim Text As String
     If MaxCmd <> "" Then
-        Kommando = MaxCmd    ' VBA.LCase m*aa*ske
+        Kommando = MaxCmd    ' VBA.LCase måske
     End If
 
 
@@ -847,28 +847,28 @@ Public Sub ExecuteMaximaCommand(Optional MaxCmd As String, Optional TranslateToM
     If TranslateToMaxima Then
         MaximaInputStreng = MaximaInputStreng & CodeForMaxima(Kommando) & ";"
     Else
-        text = Kommando
-        text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
-        text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
-        text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
-        text = Replace(text, vbLf, "")    ' shift-enter og enter
-        text = Replace(text, vbCrLf, "")
-        text = Replace(text, vbCr, "")
-        text = Replace(text, VBA.ChrW(183), "*")    ' prik erstattes med gange
-        text = Replace(text, VBA.ChrW(8901), "*")    ' \cdot , ved ikke hvorfor der tilsyneladende er to
-        text = Replace(text, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
-        text = Replace(text, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
-        text = Replace(text, VBA.ChrW(247), "/")    '
-        text = Replace(text, VBA.ChrW(8800), "#")    ' ikkeligmed
-        text = Replace(text, VBA.ChrW(8804), "<=")    '
-        text = Replace(text, VBA.ChrW(8805), ">=")    '
-        text = Replace(text, VBA.ChrW(160), "")    ' foran accent f.eks. vector pil 160 8407
-        text = Replace(text, VBA.ChrW(8289), "") ' funktionstegn
-        text = Replace(text, VBA.ChrW(9618), "") ' funktionstegn
-        text = Replace(text, VBA.ChrW(12310), "(") ' skjulte parenteser
-        text = Replace(text, VBA.ChrW(12311), ")") ' skjulte parenteser
+        Text = Kommando
+        Text = Replace(Text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
+        Text = Replace(Text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
+        Text = Replace(Text, VBA.ChrW(11), "")    ' shift-enter
+        Text = Replace(Text, vbLf, "")    ' shift-enter og enter
+        Text = Replace(Text, vbCrLf, "")
+        Text = Replace(Text, vbCr, "")
+        Text = Replace(Text, VBA.ChrW(183), "*")    ' prik erstattes med gange
+        Text = Replace(Text, VBA.ChrW(8901), "*")    ' \cdot , ved ikke hvorfor der tilsyneladende er to
+        Text = Replace(Text, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
+        Text = Replace(Text, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
+        Text = Replace(Text, VBA.ChrW(247), "/")    '
+        Text = Replace(Text, VBA.ChrW(8800), "#")    ' ikkeligmed
+        Text = Replace(Text, VBA.ChrW(8804), "<=")    '
+        Text = Replace(Text, VBA.ChrW(8805), ">=")    '
+        Text = Replace(Text, VBA.ChrW(160), "")    ' foran accent f.eks. vector pil 160 8407
+        Text = Replace(Text, VBA.ChrW(8289), "") ' funktionstegn
+        Text = Replace(Text, VBA.ChrW(9618), "") ' funktionstegn
+        Text = Replace(Text, VBA.ChrW(12310), "(") ' skjulte parenteser
+        Text = Replace(Text, VBA.ChrW(12311), ")") ' skjulte parenteser
         
-        Kommando = text
+        Kommando = Text
         Kommando = Replace(Kommando, VBA.ChrW(8289), "")
         MaximaInputStreng = MaximaInputStreng & Kommando & ";"
     End If
@@ -909,14 +909,14 @@ start:
     End If
 
     If MaximaExact = 2 Then
-        rkommando = "ev(%,numer)"    ' fors*oe*g p*aa* at l*oe*se : 6^2=5^2+3^2-2*5*3*cos(C) l*oe*s for C med numer, giver delvist eksakt
+        rkommando = "ev(%,numer)"    ' forsøg på at løse : 6^2=5^2+3^2-2*5*3*cos(C) løs for C med numer, giver delvist eksakt
     Else
         rkommando = "ev(%)"    ' kommando hvor log og sin konverteres
     End If
-    '    rkommando = "ev(%th(2))" ' kommando hvor log og sin konverteres  th2 pga slutprut n*aa*r der bruges answerquestion
+    '    rkommando = "ev(%th(2))" ' kommando hvor log og sin konverteres  th2 pga slutprut når der bruges answerquestion
 
 
-    '    If Not Radians And Not MaximaExact = 2 Then ' kan ikke huske hvorfor  not num, men det er et problem n*aa*r der kommer udtryk med variabel
+    '    If Not Radians And Not MaximaExact = 2 Then ' kan ikke huske hvorfor  not num, men det er et problem når der kommer udtryk med variabel
     If Not Radians Then
         rkommando = "ConvertToDegr(" & rkommando & ")"
     End If
@@ -932,15 +932,15 @@ start:
 
     ' inputstrengen bygges op**************
 
-    ' f*oe*rst en simpel reducering af ligningen. nok ikke n*oe*dvendig. Giver problemer med sp*oe*rgsm*aa*l da kommando med spr. er sidste der udf*oe*res
+    ' først en simpel reducering af ligningen. nok ikke nødvendig. Giver problemer med spørgsmål da kommando med spr. er sidste der udføres
     '    If MaximaExact = 2 Then
     '        MaximaInputStreng = MaximaInputStreng & "fullratsimp(" & ckommando & "),numer;"
     '    Else
     '        MaximaInputStreng = MaximaInputStreng & ckommando & ";"
     '    End If
     
-    If MaximaUnits Then 'reducer f*oe*rst enheder p*aa* udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
-        If Not (InStr(ckommando, "diff") > 0 And InStr(ckommando, "subst") > 0) Then ' hvis der indg*aa*r noget f' m*aa* det ikke reduceres inden
+    If MaximaUnits Then 'reducer først enheder på udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
+        If Not (InStr(ckommando, "diff") > 0 And InStr(ckommando, "subst") > 0) Then ' hvis der indgår noget f' må det ikke reduceres inden
             ckommando = Replace(ConvertMaximaUnits(ckommando), """", "")
         End If
     End If
@@ -949,10 +949,10 @@ start:
 '        MaximaInputStreng = MaximaInputStreng & "rhs(" & ckommando & ");"    ' kryptisk, men ellers kan komme lisp fejl f.eks. (-t+1)*m/s=0
 '        MaximaInputStreng = MaximaInputStreng & "lhs(" & ckommando & ");"    ' kryptisk, men ellers kan komme lisp fejl f.eks. -(252178095*m*x-206157266*m)/(342482374*s)=0
 '        MaximaInputStreng = MaximaInputStreng & "%=%th(2);"    ' kryptisk, men ellers kan komme lisp fejl f.eks. (-t+1)*m/s=0
-'        MaximaInputStreng = MaximaInputStreng & "fullratsimp(%),numer;"    ' hvis lisp fejl p*aa* denne bliver % bare lig forrige
+'        MaximaInputStreng = MaximaInputStreng & "fullratsimp(%),numer;"    ' hvis lisp fejl på denne bliver % bare lig forrige
 '        MaximaInputStreng = MaximaInputStreng & "applyunitrule(lhs(%)-rhs(%))=0;"
 '        MaximaInputStreng = MaximaInputStreng & "CSolve(%," & variabel & ");"
-    If MaximaExact = 2 Then    ' n*oe*dvendigt for at trig ligninger med sing ikke l*oe*ses eksakt
+    If MaximaExact = 2 Then    ' nødvendigt for at trig ligninger med sing ikke løses eksakt
         MaximaInputStreng = MaximaInputStreng & "Solve(ev(" & ckommando & ",numer)," & variabel & ");"
     Else
         MaximaInputStreng = MaximaInputStreng & "Solve(" & ckommando & "," & variabel & ");"
@@ -962,7 +962,7 @@ start:
     '    RunMaxima reset:=False
     '    MaximaInputStreng = ""
 
-    MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    's*aa* log og trig konverteringer
+    MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    'så log og trig konverteringer
 
 
     AddStandardSecondary
@@ -1040,7 +1040,7 @@ start:
         End If
 
         '    MaximaOutput = Replace(MaximaOutput, "%i", "i")
-    End If    ' slut p*aa* L=*oe*
+    End If    ' slut på L=ø
     ResetMaxima
 
     If gemMaxExct >= 0 Then MaximaExact = gemMaxExct
@@ -1048,7 +1048,7 @@ slut:
 End Sub
 Sub MaximaSolveInequality(variabel As String)
     Dim nr As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer
     If variabel = "" Then Exit Sub
 
@@ -1079,7 +1079,7 @@ Sub MaximaSolveInequality(variabel As String)
 
     nr = UBound(Minput)
     If Not MaximaExact = 2 Then
-        If InStr(moutput(nr - 1), variabel & " = ") > 0 Then    ' hvis l*oe*st analytisk skal analytisk l*oe*sning bruges ellers numerisk
+        If InStr(moutput(nr - 1), variabel & " = ") > 0 Then    ' hvis løst analytisk skal analytisk løsning bruges ellers numerisk
             MaximaOutput = ConvertToWordSymbols(moutput(nr - 1))
         Else
             MaximaOutput = ConvertToWordSymbols(MaximaOutput)
@@ -1120,12 +1120,12 @@ Sub MaximaSolveInequality(variabel As String)
         Else    ' notation med x=...
             MaximaOutput = RemoveBrackets(MaximaOutput)
             If Not MaximaComplex Then
-                Arr = Split(MaximaOutput, ListSeparator)
+                arr = Split(MaximaOutput, ListSeparator)
                 MaximaOutput = ""
-                For i = 0 To UBound(Arr)
-                    If InStr(Arr(i), "%i") < 1 Then     'kun reelle l*oe*sninger
+                For i = 0 To UBound(arr)
+                    If InStr(arr(i), "%i") < 1 Then     'kun reelle løsninger
                         If MaximaOutput <> "" Then MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    "
-                        MaximaOutput = MaximaOutput & Arr(i)
+                        MaximaOutput = MaximaOutput & arr(i)
                     End If
                 Next
             Else
@@ -1149,14 +1149,14 @@ Sub MaximaSolveNumeric(ByVal variabel As String, ByVal guess As String, Optional
         eps = "10^-" & eps
     End If
     If InStr(Kommando, "=") < 1 Then
-        Kommentar = "Der skal v*ae*re et ligmed tegn i en ligning."
+        Kommentar = "Der skal være et ligmed tegn i en ligning."
         MaximaOutput = ""
         Exit Sub
     End If
-    Kommando = Replace(Kommando, "=", "-(") & ")"    ' skal v*ae*re udtryk ikke ligning. Dette s*ae*ttes lig nul
+    Kommando = Replace(Kommando, "=", "-(") & ")"    ' skal være udtryk ikke ligning. Dette sættes lig nul
     Kommando = "newton(" & CodeForMaxima(Kommando) & "," & variabel & "," & guess & "," & eps & ")"
     MaximaInputStreng = MaximaInputStreng & "[ratsimpexpons:false,load(""newton1"")]$" & Kommando & ";"
-    ' af uransagelige *aa*rsager kan der komme eksakte l*oe*sninger ud
+    ' af uransagelige årsager kan der komme eksakte løsninger ud
 
     If MaximaVidNotation Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer"  ' uden ,numer bliver der ikke reduceret i udtrykket sqrt(2) f.eks.
@@ -1194,7 +1194,7 @@ Sub MaximaFindRoot(ByVal variabel As String, ByVal xmin As String, ByVal xmax As
     If eps = "" Then
         eps = "10^-" & MaximaCifre
     End If
-    Kommando = Replace(Kommando, "=", "-(") & ")"    ' skal v*ae*re udtryk ikke ligning. Dette s*ae*ttes lig nul
+    Kommando = Replace(Kommando, "=", "-(") & ")"    ' skal være udtryk ikke ligning. Dette sættes lig nul
     Kommando = "find_root(" & CodeForMaxima(Kommando) & "," & variabel & "," & xmin & "," & xmax & ")"
     MaximaInputStreng = MaximaInputStreng & "[ratsimpexpons:false]$" & Kommando & ";"
 
@@ -1283,7 +1283,7 @@ Sub SolveSystem(Variable As String)
 
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139) & "Der skal v*ae*re et ligmed tegn i en ligning."
+        Kommentar = Sprog.A(139) & "Der skal være et ligmed tegn i en ligning."
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1294,7 +1294,7 @@ Sub SolveSystem(Variable As String)
     End If
 
     rkommando = "ev(%)"    ' kommando hvor log og sin konverteres
-    '    If Not Radians And Not MaximaExact = 2 Then ' kan ikke huske hvorfor  not num, men det er et problem n*aa*r der kommer udtryk med variabel
+    '    If Not Radians And Not MaximaExact = 2 Then ' kan ikke huske hvorfor  not num, men det er et problem når der kommer udtryk med variabel
     If Not Radians Then
         rkommando = "ConvertToDegr(" & rkommando & ")"
     End If
@@ -1315,8 +1315,8 @@ Sub SolveSystem(Variable As String)
         Kommando = Kommando & "," & CodeForMaxima(Kommandoer(i))
     Next
 
-    ' ikke sikker p*aa* at dette er godt ved ligningssystemer
-'    If MaximaUnits Then 'reducer f*oe*rst enheder p*aa* udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
+    ' ikke sikker på at dette er godt ved ligningssystemer
+'    If MaximaUnits Then 'reducer først enheder på udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
 '        ckommando = Replace(ConvertMaximaUnits(ckommando), """", "")
 '    End If
     
@@ -1332,7 +1332,7 @@ Sub SolveSystem(Variable As String)
     Kommando = Kommando & "]"
     Variable = "[" & Variable & "]"
 
-    If MaximaExact = 2 Then    ' n*oe*dvendigt for at trig ligninger med sing ikke l*oe*ses eksakt
+    If MaximaExact = 2 Then    ' nødvendigt for at trig ligninger med sing ikke løses eksakt
         Kommando = "Solve(ev(" & Kommando & ",numer)," & Variable & ")"
     Else
         Kommando = "Solve(" & Kommando & "," & Variable & ")"
@@ -1353,7 +1353,7 @@ Sub SolveSystem(Variable As String)
         MaximaInputStreng = MaximaInputStreng & ",autonsolve=true;"
     End If
 
-    MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    's*aa* log og trig konverteringer
+    MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    'så log og trig konverteringer
 
     AddStandardSecondary
 
@@ -1367,10 +1367,10 @@ End Sub
 Sub Eliminate(Variable As String)
     Dim Kommentar As String
     Dim i As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139) '"Der skal v*ae*re et ligmed tegn i en ligning."
+        Kommentar = Sprog.A(139) '"Der skal være et ligmed tegn i en ligning."
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1413,17 +1413,17 @@ Sub Eliminate(Variable As String)
     If StopNow Then GoTo slut
 
     MaximaOutput = Mid(MaximaOutput, 2, Len(MaximaOutput) - 2)
-    Arr = Split(MaximaOutput, ListSeparator)
-    If Not (InStr(Arr(0), "=") > 0) Then
-        MaximaOutput = Arr(0) & "=0"
+    arr = Split(MaximaOutput, ListSeparator)
+    If Not (InStr(arr(0), "=") > 0) Then
+        MaximaOutput = arr(0) & "=0"
     Else
-        MaximaOutput = Arr(0)
+        MaximaOutput = arr(0)
     End If
-    For i = 1 To UBound(Arr)
-        If Not (InStr(Arr(i), "=") > 0) Then
-            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & Arr(i) & "=0"
+    For i = 1 To UBound(arr)
+        If Not (InStr(arr(i), "=") > 0) Then
+            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & arr(i) & "=0"
         Else
-            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & Arr(i)
+            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & arr(i)
         End If
     Next
 
@@ -1434,7 +1434,7 @@ Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional
     Dim i As Integer
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139) '"Der skal v*ae*re et ligmed tegn i en ligning."
+        Kommentar = Sprog.A(139) '"Der skal være et ligmed tegn i en ligning."
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1484,11 +1484,11 @@ Sub beregn()
     '    kommando = Replace(kommando, VBA.ChrW(12311), "") ' specielle usynlige paranteser fjernes
     Kommando = Trim(Kommando)    ' fjern mellemrum duer ikke da 1/5 2 bliver til 1/52
 
-    If right(Kommando, 1) = "=" Then    ' fjern ligmed hvis det er yderst til h*oe*jre
+    If right(Kommando, 1) = "=" Then    ' fjern ligmed hvis det er yderst til højre
         Kommando = Left(Kommando, Len(Kommando) - 1)
     End If
 
-    Do    ' g*aa* tilbage til n*ae*rmeste ligmed
+    Do    ' gå tilbage til nærmeste ligmed
         posligmed = InStr(Kommando, "=")
         possumtegn = InStr(Kommando, VBA.ChrW(8721))
         '    posprodtegn = InStr(Kommando, VBA.ChrW(8719))
@@ -1504,13 +1504,13 @@ Sub beregn()
     Loop While posligmed > 0
 
 start:
-    StartKommando = Kommando    ' kommando f*oe*r der bliver pillet ved den
+    StartKommando = Kommando    ' kommando før der bliver pillet ved den
     StartKommando3 = Kommando
     
-    pkommando = Kommando    ' kommando f*oe*r der bliver pillet ved den
+    pkommando = Kommando    ' kommando før der bliver pillet ved den
     pkommando = Replace(pkommando, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes, giver problemer at fjerne her
     pkommando = Replace(pkommando, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
-    '    pkommando = Replace(pkommando, " ", "") ' ikke altid optimalt men nok det bedste. nej ikke efter underforst*aa*ede gangetegn
+    '    pkommando = Replace(pkommando, " ", "") ' ikke altid optimalt men nok det bedste. nej ikke efter underforståede gangetegn
 
 '    StartKommando2 = pkommando ' til at sammenligne om numerisk resultat er lig input
 '    StartKommando2 = Replace(StartKommando2, "sin", "sing")
@@ -1519,7 +1519,7 @@ start:
 '    StartKommando2 = Replace(StartKommando2, "log10", "lgog")
 
 
-' *ae*ndret pga maximaimage
+' ændret pga maximaimage
 '    If MaximaUnits Then
 '        '        kommando = CodeForMaxima(kommando) & ";applyunitrule(%)"
 '        Kommando = "applyunitrule(" & CodeForMaxima(Kommando) & ")"
@@ -1539,7 +1539,7 @@ start:
     If Not Radians Then
         inkom = "ConvertToDegr(" & inkom & ")"
     End If
-    '    If Not MaximaExact = 2 Then ' kan give m*ae*rkelig resultat #1,INF med ,numer   72*e^((0.619/0.22*(e^22-e^0.22*t )) )
+    '    If Not MaximaExact = 2 Then ' kan give mærkelig resultat #1,INF med ,numer   72*e^((0.619/0.22*(e^22-e^0.22*t )) )
     ''        inkom = "fullratsimp(" & inkom & ")"
     '        inkom = "simplify(" & inkom & ")"
     '    End If
@@ -1558,20 +1558,20 @@ start:
         MaximaInputStrengSec = "ev(" & inkom & ",numer);scinotall(%);ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"    ' ,numer fjernet fra scinot
         MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
     ElseIf MaximaExact = 2 Or MaximaUnits Then    ' enheder overrider, overrider auto,exact,num
-        '        MaximaInputStreng = MaximaInputStreng & kommando & ",numer;" & inkom & ";%,numer;" ' m*aa*ske bruge dectalall for at f*aa* mere pr*ae*cis antal bet cifre
+        '        MaximaInputStreng = MaximaInputStreng & kommando & ",numer;" & inkom & ";%,numer;" ' måske bruge dectalall for at få mere præcis antal bet cifre
         If MaximaBigFloat Then
             MaximaInputStreng = MaximaInputStreng & "fpprec:50$convertbfloat(" & Kommando & ");"
         Else
             MaximaInputStreng = MaximaInputStreng & Kommando & ",numer;"
         End If
-'        MaximaInputStrengSec = "simplifynum(" & inkom & ");dectalallNum(%),numer;ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns)," & StartKommando2 & ")),numer);"    ' dectal er n*oe*dvendig for enheder og korrekt antal bet cif. . fors*oe*g med ,numer
-'        MaximaInputStrengSec = "simplifynum(" & inkom & ");dectalallNum(%),numer;ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"    ' dectal er n*oe*dvendig for enheder og korrekt antal bet cif. . fors*oe*g med ,numer
-        MaximaInputStrengSec = "simplifynum(" & inkom & ");"    ' dectal er n*oe*dvendig for enheder og korrekt antal bet cif. . fors*oe*g med ,numer
+'        MaximaInputStrengSec = "simplifynum(" & inkom & ");dectalallNum(%),numer;ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns)," & StartKommando2 & ")),numer);"    ' dectal er nødvendig for enheder og korrekt antal bet cif. . forsøg med ,numer
+'        MaximaInputStrengSec = "simplifynum(" & inkom & ");dectalallNum(%),numer;ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"    ' dectal er nødvendig for enheder og korrekt antal bet cif. . forsøg med ,numer
+        MaximaInputStrengSec = "simplifynum(" & inkom & ");"    ' dectal er nødvendig for enheder og korrekt antal bet cif. . forsøg med ,numer
 #If Mac Then
         If MaximaUnits Then
-'            MaximaInputStrengSec = "applyb1(%,unitrule),numer;" 'g*oe*r det ikke bedre
-            If InStr(ConvertUnits(OutUnits), "%") > 0 Then ' hvis % i outunits giver det muligvis enhed der placeres f*oe*r tal
-                MaximaInputStrengSec = MaximaInputStrengSec & "%,numer;" ' dectalall placerer enheder med %m prefix foran tal, s*aa* hellere forkert antal betcif?
+'            MaximaInputStrengSec = "applyb1(%,unitrule),numer;" 'gør det ikke bedre
+            If InStr(ConvertUnits(OutUnits), "%") > 0 Then ' hvis % i outunits giver det muligvis enhed der placeres før tal
+                MaximaInputStrengSec = MaximaInputStrengSec & "%,numer;" ' dectalall placerer enheder med %m prefix foran tal, så hellere forkert antal betcif?
             Else
                 MaximaInputStrengSec = MaximaInputStrengSec & "dectalallNum(%),numer;"
             End If
@@ -1582,7 +1582,7 @@ start:
 #Else
         MaximaInputStrengSec = MaximaInputStrengSec & "dectalallNum(%),numer;"
 #End If
-        MaximaInputStrengSec = MaximaInputStrengSec & "ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"     ' dectal er n*oe*dvendig for enheder og korrekt antal bet cif. . fors*oe*g med ,numer
+        MaximaInputStrengSec = MaximaInputStrengSec & "ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"     ' dectal er nødvendig for enheder og korrekt antal bet cif. . forsøg med ,numer
         MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
     ElseIf MaximaExact = 0 Then    ' auto
         '        MaximaInputStreng = MaximaInputStreng & inkom & ",numer:false;" & inkom & ",numer;is(%=%th(2));"
@@ -1632,13 +1632,13 @@ start:
     ElseIf MaximaExact = 0 And Not MaximaVidNotation And Not MaximaUnits Then
         Dim exactres As String
         Dim numres As String
-        moutput(nr - 1) = Replace(moutput(nr - 1), vbLf, "")
-        moutput(nr - 2) = Replace(moutput(nr - 2), vbLf, "")
-'        numres = Replace(moutput(nr - 1), """", "") ' for upr*ae*cist.
+        If nr > 1 Then moutput(nr - 1) = Replace(moutput(nr - 1), vbLf, "")
+        If nr > 2 Then moutput(nr - 2) = Replace(moutput(nr - 2), vbLf, "")
+'        numres = Replace(moutput(nr - 1), """", "") ' for upræcist.
 '        exactres = Replace(moutput(nr - 3), """", "")
         numres = ConvertToWordSymbols(moutput(nr - 1))
         If UBound(moutput) > 3 Then exactres = ConvertToWordSymbols(moutput(nr - 3))
-        If exactres = "" And numres = "" Then exactres = MaximaOutput    ' hvis der har v*ae*ret sp*oe*rgsm*aa*l
+        If exactres = "" And numres = "" Then exactres = MaximaOutput    ' hvis der har været spørgsmål
         eql = MaximaOutput
         If eql = "true" Or StartKommando3 = numres Then
              eql = "="
@@ -1646,7 +1646,7 @@ start:
              eql = VBA.ChrW(&H2248)
         End If
         MaximaOutput = ""
-        pkommando = ConvertToWordSymbols(Replace(pkommando, DecSeparator, ".")) ' pkommando kan ikke sammenlignes 100% med output f*oe*r den ogs*aa* er k*oe*rt igennem
+        pkommando = ConvertToWordSymbols(Replace(pkommando, DecSeparator, ".")) ' pkommando kan ikke sammenlignes 100% med output før den også er kørt igennem
         If exactres <> "" Then
             '    MsgBox "pkommando:" & pkommando & vbCrLf & " exactres:" & ConvertToWordSymbols(exactres)
             If exactres = numres Or pkommando = exactres Or StartKommando3 = exactres Then ' hvis numerisk og eksakt ens eller eksakt lig input
@@ -1704,14 +1704,14 @@ start:
     '    End If
     'End If
     'If MaximaOutput = "" Then
-    '    KommentarOutput = "Der kom f*oe*lgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
+    '    KommentarOutput = "Der kom følgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
     'End If
     
     If gemMaxExct >= 0 Then MaximaExact = gemMaxExct
 slut:
 End Sub
 Sub PolySolve(ByVal variabel As String)
-' l*oe*ser polynomium numerisk vha. speciel metode der giver alle l*oe*sninger
+' løser polynomium numerisk vha. speciel metode der giver alle løsninger
     Kommando = "algsys([" & CodeForMaxima(Kommando) & "],[" & variabel & "])"
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
@@ -1732,9 +1732,9 @@ slut:
 End Sub
 Sub ConvertOutputToSolved()
 ' konverterer output fra [1,3] til x=1 v x=3 eller L={1,3}
-' kun beregnet til numerisk l*oe*sning
+' kun beregnet til numerisk løsning
     Dim Variable As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer
     Dim Sep As String
     If LmSet Then
@@ -1745,9 +1745,9 @@ Sub ConvertOutputToSolved()
             MaximaOutput = Replace(MaximaOutput, "[", "(")
             MaximaOutput = Replace(MaximaOutput, "]", ")")
             MaximaOutput = Replace(MaximaOutput, "=", "")
-            Arr = Split(Mid(Variable, 2, Len(Variable) - 2), ",")
-            For i = 0 To UBound(Arr)
-                MaximaOutput = Replace(MaximaOutput, Arr(i), "")
+            arr = Split(Mid(Variable, 2, Len(Variable) - 2), ",")
+            For i = 0 To UBound(arr)
+                MaximaOutput = Replace(MaximaOutput, arr(i), "")
             Next
             MaximaOutput = "L={" & MaximaOutput & "}"
         End If
@@ -1755,10 +1755,10 @@ Sub ConvertOutputToSolved()
 
         Dim ea As New ExpressionAnalyser
         Dim o As String
-        ea.text = MaximaOutput
+        ea.Text = MaximaOutput
         MaximaOutput = ""
-        ea.text = ea.GetNextBracketContent
-        ea.pos = 1
+        ea.Text = ea.GetNextBracketContent
+        ea.Pos = 1
         o = ea.GetNextBracketContent
         If o = "" Then
             MaximaOutput = ""
@@ -1767,7 +1767,7 @@ Sub ConvertOutputToSolved()
         MaximaOutput = o
         MaximaOutput = Replace(MaximaOutput, Sep, "    " & VBA.ChrW(8743) & "    ")
         o = ea.GetNextBracketContent
-        If o = "" Then Exit Sub    ' kun en l*oe*sning
+        If o = "" Then Exit Sub    ' kun en løsning
 
         MaximaOutput = "(" & MaximaOutput & ")"
         o = "(" & Replace(o, Sep, "    " & VBA.ChrW(8743) & "    ") & ")"
@@ -1786,28 +1786,28 @@ Sub ConvertOutputToSolvedGGB()
     ' til geogebraoutput ved ligningssystemer
     Dim p As Integer, s As String, i As Integer, j As Integer
     Dim ea As New ExpressionAnalyser
-    Dim Arr() As String, arr2() As String
+    Dim arr() As String, arr2() As String
     
     If MaximaOutput = "?" Or MaximaOutput = "" Then
         Exit Sub
     End If
     ea.SetNormalBrackets
-    ea.text = MaximaOutput
+    ea.Text = MaximaOutput
 '    p = InStr(ea.text, "(_")
     p = 1
     s = ea.GetNextBracketContent(p + 1)
-    Arr = Split(s, "@")
+    arr = Split(s, "@")
     MaximaOutput = ""
     
-    For i = 0 To UBound(Arr)
-        arr2 = Split(Arr(i), "&")
+    For i = 0 To UBound(arr)
+        arr2 = Split(arr(i), "&")
         If UBound(arr2) > 0 Then
-            If UBound(Arr) > 0 Then MaximaOutput = MaximaOutput & "("
+            If UBound(arr) > 0 Then MaximaOutput = MaximaOutput & "("
             For j = 0 To UBound(arr2)
                 MaximaOutput = MaximaOutput & arr2(j) & "    " & VBA.ChrW(8743) & "    "
             Next
             MaximaOutput = Left(MaximaOutput, Len(MaximaOutput) - 9)
-            If UBound(Arr) > 0 Then MaximaOutput = MaximaOutput & ")"
+            If UBound(arr) > 0 Then MaximaOutput = MaximaOutput & ")"
         End If
         MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8744) & "    "
     Next
@@ -1816,8 +1816,8 @@ Sub ConvertOutputToSolvedGGB()
 End Sub
 Sub ConvertOutputToSolved2(Optional Variable As String)
 ' konverterer output fra [[x=1,y=3],[x=3,y=5]] til (x=1 og x=3) v ... eller L={(1,3),(3,5)}
-' kun beregnet til symbolsk l*oe*sning og mnewton og SolveIneq
-    Dim Arr As Variant
+' kun beregnet til symbolsk løsning og mnewton og SolveIneq
+    Dim arr As Variant
     Dim i As Integer
 
 
@@ -1846,9 +1846,9 @@ Sub ConvertOutputToSolved2(Optional Variable As String)
                 MaximaOutput = Replace(MaximaOutput, "[", "(")
                 MaximaOutput = Replace(MaximaOutput, "]", ")")
                 MaximaOutput = Replace(MaximaOutput, "=", "")
-                Arr = Split(Mid(Variable, 2, Len(Variable) - 2), ",")
-                For i = 0 To UBound(Arr)
-                    MaximaOutput = Replace(MaximaOutput, Arr(i), "")
+                arr = Split(Mid(Variable, 2, Len(Variable) - 2), ",")
+                For i = 0 To UBound(arr)
+                    MaximaOutput = Replace(MaximaOutput, arr(i), "")
                 Next
                 MaximaOutput = "L={" & MaximaOutput & "}"
             End If
@@ -1858,20 +1858,20 @@ Sub ConvertOutputToSolved2(Optional Variable As String)
             Dim ea As New ExpressionAnalyser
             Dim o As String
 
-            ea.text = MaximaOutput
+            ea.Text = MaximaOutput
             MaximaOutput = ""
-            ea.text = ea.GetNextBracketContent
-            ea.pos = 1
+            ea.Text = ea.GetNextBracketContent
+            ea.Pos = 1
             o = ea.GetNextBracketContent
             If o = "" Then
-                MaximaOutput = ea.text
+                MaximaOutput = ea.Text
                 Exit Sub
             End If
             MaximaOutput = o
             MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8743) & "    ")
 
             o = ea.GetNextBracketContent
-            If o = "" Then Exit Sub    ' kun en l*oe*sning
+            If o = "" Then Exit Sub    ' kun en løsning
 
             If InStr(MaximaOutput, VBA.ChrW(8743)) > 0 Then    ' kun parentes hvis og tegn
                 MaximaOutput = "(" & MaximaOutput & ")"
@@ -1908,7 +1908,7 @@ Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid
         MaximaInputStreng = MaximaInputStreng & AddDefinition("definer:" & TempDefs)
     End If
 
-    If MaximaUnits Then 'reducer f*oe*rst enheder p*aa* udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
+    If MaximaUnits Then 'reducer først enheder på udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
         Kommando = Replace(ConvertMaximaUnits(Kommando), """", "")
     End If
 '    If MaximaUnits Then
@@ -1971,7 +1971,7 @@ Sub Reduce()
     pkommando = Kommando
 
     Kommando = CodeForMaxima(Kommando)
-    If MaximaUnits Then 'reducer f*oe*rst enheder p*aa* udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
+    If MaximaUnits Then 'reducer først enheder på udtrykket inden kommandoen. Kan nogen gange give et mere kompliceret udtryk.
         Kommando = Replace(ConvertMaximaUnits(Kommando), """", "")
     End If
 '    If MaximaUnits Then
@@ -2020,7 +2020,7 @@ Sub CompareTest()
 '    End If
     Kommando = "TestTF(" & Kommando & ")"
     If Not Radians Then
-        Kommando = "ConvertToDegr(" & Kommando & ")"    ' Det er m*aa*ske problematisk at ratsimp ikke kan kaldes da der expandes igen. converttodegree s*aa* virker ikke?
+        Kommando = "ConvertToDegr(" & Kommando & ")"    ' Det er måske problematisk at ratsimp ikke kan kaldes da der expandes igen. converttodegree så virker ikke?
     End If
     If MaximaLogOutput = 0 And Not MaximaExact = 2 Then
         If (InStr(pkommando, "log" & VBA.ChrW(8289)) > 0 Or InStr(pkommando, "10" & VBA.ChrW(12311) & "^") > 0) Then
@@ -2059,7 +2059,7 @@ Sub Factor()
 '    End If
     Kommando = "factor(" & Kommando & ")"
     If Not Radians Then
-        Kommando = "ConvertToDegr(" & Kommando & ")"    ' Det er m*aa*ske problematisk at ratsimp ikke kan kaldes da der expandes igen. converttodegree s*aa* virker ikke?
+        Kommando = "ConvertToDegr(" & Kommando & ")"    ' Det er måske problematisk at ratsimp ikke kan kaldes da der expandes igen. converttodegree så virker ikke?
     End If
     If MaximaLogOutput = 0 And Not MaximaExact = 2 Then
         If (InStr(pkommando, "log" & VBA.ChrW(8289)) > 0 Or InStr(pkommando, "10" & VBA.ChrW(12311) & "^") > 0) Then
@@ -2281,13 +2281,13 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
 '        Kommando = "applyunitrule(" & Kommando & ")"
 '    End If
 
-    '    kommando = "ev(ode2(" & Replace(kommando, "diff(", "'diff(") & "," & funktion & "," & variabel & "),logabs=false)" ' logabs=false fjernet da logistisk ikke l*oe*ses korrekt s*aa*
+    '    kommando = "ev(ode2(" & Replace(kommando, "diff(", "'diff(") & "," & funktion & "," & variabel & "),logabs=false)" ' logabs=false fjernet da logistisk ikke løses korrekt så
     If InStr(funktion, "(") > 0 Then    ' hvis funktion
         Kommando = Replace(Kommando, funktion, "qvar")
-        ea.text = Kommando
+        ea.Text = Kommando
         ea.ReplaceVar Split(funktion, "(")(0), "qvar"
-        Kommando = ea.text
-        '        Kommando = Replace(Kommando, Split(funktion, "(")(0), "qvar") ' hvis b*aa*de N(t) og N indg*aa*r
+        Kommando = ea.Text
+        '        Kommando = Replace(Kommando, Split(funktion, "(")(0), "qvar") ' hvis både N(t) og N indgår
         funktion = "qvar"
     End If
 
@@ -2351,72 +2351,72 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
 
 slut:
 End Sub
-Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As String, xmax As String, ymin As String, ymax As String, xaksetitel As String, yaksetitel As String, Optional SaveFile As Boolean = False)
+Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String, Optional SaveFile As Boolean = False)
 ' forskrifter adskilt ad komma
 '    text = "load(draw)$draw2d("
-    Dim text As String
-    Dim Arr As Variant
+    Dim Text As String
+    Dim arr As Variant
     Dim i As Integer
     Dim fkt As String
     colindex = 0
-    text = "draw2d("
-    text = text & "font=""Arial"",font_size=8,"
+    Text = "draw2d("
+    Text = Text & "font=""Arial"",font_size=8,"
     If SaveFile Then
-        text = text & "terminal='gif,file_name=""" & Replace(Environ("TEMP"), "\", "/") & "/WordMatGraf"",pic_height=460,pic_width=660,"
+        Text = Text & "terminal='gif,file_name=""" & Replace(Environ("TEMP"), "\", "/") & "/WordMatGraf"",pic_height=460,pic_width=660,"
     End If
 
-    text = text & "nticks=100,axis_bottom = false,axis_top = false,axis_left = false,axis_right = false,grid=true,xtics_axis = true,ytics_axis = true"
+    Text = Text & "nticks=100,axis_bottom = false,axis_top = false,axis_left = false,axis_right = false,grid=true,xtics_axis = true,ytics_axis = true"
 
-    text = text & ",xaxis_width = 2,xaxis_color = black,xaxis_type  = solid,xaxis=true,yaxis_width = 2,yaxis_color = black,yaxis_type=solid,yaxis=true"
+    Text = Text & ",xaxis_width = 2,xaxis_color = black,xaxis_type  = solid,xaxis=true,yaxis_width = 2,yaxis_color = black,yaxis_type=solid,yaxis=true"
     '    text = text & "explicit(" & forskrifter & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ")"
     If Not MaximaComplex Then
 '            fkt = "'RealOnly(" & fkt & ")"
-        text = text & ",draw_realpart = false"
+        Text = Text & ",draw_realpart = false"
     End If
-    Arr = Split(forskrifter, ";")
-    For i = 0 To UBound(Arr)
-        fkt = omax.CodeForMaxima(Arr(i))
-        text = text & ",key=""" & ConvertToAscii(Arr(i)) & """,color=" & GetNextColor() & ",explicit(" & fkt & "," & var & "," & xmin & "," & xmax & ")"
+    arr = Split(forskrifter, ";")
+    For i = 0 To UBound(arr)
+        fkt = omax.CodeForMaxima(arr(i))
+        Text = Text & ",key=""" & ConvertToAscii(arr(i)) & """,color=" & GetNextColor() & ",explicit(" & fkt & "," & var & "," & xmin & "," & xmax & ")"
     Next
     If punkter <> "" Then
-        text = text & ",key=""punkter"",point_type=filled_circle,point_size=1,points(" & punkter & ")"
+        Text = Text & ",key=""punkter"",point_type=filled_circle,point_size=1,points(" & punkter & ")"
     End If
 
     '    If titel <> "" Then
     '        text = text & ",title=" & titel
     '    End If
     If xaksetitel <> "" Then
-        text = text & ",xlabel=" & xaksetitel
+        Text = Text & ",xlabel=" & xaksetitel
     End If
     If yaksetitel <> "" Then
-        text = text & ",ylabel=" & yaksetitel
+        Text = Text & ",ylabel=" & yaksetitel
     End If
 
-    text = text & ");"
-    MaximaInputStreng = MaximaInputStreng & text
+    Text = Text & ");"
+    MaximaInputStreng = MaximaInputStreng & Text
     Call RunMaxima(-30)
 
 End Sub
 Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As String, grid As Boolean, SaveFile As Boolean, ByVal resolution As Integer)
-    Dim text As String
+    Dim Text As String
     Dim waittime As Integer
     If df = "" Then
 #If Mac Then
 '        text = "gnuplot_command:""/Applications/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw2d("
-    text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw2d("
+    Text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw2d("
 '    text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw2d("
 '        waittime = -20
 #Else
-        text = "draw2d("
+        Text = "draw2d("
 #End If
         waittime = -400
     Else
 #If Mac Then
-    text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot""$set_plot_option([gnuplot_term, aqua])$load(drawdf)$drawdf(" & df & ","
+    Text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot""$set_plot_option([gnuplot_term, aqua])$load(drawdf)$drawdf(" & df & ","
 'text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$load(drawdf)$drawdf(" & df & ","
 '        waittime = -25
 #Else
-        text = "load(drawdf)$drawdf(" & df & ","
+        Text = "load(drawdf)$drawdf(" & df & ","
 #End If
         waittime = -600
     End If
@@ -2424,44 +2424,44 @@ Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As
 
     If SaveFile Then
 #If Mac Then
-        text = text & "terminal=pdf"
-        text = text & ",file_name=""" & Replace(GetTempDir(), "\", "/") & "WordMatGraf""," & MacDrawDims(500, 350) & ","
+        Text = Text & "terminal=pdf"
+        Text = Text & ",file_name=""" & Replace(GetTempDir(), "\", "/") & "WordMatGraf""," & MacDrawDims(500, 350) & ","
 #Else
-        text = text & "terminal='gif"
-        text = text & ",file_name=""" & Replace(GetTempDir(), "\", "/") & "WordMatGraf"",dimensions=[" & resolution * 660 & "," & resolution * 460 & "],"
+        Text = Text & "terminal='gif"
+        Text = Text & ",file_name=""" & Replace(GetTempDir(), "\", "/") & "WordMatGraf"",dimensions=[" & resolution * 660 & "," & resolution * 460 & "],"
 #End If
 '        text = text & "terminal='gif,file_name=""" & Replace(Environ("TEMP"), "\", "/") & "/WordMatGraf"",dimensions=[" & resolution * 660 & "," & resolution * 460 & "],"
         '        text = text & "terminal='gif,file_name=""" & Replace(Environ("TEMP"), "\", "/") & "/WordMatGraf"",dimensions=[1980,1380],font_size=20,"
         '        text = text & "terminal='gif,file_name=""" & Replace(Environ("TEMP"), "\", "/") & "/WordMatGraf"",dimensions=[660,460],font_size=20,"
     End If
-    text = text & "axis_bottom = false,axis_top = false,axis_left = false,axis_right = false"
-    text = text & ",xaxis_width = 2,xaxis_color = black,xaxis_type = solid,xaxis=true,yaxis_width = 2,yaxis_color = black,yaxis_type=solid,yaxis=true,"
+    Text = Text & "axis_bottom = false,axis_top = false,axis_left = false,axis_right = false"
+    Text = Text & ",xaxis_width = 2,xaxis_color = black,xaxis_type = solid,xaxis=true,yaxis_width = 2,yaxis_color = black,yaxis_type=solid,yaxis=true,"
 
-    text = text & graphobj
+    Text = Text & graphobj
 
-    text = text & ",font_size=" & resolution * 12
+    Text = Text & ",font_size=" & resolution * 12
     '    text = text & ",font_size=60"
 
     If grid Then
         If resolution = 1 Then
-            text = text & ",grid=true"
+            Text = Text & ",grid=true"
         Else
-            '    text = text & ",user_preamble = ""set arrow from graph 0.95, first 0 to graph 1, first 0""" ' pil p*aa* x-akse ikke p*ae*n
+            '    text = text & ",user_preamble = ""set arrow from graph 0.95, first 0 to graph 1, first 0""" ' pil på x-akse ikke pæn
             '            text = text & ",user_preamble = ""set grid lt -1 """ ' sorte linjer solid
-            text = text & ",user_preamble = ""set grid lt 0 lc -1 lw 1"""    ' sorte dottede linjer
-            '           text = text & ",user_preamble = ""set grid lt 0 lw " & resolution & """" ' linewidth>1 vises ikke korrekt p*aa* vandrette linjer
+            Text = Text & ",user_preamble = ""set grid lt 0 lc -1 lw 1"""    ' sorte dottede linjer
+            '           text = text & ",user_preamble = ""set grid lt 0 lw " & resolution & """" ' linewidth>1 vises ikke korrekt på vandrette linjer
             ' lw 2 er linewidth 2, lt er linetype, lc er linecolor
         End If
     End If
     If xaksetitel <> "" Then
-        text = text & ",xlabel=""" & xaksetitel & """"
+        Text = Text & ",xlabel=""" & xaksetitel & """"
     End If
     If yaksetitel <> "" Then
-        text = text & ",ylabel=""" & yaksetitel & """"
+        Text = Text & ",ylabel=""" & yaksetitel & """"
     End If
 
-    text = text & "),numer;" ' numer indf*oe*rt fordi der var et udtryk med numerisk integrale, hvor den bare ventede uden. Der er ingen grund til eksakt udtryk n*aa*r der skal plottes.
-    MaximaInputStreng = MaximaInputStreng & text
+    Text = Text & "),numer;" ' numer indført fordi der var et udtryk med numerisk integrale, hvor den bare ventede uden. Der er ingen grund til eksakt udtryk når der skal plottes.
+    MaximaInputStreng = MaximaInputStreng & Text
     
 #If Mac Then
     If MaximaUnits Then
@@ -2476,30 +2476,30 @@ Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As
 #End If
 
 End Sub
-Sub PlotDF(lign As String, IndepVar As String, DepVar As String, xmin As String, xmax As String, ymin As String, ymax As String, xtrajec As String, ytrajec As String, parametre As String)
+Sub PlotDF(lign As String, IndepVar As String, DepVar As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xtrajec As String, ytrajec As String, parametre As String)
 'plot af kurveintegraler
 
-    Dim text As String
+    Dim Text As String
 
-    text = "plotdf("
+    Text = "plotdf("
 
-    text = text & lign
+    Text = Text & lign
 
     If xmin <> "" And xmax <> "" Then
-        text = text & ",[" & IndepVar & "," & DepVar & "],[" & IndepVar & "," & xmin & "," & xmax & "]"
+        Text = Text & ",[" & IndepVar & "," & DepVar & "],[" & IndepVar & "," & xmin & "," & xmax & "]"
     End If
-    If ymin <> "" And ymax <> "" Then
-        text = text & ",[" & DepVar & "," & ymin & "," & ymax & "]"
+    If Ymin <> "" And Ymax <> "" Then
+        Text = Text & ",[" & DepVar & "," & Ymin & "," & Ymax & "]"
     End If
     If Len(xtrajec) > 0 And Len(ytrajec) > 0 Then
-        text = text & ",[trajectory_at," & xtrajec & "," & ytrajec & "]"
+        Text = Text & ",[trajectory_at," & xtrajec & "," & ytrajec & "]"
     End If
     If Len(parametre) > 0 Then
-        text = text & "," & parametre
+        Text = Text & "," & parametre
     End If
 
-    text = text & ");"
-    MaximaInputStreng = MaximaInputStreng & text
+    Text = Text & ");"
+    MaximaInputStreng = MaximaInputStreng & Text
 #If Mac Then
     If MaximaUnits Then
         MaximaUnits = False
@@ -2512,52 +2512,52 @@ Sub PlotDF(lign As String, IndepVar As String, DepVar As String, xmin As String,
         Call RunMaxima(-500)
 #End If
 End Sub
-Sub Plot2Dold(forskrifter As String, xmin As String, xmax As String, ymin As String, ymax As String, xaksetitel As String, yaksetitel As String)
+Sub Plot2Dold(forskrifter As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String)
 ' forskrifter adskilt ad komma
-    Dim text As String
-    text = "plot2d(["
-    text = text & forskrifter
-    text = text & "]"
+    Dim Text As String
+    Text = "plot2d(["
+    Text = Text & forskrifter
+    Text = Text & "]"
 
-    text = text & ",[x," & xmin & "," & xmax & "]"
+    Text = Text & ",[x," & xmin & "," & xmax & "]"
     If xaksetitel <> "" Then
-        text = text & ",[xlabel," & xaksetitel & "]"
+        Text = Text & ",[xlabel," & xaksetitel & "]"
     End If
     If yaksetitel <> "" Then
-        text = text & ",[ylabel," & yaksetitel & "]"
+        Text = Text & ",[ylabel," & yaksetitel & "]"
     End If
     '    text = text & ",[box,false]"
     If InStr(forskrifter, "discrete") > 0 Then
-        text = text & ",[style,points,lines]"
+        Text = Text & ",[style,points,lines]"
     Else
-        text = text & ",[style,lines]"
+        Text = Text & ",[style,lines]"
     End If
 
-    text = text & ",[point_type,diamond],[axes,true],[gnuplot_out_file, false],[plot_format,xmaxima]"
-    text = text & ");"
-    MaximaInputStreng = text
+    Text = Text & ",[point_type,diamond],[axes,true],[gnuplot_out_file, false],[plot_format,xmaxima]"
+    Text = Text & ");"
+    MaximaInputStreng = Text
     Call RunMaxima
 
 End Sub
-Sub Plot3D(forskrifter As String, xvar As String, xmin As String, xmax As String, yvar As String, ymin As String, ymax As String, xaksetitel As String, yaksetitel As String, kunlinjer As Boolean, gridlines As Integer)
+Sub Plot3D(forskrifter As String, xvar As String, xmin As String, xmax As String, yvar As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String, kunlinjer As Boolean, gridlines As Integer)
 ' forskrifter adskilt ad komma
-    Dim text As String
+    Dim Text As String
     Dim tid As Integer
     tid = 20
     tid = tid + Len(forskrifter) / 2
-    text = "plot3d(["
-    text = text & forskrifter
+    Text = "plot3d(["
+    Text = Text & forskrifter
 
-    text = text & ",[" & xvar & "," & xmin & "," & xmax & "]"
-    text = text & ",[" & yvar & "," & ymin & "," & ymax & "]"
+    Text = Text & ",[" & xvar & "," & xmin & "," & xmax & "]"
+    Text = Text & ",[" & yvar & "," & Ymin & "," & Ymax & "]"
 
-    text = text & "]"
+    Text = Text & "]"
 
     If xaksetitel <> "" Then
-        text = text & ",[xlabel," & xaksetitel & "]"
+        Text = Text & ",[xlabel," & xaksetitel & "]"
     End If
     If yaksetitel <> "" Then
-        text = text & ",[ylabel," & yaksetitel & "]"
+        Text = Text & ",[ylabel," & yaksetitel & "]"
     End If
     '    text = text & ",[box,false]"
     '    If InStr(forskrifter, "discrete") > 0 Then
@@ -2566,15 +2566,15 @@ Sub Plot3D(forskrifter As String, xvar As String, xmin As String, xmax As String
     '        text = text & ",[style,lines]"
     '    End If
     If kunlinjer = True Then
-        text = text & ",[palette,false]"
+        Text = Text & ",[palette,false]"
     End If
     If gridlines <> 30 Then
-        text = text & ",[grid," & gridlines & "," & gridlines & "]"
+        Text = Text & ",[grid," & gridlines & "," & gridlines & "]"
     End If
 
     '    text = text & ",[point_type,diamond],[axes,true],[gnuplot_out_file, false],[plot_format,xmaxima]"
-    text = text & ");"
-    MaximaInputStreng = MaximaInputStreng & text
+    Text = Text & ");"
+    MaximaInputStreng = MaximaInputStreng & Text
     Call RunMaxima(-1 * tid)
 #If Mac Then
     If MaximaUnits Then
@@ -2590,23 +2590,23 @@ Sub Plot3D(forskrifter As String, xvar As String, xmin As String, xmax As String
 End Sub
 Sub Draw3D(graphobj As String, Optional antalobj As Integer = 1)
 '    text = "load(draw)$draw3d("
-    Dim text As String
+    Dim Text As String
     Dim tid As Integer
 
     tid = 20 + antalobj * 10
 
 #If Mac Then
-        text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw3d("
-        text = text & "terminal=pdf"
-        text = text & ",file_name=""" & Replace(GetTempDir(), "\", "/") & "WordMatGraf""," & MacDrawDims(500, 350) & ","
+        Text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw3d("
+        Text = Text & "terminal=pdf"
+        Text = Text & ",file_name=""" & Replace(GetTempDir(), "\", "/") & "WordMatGraf""," & MacDrawDims(500, 350) & ","
 '        waittime = -20
 #Else
-    text = "draw3d("
+    Text = "draw3d("
 #End If
-    text = text & graphobj
+    Text = Text & graphobj
 
-    text = text & ");"
-    MaximaInputStreng = MaximaInputStreng & text
+    Text = Text & ");"
+    MaximaInputStreng = MaximaInputStreng & Text
 
 #If Mac Then
     If MaximaUnits Then
@@ -2634,19 +2634,19 @@ Sub Wait(pausetime As Variant)
 
 End Sub
 
-Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As String
-' Castype=0 is maxima, CasType=1/2 is GeoGebra (geogebra friendly. still needs cenvertToGeogebraSyntax)
+Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As String
+' Castype=0 is maxima, CasType=1/2 is GeoGebra (geogebra friendly. still needs convertToGeogebraSyntax)
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
-    Dim pos As Integer
-    Dim posb As Integer
+    Dim Pos As Long
+    Dim posb As Long
     Dim rod As Integer
-    Dim pos2 As Integer
-    Dim pos3 As Integer
-    Dim pos4 As Integer
-    Dim pos5 As Integer
-    Dim posog As Integer
-    Dim Arr As Variant, arr2() As String, arr3() As String
+    Dim pos2 As Long
+    Dim pos3 As Long
+    Dim pos4 As Long
+    Dim pos5 As Long
+    Dim posog As Long
+    Dim arr As Variant, arr2() As String, arr3() As String
     Dim var As String
     Dim startn As String
     Dim slutn As String
@@ -2681,7 +2681,8 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     ea2.StartBracket = VBA.ChrW(12310)
     ea2.EndBracket = VBA.ChrW(12311)
 
-    text = Trim(text)
+    Text = Trim(Text)
+
     '    For j = 1 To Len(text)
     '    i = AscW(Mid(text, j, 1))
     '    s = s & Mid(text, j, 1) & " - " & i & vbCrLf
@@ -2689,246 +2690,256 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '    MsgBox s
 
 
-    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
-    text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
-    text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
-    text = Replace(text, vbLf, "")    ' shift-enter og enter
-    text = Replace(text, vbCrLf, "")
-    text = Replace(text, vbCr, "")
-    text = Replace(text, """", "")    ' apostrof fjernes
-    text = Replace(text, "+-", "-")    ' plus-minus giver minus
-    text = Replace(text, VBA.ChrW(8212), "+")    'dobbelt minustegn giver plus
-    text = Replace(text, ChrW(8711) & VBA.ChrW(183), "divq ")    ' nabla gange
-    text = Replace(text, ChrW(8711) & VBA.ChrW(215), "curlq ")    ' nabla kryds - curl
-    text = Replace(text, ChrW(8711) & "^2", "laplaceq ")    ' nabla
-    text = Replace(text, ChrW(8711), "gradq ")    ' nabla
-    text = Replace(text, VBA.ChrW(183), "*")    ' prik erstattes med gange
-    text = Replace(text, VBA.ChrW(8901), "*")    ' \cdot , ved ikke hvorfor der tilsyneladende er to
-    text = Replace(text, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
-    text = Replace(text, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
-    text = Replace(text, VBA.ChrW(247), "/")    '
-    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige 'Ç` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige 'Ç`
-    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige 'Ç` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige 'Ç`
-    text = Replace(text, VBA.ChrW(&H393) & "_incomplete ", "gamma_incomplete")
-    text = Replace(text, VBA.ChrW(915), "gamma")    ' stort gammategn
-    text = Replace(text, VBA.ChrW(8800), "#")    ' ikkeligmed
-    text = Replace(text, VBA.ChrW(8804), "<=")    '
-    text = Replace(text, VBA.ChrW(8805), ">=")    '
-    text = Replace(text, VBA.ChrW(8710), "increment")    ' specielt delta increment
-    text = Replace(text, "^ " & VBA.ChrW(176) & "C", "degC")    ' specielt gradtegn(\circ) og C
-    text = Replace(text, "^ " & VBA.ChrW(8728) & "C", "degC")    ' specielt gradtegn(\circ) og C
-    text = Replace(text, VBA.ChrW(8451), "degC")    ' specielt oC tegn
-    text = Replace(text, VBA.ChrW(8728), "tgrader")    ' gradtegn
-    text = Replace(text, "%", "/100")    ' procenttegn
-    text = Replace(text, VBA.ChrW(160), "")    ' foran accent f.eks. vector pil 160 8407
+    Text = Replace(Text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
+    Text = Replace(Text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
+    Text = Replace(Text, VBA.ChrW(11), "")    ' shift-enter
+    Text = Replace(Text, vbLf, "")    ' shift-enter og enter
+    Text = Replace(Text, vbCrLf, "")
+    Text = Replace(Text, vbCr, "")
+    Text = Replace(Text, """", "")    ' apostrof fjernes
+    Text = Replace(Text, "+-", "-")    ' plus-minus giver minus
+    Text = Replace(Text, VBA.ChrW(8212), "+")    'dobbelt minustegn giver plus
+    Text = Replace(Text, ChrW(8711) & VBA.ChrW(183), "divq ")    ' nabla gange
+    Text = Replace(Text, ChrW(8711) & VBA.ChrW(215), "curlq ")    ' nabla kryds - curl
+    Text = Replace(Text, ChrW(8711) & "^2", "laplaceq ")    ' nabla
+    Text = Replace(Text, ChrW(8711), "gradq ")    ' nabla
+    Text = Replace(Text, VBA.ChrW(183), "*")    ' prik erstattes med gange
+    Text = Replace(Text, VBA.ChrW(8901), "*")    ' \cdot , ved ikke hvorfor der tilsyneladende er to
+    Text = Replace(Text, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
+    Text = Replace(Text, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
+    Text = Replace(Text, VBA.ChrW(247), "/")    '
+    Text = Replace(Text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
+    Text = Replace(Text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '‰`
+    Text = Replace(Text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
+    Text = Replace(Text, VBA.ChrW(96), "^'")    ' der er tre forskellige '‰`
+    Text = Replace(Text, VBA.ChrW(&H393) & "_incomplete ", "gamma_incomplete")
+    Text = Replace(Text, VBA.ChrW(915), "gamma")    ' stort gammategn
+    Text = Replace(Text, VBA.ChrW(8800), "#")    ' ikkeligmed
+    Text = Replace(Text, VBA.ChrW(8804), "<=")    '
+    Text = Replace(Text, VBA.ChrW(8805), ">=")    '
+    Text = Replace(Text, VBA.ChrW(8710), "increment")    ' specielt delta increment
+    Text = Replace(Text, "^ " & VBA.ChrW(176) & "C", "degC")    ' specielt gradtegn(\circ) og C
+    Text = Replace(Text, "^ " & VBA.ChrW(8728) & "C", "degC")    ' specielt gradtegn(\circ) og C
+    Text = Replace(Text, VBA.ChrW(8451), "degC")    ' specielt oC tegn
+    Text = Replace(Text, VBA.ChrW(8728), "tgrader")    ' gradtegn
+    Text = Replace(Text, "%", "/100")    ' procenttegn
+    Text = Replace(Text, VBA.ChrW(160), "")    ' foran accent f.eks. vector pil 160 8407
     If Not MaximaComplex Then
-        text = Replace(text, VBA.ChrW(8736), "Symangle")    '
+        Text = Replace(Text, VBA.ChrW(8736), "Symangle")    '
     End If
     If CasType = 0 Then
-        text = Replace(text, VBA.ChrW(176), "tgrader")    ' gradtegn
+        Text = Replace(Text, VBA.ChrW(176), "tgrader")    ' gradtegn
     End If
 
     ' som test flyttes disse fra slutningen til starten
-    ' *oe**ae**aa* *AE**OE* ' *ae*ndres ikke tilbagee
-    text = Replace(text, "*ae*", "ae")
-    text = Replace(text, "*oe*", "oe")
-    text = Replace(text, "*aa*", "aa")
-    text = Replace(text, "*AE*", "AE")
-    text = Replace(text, "*OE*", "OE")
-    text = Replace(text, "*AA*", "AA")
+    ' øæå ÆØ ' ændres ikke tilbagee
+    Text = Replace(Text, "æ", "ae")
+    Text = Replace(Text, "ø", "oe")
+    Text = Replace(Text, "å", "aa")
+    Text = Replace(Text, "Æ", "AE")
+    Text = Replace(Text, "Ø", "OE")
+    Text = Replace(Text, "Å", "AA")
 
-    'gr*ae*ske bogstaver
-    text = Replace(text, VBA.ChrW(916), "Delta")
-    text = Replace(text, VBA.ChrW(948), "delta")
-    text = Replace(text, VBA.ChrW(945), "alpha")
-    text = Replace(text, VBA.ChrW(946), "beta")
-    text = Replace(text, VBA.ChrW(947), "gammaLB")
-    text = Replace(text, VBA.ChrW(952), "theta")
-    text = Replace(text, VBA.ChrW(920), "Theta")
-    text = Replace(text, VBA.ChrW(955), "lambda")
-    text = Replace(text, VBA.ChrW(923), "Lambda")
-    text = Replace(text, VBA.ChrW(956), "mu")
-    text = Replace(text, VBA.ChrW(961), "rho")
-    text = Replace(text, VBA.ChrW(963), "sigma")
-    text = Replace(text, VBA.ChrW(931), "Sigma")
-    text = Replace(text, VBA.ChrW(966), "varphi")
-    text = Replace(text, VBA.ChrW(981), "phi")
-    text = Replace(text, VBA.ChrW(934), "Phi")
-    text = Replace(text, VBA.ChrW(949), "varepsilon")
-    text = Replace(text, VBA.ChrW(1013), "epsilon")
-    text = Replace(text, VBA.ChrW(968), "psi")
-    text = Replace(text, VBA.ChrW(936), "Psi")
-    text = Replace(text, VBA.ChrW(926), "Xi")
-    text = Replace(text, VBA.ChrW(958), "xi")
-    text = Replace(text, VBA.ChrW(935), "Chi")
-    text = Replace(text, VBA.ChrW(967), "chi")
-    text = Replace(text, VBA.ChrW(928), "Pi")
-    text = Replace(text, VBA.ChrW(964), "tau")
-    text = Replace(text, VBA.ChrW(957), "greek-nu")
-    text = Replace(text, VBA.ChrW(954), "kappa")
-    text = Replace(text, VBA.ChrW(951), "eta")
-    text = Replace(text, VBA.ChrW(950), "zeta")
-    text = Replace(text, VBA.ChrW(969), "omega")    ' lille omega
+    'græske bogstaver
+    Text = Replace(Text, VBA.ChrW(916), "Delta")
+    Text = Replace(Text, VBA.ChrW(948), "delta")
+    Text = Replace(Text, VBA.ChrW(945), "alpha")
+    Text = Replace(Text, VBA.ChrW(946), "beta")
+    Text = Replace(Text, VBA.ChrW(947), "gammaLB")
+    Text = Replace(Text, VBA.ChrW(952), "theta")
+    Text = Replace(Text, VBA.ChrW(920), "Theta")
+    Text = Replace(Text, VBA.ChrW(955), "lambda")
+    Text = Replace(Text, VBA.ChrW(923), "Lambda")
+    Text = Replace(Text, VBA.ChrW(956), "mu")
+    Text = Replace(Text, VBA.ChrW(961), "rho")
+    Text = Replace(Text, VBA.ChrW(963), "sigma")
+    Text = Replace(Text, VBA.ChrW(931), "Sigma")
+    Text = Replace(Text, VBA.ChrW(966), "varphi")
+    Text = Replace(Text, VBA.ChrW(981), "phi")
+    Text = Replace(Text, VBA.ChrW(934), "Phi")
+    Text = Replace(Text, VBA.ChrW(949), "varepsilon")
+    Text = Replace(Text, VBA.ChrW(1013), "epsilon")
+    Text = Replace(Text, VBA.ChrW(968), "psi")
+    Text = Replace(Text, VBA.ChrW(936), "Psi")
+    Text = Replace(Text, VBA.ChrW(926), "Xi")
+    Text = Replace(Text, VBA.ChrW(958), "xi")
+    Text = Replace(Text, VBA.ChrW(935), "Chi")
+    Text = Replace(Text, VBA.ChrW(967), "chi")
+    Text = Replace(Text, VBA.ChrW(928), "Pi")
+    Text = Replace(Text, VBA.ChrW(964), "tau")
+    Text = Replace(Text, VBA.ChrW(957), "greek-nu")
+    Text = Replace(Text, VBA.ChrW(954), "kappa")
+    Text = Replace(Text, VBA.ChrW(951), "eta")
+    Text = Replace(Text, VBA.ChrW(950), "zeta")
+    Text = Replace(Text, VBA.ChrW(969), "omega")    ' lille omega
 
 
     ' _ symbol bliver til 1/2 eller tekst Symhalf afh. af kontekst. Symhalf hvis bogstavforan
     '    text = Replace(text, VBA.ChrW(189), "(1/2)") '
     '    text = Replace(text, VBA.ChrW(189), "Symhalf") ' 189 er symbolet for en halv
     
-    ea.text = text
-    pos = 0
+    ea.Text = Text
+    ' fjern dobbelt mellemrum ' indført her 1.24. Er også lige før replacespacebymult. Indført for måske at fange nogle fejl med mange mellemrum
+    Do While InStr(ea.Text, "  ") > 0
+        ea.Text = Replace(ea.Text, "  ", " ")
+    Loop
+
+    Pos = 0
     Do
-        pos = InStr(pos + 1, ea.text, VBA.ChrW(189))
-        If pos > 0 Then
-            If ea.IsLetterPos(pos - 1, False) Then
-                ea.RemoveChar pos
-                ea.InsertBeforePos "Symhalf", pos
+        Pos = InStr(Pos + 1, ea.Text, VBA.ChrW(189))
+        If Pos > 0 Then
+            If ea.IsLetterPos(Pos - 1, False) Then
+                ea.RemoveChar Pos
+                ea.InsertBeforePos "Symhalf", Pos
             Else
-                ea.RemoveChar pos
-                ea.InsertBeforePos "(1/2)", pos
+                ea.RemoveChar Pos
+                ea.InsertBeforePos "(1/2)", Pos
             End If
         End If
-    Loop While pos > 0
-    text = ea.text
+    Loop While Pos > 0
+    Text = ea.Text
 
     'lambertW0
     Do
-        pos = InStr(text, "W_0")
-        If pos > 0 Then
-            ea.text = text
-            text = Left(text, pos - 1) & "generalized_lambert_w(0," & right(text, Len(text) - pos - 4)
+        Pos = InStr(Text, "W_0")
+        If Pos > 0 Then
+            ea.Text = Text
+            Text = Left(Text, Pos - 1) & "generalized_lambert_w(0," & right(Text, Len(Text) - Pos - 4)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
     'lambertW-1
     Do
-        pos = InStr(text, "W_(-1)")
-        If pos > 0 Then
-            ea.text = text
-            text = Left(text, pos - 1) & "generalized_lambert_w(-1," & right(text, Len(text) - pos - 7)
+        Pos = InStr(Text, "W_(-1)")
+        If Pos > 0 Then
+            ea.Text = Text
+            Text = Left(Text, Pos - 1) & "generalized_lambert_w(-1," & right(Text, Len(Text) - Pos - 7)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' autoregistrering af matrixparenteser
-    If InStr(text, "[") > 0 Then
+    If InStr(Text, "[") > 0 Then
         matrixstartbracket = "["
         matrixendbracket = "]"
     End If
 
-    ' nu overfl*oe*dig: virker ikke med (ab)\vec
+    ' nu overflødig: virker ikke med (ab)\vec
     '    text = Replace(text, VBA.ChrW(8407), "SymVecta") ' vektorpil
     '    text = Replace(text, VBA.ChrW(8401), "SymVectb") ' vektorpil men ikke hel pil
     '    text = Replace(text, VBA.ChrW(773), "SymVectc") ' matrixtegn
     '    text = Replace(text, VBA.ChrW(175), "SymVectc") ' matrixtegn \overbar
 
     ' vektortegn til SymVecta
-    ea.text = text
-    pos = 1
+    ea.Text = Text
+    Pos = 1
     Do
-        pos = InStr(pos, ea.text, VBA.ChrW(8407))
-        If pos > 0 Then
+        Pos = InStr(Pos, ea.Text, VBA.ChrW(8407))
+        If Pos > 0 Then
             matvekt = True
-            If ea.ChrByIndex(pos - 1) = ")" Then
-                s = ea.GetPrevBracketContent(pos)
+            If ea.ChrByIndex(Pos - 1) = ")" Then
+                s = ea.GetPrevBracketContent(Pos)
                 s = Replace(s, " ", "SPC")
                 MaximaInputStreng = MaximaInputStreng & "declare(" & s & "SymVecta,nonscalar)$"
                 KillDef = KillDef & s & "SymVecta,"
                 'AddDefinition ("definer: declare(" & s & "SymVecta,nonscalar)")
-                ea.text = Left(ea.text, ea.pos - 2) & s & "SymVecta" & right(ea.text, Len(ea.text) - pos)
+                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVecta" & right(ea.Text, Len(ea.Text) - Pos)
             Else
                 '            AddDefinition ("definer: declare(" & ea.ChrByIndex(pos - 1) & "SymVecta,nonscalar)")
-                s = ea.ChrByIndex(pos - 1)
+                s = ea.ChrByIndex(Pos - 1)
                 MaximaInputStreng = MaximaInputStreng & "declare(" & s & "SymVecta,nonscalar)$"
                 KillDef = KillDef & s & "SymVecta,"
-                ea.text = Left(ea.text, pos - 1) & "SymVecta" & right(ea.text, Len(ea.text) - pos)
+                ea.Text = Left(ea.Text, Pos - 1) & "SymVecta" & right(ea.Text, Len(ea.Text) - Pos)
             End If
-            pos = pos + 7
+            Pos = Pos + 7
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' vektortegn 2 ikke hel pil til SymVectb
-    pos = 1
+    Pos = 1
     Do
-        pos = InStr(pos, ea.text, VBA.ChrW(8401))
-        If pos > 0 Then
+        Pos = InStr(Pos, ea.Text, VBA.ChrW(8401))
+        If Pos > 0 Then
             matvekt = True
-            If ea.ChrByIndex(pos - 1) = ")" Then
-                s = ea.GetPrevBracketContent(pos)
-                ea.text = Left(ea.text, ea.pos - 2) & s & "SymVectb" & right(ea.text, Len(ea.text) - pos)
+            If ea.ChrByIndex(Pos - 1) = ")" Then
+                s = ea.GetPrevBracketContent(Pos)
+                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVectb" & right(ea.Text, Len(ea.Text) - Pos)
             Else
-                ea.text = Left(ea.text, pos - 1) & "SymVectb" & right(ea.text, Len(ea.text) - pos)
+                ea.Text = Left(ea.Text, Pos - 1) & "SymVectb" & right(ea.Text, Len(ea.Text) - Pos)
             End If
-            pos = pos + 7
+            Pos = Pos + 7
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' matrixtegn til SymVectc
-    pos = 1
+    Pos = 1
     Do
-        pos = InStr(pos, ea.text, VBA.ChrW(773))
-        If pos > 0 Then
+        Pos = InStr(Pos, ea.Text, VBA.ChrW(773))
+        If Pos > 0 Then
             matvekt = True
-            If ea.ChrByIndex(pos - 1) = ")" Then
-                s = ea.GetPrevBracketContent(pos)
-                ea.text = Left(ea.text, ea.pos - 2) & s & "SymVectc" & right(ea.text, Len(ea.text) - pos)
+            If ea.ChrByIndex(Pos - 1) = ")" Then
+                s = ea.GetPrevBracketContent(Pos)
+                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVectc" & right(ea.Text, Len(ea.Text) - Pos)
             Else
-                ea.text = Left(ea.text, pos - 1) & "SymVectc" & right(ea.text, Len(ea.text) - pos)
+                ea.Text = Left(ea.Text, Pos - 1) & "SymVectc" & right(ea.Text, Len(ea.Text) - Pos)
             End If
-            pos = pos + 7
+            Pos = Pos + 7
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
 
     ' matrixtegn \overbar til SymVectc
     
-    pos = 1
+    Pos = 1
     Do
-        pos = InStr(pos, ea.text, VBA.ChrW(175))
-        If pos > 0 Then
+        Pos = InStr(Pos, ea.Text, VBA.ChrW(175))
+        If Pos > 0 Then
             matvekt = True
-            s = ea.GetNextVar(pos)
-            If Len(ea.text) = ea.pos Then
-                ea.text = Left(ea.text, pos - 1) & " " & s & "SymVectc"
+            s = ea.GetNextVar(Pos)
+            If Len(ea.Text) = ea.Pos Then
+                ea.Text = Left(ea.Text, Pos - 1) & " " & s & "SymVectc"
             Else
-                ea.text = Left(ea.text, pos - 1) & " " & s & "SymVectc" & right(ea.text, Len(ea.text) - ea.pos)
+                ea.Text = Left(ea.Text, Pos - 1) & " " & s & "SymVectc" & right(ea.Text, Len(ea.Text) - ea.Pos)
             End If
-            pos = pos + 7
+            Pos = Pos + 7
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
-    text = ea.text
+    Text = ea.Text
 
-    If InStr(text, VBA.ChrW(9608)) > 0 Then matvekt = True    '9608=matrixtegn
-    If InStr(text, VBA.ChrW(9632)) > 0 Then matvekt = True    '9632= andet vektortegn
+    If InStr(Text, VBA.ChrW(9608)) > 0 Then matvekt = True    '9608=matrixtegn
+    If InStr(Text, VBA.ChrW(9632)) > 0 Then matvekt = True    '9632= andet vektortegn
 
     If matvekt Then  '9632?
-        text = Replace(text, VBA.ChrW(215), "~")    ' vektorprodukt
+        Text = Replace(Text, VBA.ChrW(215), "~")    ' vektorprodukt
     Else
-        text = Replace(text, VBA.ChrW(215), "*")    ' kryds erstattes med gange
+        Text = Replace(Text, VBA.ChrW(215), "*")    ' kryds erstattes med gange
     End If
 
-    'tv*ae*rvektor \hat
-    pos = 1
+    'tværvektor \hat
+    Pos = 1
     Do
-        pos = InStr(pos, text, VBA.ChrW(770))
-        If pos > 0 Then
-            ea.text = text
-            If ea.ChrByIndex(pos - 1) = ")" Then
-                s = ea.GetPrevBracketContent(pos)
-                text = Left(text, ea.pos - 2) & "tvvec(" & s & ")" & right(text, Len(text) - pos)
-                pos = pos + 4
+        Pos = InStr(Pos, Text, VBA.ChrW(770))
+        If Pos > 0 Then
+            ea.Text = Text
+            If ea.ChrByIndex(Pos - 1) = ")" Then
+                s = ea.GetPrevBracketContent(Pos)
+                Text = Left(Text, ea.Pos - 2) & "tvvec(" & s & ")" & right(Text, Len(Text) - Pos)
+                Pos = Pos + 4
             Else
-                s = ea.GetPrevVar(pos)
-                text = Left(text, pos - Len(s) - 2) & "tvvec(" & Mid(text, pos - Len(s) - 1, Len(s)) & ")" & right(text, Len(text) - pos)
-                pos = pos + 5
+                s = ea.GetPrevVar(Pos)
+                If Pos - Len(s) - 2 < 0 Then
+                  MsgBox "An error orrcured with hat operator. "
+                  GoTo Fejl
+                Else
+                   Text = Left(Text, Pos - Len(s) - 2) & "tvvec(" & Mid(Text, Pos - Len(s) - 1, Len(s)) & ")" & right(Text, Len(Text) - Pos)
+                End If
+                Pos = Pos + 5
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     '    text = Replace(text, VBA.ChrW(&H393) & " ", "Gamma")
 
-    '   Fjern problematiske usynlige paranteser foran / ' l*oe*ses af den efterf*oe*lgende ogs*aa*
+    '   Fjern problematiske usynlige paranteser foran / ' løses af den efterfølgende også
     '    Do
     '    pos = InStr(text, VBA.ChrW(12311) & "/")
     '    If pos > 0 Then
@@ -2957,7 +2968,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '        ea2.FindPrevBreak
     '        pos2 = ea2.pos
     '        ea.text = ea2.GetNextBracketContent(pos)
-    '        If ea.ValidateBrackets And InStr(ea.text, "=") < 1 Then ' fors*oe*ger at l*oe*se problem hvor skjulte og alm paranteser er blandet som f.eks.[( ])
+    '        If ea.ValidateBrackets And InStr(ea.text, "=") < 1 Then ' forsøger at løse problem hvor skjulte og alm paranteser er blandet som f.eks.[( ])
     '            If ea2.ChrByIndex(ea2.pos) = "/" Or ea2.ChrByIndex(pos2 - 1) = "/" Then
     '            ea2.InsertTextAt "(", pos2
     '            ea2.FindNextBreak
@@ -2975,57 +2986,57 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
 
 
     ' trig med store bogstaver
-    If InStr(text, "Sin") > 0 Then
-        ea.text = text
+    If InStr(Text, "Sin") > 0 Then
+        ea.Text = Text
         ea.ReplaceVar "Sin", "sin"
-        text = ea.text
+        Text = ea.Text
     End If
-    If InStr(text, "Cos") > 0 Then
-        ea.text = text
+    If InStr(Text, "Cos") > 0 Then
+        ea.Text = Text
         ea.ReplaceVar "Cos", "cos"
-        text = ea.text
+        Text = ea.Text
     End If
-    If InStr(text, "Tan") > 0 Then
-        ea.text = text
+    If InStr(Text, "Tan") > 0 Then
+        ea.Text = Text
         ea.ReplaceVar "Tan", "tan"
-        text = ea.text
+        Text = ea.Text
     End If
-    If InStr(text, "Log") > 0 Then
-        ea.text = text
+    If InStr(Text, "Log") > 0 Then
+        ea.Text = Text
         ea.ReplaceVar "Log", "log"
-        text = ea.text
+        Text = ea.Text
     End If
-    If InStr(text, "Ln") > 0 Then
-        ea.text = text
+    If InStr(Text, "Ln") > 0 Then
+        ea.Text = Text
         ea.ReplaceVar "Ln", "ln"
-        text = ea.text
+        Text = ea.Text
     End If
 
-    ''  her var disse f*oe*r men nu flyttet efter 8289 fjernes  text = Replace(text, "cosh^(-1)", "acosh")
+    ''  her var disse før men nu flyttet efter 8289 fjernes  text = Replace(text, "cosh^(-1)", "acosh")
 
 
     ' fjern +- symbol
-    pos = InStr(text, VBA.ChrW(177))
-    If pos > 0 Then
+    Pos = InStr(Text, VBA.ChrW(177))
+    If Pos > 0 Then
         pm = InputBox(Sprog.A(421), Sprog.A(422), "-")
         If pm = "+" Or VBA.LCase(pm) = "plus" Then
-            text = Replace(text, VBA.ChrW(177), "+")
+            Text = Replace(Text, VBA.ChrW(177), "+")
         ElseIf pm = "-" Or VBA.LCase(pm) = "minus" Then
-            text = Replace(text, VBA.ChrW(177), "-")
+            Text = Replace(Text, VBA.ChrW(177), "-")
         Else
             MsgBox Sprog.A(423)
-            text = Replace(text, VBA.ChrW(177), "+")
+            Text = Replace(Text, VBA.ChrW(177), "+")
         End If
     End If
 
     ' kommaer og listeseparator
     If Not MaximaSeparator Then
-        ea.text = text
+        ea.Text = Text
         ea.ConvertDecSeparator
-        text = ea.text
+        Text = ea.Text
         '        text = Replace(text, ",", ".")
     End If
-    text = Replace(text, ";", ",")
+    Text = Replace(Text, ";", ",")
 
 
     ' d/dx notation gammel
@@ -3064,81 +3075,115 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '    Loop While pos > 0
 
 
-'    ' stykkevise funktioner defineret med en tuborg parantes. Ikke f*ae*rdig. Et problem at der inds*ae*ttes gangetegn i koden senere hen
-'    ea.Text = Text
-'    ea.SetNormalBrackets
-'    i = 0
-'    Do
-'        pos = InStr(ea.Text, "{" & VBA.ChrW(9608))
-'        If pos > 0 Then
-'
-''            pos2 = InStr(pos, ea.Text, VBA.ChrW(9508))
-''            expr = Mid(ea.Text, pos + 2, pos2 - pos - 1)
-'            expr = ea.GetNextBracketContent(pos)
-'            arr2 = Split(expr, "@")
-'            If InStr(expr, ", ") > 0 Then
-'                c = ", "
-'            Else
-'                c = " ,"
-'            End If
-'            s = "(if "
-'            For j = 0 To UBound(arr2)
-'                arr3 = Split(arr2(j), c)
-'                If UBound(arr3) > 0 Then
-'                    s = s & arr3(1) & " then " & arr3(0)
-'                End If
-'                If j < UBound(arr2) Then s = s & " elseif "
-'            Next
-'            ea.Text = Left(ea.Text, pos - 1) & s & ")" & Right(ea.Text, Len(ea.Text) - pos - Len(expr) - 3)
-'            i = i + 1
-'        End If
-'    Loop While pos > 0 And i < 1000
-'    Text = ea.Text
+'  stykkevis definerede funktioner defineret med en tuborg parantes.
+   Dim ass As String, k As Long
+    ea.Text = Text
+    ea.SetNormalBrackets
+    i = 0
+    Do
+        Pos = InStr(ea.Text, "{" & VBA.ChrW(9608))
+        If Pos > 0 Then
+
+'            pos2 = InStr(pos, ea.Text, VBA.ChrW(9508))
+'            expr = Mid(ea.Text, pos + 2, pos2 - pos - 1)
+            Expr = ea.GetNextBracketContent(Pos)
+            arr2 = Split(Expr, "@")
+            s = "(if&&"
+            For j = 0 To UBound(arr2)
+               If InStr(arr2(j), ";") > 0 Then
+                  c = ";"
+               ElseIf InStr(arr2(j), ", ") > 0 Then
+                  c = ", "
+               ElseIf InStr(arr2(j), " ,") > 0 Then
+                  c = " ,"
+               ElseIf InStr(arr2(j), ",") > 0 Then
+                  c = ","
+               ElseIf InStr(arr2(j), "|") > 0 Then
+                  c = "|"
+               Else
+                  c = ""
+               End If
+                arr3 = Split(arr2(j), c)
+                  If UBound(arr3) > 1 Then
+                     k = 1
+                     ass = ""
+                     Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
+                        If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
+                           If ass = "" Then
+                              ass = arr3(k)
+                           Else
+                              ass = ass & c & arr3(k)
+                           End If
+                        Else
+                           arr3(0) = arr3(0) & c & arr3(k)
+                        End If
+                        k = k + 1
+                     Loop
+                  ElseIf UBound(arr3) = 1 Then
+                     ass = arr3(1)
+                  End If
+                If UBound(arr3) > 0 Then
+                  If CasType = 0 Then
+                    s = s & sqbrAssump(SplitAssump(Trim(ass))) & "&&then&&(" & Trim(arr3(0)) & ")"
+                  Else
+                    s = s & ass & "&&then&&(" & Trim(arr3(0)) & ")"
+                  End If
+               Else
+                    s = s & "0=0&&then&&(" & Trim(arr3(0)) & ")"
+                End If
+                If j < UBound(arr2) Then s = s & "&&elseif&&"
+            Next
+            ea.Text = Left(ea.Text, Pos - 1) & s & ")" & right(ea.Text, Len(ea.Text) - Pos - Len(Expr) - 3)
+            i = i + 1
+        End If
+    Loop While Pos > 0 And i < 1000
+    Text = ea.Text
     
 
     ' |x| -> abs(x) '
-    ea.text = text
+    If CASengine = 0 Then
+    ea.Text = Text
     i = 0
     Do
-        pos = InStr(ea.text, VBA.ChrW(124))
-        If pos > 0 Then
-            posb = pos
+        Pos = InStr(ea.Text, VBA.ChrW(124))
+        If Pos > 0 Then
+            posb = Pos
             Do
-                i = i + 1    ' forkert input kan ellers skabe uendelig l*oe*kke
+                i = i + 1    ' forkert input kan ellers skabe uendelig løkke
                 posb = posb + 1
                 c = ea.ChrByIndex(posb)
                 If c = "|" Then
                     If Not (ea.IsOperator(ea.ChrByIndex(posb - 1), 4)) Then
-                        If matvekt Or InStr(ea.text, VBA.ChrW(9632)) > 0 Then
+                        If matvekt Or InStr(ea.Text, VBA.ChrW(9632)) > 0 Then
                             If CasType = 0 Then
-                                ea.text = Left(ea.text, pos - 1) & "vecmag(" & Mid(ea.text, pos + 1, posb - pos - 1) & ")" & right(ea.text, Len(ea.text) - posb)
+                                ea.Text = Left(ea.Text, Pos - 1) & "vecmag(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & right(ea.Text, Len(ea.Text) - posb)
                             Else
-                                ea.text = Left(ea.text, pos - 1) & "length(" & Mid(ea.text, pos + 1, posb - pos - 1) & ")" & right(ea.text, Len(ea.text) - posb)
+                                ea.Text = Left(ea.Text, Pos - 1) & "length(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & right(ea.Text, Len(ea.Text) - posb)
                             End If
                         Else
-                            ea.text = Left(ea.text, pos - 1) & "abs(" & Mid(ea.text, pos + 1, posb - pos - 1) & ")" & right(ea.text, Len(ea.text) - posb)
+                            ea.Text = Left(ea.Text, Pos - 1) & "abs(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & right(ea.Text, Len(ea.Text) - posb)
                         End If
                         Exit Do
                     Else
-                        pos = posb
+                        Pos = posb
                     End If
                 ElseIf c = "(" Then
-                    ea.pos = posb
+                    ea.Pos = posb
                     posb = ea.FindEndOfBracket() - 1
                 End If
-            Loop While posb < Len(ea.text) And i < 1000
+            Loop While posb < Len(ea.Text) And i < 1000
             '        Loop While c <> "|" And c <> "(" And c <> "["
 
-            posb = InStr(ea.text, VBA.ChrW(124))
+            posb = InStr(ea.Text, VBA.ChrW(124))
         End If
-    Loop While pos > 0 And i < 1000
+    Loop While Pos > 0 And i < 1000
     If i = 1000 Then
         MsgBox Sprog.A(424), vbOKOnly, Sprog.A(105)
     End If
     i = 0
-    text = ea.text
-
-    ' |x| -> abs(x) ' men der tages ikke h*oe*jde for paranteser
+    Text = ea.Text
+   End If
+    ' |x| -> abs(x) ' men der tages ikke højde for paranteser
     '    ea.text = text
     '    Do
     '    pos = InStr(ea.text, VBA.ChrW(124))
@@ -3155,38 +3200,47 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     '    Loop While pos > 0
     '    text = ea.text
 
-    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma)
-    ea.text = text
+
+    ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma)
+    ea.Text = Text
     ea.InsertBracketAfter ("/")
     ea.InsertBracketBefore ("/")
-    text = ea.text
+    Text = ea.Text
+    
+    ' indsæt underforståede gangetegn ' den køres også til slut efter alle mellemrum er fjernet, da der så kan opstå flere.
+    'Indført her også for at omgå problem med fx at underforstået gangetegn ved 3(x+1) ikke bliver håndteret af findhierarkibreak
+    ' Det giver dog problemer for 2^2x da
+'    ea.text = text
+'    ea.Pos = 1
+'    ea.InsertMultSigns
+'    text = ea.text
     
     ' d/dx notation
-    text = ConvertDifferentials(text, VBA.ChrW(8518)) ' \dd
-    If Left(text, 5) = "Fejl!" Then
-        text = ea.text
-        ConvertErrorText = text
+    Text = ConvertDifferentials(Text, VBA.ChrW(8518)) ' \dd
+    If Left(Text, 5) = "Fejl!" Then
+        Text = ea.Text
+        ConvertErrorText = Text
         GoTo slut
     End If
-    text = ConvertDifferentials(text, VBA.ChrW(8706)) ' \partial
-    If Left(text, 5) = "Fejl!" Then
-        text = ea.text
-        ConvertErrorText = text
+    Text = ConvertDifferentials(Text, VBA.ChrW(8706)) ' \partial
+    If Left(Text, 5) = "Fejl!" Then
+        Text = ea.Text
+        ConvertErrorText = Text
         GoTo slut
     End If
     If dAsDiffChr Then
-        text = ConvertDifferentials(text, "d") ' normal d
-        If Left(text, 5) = "Fejl!" Then
-            text = ea.text
-            ConvertErrorText = text
+        Text = ConvertDifferentials(Text, "d") ' normal d
+        If Left(Text, 5) = "Fejl!" Then
+            Text = ea.Text
+            ConvertErrorText = Text
             GoTo slut
         End If
     End If
     
-    ' inds*ae*t parentes ved f.eks. log 2 -> log(2)
-    ea.text = text
+    ' indsæt parentes ved f.eks. log 2 -> log(2)
+    ea.Text = Text
     ea.InsertFunctionBrackets
-    ' {rod(5&3)}^2  hvor rod er rodtegn og {} er usynlig paranteser. Indf*oe*rt med geogebra, men nu l*oe*st i potensdelen
+    ' {rod(5&3)}^2  hvor rod er rodtegn og {} er usynlig paranteser. Indført med geogebra, men nu løst i potensdelen
 '    pos = InStr(ea.text, VBA.ChrW(12311) & "^")
 '    Do While pos > 0
 '        ea.SetInvisibleBrackets
@@ -3200,60 +3254,60 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
 '        ea.SetNormalBrackets
 '    Loop
     
-    ea.text = Replace(ea.text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes   flyttet fra f*oe*r trig med store bogstaver for at f*aa* insertfunctionbrackets til at virke
-    ea.text = Replace(ea.text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
+    ea.Text = Replace(ea.Text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes   flyttet fra før trig med store bogstaver for at få insertfunctionbrackets til at virke
+    ea.Text = Replace(ea.Text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
 
-    ea.text = Replace(ea.text, "cosh^(-1)", "acosh")
-    ea.text = Replace(ea.text, "sinh^(-1)", "asinh")
-    ea.text = Replace(ea.text, "tanh^(-1)", "atanh")
-    ea.text = Replace(ea.text, "cos^(-1) ", "acos")    ' under sj*ae*ldne omst*ae*ndigheder kan der v*ae*re et mellemrum istedet for et 8289 tegn efter
-    ea.text = Replace(ea.text, "sin^(-1) ", "asin")    ' det blive forst*aa*et som et gangetegn hvis ikke fjernes
-    ea.text = Replace(ea.text, "tan^(-1) ", "atan")
-    ea.text = Replace(ea.text, "cos^(-1)", "acos")
-    ea.text = Replace(ea.text, "sin^(-1)", "asin")
-    ea.text = Replace(ea.text, "tan^(-1)", "atan")
+    ea.Text = Replace(ea.Text, "cosh^(-1)", "acosh")
+    ea.Text = Replace(ea.Text, "sinh^(-1)", "asinh")
+    ea.Text = Replace(ea.Text, "tanh^(-1)", "atanh")
+    ea.Text = Replace(ea.Text, "cos^(-1) ", "acos")    ' under sjældne omstændigheder kan der være et mellemrum istedet for et 8289 tegn efter
+    ea.Text = Replace(ea.Text, "sin^(-1) ", "asin")    ' det blive forstået som et gangetegn hvis ikke fjernes
+    ea.Text = Replace(ea.Text, "tan^(-1) ", "atan")
+    ea.Text = Replace(ea.Text, "cos^(-1)", "acos")
+    ea.Text = Replace(ea.Text, "sin^(-1)", "asin")
+    ea.Text = Replace(ea.Text, "tan^(-1)", "atan")
 
-    ea.ConvertTrigPow ("sin")    ' skal v*ae*re efter inverse trig
+    ea.ConvertTrigPow ("sin")    ' skal være efter inverse trig
     ea.ConvertTrigPow ("cos")
     ea.ConvertTrigPow ("tan")
-    text = ea.text
+    Text = ea.Text
 
     ' logaritmer med base forskellig fra 10 og e
     Dim base As String
     Dim spos As Integer
-    ea.text = text
+    ea.Text = Text
     spos = 1
     Do
         '    ea.text = text
-        pos = ea.FindChr("log_", spos)
-        If pos > 0 Then
-            pos2 = InStr(pos + 2, ea.text, VBA.ChrW(8289))
+        Pos = ea.FindChr("log_", spos)
+        If Pos > 0 Then
+            pos2 = InStr(Pos + 2, ea.Text, VBA.ChrW(8289))
             If Not pos2 > 0 Then
-                base = ea.GetNextVar(pos)
+                base = ea.GetNextVar(Pos)
                 base = right(base, Len(base) - 4)
             Else
-                base = Mid(ea.text, pos + 4, pos2 - pos - 4)
+                base = Mid(ea.Text, Pos + 4, pos2 - Pos - 4)
             End If
-            ea.text = Left(ea.text, pos + 2) & "base" & right(ea.text, Len(ea.text) - pos - Len(base) - 4)
-            ea.pos = pos + 7
+            ea.Text = Left(ea.Text, Pos + 2) & "base" & right(ea.Text, Len(ea.Text) - Pos - Len(base) - 4)
+            ea.Pos = Pos + 7
             '        ea.InsertBeforePos ("(")
             '        ea.pos = ea.pos + 3
             ea.GetNextBracketContent
-            ea.InsertBeforePos "," & base, ea.pos - 1
+            ea.InsertBeforePos "," & base, ea.Pos - 1
             '        text = ea.text
             '        spos = ea.pos + 10
         End If
-    Loop While pos > 0
-    text = ea.text
+    Loop While Pos > 0
+    Text = ea.Text
 
 
-    text = Replace(text, VBA.ChrW(8289), "")    ' symbol der definerer funktion fjernes fra word syntaks
+    Text = Replace(Text, VBA.ChrW(8289), "")    ' symbol der definerer funktion fjernes fra word syntaks
 
     'logaritmer
     If ConvertLnLog Then
-        ea.text = text
+        ea.Text = Text
         ea.ReplaceVar "log", "log10"
-        text = ea.text
+        Text = ea.Text
         '    spos = 1
         '    Do
         '    ea.text = text
@@ -3273,76 +3327,76 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     ' 3 og 4 rod
     For rod = 3 To 4
         Do
-            pos = InStr(text, VBA.ChrW(8728 + rod))
-            If pos > 0 Or pos4 > 0 Or pos5 > 0 Then
-                ea.text = text
-                ea.pos = pos + 1
-                If Mid(text, pos + 1, 1) <> "(" Then
+            Pos = InStr(Text, VBA.ChrW(8728 + rod))
+            If Pos > 0 Or pos4 > 0 Or pos5 > 0 Then
+                ea.Text = Text
+                ea.Pos = Pos + 1
+                If Mid(Text, Pos + 1, 1) <> "(" Then
                     ea.InsertUnderstoodBracketPair
                 End If
-                ea.pos = pos
+                ea.Pos = Pos
                 Call ea.GetNextBracketContent    ' bare for at finde slut parantes
-                Call ea.InsertBeforePos("^(1/" & rod & ")")
-                ea.text = Replace(ea.text, VBA.ChrW(8728 + rod), "", 1, 1)
-                text = ea.text
+                Call ea.InsertBeforePos("^(1/" & rod & ")") ' metoden her kan faktisk give problemer ved fx \cbrt(4)^2 da denne skal fortolkes cbrt(4^2) og ikke cbrt(4)^2
+                ea.Text = Replace(ea.Text, VBA.ChrW(8728 + rod), "", 1, 1)
+                Text = ea.Text
             End If
-        Loop While pos > 0
+        Loop While Pos > 0
     Next
 
     'kvadratrod
     Do
-        pos = InStr(text, VBA.ChrW(8730))
-        If pos > 0 Then
-            If Mid(text, pos + 1, 1) <> "(" Then
-                text = Replace(text, VBA.ChrW(8730), "sqrt", 1, 1)
-                pos = pos + 4
-                ea.text = text
-                ea.pos = pos
+        Pos = InStr(Text, VBA.ChrW(8730))
+        If Pos > 0 Then
+            If Mid(Text, Pos + 1, 1) <> "(" Then
+                Text = Replace(Text, VBA.ChrW(8730), "sqrt", 1, 1)
+                Pos = Pos + 4
+                ea.Text = Text
+                ea.Pos = Pos
                 ea.InsertUnderstoodBracketPair
-                text = ea.text
+                Text = ea.Text
             Else
-                ea.text = text
-                ea.pos = pos
-                Arr = Split(ea.GetNextBracketContent, "&")
-                pos2 = ea.pos
-                If UBound(Arr) = 0 Then
-                    text = Replace(text, VBA.ChrW(8730), "sqrt", 1, 1)
-                ElseIf UBound(Arr) = 1 Then
-                    Call ea.InsertBeforePos("^(1/(" & Arr(0) & ")))")
-                    ea.text = Replace(ea.text, VBA.ChrW(8730), "(", 1, 1)
+                ea.Text = Text
+                ea.Pos = Pos
+                arr = Split(ea.GetNextBracketContent, "&")
+                pos2 = ea.Pos
+                If UBound(arr) = 0 Then
+                    Text = Replace(Text, VBA.ChrW(8730), "sqrt", 1, 1)
+                ElseIf UBound(arr) = 1 Then
+                    Call ea.InsertBeforePos("^(1/(" & arr(0) & ")))")
+                    ea.Text = Replace(ea.Text, VBA.ChrW(8730), "(", 1, 1)
                     posog = ea.FindChr("&", 1)
-                    text = Left(ea.text, pos + 1) & right(ea.text, Len(ea.text) - posog)
-                ElseIf UBound(Arr) = -1 Then ' tilf*oe*jet v1.09 pga uendelig l*oe*kke ved mangl parentes
+                    Text = Left(ea.Text, Pos + 1) & right(ea.Text, Len(ea.Text) - posog)
+                ElseIf UBound(arr) = -1 Then ' tilføjet v1.09 pga uendelig løkke ved mangl parentes
                     MsgBox Sprog.A(169), vbOKOnly, Sprog.Error
-                    GoTo fejl
+                    GoTo Fejl
                 End If
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' sumtegn
     Do
-        pos = InStr(text, VBA.ChrW(8721))
-        If pos > 0 Then
-            ea.text = text
-            ea.pos = pos
+        Pos = InStr(Text, VBA.ChrW(8721))
+        If Pos > 0 Then
+            ea.Text = Text
+            ea.Pos = Pos
             subs = ea.FindChr("_")
             sups = ea.FindChr("^")
             ends = ea.FindChr(VBA.ChrW(9618))
-            Arr = Split(Mid(text, subs + 2, sups - subs - 3), "=")
-            If UBound(Arr) < 1 Then    ' hvis definition er = oversat til :
-                Arr = Split(Mid(text, subs + 2, sups - subs - 3), ":")
+            arr = Split(Mid(Text, subs + 2, sups - subs - 3), "=")
+            If UBound(arr) < 1 Then    ' hvis definition er = oversat til :
+                arr = Split(Mid(Text, subs + 2, sups - subs - 3), ":")
             End If
-            If UBound(Arr) < 1 Then
-                MsgBox Sprog.A(425), vbOKOnly, Sprog.Error '"Notationen for sumtegnet er ikke korrekt. Den nedre gr*ae*nse skal skrives f.eks. i=1"
+            If UBound(arr) < 1 Then
+                MsgBox Sprog.A(425), vbOKOnly, Sprog.Error '"Notationen for sumtegnet er ikke korrekt. Den nedre grænse skal skrives f.eks. i=1"
                 GoTo videre
             End If
-            var = Arr(0)
-            startn = Arr(1)
-            slutn = Mid(text, sups + 1, ends - sups - 1)
+            var = arr(0)
+            startn = arr(1)
+            slutn = Mid(Text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
-            If ea.ChrByIndex(ea.pos) = "+" Or ea.ChrByIndex(ea.pos) = "-" Or ea.ChrByIndex(ea.pos) = "*" Or ea.ChrByIndex(ea.pos) = "/" Then sluts = sluts - 1
-            Expr = Mid(text, ends + 1, sluts - ends)
+            If ea.ChrByIndex(ea.Pos) = "+" Or ea.ChrByIndex(ea.Pos) = "-" Or ea.ChrByIndex(ea.Pos) = "*" Or ea.ChrByIndex(ea.Pos) = "/" Then sluts = sluts - 1
+            Expr = Mid(Text, ends + 1, sluts - ends)
             '        If ea.ChrByIndex(ends + 1) = "(" Then
             '            expr = ea.GetNextBracketContent
             '            If ea.pos = Len(ea.text) Then
@@ -3355,50 +3409,50 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
             '            If sluts < 1 Then sluts = Len(text)
             '            expr = Mid(text, ends + 1, sluts - ends)
             '        End If
-            text = Left(text, pos - 1) & "sum(" & Expr & "," & var & "," & startn & "," & slutn & ")" & right(text, Len(text) - sluts)
+            Text = Left(Text, Pos - 1) & "sum(" & Expr & "," & var & "," & startn & "," & slutn & ")" & right(Text, Len(Text) - sluts)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' produkttegn
     Do
-        pos = InStr(text, VBA.ChrW(8719))
-        If pos > 0 Then
-            ea.text = text
-            ea.pos = pos
+        Pos = InStr(Text, VBA.ChrW(8719))
+        If Pos > 0 Then
+            ea.Text = Text
+            ea.Pos = Pos
             subs = ea.FindChr("_")
             sups = ea.FindChr("^")
             ends = ea.FindChr(VBA.ChrW(9618))
-            Arr = Split(Mid(text, subs + 2, sups - subs - 3), "=")
-            If UBound(Arr) < 1 Then    ' hvis definition er = oversat til :
-                Arr = Split(Mid(text, subs + 2, sups - subs - 3), ":")
+            arr = Split(Mid(Text, subs + 2, sups - subs - 3), "=")
+            If UBound(arr) < 1 Then    ' hvis definition er = oversat til :
+                arr = Split(Mid(Text, subs + 2, sups - subs - 3), ":")
             End If
-            If UBound(Arr) < 1 Then
+            If UBound(arr) < 1 Then
                 MsgBox Sprog.A(426)
                 GoTo videre
             End If
-            var = Arr(0)
-            startn = Arr(1)
-            slutn = Mid(text, sups + 1, ends - sups - 1)
+            var = arr(0)
+            startn = arr(1)
+            slutn = Mid(Text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
-            Expr = Mid(text, ends + 1, sluts - ends)
-            text = Left(text, pos - 1) & "product(" & Expr & "," & var & "," & startn & "," & slutn & ")" & right(text, Len(text) - sluts)
+            Expr = Mid(Text, ends + 1, sluts - ends)
+            Text = Left(Text, Pos - 1) & "product(" & Expr & "," & var & "," & startn & "," & slutn & ")" & right(Text, Len(Text) - sluts)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
 videre:
 
-    'gr*ae*nsev*ae*rdier
-    pos = 1
+    'grænseværdier
+    Pos = 1
     Do
-        pos = InStr(pos, text, "lim")
+        Pos = InStr(Pos, Text, "lim")
         '    pos = InStr(text, "lim" & VBA.ChrW(9516))
         '    pos = InStr(text, "lim" & VBA.ChrW(9516))
-        If pos > 0 Then
-            ea.text = text
-            If ea.ChrByIndex(pos + 3) = VBA.ChrW(9516) Or ea.ChrByIndex(pos + 3) = "_" Then
-                ea.pos = pos
+        If Pos > 0 Then
+            ea.Text = Text
+            If ea.ChrByIndex(Pos + 3) = VBA.ChrW(9516) Or ea.ChrByIndex(Pos + 3) = "_" Then
+                ea.Pos = Pos
                 var = ea.GetNextBracketContent
-                ends = ea.pos
+                ends = ea.Pos
 
                 '        If ea.ChrByIndex(ends) = VBA.ChrW(12310) Then
                 '            ea.StartBracket = VBA.ChrW(12310)
@@ -3422,63 +3476,63 @@ videre:
                 '            expr = Mid(text, ends, sluts - ends + 1)
                 '        End If
                 sluts = ea.FindHierakiBreak(2)
-                Expr = Mid(text, ends, sluts - ends + 1)
+                Expr = Mid(Text, ends, sluts - ends + 1)
 
-                Arr = Split(var, VBA.ChrW(8594))
-                var = Trim(Arr(0))
+                arr = Split(var, VBA.ChrW(8594))
+                var = Trim(arr(0))
                 DiffEqVar = var
-                app = Trim(Arr(1))
+                app = Trim(arr(1))
                 If right(app, 2) = "^+" Then
                     app = Left(app, Len(app) - 2) & ",plus"
                 ElseIf right(app, 2) = "^-" Then
                     app = Left(app, Len(app) - 2) & ",minus"
                 End If
-                text = Left(text, pos - 1) & "limit(" & Expr & "," & var & "," & app & ")" & right(text, Len(text) - sluts)
+                Text = Left(Text, Pos - 1) & "limit(" & Expr & "," & var & "," & app & ")" & right(Text, Len(Text) - sluts)
             Else
-                pos = pos + 3
+                Pos = Pos + 3
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
 
     'differentiering
     Dim subt As String, vararr() As String, s2 As String, f2 As String
     di = 0    ' hvis der er flere f'(2) skal der bruges flere variable
 #If Mac Then
-    text = Replace(text, "^('')", "^''")
-    text = Replace(text, "^(''')", "^'''")
-    text = Replace(text, "^('''')", "^''''")
+    Text = Replace(Text, "^('')", "^''")
+    Text = Replace(Text, "^(''')", "^'''")
+    Text = Replace(Text, "^('''')", "^''''")
 #End If
     Do
-        pos = InStr(text, "^'")
-        If pos > 0 Then
-            ea.text = text
-            ea.pos = pos
+        Pos = InStr(Text, "^'")
+        If Pos > 0 Then
+            ea.Text = Text
+            ea.Pos = Pos
             '        f = ea.ChrByIndex(pos - 1)
-            f = ea.GetPrevVar(pos - 1)
+            f = ea.GetPrevVar(Pos - 1)
             antalm = 0
             Do
                 antalm = antalm + 1
-            Loop Until ea.ChrByIndex(pos + 1 + antalm) <> "'"
+            Loop Until ea.ChrByIndex(Pos + 1 + antalm) <> "'"
             If CasType = 0 Then
                 antalmS = "round(" & antalm & ")"
             Else
                 antalmS = CStr(antalm)
             End If
-            If ea.ChrByIndex(pos + antalm + 1) = " " Then    ' fjern evt. mellemrum efter '
-                text = Left(text, pos + 1) & right(text, Len(text) - pos - 2)
-                ea.text = text
+            If ea.ChrByIndex(Pos + antalm + 1) = " " Then    ' fjern evt. mellemrum efter '
+                Text = Left(Text, Pos + 1) & right(Text, Len(Text) - Pos - 2)
+                ea.Text = Text
             End If
 
-            If ea.ChrByIndex(pos + antalm + 1) = "(" Then
+            If ea.ChrByIndex(Pos + antalm + 1) = "(" Then
                 '            var = ea.ChrByIndex(pos + 3 + antalm)
-                var = ea.GetNextBracketContent(pos + 1 + antalm)
+                var = ea.GetNextBracketContent(Pos + 1 + antalm)
                 varl = Len(var) + 2
             Else
                 If DiffEqVar = "" Then
                     var = "x"    ' hvis ingen variabel antages x
                 Else
-                    var = DiffEqVar    ' hvis diffligning s*aa* antages diffeqvar
+                    var = DiffEqVar    ' hvis diffligning så antages diffeqvar
                 End If
                 varl = 0
             End If
@@ -3495,45 +3549,45 @@ videre:
                Next
             End If
 
-            If ea.ChrByIndex(pos - 1) = ")" Then    ' hvis (...)'(x)
+            If ea.ChrByIndex(Pos - 1) = ")" Then    ' hvis (...)'(x)
                 ' find startparantes?
-                udtryk = ea.GetPrevBracketContent(pos)
-                If ea.ChrByIndex(ea.pos - 2) = "_" Then    '  f_(...)'(x)
-                    f = ea.GetPrevVar(ea.pos - 1) & "(" & udtryk & ")"
+                udtryk = ea.GetPrevBracketContent(Pos)
+                If ea.ChrByIndex(ea.Pos - 2) = "_" Then    '  f_(...)'(x)
+                    f = ea.GetPrevVar(ea.Pos - 1) & "(" & udtryk & ")"
                     GoTo msat
-                    '                MsgBox "Der er s*ae*nket skrift som ikke kan fortolkes", vbOKOnly, "Fejl"
+                    '                MsgBox "Der er sænket skrift som ikke kan fortolkes", vbOKOnly, "Fejl"
                     '                GoTo fejl
-                ElseIf ea.IsLetterPos(ea.pos - 2) Then    ' sin(x)'
-                    f = ea.GetPrevVar(ea.pos - 1)
-                    text = Left(text, ea.pos - Len(f)) & "subst(" & var & ",qkqg" & di & ",diff(" & f & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(text, Len(text) - pos - varl - antalm)
+                ElseIf ea.IsLetterPos(ea.Pos - 2) Then    ' sin(x)'
+                    f = ea.GetPrevVar(ea.Pos - 1)
+                    Text = Left(Text, ea.Pos - Len(f)) & "subst(" & var & ",qkqg" & di & ",diff(" & f & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
                     di = di + 1
                 Else    ' (x^2)'
-                    text = Left(ea.text, ea.pos - 2) & "diff(" & udtryk & "," & var & "," & antalmS & ")" & right(ea.text, Len(ea.text) - pos - varl - antalm)
+                    Text = Left(ea.Text, ea.Pos - 2) & "diff(" & udtryk & "," & var & "," & antalmS & ")" & right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
                 End If
-            ElseIf ea.ChrByIndex(pos - 2 - Len(subt)) = ")" And Len(subt) > 0 And Len(subt) = antalm Then ' partiel (...)_xy''
-                  s = ea.GetPrevBracketContent(pos - 2)
+            ElseIf ea.ChrByIndex(Pos - 2 - Len(subt)) = ")" And Len(subt) > 0 And Len(subt) = antalm Then ' partiel (...)_xy''
+                  s = ea.GetPrevBracketContent(Pos - 2)
                   For i = 1 To antalm
                      s = "diff(" & s & "," & Mid(subt, i, 1) & ",1)"
                   Next
-                 text = Left(ea.text, ea.pos - 2) & s & right(ea.text, Len(ea.text) - pos - varl - antalm)
+                 Text = Left(ea.Text, ea.Pos - 2) & s & right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
             
-            ElseIf Not ea.ChrByIndex(pos + antalm + 1) = "(" Then    ' hvis y'  variabel ikke funktion
+            ElseIf Not ea.ChrByIndex(Pos + antalm + 1) = "(" Then    ' hvis y'  variabel ikke funktion
                If Len(subt) > 0 And Len(subt) = antalm Then ' hvis partiel y'
                   s = Left(f, pos2 - 1)
                   For i = 1 To antalm
                      s = "diff(" & s & "," & Mid(subt, i, 1) & ",1)"
                   Next
-                 text = Left(text, pos - 1 - Len(f)) & s & right(text, Len(text) - pos - varl - antalm)
+                 Text = Left(Text, Pos - 1 - Len(f)) & s & right(Text, Len(Text) - Pos - varl - antalm)
                Else
-                text = Left(text, pos - 1 - Len(f)) & "diff(" & f & "," & var & "," & antalmS & ")" & right(text, Len(text) - pos - varl - antalm)
+                Text = Left(Text, Pos - 1 - Len(f)) & "diff(" & f & "," & var & "," & antalmS & ")" & right(Text, Len(Text) - Pos - varl - antalm)
                End If
-            ElseIf ea.ChrByIndex(pos + antalm + 1) = "(" Then    ' hvis f'(x)
+            ElseIf ea.ChrByIndex(Pos + antalm + 1) = "(" Then    ' hvis f'(x)
 msat:
-                If DiffEqVar = var Or CasType = 1 Or CasType = 2 Then  'hvis diffligning s*aa* ingen subst
+                If DiffEqVar = var Or CasType = 1 Or CasType = 2 Then  'hvis diffligning så ingen subst
                   If Len(subt) > 0 And Len(subt) = antalm Then ' hvis partiel
-                        text = Left(text, pos - 1 - Len(f)) & "diff(" & f & "(" & var & ")," & var & "," & antalmS & ")" & right(text, Len(text) - pos - varl - antalm)
+                        Text = Left(Text, Pos - 1 - Len(f)) & "diff(" & f & "(" & var & ")," & var & "," & antalmS & ")" & right(Text, Len(Text) - Pos - varl - antalm)
                     Else
-                        text = Left(text, pos - 1 - Len(f)) & "substitute(diff(" & f & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & var & ")" & right(text, Len(text) - pos - varl - antalm)
+                        Text = Left(Text, Pos - 1 - Len(f)) & "substitute(diff(" & f & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & var & ")" & right(Text, Len(Text) - Pos - varl - antalm)
                         di = di + 1
                     End If
                 Else    ' ikke diff ligning
@@ -3551,65 +3605,65 @@ msat:
                         s2 = s2 & "part(first(fundef(" & f2 & "))," & i + 1 & ")=" & vararr(i) & ","
                      Next
                      s = Left(s2, Len(s2) - 1) & "]," & s & ")"
-                    text = Left(text, pos - 1 - Len(f)) & s & right(text, Len(text) - pos - varl - antalm)
+                    Text = Left(Text, Pos - 1 - Len(f)) & s & right(Text, Len(Text) - Pos - varl - antalm)
                   Else ' alm ikke partiel f'(x)
-                    text = Left(text, pos - 1 - Len(f)) & "subst(" & var & ",qkqg" & di & ",diff(" & f & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(text, Len(text) - pos - varl - antalm)
+                    Text = Left(Text, Pos - 1 - Len(f)) & "subst(" & var & ",qkqg" & di & ",diff(" & f & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
                     di = di + 1
                   End If
                 End If
             Else
-                GoTo fejl
+                GoTo Fejl
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
    ' nabla operator, grad og div
     Do
-        pos = InStr(text, ChrW(8711) & ChrW(13))
-        If pos > 0 Then
-            ea.text = text
-            ea.pos = pos
+        Pos = InStr(Text, ChrW(8711) & ChrW(13))
+        If Pos > 0 Then
+            ea.Text = Text
+            ea.Pos = Pos
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
 
     'integraler
     Dim integrand As String
-    pos = InStr(text, VBA.ChrW(8747))
-    If pos > 0 Then
-        ea.text = text
-        ea.text = Replace(ea.text, "diff", "qiff")    ' d'et vil give problemer da det vil blive opfattet som afslutning af integrale
-        ea.text = Replace(ea.text, "round", "rounq")    ' d'et vil give problemer da det vil blive opfattet som afslutning af integrale
+    Pos = InStr(Text, VBA.ChrW(8747))
+    If Pos > 0 Then
+        ea.Text = Text
+        ea.Text = Replace(ea.Text, "diff", "qiff")    ' d'et vil give problemer da det vil blive opfattet som afslutning af integrale
+        ea.Text = Replace(ea.Text, "round", "rounq")    ' d'et vil give problemer da det vil blive opfattet som afslutning af integrale
         i = 0
         Do
-            ea.pos = 0
+            ea.Pos = 0
             ea.StartBracket = VBA.ChrW(8747)
             ea.EndBracket = VBA.ChrW(8518)    'differential d
             integrand = ea.GetNextBracketContent
-            pos = ea.pos - Len(integrand)    'pos s*ae*ttes til start-integraltegnet
-            pos2 = ea.pos
+            Pos = ea.Pos - Len(integrand)    'pos sættes til start-integraltegnet
+            pos2 = ea.Pos
             If Len(integrand) = 0 Then
                 ea.EndBracket = "d"
-                integrand = ea.GetNextBracketContent(pos)
-                pos = ea.pos - Len(integrand) - 2    'pos s*ae*ttes til start-integraltegnet
-                pos2 = ea.pos
-                If Not (ea.IsLetterPos(ea.pos, False) And Not (ea.IsLetterPos(ea.pos - 2, False))) Then ' hvis enligt d eller som af variabel/funktion der ikke starter med d, s*aa* er det ikke slutningen af integralet. Derfor fors*oe*ges med simplere metode til at finde d
+                integrand = ea.GetNextBracketContent(Pos)
+                Pos = ea.Pos - Len(integrand) - 2    'pos sættes til start-integraltegnet
+                pos2 = ea.Pos
+                If Not (ea.IsLetterPos(ea.Pos, False) And Not (ea.IsLetterPos(ea.Pos - 2, False))) Then ' hvis enligt d eller som af variabel/funktion der ikke starter med d, så er det ikke slutningen af integralet. Derfor forsøges med simplere metode til at finde d
                     j = 0
                     Do
                         j = j + 1
-                        pos3 = InStr(ea.pos, ea.text, "d")
-                        ea.pos = pos3 + 1
-                    Loop While j < 100 And Not (ea.IsLetterPos(ea.pos, False) And Not (ea.IsLetterPos(ea.pos - 2, False)))
-                    integrand = Mid(ea.text, pos + 1, pos3 - pos - 1)
-                    pos2 = ea.pos
+                        pos3 = InStr(ea.Pos, ea.Text, "d")
+                        ea.Pos = pos3 + 1
+                    Loop While j < 100 And Not (ea.IsLetterPos(ea.Pos, False) And Not (ea.IsLetterPos(ea.Pos - 2, False)))
+                    integrand = Mid(ea.Text, Pos + 1, pos3 - Pos - 1)
+                    pos2 = ea.Pos
                 End If
             End If
-            var = ea.GetNextVar(ea.pos - 1)
+            var = ea.GetNextVar(ea.Pos - 1)
             If Len(integrand) > 0 Then
-                If Len(integrand) < 3 And Mid(ea.text, pos2 - Len(var), 2 + Len(var)) = "(" & var & ")" Then    ' hvis speciel notation med \int (dx)/(bla bla)
+                If Len(integrand) < 3 And Mid(ea.Text, pos2 - Len(var), 2 + Len(var)) = "(" & var & ")" Then    ' hvis speciel notation med \int (dx)/(bla bla)
                     ea.SetNormalBrackets
                     integrand = ea.GetNextBracketContent(pos2 + 1)
-                    pos2 = ea.pos - 1
+                    pos2 = ea.Pos - 1
                 End If
                 If Len(var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
@@ -3622,8 +3676,15 @@ msat:
                     IntegrationVars = IntegrationVars & var & ";"
                     poss = InStr(integrand, VBA.ChrW(9618))
                     posn = InStr(integrand, "_")
-                    poso = InStr(integrand, "^")
-                    If posn > 0 And poso > 0 And posn < poss And poso < poss Then
+                    If Mid(integrand, posn + 1, 1) = "(" Then
+                        ea2.Text = integrand
+                        ea2.SetNormalBrackets
+                        ea2.GetNextBracketContent (posn)
+                        poso = InStr(ea2.Pos, integrand, "^")
+                    Else
+                        poso = InStr(integrand, "^")
+                    End If
+                    If posn > 0 And poso > 0 And posn < poss And poso < poss Then ' bestemt integrale
                         nedre = Mid(integrand, posn + 1, poso - posn - 1)
                         upper = Mid(integrand, poso + 1, poss - poso - 1)
                         '        text = Left(text, posn - 1) & Mid(text, poss + 1, pos2 - poss - 1) & "," & Mid(text, pos2 + 1, 1) & "," & nedre & "," & upper & ")" & Mid(text, pos2 + 2, Len(text) - pos2 - 1)
@@ -3633,9 +3694,9 @@ msat:
                         End If
                         If MaximaExact = 2 Then
                             '                        ea.text = Replace(ea.text, VBA.ChrW(8747), "NIntegrate(", 1, 1)
-                            ea.text = Left(ea.text, pos - 1) & "NIntegrate(" & integrand & right(ea.text, ea.Length - pos2 - Len(var) + 2)
+                            ea.Text = Left(ea.Text, Pos - 1) & "NIntegrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) + 2)
                         Else
-                            ea.text = Left(ea.text, pos - 1) & "Integrate(" & integrand & right(ea.text, ea.Length - pos2 - Len(var) + 2)
+                            ea.Text = Left(ea.Text, Pos - 1) & "Integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) + 2)
                             '                        ea.text = Replace(ea.text, VBA.ChrW(8747), "Integrate(", 1, 1)
                         End If
                     Else    ' ubestemt integrale
@@ -3643,46 +3704,46 @@ msat:
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktionstegn
                             integrand = right(integrand, Len(integrand) - 1)
                         End If
-                        ea.text = Left(ea.text, pos - 1) & "integrate(" & integrand & right(ea.text, ea.Length - pos2 - Len(var) + 2)
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) + 2)
                     End If
                     i = i + 1
                 End If
             End If
-        Loop While i < 100 And InStr(ea.text, VBA.ChrW(8747)) > 0 'Len(integrand) > 0
-        ea.text = Replace(ea.text, "qiff", "diff")
-        ea.text = Replace(ea.text, "rounq", "round")
+        Loop While i < 100 And InStr(ea.Text, VBA.ChrW(8747)) > 0 'Len(integrand) > 0
+        ea.Text = Replace(ea.Text, "qiff", "diff")
+        ea.Text = Replace(ea.Text, "rounq", "round")
         ea.SetNormalBrackets
-        text = ea.text
+        Text = ea.Text
     End If
 
     'dobbeltintegraler
     Dim var2 As String
-    pos = InStr(text, VBA.ChrW(8748))
-    If pos > 0 Then
-        ea.text = text
-        ea.text = Replace(ea.text, "diff", "qiff")    ' d'et vil give problemer da det vil blive opfattet som afslutning af integrale
+    Pos = InStr(Text, VBA.ChrW(8748))
+    If Pos > 0 Then
+        ea.Text = Text
+        ea.Text = Replace(ea.Text, "diff", "qiff")    ' d'et vil give problemer da det vil blive opfattet som afslutning af integrale
         i = 0
         Do
-            ea.pos = 0
+            ea.Pos = 0
             ea.StartBracket = VBA.ChrW(8748)
             ea.EndBracket = VBA.ChrW(8518)    'differential d
             integrand = ea.GetNextBracketContent
-            pos = ea.pos - Len(integrand)    'pos s*ae*ttes til start-integraltegnet
-            pos2 = ea.pos
+            Pos = ea.Pos - Len(integrand)    'pos sættes til start-integraltegnet
+            pos2 = ea.Pos
             If Len(integrand) = 0 Then
                 ea.EndBracket = "d"
                 integrand = ea.GetNextBracketContent
-                pos = ea.pos - Len(integrand) - 2    'pos s*ae*ttes til start-integraltegnet
-                pos2 = ea.pos
+                Pos = ea.Pos - Len(integrand) - 2    'pos sættes til start-integraltegnet
+                pos2 = ea.Pos
             End If
             If Len(integrand) > 0 Then
-                var = ea.GetNextVar(ea.pos - 1)
+                var = ea.GetNextVar(ea.Pos - 1)
                 If Len(var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
                     GoTo slut
                 End If
                 var = right(var, Len(var) - 1)
-                var2 = ea.GetNextVar(ea.pos + 1)
+                var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
                     ConvertErrorText = Sprog.A(428)
                     GoTo slut
@@ -3694,7 +3755,14 @@ msat:
                     IntegrationVars = IntegrationVars & var & ";"
                     poss = InStr(integrand, VBA.ChrW(9618))
                     posn = InStr(integrand, "_")
-                    poso = InStr(integrand, "^")
+                    If Mid(integrand, posn + 1, 1) = "(" Then
+                        ea2.Text = integrand
+                        ea2.SetNormalBrackets
+                        ea2.GetNextBracketContent (posn)
+                        poso = InStr(ea2.Pos, integrand, "^")
+                    Else
+                        poso = InStr(integrand, "^")
+                    End If
                     If posn > 0 And poso > 0 And posn < poss And poso < poss Then
                         ConvertErrorText = Sprog.A(429)
                         GoTo slut
@@ -3703,53 +3771,53 @@ msat:
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktionstegn
                             integrand = right(integrand, Len(integrand) - 1)
                         End If
-                        ea.text = Left(ea.text, pos - 1) & "integrate(integrate(" & integrand & right(ea.text, ea.Length - pos2 - Len(var) - Len(var2))
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) - Len(var2))
                     End If
                     i = i + 1
                 End If
             End If
         Loop While i < 100 And Len(integrand) > 0
-        ea.text = Replace(ea.text, "qiff", "diff")
+        ea.Text = Replace(ea.Text, "qiff", "diff")
         ea.SetNormalBrackets
-        text = ea.text
+        Text = ea.Text
     End If
 
     'trippelintegraler
     Dim var3 As String
-    pos = InStr(text, VBA.ChrW(8749))
-    If pos > 0 Then
-        ea.text = text
-        ea.text = Replace(ea.text, "diff", "qiff")    ' d'et vil give problemer da det vil blive opfattet som afslutning af integrale
+    Pos = InStr(Text, VBA.ChrW(8749))
+    If Pos > 0 Then
+        ea.Text = Text
+        ea.Text = Replace(ea.Text, "diff", "qiff")    ' d'et vil give problemer da det vil blive opfattet som afslutning af integrale
         i = 0
         Do
-            ea.pos = 0
+            ea.Pos = 0
             ea.StartBracket = VBA.ChrW(8749)
             ea.EndBracket = VBA.ChrW(8518)    'differential d
             integrand = ea.GetNextBracketContent()
-            pos = ea.pos - Len(integrand)    'pos s*ae*ttes til start-integraltegnet
-            pos2 = ea.pos
+            Pos = ea.Pos - Len(integrand)    'pos sættes til start-integraltegnet
+            pos2 = ea.Pos
             If Len(integrand) = 0 Then
                 ea.EndBracket = "d"
                 integrand = ea.GetNextBracketContent
-                pos = ea.pos - Len(integrand) - 2    'pos s*ae*ttes til start-integraltegnet
-                pos2 = ea.pos
+                Pos = ea.Pos - Len(integrand) - 2    'pos sættes til start-integraltegnet
+                pos2 = ea.Pos
             End If
             If Len(integrand) > 0 Then
-                var = ea.GetNextVar(ea.pos - 1)
+                var = ea.GetNextVar(ea.Pos - 1)
                 If Len(var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
                     GoTo slut
                 End If
                 var = right(var, Len(var) - 1)
-                var2 = ea.GetNextVar(ea.pos + 1)
+                var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
-                    ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. M*aa*ske har du brugt d i anden sammenh*ae*ng. Brug da differential d \dd"
+                    ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. Måske har du brugt d i anden sammenhæng. Brug da differential d \dd"
                     GoTo slut
                 End If
                 var2 = right(var2, Len(var2) - 1)
-                var3 = ea.GetNextVar(ea.pos + 1)
+                var3 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var3) < 2 Or (Left(var3, 1) <> "d" And Left(var3, 1) <> VBA.ChrW(8518)) Then
-                    ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. M*aa*ske har du brugt d i anden sammenh*ae*ng. Brug da differential d \dd"
+                    ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. Måske har du brugt d i anden sammenhæng. Brug da differential d \dd"
                     GoTo slut
                 End If
                 var3 = right(var3, Len(var3) - 1)
@@ -3759,7 +3827,14 @@ msat:
                     IntegrationVars = IntegrationVars & var & ";"
                     poss = InStr(integrand, VBA.ChrW(9618))
                     posn = InStr(integrand, "_")
-                    poso = InStr(integrand, "^")
+                    If Mid(integrand, posn + 1, 1) = "(" Then
+                        ea2.Text = integrand
+                        ea2.SetNormalBrackets
+                        ea2.GetNextBracketContent (posn)
+                        poso = InStr(ea2.Pos, integrand, "^")
+                    Else
+                        poso = InStr(integrand, "^")
+                    End If
                     If posn > 0 And poso > 0 And posn < poss And poso < poss Then
                         ConvertErrorText = Sprog.A(429) '"Du kan ikke bruge dobbeltintegraltegnet til bestemte integraler. Brug to enkeltintegraler."
                         GoTo slut
@@ -3768,15 +3843,15 @@ msat:
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktionstegn
                             integrand = right(integrand, Len(integrand) - 1)
                         End If
-                        ea.text = Left(ea.text, pos - 1) & "integrate(integrate(integrate(" & integrand & right(ea.text, ea.Length - pos2 - Len(var) - Len(var2) - Len(var3) - 2)
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) - Len(var2) - Len(var3) - 2)
                     End If
                     i = i + 1
                 End If
             End If
         Loop While i < 100 And Len(integrand) > 0
-        ea.text = Replace(ea.text, "qiff", "diff")
+        ea.Text = Replace(ea.Text, "qiff", "diff")
         ea.SetNormalBrackets
-        text = ea.text
+        Text = ea.Text
     End If
 
 
@@ -3800,7 +3875,7 @@ msat:
     '                    pos2 = pos2d
     '                End If
     '                ea.pos = pos2
-    '                If ea.IsLetterPos(pos2 - 1, False) Then    ' hvis bogstav foran d, s*aa* indg*aa*r det i variabel
+    '                If ea.IsLetterPos(pos2 - 1, False) Then    ' hvis bogstav foran d, så indgår det i variabel
     '                    pos2 = pos2 + i
     '                    GoTo findslut
     '                End If
@@ -3809,7 +3884,7 @@ msat:
     '                    i = i + 1
     '                Loop While ea.IsLetterPos(pos2 + i, False) And i < 50
     '                var = Mid(text, pos2 + 1, i - 1)
-    '                If var = "" Or var = "iff" Then    ' der vil v*ae*re d hvis diff under integraltegn
+    '                If var = "" Or var = "iff" Then    ' der vil være d hvis diff under integraltegn
     '                    pos2 = pos2 + i
     '                    GoTo findslut
     '                End If
@@ -3840,115 +3915,120 @@ msat:
     '        Loop While pos > 0
 
 
-    ' find underforst*aa*ede paranteser efter ^ og / ' (skal v*ae*re efter diff og andre funktioner med komma)
-    ' flyttet op for at tage h*oe*jde for skjulte parenteser
-    ea.text = text
+    ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma). Skal være før ea.InsertMultSigns
+    ' flyttet op for at tage højde for skjulte parenteser
+    ea.Text = Text
     ea.SetNormalBrackets
     ea.InsertBracketAfter ("^")
-    text = ea.text
+    Text = ea.Text
 
     ' konverter a_i - > a[i] a_i,j -> a[i,j]  hvis sat i indstillinger
     If MaximaIndex Then
-        pos = 1
+        Pos = 1
         Do
-            pos = InStr(pos, ea.text, "_")
-            If pos > 0 Then
-                If ea.IsLetterPos(pos - 1, False) Or ea.ChrByIndex(pos - 1) = ")" Then
-                    ea.RemoveChar pos
-                    ea.pos = pos
-                    If ea.ChrByIndex(pos) = "(" Then
+            Pos = InStr(Pos, ea.Text, "_")
+            If Pos > 0 Then
+                If ea.IsLetterPos(Pos - 1, False) Or ea.ChrByIndex(Pos - 1) = ")" Then
+                    ea.RemoveChar Pos
+                    ea.Pos = Pos
+                    If ea.ChrByIndex(Pos) = "(" Then
                         Expr = ea.GetNextBracketContent()
-                        ea.text = Left(ea.text, pos - 1) & "[" & Expr & "]" & right(ea.text, Len(ea.text) - pos - Len(Expr) - 1)
+                        ea.Text = Left(ea.Text, Pos - 1) & "[" & Expr & "]" & right(ea.Text, Len(ea.Text) - Pos - Len(Expr) - 1)
                     Else
-                        posb = ea.FindHierakiBreak(5)    ' *ae*ndret 5 pga f_1^'(x)
-                        Expr = ea.GetTextInterval(pos, posb)
-                        ea.text = Left(ea.text, pos - 1) & "[" & Expr & "]" & right(ea.text, Len(ea.text) - pos - Len(Expr) + 1)
+                        posb = ea.FindHierakiBreak(5)    ' ændret 5 pga f_1^'(x)
+                        Expr = ea.GetTextInterval(Pos, posb)
+                        ea.Text = Left(ea.Text, Pos - 1) & "[" & Expr & "]" & right(ea.Text, Len(ea.Text) - Pos - Len(Expr) + 1)
                     End If
                 Else
-                    pos = pos + 1
+                    Pos = Pos + 1
                 End If
             End If
-        Loop While pos > 0
+        Loop While Pos > 0
     End If
 spring:
     ea.RemoveSpaceAfterSubSuperscript ("_")
     '    ea.RemoveSpaceAfterSubSuperscript ("^")
-    ' fjern dobbelt mellemrum
-    Do While InStr(ea.text, "  ") > 0
-        ea.text = Replace(ea.text, "  ", " ")
+    ' fjern dobbelt mellemrum ' dette også indført i starten af codeformaxima, så nok overflødigt her
+    Do While InStr(ea.Text, "  ") > 0
+        ea.Text = Replace(ea.Text, "  ", " ")
     Loop
     ea.ReplaceSpaceByMult    ' erstatter mellemrum med * men ikke hvis ulovlig
-    text = ea.text
+    Text = ea.Text
 
-    text = Replace(text, " ", "")     ' evt. resterende mellemrum fjernes
-    '    text = Replace(text, " ", "*")     ' skal v*ae*re efter diff og integral ' problematisk ved (x^2 )' -> diff(x^2*,x,1)
+    Text = Replace(Text, " ", "")     ' evt. resterende mellemrum fjernes
+    '    text = Replace(text, " ", "*")     ' skal være efter diff og integral ' problematisk ved (x^2 )' -> diff(x^2*,x,1)
 
 
-    text = Replace(text, "det(", "determinant2(")    ' lidt usikker da der kan v*ae*re funktioner der slutter p*aa* "det"
+    Text = Replace(Text, "det(", "determinant2(")    ' lidt usikker da der kan være funktioner der slutter på "det"
     ' Matricer
     Do
-        pos = InStr(text, VBA.ChrW(9632))
-        If pos > 0 Then
+        Pos = InStr(Text, VBA.ChrW(9632))
+        If Pos > 0 Then
             matvekt = True
-            stpos = pos - 1
-            ea.text = text
-            ea.pos = pos
+            stpos = Pos - 1
+            ea.Text = Text
+            ea.Pos = Pos
             matrix = ea.GetNextBracketContent
-            slpos = ea.pos
+            slpos = ea.Pos
             If ea.ChrByIndex(slpos + 1) = "*" Then
-                text = Left(text, slpos) & " ## " & right(text, Len(text) - slpos - 1)
+                Text = Left(Text, slpos) & " ## " & right(Text, Len(Text) - slpos - 1)
             End If
-            Arr = Split(matrix, "@")
+            arr = Split(matrix, "@")
             If CasType = 1 Or CasType = 2 Then
                 mtext = "{"
-                For i = 0 To UBound(Arr)
-                    mtext = mtext & "{" & Replace(Arr(i), "&", ",") & "},"
+                For i = 0 To UBound(arr)
+                    mtext = mtext & "{" & Replace(arr(i), "&", ",") & "},"
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & "}"
             Else
                 mtext = "matrix("
-                For i = 0 To UBound(Arr)
-                    mtext = mtext & "[" & Replace(Arr(i), "&", ",") & "],"
+                For i = 0 To UBound(arr)
+                    mtext = mtext & "[" & Replace(arr(i), "&", ",") & "],"
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & ")"
             End If
-            text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos)
+            Text = Left(Text, stpos - 1) & mtext & right(Text, Len(Text) - slpos)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     'vektorer
     Do
-        pos = InStr(text, VBA.ChrW(9608))
-        If pos > 0 Then
+        Pos = InStr(Text, VBA.ChrW(9608))
+        If Pos > 0 Then
             matvekt = True
-            stpos = pos - 1
-            ea.text = text
-            ea.pos = pos
+            stpos = Pos - 1
+            ea.Text = Text
+            ea.Pos = Pos
             matrix = ea.GetNextBracketContent
-            slpos = ea.pos
-            Arr = Split(matrix, "@")
+            slpos = ea.Pos
+            arr = Split(matrix, "@")
             If CasType = 1 Or CasType = 2 Then
                 mtext = "{"
-                For i = 0 To UBound(Arr)
-                    mtext = mtext & "{" & Arr(i) & "},"
+                For i = 0 To UBound(arr)
+                    mtext = mtext & "{" & arr(i) & "},"
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & "}"
             Else
                 mtext = "matrix("
-                For i = 0 To UBound(Arr)
-                    mtext = mtext & "[" & Arr(i) & "],"
+                For i = 0 To UBound(arr)
+                    mtext = mtext & "[" & arr(i) & "],"
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & ")"
             End If
-            text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos)
+            
+            If Len(Text) - slpos >= 0 Then
+                Text = Left(Text, stpos - 1) & mtext & right(Text, Len(Text) - slpos)
+            Else
+                Text = Left(Text, stpos - 1) & mtext
+            End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
 
 
 
-    ' inds*ae*t underforst*aa*ede gangetegn mellem bogstav mellemrum og bogstav
-    ' virker men s*aa* kan man ikke lave funktioner med s*ae*nket skrift da der da er mellemrum
+    ' indsæt underforståede gangetegn mellem bogstav mellemrum og bogstav
+    ' virker men så kan man ikke lave funktioner med sænket skrift da der da er mellemrum
     '    ea.text = text
     '    pos = 1
     '    Do
@@ -3963,50 +4043,50 @@ spring:
     '    text = ea.text
 
 
-    ' inds*ae*t underforst*aa*ede gangetegn ' skal v*ae*re efter fjern mellemrum
-    ea.text = text
-    ea.pos = 1
+    ' indsæt underforståede gangetegn ' skal være efter fjern mellemrum
+    ea.Text = Text
+    ea.Pos = 1
     ea.InsertMultSigns
-    text = ea.text
+    Text = ea.Text
     If Radians Then
-        text = Replace(text, VBA.ChrW(8736), " CVinkel ")    ' hvis complex s*aa* er vinkel pol*ae*r notation
+        Text = Replace(Text, VBA.ChrW(8736), " CVinkel ")    ' hvis complex så er vinkel polær notation
     Else
-        text = Replace(text, VBA.ChrW(8736), " CVinkelgrad ")    ' hvis complex s*aa* er vinkel pol*ae*r notation
+        Text = Replace(Text, VBA.ChrW(8736), " CVinkelgrad ")    ' hvis complex så er vinkel polær notation
     End If
 
-    text = Replace(text, "gradq*", "gradq ")
-    text = Replace(text, "divq*", "divq ")
-    text = Replace(text, "curlq*", "curlq ")
-    text = Replace(text, "laplaceq*", "laplaceq ")
+    Text = Replace(Text, "gradq*", "gradq ")
+    Text = Replace(Text, "divq*", "divq ")
+    Text = Replace(Text, "curlq*", "curlq ")
+    Text = Replace(Text, "laplaceq*", "laplaceq ")
 
 
     If matvekt Then
         If CASengine = 0 Then
-        '        text = Replace(text, "])^", "])^^")  ' matrix ^ enkelt ^ opl*oe*fter kun hvert enkelt element
-        text = Replace(text, "^", "^^")  ' definerede matricer blev ikke h*aa*ndteret korrekt med ovenst*aa*ende. Fors*oe*ger nu at erstatte alle og h*aa*ber det ikke giver andre problemer
+        '        text = Replace(text, "])^", "])^^")  ' matrix ^ enkelt ^ opløfter kun hvert enkelt element
+        Text = Replace(Text, "^", "^^")  ' definerede matricer blev ikke håndteret korrekt med ovenstående. Forsøger nu at erstatte alle og håber det ikke giver andre problemer
 '#If Mac Then ' from 1.18  windows is also sbcl
-        text = Replace(text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
-        text = Replace(text, "_", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
+        Text = Replace(Text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
+        Text = Replace(Text, "_", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
 '#Else
-'        text = Replace(text, "*", " _ ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk n*aa*r * ikke er matrix multiplikation, da der s*aa* er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind f*oe*rst. Dog l*oe*st med egen _ operator istedet for .
+'        text = Replace(text, "*", " _ ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
 '#End If
         '        text = Replace(text, "*matrix", " . matrix")  ' matrix gangetegn og prikprodukt
         '        text = Replace(text, "*vect", " . vect")
         Else
-            text = Replace(text, ChrW(215), ChrW(8855))
-            text = Replace(text, "~", ChrW(8855)) ' vektorprodukt
+            Text = Replace(Text, ChrW(215), ChrW(8855))
+            Text = Replace(Text, "~", ChrW(8855)) ' vektorprodukt
         End If
     End If
 
-    'erstat e med %e og i med %i      er flyttet til efter underforst*aa*ede gangetegn da % ikke g*ae*lder som bogstav
-    text = CodeConstantPercentSign(text, "e")
+    'erstat e med %e og i med %i      er flyttet til efter underforståede gangetegn da % ikke gælder som bogstav
+    Text = CodeConstantPercentSign(Text, "e")
     If MaximaComplex Then
         If CASengine = 0 Then
-            text = CodeConstantPercentSign(text, "i")
+            Text = CodeConstantPercentSign(Text, "i")
         Else
-            ea.text = text
+            ea.Text = Text
             ea.ReplaceVar "i", VBA.ChrW(943)
-            text = ea.text
+            Text = ea.Text
         End If
     End If
 
@@ -4028,78 +4108,79 @@ spring:
 
     '       text = Replace(text, "log", "1/log(10)*log") 'virker ikke hvis der bliver divideret med log
     '    text = Replace(text, "ln", "log")
-    ea.text = text
+    ea.Text = Text
     If ConvertLnLog Then
         ea.ReplaceVar "ln", "log"
     End If
     ea.ReplaceVar "arg", "carg"
-    text = ea.text
+    Text = ea.Text
 
 
     ' trig funktioner konverterer til radianer
     If Not Radians Then
-        text = ConvertDegreeToRad(text, "sin")
-        text = ConvertDegreeToRad(text, "cos")
-        text = ConvertDegreeToRad(text, "tan")
-        text = ConvertDegreeToRad(text, "sec")
-        text = ConvertDegreeToRad(text, "cot")
-        text = ConvertDegreeToRad(text, "csc")
+        Text = ConvertDegreeToRad(Text, "sin")
+        Text = ConvertDegreeToRad(Text, "cos")
+        Text = ConvertDegreeToRad(Text, "tan")
+        Text = ConvertDegreeToRad(Text, "sec")
+        Text = ConvertDegreeToRad(Text, "cot")
+        Text = ConvertDegreeToRad(Text, "csc")
     End If
 
-    ' her var *ae**oe**aa* og gr*ae*ske f*oe*r
+    ' her var æøå og græske før
     If CasType = 0 Then
-        text = Replace(text, VBA.ChrW(960), "%pi")
-        text = Replace(text, "-" & VBA.ChrW(8734), "minf")
-        text = Replace(text, VBA.ChrW(8734), "inf")
+        Text = Replace(Text, VBA.ChrW(960), "%pi")
+        Text = Replace(Text, "-" & VBA.ChrW(8734), "minf")
+        Text = Replace(Text, VBA.ChrW(8734), "inf")
     Else
 '        text = Replace(text, "-" & VBA.ChrW(8734), "minf")
-        text = Replace(text, VBA.ChrW(8734), "infinity")
+        Text = Replace(Text, VBA.ChrW(8734), "infinity")
     End If
 
 
     'enheder
     If MaximaUnits Then
-        text = ConvertUnits(text)
+        Text = ConvertUnits(Text)
     Else
-        text = Replace(text, VBA.ChrW(937), "Omega")    ' omega
+        Text = Replace(Text, VBA.ChrW(937), "Omega")    ' omega
     End If
 
+    Text = Replace(Text, "&&", " ") ' metode til at omgå automatisk gangetegn. Bruges med stykkevise defineret funktioner
 
     '    text = Replace(text, VBA.ChrW(8744), ",")  og
     '    text = Replace(text, VBA.ChrW(8743), ",") eller
 
     GoTo slut:
-fejl:
+Fejl:
     MsgBox Sprog.A(99), vbOKOnly, Sprog.Error
 slut:
     If Len(ConvertErrorText) > 0 Then
         MsgBox ConvertErrorText, vbOKOnly, Sprog.Error
         CodeForMaxima = ""
     Else
-        CodeForMaxima = text
+        CodeForMaxima = Text
     End If
 End Function
-Function ConvertDifferentials(text As String, DiffChr As String) As String
+Function ConvertDifferentials(Text As String, DiffChr As String) As String
     ' d/dx notation
     ' konverterer d/dx til maxima diff(...,x) notation
-    ' DiffChr er symbolet for d. Det kan fx v*ae*re VBA.ChrW(8518) (\dd) eller VBA.ChrW(...)(\partial) eller m*aa*ske et almindeligt d
+    ' DiffChr er symbolet for d. Det kan fx være VBA.ChrW(8518) (\dd) eller VBA.ChrW(...)(\partial) eller måske et almindeligt d
     
     Dim num As String, dem As String, vararr(9) As String, varind As Integer, antalm2 As Integer
-    Dim udtryk1 As String, udtryk2 As String, pos As Integer, pos3 As Integer, antalm As Integer
+    Dim udtryk1 As String, udtryk2 As String, Pos As Integer, pos3 As Integer, antalm As Integer
     Dim pos2 As Integer, var As String, i As Integer, udtryk As String, posstart As Integer, posslut As Integer
     Dim ea As New ExpressionAnalyser
     ea.SetNormalBrackets
     Do
-        pos = InStr(text, "/(" & DiffChr)
-        If pos > 0 Then
-            ea.text = text
-            dem = ea.GetNextBracketContent(pos + 1)
-            pos3 = ea.pos
-            num = ea.GetPrevBracketContent(pos)
+        Pos = InStr(Text, "/(" & DiffChr)
+        If Pos > 0 Then
+            ea.Text = Text
+            dem = ea.GetNextBracketContent(Pos + 1)
+            pos3 = ea.Pos
+            num = ea.GetPrevBracketContent(Pos)
             If Left(num, 1) <> DiffChr Then
                 GoTo slut
             End If
-            pos = ea.pos
+            Pos = ea.Pos
             varind = 0
             If Left(num, 2) = DiffChr & "^" Then
                 antalm = Mid(num, 3, 1)
@@ -4119,14 +4200,14 @@ Function ConvertDifferentials(text As String, DiffChr As String) As String
                     pos2 = InStr(pos2 + 1, dem, DiffChr)
                 Loop While pos2 > 0
                 If antalm <> varind Then
-                    text = Sprog.A(430)
+                    Text = Sprog.A(430)
                     GoTo slut
                 End If
                 ElseIf Left(num, 1) = DiffChr Then
                     antalm = 1
                     vararr(0) = Mid(dem, 2, 1)
                 Else
-                    text = Sprog.A(430)
+                    Text = Sprog.A(430)
                     GoTo slut
             End If
 
@@ -4139,17 +4220,17 @@ Function ConvertDifferentials(text As String, DiffChr As String) As String
                 If Left(udtryk, 1) = "^" Then
                     udtryk = right(udtryk, Len(udtryk) - 1)
                 End If
-                text = Left(text, pos - 2) & udtryk1 & udtryk & udtryk2 & right(text, Len(text) - pos3 + 1)
-            ElseIf Mid(text, pos3 + 1, 1) = "(" Then ' parentes lige efter d/dx operator
+                Text = Left(Text, Pos - 2) & udtryk1 & udtryk & udtryk2 & right(Text, Len(Text) - pos3 + 1)
+            ElseIf Mid(Text, pos3 + 1, 1) = "(" Then ' parentes lige efter d/dx operator
                 udtryk = ea.GetNextBracketContent(pos3)
-                text = Left(text, pos - 2) & udtryk1 & udtryk & udtryk2 & right(text, Len(text) - ea.pos + 1)
+                Text = Left(Text, Pos - 2) & udtryk1 & udtryk & udtryk2 & right(Text, Len(Text) - ea.Pos + 1)
                 ' Her mangler notation for df(x)/dx
-            Else ' ingen parentes efter d/dx operator s*aa* udtrykket m*aa* findes via hieraki
+            Else ' ingen parentes efter d/dx operator så udtrykket må findes via hieraki
                 posstart = pos3
-                ea.pos = pos3 + 1
+                ea.Pos = pos3 + 1
                 posslut = ea.FindHierakiBreak(2)
-                udtryk = Mid(text, pos3, posslut - posstart + 1)
-                text = Left(text, pos - 2) & udtryk1 & udtryk & udtryk2 & right(text, Len(text) - posslut)
+                udtryk = Trim(Mid(Text, pos3, posslut - posstart + 1))
+                Text = Left(Text, Pos - 2) & udtryk1 & udtryk & udtryk2 & right(Text, Len(Text) - posslut)
             End If
             '        var = Mid(text, pos + 3, 1)
             '            If di = 8 Then
@@ -4171,14 +4252,14 @@ Function ConvertDifferentials(text As String, DiffChr As String) As String
             '                text = Left(ea.text, pos - 2) & "diff(" & udtryk & "," & var & "," & antalm & ")" & Right(ea.text, Len(ea.text) - posslut)
             '            End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 slut:
-    ConvertDifferentials = text
+    ConvertDifferentials = Text
 End Function
-Function ConvertUnits(ByVal text As String) As String
+Function ConvertUnits(ByVal Text As String) As String
     Dim ea As New ExpressionAnalyser
-    text = Replace(text, VBA.ChrW(937), "Ohm")    ' Omega er s*aa* ohm
-    ea.text = text
+    Text = Replace(Text, VBA.ChrW(937), "Ohm")    ' Omega er så ohm
+    ea.Text = Text
     ea.ReplaceVar VBA.ChrW(176) & "C", "degC"  ' grad tegn og C
     ea.ReplaceVar "timer", "%timer"
     ea.ReplaceVar "min", "%min"
@@ -4212,144 +4293,134 @@ Function ConvertUnits(ByVal text As String) As String
     ea.ReplaceVar "muOhm", "%muOhm"
     ea.ReplaceVar "mpc", "%%mpc"
     ea.ReplaceVar "mupc", "%mupc"
-    ConvertUnits = ea.text
+    ConvertUnits = ea.Text
 
 End Function
-Function ConvertDegreeToRad(text As String, trigfunc As String) As String
-    Dim pos, spos As Integer, s As String, v As String, f As Boolean
+Function ConvertDegreeToRad(Text As String, trigfunc As String) As String
+    Dim Pos, spos As Integer, s As String, v As String, f As Boolean
     Dim ea As New ExpressionAnalyser ', ea2 As New ExpressionAnalyser
     ea.SetNormalBrackets
 '    ea2.SetNormalBrackets
-    ea.text = text
+    ea.Text = Text
     spos = 1
 
     Do
-        pos = ea.FindChr("a" & trigfunc, spos)
-        If pos > 0 Then
-            If (pos = 1 Or Not (ea.IsLetterPos(pos - 1, False))) And Not (ea.IsLetterPos(pos + Len(trigfunc) + 1, False)) Then
+        Pos = ea.FindChr("a" & trigfunc, spos)
+        If Pos > 0 Then
+            If (Pos = 1 Or Not (ea.IsLetterPos(Pos - 1, False))) And Not (ea.IsLetterPos(Pos + Len(trigfunc) + 1, False)) Then
                 ea.GetNextBracketContent
                 ea.InsertBeforePos (")")
-                ea.pos = pos
+                ea.Pos = Pos
                 ea.InsertBeforePos ("180/%pi*(")
-                spos = pos + 13
+                spos = Pos + 13
             Else
-                spos = pos + 3
+                spos = Pos + 3
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     spos = 1
     Do
-        pos = ea.FindChr(trigfunc, spos)
-        If pos > 0 Then
-            If (pos = 1 Or Not (ea.IsLetterPos(pos - 1, False))) And Not (ea.IsLetterPos(pos + Len(trigfunc), False)) Then
+        Pos = ea.FindChr(trigfunc, spos)
+        If Pos > 0 Then
+            If (Pos = 1 Or Not (ea.IsLetterPos(Pos - 1, False))) And Not (ea.IsLetterPos(Pos + Len(trigfunc), False)) Then
                 'If Not (ea.ChrByIndex(pos - 1) = "a") Then
                 s = ea.GetNextBracketContent()
                 If CASengine = 0 Then
                     ea.InsertBeforePos (")")
-                    ea.pos = pos + Len(trigfunc)
+                    ea.Pos = Pos + Len(trigfunc)
                     ea.InsertAfterPos ("%pi/180*(")
-                Else ' geogebra. Her fors*oe*ges at inds*ae*tte gradtegn, hvis der ikke indg*aa*r variabel indenfor parentes
+                Else ' geogebra.
                     If InStr(s, VBA.ChrW(176)) <= 0 Then
-'                        ea2.text = s
-'                        f = False
-'                        Do
-'                            v = ea2.GetNextVar
-'                            If v <> "" Then
-'                                If Not ea2.IsFunction(v) Then
-'                                    f = True
-'                                    Exit Do
-'                                End If
-'                            End If
-'                        Loop While v <> ""
-'                        If Not f Then
-                            ea.pos = ea.pos - 1
-                            ea.InsertBeforePos (VBA.ChrW(176))
-'                        End If
+                     ea.InsertBeforePos (")")
+                     ea.Pos = Pos + Len(trigfunc)
+                     ea.InsertAfterPos ("pi/180*(")
+'                            ea.Pos = ea.Pos - 1 ' Her forsøges at indsætte gradtegn, hvis der ikke indgår variabel indenfor parentes. fjernet v. 1.26 da det ikke virkede ved variable og ligningsløsning cos(v grader)=...
+'                            ea.InsertBeforePos (VBA.ChrW(176))
                     End If
                 End If
-                spos = pos + 13
+                spos = Pos + 13
             Else
-                spos = pos + 3
+                spos = Pos + 3
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
-    ConvertDegreeToRad = ea.text
+    ConvertDegreeToRad = ea.Text
 
 End Function
 
-Function CodeConstantPercentSign(text As String, tegn As String) As String
-' inds*ae*tter % foran konstant i udtryk hvis der ikke er bogstav foran eller bag
-    Dim pos As Integer
+Function CodeConstantPercentSign(Text As String, tegn As String) As String
+' indsætter % foran konstant i udtryk hvis der ikke er bogstav foran eller bag
+    Dim Pos As Integer
     Dim ea As New ExpressionAnalyser
 
-    ea.text = text
-    pos = 1
+    ea.Text = Text
+    Pos = 1
     Do
-        pos = InStr(pos, ea.text, tegn)
-        If pos > 0 Then
-            If Not (ea.IsLetterPos(pos + 1, False) Or ea.ChrByIndex(pos + 1) = "[" Or ea.IsLetterPos(pos - 1, False)) Then
-                ea.text = Left(ea.text, pos - 1) & "%" & right(ea.text, Len(ea.text) - pos + 1)
-                pos = pos + 2
+        Pos = InStr(Pos, ea.Text, tegn)
+        If Pos > 0 Then
+            If Not (ea.IsLetterPos(Pos + 1, False) Or ea.ChrByIndex(Pos + 1) = "[" Or ea.IsLetterPos(Pos - 1, False)) Then
+                ea.Text = Left(ea.Text, Pos - 1) & "%" & right(ea.Text, Len(ea.Text) - Pos + 1)
+                Pos = Pos + 2
             Else
-                pos = pos + 1
+                Pos = Pos + 1
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
-    CodeConstantPercentSign = ea.text
+    CodeConstantPercentSign = ea.Text
 End Function
-Function ConvertToAscii(ByVal text As String) As String
+Function ConvertToAscii(ByVal Text As String) As String
 ' konverterer fra word input til ascii
 
-    text = Replace(text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes
-    text = Replace(text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
-    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
-    text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
-    text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
-    text = Replace(text, vbLf, "")    ' shift-enter og enter
-    text = Replace(text, vbCrLf, "")
-    text = Replace(text, vbCr, "")
-    text = Replace(text, """", "")    ' apostrof fjernes
+    Text = Replace(Text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes
+    Text = Replace(Text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
+    Text = Replace(Text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
+    Text = Replace(Text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
+    Text = Replace(Text, VBA.ChrW(11), "")    ' shift-enter
+    Text = Replace(Text, vbLf, "")    ' shift-enter og enter
+    Text = Replace(Text, vbCrLf, "")
+    Text = Replace(Text, vbCr, "")
+    Text = Replace(Text, """", "")    ' apostrof fjernes
 '#If Mac Then
 '#Else
-    text = Replace(text, "^'", "Ç")    ' alm apostrof kan ikke bruges
-    text = Replace(text, "'", "Ç")    ' alm apostrof kan ikke bruges
+    Text = Replace(Text, "^'", ChrW(180))    ' alm apostrof kan ikke bruges skal anvende ´  (accent der vender opad)
+    Text = Replace(Text, "'", ChrW(180))    ' alm apostrof kan ikke bruges
 '#End If
-    text = Replace(text, "+-", "-")    ' plus-minus giver minus
-    text = Replace(text, VBA.ChrW(8289), "")    ' symbol der definerer funktion fjernes fra word syntaks
-    text = Replace(text, VBA.ChrW(8212), "+")    'dobbbelt minustegn giver plus
+    Text = Replace(Text, "+-", "-")    ' plus-minus giver minus
+    Text = Replace(Text, VBA.ChrW(8289), "")    ' symbol der definerer funktion fjernes fra word syntaks
+    Text = Replace(Text, VBA.ChrW(8212), "+")    'dobbbelt minustegn giver plus
     '    text = Replace(text, VBA.ChrW(183), "*") ' prik erstattes med gange
     '    text = Replace(text, VBA.ChrW(215), "*") ' kryds erstattes med gange
     '    text = Replace(text, VBA.ChrW(8901), "*") ' \cdot , ved ikke hvorfor der tilsyneladende er to
     '    text = Replace(text, VBA.ChrW(8729), "*") ' prik \cdot erstattes med gange
     '    text = Replace(text, VBA.ChrW(8226), "*") ' tyk prik erstattes med gange
-    '    text = Replace(text, VBA.ChrW(180), "^'") ' der er tre forskellige 'Ç` apostrof lignende de forst*aa*es alle som diff
-    '    text = Replace(text, VBA.ChrW(96), "^'") ' der er tre forskellige 'Ç`
+    '    text = Replace(text, VBA.ChrW(180), "^'") ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
+    '    text = Replace(text, VBA.ChrW(96), "^'") ' der er tre forskellige '‰`
 
-    text = Replace(text, ChrW(183), "*")  ' Siden 1.18 (SBCL) kan alm gangetegn ikke vises
-    text = Replace(text, ChrW(215), "*")  '
-    text = Replace(text, "  ", " ")
-    '    text = Replace(text, " ", "") ' mellemrum fjernes ' problematisk n*aa*r , bruges som ; separator f(0 , 1) -> f(0,1)
-    text = Replace(text, """", "")    ' apostrof fjernes
-    text = Replace(text, "+-", "-")    ' plus-minus giver minus
-    text = Replace(text, "%e", "e")    '
-    '    text = Replace(text, "*ae*", "ae") '
-    '    text = Replace(text, "*oe*", "oe") '
-    '    text = Replace(text, "*aa*", "aa") '
+    Text = Replace(Text, ChrW(183), "*")  ' Siden 1.18 (SBCL) kan alm gangetegn ikke vises
+    Text = Replace(Text, ChrW(215), "*")  '
+    Text = Replace(Text, "  ", " ")
+    '    text = Replace(text, " ", "") ' mellemrum fjernes ' problematisk når , bruges som ; separator f(0 , 1) -> f(0,1)
+    Text = Replace(Text, """", "")    ' apostrof fjernes
+    Text = Replace(Text, "+-", "-")    ' plus-minus giver minus
+    Text = Replace(Text, "%e", "e")    '
+    '    text = Replace(text, "æ", "ae") '
+    '    text = Replace(text, "ø", "oe") '
+    '    text = Replace(text, "å", "aa") '
 
 
-    ConvertToAscii = text
+    ConvertToAscii = Text
 End Function
-Function ConvertToWordSymbols(ByVal text As String) As String
-    On Error GoTo fejl
+Function ConvertToWordSymbols(ByVal Text As String) As String
+    On Error GoTo Fejl
     Dim gtegn As String
     Dim ea As New ExpressionAnalyser
-    Dim pos As Integer, pos2 As Integer
+    Dim Pos As Long, pos2 As Long
     Dim udtryk As String
-    Dim possep As Integer
-    Dim Arr As Variant
+    Dim possep As Long
+    Dim arr As Variant
     Dim mtext As String
     Dim slutp As Integer
     Dim s As String, s2 As String
@@ -4358,170 +4429,170 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     gtegn = MaximaGangeTegn
 
     If CASengine = 0 Then
-        text = Replace(text, " ", "")    ' mellemrum fjernes
+        Text = Replace(Text, " ", "")    ' mellemrum fjernes
     Else
-        text = Replace(text, " + ", "+")
-        text = Replace(text, " - ", "-")
-        text = Replace(text, " * ", "*")
-        text = Replace(text, " / ", "/")
+        Text = Replace(Text, " + ", "+")
+        Text = Replace(Text, " - ", "-")
+        Text = Replace(Text, " * ", "*")
+        Text = Replace(Text, " / ", "/")
     End If
-    text = Replace(text, " . ", "*")    ' prikprodukt
-    text = Replace(text, """", "")    ' apostrof fjernes
-    text = Replace(text, "+-", "-")    ' plus-minus giver minus
-    text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
-    text = Replace(text, vbCrLf, "")    ' enter
-    text = Replace(text, VBA.ChrW(10), "")    ' shift-enter
-    text = Replace(text, VBA.ChrW(13), "")    ' shift-enter
-    text = Replace(text, "'lgog", "lgog")    '
+    Text = Replace(Text, " . ", "*")    ' prikprodukt
+    Text = Replace(Text, """", "")    ' apostrof fjernes
+    Text = Replace(Text, "+-", "-")    ' plus-minus giver minus
+    Text = Replace(Text, VBA.ChrW(11), "")    ' shift-enter
+    Text = Replace(Text, vbCrLf, "")    ' enter
+    Text = Replace(Text, VBA.ChrW(10), "")    ' shift-enter
+    Text = Replace(Text, VBA.ChrW(13), "")    ' shift-enter
+    Text = Replace(Text, "'lgog", "lgog")    '
 
 
-    ea.text = text
+    ea.Text = Text
 
     ea.RemoveFaultySeparator
 
 
     ' fx e^x^-1 rettes
-    pos = InStr(ea.text, "^-")
-    Do While pos > 0
-        ea.InsertTextAt "(", pos + 1
-        ea.pos = pos + 3
+    Pos = InStr(ea.Text, "^-")
+    Do While Pos > 0
+        ea.InsertTextAt "(", Pos + 1
+        ea.Pos = Pos + 3
         ea.FindHierakiBreak 3
-        ea.InsertTextAt ")", ea.pos + 1
-        pos = InStr(pos + 1, ea.text, "^-")
+        ea.InsertTextAt ")", ea.Pos + 1
+        Pos = InStr(Pos + 1, ea.Text, "^-")
     Loop
 
 
     ea.InsertBracketAfter ("^")
 
 
-    ' eksponentiel notation positiv   ' f*oe*r insertbracketbefore da ellers 4E-13/x -> 4E-(13)/x men c^5.0E-1 -> c^0.5*10^-1 duer ikke
-    pos = 0
+    ' eksponentiel notation positiv   ' før insertbracketbefore da ellers 4E-13/x -> 4E-(13)/x men c^5.0E-1 -> c^0.5*10^-1 duer ikke
+    Pos = 0
     Do
 '#If Mac Then ' SBCL
-        pos = InStr(pos + 1, ea.text, "e+")
+        Pos = InStr(Pos + 1, ea.Text, "e+")
 '#Else 'GCL
 '        pos = InStr(pos + 1, ea.text, "E+")
 '#End If
-        If pos > 1 Then
-            If ea.IsNumber(pos - 1) Then
-                ea.pos = pos + 1
+        If Pos > 1 Then
+            If ea.IsNumber(Pos - 1) Then
+                ea.Pos = Pos + 1
                 Do
-                    ea.pos = ea.pos + 1
-                Loop While ea.IsNumber(ea.pos)
-                ' mellemrum fjernet for at f*aa* insertbracket til at virke
-                ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 2, ea.pos - pos - 2) & " " & right(ea.text, Len(ea.text) - ea.pos + 1)
+                    ea.Pos = ea.Pos + 1
+                Loop While ea.IsNumber(ea.Pos)
+                ' mellemrum fjernet for at få insertbracket til at virke
+                ea.Text = Left(ea.Text, Pos - 1) & gtegn & "10^" & Mid(ea.Text, Pos + 2, ea.Pos - Pos - 2) & " " & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
                 'ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 2, ea.pos - pos - 2) & Right(text, Len(ea.text) - ea.pos + 1)
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' eksponentiel notation negativ
-    pos = 0
+    Pos = 0
     Do
 '#If Mac Then ' SBCL
-        pos = InStr(pos + 1, ea.text, "e-")
+        Pos = InStr(Pos + 1, ea.Text, "e-")
 '#Else 'GCL
 '        pos = InStr(pos + 1, ea.text, "E-")
 '#End If
-        If pos > 1 Then
-            If ea.IsNumber(pos - 1) Then
-                ea.pos = pos + 1
+        If Pos > 1 Then
+            If ea.IsNumber(Pos - 1) Then
+                ea.Pos = Pos + 1
                 Do
-                    ea.pos = ea.pos + 1
-                Loop While ea.IsNumber(ea.pos)
-                ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 1, ea.pos - pos - 1) & " " & right(ea.text, Len(ea.text) - ea.pos + 1)
+                    ea.Pos = ea.Pos + 1
+                Loop While ea.IsNumber(ea.Pos)
+                ea.Text = Left(ea.Text, Pos - 1) & gtegn & "10^" & Mid(ea.Text, Pos + 1, ea.Pos - Pos - 1) & " " & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
                 '    ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 1, ea.pos - pos - 1) & Right(ea.text, Len(ea.text) - ea.pos + 1)
             End If
         End If
-    Loop While pos > 1
+    Loop While Pos > 1
 
-    ' efter eksponentiel da 1E-1*x g*aa*r galt
+    ' efter eksponentiel da 1E-1*x går galt
     ' 1* fjernes
-    pos = InStr(ea.text, "1*")
-    Do While pos > 0
-        If pos = 1 Then
-            ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, pos - 1, 1) = "*" Then  ' gange foran s*aa* fjern altid
-            ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, pos - 1, 1) = "(" Then  ' parentes foran s*aa* fjern altid
-            ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, pos - 1, 1) = ")" Then  ' parentes foran s*aa* fjern altid
-            ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, pos - 1, 1) = "=" Then  ' ligmed foran s*aa* fjern altid
-            ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ' fjern 1*
-        ElseIf Mid(ea.text, pos - 1, 1) = VBA.ChrW(8776) Then  ' ca. ligmed foran s*aa* fjern altid
-            ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ' fjern 1*
-        ElseIf ea.IsNumber(pos - 1) Then    ' tal foran s*aa* ingenting
+    Pos = InStr(ea.Text, "1*")
+    Do While Pos > 0
+        If Pos = 1 Then
+            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' fjern 1*
+        ElseIf Mid(ea.Text, Pos - 1, 1) = "*" Then  ' gange foran så fjern altid
+            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' fjern 1*
+        ElseIf Mid(ea.Text, Pos - 1, 1) = "(" Then  ' parentes foran så fjern altid
+            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' fjern 1*
+        ElseIf Mid(ea.Text, Pos - 1, 1) = ")" Then  ' parentes foran så fjern altid
+            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' fjern 1*
+        ElseIf Mid(ea.Text, Pos - 1, 1) = "=" Then  ' ligmed foran så fjern altid
+            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' fjern 1*
+        ElseIf Mid(ea.Text, Pos - 1, 1) = VBA.ChrW(8776) Then  ' ca. ligmed foran så fjern altid
+            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' fjern 1*
+        ElseIf ea.IsNumber(Pos - 1) Then    ' tal foran så ingenting
 
-        ElseIf ea.IsLetterPos(pos - 1, True) Then    ' bogstav foran s*aa* ingenting
+        ElseIf ea.IsLetterPos(Pos - 1, True) Then    ' bogstav foran så ingenting
 
-        ElseIf Mid(ea.text, pos - 1, 1) = "." Then    ' .1* s*aa* ingenting
+        ElseIf Mid(ea.Text, Pos - 1, 1) = "." Then    ' .1* så ingenting
 
-        ElseIf pos > 2 Then
-            If Mid(ea.text, pos - 2, 2) = "^-" Then    ' ^-1 fjern ikke
+        ElseIf Pos > 2 Then
+            If Mid(ea.Text, Pos - 2, 2) = "^-" Then    ' ^-1 fjern ikke
             Else
-                ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ' fjern 1*
+                ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' fjern 1*
             End If
         Else
-            ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ' fjern 1*
+            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' fjern 1*
         End If
-        pos = InStr(pos + 1, ea.text, "1*")
+        Pos = InStr(Pos + 1, ea.Text, "1*")
     Loop
 
     ' 1,0* fjernes og ,0* ->*
-    pos = InStr(ea.text, ".0*")
-    Do While pos > 0
-        If ea.ChrByIndex(pos - 1) = "1" Then
-            If Not (ea.IsNumber(pos - 2)) Or pos = 2 Then
-                ea.text = Left(ea.text, pos - 2) & right(ea.text, Len(ea.text) - pos - 2)
+    Pos = InStr(ea.Text, ".0*")
+    Do While Pos > 0
+        If ea.ChrByIndex(Pos - 1) = "1" Then
+            If Not (ea.IsNumber(Pos - 2)) Or Pos = 2 Then
+                ea.Text = Left(ea.Text, Pos - 2) & right(ea.Text, Len(ea.Text) - Pos - 2)
             Else
-                ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ',0* ->*
+                ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ',0* ->*
             End If
         Else
-            ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)    ',0* ->*
+            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ',0* ->*
         End If
-        pos = InStr(pos + 1, ea.text, ".0*")
+        Pos = InStr(Pos + 1, ea.Text, ".0*")
     Loop
     ' tal,ikketal fjernes  f.eks. 240, -> 240  samt x*,45  ->x*0,45
-    ' test: 2,0*a-*10^3*a-*g
+    ' test: 2,0á10^3ág
     
 '#If Mac Then
-'** MAC   .0 p*aa* alle tal, fordi der bruges float istedet for dectalallnum
-    pos = InStr(ea.text, ".0")
-    Do While pos > 0
-            If Not (ea.IsNumber(pos + 2)) Then
-                ea.text = Left(ea.text, pos - 1) & right(ea.text, Len(ea.text) - pos - 1)
+'** MAC   .0 på alle tal, fordi der bruges float istedet for dectalallnum
+    Pos = InStr(ea.Text, ".0")
+    Do While Pos > 0
+            If Not (ea.IsNumber(Pos + 2)) Then
+                ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)
             End If
-        pos = InStr(pos + 1, ea.text, ".0")
+        Pos = InStr(Pos + 1, ea.Text, ".0")
     Loop
 '#End If
 
     ' konverter a[i,j] -> a_(i,j)
     If MaximaIndex Then
-        pos = 1
+        Pos = 1
         Do
-            pos = InStr(pos + 1, ea.text, "[")
-            If pos > 1 And ea.IsLetterPos(pos - 1, False) Then
-                ea.pos = pos
+            Pos = InStr(Pos + 1, ea.Text, "[")
+            If Pos > 1 And ea.IsLetterPos(Pos - 1, False) Then
+                ea.Pos = Pos
                 ea.SetSquareBrackets
-                udtryk = ea.GetNextBracketContent(pos)
+                udtryk = ea.GetNextBracketContent(Pos)
                 '       if ea.ChrByIndex(ea.pos)=
-                ea.text = Left(ea.text, pos - 1) & "_(" & udtryk & ")" & right(ea.text, Len(ea.text) - ea.pos + 1)
+                ea.Text = Left(ea.Text, Pos - 1) & "_(" & udtryk & ")" & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
 
             End If
-        Loop While pos > 1
+        Loop While Pos > 1
         ea.SetNormalBrackets
     End If
 
 
-    ' fjern gangetegn der er underforst*aa*ede
-    ' giver desv*ae*rre problemer bla. foran inverse trig  180sin^-1(12)/\pi og (1+x)=2 sin^(-1)(1/2)/\pi konvertes forkert til prof
+    ' fjern gangetegn der er underforståede
+    ' giver desværre problemer bla. foran inverse trig  180sin^-1(12)/\pi og (1+x)=2 sin^(-1)(1/2)/\pi konvertes forkert til prof
     ' virker hverken hvis * erstattes med mellemrum eller fjernes
-    ' r*ae*kkef*oe*lgen p*aa* disse to skal muligvis byttes om da det giver problemer ved identifikation af identitiske udtryk for beregn auto
+    ' rækkefølgen på disse to skal muligvis byttes om da det giver problemer ved identifikation af identitiske udtryk for beregn auto
 
     '    ea.InsertBracketBefore ("/") ' skal bruges for at removemultsign virker, men problem ved f.eks. matrix([5/6];[13/10]) -> matrix([5/6];([13)/10])
-    If MaximaUnits Then ' version 1.07 fors*oe*ges n*aa*r enheder er sl*aa*et til
-        ea.RemoveMultSign ' stadig problematisk ved f.eks. e^-x^2*(e^(x^2)+2*a-*c)/2
+    If MaximaUnits Then ' version 1.07 forsøges når enheder er slået til
+        ea.RemoveMultSign ' stadig problematisk ved f.eks. e^-x^2*(e^(x^2)+2ác)/2
     End If
     If CASengine = 0 Then
         ea.SetNormalBrackets
@@ -4530,203 +4601,204 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     End If
     ea.AddSpaceAfterSubSuperscript ("_")
     ea.SetNormalBrackets
-    text = ea.text
+    Text = ea.Text
 
     If Not MaximaSeparator Then
-        text = Replace(text, ",", ";")
-        text = Replace(text, ".", ",")
+        Text = Replace(Text, ",", ";")
+        Text = Replace(Text, ".", ",")
     End If
-    text = Replace(text, "%pi", VBA.ChrW(960))
-    text = Replace(text, "%e", "e")
-    text = Replace(text, "%c", "c")
-    text = Replace(text, "%k", "c_")
-    text = Replace(text, "%r", "k_")
-    text = Replace(text, "%z", VBA.ChrW(8484) & "_")
-    text = Replace(text, "%Z", VBA.ChrW(8484))
-    text = Replace(text, "#", VBA.ChrW(8800))    ' ikke ligmed
+    Text = Replace(Text, "%pi", VBA.ChrW(960))
+    Text = Replace(Text, "%e", "e")
+    Text = Replace(Text, "%c", "c")
+    Text = Replace(Text, "%k", "c_")
+    Text = Replace(Text, "%r", "k_")
+    Text = Replace(Text, "%z", VBA.ChrW(8484) & "_")
+    Text = Replace(Text, "%Z", VBA.ChrW(8484))
+    Text = Replace(Text, "#", VBA.ChrW(8800))    ' ikke ligmed
 
     If MaximaUnits Then
-        text = Replace(text, VBA.ChrW(937), "Ohm")    ' Omega er s*aa* ohm
-        text = Replace(text, "%%m", "m")
-        text = Replace(text, "%mu", VBA.ChrW(956))
-        ea.text = text
+        Text = Replace(Text, VBA.ChrW(937), "Ohm")    ' Omega er så ohm
+        Text = Replace(Text, "%%m", "m")
+        Text = Replace(Text, "%mu", VBA.ChrW(956))
+        ea.Text = Text
         ea.ReplaceVar "degC", VBA.ChrW(176) & "C"  ' grad tegn og C
         ea.ReplaceVar "%timer", "timer"
         ea.ReplaceVar "%min", "min"
-        ea.ReplaceVar "aar", "*aa*r"
-        text = ea.text
+        ea.ReplaceVar "aar", "år"
+        Text = ea.Text
     End If
 
 
-    text = Replace(text, "*", gtegn)    ' VBA.ChrW(183)
+    Text = Replace(Text, "*", gtegn)    ' VBA.ChrW(183)
 
 
     '    Text = Replace(Text, "e", VBA.ChrW(183) & "10^ ")
-    text = Replace(text, "exp(", "e^(")
-    text = Replace(text, "log", "ln" & VBA.ChrW(8289))
-    text = Replace(text, "lgog(", "log" & VBA.ChrW(8289) & "(")
-    text = Replace(text, "sqrt", VBA.ChrW(8730))
-    text = Replace(text, "cbrt", VBA.ChrW(8731)) ' fra geogebra
+    Text = Replace(Text, "exp(", "e^(")
+    Text = Replace(Text, "log", "ln" & VBA.ChrW(8289))
+    Text = Replace(Text, "lgog(", "log" & VBA.ChrW(8289) & "(")
+    Text = Replace(Text, "sqrt", VBA.ChrW(8730))
+    Text = Replace(Text, "cbrt", VBA.ChrW(8731)) ' fra geogebra
 
     '    text = Replace(text, "E+", gtegn & "10^")
     '    text = Replace(text, "E-", gtegn & "10^-")
         
-    'rod af h*oe*jere grad.
+    'rod af højere grad.
     If CASengine > 0 Then 'Kun til GeoGebra
     Do
-        pos = InStr(text, "nroot(")
-        If pos > 0 Then
-            ea.text = text
-            udtryk = ea.GetNextBracketContent(pos + 4)
-            pos2 = ea.pos
+        Pos = InStr(Text, "nroot(")
+        If Pos > 0 Then
+            ea.Text = Text
+            udtryk = ea.GetNextBracketContent(Pos + 4)
+            pos2 = ea.Pos
 '            Arr = Split(udtryk, ";")
-            ea.text = udtryk
-            ea.SplitNonBracket Arr, ";"
-            If UBound(Arr) > 0 Then
-                text = Left(text, pos - 1) & "" & VBA.ChrW(8730) & "(" & Arr(1) & "&" & Arr(0) & ")" & right(text, Len(text) - pos2 + 1)
+            ea.Text = udtryk
+            ea.SplitNonBracket arr, ";"
+            If UBound(arr) > 0 Then
+                Text = Left(Text, Pos - 1) & "" & VBA.ChrW(8730) & "(" & arr(1) & "&" & arr(0) & ")" & right(Text, Len(Text) - pos2 + 1)
             Else
-                GoTo fejl
+                GoTo Fejl
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
     End If
 
     ' notequal(x,y) -> x=y
     Do
-        pos = InStr(text, "notequal(")
-        If pos > 0 Then
-            ea.text = text
-            udtryk = ea.GetNextBracketContent(pos + 7)
-            text = Left(text, pos - 1) & " " & Replace(udtryk, ListSeparator, VBA.ChrW(8800)) & " " & right(text, Len(text) - ea.pos + 1)
+        Pos = InStr(Text, "notequal(")
+        If Pos > 0 Then
+            ea.Text = Text
+            udtryk = ea.GetNextBracketContent(Pos + 7)
+            Text = Left(Text, Pos - 1) & " " & Replace(udtryk, ListSeparator, VBA.ChrW(8800)) & " " & right(Text, Len(Text) - ea.Pos + 1)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' equal(x,y) -> x=y
     Do
-        pos = InStr(text, "equal(")
-        If pos > 0 Then
-            ea.text = text
-            udtryk = ea.GetNextBracketContent(pos + 4)
-            text = Left(text, pos - 1) & " " & Replace(udtryk, ListSeparator, "=") & " " & right(text, Len(text) - ea.pos + 1)
+        Pos = InStr(Text, "equal(")
+        If Pos > 0 Then
+            ea.Text = Text
+            udtryk = ea.GetNextBracketContent(Pos + 4)
+            Text = Left(Text, Pos - 1) & " " & Replace(udtryk, ListSeparator, "=") & " " & right(Text, Len(Text) - ea.Pos + 1)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     '    text = Replace(text, "if", vbCrLf & "hvis  ")
-    '    text = Replace(text, "then", "  s*aa*  ")
+    '    text = Replace(text, "then", "  så  ")
     '    text = Replace(text, "else", vbCrLf & "ellers  ")
 
     ' abs(x) -> |x|
     Do
-        pos = InStr(text, "abs(")
-        If pos > 0 Then
-            ea.text = text
-            udtryk = ea.GetNextBracketContent(pos)
-            text = Left(text, pos - 1) & VBA.ChrW(124) & udtryk & VBA.ChrW(124) & right(text, Len(text) - ea.pos + 1)
+        Pos = InStr(Text, "abs(")
+        If Pos > 0 Then
+            ea.Text = Text
+            udtryk = ea.GetNextBracketContent(Pos)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & udtryk & VBA.ChrW(124) & right(Text, Len(Text) - ea.Pos + 1)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' 'vecmag(x) -> |x|
     Do
-        pos = InStr(text, "'vecmag(")
-        If pos > 0 Then
-            ea.text = text
-            udtryk = ea.GetNextBracketContent(pos + 6)
-            text = Left(text, pos - 1) & VBA.ChrW(124) & udtryk & VBA.ChrW(124) & right(text, Len(text) - ea.pos + 1)
+        Pos = InStr(Text, "'vecmag(")
+        If Pos > 0 Then
+            ea.Text = Text
+            udtryk = ea.GetNextBracketContent(Pos + 6)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & udtryk & VBA.ChrW(124) & right(Text, Len(Text) - ea.Pos + 1)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     'atan2(x,y) til atan(x/y)
-    pos = InStr(text, "atan2")
-    Do While pos > 0
-        ea.text = text
-        ea.GetNextBracketContent (pos)
-        text = Left(text, ea.pos - 1) & ")" & right(text, Len(text) - ea.pos + 1)    ' slutparantes i n*ae*vner
-        text = Left(text, pos + 3) & "(" & right(text, Len(text) - pos - 4)    ' , atan2 til atan(
-        possep = InStr(pos + 4, text, ListSeparator)
-        text = Left(text, possep - 1) & ")/(" & right(text, Len(text) - possep)    ' , til /
+    Pos = InStr(Text, "atan2")
+    Do While Pos > 0
+        ea.Text = Text
+        ea.GetNextBracketContent (Pos)
+        Text = Left(Text, ea.Pos - 1) & ")" & right(Text, Len(Text) - ea.Pos + 1)    ' slutparantes i nævner
+        Text = Left(Text, Pos + 3) & "(" & right(Text, Len(Text) - Pos - 4)    ' , atan2 til atan(
+        possep = InStr(Pos + 4, Text, ListSeparator)
+        Text = Left(Text, possep - 1) & ")/(" & right(Text, Len(Text) - possep)    ' , til /
 
-        pos = InStr(pos, text, "atan2")
+        Pos = InStr(Pos, Text, "atan2")
     Loop
 
     ' integrate til integraltegn
-    pos = InStr(text, "integrate")
-    Do While pos > 0
-        If Mid(text, pos - 1, 1) = "'" Then
-            text = Left(text, pos - 2) & right(text, Len(text) - pos + 1)
-            pos = pos - 1
+    Pos = InStr(Text, "integrate")
+    Do While Pos > 0
+        If Mid(Text, Pos - 1, 1) = "'" Then
+            Text = Left(Text, Pos - 2) & right(Text, Len(Text) - Pos + 1)
+            Pos = Pos - 1
         End If
         Dim udt As String
-        ea.text = text
-        ea.pos = pos + 8
+        ea.Text = Text
+        ea.Pos = Pos + 8
         udt = ea.GetNextBracketContent()
-        Arr = Split(udt, ListSeparator)
-        If UBound(Arr) > 1 Then
-            text = Left(text, pos - 1) & VBA.ChrW(8747) & "_" & Arr(2) & "^" & Arr(3) & VBA.ChrW(9618) & Arr(0) & "  d" & Arr(1) & " " & right(text, Len(text) - pos - Len(udt) - 10)
+        arr = Split(udt, ListSeparator)
+        If UBound(arr) > 1 Then
+            Text = Left(Text, Pos - 1) & VBA.ChrW(8747) & "_" & arr(2) & "^" & arr(3) & VBA.ChrW(9618) & arr(0) & "  d" & arr(1) & " " & right(Text, Len(Text) - Pos - Len(udt) - 10)
         Else
-            text = Left(text, pos - 1) & VBA.ChrW(8747) & VBA.ChrW(9618) & Arr(0) & "  d" & Arr(1) & " " & right(text, Len(text) - pos - Len(udt) - 10)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(8747) & VBA.ChrW(9618) & arr(0) & "  d" & arr(1) & " " & right(Text, Len(Text) - Pos - Len(udt) - 10)
         End If
-        pos = InStr(pos, text, "integrate")
+        Pos = InStr(Pos, Text, "integrate")
     Loop
 
     ' differentier
-    pos = InStr(text, "diff")
-    Do While pos > 0
-        If Mid(text, pos - 1, 1) = "'" Then
-            text = Left(text, pos - 2) & right(text, Len(text) - pos + 1)
-            pos = pos - 1
+    Pos = InStr(Text, "diff")
+    Do While Pos > 0
+        If Mid(Text, Pos - 1, 1) = "'" Then
+            Text = Left(Text, Pos - 2) & right(Text, Len(Text) - Pos + 1)
+            Pos = Pos - 1
         End If
-        ea.text = text
-        ea.pos = pos + 4
+        ea.Text = Text
+        ea.Pos = Pos + 4
         udt = ea.GetNextBracketContent()
-        Arr = Split(udt, ListSeparator)
-        If UBound(Arr) > 1 Then
-            If Arr(2) = "1" Then
-                text = Left(text, pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & Arr(1) & ") (" & Arr(0) & ")" & " " & right(text, Len(text) - Len(udt) - 5 - pos)
+        arr = Split(udt, ListSeparator)
+        If UBound(arr) > 1 Then
+            If arr(2) = "1" Then
+                Text = Left(Text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & arr(1) & ") (" & arr(0) & ")" & " " & right(Text, Len(Text) - Len(udt) - 5 - Pos)
             Else
-                text = Left(text, pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & "^" & Arr(2) & " " & Arr(1) & ") (" & Arr(0) & ")" & " " & right(text, Len(text) - Len(udt) - 6)
+                Text = Left(Text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & "^" & arr(2) & " " & arr(1) & ") (" & arr(0) & ")" & " " & right(Text, Len(Text) - Len(udt) - 6)
             End If
         Else
+            Pos = Pos + 4
         End If
-        pos = InStr(pos, text, "diff")
+        Pos = InStr(Pos, Text, "diff")
     Loop
 
     ' Limit
-    pos = InStr(text, "limit")
-    Do While pos > 0
-        If Mid(text, pos - 1, 1) = "'" Then
-            text = Left(text, pos - 2) & right(text, Len(text) - pos + 1)
-            pos = pos - 1
+    Pos = InStr(Text, "limit")
+    Do While Pos > 0
+        If Mid(Text, Pos - 1, 1) = "'" Then
+            Text = Left(Text, Pos - 2) & right(Text, Len(Text) - Pos + 1)
+            Pos = Pos - 1
         End If
-        ea.text = text
-        ea.pos = pos + 4
+        ea.Text = Text
+        ea.Pos = Pos + 4
         udt = ea.GetNextBracketContent()
-        Arr = Split(udt, ListSeparator)
+        arr = Split(udt, ListSeparator)
         'lim" & VBA.ChrW(9516) & "(x" & VBA.ChrW(8594) & "1)" & VBA.ChrW(8289) & "(x+1)
-        text = Left(text, pos - 1) & "lim" & VBA.ChrW(9516) & "(" & Arr(1) & VBA.ChrW(8594) & Arr(2) & ")" & VBA.ChrW(8289) & "(" & Arr(0) & ") " & right(text, Len(text) - pos - Len(udt) - 6)
-        pos = InStr(pos, text, "limit")
+        Text = Left(Text, Pos - 1) & "lim" & VBA.ChrW(9516) & "(" & arr(1) & VBA.ChrW(8594) & arr(2) & ")" & VBA.ChrW(8289) & "(" & arr(0) & ") " & right(Text, Len(Text) - Pos - Len(udt) - 6)
+        Pos = InStr(Pos, Text, "limit")
     Loop
 
 
     If Not Radians Then
-        text = Replace(text, "sing(", "sin(")
-        text = Replace(text, "asing(", "asin(")
-        text = Replace(text, "cosg(", "cos(")
-        text = Replace(text, "acosg(", "acos(")
-        text = Replace(text, "tang(", "tan(")
-        text = Replace(text, "atang(", "atan(")
+        Text = Replace(Text, "sing(", "sin(")
+        Text = Replace(Text, "asing(", "asin(")
+        Text = Replace(Text, "cosg(", "cos(")
+        Text = Replace(Text, "acosg(", "acos(")
+        Text = Replace(Text, "tang(", "tan(")
+        Text = Replace(Text, "atang(", "atan(")
 
         '        text = ConvertRadToDegree(text, "sin")
         '        text = ConvertRadToDegree(text, "cos")
         '        text = ConvertRadToDegree(text, "tan")
-        text = ConvertRadToDegree(text, "sec")
-        text = ConvertRadToDegree(text, "cot")
-        text = ConvertRadToDegree(text, "csc")
+        Text = ConvertRadToDegree(Text, "sec")
+        Text = ConvertRadToDegree(Text, "cot")
+        Text = ConvertRadToDegree(Text, "csc")
     End If
 
     '    text = Replace(text, "acos", "cos^(-1) ")
     '    text = Replace(text, "asin", "sin^(-1) ")
     '    text = Replace(text, "atan", "tan^(-1) ")
-    ea.text = text
+    ea.Text = Text
     ea.ReplaceVar "cos", "cos" & VBA.ChrW(8289)
     ea.ReplaceVar "sin", "sin" & VBA.ChrW(8289)
     ea.ReplaceVar "tan", "tan" & VBA.ChrW(8289)
@@ -4739,9 +4811,9 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     ea.ReplaceVar "cosh", "cosh" & VBA.ChrW(8289)
     ea.ReplaceVar "sinh", "sinh" & VBA.ChrW(8289)
     ea.ReplaceVar "tanh", "tanh" & VBA.ChrW(8289)
-    text = ea.text
+    Text = ea.Text
 
-    '        text = Replace(text, "acos(", "cos^(-1)" & VBA.ChrW(8289) & "(") ' parentes fors*oe*g ved invers ogs*aa*
+    '        text = Replace(text, "acos(", "cos^(-1)" & VBA.ChrW(8289) & "(") ' parentes forsøg ved invers også
     '        text = Replace(text, "asin(", "sin^(-1)" & VBA.ChrW(8289) & "(")
     '        text = Replace(text, "atan(", "tan^(-1)" & VBA.ChrW(8289) & "(")
     '        text = Replace(text, "cos(", "cos" & VBA.ChrW(8289) & "(")
@@ -4751,110 +4823,110 @@ Function ConvertToWordSymbols(ByVal text As String) As String
 
 
     ' matricer
-    pos = InStr(text, "matrix")
-    Do While pos > 0
+    Pos = InStr(Text, "matrix")
+    Do While Pos > 0
 
-        ea.text = text
-        mtext = ea.GetNextBracketContent(pos + 5)
+        ea.Text = Text
+        mtext = ea.GetNextBracketContent(Pos + 5)
         mtext = Replace(mtext, "]" & ListSeparator & "[", "@")
         mtext = Replace(mtext, ListSeparator, "&")
 
         mtext = matrixstartbracket & VBA.ChrW(9632) & "(" & Mid(mtext, 2, Len(mtext) - 2) & ")" & matrixendbracket
-        text = Left(text, pos - 1) & mtext & right(text, Len(text) - ea.pos + 1)
+        Text = Left(Text, Pos - 1) & mtext & right(Text, Len(Text) - ea.Pos + 1)
 
-        pos = InStr(pos + 1, text, "matrix")
+        Pos = InStr(Pos + 1, Text, "matrix")
     Loop
 
     ' 'and i %if
-    pos = InStr(text, "'and(")
-    If pos > 0 Then
-        ea.text = text
-        ea.pos = pos + 3
+    Pos = InStr(Text, "'and(")
+    If Pos > 0 Then
+        ea.Text = Text
+        ea.Pos = Pos + 3
         udt = ea.GetNextBracketContent()
         udt = Replace(udt, ListSeparator, "  " & VBA.ChrW(8743) & "  ")
-        text = Left(text, pos - 1) & udt & right(text, Len(text) - ea.pos + 1)
+        Text = Left(Text, Pos - 1) & udt & right(Text, Len(Text) - ea.Pos + 1)
     End If
 
     ' %if
-    pos = InStr(text, "%if")
-    Do While pos > 0
-        ea.text = text
-        mtext = ea.GetNextBracketContent(pos + 2)
-        slutp = ea.pos
-        Arr = Split(mtext, ListSeparator)
-        text = Left(text, pos - 1) & Arr(1) & "   for   " & Arr(0) & right(text, Len(text) - slutp + 1)
-        pos = InStr(text, "%if")
+    Pos = InStr(Text, "%if")
+    Do While Pos > 0
+        ea.Text = Text
+        mtext = ea.GetNextBracketContent(Pos + 2)
+        slutp = ea.Pos
+        arr = Split(mtext, ListSeparator)
+        Text = Left(Text, Pos - 1) & arr(1) & "   for   " & arr(0) & right(Text, Len(Text) - slutp + 1)
+        Pos = InStr(Text, "%if")
     Loop
 
     'vecta_ -> vektorpil
-    pos = InStr(text, "vecta_")
-    Do While pos > 0
-        ea.text = text
-        s = ea.GetNextVar(pos + 6)
-        text = Left(text, pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(8407) & right(text, Len(text) - ea.pos)
-        pos = InStr(text, "vecta_")
+    Pos = InStr(Text, "vecta_")
+    Do While Pos > 0
+        ea.Text = Text
+        s = ea.GetNextVar(Pos + 6)
+        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(8407) & right(Text, Len(Text) - ea.Pos)
+        Pos = InStr(Text, "vecta_")
     Loop
     'vectb_ -> ikke hel vektorpil
-    pos = InStr(text, "vectb_")
-    Do While pos > 0
-        ea.text = text
-        s = ea.GetNextVar(pos + 6)
-        text = Left(text, pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(8401) & right(text, Len(text) - ea.pos)
-        pos = InStr(text, "vectb_")
+    Pos = InStr(Text, "vectb_")
+    Do While Pos > 0
+        ea.Text = Text
+        s = ea.GetNextVar(Pos + 6)
+        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(8401) & right(Text, Len(Text) - ea.Pos)
+        Pos = InStr(Text, "vectb_")
     Loop
     'vectc_ -> matrixstreg
-    pos = InStr(text, "vectc_")
-    Do While pos > 0
-        ea.text = text
-        s = ea.GetNextVar(pos + 6)
-        text = Left(text, pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(773) & right(text, Len(text) - ea.pos)
-        pos = InStr(text, "vectc_")
+    Pos = InStr(Text, "vectc_")
+    Do While Pos > 0
+        ea.Text = Text
+        s = ea.GetNextVar(Pos + 6)
+        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(773) & right(Text, Len(Text) - ea.Pos)
+        Pos = InStr(Text, "vectc_")
     Loop
 
-    'gr*ae*ske bogstaver
-    text = Replace(text, "Delta", VBA.ChrW(916))
-    text = Replace(text, "delta", VBA.ChrW(948))
-    text = Replace(text, "alpha", VBA.ChrW(945))
-    text = Replace(text, "beta", VBA.ChrW(946))
-    text = Replace(text, "gamma_incomplete", "\Gamma_incomplete ")
-    text = Replace(text, "gamma", VBA.ChrW(915))
-    text = Replace(text, "gammaLB", VBA.ChrW(947))
-    text = Replace(text, "theta", VBA.ChrW(952))
-    text = Replace(text, "Theta", VBA.ChrW(920))
-    text = Replace(text, "lambda", VBA.ChrW(955))
-    text = Replace(text, "Lambda", VBA.ChrW(923))
-    text = Replace(text, "rho", VBA.ChrW(961))
-    text = Replace(text, "varphi", VBA.ChrW(966))
-    text = Replace(text, "phi", VBA.ChrW(981))
-    text = Replace(text, "Phi", VBA.ChrW(934))
-    text = Replace(text, "varepsilon", VBA.ChrW(949))
-    text = Replace(text, "epsilon", VBA.ChrW(1013))
-    text = Replace(text, "psi", VBA.ChrW(968))
-    text = Replace(text, "Psi", VBA.ChrW(936))
-    text = Replace(text, "sigma", VBA.ChrW(963))
-    text = Replace(text, "Sigma", VBA.ChrW(931))
-    text = Replace(text, "mu", VBA.ChrW(956))
-    text = Replace(text, "Ohm", VBA.ChrW(937))
-    text = Replace(text, "Omega", VBA.ChrW(937))
-    text = Replace(text, "omega", VBA.ChrW(969))
-    text = Replace(text, "Xi", VBA.ChrW(926))
-    text = Replace(text, "xi", VBA.ChrW(958))
-    text = Replace(text, "Chi", VBA.ChrW(935))
-    text = Replace(text, "chi", VBA.ChrW(967))
-    text = Replace(text, "tau", VBA.ChrW(964))
-    text = Replace(text, "Pi", VBA.ChrW(928))
-    text = Replace(text, "greek-nu", VBA.ChrW(957))
-    text = Replace(text, "kappa", VBA.ChrW(954))
-    text = Replace(text, "zeta", VBA.ChrW(950))
-    text = Replace(text, "eta", VBA.ChrW(951))    ' skal v*ae*re sidst da eta indg*aa*r i andre
-    text = Replace(text, "increment", VBA.ChrW(8710))  ' specielt delta increment
-    text = Replace(text, "Symhalf", VBA.ChrW(189))    ' _
+    'græske bogstaver
+    Text = Replace(Text, "Delta", VBA.ChrW(916))
+    Text = Replace(Text, "delta", VBA.ChrW(948))
+    Text = Replace(Text, "alpha", VBA.ChrW(945))
+    Text = Replace(Text, "beta", VBA.ChrW(946))
+    Text = Replace(Text, "gamma_incomplete", "\Gamma_incomplete ")
+    Text = Replace(Text, "gamma", VBA.ChrW(915))
+    Text = Replace(Text, "gammaLB", VBA.ChrW(947))
+    Text = Replace(Text, "theta", VBA.ChrW(952))
+    Text = Replace(Text, "Theta", VBA.ChrW(920))
+    Text = Replace(Text, "lambda", VBA.ChrW(955))
+    Text = Replace(Text, "Lambda", VBA.ChrW(923))
+    Text = Replace(Text, "rho", VBA.ChrW(961))
+    Text = Replace(Text, "varphi", VBA.ChrW(966))
+    Text = Replace(Text, "phi", VBA.ChrW(981))
+    Text = Replace(Text, "Phi", VBA.ChrW(934))
+    Text = Replace(Text, "varepsilon", VBA.ChrW(949))
+    Text = Replace(Text, "epsilon", VBA.ChrW(1013))
+    Text = Replace(Text, "psi", VBA.ChrW(968))
+    Text = Replace(Text, "Psi", VBA.ChrW(936))
+    Text = Replace(Text, "sigma", VBA.ChrW(963))
+    Text = Replace(Text, "Sigma", VBA.ChrW(931))
+    Text = Replace(Text, "mu", VBA.ChrW(956))
+    Text = Replace(Text, "Ohm", VBA.ChrW(937))
+    Text = Replace(Text, "Omega", VBA.ChrW(937))
+    Text = Replace(Text, "omega", VBA.ChrW(969))
+    Text = Replace(Text, "Xi", VBA.ChrW(926))
+    Text = Replace(Text, "xi", VBA.ChrW(958))
+    Text = Replace(Text, "Chi", VBA.ChrW(935))
+    Text = Replace(Text, "chi", VBA.ChrW(967))
+    Text = Replace(Text, "tau", VBA.ChrW(964))
+    Text = Replace(Text, "Pi", VBA.ChrW(928))
+    Text = Replace(Text, "greek-nu", VBA.ChrW(957))
+    Text = Replace(Text, "kappa", VBA.ChrW(954))
+    Text = Replace(Text, "zeta", VBA.ChrW(950))
+    Text = Replace(Text, "eta", VBA.ChrW(951))    ' skal være sidst da eta indgår i andre
+    Text = Replace(Text, "increment", VBA.ChrW(8710))  ' specielt delta increment
+    Text = Replace(Text, "Symhalf", VBA.ChrW(189))    ' _
     text = Replace(text, "degC", VBA.ChrW(8451))   ' specielt oC tegn
-    text = Replace(text, "<=", VBA.ChrW(8804))  '
-    text = Replace(text, ">=", VBA.ChrW(8805))    '
-    text = Replace(text, "CVinkelO", VBA.ChrW(8736))    '
-    text = Replace(text, "CVinkel", VBA.ChrW(8736))    '
-    text = Replace(text, "Symangle", VBA.ChrW(8736))  '
+    Text = Replace(Text, "<=", VBA.ChrW(8804))  '
+    Text = Replace(Text, ">=", VBA.ChrW(8805))    '
+    Text = Replace(Text, "CVinkelO", VBA.ChrW(8736))    '
+    Text = Replace(Text, "CVinkel", VBA.ChrW(8736))    '
+    Text = Replace(Text, "Symangle", VBA.ChrW(8736))  '
 
     ' konverter vektor og matrixpile
     '    text = Replace(text, "SymVecta", VBA.ChrW(8407))   ' vektorpil
@@ -4862,154 +4934,154 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     '    text = Replace(text, "SymVectc", VBA.ChrW(773)) ' matrixtegn
     ''    text = Replace(text, "SymVectc", VBA.ChrW(175))  ' matrixtegn \overbar
 
-    ea.text = text
+    ea.Text = Text
     ' SymVecta til vektorpil
-    pos = 1
+    Pos = 1
     Do
-        pos = InStr(pos, ea.text, "SymVecta")
-        If pos > 0 Then
-            ea.pos = pos
-            s = ea.GetPrevVar(pos)
-            s = Left(s, Len(s) - (ea.pos - pos) - 1)
-            If pos + 7 = Len(ea.text) Then
-                ea.text = Left(ea.text, pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8407)
+        Pos = InStr(Pos, ea.Text, "SymVecta")
+        If Pos > 0 Then
+            ea.Pos = Pos
+            s = ea.GetPrevVar(Pos)
+            s = Left(s, Len(s) - (ea.Pos - Pos) - 1)
+            If Pos + 7 = Len(ea.Text) Then
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8407)
             Else
-                ea.text = Left(ea.text, pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8407) & right(ea.text, Len(ea.text) - pos - 7)
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8407) & right(ea.Text, Len(ea.Text) - Pos - 7)
             End If
-            pos = pos + 1
+            Pos = Pos + 1
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' SymVectb til halv vektorpil
-    pos = 1
+    Pos = 1
     Do
-        pos = InStr(pos, ea.text, "SymVectb")
-        If pos > 0 Then
-            ea.pos = pos
-            s = ea.GetPrevVar(pos)
-            s = Left(s, Len(s) - (ea.pos - pos) - 1)
-            If pos + 7 = Len(ea.text) Then
-                ea.text = Left(ea.text, pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8401)
+        Pos = InStr(Pos, ea.Text, "SymVectb")
+        If Pos > 0 Then
+            ea.Pos = Pos
+            s = ea.GetPrevVar(Pos)
+            s = Left(s, Len(s) - (ea.Pos - Pos) - 1)
+            If Pos + 7 = Len(ea.Text) Then
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8401)
             Else
-                ea.text = Left(ea.text, pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8401) & right(ea.text, Len(ea.text) - pos - 7)
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8401) & right(ea.Text, Len(ea.Text) - Pos - 7)
             End If
-            pos = pos + 1
+            Pos = Pos + 1
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' SymVectc til halv vektorpil
-    pos = 1
+    Pos = 1
     Do
-        pos = InStr(pos, ea.text, "SymVectc")
-        If pos > 0 Then
-            ea.pos = pos
-            s = ea.GetPrevVar(pos)
-            s = Left(s, Len(s) - (ea.pos - pos) - 1)
-            If pos + 7 = Len(ea.text) Then
-                ea.text = Left(ea.text, pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(773)
+        Pos = InStr(Pos, ea.Text, "SymVectc")
+        If Pos > 0 Then
+            ea.Pos = Pos
+            s = ea.GetPrevVar(Pos)
+            s = Left(s, Len(s) - (ea.Pos - Pos) - 1)
+            If Pos + 7 = Len(ea.Text) Then
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(773)
             Else
-                ea.text = Left(ea.text, pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(773) & right(ea.text, Len(ea.text) - pos - 7)
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(773) & right(ea.Text, Len(ea.Text) - Pos - 7)
             End If
-            pos = pos + 1
+            Pos = Pos + 1
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' lambert w
     Do
-        pos = InStr(ea.text, "generalized_lambert_w")
-        If pos > 0 Then
-        s = ea.GetNextBracketContent(pos + 20)
-        Arr = Split(s, ListSeparator)
-        If UBound(Arr) = 0 Then
-            Arr = Split(s, ",")
+        Pos = InStr(ea.Text, "generalized_lambert_w")
+        If Pos > 0 Then
+        s = ea.GetNextBracketContent(Pos + 20)
+        arr = Split(s, ListSeparator)
+        If UBound(arr) = 0 Then
+            arr = Split(s, ",")
         End If
-        s2 = Trim(Arr(0))
-        If (s2 = "0" Or s2 = "-1") And UBound(Arr) = 1 Then
-            ea.text = Left(ea.text, pos - 1) & "W_(" & s2 & ") (" & Arr(1) & ")" & right(ea.text, Len(ea.text) - ea.pos + 1)
+        s2 = Trim(arr(0))
+        If (s2 = "0" Or s2 = "-1") And UBound(arr) = 1 Then
+            ea.Text = Left(ea.Text, Pos - 1) & "W_(" & s2 & ") (" & arr(1) & ")" & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
         End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
 
 
-    ' Disse kan v*ae*re resultat fra gr*ae*nsev*ae*rdi
+    ' Disse kan være resultat fra grænseværdi
     ea.ReplaceVar "inf", VBA.ChrW(8734)
     ea.ReplaceVar "minf", "-" & VBA.ChrW(8734)
     ea.ReplaceVar "infinity", VBA.ChrW(8734)
     ea.ReplaceVar "und", Sprog.A(431) '"ikke defineret"
-    ea.ReplaceVar "ind", Sprog.A(432) ' "ikke defineret men begr*ae*nset"
+    ea.ReplaceVar "ind", Sprog.A(432) ' "ikke defineret men begrænset"
     ea.ReplaceVar "tgrader", VBA.ChrW(176)     ' gradtegn
-    text = ea.text
+    Text = ea.Text
 
     '
-    text = Replace(text, "SPC", " ")
+    Text = Replace(Text, "SPC", " ")
 
 
     'ingen komplekse udtryk
     If Not MaximaComplex Then
-        If InStr(text, "%i") > 0 Or InStr(text, VBA.ChrW(943)) > 0 Then
-            text = Sprog.A(433) & " " & VBA.ChrW(8477)
+        If InStr(Text, "%i") > 0 Or InStr(Text, VBA.ChrW(943)) > 0 Then
+            Text = Sprog.A(433) & " " & VBA.ChrW(8477)
             GoTo slut
         End If
     Else
-        text = Replace(text, "%i", "i")
+        Text = Replace(Text, "%i", "i")
     End If
 
     '    text = Replace(text, "", "\")
     GoTo slut
-fejl:
-    MsgBox Sprog.A(100) & vbCrLf & vbCrLf & text, vbOKOnly, Sprog.Error
+Fejl:
+    MsgBox Sprog.A(100) & vbCrLf & vbCrLf & Text, vbOKOnly, Sprog.Error
 slut:
-    ConvertToWordSymbols = text
+    ConvertToWordSymbols = Text
 End Function
-Function ConvertRadToDegree(text As String, trigfunc As String) As String
-    Dim pos, spos As Integer
+Function ConvertRadToDegree(Text As String, trigfunc As String) As String
+    Dim Pos, spos As Integer
     Dim ea As New ExpressionAnalyser
     ea.StartBracket = "("
     ea.EndBracket = ")"
-    ea.text = text
+    ea.Text = Text
     spos = 1
 
     Do
-        pos = ea.FindChr("a" & trigfunc, spos)
-        If pos > 0 Then
+        Pos = ea.FindChr("a" & trigfunc, spos)
+        If Pos > 0 Then
             ea.GetNextBracketContent
             ea.InsertBeforePos (")")
-            ea.pos = pos
+            ea.Pos = Pos
             ea.InsertBeforePos (VBA.ChrW(960) & "/180" & MaximaGangeTegn & "(")
-            spos = pos + 11
+            spos = Pos + 11
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     spos = 1
     Do
-        pos = ea.FindChr(trigfunc, spos)
-        If pos > 0 And Not (ea.ChrByIndex(pos - 1) = "a") Then
+        Pos = ea.FindChr(trigfunc, spos)
+        If Pos > 0 And Not (ea.ChrByIndex(Pos - 1) = "a") Then
             ea.GetNextBracketContent
             ea.InsertBeforePos (")")
-            ea.pos = pos + Len(trigfunc)
+            ea.Pos = Pos + Len(trigfunc)
             ea.InsertAfterPos ("180/" & VBA.ChrW(960) & MaximaGangeTegn & "(")
-            spos = pos + 11
+            spos = Pos + 11
         Else
             spos = spos + 3
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
-    ConvertRadToDegree = ea.text
+    ConvertRadToDegree = ea.Text
 
 End Function
 Sub RemoveComplexSolutions()
-'kun reelle l*oe*sninger ' problem at selvom der er i i kan det m*aa*ske reduceres til reelt
-    Dim Arr As Variant
+'kun reelle løsninger ' problem at selvom der er i i kan det måske reduceres til reelt
+    Dim arr As Variant
     Dim i As Integer
     If Not MaximaComplex Then
         '        If InStr(MaximaOutput, "%i") Then
-        Arr = Split(MaximaOutput, ListSeparator)
+        arr = Split(MaximaOutput, ListSeparator)
         MaximaOutput = ""
-        For i = 0 To UBound(Arr)
-            If InStr(Arr(i), "%i") < 1 Then
+        For i = 0 To UBound(arr)
+            If InStr(arr(i), "%i") < 1 Then
                 If MaximaOutput <> "" Then MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8744) & "    "
-                MaximaOutput = MaximaOutput & Arr(i)
+                MaximaOutput = MaximaOutput & arr(i)
             End If
         Next
         '        End If
@@ -5018,123 +5090,123 @@ Sub RemoveComplexSolutions()
     End If
 
 End Sub
-Function ConvertToLatex(text As String) As String
-    Dim pos As Integer, pos1 As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
+Function ConvertToLatex(Text As String) As String
+    Dim Pos As Long, pos1 As Long, pos2 As Long, pos3 As Long, pos4 As Long
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     Dim s As String, t As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim ib As Boolean
     Dim rod As Integer
     Dim ends As Integer
     Dim subs As Integer, sups As Integer
     
     If ConvertTexWithMaxima Then
-        ConvertToLatex = ConvertToLatexMaxima(text)
+        ConvertToLatex = ConvertToLatexMaxima(Text)
         Exit Function
     End If
     ea.SetNormalBrackets
     ea2.SetTuborgBrackets
 
 
-    text = Replace(text, "-" & VBA.ChrW(8734), "\minfty ")
-    text = Replace(text, VBA.ChrW(8734), "\infty ")
+    Text = Replace(Text, "-" & VBA.ChrW(8734), "\minfty ")
+    Text = Replace(Text, VBA.ChrW(8734), "\infty ")
 
     'diverse symboler
 '    text = Replace(text, VBA.ChrW(183), "* ")    ' prik erstattes med gange
-    text = Replace(text, VBA.ChrW(8901), VBA.ChrW(183))     ' \cdot , ved ikke hvorfor der tilsyneladende er to
-    text = Replace(text, VBA.ChrW(8729), VBA.ChrW(183))    ' prik \cdot erstattes med gange (denne er \bullet)
-    text = Replace(text, VBA.ChrW(8226), VBA.ChrW(183))    ' tyk prik erstattes med gange
+    Text = Replace(Text, VBA.ChrW(8901), VBA.ChrW(183))     ' \cdot , ved ikke hvorfor der tilsyneladende er to
+    Text = Replace(Text, VBA.ChrW(8729), VBA.ChrW(183))    ' prik \cdot erstattes med gange (denne er \bullet)
+    Text = Replace(Text, VBA.ChrW(8226), VBA.ChrW(183))    ' tyk prik erstattes med gange
     
-    text = Replace(text, VBA.ChrW(247), "\div ")    ' divisionstegn med prikker over/under
+    Text = Replace(Text, VBA.ChrW(247), "\div ")    ' divisionstegn med prikker over/under
 
 
-    text = Replace(text, vbCrLf, "")
-    text = Replace(text, vbCr, "")
-    text = Replace(text, vbLf, "")
+    Text = Replace(Text, vbCrLf, "")
+    Text = Replace(Text, vbCr, "")
+    Text = Replace(Text, vbLf, "")
 
-    text = Replace(text, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
-    text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
-    text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
-    text = Replace(text, """", "")    ' apostrof fjernes
-    text = Replace(text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige 'Ç` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige 'Ç`
-    text = Replace(text, VBA.ChrW(180), "^'")    ' der er tre forskellige 'Ç` apostrof lignende de forst*aa*es alle som diff
-    text = Replace(text, VBA.ChrW(96), "^'")    ' der er tre forskellige 'Ç`
+    Text = Replace(Text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
+    Text = Replace(Text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
+    Text = Replace(Text, VBA.ChrW(11), "")    ' shift-enter
+    Text = Replace(Text, """", "")    ' apostrof fjernes
+    Text = Replace(Text, VBA.ChrW(180) & VBA.ChrW(180), "^''")    ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
+    Text = Replace(Text, VBA.ChrW(96) & VBA.ChrW(96), "^''")    ' der er tre forskellige '‰`
+    Text = Replace(Text, VBA.ChrW(180), "^'")    ' der er tre forskellige '‰` apostrof lignende de forståes alle som diff
+    Text = Replace(Text, VBA.ChrW(96), "^'")    ' der er tre forskellige '‰`
     '    text = Replace(text, VBA.ChrW(176), "\circ ") ' gradtegn
-    text = Replace(text, VBA.ChrW(189), "\frac{1}{2} ")    ' _
+    Text = Replace(Text, VBA.ChrW(189), "\frac{1}{2} ")    ' _
     text = Replace(text, VBA.ChrW(8800), "\neq ")    ' ikkeligmed
-    text = Replace(text, VBA.ChrW(177), "\pm ")    ' plus/minus
-    text = Replace(text, VBA.ChrW(8723), "\mp ")    ' minus-plus
-    text = Replace(text, VBA.ChrW(8804), "\leq ")    ' <=
-    text = Replace(text, VBA.ChrW(8805), "\geq ")    ' >=
-    text = Replace(text, VBA.ChrW(8776), "\approx ")    ' cirka lig
-    text = Replace(text, VBA.ChrW(8773), "\cong ")    ' cirka lig
-    text = Replace(text, VBA.ChrW(8656), "\Leftarrow ")    '
-    text = Replace(text, VBA.ChrW(8658), "\Rightarrow ")    '
-    text = Replace(text, VBA.ChrW(8660), "\Leftrightarrow ")    ' ensbetydende tegn
-    text = Replace(text, VBA.ChrW(8661), "\Updownarrow ")    ' ensbetydende tegn op/ned
-    text = Replace(text, VBA.ChrW(8657), "\Uparrow ")    ' dobbeltpil op
-    text = Replace(text, VBA.ChrW(8659), "\Downarrow ")    ' dobbeltpil ned
-    text = Replace(text, VBA.ChrW(8593), "\uparrow ")    '
-    text = Replace(text, VBA.ChrW(8595), "\downarrow ")    '
-    text = Replace(text, VBA.ChrW(8596), "\leftrightarrow ")    '
-    text = Replace(text, VBA.ChrW(10187), "\partial ")    '
-    text = Replace(text, VBA.ChrW(8469), "\mathbb{N} ")    ' symbol for naturlige tal
-    text = Replace(text, VBA.ChrW(8484), "\mathbb{Z} ")    ' symbol for hele tal
-    text = Replace(text, VBA.ChrW(8474), "\mathbb{Q} ")    ' symbol for rationelle tal
-    text = Replace(text, VBA.ChrW(8477), "\mathbb{R} ")    ' symbol for reelle tal
-    text = Replace(text, VBA.ChrW(8450), "\mathbb{C} ")    ' symbol for komplekse tal
-    text = Replace(text, VBA.ChrW(8463), "\hbar ")    ' planck konstant/2pi
-    text = Replace(text, VBA.ChrW(8704), "\forall ")    ' for alle tegn
-    text = Replace(text, VBA.ChrW(8712), "\in ")    ' tilh*oe*rer tegn
-    text = Replace(text, VBA.ChrW(8733), "\propto ")    ' propotionel tegn
-    text = Replace(text, VBA.ChrW(8810), "\ll ")    ' <<
-    text = Replace(text, VBA.ChrW(8811), "\gg ")    ' >>
-    text = Replace(text, VBA.ChrW(8704), "\exists ")    ' eksisterer tegn
-    text = Replace(text, VBA.ChrW(8708), "\exists ")    ' eksisterer tegn
-    text = Replace(text, VBA.ChrW(8713), "\notin ")    ' tilh*oe*rer ikke
-    text = Replace(text, VBA.ChrW(8709), "\emptyset ")    ' *OE* tomme m*ae*ngde
-    text = Replace(text, VBA.ChrW(8711), "\nabla ")    ' nabla operator
-    text = Replace(text, VBA.ChrW(8801), "\equiv ")    ' ligmed 3 streger
-    text = Replace(text, VBA.ChrW(8710), "\inc ")    ' specielt delta increment
-    text = Replace(text, VBA.ChrW(8943), "\ldots ")    ' ...
-    text = Replace(text, VBA.ChrW(8942), "\vdots ")    ' 3 prikker lodret
-    text = Replace(text, VBA.ChrW(8944), "\rddots ")    ' 3 prikker skr*aa*t op til h*oe*jre
-    text = Replace(text, VBA.ChrW(8945), "\ddots ")    ' 3 prikker skr*aa*t ned til h*oe*jre
-    text = Replace(text, VBA.ChrW(8756), "\therefore ")    ' 3 prikker i trekant
-    text = Replace(text, VBA.ChrW(8757), "\because ")    ' 3 prikker i trekant
-    text = Replace(text, VBA.ChrW(8834), "\subset ")    ' tilh*oe*rer m*ae*ngde (*ae*gte delm*ae*ngde)
-    text = Replace(text, VBA.ChrW(8838), "\subseteq ")    ' tilh*oe*rer lig m*ae*ngde
-    text = Replace(text, VBA.ChrW(8745), "\cap ")    ' foreningsm*ae*ngde
-    text = Replace(text, VBA.ChrW(8746), "\cup ")    ' f*ae*llesm*ae*ngde
-    text = Replace(text, VBA.ChrW(8764), "\sim ")    'ca ligmed en b*oe*lge
-    text = Replace(text, VBA.ChrW(8771), "\simeq ")    ' ca ligmed en b*oe*lge en lige
-    text = Replace(text, VBA.ChrW(8855), "\otimes ")    ' m*ae*ngdeprodukt
-    text = Replace(text, VBA.ChrW(8614), "\mapsto ")    ' pil til funktionsdef
-    text = Replace(text, VBA.ChrW(8640), "\rightharpoonup ")    ' pil h*oe*jre med kun halv pil
-    text = Replace(text, VBA.ChrW(8651), "\lrhar ")    ' harpun h*oe*jre/venstre
-    text = Replace(text, VBA.ChrW(8598), "\nwarrow ")    ' pil op til venstre
-    text = Replace(text, VBA.ChrW(8599), "\nearrow ")    ' pil op til h*oe*jre
-    text = Replace(text, VBA.ChrW(8600), "\nwarrow ")    ' pil ned h*oe*jre
-    text = Replace(text, VBA.ChrW(8601), "\swarrow ")    ' pil ned venstre
-    text = Replace(text, VBA.ChrW(8728), "\circ ")    ' grad-tegn
-    text = Replace(text, VBA.ChrW(8451), "^\circ\text{C} ")    ' specielt oC tegn
-    text = Replace(text, VBA.ChrW(8457), "^\circ\text{F} ")    ' specielt oF tegn
-    text = Replace(text, VBA.ChrW(176), "^\circ ")    '
-    text = Replace(text, VBA.ChrW(8736), "\angle ")    '
-    text = Replace(text, VBA.ChrW(160), "")    ' foran accent f.eks. vector pil 160 8407
-    text = Replace(text, VBA.ChrW(8743), "\wedge ")    ' og
-    text = Replace(text, VBA.ChrW(8744), "\vee ")    ' eller
+    Text = Replace(Text, VBA.ChrW(177), "\pm ")    ' plus/minus
+    Text = Replace(Text, VBA.ChrW(8723), "\mp ")    ' minus-plus
+    Text = Replace(Text, VBA.ChrW(8804), "\leq ")    ' <=
+    Text = Replace(Text, VBA.ChrW(8805), "\geq ")    ' >=
+    Text = Replace(Text, VBA.ChrW(8776), "\approx ")    ' cirka lig
+    Text = Replace(Text, VBA.ChrW(8773), "\cong ")    ' cirka lig
+    Text = Replace(Text, VBA.ChrW(8656), "\Leftarrow ")    '
+    Text = Replace(Text, VBA.ChrW(8658), "\Rightarrow ")    '
+    Text = Replace(Text, VBA.ChrW(8660), "\Leftrightarrow ")    ' ensbetydende tegn
+    Text = Replace(Text, VBA.ChrW(8661), "\Updownarrow ")    ' ensbetydende tegn op/ned
+    Text = Replace(Text, VBA.ChrW(8657), "\Uparrow ")    ' dobbeltpil op
+    Text = Replace(Text, VBA.ChrW(8659), "\Downarrow ")    ' dobbeltpil ned
+    Text = Replace(Text, VBA.ChrW(8593), "\uparrow ")    '
+    Text = Replace(Text, VBA.ChrW(8595), "\downarrow ")    '
+    Text = Replace(Text, VBA.ChrW(8596), "\leftrightarrow ")    '
+    Text = Replace(Text, VBA.ChrW(10187), "\partial ")    '
+    Text = Replace(Text, VBA.ChrW(8469), "\mathbb{N} ")    ' symbol for naturlige tal
+    Text = Replace(Text, VBA.ChrW(8484), "\mathbb{Z} ")    ' symbol for hele tal
+    Text = Replace(Text, VBA.ChrW(8474), "\mathbb{Q} ")    ' symbol for rationelle tal
+    Text = Replace(Text, VBA.ChrW(8477), "\mathbb{R} ")    ' symbol for reelle tal
+    Text = Replace(Text, VBA.ChrW(8450), "\mathbb{C} ")    ' symbol for komplekse tal
+    Text = Replace(Text, VBA.ChrW(8463), "\hbar ")    ' planck konstant/2pi
+    Text = Replace(Text, VBA.ChrW(8704), "\forall ")    ' for alle tegn
+    Text = Replace(Text, VBA.ChrW(8712), "\in ")    ' tilhører tegn
+    Text = Replace(Text, VBA.ChrW(8733), "\propto ")    ' propotionel tegn
+    Text = Replace(Text, VBA.ChrW(8810), "\ll ")    ' <<
+    Text = Replace(Text, VBA.ChrW(8811), "\gg ")    ' >>
+    Text = Replace(Text, VBA.ChrW(8704), "\exists ")    ' eksisterer tegn
+    Text = Replace(Text, VBA.ChrW(8708), "\exists ")    ' eksisterer tegn
+    Text = Replace(Text, VBA.ChrW(8713), "\notin ")    ' tilhører ikke
+    Text = Replace(Text, VBA.ChrW(8709), "\emptyset ")    ' Ø tomme mængde
+    Text = Replace(Text, VBA.ChrW(8711), "\nabla ")    ' nabla operator
+    Text = Replace(Text, VBA.ChrW(8801), "\equiv ")    ' ligmed 3 streger
+    Text = Replace(Text, VBA.ChrW(8710), "\inc ")    ' specielt delta increment
+    Text = Replace(Text, VBA.ChrW(8943), "\ldots ")    ' ...
+    Text = Replace(Text, VBA.ChrW(8942), "\vdots ")    ' 3 prikker lodret
+    Text = Replace(Text, VBA.ChrW(8944), "\rddots ")    ' 3 prikker skråt op til højre
+    Text = Replace(Text, VBA.ChrW(8945), "\ddots ")    ' 3 prikker skråt ned til højre
+    Text = Replace(Text, VBA.ChrW(8756), "\therefore ")    ' 3 prikker i trekant
+    Text = Replace(Text, VBA.ChrW(8757), "\because ")    ' 3 prikker i trekant
+    Text = Replace(Text, VBA.ChrW(8834), "\subset ")    ' tilhører mængde (ægte delmængde)
+    Text = Replace(Text, VBA.ChrW(8838), "\subseteq ")    ' tilhører lig mængde
+    Text = Replace(Text, VBA.ChrW(8745), "\cap ")    ' foreningsmængde
+    Text = Replace(Text, VBA.ChrW(8746), "\cup ")    ' fællesmængde
+    Text = Replace(Text, VBA.ChrW(8764), "\sim ")    'ca ligmed en bølge
+    Text = Replace(Text, VBA.ChrW(8771), "\simeq ")    ' ca ligmed en bølge en lige
+    Text = Replace(Text, VBA.ChrW(8855), "\otimes ")    ' mængdeprodukt
+    Text = Replace(Text, VBA.ChrW(8614), "\mapsto ")    ' pil til funktionsdef
+    Text = Replace(Text, VBA.ChrW(8640), "\rightharpoonup ")    ' pil højre med kun halv pil
+    Text = Replace(Text, VBA.ChrW(8651), "\lrhar ")    ' harpun højre/venstre
+    Text = Replace(Text, VBA.ChrW(8598), "\nwarrow ")    ' pil op til venstre
+    Text = Replace(Text, VBA.ChrW(8599), "\nearrow ")    ' pil op til højre
+    Text = Replace(Text, VBA.ChrW(8600), "\nwarrow ")    ' pil ned højre
+    Text = Replace(Text, VBA.ChrW(8601), "\swarrow ")    ' pil ned venstre
+    Text = Replace(Text, VBA.ChrW(8728), "\circ ")    ' grad-tegn
+    Text = Replace(Text, VBA.ChrW(8451), "^\circ\text{C} ")    ' specielt oC tegn
+    Text = Replace(Text, VBA.ChrW(8457), "^\circ\text{F} ")    ' specielt oF tegn
+    Text = Replace(Text, VBA.ChrW(176), "^\circ ")    '
+    Text = Replace(Text, VBA.ChrW(8736), "\angle ")    '
+    Text = Replace(Text, VBA.ChrW(160), "")    ' foran accent f.eks. vector pil 160 8407
+    Text = Replace(Text, VBA.ChrW(8743), "\wedge ")    ' og
+    Text = Replace(Text, VBA.ChrW(8744), "\vee ")    ' eller
 
-'    text = Replace(text, VBA.ChrW(8721), "\sum ")    ' sumtegn. Skal m*aa*ske nok laves mere avanceret
-'    text = Replace(text, VBA.ChrW(8719), "\prod ")    ' produkttegn. Skal m*aa*ske nok laves mere avanceret
-    text = Replace(text, VBA.ChrW(8748), "\iint ")    ' dobbeltintegraltegn. Skal m*aa*ske nok laves mere avanceret
-    text = Replace(text, VBA.ChrW(8749), "\iiint ")    ' tripelintegraltegn. Skal m*aa*ske nok laves mere avanceret
-    text = Replace(text, VBA.ChrW(8750), "\oint ")    ' kurveintegraltegn. Skal m*aa*ske nok laves mere avanceret
+'    text = Replace(text, VBA.ChrW(8721), "\sum ")    ' sumtegn. Skal måske nok laves mere avanceret
+'    text = Replace(text, VBA.ChrW(8719), "\prod ")    ' produkttegn. Skal måske nok laves mere avanceret
+    Text = Replace(Text, VBA.ChrW(8748), "\iint ")    ' dobbeltintegraltegn. Skal måske nok laves mere avanceret
+    Text = Replace(Text, VBA.ChrW(8749), "\iiint ")    ' tripelintegraltegn. Skal måske nok laves mere avanceret
+    Text = Replace(Text, VBA.ChrW(8750), "\oint ")    ' kurveintegraltegn. Skal måske nok laves mere avanceret
 
 
-    '   Fjern problematiske usynlige paranteser efter og foran / m*aa*ske ikke n*oe*dvendig for latex? ihvertfald problematisk for x/10^2 -> x/(10)^2
+    '   Fjern problematiske usynlige paranteser efter og foran / måske ikke nødvendig for latex? ihvertfald problematisk for x/10^2 -> x/(10)^2
     '    ea2.StartBracket = VBA.ChrW(12310)
     '    ea2.EndBracket = VBA.ChrW(12311)
     '    pos = 1
@@ -5147,7 +5219,7 @@ Function ConvertToLatex(text As String) As String
     '        ea2.FindPrevBreak
     '        pos2 = ea2.pos
     '        ea.text = ea2.GetNextBracketContent(pos)
-    '        If ea.ValidateBrackets And InStr(ea.text, "=") < 1 Then ' fors*oe*ger at l*oe*se problem hvor skjulte og alm paranteser er blandet som f.eks.[( ])
+    '        If ea.ValidateBrackets And InStr(ea.text, "=") < 1 Then ' forsøger at løse problem hvor skjulte og alm paranteser er blandet som f.eks.[( ])
     '            If ea2.ChrByIndex(ea2.pos) = "/" Or ea2.ChrByIndex(pos2 - 1) = "/" Then
     '            ea2.InsertTextAt "(", pos2
     '            ea2.FindNextBreak
@@ -5163,19 +5235,19 @@ Function ConvertToLatex(text As String) As String
     '    Loop While pos > 0
 
     ea2.SetTuborgBrackets
-    ea.text = text
+    ea.Text = Text
 
-    ea.text = Replace(ea.text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes   flyttet fra f*oe*r trig med store bogstaver for at f*aa* insertfunctionbrackets til at virke
-    ea.text = Replace(ea.text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
+    ea.Text = Replace(ea.Text, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes   flyttet fra før trig med store bogstaver for at få insertfunctionbrackets til at virke
+    ea.Text = Replace(ea.Text, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
 
 'lim
-    pos = -1
+    Pos = -1
     Do
-        pos = InStr(pos + 2, ea.text, "lim")
-        If pos > 0 And ea.ChrByIndex(pos - 1) <> "\" Then
-            ea.pos = pos
-            If ea.ChrByIndex(pos + 3) = VBA.ChrW(9516) Then
-                ea.ReplaceStringAt "_", pos + 3
+        Pos = InStr(Pos + 2, ea.Text, "lim")
+        If Pos > 0 And ea.ChrByIndex(Pos - 1) <> "\" Then
+            ea.Pos = Pos
+            If ea.ChrByIndex(Pos + 3) = VBA.ChrW(9516) Then
+                ea.ReplaceStringAt "_", Pos + 3
             End If
             subs = ea.FindChr("_")
             If ea.ChrByIndex(subs + 1) = "(" Then
@@ -5194,108 +5266,108 @@ Function ConvertToLatex(text As String) As String
             End If
             ends = ea.FindChr(VBA.ChrW(8289))
             If ends > 0 Then ea.ReplaceStringAt " ", ends
-            ea.text = Left(ea.text, pos - 1) & "\lim " & right(ea.text, Len(ea.text) - pos - 2)
+            ea.Text = Left(ea.Text, Pos - 1) & "\lim " & right(ea.Text, Len(ea.Text) - Pos - 2)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
 '    ea.text = Replace(ea.text, "cosh^(-1)", "cosh^{-1}")
 '    ea.text = Replace(ea.text, "sinh^(-1)", "sinh^{-1}")
 '    ea.text = Replace(ea.text, "tanh^(-1)", "tanh^{-1}")
-'    ea.text = Replace(ea.text, "cos^(-1) ", "cos^{-1}")    ' under sj*ae*ldne omst*ae*ndigheder kan der v*ae*re et mellemrum istedet for et 8289 tegn efter
-'    ea.text = Replace(ea.text, "sin^(-1) ", "sin^{-1}")    ' det blive forst*aa*et som et gangetegn hvis ikke fjernes
+'    ea.text = Replace(ea.text, "cos^(-1) ", "cos^{-1}")    ' under sjældne omstændigheder kan der være et mellemrum istedet for et 8289 tegn efter
+'    ea.text = Replace(ea.text, "sin^(-1) ", "sin^{-1}")    ' det blive forstået som et gangetegn hvis ikke fjernes
 '    ea.text = Replace(ea.text, "tan^(-1) ", "tan^{-1}")
 '    ea.text = Replace(ea.text, "cos^(-1)", "cos^{-1}")
 '    ea.text = Replace(ea.text, "sin^(-1)", "sin^{-1}")
 '    ea.text = Replace(ea.text, "tan^(-1)", "tan^{-1}")
 
-    ea.text = ConvertTrigPowLatex("sin", ea.text) ' skal v*ae*re f*oe*r funktionstegn fjernes
-    ea.text = ConvertTrigPowLatex("cos", ea.text) ' skal v*ae*re f*oe*r funktionstegn fjernes
-    ea.text = ConvertTrigPowLatex("tan", ea.text) ' skal v*ae*re f*oe*r funktionstegn fjernes
+    ea.Text = ConvertTrigPowLatex("sin", ea.Text) ' skal være før funktionstegn fjernes
+    ea.Text = ConvertTrigPowLatex("cos", ea.Text) ' skal være før funktionstegn fjernes
+    ea.Text = ConvertTrigPowLatex("tan", ea.Text) ' skal være før funktionstegn fjernes
 
-    ea.text = Replace(ea.text, VBA.ChrW(8289), "") ' funktionstegn
+    ea.Text = Replace(ea.Text, VBA.ChrW(8289), "") ' funktionstegn
 
     'fbox
-    ea.text = ConvertPreAccent(ea.text, VBA.ChrW(9645), "\fbox{", "}")
+    ea.Text = ConvertPreAccent(ea.Text, VBA.ChrW(9645), "\fbox{", "}")
 
     'overbrace
-    ea.text = ConvertPreAccent(ea.text, VBA.ChrW(9182), "\overbrace{", "}")
+    ea.Text = ConvertPreAccent(ea.Text, VBA.ChrW(9182), "\overbrace{", "}")
 
     'underbrace
-    ea.text = ConvertPreAccent(ea.text, VBA.ChrW(9183), "\underbrace{", "}")
+    ea.Text = ConvertPreAccent(ea.Text, VBA.ChrW(9183), "\underbrace{", "}")
 
 
     'vektor-notation med pil over bogstav
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(8407), "\overrightarrow{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(8407), "\overrightarrow{", "}")
 
-    'tv*ae*rvektor \hat
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(770), "\widehat{", "}")
+    'tværvektor \hat
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(770), "\widehat{", "}")
     
     '\overline
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(773), "\overline{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(773), "\overline{", "}")
     'dobbelt overline
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(831), "\overline{\overline{", "}}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(831), "\overline{\overline{", "}}")
     
     'halvpil
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(8401), "\overset{\rightharpoonup}{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(8401), "\overset{\rightharpoonup}{", "}")
 
     'dobbeltpil over
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(8417), "\overleftrightarrow{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(8417), "\overleftrightarrow{", "}")
     
     'venstrepil over
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(8406), "\overleftarrow{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(8406), "\overleftarrow{", "}")
 
     '\widetilde
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(771), "\widetilde{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(771), "\widetilde{", "}")
 
     '\dot
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(775), "\dot{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(775), "\dot{", "}")
     '\ddot
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(776), "\ddot{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(776), "\ddot{", "}")
     '\ddot
-    ea.text = ConvertAccent(ea.text, VBA.ChrW(8411), "\dddot{", "}")
+    ea.Text = ConvertAccent(ea.Text, VBA.ChrW(8411), "\dddot{", "}")
 
     '\underset
     Do
-        pos = InStr(ea.text, VBA.ChrW(9516))
-        If pos > 0 Then
-            If ea.ChrByIndex(pos + 1) = "(" Then
+        Pos = InStr(ea.Text, VBA.ChrW(9516))
+        If Pos > 0 Then
+            If ea.ChrByIndex(Pos + 1) = "(" Then
                 ea.SetNormalBrackets
-                s = ea.GetNextBracketContent(pos + 1)
-                pos2 = ea.pos - 1
+                s = ea.GetNextBracketContent(Pos + 1)
+                pos2 = ea.Pos - 1
             Else
-                s = ea.GetNextVar(pos)
-                pos2 = ea.pos
+                s = ea.GetNextVar(Pos)
+                pos2 = ea.Pos
             End If
-            If ea.ChrByIndex(pos - 1) = ")" Then
+            If ea.ChrByIndex(Pos - 1) = ")" Then
                 ea.SetNormalBrackets
-                t = ea.GetPrevBracketContent(pos)
-                pos1 = ea.pos - 2
-            ElseIf ea.ChrByIndex(pos - 1) = "}" Then
+                t = ea.GetPrevBracketContent(Pos)
+                pos1 = ea.Pos - 2
+            ElseIf ea.ChrByIndex(Pos - 1) = "}" Then
                 ea.SetTuborgBrackets
-                t = ea.GetPrevBracketContent(pos)
-                pos1 = ea.pos - 2
+                t = ea.GetPrevBracketContent(Pos)
+                pos1 = ea.Pos - 2
                 Do While ea.IsLatexLetterPos(pos1)
                     pos1 = pos1 - 1
                 Loop
                 If ea.ChrByIndex(pos1) = "\" Then
-                    t = Mid(ea.text, pos1, pos - pos1)
+                    t = Mid(ea.Text, pos1, Pos - pos1)
                     pos1 = pos1 - 1
                 End If
             Else
-                t = ea.GetPrevVar(pos)
-                pos1 = ea.pos - Len(t)
+                t = ea.GetPrevVar(Pos)
+                pos1 = ea.Pos - Len(t)
             End If
-            ea.text = Left(ea.text, pos1) & "\underset{" & t & "}{" & s & "}" & right(ea.text, Len(ea.text) - pos2)
+            ea.Text = Left(ea.Text, pos1) & "\underset{" & t & "}{" & s & "}" & right(ea.Text, Len(ea.Text) - pos2)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
     
     
 
     ' sumtegn
     Do
-        pos = InStr(ea.text, VBA.ChrW(8721))
-        If pos > 0 Then
-            ea.pos = pos
+        Pos = InStr(ea.Text, VBA.ChrW(8721))
+        If Pos > 0 Then
+            ea.Pos = Pos
             subs = ea.FindChr("_")
             If ea.ChrByIndex(subs + 1) = "(" Then
                 ea.SetNormalBrackets
@@ -5313,15 +5385,15 @@ Function ConvertToLatex(text As String) As String
             End If
             ends = ea.FindChr(VBA.ChrW(9618))
             If ends > 0 Then ea.ReplaceStringAt " ", ends
-            ea.text = Left(ea.text, pos - 1) & "\sum " & right(ea.text, Len(ea.text) - pos)
+            ea.Text = Left(ea.Text, Pos - 1) & "\sum " & right(ea.Text, Len(ea.Text) - Pos)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' produkttegn
     Do
-        pos = InStr(ea.text, VBA.ChrW(8719))
-        If pos > 0 Then
-            ea.pos = pos
+        Pos = InStr(ea.Text, VBA.ChrW(8719))
+        If Pos > 0 Then
+            ea.Pos = Pos
             subs = ea.FindChr("_")
             If ea.ChrByIndex(subs + 1) = "(" Then
                 ea.SetNormalBrackets
@@ -5339,116 +5411,116 @@ Function ConvertToLatex(text As String) As String
             End If
             ends = ea.FindChr(VBA.ChrW(9618))
             If ends > 0 Then ea.ReplaceStringAt " ", ends
-            ea.text = Left(ea.text, pos - 1) & "\prod " & right(ea.text, Len(ea.text) - pos)
+            ea.Text = Left(ea.Text, Pos - 1) & "\prod " & right(ea.Text, Len(ea.Text) - Pos)
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' integrale
-    pos = InStr(ea.text, VBA.ChrW(8747))
-    Do While pos > 0
-        pos1 = InStr(pos, ea.text, "_")
-        pos2 = InStr(pos, ea.text, "^")
-        pos3 = InStr(pos, ea.text, VBA.ChrW(9618))
-        If pos3 = 0 Then pos3 = pos
+    Pos = InStr(ea.Text, VBA.ChrW(8747))
+    Do While Pos > 0
+        pos1 = InStr(Pos, ea.Text, "_")
+        pos2 = InStr(Pos, ea.Text, "^")
+        pos3 = InStr(Pos, ea.Text, VBA.ChrW(9618))
+        If pos3 = 0 Then pos3 = Pos
         If pos1 > 0 Then
             Dim ul As String, ll As String
-            ll = Mid(ea.text, pos1 + 1, pos2 - pos1 - 1)
-            ul = Mid(ea.text, pos2 + 1, pos3 - pos2 - 1)
-            If Left(ll, 1) = "(" And right(ll, 1) = ")" Then ll = Mid(ll, 2, Len(ll) - 2) ' Word alm inds*ae*tter parenteser som ikke skal ses. Hvis der skal v*ae*re parenteser s*aa* er der dobbelt
+            ll = Mid(ea.Text, pos1 + 1, pos2 - pos1 - 1)
+            ul = Mid(ea.Text, pos2 + 1, pos3 - pos2 - 1)
+            If Left(ll, 1) = "(" And right(ll, 1) = ")" Then ll = Mid(ll, 2, Len(ll) - 2) ' Word alm indsætter parenteser som ikke skal ses. Hvis der skal være parenteser så er der dobbelt
             If Left(ul, 1) = "(" And right(ul, 1) = ")" Then ul = Mid(ul, 2, Len(ul) - 2)
-            ea.text = Left(ea.text, pos - 1) & "\int_{" & ll & "}^{" & ul & "} " & right(ea.text, Len(ea.text) - pos3)
+            ea.Text = Left(ea.Text, Pos - 1) & "\int_{" & ll & "}^{" & ul & "} " & right(ea.Text, Len(ea.Text) - pos3)
         Else    ' ubestemt
-            ea.text = Left(ea.text, pos - 1) & "\int " & right(ea.text, Len(ea.text) - pos3)
+            ea.Text = Left(ea.Text, Pos - 1) & "\int " & right(ea.Text, Len(ea.Text) - pos3)
         End If
-        pos = InStr(ea.text, VBA.ChrW(8747))
+        Pos = InStr(ea.Text, VBA.ChrW(8747))
     Loop
 
     ' ^
-    pos = InStr(ea.text, "^")
-    Do While pos > 0
-        If ea.ChrByIndex(pos + 1) = "(" Then
-            s = Trim(ea.GetNextBracketContent(pos))
+    Pos = InStr(ea.Text, "^")
+    Do While Pos > 0
+        If ea.ChrByIndex(Pos + 1) = "(" Then
+            s = Trim(ea.GetNextBracketContent(Pos))
             If Not (Left(s, 1) = "{" And right(s, 1) = "}") Then s = "{" & s & "}"
-            ea.text = Left(ea.text, pos) & s & right(ea.text, Len(ea.text) - ea.pos + 1)
-        ElseIf ea.ChrByIndex(pos + 1) = "{" Then ' hvis allerede er konverteret
+            ea.Text = Left(ea.Text, Pos) & s & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+        ElseIf ea.ChrByIndex(Pos + 1) = "{" Then ' hvis allerede er konverteret
         Else
-            ea.pos = pos + 1
+            ea.Pos = Pos + 1
             ea.FindHierakiBreak 4, False
-            s = ea.SubString(pos + 1, ea.pos)
+            s = ea.SubString(Pos + 1, ea.Pos)
             If Not (Left(s, 1) = "{" And right(s, 1) = "}") Then s = "{" & s & "}"
-            ea.text = Left(ea.text, pos) & s & right(ea.text, NotZero(ea.Length - ea.pos))
+            ea.Text = Left(ea.Text, Pos) & s & right(ea.Text, NotZero(ea.Length - ea.Pos))
         End If
-        pos = InStr(pos + 1, ea.text, "^")
+        Pos = InStr(Pos + 1, ea.Text, "^")
     Loop
 
 
 
     '_
-    pos = InStr(ea.text, "_")
-    Do While pos > 0
-        If ea.ChrByIndex(pos + 1) = "(" Then
+    Pos = InStr(ea.Text, "_")
+    Do While Pos > 0
+        If ea.ChrByIndex(Pos + 1) = "(" Then
             s = ea.GetNextBracketContent
             If Not (Left(s, 1) = "{" And right(s, 1) = "}") Then s = "{" & s & "}"
-            ea.text = Left(ea.text, pos) & s & right(ea.text, Len(ea.text) - ea.pos + 1)
+            ea.Text = Left(ea.Text, Pos) & s & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
         Else
-            ea.pos = pos + 1
+            ea.Pos = Pos + 1
             ea.FindHierakiBreak 4, False
-            s = ea.SubString(pos + 1, ea.pos)
+            s = ea.SubString(Pos + 1, ea.Pos)
             If Not (Left(s, 1) = "{" And right(s, 1) = "}") Then s = "{" & s & "}"
-            ea.text = Left(ea.text, pos) & s & right(ea.text, NotZero(ea.Length - ea.pos))
+            ea.Text = Left(ea.Text, Pos) & s & right(ea.Text, NotZero(ea.Length - ea.Pos))
         End If
-        pos = InStr(pos + 1, ea.text, "_")
+        Pos = InStr(Pos + 1, ea.Text, "_")
     Loop
 
     ' /
-    pos = InStr(ea.text, "/")
+    Pos = InStr(ea.Text, "/")
     Dim n As String
-    Do While pos > 0
-        If ea.ChrByIndex(pos - 1) = ")" Then
+    Do While Pos > 0
+        If ea.ChrByIndex(Pos - 1) = ")" Then
             ea.SetNormalBrackets
-            t = ea.GetPrevBracketContent(pos)
-            If ea.IsLetterPos(ea.pos - 2) Or ea.IsNumber(ea.pos - 2) Or ea.IsSquareRoot(ea.pos - 2) Or ea.ChrByIndex(ea.pos - 2) = "^" Then
-                ea.pos = ea.pos - 2
+            t = ea.GetPrevBracketContent(Pos)
+            If ea.IsLetterPos(ea.Pos - 2) Or ea.IsNumber(ea.Pos - 2) Or ea.IsSquareRoot(ea.Pos - 2) Or ea.ChrByIndex(ea.Pos - 2) = "^" Then
+                ea.Pos = ea.Pos - 2
                 '                pos1 = ea.FindPrevBreak
                 pos1 = ea.FindPrevHierakiBreak(4, False)
-                t = Mid(ea.text, pos1, pos - pos1)
+                t = Mid(ea.Text, pos1, Pos - pos1)
             Else
-                pos1 = ea.pos - 1
+                pos1 = ea.Pos - 1
             End If
-        ElseIf ea.ChrByIndex(pos - 1) = "}" Then
+        ElseIf ea.ChrByIndex(Pos - 1) = "}" Then
             ea.SetTuborgBrackets
-            t = ea.GetPrevBracketContent(pos)
-            If ea.IsLetterPos(ea.pos - 2) Or ea.IsNumber(ea.pos - 2) Or ea.IsSquareRoot(ea.pos - 2) Or ea.ChrByIndex(ea.pos - 2) = "^" Then
-                ea.pos = ea.pos - 2
+            t = ea.GetPrevBracketContent(Pos)
+            If ea.IsLetterPos(ea.Pos - 2) Or ea.IsNumber(ea.Pos - 2) Or ea.IsSquareRoot(ea.Pos - 2) Or ea.ChrByIndex(ea.Pos - 2) = "^" Then
+                ea.Pos = ea.Pos - 2
                 '                pos1 = ea.FindPrevBreak
                 pos1 = ea.FindPrevHierakiBreak(3, False)
-                t = Mid(ea.text, pos1, pos - pos1)
+                t = Mid(ea.Text, pos1, Pos - pos1)
             Else
-                pos1 = ea.pos - 1
+                pos1 = ea.Pos - 1
             End If
         Else
-            ea.pos = pos - 1
+            ea.Pos = Pos - 1
             '            pos1 = ea.FindPrevBreak
             pos1 = ea.FindPrevHierakiBreak(4, False)
-            t = Mid(ea.text, pos1, pos - pos1)
+            t = Mid(ea.Text, pos1, Pos - pos1)
         End If
 
         '        If ea.ChrByIndex(pos + 1) = "(" Then
         '            n = ea.GetNextBracketContent(pos)
         '            pos2 = ea.pos
         '        Else
-        ea.pos = pos + 1
+        ea.Pos = Pos + 1
         ''            pos2 = ea.FindNextBreak
         pos2 = ea.FindHierakiBreak(3, False)
         
-        n = Mid(ea.text, pos + 1, pos2 - pos)
+        n = Mid(ea.Text, Pos + 1, pos2 - Pos)
         If Left(n, 1) = "(" And right(n, 1) = ")" Then
             n = Mid(n, 2, Len(n) - 2)
         End If
         pos2 = pos2 + 1
         '        End If
-        ea.text = Left(ea.text, pos1 - 1) & "\frac{" & t & "}{" & n & "}" & right(ea.text, NotZero(Len(ea.text) - pos2 + 1))
-        pos = InStr(ea.text, "/")
+        ea.Text = Left(ea.Text, pos1 - 1) & "\frac{" & t & "}{" & n & "}" & right(ea.Text, NotZero(Len(ea.Text) - pos2 + 1))
+        Pos = InStr(ea.Text, "/")
     Loop
 
 
@@ -5459,55 +5531,55 @@ Function ConvertToLatex(text As String) As String
     ' 3 og 4 rod
     For rod = 3 To 4
         Do
-            pos = InStr(ea.text, VBA.ChrW(8728 + rod))
-            If pos > 0 Then
-                ea.pos = pos + 1
-                If Mid(ea.text, pos + 1, 1) <> "(" Then
+            Pos = InStr(ea.Text, VBA.ChrW(8728 + rod))
+            If Pos > 0 Then
+                ea.Pos = Pos + 1
+                If Mid(ea.Text, Pos + 1, 1) <> "(" Then
                     ea.SetTuborgBrackets
                     ea.InsertUnderstoodBracketPair
-                    ea.text = Replace(ea.text, VBA.ChrW(8728 + rod), "\sqrt[" & rod & "]", 1, 1)
+                    ea.Text = Replace(ea.Text, VBA.ChrW(8728 + rod), "\sqrt[" & rod & "]", 1, 1)
                 Else
                     ea.SetNormalBrackets
                     s = ea.GetNextBracketContent()
-                    ea.text = Left(ea.text, pos - 1) & "\sqrt[" & rod & "]{" & s & "}" & right(ea.text, NotZero(ea.Length - ea.pos + 1))
+                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt[" & rod & "]{" & s & "}" & right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
                 End If
-                ea.pos = pos
+                ea.Pos = Pos
             End If
-        Loop While pos > 0
+        Loop While Pos > 0
     Next
 
     'kvadratrod
     Do
-        pos = InStr(ea.text, VBA.ChrW(8730))
-        If pos > 0 Then
-            If Mid(ea.text, pos + 1, 1) <> "(" Then
-                ea.text = Replace(ea.text, VBA.ChrW(8730), "\sqrt", 1, 1)
-                pos = pos + 5
-                ea.pos = pos
+        Pos = InStr(ea.Text, VBA.ChrW(8730))
+        If Pos > 0 Then
+            If Mid(ea.Text, Pos + 1, 1) <> "(" Then
+                ea.Text = Replace(ea.Text, VBA.ChrW(8730), "\sqrt", 1, 1)
+                Pos = Pos + 5
+                ea.Pos = Pos
                 ea.SetTuborgBrackets
                 ea.InsertUnderstoodBracketPair
             Else
-                ea.pos = pos
-                Arr = Split(ea.GetNextBracketContent, "&")
-                pos2 = ea.pos
-                If UBound(Arr) = 0 Then
+                ea.Pos = Pos
+                arr = Split(ea.GetNextBracketContent, "&")
+                pos2 = ea.Pos
+                If UBound(arr) = 0 Then
 '                    ea.text = Replace(ea.text, VBA.ChrW(8730), "\sqrt ", 1, 1)
-                    ea.text = Left(ea.text, pos - 1) & "\sqrt{" & Arr(0) & "}" & right(ea.text, NotZero(ea.Length - ea.pos + 1))
-                ElseIf UBound(Arr) = 1 Then
-                    ea.text = Left(ea.text, pos - 1) & "\sqrt[" & Arr(0) & "]{" & Arr(1) & "}" & right(ea.text, NotZero(ea.Length - ea.pos + 1))
+                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt{" & arr(0) & "}" & right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
+                ElseIf UBound(arr) = 1 Then
+                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt[" & arr(0) & "]{" & arr(1) & "}" & right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
                 End If
             End If
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
     ' matricer
-    ea.text = Replace(ea.text, VBA.ChrW(9608), VBA.ChrW(9632))
-    pos = InStr(ea.text, VBA.ChrW(9632))
-    Do While pos > 0
+    ea.Text = Replace(ea.Text, VBA.ChrW(9608), VBA.ChrW(9632))
+    Pos = InStr(ea.Text, VBA.ChrW(9632))
+    Do While Pos > 0
         ea.SetNormalBrackets
-        s = ea.GetNextBracketContent(pos)
-        ea.text = Left(ea.text, pos - 1) & "\begin{matrix}" & Replace(s, "@", "\\") & "\end{matrix}" & right(ea.text, NotZero(ea.Length - pos - Len(s) - 2))
-        pos = InStr(ea.text, VBA.ChrW(9632))
+        s = ea.GetNextBracketContent(Pos)
+        ea.Text = Left(ea.Text, Pos - 1) & "\begin{matrix}" & Replace(s, "@", "\\") & "\end{matrix}" & right(ea.Text, NotZero(ea.Length - Pos - Len(s) - 2))
+        Pos = InStr(ea.Text, VBA.ChrW(9632))
     Loop
 
     ' funktioner
@@ -5526,170 +5598,170 @@ Function ConvertToLatex(text As String) As String
 
     ' enheder ikke i kursiv \,\text{cm}
     If LatexUnits Then
-    ea.pos = 1
+    ea.Pos = 1
     s = ea.GetNextVar()
     Do
-        ea.pos = ea.pos + 1
+        ea.Pos = ea.Pos + 1
         If ea.IsUnit(s) Then
-            If ea.IsNumber(ea.pos - Len(s) - 1) Or ea.ChrByIndex(ea.pos - Len(s) - 1) = " " Then
+            If ea.IsNumber(ea.Pos - Len(s) - 1) Or ea.ChrByIndex(ea.Pos - Len(s) - 1) = " " Then
                 t = "\,\mathrm{" & s & "}"
             Else
                 t = "\mathrm{" & s & "}"
             End If
-            ea.ReplaceVar s, t, ea.pos - Len(s), 1
-            ea.pos = ea.pos + Len(t) - Len(s)
+            ea.ReplaceVar s, t, ea.Pos - Len(s), 1
+            ea.Pos = ea.Pos + Len(t) - Len(s)
         End If
-        ea.text = Replace(ea.text, VBA.ChrW(8289), "")    ' funktionstegn
+        ea.Text = Replace(ea.Text, VBA.ChrW(8289), "")    ' funktionstegn
         s = ea.GetNextVar()
     Loop While s <> ""
     End If
 
-    'gr*ae*ske bogstaver
-    ea.text = Replace(ea.text, VBA.ChrW(916), "\Delta ")
-    ea.text = Replace(ea.text, VBA.ChrW(948), "\delta ")
-    ea.text = Replace(ea.text, VBA.ChrW(945), "\alpha ")
-    ea.text = Replace(ea.text, VBA.ChrW(946), "\beta ")
-    ea.text = Replace(ea.text, VBA.ChrW(947), "\gammaLB ")
-    ea.text = Replace(ea.text, VBA.ChrW(952), "\theta ")
-    ea.text = Replace(ea.text, VBA.ChrW(920), "\Theta ")
-    ea.text = Replace(ea.text, VBA.ChrW(955), "\lambda ")
-    ea.text = Replace(ea.text, VBA.ChrW(923), "\Lambda ")
-    ea.text = Replace(ea.text, VBA.ChrW(956), "\mu ")
-    ea.text = Replace(ea.text, VBA.ChrW(961), "\rho ")
-    ea.text = Replace(ea.text, VBA.ChrW(963), "\sigma ")
-    ea.text = Replace(ea.text, VBA.ChrW(931), "\Sigma ")
-    ea.text = Replace(ea.text, VBA.ChrW(981), "\phi ")
-    ea.text = Replace(ea.text, VBA.ChrW(934), "\Phi ")
-    ea.text = Replace(ea.text, VBA.ChrW(949), "\varepsilon ")
-    ea.text = Replace(ea.text, VBA.ChrW(1013), "\epsilon ")
-    ea.text = Replace(ea.text, VBA.ChrW(968), "\psi ")
-    ea.text = Replace(ea.text, VBA.ChrW(936), "\Psi ")
-    ea.text = Replace(ea.text, VBA.ChrW(926), "\Xi ")
-    ea.text = Replace(ea.text, VBA.ChrW(958), "\xi ")
-    ea.text = Replace(ea.text, VBA.ChrW(935), "\Chi ")
-    ea.text = Replace(ea.text, VBA.ChrW(967), "\chi ")
-    ea.text = Replace(ea.text, VBA.ChrW(928), "\Pi ")
-    ea.text = Replace(ea.text, VBA.ChrW(964), "\tau ")
-    ea.text = Replace(ea.text, VBA.ChrW(957), "\greek-nu ")
-    ea.text = Replace(ea.text, VBA.ChrW(954), "\kappa ")
-    ea.text = Replace(ea.text, VBA.ChrW(951), "\eta ")
-    ea.text = Replace(ea.text, VBA.ChrW(950), "\zeta ")
-    ea.text = Replace(ea.text, VBA.ChrW(960), "\pi ")
+    'græske bogstaver
+    ea.Text = Replace(ea.Text, VBA.ChrW(916), "\Delta ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(948), "\delta ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(945), "\alpha ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(946), "\beta ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(947), "\gammaLB ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(952), "\theta ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(920), "\Theta ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(955), "\lambda ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(923), "\Lambda ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(956), "\mu ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(961), "\rho ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(963), "\sigma ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(931), "\Sigma ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(981), "\phi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(934), "\Phi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(949), "\varepsilon ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(1013), "\epsilon ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(968), "\psi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(936), "\Psi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(926), "\Xi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(958), "\xi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(935), "\Chi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(967), "\chi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(928), "\Pi ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(964), "\tau ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(957), "\greek-nu ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(954), "\kappa ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(951), "\eta ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(950), "\zeta ")
+    ea.Text = Replace(ea.Text, VBA.ChrW(960), "\pi ")
 
-    ea.text = Replace(ea.text, VBA.ChrW(8592), "\leftarrow ")    '
-    ea.text = Replace(ea.text, VBA.ChrW(8594), "\rightarrow ")    '
-    ea.text = Replace(ea.text, VBA.ChrW(8652), "\rightleftharpoons ")    ' egentlig \leftrightharpoons   but not supported by default Latex
-    ea.text = Replace(ea.text, VBA.ChrW(8651), "\rightleftharpoons ")    '
-    ea.text = Replace(ea.text, VBA.ChrW(8592), "\leftarrow ")    '
-    ea.text = Replace(ea.text, VBA.ChrW(10236), "\longmapsto ")    '
-    ea.text = Replace(ea.text, VBA.ChrW(8640), "\rightharpoonup ")    '
-    ea.text = Replace(ea.text, VBA.ChrW(8641), "\rightharpoondown ")    '
-    ea.text = Replace(ea.text, VBA.ChrW(183), "\cdot ")    ' prik erstattes med gange
-    ea.text = Replace(ea.text, VBA.ChrW(215), "\times ")    ' x gangetegn
-    ea.text = Replace(ea.text, " \", "\") ' i Moodle bliver mellemrum lavet. Derfor skal de helst fjernes. mellemrum f*oe*r \ er ihvertfald ikke n*oe*dvendigt
+    ea.Text = Replace(ea.Text, VBA.ChrW(8592), "\leftarrow ")    '
+    ea.Text = Replace(ea.Text, VBA.ChrW(8594), "\rightarrow ")    '
+    ea.Text = Replace(ea.Text, VBA.ChrW(8652), "\rightleftharpoons ")    ' egentlig \leftrightharpoons   but not supported by default Latex
+    ea.Text = Replace(ea.Text, VBA.ChrW(8651), "\rightleftharpoons ")    '
+    ea.Text = Replace(ea.Text, VBA.ChrW(8592), "\leftarrow ")    '
+    ea.Text = Replace(ea.Text, VBA.ChrW(10236), "\longmapsto ")    '
+    ea.Text = Replace(ea.Text, VBA.ChrW(8640), "\rightharpoonup ")    '
+    ea.Text = Replace(ea.Text, VBA.ChrW(8641), "\rightharpoondown ")    '
+    ea.Text = Replace(ea.Text, VBA.ChrW(183), "\cdot ")    ' prik erstattes med gange
+    ea.Text = Replace(ea.Text, VBA.ChrW(215), "\times ")    ' x gangetegn
+    ea.Text = Replace(ea.Text, " \", "\") ' i Moodle bliver mellemrum lavet. Derfor skal de helst fjernes. mellemrum før \ er ihvertfald ikke nødvendigt
 
     ' parenteser
-    ea.text = Replace(ea.text, "(", "\left(")    '
-    ea.text = Replace(ea.text, ")", "\right)")    '
+    ea.Text = Replace(ea.Text, "(", "\left(")    '
+    ea.Text = Replace(ea.Text, ")", "\right)")    '
     
-    'kantede parenteser ' ikke s*aa* simpelt fordi de indg*aa*r i latex syntaks
+    'kantede parenteser ' ikke så simpelt fordi de indgår i latex syntaks
     ea.SetSquareBrackets
     pos1 = 1
     Do
-        pos = InStr(pos1, ea.text, "[")
-        If pos > 0 And ea.ChrByIndex(pos - 1) <> "}" Then
-            pos1 = pos + 6
-            pos2 = pos
-            ea.GetNextBracketContent pos - 1
-            pos3 = ea.pos
+        Pos = InStr(pos1, ea.Text, "[")
+        If Pos > 0 And ea.ChrByIndex(Pos - 1) <> "}" Then
+            pos1 = Pos + 6
+            pos2 = Pos
+            ea.GetNextBracketContent Pos - 1
+            pos3 = ea.Pos
             If Not ea.ChrByIndex(pos3) = "{" Then
-                ea.text = Left(ea.text, pos2 - 1) & "\left" & right(ea.text, Len(ea.text) - pos2 + 1)
-                ea.text = Left(ea.text, pos3 + 3) & "\right" & right(ea.text, Len(ea.text) - pos3 - 3)
+                ea.Text = Left(ea.Text, pos2 - 1) & "\left" & right(ea.Text, Len(ea.Text) - pos2 + 1)
+                ea.Text = Left(ea.Text, pos3 + 3) & "\right" & right(ea.Text, Len(ea.Text) - pos3 - 3)
             End If
         Else
-            pos1 = pos + 1
+            pos1 = Pos + 1
         End If
-    Loop While pos > 0
+    Loop While Pos > 0
 
-    ConvertToLatex = ea.text
+    ConvertToLatex = ea.Text
 End Function
-Function ConvertTrigPowLatex(Trig As String, text As String) As String
+Function ConvertTrigPowLatex(Trig As String, Text As String) As String
 ' omdanner f.eks. sin^2(x) -> sin^2(x)
 Dim ea As ExpressionAnalyser
 Dim pow As String
-Dim pos2 As Integer, pos As Integer
-pos = 1
+Dim pos2 As Integer, Pos As Integer
+Pos = 1
 Do
-    pos = InStr(pos, text, Trig & "^")
-    If pos > 0 Then
-        pos = pos + Len(Trig) + 1
-        pos2 = InStr(pos, text, VBA.ChrW(8289))
+    Pos = InStr(Pos, Text, Trig & "^")
+    If Pos > 0 Then
+        Pos = Pos + Len(Trig) + 1
+        pos2 = InStr(Pos, Text, VBA.ChrW(8289))
         If pos2 = 0 Then
             Set ea = New ExpressionAnalyser
             ea.SetNormalBrackets
-            ea.text = text
-            ea.pos = pos
+            ea.Text = Text
+            ea.Pos = Pos
             pos2 = ea.FindEndOfBracket
         End If
-        pow = Mid(text, pos, pos2 - pos)
+        pow = Mid(Text, Pos, pos2 - Pos)
         If pow = "(-1)" Then pow = "-1"
-        text = Left(text, pos - 1) & "{" & pow & "}" & right(text, Len(text) - pos2)
+        Text = Left(Text, Pos - 1) & "{" & pow & "}" & right(Text, Len(Text) - pos2)
 '        InsertTextAt "^" & pow, FindEndOfBracket
         
     End If
-Loop While pos > 0
-ConvertTrigPowLatex = text
+Loop While Pos > 0
+ConvertTrigPowLatex = Text
 End Function
-Function ConvertAccent(text As String, Accent As String, aString, bString) As String
+Function ConvertAccent(Text As String, Accent As String, aString, bString) As String
 ' ConvertAccent(ea.text,VBA.ChrW(8407), "\overrightarrow{","}")
-Dim ea As New ExpressionAnalyser, pos As Integer, pos1 As Integer, s As String
-    ea.text = text
-    pos = InStr(ea.text, Accent)
-    Do While pos > 0
-        If ea.ChrByIndex(pos + 1) = " " Then ea.RemoveChar (pos + 1) ' der kan v*ae*re mellemrum efter pilen som kan forstyrre
-        If Mid(ea.text, pos - 1, 1) = ")" Then
+Dim ea As New ExpressionAnalyser, Pos As Integer, pos1 As Integer, s As String
+    ea.Text = Text
+    Pos = InStr(ea.Text, Accent)
+    Do While Pos > 0
+        If ea.ChrByIndex(Pos + 1) = " " Then ea.RemoveChar (Pos + 1) ' der kan være mellemrum efter pilen som kan forstyrre
+        If Mid(ea.Text, Pos - 1, 1) = ")" Then
             ea.SetNormalBrackets
-            s = ea.GetPrevBracketContent(pos)
-            ea.text = Left(ea.text, pos - Len(s) - 3) & aString & s & bString & right(ea.text, Len(ea.text) - pos)
-        ElseIf Mid(ea.text, pos - 1, 1) = "}" Then
+            s = ea.GetPrevBracketContent(Pos)
+            ea.Text = Left(ea.Text, Pos - Len(s) - 3) & aString & s & bString & right(ea.Text, Len(ea.Text) - Pos)
+        ElseIf Mid(ea.Text, Pos - 1, 1) = "}" Then
             ea.SetTuborgBrackets
-            s = ea.GetPrevBracketContent(pos)
-            pos1 = ea.pos - 2
+            s = ea.GetPrevBracketContent(Pos)
+            pos1 = ea.Pos - 2
             Do While ea.IsLetterPos(pos1, False)
                 pos1 = pos1 - 1
             Loop
             If ea.ChrByIndex(pos1) = "\" Then
-                ea.text = Left(ea.text, pos1 - 1) & aString & Mid(ea.text, pos1, pos - pos1) & bString & right(ea.text, Len(ea.text) - pos - Len(Accent) + 1)
+                ea.Text = Left(ea.Text, pos1 - 1) & aString & Mid(ea.Text, pos1, Pos - pos1) & bString & right(ea.Text, Len(ea.Text) - Pos - Len(Accent) + 1)
             End If
         Else
-            ea.text = Left(ea.text, pos - 2) & aString & Mid(ea.text, pos - 1, 1) & bString & right(ea.text, Len(ea.text) - pos - Len(Accent) + 1)
+            ea.Text = Left(ea.Text, Pos - 2) & aString & Mid(ea.Text, Pos - 1, 1) & bString & right(ea.Text, Len(ea.Text) - Pos - Len(Accent) + 1)
         End If
-        pos = InStr(pos + 1, ea.text, Accent)
+        Pos = InStr(Pos + 1, ea.Text, Accent)
     Loop
-    ConvertAccent = ea.text
+    ConvertAccent = ea.Text
 End Function
-Function ConvertPreAccent(text As String, Accent As String, aString, bString) As String
+Function ConvertPreAccent(Text As String, Accent As String, aString, bString) As String
     Dim ea As New ExpressionAnalyser
-    Dim pos As Integer, s As String
-    ea.text = text
+    Dim Pos As Long, s As String
+    ea.Text = Text
     Do
-        pos = InStr(ea.text, Accent)
-        If pos > 0 Then
-            If ea.ChrByIndex(pos + 1) = "(" Then
+        Pos = InStr(ea.Text, Accent)
+        If Pos > 0 Then
+            If ea.ChrByIndex(Pos + 1) = "(" Then
                 ea.SetNormalBrackets
-                s = ea.GetNextBracketContent(pos)
-                ea.text = Left(ea.text, pos - 1) & aString & s & bString & right(ea.text, Len(ea.text) - ea.pos + 1)
+                s = ea.GetNextBracketContent(Pos)
+                ea.Text = Left(ea.Text, Pos - 1) & aString & s & bString & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
             Else
-                s = ea.GetNextVar(pos)
-                ea.text = Left(ea.text, pos - 1) & aString & s & bString & right(ea.text, Len(ea.text) - ea.pos)
+                s = ea.GetNextVar(Pos)
+                ea.Text = Left(ea.Text, Pos - 1) & aString & s & bString & right(ea.Text, Len(ea.Text) - ea.Pos)
             End If
         End If
-    Loop While pos > 0
-    ConvertPreAccent = ea.text
+    Loop While Pos > 0
+    ConvertPreAccent = ea.Text
 End Function
-Function ConvertToLatexMaxima(Optional text As String) As String
+Function ConvertToLatexMaxima(Optional Text As String) As String
 ' converts to Latex using Maxima
-    If text <> "" Then Kommando = text
+    If Text <> "" Then Kommando = Text
     Dim pkommando As String
     
     pkommando = Kommando
@@ -5720,70 +5792,70 @@ slut:
 
 
 End Function
-Function ConvertLatexToWord(text As String) As String
+Function ConvertLatexToWord(Text As String) As String
     Dim ea As New ExpressionAnalyser
     Dim p As Integer
     Dim t As String, n As String
 
-    text = Replace(text, VBA.ChrW(11), "")    ' shift-enter
-    text = Replace(text, vbCrLf, "")    ' enter
-    text = Replace(text, VBA.ChrW(10), "")    ' shift-enter
-    text = Replace(text, VBA.ChrW(13), "")    ' shift-enter
-    text = Replace(text, "\infty", VBA.ChrW(8734))    '
-    text = Replace(text, "\cdot", VBA.ChrW(183))    'prik gange
+    Text = Replace(Text, VBA.ChrW(11), "")    ' shift-enter
+    Text = Replace(Text, vbCrLf, "")    ' enter
+    Text = Replace(Text, VBA.ChrW(10), "")    ' shift-enter
+    Text = Replace(Text, VBA.ChrW(13), "")    ' shift-enter
+    Text = Replace(Text, "\infty", VBA.ChrW(8734))    '
+    Text = Replace(Text, "\cdot", VBA.ChrW(183))    'prik gange
 
-    'gr*ae*ske bogstaver
-    text = Replace(text, "\Delta", VBA.ChrW(916))
-    text = Replace(text, "\delta", VBA.ChrW(948))
-    text = Replace(text, "\alpha", VBA.ChrW(945))
-    text = Replace(text, "\beta", VBA.ChrW(946))
-    text = Replace(text, "\gamma", VBA.ChrW(915))
-    text = Replace(text, "\theta", VBA.ChrW(952))
-    text = Replace(text, "\Theta", VBA.ChrW(920))
-    text = Replace(text, "\lambda", VBA.ChrW(955))
-    text = Replace(text, "\Lambda", VBA.ChrW(923))
-    text = Replace(text, "\rho", VBA.ChrW(961))
-    text = Replace(text, "\phi", VBA.ChrW(981))
-    text = Replace(text, "\Phi", VBA.ChrW(934))
-    text = Replace(text, "\varepsilon", VBA.ChrW(949))
-    text = Replace(text, "\epsilon", VBA.ChrW(1013))
-    text = Replace(text, "\psi", VBA.ChrW(968))
-    text = Replace(text, "\Psi", VBA.ChrW(936))
-    text = Replace(text, "\sigma", VBA.ChrW(963))
-    text = Replace(text, "\Sigma", VBA.ChrW(931))
-    text = Replace(text, "\mu", VBA.ChrW(956))
-    text = Replace(text, "\Ohm", VBA.ChrW(937))
-    text = Replace(text, "\Omega", VBA.ChrW(937))
-    text = Replace(text, "omega", VBA.ChrW(969))
-    text = Replace(text, "\Xi", VBA.ChrW(926))
-    text = Replace(text, "\xi", VBA.ChrW(958))
-    text = Replace(text, "\Chi", VBA.ChrW(935))
-    text = Replace(text, "\chi", VBA.ChrW(967))
-    text = Replace(text, "\tau", VBA.ChrW(964))
-    text = Replace(text, "\Pi", VBA.ChrW(928))
+    'græske bogstaver
+    Text = Replace(Text, "\Delta", VBA.ChrW(916))
+    Text = Replace(Text, "\delta", VBA.ChrW(948))
+    Text = Replace(Text, "\alpha", VBA.ChrW(945))
+    Text = Replace(Text, "\beta", VBA.ChrW(946))
+    Text = Replace(Text, "\gamma", VBA.ChrW(915))
+    Text = Replace(Text, "\theta", VBA.ChrW(952))
+    Text = Replace(Text, "\Theta", VBA.ChrW(920))
+    Text = Replace(Text, "\lambda", VBA.ChrW(955))
+    Text = Replace(Text, "\Lambda", VBA.ChrW(923))
+    Text = Replace(Text, "\rho", VBA.ChrW(961))
+    Text = Replace(Text, "\phi", VBA.ChrW(981))
+    Text = Replace(Text, "\Phi", VBA.ChrW(934))
+    Text = Replace(Text, "\varepsilon", VBA.ChrW(949))
+    Text = Replace(Text, "\epsilon", VBA.ChrW(1013))
+    Text = Replace(Text, "\psi", VBA.ChrW(968))
+    Text = Replace(Text, "\Psi", VBA.ChrW(936))
+    Text = Replace(Text, "\sigma", VBA.ChrW(963))
+    Text = Replace(Text, "\Sigma", VBA.ChrW(931))
+    Text = Replace(Text, "\mu", VBA.ChrW(956))
+    Text = Replace(Text, "\Ohm", VBA.ChrW(937))
+    Text = Replace(Text, "\Omega", VBA.ChrW(937))
+    Text = Replace(Text, "omega", VBA.ChrW(969))
+    Text = Replace(Text, "\Xi", VBA.ChrW(926))
+    Text = Replace(Text, "\xi", VBA.ChrW(958))
+    Text = Replace(Text, "\Chi", VBA.ChrW(935))
+    Text = Replace(Text, "\chi", VBA.ChrW(967))
+    Text = Replace(Text, "\tau", VBA.ChrW(964))
+    Text = Replace(Text, "\Pi", VBA.ChrW(928))
     '    text = Replace(text, "\greek-nu", VBA.ChrW(957))
-    text = Replace(text, "\kappa", VBA.ChrW(954))
-    text = Replace(text, "\zeta", VBA.ChrW(950))
-    text = Replace(text, "\eta", VBA.ChrW(951))    ' skal v*ae*re sidst da eta indg*aa*r i andre
-    text = Replace(text, "\inc", VBA.ChrW(8710))  ' specielt delta increment
+    Text = Replace(Text, "\kappa", VBA.ChrW(954))
+    Text = Replace(Text, "\zeta", VBA.ChrW(950))
+    Text = Replace(Text, "\eta", VBA.ChrW(951))    ' skal være sidst da eta indgår i andre
+    Text = Replace(Text, "\inc", VBA.ChrW(8710))  ' specielt delta increment
     '    text = Replace(text, "degC", VBA.ChrW(8451))   ' specielt oC tegn
     '    text = Replace(text, "Symangle", VBA.ChrW(8736))  '
 
     ea.SetTuborgBrackets
-    ea.text = text
-    p = InStr(ea.text, "\frac")
+    ea.Text = Text
+    p = InStr(ea.Text, "\frac")
     Do While p > 0
         t = ea.GetNextBracketContent
         n = ea.GetNextBracketContent
-        ea.text = Left(ea.text, p - 1) & "(" & t & ")/(" & n & ")" & right(ea.text, ea.Length - ea.pos + 1)
-        p = InStr(ea.text, "\frac")
+        ea.Text = Left(ea.Text, p - 1) & "(" & t & ")/(" & n & ")" & right(ea.Text, ea.Length - ea.Pos + 1)
+        p = InStr(ea.Text, "\frac")
     Loop
 
-    ConvertLatexToWord = ea.text
+    ConvertLatexToWord = ea.Text
 
 End Function
 Sub ReadSelection()
-' inds*ae*tter det markerede som kommando
+    ' indsætter det markerede som kommando
     Dim mtext As String, copytext As String
     Dim antal As Integer
     Dim sstart As Long
@@ -5791,10 +5863,10 @@ Sub ReadSelection()
     Dim j As Integer, antalgenstart As Integer
     On Error GoTo slut
 
-    ' hvis bold giver det buildup problemer
-    For j = 1 To Selection.OMaths.Count
-        Selection.OMaths(j).Range.Font.Bold = False
-    Next
+    ' hvis bold giver det buildup problemer ' i v. 1.24.1 forsøges det håndteret uden at ændre i originalen
+'        For j = 1 To Selection.OMaths.Count
+'            Selection.OMaths(j).Range.Font.Bold = False
+'        Next
     sstart = Selection.start
     sslut = Selection.End
     antal = Selection.OMaths.Count
@@ -5814,14 +5886,14 @@ Sub ReadSelection()
         '    If Selection.OMaths(1).Range.End < Selection.Range.End Then
         '        Selection.OMaths(1).Range.Select
         '    End If
-        Selection.OMaths(1).Range.Select    ' ovenst*aa*ende var ikke nok, men hvorfor var det der?
+        Selection.OMaths(1).Range.Select    ' ovenstående var ikke nok, men hvorfor var det der?
 
         antalgenstart = 0
 genstart:
         Kommando = ReadEquationCopy()
-        If Kommando = "" And antalgenstart = 0 Then    ' fors*oe*g p*aa* at rette sj*ae*ldent problem hvor alt l*ae*ses som "" m*aa*ske skyldes det tempdoc
-'            tempDoc.Close (False)
-'            Set tempDoc = Nothing
+        If Kommando = "" And antalgenstart = 0 Then    ' forsøg på at rette sjældent problem hvor alt læses som "" måske skyldes det tempdoc
+            '            tempDoc.Close (False)
+            '            Set tempDoc = Nothing
             LukTempDoc
             OpretTempdoc
             antalgenstart = antalgenstart + 1
@@ -5845,11 +5917,11 @@ genstart:
     ElseIf antal > 1 Then
         ReDim Kommandoer(0 To 100)
         '    For j = 1 To antal
-        '        Selection.OMaths(j).Range.Select ' ovenst*aa*ende var ikke nok, men hvorfor var det der?
+        '        Selection.OMaths(j).Range.Select ' ovenstående var ikke nok, men hvorfor var det der?
         '        Kommandoer(j - 1) = Replace(ReadEquationCopy(), Chr(11), "") ' fjern shift-enter
         '    Next
 
-        '    GoTo hop ' fors*oe*g
+        '    GoTo hop ' forsøg
 
         Set sr = Selection.Range
         Selection.Copy
@@ -5873,7 +5945,7 @@ genstart:
         Set mathcol = r.OMaths
         For j = 0 To antal - 1
             mathcol(j + 1).ConvertToNormalText
-            Kommandoer(j) = Replace(mathcol(j + 1).Range.text, ChrW(11), "")    ' fjern shift-enter
+            Kommandoer(j) = Replace(mathcol(j + 1).Range.Text, ChrW(11), "")    ' fjern shift-enter
         Next
         
 
@@ -5888,10 +5960,10 @@ slut:
 
 End Sub
 Function ReadEquation(Optional ir As Range) As String
-' Overs*ae*tter selection der er omath til streng
-' kan g*oe*res hurtigere hvis der kopieres indenfor samme document, men virker ikke 100%
-' autotextentries kan kopiere istedet for clipboard, og er m*aa*ske hurtigere, men det er meget tvivlsomt.
-' har dog oplevet at det giver problemer. Ligningssystem tan(30)=h/x og tan(25)=h/(x+34) p*aa* l*oe*sningen beregnes i enden. Det g*aa*r helt galt, men virker n*aa*r autotextentries ikke anvendes
+    ' Oversætter selection der er omath til streng
+    ' kan gøres hurtigere hvis der kopieres indenfor samme document, men virker ikke 100%
+    ' autotextentries kan kopiere istedet for clipboard, og er måske hurtigere, men det er meget tvivlsomt.
+    ' har dog oplevet at det giver problemer. Ligningssystem tan(30)=h/x og tan(25)=h/(x+34) på løsningen beregnes i enden. Det går helt galt, men virker når autotextentries ikke anvendes
 
     Dim sr As Range, r As Range
     If ir Is Nothing Then
@@ -5905,20 +5977,21 @@ Function ReadEquation(Optional ir As Range) As String
     at.Insert r, True
 
     With r
+        .Font.Bold = False
         .OMaths.BuildUp
         .OMaths.Linearize
         .OMaths(1).ConvertToNormalText
     End With
 
-    ReadEquation = r.text
-    r.Delete    ' dette afhj*ae*lper muligvis at word bliver langsom
+    ReadEquation = r.Text
+    r.Delete    ' dette afhjælper muligvis at word bliver langsom
 
     sr.Select
 
 End Function
 Function ReadEquationCopy(Optional ir As Range) As String
 ' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
-' Overs*ae*tter selection der er omath til streng
+' Oversætter selection der er omath til streng
     Dim sr As Range, r As Range
     '    Dim t As Variant
     '    t = Timer
@@ -5926,28 +5999,28 @@ Function ReadEquationCopy(Optional ir As Range) As String
 
     End If
 
-    '    copytext = Selection.Range.text ' fors*oe*g med ikke at klippe og kopiere problemet er at man er n*oe*dt til at konvertere til text for at l*ae*se ordentlig
+    '    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
     Set sr = Selection.Range
 
     Selection.Copy
 
     Set r = tempDoc.Range
-
-
+    
     With r
         .Paste
+        .Font.Bold = False
         .OMaths.BuildUp
         .OMaths.Linearize
         .OMaths(1).ConvertToNormalText
     End With
 
-    ReadEquationCopy = r.text
+    ReadEquationCopy = r.Text
     sr.Select
 
     r.Delete
     '    ClearClipboard
 
-    '    tempDoc.Range.Delete ' dette afhj*ae*lper muligvis at word bliver langsom
+    '    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
     '    MsgBox Timer - t
 End Function
 Function ReadEquation2(ir As Range) As String
@@ -5960,19 +6033,45 @@ Function ReadEquation2(ir As Range) As String
 
     With r
         .Paste
+        .Font.Bold = False
         .OMaths.BuildUp
         .OMaths.Linearize
         .OMaths(1).ConvertToNormalText
     End With
 
-    ReadEquation2 = r.text
+    ReadEquation2 = r.Text
     sr.Select
 
-    tempDoc.Range.Delete    ' dette afhj*ae*lper muligvis at word bliver langsom
+    tempDoc.Range.Delete    ' dette afhjælper muligvis at word bliver langsom
 
 End Function
+Function ReadFromWord(Expr As String) As String
+' tager udtryk som streng. Indsætter i word, bygger op og returnerer
+
+    Dim r As Range, oldr As Range
+
+    Set oldr = Selection.Range
+
+    Set r = tempDoc.Range
+    r.Delete
+    Set r = tempDoc.Range
+    With r
+        .OMaths.Add r
+        .OMaths(1).Range.Text = Expr
+        .OMaths(1).Range.Font.Bold = False
+        .OMaths.BuildUp
+        .OMaths.Linearize
+        .OMaths(1).ConvertToNormalText
+    End With
+
+    ReadFromWord = r.Text
+
+    r.Delete
+    
+    oldr.Select
+End Function
 Sub ReadSelectionOld()
-' inds*ae*tter det markerede som kommando
+' indsætter det markerede som kommando
     Dim mtext As String
     Dim antal As Integer
     Dim sstart As Integer
@@ -5989,15 +6088,15 @@ Sub ReadSelectionOld()
     antal = Selection.OMaths.Count
 
     If antal = 0 Then
-        If Len(Selection.text) < 2 Then
+        If Len(Selection.Text) < 2 Then
             Kommando = ""
-            MsgBox "Marker det der skal evalueres af Maxima.", vbOKOnly, "V*ae*lg"
+            MsgBox "Marker det der skal evalueres af Maxima.", vbOKOnly, "Vælg"
             Exit Sub
         End If
-        Kommando = Selection.text
+        Kommando = Selection.Text
         Selection.Collapse (wdCollapseEnd)
     ElseIf antal = 1 Then
-        If Len(Selection.text) < 3 Then
+        If Len(Selection.Text) < 3 Then
             Selection.OMaths(1).Range.Select
         End If
         If Selection.OMaths(1).Range.End < Selection.Range.End Then
@@ -6007,11 +6106,11 @@ Sub ReadSelectionOld()
         Selection.OMaths.BuildUp
         Selection.OMaths.Linearize
         Selection.OMaths(1).ConvertToNormalText
-        Kommando = Selection.text
-        Selection.text = Replace(Selection.text, VBA.ChrW(8727), MaximaGangeTegn)    'fjern *
-        Selection.text = Replace(Selection.text, "*", MaximaGangeTegn)    'fjern *
+        Kommando = Selection.Text
+        Selection.Text = Replace(Selection.Text, VBA.ChrW(8727), MaximaGangeTegn)    'fjern *
+        Selection.Text = Replace(Selection.Text, "*", MaximaGangeTegn)    'fjern *
         If DecSeparator = "," Then
-            Selection.text = Replace(Selection.text, ".", ",")    'N*aa*r komma er decseparator kan . *ae*ndres til komma
+            Selection.Text = Replace(Selection.Text, ".", ",")    'Når komma er decseparator kan . ændres til komma
         End If
         Selection.OMaths(1).ConvertToMathText
         Selection.OMaths(1).Range.Select
@@ -6025,7 +6124,7 @@ Sub ReadSelectionOld()
         Set mathcol = Selection.OMaths
         For i = 1 To antal
             mathcol(i).ConvertToNormalText
-            Kommandoer(i) = Replace(mathcol(i).Range.text, ChrW(11), "")
+            Kommandoer(i) = Replace(mathcol(i).Range.Text, ChrW(11), "")
             mathcol(i).ConvertToMathText
             mathcol(i).BuildUp
         Next
@@ -6048,16 +6147,16 @@ Sub GoToEndOfSelectedMaths2()
     Dim mc As OMaths
     Set mc = Selection.OMaths
     On Error Resume Next
-    mc(mc.Count).ParentOMath.Range.Select    ' parentomath n*oe*dvendig hvis cursor st*aa*r i lysebl*aa* firkant
+    mc(mc.Count).ParentOMath.Range.Select    ' parentomath nødvendig hvis cursor står i lyseblå firkant
     On Error GoTo slut
-    '        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgeng*ae*ld problemer. Hmm problem med valgt del af udtryk og reducer
+    '        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
 slut:
     Selection.Collapse wdCollapseEnd
     Dim r As Range
     Set r = Selection.Range
     r.MoveStart wdCharacter, -1
-    If r.text = VBA.ChrW(11) Then    ' hvis der er shift-enter i slutningen erstattes med alm. retur
-        r.text = VBA.ChrW(13)
+    If r.Text = VBA.ChrW(11) Then    ' hvis der er shift-enter i slutningen erstattes med alm. retur
+        r.Text = VBA.ChrW(13)
     End If
 End Sub
 Sub GoToEndOfSelectedMaths()
@@ -6081,7 +6180,7 @@ Sub GoToEndOfSelectedMaths()
         On Error Resume Next
         mc(mc.Count).ParentOMath.Range.Select
         On Error GoTo slut
-        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgeng*ae*ld problemer. Hmm problem med valgt del af udtryk og reducer
+        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
     Else
         i = 0
         Do While Selection.OMaths.Count = 0 And i < 100
@@ -6095,17 +6194,18 @@ slut:
     Dim r As Range
     Set r = Selection.Range
     r.MoveStart wdCharacter, -1
-    If r.text = VBA.ChrW(11) Then    ' hvis der er shift-enter i slutningen erstattes med alm. retur
-        r.text = VBA.ChrW(13)
+    If r.Text = VBA.ChrW(11) Then    ' hvis der er shift-enter i slutningen erstattes med alm. retur
+        r.Text = VBA.ChrW(13)
     End If
 End Sub
 Sub InsertMaximaOutput()
-' inds*ae*tter maxima output i word document
-    Dim mo As Range
+' indsætter maxima output i word document
+    Dim mo As Range, IsBold As Boolean, s As String
 
+    Selection.Range.Font.Bold = False
     If MaximaKommando Then
         Set mo = Selection.OMaths.Add(Selection.Range)
-        Selection.TypeText text:=Kommando
+        Selection.TypeText Text:=Kommando
         mo.OMaths.BuildUp
         '        GoToEndOfSelectedMaths
         Selection.TypeParagraph
@@ -6120,20 +6220,26 @@ Sub InsertMaximaOutput()
         MaximaOutput = Left(MaximaOutput, 500) + Sprog.A(119)
     End If
     Set mo = Selection.OMaths.Add(Selection.Range)
+    If mo.OMaths(1).Range.Bold Then ' Der er en fejl i Word build virker ikke korrekt med fed skrift. Fx løsningen af 2000=3000*0,85?x
+        mo.OMaths(1).Range.Bold = False
+        IsBold = True
+    End If
     Selection.TypeText MaximaOutput
     mo.OMaths.BuildUp
+    If IsBold Then
+        mo.OMaths(1).Range.Bold = True
+    End If
 
     InsertAssumptions
 
     If Len(KommentarOutput) > 3 Then
-        '        Selection.Collapse (wdCollapseEnd)
-        Selection.TypeParagraph
-        Selection.InsertAfter TranslateReplaceComment(KommentarOutput)
-        '        Selection.TypeText KommentarOutput
-        Selection.Collapse (wdCollapseEnd)
+        s = TranslateReplaceComment(KommentarOutput)
+        If Len(s) > 3 Then
+            Selection.TypeParagraph
+            Selection.InsertAfter s
+            Selection.Collapse (wdCollapseEnd)
+        End If
     End If
-
-    '        Selection.TypeParagraph
 
 End Sub
 Function TranslateReplaceComment(comm As String) As String
@@ -6191,9 +6297,9 @@ Function TranslateReplaceComment(comm As String) As String
 
 
 
-    'comm = Replace(comm, "solve: using arc-trig functions to get a solution.", "Da det er en trigonometrisk ligning er der uendeligt mange l*oe*sninger. Kun en af disse l*oe*sninger er angivet.")
-    'comm = Replace(comm, "Some solutions will be lost.", " Alle l*oe*sninger er ikke fundet.")
-    'comm = Replace(comm, "A number was found where a variable was expected -`solve'", "Du har bedt om at l*oe*se en ligning for en variabel der er defineret til en v*ae*rdi. Lav en 'slet def:'  kommando f*oe*r du l*oe*ser for denne variabel.")
+    'comm = Replace(comm, "solve: using arc-trig functions to get a solution.", "Da det er en trigonometrisk ligning er der uendeligt mange løsninger. Kun en af disse løsninger er angivet.")
+    'comm = Replace(comm, "Some solutions will be lost.", " Alle løsninger er ikke fundet.")
+    'comm = Replace(comm, "A number was found where a variable was expected -`solve'", "Du har bedt om at løse en ligning for en variabel der er defineret til en værdi. Lav en 'slet def:'  kommando før du løser for denne variabel.")
     'comm = Replace(comm, " -- an error. To debug this try: debugmode(true);", "Der skete en fejl.")
     'comm = Replace(comm, "Division by 0", "Fejl: Division med nul.")
 
@@ -6211,11 +6317,11 @@ Sub InsertAssumptions()
     If Not (ShowAssum) Then GoTo slut
 
     If InStr(KommentarOutput, "Assumptions:") > 0 Then
-        Dim pos As Integer
+        Dim Pos As Integer
         Dim ea As New ExpressionAnalyser
-        pos = InStr(KommentarOutput, "Assumptions:")
-        ea.text = KommentarOutput
-        ea.pos = pos
+        Pos = InStr(KommentarOutput, "Assumptions:")
+        ea.Text = KommentarOutput
+        ea.Pos = Pos
         assum = Trim(omax.ConvertToWordSymbols(Replace(ea.GetNextBracketContent, ",", " , ")))
     End If
     If Len(assum) < 2 Then GoTo slut
@@ -6240,7 +6346,7 @@ Sub InsertAssumptions()
     Selection.Font.Italic = True
 
     Selection.TypeParagraph
-    Selection.TypeText "L*oe*sningsbetingelser:  "
+    Selection.TypeText "Løsningsbetingelser:  "
     '            Selection.TypeText text:=vbTab
     Set mo = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText assum
@@ -6258,23 +6364,23 @@ Sub InsertAssumptions()
     End With
 
     GoTo slut
-fejl:
+Fejl:
 slut:
 
 End Sub
 
-Function FindMaximaOutput(text As String) As String
+Function FindMaximaOutput(Text As String) As String
 ' plukker output2 fra hele maxima output
     Dim opos, ipos As Integer
     Dim text2 As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
-    opos = InStr(text, "(%o2)")
-    ipos = InStr(text, "(%i3)")
+    opos = InStr(Text, "(%o2)")
+    ipos = InStr(Text, "(%i3)")
     'MsgBox text
-    If opos < 1 Then GoTo fejl
+    If opos < 1 Then GoTo Fejl
 
-    text2 = Trim(Mid(text, opos + 5, ipos - opos - 5))
+    text2 = Trim(Mid(Text, opos + 5, ipos - opos - 5))
     text2 = Replace(text2, "[", "")
     text2 = Replace(text2, "]", "")
     'text2 = Mid(text2, 2, Len(text2) - 3) ' fjern kantede paranteser
@@ -6282,9 +6388,9 @@ Function FindMaximaOutput(text As String) As String
     FindMaximaOutput = text2
 
     GoTo slut
-fejl:
-    opos = InStr(text, "(%i2)")
-    text2 = right(text, Len(text) - opos - 4)
+Fejl:
+    opos = InStr(Text, "(%i2)")
+    text2 = right(Text, Len(Text) - opos - 4)
     text2 = Replace(text2, "(%i2)", "")
     text2 = Sprog.A(108) & vbCrLf & vbCrLf & text2
     MsgBox text2, vbOKOnly, Sprog.A(109)
@@ -6324,26 +6430,26 @@ Dim same As Boolean
     End If
 
     'If MaximaOutput = "" Then
-    '    KommentarOutput = "Der kom f*oe*lgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
+    '    KommentarOutput = "Der kom følgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
     'End If
 
     GoTo slut
-fejl:
+Fejl:
 slut:
 End Sub
-Sub GenerateOutputArray(Optional text As String)
+Sub GenerateOutputArray(Optional Text As String)
 '    Dim text As String
     Dim Output As String
     Dim nr As Integer
     Dim AntalCifre As Integer
-    Dim pos As Long
+    Dim Pos As Long
     Dim pos2 As Long
     Dim posb As Long
     Dim ArrIndex As Integer 'mac
     ArrIndex = 1 'mac
 
-    On Error GoTo fejl
-    If text = "" Then text = MaxProc.LastMaximaOutput
+    On Error GoTo Fejl
+    If Text = "" Then Text = MaxProc.LastMaximaOutput
     'text = Right(text, Len(text) - 270)
     ReDim Minput(1 To 100) As String
     ReDim moutput(1 To 100) As String
@@ -6352,21 +6458,21 @@ Sub GenerateOutputArray(Optional text As String)
     
 '    pos = InStr(1, text, vbLf & "(%")
 '    pos2 = InStr(pos + 2, text, "(%") - 1
-   pos = FindNextio(1, text) - 1
-   pos2 = FindNextio(pos + 2, text) - 1
+   Pos = FindNextio(1, Text) - 1
+   pos2 = FindNextio(Pos + 2, Text) - 1
 
     'pos2 = InStr(pos + 2, text, vbLf & "(%")
     Do
-        If pos < 1 Then
+        If Pos < 1 Then
             GoTo slut
         End If
         If pos2 < 1 Then
-            pos2 = Len(text)
+            pos2 = Len(Text)
             slutnu = True
         End If
-        posb = InStr(pos, text, ")")
+        posb = InStr(Pos, Text, ")")
 
-        nr = CInt(Mid(text, pos + 4, posb - pos - 4))
+        nr = CInt(Mid(Text, Pos + 4, posb - Pos - 4))
         If nr < 10 Then
             AntalCifre = 1
         ElseIf nr < 100 Then
@@ -6377,30 +6483,30 @@ Sub GenerateOutputArray(Optional text As String)
             AntalCifre = 4
         End If
 
-        Output = Mid(text, posb + 1, pos2 - pos - 4 - AntalCifre)
-        If Mid(text, pos + 3, 1) = "o" Then Output = RemovePrintetBool(Output)
+        Output = Mid(Text, posb + 1, pos2 - Pos - 4 - AntalCifre)
+        If Mid(Text, Pos + 3, 1) = "o" Then Output = RemovePrintetBool(Output)
         Output = Replace(Trim(Output), VbCrLfMac, "")
 '#If Mac Then ' SBCL
-        If Mid(text, pos + 3, 1) = "i" Then
-            ' n*ae*ste er input
+        If Mid(Text, Pos + 3, 1) = "i" Then
+            ' næste er input
             Minput(ArrIndex) = Minput(ArrIndex) & Output
         Else
-            ' n*ae*ste er output
+            ' næste er output
             moutput(ArrIndex) = moutput(ArrIndex) & Output
             ArrIndex = ArrIndex + 1 'mac
         End If
 '#Else ' GCL
 '        If Mid(text, pos + 3, 1) = "i" Then
-'            ' n*ae*ste er input
+'            ' næste er input
 '            Minput(nr) = Minput(nr) & Output
 '        Else
-'            ' n*ae*ste er output
+'            ' næste er output
 '            moutput(nr) = moutput(nr) & Output
 '        End If
 '#End If
-        pos = pos2
+        Pos = pos2
 '        pos2 = InStr(pos + 3, text, vbLf & "(%")
-      pos2 = FindNextio(pos + 3, text) - 1
+      pos2 = FindNextio(Pos + 3, Text) - 1
     Loop Until slutnu
 '#If Mac Then
     nr = ArrIndex 'mac
@@ -6421,36 +6527,36 @@ Sub GenerateOutputArray(Optional text As String)
     '    ShowOutputArray ' til test
 
     GoTo slut
-fejl:
+Fejl:
     '    MsgBox text
 slut:
    If nr < 1 Then nr = 1
     ReDim Preserve Minput(1 To nr) As String
     ReDim Preserve moutput(1 To nr) As String
 End Sub
-Function FindNextio(StartPos As Long, text As String) As Long
+Function FindNextio(StartPos As Long, Text As String) As Long
 
-On Error GoTo fejl
-Dim pos As Long, pos2 As Long, io As String
+On Error GoTo Fejl
+Dim Pos As Long, pos2 As Long, io As String
 Dim ea As New ExpressionAnalyser
 
 FindNextio = 0
-ea.text = text
+ea.Text = Text
 Do
-   pos = InStr(StartPos, text, "(%")
-   If pos <= 0 Then Exit Function
-   io = ea.ChrByIndex(pos + 2)
+   Pos = InStr(StartPos, Text, "(%")
+   If Pos <= 0 Then Exit Function
+   io = ea.ChrByIndex(Pos + 2)
    If io = "o" Or io = "i" Then
-      If ea.IsNumber(pos + 3) Then
-         FindNextio = pos
+      If ea.IsNumber(Pos + 3) Then
+         FindNextio = Pos
          Exit Function
       End If
    End If
-   StartPos = pos + 2
-Loop While StartPos < Len(text)
+   StartPos = Pos + 2
+Loop While StartPos < Len(Text)
    
 GoTo slut
-fejl:
+Fejl:
    FindNextio = 0
 '    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure FindNextio, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
 slut:
@@ -6459,30 +6565,30 @@ End Function
 Function RemovePrintetBool(s As String) As String
 ' removes the true/false which can be printed in output on Mac
 ' mac auto. Der kan blive printet et true eller false i slutningen
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim t As String, ant As Integer, i As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
     s = TrimR(Trim(s), vbLf)
     s = TrimR(Trim(s), vbCr)
-'#If Mac Then ' vbcrlfmac can ikke bruges her, da det er lf p*aa* mac. Ikke efter 1.23
+'#If Mac Then ' vbcrlfmac can ikke bruges her, da det er lf på mac. Ikke efter 1.23
 '    arr = Split(s, vbCr)
 '#Else
 '    arr = Split(s, vbLf)
 '#End If
-Arr = Split(s, VbCrLfMac) ' *ae*ndret v. 1.23
+arr = Split(s, VbCrLfMac) ' ændret v. 1.23
 
-    ant = UBound(Arr)
+    ant = UBound(arr)
     If ant > 0 Then
-        t = Trim(Arr(ant))
+        t = Trim(arr(ant))
         If t = "true" Or t = "false" Or t = "unknown" Or t = "expt: undefined: 0 to a negative exponent." Then
             s = vbNullString
             For i = 0 To ant - 1
-                s = s & Arr(i)
+                s = s & arr(i)
             Next
         End If
     End If
 GoTo slut
-fejl:
+Fejl:
     MsgBox "removeprintetbool error", vbOKOnly, Sprog.Error
 slut:
 
@@ -6490,11 +6596,11 @@ slut:
 End Function
 '#End If
 Function GetMaximaUnitOutput() As String
-    Dim text As String
+    Dim Text As String
     Dim Output As String
     Dim nr As Integer
     Dim AntalCifre As Integer
-    Dim pos As Integer
+    Dim Pos As Integer
     Dim pos2 As Integer
     Dim posb As Integer
     
@@ -6502,30 +6608,30 @@ Function GetMaximaUnitOutput() As String
     Dim moutputU() As String
     
 
-    On Error GoTo fejl
+    On Error GoTo Fejl
 #If Mac Then
-    text = MaxProc.LastMaximaOutput
+    Text = MaxProc.LastMaximaOutput
 #Else
-    text = MaxProcUnit.LastMaximaOutput
+    Text = MaxProcUnit.LastMaximaOutput
 #End If
     ReDim MinputU(1 To 100) As String
     ReDim moutputU(1 To 100) As String
     Dim slutnu As Boolean
 '    MsgBox text
 
-    pos = InStr(1, text, vbLf & "(%")
-    pos2 = InStr(pos + 2, text, "(%") - 1
+    Pos = InStr(1, Text, vbLf & "(%")
+    pos2 = InStr(Pos + 2, Text, "(%") - 1
     Do
-        If pos < 1 Then
+        If Pos < 1 Then
             Exit Function
         End If
         If pos2 < 1 Then
-            pos2 = Len(text)
+            pos2 = Len(Text)
             slutnu = True
         End If
-        posb = InStr(pos, text, ")")
+        posb = InStr(Pos, Text, ")")
 
-        nr = CInt(Mid(text, pos + 4, posb - pos - 4))
+        nr = CInt(Mid(Text, Pos + 4, posb - Pos - 4))
         If nr < 10 Then
             AntalCifre = 1
         ElseIf nr < 100 Then
@@ -6533,17 +6639,17 @@ Function GetMaximaUnitOutput() As String
         Else
             AntalCifre = 3
         End If
-        Output = Replace(Trim(Mid(text, posb + 1, pos2 - pos - 4 - AntalCifre)), vbCrLf, "")
+        Output = Replace(Trim(Mid(Text, posb + 1, pos2 - Pos - 4 - AntalCifre)), vbCrLf, "")
 
-        If Mid(text, pos + 3, 1) = "i" Then
-            ' n*ae*ste er input
+        If Mid(Text, Pos + 3, 1) = "i" Then
+            ' næste er input
             MinputU(nr) = MinputU(nr) & Output
         Else
-            ' n*ae*ste er output
+            ' næste er output
             moutputU(nr) = moutputU(nr) & Output
         End If
-        pos = pos2
-        pos2 = InStr(pos + 3, text, vbLf & "(%")
+        Pos = pos2
+        pos2 = InStr(Pos + 3, Text, vbLf & "(%")
     Loop Until slutnu
 
     If moutputU(nr) = "" And Len(MinputU(nr)) < 6 Then
@@ -6557,7 +6663,7 @@ Function GetMaximaUnitOutput() As String
     GetMaximaUnitOutput = moutputU(nr)
 
     GoTo slut
-fejl:
+Fejl:
     '    MsgBox text
 slut:
 End Function
@@ -6608,37 +6714,37 @@ start:
 
 slut:
 End Sub
-Sub FindVariable(Optional text As String, Optional MaximaCode As Boolean = True)
+Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
 ' finder variable i texten og putter dem i Vars-string
     Dim var As String
-    Dim pos As Integer
+    Dim Pos As Integer
     Dim i As Integer
     Dim j As Integer
     Dim arrint As Variant
     AntalVars = 0
     vars = ""
     IntegrationVars = ""
-    If text = "" Then
-        text = Kommando
-        If text = "" Then
-            On Error GoTo fejl
+    If Text = "" Then
+        Text = Kommando
+        If Text = "" Then
+            On Error GoTo Fejl
             For j = 0 To UBound(Kommandoer)
-                text = text & "+" & Kommandoer(j)    ' der skal bare v*ae*re tegn mellem som ikke kan indg*aa* i variabel
+                Text = Text & "+" & Kommandoer(j)    ' der skal bare være tegn mellem som ikke kan indgå i variabel
             Next
         End If
     End If
     Dim ea As New ExpressionAnalyser
     If MaximaCode Then
-        ea.text = CodeForMaxima(text)
+        ea.Text = CodeForMaxima(Text)
     Else
-        ea.text = text
+        ea.Text = Text
     End If
-    ea.pos = 1
+    ea.Pos = 1
     Dim vararr(30) As String    ' gemmer variablene kun til sammenligning
     Dim varind As Integer
     Dim varexists As Boolean
 
-    ' f*oe*rst tils*ae*t integrationsvariable
+    ' først tilsæt integrationsvariable
     varind = 1
     If Len(IntegrationVars) > 0 Then
         arrint = Split(IntegrationVars, ";")
@@ -6652,7 +6758,7 @@ Sub FindVariable(Optional text As String, Optional MaximaCode As Boolean = True)
     var = ea.GetNextVar()
     var = Replace(var, vbCrLf, "")
     Do While var <> ""
-        If ea.ChrByIndex(ea.pos + 1) <> "(" And ea.ChrByIndex(ea.pos + 1) <> "'" And ea.ChrByIndex(ea.pos + 1) <> VBA.ChrW(8289) And Not (InStr(DefString, var & ":") = 1 Or InStr(DefString, "$" & var & ":") > 0) And InStr(var, "qkqg") < 1 Then
+        If ea.ChrByIndex(ea.Pos + 1) <> "(" And ea.ChrByIndex(ea.Pos + 1) <> "'" And ea.ChrByIndex(ea.Pos + 1) <> VBA.ChrW(8289) And Not (InStr(DefString, var & ":") = 1 Or InStr(DefString, "$" & var & ":") > 0) And InStr(var, "qkqg") < 1 Then
             varexists = False
             For i = 1 To varind - 1
                 If vararr(i) = var Then varexists = True
@@ -6668,7 +6774,7 @@ Sub FindVariable(Optional text As String, Optional MaximaCode As Boolean = True)
                 AntalVars = AntalVars + 1
             End If
         End If
-        ea.pos = ea.pos + 1
+        ea.Pos = ea.Pos + 1
         var = ea.GetNextVar()
     Loop
 
@@ -6678,7 +6784,7 @@ Sub FindVariable(Optional text As String, Optional MaximaCode As Boolean = True)
     '    End If
 
     '    ReDim Preserve Vars(1 To i - 1)
-fejl:
+Fejl:
 End Sub
 Function FindDefinitions() As String
     Dim s As String
@@ -6687,7 +6793,7 @@ Function FindDefinitions() As String
     Dim start As Long, sslut As Long
     Dim ra As Range
 
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     Application.ScreenUpdating = False
     Definitions = False
@@ -6701,12 +6807,12 @@ Function FindDefinitions() As String
     ra.End = start
     For i = ra.OMaths.Count To 1 Step -1
         '    MsgBox ActiveDocument.Range.OMaths(i).Range.Text
-        s = ActiveDocument.Range.OMaths(i).Range.text
+        s = ActiveDocument.Range.OMaths(i).Range.Text
         '        If ActiveDocument.Range.OMaths(i).Range.start > start Then GoTo slut
 
-        If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then    ' kun se p*aa* felter med :  tripelligmed def= og specielt := tegn
+        If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then    ' kun se på felter med :  tripelligmed def= og specielt := tegn
 #If Mac Then
-            s = ReadEquation(ActiveDocument.Range.OMaths(i).Range) ' kan ikke huske hvad forskel p*aa* readeq1 og 2 er. Ihvert et tilf*ae*lde p*aa* mac numerisk grafisk ligningsl*oe*sning med foreg*aa*ende definition fejler. s*aa* derfor alm. readeq p*aa* mac.
+            s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range) ' kan ikke huske hvad forskel på readeq1 og 2 er. Ihvert et tilfælde på mac numerisk grafisk ligningsløsning med foregående definition fejler. så derfor alm. readeq på mac. april2022 skiftet tilbage til readeq2, da der opstod problemer med definitioner anden gang de blev l_st. De kom ind som tekst med en masse "" og mellemrum
 #Else
             s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range)
 #End If
@@ -6722,7 +6828,7 @@ Function FindDefinitions() As String
     End If
 
     GoTo slut
-fejl:
+Fejl:
     deffejl = True
     '    DefString = ""
     FindDefinitions = ""
@@ -6738,11 +6844,11 @@ slut:
 
 End Function
 Function AddDefinition(s As String) As String
-   Dim t As String, i As Integer, Expr As String, c As String, j As Integer, pos As Integer, pos2 As Integer, k As Integer
+   Dim t As String, i As Integer, Expr As String, c As String, j As Integer, Pos As Integer, pos2 As Integer, k As Integer
    Dim ea As New ExpressionAnalyser
    Dim ea2 As New ExpressionAnalyser
    Dim defenk As String, ass As String
-   Dim Arr As Variant, arr2() As String, arr3() As String
+   Dim arr As Variant, arr2() As String, arr3() As String
    Dim deflign As Boolean
 
    ea.SetNormalBrackets
@@ -6793,15 +6899,15 @@ Function AddDefinition(s As String) As String
       Else    ' gem definitioner
          '            FindDefinitions = CodeForMaxima(s) & "," & FindDefinitions
          defstringtext = defstringtext & s & "$"
-         ea.text = Replace(s, ";", " , ")    ' fors*oe*g med at fjerne semikolon
+         ea.Text = Replace(s, ";", " , ")    ' forsøg med at fjerne semikolon
          ea.ConvertDecSeparator
-         ea.pos = 1
+         ea.Pos = 1
          Do
-            defenk = Trim(ea.GetNextListItem(ea.pos, ","))
+            defenk = Trim(ea.GetNextListItem(ea.Pos, ","))
             If Len(defenk) = 0 Then GoTo hop
             If InStr(defenk, "block") > 0 Then
                defenk = Replace(defenk, ";", ",")
-               defenk = Replace(defenk, VBA.ChrW(9633), "")    ' tegn foran paranteser der g*oe*r dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. g*oe*r ogs*aa* br*oe*ker sm*aa*
+               defenk = Replace(defenk, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
                defenk = Replace(defenk, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
                defenk = Replace(defenk, VBA.ChrW(11), "")    ' shift-enter
                defenk = Replace(defenk, vbLf, "")    ' shift-enter og enter
@@ -6820,75 +6926,72 @@ Function AddDefinition(s As String) As String
                defenk = Replace(defenk, VBA.ChrW(9618), "") ' funktionstegn
                defenk = Replace(defenk, VBA.ChrW(12310), "(") ' skjulte parenteser
                defenk = Replace(defenk, VBA.ChrW(12311), ")") ' skjulte parenteser
-            ElseIf InStr(defenk, VBA.ChrW(9608)) > 0 And InStr(defenk, VBA.ChrW(9508)) > 0 Then ' tuborg parentes
-            
-               ea2.text = defenk
-               ea2.SetNormalBrackets
-               i = 0
-               Do
-                  pos = InStr(ea2.text, "{" & VBA.ChrW(9608))
-                  If pos > 0 Then
-                     ea2.text = Replace(ea2.text, ")=", "):=", 1, pos)
-                     pos = InStr(ea2.text, "{" & VBA.ChrW(9608))
-                     pos2 = InStr(pos, ea2.text, VBA.ChrW(9508))
-                     
-                     Expr = Mid(ea2.text, pos + 2, pos2 - pos - 1)
-                     Expr = ea2.GetNextBracketContent(pos)
-                     arr2 = Split(Expr, "@")
-                     t = "(if "
-                     For j = 0 To UBound(arr2)
-                        If InStr(arr2(j), ";") > 0 Then
-                           c = ";"
-                        ElseIf InStr(arr2(j), ", ") > 0 Then
-                           c = ", "
-                        ElseIf InStr(arr2(j), " ,") > 0 Then
-                           c = " ,"
-                        ElseIf InStr(arr2(j), ",") > 0 Then
-                           c = ","
-                        ElseIf InStr(arr2(j), "|") > 0 Then
-                           c = "|"
-                        Else
-                           c = ""
-                        End If
-                        arr3 = Split(arr2(j), c)
-                        If UBound(arr3) > 1 Then
-                           k = 1
-                           ass = ""
-                           Do While k <= UBound(arr3) ' hvis delt op forkert s*aa* repareres
-                              If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
-                                 If ass = "" Then
-                                    ass = arr3(k)
-                                 Else
-                                    ass = ass & c & arr3(k)
-                                 End If
-                              Else
-                                 arr3(0) = arr3(0) & c & arr3(k)
-                              End If
-                              k = k + 1
-                           Loop
-                        ElseIf UBound(arr3) = 1 Then
-                           ass = arr3(1)
-                        End If
-                        If UBound(arr3) > 0 Then
-                           '                           t = t & sqbrAssump(SplitAssump(CodeForMaxima(Trim(arr3(1))))) & " then " & CodeForMaxima(arr3(0))
-                           t = t & sqbrAssump(SplitAssump(Trim(ass))) & " then " & CodeForMaxima(arr3(0), CASengine)
-                        Else
-                           t = t & " 0=0 then " & CodeForMaxima(arr3(0), CASengine)
-                        End If
-                        If j < UBound(arr2) Then t = t & " elseif "
-                     Next
-                     ea2.text = Left(ea2.text, pos - 1) & t & ")"  ' & Right(ea2.Text, Len(ea2.Text) - pos - Len(expr) - 6)
-                     i = i + 1
-                  End If
-               Loop While pos > 0 And i < 1000
-               defenk = ea2.text
-            
-            
+'            ElseIf InStr(defenk, VBA.ChrW(9608)) > 0 And InStr(defenk, VBA.ChrW(9508)) > 0 Then ' tuborg parentes ' fjernet v. 1.26 Er nu i CodeForMaxima
+'               ea2.Text = defenk
+'               ea2.SetNormalBrackets
+'               i = 0
+'               Do
+'                  Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
+'                  If Pos > 0 Then
+'                     ea2.Text = Replace(ea2.Text, ")=", "):=", 1, Pos)
+'                     Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
+'                     pos2 = InStr(Pos, ea2.Text, VBA.ChrW(9508))
+'
+'                     Expr = Mid(ea2.Text, Pos + 2, pos2 - Pos - 1)
+'                     Expr = ea2.GetNextBracketContent(Pos)
+'                     arr2 = Split(Expr, "@")
+'                     t = "(if "
+'                     For j = 0 To UBound(arr2)
+'                        If InStr(arr2(j), ";") > 0 Then
+'                           c = ";"
+'                        ElseIf InStr(arr2(j), ", ") > 0 Then
+'                           c = ", "
+'                        ElseIf InStr(arr2(j), " ,") > 0 Then
+'                           c = " ,"
+'                        ElseIf InStr(arr2(j), ",") > 0 Then
+'                           c = ","
+'                        ElseIf InStr(arr2(j), "|") > 0 Then
+'                           c = "|"
+'                        Else
+'                           c = ""
+'                        End If
+'                        arr3 = Split(arr2(j), c)
+'                        If UBound(arr3) > 1 Then
+'                           k = 1
+'                           ass = ""
+'                           Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
+'                              If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
+'                                 If ass = "" Then
+'                                    ass = arr3(k)
+'                                 Else
+'                                    ass = ass & c & arr3(k)
+'                                 End If
+'                              Else
+'                                 arr3(0) = arr3(0) & c & arr3(k)
+'                              End If
+'                              k = k + 1
+'                           Loop
+'                        ElseIf UBound(arr3) = 1 Then
+'                           ass = arr3(1)
+'                        End If
+'                        If UBound(arr3) > 0 Then
+'                           '                           t = t & sqbrAssump(SplitAssump(CodeForMaxima(Trim(arr3(1))))) & " then " & CodeForMaxima(arr3(0))
+'                           t = t & sqbrAssump(SplitAssump(Trim(ass))) & " then " & CodeForMaxima(arr3(0), CASengine)
+'                        Else
+'                           t = t & " 0=0 then " & CodeForMaxima(arr3(0), CASengine)
+'                        End If
+'                        If j < UBound(arr2) Then t = t & " elseif "
+'                     Next
+'                     ea2.Text = Left(ea2.Text, Pos - 1) & t & ")"  ' & Right(ea2.Text, Len(ea2.Text) - pos - Len(expr) - 6)
+'                     i = i + 1
+'                  End If
+'               Loop While Pos > 0 And i < 1000
+'               defenk = ea2.Text
             Else
                defenk = Replace(defenk, VBA.ChrW(34), "")    ' apostrof
                defenk = CodeForMaxima(defenk, CASengine)
-'#If Mac Then ' p*aa* mac bruges ## som multiplikator ved vektorer, s*aa* ikke n*oe*dvendigvis 'ikke ligmed'  nu ogs*aa* p*aa* windows 1.18
-               If InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0 Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
+'#If Mac Then ' på mac bruges ## som multiplikator ved vektorer, så ikke nødvendigvis 'ikke ligmed'  nu også på windows 1.18
+               If InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
 '#Else
 '               If InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0 Or InStr(defenk, "#") > 0 Then
 '#End If
@@ -6901,26 +7004,26 @@ Function AddDefinition(s As String) As String
                   defenk = Replace(defenk, "):", "):=")
                End If
             End If
-            Arr = Split(defenk, ":")
-            If UBound(Arr) = 0 Then
+            arr = Split(defenk, ":")
+            If UBound(arr) = 0 Then
                '                    If InStr(defenk, "setunits") > 0 Or InStr(defenk, "assume") > 0 Then
                GoTo hop2
                '                    End If
             End If
-            If Not ValidateDef(Arr(0), Arr(1)) Then GoTo hop
+            If Not ValidateDef(arr(0), arr(1)) Then GoTo hop
 
-            If Left(Arr(1), 1) = "=" Then Arr(1) = right(Arr(1), Len(Arr(1)) - 1)
-            If Arr(1) = "" Then GoTo hop
+            If Left(arr(1), 1) = "=" Then arr(1) = right(arr(1), Len(arr(1)) - 1)
+            If arr(1) = "" Then GoTo hop
             If UBound(ldefname) < defindex Then
                ReDim Preserve ldefname(defindex)
                ReDim Preserve ldefvalue(defindex)
             End If
-            ldefname(defindex) = Arr(0)
-            ldefvalue(defindex) = Arr(1)
+            ldefname(defindex) = arr(0)
+            ldefvalue(defindex) = arr(1)
             defindex = defindex + 1
 hop2:                    ' hvis setunit eller assume eller declare
-            ea2.text = defenk
-            ea2.pos = 1
+            ea2.Text = defenk
+            ea2.Pos = 1
             t = ea2.GetNextVar
 
             If InStr(Split(defenk, ":")(0), "diff") > 0 Then
@@ -6935,12 +7038,13 @@ hop2:                    ' hvis setunit eller assume eller declare
                AddDefinition = AddDefinition & defenk & "$"
             End If
 hop:
-         Loop Until ea.pos >= Len(ea.text)
+         Loop Until ea.Pos >= Len(ea.Text)
       End If
    End If
 
 End Function
 Function SplitAssump(s As String) As String
+' Deler  0<x<5 op til x>0 and x<5
    Dim ea As New ExpressionAnalyser
    Dim v As String, p As Integer, p2 As Integer
    Dim pre As String, pst As String
@@ -6950,7 +7054,7 @@ Function SplitAssump(s As String) As String
     s = Replace(s, VBA.ChrW(8804), "<=")    '
     s = Replace(s, VBA.ChrW(8805), ">=")    '
 
-   ea.text = s
+   ea.Text = s
    
    v = ea.GetNextVar()
    If v = "" Then
@@ -6962,7 +7066,7 @@ Function SplitAssump(s As String) As String
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 4)
-      SplitAssump = v & ">=" & pre & " and " & v & "<=" & pst
+      SplitAssump = v & ">=" & pre & "&&and&&" & v & "<=" & pst
 '      SplitAssump = pre & "<=" & v & " and " & v & "<=" & pst
       Exit Function
    End If
@@ -6970,21 +7074,21 @@ Function SplitAssump(s As String) As String
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 3)
-      SplitAssump = pre & "<=" & v & " and " & v & "<" & pst
+      SplitAssump = pre & "<=" & v & "&&and&&" & v & "<" & pst
       Exit Function
    End If
    p = InStr(s, "<" & v & "<=")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 3)
-      SplitAssump = pre & "<" & v & " and " & v & "<=" & pst
+      SplitAssump = pre & "<" & v & "&&and&&" & v & "<=" & pst
       Exit Function
    End If
    p = InStr(s, "<" & v & "<")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 2)
-      SplitAssump = pre & "<" & v & " and " & v & "<" & pst
+      SplitAssump = pre & "<" & v & "&&and&&" & v & "<" & pst
       Exit Function
    End If
    SplitAssump = s
@@ -6992,7 +7096,7 @@ End Function
 Function sqbrAssump(s As String) As String
    Dim ea As ExpressionAnalyser, t As String
    Dim v As String, p As Integer, p2 As Integer, c As String
-   Dim pre As String, pst As String, Arr() As String, l1 As String, l2 As String
+   Dim pre As String, pst As String, arr() As String, l1 As String, l2 As String
    t = s
    p = InStr(s, VBA.ChrW(8712))
    If p <= 0 Then
@@ -7000,15 +7104,15 @@ Function sqbrAssump(s As String) As String
       Exit Function
    End If
    Set ea = New ExpressionAnalyser
-   ea.text = s
+   ea.Text = s
    v = ea.GetNextVar()
    If v = "" Then
       sqbrAssump = s
       Exit Function
    End If
-   ea.pos = p
+   ea.Pos = p
    s = right(s, Len(s) - p)
-   ea.text = s
+   ea.Text = s
    ea.StartBracket = ea.ChrByIndex(1)
    ea.EndBracket = ea.ChrByIndex(ea.Length)
    
@@ -7028,7 +7132,7 @@ Function sqbrAssump(s As String) As String
       sqbrAssump = t
       Exit Function
    End If
-   ea.pos = 1
+   ea.Pos = 1
    s = ea.GetNextBracketContent
    If InStr(s, ";") > 0 Then
       c = ";"
@@ -7039,9 +7143,9 @@ Function sqbrAssump(s As String) As String
    Else
       c = ","
    End If
-   Arr = Split(s, c)
-   If UBound(Arr) = 1 Then
-      sqbrAssump = v & l1 & Arr(0) & " and " & Arr(1) & l2 & v
+   arr = Split(s, c)
+   If UBound(arr) = 1 Then
+      sqbrAssump = v & l1 & arr(0) & "&&and&&" & arr(1) & l2 & v
    Else
       sqbrAssump = t
    End If
@@ -7056,16 +7160,16 @@ End Sub
 Function ValidateDef(ByVal lhs As String, ByVal rhs As String) As Boolean
 ' returnerer false hvis der er fejl
     Dim ea As New ExpressionAnalyser
-    Dim pos As Integer
-    On Error GoTo fejl
+    Dim Pos As Integer
+    On Error GoTo Fejl
     ValidateDef = False
 
-    pos = InStr(lhs, "[")    ' Man kan skrive alt muligt i subscript/index
-    If pos > 0 Then
-        lhs = Left(lhs, pos - 1)
+    Pos = InStr(lhs, "[")    ' Man kan skrive alt muligt i subscript/index
+    If Pos > 0 Then
+        lhs = Left(lhs, Pos - 1)
     End If
 
-    ' If Not ea.IsAllText Then ikke god nok da , og ; ikke bliver taget h*oe*jde for
+    ' If Not ea.IsAllText Then ikke god nok da , og ; ikke bliver taget højde for
     If InStr(lhs, "+") > 0 Or InStr(lhs, "-") > 0 Or InStr(lhs, "*") > 0 Or InStr(lhs, "/") > 0 Then
         MsgBox Sprog.A(117) & vbCrLf & vbTab & ConvertToAscii(lhs & "=" & rhs) & vbCrLf & Sprog.A(118), vbOKOnly, Sprog.Error
         Exit Function
@@ -7078,36 +7182,36 @@ Function ValidateDef(ByVal lhs As String, ByVal rhs As String) As Boolean
 
 
     ValidateDef = True
-fejl:
+Fejl:
 End Function
 Function GetAssumeText(defenk) As String
-' tager text fra word og omdanner til assume samt inds*ae*tter til forget
+' tager text fra word og omdanner til assume samt indsætter til forget
     Dim ea As ExpressionAnalyser
     Dim ea2 As ExpressionAnalyser
     Dim s As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim p1 As Integer, p2 As Integer
     If Len(defenk) > 0 Then
         If Left(defenk, 6) = "assume" Then
             GetAssumeText = defenk & "$"
             Set ea = New ExpressionAnalyser
-            ea.text = defenk
+            ea.Text = defenk
             ea.SetNormalBrackets
             defenk = ea.GetNextBracketContent(6)
             ForgetList = ForgetList & defenk & ","
         Else
             Set ea = New ExpressionAnalyser
             Set ea2 = New ExpressionAnalyser
-            ea.text = defenk
+            ea.Text = defenk
             defenk = ""
             ea.SetNormalBrackets
             Do
-                s = ea.GetNextListItem(ea.pos)
+                s = ea.GetNextListItem(ea.Pos)
                 If InStr(s, "#") > 0 Then
-                    Arr = Split(s, "#")
-                    s = "notequal(" & Arr(0) & "," & Arr(1) & ")"
+                    arr = Split(s, "#")
+                    s = "notequal(" & arr(0) & "," & arr(1) & ")"
                 ElseIf Len(s) > 0 Then
-                    ea2.text = s
+                    ea2.Text = s
                     p1 = ea2.FindNextGreaterOrLower(1)
                     p2 = ea2.FindNextGreaterOrLower(p1 + 1)
                     If p2 > 0 Then    ' 2<=x<=3
@@ -7132,13 +7236,13 @@ End Function
 
 
 Sub AddToKillDefs(DefS As String)
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim j As Integer
     Dim s As String
     If DefS <> "" Then
-        Arr = Split(DefS, ListSeparator)
-        For j = 0 To UBound(Arr)
-            s = Arr(j)
+        arr = Split(DefS, ListSeparator)
+        For j = 0 To UBound(arr)
+            s = arr(j)
             s = Split(s, "=")(0)
             s = Split(s, "(")(0)
             KillDef = KillDef & s & ","
@@ -7148,37 +7252,37 @@ Sub AddToKillDefs(DefS As String)
 End Sub
 
 Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
-' checker om ligningen er helt l*oe*st for variabelen
+' checker om ligningen er helt løst for variabelen
 ' starter den med variabel= ?
-' indg*aa*r variabel p*aa* h*oe*jresiden af =tegn
+' indgår variabel på højresiden af =tegn
     On Error GoTo slut
     Dim NotSolved As Boolean
     Dim ea As New ExpressionAnalyser
     Dim var As String
-    Dim Arr As Variant
+    Dim arr As Variant
     If CASengine > 0 Then
         ea.SetTuborgBrackets
     End If
     Ligning = RemoveBrackets(Ligning)
-    Arr = Split(Ligning, "=")
+    arr = Split(Ligning, "=")
 
-    If UBound(Arr) = 1 Then    ' der er pr*ae*cis et =tegn
-        ea.text = Arr(1)    'h*oe*jresiden
+    If UBound(arr) = 1 Then    ' der er præcis et =tegn
+        ea.Text = arr(1)    'højresiden
         IsSolved = True
         Do
             var = ea.GetNextVar
-            ea.pos = ea.pos + 1
+            ea.Pos = ea.Pos + 1
             If var = variabel Then
-                IsSolved = False    'variabel fundet p*aa* h*oe*jresiden s*aa* er det ihvertfald ikke l*oe*st
+                IsSolved = False    'variabel fundet på højresiden så er det ihvertfald ikke løst
                 GoTo slut
             End If
         Loop Until var = ""
 
         If Left(Ligning, 1 + Len(variabel)) = variabel & "=" Then  '  ikke nok alene
             IsSolved = True
-        ElseIf Len(variabel) > 1 And Mid(Ligning, Len(variabel) + 1, 1) = "=" Then    ' hvis l*ae*ngde af variabel samme som venstresiden. N*oe*dvendig for variable som f.eks. 1+r da det kan *ae*ndres til r+1. Men nok ikke 100% sikker
+        ElseIf Len(variabel) > 1 And Mid(Ligning, Len(variabel) + 1, 1) = "=" Then    ' hvis længde af variabel samme som venstresiden. Nødvendig for variable som f.eks. 1+r da det kan ændres til r+1. Men nok ikke 100% sikker
             IsSolved = True
-        Else    ' det m*aa* antages at den ikke er l*oe*st hvis den ikke passer med noget ovenfor
+        Else    ' det må antages at den ikke er løst hvis den ikke passer med noget ovenfor
             IsSolved = False
         End If
     Else
@@ -7186,17 +7290,17 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
     End If
 
     GoTo slut
-fejl:
+Fejl:
     IsSolved = False
 slut:
 End Function
 
 Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Optional ByVal Sep As String = ",") As String
-' checker om en liste af ligninger er l*oe*st helt
-' true hvis en er l*oe*st, false hvis ingen. All hvis alle.
+' checker om en liste af ligninger er løst helt
+' true hvis en er løst, false hvis ingen. All hvis alle.
     Dim oneSolved As Boolean
     Dim allsolved As Boolean
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer
     oneSolved = False
     allsolved = True
@@ -7209,10 +7313,10 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
         If InStr(ligninger, "%if(") > 0 Then GoTo slut
 
         ligninger = RemoveBrackets(ligninger)
-        Arr = Split(ligninger, Sep)
+        arr = Split(ligninger, Sep)
 
-        For i = 0 To UBound(Arr)
-            If IsSolved(Arr(i), variabel) Then
+        For i = 0 To UBound(arr)
+            If IsSolved(arr(i), variabel) Then
                 oneSolved = True
             Else
                 allsolved = False
@@ -7233,7 +7337,7 @@ End Function
 
 Public Property Get KommandoerStreng() As Variant
     Dim i As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     If Kommando <> "" Then
         KommandoerStreng = Replace(Kommando, vbCr, "")
@@ -7245,7 +7349,7 @@ Public Property Get KommandoerStreng() As Variant
     End If
 
     GoTo slut
-fejl:
+Fejl:
     KommandoerStreng = ""
 slut:
 End Property
@@ -7261,10 +7365,10 @@ Private Function TrigFunction(Expr As String) As Boolean
 End Function
 Public Property Get AntalKom() As Integer
 ' antal ligninger/udtryk
-    On Error GoTo fejl
+    On Error GoTo Fejl
     AntalKom = UBound(Kommandoer) + 1
     GoTo slut
-fejl:
+Fejl:
     If Kommando <> "" Then
         AntalKom = 1
     Else
@@ -7276,7 +7380,7 @@ End Property
 Function CheckForError() As Boolean
     Dim UFerror As UserFormError
     Dim fejltekst As String
-    Dim pos As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
+    Dim Pos As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
     Dim t As String
     Dim deffejl As Boolean
     Dim ndeferror As Integer
@@ -7292,13 +7396,13 @@ Function CheckForError() As Boolean
         fejltekst = Sprog.SyntaxErrorLong
         CheckForError = True
     ElseIf InStr(MaximaOutput, "incorrectsyntax:Missing") > 0 Then
-        pos = InStr(MaximaOutput, "incorrectsyntax:Missing")
-        fejltekst = Sprog.SyntaxError & ". " & vbCrLf & Sprog.Missing & " " & Mid(MaximaOutput, pos + 22, 1)
+        Pos = InStr(MaximaOutput, "incorrectsyntax:Missing")
+        fejltekst = Sprog.SyntaxError & ". " & vbCrLf & Sprog.Missing & " " & Mid(MaximaOutput, Pos + 22, 1)
         deffejl = True
         CheckForError = True
     ElseIf InStr(MaximaOutput, "incorrectsyntax:Toomany") > 0 Then
-        pos = InStr(KommentarOutput, "incorrectsyntax:Toomany")
-        fejltekst = Sprog.SyntaxError & ". " & vbCrLf & Sprog.TooMany & " " & Mid(MaximaOutput, pos + 29, 1)
+        Pos = InStr(KommentarOutput, "incorrectsyntax:Toomany")
+        fejltekst = Sprog.SyntaxError & ". " & vbCrLf & Sprog.TooMany & " " & Mid(MaximaOutput, Pos + 29, 1)
         deffejl = True
         CheckForError = True
     ElseIf InStr(MaximaOutput, "isnotaprefixoperator") > 0 Then
@@ -7333,7 +7437,7 @@ Function CheckForError() As Boolean
         fejltekst = Sprog.LispError
         CheckForError = True
     ElseIf MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
-        fejltekst = Sprog.A(133) '"Du har bedt om at l*oe*se ligningen for en variabel der allerede er defineret. Inds*ae*t en 'slet def:' kommando f*oe*r ligningen"
+        fejltekst = Sprog.A(133) '"Du har bedt om at løse ligningen for en variabel der allerede er defineret. Indsæt en 'slet def:' kommando før ligningen"
         CheckForError = True
     ElseIf (omax.deffejl = True) Then
         fejltekst = Sprog.DefError & vbCrLf & VisDef
@@ -7349,7 +7453,7 @@ Function CheckForError() As Boolean
             Else
                 fejltekst = fejltekst & vbCrLf & vbCrLf & Sprog.DefError3
             End If
-            UFerror.TextBox_definitioner.text = DefinitionsNice
+            UFerror.TextBox_definitioner.Text = DefinitionsNice
         Else
             UFerror.TextBox_definitioner.visible = False
             UFerror.Label_definitioner.visible = False
@@ -7360,14 +7464,14 @@ Function CheckForError() As Boolean
 
 End Function
 
-Function GetErrorText(text As String) As String
-    Dim pos As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
+Function GetErrorText(Text As String) As String
+    Dim Pos As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
     Dim t As String
     Dim l As Integer
     On Error Resume Next
-    l = Len(text)
-    pos = InStr(MaximaOutput, "incorrectsyntax")
-    pos2 = InStr(pos, MaximaOutput, text)
+    l = Len(Text)
+    Pos = InStr(MaximaOutput, "incorrectsyntax")
+    pos2 = InStr(Pos, MaximaOutput, Text)
     pos4 = InStr(pos2 + l, MaximaOutput, "^")
     If pos4 < 1 Then
         pos4 = Len(MaximaOutput)

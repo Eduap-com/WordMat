@@ -1015,7 +1015,7 @@ Sub ReplaceTrigPow(ByVal var As String, ByVal replvar As String, Optional StartP
         Count = Count - 1
     Loop
 End Sub
-Function GetNextListItem(Optional ByVal spos As Long = 1, Optional Sep As String = "") As String
+Function GetNextListItem(Optional ByVal spos As Long = 0, Optional Sep As String = "") As String ' 1.26 spos default ændret til 0
 ' returnerer næste del af strengen indtil første separator som ikke er i parantes ([{
 ' ikke færdig
 Dim c As String

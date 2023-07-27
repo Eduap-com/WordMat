@@ -16,8 +16,8 @@ Attribute VB_Exposed = False
 
 Option Explicit
 Private Sub CommandButton_nulstil_Click()
-    TextBox_data.text = ""
-    TextBox_intervaller.text = ""
+    TextBox_data.Text = ""
+    TextBox_intervaller.Text = ""
 End Sub
 
 Private Sub CommandButton_ok_Click()
@@ -27,31 +27,31 @@ Dim v As Double
 Dim Min As Double
 Dim Max As Double
 Dim n As Integer
-Dim Arr As Variant
+Dim arr As Variant
 Dim arrdata As Variant
 Dim arrint As Variant
 Dim i As Integer
 Dim j As Integer
-On Error GoTo fejl
+On Error GoTo Fejl
 Me.Hide
 'Application.ScreenUpdating = False
-Data = TextBox_data.text
-intervaller = TextBox_intervaller.text
+Data = TextBox_data.Text
+intervaller = TextBox_intervaller.Text
 arrdata = Split(Data, vbCrLf)
 arrint = Split(intervaller, vbCrLf)
 n = UBound(arrint)
 
 If n > 0 Then
-' inds*ae*t data
+' indsæt data
 If CheckBox_data.Value = True Then
     Dim t As String
-    t = AppNavn & " grupperede talm*ae*ngden: { " & Replace(Data, vbCrLf, " " & ListSeparator & " ") & " }" & vbCrLf
+    t = AppNavn & " grupperede talmængden: { " & Replace(Data, vbCrLf, " " & ListSeparator & " ") & " }" & vbCrLf
     t = t & "i intervallerne: " & Replace(intervaller, vbCrLf, " " & ListSeparator & " ") & vbCrLf
     Selection.TypeText t
     Selection.Collapse wdCollapseEnd
 End If
 
-' inds*ae*t tabel
+' indsæt tabel
 Dim Tabel As Table
     ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=UBound(arrint) + 2, NumColumns:= _
         3, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
@@ -69,35 +69,35 @@ Set Tabel = Selection.Tables(1)
         .ApplyStyleColumnBands = False
     End With
 
-Tabel.Cell(1, 1).Range.text = "Fra"
-Tabel.Cell(1, 2).Range.text = "Til"
-Tabel.Cell(1, 3).Range.text = "Hyppighed"
+Tabel.Cell(1, 1).Range.Text = "Fra"
+Tabel.Cell(1, 2).Range.Text = "Til"
+Tabel.Cell(1, 3).Range.Text = "Hyppighed"
 Tabel.Columns.Width = 50
 
 ' fyld tabel med data
 For i = 0 To n
-    Arr = Split(arrint(i), "-")
-    Min = Arr(0)
-    If UBound(Arr) = 0 Then
-        If Trim(Arr(0)) = "" Then
+    arr = Split(arrint(i), "-")
+    Min = arr(0)
+    If UBound(arr) = 0 Then
+        If Trim(arr(0)) = "" Then
             
         Else
-            GoTo fejl
+            GoTo Fejl
         End If
     End If
-    Max = Arr(1)
-    Tabel.Cell(i + 2, 1).Range.text = Min
-    Tabel.Cell(i + 2, 2).Range.text = Max
-    Tabel.Cell(i + 2, 3).Range.text = 0
+    Max = arr(1)
+    Tabel.Cell(i + 2, 1).Range.Text = Min
+    Tabel.Cell(i + 2, 2).Range.Text = Max
+    Tabel.Cell(i + 2, 3).Range.Text = 0
     For j = 0 To UBound(arrdata)
         On Error Resume Next
         If Trim(arrdata(j)) <> "" Then
             arrdata(j) = Replace(arrdata(j), ",", ".")
             v = CDbl(arrdata(j))
             v = val(arrdata(j))
-            On Error GoTo fejl
+            On Error GoTo Fejl
             If v > Min And v <= Max Then
-                Tabel.Cell(i + 2, 3).Range.text = val(Tabel.Cell(i + 2, 3).Range.text) + 1
+                Tabel.Cell(i + 2, 3).Range.Text = val(Tabel.Cell(i + 2, 3).Range.Text) + 1
             End If
         End If
     Next
@@ -105,7 +105,7 @@ Next
 End If
 
 GoTo slut
-fejl:
+Fejl:
     MsgBox "Der er en fejl i dine intervaller. Hver linje skal indeholde interval f.eks. 5-10.", vbOKOnly, Sprog.Error
 slut:
 End Sub

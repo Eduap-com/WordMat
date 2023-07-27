@@ -7,7 +7,7 @@ Option Explicit
 Const VBAModulesFolder = "VBA-modules" ' the subfolder to import and export modules from/to
 
 Sub ReplaceToASCIIseq()
-   Dim VBC As Object  'VBComponent
+   Dim VBC As Object 'VBComponent
    Dim i As Long, s As String
    
    If MsgBox("Do you want to replace all codetext to ASCII-sequences of 4 characters?" & vbCrLf & vbCrLf & "After use you can open on both Mac and Windows" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
@@ -16,10 +16,15 @@ Sub ReplaceToASCIIseq()
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
 '      If VBC.Name = "CSprog" Then
 '        If MsgBox(VBC.Name, vbOKCancel, "Continue") = vbCancel Then Exit Sub
-         For i = 2 To VBC.CodeModule.CountOfLines
+         For i = 1 To VBC.CodeModule.CountOfLines
+            If i > VBC.CodeModule.CountOfLines Then Exit For
             s = ReplaceLineToASCIIseq(VBC.CodeModule.Lines(i, 1))
-            VBC.CodeModule.DeleteLines i, 1
-            VBC.CodeModule.InsertLines i, s
+            If s <> "" Or i > 2 Then
+                VBC.CodeModule.DeleteLines i, 1
+                VBC.CodeModule.InsertLines i, s
+            Else
+                VBC.CodeModule.DeleteLines i, 1 ' import/export introduces a blank line at the top of the code for forms. This removes these blank lines
+            End If
          Next
       End If
    Next
@@ -28,23 +33,24 @@ Sub ReplaceToASCIIseq()
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
 Sub ReplaceToExtendedASCII()
-   Dim VBC As Object  'VBComponent
-   Dim i As Long, s As String
+    Dim VBC As Object  'VBComponent
+    Dim i As Long, s As String
    
-   If MsgBox("Do you want to replace all codetext to extended ASCII?" & vbCrLf & vbCrLf & "After use you can distribute the document" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
+    If MsgBox("Do you want to replace all codetext to extended ASCII?" & vbCrLf & vbCrLf & "After use you can distribute the document" & vbCrLf & vbCrLf & "The conversion can take 5-10s. You will be prompted upon completion", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
    
-   For Each VBC In ActiveDocument.VBProject.VBComponents
+    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
-'      If VBC.Name = "CSprog" Then
+            '      If VBC.Name = "CSprog" Then
         
-         For i = 2 To VBC.CodeModule.CountOfLines
-            s = ReplaceLineToExtendedASCII(VBC.CodeModule.Lines(i, 1))
-            VBC.CodeModule.DeleteLines i, 1
-            VBC.CodeModule.InsertLines i, s
-         Next
-      End If
-   Next
-'   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
+            For i = 1 To VBC.CodeModule.CountOfLines
+                If i > VBC.CodeModule.CountOfLines Then Exit For
+                s = ReplaceLineToExtendedASCII(VBC.CodeModule.Lines(i, 1))
+                VBC.CodeModule.DeleteLines i, 1
+                If s <> "" Or i > 2 Then VBC.CodeModule.InsertLines i, s
+            Next
+        End If
+    Next
+    '   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
 
@@ -208,11 +214,10 @@ Public Sub ExportAllModules()
     szSourceWorkbook = ActiveDocument.Name
     Set wkbSource = Application.ActiveDocument
     
-    If wkbSource.VBProject.Protection = 1 Then
-    MsgBox "The VBA in this workbook is protected," & _
-        "not possible to export the code"
-    Exit Sub
-    End If
+'    If wkbSource.VBProject.Protection = 1 Then ' dette check kan få Word til at crashe
+'      MsgBox "The VBA in this workbook is protected, not possible to export the code", vbOKOnly, "Error"
+'      Exit Sub
+'    End If
     
     szExportPath = FolderWithVBAProjectFiles '& "\"
     
@@ -221,7 +226,7 @@ Public Sub ExportAllModules()
         bExport = True
         szFileName = cmpComponent.Name
 
-    ' nër der importeres oveni VBAmodul omdËbes til VBAmodul1. Det _ndres tilbage
+    ' nïr der importeres oveni VBAmodul omdbes til VBAmodul1. Det _ndres tilbagee
         If cmpComponent.Name = "VBAmodul1" Then cmpComponent.Name = "VBAmodul"
         If cmpComponent.Name = "VBAmodul11" Then cmpComponent.Name = "VBAmodul"
 
@@ -266,7 +271,7 @@ Sub ImportAllModules()
     Dim szExportPath As String
     Dim szFileName As String
     Dim StrFile As String, i As Integer
-    Dim Arr() As String, FileList As String, MBP As Integer
+    Dim arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
 
 #If Mac Then
@@ -308,7 +313,7 @@ Sub ImportAllModules()
         End If
         StrFile = Dir
     Loop
-    Arr = Split(FileList, vbCrLf)
+    arr = Split(FileList, vbCrLf)
 '    FileList = Replace(FileList, vbCrLf, " | ")
     q = ""
     If Not ActiveDocument.Saved Then
@@ -333,9 +338,9 @@ Sub ImportAllModules()
     
    DeleteAllModules False
     
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" And InStr(Arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
-            wkbSource.VBProject.VBComponents.Import szExportPath & Arr(i)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" And InStr(arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
+            wkbSource.VBProject.VBComponents.Import szExportPath & arr(i)
         End If
     Next
     

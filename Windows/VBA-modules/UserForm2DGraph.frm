@@ -2277,7 +2277,7 @@ Dim i As Integer
         End If
         End If
     Next
-    If var <> "" Then
+    If var <> "" And var <> "if" And var <> "then" And var <> "else" And var <> "elseif" And var <> "and" Then
 '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
         If Len(TextBox_definitioner.Text) > 0 Then
             TextBox_definitioner.Text = TextBox_definitioner.Text & VbCrLfMac
@@ -2471,7 +2471,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

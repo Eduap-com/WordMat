@@ -26,7 +26,7 @@ Private mshowassum As Boolean
 Private mpolaroutput As Boolean
 Private mgraphapp As Integer
 Private mlanguage As Integer
-Private mlmset As Boolean ' l*oe*sninger som l*oe*sningsm*ae*ngde
+Private mlmset As Boolean ' løsninger som løsningsmængde
 Private mdasdiffchr As Boolean
 Private mlatexstart As String
 Private mlatexslut As String
@@ -75,7 +75,7 @@ On Error Resume Next
     mpolaroutput = CBool(GetRegSetting("PolarOutput"))
     mgraphapp = CInt(GetRegSettingLong("GraphApp"))
 #If Mac Then
-    If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot er pt afskaffet, s*aa* der bruges webapp
+    If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot er pt afskaffet, så der bruges webapp
 #End If
     mlanguage = CInt(GetRegSettingLong("Language"))
     mdasdiffchr = CBool(GetRegSetting("dAsDiffChr"))
@@ -126,7 +126,7 @@ On Error Resume Next
     SettingsRead = True
 End Sub
 Public Sub SetAllDefaultRegistrySettings()
-' s*ae*tter alle indstillinger til default, men kun hvis de ikke eksisterer i forvejen
+' sætter alle indstillinger til default, men kun hvis de ikke eksisterer i forvejen
 On Error Resume Next
     If Not RegKeyExists("HKCU\SOFTWARE\WORDMAT\Settings\Forklaring") Then
 '    If MsgBox("Indstillingerne kan ikke findes. Vil du genoprette og nulstille alle indstillinger?", vbOKCancel, Sprog.Error) Then
@@ -215,9 +215,9 @@ End Property
 Public Property Get Radians() As Boolean
     Radians = mradians
 End Property
-Public Property Let Radians(ByVal text As Boolean)
-    SetRegSetting "Radians", Abs(CInt(text))
-    mradians = text
+Public Property Let Radians(ByVal Text As Boolean)
+    SetRegSetting "Radians", Abs(CInt(Text))
+    mradians = Text
 End Property
 Public Property Get MaximaCifre() As Integer
     If mcifre > 1 Then
@@ -331,37 +331,37 @@ End Property
 Public Property Get EqNumPlacement() As Boolean
     EqNumPlacement = meqnumplacement
 End Property
-Public Property Let EqNumPlacement(ByVal text As Boolean)
-    SetRegSetting "EqNumPlacement", Abs(CInt(text))
-    meqnumplacement = text
+Public Property Let EqNumPlacement(ByVal Text As Boolean)
+    SetRegSetting "EqNumPlacement", Abs(CInt(Text))
+    meqnumplacement = Text
 End Property
 Public Property Get EqNumType() As Boolean
     EqNumType = meqnumtype
 End Property
-Public Property Let EqNumType(ByVal text As Boolean)
-    SetRegSetting "EqNumType", Abs(CInt(text))
-    meqnumtype = text
+Public Property Let EqNumType(ByVal Text As Boolean)
+    SetRegSetting "EqNumType", Abs(CInt(Text))
+    meqnumtype = Text
 End Property
 Public Property Get EqAskRef() As Boolean
     EqAskRef = maskref
 End Property
-Public Property Let EqAskRef(ByVal text As Boolean)
-    SetRegSetting "EqAskRef", Abs(CInt(text))
-    maskref = text
+Public Property Let EqAskRef(ByVal Text As Boolean)
+    SetRegSetting "EqAskRef", Abs(CInt(Text))
+    maskref = Text
 End Property
 
 
 Public Property Get OutUnits() As String
     OutUnits = moutunits
 End Property
-Public Property Let OutUnits(ByVal text As String)
-    text = Replace(text, "kwh", "kWh")
-    text = Replace(text, "hz", "Hz")
-    text = Replace(text, "HZ", "Hz")
-    text = Replace(text, "bq", "Bq")
-    text = Replace(text, "ev", "eV")
-    SetRegSettingString "OutUnits", text
-    moutunits = text
+Public Property Let OutUnits(ByVal Text As String)
+    Text = Replace(Text, "kwh", "kWh")
+    Text = Replace(Text, "hz", "Hz")
+    Text = Replace(Text, "HZ", "Hz")
+    Text = Replace(Text, "bq", "Bq")
+    Text = Replace(Text, "ev", "eV")
+    SetRegSettingString "OutUnits", Text
+    moutunits = Text
 End Property
 Public Property Get AutoStart() As Boolean
     AutoStart = mautostart
@@ -434,9 +434,9 @@ End Property
 Public Property Get dAsDiffChr() As Boolean
     dAsDiffChr = mdasdiffchr
 End Property
-Public Property Let dAsDiffChr(ByVal text As Boolean)
-    SetRegSetting "dAsDiffChr", Abs(CInt(text))
-    mdasdiffchr = text
+Public Property Let dAsDiffChr(ByVal Text As Boolean)
+    SetRegSetting "dAsDiffChr", Abs(CInt(Text))
+    mdasdiffchr = Text
 End Property
 Public Property Get LatexStart() As String
     LatexStart = mlatexstart
@@ -455,16 +455,16 @@ End Property
 Public Property Get LatexUnits() As Boolean
     LatexUnits = mlatexunits
 End Property
-Public Property Let LatexUnits(ByVal text As Boolean)
-    SetRegSetting "LatexUnits", Abs(CInt(text))
-    mlatexunits = text
+Public Property Let LatexUnits(ByVal Text As Boolean)
+    SetRegSetting "LatexUnits", Abs(CInt(Text))
+    mlatexunits = Text
 End Property
 Public Property Get ConvertTexWithMaxima() As Boolean
     ConvertTexWithMaxima = mConvertTexWithMaxima
 End Property
-Public Property Let ConvertTexWithMaxima(ByVal text As Boolean)
-    SetRegSetting "ConvertTexWithMaxima", Abs(CInt(text))
-    mConvertTexWithMaxima = text
+Public Property Let ConvertTexWithMaxima(ByVal Text As Boolean)
+    SetRegSetting "ConvertTexWithMaxima", Abs(CInt(Text))
+    mConvertTexWithMaxima = Text
 End Property
 Public Property Get LatexWordMargins() As Boolean
     LatexWordMargins = mLatexWordMargins
@@ -514,18 +514,18 @@ End Property
 
 Public Property Get LatexPreamble() As String
    If mLatexPreamble = "" Then
-      Dim filnavn As String
-      filnavn = Environ("AppData") & "\WordMat\WordMatLatexPreamble.tex"
-      If Dir(filnavn) <> "" Then mLatexPreamble = ReadTextfileToString(filnavn)
+      Dim Filnavn As String
+      Filnavn = Environ("AppData") & "\WordMat\WordMatLatexPreamble.tex"
+      If Dir(Filnavn) <> "" Then mLatexPreamble = ReadTextfileToString(Filnavn)
    End If
    LatexPreamble = mLatexPreamble
 End Property
 Public Property Let LatexPreamble(ByVal preAmble As String)
-    Dim filnavn As String
+    Dim Filnavn As String
     mLatexPreamble = preAmble
-    filnavn = Environ("AppData") & "\WordMat\WordMatLatexPreamble.tex"
-    If Dir(filnavn) <> "" Then Kill filnavn
-    WriteTextfileToString filnavn, preAmble
+    Filnavn = Environ("AppData") & "\WordMat\WordMatLatexPreamble.tex"
+    If Dir(Filnavn) <> "" Then Kill Filnavn
+    WriteTextfileToString Filnavn, preAmble
 End Property
 Public Property Get LatexSectionNumbering() As Boolean
     LatexSectionNumbering = mLatexSectionNumbering

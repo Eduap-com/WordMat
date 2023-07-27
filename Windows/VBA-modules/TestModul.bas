@@ -27,6 +27,7 @@ Sub RunTestSequence()
     On Error GoTo Fejl
     ErrCount = 0
     TestCount = 0
+    ContCount = 0
     visok = True
     
     If MsgBox("Are you sure want to conduct a test. The document will be filled with calculations. It can take some time.", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
@@ -321,9 +322,11 @@ ggbtest:
     If StopNow Then GoTo slut
     TestBeregn "log_4" & VBA.ChrW(8289) & "a", "=ln(a)/ln(4)"
     If StopNow Then GoTo slut
-    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(x_0)+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)" ' Test af forkert placerede skjulte parenteser
+'    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(x_0)+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)" ' Test af forkert placerede skjulte parenteser
+    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(1/180 x_0 " & VBA.ChrW(960) & ")+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)"
     If StopNow Then GoTo slut
-    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(x_0)-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
+'    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(x_0)-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
+    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(1/180 x_0 " & VBA.ChrW(960) & ")-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
     If StopNow Then GoTo slut
         
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
@@ -360,20 +363,23 @@ Function StopNow() As Boolean
     If ErrCount = 5 And ContCount = 0 Then
         If MsgBox("5 errors detected. Do you want to continue?", vbYesNo, "Many errors") = vbNo Then
             StopNow = True
-            ContCount = ContCount + 1
             Exit Function
-        End If
+         Else
+            ContCount = ContCount + 1
+         End If
     ElseIf ErrCount = 10 And ContCount <= 1 Then
         If MsgBox("10 errors detected. Do you still want to continue?", vbYesNo, "Many errors") = vbNo Then
             StopNow = True
-            ContCount = ContCount + 1
             Exit Function
+         Else
+            ContCount = ContCount + 1
         End If
     ElseIf ErrCount = 50 And ContCount <= 2 Then
         If MsgBox("50 errors detected. Do you still want to continue?", vbYesNo, "Many errors") = vbNo Then
             StopNow = True
-            ContCount = ContCount + 1
             Exit Function
+         Else
+            ContCount = ContCount + 1
         End If
     End If
     StopNow = False
@@ -392,11 +398,13 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
         UfWait2.Label_tip.Caption = komm & vbCrLf & Instruk
     End If
     InsertTestMath komm
+    DoEvents
     If TestType = 1 Then
         beregn
     ElseIf TestType = 2 Then
         MaximaSolvePar (var)
     End If
+    Wait 0.5
     MoveCursorToEndOfCalculation
         
     If TestType = 1 Then ' ved beregn skrives resultatet sammen med input, så sammenligning ryger
@@ -508,6 +516,7 @@ End Sub
 Sub TestSolve(komm As String, var As String, resul As String, Optional Instruk As String)
     PerformTest 2, komm, resul, var, Instruk
     Exit Sub
+    
     Dim s As String
     s = TestCount & ": Solving equation" & vbCrLf & "Error count: " & ErrCount
     UfWait2.Label1.Caption = s
@@ -543,7 +552,9 @@ End Sub
 
 Sub TestSolve2(komm As String, var As String, resul As String)
     omax.Kommando = komm
+    DoEvents
     omax.MaximaSolve (var)
+    Wait 0.5
     If Not omax.MaximaOutput = resul Then
         Selection.TypeText (" - Fejl - " & omax.Kommando & " - " & omax.MaximaOutput)
         Selection.TypeParagraph
@@ -578,6 +589,7 @@ Sub InsertTestMath(s As String)
     Set mo = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText s
     mo.OMaths.BuildUp
+    DoEvents
 End Sub
 Sub MoveCursorToEndOfCalculation(Optional AddLine As Boolean = True)
     If Not Selection.Find.Execute("*^13^13", , , True) Then

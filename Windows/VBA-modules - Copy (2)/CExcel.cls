@@ -10,9 +10,9 @@ Attribute VB_Exposed = False
 Option Explicit
 'Public XLapp As excel.Application
 Public XLapp As Object ' getobject metoden gav problemer med at man ikke vidste hvilken
-                        ' excel app der kom retur. Fidusen var ellers at g*oe*re det hurtigere
-                        ' hvis Excel allerede var *aa*ben.
-                        ' men det virker ikke stabilt. WordMat skal have sin egen excel.app k*oe*rende
+                        ' excel app der kom retur. Fidusen var ellers at gøre det hurtigere
+                        ' hvis Excel allerede var åben.
+                        ' men det virker ikke stabilt. WordMat skal have sin egen excel.app kørende
                         
 'Public xlwb As Excel.Workbook
 Public xlwb As Object
@@ -45,7 +45,7 @@ End If
 XLapp.visible = vis
 Set xlwb = XLapp.Workbooks.Add
 End Sub
-Sub LoadFile(filnavn As String)
+Sub LoadFile(Filnavn As String)
 Dim wordmatsti As String
 On Error Resume Next
 If XLapp Is Nothing Then
@@ -62,7 +62,7 @@ XLapp.visible = vis
 '    Set XLapp = CreateObject("Excel.Application")
 'End If
     XLapp.visible = True
-wordmatsti = GetProgramFilesDir & "\WordMat\ExcelFiles\" & filnavn & ""
+wordmatsti = GetProgramFilesDir & "\WordMat\ExcelFiles\" & Filnavn & ""
 If Dir(wordmatsti) <> "" Then
     Set xlwb = XLapp.Workbooks.Add(wordmatsti)
 End If
@@ -70,11 +70,11 @@ End If
 
 End Sub
 Public Sub CloseExcel()
-On Error GoTo fejl
+On Error GoTo Fejl
 xlwb.Close False ' close the workbook without saving
 XLapp.quit ' close the Excel application
 
-fejl:
+Fejl:
 Set xlwb = Nothing
 Set XLapp = Nothing
 
@@ -104,7 +104,7 @@ If Err.Number <> 0 Then
 '    Set XLapp = New excel.Application
 End If
 GoTo slut
-fejl:
+Fejl:
     RestartExcel
 slut:
 End Sub
@@ -120,8 +120,8 @@ On Error Resume Next
     XLapp.ScreenUpdating = True
     XLapp.DisplayAlerts = True
 End Sub
-Function InsertIndlejret(filnavn As String, Optional startark As String)
-'inds*ae*tter exceldokument som indlejret dokument
+Function InsertIndlejret(Filnavn As String, Optional startark As String)
+'indsætter exceldokument som indlejret dokument
 Dim path As String
 Dim ils As InlineShape
 Dim vers As String
@@ -137,12 +137,12 @@ EnableExcelMacros
     
 '    Dim ufwait2 As New UserFormWaitForMaxima
 '    ufwait2.CommandButton_stop.visible = False
-'    ufwait2.Label_tip.Caption = "      Inds*ae*tter indlejret..."
-'    ufwait2.Label_progress.Caption = "Inds*ae*tning af indlejrede objekter kan tage tid. Dobbeltklik p*aa* objektet for at redigere det."
+'    ufwait2.Label_tip.Caption = "      Indsætter indlejret..."
+'    ufwait2.Label_progress.Caption = "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
 '    ufwait2.Show vbModeless
         DoEvents
 '        ufwait2.Label_progress = "***"
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & filnavn & """"
+path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & Filnavn & """"
     If Selection.Range.Tables.Count > 0 Then
 '        Selection.Copy
         Selection.Tables(Selection.Tables.Count).Select
@@ -185,7 +185,7 @@ End If
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
 GoTo slut
-fejl:
+Fejl:
     On Error Resume Next
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 '    Unload ufwait2
@@ -225,13 +225,13 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
 '    Next
 '    Next
     
-    't*ae*l r*ae*kker sammen
+    'tæl rækker sammen
     For i = 1 To r
         ws.Cells(i + 2, c + 2).Formula = "=sum(R" & i + 2 & "C2:R" & i + 2 & "C" & c + 1 & ")"
         ws.Range(ws.Cells(i + 2, c + 2), ws.Cells(i + 2, c + 2)).BorderAround ColorIndex:=1, Weight:=xlThin
     Next
     
-    't*ae*l kolonner sammen
+    'tæl kolonner sammen
     For i = 1 To c
         ws.Cells(r + 3, i + 1).Formula = "=sum(R3C" & i + 1 & ":R" & r + 2 & "C" & i + 1 & ")"
         ws.Range(ws.Cells(r + 3, i + 1), ws.Cells(r + 3, i + 1)).BorderAround ColorIndex:=1, Weight:=xlThin
@@ -240,7 +240,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     ws.Cells(r + 3, c + 2).Formula = "=sum(R" & r + 3 & "C2:R" & r + 3 & "C" & c + 1 & ")"
     ws.Range(ws.Cells(r + 3, c + 2), ws.Cells(r + 3, c + 2)).BorderAround ColorIndex:=1, Weight:=xlThin
     
-    ' forventede v*ae*rdier
+    ' forventede værdier
     For i = 3 To r + 2
     For j = 2 To c + 1
 '        ws.Cells(i, c + 2 + j).Formula = ws.Cells(r + 1, j).Value * ws.Cells(i, c + 1).Value / ws.Cells(r + 1, c + 1).Value
@@ -250,13 +250,13 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     Next
     Next
     
-    't*ae*l r*ae*kker sammen
+    'tæl rækker sammen
     For i = 1 To r
         ws.Cells(i + 2, 2 * c + 4).Formula = "=sum(R" & i + 2 & "C" & c + 4 & ":R" & i + 2 & "C" & 2 * c + 3 & ")"
         ws.Range(ws.Cells(i + 2, 2 * c + 4), ws.Cells(i + 2, 2 * c + 4)).BorderAround ColorIndex:=1, Weight:=xlThin
     Next
     
-    't*ae*l kolonner sammen
+    'tæl kolonner sammen
     For i = 1 To c + 1
         ws.Cells(r + 3, i + 3 + c).Formula = "=sum(R3C" & i + 3 + c & ":R" & r + 2 & "C" & i + 3 + c & ")"
         ws.Range(ws.Cells(r + 3, i + 3 + c), ws.Cells(r + 3, i + 3 + c)).BorderAround ColorIndex:=1, Weight:=xlThin
@@ -265,7 +265,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
 '    ws.Cells(r + 3, c + 2).Formula = "=sum(R" & r + 3 & "C2:R" & r + 3 & "C" & c + 1 & ")"
     
     ws.Calculate
-    ' Chi2 beregning af p-v*ae*rdi
+    ' Chi2 beregning af p-værdi
 '    ws.Cells(2, 2 * c + 4).Formula = "=a1"
 '    ws.Cells(2, 2 * c + 4).Formula = "=CHITEST(R1C1:R2C2;R1C5:R2C6)"
 '    ws.Cells(2, 8).Formula = "=sum(A1:B2)"
@@ -352,7 +352,7 @@ Dim n As Integer
 Dim oFS As Integer
 Dim r As Range
 
-On Error GoTo fejl
+On Error GoTo Fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -364,16 +364,16 @@ If Selection.Range.End > Selection.Tables(1).Range.End Then
     Selection.End = Selection.Tables(1).Range.End
 End If
 
-If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel ogs*aa* er valgt
+If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel også er valgt
     Set rws = Selection.Rows
     oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
 Else
     Set rws = Selection.Columns
-    oFS = Selection.Cells(1).Row.Index - 1 ' r*ae*kke hvor selection starter
+    oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
 End If
 n = rws.Count
 
-If n < 2 Then ' hvis intet valgt p*aa* forh*aa*nd
+If n < 2 Then ' hvis intet valgt på forhånd
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
         oFS = 0
@@ -385,7 +385,7 @@ If n < 2 Then ' hvis intet valgt p*aa* forh*aa*nd
     On Error Resume Next
     For i = 1 To n ' bestem hvor der ligger tal
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.text
+        cellval = rws(i).Cells(j).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         tal = CDbl(cellval)
@@ -400,7 +400,7 @@ If n < 2 Then ' hvis intet valgt p*aa* forh*aa*nd
 End If
 
 If n < 2 Then
-    GoTo fejl
+    GoTo Fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -412,13 +412,13 @@ End If
     For j = 1 To n
         i = i + 1
 
-        cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
+        cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         Tabel(i, 1) = CDbl(cellval) ' skal med for at melde fejl , men alene duer ikke da den er afh af sprog indstill
         Tabel(i, 1) = val(cellval) 'melder ikke fejl ved bogstaver
-        cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
+        cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
@@ -435,7 +435,7 @@ End If
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 

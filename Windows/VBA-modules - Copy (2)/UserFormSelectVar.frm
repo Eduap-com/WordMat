@@ -28,8 +28,8 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo fejl
-Dim Arr As Variant
+On Error GoTo Fejl
+Dim arr As Variant
 Dim i As Integer
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
@@ -43,31 +43,31 @@ Dim i As Integer
     MaximaVidNotation = CheckBox_vidnotation.Value
     MaximaCifre = ComboBox_cifre.Value
     If MaximaUnits Then
-        If OutUnits <> TextBox_outunits.text Then
-            OutUnits = TextBox_outunits.text
+        If OutUnits <> TextBox_outunits.Text Then
+            OutUnits = TextBox_outunits.Text
 '            omax.MaximaInputStreng = omax.MaximaInputStreng & "uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
 '            If TextBox_outunits.text <> "" Then omax.MaximaInputStreng = omax.MaximaInputStreng & "setunits(" & omax.ConvertUnits(TextBox_outunits.text) & ")$"
         End If
     End If
     
-    If TextBox_variabel.text = "" Then
+    If TextBox_variabel.Text = "" Then
         SelectedVar = Svars(ListBox_vars.ListIndex)
 '        SelectedVar = ListBox_vars.value
     Else
-        SelectedVar = TextBox_variabel.text
+        SelectedVar = TextBox_variabel.Text
     End If
     
-    TempDefs = TextBox_def.text
+    TempDefs = TextBox_def.Text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
 
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der l*oe*ses for
-                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
+            If Split(arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
+                TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & SelectedVar & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
@@ -75,7 +75,7 @@ Dim i As Integer
         End If
     Next
     
-    ' Hvis units er on s*aa* m*aa* man ikke l*oe*se for en enhed
+    ' Hvis units er on så må man ikke løse for en enhed
     If MaximaUnits Then
         If InStr("A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s", SelectedVar) Then
             MsgBox Sprog.A(254), vbOKOnly, Sprog.Warning
@@ -99,7 +99,7 @@ Dim i As Integer
     End If
     
     GoTo slut
-fejl:
+Fejl:
     SelectedVar = ""
 slut:
     UFSelectVar.Hide
@@ -131,7 +131,7 @@ Dim i As Integer, svar As String
         Label_unitwarning.visible = True
         Label_enheder.visible = True
         TextBox_outunits.visible = True
-        TextBox_outunits.text = OutUnits
+        TextBox_outunits.Text = OutUnits
     Else
         Label_unitwarning.visible = False
         Label_enheder.visible = False
@@ -159,7 +159,7 @@ Dim i As Integer, svar As String
 
     SelectedVar = ""
     ListBox_vars.Clear
-    TextBox_variabel.text = ""
+    TextBox_variabel.Text = ""
     Svars = Split(vars, ";")
     
     ' definitioner vises
@@ -180,7 +180,7 @@ Dim i As Integer, svar As String
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
             ListBox_vars.AddItem (svar)
-            If UBound(Svars) > 0 Then TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac               ' midlertidige definitioner
+            If UBound(Svars) > 0 Then TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac               ' midlertidige definitioner
         End If
     Next
     If ListBox_vars.ListCount > 0 Then

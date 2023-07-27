@@ -2635,7 +2635,7 @@ Sub Wait(pausetime As Variant)
 End Sub
 
 Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As String
-' Castype=0 is maxima, CasType=1/2 is GeoGebra (geogebra friendly. still needs cenvertToGeogebraSyntax)
+' Castype=0 is maxima, CasType=1/2 is GeoGebra (geogebra friendly. still needs convertToGeogebraSyntax)
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     Dim Pos As Long
@@ -3075,36 +3075,69 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     '    Loop While pos > 0
 
 
-'    ' stykkevise funktioner defineret med en tuborg parantes. Ikke færdig. Et problem at der indsættes gangetegn i koden senere hen
-'    ea.Text = Text
-'    ea.SetNormalBrackets
-'    i = 0
-'    Do
-'        pos = InStr(ea.Text, "{" & VBA.ChrW(9608))
-'        If pos > 0 Then
-'
-''            pos2 = InStr(pos, ea.Text, VBA.ChrW(9508))
-''            expr = Mid(ea.Text, pos + 2, pos2 - pos - 1)
-'            expr = ea.GetNextBracketContent(pos)
-'            arr2 = Split(expr, "@")
-'            If InStr(expr, ", ") > 0 Then
-'                c = ", "
-'            Else
-'                c = " ,"
-'            End If
-'            s = "(if "
-'            For j = 0 To UBound(arr2)
-'                arr3 = Split(arr2(j), c)
-'                If UBound(arr3) > 0 Then
-'                    s = s & arr3(1) & " then " & arr3(0)
-'                End If
-'                If j < UBound(arr2) Then s = s & " elseif "
-'            Next
-'            ea.Text = Left(ea.Text, pos - 1) & s & ")" & Right(ea.Text, Len(ea.Text) - pos - Len(expr) - 3)
-'            i = i + 1
-'        End If
-'    Loop While pos > 0 And i < 1000
-'    Text = ea.Text
+'  stykkevis definerede funktioner defineret med en tuborg parantes.
+   Dim ass As String, k As Long
+    ea.Text = Text
+    ea.SetNormalBrackets
+    i = 0
+    Do
+        Pos = InStr(ea.Text, "{" & VBA.ChrW(9608))
+        If Pos > 0 Then
+
+'            pos2 = InStr(pos, ea.Text, VBA.ChrW(9508))
+'            expr = Mid(ea.Text, pos + 2, pos2 - pos - 1)
+            Expr = ea.GetNextBracketContent(Pos)
+            arr2 = Split(Expr, "@")
+            s = "(if&&"
+            For j = 0 To UBound(arr2)
+               If InStr(arr2(j), ";") > 0 Then
+                  c = ";"
+               ElseIf InStr(arr2(j), ", ") > 0 Then
+                  c = ", "
+               ElseIf InStr(arr2(j), " ,") > 0 Then
+                  c = " ,"
+               ElseIf InStr(arr2(j), ",") > 0 Then
+                  c = ","
+               ElseIf InStr(arr2(j), "|") > 0 Then
+                  c = "|"
+               Else
+                  c = ""
+               End If
+                arr3 = Split(arr2(j), c)
+                  If UBound(arr3) > 1 Then
+                     k = 1
+                     ass = ""
+                     Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
+                        If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
+                           If ass = "" Then
+                              ass = arr3(k)
+                           Else
+                              ass = ass & c & arr3(k)
+                           End If
+                        Else
+                           arr3(0) = arr3(0) & c & arr3(k)
+                        End If
+                        k = k + 1
+                     Loop
+                  ElseIf UBound(arr3) = 1 Then
+                     ass = arr3(1)
+                  End If
+                If UBound(arr3) > 0 Then
+                  If CasType = 0 Then
+                    s = s & sqbrAssump(SplitAssump(Trim(ass))) & "&&then&&(" & Trim(arr3(0)) & ")"
+                  Else
+                    s = s & ass & "&&then&&(" & Trim(arr3(0)) & ")"
+                  End If
+               Else
+                    s = s & "0=0&&then&&(" & Trim(arr3(0)) & ")"
+                End If
+                If j < UBound(arr2) Then s = s & "&&elseif&&"
+            Next
+            ea.Text = Left(ea.Text, Pos - 1) & s & ")" & right(ea.Text, Len(ea.Text) - Pos - Len(Expr) - 3)
+            i = i + 1
+        End If
+    Loop While Pos > 0 And i < 1000
+    Text = ea.Text
     
 
     ' |x| -> abs(x) '
@@ -4111,6 +4144,7 @@ spring:
         Text = Replace(Text, VBA.ChrW(937), "Omega")    ' omega
     End If
 
+    Text = Replace(Text, "&&", " ") ' metode til at omgå automatisk gangetegn. Bruges med stykkevise defineret funktioner
 
     '    text = Replace(text, VBA.ChrW(8744), ",")  og
     '    text = Replace(text, VBA.ChrW(8743), ",") eller
@@ -6892,75 +6926,72 @@ Function AddDefinition(s As String) As String
                defenk = Replace(defenk, VBA.ChrW(9618), "") ' funktionstegn
                defenk = Replace(defenk, VBA.ChrW(12310), "(") ' skjulte parenteser
                defenk = Replace(defenk, VBA.ChrW(12311), ")") ' skjulte parenteser
-            ElseIf InStr(defenk, VBA.ChrW(9608)) > 0 And InStr(defenk, VBA.ChrW(9508)) > 0 Then ' tuborg parentes
-            
-               ea2.Text = defenk
-               ea2.SetNormalBrackets
-               i = 0
-               Do
-                  Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
-                  If Pos > 0 Then
-                     ea2.Text = Replace(ea2.Text, ")=", "):=", 1, Pos)
-                     Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
-                     pos2 = InStr(Pos, ea2.Text, VBA.ChrW(9508))
-                     
-                     Expr = Mid(ea2.Text, Pos + 2, pos2 - Pos - 1)
-                     Expr = ea2.GetNextBracketContent(Pos)
-                     arr2 = Split(Expr, "@")
-                     t = "(if "
-                     For j = 0 To UBound(arr2)
-                        If InStr(arr2(j), ";") > 0 Then
-                           c = ";"
-                        ElseIf InStr(arr2(j), ", ") > 0 Then
-                           c = ", "
-                        ElseIf InStr(arr2(j), " ,") > 0 Then
-                           c = " ,"
-                        ElseIf InStr(arr2(j), ",") > 0 Then
-                           c = ","
-                        ElseIf InStr(arr2(j), "|") > 0 Then
-                           c = "|"
-                        Else
-                           c = ""
-                        End If
-                        arr3 = Split(arr2(j), c)
-                        If UBound(arr3) > 1 Then
-                           k = 1
-                           ass = ""
-                           Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
-                              If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
-                                 If ass = "" Then
-                                    ass = arr3(k)
-                                 Else
-                                    ass = ass & c & arr3(k)
-                                 End If
-                              Else
-                                 arr3(0) = arr3(0) & c & arr3(k)
-                              End If
-                              k = k + 1
-                           Loop
-                        ElseIf UBound(arr3) = 1 Then
-                           ass = arr3(1)
-                        End If
-                        If UBound(arr3) > 0 Then
-                           '                           t = t & sqbrAssump(SplitAssump(CodeForMaxima(Trim(arr3(1))))) & " then " & CodeForMaxima(arr3(0))
-                           t = t & sqbrAssump(SplitAssump(Trim(ass))) & " then " & CodeForMaxima(arr3(0), CASengine)
-                        Else
-                           t = t & " 0=0 then " & CodeForMaxima(arr3(0), CASengine)
-                        End If
-                        If j < UBound(arr2) Then t = t & " elseif "
-                     Next
-                     ea2.Text = Left(ea2.Text, Pos - 1) & t & ")"  ' & Right(ea2.Text, Len(ea2.Text) - pos - Len(expr) - 6)
-                     i = i + 1
-                  End If
-               Loop While Pos > 0 And i < 1000
-               defenk = ea2.Text
-            
-            
+'            ElseIf InStr(defenk, VBA.ChrW(9608)) > 0 And InStr(defenk, VBA.ChrW(9508)) > 0 Then ' tuborg parentes ' fjernet v. 1.26 Er nu i CodeForMaxima
+'               ea2.Text = defenk
+'               ea2.SetNormalBrackets
+'               i = 0
+'               Do
+'                  Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
+'                  If Pos > 0 Then
+'                     ea2.Text = Replace(ea2.Text, ")=", "):=", 1, Pos)
+'                     Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
+'                     pos2 = InStr(Pos, ea2.Text, VBA.ChrW(9508))
+'
+'                     Expr = Mid(ea2.Text, Pos + 2, pos2 - Pos - 1)
+'                     Expr = ea2.GetNextBracketContent(Pos)
+'                     arr2 = Split(Expr, "@")
+'                     t = "(if "
+'                     For j = 0 To UBound(arr2)
+'                        If InStr(arr2(j), ";") > 0 Then
+'                           c = ";"
+'                        ElseIf InStr(arr2(j), ", ") > 0 Then
+'                           c = ", "
+'                        ElseIf InStr(arr2(j), " ,") > 0 Then
+'                           c = " ,"
+'                        ElseIf InStr(arr2(j), ",") > 0 Then
+'                           c = ","
+'                        ElseIf InStr(arr2(j), "|") > 0 Then
+'                           c = "|"
+'                        Else
+'                           c = ""
+'                        End If
+'                        arr3 = Split(arr2(j), c)
+'                        If UBound(arr3) > 1 Then
+'                           k = 1
+'                           ass = ""
+'                           Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
+'                              If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
+'                                 If ass = "" Then
+'                                    ass = arr3(k)
+'                                 Else
+'                                    ass = ass & c & arr3(k)
+'                                 End If
+'                              Else
+'                                 arr3(0) = arr3(0) & c & arr3(k)
+'                              End If
+'                              k = k + 1
+'                           Loop
+'                        ElseIf UBound(arr3) = 1 Then
+'                           ass = arr3(1)
+'                        End If
+'                        If UBound(arr3) > 0 Then
+'                           '                           t = t & sqbrAssump(SplitAssump(CodeForMaxima(Trim(arr3(1))))) & " then " & CodeForMaxima(arr3(0))
+'                           t = t & sqbrAssump(SplitAssump(Trim(ass))) & " then " & CodeForMaxima(arr3(0), CASengine)
+'                        Else
+'                           t = t & " 0=0 then " & CodeForMaxima(arr3(0), CASengine)
+'                        End If
+'                        If j < UBound(arr2) Then t = t & " elseif "
+'                     Next
+'                     ea2.Text = Left(ea2.Text, Pos - 1) & t & ")"  ' & Right(ea2.Text, Len(ea2.Text) - pos - Len(expr) - 6)
+'                     i = i + 1
+'                  End If
+'               Loop While Pos > 0 And i < 1000
+'               defenk = ea2.Text
             Else
                defenk = Replace(defenk, VBA.ChrW(34), "")    ' apostrof
                defenk = CodeForMaxima(defenk, CASengine)
 '#If Mac Then ' på mac bruges ## som multiplikator ved vektorer, så ikke nødvendigvis 'ikke ligmed'  nu også på windows 1.18
-               If InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0 Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
+               If InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
 '#Else
 '               If InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0 Or InStr(defenk, "#") > 0 Then
 '#End If
@@ -7013,6 +7044,7 @@ hop:
 
 End Function
 Function SplitAssump(s As String) As String
+' Deler  0<x<5 op til x>0 and x<5
    Dim ea As New ExpressionAnalyser
    Dim v As String, p As Integer, p2 As Integer
    Dim pre As String, pst As String
@@ -7034,7 +7066,7 @@ Function SplitAssump(s As String) As String
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 4)
-      SplitAssump = v & ">=" & pre & " and " & v & "<=" & pst
+      SplitAssump = v & ">=" & pre & "&&and&&" & v & "<=" & pst
 '      SplitAssump = pre & "<=" & v & " and " & v & "<=" & pst
       Exit Function
    End If
@@ -7042,21 +7074,21 @@ Function SplitAssump(s As String) As String
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 3)
-      SplitAssump = pre & "<=" & v & " and " & v & "<" & pst
+      SplitAssump = pre & "<=" & v & "&&and&&" & v & "<" & pst
       Exit Function
    End If
    p = InStr(s, "<" & v & "<=")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 3)
-      SplitAssump = pre & "<" & v & " and " & v & "<=" & pst
+      SplitAssump = pre & "<" & v & "&&and&&" & v & "<=" & pst
       Exit Function
    End If
    p = InStr(s, "<" & v & "<")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 2)
-      SplitAssump = pre & "<" & v & " and " & v & "<" & pst
+      SplitAssump = pre & "<" & v & "&&and&&" & v & "<" & pst
       Exit Function
    End If
    SplitAssump = s
@@ -7113,7 +7145,7 @@ Function sqbrAssump(s As String) As String
    End If
    arr = Split(s, c)
    If UBound(arr) = 1 Then
-      sqbrAssump = v & l1 & arr(0) & " and " & arr(1) & l2 & v
+      sqbrAssump = v & l1 & arr(0) & "&&and&&" & arr(1) & l2 & v
    Else
       sqbrAssump = t
    End If

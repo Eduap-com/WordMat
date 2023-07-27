@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
 ''
-' WebResponse v4.1.5
+' WebResponse v4.1.6
 ' (c) Tim Hall - https://github.com/VBA-tools/VBA-Web
 '
 ' Wrapper for http/cURL responses that includes parsed Data based on WebRequest.ResponseFormat.
@@ -165,12 +165,12 @@ End Sub
 ' @param {String} Result
 ' @throws 11031 / 80042b17 / -2147210473 - Error creating from cURL
 ''
-Public Sub CreateFromCurl(Client As WebClient, Request As WebRequest, Result As String)
+Public Sub CreateFromCurl(Client As WebClient, Request As WebRequest, result As String)
     On Error GoTo web_ErrorHandling
 
     Dim web_Lines() As String
 
-    web_Lines = VBA.Split(Result, web_CrLf)
+    web_Lines = VBA.Split(result, web_CrLf)
 
     Me.StatusCode = web_ExtractStatusFromCurlResponse(web_Lines)
     Me.StatusDescription = web_ExtractStatusTextFromCurlResponse(web_Lines)
@@ -216,7 +216,7 @@ Public Function ExtractHeaders(ResponseHeaders As String) As Collection
         If web_i > UBound(web_Lines) Then
             web_Headers.Add web_Header
         ElseIf web_Lines(web_i) <> "" Then
-            web_ColonPosition = VBA.InStr(1, web_Lines(web_i), ":")
+            web_ColonPosition = VBA.Instr(1, web_Lines(web_i), ":")
             If web_ColonPosition = 0 And Not web_Header Is Nothing Then
                 ' Assume part of multi-line header
                 web_Multiline = True
@@ -271,13 +271,13 @@ Public Function ExtractCookies(Headers As Collection) As Collection
     For Each web_Header In Headers
         If web_Header("Key") = "Set-Cookie" Then
             web_Cookie = web_Header("Value")
-            If VBA.InStr(1, web_Cookie, "=") > 0 Then
-                web_Key = VBA.Mid$(web_Cookie, 1, VBA.InStr(1, web_Cookie, "=") - 1)
-                web_Value = VBA.Mid$(web_Cookie, VBA.InStr(1, web_Cookie, "=") + 1, VBA.Len(web_Cookie))
+            If VBA.Instr(1, web_Cookie, "=") > 0 Then
+                web_Key = VBA.Mid$(web_Cookie, 1, VBA.Instr(1, web_Cookie, "=") - 1)
+                web_Value = VBA.Mid$(web_Cookie, VBA.Instr(1, web_Cookie, "=") + 1, VBA.Len(web_Cookie))
 
                 ' Ignore text after semi-colon
-                If VBA.InStr(1, web_Value, ";") > 0 Then
-                    web_Value = VBA.Mid$(web_Value, 1, VBA.InStr(1, web_Value, ";") - 1)
+                If VBA.Instr(1, web_Value, ";") > 0 Then
+                    web_Value = VBA.Mid$(web_Value, 1, VBA.Instr(1, web_Value, ";") - 1)
                 End If
 
                 ' Ignore surrounding quotes
@@ -407,3 +407,7 @@ Private Sub Class_Initialize()
     Set Headers = New Collection
     Set Cookies = New Collection
 End Sub
+
+
+
+

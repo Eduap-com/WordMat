@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
 ''
-' WebRequest v4.1.5
+' WebRequest v4.1.6
 ' (c) Tim Hall - https://github.com/VBA-tools/VBA-Web
 '
 ' `WebRequest` is used to create detailed requests
@@ -525,7 +525,7 @@ Public Property Get FormattedResource() As String
 
     ' Add querystring
     If Me.QuerystringParams.Count > 0 Then
-        If VBA.InStr(FormattedResource, "?") <= 0 Then
+        If VBA.Instr(FormattedResource, "?") <= 0 Then
             FormattedResource = FormattedResource & "?"
         Else
             FormattedResource = FormattedResource & "&"
@@ -873,3 +873,7 @@ Private Sub Class_Initialize()
     Set Me.Cookies = New Collection
     Me.ContentLength = -1
 End Sub
+
+
+
+

@@ -72,15 +72,15 @@ GraphText = GraphText & "" & vbCrLf
 
 End Sub
 
-Public Sub Save(filnavn As String)
+Public Sub Save(Filnavn As String)
 Dim filnr As Integer
-On Error GoTo fejl
+On Error GoTo Fejl
 
 InsertDataSection
 InsertCustomFunctions
 
 filnr = FreeFile()
-Open filnavn For Output As filnr    ' Open file for output.
+Open Filnavn For Output As filnr    ' Open file for output.
 
 Print #filnr, GraphText  ' print skriver uden " "
 'Print #filnr, "Hello World"  ' print skriver uden " "
@@ -90,7 +90,7 @@ Print #filnr, GraphText  ' print skriver uden " "
 'Write #filnr, MyError; " is an error value"
 
 GoTo slut
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 Close #filnr    ' Close file.
@@ -155,18 +155,18 @@ Sub InsertRelation(relation As String)
 
 End Sub
 
-Function ConvertToGraphSyntax(text As String, Optional ConvertMaxima As Boolean = True)
+Function ConvertToGraphSyntax(Text As String, Optional ConvertMaxima As Boolean = True)
 If ConvertMaxima Then
     On Error Resume Next
     omax.ConvertLnLog = False
-    text = omax.CodeForMaxima(text)
+    Text = omax.CodeForMaxima(Text)
     omax.ConvertLnLog = True
 End If
-    text = Replace(text, "%e", "e")
-    text = Replace(text, "%pi", "pi")
-    text = Replace(text, "%", "")
+    Text = Replace(Text, "%e", "e")
+    Text = Replace(Text, "%pi", "pi")
+    Text = Replace(Text, "%", "")
 
-ConvertToGraphSyntax = text
+ConvertToGraphSyntax = Text
 End Function
 #End If
 
