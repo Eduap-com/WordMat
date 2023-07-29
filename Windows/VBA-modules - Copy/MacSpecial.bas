@@ -77,13 +77,13 @@ End Function
 'End Function
 
 
-Function MacDrawDims(Optional x As Long = 0, Optional Y As Long = 0) As String
+Function MacDrawDims(Optional x As Long = 0, Optional y As Long = 0) As String
 Dim xdrawdim As Long, ydrawdim As Long
     If x > 0 Then
         xdrawdim = x
     End If
-    If Y > 0 Then
-        ydrawdim = Y
+    If y > 0 Then
+        ydrawdim = y
     End If
     
     Dim dx As Long
@@ -205,10 +205,10 @@ On Error GoTo Fejl
     End If
 '    ExecuteMaximaViaFile = ReadMaximaOutputFile()
 'MsgBox ExecuteMaximaViaFile
-    GoTo Slut
+    GoTo slut
 Fejl:
     ExecuteMaximaViaFile = "Fejln" & Err.Number
-Slut:
+slut:
     
 End Function
 Function RunScript(ScriptName As String, Param As String) As String
@@ -217,10 +217,10 @@ Function RunScript(ScriptName As String, Param As String) As String
 ' filetype: .scpt or .applescript
 On Error GoTo Fejl
     RunScript = AppleScriptTask("WordMatScripts.scpt", ScriptName, Param)
-GoTo Slut
+GoTo slut
 Fejl:
     RunScript = "ScriptError"
-Slut:
+slut:
 End Function
 #Else
 Function RunScript(ScriptName As String, Param As String) As String

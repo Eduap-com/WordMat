@@ -176,10 +176,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Public Sub GetTableDataOld()
@@ -259,10 +259,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Public Sub GetSetData()
@@ -306,7 +306,7 @@ Loop While Not (p = "") And n < 1000
 
 End Sub
 
-Private Function ComputeRegr(x() As Double, Y() As Double) As Boolean
+Private Function ComputeRegr(x() As Double, y() As Double) As Boolean
 'Udfører lineær regression på to arrays og returnerer a,b og R^2
 
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
@@ -318,10 +318,10 @@ n = UBound(x) - LBound(x) + 1
                
 For i = LBound(x) To UBound(x)
     sumx = sumx + x(i)
-    sumy = sumy + Y(i)
-    sumxy = sumxy + x(i) * Y(i)
+    sumy = sumy + y(i)
+    sumxy = sumxy + x(i) * y(i)
     sumxx = sumxx + x(i) ^ 2
-    sumyy = sumyy + Y(i) ^ 2
+    sumyy = sumyy + y(i) ^ 2
 Next
 
 A = (n * sumxy - sumx * sumy) / (n * sumxx - sumx ^ 2)
@@ -336,11 +336,11 @@ End If
 If r > 1 Then r = 1
 
 ComputeRegr = True
-GoTo Slut
+GoTo slut
 Fejl:
     ComputeRegr = False
     MsgBox Sprog.A(28), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Function
 
 Function Logv(val() As Double) As Variant
@@ -356,10 +356,10 @@ Function Logv(val() As Double) As Variant
             arrlog(j) = Log(val(i))
         Else
             MsgBox Sprog.A(672), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
     Next
-Slut:
+slut:
     ReDim Preserve arrlog(LBound(val) To j) As Double
 
     Logv = arrlog
@@ -446,10 +446,10 @@ On Error GoTo Fejl
         c = 0
         r = 0
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(32), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ComputeUserRegr()
     Dim fkt As String
@@ -518,10 +518,10 @@ Sub ComputeUserRegr()
         Ligning = omax.MaximaOutput
     End If
     
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Function ConvertSep(Text As String) As String
     ' kommaer og listeseparator
@@ -623,13 +623,13 @@ Sub ComputePolRegr()
         c = 0
         r = 0
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
-Function polregr(x() As Double, Y() As Double, orden As Integer, Optional ByVal tving As Boolean = False) As Boolean
+Function polregr(x() As Double, y() As Double, orden As Integer, Optional ByVal tving As Boolean = False) As Boolean
 'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
@@ -640,7 +640,7 @@ Dim M() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
 On Error GoTo Fejl
 
-If Not (UBound(x) = UBound(Y)) Then
+If Not (UBound(x) = UBound(y)) Then
     polregr = False
     Exit Function
 End If
@@ -660,7 +660,7 @@ n = UBound(x) - LBound(x) + 1
                
 For j = 0 To orden ' T(i) sættes op (højre kolonne af matrix)
     For i = 0 To np - 1
-        t(j) = t(j) + Y(i + 1) * x(i + 1) ^ j
+        t(j) = t(j) + y(i + 1) * x(i + 1) ^ j
     Next
 Next
                
@@ -718,7 +718,7 @@ End If
 ymean = t(0) / n
 Dim FV As Double
 For i = LBound(x) To UBound(x)
-  SStotal = SStotal + (Y(i) - ymean) ^ 2
+  SStotal = SStotal + (y(i) - ymean) ^ 2
   FV = -ymean
   For j = 0 To orden
     FV = FV + Coeff(j) * x(i) ^ j
@@ -729,13 +729,13 @@ Next
 r = SSregr / SStotal
              
 polregr = True
-GoTo Slut
+GoTo slut
 Fejl:
   polregr = False
 '  MsgBox Err.Number
-Slut:
+slut:
 End Function
-Function polregrkvad(x() As Double, Y() As Double, Optional ByVal tving As Boolean = False) As Boolean
+Function polregrkvad(x() As Double, y() As Double, Optional ByVal tving As Boolean = False) As Boolean
 'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2 via userdefined datatype
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
@@ -750,9 +750,9 @@ n = UBound(x) - LBound(x) + 1
                
 For i = LBound(x) To UBound(x)
     sumx = sumx + x(i)
-    sumy = sumy + Y(i)
-    sumxy = sumxy + x(i) * Y(i)
-    sumx2y = sumx2y + x(i) ^ 2 * Y(i)
+    sumy = sumy + y(i)
+    sumxy = sumxy + x(i) * y(i)
+    sumx2y = sumx2y + x(i) ^ 2 * y(i)
     sumxx = sumxx + x(i) ^ 2
     sumx3 = sumx3 + x(i) ^ 3
     sumx4 = sumx4 + x(i) ^ 4
@@ -808,18 +808,18 @@ End If
 ymean = sumy / n
 
 For i = LBound(x) To UBound(x)
-  SStotal = SStotal + (Y(i) - ymean) ^ 2
+  SStotal = SStotal + (y(i) - ymean) ^ 2
   SSregr = SSregr + (A * x(i) ^ 2 + b * x(i) + c - ymean) ^ 2
 Next
              
 r = SSregr / SStotal
              
 polregrkvad = True
-GoTo Slut
+GoTo slut
 Fejl:
   polregrkvad = False
 '  MsgBox Err.Number
-Slut:
+slut:
 End Function
 
 

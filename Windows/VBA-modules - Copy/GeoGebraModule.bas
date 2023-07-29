@@ -19,6 +19,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Dim DefS As String
     Dim Arr As Variant, uvar As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim TempCas As Integer
 
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
@@ -27,6 +28,9 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     ea2.SetNormalBrackets
 
     On Error GoTo Fejl
+
+    TempCas = CASengine
+    CASengine = 1
 
     PrepareMaxima
     omax.ConvertLnLog = False
@@ -69,7 +73,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
         Else
             cmd = sl.GetName(i) & "=" & fktudtryk
         End If
-        cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
+        cmd = Replace(Replace(ConvertToGeogebraSyntax(cmd, False), "+", "%2B"), "&", "%26") & ";" ' v.1.26 tilføjet false ved konvertering fordi den vidst allerede er konverteret
         UrlLink = UrlLink & cmd
    Next
 End If
@@ -171,10 +175,11 @@ End If
     '    MsgBox UrlLink & cmd
     '    OpenLink UrlLink, True
     
-    OpenGeoGebraWeb UrlLink, Gtype
+    OpenGeoGebraWeb UrlLink, Gtype, False, False ' v.1.26 false, false tilføjet da definitioner kom med to gange
 Fejl:
 
-Slut:
+slut:
+    CASengine = TempCas
 End Sub
 
 Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True)
@@ -345,7 +350,7 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
             Do
                 Wait (0.2)
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-                If UfWait2.StopNow Then GoTo Slut
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -366,7 +371,7 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
             Do
                 Wait (0.2)
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-                If UfWait2.StopNow Then GoTo Slut
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -380,13 +385,13 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#?" & Defliste)
         ElseIf Left(Res, 5) = "error" Then
 '            Wait (1)
-            GoTo Slut
+            GoTo slut
         End If
 '        Res = Replace(Res, " ", "")
         Res = ConvertGeoGebraSyntaxToWord(Res)
         omax.MaximaOutput = Res
         RunGeoGebraDirect = Res
-Slut:
+slut:
      If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
 
@@ -407,7 +412,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
 
  '  text = Replace(text, "log", "lg")
    If ConvertMaxima Then
-      Text = omax.CodeForMaxima(Text, CASengine)
+      Text = omax.CodeForMaxima(Text, 1) ' CASengine
    End If
 
       'græske bogstaver
@@ -494,6 +499,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
 '   text = Replace(text, "]", "}")
    Text = Replace(Text, "##", "*") 'prikprodukt
    Text = Replace(Text, "~", "*") ' vectorprodukt
+   Text = Replace(Text, "^^", "^") ' vectorprodukt
 '   text = Replace(text, "matrix", "")
 
 '
@@ -536,10 +542,10 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
             gexpr = gexpr & ")"
          Next
          Text = Left(Text, sp - 1) & gexpr & right(Text, Len(Text) - ep + 2)
-         If Left(Text, 1) = "(" Then Text = right(Text, Len(Text) - 1)
-'         text = Replace(text, " and ", " ??_ ") '&& der må være sket noget fejlkonvertering
-'         text = Replace(text, " or ", " ??å ") '||
-         Text = Replace(Text, " and ", " && ") '&&
+         
+'         If Left(Text, 1) = "(" Then Text = right(Text, Len(Text) - 1) ' denne gav fejl, så der manglede startparentes. ved ikke hvorfor den er der
+
+         Text = Replace(Text, " and ", " &amp;&amp; ") '&&
          Text = Replace(Text, " or ", " || ") '||
       End If
 
@@ -548,6 +554,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
 '    ConvertToGeogebraSyntax = geogebrafil.ConvertToGeogebraSyntax(s, True)
     If HtmlReady Then
         ConvertToGeogebraSyntax = Replace(ConvertToGeogebraSyntax, "+", "%2B")
+        ConvertToGeogebraSyntax = Replace(ConvertToGeogebraSyntax, "&", "%26")
     End If
 '    Set geogebrafil = Nothing
 End Function
@@ -695,11 +702,16 @@ Dim p As Integer, p2 As Integer
 End Sub
 
 Sub GeoGebra()
-    On Error GoTo Fejl
+ '   On Error GoTo Fejl
     Dim geogebrasti As String
     Dim geogebrafilersti As String
-    Dim appnr As Integer
+    Dim appnr As Long
     Dim UFwait As New UserFormWaitForMaxima
+    Dim TempCas As Integer
+    
+    TempCas = CASengine
+    CASengine = 1
+    
     PrepareMaxima ' omax bliver brugt
     
     UFwait.Label_tip.Caption = Sprog.A(362)
@@ -737,10 +749,11 @@ Sub GeoGebra()
     DoEvents
     Unload UFwait
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     UserFormGeoGebra.Show
-Slut:
+slut:
+    CASengine = TempCas
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found
@@ -781,10 +794,10 @@ On Error GoTo Fejl
         GeoGebraPath = """" & GeoGebraPath & """"
     End If
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     GeoGebraPath = ""
-Slut:
+slut:
 End Function
 Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
@@ -940,10 +953,10 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     CreateZipFile geogebrasti & "geogebra.zip", geogebrasti & "geogebra.xml"
     Name geogebrasti & "geogebra.zip" As geogebrasti & "geogebra.ggb"
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 On Error Resume Next
     omax.ConvertLnLog = True
 End Sub
@@ -962,7 +975,7 @@ Dim varval As String
 '        MsgBox AscW(var) & vbCrLf & VBA.ChrW(960)
         ea2.Pos = ea2.Pos + 1
 '        If var = "z" Then geogebrafil.Show3D = True  ' ikke implementeret endnu
-        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (Left(var, 1) = "_") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "z" And var <> "e" And var <> "pi" And var <> "matrix" And var <> "if" And var <> "elseif" And var <> "then" And var <> "and" And var <> "or" And var <> "else" And var <> VBA.ChrW(960) Then  ' 960=pi
+        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (Left(var, 1) = "_") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "z" And var <> "e" And var <> "pi" And var <> "matrix" And var <> "if" And var <> "elseif" And var <> "then" And var <> "and" And var <> "or" And var <> "else" And var <> "amp" And var <> VBA.ChrW(960) Then  ' 960=pi
             varval = InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(364), Sprog.A(365), "1")
             If Len(varval) > 0 Then
                 If Not geogebrafil Is Nothing Then
@@ -1045,10 +1058,10 @@ Sub CreateZipFile(zipfilnavn As Variant, Filnavn As Variant, Optional filnavn2 A
     
 '    On Error GoTo 0
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
  

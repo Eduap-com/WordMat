@@ -35,7 +35,6 @@ Public Sub Plot2DGraph()
     Exit Sub
 #End If
 
-    
     sstart = Selection.start
     sslut = Selection.End
     
@@ -97,10 +96,10 @@ Public Sub Plot2DGraph()
     Selection.start = sstart
     UF2Dgraph.Show vbModeless
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
     CASengine = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
@@ -112,10 +111,10 @@ Ligning = Replace(Ligning, VBA.ChrW(8801), "=") ' def =
 
 Arr = Split(Ligning, "=")
 
-If Not (InStr(Ligning, VBA.ChrW(9608)) > 0 And InStr(Ligning, VBA.ChrW(9508)) > 0) Then ' tuborg
+'If Not (InStr(Ligning, VBA.ChrW(9608)) > 0 And InStr(Ligning, VBA.ChrW(9508)) > 0) Then ' tuborg
    Arr = Split(Arr(UBound(Arr)), VBA.ChrW(8776)) ' til indsættelse af selve forskrift i stedet for f(x)
    Ligning = omax.ConvertToAscii(Arr(UBound(Arr)))
-End If
+'End If
 Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(Arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
 
 If UF2Dgraph.TextBox_ligning1.Text = Ligning Then
@@ -145,10 +144,10 @@ ElseIf UF2Dgraph.TextBox_ligning5.Text = "" Then
 ElseIf UF2Dgraph.TextBox_ligning6.Text = "" Then
     UF2Dgraph.TextBox_ligning6.Text = Ligning
 End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub PlotDF()
@@ -167,7 +166,8 @@ Sub PlotDF()
     omax.ReadSelection
 #If Mac Then
 #Else
-    If CASengine > 0 Then
+   If GraphApp > 0 Then
+'    If CASengine > 0 Then ' fra 1.26 er der skiftet til, at det er det valgte grafprogram der anvendes
 #End If
         s = Trim(omax.Kommando)
         s = GetCmdAfterEqualSign(s)
@@ -191,7 +191,7 @@ Sub PlotDF()
         s = s & "A=(-10, 2);B=(10, 0);"
         s = s & "SolveODE(" & ea.Text & ", x(A), y(A), x(B), 0.1)" ' y(A) virker ikke
         OpenGeoGebraWeb s, "Classic", True, True
-        GoTo Slut
+        GoTo slut
 #If Mac Then
 #Else
     End If
@@ -233,10 +233,10 @@ Sub PlotDF()
     UF2Dgraph.MultiPage1.SetFocus
     UF2Dgraph.Show vbModeless
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEmptyGraphOleObject()
@@ -441,12 +441,12 @@ Dim i As Integer
     Unload UFwait
 
 Application.ScreenUpdating = True
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(97), vbOKOnly, Sprog.Error
     omax.ConvertLnLog = True
     Unload UFwait
-Slut:
+slut:
     omax.ConvertLnLog = True
     
 #End If
@@ -654,10 +654,10 @@ End If
     srange.Select
     Selection.Collapse wdCollapseEnd
 
-GoTo Slut:
+GoTo slut:
 Fejl:
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
-Slut:
+slut:
 On Error GoTo slut2
     UfWait2.Label_progress = UfWait2.Label_progress & "**"
     xlap.Run ("Auto_open")
@@ -849,7 +849,7 @@ ws.Activate
 'Dim excel As excel.Application
 'Set excel = CreateObject("Excel.Application")
 'Set wb = excel.Workbooks(excel.Workbooks.Count)
-Slut:
+slut:
 DisableExcelMacros
 End Sub
 
@@ -973,12 +973,12 @@ Unload UfWait2
 'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
-GoTo Slut
+GoTo slut
 Fejl:
     On Error Resume Next
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     Unload UfWait2
-Slut:
+slut:
 End Function
 
 Sub InsertPindeDiagram()

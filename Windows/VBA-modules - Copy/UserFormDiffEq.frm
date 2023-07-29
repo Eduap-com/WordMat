@@ -55,6 +55,30 @@ Dim i As Integer
     Me.Hide
 End Sub
 
+Private Sub CommandButton_solvenum_Click()
+   Dim f As String, Arr() As String
+   Arr = Split(Label_ligning.Caption, "=")
+   If UBound(Arr) > 0 Then f = Arr(1)
+   If Len(Arr(0)) > 2 Then
+      MsgBox "Differentialligningen skal være på formen y'=...  for at den kan løses numerisk" & vbCrLf & "", vbOKOnly, "Fejl"
+      Exit Sub
+   End If
+   luk = True
+   Me.Hide
+   UserFormDeSolveNumeric.TextBox_varx.Text = TextBox_variabel.Text
+   UserFormDeSolveNumeric.TextBox_var1.Text = TextBox_funktion.Text
+   UserFormDeSolveNumeric.TextBox_eq1.Text = f
+   If TextBox_starty.Text = vbNullString Then
+      UserFormDeSolveNumeric.TextBox_init1.Text = "1"
+   Else
+      UserFormDeSolveNumeric.TextBox_init1.Text = TextBox_starty.Text
+   End If
+   UserFormDeSolveNumeric.TextBox_xmin.Text = TextBox_startx.Text
+   UserFormDeSolveNumeric.TextBox_xmax.Text = TextBox_startx.Text + 10
+   UserFormDeSolveNumeric.TextBox_definitioner.Text = TextBox_def.Text
+   UserFormDeSolveNumeric.Show
+End Sub
+
 Private Sub TextBox_funktion_Change()
     opdaterLabels
 End Sub
@@ -68,7 +92,7 @@ Dim i As Integer
 Dim svar As String
     SetCaptions
 
-    If InStr(Label_ligning.Caption, "‰‰") > 0 Then
+    If InStr(Label_ligning.Caption, ChrW(180) & ChrW(180)) > 0 Then ' "´´" to accenter der vender opad
         Label_diffy.visible = True
         TextBox_starty2.visible = True
         Label_y2.visible = True
@@ -76,6 +100,7 @@ Dim svar As String
         Label7.visible = True
         Label8.visible = True
         TextBox_bcy.visible = True
+        CommandButton_solvenum.visible = False
     Else
         Label_diffy.visible = False
         TextBox_starty2.visible = False
@@ -84,6 +109,7 @@ Dim svar As String
         Label7.visible = False
         Label8.visible = False
         TextBox_bcy.visible = False
+        CommandButton_solvenum.visible = True
     End If
 
     Svars = Split(vars, ";")

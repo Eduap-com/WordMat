@@ -4839,10 +4839,10 @@ End Property
 Public Property Get UnitWarning() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Advarsel: Enheder er slået til." & VbCrLfMac & "Pas på med variable der er enheder fx A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
+Case 1: s = "Advarsel: Enheder er slået til. Ligningsløsning påvirkes negativt." & VbCrLfMac & "Pas også på variable, der er enheder fx A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
 Case 3: s = "Advertencia: Las unidades están encendidas. " & VbCrLfMac & "Cuidado con las variables que son unidades como: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
 Case 4: s = ""
-Case Else: s = "Warning: Units are turned on." & VbCrLfMac & "Watch out for variables which are units like: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
+Case Else: s = "Warning: Units are turned on. Equation solving will be poorer" & VbCrLfMac & "Watch out for variables which are units like: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
 End Select
 UnitWarning = s
 End Property

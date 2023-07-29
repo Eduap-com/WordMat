@@ -489,10 +489,10 @@ Else
     MsgBox "Cant locate the help-file", vbOKOnly, Sprog.Error
 End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub indsaetformel()
@@ -520,10 +520,10 @@ Sub indsaetformel()
         Oundo.EndCustomRecord
 #End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Function VisDef() As String
 'Dim omax As New CMaxima
@@ -546,10 +546,10 @@ Dim deftext As String
     End If
     VisDef = deftext
 '    MsgBox deftext, vbOKOnly, "Definitioner"
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Function
 Sub DefinerVar()
     Dim var As String
@@ -566,10 +566,10 @@ Sub DefinerVar()
         Selection.MoveRight Unit:=wdCharacter, Count:=2
     End If
     
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub DefinerFunktion()
     Dim var As String
@@ -586,10 +586,10 @@ On Error GoTo Fejl
         Selection.OMaths(1).BuildUp
         Selection.MoveRight Unit:=wdCharacter, Count:=2
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub DefinerLigning()
     Dim var As String
@@ -603,10 +603,10 @@ On Error GoTo Fejl
         Selection.OMaths(1).BuildUp
         Selection.MoveRight Unit:=wdCharacter, Count:=2
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ErstatPunktum()
 '
@@ -649,10 +649,10 @@ On Error GoTo Fejl
         .MatchAllWordForms = False
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ErstatKomma()
 '
@@ -695,10 +695,10 @@ On Error GoTo Fejl
         .MatchAllWordForms = False
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub Nsolve()
@@ -732,10 +732,10 @@ On Error GoTo Fejl
     GetMathText = om.Range.Text
     om.ConvertToMathText
     om.BuildUp
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Function
 Sub Gange()
 ' prik Gangetegn
@@ -749,7 +749,7 @@ End Sub
 Sub SimpelUdregning()
 ' laver simpel udregning med 4 regningsarter og ^
     
-    On Error GoTo Slut
+    On Error GoTo slut
     Dim crange As Range
     Dim r As Range
     Dim sindex As Integer
@@ -793,7 +793,7 @@ Sub SimpelUdregning()
     Selection.MoveRight Unit:=wdCharacter, Count:=1
 '    Selection.TypeText (" ")
 
-Slut:
+slut:
 End Sub
 Sub tofrac()
 Dim udtryk As String
@@ -819,10 +819,10 @@ On Error GoTo Fejl
     Call ActiveDocument.Range.Find.Execute("*", , , , , , , , , VBA.ChrW(183), wdReplaceAll)
 
 '    MsgBox "Alle * er nu lavet om til " & VBA.ChrW(183)
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ReplaceStarMultBack()
 ' fjerner alm gangetegn og indsætter *
@@ -834,20 +834,20 @@ On Error GoTo Fejl
     Call Selection.Range.Find.Execute(VBA.ChrW(8226), , , , , , , , , "*", wdReplaceAll) ' tyk prik
     
 '    MsgBox "Alle " & VBA.ChrW(183) & " er nu lavet om til *"
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub MaximaSettings()
 On Error GoTo Fejl
     If UFMSettings Is Nothing Then Set UFMSettings = New UserFormMaximaSettings
     UFMSettings.Show
-    GoTo Slut
+    GoTo slut
 Fejl:
     Set UFMSettings = New UserFormMaximaSettings
     UFMSettings.Show
-Slut:
+slut:
 End Sub
 Sub GoToLink()
     Dim Link As String
@@ -859,9 +859,9 @@ Sub GoToLink()
     explorersti = """" & GetProgramFilesDir & "\Internet Explorer\iexplore.exe"" " & Link
 '    On Error GoTo fejl
     appnr = Shell(explorersti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 

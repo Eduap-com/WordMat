@@ -98,10 +98,10 @@ Dim i As Integer
         CASengine = 1
     End If
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     SelectedVar = ""
-Slut:
+slut:
     UFSelectVar.Hide
     Application.ScreenUpdating = False
 End Sub

@@ -84,10 +84,10 @@ On Error GoTo Fejl
     End If
     
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     SelectedVar = ""
-Slut:
+slut:
     UFSelectVars.Hide
     Application.ScreenUpdating = False
 End Sub

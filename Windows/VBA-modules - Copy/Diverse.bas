@@ -143,7 +143,7 @@ Sub ShowTempDoc()
     MsgBox tempDoc.Range.Text
 End Sub
 Sub LukTempDoc()
-On Error GoTo Slut
+On Error GoTo slut
 #If Mac Then
     If Not m_tempDoc Is Nothing Then
         If Word.Application.IsObjectValid(m_tempDoc) Then
@@ -156,7 +156,7 @@ On Error GoTo Slut
 '    tempDoc.ActiveWindow
     Set tempDoc = Nothing ' added v. 1.11
 #End If
-Slut:
+slut:
 End Sub
 
 #If Mac Then
@@ -244,14 +244,14 @@ start:
 Err.Clear
 i = i + 1
 Wait (0.1)
-If i > 2 Then GoTo Slut
+If i > 2 Then GoTo slut
 tasksave.Activate
 
-Slut:
+slut:
 End Sub
 
 Sub Wait(pausetime As Variant)
-'pausetime in milliseconds
+'pausetime in senconds
 Dim start
     start = Timer    ' Set start time.
     Do While Timer < start + pausetime
@@ -395,10 +395,10 @@ On Error GoTo Fejl
 
 #End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
-Slut:
+slut:
 'MsgBox GetProgramFilesDir
 End Function
 Function GetDocumentsDir() As String
@@ -417,10 +417,10 @@ On Error GoTo Fejl
  DocumentsDir = GetDocumentsDir
  End If
  
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
-Slut:
+slut:
 'MsgBox GetProgramFilesDir
 End Function
 Function RegKeyRead(i_RegKey As String) As String
@@ -603,10 +603,10 @@ Sub InsertDefiner()
 '    Selection.OMaths(1).BuildUp
     Selection.Collapse wdCollapseEnd
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub ForrigeResultat()
@@ -623,7 +623,7 @@ Sub ForrigeResultat()
     Application.ScreenUpdating = False
     
     On Error Resume Next
-    If Selection.OMaths.Count = 0 Then GoTo Slut
+    If Selection.OMaths.Count = 0 Then GoTo slut
     
     Dim scrollpos As Double
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -669,7 +669,7 @@ Sub ForrigeResultat()
         If Len(r.Text) = 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
-            GoTo Slut
+            GoTo slut
         End If
 '        s = omax.ReadEquation2(r)
         s = omax.ReadEquation(r)
@@ -710,13 +710,13 @@ Loop While hopover
 '    ResPos2 = Selection.start
 '    ActiveDocument.Range.OMaths(ra.OMaths.Count).BuildUp
 '    ResPos2 = ResPos1 + Len(ActiveDocument.Range.OMaths(matfeltno).Range.text) - ml
-GoTo Slut
+GoTo slut
 Fejl:
     ResIndex = 0
     ResFeltIndex = 0
     ResPos2 = 0
     ResPos1 = 0
-Slut:
+slut:
 '    Selection.End = sslut ' slut skal være først eller går det galt
 '    Selection.start = start
 '    Call sr.Move(wdCharacter, Len(s))
@@ -821,10 +821,10 @@ On Error GoTo Fejl
 #Else
     OpenWordFile "" & Filnavn
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub OpenWordFile(Filnavn As String)
 ' OpenWordFile ("Figurer.docx")
@@ -858,10 +858,10 @@ Else
 End If
 #End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(111) & Filnavn, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 
@@ -1105,10 +1105,10 @@ Sub ToggleNum()
 End Sub
 Sub CheckForUpdateOld()
     Dim result As VbMsgBoxResult
-    On Error GoTo Fejl
+'    On Error GoTo Fejl
 #If Mac Then
-    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com/WordMat/Download.aspx"
-    OpenLink "http://www.eduap.com/WordMat/Download.aspx"
+    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
+    OpenLink "https://www.eduap.com/da/download-wordmat/"
 #Else
     Dim nyversion As String, News As String
     PrepareMaxima
@@ -1124,15 +1124,15 @@ Sub CheckForUpdateOld()
         News = MaxProc.GetVersionNews()
         result = MsgBox(Sprog.A(21) & News & vbCrLf & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
         If result = vbYes Then
-            OpenLink "http://eduap.com/da/download-wordmat/" ' "http://www.eduap.com/wordmat/download.aspx"
+            OpenLink "https://www.eduap.com/da/download-wordmat/"
         End If
     End If
 
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub CheckForUpdate()
 #If Mac Then
@@ -1152,7 +1152,7 @@ Sub CheckForUpdateF(Optional Silent As Boolean = False)
 '    OpenLink "http://eduap.com/download-wordmat/"
 '#Else
     Dim result As VbMsgBoxResult
-    MapsClient.BaseUrl = "http://www.eduap.com/wordmat-version-history/"
+    MapsClient.BaseUrl = "https://www.eduap.com/wordmat-version-history/"
 
     ' Use GetJSON helper to execute simple request and work with response
     Dim Resource As String
@@ -1208,37 +1208,38 @@ Sub CheckForUpdateF(Optional Silent As Boolean = False)
         Else
             result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
             If result = vbYes Then
-                OpenLink "http://eduap.com/download-wordmat/"
+                OpenLink "https://www.eduap.com/da/download-wordmat/"
             End If
         End If
     Else
-        GoTo Slut
+        GoTo slut
     End If
     
     If Response.StatusCode = WebStatusCode.OK Or Response.StatusCode = 301 Then
     End If
     
 '#End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     On Error GoTo Fejl
     Dim NewVersion As String, p As Integer, p2 As Integer, News As String, s As String, v As String
     Dim Filnavn As String, FilDir As String, FilPath As String, result As VbMsgBoxResult
     
+   
     If GetInternetConnectedState = False Then
         If Not RunSilent Then MsgBox "Ingen internetforbindelse", vbOKOnly, "Fejl"
         Exit Sub
     End If
    
-    s = GetHTML("http://www.eduap.com/wordmat-version-history/")
+    s = GetHTML("https://www.eduap.com/wordmat-version-history/")
     If Len(s) = 0 Then
         If Not RunSilent Then
             MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -1263,7 +1264,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     If Len(v) = 0 Then
         If Not RunSilent Then
             MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
-            GoTo Slut
+            GoTo slut
         End If
     End If
 
@@ -1272,7 +1273,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         '      If UFreminder.Visible = True Then UFreminder.Top = 100
         result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
         If result = vbYes Then
-            OpenLink "http://eduap.com/download-wordmat/"
+            OpenLink "https://eduap.com/da/download-wordmat/"
         End If
     Else
         If Not RunSilent Then
@@ -1280,13 +1281,15 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         End If
     End If
    
-    GoTo Slut
+    GoTo slut
 Fejl:
     '   MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure CheckForUpdate, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     If Not RunSilent Then
-        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
+      MsgBox "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com"
+      OpenLink "https://www.eduap.com/da/download-wordmat/"
+'        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     End If
-Slut:
+slut:
 
 End Sub
 Sub CheckForUpdateSilentOld()
@@ -1310,10 +1313,10 @@ Sub CheckForUpdateSilentOld()
     End If
 
 
-GoTo Slut
+GoTo slut
 Fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
-Slut:
+slut:
 #End If
 End Sub
 Sub CheckForUpdateSilent()
@@ -1324,10 +1327,10 @@ Sub CheckForUpdateSilent()
 #Else
     CheckForUpdateWindows True
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
-Slut:
+slut:
 End Sub
 Function GetHTML(Url As String) As String
     Dim html As String
@@ -1401,7 +1404,7 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = ConvertNumberToString & ") "
     End If
     
-Slut:
+slut:
 End Function
 Function ConvertNumberToStringBC(n As Double, Optional bc As Integer) As String
 ' konverter tal til streng med angivet antal betydende cifre. Hvis ingen angives anvendes maximacifre
@@ -1468,22 +1471,22 @@ End Sub
 Function TrimR(ByVal Text As String, c As String)
 ' fjerner c fra højre side af text
 Dim s As String
-If Text = "" Then GoTo Slut
+If Text = "" Then GoTo slut
 Do While right(Text, 1) = c
     Text = Left(Text, Len(Text) - 1)
 Loop
 TrimR = Text
-Slut:
+slut:
 End Function
 Function TrimL(ByVal Text As String, c As String)
 ' fjerner c fra venstre side af text
 Dim s As String
-If Text = "" Then GoTo Slut
+If Text = "" Then GoTo slut
 Do While Left(Text, 1) = c
     Text = right(Text, Len(Text) - 1)
 Loop
 TrimL = Text
-Slut:
+slut:
 End Function
 
 Function TrimB(ByVal Text As String, c As String)
@@ -1491,7 +1494,7 @@ Function TrimB(ByVal Text As String, c As String)
 
 TrimB = TrimL(Text, c)
 TrimB = TrimR(TrimB, c)
-Slut:
+slut:
 End Function
 Function TrimRenter(ByVal Text As String)
 ' removes crlf at right end
@@ -1506,13 +1509,13 @@ End Sub
 Public Sub ClearClipBoard()
 ' giver desværre sjældne problemer på nogle computere
 ' specielt hvis der er definitioner i dokumentet så den fyres to gange
-On Error GoTo Slut
+On Error GoTo slut
     Dim oData   As New DataObject 'object to use the clipboard
      
     oData.SetText Text:=Empty 'Clear
     oData.PutInClipboard 'take in the clipboard to empty it
     Set oData = Nothing
-Slut:
+slut:
 End Sub
 
 Sub testt()
@@ -1527,7 +1530,7 @@ Dim i As Integer
     If mc.Count > 0 Then
 On Error Resume Next
     mc(mc.Count).ParentOMath.Range.Select
-On Error GoTo Slut
+On Error GoTo slut
     mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
     Else
         i = 0
@@ -1536,7 +1539,7 @@ On Error GoTo Slut
             i = i + 1
         Loop
     End If
-Slut:
+slut:
 On Error Resume Next
     Selection.Collapse wdCollapseEnd
     Dim r As Range
@@ -1558,7 +1561,7 @@ End Sub
 Sub ToggleLatex()
 Dim mtext As String
 Dim r As Range
-On Error GoTo Slut
+On Error GoTo slut
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -1586,7 +1589,7 @@ On Error GoTo Slut
         Oundo.EndCustomRecord
 #End If
 
-Slut:
+slut:
 End Sub
 Function RemoveLatexOmslut(Text As String)
 
@@ -1618,10 +1621,10 @@ Set om = Selection.OMaths.Add(Selection.Range)
 Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
 om.OMaths(1).BuildUp
 Selection.TypeParagraph
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ListToTabel()
 Dim dd As New DocData
@@ -1667,10 +1670,10 @@ For i = 1 To dd.nrows
     Next
 Next
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub GoToInsertPoint()
 ' finder næste punkt efter selection hvor der kan indsættes nog
@@ -1776,7 +1779,6 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
     Selection.Collapse wdCollapseEnd
     Set t = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=1, NumColumns:=3, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed)
-      DoEvents
 #If Mac Then
 #Else
     With t
@@ -1788,8 +1790,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         .ApplyStyleColumnBands = False
     End With
 #End If
-    t.Columns(1).PreferredWidthType = _
-    wdPreferredWidthPercent
+    t.PreferredWidthType = wdPreferredWidthPercent
 
     t.Columns(1).PreferredWidth = 7
     t.Columns(2).PreferredWidth = 84
@@ -1800,7 +1801,6 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     t.Borders(wdBorderBottom).LineStyle = wdLineStyleNone
     t.Borders(wdBorderRight).LineStyle = wdLineStyleNone
     t.Borders(wdBorderVertical).LineStyle = wdLineStyleNone
-
 
     'indsæt nummer
     If EqNumPlacement Then
@@ -1870,10 +1870,10 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         Oundo.EndCustomRecord
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEquationRef()
@@ -1919,10 +1919,10 @@ Dim b As String
 
 '    Selection.MoveLeft Unit:=wdCharacter, count:=1
 '    Selection.Fields.ToggleShowCodes
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub SetEquationNumber()
@@ -1963,10 +1963,10 @@ On Error GoTo Fejl
     End If
     
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub SetFieldNo(f As Field, n As String)
@@ -1981,10 +1981,10 @@ On Error GoTo Fejl
     f.Code.Text = f.Code.Text & "\r" & n & " \c"
     f.Update
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEquationHeadingNo()
@@ -2001,10 +2001,10 @@ On Error GoTo Fejl
       Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 \r0 \h"
 
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub UpdateEquationNumbers()
@@ -2012,10 +2012,10 @@ On Error GoTo Fejl
 
     ActiveDocument.Fields.Update
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub CreateSprogArrays()
@@ -2116,10 +2116,10 @@ Sub SaveBackup()
     DoEvents
     tempDoc2.Close
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
-Slut:
+slut:
 On Error Resume Next
     If Not UFwait Is Nothing Then Unload UFwait
     Application.ScreenUpdating = True
@@ -2128,10 +2128,10 @@ End Sub
 Sub OpenLatexTemplate()
 On Error GoTo Fejl
     Documents.Add Template:=GetWordMatDir() & "WordDocs/LatexWordTemplate.dotx"
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub DeleteNormalDotm()
@@ -2173,10 +2173,10 @@ Function ReadTextfileToString(Filnavn As String) As String
    Set fsT = Nothing
 #End If
 
-   GoTo Slut
+   GoTo slut
 Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
-Slut:
+slut:
 
 End Function
 
@@ -2192,10 +2192,10 @@ Sub WriteTextfileToString(Filnavn As String, WriteText As String)
    Dim fsT As Object
    'On Error GoTo fejl
 
-   If Filnavn = "" Then GoTo Slut
+   If Filnavn = "" Then GoTo slut
    If WriteText = "" Then
       If Dir(Filnavn) <> "" Then Kill Filnavn
-         GoTo Slut
+         GoTo slut
    End If
    Set fsT = CreateObject("ADODB.Stream")
    fsT.Type = 2 'Specify stream type - we want To save text/string data.
@@ -2208,10 +2208,10 @@ Sub WriteTextfileToString(Filnavn As String, WriteText As String)
 #End If
 
 
-   GoTo Slut
+   GoTo slut
 Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTexfilen"
-Slut:
+slut:
 
 End Sub
 
@@ -2351,10 +2351,8 @@ Sub NewEquation()
         Selection.TypeParagraph
         Selection.MoveLeft Unit:=wdCharacter, Count:=2
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
-
-

@@ -110,7 +110,7 @@ Private Sub UserForm_Activate()
     Label2.Caption = Sprog.SearchingSolutions
     omax.Kommando = Ligning
     omax.Nsolve variabel, 0, 2, 15, 1, 0, 0
-    If Finished Then GoTo Slut
+    If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = omax.MaximaOutput
     If Len(omax.MaximaOutput) > 1 Then
@@ -123,12 +123,12 @@ Private Sub UserForm_Activate()
     Else
         Label2.Caption = Sprog.SearchingSolutions & "..."
     End If
-    If Finished Then GoTo Slut
+    If Finished Then GoTo slut
     omax.PrepareNewCommand
     omax.Kommando = Ligning
     omax.TempDefs = TempDefs
     omax.Nsolve variabel, -3, 3, 15, 5, 0, 0
-    If Finished Then GoTo Slut
+    If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = omax.MaximaOutput
     If Len(omax.MaximaOutput) > 1 Then
@@ -141,12 +141,12 @@ Private Sub UserForm_Activate()
     Else
         Label2.Caption = Sprog.SearchingSolutions & "......"
     End If
-    If Finished Then GoTo Slut
+    If Finished Then GoTo slut
     omax.PrepareNewCommand
     omax.Kommando = Ligning
     omax.TempDefs = TempDefs
     omax.Nsolve variabel, -6, 6, 15, 20, 0, 0
-    If Finished Then GoTo Slut
+    If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = omax.MaximaOutput
     If Len(omax.MaximaOutput) > 1 Then
@@ -159,12 +159,12 @@ Private Sub UserForm_Activate()
     Else
         Label2.Caption = Sprog.SearchingSolutions & "........."
     End If
-    If Finished Then GoTo Slut
+    If Finished Then GoTo slut
     omax.PrepareNewCommand
     omax.Kommando = Ligning
     omax.TempDefs = TempDefs
     omax.Nsolve variabel, -15, 15, 15, 20, 30, 30, True
-    If Finished Then GoTo Slut
+    If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = omax.MaximaOutput
     If Len(omax.MaximaOutput) > 1 Then
@@ -188,7 +188,7 @@ afslut:
         Label2.Caption = Sprog.NoNumericSolution2
     End If
     CommandButton_nsolve.SetFocus
-Slut:
+slut:
     Finished = True
     
 End Sub

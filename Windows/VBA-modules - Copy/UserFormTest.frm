@@ -51,11 +51,11 @@ Dim s As String
                         SetRow Tabel, RowNo
                     End If
                 Else
-                    GoTo Slut
+                    GoTo slut
                 End If
             Next
         End If
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_nexttable_Click()
@@ -91,7 +91,7 @@ Sub AllTables()
 
 
 Fejl:
-Slut:
+slut:
 End Sub
 
 Sub SetRow(t As Table, r As Integer)

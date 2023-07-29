@@ -214,11 +214,10 @@ Public Sub ExportAllModules()
     szSourceWorkbook = ActiveDocument.Name
     Set wkbSource = Application.ActiveDocument
     
-    If wkbSource.VBProject.Protection = 1 Then
-    MsgBox "The VBA in this workbook is protected," & _
-        "not possible to export the code"
-    Exit Sub
-    End If
+'    If wkbSource.VBProject.Protection = 1 Then ' dette check kan få Word til at crashe
+'      MsgBox "The VBA in this workbook is protected, not possible to export the code", vbOKOnly, "Error"
+'      Exit Sub
+'    End If
     
     szExportPath = FolderWithVBAProjectFiles '& "\"
     

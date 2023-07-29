@@ -8,6 +8,7 @@ Option Explicit
     Private NonInterA As Boolean
 
 Sub TestTabel()
+' depracated
     UserFormTest.Show
 End Sub
 Sub RunTestSequenceNonInteractive()
@@ -27,6 +28,7 @@ Sub RunTestSequence()
     On Error GoTo Fejl
     ErrCount = 0
     TestCount = 0
+    ContCount = 0
     visok = True
     
     If MsgBox("Are you sure want to conduct a test. The document will be filled with calculations. It can take some time.", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
@@ -67,132 +69,138 @@ Sub RunTestSequence()
     Selection.GoToPrevious (wdGoToLine)
     Selection.GoToPrevious (wdGoToLine)
 
-
 'GoTo ggbtest
 'GoTo slut
     
-    ' når der skal laves nye test, er det nemmest bare at køre testen med et tomt expected result. Der skrives hvilken teststreng der skal bruges hvis resultat er korrekt
+    ' når der skal laves nye test, er det nemmest at bruge funktion 'CreateTestberegn'
+    ' alternativt: bare at køre testen med et tomt expected result. Der skrives hvilken teststreng der skal bruges hvis resultat er korrekt
     ' ellers brug GetTestString' eller UnicodeValsToString for at finde streng fra et matematikfelt for kommandoen.
     ' the result may have to be adjusted for calculations (not solve). Often brackets of exponents are different and spaces must be removed
     ' Multiple correct answers can be separated by @
 '    DoEvents ' virker ikke
 '    Application.ScreenRefresh
 
+   'til test af enkelt
+'   TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) "
+'   GoTo slut
+   
     'calculation tests
     TestBeregn "2+3", "=5"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "1/5 2", "=2/5"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn VBA.ChrW(8731) & "(-8)", "=-2"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "a b/c+a b+f_a (x)", "=f_a (x)+(a" & VBA.ChrW(183) & "b)/c+a" & VBA.ChrW(183) & "b"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "f_a (x)+a (b+d)/c+f_c+2+a^x (2)", "=f_a (x)+f_c+(a" & VBA.ChrW(183) & "(d+b))/c+2" & VBA.ChrW(183) & "a^(x)+2"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "2^2x+23/2x", "=2^(2" & VBA.ChrW(183) & "x)+23/(2" & VBA.ChrW(183) & "x)" ' fails if 2^2x is not interpreted as 2^(2*x)
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "log" & VBA.ChrW(8289) & "(a)", "=ln" & VBA.ChrW(8289) & "(a)/ln" & VBA.ChrW(8289) & "(10)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "log_2" & VBA.ChrW(8289) & "(4)", "=2"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "ln" & VBA.ChrW(8289) & "(a)", "=ln" & VBA.ChrW(8289) & "(a)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "log_4" & VBA.ChrW(8289) & "a", "=ln" & VBA.ChrW(8289) & "(a)/ln" & VBA.ChrW(8289) & "(4)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(sin" & VBA.ChrW(8289) & "((" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x)/180)-sin" & VBA.ChrW(8289) & "((" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x_0)/180))/(y+x)" ' Test af forkert placerede skjulte parenteser
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "((" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x)/180)-sin" & VBA.ChrW(8289) & "((" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x_0)/180))/(x-x_0)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "x/" & VBA.ChrW(12310) & "2+x" & VBA.ChrW(12311) & "^2", "=x/(x^(2)+2)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "|2+(1+|2-3|)/(|2|+1)+1|", "=11/3"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "L=100^(1/5)/" & VBA.ChrW(960) & "^(1/5)", "=100^(1/5)/" & VBA.ChrW(960) & "^(1/5)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", "=(180" & VBA.ChrW(183) & "cos^(-1)" & VBA.ChrW(8289) & "(2))/" & VBA.ChrW(960) ' burde måske give fejl
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "(" & VBA.ChrW(8730) & "((x+1)^2+(2" & VBA.ChrW(183) & "(x+1)/x)^2 ))^'", "=((-(8" & VBA.ChrW(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW(183) & "(x+1))/x^(2)+2" & VBA.ChrW(183) & "(x+1))/(2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "((4" & VBA.ChrW(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 '    TestBeregn "", ""
 '    If StopNow Then GoTo slut
     ' equation solving
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
+    TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) "
+    If StopNow Then GoTo slut
     TestSolve VBA.ChrW(8747) & "_0^a" & VBA.ChrW(9618) & "x^2 dx=4", "a", "a=12^(1/3)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve VBA.ChrW(8747) & "_0^2" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "a·x·(x-2)^2 " & VBA.ChrW(12311) & " dx=20", "a", "a=15"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "92,3*(e^(0,21278*x)-1)/(e^(0,21278*x)+1)=0.5", "x", "x=0,05091805"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "x^3-x^2+x-2=0", "x", "x=1,35321"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "x^4-x^3+x^2-x-1=0", "x", "x=-0,5187901    " & VBA.ChrW(8744) & "    x=1,290649"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "x-x=2", "x", "x" & VBA.ChrW(8712) & "" & VBA.ChrW(8709)
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "sin" & VBA.ChrW(8289) & "(2x)=1/2", "x", "x=15"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "340=34" & VBA.ChrW(183) & "x^2,9", "x", "x=2,212216"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "sin" & VBA.ChrW(8289) & "(x)=2", "x", "x" & VBA.ChrW(8712) & "" & VBA.ChrW(8709)
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "x^(1/3)=V", "x", "x=V^3"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "5/(x-1)=7/x", "x", "x=3,5"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "120=429" & VBA.ChrW(183) & "L^2,920", "L", "L=0,6464306"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "x^17,3=1/2", "x", "x=0,9607257"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "1,15=" & VBA.ChrW(12310) & "0,9" & VBA.ChrW(12311) & "^a", "a", "a=-1,326512"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "y2/y1=(x2/x1)^a", "a", "a=ln" & VBA.ChrW(8289) & "(y2/y1)/ln" & VBA.ChrW(8289) & "(x2/x1)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "K_n=K_0" & VBA.ChrW(183) & "(1+r)^n", "r", "r=(K_n/K_0 )^(1/n)-1"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "(sin" & VBA.ChrW(8289) & "(A))/a=(sin(B))/b", "A", "A=sin^(-1)" & VBA.ChrW(8289) & "((sin" & VBA.ChrW(8289) & "(B)" & VBA.ChrW(183) & "a)/b)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "tan" & VBA.ChrW(8289) & "(A)=x/50", "A", "A=tan^(-1)" & VBA.ChrW(8289) & "(x/50)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "L=10" & VBA.ChrW(183) & "log" & VBA.ChrW(8289) & "(I/I_0 )", "I", "I=I_0" & VBA.ChrW(183) & "10^(L/10)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "4" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(x-1)=-1/5" & VBA.ChrW(183) & "x^2+2" & VBA.ChrW(183) & "x+3", "x", "x=5" ' skal kun give denne ene løsning
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "x^2" & VBA.ChrW(183) & "(x^2-1)=9" & VBA.ChrW(183) & "(x^2-1)", "x", "x=-3    " & VBA.ChrW(8744) & "    x=-1    " & VBA.ChrW(8744) & "    x=1    " & VBA.ChrW(8744) & "    x=3"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "54.4=(0.01767+2" & VBA.ChrW(183) & "x)^2/((0.00600-x)(0.00313-x))", "x", "x=0,001432725    " & VBA.ChrW(8744) & "    x=0,00982426" ' earlier problem with missing multsign in denominator
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve VBA.ChrW(8747) & "_0^a" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "x^2+2dx=13" & VBA.ChrW(12311), "a", "a=2,808381"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve VBA.ChrW(8747) & "_0^2" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "a" & VBA.ChrW(183) & "x" & VBA.ChrW(183) & "(x-2)^2 " & VBA.ChrW(12311) & " dx=20", "a", "a=15"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "0=(x^3+b)/x^2", "x", "x=-b^(1/3)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "0,1" & VBA.ChrW(183) & "x^4+0,8" & VBA.ChrW(183) & "x^3+0,6" & VBA.ChrW(183) & "x^2-2" & VBA.ChrW(183) & "x-1=0", "x", "x=-6,689559    " & VBA.ChrW(8744) & "    x=-2,245805    " & VBA.ChrW(8744) & "    x=-0,4727184    " & VBA.ChrW(8744) & "    x=1,408082"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "(x+1,5)^2+ (3/x+2)^2=25", "x", "x=-6,263041    " & VBA.ChrW(8744) & "    x=-0,4357036    " & VBA.ChrW(8744) & "    x=1,5    " & VBA.ChrW(8744) & "    x=2,198745"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "2" & VBA.ChrW(183) & "3^x=4" & VBA.ChrW(183) & "5^2x", "x", "x=ln" & VBA.ChrW(8289) & "(2)/ln" & VBA.ChrW(8289) & "(3/25)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "2" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "1,1" & VBA.ChrW(12311) & "^x=3" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "1,05" & VBA.ChrW(12311) & "^x", "x", "x=ln" & VBA.ChrW(8289) & "(3/2)" & VBA.ChrW(183) & "21,49612"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "2" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "(11/10)" & VBA.ChrW(12311) & "^x=3" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "(105/100)" & VBA.ChrW(12311) & "^x", "x", "x=ln" & VBA.ChrW(8289) & "(3/2)/ln" & VBA.ChrW(8289) & "(22/21)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "e^(3,044522 x)=0,6666667 e^(3,091042 x)", "x", "x=8,71593"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "92,3*(e^(0,21278*x)-1)/(e^(0,21278*x)+1)=0.5", "x", "x=0,05091805"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "x^2+x-12" & VBA.ChrW(8805) & "8", "x", "x" & VBA.ChrW(8804) & "-5   " & VBA.ChrW(8744) & "   x" & VBA.ChrW(8805) & "4" ' ulighed
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 '    TestSolve "", "x", "x="
 '    If StopNow Then GoTo slut
     
     'Often fails, but not always ??? then works numerically
     If Not NonInterA Then
         TestSolve "40=72" & VBA.ChrW(183) & "e^((0,619/0,22" & VBA.ChrW(8729) & "(e^22-e^0,22t )) )", "t", "t=100@t=ln" & VBA.ChrW(8289) & "(ln" & VBA.ChrW(8289) & "(5/9)" & VBA.ChrW(183) & "-0,355412+e^22 )" & VBA.ChrW(183) & "4,545455" ' resultat er numerisk 100. Nogle gange kører denne i lykke og skal gentages numerisk. Ukendt hvorfor.
-        If StopNow Then GoTo Slut
+        If StopNow Then GoTo slut
     End If
     
     ' Defintion test
@@ -200,7 +208,7 @@ Sub RunTestSequence()
     Selection.TypeParagraph
     TestSolve "T_2=log" & VBA.ChrW(8289) & "(2)/log" & VBA.ChrW(8289) & "(a) ", "a", "a=2^(1/8)"
     InsertSletDef
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 
     InsertTestMath "f(x)" & VBA.ChrW(8788) & "4x-2,5"
     Selection.TypeParagraph
@@ -208,13 +216,13 @@ Sub RunTestSequence()
     Selection.TypeParagraph
     TestBeregn "f(x)+g(x)", "=2" & VBA.ChrW(183) & "0,8^(x)+4" & VBA.ChrW(183) & "x-2,5"
     InsertSletDef
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     
     InsertTestMath "f(x)" & VBA.ChrW(8788) & "" & VBA.ChrW(8730) & "(r^2-x^2 )"
     Selection.TypeParagraph
     TestBeregn "S=2" & VBA.ChrW(960) & "" & VBA.ChrW(8747) & "_(-r)^r" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "f(x)" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(1+(f^' (x))^2 ) dx" & VBA.ChrW(12311), "=4" & VBA.ChrW(183) & "" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "r^(2)"
     InsertSletDef
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 
     InsertTestMath "Definer: a=2 ;g(x)=x^2"
     Selection.TypeParagraph
@@ -224,14 +232,14 @@ Sub RunTestSequence()
     Selection.TypeParagraph
     TestBeregn "g(h(a+b))", "=100"
     InsertSletDef
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 
     Radians = True
     InsertTestMath "Definer: -2<x<2"
     Selection.TypeParagraph
     TestSolve "sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " " & VBA.ChrW(8730) & "(cos" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " )=0", "x", "x=0    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "/2"
     InsertSletDef
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     Radians = False
 
 '    TestSolve "", "x", "x="
@@ -240,13 +248,13 @@ Sub RunTestSequence()
     If Not NonInterA Then '****** Interactive start *******
     ' requires user to stop and choose retry numeric
     TestBeregn "(1+1/10^12 )^(10^12 )", VBA.ChrW(8776) & "2,718523"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 
     ' Requires user input. Equations that trigger numeric solution
     TestSolve "x^2=" & VBA.ChrW(12310) & "0,7" & VBA.ChrW(12311) & "^x", "x", "x" & VBA.ChrW(8776) & "-15,29371    " & VBA.ChrW(8744) & "    x" & VBA.ChrW(8776) & "-1,249643    " & VBA.ChrW(8744) & "    x" & VBA.ChrW(8776) & "0,8581024", "Click maxima numeric"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestSolve "x" & VBA.ChrW(183) & "e^2x+e^2x=0", "x", "x" & VBA.ChrW(8776) & "-1", "Click maxima numeric"  ' Only x=-1 is a solution
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     
     End If '****** Interactive end *******
 '    TestBeregn VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^" & VBA.ChrW(8734) & "" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "á3)áe^(-1/2á((y-1)/3)^2 ) dy", "=1"
@@ -257,35 +265,35 @@ Sub RunTestSequence()
     ShowSettings
 
     TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", VBA.ChrW(8776) & "Ikke defineret indenfor " & VBA.ChrW(8477)
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn VBA.ChrW(12310) & "cos" & VBA.ChrW(12311) & "^(-1) (0,5)", VBA.ChrW(8776) & "60" ' test af invers trig og indtastning via design-skrift-hævet skrift
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "23456789123", VBA.ChrW(8776) & "2,345679" & VBA.ChrW(183) & "10^10"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "B=sin^(-1)" & VBA.ChrW(8289) & "(sin" & VBA.ChrW(8289) & "(40)" & VBA.ChrW(183) & "0,8605341)", VBA.ChrW(8776) & "33,58274"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 
      'numeric definition test
     InsertTestMath "definer: f(x)=-x^2" & VBA.ChrW(8729) & "" & VBA.ChrW(8730) & "x+2/x;x_1=0,25"
     Selection.TypeParagraph
     TestSolve "f^' (x)=-32", "x", "x=0,251239    " & VBA.ChrW(8744) & "    x=5,464284"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "y=f^' (x_1 )" & VBA.ChrW(183) & "(x-x_1 )+f(x_1 )", VBA.ChrW(8776) & "-32,3125" & VBA.ChrW(183) & "x+16,04688"
     InsertSletDef
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 
     InsertTestMath "Definer: f(x)=211,4885-10,4801" & VBA.ChrW(183) & "(e^0,0329x+e^(-0,0329x) )"
     Selection.TypeParagraph
     TestBeregn "s=" & VBA.ChrW(8747) & "_(-91,25312)^91,25312" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(1+(f^' (x))^2 ) dx", VBA.ChrW(8776) & "451,2554"
     InsertSletDef
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     
     ' Scientific notation test
     MaximaExact = 2
     MaximaVidNotation = True
     ShowSettings
     TestBeregn "123", "=1,23" & VBA.ChrW(183) & "10^2"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     MaximaVidNotation = False
     
 ggbtest:
@@ -297,43 +305,45 @@ ggbtest:
     ShowSettings
     
     TestBeregn "2+3", "=5"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     ' Denne er ikke justeret
     TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=-cos" & VBA.ChrW(8289) & "(14/45 " & VBA.ChrW(960) & ")+27" & VBA.ChrW(8730) & "(5&3)^(2)/(ln(889)/ln(10))+2"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "1/5 2", "=2/5"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn VBA.ChrW(8731) & "(-8)", "=-2"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     
     TestBeregn "a b/c+a b+f_a (x)", "=a" & VBA.ChrW(183) & "b+a" & VBA.ChrW(183) & "b/c+f_a (x)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "f_a (x)+a (b+d)/c+f_c+2+a^x (2)", "=a" & VBA.ChrW(183) & "(b+d)/c+f_a (x)+f_c+2a^(x)+2"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "2^2x+23/2x", "=(2^(x))^(2)+23/(2x)" ' fails if 2^2x is not interpreted as 2^(2*x)
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "log" & VBA.ChrW(8289) & "(a)", "=ln(a)/ln(10)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     
     TestBeregn "log_2" & VBA.ChrW(8289) & "(4)", "=ln(4)/ln(2)@2" ' reducerer ikke eksakt med ggb
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "ln" & VBA.ChrW(8289) & "(a)", "=ln(a)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
     TestBeregn "log_4" & VBA.ChrW(8289) & "a", "=ln(a)/ln(4)"
-    If StopNow Then GoTo Slut
-    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(x_0)+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)" ' Test af forkert placerede skjulte parenteser
-    If StopNow Then GoTo Slut
-    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(x_0)-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
+'    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(x_0)+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)" ' Test af forkert placerede skjulte parenteser
+    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(1/180 x_0 " & VBA.ChrW(960) & ")+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)"
+    If StopNow Then GoTo slut
+'    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(x_0)-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
+    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(1/180 x_0 " & VBA.ChrW(960) & ")-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
+    If StopNow Then GoTo slut
         
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
-    If StopNow Then GoTo Slut
+    If StopNow Then GoTo slut
 
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Err.Description & vbCrLf & vbCrLf & "Error at test no.:" & TestCount + 1, vbOKOnly, "Error during test"
-Slut:
+slut:
     Selection.TypeParagraph
     Selection.Font.Bold = True
     Selection.Font.Size = 14
@@ -360,20 +370,23 @@ Function StopNow() As Boolean
     If ErrCount = 5 And ContCount = 0 Then
         If MsgBox("5 errors detected. Do you want to continue?", vbYesNo, "Many errors") = vbNo Then
             StopNow = True
-            ContCount = ContCount + 1
             Exit Function
-        End If
+         Else
+            ContCount = ContCount + 1
+         End If
     ElseIf ErrCount = 10 And ContCount <= 1 Then
         If MsgBox("10 errors detected. Do you still want to continue?", vbYesNo, "Many errors") = vbNo Then
             StopNow = True
-            ContCount = ContCount + 1
             Exit Function
+         Else
+            ContCount = ContCount + 1
         End If
     ElseIf ErrCount = 50 And ContCount <= 2 Then
         If MsgBox("50 errors detected. Do you still want to continue?", vbYesNo, "Many errors") = vbNo Then
             StopNow = True
-            ContCount = ContCount + 1
             Exit Function
+         Else
+            ContCount = ContCount + 1
         End If
     End If
     StopNow = False
@@ -392,11 +405,14 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
         UfWait2.Label_tip.Caption = komm & vbCrLf & Instruk
     End If
     InsertTestMath komm
+    DoEvents
     If TestType = 1 Then
         beregn
     ElseIf TestType = 2 Then
         MaximaSolvePar (var)
     End If
+    Wait 0.5
+    Application.ScreenRefresh
     MoveCursorToEndOfCalculation
         
     If TestType = 1 Then ' ved beregn skrives resultatet sammen med input, så sammenligning ryger
@@ -444,20 +460,73 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
             Selection.TypeParagraph
             Selection.TypeText "Brug denne streng i koden:"
             Selection.TypeParagraph
-            Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
+            Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul))
         End If
         Selection.TypeParagraph
         ErrCount = ErrCount + 1
     ElseIf visok Then
         Selection.Font.ColorIndex = wdGreen
         Selection.Font.Bold = True
-        Selection.TypeText (TypeText & " test was succesful")
+        Selection.TypeText (TypeText & " test was successful")
         Selection.Font.Bold = False
         Selection.Font.ColorIndex = wdAuto
         Selection.TypeParagraph
     End If
     UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
     TestCount = TestCount + 1
+End Sub
+Sub CreateTestBeregn()
+   Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
+   Dim komm As String, TestType As Integer, var As String
+    
+   omax.ReadSelection
+   komm = TrimR(omax.Kommando, vbCr)
+   If InStr(LCase(komm), "define") > 0 Then
+      TestType = 3
+   ElseIf InStr(komm, "=") > 0 Then
+      TestType = 2
+      var = InputBox("Enter variable to solve for", "Variable", "x")
+      If Trim(var) = vbNullString Then Exit Sub
+   Else
+      TestType = 1
+   End If
+'   InsertTestMath komm
+   DoEvents
+   If TestType = 1 Then
+      beregn
+   ElseIf TestType = 2 Then
+      MaximaSolvePar (var)
+   End If
+   Wait 0.5
+   MoveCursorToEndOfCalculation
+        
+   If TestType = 1 Then ' ved beregn skrives resultatet sammen med input, så sammenligning ryger
+      Oresul = omax.MaximaOutput
+   Else
+      GotoPrevEq
+      omax.ReadSelection
+      Oresul = TrimR(omax.Kommando, vbCr)
+      MoveCursorToEndOfCalculation False
+   End If
+        
+   If TestType = 1 Then
+      Selection.TypeParagraph
+      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeParagraph
+      Selection.TypeText "TestBeregn " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
+   ElseIf TestType = 2 Then
+      Selection.TypeParagraph
+      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeParagraph
+      Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul))
+   ElseIf TestType = 3 Then
+      Selection.TypeParagraph
+      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeParagraph
+      Selection.TypeText "InsertTestMath " & Trim(ConvertToVBAString(komm))
+   End If
+   Selection.TypeParagraph
+
 End Sub
 Sub GetTestString()
     ' placer cursoren i resultat af en beregning, så giver denne sub det udtryk som performtest skal have som resultat
@@ -508,6 +577,7 @@ End Sub
 Sub TestSolve(komm As String, var As String, resul As String, Optional Instruk As String)
     PerformTest 2, komm, resul, var, Instruk
     Exit Sub
+    
     Dim s As String
     s = TestCount & ": Solving equation" & vbCrLf & "Error count: " & ErrCount
     UfWait2.Label1.Caption = s
@@ -543,7 +613,9 @@ End Sub
 
 Sub TestSolve2(komm As String, var As String, resul As String)
     omax.Kommando = komm
+    DoEvents
     omax.MaximaSolve (var)
+    Wait 0.5
     If Not omax.MaximaOutput = resul Then
         Selection.TypeText (" - Fejl - " & omax.Kommando & " - " & omax.MaximaOutput)
         Selection.TypeParagraph
@@ -578,6 +650,7 @@ Sub InsertTestMath(s As String)
     Set mo = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText s
     mo.OMaths.BuildUp
+    DoEvents
 End Sub
 Sub MoveCursorToEndOfCalculation(Optional AddLine As Boolean = True)
     If Not Selection.Find.Execute("*^13^13", , , True) Then

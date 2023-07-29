@@ -2691,7 +2691,6 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
 
 
     Text = Replace(Text, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
-    Text = Replace(Text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
     Text = Replace(Text, VBA.ChrW(11), "")    ' shift-enter
     Text = Replace(Text, vbLf, "")    ' shift-enter og enter
     Text = Replace(Text, vbCrLf, "")
@@ -2905,8 +2904,10 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
 
     Text = ea.Text
 
-    If InStr(Text, VBA.ChrW(9608)) > 0 Then matvekt = True    '9608=matrixtegn
+    If InStr(Text, VBA.ChrW(9608)) > 0 And InStr(Text, VBA.ChrW(9508)) <= 0 Then matvekt = True    '9608=matrixtegn  , bruges dog også ved stykkevis definerede funktioner, hvor 9508 bruges som afsluttende tegn
     If InStr(Text, VBA.ChrW(9632)) > 0 Then matvekt = True    '9632= andet vektortegn
+    
+    Text = Replace(Text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ] bruges ved stykkevis def. funktioner flyttet her 1.26 pga problemer med vekt
 
     If matvekt Then  '9632?
         Text = Replace(Text, VBA.ChrW(215), "~")    ' vektorprodukt
@@ -3689,7 +3690,13 @@ msat:
                         nedre = Mid(integrand, posn + 1, poso - posn - 1)
                         upper = Mid(integrand, poso + 1, poss - poso - 1)
                         '        text = Left(text, posn - 1) & Mid(text, poss + 1, pos2 - poss - 1) & "," & Mid(text, pos2 + 1, 1) & "," & nedre & "," & upper & ")" & Mid(text, pos2 + 2, Len(text) - pos2 - 1)
-                        integrand = right(integrand, Len(integrand) - poss) & "," & var & "," & nedre & "," & upper & ")"
+                        If CasType = 0 Then
+                           integrand = right(integrand, Len(integrand) - poss) & "," & var & "," & nedre & "," & upper & ")"
+                        Else ' geogebra understøtter kun at variabel er x
+                           ea2.Text = right(integrand, Len(integrand) - poss)
+                           If var <> "x" Then ea2.ReplaceVar var, "x", 1
+                           integrand = ea2.Text & "," & nedre & "," & upper & ")"
+                        End If
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktiontegn
                             integrand = right(integrand, Len(integrand) - 1)
                         End If
@@ -4025,7 +4032,41 @@ spring:
         End If
     Loop While Pos > 0
 
-
+    'vektorer med "(1¦2)" notation. Ved indtastning af vektorer via ligningsmenu | Parentes | Eksempler og stakke | ( _ _ )
+    Do
+        Pos = InStr(Text, VBA.ChrW(166))
+        If Pos > 0 Then
+            matvekt = True
+            ea.Text = Text
+            ea.Pos = Pos
+            ea.Pos = ea.FindPrevBracket(Pos - 1)
+            stpos = ea.Pos
+            
+            matrix = ea.GetNextBracketContent
+            slpos = ea.Pos - 1
+            ea.Pos = Pos
+            Arr = Split(matrix, VBA.ChrW(166))
+            If CasType = 1 Or CasType = 2 Then
+                mtext = "{"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "{" & Arr(i) & "},"
+                Next
+                mtext = Left(mtext, Len(mtext) - 1) & "}"
+            Else
+                mtext = "matrix("
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "[" & Arr(i) & "],"
+                Next
+                mtext = Left(mtext, Len(mtext) - 1) & ")"
+            End If
+            
+            If Len(Text) - slpos >= 0 Then
+                Text = Left(Text, stpos - 1) & mtext & right(Text, Len(Text) - slpos)
+            Else
+                Text = Left(Text, stpos - 1) & mtext
+            End If
+        End If
+    Loop While Pos > 0
 
 
     ' indsæt underforståede gangetegn mellem bogstav mellemrum og bogstav
@@ -4158,7 +4199,7 @@ slut:
         MsgBox ConvertErrorText, vbOKOnly, Sprog.Error
         CodeForMaxima = ""
     Else
-        CodeForMaxima = Text
+      CodeForMaxima = Text
     End If
 End Function
 Function ConvertDifferentials(Text As String, DiffChr As String) As String
