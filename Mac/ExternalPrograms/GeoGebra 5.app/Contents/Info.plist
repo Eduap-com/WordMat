@@ -1,89 +1,133 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<?xml version="1.0" ?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleDisplayName</key>
-	<string>GeoGebra</string>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>ggt</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>geogebra.icns</string>
-			<key>CFBundleTypeName</key>
-			<string>GeoGebra Tool</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>ggb</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>geogebra.icns</string>
-			<key>CFBundleTypeName</key>
-			<string>GeoGebra File</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-		</dict>
-	</array>
-	<key>CFBundleExecutable</key>
-	<string>JavaAppLauncher</string>
-	<key>CFBundleIconFile</key>
-	<string>geogebra.icns</string>
-	<key>CFBundleIdentifier</key>
-	<string>org.geogebra5.mac</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>GeoGebra</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>5.0.700</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>JVMArguments</key>
-	<array>
-		<string>--macSandbox=false</string>
-	</array>
-	<key>JVMClassPath</key>
-	<string>geogebra.jar:javagiac-mac.jar:</string>
-	<key>JVMMainClassName</key>
-	<string>geogebra.GeoGebra3D</string>
-	<key>JVMOptions</key>
-	<array>
-		<string>-Xdock:icon=Contents/Resources/${bundle.icon}</string>
-		<string>-Dapple.laf.useScreenMenuBar=true</string>
-		<string>-Dcom.apple.macos.use-file-dialog-packages=true</string>
-		<string>-Dcom.apple.macos.useScreenMenuBar=true</string>
-		<string>-Dcom.apple.mrj.application.apple.menu.about.name=GeoGebra 5</string>
-		<string>-Dcom.apple.smallTabs=true</string>
-		<string>-Dapple.awt.application.name=GeoGebra 5</string>
-		<string>-Xbootclasspath/a:../PlugIns/jdk1.8.0_201.jdk/Contents/Home/jre/lib/jfxrt.jar</string>
-		<string>-Xmx1024M</string>
-	</array>
-	<key>JVMRuntime</key>
-	<string>jdk1.8.0_201.jdk</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.developer-tools</string>
-	<key>LSArchitecturePriority</key>
-	<array>
-		<string>x86_64</string>
-	</array>
-	<key>LSMinimumSystemVersion</key>
-	<string>10.8.0</string>
-	<key>NSHighResolutionCapable</key>
-	<true/>
-	<key>NSHumanReadableCopyright</key>
-	<string>2014 International GeoGebra Institute.</string>
-</dict>
+ <dict>
+  <key>LSMinimumSystemVersion</key>
+  <string>10.11</string>
+  <key>CFBundleDevelopmentRegion</key>
+  <string>English</string>
+  <key>CFBundleAllowMixedLocalizations</key>
+  <true/>
+  <key>CFBundleExecutable</key>
+  <string>GeoGebra</string>
+  <key>CFBundleIconFile</key>
+  <string>GeoGebra.icns</string>
+  <key>CFBundleIdentifier</key>
+  <string>org.geogebra.desktop</string>
+  <key>CFBundleInfoDictionaryVersion</key>
+  <string>6.0</string>
+  <key>CFBundleName</key>
+  <string>GeoGebra</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>1.0</string>
+  <key>CFBundleSignature</key>
+  <string>????</string>
+  <!-- See https://developer.apple.com/app-store/categories/ for list of AppStore categories -->
+  <key>LSApplicationCategoryType</key>
+  <string>public.app-category.utilities</string>
+  <key>CFBundleVersion</key>
+  <string>1.0</string>
+  <key>NSHumanReadableCopyright</key>
+  <string>Copyright (C) 2023</string>
+  <key>CFBundleDocumentTypes</key>
+  <array>
+ <dict>
+  <key>LSItemContentTypes</key>
+   <array>
+    <string>org.geogebra.desktop.ggb</string>
+   </array>
+  <key>CFBundleTypeName</key>
+  <string>GeoGebra File</string>
+
+  <key>LSHandlerRank</key>
+  <string>Owner</string>
+
+  <key>CFBundleTypeRole</key>
+  <string>Editor</string>
+
+  <key>LSIsAppleDefaultForType</key>
+  <true/>
+
+  </dict>
+ <dict>
+  <key>LSItemContentTypes</key>
+   <array>
+    <string>org.geogebra.desktop.ggt</string>
+   </array>
+  <key>CFBundleTypeName</key>
+  <string>GeoGebra Tool</string>
+
+  <key>LSHandlerRank</key>
+  <string>Owner</string>
+
+  <key>CFBundleTypeRole</key>
+  <string>Editor</string>
+
+  <key>LSIsAppleDefaultForType</key>
+  <true/>
+
+  </dict>
+  </array>
+
+  <key>UTExportedTypeDeclarations</key>
+  <array>
+  <dict>
+  <key>UTTypeIdentifier</key>
+  <string>org.geogebra.desktop.ggb</string>
+
+  <key>UTTypeDescription</key>
+  <string>GeoGebra File</string>
+
+  <key>UTTypeConformsTo</key>
+   <array>
+    <string>public.data</string>
+   </array>
+
+  <key>UTTypeTagSpecification</key>
+  <dict>
+
+  <key>public.filename-extension</key>
+   <array>
+    <string>ggb</string>
+   </array>
+  <key>public.mime-type</key>
+   <array>
+    <string>application/vnd.geogebra.file</string>
+   </array>
+  </dict>
+ </dict>
+  <dict>
+  <key>UTTypeIdentifier</key>
+  <string>org.geogebra.desktop.ggt</string>
+
+  <key>UTTypeDescription</key>
+  <string>GeoGebra Tool</string>
+
+  <key>UTTypeConformsTo</key>
+   <array>
+    <string>public.data</string>
+   </array>
+
+  <key>UTTypeTagSpecification</key>
+  <dict>
+
+  <key>public.filename-extension</key>
+   <array>
+    <string>ggt</string>
+   </array>
+  <key>public.mime-type</key>
+   <array>
+    <string>application/vnd.geogebra.tool</string>
+   </array>
+  </dict>
+ </dict>
+  </array>
+
+  <key>NSHighResolutionCapable</key>
+  <string>true</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>The application GeoGebra is requesting access to the microphone.</string>
+ </dict>
 </plist>
