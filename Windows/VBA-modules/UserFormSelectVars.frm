@@ -32,7 +32,7 @@ Private Sub CommandButton_ok_Click()
 On Error GoTo Fejl
     Dim i As Integer
     Dim c As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     
     For i = 0 To ListBox_vars.ListCount - 1
         If ListBox_vars.Selected(i) Then
@@ -42,9 +42,9 @@ On Error GoTo Fejl
         End If
     Next
     If Len(TextBox_variabel.Text) > 0 Then
-    arr = Split(TextBox_variabel.Text, ",")
-    For i = 0 To UBound(arr)
-            SelectedVar = SelectedVar & arr(i) & ","
+    Arr = Split(TextBox_variabel.Text, ",")
+    For i = 0 To UBound(Arr)
+            SelectedVar = SelectedVar & Arr(i) & ","
             c = c + 1
     Next
     End If
@@ -71,11 +71,11 @@ On Error GoTo Fejl
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    arr = Split(TempDefs, VbCrLfMac)
+    Arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
-    For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
-            TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
+    For i = 0 To UBound(Arr)
+        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+            TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
         End If
     Next
     If right(TempDefs, 1) = ListSeparator Then

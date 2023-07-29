@@ -443,7 +443,7 @@ Sub MaximaSolve()
 End Sub
 'Sub MaximaSolve(Optional variabel As String)
 Sub MaximaSolvePar(Optional variabel As String)
-    Dim arr As Variant, s As String, t As String, v As String
+    Dim Arr As Variant, s As String, t As String, v As String
     Dim fejlm As String
     On Error GoTo Fejl
     Application.ScreenUpdating = False
@@ -839,9 +839,9 @@ newcassys:
                 InsertForklaring Sprog.A(134) & variabel & Sprog.A(135)
             End If
             omax.InsertMaximaOutput
-            arr = Split(omax.MaximaOutput, "=")
-            If UBound(arr) = 1 Then
-                If InStr(arr(0), variabel) > 0 And InStr(arr(1), variabel) > 0 Then
+            Arr = Split(omax.MaximaOutput, "=")
+            If UBound(Arr) = 1 Then
+                If InStr(Arr(0), variabel) > 0 And InStr(Arr(1), variabel) > 0 Then
                     '                    Result = MsgBox("Maxima kunne ikke løse ligningssystemet. Den var for kompleks." & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & vbCrLf & "Tryk OK hvis du vil forsøge at løse ligningen numerisk.", vbOKCancel, "Fejl")
                     UFSolvenumeric.FejlMeld = omax.KommentarOutput
                     UFSolvenumeric.Show
@@ -1139,7 +1139,7 @@ slut:
     '   UnLockWindow
 End Sub
 Sub MaximaNsolve(Optional ByVal variabel As String)
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim fejlm As String
     Dim solutions As String
     Dim UFnsolve As New UserFormNumericQuestion
@@ -1246,9 +1246,9 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
                 Selection.TypeParagraph
             End If
             s = Replace(omax.Kommando, ",", ".")
-            arr = Split(s, "=")
-            lhs = arr(0)
-            rhs = arr(1)
+            Arr = Split(s, "=")
+            lhs = Arr(0)
+            rhs = Arr(1)
             If variabel <> "x" Then
                 ea.Text = lhs
                 ea.ReplaceVar variabel, "x"
@@ -1293,9 +1293,9 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
                 MaximaSolveNumeric UFSelectVar.ListBox_vars.Text
             Else
       s = Replace(omax.Kommando, ",", ".")
-            arr = Split(s, "=")
-            lhs = arr(0)
-            rhs = arr(1)
+            Arr = Split(s, "=")
+            lhs = Arr(0)
+            rhs = Arr(1)
             If variabel <> "x" Then
                 ea.Text = lhs
                 ea.ReplaceVar variabel, "x"
@@ -1358,11 +1358,11 @@ ghop:
         Variable = Variable & "=1"
         inp = InputBox(Sprog.A(379), Sprog.A(380), Variable)
         If inp = "" Then GoTo slut    ' trykket cancel
-        arr = Split(inp, ListSeparator)
+        Arr = Split(inp, ListSeparator)
 
         Variable = ""
-        For j = 0 To UBound(arr)
-            arr2 = Split(arr(j), "=")
+        For j = 0 To UBound(Arr)
+            arr2 = Split(Arr(j), "=")
             Variable = Variable & Trim(arr2(0)) & ","
             If UBound(arr2) = 0 Or Trim(arr2(1)) = "" Then
                 guess = guess & ",1"
@@ -1450,7 +1450,7 @@ Sub MaximaSolveNumeric(Optional var As String)
     Dim t As String
     Dim scrollpos As Double
     Dim VarGuess As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim arr2 As Variant
     Dim j As Integer
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -1641,7 +1641,7 @@ Sub beregn()
     '    UFWait.Show
     '    If omax.StopNow Then GoTo slut
     
-    Dim s As String, Res As String, def As String, arr() As String, i As Integer, ms As String, t As String, fo As String
+    Dim s As String, Res As String, def As String, Arr() As String, i As Integer, ms As String, t As String, fo As String
     
     If CASengine > 0 Then
         s = Trim(omax.Kommando)
@@ -2496,17 +2496,17 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Function GetRHS(s As String) As String
-    Dim arr As Variant
+    Dim Arr As Variant
     s = omax.ConvertToAscii(s)
-    arr = Split(s, "=")
-    If UBound(arr) > 0 Then
-        GetRHS = arr(UBound(arr))
+    Arr = Split(s, "=")
+    If UBound(Arr) > 0 Then
+        GetRHS = Arr(UBound(Arr))
     Else
         GetRHS = s
     End If
 End Function
 Function GetLHSvar(s As String) As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim ea As New ExpressionAnalyser
     Dim var As String, i As Integer
     If s = vbNullString Then
@@ -2514,8 +2514,8 @@ Function GetLHSvar(s As String) As String
         Exit Function
     End If
     s = omax.ConvertToAscii(s)
-    arr = Split(s, "=")
-    s = arr(0)
+    Arr = Split(s, "=")
+    s = Arr(0)
     ea.Text = s
     Do
         var = ea.GetNextVar()
@@ -2538,7 +2538,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     Dim scrollpos As Double
     Dim sstart As Long, sslut As Long
     Dim t As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim UFdiffeq As New UserFormDiffEq
     Dim ea As New ExpressionAnalyser
     ea.SetNormalBrackets
@@ -2801,7 +2801,7 @@ Sub UnicodeValsToString()
     Dim k As Integer, n As Integer
     Dim s As String
     Dim mo As OMath
-    Dim arr() As String
+    Dim Arr() As String
     Dim MoArr() As Variant
 
     n = Selection.OMaths.Count
@@ -2809,7 +2809,7 @@ Sub UnicodeValsToString()
         MsgBox "You must select an equation", vbOKOnly, "Error"
         Exit Sub
     End If
-    ReDim arr(n - 1)
+    ReDim Arr(n - 1)
     ReDim MoArr(n - 1)
 '    Selection.OMaths.Linearize
     For k = 0 To n - 1
@@ -2819,7 +2819,7 @@ Sub UnicodeValsToString()
         Set mo = MoArr(k)
         mo.Linearize
         mo.ConvertToNormalText
-        arr(k) = Trim(mo.Range.Text)
+        Arr(k) = Trim(mo.Range.Text)
         mo.ConvertToMathText
         mo.Range.Select
         mo.BuildUp
@@ -2827,8 +2827,8 @@ Sub UnicodeValsToString()
     Selection.Collapse wdCollapseEnd
     Selection.EndKey Unit:=wdLine
 
-    For k = 0 To UBound(arr)
-        Text = arr(k)
+    For k = 0 To UBound(Arr)
+        Text = Arr(k)
         s = ""
         For j = 1 To Len(Text)
             i = AscW(Mid(Text, j, 1))

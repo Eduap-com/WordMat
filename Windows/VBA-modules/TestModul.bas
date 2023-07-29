@@ -8,6 +8,7 @@ Option Explicit
     Private NonInterA As Boolean
 
 Sub TestTabel()
+' depracated
     UserFormTest.Show
 End Sub
 Sub RunTestSequenceNonInteractive()
@@ -68,17 +69,21 @@ Sub RunTestSequence()
     Selection.GoToPrevious (wdGoToLine)
     Selection.GoToPrevious (wdGoToLine)
 
-
 'GoTo ggbtest
 'GoTo slut
     
-    ' når der skal laves nye test, er det nemmest bare at køre testen med et tomt expected result. Der skrives hvilken teststreng der skal bruges hvis resultat er korrekt
+    ' når der skal laves nye test, er det nemmest at bruge funktion 'CreateTestberegn'
+    ' alternativt: bare at køre testen med et tomt expected result. Der skrives hvilken teststreng der skal bruges hvis resultat er korrekt
     ' ellers brug GetTestString' eller UnicodeValsToString for at finde streng fra et matematikfelt for kommandoen.
     ' the result may have to be adjusted for calculations (not solve). Often brackets of exponents are different and spaces must be removed
     ' Multiple correct answers can be separated by @
 '    DoEvents ' virker ikke
 '    Application.ScreenRefresh
 
+   'til test af enkelt
+'   TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) "
+'   GoTo slut
+   
     'calculation tests
     TestBeregn "2+3", "=5"
     If StopNow Then GoTo slut
@@ -120,6 +125,8 @@ Sub RunTestSequence()
 '    If StopNow Then GoTo slut
     ' equation solving
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
+    If StopNow Then GoTo slut
+    TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) "
     If StopNow Then GoTo slut
     TestSolve VBA.ChrW(8747) & "_0^a" & VBA.ChrW(9618) & "x^2 dx=4", "a", "a=12^(1/3)"
     If StopNow Then GoTo slut
@@ -385,7 +392,7 @@ Function StopNow() As Boolean
     StopNow = False
 End Function
 Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional var As String, Optional Instruk As String)
-    Dim s As String, TypeText As String, Oresul As String, arr() As String, ResultOK As Boolean, i As Integer
+    Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
     If TestType = 1 Then
         TypeText = "Calculate"
     ElseIf TestType = 2 Then
@@ -405,6 +412,7 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
         MaximaSolvePar (var)
     End If
     Wait 0.5
+    Application.ScreenRefresh
     MoveCursorToEndOfCalculation
         
     If TestType = 1 Then ' ved beregn skrives resultatet sammen med input, så sammenligning ryger
@@ -417,9 +425,9 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
     End If
     
     ResultOK = False
-    arr = Split(resul, "@")
-    For i = 0 To UBound(arr)
-        If Trim(arr(i)) = Trim(Oresul) Then
+    Arr = Split(resul, "@")
+    For i = 0 To UBound(Arr)
+        If Trim(Arr(i)) = Trim(Oresul) Then
             ResultOK = True
             Exit For
         End If
@@ -452,20 +460,73 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
             Selection.TypeParagraph
             Selection.TypeText "Brug denne streng i koden:"
             Selection.TypeParagraph
-            Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
+            Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul))
         End If
         Selection.TypeParagraph
         ErrCount = ErrCount + 1
     ElseIf visok Then
         Selection.Font.ColorIndex = wdGreen
         Selection.Font.Bold = True
-        Selection.TypeText (TypeText & " test was succesful")
+        Selection.TypeText (TypeText & " test was successful")
         Selection.Font.Bold = False
         Selection.Font.ColorIndex = wdAuto
         Selection.TypeParagraph
     End If
     UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
     TestCount = TestCount + 1
+End Sub
+Sub CreateTestBeregn()
+   Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
+   Dim komm As String, TestType As Integer, var As String
+    
+   omax.ReadSelection
+   komm = TrimR(omax.Kommando, vbCr)
+   If InStr(LCase(komm), "define") > 0 Then
+      TestType = 3
+   ElseIf InStr(komm, "=") > 0 Then
+      TestType = 2
+      var = InputBox("Enter variable to solve for", "Variable", "x")
+      If Trim(var) = vbNullString Then Exit Sub
+   Else
+      TestType = 1
+   End If
+'   InsertTestMath komm
+   DoEvents
+   If TestType = 1 Then
+      beregn
+   ElseIf TestType = 2 Then
+      MaximaSolvePar (var)
+   End If
+   Wait 0.5
+   MoveCursorToEndOfCalculation
+        
+   If TestType = 1 Then ' ved beregn skrives resultatet sammen med input, så sammenligning ryger
+      Oresul = omax.MaximaOutput
+   Else
+      GotoPrevEq
+      omax.ReadSelection
+      Oresul = TrimR(omax.Kommando, vbCr)
+      MoveCursorToEndOfCalculation False
+   End If
+        
+   If TestType = 1 Then
+      Selection.TypeParagraph
+      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeParagraph
+      Selection.TypeText "TestBeregn " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
+   ElseIf TestType = 2 Then
+      Selection.TypeParagraph
+      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeParagraph
+      Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul))
+   ElseIf TestType = 3 Then
+      Selection.TypeParagraph
+      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeParagraph
+      Selection.TypeText "InsertTestMath " & Trim(ConvertToVBAString(komm))
+   End If
+   Selection.TypeParagraph
+
 End Sub
 Sub GetTestString()
     ' placer cursoren i resultat af en beregning, så giver denne sub det udtryk som performtest skal have som resultat

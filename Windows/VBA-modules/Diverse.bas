@@ -735,7 +735,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     Dim posca As Integer
     Dim poseller As Integer
     Dim Pos As Integer
-    Dim arr(20) As String
+    Dim Arr(20) As String
     Dim i As Integer
     
     Do ' gå tilbage til nærmeste ligmed
@@ -755,11 +755,11 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     End If
     If Pos = Len(Text) Then Pos = 0
     If Pos > 0 Then
-        arr(i) = Left(Text, Pos - 1)
+        Arr(i) = Left(Text, Pos - 1)
         Text = right(Text, Len(Text) - Pos)
         i = i + 1
     Else
-        arr(i) = Text
+        Arr(i) = Text
     End If
     Loop While Pos > 0
     
@@ -768,7 +768,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
         KlipTilLigmed = Text
         ResIndex = -1
     Else
-        KlipTilLigmed = arr(i - indeks)
+        KlipTilLigmed = Arr(i - indeks)
     End If
     
     ' fjern retur og mellemrum mm.
@@ -1779,7 +1779,6 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
     Selection.Collapse wdCollapseEnd
     Set t = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=1, NumColumns:=3, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed)
-      DoEvents
 #If Mac Then
 #Else
     With t
@@ -1791,8 +1790,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         .ApplyStyleColumnBands = False
     End With
 #End If
-    t.Columns(1).PreferredWidthType = _
-    wdPreferredWidthPercent
+    t.PreferredWidthType = wdPreferredWidthPercent
 
     t.Columns(1).PreferredWidth = 7
     t.Columns(2).PreferredWidth = 84
@@ -1803,7 +1801,6 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     t.Borders(wdBorderBottom).LineStyle = wdLineStyleNone
     t.Borders(wdBorderRight).LineStyle = wdLineStyleNone
     t.Borders(wdBorderVertical).LineStyle = wdLineStyleNone
-
 
     'indsæt nummer
     If EqNumPlacement Then
@@ -1931,7 +1928,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo Fejl
     Application.ScreenUpdating = False
-    Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, arr As Variant
+    Dim f As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, Arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox Sprog.A(345), vbOKOnly, Sprog.Error
@@ -1951,12 +1948,12 @@ On Error GoTo Fejl
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(Sprog.A(346), Sprog.A(6), f.result & "." & f2.result)
-            arr = Split(n, ".")
-            If UBound(arr) > 0 Then
-                SetFieldNo f, CStr(arr(0))
-                SetFieldNo f2, CStr(arr(1))
+            Arr = Split(n, ".")
+            If UBound(Arr) > 0 Then
+                SetFieldNo f, CStr(Arr(0))
+                SetFieldNo f2, CStr(Arr(1))
             Else
-                SetFieldNo f, CStr(arr(0))
+                SetFieldNo f, CStr(Arr(0))
             End If
         Else
             n = InputBox(Sprog.A(346), Sprog.A(6), f.result)
