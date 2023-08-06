@@ -76,7 +76,7 @@ Dim n As Integer
 Dim oFS As Integer
 Dim r As Range
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -125,7 +125,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
 End If
 
 If n < 2 Then
-    GoTo Fejl
+    GoTo fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -177,7 +177,7 @@ End If
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 
@@ -230,7 +230,7 @@ If n < 2 Then
     n = rws.Count
 End If
 If n < 2 Then
-    GoTo Fejl
+    GoTo fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -260,7 +260,7 @@ End If
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 
@@ -312,7 +312,7 @@ Private Function ComputeRegr(x() As Double, y() As Double) As Boolean
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
 Dim n As Integer
 Dim i As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 
 n = UBound(x) - LBound(x) + 1
                
@@ -337,7 +337,7 @@ If r > 1 Then r = 1
 
 ComputeRegr = True
 GoTo slut
-Fejl:
+fejl:
     ComputeRegr = False
     MsgBox Sprog.A(28), vbOKOnly, Sprog.Error
 slut:
@@ -423,7 +423,7 @@ Sub ComputeExpRegr()
 End Sub
 
 Sub ComputePowRegr()
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim n As Integer
     ReDim logx(LBound(xval) To UBound(xval)) As Double
     ReDim logy(LBound(yval) To UBound(yval)) As Double
@@ -447,7 +447,7 @@ On Error GoTo Fejl
         r = 0
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(32), vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -457,7 +457,7 @@ Sub ComputeUserRegr()
     Dim Arr As Variant
     Dim xlist As String, ylist As String
     Dim i As Long, guess As String, var As String, p As Integer, eps As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     xlist = "["
     For i = LBound(xval) To UBound(xval)
         xlist = xlist & Replace((xval(i)), ",", ".") & ","
@@ -519,7 +519,7 @@ Sub ComputeUserRegr()
     End If
     
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -568,7 +568,7 @@ Sub ComputePolRegr()
     On Error Resume Next
     n = UBound(xval) - LBound(xval)
     orden = InputBox(Sprog.A(35) & n & ")" & vbCrLf & vbCrLf & Sprog.A(36), Sprog.A(37), "2")
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If orden < 1 Or orden > n Then
         MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, Sprog.Error
         Exit Sub
@@ -624,7 +624,7 @@ Sub ComputePolRegr()
         r = 0
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -638,7 +638,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
-On Error GoTo Fejl
+On Error GoTo fejl
 
 If Not (UBound(x) = UBound(y)) Then
     polregr = False
@@ -730,7 +730,7 @@ r = SSregr / SStotal
              
 polregr = True
 GoTo slut
-Fejl:
+fejl:
   polregr = False
 '  MsgBox Err.Number
 slut:
@@ -744,7 +744,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M(3, 4)
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
 n = UBound(x) - LBound(x) + 1
                
@@ -816,7 +816,7 @@ r = SSregr / SStotal
              
 polregrkvad = True
 GoTo slut
-Fejl:
+fejl:
   polregrkvad = False
 '  MsgBox Err.Number
 slut:

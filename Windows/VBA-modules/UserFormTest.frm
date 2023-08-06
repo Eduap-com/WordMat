@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Dim ErrorCount As Long, OkCount As Long
 Dim i As Integer, TabNo As Integer, j As Integer, RowNo As Integer
@@ -90,7 +91,7 @@ Sub AllTables()
     TextBox_status.Text = TextBox_status.Text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemført " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
 
 
-Fejl:
+fejl:
 slut:
 End Sub
 

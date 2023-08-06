@@ -23,7 +23,7 @@ Public Sub Plot2DGraph()
     Dim Arr As Variant
     Dim i As Integer
     Dim j As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim sstart As Long, sslut As Long
     Dim TempCas As Integer
     
@@ -97,14 +97,14 @@ Public Sub Plot2DGraph()
     UF2Dgraph.Show vbModeless
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
     CASengine = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
 Dim Arr As Variant
-On Error GoTo Fejl
+On Error GoTo fejl
 Ligning = Replace(Ligning, VBA.ChrW(8788), "=") ' :=
 Ligning = Replace(Ligning, VBA.ChrW(8797), "=") ' tripel =
 Ligning = Replace(Ligning, VBA.ChrW(8801), "=") ' def =
@@ -145,7 +145,7 @@ ElseIf UF2Dgraph.TextBox_ligning6.Text = "" Then
     UF2Dgraph.TextBox_ligning6.Text = Ligning
 End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -234,7 +234,7 @@ Sub PlotDF()
     UF2Dgraph.Show vbModeless
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -290,7 +290,7 @@ ea.SetNormalBrackets
     UFwait.Label_progress.Caption = "***"
     UFwait.CommandButton_stop.visible = False
     UFwait.Show vbModeless
-On Error GoTo Fejl
+On Error GoTo fejl
 Application.ScreenUpdating = False
 
 If Not FileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
@@ -442,7 +442,7 @@ Dim i As Integer
 
 Application.ScreenUpdating = True
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(97), vbOKOnly, Sprog.Error
     omax.ConvertLnLog = True
     Unload UFwait
@@ -519,7 +519,7 @@ Dim Arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
 Dim srange As Range
-On Error GoTo Fejl
+On Error GoTo fejl
 ea.SetNormalBrackets
     Dim sstart As Long, sslut As Long
     sstart = Selection.start
@@ -655,7 +655,7 @@ End If
     Selection.Collapse wdCollapseEnd
 
 GoTo slut:
-Fejl:
+fejl:
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 slut:
 On Error GoTo slut2
@@ -910,7 +910,7 @@ Function InsertIndlejret(Filnavn As String, Optional startark As String) As Obje
 Dim path As String
 Dim ils As InlineShape
 Dim vers As String
-On Error GoTo Fejl
+On Error GoTo fejl
 Application.ScreenUpdating = False
 EnableExcelMacros
     
@@ -974,7 +974,7 @@ Unload UfWait2
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
 GoTo slut
-Fejl:
+fejl:
     On Error Resume Next
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     Unload UfWait2

@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Public vars As String
 Public DefS As String
@@ -29,7 +30,7 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim i As Integer
     Dim c As Integer
     Dim Arr As Variant
@@ -85,7 +86,7 @@ On Error GoTo Fejl
     
     
     GoTo slut
-Fejl:
+fejl:
     SelectedVar = ""
 slut:
     UFSelectVars.Hide

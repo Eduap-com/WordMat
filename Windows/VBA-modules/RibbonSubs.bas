@@ -39,7 +39,7 @@ Sub RefreshRibbon()
         WoMatRibbon.Invalidate
     End If
 #Else
-    On Error GoTo Fejl
+    On Error GoTo fejl
    Dim lngRibPtr As LongPtr
    Dim lngRibPtrBackup As LongPtr
    Dim objRibbon As Object
@@ -64,7 +64,7 @@ Sub RefreshRibbon()
     End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(394), vbOKOnly, Sprog.Error
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
@@ -73,7 +73,7 @@ slut:
 End Sub
 ' events der fyres når der trykkes på ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
-    On Error GoTo Fejl
+    On Error GoTo fejl
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -100,7 +100,7 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
 #End If
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(395), vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -706,14 +706,14 @@ End Sub
 
 'Callback for ButtonNyLig onAction
 Sub Rib_nylign(control As IRibbonControl)
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     Application.ScreenUpdating = False
     Selection.OMaths.Add Range:=Selection.Range
 '    Selection.OMaths(1).BuildUp
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -843,12 +843,12 @@ Sub Rib_HelpMaxima(control As IRibbonControl)
 #Else
 Dim ReturnValue
 Dim sti As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\html\index.html"
 '    sti = "cmd /C """ & GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\chm\maxima.chm"""
 '    ReturnValue = Shell(sti, vbHide)
 GoTo slut
-Fejl:
+fejl:
     OpenLink "http://maxima.sourceforge.net/docs/manual/en/maxima.html"
 slut:
 #End If

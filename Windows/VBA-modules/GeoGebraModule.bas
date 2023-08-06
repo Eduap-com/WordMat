@@ -27,7 +27,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     ea.SetNormalBrackets
     ea2.SetNormalBrackets
 
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     TempCas = CASengine
     CASengine = 1
@@ -176,7 +176,7 @@ End If
     '    OpenLink UrlLink, True
     
     OpenGeoGebraWeb UrlLink, Gtype, False, False ' v.1.26 false, false tilføjet da definitioner kom med to gange
-Fejl:
+fejl:
 
 slut:
     CASengine = TempCas
@@ -454,8 +454,8 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
       Text = Replace(Text, "increment", VBA.ChrW(8710))  ' specielt delta increment
       Text = Replace(Text, "Symhalf", VBA.ChrW(189)) ' _
       text = Replace(text, "degC", VBA.ChrW(8451))   ' specielt oC tegn
-      Text = Replace(Text, "<=", VBA.ChrW(8804))  '
-      Text = Replace(Text, ">=", VBA.ChrW(8805)) '
+      Text = Replace(Text, "<=", VBA.ChrW(8804))  ' Virker kun med geogebra app
+      Text = Replace(Text, ">=", VBA.ChrW(8805)) ' Virker kun med geogebra app
       Text = Replace(Text, "CVinkelO", VBA.ChrW(8736)) '
       Text = Replace(Text, "CVinkel", VBA.ChrW(8736)) '
       Text = Replace(Text, "Symangle", VBA.ChrW(8736))  '
@@ -702,6 +702,7 @@ Dim p As Integer, p2 As Integer
 End Sub
 
 Sub GeoGebra()
+' sender den valgte ligning og definitioner over i GeoGebra 5
  '   On Error GoTo Fejl
     Dim geogebrasti As String
     Dim geogebrafilersti As String
@@ -720,7 +721,7 @@ Sub GeoGebra()
     UFwait.Show vbModeless
     
     geogebrasti = GeoGebraPath()
-    If geogebrasti = "" Then GoTo Fejl ' hvis geogebra ikke installeret så fejl
+    If geogebrasti = "" Then GoTo fejl ' hvis geogebra ikke installeret så fejl
 '    geogebrafilersti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     geogebrafilersti = GetTempDir()
     
@@ -733,7 +734,7 @@ Sub GeoGebra()
         geogebrasti = geogebrasti & " """ & geogebrafilersti & """"
     Else
         MsgBox "The GeoGebra.ggb file cannot be located", vbOKOnly, Sprog.Error
-        GoTo Fejl
+        GoTo fejl
     End If
     
 #If Mac Then
@@ -750,14 +751,14 @@ Sub GeoGebra()
     Unload UFwait
     
     GoTo slut
-Fejl:
+fejl:
     UserFormGeoGebra.Show
 slut:
     CASengine = TempCas
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
     If FileExists(GeoGebraPath) Then Exit Function
@@ -795,7 +796,7 @@ On Error GoTo Fejl
     End If
 #End If
     GoTo slut
-Fejl:
+fejl:
     GeoGebraPath = ""
 slut:
 End Function
@@ -808,7 +809,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Dim dd As New DocData
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ea.SetNormalBrackets
     ea2.SetNormalBrackets
     geogebrafil.Show3D = False
@@ -954,7 +955,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Name geogebrasti & "geogebra.zip" As geogebrasti & "geogebra.ggb"
 #End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 On Error Resume Next
@@ -1059,7 +1060,7 @@ Sub CreateZipFile(zipfilnavn As Variant, Filnavn As Variant, Optional filnavn2 A
 '    On Error GoTo 0
 #End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 

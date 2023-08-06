@@ -164,14 +164,14 @@ Pos = pos2 + 1
 End Function
 
 Public Property Get ChrByIndex(ByVal Pos As Long) As String
-On Error GoTo Fejl
+On Error GoTo fejl
     If Pos <= Len(Text) And Pos > 0 Then
         ChrByIndex = Mid(Text, Pos, 1)
     Else
         ChrByIndex = VBA.ChrW(0)
     End If
 GoTo slut
-Fejl:
+fejl:
         ChrByIndex = VBA.ChrW(0)
 slut:
 End Property
@@ -644,7 +644,7 @@ End Function
 Sub InsertMultSigns()
 ' indsætter underforståede gangetegn
 Dim navn As String
-Dim c1 As Integer, c2 As Integer, gempos As Long
+Dim C1 As Integer, C2 As Integer, gempos As Long
 Dim c As String, var As String
     On Error Resume Next
     Do
@@ -709,14 +709,14 @@ Sub RemoveMultSign()
 ' tal*bogstav samt )*( og 2*( eller mellemrum*alt
 
 Dim p As Long
-Dim c1 As String, c2 As String, c3 As String
+Dim C1 As String, C2 As String, c3 As String
     p = 1
     Do
         p = InStr(p, Text, "*")
         If p > 0 And p < Len(Text) Then
-            c1 = ChrByIndex(p - 1)
+            C1 = ChrByIndex(p - 1)
             c3 = ChrByIndex(p + 1)
-            If (IsNumber(p - 1) And IsLetterPos(p + 1)) Or (c1 = ")" And c2 = "(") Or c1 = " " Then
+            If (IsNumber(p - 1) And IsLetterPos(p + 1)) Or (C1 = ")" And C2 = "(") Or C1 = " " Then
                 Text = Left(Text, p - 1) & " " & right(Text, Len(Text) - p)
             End If
             p = p + 2

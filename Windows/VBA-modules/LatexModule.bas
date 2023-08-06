@@ -109,28 +109,28 @@ Public Sub SaveFile(doctype As Integer)
    
    UFwait.Label_tip.Caption = "Konverterer bibliografi"
    ' Fields
-   Dim f As Field, CiteName As String, CiteP As String, p2 As Integer, fr As Range
-   For Each f In HiddenDoc.Fields
-      If f.Type = wdFieldCitation Then
+   Dim F As Field, CiteName As String, CiteP As String, p2 As Integer, fr As Range
+   For Each F In HiddenDoc.Fields
+      If F.Type = wdFieldCitation Then
          HasBib = True
-         CiteName = Split(Trim(f.Code), " ")(1)
-         f.Select
-         p = InStr(f.Code, "\p")
+         CiteName = Split(Trim(F.Code), " ")(1)
+         F.Select
+         p = InStr(F.Code, "\p")
          If p > 0 Then
-            p2 = InStr(p + 3, f.Code, " ")
-            CiteP = Mid(f.Code, p + 3, p2 - p - 3)
+            p2 = InStr(p + 3, F.Code, " ")
+            CiteP = Mid(F.Code, p + 3, p2 - p - 3)
          End If
          Selection.Collapse wdCollapseEnd
-         f.Delete
+         F.Delete
          If CiteP = "" Then
             Selection.TypeText "\cite{" & CiteName & "}"
          Else
             Selection.TypeText "\cite[p.~" & CiteP & "]{" & CiteName & "}"
          End If
-      ElseIf f.Type = wdFieldAuthor Then
-         latexfil.Author = f.Code ' skal justeres navnet er i code
-      ElseIf f.Type = wdFieldBibliography Then
-         f.Select
+      ElseIf F.Type = wdFieldAuthor Then
+         latexfil.Author = F.Code ' skal justeres navnet er i code
+      ElseIf F.Type = wdFieldBibliography Then
+         F.Select
          Selection.MoveStart wdLine, -2
          Selection.Delete
       End If
@@ -413,7 +413,7 @@ Sub ConvertImagesToLatex(d As Document)
    Next
    
    GoTo slut
-Fejl:
+fejl:
    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure ConvertImagesToLatex, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
 slut:
 End Sub

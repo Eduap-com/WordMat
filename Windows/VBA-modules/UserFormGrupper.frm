@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Private Sub CommandButton_nulstil_Click()
     TextBox_data.Text = ""
@@ -32,7 +33,7 @@ Dim arrdata As Variant
 Dim arrint As Variant
 Dim i As Integer
 Dim j As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 Me.Hide
 'Application.ScreenUpdating = False
 Data = TextBox_data.Text
@@ -82,7 +83,7 @@ For i = 0 To n
         If Trim(Arr(0)) = "" Then
             
         Else
-            GoTo Fejl
+            GoTo fejl
         End If
     End If
     Max = Arr(1)
@@ -95,7 +96,7 @@ For i = 0 To n
             arrdata(j) = Replace(arrdata(j), ",", ".")
             v = CDbl(arrdata(j))
             v = val(arrdata(j))
-            On Error GoTo Fejl
+            On Error GoTo fejl
             If v > Min And v <= Max Then
                 Tabel.Cell(i + 2, 3).Range.Text = val(Tabel.Cell(i + 2, 3).Range.Text) + 1
             End If
@@ -105,7 +106,7 @@ Next
 End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox "Der er en fejl i dine intervaller. Hver linje skal indeholde interval f.eks. 5-10.", vbOKOnly, Sprog.Error
 slut:
 End Sub

@@ -270,7 +270,7 @@ WriteTextfileToString Mappe & "\" & Filnavn, LaTexDoc
 
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
 slut:
 
@@ -306,7 +306,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal Filnavn As String)
       On Error Resume Next
       If Dir(Mappe & "\" & Filnavn & ".dvi") <> "" Then Kill Mappe & "\" & Filnavn & ".dvi"
       'Kill Mappe & "\" & filnavn & ".dvi"
-      On Error GoTo Fejl
+      On Error GoTo fejl
 
       appnr = Shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
 
@@ -328,7 +328,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal Filnavn As String)
 
    'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
    GoTo slut
-Fejl:
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 #End If
@@ -417,7 +417,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal Filnavn As String)
    End If
 #End If
    GoTo slut
-Fejl:
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub

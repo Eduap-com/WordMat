@@ -182,33 +182,73 @@ Function FolderWithVBAProjectFiles() As String
     
 End Function
 Public Sub ExportAllModules()
+' Eksports all modules, class and forms to VBAModulesFolder in the same dir as the current document.
+' If the folder already exist it is renamed in case of an error during export. If the export is successfull the backupfolder is deleted.
+' The backup folder is called VBAModulesFolder & "-Backup"
+' If the number of files in VBAModulesFolder is <2 or less than 90% of the files in the previous export, then the backup folder is not deleted.
     Dim bExport As Boolean
     Dim wkbSource As Document
     Dim szSourceWorkbook As String
     Dim szExportPath As String
     Dim szFileName As String, FileList As String
     Dim cmpComponent As VBIDE.VBComponent
+    Dim C1 As Long, C2 As Long
+    Dim ModuleFolder As String
+    Dim ModuleBackupFolder As String
+    Dim UfWait2 As UserFormWaitForMaxima
+    Set UfWait2 = New UserFormWaitForMaxima
+    On Error GoTo fejl
+    
 
 #If Mac Then
     MsgBox "This function is not meant to be run on Mac, as the export will not be Windows compatible", vbOKOnly, "No Mac"
     Exit Sub
 #End If
 
-
-   If MsgBox("Do you really want to export all VBA modules to folder '" & VBAModulesFolder & "'?" & vbCrLf & "(all current files in folder are deleted)", vbOKCancel) = vbCancel Then Exit Sub
+'   If MsgBox("Confirm you want to export all VBA modules to folder '" & VBAModulesFolder & "'?" & vbCrLf & "(If the folder exists. A backup will be made in '" & VBAModulesFolder & "-Backup'. If case of an error)", vbOKCancel) = vbCancel Then Exit Sub
+    UfWait2.Show vbModeless
+    UfWait2.Label_tip.Caption = "Exporting modules"
+    UfWait2.Label_progress.Caption = "*"
+    DoEvents
     
     ''' The code modules will be exported in a folder named.
     ''' VBAProjectFiles in the Documents folder.
     ''' The code below create this folder if it not exist
     ''' or delete all files in the folder if it exist.
-    If FolderWithVBAProjectFiles = "Error" Then
-        MsgBox "Export Folder does not exist"
+    ModuleFolder = FolderWithVBAProjectFiles
+    ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup\"
+    
+    If ModuleFolder = "Error" Then
+        MsgBox "Export Folder does not exist and could not be created", vbOKOnly, "Error"
+        Exit Sub
+    End If
+    If Dir(ModuleBackupFolder) <> "" Then
+        If MsgBox("There is already a backup-folder. Do you want to overwrite the contents?", vbYesNo, "Confirm") = vbYes Then
+            Err.Clear
+            On Error Resume Next
+                Kill ModuleBackupFolder & "*.*"
+                RmDir ModuleBackupFolder
+            On Error GoTo fejl
+            If Err.Number > 0 Then
+                MsgBox "Could not delete backupfolder"
+                GoTo slut
+            End If
+        Else
+            MsgBox "Export aborted", vbOKOnly, "Aborted"
+            GoTo slut
+        End If
+    End If
+    Name ModuleFolder As ModuleBackupFolder ' omdøber eksisterende folder til backup
+    ModuleFolder = FolderWithVBAProjectFiles ' genskaber ny folder
+    If ModuleFolder = "Error" Then
+        MsgBox "Export Folder does not exist and could not be created", vbOKOnly, "Error"
         Exit Sub
     End If
     
-    On Error Resume Next
-        Kill FolderWithVBAProjectFiles & "\*.*"
-    On Error GoTo 0
+    
+'    On Error Resume Next
+'        Kill FolderWithVBAProjectFiles & "\*.*"
+'    On Error GoTo 0
 
     ''' NOTE: This workbook must be open in Excel.
     szSourceWorkbook = ActiveDocument.Name
@@ -226,7 +266,7 @@ Public Sub ExportAllModules()
         bExport = True
         szFileName = cmpComponent.Name
 
-    ' nïr der importeres oveni VBAmodul omdbes til VBAmodul1. Det _ndres tilbagee
+    ' naar der importeres oveni VBAmodul omdoebes til VBAmodul1. Det aendres tilbage
         If cmpComponent.Name = "VBAmodul1" Then cmpComponent.Name = "VBAmodul"
         If cmpComponent.Name = "VBAmodul11" Then cmpComponent.Name = "VBAmodul"
 
@@ -252,6 +292,8 @@ Public Sub ExportAllModules()
         ''' remove it from the project if you want
         '''wkbSource.VBProject.VBComponents.Remove cmpComponent
         End If
+        UfWait2.Label_progress.Caption = "*"
+        DoEvents
    
     Next cmpComponent
     
@@ -262,7 +304,26 @@ Public Sub ExportAllModules()
     A.WriteLine ("VBA-exported of Project " & wkbSource.VBProject.Name & " created " & Now())
     A.Close
 
-    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
+    C1 = CountFilesInFolder(ModuleFolder)
+    C2 = CountFilesInFolder(ModuleBackupFolder)
+    If C1 > 2 Then
+        If C1 < 0.9 * C2 Then
+            MsgBox "The number of files in the export is significantly smaller than the previous export. Please check that this is correct." & vbCrLf & "The previous export is backed up in:" & vbCrLf & ModuleBackupFolder, vbOKOnly, "Alert"
+        Else
+            On Error Resume Next
+                Kill ModuleBackupFolder & "*.*"
+                RmDir ModuleBackupFolder
+            On Error GoTo fejl
+        End If
+    Else
+        MsgBox "An error occurred during Export. The module folder only contains " & C1 & " files. " & vbCrLf & "Your previous Export is saved to a backup folder: " & vbCrLf & ModuleBackupFolder, vbOKOnly, "Error"
+    End If
+    GoTo slut
+fejl:
+    MsgBox "An error occurred during Export. Your previous Export is saved to a backup folder: " & VBAModulesFolder & "-Backup", vbOKOnly, "Error"
+slut:
+    Unload UfWait2
+'    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
 End Sub
 Sub ImportAllModules()
     Dim bExport As Boolean, d As String, q As String
@@ -273,6 +334,7 @@ Sub ImportAllModules()
     Dim StrFile As String, i As Integer
     Dim Arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
+    Dim ModuleFolder As String, C1 As Long
 
 #If Mac Then
     MsgBox "This function is not meant to be run on Mac, as the import is not Mac to Windows compatible", vbOKOnly, "No Mac"
@@ -283,17 +345,25 @@ Sub ImportAllModules()
     ''' VBAProjectFiles in the Documents folder.
     ''' The code below create this folder if it not exist
     ''' or delete all files in the folder if it exist.
-    If FolderWithVBAProjectFiles = "Error" Then
-        MsgBox "Import Folder does not exist"
+    ModuleFolder = FolderWithVBAProjectFiles
+
+    If ModuleFolder = "Error" Then
+        MsgBox "Import Folder does not exist", vbOKOnly, "Error"
         Exit Sub
     End If
     
+    C1 = CountFilesInFolder(ModuleFolder)
+    If C1 < 2 Then
+        MsgBox "There is only " & C1 & " files in import folder. Import aborted", vbOKOnly, "Aborted"
+        GoTo slut
+    ElseIf C1 < 10 Then
+        If MsgBox("There is only " & C1 & " files in import folder. Are you sure you wish to continue?", vbYesNo, "Warning!") = vbNo Then GoTo slut
+    End If
     szSourceWorkbook = ActiveDocument.Name
     Set wkbSource = Application.ActiveDocument
     
-    If wkbSource.VBProject.Protection = 1 Then
-    MsgBox "The VBA in this workbook is protected," & _
-        "not possible to import"
+    If wkbSource.VBProject.Protection = 1 Then ' this check can maybe cause problems
+        MsgBox "The VBA in this workbook is protected, not possible to import"
         Exit Sub
     End If
     
@@ -345,10 +415,27 @@ Sub ImportAllModules()
     Next
     
     MsgBox "Files imported from folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Import complete"
+    GoTo slut
+fejl:
+slut:
 End Sub
 Public Sub RemoveAllModules()
     DeleteAllModules True
 End Sub
+Function CountFilesInFolder(FolderPath As String) As Long
+    Dim FileName As String
+    Dim FileCount As Long
+    If right(FolderPath, 1) = "\" Then
+        FileName = Dir(FolderPath & "*")
+    Else
+        FileName = Dir(FolderPath & "\*")
+    End If
+    Do While FileName <> ""
+        FileCount = FileCount + 1
+        FileName = Dir()
+    Loop
+    CountFilesInFolder = FileCount
+End Function
 Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
     Dim bExport As Boolean
     Dim wkbSource As Document

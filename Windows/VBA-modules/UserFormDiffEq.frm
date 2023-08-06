@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Public DefS As String
 Public vars As String
@@ -56,9 +57,9 @@ Dim i As Integer
 End Sub
 
 Private Sub CommandButton_solvenum_Click()
-   Dim f As String, Arr() As String
+   Dim F As String, Arr() As String
    Arr = Split(Label_ligning.Caption, "=")
-   If UBound(Arr) > 0 Then f = Arr(1)
+   If UBound(Arr) > 0 Then F = Arr(1)
    If Len(Arr(0)) > 2 Then
       MsgBox "Differentialligningen skal være på formen y'=...  for at den kan løses numerisk" & vbCrLf & "", vbOKOnly, "Fejl"
       Exit Sub
@@ -67,7 +68,7 @@ Private Sub CommandButton_solvenum_Click()
    Me.Hide
    UserFormDeSolveNumeric.TextBox_varx.Text = TextBox_variabel.Text
    UserFormDeSolveNumeric.TextBox_var1.Text = TextBox_funktion.Text
-   UserFormDeSolveNumeric.TextBox_eq1.Text = f
+   UserFormDeSolveNumeric.TextBox_eq1.Text = F
    If TextBox_starty.Text = vbNullString Then
       UserFormDeSolveNumeric.TextBox_init1.Text = "1"
    Else

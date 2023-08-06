@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Private MustRestart As Boolean
 Private LoadUnits As Boolean
@@ -38,8 +39,8 @@ End Sub
 
 Private Sub NulstilWordDoc(Filnavn As String)
 Dim appdir As String
-Dim fs, f, s
-On Error GoTo Fejl
+Dim fs, F, s
+On Error GoTo fejl
     
 If MsgBox(Sprog.A(665) & ", " & Filnavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo slut
     
@@ -59,7 +60,7 @@ End If
 #End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 

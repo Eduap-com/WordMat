@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Public vars As String
 Public DefS As String
@@ -28,7 +29,7 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo Fejl
+On Error GoTo fejl
 Dim Arr As Variant
 Dim i As Integer
     If OptionButton_numonly.Value = True Then
@@ -99,7 +100,7 @@ Dim i As Integer
     End If
     
     GoTo slut
-Fejl:
+fejl:
     SelectedVar = ""
 slut:
     UFSelectVar.Hide
