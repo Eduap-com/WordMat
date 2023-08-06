@@ -274,7 +274,7 @@ Dim result As VbMsgBoxResult
 '    result = MsgBox(Sprog.A(63) & vbCrLf & vbCrLf & "Alt + g    Prik-gangetegn" & vbCrLf & "Alt + b    beregn" & vbCrLf & "AltGr + Enter    beregn" & vbCrLf & "Alt + L    Løs ligning(er)" & vbCrLf & "Alt + S    Slet definitioner" & vbCrLf & "Alt + D    Indsæt Definer:" & vbCrLf & "Alt + i    Indstillinger" & vbCrLf & "alt + r    Indsæt forrige resultat(er)" & vbCrLf & "alt + P    Plot graf" & vbCrLf & "alt + E    Slå enheder til / fra" & vbCrLf & "alt + M    Indsæt ny ligning" & vbCrLf & "alt + O    Omskriv" & vbCrLf & "alt + N    Skift mellem auto, eksakt, num" & vbCrLf & "alt + T   Konverter ligning til/fra LaTex" & vbCrLf & vbCrLf & "Bemærk at der også er genveje til beregn og løs ligning(er) hvis du højreklikker på en ligning.", vbYesNo, Sprog.A(64))
 '    If result = vbYes Then
     DeleteNormalDotm
-    GenerateKeyboardShortcuts
+'    GenerateKeyboardShortcuts
         
     MsgBox Sprog.A(671), vbOKOnly, ""
         
@@ -285,8 +285,6 @@ End Sub
 Private Sub CommandButton_sletenheder_Click()
     TextBox_outunits.Text = ""
 End Sub
-
-
 
 
 

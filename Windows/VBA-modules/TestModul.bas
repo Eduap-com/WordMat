@@ -23,7 +23,8 @@ End Sub
 Sub RunTestSequence()
 ' runs a series of test calculations. The expressions are typed into Word and the test math action is performed. Result is shown
 '    Application.ScreenUpdating = False
-    Dim scrollpos As Double
+    Dim scrollpos As Double, s As String
+    Dim AllR As Range
     
     On Error GoTo fejl
     ErrCount = 0
@@ -32,15 +33,7 @@ Sub RunTestSequence()
     visok = True
     
     If MsgBox("Are you sure want to conduct a test. The document will be filled with calculations. It can take some time.", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
-    
-    
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
-    
+        
     Set UfWait2 = New UserFormWaitForMaxima
     UfWait2.Label1.Font.Size = 12
     UfWait2.Label_tip.Font.Size = 10
@@ -59,6 +52,8 @@ Sub RunTestSequence()
     Selection.GoToNext (wdGoToLine)
     If Selection.OMaths.Count > 0 Then MoveCursorToEndOfCalculation
     
+    Set AllR = Selection.Range
+    
     Selection.TypeParagraph
     Selection.Font.Bold = True
     Selection.Font.Size = 14
@@ -70,6 +65,26 @@ Sub RunTestSequence()
     Selection.TypeParagraph
     Selection.GoToPrevious (wdGoToLine)
     Selection.GoToPrevious (wdGoToLine)
+
+    s = CheckKeyboardShortcutsNoninteractive()
+    If s = "" Then
+        Selection.Font.ColorIndex = wdGreen
+        Selection.Font.Bold = True
+        Selection.TypeText ("Keyboard Shortcuts ok")
+        Selection.Font.Bold = False
+        Selection.Font.ColorIndex = wdAuto
+        Selection.TypeParagraph
+    Else
+        Selection.Font.ColorIndex = wdRed
+        Selection.Font.Bold = True
+        Selection.TypeText ("Keyboard shortcut problem:  " & s)
+        Selection.Font.Bold = False
+        Selection.Font.ColorIndex = wdAuto
+        Selection.TypeParagraph
+'        Selection.TypeText ("  ")
+        ErrCount = ErrCount + 1
+    End If
+    TestCount = TestCount + 1
 
 'GoTo ggbtest
 'GoTo slut
@@ -413,10 +428,10 @@ slut:
     
     MaximaVidNotation = False
     MaximaUnits = False
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    
+    AllR.End = Selection.End
+    AllR.Select
+    
     Unload UfWait2
 End Sub
 Function StopNow() As Boolean

@@ -275,9 +275,111 @@ Sub ChangeAutoHyphen()
     Options.AutoFormatAsYouTypeReplaceFarEastDashes = False
     Options.AutoFormatAsYouTypeReplaceSymbols = False
 End Sub
+
+Sub ShowCustomizationContext()
+'    MsgBox CustomizationContext & vbCrLf & ActiveDocument.AttachedTemplate
+    MsgBox Templates(4)
+End Sub
+Public Sub CheckKeyboardShortcuts()
+    CheckKeyboardShortcutsPar False
+End Sub
+Public Function CheckKeyboardShortcutsNoninteractive() As String
+    CheckKeyboardShortcutsNoninteractive = CheckKeyboardShortcutsPar(True)
+End Function
+Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) As String
+    ' Checker om Keyboard shortcuts er gemt correct i WordMat.dotm.
+    Dim WT As Template
+    Dim KB As KeyBinding
+    Dim GemT As Template, s As String
+    Dim KeybInNormal As Boolean, FejlText As String
+    
+    Set GemT = CustomizationContext
+        
+    Set WT = GetWordMatTemplate()
+    If WT Is Nothing Then
+        CheckKeyboardShortcutsPar = "Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm" & vbCrLf
+        If Not NonInteractive Then
+            If MsgBox("Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm. Vil du anvende " & ActiveDocument.AttachedTemplate & "?", vbYesNo, "Ingen WordMat skabelon") = vbYes Then
+                Set WT = ActiveDocument.AttachedTemplate
+            Else
+                GoTo slut
+            End If
+        Else
+            GoTo slut
+        End If
+    End If
+    
+    CustomizationContext = NormalTemplate
+    For Each KB In KeyBindings
+        If KeyBindings.Count > 10 Then
+            If KB.KeyString = "Alt+B" Then
+                KeybInNormal = True
+                Exit For
+            End If
+        End If
+    Next
+    If KeybInNormal Then
+        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Advarsel: Der er sat WordMat tastaturgenveje i Normal.dotm" & vbCrLf
+        If Not NonInteractive Then
+            MsgBox "Der er sat WordMat tastaturgenveje i Normal.dotm", vbOKOnly Or vbInformation, "Advarsel"
+            DeleteNormalDotm
+        End If
+        GoTo slut
+    End If
+    
+    
+    CustomizationContext = WT
+    
+    If Not NonInteractive Then
+        s = "CustomizationContext:  " & CustomizationContext & vbCrLf
+        If CustomizationContext = ActiveDocument.AttachedTemplate Then
+            s = s & "Det er aktivt dokument" & vbCrLf
+        Else
+            s = s & "Det er global skabelon og ikke aktivt dokument" & vbCrLf
+        End If
+        s = s & vbCrLf
+        s = s & "Antal keybindings: " & KeyBindings.Count & vbCrLf & vbCrLf
+        s = s & "Keybindings:" & vbCrLf
+        For Each KB In KeyBindings
+            s = s & "  " & KB.KeyString & vbCrLf
+        Next
+        MsgBox s, vbOKOnly, "KeyBindings"
+    End If
+    
+slut:
+    CustomizationContext = GemT
+
+End Function
+Function GetWordMatTemplate() As Template
+    ' Hvis det aktuelle dokument hedder wordmat*.dotm så returneres den som template
+    ' Ellers søges alle globale skabeloner igennem efter om der er en der hedder wordmat*.dotm
+    Dim WT As Template
+    If Len(ActiveDocument.AttachedTemplate) > 10 Then
+        If LCase(Left(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase(right(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
+            Set GetWordMatTemplate = ActiveDocument.AttachedTemplate
+            Exit Function
+        End If
+    End If
+    For Each WT In Application.Templates
+        If LCase(Left(WT, 7)) = "wordmat" And LCase(right(WT, 4)) = ".dotm" Then
+            Set GetWordMatTemplate = WT
+            Exit Function
+        End If
+    Next
+End Function
 Public Sub GenerateKeyboardShortcuts()
-    Dim Wd As WdKey
-    CustomizationContext = ActiveDocument.AttachedTemplate
+    Dim Wd As WdKey, WT As Template, s As String
+    
+    Set WT = GetWordMatTemplate()
+    If WT Is Nothing Then
+        If MsgBox("Der kunne ikke findes nogen skabelon der hed wordmat*.dotm. Vil du anvende " & ActiveDocument.AttachedTemplate & "?", vbYesNo, "Ingen WordMat skabelon") = vbYes Then
+            Set WT = ActiveDocument.AttachedTemplate
+        Else
+            Exit Sub
+        End If
+    End If
+    
+    CustomizationContext = WT
 On Error Resume Next
 '#If Mac Then
 '    Wd = wdKeyControl
