@@ -14,6 +14,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
+
 Option Explicit
 Public DefS As String
 Public vars As String
@@ -27,7 +29,7 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer
     
     
@@ -35,12 +37,12 @@ Dim i As Integer
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> TextBox_funktion.Text Then ' kan ikke definere variabel der løses for
-                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
+            If Split(arr(i), "=")(0) <> TextBox_funktion.Text Then ' kan ikke definere variabel der løses for
+                TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & TextBox_funktion.Text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
@@ -56,10 +58,10 @@ Dim i As Integer
 End Sub
 
 Private Sub CommandButton_solvenum_Click()
-   Dim f As String, Arr() As String
-   Arr = Split(Label_ligning.Caption, "=")
-   If UBound(Arr) > 0 Then f = Arr(1)
-   If Len(Arr(0)) > 2 Then
+   Dim F As String, arr() As String
+   arr = Split(Label_ligning.Caption, "=")
+   If UBound(arr) > 0 Then F = arr(1)
+   If Len(arr(0)) > 2 Then
       MsgBox "Differentialligningen skal være på formen y'=...  for at den kan løses numerisk" & vbCrLf & "", vbOKOnly, "Fejl"
       Exit Sub
    End If
@@ -67,7 +69,7 @@ Private Sub CommandButton_solvenum_Click()
    Me.Hide
    UserFormDeSolveNumeric.TextBox_varx.Text = TextBox_variabel.Text
    UserFormDeSolveNumeric.TextBox_var1.Text = TextBox_funktion.Text
-   UserFormDeSolveNumeric.TextBox_eq1.Text = f
+   UserFormDeSolveNumeric.TextBox_eq1.Text = F
    If TextBox_starty.Text = vbNullString Then
       UserFormDeSolveNumeric.TextBox_init1.Text = "1"
    Else

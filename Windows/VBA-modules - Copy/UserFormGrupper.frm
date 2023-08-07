@@ -14,6 +14,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
+
 Option Explicit
 Private Sub CommandButton_nulstil_Click()
     TextBox_data.Text = ""
@@ -27,12 +29,12 @@ Dim v As Double
 Dim Min As Double
 Dim Max As Double
 Dim n As Integer
-Dim Arr As Variant
+Dim arr As Variant
 Dim arrdata As Variant
 Dim arrint As Variant
 Dim i As Integer
 Dim j As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 Me.Hide
 'Application.ScreenUpdating = False
 Data = TextBox_data.Text
@@ -76,16 +78,16 @@ Tabel.Columns.Width = 50
 
 ' fyld tabel med data
 For i = 0 To n
-    Arr = Split(arrint(i), "-")
-    Min = Arr(0)
-    If UBound(Arr) = 0 Then
-        If Trim(Arr(0)) = "" Then
+    arr = Split(arrint(i), "-")
+    Min = arr(0)
+    If UBound(arr) = 0 Then
+        If Trim(arr(0)) = "" Then
             
         Else
-            GoTo Fejl
+            GoTo fejl
         End If
     End If
-    Max = Arr(1)
+    Max = arr(1)
     Tabel.Cell(i + 2, 1).Range.Text = Min
     Tabel.Cell(i + 2, 2).Range.Text = Max
     Tabel.Cell(i + 2, 3).Range.Text = 0
@@ -95,7 +97,7 @@ For i = 0 To n
             arrdata(j) = Replace(arrdata(j), ",", ".")
             v = CDbl(arrdata(j))
             v = val(arrdata(j))
-            On Error GoTo Fejl
+            On Error GoTo fejl
             If v > Min And v <= Max Then
                 Tabel.Cell(i + 2, 3).Range.Text = val(Tabel.Cell(i + 2, 3).Range.Text) + 1
             End If
@@ -105,7 +107,7 @@ Next
 End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox "Der er en fejl i dine intervaller. Hver linje skal indeholde interval f.eks. 5-10.", vbOKOnly, Sprog.Error
 slut:
 End Sub

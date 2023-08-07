@@ -14,6 +14,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
+
 Option Explicit
     Dim vA As Double
     Dim vB As Double
@@ -258,7 +260,7 @@ Private Sub CommandButton_ok_Click()
 #End If
     
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.TSNoSolution, vbOKOnly, Sprog.Error
     Exit Sub
 slut:
@@ -294,7 +296,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     Dim vBn As String
     Dim vCn As String
     
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     san = TextBox_captionsa.Text
     sbn = TextBox_captionsb.Text
@@ -544,7 +546,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf SA > 0 And sb > 0 Then ' sider ikke om vinkel
                 d = SA ^ 2 - sb ^ 2 * Sin(vA * PI / 180) ^ 2
                 If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 sc = sb * Cos(vA * PI / 180) + Sqr(d)
                 sc2 = sb * Cos(vA * PI / 180) - Sqr(d)
@@ -570,7 +572,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf SA > 0 And sc > 0 Then ' sider ikke om vinkel
                 d = SA ^ 2 - sc ^ 2 * Sin(vA * PI / 180) ^ 2
                 If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 sb = sc * Cos(vA * PI / 180) + Sqr(d)
                 sb2 = sc * Cos(vA * PI / 180) - Sqr(d)
@@ -605,7 +607,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf SA > 0 And sb > 0 Then ' sider ikke om vinkel
                 d = sb ^ 2 - SA ^ 2 * Sin(vB * PI / 180) ^ 2
                 If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 sc = SA * Cos(vB * PI / 180) + Sqr(d)
                 sc2 = SA * Cos(vB * PI / 180) - Sqr(d)
@@ -631,7 +633,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf sb > 0 And sc > 0 Then ' sider ikke om vinkel
                 d = sb ^ 2 - sc ^ 2 * Sin(vB * PI / 180) ^ 2
                 If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 SA = sc * Cos(vB * PI / 180) + Sqr(d)
                 sa2 = sc * Cos(vB * PI / 180) - Sqr(d)
@@ -666,7 +668,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf sc > 0 And sb > 0 Then ' sider ikke om vinkel
                 d = sc ^ 2 - sb ^ 2 * Sin(vC * PI / 180) ^ 2
                 If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 SA = sb * Cos(vC * PI / 180) + Sqr(d)
                 sa2 = sb * Cos(vC * PI / 180) - Sqr(d)
@@ -692,7 +694,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf SA > 0 And sc > 0 Then ' sider ikke om vinkel
                 d = sc ^ 2 - SA ^ 2 * Sin(vC * PI / 180) ^ 2
                 If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 sb = SA * Cos(vC * PI / 180) + Sqr(d)
                 sb2 = SA * Cos(vC * PI / 180) - Sqr(d)
@@ -719,13 +721,13 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         End If
     End If
 GoTo slut
-Fejl:
+fejl:
     statustext = Sprog.TSMissingInfo
     If advarsler Then MsgBox statustext, vbOKOnly, Sprog.Error
     Exit Sub
 slut:
     If SA <= 0 Or sb <= 0 Or sc <= 0 Or vA <= 0 Or vB <= 0 Or vC <= 0 Then
-        GoTo Fejl
+        GoTo fejl
     Else
         succes = True
         statustext = Sprog.TSInfoOK
@@ -760,12 +762,12 @@ Dim xc As Double
 Dim yc As Double
 Dim dxc As Double
 Dim dyc As Double
-Dim f As Double
+Dim F As Double
 Dim SA As Double
 
 
 
-f = 200
+F = 200
 
 SA = Sqr(sb ^ 2 + sc ^ 2 - 2 * sb * sc * Cos(vA * PI / 180))
 
@@ -777,9 +779,9 @@ End If
 If SA > sb Then maxs = SA Else maxs = sb
 If sc > maxs Then maxs = sc
 
-nsa = SA / maxs * f
-nsb = sb / maxs * f
-nsc = sc / maxs * f
+nsa = SA / maxs * F
+nsb = sb / maxs * F
+nsc = sc / maxs * F
 
 xb = nsc * Cos(vA * PI / 180)
 yb = 0

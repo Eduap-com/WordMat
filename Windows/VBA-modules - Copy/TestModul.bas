@@ -23,24 +23,17 @@ End Sub
 Sub RunTestSequence()
 ' runs a series of test calculations. The expressions are typed into Word and the test math action is performed. Result is shown
 '    Application.ScreenUpdating = False
-    Dim scrollpos As Double
+    Dim scrollpos As Double, s As String
+    Dim AllR As Range
     
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ErrCount = 0
     TestCount = 0
     ContCount = 0
     visok = True
     
     If MsgBox("Are you sure want to conduct a test. The document will be filled with calculations. It can take some time.", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
-    
-    
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
-    
+        
     Set UfWait2 = New UserFormWaitForMaxima
     UfWait2.Label1.Font.Size = 12
     UfWait2.Label_tip.Font.Size = 10
@@ -55,7 +48,11 @@ Sub RunTestSequence()
     
     PrepareMaxima
     
-    MoveCursorToEndOfCalculation
+    Selection.Collapse wdCollapseEnd
+    Selection.GoToNext (wdGoToLine)
+    If Selection.OMaths.Count > 0 Then MoveCursorToEndOfCalculation
+    
+    Set AllR = Selection.Range
     
     Selection.TypeParagraph
     Selection.Font.Bold = True
@@ -69,6 +66,26 @@ Sub RunTestSequence()
     Selection.GoToPrevious (wdGoToLine)
     Selection.GoToPrevious (wdGoToLine)
 
+    s = CheckKeyboardShortcutsNoninteractive()
+    If s = "" Then
+        Selection.Font.ColorIndex = wdGreen
+        Selection.Font.Bold = True
+        Selection.TypeText ("Keyboard Shortcuts ok")
+        Selection.Font.Bold = False
+        Selection.Font.ColorIndex = wdAuto
+        Selection.TypeParagraph
+    Else
+        Selection.Font.ColorIndex = wdRed
+        Selection.Font.Bold = True
+        Selection.TypeText ("Keyboard shortcut problem:  " & s)
+        Selection.Font.Bold = False
+        Selection.Font.ColorIndex = wdAuto
+        Selection.TypeParagraph
+'        Selection.TypeText ("  ")
+        ErrCount = ErrCount + 1
+    End If
+    TestCount = TestCount + 1
+
 'GoTo ggbtest
 'GoTo slut
     
@@ -76,17 +93,17 @@ Sub RunTestSequence()
     ' alternativt: bare at køre testen med et tomt expected result. Der skrives hvilken teststreng der skal bruges hvis resultat er korrekt
     ' ellers brug GetTestString' eller UnicodeValsToString for at finde streng fra et matematikfelt for kommandoen.
     ' the result may have to be adjusted for calculations (not solve). Often brackets of exponents are different and spaces must be removed
-    ' Multiple correct answers can be separated by @
+    ' Multiple correct answers can be separated by @$
 '    DoEvents ' virker ikke
 '    Application.ScreenRefresh
 
    'til test af enkelt
-'   TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) "
-'   GoTo slut
+
+   
+'    GoTo slut
    
     'calculation tests
-    TestBeregn "2+3", "=5"
-    If StopNow Then GoTo slut
+    If TestBeregn("2+3", "=5") Then GoTo slut
     TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
     If StopNow Then GoTo slut
     TestBeregn "1/5 2", "=2/5"
@@ -121,9 +138,9 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn "(" & VBA.ChrW(8730) & "((x+1)^2+(2" & VBA.ChrW(183) & "(x+1)/x)^2 ))^'", "=((-(8" & VBA.ChrW(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW(183) & "(x+1))/x^(2)+2" & VBA.ChrW(183) & "(x+1))/(2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "((4" & VBA.ChrW(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))"
     If StopNow Then GoTo slut
-'    TestBeregn "", ""
-'    If StopNow Then GoTo slut
+    
     ' equation solving
+    InsertHeadingtext "Ligningsløsning"
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
     If StopNow Then GoTo slut
     TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) "
@@ -199,7 +216,7 @@ Sub RunTestSequence()
     
     'Often fails, but not always ??? then works numerically
     If Not NonInterA Then
-        TestSolve "40=72" & VBA.ChrW(183) & "e^((0,619/0,22" & VBA.ChrW(8729) & "(e^22-e^0,22t )) )", "t", "t=100@t=ln" & VBA.ChrW(8289) & "(ln" & VBA.ChrW(8289) & "(5/9)" & VBA.ChrW(183) & "-0,355412+e^22 )" & VBA.ChrW(183) & "4,545455" ' resultat er numerisk 100. Nogle gange kører denne i lykke og skal gentages numerisk. Ukendt hvorfor.
+        TestSolve "40=72" & VBA.ChrW(183) & "e^((0,619/0,22" & VBA.ChrW(8729) & "(e^22-e^0,22t )) )", "t", "t=100@$t=ln" & VBA.ChrW(8289) & "(ln" & VBA.ChrW(8289) & "(5/9)" & VBA.ChrW(183) & "-0,355412+e^22 )" & VBA.ChrW(183) & "4,545455" ' resultat er numerisk 100. Nogle gange kører denne i lykke og skal gentages numerisk. Ukendt hvorfor.
         If StopNow Then GoTo slut
     End If
     
@@ -210,10 +227,8 @@ Sub RunTestSequence()
     InsertSletDef
     If StopNow Then GoTo slut
 
-    InsertTestMath "f(x)" & VBA.ChrW(8788) & "4x-2,5"
-    Selection.TypeParagraph
-    InsertTestMath "g(x)" & VBA.ChrW(8788) & "2" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "0,8" & VBA.ChrW(12311) & "^x"
-    Selection.TypeParagraph
+    InsertTestMath "f(x)" & VBA.ChrW(8788) & "4x-2,5", True
+    InsertTestMath "g(x)" & VBA.ChrW(8788) & "2" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "0,8" & VBA.ChrW(12311) & "^x", True
     TestBeregn "f(x)+g(x)", "=2" & VBA.ChrW(183) & "0,8^(x)+4" & VBA.ChrW(183) & "x-2,5"
     InsertSletDef
     If StopNow Then GoTo slut
@@ -262,7 +277,7 @@ Sub RunTestSequence()
     
     ' Numrerisk test
     MaximaExact = 2
-    ShowSettings
+    ShowSettings "Numerisk test"
 
     TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", VBA.ChrW(8776) & "Ikke defineret indenfor " & VBA.ChrW(8477)
     If StopNow Then GoTo slut
@@ -273,6 +288,9 @@ Sub RunTestSequence()
     TestBeregn "B=sin^(-1)" & VBA.ChrW(8289) & "(sin" & VBA.ChrW(8289) & "(40)" & VBA.ChrW(183) & "0,8605341)", VBA.ChrW(8776) & "33,58274"
     If StopNow Then GoTo slut
 
+    MaximaExact = 0
+    ShowSettings
+    
      'numeric definition test
     InsertTestMath "definer: f(x)=-x^2" & VBA.ChrW(8729) & "" & VBA.ChrW(8730) & "x+2/x;x_1=0,25"
     Selection.TypeParagraph
@@ -282,27 +300,78 @@ Sub RunTestSequence()
     InsertSletDef
     If StopNow Then GoTo slut
 
-    InsertTestMath "Definer: f(x)=211,4885-10,4801" & VBA.ChrW(183) & "(e^0,0329x+e^(-0,0329x) )"
-    Selection.TypeParagraph
-    TestBeregn "s=" & VBA.ChrW(8747) & "_(-91,25312)^91,25312" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(1+(f^' (x))^2 ) dx", VBA.ChrW(8776) & "451,2554"
-    InsertSletDef
-    If StopNow Then GoTo slut
+    If Not NonInterA Then '****** Interactive start *******
+        InsertTestMath "Definer: f(x)=211,4885-10,4801" & VBA.ChrW(183) & "(e^0,0329x+e^(-0,0329x) )"
+        Selection.TypeParagraph
+        TestBeregn "s=" & VBA.ChrW(8747) & "_(-91,25312)^91,25312" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(1+(f^' (x))^2 ) dx", VBA.ChrW(8776) & "451,2554"
+        InsertSletDef
+        If StopNow Then GoTo slut
+    End If '****** Interactive end *******
     
     ' Scientific notation test
     MaximaExact = 2
     MaximaVidNotation = True
-    ShowSettings
+    ShowSettings "Videnskabelig notation test"
     TestBeregn "123", "=1,23" & VBA.ChrW(183) & "10^2"
     If StopNow Then GoTo slut
     MaximaVidNotation = False
     
+
+    ' Differential- og integralregning
+    MaximaExact = 0
+    ShowSettings "Differential- og integralregning"
+    If TestBeregn(VBA.ChrW(8747) & "_1^10" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(x^(-2)+1) dx", "=-(ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2" & VBA.ChrW(8776) & "9,417202") Then GoTo slut
+    InsertTestMath "Definer: f(x)=" & VBA.ChrW(8730) & "(3x+9)  ;g(x)=x+3"
+    If TestSolve(VBA.ChrW(8747) & "_0^k" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "g(x)-f(x) " & VBA.ChrW(12311) & " dx=1,5", "k", "k=-3    " & VBA.ChrW(8744) & "    k=7/3") Then GoTo slut
+    
+
+    ' Vektortest
+    MaximaExact = 0
+    ShowSettings "Vektorer"
+    If TestBeregn("((" & VBA.ChrW(9608) & "(-4@3))" & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(1@7)))/|((" & VBA.ChrW(9608) & "(-4@3)))|^2 " & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(-4@3))", "=(" & VBA.ChrW(9632) & "(-68/25@51/25))=(" & VBA.ChrW(9632) & "(-2,72@2,04))") Then GoTo slut
+    If TestBeregn("(" & VBA.ChrW(9632) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9632) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo slut 'To forskellige måde at taste vektorer på:
+    If TestBeregn("(" & VBA.ChrW(9608) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9608) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo slut
+
+    MaximaExact = 2
+    TestBeregn "rref([" & VBA.ChrW(9632) & "(-1&0&1/2&1/2@1/2&-1&0&1/2@1/2&1&-1&0@0&0&1/2&-1)])", "=[" & VBA.ChrW(9632) & "(1&0&0&-1,5@0&1&0&-1,25@0&0&1&-2@0&0&0&0)]"
+    If StopNow Then GoTo slut
+    MaximaExact = 0
+
+    InsertTestMath "Definer: s" & VBA.ChrW(8407) & "(t)=(" & VBA.ChrW(9608) & "(2+t@t^2 ))"
+    If StopNow Then GoTo slut
+    TestBeregn "s" & VBA.ChrW(8407) & "(2)", "=(" & VBA.ChrW(9632) & "(4@4))"
+    If StopNow Then GoTo slut
+    TestBeregn "s" & VBA.ChrW(8407) & "^'(t)", "=(" & VBA.ChrW(9632) & "(1@2" & VBA.ChrW(183) & "t))"
+    If StopNow Then GoTo slut
+    
+    ' Differentialligning test
+    TestSolveDE "N^'=1/10500" & VBA.ChrW(183) & "N" & VBA.ChrW(183) & "(1000-N)", "N,x", "N=0    " & VBA.ChrW(8744) & "    N=1000    " & VBA.ChrW(8744) & "    N=1000/(c" & VBA.ChrW(183) & "e^(-((2" & VBA.ChrW(183) & "x)/21) )+1)"
+    If StopNow Then GoTo slut
+    TestSolveDE "N^'=(0,025-0,0004t)" & VBA.ChrW(183) & "N", "N,t", "N=c" & VBA.ChrW(183) & "e^(t/40-t^2/5000)"
+    If StopNow Then GoTo slut
+    TestSolveDE "y^'=-2x/(1+x^2 )" & VBA.ChrW(183) & "y+1/(1+x^2 )", "y,x", "y=(x+c)/(x^2+1)"
+    If StopNow Then GoTo slut
+    TestSolveDE "y^'+2x" & VBA.ChrW(183) & "y=x", "y,x", "y=c" & VBA.ChrW(183) & "e^(-x^2 )+1/2"
+    If StopNow Then GoTo slut
+    TestSolveDE "L^'=k" & VBA.ChrW(183) & "(100-L)", "L,x", "L=c" & VBA.ChrW(183) & "e^(-(k" & VBA.ChrW(183) & "x) )+100"
+    If StopNow Then GoTo slut
+    TestSolveDE "2y^'+y^2-5y=0", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=5    " & VBA.ChrW(8744) & "    y=5/(c" & VBA.ChrW(183) & "e^(-((5" & VBA.ChrW(183) & "x)/2) )+1)"
+    If StopNow Then GoTo slut
+    TestSolveDE "y^'=5y" & VBA.ChrW(183) & "(y+1)", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=-1    " & VBA.ChrW(8744) & "    y=-1/(c" & VBA.ChrW(183) & "e^(-(5" & VBA.ChrW(183) & "x) )+1)"
+    If StopNow Then GoTo slut
+    TestSolveDE "y^'=b" & VBA.ChrW(183) & "y" & VBA.ChrW(183) & "(b/a-y)", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=b/a    " & VBA.ChrW(8744) & "    y=b/(c" & VBA.ChrW(183) & "a" & VBA.ChrW(183) & "e^(-((b^2" & VBA.ChrW(183) & "x)/a) )+a)"
+    If StopNow Then GoTo slut
+    If TestSolveDE("y^'=b" & VBA.ChrW(183) & "y" & VBA.ChrW(183) & "(M-y)", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=M    " & VBA.ChrW(8744) & "    y=M/(c" & VBA.ChrW(183) & "e^(-(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x) )+1)") Then GoTo slut
+    If TestSolveDE("(y^' )^2+x" & VBA.ChrW(183) & "y^'=0", "y,x", "y=c    " & VBA.ChrW(8744) & "    y=c-x^2/2") Then GoTo slut
+    
+
 ggbtest:
     ' GeoGebra test
     CASengine = 2
     MaximaExact = 1 ' 1=exact
-    Selection.TypeParagraph
-    Selection.TypeText "GeoGebra CAS Test"
-    ShowSettings
+'    Selection.TypeParagraph
+'    Selection.TypeText "GeoGebra CAS Test"
+    ShowSettings "GeoGebra CAS Test"
     
     TestBeregn "2+3", "=5"
     If StopNow Then GoTo slut
@@ -323,7 +392,7 @@ ggbtest:
     TestBeregn "log" & VBA.ChrW(8289) & "(a)", "=ln(a)/ln(10)"
     If StopNow Then GoTo slut
     
-    TestBeregn "log_2" & VBA.ChrW(8289) & "(4)", "=ln(4)/ln(2)@2" ' reducerer ikke eksakt med ggb
+    TestBeregn "log_2" & VBA.ChrW(8289) & "(4)", "=ln(4)/ln(2)@$2" ' reducerer ikke eksakt med ggb
     If StopNow Then GoTo slut
     TestBeregn "ln" & VBA.ChrW(8289) & "(a)", "=ln(a)"
     If StopNow Then GoTo slut
@@ -335,13 +404,16 @@ ggbtest:
 '    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(x_0)-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
     TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(1/180 x_0 " & VBA.ChrW(960) & ")-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
     If StopNow Then GoTo slut
-        
-    TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
-    If StopNow Then GoTo slut
+    
+    ' Ligninger
+    If TestSolve("x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3") Then GoTo slut
 
+    ' Differentialligninger
+    If TestSolveDE("y^'+2x" & VBA.ChrW(183) & "y=x", "y,x", "y=c_1 e^(-x^2 )+1/2") Then GoTo slut
+    If TestSolveDE("y^'=b" & VBA.ChrW(183) & "y" & VBA.ChrW(183) & "(M-y)", "y,x", "y=-M e^(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x)/(c_1-e^(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x) )") Then GoTo slut
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Err.Description & vbCrLf & vbCrLf & "Error at test no.:" & TestCount + 1, vbOKOnly, "Error during test"
 slut:
     Selection.TypeParagraph
@@ -356,10 +428,10 @@ slut:
     
     MaximaVidNotation = False
     MaximaUnits = False
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    
+    AllR.End = Selection.End
+    AllR.Select
+    
     Unload UfWait2
 End Sub
 Function StopNow() As Boolean
@@ -392,11 +464,13 @@ Function StopNow() As Boolean
     StopNow = False
 End Function
 Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional var As String, Optional Instruk As String)
-    Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
+    Dim s As String, TypeText As String, Oresul As String, arr() As String, ResultOK As Boolean, i As Integer
     If TestType = 1 Then
         TypeText = "Calculate"
     ElseIf TestType = 2 Then
         TypeText = "Solve"
+    ElseIf TestType = 3 Then
+        TypeText = "SolveDE"
     End If
     s = TestCount & ": " & TypeText & vbCrLf & "Error count: " & ErrCount
     UfWait2.Label1.Caption = s
@@ -404,14 +478,18 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
     If Instruk <> "" Then
         UfWait2.Label_tip.Caption = komm & vbCrLf & Instruk
     End If
-    InsertTestMath komm
+    InsertTestMath komm, False
     DoEvents
     If TestType = 1 Then
         beregn
     ElseIf TestType = 2 Then
         MaximaSolvePar (var)
+    ElseIf TestType = 3 Then 'solvede
+        arr = Split(var, ",")
+        SolveDEpar arr(0), arr(1)
     End If
-    Wait 0.5
+    Wait 0.2
+    Application.ScreenUpdating = True
     Application.ScreenRefresh
     MoveCursorToEndOfCalculation
         
@@ -425,9 +503,9 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
     End If
     
     ResultOK = False
-    Arr = Split(resul, "@")
-    For i = 0 To UBound(Arr)
-        If Trim(Arr(i)) = Trim(Oresul) Then
+    arr = Split(resul, "@$")
+    For i = 0 To UBound(arr)
+        If Trim(arr(i)) = Trim(Oresul) Then
             ResultOK = True
             Exit For
         End If
@@ -446,21 +524,19 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
             Selection.TypeParagraph
             Selection.TypeText "Oresul(egentlige resultat):  " & Oresul
             Selection.TypeParagraph
-            Selection.TypeText "Brug denne streng i koden:"
+            Selection.TypeText "Brug denne kode-streng:"
             Selection.TypeParagraph
             Selection.TypeText "TestBeregn " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
-        Else
-'            InsertTestMath resul
-'            Selection.TypeParagraph
-'            InsertTestMath Oresul
-'            UnicodeValsToString
-'            GotoPrevEq
-'            Selection.OMaths(1).Range.Delete
-'            Selection.GoToNext (wdGoToLine)
+        ElseIf TestType = 2 Then
             Selection.TypeParagraph
-            Selection.TypeText "Brug denne streng i koden:"
+            Selection.TypeText "Brug denne kode-streng:"
             Selection.TypeParagraph
-            Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul))
+            Selection.TypeText vbTab & "If TestSolve(" & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
+        ElseIf TestType = 3 Then
+            Selection.TypeParagraph
+            Selection.TypeText "Brug denne kode-streng:"
+            Selection.TypeParagraph
+            Selection.TypeText vbTab & "If TestSolveDE(" & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
         End If
         Selection.TypeParagraph
         ErrCount = ErrCount + 1
@@ -476,27 +552,38 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
     TestCount = TestCount + 1
 End Sub
 Sub CreateTestBeregn()
-   Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
-   Dim komm As String, TestType As Integer, var As String
+    CreateTestBeregnPar
+End Sub
+Sub CreateTestBeregnDE()
+    CreateTestBeregnPar 4
+End Sub
+
+Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
+   Dim s As String, TypeText As String, Oresul As String, arr() As String, ResultOK As Boolean, i As Integer
+   Dim komm As String, var As String, varpar As String
     
    omax.ReadSelection
    komm = TrimR(omax.Kommando, vbCr)
-   If InStr(LCase(komm), "define") > 0 Then
+   DoEvents
+   If InStr(LCase(komm), "define") > 0 Or TestType = 3 Then
       TestType = 3
-   ElseIf InStr(komm, "=") > 0 Then
+   ElseIf InStr(komm, "y^'=") > 0 Or TestType = 4 Then
+     TestType = 4
+      var = InputBox("Enter dependent and independent variable to DEsolve for", "Variable", "y,x")
+      If Trim(var) = vbNullString Then Exit Sub
+      arr = Split(var, ",")
+      If UBound(arr) < 1 Then Exit Sub
+      SolveDEpar arr(0), arr(1)
+   ElseIf InStr(komm, "=") > 0 Or TestType = 2 Then
       TestType = 2
       var = InputBox("Enter variable to solve for", "Variable", "x")
       If Trim(var) = vbNullString Then Exit Sub
+      MaximaSolvePar (var)
    Else
       TestType = 1
+      beregn
    End If
 '   InsertTestMath komm
-   DoEvents
-   If TestType = 1 Then
-      beregn
-   ElseIf TestType = 2 Then
-      MaximaSolvePar (var)
-   End If
    Wait 0.5
    MoveCursorToEndOfCalculation
         
@@ -506,6 +593,7 @@ Sub CreateTestBeregn()
       GotoPrevEq
       omax.ReadSelection
       Oresul = TrimR(omax.Kommando, vbCr)
+'      omax.Kommando = komm & "=" & Split(omax.Kommando, "=", 1)(1)
       MoveCursorToEndOfCalculation False
    End If
         
@@ -513,17 +601,22 @@ Sub CreateTestBeregn()
       Selection.TypeParagraph
       Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
       Selection.TypeParagraph
-      Selection.TypeText "TestBeregn " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
+      Selection.TypeText vbTab & "If TestBeregn(" & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
    ElseIf TestType = 2 Then
       Selection.TypeParagraph
       Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
       Selection.TypeParagraph
-      Selection.TypeText "TestSolve " & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul))
+      Selection.TypeText vbTab & "If TestSolve(" & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
    ElseIf TestType = 3 Then
       Selection.TypeParagraph
       Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
       Selection.TypeParagraph
       Selection.TypeText "InsertTestMath " & Trim(ConvertToVBAString(komm))
+   ElseIf TestType = 4 Then
+      Selection.TypeParagraph
+      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeParagraph
+      Selection.TypeText vbTab & "If TestSolveDE(" & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
    End If
    Selection.TypeParagraph
 
@@ -565,18 +658,25 @@ Function ConvertToVBAString(Text As String) As String
     End If
     ConvertToVBAString = s
 End Function
-Sub TestBeregn(komm As String, resul As String)
+Function TestBeregn(komm As String, resul As String) As Boolean
     PerformTest 1, komm, resul
-End Sub
+    If StopNow Then TestBeregn = True ' betyder stop
+End Function
+Function TestSolveDE(komm As String, var As String, resul As String) As Boolean
+    PerformTest 3, komm, resul, var
+    If StopNow Then TestSolveDE = True ' betyder stop
+End Function
 Sub GotoPrevEq()
     Do While Selection.OMaths.Count = 0
         Selection.GoToPrevious (wdGoToLine)
         Selection.EndKey Unit:=wdLine
     Loop
 End Sub
-Sub TestSolve(komm As String, var As String, resul As String, Optional Instruk As String)
+Function TestSolve(komm As String, var As String, resul As String, Optional Instruk As String) As Boolean
     PerformTest 2, komm, resul, var, Instruk
-    Exit Sub
+    If StopNow Then TestSolve = True ' betyder stop
+    
+    Exit Function
     
     Dim s As String
     s = TestCount & ": Solving equation" & vbCrLf & "Error count: " & ErrCount
@@ -585,7 +685,7 @@ Sub TestSolve(komm As String, var As String, resul As String, Optional Instruk A
     If Instruk <> "" Then
         UfWait2.Label_tip.Caption = komm & vbCrLf & Instruk
     End If
-    InsertTestMath komm
+    InsertTestMath komm, False
     MaximaSolvePar (var)
     MoveCursorToEndOfCalculation
     If Not omax.MaximaOutput = resul Then
@@ -609,7 +709,7 @@ Sub TestSolve(komm As String, var As String, resul As String, Optional Instruk A
     End If
     UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
     TestCount = TestCount + 1
-End Sub
+End Function
 
 Sub TestSolve2(komm As String, var As String, resul As String)
     omax.Kommando = komm
@@ -638,7 +738,7 @@ MsgBox ea.GetNextListItem()
 MsgBox ea.GetNextListItem()
 
 End Sub
-Sub InsertTestMath(s As String)
+Sub InsertTestMath(s As String, Optional NewLine As Boolean = True)
 ' indsætter maxima output i word document
     Dim mo As Range
 
@@ -650,6 +750,11 @@ Sub InsertTestMath(s As String)
     Set mo = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText s
     mo.OMaths.BuildUp
+    If NewLine Then
+        Selection.EndKey Unit:=wdLine
+        Selection.Collapse wdCollapseEnd
+        Selection.TypeParagraph
+    End If
     DoEvents
 End Sub
 Sub MoveCursorToEndOfCalculation(Optional AddLine As Boolean = True)
@@ -675,7 +780,20 @@ Sub MoveCursorToEndOfCalculation(Optional AddLine As Boolean = True)
     Selection.EndKey Unit:=wdLine
 
 End Sub
-Sub ShowSettings()
+Sub InsertHeadingtext(Htext As String)
+    Selection.TypeParagraph
+    Selection.Font.Size = 18
+    Selection.ParagraphFormat.SpaceAfter = 0
+    Selection.Font.Bold = True
+    Selection.TypeText Htext
+    Selection.Font.Bold = False
+    Selection.TypeParagraph
+    Selection.Font.Size = 11
+    Selection.ParagraphFormat.SpaceAfter = 6
+End Sub
+
+Sub ShowSettings(Optional Htext As String)
+    If Htext <> "" Then InsertHeadingtext Htext
     Selection.TypeParagraph
     Selection.Font.Size = 9
     Selection.ParagraphFormat.SpaceAfter = 0
@@ -693,7 +811,6 @@ Sub ShowSettings()
     Selection.Font.Size = 11
     Selection.ParagraphFormat.SpaceAfter = 6
     Selection.TypeParagraph
-    
 End Sub
 Sub InsertTestComment(s As String)
     Selection.TypeText (s)

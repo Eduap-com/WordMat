@@ -14,6 +14,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
+
 Option Explicit
 Public luk As Boolean
 Public InsertType As Integer
@@ -115,7 +117,7 @@ Dim ils As InlineShape
 Dim Sep As String, s As String
 Dim pointText As String, i As Long
 Dim pointText2 As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     InsertType = 1
     If ListOutput = vbNullString Then SolveDE
     PlotOutput 3
@@ -166,7 +168,7 @@ s = s & "true" & Sep & "false" & Sep & "false" & Sep & "false" & Sep
 ils.AlternativeText = s
 Unload Me
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 Application.ScreenUpdating = True
@@ -175,7 +177,7 @@ End Sub
 Private Sub CommandButton_inserttabel_Click()
 Dim Tabel As Table
 Dim i As Long, j As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If ListOutput = vbNullString Then SolveDE
     InsertType = 2
         Application.ScreenUpdating = False
@@ -266,7 +268,7 @@ Dim i As Long, j As Integer
     
     Unload Me
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 Application.ScreenUpdating = True
@@ -532,7 +534,7 @@ Function SolveDE() As Boolean
     Dim variabel As String, xmin As String, xmax As String, xstep As String, DElist As String, varlist As String, guesslist As String
     Dim ea As New ExpressionAnalyser
     Dim n As Integer, Npoints As Long
-    On Error GoTo Fejl
+    On Error GoTo fejl
     variabel = TextBox_varx.Text
     xmin = Replace(TextBox_xmin.Text, ",", ".")
     xmax = Replace(TextBox_xmax.Text, ",", ".")
@@ -609,7 +611,7 @@ Function SolveDE() As Boolean
     ListOutput = omax.MaximaOutput
     
     Dim s As String, i As Long, j As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     ReDim PointArr(Npoints, n)
     ea.Text = ListOutput
     ea.SetSquareBrackets
@@ -618,15 +620,15 @@ Function SolveDE() As Boolean
     End If
     Do
         s = ea.GetNextBracketContent(0)
-        Arr = Split(s, ListSeparator)
+        arr = Split(s, ListSeparator)
         For j = 0 To n 'UBound(Arr)
-            PointArr(i, j) = Arr(j)
+            PointArr(i, j) = arr(j)
         Next
         i = i + 1
     Loop While ea.Pos < ea.Length - 1 And i < 10000
 SolveDE = True
 GoTo slut
-Fejl:
+fejl:
    If i >= Npoints Then
     SolveDE = True
    Else
@@ -637,7 +639,7 @@ End Function
 
 Sub PlotOutput(Optional highres As Double = 1)
 Dim Text As String, yAxislabel As String
-On Error GoTo Fejl
+On Error GoTo fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
@@ -774,7 +776,7 @@ On Error GoTo Fejl
     End If
     Label_wait.visible = False
 GoTo slut
-Fejl:
+fejl:
     On Error Resume Next
     Label_wait.Caption = Sprog.A(94)
     Label_wait.Font.Size = 12
@@ -824,7 +826,7 @@ Sub OpdaterDefinitioner()
    Dim var As String, var2 As String
    Dim ea As New ExpressionAnalyser
    Dim ea2 As New ExpressionAnalyser
-   Dim Arr As Variant
+   Dim arr As Variant
    Dim arr2 As Variant
    Dim i As Integer, s As String
    Validate
@@ -857,15 +859,15 @@ Sub OpdaterDefinitioner()
    Do While right(TextBox_definitioner.Text, 2) = vbCrLf
       TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
    Loop
-   Arr = Split(TextBox_definitioner.Text, vbCrLf)
+   arr = Split(TextBox_definitioner.Text, vbCrLf)
    
-   For i = 0 To UBound(Arr) ' Hvis variabel indgår i def, skal den fjernes
-      If Arr(i) <> "" Then
-         var2 = Split(Arr(i), "=")(0)
+   For i = 0 To UBound(arr) ' Hvis variabel indgår i def, skal den fjernes
+      If arr(i) <> "" Then
+         var2 = Split(arr(i), "=")(0)
          If var2 = TextBox_varx.Text Then
-            Arr(i) = ""
+            arr(i) = ""
          End If
-         If Arr(i) <> "" Then s = s & Arr(i) & vbCrLf
+         If arr(i) <> "" Then s = s & arr(i) & vbCrLf
       End If
    Next
    Do While right(s, 2) = vbCrLf
@@ -873,13 +875,13 @@ Sub OpdaterDefinitioner()
    Loop
    TextBox_definitioner.Text = s
    
-   Arr = Split(TextBox_definitioner.Text, vbCrLf)
+   arr = Split(TextBox_definitioner.Text, vbCrLf)
    Do
       var = ea.GetNextListItem(ea.Pos)
       var = Replace(var, vbCrLf, "")
-      For i = 0 To UBound(Arr)
-         If Arr(i) <> "" Then
-            var2 = Split(Arr(i), "=")(0)
+      For i = 0 To UBound(arr)
+         If arr(i) <> "" Then
+            var2 = Split(arr(i), "=")(0)
             If var2 = var Then
                var = ""
                Exit For

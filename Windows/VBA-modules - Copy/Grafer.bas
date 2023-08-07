@@ -20,10 +20,10 @@ Public Sub Plot2DGraph()
 ' gnuplot
 '    Dim omax As New CMaxima
     Dim forskrifter As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer
     Dim j As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim sstart As Long, sslut As Long
     Dim TempCas As Integer
     
@@ -67,10 +67,10 @@ Public Sub Plot2DGraph()
     forskrifter = omax.KommandoerStreng
     
     If Len(forskrifter) > 1 Then
-    Arr = Split(forskrifter, ListSeparator)
-    For i = 0 To UBound(Arr)
-        Arr(i) = Trim(Replace(Arr(i), "  ", " ")) ' må ikke fjerne alle mellemrum da f.eks 1/x 3 så bliver 1/x3 hvor x3 er variabel
-        If Arr(i) <> "" Then InsertNextEquation (Arr(i))
+    arr = Split(forskrifter, ListSeparator)
+    For i = 0 To UBound(arr)
+        arr(i) = Trim(Replace(arr(i), "  ", " ")) ' må ikke fjerne alle mellemrum da f.eks 1/x 3 så bliver 1/x3 hvor x3 er variabel
+        If arr(i) <> "" Then InsertNextEquation (arr(i))
     Next
     End If
     
@@ -97,25 +97,25 @@ Public Sub Plot2DGraph()
     UF2Dgraph.Show vbModeless
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
     CASengine = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
-Dim Arr As Variant
-On Error GoTo Fejl
+Dim arr As Variant
+On Error GoTo fejl
 Ligning = Replace(Ligning, VBA.ChrW(8788), "=") ' :=
 Ligning = Replace(Ligning, VBA.ChrW(8797), "=") ' tripel =
 Ligning = Replace(Ligning, VBA.ChrW(8801), "=") ' def =
 
-Arr = Split(Ligning, "=")
+arr = Split(Ligning, "=")
 
 'If Not (InStr(Ligning, VBA.ChrW(9608)) > 0 And InStr(Ligning, VBA.ChrW(9508)) > 0) Then ' tuborg
-   Arr = Split(Arr(UBound(Arr)), VBA.ChrW(8776)) ' til indsættelse af selve forskrift i stedet for f(x)
-   Ligning = omax.ConvertToAscii(Arr(UBound(Arr)))
+   arr = Split(arr(UBound(arr)), VBA.ChrW(8776)) ' til indsættelse af selve forskrift i stedet for f(x)
+   Ligning = omax.ConvertToAscii(arr(UBound(arr)))
 'End If
-Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(Arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
+Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
 
 If UF2Dgraph.TextBox_ligning1.Text = Ligning Then
     Exit Sub
@@ -145,7 +145,7 @@ ElseIf UF2Dgraph.TextBox_ligning6.Text = "" Then
     UF2Dgraph.TextBox_ligning6.Text = Ligning
 End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -153,7 +153,7 @@ End Sub
 Sub PlotDF()
 ' plot retningsfelt
     Dim forskrifter As String, s As String, v As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer
     Dim j As Integer
     Dim ea As New ExpressionAnalyser
@@ -202,8 +202,8 @@ Sub PlotDF()
     
         
     If Len(omax.Kommando) > 0 Then
-    Arr = Split(omax.Kommando, "=")
-    omax.Kommando = Arr(UBound(Arr))
+    arr = Split(omax.Kommando, "=")
+    omax.Kommando = arr(UBound(arr))
     End If
     UF2Dgraph.TextBox_dfligning.Text = omax.ConvertToAscii(omax.Kommando)
     
@@ -234,7 +234,7 @@ Sub PlotDF()
     UF2Dgraph.Show vbModeless
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -275,7 +275,7 @@ Sub InsertGraphOleObject()
 Dim path As String
 Dim ils As InlineShape
 Dim fkt As String
-Dim Arr As Variant
+Dim arr As Variant
 Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim dd As New DocData
 Dim listform As String
@@ -290,7 +290,7 @@ ea.SetNormalBrackets
     UFwait.Label_progress.Caption = "***"
     UFwait.CommandButton_stop.visible = False
     UFwait.Show vbModeless
-On Error GoTo Fejl
+On Error GoTo fejl
 Application.ScreenUpdating = False
 
 If Not FileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
@@ -350,9 +350,9 @@ Dim i As Integer
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
-                    lhs = Arr(0)
-                    rhs = Arr(1)
+                    arr = Split(udtryk, "=")
+                    lhs = arr(0)
+                    rhs = arr(1)
                     ea.Text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
@@ -442,7 +442,7 @@ Dim i As Integer
 
 Application.ScreenUpdating = True
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(97), vbOKOnly, Sprog.Error
     omax.ConvertLnLog = True
     Unload UFwait
@@ -515,11 +515,11 @@ Dim plinjer As Variant
 Dim linje As Variant
 Dim i As Integer
 Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
-Dim Arr As Variant
+Dim arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
 Dim srange As Range
-On Error GoTo Fejl
+On Error GoTo fejl
 ea.SetNormalBrackets
     Dim sstart As Long, sslut As Long
     sstart = Selection.start
@@ -589,9 +589,9 @@ End If
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
-                    lhs = Arr(0)
-                    rhs = Arr(1)
+                    arr = Split(udtryk, "=")
+                    lhs = arr(0)
+                    rhs = arr(1)
                     ea.Text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
@@ -655,7 +655,7 @@ End If
     Selection.Collapse wdCollapseEnd
 
 GoTo slut:
-Fejl:
+fejl:
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 slut:
 On Error GoTo slut2
@@ -696,7 +696,7 @@ Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn A
 Dim dd As New DocData
 Dim listform As String
 Dim i As Integer
-Dim Arr As Variant
+Dim arr As Variant
 Dim ea As New ExpressionAnalyser
 Dim path As String
 Dim ils As InlineShape
@@ -757,9 +757,9 @@ End If
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
-                    lhs = Arr(0)
-                    rhs = Arr(1)
+                    arr = Split(udtryk, "=")
+                    lhs = arr(0)
+                    rhs = arr(1)
                     ea.Text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
@@ -910,7 +910,7 @@ Function InsertIndlejret(Filnavn As String, Optional startark As String) As Obje
 Dim path As String
 Dim ils As InlineShape
 Dim vers As String
-On Error GoTo Fejl
+On Error GoTo fejl
 Application.ScreenUpdating = False
 EnableExcelMacros
     
@@ -974,7 +974,7 @@ Unload UfWait2
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
 GoTo slut
-Fejl:
+fejl:
     On Error Resume Next
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     Unload UfWait2

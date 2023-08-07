@@ -164,14 +164,14 @@ Pos = pos2 + 1
 End Function
 
 Public Property Get ChrByIndex(ByVal Pos As Long) As String
-On Error GoTo Fejl
+On Error GoTo fejl
     If Pos <= Len(Text) And Pos > 0 Then
         ChrByIndex = Mid(Text, Pos, 1)
     Else
         ChrByIndex = VBA.ChrW(0)
     End If
 GoTo slut
-Fejl:
+fejl:
         ChrByIndex = VBA.ChrW(0)
 slut:
 End Property
@@ -644,7 +644,7 @@ End Function
 Sub InsertMultSigns()
 ' indsætter underforståede gangetegn
 Dim navn As String
-Dim c1 As Integer, c2 As Integer, gempos As Long
+Dim C1 As Integer, C2 As Integer, gempos As Long
 Dim c As String, var As String
     On Error Resume Next
     Do
@@ -709,14 +709,14 @@ Sub RemoveMultSign()
 ' tal*bogstav samt )*( og 2*( eller mellemrum*alt
 
 Dim p As Long
-Dim c1 As String, c2 As String, c3 As String
+Dim C1 As String, C2 As String, c3 As String
     p = 1
     Do
         p = InStr(p, Text, "*")
         If p > 0 And p < Len(Text) Then
-            c1 = ChrByIndex(p - 1)
+            C1 = ChrByIndex(p - 1)
             c3 = ChrByIndex(p + 1)
-            If (IsNumber(p - 1) And IsLetterPos(p + 1)) Or (c1 = ")" And c2 = "(") Or c1 = " " Then
+            If (IsNumber(p - 1) And IsLetterPos(p + 1)) Or (C1 = ")" And C2 = "(") Or C1 = " " Then
                 Text = Left(Text, p - 1) & " " & right(Text, Len(Text) - p)
             End If
             p = p + 2
@@ -1082,7 +1082,7 @@ If right(GetNextListItem, 1) = Sep Then
 End If
 
 End Function
-Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
+Sub SplitNonBracket(ByRef arr As Variant, Optional Sep As String = "")
     Dim s As String, t As String
     Pos = 1
     Do
@@ -1092,7 +1092,7 @@ Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
         End If
     Loop While s <> ""
     If t <> "" Then t = Left(t, Len(t) - 3)
-    Arr = Split(t, "$_q")
+    arr = Split(t, "$_q")
     
 End Sub
 
@@ -1466,7 +1466,7 @@ Function GetFirstMatrix() As CMatrix
 ' finder næste matrix fra pos
 Dim p As Long
 Dim s As String
-Dim Arr As Variant
+Dim arr As Variant
 Dim arr2 As Variant
 Dim i As Long, j As Long
 Dim M As New CMatrix
@@ -1476,9 +1476,9 @@ Dim M As New CMatrix
     p = InStr(Pos, Text, VBA.ChrW(9608)) ' vektor
     s = GetNextBracketContent(p)
     If Len(s) > 0 Then
-    Arr = Split(s, "@")
-    For i = 0 To UBound(Arr)
-        arr2 = Split(Arr(i), "&")
+    arr = Split(s, "@")
+    For i = 0 To UBound(arr)
+        arr2 = Split(arr(i), "&")
         For j = 0 To UBound(arr2)
             M.Element(i, j) = arr2(j)
         Next

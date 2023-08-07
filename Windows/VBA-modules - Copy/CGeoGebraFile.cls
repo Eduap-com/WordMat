@@ -498,7 +498,9 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
     End If
     
     Expr = ConvertToGeogebraSyntax(Expr, ConvertMaxima)
-    
+    Expr = Replace(Expr, VBA.ChrW(8804), "<=")  ' Virker kun med geogebra app
+    Expr = Replace(Expr, VBA.ChrW(8805), ">=") ' Virker kun med geogebra app
+
     Dim expressionelement As IXMLDOMElement
     Set expressionelement = GeoXMLdom.createElement("expression")
     Constructionelement.appendChild expressionelement

@@ -102,7 +102,7 @@ End Function
 Sub ExecuteMaximaCommand(Command As String, WaitForIt As Integer)
 Dim l As LongPtr, nocmd As LongPtr
 Dim ea As New ExpressionAnalyser
-On Error GoTo Fejl
+On Error GoTo fejl
     mFinished = 0
     mQuestion = 0
     Command = "[" & GuiSettingsString & "]$" & Command & vbLf
@@ -128,7 +128,7 @@ On Error GoTo Fejl
         CheckForQuestion
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox "Maxima execute error", vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -237,7 +237,7 @@ WaitForMaximaUntil = 1
     End If
 '    End If
 GoTo slut
-Fejl:
+fejl:
         WaitForMaximaUntil = -1 'error
 slut:
 End Function
@@ -316,7 +316,7 @@ Dim c As Long
     
 '    c = ForceDivZero()
     GoTo slut
-Fejl:
+fejl:
     MsgBox "divzero"
 slut:
 End Sub

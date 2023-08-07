@@ -14,6 +14,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
+
 Option Explicit
 Private Sub CommandButton_ok_Click()
     Dim funk As String
@@ -26,7 +28,7 @@ Private Sub CommandButton_ok_Click()
     Dim kunlinjer As Boolean
     Dim gridlines As Integer
     Dim grafobj As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     Label_vent.visible = True
     Sxmin = Replace(TextBox_xmin.Text, ",", ".")
@@ -83,7 +85,7 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
     Me.Hide
 #End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
     Label_vent.visible = False

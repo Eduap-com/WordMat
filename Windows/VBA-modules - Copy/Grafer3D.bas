@@ -4,7 +4,7 @@ Sub OmdrejningsLegeme()
     Dim geogebrafil As New CGeoGebraFile
 Dim Kommando As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim var As String, DefList As String
 
@@ -45,9 +45,9 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
-                    lhs = Arr(0)
-                    rhs = Arr(1)
+                    arr = Split(udtryk, "=")
+                    lhs = arr(0)
+                    rhs = arr(1)
                     ea.Text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
@@ -111,8 +111,8 @@ Exit Sub
     i = 0
     Do While i < omax.KommandoArrayLength + 1
         Kommando = omax.KommandoArray(i)
-        Arr = Split(Kommando, "=")
-        If Len(Kommando) > 0 Then Kommando = Arr(UBound(Arr))
+        arr = Split(Kommando, "=")
+        If Len(Kommando) > 0 Then Kommando = arr(UBound(arr))
         
         Kommando = Replace(Kommando, vbLf, "")
         Kommando = Replace(Kommando, vbCrLf, "")
@@ -132,16 +132,16 @@ Exit Sub
     
     UserFormOmdrejninglegeme.Show
     
-Fejl:
+fejl:
 slut:
 End Sub
 
 Sub Plot3DGraph()
     Dim forskrifter As String
     Dim result As Variant
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     PrepareMaxima
     omax.ReadSelection
@@ -150,12 +150,12 @@ Sub Plot3DGraph()
     forskrifter = omax.FindDefinitions
     If Len(forskrifter) > 3 Then
     forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3)
-    Arr = Split(forskrifter, ListSeparator)
+    arr = Split(forskrifter, ListSeparator)
     forskrifter = ""
     
-    For i = 0 To UBound(Arr)
-        If InStr(Arr(i), "):") > 0 Then
-            forskrifter = forskrifter & omax.ConvertToWordSymbols(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If InStr(arr(i), "):") > 0 Then
+            forskrifter = forskrifter & omax.ConvertToWordSymbols(arr(i)) & ListSeparator
         End If
     Next
     End If
@@ -166,12 +166,12 @@ Sub Plot3DGraph()
     forskrifter = omax.KommandoerStreng & ListSeparator & forskrifter
     
     If Len(forskrifter) > 1 Then
-    Arr = Split(forskrifter, ListSeparator)
-    For i = 0 To UBound(Arr)
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Arr(i) <> "" Then
-            If MsgBox(Sprog.A(374) & ": " & Arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
-                Insert3DEquation (Arr(i))
+    arr = Split(forskrifter, ListSeparator)
+    For i = 0 To UBound(arr)
+        arr(i) = Replace(arr(i), " ", "")
+        If arr(i) <> "" Then
+            If MsgBox(Sprog.A(374) & ": " & arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
+                Insert3DEquation (arr(i))
             End If
         End If
     Next
@@ -179,7 +179,7 @@ Sub Plot3DGraph()
     
     UserForm3DGraph.Show
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub

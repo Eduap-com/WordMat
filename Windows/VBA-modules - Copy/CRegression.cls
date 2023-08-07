@@ -41,20 +41,20 @@ Public Property Let Datatext(ByVal Text As Variant)
     Dim i As Integer
     Dim j As Integer
     Dim lsep As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim arr2 As Variant
     Dim n As Integer
-    Arr = Split(Text, VbCrLfMac)
-    n = UBound(Arr)
+    arr = Split(Text, VbCrLfMac)
+    n = UBound(arr)
     ReDim xval(1 To n + 1) As Double
     ReDim yval(1 To n + 1) As Double
-    For j = 0 To UBound(Arr)
-        If InStr(Arr(j), ";") Then
+    For j = 0 To UBound(arr)
+        If InStr(arr(j), ";") Then
             lsep = ";"
         Else
             lsep = ","
         End If
-        arr2 = Split(Arr(j), lsep)
+        arr2 = Split(arr(j), lsep)
         If UBound(arr2) > 0 Then
         i = i + 1
         xval(i) = Replace(arr2(0), ".", ",")
@@ -76,7 +76,7 @@ Dim n As Integer
 Dim oFS As Integer
 Dim r As Range
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -125,7 +125,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
 End If
 
 If n < 2 Then
-    GoTo Fejl
+    GoTo fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -177,7 +177,7 @@ End If
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 
@@ -230,7 +230,7 @@ If n < 2 Then
     n = rws.Count
 End If
 If n < 2 Then
-    GoTo Fejl
+    GoTo fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -260,7 +260,7 @@ End If
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 
@@ -273,7 +273,7 @@ Dim ys As String
 Dim Text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
-Dim Arr As Variant
+Dim arr As Variant
 
     ReDim xval(1 To 1000) As Double
     ReDim yval(1 To 1000) As Double
@@ -288,16 +288,16 @@ ea.Pos = 1
 Do
 p = ea.GetNextBracketContent()
 If InStr(p, ";") Then
-    Arr = Split(p, ";")
+    arr = Split(p, ";")
 Else
-    Arr = Split(p, ",")
+    arr = Split(p, ",")
 End If
-If UBound(Arr) > 0 Then
+If UBound(arr) > 0 Then
     n = n + 1
 '    xval(n) = CDbl(arr(0))
 '    yval(n) = CDbl(arr(1))
-    xval(n) = val(Replace(Arr(0), ",", "."))
-    yval(n) = val(Replace(Arr(1), ",", "."))
+    xval(n) = val(Replace(arr(0), ",", "."))
+    yval(n) = val(Replace(arr(1), ",", "."))
 End If
 Loop While Not (p = "") And n < 1000
 
@@ -312,7 +312,7 @@ Private Function ComputeRegr(x() As Double, y() As Double) As Boolean
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
 Dim n As Integer
 Dim i As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 
 n = UBound(x) - LBound(x) + 1
                
@@ -337,7 +337,7 @@ If r > 1 Then r = 1
 
 ComputeRegr = True
 GoTo slut
-Fejl:
+fejl:
     ComputeRegr = False
     MsgBox Sprog.A(28), vbOKOnly, Sprog.Error
 slut:
@@ -423,7 +423,7 @@ Sub ComputeExpRegr()
 End Sub
 
 Sub ComputePowRegr()
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim n As Integer
     ReDim logx(LBound(xval) To UBound(xval)) As Double
     ReDim logy(LBound(yval) To UBound(yval)) As Double
@@ -447,17 +447,17 @@ On Error GoTo Fejl
         r = 0
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(32), vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub ComputeUserRegr()
     Dim fkt As String
     Dim ea As New ExpressionAnalyser
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim xlist As String, ylist As String
     Dim i As Long, guess As String, var As String, p As Integer, eps As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     xlist = "["
     For i = LBound(xval) To UBound(xval)
         xlist = xlist & Replace((xval(i)), ",", ".") & ","
@@ -474,8 +474,8 @@ Sub ComputeUserRegr()
     fkt = Replace(omax.Kommando, vbCrLf, "")
     If fkt <> vbNullString Then
         If InStr(fkt, "=") Then
-            Arr = Split(fkt, "=")
-            If UBound(Arr) > 0 Then fkt = Arr(1)
+            arr = Split(fkt, "=")
+            If UBound(arr) > 0 Then fkt = arr(1)
         End If
         UserFormUserRegression.TextBox_function.Text = fkt
     End If
@@ -519,7 +519,7 @@ Sub ComputeUserRegr()
     End If
     
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -568,7 +568,7 @@ Sub ComputePolRegr()
     On Error Resume Next
     n = UBound(xval) - LBound(xval)
     orden = InputBox(Sprog.A(35) & n & ")" & vbCrLf & vbCrLf & Sprog.A(36), Sprog.A(37), "2")
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If orden < 1 Or orden > n Then
         MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, Sprog.Error
         Exit Sub
@@ -624,7 +624,7 @@ Sub ComputePolRegr()
         r = 0
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -638,7 +638,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
-On Error GoTo Fejl
+On Error GoTo fejl
 
 If Not (UBound(x) = UBound(y)) Then
     polregr = False
@@ -730,7 +730,7 @@ r = SSregr / SStotal
              
 polregr = True
 GoTo slut
-Fejl:
+fejl:
   polregr = False
 '  MsgBox Err.Number
 slut:
@@ -744,7 +744,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M(3, 4)
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
 n = UBound(x) - LBound(x) + 1
                
@@ -816,7 +816,7 @@ r = SSregr / SStotal
              
 polregrkvad = True
 GoTo slut
-Fejl:
+fejl:
   polregrkvad = False
 '  MsgBox Err.Number
 slut:

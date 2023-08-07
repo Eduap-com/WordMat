@@ -14,6 +14,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
+
 Option Explicit
 Public vars As String
 Public DefS As String
@@ -28,8 +30,8 @@ Private Sub CommandButton_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo Fejl
-Dim Arr As Variant
+On Error GoTo fejl
+Dim arr As Variant
 Dim i As Integer
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
@@ -61,13 +63,13 @@ Dim i As Integer
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
 
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
-                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
+            If Split(arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
+                TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & SelectedVar & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
@@ -99,7 +101,7 @@ Dim i As Integer
     End If
     
     GoTo slut
-Fejl:
+fejl:
     SelectedVar = ""
 slut:
     UFSelectVar.Hide

@@ -480,7 +480,7 @@ Sub OmMathMenu()
 End Sub
 Sub hjaelpeMenu()
 Dim Filnavn As String
-On Error GoTo Fejl
+On Error GoTo fejl
 'filnavn = """" & Environ("ProgramFiles") & "\MathMenu\MathMenuManual.docx"""
 Filnavn = GetProgramFilesDir & "\WordMat\WordMatManual.docx"
 If Dir(Filnavn) <> "" Then
@@ -490,13 +490,13 @@ Else
 End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
 Sub indsaetformel()
-    On Error GoTo Fejl
+    On Error GoTo fejl
 '    MsgBox CommandBars.ActionControl.Caption
 #If Mac Then
 #Else
@@ -521,14 +521,14 @@ Sub indsaetformel()
 #End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 Function VisDef() As String
 'Dim omax As New CMaxima
 Dim deftext As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     deftext = omax.DefString
     If Len(deftext) > 3 Then
@@ -547,13 +547,13 @@ Dim deftext As String
     VisDef = deftext
 '    MsgBox deftext, vbOKOnly, "Definitioner"
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Function
 Sub DefinerVar()
     Dim var As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
 '    var = InputBox("Indtast definitionen på den nye variabel" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke før. Hvis der indsættes en clearvars: kommando længere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes på 4 forskellige måder" & vbCrLf & vbCrLf & "definer: variabel=værdi" & vbCrLf & "variabel:værdi" & vbCrLf & "variabel:=værdi" & vbCrLf & "variabel" & VBA.ChrW(&H2261) & "værdi  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere variable i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. a:1 ; b:2", "Ny variabel", "a=1")
     var = InputBox(Sprog.A(120), Sprog.A(121), "a=1")
     var = Replace(var, ":=", "=")
@@ -567,13 +567,13 @@ Sub DefinerVar()
     End If
     
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub DefinerFunktion()
     Dim var As String
-On Error GoTo Fejl
+On Error GoTo fejl
 '    var = InputBox("Indtast definitionen på den nye funktion" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke før. Hvis der indsættes en clearvars: kommando længere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes på 3 forskellige måder" & vbCrLf & vbCrLf & "f(x):forskrift" & vbCrLf & "f(x):=forskrift" & vbCrLf & "f(x)" & VBA.ChrW(&H2261) & "forskrift  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere funktioner i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. f(x)=x ; g(x)=2x+1", "Ny funktion", "f(x)=x+1")
     var = InputBox(Sprog.A(122), Sprog.A(123), "f(x)=x+1")
     var = Replace(var, ":=", "=")
@@ -587,13 +587,13 @@ On Error GoTo Fejl
         Selection.MoveRight Unit:=wdCharacter, Count:=2
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub DefinerLigning()
     Dim var As String
-On Error GoTo Fejl
+On Error GoTo fejl
     var = InputBox(Sprog.A(115), Sprog.A(124), Sprog.A(125) & ":     Area:A=1/2*h*b")
 '    var = Replace(var, "=", VBA.ChrW(&H2261))
     
@@ -604,7 +604,7 @@ On Error GoTo Fejl
         Selection.MoveRight Unit:=wdCharacter, Count:=2
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -613,7 +613,7 @@ Sub ErstatPunktum()
 ' ErstatPunktum Makro
 '
 '
-On Error GoTo Fejl
+On Error GoTo fejl
     Selection.HomeKey Unit:=wdStory
     Selection.Find.ClearFormatting
     Selection.Find.Font.Name = "Cambria Math"
@@ -650,7 +650,7 @@ On Error GoTo Fejl
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -659,7 +659,7 @@ Sub ErstatKomma()
 ' ErstatPunktum Makro
 '
 '
-On Error GoTo Fejl
+On Error GoTo fejl
     Selection.HomeKey Unit:=wdStory
     Selection.Find.ClearFormatting
     Selection.Find.Font.Name = "Cambria Math"
@@ -696,7 +696,7 @@ On Error GoTo Fejl
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -727,13 +727,13 @@ Sub FlytLigningerNed(antal As Integer)
     Next
 End Sub
 Function GetMathText(om As OMath) As String
-On Error GoTo Fejl
+On Error GoTo fejl
     om.ConvertToNormalText
     GetMathText = om.Range.Text
     om.ConvertToMathText
     om.BuildUp
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Function
@@ -812,7 +812,7 @@ End Sub
 Sub ReplaceStarMult()
 ' fjerner stjerner og indsætter alm. gangetegn
 Application.ScreenUpdating = False
-On Error GoTo Fejl
+On Error GoTo fejl
 
 '    Call ActiveDocument.Range.Find.Execute(chr(42), , , , , , , , , VBA.ChrW(183), wdReplaceAll)
     Call ActiveDocument.Range.Find.Execute(VBA.ChrW(8727), , , , , , , , , VBA.ChrW(183), wdReplaceAll) ' nødvendig til mathboxes
@@ -820,14 +820,14 @@ On Error GoTo Fejl
 
 '    MsgBox "Alle * er nu lavet om til " & VBA.ChrW(183)
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub ReplaceStarMultBack()
 ' fjerner alm gangetegn og indsætter *
 Application.ScreenUpdating = False
-On Error GoTo Fejl
+On Error GoTo fejl
     Call Selection.Range.Find.Execute(VBA.ChrW(183), , , , , , , , , "*", wdReplaceAll)
     Call Selection.Range.Find.Execute(VBA.ChrW(8901), , , , , , , , , "*", wdReplaceAll) '\cdot
     Call Selection.Range.Find.Execute(VBA.ChrW(8729), , , , , , , , , "*", wdReplaceAll) ' \cdot
@@ -835,16 +835,16 @@ On Error GoTo Fejl
     
 '    MsgBox "Alle " & VBA.ChrW(183) & " er nu lavet om til *"
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 Sub MaximaSettings()
-On Error GoTo Fejl
+On Error GoTo fejl
     If UFMSettings Is Nothing Then Set UFMSettings = New UserFormMaximaSettings
     UFMSettings.Show
     GoTo slut
-Fejl:
+fejl:
     Set UFMSettings = New UserFormMaximaSettings
     UFMSettings.Show
 slut:
@@ -853,14 +853,14 @@ Sub GoToLink()
     Dim Link As String
     Dim explorersti As String
     Dim appnr As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Link = CommandBars.ActionControl.Tag
 
     explorersti = """" & GetProgramFilesDir & "\Internet Explorer\iexplore.exe"" " & Link
 '    On Error GoTo fejl
     appnr = Shell(explorersti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
