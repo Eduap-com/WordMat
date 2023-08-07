@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 Public raekker As Integer
 Public kolonner As Integer
 Private Sub CommandButton_ok_Click()

@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 Option Explicit
 Private Sub CommandButton_Installer_Click()
 'Dim explorersti As String

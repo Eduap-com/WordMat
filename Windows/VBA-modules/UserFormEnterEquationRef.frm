@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 Option Explicit
 Public EquationName As String
 Private Sub CommandButton_cancel_Click()

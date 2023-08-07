@@ -195,8 +195,8 @@ Public Sub ExportAllModules()
     Dim C1 As Long, C2 As Long
     Dim ModuleFolder As String
     Dim ModuleBackupFolder As String
-    Dim UfWait2 As UserFormWaitForMaxima
-    Set UfWait2 = New UserFormWaitForMaxima
+'    Dim UfWait2 As UserFormWaitForMaxima ' det duer ikke at bruge noget der refererer uden for vbamodul, da de bliver slettet, og så fejler hele modulet og der kan ikke importeres
+'    Set UfWait2 = New UserFormWaitForMaxima
     On Error GoTo fejl
     
 
@@ -206,9 +206,9 @@ Public Sub ExportAllModules()
 #End If
 
 '   If MsgBox("Confirm you want to export all VBA modules to folder '" & VBAModulesFolder & "'?" & vbCrLf & "(If the folder exists. A backup will be made in '" & VBAModulesFolder & "-Backup'. If case of an error)", vbOKCancel) = vbCancel Then Exit Sub
-    UfWait2.Show vbModeless
-    UfWait2.Label_tip.Caption = "Exporting modules"
-    UfWait2.Label_progress.Caption = "*"
+'    UfWait2.Show vbModeless
+'    UfWait2.Label_tip.Caption = "Exporting modules"
+'    UfWait2.Label_progress.Caption = "*"
     DoEvents
     
     ''' The code modules will be exported in a folder named.
@@ -281,7 +281,11 @@ Public Sub ExportAllModules()
             Case vbext_ct_Document
                 ''' This is a worksheet or workbook object.
                 ''' Don't try to export.
-                bExport = False
+                If szFileName = "ThisDocument" Then
+                    szFileName = szFileName & ".cls"
+                Else
+                    bExport = False
+                End If
         End Select
         
         If bExport Then
@@ -292,7 +296,6 @@ Public Sub ExportAllModules()
         ''' remove it from the project if you want
         '''wkbSource.VBProject.VBComponents.Remove cmpComponent
         End If
-        UfWait2.Label_progress.Caption = "*"
         DoEvents
    
     Next cmpComponent
@@ -322,7 +325,6 @@ Public Sub ExportAllModules()
 fejl:
     MsgBox "An error occurred during Export. Your previous Export is saved to a backup folder: " & VBAModulesFolder & "-Backup", vbOKOnly, "Error"
 slut:
-    Unload UfWait2
 '    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
 End Sub
 Sub ImportAllModules()
@@ -332,7 +334,7 @@ Sub ImportAllModules()
     Dim szExportPath As String
     Dim szFileName As String
     Dim StrFile As String, i As Integer
-    Dim Arr() As String, FileList As String, MBP As Integer
+    Dim arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
     Dim ModuleFolder As String, C1 As Long
 
@@ -383,7 +385,7 @@ Sub ImportAllModules()
         End If
         StrFile = Dir
     Loop
-    Arr = Split(FileList, vbCrLf)
+    arr = Split(FileList, vbCrLf)
 '    FileList = Replace(FileList, vbCrLf, " | ")
     q = ""
     If Not ActiveDocument.Saved Then
@@ -408,9 +410,9 @@ Sub ImportAllModules()
     
    DeleteAllModules False
     
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" And InStr(Arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
-            wkbSource.VBProject.VBComponents.Import szExportPath & Arr(i)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" And InStr(arr(i), ".frx") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
+            wkbSource.VBProject.VBComponents.Import szExportPath & arr(i)
         End If
     Next
     
@@ -436,6 +438,9 @@ Function CountFilesInFolder(FolderPath As String) As Long
     Loop
     CountFilesInFolder = FileCount
 End Function
+Sub TestDelete()
+    DeleteAllModules False
+End Sub
 Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
     Dim bExport As Boolean
     Dim wkbSource As Document
@@ -472,9 +477,9 @@ Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
             Case vbext_ct_Document
                 bExport = False
         End Select
-        If PromptOk Then
+'        If PromptOk Then
             If szFileName = "VBAmodul.bas" Then bExport = False
-        End If
+'        End If
         
         If bExport Then
             wkbSource.VBProject.VBComponents.Remove cmpComponent
