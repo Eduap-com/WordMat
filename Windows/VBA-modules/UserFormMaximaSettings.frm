@@ -222,7 +222,6 @@ On Error Resume Next
     UFMSettings.Hide
     Sprog.CheckSetting
     RibbonSubs.RefreshRibbon
-    GenerateKeyboardShortcuts
 '#If Mac Then
 '    If LangChange Then MsgBox Sprog.A(671)
 '#End If

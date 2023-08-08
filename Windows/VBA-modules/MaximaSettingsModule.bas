@@ -176,7 +176,6 @@ On Error Resume Next
     LatexTOC = 0
     CASengine = 0
     
-    GenerateKeyboardShortcuts
 '    End If
     End If
     If Not RegKeyExists("HKCU\SOFTWARE\WORDMAT\Settings\BigFloat") Then

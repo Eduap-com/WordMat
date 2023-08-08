@@ -20,7 +20,6 @@ Dim b As Boolean
     If SprogNr < 1 Then b = True
     If LanguageSetting = 0 Then
         SprogNr = GetOfficeLanguage
-        If SprogNr <> 1 Then GenerateKeyboardShortcuts
     Else
         SprogNr = LanguageSetting
     End If

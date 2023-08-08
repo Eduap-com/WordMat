@@ -18,7 +18,6 @@ Attribute VB_Exposed = False
 
 Private Sub UserForm_Activate()
     SetCaptions
-    GenerateKeyboardShortcuts
 End Sub
 
 Sub SetCaptions()
