@@ -248,7 +248,7 @@ Sub Rib_FSbinspred(control As IRibbonControl)
 End Sub
 
 Sub Rib_FSbinusik(control As IRibbonControl)
-    insertribformel "", "p" & VBA.ChrW(770) & "±" & VBA.ChrW(8730) & "((p" & VBA.ChrW(770) & "" & VBA.ChrW(183) & "(1-p" & VBA.ChrW(770) & "))/n)"
+    insertribformel "", "p" & VBA.ChrW(770) & "±2" & VBA.ChrW(183) & VBA.ChrW(8730) & "((p" & VBA.ChrW(770) & "" & VBA.ChrW(183) & "(1-p" & VBA.ChrW(770) & "))/n)"
 End Sub
 
 'Callback for sandnorm1 onAction
