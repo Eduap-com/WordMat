@@ -24,10 +24,13 @@ End Sub
 
 Private Sub Document_Close()
     ' køres kun hvis WordMat.dotm er åbnet direkte og ikke som global skabelon
+#If Mac Then
+#Else
     If DateDiff("n", ExportDatetime, Now) > 2 Then ' hvis lige eksporteret, så spørg ikke
         If MsgBox("Do you want to Export modules?", vbYesNo, "Export?") = vbYes Then
             ExportAllModules
         End If
     End If
+#End If
 End Sub
 
