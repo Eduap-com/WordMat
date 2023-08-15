@@ -36,13 +36,17 @@ End Sub
 
 Private Sub Document_Open()
     ' køres kun hvis WordMat.dotm er åbnet direkte og ikke som global skabelon
+    ' Der opstår mærkelig fejl på Mac med denne funktion. Første gang der åbnes på Mac fungerer det fint. Der gemmes.
+    ' Næste gang der åbnes, meldes 'Internal error' på funktionen og intet virker.
+    ' Det opstår ikke, hvis der compiles når dokumentet åbnes første gang.
+    ' Problemet opstår også selvom denne funktion kun indeholder en msgbox "Hej"
     Dim s As String
     s = CheckKeyboardShortcutsPar(True)
     If s <> vbNullString Then
         If MsgBox("Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & "Vil du fixe?", vbYesNo) = vbYes Then
             GenerateKeyboardShortcuts
             CheckKeyboardShortcuts
-            MsgBox "Keyboard Genveje er repareret. Glem ikke at compile på Mac", vbOKOnly, "Husk compile"
+            MsgBox "Keyboard Genveje er repareret." & vbCrLf & vbCrLf & "Glem ikke at compile på Mac, med det samme.", vbOKOnly, "Husk compile!"
         End If
     End If
     
