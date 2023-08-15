@@ -35,7 +35,8 @@ Private Sub Document_Close()
 End Sub
 
 Private Sub Document_Open()
-    ' køres kun hvis WordMat.dotm er åbnet direkte og ikke som global skabelon
+' køres kun hvis WordMat.dotm er åbnet direkte og ikke som global skabelon
+
 #If Mac Then
     Dim s As String
     s = CheckKeyboardShortcutsPar(True)
@@ -45,8 +46,7 @@ Private Sub Document_Open()
             CheckKeyboardShortcuts
         End If
     End If
-
-#Else ' så længe der dun er én udvikler er det ikke nødv
+#Else ' så længe der dun er én udvikler er det ikke needed
 '    If MsgBox("Do you want to import modules?", vbYesNo, "Export?") = vbYes Then
 '        ImportAllModules
 '    End If
