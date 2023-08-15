@@ -42,6 +42,7 @@ Private Sub Document_Open()
         If MsgBox("Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & "Vil du fixe?", vbYesNo) = vbYes Then
             GenerateKeyboardShortcuts
             CheckKeyboardShortcuts
+            MsgBox "Keyboard Genveje er repareret. Glem ikke at compile på Mac", vbOKOnly, "Husk compile"
         End If
     End If
     
