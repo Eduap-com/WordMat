@@ -281,17 +281,22 @@ Sub ShowCustomizationContext()
     MsgBox Templates(4)
 End Sub
 Public Sub CheckKeyboardShortcuts()
+' til manuelt kald af om alt er ok med ks
     CheckKeyboardShortcutsPar False
 End Sub
+Public Sub TestCheckKeyboardShortcutsNoninteractive()
+    MsgBox CheckKeyboardShortcutsPar(True)
+End Sub
 Public Function CheckKeyboardShortcutsNoninteractive() As String
+' bruges at test-modulet til at checke om ks er sat rigtigt. Det er ikke vigtigt om Normal-dotm er sat.
     CheckKeyboardShortcutsNoninteractive = CheckKeyboardShortcutsPar(True)
 End Function
 Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) As String
-    ' Checker om Keyboard shortcuts er gemt correct i WordMat.dotm.
+    ' Checker om Keyboard shortcuts er gemt correct i WordMat.dotm.  og om der er gemt noget i normal.dotm
     Dim WT As Template
     Dim KB As KeyBinding
     Dim GemT As Template, s As String
-    Dim KeybInNormal As Boolean, FejlText As String
+    Dim KeybInNormal As Boolean, FejlText As String, KBerr As Boolean
     
     Set GemT = CustomizationContext
         
@@ -331,7 +336,6 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
         GoTo slut
     End If
     
-    
     CustomizationContext = WT
     
     If Not NonInteractive Then
@@ -344,13 +348,24 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
         s = s & vbCrLf
         s = s & "Antal keybindings: " & KeyBindings.Count & VbCrLfMac & VbCrLfMac
         s = s & "Keybindings:" & VbCrLfMac
-        On Error Resume Next
-        For Each KB In KeyBindings
-            Err.Clear
-            s = s & "  " & KB.KeyString & " ->" & KB.Command & VbCrLfMac
-            If Err.Number > 0 Then s = s & "  ??? ->" & KB.Command & VbCrLfMac
-        Next
+    End If
+    On Error Resume Next
+    
+    For Each KB In KeyBindings
+        Err.Clear
+        s = s & "  " & KB.KeyString & " ->" & KB.Command & VbCrLfMac
+        If Err.Number > 0 Then
+            s = s & "  ??? ->" & KB.Command & VbCrLfMac
+            KBerr = True
+        End If
+    Next
+    
+    If Not NonInteractive Then
         MsgBox s, vbOKOnly, "KeyBindings"
+    ElseIf KeyBindings.Count < 10 Then
+        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er kun " & KeyBindings.Count & " tastaturveje i WordMat*.dotm. Der skal nok køres GenerateKeyBoardShortcuts." & vbCrLf
+    ElseIf KBerr Then
+        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er problemer med Genvejene i WordMat*.dotm. Der skal nok køres GenerateKeyBoardShortcuts på Mac." & vbCrLf
     End If
     
 slut:
