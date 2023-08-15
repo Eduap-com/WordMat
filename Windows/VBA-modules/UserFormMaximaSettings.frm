@@ -284,14 +284,20 @@ Private Sub CommandButton_shortcuts_Click()
             Exit For
         End If
     Next
-    
+        
     ' Check om genvejene er sat i den vedhæftede skabelon. Hvis ikke så sættes de i normal.dotm
 #If Mac Then
+    On Error Resume Next
     If TemplateFundet Then
         If KeyBindings.Count > 10 Then
             For Each KB In KeyBindings
+                Err.Clear
                 If KB.KeyString = "Option+B" Then
                     KSok = True
+                    Exit For
+                End If
+                If Err.Number > 0 Then
+                    KSok = False
                     Exit For
                 End If
             Next
