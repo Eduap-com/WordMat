@@ -299,7 +299,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     If WT Is Nothing Then
         CheckKeyboardShortcutsPar = "Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm" & vbCrLf
         If Not NonInteractive Then
-            If MsgBox("Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm. Vil du anvende " & ActiveDocument.AttachedTemplate & "?", vbYesNo, "Ingen WordMat skabelon") = vbYes Then
+            If MsgBox("Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm. Vil du anvende " & ActiveDocument.AttachedTemplate & " til at checke genveje?", vbYesNo, "Ingen WordMat skabelon") = vbYes Then
                 Set WT = ActiveDocument.AttachedTemplate
             Else
                 GoTo slut
@@ -2290,12 +2290,20 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
     Set GemT = CustomizationContext
             
     CustomizationContext = NormalTemplate
-    
+
+#If Mac Then ' ved en elev var KB.command helt tom, så på mac anvendes kb.keystring, selvom det er lidt mere usikkert.
+    For Each KB In KeyBindings
+        If Len(KB.KeyString) = 8 & Left(KB.KeyString, 7) = "Option+" Then
+            KB.Clear
+        End If
+    Next
+#Else
     For Each KB In KeyBindings
         If LCase(Left(KB.Command, 8)) = "wordmat." Then
             KB.Clear
         End If
     Next
+#End If
     NormalTemplate.Save
 ' man kan ikke gemme WordMat.dotm som global skabelon når den er gemt for alle brugere
 '    For i = 1 To Application.Documents.Count
