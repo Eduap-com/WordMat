@@ -299,11 +299,8 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     If WT Is Nothing Then
         CheckKeyboardShortcutsPar = "Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm" & vbCrLf
         If Not NonInteractive Then
-            If MsgBox("Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm. Vil du anvende " & ActiveDocument.AttachedTemplate & " til at checke genveje?", vbYesNo, "Ingen WordMat skabelon") = vbYes Then
-                Set WT = ActiveDocument.AttachedTemplate
-            Else
-                GoTo slut
-            End If
+            MsgBox "Det ser ikke ud til at du har åbnet wordmat.dotm, men kører som global skabelon. Genveje vises for " & ActiveDocument.AttachedTemplate & "", vbOKOnly, "Ingen WordMat skabelon"
+            Set WT = ActiveDocument.AttachedTemplate
         Else
             GoTo slut
         End If
@@ -312,10 +309,17 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     CustomizationContext = NormalTemplate
     For Each KB In KeyBindings
         If KeyBindings.Count > 10 Then
+#If Mac Then
+            If KB.KeyString = "Option+B" Then
+                KeybInNormal = True
+                Exit For
+            End If
+#Else
             If KB.Command = "WordMat.Maxima.Beregn" Then
                 KeybInNormal = True
                 Exit For
             End If
+#End If
         End If
     Next
     If KeybInNormal Then

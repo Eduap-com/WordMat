@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm3DGraph
    Caption         =   "3D grafer"
    ClientHeight    =   5235
    ClientLeft      =   -30
-   ClientTop       =   80
-   ClientWidth     =   10880
+   ClientTop       =   75
+   ClientWidth     =   10875
    OleObjectBlob   =   "UserForm3DGraph.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

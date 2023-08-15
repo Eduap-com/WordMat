@@ -4516,10 +4516,10 @@ End Property
 Public Property Get GenerateShortcuts() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Opret tastaturgenveje"
+Case 1: s = "Reparér tastaturgenveje"
 Case 3: s = "Crear atajos de teclado"
 Case 4: s = ""
-Case Else: s = "Keyboard shortcuts"
+Case Else: s = "Repair Keyboard shortcuts"
 End Select
 GenerateShortcuts = s
 End Property

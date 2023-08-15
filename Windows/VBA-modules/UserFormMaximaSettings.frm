@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMaximaSettings 
    Caption         =   "Indstillinger"
    ClientHeight    =   5340
-   ClientLeft      =   -20
-   ClientTop       =   50
-   ClientWidth     =   9790.001
+   ClientLeft      =   -15
+   ClientTop       =   45
+   ClientWidth     =   9780.001
    OleObjectBlob   =   "UserFormMaximaSettings.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,9 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
 Option Explicit
 Private MustRestart As Boolean
 Private LoadUnits As Boolean
