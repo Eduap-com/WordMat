@@ -439,7 +439,7 @@ Sub ImportAllModules()
     Next
     
     NoOfModules = wkbSource.VBProject.VBComponents.Count
-    If NoOfModules <> ImportCount - 1 Then
+    If NoOfModules - 1 <> ImportCount Then
         MsgBox "The number of imported files does not match the final number of modules, classes and forms!!" & vbCrLf & " Please check if import is ok. " & vbCrLf & vbCrLf & "Files: " & ImportCount & vbCrLf & "Modules: " & NoOfModules, vbOKOnly Or vbExclamation, "Warning!"
     Else
         MsgBox ImportCount & " files successfully imported from folder '" & VBAModulesFolder & "'", vbOKOnly, "Import complete"

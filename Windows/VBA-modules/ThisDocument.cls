@@ -35,18 +35,18 @@ Private Sub Document_Close()
 End Sub
 
 Private Sub Document_Open()
-' køres kun hvis WordMat.dotm er åbnet direkte og ikke som global skabelon
-
+    ' køres kun hvis WordMat.dotm er åbnet direkte og ikke som global skabelon
 #If Mac Then
     Dim s As String
-    s = CheckKeyboardShortcutsPar(True)
+    s = CheckKeyboardShortcutsPar(False)
     If s <> vbNullString Then
-        If MsgBox("CheckKeyboardShortcuts meldte følgende:" & vbCrLf & s & vbCrLf & vbCrLf & "Vil du fixe?", vbYesNo) = vbYes Then
+        If MsgBox("Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & vbCrLf & "Vil du fixe?", vbYesNo) = vbYes Then
             GenerateKeyboardShortcuts
             CheckKeyboardShortcuts
         End If
     End If
-#Else ' så længe der dun er én udvikler er det ikke needed
+
+#Else ' så længe der dun er én udvikler er det ikke nødv
 '    If MsgBox("Do you want to import modules?", vbYesNo, "Export?") = vbYes Then
 '        ImportAllModules
 '    End If

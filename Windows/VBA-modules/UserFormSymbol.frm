@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Public tegn As String
 Private Sub CommandButton1_Click()
 On Error GoTo fejl
