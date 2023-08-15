@@ -285,16 +285,29 @@ Private Sub CommandButton_shortcuts_Click()
     Next
     
     ' Check om genvejene er sat i den vedhæftede skabelon. Hvis ikke så sættes de i normal.dotm
+#If Mac Then
     If TemplateFundet Then
         If KeyBindings.Count > 10 Then
             For Each KB In KeyBindings
-                If KB.Command = "WordMat.Maxima.Beregn" Then
+                If KB.KeyString = "Option+B" Then
                     KSok = True
                     Exit For
                 End If
             Next
         End If
     End If
+#Else
+    If TemplateFundet Then
+        If KeyBindings.Count > 10 Then
+            For Each KB In KeyBindings
+                If KB.Command = "WordMat.Maxima.beregn" Then
+                    KSok = True
+                    Exit For
+                End If
+            Next
+        End If
+    End If
+#End If
     
     If Not KSok Then
         MsgBox "Det ser ud til at genvejene ikke er sat korrekt i denne udgave af WordMat. Det kræver nok en Fejlmeldingen", vbOKOnly, "Fejl"
