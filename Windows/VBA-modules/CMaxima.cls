@@ -5898,6 +5898,9 @@ Function ConvertLatexToWord(Text As String) As String
 End Function
 Sub ReadSelection()
     ' indsætter det markerede som kommando
+    ' denne metode bruger ikke tempdoc, men ændrer den markerede ligning til text, læser den og ændrer tilbage til prof layout. Det kan give ændringer i den måde det står på.
+    ' metoden er dog nok lidt hurtigere
+    
     Dim mtext As String, copytext As String
     Dim antal As Integer
     Dim sstart As Long
@@ -6004,7 +6007,7 @@ End Sub
 Function ReadEquation(Optional ir As Range) As String
     ' Oversætter selection der er omath til streng
     ' kan gøres hurtigere hvis der kopieres indenfor samme document, men virker ikke 100%
-    ' autotextentries kan kopiere istedet for clipboard, og er måske hurtigere, men det er meget tvivlsomt.
+    ' Denne metode bruger autotextentries istedet for clipboard, og er måske hurtigere, men det er meget tvivlsomt.
     ' har dog oplevet at det giver problemer. Ligningssystem tan(30)=h/x og tan(25)=h/(x+34) på løsningen beregnes i enden. Det går helt galt, men virker når autotextentries ikke anvendes
 
     Dim sr As Range, r As Range
@@ -6034,6 +6037,8 @@ End Function
 Function ReadEquationCopy(Optional ir As Range) As String
 ' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
 ' Oversætter selection der er omath til streng
+' 22/8-2023 Har oplevet nogle win 11 computere, der fryser lige når selection.copy eksekveres. Det virker at skifte til readselectionold (men det er der også ulemper ved)
+
     Dim sr As Range, r As Range
     '    Dim t As Variant
     '    t = Timer
