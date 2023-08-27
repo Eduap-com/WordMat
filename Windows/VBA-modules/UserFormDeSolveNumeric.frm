@@ -852,10 +852,10 @@ Sub OpdaterDefinitioner()
    If Left(vars, 1) = ";" Then vars = right(vars, Len(vars) - 1)
     
    ea.Text = vars
-   Do While right(TextBox_definitioner.Text, 2) = vbCrLf
+   Do While right(TextBox_definitioner.Text, 2) = VbCrLfMac
       TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
    Loop
-   arr = Split(TextBox_definitioner.Text, vbCrLf)
+   arr = Split(TextBox_definitioner.Text, VbCrLfMac)
    
    For i = 0 To UBound(arr) ' Hvis variabel indgår i def, skal den fjernes
       If arr(i) <> "" Then
@@ -863,7 +863,7 @@ Sub OpdaterDefinitioner()
          If var2 = TextBox_varx.Text Then
             arr(i) = ""
          End If
-         If arr(i) <> "" Then s = s & arr(i) & vbCrLf
+         If arr(i) <> "" Then s = s & arr(i) & VbCrLfMac
       End If
    Next
    Do While right(s, 2) = vbCrLf
@@ -871,7 +871,7 @@ Sub OpdaterDefinitioner()
    Loop
    TextBox_definitioner.Text = s
    
-   arr = Split(TextBox_definitioner.Text, vbCrLf)
+   arr = Split(TextBox_definitioner.Text, VbCrLfMac)
    Do
       var = ea.GetNextListItem(ea.Pos)
       var = Replace(var, vbCrLf, "")
@@ -887,7 +887,7 @@ Sub OpdaterDefinitioner()
       If var <> "" Then
          '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
          If Len(TextBox_definitioner.Text) > 0 Then
-            TextBox_definitioner.Text = TextBox_definitioner.Text & vbCrLf
+            TextBox_definitioner.Text = TextBox_definitioner.Text & VbCrLfMac
          End If
          TextBox_definitioner.Text = TextBox_definitioner.Text & var & "=1"
       End If
