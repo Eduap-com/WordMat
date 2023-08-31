@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm2DGraph
    Caption         =   "Plot af grafer og punkter i planen"
    ClientHeight    =   7170
    ClientLeft      =   -30
-   ClientTop       =   45
-   ClientWidth     =   15945
+   ClientTop       =   50
+   ClientWidth     =   15950
    OleObjectBlob   =   "UserForm2DGraph.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

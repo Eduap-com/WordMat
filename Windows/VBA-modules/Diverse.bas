@@ -2312,7 +2312,7 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
 
 #If Mac Then ' ved en elev var KB.command helt tom, så på mac anvendes kb.keystring, selvom det er lidt mere usikkert.
     For Each KB In KeyBindings
-        If Len(KB.KeyString) = 8 & Left(KB.KeyString, 7) = "Option+" Then
+        If Len(KB.KeyString) = 8 And Left(KB.KeyString, 7) = "Option+" Then
             KB.Clear
         End If
     Next

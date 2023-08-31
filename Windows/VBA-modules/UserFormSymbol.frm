@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSymbol 
    Caption         =   "Symbol"
    ClientHeight    =   4875
-   ClientLeft      =   -15
+   ClientLeft      =   -20
    ClientTop       =   30
-   ClientWidth     =   4710
+   ClientWidth     =   4720
    OleObjectBlob   =   "UserFormSymbol.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
