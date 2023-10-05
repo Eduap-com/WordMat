@@ -65,19 +65,18 @@ root            maxima.sh used by WordMat to run Maxima (and maybe other scripts
 Whenever a new release is compiled the following checklist must be followed
 1. If any changes have been made to SolveReal.mac or WordMatunitAddon.mac a new maxima.core and/or maximaunit.core must be built for both Windows and Mac. See section *Buidling a new maxima.core*
 2. Update the version number in WordMat.dotm, the inno script and Package script
-3. Make a copy of WordMatAscii.dotm and rename the copy to WordMat.dotm
-4. Open WordMat.dotm and run VBA functions: ‘ReplacetoExtendedASCII’ & ‘GenerateKeyboardShortcuts’
+3. Open WordMat.dotm and run VBA functions: ‘GenerateKeyboardShortcuts’
 *(Make sure to add reference 'Microsoft Visual Basic for Applications Extensibility 5.3')*
 *This macros will only run if you have set Word to trust the VBA project object model*
    *Files | Settings | Trust Center | Trust Center Settings | Macro Settings | Trust access to the VBA project object model *
-5. If any changes have been made to WordMat.dotm a new WordMatMac.dotm must be created. See section *Creating WordMatMac.dotm for Mac*
-6. If any changes has been made to Excelfiles in Windows it must be copied to the corresponding Mac-folder. To avoid special character problems. The copied excel files must first be opened on windows. Then the VBA function 'replacetononunicode' must be run. Then it must opened on Mac, where you run 'replacetounicode'
-7. Download a new GeoGebra 5 installer and place it in Externalprograms. The filenames must be changed in the inno script file to reflect the new file.
-8. Download a new version of GeoGebra Math apps bundle: https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding and place in Shared
-9. Build the Windows version
-10. Codesign the installer (Project owner only)
-11. Build the Mac M1 and intel versions
-12. Create a new release on GitHub and upload the 3 installers
+4. If any changes have been made to WordMat.dotm a new WordMatMac.dotm must be created. See section *Creating WordMatMac.dotm for Mac*
+5. If any changes has been made to Excelfiles in Windows it must be copied to the corresponding Mac-folder. To avoid special character problems. The copied excel files must first be opened on windows. Then the VBA function 'replacetononunicode' must be run. Then it must opened on Mac, where you run 'replacetounicode'
+6. Download a new GeoGebra 5 installer and place it in Externalprograms. The filenames must be changed in the inno script file to reflect the new file.
+7. Download a new version of GeoGebra Math apps bundle: https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding and place in Shared
+8. Build the Windows version
+9. Codesign the installer (Project owner only)
+10. Build the Mac M1 and intel versions
+11. Create a new release on GitHub and upload the 3 installers
 
 ## Buidling a new maxima.core
 The default installation of Maxima loads the compiled *maxima.core* file from this location:
