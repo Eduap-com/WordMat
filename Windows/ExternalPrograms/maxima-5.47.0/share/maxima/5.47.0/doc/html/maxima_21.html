@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Numerical (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Numerical (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Numerical (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_22.html#Matrices-and-Linear-Algebra" rel="next" title="Matrices and Linear Algebra">
+<link href="maxima_20.html#Differential-Equations" rel="prev" title="Differential Equations">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+kbd.key {font-style: normal}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Numerical">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_22.html#Matrices-and-Linear-Algebra" accesskey="n" rel="next">Matrices and Linear Algebra</a>, Previous: <a href="maxima_20.html#Differential-Equations" accesskey="p" rel="prev">Differential Equations</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Numerical-1">22 Numerical</h2>
+
+<a class="anchor" id="Item_003a-Numerical_002fnode_002fIntroduction-to-fast-Fourier-transform"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-fast-Fourier-transform" accesskey="1">Introduction to fast Fourier transform</a></li>
+<li><a href="#Functions-and-Variables-for-fast-Fourier-transform" accesskey="2">Functions and Variables for fft</a></li>
+<li><a href="#Functions-and-Variables-for-FFTPACK5" accesskey="3">Functions and Variables for FFTPACK5</a></li>
+<li><a href="#Functions-for-numerical-solution-of-equations" accesskey="4">Functions for numerical solution of equations</a></li>
+<li><a href="#Introduction-to-numerical-solution-of-differential-equations" accesskey="5">Introduction to numerical solution of differential equations</a></li>
+<li><a href="#Functions-for-numerical-solution-of-differential-equations" accesskey="6">Functions for numerical solution of differential equations</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-fast-Fourier-transform">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-fast-Fourier-transform" accesskey="n" rel="next">Functions and Variables for fft</a>, Up: <a href="#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-fast-Fourier-transform-1">22.1 Introduction to fast Fourier transform</h3>
+
+<p>The <code class="code">fft</code> package comprises functions for the numerical (not symbolic)
+computation of the fast Fourier transform.  This is limited to
+sequences whit length that is a power of two.  For more general
+lengths, consider the <code class="code">fftpack5</code> package that supports sequences
+of any length, but is most efficient if the length is a product of
+small primes.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Fourier-transform">Fourier transform</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-Numerical_002fnode_002fFunctions-and-Variables-for-fast-Fourier-transform"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-fast-Fourier-transform">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-FFTPACK5" accesskey="n" rel="next">Functions and Variables for FFTPACK5</a>, Previous: <a href="#Introduction-to-fast-Fourier-transform" accesskey="p" rel="prev">Introduction to fast Fourier transform</a>, Up: <a href="#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-fft">22.2 Functions and Variables for fft</h3>
+
+<a class="anchor" id="polartorect"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fpolartorect"></a><dl class="first-deffn">
+<dt class="deffn" id="index-polartorect"><span class="category-def">Function: </span><span><strong class="def-name">polartorect</strong> <var class="def-var-arguments">(<var class="var">r</var>, <var class="var">t</var>)</var><a class="copiable-link" href='#index-polartorect'> &para;</a></span></dt>
+<dd>
+<p>Translates complex values of the form <code class="code">r %e^(%i t)</code> to the form
+<code class="code">a + b %i</code>, where <var class="var">r</var> is the magnitude and <var class="var">t</var> is the phase.
+<var class="var">r</var> and <var class="var">t</var> are 1-dimensional arrays of the same size.
+The array size need not be a power of 2.
+</p>
+<p>The original values of the input arrays are
+replaced by the real and imaginary parts, <code class="code">a</code> and <code class="code">b</code>, on return.
+The outputs are calculated as
+</p>
+<div class="example">
+<pre class="example-preformatted">a = r cos(t)
+b = r sin(t)
+</pre></div>
+
+<p><code class="code"><a class="ref" href="#polartorect">polartorect</a></code> is the inverse function of <code class="code"><a class="ref" href="#recttopolar">recttopolar</a></code>.
+</p>
+<p><code class="code">load(&quot;fft&quot;)</code> loads this function.  See also <code class="code"><a class="ref" href="#fft">fft</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="recttopolar"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002frecttopolar"></a><dl class="first-deffn">
+<dt class="deffn" id="index-recttopolar"><span class="category-def">Function: </span><span><strong class="def-name">recttopolar</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-recttopolar'> &para;</a></span></dt>
+<dd>
+<p>Translates complex values of the form <code class="code">a + b %i</code> to the form
+<code class="code">r %e^(%i t)</code>, where <var class="var">a</var> is the real part and <var class="var">b</var> is the imaginary
+part.  <var class="var">a</var> and <var class="var">b</var> are 1-dimensional arrays of the same size.
+The array size need not be a power of 2.
+</p>
+<p>The original values of the input arrays are
+replaced by the magnitude and angle, <code class="code">r</code> and <code class="code">t</code>, on return.
+The outputs are calculated as
+</p>
+<div class="example">
+<pre class="example-preformatted">r = sqrt(a^2 + b^2)
+t = atan2(b, a)
+</pre></div>
+
+<p>The computed angle is in the range <code class="code">-%pi</code> to <code class="code">%pi</code>.
+</p>
+<p><code class="code">recttopolar</code> is the inverse function of <code class="code"><a class="ref" href="#polartorect">polartorect</a></code>.
+</p>
+<p><code class="code">load(&quot;fft&quot;)</code> loads this function.  See also <code class="code"><a class="ref" href="#fft">fft</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002finverse_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">inverse_fft</strong> <var class="def-var-arguments">(<var class="var">y</var>)</var><a class="copiable-link" href='#index-inverse_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Computes the inverse complex fast Fourier transform.
+<var class="var">y</var> is a list or array (named or unnamed) which contains the data to
+transform.  The number of elements must be a power of 2.
+The elements must be literal numbers (integers, rationals, floats, or bigfloats)
+or symbolic constants,
+or expressions <code class="code">a + b*%i</code> where <code class="code">a</code> and <code class="code">b</code> are literal numbers
+or symbolic constants.
+</p>
+<p><code class="code">inverse_fft</code> returns a new object of the same type as <var class="var">y</var>,
+which is not modified.
+Results are always computed as floats
+or expressions <code class="code">a + b*%i</code> where <code class="code">a</code> and <code class="code">b</code> are floats.
+If bigfloat precision is needed the function <code class="code"><a class="ref" href="#bf_005finverse_005ffft">bf_inverse_fft</a></code> can
+be used instead as a drop-in replacement of <code class="code">inverse_fft</code> that is
+slower, but supports bfloats. 
+</p>
+<p>The inverse discrete Fourier transform is defined as follows.
+Let <code class="code">x</code> be the output of the inverse transform.
+Then for <code class="code">j</code> from 0 through <code class="code">n - 1</code>,
+</p>
+<div class="example">
+<pre class="example-preformatted">x[j] = sum(y[k] exp(-2 %i %pi j k / n), k, 0, n - 1)
+</pre></div>
+
+<p>As there are various sign and normalization conventions possible,
+this definition of the transform may differ from that used by other mathematical software.
+</p>
+<p><code class="code">load(&quot;fft&quot;)</code> loads this function.
+</p>
+<p>See also <code class="code"><a class="ref" href="#fft">fft</a></code> (forward transform), <code class="code"><a class="ref" href="#recttopolar">recttopolar</a></code>, and
+<code class="code"><a class="ref" href="#polartorect">polartorect</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Real data.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 2, 3, 4, -1, -2, -3, -4] $
+(%i4) L1 : inverse_fft (L);
+(%o4) [0.0, 14.49 %i - .8284, 0.0, 2.485 %i + 4.828, 0.0, 
+                       4.828 - 2.485 %i, 0.0, - 14.49 %i - .8284]
+(%i5) L2 : fft (L1);
+(%o5) [1.0, 2.0 - 2.168L-19 %i, 3.0 - 7.525L-20 %i, 
+4.0 - 4.256L-19 %i, - 1.0, 2.168L-19 %i - 2.0, 
+7.525L-20 %i - 3.0, 4.256L-19 %i - 4.0]
+(%i6) lmax (abs (L2 - L));
+(%o6)                       3.545L-16
+</pre></div>
+
+<p>Complex data.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $                 
+(%i3) L : [1, 1 + %i, 1 - %i, -1, -1, 1 - %i, 1 + %i, 1] $
+(%i4) L1 : inverse_fft (L);
+(%o4) [4.0, 2.711L-19 %i + 4.0, 2.0 %i - 2.0, 
+- 2.828 %i - 2.828, 0.0, 5.421L-20 %i + 4.0, - 2.0 %i - 2.0, 
+2.828 %i + 2.828]
+(%i5) L2 : fft (L1);
+(%o5) [4.066E-20 %i + 1.0, 1.0 %i + 1.0, 1.0 - 1.0 %i, 
+1.55L-19 %i - 1.0, - 4.066E-20 %i - 1.0, 1.0 - 1.0 %i, 
+1.0 %i + 1.0, 1.0 - 7.368L-20 %i]
+(%i6) lmax (abs (L2 - L));                    
+(%o6)                       6.841L-17
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fft"><span class="category-def">Function: </span><span><strong class="def-name">fft</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-fft'> &para;</a></span></dt>
+<dd>
+<p>Computes the complex fast Fourier transform.
+<var class="var">x</var> is a list or array (named or unnamed) which contains the data to
+transform.  The number of elements must be a power of 2.
+The elements must be literal numbers (integers, rationals, floats, or bigfloats)
+or symbolic constants,
+or expressions <code class="code">a + b*%i</code> where <code class="code">a</code> and <code class="code">b</code> are literal numbers
+or symbolic constants.
+</p>
+<p><code class="code">fft</code> returns a new object of the same type as <var class="var">x</var>,
+which is not modified.
+Results are always computed as floats
+or expressions <code class="code">a + b*%i</code> where <code class="code">a</code> and <code class="code">b</code> are floats.
+If bigfloat precision is needed the function <code class="code"><a class="ref" href="#bf_005ffft">bf_fft</a></code> can be used
+instead as a drop-in replacement of <code class="code">fft</code> that is slower, but
+supports bfloats. In addition if it is known that the input consists
+of only real values (no imaginary parts), <code class="code"><a class="ref" href="#real_005ffft">real_fft</a></code> can be used
+which is potentially faster.
+</p>
+<p>The discrete Fourier transform is defined as follows.
+Let <code class="code">y</code> be the output of the transform.
+Then for <code class="code">k</code> from 0 through <code class="code">n - 1</code>,
+</p>
+<div class="example">
+<pre class="example-preformatted">y[k] = (1/n) sum(x[j] exp(+2 %i %pi j k / n), j, 0, n - 1)
+</pre></div>
+
+<p>As there are various sign and normalization conventions possible,
+this definition of the transform may differ from that used by other mathematical software.
+</p>
+<p>When the data <var class="var">x</var> are real,
+real coefficients <code class="code">a</code> and <code class="code">b</code> can be computed such that
+</p>
+<div class="example">
+<pre class="example-preformatted">x[j] = sum(a[k]*cos(2*%pi*j*k/n)+b[k]*sin(2*%pi*j*k/n), k, 0, n/2)
+</pre></div>
+
+<p>with
+</p>
+<div class="example">
+<pre class="example-preformatted">a[0] = realpart (y[0])
+b[0] = 0
+</pre></div>
+
+<p>and, for k from 1 through n/2 - 1,
+</p>
+<div class="example">
+<pre class="example-preformatted">a[k] = realpart (y[k] + y[n - k])
+b[k] = imagpart (y[n - k] - y[k])
+</pre></div>
+
+<p>and
+</p>
+<div class="example">
+<pre class="example-preformatted">a[n/2] = realpart (y[n/2])
+b[n/2] = 0
+</pre></div>
+
+<p><code class="code">load(&quot;fft&quot;)</code> loads this function.
+</p>
+<p>See also <code class="code"><a class="ref" href="#inverse_005ffft">inverse_fft</a></code> (inverse transform),
+<code class="code"><a class="ref" href="#recttopolar">recttopolar</a></code>, and <code class="code"><a class="ref" href="#polartorect">polartorect</a></code>.. See <code class="code"><a class="ref" href="#real_005ffft">real_fft</a></code>
+for FFTs of a real-valued input, and <code class="code"><a class="ref" href="#bf_005ffft">bf_fft</a></code> and
+<code class="code"><a class="ref" href="#bf_005freal_005ffft">bf_real_fft</a></code> for operations on bigfloat values.  Finally, for
+transforms of any size (but limited to float values), see
+<code class="code"><a class="ref" href="#fftpack5_005ffft">fftpack5_fft</a></code> and <code class="code"><a class="ref" href="#fftpack5_005freal_005ffft">fftpack5_real_fft</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Real data.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 2, 3, 4, -1, -2, -3, -4] $
+(%i4) L1 : fft (L);
+(%o4) [0.0, 1.811 %i - .1036, 0.0, 0.3107 %i + .6036, 0.0, 
+                         0.6036 - 0.3107 %i, 0.0, (- 1.811 %i) - 0.1036]
+(%i5) L2 : inverse_fft (L1);
+(%o5) [1.0, 2.168L-19 %i + 2.0, 7.525L-20 %i + 3.0, 
+4.256L-19 %i + 4.0, - 1.0, - 2.168L-19 %i - 2.0, 
+- 7.525L-20 %i - 3.0, - 4.256L-19 %i - 4.0]
+(%i6) lmax (abs (L2 - L));
+(%o6)                       3.545L-16
+</pre></div>
+
+<p>Complex data.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 1 + %i, 1 - %i, -1, -1, 1 - %i, 1 + %i, 1] $
+(%i4) L1 : fft (L);
+(%o4) [0.5, 0.5, 0.25 %i - 0.25, (- 0.3536 %i) - 0.3536, 0.0, 0.5, 
+                                        (- 0.25 %i) - 0.25, 0.3536 %i + 0.3536]
+(%i5) L2 : inverse_fft (L1);
+(%o5) [1.0, 1.0 %i + 1.0, 1.0 - 1.0 %i, - 1.0, - 1.0, 1.0 - 1.0 %i, 
+                                                             1.0 %i + 1.0, 1.0]
+(%i6) lmax (abs (L2 - L));
+(%o6)                       0.0
+</pre></div>
+
+<p>Computation of sine and cosine coefficients.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 2, 3, 4, 5, 6, 7, 8] $
+(%i4) n : length (L) $
+(%i5) x : make_array (any, n) $
+(%i6) fillarray (x, L) $
+(%i7) y : fft (x) $
+(%i8) a : make_array (any, n/2 + 1) $
+(%i9) b : make_array (any, n/2 + 1) $
+(%i10) a[0] : realpart (y[0]) $
+(%i11) b[0] : 0 $
+(%i12) for k : 1 thru n/2 - 1 do
+   (a[k] : realpart (y[k] + y[n - k]),
+    b[k] : imagpart (y[n - k] - y[k]));
+(%o12)                        done
+(%i13) a[n/2] : y[n/2] $
+(%i14) b[n/2] : 0 $
+(%i15) listarray (a);
+(%o15)          [4.5, - 1.0, - 1.0, - 1.0, - 0.5]
+(%i16) listarray (b);
+(%o16)           [0, - 2.414, - 1.0, - .4142, 0]
+(%i17) f(j) := sum (a[k]*cos(2*%pi*j*k/n) + b[k]*sin(2*%pi*j*k/n), 
+                    k, 0, n/2) $
+(%i18) makelist (float (f (j)), j, 0, n - 1);
+(%o18)      [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="real_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002freal_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-real_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">real_fft</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-real_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Computes the fast Fourier transform of a real-valued sequence
+<var class="var">x</var>.  This is equivalent to performing <code class="code">fft(x)</code>, except that
+only the first <code class="code">N/2+1</code> results are returned, where <code class="code">N</code> is
+the length of <var class="var">x</var>.  <code class="code">N</code> must be power of two.
+</p>
+<p>No check is made that <var class="var">x</var> contains only real values.
+</p>
+<p>The symmetry properties of the Fourier transform of real sequences to
+reduce he complexity.  In particular the first and last output values
+of <code class="code">real_fft</code> are purely real.  For larger sequences, <code class="code">real_fft</code>
+may be computed more quickly than <code class="code">fft</code>.
+</p>
+<p>Since the output length is short, the normal <code class="code"><a class="ref" href="#inverse_005ffft">inverse_fft</a></code> cannot
+be directly used.  Use <code class="code"><a class="ref" href="#inverse_005freal_005ffft">inverse_real_fft</a></code> to compute the inverse.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="inverse_005freal_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002finverse_005freal_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005freal_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">inverse_real_fft</strong> <var class="def-var-arguments">(<var class="var">y</var>)</var><a class="copiable-link" href='#index-inverse_005freal_005ffft'> &para;</a></span></dt>
+<dd><p>Computes the inverse Fourier transform of <var class="var">y</var>, which must have a
+length of <code class="code">N/2+1</code> where <code class="code">N</code> is a power of two.  That is, the
+input <var class="var">x</var> is expected to be the output of <code class="code">real_fft</code>.
+</p>
+<p>No check is made to ensure that the input has the correct format.
+(The first and last elements must be purely real.)
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bf_005finverse_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fbf_005finverse_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bf_005finverse_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">bf_inverse_fft</strong> <var class="def-var-arguments">(<var class="var">y</var>)</var><a class="copiable-link" href='#index-bf_005finverse_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Computes the inverse complex fast Fourier transform.  This is the
+bigfloat version of <code class="code"><a class="ref" href="#inverse_005ffft">inverse_fft</a></code> that converts the input to
+bigfloats and returns a bigfloat result.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="bf_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fbf_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bf_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">bf_fft</strong> <var class="def-var-arguments">(<var class="var">y</var>)</var><a class="copiable-link" href='#index-bf_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Computes the forward complex fast Fourier transform.  This is the
+bigfloat version of <code class="code"><a class="ref" href="#fft">fft</a></code> that converts the input to
+bigfloats and returns a bigfloat result.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="bf_005freal_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fbf_005freal_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bf_005freal_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">bf_real_fft</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-bf_005freal_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Computes the forward fast Fourier transform of a real-valued input
+returning a bigfloat result.  This is the bigfloat version of
+<code class="code">real_fft</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bf_005finverse_005freal_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fbf_005finverse_005freal_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bf_005finverse_005freal_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">bf_inverse_real_fft</strong> <var class="def-var-arguments">(<var class="var">y</var>)</var><a class="copiable-link" href='#index-bf_005finverse_005freal_005ffft'> &para;</a></span></dt>
+<dd><p>Computes the inverse fast Fourier transform with a real-valued
+bigfloat output.  This is the bigfloat version of <code class="code">inverse_real_fft</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fft">Package fft</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Numerical_002fnode_002fFunctions-and-Variables-for-FFTPACK5"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-FFTPACK5">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-for-numerical-solution-of-equations" accesskey="n" rel="next">Functions for numerical solution of equations</a>, Previous: <a href="#Functions-and-Variables-for-fast-Fourier-transform" accesskey="p" rel="prev">Functions and Variables for fft</a>, Up: <a href="#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-FFTPACK5-1">22.3 Functions and Variables for FFTPACK5</h3>
+
+<p><code class="code">FFTPACK5</code> provides several routines to compute Fourier
+transforms for both real and complex sequences and their inverses.
+The forward transform is defined the same as for <code class="code">fft</code>.  The
+major difference is the length of the sequence is not constrained to
+be a power of two.  In fact, any length is supported, but it is most
+efficient when the length has the form <em class="math tex2jax_process">\(2^r*3^s*5^t\)</em>.
+</p>
+<p><code class="code">load(&quot;fftpack5&quot;)</code> loads this function.
+</p>
+<a class="anchor" id="fftpack5_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffftpack5_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fftpack5_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">fftpack5_fft</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-fftpack5_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">fft</code> (<code class="code"><a class="ref" href="#fft">fft</a></code>), this computes the fast Fourier transform
+of a complex sequence.  However, the length of <var class="var">x</var> is not limited
+to a power of 2.  
+</p>
+<p><code class="code">load(&quot;fftpack5&quot;)</code> loads this function.
+</p>
+<p>Examples:
+</p>
+<p>Real data.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fftpack5&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 2, 3, 4, -1, -2 ,-3, -4] $
+(%i4) L1 : fftpack5_fft(L);
+(%o4) [0.0, 1.811 %i - 0.1036, 0.0, 0.3107 %i + 0.6036, 0.0, 
+                                0.6036 - 0.3107 %i, 0.0, (- 1.811 %i) - 0.1036]
+(%i5) L2 : fftpack5_inverse_fft(L1);
+(%o5) [1.0, 4.441e-16 %i + 2.0, 1.837e-16 %i + 3.0, 4.0 - 4.441e-16 %i, 
+     - 1.0, (- 4.441e-16 %i) - 2.0, (- 1.837e-16 %i) - 3.0, 4.441e-16
+       %i - 4.0]
+(%i6) lmax (abs (L2-L));
+(%o6)                       4.441e-16
+(%i7) L : [1, 2, 3, 4, 5, 6]$
+(%i8) L1 : fftpack5_fft(L);
+(%o8) [3.5, (- 0.866 %i) - 0.5, (- 0.2887 %i) - 0.5, (- 1.48e-16 %i) - 0.5, 
+                                               0.2887 %i - 0.5, 0.866
+                                                      %%i - 0.5]
+(%i9) L2 : fftpack5_inverse_fft (L1);
+(%o9) [1.0 - 1.48e-16 %i, 3.701e-17 %i + 2.0, 3.0 - 1.48e-16 %i, 
+                     4.0 - 1.811e-16 %i, 5.0 - 1.48e-16 %i, 5.881e-16
+                           %i + 6.0]
+(%i10) lmax (abs (L2-L));
+(%o10)                             9.064e-16
+</pre></div>
+
+<p>Complex data.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fftpack5&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 1 + %i, 1 - %i, -1, -1, 1 - %i, 1 + %i, 1] $
+(%i4) L1 : fftpack5_inverse_fft (L);
+(%o4) [4.0, 2.828 %i + 2.828, (- 2.0 %i) - 2.0, 4.0, 0.0, 
+                                       (- 2.828 %i) - 2.828, 2.0 %i - 2.0, 4.0]
+(%i5) L2 : fftpack5_fft(L1);
+(%o5) [1.0, 1.0 %i + 1.0, 1.0 - 1.0 %i, (- 2.776e-17 %i) - 1.0, - 1.0, 
+                                1.0 - 1.0 %i, 1.0 %i + 1.0, 1.0 -
+                                          %2.776e-17 %i]
+(%i6) lmax(abs(L2-L));
+(%o6)                              1.11e-16
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fftpack5">Package fftpack5</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fftpack5_005finverse_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffftpack5_005finverse_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fftpack5_005finverse_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">fftpack5_inverse_fft</strong> <var class="def-var-arguments">(<var class="var">y</var>)</var><a class="copiable-link" href='#index-fftpack5_005finverse_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Computes the inverse complex Fourier transform, like
+<code class="code">inverse_fft</code>, but is not constrained to be a power of two.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fftpack5">Package fftpack5</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fftpack5_005freal_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffftpack5_005freal_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fftpack5_005freal_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">fftpack5_real_fft</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-fftpack5_005freal_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Computes the fast Fourier transform of a real-valued sequence <var class="var">x</var>,
+just like <code class="code">real_fft</code>, except the length is not constrained to be
+a power of two.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) fpprintprec : 4 $
+(%i2) L : [1, 2, 3, 4, 5, 6] $
+(%i3) L1 : fftpack5_real_fft(L);
+(%o3)       [3.5, (- 0.866 %i) - 0.5, (- 0.2887 %i) - 0.5, - 0.5]
+(%i4) L2 : fftpack5_inverse_real_fft(L1, 6);
+(%o4)                  [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
+(%i5) lmax(abs(L2-L));
+(%o5)                            1.332e-15
+(%i6) fftpack5_inverse_real_fft(L1, 7);
+(%o6)            [0.5, 2.083, 2.562, 3.7, 4.3, 5.438, 5.917] 
+</pre></div>
+
+<p>The last example shows how important it to set the length correctly
+for <code class="code">fftpack5_inverse_real_fft</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fftpack5">Package fftpack5</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fftpack5_005finverse_005freal_005ffft"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffftpack5_005finverse_005freal_005ffft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fftpack5_005finverse_005freal_005ffft"><span class="category-def">Function: </span><span><strong class="def-name">fftpack5_inverse_real_fft</strong> <var class="def-var-arguments">(<var class="var">y</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-fftpack5_005finverse_005freal_005ffft'> &para;</a></span></dt>
+<dd>
+<p>Computes the inverse Fourier transform of <var class="var">y</var>, which must have a
+length of <code class="code">floor(n/2) + 1</code>.  The length of sequence produced by the
+inverse transform must be specified by <var class="var">n</var>.  This is required
+because the length of <var class="var">y</var> does not uniquely determine <var class="var">n</var>.
+The last element of <var class="var">y</var> is always real if <var class="var">n</var> is even, but it
+can be complex when <var class="var">n</var> is odd.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fftpack5">Package fftpack5</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Numerical_002fnode_002fFunctions-for-numerical-solution-of-equations"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-for-numerical-solution-of-equations">
+<div class="nav-panel">
+<p>
+Next: <a href="#Introduction-to-numerical-solution-of-differential-equations" accesskey="n" rel="next">Introduction to numerical solution of differential equations</a>, Previous: <a href="#Functions-and-Variables-for-FFTPACK5" accesskey="p" rel="prev">Functions and Variables for FFTPACK5</a>, Up: <a href="#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-for-numerical-solution-of-equations-1">22.4 Functions for numerical solution of equations</h3>
+
+<a class="anchor" id="horner"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fhorner"></a><dl class="first-deffn">
+<dt class="deffn" id="index-horner"><span class="category-def">Function: </span><span><strong class="def-name">horner</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">horner</code> (<var class="var">expr</var>, <var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">horner</code> (<var class="var">expr</var>)</var><a class="copiable-link" href='#index-horner'> &para;</a></span></dt>
+<dd>
+<p>Returns a rearranged representation of <var class="var">expr</var> as in Horner&rsquo;s rule, using
+<var class="var">x</var> as the main variable if it is specified.  <code class="code">x</code> may be omitted in
+which case the main variable of the canonical rational expression form of
+<var class="var">expr</var> is used.
+</p>
+<p><code class="code">horner</code> sometimes improves stability if <code class="code">expr</code> is
+to be numerically evaluated.  It is also useful if Maxima is used to
+generate programs to be run in Fortran.  See also <code class="code"><a class="ref" href="maxima_12.html#stringout">stringout</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expr: 1e-155*x^2 - 5.5*x + 5.2e155;
+                           2
+(%o1)             1.e-155 x  - 5.5 x + 5.2e+155
+(%i2) expr2: horner (%, x), keepfloat: true;
+(%o2)         1.0 ((1.e-155 x - 5.5) x + 5.2e+155)
+(%i3) ev (expr, x=1e155);
+Maxima encountered a Lisp error:
+
+ arithmetic error FLOATING-POINT-OVERFLOW signalled
+
+Automatically continuing.
+To enable the Lisp debugger set *debugger-hook* to nil.
+(%i4) ev (expr2, x=1e155);
+(%o4)                 7.00000000000001e+154
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="find_005froot"></a><a class="anchor" id="bf_005ffind_005froot"></a><a class="anchor" id="find_005froot_005ferror"></a><a class="anchor" id="find_005froot_005fabs"></a><a class="anchor" id="find_005froot_005frel"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffind_005froot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-find_005froot"><span class="category-def">Function: </span><span><strong class="def-name">find_root</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">abserr</var>, <var class="var">relerr</var>])</var><a class="copiable-link" href='#index-find_005froot'> &para;</a></span></dt>
+<dt class="deffnx def-cmd-deffn" id="index-find_005froot-1"><span class="category-def">Function: </span><span><strong class="def-name">find_root</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">abserr</var>, <var class="var">relerr</var>])</var><a class="copiable-link" href='#index-find_005froot-1'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fbf_005ffind_005froot"></a></dd><dt class="deffnx def-cmd-deffn" id="index-bf_005ffind_005froot"><span class="category-def">Function: </span><span><strong class="def-name">bf_find_root</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">abserr</var>, <var class="var">relerr</var>])</var><a class="copiable-link" href='#index-bf_005ffind_005froot'> &para;</a></span></dt>
+<dt class="deffnx def-cmd-deffn" id="index-bf_005ffind_005froot-1"><span class="category-def">Function: </span><span><strong class="def-name">bf_find_root</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">abserr</var>, <var class="var">relerr</var>])</var><a class="copiable-link" href='#index-bf_005ffind_005froot-1'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffind_005froot_005ferror"></a></dd><dt class="deffnx def-cmd-deffn" id="index-find_005froot_005ferror"><span class="category-def">Option variable: </span><span><strong class="def-name">find_root_error</strong><a class="copiable-link" href='#index-find_005froot_005ferror'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffind_005froot_005fabs"></a></dd><dt class="deffnx def-cmd-deffn" id="index-find_005froot_005fabs"><span class="category-def">Option variable: </span><span><strong class="def-name">find_root_abs</strong><a class="copiable-link" href='#index-find_005froot_005fabs'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Numerical_002fdeffn_002ffind_005froot_005frel"></a></dd><dt class="deffnx def-cmd-deffn" id="index-find_005froot_005frel"><span class="category-def">Option variable: </span><span><strong class="def-name">find_root_rel</strong><a class="copiable-link" href='#index-find_005froot_005frel'> &para;</a></span></dt>
+<dd>
+<p>Finds a root of the expression <var class="var">expr</var> or the function <var class="var">f</var> over the
+closed interval <em class="math tex2jax_process">\([\mathit{a}, \mathit{b}]\)</em>.  The expression <var class="var">expr</var> may be an
+equation, in which case <code class="code"><a class="ref" href="#find_005froot">find_root</a></code> seeks a root of
+<code class="code">lhs(<var class="var">expr</var>) - rhs(<var class="var">expr</var>)</code>.
+</p>
+<p>Given that Maxima can evaluate <var class="var">expr</var> or <var class="var">f</var> over
+<em class="math tex2jax_process">\([\mathit{a}, \mathit{b}]\)</em> and that <var class="var">expr</var> or <var class="var">f</var> is continuous,
+<code class="code">find_root</code> is guaranteed to find the root,
+or one of the roots if there is more than one.
+</p>
+<p><code class="code">find_root</code> initially applies binary search.
+If the function in question appears to be smooth enough,
+<code class="code">find_root</code> applies linear interpolation instead.
+</p>
+<p><code class="code">bf_find_root</code> is a bigfloat version of <code class="code">find_root</code>.  The
+function is computed using bigfloat arithmetic and a bigfloat result
+is returned.  Otherwise, <code class="code">bf_find_root</code> is identical to
+<code class="code">find_root</code>, and the following description is equally applicable
+to <code class="code">bf_find_root</code>.
+</p>
+<p>The accuracy of <code class="code">find_root</code> is governed by <code class="code">abserr</code> and
+<code class="code">relerr</code>, which are optional keyword arguments to
+<code class="code">find_root</code>.  These keyword arguments take the form
+<code class="code">key=val</code>.  The keyword arguments are
+</p>
+<dl class="table">
+<dt><code class="code">abserr</code></dt>
+<dd><p>Desired absolute error of function value at root.  Default is
+<code class="code">find_root_abs</code>.
+</p></dd>
+<dt><code class="code">relerr</code></dt>
+<dd><p>Desired relative error of root.  Default is <code class="code">find_root_rel</code>.
+</p></dd>
+</dl>
+
+<p><code class="code">find_root</code> stops when the function in question evaluates to
+something less than or equal to <code class="code">abserr</code>, or if successive
+approximants <var class="var">x_0</var>, <var class="var">x_1</var> differ by no more than <code class="code">relerr
+* max(abs(x_0), abs(x_1))</code>.  The default values of
+<code class="code">find_root_abs</code> and <code class="code">find_root_rel</code> are both zero.
+</p>
+<p><code class="code">find_root</code> expects the function in question to have a different sign at
+the endpoints of the search interval.
+When the function evaluates to a number at both endpoints
+and these numbers have the same sign,
+the behavior of <code class="code">find_root</code> is governed by <code class="code">find_root_error</code>.
+When <code class="code">find_root_error</code> is <code class="code">true</code>,
+<code class="code">find_root</code> prints an error message.
+Otherwise <code class="code">find_root</code> returns the value of <code class="code">find_root_error</code>.
+The default value of <code class="code">find_root_error</code> is <code class="code">true</code>.
+</p>
+<p>If <var class="var">f</var> evaluates to something other than a number at any step in the search
+algorithm, <code class="code">find_root</code> returns a partially-evaluated <code class="code">find_root</code>
+expression.
+</p>
+<p>The order of <var class="var">a</var> and <var class="var">b</var> is ignored; the region in which a root is
+sought is <em class="math tex2jax_process">\([min(\mathit{a}, \mathit{b}), max(\mathit{a}, \mathit{b})]\)</em>.
+</p>
+<p>Examples:
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) f(x) := sin(x) - x/2;
+                                        x
+(%o1)                  f(x) := sin(x) - -
+                                        2
+(%i2) find_root (sin(x) - x/2, x, 0.1, %pi);
+(%o2)                   1.895494267033981
+(%i3) find_root (sin(x) = x/2, x, 0.1, %pi);
+(%o3)                   1.895494267033981
+(%i4) find_root (f(x), x, 0.1, %pi);
+(%o4)                   1.895494267033981
+(%i5) find_root (f, 0.1, %pi);
+(%o5)                   1.895494267033981
+(%i6) find_root (exp(x) = y, x, 0, 100);
+                            x
+(%o6)           find_root(%e  = y, x, 0.0, 100.0)
+(%i7) find_root (exp(x) = y, x, 0, 100), y = 10;
+(%o7)                   2.302585092994046
+(%i8) log (10.0);
+(%o8)                   2.302585092994046
+(%i9) fpprec:32;
+(%o9)                           32
+(%i10) bf_find_root (exp(x) = y, x, 0, 100), y = 10;
+(%o10)                  2.3025850929940456840179914546844b0
+(%i11) log(10b0);
+(%o11)                  2.3025850929940456840179914546844b0
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="newton"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fnewton"></a><dl class="first-deffn">
+<dt class="deffn" id="index-newton"><span class="category-def">Function: </span><span><strong class="def-name">newton</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">x_0</var>, <var class="var">eps</var>)</var><a class="copiable-link" href='#index-newton'> &para;</a></span></dt>
+<dd>
+<p>Returns an approximate solution of <code class="code"><var class="var">expr</var> = 0</code> by Newton&rsquo;s method,
+considering <var class="var">expr</var> to be a function of one variable, <var class="var">x</var>.
+The search begins with <code class="code"><var class="var">x</var> = <var class="var">x_0</var></code>
+and proceeds until <code class="code">abs(<var class="var">expr</var>) &lt; <var class="var">eps</var></code>
+(with <var class="var">expr</var> evaluated at the current value of <var class="var">x</var>).
+</p>
+<p><code class="code">newton</code> allows undefined variables to appear in <var class="var">expr</var>,
+so long as the termination test <code class="code">abs(<var class="var">expr</var>) &lt; <var class="var">eps</var></code> evaluates
+to <code class="code">true</code> or <code class="code">false</code>.
+Thus it is not necessary that <var class="var">expr</var> evaluate to a number.
+</p>
+<p><code class="code">load(&quot;newton1&quot;)</code> loads this function.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_19.html#realroots">realroots</a></code>, <code class="code"><a class="ref" href="maxima_19.html#allroots">allroots</a></code>, <code class="code"><a class="ref" href="#find_005froot">find_root</a></code> and
+<code class="code"><a class="ref" href="maxima_74.html#mnewton">mnewton</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;newton1&quot;);
+(%o1)  /maxima/share/numeric/newton1.mac
+(%i2) newton (cos (u), u, 1, 1/100);
+(%o2)                   1.570675277161251
+(%i3) ev (cos (u), u = %);
+(%o3)                 1.2104963335033529e-4
+(%i4) assume (a &gt; 0);
+(%o4)                        [a &gt; 0]
+(%i5) newton (x^2 - a^2, x, a/2, a^2/100);
+(%o5)                  1.00030487804878 a
+(%i6) ev (x^2 - a^2, x = %);
+                                           2
+(%o6)                6.098490481853958e-4 a
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Numerical_002fnode_002fIntroduction-to-numerical-solution-of-differential-equations"></a><hr>
+</div>
+<div class="section-level-extent" id="Introduction-to-numerical-solution-of-differential-equations">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-for-numerical-solution-of-differential-equations" accesskey="n" rel="next">Functions for numerical solution of differential equations</a>, Previous: <a href="#Functions-for-numerical-solution-of-equations" accesskey="p" rel="prev">Functions for numerical solution of equations</a>, Up: <a href="#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-numerical-solution-of-differential-equations-1">22.5 Introduction to numerical solution of differential equations</h3>
+
+<p>The Ordinary Differential Equations (ODE) solved by the functions in this
+section should have the form,
+</p><div class="example">
+<pre class="example-preformatted">       dy
+       -- = F(x,y)
+       dx
+</pre></div>
+<p>which is a first-order ODE. Higher order differential equations of order
+<var class="var">n</var> must be written as a system of <var class="var">n</var> first-order equations of that
+kind. For instance, a second-order ODE should be written as a system of two
+equations
+</p><div class="example">
+<pre class="example-preformatted">       dx               dy
+       -- = G(x,y,t)    -- = F(x,y,t) 
+       dt               dt
+</pre></div>
+
+<p>The first argument in the functions will be a list with the expressions on
+the right-side of the ODE&rsquo;s. The variables whose derivatives are represented
+by those expressions should be given in a second list. In the case above those
+variables are <var class="var">x</var> and <var class="var">y</var>. The independent variable, <var class="var">t</var> in the
+examples above, might be given in a separated option. If the expressions
+given do not depend on that independent variable, the system is called
+autonomous.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-Numerical_002fnode_002fFunctions-for-numerical-solution-of-differential-equations"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-for-numerical-solution-of-differential-equations">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-numerical-solution-of-differential-equations" accesskey="p" rel="prev">Introduction to numerical solution of differential equations</a>, Up: <a href="#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-for-numerical-solution-of-differential-equations-1">22.6 Functions for numerical solution of differential equations</h3>
+<a class="anchor" id="plotdf"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002fplotdf"></a><dl class="first-deffn">
+<dt class="deffn" id="index-plotdf"><span class="category-def">Function: </span><span><strong class="def-name">plotdf</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plotdf</code> (<var class="var">dydx</var>, options&hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plotdf</code> (<var class="var">dvdu</var>, [<var class="var">u</var>,<var class="var">v</var>], options&hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plotdf</code> ([<var class="var">dxdt</var>,c<var class="var">dydt</var>], options&hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plotdf</code> ([<var class="var">dudt</var>,c<var class="var">dvdt</var>], [<var class="var">u</var>,c<var class="var">v</var>], options&hellip;)</var><a class="copiable-link" href='#index-plotdf'> &para;</a></span></dt>
+<dd>
+<p>The function <code class="code">plotdf</code> creates a two-dimensional plot of the direction
+field (also called slope field) for a first-order Ordinary Differential
+Equation (ODE) or a system of two autonomous first-order ODE&rsquo;s.
+</p>
+<p>Plotdf requires Xmaxima, even if its run from a Maxima session in
+a console, since the plot will be created by the Tk scripts in Xmaxima.
+If Xmaxima is not installed plotdf will not work.
+</p>
+<p><var class="var">dydx</var>, <var class="var">dxdt</var> and <var class="var">dydt</var> are expressions that depend on
+<var class="var">x</var> and <var class="var">y</var>. <var class="var">dvdu</var>, <var class="var">dudt</var> and <var class="var">dvdt</var> are
+expressions that depend on <var class="var">u</var> and <var class="var">v</var>. In addition to those two
+variables, the expressions can also depend on a set of parameters, with
+numerical values given with the <code class="code">parameters</code> option (the option
+syntax is given below), or with a range of allowed values specified by a
+<var class="var">sliders</var> option.
+</p>
+<p>Several other options can be given within the command, or selected in
+the menu. Integral curves can be obtained by clicking on the plot, or
+with the option <code class="code">trajectory_at</code>. The direction of the integration
+can be controlled with the <code class="code">direction</code> option, which can have
+values of <em class="emph">forward</em>, <em class="emph">backward</em> or <em class="emph">both</em>. The number of
+integration steps is given by <code class="code">nsteps</code>; at each integration
+step the time increment will be adjusted automatically to produce
+displacements much smaller than the size of the plot window. The
+numerical method used is 4th order Runge-Kutta with variable time steps.
+</p>
+<p><b class="b">Plot window menu:</b>
+</p>
+<p>The menu bar of the plot window has the following seven icons:
+</p>
+<p>An X. Can be used to close the plot window.
+</p>
+<p>A wrench and a screwdriver. Opens the configuration menu with several
+fields that show the ODE(s) in use and various other settings. If a pair
+of coordinates are entered in the field <em class="emph">Trajectory at</em> and the
+<kbd class="key">enter</kbd> key is pressed, a new integral curve will be shown, in
+addition to the ones already shown.
+</p>
+<p>Two arrows following a circle. Replots the direction field with the
+new settings defined in the configuration menu and replots only the last
+integral curve that was previously plotted.
+</p>
+<p>Hard disk drive with an arrow. Used to save a copy of the
+plot, in Postscript format, in the file specified in a field of the
+box that appears when that icon is clicked.
+</p>
+<p>Magnifying glass with a plus sign. Zooms in the plot.
+</p>
+<p>Magnifying glass with a minus sign. Zooms out the plot. The plot can be
+displaced by holding down the right mouse button while the mouse is
+moved.
+</p>
+<p>Icon of a plot. Opens another window with a plot of the two variables
+in terms of time, for the last integral curve that was plotted.
+</p>
+<p><b class="b">Plot options:</b>
+</p>
+<p>Options can also be given within the <code class="code">plotdf</code> itself, each one being
+a list of two or more elements. The first element in each option is the name
+of the option, and the remainder is the value or values assigned to the
+option.
+</p>
+<p>The options which are recognized by <code class="code">plotdf</code> are the following:
+</p>
+<ul class="itemize mark-bullet">
+<li><em class="dfn">nsteps</em> defines the number of steps that will be used for the
+independent variable, to compute an integral curve. The default value is
+100.
+
+</li><li><em class="dfn">direction</em> defines the direction of the independent
+variable that will be followed to compute an integral curve. Possible
+values are <code class="code">forward</code>, to make the independent variable increase
+<code class="code">nsteps</code> times, with increments <code class="code">tstep</code>, <code class="code">backward</code>, to
+make the independent variable decrease, or <code class="code">both</code> that will lead to
+an integral curve that extends <code class="code">nsteps</code> forward, and <code class="code">nsteps</code>
+backward. The keywords <code class="code">right</code> and <code class="code">left</code> can be used as
+synonyms for <code class="code">forward</code> and <code class="code">backward</code>.
+The default value is <code class="code">both</code>.
+
+</li><li><em class="dfn">tinitial</em> defines the initial value of variable <var class="var">t</var> used
+to compute integral curves. Since the differential equations are
+autonomous, that setting will only appear in the plot of the curves as
+functions of <var class="var">t</var>. 
+The default value is 0.
+
+</li><li><em class="dfn">versus_t</em> is used to create a second plot window, with a
+plot of an integral curve, as two functions <var class="var">x</var>, <var class="var">y</var>, of the
+independent variable <var class="var">t</var>. If <code class="code">versus_t</code> is given any value
+different from 0, the second plot window will be displayed. The second
+plot window includes another menu, similar to the menu of the main plot
+window.
+The default value is 0.
+
+</li><li><em class="dfn">trajectory_at</em> defines the coordinates <var class="var">xinitial</var> and
+<var class="var">yinitial</var> for the starting point of an integral curve.
+The option is empty by default.
+
+</li><li><em class="dfn">parameters</em> defines a list of parameters, and their
+numerical values, used in the definition of the differential
+equations. The name and values of the parameters must be given in a
+string with a comma-separated sequence of pairs <code class="code">name=value</code>.
+
+</li><li><em class="dfn">sliders</em> defines a list of parameters that will be changed
+interactively using slider buttons, and the range of variation of those
+parameters. The names and ranges of the parameters must be given in a
+string with a comma-separated sequence of elements <code class="code">name=min:max</code>
+
+</li><li><em class="dfn">xfun</em> defines a string with semi-colon-separated sequence
+of functions of <var class="var">x</var> to be displayed, on top of the direction field.
+Those functions will be parsed by Tcl and not by Maxima.
+
+</li><li><em class="dfn">x</em> should be followed by two numbers, which will set up the minimum
+and maximum values shown on the horizontal axis. If the variable on the
+horizontal axis is not <var class="var">x</var>, then this option should have the name of
+the variable on the horizontal axis.
+The default horizontal range is from -10 to 10.
+
+</li><li><em class="dfn">y</em> should be followed by two numbers, which will set up the minimum
+and maximum values shown on the vertical axis. If the variable on the
+vertical axis is not <var class="var">y</var>, then this option should have the name of
+the variable on the vertical axis.
+The default vertical range is from -10 to 10.
+
+</li><li><em class="dfn">xaxislabel</em> will be used to identify the horizontal axis. Its default value is the name of the first state variable.
+
+</li><li><em class="dfn">yaxislabel</em> will be used to identify the vertical axis. Its default value is the name of the second state variable.
+
+</li><li><em class="dfn">number_of_arrows</em> should be set to a square number and defines the approximate
+density of the arrows being drawn. The default value is 225.
+</li></ul>
+
+<p><strong class="strong">Examples:</strong>
+</p>
+<ul class="itemize mark-bullet">
+<li>To show the direction field of the differential equation <em class="math tex2jax_process">\(y' = exp(-x) + y\)</em> and the solution that goes through <em class="math tex2jax_process">\((2, -0.1)\)</em>:
+<div class="example">
+<pre class="example-preformatted">(%i1) plotdf(exp(-x)+y,[trajectory_at,2,-0.1])$
+</pre></div>
+
+<img class="image" src="figures/plotdf1.png" alt="figures/plotdf1">
+
+</li><li>To obtain the direction field for the equation <em class="math tex2jax_process">\(diff(y,x) = x - y^2\)</em> and the solution with initial condition <em class="math tex2jax_process">\(y(-1) = 3\)</em>, we can use the command:
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plotdf(x-y^2,[xfun,&quot;sqrt(x);-sqrt(x)&quot;],
+         [trajectory_at,-1,3], [direction,forward],
+         [y,-5,5], [x,-4,16])$
+</pre></div></div>
+
+<p>The graph also shows the function <em class="math tex2jax_process">\(y = sqrt(x)\)</em>. 
+</p>
+<img class="image" src="figures/plotdf2.png" alt="figures/plotdf2">
+
+</li><li>The following example shows the direction field of a harmonic oscillator,
+defined by the two equations <em class="math tex2jax_process">\(dz/dt = v\)</em> and <em class="math tex2jax_process">\(dv/dt = -k*z/m\)</em>,
+and the integral curve through <em class="math tex2jax_process">\((z,v) = (6,0)\)</em>, with a slider that
+will allow you to change the value of <em class="math tex2jax_process">\(m\)</em> interactively (<em class="math tex2jax_process">\(k\)</em> is
+fixed at 2):
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plotdf([v,-k*z/m], [z,v], [parameters,&quot;m=2,k=2&quot;],
+           [sliders,&quot;m=1:5&quot;], [trajectory_at,6,0])$
+</pre></div></div>
+
+<img class="image" src="figures/plotdf3.png" alt="figures/plotdf3">
+
+</li><li>To plot the direction field of the Duffing equation, <em class="math tex2jax_process">\(m*x''+c*x'+k*x+b*x^3 = 0\)</em>, we introduce the variable <em class="math tex2jax_process">\(y=x'\)</em> and use:
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plotdf([y,-(k*x + c*y + b*x^3)/m],
+             [parameters,&quot;k=-1,m=1.0,c=0,b=1&quot;],
+             [sliders,&quot;k=-2:2,m=-1:1&quot;],[tstep,0.1])$
+</pre></div></div>
+
+<img class="image" src="figures/plotdf4.png" alt="figures/plotdf4">
+
+</li><li>The direction field for a damped pendulum, including the
+solution for the given initial conditions, with a slider that
+can be used to change the value of the mass <em class="math tex2jax_process">\(m\)</em>, and with a plot of
+the two state variables as a function of time:
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plotdf([w,-g*sin(a)/l - b*w/m/l], [a,w],
+        [parameters,&quot;g=9.8,l=0.5,m=0.3,b=0.05&quot;],
+        [trajectory_at,1.05,-9],[tstep,0.01],
+        [a,-10,2], [w,-14,14], [direction,forward],
+        [nsteps,300], [sliders,&quot;m=0.1:1&quot;], [versus_t,1])$
+</pre></div></div>
+
+<img class="image" src="figures/plotdf5.png" alt="figures/plotdf5"><img class="image" src="figures/plotdf6.png" alt="figures/plotdf6">
+
+</li></ul>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Numerical_002fdeffn_002fploteq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ploteq"><span class="category-def">Function: </span><span><strong class="def-name">ploteq</strong> <var class="def-var-arguments">(<var class="var">exp</var>, ...options...)</var><a class="copiable-link" href='#index-ploteq'> &para;</a></span></dt>
+<dd>
+<p>Plots equipotential curves for <var class="var">exp</var>, which should be an expression
+depending on two variables. The curves are obtained by integrating the
+differential equation that define the orthogonal trajectories to the solutions
+of the autonomous system obtained from the gradient of the expression given.
+The plot can also show the integral curves for that gradient system (option
+fieldlines).
+</p>
+<p>This program also requires Xmaxima, even if its run from a Maxima session in
+a console, since the plot will be created by the Tk scripts in Xmaxima.
+By default, the plot region will be empty until the user clicks in a point
+(or gives its coordinate with in the set-up menu or via the trajectory_at option).
+</p>
+<p>Most options accepted by plotdf can also be used for ploteq and the plot
+interface is the same that was described in plotdf.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) V: 900/((x+1)^2+y^2)^(1/2)-900/((x-1)^2+y^2)^(1/2)$
+(%i2) ploteq(V,[x,-2,2],[y,-2,2],[fieldlines,&quot;blue&quot;])$
+</pre></div>
+
+<p>Clicking on a point will plot the equipotential curve that passes by that point
+(in red) and the orthogonal trajectory (in blue).
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="rk"></a><a class="anchor" id="Item_003a-Numerical_002fdeffn_002frk"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rk"><span class="category-def">Function: </span><span><strong class="def-name">rk</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">rk</code> (<var class="var">ODE</var>, <var class="var">var</var>, <var class="var">initial</var>, <var class="var">domain</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">rk</code> ([<var class="var">ODE1</var>, &hellip;, <var class="var">ODEm</var>], [<var class="var">v1</var>, &hellip;, <var class="var">vm</var>], [<var class="var">init1</var>, &hellip;, <var class="var">initm</var>], <var class="var">domain</var>)</var><a class="copiable-link" href='#index-rk'> &para;</a></span></dt>
+<dd>
+<p>The first form solves numerically one first-order ordinary differential
+equation, and the second form solves a system of m of those equations,
+using the 4th order Runge-Kutta method. <var class="var">var</var> represents the dependent
+variable. <var class="var">ODE</var> must be an expression that depends only on the independent
+and dependent variables and defines the derivative of the dependent
+variable with respect to the independent variable.
+</p>
+<p>The independent variable is specified with <code class="code">domain</code>, which must be a
+list of four elements as, for instance:
+</p><div class="example">
+<pre class="example-preformatted">[t, 0, 10, 0.1]
+</pre></div>
+<p>the first element of the list identifies the independent variable, the
+second and third elements are the initial and final values for that
+variable, and the last element sets the increments that should be used
+within that interval.
+</p>
+<p>If <var class="var">m</var> equations are going to be solved, there should be <var class="var">m</var>
+dependent variables <var class="var">v1</var>, <var class="var">v2</var>, ..., <var class="var">vm</var>. The initial values
+for those variables will be <var class="var">init1</var>, <var class="var">init2</var>, ..., <var class="var">initm</var>.
+There will still be just one independent variable defined by <code class="code">domain</code>,
+as in the previous case. <var class="var">ODE1</var>, ..., <var class="var">ODEm</var> are the expressions
+that define the derivatives of each dependent variable in
+terms of the independent variable. The only variables that may appear in
+those expressions are the independent variable and any of the dependent
+variables. It is important to give the derivatives <var class="var">ODE1</var>, ...,
+<var class="var">ODEm</var> in the list in exactly the same order used for the dependent
+variables; for instance, the third element in the list will be interpreted
+as the derivative of the third dependent variable.
+</p>
+<p>The program will try to integrate the equations from the initial value
+of the independent variable until its last value, using constant
+increments. If at some step one of the dependent variables takes an
+absolute value too large, the integration will be interrupted at that
+point. The result will be a list with as many elements as the number of
+iterations made. Each element in the results list is itself another list
+with <var class="var">m</var>+1 elements: the value of the independent variable, followed
+by the values of the dependent variables corresponding to that point.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_53.html#drawdf">drawdf</a></code>, <code class="code"><a class="ref" href="maxima_20.html#desolve">desolve</a></code> and <code class="code"><a class="ref" href="maxima_20.html#ode2">ode2</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>To solve numerically the differential equation
+</p>
+<div class="example">
+<pre class="example-preformatted">          dx/dt = t - x^2
+</pre></div>
+
+<p>With initial value x(t=0) = 1, in the interval of t from 0 to 8 and with
+increments of 0.1 for t, use:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) results: rk(t-x^2,x,1,[t,0,8,0.1])$
+(%i2) plot2d ([discrete, results])$
+</pre></div>
+
+<p>the results will be saved in the list <code class="code">results</code> and the plot will show the solution obtained, with <var class="var">t</var> on the horizontal axis and <var class="var">x</var> on the vertical axis.
+</p>
+<p>To solve numerically the system:
+</p>
+<div class="example">
+<pre class="example-preformatted">        dx/dt = 4-x^2-4*y^2     dy/dt = y^2-x^2+1
+</pre></div>
+
+<p>for t between 0 and 4, and with values of -1.25 and 0.75 for x and y at t=0:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) sol: rk([4-x^2-4*y^2, y^2-x^2+1], [x, y], [-1.25, 0.75],
+              [t, 0, 4, 0.02])$
+(%i2) plot2d([discrete, makelist([p[1], p[3]], p, sol)], [xlabel, &quot;t&quot;],
+             [ylabel, &quot;y&quot;])$
+</pre></div>
+
+<p>The plot will show the solution for variable <var class="var">y</var> as a function of <var class="var">t</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_22.html#Matrices-and-Linear-Algebra" accesskey="n" rel="next">Matrices and Linear Algebra</a>, Previous: <a href="maxima_20.html#Differential-Equations" accesskey="p" rel="prev">Differential Equations</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

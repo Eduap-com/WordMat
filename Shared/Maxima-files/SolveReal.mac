@@ -124,7 +124,7 @@ defrule(lambertwrule1sol,alizx*%e^(alizx)-aliznegative=0,(assume(aliznegative<0)
 defrule(lambertwrulegeneral,alizx*%e^(alizx)+aliz=0,(assume(aliz>1/%e),print("The lambert_w function is two-valued for values from -1/%e to 0"),[alizx=lambert_w(-aliz)]))$
 defrule(lambertwrule2,
 aliznotx*alizpositive^(aliznotzero*solvar+aliznotx2)+aliznotx3+aliznotx4*solvar=0,
-block([z,numer:not(uselambertw)],z:aliznotzero*log(alizpositive)/aliznotx4*aliznotx*alizpositive^(aliznotx2-aliznotzero*aliznotx3/aliznotx4),
+block([z,numer:not(uselambertw)],if errcatch(z:aliznotzero*log(alizpositive)/aliznotx4*aliznotx*alizpositive^(aliznotx2-aliznotzero*aliznotx3/aliznotx4))=[] then return(aliznotx*alizpositive^(aliznotzero*solvar+aliznotx2)+aliznotx3+aliznotx4*solvar=0),
 if z<-1/%e then return([]),if z<0 then return([solvar=-generalized_lambert_w(0,z)/(aliznotzero*log(alizpositive))-aliznotx3/aliznotx4,
 solvar=-generalized_lambert_w(-1,z)/(aliznotzero*log(alizpositive))-aliznotx3/aliznotx4]),solvar=-lambert_w(z)/(aliznotzero*log(alizpositive))-aliznotx3/aliznotx4))$
 defrule(fracrule,aliznotx3*(alizx+aliznotx)/(alizx+aliznotx2),aliznotx3+aliznotx3*(aliznotx-aliznotx2)/(alizx+aliznotx2))$
@@ -207,13 +207,13 @@ udt:ev(udt,lgog(x):=if x=%e then 0.4342944819032518 elseif numberp(x) then ev(lo
 qout:errcatch(apply1(udt,dectalrul)),
 if qout#[] then return(qout[1]),
 qout:errcatch(apply1(udt,dectalnumrul)),
-if qout=[] then udt else qout[1])$ /* Justeret i 1.19 dectalrul giver desvÊrre fejl nu. gjorde den ikke f¯r. dectalnumrul virker, men der kan vÊre noget med rÊkkef¯lgen, sÂ den er andet valg*/
+if qout=[] then udt else qout[1])$ /* Justeret i 1.19 dectalrul giver desvÔøΩrre fejl nu. gjorde den ikke fÔøΩr. dectalnumrul virker, men der kan vÔøΩre noget med rÔøΩkkefÔøΩlgen, sÔøΩ den er andet valg*/
 
 dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1])$
 /* fra funcdef*/
 infix("~",135,135)$
-infix("◊",135,135)$
-"~"(qwa,qwb):=if not(scalarp(qwa) or scalarp(qwb)) then (if not(matrixp(qwa) and matrixp(qwb)) then qwa◊qwb elseif length(qwa)=3 and length(qwb)=3 then matrix( qwa[2]*qwb[3]-qwa[3]*qwb[2], qwa[3]*qwb[1]-qwa[1]*qwb[3], qwa[1]*qwb[2]-qwa[2]*qwb[1]) else(error("vektorproduktet er kun defineret for vektorer af dimension 3"))) else qwa*qwb$                                                                                                                                       
+infix("ÔøΩ",135,135)$
+"~"(qwa,qwb):=if not(scalarp(qwa) or scalarp(qwb)) then (if not(matrixp(qwa) and matrixp(qwb)) then qwaÔøΩqwb elseif length(qwa)=3 and length(qwb)=3 then matrix( qwa[2]*qwb[3]-qwa[3]*qwb[2], qwa[3]*qwb[1]-qwa[1]*qwb[3], qwa[1]*qwb[2]-qwa[2]*qwb[1]) else(error("vektorproduktet er kun defineret for vektorer af dimension 3"))) else qwa*qwb$                                                                                                                                       
 infix("##",115,115)$
 "##"(qwa,qwb):=block(if scalarp(qwa) or scalarp(qwb) then return(qwa*qwb) else return(qwa.qwb))$
 
@@ -243,7 +243,7 @@ if qudt<10^-4 then return(scinot(udt)) elseif qudt>10^NoSigFig then return(scino
 antbsf:NoSigFig+1,
 if qudt<1 then antbsf:antbsf-1-floor(log(qudt)/log(10)),
 if udt<0 then antbsf:antbsf+1,
-udt:printf(false,concat("~",antbsf,"f"),udt),udt:striml(" ",udt),udt:strimr("0",udt),strimr(".",udt) 
+udt:printf(false,concat("~",antbsf,"f"),udt),udt:striml(" ",udt),udt:strimr("0",udt),udt:strimr(".",udt),parse_string(udt) 
 )$
 
 funp1(fun,exp):=block([inflag],inflag:true,if mapatom(exp) then false else (if inpart(exp,0) = fun then true else member(true,maplist(lambda([q],funp1(fun,q)),exp))))$
@@ -271,7 +271,9 @@ strtonum(exp):=if stringp(exp) then parse_string(exp) else exp$
 countvar(exprq,varq):=block([qi:0,partswitch:true,varc:0],
 startq,
 if inpart(exprq,qi)=end then (return(varc)),
-if inpart(exprq,qi)=varq then (varc:varc+1),
+if inpart
+
+(exprq,qi)=varq then (varc:varc+1),
 if not(atom(inpart(exprq,qi))) then varc:varc+countvar(inpart(exprq,qi),varq),
 qi:qi+1,
 go(startq)
@@ -329,7 +331,8 @@ res2:NIntegrate(udt,var,x0,x1),
 if numberp(res2) then return(res2),res1)$
 
 zerorule(exprq):=block([indq,ledq,restq,xledq,exprq2],partswitch:true,
-if op(exprq)#"=" or inpart(exprq,3)#end then return(exprq),if CheckSolved(exprq) then return(exprq),
+if op(exprq)#"=" or inpart(exprq,3)#end then return(exprq),
+if CheckSolved(exprq) then return(exprq),
 /* exprq2:factor(lhs(exprq)-rhs(exprq))=0, */
 exprq2:factoreq(exprq),
 exprq2:lhs(exprq2)-rhs(exprq2),
@@ -338,7 +341,8 @@ if not(op(exprq2)="*") then
 	exprq2:sqfr(exprq2)=0 
 else 
 	exprq2:exprq2=0,
-if rhs(exprq2)#0 then return(exprq),
+if rhs(exprq2)#0 then return
+(exprq),
 if op(lhs(exprq2))="-" then exprq2:-exprq2,
 if op(lhs(exprq2))#"*" then return(exprq),
 restq:1,xledq:0,indq:1,
@@ -433,7 +437,8 @@ indq:indq+1,
 solq:sollistq[indq],
 /* med numer virker flg ikke assume(x>=-1/3) , is(equal(x,-3/2)),numer men det er vel af en grund*/
 /* if ev(is(equal(lhs(solq),rhs(solq))),numer)#false then sollistq2:append(sollistq2,[solq]), */
-if is(equal(lhs(solq),rhs(solq)))#false then sollistq2:append(sollistq2,[solq]),
+/* if is(equal(lhs(solq),rhs(solq)))#false then sollistq2:append(sollistq2,[solq]), Denne fjernet og erstattet af n√¶ste linje i v. 1.27 pga problem med [assume(-7.5<=x,x<=7.5)]$;AllTrig:true$Solve(1.386*cos(0.61*x)=0,x); OBS: kan ikke genskabe problemet i forrige linje*/
+if is(equal(lhs(solq),ev(rhs(solq),numer)))#false then sollistq2:append(sollistq2,[solq]),
 if length(sollistq)=indq then return(sollistq2)
 )
 )$
@@ -467,7 +472,8 @@ lignq
 
 ExpandIntegerSolution(eqw):=block([lisq,expqw,expqw2],
 kill(%Z),
-if freeof(%Z,eqw) then return(eqw),if length(GetContextFacts(initial,solvar))+length(GetContextFacts(solreal,solvar))<2 then return(eqw),
+if freeof(%Z,eqw) then return(eqw),
+if length(GetContextFacts(initial,solvar))+length(GetContextFacts(solreal,solvar))<2 then return(eqw),
 lisq:[],
 expqw:lhs(eqw)-rhs(eqw),
 %Z:-100,
@@ -587,7 +593,8 @@ sexprq:radcan(exprq),
 if exprsize(sexprq)<exprsize(exprq) and is(equal(sexprq,exprq)) then exprq:sexprq,
 sexprq:ratsimp(exprq),
 if exprsize(sexprq)<exprsize(exprq) and is(equal(sexprq,exprq)) then exprq:sexprq,
-sexprq:expand(exprq),sexprq:applyb1(exprq,fracrule),
+sexprq:expand(exprq),
+sexprq:applyb1(exprq,fracrule),
 if exprsize(sexprq)<exprsize(exprq) and is(equal(sexprq,exprq)) then exprq:sexprq,
 if not errcatch(applyb1(exprq,simpdiv))=[] then sexprq:applyb1(exprq,simpdiv),
 /* simplify(M*%e^(a*x*M+a*c*M)/(%e^(a*x*M+a*c*M)+1)) */
@@ -747,7 +754,8 @@ solvereal([paramq]):=block([solq,tempq,lignq,varq,condq,qassum,solu_1a,solu_2b,s
 lignq:paramq[1],varq:paramq[2],
 if length(paramq)=3 then condq:paramq[3] else condq=[],
 if nonscalarp(lignq) and length(lignq)>1 and freeof(at,lignq) then (print("solving system of equations"),return(solvesystem(lignq,varq))),
-if sepsolvecontext then (context:solreal,activate(initial)),
+if sepsolvecontext then (context:solreal,
+activate(initial)),
 if atom(varq) then (solvar:varq,remarray(''solvar)) else (solvar:solx,lignq:subst(solvar,varq,lignq)),
 if lignq=all then return([all]),
 if freeof(solvar,lignq) then (print(solvar," not present in equation"),if is(equal(lhs(lignq),rhs(lignq)))=true then return(all) elseif is(equal(lhs(lignq),rhs(lignq)))=false then return([]) else return(unknown)),
@@ -768,6 +776,7 @@ solq:RemoveIncorrect(solq),addsolstep(solq,"RemoveIncorrect"), /* Fjerner loesni
 solq:RemoveUndefined(lignq,solq),addsolstep(solq,"RemoveUndefined"),
 solq:applyconverttoreal(solq),addsolstep(solq,"ConvertToReal"),
 solq:simplifysol(solq),
+solq:applyconverttoreal(solq), /* simplifysol can introduce %i*/
 addsolstep(solq,"Simplify"),
 if not(atom(varq)) then solq:subst(varq,solvar,solq),
 addsolstep(solq,"subst tilbage"),
@@ -850,16 +859,20 @@ solverecursive(lignq,varq,condq):=block([solq],
 	if iteind>35 then return(solq),
 	addsolstep(solq,"Start"),
 	solq:applyswaprule(solq),
-	addsolstep(solq,"Byt side"),	solq:applyrulelist(solq,divzerorule),addsolstep(solq,"divzerorule"),
+	addsolstep(solq,"Byt side"),
+	solq:applyrulelist(solq,divzerorule),addsolstep(solq,"divzerorule"),
 	solq:applyzerorule(solq),addsolstep(solq,"Nulregel"),
-solq:applyaddrule(solq),addsolstep(solq,"addrule"),solq:applyrulelist(solq,prodrule4),addsolstep(solq,"prodrule4"),
+solq:applyaddrule(solq),addsolstep(solq,"addrule"),
+solq:applyrulelist(solq,prodrule4),addsolstep(solq,"prodrule4"),
 solq:applyaddrule2(solq),addsolstep(solq,"addrule2"),
 solq:applyprodrule(solq),addsolstep(solq,"prodrule"),
 solq:applyprodrule2(solq),addsolstep(solq,"prodrule2"),
 /* solq:applyprodrule3(solq),addsolstep(solq,"prodrule3"),  */ /* Overser loesning i fx solvereal(x^2*(x^2-1)=9*(x^2-1),x); fordi der divideres med udtryk hvor x indgaar. Forhaabentlig er den ikke noedvendig. Ellers skal den aendres*/
 solq:applydivrule(solq),addsolstep(solq,"divrule"),
 solq:applydivrule2(solq),addsolstep(solq,"divrule2"),
-solq:applydivrule3(solq),addsolstep(solq,"divrule3"),solq:applyrulelist(solq,divrule5),addsolstep(solq,"divrule5"),solq:applyrulelist(solq,expandrule),addsolstep(solq,"expandrule"),
+solq:applydivrule3(solq),addsolstep(solq,"divrule3"),
+solq:applyrulelist(solq,divrule5),addsolstep(solq,"divrule5"),
+solq:applyrulelist(solq,expandrule),addsolstep(solq,"expandrule"),
 if solq#lignq then return(solverecursive(solq,varq,condq)),
 solq:applyrulelist(solq,absremoverule),addsolstep(solq,"absremoverule"),
 solq:applyabsrule(solq),addsolstep(solq,"lift abs(x)"),
@@ -878,7 +891,8 @@ solq:applyrulelist(solq,powruleirratneg),addsolstep(solq,"powruleirratneg"),
 solq:applyrulelist(solq,powruleirrat),addsolstep(solq,"powruleirrat"),
 solq:applypowrulenotnum(solq),addsolstep(solq,"powrulenotnum"),
 solq:applydoubleexp(solq),addsolstep(solq,"doubleexp"),
-solq:applyexprule(solq),addsolstep(solq,"exprule"),solq:applyrulelist(solq,expremoverule),addsolstep(solq,"expremoverule"),
+solq:applyexprule(solq),addsolstep(solq,"exprule"),
+solq:applyrulelist(solq,expremoverule),addsolstep(solq,"expremoverule"),
 solq:applylnrule(solq),addsolstep(solq,"lnrule"),
 solq:applysinrule(solq),addsolstep(solq,"sinrule"),
 solq:applycosrule(solq),addsolstep(solq,"cosrule"),
@@ -941,7 +955,8 @@ solvar:savevar,if noradicals then qexprl else solq2
 
 DissolveAbs(qexprl):=block([absno:0,solq,solq2:[],savevar,qind:0,qind2:0,noabs:true],
 if not(dissolveabs) then return(qexprl),
-if freeof(abs,qexprl) then return(qexprl),
+if freeof(abs,qexprl) then 
+return(qexprl),
 do(
 qind2:qind2+1,
 if qind2>length(qexprl) then return(),
@@ -963,7 +978,8 @@ else
 solq2:append(solq2,[subst(abs(abssubst),absx,solq[qind])])
 )))),
 if noabs then return(qexprl) else solq2:applyabsrule(applyrulelist(solq2,absremoverule)),
-if freeof(abs,solq2) then solq2 else DissolveAbs(solq2)
+if freeof(abs,solq2) then 
+solq2 else DissolveAbs(solq2)
 )$
 
 nsolve([paramq]):=block([qfkt,solq,qn,qm,qti,qmaxti,qantal,qmm,qnn,qnewt,fpprec:50],
@@ -1016,7 +1032,8 @@ sollq:append(sollq,flatten([errcatch(bf_find_root(qfkt,qvar,ql[qi],ql[qi+1]))]))
 qi:qi+1
 ),
 if (absolute_real_time()-qti)>qmaxti then (print("Time out"),return(sollq)), 
-if length(sollq)>=qantal then (print(concat("Stopped searching because " , qantal , " solutions were found")),return(sollq)),qi:1,
+if length(sollq)>=qantal then (print(concat("Stopped searching because " , qantal , " solutions were found")),return(sollq)),
+qi:1,
 qlf:flatten(errcatch(qfkt(-ql))),
 do(
 if qi>=length(qlf) then return(),
@@ -1157,7 +1174,8 @@ eqnlqsave:eqnpermut[1],
 varlqsave:varpermut[1],
 noq:factorial(length(varlqsave)),
 iteq:1, /*Bruges til at taelle ned hvor mange gange der er forsoegt med forskellige variabelraekkefoelge*/
-iteql:1, /*Bruges til at taelle hvor mange gange der er forsoegt med forskellig ligningsraekkefoelge.*/eqnlq:[eqnlqsave],
+iteql:1, /*Bruges til at taelle hvor mange gange der er forsoegt med forskellig ligningsraekkefoelge.*/
+eqnlq:[eqnlqsave],
 sollq:[],
 eqnlqtemp:[],
 startq,
@@ -1171,7 +1189,8 @@ indq:1,
 /* loes foerste ligning og indsaet i andre, flyt til slutningen. Hvis loesning fejler saa forsoeges med naeste variabel indtil ikke flere*/
 resq:do
 	( 
-	varq:first(varlq), /* Foerste variable udvaelges og placeres derefter i slutningen af listen*/	varlq:rest(varlq,1),
+	varq:first(varlq), /* Foerste variable udvaelges og placeres derefter i slutningen af listen*/
+	varlq:rest(varlq,1),
 	varlq:append(varlq,[varq]),
 	elq:ev(SolveFirst(eqnq,varq),solsysvars=varlqsave), /* Den foerste ligning i listen loeses og placeres paa samme sted i listen */
 	if elq=[] then (
@@ -1179,7 +1198,8 @@ resq:do
 		eqnq:[],		
 		return(true))
 	elseif elq#false and elq#unknown then /*Hvis foerste ligning blev loest*/
-		( /*Den foerste ligning indsaettes i de andre og placeres sidst. Hvis der var flere loesninger indsaettes disse ogsaa i alle ligninger som gemmes i eqnlqtemp*/		elq:SplitSubst([elq]),
+		( /*Den foerste ligning indsaettes i de andre og placeres sidst. Hvis der var flere loesninger indsaettes disse ogsaa i alle ligninger som gemmes i eqnlqtemp*/
+		elq:SplitSubst([elq]),
 		eqnq:first(elq),
 		if length(elq)>1 then 
 			(eqnlqtemp:append(eqnlqtemp,rest(elq,1))),
@@ -1212,7 +1232,8 @@ elseif resq=retry then
 	eqnlqtemp:[],
 	go(startsolq)
 	),
-/*Hvis foerste ligning blev loest saa fortsaettes her*/varlq:rest(varlq,-1), /*Den variabel der blev loest for fjernes fra listen*/
+/*Hvis foerste ligning blev loest saa fortsaettes her*/
+varlq:rest(varlq,-1), /*Den variabel der blev loest for fjernes fra listen*/
 if length(varlq)>=1 then go(startsolq), /* Hvis de er flere variable der skal isoleres saa start forfra*/
 if not(IsSystemSolved(sollq,varlqsave)) and iteq<noq and iteql<noq then (resq:retry,go(tryagainlabel)),
 /*Her nulstilles og goeres klar til at loese evt gemte extra loesninger*/
@@ -1241,7 +1262,8 @@ sollq
 solvesystemScalar(eqnlq,varlq):=block([varlq1,elq,sollq,indq,varq],sollq:[],
 startq,
 for indq:1 thru length(varlq) step 1 do( 
-	varq:first(varlq),	varlq:rest(varlq,1),
+	varq:first(varlq),
+	varlq:rest(varlq,1),
 	varlq:append(varlq,[varq]),
 	eqnq:first(eqnlq),
 	eqnlq:rest(eqnlq,1),
@@ -1327,7 +1349,7 @@ sublist(soluts,lambda([z],
 		)
 	) 
 )$
-/* Checks solutions. targetted at removing imag formentlig Êldre version med fppprintrec istedet for NoSigFIg
+/* Checks solutions. targetted at removing imag formentlig ÔøΩldre version med fppprintrec istedet for NoSigFIg
 CheckSolutions(udtind,var,soluts):=block([udt,qweks,boutq],udt:lhs(udtind)-rhs(udtind),sublist(soluts,lambda([z],if not(freeof(%if,z)) then z:args(z)[2][1],if not(numberp(ev(rhs(z),numer))) then true else (errcatch(qweks:ceiling(log(ev(abs(ev(lhs(udtind),z,numer)),numer))/log(10))),if not(integerp(qweks)) then qweks=1, if fpprintprec>7 then qweks:qweks+fpprintprec-7,if qweks<0 then qweks:0 ,is(ev(abs(ev(udt,z,numer)),numer)<10^(-fpprintprec+qweks+3))) )))$
 */
 
@@ -1382,7 +1404,7 @@ if length(paramq)=5 and not(freeof(%k1,solq)) then solq:makelist(bc2(z,qivar,qdv
 solq
 )$
 
-/* Tager generel loesning til differentialligning og begyndelsesbetingelser og returnerer partikulaer loesning. Erstatter ic1 som kunne returnere komplekse loesninger. Har givet problemer i forhold til rÊkkef¯lgen af hvornÂr c isoloeres, nu g¯res begge dele og c der findes bÂde f¯r og efter bruges ligesom c behandles separat for hver y-l¯sning, se beskrivelse i onenote*/
+/* Tager generel loesning til differentialligning og begyndelsesbetingelser og returnerer partikulaer loesning. Erstatter ic1 som kunne returnere komplekse loesninger. Har givet problemer i forhold til rÔøΩkkefÔøΩlgen af hvornÔøΩr c isoloeres, nu gÔøΩres begge dele og c der findes bÔøΩde fÔøΩr og efter bruges ligesom c behandles separat for hver y-lÔøΩsning, se beskrivelse i onenote*/
 ic1real(solq,qivar,qdvar):=block([z,z2,indq,indq2,solq3,solq2,solc],if domain=complex then return(ic1(solq,qivar,qdvar)),
 solc:solvereal(at(solq,[qivar,qdvar]),%c),
 solq:flatten(makelist(solvereal(z,lhs(qdvar)),z,[solq])),
@@ -1400,7 +1422,7 @@ for indq:1 thru length(solq) step 1
     solq3
 )$
 
-/* SolExists([x=1,x=2],x=5); tester om l¯sning er i listen og returnerer korteste udtryk hvis den er, ellers [] */
+/* SolExists([x=1,x=2],x=5); tester om lÔøΩsning er i listen og returnerer korteste udtryk hvis den er, ellers [] */
 SolExists(SolList,Sol):=block([indq,retval],retval:[],
     for indq:1 thru length(SolList) step 1
     do(
@@ -1409,7 +1431,7 @@ SolExists(SolList,Sol):=block([indq,retval],retval:[],
 retval
 );
 
-/* Tester om udsagnet er sandt, falsk eller ukendt baade analytisk og numerisk. Êndret 1.22 sÂ der fortsÊttes hvis ikke true istedet for unknown */
+/* Tester om udsagnet er sandt, falsk eller ukendt baade analytisk og numerisk. ÔøΩndret 1.22 sÔøΩ der fortsÔøΩttes hvis ikke true istedet for unknown */
 TestTF(qexpr):=block([qres,qvar],
 if not(freeof("=",qexpr)) then qexpr:equal(lhs(qexpr)-rhs(qexpr),0),
 qres:is(qexpr),if qres=true then return(qres),qres:is(trigreduce(qexpr)),

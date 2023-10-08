@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to atensor</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to atensor">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to atensor">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_135.html#atensor" rel="up" title="atensor">
+<link href="maxima_137.html#Functions-and-Variables-for-atensor" rel="next" title="Functions and Variables for atensor">
+<link href="maxima_135.html#atensor" rel="previous" title="atensor">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-atensor"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_137.html#Functions-and-Variables-for-atensor" accesskey="n" rel="next">Functions and Variables for atensor</a>, Previous: <a href="maxima_135.html#atensor" accesskey="p" rel="previous">atensor</a>, Up: <a href="maxima_135.html#atensor" accesskey="u" rel="up">atensor</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-atensor-1"></a>
+<h3 class="section">27.1 Introduction to atensor</h3>
+
+<p><code>atensor</code> is an algebraic tensor manipulation package. To use <code>atensor</code>,
+type <code>load(&quot;atensor&quot;)</code>, followed by a call to the <code>init_atensor</code>
+function.
+</p>
+<p>The essence of <code>atensor</code> is a set of simplification rules for the
+noncommutative (dot) product operator (&quot;<code>.</code>&quot;). <code>atensor</code> recognizes
+several algebra types; the corresponding simplification rules are put
+into effect when the <code>init_atensor</code> function is called.
+</p>
+<p>The capabilities of <code>atensor</code> can be demonstrated by defining the
+algebra of quaternions as a Clifford-algebra Cl(0,2) with two basis
+vectors. The three quaternionic imaginary units are then the two
+basis vectors and their product, i.e.:
+</p>
+<div class="example">
+<pre class="example">    i = v     j = v     k = v  . v
+         1         2         1    2
+</pre></div>
+
+<p>Although the <code>atensor</code> package has a built-in definition for the
+quaternion algebra, it is not used in this example, in which we
+endeavour to build the quaternion multiplication table as a matrix:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;atensor&quot;);
+(%o1)       /share/tensor/atensor.mac
+(%i2) init_atensor(clifford,0,0,2);
+(%o2)                                done
+(%i3) atensimp(v[1].v[1]);
+(%o3)                                 - 1
+(%i4) atensimp((v[1].v[2]).(v[1].v[2]));
+(%o4)                                 - 1
+(%i5) q:zeromatrix(4,4);
+                                [ 0  0  0  0 ]
+                                [            ]
+                                [ 0  0  0  0 ]
+(%o5)                           [            ]
+                                [ 0  0  0  0 ]
+                                [            ]
+                                [ 0  0  0  0 ]
+(%i6) q[1,1]:1;
+(%o6)                                  1
+(%i7) for i thru adim do q[1,i+1]:q[i+1,1]:v[i];
+(%o7)                                done
+(%i8) q[1,4]:q[4,1]:v[1].v[2];
+(%o8)                               v  . v
+                                     1    2
+(%i9) for i from 2 thru 4 do for j from 2 thru 4 do
+      q[i,j]:atensimp(q[i,1].q[1,j]);
+(%o9)                                done
+(%i10) q;
+</pre><pre class="example">                   [    1        v         v      v  . v  ]
+                   [              1         2      1    2 ]
+                   [                                      ]
+                   [   v         - 1     v  . v    - v    ]
+                   [    1                 1    2      2   ]
+(%o10)             [                                      ]
+                   [   v      - v  . v     - 1      v     ]
+                   [    2        1    2              1    ]
+                   [                                      ]
+                   [ v  . v      v        - v       - 1   ]
+                   [  1    2      2          1            ]
+</pre></div>
+
+<p><code>atensor</code> recognizes as base vectors indexed symbols, where the symbol
+is that stored in <code>asymbol</code> and the index runs between 1 and <code>adim</code>.
+For indexed symbols, and indexed symbols only, the bilinear forms
+<code>sf</code>, <code>af</code>, and <code>av</code> are evaluated. The evaluation
+substitutes the value of <code>aform[i,j]</code> in place of <code>fun(v[i],v[j])</code>
+where <code>v</code> represents the value of <code>asymbol</code> and <code>fun</code> is
+either <code>af</code> or <code>sf</code>; or, it substitutes <code>v[aform[i,j]]</code>
+in place of <code>av(v[i],v[j])</code>.
+</p>
+<p>Needless to say, the functions <code>sf</code>, <code>af</code> and <code>av</code>
+can be redefined.
+</p>
+<p>When the <code>atensor</code> package is loaded, the following flags are set:
+</p>
+<div class="example">
+<pre class="example">dotscrules:true;
+dotdistrib:true;
+dotexptsimp:false;
+</pre></div>
+
+<p>If you wish to experiment with a nonassociative algebra, you may also
+consider setting <code>dotassoc</code> to <code>false</code>. In this case, however,
+<code>atensimp</code> will not always be able to obtain the desired
+simplifications.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Tensors">Tensors</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;</div>
+<a name="Item_003a-Atensor_002fnode_002fFunctions-and-Variables-for-atensor"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_137.html#Functions-and-Variables-for-atensor" accesskey="n" rel="next">Functions and Variables for atensor</a>, Previous: <a href="maxima_135.html#atensor" accesskey="p" rel="previous">atensor</a>, Up: <a href="maxima_135.html#atensor" accesskey="u" rel="up">atensor</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

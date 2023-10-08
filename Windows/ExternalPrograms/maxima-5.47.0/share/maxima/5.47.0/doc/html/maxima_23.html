@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Affine (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Affine (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Affine (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_24.html#itensor" rel="next" title="itensor">
+<link href="maxima_22.html#Matrices-and-Linear-Algebra" rel="prev" title="Matrices and Linear Algebra">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Affine">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_24.html#itensor" accesskey="n" rel="next">itensor</a>, Previous: <a href="maxima_22.html#Matrices-and-Linear-Algebra" accesskey="p" rel="prev">Matrices and Linear Algebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Affine-1">24 Affine</h2>
+
+<a class="anchor" id="Item_003a-Affine_002fnode_002fIntroduction-to-Affine"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Affine" accesskey="1">Introduction to Affine</a></li>
+<li><a href="#Functions-and-Variables-for-Affine" accesskey="2">Functions and Variables for Affine</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Affine">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Affine" accesskey="n" rel="next">Functions and Variables for Affine</a>, Previous: <a href="#Affine" accesskey="p" rel="prev">Affine</a>, Up: <a href="#Affine" accesskey="u" rel="up">Affine</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Affine-1">24.1 Introduction to Affine</h3>
+
+<p><code class="code">affine</code> is a package to work with groups of polynomials.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Groebner-bases">Groebner bases</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-Affine_002fnode_002fFunctions-and-Variables-for-Affine"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Affine">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-Affine" accesskey="p" rel="prev">Introduction to Affine</a>, Up: <a href="#Affine" accesskey="u" rel="up">Affine</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Affine-1">24.2 Functions and Variables for Affine</h3>
+
+<a class="anchor" id="fast_005flinsolve"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002ffast_005flinsolve"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fast_005flinsolve"><span class="category-def">Function: </span><span><strong class="def-name">fast_linsolve</strong> <var class="def-var-arguments">([<var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var>], [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-fast_005flinsolve'> &para;</a></span></dt>
+<dd><p>Solves the simultaneous linear equations <var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var>
+for the variables <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>.
+Each <var class="var">expr_i</var> may be an equation or a general expression;
+if given as a general expression, it is treated as an equation of the form <code class="code"><var class="var">expr_i</var> = 0</code>.
+</p>
+<p>The return value is a list of equations of the form
+<code class="code">[<var class="var">x_1</var> = <var class="var">a_1</var>, &hellip;, <var class="var">x_n</var> = <var class="var">a_n</var>]</code>
+where <var class="var">a_1</var>, &hellip;, <var class="var">a_n</var> are all free of <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>.
+</p>
+<p><code class="code">fast_linsolve</code> is faster than <code class="code">linsolve</code> for system of equations which
+are sparse.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="grobner_005fbasis"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fgrobner_005fbasis"></a><dl class="first-deffn">
+<dt class="deffn" id="index-grobner_005fbasis"><span class="category-def">Function: </span><span><strong class="def-name">grobner_basis</strong> <var class="def-var-arguments">([<var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var>])</var><a class="copiable-link" href='#index-grobner_005fbasis'> &para;</a></span></dt>
+<dd><p>Returns a Groebner basis for the equations <var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var>.
+The function <code class="code">polysimp</code> can then
+be used to simplify other functions relative to the equations.
+</p>
+<div class="example">
+<pre class="example-preformatted">grobner_basis ([3*x^2+1, y*x])$
+
+polysimp (y^2*x + x^3*9 + 2) ==&gt; -3*x + 2
+</pre></div>
+
+<p><code class="code">polysimp(f)</code> yields 0 if and only if <var class="var">f</var> is in the ideal generated by
+<var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var>, that is,
+if and only if <var class="var">f</var> is a polynomial combination of the elements of
+<var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var>.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="set_005fup_005fdot_005fsimplifications"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fset_005fup_005fdot_005fsimplifications"></a><dl class="first-deffn">
+<dt class="deffn" id="index-set_005fup_005fdot_005fsimplifications"><span class="category-def">Function: </span><span><strong class="def-name">set_up_dot_simplifications</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">set_up_dot_simplifications</code> (<var class="var">eqns</var>, <var class="var">check_through_degree</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">set_up_dot_simplifications</code> (<var class="var">eqns</var>)</var><a class="copiable-link" href='#index-set_005fup_005fdot_005fsimplifications'> &para;</a></span></dt>
+<dd>
+<p>The <var class="var">eqns</var> are polynomial equations in non commutative variables.
+The value of <code class="code">current_variables</code> is the
+list of variables used for computing degrees.  The equations must be
+homogeneous, in order for the procedure to terminate.
+</p>
+<p>If you have checked overlapping simplifications in <code class="code">dot_simplifications</code>
+above the degree of <var class="var">f</var>, then the following is true:
+<code class="code">dotsimp (<var class="var">f</var>)</code> yields 0 if and only if <var class="var">f</var> is in the
+ideal generated by the equations, i.e.,
+if and only if <var class="var">f</var> is a polynomial combination
+of the elements of the equations.
+</p>
+<p>The degree is that returned by <code class="code">nc_degree</code>.   This in turn is influenced by
+the weights of individual variables.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="declare_005fweights"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fdeclare_005fweights"></a><dl class="first-deffn">
+<dt class="deffn" id="index-declare_005fweights"><span class="category-def">Function: </span><span><strong class="def-name">declare_weights</strong> <var class="def-var-arguments">(<var class="var">x_1</var>, <var class="var">w_1</var>, &hellip;, <var class="var">x_n</var>, <var class="var">w_n</var>)</var><a class="copiable-link" href='#index-declare_005fweights'> &para;</a></span></dt>
+<dd><p>Assigns weights <var class="var">w_1</var>, &hellip;, <var class="var">w_n</var> to <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>, respectively.
+These are the weights used in computing <code class="code">nc_degree</code>.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="nc_005fdegree"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fnc_005fdegree"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nc_005fdegree"><span class="category-def">Function: </span><span><strong class="def-name">nc_degree</strong> <var class="def-var-arguments">(<var class="var">p</var>)</var><a class="copiable-link" href='#index-nc_005fdegree'> &para;</a></span></dt>
+<dd><p>Returns the degree of a noncommutative polynomial <var class="var">p</var>.  See <code class="code">declare_weights</code>.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dotsimp"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fdotsimp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dotsimp"><span class="category-def">Function: </span><span><strong class="def-name">dotsimp</strong> <var class="def-var-arguments">(<var class="var">f</var>)</var><a class="copiable-link" href='#index-dotsimp'> &para;</a></span></dt>
+<dd><p>Returns 0 if and only if <var class="var">f</var> is in the ideal generated by the equations, i.e.,
+if and only if <var class="var">f</var> is a polynomial combination of the elements of the equations.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fast_005fcentral_005felements"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002ffast_005fcentral_005felements"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fast_005fcentral_005felements"><span class="category-def">Function: </span><span><strong class="def-name">fast_central_elements</strong> <var class="def-var-arguments">([<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>], <var class="var">n</var>)</var><a class="copiable-link" href='#index-fast_005fcentral_005felements'> &para;</a></span></dt>
+<dd><p>If <code class="code">set_up_dot_simplifications</code> has been previously done, finds the central polynomials
+in the variables <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var> in the given degree, <var class="var">n</var>.
+</p>
+<p>For example:
+</p><div class="example">
+<pre class="example-preformatted">set_up_dot_simplifications ([y.x + x.y], 3);
+fast_central_elements ([x, y], 2);
+[y.y, x.x];
+</pre></div>
+
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="check_005foverlaps"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fcheck_005foverlaps"></a><dl class="first-deffn">
+<dt class="deffn" id="index-check_005foverlaps"><span class="category-def">Function: </span><span><strong class="def-name">check_overlaps</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">add_to_simps</var>)</var><a class="copiable-link" href='#index-check_005foverlaps'> &para;</a></span></dt>
+<dd><p>Checks the overlaps thru degree <var class="var">n</var>,
+making sure that you have sufficient simplification rules in each
+degree, for <code class="code">dotsimp</code> to work correctly.  This process can be speeded
+up if you know before hand what the dimension of the space of monomials is.
+If it is of finite global dimension, then <code class="code">hilbert</code> should be used.  If you
+don&rsquo;t know the monomial dimensions, do not specify a <code class="code">rank_function</code>.
+An optional third argument <code class="code">reset</code>, <code class="code">false</code> says don&rsquo;t bother to query
+about resetting things.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="mono"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fmono"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mono"><span class="category-def">Function: </span><span><strong class="def-name">mono</strong> <var class="def-var-arguments">([<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>], <var class="var">n</var>)</var><a class="copiable-link" href='#index-mono'> &para;</a></span></dt>
+<dd><p>Returns the list of independent
+monomials relative to the current dot simplifications of degree <var class="var">n</var>
+in the variables <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="monomial_005fdimensions"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fmonomial_005fdimensions"></a><dl class="first-deffn">
+<dt class="deffn" id="index-monomial_005fdimensions"><span class="category-def">Function: </span><span><strong class="def-name">monomial_dimensions</strong> <var class="def-var-arguments">(<var class="var">n</var>)</var><a class="copiable-link" href='#index-monomial_005fdimensions'> &para;</a></span></dt>
+<dd><p>Compute the Hilbert series through degree <var class="var">n</var> for the current algebra.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="extract_005flinear_005fequations"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002fextract_005flinear_005fequations"></a><dl class="first-deffn">
+<dt class="deffn" id="index-extract_005flinear_005fequations"><span class="category-def">Function: </span><span><strong class="def-name">extract_linear_equations</strong> <var class="def-var-arguments">([<var class="var">p_1</var>, &hellip;, <var class="var">p_n</var>], [<var class="var">m_1</var>, &hellip;, <var class="var">m_n</var>])</var><a class="copiable-link" href='#index-extract_005flinear_005fequations'> &para;</a></span></dt>
+<dd>
+<p>Makes a list of the coefficients of the noncommutative polynomials <var class="var">p_1</var>, &hellip;, <var class="var">p_n</var>
+of the noncommutative monomials <var class="var">m_1</var>, &hellip;, <var class="var">m_n</var>.
+The coefficients should be scalars.   Use <code class="code">list_nc_monomials</code> to build the list of
+monomials.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="list_005fnc_005fmonomials"></a><a class="anchor" id="Item_003a-Affine_002fdeffn_002flist_005fnc_005fmonomials"></a><dl class="first-deffn">
+<dt class="deffn" id="index-list_005fnc_005fmonomials"><span class="category-def">Function: </span><span><strong class="def-name">list_nc_monomials</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">list_nc_monomials</code> ([<var class="var">p_1</var>, &hellip;, <var class="var">p_n</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">list_nc_monomials</code> (<var class="var">p</var>)</var><a class="copiable-link" href='#index-list_005fnc_005fmonomials'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of the non commutative monomials occurring in a polynomial <var class="var">p</var>
+or a list of polynomials <var class="var">p_1</var>, &hellip;, <var class="var">p_n</var>.
+</p>
+<p><code class="code">load(&quot;affine&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="all_005fdotsimp_005fdenoms"></a><a class="anchor" id="Item_003a-Affine_002fdefvr_002fall_005fdotsimp_005fdenoms"></a><dl class="first-defvr">
+<dt class="defvr" id="index-all_005fdotsimp_005fdenoms"><span class="category-def">Option variable: </span><span><strong class="def-name">all_dotsimp_denoms</strong><a class="copiable-link" href='#index-all_005fdotsimp_005fdenoms'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">all_dotsimp_denoms</code> is a list,
+the denominators encountered by <code class="code">dotsimp</code> are appended to the list.
+<code class="code">all_dotsimp_denoms</code> may be initialized to an empty list <code class="code">[]</code>
+before calling <code class="code">dotsimp</code>.
+</p>
+<p>By default, denominators are not collected by <code class="code">dotsimp</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-affine">Package affine</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_24.html#itensor" accesskey="n" rel="next">itensor</a>, Previous: <a href="maxima_22.html#Matrices-and-Linear-Algebra" accesskey="p" rel="prev">Matrices and Linear Algebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

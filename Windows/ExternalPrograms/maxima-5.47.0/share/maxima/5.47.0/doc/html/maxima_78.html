@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>opsubst-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="opsubst-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="opsubst-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_79.html#orthopoly_002dpkg" rel="next" title="orthopoly-pkg">
+<link href="maxima_77.html#operatingsystem_002dpkg" rel="prev" title="operatingsystem-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="opsubst_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_79.html#orthopoly_002dpkg" accesskey="n" rel="next">orthopoly</a>, Previous: <a href="maxima_77.html#operatingsystem_002dpkg" accesskey="p" rel="prev">operatingsystem</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="opsubst">79 opsubst</h2>
+
+<a class="anchor" id="Item_003a-opsubst_002fnode_002fFunctions-and-Variables-for-opsubst"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-opsubst" accesskey="1">Functions and Variables for opsubst</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-opsubst">
+<div class="nav-panel">
+<p>
+Previous: <a href="#opsubst_002dpkg" accesskey="p" rel="prev">opsubst</a>, Up: <a href="#opsubst_002dpkg" accesskey="u" rel="up">opsubst</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-opsubst-1">79.1 Functions and Variables for opsubst</h3>
+
+<a class="anchor" id="opsubst_005ffunc"></a><a class="anchor" id="Item_003a-opsubst_002fdeffn_002fopsubst"></a><dl class="first-deffn">
+<dt class="deffn" id="index-opsubst"><span class="category-def">Function: </span><span><strong class="def-name">opsubst</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">opsubst</code> (<var class="var">f</var>,<var class="var">g</var>,<var class="var">e</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">opsubst</code> (<var class="var">g</var>=<var class="var">f</var>,<var class="var">e</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">opsubst</code> ([<var class="var">g1</var>=<var class="var">f1</var>,<var class="var">g2</var>=<var class="var">f2</var>,..., <var class="var">gn</var>=<var class="var">fn</var>],<var class="var">e</var>)</var><a class="copiable-link" href='#index-opsubst'> &para;</a></span></dt>
+<dd><p>The function <code class="code">opsubst</code> is similar to the function <code class="code">subst</code>, except that
+<code class="code">opsubst</code> only makes substitutions for the operators in an expression. In general, 
+When <var class="var">f</var> is an operator in the expression <var class="var">e</var>, substitute <var class="var">g</var> 
+for <var class="var">f</var> in the expression <var class="var">e</var>.
+</p>
+<p>To determine the operator, <code class="code">opsubst</code> sets <code class="code">inflag</code> to true. This means 
+<code class="code">opsubst</code> substitutes for the internal, not the displayed, operator
+in the expression.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;opsubst&quot;)$
+
+(%i2) opsubst(f,g,g(g(x)));
+(%o2)                     f(f(x))
+(%i3) opsubst(f,g,g(g));
+(%o3)                       f(g)
+(%i4) opsubst(f,g[x],g[x](z));
+(%o4)                       f(z)
+(%i5) opsubst(g[x],f, f(z));
+(%o5)                      g (z)
+                            x
+(%i6) opsubst(tan, sin, sin(sin));
+(%o6)                     tan(sin)
+(%i7) opsubst([f=g,g=h],f(x));
+(%o7)                       h(x)
+</pre></div>
+
+<p>Internally, Maxima does not use the unary negation,
+division, or the subtraction operators; thus:
+</p><div class="example">
+<pre class="example-preformatted">(%i8) opsubst(&quot;+&quot;,&quot;-&quot;,a-b);
+(%o8)                     a - b
+(%i9) opsubst(&quot;f&quot;,&quot;-&quot;,-a);
+(%o9)                      - a
+(%i10) opsubst(&quot;^^&quot;,&quot;/&quot;,a/b);
+                             a
+(%o10)                       -
+                             b
+</pre></div>
+
+<p>The internal representation of -a*b is *(-1,a,b); thus
+</p><div class="example">
+<pre class="example-preformatted">(%i11) opsubst(&quot;[&quot;,&quot;*&quot;, -a*b);
+(%o11)                  [- 1, a, b]
+</pre></div>
+
+<p>When either operator isn&rsquo;t a Maxima symbol, generally some other function
+will signal an error:
+</p><div class="example">
+<pre class="example-preformatted">(%i12) opsubst(a+b,f, f(x));
+
+Improper name or value in functional position:
+b + a
+ -- an error.  Quitting.  To debug this try debugmode(true);
+</pre></div>
+
+<p>However, subscripted operators are allowed:
+</p><div class="example">
+<pre class="example-preformatted">(%i13) opsubst(g[5],f, f(x));
+(%o13)                     g (x)
+                            5
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;opsubst&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-opsubst">Package opsubst</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_79.html#orthopoly_002dpkg" accesskey="n" rel="next">orthopoly</a>, Previous: <a href="maxima_77.html#operatingsystem_002dpkg" accesskey="p" rel="prev">operatingsystem</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

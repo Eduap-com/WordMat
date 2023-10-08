@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Top (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Top (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Top (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="#Top" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="../dir_html/index.html" rel="up" title="(dir)">
+<link href="maxima.html" rel="next" title="Introduction to Maxima">
+<link href="../dir_html/index.html" rel="prev" title="(dir)">
+<style type="text/css">
+<!--
+ul.toc-numbered-mark {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="top-level-extent" id="Top">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima.html" accesskey="n" rel="next">Introduction to Maxima</a>, Previous: <a href="../dir_html/index.html" accesskey="p" rel="prev">(dir)</a>, Up: <a href="../dir_html/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<a class="top" id="SEC_Top"></a>
+<p>Maxima is a computer algebra system, implemented in Lisp.
+</p>
+<p>Maxima is derived from the Macsyma system,
+developed at MIT in the years 1968 through 1982 as part of Project MAC.
+MIT turned over a copy of the Macsyma source code to the Department of Energy
+in 1982; that version is now known as DOE Macsyma.
+A copy of DOE Macsyma was maintained by Professor William F. Schelter
+of the University of Texas from 1982 until his death in 2001.
+In 1998, Schelter obtained permission from the Department of Energy
+to release the DOE Macsyma source code under the GNU Public License,
+and in 2000 he initiated the Maxima project at SourceForge to maintain
+and develop DOE Macsyma, now called Maxima.
+</p>
+
+
+
+<div class="element-contents" id="SEC_Contents">
+<h2 class="contents-heading">Table of Contents</h2>
+
+<div class="contents">
+
+<ul class="toc-numbered-mark">
+  <li><a id="toc-Introduction-to-Maxima-1" href="maxima.html">1 Introduction to Maxima</a></li>
+  <li><a id="toc-Bug-Detection-and-Reporting-1" href="maxima_1.html#Bug-Detection-and-Reporting">2 Bug Detection and Reporting</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Bug-Detection-and-Reporting-1" href="maxima_1.html#Functions-and-Variables-for-Bug-Detection-and-Reporting">2.1 Functions and Variables for Bug Detection and Reporting</a></li>
+  </ul></li>
+  <li><a id="toc-Help-1" href="maxima_2.html#Help">3 Help</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Documentation-1" href="maxima_2.html#Documentation">3.1 Documentation</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Help-1" href="maxima_2.html#Functions-and-Variables-for-Help">3.2 Functions and Variables for Help</a></li>
+  </ul></li>
+  <li><a id="toc-Command-Line-1" href="maxima_3.html#Command-Line">4 Command Line</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Command-Line-1" href="maxima_3.html#Introduction-to-Command-Line">4.1 Introduction to Command Line</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Command-Line-1" href="maxima_3.html#Functions-and-Variables-for-Command-Line">4.2 Functions and Variables for Command Line</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Display-1" href="maxima_3.html#Functions-and-Variables-for-Display">4.3 Functions and Variables for Display</a></li>
+  </ul></li>
+  <li><a id="toc-Data-Types-and-Structures-1" href="maxima_4.html#Data-Types-and-Structures">5 Data Types and Structures</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Numbers-1" href="maxima_4.html#Numbers">5.1 Numbers</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Numbers-1" href="maxima_4.html#Introduction-to-Numbers">5.1.1 Introduction to Numbers</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Numbers-1" href="maxima_4.html#Functions-and-Variables-for-Numbers">5.1.2 Functions and Variables for Numbers</a></li>
+    </ul></li>
+    <li><a id="toc-Strings-1" href="maxima_4.html#Strings">5.2 Strings</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Strings-1" href="maxima_4.html#Introduction-to-Strings">5.2.1 Introduction to Strings</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Strings-1" href="maxima_4.html#Functions-and-Variables-for-Strings">5.2.2 Functions and Variables for Strings</a></li>
+    </ul></li>
+    <li><a id="toc-Constants-1" href="maxima_4.html#Constants">5.3 Constants</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Functions-and-Variables-for-Constants-1" href="maxima_4.html#Functions-and-Variables-for-Constants">5.3.1 Functions and Variables for Constants</a></li>
+    </ul></li>
+    <li><a id="toc-Lists-1" href="maxima_4.html#Lists">5.4 Lists</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Lists-1" href="maxima_4.html#Introduction-to-Lists">5.4.1 Introduction to Lists</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Lists-1" href="maxima_4.html#Functions-and-Variables-for-Lists">5.4.2 Functions and Variables for Lists</a></li>
+      <li><a id="toc-Performance-considerations-for-Lists-1" href="maxima_4.html#Performance-considerations-for-Lists">5.4.3 Performance considerations for Lists</a></li>
+    </ul></li>
+    <li><a id="toc-Arrays-1" href="maxima_4.html#Arrays">5.5 Arrays</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Functions-and-Variables-for-Arrays-1" href="maxima_4.html#Functions-and-Variables-for-Arrays">5.5.1 Functions and Variables for Arrays</a></li>
+    </ul></li>
+    <li><a id="toc-Structures-1" href="maxima_4.html#Structures">5.6 Structures</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Structures-1" href="maxima_4.html#Introduction-to-Structures">5.6.1 Introduction to Structures</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Structures-1" href="maxima_4.html#Functions-and-Variables-for-Structures">5.6.2 Functions and Variables for Structures</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Expressions-1" href="maxima_5.html#Expressions">6 Expressions</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Expressions-1" href="maxima_5.html#Introduction-to-Expressions">6.1 Introduction to Expressions</a></li>
+    <li><a id="toc-Nouns-and-Verbs-1" href="maxima_5.html#Nouns-and-Verbs">6.2 Nouns and Verbs</a></li>
+    <li><a id="toc-Identifiers-1" href="maxima_5.html#Identifiers">6.3 Identifiers</a></li>
+    <li><a id="toc-Inequality-1" href="maxima_5.html#Inequality">6.4 Inequality</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Expressions-1" href="maxima_5.html#Functions-and-Variables-for-Expressions">6.5 Functions and Variables for Expressions</a></li>
+  </ul></li>
+  <li><a id="toc-Operators-1" href="maxima_6.html#Operators">7 Operators</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-operators-1" href="maxima_6.html#Introduction-to-operators">7.1 Introduction to operators</a></li>
+    <li><a id="toc-Arithmetic-operators-1" href="maxima_6.html#Arithmetic-operators">7.2 Arithmetic operators</a></li>
+    <li><a id="toc-Relational-operators-1" href="maxima_6.html#Relational-operators">7.3 Relational operators</a></li>
+    <li><a id="toc-Logical-operators-1" href="maxima_6.html#Logical-operators">7.4 Logical operators</a></li>
+    <li><a id="toc-Operators-for-Equations-1" href="maxima_6.html#Operators-for-Equations">7.5 Operators for Equations</a></li>
+    <li><a id="toc-Assignment-operators-1" href="maxima_6.html#Assignment-operators">7.6 Assignment operators</a></li>
+    <li><a id="toc-User-defined-operators-1" href="maxima_6.html#User-defined-operators">7.7 User defined operators</a></li>
+  </ul></li>
+  <li><a id="toc-Evaluation-1" href="maxima_7.html#Evaluation">8 Evaluation</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Evaluation-1" href="maxima_7.html#Functions-and-Variables-for-Evaluation">8.1 Functions and Variables for Evaluation</a></li>
+  </ul></li>
+  <li><a id="toc-Simplification-1" href="maxima_8.html#Simplification">9 Simplification</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Simplification-1" href="maxima_8.html#Introduction-to-Simplification">9.1 Introduction to Simplification</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Simplification-1" href="maxima_8.html#Functions-and-Variables-for-Simplification">9.2 Functions and Variables for Simplification</a></li>
+  </ul></li>
+  <li><a id="toc-Elementary-Functions-1" href="maxima_9.html#Elementary-Functions">10 Elementary Functions</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-for-Numbers-1" href="maxima_9.html#Functions-for-Numbers">10.1 Functions for Numbers</a></li>
+    <li><a id="toc-Functions-for-Complex-Numbers-1" href="maxima_9.html#Functions-for-Complex-Numbers">10.2 Functions for Complex Numbers</a></li>
+    <li><a id="toc-Combinatorial-Functions-1" href="maxima_9.html#Combinatorial-Functions">10.3 Combinatorial Functions</a></li>
+    <li><a id="toc-Root_002c-Exponential-and-Logarithmic-Functions" href="maxima_9.html#Root-Exponential-and-Logarithmic-Functions">10.4 Root, Exponential and Logarithmic Functions</a></li>
+    <li><a id="toc-Trigonometric-Functions-1" href="maxima_9.html#Trigonometric-Functions">10.5 Trigonometric Functions</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Trigonometric-1" href="maxima_9.html#Introduction-to-Trigonometric">10.5.1 Introduction to Trigonometric</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Trigonometric-1" href="maxima_9.html#Functions-and-Variables-for-Trigonometric">10.5.2 Functions and Variables for Trigonometric</a>
+      <ul class="toc-numbered-mark">
+        <li><a id="toc-Trigonometric-and-Hyperbolic-Functions-1" href="maxima_9.html#Trigonometric-and-Hyperbolic-Functions">10.5.2.1 Trigonometric and Hyperbolic Functions</a></li>
+        <li><a id="toc-Options-Controlling-Simplification-1" href="maxima_9.html#Options-Controlling-Simplification">10.5.2.2 Options Controlling Simplification</a></li>
+        <li><a id="toc-Explicit-Simplifications-Using-Identities-1" href="maxima_9.html#Explicit-Simplifications-Using-Identities">10.5.2.3 Explicit Simplifications Using Identities</a></li>
+        <li><a id="toc-Additional-Functions-1" href="maxima_9.html#Additional-Functions">10.5.2.4 Additional Functions</a></li>
+      </ul></li>
+    </ul></li>
+    <li><a id="toc-Random-Numbers-1" href="maxima_9.html#Random-Numbers">10.6 Random Numbers</a></li>
+  </ul></li>
+  <li><a id="toc-Maxima_0027s-Database-1" href="maxima_10.html#Maxima_0027s-Database">11 Maxima&rsquo;s Database</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Maxima_0027s-Database-1" href="maxima_10.html#Introduction-to-Maxima_0027s-Database">11.1 Introduction to Maxima&rsquo;s Database</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Properties-1" href="maxima_10.html#Functions-and-Variables-for-Properties">11.2 Functions and Variables for Properties</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Facts-1" href="maxima_10.html#Functions-and-Variables-for-Facts">11.3 Functions and Variables for Facts</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Predicates-1" href="maxima_10.html#Functions-and-Variables-for-Predicates">11.4 Functions and Variables for Predicates</a></li>
+  </ul></li>
+  <li><a id="toc-Plotting-1" href="maxima_11.html#Plotting">12 Plotting</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Plotting-1" href="maxima_11.html#Introduction-to-Plotting">12.1 Introduction to Plotting</a></li>
+    <li><a id="toc-Plotting-Formats-1" href="maxima_11.html#Plotting-Formats">12.2 Plotting Formats</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Plotting-1" href="maxima_11.html#Functions-and-Variables-for-Plotting">12.3 Functions and Variables for Plotting</a></li>
+    <li><a id="toc-Plotting-Options-1" href="maxima_11.html#Plotting-Options">12.4 Plotting Options</a></li>
+    <li><a id="toc-Gnuplot-Options-1" href="maxima_11.html#Gnuplot-Options">12.5 Gnuplot Options</a></li>
+    <li><a id="toc-Gnuplot_005fpipes-Format-Functions-1" href="maxima_11.html#Gnuplot_005fpipes-Format-Functions">12.6 Gnuplot_pipes Format Functions</a></li>
+  </ul></li>
+  <li><a id="toc-File-Input-and-Output-1" href="maxima_12.html#File-Input-and-Output">13 File Input and Output</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Comments-1" href="maxima_12.html#Comments">13.1 Comments</a></li>
+    <li><a id="toc-Files-1" href="maxima_12.html#Files">13.2 Files</a></li>
+    <li><a id="toc-Functions-and-Variables-for-File-Input-and-Output-1" href="maxima_12.html#Functions-and-Variables-for-File-Input-and-Output">13.3 Functions and Variables for File Input and Output</a></li>
+    <li><a id="toc-Functions-and-Variables-for-TeX-Output-1" href="maxima_12.html#Functions-and-Variables-for-TeX-Output">13.4 Functions and Variables for TeX Output</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Fortran-Output-1" href="maxima_12.html#Functions-and-Variables-for-Fortran-Output">13.5 Functions and Variables for Fortran Output</a></li>
+  </ul></li>
+  <li><a id="toc-Polynomials-1" href="maxima_13.html#Polynomials">14 Polynomials</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Polynomials-1" href="maxima_13.html#Introduction-to-Polynomials">14.1 Introduction to Polynomials</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Polynomials-1" href="maxima_13.html#Functions-and-Variables-for-Polynomials">14.2 Functions and Variables for Polynomials</a></li>
+    <li><a id="toc-Introduction-to-algebraic-extensions-1" href="maxima_13.html#Introduction-to-algebraic-extensions">14.3 Introduction to algebraic extensions</a></li>
+    <li><a id="toc-Functions-and-Variables-for-algebraic-extensions-1" href="maxima_13.html#Functions-and-Variables-for-algebraic-extensions">14.4 Functions and Variables for algebraic extensions</a></li>
+  </ul></li>
+  <li><a id="toc-Special-Functions-1" href="maxima_14.html#Special-Functions">15 Special Functions</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Special-Functions-1" href="maxima_14.html#Introduction-to-Special-Functions">15.1 Introduction to Special Functions</a></li>
+    <li><a id="toc-Bessel-Functions-1" href="maxima_14.html#Bessel-Functions">15.2 Bessel Functions</a></li>
+    <li><a id="toc-Airy-Functions-1" href="maxima_14.html#Airy-Functions">15.3 Airy Functions</a></li>
+    <li><a id="toc-Gamma-and-Factorial-Functions-1" href="maxima_14.html#Gamma-and-Factorial-Functions">15.4 Gamma and Factorial Functions</a></li>
+    <li><a id="toc-Exponential-Integrals-1" href="maxima_14.html#Exponential-Integrals">15.5 Exponential Integrals</a></li>
+    <li><a id="toc-Error-Function-1" href="maxima_14.html#Error-Function">15.6 Error Function</a></li>
+    <li><a id="toc-Struve-Functions-1" href="maxima_14.html#Struve-Functions">15.7 Struve Functions</a></li>
+    <li><a id="toc-Hypergeometric-Functions-1" href="maxima_14.html#Hypergeometric-Functions">15.8 Hypergeometric Functions</a></li>
+    <li><a id="toc-Parabolic-Cylinder-Functions-1" href="maxima_14.html#Parabolic-Cylinder-Functions">15.9 Parabolic Cylinder Functions</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Special-Functions-1" href="maxima_14.html#Functions-and-Variables-for-Special-Functions">15.10 Functions and Variables for Special Functions</a></li>
+  </ul></li>
+  <li><a id="toc-Elliptic-Functions-1" href="maxima_15.html#Elliptic-Functions">16 Elliptic Functions</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Elliptic-Functions-and-Integrals-1" href="maxima_15.html#Introduction-to-Elliptic-Functions-and-Integrals">16.1 Introduction to Elliptic Functions and Integrals</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Elliptic-Functions-1" href="maxima_15.html#Functions-and-Variables-for-Elliptic-Functions">16.2 Functions and Variables for Elliptic Functions</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Elliptic-Integrals-1" href="maxima_15.html#Functions-and-Variables-for-Elliptic-Integrals">16.3 Functions and Variables for Elliptic Integrals</a></li>
+  </ul></li>
+  <li><a id="toc-Limits-1" href="maxima_16.html#Limits">17 Limits</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Limits-1" href="maxima_16.html#Functions-and-Variables-for-Limits">17.1 Functions and Variables for Limits</a></li>
+  </ul></li>
+  <li><a id="toc-Differentiation-1" href="maxima_17.html#Differentiation">18 Differentiation</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Differentiation-1" href="maxima_17.html#Functions-and-Variables-for-Differentiation">18.1 Functions and Variables for Differentiation</a></li>
+  </ul></li>
+  <li><a id="toc-Integration-1" href="maxima_18.html#Integration">19 Integration</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Integration-1" href="maxima_18.html#Introduction-to-Integration">19.1 Introduction to Integration</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Integration-1" href="maxima_18.html#Functions-and-Variables-for-Integration">19.2 Functions and Variables for Integration</a></li>
+    <li><a id="toc-Introduction-to-QUADPACK-1" href="maxima_18.html#Introduction-to-QUADPACK">19.3 Introduction to QUADPACK</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Overview" href="maxima_18.html#Overview">19.3.1 Overview</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-QUADPACK-1" href="maxima_18.html#Functions-and-Variables-for-QUADPACK">19.4 Functions and Variables for QUADPACK</a></li>
+  </ul></li>
+  <li><a id="toc-Equations-1" href="maxima_19.html#Equations">20 Equations</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Equations-1" href="maxima_19.html#Functions-and-Variables-for-Equations">20.1 Functions and Variables for Equations</a></li>
+  </ul></li>
+  <li><a id="toc-Differential-Equations-1" href="maxima_20.html#Differential-Equations">21 Differential Equations</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Differential-Equations-1" href="maxima_20.html#Introduction-to-Differential-Equations">21.1 Introduction to Differential Equations</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Differential-Equations-1" href="maxima_20.html#Functions-and-Variables-for-Differential-Equations">21.2 Functions and Variables for Differential Equations</a></li>
+  </ul></li>
+  <li><a id="toc-Numerical-1" href="maxima_21.html#Numerical">22 Numerical</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-fast-Fourier-transform-1" href="maxima_21.html#Introduction-to-fast-Fourier-transform">22.1 Introduction to fast Fourier transform</a></li>
+    <li><a id="toc-Functions-and-Variables-for-fft" href="maxima_21.html#Functions-and-Variables-for-fast-Fourier-transform">22.2 Functions and Variables for fft</a></li>
+    <li><a id="toc-Functions-and-Variables-for-FFTPACK5-1" href="maxima_21.html#Functions-and-Variables-for-FFTPACK5">22.3 Functions and Variables for FFTPACK5</a></li>
+    <li><a id="toc-Functions-for-numerical-solution-of-equations-1" href="maxima_21.html#Functions-for-numerical-solution-of-equations">22.4 Functions for numerical solution of equations</a></li>
+    <li><a id="toc-Introduction-to-numerical-solution-of-differential-equations-1" href="maxima_21.html#Introduction-to-numerical-solution-of-differential-equations">22.5 Introduction to numerical solution of differential equations</a></li>
+    <li><a id="toc-Functions-for-numerical-solution-of-differential-equations-1" href="maxima_21.html#Functions-for-numerical-solution-of-differential-equations">22.6 Functions for numerical solution of differential equations</a></li>
+  </ul></li>
+  <li><a id="toc-Matrices-and-Linear-Algebra-1" href="maxima_22.html#Matrices-and-Linear-Algebra">23 Matrices and Linear Algebra</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Matrices-and-Linear-Algebra-1" href="maxima_22.html#Introduction-to-Matrices-and-Linear-Algebra">23.1 Introduction to Matrices and Linear Algebra</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Dot-1" href="maxima_22.html#Dot">23.1.1 Dot</a></li>
+      <li><a id="toc-Matrices-1" href="maxima_22.html#Matrices">23.1.2 Matrices</a></li>
+      <li><a id="toc-Vectors-1" href="maxima_22.html#Vectors">23.1.3 Vectors</a></li>
+      <li><a id="toc-eigen-1" href="maxima_22.html#eigen">23.1.4 eigen</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-Matrices-and-Linear-Algebra-1" href="maxima_22.html#Functions-and-Variables-for-Matrices-and-Linear-Algebra">23.2 Functions and Variables for Matrices and Linear Algebra</a></li>
+  </ul></li>
+  <li><a id="toc-Affine-1" href="maxima_23.html#Affine">24 Affine</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Affine-1" href="maxima_23.html#Introduction-to-Affine">24.1 Introduction to Affine</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Affine-1" href="maxima_23.html#Functions-and-Variables-for-Affine">24.2 Functions and Variables for Affine</a></li>
+  </ul></li>
+  <li><a id="toc-itensor-1" href="maxima_24.html#itensor">25 itensor</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-itensor-1" href="maxima_24.html#Introduction-to-itensor">25.1 Introduction to itensor</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-New-tensor-notation" href="maxima_24.html#New-tensor-notation">25.1.1 New tensor notation</a></li>
+      <li><a id="toc-Indicial-tensor-manipulation" href="maxima_24.html#Indicial-tensor-manipulation">25.1.2 Indicial tensor manipulation</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-itensor-1" href="maxima_24.html#Functions-and-Variables-for-itensor">25.2 Functions and Variables for itensor</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Managing-indexed-objects" href="maxima_24.html#Managing-indexed-objects">25.2.1 Managing indexed objects</a></li>
+      <li><a id="toc-Tensor-symmetries" href="maxima_24.html#Tensor-symmetries">25.2.2 Tensor symmetries</a></li>
+      <li><a id="toc-Indicial-tensor-calculus" href="maxima_24.html#Indicial-tensor-calculus">25.2.3 Indicial tensor calculus</a></li>
+      <li><a id="toc-Tensors-in-curved-spaces" href="maxima_24.html#Tensors-in-curved-spaces">25.2.4 Tensors in curved spaces</a></li>
+      <li><a id="toc-Moving-frames" href="maxima_24.html#Moving-frames">25.2.5 Moving frames</a></li>
+      <li><a id="toc-Torsion-and-nonmetricity" href="maxima_24.html#Torsion-and-nonmetricity">25.2.6 Torsion and nonmetricity</a></li>
+      <li><a id="toc-Exterior-algebra" href="maxima_24.html#Exterior-algebra">25.2.7 Exterior algebra</a></li>
+      <li><a id="toc-Exporting-TeX-expressions" href="maxima_24.html#Exporting-TeX-expressions">25.2.8 Exporting TeX expressions</a></li>
+      <li><a id="toc-Interfacing-with-ctensor" href="maxima_24.html#Interfacing-with-ctensor">25.2.9 Interfacing with ctensor</a></li>
+      <li><a id="toc-Reserved-words" href="maxima_24.html#Reserved-words">25.2.10 Reserved words</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-ctensor-1" href="maxima_25.html#ctensor">26 ctensor</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-ctensor-1" href="maxima_25.html#Introduction-to-ctensor">26.1 Introduction to ctensor</a></li>
+    <li><a id="toc-Functions-and-Variables-for-ctensor-1" href="maxima_25.html#Functions-and-Variables-for-ctensor">26.2 Functions and Variables for ctensor</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Initialization-and-setup" href="maxima_25.html#Initialization-and-setup">26.2.1 Initialization and setup</a></li>
+      <li><a id="toc-The-tensors-of-curved-space" href="maxima_25.html#The-tensors-of-curved-space">26.2.2 The tensors of curved space</a></li>
+      <li><a id="toc-Taylor-series-expansion" href="maxima_25.html#Taylor-series-expansion">26.2.3 Taylor series expansion</a></li>
+      <li><a id="toc-Frame-fields" href="maxima_25.html#Frame-fields">26.2.4 Frame fields</a></li>
+      <li><a id="toc-Algebraic-classification" href="maxima_25.html#Algebraic-classification">26.2.5 Algebraic classification</a></li>
+      <li><a id="toc-Torsion-and-nonmetricity-1" href="maxima_25.html#Torsion-and-nonmetricity-1">26.2.6 Torsion and nonmetricity</a></li>
+      <li><a id="toc-Miscellaneous-features" href="maxima_25.html#Miscellaneous-features">26.2.7 Miscellaneous features</a></li>
+      <li><a id="toc-Utility-functions" href="maxima_25.html#Utility-functions">26.2.8 Utility functions</a></li>
+      <li><a id="toc-Variables-used-by-ctensor" href="maxima_25.html#Variables-used-by-ctensor">26.2.9 Variables used by <code class="code">ctensor</code></a></li>
+      <li><a id="toc-Reserved-names" href="maxima_25.html#Reserved-names">26.2.10 Reserved names</a></li>
+      <li><a id="toc-Changes" href="maxima_25.html#Changes">26.2.11 Changes</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-atensor-1" href="maxima_26.html#atensor">27 atensor</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-atensor-1" href="maxima_26.html#Introduction-to-atensor">27.1 Introduction to atensor</a></li>
+    <li><a id="toc-Functions-and-Variables-for-atensor-1" href="maxima_26.html#Functions-and-Variables-for-atensor">27.2 Functions and Variables for atensor</a></li>
+  </ul></li>
+  <li><a id="toc-Sums_002c-Products_002c-and-Series" href="maxima_27.html#Sums-Products-and-Series">28 Sums, Products, and Series</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Sums-and-Products-1" href="maxima_27.html#Functions-and-Variables-for-Sums-and-Products">28.1 Functions and Variables for Sums and Products</a></li>
+    <li><a id="toc-Introduction-to-Series-1" href="maxima_27.html#Introduction-to-Series">28.2 Introduction to Series</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Series-1" href="maxima_27.html#Functions-and-Variables-for-Series">28.3 Functions and Variables for Series</a></li>
+    <li><a id="toc-Introduction-to-Fourier-series-1" href="maxima_27.html#Introduction-to-Fourier-series">28.4 Introduction to Fourier series</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Fourier-series-1" href="maxima_27.html#Functions-and-Variables-for-Fourier-series">28.5 Functions and Variables for Fourier series</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Poisson-series-1" href="maxima_27.html#Functions-and-Variables-for-Poisson-series">28.6 Functions and Variables for Poisson series</a></li>
+  </ul></li>
+  <li><a id="toc-Number-Theory-1" href="maxima_28.html#Number-Theory">29 Number Theory</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Number-Theory-1" href="maxima_28.html#Functions-and-Variables-for-Number-Theory">29.1 Functions and Variables for Number Theory</a></li>
+  </ul></li>
+  <li><a id="toc-Symmetries-1" href="maxima_29.html#Symmetries">30 Symmetries</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Symmetries-1" href="maxima_29.html#Introduction-to-Symmetries">30.1 Introduction to Symmetries</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Symmetries-1" href="maxima_29.html#Functions-and-Variables-for-Symmetries">30.2 Functions and Variables for Symmetries</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Changing-bases" href="maxima_29.html#Changing-bases">30.2.1 Changing bases</a></li>
+      <li><a id="toc-Changing-representations" href="maxima_29.html#Changing-representations">30.2.2 Changing representations</a></li>
+      <li><a id="toc-Groups-and-orbits" href="maxima_29.html#Groups-and-orbits">30.2.3 Groups and orbits</a></li>
+      <li><a id="toc-Partitions" href="maxima_29.html#Partitions">30.2.4 Partitions</a></li>
+      <li><a id="toc-Polynomials-and-their-roots" href="maxima_29.html#Polynomials-and-their-roots">30.2.5 Polynomials and their roots</a></li>
+      <li><a id="toc-Resolvents" href="maxima_29.html#Resolvents">30.2.6 Resolvents</a></li>
+      <li><a id="toc-Miscellaneous" href="maxima_29.html#Miscellaneous">30.2.7 Miscellaneous</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Groups-1" href="maxima_30.html#Groups">31 Groups</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Groups-1" href="maxima_30.html#Functions-and-Variables-for-Groups">31.1 Functions and Variables for Groups</a></li>
+  </ul></li>
+  <li><a id="toc-Runtime-Environment-1" href="maxima_31.html#Runtime-Environment">32 Runtime Environment</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-for-Runtime-Environment-1" href="maxima_31.html#Introduction-for-Runtime-Environment">32.1 Introduction for Runtime Environment</a></li>
+    <li><a id="toc-Interrupts-1" href="maxima_31.html#Interrupts">32.2 Interrupts</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Runtime-Environment-1" href="maxima_31.html#Functions-and-Variables-for-Runtime-Environment">32.3 Functions and Variables for Runtime Environment</a></li>
+  </ul></li>
+  <li><a id="toc-Miscellaneous-Options-1" href="maxima_32.html#Miscellaneous-Options">33 Miscellaneous Options</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Miscellaneous-Options-1" href="maxima_32.html#Introduction-to-Miscellaneous-Options">33.1 Introduction to Miscellaneous Options</a></li>
+    <li><a id="toc-Share-1" href="maxima_32.html#Share">33.2 Share</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Miscellaneous-Options-1" href="maxima_32.html#Functions-and-Variables-for-Miscellaneous-Options">33.3 Functions and Variables for Miscellaneous Options</a></li>
+  </ul></li>
+  <li><a id="toc-Rules-and-Patterns-1" href="maxima_33.html#Rules-and-Patterns">34 Rules and Patterns</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Rules-and-Patterns-1" href="maxima_33.html#Introduction-to-Rules-and-Patterns">34.1 Introduction to Rules and Patterns</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Rules-and-Patterns-1" href="maxima_33.html#Functions-and-Variables-for-Rules-and-Patterns">34.2 Functions and Variables for Rules and Patterns</a></li>
+  </ul></li>
+  <li><a id="toc-Sets-1" href="maxima_34.html#Sets">35 Sets</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Sets-1" href="maxima_34.html#Introduction-to-Sets">35.1 Introduction to Sets</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Usage" href="maxima_34.html#Usage">35.1.1 Usage</a></li>
+      <li><a id="toc-Set-Member-Iteration" href="maxima_34.html#Set-Member-Iteration">35.1.2 Set Member Iteration</a></li>
+      <li><a id="toc-Authors" href="maxima_34.html#Authors">35.1.3 Authors</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-Sets-1" href="maxima_34.html#Functions-and-Variables-for-Sets">35.2 Functions and Variables for Sets</a></li>
+  </ul></li>
+  <li><a id="toc-Function-Definition-1" href="maxima_35.html#Function-Definition">36 Function Definition</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Function-Definition-1" href="maxima_35.html#Introduction-to-Function-Definition">36.1 Introduction to Function Definition</a></li>
+    <li><a id="toc-Function-1" href="maxima_35.html#Function">36.2 Function</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Ordinary-functions" href="maxima_35.html#Ordinary-functions">36.2.1 Ordinary functions</a></li>
+      <li><a id="toc-Memoizing-Functions" href="maxima_35.html#Memoizing-Functions">36.2.2 Memoizing Functions</a></li>
+    </ul></li>
+    <li><a id="toc-Macros-1" href="maxima_35.html#Macros">36.3 Macros</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Function-Definition-1" href="maxima_35.html#Functions-and-Variables-for-Function-Definition">36.4 Functions and Variables for Function Definition</a></li>
+  </ul></li>
+  <li><a id="toc-Program-Flow-1" href="maxima_36.html#Program-Flow">37 Program Flow</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Lisp-and-Maxima-1" href="maxima_36.html#Lisp-and-Maxima">37.1 Lisp and Maxima</a></li>
+    <li><a id="toc-Garbage-Collection-1" href="maxima_36.html#Garbage-Collection">37.2 Garbage Collection</a></li>
+    <li><a id="toc-Introduction-to-Program-Flow-1" href="maxima_36.html#Introduction-to-Program-Flow">37.3 Introduction to Program Flow</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Program-Flow-1" href="maxima_36.html#Functions-and-Variables-for-Program-Flow">37.4 Functions and Variables for Program Flow</a></li>
+  </ul></li>
+  <li><a id="toc-Debugging-1" href="maxima_37.html#Debugging">38 Debugging</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Source-Level-Debugging-1" href="maxima_37.html#Source-Level-Debugging">38.1 Source Level Debugging</a></li>
+    <li><a id="toc-Keyword-Commands-1" href="maxima_37.html#Keyword-Commands">38.2 Keyword Commands</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Debugging-1" href="maxima_37.html#Functions-and-Variables-for-Debugging">38.3 Functions and Variables for Debugging</a></li>
+  </ul></li>
+  <li><a id="toc-alt_002ddisplay" href="maxima_38.html#alt_002ddisplay_002dpkg">39 alt-display</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-alt_002ddisplay-1" href="maxima_38.html#Introduction-to-alt_002ddisplay">39.1 Introduction to alt-display</a></li>
+    <li><a id="toc-Functions-and-Variables-for-alt_002ddisplay-1" href="maxima_38.html#Functions-and-Variables-for-alt_002ddisplay">39.2 Functions and Variables for alt-display</a></li>
+  </ul></li>
+  <li><a id="toc-asympa-1" href="maxima_39.html#asympa_002dpkg">40 asympa</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-asympa-1" href="maxima_39.html#Introduction-to-asympa">40.1 Introduction to asympa</a></li>
+    <li><a id="toc-Functions-and-variables-for-asympa-1" href="maxima_39.html#Functions-and-variables-for-asympa">40.2 Functions and variables for asympa</a></li>
+  </ul></li>
+  <li><a id="toc-augmented_005flagrangian" href="maxima_40.html#augmented_005flagrangian_002dpkg">41 augmented_lagrangian</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-augmented_005flagrangian-1" href="maxima_40.html#Functions-and-Variables-for-augmented_005flagrangian">41.1 Functions and Variables for augmented_lagrangian</a></li>
+  </ul></li>
+  <li><a id="toc-Bernstein" href="maxima_41.html#Bernstein_002dpkg">42 Bernstein</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Bernstein-1" href="maxima_41.html#Functions-and-Variables-for-Bernstein">42.1 Functions and Variables for Bernstein</a></li>
+  </ul></li>
+  <li><a id="toc-bitwise" href="maxima_42.html#bitwise_002dpkg">43 bitwise</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-bitwise-1" href="maxima_42.html#Functions-and-Variables-for-bitwise">43.1 Functions and Variables for bitwise</a></li>
+  </ul></li>
+  <li><a id="toc-bode" href="maxima_43.html#bode_002dpkg">44 bode</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-bode-1" href="maxima_43.html#Functions-and-Variables-for-bode">44.1 Functions and Variables for bode</a></li>
+  </ul></li>
+  <li><a id="toc-celine" href="maxima_44.html#celine_002dpkg">45 celine</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-celine-1" href="maxima_44.html#Introduction-to-celine">45.1 Introduction to celine</a></li>
+  </ul></li>
+  <li><a id="toc-clebsch_005fgordan-1" href="maxima_45.html#clebsch_005fgordan_002dpkg">46 clebsch_gordan</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-clebsch_005fgordan-1" href="maxima_45.html#Functions-and-Variables-for-clebsch_005fgordan">46.1 Functions and Variables for clebsch_gordan</a></li>
+  </ul></li>
+  <li><a id="toc-cobyla" href="maxima_46.html#cobyla_002dpkg">47 cobyla</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-cobyla-1" href="maxima_46.html#Introduction-to-cobyla">47.1 Introduction to cobyla</a></li>
+    <li><a id="toc-Functions-and-Variables-for-cobyla-1" href="maxima_46.html#Functions-and-Variables-for-cobyla">47.2 Functions and Variables for cobyla</a></li>
+    <li><a id="toc-Examples-for-cobyla-1" href="maxima_46.html#Examples-for-cobyla">47.3 Examples for cobyla</a></li>
+  </ul></li>
+  <li><a id="toc-combinatorics" href="maxima_47.html#combinatorics_002dpkg">48 combinatorics</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Package-combinatorics-1" href="maxima_47.html#Package-combinatorics">48.1 Package combinatorics</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Combinatorics-1" href="maxima_47.html#Functions-and-Variables-for-Combinatorics">48.2 Functions and Variables for Combinatorics</a></li>
+  </ul></li>
+  <li><a id="toc-contrib_005fode-1" href="maxima_48.html#contrib_005fode_002dpkg">49 contrib_ode</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-contrib_005fode-1" href="maxima_48.html#Introduction-to-contrib_005fode">49.1 Introduction to contrib_ode</a></li>
+    <li><a id="toc-Functions-and-Variables-for-contrib_005fode-1" href="maxima_48.html#Functions-and-Variables-for-contrib_005fode">49.2 Functions and Variables for contrib_ode</a></li>
+    <li><a id="toc-Possible-improvements-to-contrib_005fode-1" href="maxima_48.html#Possible-improvements-to-contrib_005fode">49.3 Possible improvements to contrib_ode</a></li>
+    <li><a id="toc-Test-cases-for-contrib_005fode-1" href="maxima_48.html#Test-cases-for-contrib_005fode">49.4 Test cases for contrib_ode</a></li>
+    <li><a id="toc-References-for-contrib_005fode-1" href="maxima_48.html#References-for-contrib_005fode">49.5 References for contrib_ode</a></li>
+  </ul></li>
+  <li><a id="toc-descriptive" href="maxima_49.html#descriptive_002dpkg">50 descriptive</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-descriptive-1" href="maxima_49.html#Introduction-to-descriptive">50.1 Introduction to descriptive</a></li>
+    <li><a id="toc-Functions-and-Variables-for-data-manipulation-1" href="maxima_49.html#Functions-and-Variables-for-data-manipulation">50.2 Functions and Variables for data manipulation</a></li>
+    <li><a id="toc-Functions-and-Variables-for-descriptive-statistics-1" href="maxima_49.html#Functions-and-Variables-for-descriptive-statistics">50.3 Functions and Variables for descriptive statistics</a></li>
+    <li><a id="toc-Functions-and-Variables-for-statistical-graphs-1" href="maxima_49.html#Functions-and-Variables-for-statistical-graphs">50.4 Functions and Variables for statistical graphs</a></li>
+  </ul></li>
+  <li><a id="toc-diag" href="maxima_50.html#diag_002dpkg">51 diag</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-diag-1" href="maxima_50.html#Functions-and-Variables-for-diag">51.1 Functions and Variables for diag</a></li>
+  </ul></li>
+  <li><a id="toc-distrib" href="maxima_51.html#distrib_002dpkg">52 distrib</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-distrib-1" href="maxima_51.html#Introduction-to-distrib">52.1 Introduction to distrib</a></li>
+    <li><a id="toc-Functions-and-Variables-for-continuous-distributions-1" href="maxima_51.html#Functions-and-Variables-for-continuous-distributions">52.2 Functions and Variables for continuous distributions</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Normal-Random-Variable-1" href="maxima_51.html#Normal-Random-Variable">52.2.1 Normal Random Variable</a></li>
+      <li><a id="toc-Student_0027s-t-Random-Variable-1" href="maxima_51.html#Student_0027s-t-Random-Variable">52.2.2 Student&rsquo;s t Random Variable</a></li>
+      <li><a id="toc-Noncentral-Student_0027s-t-Random-Variable-1" href="maxima_51.html#Noncentral-Student_0027s-t-Random-Variable">52.2.3 Noncentral Student&rsquo;s t Random Variable</a></li>
+      <li><a id="toc-Chi_002dsquared-Random-Variable-1" href="maxima_51.html#Chi_002dsquared-Random-Variable">52.2.4 Chi-squared Random Variable</a></li>
+      <li><a id="toc-Noncentral-Chi_002dsquared-Random-Variable-1" href="maxima_51.html#Noncentral-Chi_002dsquared-Random-Variable">52.2.5 Noncentral Chi-squared Random Variable</a></li>
+      <li><a id="toc-F-Random-Variable-1" href="maxima_51.html#F-Random-Variable">52.2.6 F Random Variable</a></li>
+      <li><a id="toc-Exponential-Random-Variable-1" href="maxima_51.html#Exponential-Random-Variable">52.2.7 Exponential Random Variable</a></li>
+      <li><a id="toc-Lognormal-Random-Variable-1" href="maxima_51.html#Lognormal-Random-Variable">52.2.8 Lognormal Random Variable</a></li>
+      <li><a id="toc-Gamma-Random-Variable-1" href="maxima_51.html#Gamma-Random-Variable">52.2.9 Gamma Random Variable</a></li>
+      <li><a id="toc-Beta-Random-Variable-1" href="maxima_51.html#Beta-Random-Variable">52.2.10 Beta Random Variable</a></li>
+      <li><a id="toc-Continuous-Uniform-Random-Variable-1" href="maxima_51.html#Continuous-Uniform-Random-Variable">52.2.11 Continuous Uniform Random Variable</a></li>
+      <li><a id="toc-Logistic-Random-Variable-1" href="maxima_51.html#Logistic-Random-Variable">52.2.12 Logistic Random Variable</a></li>
+      <li><a id="toc-Pareto-Random-Variable-1" href="maxima_51.html#Pareto-Random-Variable">52.2.13 Pareto Random Variable</a></li>
+      <li><a id="toc-Weibull-Random-Variable-1" href="maxima_51.html#Weibull-Random-Variable">52.2.14 Weibull Random Variable</a></li>
+      <li><a id="toc-Rayleigh-Random-Variable-1" href="maxima_51.html#Rayleigh-Random-Variable">52.2.15 Rayleigh Random Variable</a></li>
+      <li><a id="toc-Laplace-Random-Variable-1" href="maxima_51.html#Laplace-Random-Variable">52.2.16 Laplace Random Variable</a></li>
+      <li><a id="toc-Cauchy-Random-Variable-1" href="maxima_51.html#Cauchy-Random-Variable">52.2.17 Cauchy Random Variable</a></li>
+      <li><a id="toc-Gumbel-Random-Variable-1" href="maxima_51.html#Gumbel-Random-Variable">52.2.18 Gumbel Random Variable</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-discrete-distributions-1" href="maxima_51.html#Functions-and-Variables-for-discrete-distributions">52.3 Functions and Variables for discrete distributions</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-General-Finite-Discrete-Random-Variable-1" href="maxima_51.html#General-Finite-Discrete-Random-Variable">52.3.1 General Finite Discrete Random Variable</a></li>
+      <li><a id="toc-Binomial-Random-Variable-1" href="maxima_51.html#Binomial-Random-Variable">52.3.2 Binomial Random Variable</a></li>
+      <li><a id="toc-Poisson-Random-Variable-1" href="maxima_51.html#Poisson-Random-Variable">52.3.3 Poisson Random Variable</a></li>
+      <li><a id="toc-Bernoulli-Random-Variable-1" href="maxima_51.html#Bernoulli-Random-Variable">52.3.4 Bernoulli Random Variable</a></li>
+      <li><a id="toc-Geometric-Random-Variable-1" href="maxima_51.html#Geometric-Random-Variable">52.3.5 Geometric Random Variable</a></li>
+      <li><a id="toc-Discrete-Uniform-Random-Variable-1" href="maxima_51.html#Discrete-Uniform-Random-Variable">52.3.6 Discrete Uniform Random Variable</a></li>
+      <li><a id="toc-Hypergeometric-Random-Variable-1" href="maxima_51.html#Hypergeometric-Random-Variable">52.3.7 Hypergeometric Random Variable</a></li>
+      <li><a id="toc-Negative-Binomial-Random-Variable-1" href="maxima_51.html#Negative-Binomial-Random-Variable">52.3.8 Negative Binomial Random Variable</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-draw-1" href="maxima_52.html#draw_002dpkg">53 draw</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-draw-1" href="maxima_52.html#Introduction-to-draw">53.1 Introduction to draw</a></li>
+    <li><a id="toc-Functions-and-Variables-for-draw-1" href="maxima_52.html#Functions-and-Variables-for-draw">53.2 Functions and Variables for draw</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Scenes" href="maxima_52.html#Scenes">53.2.1 Scenes</a></li>
+      <li><a id="toc-Functions" href="maxima_52.html#Functions">53.2.2 Functions</a></li>
+      <li><a id="toc-Plot-options-for-draw-programs" href="maxima_52.html#Plot-options-for-draw-programs">53.2.3 Plot options for draw programs</a></li>
+      <li><a id="toc-Graphics-objects" href="maxima_52.html#Graphics-objects">53.2.4 Graphics objects</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-pictures-1" href="maxima_52.html#Functions-and-Variables-for-pictures">53.3 Functions and Variables for pictures</a></li>
+    <li><a id="toc-Functions-and-Variables-for-worldmap-1" href="maxima_52.html#Functions-and-Variables-for-worldmap">53.4 Functions and Variables for worldmap</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Variables-and-Functions" href="maxima_52.html#Variables-and-Functions">53.4.1 Variables and Functions</a></li>
+      <li><a id="toc-Graphic-objects" href="maxima_52.html#Graphic-objects">53.4.2 Graphic objects</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-drawdf-1" href="maxima_53.html#drawdf_002dpkg">54 drawdf</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-drawdf-1" href="maxima_53.html#Introduction-to-drawdf">54.1 Introduction to drawdf</a></li>
+    <li><a id="toc-Functions-and-Variables-for-drawdf-1" href="maxima_53.html#Functions-and-Variables-for-drawdf">54.2 Functions and Variables for drawdf</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Functions-1" href="maxima_53.html#Functions-1">54.2.1 Functions</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-dynamics" href="maxima_54.html#dynamics_002dpkg">55 dynamics</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-The-dynamics-package-1" href="maxima_54.html#The-dynamics-package">55.1 The dynamics package</a></li>
+    <li><a id="toc-Graphical-analysis-of-discrete-dynamical-systems-1" href="maxima_54.html#Graphical-analysis-of-discrete-dynamical-systems">55.2 Graphical analysis of discrete dynamical systems</a></li>
+    <li><a id="toc-Visualization-with-VTK-1" href="maxima_54.html#Visualization-with-VTK">55.3 Visualization with VTK</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Scene-options" href="maxima_54.html#Scene-options">55.3.1 Scene options</a></li>
+      <li><a id="toc-Scene-objects" href="maxima_54.html#Scene-objects">55.3.2 Scene objects</a></li>
+      <li><a id="toc-Scene-object_0027s-options" href="maxima_54.html#Scene-object_0027s-options">55.3.3 Scene object&rsquo;s options</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-engineering_002dformat" href="maxima_55.html#engineering_002dformat_002dpkg">56 engineering-format</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-engineering_002dformat-1" href="maxima_55.html#Functions-and-Variables-for-engineering_002dformat">56.1 Functions and Variables for engineering-format</a></li>
+  </ul></li>
+  <li><a id="toc-ezunits" href="maxima_56.html#ezunits_002dpkg">57 ezunits</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-ezunits-1" href="maxima_56.html#Introduction-to-ezunits">57.1 Introduction to ezunits</a></li>
+    <li><a id="toc-Introduction-to-physical_005fconstants-1" href="maxima_56.html#Introduction-to-physical_005fconstants">57.2 Introduction to physical_constants</a></li>
+    <li><a id="toc-Functions-and-Variables-for-ezunits-1" href="maxima_56.html#Functions-and-Variables-for-ezunits">57.3 Functions and Variables for ezunits</a></li>
+  </ul></li>
+  <li><a id="toc-f90" href="maxima_57.html#f90_002dpkg">58 f90</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Package-f90-1" href="maxima_57.html#Package-f90">58.1 Package f90</a></li>
+  </ul></li>
+  <li><a id="toc-finance" href="maxima_58.html#finance_002dpkg">59 finance</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-finance-1" href="maxima_58.html#Introduction-to-finance">59.1 Introduction to finance</a></li>
+    <li><a id="toc-Functions-and-Variables-for-finance-1" href="maxima_58.html#Functions-and-Variables-for-finance">59.2 Functions and Variables for finance</a></li>
+  </ul></li>
+  <li><a id="toc-fractals" href="maxima_59.html#fractals_002dpkg">60 fractals</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-fractals-1" href="maxima_59.html#Introduction-to-fractals">60.1 Introduction to fractals</a></li>
+    <li><a id="toc-Definitions-for-IFS-fractals-1" href="maxima_59.html#Definitions-for-IFS-fractals">60.2 Definitions for IFS fractals</a></li>
+    <li><a id="toc-Definitions-for-complex-fractals-1" href="maxima_59.html#Definitions-for-complex-fractals">60.3 Definitions for complex fractals</a></li>
+    <li><a id="toc-Definitions-for-Koch-snowflakes-1" href="maxima_59.html#Definitions-for-Koch-snowflakes">60.4 Definitions for Koch snowflakes</a></li>
+    <li><a id="toc-Definitions-for-Peano-maps-1" href="maxima_59.html#Definitions-for-Peano-maps">60.5 Definitions for Peano maps</a></li>
+  </ul></li>
+  <li><a id="toc-Gentran" href="maxima_60.html#gentran_002dpkg">61 Gentran</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Gentran-1" href="maxima_60.html#Introduction-to-Gentran">61.1 Introduction to Gentran</a></li>
+    <li><a id="toc-Functions-for-Gentran-1" href="maxima_60.html#Functions-for-Gentran">61.2 Functions for Gentran</a></li>
+    <li><a id="toc-Gentran-Mode-Switches-1" href="maxima_60.html#Gentran-Mode-Switches">61.3 Gentran Mode Switches</a></li>
+    <li><a id="toc-Gentran-Option-Variables-1" href="maxima_60.html#Gentran-Option-Variables">61.4 Gentran Option Variables</a></li>
+    <li><a id="toc-Gentran-Evaluation-Forms-1" href="maxima_60.html#Gentran-Evaluation-Forms">61.5 Gentran Evaluation Forms</a></li>
+  </ul></li>
+  <li><a id="toc-ggf-1" href="maxima_61.html#ggf_002dpkg">62 ggf</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-ggf-1" href="maxima_61.html#Functions-and-Variables-for-ggf">62.1 Functions and Variables for ggf</a></li>
+  </ul></li>
+  <li><a id="toc-graphs" href="maxima_62.html#graphs_002dpkg">63 graphs</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-graphs-1" href="maxima_62.html#Introduction-to-graphs">63.1 Introduction to graphs</a></li>
+    <li><a id="toc-Functions-and-Variables-for-graphs-1" href="maxima_62.html#Functions-and-Variables-for-graphs">63.2 Functions and Variables for graphs</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Building-graphs" href="maxima_62.html#Building-graphs">63.2.1 Building graphs</a></li>
+      <li><a id="toc-Graph-properties" href="maxima_62.html#Graph-properties">63.2.2 Graph properties</a></li>
+      <li><a id="toc-Modifying-graphs" href="maxima_62.html#Modifying-graphs">63.2.3 Modifying graphs</a></li>
+      <li><a id="toc-Reading-and-writing-to-files" href="maxima_62.html#Reading-and-writing-to-files">63.2.4 Reading and writing to files</a></li>
+      <li><a id="toc-Visualization" href="maxima_62.html#Visualization">63.2.5 Visualization</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-grobner" href="maxima_63.html#grobner_002dpkg">64 grobner</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-grobner-1" href="maxima_63.html#Introduction-to-grobner">64.1 Introduction to grobner</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Notes-on-the-grobner-package" href="maxima_63.html#Notes-on-the-grobner-package">64.1.1 Notes on the grobner package</a></li>
+      <li><a id="toc-Implementations-of-admissible-monomial-orders-in-grobner" href="maxima_63.html#Implementations-of-admissible-monomial-orders-in-grobner">64.1.2 Implementations of admissible monomial orders in grobner</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-grobner-1" href="maxima_63.html#Functions-and-Variables-for-grobner">64.2 Functions and Variables for grobner</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Global-switches-for-grobner" href="maxima_63.html#Global-switches-for-grobner">64.2.1 Global switches for grobner</a></li>
+      <li><a id="toc-Simple-operators-in-grobner" href="maxima_63.html#Simple-operators-in-grobner">64.2.2 Simple operators in grobner</a></li>
+      <li><a id="toc-Other-functions-in-grobner" href="maxima_63.html#Other-functions-in-grobner">64.2.3 Other functions in grobner</a></li>
+      <li><a id="toc-Standard-postprocessing-of-Groebner-Bases" href="maxima_63.html#Standard-postprocessing-of-Groebner-Bases">64.2.4 Standard postprocessing of Groebner Bases</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-hompack" href="maxima_64.html#hompack_002dpkg">65 hompack</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-hompack-1" href="maxima_64.html#Introduction-to-hompack">65.1 Introduction to hompack</a></li>
+    <li><a id="toc-Functions-and-Variables-for-hompack-1" href="maxima_64.html#Functions-and-Variables-for-hompack">65.2 Functions and Variables for hompack</a></li>
+  </ul></li>
+  <li><a id="toc-impdiff" href="maxima_65.html#impdiff_002dpkg">66 impdiff</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-impdiff-1" href="maxima_65.html#Functions-and-Variables-for-impdiff">66.1 Functions and Variables for impdiff</a></li>
+  </ul></li>
+  <li><a id="toc-interpol" href="maxima_66.html#interpol_002dpkg">67 interpol</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-interpol-1" href="maxima_66.html#Introduction-to-interpol">67.1 Introduction to interpol</a></li>
+    <li><a id="toc-Functions-and-Variables-for-interpol-1" href="maxima_66.html#Functions-and-Variables-for-interpol">67.2 Functions and Variables for interpol</a></li>
+  </ul></li>
+  <li><a id="toc-lapack" href="maxima_67.html#lapack_002dpkg">68 lapack</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-lapack-1" href="maxima_67.html#Introduction-to-lapack">68.1 Introduction to lapack</a></li>
+    <li><a id="toc-Functions-and-Variables-for-lapack-1" href="maxima_67.html#Functions-and-Variables-for-lapack">68.2 Functions and Variables for lapack</a></li>
+  </ul></li>
+  <li><a id="toc-lbfgs" href="maxima_68.html#lbfgs_002dpkg">69 lbfgs</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-lbfgs-1" href="maxima_68.html#Introduction-to-lbfgs">69.1 Introduction to lbfgs</a></li>
+    <li><a id="toc-Functions-and-Variables-for-lbfgs-1" href="maxima_68.html#Functions-and-Variables-for-lbfgs">69.2 Functions and Variables for lbfgs</a></li>
+  </ul></li>
+  <li><a id="toc-lindstedt" href="maxima_69.html#lindstedt_002dpkg">70 lindstedt</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-lindstedt-1" href="maxima_69.html#Functions-and-Variables-for-lindstedt">70.1 Functions and Variables for lindstedt</a></li>
+  </ul></li>
+  <li><a id="toc-linearalgebra" href="maxima_70.html#linearalgebra_002dpkg">71 linearalgebra</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-linearalgebra-1" href="maxima_70.html#Introduction-to-linearalgebra">71.1 Introduction to linearalgebra</a></li>
+    <li><a id="toc-Functions-and-Variables-for-linearalgebra-1" href="maxima_70.html#Functions-and-Variables-for-linearalgebra">71.2 Functions and Variables for linearalgebra</a></li>
+  </ul></li>
+  <li><a id="toc-lsquares" href="maxima_71.html#lsquares_002dpkg">72 lsquares</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-lsquares-1" href="maxima_71.html#Introduction-to-lsquares">72.1 Introduction to lsquares</a></li>
+    <li><a id="toc-Functions-and-Variables-for-lsquares-1" href="maxima_71.html#Functions-and-Variables-for-lsquares">72.2 Functions and Variables for lsquares</a></li>
+  </ul></li>
+  <li><a id="toc-minpack" href="maxima_72.html#minpack_002dpkg">73 minpack</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-minpack-1" href="maxima_72.html#Introduction-to-minpack">73.1 Introduction to minpack</a></li>
+    <li><a id="toc-Functions-and-Variables-for-minpack-1" href="maxima_72.html#Functions-and-Variables-for-minpack">73.2 Functions and Variables for minpack</a></li>
+  </ul></li>
+  <li><a id="toc-makeOrders" href="maxima_73.html#makeOrders_002dpkg">74 makeOrders</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-makeOrders-1" href="maxima_73.html#Functions-and-Variables-for-makeOrders">74.1 Functions and Variables for makeOrders</a></li>
+  </ul></li>
+  <li><a id="toc-mnewton-1" href="maxima_74.html#mnewton_002dpkg">75 mnewton</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-mnewton-1" href="maxima_74.html#Introduction-to-mnewton">75.1 Introduction to mnewton</a></li>
+    <li><a id="toc-Functions-and-Variables-for-mnewton-1" href="maxima_74.html#Functions-and-Variables-for-mnewton">75.2 Functions and Variables for mnewton</a></li>
+  </ul></li>
+  <li><a id="toc-numericalio-1" href="maxima_75.html#numericalio_002dpkg">76 numericalio</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-numericalio-1" href="maxima_75.html#Introduction-to-numericalio">76.1 Introduction to numericalio</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Plain_002dtext-input-and-output" href="maxima_75.html#Plain_002dtext-input-and-output">76.1.1 Plain-text input and output</a></li>
+      <li><a id="toc-Separator-flag-values-for-input" href="maxima_75.html#Separator-flag-values-for-input">76.1.2 Separator flag values for input</a></li>
+      <li><a id="toc-Separator-flag-values-for-output" href="maxima_75.html#Separator-flag-values-for-output">76.1.3 Separator flag values for output</a></li>
+      <li><a id="toc-Binary-floating_002dpoint-input-and-output" href="maxima_75.html#Binary-floating_002dpoint-input-and-output">76.1.4 Binary floating-point input and output</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-plain_002dtext-input-and-output-1" href="maxima_75.html#Functions-and-Variables-for-plain_002dtext-input-and-output">76.2 Functions and Variables for plain-text input and output</a></li>
+    <li><a id="toc-Functions-and-Variables-for-binary-input-and-output-1" href="maxima_75.html#Functions-and-Variables-for-binary-input-and-output">76.3 Functions and Variables for binary input and output</a></li>
+  </ul></li>
+  <li><a id="toc-odepack" href="maxima_76.html#odepack_002dpkg">77 odepack</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-ODEPACK-1" href="maxima_76.html#Introduction-to-ODEPACK">77.1 Introduction to ODEPACK</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Getting-Started-with-ODEPACK-1" href="maxima_76.html#Getting-Started-with-ODEPACK">77.1.1 Getting Started with ODEPACK</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-odepack-1" href="maxima_76.html#Functions-and-Variables-for-odepack">77.2 Functions and Variables for odepack</a></li>
+  </ul></li>
+  <li><a id="toc-operatingsystem" href="maxima_77.html#operatingsystem_002dpkg">78 operatingsystem</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-operatingsystem-1" href="maxima_77.html#Introduction-to-operatingsystem">78.1 Introduction to operatingsystem</a></li>
+    <li><a id="toc-Directory-operations-1" href="maxima_77.html#Directory-operations">78.2 Directory operations</a></li>
+    <li><a id="toc-File-operations-1" href="maxima_77.html#File-operations">78.3 File operations</a></li>
+    <li><a id="toc-Environment-operations-1" href="maxima_77.html#Environment-operations">78.4 Environment operations</a></li>
+  </ul></li>
+  <li><a id="toc-opsubst" href="maxima_78.html#opsubst_002dpkg">79 opsubst</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-opsubst-1" href="maxima_78.html#Functions-and-Variables-for-opsubst">79.1 Functions and Variables for opsubst</a></li>
+  </ul></li>
+  <li><a id="toc-orthopoly" href="maxima_79.html#orthopoly_002dpkg">80 orthopoly</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-orthogonal-polynomials-1" href="maxima_79.html#Introduction-to-orthogonal-polynomials">80.1 Introduction to orthogonal polynomials</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Getting-Started-with-orthopoly" href="maxima_79.html#Getting-Started-with-orthopoly">80.1.1 Getting Started with orthopoly</a></li>
+      <li><a id="toc-Limitations" href="maxima_79.html#Limitations">80.1.2 Limitations</a></li>
+      <li><a id="toc-Floating-point-Evaluation-1" href="maxima_79.html#Floating-point-Evaluation-1">80.1.3 Floating point Evaluation</a></li>
+      <li><a id="toc-Graphics-and-orthopoly" href="maxima_79.html#Graphics-and-orthopoly">80.1.4 Graphics and <code class="code">orthopoly</code></a></li>
+      <li><a id="toc-Miscellaneous-Functions" href="maxima_79.html#Miscellaneous-Functions">80.1.5 Miscellaneous Functions</a></li>
+      <li><a id="toc-Algorithms" href="maxima_79.html#Algorithms">80.1.6 Algorithms</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-orthogonal-polynomials-1" href="maxima_79.html#Functions-and-Variables-for-orthogonal-polynomials">80.2 Functions and Variables for orthogonal polynomials</a></li>
+  </ul></li>
+  <li><a id="toc-pslq" href="maxima_80.html#pslq_002dpkg">81 pslq</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-pslq-1" href="maxima_80.html#Introduction-to-pslq">81.1 Introduction to pslq</a></li>
+    <li><a id="toc-Functions-and-Variables-for-pslq-1" href="maxima_80.html#Functions-and-Variables-for-pslq">81.2 Functions and Variables for pslq</a></li>
+  </ul></li>
+  <li><a id="toc-pytranslate-1" href="maxima_81.html#pytranslate">82 pytranslate</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-pytranslate-1" href="maxima_81.html#Introduction-to-pytranslate">82.1 Introduction to pytranslate</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Tests-for-pytranslate" href="maxima_81.html#Tests-for-pytranslate">82.1.1 Tests for pytranslate</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-in-pytranslate-1" href="maxima_81.html#Functions-in-pytranslate">82.2 Functions in pytranslate</a></li>
+    <li><a id="toc-Extending-pytranslate-1" href="maxima_81.html#Extending-pytranslate">82.3 Extending pytranslate</a></li>
+  </ul></li>
+  <li><a id="toc-quantum_005fcomputing_002dpkg-1" href="maxima_82.html#quantum_005fcomputing_002dpkg">83 quantum_computing-pkg</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Package-quantum_005fcomputing-1" href="maxima_82.html#Package-quantum_005fcomputing">83.1 Package quantum_computing</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Quantum_005fComputing-1" href="maxima_82.html#Functions-and-Variables-for-Quantum_005fComputing">83.2 Functions and Variables for Quantum_Computing</a></li>
+  </ul></li>
+  <li><a id="toc-ratpow" href="maxima_83.html#ratpow_002dpkg">84 ratpow</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-ratpow-1" href="maxima_83.html#Functions-and-Variables-for-ratpow">84.1 Functions and Variables for ratpow</a></li>
+  </ul></li>
+  <li><a id="toc-romberg" href="maxima_84.html#romberg_002dpkg">85 romberg</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-romberg-1" href="maxima_84.html#Functions-and-Variables-for-romberg">85.1 Functions and Variables for romberg</a></li>
+  </ul></li>
+  <li><a id="toc-simplex" href="maxima_85.html#simplex_002dpkg">86 simplex</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-simplex-1" href="maxima_85.html#Introduction-to-simplex">86.1 Introduction to simplex</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Tests-for-simplex" href="maxima_85.html#Tests-for-simplex">86.1.1 Tests for simplex</a>
+      <ul class="toc-numbered-mark">
+        <li><a id="toc-klee_005fminty" href="maxima_85.html#klee_005fminty">86.1.1.1 klee_minty</a></li>
+        <li><a id="toc-NETLIB" href="maxima_85.html#NETLIB">86.1.1.2 NETLIB</a></li>
+      </ul></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-simplex-1" href="maxima_85.html#Functions-and-Variables-for-simplex">86.2 Functions and Variables for simplex</a></li>
+  </ul></li>
+  <li><a id="toc-simplification" href="maxima_86.html#simplification_002dpkg">87 simplification</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-simplification-1" href="maxima_86.html#Introduction-to-simplification">87.1 Introduction to simplification</a></li>
+    <li><a id="toc-Package-absimp-1" href="maxima_86.html#Package-absimp">87.2 Package absimp</a></li>
+    <li><a id="toc-Package-facexp-1" href="maxima_86.html#Package-facexp">87.3 Package facexp</a></li>
+    <li><a id="toc-Package-functs-1" href="maxima_86.html#Package-functs">87.4 Package functs</a></li>
+    <li><a id="toc-Package-ineq-1" href="maxima_86.html#Package-ineq">87.5 Package ineq</a></li>
+    <li><a id="toc-Package-rducon-1" href="maxima_86.html#Package-rducon">87.6 Package rducon</a></li>
+    <li><a id="toc-Package-scifac-1" href="maxima_86.html#Package-scifac">87.7 Package scifac</a></li>
+  </ul></li>
+  <li><a id="toc-solve_005frec-1" href="maxima_87.html#solve_005frec_002dpkg">88 solve_rec</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-solve_005frec-1" href="maxima_87.html#Introduction-to-solve_005frec">88.1 Introduction to solve_rec</a></li>
+    <li><a id="toc-Functions-and-Variables-for-solve_005frec-1" href="maxima_87.html#Functions-and-Variables-for-solve_005frec">88.2 Functions and Variables for solve_rec</a></li>
+  </ul></li>
+  <li><a id="toc-stats" href="maxima_88.html#stats_002dpkg">89 stats</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-stats-1" href="maxima_88.html#Introduction-to-stats">89.1 Introduction to stats</a></li>
+    <li><a id="toc-Functions-and-Variables-for-inference_005fresult-1" href="maxima_88.html#Functions-and-Variables-for-inference_005fresult">89.2 Functions and Variables for inference_result</a></li>
+    <li><a id="toc-Functions-and-Variables-for-stats-1" href="maxima_88.html#Functions-and-Variables-for-stats">89.3 Functions and Variables for stats</a></li>
+    <li><a id="toc-Functions-and-Variables-for-special-distributions-1" href="maxima_88.html#Functions-and-Variables-for-special-distributions">89.4 Functions and Variables for special distributions</a></li>
+  </ul></li>
+  <li><a id="toc-stirling-1" href="maxima_89.html#stirling_002dpkg">90 stirling</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-stirling-1" href="maxima_89.html#Functions-and-Variables-for-stirling">90.1 Functions and Variables for stirling</a></li>
+  </ul></li>
+  <li><a id="toc-stringproc" href="maxima_90.html#stringproc_002dpkg">91 stringproc</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-String-Processing-1" href="maxima_90.html#Introduction-to-String-Processing">91.1 Introduction to String Processing</a></li>
+    <li><a id="toc-String-Input-and-Output-1" href="maxima_90.html#String-Input-and-Output">91.2 String Input and Output</a></li>
+    <li><a id="toc-Characters-1" href="maxima_90.html#Characters">91.3 Characters</a></li>
+    <li><a id="toc-String-Processing-1" href="maxima_90.html#String-Processing">91.4 String Processing</a></li>
+    <li><a id="toc-Octets-and-Utilities-for-Cryptography-1" href="maxima_90.html#Octets-and-Utilities-for-Cryptography">91.5 Octets and Utilities for Cryptography</a></li>
+  </ul></li>
+  <li><a id="toc-to_005fpoly_005fsolve" href="maxima_91.html#to_005fpoly_005fsolve_002dpkg">92 to_poly_solve</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-to_005fpoly_005fsolve-1" href="maxima_91.html#Functions-and-Variables-for-to_005fpoly_005fsolve">92.1 Functions and Variables for to_poly_solve</a></li>
+  </ul></li>
+  <li><a id="toc-unit" href="maxima_92.html#unit_002dpkg">93 unit</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Units-1" href="maxima_92.html#Introduction-to-Units">93.1 Introduction to Units</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Units-1" href="maxima_92.html#Functions-and-Variables-for-Units">93.2 Functions and Variables for Units</a></li>
+  </ul></li>
+  <li><a id="toc-wrstcse" href="maxima_93.html#wrstcse_002dpkg">94 wrstcse</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-wrstcse-1" href="maxima_93.html#Introduction-to-wrstcse">94.1 Introduction to wrstcse</a></li>
+    <li><a id="toc-Functions-and-Variables-for-wrstcse-1" href="maxima_93.html#Functions-and-Variables-for-wrstcse">94.2 Functions and Variables for wrstcse</a></li>
+  </ul></li>
+  <li><a id="toc-zeilberger" href="maxima_94.html#zeilberger_002dpkg">95 zeilberger</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-zeilberger-1" href="maxima_94.html#Introduction-to-zeilberger">95.1 Introduction to zeilberger</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-The-indefinite-summation-problem" href="maxima_94.html#The-indefinite-summation-problem">95.1.1 The indefinite summation problem</a></li>
+      <li><a id="toc-The-definite-summation-problem" href="maxima_94.html#The-definite-summation-problem">95.1.2 The definite summation problem</a></li>
+      <li><a id="toc-Verbosity-levels" href="maxima_94.html#Verbosity-levels">95.1.3 Verbosity levels</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-zeilberger-1" href="maxima_94.html#Functions-and-Variables-for-zeilberger">95.2 Functions and Variables for zeilberger</a></li>
+    <li><a id="toc-General-global-variables" href="maxima_94.html#General-global-variables">95.3 General global variables</a></li>
+    <li><a id="toc-Variables-related-to-the-modular-test" href="maxima_94.html#Variables-related-to-the-modular-test">95.4 Variables related to the modular test</a></li>
+  </ul></li>
+  <li><a id="toc-trigtools" href="maxima_95.html#trigtools_002dpkg">96 trigtools</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-trigtools-1" href="maxima_95.html#Introduction-to-trigtools">96.1 Introduction to trigtools</a></li>
+    <li><a id="toc-Functions-and-Variables-for-trigtools-1" href="maxima_95.html#Functions-and-Variables-for-trigtools">96.2 Functions and Variables for trigtools</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Convert-to-sin-and-cos-1" href="maxima_95.html#Convert-to-sin-and-cos">96.2.1 Convert to sin and cos</a></li>
+      <li><a id="toc-Convert-to-Trignometric-Functions-1" href="maxima_95.html#Convert-to-Trignometric-Functions">96.2.2 Convert to Trignometric Functions</a></li>
+      <li><a id="toc-Convert-to-Hyperbolic-Functions-1" href="maxima_95.html#Convert-to-Hyperbolic-Functions">96.2.3 Convert to Hyperbolic Functions</a></li>
+      <li><a id="toc-Factor-Sums-of-sin-and-cos-Functions-1" href="maxima_95.html#Factor-Sums-of-sin-and-cos-Functions">96.2.4 Factor Sums of sin and cos Functions</a></li>
+      <li><a id="toc-Solve-Trignometric-Equations-1" href="maxima_95.html#Solve-Trignometric-Equations">96.2.5 Solve Trignometric Equations</a></li>
+      <li><a id="toc-Evaluation-of-Trignometric-Functions-1" href="maxima_95.html#Evaluation-of-Trignometric-Functions">96.2.6 Evaluation of Trignometric Functions</a></li>
+      <li><a id="toc-Contract-atan-Functions-1" href="maxima_95.html#Contract-atan-Functions">96.2.7 Contract atan Functions</a></li>
+    </ul></li>
+    <li><a id="toc-References-1" href="maxima_95.html#References">96.3 References</a></li>
+  </ul></li>
+  <li><a id="toc-Error-and-warning-messages-1" href="maxima_96.html#Error-and-warning-messages">97 Error and warning messages</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Error-Messages-1" href="maxima_96.html#Error-Messages">97.1 Error Messages</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-apply_003a-no-such-_0022list_0022-element" href="maxima_96.html#No-such-list-element">97.1.1 apply: no such &quot;list&quot; element</a></li>
+      <li><a id="toc-argument-must-be-a-non_002datomic-expression-1" href="maxima_96.html#argument-must-be-a-non_002datomic-expression">97.1.2 argument must be a non-atomic expression</a></li>
+      <li><a id="toc-assignment_003a-cannot-assign-to-_003cfunction-name_003e" href="maxima_96.html#cannot-assign-to-function">97.1.3 assignment: cannot assign to <code class="code">&lt;function name&gt;</code></a></li>
+      <li><a id="toc-expt_003a-undefined_003a-0-to-a-negative-exponent_002e" href="maxima_96.html#g_t0-to-a-negative-exponent">97.1.4 expt: undefined:  0 to a negative exponent.</a></li>
+      <li><a id="toc-incorrect-syntax_003a-_002c-is-not-a-prefix-operator" href="maxima_96.html#Comma-is-not-a-prefix-operator">97.1.5 incorrect syntax: , is not a prefix operator</a></li>
+      <li><a id="toc-incorrect-syntax_003a-Illegal-use-of-delimiter-_0029" href="maxima_96.html#Illegal-use-of-delimiter">97.1.6 incorrect syntax: Illegal use of delimiter )</a></li>
+      <li><a id="toc-loadfile_003a-failed-to-load-_003cfilename_003e" href="maxima_96.html#loadfile-failed-to-load">97.1.7 loadfile: failed to load <code class="code">&lt;filename&gt;</code></a></li>
+      <li><a id="toc-makelist_003a-second-argument-must-evaluate-to-a-number" href="maxima_96.html#makelist-second-argument-must-evaluate-to-a-number">97.1.8 makelist: second argument must evaluate to a number</a></li>
+      <li><a id="toc-Only-symbols-can-be-bound-1" href="maxima_96.html#Only-symbols-can-be-bound">97.1.9 Only symbols can be bound</a></li>
+      <li><a id="toc-operators-of-arguments-must-all-be-the-same" href="maxima_96.html#Operators-of-arguments-must-all-be-the-same">97.1.10 operators of arguments must all be the same</a></li>
+      <li><a id="toc-Out-of-memory" href="maxima_96.html#out-of-memory">97.1.11 Out of memory</a></li>
+      <li><a id="toc-part_003a-fell-off-the-end" href="maxima_96.html#part-fell-off-the-end">97.1.12 part: fell off the end</a></li>
+      <li><a id="toc-undefined-variable-_0028draw-or-plot_0029" href="maxima_96.html#undefined-variable-during-plotting">97.1.13 undefined variable (draw or plot)</a></li>
+      <li><a id="toc-VTK-is-not-installed_002c-which-is-required-for-Scene" href="maxima_96.html#VTK-is-not-installed">97.1.14 VTK is not installed, which is required for Scene</a></li>
+    </ul></li>
+    <li><a id="toc-Warning-Messages-1" href="maxima_96.html#Warning-Messages">97.2 Warning Messages</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Encountered-undefined-variable-_003cx_003e-in-translation" href="maxima_96.html#undefined-variable-during-translation">97.2.1 Encountered undefined variable <code class="code">&lt;x&gt;</code> in translation</a></li>
+      <li><a id="toc-Rat_003a-replaced-_003cx_003e-by-_003cy_003e-_003d-_003cz_003e" href="maxima_96.html#replaced-x-by-y">97.2.2 Rat: replaced <code class="code">&lt;x&gt;</code> by <code class="code">&lt;y&gt; = &lt;z&gt;</code></a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Command_002dline-options-1" href="maxima_97.html#Command_002dline-options">98 Command-line options</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Command-line-options-1" href="maxima_97.html#Command-line-options">98.1 Command line options</a></li>
+  </ul></li>
+  <li><a id="toc-Function-and-Variable-Index-1" href="Function-and-Variable-Index.html" rel="index">Appendix A Function and Variable Index</a></li>
+  <li><a id="toc-Documentation-Categories-1" href="Documentation-Categories.html">Appendix B Documentation Categories</a></li>
+</ul>
+</div>
+</div>
+<div class="element-shortcontents" id="SEC_Shortcontents">
+<h2 class="shortcontents-heading">Short Table of Contents</h2>
+
+<div class="shortcontents">
+<ul class="toc-numbered-mark">
+<li><a id="stoc-Introduction-to-Maxima-1" href="#toc-Introduction-to-Maxima-1">1 Introduction to Maxima</a></li>
+<li><a id="stoc-Bug-Detection-and-Reporting-1" href="#toc-Bug-Detection-and-Reporting-1">2 Bug Detection and Reporting</a></li>
+<li><a id="stoc-Help-1" href="#toc-Help-1">3 Help</a></li>
+<li><a id="stoc-Command-Line-1" href="#toc-Command-Line-1">4 Command Line</a></li>
+<li><a id="stoc-Data-Types-and-Structures-1" href="#toc-Data-Types-and-Structures-1">5 Data Types and Structures</a></li>
+<li><a id="stoc-Expressions-1" href="#toc-Expressions-1">6 Expressions</a></li>
+<li><a id="stoc-Operators-1" href="#toc-Operators-1">7 Operators</a></li>
+<li><a id="stoc-Evaluation-1" href="#toc-Evaluation-1">8 Evaluation</a></li>
+<li><a id="stoc-Simplification-1" href="#toc-Simplification-1">9 Simplification</a></li>
+<li><a id="stoc-Elementary-Functions-1" href="#toc-Elementary-Functions-1">10 Elementary Functions</a></li>
+<li><a id="stoc-Maxima_0027s-Database-1" href="#toc-Maxima_0027s-Database-1">11 Maxima&rsquo;s Database</a></li>
+<li><a id="stoc-Plotting-1" href="#toc-Plotting-1">12 Plotting</a></li>
+<li><a id="stoc-File-Input-and-Output-1" href="#toc-File-Input-and-Output-1">13 File Input and Output</a></li>
+<li><a id="stoc-Polynomials-1" href="#toc-Polynomials-1">14 Polynomials</a></li>
+<li><a id="stoc-Special-Functions-1" href="#toc-Special-Functions-1">15 Special Functions</a></li>
+<li><a id="stoc-Elliptic-Functions-1" href="#toc-Elliptic-Functions-1">16 Elliptic Functions</a></li>
+<li><a id="stoc-Limits-1" href="#toc-Limits-1">17 Limits</a></li>
+<li><a id="stoc-Differentiation-1" href="#toc-Differentiation-1">18 Differentiation</a></li>
+<li><a id="stoc-Integration-1" href="#toc-Integration-1">19 Integration</a></li>
+<li><a id="stoc-Equations-1" href="#toc-Equations-1">20 Equations</a></li>
+<li><a id="stoc-Differential-Equations-1" href="#toc-Differential-Equations-1">21 Differential Equations</a></li>
+<li><a id="stoc-Numerical-1" href="#toc-Numerical-1">22 Numerical</a></li>
+<li><a id="stoc-Matrices-and-Linear-Algebra-1" href="#toc-Matrices-and-Linear-Algebra-1">23 Matrices and Linear Algebra</a></li>
+<li><a id="stoc-Affine-1" href="#toc-Affine-1">24 Affine</a></li>
+<li><a id="stoc-itensor-1" href="#toc-itensor-1">25 itensor</a></li>
+<li><a id="stoc-ctensor-1" href="#toc-ctensor-1">26 ctensor</a></li>
+<li><a id="stoc-atensor-1" href="#toc-atensor-1">27 atensor</a></li>
+<li><a id="stoc-Sums_002c-Products_002c-and-Series" href="#toc-Sums_002c-Products_002c-and-Series">28 Sums, Products, and Series</a></li>
+<li><a id="stoc-Number-Theory-1" href="#toc-Number-Theory-1">29 Number Theory</a></li>
+<li><a id="stoc-Symmetries-1" href="#toc-Symmetries-1">30 Symmetries</a></li>
+<li><a id="stoc-Groups-1" href="#toc-Groups-1">31 Groups</a></li>
+<li><a id="stoc-Runtime-Environment-1" href="#toc-Runtime-Environment-1">32 Runtime Environment</a></li>
+<li><a id="stoc-Miscellaneous-Options-1" href="#toc-Miscellaneous-Options-1">33 Miscellaneous Options</a></li>
+<li><a id="stoc-Rules-and-Patterns-1" href="#toc-Rules-and-Patterns-1">34 Rules and Patterns</a></li>
+<li><a id="stoc-Sets-1" href="#toc-Sets-1">35 Sets</a></li>
+<li><a id="stoc-Function-Definition-1" href="#toc-Function-Definition-1">36 Function Definition</a></li>
+<li><a id="stoc-Program-Flow-1" href="#toc-Program-Flow-1">37 Program Flow</a></li>
+<li><a id="stoc-Debugging-1" href="#toc-Debugging-1">38 Debugging</a></li>
+<li><a id="stoc-alt_002ddisplay" href="#toc-alt_002ddisplay">39 alt-display</a></li>
+<li><a id="stoc-asympa-1" href="#toc-asympa-1">40 asympa</a></li>
+<li><a id="stoc-augmented_005flagrangian" href="#toc-augmented_005flagrangian">41 augmented_lagrangian</a></li>
+<li><a id="stoc-Bernstein" href="#toc-Bernstein">42 Bernstein</a></li>
+<li><a id="stoc-bitwise" href="#toc-bitwise">43 bitwise</a></li>
+<li><a id="stoc-bode" href="#toc-bode">44 bode</a></li>
+<li><a id="stoc-celine" href="#toc-celine">45 celine</a></li>
+<li><a id="stoc-clebsch_005fgordan-1" href="#toc-clebsch_005fgordan-1">46 clebsch_gordan</a></li>
+<li><a id="stoc-cobyla" href="#toc-cobyla">47 cobyla</a></li>
+<li><a id="stoc-combinatorics" href="#toc-combinatorics">48 combinatorics</a></li>
+<li><a id="stoc-contrib_005fode-1" href="#toc-contrib_005fode-1">49 contrib_ode</a></li>
+<li><a id="stoc-descriptive" href="#toc-descriptive">50 descriptive</a></li>
+<li><a id="stoc-diag" href="#toc-diag">51 diag</a></li>
+<li><a id="stoc-distrib" href="#toc-distrib">52 distrib</a></li>
+<li><a id="stoc-draw-1" href="#toc-draw-1">53 draw</a></li>
+<li><a id="stoc-drawdf-1" href="#toc-drawdf-1">54 drawdf</a></li>
+<li><a id="stoc-dynamics" href="#toc-dynamics">55 dynamics</a></li>
+<li><a id="stoc-engineering_002dformat" href="#toc-engineering_002dformat">56 engineering-format</a></li>
+<li><a id="stoc-ezunits" href="#toc-ezunits">57 ezunits</a></li>
+<li><a id="stoc-f90" href="#toc-f90">58 f90</a></li>
+<li><a id="stoc-finance" href="#toc-finance">59 finance</a></li>
+<li><a id="stoc-fractals" href="#toc-fractals">60 fractals</a></li>
+<li><a id="stoc-Gentran" href="#toc-Gentran">61 Gentran</a></li>
+<li><a id="stoc-ggf-1" href="#toc-ggf-1">62 ggf</a></li>
+<li><a id="stoc-graphs" href="#toc-graphs">63 graphs</a></li>
+<li><a id="stoc-grobner" href="#toc-grobner">64 grobner</a></li>
+<li><a id="stoc-hompack" href="#toc-hompack">65 hompack</a></li>
+<li><a id="stoc-impdiff" href="#toc-impdiff">66 impdiff</a></li>
+<li><a id="stoc-interpol" href="#toc-interpol">67 interpol</a></li>
+<li><a id="stoc-lapack" href="#toc-lapack">68 lapack</a></li>
+<li><a id="stoc-lbfgs" href="#toc-lbfgs">69 lbfgs</a></li>
+<li><a id="stoc-lindstedt" href="#toc-lindstedt">70 lindstedt</a></li>
+<li><a id="stoc-linearalgebra" href="#toc-linearalgebra">71 linearalgebra</a></li>
+<li><a id="stoc-lsquares" href="#toc-lsquares">72 lsquares</a></li>
+<li><a id="stoc-minpack" href="#toc-minpack">73 minpack</a></li>
+<li><a id="stoc-makeOrders" href="#toc-makeOrders">74 makeOrders</a></li>
+<li><a id="stoc-mnewton-1" href="#toc-mnewton-1">75 mnewton</a></li>
+<li><a id="stoc-numericalio-1" href="#toc-numericalio-1">76 numericalio</a></li>
+<li><a id="stoc-odepack" href="#toc-odepack">77 odepack</a></li>
+<li><a id="stoc-operatingsystem" href="#toc-operatingsystem">78 operatingsystem</a></li>
+<li><a id="stoc-opsubst" href="#toc-opsubst">79 opsubst</a></li>
+<li><a id="stoc-orthopoly" href="#toc-orthopoly">80 orthopoly</a></li>
+<li><a id="stoc-pslq" href="#toc-pslq">81 pslq</a></li>
+<li><a id="stoc-pytranslate-1" href="#toc-pytranslate-1">82 pytranslate</a></li>
+<li><a id="stoc-quantum_005fcomputing_002dpkg-1" href="#toc-quantum_005fcomputing_002dpkg-1">83 quantum_computing-pkg</a></li>
+<li><a id="stoc-ratpow" href="#toc-ratpow">84 ratpow</a></li>
+<li><a id="stoc-romberg" href="#toc-romberg">85 romberg</a></li>
+<li><a id="stoc-simplex" href="#toc-simplex">86 simplex</a></li>
+<li><a id="stoc-simplification" href="#toc-simplification">87 simplification</a></li>
+<li><a id="stoc-solve_005frec-1" href="#toc-solve_005frec-1">88 solve_rec</a></li>
+<li><a id="stoc-stats" href="#toc-stats">89 stats</a></li>
+<li><a id="stoc-stirling-1" href="#toc-stirling-1">90 stirling</a></li>
+<li><a id="stoc-stringproc" href="#toc-stringproc">91 stringproc</a></li>
+<li><a id="stoc-to_005fpoly_005fsolve" href="#toc-to_005fpoly_005fsolve">92 to_poly_solve</a></li>
+<li><a id="stoc-unit" href="#toc-unit">93 unit</a></li>
+<li><a id="stoc-wrstcse" href="#toc-wrstcse">94 wrstcse</a></li>
+<li><a id="stoc-zeilberger" href="#toc-zeilberger">95 zeilberger</a></li>
+<li><a id="stoc-trigtools" href="#toc-trigtools">96 trigtools</a></li>
+<li><a id="stoc-Error-and-warning-messages-1" href="#toc-Error-and-warning-messages-1">97 Error and warning messages</a></li>
+<li><a id="stoc-Command_002dline-options-1" href="#toc-Command_002dline-options-1">98 Command-line options</a></li>
+<li><a id="stoc-Function-and-Variable-Index-1" href="#toc-Function-and-Variable-Index-1" rel="index">Appendix A Function and Variable Index</a></li>
+<li><a id="stoc-Documentation-Categories-1" href="#toc-Documentation-Categories-1">Appendix B Documentation Categories</a></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima.html" accesskey="n" rel="next">Introduction to Maxima</a>, Previous: <a href="../dir_html/index.html" accesskey="p" rel="prev">(dir)</a>, Up: <a href="../dir_html/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

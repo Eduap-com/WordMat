@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Package functs</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Package functs">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Package functs">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_356.html#simplification_002dpkg" rel="up" title="simplification-pkg">
+<link href="maxima_361.html#Package-ineq" rel="next" title="Package ineq">
+<link href="maxima_359.html#Package-facexp" rel="previous" title="Package facexp">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Package-functs"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_361.html#Package-ineq" accesskey="n" rel="next">Package ineq</a>, Previous: <a href="maxima_359.html#Package-facexp" accesskey="p" rel="previous">Package facexp</a>, Up: <a href="maxima_356.html#simplification_002dpkg" accesskey="u" rel="up">simplification-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Package-functs-1"></a>
+<h3 class="section">87.4 Package functs</h3>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;</div>
+<a name="rempart"></a><a name="Item_003a-simplifications_002fdeffn_002frempart"></a><dl>
+<dt><a name="index-rempart"></a>Function: <strong>rempart</strong> <em>(<var>expr</var>, <var>n</var>)</em></dt>
+<dd><p>Removes part <var>n</var> from the expression <var>expr</var>.
+</p>
+<p>If <var>n</var> is a list of the form <code>[<var>l</var>, <var>m</var>]</code>
+then parts <var>l</var> thru <var>m</var> are removed.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="wronskian"></a><a name="Item_003a-simplifications_002fdeffn_002fwronskian"></a><dl>
+<dt><a name="index-wronskian"></a>Function: <strong>wronskian</strong> <em>([<var>f_1</var>, ..., <var>f_n</var>], <var>x</var>)</em></dt>
+<dd><p>Returns the Wronskian matrix of the list of expressions [<var>f_1</var>, ..., <var>f_n</var>] in the variable <var>x</var>.
+The determinant of the Wronskian matrix is the Wronskian determinant of the list of expressions.
+</p>
+<p>To use <code>wronskian</code>, first <code>load(&quot;functs&quot;)</code>. Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;functs&quot;)$
+</pre><pre class="example">(%i2) wronskian([f(x), g(x)],x);
+                    [   f(x)       g(x)    ]
+                    [                      ]
+(%o2)               [ d          d         ]
+                    [ -- (f(x))  -- (g(x)) ]
+                    [ dx         dx        ]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="tracematrix"></a><a name="Item_003a-simplifications_002fdeffn_002ftracematrix"></a><dl>
+<dt><a name="index-tracematrix"></a>Function: <strong>tracematrix</strong> <em>(<var>M</var>)</em></dt>
+<dd><p>Returns the trace (sum of the diagonal elements) of matrix <var>M</var>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Matrices">Matrices</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-simplifications_002fdeffn_002frational"></a><dl>
+<dt><a name="index-rational"></a>Function: <strong>rational</strong> <em>(<var>z</var>)</em></dt>
+<dd><p>Multiplies numerator and denominator of <var>z</var> by the complex conjugate of denominator,
+thus rationalizing the denominator.
+Returns canonical rational expression (CRE) form if given one, else returns general form.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+
+
+<a name="nonzeroandfreeof"></a><a name="Item_003a-simplifications_002fdeffn_002fnonzeroandfreeof"></a><dl>
+<dt><a name="index-nonzeroandfreeof"></a>Function: <strong>nonzeroandfreeof</strong> <em>(<var>x</var>, <var>expr</var>)</em></dt>
+<dd><p>Returns <code>true</code> if <var>expr</var> is nonzero and <code>freeof (<var>x</var>, <var>expr</var>)</code> returns <code>true</code>.
+Returns <code>false</code> otherwise.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-simplifications_002fdeffn_002flinear"></a><dl>
+<dt><a name="index-linear"></a>Function: <strong>linear</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd><p>When <var>expr</var> is an expression of the form <code><var>a</var>*<var>x</var> + <var>b</var></code>
+where <var>a</var> is nonzero, and <var>a</var> and <var>b</var> are free of <var>x</var>,
+<code>linear</code> returns a list of three equations, one for each of the three formal
+variables <var>b</var>, <var>a</var>, and <var>x</var>. Otherwise, <code>linear</code> returns <code>false</code>.
+</p>
+<p><code>load(&quot;antid&quot;)</code> loads this function.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;antid&quot;);
+(%o1)  /maxima/share/integration/antid.mac
+</pre><pre class="example">(%i2) linear ((1 - w)*(1 - x)*z, z);
+(%o2) [bargumentb = 0, aargumenta = (w - 1) x - w + 1, 
+                                                  xargumentx = z]
+</pre><pre class="example">(%i3) linear (cos(u - v) + cos(u + v), u);
+(%o3)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-antid">Package antid</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="gcdivide"></a><a name="Item_003a-simplifications_002fdeffn_002fgcdivide"></a><dl>
+<dt><a name="index-gcdivide"></a>Function: <strong>gcdivide</strong> <em>(<var>p</var>, <var>q</var>)</em></dt>
+<dd>
+<p>When the option variable <code>takegcd</code> is <code>true</code> which is the default,
+<code>gcdivide</code> divides the polynomials <var>p</var> and <var>q</var> by their greatest
+common divisor and returns the ratio of the results.  <code>gcdivde</code> calls the
+function <code><a href="maxima_80.html#ezgcd">ezgcd</a></code> to divide the polynomials by the greatest common divisor.
+</p>
+<p>When <code>takegcd</code> is <code>false</code>, <code>gcdivide</code> returns the ratio
+<code><var>p</var>/<var>q</var></code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<p>See also <code><a href="maxima_80.html#ezgcd">ezgcd</a></code>, <code><a href="maxima_80.html#gcd">gcd</a></code>, <code><a href="maxima_80.html#gcdex">gcdex</a></code>, and
+<code><a href="maxima_290.html#poly_005fgcd">poly_gcd</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;functs&quot;)$
+
+(%i2) p1:6*x^3+19*x^2+19*x+6; 
+                        3       2
+(%o2)                6 x  + 19 x  + 19 x + 6
+(%i3) p2:6*x^5+13*x^4+12*x^3+13*x^2+6*x;
+                  5       4       3       2
+(%o3)          6 x  + 13 x  + 12 x  + 13 x  + 6 x
+(%i4) gcdivide(p1, p2);
+                             x + 1
+(%o4)                        ------
+                              3
+                             x  + x
+(%i5) takegcd:false;
+(%o5)                         false
+(%i6) gcdivide(p1, p2);
+                       3       2
+                    6 x  + 19 x  + 19 x + 6
+(%o6)          ----------------------------------
+                  5       4       3       2
+               6 x  + 13 x  + 12 x  + 13 x  + 6 x
+(%i7) ratsimp(%);
+                             x + 1
+(%o7)                        ------
+                              3
+                             x  + x
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Polynomials">Polynomials</a>
+&middot;</div></dd></dl>
+
+
+<a name="arithmetic"></a><a name="Item_003a-simplifications_002fdeffn_002farithmetic"></a><dl>
+<dt><a name="index-arithmetic"></a>Function: <strong>arithmetic</strong> <em>(<var>a</var>, <var>d</var>, <var>n</var>)</em></dt>
+<dd><p>Returns the <var>n</var>-th term of the arithmetic series
+<code><var>a</var>, <var>a</var> + <var>d</var>, <var>a</var> + 2*<var>d</var>, ..., <var>a</var> + (<var>n</var> - 1)*<var>d</var></code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div>
+</dd></dl>
+
+<a name="geometric"></a><a name="Item_003a-simplifications_002fdeffn_002fgeometric"></a><dl>
+<dt><a name="index-geometric"></a>Function: <strong>geometric</strong> <em>(<var>a</var>, <var>r</var>, <var>n</var>)</em></dt>
+<dd><p>Returns the <var>n</var>-th term of the geometric series
+<code><var>a</var>, <var>a</var>*<var>r</var>, <var>a</var>*<var>r</var>^2, ..., <var>a</var>*<var>r</var>^(<var>n</var> - 1)</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div>
+</dd></dl>
+
+<a name="harmonic"></a><a name="Item_003a-simplifications_002fdeffn_002fharmonic"></a><dl>
+<dt><a name="index-harmonic"></a>Function: <strong>harmonic</strong> <em>(<var>a</var>, <var>b</var>, <var>c</var>, <var>n</var>)</em></dt>
+<dd><p>Returns the <var>n</var>-th term of the harmonic series
+<code><var>a</var>/<var>b</var>, <var>a</var>/(<var>b</var> + <var>c</var>), <var>a</var>/(<var>b</var> + 2*<var>c</var>), ..., <var>a</var>/(<var>b</var> + (<var>n</var> - 1)*<var>c</var>)</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div>
+</dd></dl>
+
+<a name="arithsum"></a><a name="Item_003a-simplifications_002fdeffn_002farithsum"></a><dl>
+<dt><a name="index-arithsum"></a>Function: <strong>arithsum</strong> <em>(<var>a</var>, <var>d</var>, <var>n</var>)</em></dt>
+<dd><p>Returns the sum of the arithmetic series from 1 to <var>n</var>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div>
+</dd></dl>
+
+<a name="geosum"></a><a name="Item_003a-simplifications_002fdeffn_002fgeosum"></a><dl>
+<dt><a name="index-geosum"></a>Function: <strong>geosum</strong> <em>(<var>a</var>, <var>r</var>, <var>n</var>)</em></dt>
+<dd><p>Returns the sum of the geometric series from 1 to <var>n</var>.  If <var>n</var> is
+infinity (<code>inf</code>) then a sum is finite only if the absolute value
+of <var>r</var> is less than 1.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div>
+</dd></dl>
+
+<a name="gaussprob"></a><a name="Item_003a-simplifications_002fdeffn_002fgaussprob"></a><dl>
+<dt><a name="index-gaussprob"></a>Function: <strong>gaussprob</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>Returns the Gaussian probability function
+<code>%e^(-<var>x</var>^2/2) / sqrt(2*%pi)</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="gd"></a><a name="Item_003a-simplifications_002fdeffn_002fgd"></a><dl>
+<dt><a name="index-gd"></a>Function: <strong>gd</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>Returns the Gudermannian function
+<code>2*atan(%e^x)-%pi/2</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="agd"></a><a name="Item_003a-simplifications_002fdeffn_002fagd"></a><dl>
+<dt><a name="index-agd"></a>Function: <strong>agd</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>Returns the inverse Gudermannian function
+<code>log (tan (%pi/4 + x/2))</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="vers"></a><a name="Item_003a-simplifications_002fdeffn_002fvers"></a><dl>
+<dt><a name="index-vers"></a>Function: <strong>vers</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>Returns the versed sine <code>1 - cos (x)</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="covers"></a><a name="Item_003a-simplifications_002fdeffn_002fcovers"></a><dl>
+<dt><a name="index-covers"></a>Function: <strong>covers</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>Returns the coversed sine <code>1 - sin (<var>x</var>)</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="exsec"></a><a name="Item_003a-simplifications_002fdeffn_002fexsec"></a><dl>
+<dt><a name="index-exsec"></a>Function: <strong>exsec</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>Returns the exsecant <code>sec (<var>x</var>) - 1</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="hav"></a><a name="Item_003a-simplifications_002fdeffn_002fhav"></a><dl>
+<dt><a name="index-hav"></a>Function: <strong>hav</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>Returns the haversine <code>(1 - cos(x))/2</code>.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="combination"></a><a name="Item_003a-simplifications_002fdeffn_002fcombination"></a><dl>
+<dt><a name="index-combination"></a>Function: <strong>combination</strong> <em>(<var>n</var>, <var>r</var>)</em></dt>
+<dd><p>Returns the number of combinations of <var>n</var> objects
+taken <var>r</var> at a time.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="permutation"></a><a name="Item_003a-simplifications_002fdeffn_002fpermutation"></a><dl>
+<dt><a name="index-permutation"></a>Function: <strong>permutation</strong> <em>(<var>n</var>, <var>r</var>)</em></dt>
+<dd><p>Returns the number of permutations of <var>r</var> objects
+selected from a set of <var>n</var> objects.
+</p>
+<p>To use this function write first <code>load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-functs">Package functs</a>
+&middot;<a href="maxima_424.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-simplifications_002fnode_002fPackage-ineq"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_361.html#Package-ineq" accesskey="n" rel="next">Package ineq</a>, Previous: <a href="maxima_359.html#Package-facexp" accesskey="p" rel="previous">Package facexp</a>, Up: <a href="maxima_356.html#simplification_002dpkg" accesskey="u" rel="up">simplification-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

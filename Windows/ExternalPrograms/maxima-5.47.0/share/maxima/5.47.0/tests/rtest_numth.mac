@@ -1,0 +1,811 @@
+(kill(all), 0);
+0;
+
+/* (Z/pZ)* p prime */
+(p : 2^61-1, fs : ifactors(p - 1), g : zn_primroot(p, fs));
+37;
+
+zn_primroot_p(power_mod(g, 7, p), p, fs);
+false;
+
+zn_primroot_p(power_mod(g, 17, p), p, fs);
+true;
+
+is(zn_order(g, p, fs) = totient(p));
+true;
+
+is(zn_order(power_mod(g, 7, p), p, fs) = zn_order(g, p, fs));
+false;
+
+is(zn_order(power_mod(g, 17, p), p, fs) = zn_order(g, p, fs));
+true;
+
+(a : power_mod(g, 1234567890, p), zn_log(a, g, p, fs));
+1234567890;
+
+(g : 3, ord_3 : zn_order(3,p,fs), fs_ord_3 : ifactors(ord_3), (p-1)/ord_3);
+9;
+
+(a : power_mod(g, 1234567890, p), zn_log(a, g, p, fs));
+1234567890;
+
+/* (Z/nZ)* n composite */
+n : 22;
+22;
+
+g : zn_primroot(n);
+7;
+
+zn_primroot_p(power_mod(g, 2, n), n);
+false;
+
+zn_primroot_p(power_mod(g, 3, n), n);
+true;
+
+zn_order(power_mod(g, 2, n), n);
+5;
+
+zn_order(g, n);
+10;
+
+a : power_mod(g, 8, n);
+9;
+
+zn_log(a, g, n);
+8;
+
+(g : 5, a : power_mod(g, 4, n), zn_log(a, g, n));
+4;
+
+/* CRT */
+mods : [1009, 1013, 1019];
+[1009, 1013, 1019];
+
+x : 374599943;
+374599943;
+
+rems : map(lambda([z], mod(x, z)), mods);
+[621, 647, 258];
+
+chinese(rems, mods);
+374599943;
+
+(remvalue(p,fs,g,a,n,mods,x,rems), 0);
+0;
+
+(kill(all), modulus_copy : modulus, modulus : false, 
+gf_coeff_limit_copy : gf_coeff_limit, gf_coeff_limit : 256, 0); 
+0;
+
+/* Tests adapted from contrib/gf/gf_test.mac */
+
+( gf_set_data(123127, x^5+2*x+1), gf_infolist() );
+[123127,x^5+2*x+1,x+4,28298700309333316062584407,28298700309333316062584406];
+
+( gf_set_data(7, x^10+5*x^2+x+5), gf_infolist() );
+[7,x^10+5*x^2+x+5,x,282475249,282475248];
+
+gf_exp(gf_primitive(), gf_index(x^9+3*x^6+x^5+2*x^2+6));
+x^9+3*x^6+x^5+2*x^2+6;
+
+gf_minimal_poly(x^9+3*x^6+x^5+2*x^2+6);
+z^10+5*z^9+6*z^8+5*z^6+3*z^5+4*z^4+z^3+2*z^2+4*z+3;
+
+( gf_set_data(19), gf_infolist() );
+[19,x,2,19,18];
+
+gf_exp(gf_primitive(), gf_index(17));
+17;
+
+( gf_set_data(10000000019), gf_infolist() );
+[10000000019,x,2,10000000019,10000000018];
+
+gf_exp(gf_primitive() ,gf_index(3));
+3;
+
+( gf_set_data(32717, x^11+x^5+x^2+x+1), gf_infolist() );
+[32717,x^11+x^5+x^2+x+1,x+2,
+        45973568360012658888852552517205008541393124962933,
+        45973568360012658888852552517205008541393124962932];
+
+( gf_set_data(211, x^17+2*x^2+1), gf_infolist() );
+[211,x^17+2*x^2+1,x+6,3256879871129217157345956711624826081171,
+        3256879871129217157345956711624826081170];
+
+( gf_set_data(2, x^20+x^3+x^2+x+1), gf_infolist() );
+[2,x^20+x^3+x^2+x+1,x^2+x,1048576,1048575];
+
+gf_exp(gf_primitive(), gf_index(x^10+1));
+x^10+1;
+
+gf_minimal_poly(x^10+1);
+z^20+z^13+z^12+z^5+z^4+z^3+1;
+
+( gf_set_data(3, x^91+x^35+x+1), gf_infolist() );
+[3,x^91+x^35+x+1,x,26183890704263137277674192438430182020124347,
+        26183890704263137277674192438430182020124346];
+
+/* Tests adapted from contrib/gf/gf_hard_test.mac */
+
+( gf_set_data(7, x^61+x^4+1), gf_infolist() );
+[7,x^61+x^4+1,x+3,3556153025177363557255317383565515512407041673852007,
+        3556153025177363557255317383565515512407041673852006];
+
+( gf_set_data(197, x^24-x^8+2), gf_infolist() );
+[197,x^24+196*x^8+2,x+19,
+        11673186598630578538556565100133681446610566511878526881,
+        11673186598630578538556565100133681446610566511878526880];
+
+( gf_set_data(5, x^84+x^41+x^2+1), gf_infolist() );
+[5,x^84+x^41+x^2+1,x^2+1,
+        51698788284564229679463043254372678347863256931304931640625,
+        51698788284564229679463043254372678347863256931304931640624];
+
+( gf_set_data(2, x^102+x^29+1), gf_infolist() );
+[2,x^102+x^29+1,x+1,5070602400912917605986812821504,
+        5070602400912917605986812821503];
+
+( gf_set_data(5, x^61+x^15+1), gf_infolist() );
+[5,x^61+x^15+1,x+4,4336808689942017736029811203479766845703125,
+        4336808689942017736029811203479766845703124];
+
+( gf_set_data(8796519617, x^8+3*x^6+x+1), gf_infolist() );
+[8796519617,x^8+3*x^6+x+1,x+9,
+        35849822058178726610670969179311817327626124038937602048832281182665519944803841,
+        35849822058178726610670969179311817327626124038937602048832281182665519944803840];
+
+( gf_set_data(3, x^120+x^4-1), gf_infolist() );
+[3,x^120+x^4+2,x^3+x^2+2,
+        1797010299914431210413179829509605039731475627537851106401,
+        1797010299914431210413179829509605039731475627537851106400];
+
+( gf_set_data(18659817111137), gf_infolist() );
+[18659817111137,x,3,18659817111137,18659817111136];
+
+gf_log(7);
+15962290024269;
+
+/* Examples adapted from contrib/gf/gf_manual.pdf */
+
+( gf_set_data(2, x^4+x+1), gf_infolist() );
+[2,x^4+x+1,x,16,15];
+
+(a : x^3+x^2+1, b : x^3+x+1, 0);
+0;
+
+gf_add(a, b);
+x^2+x;
+
+gf_mult(a, b);
+x^2+x;
+
+gf_inv(b);
+x^2+1;
+
+gf_div(a, b);
+x^3+x^2;
+
+gf_mult(a, gf_inv(b));
+x^3+x^2;
+
+gf_exp(a, 10);
+x^2+x+1;
+
+gf_exp(a, 15);
+1;
+
+gf_primitive();
+x;
+
+gf_index(a);
+13;
+
+ev(a = gf_exp(x, 13)), pred;
+true;
+
+(gf_make_logs(), 0);
+0;
+
+gf_logs[10];
+9;
+
+gf_n2p(10);
+x^3+x;
+
+gf_index(x^3+x);
+9;
+
+(a : x^2+x+1, b : x^3+x^2+1, 0);
+0;
+
+gf_log(a, b);
+10;
+
+gf_primitive_p(x^3+x+1);
+true;
+
+gf_primitive_p(x^2+x);
+false;
+
+gf_order(x^2+x);
+3;
+
+gf_order(x^3+x+1);
+15;
+
+(a : x^3+x+1, 0);
+0;
+
+p : gf_minimal_poly(a);
+z^4+z^3+1;
+
+p : subst(a, z, p);
+(x^3+x+1)^4+(x^3+x+1)^3+1;
+
+gf_eval(p);
+0;
+
+( gf_set_data(7, x^4+3*x^3+5*x^2+6*x+2), gf_infolist() );
+[7,x^4+3*x^3+5*x^2+6*x+2,x+4,2401,2400];
+
+(char : 7, exp : 4, g : 3*x^3+3*x^2+6, 0);
+0;
+
+gf_primitive_p(g);
+true;
+
+a : makelist(gf_log(x+i, g),i, 0, 6);
+[1028,1935,2054,1008,379,1780,223];
+
+d : 1702;
+1702;
+
+ord : char^exp - 1;
+2400;
+
+c : makelist(mod(a[i] + d, ord), i, 1, 7);
+[330,1237,1356,310,2081,1082,1925];
+
+m : [1,0,1,1,0,0,1];
+[1,0,1,1,0,0,1];
+
+c : mod(sum(m[i] * c[i], i, 1, 7), ord);
+1521;
+
+r : mod(c - exp*d, ord);
+1913;
+
+u : gf_exp(g, r);
+x^3+3*x^2+2*x+5;
+
+s : u + gf_reduction();
+x^4+4*x^3+8*x^2+8*x+7;
+
+gf_factor(s);
+x*(x+2)*(x+3)*(x+6);
+
+( gf_set_data(2, x^4+x+1), gf_infolist() );
+[2,x^4+x+1,x,16,15];
+
+(m : matrix([x^3+x^2+x, x^3, x^3+x^2], [x^2, x^3+x^2+1, x^3+x+1], [x^2+x, x^3+x^2+x+1, x^2]), 0);
+0;
+
+mi : gf_invert_by_lu(m);
+matrix([x^2, x^3+x^2+x+1, x^3], [x^3+x+1, x^2+x, x^3+1], [x, 0, x^3+x+1]);
+
+gf_matmult(m, mi);
+matrix([1,0,0], [0,1,0], [0,0,1]);
+
+( gf_set_data(2, x^10+x^3+1), gf_infolist() );
+[2,x^10+x^3+1,x,1024,1023];
+
+elem : gf_normal();
+x^7;
+
+m : gf_normal_basis(elem);
+matrix([0,0,0,1,1,0,1,1,0,0],[0,0,1,1,0,1,1,0,0,0],
+       [1,1,1,1,1,1,1,1,1,1],[0,0,0,1,1,0,0,0,0,0],
+       [0,0,0,0,1,1,0,0,0,0],[0,1,1,1,0,1,1,1,0,0],
+       [0,0,0,0,0,1,1,0,0,0],[0,0,0,0,1,0,1,0,1,1],
+       [0,0,0,0,1,1,0,1,1,0],[0,0,0,0,0,1,0,0,0,0]);
+
+gf_normal_basis_rep(elem, mi : gf_invert_by_lu(m));
+[1,0,0,0,0,0,0,0,0,0];
+
+(a : x^9+x^7+x^6+x^5+x^3+x^2+x, 0);
+0;
+
+gf_normal_basis_rep(a, mi);
+[1,1,1,0,1,0,1,1,1,0];
+
+gf_normal_basis_rep(gf_exp(a, 2), mi);
+[0,1,1,1,0,1,0,1,1,1];
+
+( gf_set_data(2, x^20+x^3+1), gf_infolist() );
+[2,x^20+x^3+1,x,1048576,1048575];
+
+(a : x^15+x^5+1, 0);
+0;
+
+gf_index(a);
+720548;
+
+gf_exp(a, 3^12);
+x^17+x^16+x^13+x^12+x^11+x^3+x^2+x;
+
+/* some new tests */
+
+( gf_set_data(2, x^12+x^3+1), gf_infolist() );
+[2,x^12+x^3+1,x+1,4096,4095];
+
+gf_log(gf_exp(x+1, 1234));
+1234;
+
+( gf_set_data(8796519617, x^2+3), gf_infolist() );
+[8796519617,x^2+3,x+9,77378757372265826689,77378757372265826688];
+
+gf_log(gf_exp(x+9, 1234567890));
+1234567890;
+
+( gf_set_data(2, 4), gf_infolist() );
+[2,x^4+x+1,x,16,15];
+
+( prod : (z - 0), 
+  for i:1 thru 15 do prod : prod*(z - gf_exp(x,i)), 
+  block([modulus:2], polymod(remainder(prod, x^4+x+1))) );
+z^16+z;
+
+fs : gf_factor(x^16-x, 2);
+x*(x+1)*(x^2+x+1)*(x^4+x+1)*(x^4+x^3+1)*(x^4+x^3+x^2+x+1);
+
+(gf_minimal_set(2, x^17), 0);
+0;
+
+apply(gf_mult, args(fs));
+x^16+x;
+
+( gf_set_data(13, x^7+3*x+2), gf_infolist() );
+[13,x^7+3*x+2,x,62748517,62748516];
+
+p : 9*x^6+12*x^5+5*x^4+x^3+8*x^2+2*x;
+9*x^6+12*x^5+5*x^4+x^3+8*x^2+2*x;
+
+gf_normal_p(p);
+true;
+
+m : gf_normal_basis(p);
+matrix([9,7,10,4,4,2,3],[12,1,8,5,9,2,2],[5,12,8,9,10,3,5],
+   [1,5,6,8,11,8,0],[8,4,11,6,12,6,5],[2,2,12,11,1,5,6],[0,6,10,2,2,8,5]);
+
+gf_normal_basis_rep(p, mi : gf_invert_by_lu(m));
+[1,0,0,0,0,0,0];
+
+coeffs : gf_normal_basis_rep(x^2+4*x+7, mi);
+[8,8,7,2,5,1,2];
+
+( basis : map(gf_l2p, args(transpose(m))), 
+  apply(gf_add, map(gf_mult, coeffs, basis)) );
+x^2+4*x+7;
+
+( gf_set_data(7, 4), gf_infolist() );
+[7,x^4+x+1,x+5,2401,2400];
+
+( gf_set_data(7, x^4+x^2+3), gf_infolist() );
+[7,x^4+x^2+3,x+1,2401,2400];
+
+( gf_set_data(2, x^8+1), gf_infolist() );
+[2,x^8+1,unknown,256,128];
+
+gf_order();
+128;
+
+gf_inv(x);
+x^7;
+
+gf_inv(x+1);
+false;
+
+gf_gcdex(x+1, gf_reduction());
+[1, 0, x+1];
+
+( gf_set_data(3, x^8+1), gf_infolist() );
+[3,x^8+1,unknown,6561,6400];
+
+gf_order();
+6400;
+
+( gf_set_data(3, x^8+x+1), gf_infolist() );
+[3,x^8+x+1,unknown,6561,4368];
+
+gf_order();
+4368;
+
+( gf_set_data(13, x^8+2), gf_infolist() );
+[13,x^8+2,x+2,815730721,815730720];
+
+(a : x^7+x+1, b : x^3+3*x^2+9*x+7, 0);
+0;
+
+gf_gcd(a, b);
+x^2+2*x+7;
+
+gf_gcdex(a, b);
+[7, 6*x^4+8*x^3+3*x, x^2+2*x+7];
+
+gf_primitive_poly(7, 8);
+x^8+x+3;
+
+gf_primitive_poly_p(x^8+x+3, 7);
+true;
+
+gf_primitive_poly_p(gf_irreducible(7, 8), 7);
+true;
+
+gf_primitive_poly(2, 8);
+x^8+x^4+x^3+x^2+1;
+
+gf_primitive_poly_p(x^8+x^4+x^3+x^2+1, 2);
+true;
+
+gf_primitive_poly_p(gf_irreducible(2, 8), 2);
+false;
+
+block([count:0, end:2*3^4], 
+  for n:3^4 thru end do 
+    if gf_primitive_poly_p(p:gf_n2p(n, 3), 3) then count:count+1, 
+  count);
+8;
+
+/* lu decomposition: */
+
+( gf_set_data(2, x^8+x^4+x^3+x+1), gf_infolist() );
+[2,x^8+x^4+x^3+x+1,x+1,256,255];
+
+m : matrix([2,3,1,1], [1,2,3,1], [1,1,2,3], [3,1,1,2]);
+matrix([2,3,1,1], [1,2,3,1], [1,1,2,3], [3,1,1,2]);
+
+mp : matrixmap(gf_n2p, m);
+matrix([x,x+1,1,1], [1,x,x+1,1], [1,1,x,x+1], [x+1,1,1,x]);
+
+mpi : gf_invert_by_lu(mp);
+matrix([x^3+x^2+x, x^3+x+1,   x^3+x^2+1, x^3+1    ],
+       [x^3+1,     x^3+x^2+x, x^3+x+1,   x^3+x^2+1],
+       [x^3+x^2+1, x^3+1,     x^3+x^2+x, x^3+x+1  ],
+       [x^3+x+1,   x^3+x^2+1, x^3+1,     x^3+x^2+x]);
+
+mi : matrixmap(gf_p2n, mpi);
+matrix([14,11,13,9], [9,14,11,13], [13,9,14,11], [11,13,9,14]);
+
+( ef_set_data(x), ef_infolist() );
+[x,3,256,255];
+
+is( ef_invert_by_lu(m) = mi );
+true;
+
+ef_unset();
+true;
+
+( p : 17, n : 4, gf_set_data(p,n), 0);
+0;
+
+(elem : 6*x^3+13*x^2+4*x+2, gf_normal_p(elem));
+true;
+
+m : gf_normal_basis(elem);
+matrix([6,7,11,10],[13,4,13,4],[4,1,13,16],[2,2,2,2]);
+
+mi : gf_invert_by_lu(m);
+matrix([5,1,16,15],[14,16,13,15],[12,1,1,15],[3,16,4,15]);
+
+is(gf_matmult(m, mi) = diagmatrix(n, 1));
+true;
+
+is(zn_invert_by_lu(m, p) = mi);
+true;
+
+mod(determinant(m), p);
+3;
+
+mod(determinant_by_lu(m, 'generalring), p);
+3;
+
+gf_determinant(m);
+3;
+
+zn_determinant(m, p);
+3;
+
+/* extension fields: AES mix columns operation */
+
+( gf_set_data(2, 8), gf_infolist() );
+[2,x^8+x^4+x^3+x+1,x+1,256,255];
+
+(ef_minimal_set(x^4+1), 0);
+0;
+
+ef_irreducible_p(x^4+1);
+false;
+
+(ibase : obase : 16, 0);
+0;
+
+m : matrix([0d4,0e0,0b8, 1e], [0bf,0b4, 41, 27], [ 5d, 52, 11, 98], [ 30,0ae,0f1,0e5]);
+matrix([0D4,0E0,0B8,1E],[0BF,0B4,41,27],[5D,52,11,98],[30,0AE,0F1,0E5]);
+
+c : ef_l2p(reverse(flatten(args(col(m, 1)))));
+30*x^3+5D*x^2+0BF*x+0D4;
+
+p3 : 3*x^3+x^2+x+2;
+3*x^3+x^2+x+2;
+
+ef_add(p3, c);
+33*x^3+5C*x^2+0BE*x+0D6;
+
+ef_mult(p3, c);
+0E5*x^3+81*x^2+66*x+4;
+
+i3 : ef_inv(p3);
+0B*x^3+0D*x^2+9*x+0E;
+
+ef_div(1, p3);
+0B*x^3+0D*x^2+9*x+0E;
+
+ef_exp(p3, -1);
+0B*x^3+0D*x^2+9*x+0E;
+
+ef_mult(p3, i3);
+1;
+
+(ibase : obase : 10., 0);
+0;
+
+/* this time use lookup tables : */
+
+(gf_make_logs(), 0);
+0;
+
+ord : gf_order();
+255;
+
+( gf_coeff_mult(a, b) := 
+    if a = 0 or b = 0 then 0
+    else gf_powers[ ?mod(gf_logs[a] + gf_logs[b], ord) ],
+
+  gf_coeff_inv(a) := 
+    if a = 0 then 0
+    else gf_powers[ord - gf_logs[a]],
+
+  gf_coeff_add : ?logxor,
+
+0);
+0;
+
+(ibase : obase : 16, 0);
+0;
+
+ef_add(p3, c);
+33*x^3+5C*x^2+0BE*x+0D6;
+
+ef_mult(p3, c);
+0E5*x^3+81*x^2+66*x+4;
+
+i3 : ef_inv(p3);
+0B*x^3+0D*x^2+9*x+0E;
+
+ef_div(1, p3);
+0B*x^3+0D*x^2+9*x+0E;
+
+ef_exp(p3, -1);
+0B*x^3+0D*x^2+9*x+0E;
+
+ef_mult(p3, i3);
+1;
+
+(ibase : obase : 10., 0);
+0;
+
+/* 
+extension fields:
+
+examples taken from
+Efficient Software Implementations of Large Finite Fields
+by LUO, BOWERS, OPREA, XU
+*/
+
+( gf_set_data(2, x^8+x^4+x^3+x^2+1), gf_infolist() );
+[2,x^8+x^4+x^3+x^2+1,x,256,255];
+
+ef_irreducible_p(x^4+x^2+6*x+1);
+true;
+
+ef_irreducible_p(x^6+x^2+x+32);
+true;
+
+ef_irreducible_p(x^8+x^3+x+9);
+true;
+
+ef_irreducible_p(x^10+x^3+x+32);
+true;
+
+ef_irreducible_p(x^12+x^3+x+2);
+true;
+
+ef_irreducible_p(x^14+x^3+x+33);
+true;
+
+ef_irreducible_p(x^16+x^3+x+6);
+true;
+
+( gf_set_data(2, x^16+x^12+x^3+x+1), gf_infolist() );
+[2,x^16+x^12+x^3+x+1,x,65536,65535];
+
+ef_irreducible_p(x^2+x+8192);
+true;
+
+ef_irreducible_p(x^3+x+1);
+true;
+
+ef_irreducible_p(x^4+x^2+2*x+1);
+true;
+
+ef_irreducible_p(x^5+x^2+1);
+true;
+
+ef_irreducible_p(x^6+x^3+8192);
+true;
+
+ef_irreducible_p(x^7+x+1);
+true;
+
+ef_irreducible_p(x^8+x^3+x+8);
+true;
+
+(remvalue(a,b,c,d,p,n,g,m,mi,ord,elem,r,s,u,prod,mp,mpi,fs,fs_ord,basis,coeffs,p3,i3), 
+  modulus : modulus_copy, gf_coeff_limit : gf_coeff_limit_copy, 0);
+0;
+
+gf_unset();
+true;
+
+/* Bug #3427: gcfactor(3+4*%i) => error */
+
+gcfactor(3+4*%i);
+(2+%i)^2;
+
+/* Bug #3265: gcfactor(0) -> division by zero */
+
+gcfactor(0);
+0;
+
+/* Bug #2839: gcfactor(9) => 9 */
+
+block ([g : gcfactor (9)], [op (g), args (g)]);
+["^", [3, 2]];
+
+block ([g : gcfactor (343)], [op (g), args (g)]);
+["^", [7, 3]];
+
+/* A bogus comparison caused various things like gcfactor(x*%i)
+ * to signal lisp errors
+ */
+
+gcfactor (x * %i);
+x * %i;
+
+gcfactor (%i / 2);
+%i / 2;
+
+/* Exhaustive testing of zn_determinant and zn_invert_by_lu,
+ * inspired by:
+ * https://stackoverflow.com/questions/68541899/maxima-wrongly-says-a-matrix-is-non-invertible
+ *
+ * Enumerate all matrices of size 2x2 and 3x3 and calculate
+ * zn_determinant and zn_invert_by_lu with modulus = 2.
+ * Repeat with modulus = 3 but process only 2x2 matrices.
+ * There are enough 3x3 matrices with modulus = 3 to cause
+ * trouble with some Lisp implementations; too many arguments.
+ */
+
+(enumerate_matrices_modulo (p, n) :=
+  (enumerate_lists_modulo (p, n^2),
+   map (lambda ([L], reshape_matrix_from_list (L, n)), %%)),
+
+ enumerate_lists_modulo (p, nn) :=
+   if nn = 1
+     then makelist ([i], i, 0, p - 1)
+     else tree_reduce ('append,
+                       map (lambda ([L], makelist (cons (i, L), i, 0, p - 1)),
+                            enumerate_lists_modulo (p, nn - 1))),
+
+ reshape_matrix_from_list (L, n) :=
+   apply ('matrix, makelist (makelist (L[1 + (i - 1)*n + (j - 1)], j, 1, n), i, 1, n)),
+
+ test_zn_determinant (p, M) :=
+   block ([det_M: determinant (M),
+           zn_det_M: zn_determinant (M, p)],
+           if zn_det_M = mod (det_M, p)
+             then true
+             else failed ('zn_determinant (M, p))),
+
+ test_zn_invert_by_lu (p, M) :=
+   block ([zn_inv_M: zn_invert_by_lu (M, p)],
+          if zn_inv_M = false
+            then if mod (determinant (M), p) = 0
+                   then true
+                   else failed_a ('zn_invert_by_lu (M, p))
+            else block ([M_Minv, Minv_M,
+                         scalarmatrixp: false],
+                        M_Minv: mod (M . zn_inv_M, p),
+                        Minv_M: mod (zn_inv_M . M, p),
+                        if identity_matrix_p (M_Minv) and identity_matrix_p (Minv_M)
+                          then true
+                          else failed_b ('zn_invert_by_lu (M, p)))),
+
+ identity_matrix_p (M) := is (M = ident (length (M))),
+
+ 0);
+0;
+
+(enumerate_matrices_modulo (2, 1),
+ map (lambda ([M], test_zn_determinant (2, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+(enumerate_matrices_modulo (2, 2),
+ map (lambda ([M], test_zn_determinant (2, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+(enumerate_matrices_modulo (2, 3),
+ map (lambda ([M], test_zn_determinant (2, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+(enumerate_matrices_modulo (3, 1),
+ map (lambda ([M], test_zn_determinant (3, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+(enumerate_matrices_modulo (3, 2),
+ map (lambda ([M], test_zn_determinant (3, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+/* time consuming, skip it for now
+(enumerate_matrices_modulo (3, 3),
+ map (lambda ([M], test_zn_determinant (3, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+ */
+
+(enumerate_matrices_modulo (2, 1),
+ map (lambda ([M], test_zn_invert_by_lu (2, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+(enumerate_matrices_modulo (2, 2),
+ map (lambda ([M], test_zn_invert_by_lu (2, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+(enumerate_matrices_modulo (2, 3),
+ map (lambda ([M], test_zn_invert_by_lu (2, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+(enumerate_matrices_modulo (3, 1),
+ map (lambda ([M], test_zn_invert_by_lu (3, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+(enumerate_matrices_modulo (3, 2),
+ map (lambda ([M], test_zn_invert_by_lu (3, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+
+/* time consuming, skip it for now
+(enumerate_matrices_modulo (3, 3),
+ map (lambda ([M], test_zn_invert_by_lu (3, M)), %%),
+ sublist (%%, lambda ([x], x # true)));
+[];
+ */

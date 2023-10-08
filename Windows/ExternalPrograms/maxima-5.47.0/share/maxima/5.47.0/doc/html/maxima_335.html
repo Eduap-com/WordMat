@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for opsubst</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for opsubst">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for opsubst">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_334.html#opsubst_002dpkg" rel="up" title="opsubst-pkg">
+<link href="maxima_336.html#orthopoly_002dpkg" rel="next" title="orthopoly-pkg">
+<link href="maxima_334.html#opsubst_002dpkg" rel="previous" title="opsubst-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-opsubst"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_334.html#opsubst_002dpkg" accesskey="p" rel="previous">opsubst-pkg</a>, Up: <a href="maxima_334.html#opsubst_002dpkg" accesskey="u" rel="up">opsubst-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-opsubst-1"></a>
+<h3 class="section">79.1 Functions and Variables for opsubst</h3>
+
+<a name="opsubst_005ffunc"></a><a name="Item_003a-opsubst_002fdeffn_002fopsubst"></a><dl>
+<dt><a name="index-opsubst"></a>Function: <strong>opsubst</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>opsubst</tt> (<var>f</var>,<var>g</var>,<var>e</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>opsubst</tt> (<var>g</var>=<var>f</var>,<var>e</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>opsubst</tt> ([<var>g1</var>=<var>f1</var>,<var>g2</var>=<var>f2</var>,..., <var>gn</var>=<var>fn</var>],<var>e</var>)</em></dt>
+<dd><p>The function <code>opsubst</code> is similar to the function <code>subst</code>, except that
+<code>opsubst</code> only makes substitutions for the operators in an expression. In general, 
+When <var>f</var> is an operator in the expression <var>e</var>, substitute <var>g</var> 
+for <var>f</var> in the expression <var>e</var>.
+</p>
+<p>To determine the operator, <code>opsubst</code> sets <code>inflag</code> to true. This means 
+<code>opsubst</code> substitutes for the internal, not the displayed, operator
+in the expression.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;opsubst&quot;)$
+
+(%i2) opsubst(f,g,g(g(x)));
+(%o2)                     f(f(x))
+(%i3) opsubst(f,g,g(g));
+(%o3)                       f(g)
+(%i4) opsubst(f,g[x],g[x](z));
+(%o4)                       f(z)
+(%i5) opsubst(g[x],f, f(z));
+(%o5)                      g (z)
+                            x
+(%i6) opsubst(tan, sin, sin(sin));
+(%o6)                     tan(sin)
+(%i7) opsubst([f=g,g=h],f(x));
+(%o7)                       h(x)
+</pre></div>
+
+<p>Internally, Maxima does not use the unary negation,
+division, or the subtraction operators; thus:
+</p><div class="example">
+<pre class="example">(%i8) opsubst(&quot;+&quot;,&quot;-&quot;,a-b);
+(%o8)                     a - b
+(%i9) opsubst(&quot;f&quot;,&quot;-&quot;,-a);
+(%o9)                      - a
+(%i10) opsubst(&quot;^^&quot;,&quot;/&quot;,a/b);
+                             a
+(%o10)                       -
+                             b
+</pre></div>
+
+<p>The internal representation of -a*b is *(-1,a,b); thus
+</p><div class="example">
+<pre class="example">(%i11) opsubst(&quot;[&quot;,&quot;*&quot;, -a*b);
+(%o11)                  [- 1, a, b]
+</pre></div>
+
+<p>When either operator isn&rsquo;t a Maxima symbol, generally some other function
+will signal an error:
+</p><div class="example">
+<pre class="example">(%i12) opsubst(a+b,f, f(x));
+
+Improper name or value in functional position:
+b + a
+ -- an error.  Quitting.  To debug this try debugmode(true);
+</pre></div>
+
+<p>However, subscripted operators are allowed:
+</p><div class="example">
+<pre class="example">(%i13) opsubst(g[5],f, f(x));
+(%o13)                     g (x)
+                            5
+</pre></div>
+
+<p>To use this function write first <code>load(&quot;opsubst&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-opsubst">Package opsubst</a>
+&middot;</div>
+</dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_334.html#opsubst_002dpkg" accesskey="p" rel="previous">opsubst-pkg</a>, Up: <a href="maxima_334.html#opsubst_002dpkg" accesskey="u" rel="up">opsubst-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

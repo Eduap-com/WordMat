@@ -1,0 +1,1855 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Function Definition</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Function Definition">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Function Definition">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_166.html#Function-Definition" rel="up" title="Function Definition">
+<link href="maxima_171.html#Program-Flow" rel="next" title="Program Flow">
+<link href="maxima_169.html#Macros" rel="previous" title="Macros">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Function-Definition"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_169.html#Macros" accesskey="p" rel="previous">Macros</a>, Up: <a href="maxima_166.html#Function-Definition" accesskey="u" rel="up">Function Definition</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Function-Definition-1"></a>
+<h3 class="section">36.4 Functions and Variables for Function Definition</h3>
+
+<a name="apply"></a><a name="Item_003a-Function_002fdeffn_002fapply"></a><dl>
+<dt><a name="index-apply"></a>Function: <strong>apply</strong> <em>(<var>F</var>, [<var>x_1</var>, &hellip;, <var>x_n</var>])</em></dt>
+<dd>
+<p>Constructs and evaluates an expression <code><var>F</var>(<var>arg_1</var>, ...,
+<var>arg_n</var>)</code>.
+</p>
+<p><code>apply</code> does not attempt to distinguish a <code><a href="maxima_168.html#memoizing-function">memoizing function</a></code> from an ordinary 
+function; when <var>F</var> is the name of a memoizing function, <code>apply</code> evaluates
+<code><var>F</var>(...)</code> (that is, a function call with parentheses instead of square
+brackets).  <code>arrayapply</code> evaluates a function call with square brackets in
+this case.
+</p>
+<p>See also <code><a href="#funmake">funmake</a></code> and <code><a href="maxima_33.html#args">args</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code>apply</code> evaluates its arguments.
+In this example, <code>min</code> is applied to the value of <code>L</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) L : [1, 5, -10.2, 4, 3];
+(%o1)                 [1, 5, - 10.2, 4, 3]
+</pre><pre class="example">(%i2) apply (min, L);
+(%o2)                        - 10.2
+</pre></div>
+
+<p><code>apply</code> evaluates arguments, even if the function <var>F</var> quotes them.
+</p>
+<div class="example">
+<pre class="example">(%i1) F (x) := x / 1729;
+                                   x
+(%o1)                     F(x) := ----
+                                  1729
+</pre><pre class="example">(%i2) fname : F;
+(%o2)                           F
+</pre><pre class="example">(%i3) dispfun (F);
+                                   x
+(%t3)                     F(x) := ----
+                                  1729
+
+(%o3)                         [%t3]
+</pre><pre class="example">(%i4) dispfun (fname);
+fundef: no such function: fname
+ -- an error. To debug this try: debugmode(true);
+</pre><pre class="example">(%i5) apply (dispfun, [fname]);
+                                   x
+(%t5)                     F(x) := ----
+                                  1729
+
+(%o5)                         [%t5]
+</pre></div>
+
+<p><code>apply</code> evaluates the function name <var>F</var>.
+Single quote <code>'</code> defeats evaluation.
+<code>demoivre</code> is the name of a global variable and also a function.
+</p>
+<div class="example">
+<pre class="example">(%i1) demoivre;
+(%o1)                         false
+</pre><pre class="example">(%i2) demoivre (exp (%i * x));
+(%o2)                  %i sin(x) + cos(x)
+</pre><pre class="example">(%i3) apply (demoivre, [exp (%i * x)]);
+apply: found false where a function was expected.
+ -- an error. To debug this try: debugmode(true);
+</pre><pre class="example">(%i4) apply ('demoivre, [exp (%i * x)]);
+(%o4)                  %i sin(x) + cos(x)
+</pre></div>
+
+<p>How to convert a nested list into a matrix:
+</p>
+<div class="example">
+<pre class="example">(%i1) a:[[1,2],[3,4]];
+(%o1)                   [[1, 2], [3, 4]]
+</pre><pre class="example">(%i2) apply(matrix,a);
+                            [ 1  2 ]
+(%o2)                       [      ]
+                            [ 3  4 ]
+</pre></div>
+
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;</div></dd></dl>
+
+<a name="block"></a><a name="Item_003a-Function_002fdeffn_002fblock"></a><dl>
+<dt><a name="index-block"></a>Function: <strong>block</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>block</tt> ([<var>v_1</var>, &hellip;, <var>v_m</var>], <var>expr_1</var>, &hellip;, <var>expr_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>block</tt> (<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>The function <code>block</code> allows to make the variables <var>v_1</var>, &hellip;,
+<var>v_m</var> to be local for a sequence of commands. If these variables
+are already bound <code>block</code> saves the current values of the
+variables <var>v_1</var>, &hellip;, <var>v_m</var> (if any) upon entry to the
+block, then unbinds the variables so that they evaluate to themselves;
+The local variables may be bound to arbitrary values within the block
+but when the block is exited the saved values are restored, and the
+values assigned within the block are lost.
+</p>
+<p>If there is no need to define local variables then the list at the
+beginning of the <code>block</code> command may be omitted.
+In this case if neither <code><a href="maxima_175.html#return">return</a></code> nor <code><a href="maxima_175.html#go">go</a></code> are used
+<code>block</code> behaves similar to the following construct:
+</p>
+<div class="example">
+<pre class="example">( expr_1, expr_2,... , expr_n );
+</pre></div>
+
+<p><var>expr_1</var>, &hellip;, <var>expr_n</var> will be evaluated in sequence and
+the value of the last expression will be returned. The sequence can be 
+modified by the <code>go</code>, <code>throw</code>, and <code>return</code> functions.  The last
+expression is <var>expr_n</var> unless <code>return</code> or an expression containing
+<code>throw</code> is evaluated.
+</p>
+<p>The declaration <code>local(<var>v_1</var>, ..., <var>v_m</var>)</code> within <code>block</code>
+saves the properties associated with the symbols <var>v_1</var>, &hellip;, <var>v_m</var>,
+removes any properties before evaluating other expressions, and restores any
+saved properties on exit from the block.  Some declarations are implemented as
+properties of a symbol, including <code>:=</code>, <code>array</code>, <code>dependencies</code>,
+<code>atvalue</code>, <code>matchdeclare</code>, <code>atomgrad</code>, <code>constant</code>,
+<code>nonscalar</code>, <code>assume</code>, and some others.  The effect of <code>local</code>
+is to make such declarations effective only within the block; otherwise
+declarations within a block are actually global declarations.
+</p>
+<p><code>block</code> may appear within another <code>block</code>.
+Local variables are established each time a new <code>block</code> is evaluated.
+Local variables appear to be global to any enclosed blocks.
+If a variable is non-local in a block,
+its value is the value most recently assigned by an enclosing block, if any,
+otherwise, it is the value of the variable in the global environment.
+This policy may coincide with the usual understanding of &quot;dynamic scope&quot;.
+</p>
+<p>The value of the block is the value of the last statement or the
+value of the argument to the function <code>return</code> which may be used to exit
+explicitly from the block. The function <code>go</code> may be used to transfer
+control to the statement of the block that is tagged with the argument
+to <code>go</code>.  To tag a statement, precede it by an atomic argument as
+another statement in the block.  For example:
+<code>block ([x], x:1, loop, x: x+1, ..., go(loop), ...)</code>.  The argument to
+<code>go</code> must be the name of a tag appearing within the block.  One cannot use
+<code>go</code> to transfer to a tag in a block other than the one containing the
+<code>go</code>.
+</p>
+<p>Blocks typically appear on the right side of a function definition
+but can be used in other places as well.
+</p>
+<p>See also <code><a href="maxima_175.html#return">return</a></code> and <code><a href="maxima_175.html#go">go</a></code>.
+</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+
+<a name="break"></a><a name="Item_003a-Function_002fdeffn_002fbreak"></a><dl>
+<dt><a name="index-break"></a>Function: <strong>break</strong> <em>(<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>Evaluates and prints <var>expr_1</var>, &hellip;, <var>expr_n</var> and then
+causes a Maxima break at which point the user can examine and change
+his environment.  Upon typing <code>exit;</code> the computation resumes.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+
+<a name="catch"></a><a name="Item_003a-Function_002fdeffn_002fcatch"></a><dl>
+<dt><a name="index-catch"></a>Function: <strong>catch</strong> <em>(<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>Evaluates <var>expr_1</var>, &hellip;, <var>expr_n</var> one by one; if any
+leads to the evaluation of an expression of the
+form <code>throw (arg)</code>, then the value of the <code>catch</code> is the value of
+<code>throw (arg)</code>, and no further expressions are evaluated.
+This &quot;non-local return&quot; thus goes through any depth of
+nesting to the nearest enclosing <code>catch</code>.  If there is no <code>catch</code>
+enclosing a <code>throw</code>, an error message is printed.
+</p>
+<p>If the evaluation of the arguments does not lead to the evaluation of any
+<code>throw</code> then the value of <code>catch</code> is the value of <var>expr_n</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) lambda ([x], if x &lt; 0 then throw(x) else f(x))$
+(%i2) g(l) := catch (map (''%, l))$
+(%i3) g ([1, 2, 3, 7]);
+(%o3)               [f(1), f(2), f(3), f(7)]
+(%i4) g ([1, 2, -3, 7]);
+(%o4)                          - 3
+</pre></div>
+
+<p>The function <code>g</code> returns a list of <code>f</code> of each element of <code>l</code> if
+<code>l</code> consists only of non-negative numbers; otherwise, <code>g</code> &quot;catches&quot;
+the first negative element of <code>l</code> and &quot;throws&quot; it up.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="compfile"></a><a name="Item_003a-Function_002fdeffn_002fcompfile"></a><dl>
+<dt><a name="index-compfile"></a>Function: <strong>compfile</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compfile</tt> (<var>filename</var>, <var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compfile</tt> (<var>filename</var>, functions) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compfile</tt> (<var>filename</var>, all)</em></dt>
+<dd>
+<p>Translates Maxima functions into Lisp and writes the translated code into the
+file <var>filename</var>.
+</p>
+<p><code>compfile(<var>filename</var>, <var>f_1</var>, ..., <var>f_n</var>)</code> translates the
+specified functions.  <code>compfile (<var>filename</var>, functions)</code> and
+<code>compfile (<var>filename</var>, all)</code> translate all user-defined functions.
+</p>
+<p>The Lisp translations are not evaluated, nor is the output file processed by
+the Lisp compiler.
+<code>translate</code> creates and evaluates Lisp translations.  <code>compile_file</code>
+translates Maxima into Lisp, and then executes the Lisp compiler.
+</p>
+<p>See also <code><a href="#translate">translate</a></code>, <code><a href="#translate_005ffile">translate_file</a></code>, and <code><a href="#compile_005ffile">compile_file</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+
+<a name="compile"></a><a name="Item_003a-Function_002fdeffn_002fcompile"></a><dl>
+<dt><a name="index-compile"></a>Function: <strong>compile</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compile</tt> (<var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compile</tt> (functions) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compile</tt> (all)</em></dt>
+<dd>
+<p>Translates Maxima functions <var>f_1</var>, &hellip;, <var>f_n</var> into Lisp, evaluates
+the Lisp translations, and calls the Lisp function <code>COMPILE</code> on each
+translated function.  <code>compile</code> returns a list of the names of the
+compiled functions.
+</p>
+<p><code>compile (all)</code> or <code>compile (functions)</code> compiles all user-defined
+functions.
+</p>
+<p><code>compile</code> quotes its arguments; 
+the quote-quote operator <code>'<!-- /@w -->'</code> defeats quotation.
+</p>
+<p>Compiling a function to native code can mean a big increase in speed and might 
+cause the memory footprint to reduce drastically.
+Code tends to be especially effective when the flexibility it needs to provide
+is limited. If compilation doesn&rsquo;t provide the speed that is needed a few ways
+to limit the code&rsquo;s functionality are the following:
+</p><ul>
+<li> If the function accesses global variables the complexity of the function
+      can be drastically be reduced by limiting these variables to one data type,
+      for example using <code><a href="#mode_005fdeclare">mode_declare</a></code> or a statement like the following one:
+      <code>put(x_1, bigfloat, numerical_type)</code>
+</li><li> The compiler might warn about undeclared variables if text could either be
+      a named option to a command or (if they are assigned a value to) the name
+      of a variable. Prepending the option with a single quote <code>'</code>
+      tells the compiler that the text is meant as an option.
+</li></ul>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+<a name="define"></a><a name="Item_003a-Function_002fdeffn_002fdefine"></a><dl>
+<dt><a name="index-define"></a>Function: <strong>define</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>define</tt> (<var>f</var>(<var>x_1</var>, &hellip;, <var>x_n</var>), <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>define</tt> (<var>f</var>[<var>x_1</var>, &hellip;, <var>x_n</var>], <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>define</tt> (<var>f</var>[<var>x_1</var>, &hellip;, <var>x_n</var>](<var>y_1</var>, &hellip;, <var>y_m</var>), <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>define</tt> (funmake (<var>f</var>, [<var>x_1</var>, &hellip;, <var>x_n</var>]), <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>define</tt> (arraymake (<var>f</var>, [<var>x_1</var>, &hellip;, <var>x_n</var>]), <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>define</tt> (ev (<var>expr_1</var>), <var>expr_2</var>)</em></dt>
+<dd>
+<p>Defines a function named <var>f</var> with arguments <var>x_1</var>, &hellip;, <var>x_n</var>
+and function body <var>expr</var>.  <code>define</code> always evaluates its second
+argument (unless explicitly quoted).  The function so defined may be an ordinary
+Maxima function (with arguments enclosed in parentheses) or a <code><a href="maxima_168.html#memoizing-function">memoizing function</a></code>
+(with arguments enclosed in square brackets).
+</p>
+<p>When the last or only function argument <var>x_n</var> is a list of one element,
+the function defined by <code>define</code> accepts a variable number of arguments.
+Actual arguments are assigned one-to-one to formal arguments <var>x_1</var>, &hellip;,
+<var>x_(n - 1)</var>, and any further actual arguments, if present, are assigned to
+<var>x_n</var> as a list.
+</p>
+<p>When the first argument of <code>define</code> is an expression of the form
+<code><var>f</var>(<var>x_1</var>, ..., <var>x_n</var>)</code> or <code><var>f</var>[<var>x_1</var>, ...,
+<var>x_n</var>]</code>, the function arguments are evaluated but <var>f</var> is not evaluated,
+even if there is already a function or variable by that name.
+</p>
+<p>When the first argument is an expression with operator <code>funmake</code>,
+<code>arraymake</code>, or <code>ev</code>, the first argument is evaluated;
+this allows for the function name to be computed, as well as the body.
+</p>
+<p>All function definitions appear in the same namespace; defining a function
+<code>f</code> within another function <code>g</code> does not automatically limit the scope
+of <code>f</code> to <code>g</code>.  However, <code>local(f)</code> makes the definition of
+function <code>f</code> effective only within the block or other compound expression
+in which <code>local</code> appears.
+</p>
+<p>If some formal argument <var>x_k</var> is a quoted symbol (after evaluation), the
+function defined by <code>define</code> does not evaluate the corresponding actual
+argument.  Otherwise all actual arguments are evaluated.
+</p>
+<p>See also <code><a href="maxima_40.html#g_t_003a_003d">:=</a></code> and <code><a href="maxima_40.html#g_t_003a_003a_003d">::=</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code>define</code> always evaluates its second argument (unless explicitly quoted).
+</p>
+<div class="example">
+<pre class="example">(%i1) expr : cos(y) - sin(x);
+(%o1)                    cos(y) - sin(x)
+</pre><pre class="example">(%i2) define (F1 (x, y), expr);
+(%o2)              F1(x, y) := cos(y) - sin(x)
+</pre><pre class="example">(%i3) F1 (a, b);
+(%o3)                    cos(b) - sin(a)
+</pre><pre class="example">(%i4) F2 (x, y) := expr;
+(%o4)                   F2(x, y) := expr
+</pre><pre class="example">(%i5) F2 (a, b);
+(%o5)                    cos(y) - sin(x)
+</pre></div>
+
+<p>The function defined by <code>define</code> may be an ordinary Maxima function or a
+<code><a href="maxima_168.html#memoizing-function">memoizing function</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) define (G1 (x, y), x.y - y.x);
+(%o1)               G1(x, y) := x . y - y . x
+</pre><pre class="example">(%i2) define (G2 [x, y], x.y - y.x);
+(%o2)                G2     := x . y - y . x
+                       x, y
+</pre></div>
+
+<p>When the last or only function argument <var>x_n</var> is a list of one element,
+the function defined by <code>define</code> accepts a variable number of arguments.
+</p>
+<div class="example">
+<pre class="example">(%i1) define (H ([L]), '(apply (&quot;+&quot;, L)));
+(%o1)                H([L]) := apply(&quot;+&quot;, L)
+</pre><pre class="example">(%i2) H (a, b, c);
+(%o2)                       c + b + a
+</pre></div>
+
+<p>When the first argument is an expression with operator <code>funmake</code>,
+<code>arraymake</code>, or <code>ev</code>, the first argument is evaluated.
+</p>
+<div class="example">
+<pre class="example">(%i1) [F : I, u : x];
+(%o1)                        [I, x]
+</pre><pre class="example">(%i2) funmake (F, [u]);
+(%o2)                         I(x)
+</pre><pre class="example">(%i3) define (funmake (F, [u]), cos(u) + 1);
+(%o3)                  I(x) := cos(x) + 1
+</pre><pre class="example">(%i4) define (arraymake (F, [u]), cos(u) + 1);
+(%o4)                   I  := cos(x) + 1
+                         x
+</pre><pre class="example">(%i5) define (foo (x, y), bar (y, x));
+(%o5)                foo(x, y) := bar(y, x)
+</pre><pre class="example">(%i6) define (ev (foo (x, y)), sin(x) - cos(y));
+(%o6)             bar(y, x) := sin(x) - cos(y)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-definition">Function definition</a>
+&middot;</div></dd></dl>
+
+
+<a name="define_005fvariable"></a><a name="Item_003a-Function_002fdeffn_002fdefine_005fvariable"></a><dl>
+<dt><a name="index-define_005fvariable"></a>Function: <strong>define_variable</strong> <em>(<var>name</var>, <var>default_value</var>, <var>mode</var>)</em></dt>
+<dd>
+<p>Introduces a global variable into the Maxima environment.
+<code>define_variable</code> is useful in user-written packages, which are often
+translated or compiled as it gives the compiler hints of the type (&ldquo;mode&rdquo;)
+of a variable and therefore avoids requiring it to generate generic code that
+can deal with every variable being an integer, float, maxima object, array etc.
+</p>
+<p><code>define_variable</code> carries out the following steps:
+</p>
+<ol>
+<li> <code>mode_declare (<var>name</var>, <var>mode</var>)</code> declares the mode (&ldquo;type&rdquo;) of
+<var>name</var> to the translator which can considerably speed up compiled code as
+it allows having to create generic code. See <code><a href="#mode_005fdeclare">mode_declare</a></code> for a list of
+the possible modes.
+
+</li><li> If the variable is unbound, <var>default_value</var> is assigned to <var>name</var>.
+
+</li><li> Associates <var>name</var> with a test function
+to ensure that <var>name</var> is only assigned values of the declared mode.
+</li></ol>
+
+
+
+<p>The <code>value_check</code> property can be assigned to any variable which has been
+defined via <code>define_variable</code> with a mode other than <code>any</code>.
+The <code>value_check</code> property is a lambda expression or the name of a function
+of one variable, which is called when an attempt is made to assign a value to
+the variable.  The argument of the <code>value_check</code> function is the would-be
+assigned value.
+</p>
+<p><code>define_variable</code> evaluates <code>default_value</code>, and quotes <code>name</code>
+and <code>mode</code>.  <code>define_variable</code> returns the current value of
+<code>name</code>, which is <code>default_value</code> if <code>name</code> was unbound before,
+and otherwise it is the previous value of <code>name</code>.
+</p>
+<p>Examples:
+</p>
+<p><code>foo</code> is a Boolean variable, with the initial value <code>true</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) define_variable (foo, true, boolean);
+(%o1)                         true
+</pre><pre class="example">(%i2) foo;
+(%o2)                         true
+</pre><pre class="example">(%i3) foo: false;
+(%o3)                         false
+</pre><pre class="example">(%i4) foo: %pi;
+translator: foo was declared with mode boolean
+                                          , but it has value: %pi
+ -- an error. To debug this try: debugmode(true);
+</pre><pre class="example">(%i5) foo;
+(%o5)                         false
+</pre></div>
+
+<p><code>bar</code> is an integer variable, which must be prime.
+</p>
+<div class="example">
+<pre class="example">(%i1) define_variable (bar, 2, integer);
+(%o1)                           2
+</pre><pre class="example">(%i2) qput (bar, prime_test, value_check);
+(%o2)                      prime_test
+</pre><pre class="example">(%i3) prime_test (y) := if not primep(y) then
+                           error (y, &quot;is not prime.&quot;);
+(%o3) prime_test(y) := if not primep(y)
+                                   then error(y, &quot;is not prime.&quot;)
+</pre><pre class="example">(%i4) bar: 1439;
+(%o4)                         1439
+</pre><pre class="example">(%i5) bar: 1440;
+1440 is not prime.
+#0: prime_test(y=1440)
+ -- an error. To debug this try: debugmode(true);
+</pre><pre class="example">(%i6) bar;
+(%o6)                         1439
+</pre></div>
+
+<p><code>baz_quux</code> is a variable which cannot be assigned a value.
+The mode <code>any_check</code> is like <code>any</code>, but <code>any_check</code> enables the
+<code>value_check</code> mechanism, and <code>any</code> does not.
+</p>
+<div class="example">
+<pre class="example">(%i1) define_variable (baz_quux, 'baz_quux, any_check);
+(%o1)                       baz_quux
+</pre><pre class="example">(%i2) F: lambda ([y], if y # 'baz_quux then
+                 error (&quot;Cannot assign to `baz_quux'.&quot;));
+(%o2) lambda([y], if y # 'baz_quux
+                        then error(Cannot assign to `baz_quux'.))
+</pre><pre class="example">(%i3) qput (baz_quux, ''F, value_check);
+(%o3) lambda([y], if y # 'baz_quux
+                        then error(Cannot assign to `baz_quux'.))
+</pre><pre class="example">(%i4) baz_quux: 'baz_quux;
+(%o4)                       baz_quux
+</pre><pre class="example">(%i5) baz_quux: sqrt(2);
+Cannot assign to `baz_quux'.
+#0: lambda([y],if y # 'baz_quux then
+            error(&quot;Cannot assign to `baz_quux'.&quot;))(y=sqrt(2))
+ -- an error. To debug this try: debugmode(true);
+</pre><pre class="example">(%i6) baz_quux;
+(%o6)                       baz_quux
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+<a name="dispfun"></a><a name="Item_003a-Function_002fdeffn_002fdispfun"></a><dl>
+<dt><a name="index-dispfun"></a>Function: <strong>dispfun</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>dispfun</tt> (<var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>dispfun</tt> (all)</em></dt>
+<dd>
+<p>Displays the definition of the user-defined functions <var>f_1</var>, &hellip;,
+<var>f_n</var>.  Each argument may be the name of a macro (defined with <code>::=</code>),
+an ordinary function (defined with <code>:=</code> or <code>define</code>), an array
+function (defined with <code>:=</code> or <code>define</code>, but enclosing arguments in
+square brackets <code>[ ]</code>), a subscripted function (defined with <code>:=</code> or
+<code>define</code>, but enclosing some arguments in square brackets and others in
+parentheses <code>( )</code>), one of a family of subscripted functions selected by a
+particular subscript value, or a subscripted function defined with a constant
+subscript.
+</p>
+<p><code>dispfun (all)</code> displays all user-defined functions as
+given by the <code>functions</code>, <code>arrays</code>, and <code>macros</code> lists,
+omitting subscripted functions defined with constant subscripts.
+</p>
+<p><code>dispfun</code> creates an intermediate expression label
+(<code>%t1</code>, <code>%t2</code>, etc.)
+for each displayed function, and assigns the function definition to the label.
+In contrast, <code>fundef</code> returns the function definition.
+</p>
+<p><code>dispfun</code> quotes its arguments; the quote-quote operator <code>'<!-- /@w -->'</code>
+defeats quotation.  <code>dispfun</code> returns the list of intermediate expression
+labels corresponding to the displayed functions.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) m(x, y) ::= x^(-y);
+                                     - y
+(%o1)                   m(x, y) ::= x
+</pre><pre class="example">(%i2) f(x, y) :=  x^(-y);
+                                     - y
+(%o2)                    f(x, y) := x
+</pre><pre class="example">(%i3) g[x, y] :=  x^(-y);
+                                    - y
+(%o3)                     g     := x
+                           x, y
+</pre><pre class="example">(%i4) h[x](y) :=  x^(-y);
+                                    - y
+(%o4)                     h (y) := x
+                           x
+</pre><pre class="example">(%i5) i[8](y) :=  8^(-y);
+                                    - y
+(%o5)                     i (y) := 8
+                           8
+</pre><pre class="example">(%i6) dispfun (m, f, g, h, h[5], h[10], i[8]);
+                                     - y
+(%t6)                   m(x, y) ::= x
+
+                                     - y
+(%t7)                    f(x, y) := x
+
+                                    - y
+(%t8)                     g     := x
+                           x, y
+
+                                    - y
+(%t9)                     h (y) := x
+                           x
+
+                                    1
+(%t10)                     h (y) := --
+                            5        y
+                                    5
+
+                                     1
+(%t11)                    h  (y) := ---
+                           10         y
+                                    10
+
+                                    - y
+(%t12)                    i (y) := 8
+                           8
+
+(%o12)       [%t6, %t7, %t8, %t9, %t10, %t11, %t12]
+</pre><pre class="example">(%i13) ''%;
+                     - y              - y            - y
+(%o13) [m(x, y) ::= x   , f(x, y) := x   , g     := x   , 
+                                            x, y
+                  - y           1              1             - y
+        h (y) := x   , h (y) := --, h  (y) := ---, i (y) := 8   ]
+         x              5        y   10         y   8
+                                5             10
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-definition">Function definition</a>
+&middot;<a href="maxima_424.html#Category_003a-Display-functions">Display functions</a>
+&middot;</div></dd></dl>
+
+<a name="fullmap"></a><a name="Item_003a-Function_002fdeffn_002ffullmap"></a><dl>
+<dt><a name="index-fullmap"></a>Function: <strong>fullmap</strong> <em>(<var>f</var>, <var>expr_1</var>, &hellip;)</em></dt>
+<dd>
+<p>Similar to <code>map</code>, but <code>fullmap</code> keeps mapping down all subexpressions
+until the main operators are no longer the same.
+</p>
+<p><code>fullmap</code> is used by the Maxima simplifier for certain matrix
+manipulations; thus, Maxima sometimes generates an error message concerning
+<code>fullmap</code> even though <code>fullmap</code> was not explicitly called by the user.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) a + b * c;
+(%o1)                        b c + a
+</pre><pre class="example">(%i2) fullmap (g, %);
+(%o2)                   g(b) g(c) + g(a)
+</pre><pre class="example">(%i3) map (g, %th(2));
+(%o3)                     g(b c) + g(a)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div></dd></dl>
+
+<a name="fullmapl"></a><a name="Item_003a-Function_002fdeffn_002ffullmapl"></a><dl>
+<dt><a name="index-fullmapl"></a>Function: <strong>fullmapl</strong> <em>(<var>f</var>, <var>list_1</var>, &hellip;)</em></dt>
+<dd>
+<p>Similar to <code>fullmap</code>, but <code>fullmapl</code> only maps onto lists and
+matrices.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) fullmapl (&quot;+&quot;, [3, [4, 5]], [[a, 1], [0, -1.5]]);
+(%o1)                [[a + 3, 4], [4, 3.5]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div></dd></dl>
+
+<a name="functions"></a><a name="Item_003a-Function_002fdefvr_002ffunctions"></a><dl>
+<dt><a name="index-functions"></a>System variable: <strong>functions</strong></dt>
+<dd><p>Default value: <code>[]</code>
+</p>
+<p><code>functions</code> is the list of ordinary Maxima functions
+in the current session.
+An ordinary function is a function constructed by
+<code>define</code> or <code>:=</code> and called with parentheses <code>()</code>.
+A function may be defined at the Maxima prompt
+or in a Maxima file loaded by <code>load</code> or <code>batch</code>.
+</p>
+<p><code><a href="maxima_168.html#Memoizing-functions">Memoizing functions</a></code> (called with square brackets, e.g., <code>F[x]</code>) and subscripted
+functions (called with square brackets and parentheses, e.g., <code>F[x](y)</code>)
+are listed by the global variable <code>arrays</code>, and not by <code>functions</code>.
+</p>
+<p>Lisp functions are not kept on any list.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) F_1 (x) := x - 100;
+(%o1)                   F_1(x) := x - 100
+</pre><pre class="example">(%i2) F_2 (x, y) := x / y;
+                                      x
+(%o2)                    F_2(x, y) := -
+                                      y
+</pre><pre class="example">(%i3) define (F_3 (x), sqrt (x));
+(%o3)                   F_3(x) := sqrt(x)
+</pre><pre class="example">(%i4) G_1 [x] := x - 100;
+(%o4)                    G_1  := x - 100
+                            x
+</pre><pre class="example">(%i5) G_2 [x, y] := x / y;
+                                     x
+(%o5)                     G_2     := -
+                             x, y    y
+</pre><pre class="example">(%i6) define (G_3 [x], sqrt (x));
+(%o6)                    G_3  := sqrt(x)
+                            x
+</pre><pre class="example">(%i7) H_1 [x] (y) := x^y;
+                                      y
+(%o7)                     H_1 (y) := x
+                             x
+</pre><pre class="example">(%i8) functions;
+(%o8)              [F_1(x), F_2(x, y), F_3(x)]
+</pre><pre class="example">(%i9) arrays;
+(%o9)                 [G_1, G_2, G_3, H_1]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-definition">Function definition</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-variables">Global variables</a>
+&middot;</div></dd></dl>
+
+<a name="fundef"></a><a name="Item_003a-Function_002fdeffn_002ffundef"></a><dl>
+<dt><a name="index-fundef"></a>Function: <strong>fundef</strong> <em>(<var>f</var>)</em></dt>
+<dd>
+<p>Returns the definition of the function <var>f</var>.
+</p>
+<p>The argument may be
+</p><ul>
+<li> the name of a macro (defined with <code>::=</code>),
+</li><li> an ordinary function (defined with <code>:=</code> or <code>define</code>),
+</li><li> a <code><a href="maxima_168.html#memoizing-function">memoizing function</a></code> (defined with <code>:=</code> or <code>define</code>, but enclosing arguments in square brackets <code>[ ]</code>),
+</li><li> a subscripted function (defined with <code>:=</code> or <code>define</code>,
+but enclosing some arguments in square brackets and others in parentheses
+<code>( )</code>),
+</li><li> one of a family of subscripted functions selected by a particular
+subscript value,
+</li><li> or a subscripted function defined with a constant subscript.
+</li></ul>
+
+<p><code>fundef</code> quotes its argument;
+the quote-quote operator <code>'<!-- /@w -->'</code> defeats quotation.
+</p>
+<p><code>fundef (<var>f</var>)</code> returns the definition of <var>f</var>.
+In contrast, <code>dispfun (<var>f</var>)</code> creates an intermediate expression label
+and assigns the definition to the label.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-definition">Function definition</a>
+&middot;</div></dd></dl>
+
+<a name="funmake"></a><a name="Item_003a-Function_002fdeffn_002ffunmake"></a><dl>
+<dt><a name="index-funmake"></a>Function: <strong>funmake</strong> <em>(<var>F</var>, [<var>arg_1</var>, &hellip;, <var>arg_n</var>])</em></dt>
+<dd>
+<p>Returns an expression <code><var>F</var>(<var>arg_1</var>, ..., <var>arg_n</var>)</code>.
+The return value is simplified, but not evaluated,
+so the function <var>F</var> is not called, even if it exists.
+</p>
+<p><code>funmake</code> does not attempt to distinguish <code><a href="maxima_168.html#memoizing-functions">memoizing functions</a></code> from ordinary 
+functions; when <var>F</var> is the name of a memoizing function,
+<code>funmake</code> returns <code><var>F</var>(...)</code>
+(that is, a function call with parentheses instead of square brackets).
+<code>arraymake</code> returns a function call with square brackets in this case.
+</p>
+<p><code>funmake</code> evaluates its arguments.
+</p>
+<p>See also <code><a href="#apply">apply</a></code> and <code><a href="maxima_33.html#args">args</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code>funmake</code> applied to an ordinary Maxima function.
+</p>
+<div class="example">
+<pre class="example">(%i1) F (x, y) := y^2 - x^2;
+                                   2    2
+(%o1)                  F(x, y) := y  - x
+</pre><pre class="example">(%i2) funmake (F, [a + 1, b + 1]);
+(%o2)                    F(a + 1, b + 1)
+</pre><pre class="example">(%i3) ''%;
+                              2          2
+(%o3)                  (b + 1)  - (a + 1)
+</pre></div>
+
+<p><code>funmake</code> applied to a macro.
+</p>
+<div class="example">
+<pre class="example">(%i1) G (x) ::= (x - 1)/2;
+                                  x - 1
+(%o1)                    G(x) ::= -----
+                                    2
+</pre><pre class="example">(%i2) funmake (G, [u]);
+(%o2)                         G(u)
+</pre><pre class="example">(%i3) ''%;
+                              u - 1
+(%o3)                         -----
+                                2
+</pre></div>
+
+<p><code>funmake</code> applied to a subscripted function.
+</p>
+<div class="example">
+<pre class="example">(%i1) H [a] (x) := (x - 1)^a;
+                                        a
+(%o1)                   H (x) := (x - 1)
+                         a
+</pre><pre class="example">(%i2) funmake (H [n], [%e]);
+                                       n
+(%o2)               lambda([x], (x - 1) )(%e)
+</pre><pre class="example">(%i3) ''%;
+                                    n
+(%o3)                       (%e - 1)
+</pre><pre class="example">(%i4) funmake ('(H [n]), [%e]);
+(%o4)                        H (%e)
+                              n
+</pre><pre class="example">(%i5) ''%;
+                                    n
+(%o5)                       (%e - 1)
+</pre></div>
+
+<p><code>funmake</code> applied to a symbol which is not a defined function of any kind.
+</p>
+<div class="example">
+<pre class="example">(%i1) funmake (A, [u]);
+(%o1)                         A(u)
+</pre><pre class="example">(%i2) ''%;
+(%o2)                         A(u)
+</pre></div>
+
+<p><code>funmake</code> evaluates its arguments, but not the return value.
+</p>
+<div class="example">
+<pre class="example">(%i1) det(a,b,c) := b^2 -4*a*c;
+                                    2
+(%o1)              det(a, b, c) := b  - 4 a c
+</pre><pre class="example">(%i2) (x : 8, y : 10, z : 12);
+(%o2)                          12
+</pre><pre class="example">(%i3) f : det;
+(%o3)                          det
+</pre><pre class="example">(%i4) funmake (f, [x, y, z]);
+(%o4)                    det(8, 10, 12)
+</pre><pre class="example">(%i5) ''%;
+(%o5)                         - 284
+</pre></div>
+
+<p>Maxima simplifies <code>funmake</code>&rsquo;s return value.
+</p>
+<div class="example">
+<pre class="example">(%i1) funmake (sin, [%pi / 2]);
+(%o1)                           1
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div></dd></dl>
+
+<a name="lambda"></a><a name="Item_003a-Function_002fdeffn_002flambda"></a><dl>
+<dt><a name="index-lambda"></a>Function: <strong>lambda</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lambda</tt> ([<var>x_1</var>, &hellip;, <var>x_m</var>], <var>expr_1</var>, &hellip;, <var>expr_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lambda</tt> ([[<var>L</var>]], <var>expr_1</var>, &hellip;, <var>expr_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lambda</tt> ([<var>x_1</var>, &hellip;, <var>x_m</var>, [<var>L</var>]], <var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>Defines and returns a lambda expression (that is, an anonymous function).
+The function may have required arguments <var>x_1</var>, &hellip;, <var>x_m</var> and/or
+optional arguments <var>L</var>, which appear within the function body as a list.
+The return value of the function is <var>expr_n</var>.  A lambda expression can be
+assigned to a variable and evaluated like an ordinary function.  A lambda
+expression may appear in some contexts in which a function name is expected.
+</p>
+<p>When the function is evaluated, unbound local variables <var>x_1</var>, &hellip;,
+<var>x_m</var> are created.  <code>lambda</code> may appear within <code>block</code> or another
+<code>lambda</code>; local variables are established each time another <code>block</code> or
+<code>lambda</code> is evaluated.  Local variables appear to be global to any enclosed
+<code>block</code> or <code>lambda</code>.  If a variable is not local, its value is the
+value most recently assigned in an enclosing <code>block</code> or <code>lambda</code>, if
+any, otherwise, it is the value of the variable in the global environment.
+This policy may coincide with the usual understanding of &quot;dynamic scope&quot;.
+</p>
+<p>After local variables are established, <var>expr_1</var> through <var>expr_n</var> are
+evaluated in turn.  The special variable <code>%%</code>, representing the value of
+the preceding expression, is recognized.  <code>throw</code> and <code>catch</code> may also
+appear in the list of expressions.
+</p>
+<p><code>return</code> cannot appear in a lambda expression unless enclosed by
+<code>block</code>, in which case <code>return</code> defines the return value of the block
+and not of the lambda expression, unless the block happens to be <var>expr_n</var>.
+Likewise, <code>go</code> cannot appear in a lambda expression unless enclosed by
+<code>block</code>.
+</p>
+<p><code>lambda</code> quotes its arguments; 
+the quote-quote operator <code>'<!-- /@w -->'</code> defeats quotation.
+</p>
+<p>Examples:
+</p>
+<ul>
+<li> A lambda expression can be assigned to a variable and evaluated like an ordinary
+function.
+</li></ul>
+
+<div class="example">
+<pre class="example">(%i1) f: lambda ([x], x^2);
+                                      2
+(%o1)                    lambda([x], x )
+</pre><pre class="example">(%i2) f(a);
+                                2
+(%o2)                          a
+</pre></div>
+
+<ul>
+<li> A lambda expression may appear in contexts in which a function evaluation is expected.
+</li></ul>
+
+<div class="example">
+<pre class="example">(%i1) lambda ([x], x^2) (a);
+                                2
+(%o1)                          a
+</pre><pre class="example">(%i2) apply (lambda ([x], x^2), [a]);
+                                2
+(%o2)                          a
+</pre><pre class="example">(%i3) map (lambda ([x], x^2), [a, b, c, d, e]);
+                        2   2   2   2   2
+(%o3)                 [a , b , c , d , e ]
+</pre></div>
+
+<ul>
+<li> Argument variables are local variables.
+Other variables appear to be global variables.
+Global variables are evaluated at the time the lambda expression is evaluated,
+unless some special evaluation is forced by some means, such as <code>'<!-- /@w -->'</code>.
+</li></ul>
+
+<div class="example">
+<pre class="example">(%i1) a: %pi$
+(%i2) b: %e$
+</pre><pre class="example">(%i3) g: lambda ([a], a*b);
+(%o3)                   lambda([a], a b)
+</pre><pre class="example">(%i4) b: %gamma$
+</pre><pre class="example">(%i5) g(1/2);
+                             %gamma
+(%o5)                        ------
+                               2
+</pre><pre class="example">(%i6) g2: lambda ([a], a*''b);
+(%o6)                 lambda([a], a %gamma)
+</pre><pre class="example">(%i7) b: %e$
+</pre><pre class="example">(%i8) g2(1/2);
+                             %gamma
+(%o8)                        ------
+                               2
+</pre></div>
+
+<ul>
+<li> Lambda expressions may be nested.  Local variables within the outer lambda
+expression appear to be global to the inner expression unless masked by local
+variables of the same names.
+</li></ul>
+
+<div class="example">
+<pre class="example">(%i1) h: lambda ([a, b], h2: lambda ([a], a*b), h2(1/2));
+                                                   1
+(%o1)     lambda([a, b], h2 : lambda([a], a b), h2(-))
+                                                   2
+</pre><pre class="example">(%i2) h(%pi, %gamma);
+                             %gamma
+(%o2)                        ------
+                               2
+</pre></div>
+
+<ul>
+<li> Since <code>lambda</code> quotes its arguments, lambda expression <code>i</code> below does
+not define a &quot;multiply by <code>a</code>&quot; function.  Such a function can be defined
+via <code>buildq</code>, as in lambda expression <code>i2</code> below.
+</li></ul>
+
+<div class="example">
+<pre class="example">(%i1) i: lambda ([a], lambda ([x], a*x));
+(%o1)             lambda([a], lambda([x], a x))
+</pre><pre class="example">(%i2) i(1/2);
+(%o2)                   lambda([x], a x)
+</pre><pre class="example">(%i3) i2: lambda([a], buildq([a: a], lambda([x], a*x)));
+(%o3)    lambda([a], buildq([a : a], lambda([x], a x)))
+</pre><pre class="example">(%i4) i2(1/2);
+                                    1
+(%o4)                  lambda([x], (-) x)
+                                    2
+</pre><pre class="example">(%i5) i2(1/2)(%pi);
+                               %pi
+(%o5)                          ---
+                                2
+</pre></div>
+
+<ul>
+<li> A lambda expression may take a variable number of arguments,
+which are indicated by <code>[<var>L</var>]</code> as the sole or final argument.
+The arguments appear within the function body as a list.
+</li></ul>
+
+<div class="example">
+<pre class="example">(%i1) f : lambda ([aa, bb, [cc]], aa * cc + bb);
+(%o1)          lambda([aa, bb, [cc]], aa cc + bb)
+</pre><pre class="example">(%i2) f (foo, %i, 17, 29, 256);
+(%o2)       [17 foo + %i, 29 foo + %i, 256 foo + %i]
+</pre><pre class="example">(%i3) g : lambda ([[aa]], apply (&quot;+&quot;, aa));
+(%o3)             lambda([[aa]], apply(+, aa))
+</pre><pre class="example">(%i4) g (17, 29, x, y, z, %e);
+(%o4)                  z + y + x + %e + 46
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-definition">Function definition</a>
+&middot;</div></dd></dl>
+
+
+<a name="local"></a><a name="Item_003a-Function_002fdeffn_002flocal"></a><dl>
+<dt><a name="index-local"></a>Function: <strong>local</strong> <em>(<var>v_1</var>, &hellip;, <var>v_n</var>)</em></dt>
+<dd>
+<p>Saves the properties associated with the symbols <var>v_1</var>, &hellip;, <var>v_n</var>,
+removes any properties before evaluating other expressions,
+and restores any saved properties on exit
+from the block or other compound expression in which <code>local</code> appears.
+</p>
+<p>Some declarations are implemented as properties of a symbol, including
+<code>:=</code>, <code>array</code>, <code>dependencies</code>, <code>atvalue</code>,
+<code>matchdeclare</code>, <code>atomgrad</code>, <code>constant</code>, <code>nonscalar</code>,
+<code>assume</code>, and some others.  The effect of <code>local</code> is to make such
+declarations effective only within the block or other compound expression in
+which <code>local</code> appears; otherwise such declarations are global declarations.
+</p>
+<p><code>local</code> can only appear in <code>block</code>
+or in the body of a function definition or <code>lambda</code> expression,
+and only one occurrence is permitted in each.
+</p>
+<p><code>local</code> quotes its arguments.
+<code>local</code> returns <code>done</code>.
+</p>
+<p>Example:
+</p>
+<p>A local function definition.
+</p>
+<div class="example">
+<pre class="example">(%i1) foo (x) := 1 - x;
+(%o1)                    foo(x) := 1 - x
+</pre><pre class="example">(%i2) foo (100);
+(%o2)                         - 99
+</pre><pre class="example">(%i3) block (local (foo), foo (x) := 2 * x, foo (100));
+(%o3)                          200
+</pre><pre class="example">(%i4) foo (100);
+(%o4)                         - 99
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-definition">Function definition</a>
+&middot;<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="macroexpansion"></a><a name="Item_003a-Function_002fdefvr_002fmacroexpansion"></a><dl>
+<dt><a name="index-macroexpansion"></a>Option variable: <strong>macroexpansion</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p><code>macroexpansion</code> controls whether the expansion (that is, the return value)
+of a macro function is substituted for the macro function call.
+A substitution may speed up subsequent expression evaluations,
+at the cost of storing the expansion.
+</p>
+<dl compact="compact">
+<dt><code>false</code></dt>
+<dd><p>The expansion of a macro function is not substituted for the macro function call.
+</p></dd>
+<dt><code>expand</code></dt>
+<dd><p>The first time a macro function call is evaluated,
+the expansion is stored.
+The expansion is not recomputed on subsequent calls;
+any side effects (such as <code>print</code> or assignment to global variables) happen
+only when the macro function call is first evaluated.
+Expansion in an expression does not affect other expressions
+which have the same macro function call.
+</p></dd>
+<dt><code>displace</code></dt>
+<dd><p>The first time a macro function call is evaluated,
+the expansion is substituted for the call,
+thus modifying the expression from which the macro function was called.
+The expansion is not recomputed on subsequent calls;
+any side effects happen only when the macro function call is first evaluated.
+Expansion in an expression does not affect other expressions
+which have the same macro function call.
+</p></dd>
+</dl>
+
+<p>Examples
+</p>
+<p>When <code>macroexpansion</code> is <code>false</code>,
+a macro function is called every time the calling expression is evaluated,
+and the calling expression is not modified.
+</p>
+<div class="example">
+<pre class="example">(%i1) f (x) := h (x) / g (x);
+                                  h(x)
+(%o1)                     f(x) := ----
+                                  g(x)
+</pre><pre class="example">(%i2) g (x) ::= block (print (&quot;x + 99 is equal to&quot;, x),
+                       return (x + 99));
+(%o2) g(x) ::= block(print(&quot;x + 99 is equal to&quot;, x), 
+                                                  return(x + 99))
+</pre><pre class="example">(%i3) h (x) ::= block (print (&quot;x - 99 is equal to&quot;, x),
+                       return (x - 99));
+(%o3) h(x) ::= block(print(&quot;x - 99 is equal to&quot;, x), 
+                                                  return(x - 99))
+</pre><pre class="example">(%i4) macroexpansion: false;
+(%o4)                         false
+</pre><pre class="example">(%i5) f (a * b);
+x - 99 is equal to x 
+x + 99 is equal to x 
+                            a b - 99
+(%o5)                       --------
+                            a b + 99
+</pre><pre class="example">(%i6) dispfun (f);
+                                  h(x)
+(%t6)                     f(x) := ----
+                                  g(x)
+
+(%o6)                         [%t6]
+</pre><pre class="example">(%i7) f (a * b);
+x - 99 is equal to x 
+x + 99 is equal to x 
+                            a b - 99
+(%o7)                       --------
+                            a b + 99
+</pre></div>
+
+<p>When <code>macroexpansion</code> is <code>expand</code>,
+a macro function is called once,
+and the calling expression is not modified.
+</p>
+<div class="example">
+<pre class="example">(%i1) f (x) := h (x) / g (x);
+                                  h(x)
+(%o1)                     f(x) := ----
+                                  g(x)
+</pre><pre class="example">(%i2) g (x) ::= block (print (&quot;x + 99 is equal to&quot;, x),
+                       return (x + 99));
+(%o2) g(x) ::= block(print(&quot;x + 99 is equal to&quot;, x), 
+                                                  return(x + 99))
+</pre><pre class="example">(%i3) h (x) ::= block (print (&quot;x - 99 is equal to&quot;, x),
+                       return (x - 99));
+(%o3) h(x) ::= block(print(&quot;x - 99 is equal to&quot;, x), 
+                                                  return(x - 99))
+</pre><pre class="example">(%i4) macroexpansion: expand;
+(%o4)                        expand
+</pre><pre class="example">(%i5) f (a * b);
+x - 99 is equal to x 
+x + 99 is equal to x 
+                            a b - 99
+(%o5)                       --------
+                            a b + 99
+</pre><pre class="example">(%i6) dispfun (f);
+                      mmacroexpanded(x - 99, h(x))
+(%t6)         f(x) := ----------------------------
+                      mmacroexpanded(x + 99, g(x))
+
+(%o6)                         [%t6]
+</pre><pre class="example">(%i7) f (a * b);
+                            a b - 99
+(%o7)                       --------
+                            a b + 99
+</pre></div>
+
+<p>When <code>macroexpansion</code> is <code>displace</code>,
+a macro function is called once,
+and the calling expression is modified.
+</p>
+<div class="example">
+<pre class="example">(%i1) f (x) := h (x) / g (x);
+                                  h(x)
+(%o1)                     f(x) := ----
+                                  g(x)
+</pre><pre class="example">(%i2) g (x) ::= block (print (&quot;x + 99 is equal to&quot;, x),
+                       return (x + 99));
+(%o2) g(x) ::= block(print(&quot;x + 99 is equal to&quot;, x), 
+                                                  return(x + 99))
+</pre><pre class="example">(%i3) h (x) ::= block (print (&quot;x - 99 is equal to&quot;, x),
+                       return (x - 99));
+(%o3) h(x) ::= block(print(&quot;x - 99 is equal to&quot;, x), 
+                                                  return(x - 99))
+</pre><pre class="example">(%i4) macroexpansion: displace;
+(%o4)                       displace
+</pre><pre class="example">(%i5) f (a * b);
+x - 99 is equal to x 
+x + 99 is equal to x 
+                            a b - 99
+(%o5)                       --------
+                            a b + 99
+</pre><pre class="example">(%i6) dispfun (f);
+                                 x - 99
+(%t6)                    f(x) := ------
+                                 x + 99
+
+(%o6)                         [%t6]
+</pre><pre class="example">(%i7) f (a * b);
+                            a b - 99
+(%o7)                       --------
+                            a b + 99
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-flags">Global flags</a>
+&middot;</div></dd></dl>
+
+<a name="mode_005fdeclare"></a><a name="modedeclare"></a><a name="Item_003a-Function_002fdeffn_002fmode_005fdeclare"></a><dl>
+<dt><a name="index-mode_005fdeclare"></a>Function: <strong>mode_declare</strong> <em>(<var>y_1</var>, <var>mode_1</var>, &hellip;, <var>y_n</var>, <var>mode_n</var>)</em></dt>
+<dd><a name="Item_003a-Function_002fdeffn_002fmodedeclare"></a></dd><dt><a name="index-modedeclare"></a>Function: <strong>modedeclare</strong> <em>(<var>y_1</var>, <var>mode_1</var>, &hellip;, <var>y_n</var>, <var>mode_n</var>)</em></dt>
+<dd>
+<p>A <code>mode_declare</code> informs the compiler which type (lisp programmers name the type:
+&ldquo;mode&rdquo;) a function parameter or its return value will be of. This can greatly
+boost the efficiency of the code the compiler generates: Without knowing the type of
+all variables and knowing the return value of all functions a function uses
+in advance very generic (and thus potentially slow) code needs to be generated.
+</p>
+<p>The arguments of <code>mode_declare</code> are pairs consisting of a variable (or a list
+of variables all having the same mode) and a mode. Available modes (&ldquo;types&rdquo;) are:
+</p><div class="example">
+<pre class="example">array            an declared array (see the detailed description below)
+boolean          true or false
+integer          integers (including arbitrary-size integers)
+fixnum           integers (excluding arbitrary-size integers)
+float            machine-size floating-point numbers
+real             machine-size floating-point or integer
+number           Numbers
+any              any kind of object (useful for arrays of any)
+</pre></div>
+
+<p>A function parameter named <code>a</code> can be declared as an array filled with elements
+of the type <code>t</code> the following way:
+</p><div class="example">
+<pre class="example">mode_declare (a, array(t, dim1, dim2, ...))
+</pre></div>
+<p>If none of the elements of the array <code>a</code> needs to be checked if it still doesn&rsquo;t
+contain a value additional code can be omitted by declaring this fact, too:
+</p><div class="example">
+<pre class="example">mode_declare (a, array (t, complete, dim1, dim2, ...))
+</pre></div>
+<p>The <code>complete</code> has no effect if all array elements are of the type
+<code>fixnum</code> or <code>float</code>: Machine-sized numbers inevitably contain a value
+(and will automatically be initialized to 0 in most lisp implementations).
+</p>
+<p>Another way to tell that all entries of the array <code>a</code> are of the type
+(&ldquo;mode&rdquo;) <code>m</code> and have been assigned a value to would be:
+</p><div class="example">
+<pre class="example">mode_declare (completearray (a), m))
+</pre></div>
+
+<p>Numeric code using arrays might run faster still if the size of the array is
+known at compile time, as well, as in:
+</p><div class="example">
+<pre class="example">mode_declare (completearray (a [10, 10]), float)
+</pre></div>
+<p>for a floating point number array named <code>a</code> which is 10 x 10.
+</p>
+<p><code>mode_declare</code> also can be used in order to declare the type of the result
+of a function. In this case the function compilation needs to be preceded by
+another <code>mode_declare</code> statement. For example the expression,
+</p><div class="example">
+<pre class="example">mode_declare ([function (f_1, f_2, ...)], fixnum)
+</pre></div>
+<p>declares that the values returned by <code>f_1</code>, <code>f_2</code>, &hellip; are
+single-word integers.
+</p>
+<p><code>modedeclare</code> is a synonym for <code>mode_declare</code>.
+</p>
+<p>If the type of function parameters and results doesn&rsquo;t match the declaration by
+<code>mode_declare</code> the function may misbehave or a warning or an error might
+occur, see <code><a href="#mode_005fcheckp">mode_checkp</a></code>, <code><a href="#mode_005fcheck_005ferrorp">mode_check_errorp</a></code> and
+<code><a href="#mode_005fcheck_005fwarnp">mode_check_warnp</a></code>.
+</p>
+<p>See <code><a href="#mode_005fidentity">mode_identity</a></code> for declaring the type of lists and <code><a href="#define_005fvariable">define_variable</a></code> for
+declaring the type of all global variables compiled code uses, as well.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) square_float(f):=(
+     mode_declare(f,float),
+     f*f
+ );
+(%o1)   square_float(f) := (mode_declare(f, float), f f)
+</pre><pre class="example">(%i2) mode_declare([function(f)],float);
+(%o2)                    [[function(f)]]
+</pre><pre class="example">(%i3) compile(square_float);
+(%o3)                    [square_float]
+</pre><pre class="example">(%i4) square_float(100.0);
+(%o4)                        10000.0
+</pre></div>
+
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+
+<a name="mode_005fcheckp"></a><a name="Item_003a-Function_002fdefvr_002fmode_005fcheckp"></a><dl>
+<dt><a name="index-mode_005fcheckp"></a>Option variable: <strong>mode_checkp</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>mode_checkp</code> is <code>true</code>, <code><a href="#mode_005fdeclare">mode_declare</a></code> does not only define
+which type a variable will be of so the compiler can generate more efficient code,
+but will also create a runtime warning if the variable isn&rsquo;t of the variable type
+the code was compiled to deal with.
+</p>
+<div class="example">
+<pre class="example">(%i1) mode_checkp:true;
+(%o1)                         true
+</pre><pre class="example">(%i2) square(f):=(
+    mode_declare(f,float),
+    f^2);
+                                                   2
+(%o2)       square(f) := (mode_declare(f, float), f )
+</pre><pre class="example">(%i3) compile(square);
+(%o3)                       [square]
+</pre><pre class="example">(%i4) square(2.3);
+(%o4)                   5.289999999999999
+</pre><pre class="example">(%i5) square(4);
+Maxima encountered a Lisp error:
+
+ The value
+   4
+ is not of type
+   DOUBLE-FLOAT
+ when binding $F
+
+Automatically continuing.
+To enable the Lisp debugger set *debugger-hook* to nil.
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="mode_005fcheck_005ferrorp"></a><a name="Item_003a-Function_002fdefvr_002fmode_005fcheck_005ferrorp"></a><dl>
+<dt><a name="index-mode_005fcheck_005ferrorp"></a>Option variable: <strong>mode_check_errorp</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>mode_check_errorp</code> is <code>true</code>, <code>mode_declare</code> calls
+error.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="mode_005fcheck_005fwarnp"></a><a name="Item_003a-Function_002fdefvr_002fmode_005fcheck_005fwarnp"></a><dl>
+<dt><a name="index-mode_005fcheck_005fwarnp"></a>Option variable: <strong>mode_check_warnp</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>mode_check_warnp</code> is <code>true</code>, mode errors are
+described.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+
+<a name="mode_005fidentity"></a><a name="Item_003a-Function_002fdeffn_002fmode_005fidentity"></a><dl>
+<dt><a name="index-mode_005fidentity"></a>Function: <strong>mode_identity</strong> <em>(<var>arg_1</var>, <var>arg_2</var>)</em></dt>
+<dd>
+<p><code>mode_identity</code> works similar to <code><a href="#mode_005fdeclare">mode_declare</a></code>, but is used for
+informing the compiler that a thing like a <code>macro</code> or a list operation
+will only return a specific type of object. The purpose of doing so is that
+maxima supports many objects: Machine integers, arbitrary length integers,
+equations, machine floats, big floats, which means that for everything that
+deals with return values of operations that can result in any object the
+compiler needs to output generic (and therefore potentially slow) code.
+</p>
+<p>The first argument to <code>mode_identity</code> is the type of return value
+something will return (for possible types see <code><a href="#mode_005fdeclare">mode_declare</a></code>).
+(i.e., one of <code>float</code>, <code>fixnum</code>, <code>number</code>,
+The second argument is the expression that will return an object of this
+type.
+</p>
+<p>If the the return value of this expression is of a type the code was not
+compiled for error or warning is signalled.
+</p>
+<p>If you knew that <code>first (l)</code> returned a number then you could write
+</p>
+<div class="example">
+<pre class="example"><code>mode_identity (number, first (l))</code>.
+</pre></div>
+<p>However, if you need this construct more often it would be more efficient
+to define a function that returns a number fist:
+</p><div class="example">
+<pre class="example">firstnumb (x) ::= buildq ([x], mode_identity (number, first(x)));
+compile(firstnumb)
+</pre></div>
+<p><code>firstnumb</code> now can be used every time you need the first element
+of a list that is guaranteed to be filled with numbers.
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></p></dd></dl>
+
+<a name="remfunction"></a><a name="Item_003a-Function_002fdeffn_002fremfunction"></a><dl>
+<dt><a name="index-remfunction"></a>Function: <strong>remfunction</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>remfunction</tt> (<var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>remfunction</tt> (all)</em></dt>
+<dd>
+<p>Unbinds the function definitions of the symbols <var>f_1</var>, &hellip;, <var>f_n</var>.
+The arguments may be the names of ordinary functions (created by <code><a href="maxima_40.html#g_t_003a_003d">:=</a></code> or
+<code><a href="#define">define</a></code>) or macro functions (created by <code><a href="maxima_40.html#g_t_003a_003a_003d">::=</a></code>).
+</p>
+<p><code>remfunction (all)</code> unbinds all function definitions.
+</p>
+<p><code>remfunction</code> quotes its arguments.
+</p>
+<p><code>remfunction</code> returns a list of the symbols for which the function
+definition was unbound.  <code>false</code> is returned in place of any symbol for
+which there is no function definition.
+</p>
+<p><code>remfunction</code> does not apply to <code><a href="maxima_168.html#memoizing-functions">memoizing functions</a></code> or subscripted functions.
+<code><a href="maxima_24.html#remarray">remarray</a></code> applies to those types of functions.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-definition">Function definition</a>
+&middot;</div></dd></dl>
+
+
+<a name="savedef"></a><a name="Item_003a-Function_002fdefvr_002fsavedef"></a><dl>
+<dt><a name="index-savedef"></a>Option variable: <strong>savedef</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>savedef</code> is <code>true</code>, the Maxima version of a user function is
+preserved when the function is translated.  This permits the definition to be
+displayed by <code>dispfun</code> and allows the function to be edited.
+</p>
+<p>When <code>savedef</code> is <code>false</code>, the names of translated functions are
+removed from the <code>functions</code> list.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="translate"></a><a name="Item_003a-Function_002fdeffn_002ftranslate"></a><dl>
+<dt><a name="index-translate"></a>Function: <strong>translate</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>translate</tt> (<var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>translate</tt> (functions) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>translate</tt> (all)</em></dt>
+<dd>
+<p>Translates the user-defined functions <var>f_1</var>, &hellip;, <var>f_n</var> from the
+Maxima language into Lisp and evaluates the Lisp translations.
+Typically the translated functions run faster than the originals.
+</p>
+<p><code>translate (all)</code> or <code>translate (functions)</code> translates all
+user-defined functions.
+</p>
+<p>Functions to be translated should include a call to <code>mode_declare</code> at the
+beginning when possible in order to produce more efficient code.  For example:
+</p>
+<div class="example">
+<pre class="example">f (x_1, x_2, ...) := block ([v_1, v_2, ...],
+    mode_declare (v_1, mode_1, v_2, mode_2, ...), ...)
+</pre></div>
+
+<p>where the <var>x_1</var>, <var>x_2</var>, &hellip;  are the parameters to the function and
+the <var>v_1</var>, <var>v_2</var>, &hellip; are the local variables.
+</p>
+<p>The names of translated functions are removed from the <code>functions</code> list
+if <code>savedef</code> is <code>false</code> (see below) and are added to the <code>props</code>
+lists.
+</p>
+<p>Functions should not be translated unless they are fully debugged.
+</p>
+<p>Expressions are assumed simplified; if they are not, correct but non-optimal
+code gets generated.  Thus, the user should not set the <code>simp</code> switch to
+<code>false</code> which inhibits simplification of the expressions to be translated.
+</p>
+<p>The switch <code>translate</code>, if <code>true</code>, causes automatic
+translation of a user&rsquo;s function to Lisp.
+</p>
+<p>Note that translated
+functions may not run identically to the way they did before
+translation as certain incompatibilities may exist between the Lisp
+and Maxima versions.  Principally, the <code>rat</code> function with more than
+one argument and the <code>ratvars</code> function should not be used if any
+variables are <code>mode_declare</code>&rsquo;d canonical rational expressions (CRE).
+Also the <code>prederror: false</code> setting
+will not translate.
+</p>
+<p><code>savedef</code> - if <code>true</code> will cause the Maxima version of a user
+function to remain when the function is <code>translate</code>&rsquo;d.  This permits the
+definition to be displayed by <code>dispfun</code> and allows the function to be
+edited.
+</p>
+<p><code>transrun</code> - if <code>false</code> will cause the interpreted version of all
+functions to be run (provided they are still around) rather than the
+translated version.
+</p>
+<p>The result returned by <code>translate</code> is a list of the names of the
+functions translated.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+<a name="translate_005ffile"></a><a name="Item_003a-Function_002fdeffn_002ftranslate_005ffile"></a><dl>
+<dt><a name="index-translate_005ffile"></a>Function: <strong>translate_file</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>translate_file</tt> (<var>maxima_filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>translate_file</tt> (<var>maxima_filename</var>, <var>lisp_filename</var>)</em></dt>
+<dd>
+<p>Translates a file of Maxima code into a file of Lisp code.
+<code>translate_file</code> returns a list of three filenames:
+the name of the Maxima file, the name of the Lisp file, and the name of file
+containing additional information about the translation.
+<code>translate_file</code> evaluates its arguments.
+</p>
+<p><code>translate_file (&quot;foo.mac&quot;); load(&quot;foo.LISP&quot;)</code> is the same as the command
+<code>batch (&quot;foo.mac&quot;)</code> except for certain restrictions, the use of
+<code>'<!-- /@w -->'</code> and <code>%</code>, for example.
+</p>
+<p><code>translate_file (<var>maxima_filename</var>)</code> translates a Maxima file
+<var>maxima_filename</var> into a similarly-named Lisp file.
+For example, <code>foo.mac</code> is translated into <code>foo.LISP</code>.
+The Maxima filename may include a directory name or names,
+in which case the Lisp output file is written
+to the same directory from which the Maxima input comes.
+</p>
+<p><code>translate_file (<var>maxima_filename</var>, <var>lisp_filename</var>)</code> translates
+a Maxima file <var>maxima_filename</var> into a Lisp file <var>lisp_filename</var>.
+<code>translate_file</code> ignores the filename extension, if any, of
+<code>lisp_filename</code>; the filename extension of the Lisp output file is always
+<code>LISP</code>.  The Lisp filename may include a directory name or names,
+in which case the Lisp output file is written to the specified directory.
+</p>
+<p><code>translate_file</code> also writes a file of translator warning
+messages of various degrees of severity.
+The filename extension of this file is <code>UNLISP</code>.
+This file may contain valuable information, though possibly obscure,
+for tracking down bugs in translated code.
+The <code>UNLISP</code> file is always written
+to the same directory from which the Maxima input comes.
+</p>
+<p><code>translate_file</code> emits Lisp code which causes
+some declarations and definitions to take effect as soon
+as the Lisp code is compiled.
+See <code>compile_file</code> for more on this topic.
+</p>
+<p>See also 
+</p><p align="left"><code>tr_array_as_ref</code>
+<code><a href="#tr_005fbound_005ffunction_005fapplyp">tr_bound_function_applyp</a></code>,
+<code>tr_exponent</code>
+<code><a href="#tr_005ffile_005ftty_005fmessagesp">tr_file_tty_messagesp</a></code>,
+<code><a href="#tr_005ffloat_005fcan_005fbranch_005fcomplex">tr_float_can_branch_complex</a></code>,
+<code><a href="#tr_005ffunction_005fcall_005fdefault">tr_function_call_default</a></code>,
+<code><a href="#tr_005fnumer">tr_numer</a></code>,
+<code><a href="#tr_005foptimize_005fmax_005floop">tr_optimize_max_loop</a></code>,
+<code><a href="#tr_005fstate_005fvars">tr_state_vars</a></code>,
+<code><a href="#tr_005fwarnings_005fget">tr_warnings_get</a></code>,
+<code>tr_warn_bad_function_calls</code>
+<code><a href="#tr_005fwarn_005ffexpr">tr_warn_fexpr</a></code>, 
+<code><a href="#tr_005fwarn_005fmeval">tr_warn_meval</a></code>,
+<code><a href="#tr_005fwarn_005fmode">tr_warn_mode</a></code>,
+<code><a href="#tr_005fwarn_005fundeclared">tr_warn_undeclared</a></code>,
+and <code><a href="#tr_005fwarn_005fundefined_005fvariable">tr_warn_undefined_variable</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+<a name="transrun"></a><a name="Item_003a-Function_002fdefvr_002ftransrun"></a><dl>
+<dt><a name="index-transrun"></a>Option variable: <strong>transrun</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>transrun</code> is <code>false</code> will cause the interpreted
+version of all functions to be run (provided they are still around)
+rather than the translated version.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+
+<a name="tr_005farray_005fas_005fref"></a><a name="Item_003a-Function_002fdefvr_002ftr_005farray_005fas_005fref"></a><dl>
+<dt><a name="index-tr_005farray_005fas_005fref"></a>Option variable: <strong>tr_array_as_ref</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>If <code>translate_fast_arrays</code> is <code>false</code>, array references in Lisp code
+emitted by <code>translate_file</code> are affected by <code>tr_array_as_ref</code>.
+When <code>tr_array_as_ref</code> is <code>true</code>,
+array names are evaluated,
+otherwise array names appear as literal symbols in translated code.
+</p>
+<p><code>tr_array_as_ref</code> has no effect if <code>translate_fast_arrays</code> is
+<code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+
+<a name="tr_005fbound_005ffunction_005fapplyp"></a><a name="Item_003a-Function_002fdefvr_002ftr_005fbound_005ffunction_005fapplyp"></a><dl>
+<dt><a name="index-tr_005fbound_005ffunction_005fapplyp"></a>Option variable: <strong>tr_bound_function_applyp</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>tr_bound_function_applyp</code> is <code>true</code> and <code>tr_function_call_default</code>
+is <code>general</code>, if a bound variable (such as a function argument) is found being
+used as a function then Maxima will rewrite that function call using <code>apply</code> and
+print a warning message.
+</p>
+<p>For example, if <code>g</code> is defined by <code>g(f,x) := f(x+1)</code> then translating
+<code>g</code> will cause Maxima to print a warning and rewrite <code>f(x+1)</code> as
+<code>apply(f,[x+1])</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) f (x) := x^2$
+(%i2) g (f) := f (3)$
+(%i3) tr_bound_function_applyp : true$
+</pre><pre class="example">(%i4) translate (g)$
+warning: f is a bound variable in f(3), but it is used as a function.
+note: instead I'll translate it as: apply(f,[3])
+</pre><pre class="example">(%i5) g (lambda ([x], x));
+(%o5)                           3
+</pre><pre class="example">(%i6) tr_bound_function_applyp : false$
+(%i7) translate (g)$
+</pre><pre class="example">(%i8) g (lambda ([x], x));
+(%o8)                           9
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005ffile_005ftty_005fmessagesp"></a><a name="Item_003a-Function_002fdefvr_002ftr_005ffile_005ftty_005fmessagesp"></a><dl>
+<dt><a name="index-tr_005ffile_005ftty_005fmessagesp"></a>Option variable: <strong>tr_file_tty_messagesp</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>tr_file_tty_messagesp</code> is <code>true</code>, messages generated by
+<code>translate_file</code> during translation of a file are displayed on the console
+and inserted into the UNLISP file.  When <code>false</code>, messages about
+translation of the file are only inserted into the UNLISP file.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005ffloat_005fcan_005fbranch_005fcomplex"></a><a name="Item_003a-Function_002fdefvr_002ftr_005ffloat_005fcan_005fbranch_005fcomplex"></a><dl>
+<dt><a name="index-tr_005ffloat_005fcan_005fbranch_005fcomplex"></a>Option variable: <strong>tr_float_can_branch_complex</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>Tells the Maxima-to-Lisp translator to assume that the functions 
+<code>acos</code>, <code>asin</code>, <code>asec</code>, <code>acsc</code>, <code>acosh</code>,
+<code>asech</code>, <code>atanh</code>, <code>acoth</code>, <code>log</code> and <code>sqrt</code>
+can return complex results.
+</p>
+<p>When it is <code>true</code> then <code>acos(x)</code> is of mode <code>any</code>
+even if <code>x</code> is of mode <code>float</code> (as set by <code>mode_declare</code>).
+When <code>false</code> then <code>acos(x)</code> is of mode
+<code>float</code> if and only if <code>x</code> is of mode <code>float</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005ffunction_005fcall_005fdefault"></a><a name="Item_003a-Function_002fdefvr_002ftr_005ffunction_005fcall_005fdefault"></a><dl>
+<dt><a name="index-tr_005ffunction_005fcall_005fdefault"></a>Option variable: <strong>tr_function_call_default</strong></dt>
+<dd><p>Default value: <code>general</code>
+</p>
+<p><code>false</code> means give up and call <code>meval</code>, <code>expr</code> means assume Lisp
+fixed arg function.  <code>general</code>, the default gives code good for
+<code>mexprs</code> and <code>mlexprs</code> but not <code>macros</code>.  <code>general</code> assures
+variable bindings are correct in compiled code.  In <code>general</code> mode, when
+translating F(X), if F is a bound variable, then it assumes that
+<code>apply (f, [x])</code> is meant, and translates a such, with appropriate warning.
+There is no need to turn this off.  With the default settings, no warning
+messages implies full compatibility of translated and compiled code with the
+Maxima interpreter.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005fnumer"></a><a name="Item_003a-Function_002fdefvr_002ftr_005fnumer"></a><dl>
+<dt><a name="index-tr_005fnumer"></a>Option variable: <strong>tr_numer</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>tr_numer</code> is <code>true</code>, <code>numer</code> properties are used for
+atoms which have them, e.g. <code>%pi</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005foptimize_005fmax_005floop"></a><a name="Item_003a-Function_002fdefvr_002ftr_005foptimize_005fmax_005floop"></a><dl>
+<dt><a name="index-tr_005foptimize_005fmax_005floop"></a>Option variable: <strong>tr_optimize_max_loop</strong></dt>
+<dd><p>Default value: 100
+</p>
+<p><code>tr_optimize_max_loop</code> is the maximum number of times the
+macro-expansion and optimization pass of the translator will loop in
+considering a form.  This is to catch macro expansion errors, and
+non-terminating optimization properties.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+
+<a name="tr_005fstate_005fvars"></a><a name="Item_003a-Function_002fdefvr_002ftr_005fstate_005fvars"></a><dl>
+<dt><a name="index-tr_005fstate_005fvars"></a>System variable: <strong>tr_state_vars</strong></dt>
+<dd><p>Default value:
+</p><div class="example">
+<pre class="example">[translate_fast_arrays, tr_function_call_default, tr_bound_function_applyp,
+tr_array_as_ref, tr_numer, tr_float_can_branch_complex, define_variable]
+</pre></div>
+
+<p>The list of the switches that affect the form of the
+translated output.
+This information is useful to system people when
+trying to debug the translator.  By comparing the translated product
+to what should have been produced for a given state, it is possible to
+track down bugs.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+
+<a name="tr_005fwarnings_005fget"></a><a name="Item_003a-Function_002fdeffn_002ftr_005fwarnings_005fget"></a><dl>
+<dt><a name="index-tr_005fwarnings_005fget"></a>Function: <strong>tr_warnings_get</strong> <em>()</em></dt>
+<dd>
+<p>Prints a list of warnings which have been given by
+the translator during the current translation.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+<a name="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fbad_005ffunction_005fcalls"></a><dl>
+<dt><a name="index-tr_005fwarn_005fbad_005ffunction_005fcalls"></a>Option variable: <strong>tr_warn_bad_function_calls</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>- Gives a warning when
+when function calls are being made which may not be correct due to
+improper declarations that were made at translate time.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005fwarn_005ffexpr"></a><a name="Item_003a-Function_002fdefvr_002ftr_005fwarn_005ffexpr"></a><dl>
+<dt><a name="index-tr_005fwarn_005ffexpr"></a>Option variable: <strong>tr_warn_fexpr</strong></dt>
+<dd><p>Default value: <code>compfile</code>
+</p>
+<p>- Gives a warning if any FEXPRs are
+encountered.  FEXPRs should not normally be output in translated code,
+all legitimate special program forms are translated.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005fwarn_005fmeval"></a><a name="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fmeval"></a><dl>
+<dt><a name="index-tr_005fwarn_005fmeval"></a>Option variable: <strong>tr_warn_meval</strong></dt>
+<dd><p>Default value: <code>compfile</code>
+</p>
+<p>- Gives a warning if the function <code>meval</code> gets called.  If <code>meval</code> is
+called that indicates problems in the translation.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005fwarn_005fmode"></a><a name="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fmode"></a><dl>
+<dt><a name="index-tr_005fwarn_005fmode"></a>Option variable: <strong>tr_warn_mode</strong></dt>
+<dd><p>Default value: <code>all</code>
+</p>
+<p>- Gives a warning when variables are
+assigned values inappropriate for their mode.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005fwarn_005fundeclared"></a><a name="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fundeclared"></a><dl>
+<dt><a name="index-tr_005fwarn_005fundeclared"></a>Option variable: <strong>tr_warn_undeclared</strong></dt>
+<dd><p>Default value: <code>compile</code>
+</p>
+<p>- Determines when to send
+warnings about undeclared variables to the TTY.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="tr_005fwarn_005fundefined_005fvariable"></a><a name="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fundefined_005fvariable"></a><dl>
+<dt><a name="index-tr_005fwarn_005fundefined_005fvariable"></a>Option variable: <strong>tr_warn_undefined_variable</strong></dt>
+<dd><p>Default value: <code>all</code>
+</p>
+<p>- Gives a warning when
+undefined global variables are seen.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="compile_005ffile"></a><a name="Item_003a-Function_002fdeffn_002fcompile_005ffile"></a><dl>
+<dt><a name="index-compile_005ffile"></a>Function: <strong>compile_file</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compile_file</tt> (<var>filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compile_file</tt> (<var>filename</var>, <var>compiled_filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>compile_file</tt> (<var>filename</var>, <var>compiled_filename</var>, <var>lisp_filename</var>)</em></dt>
+<dd>
+<p>Translates the Maxima file <var>filename</var> into Lisp, and executes the Lisp compiler.
+The compiled code is not loaded into Maxima.
+</p>
+<p><code>compile_file</code> returns a list of the names of four files: the original
+Maxima file, the Lisp translation, notes on translation, and the compiled code.
+If the compilation fails, the fourth item is <code>false</code>.
+</p>
+<p>Some declarations and definitions take effect as soon
+as the Lisp code is compiled (without loading the compiled code).
+These include functions defined with the <code>:=</code> operator,
+macros define with the <code>::=</code> operator,
+<code>alias</code>, <code>declare</code>,
+<code>define_variable</code>,  <code>mode_declare</code>,
+and 
+<code>infix</code>, <code>matchfix</code>,
+<code>nofix</code>, <code>postfix</code>, <code>prefix</code>,
+and <code>compfile</code>.
+</p>
+<p>Assignments and function calls are not evaluated until the compiled code is
+loaded.  In particular, within the Maxima file, assignments to the translation
+flags (<code>tr_numer</code>, etc.) have no effect on the translation.
+</p>
+
+<p><var>filename</var> may not contain <code>:lisp</code> statements.
+</p>
+<p><code>compile_file</code> evaluates its arguments.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+
+<a name="declare_005ftranslated"></a><a name="Item_003a-Function_002fdeffn_002fdeclare_005ftranslated"></a><dl>
+<dt><a name="index-declare_005ftranslated"></a>Function: <strong>declare_translated</strong> <em>(<var>f_1</var>, <var>f_2</var>, &hellip;)</em></dt>
+<dd>
+<p>When translating a file of Maxima code
+to Lisp, it is important for the translator to know which functions it
+sees in the file are to be called as translated or compiled functions,
+and which ones are just Maxima functions or undefined.  Putting this
+declaration at the top of the file, lets it know that although a symbol
+does which does not yet have a Lisp function value, will have one at
+call time.  <code>(MFUNCTION-CALL fn arg1 arg2 ...)</code> is generated when
+the translator does not know <code>fn</code> is going to be a Lisp function.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;</div></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_169.html#Macros" accesskey="p" rel="previous">Macros</a>, Up: <a href="maxima_166.html#Function-Definition" accesskey="u" rel="up">Function Definition</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

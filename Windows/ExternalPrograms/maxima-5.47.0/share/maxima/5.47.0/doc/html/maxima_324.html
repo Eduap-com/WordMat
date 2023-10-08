@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for binary input and output</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for binary input and output">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for binary input and output">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_321.html#numericalio_002dpkg" rel="up" title="numericalio-pkg">
+<link href="maxima_325.html#odepack_002dpkg" rel="next" title="odepack-pkg">
+<link href="maxima_323.html#Functions-and-Variables-for-plain_002dtext-input-and-output" rel="previous" title="Functions and Variables for plain-text input and output">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-binary-input-and-output"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_323.html#Functions-and-Variables-for-plain_002dtext-input-and-output" accesskey="p" rel="previous">Functions and Variables for plain-text input and output</a>, Up: <a href="maxima_321.html#numericalio_002dpkg" accesskey="u" rel="up">numericalio-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-binary-input-and-output-1"></a>
+<h3 class="section">76.3 Functions and Variables for binary input and output</h3>
+
+<a name="assume_005fexternal_005fbyte_005forder"></a><a name="Item_003a-numericalio_002fdeffn_002fassume_005fexternal_005fbyte_005forder"></a><dl>
+<dt><a name="index-assume_005fexternal_005fbyte_005forder"></a>Function: <strong>assume_external_byte_order</strong> <em>(<var>byte_order_flag</var>)</em></dt>
+<dd><p>Tells <code>numericalio</code> the byte order for reading and writing binary data.
+Two values of <var>byte_order_flag</var> are recognized:
+<code>lsb</code> which indicates least-significant byte first, also called little-endian byte order;
+and <code>msb</code> which indicates most-significant byte first, also called big-endian byte order.
+</p>
+<p>If not specified, <code>numericalio</code> assumes the external byte order is most-significant byte first.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;</div></dd></dl>
+
+<a name="openr_005fbinary"></a><a name="Item_003a-numericalio_002fdeffn_002fopenr_005fbinary"></a><dl>
+<dt><a name="index-openr_005fbinary"></a>Function: <strong>openr_binary</strong> <em>(<var>file_name</var>)</em></dt>
+<dd><p>Returns an input stream of 8-bit unsigned bytes to read the file named by <var>file_name</var>.
+</p>
+<p>See also <code><a href="#openw_005fbinary">openw_binary</a></code> and <code><a href="maxima_376.html#openr">openr</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div></dd></dl>
+
+<a name="openw_005fbinary"></a><a name="Item_003a-numericalio_002fdeffn_002fopenw_005fbinary"></a><dl>
+<dt><a name="index-openw_005fbinary"></a>Function: <strong>openw_binary</strong> <em>(<var>file_name</var>)</em></dt>
+<dd><p>Returns an output stream of 8-bit unsigned bytes to write the file named by <var>file_name</var>.
+</p>
+<p>See also <code><a href="#openr_005fbinary">openr_binary</a></code>, <code><a href="#opena_005fbinary">opena_binary</a></code> and <code><a href="maxima_376.html#openw">openw</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;</div></dd></dl>
+
+<a name="opena_005fbinary"></a><a name="Item_003a-numericalio_002fdeffn_002fopena_005fbinary"></a><dl>
+<dt><a name="index-opena_005fbinary"></a>Function: <strong>opena_binary</strong> <em>(<var>file_name</var>)</em></dt>
+<dd><p>Returns an output stream of 8-bit unsigned bytes to append the file named by <var>file_name</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;</div></dd></dl>
+
+<a name="read_005fbinary_005fmatrix"></a><a name="Item_003a-numericalio_002fdeffn_002fread_005fbinary_005fmatrix"></a><dl>
+<dt><a name="index-read_005fbinary_005fmatrix"></a>Function: <strong>read_binary_matrix</strong> <em>(<var>S</var>, <var>M</var>)</em></dt>
+<dd><p>Reads binary 8-byte floating point numbers from the source <var>S</var> into the matrix <var>M</var>
+until <var>M</var> is full, or the source is exhausted.
+Elements of <var>M</var> are read in row-major order.
+</p>
+<p>The source <var>S</var> may be a file name or a stream.
+</p>
+<p>The byte order in elements of the source is specified by <code>assume_external_byte_order</code>.
+</p>
+<p>See also <code><a href="maxima_323.html#read_005fmatrix">read_matrix</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div></dd></dl>
+
+<a name="read_005fbinary_005farray"></a><a name="Item_003a-numericalio_002fdeffn_002fread_005fbinary_005farray"></a><dl>
+<dt><a name="index-read_005fbinary_005farray"></a>Function: <strong>read_binary_array</strong> <em>(<var>S</var>, <var>A</var>)</em></dt>
+<dd><p>Reads binary 8-byte floating point numbers from the source <var>S</var> into the array <var>A</var>
+until <var>A</var> is full, or the source is exhausted.
+<var>A</var> must be an array created by <code>array</code> or <code>make_array</code>.
+Elements of <var>A</var> are read in row-major order.
+</p>
+<p>The source <var>S</var> may be a file name or a stream.
+</p>
+<p>The byte order in elements of the source is specified by <code>assume_external_byte_order</code>.
+</p>
+<p>See also <code><a href="maxima_323.html#read_005farray">read_array</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div></dd></dl>
+
+<a name="read_005fbinary_005flist"></a><a name="Item_003a-numericalio_002fdeffn_002fread_005fbinary_005flist"></a><dl>
+<dt><a name="index-read_005fbinary_005flist"></a>Function: <strong>read_binary_list</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_binary_list</tt> (<var>S</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_binary_list</tt> (<var>S</var>, <var>L</var>)</em></dt>
+<dd>
+<p><code>read_binary_list(<var>S</var>)</code> reads the entire content of the source <var>S</var>
+as a sequence of binary 8-byte floating point numbers, and returns it as a list.
+The source <var>S</var> may be a file name or a stream.
+</p>
+<p><code>read_binary_list(<var>S</var>, <var>L</var>)</code> reads 8-byte binary floating point numbers
+from the source <var>S</var> until the list <var>L</var> is full, or the source is exhausted.
+</p>
+<p>The byte order in elements of the source is specified by <code>assume_external_byte_order</code>.
+</p>
+<p>See also <code><a href="maxima_323.html#read_005flist">read_list</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div></dd></dl>
+
+<a name="write_005fbinary_005fdata"></a><a name="Item_003a-numericalio_002fdeffn_002fwrite_005fbinary_005fdata"></a><dl>
+<dt><a name="index-write_005fbinary_005fdata"></a>Function: <strong>write_binary_data</strong> <em>(<var>X</var>, <var>D</var>)</em></dt>
+<dd>
+<p>Writes the object <var>X</var>, comprising binary 8-byte IEEE 754 floating-point numbers,
+to the destination <var>D</var>.
+Other kinds of numbers are coerced to 8-byte floats.
+<code>write_binary_data</code> cannot write non-numeric data.
+</p>
+<p>The object <var>X</var> may be a list, a nested list, a matrix,
+or an array created by <code>array</code> or <code>make_array</code>;
+<var>X</var> cannot be a hashed array or any other type of object.
+<code>write_binary_data</code> writes nested lists, matrices, and arrays in row-major order.
+</p>
+<p>The destination <var>D</var> may be a file name or a stream.
+When the destination is a file name,
+the global variable <code>file_output_append</code> governs
+whether the output file is appended or truncated.
+When the destination is a stream,
+no special action is taken by <code>write_binary_data</code> after all the data are written;
+in particular, the stream remains open.
+</p>
+<p>The byte order in elements of the destination
+is specified by <code>assume_external_byte_order</code>.
+</p>
+<p>See also <code><a href="maxima_323.html#write_005fdata">write_data</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;</div></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_323.html#Functions-and-Variables-for-plain_002dtext-input-and-output" accesskey="p" rel="previous">Functions and Variables for plain-text input and output</a>, Up: <a href="maxima_321.html#numericalio_002dpkg" accesskey="u" rel="up">numericalio-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

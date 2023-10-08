@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Convert to Trignometric Functions</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Convert to Trignometric Functions">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Convert to Trignometric Functions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_393.html#Functions-and-Variables-for-trigtools" rel="up" title="Functions and Variables for trigtools">
+<link href="maxima_396.html#Convert-to-Hyperbolic-Functions" rel="next" title="Convert to Hyperbolic Functions">
+<link href="maxima_394.html#Convert-to-sin-and-cos" rel="previous" title="Convert to sin and cos">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Convert-to-Trignometric-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_396.html#Convert-to-Hyperbolic-Functions" accesskey="n" rel="next">Convert to Hyperbolic Functions</a>, Previous: <a href="maxima_394.html#Convert-to-sin-and-cos" accesskey="p" rel="previous">Convert to sin and cos</a>, Up: <a href="maxima_393.html#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Convert-to-Trignometric-Functions-1"></a>
+<h4 class="subsection">96.2.2 Convert to Trignometric Functions</h4>
+
+<a name="c2trig"></a><a name="Item_003a-trigtools_002fdeffn_002fc2trig"></a><dl>
+<dt><a name="index-c2trig"></a>Function: <strong>c2trig</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>The function c2trig (convert to trigonometric) reduce expression with hyperbolic functions
+sinh, cosh, tanh, coth to trigonometric expression with sin, cos, tan, cot.
+</p>
+<p>Examples:
+</p>
+<ol>
+<li> &nbsp;<!-- /@w -->
+<div class="example">
+<pre class="example">(%i1) load(trigtools)$
+(%i2) sinh(x)=c2trig(sinh(x));
+cosh(x)=c2trig(cosh(x));
+tanh(x)=c2trig(tanh(x));
+coth(x)=c2trig(coth(x));
+(%o2)                     sinh(x) = - %i sin(%i x)
+(%o3)                        cosh(x) = cos(%i x)
+(%o4)                     tanh(x) = - %i tan(%i x)
+(%o5)                      coth(x) = %i cot(%i x)
+</pre></div>
+
+</li><li> see <a href="http://www.math.utexas.edu/pipermail/maxima/2013/034585.html">http://www.math.utexas.edu/pipermail/maxima/2013/034585.html</a>
+<div class="example">
+<pre class="example">(%i6) cos(p+q*%i);
+(%o6)                           cos(%i q + p)
+(%i7) trigexpand(%);
+(%o7)                cos(p) cosh(q) - %i sin(p) sinh(q)
+(%i8) c2trig(%);
+(%o8)                           cos(%i q + p)
+</pre></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example">
+<pre class="example">(%i9) sin(a+b*%i);
+(%o9)                           sin(%i b + a)
+(%i10) trigexpand(%);
+(%o10)                %i cos(a) sinh(b) + sin(a) cosh(b)
+(%i11) c2trig(%);
+(%o11)                           sin(%i b + a)
+</pre></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example">
+<pre class="example">(%i12) cos(a*%i+b*%i);
+(%o12)                         cos(%i b + %i a)
+(%i13) trigexpand(%);
+(%o13)                 sinh(a) sinh(b) + cosh(a) cosh(b)
+(%i14) c2trig(%);
+(%o14)                         cos(%i b + %i a)
+</pre></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example">
+<pre class="example">(%i15) tan(a+%i*b);
+(%o15)                           tan(%i b + a)
+</pre><pre class="example">(%i16) trigexpand(%);
+                              %i tanh(b) + tan(a)
+(%o16)                       ---------------------
+                             1 - %i tan(a) tanh(b)
+</pre><pre class="example">(%i17) c2trig(%);
+(%o217)                           tan(%i b + a)
+</pre></div>
+
+</li><li> &nbsp;<!-- /@w -->
+
+<div class="example">
+<pre class="example">(%i18) cot(x+%i*y);
+(%o18)                           cot(%i y + x)
+(%i19) trigexpand(%);
+                           (- %i cot(x) coth(y)) - 1
+(%o19)                     -------------------------
+                              cot(x) - %i coth(y)
+(%i20) c2trig(%);
+(%o20)                           cot(%i y + x)
+</pre></div>
+</li></ol>
+
+</dd></dl>
+
+<a name="Item_003a-trigtools_002fnode_002fConvert-to-Hyperbolic-Functions"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_396.html#Convert-to-Hyperbolic-Functions" accesskey="n" rel="next">Convert to Hyperbolic Functions</a>, Previous: <a href="maxima_394.html#Convert-to-sin-and-cos" accesskey="p" rel="previous">Convert to sin and cos</a>, Up: <a href="maxima_393.html#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

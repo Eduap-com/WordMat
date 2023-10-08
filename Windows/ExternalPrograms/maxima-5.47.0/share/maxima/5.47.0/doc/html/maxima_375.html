@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to String Processing</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to String Processing">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to String Processing">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_374.html#stringproc_002dpkg" rel="up" title="stringproc-pkg">
+<link href="maxima_376.html#String-Input-and-Output" rel="next" title="String Input and Output">
+<link href="maxima_374.html#stringproc_002dpkg" rel="previous" title="stringproc-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-String-Processing"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_376.html#String-Input-and-Output" accesskey="n" rel="next">String Input and Output</a>, Previous: <a href="maxima_374.html#stringproc_002dpkg" accesskey="p" rel="previous">stringproc-pkg</a>, Up: <a href="maxima_374.html#stringproc_002dpkg" accesskey="u" rel="up">stringproc-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-String-Processing-1"></a>
+<h3 class="section">91.1 Introduction to String Processing</h3>
+
+<p>The package <code>stringproc</code> contains functions for processing strings 
+and characters including formatting, encoding and data streams. 
+This package is completed by some tools for cryptography, e.g. base64 and hash 
+functions.
+</p>
+<p>It can be directly loaded via <code>load(&quot;stringproc&quot;)</code> or automatically by 
+using one of its functions.
+</p>
+<p>For questions and bug reports please contact the author. The following 
+command prints his e-mail-address.
+</p>
+<p><code>printf(true, &quot;~{~a~}@gmail.com&quot;, split(sdowncase(&quot;Volker van Nek&quot;)))$</code>
+</p>
+
+<p>A string is constructed by typing e.g. <code>&quot;Text&quot;</code>. 
+When the option variable <code><a href="maxima_16.html#stringdisp">stringdisp</a></code> is set to <code>false</code>, which is 
+the default, the double quotes won&rsquo;t be printed. 
+<a href="maxima_378.html#stringp">stringp</a> is a test, if an object is a string.
+</p>
+<div class="example">
+<pre class="example">(%i1) str: &quot;Text&quot;;
+(%o1)                         Text
+(%i2) stringp(str);
+(%o2)                         true
+</pre></div>
+
+<p>Characters are represented by a string of length 1. 
+<a href="maxima_377.html#charp">charp</a> is the corresponding test.
+</p>
+<div class="example">
+<pre class="example">(%i1) char: &quot;e&quot;;
+(%o1)                           e
+(%i2) charp(char);
+(%o2)                         true
+</pre></div>
+
+<p>In Maxima position indices in strings are like in list 1-indexed 
+which results to the following consistency.
+</p>
+<div class="example">
+<pre class="example">(%i1) is(charat(&quot;Lisp&quot;,1) = charlist(&quot;Lisp&quot;)[1]);
+(%o1)                         true
+</pre></div>
+
+<p>A string may contain Maxima expressions. 
+These can be parsed with <a href="maxima_378.html#parse_005fstring">parse_string</a>.
+</p>
+<div class="example">
+<pre class="example">(%i1) map(parse_string, [&quot;42&quot; ,&quot;sqrt(2)&quot;, &quot;%pi&quot;]);
+(%o1)                   [42, sqrt(2), %pi]
+(%i2) map('float, %);
+(%o2)        [42.0, 1.414213562373095, 3.141592653589793]
+</pre></div>
+
+<p>Strings can be processed as characters or in binary form as octets. 
+Functions for conversions are <a href="maxima_379.html#string_005fto_005foctets">string_to_octets</a> and <a href="maxima_379.html#octets_005fto_005fstring">octets_to_string</a>.
+Usable encodings depend on the platform, the application and the 
+underlying Lisp.
+(The following shows Maxima in GNU/Linux, compiled with SBCL.)
+</p>
+<div class="example">
+<pre class="example">(%i1) obase: 16.$
+(%i2) string_to_octets(&quot;$&pound;&euro;&quot;, &quot;cp1252&quot;);
+(%o2)                     [24, 0A3, 80]
+(%i3) string_to_octets(&quot;$&pound;&euro;&quot;, &quot;utf-8&quot;);
+(%o3)               [24, 0C2, 0A3, 0E2, 82, 0AC]
+</pre></div>
+
+<p>Strings may be written to character streams or as octets to binary streams. 
+The following example demonstrates file in and output of characters.
+</p>
+<p><a href="maxima_376.html#openw">openw</a> returns an output stream to a file, 
+<a href="maxima_376.html#printf">printf</a> writes formatted to that file and by e.g. 
+<a href="maxima_376.html#close">close</a> all characters contained in the stream are written to the file.
+</p>
+<div class="example">
+<pre class="example">(%i1) s: openw(&quot;file.txt&quot;);
+(%o1)                #&lt;output stream file.txt&gt;
+(%i2) printf(s, &quot;~%~d ~f ~a ~a ~f ~e ~a~%&quot;, 
+42, 1.234, sqrt(2), %pi, 1.0e-2, 1.0e-2, 1.0b-2)$
+(%i3) close(s)$
+</pre></div>
+
+<p><a href="maxima_376.html#openr">openr</a> then returns an input stream from the previously used file and 
+<a href="maxima_376.html#readline">readline</a> returns the line read as a string.
+The string may be tokenized by e.g. <a href="maxima_378.html#split">split</a> or <a href="maxima_378.html#tokens">tokens</a> and 
+finally parsed by <a href="maxima_378.html#parse_005fstring">parse_string</a>.
+</p>
+<div class="example">
+<pre class="example">(%i4) s: openr(&quot;file.txt&quot;);
+(%o4)                 #&lt;input stream file.txt&gt;
+(%i5) readline(s);
+(%o5)          42 1.234 sqrt(2) %pi 0.01 1.0E-2 1.0b-2
+(%i6) map(parse_string, split(%));
+(%o6)       [42, 1.234, sqrt(2), %pi, 0.01, 0.01, 1.0b-2]
+(%i7) close(s)$
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Strings">Strings</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+
+<a name="Item_003a-stringproc_002fnode_002fString-Input-and-Output"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_376.html#String-Input-and-Output" accesskey="n" rel="next">String Input and Output</a>, Previous: <a href="maxima_374.html#stringproc_002dpkg" accesskey="p" rel="previous">stringproc-pkg</a>, Up: <a href="maxima_374.html#stringproc_002dpkg" accesskey="u" rel="up">stringproc-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+#
+# Use of "set ttics" to place angular labels around polar grid
+#
+set title "Angle labels (ttics) for polar plots" offset 0,1
+set polar
+set ttics 0,30 format "%g".GPVAL_DEGREE_SIGN font ":Italic"
+set mttics 3
+set grid r polar 60
+unset xtics
+unset ytics
+set border 0
+set size square
+unset key
+
+set rrange [0:6.1]
+if (GPVAL_ENCODING eq "utf8") {
+    set ttics add ("π" 180, "π/2" 90, "3π/2" 270)
+} else {
+    set ttics add ("pi" 180, "pi/2" 90, "3pi/2" 270)
+}
+
+plot t lt 3 lw 2, -t lt 4 lw 2
+#
+pause -1 "<cr> to continue"
+
+set title "Polar plot with border and rotated labels for ttics"
+set ttics rotate
+set rrange [0:6.5]
+set border polar
+replot
+
+pause -1 "<cr> to continue"
+
+set title "Theta origin at top, increasing clockwise"
+set ttics norotate offset 1
+set theta clockwise top
+replot
+
+pause -1 "<cr> to continue"
+
+reset

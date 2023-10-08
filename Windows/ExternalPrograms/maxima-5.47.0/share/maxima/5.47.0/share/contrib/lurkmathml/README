@@ -1,0 +1,6 @@
+This is David Drysdale's mathml package for Maxima,
+based on mactex.lisp.
+
+License: GPL
+
+Documentation in mathml.texi.

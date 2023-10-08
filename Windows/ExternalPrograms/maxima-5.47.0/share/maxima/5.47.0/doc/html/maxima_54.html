@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>dynamics-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="dynamics-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="dynamics-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_55.html#engineering_002dformat_002dpkg" rel="next" title="engineering-format-pkg">
+<link href="maxima_53.html#drawdf_002dpkg" rel="prev" title="drawdf-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="dynamics_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_55.html#engineering_002dformat_002dpkg" accesskey="n" rel="next">engineering-format</a>, Previous: <a href="maxima_53.html#drawdf_002dpkg" accesskey="p" rel="prev">drawdf</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="dynamics">55 dynamics</h2>
+
+<a class="anchor" id="Item_003a-dynamics_002fnode_002fThe-dynamics-package"></a><ul class="mini-toc">
+<li><a href="#The-dynamics-package" accesskey="1">The dynamics package</a></li>
+<li><a href="#Graphical-analysis-of-discrete-dynamical-systems" accesskey="2">Graphical analysis of discrete dynamical systems</a></li>
+<li><a href="#Visualization-with-VTK" accesskey="3">Visualization with VTK</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="The-dynamics-package">
+<div class="nav-panel">
+<p>
+Next: <a href="#Graphical-analysis-of-discrete-dynamical-systems" accesskey="n" rel="next">Graphical analysis of discrete dynamical systems</a>, Previous: <a href="#dynamics_002dpkg" accesskey="p" rel="prev">dynamics</a>, Up: <a href="#dynamics_002dpkg" accesskey="u" rel="up">dynamics</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="The-dynamics-package-1">55.1 The dynamics package</h3>
+
+<p>Package <code class="code">dynamics</code> includes functions for 3D visualization,
+animations, graphical analysis of differential and difference equations
+and numerical solution of differential equations. The functions for
+differential equations are described in the section on <code class="code"><a class="ref" href="maxima_21.html#Numerical">Numerical Methods</a></code> and the functions to plot the Mandelbrot and Julia
+sets are described in the section on <code class="code"><a class="ref" href="maxima_11.html#Plotting">Plotting</a></code>.
+</p>
+<p>All the functions in this package will be loaded automatically the first
+time they are used.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Dynamical-systems">Dynamical systems</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-dynamics_002fnode_002fGraphical-analysis-of-discrete-dynamical-systems"></a><hr>
+</div>
+<div class="section-level-extent" id="Graphical-analysis-of-discrete-dynamical-systems">
+<div class="nav-panel">
+<p>
+Next: <a href="#Visualization-with-VTK" accesskey="n" rel="next">Visualization with VTK</a>, Previous: <a href="#The-dynamics-package" accesskey="p" rel="prev">The dynamics package</a>, Up: <a href="#dynamics_002dpkg" accesskey="u" rel="up">dynamics</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Graphical-analysis-of-discrete-dynamical-systems-1">55.2 Graphical analysis of discrete dynamical systems</h3>
+
+<a class="anchor" id="chaosgame"></a><a class="anchor" id="Item_003a-dynamics_002fdeffn_002fchaosgame"></a><dl class="first-deffn">
+<dt class="deffn" id="index-chaosgame"><span class="category-def">Function: </span><span><strong class="def-name">chaosgame</strong> <var class="def-var-arguments">([[<var class="var">x1</var>, <var class="var">y1</var>]&hellip;[<var class="var">xm</var>, <var class="var">ym</var>]], [<var class="var">x0</var>, <var class="var">y0</var>], <var class="var">b</var>, <var class="var">n</var>, <var class="var">options</var>, &hellip;);</var><a class="copiable-link" href='#index-chaosgame'> &para;</a></span></dt>
+<dd>
+<p>Implements the so-called chaos game: the initial point (<var class="var">x0</var>,
+<var class="var">y0</var>) is plotted and then one of the <var class="var">m</var> points
+[<var class="var">x1</var>, <var class="var">y1</var>]&hellip;<var class="var">xm</var>, <var class="var">ym</var>]
+will be selected at random. The next point plotted will be on the
+segment from the previous point plotted to the point chosen randomly, at a
+distance from the random point which will be <var class="var">b</var> times that segment&rsquo;s
+length. The procedure is repeated <var class="var">n</var> times. The options are the
+same as for <code class="code"><a class="ref" href="maxima_11.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong class="strong">Example</strong>. A plot of Sierpinsky&rsquo;s triangle:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) chaosgame([[0, 0], [1, 0], [0.5, sqrt(3)/2]], [0.1, 0.1], 1/2,
+                 30000, [style, dots]);
+</pre></div>
+
+<img class="image" src="./figures/dynamics7.png" alt="./figures/dynamics7">
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="evolution"></a><a class="anchor" id="Item_003a-dynamics_002fdeffn_002fevolution"></a><dl class="first-deffn">
+<dt class="deffn" id="index-evolution"><span class="category-def">Function: </span><span><strong class="def-name">evolution</strong> <var class="def-var-arguments">(<var class="var">F</var>, <var class="var">y0</var>, <var class="var">n</var>,  &hellip;, <var class="var">options</var>, &hellip;);</var><a class="copiable-link" href='#index-evolution'> &para;</a></span></dt>
+<dd>
+<p>Draws <var class="var">n+1</var> points in a two-dimensional graph, where the horizontal
+coordinates of the points are the integers 0, 1, 2, ..., <var class="var">n</var>, and
+the vertical coordinates are the corresponding values <var class="var">y(n)</var> of the
+sequence defined by the recurrence relation
+</p><div class="example">
+<pre class="example-preformatted">        y(n+1) = F(y(n))
+</pre></div>
+
+<p>With initial value <var class="var">y(0)</var> equal to <var class="var">y0</var>. <var class="var">F</var> must be an
+expression that depends only on one variable (in the example, it
+depend on <var class="var">y</var>, but any other variable can be used),
+<var class="var">y0</var> must be a real number and <var class="var">n</var> must be a positive integer.
+ This function accepts the same options as <code class="code"><a class="ref" href="maxima_11.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong class="strong">Example</strong>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) evolution(cos(y), 2, 11);
+</pre></div>
+<img class="image" src="./figures/dynamics1.png" alt="./figures/dynamics1">
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="evolution2d"></a><a class="anchor" id="Item_003a-dynamics_002fdeffn_002fevolution2d"></a><dl class="first-deffn">
+<dt class="deffn" id="index-evolution2d"><span class="category-def">Function: </span><span><strong class="def-name">evolution2d</strong> <var class="def-var-arguments">([<var class="var">F</var>, <var class="var">G</var>], [<var class="var">u</var>, <var class="var">v</var>], [<var class="var">u0</var>, <var class="var">y0</var>], <var class="var">n</var>, <var class="var">options</var>, &hellip;);</var><a class="copiable-link" href='#index-evolution2d'> &para;</a></span></dt>
+<dd>
+<p>Shows, in a two-dimensional plot, the first <var class="var">n+1</var> points in the
+sequence of points defined by the two-dimensional discrete dynamical
+system with recurrence relations
+</p><div class="example">
+<pre class="example-preformatted">        u(n+1) = F(u(n), v(n))    v(n+1) = G(u(n), v(n))
+</pre></div>
+
+<p>With initial values <var class="var">u0</var> and <var class="var">v0</var>. <var class="var">F</var> and <var class="var">G</var> must be
+two expressions that depend only on two variables, <var class="var">u</var> and
+<var class="var">v</var>, which must be named explicitly in a list. The options are the
+same as for <code class="code"><a class="ref" href="maxima_11.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong class="strong">Example</strong>. Evolution of a two-dimensional discrete dynamical system:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) f: 0.6*x*(1+2*x)+0.8*y*(x-1)-y^2-0.9$
+(%i2) g: 0.1*x*(1-6*x+4*y)+0.1*y*(1+9*y)-0.4$
+(%i3) evolution2d([f,g], [x,y], [-0.5,0], 50000, [style,dots]);
+</pre></div>
+
+<img class="image" src="./figures/dynamics5.png" alt="./figures/dynamics5">
+
+<p>And an enlargement of a small region in that fractal:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i9) evolution2d([f,g], [x,y], [-0.5,0], 300000, [x,-0.8,-0.6],
+                  [y,-0.4,-0.2], [style, dots]);
+</pre></div>
+
+<img class="image" src="./figures/dynamics6.png" alt="./figures/dynamics6">
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ifs"></a><a class="anchor" id="Item_003a-dynamics_002fdeffn_002fifs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ifs"><span class="category-def">Function: </span><span><strong class="def-name">ifs</strong> <var class="def-var-arguments">([<var class="var">r1</var>, &hellip;, <var class="var">rm</var>], [<var class="var">A1</var>,&hellip;, <var class="var">Am</var>], [[<var class="var">x1</var>, <var class="var">y1</var>], &hellip;, [<var class="var">xm</var>, <var class="var">ym</var>]], [<var class="var">x0</var>, <var class="var">y0</var>], <var class="var">n</var>, <var class="var">options</var>, &hellip;);</var><a class="copiable-link" href='#index-ifs'> &para;</a></span></dt>
+<dd>
+<p>Implements the Iterated Function System method. This method is similar
+to the method described in the function <code class="code"><a class="ref" href="#chaosgame">chaosgame</a></code>. but instead of
+shrinking the segment from the current point to the randomly chosen
+point, the 2 components of that segment will be multiplied by the 2 by 2
+matrix <var class="var">Ai</var> that corresponds to the point chosen randomly.
+</p>
+<p>The random choice of one of the <var class="var">m</var> attractive points can be made
+with a non-uniform probability distribution defined by the weights
+<var class="var">r1</var>,...,<var class="var">rm</var>. Those weights are given in cumulative form; for
+instance if there are 3 points with probabilities 0.2, 0.5 and 0.3, the
+weights <var class="var">r1</var>, <var class="var">r2</var> and <var class="var">r3</var> could be 2, 7 and 10. The
+options are the same as for <code class="code"><a class="ref" href="maxima_11.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong class="strong">Example</strong>. Barnsley&rsquo;s fern, obtained with 4 matrices and 4 points:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) a1: matrix([0.85,0.04],[-0.04,0.85])$
+(%i2) a2: matrix([0.2,-0.26],[0.23,0.22])$
+(%i3) a3: matrix([-0.15,0.28],[0.26,0.24])$
+(%i4) a4: matrix([0,0],[0,0.16])$
+(%i5) p1: [0,1.6]$
+(%i6) p2: [0,1.6]$
+(%i7) p3: [0,0.44]$
+(%i8) p4: [0,0]$
+(%i9) w: [85,92,99,100]$
+(%i10) ifs(w, [a1,a2,a3,a4], [p1,p2,p3,p4], [5,0], 50000, [style,dots]);
+</pre></div>
+
+<img class="image" src="./figures/dynamics8.png" alt="./figures/dynamics8">
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="orbits"></a><a class="anchor" id="Item_003a-dynamics_002fdeffn_002forbits"></a><dl class="first-deffn">
+<dt class="deffn" id="index-orbits"><span class="category-def">Function: </span><span><strong class="def-name">orbits</strong> <var class="def-var-arguments">(<var class="var">F</var>, <var class="var">y0</var>, <var class="var">n1</var>, <var class="var">n2</var>, [<var class="var">x</var>, <var class="var">x0</var>, <var class="var">xf</var>, <var class="var">xstep</var>], <var class="var">options</var>, &hellip;);</var><a class="copiable-link" href='#index-orbits'> &para;</a></span></dt>
+<dd>
+<p>Draws the orbits diagram for a family of one-dimensional
+discrete dynamical systems, with one parameter <var class="var">x</var>; that kind of
+diagram is used to study the bifurcations of an one-dimensional discrete
+system.
+</p>
+<p>The function <var class="var">F(y)</var> defines a sequence with a starting value of
+<var class="var">y0</var>, as in the case of the function <code class="code">evolution</code>, but in this
+case that function will also depend on a parameter <var class="var">x</var> that will
+take values in the interval from <var class="var">x0</var> to <var class="var">xf</var> with increments of
+<var class="var">xstep</var>. Each value used for the parameter <var class="var">x</var> is shown on the
+horizontal axis. The vertical axis will show the <var class="var">n2</var> values
+of the sequence <var class="var">y(n1+1)</var>,..., <var class="var">y(n1+n2+1)</var> obtained after letting
+the sequence evolve <var class="var">n1</var> iterations.  In addition to the options
+accepted by <code class="code"><a class="ref" href="maxima_11.html#plot2d">plot2d</a></code>, it accepts an option <var class="var">pixels</var> that
+sets up the maximum number of different points that will be represented
+in the vertical direction.
+</p>
+<p><strong class="strong">Example</strong>. Orbits diagram of the quadratic map, with a parameter
+<var class="var">a</var>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) orbits(x^2+a, 0, 50, 200, [a, -2, 0.25], [style, dots]);
+</pre></div>
+
+<img class="image" src="./figures/dynamics3.png" alt="./figures/dynamics3">
+
+<p>To enlarge the region around the lower bifurcation near x <code class="code">=</code> -1.25 use:
+</p><div class="example">
+<pre class="example-preformatted">(%i2) orbits(x^2+a, 0, 100, 400, [a,-1,-1.53], [x,-1.6,-0.8],
+             [nticks, 400], [style,dots]);
+</pre></div>
+
+<img class="image" src="./figures/dynamics4.png" alt="./figures/dynamics4">
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="staircase"></a><a class="anchor" id="Item_003a-dynamics_002fdeffn_002fstaircase"></a><dl class="first-deffn">
+<dt class="deffn" id="index-staircase"><span class="category-def">Function: </span><span><strong class="def-name">staircase</strong> <var class="def-var-arguments">(<var class="var">F</var>, <var class="var">y0</var>, <var class="var">n</var>,<var class="var">options</var>,&hellip;);</var><a class="copiable-link" href='#index-staircase'> &para;</a></span></dt>
+<dd>
+<p>Draws a staircase diagram for the sequence defined by the recurrence
+relation
+</p><div class="example">
+<pre class="example-preformatted">        y(n+1) = F(y(n))
+</pre></div>
+
+<p>The interpretation and allowed values of the input parameters is the
+same as for the function <code class="code"><a class="ref" href="#evolution">evolution</a></code>. A staircase diagram consists
+of a plot of the function <var class="var">F(y)</var>, together with the line <var class="var">G(y)</var>
+<code class="code">=</code> <var class="var">y</var>. A vertical segment is drawn from the point (<var class="var">y0</var>,
+<var class="var">y0</var>) on that line until the point where it intersects the function
+<var class="var">F</var>. From that point a horizontal segment is drawn until it reaches
+the point (<var class="var">y1</var>, <var class="var">y1</var>) on the line, and the procedure is
+repeated <var class="var">n</var> times until the point (<var class="var">yn</var>, <var class="var">yn</var>) is
+reached. The options are the same as for <code class="code"><a class="ref" href="maxima_11.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong class="strong">Example</strong>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) staircase(cos(y), 1, 11, [y, 0, 1.2]);
+</pre></div>
+<img class="image" src="./figures/dynamics2.png" alt="./figures/dynamics2">
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-dynamics_002fnode_002fVisualization-with-VTK"></a><hr>
+</div>
+<div class="section-level-extent" id="Visualization-with-VTK">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Graphical-analysis-of-discrete-dynamical-systems" accesskey="p" rel="prev">Graphical analysis of discrete dynamical systems</a>, Up: <a href="#dynamics_002dpkg" accesskey="u" rel="up">dynamics</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Visualization-with-VTK-1">55.3 Visualization with VTK</h3>
+
+<p>Function scene creates 3D images and animations using the <em class="emph">Visualization
+ToolKit</em> (VTK) software. In order to use that function, Xmaxima and VTK should be
+installed in your system (including the TCL bindings of VTK, which in
+some system might come in a separate package).
+</p>
+<a class="anchor" id="scene"></a><a class="anchor" id="Item_003a-dynamics_002fdeffn_002fscene"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scene"><span class="category-def">Function: </span><span><strong class="def-name">scene</strong> <var class="def-var-arguments">(<var class="var">objects</var>, &hellip;, <var class="var">options</var>, &hellip;);</var><a class="copiable-link" href='#index-scene'> &para;</a></span></dt>
+<dd>
+<p>Accepts an empty list or a list of several <code class="code"><a class="ref" href="#scene_005fobjects">objects</a></code>
+and <code class="code"><a class="ref" href="#scene_005foptions">options</a></code>. The program launches Xmaxima, which
+opens an external window representing the given objects in a
+3-dimensional space and applying the options given. Each object must
+belong to one of the following 4 classes: sphere, cube, cylinder or cone
+(see <code class="code"><a class="ref" href="#scene_005fobjects">Scene objects</a></code>). Objects are identified by
+giving their name or by a list in which the first element is the class
+name and the following elements are options for that object.
+</p> 
+<p><strong class="strong">Example</strong>. A hexagonal pyramid with a blue background:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) scene(cone, [background,&quot;#9980e5&quot;])$
+</pre></div>
+<img class="image" src="./figures/scene1.png" alt="./figures/scene1">
+
+<p>By holding down the left button of the mouse while it is moved on the
+graphics window, the camera can be rotated showing different views of
+the pyramid. The two plot options <code class="code"><a class="ref" href="#scene_005felevation">elevation</a></code> and
+<code class="code"><a class="ref" href="#scene_005fazimuth">azimuth</a></code> can also be used to change the initial
+orientation of the viewing camera. The camera can be moved by holding
+the middle mouse button while moving it and holding the right-side mouse
+button while moving it up or down will zoom in or out.
+</p>
+<p>Each object option should be a list starting with the option name,
+followed by its value. The list of allowed options can be found in the
+<code class="code"><a class="ref" href="#object_005foptions">Scene object's options</a></code> section.
+</p>
+<p><strong class="strong">Example</strong>. This will show a sphere falling to the ground and
+bouncing off without losing any energy. To start or pause the
+animation, press the play/pause button.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) p: makelist ([0,0,2.1- 9.8*t^2/2], t, 0, 0.64, 0.01)$
+
+(%i2) p: append (p, reverse(p))$
+
+(%i3) ball: [sphere, [radius,0.1], [thetaresolution,20],
+  [phiresolution,20], [position,0,0,2.1], [color,red],
+  [animate,position,p]]$
+
+(%i4) ground: [cube, [xlength,2], [ylength,2], [zlength,0.2],
+  [position,0,0,-0.1],[color,violet]]$
+
+(%i5) scene (ball, ground, restart)$
+</pre></div>
+<img class="image" src="./figures/scene2.png" alt="./figures/scene2">
+
+<p>The <var class="var">restart</var> option was used to make the animation restart
+automatically every time the last point in the position list is reached.
+The accepted values for the colors are the same as for the <code class="code"><a class="ref" href="maxima_11.html#color">color</a></code>
+option of plot2d. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="scene_005foptions"></a><ul class="mini-toc">
+<li><a href="#Scene-options" accesskey="1">Scene options</a></li>
+<li><a href="#Scene-objects" accesskey="2">Scene objects</a></li>
+<li><a href="#Scene-object_0027s-options" accesskey="3">Scene object&rsquo;s options</a></li>
+</ul>
+<div class="subsection-level-extent" id="Scene-options">
+<h4 class="subsection">55.3.1 Scene options</h4>
+
+<a class="anchor" id="scene_005fazimuth"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fazimuth"></a><dl class="first-defvr">
+<dt class="defvr" id="index-azimuth-1"><span class="category-def">Scene option: </span><span><strong class="def-name">azimuth</strong> <var class="def-var-arguments">[azimuth, <var class="var">angle</var>]</var><a class="copiable-link" href='#index-azimuth-1'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">135</code>
+</p>
+<p>The rotation of the camera on the horizontal (x, y) plane. <var class="var">angle</var>
+must be a real number; an angle of 0 means that the camera points in the
+direction of the y axis and the x axis will appear on the right.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005fbackground"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fbackground"></a><dl class="first-defvr">
+<dt class="defvr" id="index-background"><span class="category-def">Scene option: </span><span><strong class="def-name">background</strong> <var class="def-var-arguments">[background, <var class="var">color</var>]</var><a class="copiable-link" href='#index-background'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">black</code>
+</p>
+<p>The color of the graphics window&rsquo;s background. It accepts color names or
+hexadecimal red-green-blue strings (see the <code class="code"><a class="ref" href="maxima_11.html#color">color</a></code> option of plot2d).
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005felevation"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002felevation"></a><dl class="first-defvr">
+<dt class="defvr" id="index-elevation-1"><span class="category-def">Scene option: </span><span><strong class="def-name">elevation</strong> <var class="def-var-arguments">[elevation, <var class="var">angle</var>]</var><a class="copiable-link" href='#index-elevation-1'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">30</code>
+</p>
+<p>The vertical rotation of the camera. The <var class="var">angle</var> must be a real
+number; an angle of 0 means that the camera points on the horizontal,
+and the default angle of 30 means that the camera is pointing 30 degrees
+down from the horizontal.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005fheight"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fheight"></a><dl class="first-defvr">
+<dt class="defvr" id="index-height"><span class="category-def">Scene option: </span><span><strong class="def-name">height</strong> <var class="def-var-arguments">[height, <var class="var">pixels</var>]</var><a class="copiable-link" href='#index-height'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">500</code>
+</p>
+<p>The height, in pixels, of the graphics window. <var class="var">pixels</var> must be a
+positive integer number.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005frestart"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002frestart"></a><dl class="first-defvr">
+<dt class="defvr" id="index-restart"><span class="category-def">Scene option: </span><span><strong class="def-name">restart</strong> <var class="def-var-arguments">[restart, <var class="var">value</var>]</var><a class="copiable-link" href='#index-restart'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>A true value means that animations will restart automatically when the
+end of the list is reached. Writing just &ldquo;restart&rdquo; is equivalent to
+[restart, <var class="var">true</var>].
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005ftstep"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002ftstep"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tstep"><span class="category-def">Scene option: </span><span><strong class="def-name">tstep</strong> <var class="def-var-arguments">[tstep, <var class="var">time</var>]</var><a class="copiable-link" href='#index-tstep'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">10</code>
+</p>
+<p>The amount of time, in mili-seconds, between iterations among
+consecutive animation frames. <var class="var">time</var> must be a real number.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005fwidth"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fwidth"></a><dl class="first-defvr">
+<dt class="defvr" id="index-width"><span class="category-def">Scene option: </span><span><strong class="def-name">width</strong> <var class="def-var-arguments">[width, <var class="var">pixels</var>]</var><a class="copiable-link" href='#index-width'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">500</code>
+</p>
+<p>The width, in pixels, of the graphics window. <var class="var">pixels</var> must be a
+positive integer number.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005fwindowname"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fwindowname"></a><dl class="first-defvr">
+<dt class="defvr" id="index-windowname"><span class="category-def">Scene option: </span><span><strong class="def-name">windowname</strong> <var class="def-var-arguments">[windowtitle, <var class="var">name</var>]</var><a class="copiable-link" href='#index-windowname'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">.scene</code>
+</p>
+<p><var class="var">name</var> must be a string that can be used as the name of the Tk
+window created by Xmaxima for the <code class="code">scene</code> graphics. The default
+value <code class="code">.scene</code> implies that a new top level window will be created.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005fwindowtitle"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fwindowtitle"></a><dl class="first-defvr">
+<dt class="defvr" id="index-windowtitle"><span class="category-def">Scene option: </span><span><strong class="def-name">windowtitle</strong> <var class="def-var-arguments">[windowtitle, <var class="var">name</var>]</var><a class="copiable-link" href='#index-windowtitle'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">Xmaxima: scene</code>
+</p>
+<p><var class="var">name</var> must be a string that will be written in the title of the
+window created by <code class="code">scene</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scene_005fobjects"></a></div>
+<div class="subsection-level-extent" id="Scene-objects">
+<h4 class="subsection">55.3.2 Scene objects</h4>
+
+<a class="anchor" id="cone"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fcone"></a><dl class="first-defvr">
+<dt class="defvr" id="index-cone"><span class="category-def">Scene object: </span><span><strong class="def-name">cone</strong> <var class="def-var-arguments">[cone, <var class="var">options</var>]</var><a class="copiable-link" href='#index-cone'> &para;</a></span></dt>
+<dd>
+<p>Creates a regular pyramid with height equal to 1 and a hexagonal base
+with vertices 0.5 units away from the axis. Options
+<code class="code"><a class="ref" href="#object_005fheight">height</a></code> and <code class="code"><a class="ref" href="#object_005fradius">radius</a></code> can be used
+to change those defaults and option <code class="code"><a class="ref" href="#object_005fresolution">resolution</a></code>
+can be used to change the number of edges of the base; higher values
+will make it look like a cone. By default, the axis will be along the x
+axis, the middle point of the axis will be at the origin and the vertex
+on the positive side of the x axis; use options
+<code class="code"><a class="ref" href="#object_005forientation">orientation</a></code> and <code class="code"><a class="ref" href="#object_005fcenter">center</a></code> to
+change those defaults.
+</p>
+<p><strong class="strong">Example</strong>. This shows a pyramid that starts rotating around the z
+axis when the play button is pressed.
+</p> 
+<div class="example">
+<pre class="example-preformatted">(%i1) scene([cone, [orientation,0,30,0], [tstep,100],
+   [animate,orientation,makelist([0,30,i],i,5,360,5)]], restart)$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="cube"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fcube"></a><dl class="first-defvr">
+<dt class="defvr" id="index-cube"><span class="category-def">Scene object: </span><span><strong class="def-name">cube</strong> <var class="def-var-arguments">[cube, <var class="var">options</var>]</var><a class="copiable-link" href='#index-cube'> &para;</a></span></dt>
+<dd>
+<p>A cube with edges of 1 unit and faces parallel to the xy, xz and yz
+planes. The lengths of the three edges can be changed with options
+<code class="code"><a class="ref" href="#object_005fxlength">xlength</a></code>, <code class="code"><a class="ref" href="#object_005fylength">ylength</a></code> and
+<code class="code"><a class="ref" href="#object_005fzlength">zlength</a></code>, turning it into a rectangular box and
+the faces can be rotated with option <code class="code"><a class="ref" href="#object_005forientation">orientation</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="cylinder"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fcylinder"></a><dl class="first-defvr">
+<dt class="defvr" id="index-cylinder"><span class="category-def">Scene object: </span><span><strong class="def-name">cylinder</strong> <var class="def-var-arguments">[cylinder, <var class="var">options</var>]</var><a class="copiable-link" href='#index-cylinder'> &para;</a></span></dt>
+<dd>
+<p>Creates a regular prism with height equal to 1 and a hexagonal base with
+vertices 0.5 units away from the axis. Options
+<code class="code"><a class="ref" href="#object_005fheight">height</a></code> and <code class="code"><a class="ref" href="#object_005fradius">radius</a></code> can be
+used to change those defaults and option <code class="code"><a class="ref" href="#object_005fresolution">resolution</a></code> can be used to change the number of edges of the base;
+higher values will make it look like a cylinder. The default height can
+be changed with the option <code class="code"><a class="ref" href="#object_005fheight">height</a></code>. By default,
+the axis will be along the x axis and the middle point of the axis will
+be at the origin; use options <code class="code"><a class="ref" href="#object_005forientation">orientation</a></code> and
+<code class="code"><a class="ref" href="#object_005fcenter">center</a></code> to change those defaults.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sphere"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fsphere"></a><dl class="first-defvr">
+<dt class="defvr" id="index-sphere"><span class="category-def">Scene object: </span><span><strong class="def-name">sphere</strong> <var class="def-var-arguments">[sphere, <var class="var">options</var>]</var><a class="copiable-link" href='#index-sphere'> &para;</a></span></dt>
+<dd>
+<p>A sphere with default radius of 0.5 units and center at the origin. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005foptions"></a></div>
+<div class="subsection-level-extent" id="Scene-object_0027s-options">
+<h4 class="subsection">55.3.3 Scene object&rsquo;s options</h4>
+
+<a class="anchor" id="object_005fanimation"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fanimation"></a><dl class="first-defvr">
+<dt class="defvr" id="index-animation"><span class="category-def">Object option: </span><span><strong class="def-name">animation</strong> <var class="def-var-arguments">[animation, <var class="var">property</var>, <var class="var">positions</var>]</var><a class="copiable-link" href='#index-animation'> &para;</a></span></dt>
+<dd>
+<p><var class="var">property</var> should be one of the following 4 object&rsquo;s properties:
+<code class="code"><a class="ref" href="#object_005forigin">origin</a></code>, <code class="code"><a class="ref" href="#object_005fscale">scale</a></code>,
+<code class="code"><a class="ref" href="#object_005fposition">position</a></code> or
+<code class="code"><a class="ref" href="#object_005forientation">orientation</a></code> and <var class="var">positions</var> should be a
+list of points. When the play button is pressed, the object property
+will be changed sequentially through all the values in the list, at
+intervals of time given by the option <code class="code"><a class="ref" href="#scene_005ftstep">tstep</a></code>. The
+rewind button can be used to point at the start of the sequence making
+the animation restart after the play button is pressed again.
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005ftrack">track</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fcapping"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fcapping"></a><dl class="first-defvr">
+<dt class="defvr" id="index-capping-1"><span class="category-def">Object option: </span><span><strong class="def-name">capping</strong> <var class="def-var-arguments">[capping, <var class="var">number</var>]</var><a class="copiable-link" href='#index-capping-1'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">1</code>
+</p>
+<p>In a cone or a cylinder, it defines whether the base (or bases) will be
+shown. A value of 1 for <var class="var">number</var> makes the base visible and a value
+of 0 makes it invisible.
+</p> 
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fcenter"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fcenter"></a><dl class="first-defvr">
+<dt class="defvr" id="index-center"><span class="category-def">Object option: </span><span><strong class="def-name">center</strong> <var class="def-var-arguments">[center, <var class="var">point</var>]</var><a class="copiable-link" href='#index-center'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[0, 0, 0]</code>
+</p>
+<p>The coordinates of the object&rsquo;s geometric center, with respect to its
+<code class="code"><a class="ref" href="#object_005fposition">position</a></code>. <var class="var">point</var> can be a list with 3
+real numbers, or 3 real numbers separated by commas. In a cylinder, cone
+or cube it will be at half its height and in a sphere at its center.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fcolor"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fcolor"></a><dl class="first-defvr">
+<dt class="defvr" id="index-color-2"><span class="category-def">Object option: </span><span><strong class="def-name">color</strong> <var class="def-var-arguments">[color, <var class="var">colorname</var>]</var><a class="copiable-link" href='#index-color-2'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">white</code>
+</p>
+<p>The color of the object. It accepts color names or hexadecimal
+red-green-blue strings (see the <code class="code"><a class="ref" href="maxima_11.html#color">color</a></code> option of plot2d).
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fendphi"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fendphi"></a><dl class="first-defvr">
+<dt class="defvr" id="index-endphi"><span class="category-def">Object option: </span><span><strong class="def-name">endphi</strong> <var class="def-var-arguments">[endphi, <var class="var">angle</var>]</var><a class="copiable-link" href='#index-endphi'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">180</code>
+</p>
+<p>In a sphere phi is the angle on the vertical plane that passes through
+the z axis, measured from the positive part of the z axis. <var class="var">angle</var>
+must be a number between 0 and 180 that sets the final value of phi at
+which the surface will end. A value smaller than 180 will eliminate a
+part of the sphere&rsquo;s surface.
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005fstartphi">startphi</a></code> and
+<code class="code"><a class="ref" href="#object_005fphiresolution">phiresolution</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fendtheta"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fendtheta"></a><dl class="first-defvr">
+<dt class="defvr" id="index-endtheta"><span class="category-def">Object option: </span><span><strong class="def-name">endtheta</strong> <var class="def-var-arguments">[endtheta, <var class="var">angle</var>]</var><a class="copiable-link" href='#index-endtheta'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">360</code>
+</p>
+<p>In a sphere theta is the angle on the horizontal plane (longitude),
+measured from the positive part of the x axis. <var class="var">angle</var> must be a
+number between 0 and 360 that sets the final value of theta at which the
+surface will end. A value smaller than 360 will eliminate a part of
+the sphere&rsquo;s surface.
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005fstarttheta">starttheta</a></code> and
+<code class="code"><a class="ref" href="#object_005fthetaresolution">thetaresolution</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fheight"></a><dl class="first-defvr">
+<dt class="defvr" id="index-height-1"><span class="category-def">Object option: </span><span><strong class="def-name">height</strong> <var class="def-var-arguments">[height, <var class="var">value</var>]</var><a class="copiable-link" href='#index-height-1'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">1</code>
+</p>
+<p><var class="var">value</var> must be a positive number which sets the height of a cone
+or a cylinder.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005flinewidth"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002flinewidth"></a><dl class="first-defvr">
+<dt class="defvr" id="index-linewidth"><span class="category-def">Object option: </span><span><strong class="def-name">linewidth</strong> <var class="def-var-arguments">[linewidth, <var class="var">value</var>]</var><a class="copiable-link" href='#index-linewidth'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">1</code>
+</p>
+<p>The width of the lines, when option <code class="code"><a class="ref" href="#object_005fwireframe">wireframe</a></code> is
+used. <var class="var">value</var> must be a positive number.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fopacity"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fopacity"></a><dl class="first-defvr">
+<dt class="defvr" id="index-opacity"><span class="category-def">Object option: </span><span><strong class="def-name">opacity</strong> <var class="def-var-arguments">[opacity, <var class="var">value</var>]</var><a class="copiable-link" href='#index-opacity'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">1</code>
+</p>
+<p><var class="var">value</var> must be a number between 0 and 1. The lower the number, the
+more transparent the object will become. The default value of 1 means a
+completely opaque object.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005forientation"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002forientation"></a><dl class="first-defvr">
+<dt class="defvr" id="index-orientation"><span class="category-def">Object option: </span><span><strong class="def-name">orientation</strong> <var class="def-var-arguments">[orientation, <var class="var">angles</var>]</var><a class="copiable-link" href='#index-orientation'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[0, 0, 0]</code>
+</p>
+<p>Three angles by which the object will be rotated with respect to the
+three axis. <var class="var">angles</var> can be a list with 3 real numbers, or 3 real
+numbers separated by commas. <strong class="strong">Example</strong>: <code class="code">[0, 0, 90]</code> rotates
+the x axis of the object to the y axis of the reference frame.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005forigin"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002forigin"></a><dl class="first-defvr">
+<dt class="defvr" id="index-origin"><span class="category-def">Object option: </span><span><strong class="def-name">origin</strong> <var class="def-var-arguments">[origin, <var class="var">point</var>]</var><a class="copiable-link" href='#index-origin'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[0, 0, 0]</code>
+</p>
+<p>The coordinates of the object&rsquo;s origin, with respect to which its
+other dimensions are defined. <var class="var">point</var> can be a list with 3
+real numbers, or 3 real numbers separated by commas.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fphiresolution"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fphiresolution"></a><dl class="first-defvr">
+<dt class="defvr" id="index-phiresolution"><span class="category-def">Object option: </span><span><strong class="def-name">phiresolution</strong> <var class="def-var-arguments">[phiresolution, <var class="var">num</var>]</var><a class="copiable-link" href='#index-phiresolution'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code"></code>
+</p>
+<p>The number of sub-intervals into which the phi angle interval from
+<code class="code"><a class="ref" href="#object_005fstartphi">startphi</a></code> to <code class="code"><a class="ref" href="#object_005fendphi">endphi</a></code>
+will be divided. <var class="var">num</var> must be a positive integer.
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005fstartphi">startphi</a></code> and
+<code class="code"><a class="ref" href="#object_005fendphi">endphi</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fpoints"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fpoints"></a><dl class="first-defvr">
+<dt class="defvr" id="index-points-1"><span class="category-def">Object option: </span><span><strong class="def-name">points</strong> <var class="def-var-arguments">[points]</var><a class="copiable-link" href='#index-points-1'> &para;</a></span></dt>
+<dd>
+<p>Only the vertices of the triangulation used to render the surface will
+be shown. <strong class="strong">Example</strong>: <code class="code">[sphere, [points]]</code>
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005fsurface">surface</a></code> and
+<code class="code"><a class="ref" href="#object_005fwireframe">wireframe</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fpointsize"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fpointsize"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pointsize"><span class="category-def">Object option: </span><span><strong class="def-name">pointsize</strong> <var class="def-var-arguments">[pointsize, <var class="var">value</var>]</var><a class="copiable-link" href='#index-pointsize'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">1</code>
+</p>
+<p>The size of the points, when option <code class="code"><a class="ref" href="#object_005fpoints">points</a></code> is
+used. <var class="var">value</var> must be a positive number.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fposition"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fposition"></a><dl class="first-defvr">
+<dt class="defvr" id="index-position"><span class="category-def">Object option: </span><span><strong class="def-name">position</strong> <var class="def-var-arguments">[position, <var class="var">point</var>]</var><a class="copiable-link" href='#index-position'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[0, 0, 0]</code>
+</p>
+<p>The coordinates of the object&rsquo;s position. <var class="var">point</var> can be a list with 3
+real numbers, or 3 real numbers separated by commas.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fradius"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fradius"></a><dl class="first-defvr">
+<dt class="defvr" id="index-radius-1"><span class="category-def">Object option: </span><span><strong class="def-name">radius</strong> <var class="def-var-arguments">[radius, <var class="var">value</var>]</var><a class="copiable-link" href='#index-radius-1'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">0.5</code>
+</p>
+<p>The radius or a sphere or the distance from the axis to the base&rsquo;s
+vertices in a cylinder or a cone. <var class="var">value</var> must be a positive number.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fresolution"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fresolution"></a><dl class="first-defvr">
+<dt class="defvr" id="index-resolution"><span class="category-def">Object option: </span><span><strong class="def-name">resolution</strong> <var class="def-var-arguments">[resolution, <var class="var">number</var>]</var><a class="copiable-link" href='#index-resolution'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">6</code>
+</p>
+<p><var class="var">number</var> must be an integer greater than 2 that sets the number of
+edges in the base of a cone or a cylinder.
+</p> 
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fscale"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fscale"></a><dl class="first-defvr">
+<dt class="defvr" id="index-scale"><span class="category-def">Object option: </span><span><strong class="def-name">scale</strong> <var class="def-var-arguments">[scale, <var class="var">factors</var>]</var><a class="copiable-link" href='#index-scale'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[1, 1, 1]</code>
+</p>
+<p>Three numbers by which the object will be scaled with respect to the
+three axis. <var class="var">factors</var> can be a list with 3 real numbers, or 3 real
+numbers separated by commas. <strong class="strong">Example</strong>: <code class="code">[2, 0.5, 1]</code>
+enlarges the object to twice its size in the x direction, reduces the
+dimensions in the y direction to half and leaves the z dimensions
+unchanged.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fstartphi"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fstartphi"></a><dl class="first-defvr">
+<dt class="defvr" id="index-startphi"><span class="category-def">Object option: </span><span><strong class="def-name">startphi</strong> <var class="def-var-arguments">[startphi, <var class="var">angle</var>]</var><a class="copiable-link" href='#index-startphi'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">0</code>
+</p>
+<p>In a sphere phi is the angle on the vertical plane that passes through
+the z axis, measured from the positive part of the z axis. <var class="var">angle</var>
+must be a number between 0 and 180 that sets the initial value of phi at
+which the surface will start. A value bigger than 0 will eliminate a
+part of the sphere&rsquo;s surface.
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005fendphi">endphi</a></code> and
+<code class="code"><a class="ref" href="#object_005fphiresolution">phiresolution</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fstarttheta"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fstarttheta"></a><dl class="first-defvr">
+<dt class="defvr" id="index-starttheta"><span class="category-def">Object option: </span><span><strong class="def-name">starttheta</strong> <var class="def-var-arguments">[starttheta, <var class="var">angle</var>]</var><a class="copiable-link" href='#index-starttheta'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">0</code>
+</p>
+<p>In a sphere theta is the angle on the horizontal plane (longitude),
+measured from the positive part of the x axis. <var class="var">angle</var> must be a
+number between 0 and 360 that sets the initial value of theta at which
+the surface will start. A value bigger than 0 will eliminate a part of
+the sphere&rsquo;s surface.
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005fendtheta">endtheta</a></code> and
+<code class="code"><a class="ref" href="#object_005fthetaresolution">thetaresolution</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fsurface"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fsurface"></a><dl class="first-defvr">
+<dt class="defvr" id="index-surface"><span class="category-def">Object option: </span><span><strong class="def-name">surface</strong> <var class="def-var-arguments">[surface]</var><a class="copiable-link" href='#index-surface'> &para;</a></span></dt>
+<dd>
+<p>The surfaces of the object will be rendered and the lines and points of
+the triangulation used to build the surface will not be shown. This is
+the default behavior, which can be changed using either the option
+<code class="code"><a class="ref" href="#object_005fpoints">points</a></code> or <code class="code"><a class="ref" href="#object_005fwireframe">wireframe</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fthetaresolution"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fthetaresolution"></a><dl class="first-defvr">
+<dt class="defvr" id="index-thetaresolution"><span class="category-def">Object option: </span><span><strong class="def-name">thetaresolution</strong> <var class="def-var-arguments">[thetaresolution, <var class="var">num</var>]</var><a class="copiable-link" href='#index-thetaresolution'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code"></code>
+</p>
+<p>The number of sub-intervals into which the theta angle interval from
+<code class="code"><a class="ref" href="#object_005fstarttheta">starttheta</a></code> to <code class="code"><a class="ref" href="#object_005fendtheta">endtheta</a></code>
+will be divided. <var class="var">num</var> must be a positive integer.
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005fstarttheta">starttheta</a></code> and
+<code class="code"><a class="ref" href="#object_005fendtheta">endtheta</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005ftrack"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002ftrack"></a><dl class="first-defvr">
+<dt class="defvr" id="index-track"><span class="category-def">Object option: </span><span><strong class="def-name">track</strong> <var class="def-var-arguments">[track, <var class="var">positions</var>]</var><a class="copiable-link" href='#index-track'> &para;</a></span></dt>
+<dd>
+<p><var class="var">positions</var> should be a list of points. When the play button is
+pressed, the object position will be changed sequentially through all
+the points in the list, at intervals of time given by the option
+<code class="code"><a class="ref" href="#scene_005ftstep">tstep</a></code>, leaving behind a track of the object&rsquo;s
+trajectory. The rewind button can be used to point at the start of the
+sequence making the animation restart after the play button is pressed
+again.
+</p>
+<p><strong class="strong">Example</strong>. This will show the trajectory of a ball thrown with
+speed of 5 m/s, at an angle of 45 degrees, when the air resistance can
+be neglected:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) p: makelist ([0,4*t,4*t- 9.8*t^2/2], t, 0, 0.82, 0.01)$
+
+(%i2) ball: [sphere, [radius,0.1], [color,red], [track,p]]$
+
+(%i3) ground: [cube, [xlength,2], [ylength,4], [zlength,0.2],
+      [position,0,1.5,-0.2],[color,green]]$
+
+(%i4) scene (ball, ground)$
+</pre></div>
+
+<p>See also <code class="code"><a class="ref" href="#object_005fanimation">animation</a></code>.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fxlength"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fxlength"></a><dl class="first-defvr">
+<dt class="defvr" id="index-xlength"><span class="category-def">Object option: </span><span><strong class="def-name">xlength</strong> <var class="def-var-arguments">[xlength, <var class="var">length</var>]</var><a class="copiable-link" href='#index-xlength'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">1</code>
+</p>
+<p>The height of a cube in the x direction. <var class="var">length</var> must be a positive
+number. See also <code class="code"><a class="ref" href="#object_005fylength">ylength</a></code> and
+<code class="code"><a class="ref" href="#object_005fzlength">zlength</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fylength"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fylength"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ylength"><span class="category-def">Object option: </span><span><strong class="def-name">ylength</strong> <var class="def-var-arguments">[ylength, <var class="var">length</var>]</var><a class="copiable-link" href='#index-ylength'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">1</code>
+</p>
+<p>The height of a cube in the y direction. <var class="var">length</var> must be a positive
+number. See also <code class="code"><a class="ref" href="#object_005fxlength">xlength</a></code> and
+<code class="code"><a class="ref" href="#object_005fzlength">zlength</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fzlength"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fzlength"></a><dl class="first-defvr">
+<dt class="defvr" id="index-zlength"><span class="category-def">Object option: </span><span><strong class="def-name">zlength</strong> <var class="def-var-arguments">[zlength, <var class="var">length</var>]</var><a class="copiable-link" href='#index-zlength'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">1</code>
+</p>
+<p>The height of a cube in z the direction. <var class="var">length</var> must be a positive
+ number.  See also <code class="code"><a class="ref" href="#object_005fxlength">xlength</a></code> and
+ <code class="code"><a class="ref" href="#object_005fylength">ylength</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="object_005fwireframe"></a><a class="anchor" id="Item_003a-dynamics_002fdefvr_002fwireframe"></a><dl class="first-defvr">
+<dt class="defvr" id="index-wireframe"><span class="category-def">Object option: </span><span><strong class="def-name">wireframe</strong> <var class="def-var-arguments">[wireframe]</var><a class="copiable-link" href='#index-wireframe'> &para;</a></span></dt>
+<dd>
+<p>Only the edges of the triangulation used to render the surface will be
+shown. <strong class="strong">Example</strong>: <code class="code">[cube, [wireframe]]</code>
+</p>
+<p>See also <code class="code"><a class="ref" href="#object_005fsurface">surface</a></code> and
+<code class="code"><a class="ref" href="#object_005fpoints">points</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_55.html#engineering_002dformat_002dpkg" accesskey="n" rel="next">engineering-format</a>, Previous: <a href="maxima_53.html#drawdf_002dpkg" accesskey="p" rel="prev">drawdf</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

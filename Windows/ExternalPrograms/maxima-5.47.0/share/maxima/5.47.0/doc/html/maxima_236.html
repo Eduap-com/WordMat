@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Laplace Random Variable</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Laplace Random Variable">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Laplace Random Variable">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" rel="up" title="Functions and Variables for continuous distributions">
+<link href="maxima_237.html#Cauchy-Random-Variable" rel="next" title="Cauchy Random Variable">
+<link href="maxima_235.html#Rayleigh-Random-Variable" rel="previous" title="Rayleigh Random Variable">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Laplace-Random-Variable"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_237.html#Cauchy-Random-Variable" accesskey="n" rel="next">Cauchy Random Variable</a>, Previous: <a href="maxima_235.html#Rayleigh-Random-Variable" accesskey="p" rel="previous">Rayleigh Random Variable</a>, Up: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="u" rel="up">Functions and Variables for continuous distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Laplace-Random-Variable-1"></a>
+<h4 class="subsection">52.2.16 Laplace Random Variable</h4>
+
+<p>The <em>Laplace</em> distribution is a continuous probability
+distribution that is sometimes called the double exponential
+distribution because it can be thought of as two exponential
+distributions spliced back to back.
+</p>
+<a name="pdf_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002fpdf_005flaplace"></a><dl>
+<dt><a name="index-pdf_005flaplace"></a>Function: <strong>pdf_laplace</strong> <em>(<var>x</var>,<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the density function of a 
+\({\it Laplace}(a,b)\) random variable, with <em>b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>Here, <em>a</em> is the location parameter (or mean), and <em>b</em> is
+the scale parameter, related to the variance.
+</p>
+<p>The pdf is
+$$
+f(x; a, b) = {1\over 2b}\exp\left(-{|x-a|\over b}\right)
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="cdf_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002fcdf_005flaplace"></a><dl>
+<dt><a name="index-cdf_005flaplace"></a>Function: <strong>cdf_laplace</strong> <em>(<var>x</var>,<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the distribution function of a 
+\({\it Laplace}(a,b)\) random variable, with <em>b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The cdf is
+$$
+F(x; a, b) =
+\cases{
+\displaystyle{1\over 2} \exp\left({x-a\over b}\right) & for $x < a$\cr
+\cr
+1-\displaystyle{1\over 2} \exp\left({x-a\over b}\right) & for $x \ge a$
+}
+$$</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="quantile_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002fquantile_005flaplace"></a><dl>
+<dt><a name="index-quantile_005flaplace"></a>Function: <strong>quantile_laplace</strong> <em>(<var>q</var>,<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the <var>q</var>-quantile of a 
+\({\it Laplace}(a,b)\) random variable, with <em>b&gt;0</em>; in other words, this is the inverse of <code>cdf_laplace</code>. Argument <var>q</var> must be an element of <em>[0,1]</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="mean_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002fmean_005flaplace"></a><dl>
+<dt><a name="index-mean_005flaplace"></a>Function: <strong>mean_laplace</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the mean of a 
+\({\it Laplace}(a,b)\) random variable, with <em>b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The mean is
+$$
+E[X] = a
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="var_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002fvar_005flaplace"></a><dl>
+<dt><a name="index-var_005flaplace"></a>Function: <strong>var_laplace</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the variance of a 
+\({\it Laplace}(a,b)\) random variable, with <em>b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The variance is
+$$
+V[X] = 2b^2
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="std_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002fstd_005flaplace"></a><dl>
+<dt><a name="index-std_005flaplace"></a>Function: <strong>std_laplace</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the standard deviation of a 
+\({\it Laplace}(a,b)\) random variable, with <em>b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The standard deviation is
+$$
+D[X] = \sqrt{2} b
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="skewness_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002fskewness_005flaplace"></a><dl>
+<dt><a name="index-skewness_005flaplace"></a>Function: <strong>skewness_laplace</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the skewness coefficient of a 
+\({\it Laplace}(a,b)\) random variable, with <em>b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The skewness coefficient is
+$$
+SK[X] = 0
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="kurtosis_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002fkurtosis_005flaplace"></a><dl>
+<dt><a name="index-kurtosis_005flaplace"></a>Function: <strong>kurtosis_laplace</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the kurtosis coefficient of a 
+\({\it Laplace}(a,b)\) random variable, with <em>b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The kurtosis coefficient is
+$$
+KU[X] = 3
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="random_005flaplace"></a><a name="Item_003a-distrib_002fdeffn_002frandom_005flaplace"></a><dl>
+<dt><a name="index-random_005flaplace"></a>Function: <strong>random_laplace</strong> <em>(<var>a</var>,<var>b</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>random_laplace</tt> (<var>a</var>,<var>b</var>,<var>n</var>)</em></dt>
+<dd>
+<p>Returns a 
+\({\it Laplace}(a,b)\) random variate, with <em>b&gt;0</em>. Calling <code>random_laplace</code> with a third argument <var>n</var>, a random sample of size <var>n</var> will be simulated.
+</p>
+<p>The implemented algorithm is based on the general inverse method.
+</p>
+<p>To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;<a href="maxima_424.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;</div>
+</dd></dl>
+
+
+
+<a name="Item_003a-distrib_002fnode_002fCauchy-Random-Variable"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_237.html#Cauchy-Random-Variable" accesskey="n" rel="next">Cauchy Random Variable</a>, Previous: <a href="maxima_235.html#Rayleigh-Random-Variable" accesskey="p" rel="previous">Rayleigh Random Variable</a>, Up: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="u" rel="up">Functions and Variables for continuous distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

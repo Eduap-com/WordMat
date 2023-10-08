@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for plain-text input and output</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for plain-text input and output">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for plain-text input and output">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_321.html#numericalio_002dpkg" rel="up" title="numericalio-pkg">
+<link href="maxima_324.html#Functions-and-Variables-for-binary-input-and-output" rel="next" title="Functions and Variables for binary input and output">
+<link href="maxima_322.html#Introduction-to-numericalio" rel="previous" title="Introduction to numericalio">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-plain_002dtext-input-and-output"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_324.html#Functions-and-Variables-for-binary-input-and-output" accesskey="n" rel="next">Functions and Variables for binary input and output</a>, Previous: <a href="maxima_322.html#Introduction-to-numericalio" accesskey="p" rel="previous">Introduction to numericalio</a>, Up: <a href="maxima_321.html#numericalio_002dpkg" accesskey="u" rel="up">numericalio-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-plain_002dtext-input-and-output-1"></a>
+<h3 class="section">76.2 Functions and Variables for plain-text input and output</h3>
+
+<a name="read_005fmatrix"></a><a name="Item_003a-numericalio_002fdeffn_002fread_005fmatrix"></a><dl>
+<dt><a name="index-read_005fmatrix"></a>Function: <strong>read_matrix</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_matrix</tt> (<var>S</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_matrix</tt> (<var>S</var>, <var>M</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_matrix</tt> (<var>S</var>, <var>separator_flag</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_matrix</tt> (<var>S</var>, <var>M</var>, <var>separator_flag</var>)</em></dt>
+<dd>
+<p><code>read_matrix(<var>S</var>)</code> reads the source <var>S</var> and returns its entire content as a matrix.
+The size of the matrix is inferred from the input data;
+each line of the file becomes one row of the matrix.
+If some lines have different lengths, <code>read_matrix</code> complains.
+</p>
+<p><code>read_matrix(<var>S</var>, <var>M</var>)</code> read the source <var>S</var> into the matrix <var>M</var>,
+until <var>M</var> is full or the source is exhausted.
+Input data are read into the matrix in row-major order;
+the input need not have the same number of rows and columns as <var>M</var>.
+</p>
+<p>The source <var>S</var> may be a file name or a stream which for example allows skipping
+the very first line of a file (that may be useful, if you read CSV data, where the
+first line often contains the description of the columns):
+</p><div class="example">
+<pre class="example">s : openr(&quot;data.txt&quot;);
+readline(s);  /* skip the first line */
+M : read_matrix(s, 'comma);  /* read the following (comma-separated) lines into matrix M */
+close(s);
+</pre></div>
+
+<p>The recognized values of <var>separator_flag</var> are
+<code>comma</code>, <code>pipe</code>, <code>semicolon</code>, and <code>space</code>.
+Equivalently, the separator may be specified as a string of one character:
+<code>&quot;,&quot;</code> (comma), <code>&quot;|&quot;</code> (pipe), <code>&quot;;&quot;</code> (semicolon),
+<code>&quot; &quot;</code> (space), or <code>&quot;    &quot;</code> (tab).
+If <var>separator_flag</var> is not specified, the file is assumed space-delimited.
+</p>
+<p>See also <code><a href="maxima_376.html#openr">openr</a></code>, <code><a href="#read_005farray">read_array</a></code>, <code><a href="#read_005fhashed_005farray">read_hashed_array</a></code>,
+<code><a href="#read_005flist">read_list</a></code>, <code><a href="maxima_324.html#read_005fbinary_005fmatrix">read_binary_matrix</a></code>, <code><a href="#write_005fdata">write_data</a></code> and
+<code><a href="#read_005fnested_005flist">read_nested_list</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div>
+</dd></dl>
+
+<a name="read_005farray"></a><a name="Item_003a-numericalio_002fdeffn_002fread_005farray"></a><dl>
+<dt><a name="index-read_005farray"></a>Function: <strong>read_array</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_array</tt> (<var>S</var>, <var>A</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_array</tt> (<var>S</var>, <var>A</var>, <var>separator_flag</var>)</em></dt>
+<dd>
+<p>Reads the source <var>S</var> into the array <var>A</var>,
+until <var>A</var> is full or the source is exhausted.
+Input data are read into the array in row-major order;
+the input need not conform to the dimensions of <var>A</var>.
+</p>
+<p>The source <var>S</var> may be a file name or a stream.
+</p>
+<p>The recognized values of <var>separator_flag</var> are
+<code>comma</code>, <code>pipe</code>, <code>semicolon</code>, and <code>space</code>.
+Equivalently, the separator may be specified as a string of one character:
+<code>&quot;,&quot;</code> (comma), <code>&quot;|&quot;</code> (pipe), <code>&quot;;&quot;</code> (semicolon),
+<code>&quot; &quot;</code> (space), or <code>&quot;    &quot;</code> (tab).
+If <var>separator_flag</var> is not specified, the file is assumed space-delimited.
+</p>
+<p>See also <code><a href="maxima_376.html#openr">openr</a></code>, <code><a href="#read_005fmatrix">read_matrix</a></code>, <code><a href="#read_005fhashed_005farray">read_hashed_array</a></code>,
+<code><a href="#read_005flist">read_list</a></code>, <code><a href="maxima_324.html#read_005fbinary_005farray">read_binary_array</a></code> and <code><a href="#read_005fnested_005flist">read_nested_list</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div>
+</dd></dl>
+
+<a name="read_005fhashed_005farray"></a><a name="Item_003a-numericalio_002fdeffn_002fread_005fhashed_005farray"></a><dl>
+<dt><a name="index-read_005fhashed_005farray"></a>Function: <strong>read_hashed_array</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_hashed_array</tt> (<var>S</var>, <var>A</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_hashed_array</tt> (<var>S</var>, <var>A</var>, <var>separator_flag</var>)</em></dt>
+<dd>
+<p>Reads the source <var>S</var> and returns its entire content as a <code><a href="maxima_23.html#hashed-array">hashed array</a></code>.
+The source <var>S</var> may be a file name or a stream.
+</p>
+<p><code>read_hashed_array</code> treats the first item on each line as a hash key,
+and associates the remainder of the line (as a list) with the key.
+For example,
+the line <code>567 12 17 32 55</code> is equivalent to <code>A[567]: [12, 17, 32, 55]$</code>.
+Lines need not have the same numbers of elements.
+</p>
+<p>The recognized values of <var>separator_flag</var> are
+<code>comma</code>, <code>pipe</code>, <code>semicolon</code>, and <code>space</code>.
+Equivalently, the separator may be specified as a string of one character:
+<code>&quot;,&quot;</code> (comma), <code>&quot;|&quot;</code> (pipe), <code>&quot;;&quot;</code> (semicolon),
+<code>&quot; &quot;</code> (space), or <code>&quot;    &quot;</code> (tab).
+If <var>separator_flag</var> is not specified, the file is assumed space-delimited.
+</p>
+<p>See also <code><a href="maxima_376.html#openr">openr</a></code>, <code><a href="#read_005fmatrix">read_matrix</a></code>, <code><a href="#read_005farray">read_array</a></code>,
+<code><a href="#read_005flist">read_list</a></code> and <code><a href="#read_005fnested_005flist">read_nested_list</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div>
+</dd></dl>
+
+<a name="read_005fnested_005flist"></a><a name="Item_003a-numericalio_002fdeffn_002fread_005fnested_005flist"></a><dl>
+<dt><a name="index-read_005fnested_005flist"></a>Function: <strong>read_nested_list</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_nested_list</tt> (<var>S</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_nested_list</tt> (<var>S</var>, <var>separator_flag</var>)</em></dt>
+<dd>
+<p>Reads the source <var>S</var> and returns its entire content as a nested list.
+The source <var>S</var> may be a file name or a stream.
+</p>
+<p><code>read_nested_list</code> returns a list which has a sublist for each
+line of input. Lines need not have the same numbers of elements.
+Empty lines are <i>not</i> ignored: an empty line yields an empty sublist.
+</p>
+<p>The recognized values of <var>separator_flag</var> are
+<code>comma</code>, <code>pipe</code>, <code>semicolon</code>, and <code>space</code>.
+Equivalently, the separator may be specified as a string of one character:
+<code>&quot;,&quot;</code> (comma), <code>&quot;|&quot;</code> (pipe), <code>&quot;;&quot;</code> (semicolon),
+<code>&quot; &quot;</code> (space), or <code>&quot;    &quot;</code> (tab).
+If <var>separator_flag</var> is not specified, the file is assumed space-delimited.
+</p>
+<p>See also <code><a href="maxima_376.html#openr">openr</a></code>, <code><a href="#read_005fmatrix">read_matrix</a></code>, <code><a href="#read_005farray">read_array</a></code>,
+<code><a href="#read_005flist">read_list</a></code> and <code><a href="#read_005fhashed_005farray">read_hashed_array</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div>
+</dd></dl>
+
+<a name="read_005flist"></a><a name="Item_003a-numericalio_002fdeffn_002fread_005flist"></a><dl>
+<dt><a name="index-read_005flist"></a>Function: <strong>read_list</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_list</tt> (<var>S</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_list</tt> (<var>S</var>, <var>L</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_list</tt> (<var>S</var>, <var>separator_flag</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>read_list</tt> (<var>S</var>, <var>L</var>, <var>separator_flag</var>)</em></dt>
+<dd>
+<p><code>read_list(<var>S</var>)</code> reads the source <var>S</var> and returns its entire content as a flat list.
+</p>
+<p><code>read_list(<var>S</var>, <var>L</var>)</code> reads the source <var>S</var> into the list <var>L</var>,
+until <var>L</var> is full or the source is exhausted.
+</p>
+<p>The source <var>S</var> may be a file name or a stream.
+</p>
+<p>The recognized values of <var>separator_flag</var> are
+<code>comma</code>, <code>pipe</code>, <code>semicolon</code>, and <code>space</code>.
+Equivalently, the separator may be specified as a string of one character:
+<code>&quot;,&quot;</code> (comma), <code>&quot;|&quot;</code> (pipe), <code>&quot;;&quot;</code> (semicolon),
+<code>&quot; &quot;</code> (space), or <code>&quot;    &quot;</code> (tab).
+If <var>separator_flag</var> is not specified, the file is assumed space-delimited.
+</p>
+<p>See also <code><a href="maxima_376.html#openr">openr</a></code>, <code><a href="#read_005fmatrix">read_matrix</a></code>, <code><a href="#read_005farray">read_array</a></code>,
+<code><a href="#read_005fnested_005flist">read_nested_list</a></code>, <code><a href="maxima_324.html#read_005fbinary_005flist">read_binary_list</a></code> and <code><a href="#read_005fhashed_005farray">read_hashed_array</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;</div>
+</dd></dl>
+
+<a name="write_005fdata"></a><a name="Item_003a-numericalio_002fdeffn_002fwrite_005fdata"></a><dl>
+<dt><a name="index-write_005fdata"></a>Function: <strong>write_data</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>write_data</tt> (<var>X</var>, <var>D</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>write_data</tt> (<var>X</var>, <var>D</var>, <var>separator_flag</var>)</em></dt>
+<dd>
+<p>Writes the object <var>X</var> to the destination <var>D</var>.
+</p>
+<p><code>write_data</code> writes a matrix in row-major order,
+with one line per row.
+</p>
+<p><code>write_data</code> writes an array created by <code>array</code> or <code>make_array</code>
+in row-major order, with a new line at the end of every slab.
+Higher-dimensional slabs are separated by additional new lines.
+</p>
+<p><code>write_data</code> writes a hashed array with each key followed by
+its associated list on one line.
+</p>
+<p><code>write_data</code> writes a nested list with each sublist on one line.
+</p>
+<p><code>write_data</code> writes a flat list all on one line.
+</p>
+<p>The destination <var>D</var> may be a file name or a stream.
+When the destination is a file name,
+the global variable <code>file_output_append</code> governs
+whether the output file is appended or truncated.
+When the destination is a stream,
+no special action is taken by <code>write_data</code> after all the data are written;
+in particular, the stream remains open.
+</p>
+<p>The recognized values of <var>separator_flag</var> are
+<code>comma</code>, <code>pipe</code>, <code>semicolon</code>, <code>space</code>, and <code>tab</code>.
+Equivalently, the separator may be specified as a string of one character:
+<code>&quot;,&quot;</code> (comma), <code>&quot;|&quot;</code> (pipe), <code>&quot;;&quot;</code> (semicolon),
+<code>&quot; &quot;</code> (space), or <code>&quot;    &quot;</code> (tab).
+If <var>separator_flag</var> is not specified, the file is assumed space-delimited.
+</p>
+<p>See also <code><a href="maxima_376.html#openw">openw</a></code> and <code><a href="#read_005fmatrix">read_matrix</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-numericalio_002fnode_002fFunctions-and-Variables-for-binary-input-and-output"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_324.html#Functions-and-Variables-for-binary-input-and-output" accesskey="n" rel="next">Functions and Variables for binary input and output</a>, Previous: <a href="maxima_322.html#Introduction-to-numericalio" accesskey="p" rel="previous">Introduction to numericalio</a>, Up: <a href="maxima_321.html#numericalio_002dpkg" accesskey="u" rel="up">numericalio-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

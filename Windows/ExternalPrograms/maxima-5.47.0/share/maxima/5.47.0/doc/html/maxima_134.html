@@ -1,0 +1,1813 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for ctensor</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for ctensor">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for ctensor">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_132.html#ctensor" rel="up" title="ctensor">
+<link href="maxima_135.html#atensor" rel="next" title="atensor">
+<link href="maxima_133.html#Introduction-to-ctensor" rel="previous" title="Introduction to ctensor">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-ctensor"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_133.html#Introduction-to-ctensor" accesskey="p" rel="previous">Introduction to ctensor</a>, Up: <a href="maxima_132.html#ctensor" accesskey="u" rel="up">ctensor</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+<a name="Functions-and-Variables-for-ctensor-1"></a>
+<h3 class="section">26.2 Functions and Variables for ctensor</h3>
+
+<a name="Initialization-and-setup"></a>
+<h4 class="subsection">26.2.1 Initialization and setup</h4>
+<a name="csetup"></a><a name="Item_003a-Ctensor_002fdeffn_002fcsetup"></a><dl>
+<dt><a name="index-csetup"></a>Function: <strong>csetup</strong> <em>()</em></dt>
+<dd><p>A function in the <code>ctensor</code> (component tensor) package
+which initializes the package and allows the user to enter a metric
+interactively. See <code>ctensor</code> for more details.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="cmetric"></a><a name="Item_003a-Ctensor_002fdeffn_002fcmetric"></a><dl>
+<dt><a name="index-cmetric"></a>Function: <strong>cmetric</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cmetric</tt> (<var>dis</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cmetric</tt> ()</em></dt>
+<dd>
+<p>A function in the <code>ctensor</code> (component tensor) package
+that computes the metric inverse and sets up the package for
+further calculations.
+</p>
+<p>If <code>cframe_flag</code> is <code>false</code>, the function computes the inverse metric
+<code>ug</code> from the (user-defined) matrix <code>lg</code>. The metric determinant is
+also computed and stored in the variable <code>gdet</code>. Furthermore, the
+package determines if the metric is diagonal and sets the value
+of <code>diagmetric</code> accordingly. If the optional argument <var>dis</var>
+is present and not equal to <code>false</code>, the user is prompted to see
+the metric inverse.
+</p>
+<p>If <code>cframe_flag</code> is <code>true</code>, the function expects that the values of
+<code>fri</code> (the inverse frame matrix) and <code>lfg</code> (the frame metric) are
+defined. From these, the frame matrix <code>fr</code> and the inverse frame
+metric <code>ufg</code> are computed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="ct"></a><a name="Item_003a-Ctensor_002fdeffn_002fct_005fcoordsys"></a><dl>
+<dt><a name="index-ct_005fcoordsys"></a>Function: <strong>ct_coordsys</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ct_coordsys</tt> (<var>coordinate_system</var>, <var>extra_arg</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ct_coordsys</tt> (<var>coordinate_system</var>)</em></dt>
+<dd>
+<p>Sets up a predefined coordinate system and metric. The argument
+<var>coordinate_system</var> can be one of the following symbols:
+</p>
+<div class="example">
+<pre class="example">
+ SYMBOL             Dim Coordinates     Description/comments
+ ------------------------------------------------------------------
+ cartesian2d           2  [x,y]             Cartesian 2D coordinate
+                                            system
+ polar                 2  [r,phi]           Polar coordinate system
+ elliptic              2  [u,v]             Elliptic coord. system
+ confocalelliptic      2  [u,v]             Confocal elliptic
+                                            coordinates
+ bipolar               2  [u,v]             Bipolar coord. system
+ parabolic             2  [u,v]             Parabolic coord. system
+ cartesian3d           3  [x,y,z]           Cartesian 3D coordinate
+                                            system
+ polarcylindrical      3  [r,theta,z]       Polar 2D with
+                                            cylindrical z
+ ellipticcylindrical   3  [u,v,z]           Elliptic 2D with
+                                            cylindrical z
+ confocalellipsoidal   3  [u,v,w]           Confocal ellipsoidal
+ bipolarcylindrical    3  [u,v,z]           Bipolar 2D with
+                                            cylindrical z
+ paraboliccylindrical  3  [u,v,z]           Parabolic 2D with
+                                            cylindrical z
+ paraboloidal          3  [u,v,phi]         Paraboloidal coords.
+ conical               3  [u,v,w]           Conical coordinates
+ toroidal              3  [phi,u,v]         Toroidal coordinates
+ spherical             3  [r,theta,phi]     Spherical coord. system
+ oblatespheroidal      3  [u,v,phi]         Oblate spheroidal
+                                            coordinates
+ oblatespheroidalsqrt  3  [u,v,phi]
+ prolatespheroidal     3  [u,v,phi]         Prolate spheroidal
+                                            coordinates
+ prolatespheroidalsqrt 3  [u,v,phi]
+ ellipsoidal           3  [r,theta,phi]     Ellipsoidal coordinates
+ cartesian4d           4  [x,y,z,t]         Cartesian 4D coordinate
+                                            system
+ spherical4d           4  [r,theta,eta,phi] Spherical 4D coordinate
+                                            system
+ exteriorschwarzschild 4  [t,r,theta,phi]   Schwarzschild metric
+ interiorschwarzschild 4  [t,z,u,v]         Interior Schwarzschild
+                                            metric
+ kerr_newman           4  [t,r,theta,phi]   Charged axially
+                                            symmetric metric
+</pre></div>
+
+<p><code>coordinate_system</code> can also be a list of transformation functions,
+followed by a list containing the coordinate variables. For instance,
+you can specify a spherical metric as follows:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) ct_coordsys([r*cos(theta)*cos(phi),r*cos(theta)*sin(phi),
+      r*sin(theta),[r,theta,phi]]);
+(%o2)                                done
+(%i3) lg:trigsimp(lg);
+                           [ 1  0         0        ]
+                           [                       ]
+                           [     2                 ]
+(%o3)                      [ 0  r         0        ]
+                           [                       ]
+                           [         2    2        ]
+                           [ 0  0   r  cos (theta) ]
+(%i4) ct_coords;
+(%o4)                           [r, theta, phi]
+(%i5) dim;
+(%o5)                                  3
+
+</pre></div>
+
+<p>Transformation functions can also be used when <code>cframe_flag</code> is <code>true</code>:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) cframe_flag:true;
+(%o2)                                true
+(%i3) ct_coordsys([r*cos(theta)*cos(phi),r*cos(theta)*sin(phi),
+      r*sin(theta),[r,theta,phi]]);
+(%o3)                                done
+(%i4) fri;
+(%o4)
+ [cos(phi)cos(theta) -cos(phi) r sin(theta) -sin(phi) r cos(theta)]
+ [                                                                ]
+ [sin(phi)cos(theta) -sin(phi) r sin(theta)  cos(phi) r cos(theta)]
+ [                                                                ]
+ [    sin(theta)           r cos(theta)                0          ]
+
+(%i5) cmetric();
+(%o5)                                false
+(%i6) lg:trigsimp(lg);
+                           [ 1  0         0        ]
+                           [                       ]
+                           [     2                 ]
+(%o6)                      [ 0  r         0        ]
+                           [                       ]
+                           [         2    2        ]
+                           [ 0  0   r  cos (theta) ]
+
+</pre></div>
+
+<p>The optional argument <var>extra_arg</var> can be any one of the following:
+</p>
+<p><code>cylindrical</code> tells <code>ct_coordsys</code> to attach an additional cylindrical coordinate.
+</p>
+<p><code>minkowski</code> tells <code>ct_coordsys</code> to attach an additional coordinate with negative metric signature.
+</p>
+<p><code>all</code> tells <code>ct_coordsys</code> to call <code>cmetric</code> and <code>christof(false)</code> after setting up the metric.
+</p>
+<p>If the global variable <code>verbose</code> is set to <code>true</code>, <code>ct_coordsys</code> displays the values of <code>dim</code>, <code>ct_coords</code>, and either <code>lg</code> or <code>lfg</code> and <code>fri</code>, depending on the value of <code>cframe_flag</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="init"></a><a name="Item_003a-Ctensor_002fdeffn_002finit_005fctensor"></a><dl>
+<dt><a name="index-init_005fctensor"></a>Function: <strong>init_ctensor</strong> <em>()</em></dt>
+<dd><p>Initializes the <code>ctensor</code> package.
+</p>
+<p>The <code>init_ctensor</code> function reinitializes the <code>ctensor</code> package. It removes all arrays and matrices used by <code>ctensor</code>, resets all flags, resets <code>dim</code> to 4, and resets the frame metric to the Lorentz-frame.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+
+<a name="The-tensors-of-curved-space"></a>
+<h4 class="subsection">26.2.2 The tensors of curved space</h4>
+
+<p>The main purpose of the <code>ctensor</code> package is to compute the tensors
+of curved space(time), most notably the tensors used in general
+relativity.
+</p>
+<p>When a metric base is used, <code>ctensor</code> can compute the following tensors:
+</p>
+<div class="example">
+<pre class="example">
+ lg  -- ug
+   \      \
+    lcs -- mcs -- ric -- uric
+              \      \       \
+               \      tracer - ein -- lein
+                \
+                 riem -- lriem -- weyl
+                     \
+                      uriem
+
+
+</pre></div>
+
+<p><code>ctensor</code> can also work using moving frames. When <code>cframe_flag</code> is
+set to <code>true</code>, the following tensors can be calculated:
+</p>
+<div class="example">
+<pre class="example">
+ lfg -- ufg
+     \
+ fri -- fr -- lcs -- mcs -- lriem -- ric -- uric
+      \                       |  \      \       \
+       lg -- ug               |   weyl   tracer - ein -- lein
+                              |\
+                              | riem
+                              |
+                              \uriem
+
+</pre></div>
+<a name="christof"></a><a name="Item_003a-Ctensor_002fdeffn_002fchristof"></a><dl>
+<dt><a name="index-christof"></a>Function: <strong>christof</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>A function in the <code>ctensor</code> (component tensor)
+package.  It computes the Christoffel symbols of both
+kinds.  The argument <var>dis</var> determines which results are to be immediately
+displayed.  The Christoffel symbols of the first and second kinds are
+stored in the arrays <code>lcs[i,j,k]</code> and <code>mcs[i,j,k]</code> respectively and
+defined to be symmetric in the first two indices. If the argument to
+<code>christof</code> is <code>lcs</code> or <code>mcs</code> then the unique non-zero values of <code>lcs[i,j,k]</code>
+or <code>mcs[i,j,k]</code>, respectively, will be displayed. If the argument is <code>all</code>
+then the unique non-zero values of <code>lcs[i,j,k]</code> and <code>mcs[i,j,k]</code> will be
+displayed.  If the argument is <code>false</code> then the display of the elements
+will not occur. The array elements <code>mcs[i,j,k]</code> are defined in such a
+manner that the final index is contravariant.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="ricci"></a><a name="Item_003a-Ctensor_002fdeffn_002fricci"></a><dl>
+<dt><a name="index-ricci"></a>Function: <strong>ricci</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>A function in the <code>ctensor</code> (component tensor)
+package. <code>ricci</code> computes the covariant (symmetric)
+components <code>ric[i,j]</code> of the Ricci tensor.  If the argument <var>dis</var> is <code>true</code>,
+then the non-zero components are displayed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="uricci"></a><a name="Item_003a-Ctensor_002fdeffn_002furicci"></a><dl>
+<dt><a name="index-uricci"></a>Function: <strong>uricci</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>This function first computes the
+covariant components <code>ric[i,j]</code> of the Ricci tensor.
+Then the mixed Ricci tensor is computed using the
+contravariant metric tensor.  If the value of the argument <var>dis</var>
+is <code>true</code>, then these mixed components, <code>uric[i,j]</code> (the
+index <code>i</code> is covariant and the index <code>j</code> is contravariant), will be displayed
+directly.  Otherwise, <code>ricci(false)</code> will simply compute the entries
+of the array <code>uric[i,j]</code> without displaying the results.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="scurvature"></a><a name="Item_003a-Ctensor_002fdeffn_002fscurvature"></a><dl>
+<dt><a name="index-scurvature"></a>Function: <strong>scurvature</strong> <em>()</em></dt>
+<dd><p>Returns the scalar curvature (obtained by contracting
+the Ricci tensor) of the Riemannian manifold with the given metric.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="einstein"></a><a name="Item_003a-Ctensor_002fdeffn_002feinstein"></a><dl>
+<dt><a name="index-einstein"></a>Function: <strong>einstein</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>A function in the <code>ctensor</code> (component tensor)
+package.  <code>einstein</code> computes the mixed Einstein tensor
+after the Christoffel symbols and Ricci tensor have been obtained
+(with the functions <code>christof</code> and <code>ricci</code>).  If the argument <var>dis</var> is
+<code>true</code>, then the non-zero values of the mixed Einstein tensor <code>ein[i,j]</code>
+will be displayed where <code>j</code> is the contravariant index.
+The variable <code>rateinstein</code> will cause the rational simplification on
+these components. If <code>ratfac</code> is <code>true</code> then the components will
+also be factored.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="leinstein"></a><a name="Item_003a-Ctensor_002fdeffn_002fleinstein"></a><dl>
+<dt><a name="index-leinstein"></a>Function: <strong>leinstein</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>Covariant Einstein-tensor. <code>leinstein</code> stores the values of the covariant Einstein tensor in the array <code>lein</code>. The covariant Einstein-tensor is computed from the mixed Einstein tensor <code>ein</code> by multiplying it with the metric tensor. If the argument <var>dis</var> is <code>true</code>, then the non-zero values of the covariant Einstein tensor are displayed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="riemann"></a><a name="Item_003a-Ctensor_002fdeffn_002friemann"></a><dl>
+<dt><a name="index-riemann"></a>Function: <strong>riemann</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>A function in the <code>ctensor</code> (component tensor)
+package.  <code>riemann</code> computes the Riemann curvature tensor
+from the given metric and the corresponding Christoffel symbols. The following
+index conventions are used:
+</p>
+<div class="example">
+<pre class="example">                l      _l       _l       _l   _m    _l   _m
+ R[i,j,k,l] =  R    = |      - |      + |    |   - |    |
+                ijk     ij,k     ik,j     mk   ij    mj   ik
+</pre></div>
+
+<p>This notation is consistent with the notation used by the <code>itensor</code>
+package and its <code>icurvature</code> function.
+If the optional argument <var>dis</var> is <code>true</code>,
+the unique non-zero components <code>riem[i,j,k,l]</code> will be displayed.
+As with the Einstein tensor, various switches set by the user
+control the simplification of the components of the Riemann tensor.
+If <code>ratriemann</code> is <code>true</code>, then
+rational simplification will be done. If <code>ratfac</code>
+is <code>true</code> then
+each of the components will also be factored.
+</p>
+<p>If the variable <code>cframe_flag</code> is <code>false</code>, the Riemann tensor is
+computed directly from the Christoffel-symbols. If <code>cframe_flag</code> is
+<code>true</code>, the covariant Riemann-tensor is computed first from the
+frame field coefficients.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="lriemann"></a><a name="Item_003a-Ctensor_002fdeffn_002flriemann"></a><dl>
+<dt><a name="index-lriemann"></a>Function: <strong>lriemann</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>Covariant Riemann-tensor (<code>lriem[]</code>).
+</p>
+<p>Computes the covariant Riemann-tensor as the array <code>lriem</code>. If the
+argument <var>dis</var> is <code>true</code>, unique non-zero values are displayed.
+</p>
+<p>If the variable <code>cframe_flag</code> is <code>true</code>, the covariant Riemann
+tensor is computed directly from the frame field coefficients. Otherwise,
+the (3,1) Riemann tensor is computed first.
+</p>
+<p>For information on index ordering, see <code>riemann</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="uriemann"></a><a name="Item_003a-Ctensor_002fdeffn_002furiemann"></a><dl>
+<dt><a name="index-uriemann"></a>Function: <strong>uriemann</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>Computes the contravariant components of the Riemann
+curvature tensor as array elements <code>uriem[i,j,k,l]</code>.  These are displayed
+if <var>dis</var> is <code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="rinvariant"></a><a name="Item_003a-Ctensor_002fdeffn_002frinvariant"></a><dl>
+<dt><a name="index-rinvariant"></a>Function: <strong>rinvariant</strong> <em>()</em></dt>
+<dd><p>Forms the Kretschmann-invariant (<code>kinvariant</code>) obtained by
+contracting the tensors
+</p>
+<div class="example">
+<pre class="example">lriem[i,j,k,l]*uriem[i,j,k,l].
+</pre></div>
+
+<p>This object is not automatically simplified since it can be very large.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="weyl"></a><a name="Item_003a-Ctensor_002fdeffn_002fweyl"></a><dl>
+<dt><a name="index-weyl"></a>Function: <strong>weyl</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>Computes the Weyl conformal tensor.  If the argument <var>dis</var> is
+<code>true</code>, the non-zero components <code>weyl[i,j,k,l]</code> will be displayed to the
+user.  Otherwise, these components will simply be computed and stored.
+If the switch <code>ratweyl</code> is set to <code>true</code>, then the components will be
+rationally simplified; if <code>ratfac</code> is <code>true</code> then the results will be
+factored as well.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="Taylor-series-expansion"></a>
+<h4 class="subsection">26.2.3 Taylor series expansion</h4>
+
+<p>The <code>ctensor</code> package has the ability to truncate results by assuming
+that they are Taylor-series approximations. This behavior is controlled by
+the <code>ctayswitch</code> variable; when set to true, <code>ctensor</code> makes use
+internally of the function <code>ctaylor</code> when simplifying results.
+</p>
+<p>The <code>ctaylor</code> function is invoked by the following <code>ctensor</code> functions:
+</p>
+<div class="example">
+<pre class="example">
+    Function     Comments
+    ---------------------------------
+    christof()   For mcs only
+    ricci()
+    uricci()
+    einstein()
+    riemann()
+    weyl()
+    checkdiv()
+</pre></div>
+<a name="ctaylor"></a><a name="Item_003a-Ctensor_002fdeffn_002fctaylor"></a><dl>
+<dt><a name="index-ctaylor"></a>Function: <strong>ctaylor</strong> <em>()</em></dt>
+<dd>
+<p>The <code>ctaylor</code> function truncates its argument by converting
+it to a Taylor-series using <code>taylor</code>, and then calling
+<code>ratdisrep</code>. This has the combined effect of dropping terms
+higher order in the expansion variable <code>ctayvar</code>. The order
+of terms that should be dropped is defined by <code>ctaypov</code>; the
+point around which the series expansion is carried out is specified
+in <code>ctaypt</code>.
+</p>
+<p>As an example, consider a simple metric that is a perturbation of
+the Minkowski metric. Without further restrictions, even a diagonal
+metric produces expressions for the Einstein tensor that are far too
+complex:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) ratfac:true;
+(%o2)                                true
+(%i3) derivabbrev:true;
+(%o3)                                true
+(%i4) ct_coords:[t,r,theta,phi];
+(%o4)                         [t, r, theta, phi]
+(%i5) lg:matrix([-1,0,0,0],[0,1,0,0],[0,0,r^2,0],
+                [0,0,0,r^2*sin(theta)^2]);
+                        [ - 1  0  0         0        ]
+                        [                            ]
+                        [  0   1  0         0        ]
+                        [                            ]
+(%o5)                   [          2                 ]
+                        [  0   0  r         0        ]
+                        [                            ]
+                        [              2    2        ]
+                        [  0   0  0   r  sin (theta) ]
+(%i6) h:matrix([h11,0,0,0],[0,h22,0,0],[0,0,h33,0],[0,0,0,h44]);
+                            [ h11   0    0    0  ]
+                            [                    ]
+                            [  0   h22   0    0  ]
+(%o6)                       [                    ]
+                            [  0    0   h33   0  ]
+                            [                    ]
+                            [  0    0    0   h44 ]
+(%i7) depends(l,r);
+(%o7)                               [l(r)]
+(%i8) lg:lg+l*h;
+      [ h11 l - 1      0          0                 0            ]
+      [                                                          ]
+      [     0      h22 l + 1      0                 0            ]
+      [                                                          ]
+(%o8) [                        2                                 ]
+      [     0          0      r  + h33 l            0            ]
+      [                                                          ]
+      [                                    2    2                ]
+      [     0          0          0       r  sin (theta) + h44 l ]
+(%i9) cmetric(false);
+(%o9)                                done
+(%i10) einstein(false);
+(%o10)                               done
+(%i11) ntermst(ein);
+[[1, 1], 62]
+[[1, 2], 0]
+[[1, 3], 0]
+[[1, 4], 0]
+[[2, 1], 0]
+[[2, 2], 24]
+[[2, 3], 0]
+[[2, 4], 0]
+[[3, 1], 0]
+[[3, 2], 0]
+[[3, 3], 46]
+[[3, 4], 0]
+[[4, 1], 0]
+[[4, 2], 0]
+[[4, 3], 0]
+[[4, 4], 46]
+(%o12)                               done
+
+</pre></div>
+
+<p>However, if we recompute this example as an approximation that is
+linear in the variable <code>l</code>, we get much simpler expressions:
+</p>
+<div class="example">
+<pre class="example">
+(%i14) ctayswitch:true;
+(%o14)                               true
+(%i15) ctayvar:l;
+(%o15)                                 l
+(%i16) ctaypov:1;
+(%o16)                                 1
+(%i17) ctaypt:0;
+(%o17)                                 0
+(%i18) christof(false);
+(%o18)                               done
+(%i19) ricci(false);
+(%o19)                               done
+(%i20) einstein(false);
+(%o20)                               done
+(%i21) ntermst(ein);
+[[1, 1], 6]
+[[1, 2], 0]
+[[1, 3], 0]
+[[1, 4], 0]
+[[2, 1], 0]
+[[2, 2], 13]
+[[2, 3], 2]
+[[2, 4], 0]
+[[3, 1], 0]
+[[3, 2], 2]
+[[3, 3], 9]
+[[3, 4], 0]
+[[4, 1], 0]
+[[4, 2], 0]
+[[4, 3], 0]
+[[4, 4], 9]
+(%o21)                               done
+(%i22) ratsimp(ein[1,1]);
+                         2      2  4               2     2
+(%o22) - (((h11 h22 - h11 ) (l )  r  - 2 h33 l    r ) sin (theta)
+                              r               r r
+
+                            2               2      4    2
+              - 2 h44 l    r  - h33 h44 (l ) )/(4 r  sin (theta))
+                       r r                r
+
+
+
+</pre></div>
+
+<p>This capability can be useful, for instance, when working in the weak
+field limit far from a gravitational source.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+
+<a name="Frame-fields"></a>
+<h4 class="subsection">26.2.4 Frame fields</h4>
+
+<p>When the variable <code>cframe_flag</code> is set to true, the <code>ctensor</code> package
+performs its calculations using a moving frame.
+<a name="frame"></a><a name="Item_003a-Ctensor_002fdeffn_002fframe_005fbracket"></a></p><dl>
+<dt><a name="index-frame_005fbracket"></a>Function: <strong>frame_bracket</strong> <em>(<var>fr</var>, <var>fri</var>, <var>diagframe</var>)</em></dt>
+<dd><p>The frame bracket (<code>fb[]</code>).
+</p>
+<p>Computes the frame bracket according to the following definition:
+</p>
+<div class="example">
+<pre class="example">   c          c         c        d     e
+ifb   = ( ifri    - ifri    ) ifr   ifr
+   ab         d,e       e,d      a     b
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="Algebraic-classification"></a>
+<h4 class="subsection">26.2.5 Algebraic classification</h4>
+
+<p>A new feature (as of November, 2004) of <code>ctensor</code> is its ability to
+compute the Petrov classification of a 4-dimensional spacetime metric.
+For a demonstration of this capability, see the file
+<code>share/tensor/petrov.dem</code>.
+<a name="nptetrad"></a><a name="Item_003a-Ctensor_002fdeffn_002fnptetrad"></a></p><dl>
+<dt><a name="index-nptetrad"></a>Function: <strong>nptetrad</strong> <em>()</em></dt>
+<dd><p>Computes a Newman-Penrose null tetrad (<code>np</code>) and its raised-index
+counterpart (<code>npi</code>). See <code>petrov</code> for an example.
+</p>
+<p>The null tetrad is constructed on the assumption that a four-dimensional
+orthonormal frame metric with metric signature (-,+,+,+) is being used.
+The components of the null tetrad are related to the inverse frame matrix
+as follows:
+</p>
+<div class="example">
+<pre class="example">
+np  = (fri  + fri ) / sqrt(2)
+  1       1      2
+
+np  = (fri  - fri ) / sqrt(2)
+  2       1      2
+
+np  = (fri  + %i fri ) / sqrt(2)
+  3       3         4
+
+np  = (fri  - %i fri ) / sqrt(2)
+  4       3         4
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="psi"></a><a name="Item_003a-Ctensor_002fdeffn_002fpsi"></a><dl>
+<dt><a name="index-psi-1"></a>Function: <strong>psi</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>Computes the five Newman-Penrose coefficients <code>psi[0]</code>...<code>psi[4]</code>.
+If <code>dis</code> is set to <code>true</code>, the coefficients are displayed.
+See <code>petrov</code> for an example.
+</p>
+<p>These coefficients are computed from the Weyl-tensor in a coordinate base.
+If a frame base is used, the Weyl-tensor is first converted to a coordinate
+base, which can be a computationally expensive procedure. For this reason,
+in some cases it may be more advantageous to use a coordinate base in the
+first place before the Weyl tensor is computed. Note however, that
+constructing a Newman-Penrose null tetrad requires a frame base. Therefore,
+a meaningful computation sequence may begin with a frame base, which
+is then used to compute <code>lg</code> (computed automatically by <code>cmetric</code>)
+and then <code>ug</code>. See <code>petrov</code> for an example. At this point, you can switch back to a coordinate base
+by setting <code>cframe_flag</code> to false before beginning to compute the
+Christoffel symbols. Changing to a frame base at a later stage could yield
+inconsistent results, as you may end up with a mixed bag of tensors, some
+computed in a frame base, some in a coordinate base, with no means to
+distinguish between the two.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="petrov"></a><a name="Item_003a-Ctensor_002fdeffn_002fpetrov"></a><dl>
+<dt><a name="index-petrov"></a>Function: <strong>petrov</strong> <em>()</em></dt>
+<dd><p>Computes the Petrov classification of the metric characterized by <code>psi[0]</code>...<code>psi[4]</code>.
+</p>
+<p>For example, the following demonstrates how to obtain the Petrov-classification
+of the Kerr metric:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) (cframe_flag:true,gcd:spmod,ctrgsimp:true,ratfac:true);
+(%o2)                                true
+(%i3) ct_coordsys(exteriorschwarzschild,all);
+(%o3)                                done
+(%i4) ug:invert(lg)$
+(%i5) weyl(false);
+(%o5)                                done
+(%i6) nptetrad(true);
+(%t6) np =
+
+[ sqrt(r - 2 m)           sqrt(r)                                 ]
+[---------------   ---------------------    0            0        ]
+[sqrt(2) sqrt(r)   sqrt(2) sqrt(r - 2 m)                          ]
+[                                                                 ]
+[ sqrt(r - 2 m)            sqrt(r)                                ]
+[---------------  - ---------------------   0            0        ]
+[sqrt(2) sqrt(r)    sqrt(2) sqrt(r - 2 m)                         ]
+[                                                                 ]
+[                                          r      %i r sin(theta) ]
+[       0                    0          -------   --------------- ]
+[                                       sqrt(2)       sqrt(2)     ]
+[                                                                 ]
+[                                          r       %i r sin(theta)]
+[       0                    0          -------  - ---------------]
+[                                       sqrt(2)        sqrt(2)    ]
+
+                             sqrt(r)         sqrt(r - 2 m)
+(%t7) npi = matrix([- ---------------------,---------------, 0, 0],
+                      sqrt(2) sqrt(r - 2 m) sqrt(2) sqrt(r)
+
+          sqrt(r)            sqrt(r - 2 m)
+[- ---------------------, - ---------------, 0, 0],
+   sqrt(2) sqrt(r - 2 m)    sqrt(2) sqrt(r)
+
+           1               %i
+[0, 0, ---------, --------------------],
+       sqrt(2) r  sqrt(2) r sin(theta)
+
+           1                 %i
+[0, 0, ---------, - --------------------])
+       sqrt(2) r    sqrt(2) r sin(theta)
+
+(%o7)                                done
+(%i7) psi(true);
+(%t8)                              psi  = 0
+                                      0
+
+(%t9)                              psi  = 0
+                                      1
+
+                                          m
+(%t10)                             psi  = --
+                                      2    3
+                                          r
+
+(%t11)                             psi  = 0
+                                      3
+
+(%t12)                             psi  = 0
+                                      4
+(%o12)                               done
+(%i12) petrov();
+(%o12)                                 D
+
+</pre></div>
+
+<p>The Petrov classification function is based on the algorithm published in
+&quot;Classifying geometries in general relativity: III Classification in practice&quot;
+by Pollney, Skea, and d&rsquo;Inverno, Class. Quant. Grav. 17 2885-2902 (2000).
+Except for some simple test cases, the implementation is untested as of
+December 19, 2004, and is likely to contain errors.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+
+<a name="Torsion-and-nonmetricity-1"></a>
+<h4 class="subsection">26.2.6 Torsion and nonmetricity</h4>
+
+<p><code>ctensor</code> has the ability to compute and include torsion and nonmetricity
+coefficients in the connection coefficients.
+</p>
+<p>The torsion coefficients are calculated from a user-supplied tensor
+<code>tr</code>, which should be a rank (2,1) tensor. From this, the torsion
+coefficients <code>kt</code> are computed according to the following formulae:
+</p>
+<div class="example">
+<pre class="example">
+              m          m      m
+       - g  tr   - g   tr   - tr   g
+          im  kj    jm   ki     ij  km
+kt   = -------------------------------
+  ijk                 2
+
+
+  k     km
+kt   = g   kt
+  ij         ijm
+
+</pre></div>
+
+<p>Note that only the mixed-index tensor is calculated and stored in the
+array <code>kt</code>.
+</p>
+<p>The nonmetricity coefficients are calculated from the user-supplied
+nonmetricity vector <code>nm</code>. From this, the nonmetricity coefficients
+<code>nmc</code> are computed as follows:
+</p>
+<div class="example">
+<pre class="example">
+             k    k        km
+       -nm  D  - D  nm  + g   nm  g
+   k      i  j    i   j         m  ij
+nmc  = ------------------------------
+   ij                2
+
+</pre></div>
+
+<p>where D stands for the Kronecker-delta.
+</p>
+<p>When <code>ctorsion_flag</code> is set to <code>true</code>, the values of <code>kt</code>
+are subtracted from the mixed-indexed connection coefficients computed by
+<code>christof</code> and stored in <code>mcs</code>. Similarly, if <code>cnonmet_flag</code>
+is set to <code>true</code>, the values of <code>nmc</code> are subtracted from the
+mixed-indexed connection coefficients.
+</p>
+<p>If necessary, <code>christof</code> calls the functions <code>contortion</code> and
+<code>nonmetricity</code> in order to compute <code>kt</code> and <code>nm</code>.
+<a name="contortion"></a><a name="Item_003a-Ctensor_002fdeffn_002fcontortion"></a></p><dl>
+<dt><a name="index-contortion"></a>Function: <strong>contortion</strong> <em>(<var>tr</var>)</em></dt>
+<dd>
+<p>Computes the (2,1) contortion coefficients from the torsion tensor <var>tr</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="nonmetricity"></a><a name="Item_003a-Ctensor_002fdeffn_002fnonmetricity"></a><dl>
+<dt><a name="index-nonmetricity"></a>Function: <strong>nonmetricity</strong> <em>(<var>nm</var>)</em></dt>
+<dd>
+<p>Computes the (2,1) nonmetricity coefficients from the nonmetricity
+vector <var>nm</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="Miscellaneous-features"></a>
+<h4 class="subsection">26.2.7 Miscellaneous features</h4>
+<a name="ctransform"></a><a name="Item_003a-Ctensor_002fdeffn_002fctransform"></a><dl>
+<dt><a name="index-ctransform"></a>Function: <strong>ctransform</strong> <em>(<var>M</var>)</em></dt>
+<dd><p>A function in the <code>ctensor</code> (component tensor)
+package which will perform a coordinate transformation
+upon an arbitrary square symmetric matrix <var>M</var>. The user must input the
+functions which define the transformation.  (Formerly called <code>transform</code>.)
+These may also be supplied in the form of a list as an optional second argument.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="findde"></a><a name="Item_003a-Ctensor_002fdeffn_002ffindde"></a><dl>
+<dt><a name="index-findde"></a>Function: <strong>findde</strong> <em>(<var>A</var>, <var>n</var>)</em></dt>
+<dd>
+<p>returns a list of the unique differential equations (expressions)
+corresponding to the elements of the <var>n</var> dimensional square
+array <var>A</var>. Presently, <var>n</var> may be 2 or 3. <code>deindex</code> is a global list
+containing the indices of <var>A</var> corresponding to these unique
+differential equations. For the Einstein tensor (<code>ein</code>), which
+is a two dimensional array, if computed for the metric in the example
+below, <code>findde</code> gives the following independent differential equations:
+</p>
+
+<div class="example">
+<pre class="example">(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) derivabbrev:true;
+(%o2)                                true
+(%i3) dim:4;
+(%o3)                                  4
+(%i4) lg:matrix([a, 0, 0, 0], [ 0, x^2, 0, 0],
+                              [0, 0, x^2*sin(y)^2, 0], [0,0,0,-d]);
+                          [ a  0       0        0  ]
+                          [                        ]
+                          [     2                  ]
+                          [ 0  x       0        0  ]
+(%o4)                     [                        ]
+                          [         2    2         ]
+                          [ 0  0   x  sin (y)   0  ]
+                          [                        ]
+                          [ 0  0       0       - d ]
+(%i5) depends([a,d],x);
+(%o5)                            [a(x), d(x)]
+(%i6) ct_coords:[x,y,z,t];
+(%o6)                            [x, y, z, t]
+(%i7) cmetric();
+(%o7)                                done
+(%i8) einstein(false);
+(%o8)                                done
+(%i9) findde(ein,2);
+                                            2
+(%o9) [d  x - a d + d, 2 a d d    x - a (d )  x - a  d d  x
+        x                     x x         x        x    x
+
+                                              2          2
+                          + 2 a d d   - 2 a  d , a  x + a  - a]
+                                   x       x      x
+(%i10) deindex;
+(%o10)                     [[1, 1], [2, 2], [4, 4]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="cograd"></a><a name="Item_003a-Ctensor_002fdeffn_002fcograd"></a><dl>
+<dt><a name="index-cograd"></a>Function: <strong>cograd</strong> <em>()</em></dt>
+<dd><p>Computes the covariant gradient of a scalar function allowing the
+user to choose the corresponding vector name as the example under
+<code>contragrad</code> illustrates.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="contragrad"></a><a name="Item_003a-Ctensor_002fdeffn_002fcontragrad"></a><dl>
+<dt><a name="index-contragrad"></a>Function: <strong>contragrad</strong> <em>()</em></dt>
+<dd>
+<p>Computes the contravariant gradient of a scalar function allowing
+the user to choose the corresponding vector name as the example
+below for the Schwarzschild metric illustrates:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) derivabbrev:true;
+(%o2)                                true
+(%i3) ct_coordsys(exteriorschwarzschild,all);
+(%o3)                                done
+(%i4) depends(f,r);
+(%o4)                               [f(r)]
+(%i5) cograd(f,g1);
+(%o5)                                done
+(%i6) listarray(g1);
+(%o6)                            [0, f , 0, 0]
+                                      r
+(%i7) contragrad(f,g2);
+(%o7)                                done
+(%i8) listarray(g2);
+                               f  r - 2 f  m
+                                r        r
+(%o8)                      [0, -------------, 0, 0]
+                                     r
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="ctensor_005fdscalar"></a><a name="Item_003a-Ctensor_002fdeffn_002fdscalar"></a><dl>
+<dt><a name="index-dscalar"></a>Function: <strong>dscalar</strong> <em>()</em></dt>
+<dd><p>computes the tensor d&rsquo;Alembertian of the scalar function once
+dependencies have been declared upon the function. For example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) derivabbrev:true;
+(%o2)                                true
+(%i3) ct_coordsys(exteriorschwarzschild,all);
+(%o3)                                done
+(%i4) depends(p,r);
+(%o4)                               [p(r)]
+(%i5) factor(dscalar(p));
+</pre><pre class="example">                          2
+                    p    r  - 2 m p    r + 2 p  r - 2 m p
+                     r r           r r        r          r
+(%o5)               --------------------------------------
+                                       2
+                                      r
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="checkdiv"></a><a name="Item_003a-Ctensor_002fdeffn_002fcheckdiv"></a><dl>
+<dt><a name="index-checkdiv"></a>Function: <strong>checkdiv</strong> <em>()</em></dt>
+<dd>
+<p>computes the covariant divergence of the mixed second rank tensor
+(whose first index must be covariant) by printing the
+corresponding n components of the vector field (the divergence) where
+n = <code>dim</code>. If the argument to the function is <code>g</code> then the
+divergence of the Einstein tensor will be formed and must be zero.
+In addition, the divergence (vector) is given the array name <code>div</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="cgeodesic"></a><a name="Item_003a-Ctensor_002fdeffn_002fcgeodesic"></a><dl>
+<dt><a name="index-cgeodesic"></a>Function: <strong>cgeodesic</strong> <em>(<var>dis</var>)</em></dt>
+<dd><p>A function in the <code>ctensor</code> (component tensor)
+package.  <code>cgeodesic</code> computes the geodesic equations of
+motion for a given metric.  They are stored in the array <code>geod[i]</code>.  If
+the argument <var>dis</var> is <code>true</code> then these equations are displayed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="bdvac"></a><a name="Item_003a-Ctensor_002fdeffn_002fbdvac"></a><dl>
+<dt><a name="index-bdvac"></a>Function: <strong>bdvac</strong> <em>(<var>f</var>)</em></dt>
+<dd>
+<p>generates the covariant components of the vacuum field equations of
+the Brans- Dicke gravitational theory. The scalar field is specified
+by the argument <var>f</var>, which should be a (quoted) function name
+with functional dependencies, e.g., <code>'p(x)</code>.
+</p>
+<p>The components of the second rank covariant field tensor are
+represented by the array <code>bd</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="invariant1"></a><a name="Item_003a-Ctensor_002fdeffn_002finvariant1"></a><dl>
+<dt><a name="index-invariant1"></a>Function: <strong>invariant1</strong> <em>()</em></dt>
+<dd>
+<p>generates the mixed Euler- Lagrange tensor (field equations) for the
+invariant density of R^2. The field equations are the components of an
+array named <code>inv1</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="invariant2"></a><a name="Item_003a-Ctensor_002fdeffn_002finvariant2"></a><dl>
+<dt><a name="index-invariant2"></a>Function: <strong>invariant2</strong> <em>()</em></dt>
+<dd>
+<p>*** NOT YET IMPLEMENTED ***
+</p>
+<p>generates the mixed Euler- Lagrange tensor (field equations) for the
+invariant density of <code>ric[i,j]*uriem[i,j]</code>. The field equations are the
+components of an array named <code>inv2</code>.
+</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="bimetric"></a><a name="Item_003a-Ctensor_002fdeffn_002fbimetric"></a><dl>
+<dt><a name="index-bimetric"></a>Function: <strong>bimetric</strong> <em>()</em></dt>
+<dd>
+<p>*** NOT YET IMPLEMENTED ***
+</p>
+<p>generates the field equations of Rosen&rsquo;s bimetric theory. The field
+equations are the components of an array named <code>rosen</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="Utility-functions"></a>
+<h4 class="subsection">26.2.8 Utility functions</h4>
+<a name="diagmatrixp"></a><a name="Item_003a-Ctensor_002fdeffn_002fdiagmatrixp"></a><dl>
+<dt><a name="index-diagmatrixp"></a>Function: <strong>diagmatrixp</strong> <em>(<var>M</var>,<var>n</var>)</em></dt>
+<dd>
+<p>Returns <code>true</code> if the first <var>n</var> rows and <var>n</var> columns of <var>M</var>
+form a diagonal matrix or (2D) array.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;</div>
+</dd></dl>
+<a name="symmetricp"></a><a name="Item_003a-Ctensor_002fdeffn_002fsymmetricp"></a><dl>
+<dt><a name="index-symmetricp"></a>Function: <strong>symmetricp</strong> <em>(<var>M</var>, <var>n</var>)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <var>M</var> is a <var>n</var> by <var>n</var> symmetric matrix or two-dimensional array,
+otherwise <code>false</code>.
+</p>
+<p>If <var>n</var> is less than the size of <var>M</var>,
+<code>symmetricp</code> considers only the <var>n</var> by <var>n</var> submatrix (respectively, subarray)
+comprising rows 1 through <var>n</var> and columns 1 through <var>n</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;</div>
+</dd></dl>
+<a name="ntermst"></a><a name="Item_003a-Ctensor_002fdeffn_002fntermst"></a><dl>
+<dt><a name="index-ntermst"></a>Function: <strong>ntermst</strong> <em>(<var>f</var>)</em></dt>
+<dd><p>gives the user a quick picture of the &quot;size&quot; of the doubly subscripted
+tensor (array) <var>f</var>.  It prints two element lists where the second
+element corresponds to NTERMS of the components specified by the first
+elements.  In this way, it is possible to quickly find the non-zero
+expressions and attempt simplification.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="cdisplay"></a><a name="Item_003a-Ctensor_002fdeffn_002fcdisplay"></a><dl>
+<dt><a name="index-cdisplay"></a>Function: <strong>cdisplay</strong> <em>(<var>ten</var>)</em></dt>
+<dd><p>displays all the elements of the tensor <var>ten</var>, as represented by
+a multidimensional array. Tensors of rank 0 and 1, as well as other types
+of variables, are displayed as with <code>ldisplay</code>. Tensors of rank 2 are
+displayed as 2-dimensional matrices, while tensors of higher rank are displayed
+as a list of 2-dimensional matrices. For instance, the Riemann-tensor of
+the Schwarzschild metric can be viewed as:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) ratfac:true;
+(%o2)                                true
+(%i3) ct_coordsys(exteriorschwarzschild,all);
+(%o3)                                done
+(%i4) riemann(false);
+(%o4)                                done
+(%i5) cdisplay(riem);
+          [ 0               0                   0           0     ]
+          [                                                       ]
+          [                              2                        ]
+          [      3 m (r - 2 m)   m    2 m                         ]
+          [ 0  - ------------- + -- - ----      0           0     ]
+          [            4          3     4                         ]
+          [           r          r     r                          ]
+          [                                                       ]
+riem    = [                                m (r - 2 m)            ]
+    1, 1  [ 0               0              -----------      0     ]
+          [                                     4                 ]
+          [                                    r                  ]
+          [                                                       ]
+          [                                           m (r - 2 m) ]
+          [ 0               0                   0     ----------- ]
+          [                                                4      ]
+          [                                               r       ]
+
+                                [    2 m (r - 2 m)       ]
+                                [ 0  -------------  0  0 ]
+                                [          4             ]
+                                [         r              ]
+                     riem     = [                        ]
+                         1, 2   [ 0        0        0  0 ]
+                                [                        ]
+                                [ 0        0        0  0 ]
+                                [                        ]
+                                [ 0        0        0  0 ]
+
+                                [         m (r - 2 m)    ]
+                                [ 0  0  - -----------  0 ]
+                                [              4         ]
+                                [             r          ]
+                     riem     = [                        ]
+                         1, 3   [ 0  0        0        0 ]
+                                [                        ]
+                                [ 0  0        0        0 ]
+                                [                        ]
+                                [ 0  0        0        0 ]
+
+                                [            m (r - 2 m) ]
+                                [ 0  0  0  - ----------- ]
+                                [                 4      ]
+                                [                r       ]
+                     riem     = [                        ]
+                         1, 4   [ 0  0  0        0       ]
+                                [                        ]
+                                [ 0  0  0        0       ]
+                                [                        ]
+                                [ 0  0  0        0       ]
+
+                               [       0         0  0  0 ]
+                               [                         ]
+                               [       2 m               ]
+                               [ - ------------  0  0  0 ]
+                    riem     = [    2                    ]
+                        2, 1   [   r  (r - 2 m)          ]
+                               [                         ]
+                               [       0         0  0  0 ]
+                               [                         ]
+                               [       0         0  0  0 ]
+
+             [     2 m                                         ]
+             [ ------------  0        0               0        ]
+             [  2                                              ]
+             [ r  (r - 2 m)                                    ]
+             [                                                 ]
+             [      0        0        0               0        ]
+             [                                                 ]
+  riem     = [                         m                       ]
+      2, 2   [      0        0  - ------------        0        ]
+             [                     2                           ]
+             [                    r  (r - 2 m)                 ]
+             [                                                 ]
+             [                                         m       ]
+             [      0        0        0         - ------------ ]
+             [                                     2           ]
+             [                                    r  (r - 2 m) ]
+
+                                [ 0  0       0        0 ]
+                                [                       ]
+                                [            m          ]
+                                [ 0  0  ------------  0 ]
+                     riem     = [        2              ]
+                         2, 3   [       r  (r - 2 m)    ]
+                                [                       ]
+                                [ 0  0       0        0 ]
+                                [                       ]
+                                [ 0  0       0        0 ]
+
+                                [ 0  0  0       0       ]
+                                [                       ]
+                                [               m       ]
+                                [ 0  0  0  ------------ ]
+                     riem     = [           2           ]
+                         2, 4   [          r  (r - 2 m) ]
+                                [                       ]
+                                [ 0  0  0       0       ]
+                                [                       ]
+                                [ 0  0  0       0       ]
+
+                                      [ 0  0  0  0 ]
+                                      [            ]
+                                      [ 0  0  0  0 ]
+                                      [            ]
+                           riem     = [ m          ]
+                               3, 1   [ -  0  0  0 ]
+                                      [ r          ]
+                                      [            ]
+                                      [ 0  0  0  0 ]
+
+                                      [ 0  0  0  0 ]
+                                      [            ]
+                                      [ 0  0  0  0 ]
+                                      [            ]
+                           riem     = [    m       ]
+                               3, 2   [ 0  -  0  0 ]
+                                      [    r       ]
+                                      [            ]
+                                      [ 0  0  0  0 ]
+
+                               [   m                      ]
+                               [ - -   0   0       0      ]
+                               [   r                      ]
+                               [                          ]
+                               [        m                 ]
+                               [  0   - -  0       0      ]
+                    riem     = [        r                 ]
+                        3, 3   [                          ]
+                               [  0    0   0       0      ]
+                               [                          ]
+                               [              2 m - r     ]
+                               [  0    0   0  ------- + 1 ]
+                               [                 r        ]
+
+                                    [ 0  0  0    0   ]
+                                    [                ]
+                                    [ 0  0  0    0   ]
+                                    [                ]
+                         riem     = [            2 m ]
+                             3, 4   [ 0  0  0  - --- ]
+                                    [             r  ]
+                                    [                ]
+                                    [ 0  0  0    0   ]
+
+                                [       0        0  0  0 ]
+                                [                        ]
+                                [       0        0  0  0 ]
+                                [                        ]
+                     riem     = [       0        0  0  0 ]
+                         4, 1   [                        ]
+                                [      2                 ]
+                                [ m sin (theta)          ]
+                                [ -------------  0  0  0 ]
+                                [       r                ]
+
+                                [ 0        0        0  0 ]
+                                [                        ]
+                                [ 0        0        0  0 ]
+                                [                        ]
+                     riem     = [ 0        0        0  0 ]
+                         4, 2   [                        ]
+                                [         2              ]
+                                [    m sin (theta)       ]
+                                [ 0  -------------  0  0 ]
+                                [          r             ]
+
+                              [ 0  0          0          0 ]
+                              [                            ]
+                              [ 0  0          0          0 ]
+                              [                            ]
+                   riem     = [ 0  0          0          0 ]
+                       4, 3   [                            ]
+                              [                2           ]
+                              [         2 m sin (theta)    ]
+                              [ 0  0  - ---------------  0 ]
+                              [                r           ]
+
+           [        2                                             ]
+           [   m sin (theta)                                      ]
+           [ - -------------         0                0         0 ]
+           [         r                                            ]
+           [                                                      ]
+           [                         2                            ]
+           [                    m sin (theta)                     ]
+riem     = [        0         - -------------         0         0 ]
+    4, 4   [                          r                           ]
+           [                                                      ]
+           [                                          2           ]
+           [                                   2 m sin (theta)    ]
+           [        0                0         ---------------  0 ]
+           [                                          r           ]
+           [                                                      ]
+           [        0                0                0         0 ]
+
+(%o5)                                done
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+<a name="deleten"></a><a name="Item_003a-Ctensor_002fdeffn_002fdeleten"></a><dl>
+<dt><a name="index-deleten"></a>Function: <strong>deleten</strong> <em>(<var>L</var>, <var>n</var>)</em></dt>
+<dd><p>Returns a new list consisting of <var>L</var> with the <var>n</var>&rsquo;th element
+deleted.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="Variables-used-by-ctensor"></a>
+<h4 class="subsection">26.2.9 Variables used by <code>ctensor</code></h4>
+
+
+<a name="dim"></a><a name="Item_003a-Ctensor_002fdefvr_002fdim"></a><dl>
+<dt><a name="index-dim"></a>Option variable: <strong>dim</strong></dt>
+<dd><p>Default value: 4
+</p>
+<p>An option in the <code>ctensor</code> (component tensor)
+package.  <code>dim</code> is the dimension of the manifold with the
+default 4. The command <code>dim: n</code> will reset the dimension to any other
+value <code>n</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="diagmetric"></a><a name="Item_003a-Ctensor_002fdefvr_002fdiagmetric"></a><dl>
+<dt><a name="index-diagmetric"></a>Option variable: <strong>diagmetric</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>An option in the <code>ctensor</code> (component tensor)
+package.  If <code>diagmetric</code> is <code>true</code> special routines compute
+all geometrical objects (which contain the metric tensor explicitly)
+by taking into consideration the diagonality of the metric. Reduced
+run times will, of course, result. Note: this option is set
+automatically by <code>csetup</code> if a diagonal metric is specified.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ctrgsimp"></a><a name="Item_003a-Ctensor_002fdefvr_002fctrgsimp"></a><dl>
+<dt><a name="index-ctrgsimp"></a>Option variable: <strong>ctrgsimp</strong></dt>
+<dd>
+<p>Causes trigonometric simplifications to be used when tensors are computed. Presently,
+<code>ctrgsimp</code> affects only computations involving a moving frame.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;</div>
+</dd></dl>
+
+<a name="cframe_005fflag"></a><a name="Item_003a-Ctensor_002fdefvr_002fcframe_005fflag"></a><dl>
+<dt><a name="index-cframe_005fflag"></a>Option variable: <strong>cframe_flag</strong></dt>
+<dd>
+<p>Causes computations to be performed relative to a moving frame as opposed to
+a holonomic metric. The frame is defined by the inverse frame array <code>fri</code>
+and the frame metric <code>lfg</code>. For computations using a Cartesian frame,
+<code>lfg</code> should be the unit matrix of the appropriate dimension; for
+computations in a Lorentz frame, <code>lfg</code> should have the appropriate
+signature.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ctorsion_005fflag"></a><a name="Item_003a-Ctensor_002fdefvr_002fctorsion_005fflag"></a><dl>
+<dt><a name="index-ctorsion_005fflag"></a>Option variable: <strong>ctorsion_flag</strong></dt>
+<dd>
+<p>Causes the contortion tensor to be included in the computation of the
+connection coefficients. The contortion tensor itself is computed by
+<code>contortion</code> from the user-supplied tensor <code>tr</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="cnonmet_005fflag"></a><a name="Item_003a-Ctensor_002fdefvr_002fcnonmet_005fflag"></a><dl>
+<dt><a name="index-cnonmet_005fflag"></a>Option variable: <strong>cnonmet_flag</strong></dt>
+<dd>
+<p>Causes the nonmetricity coefficients to be included in the computation of
+the connection coefficients. The nonmetricity coefficients are computed
+from the user-supplied nonmetricity vector <code>nm</code> by the function
+<code>nonmetricity</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ctayswitch"></a><a name="Item_003a-Ctensor_002fdefvr_002fctayswitch"></a><dl>
+<dt><a name="index-ctayswitch"></a>Option variable: <strong>ctayswitch</strong></dt>
+<dd>
+<p>If set to <code>true</code>, causes some <code>ctensor</code> computations to be carried out using
+Taylor-series expansions. Presently, <code>christof</code>, <code>ricci</code>,
+<code>uricci</code>, <code>einstein</code>, and <code>weyl</code> take into account this
+setting.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ctayvar"></a><a name="Item_003a-Ctensor_002fdefvr_002fctayvar"></a><dl>
+<dt><a name="index-ctayvar"></a>Option variable: <strong>ctayvar</strong></dt>
+<dd>
+<p>Variable used for Taylor-series expansion if <code>ctayswitch</code> is set to
+<code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ctaypov"></a><a name="Item_003a-Ctensor_002fdefvr_002fctaypov"></a><dl>
+<dt><a name="index-ctaypov"></a>Option variable: <strong>ctaypov</strong></dt>
+<dd>
+<p>Maximum power used in Taylor-series expansion when <code>ctayswitch</code> is
+set to <code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ctaypt"></a><a name="Item_003a-Ctensor_002fdefvr_002fctaypt"></a><dl>
+<dt><a name="index-ctaypt"></a>Option variable: <strong>ctaypt</strong></dt>
+<dd>
+<p>Point around which Taylor-series expansion is carried out when
+<code>ctayswitch</code> is set to <code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="gdet"></a><a name="Item_003a-Ctensor_002fdefvr_002fgdet"></a><dl>
+<dt><a name="index-gdet"></a>System variable: <strong>gdet</strong></dt>
+<dd>
+<p>The determinant of the metric tensor <code>lg</code>. Computed by <code>cmetric</code> when
+<code>cframe_flag</code> is set to <code>false</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ratchristof"></a><a name="Item_003a-Ctensor_002fdefvr_002fratchristof"></a><dl>
+<dt><a name="index-ratchristof"></a>Option variable: <strong>ratchristof</strong></dt>
+<dd>
+<p>Causes rational simplification to be applied by <code>christof</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="rateinstein"></a><a name="Item_003a-Ctensor_002fdefvr_002frateinstein"></a><dl>
+<dt><a name="index-rateinstein"></a>Option variable: <strong>rateinstein</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>If <code>true</code> rational simplification will be
+performed on the non-zero components of Einstein tensors; if
+<code>ratfac</code> is <code>true</code> then the components will also be factored.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+<a name="ratriemann"></a><a name="Item_003a-Ctensor_002fdefvr_002fratriemann"></a><dl>
+<dt><a name="index-ratriemann"></a>Option variable: <strong>ratriemann</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>One of the switches which controls
+simplification of Riemann tensors; if <code>true</code>, then rational
+simplification will be done; if <code>ratfac</code> is <code>true</code> then each of the
+components will also be factored.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ratweyl"></a><a name="Item_003a-Ctensor_002fdefvr_002fratweyl"></a><dl>
+<dt><a name="index-ratweyl"></a>Option variable: <strong>ratweyl</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>If <code>true</code>, this switch causes the <code>weyl</code> function
+to apply rational simplification to the values of the Weyl tensor. If
+<code>ratfac</code> is <code>true</code>, then the components will also be factored.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="lfg"></a><a name="Item_003a-Ctensor_002fdefvr_002flfg"></a><dl>
+<dt><a name="index-lfg"></a>Variable: <strong>lfg</strong></dt>
+<dd><p>The covariant frame metric. By default, it is initialized to the 4-dimensional Lorentz frame with signature (+,+,+,-). Used when <code>cframe_flag</code> is <code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ufg"></a><a name="Item_003a-Ctensor_002fdefvr_002fufg"></a><dl>
+<dt><a name="index-ufg"></a>Variable: <strong>ufg</strong></dt>
+<dd><p>The inverse frame metric. Computed from <code>lfg</code> when <code>cmetric</code> is called while <code>cframe_flag</code> is set to <code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="riem"></a><a name="Item_003a-Ctensor_002fdefvr_002friem"></a><dl>
+<dt><a name="index-riem"></a>Variable: <strong>riem</strong></dt>
+<dd><p>The (3,1) Riemann tensor. Computed when the function <code>riemann</code> is invoked. For information about index ordering, see the description of <code>riemann</code>.
+</p>
+<p>If <code>cframe_flag</code> is <code>true</code>, <code>riem</code> is computed from the covariant Riemann-tensor <code>lriem</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="lriem"></a><a name="Item_003a-Ctensor_002fdefvr_002flriem"></a><dl>
+<dt><a name="index-lriem"></a>Variable: <strong>lriem</strong></dt>
+<dd>
+<p>The covariant Riemann tensor. Computed by <code>lriemann</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="uriem"></a><a name="Item_003a-Ctensor_002fdefvr_002furiem"></a><dl>
+<dt><a name="index-uriem"></a>Variable: <strong>uriem</strong></dt>
+<dd>
+<p>The contravariant Riemann tensor. Computed by <code>uriemann</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ric"></a><a name="Item_003a-Ctensor_002fdefvr_002fric"></a><dl>
+<dt><a name="index-ric"></a>Variable: <strong>ric</strong></dt>
+<dd>
+<p>The covariant Ricci-tensor. Computed by <code>ricci</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="uric"></a><a name="Item_003a-Ctensor_002fdefvr_002furic"></a><dl>
+<dt><a name="index-uric"></a>Variable: <strong>uric</strong></dt>
+<dd>
+<p>The mixed-index Ricci-tensor. Computed by <code>uricci</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="lg"></a><a name="Item_003a-Ctensor_002fdefvr_002flg"></a><dl>
+<dt><a name="index-lg"></a>Variable: <strong>lg</strong></dt>
+<dd>
+<p>The metric tensor. This tensor must be specified (as a <code>dim</code> by <code>dim</code> matrix)
+before other computations can be performed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ug"></a><a name="Item_003a-Ctensor_002fdefvr_002fug"></a><dl>
+<dt><a name="index-ug"></a>Variable: <strong>ug</strong></dt>
+<dd>
+<p>The inverse of the metric tensor. Computed by <code>cmetric</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="weyl_005fvariable"></a><a name="Item_003a-Ctensor_002fdefvr_002fweyl"></a><dl>
+<dt><a name="index-weyl-1"></a>Variable: <strong>weyl</strong></dt>
+<dd>
+<p>The Weyl tensor. Computed by <code>weyl</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="fb"></a><a name="Item_003a-Ctensor_002fdefvr_002ffb"></a><dl>
+<dt><a name="index-fb"></a>Variable: <strong>fb</strong></dt>
+<dd>
+<p>Frame bracket coefficients, as computed by <code>frame_bracket</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="kinvariant"></a><a name="Item_003a-Ctensor_002fdefvr_002fkinvariant"></a><dl>
+<dt><a name="index-kinvariant"></a>Variable: <strong>kinvariant</strong></dt>
+<dd>
+<p>The Kretschmann invariant. Computed by <code>rinvariant</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="np"></a><a name="Item_003a-Ctensor_002fdefvr_002fnp"></a><dl>
+<dt><a name="index-np"></a>Variable: <strong>np</strong></dt>
+<dd>
+<p>A Newman-Penrose null tetrad. Computed by <code>nptetrad</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="npi"></a><a name="Item_003a-Ctensor_002fdefvr_002fnpi"></a><dl>
+<dt><a name="index-npi"></a>Variable: <strong>npi</strong></dt>
+<dd>
+<p>The raised-index Newman-Penrose null tetrad. Computed by <code>nptetrad</code>.
+Defined as <code>ug.np</code>. The product <code>np.transpose(npi)</code> is constant:
+</p>
+<div class="example">
+<pre class="example">(%i39) trigsimp(np.transpose(npi));
+                              [  0   - 1  0  0 ]
+                              [                ]
+                              [ - 1   0   0  0 ]
+(%o39)                        [                ]
+                              [  0    0   0  1 ]
+                              [                ]
+                              [  0    0   1  0 ]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="tr"></a><a name="Item_003a-Ctensor_002fdefvr_002ftr"></a><dl>
+<dt><a name="index-tr"></a>Variable: <strong>tr</strong></dt>
+<dd>
+<p>User-supplied rank-3 tensor representing torsion. Used by <code>contortion</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="kt"></a><a name="Item_003a-Ctensor_002fdefvr_002fkt"></a><dl>
+<dt><a name="index-kt"></a>Variable: <strong>kt</strong></dt>
+<dd>
+<p>The contortion tensor, computed from <code>tr</code> by <code>contortion</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="nm"></a><a name="Item_003a-Ctensor_002fdefvr_002fnm"></a><dl>
+<dt><a name="index-nm"></a>Variable: <strong>nm</strong></dt>
+<dd>
+<p>User-supplied nonmetricity vector. Used by <code>nonmetricity</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="nmc"></a><a name="Item_003a-Ctensor_002fdefvr_002fnmc"></a><dl>
+<dt><a name="index-nmc"></a>Variable: <strong>nmc</strong></dt>
+<dd>
+<p>The nonmetricity coefficients, computed from <code>nm</code> by <code>nonmetricity</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="tensorkill"></a><a name="Item_003a-Ctensor_002fdefvr_002ftensorkill"></a><dl>
+<dt><a name="index-tensorkill"></a>System variable: <strong>tensorkill</strong></dt>
+<dd>
+<p>Variable indicating if the tensor package has been initialized. Set and used by
+<code>csetup</code>, reset by <code>init_ctensor</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ct_005fcoords"></a><a name="Item_003a-Ctensor_002fdefvr_002fct_005fcoords"></a><dl>
+<dt><a name="index-ct_005fcoords"></a>Option variable: <strong>ct_coords</strong></dt>
+<dd><p>Default value: <code>[]</code>
+</p>
+<p>An option in the <code>ctensor</code> (component tensor)
+package.  <code>ct_coords</code> contains a list of coordinates.
+While normally defined when the function <code>csetup</code> is called,
+one may redefine the coordinates with the assignment
+<code>ct_coords: [j1, j2, ..., jn]</code> where the j&rsquo;s are the new coordinate names.
+See also <code><a href="#csetup">csetup</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Reserved-names"></a>
+<h4 class="subsection">26.2.10 Reserved names</h4>
+
+<p>The following names are used internally by the <code>ctensor</code> package and
+should not be redefined:
+</p>
+<div class="example">
+<pre class="example">  Name         Description
+  ---------------------------------------------------------------------
+  _lg()        Evaluates to lfg if frame metric used, lg otherwise
+  _ug()        Evaluates to ufg if frame metric used, ug otherwise
+  cleanup()    Removes items from the deindex list
+  contract4()  Used by psi()
+  filemet()    Used by csetup() when reading the metric from a file
+  findde1()    Used by findde()
+  findde2()    Used by findde()
+  findde3()    Used by findde()
+  kdelt()      Kronecker-delta (not generalized)
+  newmet()     Used by csetup() for setting up a metric interactively
+  setflags()   Used by init_ctensor()
+  readvalue()
+  resimp()
+  sermet()     Used by csetup() for entering a metric as Taylor-series
+  txyzsum()
+  tmetric()    Frame metric, used by cmetric() when cframe_flag:true
+  triemann()   Riemann-tensor in frame base, used when cframe_flag:true
+  tricci()     Ricci-tensor in frame base, used when cframe_flag:true
+  trrc()       Ricci rotation coefficients, used by christof()
+  yesp()
+</pre></div>
+
+
+<a name="Changes"></a>
+<h4 class="subsection">26.2.11 Changes</h4>
+
+<p>In November, 2004, the <code>ctensor</code> package was extensively rewritten.
+Many functions and variables have been renamed in order to make the
+package compatible with the commercial version of Macsyma.
+</p>
+
+<div class="example">
+<pre class="example">  New Name     Old Name        Description
+  ---------------------------------------------------------------------
+  ctaylor()    DLGTAYLOR()     Taylor-series expansion of an expression
+  lgeod[]      EM              Geodesic equations
+  ein[]        G[]             Mixed Einstein-tensor
+  ric[]        LR[]            Mixed Ricci-tensor
+  ricci()      LRICCICOM()     Compute the mixed Ricci-tensor
+  ctaypov      MINP            Maximum power in Taylor-series expansion
+  cgeodesic()  MOTION          Compute geodesic equations
+  ct_coords    OMEGA           Metric coordinates
+  ctayvar      PARAM           Taylor-series expansion variable
+  lriem[]      R[]             Covariant Riemann-tensor
+  uriemann()   RAISERIEMANN()  Compute the contravariant Riemann-tensor
+  ratriemann   RATRIEMAN       Rational simplif. of the Riemann-tensor
+  uric[]       RICCI[]         Contravariant Ricci-tensor
+  uricci()     RICCICOM()      Compute the contravariant Ricci-tensor
+  cmetric()    SETMETRIC()     Set up the metric
+  ctaypt       TAYPT           Point for Taylor-series expansion
+  ctayswitch   TAYSWITCH       Taylor-series setting switch
+  csetup()     TSETUP()        Start interactive setup session
+  ctransform() TTRANSFORM()    Interactive coordinate transformation
+  uriem[]      UR[]            Contravariant Riemann-tensor
+  weyl[]       W[]             (3,1) Weyl-tensor
+
+</pre></div>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_133.html#Introduction-to-ctensor" accesskey="p" rel="previous">Introduction to ctensor</a>, Up: <a href="maxima_132.html#ctensor" accesskey="u" rel="up">ctensor</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

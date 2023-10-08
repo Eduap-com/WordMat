@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Bernstein-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Bernstein-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Bernstein-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_42.html#bitwise_002dpkg" rel="next" title="bitwise-pkg">
+<link href="maxima_40.html#augmented_005flagrangian_002dpkg" rel="prev" title="augmented_lagrangian-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Bernstein_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_42.html#bitwise_002dpkg" accesskey="n" rel="next">bitwise</a>, Previous: <a href="maxima_40.html#augmented_005flagrangian_002dpkg" accesskey="p" rel="prev">augmented_lagrangian</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Bernstein">42 Bernstein</h2>
+
+<a class="anchor" id="Item_003a-bernstein_002fnode_002fFunctions-and-Variables-for-Bernstein"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-Bernstein" accesskey="1">Functions and Variables for Bernstein</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-Bernstein">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Bernstein_002dpkg" accesskey="p" rel="prev">Bernstein</a>, Up: <a href="#Bernstein_002dpkg" accesskey="u" rel="up">Bernstein</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Bernstein-1">42.1 Functions and Variables for Bernstein</h3>
+
+<a class="anchor" id="bernstein_005fpoly"></a><a class="anchor" id="Item_003a-bernstein_002fdeffn_002fbernstein_005fpoly"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bernstein_005fpoly"><span class="category-def">Function: </span><span><strong class="def-name">bernstein_poly</strong> <var class="def-var-arguments">(<var class="var">k</var>, <var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-bernstein_005fpoly'> &para;</a></span></dt>
+<dd>
+<p>Provided <code class="code">k</code> is not a negative integer, the Bernstein polynomials
+are defined by <code class="code">bernstein_poly(k,n,x) = binomial(n,k) x^k
+(1-x)^(n-k)</code>; for a negative integer <code class="code">k</code>, the Bernstein polynomial
+<code class="code">bernstein_poly(k,n,x)</code> vanishes.  When either <code class="code">k</code> or <code class="code">n</code> are
+non integers, the option variable <code class="code">bernstein_explicit</code>
+controls the expansion of the Bernstein polynomials into its explicit form;
+example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bernstein&quot;)$
+
+(%i2) bernstein_poly(k,n,x);
+(%o2)                bernstein_poly(k, n, x)
+(%i3) bernstein_poly(k,n,x), bernstein_explicit : true;
+                                       n - k  k
+(%o3)            binomial(n, k) (1 - x)      x
+</pre></div>
+
+<p>The Bernstein polynomials have both a gradef property and an integrate property:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) diff(bernstein_poly(k,n,x),x);
+(%o4) (bernstein_poly(k - 1, n - 1, x)
+                                 - bernstein_poly(k, n - 1, x)) n
+(%i5) integrate(bernstein_poly(k,n,x),x);
+(%o5) 
+                                                            k + 1
+ hypergeometric([k + 1, k - n], [k + 2], x) binomial(n, k) x
+ ----------------------------------------------------------------
+                              k + 1
+</pre></div>
+
+<p>For numeric inputs, both real and complex, the Bernstein polynomials evaluate
+to a numeric result:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i6) bernstein_poly(5,9, 1/2 + %i);
+                        39375 %i   39375
+(%o6)                   -------- + -----
+                          128       256
+(%i7) bernstein_poly(5,9, 0.5b0 + %i);
+(%o7)           3.076171875b2 %i + 1.5380859375b2
+</pre></div>
+
+<p>To use <code class="code">bernstein_poly</code>, first <code class="code">load(&quot;bernstein&quot;)</code>.
+</p>
+</dd></dl>
+
+
+<a class="anchor" id="bernstein_005fexplicit"></a><a class="anchor" id="Item_003a-bernstein_002fdefvr_002fbernstein_005fexplicit"></a><dl class="first-defvr">
+<dt class="defvr" id="index-bernstein_005fexplicit"><span class="category-def">Variable: </span><span><strong class="def-name">bernstein_explicit</strong><a class="copiable-link" href='#index-bernstein_005fexplicit'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When either <code class="code">k</code> or <code class="code">n</code> are non integers, the option variable 
+<code class="code">bernstein_explicit</code> controls the expansion of <code class="code">bernstein(k,n,x)</code> 
+into its explicit form; example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) bernstein_poly(k,n,x);
+(%o1)                bernstein_poly(k, n, x)
+(%i2) bernstein_poly(k,n,x), bernstein_explicit : true;
+                                       n - k  k
+(%o2)            binomial(n, k) (1 - x)      x
+</pre></div>
+<p>When both <code class="code">k</code> and <code class="code">n</code> are explicitly integers, <code class="code">bernstein(k,n,x)</code> 
+<em class="emph">always</em> expands to its explicit form.
+</p>
+</dd></dl>
+
+
+<a class="anchor" id="multibernstein_005fpoly"></a><a class="anchor" id="Item_003a-bernstein_002fdeffn_002fmultibernstein_005fpoly"></a><dl class="first-deffn">
+<dt class="deffn" id="index-multibernstein_005fpoly"><span class="category-def">Function: </span><span><strong class="def-name">multibernstein_poly</strong> <var class="def-var-arguments">(<var class="var">[k1,k2,&hellip;, kp]</var>, <var class="var">[n1,n2,&hellip;, np]</var>, <var class="var">[x1,x2,&hellip;, xp]</var>)</var><a class="copiable-link" href='#index-multibernstein_005fpoly'> &para;</a></span></dt>
+<dd>
+<p>The multibernstein polynomial <code class="code">multibernstein_poly (<var class="var">[k1, k2, ..., 
+kp]</var>, <var class="var">[n1, n2, ..., np]</var>, <var class="var">[x1, x2, ..., xp]</var>)</code> is the product of
+bernstein polynomials <code class="code">bernstein_poly(k1, n1, x1)
+bernstein_poly(k2, n2, x2) ... bernstein_poly(kp, np, xp)</code>.
+</p>
+<p>To use <code class="code">multibernstein_poly</code>, first <code class="code">load(&quot;bernstein&quot;)</code>.
+</p>
+</dd></dl>
+
+<a class="anchor" id="bernstein_005fapprox"></a><a class="anchor" id="Item_003a-bernstein_002fdeffn_002fbernstein_005fapprox"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bernstein_005fapprox"><span class="category-def">Function: </span><span><strong class="def-name">bernstein_approx</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">[x1, x1, &hellip;, xn]</var>, n)</var><a class="copiable-link" href='#index-bernstein_005fapprox'> &para;</a></span></dt>
+<dd>
+<p>Return the <code class="code">n</code>-th order uniform Bernstein polynomial approximation for the
+function <code class="code">(x1, x2, ..., xn) |--&gt; f</code>.
+Examples
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) bernstein_approx(f(x),[x], 2);
+                 2       1                          2
+(%o1)      f(1) x  + 2 f(-) (1 - x) x + f(0) (1 - x)
+                         2
+(%i2) bernstein_approx(f(x,y),[x,y], 2);
+               2  2       1                2
+(%o2) f(1, 1) x  y  + 2 f(-, 1) (1 - x) x y
+                          2
+                  2  2          1   2
+ + f(0, 1) (1 - x)  y  + 2 f(1, -) x  (1 - y) y
+                                2
+       1  1                               1         2
+ + 4 f(-, -) (1 - x) x (1 - y) y + 2 f(0, -) (1 - x)  (1 - y) y
+       2  2                               2
+            2        2       1                      2
+ + f(1, 0) x  (1 - y)  + 2 f(-, 0) (1 - x) x (1 - y)
+                             2
+                  2        2
+ + f(0, 0) (1 - x)  (1 - y)
+</pre></div>
+
+<p>To use <code class="code">bernstein_approx</code>, first <code class="code">load(&quot;bernstein&quot;)</code>.
+</p>
+</dd></dl>
+
+<a class="anchor" id="bernstein_005fexpand"></a><a class="anchor" id="Item_003a-bernstein_002fdeffn_002fbernstein_005fexpand"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bernstein_005fexpand"><span class="category-def">Function: </span><span><strong class="def-name">bernstein_expand</strong> <var class="def-var-arguments">(<var class="var">e</var>, <var class="var">[x1, x1, &hellip;, xn]</var>)</var><a class="copiable-link" href='#index-bernstein_005fexpand'> &para;</a></span></dt>
+<dd>
+<p>Express the <em class="emph">polynomial</em> <code class="code">e</code> exactly as a linear combination of multi-variable
+Bernstein polynomials.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) bernstein_expand(x*y+1,[x,y]);
+(%o1)    2 x y + (1 - x) y + x (1 - y) + (1 - x) (1 - y)
+(%i2) expand(%);
+(%o2)                        x y + 1
+</pre></div>
+
+<p>Maxima signals an error when the first argument isn&rsquo;t a polynomial.
+</p>
+<p>To use <code class="code">bernstein_expand</code>, first <code class="code">load(&quot;bernstein&quot;)</code>.
+</p>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_42.html#bitwise_002dpkg" accesskey="n" rel="next">bitwise</a>, Previous: <a href="maxima_40.html#augmented_005flagrangian_002dpkg" accesskey="p" rel="prev">augmented_lagrangian</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

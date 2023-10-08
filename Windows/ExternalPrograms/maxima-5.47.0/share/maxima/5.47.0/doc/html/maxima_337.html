@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to orthogonal polynomials</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to orthogonal polynomials">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to orthogonal polynomials">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_336.html#orthopoly_002dpkg" rel="up" title="orthopoly-pkg">
+<link href="maxima_338.html#Functions-and-Variables-for-orthogonal-polynomials" rel="next" title="Functions and Variables for orthogonal polynomials">
+<link href="maxima_336.html#orthopoly_002dpkg" rel="previous" title="orthopoly-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-orthogonal-polynomials"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_338.html#Functions-and-Variables-for-orthogonal-polynomials" accesskey="n" rel="next">Functions and Variables for orthogonal polynomials</a>, Previous: <a href="maxima_336.html#orthopoly_002dpkg" accesskey="p" rel="previous">orthopoly-pkg</a>, Up: <a href="maxima_336.html#orthopoly_002dpkg" accesskey="u" rel="up">orthopoly-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-orthogonal-polynomials-1"></a>
+<h3 class="section">80.1 Introduction to orthogonal polynomials</h3>
+
+<p><code>orthopoly</code> is a package for symbolic and numerical evaluation of
+several kinds of orthogonal polynomials, including Chebyshev,
+Laguerre, Hermite, Jacobi, Legendre, and ultraspherical (Gegenbauer) 
+polynomials. Additionally, <code>orthopoly</code> includes support for the spherical Bessel, 
+spherical Hankel, and spherical harmonic functions.
+</p>
+<p>For the most part, <code>orthopoly</code> follows the conventions of Abramowitz and Stegun
+<i>Handbook of Mathematical Functions</i>, Chapter 22 (10th printing, December 1972);
+additionally, we use Gradshteyn and Ryzhik, 
+<i>Table of Integrals, Series, and Products</i> (1980 corrected and 
+enlarged edition), and Eugen Merzbacher <i>Quantum Mechanics</i> (2nd edition, 1970).
+</p>
+
+
+<p>Barton Willis of the University of Nebraska at Kearney (UNK) wrote
+the <code>orthopoly</code> package and its documentation. The package 
+is released under the GNU General Public License (GPL).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Orthogonal-polynomials">Orthogonal polynomials</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;</div>
+<a name="Getting-Started-with-orthopoly"></a>
+<h4 class="subsection">80.1.1 Getting Started with orthopoly</h4>
+
+<p><code>load (&quot;orthopoly&quot;)</code> loads the <code>orthopoly</code> package.
+</p>
+<p>To find the third-order Legendre polynomial,
+</p>
+<div class="example">
+<pre class="example">(%i1) legendre_p (3, x);
+                      3             2
+             5 (1 - x)    15 (1 - x)
+(%o1)      - ---------- + ----------- - 6 (1 - x) + 1
+                 2             2
+</pre></div>
+
+<p>To express this as a sum of powers of <var>x</var>, apply <var>ratsimp</var> or <var>rat</var>
+to the result.
+</p>
+<div class="example">
+<pre class="example">(%i2) [ratsimp (%), rat (%)];
+                        3           3
+                     5 x  - 3 x  5 x  - 3 x
+(%o2)/R/            [----------, ----------]
+                         2           2
+</pre></div>
+
+<p>Alternatively, make the second argument to <code>legendre_p</code> (its &ldquo;main&rdquo; variable) 
+a canonical rational expression (CRE).
+</p>
+<div class="example">
+<pre class="example">(%i1) legendre_p (3, rat (x));
+                              3
+                           5 x  - 3 x
+(%o1)/R/                   ----------
+                               2
+</pre></div>
+
+<p>For floating point evaluation, <code>orthopoly</code> uses a running error analysis
+to estimate an upper bound for the error. For example,
+</p>
+<div class="example">
+<pre class="example">(%i1) jacobi_p (150, 2, 3, 0.2);
+(%o1) interval(- 0.062017037936715, 1.533267919277521E-11)
+</pre></div>
+
+<p>Intervals have the form <code>interval (<var>c</var>, <var>r</var>)</code>, where <var>c</var> is the
+center and <var>r</var> is the radius of the interval. Since Maxima
+does not support arithmetic on intervals, in some situations, such
+as graphics, you want to suppress the error and output only the 
+center of the interval. To do this, set the option
+variable <code>orthopoly_returns_intervals</code> to <code>false</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) orthopoly_returns_intervals : false;
+(%o1)                         false
+(%i2) jacobi_p (150, 2, 3, 0.2);
+(%o2)                  - 0.062017037936715
+</pre></div>
+
+<p>Refer to the section see <a href="#Floating-point-Evaluation">Floating point Evaluation</a> for more information.
+</p>
+<p>Most functions in <code>orthopoly</code> have a <code>gradef</code> property; thus
+</p>
+<div class="example">
+<pre class="example">(%i1) diff (hermite (n, x), x);
+(%o1)                     2 n H     (x)
+                               n - 1
+(%i2) diff (gen_laguerre (n, a, x), x);
+              (a)               (a)
+           n L   (x) - (n + a) L     (x) unit_step(n)
+              n                 n - 1
+(%o2)      ------------------------------------------
+                               x
+</pre></div>
+
+<p>The unit step function in the second example prevents an error that would
+otherwise arise by evaluating with <var>n</var> equal to 0.
+</p>
+<div class="example">
+<pre class="example">(%i3) ev (%, n = 0);
+(%o3)                           0
+</pre></div>
+
+<p>The <code>gradef</code> property only applies to the &ldquo;main&rdquo; variable; derivatives with 
+respect other arguments usually result in an error message; for example
+</p>
+<div class="example">
+<pre class="example">(%i1) diff (hermite (n, x), x);
+(%o1)                     2 n H     (x)
+                               n - 1
+(%i2) diff (hermite (n, x), n);
+
+Maxima doesn't know the derivative of hermite with respect the first
+argument
+ -- an error.  Quitting.  To debug this try debugmode(true);
+</pre></div>
+
+<p>Generally, functions in <code>orthopoly</code> map over lists and matrices. For
+the mapping to fully evaluate, the option variables 
+<code>doallmxops</code> and <code>listarith</code> must both be <code>true</code> (the defaults).
+To illustrate the mapping over matrices, consider
+</p>
+<div class="example">
+<pre class="example">(%i1) hermite (2, x);
+                                     2
+(%o1)                    - 2 (1 - 2 x )
+(%i2) m : matrix ([0, x], [y, 0]);
+                            [ 0  x ]
+(%o2)                       [      ]
+                            [ y  0 ]
+(%i3) hermite (2, m);
+               [                             2  ]
+               [      - 2        - 2 (1 - 2 x ) ]
+(%o3)          [                                ]
+               [             2                  ]
+               [ - 2 (1 - 2 y )       - 2       ]
+</pre></div>
+
+<p>In the second example, the <code>i, j</code> element of the value
+is <code>hermite (2, m[i,j])</code>; this is not the same as computing
+<code>-2 + 4 m . m</code>, as seen in the next example.
+</p>
+<div class="example">
+<pre class="example">(%i4) -2 * matrix ([1, 0], [0, 1]) + 4 * m . m;
+                    [ 4 x y - 2      0     ]
+(%o4)               [                      ]
+                    [     0      4 x y - 2 ]
+</pre></div>
+
+<p>If you evaluate a function at a point outside its domain, generally
+<code>orthopoly</code> returns the function unevaluated. For example,
+</p>
+<div class="example">
+<pre class="example">(%i1) legendre_p (2/3, x);
+(%o1)                        P   (x)
+                              2/3
+</pre></div>
+
+<p><code>orthopoly</code> supports translation into TeX; it also does two-dimensional
+output on a terminal.
+</p>
+<div class="example">
+<pre class="example">(%i1) spherical_harmonic (l, m, theta, phi);
+                          m
+(%o1)                    Y (theta, phi)
+                          l
+(%i2) tex (%);
+$$Y_{l}^{m}\left(\vartheta,\varphi\right)$$
+(%o2)                         false
+(%i3) jacobi_p (n, a, a - b, x/2);
+                          (a, a - b) x
+(%o3)                    P          (-)
+                          n          2
+(%i4) tex (%);
+$$P_{n}^{\left(a,a-b\right)}\left({{x}\over{2}}\right)$$
+(%o4)                         false
+</pre></div>
+
+<a name="Limitations"></a>
+<h4 class="subsection">80.1.2 Limitations</h4>
+
+<p>When an expression involves several orthogonal polynomials with
+symbolic orders, it&rsquo;s possible that the expression actually
+vanishes, yet Maxima is unable to simplify it to zero. If you
+divide by such a quantity, you&rsquo;ll be in trouble. For example,
+the following expression vanishes for integers <var>n</var> greater than 1, yet Maxima
+is unable to simplify it to zero.
+</p>
+<div class="example">
+<pre class="example">(%i1) (2*n - 1) * legendre_p (n - 1, x) * x - n * legendre_p (n, x)
+      + (1 - n) * legendre_p (n - 2, x);
+(%o1)  (2 n - 1) P     (x) x - n P (x) + (1 - n) P     (x)
+                  n - 1           n               n - 2
+</pre></div>
+
+<p>For a specific <var>n</var>, we can reduce the expression to zero.
+</p>
+<div class="example">
+<pre class="example">(%i2) ev (% ,n = 10, ratsimp);
+(%o2)                           0
+</pre></div>
+
+<p>Generally, the polynomial form of an orthogonal polynomial is ill-suited
+for floating point evaluation. Here&rsquo;s an example.
+</p>
+<div class="example">
+<pre class="example">(%i1) p : jacobi_p (100, 2, 3, x)$
+
+(%i2) subst (0.2, x, p);
+(%o2)                3.4442767023833592E+35
+(%i3) jacobi_p (100, 2, 3, 0.2);
+(%o3)  interval(0.18413609135169, 6.8990300925815987E-12)
+(%i4) float(jacobi_p (100, 2, 3, 2/10));
+(%o4)                   0.18413609135169
+</pre></div>
+
+<p>The true value is about 0.184; this calculation suffers from extreme
+subtractive cancellation error. Expanding the polynomial and then
+evaluating, gives a better result.
+</p><div class="example">
+<pre class="example">(%i5) p : expand(p)$
+(%i6) subst (0.2, x, p);
+(%o6) 0.18413609766122982
+</pre></div>
+
+<p>This isn&rsquo;t a general rule; expanding the polynomial does not always
+result in an expression that is better suited for numerical evaluation.
+By far, the best way to do numerical evaluation is to make one or more
+of the function arguments floating point numbers. By doing that, 
+specialized floating point algorithms are used for evaluation.
+</p>
+<p>Maxima&rsquo;s <code>float</code> function is somewhat indiscriminate; if you apply 
+<code>float</code> to an expression involving an orthogonal polynomial with a
+symbolic degree or order parameter, these parameters may be 
+converted into floats; after that, the expression will not evaluate 
+fully. Consider
+</p>
+<div class="example">
+<pre class="example">(%i1) assoc_legendre_p (n, 1, x);
+                               1
+(%o1)                         P (x)
+                               n
+(%i2) float (%);
+                              1.0
+(%o2)                        P   (x)
+                              n
+(%i3) ev (%, n=2, x=0.9);
+                             1.0
+(%o3)                       P   (0.9)
+                             2
+</pre></div>
+
+<p>The expression in (%o3) will not evaluate to a float; <code>orthopoly</code> doesn&rsquo;t
+recognize floating point values where it requires an integer. Similarly, 
+numerical evaluation of the <code>pochhammer</code> function for orders that
+exceed <code>pochhammer_max_index</code> can be troublesome; consider
+</p>
+<div class="example">
+<pre class="example">(%i1) x :  pochhammer (1, 10), pochhammer_max_index : 5;
+(%o1)                         (1)
+                                 10
+</pre></div>
+
+<p>Applying <code>float</code> doesn&rsquo;t evaluate <var>x</var> to a float
+</p>
+<div class="example">
+<pre class="example">(%i2) float (x);
+(%o2)                       (1.0)
+                                 10.0
+</pre></div>
+
+<p>To evaluate <var>x</var> to a float, you&rsquo;ll need to bind
+<code>pochhammer_max_index</code> to 11 or greater and apply <code>float</code> to <var>x</var>.
+</p>
+<div class="example">
+<pre class="example">(%i3) float (x), pochhammer_max_index : 11;
+(%o3)                       3628800.0
+</pre></div>
+
+<p>The default value of <code>pochhammer_max_index</code> is 100;
+change its value after loading <code>orthopoly</code>.
+</p>
+<p>Finally, be aware that reference books vary on the definitions of the 
+orthogonal polynomials; we&rsquo;ve generally used the conventions 
+of Abramowitz and Stegun.
+</p>
+<p>Before you suspect a bug in orthopoly, check some special cases 
+to determine if your definitions match those used by <code>orthopoly</code>. 
+Definitions often differ by a normalization; occasionally, authors
+use &ldquo;shifted&rdquo; versions of the functions that makes the family
+orthogonal on an interval other than <em>(-1, 1)</em>. To define, for example,
+a Legendre polynomial that is orthogonal on <em>(0, 1)</em>, define
+</p>
+<div class="example">
+<pre class="example">(%i1) shifted_legendre_p (n, x) := legendre_p (n, 2*x - 1)$
+
+(%i2) shifted_legendre_p (2, rat (x));
+                            2
+(%o2)/R/                 6 x  - 6 x + 1
+(%i3) legendre_p (2, rat (x));
+                               2
+                            3 x  - 1
+(%o3)/R/                    --------
+                               2
+</pre></div>
+
+<a name="Floating-point-Evaluation"></a><a name="Floating-point-Evaluation-1"></a>
+<h4 class="subsection">80.1.3 Floating point Evaluation</h4>
+
+<p>Most functions in <code>orthopoly</code> use a running error analysis to 
+estimate the error in floating point evaluation; the 
+exceptions are the spherical Bessel functions and the associated Legendre 
+polynomials of the second kind. For numerical evaluation, the spherical 
+Bessel functions call SLATEC functions. No specialized method is used
+for numerical evaluation of the associated Legendre polynomials of the
+second kind.
+</p>
+<p>The running error analysis ignores errors that are second or higher order
+in the machine epsilon (also known as unit roundoff). It also
+ignores a few other errors. It&rsquo;s possible (although unlikely) 
+that the actual error exceeds the estimate.
+</p>
+<p>Intervals have the form <code>interval (<var>c</var>, <var>r</var>)</code>, where <var>c</var> is the 
+center of the interval and <var>r</var> is its radius. The 
+center of an interval can be a complex number, and the radius is always a positive real number.
+</p>
+<p>Here is an example.
+</p>
+
+<div class="example">
+<pre class="example">(%i1) fpprec : 50$
+
+(%i2) y0 : jacobi_p (100, 2, 3, 0.2);
+(%o2) interval(0.1841360913516871, 6.8990300925815987E-12)
+(%i3) y1 : bfloat (jacobi_p (100, 2, 3, 1/5));
+(%o3) 1.8413609135168563091370224958913493690868904463668b-1
+</pre></div>
+
+<p>Let&rsquo;s test that the actual error is smaller than the error estimate
+</p>
+<div class="example">
+<pre class="example">(%i4) is (abs (part (y0, 1) - y1) &lt; part (y0, 2));
+(%o4)                         true
+</pre></div>
+
+<p>Indeed, for this example the error estimate is an upper bound for the
+true error.
+</p>
+<p>Maxima does not support arithmetic on intervals.
+</p>
+<div class="example">
+<pre class="example">(%i1) legendre_p (7, 0.1) + legendre_p (8, 0.1);
+(%o1) interval(0.18032072148437508, 3.1477135311021797E-15)
+        + interval(- 0.19949294375000004, 3.3769353084291579E-15)
+</pre></div>
+
+<p>A user could define arithmetic operators that do interval math. To
+define interval addition, we can define
+</p>
+<div class="example">
+<pre class="example">(%i1) infix (&quot;@+&quot;)$
+
+(%i2) &quot;@+&quot;(x,y) := interval (part (x, 1) + part (y, 1), part (x, 2)
+      + part (y, 2))$
+
+(%i3) legendre_p (7, 0.1) @+ legendre_p (8, 0.1);
+(%o3) interval(- 0.019172222265624955, 6.5246488395313372E-15)
+</pre></div>
+
+<p>The special floating point routines get called when the arguments
+are complex.  For example,
+</p>
+<div class="example">
+<pre class="example">(%i1) legendre_p (10, 2 + 3.0*%i);
+(%o1) interval(- 3.876378825E+7 %i - 6.0787748E+7, 
+                                           1.2089173052721777E-6)
+</pre></div>
+
+<p>Let&rsquo;s compare this to the true value.
+</p>
+<div class="example">
+<pre class="example">(%i1) float (expand (legendre_p (10, 2 + 3*%i)));
+(%o1)          - 3.876378825E+7 %i - 6.0787748E+7
+</pre></div>
+
+<p>Additionally, when the arguments are big floats, the special floating point
+routines get called; however, the big floats are converted into double floats
+and the final result is a double.
+</p>
+<div class="example">
+<pre class="example">(%i1) ultraspherical (150, 0.5b0, 0.9b0);
+(%o1) interval(- 0.043009481257265, 3.3750051301228864E-14)
+</pre></div>
+
+<a name="Graphics-and-orthopoly"></a>
+<h4 class="subsection">80.1.4 Graphics and <code>orthopoly</code></h4>
+
+<p>To plot expressions that involve the orthogonal polynomials, you 
+must do two things:
+</p><ol>
+<li> Set the option variable <code>orthopoly_returns_intervals</code> to <code>false</code>,
+</li><li> Quote any calls to <code>orthopoly</code> functions.
+</li></ol>
+<p>If function calls aren&rsquo;t quoted, Maxima evaluates them to polynomials before 
+plotting; consequently, the specialized floating point code doesn&rsquo;t get called.
+Here is an example of how to plot an expression that involves
+a Legendre polynomial.
+</p>
+<div class="example">
+<pre class="example">(%i1) plot2d ('(legendre_p (5, x)), [x, 0, 1]),
+                        orthopoly_returns_intervals : false;
+(%o1)
+</pre></div>
+
+<img src="figures/orthopoly1.png" alt="figures/orthopoly1">
+
+<p>The <i>entire</i> expression <code>legendre_p (5, x)</code> is quoted; this is 
+different than just quoting the function name using <code>'legendre_p (5, <var>x</var>)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div>
+
+<a name="Miscellaneous-Functions"></a>
+<h4 class="subsection">80.1.5 Miscellaneous Functions</h4>
+
+<p>The <code>orthopoly</code> package defines the
+Pochhammer symbol and a unit step function. <code>orthopoly</code> uses
+the Kronecker delta function and the unit step function in
+<code>gradef</code> statements.
+</p>
+<p>To convert Pochhammer symbols into quotients of gamma functions,
+use <code>makegamma</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) makegamma (pochhammer (x, n));
+                          gamma(x + n)
+(%o1)                     ------------
+                            gamma(x)
+(%i2) makegamma (pochhammer (1/2, 1/2));
+                                1
+(%o2)                       ---------
+                            sqrt(%pi)
+</pre></div>
+
+<p>Derivatives of the Pochhammer symbol are given in terms of the <code>psi</code>
+function.
+</p>
+<div class="example">
+<pre class="example">(%i1) diff (pochhammer (x, n), x);
+(%o1)             (x)  (psi (x + n) - psi (x))
+                     n     0             0
+(%i2) diff (pochhammer (x, n), n);
+(%o2)                   (x)  psi (x + n)
+                           n    0
+</pre></div>
+
+<p>You need to be careful with the expression in (%o1); the difference of the
+<code>psi</code> functions has polynomials when <code><var>x</var> = -1, -2, .., -<var>n</var></code>. These polynomials
+cancel with factors in <code>pochhammer (<var>x</var>, <var>n</var>)</code> making the derivative a degree
+<code><var>n</var> - 1</code> polynomial when <var>n</var> is a positive integer.
+</p>
+<p>The Pochhammer symbol is defined for negative orders through its
+representation as a quotient of gamma functions. Consider
+</p>
+<div class="example">
+<pre class="example">(%i1) q : makegamma (pochhammer (x, n));
+                          gamma(x + n)
+(%o1)                     ------------
+                            gamma(x)
+(%i2) sublis ([x=11/3, n= -6], q);
+                               729
+(%o2)                        - ----
+                               2240
+</pre></div>
+
+<p>Alternatively, we can get this result directly.
+</p>
+<div class="example">
+<pre class="example">(%i1) pochhammer (11/3, -6);
+                               729
+(%o1)                        - ----
+                               2240
+</pre></div>
+
+<p>The unit step function is left-continuous; thus
+</p>
+<div class="example">
+<pre class="example">(%i1) [unit_step (-1/10), unit_step (0), unit_step (1/10)];
+(%o1)                       [0, 0, 1]
+</pre></div>
+
+<p>If you need a unit step function that is neither left or right continuous
+at zero, define your own using <code>signum</code>; for example,
+</p>
+<div class="example">
+<pre class="example">(%i1) xunit_step (x) := (1 + signum (x))/2$
+
+(%i2) [xunit_step (-1/10), xunit_step (0), xunit_step (1/10)];
+                                1
+(%o2)                       [0, -, 1]
+                                2
+</pre></div>
+
+<p>Do not redefine <code>unit_step</code> itself; some code in <code>orthopoly</code>
+requires that the unit step function be left-continuous.
+</p>
+<a name="Algorithms"></a>
+<h4 class="subsection">80.1.6 Algorithms</h4>
+
+<p>Generally, <code>orthopoly</code> does symbolic evaluation by using a hypergeometic 
+representation of the orthogonal polynomials. The hypergeometic 
+functions are evaluated using the (undocumented) functions <code>hypergeo11</code> 
+and <code>hypergeo21</code>. The exceptions are the half-integer Bessel functions 
+and the associated Legendre function of the second kind. The half-integer Bessel functions are
+evaluated using an explicit representation, and the associated Legendre 
+function of the second kind is evaluated using recursion.
+</p>
+<p>For floating point evaluation, we again convert most functions into
+a hypergeometic form; we evaluate the hypergeometic functions using 
+forward recursion. Again, the exceptions are the half-integer Bessel functions 
+and the associated Legendre function of the second kind. Numerically, 
+the half-integer Bessel functions are evaluated using the SLATEC code.
+</p>
+
+<a name="Item_003a-orthopoly_002fnode_002fFunctions-and-Variables-for-orthogonal-polynomials"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_338.html#Functions-and-Variables-for-orthogonal-polynomials" accesskey="n" rel="next">Functions and Variables for orthogonal polynomials</a>, Previous: <a href="maxima_336.html#orthopoly_002dpkg" accesskey="p" rel="previous">orthopoly-pkg</a>, Up: <a href="maxima_336.html#orthopoly_002dpkg" accesskey="u" rel="up">orthopoly-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

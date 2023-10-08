@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Plotting (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Plotting (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Plotting (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_12.html#File-Input-and-Output" rel="next" title="File Input and Output">
+<link href="maxima_10.html#Maxima_0027s-Database" rel="prev" title="Maxima's Database">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Plotting">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_12.html#File-Input-and-Output" accesskey="n" rel="next">File Input and Output</a>, Previous: <a href="maxima_10.html#Maxima_0027s-Database" accesskey="p" rel="prev">Maxima&rsquo;s Database</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Plotting-1">12 Plotting</h2>
+
+<a class="anchor" id="Item_003a-Plotting_002fnode_002fIntroduction-to-Plotting"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Plotting" accesskey="1">Introduction to Plotting</a></li>
+<li><a href="#Plotting-Formats" accesskey="2">Plotting Formats</a></li>
+<li><a href="#Functions-and-Variables-for-Plotting" accesskey="3">Functions and Variables for Plotting</a></li>
+<li><a href="#Plotting-Options" accesskey="4">Plotting Options</a></li>
+<li><a href="#Gnuplot-Options" accesskey="5">Gnuplot Options</a></li>
+<li><a href="#Gnuplot_005fpipes-Format-Functions" accesskey="6">Gnuplot_pipes Format Functions</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Plotting">
+<div class="nav-panel">
+<p>
+Next: <a href="#Plotting-Formats" accesskey="n" rel="next">Plotting Formats</a>, Previous: <a href="#Plotting" accesskey="p" rel="prev">Plotting</a>, Up: <a href="#Plotting" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Plotting-1">12.1 Introduction to Plotting</h3>
+
+<p>To make the plots, Maxima can use an external plotting package or its
+own graphical interface Xmaxima (see the section on <code class="code"><a class="ref" href="#Plotting-Formats">Plotting Formats</a></code>). The plotting functions calculate a set of points and pass
+them to the plotting package together with a set of commands specific to
+that graphic program. In some cases those commands and data are saved in
+a file and the graphic program is executed giving it the name of that
+file to be parsed.
+</p>
+<p>When a file is created, it will begiven the name
+<code class="code">maxout_xxx.format</code>, where <code class="code">xxx</code> is a number that is unique to
+every concurrently-running instance of Maxima and <code class="code">format</code> is the
+name of the plotting format being used (<code class="code">gnuplot</code>, <code class="code">xmaxima</code>,
+<code class="code">mgnuplot</code> or <code class="code">geomview</code>).
+</p>
+<p>There are commands to save the plot in a graphic format file, rather
+than showing it in the screen. The default name for that graphic file is
+<code class="code">maxplot.extension</code>, where <code class="code">extension</code> is the extension
+normally used for the kind of graphic file selected, but that name can
+also be specified by the user.
+</p>
+<p>The <code class="code">maxout_xxx.format</code> and <code class="code">maxplot.extension</code> files are created
+in the directory specified by the system variable
+<code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code>. That location can be changed by assigning to
+that variable (or to the environment variable <code class="env">MAXIMA_TEMPDIR</code>) a string
+that represents a valid directory where Maxima can create new files. The
+output of the Maxima plotting command will be a list with the names of
+the file(s) created, including their complete path, or empty if no files
+are created. Those files should be deleted after the maxima session ends.
+</p>
+<p>If the format used is either <code class="code">gnuplot</code> or <code class="code">xmaxima</code>, and the
+<code class="code">maxout_xxx.gnuplot</code> or <code class="code">maxout_xxx.xmaxima</code> was saved,
+<code class="code">gnuplot</code> or <code class="code">xmaxima</code> can be run, giving it the name of that
+file as argument, in order to view again a plot previously created in
+Maxima. Thus, when a Maxima plotting command fails, the format can be
+set to <code class="code">gnuplot</code> or <code class="code">xmaxima</code> and the plain-text file
+<code class="code">maxout_xxx.gnuplot</code> (or <code class="code">maxout_xxx.xmaxima</code>) can be
+inspected to look for the source of the problem.
+</p>
+<p>The additional package <a class="ref" href="maxima_52.html#draw">draw</a> provides functions similar to the ones
+described in this section with some extra features, but it only works
+with <code class="code">gnuplot</code>. Note that some plotting options have the same name
+in both plotting packages, but their syntax and behavior is
+different. To view the documentation for a graphic option <code class="code">opt</code>,
+type <code class="code">?? opt</code> in order to choose the information for either of
+those two packages.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Plotting_002fnode_002fPlotting-Formats"></a><hr>
+</div>
+<div class="section-level-extent" id="Plotting-Formats">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Plotting" accesskey="n" rel="next">Functions and Variables for Plotting</a>, Previous: <a href="#Introduction-to-Plotting" accesskey="p" rel="prev">Introduction to Plotting</a>, Up: <a href="#Plotting" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Plotting-Formats-1">12.2 Plotting Formats</h3>
+
+<p>Maxima can use either Gnuplot, Xmaxima or Geomview as graphics
+program. Gnuplot and Geomview are external programs which must be
+installed separately, while Xmaxima is distributed with Maxima. To see
+which plotting format you are currently using, use the command
+<code class="code">get_plot_option(plot_format);</code> and to change to another format,
+you can use <code class="code">set_plot_option([plot_format, &lt;format&gt;])</code>, where
+<code class="code">&lt;format&gt;</code> is the name of one of the formats described below. Those
+two commands show and change the global plot format, while each
+individual plotting command can use its own format, if it includes an
+option <code class="code">[plot_format, &lt;format&gt;]</code> (see <code class="code"><a class="ref" href="#get_005fplot_005foption">get_plot_option</a></code> and
+<code class="code"><a class="ref" href="#set_005fplot_005foption">set_plot_option</a></code>).
+</p>
+<p>The plotting formats are the following:
+</p>
+<ul class="itemize mark-bullet">
+<li><strong class="strong">gnuplot</strong>
+
+<p>Used to launch the external program gnuplot, which must be installed in
+your system.  All plotting commands and data are saved into the file
+<code class="code">maxout_xxx.gnuplot</code>.
+</p>
+</li><li><strong class="strong">gnuplot_pipes</strong> (default value)
+
+<p>It is similar to the <code class="code">gnuplot</code> format except that the commands and
+plot data are sent directly to <code class="code">gnuplot</code> without creating any
+files.  A single gnuplot process is kept open, with a single graphic
+window, and subsequent plot commands will be sent to the same process,
+replacing previous plots in that same window. Even if the graphic window
+is closed, the <code class="code">gnuplot</code> process is still running until the end of
+the session or until it is killed with <code class="code"><a class="ref" href="#gnuplot_005fclose">gnuplot_close</a></code>.. The
+function <code class="code"><a class="ref" href="#gnuplot_005freplot">gnuplot_replot</a></code> can be used to modify a plot that has
+already been displayed on the screen or to open again the graphic window
+after it was closed.
+</p>
+<p>This format does not work with some versions of Lisp under Windows and
+it is only used to plot to the screen; whenever graphic files are to be
+created, the format is silently switched to <code class="code">gnuplot</code> and the
+commands needed to create the graphic file are saved with the data in
+file <code class="code">maxout_xxx.gnuplot</code>.
+</p>
+</li><li><strong class="strong">mgnuplot</strong>
+
+<p>Mgnuplot is a Tk-based wrapper around gnuplot. It is an old interface
+still included in the Maxima distribution, but it is currently disabled
+because it does not have most of the features introduced by the newer
+versions of the plotting commands. Mgnuplot requires an external gnuplot
+installation and, in Unix systems, the Tcl/Tk system.
+</p>
+</li><li><strong class="strong">xmaxima</strong>
+
+<p>Xmaxima is a Tcl/Tk graphical interface for Maxima that can also be used
+to display plots created when Maxima is run from the console or from
+other graphical interfaces. To use this format, the xmaxima program,
+which is distributed together with Maxima, must be installed; in some
+Linux distributions Xmaxima is distributed in a package separate from
+other parts of Maxima. If Maxima is being run from the Xmaxima console,
+the data and commands are passed to xmaxima through the same socket used
+for the communication between Maxima and the Xmaxima console. When used
+from a terminal or from graphical interfaces different from Xmaxima, the
+commands and data are saved in the file <code class="code">maxout_xxx.xmaxima</code> and
+xmaxima is run with the name of that file as argument.
+</p>
+</li><li><strong class="strong">geomview</strong>
+
+<p>Geomview, a Motif based interactive 3D viewing program for Unix. It can
+only be used to display plots created with <code class="code">plot3d</code>. To use this
+format, the geomview program must be installed.
+</p>
+</li></ul>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Plotting_002fnode_002fFunctions-and-Variables-for-Plotting"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Plotting">
+<div class="nav-panel">
+<p>
+Next: <a href="#Plotting-Options" accesskey="n" rel="next">Plotting Options</a>, Previous: <a href="#Plotting-Formats" accesskey="p" rel="prev">Plotting Formats</a>, Up: <a href="#Plotting" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Plotting-1">12.3 Functions and Variables for Plotting</h3>
+
+<a class="anchor" id="geomview_005fcommand"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgeomview_005fcommand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-geomview_005fcommand"><span class="category-def">System variable: </span><span><strong class="def-name">geomview_command</strong><a class="copiable-link" href='#index-geomview_005fcommand'> &para;</a></span></dt>
+<dd>
+<p>This variable stores the name of the command used to run the geomview
+program when the plot format is <code class="code">geomview</code>. Its default value is
+&quot;geomview&quot;.  If the geomview program is not found unless you give
+its complete path or if you want to try a different version of it,
+you may change the value of this variable. For instance,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) geomview_command: &quot;/usr/local/bin/my_geomview&quot;$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="get_005fplot_005foption"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fget_005fplot_005foption"></a><dl class="first-deffn">
+<dt class="deffn" id="index-get_005fplot_005foption"><span class="category-def">Function: </span><span><strong class="def-name">get_plot_option</strong> <var class="def-var-arguments">(<var class="var">keyword</var>, <var class="var">index</var>)</var><a class="copiable-link" href='#index-get_005fplot_005foption'> &para;</a></span></dt>
+<dd>
+<p>Returns the current default value of the option named <var class="var">keyword</var>,
+which is a list. The optional argument <var class="var">index</var> must be a positive
+integer which can be used to extract only one element from the list
+(element 1 is the name of the option).
+</p>
+<p>See also <code class="code"><a class="ref" href="#set_005fplot_005foption">set_plot_option</a></code>, <code class="code"><a class="ref" href="#remove_005fplot_005foption">remove_plot_option</a></code> and the
+section on <code class="code"><a class="ref" href="#Plotting-Options">Plotting Options</a></code>.
+</p></dd></dl>
+
+<a class="anchor" id="gnuplot_005fcommand"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fcommand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fcommand"><span class="category-def">System variable: </span><span><strong class="def-name">gnuplot_command</strong><a class="copiable-link" href='#index-gnuplot_005fcommand'> &para;</a></span></dt>
+<dd>
+<p>This variable stores the name of the command used to run the gnuplot
+program when the plot format is <code class="code">gnuplot</code> or
+<code class="code">gnuplot_pipes</code>. Its default value is &quot;gnuplot&quot;. If the gnuplot
+program is not found unless you give its complete path or if you want to
+try a different version of it, you may change the value of this
+variable. For instance,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) gnuplot_command: &quot;/usr/local/bin/my_gnuplot&quot;$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005ffile_005fargs"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005ffile_005fargs"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005ffile_005fargs"><span class="category-def">System variable: </span><span><strong class="def-name">gnuplot_file_args</strong><a class="copiable-link" href='#index-gnuplot_005ffile_005fargs'> &para;</a></span></dt>
+<dd>
+<p>When a graphic file is going to be created using <code class="code">gnuplot</code>, this
+variable is used to specify the format used to print the file name given
+to gnuplot. Its default value is &quot;~a&quot; in SBCL and Openmcl, and &quot;~s&quot; in
+other lisp versions, which means that the name of the file will be
+passed without quotes if SBCL or Openmcl are used and within quotes if
+other Lisp versions are used. The contents of this variable can be
+changed in order to add options for the gnuplot program, adding those
+options before the format directive &quot;~s&quot;.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fview_005fargs"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fview_005fargs"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fview_005fargs"><span class="category-def">System variable: </span><span><strong class="def-name">gnuplot_view_args</strong><a class="copiable-link" href='#index-gnuplot_005fview_005fargs'> &para;</a></span></dt>
+<dd>
+<p>This variable is the format used to parse the argument that will be
+passed to the gnuplot program when the plot format is
+<code class="code">gnuplot</code>. Its default value is &quot;-persist ~a&quot; when SBCL or Openmcl
+are used, and &quot;-persist ~s&quot; with other Lisp variants, where &quot;~a&quot; or &quot;~s&quot;
+will be replaced with the name of the file where the gnuplot commands
+have been written (usually &quot;maxout_xxx.gnuplot&quot;). The option
+<code class="code">-persist</code> tells gnuplot to exit after the commands in the file
+have been executed, without closing the window that displays the plot.
+</p>
+<p>Those familiar with gnuplot, might want to change the value of this
+variable. For example, by changing it to:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) gnuplot_view_args: &quot;~s -&quot;$
+</pre></div>
+
+<p>gnuplot will not be closed after the commands in the file have been
+executed; thus, the window with the plot will remain, as well as the
+gnuplot interactive shell where other commands can be issued in order to
+modify the plot.
+</p>
+<p>In Windows versions of Gnuplot older than 4.6.3 the behavior of &quot;~s -&quot;
+and &quot;-persist ~s&quot; were the opposite; namely, &quot;-persist ~s&quot; made the plot
+window and the gnuplot interactive shell remain, while &quot;~s -&quot; closed the
+gnuplot shell keeping the plot window. Therefore, when older gnuplot
+versions are used in Windows, it might be necessary to adjust the value
+of <code class="code">gnuplot_view_args</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="julia"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fjulia"></a><dl class="first-deffn">
+<dt class="deffn" id="index-julia"><span class="category-def">Function: </span><span><strong class="def-name">julia</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>, ...<var class="var">options</var>...)</var><a class="copiable-link" href='#index-julia'> &para;</a></span></dt>
+<dd>
+<p>Creates a graphic representation of the Julia set for the complex number
+(<var class="var">x</var> + i <var class="var">y</var>). The two mandatory parameters <var class="var">x</var> and <var class="var">y</var>
+must be real. This program is part of the additional package
+<code class="code">dynamics</code>, but that package does not have to be loaded; the first
+time julia is used, it will be loaded automatically.
+</p>
+<p>Each pixel in the grid is given a color corresponding to the number of
+iterations it takes the sequence that starts at that point to move out
+of the convergence circle of radius 2 centered at the origin. The number
+of pixels in the grid is controlled by the <code class="code"><a class="ref" href="#grid">grid</a></code> plot option
+(default 30 by 30). The maximum number of iterations is set with the
+option <code class="code"><a class="ref" href="#iterations">iterations</a></code>. The program sets its own default palette:
+magenta, violet, blue, cyan, green, yellow, orange, red, brown and black,
+but it can be changed by adding an explicit <code class="code"><a class="ref" href="#palette">palette</a></code> option in the
+command.
+</p>
+<p>The default domain used goes from -2 to 2 in both axes and can be
+changed with the <code class="code">x</code> and <code class="code">y</code> options. By default, the two axes
+are shown with the same scale, unless the option <code class="code"><a class="ref" href="#yx_005fratio">yx_ratio</a></code> is used
+or the option <code class="code"><a class="ref" href="#same_005fxy">same_xy</a></code> is disabled. Other general plot options are
+also accepted.
+</p>
+<p>The following example shows a region of the Julia set for the number
+-0.55 + i0.6. The option <code class="code"><a class="ref" href="#color_005fbar_005ftics">color_bar_tics</a></code> is used to prevent
+Gnuplot from adjusting the color box up to 40, in which case the points
+corresponding the maximum 36 iterations would not be black.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) julia (-0.55, 0.6, [iterations, 36], [x, -0.3, 0.2],
+      [y, 0.3, 0.9], [grid, 400, 400], [color_bar_tics, 0, 6, 36])$
+</pre></div></div>
+
+<img class="image" src="figures/plotting4.png" alt="figures/plotting4">
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="make_005ftransform"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fmake_005ftransform"></a><dl class="first-deffn">
+<dt class="deffn" id="index-make_005ftransform"><span class="category-def">Function: </span><span><strong class="def-name">make_transform</strong> <var class="def-var-arguments">([<var class="var">var1</var>, <var class="var">var2</var>, <var class="var">var3</var>], <var class="var">fx</var>, <var class="var">fy</var>, <var class="var">fz</var>)</var><a class="copiable-link" href='#index-make_005ftransform'> &para;</a></span></dt>
+<dd>
+<p>Returns a function suitable to be used in the option <code class="code"><a class="ref" href="#transform_005fxy">transform_xy</a></code><!-- /@w -->
+of plot3d.  The three variables <var class="var">var1</var>, <var class="var">var2</var>, <var class="var">var3</var> are
+three dummy variable names, which represent the 3 variables given by the
+plot3d command (first the two independent variables and then the
+function that depends on those two variables).  The three functions
+<var class="var">fx</var>, <var class="var">fy</var>, <var class="var">fz</var> must depend only on those 3 variables, and
+will give the corresponding x, y and z coordinates that should be
+plotted.  There are two transformations defined by default:
+<code class="code"><a class="ref" href="#polar_005fto_005fxy">polar_to_xy</a></code> and <code class="code"><a class="ref" href="#spherical_005fto_005fxyz">spherical_to_xyz</a></code>. See the documentation
+for those two transformations.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="mandelbrot"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fmandelbrot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mandelbrot"><span class="category-def">Function: </span><span><strong class="def-name">mandelbrot</strong> <var class="def-var-arguments">(<var class="var">options</var>)</var><a class="copiable-link" href='#index-mandelbrot'> &para;</a></span></dt>
+<dd>
+<p>Creates a graphic representation of the Mandelbrot set. This program is
+part of the additional package <code class="code">dynamics</code>, but that package does
+not have to be loaded; the first time mandelbrot is used, the package
+will be loaded automatically.
+</p>
+<p>This program can be called without any arguments, in which case it will
+use a default value of 9 iterations per point, a grid with dimensions
+set by the <code class="code"><a class="ref" href="#grid">grid</a></code> plot option (default 30 by 30) and a region
+that extends from -2 to 2 in both axes. The options are all the same
+that plot2d accepts, plus an option <code class="code"><a class="ref" href="#iterations">iterations</a></code> to change the
+number of iterations.
+</p>
+<p>Each pixel in the grid is given a color corresponding to the number of
+iterations it takes the sequence starting at zero to move out
+of the convergence circle of radius 2, centered at the origin. The
+maximum number of iterations is set by the option <code class="code"><a class="ref" href="#iterations">iterations</a></code>.
+The program uses its own default palette: magenta,violet, blue, cyan,
+green, yellow, orange, red, brown and black, but it can be changed by
+adding an explicit <code class="code"><a class="ref" href="#palette">palette</a></code> option in the command. By default, the
+two axes are shown with the same scale, unless the option <code class="code"><a class="ref" href="#yx_005fratio">yx_ratio</a></code>
+is used or the option <code class="code"><a class="ref" href="#same_005fxy">same_xy</a></code> is disabled.
+</p>
+<p>Example:
+</p>
+<p>[grid,400,400])$
+</p><div class="example">
+<pre class="example-preformatted">(%i1) mandelbrot ([iterations, 30], [x, -2, 1], [y, -1.2, 1.2],
+            [grid,400,400])$
+</pre></div>
+
+<img class="image" src="figures/plotting5.png" alt="figures/plotting5">
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="polar_005fto_005fxy"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fpolar_005fto_005fxy"></a><dl class="first-deffn">
+<dt class="deffn" id="index-polar_005fto_005fxy"><span class="category-def">System function: </span><span><strong class="def-name">polar_to_xy</strong><a class="copiable-link" href='#index-polar_005fto_005fxy'> &para;</a></span></dt>
+<dd>
+<p>It can be given as value for the <code class="code"><a class="ref" href="#transform_005fxy">transform_xy</a></code> option of
+plot3d.  Its effect will be to interpret the two independent variables in
+plot3d as the distance from the z axis and the azimuthal angle (polar
+coordinates), and transform them into x and y coordinates.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="plot2d"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fplot2d"></a><dl class="first-deffn">
+<dt class="deffn" id="index-plot2d"><span class="category-def">Function: </span><span><strong class="def-name">plot2d</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plot2d</code> (<var class="var">expr</var>, <var class="var">range_x</var>, <var class="var">options</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plot2d</code> (<var class="var">expr_1</var>=<var class="var">expr_2</var>, <var class="var">range_x</var>, <var class="var">range_y</var>, <var class="var">options</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plot2d</code> ([parametric, <var class="var">expr_x</var>, <var class="var">expr</var>_y, <var class="var">range</var>], <var class="var">options</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plot2d</code> ([discrete, <var class="var">points</var>], <var class="var">options</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plot2d</code> ([contour, <var class="var">expr</var>], <var class="var">range_x</var>, <var class="var">range_y</var>, <var class="var">options</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plot2d</code> ([<var class="var">type_1</var>, &hellip;, <var class="var">type_n</var>], <var class="var">options</var>)</var><a class="copiable-link" href='#index-plot2d'> &para;</a></span></dt>
+<dd>
+<p>There are 5 types of plots that can be plotted by <code class="code">plot2d</code>:
+</p>
+<ol class="enumerate">
+<li> <b class="b">Explicit functions</b>. <code class="code">plot2d</code> (<var class="var">expr</var>, <var class="var">range_x</var>,
+<var class="var">options</var>), where <var class="var">expr</var> is an expression that depends on only
+one variable, or the name of a function with one input parameter and
+numerical results. <var class="var">range_x</var> is a list with three elements, the
+first one being the name of the variable that will be shown on the
+horizontal axis of the plot, and the other two elements should be two
+numbers, the first one smaller than the second, that define the minimum
+and maximum values to be shown on the horizontal axis. The name of the
+variable used in <var class="var">range_x</var> must be the same variable on which
+<var class="var">expr</var> depends. The result will show in the vertical axis the
+corresponding values of the expression or function for each value of the
+variable in the horizontal axis.
+
+</li><li> <b class="b">Implicit functions</b>. <code class="code">plot2d</code> (<var class="var">expr_1</var>=<var class="var">expr_2</var>,
+<var class="var">range_x</var>, <var class="var">range_y</var>, <var class="var">options</var>), where <var class="var">expr_1</var> and
+<var class="var">expr_2</var> are two expressions that can depend on one or two
+variables. <var class="var">range_x</var> and <var class="var">range_y</var> must be two lists of three
+elements that define the ranges for the variables in the two axes of the
+plot; the first element of each list is the name of the corresponding
+variable, and the other two elements are the minimum and maximum values
+for that variable. The two variables on which <var class="var">expr_1</var> and
+<var class="var">expr_2</var> can depend are those specified by <var class="var">range_x</var> and
+<var class="var">range_y</var>. The result will be a curve or a set of curves where the
+equation <var class="var">expr_1</var>=<var class="var">expr_2</var> is true.
+
+</li><li> <b class="b">Parametric functions</b>. <code class="code">plot2d</code> ([parametric,
+<var class="var">expr_x</var>, <var class="var">expr</var>_y, <var class="var">range</var>], <var class="var">options</var>), where
+<var class="var">expr_x</var> and <var class="var">expr</var>_y are two expressions that depend on a
+single parameter. <var class="var">range</var> must be a three-element list; the first
+element must be the name of the parameter on which <var class="var">expr_x</var> and
+<var class="var">expr</var>_y depend, and the other two elements must be the minimum and
+maximum values for that parameter. The result will be a curve in which
+the horizontal and vertical coordinates of each point are the values of
+<var class="var">expr_x</var> and <var class="var">expr</var>_y for a value of the parameter within the
+range given.
+
+</li><li> <b class="b">Set of points</b>. <code class="code">plot2d</code> ([discrete, <var class="var">points</var>],
+<var class="var">options</var>), displays a list of points, joined by segments by
+default. The horizontal and vertical coordinates of each of those points
+can be specified in three different ways: With two lists of the same
+length, in which the elements of the first list are the horizontal
+coordinates of the points and the second list are the vertical
+coordinates, or with a list of two-element lists, each one corresponding
+to the two coordinates of one of the points, or with a single list that
+defines the vertical coordinates of the points; in this last case, the
+horizontal coordinates of the n points will be assumed to be the first n
+natural numbers.
+
+</li><li> <b class="b">Contour lines</b>. <code class="code">plot2d</code> ([contour, <var class="var">expr</var>],
+<var class="var">range_x</var>, <var class="var">range_y</var>, <var class="var">options</var>), where <var class="var">expr</var> is an
+expression that depends on two variables. <var class="var">range_x</var> and
+<var class="var">range_y</var> will be lists whose first elements are the names of those
+two variables, followed by two numbers that set the minimum and maximum
+values for them. The first variable will be represented along the
+horizontal axis and the second along the vertical axis. The result will
+be a set of curves along which the given expression has certain
+values. If those values are not specified with the option <code class="code">levels</code>,
+plotd2d will try to choose, at the most, 8 values of the form d*10^n, where d is
+either 1, 2 or 5, all of them within the minimum and maximum values of
+<var class="var">expr</var> within the given ranges.
+</li></ol>
+
+<p>At the end of a plot2d command several of the options described in
+<code class="code"><a class="ref" href="#Plotting-Options">Plotting Options</a></code> can be used. Many instances of the 5 types
+described above can be combined into a single plot, by putting them
+inside a list: <code class="code">plot2d</code> ([<var class="var">type_1</var>, &hellip;, <var class="var">type_n</var>],
+<var class="var">options</var>). If one of the types included in the list require
+<var class="var">range_x</var> or <var class="var">range_y</var>, those ranges should come immediately
+after the list.
+</p>
+<p>If there are several plots to be plotted, a legend will be
+written to identity each of the expressions.  The labels that should be
+used in that legend can be given with the option <code class="code"><a class="ref" href="#legend">legend</a></code>.  If that
+option is not used, Maxima will create labels from the expressions or
+function names.
+</p>
+<p><strong class="strong">Examples:</strong>
+</p>
+<ol class="enumerate">
+<li> Explicit function.
+
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d (sin(x), [x, -%pi, %pi])$
+</pre></div>
+
+<img class="image" src="figures/plotting6.png" alt="figures/plotting6">
+
+</li><li> Implicit function.
+
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d (x^2-y^3+3*y=2, [x,-2.5,2.5], [y,-2.5,2.5])$
+</pre></div>
+
+<img class="image" src="figures/plotting3.png" alt="figures/plotting3">
+
+</li><li> Parametric function.
+
+<div class="example">
+<pre class="example-preformatted">(%i1) r: (exp(cos(t))-2*cos(4*t)-sin(t/12)^5)$
+(%i2) plot2d([parametric, r*sin(t), r*cos(t), [t,-8*%pi,8*%pi]])$
+</pre></div>
+
+<img class="image" src="figures/plotting11.png" alt="figures/plotting11">
+
+</li><li> Set of points.
+
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d ([discrete, makelist(i*%pi, i, 1, 5),
+                            [0.6, 0.9, 0.2, 1.3, 1]])$
+</pre></div>
+
+<img class="image" src="figures/plotting14.png" alt="figures/plotting14">
+
+</li><li> Contour lines.
+
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d ([contour, u^3 + v^2], [u, -4, 4], [v, -4, 4])$
+</pre></div>
+
+<img class="image" src="figures/plotting2.png" alt="figures/plotting2">
+
+</li></ol>
+
+<p><strong class="strong">Examples using options</strong>.
+</p>
+<p>If an explicit function grows too fast, the <code class="code"><a class="ref" href="#y">y</a></code> option can be used
+to limit the values in the vertical axis:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d (sec(x), [x, -2, 2], [y, -20, 20])$
+</pre></div>
+
+<img class="image" src="figures/plotting7.png" alt="figures/plotting7">
+
+<p>When the plot box is disabled, no labels are created for the axes. In
+that case, instead of using <code class="code"><a class="ref" href="#xlabel">xlabel</a></code> and <code class="code"><a class="ref" href="#ylabel">ylabel</a></code> to set the
+names of the axes, it is better to use option <code class="code"><a class="ref" href="#label">label</a></code>, which
+allows more flexibility. Option <code class="code"><a class="ref" href="#yx_005fratio">yx_ratio</a></code> is used to change the
+default rectangular shape of the plot; in this example the plot will
+fill a square.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d ( x^2 - 1, [x, -3, 3], nobox, grid2d,
+      [yx_ratio, 1], [axes, solid], [xtics, -2, 4, 2],
+      [ytics, 2, 2, 6], [label, [&quot;x&quot;, 2.9, -0.3],
+      [&quot;x^2-1&quot;, 0.1, 8]], [title, &quot;A parabola&quot;])$
+</pre></div>
+
+<img class="image" src="figures/plotting8.png" alt="figures/plotting8">
+
+<p>A plot with a logarithmic scale in the vertical axis:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d (exp(3*s), [s, -2, 2], logy)$
+</pre></div>
+
+<img class="image" src="figures/plotting9.png" alt="figures/plotting9">
+
+<p>Plotting functions by name:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) F(x) := x^2 $
+(%i2) :lisp (defun |$g| (x) (m* x x x))
+$g
+(%i2) H(x) := if x &lt; 0 then x^4 - 1 else 1 - x^5 $
+(%i3) plot2d ([F, G, H], [u, -1, 1], [y, -1.5, 1.5])$
+</pre></div>
+
+<img class="image" src="figures/plotting10.png" alt="figures/plotting10">
+
+<p>Plot of a circle, using its parametric representation, together with the
+function -<code class="code">|<var class="var">x</var>|</code>. The circle will only look like a circle if
+the scale in the two axes is the same, which is done with the option
+<code class="code"><a class="ref" href="#same_005fxy">same_xy</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plot2d([[parametric, cos(t), sin(t), [t,0,2*%pi]], -abs(x)],
+         [x, -sqrt(2), sqrt(2)], same_xy)$
+</pre></div></div>
+
+<img class="image" src="figures/plotting12.png" alt="figures/plotting12">
+
+<p>A plot of 200 random numbers between 0 and 9:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plot2d ([discrete, makelist ( random(10), 200)])$
+</pre></div></div>
+
+<img class="image" src="figures/plotting13.png" alt="figures/plotting13">
+
+<p>In the next example a table with three columns is saved in a file
+&ldquo;data.txt&rdquo; which is then read and the second and third column are
+plotted on the two axes:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) display2d:false$
+(%i2) with_stdout (&quot;data.txt&quot;, for x:0 thru 10 do
+                             print (x, x^2, x^3))$
+(%i3) data: read_matrix (&quot;data.txt&quot;)$
+(%i4) plot2d ([discrete, transpose(data)[2], transpose(data)[3]],
+  [style,points], [point_type,diamond], [color,red])$
+</pre></div>
+
+<img class="image" src="figures/plotting15.png" alt="figures/plotting15">
+
+<p>A plot of discrete data points together with a continuous function:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) xy: [[10, .6], [20, .9], [30, 1.1], [40, 1.3], [50, 1.4]]$
+(%i2) plot2d([[discrete, xy], 2*%pi*sqrt(l/980)], [l,0,50],
+        [style, points, lines], [color, red, blue],
+        [point_type, asterisk],
+        [legend, &quot;experiment&quot;, &quot;theory&quot;],
+        [xlabel, &quot;pendulum's length (cm)&quot;],
+        [ylabel, &quot;period (s)&quot;])$
+</pre></div>
+
+<img class="image" src="figures/plotting16.png" alt="figures/plotting16">
+
+<p>See also the section about Plotting Options.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="plot3d"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fplot3d"></a><dl class="first-deffn">
+<dt class="deffn" id="index-plot3d"><span class="category-def">Function: </span><span><strong class="def-name">plot3d</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plot3d</code> (<var class="var">expr</var>, <var class="var">x_range</var>, <var class="var">y_range</var>, &hellip;, <var class="var">options</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plot3d</code> ([<var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>], <var class="var">x_range</var>, <var class="var">y_range</var>, &hellip;, <var class="var">options</var>, &hellip;)</var><a class="copiable-link" href='#index-plot3d'> &para;</a></span></dt>
+<dd>
+<p>Displays a plot of one or more surfaces defined as functions of two
+variables or in parametric form.
+</p>
+<p>The functions to be plotted may be specified as expressions or function names.
+The mouse can be used to rotate the plot looking at the surface from different
+sides.
+</p>
+<p><strong class="strong">Examples</strong>.
+</p>
+<p>Plot of a function of two variables:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plot3d (u^2 - v^2, [u, -2, 2], [v, -3, 3], [grid, 100, 100],
+        nomesh_lines)$
+</pre></div></div>
+
+<img class="image" src="figures/plotting17.png" alt="figures/plotting17">
+
+<p>Use of the <code class="code"><a class="ref" href="#z">z</a></code> option to limit a function that goes to infinity
+ (in this case the function is minus infinity on the x and y axes); this also
+shows how to plot with only lines and no shading:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plot3d ( log ( x^2*y^2 ), [x, -2, 2], [y, -2, 2], [z, -8, 4],
+         nopalette, [color, magenta])$
+</pre></div></div>
+
+<img class="image" src="figures/plotting18.png" alt="figures/plotting18">
+
+<p>The infinite values of z can also be avoided by choosing a grid that
+does not fall on any points where the function is undefined, as in the
+next example, which also shows how to change the palette and how to
+include a color bar that relates colors to values of the z variable:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plot3d (log (x^2*y^2), [x, -2, 2], [y, -2, 2],[grid, 29, 29],
+       [palette, [gradient, red, orange, yellow, green]],
+       color_bar, [xtics, 1], [ytics, 1], [ztics, 4],
+       [color_bar_tics, 4])$
+</pre></div></div>
+
+<img class="image" src="figures/plotting19.png" alt="figures/plotting19">
+
+<p>Two surfaces in the same plot. Ranges specific to one of the surfaces can
+be given by placing each expression and its ranges in a separate list;
+global ranges for the complete plot are also given after the function
+definitions.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) plot3d ([[-3*x - y, [x, -2, 2], [y, -2, 2]],
+   4*sin(3*(x^2 + y^2))/(x^2 + y^2), [x, -3, 3], [y, -3, 3]],
+   [x, -4, 4], [y, -4, 4])$
+</pre></div>
+
+<img class="image" src="figures/plotting20.png" alt="figures/plotting20">
+
+<p>Plot of a Klein bottle, defined parametrically:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expr_1: 5*cos(x)*(cos(x/2)*cos(y)+sin(x/2)*sin(2*y)+3)-10$
+(%i2) expr_2: -5*sin(x)*(cos(x/2)*cos(y)+sin(x/2)*sin(2*y)+3)$
+(%i3) expr_3: 5*(-sin(x/2)*cos(y)+cos(x/2)*sin(2*y))$
+(%i4) plot3d ([expr_1, expr_2, expr_3], [x, -%pi, %pi],
+        [y, -%pi, %pi], [grid, 50, 50])$
+</pre></div>
+
+<img class="image" src="figures/plotting21.png" alt="figures/plotting21">
+
+<p>Plot of a &ldquo;spherical harmonic&rdquo; function, using the predefined
+transformation, <code class="code">spherical_to_xyz</code> to transform from spherical
+coordinates to rectangular coordinates. See the documentation for
+<code class="code"><a class="ref" href="#spherical_005fto_005fxyz">spherical_to_xyz</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) plot3d (sin(2*theta)*cos(phi), [theta,0,%pi], [phi,0,2*%pi],
+      [transform_xy, spherical_to_xyz], [grid, 30, 60], nolegend)$
+</pre></div>
+
+<img class="image" src="figures/plotting22.png" alt="figures/plotting22">
+
+<p>Use of the pre-defined function <code class="code">polar_to_xy</code> to transform from
+cylindrical to rectangular coordinates.  See the documentation for
+<code class="code"><a class="ref" href="#polar_005fto_005fxy">polar_to_xy</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plot3d (r^.33*cos(th/3), [r,0,1], [th,0,6*%pi], nobox,
+    nolegend, [grid, 12, 80], [transform_xy, polar_to_xy])$
+</pre></div></div>
+
+<img class="image" src="figures/plotting23.png" alt="figures/plotting23">
+
+<p>Plot of a sphere using the transformation from spherical to rectangular
+coordinates. Option <code class="code"><a class="ref" href="#same_005fxyz">same_xyz</a></code> is used to get the three axes
+scaled in the same proportion. When transformations are used, it is not
+convenient to eliminate the mesh lines, because Gnuplot will not show the
+surface correctly.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plot3d ( 5, [theta,0,%pi], [phi,0,2*%pi], same_xyz, nolegend,
+  [transform_xy, spherical_to_xyz], [mesh_lines_color,blue],
+  [palette,[gradient,&quot;#1b1b4e&quot;, &quot;#8c8cf8&quot;]])$
+</pre></div></div>
+
+<img class="image" src="figures/plotting24.png" alt="figures/plotting24">
+
+<p>Definition of a function of two-variables using a matrix.  Notice the
+single quote in the definition of the function, to prevent <code class="code">plot3d</code>
+from failing when it realizes that the matrix will require integer
+indices.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) M: matrix([1,2,3,4], [1,2,3,2], [1,2,3,4], [1,2,3,3])$
+(%i2) f(x, y) := float('M [round(x), round(y)])$
+(%i3) plot3d (f(x,y), [x,1,4], [y,1,4], [grid,3,3], nolegend)$
+</pre></div>
+
+<img class="image" src="figures/plotting25.png" alt="figures/plotting25">
+
+<p>By setting the elevation equal to zero, a surface can be seen as a map
+in which each color represents a different level.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) plot3d (cos (-x^2 + y^3/4), [x,-4,4], [y,-4,4], [zlabel,&quot;&quot;],
+       [mesh_lines_color,false], [elevation,0], [azimuth,0],
+       color_bar, [grid,80,80], noztics, [color_bar_tics,1])$
+</pre></div></div>
+
+<img class="image" src="figures/plotting26.png" alt="figures/plotting26">
+
+<p>See also <code class="code"><a class="ref" href="#Plotting-Options">Plotting Options</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="plot_005foptions"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fplot_005foptions"></a><dl class="first-defvr">
+<dt class="defvr" id="index-plot_005foptions"><span class="category-def">System variable: </span><span><strong class="def-name">plot_options</strong><a class="copiable-link" href='#index-plot_005foptions'> &para;</a></span></dt>
+<dd>
+<p>This option is being kept for compatibility with older versions, but its
+use is deprecated. To set global plotting options, see their current
+values or remove options, use <code class="code"><a class="ref" href="#set_005fplot_005foption">set_plot_option</a></code>,
+<code class="code"><a class="ref" href="#get_005fplot_005foption">get_plot_option</a></code> and <code class="code"><a class="ref" href="#remove_005fplot_005foption">remove_plot_option</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="remove_005fplot_005foption"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fremove_005fplot_005foption"></a><dl class="first-deffn">
+<dt class="deffn" id="index-remove_005fplot_005foption"><span class="category-def">Function: </span><span><strong class="def-name">remove_plot_option</strong> <var class="def-var-arguments">(<var class="var">name</var>)</var><a class="copiable-link" href='#index-remove_005fplot_005foption'> &para;</a></span></dt>
+<dd>
+<p>Removes the default value of an option. The name of the option must be given.
+</p>
+<p>See also <code class="code"><a class="ref" href="#set_005fplot_005foption">set_plot_option</a></code>, <code class="code"><a class="ref" href="#get_005fplot_005foption">get_plot_option</a></code> and
+<code class="code"><a class="ref" href="#Plotting-Options">Plotting Options</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+<a class="anchor" id="set_005fplot_005foption"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fset_005fplot_005foption"></a><dl class="first-deffn">
+<dt class="deffn" id="index-set_005fplot_005foption"><span class="category-def">Function: </span><span><strong class="def-name">set_plot_option</strong> <var class="def-var-arguments">(<var class="var">option</var>)</var><a class="copiable-link" href='#index-set_005fplot_005foption'> &para;</a></span></dt>
+<dd>
+<p>Accepts any of the options listed in the section Plotting Options, and
+saves them for use in plotting commands. The values of the options set
+in each plotting command will have precedence, but if those options are
+not given, the default values set with this function will be used.
+</p>
+<p><code class="code">set_plot_option</code> evaluates its argument and returns the complete
+list of options (after modifying the option given). If called without
+any arguments, it will simply show the list of current default options.
+</p>
+<p>See also <code class="code"><a class="ref" href="#remove_005fplot_005foption">remove_plot_option</a></code>, <code class="code"><a class="ref" href="#get_005fplot_005foption">get_plot_option</a></code> and the section
+on Plotting Options.
+</p>
+<p>Example:
+</p>
+<p>Modification of the <code class="code"><a class="ref" href="#grid">grid</a></code> values.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) set_plot_option ([grid, 30, 40]);
+(%o1) [[plot_format, gnuplot_pipes], [grid, 30, 40], 
+[run_viewer, true], [axes, true], [nticks, 29], [adapt_depth, 5], 
+[color, blue, red, green, magenta, black, cyan], 
+[point_type, bullet, box, triangle, plus, times, asterisk], 
+[palette, [gradient, green, cyan, blue, violet], 
+[gradient, magenta, violet, blue, cyan, green, yellow, orange, 
+red, brown, black]], [gnuplot_preamble, ], [gnuplot_term, default]]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="spherical_005fto_005fxyz"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fspherical_005fto_005fxyz"></a><dl class="first-deffn">
+<dt class="deffn" id="index-spherical_005fto_005fxyz"><span class="category-def">System function: </span><span><strong class="def-name">spherical_to_xyz</strong><a class="copiable-link" href='#index-spherical_005fto_005fxyz'> &para;</a></span></dt>
+<dd>
+<p>It can be given as value for the <code class="code"><a class="ref" href="#transform_005fxy">transform_xy</a></code> option of
+<code class="code"><a class="ref" href="#plot3d">plot3d</a></code>. Its effect will be to interpret the two independent
+variables and the function in <code class="code">plot3d</code> as the spherical coordinates
+of a point (first, the angle with the z axis, then the angle of the xy
+projection with the x axis and finally the distance from the origin) and
+transform them into x, y and z coordinates.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Plotting_002fnode_002fPlotting-Options"></a><hr>
+</div>
+<div class="section-level-extent" id="Plotting-Options">
+<div class="nav-panel">
+<p>
+Next: <a href="#Gnuplot-Options" accesskey="n" rel="next">Gnuplot Options</a>, Previous: <a href="#Functions-and-Variables-for-Plotting" accesskey="p" rel="prev">Functions and Variables for Plotting</a>, Up: <a href="#Plotting" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Plotting-Options-1">12.4 Plotting Options</h3>
+
+<p>All options consist of a list starting with one of the keywords in this
+section, followed by one or more values. If the option appears inside
+one of the plotting commands, its value will be local for that
+command. It the option is given as argument to
+<code class="code"><a class="ref" href="#set_005fplot_005foption">set_plot_option</a></code>, its value will be global and used in all
+plots, unless it is overridden by a local value.
+</p>
+<p>Some of the options may have different effects in different plotting
+commands as it will be pointed out in the following list. The options
+that accept among their possible values true or false, can also be set
+to true by simply writing their names, and false by writing their names
+with the prefix no. For instance, typing <code class="code">logx</code> as an option is
+equivalent to writing <code class="code">[logx, true]</code> and <code class="code">nobox</code> is equivalent
+to <code class="code">[box, false]</code>. When just the name of the option is used for an
+option which cannot have a value <code class="code">true</code>, it means that any value
+previously assigned to that option will be removed, leaving it to the
+graphic program to decide what to do.
+</p>
+<a class="anchor" id="adapt_005fdepth"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fadapt_005fdepth"></a><dl class="first-defvr">
+<dt class="defvr" id="index-adapt_005fdepth"><span class="category-def">Plot option: </span><span><strong class="def-name">adapt_depth</strong> <var class="def-var-arguments">[adapt_depth, <var class="var">integer</var>]</var><a class="copiable-link" href='#index-adapt_005fdepth'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">5</code>
+</p>
+<p>The maximum number of splittings used by the adaptive plotting routine
+of <code class="code"><a class="ref" href="#plot2d">plot2d</a></code>; <var class="var">integer</var> must be a non-negative integer. A value
+of zero means that adaptive plotting will not be used and the resulting
+plot will have 1+4*<var class="var">nticks</var> points (see option <code class="code"><a class="ref" href="#nticks">nticks</a></code>). To
+have more control on the number of points and their positions, a list of
+points can be created and then plotted using the <code class="code">discrete</code> method
+of <code class="code">plot2d</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="axes"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002faxes"></a><dl class="first-defvr">
+<dt class="defvr" id="index-axes"><span class="category-def">Plot option: </span><span><strong class="def-name">axes</strong> <var class="def-var-arguments">[axes, <var class="var">symbol</var>], axes, noaxes</var><a class="copiable-link" href='#index-axes'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">true</code>
+</p>
+<p>Where <var class="var">symbol</var> can be either <code class="code">true</code>, <code class="code">false</code>, <code class="code">x</code>,
+<code class="code">y</code> or <code class="code">solid</code>. If <code class="code">false</code>, no axes are shown; if equal
+to <code class="code">x</code> or <code class="code">y</code> only the x or y axis will be shown; if it is
+equal to <code class="code">true</code>, both axes will be shown and <code class="code">solid</code> will show
+the two axes with a solid line, rather than the default broken
+line. This option does not have any effect in the 3 dimensional plots.
+The single keywords <code class="code">axes</code> and <code class="code">noaxes</code> can be used as
+synonyms for <code class="code">[axes, true]</code> and <code class="code">[axes, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="azimuth"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fazimuth"></a><dl class="first-defvr">
+<dt class="defvr" id="index-azimuth"><span class="category-def">Plot option: </span><span><strong class="def-name">azimuth</strong> <var class="def-var-arguments">[azimuth, <var class="var">number</var>]</var><a class="copiable-link" href='#index-azimuth'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">30</code>
+</p>
+<p>A plot3d plot can be thought of as starting with the x and y axis in the
+horizontal and vertical axis, as in plot2d, and the z axis coming out of
+the screen.  The z axis is then rotated around the x axis through an
+angle equal to <code class="code"><a class="ref" href="#elevation">elevation</a></code> and then the new xy plane is rotated
+around the new z axis through an angle <code class="code"><a class="ref" href="#azimuth">azimuth</a></code>. This option sets
+the value for the azimuth, in degrees.
+</p>
+<p>See also <code class="code"><a class="ref" href="#elevation">elevation</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="option_005fbox"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fbox"></a><dl class="first-defvr">
+<dt class="defvr" id="index-box-1"><span class="category-def">Plot option: </span><span><strong class="def-name">box</strong> <var class="def-var-arguments">[box, <var class="var">symbol</var>], box, nobox</var><a class="copiable-link" href='#index-box-1'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">true</code>
+</p>
+<p>If set to <code class="code">true</code>, a bounding box will be drawn for the plot; if set
+to <code class="code">false</code>, no box will be drawn.
+The single keywords <code class="code">box</code> and <code class="code">nobox</code> can be used as
+synonyms for <code class="code">[box, true]</code> and <code class="code">[box, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="color"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fcolor"></a><dl class="first-defvr">
+<dt class="defvr" id="index-color"><span class="category-def">Plot option: </span><span><strong class="def-name">color</strong> <var class="def-var-arguments">[color, <var class="var">color_1</var>, &hellip;, <var class="var">color_n</var>]</var><a class="copiable-link" href='#index-color'> &para;</a></span></dt>
+<dd>
+<p>In 2d plots it defines the color (or colors) for the various curves.  In
+<code class="code"><a class="ref" href="#plot3d">plot3d</a></code>, it defines the colors used for the mesh lines of the
+surfaces, when no palette is being used.
+</p>
+<p>If there are more curves or surfaces than colors, the colors will be
+repeated in sequence. The valid colors are <code class="code">red</code>, <code class="code">green</code>,
+<code class="code">blue</code>, <code class="code">magenta</code>, <code class="code">cyan</code>, <code class="code">yellow</code>, <code class="code">orange</code>,
+<code class="code">violet</code>, <code class="code">brown</code>, <code class="code">gray</code>, <code class="code">black</code>, <code class="code">white</code>, or
+a string starting with the character # and followed by six hexadecimal
+digits: two for the red component, two for green component and two for
+the blue component. If the name of a given color is unknown color, black
+will be used instead.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="color_005fbar"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fcolor_005fbar"></a><dl class="first-defvr">
+<dt class="defvr" id="index-color_005fbar"><span class="category-def">Plot option: </span><span><strong class="def-name">color_bar</strong> <var class="def-var-arguments">[color_bar, <var class="var">symbol</var>], color_bar, nocolor_bar</var><a class="copiable-link" href='#index-color_005fbar'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">false</code> in plot3d, <code class="code">true</code> in mandelbrot and julia
+</p>
+<p>Where <var class="var">symbol</var> can be either <code class="code">true</code> or <code class="code">false</code>.  If
+<code class="code">true</code>, whenever <code class="code"><a class="ref" href="#plot3d">plot3d</a></code>, <code class="code"><a class="ref" href="#mandelbrot">mandelbrot</a></code> or
+<code class="code"><a class="ref" href="#julia">julia</a></code> use a palette to represent different values, a box will be
+shown on the right, showing the corresponding between colors and values.
+The single keywords <code class="code">color_bar</code> and <code class="code">nocolor_bar</code> can be used
+as synonyms for <code class="code">[color_bar, true]</code> and <code class="code">[color_bar, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="color_005fbar_005ftics"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fcolor_005fbar_005ftics"></a><dl class="first-defvr">
+<dt class="defvr" id="index-color_005fbar_005ftics"><span class="category-def">Plot option: </span><span><strong class="def-name">color_bar_tics</strong> <var class="def-var-arguments">[color_bar_tics, <var class="var">x1</var>, <var class="var">x2</var>, <var class="var">x3</var>], color_bar_tics, nocolor_bar_tics</var><a class="copiable-link" href='#index-color_005fbar_005ftics'> &para;</a></span></dt>
+<dd>
+<p>Defines the values at which a mark and a number will be placed in the
+color bar. The first number is the initial value, the second the
+increments and the third is the last value where a mark is placed. The
+second and third numbers can be omitted. When only one number is given,
+it will be used as the increment from an initial value that will be
+chosen automatically. The single keyword <code class="code">color_bar_tics</code> removes a
+value given previously, making the graphic program use its default for
+the values of the tics and <code class="code">nocolor_bar_tics</code> will not show any
+tics on the color bar.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="elevation"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002felevation"></a><dl class="first-defvr">
+<dt class="defvr" id="index-elevation"><span class="category-def">Plot option: </span><span><strong class="def-name">elevation</strong> <var class="def-var-arguments">[elevation, <var class="var">number</var>]</var><a class="copiable-link" href='#index-elevation'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">60</code>
+</p>
+<p>A plot3d plot can be thought of as starting with the x and y axis in the
+horizontal and vertical axis, as in plot2d, and the z axis coming out of
+the screen.  The z axis is then rotated around the x axis through an
+angle equal to <code class="code"><a class="ref" href="#elevation">elevation</a></code> and then the new xy plane is rotated
+around the new z axis through an angle <code class="code"><a class="ref" href="#azimuth">azimuth</a></code>. This option sets
+the value for the elevation, in degrees.
+</p>
+<p>See also <code class="code"><a class="ref" href="#azimuth">azimuth</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="grid"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgrid"></a><dl class="first-defvr">
+<dt class="defvr" id="index-grid"><span class="category-def">Plot option: </span><span><strong class="def-name">grid</strong> <var class="def-var-arguments">[grid, <var class="var">integer</var>, <var class="var">integer</var>]</var><a class="copiable-link" href='#index-grid'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">30</code>, <code class="code">30</code>
+</p>
+<p>Sets the number of grid points to use in the x- and y-directions for
+three-dimensional plotting or for the <code class="code"><a class="ref" href="#julia">julia</a></code> and <code class="code"><a class="ref" href="#mandelbrot">mandelbrot</a></code>
+programs.
+</p>
+<p>For a way to actually draw a grid See <code class="code"><a class="ref" href="#grid2d">grid2d</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="grid2d"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgrid2d"></a><dl class="first-defvr">
+<dt class="defvr" id="index-grid2d"><span class="category-def">Plot option: </span><span><strong class="def-name">grid2d</strong> <var class="def-var-arguments">[grid2d, <var class="var">value</var>], grid2d, nogrid2d</var><a class="copiable-link" href='#index-grid2d'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">false</code>
+</p>
+<p>Shows a grid of lines on the xy plane. The points where the grid lines
+are placed are the same points where tics are marked in the x and y
+axes, which can be controlled with the <code class="code"><a class="ref" href="#xtics">xtics</a></code> and <code class="code"><a class="ref" href="#ytics">ytics</a></code>
+options.  The single keywords <code class="code">grid2d</code> and <code class="code">nogrid2d</code> can be
+used as synonyms for <code class="code">[grid2d, true]</code> and <code class="code">[grid2d, false]</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#grid">grid</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="iterations"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fiterations"></a><dl class="first-defvr">
+<dt class="defvr" id="index-iterations"><span class="category-def">Plot option: </span><span><strong class="def-name">iterations</strong> <var class="def-var-arguments">[iterations, <var class="var">value</var>]</var><a class="copiable-link" href='#index-iterations'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">9</code>
+</p>
+<p>Number of iterations made by the programs mandelbrot and julia.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="label"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002flabel"></a><dl class="first-defvr">
+<dt class="defvr" id="index-label-1"><span class="category-def">Plot option: </span><span><strong class="def-name">label</strong> <var class="def-var-arguments">[label, [<var class="var">string</var>, <var class="var">x</var>, <var class="var">y</var>], &hellip;]</var><a class="copiable-link" href='#index-label-1'> &para;</a></span></dt>
+<dd>
+<p>Writes one or several labels in the points with <var class="var">x</var>, <var class="var">y</var>
+coordinates indicated after each label.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="legend"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002flegend"></a><dl class="first-defvr">
+<dt class="defvr" id="index-legend"><span class="category-def">Plot option: </span><span><strong class="def-name">legend</strong> <var class="def-var-arguments">[legend, <var class="var">string_1</var>, &hellip;, <var class="var">string_n</var>], legend, nolegend</var><a class="copiable-link" href='#index-legend'> &para;</a></span></dt>
+<dd>
+<p>It specifies the labels for the plots when various plots are shown.  If
+there are more plots than the number of labels given, they will be
+repeated.  If given the value <code class="code">false</code>, no legends will be shown.
+By default, the names of the expressions or functions will be used, or
+the words discrete1, discrete2, &hellip;, for discrete sets of points.
+The single keyword <code class="code">legend</code> removes any previously defined legends,
+leaving it to the plotting program to set up a legend. The keyword
+<code class="code">nolegend</code> is a synonym for <code class="code">[legend, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="levels"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002flevels"></a><dl class="first-defvr">
+<dt class="defvr" id="index-levels"><span class="category-def">Plot option: </span><span><strong class="def-name">levels</strong> <var class="def-var-arguments">[levels, <var class="var">number</var>, &hellip;]</var><a class="copiable-link" href='#index-levels'> &para;</a></span></dt>
+<dd>
+<p>This option is used by <code class="code"><a class="ref" href="#plot2d">plot2d</a></code> to do contour plots. If only one
+number is given after the keyword <code class="code">levels</code>, it must be a natural
+number; <code class="code">plot2d</code> will try to plot that number of contours with
+values between the minimum and maximum value of the expression given,
+with the form d*10^n, where d is either 1, 2 or 5. Since not always it will
+be possible to find that number of levels in that interval, the number of
+contour lines show will be smaller than the number specified by this
+option.
+</p>
+<p>If more than one number are given after the keyword <code class="code">levels</code>,
+<code class="code"><a class="ref" href="#plot2d">plot2d</a></code>. will show the contour lines corresponding to those
+values of the expression plotted, if they exist within the domain used.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="logx"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002flogx"></a><dl class="first-defvr">
+<dt class="defvr" id="index-logx"><span class="category-def">Plot option: </span><span><strong class="def-name">logx</strong> <var class="def-var-arguments">[logx, <var class="var">value</var>], logx, nologx</var><a class="copiable-link" href='#index-logx'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">false</code>
+</p>
+<p>Makes the horizontal axes to be scaled logarithmically. It can be either
+true or false. The single keywords <code class="code">logx</code> and <code class="code">nologx</code> can be
+used as synonyms for <code class="code">[logx, true]</code> and <code class="code">[logx, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="logy"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002flogy"></a><dl class="first-defvr">
+<dt class="defvr" id="index-logy"><span class="category-def">Plot option: </span><span><strong class="def-name">logy</strong> <var class="def-var-arguments">[logy, <var class="var">value</var>], logy, nology</var><a class="copiable-link" href='#index-logy'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">false</code>
+</p>
+<p>Makes the vertical axes to be scaled logarithmically. It can be either
+true or false.
+The single keywords <code class="code">logy</code> and <code class="code">nology</code> can be used as
+synonyms for <code class="code">[logy, true]</code> and <code class="code">[logy, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="mesh_005flines_005fcolor"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fmesh_005flines_005fcolor"></a><dl class="first-defvr">
+<dt class="defvr" id="index-mesh_005flines_005fcolor"><span class="category-def">Plot option: </span><span><strong class="def-name">mesh_lines_color</strong> <var class="def-var-arguments">[mesh_lines_color, <var class="var">color</var>], mesh_lines_color, no_mesh_lines</var><a class="copiable-link" href='#index-mesh_005flines_005fcolor'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">black</code>
+</p>
+<p>It sets the color used by plot3d to draw the mesh lines, when a palette
+is being used.  It accepts the same colors as for the option
+<code class="code"><a class="ref" href="#color">color</a></code><!-- /@w --> (see the list of allowed colors in <code class="code"><a class="ref" href="#color">color</a></code>).  It
+can also be given a value <code class="code">false</code> to eliminate completely the mesh
+lines. The single keyword <code class="code">mesh_lines_color</code> removes any previously
+defined colors, leaving it to the graphic program to decide what color
+to use. The keyword <code class="code">no_mesh_lines</code> is a synonym for
+<code class="code">[mesh_lines_color, false]</code>
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="nticks"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fnticks"></a><dl class="first-defvr">
+<dt class="defvr" id="index-nticks"><span class="category-def">Plot option: </span><span><strong class="def-name">nticks</strong> <var class="def-var-arguments">[nticks, <var class="var">integer</var>]</var><a class="copiable-link" href='#index-nticks'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">29</code>
+</p>
+<p>When plotting functions with <code class="code"><a class="ref" href="#plot2d">plot2d</a></code>, it is gives the initial
+number of points used by the adaptive plotting routine for plotting
+functions. When plotting parametric functions with <code class="code"><a class="ref" href="#plot3d">plot3d</a></code>,
+it sets the number of points that will be shown for the plot.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="palette"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fpalette"></a><dl class="first-defvr">
+<dt class="defvr" id="index-palette"><span class="category-def">Plot option: </span><span><strong class="def-name">palette</strong> <var class="def-var-arguments">[palette, [<var class="var">palette_1</var>], &hellip;, [<var class="var">palette_n</var>]], palette, nopalette</var><a class="copiable-link" href='#index-palette'> &para;</a></span></dt>
+<dd>
+<p>It can consist of one palette or a list of several palettes.  Each
+palette is a list with a keyword followed by values. If the keyword is
+gradient, it should be followed by a list of valid colors.
+</p>
+<p>If the keyword is hue, saturation or value, it must be followed by 4
+numbers. The first three numbers, which must be between 0 and 1, define
+the hue, saturation and value of a basic color to be assigned to the
+minimum value of z. The keyword specifies which of the three attributes
+(hue, saturation or value) will be increased according to the values of
+z.  The last number indicates the increase corresponding to the maximum
+value of z.  That last number can be bigger than 1 or negative; the
+corresponding values of the modified attribute will be rounded modulo 1.
+</p>
+<p>Gnuplot only uses the first palette in the list; xmaxima will use the
+palettes in the list sequentially, when several surfaces are plotted
+together; if the number of palettes is exhausted, they will be repeated
+sequentially.
+</p>
+<p>The color of the mesh lines will be given by the option
+<code class="code"><a class="ref" href="#mesh_005flines_005fcolor">mesh_lines_color</a></code>. If <code class="code">palette</code> is given the value
+<code class="code">false</code>, the surfaces will not be shaded but represented with a
+mesh of curves only. In that case, the colors of the lines will be
+determined by the option <code class="code"><a class="ref" href="#color">color</a></code>.
+</p>
+<p>The single keyword <code class="code">palette</code> removes any palette previously
+defined, leaving it to the graphic program to decide the palette to use
+and <code class="code">nopalette</code> is a synonym for <code class="code">[palette, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="plotepsilon"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fplotepsilon"></a><dl class="first-defvr">
+<dt class="defvr" id="index-plotepsilon"><span class="category-def">Plot option: </span><span><strong class="def-name">plotepsilon</strong> <var class="def-var-arguments">[plotepsilon, <var class="var">value</var>]</var><a class="copiable-link" href='#index-plotepsilon'> &para;</a></span></dt>
+<dd>
+<p>Default value: 1e-6
+</p>
+<p>This value is used by <code class="code"><a class="ref" href="#plot2d">plot2d</a></code> when plotting implicit functions or
+contour lines. When plotting an explicit function <code class="code">expr_1=expr_2</code>,
+it is converted into <code class="code">expr_1-expr_2</code> and the points where that equals
+zero are searched. When a contour line for <code class="code">expr</code> equal to some value
+is going to be plotted, the points where <code class="code">expr</code> minus that value
+are equal to zero are searched. The search is done by computing those
+expressions at a grid of points (see <code class="code"><a class="ref" href="#sample">sample</a></code>). If at one of the
+points in that grid the absolute value of the expression is less than
+the value of <code class="code">plotepsilon</code>, it will be assumed to be zero, and
+therefore, as being part of the curve to be plotted.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="plot_005fformat"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fplot_005fformat"></a><dl class="first-defvr">
+<dt class="defvr" id="index-plot_005fformat"><span class="category-def">Plot option: </span><span><strong class="def-name">plot_format</strong> <var class="def-var-arguments">[plot_format, <var class="var">format</var>]</var><a class="copiable-link" href='#index-plot_005fformat'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">gnuplot</code>, in Windows systems, or <code class="code">gnuplot_pipes</code> in
+other systems.
+</p>
+<p>Where <var class="var">format</var> is one of the following: gnuplot, xmaxima, mgnuplot,
+gnuplot_pipes or geomview.
+</p>
+<p>It sets the format to be used for plotting as explained in
+<code class="code"><a class="ref" href="#Plotting-Formats">Plotting Formats</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="plot_005freal_005fpart"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fplot_005frealpart"></a><dl class="first-defvr">
+<dt class="defvr" id="index-plot_005frealpart"><span class="category-def">Plot option: </span><span><strong class="def-name">plot_realpart</strong> <var class="def-var-arguments">[plot_realpart, <var class="var">symbol</var>], plot_realpart, noplot_realpart</var><a class="copiable-link" href='#index-plot_005frealpart'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">false</code>
+</p>
+<p>If set to <code class="code">true</code>, the functions to be plotted will be considered as
+complex functions whose real value should be plotted; this is equivalent
+to plotting <code class="code">realpart(<var class="var">function</var>)</code>.  If set to <code class="code">false</code>,
+nothing will be plotted when the function does not give a real value.
+For instance, when <code class="code">x</code> is negative, <code class="code">log(x)</code> gives a complex
+value, with real value equal to <code class="code">log(abs(x))</code>; if
+<code class="code">plot_realpart</code> were <code class="code">true</code>, <code class="code">log(-5)</code> would be plotted
+as <code class="code">log(5)</code>, while nothing would be plotted if <code class="code">plot_realpart</code>
+were <code class="code">false</code>. The single keyword <code class="code">plot_realpart</code> can be used
+as a synonym for <code class="code">[plot_realpart, true]</code> and <code class="code">noplot_realpart</code>
+is a synonym for <code class="code">[plot_realpart, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="point_005ftype"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fpoint_005ftype"></a><dl class="first-defvr">
+<dt class="defvr" id="index-point_005ftype"><span class="category-def">Plot option: </span><span><strong class="def-name">point_type</strong> <var class="def-var-arguments">[point_type, <var class="var">type_1</var>, &hellip;, <var class="var">type_n</var>]</var><a class="copiable-link" href='#index-point_005ftype'> &para;</a></span></dt>
+<dd>
+<p>In gnuplot, each set of points to be plotted with the style &ldquo;points&rdquo;
+or &ldquo;linespoints&rdquo; will be represented with objects taken from this
+list, in sequential order.  If there are more sets of points than objects
+in this list, they will be repeated sequentially.
+The possible objects that can be used are: <code class="code">bullet</code>, <code class="code">circle</code>,
+<code class="code">plus</code>, <code class="code">times</code>, <code class="code">asterisk</code>, <code class="code">box</code>, <code class="code">square</code>,
+<code class="code">triangle</code>, <code class="code">delta</code>, <code class="code">wedge</code>, <code class="code">nabla</code>, <code class="code">diamond</code>,
+<code class="code">lozenge</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="pdf_005ffile"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fpdf_005ffile"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pdf_005ffile"><span class="category-def">Plot option: </span><span><strong class="def-name">pdf_file</strong> <var class="def-var-arguments">[pdf_file, <var class="var">file_name</var>]</var><a class="copiable-link" href='#index-pdf_005ffile'> &para;</a></span></dt>
+<dd>
+<p>Saves the plot into a PDF file with name equal to <var class="var">file_name</var>,
+rather than showing it in the screen.  By default, the file will be
+created in the directory defined by the variable
+<code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code>, unless <var class="var">file_name</var> contains the character
+&ldquo;/&rdquo;, in which case it will be assumed to contain the complete path where
+the file should be created. The value of <code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code> can be changed
+to save the file in a different directory. When the option
+<code class="code"><a class="ref" href="#gnuplot_005fpdf_005fterm_005fcommand">gnuplot_pdf_term_command</a></code> is also given, it will be used to set up
+Gnuplot&rsquo;s PDF terminal; otherwise, Gnuplot&rsquo;s pdfcairo terminal
+will be used with solid colored lines of width 3, plot
+size of 17.2 cm by 12.9 cm and font of 18 points.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="png_005ffile"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fpng_005ffile"></a><dl class="first-defvr">
+<dt class="defvr" id="index-png_005ffile"><span class="category-def">Plot option: </span><span><strong class="def-name">png_file</strong> <var class="def-var-arguments">[png_file, <var class="var">file_name</var>]</var><a class="copiable-link" href='#index-png_005ffile'> &para;</a></span></dt>
+<dd>
+<p>Saves the plot into a PNG graphics file with name equal to <var class="var">file_name</var>,
+rather than showing it in the screen. By default, the file will be
+created in the directory defined by the variable
+<code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code>, unless <var class="var">file_name</var> contains the character
+&ldquo;/&rdquo;, in which case it will be assumed to contain the complete path where
+the file should be created. The value of <code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code> can be changed
+to save the file in a different directory. When the option
+<code class="code"><a class="ref" href="#gnuplot_005fpng_005fterm_005fcommand">gnuplot_png_term_command</a></code> is also given, it will be used to set up
+Gnuplot&rsquo;s PNG terminal; otherwise, Gnuplot&rsquo;s pngcairo terminal
+will be used, with a font of size 12. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ps_005ffile"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fps_005ffile"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ps_005ffile"><span class="category-def">Plot option: </span><span><strong class="def-name">ps_file</strong> <var class="def-var-arguments">[ps_file, <var class="var">file_name</var>]</var><a class="copiable-link" href='#index-ps_005ffile'> &para;</a></span></dt>
+<dd>
+<p>Saves the plot into a Postscript file with name equal to <var class="var">file_name</var>,
+rather than showing it in the screen.  By default, the file will be
+created in the directory defined by the variable
+<code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code>, unless <var class="var">file_name</var> contains the character
+&ldquo;/&rdquo;, in which case it will be assumed to contain the complete path where
+the file should be created. The value of <code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code> can be changed
+to save the file in a different directory. When the option
+<code class="code"><a class="ref" href="#gnuplot_005fps_005fterm_005fcommand">gnuplot_ps_term_command</a></code> is also given, it will be used to set up
+Gnuplot&rsquo;s Postscript terminal; otherwise, Gnuplot&rsquo;s postscript terminal
+will be used with the EPS option, solid colored lines of width 2, plot
+size of 16.4 cm by 12.3 cm and font of 24 points.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="run_005fviewer"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002frun_005fviewer"></a><dl class="first-defvr">
+<dt class="defvr" id="index-run_005fviewer"><span class="category-def">Plot option: </span><span><strong class="def-name">run_viewer</strong> <var class="def-var-arguments">[run_viewer, <var class="var">symbol</var>], run_viewer, norun_viewer</var><a class="copiable-link" href='#index-run_005fviewer'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">true</code>
+</p>
+<p>This option is only used when the plot format is <code class="code">gnuplot</code> and the
+terminal is <code class="code">default</code> or when the Gnuplot terminal is set to
+<code class="code">dumb</code> (see <code class="code"><a class="ref" href="#gnuplot_005fterm">gnuplot_term</a></code>) and can have a true or false
+value.
+</p>
+<p>If the terminal is <code class="code">default</code>, a file <code class="code">maxout_xxx.gnuplot</code> (or
+other name specified with <code class="code"><a class="ref" href="#gnuplot_005fout_005ffile">gnuplot_out_file</a></code>) is created with the
+gnuplot commands necessary to generate the plot. Option <code class="code">run_viewer</code>
+controls whether or not Gnuplot will be launched to execute those
+commands and show the plot.
+</p>
+<p>If the terminal is <code class="code">default</code>, gnuplot is run to execute the
+commands in <code class="code">maxout_xxx.gnuplot</code>, producing another file
+<code class="code">maxplot.txt</code> (or other name specified with
+<code class="code"><a class="ref" href="#gnuplot_005fout_005ffile">gnuplot_out_file</a></code>). Option <code class="code">run_viewer</code> controls whether or
+not that file, with an ASCII representation of the plot, will be shown
+in the Maxima or Xmaxima console.
+</p>
+<p>Its default value, true, makes the plots appear in either the console or
+a separate graphics window. <code class="code">run_viewer</code> and <code class="code">norun_viewer</code>
+are synonyms for <code class="code">[run_viewer, true]</code> and <code class="code">[run_viewer,
+false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="same_005fxy"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fsame_005fxy"></a><dl class="first-defvr">
+<dt class="defvr" id="index-same_005fxy"><span class="category-def">Plot option: </span><span><strong class="def-name">same_xy</strong> <var class="def-var-arguments">[same_xy , <var class="var">value</var>], same_xy, nosame_xy</var><a class="copiable-link" href='#index-same_005fxy'> &para;</a></span></dt>
+<dd>
+<p>It can be either true or false. If true, the scales used in the x and y
+axes will be the same, in either 2d or 3d plots. See also
+<code class="code"><a class="ref" href="#yx_005fratio">yx_ratio</a></code>. <code class="code">same_xy</code> and <code class="code">nosame_xy</code> are synonyms for
+<code class="code">[same_xy, true]</code> and <code class="code">[same_xy, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="same_005fxyz"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fsame_005fxyz"></a><dl class="first-defvr">
+<dt class="defvr" id="index-same_005fxyz"><span class="category-def">Plot option: </span><span><strong class="def-name">same_xyz</strong> <var class="def-var-arguments">[same_xyz , <var class="var">value</var>], same_xyz, nosame_xyz</var><a class="copiable-link" href='#index-same_005fxyz'> &para;</a></span></dt>
+<dd>
+<p>It can be either true or false. If true, the scales used in the 3 axes
+of a 3d plot will be the same. <code class="code">same_xyz</code> and <code class="code">nosame_xyz</code> are
+synonyms for <code class="code">[same_xyz, true]</code> and <code class="code">[same_xyz, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sample"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fsample"></a><dl class="first-defvr">
+<dt class="defvr" id="index-sample"><span class="category-def">Plot option: </span><span><strong class="def-name">sample</strong> <var class="def-var-arguments">[sample, <var class="var">nx</var>, <var class="var">ny</var>]</var><a class="copiable-link" href='#index-sample'> &para;</a></span></dt>
+<dd>
+<p>Default value: <code class="code">[sample, 50, 50]</code>
+</p>
+<p><var class="var">nx</var> and <var class="var">ny</var> must be two natural numbers that will be used by
+<code class="code"><a class="ref" href="#plot2d">plot2d</a></code> to look for the points that make part of the plot of an
+implicit function or a contour line. The domain is divided into <var class="var">nx</var>
+intervals in the horizontal axis and <var class="var">ny</var> intervals in the vertical
+axis and the numerical value of the expression is computed at the
+borders of those intervals. Higher values of <var class="var">nx</var> and <var class="var">ny</var> will
+give smoother curves, but will increase the time needed to trace the
+plot. When there are critical points in the plot where the curve changes
+direction, to get better results it is more important to try to make
+those points to be at the border of the intervals, rather than
+increasing <var class="var">nx</var> and <var class="var">ny</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="style"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fstyle"></a><dl class="first-defvr">
+<dt class="defvr" id="index-style"><span class="category-def">Plot option: </span><span><strong class="def-name">style</strong> <var class="def-var-arguments">[style, <var class="var">type_1</var>, &hellip;, <var class="var">type_n</var>], [style, [<var class="var">style_1</var>], &hellip;, [<var class="var">style_n</var>]]</var><a class="copiable-link" href='#index-style'> &para;</a></span></dt>
+<dd>
+<p>The styles that will be used for the various functions or sets of data
+in a 2d plot.  The word <var class="var">style</var> must be followed by one or more
+styles.  If there are more functions and data sets than the styles
+given, the styles will be repeated.  Each style can be either
+<var class="var">lines</var> for line segments, <var class="var">points</var> for isolated points,
+<var class="var">linespoints</var> for segments and points, or <var class="var">dots</var> for small
+isolated dots.  Gnuplot accepts also an <var class="var">impulses</var> style.
+</p>
+<p>Each of the styles can be enclosed inside a list with some additional
+parameters.  <var class="var">lines</var> accepts one or two numbers: the width of the
+line and an integer that identifies a color.  The default color codes
+are: 1: blue, 2: red, 3: magenta, 4: orange, 5: brown, 6: lime and 7:
+aqua.  If you use Gnuplot with a terminal different than X11,
+those colors might be different; for example, if you use the option
+[<var class="var">gnuplot_term</var>, <var class="var">ps</var>], color index 4 will correspond to black,
+instead of orange.
+</p>
+<p><var class="var">points</var> accepts one two or three parameters; the first parameter
+is the radius of the points, the second parameter is an integer that
+selects the color, using the same code used for <var class="var">lines</var> and the
+third parameter is currently used only by Gnuplot and it corresponds
+to several objects instead of points.  The default types of
+objects are: 1: filled circles, 2: open circles, 3: plus signs, 4: x,
+5: *, 6: filled squares, 7: open squares, 8: filled triangles, 9: open
+triangles, 10: filled inverted triangles, 11: open inverted triangles,
+12: filled lozenges and 13: open lozenges.
+</p>
+<p><var class="var">linespoints</var> accepts up to four parameters: line width, points
+radius, color and type of object to replace the points.
+</p>
+<p>See also <code class="code"><a class="ref" href="#color">color</a></code> and <code class="code"><a class="ref" href="#point_005ftype">point_type</a></code>.
+</p> 
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="svg_005ffile"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fsvg_005ffile"></a><dl class="first-defvr">
+<dt class="defvr" id="index-svg_005ffile"><span class="category-def">Plot option: </span><span><strong class="def-name">svg_file</strong> <var class="def-var-arguments">[svg_file, <var class="var">file_name</var>]</var><a class="copiable-link" href='#index-svg_005ffile'> &para;</a></span></dt>
+<dd>
+<p>Saves the plot into an SVG file with name equal to <var class="var">file_name</var>,
+rather than showing it in the screen.  By default, the file will be
+created in the directory defined by the variable
+<code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code>, unless <var class="var">file_name</var> contains the character
+&ldquo;/&rdquo;, in which case it will be assumed to contain the complete path where
+the file should be created. The value of <code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code> can be changed
+to save the file in a different directory. When the option
+<code class="code"><a class="ref" href="#gnuplot_005fsvg_005fterm_005fcommand">gnuplot_svg_term_command</a></code> is also given, it will be used to set up
+Gnuplot&rsquo;s SVG terminal; otherwise, Gnuplot&rsquo;s svg terminal
+will be used with font of 14 points.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="t"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002ft"></a><dl class="first-defvr">
+<dt class="defvr" id="index-t"><span class="category-def">Plot option: </span><span><strong class="def-name">t</strong> <var class="def-var-arguments">[t, <var class="var">min</var>, <var class="var">max</var>]</var><a class="copiable-link" href='#index-t'> &para;</a></span></dt>
+<dd>
+<p>Default range for parametric plots.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="title"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002ftitle"></a><dl class="first-defvr">
+<dt class="defvr" id="index-title"><span class="category-def">Plot option: </span><span><strong class="def-name">title</strong> <var class="def-var-arguments">[title, <var class="var">text</var>]</var><a class="copiable-link" href='#index-title'> &para;</a></span></dt>
+<dd>
+<p>Defines a title that will be written at the top of the plot.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="transform_005fxy"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002ftransform_005fxy"></a><dl class="first-defvr">
+<dt class="defvr" id="index-transform_005fxy"><span class="category-def">Plot option: </span><span><strong class="def-name">transform_xy</strong> <var class="def-var-arguments">[transform_xy, <var class="var">symbol</var>], notransform_xy</var><a class="copiable-link" href='#index-transform_005fxy'> &para;</a></span></dt>
+<dd>
+<p>Where <var class="var">symbol</var> is either <code class="code">false</code> or the result obtained by
+using the function <code class="code">transform_xy</code>.  If different from <code class="code">false</code>,
+it will be used to transform the 3 coordinates in
+plot3d. <code class="code">notransform_xy</code> removes any transformation function
+previously defined.
+</p>
+<p>See <code class="code"><a class="ref" href="#make_005ftransform">make_transform</a></code>, <code class="code"><a class="ref" href="#polar_005fto_005fxy">polar_to_xy</a></code> and
+<code class="code"><a class="ref" href="#spherical_005fto_005fxyz">spherical_to_xyz</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="window"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fwindow"></a><dl class="first-defvr">
+<dt class="defvr" id="index-window"><span class="category-def">Plot option: </span><span><strong class="def-name">window</strong> <var class="def-var-arguments">[window, <var class="var">n</var>]</var><a class="copiable-link" href='#index-window'> &para;</a></span></dt>
+<dd>
+<p>Opens the plot in window number <var class="var">n</var>, instead of the default window
+0. If window number <var class="var">n</var> is already opened, the plot in that window
+will be replaced by the current plot.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="x"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fx"></a><dl class="first-defvr">
+<dt class="defvr" id="index-x"><span class="category-def">Plot option: </span><span><strong class="def-name">x</strong> <var class="def-var-arguments">[x, <var class="var">min</var>, <var class="var">max</var>]</var><a class="copiable-link" href='#index-x'> &para;</a></span></dt>
+<dd>
+<p>When used as the first option in a <code class="code"><a class="ref" href="#plot2d">plot2d</a></code> command (or any of the
+first two in <code class="code"><a class="ref" href="#plot3d">plot3d</a></code>), it indicates that the first independent variable
+is x and it sets its range.  It can also be used again after the first
+option (or after the second option in plot3d) to define the effective
+horizontal domain that will be shown in the plot.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="xlabel"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fxlabel"></a><dl class="first-defvr">
+<dt class="defvr" id="index-xlabel"><span class="category-def">Plot option: </span><span><strong class="def-name">xlabel</strong> <var class="def-var-arguments">[xlabel, <var class="var">string</var>]</var><a class="copiable-link" href='#index-xlabel'> &para;</a></span></dt>
+<dd>
+<p>Specifies the <var class="var">string</var> that will label the first axis; if this
+option is not used, that label will be the name of the independent
+variable, when plotting functions with <code class="code"><a class="ref" href="#plot2d">plot2d</a></code> the name of the
+first variable, when plotting surfaces with <code class="code"><a class="ref" href="#plot3d">plot3d</a></code>, or the first
+expression in the case of a parametric plot.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="xtics"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fxtics"></a><dl class="first-defvr">
+<dt class="defvr" id="index-xtics"><span class="category-def">Plot option: </span><span><strong class="def-name">xtics</strong> <var class="def-var-arguments">[xtics, <var class="var">x1</var>, <var class="var">x2</var>, <var class="var">x3</var>], [xtics, <code class="code">false</code>], xtics, noxtics</var><a class="copiable-link" href='#index-xtics'> &para;</a></span></dt>
+<dd>
+<p>Defines the values at which a mark and a number will be placed in the x
+axis. The first number is the initial value, the second the increments
+and the third is the last value where a mark is placed. The second and
+third numbers can be omitted, in which case the first number is the
+increment from an initial value that will be chosen by the graphic
+program. If <code class="code">[xtics, false]</code> is used, no marks or numbers will be
+shown along the x axis.
+</p>
+<p>The single keyword <code class="code">xtics</code> removes any values previously
+defined, leaving it to the graphic program to decide the values to use
+and <code class="code">noxtics</code> is a synonym for <code class="code">[xtics, false]</code>
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="xy_005fscale"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fxy_005fscale"></a><dl class="first-defvr">
+<dt class="defvr" id="index-xy_005fscale"><span class="category-def">Plot option: </span><span><strong class="def-name">xy_scale</strong> <var class="def-var-arguments">[xy_scale, <var class="var">sx</var>, <var class="var">sy</var>]</var><a class="copiable-link" href='#index-xy_005fscale'> &para;</a></span></dt>
+<dd>
+<p>In a 2d plot, it defines the ratio of the total size of the Window to
+the size that will be used for the plot. The two numbers given as
+arguments are the scale factors for the x and y axes.
+</p>
+<p>This option does not change the size of the graphic window or the placement
+of the graph in the window. If you want to change the aspect ratio of the
+plot, it is better to use option <code class="code"><a class="ref" href="#yx_005fratio">yx_ratio</a></code>. For instance,
+<code class="code">[yx_ratio, 10]</code> instead of <code class="code">[xy_scale, 0.1, 1]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="y"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fy"></a><dl class="first-defvr">
+<dt class="defvr" id="index-y"><span class="category-def">Plot option: </span><span><strong class="def-name">y</strong> <var class="def-var-arguments">[y, <var class="var">min</var>, <var class="var">max</var>]</var><a class="copiable-link" href='#index-y'> &para;</a></span></dt>
+<dd>
+<p>When used as one of the first two options in <code class="code"><a class="ref" href="#plot3d">plot3d</a></code>, it indicates
+that one of the independent variables is y and it sets its range.  Otherwise,
+it defines the effective domain of the second variable that will be
+shown in the plot.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ylabel"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fylabel"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ylabel"><span class="category-def">Plot option: </span><span><strong class="def-name">ylabel</strong> <var class="def-var-arguments">[ylabel, <var class="var">string</var>]</var><a class="copiable-link" href='#index-ylabel'> &para;</a></span></dt>
+<dd>
+<p>Specifies the <var class="var">string</var> that will label the second axis; if this
+option is not used, that label will be &ldquo;y&rdquo;, when plotting explicit
+functions with <code class="code"><a class="ref" href="#plot2d">plot2d</a></code>, or the name of the second variable, when
+plotting surfaces with <code class="code"><a class="ref" href="#plot3d">plot3d</a></code>, or the second expression in the
+case of a parametric plot.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ytics"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fytics"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ytics"><span class="category-def">Plot option: </span><span><strong class="def-name">ytics</strong> <var class="def-var-arguments">[ytics, <var class="var">y1</var>, <var class="var">y2</var>, <var class="var">y3</var>], [ytics, <code class="code">false</code>], ytics, noytics</var><a class="copiable-link" href='#index-ytics'> &para;</a></span></dt>
+<dd>
+<p>Defines the values at which a mark and a number will be placed in the y
+axis. The first number is the initial value, the second the increments
+and the third is the last value where a mark is placed. The second and
+third numbers can be omitted, in which case the first number is the
+increment from an initial value that will be chosen by the graphic
+program. If <code class="code">[ytics, false]</code> is used, no marks or numbers will be
+shown along the y axis.
+</p>
+<p>The single keyword <code class="code">ytics</code> removes any values previously
+defined, leaving it to the graphic program to decide the values to use
+and <code class="code">noytics</code> is a synonym for <code class="code">[ytics, false]</code>
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="yx_005fratio"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fyx_005fratio"></a><dl class="first-defvr">
+<dt class="defvr" id="index-yx_005fratio"><span class="category-def">Plot option: </span><span><strong class="def-name">yx_ratio</strong> <var class="def-var-arguments">[yx_ratio, <var class="var">r</var>]</var><a class="copiable-link" href='#index-yx_005fratio'> &para;</a></span></dt>
+<dd>
+<p>In a 2d plot, the ratio between the vertical and the horizontal sides of
+the rectangle used to make the plot. See also <code class="code"><a class="ref" href="#same_005fxy">same_xy</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="z"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fz"></a><dl class="first-defvr">
+<dt class="defvr" id="index-z"><span class="category-def">Plot option: </span><span><strong class="def-name">z</strong> <var class="def-var-arguments">[z, <var class="var">min</var>, <var class="var">max</var>]</var><a class="copiable-link" href='#index-z'> &para;</a></span></dt>
+<dd>
+<p>Used in <code class="code"><a class="ref" href="#plot3d">plot3d</a></code> to set the effective range of values of z that will be
+shown in the plot.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="zlabel"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fzlabel"></a><dl class="first-defvr">
+<dt class="defvr" id="index-zlabel"><span class="category-def">Plot option: </span><span><strong class="def-name">zlabel</strong> <var class="def-var-arguments">[zlabel, <var class="var">string</var>]</var><a class="copiable-link" href='#index-zlabel'> &para;</a></span></dt>
+<dd>
+<p>Specifies the <var class="var">string</var> that will label the third axis, when using
+<code class="code"><a class="ref" href="#plot3d">plot3d</a></code>.  If this option is not used, that label will be &ldquo;z&rdquo;, when
+plotting surfaces, or the third expression in the case of a parametric
+plot.  It can not be used with <code class="code"><a class="ref" href="#set_005fplot_005foption">set_plot_option</a></code> and it will be
+ignored by <code class="code"><a class="ref" href="#plot2d">plot2d</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="zmin"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fzmin"></a><dl class="first-defvr">
+<dt class="defvr" id="index-zmin"><span class="category-def">Plot option: </span><span><strong class="def-name">zmin</strong> <var class="def-var-arguments">[zmin, <var class="var">z</var>], zmin</var><a class="copiable-link" href='#index-zmin'> &para;</a></span></dt>
+<dd>
+<p>In 3d plots, the value of z that will be at the bottom of the plot box.
+</p>
+<p>The single keyword <code class="code">zmin</code> removes any value previously
+defined, leaving it to the graphic program to decide the value to use.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ztics"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fztics"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ztics"><span class="category-def">Plot option: </span><span><strong class="def-name">ztics</strong> <var class="def-var-arguments">[ztics, <var class="var">z1</var>, <var class="var">z2</var>, <var class="var">z3</var>], [ztics, <code class="code">false</code>], ztics, noztics</var><a class="copiable-link" href='#index-ztics'> &para;</a></span></dt>
+<dd>
+<p>Defines the values at which a mark and a number will be placed in the z
+axis. The first number is the initial value, the second the increments
+and the third is the last value where a mark is placed. The second and
+third numbers can be omitted, in which case the first number is the
+increment from an initial value that will be chosen by the graphic
+program. If <code class="code">[ztics, false]</code> is used, no marks or numbers will be
+shown along the z axis. 
+</p>
+<p>The single keyword <code class="code">ztics</code> removes any values previously
+defined, leaving it to the graphic program to decide the values to use
+and <code class="code">noztics</code> is a synonym for <code class="code">[ztics, false]</code>
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Plotting_002fnode_002fGnuplot-Options"></a><hr>
+</div>
+<div class="section-level-extent" id="Gnuplot-Options">
+<div class="nav-panel">
+<p>
+Next: <a href="#Gnuplot_005fpipes-Format-Functions" accesskey="n" rel="next">Gnuplot_pipes Format Functions</a>, Previous: <a href="#Plotting-Options" accesskey="p" rel="prev">Plotting Options</a>, Up: <a href="#Plotting" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Gnuplot-Options-1">12.5 Gnuplot Options</h3>
+
+<p>There are several plot options specific to gnuplot.  All of them consist
+of a keyword (the name of the option), followed by a string that should
+be a valid gnuplot command, to be passed directly to gnuplot.  In most
+cases, there exist a corresponding plotting option that will produce a
+similar result and whose use is more recommended than the gnuplot
+specific option.
+</p>
+<a class="anchor" id="gnuplot_005fterm"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fterm"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fterm"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_term</strong> <var class="def-var-arguments">[gnuplot_term, <var class="var">terminal_name</var>]</var><a class="copiable-link" href='#index-gnuplot_005fterm'> &para;</a></span></dt>
+<dd>
+<p>Sets the output terminal type for gnuplot. The argument <var class="var">terminal_name</var>
+can be a string or one of the following 3 special symbols
+</p><ul class="itemize mark-bullet">
+<li><strong class="strong">default</strong> (default value)
+
+<p>Gnuplot output is displayed in a separate graphical window and the
+gnuplot terminal used will be specified by the value of the option
+<code class="code"><a class="ref" href="#gnuplot_005fdefault_005fterm_005fcommand">gnuplot_default_term_command</a></code>.
+</p>
+</li><li><strong class="strong">dumb</strong>
+
+<p>Gnuplot output is saved to a file <code class="code">maxout_xxx.gnuplot</code> using &quot;ASCII
+art&quot; approximation to graphics. If the option <code class="code"><a class="ref" href="#gnuplot_005fout_005ffile">gnuplot_out_file</a></code> is
+set to <var class="var">filename</var>, the plot will be saved there, instead of the
+default <code class="code">maxout_xxx.gnuplot</code>. The settings for the &ldquo;dumb&rdquo; terminal of
+Gnuplot are given by the value of option
+<code class="code"><a class="ref" href="#gnuplot_005fdumb_005fterm_005fcommand">gnuplot_dumb_term_command</a></code>. If option <code class="code"><a class="ref" href="#run_005fviewer">run_viewer</a></code> is set
+to true and the plot_format is <code class="code">gnuplot</code> that ASCII representation
+will also be shown in the Maxima or Xmaxima console.
+</p>
+</li><li><strong class="strong">ps</strong>
+
+<p>Gnuplot generates commands in the PostScript page description language.
+If the option <code class="code"><a class="ref" href="#gnuplot_005fout_005ffile">gnuplot_out_file</a></code> is set to <var class="var">filename</var>, gnuplot
+writes the PostScript commands to <var class="var">filename</var>.  Otherwise, it is
+saved as <code class="code">maxplot.ps</code> file. The settings for this terminal are given by the value of the option <code class="code"><a class="ref" href="#gnuplot_005fdumb_005fterm_005fcommand">gnuplot_dumb_term_command</a></code>.
+</p>
+</li><li>A string representing any valid gnuplot term specification
+
+<p>Gnuplot can generate output in many other graphical formats such as png,
+jpeg, svg etc. To use those formats, option <code class="code">gnuplot_term</code> can be
+set to any supported gnuplot term name (which must be a symbol) or even a
+full gnuplot term specification with any valid options (which must be a string).  For
+example <code class="code">[gnuplot_term, png]</code> creates output in PNG (Portable
+Network Graphics) format while <code class="code">[gnuplot_term, &quot;png size
+1000,1000&quot;]</code> creates PNG of 1000 x 1000 pixels size.  If the option
+<code class="code"><a class="ref" href="#gnuplot_005fout_005ffile">gnuplot_out_file</a></code> is set to <var class="var">filename</var>, gnuplot writes the
+output to <var class="var">filename</var>.  Otherwise, it is saved as
+<code class="code">maxplot.<var class="var">term</var></code> file, where <var class="var">term</var> is gnuplot terminal
+name.
+</p></li></ul>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fout_005ffile"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fout_005ffile"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fout_005ffile"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_out_file</strong> <var class="def-var-arguments">[gnuplot_out_file, <var class="var">file_name</var>]</var><a class="copiable-link" href='#index-gnuplot_005fout_005ffile'> &para;</a></span></dt>
+<dd>
+<p>It can be used to replace the default name for the file that contains
+the commands that will interpreted by gnuplot, when the terminal is set
+to <code class="code">default</code>, or to replace the default name of the graphic file
+that gnuplot creates, when the terminal is different from
+<code class="code">default</code>. If it contains one or more slashes, &ldquo;/&rdquo;, the name of
+the file will be left as it is; otherwise, it will be appended to the
+path of the temporary directory. The complete name of the files created
+by the plotting commands is always sent as output of those commands so
+they can be seen if the command is ended by semi-colon.
+</p>
+<p>When used in conjunction with the <code class="code"><a class="ref" href="#gnuplot_005fterm">gnuplot_term</a></code> option, it can be
+used to save the plot in a file, in one of the graphic formats supported
+by Gnuplot. To create PNG, PDF, Postscript or SVG, it is easier to use
+options <code class="code"><a class="ref" href="#png_005ffile">png_file</a></code>, <code class="code"><a class="ref" href="#pdf_005ffile">pdf_file</a></code>, <code class="code"><a class="ref" href="#ps_005ffile">ps_file</a></code>,
+or <code class="code"><a class="ref" href="#svg_005ffile">svg_file</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fscript_005ffile"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fscript_005ffile"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fscript_005ffile"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_script_file</strong> <var class="def-var-arguments">[gnuplot_script_file, <var class="var">file_name_or_function</var>]</var><a class="copiable-link" href='#index-gnuplot_005fscript_005ffile'> &para;</a></span></dt>
+<dd>
+<p>Creates a plot with <code class="code">plot2d</code>, <code class="code">plot3d</code>, <code class="code">mandelbrot</code> or
+<code class="code">julia</code> using the <code class="code">gnuplot</code> <code class="code"><a class="ref" href="#plot_005fformat">plot_format</a></code> and saving
+the script sent to Gnuplot in the file specified by <var class="var">file_name_or_function</var>.
+The value <var class="var">file_name_or_function</var> can be a string or a Maxima function of
+one variable that returns a string. If that string corresponds to a
+complete file path (directory and file name), the script will be created in
+that file and will not be deleted after Maxima is closed; otherwise, the
+string will give the name of a file to be created in the temporary directory
+and deleted when Maxima is closed.
+</p>
+<p>In this example, the script file name is set to &ldquo;sin.gnuplot&rdquo;, in the
+current directory.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d( sin(x), [x,0,2*%pi], [gnuplot_script_file, &quot;./sin.gnuplot&quot;]);
+
+(%o1) [&quot;./sin.gnuplot&quot;]
+</pre></div>
+
+<p>In this example, <code class="code">gnuplot_maxout_prt(<var class="var">file</var>)</code> is a function
+that takes the default file name, <var class="var">file</var>. It constructs a full file
+name for the data file by interpolating a random 8-digit integer with a
+pad of zeros into the default file name (&ldquo;maxout&rdquo; followed by the id
+number of the Maxima process, followed by &ldquo;.gnuplot&rdquo;). The temporary
+directory is determined by <code class="code"><a class="ref" href="maxima_31.html#maxima_005ftempdir">maxima_tempdir</a></code> (it is &ldquo;/tmp&rdquo; in this
+example).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) gnuplot_maxout_prt(file) := block([beg,end],
+        [beg,end] : split(file,&quot;.&quot;),
+        printf(false,&quot;~a_~8,'0d.~a&quot;,beg,random(10^8-1),end)) $
+
+(%i2) plot2d( sin(x), [x,0,2*%pi], [gnuplot_script_file, gnuplot_maxout_prt]);
+
+(%o2) [&quot;/tmp/maxout68715_09606909.gnuplot&quot;]
+</pre></div>
+
+<p>By default, the script would have been saved in a file named
+<code class="code">maxoutXXXXX.gnuplot</code> (XXXXX=68715 in this example) in the temporary
+directory. If the print statement in function <code class="code">gnuplot_maxout_prt</code>
+above included a directory path, the file would have been saved in that
+directory rather than in the temporary directory.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fpm3d"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpm3d"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fpm3d"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_pm3d</strong> <var class="def-var-arguments">[gnuplot_pm3d, <var class="var">value</var>]</var><a class="copiable-link" href='#index-gnuplot_005fpm3d'> &para;</a></span></dt>
+<dd>
+<p>With a value of <code class="code">false</code>, it can be used to disable the use of PM3D
+mode, which is enabled by default.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fpreamble"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpreamble"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fpreamble"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_preamble</strong> <var class="def-var-arguments">[gnuplot_preamble, <var class="var">string</var>]</var><a class="copiable-link" href='#index-gnuplot_005fpreamble'> &para;</a></span></dt>
+<dd>
+<p>This option inserts gnuplot commands before any other commands sent to
+Gnuplot. Any valid gnuplot commands may be used. Multiple commands should
+be separated with a semi-colon. See also <code class="code"><a class="ref" href="#gnuplot_005fpostamble">gnuplot_postamble</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fpostamble"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpostamble"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fpostamble"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_postamble</strong> <var class="def-var-arguments">[gnuplot_postamble, <var class="var">string</var>]</var><a class="copiable-link" href='#index-gnuplot_005fpostamble'> &para;</a></span></dt>
+<dd>
+<p>This option inserts gnuplot commands after other commands sent to
+Gnuplot and right before the plot command is sent. Any valid gnuplot
+commands may be used. Multiple commands should be separated with a
+semi-colon. See also <code class="code"><a class="ref" href="#gnuplot_005fpreamble">gnuplot_preamble</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fdefault_005fterm_005fcommand"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fdefault_005fterm_005fcommand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fdefault_005fterm_005fcommand"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_default_term_command</strong><a class="copiable-link" href='#index-gnuplot_005fdefault_005fterm_005fcommand'> &para;</a></span></dt>
+<dd><p>[gnuplot_default_term_command, <var class="var">command</var>]
+</p>
+<p>The gnuplot command to set the terminal type for the default
+terminal. It this option is not set, the command used will be: <code class="code">&quot;set term wxt size 640,480 font \&quot;,12\&quot;; set term pop&quot;</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fdumb_005fterm_005fcommand"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fdumb_005fterm_005fcommand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fdumb_005fterm_005fcommand"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_dumb_term_command</strong><a class="copiable-link" href='#index-gnuplot_005fdumb_005fterm_005fcommand'> &para;</a></span></dt>
+<dd><p>[gnuplot_dumb_term_command, <var class="var">command</var>]
+</p>
+<p>The gnuplot command to set the terminal type for the dumb terminal.  It
+this option is not set, the command used will be: <code class="code">&quot;set term dumb
+79 22&quot;</code>, which makes the text output 79 characters by 22 characters.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fpdf_005fterm_005fcommand"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpdf_005fterm_005fcommand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fpdf_005fterm_005fcommand"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_pdf_term_command</strong> <var class="def-var-arguments">[gnuplot_pdf_term_command, <var class="var">command</var>]</var><a class="copiable-link" href='#index-gnuplot_005fpdf_005fterm_005fcommand'> &para;</a></span></dt>
+<dd>
+<p>The gnuplot command to set the terminal type for the PDF
+terminal.  If this option is not set, the command used will be: <code class="code">&quot;set term pdfcairo color solid lw 3 size 17.2 cm, 12.9 cm font \&quot;,18\&quot;&quot;</code>. See the gnuplot documentation for more information.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fpng_005fterm_005fcommand"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fpng_005fterm_005fcommand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fpng_005fterm_005fcommand"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_png_term_command</strong> <var class="def-var-arguments">[gnuplot_png_term_command, <var class="var">command</var>]</var><a class="copiable-link" href='#index-gnuplot_005fpng_005fterm_005fcommand'> &para;</a></span></dt>
+<dd>
+<p>The gnuplot command to set the terminal type for the PNG terminal.  If
+this option is not set, the command used will be:
+<code class="code">&quot;set term pngcairo font \&quot;,12\&quot;&quot;</code>. See the gnuplot documentation
+for more information.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fps_005fterm_005fcommand"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fps_005fterm_005fcommand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fps_005fterm_005fcommand"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_ps_term_command</strong> <var class="def-var-arguments">[gnuplot_ps_term_command, <var class="var">command</var>]</var><a class="copiable-link" href='#index-gnuplot_005fps_005fterm_005fcommand'> &para;</a></span></dt>
+<dd>
+<p>The gnuplot command to set the terminal type for the PostScript
+terminal.  If this option is not set, the command used will be: <code class="code">&quot;set term postscript eps color solid lw 2 size 16.4 cm, 12.3 cm font \&quot;,24\&quot;&quot;</code>. See the gnuplot documentation for <code class="code">set term postscript</code> for
+more information.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fstrings"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fstrings"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fstrings"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_strings</strong> <var class="def-var-arguments">[gnuplot_strings, <var class="var">value</var>]</var><a class="copiable-link" href='#index-gnuplot_005fstrings'> &para;</a></span></dt>
+<dd>
+<p>With a value of <code class="code">true</code>, all strings used in labels and titles will
+be interpreted by gnuplot as &ldquo;enhanced&rdquo; text, if the terminal being used
+supports it. In enhanced mode, some characters such as ^ and _ are not
+printed, but interpreted as formatting characters. For a list of the
+formatting characters and their meaning, see the documentation for enhanced
+in Gnuplot. The default value for this option is <code class="code">false</code>, which will
+not treat any characters as formatting characters.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fsvg_005fbackground"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fsvg_005fbackground"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fsvg_005fbackground"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_svg_background</strong> <var class="def-var-arguments"><br></var><a class="copiable-link" href='#index-gnuplot_005fsvg_005fbackground'> &para;</a></span></dt>
+<dd>
+<p>[gnuplot_svg_background, <var class="var">color</var>] <br>
+    nognuplot_svg_background
+</p>
+<p>Specify the background color for SVG image output.
+<var class="var">color</var> must be a string which specifies a color name recognized by Gnuplot,
+or an RGB triple of the form <code class="code">&quot;#xxxxxx&quot;</code> where <code class="code">x</code> is a hexadecimal digit.
+The default value is <code class="code">&quot;white&quot;</code>.
+</p>
+<p>When the value of <code class="code">gnuplot_svg_background</code> is <code class="code">false</code>,
+the background is the default determined by Gnuplot.
+At present (April 2023),
+the Gnuplot default is to specify the background in SVG output as <code class="code">&quot;none&quot;</code>.
+</p>
+<p><code class="code">nognuplot_svg_background</code>, specified by itself without a value,
+is equivalent to <code class="code">[gnuplot_svg_background, false]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fsvg_005fterm_005fcommand"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fsvg_005fterm_005fcommand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fsvg_005fterm_005fcommand"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_svg_term_command</strong> <var class="def-var-arguments">[gnuplot_svg_term_command, <var class="var">command</var>]</var><a class="copiable-link" href='#index-gnuplot_005fsvg_005fterm_005fcommand'> &para;</a></span></dt>
+<dd>
+<p>The gnuplot command to set the terminal type for the SVG
+terminal.  If this option is not set, the command used will be:
+<code class="code">&quot;set term svg font \&quot;,14\&quot;&quot;</code>. See the gnuplot documentation for
+more information.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fcurve_005ftitles"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fcurve_005ftitles"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fcurve_005ftitles"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_curve_titles</strong><a class="copiable-link" href='#index-gnuplot_005fcurve_005ftitles'> &para;</a></span></dt>
+<dd>
+<p>This is an obsolete option that has been replaced by <code class="code"><a class="ref" href="#legend">legend</a></code> described
+above.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fcurve_005fstyles"></a><a class="anchor" id="Item_003a-Plotting_002fdefvr_002fgnuplot_005fcurve_005fstyles"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gnuplot_005fcurve_005fstyles"><span class="category-def">Plot option: </span><span><strong class="def-name">gnuplot_curve_styles</strong><a class="copiable-link" href='#index-gnuplot_005fcurve_005fstyles'> &para;</a></span></dt>
+<dd>
+<p>This is an obsolete option that has been replaced by <code class="code"><a class="ref" href="#style">style</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Plotting_002fnode_002fGnuplot_005fpipes-Format-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Gnuplot_005fpipes-Format-Functions">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Gnuplot-Options" accesskey="p" rel="prev">Gnuplot Options</a>, Up: <a href="#Plotting" accesskey="u" rel="up">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Gnuplot_005fpipes-Format-Functions-1">12.6 Gnuplot_pipes Format Functions</h3>
+
+<a class="anchor" id="gnuplot_005fstart"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fgnuplot_005fstart"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gnuplot_005fstart"><span class="category-def">Function: </span><span><strong class="def-name">gnuplot_start</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-gnuplot_005fstart'> &para;</a></span></dt>
+<dd>
+<p>Opens the pipe to gnuplot used for plotting with the <code class="code">gnuplot_pipes</code>
+format.  Is not necessary to manually open the pipe before plotting.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fclose"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fgnuplot_005fclose"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gnuplot_005fclose"><span class="category-def">Function: </span><span><strong class="def-name">gnuplot_close</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-gnuplot_005fclose'> &para;</a></span></dt>
+<dd>
+<p>Closes the pipe to gnuplot which is used with the <code class="code">gnuplot_pipes</code> format.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005fsend"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fgnuplot_005fsend"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gnuplot_005fsend"><span class="category-def">Function: </span><span><strong class="def-name">gnuplot_send</strong> <var class="def-var-arguments">(<var class="var">s</var>)</var><a class="copiable-link" href='#index-gnuplot_005fsend'> &para;</a></span></dt>
+<dd>
+<p>Sends the command <var class="var">s</var> to the gnuplot pipe. If that pipe is not currently
+opened, it will be opened before sending the command. <var class="var">s</var> must be a
+string.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005frestart"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fgnuplot_005frestart"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gnuplot_005frestart"><span class="category-def">Function: </span><span><strong class="def-name">gnuplot_restart</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-gnuplot_005frestart'> &para;</a></span></dt>
+<dd>
+<p>Closes the pipe to gnuplot which is used with the <code class="code">gnuplot_pipes</code>
+format and opens a new pipe.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005freplot"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fgnuplot_005freplot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gnuplot_005freplot"><span class="category-def">Function: </span><span><strong class="def-name">gnuplot_replot</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">gnuplot_replot</code> () <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">gnuplot_replot</code> (<var class="var">s</var>)</var><a class="copiable-link" href='#index-gnuplot_005freplot'> &para;</a></span></dt>
+<dd>
+<p>Updates the gnuplot window.  If <code class="code">gnuplot_replot</code> is called with a
+gnuplot command in a string <var class="var">s</var>, then <code class="code">s</code> is sent to gnuplot
+before reploting the window.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gnuplot_005freset"></a><a class="anchor" id="Item_003a-Plotting_002fdeffn_002fgnuplot_005freset"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gnuplot_005freset"><span class="category-def">Function: </span><span><strong class="def-name">gnuplot_reset</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-gnuplot_005freset'> &para;</a></span></dt>
+<dd>
+<p>Resets the state of gnuplot used with the <code class="code">gnuplot_pipes</code> format.  To
+update the gnuplot window call <code class="code"><a class="ref" href="#gnuplot_005freplot">gnuplot_replot</a></code> after <code class="code">gnuplot_reset</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_12.html#File-Input-and-Output" accesskey="n" rel="next">File Input and Output</a>, Previous: <a href="maxima_10.html#Maxima_0027s-Database" accesskey="p" rel="prev">Maxima&rsquo;s Database</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

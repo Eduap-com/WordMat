@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>engineering-format-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="engineering-format-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="engineering-format-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_56.html#ezunits_002dpkg" rel="next" title="ezunits-pkg">
+<link href="maxima_54.html#dynamics_002dpkg" rel="prev" title="dynamics-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="engineering_002dformat_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_56.html#ezunits_002dpkg" accesskey="n" rel="next">ezunits</a>, Previous: <a href="maxima_54.html#dynamics_002dpkg" accesskey="p" rel="prev">dynamics</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="engineering_002dformat">56 engineering-format</h2>
+<p>Engineering-format changes the way maxima outputs floating-point numbers
+to the notation engineers are used to: <code class="code">a*10^b</code> with <code class="code">b</code> dividable by
+three.
+</p>
+<a class="anchor" id="Item_003a-engineering_002dformat_002fnode_002fFunctions-and-Variables-for-engineering_002dformat"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-engineering_002dformat" accesskey="1">Functions and Variables for engineering-format</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-engineering_002dformat">
+<div class="nav-panel">
+<p>
+Previous: <a href="#engineering_002dformat_002dpkg" accesskey="p" rel="prev">engineering-format</a>, Up: <a href="#engineering_002dformat_002dpkg" accesskey="u" rel="up">engineering-format</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-engineering_002dformat-1">56.1 Functions and Variables for engineering-format</h3>
+
+<a class="anchor" id="engineering_005fformat_005ffloats"></a><a class="anchor" id="Item_003a-engineering_002dformat_002fdefvr_002fengineering_005fformat_005ffloats"></a><dl class="first-defvr">
+<dt class="defvr" id="index-engineering_005fformat_005ffloats"><span class="category-def">Option variable: </span><span><strong class="def-name">engineering_format_floats</strong><a class="copiable-link" href='#index-engineering_005fformat_005ffloats'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code> 
+</p>
+
+<p>This variable allows to temporarily switch off engineering-format.
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) load(&quot;engineering-format&quot;);
+(%o1) /home/gunter/src/maxima-code/share/contrib/engineering-for\
+mat.lisp
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) float(sin(10)/10000);
+(%o2)                - 54.40211108893698e-6
+</pre></div><pre class="example-preformatted">(%i3) engineering_format_floats:false$
+</pre><div class="group"><pre class="example-preformatted">(%i4) float(sin(10)/10000);
+(%o4)                - 5.440211108893698e-5
+</pre></div></div>
+
+<p>See also <code class="code"><a class="ref" href="maxima_4.html#fpprintprec">fpprintprec</a></code> and <code class="code"><a class="ref" href="maxima_4.html#float">float</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Display-functions">Display functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="engineering_005fformat_005fmin"></a><a class="anchor" id="Item_003a-engineering_002dformat_002fdefvr_002fengineering_005fformat_005fmin"></a><dl class="first-defvr">
+<dt class="defvr" id="index-engineering_005fformat_005fmin"><span class="category-def">Option variable: </span><span><strong class="def-name">engineering_format_min</strong><a class="copiable-link" href='#index-engineering_005fformat_005fmin'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">0.0</code> 
+</p>
+<p>The minimum absolute value that isn&rsquo;t automatically converted to the engineering format.
+See also <code class="code"><a class="ref" href="#engineering_005fformat_005fmax">engineering_format_max</a></code> and <code class="code"><a class="ref" href="#engineering_005fformat_005ffloats">engineering_format_floats</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) lst: float([.05,.5,5,500,5000,500000]);
+(%o1)       [0.05, 0.5, 5.0, 500.0, 5000.0, 500000.0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) load(&quot;engineering-format&quot;);
+(%o2) /home/gunter/src/maxima-code/share/contrib/engineering-for\
+mat.lisp
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) lst;
+(%o3) [50.0e-3, 500.0e-3, 5.0e+0, 500.0e+0, 5.0e+3, 500.0e+3]
+</pre></div><pre class="example-preformatted">(%i4) engineering_format_min:.1$
+(%i5) engineering_format_max:1000$
+</pre><div class="group"><pre class="example-preformatted">(%i6) lst;
+(%o6)     [50.0e-3, 0.5, 5.0, 500.0, 5.0e+3, 500.0e+3]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Display-functions">Display functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="engineering_005fformat_005fmax"></a><a class="anchor" id="Item_003a-engineering_002dformat_002fdefvr_002fengineering_005fformat_005fmax"></a><dl class="first-defvr">
+<dt class="defvr" id="index-engineering_005fformat_005fmax"><span class="category-def">Option variable: </span><span><strong class="def-name">engineering_format_max</strong><a class="copiable-link" href='#index-engineering_005fformat_005fmax'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">0.0</code> 
+</p>
+<p>The maximum absolute value that isn&rsquo;t automatically converted to the engineering format.
+See also <code class="code"><a class="ref" href="#engineering_005fformat_005fmin">engineering_format_min</a></code> and <code class="code"><a class="ref" href="#engineering_005fformat_005ffloats">engineering_format_floats</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Display-functions">Display functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+</div>
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_56.html#ezunits_002dpkg" accesskey="n" rel="next">ezunits</a>, Previous: <a href="maxima_54.html#dynamics_002dpkg" accesskey="p" rel="prev">dynamics</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

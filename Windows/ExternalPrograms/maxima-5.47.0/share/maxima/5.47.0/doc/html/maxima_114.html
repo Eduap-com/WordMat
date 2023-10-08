@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for fast Fourier transform</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for fast Fourier transform">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for fast Fourier transform">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_112.html#Numerical" rel="up" title="Numerical">
+<link href="maxima_115.html#Functions-and-Variables-for-FFTPACK5" rel="next" title="Functions and Variables for FFTPACK5">
+<link href="maxima_113.html#Introduction-to-fast-Fourier-transform" rel="previous" title="Introduction to fast Fourier transform">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-fast-Fourier-transform"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_115.html#Functions-and-Variables-for-FFTPACK5" accesskey="n" rel="next">Functions and Variables for FFTPACK5</a>, Previous: <a href="maxima_113.html#Introduction-to-fast-Fourier-transform" accesskey="p" rel="previous">Introduction to fast Fourier transform</a>, Up: <a href="maxima_112.html#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-fft"></a>
+<h3 class="section">22.2 Functions and Variables for fft</h3>
+
+<a name="polartorect"></a><a name="Item_003a-Numerical_002fdeffn_002fpolartorect"></a><dl>
+<dt><a name="index-polartorect"></a>Function: <strong>polartorect</strong> <em>(<var>r</var>, <var>t</var>)</em></dt>
+<dd>
+<p>Translates complex values of the form <code>r %e^(%i t)</code> to the form
+<code>a + b %i</code>, where <var>r</var> is the magnitude and <var>t</var> is the phase.
+<var>r</var> and <var>t</var> are 1-dimensional arrays of the same size.
+The array size need not be a power of 2.
+</p>
+<p>The original values of the input arrays are
+replaced by the real and imaginary parts, <code>a</code> and <code>b</code>, on return.
+The outputs are calculated as
+</p>
+<div class="example">
+<pre class="example">a = r cos(t)
+b = r sin(t)
+</pre></div>
+
+<p><code><a href="#polartorect">polartorect</a></code> is the inverse function of <code><a href="#recttopolar">recttopolar</a></code>.
+</p>
+<p><code>load(&quot;fft&quot;)</code> loads this function.  See also <code><a href="#fft">fft</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;<a href="maxima_424.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;</div></dd></dl>
+
+<a name="recttopolar"></a><a name="Item_003a-Numerical_002fdeffn_002frecttopolar"></a><dl>
+<dt><a name="index-recttopolar"></a>Function: <strong>recttopolar</strong> <em>(<var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>Translates complex values of the form <code>a + b %i</code> to the form
+<code>r %e^(%i t)</code>, where <var>a</var> is the real part and <var>b</var> is the imaginary
+part.  <var>a</var> and <var>b</var> are 1-dimensional arrays of the same size.
+The array size need not be a power of 2.
+</p>
+<p>The original values of the input arrays are
+replaced by the magnitude and angle, <code>r</code> and <code>t</code>, on return.
+The outputs are calculated as
+</p>
+<div class="example">
+<pre class="example">r = sqrt(a^2 + b^2)
+t = atan2(b, a)
+</pre></div>
+
+<p>The computed angle is in the range <code>-%pi</code> to <code>%pi</code>.
+</p>
+<p><code>recttopolar</code> is the inverse function of <code><a href="#polartorect">polartorect</a></code>.
+</p>
+<p><code>load(&quot;fft&quot;)</code> loads this function.  See also <code><a href="#fft">fft</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;<a href="maxima_424.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;</div></dd></dl>
+
+<a name="inverse_005ffft"></a><a name="Item_003a-Numerical_002fdeffn_002finverse_005ffft"></a><dl>
+<dt><a name="index-inverse_005ffft"></a>Function: <strong>inverse_fft</strong> <em>(<var>y</var>)</em></dt>
+<dd>
+<p>Computes the inverse complex fast Fourier transform.
+<var>y</var> is a list or array (named or unnamed) which contains the data to
+transform.  The number of elements must be a power of 2.
+The elements must be literal numbers (integers, rationals, floats, or bigfloats)
+or symbolic constants,
+or expressions <code>a + b*%i</code> where <code>a</code> and <code>b</code> are literal numbers
+or symbolic constants.
+</p>
+<p><code>inverse_fft</code> returns a new object of the same type as <var>y</var>,
+which is not modified.
+Results are always computed as floats
+or expressions <code>a + b*%i</code> where <code>a</code> and <code>b</code> are floats.
+If bigfloat precision is needed the function <code><a href="#bf_005finverse_005ffft">bf_inverse_fft</a></code> can
+be used instead as a drop-in replacement of <code>inverse_fft</code> that is
+slower, but supports bfloats. 
+</p>
+<p>The inverse discrete Fourier transform is defined as follows.
+Let <code>x</code> be the output of the inverse transform.
+Then for <code>j</code> from 0 through <code>n - 1</code>,
+</p>
+<div class="example">
+<pre class="example">x[j] = sum(y[k] exp(-2 %i %pi j k / n), k, 0, n - 1)
+</pre></div>
+
+<p>As there are various sign and normalization conventions possible,
+this definition of the transform may differ from that used by other mathematical software.
+</p>
+<p><code>load(&quot;fft&quot;)</code> loads this function.
+</p>
+<p>See also <code><a href="#fft">fft</a></code> (forward transform), <code><a href="#recttopolar">recttopolar</a></code>, and
+<code><a href="#polartorect">polartorect</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Real data.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 2, 3, 4, -1, -2, -3, -4] $
+(%i4) L1 : inverse_fft (L);
+(%o4) [0.0, 14.49 %i - .8284, 0.0, 2.485 %i + 4.828, 0.0, 
+                       4.828 - 2.485 %i, 0.0, - 14.49 %i - .8284]
+(%i5) L2 : fft (L1);
+(%o5) [1.0, 2.0 - 2.168L-19 %i, 3.0 - 7.525L-20 %i, 
+4.0 - 4.256L-19 %i, - 1.0, 2.168L-19 %i - 2.0, 
+7.525L-20 %i - 3.0, 4.256L-19 %i - 4.0]
+(%i6) lmax (abs (L2 - L));
+(%o6)                       3.545L-16
+</pre></div>
+
+<p>Complex data.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $                 
+(%i3) L : [1, 1 + %i, 1 - %i, -1, -1, 1 - %i, 1 + %i, 1] $
+(%i4) L1 : inverse_fft (L);
+(%o4) [4.0, 2.711L-19 %i + 4.0, 2.0 %i - 2.0, 
+- 2.828 %i - 2.828, 0.0, 5.421L-20 %i + 4.0, - 2.0 %i - 2.0, 
+2.828 %i + 2.828]
+(%i5) L2 : fft (L1);
+(%o5) [4.066E-20 %i + 1.0, 1.0 %i + 1.0, 1.0 - 1.0 %i, 
+1.55L-19 %i - 1.0, - 4.066E-20 %i - 1.0, 1.0 - 1.0 %i, 
+1.0 %i + 1.0, 1.0 - 7.368L-20 %i]
+(%i6) lmax (abs (L2 - L));                    
+(%o6)                       6.841L-17
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;</div></dd></dl>
+
+<a name="fft"></a><a name="Item_003a-Numerical_002fdeffn_002ffft"></a><dl>
+<dt><a name="index-fft"></a>Function: <strong>fft</strong> <em>(<var>x</var>)</em></dt>
+<dd>
+<p>Computes the complex fast Fourier transform.
+<var>x</var> is a list or array (named or unnamed) which contains the data to
+transform.  The number of elements must be a power of 2.
+The elements must be literal numbers (integers, rationals, floats, or bigfloats)
+or symbolic constants,
+or expressions <code>a + b*%i</code> where <code>a</code> and <code>b</code> are literal numbers
+or symbolic constants.
+</p>
+<p><code>fft</code> returns a new object of the same type as <var>x</var>,
+which is not modified.
+Results are always computed as floats
+or expressions <code>a + b*%i</code> where <code>a</code> and <code>b</code> are floats.
+If bigfloat precision is needed the function <code><a href="#bf_005ffft">bf_fft</a></code> can be used
+instead as a drop-in replacement of <code>fft</code> that is slower, but
+supports bfloats. In addition if it is known that the input consists
+of only real values (no imaginary parts), <code><a href="#real_005ffft">real_fft</a></code> can be used
+which is potentially faster.
+</p>
+<p>The discrete Fourier transform is defined as follows.
+Let <code>y</code> be the output of the transform.
+Then for <code>k</code> from 0 through <code>n - 1</code>,
+</p>
+<div class="example">
+<pre class="example">y[k] = (1/n) sum(x[j] exp(+2 %i %pi j k / n), j, 0, n - 1)
+</pre></div>
+
+<p>As there are various sign and normalization conventions possible,
+this definition of the transform may differ from that used by other mathematical software.
+</p>
+<p>When the data <var>x</var> are real,
+real coefficients <code>a</code> and <code>b</code> can be computed such that
+</p>
+<div class="example">
+<pre class="example">x[j] = sum(a[k]*cos(2*%pi*j*k/n)+b[k]*sin(2*%pi*j*k/n), k, 0, n/2)
+</pre></div>
+
+<p>with
+</p>
+<div class="example">
+<pre class="example">a[0] = realpart (y[0])
+b[0] = 0
+</pre></div>
+
+<p>and, for k from 1 through n/2 - 1,
+</p>
+<div class="example">
+<pre class="example">a[k] = realpart (y[k] + y[n - k])
+b[k] = imagpart (y[n - k] - y[k])
+</pre></div>
+
+<p>and
+</p>
+<div class="example">
+<pre class="example">a[n/2] = realpart (y[n/2])
+b[n/2] = 0
+</pre></div>
+
+<p><code>load(&quot;fft&quot;)</code> loads this function.
+</p>
+<p>See also <code><a href="#inverse_005ffft">inverse_fft</a></code> (inverse transform),
+<code><a href="#recttopolar">recttopolar</a></code>, and <code><a href="#polartorect">polartorect</a></code>.. See <code><a href="#real_005ffft">real_fft</a></code>
+for FFTs of a real-valued input, and <code><a href="#bf_005ffft">bf_fft</a></code> and
+<code><a href="#bf_005freal_005ffft">bf_real_fft</a></code> for operations on bigfloat values.  Finally, for
+transforms of any size (but limited to float values), see
+<code><a href="maxima_115.html#fftpack5_005ffft">fftpack5_fft</a></code> and <code><a href="maxima_115.html#fftpack5_005freal_005ffft">fftpack5_real_fft</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Real data.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 2, 3, 4, -1, -2, -3, -4] $
+(%i4) L1 : fft (L);
+(%o4) [0.0, 1.811 %i - .1036, 0.0, 0.3107 %i + .6036, 0.0, 
+                         0.6036 - 0.3107 %i, 0.0, (- 1.811 %i) - 0.1036]
+(%i5) L2 : inverse_fft (L1);
+(%o5) [1.0, 2.168L-19 %i + 2.0, 7.525L-20 %i + 3.0, 
+4.256L-19 %i + 4.0, - 1.0, - 2.168L-19 %i - 2.0, 
+- 7.525L-20 %i - 3.0, - 4.256L-19 %i - 4.0]
+(%i6) lmax (abs (L2 - L));
+(%o6)                       3.545L-16
+</pre></div>
+
+<p>Complex data.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 1 + %i, 1 - %i, -1, -1, 1 - %i, 1 + %i, 1] $
+(%i4) L1 : fft (L);
+(%o4) [0.5, 0.5, 0.25 %i - 0.25, (- 0.3536 %i) - 0.3536, 0.0, 0.5, 
+                                        (- 0.25 %i) - 0.25, 0.3536 %i + 0.3536]
+(%i5) L2 : inverse_fft (L1);
+(%o5) [1.0, 1.0 %i + 1.0, 1.0 - 1.0 %i, - 1.0, - 1.0, 1.0 - 1.0 %i, 
+                                                             1.0 %i + 1.0, 1.0]
+(%i6) lmax (abs (L2 - L));
+(%o6)                       0.0
+</pre></div>
+
+<p>Computation of sine and cosine coefficients.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;fft&quot;) $
+(%i2) fpprintprec : 4 $
+(%i3) L : [1, 2, 3, 4, 5, 6, 7, 8] $
+(%i4) n : length (L) $
+(%i5) x : make_array (any, n) $
+(%i6) fillarray (x, L) $
+(%i7) y : fft (x) $
+(%i8) a : make_array (any, n/2 + 1) $
+(%i9) b : make_array (any, n/2 + 1) $
+(%i10) a[0] : realpart (y[0]) $
+(%i11) b[0] : 0 $
+(%i12) for k : 1 thru n/2 - 1 do
+   (a[k] : realpart (y[k] + y[n - k]),
+    b[k] : imagpart (y[n - k] - y[k]));
+(%o12)                        done
+(%i13) a[n/2] : y[n/2] $
+(%i14) b[n/2] : 0 $
+(%i15) listarray (a);
+(%o15)          [4.5, - 1.0, - 1.0, - 1.0, - 0.5]
+(%i16) listarray (b);
+(%o16)           [0, - 2.414, - 1.0, - .4142, 0]
+(%i17) f(j) := sum (a[k]*cos(2*%pi*j*k/n) + b[k]*sin(2*%pi*j*k/n), 
+                    k, 0, n/2) $
+(%i18) makelist (float (f (j)), j, 0, n - 1);
+(%o18)      [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;</div></dd></dl>
+
+<a name="real_005ffft"></a><a name="Item_003a-Numerical_002fdeffn_002freal_005ffft"></a><dl>
+<dt><a name="index-real_005ffft"></a>Function: <strong>real_fft</strong> <em>(<var>x</var>)</em></dt>
+<dd>
+<p>Computes the fast Fourier transform of a real-valued sequence
+<var>x</var>.  This is equivalent to performing <code>fft(x)</code>, except that
+only the first <code>N/2+1</code> results are returned, where <code>N</code> is
+the length of <var>x</var>.  <code>N</code> must be power of two.
+</p>
+<p>No check is made that <var>x</var> contains only real values.
+</p>
+<p>The symmetry properties of the Fourier transform of real sequences to
+reduce he complexity.  In particular the first and last output values
+of <code>real_fft</code> are purely real.  For larger sequences, <code>real_fft</code>
+may be computed more quickly than <code>fft</code>.
+</p>
+<p>Since the output length is short, the normal <code><a href="#inverse_005ffft">inverse_fft</a></code> cannot
+be directly used.  Use <code><a href="#inverse_005freal_005ffft">inverse_real_fft</a></code> to compute the inverse.
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;</div></p></dd></dl>
+
+<a name="inverse_005freal_005ffft"></a><a name="Item_003a-Numerical_002fdeffn_002finverse_005freal_005ffft"></a><dl>
+<dt><a name="index-inverse_005freal_005ffft"></a>Function: <strong>inverse_real_fft</strong> <em>(<var>y</var>)</em></dt>
+<dd><p>Computes the inverse Fourier transform of <var>y</var>, which must have a
+length of <code>N/2+1</code> where <code>N</code> is a power of two.  That is, the
+input <var>x</var> is expected to be the output of <code>real_fft</code>.
+</p>
+<p>No check is made to ensure that the input has the correct format.
+(The first and last elements must be purely real.)
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;</div></dd></dl>
+
+<a name="bf_005finverse_005ffft"></a><a name="Item_003a-Numerical_002fdeffn_002fbf_005finverse_005ffft"></a><dl>
+<dt><a name="index-bf_005finverse_005ffft"></a>Function: <strong>bf_inverse_fft</strong> <em>(<var>y</var>)</em></dt>
+<dd>
+<p>Computes the inverse complex fast Fourier transform.  This is the
+bigfloat version of <code><a href="#inverse_005ffft">inverse_fft</a></code> that converts the input to
+bigfloats and returns a bigfloat result.
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;</div></p></dd></dl>
+
+<a name="bf_005ffft"></a><a name="Item_003a-Numerical_002fdeffn_002fbf_005ffft"></a><dl>
+<dt><a name="index-bf_005ffft"></a>Function: <strong>bf_fft</strong> <em>(<var>y</var>)</em></dt>
+<dd>
+<p>Computes the forward complex fast Fourier transform.  This is the
+bigfloat version of <code><a href="#fft">fft</a></code> that converts the input to
+bigfloats and returns a bigfloat result.
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;</div></p></dd></dl>
+
+<a name="bf_005freal_005ffft"></a><a name="Item_003a-Numerical_002fdeffn_002fbf_005freal_005ffft"></a><dl>
+<dt><a name="index-bf_005freal_005ffft"></a>Function: <strong>bf_real_fft</strong> <em>(<var>x</var>)</em></dt>
+<dd>
+<p>Computes the forward fast Fourier transform of a real-valued input
+returning a bigfloat result.  This is the bigfloat version of
+<code>real_fft</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;</div></dd></dl>
+
+<a name="bf_005finverse_005freal_005ffft"></a><a name="Item_003a-Numerical_002fdeffn_002fbf_005finverse_005freal_005ffft"></a><dl>
+<dt><a name="index-bf_005finverse_005freal_005ffft"></a>Function: <strong>bf_inverse_real_fft</strong> <em>(<var>y</var>)</em></dt>
+<dd><p>Computes the inverse fast Fourier transform with a real-valued
+bigfloat output.  This is the bigfloat version of <code>inverse_real_fft</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-fft">Package fft</a>
+&middot;</div></dd></dl>
+
+<a name="Item_003a-Numerical_002fnode_002fFunctions-and-Variables-for-FFTPACK5"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_115.html#Functions-and-Variables-for-FFTPACK5" accesskey="n" rel="next">Functions and Variables for FFTPACK5</a>, Previous: <a href="maxima_113.html#Introduction-to-fast-Fourier-transform" accesskey="p" rel="previous">Introduction to fast Fourier transform</a>, Up: <a href="maxima_112.html#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

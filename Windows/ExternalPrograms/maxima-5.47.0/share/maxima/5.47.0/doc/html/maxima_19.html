@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Equations (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Equations (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Equations (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_20.html#Differential-Equations" rel="next" title="Differential Equations">
+<link href="maxima_18.html#Integration" rel="prev" title="Integration">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Equations">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_20.html#Differential-Equations" accesskey="n" rel="next">Differential Equations</a>, Previous: <a href="maxima_18.html#Integration" accesskey="p" rel="prev">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Equations-1">20 Equations</h2>
+
+<a class="anchor" id="Item_003a-Equations_002fnode_002fFunctions-and-Variables-for-Equations"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-Equations" accesskey="1">Functions and Variables for Equations</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-Equations">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Equations" accesskey="p" rel="prev">Equations</a>, Up: <a href="#Equations" accesskey="u" rel="up">Equations</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Equations-1">20.1 Functions and Variables for Equations</h3>
+
+<a class="anchor" id="g_t_0025rnum"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002f_0025rnum"></a><dl class="first-defvr">
+<dt class="defvr" id="index-_0025rnum"><span class="category-def">System variable: </span><span><strong class="def-name">%rnum</strong><a class="copiable-link" href='#index-_0025rnum'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">0</code>
+</p>
+<p><code class="code">%rnum</code> is the counter for the <code class="code">%r</code> variables introduced in solutions by
+<code class="code"><a class="ref" href="#solve">solve</a></code> and <code class="code"><a class="ref" href="#algsys">algsys</a></code>..  The next <code class="code">%r</code> variable is numbered
+<code class="code">%rnum+1</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#g_t_0025rnum_005flist">%rnum_list</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_0025rnum_005flist"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002f_0025rnum_005flist"></a><dl class="first-defvr">
+<dt class="defvr" id="index-_0025rnum_005flist"><span class="category-def">System variable: </span><span><strong class="def-name">%rnum_list</strong><a class="copiable-link" href='#index-_0025rnum_005flist'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[]</code>
+</p>
+<p><code class="code">%rnum_list</code> is the list of variables introduced in solutions by
+<code class="code"><a class="ref" href="#solve">solve</a></code> and <code class="code"><a class="ref" href="#algsys">algsys</a></code>.  <code class="code">%r</code> variables are added to
+<code class="code">%rnum_list</code> in the order they are created.  This is convenient for doing
+substitutions into the solution later on.
+</p>
+<p>See also <code class="code"><a class="ref" href="#g_t_0025rnum">%rnum</a></code>.
+</p>
+<p>It&rsquo;s recommended to use this list rather than doing <code class="code">concat ('%r, j)</code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) solve ([x + y = 3], [x,y]);
+(%o1)              [[x = 3 - %r1, y = %r1]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) %rnum_list;
+(%o2)                       [%r1]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) sol : solve ([x + 2*y + 3*z = 4], [x,y,z]);
+(%o3)   [[x = - 2 %r3 - 3 %r2 + 4, y = %r3, z = %r2]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) %rnum_list;
+(%o4)                     [%r2, %r3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) for i : 1 thru length (%rnum_list) do
+        sol : subst (t[i], %rnum_list[i], sol)$
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) sol;
+(%o6)     [[x = - 2 t  - 3 t  + 4, y = t , z = t ]]
+                     2      1           2       1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="algepsilon"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002falgepsilon"></a><dl class="first-defvr">
+<dt class="defvr" id="index-algepsilon"><span class="category-def">Option variable: </span><span><strong class="def-name">algepsilon</strong><a class="copiable-link" href='#index-algepsilon'> &para;</a></span></dt>
+<dd><p>Default value: 10^8
+</p>
+<p><code class="code">algepsilon</code> is used by <code class="code"><a class="ref" href="#algsys">algsys</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="algexact"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002falgexact"></a><dl class="first-defvr">
+<dt class="defvr" id="index-algexact"><span class="category-def">Option variable: </span><span><strong class="def-name">algexact</strong><a class="copiable-link" href='#index-algexact'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p><code class="code">algexact</code> affects the behavior of <code class="code"><a class="ref" href="#algsys">algsys</a></code> as follows:
+</p>
+<p>If <code class="code">algexact</code> is <code class="code">true</code>, <code class="code">algsys</code> always calls <code class="code"><a class="ref" href="#solve">solve</a></code> and
+then uses <code class="code"><a class="ref" href="#realroots">realroots</a></code> on <code class="code">solve</code>&rsquo;s failures.
+</p>
+<p>If <code class="code">algexact</code> is <code class="code">false</code>, <code class="code">solve</code> is called only if the
+eliminant was not univariate, or if it was a quadratic or biquadratic.
+</p>
+<p>Thus <code class="code">algexact: true</code> does not guarantee only exact solutions, just that
+<code class="code">algsys</code> will first try as hard as it can to give exact solutions, and
+only yield approximations when all else fails.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="algsys"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002falgsys"></a><dl class="first-deffn">
+<dt class="deffn" id="index-algsys"><span class="category-def">Function: </span><span><strong class="def-name">algsys</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">algsys</code> ([<var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var>], [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">algsys</code> ([<var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_m</var>], [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-algsys'> &para;</a></span></dt>
+<dd>
+<p>Solves the simultaneous polynomials <var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var> or
+polynomial equations <var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_m</var> for the variables
+<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>.  An expression <var class="var">expr</var> is equivalent to an
+equation <code class="code"><var class="var">expr</var> = 0</code>.  There may be more equations than variables or
+vice versa.
+</p>
+<p><code class="code">algsys</code> returns a list of solutions, with each solution given as a list
+of equations stating values of the variables <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>
+which satisfy the system of equations.  If <code class="code">algsys</code> cannot find a solution,
+an empty list <code class="code">[]</code> is returned.
+</p>
+<p>The symbols <code class="code">%r1</code>, <code class="code">%r2</code>, &hellip;, are introduced as needed to
+represent arbitrary parameters in the solution; these variables are also
+appended to the list <code class="code"><a class="ref" href="#g_t_0025rnum_005flist">%rnum_list</a></code>.
+</p>
+<p>The method is as follows:
+</p>
+<ol class="enumerate">
+<li> First the equations are factored and split into subsystems.
+
+</li><li> For each subsystem <var class="var">S_i</var>, an equation <var class="var">E</var> and a variable <var class="var">x</var> are
+selected.  The variable is chosen to have lowest nonzero degree.  Then the
+resultant of <var class="var">E</var> and <var class="var">E_j</var> with respect to <var class="var">x</var> is computed for each
+of the remaining equations <var class="var">E_j</var> in the subsystem <var class="var">S_i</var>.  This yields a
+new subsystem <var class="var">S_i&rsquo;</var> in one fewer variables, as <var class="var">x</var> has been eliminated.
+The process now returns to (1).
+
+</li><li> Eventually, a subsystem consisting of a single equation is obtained.  If the
+equation is multivariate and no approximations in the form of floating point
+numbers have been introduced, then <code class="code"><a class="ref" href="#solve">solve</a></code> is called to find an exact
+solution.
+
+<p>In some cases, <code class="code">solve</code> is not be able to find a solution, or if it does
+the solution may be a very large expression.
+</p>
+<p>If the equation is univariate and is either linear, quadratic, or biquadratic,
+then again <code class="code">solve</code> is called if no approximations have been introduced.
+If approximations have been introduced or the equation is not univariate and
+neither linear, quadratic, or biquadratic, then if the switch
+<code class="code"><a class="ref" href="#realonly">realonly</a></code> is <code class="code">true</code>, the function <code class="code"><a class="ref" href="#realroots">realroots</a></code> is called to find
+the real-valued solutions.  If <code class="code">realonly</code> is <code class="code">false</code>, then
+<code class="code"><a class="ref" href="#allroots">allroots</a></code> is called which looks for real and complex-valued solutions.
+</p>
+<p>If <code class="code">algsys</code> produces a solution which has fewer significant digits than
+required, the user can change the value of <code class="code"><a class="ref" href="#algepsilon">algepsilon</a></code> to a higher value.
+</p>
+<p>If <code class="code">algexact</code> is set to <code class="code">true</code>, <code class="code">solve</code> will always be called.
+</p>
+</li><li> Finally, the solutions obtained in step (3) are substituted into
+previous levels and the solution process returns to (1).
+</li></ol>
+
+<p>When <code class="code">algsys</code> encounters a multivariate equation which contains floating
+point approximations (usually due to its failing to find exact solutions at an
+earlier stage), then it does not attempt to apply exact methods to such
+equations and instead prints the message:
+&quot;<code class="code">algsys</code> cannot solve - system too complicated.&quot;
+</p>
+<p>Interactions with <code class="code"><a class="ref" href="maxima_8.html#radcan">radcan</a></code> can produce large or complicated expressions.
+In that case, it may be possible to isolate parts of the result with
+<code class="code"><a class="ref" href="maxima_5.html#pickapart">pickapart</a></code> or <code class="code"><a class="ref" href="maxima_5.html#reveal">reveal</a></code>.
+</p>
+<p>Occasionally, <code class="code">radcan</code> may introduce an imaginary unit <code class="code">%i</code> into a
+solution which is actually real-valued.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) e1: 2*x*(1 - a1) - 2*(x - 1)*a2;
+(%o1)              2 (1 - a1) x - 2 a2 (x - 1)
+(%i2) e2: a2 - a1; 
+(%o2)                        a2 - a1
+(%i3) e3: a1*(-y - x^2 + 1); 
+                                   2
+(%o3)                   a1 (- y - x  + 1)
+(%i4) e4: a2*(y - (x - 1)^2);
+                                       2
+(%o4)                   a2 (y - (x - 1) )
+(%i5) algsys ([e1, e2, e3, e4], [x, y, a1, a2]);
+(%o5) [[x = 0, y = %r1, a1 = 0, a2 = 0], 
+
+                                  [x = 1, y = 0, a1 = 1, a2 = 1]]
+(%i6) e1: x^2 - y^2;
+                              2    2
+(%o6)                        x  - y
+(%i7) e2: -1 - y + 2*y^2 - x + x^2;
+                         2        2
+(%o7)                 2 y  - y + x  - x - 1
+(%i8) algsys ([e1, e2], [x, y]);
+                 1            1
+(%o8) [[x = - -------, y = -------], 
+              sqrt(3)      sqrt(3)
+
+        1              1             1        1
+[x = -------, y = - -------], [x = - -, y = - -], [x = 1, y = 1]]
+     sqrt(3)        sqrt(3)          3        3
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="allroots"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002fallroots"></a><dl class="first-deffn">
+<dt class="deffn" id="index-allroots"><span class="category-def">Function: </span><span><strong class="def-name">allroots</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">allroots</code> (<var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">allroots</code> (<var class="var">eqn</var>)</var><a class="copiable-link" href='#index-allroots'> &para;</a></span></dt>
+<dd>
+<p>Computes numerical approximations of the real and complex roots of the
+polynomial <var class="var">expr</var> or polynomial equation <var class="var">eqn</var> of one variable.
+</p>
+<p>The flag <code class="code"><a class="ref" href="#polyfactor">polyfactor</a></code> when <code class="code">true</code> causes <code class="code">allroots</code> to factor
+the polynomial over the real numbers if the polynomial is real, or over the
+complex numbers, if the polynomial is complex.
+</p>
+<p><code class="code">allroots</code> may give inaccurate results in case of multiple roots.
+If the polynomial is real, <code class="code">allroots (%i*<var class="var">p</var>)</code> may yield
+more accurate approximations than <code class="code">allroots (<var class="var">p</var>)</code>, as <code class="code">allroots</code>
+invokes a different algorithm in that case.
+</p>
+<p><code class="code">allroots</code> rejects non-polynomials.  It requires that the numerator
+after <code class="code">rat</code>&rsquo;ing should be a polynomial, and it requires that the
+denominator be at most a complex number.  As a result of this <code class="code">allroots</code>
+will always return an equivalent (but factored) expression, if
+<code class="code">polyfactor</code> is <code class="code">true</code>.
+</p>
+<p>For complex polynomials an algorithm by Jenkins and Traub is used
+(Algorithm 419, <i class="i">Comm. ACM</i>, vol. 15, (1972), p. 97).  For real polynomials
+the algorithm used is due to Jenkins (Algorithm 493, <i class="i">ACM TOMS</i>, vol. 1,
+(1975), p.178).
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) eqn: (1 + 2*x)^3 = 13.5*(1 + x^5);
+                            3          5
+(%o1)              (2 x + 1)  = 13.5 (x  + 1)
+(%i2) soln: allroots (eqn);
+(%o2) [x = .8296749902129361, x = - 1.015755543828121, 
+
+x = .9659625152196369 %i - .4069597231924075, 
+
+x = - .9659625152196369 %i - .4069597231924075, x = 1.0]
+(%i3) for e in soln
+        do (e2: subst (e, eqn), disp (expand (lhs(e2) - rhs(e2))));
+                      - 3.5527136788005E-15
+
+                     - 5.32907051820075E-15
+
+         4.44089209850063E-15 %i - 4.88498130835069E-15
+
+        - 4.44089209850063E-15 %i - 4.88498130835069E-15
+
+                       3.5527136788005E-15
+
+(%o3)                         done
+(%i4) polyfactor: true$
+(%i5) allroots (eqn);
+(%o5) - 13.5 (x - 1.0) (x - .8296749902129361)
+
+                           2
+ (x + 1.015755543828121) (x  + .8139194463848151 x
+
+ + 1.098699797110288)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bfallroots"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002fbfallroots"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bfallroots"><span class="category-def">Function: </span><span><strong class="def-name">bfallroots</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">bfallroots</code> (<var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">bfallroots</code> (<var class="var">eqn</var>)</var><a class="copiable-link" href='#index-bfallroots'> &para;</a></span></dt>
+<dd>
+<p>Computes numerical approximations of the real and complex roots of the
+polynomial <var class="var">expr</var> or polynomial equation <var class="var">eqn</var> of one variable.
+</p>
+<p>In all respects, <code class="code">bfallroots</code> is identical to <code class="code">allroots</code> except
+that <code class="code">bfallroots</code> computes the roots using bigfloats.  See 
+<code class="code"><a class="ref" href="#allroots">allroots</a></code> for more information.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="backsubst"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fbacksubst"></a><dl class="first-defvr">
+<dt class="defvr" id="index-backsubst"><span class="category-def">Option variable: </span><span><strong class="def-name">backsubst</strong><a class="copiable-link" href='#index-backsubst'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">backsubst</code> is <code class="code">false</code>, prevents back substitution in
+<code class="code"><a class="ref" href="#linsolve">linsolve</a></code> after the equations have been triangularized.  This may
+be helpful in very big problems where back substitution would cause
+the generation of extremely large expressions.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) eq1 : x + y + z = 6$
+(%i2) eq2 : x - y + z = 2$
+(%i3) eq3 : x + y - z = 0$
+(%i4) backsubst : false$
+</pre><div class="group"><pre class="example-preformatted">(%i5) linsolve ([eq1, eq2, eq3], [x,y,z]);
+(%o5)             [x = z - y, y = 2, z = 3]
+</pre></div><pre class="example-preformatted">(%i6) backsubst : true$
+</pre><div class="group"><pre class="example-preformatted">(%i7) linsolve ([eq1, eq2, eq3], [x,y,z]);
+(%o7)               [x = 1, y = 2, z = 3]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="breakup"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fbreakup"></a><dl class="first-defvr">
+<dt class="defvr" id="index-breakup"><span class="category-def">Option variable: </span><span><strong class="def-name">breakup</strong><a class="copiable-link" href='#index-breakup'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">breakup</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#solve">solve</a></code> expresses solutions of cubic
+and quartic equations in terms of common subexpressions, which are assigned to
+intermediate expression labels (<code class="code">%t1</code>, <code class="code">%t2</code>, etc.).
+Otherwise, common subexpressions are not identified.
+</p>
+<p><code class="code">breakup: true</code> has an effect only when <code class="code"><a class="ref" href="#programmode">programmode</a></code> is <code class="code">false</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) programmode: false$
+(%i2) breakup: true$
+(%i3) solve (x^3 + x^2 - 1);
+
+                        sqrt(23)    25 1/3
+(%t3)                  (--------- + --)
+                        6 sqrt(3)   54
+Solution:
+
+                                      sqrt(3) %i   1
+                                      ---------- - -
+                sqrt(3) %i   1            2        2   1
+(%t4)    x = (- ---------- - -) %t3 + -------------- - -
+                    2        2            9 %t3        3
+
+                                      sqrt(3) %i   1
+                                    - ---------- - -
+              sqrt(3) %i   1              2        2   1
+(%t5)    x = (---------- - -) %t3 + ---------------- - -
+                  2        2             9 %t3         3
+
+                                   1     1
+(%t6)                  x = %t3 + ----- - -
+                                 9 %t3   3
+(%o6)                    [%t4, %t5, %t6]
+(%i6) breakup: false$
+(%i7) solve (x^3 + x^2 - 1);
+Solution:
+
+             sqrt(3) %i   1
+             ---------- - -
+                 2        2        sqrt(23)    25 1/3
+(%t7) x = --------------------- + (--------- + --)
+             sqrt(23)    25 1/3    6 sqrt(3)   54
+          9 (--------- + --)
+             6 sqrt(3)   54
+
+                                              sqrt(3) %i   1    1
+                                           (- ---------- - -) - -
+                                                  2        2    3
+</pre><div class="group"><pre class="example-preformatted">           sqrt(23)    25 1/3  sqrt(3) %i   1
+(%t8) x = (--------- + --)    (---------- - -)
+           6 sqrt(3)   54          2        2
+
+                                            sqrt(3) %i   1
+                                          - ---------- - -
+                                                2        2      1
+                                      + --------------------- - -
+                                           sqrt(23)    25 1/3   3
+                                        9 (--------- + --)
+                                           6 sqrt(3)   54
+</pre></div><pre class="example-preformatted">            sqrt(23)    25 1/3             1             1
+(%t9)  x = (--------- + --)    + --------------------- - -
+            6 sqrt(3)   54          sqrt(23)    25 1/3   3
+                                 9 (--------- + --)
+                                    6 sqrt(3)   54
+(%o9)                    [%t7, %t8, %t9]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dimension"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002fdimension"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dimension"><span class="category-def">Function: </span><span><strong class="def-name">dimension</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">dimension</code> (<var class="var">eqn</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">dimension</code> (<var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_n</var>)</var><a class="copiable-link" href='#index-dimension'> &para;</a></span></dt>
+<dd>
+<p><code class="code">dimen</code> is a package for dimensional analysis.
+<code class="code">load (&quot;dimen&quot;)</code> loads this package.
+<code class="code">demo (&quot;dimen&quot;)</code> displays a short demonstration.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dispflag"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fdispflag"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dispflag"><span class="category-def">Option variable: </span><span><strong class="def-name">dispflag</strong><a class="copiable-link" href='#index-dispflag'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>If set to <code class="code">false</code> within a <code class="code">block</code> will inhibit the display of output
+generated by the solve functions called from within the <code class="code">block</code>.
+Termination of the <code class="code">block</code> with a dollar sign, <code class="code">$</code>, sets <code class="code">dispflag</code> to
+<code class="code">false</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="funcsolve"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002ffuncsolve"></a><dl class="first-deffn">
+<dt class="deffn" id="index-funcsolve"><span class="category-def">Function: </span><span><strong class="def-name">funcsolve</strong> <var class="def-var-arguments">(<var class="var">eqn</var>, <var class="var">g</var>(<var class="var">t</var>))</var><a class="copiable-link" href='#index-funcsolve'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">[<var class="var">g</var>(<var class="var">t</var>) = ...]</code>  or <code class="code">[]</code>, depending on whether
+or not there exists a rational function <code class="code"><var class="var">g</var>(<var class="var">t</var>)</code> satisfying
+<var class="var">eqn</var>, which must be a first order, linear polynomial in (for this case)
+<code class="code"><var class="var">g</var>(<var class="var">t</var>)</code> and <code class="code"><var class="var">g</var>(<var class="var">t</var>+1)</code>
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) eqn: (n + 1)*f(n) - (n + 3)*f(n + 1)/(n + 1) =
+      (n - 1)/(n + 2);
+                            (n + 3) f(n + 1)   n - 1
+(%o1)        (n + 1) f(n) - ---------------- = -----
+                                 n + 1         n + 2
+(%i2) funcsolve (eqn, f(n));
+
+Dependent equations eliminated:  (4 3)
+                                   n
+(%o2)                f(n) = ---------------
+                            (n + 1) (n + 2)
+</pre></div>
+
+<p>Warning: this is a very rudimentary implementation &ndash; many safety checks
+and obvious generalizations are missing.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="globalsolve"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fglobalsolve"></a><dl class="first-defvr">
+<dt class="defvr" id="index-globalsolve"><span class="category-def">Option variable: </span><span><strong class="def-name">globalsolve</strong><a class="copiable-link" href='#index-globalsolve'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">globalsolve</code> is <code class="code">true</code>, solved-for variables are assigned the
+solution values found by <code class="code">linsolve</code>, and by <code class="code"><a class="ref" href="#solve">solve</a></code> when solving two
+or more linear equations.
+</p>
+<p>When <code class="code">globalsolve</code> is <code class="code">false</code>, solutions found by <code class="code"><a class="ref" href="#linsolve">linsolve</a></code> and
+by <code class="code">solve</code> when solving two or more linear equations are expressed as
+equations, and the solved-for variables are not assigned.
+</p>
+<p>When solving anything other than two or more linear equations, <code class="code">solve</code>
+ignores <code class="code">globalsolve</code>.  Other functions which solve equations (e.g.,
+<code class="code"><a class="ref" href="#algsys">algsys</a></code>) always ignore <code class="code">globalsolve</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) globalsolve: true$
+(%i2) solve ([x + 3*y = 2, 2*x - y = 5], [x, y]);
+Solution
+
+                                 17
+(%t2)                        x : --
+                                 7
+
+                                   1
+(%t3)                        y : - -
+                                   7
+(%o3)                     [[%t2, %t3]]
+(%i3) x;
+                               17
+(%o3)                          --
+                               7
+(%i4) y;
+                                 1
+(%o4)                          - -
+                                 7
+(%i5) globalsolve: false$
+(%i6) kill (x, y)$
+(%i7) solve ([x + 3*y = 2, 2*x - y = 5], [x, y]);
+Solution
+
+                                 17
+(%t7)                        x = --
+                                 7
+
+                                   1
+(%t8)                        y = - -
+                                   7
+(%o8)                     [[%t7, %t8]]
+(%i8) x;
+(%o8)                           x
+(%i9) y;
+(%o9)                           y
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Linear-equations">Linear equations</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="ieqn"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002fieqn"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ieqn"><span class="category-def">Function: </span><span><strong class="def-name">ieqn</strong> <var class="def-var-arguments">(<var class="var">ie</var>, <var class="var">unk</var>, <var class="var">tech</var>, <var class="var">n</var>, <var class="var">guess</var>)</var><a class="copiable-link" href='#index-ieqn'> &para;</a></span></dt>
+<dd>
+<p><code class="code">inteqn</code> is a package for solving integral equations.
+<code class="code">load (&quot;inteqn&quot;)</code> loads this package.
+</p>
+<p><var class="var">ie</var> is the integral equation; <var class="var">unk</var> is the unknown function;
+<var class="var">tech</var> is the technique to be tried from those given in the lists
+below; (<var class="var">tech</var> = <code class="code">first</code> means: try the first technique which
+finds a solution; <var class="var">tech</var> = <code class="code">all</code> means: try all applicable
+techniques); <var class="var">n</var> is the maximum number of terms to take for
+<code class="code">taylor</code>, <code class="code">neumann</code>, <code class="code">firstkindseries</code>, or
+<code class="code">fredseries</code> (it is also the maximum depth of recursion for the
+differentiation method); <var class="var">guess</var> is the initial guess for
+<code class="code">neumann</code> or <code class="code">firstkindseries</code>.
+</p>
+<p>Two types of equations are considered. A second-kind equation of the
+following form,
+</p><div class="example">
+<pre class="example-preformatted">                           b(x)
+                          /
+                          [
+        p(x) = q(x, p(x), I     w(x, u, p(x), p(u)) du)
+                          ]
+                          /
+                           a(x)
+</pre></div>
+
+<p>and a first-kind equation with the form
+</p><div class="example">
+<pre class="example-preformatted">                         b(x)
+                        /
+                        [
+                 f(x) = I     w(x, u, p(u)) du
+                        ]
+                        /
+                         a(x)
+</pre></div>
+
+<p>The different solution techniques used require particular forms of the
+expressions <var class="var">q</var> and <var class="var">w</var>. The techniques available are the following:
+</p>
+<p><b class="b">Second-kind equations</b>
+</p><ul class="itemize mark-bullet">
+<li><code class="code">flfrnk2nd</code>: For fixed-limit, finite-rank integrands.
+</li><li><code class="code">vlfrnk</code>: For variable-limit, finite-rank integrands.
+</li><li><code class="code">transform</code>: Laplace transform for convolution types.
+</li><li><code class="code">fredseries</code>: Fredholm-Carleman series for linear equations.
+</li><li><code class="code">tailor</code>: Taylor series for quasi-linear variable-limit equations.
+</li><li><code class="code">neumann</code>: Neumann series for quasi-second kind equations.
+</li><li><code class="code">collocate</code>: Collocation using a power series form for p(x)
+evaluated at equally spaced points.
+</li></ul>
+
+<p><b class="b">First-kind equations</b>
+</p><ul class="itemize mark-bullet">
+<li><code class="code">flfrnk1st</code>: For fixed-limit, finite-rank integrands.
+</li><li><code class="code">vlfrnk</code>: For variable-limit, finite-rank integrands.
+</li><li><code class="code">abel</code>: For singular integrands
+</li><li><code class="code">transform</code>: See above
+</li><li><code class="code">collocate</code>: See above
+</li><li><code class="code">firstkindseries</code>: Iteration technique similar to neumann series.
+</li></ul>
+
+<p>The default values for the 2nd thru 5th parameters in the calling form
+are:
+</p>
+<p><var class="var">unk</var>: <code class="code"><var class="var">p</var>(<var class="var">x</var>)</code>, where <var class="var">p</var> is the first function
+encountered in an integrand which is unknown to Maxima and <var class="var">x</var> is the
+variable which occurs as an argument to the first occurrence of <var class="var">p</var> found
+outside of an integral in the case of <code class="code">secondkind</code> equations, or is the
+only other variable besides the variable of integration in <code class="code">firstkind</code>
+equations. If the attempt to search for <var class="var">x</var> fails, the user will be asked
+to supply the independent variable. <var class="var">tech</var>: <code class="code">first</code>. <var class="var">n</var>: 1.
+<var class="var">guess</var>: <code class="code">none</code> which will cause <code class="code">neumann</code> and
+<code class="code">firstkindseries</code> to use <code class="code"><var class="var">f</var>(<var class="var">x</var>)</code> as an initial guess.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;inteqn&quot;)$
+
+(%i2) e: p(x) - 1 -x + cos(x) + 'integrate(cos(x-u)*p(u),u,0,x)$
+
+(%i3) ieqn(e, p(x), 'transform);
+default 4th arg, number of iterations or coll. parms.:  1 
+default 5th arg, initial guess:  none 
+
+(%t3)                           [x, transform]
+(%o3)                               [%t3]
+(%i4) e: 2*'integrate(p(x*sin(u)), u, 0, %pi/2) - a*x - b$
+
+(%i5) ieqn(e, p(x), 'firstkindseries);
+default 4th arg, number of iterations or coll. parms.:  1 
+default 5th arg, initial guess:  none 
+
+(%t5)          [2 a x + %pi b, firstkindseries, 1, approximate]
+(%o5)                               [%t5]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-equations">Integral equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ieqnprint"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fieqnprint"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ieqnprint"><span class="category-def">Option variable: </span><span><strong class="def-name">ieqnprint</strong><a class="copiable-link" href='#index-ieqnprint'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">ieqnprint</code> governs the behavior of the result returned by the
+<code class="code"><a class="ref" href="#ieqn">ieqn</a></code> command.  When <code class="code">ieqnprint</code> is <code class="code">false</code>, the lists returned
+by the <code class="code">ieqn</code> function are of the form
+</p>
+<p>[<var class="var">solution</var>, <var class="var">technique used</var>, <var class="var">nterms</var>, <var class="var">flag</var>]
+</p>
+<p>where <var class="var">flag</var> is absent if the solution is exact.
+</p>
+<p>Otherwise, it is the word <code class="code">approximate</code> or <code class="code">incomplete</code> corresponding
+to an inexact or non-closed form solution, respectively.  If a series method was
+used, <var class="var">nterms</var> gives the number of terms taken (which could be less than
+the n given to <code class="code">ieqn</code> if an error prevented generation of further terms).
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-equations">Integral equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="lhs"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002flhs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lhs"><span class="category-def">Function: </span><span><strong class="def-name">lhs</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-lhs'> &para;</a></span></dt>
+<dd>
+<p>Returns the left-hand side (that is, the first argument) of the expression
+<var class="var">expr</var>, when the operator of <var class="var">expr</var> is one of the relational operators
+<code class="code">&lt; &lt;= = # equal notequal &gt;= &gt;</code>,
+one of the assignment operators <code class="code">:= ::= : ::</code>, or a user-defined binary
+infix operator, as declared by <code class="code"><a class="ref" href="maxima_6.html#infix">infix</a></code>.
+</p>
+<p>When <var class="var">expr</var> is an atom or its operator is something other than the ones
+listed above, <code class="code">lhs</code> returns <var class="var">expr</var>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#rhs">rhs</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) e: aa + bb = cc;
+(%o1)                     bb + aa = cc
+(%i2) lhs (e);
+(%o2)                        bb + aa
+(%i3) rhs (e);
+(%o3)                          cc
+(%i4) [lhs (aa &lt; bb), lhs (aa &lt;= bb), lhs (aa &gt;= bb),
+       lhs (aa &gt; bb)];
+(%o4)                   [aa, aa, aa, aa]
+(%i5) [lhs (aa = bb), lhs (aa # bb), lhs (equal (aa, bb)),
+       lhs (notequal (aa, bb))];
+(%o5)                   [aa, aa, aa, aa]
+(%i6) e1: '(foo(x) := 2*x);
+(%o6)                     foo(x) := 2 x
+(%i7) e2: '(bar(y) ::= 3*y);
+(%o7)                    bar(y) ::= 3 y
+(%i8) e3: '(x : y);
+(%o8)                         x : y
+(%i9) e4: '(x :: y);
+(%o9)                        x :: y
+(%i10) [lhs (e1), lhs (e2), lhs (e3), lhs (e4)];
+(%o10)               [foo(x), bar(y), x, x]
+(%i11) infix (&quot;][&quot;);
+(%o11)                         ][
+(%i12) lhs (aa ][ bb);
+(%o12)                         aa
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="linsolve"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002flinsolve"></a><dl class="first-deffn">
+<dt class="deffn" id="index-linsolve"><span class="category-def">Function: </span><span><strong class="def-name">linsolve</strong> <var class="def-var-arguments">([<var class="var">expr_1</var>, &hellip;, <var class="var">expr_m</var>], [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-linsolve'> &para;</a></span></dt>
+<dd>
+<p>Solves the list of simultaneous linear equations for the list of variables.
+The expressions must each be polynomials in the variables and may be equations.
+If the length of the list of variables doesn&rsquo;t match the number of
+linearly-independent equations to solve the result will be an empty list.
+</p>
+<p>When <code class="code"><a class="ref" href="#globalsolve">globalsolve</a></code> is <code class="code">true</code>, each solved-for variable is bound to
+its value in the solution of the equations.
+</p>
+<p>When <code class="code"><a class="ref" href="#backsubst">backsubst</a></code> is <code class="code">false</code>, <code class="code">linsolve</code> does not carry out back
+substitution after the equations have been triangularized.  This may be
+necessary in very big problems where back substitution would cause the
+generation of extremely large expressions.
+</p>
+<p>When <code class="code"><a class="ref" href="#linsolve_005fparams">linsolve_params</a></code> is <code class="code">true</code>, <code class="code">linsolve</code> also generates the
+<code class="code">%r</code> symbols used to represent arbitrary parameters described in the manual
+under <code class="code"><a class="ref" href="#algsys">algsys</a></code>.  Otherwise, <code class="code">linsolve</code> solves an under-determined
+system of equations with some variables expressed in terms of others.
+</p>
+<p>When <code class="code"><a class="ref" href="#programmode">programmode</a></code> is <code class="code">false</code>, <code class="code">linsolve</code> displays the solution
+with intermediate expression (<code class="code">%t</code>) labels, and returns the list of labels.
+</p>
+<p>See also <code class="code"><a class="ref" href="#algsys">algsys</a></code>, <code class="code"><a class="ref" href="maxima_13.html#eliminate">eliminate</a></code>. and <code class="code"><a class="ref" href="#solve">solve</a></code>.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) e1: x + z = y;
+(%o1)                       z + x = y
+(%i2) e2: 2*a*x - y = 2*a^2;
+                                       2
+(%o2)                   2 a x - y = 2 a
+(%i3) e3: y - 2*z = 2;
+(%o3)                      y - 2 z = 2
+(%i4) [globalsolve: false, programmode: true];
+(%o4)                     [false, true]
+(%i5) linsolve ([e1, e2, e3], [x, y, z]);
+(%o5)            [x = a + 1, y = 2 a, z = a - 1]
+(%i6) [globalsolve: false, programmode: false];
+(%o6)                    [false, false]
+(%i7) linsolve ([e1, e2, e3], [x, y, z]);
+Solution
+
+(%t7)                       z = a - 1
+
+(%t8)                        y = 2 a
+
+(%t9)                       x = a + 1
+(%o9)                    [%t7, %t8, %t9]
+(%i9) ''%;
+(%o9)            [z = a - 1, y = 2 a, x = a + 1]
+(%i10) [globalsolve: true, programmode: false];
+(%o10)                    [true, false]
+(%i11) linsolve ([e1, e2, e3], [x, y, z]);
+Solution
+
+(%t11)                      z : a - 1
+
+(%t12)                       y : 2 a
+
+(%t13)                      x : a + 1
+(%o13)                 [%t11, %t12, %t13]
+(%i13) ''%;
+(%o13)           [z : a - 1, y : 2 a, x : a + 1]
+(%i14) [x, y, z];
+(%o14)                 [a + 1, 2 a, a - 1]
+(%i15) [globalsolve: true, programmode: true];
+(%o15)                    [true, true]
+(%i16) linsolve ([e1, e2, e3], '[x, y, z]);
+(%o16)           [x : a + 1, y : 2 a, z : a - 1]
+(%i17) [x, y, z];
+(%o17)                 [a + 1, 2 a, a - 1]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Linear-equations">Linear equations</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="linsolvewarn"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002flinsolvewarn"></a><dl class="first-defvr">
+<dt class="defvr" id="index-linsolvewarn"><span class="category-def">Option variable: </span><span><strong class="def-name">linsolvewarn</strong><a class="copiable-link" href='#index-linsolvewarn'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">linsolvewarn</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#linsolve">linsolve</a></code> prints a message
+&quot;Dependent equations eliminated&quot;.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Linear-equations">Linear equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="linsolve_005fparams"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002flinsolve_005fparams"></a><dl class="first-defvr">
+<dt class="defvr" id="index-linsolve_005fparams"><span class="category-def">Option variable: </span><span><strong class="def-name">linsolve_params</strong><a class="copiable-link" href='#index-linsolve_005fparams'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">linsolve_params</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#linsolve">linsolve</a></code> also generates
+the <code class="code">%r</code> symbols used to represent arbitrary parameters described in
+the manual under <code class="code"><a class="ref" href="#algsys">algsys</a></code>.  Otherwise, <code class="code">linsolve</code> solves an
+under-determined system of equations with some variables expressed in terms of
+others.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Linear-equations">Linear equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="multiplicities"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fmultiplicities"></a><dl class="first-defvr">
+<dt class="defvr" id="index-multiplicities"><span class="category-def">System variable: </span><span><strong class="def-name">multiplicities</strong><a class="copiable-link" href='#index-multiplicities'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">not_set_yet</code>
+</p>
+<p><code class="code">multiplicities</code> is set to a list of the multiplicities of the individual
+solutions returned by <code class="code"><a class="ref" href="#solve">solve</a></code> or <code class="code"><a class="ref" href="#realroots">realroots</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="nroots"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002fnroots"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nroots"><span class="category-def">Function: </span><span><strong class="def-name">nroots</strong> <var class="def-var-arguments">(<var class="var">p</var>, <var class="var">low</var>, <var class="var">high</var>)</var><a class="copiable-link" href='#index-nroots'> &para;</a></span></dt>
+<dd>
+<p>Returns the number of real roots of the real univariate polynomial <var class="var">p</var> in
+the half-open interval <code class="code">(<var class="var">low</var>, <var class="var">high</var>]</code>.  The endpoints of the
+interval may be <code class="code">minf</code> or <code class="code">inf</code>.
+</p>
+<p><code class="code">nroots</code> uses the method of Sturm sequences.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) p: x^10 - 2*x^4 + 1/2$
+(%i2) nroots (p, -6, 9.1);
+(%o2)                           4
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="nthroot"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002fnthroot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nthroot"><span class="category-def">Function: </span><span><strong class="def-name">nthroot</strong> <var class="def-var-arguments">(<var class="var">p</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-nthroot'> &para;</a></span></dt>
+<dd>
+<p>where <var class="var">p</var> is a polynomial with integer coefficients and <var class="var">n</var> is a
+positive integer returns <code class="code">q</code>, a polynomial over the integers, such that
+<code class="code">q^n = p</code> or prints an error message indicating that <var class="var">p</var> is not a
+perfect nth power.  This routine is much faster than <code class="code"><a class="ref" href="maxima_13.html#factor">factor</a></code> or even
+<code class="code"><a class="ref" href="maxima_13.html#sqfr">sqfr</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="polyfactor"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fpolyfactor"></a><dl class="first-defvr">
+<dt class="defvr" id="index-polyfactor"><span class="category-def">Option variable: </span><span><strong class="def-name">polyfactor</strong><a class="copiable-link" href='#index-polyfactor'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>The option variable <code class="code">polyfactor</code> when <code class="code">true</code> causes
+<code class="code"><a class="ref" href="#allroots">allroots</a></code> and <code class="code"><a class="ref" href="#bfallroots">bfallroots</a></code> to factor the polynomial over the real
+numbers if the polynomial is real, or over the complex numbers, if the
+polynomial is complex.
+</p>
+<p>See <code class="code">allroots</code> for an example.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="programmode"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fprogrammode"></a><dl class="first-defvr">
+<dt class="defvr" id="index-programmode"><span class="category-def">Option variable: </span><span><strong class="def-name">programmode</strong><a class="copiable-link" href='#index-programmode'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">programmode</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#solve">solve</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#realroots">realroots</a></code>, <code class="code"><a class="ref" href="#allroots">allroots</a></code>, and <code class="code"><a class="ref" href="#linsolve">linsolve</a></code> return solutions
+as elements in a list.
+(Except when <code class="code"><a class="ref" href="#backsubst">backsubst</a></code> is set to <code class="code">false</code>, in which case
+<code class="code">programmode: false</code> is assumed.)
+</p>
+<p>When <code class="code">programmode</code> is <code class="code">false</code>, <code class="code">solve</code>, etc. create intermediate
+expression labels <code class="code">%t1</code>, <code class="code">%t2</code>, etc., and assign the solutions to them.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="realonly"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002frealonly"></a><dl class="first-defvr">
+<dt class="defvr" id="index-realonly"><span class="category-def">Option variable: </span><span><strong class="def-name">realonly</strong><a class="copiable-link" href='#index-realonly'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">realonly</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#algsys">algsys</a></code> returns only those solutions
+which are free of <code class="code">%i</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="realroots"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002frealroots"></a><dl class="first-deffn">
+<dt class="deffn" id="index-realroots"><span class="category-def">Function: </span><span><strong class="def-name">realroots</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">realroots</code> (<var class="var">expr</var>, <var class="var">bound</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">realroots</code> (<var class="var">eqn</var>, <var class="var">bound</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">realroots</code> (<var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">realroots</code> (<var class="var">eqn</var>)</var><a class="copiable-link" href='#index-realroots'> &para;</a></span></dt>
+<dd>
+<p>Computes rational approximations of the real roots of the polynomial <var class="var">expr</var>
+or polynomial equation <var class="var">eqn</var> of one variable, to within a tolerance of
+<var class="var">bound</var>.  Coefficients of <var class="var">expr</var> or <var class="var">eqn</var> must be literal numbers;
+symbol constants such as <code class="code">%pi</code> are rejected.
+</p>
+<p><code class="code">realroots</code> assigns the multiplicities of the roots it finds
+to the global variable <code class="code"><a class="ref" href="#multiplicities">multiplicities</a></code>.
+</p>
+<p><code class="code">realroots</code> constructs a Sturm sequence to bracket each root, and then
+applies bisection to refine the approximations.  All coefficients are converted
+to rational equivalents before searching for roots, and computations are carried
+out by exact rational arithmetic.  Even if some coefficients are floating-point
+numbers, the results are rational (unless coerced to floats by the
+<code class="code"><a class="ref" href="maxima_4.html#float">float</a></code> or <code class="code"><a class="ref" href="maxima_4.html#numer">numer</a></code> flags).
+</p>
+<p>When <var class="var">bound</var> is less than 1, all integer roots are found exactly.
+When <var class="var">bound</var> is unspecified, it is assumed equal to the global variable
+<code class="code"><a class="ref" href="#rootsepsilon">rootsepsilon</a></code>.
+</p>
+<p>When the global variable <code class="code"><a class="ref" href="#programmode">programmode</a></code> is <code class="code">true</code>, <code class="code">realroots</code>
+returns a list of the form <code class="code">[x = <var class="var">x_1</var>, x = <var class="var">x_2</var>, ...]</code>.
+When <code class="code">programmode</code> is <code class="code">false</code>, <code class="code">realroots</code> creates intermediate
+expression labels <code class="code">%t1</code>, <code class="code">%t2</code>, &hellip;,
+assigns the results to them, and returns the list of labels.
+</p>
+<p>See also <code class="code"><a class="ref" href="#allroots">allroots</a></code>, <code class="code"><a class="ref" href="#bfallroots">bfallroots</a></code>, <code class="code"><a class="ref" href="maxima_80.html#guess_005fexact_005fvalue">guess_exact_value</a></code>,
+and <code class="code"><a class="ref" href="#lhs">lhs</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) realroots (-1 - x + x^5, 5e-6);
+                               612003
+(%o1)                     [x = ------]
+                               524288
+(%i2) ev (%[1], float);
+(%o2)                 x = 1.167303085327148
+(%i3) ev (-1 - x + x^5, %);
+(%o3)                - 7.396496210176905E-6
+</pre></div>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) realroots (expand ((1 - x)^5 * (2 - x)^3 * (3 - x)), 1e-20);
+(%o1)                 [x = 1, x = 2, x = 3]
+(%i2) multiplicities;
+(%o2)                       [5, 3, 1]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="rhs"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002frhs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rhs"><span class="category-def">Function: </span><span><strong class="def-name">rhs</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-rhs'> &para;</a></span></dt>
+<dd>
+<p>Returns the right-hand side (that is, the second argument) of the expression
+<var class="var">expr</var>, when the operator of <var class="var">expr</var> is one of the relational operators
+<code class="code">&lt; &lt;= = # equal notequal &gt;= &gt;</code>,
+one of the assignment operators <code class="code">:= ::= : ::</code>, or a user-defined binary
+infix operator, as declared by <code class="code"><a class="ref" href="maxima_6.html#infix">infix</a></code>.
+</p>
+<p>When <var class="var">expr</var> is an atom or its operator is something other than the ones
+listed above, <code class="code">rhs</code> returns 0.
+</p>
+<p>See also <code class="code"><a class="ref" href="#lhs">lhs</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) e: aa + bb = cc;
+(%o1)                     bb + aa = cc
+(%i2) lhs (e);
+(%o2)                        bb + aa
+(%i3) rhs (e);
+(%o3)                          cc
+(%i4) [rhs (aa &lt; bb), rhs (aa &lt;= bb), rhs (aa &gt;= bb),
+       rhs (aa &gt; bb)];
+(%o4)                   [bb, bb, bb, bb]
+</pre><div class="group"><pre class="example-preformatted">(%i5) [rhs (aa = bb), rhs (aa # bb), rhs (equal (aa, bb)),
+       rhs (notequal (aa, bb))];
+</pre></div><pre class="example-preformatted">(%o5)                   [bb, bb, bb, bb]
+(%i6) e1: '(foo(x) := 2*x);
+(%o6)                     foo(x) := 2 x
+(%i7) e2: '(bar(y) ::= 3*y);
+(%o7)                    bar(y) ::= 3 y
+(%i8) e3: '(x : y);
+(%o8)                         x : y
+(%i9) e4: '(x :: y);
+(%o9)                        x :: y
+(%i10) [rhs (e1), rhs (e2), rhs (e3), rhs (e4)];
+(%o10)                  [2 x, 3 y, y, y]
+(%i11) infix (&quot;][&quot;);
+(%o11)                         ][
+(%i12) rhs (aa ][ bb);
+(%o12)                         bb
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="rootsconmode"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002frootsconmode"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rootsconmode"><span class="category-def">Option variable: </span><span><strong class="def-name">rootsconmode</strong><a class="copiable-link" href='#index-rootsconmode'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">rootsconmode</code> governs the behavior of the <code class="code">rootscontract</code> command.
+See <code class="code"><a class="ref" href="#rootscontract">rootscontract</a></code> for details.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="rootscontract"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002frootscontract"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rootscontract"><span class="category-def">Function: </span><span><strong class="def-name">rootscontract</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-rootscontract'> &para;</a></span></dt>
+<dd>
+<p>Converts products of roots into roots of products.  For example,
+<code class="code">rootscontract (sqrt(x)*y^(3/2))</code> yields <code class="code">sqrt(x*y^3)</code>.
+</p>
+<p>When <code class="code"><a class="ref" href="maxima_8.html#radexpand">radexpand</a></code> is <code class="code">true</code> and <code class="code"><a class="ref" href="maxima_8.html#domain">domain</a></code> is <code class="code">real</code>,
+<code class="code">rootscontract</code> converts <code class="code"><a class="ref" href="maxima_9.html#abs">abs</a></code> into <code class="code"><a class="ref" href="maxima_9.html#sqrt">sqrt</a></code>,  e.g.,
+<code class="code">rootscontract (abs(x)*sqrt(y))</code> yields <code class="code">sqrt(x^2*y)</code>.
+</p>
+<p>There is an option <code class="code"><a class="ref" href="#rootsconmode">rootsconmode</a></code> affecting <code class="code">rootscontract</code> as
+follows:
+</p>
+<div class="example">
+<pre class="example-preformatted">Problem            Value of        Result of applying
+                  rootsconmode        rootscontract
+      
+x^(1/2)*y^(3/2)      false          (x*y^3)^(1/2)
+x^(1/2)*y^(1/4)      false          x^(1/2)*y^(1/4)
+x^(1/2)*y^(1/4)      true           (x*y^(1/2))^(1/2)
+x^(1/2)*y^(1/3)      true           x^(1/2)*y^(1/3)
+x^(1/2)*y^(1/4)      all            (x^2*y)^(1/4)
+x^(1/2)*y^(1/3)      all            (x^3*y^2)^(1/6)
+</pre></div>
+
+<p>When <code class="code">rootsconmode</code> is <code class="code">false</code>, <code class="code">rootscontract</code> contracts only
+with respect to rational number exponents whose denominators are the same.  The
+key to the <code class="code">rootsconmode: true</code> examples is simply that 2 divides into 4
+but not into 3.  <code class="code">rootsconmode: all</code> involves taking the least common
+multiple of the denominators of the exponents.
+</p>
+<p><code class="code">rootscontract</code> uses <code class="code"><a class="ref" href="maxima_13.html#ratsimp">ratsimp</a></code> in a manner similar to
+<code class="code"><a class="ref" href="maxima_9.html#logcontract">logcontract</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) rootsconmode: false$
+(%i2) rootscontract (x^(1/2)*y^(3/2));
+                                   3
+(%o2)                      sqrt(x y )
+(%i3) rootscontract (x^(1/2)*y^(1/4));
+                                   1/4
+(%o3)                     sqrt(x) y
+(%i4) rootsconmode: true$
+(%i5) rootscontract (x^(1/2)*y^(1/4));
+(%o5)                    sqrt(x sqrt(y))
+(%i6) rootscontract (x^(1/2)*y^(1/3));
+                                   1/3
+(%o6)                     sqrt(x) y
+(%i7) rootsconmode: all$
+(%i8) rootscontract (x^(1/2)*y^(1/4));
+                              2   1/4
+(%o8)                       (x  y)
+(%i9) rootscontract (x^(1/2)*y^(1/3));
+                             3  2 1/6
+(%o9)                      (x  y )
+(%i10) rootsconmode: false$
+(%i11) rootscontract (sqrt(sqrt(x) + sqrt(1 + x))
+                    *sqrt(sqrt(1 + x) - sqrt(x)));
+(%o11)                          1
+(%i12) rootsconmode: true$
+(%i13) rootscontract (sqrt(5+sqrt(5)) - 5^(1/4)*sqrt(1+sqrt(5)));
+(%o13)                          0
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="rootsepsilon"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002frootsepsilon"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rootsepsilon"><span class="category-def">Option variable: </span><span><strong class="def-name">rootsepsilon</strong><a class="copiable-link" href='#index-rootsepsilon'> &para;</a></span></dt>
+<dd><p>Default value: 1.0e-7
+</p>
+<p><code class="code">rootsepsilon</code> is the tolerance which establishes the confidence interval
+for the roots found by the <code class="code"><a class="ref" href="#realroots">realroots</a></code> function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="solve"></a><a class="anchor" id="Item_003a-Equations_002fdeffn_002fsolve"></a><dl class="first-deffn">
+<dt class="deffn" id="index-solve"><span class="category-def">Function: </span><span><strong class="def-name">solve</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">solve</code> (<var class="var">expr</var>, <var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">solve</code> (<var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">solve</code> ([<var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_n</var>], [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-solve'> &para;</a></span></dt>
+<dd>
+<p>Solves the algebraic equation <var class="var">expr</var> for the variable <var class="var">x</var> and returns a
+list of solution equations in <var class="var">x</var>.  If <var class="var">expr</var> is not an equation, the
+equation <code class="code"><var class="var">expr</var> = 0</code> is assumed in its place.
+<var class="var">x</var> may be a function (e.g. <code class="code">f(x)</code>), or other non-atomic expression
+except a sum or product.  <var class="var">x</var> may be omitted if <var class="var">expr</var> contains only one
+variable.  <var class="var">expr</var> may be a rational expression, and may contain
+trigonometric functions, exponentials, etc.
+</p>
+<p>The following method is used:
+</p>
+<p>Let <var class="var">E</var> be the expression and <var class="var">X</var> be the variable.  If <var class="var">E</var> is linear
+in <var class="var">X</var> then it is trivially solved for <var class="var">X</var>.  Otherwise if <var class="var">E</var> is of
+the form <code class="code">A*X^N + B</code> then the result is <code class="code">(-B/A)^1/N)</code> times the
+<code class="code">N</code>&rsquo;th roots of unity.
+</p>
+<p>If <var class="var">E</var> is not linear in <var class="var">X</var> then the gcd of the exponents of <var class="var">X</var> in
+<var class="var">E</var> (say <var class="var">N</var>) is divided into the exponents and the multiplicity of the
+roots is multiplied by <var class="var">N</var>.  Then <code class="code">solve</code> is called again on the
+result.  If <var class="var">E</var> factors then <code class="code">solve</code> is called on each of the factors.
+Finally <code class="code">solve</code> will use the quadratic, cubic, or quartic formulas where
+necessary.
+</p>
+<p>In the case where <var class="var">E</var> is a polynomial in some function of the variable to be
+solved for, say <code class="code">F(X)</code>, then it is first solved for <code class="code">F(X)</code> (call the
+result <var class="var">C</var>), then the equation <code class="code">F(X)=C</code> can be solved for <var class="var">X</var>
+provided the inverse of the function <var class="var">F</var> is known.
+</p>
+<p><code class="code"><a class="ref" href="#breakup">breakup</a></code> if <code class="code">false</code> will cause <code class="code">solve</code> to express the solutions
+of cubic or quartic equations as single expressions rather than as made
+up of several common subexpressions which is the default.
+</p>
+<p><code class="code"><a class="ref" href="#multiplicities">multiplicities</a></code> - will be set to a list of the multiplicities of the
+individual solutions returned by <code class="code">solve</code>, <code class="code"><a class="ref" href="#realroots">realroots</a></code>, or
+<code class="code"><a class="ref" href="#allroots">allroots</a></code>.  Try <code class="code">apropos (solve)</code> for the switches which affect
+<code class="code">solve</code>.  <code class="code"><a class="ref" href="maxima_2.html#describe">describe</a></code> may then by used on the individual switch names
+if their purpose is not clear.
+</p>
+<p><code class="code">solve ([<var class="var">eqn_1</var>, ..., <var class="var">eqn_n</var>], [<var class="var">x_1</var>, ..., <var class="var">x_n</var>])</code>
+solves a system of simultaneous (linear or non-linear) polynomial equations by
+calling <code class="code"><a class="ref" href="#linsolve">linsolve</a></code> or <code class="code"><a class="ref" href="#algsys">algsys</a></code> and returns a list of the solution
+lists in the variables.  In the case of <code class="code"><a class="ref" href="#linsolve">linsolve</a></code> this list would contain
+a single list of solutions.  It takes two lists as arguments.  The first list
+represents the equations to be solved; the second list is a
+list of the unknowns to be determined.  If the total number of
+variables in the equations is equal to the number of equations, the
+second argument-list may be omitted.
+</p>
+
+<p>When <code class="code"><a class="ref" href="#programmode">programmode</a></code> is <code class="code">false</code>, <code class="code">solve</code> displays solutions with
+intermediate expression (<code class="code">%t</code>) labels, and returns the list of labels.
+</p>
+<p>When <code class="code"><a class="ref" href="#globalsolve">globalsolve</a></code> is <code class="code">true</code> and the problem is to solve two or more
+linear equations, each solved-for variable is bound to its value in the solution
+of the equations.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) solve (asin (cos (3*x))*(f(x) - 1), x);
+
+solve: using arc-trig functions to get a solution.
+Some solutions will be lost.
+                            %pi
+(%o1)                  [x = ---, f(x) = 1]
+                             6
+(%i2) ev (solve (5^f(x) = 125, f(x)), solveradcan);
+                                log(125)
+(%o2)                   [f(x) = --------]
+                                 log(5)
+(%i3) [4*x^2 - y^2 = 12, x*y - x = 2];
+                      2    2
+(%o3)             [4 x  - y  = 12, x y - x = 2]
+
+(%i4) solve (%, [x, y]);
+(%o4) [[x = 2, y = 2], [x = .5202594388652008 %i
+ - .1331240357358706, y = .07678378523787788
+ - 3.608003221870287 %i], [x = - .5202594388652008 %i
+ - .1331240357358706, y = 3.608003221870287 %i
+ + .07678378523787788], [x = - 1.733751846381093, 
+y = - .1535675710019696]]
+
+(%i5) solve (1 + a*x + x^3, x);
+
+                                       3
+              sqrt(3) %i   1   sqrt(4 a  + 27)   1 1/3
+(%o5) [x = (- ---------- - -) (--------------- - -)
+                  2        2      6 sqrt(3)      2
+
+        sqrt(3) %i   1
+       (---------- - -) a
+            2        2
+ - --------------------------, x = 
+              3
+      sqrt(4 a  + 27)   1 1/3
+   3 (--------------- - -)
+         6 sqrt(3)      2
+
+                          3
+ sqrt(3) %i   1   sqrt(4 a  + 27)   1 1/3
+(---------- - -) (--------------- - -)
+     2        2      6 sqrt(3)      2
+
+         sqrt(3) %i   1
+      (- ---------- - -) a
+             2        2
+ - --------------------------, x = 
+              3
+      sqrt(4 a  + 27)   1 1/3
+   3 (--------------- - -)
+         6 sqrt(3)      2
+
+         3
+ sqrt(4 a  + 27)   1 1/3               a
+(--------------- - -)    - --------------------------]
+    6 sqrt(3)      2                  3
+                              sqrt(4 a  + 27)   1 1/3
+                           3 (--------------- - -)
+                                 6 sqrt(3)      2
+(%i6) solve (x^3 - 1);
+             sqrt(3) %i - 1        sqrt(3) %i + 1
+(%o6)   [x = --------------, x = - --------------, x = 1]
+                   2                     2
+(%i7) solve (x^6 - 1);
+           sqrt(3) %i + 1      sqrt(3) %i - 1
+(%o7) [x = --------------, x = --------------, x = - 1, 
+                 2                   2
+
+                     sqrt(3) %i + 1        sqrt(3) %i - 1
+               x = - --------------, x = - --------------, x = 1]
+                           2                     2
+(%i8) ev (x^6 - 1, %[1]);
+</pre><div class="group"><pre class="example-preformatted">                                      6
+                      (sqrt(3) %i + 1)
+(%o8)                 ----------------- - 1
+                             64
+</pre></div><pre class="example-preformatted">(%i9) expand (%);
+(%o9)                           0
+(%i10) x^2 - 1;
+                              2
+(%o10)                       x  - 1
+(%i11) solve (%, x);
+(%o11)                  [x = - 1, x = 1]
+(%i12) ev (%th(2), %[1]);
+(%o12)                          0
+</pre></div>
+
+<p>The symbols <code class="code">%r</code> are used to denote arbitrary constants in a solution.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) solve([x+y=1,2*x+2*y=2],[x,y]);
+
+solve: dependent equations eliminated: (2)
+(%o1)                      [[x = 1 - %r1, y = %r1]]
+</pre></div>
+
+<p>See <code class="code"><a class="ref" href="#algsys">algsys</a></code> and <code class="code"><a class="ref" href="#g_t_0025rnum_005flist">%rnum_list</a></code> for more information.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="solvedecomposes"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fsolvedecomposes"></a><dl class="first-defvr">
+<dt class="defvr" id="index-solvedecomposes"><span class="category-def">Option variable: </span><span><strong class="def-name">solvedecomposes</strong><a class="copiable-link" href='#index-solvedecomposes'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">solvedecomposes</code> is <code class="code">true</code>, <code class="code">solve</code> calls
+<code class="code"><a class="ref" href="maxima_13.html#polydecomp">polydecomp</a></code> if asked to solve polynomials.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="solveexplicit"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fsolveexplicit"></a><dl class="first-defvr">
+<dt class="defvr" id="index-solveexplicit"><span class="category-def">Option variable: </span><span><strong class="def-name">solveexplicit</strong><a class="copiable-link" href='#index-solveexplicit'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">solveexplicit</code> is <code class="code">true</code>, inhibits <code class="code"><a class="ref" href="#solve">solve</a></code> from returning
+implicit solutions, that is, solutions of the form <code class="code">F(x) = 0</code> where
+<code class="code">F</code> is some function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="solvefactors"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fsolvefactors"></a><dl class="first-defvr">
+<dt class="defvr" id="index-solvefactors"><span class="category-def">Option variable: </span><span><strong class="def-name">solvefactors</strong><a class="copiable-link" href='#index-solvefactors'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">solvefactors</code> is <code class="code">false</code>, <code class="code"><a class="ref" href="#solve">solve</a></code> does not try to factor
+the expression.  The <code class="code">false</code> setting may be desired in some cases where
+factoring is not necessary.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="solvenullwarn"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fsolvenullwarn"></a><dl class="first-defvr">
+<dt class="defvr" id="index-solvenullwarn"><span class="category-def">Option variable: </span><span><strong class="def-name">solvenullwarn</strong><a class="copiable-link" href='#index-solvenullwarn'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">solvenullwarn</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#solve">solve</a></code> prints a warning message
+if called with either a null equation list or a null variable list.  For
+example, <code class="code">solve ([], [])</code> would print two warning messages and return
+<code class="code">[]</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="solveradcan"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fsolveradcan"></a><dl class="first-defvr">
+<dt class="defvr" id="index-solveradcan"><span class="category-def">Option variable: </span><span><strong class="def-name">solveradcan</strong><a class="copiable-link" href='#index-solveradcan'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">solveradcan</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#solve">solve</a></code> calls <code class="code"><a class="ref" href="maxima_8.html#radcan">radcan</a></code><!-- /@w -->
+which makes <code class="code">solve</code> slower but will allow certain problems containing
+exponentials and logarithms to be solved.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="solvetrigwarn"></a><a class="anchor" id="Item_003a-Equations_002fdefvr_002fsolvetrigwarn"></a><dl class="first-defvr">
+<dt class="defvr" id="index-solvetrigwarn"><span class="category-def">Option variable: </span><span><strong class="def-name">solvetrigwarn</strong><a class="copiable-link" href='#index-solvetrigwarn'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">solvetrigwarn</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#solve">solve</a></code> may print a message
+saying that it is using inverse trigonometric functions to solve the equation,
+and thereby losing solutions.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_20.html#Differential-Equations" accesskey="n" rel="next">Differential Equations</a>, Previous: <a href="maxima_18.html#Integration" accesskey="p" rel="prev">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

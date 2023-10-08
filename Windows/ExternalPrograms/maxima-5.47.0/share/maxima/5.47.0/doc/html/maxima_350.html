@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for ratpow</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for ratpow">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for ratpow">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_349.html#ratpow_002dpkg" rel="up" title="ratpow-pkg">
+<link href="maxima_351.html#romberg_002dpkg" rel="next" title="romberg-pkg">
+<link href="maxima_349.html#ratpow_002dpkg" rel="previous" title="ratpow-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-ratpow"></a>
+<div class="header">
+<p>
+Up: <a href="maxima_349.html#ratpow_002dpkg" accesskey="u" rel="up">ratpow-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-ratpow-1"></a>
+<h3 class="section">84.1 Functions and Variables for ratpow</h3>
+
+
+
+<a name="ratp_005fhipow"></a><a name="Item_003a-ratpow_002fdeffn_002fratp_005fhipow"></a><dl>
+<dt><a name="index-ratp_005fhipow"></a>Function: <strong>ratp_hipow</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns the highest power of <var>x</var> in <code>ratnumer(expr)</code>
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;ratpow&quot;)$
+</pre><pre class="example">(%i2) ratp_hipow( x^(5/2) + x^2 , x);
+(%o2)                           2
+</pre><pre class="example">(%i3) ratp_hipow( x^(5/2) + x^2 , sqrt(x));
+(%o3)                           5
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Rational-expressions">Rational expressions</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-ratpow">Package ratpow</a>
+&middot;</div></dd></dl>
+
+
+<a name="ratp_005flopow"></a><a name="Item_003a-ratpow_002fdeffn_002fratp_005flopow"></a><dl>
+<dt><a name="index-ratp_005flopow"></a>Function: <strong>ratp_lopow</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns the lowest power of <var>x</var> in <code>ratnumer(expr)</code>
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;ratpow&quot;)$
+</pre><pre class="example">(%i2) ratp_lopow( x^5 + x^2 , x);
+(%o2)                           2
+</pre></div>
+
+<p>The following example returns 0 since <code>1</code> equals <code>x^0</code>:
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;ratpow&quot;)$
+</pre><pre class="example">(%i2) ratp_lopow( x^5 + x^2 + 1, x);
+(%o2)                           0
+</pre></div>
+
+<p>The CRE form of the following equation contains <code>sqrt(x)</code> and
+<code>x</code>. Since they are interpreted as independent variables,
+<code>ratp_lopow</code> returns <code>0</code>:
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;ratpow&quot;)$
+</pre><pre class="example">(%i2) g:sqrt(x)^5 + sqrt(x)^2;
+                             5/2
+(%o2)                       x    + x
+</pre><pre class="example">(%i3) showratvars(g);
+                              1/2
+(%o3)                       [x   , x]
+</pre><pre class="example">(%i4) ratp_lopow( g, x);
+(%o4)                           0
+</pre><pre class="example">(%i5) ratp_lopow( g, sqrt(x));
+(%o5)                           0
+</pre></div>
+
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Rational-expressions">Rational expressions</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-ratpow">Package ratpow</a>
+&middot;</div></dd></dl>
+
+
+<a name="ratp_005fcoeffs"></a><a name="Item_003a-ratpow_002fdeffn_002fratp_005fcoeffs"></a><dl>
+<dt><a name="index-ratp_005fcoeffs"></a>Function: <strong>ratp_coeffs</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns the powers and coefficients of <var>x</var> in <code>ratnumer(expr)</code> as a list of length-2 lists;
+returned coefficients are in CRE form except for numbers.
+</p>
+
+<p><code>ratnumer(expr)</code>.
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;ratpow&quot;)$
+</pre><pre class="example">(%i2) ratp_coeffs( 4*x^3 + x + sqrt(x), x);
+(%o2)/R/         [[3, 4], [1, 1], [0, sqrt(x)]]
+</pre></div>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Rational-expressions">Rational expressions</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-ratpow">Package ratpow</a>
+&middot;</div></dd></dl>
+
+<a name="ratp_005fdense_005fcoeffs"></a><a name="Item_003a-ratpow_002fdeffn_002fratp_005fdense_005fcoeffs"></a><dl>
+<dt><a name="index-ratp_005fdense_005fcoeffs"></a>Function: <strong>ratp_dense_coeffs</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Returns the coefficients of powers of <var>x</var> in <code>ratnumer(expr)</code> from highest to lowest;
+returned coefficients are in CRE form except for numbers.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;ratpow&quot;)$
+</pre><pre class="example">(%i2) ratp_dense_coeffs( 4*x^3 + x + sqrt(x), x);
+(%o2)/R/               [4, 0, 1, sqrt(x)]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Rational-expressions">Rational expressions</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-ratpow">Package ratpow</a>
+&middot;</div></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Up: <a href="maxima_349.html#ratpow_002dpkg" accesskey="u" rel="up">ratpow-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -2277,7 +2277,7 @@ Dim i As Integer
         End If
         End If
     Next
-    If var <> "" And var <> "if" And var <> "then" And var <> "else" And var <> "elseif" And var <> "and" Then
+    If var <> "" And var <> "if" And var <> "then" And var <> "else" And var <> "elseif" And var <> "and" And var <> "or" Then
 '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
         If Len(TextBox_definitioner.Text) > 0 Then
             TextBox_definitioner.Text = TextBox_definitioner.Text & VbCrLfMac

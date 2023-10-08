@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Graphical analysis of discrete dynamical systems</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Graphical analysis of discrete dynamical systems">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Graphical analysis of discrete dynamical systems">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_256.html#dynamics_002dpkg" rel="up" title="dynamics-pkg">
+<link href="maxima_259.html#Visualization-with-VTK" rel="next" title="Visualization with VTK">
+<link href="maxima_257.html#The-dynamics-package" rel="previous" title="The dynamics package">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Graphical-analysis-of-discrete-dynamical-systems"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_259.html#Visualization-with-VTK" accesskey="n" rel="next">Visualization with VTK</a>, Previous: <a href="maxima_257.html#The-dynamics-package" accesskey="p" rel="previous">The dynamics package</a>, Up: <a href="maxima_256.html#dynamics_002dpkg" accesskey="u" rel="up">dynamics-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Graphical-analysis-of-discrete-dynamical-systems-1"></a>
+<h3 class="section">55.2 Graphical analysis of discrete dynamical systems</h3>
+
+<a name="chaosgame"></a><a name="Item_003a-dynamics_002fdeffn_002fchaosgame"></a><dl>
+<dt><a name="index-chaosgame"></a>Function: <strong>chaosgame</strong> <em>([[<var>x1</var>, <var>y1</var>]&hellip;[<var>xm</var>, <var>ym</var>]], [<var>x0</var>, <var>y0</var>], <var>b</var>, <var>n</var>, <var>options</var>, &hellip;);</em></dt>
+<dd>
+<p>Implements the so-called chaos game: the initial point (<var>x0</var>,
+<var>y0</var>) is plotted and then one of the <var>m</var> points
+[<var>x1</var>, <var>y1</var>]&hellip;<var>xm</var>, <var>ym</var>]
+will be selected at random. The next point plotted will be on the
+segment from the previous point plotted to the point chosen randomly, at a
+distance from the random point which will be <var>b</var> times that segment&rsquo;s
+length. The procedure is repeated <var>n</var> times. The options are the
+same as for <code><a href="maxima_68.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong>Example</strong>. A plot of Sierpinsky&rsquo;s triangle:
+</p>
+<div class="example">
+<pre class="example">(%i1) chaosgame([[0, 0], [1, 0], [0.5, sqrt(3)/2]], [0.1, 0.1], 1/2,
+                 30000, [style, dots]);
+</pre></div>
+
+<img src="./figures/dynamics7.png" alt="./figures/dynamics7">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div>
+</dd></dl>
+
+<a name="evolution"></a><a name="Item_003a-dynamics_002fdeffn_002fevolution"></a><dl>
+<dt><a name="index-evolution"></a>Function: <strong>evolution</strong> <em>(<var>F</var>, <var>y0</var>, <var>n</var>,  &hellip;, <var>options</var>, &hellip;);</em></dt>
+<dd>
+<p>Draws <var>n+1</var> points in a two-dimensional graph, where the horizontal
+coordinates of the points are the integers 0, 1, 2, ..., <var>n</var>, and
+the vertical coordinates are the corresponding values <var>y(n)</var> of the
+sequence defined by the recurrence relation
+</p><div class="example">
+<pre class="example">        y(n+1) = F(y(n))
+</pre></div>
+
+<p>With initial value <var>y(0)</var> equal to <var>y0</var>. <var>F</var> must be an
+expression that depends only on one variable (in the example, it
+depend on <var>y</var>, but any other variable can be used),
+<var>y0</var> must be a real number and <var>n</var> must be a positive integer.
+ This function accepts the same options as <code><a href="maxima_68.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong>Example</strong>.
+</p>
+<div class="example">
+<pre class="example">(%i1) evolution(cos(y), 2, 11);
+</pre></div>
+<img src="./figures/dynamics1.png" alt="./figures/dynamics1">
+
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div>
+</dd></dl>
+
+<a name="evolution2d"></a><a name="Item_003a-dynamics_002fdeffn_002fevolution2d"></a><dl>
+<dt><a name="index-evolution2d"></a>Function: <strong>evolution2d</strong> <em>([<var>F</var>, <var>G</var>], [<var>u</var>, <var>v</var>], [<var>u0</var>, <var>y0</var>], <var>n</var>, <var>options</var>, &hellip;);</em></dt>
+<dd>
+<p>Shows, in a two-dimensional plot, the first <var>n+1</var> points in the
+sequence of points defined by the two-dimensional discrete dynamical
+system with recurrence relations
+</p><div class="example">
+<pre class="example">        u(n+1) = F(u(n), v(n))    v(n+1) = G(u(n), v(n))
+</pre></div>
+
+<p>With initial values <var>u0</var> and <var>v0</var>. <var>F</var> and <var>G</var> must be
+two expressions that depend only on two variables, <var>u</var> and
+<var>v</var>, which must be named explicitly in a list. The options are the
+same as for <code><a href="maxima_68.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong>Example</strong>. Evolution of a two-dimensional discrete dynamical system:
+</p>
+<div class="example">
+<pre class="example">(%i1) f: 0.6*x*(1+2*x)+0.8*y*(x-1)-y^2-0.9$
+(%i2) g: 0.1*x*(1-6*x+4*y)+0.1*y*(1+9*y)-0.4$
+(%i3) evolution2d([f,g], [x,y], [-0.5,0], 50000, [style,dots]);
+</pre></div>
+
+<img src="./figures/dynamics5.png" alt="./figures/dynamics5">
+
+<p>And an enlargement of a small region in that fractal:
+</p>
+<div class="example">
+<pre class="example">(%i9) evolution2d([f,g], [x,y], [-0.5,0], 300000, [x,-0.8,-0.6],
+                  [y,-0.4,-0.2], [style, dots]);
+</pre></div>
+
+<img src="./figures/dynamics6.png" alt="./figures/dynamics6">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ifs"></a><a name="Item_003a-dynamics_002fdeffn_002fifs"></a><dl>
+<dt><a name="index-ifs"></a>Function: <strong>ifs</strong> <em>([<var>r1</var>, &hellip;, <var>rm</var>], [<var>A1</var>,&hellip;, <var>Am</var>], [[<var>x1</var>, <var>y1</var>], &hellip;, [<var>xm</var>, <var>ym</var>]], [<var>x0</var>, <var>y0</var>], <var>n</var>, <var>options</var>, &hellip;);</em></dt>
+<dd>
+<p>Implements the Iterated Function System method. This method is similar
+to the method described in the function <code><a href="#chaosgame">chaosgame</a></code>. but instead of
+shrinking the segment from the current point to the randomly chosen
+point, the 2 components of that segment will be multiplied by the 2 by 2
+matrix <var>Ai</var> that corresponds to the point chosen randomly.
+</p>
+<p>The random choice of one of the <var>m</var> attractive points can be made
+with a non-uniform probability distribution defined by the weights
+<var>r1</var>,...,<var>rm</var>. Those weights are given in cumulative form; for
+instance if there are 3 points with probabilities 0.2, 0.5 and 0.3, the
+weights <var>r1</var>, <var>r2</var> and <var>r3</var> could be 2, 7 and 10. The
+options are the same as for <code><a href="maxima_68.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong>Example</strong>. Barnsley&rsquo;s fern, obtained with 4 matrices and 4 points:
+</p>
+<div class="example">
+<pre class="example">(%i1) a1: matrix([0.85,0.04],[-0.04,0.85])$
+(%i2) a2: matrix([0.2,-0.26],[0.23,0.22])$
+(%i3) a3: matrix([-0.15,0.28],[0.26,0.24])$
+(%i4) a4: matrix([0,0],[0,0.16])$
+(%i5) p1: [0,1.6]$
+(%i6) p2: [0,1.6]$
+(%i7) p3: [0,0.44]$
+(%i8) p4: [0,0]$
+(%i9) w: [85,92,99,100]$
+(%i10) ifs(w, [a1,a2,a3,a4], [p1,p2,p3,p4], [5,0], 50000, [style,dots]);
+</pre></div>
+
+<img src="./figures/dynamics8.png" alt="./figures/dynamics8">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div>
+</dd></dl>
+
+<a name="orbits"></a><a name="Item_003a-dynamics_002fdeffn_002forbits"></a><dl>
+<dt><a name="index-orbits"></a>Function: <strong>orbits</strong> <em>(<var>F</var>, <var>y0</var>, <var>n1</var>, <var>n2</var>, [<var>x</var>, <var>x0</var>, <var>xf</var>, <var>xstep</var>], <var>options</var>, &hellip;);</em></dt>
+<dd>
+<p>Draws the orbits diagram for a family of one-dimensional
+discrete dynamical systems, with one parameter <var>x</var>; that kind of
+diagram is used to study the bifurcations of an one-dimensional discrete
+system.
+</p>
+<p>The function <var>F(y)</var> defines a sequence with a starting value of
+<var>y0</var>, as in the case of the function <code>evolution</code>, but in this
+case that function will also depend on a parameter <var>x</var> that will
+take values in the interval from <var>x0</var> to <var>xf</var> with increments of
+<var>xstep</var>. Each value used for the parameter <var>x</var> is shown on the
+horizontal axis. The vertical axis will show the <var>n2</var> values
+of the sequence <var>y(n1+1)</var>,..., <var>y(n1+n2+1)</var> obtained after letting
+the sequence evolve <var>n1</var> iterations.  In addition to the options
+accepted by <code><a href="maxima_68.html#plot2d">plot2d</a></code>, it accepts an option <var>pixels</var> that
+sets up the maximum number of different points that will be represented
+in the vertical direction.
+</p>
+<p><strong>Example</strong>. Orbits diagram of the quadratic map, with a parameter
+<var>a</var>:
+</p>
+<div class="example">
+<pre class="example">(%i1) orbits(x^2+a, 0, 50, 200, [a, -2, 0.25], [style, dots]);
+</pre></div>
+
+<img src="./figures/dynamics3.png" alt="./figures/dynamics3">
+
+<p>To enlarge the region around the lower bifurcation near x <code>=</code> -1.25 use:
+</p><div class="example">
+<pre class="example">(%i2) orbits(x^2+a, 0, 100, 400, [a,-1,-1.53], [x,-1.6,-0.8],
+             [nticks, 400], [style,dots]);
+</pre></div>
+
+<img src="./figures/dynamics4.png" alt="./figures/dynamics4">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div>
+</dd></dl>
+
+<a name="staircase"></a><a name="Item_003a-dynamics_002fdeffn_002fstaircase"></a><dl>
+<dt><a name="index-staircase"></a>Function: <strong>staircase</strong> <em>(<var>F</var>, <var>y0</var>, <var>n</var>,<var>options</var>,&hellip;);</em></dt>
+<dd>
+<p>Draws a staircase diagram for the sequence defined by the recurrence
+relation
+</p><div class="example">
+<pre class="example">        y(n+1) = F(y(n))
+</pre></div>
+
+<p>The interpretation and allowed values of the input parameters is the
+same as for the function <code><a href="#evolution">evolution</a></code>. A staircase diagram consists
+of a plot of the function <var>F(y)</var>, together with the line <var>G(y)</var>
+<code>=</code> <var>y</var>. A vertical segment is drawn from the point (<var>y0</var>,
+<var>y0</var>) on that line until the point where it intersects the function
+<var>F</var>. From that point a horizontal segment is drawn until it reaches
+the point (<var>y1</var>, <var>y1</var>) on the line, and the procedure is
+repeated <var>n</var> times until the point (<var>yn</var>, <var>yn</var>) is
+reached. The options are the same as for <code><a href="maxima_68.html#plot2d">plot2d</a></code>.
+</p>
+<p><strong>Example</strong>.
+</p>
+<div class="example">
+<pre class="example">(%i1) staircase(cos(y), 1, 11, [y, 0, 1.2]);
+</pre></div>
+<img src="./figures/dynamics2.png" alt="./figures/dynamics2">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-dynamics_002fnode_002fVisualization-with-VTK"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_259.html#Visualization-with-VTK" accesskey="n" rel="next">Visualization with VTK</a>, Previous: <a href="maxima_257.html#The-dynamics-package" accesskey="p" rel="previous">The dynamics package</a>, Up: <a href="maxima_256.html#dynamics_002dpkg" accesskey="u" rel="up">dynamics-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

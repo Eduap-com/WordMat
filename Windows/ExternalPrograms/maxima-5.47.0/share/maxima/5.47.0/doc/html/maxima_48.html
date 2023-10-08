@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>contrib_ode-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="contrib_ode-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="contrib_ode-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_49.html#descriptive_002dpkg" rel="next" title="descriptive-pkg">
+<link href="maxima_47.html#combinatorics_002dpkg" rel="prev" title="combinatorics-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="contrib_005fode_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_49.html#descriptive_002dpkg" accesskey="n" rel="next">descriptive</a>, Previous: <a href="maxima_47.html#combinatorics_002dpkg" accesskey="p" rel="prev">combinatorics</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="contrib_005fode-1">49 contrib_ode</h2>
+
+<a class="anchor" id="Item_003a-contrib_005fode_002fnode_002fIntroduction-to-contrib_005fode"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-contrib_005fode" accesskey="1">Introduction to contrib_ode</a></li>
+<li><a href="#Functions-and-Variables-for-contrib_005fode" accesskey="2">Functions and Variables for contrib_ode</a></li>
+<li><a href="#Possible-improvements-to-contrib_005fode" accesskey="3">Possible improvements to contrib_ode</a></li>
+<li><a href="#Test-cases-for-contrib_005fode" accesskey="4">Test cases for contrib_ode</a></li>
+<li><a href="#References-for-contrib_005fode" accesskey="5">References for contrib_ode</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-contrib_005fode">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-contrib_005fode" accesskey="n" rel="next">Functions and Variables for contrib_ode</a>, Previous: <a href="#contrib_005fode_002dpkg" accesskey="p" rel="prev">contrib_ode</a>, Up: <a href="#contrib_005fode_002dpkg" accesskey="u" rel="up">contrib_ode</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+<h3 class="section" id="Introduction-to-contrib_005fode-1">49.1 Introduction to contrib_ode</h3>
+
+<p>Maxima&rsquo;s ordinary differential equation (ODE) solver <code class="code"><a class="ref" href="maxima_20.html#ode2">ode2</a></code> solves
+elementary linear ODEs of first and second order.  The function
+<code class="code"><a class="ref" href="#contrib_005fode">contrib_ode</a></code> extends <code class="code">ode2</code> with additional methods for linear
+and non-linear first order ODEs and linear homogeneous second order ODEs.  
+The code is still under development and the calling sequence may change
+in future releases.  Once the code has stabilized it may be
+moved from the contrib directory and integrated into Maxima.
+</p>
+<p>This package must be loaded with the command <code class="code">load(&quot;contrib_ode&quot;)</code>
+before use.
+</p>
+<p>The calling convention for <code class="code">contrib_ode</code> is identical to <code class="code">ode2</code>.  
+It takes
+three arguments: an ODE (only the left hand side need be given if the
+right hand side is 0), the dependent variable, and the independent
+variable.  When successful, it returns a list of solutions.
+</p>
+<p>The form of the solution differs from <code class="code">ode2</code>.
+As non-linear equations can have multiple solutions, 
+<code class="code">contrib_ode</code> returns a list of solutions.  Each  solution can 
+have a number of forms:
+</p><ul class="itemize mark-bullet">
+<li>an explicit solution for the dependent variable,
+
+</li><li>an implicit solution for the dependent variable,
+
+</li><li>a parametric solution in terms of variable <code class="code">%t</code>, or
+
+</li><li>a transformation into another ODE in variable <code class="code">%u</code>.
+
+</li></ul>
+
+<p><code class="code">contrib_ode</code> uses the global variables <code class="code"><a class="ref" href="maxima_20.html#g_t_0025c">%c</a></code>, 
+<code class="code"><a class="ref" href="maxima_20.html#g_t_0025k1">%k1</a></code>, <code class="code"><a class="ref" href="maxima_20.html#g_t_0025k2">%k2</a></code>, <code class="code"><a class="ref" href="maxima_20.html#method">method</a></code> and <code class="code"><a class="ref" href="maxima_20.html#yp">yp</a></code>
+similarly to <code class="code">ode2</code>.
+</p>
+<p>If <code class="code">contrib_ode</code>
+cannot obtain a solution for whatever reason, it returns <code class="code">false</code>, after
+perhaps printing out an error message.
+</p>
+<p>It is necessary to return a list of solutions, as even first order
+non-linear ODEs can have multiple solutions.  For example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) eqn:x*'diff(y,x)^2-(1+x*y)*'diff(y,x)+y=0;
+                    dy 2             dy
+(%o2)            x (--)  - (1 + x y) -- + y = 0
+                    dx               dx
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) contrib_ode(eqn,y,x);
+                    dy 2             dy
+(%t3)            x (--)  - (1 + x y) -- + y = 0
+                    dx               dx
+
+              first order equation not linear in y'
+
+                                             x
+(%o3)             [y = log(x) + %c, y = %c %e ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) method;
+(%o4)                        factor
+</pre></div></div>
+
+<p>Nonlinear ODEs can have singular solutions without constants of
+integration, as in the second solution of the following example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) eqn:'diff(y,x)^2+x*'diff(y,x)-y=0;
+                       dy 2     dy
+(%o2)                 (--)  + x -- - y = 0
+                       dx       dx
+</pre></div><pre class="example-preformatted">(%i3) contrib_ode(eqn,y,x);
+                       dy 2     dy
+(%t3)                 (--)  + x -- - y = 0
+                       dx       dx
+
+              first order equation not linear in y'
+
+                                           2
+                                 2        x
+(%o3)              [y = %c x + %c , y = - --]
+                                          4
+</pre><div class="group"><pre class="example-preformatted">(%i4) method;
+(%o4)                       clairaut
+</pre></div></div>
+
+
+<p>The following ODE has two parametric solutions in terms of the dummy
+variable <code class="code">%t</code>.  In this case the parametric solutions can be manipulated
+to give explicit solutions.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) eqn:'diff(y,x)=(x+y)^2;
+                          dy          2
+(%o2)                     -- = (x + y)
+                          dx
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) contrib_ode(eqn,y,x);
+(%o3) [[x = %c - atan(sqrt(%t)), y = (- x) - sqrt(%t)], 
+                     [x = atan(sqrt(%t)) + %c, y = sqrt(%t) - x]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) method;
+(%o4)                       lagrange
+</pre></div></div>
+
+<p>The following example (Kamke 1.112) demonstrates an implicit solution.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) assume(x&gt;0,y&gt;0);
+(%o2)                    [x &gt; 0, y &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) eqn:x*'diff(y,x)-x*sqrt(y^2+x^2)-y;
+                     dy           2    2
+(%o3)              x -- - x sqrt(y  + x ) - y
+                     dx
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) contrib_ode(eqn,y,x);
+                                  y
+(%o4)                  [x - asinh(-) = %c]
+                                  x
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) method;
+(%o5)                          lie
+</pre></div></div>
+
+ 
+
+<p>The following Riccati equation is transformed into a linear
+second order ODE in the variable <code class="code">%u</code>.  Maxima is unable to
+solve the new ODE, so it is returned unevaluated.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) eqn:x^2*'diff(y,x)=a+b*x^n+c*x^2*y^2;
+                    2 dy      2  2      n
+(%o2)              x  -- = c x  y  + b x  + a
+                      dx
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) contrib_ode(eqn,y,x);
+               d%u
+               ---                            2
+               dx        2  a       n - 2    d %u
+(%o3)  [[y = - ----, %u c  (-- + b x     ) + ---- c = 0]]
+               %u c          2                 2
+                            x                dx
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) method;
+(%o4)                        riccati
+</pre></div></div>
+
+
+<p>For first order ODEs <code class="code">contrib_ode</code> calls <code class="code">ode2</code>.  It then tries the
+following methods: factorization, Clairaut, Lagrange, Riccati,
+Abel and Lie symmetry methods.  The Lie method is not attempted
+on Abel equations if the Abel method fails, but it is tried
+if the Riccati method returns an unsolved second order ODE.
+</p>
+<p>For second order ODEs <code class="code">contrib_ode</code> calls <code class="code">ode2</code> then <code class="code"><a class="ref" href="#odelin">odelin</a></code>.
+</p>
+<p>Extensive debugging traces and messages are displayed if the command
+<code class="code">put('contrib_ode,true,'verbose)</code> is executed.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-contrib_005fode_002fnode_002fFunctions-and-Variables-for-contrib_005fode"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-contrib_005fode">
+<div class="nav-panel">
+<p>
+Next: <a href="#Possible-improvements-to-contrib_005fode" accesskey="n" rel="next">Possible improvements to contrib_ode</a>, Previous: <a href="#Introduction-to-contrib_005fode" accesskey="p" rel="prev">Introduction to contrib_ode</a>, Up: <a href="#contrib_005fode_002dpkg" accesskey="u" rel="up">contrib_ode</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-contrib_005fode-1">49.2 Functions and Variables for contrib_ode</h3>
+
+<a class="anchor" id="contrib_005fode"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fcontrib_005fode"></a><dl class="first-deffn">
+<dt class="deffn" id="index-contrib_005fode"><span class="category-def">Function: </span><span><strong class="def-name">contrib_ode</strong> <var class="def-var-arguments">(<var class="var">eqn</var>, <var class="var">y</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-contrib_005fode'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of solutions of the ODE <var class="var">eqn</var> with 
+independent variable <var class="var">x</var> and dependent variable <var class="var">y</var>.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="odelin"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fodelin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-odelin"><span class="category-def">Function: </span><span><strong class="def-name">odelin</strong> <var class="def-var-arguments">(<var class="var">eqn</var>, <var class="var">y</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-odelin'> &para;</a></span></dt>
+<dd>
+<p><code class="code">odelin</code> solves linear homogeneous ODEs of first and 
+second order with 
+independent variable <var class="var">x</var> and dependent variable <var class="var">y</var>.  
+It returns a fundamental solution set of the ODE.
+</p>
+<p>For second order ODEs, <code class="code">odelin</code> uses a method, due to Bronstein
+and Lafaille, that searches for solutions in terms of given 
+special functions. 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) odelin(x*(x+1)*'diff(y,x,2)+(x+5)*'diff(y,x,1)+(-4)*y,y,x);
+       gauss_a(- 6, - 2, - 3, - x)  gauss_b(- 6, - 2, - 3, - x)
+(%o2) {---------------------------, ---------------------------}
+                    4                            4
+                   x                            x
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ode_005fcheck"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fode_005fcheck"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ode_005fcheck"><span class="category-def">Function: </span><span><strong class="def-name">ode_check</strong> <var class="def-var-arguments">(<var class="var">eqn</var>, <var class="var">soln</var>)</var><a class="copiable-link" href='#index-ode_005fcheck'> &para;</a></span></dt>
+<dd>
+<p>Returns the value of ODE <var class="var">eqn</var> after substituting a
+possible solution <var class="var">soln</var>.  The value is equivalent to 
+zero if <var class="var">soln</var> is a solution of <var class="var">eqn</var>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) eqn:'diff(y,x,2)+(a*x+b)*y;
+                         2
+                        d y
+(%o2)                   --- + (b + a x) y
+                          2
+                        dx
+</pre></div><pre class="example-preformatted">(%i3) ans:[y = bessel_y(1/3,2*(a*x+b)^(3/2)/(3*a))*%k2*sqrt(a*x+b)
+         +bessel_j(1/3,2*(a*x+b)^(3/2)/(3*a))*%k1*sqrt(a*x+b)];
+                                  3/2
+                    1  2 (b + a x)
+(%o3) [y = bessel_y(-, --------------) %k2 sqrt(a x + b)
+                    3       3 a
+                                          3/2
+                            1  2 (b + a x)
+                 + bessel_j(-, --------------) %k1 sqrt(a x + b)]
+                            3       3 a
+</pre><div class="group"><pre class="example-preformatted">(%i4) ode_check(eqn,ans[1]);
+(%o4)                           0
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="gauss_005fa"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fgauss_005fa"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gauss_005fa"><span class="category-def">Function: </span><span><strong class="def-name">gauss_a</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-gauss_005fa'> &para;</a></span></dt>
+<dd>
+<p><code class="code">gauss_a(a,b,c,x)</code> and <code class="code">gauss_b(a,b,c,x)</code> are 2F1 
+hypergeometric functions.  They represent any two independent
+solutions of the hypergeometric differential equation 
+<code class="code">x*(1-x) diff(y,x,2) + [c-(a+b+1)x] diff(y,x) - a*b*y = 0</code> (A&amp;S 15.5.1).  
+</p>
+<p>The only use of these functions is in solutions of ODEs returned by 
+<code class="code"><a class="ref" href="#odelin">odelin</a></code> and <code class="code"><a class="ref" href="#contrib_005fode">contrib_ode</a></code>.  The definition and use of these 
+functions may change in future releases of Maxima.
+</p>
+<p>See also <code class="code"><a class="ref" href="#gauss_005fb">gauss_b</a></code>, <code class="code"><a class="ref" href="#dgauss_005fa">dgauss_a</a></code> and <code class="code"><a class="ref" href="#gauss_005fb">gauss_b</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="gauss_005fb"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fgauss_005fb"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gauss_005fb"><span class="category-def">Function: </span><span><strong class="def-name">gauss_b</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-gauss_005fb'> &para;</a></span></dt>
+<dd><p>See <code class="code"><a class="ref" href="#gauss_005fa">gauss_a</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="dgauss_005fa"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fdgauss_005fa"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dgauss_005fa"><span class="category-def">Function: </span><span><strong class="def-name">dgauss_a</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-dgauss_005fa'> &para;</a></span></dt>
+<dd><p>The derivative with respect to <var class="var">x</var> 
+of <code class="code"><a class="ref" href="#gauss_005fa">gauss_a</a></code><code class="code">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">x</var>)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="dgauss_005fb"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fdgauss_005fb"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dgauss_005fb"><span class="category-def">Function: </span><span><strong class="def-name">dgauss_b</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-dgauss_005fb'> &para;</a></span></dt>
+<dd><p>The derivative with respect to <var class="var">x</var> 
+of <code class="code"><a class="ref" href="#gauss_005fb">gauss_b</a></code><code class="code">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">x</var>)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="kummer_005fm"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fkummer_005fm"></a><dl class="first-deffn">
+<dt class="deffn" id="index-kummer_005fm"><span class="category-def">Function: </span><span><strong class="def-name">kummer_m</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-kummer_005fm'> &para;</a></span></dt>
+<dd>
+<p>Kummer&rsquo;s M function, as defined in Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, Section 13.1.2.
+</p>
+<p>The only use of this function is in solutions of ODEs returned by 
+<code class="code"><a class="ref" href="#odelin">odelin</a></code> and <code class="code"><a class="ref" href="#contrib_005fode">contrib_ode</a></code>.  The definition and use of this 
+function may change in future releases of Maxima.
+</p>
+<p>See also <code class="code"><a class="ref" href="#kummer_005fu">kummer_u</a></code>, <code class="code"><a class="ref" href="#dkummer_005fm">dkummer_m</a></code>, and <code class="code"><a class="ref" href="#dkummer_005fu">dkummer_u</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="kummer_005fu"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fkummer_005fu"></a><dl class="first-deffn">
+<dt class="deffn" id="index-kummer_005fu"><span class="category-def">Function: </span><span><strong class="def-name">kummer_u</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-kummer_005fu'> &para;</a></span></dt>
+<dd>
+<p>Kummer&rsquo;s U function, as defined in Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, Section 13.1.3.
+</p>
+<p>See <code class="code"><a class="ref" href="#kummer_005fm">kummer_m</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="dkummer_005fm"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fdkummer_005fm"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dkummer_005fm"><span class="category-def">Function: </span><span><strong class="def-name">dkummer_m</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-dkummer_005fm'> &para;</a></span></dt>
+<dd><p>The derivative with respect to <var class="var">x</var>
+of <code class="code"><a class="ref" href="#kummer_005fm">kummer_m</a></code><code class="code">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">x</var>)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="dkummer_005fu"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fdkummer_005fu"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dkummer_005fu"><span class="category-def">Function: </span><span><strong class="def-name">dkummer_u</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-dkummer_005fu'> &para;</a></span></dt>
+<dd><p>The derivative with respect to <var class="var">x</var>
+of <code class="code"><a class="ref" href="#kummer_005fu">kummer_u</a></code><code class="code">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">x</var>)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="bessel_005fsimplify"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fbessel_005fsimplify"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bessel_005fsimplify"><span class="category-def">Function: </span><span><strong class="def-name">bessel_simplify</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-bessel_005fsimplify'> &para;</a></span></dt>
+<dd><p>Simplifies expressions containing Bessel functions <code class="code"><a class="ref" href="maxima_14.html#bessel_005fj">bessel_j</a></code>,
+<code class="code"><a class="ref" href="maxima_14.html#bessel_005fy">bessel_y</a></code>, <code class="code"><a class="ref" href="maxima_14.html#bessel_005fi">bessel_i</a></code>, <code class="code"><a class="ref" href="maxima_14.html#bessel_005fk">bessel_k</a></code>,
+<code class="code"><a class="ref" href="maxima_14.html#hankel_005f1">hankel_1</a></code>, <code class="code"><a class="ref" href="maxima_14.html#hankel_005f2">hankel_2</a></code>, <code class="code"><a class="ref" href="maxima_14.html#struve_005fh">struve_h</a></code>
+and <code class="code"><a class="ref" href="maxima_14.html#struve_005fl">struve_l</a></code>.
+Recurrence relations (DLMF §10.6(i))(A&amp;S 9.1.27)
+are used to replace functions of highest order n
+by functions of order n-1 and n-2.
+</p>
+<p>This process is repeated until all the orders
+differ by less than 2.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bessel_simplify(4*bessel_j(n,x^2)*(x^2-n^2/x^2)
+  +x*((bessel_j(n-2,x^2)-bessel_j(n,x^2))*x
+  -(bessel_j(n,x^2)-bessel_j(n+2,x^2))*x)
+  -2*bessel_j(n+1,x^2)+2*bessel_j(n-1,x^2));
+(%o2)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bessel_simplify( -2*bessel_j(1,z)*z^3 - 10*bessel_j(2,z)*z^2
+ + 15*%pi*bessel_j(1,z)*struve_h(3,z)*z - 15*%pi*struve_h(1,z)
+   *bessel_j(3,z)*z - 15*%pi*bessel_j(0,z)*struve_h(2,z)*z
+ + 15*%pi*struve_h(0,z)*bessel_j(2,z)*z - 30*%pi*bessel_j(1,z)
+   *struve_h(2,z) + 30*%pi*struve_h(1,z)*bessel_j(2,z));
+(%o3)                           0
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="expintegral_005fe_005fsimplify"></a><a class="anchor" id="Item_003a-contrib_005fode_002fdeffn_002fexpintegral_005fe_005fsimplify"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fe_005fsimplify"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_e_simplify</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-expintegral_005fe_005fsimplify'> &para;</a></span></dt>
+<dd><p>Simplify expressions containing exponential integral <code class="code"><a class="ref" href="maxima_14.html#expintegral_005fe">expintegral_e</a></code>
+using the recurrence (A&amp;S 5.1.14).
+</p>
+<p>expintegral_e(n+1,z) 
+        = (1/n) * (exp(-z)-z*expintegral_e(n,z))      n = 1,2,3 ....
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-contrib_005fode_002fnode_002fPossible-improvements-to-contrib_005fode"></a><hr>
+</div>
+<div class="section-level-extent" id="Possible-improvements-to-contrib_005fode">
+<div class="nav-panel">
+<p>
+Next: <a href="#Test-cases-for-contrib_005fode" accesskey="n" rel="next">Test cases for contrib_ode</a>, Previous: <a href="#Functions-and-Variables-for-contrib_005fode" accesskey="p" rel="prev">Functions and Variables for contrib_ode</a>, Up: <a href="#contrib_005fode_002dpkg" accesskey="u" rel="up">contrib_ode</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Possible-improvements-to-contrib_005fode-1">49.3 Possible improvements to contrib_ode</h3>
+
+
+<p>These routines are work in progress.  I still need to:
+</p>
+<ul class="itemize mark-bullet">
+<li>Extend the FACTOR method <code class="code">ode1_factor</code> to work for multiple roots.
+
+</li><li>Extend the FACTOR method <code class="code">ode1_factor</code> to attempt to solve higher
+  order factors.  At present it only attempts to solve linear factors.
+
+</li><li>Fix the LAGRANGE routine <code class="code">ode1_lagrange</code> to prefer real roots over
+  complex roots.
+
+</li><li>Add additional methods for Riccati equations.
+
+</li><li>Improve the detection of Abel equations of second kind.  The existing
+  pattern matching is weak.
+
+</li><li>Work on the Lie symmetry group routine <code class="code">ode1_lie</code>.  There are quite a
+  few problems with it: some parts are unimplemented; some test cases
+  seem to run forever; other test cases crash; yet others return very
+  complex &quot;solutions&quot;.  I wonder if it really ready for release yet.
+
+</li><li>Add more test cases.
+
+</li></ul>
+
+<a class="anchor" id="Item_003a-contrib_005fode_002fnode_002fTest-cases-for-contrib_005fode"></a><hr>
+</div>
+<div class="section-level-extent" id="Test-cases-for-contrib_005fode">
+<div class="nav-panel">
+<p>
+Next: <a href="#References-for-contrib_005fode" accesskey="n" rel="next">References for contrib_ode</a>, Previous: <a href="#Possible-improvements-to-contrib_005fode" accesskey="p" rel="prev">Possible improvements to contrib_ode</a>, Up: <a href="#contrib_005fode_002dpkg" accesskey="u" rel="up">contrib_ode</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Test-cases-for-contrib_005fode-1">49.4 Test cases for contrib_ode</h3>
+
+
+<p>The routines have been tested on a approximately one thousand  test cases 
+from Murphy,
+Kamke, Zwillinger and elsewhere.  These are included in the tests subdirectory.
+</p>
+<ul class="itemize mark-bullet">
+<li>The Clairaut routine <code class="code">ode1_clairaut</code> finds all known solutions,
+  including singular solutions, of the Clairaut equations in Murphy and
+  Kamke.
+
+</li><li>The other routines often return a single solution when multiple
+  solutions exist.
+
+</li><li>Some of the &quot;solutions&quot; from <code class="code">ode1_lie</code> are overly complex and
+  impossible to check.
+
+</li><li>There are some crashes.
+
+</li></ul>
+
+<a class="anchor" id="Item_003a-contrib_005fode_002fnode_002fReferences-for-contrib_005fode"></a><hr>
+</div>
+<div class="section-level-extent" id="References-for-contrib_005fode">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Test-cases-for-contrib_005fode" accesskey="p" rel="prev">Test cases for contrib_ode</a>, Up: <a href="#contrib_005fode_002dpkg" accesskey="u" rel="up">contrib_ode</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="References-for-contrib_005fode-1">49.5 References for contrib_ode</h3>
+
+
+<ol class="enumerate">
+<li> E. Kamke, Differentialgleichungen L&ouml;sungsmethoden und L&ouml;sungen, Vol 1,
+    Geest &amp; Portig, Leipzig, 1961
+
+</li><li> G. M. Murphy, Ordinary Differential Equations and Their Solutions,
+    Van Nostrand, New York, 1960
+
+</li><li> D. Zwillinger, Handbook of Differential Equations, 3rd edition,
+    Academic Press, 1998
+
+</li><li> F. Schwarz, Symmetry Analysis of Abel&rsquo;s Equation, Studies in
+    Applied Mathematics, 100:269-294 (1998)
+
+</li><li> F. Schwarz, Algorithmic Solution of Abel&rsquo;s Equation,
+    Computing 61, 39-49 (1998)
+
+</li><li> E. S. Cheb-Terrab, A. D. Roche, Symmetries and First Order
+    ODE Patterns, Computer Physics Communications 113 (1998), p 239.
+    (<a class="url" href="http://lie.uwaterloo.ca/papers/ode_vii.pdf">http://lie.uwaterloo.ca/papers/ode_vii.pdf</a>)
+
+</li><li> E. S. Cheb-Terrab, T. Kolokolnikov,  First Order ODEs,
+    Symmetries and Linear Transformations, European Journal of
+    Applied Mathematics, Vol. 14, No. 2, pp. 231-246 (2003).
+    (<a class="url" href="http://arxiv.org/abs/math-ph/0007023">http://arxiv.org/abs/math-ph/0007023</a>,<br>
+    <a class="url" href="http://lie.uwaterloo.ca/papers/ode_iv.pdf">http://lie.uwaterloo.ca/papers/ode_iv.pdf</a>)
+
+
+</li><li> G. W. Bluman, S. C. Anco, Symmetry and Integration Methods for
+    Differential Equations, Springer, (2002)
+
+</li><li> M. Bronstein, S. Lafaille,
+Solutions of linear ordinary differential equations in terms
+of special functions,
+Proceedings of ISSAC 2002, Lille, ACM Press, 23-28. 
+(<a class="url" href="http://www-sop.inria.fr/cafe/Manuel.Bronstein/publications/issac2002.pdf">http://www-sop.inria.fr/cafe/Manuel.Bronstein/publications/issac2002.pdf</a>)
+
+
+</li></ol>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_49.html#descriptive_002dpkg" accesskey="n" rel="next">descriptive</a>, Previous: <a href="maxima_47.html#combinatorics_002dpkg" accesskey="p" rel="prev">combinatorics</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

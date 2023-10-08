@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for interpol</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for interpol">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for interpol">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_296.html#interpol_002dpkg" rel="up" title="interpol-pkg">
+<link href="maxima_299.html#lapack_002dpkg" rel="next" title="lapack-pkg">
+<link href="maxima_297.html#Introduction-to-interpol" rel="previous" title="Introduction to interpol">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-interpol"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_297.html#Introduction-to-interpol" accesskey="p" rel="previous">Introduction to interpol</a>, Up: <a href="maxima_296.html#interpol_002dpkg" accesskey="u" rel="up">interpol-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-interpol-1"></a>
+<h3 class="section">67.2 Functions and Variables for interpol</h3>
+
+
+<a name="lagrange"></a><a name="Item_003a-interpol_002fdeffn_002flagrange"></a><dl>
+<dt><a name="index-lagrange"></a>Function: <strong>lagrange</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lagrange</tt> (<var>points</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lagrange</tt> (<var>points</var>, <var>option</var>)</em></dt>
+<dd>
+<p>Computes the polynomial interpolation by the Lagrangian method. Argument <var>points</var> must be either:
+</p>
+<ul>
+<li> a two column matrix, <code>p:matrix([2,4],[5,6],[9,3])</code>,
+</li><li> a list of pairs, <code>p: [[2,4],[5,6],[9,3]]</code>,
+</li><li> a list of numbers, <code>p: [4,6,3]</code>, in which case the abscissas will be assigned automatically to 1, 2, 3, etc.
+</li></ul>
+
+<p>In the first two cases the pairs are ordered with respect to the first coordinate before making computations.
+</p>
+<p>With the <var>option</var> argument it is possible to select the name for the independent variable, which is <code>'x</code> by default; to define another one, write something like <code>varname='z</code>. 
+</p>
+<p>Note that when working with high degree polynomials, floating point evaluations are unstable.
+</p>
+<p>See also <code><a href="#linearinterpol">linearinterpol</a></code>,  <code><a href="#cspline">cspline</a></code>,  and <code><a href="#ratinterpol">ratinterpol</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;interpol&quot;)$
+(%i2) p:[[7,2],[8,2],[1,5],[3,2],[6,7]]$
+(%i3) lagrange(p);
+       (x - 7) (x - 6) (x - 3) (x - 1)
+(%o3)  -------------------------------
+                     35
+   (x - 8) (x - 6) (x - 3) (x - 1)
+ - -------------------------------
+                 12
+   7 (x - 8) (x - 7) (x - 3) (x - 1)
+ + ---------------------------------
+                  30
+   (x - 8) (x - 7) (x - 6) (x - 1)
+ - -------------------------------
+                 60
+   (x - 8) (x - 7) (x - 6) (x - 3)
+ + -------------------------------
+                 84
+(%i4) f(x):=''%;
+               (x - 7) (x - 6) (x - 3) (x - 1)
+(%o4)  f(x) := -------------------------------
+                             35
+   (x - 8) (x - 6) (x - 3) (x - 1)
+ - -------------------------------
+                 12
+   7 (x - 8) (x - 7) (x - 3) (x - 1)
+ + ---------------------------------
+                  30
+   (x - 8) (x - 7) (x - 6) (x - 1)
+ - -------------------------------
+                 60
+   (x - 8) (x - 7) (x - 6) (x - 3)
+ + -------------------------------
+                 84
+(%i5) /* Evaluate the polynomial at some points */
+      expand(map(f,[2.3,5/7,%pi]));
+                                  4          3           2
+                    919062  73 %pi    701 %pi    8957 %pi
+(%o5)  [- 1.567535, ------, ------- - -------- + ---------
+                    84035     420       210         420
+                                             5288 %pi   186
+                                           - -------- + ---]
+                                               105       5
+(%i6) %,numer;
+(%o6) [- 1.567535, 10.9366573451538, 2.89319655125692]
+(%i7) load(&quot;draw&quot;)$  /* load draw package */
+(%i8) /* Plot the polynomial together with points */
+      draw2d(
+        color      = red,
+        key        = &quot;Lagrange polynomial&quot;,
+        explicit(f(x),x,0,10),
+        point_size = 3,
+        color      = blue,
+        key        = &quot;Sample points&quot;,
+        points(p))$
+(%i9) /* Change variable name */
+      lagrange(p, varname=w);
+       (w - 7) (w - 6) (w - 3) (w - 1)
+(%o9)  -------------------------------
+                     35
+   (w - 8) (w - 6) (w - 3) (w - 1)
+ - -------------------------------
+                 12
+   7 (w - 8) (w - 7) (w - 3) (w - 1)
+ + ---------------------------------
+                  30
+   (w - 8) (w - 7) (w - 6) (w - 1)
+ - -------------------------------
+                 60
+   (w - 8) (w - 7) (w - 6) (w - 3)
+ + -------------------------------
+                 84
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-interpol">Package interpol</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="charfun2"></a><a name="Item_003a-interpol_002fdeffn_002fcharfun2"></a><dl>
+<dt><a name="index-charfun2"></a>Function: <strong>charfun2</strong> <em>(<var>x</var>, <var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>The characteristic or indicator function on the half-open interval <em>[<var>a</var>, <var>b</var>)</em>,
+that is, including <var>a</var> and excluding <var>b</var>.
+</p>
+<p>When <em><var>x</var> &gt;= <var>a</var></em> and <em><var>x</var> &lt; <var>b</var></em> evaluates to <code>true</code> or <code>false</code>,
+<code>charfun2</code> returns 1 or 0, respectively.
+</p>
+<p>Otherwise, <code>charfun2</code> returns a partially-evaluated result in terms of <code><a href="maxima_64.html#charfun">charfun</a></code>.
+</p>
+<p>Package <code>interpol</code> loads this function.
+</p>
+<p>See also <code><a href="maxima_64.html#charfun">charfun</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>When <em><var>x</var> &gt;= <var>a</var></em> and <em><var>x</var> &lt; <var>b</var></em> evaluates to <code>true</code> or <code>false</code>,
+<code>charfun2</code> returns 1 or 0, respectively.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;interpol&quot;) $
+(%i2) charfun2 (5, 0, 100);
+(%o2)                           1
+(%i3) charfun2 (-5, 0, 100);
+(%o3)                           0
+</pre></div>
+
+<p>Otherwise, <code>charfun2</code> returns a partially-evaluated result in terms of <code><a href="maxima_64.html#charfun">charfun</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;interpol&quot;) $
+(%i2) charfun2 (t, 0, 100);
+(%o2)            charfun((0 &lt;= t) and (t &lt; 100))
+(%i3) charfun2 (5, u, v);
+(%o3)             charfun((u &lt;= 5) and (5 &lt; v))
+(%i4) assume (v &gt; u, u &gt; 5);
+(%o4)                    [v &gt; u, u &gt; 5]
+(%i5) charfun2 (5, u, v);
+(%o5)                           0
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-interpol">Package interpol</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="linearinterpol"></a><a name="Item_003a-interpol_002fdeffn_002flinearinterpol"></a><dl>
+<dt><a name="index-linearinterpol"></a>Function: <strong>linearinterpol</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>linearinterpol</tt> (<var>points</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>linearinterpol</tt> (<var>points</var>, <var>option</var>)</em></dt>
+<dd>
+<p>Computes the polynomial interpolation by the linear method. Argument <var>points</var> must be either:
+</p>
+<ul>
+<li> a two column matrix, <code>p:matrix([2,4],[5,6],[9,3])</code>,
+</li><li> a list of pairs, <code>p: [[2,4],[5,6],[9,3]]</code>,
+</li><li> a list of numbers, <code>p: [4,6,3]</code>, in which case the abscissas will be assigned automatically to 1, 2, 3, etc.
+</li></ul>
+
+<p>In the first two cases the pairs are ordered with respect to the first coordinate before making computations.
+</p>
+<p>With the <var>option</var> argument it is possible to select the name for the independent variable, which is <code>'x</code> by default; to define another one, write something like <code>varname='z</code>. 
+</p>
+<p>See also <code><a href="#lagrange">lagrange</a></code>,  <code><a href="#cspline">cspline</a></code>,  and <code><a href="#ratinterpol">ratinterpol</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;interpol&quot;)$
+(%i2) p: matrix([7,2],[8,3],[1,5],[3,2],[6,7])$
+(%i3) linearinterpol(p);
+        13   3 x
+(%o3)  (-- - ---) charfun2(x, minf, 3)
+        2     2
+ + (x - 5) charfun2(x, 7, inf) + (37 - 5 x) charfun2(x, 6, 7)
+    5 x
+ + (--- - 3) charfun2(x, 3, 6)
+     3
+
+(%i4) f(x):=''%;
+                13   3 x
+(%o4)  f(x) := (-- - ---) charfun2(x, minf, 3)
+                2     2
+ + (x - 5) charfun2(x, 7, inf) + (37 - 5 x) charfun2(x, 6, 7)
+    5 x
+ + (--- - 3) charfun2(x, 3, 6)
+     3
+(%i5)  /* Evaluate the polynomial at some points */
+       map(f,[7.3,25/7,%pi]);
+                            62  5 %pi
+(%o5)                 [2.3, --, ----- - 3]
+                            21    3
+(%i6) %,numer;
+(%o6)  [2.3, 2.952380952380953, 2.235987755982989]
+(%i7) load(&quot;draw&quot;)$  /* load draw package */
+(%i8)  /* Plot the polynomial together with points */
+       draw2d(
+         color      = red,
+         key        = &quot;Linear interpolator&quot;,
+         explicit(f(x),x,-5,20),
+         point_size = 3,
+         color      = blue,
+         key        = &quot;Sample points&quot;,
+         points(args(p)))$
+(%i9)  /* Change variable name */
+       linearinterpol(p, varname='s);
+       13   3 s
+(%o9) (-- - ---) charfun2(s, minf, 3)
+       2     2
+ + (s - 5) charfun2(s, 7, inf) + (37 - 5 s) charfun2(s, 6, 7)
+    5 s
+ + (--- - 3) charfun2(s, 3, 6)
+     3
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-interpol">Package interpol</a>
+&middot;</div>
+</dd></dl>
+
+
+
+<a name="cspline"></a><a name="Item_003a-interpol_002fdeffn_002fcspline"></a><dl>
+<dt><a name="index-cspline"></a>Function: <strong>cspline</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cspline</tt> (<var>points</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cspline</tt> (<var>points</var>, <var>option1</var>, <var>option2</var>, ...)</em></dt>
+<dd>
+<p>Computes the polynomial interpolation by the cubic splines method. Argument <var>points</var> must be either:
+</p>
+<ul>
+<li> a two column matrix, <code>p:matrix([2,4],[5,6],[9,3])</code>,
+</li><li> a list of pairs, <code>p: [[2,4],[5,6],[9,3]]</code>,
+</li><li> a list of numbers, <code>p: [4,6,3]</code>, in which case the abscissas will be assigned automatically to 1, 2, 3, etc.
+</li></ul>
+
+<p>In the first two cases the pairs are ordered with respect to the first coordinate before making computations.
+</p>
+<p>There are three options to fit specific needs:
+</p><ul>
+<li> <code>'d1</code>, default <code>'unknown</code>, is the first derivative at <em>x_1</em>; if it is <code>'unknown</code>, the second derivative at <em>x_1</em> is made equal to 0 (natural cubic spline); if it is equal to a number, the second derivative is calculated based on this number.
+
+</li><li> <code>'dn</code>, default <code>'unknown</code>, is the first derivative at <em>x_n</em>; if it is <code>'unknown</code>, the second derivative at <em>x_n</em> is made equal to 0 (natural cubic spline); if it is equal to a number, the second derivative is calculated based on this number.
+
+</li><li> <code>'varname</code>, default <code>'x</code>, is the name of the independent variable.
+</li></ul>
+
+<p>See also <code><a href="#lagrange">lagrange</a></code>,  <code><a href="#linearinterpol">linearinterpol</a></code>,  and <code><a href="#ratinterpol">ratinterpol</a></code>.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;interpol&quot;)$
+(%i2) p:[[7,2],[8,2],[1,5],[3,2],[6,7]]$
+(%i3) /* Unknown first derivatives at the extremes
+         is equivalent to natural cubic splines */
+      cspline(p);
+              3         2
+        1159 x    1159 x    6091 x   8283
+(%o3)  (------- - ------- - ------ + ----) charfun2(x, minf, 3)
+         3288      1096      3288    1096
+            3         2
+      2587 x    5174 x    494117 x   108928
+ + (- ------- + ------- - -------- + ------) charfun2(x, 7, inf)
+       1644       137       1644      137
+          3          2
+    4715 x    15209 x    579277 x   199575
+ + (------- - -------- + -------- - ------) charfun2(x, 6, 7)
+     1644       274        1644      274
+            3         2
+      3287 x    2223 x    48275 x   9609
+ + (- ------- + ------- - ------- + ----) charfun2(x, 3, 6)
+       4932       274      1644     274
+
+(%i4) f(x):=''%$
+(%i5) /* Some evaluations */
+      map(f,[2.3,5/7,%pi]), numer;
+(%o5) [1.991460766423356, 5.823200187269903, 2.227405312429507]
+(%i6) load(&quot;draw&quot;)$  /* load draw package */
+(%i7) /* Plotting interpolating function */
+      draw2d(
+        color      = red,
+        key        = &quot;Cubic splines&quot;,
+        explicit(f(x),x,0,10),
+        point_size = 3,
+        color      = blue,
+        key        = &quot;Sample points&quot;,
+        points(p))$
+(%i8) /* New call, but giving values at the derivatives */
+      cspline(p,d1=0,dn=0);
+              3          2
+        1949 x    11437 x    17027 x   1247
+(%o8)  (------- - -------- + ------- + ----) charfun2(x, minf, 3)
+         2256       2256      2256     752
+            3          2
+      1547 x    35581 x    68068 x   173546
+ + (- ------- + -------- - ------- + ------) charfun2(x, 7, inf)
+        564       564        141      141
+         3          2
+    607 x    35147 x    55706 x   38420
+ + (------ - -------- + ------- - -----) charfun2(x, 6, 7)
+     188       564        141      47
+            3         2
+      3895 x    1807 x    5146 x   2148
+ + (- ------- + ------- - ------ + ----) charfun2(x, 3, 6)
+       5076       188      141      47
+(%i8) /* Defining new interpolating function */
+      g(x):=''%$
+(%i9) /* Plotting both functions together */
+      draw2d(
+        color      = black,
+        key        = &quot;Cubic splines (default)&quot;,
+        explicit(f(x),x,0,10),
+        color      = red,
+        key        = &quot;Cubic splines (d1=0,dn=0)&quot;,
+        explicit(g(x),x,0,10),
+        point_size = 3,
+        color      = blue,
+        key        = &quot;Sample points&quot;,
+        points(p))$
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-interpol">Package interpol</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ratinterpol"></a><a name="Item_003a-interpol_002fdeffn_002fratinterpol"></a><dl>
+<dt><a name="index-ratinterpol"></a>Function: <strong>ratinterpol</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ratinterpol</tt> (<var>points</var>, <var>numdeg</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ratinterpol</tt> (<var>points</var>, <var>numdeg</var>, <var>option1</var>)</em></dt>
+<dd>
+<p>Generates a rational interpolator for data given by <var>points</var> and the degree of the numerator
+being equal to <var>numdeg</var>; the degree of the denominator is calculated
+automatically. Argument <var>points</var> must be either:
+</p>
+<ul>
+<li> a two column matrix, <code>p:matrix([2,4],[5,6],[9,3])</code>,
+</li><li> a list of pairs, <code>p: [[2,4],[5,6],[9,3]]</code>,
+</li><li> a list of numbers, <code>p: [4,6,3]</code>, in which case the abscissas will be assigned automatically to 1, 2, 3, etc.
+</li></ul>
+
+<p>In the first two cases the pairs are ordered with respect to the first coordinate before making computations.
+</p>
+<p>There is one option to fit specific needs:
+</p><ul>
+<li> <code>'varname</code>, default <code>'x</code>, is the name of the independent variable.
+</li></ul>
+
+<p>See also <code><a href="#lagrange">lagrange</a></code>,  <code><a href="#linearinterpol">linearinterpol</a></code>,  <code><a href="#cspline">cspline</a></code>,  <code><a href="maxima_315.html#minpack_005flsquares">minpack_lsquares</a></code>,  and <a href="maxima_302.html#lbfgs_002dpkg">lbfgs-pkg</a>
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;interpol&quot;)$
+(%i2) load(&quot;draw&quot;)$
+(%i3) p:[[7.2,2.5],[8.5,2.1],[1.6,5.1],[3.4,2.4],[6.7,7.9]]$
+(%i4) for k:0 thru length(p)-1 do                                     
+        draw2d(
+          explicit(ratinterpol(p,k),x,0,9),                      
+          point_size = 3,                                        
+          points(p),                                             
+          title = concat(&quot;Degree of numerator = &quot;,k),            
+          yrange=[0,10])$
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-interpol">Package interpol</a>
+&middot;</div>
+</dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_297.html#Introduction-to-interpol" accesskey="p" rel="previous">Introduction to interpol</a>, Up: <a href="maxima_296.html#interpol_002dpkg" accesskey="u" rel="up">interpol-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Extending pytranslate</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Extending pytranslate">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Extending pytranslate">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_342.html#pytranslate" rel="up" title="pytranslate">
+<link href="maxima_346.html#quantum_005fcomputing_002dpkg" rel="next" title="quantum_computing-pkg">
+<link href="maxima_344.html#Functions-in-pytranslate" rel="previous" title="Functions in pytranslate">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Extending-pytranslate"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_344.html#Functions-in-pytranslate" accesskey="p" rel="previous">Functions in pytranslate</a>, Up: <a href="maxima_342.html#pytranslate" accesskey="u" rel="up">pytranslate</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Extending-pytranslate-1"></a>
+<h3 class="section">82.3 Extending pytranslate</h3>
+<p>Working of pytranslate:
+</p><ul>
+<li> The entry point for pytranslate is the function <code>$pytranslate</code> defined in <samp>share/pytranslate/pytranslate.lisp</samp>.
+</li><li> <code>$pytranslate</code> calls the function <code>maxima-to-ir</code> with the Maxima expression as an argument(henceforth referred as <code>expr</code>).
+</li><li> <code>maxima-to-ir</code> determines if <code>expr</code> is atomic or non-atomic(lisp cons form). If atomic, <code>atom-to-ir</code> is called with <code>expr</code> which returns the IR for the atomic expression.<br>
+To define/modify translation for atomic expressions, make changes to the definition of <code>atom-to-ir</code> in accordance with the IR.
+</li><li> If <code>expr</code> is non-atomic, the function <code>cons-to-ir</code> is called with <code>expr</code> as an argument.<br>
+<ul>
+<li> <code>cons-to-ir</code> looks for <code>(caar expr)</code> which specifies the type of <code>expr</code>, in hash-table <var>*maxima-direct-ir-map*</var> and if the type is found, then appends the retrieved IR with the result of lisp call <code>(mapcar #'maxima-to-ir (cdr expr))</code>, which applies maxima-to-ir function to all the elements present in the list. Effectively, recursively generate IR for all the elements present in <code>expr</code> and append them to the IR map for the type.<br>
+Example:
+<div class="example">
+<pre class="example">(%i9) show_form(a+b);
+((MPLUS) $B $A)
+</pre><pre class="example">(%i10) pytranslate(a+b, t);
+(body (op + (element-array (symbol &quot;v&quot;) (string &quot;b&quot;)) \
+(element-array (symbol &quot;v&quot;) (string &quot;a&quot;))))
+(%o10) 
+(v[&quot;b&quot;] + v[&quot;a&quot;])
+</pre></div>
+<p>Here, operator + with internal maxima representation, <code>(mplus)</code> is present in <var>*maxima-direct-ir-map*</var> and mapped to <code>(op +)</code> to which the result of generating IR for all other elements of the list (a b), i.e. <code>(ELEMENT-ARRAY (SYMBOL &quot;v&quot;) (STRING &quot;b&quot;)) (ELEMENT-ARRAY (SYMBOL &quot;v&quot;) (STRING &quot;a&quot;))</code> is appended.<br>
+</p>
+</li><li> If <code>(caar expr)</code> is not found in <var>*maxima-direct-ir-map*</var>, then <code>cons-to-ir</code> looks for the type in <var>*maxima-special-ir-map*</var> which returns the function to handle the translation of the type of <code>expr</code>. <code>cons-to-ir</code> then calls the returned function with argument <code>expr</code> as an argument.<br>
+Example:
+<div class="example">
+<pre class="example">(%i11) show_form(g(x) := x^2);
+((mdefine simp) (($g) $x) ((mexpt) $x 2))
+</pre><pre class="example">(%i12) pytranslate(g(x):=x^2, t);
+(body
+ (body
+  (func-def (symbol &quot;g&quot;)
+            ((symbol &quot;x&quot;) (op-no-bracket = (symbol &quot;v&quot;) (symbol &quot;v&quot;)))
+            (body-indented
+                (op-no-bracket = (symbol &quot;v&quot;) (funcall (symbol &quot;stack&quot;) \
+                (dictionary) (symbol &quot;v&quot;)))
+                (obj-funcall (symbol &quot;v&quot;) (symbol &quot;ins&quot;) (dictionary \
+                ((string &quot;x&quot;) (symbol &quot;x&quot;))))
+                (funcall (symbol &quot;return&quot;)
+                    (funcall (element-array (symbol &quot;f&quot;) (string &quot;pow&quot;))
+                         (element-array (symbol &quot;v&quot;) (string &quot;x&quot;))
+                                  (num 2 0)))))
+  (op-no-bracket = (element-array (symbol &quot;f&quot;) (string &quot;g&quot;)) \
+  (symbol &quot;g&quot;))))  
+(%o12) 
+def g(x, v = v):
+    v = Stack({}, v)
+    v.ins({&quot;x&quot; : x})
+    return(f[&quot;pow&quot;](v[&quot;x&quot;], 2))
+f[&quot;g&quot;] = g
+
+</pre></div>
+<p>Here, <code>mdefine</code>, which is the type of <code>expr</code> is present in <var>*maxima-special-ir-map*</var> which returns <code>func-def-to-ir</code> as handler function, which is then called with <code>expr</code> to generate the IR.<br>
+To define/modify translation for a type, add an entry to <var>*maxima-direct-ir-map*</var> if only a part of the IR needs to be generated and the rest can be appended, otherwise, for complete handling of <code>expr</code>, add an entry to <var>*maxima-special-ir-map*</var> and define a function with the name defined in <var>*maxima-special-ir-map*</var> which returns the IR for the form. The function naming convention for ir generators is (type)-to-ir, where type is the <code>(caar expr)</code> for expression(<code>mdefine -&gt; func-def-to-ir</code>). The function must return a valid IR for the specific type.
+</p></li></ul>
+</li><li> After the generation of IR, the function <code>ir-to-python</code> is called with the generated <code>ir</code> as an argument, which performs the codegen in a recursive manner.
+<ul>
+<li> <code>ir-to-python</code> looks for lisp <code>(car ir)</code> in the hash-table <var>*ir-python-direct-templates*</var>, which maps IR type to function handlers and calls the function returned with <code>ir</code> as an argument.
+</li></ul>
+</li><li> To extend the IR of pytranslate, define a function with the naming convention (type)-to-python and add the name to <var>*ir-python-direct-templates*</var>.
+</li></ul>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_344.html#Functions-in-pytranslate" accesskey="p" rel="previous">Functions in pytranslate</a>, Up: <a href="maxima_342.html#pytranslate" accesskey="u" rel="up">pytranslate</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

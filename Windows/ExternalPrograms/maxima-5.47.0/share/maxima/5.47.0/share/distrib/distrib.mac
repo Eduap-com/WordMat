@@ -1,0 +1,2000 @@
+/*               COPYRIGHT NOTICE
+
+Copyright (C) 2005-2017 Mario Rodriguez Riotorto
+
+This program is free software; you can redistribute
+it and/or modify it under the terms of the
+GNU General Public License as published by
+the Free Software Foundation; either version 2 
+of the License, or (at your option) any later version. 
+
+This program is distributed in the hope that it
+will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the 
+GNU General Public License for more details at
+http://www.gnu.org/copyleft/gpl.html
+
+For comments, suggestions and the like, feel free to contact the author at
+
+To test:
+batch("rtest_distrib.mac", test) ;
+
+riotorto AT yahoo DOT com
+
+*/
+
+
+/*             INTRODUCTION
+
+This is a set of Maxima functions for univariate probability distributions,
+both continuous and discrete.
+
+Continuous distributions:                   Discrete distributions:
+   Normal              (*normal)              Binomial             (*binomial)
+   Student             (*student_t)           Poisson              (*poisson)
+   Chi^2               (*chi2)                Bernoulli            (*bernoulli)
+   F                   (*f)                   Geometric            (*geometric)
+   Exponential         (*exp)                 Discrete uniform     (*discrete_uniform)
+   Lognormal           (*lognormal)           Hypergeometric       (*hypergeometric)
+   Gamma               (*gamma)               Negative binomial    (*negative_binomial)
+   Beta                (*beta)                Finite discrete      (*general_finite_discrete)
+   Continuous uniform  (*continuous_uniform)
+   Logistic            (*logistic)
+   Pareto              (*pareto)
+   Weibull             (*weibull)
+   Rayleigh            (*rayleigh)
+   Laplace             (*laplace)
+   Cauchy              (*cauchy)
+   Gumbel              (*gumbel)
+   Noncentral Chi^2    (*noncentral_chi2)
+   Noncentral Student  (*noncentral_student_t)
+
+Functions:
+   Density function              (pdf_*)
+   Distribution function         (cdf_*)
+   Quantile                      (quantile_*)
+   Mean                          (mean_*)
+   Variance                      (var_*)
+   Standard deviation            (std_*)
+   Skewness coefficient          (skewness_*)
+   Kurtosis coefficient          (kurtosis_*)
+   Random variate                (random_*)
+   Maximum likelihood estimates  (mle_*)
+
+For example,
+   pdf_student_t(x,n) is the density function of the Student distribution
+                   with n degrees of freedom
+   std_pareto(a,b) is the standard deviation of the Pareto distribution
+                   with parameters a and b
+   kurtosis_poisson(m) is the kurtosis coefficient of the Poisson distribution
+                   with mean m
+
+Note: the Cauchy model has no moments, in this case only the density and
+      the distribution functions, 'pdf_cauchy' and 'cdf_cauchy', are defined.
+
+For questions, suggestions, bugs and the like, feel free
+to contact me at
+
+riotorto @@@ yahoo DOT com
+*/
+
+put('distrib, 2, 'version) $
+
+/* This business about trying to infer whether a package is loaded is kind of terrible ...
+ * Maxima would benefit from a more organized package management system.
+ */
+
+if get ('descriptive, 'version) = false then load ("descriptive");
+
+if ?fboundp ('lbfgs) = false then load ("lbfgs");
+
+/* Sets the random state according to the computer clock time */
+set_random_state(make_random_state(true))$
+
+
+/* Loads numerical routines */
+load("numdistrib.lisp")$
+
+
+
+/*         NORMAL (OR GAUSSIAN) DISTRIBUTION          */
+
+pdf_normal(x,m,s) :=
+   if maybe(s > 0) = false
+     then  error("pdf_normal: standard deviation must be greater than zero") 
+     else  exp(-(x-m)^2/(2*s^2))/(sqrt(2*%pi)*s)$
+
+cdf_normal(x,m,s) :=
+   if maybe(s > 0) = false
+     then error("cdf_normal: standard deviation must be greater than zero")
+     else 1/2+erf((x-m)/(s*sqrt(2)))/2 $
+
+/* R: qnorm(q,m,s) */
+quantile_normal(q,m,s) := 
+   if maybe(s > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_normal: illegal parameters")
+     else if equal(q, 0) then minf
+          elseif equal(q, 1) then inf
+          else m + sqrt(2)*s*inverse_erf(2*q-1) $
+
+mean_normal(m,s) := 
+   if maybe(s > 0) = false
+     then error("mean_normal: standard deviation must be greater than zero")
+     else m $
+
+var_normal(m,s) :=
+   if maybe(s > 0) = false
+     then error("var_normal: standard deviation must be greater than zero")
+     else s^2 $
+
+std_normal(m,s) :=
+   if maybe(s > 0) = false
+     then error("std_normal: standard deviation must be greater than zero")
+     else s $
+
+skewness_normal(m,s) :=
+   if maybe(s > 0) = false
+     then error("skewness_normal: standard deviation must be greater than zero")
+     else 0 $
+
+kurtosis_normal(m,s) :=
+   if maybe(s > 0) = false
+     then error("kurtosis_normal: standard deviation must be greater than zero")
+     else 0 $
+
+random_normal(m,s,[num]) := 
+   if maybe(s > 0) = false
+     then error("random_normal: standard deviation must be greater than zero")
+     else block([no],
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then m + s * ?rndnormal(no)
+              else error("random_normal: check sample size")) $
+
+mle_normal (x, [w]) :=
+    if x = []
+        then ['location = und, 'scale = und]
+    else
+        if w = []
+            then ['location = mean (x), 'scale = std (x)]
+            else ['location = mean (x, w[1]), 'scale = std (x, w[1])];
+
+
+/*         STUDENT DISTRIBUTION          */
+
+pdf_student_t(x,n) :=
+   if maybe(n > 0) = false
+     then error("pdf_student: number of degrees must be greater than zero") 
+     else gamma((n+1)/2) * (1+x*x/n)^(-(n+1)/2) / (sqrt(n*%pi) * gamma(n/2)) $
+
+/* R: pt(x,n) */
+cdf_student_t(x,n) :=
+   if maybe(n > 0) = false
+     then error("cdf_student_t: number of degrees must be greater than zero")
+     else (1+signum(x))/2 - signum(x) * beta_incomplete_regularized(n/2,1/2,n/(n+x^2)) / 2 $
+
+/* R: qt(q,n) */
+quantile_student_t(q,n) := 
+  if maybe(n > 0 and q >= 0 and q <= 1) = false
+    then error("quantile_student_t: illegal parameters")
+    else /* need numerical approximation */
+         block([fq: float(q), fn: float(n), aux, sgn],
+               if numberp(fq) and numberp(fn)
+                 then (if fq = 0.0 then return('minf),
+                       if fq = 1.0 then return('inf),
+                       if fq = 0.5 then return(0),
+                       if fq < 0.5
+                         then (aux: 2*fq,
+                               sgn: -1)
+                         else (aux: 2*(1-fq),
+                               sgn: 1),
+                       sgn*sqrt(n*(1 / ?iibeta(aux,float(n/2),0.5)-1)))
+                 else error("quantile_student: need numeric arguments for approximate procedure")) $
+
+mean_student_t(n) :=
+   if maybe(n > 0) = false
+     then error("mean_student_t:: degrees of freedom must be greater than zero")
+     else 0 $
+
+var_student_t(n) :=
+   if maybe(n > 2) = false
+     then error("var_student_t: degrees of freedom must be greater than 2")
+     else n / (n-2) $
+
+std_student_t(n) :=
+   if maybe(n > 2) = false
+     then error("std_student_t: degrees of freedom must be greater than 2")
+     else sqrt(n / (n-2)) $
+
+skewness_student_t(n) :=
+   if maybe(n > 3) = false
+     then error("skewness_student_t: degrees of freedom must be greater than 3")
+     else 0 $
+
+kurtosis_student_t(n) := 
+   if maybe(n > 4) = false
+     then error("kurtosis_student_t: degrees of freedom must be greater than 4")
+     else 6/(n-4) $
+
+random_student_t(n,[num]) :=
+   if maybe(n > 0) = false
+     then error("random_student_t: degrees of freedom must be greater than zero")
+     else block([no, fn: float(n)],
+            if not numberp(fn)
+              then error("random_student_t: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then ?rndstudent(fn,no)
+              else error("random_student_t: check sample size") ) $
+
+
+
+/*     NONCENTRAL STUDENT DISTRIBUTION      */
+
+/* According to documentation on hgfred, sometimes it might be useful to load */
+/* package orthopoly. In R, dt(x,n,ncp)                                       */
+pdf_noncentral_student_t(x,n,ncp) :=
+   if maybe(n > 0) = false
+     then error("pdf_noncentral_student_t: degrees of freedom must be greater than 0")
+   elseif sign(ncp) = 'zero
+     then pdf_student_t(x,n)
+     else n^(n/2) * factorial(n) * exp(-ncp^2/2) / 
+          (2^n * (n+x^2)^(n/2) * gamma(n/2)) *
+          (sqrt(2)*ncp*x*hgfred([n/2+1],[3/2],ncp^2*x^2/(2*(n+x^2))) /  ((n+x^2) * gamma((n+1)/2))  + 
+           hgfred([(n+1)/2],[1/2],ncp^2*x^2/(2*(n+x^2))) / (sqrt(n+x^2) * gamma(n/2+1))) $
+
+/* R: pt(x,n,ncp) */
+cdf_noncentral_student_t(x,n,ncp) :=
+   if maybe(n > 0) = false
+     then error("cdf_noncentral_student_t: degrees of freedom must be greater than 0")
+   elseif sign(ncp) = 'zero
+     then cdf_student_t(x,n)
+     else /* numerical approximation */
+          block([fx: float(x), fn: float(n), fncp: float(ncp)],
+            if numberp(fx) and numberp(fn) and numberp(fncp)
+              then ?cdfnt(fx,fn,fncp)
+              else error("cdf_noncentral_student_t: need numeric arguments for approximate procedure")) $
+
+/* R: qt(q,n,ncp) */
+quantile_noncentral_student_t(q,n,ncp) :=
+  if maybe(n > 0 and q >= 0 and q <= 1) = false
+    then error("quantile_noncentral_student_t: illegal parameters")
+    else /* numerical approximation */
+         block([fq: float(q), fn: float(n), fncp: float(ncp)],
+            if numberp(fq) and numberp(fn)
+              then (if fq = 0.0 then return('minf),
+                    if fq = 1.0 then return('inf),
+                    if numberp(fncp)
+                      then if fncp=0.0
+                             then return(quantile_student_t(fq,fn))
+                             else ?qnct(fq, fn, fncp))
+              else error("quantile_noncentral_student_t: need numeric arguments for approximate procedure") ) $
+
+mean_noncentral_student_t(n,ncp) :=
+   if maybe(n > 1) = false
+     then error("mean_noncentral_student_t: degrees of freedom must be greater than 1")
+     else ncp * sqrt(n/2) * gamma((n-1)/2) / gamma(n/2) $
+
+var_noncentral_student_t(n,ncp) :=
+   if maybe(n > 2) = false
+     then error("var_noncentral_student_t: degrees of freedom must be greater than 2")
+     else n*(1+ncp^2)/(n-2) - ncp^2*n/2 * (gamma((n-1)/2) / gamma(n/2))^2 $
+
+std_noncentral_student_t(n,ncp) := sqrt(var_noncentral_student_t(n,ncp)) $
+
+skewness_noncentral_student_t(n,ncp) :=
+   if maybe(n > 3) = false
+     then error("skewness_noncentral_student_t: degrees of freedom must be greater than 3")
+     else block([m: mean_noncentral_student_t(n,ncp), v: var_noncentral_student_t(n,ncp)],
+                 m / v^(3/2) * (n*(2*n-3+ncp^2)/((n-2)*(n-3)) - 2*v) ) $
+
+kurtosis_noncentral_student_t(n,ncp) :=
+   if maybe(n > 4) = false
+     then error("kurtosis_noncentral_student_t: degrees of freedom must be greater than 4")
+     else block([m: mean_noncentral_student_t(n,ncp), v: var_noncentral_student_t(n,ncp)],
+                 (n^2*(3+6*ncp^2+ncp^4)/((n-2)*(n-4)) - m^2 * (n*((n+1)*ncp^2+3*(3*n-5))/((n-2)*(n-3)) - 3*v))/v^2 - 3) $
+
+random_noncentral_student_t(n,ncp,[num]) :=
+   if maybe(n > 0) = false
+     then error("random_noncentral_student_t: degrees of freedom must be greater than zero")
+     else block([no, fn: float(n), fncp: float(ncp)],
+                 if numberp(fn) and numberp(fncp)
+                   then (if length(num) = 0 then no: 0 else no: num[1],
+                         if integerp(no) and no >= 0
+                           then ?rndncstudent(fn,fncp,no)
+                           else error("random_noncentral_student_t: check sample size"))
+                   else error("random_noncentral_student_t: need numeric arguments for approximate procedure") ) $
+
+
+
+/*         CHI-SQUARE (OR PEARSON'S)  DISTRIBUTION          */
+/*          chi2(n) is equivalent to gamma(n/2,2)           */
+
+pdf_chi2(x,n) := pdf_gamma(x,n/2,2)$
+
+cdf_chi2(x,n) := cdf_gamma(x,n/2,2)$
+
+quantile_chi2(q,n) := quantile_gamma(q,n/2,2)$
+
+mean_chi2(n) := mean_gamma(n/2,2)$
+
+var_chi2(n) := var_gamma(n/2,2)$
+
+std_chi2(n) := std_gamma(n/2,2)$
+
+skewness_chi2(n) := skewness_gamma(n/2,2)$
+
+kurtosis_chi2(n) := kurtosis_gamma(n/2,2)$
+
+random_chi2(n,[num]) := 
+   if maybe(n > 0) = false
+     then error("random_chi2: degrees of freedom must be greater than zero")
+     else block([no, fn: float(n)],
+            if not numberp(fn)
+              then error("random_chi2: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then ?rndchi2(fn,no)
+              else error("random_chi2: check sample size")) $
+
+
+
+/*     NONCENTRAL CHI-SQUARE DISTRIBUTION      */
+
+/* R: dchisq(x,n,ncp) */
+pdf_noncentral_chi2(x,n,ncp) :=
+   if maybe(n > 0) = false
+     then error("pdf_noncentral_chi2: degrees of freedom must be greater than 0")
+   elseif sign(ncp) = 'zero
+     then pdf_chi2(x,n)
+     else 1/2 * exp(-(x+ncp)/2) * (x/ncp)^(n/4-1/2) * bessel_i(n/2-1, sqrt(x*ncp)) * unit_step(x) $
+
+/* R: pchisq(x,n,ncp) */
+cdf_noncentral_chi2(x,n,ncp) :=
+   if maybe(n > 0) = false
+     then error("cdf_noncentral_chi2: degrees of freedom must be greater than 0")
+     elseif float(ncp)=0.0
+       then cdf_chi2(x,n)
+       elseif maybe(x >= 0) = false
+         then 0
+         else /* need numerical approximation */
+              block([fx: float(x), fn: float(n), fncp: float(ncp)],
+                    if numberp(fx) and numberp(fn) and numberp(fncp)
+                      then ?cdfnchi2(fx, fn, fncp,
+                                    1e-12,                /* maximum error */
+                                    1.4210854715202e-14,  /* 8*DBL_EPSILON */
+                                    1000000.0)            /* number of iterations */
+                      else error("cdf_noncentral_chi2: need numeric arguments for approximate procedure") ) $
+
+/* R: qchisq(q,n,ncp) */
+quantile_noncentral_chi2(q,n,ncp) :=
+   if maybe(n > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_noncentral_chi2: degrees of freedom must be greater than 0")
+     else /* numerical approximation */
+          block([fq: float(q), fn: float(n), fncp: float(ncp)],
+            if numberp(fq) and numberp(fn) and numberp(fncp)
+              then (if fq = 0.0 then return(0),
+                    if fq = 1.0 then return('inf),
+                    if fncp=0.0 then return(quantile_chi2(q,n)),
+                    ?qnchi2(fq, fn, fncp))
+              else error("quantile_noncentral_chi2: need numeric arguments for approximate procedure")) $
+
+mean_noncentral_chi2(n,ncp) :=
+   if maybe(n > 0) = false
+     then error("mean_noncentral_chi2: degrees of freedom must be greater than 0")
+     else n + ncp $
+
+var_noncentral_chi2(n,ncp) :=
+   if maybe(n > 0) = false
+     then error("var_noncentral_chi2: degrees of freedom must be greater than 0")
+     else 2*(n + 2*ncp) $
+
+std_noncentral_chi2(n,ncp) := sqrt(var_noncentral_chi2(n,ncp)) $
+
+skewness_noncentral_chi2(n,ncp) :=
+   if maybe(n > 0) = false
+     then error("skewness_noncentral_chi2: degrees of freedom must be greater than 0")
+     else 2^(3/2) * (n+3*ncp) /(n+2*ncp)^(3/2) $
+
+kurtosis_noncentral_chi2(n,ncp) :=
+   if maybe(n > 0) = false
+     then error("kurtosis_noncentral_chi2: degrees of freedom must be greater than 0")
+     else 12 * (n+4*ncp) /(n+2*ncp)^2 $
+
+random_noncentral_chi2(n,ncp,[num]) :=
+   if maybe(n > 0) = false
+     then error("random_noncentral_chi2: degrees of freedom must be greater than 0")
+     else block([no, fn: float(n), fncp: float(ncp)],
+            if not numberp(fn) or not numberp(fncp)
+              then error("random_noncentral_chi2: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then ?rndnchi2(fn,fncp,no)
+              else error("random_noncentral_chi2: check sample size")) $
+
+
+
+/*         F DISTRIBUTION          */
+
+pdf_f(x,m,n) :=
+   if maybe(n > 0 and m > 0) = false
+     then error("pdf_f: degrees of freedom must be greater than 0")
+     else gamma((m+n)/2)*(m/n)^(m/2)*x^(m/2-1)*(1+m*x/n)^(-(m+n)/2) / (gamma(m/2)*gamma(n/2)) * unit_step(x) $
+
+/* R: pf(x,m,n) */
+cdf_f(x,m,n) :=
+   if maybe(n > 0 and m > 0) = false
+     then error("cdf_f: degrees of freedom must be greater than 0")
+     else (1 - beta_incomplete_regularized(n/2, m/2, n/(n+m*x))) * unit_step(x) $
+
+/* R: qf(q,m,n) */
+quantile_f(q,m,n) :=
+   if maybe(n > 0 and m > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_f: check input parameters")
+   else block([fq: float(q), fn: float(n), fm: float(m)],
+          if numberp(fq) and numberp(fn) and numberp(fm)
+            then(if fq = 0.0 then return(0),
+                 if fq = 1.0 then return('inf),
+                 fn * (1 / ?iibeta(1-fq, fn/2, fm/2) - 1) / fm)
+            else error("quantile_f: need numeric arguments for approximate procedure")) $
+
+mean_f(m,n) :=
+   if maybe(n > 2 and m > 0) = false
+     then error("mean_f: degrees of freedom must be m>0 and n>2")
+     else n/(n-2) $
+
+var_f(m,n) :=
+   if maybe(n > 4 and m > 0) = false
+     then error("var_f: degrees of freedom must be m>0 and n>4")
+     else 2*n*n*(m+n-2)/(m*(n-2)*(n-2)*(n-4)) $
+
+std_f(m,n) := sqrt(var_f(m,n)) $
+
+skewness_f(m,n) :=
+   if maybe(n > 6 and m > 0) = false
+     then error("skewness_f: degrees of freedom must be m>0 and n>6")
+     else (2*m+n-2)*sqrt(8*(n-4))/(sqrt(m*(m+n-2))*(n-6)) $
+
+kurtosis_f(m,n) :=
+   if maybe(n > 8 and m > 0) = false
+     then error("kurtosis_f: degrees of freedom must be m>0 and n>8")
+     else 12*((n-2)*(n-2)*(n-4)+m*(m+n-2)*(5*n-22)) / (m*(n-6)*(n-8)*(m+n-2)) $
+
+random_f(m,n,[num]) :=
+   if maybe(n > 0 and m > 0) = false
+     then error("pdf_f: degrees of freedom must be greater than 0")
+     else block([no, fm: float(m), fn: float(n)],
+            if not numberp(fn) or not numberp(fm)
+              then error("random_f: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then ?rndf(fm,fn,no)
+              else error("random_f: check sample size")) $
+
+
+
+/*         EXPONENTIAL DISTRIBUTION          */
+/*   exp(m) equivalent to Weibull(1,1/m)     */
+
+pdf_exp(x,m) := pdf_weibull(x,1,1/m)$
+
+cdf_exp(x,m) := cdf_weibull(x,1,1/m)$
+
+quantile_exp(q,m) := quantile_weibull(q,1,1/m)$
+
+mean_exp(m) := mean_weibull(1,1/m)$
+
+var_exp(m) := var_weibull(1,1/m)$
+
+std_exp(m) := std_weibull(1,1/m)$
+
+skewness_exp(m) := skewness_weibull(1,1/m)$
+
+kurtosis_exp(m) := kurtosis_weibull(1,1/m)$
+
+random_exp(m,[num]) :=
+   if maybe(m > 0) = false
+     then error("random_exp: rate must be greater than 0")
+     else block([no, fm: float(m)],
+            if not numberp(fm)
+              then error("random_exp: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then ?rndexp(fm,no)
+              else error("random_exp: check sample size") ) $
+
+mle_exp (x, [w]) :=
+    if x = []
+        then ['rate = und]
+        else (w: if w = [] then 1 else w[1],
+              ['rate = 1 / mean(x, w)]);
+
+
+/*         LOGNORMAL DISTRIBUTION          */
+
+pdf_lognormal(x,m,s) :=
+   if maybe(s > 0) = false
+     then error("pdf_lognormal: parameter s must be greater than 0")
+     else exp(-(log(x)-m)^2/(2*s^2))/(sqrt(2*%pi)*s*x) * unit_step(x) $
+
+cdf_lognormal(x,m,s) :=
+   if maybe(s > 0) = false
+     then error("cdf_lognormal: parameter s must be greater than 0")
+     else (1/2+erf((log(x)-m)/(s*sqrt(2)))/2) * unit_step(x) $
+
+/* R: qlnorm(p,m,s)*/
+quantile_lognormal(q,m,s) :=
+   if maybe(s > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_lognormal: check input parameters")
+   else
+     if equal (q, 0) then 0
+     elseif equal (q, 1) then inf
+       else exp(m + sqrt(2)*s*inverse_erf(2*q-1)) $
+
+mean_lognormal(m,s) :=
+   if maybe(s > 0) = false
+     then error("mean_lognormal: parameter s must be greater than 0")
+     else exp(m+s^2/2) $
+
+var_lognormal(m,s) :=
+   if maybe(s > 0) = false
+     then error("var_lognormal: parameter s must be greater than 0")
+     else exp(2*m+s^2)*(exp(s^2)-1) $
+
+std_lognormal(m,s) := sqrt(var_lognormal(m,s)) $
+
+skewness_lognormal(m,s) :=
+   if maybe(s > 0) = false
+     then error("skewness_lognormal: parameter s must be greater than 0")
+     else (exp(s^2)+2)*sqrt(exp(s^2)-1) $
+
+kurtosis_lognormal(m,s) :=
+   if maybe(s > 0) = false
+     then error("kurtosis_lognormal: parameter s must be greater than 0")
+     else exp(4*s^2)+2*exp(3*s^2)+3*exp(2*s^2)-3 $
+
+random_lognormal(m,s,[num]) :=
+   if maybe(s > 0) = false
+     then error("random_lognormal: parameter s must be greater than 0")
+     else block([no],
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then exp(m + s * ?rndnormal(no))
+              else error("random_lognormal: check sample size") ) $
+
+mle_lognormal (x, [w]) :=
+    if x = []
+        then ['log_location = und, 'log_scale = und]
+    else
+        if w = []
+            then ['log_location = mean (log (x)), 'log_scale = std (log (x))]
+            else ['log_location = mean (log (x), w[1]), 'log_scale = std (log (x), w[1])];
+
+
+
+/*         GAMMA DISTRIBUTION          */
+
+/* R: dgamma(x,a,1/b) */
+pdf_gamma(x,a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("pdf_gamma: parameters a and b must be greater than 0")
+     else x^(a-1)*exp(-x/b)/(b^a*gamma(a)) * unit_step(x) $
+
+/* R: pgamma(x,a,1/b) */
+cdf_gamma(x,a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("cdf_gamma: parameters a and b must be greater than 0")
+     else (1 - gamma_incomplete_regularized(a,x/b)) * unit_step(x) $
+
+/* R: qgamma(q,a,1/b) */
+quantile_gamma(q,a,b) :=
+   if maybe(a > 0 and b >0 and q >= 0 and q <= 1) = false
+     then error("quantile_gamma: check input parameters")
+   else
+     if equal (q, 0) then 0
+     elseif equal (q, 1) then inf
+       else /* approximate procedure */
+          block([fq: float(q), fa: float(a)],
+            if numberp(fq) and numberp(fa)
+              then(if fq = 0.0 then return(0),
+                   if fq = 1.0 then return('inf),
+                   b * ?iigamma(fq, fa))
+              else error("quantile_gamma: need numeric arguments for approximate procedure")) $
+
+mean_gamma(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("mean_gamma: parameters a and b must be greater than 0")
+     else a*b $
+
+var_gamma(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("var_gamma: parameters a and b must be greater than 0")
+     else a*b^2 $
+
+std_gamma(a,b) := sqrt(var_gamma(a,b)) $
+
+skewness_gamma(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("skewness_gamma: parameters a and b must be greater than 0")
+     else 2/sqrt(a) $
+
+kurtosis_gamma(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("kurtosis_gamma: parameters a and b must be greater than 0")
+     else 6/a $
+
+random_gamma(a,b,[num]) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("random_gamma: parameters a and b must be greater than 0")
+     else block([no, fa:float(a), fb:float(b)],
+            if not numberp(fa) or not numberp(fb)
+              then error("random_gamma: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then ?rndgamma(fa,fb,no)
+              else error("random_gamma: check sample size") ) $
+
+mle_gamma (x, [w]) :=
+    if x = []
+        then ['shape = und, 'scale = und]
+        else block ([shape_estimate, scale_estimate],
+                    w: if w = [] then 1 else w[1],
+                    shape_estimate: mle_gamma_shape (x, w),
+                    scale_estimate: mle_gamma_scale (x, shape_estimate, w),
+                    ['shape = shape_estimate, 'scale = scale_estimate]);
+
+mle_gamma_shape_tol: 1e-8;
+
+/* Newton-Raphson iteration as described under "Maximum likelihood estimation"
+ * in https://en.wikipedia.org/wiki/Gamma_distribution
+ */
+
+mle_gamma_shape (x, [w]) :=
+    block ([s, shape, shape_update],
+           w: if w = [] then 1 else w[1],
+           s: ev (log (mean (x, w)) - mean (log (x), w), numer),
+           shape: (3 - s + sqrt ((s - 3)^2 + 24*s)) / (12*s),
+           shape_update_function: lambda ([shape], shape - (log(shape) - psi[0](shape) - s) / (1/shape - psi[1](shape))),
+           shape_update: shape_update_function (shape),
+           while abs (shape_update - shape) > mle_gamma_shape_tol
+               do [shape, shape_update]: [shape_update, shape_update_function (shape_update)],
+           shape_update);
+
+mle_gamma_scale (x, shape, [w]) :=
+    if w = []
+        then mean(x) / shape
+        else mean(x, w[1]) / shape;
+
+
+/*         BETA DISTRIBUTION          */
+
+pdf_beta(x,a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("pdf_beta: parameters a and b must be greater than 0")
+     else x^(a-1)*(1-x)^(b-1)/beta(a,b)*(unit_step(x)-unit_step(x-1)) $
+
+/* R: pbeta(x,a,b) */
+cdf_beta(x,a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("cdf_beta: parameters a and b must be greater than 0")
+     else beta_incomplete_regularized(a,b,x) * (unit_step(x)-unit_step(x-1)) + unit_step(x-1)$
+
+/* R: qbeta(q,a,b) */
+quantile_beta(q,a,b) :=
+   if maybe(a > 0 and b >0 and q >= 0 and q <= 1) = false
+     then error("quantile_beta: check input parameters")
+   else
+     if equal (q, 0) then 0
+     elseif equal (q, 1) then 1
+       else block([fq: float(q), fa: float(a), fb: float(b)],
+          if numberp(fq) and numberp(fa) and numberp(fb)
+            then(if fq = 0.0 then return(0),
+                 if fq = 1.0 then return(1),
+                 ?iibeta(fq, fa, fb))
+            else error("quantile_beta: need numeric arguments for approximate procedure")) $
+
+mean_beta(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("mean_beta: parameters a and b must be greater than 0")
+     else a/(a+b) $
+
+var_beta(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("var_beta: parameters a and b must be greater than 0")
+     else a*b/((a+b)^2*(a+b+1)) $
+
+std_beta(a,b) := sqrt(var_beta(a,b)) $
+
+skewness_beta(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("skewness_beta: parameters a and b must be greater than 0")
+     else 2*(b-a)*sqrt(a+b+1)/(sqrt(a*b)*(a+b+2)) $
+
+kurtosis_beta(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("kurtosis_beta: parameters a and b must be greater than 0")
+     else 3*(a+b+1)*(2*(a+b)^2+a*b*(a+b-6)) / (a*b*(a+b+2)*(a+b+3)) - 3 $
+
+random_beta(a,b,[num]) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("random_beta: parameters a and b must be greater than 0")
+     else block([no, fa:float(a), fb:float(b)],
+            if not numberp(fa) or not numberp(fb)
+              then error("random_beta: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no) and no >= 0
+              then ?rndbeta(fa,fb,no)
+              else error("random_beta: check sample size") ) $
+
+mle_beta (x, [w]) :=
+    if x = []
+        then ['shape_1 = und, 'shape_2 = und]
+        else block ([log_pdf, nll, fom, u, listarithm: true],
+                    w: if w = [] then 1 else w[1],
+                    log_pdf: ev (log (pdf_beta (u, shape_1, shape_2)), logexpand = super),
+                    nll: - lsum (w_log_p1, w_log_p1, w * map (lambda ([x1], subst (u = x1, log_pdf)), x)),
+                    /* rescale nll by 1/n to make problem invariant wrt number of data */
+                    fom: nll / length(x),
+                    lbfgs (fom, [shape_1, shape_2], mle_beta_initial_estimates (x, w), mle_beta_tol, mle_beta_iprint));
+
+mle_beta_tol: 1e-6;
+mle_beta_iprint: [1, 0];
+
+/* WIKIPEDIA [1] SAYS THE FOLLOWING ESTIMATES ARE VALID IF ALPHA HAT > 1 AND BETA HAT > 1,
+ * WHICH IS A LITTLE SUSPECT SINCE THE CRITERION SEEMS BETTER STATED IN TERMS OF THE INPUT FACTORS,
+ * AND ALSO IS PROBLEMATIC SINCE THERE IS NO SUGGESTION WHAT TO DO OTHERWISE.
+ * [1] https://en.wikipedia.org/wiki/Beta_distribution#Statistical_inference
+ */
+
+mle_beta_initial_estimates (x, w) :=
+    block ([G_hat_X, G_hat_1_minus_X, ab_denom],
+           G_hat_X: ev (mean (log(x), w), numer),
+           G_hat_1_minus_X: ev (mean (log (1 - x), w), numer),
+           ab_denom: 2*(1 - G_hat_X - G_hat_1_minus_X),
+           [1/2 + G_hat_X / ab_denom, 1/2 + G_hat_1_minus_X / ab_denom]);
+
+
+/*         CONTINUOUS UNIFORM DISTRIBUTION          */
+
+pdf_continuous_uniform(x,a,b) :=
+   if maybe(b - a > 0) = false
+     then error("pdf_continuous_uniform: parameter b must be greater than a")
+     else (unit_step(x-a)-unit_step(x-b))/(b-a) $
+
+cdf_continuous_uniform(x,a,b) :=
+   if maybe(b - a > 0) = false
+     then error("cdf_continuous_uniform: parameter b must be greater than a")
+     else (x-a)/(b-a)*(unit_step(x-a)-unit_step(x-b)) + unit_step(x-b) $
+
+quantile_continuous_uniform(q,a,b) :=
+   if maybe(b - a > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_continuous_uniform: check input parameters")
+   else
+     if equal (q, 0) then a
+     elseif equal (q, 1) then b
+       else a + q * (b-a) $
+
+mean_continuous_uniform(a,b) :=
+   if maybe(b - a > 0) = false
+     then error("mean_continuous_uniform: parameter b must be greater than a")
+     else (a+b)/2 $
+
+var_continuous_uniform(a,b) :=
+   if maybe(b - a > 0) = false
+     then error("var_continuous_uniform: parameter b must be greater than a")
+     else (b-a)^2/12 $
+
+std_continuous_uniform(a,b) := sqrt(var_continuous_uniform(a,b))$
+
+skewness_continuous_uniform(a,b) :=
+   if maybe(b - a > 0) = false
+     then error("skewness_continuous_uniform: parameter b must be greater than a")
+     else 0 $
+
+kurtosis_continuous_uniform(a,b) :=
+   if maybe(b - a > 0) = false
+     then error("kurtosis_continuous_uniform: parameter b must be greater than a")
+     else -6/5 $
+
+/* This is a direct application of the maxima         */
+/* random function. Make describe(random) for details */
+random_continuous_uniform(a,b,[num]) :=
+   if maybe(b - a > 0) = false
+     then error("random_continuous_uniform: parameter b must be greater than a")
+     else block([no, f:float(b-a), listarith:true],
+            if not numberp(f)
+              then error("random_continuous_uniform: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then a + random(f)
+                     else a + makelist(random(f),k,no)
+              else error("random_continuous_uniform: check sample size") ) $
+
+
+
+/*         LOGISTIC DISTRIBUTION          */
+
+pdf_logistic(x,a,b) :=
+   if maybe(b > 0) = false
+     then error("pdf_logistic: parameter b must be greater than 0")
+     else block([y: exp((a-x)/b)], y/(b*(1+y)^2)) $
+
+cdf_logistic(x,a,b) :=
+   if maybe(b > 0) = false
+     then error("cdf_logistic: parameter b must be greater than 0")
+     else 1/(1+exp((a-x)/b)) $
+
+quantile_logistic(q,a,b) :=
+   if maybe(b > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_logistic: check input parameters")
+   else
+     if equal (q, 0) then minf
+     elseif equal (q, 1) then inf
+       else a - b * log(1/q-1) $
+
+mean_logistic(a,b) :=
+   if maybe(b > 0) = false
+     then error("mean_logistic: parameter b must be greater than 0")
+     else a $
+
+var_logistic(a,b) :=
+   if maybe(b > 0) = false
+     then error("var_logistic: parameter b must be greater than 0")
+     else b^2*%pi^2/3 $
+
+std_logistic(a,b) := sqrt(var_logistic(a,b)) $
+
+skewness_logistic(a,b) :=
+   if maybe(b > 0) = false
+     then error("skewness_logistic: parameter b must be greater than 0")
+     else 0 $
+
+kurtosis_logistic(a,b) :=
+   if maybe(b > 0) = false
+     then error("kurtosis_logistic: parameter b must be greater than 0")
+     else 6/5 $
+
+/* inverse method */
+random_logistic(a,b,[num]) :=
+   if maybe(b > 0) = false
+     then error("random_logistic: parameter b must be greater than 0")
+     else block([no, fa:float(a), fb:float(b)],
+            if not numberp(fa) or not numberp(fb)
+              then error("random_logistic: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then a - b * log(1/random(1.0) - 1.0)
+                     else a - b * map('log,1/makelist(random(1.0),k,no) - 1.0)
+              else error("random_logistic: check sample size")) $
+
+
+
+/*         PARETO DISTRIBUTION          */
+
+pdf_pareto(x,a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("pdf_pareto: parameters a and b must be greater than 0")
+     else a*b^a*x^(-a-1) * unit_step(x-b) $
+
+cdf_pareto(x,a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("pdf_pareto: parameters a and b must be greater than 0")
+     else (1-(b/x)^a) * unit_step(x-b) $
+
+quantile_pareto(q,a,b) :=
+   if maybe(a > 0 and b > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_pareto: check input parameters")
+   else
+     if equal (q, 0) then b
+     elseif equal (q, 1) then inf
+       else b / (1-q)^(1/a) $
+
+mean_pareto(a,b) :=
+   if maybe(a > 1) = false
+     then error("mean_pareto: parameter a must be greater than 1")
+   elseif maybe(b > 0) = false
+     then error("mean_pareto: parameter b must be greater than 0")
+     else a*b/(a-1) $
+
+var_pareto(a,b) :=
+   if maybe(a > 2) = false
+     then error("var_pareto: parameter a must be greater than 2")
+   elseif maybe(b > 0) = false
+     then error("var_pareto: parameter b must be greater than 0")
+     else a*b*b/((a-2)*(a-1)^2) $
+
+std_pareto(a,b) :=
+   if maybe(a > 2) = false
+     then error("std_pareto: parameter a must be greater than 2")
+   elseif maybe(b > 0) = false
+     then error("std_pareto: parameter b must be greater than 0")
+     else b*sqrt(a/(a-2))/(a-1) $
+
+skewness_pareto(a,b) :=
+   if maybe(a > 3) = false
+     then error("skewness_pareto: parameter a must be greater than 3")
+   elseif maybe(b > 0) = false
+     then error("skewness_pareto: parameter b must be greater than 0")
+     else 2*(a+1)*sqrt(a-2)/((a-3)*sqrt(a)) $
+
+kurtosis_pareto(a,b) :=
+   if maybe(a > 4) = false
+     then error("kurtosis_pareto: parameter a must be greater than 4")
+   elseif maybe(b > 0) = false
+     then error("kurtosis_pareto: parameter b must be greater than 0")
+     else (6*(a^3+a^2-6*a-2)) / (a*(a^2-7*a+12)) - 3 $
+
+/* inverse method */
+random_pareto(a,b,[num]) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("random_pareto: parameters a and b must be greater than 0")
+     else block([no, fa:float(a), fb:float(b)],
+            if not numberp(fa) or not numberp(fb)
+              then error("random_pareto: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then b / (1-random(1.0))^(1.0/a)
+                     else b / (1-makelist(random(1.0),k,1,no))^(1.0/a)
+              else error("random_pareto: check sample size")) $
+
+
+
+/*         WEIBULL DISTRIBUTION          */
+
+pdf_weibull(x,a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("pdf_weibull: parameters a and b must be greater than 0")
+     else a/b*(x/b)^(a-1)*exp(-(x/b)^a) * unit_step(x) $
+
+cdf_weibull(x,a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("cdf_weibull: parameters a and b must be greater than 0")
+     else (1-exp(-(x/b)^a)) * unit_step(x) $
+
+/* R: qweibull(q,a,b) */
+quantile_weibull(q,a,b) :=
+   if maybe(a > 0 and b > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_weibull: check input parameters")
+   else
+     if equal (q, 0) then 0
+     elseif equal (q, 1) then inf
+       else b * (-log(1-q))^(1/a) $
+
+mean_weibull(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("mean_weibull: parameters a and b must be greater than 0")
+     else gamma(1/a+1)*b $
+
+var_weibull(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("var_weibull: parameters a and b must be greater than 0")
+     else (gamma(2/a+1)-gamma(1/a+1)^2)*b^2 $
+
+std_weibull(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("std_weibull: parameters a and b must be greater than 0")
+     else sqrt((gamma(2/a+1)-gamma(1/a+1)^2))*b $
+
+skewness_weibull(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("skewness_weibull: parameters a and b must be greater than 0")
+     else (gamma(3/a+1)-3*gamma(1/a+1)*gamma(2/a+1)+2*gamma(1/a+1)^3)  /
+          (gamma(2/a+1)-gamma(1/a+1)^2)^(3/2) $
+
+kurtosis_weibull(a,b) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("kurtosis_weibull: parameters a and b must be greater than 0")
+     else (gamma(4/a+1)-4*gamma(1/a+1)*gamma(3/a+1)+
+                       6*gamma(1/a+1)^2*gamma(2/a+1)-3*gamma(1/a+1)^4) /
+          (gamma(2/a+1)-gamma(1/a+1)^2)^2 - 3 $
+
+/* inverse method */
+random_weibull(a,b,[num]) :=
+   if maybe(a > 0 and b > 0) = false
+     then error("random_weibull: parameters a and b must be greater than 0")
+     else block([no, fa:float(a), fb:float(b)],
+            if not numberp(fa) or not numberp(fb)
+              then error("random_weibull: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then b * (-log(random(1.0)))^(1.0/a)
+                     else b * (-map('log,makelist(random(1.0),k,1,no)))^(1.0/a)
+              else error("random_weibull: check sample size")) $
+
+mle_weibull (x, [w]) :=
+    if x = []
+        then ['shape = und, 'scale = und]
+        else block ([shape, scale],
+                    w: if w = [] then 1 else w[1],
+                    shape: mle_weibull_shape (x, w),
+                    scale: mle_weibull_scale (x, shape, w),
+                    ['shape = shape, 'scale = scale]);
+
+mle_weibull_shape (x, [w]) :=
+    block ([listarith: true, shape_eq, eq1],
+           w: if w = [] then 1 else w[1],
+
+           /* The shape parameter is unchanged by rescaling x,
+            * so we could try to avoid overflow for large x and large k
+            * by rescaling; however, it's not clear what's a strategy
+            * for rescaling which works for very large and very small
+            * values at the same time. Just let it be for now.
+            */
+
+           shape_eq: lambda ([k], mean (x^k*log(x), w) / mean (x^k, w) - 1/k - mean (log(x), w)),
+
+           /* Shape equation is monotonically increasing in k; see:
+            * N. Balakrishnan and M. Kateri. "On the maximum likelihood estimation of parameters
+              of Weibull distribution based on complete and censored data,"
+            * Statistics and Probability Letters, vol. 78 (2008), pp. 2971--2975.
+            * 
+            * Shape equation is negative for sufficiently small k,
+            * evaluate at k = 1 and then step down (if positive there)
+            * or step up (if negative) to find the other end point for search interval.
+            */
+
+           eq1: shape_eq(1),
+           if eq1 = 0 then 1
+               elseif eq1 > 0
+                   then block ([k1: 1, k0: 1],
+                               while shape_eq(k0) >= 0 do k0: k0/2,
+                               find_root (shape_eq, k0, k1))
+                   else block ([k0: 1, k1: 1],
+                               while shape_eq(k1) <= 0 do k1: k1*2,
+                               find_root (shape_eq, k0, k1)));
+
+mle_weibull_scale (x, shape, [w]) :=
+    if w = []
+        then (noncentral_moment (x, shape))^(1/shape)
+        else (noncentral_moment (x, shape, w[1]))^(1/shape);
+
+
+/*          RAYLEIGH DISTRIBUTION              */
+/* Rayleigh(b) is equivalent to Weibull(2,1/b) */
+
+pdf_rayleigh(x,b):=pdf_weibull(x,2,1/b)$
+
+cdf_rayleigh(x,b):=cdf_weibull(x,2,1/b)$
+
+quantile_rayleigh(q,b):=quantile_weibull(q,2,1/b)$
+
+mean_rayleigh(b):=mean_weibull(2,1/b)$
+
+var_rayleigh(b):=var_weibull(2,1/b)$
+
+std_rayleigh(b):=std_weibull(2,1/b)$
+
+skewness_rayleigh(b):=skewness_weibull(2,1/b)$
+
+kurtosis_rayleigh(b):=kurtosis_weibull(2,1/b)$
+
+/* inverse method */
+random_rayleigh(b,[num]) :=
+   if maybe(b > 0) = false
+     then error("random_rayleigh: parameter b must be greater than 0")
+     else block([no, fb:float(b)],
+            if not numberp(fb)
+              then error("random_rayleigh: need numeric argument for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then sqrt(-log(random(1.0))) / b
+                     else sqrt(-map('log,makelist(random(1.0),k,1,no))) / b
+              else error("random_rayleigh: check sample size")) $
+
+
+
+/*         LAPLACE DISTRIBUTION          */
+
+pdf_laplace(x,a,b) :=
+   if maybe(b > 0) = false
+     then error("pdf_laplace: parameter b must be greater than 0")
+     else exp(-abs(x-a)/b)/(2*b) $
+
+cdf_laplace(x,a,b) :=
+   if maybe(b > 0) = false
+     then error("pdf_laplace: parameter b must be greater than 0")
+     else (1+signum(x-a)-signum(x-a)*exp(-abs(x-a)/b)) / 2  $
+
+quantile_laplace(q,a,b) :=
+   if maybe(b > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_laplace: check input parameters")
+   else
+     if equal (q, 0) then minf
+     elseif equal (q, 1) then inf
+       else a - b * signum(2*q-1) * log(1 - signum(2*q-1) * (2*q-1))$
+
+mean_laplace(a,b) :=
+   if maybe(b > 0) = false
+     then error("mean_laplace: parameter b must be greater than 0")
+     else a $
+
+var_laplace(a,b) :=
+   if maybe(b > 0) = false
+     then error("var_laplace: parameter b must be greater than 0")
+     else 2*b*b $
+
+std_laplace(a,b) :=
+   if maybe(b > 0) = false
+     then error("std_laplace: parameter b must be greater than 0")
+     else sqrt(2)*b $
+
+skewness_laplace(a,b) :=
+   if maybe(b > 0) = false
+     then error("skewness_laplace: parameter b must be greater than 0")
+     else 0 $
+
+kurtosis_laplace(a,b) :=
+   if maybe(b > 0) = false
+     then error("kurtosis_laplace: parameter b must be greater than 0")
+     else 3 $
+
+/* inverse method */
+random_laplace(a,b,[num]) :=
+   if maybe(b > 0) = false
+     then error("random_laplace: parameter b must be greater than 0")
+     else block([no, fa:float(a), fb:float(b)],
+            if not numberp(fa) or not numberp(fb)
+              then error("random_laplace: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then quantile_laplace(random(1.0),a,b)
+                     else makelist(quantile_laplace(random(1.0),a,b),k,1,no)
+              else error("random_laplace: check sample size")) $
+
+
+
+/*         CAUCHY (OR LORENTZ) DISTRIBUTION          */
+
+pdf_cauchy(x,a,b) :=
+   if maybe(b > 0) = false
+     then error("pdf_cauchy: parameter b must be greater than 0")
+     else b/(%pi*((x-a)^2+b^2)) $
+
+cdf_cauchy(x,a,b) :=
+   if maybe(b > 0) = false
+     then error("pdf_cauchy: parameter b must be greater than 0")
+     else 1/2+atan((x-a)/b)/%pi $
+
+quantile_cauchy(q,a,b) :=
+   if maybe(b > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_cauchy: check input parameters")
+   else
+     if equal (q, 0) then minf
+     elseif equal (q, 1) then inf
+       else a + b * tan(%pi * (q - 1/2)) $
+
+/* Note: integrals for Cauchy moments are divergent */
+
+/* inverse method */
+random_cauchy(a,b,[num]) :=
+   if maybe(b > 0) = false
+     then error("random_cauchy: parameter b must be greater than 0")
+     else block([no, fa:float(a), fb:float(b)],
+            if not numberp(fa) or not numberp(fb)
+              then error("random_cauchy: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then tan (float(%pi) * (random(1.0)-0.5))*fb+fa
+                     else fa + fb * map('tan, 3.141592653589793 * (makelist(random(1.0),k,1,no)-0.5))
+              else error("random_cauchy: check sample size")) $
+
+
+
+/*         GUMBEL (OR EXTREME VALUE) DISTRIBUTION          */
+
+pdf_gumbel(x,a,b) :=
+   if maybe(b > 0) = false
+     then error("pdf_gumbel: parameter b must be greater than 0")
+     else exp((a-x)/b-exp((a-x)/b))/b $
+
+cdf_gumbel(x,a,b) :=
+   if maybe(b > 0) = false
+     then error("cdf_gumbel: parameter b must be greater than 0")
+     else exp(-exp((a-x)/b)) $
+
+quantile_gumbel(q,a,b) :=
+   if maybe(b > 0 and q >= 0 and q <= 1) = false
+     then error("quantile_gumbel: check input parameters")
+   else
+     if equal (q, 0) then minf
+     elseif equal (q, 1) then inf
+       else a - b * log(-log(q)) $
+
+mean_gumbel(a,b) :=
+   if maybe(b > 0) = false
+     then error("mean_gumbel: parameter b must be greater than 0")
+     else /* %gamma=Euler-Mascheroni constant */
+          a + b*%gamma $
+
+var_gumbel(a,b) :=
+   if maybe(b > 0) = false
+     then error("var_gumbel: parameter b must be greater than 0")
+     else b*b*%pi*%pi/6 $
+
+std_gumbel(a,b) :=
+   if maybe(b > 0) = false
+     then error("std_gumbel: parameter b must be greater than 0")
+     else b*%pi/sqrt(6) $
+
+skewness_gumbel(a,b) :=
+   if maybe(b > 0) = false
+     then error("std_gumbel: parameter b must be greater than 0")
+     else 12*sqrt(6)*zeta(3)/%pi^3 $
+
+kurtosis_gumbel(a,b) :=
+   if maybe(b > 0) = false
+     then error("kurtosis_gumbel: parameter b must be greater than 0")
+     else 12/5 $
+
+/* inverse method */
+random_gumbel(a,b,[num]) :=
+   if maybe(b > 0) = false
+     then error("random_gumbel: parameter b must be greater than 0")
+     else block([no, fa:float(a), fb:float(b)],
+            if not numberp(fa) or not numberp(fb)
+              then error("random_gumbel: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then a - b * log(-log(random(1.0)))
+                     else a - b * map('log,-map('log,makelist(random(1.0),k,1,no)))
+              else error("random_gumbel: check sample size")) $
+
+
+
+/*         BINOMIAL DISTRIBUTION          */
+
+/* R: dbinom(x,n,p) */
+pdf_binomial(x,n,p) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("pdf_binomial: p must be a probability")
+  /* when n is not an integer, R returns NaN, we throw an error */
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("pdf_binomial: n must be a positive integer")
+  else
+    if equal (p, 0)
+      then kron_delta(x,0)
+    elseif equal (p, 1)
+      then kron_delta(x,n)
+    elseif x < 0 or x > n or x-floor(x) > 0
+      then 0
+      else binomial(n,x)*p^x*(1-p)^(n-x) $
+
+/* R: pbinom(x,n,p) */
+cdf_binomial(x,n,p):=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("cdf_binomial: p must be a probability")
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("cdf_binomial: n must be a positive integer")
+  else
+     if x < 0 then 0
+     elseif x >= n then 1
+     else beta_incomplete_regularized(n-floor(x),floor(x)+1,1-p) $
+
+/* R: qbinom(q,n,p) */
+quantile_binomial(q,n,p):=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("quantile_binomial: p must be a probability")
+  elseif maybe(q >= 0 and q <= 1) = false
+     then error("quantile_binomial: q must be a probability")
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("quantile_binomial: n must be a positive integer")
+  else
+    if equal (q, 0) then 0
+    elseif equal (q, 1) then n
+    elseif float(q) <= float((1-p)^n) then 0
+    elseif numberp(float(q)) and numberp(float(n)) and numberp(float(p))
+      then /* partition method */
+         block([a:0, b:n, m],
+           while (b-a>1) do (
+             m: 0.5*(a+b),
+             if cdf_binomial(m,n,p) < q
+               then a: m
+               else b: m ),
+           floor(b))
+    else error("quantile_binomial: need numeric arguments for approximate procedure") $
+
+mean_binomial(n,p) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("mean_binomial: p must be a probability")
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("mean_binomial: n must be a positive integer")
+     else n*p $
+
+var_binomial(n,p) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("var_binomial: p must be a probability")
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("var_binomial: n must be a positive integer")
+     else n*p*(1-p) $
+
+std_binomial(n,p) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("std_binomial: p must be a probability")
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("std_binomial: n must be a positive integer")
+     else sqrt(n*p*(1-p)) $
+
+skewness_binomial(n,p) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("std_binomial: p must be a probability")
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("std_binomial: n must be a positive integer")
+     else (1-2*p)/sqrt(n*p*(1-p)) $
+
+kurtosis_binomial(n,p) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("kurtosis_binomial: p must be a probability")
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("kurtosis_binomial: n must be a positive integer")
+     else (1-6*p*(1-p))/(n*p*(1-p)) $
+
+random_binomial(n,p,[num]) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("random_binomial: p must be a probability")
+  elseif maybe(n>=0)=false or numberp(n) and n-floor(n) > 0
+     then error("random_binomial: n must be a positive integer")
+     else block([no, fn:float(n), fp:float(p)],
+            if not numberp(fn) or not numberp(fp)
+              then error("random_binomial: need numeric arguments for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then ?rndbinomial(n,fp,no)
+              else error("random_binomial: check sample size")) $
+
+
+
+/*         POISSON DISTRIBUTION          */
+
+/* R: dpois(x,m) */
+pdf_poisson(x,m) :=
+  if maybe(m >= 0) = false
+     then error("pdf_poisson: m must be positive")
+  else
+    if equal (m, 0) then kron_delta(0,x)
+    elseif x < 0 or x-floor(x) > 0 then 0
+      else exp(-m)*m^x/x! $
+
+/* R: ppois(x,m) */
+cdf_poisson(x,m):=
+  if maybe(m >= 0) = false
+     then error("cdf_poisson: m must be positive")
+  else
+    if x < 0 then 0
+    else gamma_incomplete_regularized(floor(x)+1, m) $
+
+/* R: qpois(q,m) */
+quantile_poisson(q,m):=
+  if maybe(m >= 0) = false
+     then error("quantile_poisson: m must be positive")
+  elseif maybe(q >= 0 and q <= 1) = false
+     then error("quantile_poisson: q must be a probability")
+  else
+    if equal (m, 0) then 0
+    elseif q <= exp(- m) then 0
+    elseif equal (q, 1) then inf
+    elseif numberp(float(q)) and numberp(float(m))
+      then /* partition method */
+         block([a, b:1.0,mm],
+           while (cdf_poisson(b,m) < q) do b : 2.0*b,
+           a: b/2.0,
+           while (b-a>1) do(
+              mm: 0.5*(a+b),
+              if cdf_poisson(mm,m) < q
+                 then a: mm
+                 else b: mm ),
+           floor(b))
+    else error("quantile_poisson: need numeric arguments for approximate procedure") $
+
+mean_poisson(m):=
+  if maybe(m >= 0) = false
+     then error("mean_poisson: m must be positive")
+     else m $
+
+var_poisson(m):=
+  if maybe(m >= 0) = false
+     then error("var_poisson: m must be positive")
+     else m $
+
+std_poisson(m):=
+  if maybe(m >= 0) = false
+     then error("std_poisson: m must be positive")
+     else sqrt(m) $
+
+skewness_poisson(m):=
+  if maybe(m >= 0) = false
+     then error("skewness_poisson: m must be positive")
+     else 1/sqrt(m) $
+
+kurtosis_poisson(m):=
+  if maybe(m >= 0) = false
+     then error("kurtosis_poisson: m must be positive")
+     else 1/m $
+
+random_poisson(m,[num]) :=
+  if maybe(m >= 0) = false
+     then error("random_poisson: m must be positive")
+     else block([no, fm:float(m)],
+            if not numberp(fm)
+              then error("random_poisson: need numeric argument for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then ?rndpoisson(fm,no)
+              else error("random_poisson: check sample size")) $
+
+
+
+/*           BERNOULLI DISTRIBUTION            */
+/* Bernoulli(p) is equivalent to binomial(1,p) */
+
+pdf_bernoulli(x,p) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("pdf_bernoulli: p must be a probability")
+  else
+    if x < 0 or x > 1 or x-floor(x) > 0 then 0
+    elseif equal (p, 0) then kron_delta(x,0)
+    elseif equal (p, 1) then kron_delta(x,1)
+      else p^x*(1-p)^(1-x) $
+
+cdf_bernoulli(x,p):= cdf_binomial(x,1,p)$
+
+quantile_bernoulli(q,p):= quantile_binomial(q,1,p)$
+
+mean_bernoulli(p):=mean_binomial(1,p)$
+
+var_bernoulli(p):=var_binomial(1,p)$
+
+std_bernoulli(p):=std_binomial(1,p)$
+
+skewness_bernoulli(p):=skewness_binomial(1,p)$
+
+kurtosis_bernoulli(p):=kurtosis_binomial(1,p)$
+
+/* This is a direct application of the maxima
+   random function. Make describe(random) for details */
+random_bernoulli(p,[num]) :=
+  if maybe(p >= 0 and p <= 1) = false
+     then error("random_bernoulli: p must be a probability")
+     else block([no, fp:float(p)],
+            if not numberp(fp)
+              then error("random_bernoulli: need numeric argument for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then if random(1.0)<=fp then 1 else 0
+                     else makelist(if random(1.0)<=fp then 1 else 0,k,1,no)
+              else error("random_bernoulli: check sample size")) $
+
+
+
+/*         GEOMETRIC (OR PASCAL) DISTRIBUTION          */
+
+/* R: dgeom(x,p) */
+pdf_geometric(x,p) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("pdf_geometric: p must be a non zero probability")
+  else
+    if equal (p, 1)
+      then if equal (x, 0) then 1 else 0
+    elseif x < 0 or x-floor(x) > 0 then 0
+      else p*(1-p)^x $
+
+/* R: pgeom(q,p) */
+cdf_geometric(x,p) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("cdf_geometric: p must be a non zero probability")
+  else
+    if equal (p, 1)
+      then if x >= 0 then 1 else 0
+    elseif x < 0 then 0
+      else 1-(1-p)^(floor(x)+1) $
+
+/* R: qgeom(q,p) */
+quantile_geometric(q,p) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("quantile_geometric: p must be a non zero probability")
+  elseif maybe(q >= 0 and q <= 1) = false
+     then error("quantile_geometric: q must be a probability")
+  else
+    if equal (q, 1) then inf
+    elseif equal (q, 0) then 0
+    elseif equal (p, 1) then 1
+      else ceiling(log(1-q)/log(1-p)-1) $
+
+mean_geometric(p) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("mean_geometric: p must be a non zero probability")
+     else 1/p-1 $
+
+var_geometric(p) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("var_geometric: p must be a non zero probability")
+     else (1-p)/p^2 $
+
+std_geometric(p) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("std_geometric: p must be a non zero probability")
+     else sqrt(1-p)/p $
+
+skewness_geometric(p) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("skewness_geometric: p must be a non zero probability")
+     else (2-p)/sqrt(1-p) $
+
+kurtosis_geometric(p) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("kurtosis_geometric: p must be a non zero probability")
+     else (p^2+6-6*p)/(1-p) $
+
+random_geometric(p,[num]) :=
+  if maybe(p > 0 and p <= 1) = false
+     then error("random_geometric: p must be a non zero probability")
+     else block([no, fp:float(p)],
+            if not numberp(fp)
+              then error("random_geometric: need numeric argument for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then ?rndgeo(fp,no)
+              else error("random_geometric: check sample size")) $
+
+
+
+/*         DISCRETE UNIFORM DISTRIBUTION          */
+
+pdf_discrete_uniform(x,n) :=
+  if maybe(n > 0) = false or numberp(n) and n-floor(n) > 0
+    then error("pdf_discrete_uniform: n must be a positive integer")
+  else
+    if x < 1 or x > n or x-floor(x) > 0
+    then 0
+    else 1/n $
+
+cdf_discrete_uniform(x,n) :=
+  if maybe(n > 0) = false or n-floor(n) > 0
+    then error("cdf_discrete_uniform: n must be a positive integer")
+  else
+    if x < 1 then 0
+    elseif x >= n then 1
+    else floor(x)/n $
+
+quantile_discrete_uniform(q,n) :=
+  if maybe(n > 0) = false or n-floor(n) > 0
+    then error("cdf_discrete_uniform: n must be a positive integer")
+  elseif maybe(q >= 0 and q <= 1) = false
+    then error("quantile_discrete_uniform: q must be a probability")
+  else
+    if equal (q, 1) then n
+    elseif equal (q, 0) then 1
+      else ceiling(q*n) $
+
+mean_discrete_uniform(n) :=
+  if maybe(n > 0) = false or n-floor(n) > 0
+    then error("mean_discrete_uniform: n must be a positive integer")
+    else (1+n)/2 $
+
+var_discrete_uniform(n) :=
+  if maybe(n > 0) = false or n-floor(n) > 0
+    then error("var_discrete_uniform: n must be a positive integer")
+    else (n^2-1)/12 $
+
+std_discrete_uniform(n) :=
+  if maybe(n > 0) = false or n-floor(n) > 0
+    then error("std_discrete_uniform: n must be a positive integer")
+    else sqrt((n^2-1)/12) $
+
+skewness_discrete_uniform(n) :=
+  if maybe(n > 0) = false or n-floor(n) > 0
+    then error("skewness_discrete_uniform: n must be a positive integer")
+    else 0 $
+
+kurtosis_discrete_uniform(n) :=
+  if maybe(n > 0) = false or n-floor(n) > 0
+    then error("kurtosis_discrete_uniform: n must be a positive integer")
+    else -6/5-12/(5*(n^2-1)) $
+
+/* This is a direct application of the maxima
+   random function. Make describe(random) for details */
+random_discrete_uniform(n,[num]) :=
+  if maybe(n > 0) = false or numberp(n) and n-floor(n) > 0
+     then error("random_discrete_uniform: n must be a positive integer")
+     else block([no, fn:float(n)],
+            if not numberp(fn)
+              then error("random_discrete_uniform: need numeric argument for approximate procedure"),
+            if length(num) = 0 then no: 0 else no: num[1],
+            if integerp(no)
+              then if no = 0
+                     then 1+random(n)
+                     else 1+makelist(random(n),k,1,no)
+              else error("random_discrete_uniform: check sample size")) $
+
+
+
+/*         HYPERGEOMETRIC DISTRIBUTION          */
+
+/* R: dhyper(x, n1, n2, n) */
+pdf_hypergeometric(x,n1,n2,n) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("pdf_hypergeometric: n1, n2, n must be a positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("pdf_hypergeometric: n must be less or equal than n1 + n2")
+  else
+    if x < max(0,n-n2) or min(n1,n) < x or x-floor(x) > 0
+    then 0
+    else binomial(n1,x)*binomial(n2,n-x)/binomial(n1+n2,n) $
+
+/* R: phyper(x, n1, n2, n) */
+cdf_hypergeometric(x,n1,n2,n) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("pdf_hypergeometric: n1, n2, n must be a positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("cdf_hypergeometric: n must be less or equal than n1 + n2")
+  else
+    if x < max(0,n-n2) then 0
+    elseif x > min(n1,n) then 1
+    else sum(binomial(n1,k)*binomial(n2,n-k) / binomial(n1+n2,n),k,0,floor(x)) $
+
+quantile_hypergeometric(q, n1, n2, n) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("quantile_hypergeometric: n1, n2, n must be a positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("quantile_hypergeometric: n must be less or equal than n1 + n2")
+  elseif maybe(q >= 0 and q <= 1) = false
+     then error("quantile_hypergeometric: q must be a probability")
+  else
+    if equal (q, 1) then min(n1,n)
+    elseif q <= pdf_hypergeometric(max(0, n-n2),n1,n2,n) then max(0, n-n2)
+    elseif numberp(float(q)) and numberp(float(n1)) and numberp(float(n2)) and numberp(float(n))
+      then /* partition method */
+         block([a: max(0, n-n2), b: min(n1,n),m],
+           while (b-a>1) do (
+             m: floor(0.5*(a+b)),
+             if cdf_hypergeometric(m,n1,n2,n) < q
+               then a: m
+               else b: m),
+           floor(b))
+      else error("quantile_hypergeometric: need numeric arguments for approximate procedure") $
+
+mean_hypergeometric(n1,n2,n) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("mean_hypergeometric: n1, n2, n must be a positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("mean_hypergeometric: n must be less or equal than n1 + n2")
+    else n*n1/(n1+n2) $
+
+var_hypergeometric(n1,n2,n) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("var_hypergeometric: n1, n2, n must be a positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("var_hypergeometric: n must be less or equal than n1 + n2")
+    else block([t:n1+n2], n*n1*n2*(t-n)/(t*t*(t-1))) $
+
+std_hypergeometric(n1,n2,n) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("std_hypergeometric: n1, n2, n must be a positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("std_hypergeometric: n must be less or equal than n1 + n2")
+    else block([t:n1+n2], sqrt(n*n1*n2*(t-n)/(t-1))/t) $
+
+skewness_hypergeometric(n1,n2,n) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("skewness_hypergeometric: n1, n2, n must be a positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("skewness_hypergeometric: n must be less or equal than n1 + n2")
+    else block([t:n1+n2],  (n2-n1)*(t-2*n)*sqrt((t-1)/(n*n1*n2*(t-n)))/(t-2)) $
+
+kurtosis_hypergeometric(n1,n2,n) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("kurtosis_hypergeometric: n1, n2, n must be a positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("kurtosis_hypergeometric: n must be less or equal than n1 + n2")
+    else block([t:n1+n2],
+           t*t*(t-1)/((t-2)*(t-3)*n*n1*n2*(t-n)) * 
+           (t*(t+1)-6*n*(t-n)+3*n1*n2*(t*t*(n-2)-t*n*n+6*n*(t-n))/t^2) - 3) $
+
+random_hypergeometric(n1,n2,n,[num]) :=
+  if maybe(n1 >= 0) = false or numberp(n1) and n1-floor(n1) > 0 or
+     maybe(n2 >= 0) = false or numberp(n2) and n2-floor(n2) > 0 or
+     maybe( n >= 0) = false or numberp(n)  and  n-floor(n)  > 0
+    then error("random_hypergeometric: n1, n2, n must be positive integers")
+  elseif maybe (n <= n1 +n2) = false
+    then error("random_hypergeometric: n must be less or equal than n1 + n2")
+    else block([no],
+           if not integerp(n1) or not integerp(n2) or not integerp(n)
+             then error("random_hypergeometric: need numeric argument for approximate procedure"),
+           if length(num) = 0 then no: 0 else no: num[1],
+           if integerp(no)
+             then ?rndhypergeo(n1,n2,n,no)
+             else error("random_hypergeometric: check sample size")) $
+
+
+
+/*         NEGATIVE BINOMIAL DISTRIBUTION          */
+
+/* R: dnbinom(x, n, p) */
+pdf_negative_binomial(x,n,p) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("pdf_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("pdf_negative_binomial: n must be a positive integer")
+  else
+    if equal (p, 1) or x < 0 or x-floor(x) > 0 then 0
+      else gamma(n+x)*p^n*(1-p)^x/(x!*gamma(n)) $
+
+/* R: pnbinom(x, n, p) */
+cdf_negative_binomial(x,n,p) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("cdf_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("cdf_negative_binomial: n must be a positive integer")
+  else
+    if x < 0 then 0
+    else beta_incomplete_regularized(n,floor(x)+1,p) $
+
+/* R: qnbinom(q,n,p) */
+quantile_negative_binomial(q,n,p) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("quantile_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("quantile_negative_binomial: n must be a positive integer")
+  elseif maybe(q >= 0 and q <= 1) = false
+     then error("quantile_negative_binomial: q must be a probability")
+  else
+    if q <= p^n then 0
+    elseif equal (q, 1) then inf
+    elseif numberp(float(q)) and numberp(float(n)) and numberp(float(p))
+      then /* partition method */
+         block([a, b: 1.0, m, fq: float(q)],
+           while (float(beta_incomplete_regularized(n,floor(b)+1,p)) < fq) do b: b*2,
+           a: b/2,
+           while (b-a > 1) do(
+              m: floor(0.5*(a+b)),
+              if float(beta_incomplete_regularized(n,m+1,p)) < fq
+                then a: m
+                else b: m ),
+           b)
+      else error("quantile_negative_binomial: need numeric arguments for approximate procedure") $
+
+mean_negative_binomial(n,p) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("mean_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("mean_negative_binomial: n must be a positive integer")
+    else n*(1-p)/p $
+
+var_negative_binomial(n,p) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("var_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("var_negative_binomial: n must be a positive integer")
+    else n*(1-p)/p^2 $
+
+std_negative_binomial(n,p) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("std_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("std_negative_binomial: n must be a positive integer")
+    else sqrt(n*(1-p))/p $
+
+skewness_negative_binomial(n,p) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("skewness_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("skewness_negative_binomial: n must be a positive integer")
+    else (2-p)/sqrt(n*(1-p)) $
+
+kurtosis_negative_binomial(n,p) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("kurtosis_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("kurtosis_negative_binomial: n must be a positive integer")
+    else (p*p+6-6*p)/(n*(1-p)) $
+
+random_negative_binomial(n,p,[num]) :=
+  if maybe(p > 0 and p <= 1) = false
+    then error("random_negative_binomial: p must be a positive probability")
+  elseif maybe(n>0)=false or numberp(n) and n-floor(n) > 0
+    then error("random_negative_binomial: n must be a positive integer")
+    else block([no, fp:float(p), fn:float(n)],
+           if not numberp(fp) or not numberp(fn)
+             then error("random_negative_binomial: need numeric argument for approximate procedure"),
+           if length(num) = 0 then no: 0 else no: num[1],
+           if integerp(no)
+             then ?rndnegbinom(fn,fp,no)
+             else error("random_negative_binomial: check sample size")) $
+
+
+
+/*         GENERAL FINITE DISCRETE MODEL          */
+
+pdf_general_finite_discrete(x,v) := 
+  if not listp(v) or length(v)=0 or every(lambda([z], maybe(z >= 0)), v) = false
+    then error("pdf_general_finite_discrete: v must be a list of non negative expressions")
+  elseif not numberp(float(x))
+    then error("pdf_general_finite_discrete: x must be a number")
+  else
+    if x <= 0 or x > length(v) or x-floor(x) > 0
+    then 0
+    else v[floor(x)] / sum(v[k],k,1,length(v)) $
+
+cdf_general_finite_discrete(x,v) := 
+  if not listp(v) or length(v)=0 or every(lambda([z], maybe(z >= 0)), v) = false
+    then error("cdf_general_finite_discrete: v must be a list of non negative expressions")
+  elseif not numberp(float(x))
+    then error("cdf_general_finite_discrete: x must be a number")
+  else
+    if x > 1 then 0
+    elseif x >= length(v) then 1
+    else sum(v[k],k,1,floor(x)) / sum(v[k],k,1,length(v))$
+
+quantile_general_finite_discrete(q,v) :=
+  if not listp(v) or length(v)=0 or 
+     every(lambda([z], numberp(float(z)) and maybe(z >= 0)), v) = false
+    then error("cdf_general_finite_discrete: v must be a list of non negative numbers")
+  elseif maybe(q >= 0 and q <= 1) = false
+    then error("quantile_general_finite_discrete: q must be a probability")
+  else
+    if equal (q, 1) then length(v)
+    elseif equal (q, 0) then 1
+      else block([s:0, p, k:1],
+             p: makelist(s:s+i, i, v/apply("+",v)),
+             while (q>p[k]) do k: k+1,
+             k )  $
+
+mean_general_finite_discrete(v) :=
+  if not listp(v) or length(v)=0 or every(lambda([z], maybe(z >= 0)), v) = false
+    then error("mean_general_finite_discrete: v must be a list of non negative expressions")
+    else block([p],
+          p: v / apply("+", v),
+          makelist(k,k,1,length(v)) . p ) $
+
+var_general_finite_discrete(v) :=
+  if not listp(v) or length(v)=0 or every(lambda([z], maybe(z >= 0)), v) = false
+    then error("var_general_finite_discrete: v must be a list of non negative expressions")
+    else block([p,m],
+           p: v / apply("+", v),
+           m: makelist(k,k,1,length(v)) . p,
+           (makelist(k,k,1,length(v)) - m)^2 . p ) $
+
+std_general_finite_discrete(v) :=
+  if not listp(v) or length(v)=0 or every(lambda([z], maybe(z >= 0)), v) = false
+    then error("std_general_finite_discrete: v must be a list of non negative expressions")
+    else block([p,m],
+           p: v / apply("+", v),
+           m: makelist(k,k,1,length(v)) . p,
+           sqrt((makelist(k,k,1,length(v)) - m)^2 . p)) $
+
+skewness_general_finite_discrete(v) :=
+  if not listp(v) or length(v)=0 or every(lambda([z], maybe(z >= 0)), v) = false
+    then error("skewness_general_finite_discrete: v must be a list of non negative expressions")
+    else block([p,m],
+           p: v / apply("+", v),
+           m: makelist(k,k,1,length(v)) . p,
+           (makelist(k,k,1,length(v)) - m)^3 . p / var_discrete_model(v)^(3/2)) $
+
+kurtosis_general_finite_discrete(v) :=
+  if not listp(v) or length(v)=0 or every(lambda([z], maybe(z >= 0)), v) = false
+    then error("kurtosis_general_finite_discrete: v must be a list of non negative expressions")
+    else block([p,m],
+           p: v / apply("+", v),
+           m: makelist(k,k,1,length(v)) . p,
+           (makelist(k,k,1,length(v)) - m)^4 . p / var_discrete_model(v)^2 - 3) $
+
+random_general_finite_discrete(v,[num]) :=
+  if not listp(v) or length(v)=0 or 
+     every(lambda([z], numberp(float(z)) and maybe(z >= 0)), v) = false
+    then error("random_general_finite_discrete: v must be a list of non negative numbers")
+    else (if length(num) = 0 then no: 0 else no: num[1],
+          if integerp(no)
+            then block([fv: float(v), s: 0, p, k, r],
+                   fv: fv / apply("+", fv),
+                   p: makelist(s:s+k, k, fv),
+                   if no = 0
+                     then
+                       (r: random(1.0),
+                        k: 1,
+                        while (r > p[k]) do k: k+1,
+                        k)
+                     else
+                       makelist((r: random(1.0),
+                                 k: 1,
+                                 while (r > p[k]) do k: k+1,
+                                 k),
+                                i, no) )
+            else error("random_general_finite_discrete: check sample size")) $
+
+
+/* INVERSE GAMMA DISTRIBUTION
+ *
+ * Formulas from: https://en.wikipedia.org/wiki/Inverse-gamma_distribution
+ *
+ * Two real parameters, a > 0 (shape), and b > 0 (scale).
+ *
+ * Support: x > 0
+ */
+
+pdf_inverse_gamma (x, a, b) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("pdf_inverse_gamma: parameters must be positive; found:", a, b)
+        else if x > 0 then b^a/gamma(a) * x^(-a-1) * exp(-b/x) else 0;
+
+cdf_inverse_gamma (x, a, b) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("cdf_inverse_gamma: parameters must be positive; found:", a, b)
+        else if x > 0 then gamma_incomplete(a, b/x) / gamma(a) else 0;
+
+quantile_inverse_gamma (x, a, b) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("quantile_inverse_gamma: parameters must be positive; found:", a, b)
+        else if equal(x, 0) then 0
+                 elseif equal(x, 1) then inf
+                 else 1/quantile_gamma(1 - x, a, 1/b);
+
+mean_inverse_gamma (a, b) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("mean_inverse_gamma: parameters must be positive; found:", a, b)
+    elseif maybe (a > 1) = false
+        then error ("mean_inverse_gamma: mean undefined for shape parameter =", a)
+        else b/(a - 1);
+
+mode_inverse_gamma (a, b) := 
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("mode_inverse_gamma: parameters must be positive; found:", a, b)
+        else b/(a + 1);
+
+var_inverse_gamma (a, b) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("var_inverse_gamma: parameters must be positive; found:", a, b)
+    elseif maybe (a > 2) = false
+        then error ("var_inverse_gamma: variance undefined for shape parameter =", a)
+        else b^2/(a - 1)^2/(a - 2);
+
+std_inverse_gamma (a, b) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("std_inverse_gamma: parameters must be positive; found:", a, b)
+    elseif maybe (a > 2) = false
+        then error ("std_inverse_gamma: standard deviation undefined for shape parameter =", a)
+        else b/(a - 1)/sqrt(a - 2);
+
+skewness_inverse_gamma (a, b) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("skewness_inverse_gamma: parameters must be positive; found:", a, b)
+    elseif maybe (a > 3) = false
+        then error ("skewness_inverse_gamma: skewness undefined for shape parameter =", a)
+        else 4*sqrt(a - 2)/(a - 3);
+
+kurtosis_inverse_gamma (a, b) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("kurtosis_inverse_gamma: parameters must be positive; found:", a, b)
+    elseif maybe (a > 4) = false
+        then error ("kurtosis_inverse_gamma: kurtosis undefined for shape parameter =", a)
+        else 6*(5*a - 11)/(a - 3)/(a - 4);
+
+random_inverse_gamma (a, b, [n]) :=
+    if maybe (a > 0) = false or maybe (b > 0) = false
+        then error ("random_inverse_gamma: parameters must be positive; found:", a, b)
+        else block ([listarith: true],
+                    1/random_gamma (a, 1/b, if n = [] then 1 else n[1]));

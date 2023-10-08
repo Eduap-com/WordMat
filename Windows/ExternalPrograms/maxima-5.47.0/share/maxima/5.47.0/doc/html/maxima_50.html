@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>diag-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="diag-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="diag-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_51.html#distrib_002dpkg" rel="next" title="distrib-pkg">
+<link href="maxima_49.html#descriptive_002dpkg" rel="prev" title="descriptive-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="diag_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_51.html#distrib_002dpkg" accesskey="n" rel="next">distrib</a>, Previous: <a href="maxima_49.html#descriptive_002dpkg" accesskey="p" rel="prev">descriptive</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="diag">51 diag</h2>
+
+<a class="anchor" id="Item_003a-diag_002fnode_002fFunctions-and-Variables-for-diag"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-diag" accesskey="1">Functions and Variables for diag</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-diag">
+<div class="nav-panel">
+<p>
+Previous: <a href="#diag_002dpkg" accesskey="p" rel="prev">diag</a>, Up: <a href="#diag_002dpkg" accesskey="u" rel="up">diag</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-diag-1">51.1 Functions and Variables for diag</h3>
+
+
+<a class="anchor" id="diag_005ffunction"></a><a class="anchor" id="Item_003a-diag_002fdeffn_002fdiag"></a><dl class="first-deffn">
+<dt class="deffn" id="index-diag"><span class="category-def">Function: </span><span><strong class="def-name">diag</strong> <var class="def-var-arguments">(<var class="var">lm</var>)</var><a class="copiable-link" href='#index-diag'> &para;</a></span></dt>
+<dd><p>Constructs a matrix that is the block sum of the elements of
+<var class="var">lm</var>. The elements of <var class="var">lm</var> are assumed to be matrices; if an
+element is scalar, it treated as a 1 by 1 matrix.
+</p>
+<p>The resulting matrix will be square if each of the elements of
+<var class="var">lm</var> is square.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+
+(%i2) a1:matrix([1,2,3],[0,4,5],[0,0,6])$
+
+(%i3) a2:matrix([1,1],[1,0])$
+
+(%i4) diag([a1,x,a2]);
+                   [ 1  2  3  0  0  0 ]
+                   [                  ]
+                   [ 0  4  5  0  0  0 ]
+                   [                  ]
+                   [ 0  0  6  0  0  0 ]
+(%o4)              [                  ]
+                   [ 0  0  0  x  0  0 ]
+                   [                  ]
+                   [ 0  0  0  0  1  1 ]
+                   [                  ]
+                   [ 0  0  0  0  1  0 ]
+(%i5) diag ([matrix([1,2]), 3]);
+                        [ 1  2  0 ]
+(%o5)                   [         ]
+                        [ 0  0  3 ]
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;diag&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-diag">Package diag</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="JF"></a><a class="anchor" id="Item_003a-diag_002fdeffn_002fJF"></a><dl class="first-deffn">
+<dt class="deffn" id="index-JF"><span class="category-def">Function: </span><span><strong class="def-name">JF</strong> <var class="def-var-arguments">(<var class="var">lambda</var>,<var class="var">n</var>)</var><a class="copiable-link" href='#index-JF'> &para;</a></span></dt>
+<dd><p>Returns the Jordan cell of order <var class="var">n</var> with eigenvalue <var class="var">lambda</var>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+
+(%i2) JF(2,5);
+                    [ 2  1  0  0  0 ]
+                    [               ]
+                    [ 0  2  1  0  0 ]
+                    [               ]
+(%o2)               [ 0  0  2  1  0 ]
+                    [               ]
+                    [ 0  0  0  2  1 ]
+                    [               ]
+                    [ 0  0  0  0  2 ]
+(%i3) JF(3,2);
+                         [ 3  1 ]
+(%o3)                    [      ]
+                         [ 0  3 ]
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;diag&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-diag">Package diag</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="jordan"></a><a class="anchor" id="Item_003a-diag_002fdeffn_002fjordan"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jordan"><span class="category-def">Function: </span><span><strong class="def-name">jordan</strong> <var class="def-var-arguments">(<var class="var">mat</var>)</var><a class="copiable-link" href='#index-jordan'> &para;</a></span></dt>
+<dd><p>Returns the Jordan form of matrix <var class="var">mat</var>, encoded as a list in a
+particular format. To get the corresponding matrix, call the function
+<code class="code">dispJordan</code> using the output of <code class="code">jordan</code> as the argument.
+</p>
+<p>The elements of the returned list are themselves lists. The first
+element of each is an eigenvalue of <var class="var">mat</var>. The remaining elements
+are positive integers which are the lengths of the Jordan blocks for
+this eigenvalue. These integers are listed in decreasing
+order. Eigenvalues are not repeated.
+</p>
+<p>The functions <code class="code">dispJordan</code>, <code class="code">minimalPoly</code> and
+<code class="code">ModeMatrix</code> expect the output of a call to <code class="code">jordan</code> as an
+argument. If you construct this argument by hand, rather than by
+calling <code class="code">jordan</code>, you must ensure that each eigenvalue only
+appears once and that the block sizes are listed in decreasing order,
+otherwise the functions might give incorrect answers.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) A: matrix([2,0,0,0,0,0,0,0],
+                [1,2,0,0,0,0,0,0],
+                [-4,1,2,0,0,0,0,0],
+                [2,0,0,2,0,0,0,0],
+                [-7,2,0,0,2,0,0,0],
+                [9,0,-2,0,1,2,0,0],
+                [-34,7,1,-2,-1,1,2,0],
+                [145,-17,-16,3,9,-2,0,3])$
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) jordan (A);
+(%o3)                [[2, 3, 3, 1], [3, 1]]
+</pre></div><pre class="example-preformatted">(%i4) dispJordan (%);
+                   [ 2  1  0  0  0  0  0  0 ]
+                   [                        ]
+                   [ 0  2  1  0  0  0  0  0 ]
+                   [                        ]
+                   [ 0  0  2  0  0  0  0  0 ]
+                   [                        ]
+                   [ 0  0  0  2  1  0  0  0 ]
+(%o4)              [                        ]
+                   [ 0  0  0  0  2  1  0  0 ]
+                   [                        ]
+                   [ 0  0  0  0  0  2  0  0 ]
+                   [                        ]
+                   [ 0  0  0  0  0  0  2  0 ]
+                   [                        ]
+                   [ 0  0  0  0  0  0  0  3 ]
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;diag&quot;)</code>. See also <code class="code"><a class="ref" href="#dispJordan">dispJordan</a></code> and <code class="code"><a class="ref" href="#minimalPoly">minimalPoly</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-diag">Package diag</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="dispJordan"></a><a class="anchor" id="Item_003a-diag_002fdeffn_002fdispJordan"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dispJordan"><span class="category-def">Function: </span><span><strong class="def-name">dispJordan</strong> <var class="def-var-arguments">(<var class="var">l</var>)</var><a class="copiable-link" href='#index-dispJordan'> &para;</a></span></dt>
+<dd><p>Returns a matrix in Jordan canonical form (JCF) corresponding to the
+list of eigenvalues and multiplicities given by <var class="var">l</var>. This list
+should be in the format given by the <code class="code"><a class="ref" href="#jordan">jordan</a></code> function. See
+<code class="code"><a class="ref" href="#jordan">jordan</a></code> for details of this format.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+
+(%i2) b1:matrix([0,0,1,1,1],
+                [0,0,0,1,1],
+                [0,0,0,0,1],
+                [0,0,0,0,0],
+                [0,0,0,0,0])$
+
+(%i3) jordan(b1);
+(%o3)                  [[0, 3, 2]]
+(%i4) dispJordan(%);
+                    [ 0  1  0  0  0 ]
+                    [               ]
+                    [ 0  0  1  0  0 ]
+                    [               ]
+(%o4)               [ 0  0  0  0  0 ]
+                    [               ]
+                    [ 0  0  0  0  1 ]
+                    [               ]
+                    [ 0  0  0  0  0 ]
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;diag&quot;)</code>. See also <code class="code"><a class="ref" href="#jordan">jordan</a></code> and <code class="code"><a class="ref" href="#minimalPoly">minimalPoly</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-diag">Package diag</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="minimalPoly"></a><a class="anchor" id="Item_003a-diag_002fdeffn_002fminimalPoly"></a><dl class="first-deffn">
+<dt class="deffn" id="index-minimalPoly"><span class="category-def">Function: </span><span><strong class="def-name">minimalPoly</strong> <var class="def-var-arguments">(<var class="var">l</var>)</var><a class="copiable-link" href='#index-minimalPoly'> &para;</a></span></dt>
+<dd><p>Returns the minimal polynomial of the matrix whose Jordan form is
+described by the list <var class="var">l</var>. This list should be in the format given
+by the <code class="code"><a class="ref" href="#jordan">jordan</a></code> function. See <code class="code"><a class="ref" href="#jordan">jordan</a></code> for details of this
+format.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+
+(%i2) a:matrix([2,1,2,0],
+               [-2,2,1,2],
+               [-2,-1,-1,1],
+               [3,1,2,-1])$
+
+(%i3) jordan(a);
+(%o3)               [[- 1, 1], [1, 3]]
+(%i4) minimalPoly(%);
+                            3
+(%o4)                (x - 1)  (x + 1)
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;diag&quot;)</code>. See also <code class="code"><a class="ref" href="#jordan">jordan</a></code> and <code class="code"><a class="ref" href="#dispJordan">dispJordan</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-diag">Package diag</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ModeMatrix"></a><a class="anchor" id="Item_003a-diag_002fdeffn_002fModeMatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ModeMatrix"><span class="category-def">Function: </span><span><strong class="def-name">ModeMatrix</strong> <var class="def-var-arguments">(<var class="var">A</var>, [<var class="var">jordan_info</var>])</var><a class="copiable-link" href='#index-ModeMatrix'> &para;</a></span></dt>
+<dd><p>Returns an invertible matrix <var class="var">M</var> such that <em class="math tex2jax_process">\((M^^-1).A.M\)</em> is
+the Jordan form of <var class="var">A</var>.
+</p>
+<p>To calculate this, Maxima must find the Jordan form of <var class="var">A</var>, which
+might be quite computationally expensive. If that has already been
+calculated by a previous call to <code class="code"><a class="ref" href="#jordan">jordan</a></code>, pass it as a second
+argument, <var class="var">jordan_info</var>. See <code class="code"><a class="ref" href="#jordan">jordan</a></code> for details of the
+required format.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+(%i2) A: matrix([2,1,2,0], [-2,2,1,2], [-2,-1,-1,1], [3,1,2,-1])$
+(%i3) M: ModeMatrix (A);
+                      [  1    - 1   1   1 ]
+                      [                   ]
+                      [   1               ]
+                      [ - -   - 1   0   0 ]
+                      [   9               ]
+                      [                   ]
+(%o3)                 [   13              ]
+                      [ - --   1   - 1  0 ]
+                      [   9               ]
+                      [                   ]
+                      [  17               ]
+                      [  --   - 1   1   1 ]
+                      [  9                ]
+</pre><div class="group"><pre class="example-preformatted">(%i4) is ((M^^-1) . A . M = dispJordan (jordan (A)));
+(%o4)                         true
+</pre></div></div>
+
+<p>Note that, in this example, the Jordan form of <code class="code">A</code> is computed
+twice. To avoid this, we could have stored the output of
+<code class="code">jordan(A)</code> in a variable and passed that to both
+<code class="code">ModeMatrix</code> and <code class="code">dispJordan</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;diag&quot;)</code>. See also
+<code class="code"><a class="ref" href="#jordan">jordan</a></code> and <code class="code"><a class="ref" href="#dispJordan">dispJordan</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-diag">Package diag</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="mat_005ffunction"></a><a class="anchor" id="Item_003a-diag_002fdeffn_002fmat_005ffunction"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mat_005ffunction"><span class="category-def">Function: </span><span><strong class="def-name">mat_function</strong> <var class="def-var-arguments">(<var class="var">f</var>,<var class="var">A</var>)</var><a class="copiable-link" href='#index-mat_005ffunction'> &para;</a></span></dt>
+<dd><p>Returns <em class="math tex2jax_process">\(f(A)\)</em>, where <var class="var">f</var> is an analytic function and <var class="var">A</var>
+a matrix. This computation is based on the Taylor expansion of
+<var class="var">f</var>. It is not efficient for numerical evaluation, but can give
+symbolic answers for small matrices.
+</p>
+
+<p>Example 1:
+</p>
+<p>The exponential of a matrix. We only give the first row of the answer,
+since the output is rather large.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+(%i2) A: matrix ([0,1,0], [0,0,1], [-1,-3,-3])$
+</pre><div class="group"><pre class="example-preformatted">(%i3) ratsimp (mat_function (exp, t*A)[1]);
+           2              - t                   2   - t
+         (t  + 2 t + 2) %e       2        - t  t  %e
+(%o3)   [--------------------, (t  + t) %e   , --------]
+                  2                               2
+</pre></div></div>
+
+<p>Example 2:
+</p>
+<p>Comparison with the Taylor series for the exponential and also
+comparing <code class="code">exp(%i*A)</code> with sine and cosine.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) A: matrix ([0,1,1,1],
+                 [0,0,0,1],
+                 [0,0,0,1],
+                 [0,0,0,0])$
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ratsimp (mat_function (exp, t*A));
+                       [           2     ]
+                       [ 1  t  t  t  + t ]
+                       [                 ]
+(%o3)                  [ 0  1  0    t    ]
+                       [                 ]
+                       [ 0  0  1    t    ]
+                       [                 ]
+                       [ 0  0  0    1    ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) minimalPoly (jordan (A));
+                                3
+(%o4)                          x
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) ratsimp (ident(4) + t*A + 1/2*(t^2)*A^^2);
+                       [           2     ]
+                       [ 1  t  t  t  + t ]
+                       [                 ]
+(%o5)                  [ 0  1  0    t    ]
+                       [                 ]
+                       [ 0  0  1    t    ]
+                       [                 ]
+                       [ 0  0  0    1    ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) ratsimp (mat_function (exp, %i*t*A));
+                  [                        2 ]
+                  [ 1  %i t  %i t  %i t - t  ]
+                  [                          ]
+(%o6)             [ 0   1     0      %i t    ]
+                  [                          ]
+                  [ 0   0     1      %i t    ]
+                  [                          ]
+                  [ 0   0     0        1     ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) ratsimp (mat_function (cos, t*A) + %i*mat_function (sin, t*A));
+                  [                        2 ]
+                  [ 1  %i t  %i t  %i t - t  ]
+                  [                          ]
+(%o7)             [ 0   1     0      %i t    ]
+                  [                          ]
+                  [ 0   0     1      %i t    ]
+                  [                          ]
+                  [ 0   0     0        1     ]
+</pre></div></div>
+
+<p>Example 3:
+</p>
+<p>Power operations.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;diag&quot;)$
+(%i2) A: matrix([1,2,0], [0,1,0], [1,0,1])$
+(%i3) integer_pow(x) := block ([k], declare (k, integer), x^k)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) mat_function (integer_pow, A);
+                       [ 1     2 k     0 ]
+                       [                 ]
+(%o4)                  [ 0      1      0 ]
+                       [                 ]
+                       [ k  (k - 1) k  1 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) A^^20;
+                         [ 1   40   0 ]
+                         [            ]
+(%o5)                    [ 0    1   0 ]
+                         [            ]
+                         [ 20  380  1 ]
+</pre></div></div>
+
+<p>To use this function write first <code class="code">load(&quot;diag&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-diag">Package diag</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_51.html#distrib_002dpkg" accesskey="n" rel="next">distrib</a>, Previous: <a href="maxima_49.html#descriptive_002dpkg" accesskey="p" rel="prev">descriptive</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

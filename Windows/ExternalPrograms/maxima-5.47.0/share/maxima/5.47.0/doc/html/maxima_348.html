@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Quantum_Computing</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Quantum_Computing">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Quantum_Computing">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_346.html#quantum_005fcomputing_002dpkg" rel="up" title="quantum_computing-pkg">
+<link href="maxima_349.html#ratpow_002dpkg" rel="next" title="ratpow-pkg">
+<link href="maxima_347.html#Package-quantum_005fcomputing" rel="previous" title="Package quantum_computing">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Quantum_005fComputing"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_347.html#Package-quantum_005fcomputing" accesskey="p" rel="previous">Package quantum_computing</a>, Up: <a href="maxima_346.html#quantum_005fcomputing_002dpkg" accesskey="u" rel="up">quantum_computing-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Quantum_005fComputing-1"></a>
+<h3 class="section">83.2 Functions and Variables for Quantum_Computing</h3>
+
+<a name="binlist"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fbinlist"></a><dl>
+<dt><a name="index-binlist"></a>Function: <strong>binlist</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>binlist</tt> (<var>k</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>binlist</tt> (<var>k</var>, <var>n</var>)</em></dt>
+<dd>
+<p><code>binlist</code>(<var>k</var>), where <var>k</var> must be a natural number,
+returns a list of binary digits 0 or 1 corresponding to the digits of
+<var>k</var> in binary representation. <code>binlist</code>(<var>k</var>, <var>n</var>) does
+the same but returns a list of length <var>n</var>, with leading zeros as
+necessary. Notice that for the result to represent a possible state of
+<var>m</var> qubits, <var>n</var> should be equal to 2^<var>m</var> and <var>k</var> should
+be between 0 and 2^<var>m</var>-1.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="binlist2dec"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fbinlist2dec"></a><dl>
+<dt><a name="index-binlist2dec"></a>Function: <strong>binlist2dec</strong> <em>(<var>lst</var>)</em></dt>
+<dd>
+<p>Given a list <var>lst</var> with <var>n</var> binary digits, it returns the decimal
+number it represents.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="CNOT"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fCNOT"></a><dl>
+<dt><a name="index-CNOT"></a>Function: <strong>CNOT</strong> <em>(<var>q</var>, <var>i</var>, <var>j</var>)</em></dt>
+<dd>
+<p>Changes the value of the <var>j</var>&rsquo;th qubit, in a state <var>q</var> of <var>m</var>
+qubits, when the value of the <var>i</var>&rsquo;th qubit equals 1. It modifies the
+list <var>q</var> and returns its modified value.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="controlled"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fcontrolled"></a><dl>
+<dt><a name="index-controlled"></a>Function: <strong>controlled</strong> <em>(<var>U</var>, <var>q</var>, <var>c</var>, <var>i</var>)</em></dt>
+<dd>
+<p>Applies a matrix <var>U</var>, acting on <var>m</var> qubits, on qubits <var>i</var>
+through <var>i</var>+<var>m</var>-1 of the state <var>q</var> of <var>n</var> qubits
+(<var>n</var> &gt; <var>m</var>), when the value of the <var>c</var>&rsquo;th qubit in <var>q</var>
+equals 1. <var>i</var> should be an integer between 1 and <var>n</var>+1-<var>m</var>
+and <var>c</var> should be an integer between 1 and <var>n</var>, excluding the
+qubits to be modified (<var>i</var> through <var>i</var>+<var>m</var>-1).
+</p>
+<p><var>U</var> can be one of the indices of the array of common matrices
+<var>qmatrix</var> (see <code><a href="#qmatrix">qmatrix</a></code>). The state <var>q</var> is modified and
+shown in the output.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="gate"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fgate"></a><dl>
+<dt><a name="index-gate"></a>Function: <strong>gate</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>gate</tt> (<var>U</var>, <var>q</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>gate</tt> (<var>U</var>, <var>q</var>, <var>i</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>gate</tt> (<var>U</var>, <var>q</var>, <var>i1</var>, &hellip;, <var>im</var>)</em></dt>
+<dd>
+<p><var>U</var> must be a matrix acting on states of <var>m</var> qubits; <var>q</var> a
+list corresponding to a state of <var>n</var> qubits (<var>n</var> &gt;= <var>m</var>);
+<var>i</var> and the <var>m</var> numbers <var>i1</var>, &hellip;, <var>im</var> must be
+different integers between 1 and <var>n</var>.
+</p>
+<p><code>gate</code>(<var>U</var>, <var>q</var>) applies matrix <var>U</var> to each qubit of
+<var>q</var>, when <var>m</var> equals 1, or to the first <var>m</var> qubits of
+<var>q</var> when <var>m</var> is bigger than 1.
+</p>
+<p><code>gate</code>(<var>U</var>, <var>q</var>, <var>i</var>) applies matrix <var>U</var> to the
+qubits <var>i</var> through <var>i</var>+<var>m</var>-1 of <var>q</var>.
+</p>
+<p><code>gate</code>(<var>U</var>, <var>q</var>, <var>i1</var>, &hellip;, <var>in</var>) applies
+matrix <var>U</var> to the in the positions <var>i1</var>, &hellip;, <var>im</var>.
+</p>
+<p><var>U</var> can be one of the indices of the array of common matrices
+<var>qmatrix</var> (see <code><a href="#qmatrix">qmatrix</a></code>). The state <var>q</var> is modified and
+shown in the output.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="gate_005fmatrix"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fgate_005fmatrix"></a><dl>
+<dt><a name="index-gate_005fmatrix"></a>Function: <strong>gate_matrix</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>gate_matrix</tt> (<var>U</var>, <var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>gate_matrix</tt> (<var>U</var>, <var>n</var>, <var>i1</var>, &hellip;, <var>im</var>)</em></dt>
+<dd>
+<p><var>U</var> must be a 2 by 2 matrix or one of the indices of the array of
+common matrices <var>qmatrix</var> (see <code><a href="#qmatrix">qmatrix</a></code>).
+<code>gate_matrix</code>(<var>U</var>, <var>n</var>) returns the matrix corresponding to
+the action of <var>U</var> on each qubit in a state of <var>n</var> qubits.
+</p>
+<p><code>gate_matrix</code> (<var>U</var>, <var>n</var>, <var>i1</var>, &hellip;, <var>im</var>)
+returns the matrix corresponding to the action of <var>U</var> on qubits
+<var>i1</var>, &hellip;, <var>im</var> of a state of <var>n</var> qubits, where
+<var>i1</var>, &hellip;, <var>im</var> are different integers between 1 and
+<var>n</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="linsert"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002flinsert"></a><dl>
+<dt><a name="index-linsert"></a>Function: <strong>linsert</strong> <em>(<var>e</var>, <var>lst</var>, <var>p</var>)</em></dt>
+<dd>
+<p>Inserts the expression or list <var>e</var> into the list <var>lst</var> at position
+<var>p</var>. The list can be empty and <var>p</var> must be an integer between 1 and
+the length of <var>lst</var> plus 1.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="lreplace"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002flreplace"></a><dl>
+<dt><a name="index-lreplace"></a>Function: <strong>lreplace</strong> <em>(<var>e</var>, <var>lst</var>, <var>p</var>)</em></dt>
+<dd>
+<p>If <var>e</var> is a list of length <var>n</var>, the elements in the positions
+<var>p</var>, <var>p</var>+1, &hellip;, <var>p</var>+<var>n</var>-1 of the list <var>lst</var> are
+replaced by <var>e</var>, or the first elements of <var>e</var> if the end of
+<var>lst</var> is reached.  If <var>e</var> is an expression, the element in
+position <var>p</var> of list <var>lst</var> is replaced by that expression.
+<var>p</var> must be an integer between 1 and the length of <var>lst</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="normalize"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fnormalize"></a><dl>
+<dt><a name="index-normalize"></a>Function: <strong>normalize</strong> <em>(<var>q</var>)</em></dt>
+<dd>
+<p>Returns the normalized version of a quantum state given as a list <var>q</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="qdisplay"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fqdisplay"></a><dl>
+<dt><a name="index-qdisplay"></a>Function: <strong>qdisplay</strong> <em>(<var>q</var>)</em></dt>
+<dd>
+<p>Represents the state <var>q</var> of a system of <var>n</var> qubits as a linear
+combination of the computational states with <var>n</var> binary digits.  It
+returns an expression including strings and symbols.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="qmatrix"></a><a name="Item_003a-quantum_005fcomputing_002fdefvr_002fqmatrix"></a><dl>
+<dt><a name="index-qmatrix"></a>System variable: <strong>qmatrix</strong></dt>
+<dd>
+<p>This variable is a predefined hash array of two by two matrices with the
+standard matrices: identity, Pauli matrices, Hadamard matrix and the
+phase matrix. The six possible indices are I, X, Y, Z, H,
+S. <var>qmatrix</var>[I] is the identity matrix, <var>qmatrix</var>[X] the Pauli x
+matrix, <var>qmatrix</var>[Y] the Pauli y matrix, <var>qmatrix</var>[Z] the Pauli
+z matrix, <var>qmatrix</var>[H] the Hadamard matrix and <var>qmatrix</var>[S] the
+phase matrix.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="qmeasure"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fqmeasure"></a><dl>
+<dt><a name="index-qmeasure"></a>Function: <strong>qmeasure</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>qmeasure</tt> (<var>q</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>qmeasure</tt> (<var>q</var>, <var>i1</var>, &hellip;, <var>im</var>)</em></dt>
+<dd>
+<p>Measures the value of one or more qubits in a system of <var>n</var> qubits
+with state <var>q</var>. The <var>m</var> positive integers <var>i1</var>, &hellip;,
+<var>im</var> are the positions of the qubits to be measured It requires 1 or
+more arguments. The first argument must be the state q. If the only
+argument given is <var>q</var>, all the n qubits will be measured.
+</p>
+<p>It returns a list with the values of the qubits measured (either 0 or
+1), in the same order they were requested or in ascending order if the
+only argument given was <var>q</var>. It modifies the list <var>q</var>,
+reflecting the collapse of the quantum state after the measurement.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="qubits"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fqubits"></a><dl>
+<dt><a name="index-qubits"></a>Function: <strong>qubits</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>qubits</tt> (<var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>qubits</tt> (<var>i1</var>, &hellip;, <var>in</var>)</em></dt>
+<dd>
+<p><code>qubits</code>(<var>n</var>) returns a list representing the ground state of a
+system of <var>n</var> qubits.
+</p>
+<p><code>qubits</code>(<var>i1</var>, &hellip;, <var>in</var>) returns a list with
+representing the state of <var>n</var> qubits with values <var>i1</var>, &hellip;,
+<var>in</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="qswap"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fqswap"></a><dl>
+<dt><a name="index-qswap"></a>Function: <strong>qswap</strong> <em>(<var>q</var>, <var>i</var>, <var>j</var>)</em></dt>
+<dd>
+<p>Interchanges the states of qubits <var>i</var> and <var>j</var> in the state
+<var>q</var> of a system of several qubits.  It modifies the list <var>q</var> and
+returns its modified value.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Rx"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fRx"></a><dl>
+<dt><a name="index-Rx"></a>Function: <strong>Rx</strong> <em>(<var>a</var>)</em></dt>
+<dd>
+<p>Returns the 2 by two matrix (acting on one qubit) corresponding to a
+rotation of with an angle of <var>a</var> radians around the x axis.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Ry"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fRy"></a><dl>
+<dt><a name="index-Ry"></a>Function: <strong>Ry</strong> <em>(<var>a</var>)</em></dt>
+<dd>
+<p>Returns the 2 by two matrix (acting on one qubit) corresponding to a
+rotation of with an angle of <var>a</var> radians around the y axis.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Rz"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002fRz"></a><dl>
+<dt><a name="index-Rz"></a>Function: <strong>Rz</strong> <em>(<var>a</var>)</em></dt>
+<dd>
+<p>Returns the 2 by two matrix (acting on one qubit) corresponding to a
+rotation of with an angle of <var>a</var> radians around the z axis.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="tprod"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002ftprod"></a><dl>
+<dt><a name="index-tprod"></a>Function: <strong>tprod</strong> <em>(<var>o1</var>, &hellip;, <var>on</var>)</em></dt>
+<dd>
+<p>Returns the tensor product of the <var>n</var> matrices or lists <var>o1</var>,
+&hellip;, <var>on</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<a name="toffoli"></a><a name="Item_003a-quantum_005fcomputing_002fdeffn_002ftoffoli"></a><dl>
+<dt><a name="index-toffoli"></a>Function: <strong>toffoli</strong> <em>(<var>q</var>, (<var>i</var>, (<var>j</var>, (<var>k</var>)</em></dt>
+<dd>
+<p>Changes the value of the <var>k</var>&rsquo;th qubit, in the state <var>q</var> of
+<var>n</var> qubits, if the values of the <var>i</var>&rsquo;th anf <var>j</var>&rsquo;th qubits
+are equal to 1. It modifies the list <var>q</var> and returns its new value.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+</dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_347.html#Package-quantum_005fcomputing" accesskey="p" rel="previous">Package quantum_computing</a>, Up: <a href="maxima_346.html#quantum_005fcomputing_002dpkg" accesskey="u" rel="up">quantum_computing-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,3218 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Special Functions (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Special Functions (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Special Functions (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_15.html#Elliptic-Functions" rel="next" title="Elliptic Functions">
+<link href="maxima_13.html#Polynomials" rel="prev" title="Polynomials">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Special-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_15.html#Elliptic-Functions" accesskey="n" rel="next">Elliptic Functions</a>, Previous: <a href="maxima_13.html#Polynomials" accesskey="p" rel="prev">Polynomials</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Special-Functions-1">15 Special Functions</h2>
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fIntroduction-to-Special-Functions"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Special-Functions" accesskey="1">Introduction to Special Functions</a></li>
+<li><a href="#Bessel-Functions" accesskey="2">Bessel Functions</a></li>
+<li><a href="#Airy-Functions" accesskey="3">Airy Functions</a></li>
+<li><a href="#Gamma-and-Factorial-Functions" accesskey="4">Gamma and Factorial Functions</a></li>
+<li><a href="#Exponential-Integrals" accesskey="5">Exponential Integrals</a></li>
+<li><a href="#Error-Function" accesskey="6">Error Function</a></li>
+<li><a href="#Struve-Functions" accesskey="7">Struve Functions</a></li>
+<li><a href="#Hypergeometric-Functions" accesskey="8">Hypergeometric Functions</a></li>
+<li><a href="#Parabolic-Cylinder-Functions" accesskey="9">Parabolic Cylinder Functions</a></li>
+<li><a href="#Functions-and-Variables-for-Special-Functions">Functions and Variables for Special Functions</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Special-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Bessel-Functions" accesskey="n" rel="next">Bessel Functions</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Special-Functions-1">15.1 Introduction to Special Functions</h3>
+
+<p>Special function notation follows:
+</p>
+<div class="example">
+<pre class="example-preformatted">bessel_j (index, expr)         Bessel function, 1st kind
+bessel_y (index, expr)         Bessel function, 2nd kind
+bessel_i (index, expr)         Modified Bessel function, 1st kind
+bessel_k (index, expr)         Modified Bessel function, 2nd kind
+
+hankel_1 (v,z)                 Hankel function of the 1st kind
+hankel_2 (v,z)                 Hankel function of the 2nd kind
+struve_h (v,z)                 Struve H function
+struve_l (v,z)                 Struve L function
+
+assoc_legendre_p[v,u] (z)      Legendre function of degree v and order u 
+assoc_legendre_q[v,u] (z)      Legendre function, 2nd kind
+
+%f[p,q] ([], [], expr)         Generalized Hypergeometric function
+gamma (z)                      Gamma function
+gamma_incomplete_lower (a,z)   Lower incomplete gamma function
+gamma_incomplete (a,z)         Tail of incomplete gamma function
+hypergeometric (l1, l2, z)     Hypergeometric function
+%s[u,v] (z)                    Lommel &quot;small&quot; s function
+slommel[u,v] (z)               Lommel &quot;big&quot; S function
+%m[u,k] (z)                    Whittaker function, 1st kind
+%w[u,k] (z)                    Whittaker function, 2nd kind
+erfc (z)                       Complement of the erf function
+
+expintegral_e (v,z)            Exponential integral E
+expintegral_e1 (z)             Exponential integral E1
+expintegral_ei (z)             Exponential integral Ei
+expintegral_li (z)             Logarithmic integral Li
+expintegral_si (z)             Exponential integral Si
+expintegral_ci (z)             Exponential integral Ci
+expintegral_shi (z)            Exponential integral Shi
+expintegral_chi (z)            Exponential integral Chi
+
+kelliptic (z)                  Complete elliptic integral of the first 
+                               kind (K)
+parabolic_cylinder_d (v,z)     Parabolic cylinder D function
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Airy-functions">Airy functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fBessel-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Bessel-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Airy-Functions" accesskey="n" rel="next">Airy Functions</a>, Previous: <a href="#Introduction-to-Special-Functions" accesskey="p" rel="prev">Introduction to Special Functions</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Bessel-Functions-1">15.2 Bessel Functions</h3>
+
+<a class="anchor" id="bessel_005fj"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fbessel_005fj"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bessel_005fj"><span class="category-def">Function: </span><span><strong class="def-name">bessel_j</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-bessel_005fj'> &para;</a></span></dt>
+<dd>
+<p>The Bessel function of the first kind of order <em class="math tex2jax_process">\(v\)</em> and argument <em class="math tex2jax_process">\(z\)</em>.
+See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_360.htm">A&amp;S eqn 9.1.10</a> and <a class="url" href="https://dlmf.nist.gov/10.2.E2">DLMF 10.2.E2</a>.
+</p>
+<p><code class="code">bessel_j</code> is defined as
+</p>
+$$
+J_v(z) = \sum_{k=0}^{\infty }{{{\left(-1\right)^{k}\,\left(z\over 2\right)^{v+2\,k}
+ }\over{k!\,\Gamma\left(v+k+1\right)}}}
+$$
+
+
+<p>although the infinite series is not used for computations.
+</p>
+<p>When <code class="code">besselexpand</code> is <code class="code">true</code>, <code class="code">bessel_j</code> is expanded in terms
+of elementary functions when the order <em class="math tex2jax_process">\(v\)</em> is half of an odd integer. 
+See <code class="code"><a class="ref" href="#besselexpand">besselexpand</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bessel_005fy"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fbessel_005fy"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bessel_005fy"><span class="category-def">Function: </span><span><strong class="def-name">bessel_y</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-bessel_005fy'> &para;</a></span></dt>
+<dd>
+<p>The Bessel function of the second kind of order <em class="math tex2jax_process">\(v\)</em> and argument <em class="math tex2jax_process">\(z\)</em>.
+See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_358.htm">A&amp;S eqn 9.1.2</a> and <a class="url" href="https://dlmf.nist.gov/10.2.E3">DLMF 10.2.E3</a>.
+</p>
+<p><code class="code">bessel_y</code> is defined as
+$$
+Y_v(z) = {{\cos(\pi v)\, J_v(z) - J_{-v}(z)}\over{\sin{\pi v}}}
+$$
+</p>
+
+<p>when <em class="math tex2jax_process">\(v\)</em> is not an integer.  When <em class="math tex2jax_process">\(v\)</em> is an integer <em class="math tex2jax_process">\(n\)</em>,
+the limit as <em class="math tex2jax_process">\(v\)</em> approaches <em class="math tex2jax_process">\(n\)</em> is taken.
+</p>
+<p>When <code class="code">besselexpand</code> is <code class="code">true</code>, <code class="code">bessel_y</code> is expanded in terms
+of elementary functions when the order <em class="math tex2jax_process">\(v\)</em> is half of an odd integer. 
+See <code class="code"><a class="ref" href="#besselexpand">besselexpand</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bessel_005fi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fbessel_005fi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bessel_005fi"><span class="category-def">Function: </span><span><strong class="def-name">bessel_i</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-bessel_005fi'> &para;</a></span></dt>
+<dd>
+<p>The modified Bessel function of the first kind of order <em class="math tex2jax_process">\(v\)</em> and argument
+<em class="math tex2jax_process">\(z\)</em>. See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_375.htm">A&amp;S eqn 9.6.10</a> and <a class="url" href="https://dlmf.nist.gov/10.25.E2">DLMF 10.25.E2</a>.
+</p>
+<p><code class="code">bessel_i</code> is defined as
+$$
+I_v(z) = \sum_{k=0}^{\infty } {{1\over{k!\,\Gamma
+ \left(v+k+1\right)}} {\left(z\over 2\right)^{v+2\,k}}}
+$$
+</p>
+
+<p>although the infinite series is not used for computations.
+</p>
+<p>When <code class="code">besselexpand</code> is <code class="code">true</code>, <code class="code">bessel_i</code> is expanded in terms
+of elementary functions when the order <em class="math tex2jax_process">\(v\)</em> is half of an odd integer. 
+See <code class="code"><a class="ref" href="#besselexpand">besselexpand</a></code>.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bessel_005fk"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fbessel_005fk"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bessel_005fk"><span class="category-def">Function: </span><span><strong class="def-name">bessel_k</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-bessel_005fk'> &para;</a></span></dt>
+<dd>
+<p>The modified Bessel function of the second kind of order <em class="math tex2jax_process">\(v\)</em> and argument
+<em class="math tex2jax_process">\(z\)</em>. See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_375.htm">A&amp;S eqn 9.6.2</a> and <a class="url" href="https://dlmf.nist.gov/10.27.E4">DLMF 10.27.E4</a>.
+</p>
+<p><code class="code">bessel_k</code> is defined as
+$$
+K_v(z) = {{\pi\,\csc \left(\pi\,v\right)\,\left(I_{-v}(z)-I_{v}(z)\right)}\over{2}}
+$$
+</p>
+
+<p>when <em class="math tex2jax_process">\(v\)</em> is not an integer.  If <em class="math tex2jax_process">\(v\)</em> is an integer <em class="math tex2jax_process">\(n\)</em>,
+then the limit as <em class="math tex2jax_process">\(v\)</em> approaches <em class="math tex2jax_process">\(n\)</em> is taken.
+</p>
+<p>When <code class="code">besselexpand</code> is <code class="code">true</code>, <code class="code">bessel_k</code> is expanded in terms
+of elementary functions when the order <em class="math tex2jax_process">\(v\)</em> is half of an odd integer. 
+See <code class="code"><a class="ref" href="#besselexpand">besselexpand</a></code>.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="hankel_005f1"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fhankel_005f1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hankel_005f1"><span class="category-def">Function: </span><span><strong class="def-name">hankel_1</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-hankel_005f1'> &para;</a></span></dt>
+<dd>
+<p>The Hankel function of the first kind of order <em class="math tex2jax_process">\(v\)</em> and argument <em class="math tex2jax_process">\(z\)</em>.
+See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_358.htm">A&amp;S eqn 9.1.3</a> and <a class="url" href="https://dlmf.nist.gov/10.4.E3">DLMF 10.4.E3</a>.
+</p>
+<p><code class="code">hankel_1</code> is defined as
+</p>
+$$
+H^{(1)}_v(z) = J_v(z) + i Y_v(z)
+$$
+
+
+<p>Maxima evaluates <code class="code">hankel_1</code> numerically for a complex order <em class="math tex2jax_process">\(v\)</em> and 
+complex argument <em class="math tex2jax_process">\(z\)</em> in float precision. The numerical evaluation in 
+bigfloat precision is not supported.
+</p>
+<p>When <code class="code">besselexpand</code> is <code class="code">true</code>, <code class="code">hankel_1</code> is expanded in terms
+of elementary functions when the order <em class="math tex2jax_process">\(v\)</em> is half of an odd integer. 
+See <code class="code"><a class="ref" href="#besselexpand">besselexpand</a></code>.
+</p>
+<p>Maxima knows the derivative of <code class="code">hankel_1</code> wrt the argument <em class="math tex2jax_process">\(z\)</em>.
+</p>
+<p>Examples:
+</p>
+<p>Numerical evaluation:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) hankel_1(1,0.5);
+(%o1)        0.24226845767487 - 1.471472392670243 %i
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) hankel_1(1,0.5+%i);
+(%o2)       - 0.25582879948621 %i - 0.23957560188301
+</pre></div></div>
+
+<p>Expansion of <code class="code">hankel_1</code> when <code class="code">besselexpand</code> is <code class="code">true</code>:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) hankel_1(1/2,z),besselexpand:true;
+               sqrt(2) sin(z) - sqrt(2) %i cos(z)
+(%o1)          ----------------------------------
+                       sqrt(%pi) sqrt(z)
+</pre></div></div>
+
+<p>Derivative of <code class="code">hankel_1</code> wrt the argument <em class="math tex2jax_process">\(z\)</em>. The derivative wrt the 
+order <em class="math tex2jax_process">\(v\)</em> is not supported. Maxima returns a noun form:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) diff(hankel_1(v,z),z);
+             hankel_1(v - 1, z) - hankel_1(v + 1, z)
+(%o1)        ---------------------------------------
+                                2
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) diff(hankel_1(v,z),v);
+                       d
+(%o2)                  -- (hankel_1(v, z))
+                       dv
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="hankel_005f2"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fhankel_005f2"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hankel_005f2"><span class="category-def">Function: </span><span><strong class="def-name">hankel_2</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-hankel_005f2'> &para;</a></span></dt>
+<dd>
+<p>The Hankel function of the second kind of order <em class="math tex2jax_process">\(v\)</em> and argument <em class="math tex2jax_process">\(z\)</em>.
+See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_358.htm">A&amp;S eqn 9.1.4</a> and <a class="url" href="https://dlmf.nist.gov/10.4.E3">DLMF 10.4.E3</a>.
+</p>
+<p><code class="code">hankel_2</code> is defined as
+</p>
+$$
+H^{(2)}_v(z) = J_v(z) - i Y_v(z)
+$$
+
+
+<p>Maxima evaluates <code class="code">hankel_2</code> numerically for a complex order <em class="math tex2jax_process">\(v\)</em> and 
+complex argument <em class="math tex2jax_process">\(z\)</em> in float precision. The numerical evaluation in 
+bigfloat precision is not supported.
+</p>
+<p>When <code class="code">besselexpand</code> is <code class="code">true</code>, <code class="code">hankel_2</code> is expanded in terms
+of elementary functions when the order <em class="math tex2jax_process">\(v\)</em> is half of an odd integer. 
+See <code class="code"><a class="ref" href="#besselexpand">besselexpand</a></code>.
+</p>
+<p>Maxima knows the derivative of <code class="code">hankel_2</code> wrt the argument <em class="math tex2jax_process">\(z\)</em>.
+</p>
+<p>For examples see <code class="code">hankel_1</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="besselexpand"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fbesselexpand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-besselexpand"><span class="category-def">Option variable: </span><span><strong class="def-name">besselexpand</strong><a class="copiable-link" href='#index-besselexpand'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>Controls expansion of the Bessel, Hankel and Struve functions
+when the order is half of
+an odd integer.  In this case, the functions can be expanded
+in terms of other elementary functions.  When <code class="code">besselexpand</code> is <code class="code">true</code>,
+the Bessel function is expanded.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) besselexpand: false$
+(%i2) bessel_j (3/2, z);
+                                    3
+(%o2)                      bessel_j(-, z)
+                                    2
+(%i3) besselexpand: true$
+(%i4) bessel_j (3/2, z);
+                                        sin(z)   cos(z)
+                       sqrt(2) sqrt(z) (------ - ------)
+                                           2       z
+                                          z
+(%o4)                  ---------------------------------
+                                   sqrt(%pi)
+(%i5) bessel_y(3/2,z);
+                                        sin(z)    cos(z)
+                    sqrt(2) sqrt(z) ((- ------) - ------)
+                                          z          2
+                                                    z
+(%o5)               -------------------------------------
+                                  sqrt(%pi)
+(%i6) bessel_i(3/2,z);
+                                      cosh(z)   sinh(z)
+                     sqrt(2) sqrt(z) (------- - -------)
+                                         z         2
+                                                  z
+(%o6)                -----------------------------------
+                                  sqrt(%pi)
+(%i7) bessel_k(3/2,z);
+                                      1        - z
+                           sqrt(%pi) (- + 1) %e
+                                      z
+(%o7)                      -----------------------
+                               sqrt(2) sqrt(z)
+
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scaled_005fbessel_005fi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fscaled_005fbessel_005fi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scaled_005fbessel_005fi"><span class="category-def">Function: </span><span><strong class="def-name">scaled_bessel_i</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-scaled_005fbessel_005fi'> &para;</a></span></dt>
+<dd>
+<p>The scaled modified Bessel function of the first kind of order
+<em class="math tex2jax_process">\(v\)</em> and argument <em class="math tex2jax_process">\(z\)</em>.  That is,
+</p>
+$$
+{\rm scaled\_bessel\_i}(v,z) = e^{-|z|} I_v(z).
+$$
+
+
+<p>This function is particularly useful
+for calculating 
+\(I_v(z)\)
+ for large <em class="math tex2jax_process">\(z\)</em>, which is large.
+However, maxima does not otherwise know much about this function.  For
+symbolic work, it is probably preferable to work with the expression
+<code class="code">exp(-abs(z))*bessel_i(v, z)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scaled_005fbessel_005fi0"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fscaled_005fbessel_005fi0"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scaled_005fbessel_005fi0"><span class="category-def">Function: </span><span><strong class="def-name">scaled_bessel_i0</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-scaled_005fbessel_005fi0'> &para;</a></span></dt>
+<dd>
+<p>Identical to <code class="code">scaled_bessel_i(0,z)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scaled_005fbessel_005fi1"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fscaled_005fbessel_005fi1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scaled_005fbessel_005fi1"><span class="category-def">Function: </span><span><strong class="def-name">scaled_bessel_i1</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-scaled_005fbessel_005fi1'> &para;</a></span></dt>
+<dd>
+<p>Identical to <code class="code">scaled_bessel_i(1,z)</code>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="g_t_0025s"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002f_0025s"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0025s"><span class="category-def">Function: </span><span><strong class="def-name">%s</strong> <var class="def-var-arguments">[<var class="var">u</var>,<var class="var">v</var>] (<var class="var">z</var>)</var><a class="copiable-link" href='#index-_0025s'> &para;</a></span></dt>
+<dd><p>Lommel&rsquo;s little 
+\(s_{\mu,\nu}(z)\)
+ function.  
+(<a class="url" href="https://dlmf.nist.gov/11.9.E3">DLMF 11.9.E3</a>)(G&amp;R 8.570.1).
+</p>
+<p>This Lommel function is the particular solution of the inhomogeneous
+Bessel differential equation:
+</p>
+$$
+{d^2\over dz^2} + {1\over z}{dw\over dz} + \left(1-{\nu^2\over z^2}\right) w = z^{\mu-1}
+$$
+
+
+<p>This can be defined by the series
+</p>
+$$
+s_{\mu,\nu}(z) = z^{\mu+1}\sum_{k=0}^{\infty} (-1)^k {z^{2k}\over a_{k+1}(\mu, \nu)}
+$$
+
+
+<p>where
+</p>
+$$
+a_k(\mu,\nu) = \prod_{m=1}^k \left(\left(\mu + 2m-1\right)^2-\nu^2\right) = 4^k\left(\mu-\nu+1\over 2\right)_k \left(\mu+\nu+1\over 2\right)_k
+$$
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fslommel"></a><dl class="first-deffn">
+<dt class="deffn" id="index-slommel"><span class="category-def">Function: </span><span><strong class="def-name">slommel</strong> <var class="def-var-arguments">[<var class="var">u</var>,<var class="var">v</var>] (<var class="var">z</var>)</var><a class="copiable-link" href='#index-slommel'> &para;</a></span></dt>
+<dd><p>Lommel&rsquo;s big 
+\(S_{\mu,\nu}(z)\)
+ function.  
+(<a class="url" href="https://dlmf.nist.gov/11.9.E5">DLMF 11.9.E5</a>)(G&amp;R 8.570.2).
+</p>
+<p>Lommels big S function is another particular solution of the
+inhomogeneous Bessel differential equation
+(see <a class="pxref" href="#g_t_0025s">%s</a>) defined for all values
+of 
+\(\mu\)
+ and 
+\(\nu\)
+, where
+</p>
+$$
+\eqalign{
+S_{\mu,\nu}(z) = s_{\mu,\nu}(z) + 2^{\mu-1} & \Gamma\left({\mu\over 2} + {\nu\over 2} + {1\over 2}\right) \Gamma\left({\mu\over 2} - {\nu\over 2} + {1\over 2}\right) \cr
+& \times \left(\sin\left({(\mu-\nu)\pi\over 2}\right) J_{\nu}(z) - \cos\left({(\mu-\nu)\pi\over 2}\right) Y_{\nu}(z)\right)
+}
+$$
+
+
+<p>When 
+\(\mu\pm \nu\)
+) is an odd
+negative integer, the limit must be used.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fAiry-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Airy-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Gamma-and-Factorial-Functions" accesskey="n" rel="next">Gamma and Factorial Functions</a>, Previous: <a href="#Bessel-Functions" accesskey="p" rel="prev">Bessel Functions</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Airy-Functions-1">15.3 Airy Functions</h3>
+
+<p>The Airy functions 
+\({\rm Ai}(x)\)
+ and 
+\({\rm Bi}(x)\)
+ are defined in Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_446.htm">A&amp;S Section 10.4</a> and <a class="url" href="https://dlmf.nist.gov/9">DLMF 9</a>.
+</p>
+<p>The Airy differential equation is:
+</p>
+$$
+{d^2 y\over dx^2} - xy = 0
+$$
+
+
+<p>The numerically satisfactory pair of solutions (<a class="url" href="https://dlmf.nist.gov/9.2#T1">DLMF 9.2#T1</a>) on the real line are 
+\(y = {\rm Ai}(x)\)
+ and 
+\(y = {\rm Bi}(x).\)
+</p>
+<p>These two solutions are oscillatory for <em class="math tex2jax_process">\(x < 0\)</em>.  
+\({\rm Ai}(x)\)
+ is
+the solution subject to the condition that 
+\(y\rightarrow 0\)
+ as 
+\(x\rightarrow +\infty,\)
+ and 
+\({\rm Bi}(x)\)
+ is
+the second solution with the
+same amplitude as 
+\({\rm Ai}(x)\)
+ as 
+\(x\rightarrow-\infty\)
+ which differs in phase
+by 
+\(\pi/2.\)
+  Also, 
+\({\rm Bi}(x)\)
+ is unbounded
+as 
+\(x\rightarrow +\infty.\)
+</p>
+
+
+<p>If the argument <em class="math tex2jax_process">\(x\)</em> is a real or complex floating point 
+number, the numerical value of the function is returned.
+</p>
+<a class="anchor" id="airy_005fai"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fairy_005fai"></a><dl class="first-deffn">
+<dt class="deffn" id="index-airy_005fai"><span class="category-def">Function: </span><span><strong class="def-name">airy_ai</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-airy_005fai'> &para;</a></span></dt>
+<dd><p>The Airy function 
+\({\rm Ai}(x).\)
+  See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_446.htm">A&amp;S eqn 10.4.2</a> and <a class="url" href="https://dlmf.nist.gov/9">DLMF 9</a>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#airy_005fbi">airy_bi</a></code>, <code class="code"><a class="ref" href="#airy_005fdai">airy_dai</a></code>, and <code class="code"><a class="ref" href="#airy_005fdbi">airy_dbi</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Airy-functions">Airy functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="airy_005fdai"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fairy_005fdai"></a><dl class="first-deffn">
+<dt class="deffn" id="index-airy_005fdai"><span class="category-def">Function: </span><span><strong class="def-name">airy_dai</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-airy_005fdai'> &para;</a></span></dt>
+<dd><p>The derivative of the Airy function 
+\({\rm Ai}(x)\)
+:
+</p>
+$$
+{\rm airy\_dai}(x) = {d\over dx}{\rm Ai}(x)
+$$
+ 
+
+<p>See <code class="code"><a class="ref" href="#airy_005fai">airy_ai</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Airy-functions">Airy functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="airy_005fbi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fairy_005fbi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-airy_005fbi"><span class="category-def">Function: </span><span><strong class="def-name">airy_bi</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-airy_005fbi'> &para;</a></span></dt>
+<dd><p>The Airy function 
+\({\rm Bi}(x)\)
+.  See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_446.htm">A&amp;S eqn 10.4.3</a> and  <a class="url" href="https://dlmf.nist.gov/9">DLMF 9</a>.
+</p>
+<p>See <code class="code"><a class="ref" href="#airy_005fai">airy_ai</a></code>, and <code class="code"><a class="ref" href="#airy_005fdbi">airy_dbi</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Airy-functions">Airy functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="airy_005fdbi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fairy_005fdbi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-airy_005fdbi"><span class="category-def">Function: </span><span><strong class="def-name">airy_dbi</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-airy_005fdbi'> &para;</a></span></dt>
+<dd><p>The derivative of the Airy function 
+\({\rm Bi}(x)\)
+:
+</p>
+$$
+{\rm airy\_dbi}(x) = {d\over dx}{\rm Bi}(x)
+$$
+
+
+<p>See <code class="code"><a class="ref" href="#airy_005fai">airy_ai</a></code>, and <code class="code"><a class="ref" href="#airy_005fbi">airy_bi</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Airy-functions">Airy functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fGamma-and-Factorial-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Gamma-and-Factorial-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Exponential-Integrals" accesskey="n" rel="next">Exponential Integrals</a>, Previous: <a href="#Airy-Functions" accesskey="p" rel="prev">Airy Functions</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Gamma-and-Factorial-Functions-1">15.4 Gamma and Factorial Functions</h3>
+
+<p>The gamma function and the related beta, psi and incomplete gamma 
+functions are defined in Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, Chapter 6.
+</p>
+
+
+
+<a class="anchor" id="bffac"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fbffac"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bffac"><span class="category-def">Function: </span><span><strong class="def-name">bffac</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-bffac'> &para;</a></span></dt>
+<dd>
+<p>Bigfloat version of the factorial (shifted gamma)
+function.  The second argument is how many digits to retain and return,
+it&rsquo;s a good idea to request a couple of extra.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) bffac(1/2,16);
+(%o1)                        8.862269254527584b-1
+(%i2) (1/2)!,numer;
+(%o2)                          0.886226925452758
+(%i3) bffac(1/2,32);
+(%o3)                 8.862269254527580136490837416707b-1
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-evaluation">Numerical evaluation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bfpsi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fbfpsi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bfpsi"><span class="category-def">Function: </span><span><strong class="def-name">bfpsi</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">z</var>, <var class="var">fpprec</var>)</var><a class="copiable-link" href='#index-bfpsi'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Special_002fdeffn_002fbfpsi0"></a></dd><dt class="deffnx def-cmd-deffn" id="index-bfpsi0"><span class="category-def">Function: </span><span><strong class="def-name">bfpsi0</strong> <var class="def-var-arguments">(<var class="var">z</var>, <var class="var">fpprec</var>)</var><a class="copiable-link" href='#index-bfpsi0'> &para;</a></span></dt>
+<dd>
+<p><code class="code">bfpsi</code> is the polygamma function of real argument <var class="var">z</var> and
+integer order <var class="var">n</var>.  See <a class="ref" href="#polygamma">psi</a> for further
+information.  <code class="code">bfpsi0</code> is the digamma function.
+<code class="code">bfpsi0(<var class="var">z</var>, <var class="var">fpprec</var>)</code> is equivalent to <code class="code">bfpsi(0,
+<var class="var">z</var>, <var class="var">fpprec</var>)</code>.
+</p>
+<p>These functions return bigfloat values.
+<var class="var">fpprec</var> is the bigfloat precision of the return value.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) bfpsi0(1/3, 15);
+(%o1)                        - 3.13203378002081b0
+(%i2) bfpsi0(1/3, 32);
+(%o2)                - 3.1320337800208063229964190742873b0
+(%i3) bfpsi(0,1/3,32);
+(%o3)                - 3.1320337800208063229964190742873b0
+(%i4) psi[0](1/3);
+                          3 log(3)       %pi
+(%o4)                  (- --------) - --------- - %gamma
+                             2        2 sqrt(3)
+(%i5) float(%);
+(%o5)                         - 3.132033780020806
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-evaluation">Numerical evaluation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="cbffac"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fcbffac"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cbffac"><span class="category-def">Function: </span><span><strong class="def-name">cbffac</strong> <var class="def-var-arguments">(<var class="var">z</var>, <var class="var">fpprec</var>)</var><a class="copiable-link" href='#index-cbffac'> &para;</a></span></dt>
+<dd><p>Complex bigfloat factorial.
+</p>
+<p><code class="code">load (&quot;bffac&quot;)</code> loads this function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) cbffac(1+%i,16);
+(%o1)           3.430658398165453b-1 %i + 6.529654964201666b-1
+(%i2) (1+%i)!,numer;
+(%o2)             0.3430658398165453 %i + 0.6529654964201667
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-evaluation">Numerical evaluation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gamma"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fgamma"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gamma"><span class="category-def">Function: </span><span><strong class="def-name">gamma</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-gamma'> &para;</a></span></dt>
+<dd>
+<p>The basic definition of the gamma function (<a class="url" href="https://dlmf.nist.gov/5.2.E1">DLMF 5.2.E1</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_255.htm">A&amp;S eqn 6.1.1</a>) is
+</p>
+$$
+\Gamma\left(z\right)=\int_{0}^{\infty }{t^{z-1}\,e^ {- t }\;dt}
+$$
+
+
+<p>Maxima simplifies <code class="code">gamma</code> for positive integer and positive and negative 
+rational numbers. For half integral values the result is a rational number
+times 
+\(\sqrt{\pi}\)
+. The simplification for integer values is controlled by 
+<code class="code">factlim</code>. For integers greater than <code class="code">factlim</code> the numerical result of 
+the factorial function, which is used to calculate <code class="code">gamma</code>, will overflow. 
+The simplification for rational numbers is controlled by <code class="code">gammalim</code> to 
+avoid internal overflow. See <code class="code">factlim</code> and <code class="code">gammalim</code>.
+</p>
+<p>For negative integers <code class="code">gamma</code> is not defined.
+</p>
+<p>Maxima can evaluate <code class="code">gamma</code> numerically for real and complex values in float
+and bigfloat precision.
+</p>
+<p><code class="code">gamma</code> has mirror symmetry.
+</p>
+<p>When <code class="code"><a class="ref" href="#gamma_005fexpand">gamma_expand</a></code> is <code class="code">true</code>, Maxima expands <code class="code">gamma</code> for 
+arguments <code class="code">z+n</code> and <code class="code">z-n</code> where <code class="code">n</code> is an integer.
+</p>
+<p>Maxima knows the derivative of <code class="code">gamma</code>.
+</p>
+<p>Examples:
+</p>
+<p>Simplification for integer, half integral, and rational numbers:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) map('gamma,[1,2,3,4,5,6,7,8,9]);
+(%o1)        [1, 1, 2, 6, 24, 120, 720, 5040, 40320]
+(%i2) map('gamma,[1/2,3/2,5/2,7/2]);
+                    sqrt(%pi)  3 sqrt(%pi)  15 sqrt(%pi)
+(%o2)   [sqrt(%pi), ---------, -----------, ------------]
+                        2           4            8
+(%i3) map('gamma,[2/3,5/3,7/3]);
+                                  2           1
+                          2 gamma(-)  4 gamma(-)
+                      2           3           3
+(%o3)          [gamma(-), ----------, ----------]
+                      3       3           9
+</pre></div>
+
+<p>Numerical evaluation for real and complex values:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) map('gamma,[2.5,2.5b0]);
+(%o4)     [1.329340388179137, 1.3293403881791370205b0]
+(%i5) map('gamma,[1.0+%i,1.0b0+%i]);
+(%o5) [0.498015668118356 - .1549498283018107 %i, 
+          4.9801566811835604272b-1 - 1.5494982830181068513b-1 %i]
+</pre></div>
+
+<p><code class="code">gamma</code> has mirror symmetry:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i6) declare(z,complex)$
+(%i7) conjugate(gamma(z));
+(%o7)                  gamma(conjugate(z))
+</pre></div>
+
+<p>Maxima expands <code class="code">gamma(z+n)</code> and <code class="code">gamma(z-n)</code>, when <code class="code"><a class="ref" href="#gamma_005fexpand">gamma_expand</a></code> 
+is <code class="code">true</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i8) gamma_expand:true$
+
+(%i9) [gamma(z+1),gamma(z-1),gamma(z+2)/gamma(z+1)];
+                               gamma(z)
+(%o9)             [z gamma(z), --------, z + 1]
+                                z - 1
+</pre></div>
+
+<p>The derivative of <code class="code">gamma</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i10) diff(gamma(z),z);
+(%o10)                  psi (z) gamma(z)
+                           0
+</pre></div>
+
+<p>See also <code class="code"><a class="ref" href="#makegamma">makegamma</a></code>.
+</p>
+<p>The Euler-Mascheroni constant is <code class="code">%gamma</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002flog_005fgamma"></a><dl class="first-deffn">
+<dt class="deffn" id="index-log_005fgamma"><span class="category-def">Function: </span><span><strong class="def-name">log_gamma</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-log_005fgamma'> &para;</a></span></dt>
+<dd>
+<p>The natural logarithm of the gamma function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) gamma(6);
+(%o1)                                 120
+(%i2) log_gamma(6);
+(%o2)                              log(120)
+(%i3) log_gamma(0.5);
+(%o3)                         0.5723649429247004
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fgamma_005fincomplete_005flower"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gamma_005fincomplete_005flower"><span class="category-def">Function: </span><span><strong class="def-name">gamma_incomplete_lower</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-gamma_005fincomplete_005flower'> &para;</a></span></dt>
+<dd>
+<p>The lower incomplete gamma function (<a class="url" href="https://dlmf.nist.gov/8.2.E1">DLMF 8.2.E1</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_260.htm">A&amp;S eqn 6.5.2</a>):
+</p>
+$$
+\gamma\left(a , z\right)=\int_{0}^{z}{t^{a-1}\,e^ {- t }\;dt}
+$$
+
+
+<p>See also <code class="code"><a class="ref" href="#gamma_005fincomplete">gamma_incomplete</a></code> (upper incomplete gamma function).
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gamma_005fincomplete"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fgamma_005fincomplete"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gamma_005fincomplete"><span class="category-def">Function: </span><span><strong class="def-name">gamma_incomplete</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-gamma_005fincomplete'> &para;</a></span></dt>
+<dd>
+<p>The incomplete upper gamma function (<a class="url" href="https://dlmf.nist.gov/8.2.E2">DLMF 8.2.E2</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_260.htm">A&amp;S eqn 6.5.3</a>):
+</p>
+$$
+\Gamma\left(a , z\right)=\int_{z}^{\infty }{t^{a-1}\,e^ {- t }\;dt}
+$$
+
+
+<p>See also <code class="code"><a class="ref" href="#gamma_005fexpand">gamma_expand</a></code> for controlling how
+<code class="code">gamma_incomplete</code> is expressed in terms of elementary functions
+and <code class="code">erfc</code>.
+</p>
+<p>Also see the related functions <code class="code"><a class="ref" href="#gamma_005fincomplete_005fregularized">gamma_incomplete_regularized</a></code> and
+<code class="code"><a class="ref" href="#gamma_005fincomplete_005fgeneralized">gamma_incomplete_generalized</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gamma_005fincomplete_005fregularized"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fgamma_005fincomplete_005fregularized"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gamma_005fincomplete_005fregularized"><span class="category-def">Function: </span><span><strong class="def-name">gamma_incomplete_regularized</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-gamma_005fincomplete_005fregularized'> &para;</a></span></dt>
+<dd>
+<p>The regularized incomplete upper gamma function (<a class="url" href="https://dlmf.nist.gov/8.2.E4">DLMF 8.2.E4</a>):
+</p>
+$$
+Q\left(a , z\right)={{\Gamma\left(a , z\right)}\over{\Gamma\left(a\right)}}
+$$
+
+
+<p>See also <code class="code"><a class="ref" href="#gamma_005fexpand">gamma_expand</a></code> for controlling how
+<code class="code"><a class="ref" href="#gamma_005fincomplete">gamma_incomplete</a></code> is expressed in terms of elementary functions
+and <code class="code"><a class="ref" href="#erfc">erfc</a></code>.
+</p>
+<p>Also see <code class="code"><a class="ref" href="#gamma_005fincomplete">gamma_incomplete</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gamma_005fincomplete_005fgeneralized"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fgamma_005fincomplete_005fgeneralized"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gamma_005fincomplete_005fgeneralized"><span class="category-def">Function: </span><span><strong class="def-name">gamma_incomplete_generalized</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">z1</var>, <var class="var">z1</var>)</var><a class="copiable-link" href='#index-gamma_005fincomplete_005fgeneralized'> &para;</a></span></dt>
+<dd>
+<p>The generalized incomplete gamma function.
+</p>
+$$
+\Gamma\left(a , z_{1}, z_{2}\right)=\int_{z_{1}}^{z_{2}}{t^{a-1}\,e^ {- t }\;dt}
+$$
+
+
+<p>Also see <code class="code"><a class="ref" href="#gamma_005fincomplete">gamma_incomplete</a></code> and <code class="code"><a class="ref" href="#gamma_005fincomplete_005fregularized">gamma_incomplete_regularized</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="gamma_005fexpand"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fgamma_005fexpand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gamma_005fexpand"><span class="category-def">Option variable: </span><span><strong class="def-name">gamma_expand</strong><a class="copiable-link" href='#index-gamma_005fexpand'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p><code class="code">gamma_expand</code> controls expansion of <code class="code"><a class="ref" href="#gamma_005fincomplete">gamma_incomplete</a></code>.
+When <code class="code">gamma_expand</code> is <code class="code">true</code>, <code class="code">gamma_incomplete(v,z)</code>
+is expanded in terms of
+<code class="code">z</code>, <code class="code">exp(z)</code>, and <code class="code"><a class="ref" href="#gamma_005fincomplete">gamma_incomplete</a></code> or <code class="code"><a class="ref" href="#erfc">erfc</a></code> when possible.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) gamma_incomplete(2,z);
+(%o1)                       gamma_incomplete(2, z)
+(%i2) gamma_expand:true;
+(%o2)                                true
+(%i3) gamma_incomplete(2,z);
+                                           - z
+(%o3)                            (z + 1) %e
+</pre><div class="group"><pre class="example-preformatted">(%i4) gamma_incomplete(3/2,z);
+                              - z   sqrt(%pi) erfc(sqrt(z))
+(%o4)               sqrt(z) %e    + -----------------------
+                                               2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) gamma_incomplete(4/3,z);
+                                                    1
+                                   gamma_incomplete(-, z)
+                       1/3   - z                    3
+(%o5)                 z    %e    + ----------------------
+                                             3
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) gamma_incomplete(a+2,z);
+             a               - z
+(%o6)       z  (z + a + 1) %e    + a (a + 1) gamma_incomplete(a, z)
+(%i7) gamma_incomplete(a-2, z);
+        gamma_incomplete(a, z)    a - 2         z            1      - z
+(%o7)   ---------------------- - z      (--------------- + -----) %e
+           (1 - a) (2 - a)               (a - 2) (a - 1)   a - 2
+
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+
+</dd></dl>
+<a class="anchor" id="gammalim"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fgammalim"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gammalim"><span class="category-def">Option variable: </span><span><strong class="def-name">gammalim</strong><a class="copiable-link" href='#index-gammalim'> &para;</a></span></dt>
+<dd><p>Default value: 10000
+</p>
+<p><code class="code">gammalim</code> controls simplification of the gamma
+function for integral and rational number arguments.  If the absolute
+value of the argument is not greater than <code class="code">gammalim</code>, then
+simplification will occur.  Note that the <code class="code">factlim</code> switch controls
+simplification of the result of <code class="code">gamma</code> of an integer argument as well.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="makegamma"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fmakegamma"></a><dl class="first-deffn">
+<dt class="deffn" id="index-makegamma"><span class="category-def">Function: </span><span><strong class="def-name">makegamma</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-makegamma'> &para;</a></span></dt>
+<dd><p>Transforms instances of binomial, factorial, and beta
+functions in <var class="var">expr</var> into gamma functions.
+</p>
+<p>See also <code class="code"><a class="ref" href="#makefact">makefact</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) makegamma(binomial(n,k));
+                                 gamma(n + 1)
+(%o1)                    -----------------------------
+                         gamma(k + 1) gamma(n - k + 1)
+(%i2) makegamma(x!);
+(%o2)                            gamma(x + 1)
+(%i3) makegamma(beta(a,b));
+                               gamma(a) gamma(b)
+(%o3)                          -----------------
+                                 gamma(b + a)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="beta"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fbeta"></a><dl class="first-deffn">
+<dt class="deffn" id="index-beta"><span class="category-def">Function: </span><span><strong class="def-name">beta</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-beta'> &para;</a></span></dt>
+<dd><p>The beta function is defined as
+$$
+{\rm B}(a, b) = {{\Gamma(a) \Gamma(b)}\over{\Gamma(a+b)}}
+$$
+</p>
+<p>(<a class="url" href="https://dlmf.nist.gov/5.12.E1">DLMF 5.12.E1</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_258.htm">A&amp;S eqn 6.2.1</a>).
+</p>
+<p>Maxima simplifies the beta function for positive integers and rational 
+numbers, which sum to an integer. When <code class="code">beta_args_sum_to_integer</code> is 
+<code class="code">true</code>, Maxima simplifies also general expressions which sum to an integer. 
+</p>
+<p>For <var class="var">a</var> or <var class="var">b</var> equal to zero the beta function is not defined.
+</p>
+<p>In general the beta function is not defined for negative integers as an 
+argument. The exception is for <var class="var">a=-n</var>, <var class="var">n</var> a positive integer 
+and <var class="var">b</var> a positive integer with <code class="code">b&lt;=n</code>, it is possible to define an
+analytic continuation. Maxima gives for this case a result.
+</p>
+<p>When <code class="code"><a class="ref" href="#beta_005fexpand">beta_expand</a></code> is <code class="code">true</code>, expressions like <code class="code">beta(a+n,b)</code> and 
+<code class="code">beta(a-n,b)</code> or <code class="code">beta(a,b+n)</code> and <code class="code">beta(a,b-n)</code> with <code class="code">n</code> 
+an integer are simplified.
+</p>
+<p>Maxima can evaluate the beta function for real and complex values in float and 
+bigfloat precision. For numerical evaluation Maxima uses <code class="code">log_gamma</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">           - log_gamma(b + a) + log_gamma(b) + log_gamma(a)
+         %e
+</pre></div>
+
+<p>Maxima knows that the beta function is symmetric and has mirror symmetry.
+</p>
+<p>Maxima knows the derivatives of the beta function with respect to <var class="var">a</var> or 
+<var class="var">b</var>.
+</p>
+<p>To express the beta function as a ratio of gamma functions see <code class="code">makegamma</code>. 
+</p>
+<p>Examples:
+</p>
+<p>Simplification, when one of the arguments is an integer:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [beta(2,3),beta(2,1/3),beta(2,a)];
+                               1   9      1
+(%o1)                         [--, -, ---------]
+                               12  4  a (a + 1)
+</pre></div>
+
+<p>Simplification for two rational numbers as arguments which sum to an integer:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) [beta(1/2,5/2),beta(1/3,2/3),beta(1/4,3/4)];
+                          3 %pi   2 %pi
+(%o2)                    [-----, -------, sqrt(2) %pi]
+                            8    sqrt(3)
+</pre></div>
+
+<p>When setting <code class="code">beta_args_sum_to_integer</code> to <code class="code">true</code> more general 
+expression are simplified, when the sum of the arguments is an integer:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i3) beta_args_sum_to_integer:true$
+(%i4) beta(a+1,-a+2);
+                                %pi (a - 1) a
+(%o4)                         ------------------
+                              2 sin(%pi (2 - a))
+</pre></div>
+
+<p>The possible results, when one of the arguments is a negative integer: 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i5) [beta(-3,1),beta(-3,2),beta(-3,3)];
+                                    1  1    1
+(%o5)                            [- -, -, - -]
+                                    3  6    3
+</pre></div>
+
+<p><code class="code">beta(a+n,b)</code> or <code class="code">beta(a-n,b)</code> with <code class="code">n</code> an integer simplifies when 
+<code class="code"><a class="ref" href="#beta_005fexpand">beta_expand</a></code> is <code class="code">true</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i6) beta_expand:true$
+(%i7) [beta(a+1,b),beta(a-1,b),beta(a+1,b)/beta(a,b+1)];
+                    a beta(a, b)  beta(a, b) (b + a - 1)  a
+(%o7)              [------------, ----------------------, -]
+                       b + a              a - 1           b
+
+</pre></div>
+
+<p>Beta is not defined, when one of the arguments is zero:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i7) beta(0,b);
+beta: expected nonzero arguments; found 0, b
+ -- an error.  To debug this try debugmode(true);
+</pre></div>
+
+<p>Numerical evaluation for real and complex arguments in float or bigfloat
+precision:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i8) beta(2.5,2.3);
+(%o8) .08694748611299981
+
+(%i9) beta(2.5,1.4+%i);
+(%o9) 0.0640144950796695 - .1502078053286415 %i
+
+(%i10) beta(2.5b0,2.3b0);
+(%o10) 8.694748611299969b-2
+
+(%i11) beta(2.5b0,1.4b0+%i);
+(%o11) 6.401449507966944b-2 - 1.502078053286415b-1 %i
+</pre></div>
+
+<p>Beta is symmetric and has mirror symmetry:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i14) beta(a,b)-beta(b,a);
+(%o14)                                 0
+(%i15) declare(a,complex,b,complex)$
+(%i16) conjugate(beta(a,b));
+(%o16)                 beta(conjugate(a), conjugate(b))
+</pre></div>
+
+<p>The derivative of the beta function wrt <code class="code">a</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i17) diff(beta(a,b),a);
+(%o17)               - beta(a, b) (psi (b + a) - psi (a))
+                                      0             0
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fbeta_005fincomplete"></a><dl class="first-deffn">
+<dt class="deffn" id="index-beta_005fincomplete"><span class="category-def">Function: </span><span><strong class="def-name">beta_incomplete</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-beta_005fincomplete'> &para;</a></span></dt>
+<dd>
+<p>The basic definition of the incomplete beta function
+(<a class="url" href="https://dlmf.nist.gov/8.17.E1">DLMF 8.17.E1</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_263.htm">A&amp;S eqn 6.6.1</a>) is
+</p>
+$$
+{\rm B}_z(a,b) = \int_0^z t^{a-1}(1-t)^{b-1}\; dt
+$$
+
+
+<p>This definition is possible for 
+\({\rm Re}(a) > 0\)
+ and 
+\({\rm Re}(b) > 0\)
+ and 
+\(|z| < 1\)
+.
+For other values the incomplete beta function can be 
+defined through a generalized hypergeometric function:
+</p>
+<div class="example">
+<pre class="example-preformatted">   gamma(a) hypergeometric_generalized([a, 1 - b], [a + 1], z) z
+</pre></div>
+
+<p>(See <a class="url" href="https://functions.wolfram.com/GammaBetaErf/Beta3/">https://functions.wolfram.com/GammaBetaErf/Beta3/</a> for a complete definition of the incomplete beta
+function.)
+</p>
+<p>For negative integers <em class="math tex2jax_process">\(a = -n\)</em> and positive integers <em class="math tex2jax_process">\(b=m\)</em> with 
+\(m \le n\)
+ the incomplete beta function is defined through
+</p>
+$$
+z^{n-1}\sum_{k=0}^{m-1} {{(1-m)_k z^k} \over {k! (n-k)}}
+$$
+
+
+<p>Maxima uses this definition to simplify <code class="code">beta_incomplete</code> for <var class="var">a</var> a 
+negative integer.
+</p>
+<p>For <var class="var">a</var> a positive integer, <code class="code">beta_incomplete</code> simplifies for any 
+argument <var class="var">b</var> and <var class="var">z</var> and for <var class="var">b</var> a positive integer for any 
+argument <var class="var">a</var> and <var class="var">z</var>, with the exception of <var class="var">a</var> a negative integer.
+</p>
+<p>For <em class="math tex2jax_process">\(z=0\)</em> and 
+\({\rm Re}(a) > 0\)
+, <code class="code">beta_incomplete</code> has the 
+specific value zero. For <em class="math tex2jax_process">\(z=1\)</em> and 
+\({\rm Re}(b) > 0\)
+, 
+<code class="code">beta_incomplete</code> simplifies to the beta function <code class="code">beta(a,b)</code>.
+</p>
+<p>Maxima evaluates <code class="code">beta_incomplete</code> numerically for real and complex values 
+in float or bigfloat precision. For the numerical evaluation an expansion of the 
+incomplete beta function in continued fractions is used.
+</p>
+<p>When the option variable <code class="code"><a class="ref" href="#beta_005fexpand">beta_expand</a></code> is <code class="code">true</code>, Maxima expands
+expressions like <code class="code">beta_incomplete(a+n,b,z)</code> and
+<code class="code">beta_incomplete(a-n,b,z)</code> where n is a positive integer.
+</p>
+<p>Maxima knows the derivatives of <code class="code">beta_incomplete</code> with respect to the 
+variables <var class="var">a</var>, <var class="var">b</var> and <var class="var">z</var> and the integral with respect to the 
+variable <var class="var">z</var>.
+</p>
+<p>Examples:
+</p>
+<p>Simplification for <var class="var">a</var> a positive integer:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) beta_incomplete(2,b,z);
+                                       b
+                            1 - (1 - z)  (b z + 1)
+(%o1)                       ----------------------
+                                  b (b + 1)
+</pre></div>
+
+<p>Simplification for <var class="var">b</var> a positive integer:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) beta_incomplete(a,2,z);
+                                               a
+                              (a (1 - z) + 1) z
+(%o2)                         ------------------
+                                  a (a + 1)
+</pre></div>
+
+<p>Simplification for <var class="var">a</var> and <var class="var">b</var> a positive integer:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i3) beta_incomplete(3,2,z);
+</pre><div class="group"><pre class="example-preformatted">                                               3
+                              (3 (1 - z) + 1) z
+(%o3)                         ------------------
+                                      12
+</pre></div></div>
+
+<p><var class="var">a</var> is a negative integer and <em class="math tex2jax_process">\(b<=(-a)\)</em>, Maxima simplifies:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) beta_incomplete(-3,1,z);
+                                       1
+(%o4)                              - ----
+                                        3
+                                     3 z
+</pre></div>
+
+<p>For the specific values <em class="math tex2jax_process">\(z=0\)</em> and <em class="math tex2jax_process">\(z=1\)</em>, Maxima simplifies:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i5) assume(a&gt;0,b&gt;0)$
+(%i6) beta_incomplete(a,b,0);
+(%o6)                                 0
+(%i7) beta_incomplete(a,b,1);
+(%o7)                            beta(a, b)
+</pre></div>
+
+<p>Numerical evaluation in float or bigfloat precision:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i8) beta_incomplete(0.25,0.50,0.9);
+(%o8)                          4.594959440269333
+(%i9)  fpprec:25$
+(%i10) beta_incomplete(0.25,0.50,0.9b0);
+(%o10)                    4.594959440269324086971203b0
+</pre></div>
+
+<p>For <em class="math tex2jax_process">\(abs(z)>1\)</em> <code class="code">beta_incomplete</code> returns a complex result:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i11) beta_incomplete(0.25,0.50,1.7);
+(%o11)              5.244115108584249 - 1.45518047787844 %i
+</pre></div>
+
+<p>Results for more general complex arguments:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i14) beta_incomplete(0.25+%i,1.0+%i,1.7+%i);
+(%o14)             2.726960675662536 - .3831175704269199 %i
+(%i15) beta_incomplete(1/2,5/4*%i,2.8+%i);
+(%o15)             13.04649635168716 %i - 5.802067956270001
+(%i16) 
+</pre></div>
+
+<p>Expansion, when <code class="code"><a class="ref" href="#beta_005fexpand">beta_expand</a></code> is <code class="code">true</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i23) beta_incomplete(a+1,b,z),beta_expand:true;
+                                                       b  a
+                   a beta_incomplete(a, b, z)   (1 - z)  z
+(%o23)             -------------------------- - -----------
+                             b + a                 b + a
+
+(%i24) beta_incomplete(a-1,b,z),beta_expand:true;
+                                                       b  a - 1
+       beta_incomplete(a, b, z) (- b - a + 1)   (1 - z)  z
+(%o24) -------------------------------------- - ---------------
+                       1 - a                         1 - a
+</pre></div>
+ 
+<p>Derivative and integral for <code class="code">beta_incomplete</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i34) diff(beta_incomplete(a, b, z), z);
+</pre><div class="group"><pre class="example-preformatted">                              b - 1  a - 1
+(%o34)                 (1 - z)      z
+</pre></div><pre class="example-preformatted">(%i35) integrate(beta_incomplete(a, b, z), z);
+              b  a
+       (1 - z)  z
+(%o35) ----------- + beta_incomplete(a, b, z) z
+          b + a
+                                       a beta_incomplete(a, b, z)
+                                     - --------------------------
+                                                 b + a
+(%i36) factor(diff(%, z));
+(%o36)              beta_incomplete(a, b, z)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="beta_005fincomplete_005fregularized"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fbeta_005fincomplete_005fregularized"></a><dl class="first-deffn">
+<dt class="deffn" id="index-beta_005fincomplete_005fregularized"><span class="category-def">Function: </span><span><strong class="def-name">beta_incomplete_regularized</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-beta_005fincomplete_005fregularized'> &para;</a></span></dt>
+<dd>
+<p>The regularized incomplete beta function (<a class="url" href="https://dlmf.nist.gov/8.17.E2">DLMF 8.17.E2</a> and
+<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_263.htm">A&amp;S eqn 6.6.2</a>), defined as 
+</p>
+$$
+I_z(a,b) = {{\rm B}_z(a,b)\over {\rm B}(a,b)}
+$$
+
+
+<p>As for <code class="code">beta_incomplete</code> this definition is not complete. See 
+<a class="url" href="https://functions.wolfram.com/GammaBetaErf/BetaRegularized/">https://functions.wolfram.com/GammaBetaErf/BetaRegularized/</a> for a complete definition of
+<code class="code">beta_incomplete_regularized</code>.
+</p>
+<p><code class="code">beta_incomplete_regularized</code> simplifies <var class="var">a</var> or <var class="var">b</var> a positive 
+integer.
+</p>
+<p>For <em class="math tex2jax_process">\(z=0\)</em> and 
+\({\rm Re}(a)>0\)
+,
+<code class="code">beta_incomplete_regularized</code> has 
+the specific value 0. For <em class="math tex2jax_process">\(z=1\)</em> and 
+\({\rm Re}(b) > 0\)
+, 
+<code class="code">beta_incomplete_regularized</code> simplifies to 1.
+</p>
+<p>Maxima can evaluate <code class="code">beta_incomplete_regularized</code> for real and complex 
+arguments in float and bigfloat precision.
+</p>
+<p>When <code class="code"><a class="ref" href="#beta_005fexpand">beta_expand</a></code> is <code class="code">true</code>, Maxima expands 
+<code class="code">beta_incomplete_regularized</code> for arguments <em class="math tex2jax_process">\(a+n\)</em> or <em class="math tex2jax_process">\(a-n\)</em>, 
+where n is an integer.
+</p>
+<p>Maxima knows the derivatives of <code class="code">beta_incomplete_regularized</code> with respect 
+to the variables <var class="var">a</var>, <var class="var">b</var>, and <var class="var">z</var> and the integral with respect to 
+the variable <var class="var">z</var>.
+</p>
+<p>Examples:
+</p>
+<p>Simplification for <var class="var">a</var> or <var class="var">b</var> a positive integer:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) beta_incomplete_regularized(2,b,z);
+                                       b
+(%o1)                       1 - (1 - z)  (b z + 1)
+
+(%i2) beta_incomplete_regularized(a,2,z);
+                                               a
+(%o2)                         (a (1 - z) + 1) z
+
+(%i3) beta_incomplete_regularized(3,2,z);
+                                               3
+(%o3)                         (3 (1 - z) + 1) z
+</pre></div>
+
+<p>For the specific values <em class="math tex2jax_process">\(z=0\)</em> and <em class="math tex2jax_process">\(z=1\)</em>, Maxima simplifies:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) assume(a&gt;0,b&gt;0)$
+(%i5) beta_incomplete_regularized(a,b,0);
+(%o5)                                 0
+(%i6) beta_incomplete_regularized(a,b,1);
+(%o6)                                 1
+</pre></div>
+
+<p>Numerical evaluation for real and complex arguments in float and bigfloat 
+precision:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i7) beta_incomplete_regularized(0.12,0.43,0.9);
+(%o7)                         .9114011367359802
+(%i8) fpprec:32$
+(%i9) beta_incomplete_regularized(0.12,0.43,0.9b0);
+(%o9)               9.1140113673598075519946998779975b-1
+(%i10) beta_incomplete_regularized(1+%i,3/3,1.5*%i);
+(%o10)             .2865367499935403 %i - 0.122995963334684
+(%i11) fpprec:20$
+(%i12) beta_incomplete_regularized(1+%i,3/3,1.5b0*%i);
+(%o12)      2.8653674999354036142b-1 %i - 1.2299596333468400163b-1
+</pre></div>
+
+<p>Expansion, when <code class="code"><a class="ref" href="#beta_005fexpand">beta_expand</a></code> is <code class="code">true</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i13) beta_incomplete_regularized(a+1,b,z);
+                                                     b  a
+                                              (1 - z)  z
+(%o13) beta_incomplete_regularized(a, b, z) - ------------
+                                              a beta(a, b)
+(%i14) beta_incomplete_regularized(a-1,b,z);
+(%o14) beta_incomplete_regularized(a, b, z)
+                                                     b  a - 1
+                                              (1 - z)  z
+                                         - ----------------------
+                                           beta(a, b) (b + a - 1)
+</pre></div>
+
+<p>The derivative and the integral wrt <var class="var">z</var>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i15) diff(beta_incomplete_regularized(a,b,z),z);
+                              b - 1  a - 1
+                       (1 - z)      z
+(%o15)                 -------------------
+                           beta(a, b)
+(%i16) integrate(beta_incomplete_regularized(a,b,z),z);
+(%o16) beta_incomplete_regularized(a, b, z) z
+                                                           b  a
+                                                    (1 - z)  z
+          a (beta_incomplete_regularized(a, b, z) - ------------)
+                                                    a beta(a, b)
+        - -------------------------------------------------------
+                                   b + a
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fbeta_005fincomplete_005fgeneralized"></a><dl class="first-deffn">
+<dt class="deffn" id="index-beta_005fincomplete_005fgeneralized"><span class="category-def">Function: </span><span><strong class="def-name">beta_incomplete_generalized</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">z1</var>, <var class="var">z2</var>)</var><a class="copiable-link" href='#index-beta_005fincomplete_005fgeneralized'> &para;</a></span></dt>
+<dd>
+<p>The basic definition of the generalized incomplete beta function is
+</p>
+$$
+\int_{z_1}^{z_2} t^{a-1}(1-t)^{b-1}\; dt
+$$
+
+
+<p>Maxima simplifies <code class="code">beta_incomplete_regularized</code> for <var class="var">a</var> and <var class="var">b</var> 
+a positive integer.
+</p>
+<p>For 
+\({\rm Re}(a) > 0\)
+ and 
+\(z_1 = 0\)
+ or 
+\(z_2 = 0\)
+, Maxima simplifies
+<code class="code">beta_incomplete_generalized</code> to <code class="code">beta_incomplete</code>.
+For 
+\({\rm Re}(b) > 0\)
+ and 
+\(z_1 = 1\)
+ or 
+\(z_2 = 1\)
+, Maxima simplifies to an 
+expression with <code class="code">beta</code> and <code class="code">beta_incomplete</code>.
+</p>
+<p>Maxima evaluates <code class="code">beta_incomplete_regularized</code> for real and complex values 
+in float and bigfloat precision.
+</p>
+<p>When <code class="code"><a class="ref" href="#beta_005fexpand">beta_expand</a></code> is <code class="code">true</code>, Maxima expands 
+<code class="code">beta_incomplete_generalized</code> for <em class="math tex2jax_process">\(a+n\)</em> and <em class="math tex2jax_process">\(a-n\)</em>, <var class="var">n</var> a 
+positive integer.
+</p>
+<p>Maxima knows the derivative of <code class="code">beta_incomplete_generalized</code> with respect 
+to the variables <var class="var">a</var>, <var class="var">b</var>, <var class="var">z1</var>, and <var class="var">z2</var> and the integrals with
+respect to the variables <var class="var">z1</var> and <var class="var">z2</var>.
+</p>
+<p>Examples:
+</p>
+<p>Maxima simplifies <code class="code">beta_incomplete_generalized</code> for <var class="var">a</var> and <var class="var">b</var> a 
+positive integer:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) beta_incomplete_generalized(2,b,z1,z2);
+                   b                      b
+           (1 - z1)  (b z1 + 1) - (1 - z2)  (b z2 + 1)
+(%o1)      -------------------------------------------
+                            b (b + 1)
+(%i2) beta_incomplete_generalized(a,2,z1,z2);
+</pre><div class="group"><pre class="example-preformatted">                              a                      a
+           (a (1 - z2) + 1) z2  - (a (1 - z1) + 1) z1
+(%o2)      -------------------------------------------
+                            a (a + 1)
+</pre></div><pre class="example-preformatted">(%i3) beta_incomplete_generalized(3,2,z1,z2);
+              2      2                       2      2
+      (1 - z1)  (3 z1  + 2 z1 + 1) - (1 - z2)  (3 z2  + 2 z2 + 1)
+(%o3) -----------------------------------------------------------
+                                  12
+</pre></div>
+
+<p>Simplification for specific values <em class="math tex2jax_process">\(z1=0\)</em>, <em class="math tex2jax_process">\(z2=0\)</em>, <em class="math tex2jax_process">\(z1=1\)</em>, or 
+<em class="math tex2jax_process">\(z2=1\)</em>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) assume(a &gt; 0, b &gt; 0)$
+(%i5) beta_incomplete_generalized(a,b,z1,0);
+(%o5)                    - beta_incomplete(a, b, z1)
+
+(%i6) beta_incomplete_generalized(a,b,0,z2);
+(%o6)                    - beta_incomplete(a, b, z2)
+
+(%i7) beta_incomplete_generalized(a,b,z1,1);
+(%o7)              beta(a, b) - beta_incomplete(a, b, z1)
+
+(%i8) beta_incomplete_generalized(a,b,1,z2);
+(%o8)              beta_incomplete(a, b, z2) - beta(a, b)
+</pre></div>
+
+<p>Numerical evaluation for real arguments in float or bigfloat precision:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i9) beta_incomplete_generalized(1/2,3/2,0.25,0.31);
+(%o9)                        .09638178086368676
+
+(%i10) fpprec:32$
+(%i10) beta_incomplete_generalized(1/2,3/2,0.25,0.31b0);
+(%o10)               9.6381780863686935309170054689964b-2
+</pre></div>
+
+<p>Numerical evaluation for complex arguments in float or bigfloat precision:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i11) beta_incomplete_generalized(1/2+%i,3/2+%i,0.25,0.31);
+(%o11)           - .09625463003205376 %i - .003323847735353769
+(%i12) fpprec:20$
+(%i13) beta_incomplete_generalized(1/2+%i,3/2+%i,0.25,0.31b0);
+(%o13)     - 9.6254630032054178691b-2 %i - 3.3238477353543591914b-3
+</pre></div>
+
+<p>Expansion for <em class="math tex2jax_process">\(a+n\)</em> or <em class="math tex2jax_process">\(a-n\)</em>, <var class="var">n</var> a positive integer, when 
+<code class="code"><a class="ref" href="#beta_005fexpand">beta_expand</a></code> is <code class="code">true</code>: 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i14) beta_expand:true$
+
+(%i15) beta_incomplete_generalized(a+1,b,z1,z2);
+
+               b   a           b   a
+       (1 - z1)  z1  - (1 - z2)  z2
+(%o15) -----------------------------
+                   b + a
+                      a beta_incomplete_generalized(a, b, z1, z2)
+                    + -------------------------------------------
+                                         b + a
+(%i16) beta_incomplete_generalized(a-1,b,z1,z2);
+
+       beta_incomplete_generalized(a, b, z1, z2) (- b - a + 1)
+(%o16) -------------------------------------------------------
+                                1 - a
+                                    b   a - 1           b   a - 1
+                            (1 - z2)  z2      - (1 - z1)  z1
+                          - -------------------------------------
+                                            1 - a
+</pre></div>
+
+<p>Derivative wrt the variable <var class="var">z1</var> and integrals wrt <var class="var">z1</var> and <var class="var">z2</var>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i17) diff(beta_incomplete_generalized(a,b,z1,z2),z1);
+                               b - 1   a - 1
+(%o17)               - (1 - z1)      z1
+(%i18) integrate(beta_incomplete_generalized(a,b,z1,z2),z1);
+(%o18) beta_incomplete_generalized(a, b, z1, z2) z1
+                                  + beta_incomplete(a + 1, b, z1)
+(%i19) integrate(beta_incomplete_generalized(a,b,z1,z2),z2);
+(%o19) beta_incomplete_generalized(a, b, z1, z2) z2
+                                  - beta_incomplete(a + 1, b, z2)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="beta_005fexpand"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fbeta_005fexpand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-beta_005fexpand"><span class="category-def">Option variable: </span><span><strong class="def-name">beta_expand</strong><a class="copiable-link" href='#index-beta_005fexpand'> &para;</a></span></dt>
+<dd><p>Default value: false
+</p>
+<p>When <code class="code">beta_expand</code> is <code class="code">true</code>, <code class="code">beta(a,b)</code> and related 
+functions are expanded for arguments like <em class="math tex2jax_process">\(a+n\)</em> or <em class="math tex2jax_process">\(a-n\)</em>, 
+where <em class="math tex2jax_process">\(n\)</em> is an integer.
+</p>
+<p>See <a class="xref" href="#beta">beta</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdefvr_002fbeta_005fargs_005fsum_005fto_005finteger"></a><dl class="first-defvr">
+<dt class="defvr" id="index-beta_005fargs_005fsum_005fto_005finteger"><span class="category-def">Option variable: </span><span><strong class="def-name">beta_args_sum_to_integer</strong><a class="copiable-link" href='#index-beta_005fargs_005fsum_005fto_005finteger'> &para;</a></span></dt>
+<dd><p>Default value: false
+</p>
+<p>When <code class="code">beta_args_sum_to_integer</code> is <code class="code">true</code>, Maxima simplifies 
+<code class="code">beta(a,b)</code>, when the arguments <var class="var">a</var> and <var class="var">b</var> sum to an integer.
+</p>
+<p>See <a class="xref" href="#beta">beta</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="polygamma"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fpsi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-psi"><span class="category-def">Function: </span><span><strong class="def-name">psi</strong> <var class="def-var-arguments">[<var class="var">n</var>](<var class="var">x</var>)</var><a class="copiable-link" href='#index-psi'> &para;</a></span></dt>
+<dd>
+<p><code class="code">psi[n](x)</code> is the polygamma function (<a class="url" href="https://dlmf.nist.gov/5.2E2">DLMF 5.2E2</a>,
+<a class="url" href="https://dlmf.nist.gov/5.15">DLMF 5.15</a>, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_258.htm">A&amp;S eqn 6.3.1</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_260.htm">A&amp;S eqn 6.4.1</a>) defined by
+$$
+\psi^{(n)}(x) = {d^{n+1}\over{dx^{n+1}}} \log\Gamma(x)
+$$
+</p>
+<p>Thus, <code class="code">psi[0](<var class="var">x</var>)</code> is the first derivative,
+<code class="code">psi[1](<var class="var">x</var>)</code> is the second derivative, etc.
+</p>
+<p>Maxima can compute some exact values for rational args as well for
+float and bfloat args.  Several variables control what range of
+rational args 
+\(\psi^{(n)}(x)\)
+) will return an
+exact value, if possible.  See <code class="code"><a class="ref" href="#maxpsiposint">maxpsiposint</a></code>,
+<code class="code"><a class="ref" href="#maxpsinegint">maxpsinegint</a></code>, <code class="code"><a class="ref" href="#maxpsifracnum">maxpsifracnum</a></code>, and
+<code class="code"><a class="ref" href="#maxpsifracdenom">maxpsifracdenom</a></code>. That is, <em class="math tex2jax_process">\(x\)</em> must lie between
+<code class="code">maxpsinegint</code> and <code class="code">maxpsiposint</code>.  If the absolute value of
+the fractional part of <em class="math tex2jax_process">\(x\)</em> is rational and has a numerator less
+than <code class="code">maxpsifracnum</code> and has a denominator less than
+<code class="code">maxpsifracdenom</code>, 
+\(\psi^{(0)}(x)\)
+ will
+return an exact value.
+</p>
+<p>The function <code class="code"><a class="ref" href="#bfpsi">bfpsi</a></code> in the <code class="code">bffac</code> package can compute
+numerical values.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) psi[0](.25);
+(%o1)                        - 4.227453533376265
+(%i2) psi[0](1/4);
+                                        %pi
+(%o2)                    (- 3 log(2)) - --- - %gamma
+                                         2
+(%i3) float(%);
+(%o3)                        - 4.227453533376265
+(%i4) psi[2](0.75);
+(%o4)                        - 5.30263321633764
+(%i5) psi[2](3/4);
+                                   1         3
+(%o5)                         psi (-) + 4 %pi
+                                 2 4
+(%i6) float(%);
+(%o6)                        - 5.30263321633764
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="maxpsiposint"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fmaxpsiposint"></a><dl class="first-defvr">
+<dt class="defvr" id="index-maxpsiposint"><span class="category-def">Option variable: </span><span><strong class="def-name">maxpsiposint</strong><a class="copiable-link" href='#index-maxpsiposint'> &para;</a></span></dt>
+<dd><p>Default value: 20
+</p>
+<p><code class="code">maxpsiposint</code> is the largest positive integer value for
+which 
+\(\psi^{(n)}(m)\)
+ gives an exact value for
+rational <em class="math tex2jax_process">\(x\)</em>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) psi[0](20);
+                             275295799
+(%o1)                        --------- - %gamma
+                             77597520
+(%i2) psi[0](21);
+(%o2)                             psi (21)
+                                     0
+(%i3) psi[2](20);
+                      1683118856778495358491487
+(%o3)              2 (------------------------- - zeta(3))
+                      1401731326612193601024000
+(%i4) psi[2](21);
+(%o4)                            psi (21)
+                                      2
+
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="maxpsinegint"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fmaxpsinegint"></a><dl class="first-defvr">
+<dt class="defvr" id="index-maxpsinegint"><span class="category-def">Option variable: </span><span><strong class="def-name">maxpsinegint</strong><a class="copiable-link" href='#index-maxpsinegint'> &para;</a></span></dt>
+<dd><p>Default value: -10
+</p>
+<p><code class="code">maxpsinegint</code> is the most negative value for
+which 
+\(\psi^{(0)}(x)\)
+ will try to compute an exact
+value for rational <em class="math tex2jax_process">\(x\)</em>.  That is if <em class="math tex2jax_process">\(x\)</em> is less than
+<code class="code">maxpsinegint</code>, 
+\(\psi^{(n)}(x)\)
+ will not
+return simplified answer, even if it could.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) psi[0](-100/9);
+                                        100
+(%o1)                            psi (- ---)
+                                    0    9
+(%i2) psi[0](-100/11);
+                         100 %pi         1     5231385863539
+(%o2)            %pi cot(-------) + psi (--) + -------------
+                           11          0 11    381905105400
+
+(%i3) psi[2](-100/9);
+                                        100
+(%o3)                            psi (- ---)
+                                    2    9
+(%i4) psi[2](-100/11);
+           3     100 %pi     2 100 %pi         1
+(%o4) 2 %pi  cot(-------) csc (-------) + psi (--)
+                   11            11          2 11
+                                         74191313259470963498957651385614962459
+                                       + --------------------------------------
+                                          27850718060013605318710152732000000
+</pre></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="maxpsifracnum"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fmaxpsifracnum"></a><dl class="first-defvr">
+<dt class="defvr" id="index-maxpsifracnum"><span class="category-def">Option variable: </span><span><strong class="def-name">maxpsifracnum</strong><a class="copiable-link" href='#index-maxpsifracnum'> &para;</a></span></dt>
+<dd><p>Default value: 6
+</p>
+<p>Let <em class="math tex2jax_process">\(x\)</em> be a rational number of the form <em class="math tex2jax_process">\(p/q\)</em>.
+If <em class="math tex2jax_process">\(p\)</em> is greater than <code class="code">maxpsifracnum</code>,
+then 
+\(\psi^{(0)}(x)\)
+ will not try to
+return a simplified value.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) psi[0](3/4);
+                                        %pi
+(%o1)                    (- 3 log(2)) + --- - %gamma
+                                         2
+(%i2) psi[2](3/4);
+                                   1         3
+(%o2)                         psi (-) + 4 %pi
+                                 2 4
+(%i3) maxpsifracnum:2;
+(%o3)                                 2
+(%i4) psi[0](3/4);
+                                        3
+(%o4)                              psi (-)
+                                      0 4
+(%i5) psi[2](3/4);
+                                   1         3
+(%o5)                         psi (-) + 4 %pi
+                                 2 4
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="maxpsifracdenom"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fmaxpsifracdenom"></a><dl class="first-defvr">
+<dt class="defvr" id="index-maxpsifracdenom"><span class="category-def">Option variable: </span><span><strong class="def-name">maxpsifracdenom</strong><a class="copiable-link" href='#index-maxpsifracdenom'> &para;</a></span></dt>
+<dd><p>Default value: 6
+</p>
+<p>Let <em class="math tex2jax_process">\(x\)</em> be a rational number of the form <em class="math tex2jax_process">\(p/q\)</em>.
+If <em class="math tex2jax_process">\(q\)</em> is greater than <code class="code">maxpsifracdenom</code>,
+then 
+\(\psi^{(0)}(x)\)
+ will
+not try to return a simplified value.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) psi[0](3/4);
+                                        %pi
+(%o1)                    (- 3 log(2)) + --- - %gamma
+                                         2
+(%i2) psi[2](3/4);
+                                   1         3
+(%o2)                         psi (-) + 4 %pi
+                                 2 4
+(%i3) maxpsifracdenom:2;
+(%o3)                                 2
+(%i4) psi[0](3/4);
+                                        3
+(%o4)                              psi (-)
+                                      0 4
+(%i5) psi[2](3/4);
+                                   1         3
+(%o5)                         psi (-) + 4 %pi
+                                 2 4
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="makefact"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fmakefact"></a><dl class="first-deffn">
+<dt class="deffn" id="index-makefact"><span class="category-def">Function: </span><span><strong class="def-name">makefact</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-makefact'> &para;</a></span></dt>
+<dd><p>Transforms instances of binomial, gamma, and beta
+functions in <var class="var">expr</var> into factorials.
+</p>
+<p>See also <code class="code"><a class="ref" href="#makegamma">makegamma</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) makefact(binomial(n,k));
+                                      n!
+(%o1)                             -----------
+                                  k! (n - k)!
+(%i2) makefact(gamma(x));
+(%o2)                              (x - 1)!
+(%i3) makefact(beta(a,b));
+                               (a - 1)! (b - 1)!
+(%o3)                          -----------------
+                                 (b + a - 1)!
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fnumfactor"></a><dl class="first-deffn">
+<dt class="deffn" id="index-numfactor"><span class="category-def">Function: </span><span><strong class="def-name">numfactor</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-numfactor'> &para;</a></span></dt>
+<dd><p>Returns the numerical factor multiplying the expression
+<var class="var">expr</var>, which should be a single term.
+</p>
+<p><code class="code"><a class="ref" href="maxima_13.html#content">content</a></code> returns the greatest common divisor (gcd) of all terms in a sum.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) gamma (7/2);
+                          15 sqrt(%pi)
+(%o1)                     ------------
+                               8
+(%i2) numfactor (%);
+                               15
+(%o2)                          --
+                               8
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fExponential-Integrals"></a><hr>
+</div>
+<div class="section-level-extent" id="Exponential-Integrals">
+<div class="nav-panel">
+<p>
+Next: <a href="#Error-Function" accesskey="n" rel="next">Error Function</a>, Previous: <a href="#Gamma-and-Factorial-Functions" accesskey="p" rel="prev">Gamma and Factorial Functions</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Exponential-Integrals-1">15.5 Exponential Integrals</h3>
+
+<p>The Exponential Integral and related functions are defined in
+Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_228.htm">A&amp;S Chapter 5</a>.
+</p>
+<a class="anchor" id="expintegral_005fe1"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fexpintegral_005fe1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fe1"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_e1</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-expintegral_005fe1'> &para;</a></span></dt>
+<dd><p>The Exponential Integral E1(z) defined as
+</p>
+$$
+E_1(z) = \int_z^\infty {e^{-t} \over t} dt
+$$
+
+
+<p>with 
+\(\left| \arg z \right| < \pi\)
+. 
+(<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_228.htm">A&amp;S eqn 5.1.1</a>) and (<a class="url" href="https://dlmf.nist.gov/6.2E2">DLMF 6.2E2</a>)
+</p>
+<p>This can be written in terms of other functions.  See <a class="xref" href="#expintrep">expintrep</a> for examples.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fexpintegral_005fei"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fei"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_ei</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-expintegral_005fei'> &para;</a></span></dt>
+<dd><p>The Exponential Integral Ei(x) defined as
+</p>
+$$
+Ei(x)
+  = - -\kern-10.5pt\int_{-x}^\infty {e^{-t} \over t} dt
+  = -\kern-10.5pt\int_{-\infty}^x {e^{t} \over t} dt  
+$$
+
+
+<p>with <em class="math tex2jax_process">\(x\)</em> real and <em class="math tex2jax_process">\(x > 0\)</em>. (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_228.htm">A&amp;S eqn 5.1.2</a>) and (<a class="url" href="https://dlmf.nist.gov/6.2E5">DLMF 6.2E5</a>)
+</p>
+<p>This can be written in terms of other functions.  See <a class="xref" href="#expintrep">expintrep</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fexpintegral_005fli"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fli"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_li</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-expintegral_005fli'> &para;</a></span></dt>
+<dd><p>The Exponential Integral li(x) defined as
+</p>
+$$
+li(x) = -\kern-10.5pt\int_0^x {dt \over \ln t}
+$$
+
+
+<p>with <em class="math tex2jax_process">\(x\)</em> real and <em class="math tex2jax_process">\(x > 1\)</em>. (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_228.htm">A&amp;S eqn 5.1.3</a>) and (<a class="url" href="https://dlmf.nist.gov/6.2E8">DLMF 6.2E8</a>)
+</p>
+<p>This can be written in terms of other functions.  See <a class="xref" href="#expintrep">expintrep</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expintegral_005fe"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fexpintegral_005fe"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fe"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_e</strong> <var class="def-var-arguments">(<var class="var">n</var>,<var class="var">z</var>)</var><a class="copiable-link" href='#index-expintegral_005fe'> &para;</a></span></dt>
+<dd><p>The Exponential Integral En(z) (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_228.htm">A&amp;S eqn 5.1.4</a>) defined as
+</p>
+$$
+E_n(z) = \int_1^\infty {e^{-zt} \over t^n} dt
+$$
+
+<p>with 
+\({\rm Re}(z) > 1\)
+ and <em class="math tex2jax_process">\(n\)</em> a
+non-negative integer.
+</p>
+<p>For half-integral orders, this can be written in terms of <code class="code"><a class="ref" href="#erfc">erfc</a></code>
+or <code class="code"><a class="ref" href="#erf">erf</a></code>.  See <a class="xref" href="#expintexpand">expintexpand</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expintegral_005fsi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fexpintegral_005fsi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fsi"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_si</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-expintegral_005fsi'> &para;</a></span></dt>
+<dd><p>The Exponential Integral Si(z) (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_231.htm">A&amp;S eqn 5.2.1</a>
+and <a class="url" href="https://dlmf.nist.gov/6.2#E9">DLMF 6.2#E9</a>) defined as
+</p>
+$$
+{\rm Si}(z) = \int_0^z {\sin t \over t} dt
+$$
+
+
+<p>This can be written in terms of other functions.  See <a class="xref" href="#expintrep">expintrep</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expintegral_005fci"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fexpintegral_005fci"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fci"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_ci</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-expintegral_005fci'> &para;</a></span></dt>
+<dd><p>The Exponential Integral Ci(z) (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_231.htm">A&amp;S eqn 5.2.2</a>
+and <a class="url" href="https://dlmf.nist.gov/6.2#E13">DLMF 6.2#E13</a>) defined as
+</p>
+$$
+{\rm Ci}(z) = \gamma + \log z + \int_0^z {{\cos t - 1} \over t} dt
+$$
+
+
+<p>with 
+\(|\arg z| < \pi\)
+.
+</p>
+<p>This can be written in terms of other functions.  See <a class="xref" href="#expintrep">expintrep</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expintegral_005fshi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fexpintegral_005fshi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fshi"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_shi</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-expintegral_005fshi'> &para;</a></span></dt>
+<dd><p>The Exponential Integral Shi(z) (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_231.htm">A&amp;S eqn 5.2.3</a>
+and <a class="url" href="https://dlmf.nist.gov/6.2#E15">DLMF 6.2#E15</a>) defined as
+</p>
+$$
+{\rm Shi}(z) = \int_0^z {\sinh t \over t} dt
+$$
+
+
+<p>This can be written in terms of other functions.  See <a class="xref" href="#expintrep">expintrep</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expintegral_005fchi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fexpintegral_005fchi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expintegral_005fchi"><span class="category-def">Function: </span><span><strong class="def-name">expintegral_chi</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-expintegral_005fchi'> &para;</a></span></dt>
+<dd><p>The Exponential Integral Chi(z) (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_231.htm">A&amp;S eqn 5.2.4</a>
+and <a class="url" href="https://dlmf.nist.gov/6.2#E16">DLMF 6.2#E16</a>) defined as
+</p>
+$$
+{\rm Chi}(z) = \gamma + \log z + \int_0^z {{\cosh t - 1} \over t} dt
+$$
+
+
+<p>with 
+\(|\arg z| < \pi\)
+.
+</p>
+<p>This can be written in terms of other functions.  See <a class="xref" href="#expintrep">expintrep</a> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expintrep"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fexpintrep"></a><dl class="first-defvr">
+<dt class="defvr" id="index-expintrep"><span class="category-def">Option variable: </span><span><strong class="def-name">expintrep</strong><a class="copiable-link" href='#index-expintrep'> &para;</a></span></dt>
+<dd><p>Default value: false
+</p>
+<p>Change the representation of one of the exponential integrals,
+<code class="code">expintegral_e(m, z)</code>, <code class="code">expintegral_e1</code>, or
+<code class="code">expintegral_ei</code> to an equivalent form if possible.
+</p>
+<p>Possible values for <code class="code">expintrep</code> are <code class="code">false</code>,
+<code class="code">gamma_incomplete</code>, <code class="code">expintegral_e1</code>, <code class="code">expintegral_ei</code>,
+<code class="code">expintegral_li</code>, <code class="code">expintegral_trig</code>, or
+<code class="code">expintegral_hyp</code>.
+</p>
+<p><code class="code">false</code> means that the representation is not changed.  Other
+values indicate the representation is to be changed to use the
+function specified where <code class="code">expintegral_trig</code> means
+<code class="code"><a class="ref" href="#expintegral_005fsi">expintegral_si</a></code>, <code class="code"><a class="ref" href="#expintegral_005fci">expintegral_ci</a></code>; and <code class="code">expintegral_hyp</code>
+means <code class="code"><a class="ref" href="#expintegral_005fshi">expintegral_shi</a></code> or <code class="code"><a class="ref" href="#expintegral_005fchi">expintegral_chi</a></code>.
+</p>
+<p>Here are some examples for <code class="code">expintrep</code> set to <code class="code">gamma_incomplete</code>:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) expintrep:'gamma_incomplete;
+(%o1)                          gamma_incomplete
+(%i2) expintegral_e1(z);
+(%o2)                       gamma_incomplete(0, z)
+(%i3) expintegral_ei(z);
+(%o3)            log(z) - log(- z) - gamma_incomplete(0, - z)
+(%i4) expintegral_li(z);
+(%o4)     log(log(z)) - log(- log(z)) - gamma_incomplete(0, - log(z))
+(%i5) expintegral_e(n,z);
+                                                   n - 1
+(%o5)                  gamma_incomplete(1 - n, z) z
+(%i6) expintegral_si(z);
+(%o6) (%i ((- log(%i z)) + log(- %i z) - gamma_incomplete(0, %i z)
+                                              + gamma_incomplete(0, - %i z)))/2
+(%i7) expintegral_ci(z);
+(%o7) log(z) - (log(%i z) + log(- %i z) + gamma_incomplete(0, %i z)
+                                               + gamma_incomplete(0, - %i z))/2
+(%i8) expintegral_shi(z);
+      log(z) - log(- z) + gamma_incomplete(0, z) - gamma_incomplete(0, - z)
+(%o8) ---------------------------------------------------------------------
+                                        2
+(%i9) expintegral_chi(z);
+(%o9) 
+      (- log(z)) + log(- z) + gamma_incomplete(0, z) + gamma_incomplete(0, - z)
+    - -------------------------------------------------------------------------
+                                          2
+</pre></div>
+
+<p>For <code class="code">expintrep</code> set to <code class="code">expintegral_e1</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expintrep:'expintegral_e1;
+(%o1)                           expintegral_e1
+(%i2) expintegral_ei(z);
+(%o2)               log(z) - log(- z) - expintegral_e1(- z)
+(%i3) expintegral_li(z);
+(%o3)       log(log(z)) - log(- log(z)) - expintegral_e1(- log(z))
+(%i4) expintegral_e(n,z);
+(%o4)                         expintegral_e(n, z)
+(%i5) expintegral_si(z);
+(%o5) (%i ((- log(%i z)) - expintegral_e1(%i z) + log(- %i z)
+                                                   + expintegral_e1(- %i z)))/2
+(%i6) expintegral_ci(z);
+(%o6) log(z)
+          log(- %i z) (expintegral_e1(%i z) + expintegral_e1(- %i z)) log(%i z)
+        - ---------------------------------------------------------------------
+                                            2
+(%i7) expintegral_shi(z);
+          log(z) + expintegral_e1(z) - log(- z) - expintegral_e1(- z)
+(%o7)     -----------------------------------------------------------
+                                       2
+(%i8) expintegral_chi(z);
+         (- log(z)) + expintegral_e1(z) + log(- z) + expintegral_e1(- z)
+(%o8)  - ---------------------------------------------------------------
+                                        2
+</pre></div>
+
+<p>For <code class="code">expintrep</code> set to <code class="code">expintegral_ei</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expintrep:'expintegral_ei;
+(%o1)                           expintegral_ei
+(%i2) expintegral_e1(z);
+                                          1
+                         log(- z) - log(- -)
+                                          z
+(%o2)       (- log(z)) + ------------------- - expintegral_ei(- z)
+                                  2
+(%i3) expintegral_ei(z);
+(%o3)                          expintegral_ei(z)
+(%i4) expintegral_li(z);
+(%o4)                       expintegral_ei(log(z))
+(%i5) expintegral_e(n,z);
+(%o5)                         expintegral_e(n, z)
+(%i6) expintegral_si(z);
+(%o6) (%i (log(%i z) + 2 (expintegral_ei(- %i z) - expintegral_ei(%i z))
+                                                            %i          %i
+                                        - log(- %i z) + log(--) - log(- --)))/4
+                                                            z           z
+(%i7) expintegral_ci(z);
+(%o7) ((- log(%i z)) + 2 (expintegral_ei(%i z) + expintegral_ei(- %i z))
+                                                    %i          %i
+                                - log(- %i z) + log(--) + log(- --))/4 + log(z)
+                                                    z           z
+(%i8) expintegral_shi(z);
+(%o8) ((- 2 log(z)) + 2 (expintegral_ei(z) - expintegral_ei(- z)) + log(- z)
+                                                                          1
+                                                                  - log(- -))/4
+                                                                          z
+(%i9) expintegral_chi(z);
+(%o9) 
+                                                                             1
+   2 log(z) + 2 (expintegral_ei(z) + expintegral_ei(- z)) - log(- z) + log(- -)
+                                                                             z
+   ----------------------------------------------------------------------------
+                                        4
+</pre></div>
+
+<p>For <code class="code">expintrep</code> set to <code class="code">expintegral_li</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expintrep:'expintegral_li;
+(%o1)                           expintegral_li
+(%i2) expintegral_e1(z);
+                                                                 1
+                                                log(- z) - log(- -)
+                               - z                               z
+(%o2)      (- expintegral_li(%e   )) - log(z) + -------------------
+                                                         2
+(%i3) expintegral_ei(z);
+                                               z
+(%o3)                         expintegral_li(%e )
+(%i4) expintegral_li(z);
+(%o4)                          expintegral_li(z)
+(%i5) expintegral_e(n,z);
+(%o5)                         expintegral_e(n, z)
+(%i6) expintegral_si(z);
+                             %i z                     - %e z    %pi signum(z)
+        %i (expintegral_li(%e    ) - expintegral_li(%e      ) - -------------)
+                                                                      2
+(%o6) - ----------------------------------------------------------------------
+                                          2
+(%i7) expintegral_ci(z);
+                        %i z                     - %i z
+       expintegral_li(%e    ) + expintegral_li(%e      )
+(%o7)  ------------------------------------------------- - signum(z) + 1
+                               2
+(%i8) expintegral_shi(z);
+                                   z                     - z
+                  expintegral_li(%e ) - expintegral_li(%e   )
+(%o8)             -------------------------------------------
+                                       2
+(%i9) expintegral_chi(z);
+                                   z                     - z
+                  expintegral_li(%e ) + expintegral_li(%e   )
+(%o9)             -------------------------------------------
+                                       2
+</pre></div>
+
+<p>For <code class="code">expintrep</code> set to <code class="code">expintegral_trig</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expintrep:'expintegral_trig;
+(%o1)                          expintegral_trig
+(%i2) expintegral_e1(z);
+(%o2) log(%i z) - %i expintegral_si(%i z) - expintegral_ci(%i z) - log(z)
+(%i3) expintegral_ei(z);
+(%o3) (- log(%i z)) - %i expintegral_si(%i z) + expintegral_ci(%i z) + log(z)
+(%i4) expintegral_li(z);
+(%o4) (- log(%i log(z))) - %i expintegral_si(%i log(z))
+                                      + expintegral_ci(%i log(z)) + log(log(z))
+(%i5) expintegral_e(n,z);
+(%o5)                         expintegral_e(n, z)
+(%i6) expintegral_si(z);
+(%o6)                          expintegral_si(z)
+(%i7) expintegral_ci(z);
+(%o7)                          expintegral_ci(z)
+(%i8) expintegral_shi(z);
+(%o8)                      - %i expintegral_si(%i z)
+(%i9) expintegral_chi(z);
+(%o9)            (- log(%i z)) + expintegral_ci(%i z) + log(z)
+</pre></div>
+
+<p>For <code class="code">expintrep</code> set to <code class="code">expintegral_hyp</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expintrep:'expintegral_hyp;
+(%o1)                           expintegral_hyp
+(%i2) expintegral_e1(z);
+(%o2)               expintegral_shi(z) - expintegral_chi(z)
+(%i3) expintegral_ei(z);
+(%o3)               expintegral_shi(z) + expintegral_chi(z)
+(%i4) expintegral_li(z);
+(%o4)          expintegral_shi(log(z)) + expintegral_chi(log(z))
+(%i5) expintegral_e(n,z);
+(%o5)                         expintegral_e(n, z)
+(%i6) expintegral_si(z);
+(%o6)                     - %i expintegral_shi(%i z)
+(%i7) expintegral_ci(z);
+(%o7)           (- log(%i z)) + expintegral_chi(%i z) + log(z)
+(%i8) expintegral_shi(z);
+(%o8)                         expintegral_shi(z)
+(%i9) expintegral_chi(z);
+(%o9)                         expintegral_chi(z)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expintexpand"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fexpintexpand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-expintexpand"><span class="category-def">Option variable: </span><span><strong class="def-name">expintexpand</strong><a class="copiable-link" href='#index-expintexpand'> &para;</a></span></dt>
+<dd><p>Default value: false
+</p>
+<p>Expand <code class="code">expintegral_e(n,z)</code> for half
+integral values in terms of <code class="code">erfc</code> or <code class="code">erf</code> and
+for positive integers in terms of <code class="code">expintegral_ei</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expintegral_e(1/2,z);
+                                            1
+(%o1)                         expintegral_e(-, z)
+                                            2
+(%i2) expintegral_e(1,z);
+(%o2)                         expintegral_e(1, z)
+(%i3) expintexpand:true;
+(%o3)                                true
+(%i4) expintegral_e(1/2,z);
+                            sqrt(%pi) erfc(sqrt(z))
+(%o4)                       -----------------------
+                                    sqrt(z)
+(%i5) expintegral_e(1,z);
+                               1
+                         log(- -) - log(- z)
+                               z
+(%o5)       (- log(z)) - ------------------- - expintegral_ei(- z)
+                                  2
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-Integrals">Exponential Integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fError-Function"></a><hr>
+</div>
+<div class="section-level-extent" id="Error-Function">
+<div class="nav-panel">
+<p>
+Next: <a href="#Struve-Functions" accesskey="n" rel="next">Struve Functions</a>, Previous: <a href="#Exponential-Integrals" accesskey="p" rel="prev">Exponential Integrals</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Error-Function-1">15.6 Error Function</h3>
+
+<p>The Error function and related functions are defined in
+Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_297.htm">A&amp;S Chapter 7</a> and (<a class="url" href="https://dlmf.nist.gov/7">DLMF 7</a>)
+</p>
+<a class="anchor" id="erf"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002ferf"></a><dl class="first-deffn">
+<dt class="deffn" id="index-erf"><span class="category-def">Function: </span><span><strong class="def-name">erf</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-erf'> &para;</a></span></dt>
+<dd>
+<p>The Error Function erf(z):
+$$
+{\rm erf}\ z = {{2\over \sqrt{\pi}}} \int_0^z e^{-t^2}\, dt
+$$
+</p>
+
+<p>(<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_297.htm">A&amp;S eqn 7.1.1</a>) and (<a class="url" href="https://dlmf.nist.gov/7.2.E1">DLMF 7.2.E1</a>).
+</p>
+<p>See also flag <code class="code"><a class="ref" href="maxima_18.html#erfflag">erfflag</a></code>.  This can also be expressed in terms
+of a hypergeometric function.  See <a class="xref" href="#hypergeometric_005frepresentation">hypergeometric_representation</a>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="erfc"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002ferfc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-erfc"><span class="category-def">Function: </span><span><strong class="def-name">erfc</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-erfc'> &para;</a></span></dt>
+<dd><p>The Complementary Error Function erfc(z):
+$$
+{\rm erfc}\ z = 1 - {\rm erf}\ z
+$$
+</p>
+
+<p>(<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_297.htm">A&amp;S eqn 7.1.2</a>) and (<a class="url" href="https://dlmf.nist.gov/7.2.E2">DLMF 7.2.E2</a>).
+</p>
+<p>This can also be expressed in terms
+of a hypergeometric function.  See <a class="xref" href="#hypergeometric_005frepresentation">hypergeometric_representation</a>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="erfi"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002ferfi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-erfi"><span class="category-def">Function: </span><span><strong class="def-name">erfi</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-erfi'> &para;</a></span></dt>
+<dd><p>The Imaginary Error Function. 
+$$
+{\rm erfi}\ z = -i\, {\rm erf}(i z)
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="erf_005fgeneralized"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002ferf_005fgeneralized"></a><dl class="first-deffn">
+<dt class="deffn" id="index-erf_005fgeneralized"><span class="category-def">Function: </span><span><strong class="def-name">erf_generalized</strong> <var class="def-var-arguments">(<var class="var">z1</var>,<var class="var">z2</var>)</var><a class="copiable-link" href='#index-erf_005fgeneralized'> &para;</a></span></dt>
+<dd><p>Generalized Error function Erf(z1,z2):
+$$
+{\rm erf}(z_1, z_2) = {{2\over \sqrt{\pi}}} \int_{z_1}^{z_2} e^{-t^2}\, dt
+$$
+</p>
+
+<p>This can also be expressed in terms
+of a hypergeometric function.  See <a class="xref" href="#hypergeometric_005frepresentation">hypergeometric_representation</a>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="fresnel_005fc"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002ffresnel_005fc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fresnel_005fc"><span class="category-def">Function: </span><span><strong class="def-name">fresnel_c</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-fresnel_005fc'> &para;</a></span></dt>
+<dd><p>The Fresnel Integral
+</p>
+$$
+C(z) = \int_0^z \cos\left({\pi \over 2} t^2\right)\, dt
+$$
+
+
+<p>(<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_300.htm">A&amp;S eqn 7.3.1</a>) and (<a class="url" href="https://dlmf.nist.gov/7.2.E7">DLMF 7.2.E7</a>).
+</p>
+<p>The simplification 
+\(C(-x) = -C(x)\)
+ is applied when
+flag <code class="code"><a class="ref" href="maxima_9.html#trigsign">trigsign</a></code> is true.
+</p>
+<p>The simplification 
+\(C(ix) = iC(x)\)
+ is applied when
+flag <code class="code"><a class="ref" href="maxima_9.html#g_t_0025iargs">%iargs</a></code> is true.
+</p>
+<p>See flags <code class="code"><a class="ref" href="#erf_005frepresentation">erf_representation</a></code> and <code class="code"><a class="ref" href="#hypergeometric_005frepresentation">hypergeometric_representation</a></code>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="fresnel_005fs"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002ffresnel_005fs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fresnel_005fs"><span class="category-def">Function: </span><span><strong class="def-name">fresnel_s</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-fresnel_005fs'> &para;</a></span></dt>
+<dd><p>The Fresnel Integral
+$$
+S(z) = \int_0^z \sin\left({\pi \over 2} t^2\right)\, dt
+$$
+</p>
+
+<p>(<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_300.htm">A&amp;S eqn 7.3.2</a>) and (<a class="url" href="https://dlmf.nist.gov/7.2.E8">DLMF 7.2.E8</a>).
+</p>
+<p>The simplification 
+\(S(-x) = -S(x)\)
+ is applied when
+flag <code class="code"><a class="ref" href="maxima_9.html#trigsign">trigsign</a></code> is true.
+</p>
+<p>The simplification 
+\(S(ix) = iS(x)\)
+ is applied when
+flag <code class="code"><a class="ref" href="maxima_9.html#g_t_0025iargs">%iargs</a></code> is true.
+</p>
+<p>See flags <code class="code"><a class="ref" href="#erf_005frepresentation">erf_representation</a></code> and <code class="code"><a class="ref" href="#hypergeometric_005frepresentation">hypergeometric_representation</a></code>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="erf_005frepresentation"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002ferf_005frepresentation"></a><dl class="first-defvr">
+<dt class="defvr" id="index-erf_005frepresentation"><span class="category-def">Option variable: </span><span><strong class="def-name">erf_representation</strong><a class="copiable-link" href='#index-erf_005frepresentation'> &para;</a></span></dt>
+<dd><p>Default value: false
+</p>
+<p><code class="code">erf_representation</code> controls how the error functions are
+represented.  It must be set to one of <code class="code">false</code>, <code class="code">erf</code>,
+<code class="code">erfc</code>, or <code class="code">erfi</code>.  When set to <code class="code">false</code>, the error functions are not
+modified.  When set to <code class="code">erf</code>, all error functions (<code class="code"><a class="ref" href="#erfc">erfc</a></code>,
+<code class="code"><a class="ref" href="#erfi">erfi</a></code>, <code class="code"><a class="ref" href="#erf_005fgeneralized">erf_generalized</a></code>, <code class="code"><a class="ref" href="#fresnel_005fs">fresnel_s</a></code> and
+<code class="code"><a class="ref" href="#fresnel_005fc">fresnel_c</a></code>) are converted to <code class="code"><a class="ref" href="#erf">erf</a></code> functions.  Similary,
+<code class="code">erfc</code> converts error functions to <code class="code"><a class="ref" href="#erfc">erfc</a></code>.  Finally
+<code class="code">erfi</code> converts the functions to <code class="code"><a class="ref" href="#erfi">erfi</a></code>.
+</p>
+<p>Converting to <code class="code"><a class="ref" href="#erf">erf</a></code>:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) erf_representation:erf;
+(%o1)                                true
+(%i2) erfc(z);
+(%o2)                               erfc(z)
+(%i3) erfi(z);
+(%o3)                               erfi(z)
+(%i4) erf_generalized(z1,z2);
+(%o4)                          erf(z2) - erf(z1)
+(%i5) fresnel_c(z);
+                    sqrt(%pi) (%i + 1) z           sqrt(%pi) (1 - %i) z
+      (1 - %i) (erf(--------------------) + %i erf(--------------------))
+                             2                              2
+(%o5) -------------------------------------------------------------------
+                                       4
+(%i6) fresnel_s(z);
+                    sqrt(%pi) (%i + 1) z           sqrt(%pi) (1 - %i) z
+      (%i + 1) (erf(--------------------) - %i erf(--------------------))
+                             2                              2
+(%o6) -------------------------------------------------------------------
+                                       4
+
+</pre></div>
+
+<p>Converting to <code class="code"><a class="ref" href="#erfc">erfc</a></code>:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) erf_representation:erfc;
+(%o1)                                erfc
+(%i2) erf(z);
+(%o2)                             1 - erfc(z)
+(%i3) erfc(z);
+(%o3)                               erfc(z)
+(%i4) erf_generalized(z1,z2);
+(%o4)                         erfc(z1) - erfc(z2)
+(%i5) fresnel_s(c);
+                         sqrt(%pi) (%i + 1) c
+(%o5) ((%i + 1) ((- erfc(--------------------))
+                                  2
+                                                 sqrt(%pi) (1 - %i) c
+                                  - %i (1 - erfc(--------------------)) + 1))/4
+                                                          2
+(%i6) fresnel_c(c);
+                         sqrt(%pi) (%i + 1) c
+(%o6) ((1 - %i) ((- erfc(--------------------))
+                                  2
+                                                 sqrt(%pi) (1 - %i) c
+                                  + %i (1 - erfc(--------------------)) + 1))/4
+                                                          2
+</pre></div>
+
+<p>Converting to <code class="code"><a class="ref" href="#erfc">erfc</a></code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) erf_representation:erfi;
+(%o1)                                erfi
+(%i2) erf(z);
+(%o2)                           - %i erfi(%i z)
+(%i3) erfc(z);
+(%o3)                          %i erfi(%i z) + 1
+(%i4) erfi(z);
+(%o4)                               erfi(z)
+(%i5) erf_generalized(z1,z2);
+(%o5)                   %i erfi(%i z1) - %i erfi(%i z2)
+(%i6) fresnel_s(z);
+                            sqrt(%pi) %i (%i + 1) z
+(%o6) ((%i + 1) ((- %i erfi(-----------------------))
+                                       2
+                                                   sqrt(%pi) (1 - %i) %i z
+                                            - erfi(-----------------------)))/4
+                                                              2
+(%i7) fresnel_c(z);
+(%o7) 
+                   sqrt(%pi) (1 - %i) %i z            sqrt(%pi) %i (%i + 1) z
+    (1 - %i) (erfi(-----------------------) - %i erfi(-----------------------))
+                              2                                  2
+    ---------------------------------------------------------------------------
+                                         4
+</pre></div>
+</dd></dl>
+
+<a class="anchor" id="hypergeometric_005frepresentation"></a><a class="anchor" id="Item_003a-Special_002fdefvr_002fhypergeometric_005frepresentation"></a><dl class="first-defvr">
+<dt class="defvr" id="index-hypergeometric_005frepresentation"><span class="category-def">Option variable: </span><span><strong class="def-name">hypergeometric_representation</strong><a class="copiable-link" href='#index-hypergeometric_005frepresentation'> &para;</a></span></dt>
+<dd><p>Default value: false
+</p>
+<p>Enables transformation to a Hypergeometric
+representation for <code class="code"><a class="ref" href="#fresnel_005fs">fresnel_s</a></code> and <code class="code"><a class="ref" href="#fresnel_005fc">fresnel_c</a></code> and other
+error functions.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) hypergeometric_representation:true;
+(%o1)                                true
+(%i2) fresnel_s(z);
+                                                      2  4
+                                     3    3  7     %pi  z    3
+                 %pi hypergeometric([-], [-, -], - -------) z
+                                     4    2  4       16
+(%o2)            ---------------------------------------------
+                                       6
+(%i3) fresnel_c(z);
+                                                    2  4
+                                   1    1  5     %pi  z
+(%o3)              hypergeometric([-], [-, -], - -------) z
+                                   4    2  4       16
+(%i4) erf(z);
+                                        1    3      2
+                      2 hypergeometric([-], [-], - z ) z
+                                        2    2
+(%o4)                 ----------------------------------
+                                  sqrt(%pi)
+(%i5) erfi(z);
+                                         1    3    2
+                       2 hypergeometric([-], [-], z ) z
+                                         2    2
+(%o5)                  --------------------------------
+                                  sqrt(%pi)
+(%i6) erfc(z);
+                                          1    3      2
+                        2 hypergeometric([-], [-], - z ) z
+                                          2    2
+(%o6)               1 - ----------------------------------
+                                    sqrt(%pi)
+(%i7) erf_generalized(z1,z2);
+                        1    3       2
+      2 hypergeometric([-], [-], - z2 ) z2
+                        2    2
+(%o7) ------------------------------------
+                   sqrt(%pi)
+                                                             1    3       2
+                                           2 hypergeometric([-], [-], - z1 ) z1
+                                                             2    2
+                                         - ------------------------------------
+                                                        sqrt(%pi)
+</pre></div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fStruve-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Struve-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Hypergeometric-Functions" accesskey="n" rel="next">Hypergeometric Functions</a>, Previous: <a href="#Error-Function" accesskey="p" rel="prev">Error Function</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Struve-Functions-1">15.7 Struve Functions</h3>
+
+<p>The Struve functions are defined in Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_496.htm">A&amp;S Chapter 12</a> and (<a class="url" href="https://dlmf.nist.gov/11">DLMF 11</a>).
+The Struve Function 
+\({\bf H}_{\nu}(z)\)
+ is a particular solution
+of the differential equation:
+$$
+z^2 {d^2 w \over dz^2} + z {dw \over dz} + (z^2-\nu^2)w =
+{{4\left({1\over 2} z\right)^{\nu+1}} \over \sqrt{\pi} \Gamma\left(\nu + {1\over 2}\right)}
+$$
+</p>
+
+<p>which has the general soution
+$$
+w = aJ_{\nu}(z) + bY_{\nu}(z) + {\bf H}_{\nu}(z)
+$$
+</p>
+
+<a class="anchor" id="struve_005fh"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fstruve_005fh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-struve_005fh"><span class="category-def">Function: </span><span><strong class="def-name">struve_h</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-struve_005fh'> &para;</a></span></dt>
+<dd><p>The Struve Function H of order 
+\(\nu\)
+ and argument <em class="math tex2jax_process">\(z\)</em>:
+</p>
+$$
+{\bf H}_{\nu}(z) = \left({z\over 2}\right)^{\nu+1}
+\sum_{k=0}^{\infty} {(-1)^k\left({z\over 2}\right)^{2k} \over \Gamma\left(k + {3\over 2}\right) \Gamma\left(k + \nu + {3\over 2}\right)}
+$$
+
+
+<p>(<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_496.htm">A&amp;S eqn 12.1.3</a>) and (<a class="url" href="https://dlmf.nist.gov/11.2.E1">DLMF 11.2.E1</a>).
+</p>
+<p>When <code class="code">besselexpand</code> is <code class="code">true</code>, <code class="code">struve_h</code> is expanded in terms
+of elementary functions when the order <em class="math tex2jax_process">\(v\)</em> is half of an odd integer. 
+See <code class="code"><a class="ref" href="#besselexpand">besselexpand</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="struve_005fl"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fstruve_005fl"></a><dl class="first-deffn">
+<dt class="deffn" id="index-struve_005fl"><span class="category-def">Function: </span><span><strong class="def-name">struve_l</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-struve_005fl'> &para;</a></span></dt>
+<dd><p>The Modified Struve Function L of order 
+\(\nu\)
+ and argument <em class="math tex2jax_process">\(z\)</em>:
+$$
+{\bf L}_{\nu}(z) = -ie^{-{i\nu\pi\over 2}} {\bf H}_{\nu}(iz)
+$$
+</p>
+
+<p>(<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_498.htm">A&amp;S eqn 12.2.1</a>) and (<a class="url" href="https://dlmf.nist.gov/11.2.E2">DLMF 11.2.E2</a>).
+</p>
+<p>When <code class="code">besselexpand</code> is <code class="code">true</code>, <code class="code">struve_l</code> is expanded in terms
+of elementary functions when the order <em class="math tex2jax_process">\(v\)</em> is half of an odd integer. 
+See <code class="code"><a class="ref" href="#besselexpand">besselexpand</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fHypergeometric-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Hypergeometric-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Parabolic-Cylinder-Functions" accesskey="n" rel="next">Parabolic Cylinder Functions</a>, Previous: <a href="#Struve-Functions" accesskey="p" rel="prev">Struve Functions</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Hypergeometric-Functions-1">15.8 Hypergeometric Functions</h3>
+
+<p>The Hypergeometric Functions are defined in Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_504.htm">A&amp;S Chapters 13</a> and
+<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_555.htm">A&amp;S 15</a>.
+</p>
+<p>Maxima has very limited knowledge of these functions.  They
+can be returned from function <code class="code">hgfred</code>.
+</p>
+<a class="anchor" id="Item_003a-Special_002fdeffn_002f_0025m"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0025m"><span class="category-def">Function: </span><span><strong class="def-name">%m</strong> <var class="def-var-arguments">[<var class="var">k</var>,<var class="var">u</var>] (<var class="var">z</var>)</var><a class="copiable-link" href='#index-_0025m'> &para;</a></span></dt>
+<dd><p>Whittaker M function (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_505.htm">A&amp;S eqn 13.1.32</a>):
+</p>
+$$
+M_{\kappa,\mu}(z) = e^{-{1\over 2}z} z^{{1\over 2} + \mu} M\left({1\over 2} + \mu - \kappa, 1 + 2\mu, z\right)
+$$
+
+
+<p>where <em class="math tex2jax_process">\(M(a,b,z)\)</em> is Kummer&rsquo;s solution of the confluent hypergeometric equation.
+</p>
+<p>This can also be expressed by the series (<a class="url" href="https://dlmf.nist.gov/13.14.E6">DLMF 13.14.E6</a>):
+$$
+M_{\kappa,\mu}(z) = e^{-{1\over 2} z} z^{{1\over 2} + \mu}
+\sum_{s=0}^{\infty} {\left({1\over 2} + \mu - \kappa\right)_s \over (1 + 2\mu)_s s!} z^s
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002f_0025w"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0025w"><span class="category-def">Function: </span><span><strong class="def-name">%w</strong> <var class="def-var-arguments">[<var class="var">k</var>,<var class="var">u</var>] (<var class="var">z</var>)</var><a class="copiable-link" href='#index-_0025w'> &para;</a></span></dt>
+<dd><p>Whittaker W function (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_505.htm">A&amp;S eqn 13.1.33</a>):
+$$
+W_{\kappa,\mu}(z) = e^{-{1\over 2}z} z^{{1\over 2} + \mu} U\left({1\over 2} + \mu - \kappa, 1+2\mu,z\right)
+$$
+</p>
+
+<p>where <em class="math tex2jax_process">\(U(a,b,z)\)</em> is Kummer&rsquo;s second solution of the confluent hypergeometric equation.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002f_0025f"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0025f"><span class="category-def">Function: </span><span><strong class="def-name">%f</strong> <var class="def-var-arguments">[<var class="var">p</var>,<var class="var">q</var>] (<var class="var">[a],[b],z</var>)</var><a class="copiable-link" href='#index-_0025f'> &para;</a></span></dt>
+<dd><p>The 
+\(_{p}F_{q}(a_1,a_2,...,a_p;b_1,b_2,...,b_q;z)\)
+ hypergeometric function,
+where <var class="var">a</var> a list of length <var class="var">p</var> and 
+<var class="var">b</var> a list of length <var class="var">q</var>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fhypergeometric"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hypergeometric"><span class="category-def">Function: </span><span><strong class="def-name">hypergeometric</strong> <var class="def-var-arguments">([<var class="var">a1</var>, ..., <var class="var">ap</var>],[<var class="var">b1</var>, ... ,<var class="var">bq</var>], x)</var><a class="copiable-link" href='#index-hypergeometric'> &para;</a></span></dt>
+<dd><p>The hypergeometric function. Unlike Maxima&rsquo;s <code class="code">%f</code> hypergeometric
+function, the function <code class="code">hypergeometric</code> is a simplifying
+function; also, <code class="code">hypergeometric</code> supports complex double and
+big floating point evaluation. For the Gauss hypergeometric function,
+that is <em class="math tex2jax_process">\(p = 2\)</em> and <em class="math tex2jax_process">\(q = 1\)</em>, floating point evaluation
+outside the unit circle is supported, but in general, it is not
+supported.
+</p>
+<p>When the option variable <code class="code">expand_hypergeometric</code> is true (default
+is false) and one of the arguments <code class="code">a1</code> through <code class="code">ap</code> is a
+negative integer (a polynomial case), <code class="code">hypergeometric</code> returns an
+expanded polynomial. 
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1)  hypergeometric([],[],x);
+(%o1) %e^x
+</pre></div>
+
+<p>Polynomial cases automatically expand when <code class="code">expand_hypergeometric</code> is true:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) hypergeometric([-3],[7],x);
+(%o2) hypergeometric([-3],[7],x)
+
+(%i3) hypergeometric([-3],[7],x), expand_hypergeometric : true;
+(%o3) -x^3/504+3*x^2/56-3*x/7+1
+</pre></div>
+
+<p>Both double float and big float evaluation is supported:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) hypergeometric([5.1],[7.1 + %i],0.42);
+(%o4)       1.346250786375334 - 0.0559061414208204 %i
+(%i5) hypergeometric([5,6],[8], 5.7 - %i);
+(%o5)     .007375824009774946 - .001049813688578674 %i
+(%i6) hypergeometric([5,6],[8], 5.7b0 - %i), fpprec : 30;
+(%o6) 7.37582400977494674506442010824b-3
+                          - 1.04981368857867315858055393376b-3 %i
+</pre></div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fhypergeometric_005fsimp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hypergeometric_005fsimp"><span class="category-def">Function: </span><span><strong class="def-name">hypergeometric_simp</strong> <var class="def-var-arguments">(<var class="var">e</var>)</var><a class="copiable-link" href='#index-hypergeometric_005fsimp'> &para;</a></span></dt>
+<dd>
+<p><code class="code">hypergeometric_simp</code> simplifies hypergeometric functions
+by applying <code class="code">hgfred</code>
+to the arguments of any hypergeometric functions in the expression <var class="var">e</var>.
+</p>
+<p>Only instances of <code class="code">hypergeometric</code> are affected;
+any <code class="code">%f</code>, <code class="code">%w</code>, and <code class="code">%m</code> in the expression <var class="var">e</var> are not affected.
+Any unsimplified hypergeometric functions are returned unchanged
+(instead of changing to <code class="code">%f</code> as <code class="code">hgfred</code> would).
+</p>
+<p><code class="code">load(&quot;hypergeometric&quot;);</code> loads this function.
+</p>
+<p>See also <code class="code"><a class="ref" href="#hgfred">hgfred</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;hypergeometric&quot;) $
+(%i2) foo : [hypergeometric([1,1], [2], z), hypergeometric([1/2], [1], z)];
+(%o2) [hypergeometric([1, 1], [2], z), 
+                                                     1
+                                     hypergeometric([-], [1], z)]
+                                                     2
+(%i3) hypergeometric_simp (foo);
+                 log(1 - z)              z    z/2
+(%o3)         [- ----------, bessel_i(0, -) %e   ]
+                     z                   2
+(%i4) bar : hypergeometric([n], [m], z + 1);
+(%o4)            hypergeometric([n], [m], z + 1)
+(%i5) hypergeometric_simp (bar);
+(%o5)            hypergeometric([n], [m], z + 1)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hypergeometric-functions">Hypergeometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="hgfred"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fhgfred"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hgfred"><span class="category-def">Function: </span><span><strong class="def-name">hgfred</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">t</var>)</var><a class="copiable-link" href='#index-hgfred'> &para;</a></span></dt>
+<dd>
+<p>Simplify the generalized hypergeometric function in terms of other,
+simpler, forms.  <var class="var">a</var> is a list of numerator parameters and <var class="var">b</var>
+is a list of the denominator parameters. 
+</p>
+<p>If <code class="code">hgfred</code> cannot simplify the hypergeometric function, it returns
+an expression of the form <code class="code">%f[p,q]([a], [b], x)</code> where <var class="var">p</var> is
+the number of elements in <var class="var">a</var>, and <var class="var">q</var> is the number of elements
+in <var class="var">b</var>.  This is the usual 
+\(_pF_q\)
+ generalized hypergeometric
+function. 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) assume(not(equal(z,0)));
+(%o1)                          [notequal(z, 0)]
+(%i2) hgfred([v+1/2],[2*v+1],2*%i*z);
+
+                     v/2                               %i z
+                    4    bessel_j(v, z) gamma(v + 1) %e
+(%o2)               ---------------------------------------
+                                       v
+                                      z
+(%i3) hgfred([1,1],[2],z);
+
+                                   log(1 - z)
+(%o3)                            - ----------
+                                       z
+(%i4) hgfred([a,a+1/2],[3/2],z^2);
+
+                               1 - 2 a          1 - 2 a
+                        (z + 1)        - (1 - z)
+(%o4)                   -------------------------------
+                                 2 (1 - 2 a) z
+
+</pre></div>
+
+<p>It can be beneficial to load orthopoly too as the following example
+shows.  Note that <var class="var">L</var> is the generalized Laguerre polynomial.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i5) load(&quot;orthopoly&quot;)$
+(%i6) hgfred([-2],[a],z);
+</pre><div class="group"><pre class="example-preformatted">
+
+                                    (a - 1)
+                                 2 L       (z)
+                                    2
+(%o6)                            -------------
+                                   a (a + 1)
+</pre></div><pre class="example-preformatted">(%i7) ev(%);
+
+                                  2
+                                 z        2 z
+(%o7)                         --------- - --- + 1
+                              a (a + 1)    a
+
+</pre></div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fParabolic-Cylinder-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Parabolic-Cylinder-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Special-Functions" accesskey="n" rel="next">Functions and Variables for Special Functions</a>, Previous: <a href="#Hypergeometric-Functions" accesskey="p" rel="prev">Hypergeometric Functions</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Parabolic-Cylinder-Functions-1">15.9 Parabolic Cylinder Functions</h3>
+
+<p>The Parabolic Cylinder Functions are defined in Abramowitz and Stegun,
+<i class="i">Handbook of Mathematical Functions</i>, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_686.htm">A&amp;S Chapter 19</a>.
+</p>
+<p>Maxima has very limited knowledge of these functions.  They
+can be returned from function <code class="code"><a class="ref" href="maxima_18.html#specint">specint</a></code>.
+</p>
+<a class="anchor" id="parabolic_005fcylinder_005fd"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fparabolic_005fcylinder_005fd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-parabolic_005fcylinder_005fd"><span class="category-def">Function: </span><span><strong class="def-name">parabolic_cylinder_d</strong> <var class="def-var-arguments">(<var class="var">v</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-parabolic_005fcylinder_005fd'> &para;</a></span></dt>
+<dd><p>The parabolic cylinder function <code class="code">parabolic_cylinder_d(v,z)</code>. (<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_687.htm">A&amp;S eqn 19.3.1</a>).
+</p>
+<p>The solution of the Weber differential equation
+$$
+y''(z) + \left(\nu + {1\over 2} - {1\over 4} z^2\right) y(z) = 0
+$$
+</p>
+<p>has two independent solutions, one of which is 
+\(D_{\nu}(z)\)
+, the parabolic cylinder d function.
+</p>
+<p>Function <code class="code"><a class="ref" href="maxima_18.html#specint">specint</a></code> can return expressions containing
+<code class="code">parabolic_cylinder_d(v,z)</code> if the option variable
+<code class="code"><a class="ref" href="maxima_18.html#prefer_005fd">prefer_d</a></code> is <code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+
+<a class="anchor" id="Item_003a-Special_002fnode_002fFunctions-and-Variables-for-Special-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Special-Functions">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Parabolic-Cylinder-Functions" accesskey="p" rel="prev">Parabolic Cylinder Functions</a>, Up: <a href="#Special-Functions" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Special-Functions-1">15.10 Functions and Variables for Special Functions</h3>
+
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002flambert_005fw"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lambert_005fw"><span class="category-def">Function: </span><span><strong class="def-name">lambert_w</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-lambert_005fw'> &para;</a></span></dt>
+<dd><p>The principal branch of Lambert&rsquo;s W function W(z) (<a class="url" href="https://dlmf.nist.gov/4.13">DLMF 4.13</a>), the solution of 
+$$
+z = W(z)e^{W(z)}
+$$
+</p>  
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fgeneralized_005flambert_005fw"></a><dl class="first-deffn">
+<dt class="deffn" id="index-generalized_005flambert_005fw"><span class="category-def">Function: </span><span><strong class="def-name">generalized_lambert_w</strong> <var class="def-var-arguments">(<var class="var">k</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-generalized_005flambert_005fw'> &para;</a></span></dt>
+<dd><p>The <var class="var">k</var>-th branch of Lambert&rsquo;s W function W(z) (<a class="url" href="https://dlmf.nist.gov/4.13">DLMF 4.13</a>), the solution
+of 
+\(z=W(z)e^{W(z)}\)
+.
+</p>
+<p>The principal branch, denoted 
+\(W_p(z)\)
+ in DLMF, is <code class="code">lambert_w(z) = generalized_lambert_w(0,z)</code>.
+</p>
+<p>The other branch with real values, denoted 
+\(W_m(z)\)
+ in DLMF, is <code class="code">generalized_lambert_w(-1,z)</code>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+
+<a class="anchor" id="kbateman"></a><a class="anchor" id="Item_003a-Special_002fdeffn_002fkbateman"></a><dl class="first-deffn">
+<dt class="deffn" id="index-kbateman"><span class="category-def">Function: </span><span><strong class="def-name">kbateman</strong> <var class="def-var-arguments">[<var class="var">v</var>] (<var class="var">x</var>)</var><a class="copiable-link" href='#index-kbateman'> &para;</a></span></dt>
+<dd><p>The Bateman k function
+</p>
+$$
+k_v(x)
+ = \frac{2}{\pi} \int_0^{\frac{\pi}{2}} \cos(x \tan\theta-v\theta)d\theta
+$$
+
+
+<p>It is a special case of the confluent hypergeometric function. Maxima can
+calculate the Laplace transform of <code class="code">kbateman</code> using <code class="code"><a class="ref" href="maxima_18.html#laplace">laplace</a></code>
+or <code class="code"><a class="ref" href="maxima_18.html#specint">specint</a></code>, but has no other knowledge of this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fnzeta"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nzeta"><span class="category-def">Function: </span><span><strong class="def-name">nzeta</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-nzeta'> &para;</a></span></dt>
+<dd><p>The Plasma Dispersion Function 
+$$
+{\rm nzeta}(z) = i\sqrt{\pi}e^{-z^2}(1-{\rm erf}(-iz))
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fnzetar"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nzetar"><span class="category-def">Function: </span><span><strong class="def-name">nzetar</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-nzetar'> &para;</a></span></dt>
+<dd><p>Returns <code class="code">realpart(nzeta(z))</code>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-Special_002fdeffn_002fnzetai"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nzetai"><span class="category-def">Function: </span><span><strong class="def-name">nzetai</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-nzetai'> &para;</a></span></dt>
+<dd><p>Returns <code class="code">imagpart(nzeta(z))</code>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</p></dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_15.html#Elliptic-Functions" accesskey="n" rel="next">Elliptic Functions</a>, Previous: <a href="maxima_13.html#Polynomials" accesskey="p" rel="prev">Polynomials</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

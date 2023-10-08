@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Operators (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Operators (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Operators (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_7.html#Evaluation" rel="next" title="Evaluation">
+<link href="maxima_5.html#Expressions" rel="prev" title="Expressions">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Operators">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_7.html#Evaluation" accesskey="n" rel="next">Evaluation</a>, Previous: <a href="maxima_5.html#Expressions" accesskey="p" rel="prev">Expressions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Operators-1">7 Operators</h2>
+
+<a class="anchor" id="Item_003a-Operators_002fnode_002fIntroduction-to-operators"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-operators" accesskey="1">Introduction to operators</a></li>
+<li><a href="#Arithmetic-operators" accesskey="2">Arithmetic operators</a></li>
+<li><a href="#Relational-operators" accesskey="3">Relational operators</a></li>
+<li><a href="#Logical-operators" accesskey="4">Logical operators</a></li>
+<li><a href="#Operators-for-Equations" accesskey="5">Operators for Equations</a></li>
+<li><a href="#Assignment-operators" accesskey="6">Assignment operators</a></li>
+<li><a href="#User-defined-operators" accesskey="7">User defined operators</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-operators">
+<div class="nav-panel">
+<p>
+Next: <a href="#Arithmetic-operators" accesskey="n" rel="next">Arithmetic operators</a>, Previous: <a href="#Operators" accesskey="p" rel="prev">Operators</a>, Up: <a href="#Operators" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-operators-1">7.1 Introduction to operators</h3>
+
+<p>It is possible to define new operators with specified precedence, to undefine
+existing operators, or to redefine the precedence of existing operators.  An
+operator may be unary prefix or unary postfix, binary infix, n-ary infix,
+matchfix, or nofix.  &quot;Matchfix&quot; means a pair of symbols which enclose their
+argument or arguments, and &quot;nofix&quot; means an operator which takes no arguments.
+As examples of the different types of operators, there are the following.
+</p>
+<dl class="table">
+<dt>unary prefix</dt>
+<dd><p>negation <code class="code">- a</code>
+</p></dd>
+<dt>unary postfix</dt>
+<dd><p>factorial <code class="code">a!</code>
+</p></dd>
+<dt>binary infix</dt>
+<dd><p>exponentiation <code class="code">a^b</code>
+</p></dd>
+<dt>n-ary infix</dt>
+<dd><p>addition <code class="code">a + b</code>
+</p></dd>
+<dt>matchfix</dt>
+<dd><p>list construction <code class="code">[a, b]</code>
+</p></dd>
+</dl>
+
+<p>(There are no built-in nofix operators; for an example of such an operator,
+see <code class="code">nofix</code>.)
+</p>
+<p>The mechanism to define a new operator is straightforward.  It is only necessary
+to declare a function as an operator; the operator function might or might not
+be defined.
+</p>
+<p>An example of user-defined operators is the following.  Note that the explicit
+function call <code class="code">&quot;dd&quot; (a)</code> is equivalent to <code class="code">dd a</code>, likewise
+<code class="code">&quot;&lt;-&quot; (a, b)</code> is equivalent to <code class="code">a &lt;- b</code>.  Note also that the functions
+<code class="code">&quot;dd&quot;</code> and <code class="code">&quot;&lt;-&quot;</code> are undefined in this example.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) prefix (&quot;dd&quot;);
+(%o1)                          dd
+(%i2) dd a;
+(%o2)                         dd a
+(%i3) &quot;dd&quot; (a);
+(%o3)                         dd a
+(%i4) infix (&quot;&lt;-&quot;);
+(%o4)                          &lt;-
+(%i5) a &lt;- dd b;
+(%o5)                      a &lt;- dd b
+(%i6) &quot;&lt;-&quot; (a, &quot;dd&quot; (b));
+(%o6)                      a &lt;- dd b
+</pre></div>
+
+<p>The Maxima functions which define new operators are summarized in this table,
+stating the default left and right binding powers (lbp and rbp, respectively).
+(Binding power determines operator precedence.  However, since left and right
+binding powers can differ, binding power is somewhat more complicated than
+precedence.) Some of the operation definition functions take additional
+arguments; see the function descriptions for details.
+</p>
+<dl class="table">
+<dt><code class="code">prefix</code></dt>
+<dd><p>rbp=180
+</p></dd>
+<dt><code class="code">postfix</code></dt>
+<dd><p>lbp=180
+</p></dd>
+<dt><code class="code">infix</code></dt>
+<dd><p>lbp=180, rbp=180
+</p></dd>
+<dt><code class="code">nary</code></dt>
+<dd><p>lbp=180, rbp=180
+</p></dd>
+<dt><code class="code">matchfix</code></dt>
+<dd><p>(binding power not applicable)
+</p></dd>
+<dt><code class="code">nofix</code></dt>
+<dd><p>(binding power not applicable)
+</p></dd>
+</dl>
+
+<p>For comparison, here are some built-in operators and their left and right
+binding powers.
+</p>
+<div class="example">
+<pre class="example-preformatted">Operator   lbp     rbp
+
+  :        180     20 
+  ::       180     20 
+  :=       180     20 
+  ::=      180     20 
+  !        160
+  !!       160
+  ^        140     139 
+  .        130     129 
+  *        120
+  /        120     120 
+  +        100     100 
+  -        100     134 
+  =        80      80 
+  #        80      80 
+  &gt;        80      80 
+  &gt;=       80      80 
+  &lt;        80      80 
+  &lt;=       80      80 
+  not              70 
+  and      65
+  or       60
+  ,        10
+  $        -1
+  ;        -1
+</pre></div>
+
+<p><code class="code"><a class="ref" href="maxima_10.html#remove">remove</a></code> and <code class="code"><a class="ref" href="maxima_3.html#kill">kill</a></code> remove operator properties from an atom.
+<code class="code">remove (&quot;<var class="var">a</var>&quot;, op)</code> removes only the operator properties of <var class="var">a</var>.
+<code class="code">kill (&quot;<var class="var">a</var>&quot;)</code> removes all properties of <var class="var">a</var>, including the
+operator properties.  Note that the name of the operator must be enclosed in
+quotation marks.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) infix (&quot;##&quot;);
+(%o1)                          ##
+(%i2) &quot;##&quot; (a, b) := a^b;
+                                     b
+(%o2)                     a ## b := a
+(%i3) 5 ## 3;
+(%o3)                          125
+(%i4) remove (&quot;##&quot;, op);
+(%o4)                         done
+(%i5) 5 ## 3;
+Incorrect syntax: # is not a prefix operator
+5 ##
+  ^
+(%i5) &quot;##&quot; (5, 3);
+(%o5)                          125
+(%i6) infix (&quot;##&quot;);
+(%o6)                          ##
+(%i7) 5 ## 3;
+(%o7)                          125
+(%i8) kill (&quot;##&quot;);
+(%o8)                         done
+(%i9) 5 ## 3;
+Incorrect syntax: # is not a prefix operator
+5 ##
+  ^
+(%i9) &quot;##&quot; (5, 3);
+(%o9)                       ##(5, 3)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Syntax">Syntax</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Operators_002fnode_002fArithmetic-operators"></a><hr>
+</div>
+<div class="section-level-extent" id="Arithmetic-operators">
+<div class="nav-panel">
+<p>
+Next: <a href="#Relational-operators" accesskey="n" rel="next">Relational operators</a>, Previous: <a href="#Introduction-to-operators" accesskey="p" rel="prev">Introduction to operators</a>, Up: <a href="#Operators" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Arithmetic-operators-1">7.2 Arithmetic operators</h3>
+
+<a class="anchor" id="g_t_002b"></a><a class="anchor" id="g_t_002d"></a><a class="anchor" id="g_t_002a"></a><a class="anchor" id="g_t_002f"></a><a class="anchor" id="g_t_005e"></a><a class="index-entry-id" id="index-Addition"></a>
+<a class="index-entry-id" id="index-Subtraction"></a>
+<a class="index-entry-id" id="index-Multiplication"></a>
+<a class="index-entry-id" id="index-Division"></a>
+<a class="index-entry-id" id="index-Exponentiation"></a>
+
+<a class="anchor" id="Item_003a-Operators_002fdeffn_002f_002b"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002b"><span class="category-def">Operator: </span><span><strong class="def-name">+</strong><a class="copiable-link" href='#index-_002b'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_002d"></a></dd><dt class="deffnx def-cmd-deffn" id="index-_002d"><span class="category-def">Operator: </span><span><strong class="def-name">-</strong><a class="copiable-link" href='#index-_002d'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_002a"></a></dd><dt class="deffnx def-cmd-deffn" id="index-_002a"><span class="category-def">Operator: </span><span><strong class="def-name">*</strong><a class="copiable-link" href='#index-_002a'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_002f"></a></dd><dt class="deffnx def-cmd-deffn" id="index-_002f"><span class="category-def">Operator: </span><span><strong class="def-name">/</strong><a class="copiable-link" href='#index-_002f'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_005e"></a></dd><dt class="deffnx def-cmd-deffn" id="index-_005e"><span class="category-def">Operator: </span><span><strong class="def-name">^</strong><a class="copiable-link" href='#index-_005e'> &para;</a></span></dt>
+<dd>
+<p>The symbols <code class="code">+</code> <code class="code">*</code> <code class="code">/</code> and <code class="code">^</code> represent addition,
+multiplication, division, and exponentiation, respectively.  The names of these
+operators are <code class="code">&quot;+&quot;</code> <code class="code">&quot;*&quot;</code> <code class="code">&quot;/&quot;</code> and <code class="code">&quot;^&quot;</code>, which may appear
+where the name of a function or operator is required.
+</p>
+<p>The symbols <code class="code">+</code> and <code class="code">-</code> represent unary addition and negation,
+respectively, and the names of these operators are <code class="code">&quot;+&quot;</code> and <code class="code">&quot;-&quot;</code>,
+respectively.
+</p>
+<p>Subtraction <code class="code">a - b</code> is represented within Maxima as addition,
+<code class="code">a + (- b)</code>.  Expressions such as <code class="code">a + (- b)</code> are displayed as
+subtraction.  Maxima recognizes <code class="code">&quot;-&quot;</code> only as the name of the unary
+negation operator, and not as the name of the binary subtraction operator.
+</p>
+<p>Division <code class="code">a / b</code> is represented within Maxima as multiplication,
+<code class="code">a * b^(- 1)</code>.  Expressions such as <code class="code">a * b^(- 1)</code> are displayed as
+division.  Maxima recognizes <code class="code">&quot;/&quot;</code> as the name of the division operator.
+</p>
+<p>Addition and multiplication are n-ary, commutative operators.
+Division and exponentiation are binary, noncommutative operators.
+</p>
+<p>Maxima sorts the operands of commutative operators to construct a canonical
+representation.  For internal storage, the ordering is determined by
+<code class="code"><a class="ref" href="maxima_5.html#orderlessp">orderlessp</a></code>.  For display, the ordering for addition is determined by
+<code class="code"><a class="ref" href="maxima_5.html#ordergreatp">ordergreatp</a></code>, and for multiplication, it is the same as the internal
+ordering.
+</p>
+<p>Arithmetic computations are carried out on literal numbers (integers, rationals,
+ordinary floats, and bigfloats).  Except for exponentiation, all arithmetic
+operations on numbers are simplified to numbers.  Exponentiation is simplified
+to a number if either operand is an ordinary float or bigfloat or if the result
+is an exact integer or rational; otherwise an exponentiation may be simplified
+to <code class="code"><a class="ref" href="maxima_9.html#sqrt">sqrt</a></code> or another exponentiation or left unchanged.
+</p>
+<p>Floating-point contagion applies to arithmetic computations: if any operand is
+a bigfloat, the result is a bigfloat; otherwise, if any operand is an ordinary
+float, the result is an ordinary float; otherwise, the operands are rationals
+or integers and the result is a rational or integer.
+</p>
+<p>Arithmetic computations are a simplification, not an evaluation.
+Thus arithmetic is carried out in quoted (but simplified) expressions.
+</p>
+<p>Arithmetic operations are applied element-by-element to lists when the global
+flag <code class="code"><a class="ref" href="maxima_4.html#listarith">listarith</a></code> is <code class="code">true</code>, and always applied element-by-element to
+matrices.  When one operand is a list or matrix and another is an operand of
+some other type, the other operand is combined with each of the elements of the
+list or matrix.
+</p>
+<p>Examples:
+</p>
+<p>Addition and multiplication are n-ary, commutative operators.
+Maxima sorts the operands to construct a canonical representation.
+The names of these operators are <code class="code">&quot;+&quot;</code> and <code class="code">&quot;*&quot;</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) c + g + d + a + b + e + f;
+(%o1)               g + f + e + d + c + b + a
+(%i2) [op (%), args (%)];
+(%o2)              [+, [g, f, e, d, c, b, a]]
+(%i3) c * g * d * a * b * e * f;
+(%o3)                     a b c d e f g
+(%i4) [op (%), args (%)];
+(%o4)              [*, [a, b, c, d, e, f, g]]
+(%i5) apply (&quot;+&quot;, [a, 8, x, 2, 9, x, x, a]);
+(%o5)                    3 x + 2 a + 19
+(%i6) apply (&quot;*&quot;, [a, 8, x, 2, 9, x, x, a]);
+                                 2  3
+(%o6)                       144 a  x
+</pre></div>
+
+<p>Division and exponentiation are binary, noncommutative operators.
+The names of these operators are <code class="code">&quot;/&quot;</code> and <code class="code">&quot;^&quot;</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [a / b, a ^ b];
+                              a   b
+(%o1)                        [-, a ]
+                              b
+(%i2) [map (op, %), map (args, %)];
+(%o2)              [[/, ^], [[a, b], [a, b]]]
+(%i3) [apply (&quot;/&quot;, [a, b]), apply (&quot;^&quot;, [a, b])];
+                              a   b
+(%o3)                        [-, a ]
+                              b
+</pre></div>
+
+<p>Subtraction and division are represented internally
+in terms of addition and multiplication, respectively.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [inpart (a - b, 0), inpart (a - b, 1), inpart (a - b, 2)];
+(%o1)                      [+, a, - b]
+(%i2) [inpart (a / b, 0), inpart (a / b, 1), inpart (a / b, 2)];
+                                   1
+(%o2)                       [*, a, -]
+                                   b
+</pre></div>
+
+<p>Computations are carried out on literal numbers.
+Floating-point contagion applies.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) 17 + b - (1/2)*29 + 11^(2/4);
+                                       5
+(%o1)                   b + sqrt(11) + -
+                                       2
+(%i2) [17 + 29, 17 + 29.0, 17 + 29b0];
+(%o2)                   [46, 46.0, 4.6b1]
+</pre></div>
+
+<p>Arithmetic computations are a simplification, not an evaluation.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) simp : false;
+(%o1)                         false
+(%i2) '(17 + 29*11/7 - 5^3);
+                              29 11    3
+(%o2)                    17 + ----- - 5
+                                7
+(%i3) simp : true;
+(%o3)                         true
+(%i4) '(17 + 29*11/7 - 5^3);
+                                437
+(%o4)                         - ---
+                                 7
+</pre></div>
+
+<p>Arithmetic is carried out element-by-element for lists (depending on
+<code class="code">listarith</code>) and matrices.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) matrix ([a, x], [h, u]) - matrix ([1, 2], [3, 4]);
+</pre><div class="group"><pre class="example-preformatted">                        [ a - 1  x - 2 ]
+(%o1)                   [              ]
+                        [ h - 3  u - 4 ]
+</pre></div><pre class="example-preformatted">(%i2) 5 * matrix ([a, x], [h, u]);
+                          [ 5 a  5 x ]
+(%o2)                     [          ]
+                          [ 5 h  5 u ]
+(%i3) listarith : false;
+(%o3)                         false
+(%i4) [a, c, m, t] / [1, 7, 2, 9];
+                          [a, c, m, t]
+(%o4)                     ------------
+                          [1, 7, 2, 9]
+(%i5) [a, c, m, t] ^ x;
+                                      x
+(%o5)                     [a, c, m, t]
+(%i6) listarith : true;
+(%o6)                         true
+(%i7) [a, c, m, t] / [1, 7, 2, 9];
+                              c  m  t
+(%o7)                     [a, -, -, -]
+                              7  2  9
+(%i8) [a, c, m, t] ^ x;
+                          x   x   x   x
+(%o8)                   [a , c , m , t ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_002a_002a"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_002a_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002a_002a"><span class="category-def">Operator: </span><span><strong class="def-name">**</strong><a class="copiable-link" href='#index-_002a_002a'> &para;</a></span></dt>
+<dd>
+<p>Exponentiation operator.
+Maxima recognizes <code class="code">**</code> as the same operator as <code class="code"><a class="ref" href="#g_t_005e">^</a></code> in input,
+and it is displayed as <code class="code">^</code> in 1-dimensional output,
+or by placing the exponent as a superscript in 2-dimensional output.
+</p>
+<p>The <code class="code"><a class="ref" href="maxima_12.html#fortran">fortran</a></code> function displays the exponentiation operator as <code class="code">**</code>,
+whether it was input as <code class="code">**</code> or <code class="code">^</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) is (a**b = a^b);
+(%o1)                         true
+(%i2) x**y + x^z;
+                              z    y
+(%o2)                        x  + x
+(%i3) string (x**y + x^z);
+(%o3)                        x^z+x^y
+(%i4) fortran (x**y + x^z);
+      x**z+x**y
+(%o4)                         done
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_005e_005e"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_005e_005e"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_005e_005e"><span class="category-def">Operator: </span><span><strong class="def-name">^^</strong><a class="copiable-link" href='#index-_005e_005e'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Noncommutative-exponentiation"></a>
+
+<p>Noncommutative exponentiation operator.
+<code class="code">^^</code> is the exponentiation operator corresponding to noncommutative
+multiplication <code class="code">.</code>, just as the ordinary exponentiation operator <code class="code">^</code>
+corresponds to commutative multiplication <code class="code">*</code>.
+</p>
+<p>Noncommutative exponentiation is displayed by <code class="code">^^</code> in 1-dimensional output,
+and by placing the exponent as a superscript within angle brackets <code class="code">&lt; &gt;</code>
+in 2-dimensional output.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) a . a . b . b . b + a * a * a * b * b;
+                        3  2    &lt;2&gt;    &lt;3&gt;
+(%o1)                  a  b  + a    . b
+(%i2) string (a . a . b . b . b + a * a * a * b * b);
+(%o2)                  a^3*b^2+a^^2 . b^^3
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_002e"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_002e"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002e"><span class="category-def">Operator: </span><span><strong class="def-name">.</strong><a class="copiable-link" href='#index-_002e'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Noncommutative-multiplication"></a>
+
+<p>The dot operator, for matrix (non-commutative) multiplication.
+When <code class="code">&quot;.&quot;</code> is used in this way, spaces should be left on both sides of
+it, e.g.  <code class="code">A . B</code>  This distinguishes it plainly from a decimal point in
+a floating point number.
+</p>
+<p>See also
+<code class="code"><a class="ref" href="maxima_22.html#Dot">Dot</a></code>,
+<code class="code"><a class="ref" href="maxima_22.html#dot0nscsimp">dot0nscsimp</a></code>,
+<code class="code"><a class="ref" href="maxima_22.html#dot0simp">dot0simp</a></code>,
+<code class="code"><a class="ref" href="maxima_22.html#dot1simp">dot1simp</a></code>,
+<code class="code"><a class="ref" href="maxima_22.html#dotassoc">dotassoc</a></code>,
+<code class="code"><a class="ref" href="maxima_22.html#dotconstrules">dotconstrules</a></code>,
+<code class="code"><a class="ref" href="maxima_22.html#dotdistrib">dotdistrib</a></code>,
+<code class="code"><a class="ref" href="maxima_22.html#dotexptsimp">dotexptsimp</a></code>,
+<code class="code"><a class="ref" href="maxima_22.html#dotident">dotident</a></code>,
+and
+<code class="code"><a class="ref" href="maxima_22.html#dotscrules">dotscrules</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Operators_002fnode_002fRelational-operators"></a><hr>
+</div>
+<div class="section-level-extent" id="Relational-operators">
+<div class="nav-panel">
+<p>
+Next: <a href="#Logical-operators" accesskey="n" rel="next">Logical operators</a>, Previous: <a href="#Arithmetic-operators" accesskey="p" rel="prev">Arithmetic operators</a>, Up: <a href="#Operators" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Relational-operators-1">7.3 Relational operators</h3>
+
+<a class="anchor" id="g_t_003c"></a><a class="anchor" id="g_t_003c_003d"></a><a class="anchor" id="g_t_003e_003d"></a><a class="anchor" id="g_t_003e"></a><a class="index-entry-id" id="index-Less-than"></a>
+<a class="index-entry-id" id="index-Less-than-or-equal"></a>
+<a class="index-entry-id" id="index-Greater-than-or-equal"></a>
+<a class="index-entry-id" id="index-Greater-than"></a>
+
+<a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003c"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_003c"><span class="category-def">Operator: </span><span><strong class="def-name">&lt;</strong><a class="copiable-link" href='#index-_003c'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003c_003d"></a></dd><dt class="deffnx def-cmd-deffn" id="index-_003c_003d"><span class="category-def">Operator: </span><span><strong class="def-name">&lt;=</strong><a class="copiable-link" href='#index-_003c_003d'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003e_003d"></a></dd><dt class="deffnx def-cmd-deffn" id="index-_003e_003d"><span class="category-def">Operator: </span><span><strong class="def-name">&gt;=</strong><a class="copiable-link" href='#index-_003e_003d'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003e"></a></dd><dt class="deffnx def-cmd-deffn" id="index-_003e"><span class="category-def">Operator: </span><span><strong class="def-name">&gt;</strong><a class="copiable-link" href='#index-_003e'> &para;</a></span></dt>
+<dd>
+<p>The symbols <code class="code">&lt;</code> <code class="code">&lt;=</code> <code class="code">&gt;=</code> and <code class="code">&gt;</code> represent less than, less
+than or equal, greater than or equal, and greater than, respectively.  The names
+of these operators are <code class="code">&quot;&lt;&quot;</code> <code class="code">&quot;&lt;=&quot;</code> <code class="code">&quot;&gt;=&quot;</code> and <code class="code">&quot;&gt;&quot;</code>, which
+may appear where the name of a function or operator is required.
+</p>
+<p>These relational operators are all binary operators; constructs such as
+<code class="code">a &lt; b &lt; c</code> are not recognized by Maxima.
+</p>
+<p>Relational expressions are evaluated to Boolean values by the functions
+<code class="code"><a class="ref" href="maxima_10.html#is">is</a></code> and <code class="code"><a class="ref" href="maxima_10.html#maybe">maybe</a></code>, and the programming constructs
+<code class="code"><a class="ref" href="maxima_36.html#if">if</a></code>, <code class="code"><a class="ref" href="maxima_36.html#while">while</a></code>, and <code class="code"><a class="ref" href="maxima_36.html#unless">unless</a></code>.  Relational expressions
+are not otherwise evaluated or simplified to Boolean values, although the
+arguments of relational expressions are evaluated (when evaluation is not
+otherwise prevented by quotation).
+</p>
+<p>When a relational expression cannot be evaluated to <code class="code">true</code> or <code class="code">false</code>,
+the behavior of <code class="code">is</code> and <code class="code">if</code> are governed by the global flag
+<code class="code"><a class="ref" href="maxima_36.html#prederror">prederror</a></code>.  When <code class="code">prederror</code> is <code class="code">true</code>, <code class="code">is</code> and
+<code class="code">if</code> trigger an error.  When <code class="code">prederror</code> is <code class="code">false</code>, <code class="code">is</code>
+returns <code class="code">unknown</code>, and <code class="code">if</code> returns a partially-evaluated conditional
+expression.
+</p>
+<p><code class="code">maybe</code> always behaves as if <code class="code">prederror</code> were <code class="code">false</code>, and
+<code class="code">while</code> and <code class="code">unless</code> always behave as if <code class="code">prederror</code> were
+<code class="code">true</code>.
+</p>
+<p>Relational operators do not distribute over lists or other aggregates.
+</p>
+<p>See also <code class="code"><a class="ref" href="#g_t_003d">=</a></code>, <code class="code"><a class="ref" href="#g_t_0023">#</a></code>, <code class="code"><a class="ref" href="maxima_10.html#equal">equal</a></code>, and <code class="code"><a class="ref" href="maxima_10.html#notequal">notequal</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Relational expressions are evaluated to Boolean values by some functions and
+programming constructs.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [x, y, z] : [123, 456, 789];
+(%o1)                    [123, 456, 789]
+(%i2) is (x &lt; y);
+(%o2)                         true
+(%i3) maybe (y &gt; z);
+(%o3)                         false
+(%i4) if x &gt;= z then 1 else 0;
+(%o4)                           0
+(%i5) block ([S], S : 0, for i:1 while i &lt;= 100 do S : S + i, 
+             return (S));
+(%o5)                         5050
+</pre></div>
+
+<p>Relational expressions are not otherwise evaluated or simplified to Boolean
+values, although the arguments of relational expressions are evaluated.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%o1)                    [123, 456, 789]
+(%i2) [x &lt; y, y &lt;= z, z &gt;= y, y &gt; z];
+(%o2)    [123 &lt; 456, 456 &lt;= 789, 789 &gt;= 456, 456 &gt; 789]
+(%i3) map (is, %);
+(%o3)               [true, true, true, false]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Operators_002fnode_002fLogical-operators"></a><hr>
+</div>
+<div class="section-level-extent" id="Logical-operators">
+<div class="nav-panel">
+<p>
+Next: <a href="#Operators-for-Equations" accesskey="n" rel="next">Operators for Equations</a>, Previous: <a href="#Relational-operators" accesskey="p" rel="prev">Relational operators</a>, Up: <a href="#Operators" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Logical-operators-1">7.4 Logical operators</h3>
+
+
+<a class="anchor" id="and"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002fand"></a><dl class="first-deffn">
+<dt class="deffn" id="index-and"><span class="category-def">Operator: </span><span><strong class="def-name">and</strong><a class="copiable-link" href='#index-and'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Logical-conjunction"></a>
+
+<p>The logical conjunction operator.  <code class="code">and</code> is an n-ary infix operator;
+its operands are Boolean expressions, and its result is a Boolean value.
+</p>
+<p><code class="code">and</code> forces evaluation (like <code class="code"><a class="ref" href="maxima_10.html#is">is</a></code>) of one or more operands,
+and may force evaluation of all operands.
+</p>
+<p>Operands are evaluated in the order in which they appear.  <code class="code">and</code> evaluates
+only as many of its operands as necessary to determine the result.  If any
+operand is <code class="code">false</code>, the result is <code class="code">false</code> and no further operands are
+evaluated.
+</p>
+<p>The global flag <code class="code"><a class="ref" href="maxima_36.html#prederror">prederror</a></code> governs the behavior of <code class="code">and</code> when an
+evaluated operand cannot be determined to be <code class="code">true</code> or <code class="code">false</code>.
+<code class="code">and</code> prints an error message when <code class="code">prederror</code> is <code class="code">true</code>.
+Otherwise, operands which do not evaluate to <code class="code">true</code> or <code class="code">false</code> are
+accepted, and the result is a Boolean expression.
+</p>
+<p><code class="code">and</code> is not commutative: <code class="code">a and b</code> might not be equal to
+<code class="code">b and a</code> due to the treatment of indeterminate operands.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="not"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002fnot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-not"><span class="category-def">Operator: </span><span><strong class="def-name">not</strong><a class="copiable-link" href='#index-not'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Logical-negation"></a>
+
+<p>The logical negation operator.  <code class="code">not</code> is a prefix operator;
+its operand is a Boolean expression, and its result is a Boolean value.
+</p>
+<p><code class="code">not</code> forces evaluation (like <code class="code">is</code>) of its operand.
+</p>
+<p>The global flag <code class="code"><a class="ref" href="maxima_36.html#prederror">prederror</a></code> governs the behavior of <code class="code">not</code> when its
+operand cannot be determined to be <code class="code">true</code> or <code class="code">false</code>.  <code class="code">not</code>
+prints an error message when <code class="code">prederror</code> is <code class="code">true</code>.  Otherwise,
+operands which do not evaluate to <code class="code">true</code> or <code class="code">false</code> are accepted,
+and the result is a Boolean expression.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="or"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002for"></a><dl class="first-deffn">
+<dt class="deffn" id="index-or"><span class="category-def">Operator: </span><span><strong class="def-name">or</strong><a class="copiable-link" href='#index-or'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Logical-disjunction"></a>
+
+<p>The logical disjunction operator.  <code class="code">or</code> is an n-ary infix operator;
+its operands are Boolean expressions, and its result is a Boolean value.
+</p>
+<p><code class="code">or</code> forces evaluation (like <code class="code"><a class="ref" href="maxima_10.html#is">is</a></code>) of one or more operands,
+and may force evaluation of all operands.
+</p>
+<p>Operands are evaluated in the order in which they appear.  <code class="code">or</code> evaluates
+only as many of its operands as necessary to determine the result.  If any
+operand is <code class="code">true</code>, the result is <code class="code">true</code> and no further operands are
+evaluated.
+</p>
+<p>The global flag <code class="code"><a class="ref" href="maxima_36.html#prederror">prederror</a></code> governs the behavior of <code class="code">or</code> when an
+evaluated operand cannot be determined to be <code class="code">true</code> or <code class="code">false</code>.
+<code class="code">or</code> prints an error message when <code class="code">prederror</code> is <code class="code">true</code>.
+Otherwise, operands which do not evaluate to <code class="code">true</code> or <code class="code">false</code> are
+accepted, and the result is a Boolean expression.
+</p>
+<p><code class="code">or</code> is not commutative: <code class="code">a or b</code> might not be equal to <code class="code">b or a</code>
+due to the treatment of indeterminate operands.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Operators_002fnode_002fOperators-for-Equations"></a><hr>
+</div>
+<div class="section-level-extent" id="Operators-for-Equations">
+<div class="nav-panel">
+<p>
+Next: <a href="#Assignment-operators" accesskey="n" rel="next">Assignment operators</a>, Previous: <a href="#Logical-operators" accesskey="p" rel="prev">Logical operators</a>, Up: <a href="#Operators" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Operators-for-Equations-1">7.5 Operators for Equations</h3>
+
+<a class="anchor" id="g_t_0023"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_0023"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0023"><span class="category-def">Operator: </span><span><strong class="def-name">#</strong><a class="copiable-link" href='#index-_0023'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Not-equal-_0028syntactic-inequality_0029"></a>
+
+<p>Represents the negation of syntactic equality <code class="code"><a class="ref" href="#g_t_003d">=</a></code>.
+</p>
+<p>Note that because of the rules for evaluation of predicate expressions
+(in particular because <code class="code">not <var class="var">expr</var></code> causes evaluation of <var class="var">expr</var>),
+<code class="code">not <var class="var">a</var> = <var class="var">b</var></code> is equivalent to <code class="code">is(<var class="var">a</var> # <var class="var">b</var>)</code>,
+instead of <code class="code"><var class="var">a</var> # <var class="var">b</var></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) a = b;
+(%o1)                         a = b
+(%i2) is (a = b);
+(%o2)                         false
+(%i3) a # b;
+(%o3)                         a # b
+(%i4) not a = b;
+(%o4)                         true
+(%i5) is (a # b);
+(%o5)                         true
+(%i6) is (not a = b);
+(%o6)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_003d"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003d"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_003d"><span class="category-def">Operator: </span><span><strong class="def-name">=</strong><a class="copiable-link" href='#index-_003d'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Equation-operator"></a>
+<a class="index-entry-id" id="index-Equal-_0028syntactic-equality_0029"></a>
+
+<p>The equation operator.
+</p>
+<p>An expression <code class="code"><var class="var">a</var> = <var class="var">b</var></code>, by itself, represents an unevaluated
+equation, which might or might not hold.  Unevaluated equations may appear as
+arguments to <code class="code"><a class="ref" href="maxima_19.html#solve">solve</a></code> and <code class="code"><a class="ref" href="maxima_19.html#algsys">algsys</a></code> or some other functions.
+</p>
+<p>The function <code class="code"><a class="ref" href="maxima_10.html#is">is</a></code> evaluates <code class="code">=</code> to a Boolean value.
+<code class="code">is(<var class="var">a</var> = <var class="var">b</var>)</code> evaluates <code class="code"><var class="var">a</var> = <var class="var">b</var></code> to <code class="code">true</code>
+when <var class="var">a</var> and <var class="var">b</var> are identical.  That is, <var class="var">a</var> and <var class="var">b</var> are atoms
+which are identical, or they are not atoms and their operators are identical and
+their arguments are identical.  Otherwise, <code class="code">is(<var class="var">a</var> = <var class="var">b</var>)</code>
+evaluates to <code class="code">false</code>; it never evaluates to <code class="code">unknown</code>.  When
+<code class="code">is(<var class="var">a</var> = <var class="var">b</var>)</code> is <code class="code">true</code>, <var class="var">a</var> and <var class="var">b</var> are said to be
+syntactically equal, in contrast to equivalent expressions, for which
+<code class="code">is(equal(<var class="var">a</var>, <var class="var">b</var>))</code> is <code class="code">true</code>.  Expressions can be
+equivalent and not syntactically equal.
+</p>
+<p>The negation of <code class="code">=</code> is represented by <code class="code"><a class="ref" href="#g_t_0023">#</a></code>.
+As with <code class="code">=</code>, an expression <code class="code"><var class="var">a</var> # <var class="var">b</var></code>, by itself, is not
+evaluated.  <code class="code">is(<var class="var">a</var> # <var class="var">b</var>)</code> evaluates <code class="code"><var class="var">a</var> # <var class="var">b</var></code> to
+<code class="code">true</code> or <code class="code">false</code>.
+</p>
+<p>In addition to <code class="code">is</code>, some other operators evaluate <code class="code">=</code> and <code class="code">#</code>
+to <code class="code">true</code> or <code class="code">false</code>, namely <code class="code"><a class="ref" href="maxima_36.html#if">if</a></code>, <code class="code"><a class="ref" href="#and">and</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#or">or</a></code>, and <code class="code"><a class="ref" href="#not">not</a></code>.
+</p>
+<p>Note that because of the rules for evaluation of predicate expressions
+(in particular because <code class="code">not <var class="var">expr</var></code> causes evaluation of <var class="var">expr</var>),
+<code class="code">not <var class="var">a</var> = <var class="var">b</var></code> is equivalent to <code class="code">is(<var class="var">a</var> # <var class="var">b</var>)</code>,
+instead of <code class="code"><var class="var">a</var> # <var class="var">b</var></code>.
+</p>
+<p><code class="code"><a class="ref" href="maxima_19.html#rhs">rhs</a></code> and <code class="code"><a class="ref" href="maxima_19.html#lhs">lhs</a></code> return the right-hand and left-hand sides,
+respectively, of an equation or inequation.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_10.html#equal">equal</a></code> and <code class="code"><a class="ref" href="maxima_10.html#notequal">notequal</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>An expression <code class="code"><var class="var">a</var> = <var class="var">b</var></code>, by itself, represents
+an unevaluated equation, which might or might not hold.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) eq_1 : a * x - 5 * y = 17;
+(%o1)                    a x - 5 y = 17
+(%i2) eq_2 : b * x + 3 * y = 29;
+(%o2)                    3 y + b x = 29
+(%i3) solve ([eq_1, eq_2], [x, y]);
+                        196         29 a - 17 b
+(%o3)          [[x = ---------, y = -----------]]
+                     5 b + 3 a       5 b + 3 a
+(%i4) subst (%, [eq_1, eq_2]);
+</pre><div class="group"><pre class="example-preformatted">         196 a     5 (29 a - 17 b)
+(%o4) [--------- - --------------- = 17, 
+       5 b + 3 a      5 b + 3 a
+                                  196 b     3 (29 a - 17 b)
+                                --------- + --------------- = 29]
+                                5 b + 3 a      5 b + 3 a
+</pre></div><pre class="example-preformatted">(%i5) ratsimp (%);
+(%o5)                  [17 = 17, 29 = 29]
+</pre></div>
+
+<p><code class="code">is(<var class="var">a</var> = <var class="var">b</var>)</code> evaluates <code class="code"><var class="var">a</var> = <var class="var">b</var></code> to <code class="code">true</code>
+when <var class="var">a</var> and <var class="var">b</var> are syntactically equal (that is, identical).
+Expressions can be equivalent and not syntactically equal.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) a : (x + 1) * (x - 1);
+(%o1)                    (x - 1) (x + 1)
+(%i2) b : x^2 - 1;
+                              2
+(%o2)                        x  - 1
+(%i3) [is (a = b), is (a # b)];
+(%o3)                     [false, true]
+(%i4) [is (equal (a, b)), is (notequal (a, b))];
+(%o4)                     [true, false]
+</pre></div>
+
+<p>Some operators evaluate <code class="code">=</code> and <code class="code">#</code> to <code class="code">true</code> or <code class="code">false</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) if expand ((x + y)^2) = x^2 + 2 * x * y + y^2 then FOO else
+      BAR;
+(%o1)                          FOO
+(%i2) eq_3 : 2 * x = 3 * x;
+(%o2)                       2 x = 3 x
+(%i3) eq_4 : exp (2) = %e^2;
+                              2     2
+(%o3)                       %e  = %e
+(%i4) [eq_3 and eq_4, eq_3 or eq_4, not eq_3];
+(%o4)                  [false, true, true]
+</pre></div>
+
+<p>Because <code class="code">not <var class="var">expr</var></code> causes evaluation of <var class="var">expr</var>,
+<code class="code">not <var class="var">a</var> = <var class="var">b</var></code> is equivalent to <code class="code">is(<var class="var">a</var> # <var class="var">b</var>)</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [2 * x # 3 * x, not (2 * x = 3 * x)];
+(%o1)                   [2 x # 3 x, true]
+(%i2) is (2 * x # 3 * x);
+(%o2)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Operators_002fnode_002fAssignment-operators"></a><hr>
+</div>
+<div class="section-level-extent" id="Assignment-operators">
+<div class="nav-panel">
+<p>
+Next: <a href="#User-defined-operators" accesskey="n" rel="next">User defined operators</a>, Previous: <a href="#Operators-for-Equations" accesskey="p" rel="prev">Operators for Equations</a>, Up: <a href="#Operators" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Assignment-operators-1">7.6 Assignment operators</h3>
+
+<a class="anchor" id="g_t_003a"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_003a"><span class="category-def">Operator: </span><span><strong class="def-name">:</strong><a class="copiable-link" href='#index-_003a'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Assignment-operator"></a>
+
+<p>Assignment operator.
+</p>
+<p>When the left-hand side is a simple variable (not subscripted), <code class="code">:</code>
+evaluates its right-hand side and associates that value with the left-hand side.
+</p>
+<p>When the left-hand side is a subscripted element of a list, matrix, declared
+Maxima array, or Lisp array, the right-hand side is assigned to that element.
+The subscript must name an existing element; such objects cannot be extended by
+naming nonexistent elements.
+</p>
+<p>When the left-hand side is a subscripted element of a <code class="code"><a class="ref" href="maxima_4.html#hashed-array">hashed array</a></code>,
+the right-hand side is assigned to that element, if it already exists,
+or a new element is allocated, if it does not already exist.
+</p>
+<p>When the left-hand side is a list of simple and/or subscripted variables, the
+right-hand side must evaluate to a list, and the elements of the right-hand
+side are assigned to the elements of the left-hand side, in parallel.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_3.html#kill">kill</a></code> and <code class="code"><a class="ref" href="maxima_32.html#remvalue">remvalue</a></code>, which undo the association between
+the left-hand side and its value.
+</p>
+<p>Examples:
+</p>
+<p>Assignment to a simple variable.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) a;
+(%o1)                           a
+(%i2) a : 123;
+(%o2)                          123
+(%i3) a;
+(%o3)                          123
+</pre></div>
+
+<p>Assignment to an element of a list.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) b : [1, 2, 3];
+(%o1)                       [1, 2, 3]
+(%i2) b[3] : 456;
+(%o2)                          456
+(%i3) b;
+(%o3)                      [1, 2, 456]
+</pre></div>
+
+<p>Assignment to a variable that neither is the name of a list nor of an array
+creates a <code class="code"><a class="ref" href="maxima_4.html#hashed-array">hashed array</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) c[99] : 789;
+(%o1)                          789
+(%i2) c[99];
+(%o2)                          789
+(%i3) c;
+(%o3)                           c
+(%i4) arrayinfo (c);
+(%o4)                   [hashed, 1, [99]]
+(%i5) listarray (c);
+(%o5)                         [789]
+</pre></div>
+
+<p>Multiple assignment.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [a, b, c] : [45, 67, 89];
+(%o1)                     [45, 67, 89]
+(%i2) a;
+(%o2)                          45
+(%i3) b;
+(%o3)                          67
+(%i4) c;
+(%o4)                          89
+</pre></div>
+
+<p>Multiple assignment is carried out in parallel.
+The values of <code class="code">a</code> and <code class="code">b</code> are exchanged in this example.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [a, b] : [33, 55];
+(%o1)                       [33, 55]
+(%i2) [a, b] : [b, a];
+(%o2)                       [55, 33]
+(%i3) a;
+(%o3)                          55
+(%i4) b;
+(%o4)                          33
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation">Evaluation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_003a_003a"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003a_003a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_003a_003a"><span class="category-def">Operator: </span><span><strong class="def-name">::</strong><a class="copiable-link" href='#index-_003a_003a'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Assignment-operator-_0028evaluates-left_002dhand-side_0029"></a>
+
+<p>Assignment operator.
+</p>
+<p><code class="code">::</code> is the same as <code class="code"><a class="ref" href="#g_t_003a">:</a></code> (which see) except that <code class="code">::</code> evaluates
+its left-hand side as well as its right-hand side.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x : 'foo;
+(%o1)                          foo
+(%i2) x :: 123;
+(%o2)                          123
+(%i3) foo;
+(%o3)                          123
+(%i4) x : '[a, b, c];
+(%o4)                       [a, b, c]
+(%i5) x :: [11, 22, 33];
+(%o5)                     [11, 22, 33]
+(%i6) a;
+(%o6)                          11
+(%i7) b;
+(%o7)                          22
+(%i8) c;
+(%o8)                          33
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation">Evaluation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_003a_003a_003d"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003a_003a_003d"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_003a_003a_003d"><span class="category-def">Operator: </span><span><strong class="def-name">::=</strong><a class="copiable-link" href='#index-_003a_003a_003d'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Macro-function-definition-operator"></a>
+
+<p>Macro function definition operator.
+<code class="code">::=</code> defines a function (called a &quot;macro&quot; for historical reasons) which
+quotes its arguments, and the expression which it returns (called the &quot;macro
+expansion&quot;) is evaluated in the context from which the macro was called.
+A macro function is otherwise the same as an ordinary function.
+</p>
+<p><code class="code"><a class="ref" href="maxima_35.html#macroexpand">macroexpand</a></code> returns a macro expansion (without evaluating it).
+<code class="code">macroexpand (foo (x))</code> followed by <code class="code">''%</code> is equivalent to
+<code class="code">foo (x)</code> when <code class="code">foo</code> is a macro function.
+</p>
+<p><code class="code">::=</code> puts the name of the new macro function onto the global list
+<code class="code"><a class="ref" href="maxima_35.html#macros">macros</a></code>.  <code class="code"><a class="ref" href="maxima_3.html#kill">kill</a></code>, <code class="code"><a class="ref" href="maxima_10.html#remove">remove</a></code>, and <code class="code"><a class="ref" href="maxima_35.html#remfunction">remfunction</a></code><!-- /@w -->
+unbind macro function definitions and remove names from <code class="code">macros</code>.
+</p>
+<p><code class="code"><a class="ref" href="maxima_35.html#fundef">fundef</a></code> or <code class="code"><a class="ref" href="maxima_35.html#dispfun">dispfun</a></code> return a macro function definition or assign it
+to a label, respectively.
+</p>
+<p>Macro functions commonly contain <code class="code"><a class="ref" href="maxima_35.html#buildq">buildq</a></code> and <code class="code"><a class="ref" href="maxima_35.html#splice">splice</a></code> expressions to
+construct an expression, which is then evaluated.
+</p>
+<p>Examples
+</p>
+<p>A macro function quotes its arguments, so message (1) shows <code class="code">y - z</code>, not
+the value of <code class="code">y - z</code>.  The macro expansion (the quoted expression
+<code class="code">'(print (&quot;(2) x is equal to&quot;, x))</code>) is evaluated in the context from which
+the macro was called, printing message (2).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x: %pi$
+(%i2) y: 1234$
+(%i3) z: 1729 * w$
+(%i4) printq1 (x) ::= block (print (&quot;(1) x is equal to&quot;, x),
+      '(print (&quot;(2) x is equal to&quot;, x)))$
+(%i5) printq1 (y - z);
+(1) x is equal to y - z
+(2) x is equal to %pi
+(%o5)                                 %pi
+</pre></div>
+
+<p>An ordinary function evaluates its arguments, so message (1) shows the value of
+<code class="code">y - z</code>.  The return value is not evaluated, so message (2) is not printed
+until the explicit evaluation <code class="code">''%</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x: %pi$
+(%i2) y: 1234$
+(%i3) z: 1729 * w$
+(%i4) printe1 (x) := block (print (&quot;(1) x is equal to&quot;, x),
+      '(print (&quot;(2) x is equal to&quot;, x)))$
+(%i5) printe1 (y - z);
+(1) x is equal to 1234 - 1729 w
+(%o5)                     print((2) x is equal to, x)
+(%i6) ''%;
+(2) x is equal to %pi
+(%o6)                                 %pi
+</pre></div>
+
+<p><code class="code">macroexpand</code> returns a macro expansion.
+<code class="code">macroexpand (foo (x))</code> followed by <code class="code">''%</code> is equivalent to
+<code class="code">foo (x)</code> when <code class="code">foo</code> is a macro function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x: %pi$
+(%i2) y: 1234$
+(%i3) z: 1729 * w$
+(%i4) g (x) ::= buildq ([x], print (&quot;x is equal to&quot;, x))$
+(%i5) macroexpand (g (y - z));
+(%o5)                     print(x is equal to, y - z)
+(%i6) ''%;
+x is equal to 1234 - 1729 w
+(%o6)                            1234 - 1729 w
+(%i7) g (y - z);
+x is equal to 1234 - 1729 w
+(%o7)                            1234 - 1729 w
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_003a_003d"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002f_003a_003d"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_003a_003d"><span class="category-def">Operator: </span><span><strong class="def-name">:=</strong><a class="copiable-link" href='#index-_003a_003d'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Function-definition-operator"></a>
+
+<p>The function definition operator.
+</p>
+<p><code class="code"><var class="var">f</var>(<var class="var">x_1</var>, ..., <var class="var">x_n</var>) := <var class="var">expr</var></code> defines a function named
+<var class="var">f</var> with arguments <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var> and function body
+<var class="var">expr</var>.  <code class="code">:=</code> never evaluates the function body (unless explicitly
+evaluated by quote-quote <code class="code">'<!-- /@w -->'</code>).
+The function body is evaluated every time the function is called.
+</p>
+<p><code class="code"><var class="var">f</var>[<var class="var">x_1</var>, ..., <var class="var">x_n</var>] := <var class="var">expr</var></code> defines a so-called
+<code class="code"><a class="ref" href="maxima_35.html#memoizing-function">memoizing function</a></code>.
+Its function body is evaluated just once for each distinct value of its arguments,
+and that value is returned, without evaluating the function body,
+whenever the arguments have those values again.
+(A function of this kind is also known as a &ldquo;array function&rdquo;.)
+</p>
+<p><code class="code"><var class="var">f</var>[<var class="var">x_1</var>, ..., <var class="var">x_n</var>](<var class="var">y_1</var>, ..., <var class="var">y_m</var>) := <var class="var">expr</var></code>
+is a special case of a <code class="code"><a class="ref" href="maxima_35.html#memoizing-function">memoizing function</a></code>.
+<code class="code"><var class="var">f</var>[<var class="var">x_1</var>, ..., <var class="var">x_n</var>]</code> is a <code class="code"><a class="ref" href="maxima_35.html#memoizing-function">memoizing function</a></code> which returns a lambda expression
+with arguments <code class="code"><var class="var">y_1</var>, ..., <var class="var">y_m</var></code>.
+The function body is evaluated once for each distinct value of <code class="code"><var class="var">x_1</var>, ..., <var class="var">x_n</var></code>,
+and the body of the lambda expression is that value.
+</p>
+<p>When the last or only function argument <var class="var">x_n</var> is a list of one element, the
+function defined by <code class="code">:=</code> accepts a variable number of arguments.  Actual
+arguments are assigned one-to-one to formal arguments <var class="var">x_1</var>, &hellip;,
+<var class="var">x_(n - 1)</var>, and any further actual arguments, if present, are assigned to
+<var class="var">x_n</var> as a list.
+</p>
+<p>All function definitions appear in the same namespace; defining a function
+<code class="code">f</code> within another function <code class="code">g</code> does not automatically limit the scope
+of <code class="code">f</code> to <code class="code">g</code>.  However, <code class="code">local(f)</code> makes the definition of
+function <code class="code">f</code> effective only within the block or other compound expression
+in which <code class="code"><a class="ref" href="maxima_35.html#local">local</a></code> appears.
+</p>
+<p>If some formal argument <var class="var">x_k</var> is a quoted symbol, the function defined by
+<code class="code">:=</code> does not evaluate the corresponding actual argument.  Otherwise all
+actual arguments are evaluated.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_35.html#define">define</a></code> and <code class="code"><a class="ref" href="#g_t_003a_003a_003d">::=</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">:=</code> never evaluates the function body (unless explicitly evaluated by
+quote-quote).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expr : cos(y) - sin(x);
+(%o1)                    cos(y) - sin(x)
+(%i2) F1 (x, y) := expr;
+(%o2)                   F1(x, y) := expr
+(%i3) F1 (a, b);
+(%o3)                    cos(y) - sin(x)
+(%i4) F2 (x, y) := ''expr;
+(%o4)              F2(x, y) := cos(y) - sin(x)
+(%i5) F2 (a, b);
+(%o5)                    cos(b) - sin(a)
+</pre></div>
+
+<p><code class="code">f(<var class="var">x_1</var>, ..., <var class="var">x_n</var>) := ...</code> defines an ordinary function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) G1(x, y) := (print (&quot;Evaluating G1 for x=&quot;, x, &quot;and y=&quot;, y),
+ x.y - y.x);
+(%o1) G1(x, y) := (print(&quot;Evaluating G1 for x=&quot;, x, &quot;and y=&quot;, 
+                                               y), x . y - y . x)
+(%i2) G1([1, a], [2, b]);
+Evaluating G1 for x= [1, a] and y= [2, b] 
+(%o2)                           0
+(%i3) G1([1, a], [2, b]);
+Evaluating G1 for x= [1, a] and y= [2, b] 
+(%o3)                           0
+</pre></div>
+
+<p><code class="code">f[<var class="var">x_1</var>, ..., <var class="var">x_n</var>] := ...</code> defines a <code class="code"><a class="ref" href="maxima_35.html#memoizing-function">memoizing function</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) G2[a] := (print (&quot;Evaluating G2 for a=&quot;, a), a^2);
+                                                     2
+(%o1)     G2  := (print(&quot;Evaluating G2 for a=&quot;, a), a )
+            a
+(%i2) G2[1234];
+Evaluating G2 for a= 1234 
+(%o2)                        1522756
+(%i3) G2[1234];
+(%o3)                        1522756
+(%i4) G2[2345];
+Evaluating G2 for a= 2345 
+(%o4)                        5499025
+(%i5) arrayinfo (G2);
+(%o5)              [hashed, 1, [1234], [2345]]
+(%i6) listarray (G2);
+(%o6)                  [1522756, 5499025]
+</pre></div>
+
+<p><code class="code"><var class="var">f</var>[<var class="var">x_1</var>, ..., <var class="var">x_n</var>](<var class="var">y_1</var>, ..., <var class="var">y_m</var>) := <var class="var">expr</var></code>
+is a special case of a <code class="code"><a class="ref" href="maxima_35.html#memoizing-function">memoizing function</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) G3[n](x) := (print (&quot;Evaluating G3 for n=&quot;, n), diff (sin(x)^2,
+ x, n));
+(%o1) G3 (x) := (print(&quot;Evaluating G3 for n=&quot;, n), 
+        n
+                                                     2
+                                             diff(sin (x), x, n))
+(%i2) G3[2];
+Evaluating G3 for n= 2 
+                                2           2
+(%o2)          lambda([x], 2 cos (x) - 2 sin (x))
+(%i3) G3[2];
+                                2           2
+(%o3)          lambda([x], 2 cos (x) - 2 sin (x))
+(%i4) G3[2](1);
+                           2           2
+(%o4)                 2 cos (1) - 2 sin (1)
+(%i5) arrayinfo (G3);
+(%o5)                   [hashed, 1, [2]]
+(%i6) listarray (G3);
+                                2           2
+(%o6)         [lambda([x], 2 cos (x) - 2 sin (x))]
+</pre></div>
+
+<p>When the last or only function argument <var class="var">x_n</var> is a list of one element,
+the function defined by <code class="code">:=</code> accepts a variable number of arguments.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) H ([L]) := apply (&quot;+&quot;, L);
+(%o1)                H([L]) := apply(&quot;+&quot;, L)
+(%i2) H (a, b, c);
+(%o2)                       c + b + a
+</pre></div>
+
+<p><code class="code">local</code> makes a local function definition.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) foo (x) := 1 - x;
+(%o1)                    foo(x) := 1 - x
+(%i2) foo (100);
+(%o2)                         - 99
+(%i3) block (local (foo), foo (x) := 2 * x, foo (100));
+(%o3)                          200
+(%i4) foo (100);
+(%o4)                         - 99
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Operators_002fnode_002fUser-defined-operators"></a><hr>
+</div>
+<div class="section-level-extent" id="User-defined-operators">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Assignment-operators" accesskey="p" rel="prev">Assignment operators</a>, Up: <a href="#Operators" accesskey="u" rel="up">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="User-defined-operators-1">7.7 User defined operators</h3>
+
+<a class="anchor" id="infix"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002finfix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-infix"><span class="category-def">Function: </span><span><strong class="def-name">infix</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">infix</code> (<var class="var">op</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">infix</code> (<var class="var">op</var>, <var class="var">lbp</var>, <var class="var">rbp</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">infix</code> (<var class="var">op</var>, <var class="var">lbp</var>, <var class="var">rbp</var>, <var class="var">lpos</var>, <var class="var">rpos</var>, <var class="var">pos</var>)</var><a class="copiable-link" href='#index-infix'> &para;</a></span></dt>
+<dd>
+<p>Declares <var class="var">op</var> to be an infix operator.  An infix operator is a function of
+two arguments, with the name of the function written between the arguments.
+For example, the subtraction operator <code class="code">-</code> is an infix operator.
+</p>
+<p><code class="code">infix (<var class="var">op</var>)</code> declares <var class="var">op</var> to be an infix operator with default
+binding powers (left and right both equal to 180) and parts of speech (left and
+right both equal to <code class="code">any</code>).
+</p>
+<p><code class="code">infix (<var class="var">op</var>, <var class="var">lbp</var>, <var class="var">rbp</var>)</code> declares <var class="var">op</var> to be an infix
+operator with stated left and right binding powers and default parts of speech
+(left and right both equal to <code class="code">any</code>).
+</p>
+<p><code class="code">infix (<var class="var">op</var>, <var class="var">lbp</var>, <var class="var">rbp</var>, <var class="var">lpos</var>, <var class="var">rpos</var>, <var class="var">pos</var>)</code>
+declares <var class="var">op</var> to be an infix operator with stated left and right binding
+powers and parts of speech <var class="var">lpos</var>, <var class="var">rpos</var>, and <var class="var">pos</var> for the left
+operand, the right operand, and the operator result, respectively.
+</p>
+<p>&quot;Part of speech&quot;, in reference to operator declarations, means expression type.
+Three types are recognized: <code class="code">expr</code>, <code class="code">clause</code>, and <code class="code">any</code>,
+indicating an algebraic expression, a Boolean expression, or any kind of
+expression, respectively.  Maxima can detect some syntax errors by comparing the
+declared part of speech to an actual expression.
+</p>
+<p>The precedence of <var class="var">op</var> with respect to other operators derives from the left
+and right binding powers of the operators in question.  If the left and right
+binding powers of <var class="var">op</var> are both greater the left and right binding powers of
+some other operator, then <var class="var">op</var> takes precedence over the other operator.
+If the binding powers are not both greater or less, some more complicated
+relation holds.
+</p>
+<p>The associativity of <var class="var">op</var> depends on its binding powers.  Greater left
+binding power (<var class="var">lbp</var>) implies an instance of <var class="var">op</var> is evaluated before
+other operators to its left in an expression, while greater right binding power
+(<var class="var">rbp</var>) implies  an instance of <var class="var">op</var> is evaluated before other operators
+to its right in an expression.  Thus greater <var class="var">lbp</var> makes <var class="var">op</var>
+right-associative, while greater <var class="var">rbp</var> makes <var class="var">op</var> left-associative.
+If <var class="var">lbp</var> is equal to <var class="var">rbp</var>, <var class="var">op</var> is left-associative.
+</p>
+<p>See also <a class="ref" href="#Introduction-to-operators">Introduction to operators</a>.
+</p>
+<p>Examples:
+</p>
+<p>If the left and right binding powers of <var class="var">op</var> are both greater
+the left and right binding powers of some other operator,
+then <var class="var">op</var> takes precedence over the other operator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) :lisp (get '$+ 'lbp)
+100
+(%i1) :lisp (get '$+ 'rbp)
+100
+(%i1) infix (&quot;##&quot;, 101, 101);
+(%o1)                          ##
+(%i2) &quot;##&quot;(a, b) := sconcat(&quot;(&quot;, a, &quot;,&quot;, b, &quot;)&quot;);
+(%o2)       (a ## b) := sconcat(&quot;(&quot;, a, &quot;,&quot;, b, &quot;)&quot;)
+(%i3) 1 + a ## b + 2;
+(%o3)                       (a,b) + 3
+(%i4) infix (&quot;##&quot;, 99, 99);
+(%o4)                          ##
+(%i5) 1 + a ## b + 2;
+(%o5)                       (a+1,b+2)
+</pre></div>
+
+<p>Greater <var class="var">lbp</var> makes <var class="var">op</var> right-associative,
+while greater <var class="var">rbp</var> makes <var class="var">op</var> left-associative.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) infix (&quot;##&quot;, 100, 99);
+(%o1)                          ##
+(%i2) &quot;##&quot;(a, b) := sconcat(&quot;(&quot;, a, &quot;,&quot;, b, &quot;)&quot;)$
+(%i3) foo ## bar ## baz;
+(%o3)                    (foo,(bar,baz))
+(%i4) infix (&quot;##&quot;, 100, 101);
+(%o4)                          ##
+(%i5) foo ## bar ## baz;
+(%o5)                    ((foo,bar),baz)
+</pre></div>
+
+<p>Maxima can detect some syntax errors by comparing the
+declared part of speech to an actual expression.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) infix (&quot;##&quot;, 100, 99, expr, expr, expr);
+(%o1)                          ##
+(%i2) if x ## y then 1 else 0;
+Incorrect syntax: Found algebraic expression where logical
+expression expected
+if x ## y then 
+             ^
+(%i2) infix (&quot;##&quot;, 100, 99, expr, expr, clause);
+(%o2)                          ##
+(%i3) if x ## y then 1 else 0;
+(%o3)                if x ## y then 1 else 0
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Syntax">Syntax</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="matchfix"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002fmatchfix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-matchfix"><span class="category-def">Function: </span><span><strong class="def-name">matchfix</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">matchfix</code> (<var class="var">ldelimiter</var>, <var class="var">rdelimiter</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">matchfix</code> (<var class="var">ldelimiter</var>, <var class="var">rdelimiter</var>, <var class="var">arg_pos</var>, <var class="var">pos</var>)</var><a class="copiable-link" href='#index-matchfix'> &para;</a></span></dt>
+<dd>
+<p>Declares a matchfix operator with left and right delimiters <var class="var">ldelimiter</var>
+and <var class="var">rdelimiter</var>.  The delimiters are specified as strings.
+</p>
+<p>A &quot;matchfix&quot; operator is a function of any number of arguments,
+such that the arguments occur between matching left and right delimiters.
+The delimiters may be any strings, so long as the parser can
+distinguish the delimiters from the operands 
+and other expressions and operators.
+In practice this rules out unparseable delimiters such as
+<code class="code">%</code>, <code class="code">,</code>, <code class="code">$</code> and <code class="code">;</code>, 
+and may require isolating the delimiters with white space.
+The right delimiter can be the same or different from the left delimiter.
+</p>
+<p>A left delimiter can be associated with only one right delimiter;
+two different matchfix operators cannot have the same left delimiter.
+</p>
+<p>An existing operator may be redeclared as a matchfix operator
+without changing its other properties.
+In particular, built-in operators such as addition <code class="code">+</code> can
+be declared matchfix,
+but operator functions cannot be defined for built-in operators.
+</p>
+<p>The command <code class="code">matchfix (<var class="var">ldelimiter</var>, <var class="var">rdelimiter</var>, <var class="var">arg_pos</var>,
+<var class="var">pos</var>)</code> declares the argument part-of-speech <var class="var">arg_pos</var> and result
+part-of-speech <var class="var">pos</var>, and the delimiters <var class="var">ldelimiter</var> and
+<var class="var">rdelimiter</var>.
+</p>
+<p>&quot;Part of speech&quot;, in reference to operator declarations, means expression type.
+Three types are recognized: <code class="code">expr</code>, <code class="code">clause</code>, and <code class="code">any</code>,
+indicating an algebraic expression, a Boolean expression, or any kind of
+expression, respectively.
+Maxima can detect some syntax errors by comparing the
+declared part of speech to an actual expression.
+</p>
+
+<p>The function to carry out a matchfix operation is an ordinary
+user-defined function.
+The operator function is defined
+in the usual way
+with the function definition operator <code class="code">:=</code> or <code class="code">define</code>.
+The arguments may be written between the delimiters,
+or with the left delimiter as a quoted string and the arguments
+following in parentheses.
+<code class="code">dispfun (<var class="var">ldelimiter</var>)</code> displays the function definition.
+</p>
+<p>The only built-in matchfix operator is the list constructor <code class="code">[ ]</code>.
+Parentheses <code class="code">( )</code> and double-quotes <code class="code">&quot; &quot;</code> 
+act like matchfix operators,
+but are not treated as such by the Maxima parser.
+</p>
+<p><code class="code">matchfix</code> evaluates its arguments.
+<code class="code">matchfix</code> returns its first argument, <var class="var">ldelimiter</var>.
+</p>
+<p>Examples:
+</p>
+<p>Delimiters may be almost any strings.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) matchfix (&quot;@@&quot;, &quot;~&quot;);
+(%o1)                          @@
+(%i2) @@ a, b, c ~;
+(%o2)                      @@a, b, c~
+(%i3) matchfix (&quot;&gt;&gt;&quot;, &quot;&lt;&lt;&quot;);
+(%o3)                          &gt;&gt;
+(%i4) &gt;&gt; a, b, c &lt;&lt;;
+(%o4)                      &gt;&gt;a, b, c&lt;&lt;
+(%i5) matchfix (&quot;foo&quot;, &quot;oof&quot;);
+(%o5)                          foo
+(%i6) foo a, b, c oof;
+(%o6)                     fooa, b, coof
+(%i7) &gt;&gt; w + foo x, y oof + z &lt;&lt; / @@ p, q ~;
+                     &gt;&gt;z + foox, yoof + w&lt;&lt;
+(%o7)                ----------------------
+                            @@p, q~
+</pre></div>
+
+<p>Matchfix operators are ordinary user-defined functions.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) matchfix (&quot;!-&quot;, &quot;-!&quot;);
+(%o1)                         &quot;!-&quot;
+(%i2) !- x, y -! := x/y - y/x;
+                                    x   y
+(%o2)                   !-x, y-! := - - -
+                                    y   x
+(%i3) define (!-x, y-!, x/y - y/x);
+                                    x   y
+(%o3)                   !-x, y-! := - - -
+                                    y   x
+(%i4) define (&quot;!-&quot; (x, y), x/y - y/x);
+                                    x   y
+(%o4)                   !-x, y-! := - - -
+                                    y   x
+(%i5) dispfun (&quot;!-&quot;);
+                                    x   y
+(%t5)                   !-x, y-! := - - -
+                                    y   x
+
+(%o5)                         done
+(%i6) !-3, 5-!;
+                                16
+(%o6)                         - --
+                                15
+(%i7) &quot;!-&quot; (3, 5);
+                                16
+(%o7)                         - --
+                                15
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Syntax">Syntax</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="function_005fnary"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002fnary"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nary"><span class="category-def">Function: </span><span><strong class="def-name">nary</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">nary</code> (<var class="var">op</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">nary</code> (<var class="var">op</var>, <var class="var">bp</var>, <var class="var">arg_pos</var>, <var class="var">pos</var>)</var><a class="copiable-link" href='#index-nary'> &para;</a></span></dt>
+<dd>
+<p>An <code class="code">nary</code> operator is used to denote a function of any number of arguments,
+each of which is separated by an occurrence of the operator, e.g.  A+B or A+B+C.
+The <code class="code">nary(&quot;x&quot;)</code> function is a syntax extension function to declare <code class="code">x</code>
+to be an <code class="code">nary</code> operator.  Functions may be declared to be <code class="code">nary</code>.  If
+<code class="code">declare(j,nary);</code> is done, this tells the simplifier to simplify, e.g.
+<code class="code">j(j(a,b),j(c,d))</code> to <code class="code">j(a, b, c, d)</code>.
+</p>
+<p>See also <a class="ref" href="#Introduction-to-operators">Introduction to operators</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Syntax">Syntax</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="nofix"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002fnofix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nofix"><span class="category-def">Function: </span><span><strong class="def-name">nofix</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">nofix</code> (<var class="var">op</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">nofix</code> (<var class="var">op</var>, <var class="var">pos</var>)</var><a class="copiable-link" href='#index-nofix'> &para;</a></span></dt>
+<dd>
+<p><code class="code">nofix</code> operators are used to denote functions of no arguments.
+The mere presence of such an operator in a command will cause the
+corresponding function to be evaluated.  For example, when one types
+&quot;exit;&quot; to exit from a Maxima break, &quot;exit&quot; is behaving similar to a
+<code class="code">nofix</code> operator.  The function <code class="code">nofix(&quot;x&quot;)</code> is a syntax extension
+function which declares <code class="code">x</code> to be a <code class="code">nofix</code> operator.
+</p>
+<p>See also <a class="ref" href="#Introduction-to-operators">Introduction to operators</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Syntax">Syntax</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="postfix"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002fpostfix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-postfix"><span class="category-def">Function: </span><span><strong class="def-name">postfix</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">postfix</code> (<var class="var">op</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">postfix</code> (<var class="var">op</var>, <var class="var">lbp</var>, <var class="var">lpos</var>, <var class="var">pos</var>)</var><a class="copiable-link" href='#index-postfix'> &para;</a></span></dt>
+<dd>
+<p><code class="code">postfix</code> operators like the <code class="code">prefix</code> variety denote functions of a
+single argument, but in this case the argument immediately precedes an
+occurrence of the operator in the input string, e.g. 3!.  The
+<code class="code">postfix(&quot;x&quot;)</code> function is a syntax extension function to declare <code class="code">x</code>
+to be a <code class="code">postfix</code> operator.
+</p>
+<p>See also <a class="ref" href="#Introduction-to-operators">Introduction to operators</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Syntax">Syntax</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="prefix"></a><a class="anchor" id="Item_003a-Operators_002fdeffn_002fprefix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-prefix"><span class="category-def">Function: </span><span><strong class="def-name">prefix</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">prefix</code> (<var class="var">op</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">prefix</code> (<var class="var">op</var>, <var class="var">rbp</var>, <var class="var">rpos</var>, <var class="var">pos</var>)</var><a class="copiable-link" href='#index-prefix'> &para;</a></span></dt>
+<dd>
+<p>A <code class="code">prefix</code> operator is one which signifies a function of one argument,
+which argument immediately follows an occurrence of the operator.
+<code class="code">prefix(&quot;x&quot;)</code> is a syntax extension function to declare <code class="code">x</code> to be a
+<code class="code">prefix</code> operator.
+</p>
+<p>See also <a class="ref" href="#Introduction-to-operators">Introduction to operators</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Syntax">Syntax</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_7.html#Evaluation" accesskey="n" rel="next">Evaluation</a>, Previous: <a href="maxima_5.html#Expressions" accesskey="p" rel="prev">Expressions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

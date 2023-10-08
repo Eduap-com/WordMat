@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for odepack</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for odepack">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for odepack">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_325.html#odepack_002dpkg" rel="up" title="odepack-pkg">
+<link href="maxima_329.html#operatingsystem_002dpkg" rel="next" title="operatingsystem-pkg">
+<link href="maxima_327.html#Getting-Started-with-ODEPACK" rel="previous" title="Getting Started with ODEPACK">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-odepack"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_329.html#operatingsystem_002dpkg" accesskey="n" rel="next">operatingsystem-pkg</a>, Previous: <a href="maxima_327.html#Getting-Started-with-ODEPACK" accesskey="p" rel="previous">Getting Started with ODEPACK</a>, Up: <a href="maxima_325.html#odepack_002dpkg" accesskey="u" rel="up">odepack-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-odepack-1"></a>
+<h3 class="section">77.2 Functions and Variables for odepack</h3>
+
+<a name="dlsode_005finit"></a><a name="Item_003a-odepack_002fdeffn_002fdlsode_005finit"></a><dl>
+<dt><a name="index-dlsode_005finit"></a>Function: <strong>dlsode_init</strong> <em>(<var>fex</var>, <var>vars</var>, <var>method</var>)</em></dt>
+<dd>
+<p>This must be called before running the solver.  This function returns
+a state object for use in the solver.  The user must not modify the
+state.
+</p>
+<p>The ODE to be solved is given in <var>fex</var>, which is a list of the
+equations.  <var>vars</var> is a list of independent variable and the
+dependent variables.  The list of dependent variables must be in the
+same order as the equations if <var>fex</var>.  Finally, <var>method</var>
+indicates the method to be used by the solver:
+</p>
+<dl compact="compact">
+<dt><code>10</code></dt>
+<dd><p>Nonstiff (Adams) method, no Jacobian used.
+</p></dd>
+<dt><code>21</code></dt>
+<dd><p>Stiff (BDF) method, user-supplied full Jacobian.
+</p></dd>
+<dt><code>22</code></dt>
+<dd><p>Stiff method, internally generated full Jacobian.
+</p></dd>
+</dl>
+
+<p>The returned state object is a list of lists.  The sublist is a list
+of two elements:
+</p><dl compact="compact">
+<dt><code>f</code></dt>
+<dd><p>The compiled function for the ODE.
+</p></dd>
+<dt><code>vars</code></dt>
+<dd><p>The list independent and dependent variables (<var>vars</var>).
+</p></dd>
+<dt><code>mf</code></dt>
+<dd><p>The method to be used (<var>method</var>).
+</p></dd>
+<dt><code>neq</code></dt>
+<dd><p>The number of equations.
+</p></dd>
+<dt><code>lrw</code></dt>
+<dd><p>Length of the work vector for real values.
+</p></dd>
+<dt><code>liw</code></dt>
+<dd><p>Length of the work vector for integer values.
+</p></dd>
+<dt><code>rwork</code></dt>
+<dd><p>Lisp array holding the real-valued work vector.
+</p></dd>
+<dt><code>iwork</code></dt>
+<dd><p>Lisp array holding the integer-valued work vector.
+</p></dd>
+<dt><code>fjac</code></dt>
+<dd><p>Compiled analytical Jacobian of the equations
+</p></dd>
+</dl>
+
+<p>See also <code><a href="#dlsode_005fstep">dlsode_step</a></code>.  See <a href="maxima_327.html#Getting-Started-with-ODEPACK">Getting Started with ODEPACK</a> for
+an example of usage.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-odepack">Package odepack</a>
+&middot;</div>
+</dd></dl>
+
+<a name="dlsode_005fstep"></a><a name="Item_003a-odepack_002fdeffn_002fdlsode_005fstep"></a><dl>
+<dt><a name="index-dlsode_005fstep"></a>Function: <strong>dlsode_step</strong> <em>(<var>inity</var>, <var>t</var>, <var>tout</var>, <var>rtol</var>, <var>atol</var>, <var>istate</var>, <var>state</var>)</em></dt>
+<dd>
+<p>Performs one step of the solver, returning the values of the
+independent and dependent variables, a success or error code.
+</p>
+<dl compact="compact">
+<dt><code>inity</code></dt>
+<dd><p>For the first call (when istate = 1), the initial values
+</p></dd>
+<dt><code>t</code></dt>
+<dd><p>Current value of the independent value
+</p></dd>
+<dt><code>tout</code></dt>
+<dd><p>Next point where output is desired which must not be equal to <var>t</var>.
+</p></dd>
+<dt><code>rtol</code></dt>
+<dd><p>relative tolerance parameter
+</p></dd>
+<dt><code>atol</code></dt>
+<dd><p>Absolute tolerance parameter, scalar of vector.  If
+scalar, it applies to all dependent variables.
+Otherwise it must be the tolerance for each dependent
+variable.
+</p>
+<p>Use <var>rtol</var> = 0 for pure absolute error and use <var>atol</var> = 0
+for pure relative error.
+</p>         
+</dd>
+<dt><code>istate</code></dt>
+<dd><p>1 for the first call to dlsode, 2 for subsequent calls.
+</p></dd>
+<dt><code>state</code></dt>
+<dd><p>state returned by dlsode_init.
+</p></dd>
+</dl>
+
+<p>The output is a list of the following items:
+</p><dl compact="compact">
+<dt><code>t</code></dt>
+<dd><p>independent variable value
+</p></dd>
+<dt><code>y</code></dt>
+<dd><p>list of values of the dependent variables at time t.
+</p></dd>
+<dt><code>istate</code></dt>
+<dd><p>Integration status:
+</p><dl compact="compact">
+<dt><code>1</code></dt>
+<dd><p>no work because tout = tt
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>successful result
+</p></dd>
+<dt><code>-1</code></dt>
+<dd><p>Excess work done on this call
+</p></dd>
+<dt><code>-2</code></dt>
+<dd><p>Excess accuracy requested
+</p></dd>
+<dt><code>-3</code></dt>
+<dd><p>Illegal input detected
+</p></dd>
+<dt><code>-4</code></dt>
+<dd><p>Repeated error test failures
+</p></dd>
+<dt><code>-5</code></dt>
+<dd><p>Repeated convergence failures (perhaps bad Jacobian or wrong choice of
+mf or tolerances)
+</p></dd>
+<dt><code>-6</code></dt>
+<dd><p>Error weight because zero during problem (solution component is
+vanished and atol(i) = 0.
+</p></dd>
+</dl>
+</dd>
+<dt><code>info</code></dt>
+<dd><p>association list of various bits of information:
+</p><dl compact="compact">
+<dt><code>n_steps</code></dt>
+<dd><p>total steps taken thus far
+</p></dd>
+<dt><code>n_f_eval</code></dt>
+<dd><p>total number of function evals
+</p></dd>
+<dt><code>n_j_eval</code></dt>
+<dd><p>total number of Jacobian evals
+</p></dd>
+<dt><code>method_order</code></dt>
+<dd><p>method order
+</p></dd>
+<dt><code>len_rwork</code></dt>
+<dd><p>Actual length used for real work array
+</p></dd>
+<dt><code>len_iwork</code></dt>
+<dd><p>Actual length used for integer work array
+</p></dd>
+</dl>
+</dd>
+</dl>
+
+<p>See also <code><a href="#dlsode_005finit">dlsode_init</a></code>.  See <a href="maxima_327.html#Getting-Started-with-ODEPACK">Getting Started with ODEPACK</a> for
+an example of usage.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-odepack">Package odepack</a>
+&middot;</div>
+</dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_329.html#operatingsystem_002dpkg" accesskey="n" rel="next">operatingsystem-pkg</a>, Previous: <a href="maxima_327.html#Getting-Started-with-ODEPACK" accesskey="p" rel="previous">Getting Started with ODEPACK</a>, Up: <a href="maxima_325.html#odepack_002dpkg" accesskey="u" rel="up">odepack-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

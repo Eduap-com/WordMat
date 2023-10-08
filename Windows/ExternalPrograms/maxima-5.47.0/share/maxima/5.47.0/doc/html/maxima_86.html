@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>simplification-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="simplification-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="simplification-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_87.html#solve_005frec_002dpkg" rel="next" title="solve_rec-pkg">
+<link href="maxima_85.html#simplex_002dpkg" rel="prev" title="simplex-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="simplification_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_87.html#solve_005frec_002dpkg" accesskey="n" rel="next">solve_rec</a>, Previous: <a href="maxima_85.html#simplex_002dpkg" accesskey="p" rel="prev">simplex</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="simplification">87 simplification</h2>
+
+<a class="anchor" id="Item_003a-simplifications_002fnode_002fIntroduction-to-simplification"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-simplification" accesskey="1">Introduction to simplification</a></li>
+<li><a href="#Package-absimp" accesskey="2">Package absimp</a></li>
+<li><a href="#Package-facexp" accesskey="3">Package facexp</a></li>
+<li><a href="#Package-functs" accesskey="4">Package functs</a></li>
+<li><a href="#Package-ineq" accesskey="5">Package ineq</a></li>
+<li><a href="#Package-rducon" accesskey="6">Package rducon</a></li>
+<li><a href="#Package-scifac" accesskey="7">Package scifac</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-simplification">
+<div class="nav-panel">
+<p>
+Next: <a href="#Package-absimp" accesskey="n" rel="next">Package absimp</a>, Previous: <a href="#simplification_002dpkg" accesskey="p" rel="prev">simplification</a>, Up: <a href="#simplification_002dpkg" accesskey="u" rel="up">simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-simplification-1">87.1 Introduction to simplification</h3>
+
+<p>The directory <code class="code">maxima/share/simplification</code> contains several scripts
+which implement simplification rules and functions,
+and also some functions not related to simplification.
+</p>
+
+<a class="anchor" id="Item_003a-simplifications_002fnode_002fPackage-absimp"></a><hr>
+</div>
+<div class="section-level-extent" id="Package-absimp">
+<div class="nav-panel">
+<p>
+Next: <a href="#Package-facexp" accesskey="n" rel="next">Package facexp</a>, Previous: <a href="#Introduction-to-simplification" accesskey="p" rel="prev">Introduction to simplification</a>, Up: <a href="#simplification_002dpkg" accesskey="u" rel="up">simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Package-absimp-1">87.2 Package absimp</h3>
+
+<p>The <code class="code">absimp</code> package contains pattern-matching rules that
+extend the built-in simplification rules for the <code class="code">abs</code> and <code class="code">signum</code>
+functions.
+<code class="code">absimp</code> respects relations
+established with the built-in <code class="code">assume</code> function and by declarations such
+as  <code class="code">mode_declare (m, even, n, odd)</code>  for even or odd integers.
+</p>
+<p><code class="code">absimp</code> defines <code class="code">unitramp</code> and <code class="code">unitstep</code> functions
+in terms of <code class="code">abs</code> and <code class="code">signum</code>.
+</p>
+<p><code class="code">load (&quot;absimp&quot;)</code> loads this package.
+<code class="code">demo (&quot;absimp&quot;)</code> shows a demonstration of this package.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;absimp&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) (abs (x))^2;
+                                2
+(%o2)                          x
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) diff (abs (x), x);
+                               x
+(%o3)                        ------
+                             abs(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) cosh (abs (x));
+(%o4)                        cosh(x)
+</pre></div></div>
+
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Rules-and-patterns">Rules and patterns</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-absimp">Package absimp</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-simplifications_002fnode_002fPackage-facexp"></a><hr>
+</div>
+<div class="section-level-extent" id="Package-facexp">
+<div class="nav-panel">
+<p>
+Next: <a href="#Package-functs" accesskey="n" rel="next">Package functs</a>, Previous: <a href="#Package-absimp" accesskey="p" rel="prev">Package absimp</a>, Up: <a href="#simplification_002dpkg" accesskey="u" rel="up">simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Package-facexp-1">87.3 Package facexp</h3>
+
+<p>The <code class="code">facexp</code> package contains several related  functions that
+provide the user with the ability to structure expressions by controlled
+expansion.   This capability  is especially  useful when  the expression
+contains variables that have physical meaning, because it is  often true
+that the most economical form  of such an expression can be  obtained by
+fully expanding the expression with respect to those variables, and then
+factoring their coefficients.  While it is  true that this  procedure is
+not difficult to carry out using standard Maxima  functions, additional
+fine-tuning may also  be desirable, and  these finishing touches  can be
+more  difficult to  apply.
+</p>
+<p>The  function <code class="code">facsum</code>  and its  related forms
+provide a convenient means for controlling the structure  of expressions
+in this way.  Another function, <code class="code">collectterms</code>, can be used to add  two or
+more expressions that have already been simplified to this form, without
+resimplifying the whole expression again.  This function may be
+useful when the expressions are very large.
+</p>
+
+<p><code class="code">load (&quot;facexp&quot;)</code> loads this package.
+<code class="code">demo (&quot;facexp&quot;)</code> shows a demonstration of this package.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="facsum"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002ffacsum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-facsum"><span class="category-def">Function: </span><span><strong class="def-name">facsum</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">arg_1</var>, ..., <var class="var">arg_n</var>)</var><a class="copiable-link" href='#index-facsum'> &para;</a></span></dt>
+<dd><p>Returns  a form  of <var class="var">expr</var>  which depends  on the
+arguments <var class="var">arg_1</var>, ..., <var class="var">arg_n</var>.
+The arguments can be any form suitable for <code class="code">ratvars</code>, or they can be
+lists  of such  forms.  If  the arguments  are not  lists, then  the form
+returned is  fully expanded with respect  to the arguments,  and the
+coefficients of the arguments are factored.  These  coefficients are
+free of the arguments, except perhaps in a non-rational sense.
+</p>
+<p>If any of the arguments are  lists, then all such lists are combined
+into  a  single  list,   and  instead  of  calling  <code class="code">factor</code>   on  the
+coefficients  of  the  arguments,  <code class="code">facsum</code>  calls  itself   on  these
+coefficients, using  this newly constructed  single list as  the new
+argument list  for this  recursive  call.  This  process can  be  repeated to
+arbitrary depth by nesting the desired elements in lists.
+</p>
+<p>It is possible that one may wish to <code class="code">facsum</code> with respect  to more
+complicated subexpressions,  such as  <code class="code">log (x + y)</code>.  Such  arguments are
+also  permissible.   
+</p>
+
+<p>Occasionally the user may wish to obtain any of the  above forms
+for expressions which are specified only by their leading operators.
+For example, one may wish  to <code class="code">facsum</code> with respect to all  <code class="code">log</code>&rsquo;s.  In
+this situation, one may  include among the arguments either  the specific
+<code class="code">log</code>&rsquo;s which are to be treated in this way, or  alternatively, either
+the expression  <code class="code">operator (log)</code> or <code class="code">'operator (log)</code>.   If one  wished to
+<code class="code">facsum</code> the expression <var class="var">expr</var> with respect to the operators <var class="var">op_1</var>, ..., <var class="var">op_n</var>,
+one   would  evaluate  <code class="code">facsum (<var class="var">expr</var>, operator (<var class="var">op_1</var>, ..., <var class="var">op_n</var>))</code>.
+The <code class="code">operator</code> form may also appear inside list arguments.
+</p>
+<p>In  addition,  the  setting  of  the  switches   <code class="code">facsum_combine</code>  and
+<code class="code">nextlayerfactor</code> may affect the result of <code class="code">facsum</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="nextlayerfactor"></a><a class="anchor" id="Item_003a-simplifications_002fdefvr_002fnextlayerfactor"></a><dl class="first-defvr">
+<dt class="defvr" id="index-nextlayerfactor"><span class="category-def">Global variable: </span><span><strong class="def-name">nextlayerfactor</strong><a class="copiable-link" href='#index-nextlayerfactor'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">nextlayerfactor</code> is <code class="code">true</code>, recursive calls  of <code class="code">facsum</code>
+are applied  to  the  factors  of  the  factored  form   of  the
+coefficients of the arguments.
+</p>
+<p>When  <code class="code">false</code>, <code class="code">facsum</code> is applied to
+each coefficient as a whole whenever recursive calls to  <code class="code">facsum</code> occur.
+</p>
+<p>Inclusion   of   the  atom
+<code class="code">nextlayerfactor</code> in  the argument  list of <code class="code">facsum</code>  has the  effect of
+<code class="code">nextlayerfactor: true</code>, but for the next level of the expression <i class="i">only</i>.
+Since <code class="code">nextlayerfactor</code> is  always bound to  either <code class="code">true</code> or  <code class="code">false</code>, it
+must be presented single-quoted whenever it appears in the argument list of <code class="code">facsum</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="facsum_005fcombine"></a><a class="anchor" id="Item_003a-simplifications_002fdefvr_002ffacsum_005fcombine"></a><dl class="first-defvr">
+<dt class="defvr" id="index-facsum_005fcombine"><span class="category-def">Global variable: </span><span><strong class="def-name">facsum_combine</strong><a class="copiable-link" href='#index-facsum_005fcombine'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">facsum_combine</code> controls the form  of the final result  returned by
+<code class="code">facsum</code>  when  its  argument  is  a  quotient  of   polynomials.   If
+<code class="code">facsum_combine</code> is <code class="code">false</code>  then the form will  be returned as  a fully
+expanded  sum  as described  above,  but if  <code class="code">true</code>,  then  the expression
+returned is a ratio of polynomials, with each polynomial in the form
+described above.
+</p>
+<p>The <code class="code">true</code> setting of this switch is useful when one
+wants to  <code class="code">facsum</code> both  the numerator and  denominator of  a rational
+expression,  but  does not  want  the denominator  to  be multiplied
+through the terms of the numerator.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="factorfacsum"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002ffactorfacsum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-factorfacsum"><span class="category-def">Function: </span><span><strong class="def-name">factorfacsum</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">arg_1</var>, ... <var class="var">arg_n</var>)</var><a class="copiable-link" href='#index-factorfacsum'> &para;</a></span></dt>
+<dd><p>Returns a  form of <var class="var">expr</var>  which is
+obtained by calling  <code class="code">facsum</code> on the factors  of <var class="var">expr</var> with <var class="var">arg_1</var>, ... <var class="var">arg_n</var> as
+arguments.  If any of the factors of <var class="var">expr</var> is raised to a  power, both
+the factor and the exponent will be processed in this way.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="collectterms"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fcollectterms"></a><dl class="first-deffn">
+<dt class="deffn" id="index-collectterms"><span class="category-def">Function: </span><span><strong class="def-name">collectterms</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">arg_1</var>, &hellip;, <var class="var">arg_n</var>)</var><a class="copiable-link" href='#index-collectterms'> &para;</a></span></dt>
+<dd>
+<p>Collects all terms that contain <var class="var">arg_1</var> ... <var class="var">arg_n</var>.
+If several expressions have been simplified  with the following functions
+<code class="code">facsum</code>, <code class="code">factorfacsum</code>, <code class="code">factenexpand</code>, <code class="code">facexpten</code> or
+<code class="code">factorfacexpten</code>, and they are to be added together, it may be desirable
+to combine them using the function  <code class="code">collecterms</code>.  <code class="code">collecterms</code> can
+take as arguments all of the arguments that can be given to these other
+associated functions with the exception of <code class="code">nextlayerfactor</code>, which has no
+effect on <code class="code">collectterms</code>.  The advantage of <code class="code">collectterms</code> is that it
+returns a form  similar to <code class="code">facsum</code>, but since it is adding forms that have
+already been processed by <code class="code">facsum</code>, it does not need to repeat that effort.
+This capability is especially useful when the expressions to be summed are very
+large.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_13.html#factor">factor</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) (exp(x)+2)*x+exp(x);
+                             x          x
+(%o1)                   x (%e  + 2) + %e
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) collectterms(expand(%),exp(x));
+                                  x
+(%o2)                   (x + 1) %e  + 2 x
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-simplifications_002fnode_002fPackage-functs"></a><hr>
+</div>
+<div class="section-level-extent" id="Package-functs">
+<div class="nav-panel">
+<p>
+Next: <a href="#Package-ineq" accesskey="n" rel="next">Package ineq</a>, Previous: <a href="#Package-facexp" accesskey="p" rel="prev">Package facexp</a>, Up: <a href="#simplification_002dpkg" accesskey="u" rel="up">simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Package-functs-1">87.4 Package functs</h3>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+</div>
+
+<a class="anchor" id="rempart"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002frempart"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rempart"><span class="category-def">Function: </span><span><strong class="def-name">rempart</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-rempart'> &para;</a></span></dt>
+<dd><p>Removes part <var class="var">n</var> from the expression <var class="var">expr</var>.
+</p>
+<p>If <var class="var">n</var> is a list of the form <code class="code">[<var class="var">l</var>, <var class="var">m</var>]</code>
+then parts <var class="var">l</var> thru <var class="var">m</var> are removed.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="wronskian"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fwronskian"></a><dl class="first-deffn">
+<dt class="deffn" id="index-wronskian"><span class="category-def">Function: </span><span><strong class="def-name">wronskian</strong> <var class="def-var-arguments">([<var class="var">f_1</var>, ..., <var class="var">f_n</var>], <var class="var">x</var>)</var><a class="copiable-link" href='#index-wronskian'> &para;</a></span></dt>
+<dd><p>Returns the Wronskian matrix of the list of expressions [<var class="var">f_1</var>, ..., <var class="var">f_n</var>] in the variable <var class="var">x</var>.
+The determinant of the Wronskian matrix is the Wronskian determinant of the list of expressions.
+</p>
+<p>To use <code class="code">wronskian</code>, first <code class="code">load(&quot;functs&quot;)</code>. Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;functs&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) wronskian([f(x), g(x)],x);
+                    [   f(x)       g(x)    ]
+                    [                      ]
+(%o2)               [ d          d         ]
+                    [ -- (f(x))  -- (g(x)) ]
+                    [ dx         dx        ]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="tracematrix"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002ftracematrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tracematrix"><span class="category-def">Function: </span><span><strong class="def-name">tracematrix</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-tracematrix'> &para;</a></span></dt>
+<dd><p>Returns the trace (sum of the diagonal elements) of matrix <var class="var">M</var>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-simplifications_002fdeffn_002frational"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rational"><span class="category-def">Function: </span><span><strong class="def-name">rational</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-rational'> &para;</a></span></dt>
+<dd><p>Multiplies numerator and denominator of <var class="var">z</var> by the complex conjugate of denominator,
+thus rationalizing the denominator.
+Returns canonical rational expression (CRE) form if given one, else returns general form.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+<a class="anchor" id="nonzeroandfreeof"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fnonzeroandfreeof"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nonzeroandfreeof"><span class="category-def">Function: </span><span><strong class="def-name">nonzeroandfreeof</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">expr</var>)</var><a class="copiable-link" href='#index-nonzeroandfreeof'> &para;</a></span></dt>
+<dd><p>Returns <code class="code">true</code> if <var class="var">expr</var> is nonzero and <code class="code">freeof (<var class="var">x</var>, <var class="var">expr</var>)</code> returns <code class="code">true</code>.
+Returns <code class="code">false</code> otherwise.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-simplifications_002fdeffn_002flinear"></a><dl class="first-deffn">
+<dt class="deffn" id="index-linear"><span class="category-def">Function: </span><span><strong class="def-name">linear</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-linear'> &para;</a></span></dt>
+<dd><p>When <var class="var">expr</var> is an expression of the form <code class="code"><var class="var">a</var>*<var class="var">x</var> + <var class="var">b</var></code>
+where <var class="var">a</var> is nonzero, and <var class="var">a</var> and <var class="var">b</var> are free of <var class="var">x</var>,
+<code class="code">linear</code> returns a list of three equations, one for each of the three formal
+variables <var class="var">b</var>, <var class="var">a</var>, and <var class="var">x</var>. Otherwise, <code class="code">linear</code> returns <code class="code">false</code>.
+</p>
+<p><code class="code">load(&quot;antid&quot;)</code> loads this function.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) load (&quot;antid&quot;);
+(%o1)  /maxima/share/integration/antid.mac
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) linear ((1 - w)*(1 - x)*z, z);
+(%o2) [bargumentb = 0, aargumenta = (w - 1) x - w + 1, 
+                                                  xargumentx = z]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) linear (cos(u - v) + cos(u + v), u);
+(%o3)                         false
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-antid">Package antid</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="gcdivide"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fgcdivide"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gcdivide"><span class="category-def">Function: </span><span><strong class="def-name">gcdivide</strong> <var class="def-var-arguments">(<var class="var">p</var>, <var class="var">q</var>)</var><a class="copiable-link" href='#index-gcdivide'> &para;</a></span></dt>
+<dd>
+<p>When the option variable <code class="code">takegcd</code> is <code class="code">true</code> which is the default,
+<code class="code">gcdivide</code> divides the polynomials <var class="var">p</var> and <var class="var">q</var> by their greatest
+common divisor and returns the ratio of the results.  <code class="code">gcdivde</code> calls the
+function <code class="code"><a class="ref" href="maxima_13.html#ezgcd">ezgcd</a></code> to divide the polynomials by the greatest common divisor.
+</p>
+<p>When <code class="code">takegcd</code> is <code class="code">false</code>, <code class="code">gcdivide</code> returns the ratio
+<code class="code"><var class="var">p</var>/<var class="var">q</var></code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_13.html#ezgcd">ezgcd</a></code>, <code class="code"><a class="ref" href="maxima_13.html#gcd">gcd</a></code>, <code class="code"><a class="ref" href="maxima_13.html#gcdex">gcdex</a></code>, and
+<code class="code"><a class="ref" href="maxima_63.html#poly_005fgcd">poly_gcd</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;functs&quot;)$
+
+(%i2) p1:6*x^3+19*x^2+19*x+6; 
+                        3       2
+(%o2)                6 x  + 19 x  + 19 x + 6
+(%i3) p2:6*x^5+13*x^4+12*x^3+13*x^2+6*x;
+                  5       4       3       2
+(%o3)          6 x  + 13 x  + 12 x  + 13 x  + 6 x
+(%i4) gcdivide(p1, p2);
+                             x + 1
+(%o4)                        ------
+                              3
+                             x  + x
+(%i5) takegcd:false;
+(%o5)                         false
+(%i6) gcdivide(p1, p2);
+                       3       2
+                    6 x  + 19 x  + 19 x + 6
+(%o6)          ----------------------------------
+                  5       4       3       2
+               6 x  + 13 x  + 12 x  + 13 x  + 6 x
+(%i7) ratsimp(%);
+                             x + 1
+(%o7)                        ------
+                              3
+                             x  + x
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Polynomials">Polynomials</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="arithmetic"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002farithmetic"></a><dl class="first-deffn">
+<dt class="deffn" id="index-arithmetic"><span class="category-def">Function: </span><span><strong class="def-name">arithmetic</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">d</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-arithmetic'> &para;</a></span></dt>
+<dd><p>Returns the <var class="var">n</var>-th term of the arithmetic series
+<code class="code"><var class="var">a</var>, <var class="var">a</var> + <var class="var">d</var>, <var class="var">a</var> + 2*<var class="var">d</var>, ..., <var class="var">a</var> + (<var class="var">n</var> - 1)*<var class="var">d</var></code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="geometric"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fgeometric"></a><dl class="first-deffn">
+<dt class="deffn" id="index-geometric"><span class="category-def">Function: </span><span><strong class="def-name">geometric</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">r</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-geometric'> &para;</a></span></dt>
+<dd><p>Returns the <var class="var">n</var>-th term of the geometric series
+<code class="code"><var class="var">a</var>, <var class="var">a</var>*<var class="var">r</var>, <var class="var">a</var>*<var class="var">r</var>^2, ..., <var class="var">a</var>*<var class="var">r</var>^(<var class="var">n</var> - 1)</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="harmonic"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fharmonic"></a><dl class="first-deffn">
+<dt class="deffn" id="index-harmonic"><span class="category-def">Function: </span><span><strong class="def-name">harmonic</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-harmonic'> &para;</a></span></dt>
+<dd><p>Returns the <var class="var">n</var>-th term of the harmonic series
+<code class="code"><var class="var">a</var>/<var class="var">b</var>, <var class="var">a</var>/(<var class="var">b</var> + <var class="var">c</var>), <var class="var">a</var>/(<var class="var">b</var> + 2*<var class="var">c</var>), ..., <var class="var">a</var>/(<var class="var">b</var> + (<var class="var">n</var> - 1)*<var class="var">c</var>)</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="arithsum"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002farithsum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-arithsum"><span class="category-def">Function: </span><span><strong class="def-name">arithsum</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">d</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-arithsum'> &para;</a></span></dt>
+<dd><p>Returns the sum of the arithmetic series from 1 to <var class="var">n</var>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="geosum"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fgeosum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-geosum"><span class="category-def">Function: </span><span><strong class="def-name">geosum</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">r</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-geosum'> &para;</a></span></dt>
+<dd><p>Returns the sum of the geometric series from 1 to <var class="var">n</var>.  If <var class="var">n</var> is
+infinity (<code class="code">inf</code>) then a sum is finite only if the absolute value
+of <var class="var">r</var> is less than 1.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="gaussprob"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fgaussprob"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gaussprob"><span class="category-def">Function: </span><span><strong class="def-name">gaussprob</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-gaussprob'> &para;</a></span></dt>
+<dd><p>Returns the Gaussian probability function
+<code class="code">%e^(-<var class="var">x</var>^2/2) / sqrt(2*%pi)</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="gd"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fgd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gd"><span class="category-def">Function: </span><span><strong class="def-name">gd</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-gd'> &para;</a></span></dt>
+<dd><p>Returns the Gudermannian function
+<code class="code">2*atan(%e^x)-%pi/2</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="agd"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fagd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-agd"><span class="category-def">Function: </span><span><strong class="def-name">agd</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-agd'> &para;</a></span></dt>
+<dd><p>Returns the inverse Gudermannian function
+<code class="code">log (tan (%pi/4 + x/2))</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="vers"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fvers"></a><dl class="first-deffn">
+<dt class="deffn" id="index-vers"><span class="category-def">Function: </span><span><strong class="def-name">vers</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-vers'> &para;</a></span></dt>
+<dd><p>Returns the versed sine <code class="code">1 - cos (x)</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="covers"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fcovers"></a><dl class="first-deffn">
+<dt class="deffn" id="index-covers"><span class="category-def">Function: </span><span><strong class="def-name">covers</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-covers'> &para;</a></span></dt>
+<dd><p>Returns the coversed sine <code class="code">1 - sin (<var class="var">x</var>)</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="exsec"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fexsec"></a><dl class="first-deffn">
+<dt class="deffn" id="index-exsec"><span class="category-def">Function: </span><span><strong class="def-name">exsec</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-exsec'> &para;</a></span></dt>
+<dd><p>Returns the exsecant <code class="code">sec (<var class="var">x</var>) - 1</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="hav"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fhav"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hav"><span class="category-def">Function: </span><span><strong class="def-name">hav</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-hav'> &para;</a></span></dt>
+<dd><p>Returns the haversine <code class="code">(1 - cos(x))/2</code>.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="combination"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fcombination"></a><dl class="first-deffn">
+<dt class="deffn" id="index-combination"><span class="category-def">Function: </span><span><strong class="def-name">combination</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">r</var>)</var><a class="copiable-link" href='#index-combination'> &para;</a></span></dt>
+<dd><p>Returns the number of combinations of <var class="var">n</var> objects
+taken <var class="var">r</var> at a time.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="permutation"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fpermutation"></a><dl class="first-deffn">
+<dt class="deffn" id="index-permutation"><span class="category-def">Function: </span><span><strong class="def-name">permutation</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">r</var>)</var><a class="copiable-link" href='#index-permutation'> &para;</a></span></dt>
+<dd><p>Returns the number of permutations of <var class="var">r</var> objects
+selected from a set of <var class="var">n</var> objects.
+</p>
+<p>To use this function write first <code class="code">load(&quot;functs&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-functs">Package functs</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-simplifications_002fnode_002fPackage-ineq"></a><hr>
+</div>
+<div class="section-level-extent" id="Package-ineq">
+<div class="nav-panel">
+<p>
+Next: <a href="#Package-rducon" accesskey="n" rel="next">Package rducon</a>, Previous: <a href="#Package-functs" accesskey="p" rel="prev">Package functs</a>, Up: <a href="#simplification_002dpkg" accesskey="u" rel="up">simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Package-ineq-1">87.5 Package ineq</h3>
+
+<p>The <code class="code">ineq</code> package contains simplification rules
+for inequalities.
+</p>
+<p>Example session:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;ineq&quot;)$
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+</pre><div class="group"><pre class="example-preformatted">(%i2) a&gt;=4;  /* a sample inequality */
+(%o2)                        a &gt;= 4
+(%o3)                     b + a &gt; c + 4
+(%o4)                       7 x &lt; 7 y
+(%o5)                    - 2 x &lt;= - 6 z
+                                 2
+(%o6)                      1 &lt;= a  + 1
+(%o8)                       2 x &lt; 3 x
+(%o9)                        a &gt;= b
+(%o10)                   a + 3 &gt;= b + 3
+(%o11)                       a &gt;= b
+(%o12)                     a &gt;= c - b
+(%o13)                     b + a &gt;= c
+(%o14)                 (- c) + b + a &gt;= 0
+(%o15)                   c - b - a &lt;= 0
+                               2
+(%o16)                  (z - 1)  &gt; - 2 z
+                            2
+(%o17)                     z  + 1 &gt; 0
+(%o18)                        true
+</pre></div><pre class="example-preformatted">(%i19) (b&gt;c)+%; /* add a second, strict inequality */
+</pre></div>
+
+<p>Be careful about using parentheses
+around the inequalities: when the user types in <code class="code">(A &gt; B) + (C = 5)</code> the
+result is <code class="code">A + C &gt; B + 5</code>, but <code class="code">A &gt; B + C = 5</code> is a syntax error,
+and <code class="code">(A &gt; B + C) = 5</code> is something else entirely.
+</p>
+<p>Do <code class="code">disprule (all)</code> to see a complete listing
+of the rule definitions.
+</p>
+<p>The user will be queried if Maxima is
+unable to decide the sign of a quantity multiplying an inequality.
+</p>
+<p>The most common mis-feature is illustrated by:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) eq: a &gt; b;
+(%o1)                         a &gt; b
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) 2*eq;
+(%o2)                       2 (a &gt; b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) % - eq;
+(%o3)                         a &gt; b
+</pre></div></div>
+
+<p>Another problem is 0 times an inequality; the default to have this
+turn into 0 has been left alone. However, if you type 
+<code class="code">X*<var class="var">some_inequality</var></code> and Maxima asks about the sign of <code class="code">X</code> and you
+respond <code class="code">zero</code> (or <code class="code">z</code>), the program returns <code class="code">X*<var class="var">some_inequality</var></code>
+and not use the information that <code class="code">X</code> is 0. You should do <code class="code">ev (%, x: 0)</code> in such
+a case, as the database will only be used for comparison purposes
+in decisions, and not for the purpose of evaluating <code class="code">X</code>.
+</p>
+<p>The user may note a slower response when this package is loaded, as
+the simplifier is forced to examine more rules than without the
+package, so you might wish to remove the rules after making use of
+them. Do <code class="code">kill (rules)</code> to eliminate all of the rules (including any
+that you might have defined); or you may be more selective by
+killing only some of them; or use <code class="code">remrule</code> on a specific rule.
+</p>
+<p>Note that if you load this package after defining your own
+rules you will clobber your rules that have the same name. The
+rules in this package are:
+<code class="code">*rule1</code>, ..., <code class="code">*rule8</code>,
+<code class="code">+rule1</code>, ..., <code class="code">+rule18</code>,
+and you must enclose the rulename in quotes to refer to it, as
+in <code class="code">remrule (&quot;+&quot;, &quot;+rule1&quot;)</code> to specifically remove the first rule on <code class="code">&quot;+&quot;</code>
+or <code class="code">disprule (&quot;*rule2&quot;)</code> to display the definition of the second multiplicative rule.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Rules-and-patterns">Rules and patterns</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-ineq">Package ineq</a>
+&middot;
+</div>
+
+
+
+<a class="anchor" id="Item_003a-simplifications_002fnode_002fPackage-rducon"></a><hr>
+</div>
+<div class="section-level-extent" id="Package-rducon">
+<div class="nav-panel">
+<p>
+Next: <a href="#Package-scifac" accesskey="n" rel="next">Package scifac</a>, Previous: <a href="#Package-ineq" accesskey="p" rel="prev">Package ineq</a>, Up: <a href="#simplification_002dpkg" accesskey="u" rel="up">simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Package-rducon-1">87.6 Package rducon</h3>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-rducon">Package rducon</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="reduce_005fconsts"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002freduce_005fconsts"></a><dl class="first-deffn">
+<dt class="deffn" id="index-reduce_005fconsts"><span class="category-def">Function: </span><span><strong class="def-name">reduce_consts</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-reduce_005fconsts'> &para;</a></span></dt>
+<dd><p>Replaces constant subexpressions of <var class="var">expr</var> with
+constructed constant atoms, saving the definition of all these
+constructed constants in the list of equations <code class="code">const_eqns</code>, and
+returning the modified <var class="var">expr</var>.  Those parts of <var class="var">expr</var> are constant which
+return <code class="code">true</code> when operated on by the function <code class="code">constantp</code>.  Hence,
+before invoking <code class="code">reduce_consts</code>, one should do
+</p>
+<div class="example">
+<pre class="example-preformatted">declare ([<var class="var">objects to be given the constant property</var>], constant)$
+</pre></div>
+
+<p>to set up a database of the constant quantities occurring in your
+expressions.
+</p>
+<p>If you are planning to generate Fortran output after these symbolic
+calculations, one of the first code sections should be the calculation
+of all constants.  To generate this code segment, do
+</p>
+<div class="example">
+<pre class="example-preformatted">map ('fortran, const_eqns)$
+</pre></div>
+
+<p>Variables besides <code class="code">const_eqns</code> which affect <code class="code">reduce_consts</code> are:
+</p>
+<p><code class="code">const_prefix</code> (default value: <code class="code">xx</code>) is the string of characters used to prefix all
+symbols generated by <code class="code">reduce_consts</code> to represent constant subexpressions.
+</p>
+<p><code class="code">const_counter</code> (default value: 1) is the integer index used to generate unique
+symbols to represent each constant subexpression found by <code class="code">reduce_consts</code>.
+</p>
+<p><code class="code">load (&quot;rducon&quot;)</code> loads this function.
+<code class="code">demo (&quot;rducon&quot;)</code> shows a demonstration of this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-rducon">Package rducon</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-simplifications_002fnode_002fPackage-scifac"></a><hr>
+</div>
+<div class="section-level-extent" id="Package-scifac">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Package-rducon" accesskey="p" rel="prev">Package rducon</a>, Up: <a href="#simplification_002dpkg" accesskey="u" rel="up">simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Package-scifac-1">87.7 Package scifac</h3>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-scifac">Package scifac</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="gcfac"></a><a class="anchor" id="Item_003a-simplifications_002fdeffn_002fgcfac"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gcfac"><span class="category-def">Function: </span><span><strong class="def-name">gcfac</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-gcfac'> &para;</a></span></dt>
+<dd><p><code class="code">gcfac</code> is a factoring function that attempts to apply the same heuristics which
+scientists apply in trying to make expressions simpler.  <code class="code">gcfac</code> is limited
+to monomial-type factoring.  For a sum, <code class="code">gcfac</code> does the following:
+</p>
+<ol class="enumerate">
+<li> Factors over the integers.
+</li><li> Factors out the largest powers of terms occurring as
+coefficients, regardless of the complexity of the terms.
+</li><li> Uses (1) and (2) in factoring adjacent pairs of terms.
+</li><li> Repeatedly and recursively applies these techniques until
+the expression no longer changes.
+</li></ol>
+
+<p>Item (3) does not necessarily do an optimal job of pairwise
+factoring because of the combinatorially-difficult nature of finding
+which of all possible rearrangements of the pairs yields the most
+compact pair-factored result.
+</p>
+<p><code class="code">load (&quot;scifac&quot;)</code> loads this function.
+<code class="code">demo (&quot;scifac&quot;)</code> shows a demonstration of this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-scifac">Package scifac</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_87.html#solve_005frec_002dpkg" accesskey="n" rel="next">solve_rec</a>, Previous: <a href="maxima_85.html#simplex_002dpkg" accesskey="p" rel="prev">simplex</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

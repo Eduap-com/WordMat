@@ -1,0 +1,1037 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Integration</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Integration">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Integration">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_102.html#Integration" rel="up" title="Integration">
+<link href="maxima_105.html#Introduction-to-QUADPACK" rel="next" title="Introduction to QUADPACK">
+<link href="maxima_103.html#Introduction-to-Integration" rel="previous" title="Introduction to Integration">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Integration"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_105.html#Introduction-to-QUADPACK" accesskey="n" rel="next">Introduction to QUADPACK</a>, Previous: <a href="maxima_103.html#Introduction-to-Integration" accesskey="p" rel="previous">Introduction to Integration</a>, Up: <a href="maxima_102.html#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Integration-1"></a>
+<h3 class="section">19.2 Functions and Variables for Integration</h3>
+
+
+<a name="changevar"></a><a name="Item_003a-Integration_002fdeffn_002fchangevar"></a><dl>
+<dt><a name="index-changevar"></a>Function: <strong>changevar</strong> <em>(<var>expr</var>, <var>f(x,y)</var>, <var>y</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Makes the change of variable given by <code><var>f(x,y)</var> = 0</code> in all integrals
+occurring in <var>expr</var> with integration with respect to <var>x</var>.
+The new variable is <var>y</var>.
+</p>
+<p>The change of variable can also be written <code><var>f(x)</var> = <var>g(y)</var></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) assume(a &gt; 0)$
+</pre><pre class="example">(%i2) 'integrate (%e**sqrt(a*y), y, 0, 4);
+                      4
+                     /
+                     [    sqrt(a) sqrt(y)
+(%o2)                I  %e                dy
+                     ]
+                     /
+                      0
+</pre><pre class="example">(%i3) changevar (%, y-z^2/a, z, y);
+                      0
+                     /
+                     [                abs(z)
+                   2 I            z %e       dz
+                     ]
+                     /
+                      - 2 sqrt(a)
+(%o3)            - ----------------------------
+                                a
+</pre></div>
+
+<p>An expression containing a noun form, such as the instances of <code>'integrate</code>
+above, may be evaluated by <code>ev</code> with the <code>nouns</code> flag.
+For example, the expression returned by <code>changevar</code> above may be evaluated
+by <code>ev (%o3, nouns)</code>.
+</p>
+<p><code>changevar</code> may also be used to make changes in the indices of a sum or
+product.  However, it must be realized that when a change is made in a
+sum or product, this change must be a shift, i.e., <code>i = j+ ...</code>, not a
+higher degree function.  E.g.,
+</p>
+<div class="example">
+<pre class="example">(%i4) sum (a[i]*x^(i-2), i, 0, inf);
+                         inf
+                         ====
+                         \         i - 2
+(%o4)                     &gt;    a  x
+                         /      i
+                         ====
+                         i = 0
+</pre><pre class="example">(%i5) changevar (%, i-2-n, n, i);
+                        inf
+                        ====
+                        \               n
+(%o5)                    &gt;      a      x
+                        /        n + 2
+                        ====
+                        n = - 2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+
+<a name="dblint"></a><a name="Item_003a-Integration_002fdeffn_002fdblint"></a><dl>
+<dt><a name="index-dblint"></a>Function: <strong>dblint</strong> <em>(<var>f</var>, <var>r</var>, <var>s</var>, <var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>A double-integral routine which was written in
+top-level Maxima and then translated and compiled to machine code.
+Use <code>load (&quot;dblint&quot;)</code> to access this package.  It uses the Simpson&rsquo;s rule
+method in both the x and y directions to calculate
+</p>
+<div class="example">
+<pre class="example">/b /s(x)
+|  |
+|  |    f(x,y) dy dx
+|  |
+/a /r(x)
+</pre></div>
+
+<p>The function <var>f</var> must be a translated or compiled function of two variables,
+and <var>r</var> and <var>s</var> must each be a translated or compiled function of one
+variable, while <var>a</var> and <var>b</var> must be floating point numbers.  The routine
+has two global variables which determine the number of divisions of the x and y
+intervals: <code>dblint_x</code> and <code>dblint_y</code>, both of which are initially 10,
+and can be changed independently to other integer values (there are
+<code>2*dblint_x+1</code> points computed in the x direction, and <code>2*dblint_y+1</code>
+in the y direction).  The routine subdivides the X axis and then for each value
+of X it first computes <code><var>r</var>(x)</code> and <code><var>s</var>(x)</code>; then the Y axis
+between <code><var>r</var>(x)</code> and <code><var>s</var>(x)</code> is subdivided and the integral
+along the Y axis is performed using Simpson&rsquo;s rule; then the integral along the
+X axis is done using Simpson&rsquo;s rule with the function values being the
+Y-integrals.  This procedure may be numerically unstable for a great variety of
+reasons, but is reasonably fast: avoid using it on highly oscillatory functions
+and functions with singularities (poles or branch points in the region).  The Y
+integrals depend on how far apart <code><var>r</var>(x)</code> and <code><var>s</var>(x)</code> are,
+so if the distance <code><var>s</var>(x) - <var>r</var>(x)</code> varies rapidly with X, there
+may be substantial errors arising from truncation with different step-sizes in
+the various Y integrals.  One can increase <code>dblint_x</code> and <code>dblint_y</code>
+in an effort to improve the coverage of the region, at the expense of
+computation time.  The function values are not saved, so if the function is very
+time-consuming, you will have to wait for re-computation if you change anything
+(sorry).  It is required that the functions <var>f</var>, <var>r</var>, and <var>s</var> be
+either translated or compiled prior to calling <code>dblint</code>.  This will result
+in orders of magnitude speed improvement over interpreted code in many cases!
+</p>
+<p><code>demo (&quot;dblint&quot;)</code> executes a demonstration of <code>dblint</code> applied to an
+example problem.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+<a name="defint"></a><a name="Item_003a-Integration_002fdeffn_002fdefint"></a><dl>
+<dt><a name="index-defint"></a>Function: <strong>defint</strong> <em>(<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>Attempts to compute a definite integral.  <code>defint</code> is called by
+<code>integrate</code> when limits of integration are specified, i.e., when
+<code>integrate</code> is called as
+<code>integrate (<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>)</code>.
+Thus from the user&rsquo;s point of view, it is sufficient to call <code>integrate</code>.
+</p>
+<p><code>defint</code> returns a symbolic expression, either the computed integral or the
+noun form of the integral.  See <code><a href="maxima_106.html#quad_005fqag">quad_qag</a></code> and related functions for
+numerical approximation of definite integrals.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+<a name="erfflag"></a><a name="Item_003a-Integration_002fdefvr_002ferfflag"></a><dl>
+<dt><a name="index-erfflag"></a>Option variable: <strong>erfflag</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>erfflag</code> is <code>false</code>, prevents <code>risch</code> from introducing the
+<code>erf</code> function in the answer if there were none in the integrand to
+begin with.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+
+<a name="ilt"></a><a name="Item_003a-Integration_002fdeffn_002filt"></a><dl>
+<dt><a name="index-ilt"></a>Function: <strong>ilt</strong> <em>(<var>expr</var>, <var>s</var>, <var>t</var>)</em></dt>
+<dd>
+<p>Computes the inverse Laplace transform of <var>expr</var> with
+respect to <var>s</var> and parameter <var>t</var>. <var>expr</var> must be a ratio of
+polynomials whose denominator has only linear and quadratic factors;
+there is an extension of <code>ilt</code>, called <code><a href="#pwilt">pwilt</a></code> (Piece-Wise
+Inverse Laplace Transform) that handles several other cases where
+<code>ilt</code> fails.
+</p>
+<p>By using the functions <code>laplace</code> and <code>ilt</code> together with the
+<code>solve</code> or <code>linsolve</code> functions the user can solve a single
+differential or convolution integral equation or a set of them.
+</p>
+<div class="example">
+<pre class="example">(%i1) 'integrate (sinh(a*x)*f(t-x), x, 0, t) + b*f(t) = t**2;
+              t
+             /
+             [                                    2
+(%o1)        I  f(t - x) sinh(a x) dx + b f(t) = t
+             ]
+             /
+              0
+</pre><pre class="example">(%i2) laplace (%, t, s);
+                               a laplace(f(t), t, s)   2
+(%o2)  b laplace(f(t), t, s) + --------------------- = --
+                                       2    2           3
+                                      s  - a           s
+</pre><pre class="example">(%i3) linsolve ([%], ['laplace(f(t), t, s)]);
+                                        2      2
+                                     2 s  - 2 a
+(%o3)     [laplace(f(t), t, s) = --------------------]
+                                    5         2     3
+                                 b s  + (a - a  b) s
+</pre><pre class="example">(%i4) ilt (rhs (first (%)), s, t);
+Is  a b (a b - 1)  positive, negative, or zero?
+
+pos;
+               sqrt(a b (a b - 1)) t
+        2 cosh(---------------------)       2
+                         b               a t
+(%o4) - ----------------------------- + -------
+              3  2      2               a b - 1
+             a  b  - 2 a  b + a
+
+                                                       2
+                                             + ------------------
+                                                3  2      2
+                                               a  b  - 2 a  b + a
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;</div></dd></dl>
+
+<a name="intanalysis"></a><a name="Item_003a-Integration_002fdefvr_002fintanalysis"></a><dl>
+<dt><a name="index-intanalysis"></a>Option variable: <strong>intanalysis</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>true</code>, definite integration tries to find poles in the integrand in 
+the interval of integration.  If there are, then the integral is evaluated
+appropriately as a principal value integral.  If intanalysis is <code>false</code>, 
+this check is not performed and integration is done assuming there are no poles.
+</p>
+<p>See also <code><a href="#ldefint">ldefint</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Maxima can solve the following integrals, when <code><a href="#intanalysis">intanalysis</a></code> is set to
+<code>false</code>:
+</p>
+<div class="example">
+<pre class="example">(%i1) integrate(1/(sqrt(x)+1),x,0,1);
+                                1
+                               /
+                               [       1
+(%o1)                          I  ----------- dx
+                               ]  sqrt(x) + 1
+                               /
+                                0
+
+(%i2) integrate(1/(sqrt(x)+1),x,0,1),intanalysis:false;
+(%o2)                            2 - 2 log(2)
+
+(%i3) integrate(cos(a)/sqrt((tan(a))^2 +1),a,-%pi/2,%pi/2);
+The number 1 isn't in the domain of atanh
+ -- an error. To debug this try: debugmode(true);
+
+(%i4) intanalysis:false$
+(%i5) integrate(cos(a)/sqrt((tan(a))^2+1),a,-%pi/2,%pi/2);
+                                      %pi
+(%o5)                                 ---
+                                       2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+<a name="integrate"></a><a name="Item_003a-Integration_002fdeffn_002fintegrate"></a><dl>
+<dt><a name="index-integrate"></a>Function: <strong>integrate</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>integrate</tt> (<var>expr</var>, <var>x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>integrate</tt> (<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>Attempts to symbolically compute the integral of <var>expr</var> with respect to
+<var>x</var>.  <code>integrate (<var>expr</var>, <var>x</var>)</code> is an indefinite integral,
+while <code>integrate (<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>)</code> is a definite
+integral, with limits of integration <var>a</var> and <var>b</var>.  The limits should
+not contain <var>x</var>, although <code>integrate</code> does not enforce this
+restriction.  <var>a</var> need not be less than <var>b</var>.
+If <var>b</var> is equal to <var>a</var>, <code>integrate</code> returns zero.
+</p>
+<p>See <code><a href="maxima_106.html#quad_005fqag">quad_qag</a></code> and related functions for numerical approximation of
+definite integrals.  See <code><a href="#residue">residue</a></code> for computation of residues
+(complex integration).  See <code><a href="maxima_101.html#antid">antid</a></code> for an alternative means of computing
+indefinite integrals.
+</p>
+<p>The integral (an expression free of <code>integrate</code>) is returned if
+<code>integrate</code> succeeds.  Otherwise the return value is
+the noun form of the integral (the quoted operator <code>'integrate</code>)
+or an expression containing one or more noun forms.
+The noun form of <code>integrate</code> is displayed with an integral sign.
+</p>
+<p>In some circumstances it is useful to construct a noun form by hand, by quoting
+<code>integrate</code> with a single quote, e.g.,
+<code>'integrate (<var>expr</var>, <var>x</var>)</code>.  For example, the integral may depend
+on some parameters which are not yet computed.
+The noun may be applied to its arguments by <code>ev (<var>i</var>, nouns)</code>
+where <var>i</var> is the noun form of interest.
+</p>
+<p><code>integrate</code> handles definite integrals separately from indefinite, and
+employs a range of heuristics to handle each case.  Special cases of definite
+integrals include limits of integration equal to zero or infinity (<code><a href="maxima_18.html#inf">inf</a></code> or
+<code><a href="maxima_18.html#minf">minf</a></code>), trigonometric functions with limits of integration equal to zero
+and <code>%pi</code> or <code>2 %pi</code>, rational functions, integrals related to the
+definitions of the <code><a href="maxima_87.html#beta">beta</a></code> and <code><a href="maxima_134.html#psi">psi</a></code> functions, and some logarithmic
+and trigonometric integrals.  Processing rational functions may include
+computation of residues.  If an applicable special case is not found, an attempt
+will be made to compute the indefinite integral and evaluate it at the limits of
+integration.  This may include taking a limit as a limit of integration goes to
+infinity or negative infinity; see also <code><a href="#ldefint">ldefint</a></code>.
+</p>
+<p>Special cases of indefinite integrals include trigonometric functions,
+exponential and logarithmic functions,
+and rational functions.
+<code>integrate</code> may also make use of a short table of elementary integrals.
+</p>
+<p><code>integrate</code> may carry out a change of variable
+if the integrand has the form <code>f(g(x)) * diff(g(x), x)</code>.
+<code>integrate</code> attempts to find a subexpression <code>g(x)</code> such that
+the derivative of <code>g(x)</code> divides the integrand.
+This search may make use of derivatives defined by the <code>gradef</code> function.
+See also <code><a href="#changevar">changevar</a></code> and <code><a href="maxima_101.html#antid">antid</a></code>.
+</p>
+<p>If none of the preceding heuristics find the indefinite integral, the Risch
+algorithm is executed.  The flag <code><a href="#risch">risch</a></code> may be set as an <code><a href="maxima_43.html#evflag">evflag</a></code>,
+in a call to <code>ev</code> or on the command line, e.g.,
+<code>ev (integrate (<var>expr</var>, <var>x</var>), risch)</code> or
+<code>integrate (<var>expr</var>, <var>x</var>), risch</code>.  If <code>risch</code> is present,
+<code>integrate</code> calls the <code><a href="#risch">risch</a></code> function without attempting heuristics
+first.  See also <code><a href="#risch">risch</a></code>.
+</p>
+<p><code>integrate</code> works only with functional relations represented explicitly
+with the <code>f(x)</code> notation.  <code>integrate</code> does not respect implicit
+dependencies established by the <code><a href="maxima_101.html#depends">depends</a></code> function.
+</p>
+<p><code>integrate</code> may need to know some property of a parameter in the integrand.
+<code>integrate</code> will first consult the <code><a href="maxima_63.html#assume">assume</a></code> database,
+and, if the variable of interest is not there,
+<code>integrate</code> will ask the user.
+Depending on the question,
+suitable responses are <code>yes;</code> or <code>no;</code>,
+or <code>pos;</code>, <code>zero;</code>, or <code>neg;</code>.
+</p>
+<p><code>integrate</code> is not, by default, declared to be linear.  See <code>declare</code>
+and <code>linear</code>.
+</p>
+<p><code>integrate</code> attempts integration by parts only in a few special cases.
+</p>
+<p>Examples:
+</p>
+<ul>
+<li> Elementary indefinite and definite integrals.
+
+<div class="example">
+<pre class="example">(%i1) integrate (sin(x)^3, x);
+                           3
+                        cos (x)
+(%o1)                   ------- - cos(x)
+                           3
+</pre><pre class="example">(%i2) integrate (x/ sqrt (b^2 - x^2), x);
+                                 2    2
+(%o2)                    - sqrt(b  - x )
+</pre><pre class="example">(%i3) integrate (cos(x)^2 * exp(x), x, 0, %pi);
+                               %pi
+                           3 %e      3
+(%o3)                      ------- - -
+                              5      5
+</pre><pre class="example">(%i4) integrate (x^2 * exp(-x^2), x, minf, inf);
+                            sqrt(%pi)
+(%o4)                       ---------
+                                2
+</pre></div>
+
+</li><li> Use of <code>assume</code> and interactive query.
+
+<div class="example">
+<pre class="example">(%i1) assume (a &gt; 1)$
+</pre><pre class="example">(%i2) integrate (x**a/(x+1)**(5/2), x, 0, inf);
+    2 a + 2
+Is  -------  an integer?
+       5
+
+no;
+Is  2 a - 3  positive, negative, or zero?
+
+neg;
+                                   3
+(%o2)                  beta(a + 1, - - a)
+                                   2
+</pre></div>
+
+</li><li> Change of variable.  There are two changes of variable in this example:
+one using a derivative established by <code><a href="maxima_101.html#gradef">gradef</a></code>, and one using the
+derivation <code>diff(r(x))</code> of an unspecified function <code>r(x)</code>.
+
+<div class="example">
+<pre class="example">(%i3) gradef (q(x), sin(x**2));
+(%o3)                         q(x)
+</pre><pre class="example">(%i4) diff (log (q (r (x))), x);
+                      d               2
+                     (-- (r(x))) sin(r (x))
+                      dx
+(%o4)                ----------------------
+                            q(r(x))
+</pre><pre class="example">(%i5) integrate (%, x);
+(%o5)                     log(q(r(x)))
+</pre></div>
+
+</li><li> Return value contains the <code>'integrate</code> noun form.  In this example, Maxima
+can extract one factor of the denominator of a rational function, but cannot
+factor the remainder or otherwise find its integral.  <code><a href="maxima_9.html#grind">grind</a></code> shows the
+noun form <code>'integrate</code> in the result.  See also
+<code><a href="#integrate_005fuse_005frootsof">integrate_use_rootsof</a></code> for more on integrals of rational functions.
+
+<div class="example">
+<pre class="example">(%i1) expand ((x-4) * (x^3+2*x+1));
+                    4      3      2
+(%o1)              x  - 4 x  + 2 x  - 7 x - 4
+</pre><pre class="example">(%i2) integrate (1/%, x);
+                              /  2
+                              [ x  + 4 x + 18
+                              I ------------- dx
+                              ]  3
+                 log(x - 4)   / x  + 2 x + 1
+(%o2)            ---------- - ------------------
+                     73               73
+</pre><pre class="example">(%i3) grind (%);
+log(x-4)/73-('integrate((x^2+4*x+18)/(x^3+2*x+1),x))/73$
+</pre></div>
+
+</li><li> Defining a function in terms of an integral.  The body of a function is not
+evaluated when the function is defined.  Thus the body of <code>f_1</code> in this
+example contains the noun form of <code>integrate</code>.  The quote-quote operator
+<code>'<!-- /@w -->'</code> causes the integral to be evaluated, and the result becomes the
+body of <code>f_2</code>.
+
+<div class="example">
+<pre class="example">(%i1) f_1 (a) := integrate (x^3, x, 1, a);
+                                     3
+(%o1)           f_1(a) := integrate(x , x, 1, a)
+</pre><pre class="example">(%i2) ev (f_1 (7), nouns);
+(%o2)                          600
+</pre><pre class="example">(%i3) /* Note parentheses around integrate(...) here */
+      f_2 (a) := ''(integrate (x^3, x, 1, a));
+                                   4
+                                  a    1
+(%o3)                   f_2(a) := -- - -
+                                  4    4
+</pre><pre class="example">(%i4) f_2 (7);
+(%o4)                          600
+</pre></div>
+</li></ul>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+<a name="integration_005fconstant"></a><a name="Item_003a-Integration_002fdefvr_002fintegration_005fconstant"></a><dl>
+<dt><a name="index-integration_005fconstant"></a>System variable: <strong>integration_constant</strong></dt>
+<dd><p>Default value: <code>%c</code>
+</p>
+<p>When a constant of integration is introduced by indefinite integration of an
+equation, the name of the constant is constructed by concatenating
+<code>integration_constant</code> and <code>integration_constant_counter</code>.
+</p>
+<p><code>integration_constant</code> may be assigned any symbol.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o1)                     -- = x + %c1
+                          3
+</pre><pre class="example">(%i2) integration_constant : 'k;
+(%o2)                           k
+</pre><pre class="example">(%i3) integrate (x^2 = 1, x);
+                            3
+                           x
+(%o3)                      -- = x + k2
+                           3
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+<a name="integration_005fconstant_005fcounter"></a><a name="Item_003a-Integration_002fdefvr_002fintegration_005fconstant_005fcounter"></a><dl>
+<dt><a name="index-integration_005fconstant_005fcounter"></a>System variable: <strong>integration_constant_counter</strong></dt>
+<dd><p>Default value: 0
+</p>
+<p>When a constant of integration is introduced by indefinite integration of an
+equation, the name of the constant is constructed by concatenating
+<code>integration_constant</code> and <code>integration_constant_counter</code>.
+</p>
+<p><code>integration_constant_counter</code> is incremented before constructing the next
+integration constant.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o1)                     -- = x + %c1
+                          3
+</pre><pre class="example">(%i2) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o2)                     -- = x + %c2
+                          3
+</pre><pre class="example">(%i3) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o3)                     -- = x + %c3
+                          3
+</pre><pre class="example">(%i4) reset (integration_constant_counter);
+(%o4)            [integration_constant_counter]
+</pre><pre class="example">(%i5) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o5)                     -- = x + %c1
+                          3
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+<a name="integrate_005fuse_005frootsof"></a><a name="Item_003a-Integration_002fdefvr_002fintegrate_005fuse_005frootsof"></a><dl>
+<dt><a name="index-integrate_005fuse_005frootsof"></a>Option variable: <strong>integrate_use_rootsof</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>integrate_use_rootsof</code> is <code>true</code> and the denominator of
+a rational function cannot be factored, <code><a href="#integrate">integrate</a></code> returns the integral
+in a form which is a sum over the roots (not yet known) of the denominator.
+</p>
+<p>For example, with <code>integrate_use_rootsof</code> set to <code>false</code>,
+<code>integrate</code> returns an unsolved integral of a rational function in noun
+form:
+</p>
+<div class="example">
+<pre class="example">(%i1) integrate_use_rootsof: false$
+</pre><pre class="example">(%i2) integrate (1/(1+x+x^5), x);
+        /  2
+        [ x  - 4 x + 5
+        I ------------ dx                            2 x + 1
+        ]  3    2                2            5 atan(-------)
+        / x  - x  + 1       log(x  + x + 1)          sqrt(3)
+(%o2)   ----------------- - --------------- + ---------------
+                7                 14             7 sqrt(3)
+</pre></div>
+
+<p>Now we set the flag to be true and the unsolved part of the integral will be
+expressed as a summation over the roots of the denominator of the rational
+function:
+</p>
+<div class="example">
+<pre class="example">(%i3) integrate_use_rootsof: true$
+</pre><pre class="example">(%i4) integrate (1/(1+x+x^5), x);
+      ====        2
+      \       (%r4  - 4 %r4 + 5) log(x - %r4)
+       &gt;      -------------------------------
+      /                    2
+      ====            3 %r4  - 2 %r4
+                        3      2
+      %r4 in rootsof(%r4  - %r4  + 1, %r4)
+(%o4) ----------------------------------------------------------
+               7
+
+                                                      2 x + 1
+                                  2            5 atan(-------)
+                             log(x  + x + 1)          sqrt(3)
+                           - --------------- + ---------------
+                                   14             7 sqrt(3)
+</pre></div>
+
+<p>Alternatively the user may compute the roots of the denominator separately,
+and then express the integrand in terms of these roots, e.g.,
+<code>1/((x - a)*(x - b)*(x - c))</code> or <code>1/((x^2 - (a+b)*x + a*b)*(x - c))</code>
+if the denominator is a cubic polynomial.
+Sometimes this will help Maxima obtain a more useful result.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+<a name="laplace"></a><a name="Item_003a-Integration_002fdeffn_002flaplace"></a><dl>
+<dt><a name="index-laplace"></a>Function: <strong>laplace</strong> <em>(<var>expr</var>, <var>t</var>, <var>s</var>)</em></dt>
+<dd>
+<p>Attempts to compute the Laplace transform of <var>expr</var> with respect to the 
+variable <var>t</var> and transform parameter <var>s</var>.  The Laplace
+transform of the function <code>f(t)</code> is the one-sided transform defined by
+$$
+F(s) = \int_0^{\infty} f(t) e^{-st} dt
+$$</p>
+
+<p>where <em>F(s)</em> is the transform of <em>f(t)</em>, represented by <var>expr</var>.
+</p>
+<p><code>laplace</code> recognizes in <var>expr</var> the functions <code><a href="maxima_101.html#delta">delta</a></code>, <code><a href="maxima_51.html#exp">exp</a></code>,
+<code><a href="maxima_51.html#log">log</a></code>, <code><a href="maxima_55.html#sin">sin</a></code>, <code><a href="maxima_55.html#cos">cos</a></code>, <code><a href="maxima_55.html#sinh">sinh</a></code>, <code><a href="maxima_55.html#cosh">cosh</a></code>, and <code><a href="maxima_89.html#erf">erf</a></code>,
+as well as <code>derivative</code>, <code><a href="#integrate">integrate</a></code>, <code><a href="maxima_139.html#sum">sum</a></code>, and <code><a href="#ilt">ilt</a></code>. If
+<code>laplace</code> fails to find a transform the function <code><a href="#specint">specint</a></code> is called.
+<code><a href="#specint">specint</a></code> can find the laplace transform for expressions with special
+functions like the bessel functions <code><a href="maxima_85.html#bessel_005fj">bessel_j</a></code>, <code><a href="maxima_85.html#bessel_005fi">bessel_i</a></code>, &hellip;
+and can handle the <code><a href="maxima_338.html#unit_005fstep">unit_step</a></code> function.  See also <code><a href="#specint">specint</a></code>.
+</p>
+<p>If <code><a href="#specint">specint</a></code> cannot find a solution too, a noun <code>laplace</code> is returned.
+</p>
+<p><var>expr</var> may also be a linear, constant coefficient differential equation in
+which case <code><a href="maxima_101.html#atvalue">atvalue</a></code> of the dependent variable is used.
+The required atvalue may be supplied either before or after the transform is
+computed.  Since the initial conditions must be specified at zero, if one has
+boundary conditions imposed elsewhere he can impose these on the general
+solution and eliminate the constants by solving the general solution
+for them and substituting their values back.
+</p>
+<p><code>laplace</code> recognizes convolution integrals of the form
+$$
+\int_0^t f(x) g(t-x) dx
+$$</p>
+
+<p>Other kinds of convolutions are not recognized.
+</p>
+<p>Functional relations must be explicitly represented in <var>expr</var>;
+implicit relations, established by <code><a href="maxima_101.html#depends">depends</a></code>, are not recognized.
+That is, if <em>f</em> depends on <em>x</em> and <em>y</em>,
+<em>f (x, y)</em> must appear in <var>expr</var>.
+</p>
+<p>See also <code><a href="#ilt">ilt</a></code>, the inverse Laplace transform.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) laplace (exp (2*t + a) * sin(t) * t, t, s);
+                            a
+                          %e  (2 s - 4)
+(%o1)                    ---------------
+                           2           2
+                         (s  - 4 s + 5)
+(%i2) laplace ('diff (f (x), x), x, s);
+(%o2)             s laplace(f(x), x, s) - f(0)
+(%i3) diff (diff (delta (t), t), t);
+                          2
+                         d
+(%o3)                    --- (delta(t))
+                           2
+                         dt
+(%i4) laplace (%, t, s);
+                            !
+               d            !         2
+(%o4)        - -- (delta(t))!      + s  - delta(0) s
+               dt           !
+                            !t = 0
+(%i5) assume(a&gt;0)$
+(%i6) laplace(gamma_incomplete(a,t),t,s),gamma_expand:true;
+                                              - a - 1
+                         gamma(a)   gamma(a) s
+(%o6)                    -------- - -----------------
+                            s            1     a
+                                        (- + 1)
+                                         s
+(%i7) factor(laplace(gamma_incomplete(1/2,t),t,s));
+                                              s + 1
+                      sqrt(%pi) (sqrt(s) sqrt(-----) - 1)
+                                                s
+(%o7)                 -----------------------------------
+                                3/2      s + 1
+                               s    sqrt(-----)
+                                           s
+(%i8) assume(exp(%pi*s)&gt;1)$
+(%i9) laplace(sum((-1)^n*unit_step(t-n*%pi)*sin(t),n,0,inf),t,s),
+         simpsum;
+</pre><pre class="example">                         %i                         %i
+              ------------------------ - ------------------------
+                              - %pi s                    - %pi s
+              (s + %i) (1 - %e       )   (s - %i) (1 - %e       )
+(%o9)         ---------------------------------------------------
+                                       2
+</pre><pre class="example">(%i9) factor(%);
+                                      %pi s
+                                    %e
+(%o9)                   -------------------------------
+                                             %pi s
+                        (s - %i) (s + %i) (%e      - 1)
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;</div></dd></dl>
+
+
+<a name="ldefint"></a><a name="Item_003a-Integration_002fdeffn_002fldefint"></a><dl>
+<dt><a name="index-ldefint"></a>Function: <strong>ldefint</strong> <em>(<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>Attempts to compute the definite integral of <var>expr</var> by using <code><a href="maxima_99.html#limit">limit</a></code>
+to evaluate the indefinite integral of <var>expr</var> with respect to <var>x</var>
+at the upper limit <var>b</var> and at the lower limit <var>a</var>.
+If it fails to compute the definite integral,
+<code>ldefint</code> returns an expression containing limits as noun forms.
+</p>
+<p><code>ldefint</code> is not called from <code><a href="#integrate">integrate</a></code>, so executing
+<code>ldefint (<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>)</code> may yield a different
+result than <code>integrate (<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>)</code>.
+<code>ldefint</code> always uses the same method to evaluate the definite integral,
+while <code>integrate</code> may employ various heuristics and may recognize some
+special cases.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+
+<a name="pwilt"></a><a name="Item_003a-Integration_002fdeffn_002fpwilt"></a><dl>
+<dt><a name="index-pwilt"></a>Function: <strong>pwilt</strong> <em>(<var>expr</var>, <var>s</var>, <var>t</var>)</em></dt>
+<dd>
+<p>Computes the inverse Laplace transform of <var>expr</var> with
+respect to <var>s</var> and parameter <var>t</var>. Unlike <code><a href="#ilt">ilt</a></code>,
+<code>pwilt</code> is able to return piece-wise and periodic functions
+and can also handle some cases with polynomials of degree greater than 3
+in the denominator.
+</p>
+<p>Two examples where <code>ilt</code> fails:
+</p><div class="example">
+<pre class="example">(%i1) pwilt (exp(-s)*s/(s^3-2*s-s+2), s, t);
+                                       t - 1       - 2 (t - 1)
+                             (t - 1) %e        2 %e
+(%o1)         hstep(t - 1) (--------------- - ---------------)
+                                    3                 9
+                                    
+(%i2) pwilt ((s^2+2)/(s^2-1), s, t);
+                                         t       - t
+                                     3 %e    3 %e
+(%o2)                    delta(t) + ----- - -------
+                                       2        2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;</div></dd></dl>
+
+<a name="potential"></a><a name="Item_003a-Integration_002fdeffn_002fpotential"></a><dl>
+<dt><a name="index-potential"></a>Function: <strong>potential</strong> <em>(<var>givengradient</var>)</em></dt>
+<dd>
+<p>The calculation makes use of the global variable <code>potentialzeroloc[0]</code>
+which must be <code>nonlist</code> or of the form
+</p>
+<div class="example">
+<pre class="example">[indeterminatej=expressionj, indeterminatek=expressionk, ...]
+</pre></div>
+
+<p>the former being equivalent to the nonlist expression for all right-hand
+sides in the latter.  The indicated right-hand sides are used as the
+lower limit of integration.  The success of the integrations may
+depend upon their values and order.  <code>potentialzeroloc</code> is initially set
+to 0.
+</p></dd></dl>
+
+<a name="prefer_005fd"></a><a name="Item_003a-Integration_002fdefvr_002fprefer_005fd"></a><dl>
+<dt><a name="index-prefer_005fd"></a>Option variable: <strong>prefer_d</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>prefer_d</code> is <code>true</code>, <code><a href="#specint">specint</a></code> will prefer to
+express solutions using <code><a href="maxima_92.html#parabolic_005fcylinder_005fd">parabolic_cylinder_d</a></code> rather than
+hypergeometric functions.
+</p>
+<p>In the example below, the solution contains <code><a href="maxima_92.html#parabolic_005fcylinder_005fd">parabolic_cylinder_d</a></code>
+when <code>prefer_d</code> is <code>true</code>. 
+</p>
+<div class="example">
+<pre class="example">(%i1) assume(s&gt;0);
+(%o1)                               [s &gt; 0]
+</pre><pre class="example">(%i2) factor(specint(ex:%e^-(t^2/8)*exp(-s*t),t));
+                                         2
+                                      2 s
+(%o2)           - sqrt(2) sqrt(%pi) %e     (erf(sqrt(2) s) - 1)
+</pre><pre class="example">(%i3) specint(ex,t),prefer_d=true;
+                                                          2
+                                                         s
+                                                         --
+                                                 s       8
+                    parabolic_cylinder_d(- 1, -------) %e
+                                              sqrt(2)
+(%o3)               ---------------------------------------
+                                    sqrt(2)
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;<a href="maxima_424.html#Category_003a-Special-functions">Special functions</a>
+&middot;</div></dd></dl>
+
+<a name="residue"></a><a name="Item_003a-Integration_002fdeffn_002fresidue"></a><dl>
+<dt><a name="index-residue"></a>Function: <strong>residue</strong> <em>(<var>expr</var>, <var>z</var>, <var>z_0</var>)</em></dt>
+<dd>
+<p>Computes the residue in the complex plane of the expression <var>expr</var> when the
+variable <var>z</var> assumes the value <var>z_0</var>.  The residue is the coefficient of
+<code>(<var>z</var> - <var>z_0</var>)^(-1)</code> in the Laurent series for <var>expr</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) residue (s/(s**2+a**2), s, a*%i);
+                                1
+(%o1)                           -
+                                2
+</pre><pre class="example">(%i2) residue (sin(a*x)/x**4, x, 0);
+                                 3
+                                a
+(%o2)                         - --
+                                6
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;<a href="maxima_424.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;</div></dd></dl>
+
+<a name="risch"></a><a name="Item_003a-Integration_002fdeffn_002frisch"></a><dl>
+<dt><a name="index-risch"></a>Function: <strong>risch</strong> <em>(<var>expr</var>, <var>x</var>)</em></dt>
+<dd>
+<p>Integrates <var>expr</var> with respect to <var>x</var> using the
+transcendental case of the Risch algorithm.  (The algebraic case of
+the Risch algorithm has not been implemented.)  This currently
+handles the cases of nested exponentials and logarithms which the main
+part of <code>integrate</code> can&rsquo;t do.  <code><a href="#integrate">integrate</a></code> will automatically apply
+<code>risch</code> if given these cases.
+</p>
+<p><code>erfflag</code>, if <code>false</code>, prevents <code>risch</code> from introducing the
+<code>erf</code> function in the answer if there were none in the integrand to begin
+with.
+</p>
+<div class="example">
+<pre class="example">(%i1) risch (x^2*erf(x), x);
+                                                        2
+             3                      2                - x
+        %pi x  erf(x) + (sqrt(%pi) x  + sqrt(%pi)) %e
+(%o1)   -------------------------------------------------
+                              3 %pi
+</pre><pre class="example">(%i2) diff(%, x), ratsimp;
+                             2
+(%o2)                       x  erf(x)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+<a name="specint"></a><a name="Item_003a-Integration_002fdeffn_002fspecint"></a><dl>
+<dt><a name="index-specint"></a>Function: <strong>specint</strong> <em>(exp(- s*<var>t</var>) * <var>expr</var>, <var>t</var>)</em></dt>
+<dd>
+<p>Compute the Laplace transform of <var>expr</var> with respect to the variable <var>t</var>.
+The integrand <var>expr</var> may contain special functions.   The
+parameter <var>s</var> maybe be named something else; it is determined
+automatically, as the examples below show where <var>p</var> is used in
+some places.
+</p>
+<p>The following special functions are handled by <code>specint</code>: incomplete gamma 
+function, error functions (but not the error function <code>erfi</code>, it is easy to 
+transform <code>erfi</code> e.g. to the error function <code>erf</code>), exponential 
+integrals, bessel functions (including products of bessel functions), hankel 
+functions, hermite and the laguerre polynomials.
+</p>
+<p>Furthermore, <code>specint</code> can handle the hypergeometric function 
+<code>%f[p,q]([],[],z)</code>, the Whittaker function of the first kind 
+<code>%m[u,k](z)</code> and of the second kind <code>%w[u,k](z)</code>.
+</p>
+<p>The result may be in terms of special functions and can include unsimplified 
+hypergeometric functions.  If variable <code><a href="#prefer_005fd">prefer_d</a></code> is <code>true</code>
+then the <code><a href="maxima_92.html#parabolic_005fcylinder_005fd">parabolic_cylinder_d</a></code> function may be used in the result
+in preference to hypergeometric functions.
+</p>
+<p>When <code><a href="#laplace">laplace</a></code> fails to find a Laplace transform, <code>specint</code> is called. 
+Because <code><a href="#laplace">laplace</a></code> knows more general rules for Laplace transforms, it is 
+preferable to use <code><a href="#laplace">laplace</a></code> and not <code>specint</code>.
+</p>
+<p><code>demo(&quot;hypgeo&quot;)</code> displays several examples of Laplace transforms computed by 
+<code>specint</code>.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example">(%i1) assume (p &gt; 0, a &gt; 0)$
+</pre><pre class="example">(%i2) specint (t^(1/2) * exp(-a*t/4) * exp(-p*t), t);
+                           sqrt(%pi)
+(%o2)                     ------------
+                                 a 3/2
+                          2 (p + -)
+                                 4
+</pre><pre class="example">(%i3) specint (t^(1/2) * bessel_j(1, 2 * a^(1/2) * t^(1/2))
+              * exp(-p*t), t);
+                                   - a/p
+                         sqrt(a) %e
+(%o3)                    ---------------
+                                2
+                               p
+</pre></div>
+
+<p>Examples for exponential integrals:
+</p>
+<div class="example">
+<pre class="example">(%i4) assume(s&gt;0,a&gt;0,s-a&gt;0)$
+(%i5) ratsimp(specint(%e^(a*t)
+                      *(log(a)+expintegral_e1(a*t))*%e^(-s*t),t));
+                             log(s)
+(%o5)                        ------
+                             s - a
+(%i6) logarc:true$
+
+(%i7) gamma_expand:true$
+
+radcan(specint((cos(t)*expintegral_si(t)
+                     -sin(t)*expintegral_ci(t))*%e^(-s*t),t));
+                             log(s)
+(%o8)                        ------
+                              2
+                             s  + 1
+ratsimp(specint((2*t*log(a)+2/a*sin(a*t)
+                      -2*t*expintegral_ci(a*t))*%e^(-s*t),t));
+                               2    2
+                          log(s  + a )
+(%o9)                     ------------
+                                2
+                               s
+</pre></div>
+
+<p>Results when using the expansion of <code><a href="maxima_87.html#gamma_005fincomplete">gamma_incomplete</a></code> and when changing 
+the representation to <code><a href="maxima_88.html#expintegral_005fe1">expintegral_e1</a></code>:
+</p>
+<div class="example">
+<pre class="example">(%i10) assume(s&gt;0)$
+(%i11) specint(1/sqrt(%pi*t)*unit_step(t-k)*%e^(-s*t),t);
+                                            1
+                            gamma_incomplete(-, k s)
+                                            2
+(%o11)                      ------------------------
+                               sqrt(%pi) sqrt(s)
+
+(%i12) gamma_expand:true$
+(%i13) specint(1/sqrt(%pi*t)*unit_step(t-k)*%e^(-s*t),t);
+                              erfc(sqrt(k) sqrt(s))
+(%o13)                        ---------------------
+                                     sqrt(s)
+
+(%i14) expintrep:expintegral_e1$
+(%i15) ratsimp(specint(1/(t+a)^2*%e^(-s*t),t));
+                              a s
+                        a s %e    expintegral_e1(a s) - 1
+(%o15)                - ---------------------------------
+                                        a
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;</div></dd></dl>
+
+
+<a name="tldefint"></a><a name="Item_003a-Integration_002fdeffn_002ftldefint"></a><dl>
+<dt><a name="index-tldefint"></a>Function: <strong>tldefint</strong> <em>(<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>)</em></dt>
+<dd>
+<p>Equivalent to <code>ldefint</code> with <code>tlimswitch</code> set to <code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;</div></dd></dl>
+
+
+<a name="Item_003a-Integration_002fnode_002fIntroduction-to-QUADPACK"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_105.html#Introduction-to-QUADPACK" accesskey="n" rel="next">Introduction to QUADPACK</a>, Previous: <a href="maxima_103.html#Introduction-to-Integration" accesskey="p" rel="previous">Introduction to Integration</a>, Up: <a href="maxima_102.html#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

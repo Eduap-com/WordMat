@@ -1,0 +1,2226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for itensor</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for itensor">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for itensor">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_129.html#itensor" rel="up" title="itensor">
+<link href="maxima_132.html#ctensor" rel="next" title="ctensor">
+<link href="maxima_130.html#Introduction-to-itensor" rel="previous" title="Introduction to itensor">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-itensor"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_130.html#Introduction-to-itensor" accesskey="p" rel="previous">Introduction to itensor</a>, Up: <a href="maxima_129.html#itensor" accesskey="u" rel="up">itensor</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-itensor-1"></a>
+<h3 class="section">25.2 Functions and Variables for itensor</h3>
+<a name="Managing-indexed-objects"></a>
+<h4 class="subsection">25.2.1 Managing indexed objects</h4>
+
+<a name="dispcon"></a><a name="Item_003a-Itensor_002fdeffn_002fdispcon"></a><dl>
+<dt><a name="index-dispcon"></a>Function: <strong>dispcon</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>dispcon</tt> (<var>tensor_1</var>, <var>tensor_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>dispcon</tt> (all)</em></dt>
+<dd>
+<p>Displays the contraction properties of its arguments as were given to
+<code>defcon</code>.  <code>dispcon (all)</code> displays all the contraction properties
+which were defined.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Display-functions">Display functions</a>
+&middot;</div></dd></dl>
+
+<a name="entertensor"></a><a name="Item_003a-Itensor_002fdeffn_002fentertensor"></a><dl>
+<dt><a name="index-entertensor"></a>Function: <strong>entertensor</strong> <em>(<var>name</var>)</em></dt>
+<dd>
+<p>is a function which, by prompting, allows one to create an indexed
+object called <var>name</var> with any number of tensorial and derivative
+indices. Either a single index or a list of indices (which may be
+null) is acceptable input (see the example under <code><a href="#covdiff">covdiff</a></code>).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="changename"></a><a name="Item_003a-Itensor_002fdeffn_002fchangename"></a><dl>
+<dt><a name="index-changename"></a>Function: <strong>changename</strong> <em>(<var>old</var>, <var>new</var>, <var>expr</var>)</em></dt>
+<dd>
+<p>will change the name of all indexed objects called <var>old</var> to <var>new</var>
+in <var>expr</var>. <var>old</var> may be either a symbol or a list of the form
+<code>[<var>name</var>, <var>m</var>, <var>n</var>]</code> in which case only those indexed objects called
+<var>name</var> with <var>m</var> covariant and <var>n</var> contravariant indices will be
+renamed to <var>new</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="Item_003a-Itensor_002fdeffn_002flistoftens"></a><dl>
+<dt><a name="index-listoftens"></a>Function: <strong>listoftens</strong></dt>
+<dd>
+<a name="listoftens"></a>
+<p>Lists all tensors in a tensorial expression, complete with their indices. E.g.,
+</p>
+<div class="example">
+<pre class="example">
+(%i6) ishow(a([i,j],[k])*b([u],[],v)+c([x,y],[])*d([],[])*e)$
+                                         k
+(%t6)                        d e c    + a    b
+                                  x y    i j  u,v
+(%i7) ishow(listoftens(%))$
+                               k
+(%t7)                        [a   , b   , c   , d]
+                               i j   u,v   x y
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ishow"></a><a name="Item_003a-Itensor_002fdeffn_002fishow"></a><dl>
+<dt><a name="index-ishow"></a>Function: <strong>ishow</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>displays <var>expr</var> with the indexed objects in it shown having their
+covariant indices as subscripts and contravariant indices as
+superscripts. The derivative indices are displayed as subscripts,
+separated from the covariant indices by a comma (see the examples
+throughout this document).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="indices"></a><a name="Item_003a-Itensor_002fdeffn_002findices"></a><dl>
+<dt><a name="index-indices"></a>Function: <strong>indices</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns a list of two elements.  The first is a list of the free
+indices in <var>expr</var> (those that occur only once). The second is the
+list of the dummy indices in <var>expr</var> (those that occur exactly twice)
+as the following example demonstrates.
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) ishow(a([i,j],[k,l],m,n)*b([k,o],[j,m,p],q,r))$
+                                k l      j m p
+(%t2)                          a        b
+                                i j,m n  k o,q r
+(%i3) indices(%);
+(%o3)                 [[l, p, i, n, o, q, r], [k, j, m]]
+
+</pre></div>
+
+<p>A tensor product containing the same index more than twice is syntactically
+illegal. <code>indices</code> attempts to deal with these expressions in a
+reasonable manner; however, when it is called to operate upon such an
+illegal expression, its behavior should be considered undefined.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="rename"></a><a name="Item_003a-Itensor_002fdeffn_002frename"></a><dl>
+<dt><a name="index-rename"></a>Function: <strong>rename</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>rename</tt> (<var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>rename</tt> (<var>expr</var>, <var>count</var>)</em></dt>
+<dd>
+<p>Returns an expression equivalent to <var>expr</var> but with the dummy indices
+in each term chosen from the set <code>[%1, %2,...]</code>, if the optional second
+argument is omitted. Otherwise, the dummy indices are indexed
+beginning at the value of <var>count</var>.  Each dummy index in a product
+will be different. For a sum, <code>rename</code> will operate upon each term in
+the sum resetting the counter with each term. In this way <code>rename</code> can
+serve as a tensorial simplifier. In addition, the indices will be
+sorted alphanumerically (if <code><a href="#allsym">allsym</a></code> is <code>true</code>) with respect to
+covariant or contravariant indices depending upon the value of <code><a href="#flipflag">flipflag</a></code>.
+If <code>flipflag</code> is <code>false</code> then the indices will be renamed according
+to the order of the contravariant indices. If <code>flipflag</code> is <code>true</code>
+the renaming will occur according to the order of the covariant
+indices. It often happens that the combined effect of the two renamings will
+reduce an expression more than either one by itself.
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) allsym:true;
+(%o2)                                true
+(%i3) g([],[%4,%5])*g([],[%6,%7])*ichr2([%1,%4],[%3])*
+ichr2([%2,%3],[u])*ichr2([%5,%6],[%1])*ichr2([%7,r],[%2])-
+g([],[%4,%5])*g([],[%6,%7])*ichr2([%1,%2],[u])*
+ichr2([%3,%5],[%1])*ichr2([%4,%6],[%3])*ichr2([%7,r],[%2]),noeval$
+(%i4) expr:ishow(%)$
+</pre><pre class="example">       %4 %5  %6 %7      %3         u          %1         %2
+(%t4) g      g      ichr2      ichr2      ichr2      ichr2
+                         %1 %4      %2 %3      %5 %6      %7 r
+
+        %4 %5  %6 %7      u          %1         %3         %2
+     - g      g      ichr2      ichr2      ichr2      ichr2
+                          %1 %2      %3 %5      %4 %6      %7 r
+</pre><pre class="example">(%i5) flipflag:true;
+(%o5)                                true
+(%i6) ishow(rename(expr))$
+       %2 %5  %6 %7      %4         u          %1         %3
+(%t6) g      g      ichr2      ichr2      ichr2      ichr2
+                         %1 %2      %3 %4      %5 %6      %7 r
+
+        %4 %5  %6 %7      u          %1         %3         %2
+     - g      g      ichr2      ichr2      ichr2      ichr2
+                          %1 %2      %3 %4      %5 %6      %7 r
+(%i7) flipflag:false;
+(%o7)                                false
+(%i8) rename(%th(2));
+(%o8)                                  0
+(%i9) ishow(rename(expr))$
+       %1 %2  %3 %4      %5         %6         %7        u
+(%t9) g      g      ichr2      ichr2      ichr2     ichr2
+                         %1 %6      %2 %3      %4 r      %5 %7
+
+        %1 %2  %3 %4      %6         %5         %7        u
+     - g      g      ichr2      ichr2      ichr2     ichr2
+                          %1 %3      %2 %6      %4 r      %5 %7
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="flipflag"></a><a name="Item_003a-Itensor_002fdefvr_002fflipflag"></a><dl>
+<dt><a name="index-flipflag"></a>Option variable: <strong>flipflag</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>If <code>false</code> then the indices will be
+renamed according to the order of the contravariant indices,
+otherwise according to the order of the covariant indices.
+</p>
+<p>If <code>flipflag</code> is <code>false</code> then <code>rename</code> forms a list
+of the contravariant indices as they are encountered from left to right
+(if <code>true</code> then of the covariant indices). The first dummy
+index in the list is renamed to <code>%1</code>, the next to <code>%2</code>, etc.
+Then sorting occurs after the <code>rename</code>-ing (see the example
+under <code>rename</code>).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="defcon"></a><a name="Item_003a-Itensor_002fdeffn_002fdefcon"></a><dl>
+<dt><a name="index-defcon"></a>Function: <strong>defcon</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>defcon</tt> (<var>tensor_1</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>defcon</tt> (<var>tensor_1</var>, <var>tensor_2</var>, <var>tensor_3</var>)</em></dt>
+<dd>
+<p>gives <var>tensor_1</var> the property that the
+contraction of a product of <var>tensor_1</var> and <var>tensor_2</var> results in <var>tensor_3</var>
+with the appropriate indices.  If only one argument, <var>tensor_1</var>, is
+given, then the contraction of the product of <var>tensor_1</var> with any indexed
+object having the appropriate indices (say <code>my_tensor</code>) will yield an
+indexed object with that name, i.e. <code>my_tensor</code>, and with a new set of
+indices reflecting the contractions performed.
+    For example, if <code>imetric:g</code>, then <code>defcon(g)</code> will implement the
+raising and lowering of indices through contraction with the metric
+tensor.
+    More than one <code>defcon</code> can be given for the same indexed object; the
+latest one given which applies in a particular contraction will be
+used.
+<code>contractions</code> is a list of those indexed objects which have been given
+contraction properties with <code>defcon</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="remcon"></a><a name="Item_003a-Itensor_002fdeffn_002fremcon"></a><dl>
+<dt><a name="index-remcon"></a>Function: <strong>remcon</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>remcon</tt> (<var>tensor_1</var>, ..., <var>tensor_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>remcon</tt> (all)</em></dt>
+<dd>
+<p>Removes all the contraction properties
+from the (<var>tensor_1</var>, ..., <var>tensor_n</var>). <code>remcon(all)</code> removes all contraction
+properties from all indexed objects.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="contract_005fItensor"></a><a name="Item_003a-Itensor_002fdeffn_002fcontract"></a><dl>
+<dt><a name="index-contract"></a>Function: <strong>contract</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Carries out the tensorial contractions in <var>expr</var> which may be any
+combination of sums and products. This function uses the information
+given to the <code>defcon</code> function. For best results, <code>expr</code>
+should be fully expanded. <code><a href="maxima_80.html#ratexpand">ratexpand</a></code> is the fastest way to expand
+products and powers of sums if there are no variables in the denominators
+of the terms. The <code><a href="maxima_80.html#gcd">gcd</a></code> switch should be <code>false</code> if GCD
+cancellations are unnecessary.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="indexed_005ftensor"></a><a name="Item_003a-Itensor_002fdeffn_002findexed_005ftensor"></a><dl>
+<dt><a name="index-indexed_005ftensor"></a>Function: <strong>indexed_tensor</strong> <em>(<var>tensor</var>)</em></dt>
+<dd>
+<p>Must be executed before assigning components to a <var>tensor</var> for which
+a built in value already exists as with <code>ichr1</code>, <code>ichr2</code>,
+<code>icurvature</code>. See the example under <code><a href="#icurvature">icurvature</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="components"></a><a name="Item_003a-Itensor_002fdeffn_002fcomponents"></a><dl>
+<dt><a name="index-components"></a>Function: <strong>components</strong> <em>(<var>tensor</var>, <var>expr</var>)</em></dt>
+<dd>
+<p>permits one to assign an indicial value to an expression
+<var>expr</var> giving the values of the components of <var>tensor</var>. These
+are automatically substituted for the tensor whenever it occurs with
+all of its indices. The tensor must be of the form <code>t([...],[...])</code>
+where either list may be empty. <var>expr</var> can be any indexed expression
+involving other objects with the same free indices as <var>tensor</var>. When
+used to assign values to the metric tensor wherein the components
+contain dummy indices one must be careful to define these indices to
+avoid the generation of multiple dummy indices. Removal of this
+assignment is given to the function <code><a href="#remcomps">remcomps</a></code>.
+</p>
+<p>It is important to keep in mind that <code>components</code> cares only about
+the valence of a tensor, not about any particular index ordering. Thus
+assigning components to, say, <code>x([i,-j],[])</code>, <code>x([-j,i],[])</code>, or
+<code>x([i],[j])</code> all produce the same result, namely components being
+assigned to a tensor named <code>x</code> with valence <code>(1,1)</code>.
+</p>
+<p>Components can be assigned to an indexed expression in four ways, two
+of which involve the use of the <code>components</code> command:
+</p>
+<p>1) As an indexed expression. For instance:
+</p>
+<div class="example">
+<pre class="example">(%i2) components(g([],[i,j]),e([],[i])*p([],[j]))$
+(%i3) ishow(g([],[i,j]))$
+                                      i  j
+(%t3)                                e  p
+
+</pre></div>
+
+<p>2) As a matrix:
+</p>
+<div class="example">
+<pre class="example">
+(%i5) lg:-ident(4)$lg[1,1]:1$lg;
+</pre><pre class="example">                            [ 1   0    0    0  ]
+                            [                  ]
+                            [ 0  - 1   0    0  ]
+(%o5)                       [                  ]
+                            [ 0   0   - 1   0  ]
+                            [                  ]
+                            [ 0   0    0   - 1 ]
+</pre><pre class="example">(%i6) components(g([i,j],[]),lg);
+(%o6)                                done
+(%i7) ishow(g([i,j],[]))$
+(%t7)                                g
+                                      i j
+(%i8) g([1,1],[]);
+(%o8)                                  1
+(%i9) g([4,4],[]);
+(%o9)                                 - 1
+</pre></div>
+
+<p>3) As a function. You can use a Maxima function to specify the
+components of a tensor based on its indices. For instance, the following
+code assigns <code><a href="#kdelta">kdelta</a></code> to <code>h</code> if <code>h</code> has the same number
+of covariant and contravariant indices and no derivative indices, and
+<code>g</code> otherwise:
+</p>
+<div class="example">
+<pre class="example">
+(%i4) h(l1,l2,[l3]):=if length(l1)=length(l2) and length(l3)=0
+  then kdelta(l1,l2) else apply(g,append([l1,l2], l3))$
+(%i5) ishow(h([i],[j]))$
+                                          j
+(%t5)                               kdelta
+                                          i
+(%i6) ishow(h([i,j],[k],l))$
+                                     k
+(%t6)                               g
+                                     i j,l
+</pre></div>
+
+<p>4) Using Maxima&rsquo;s pattern matching capabilities, specifically the
+<code><a href="maxima_162.html#defrule">defrule</a></code> and <code><a href="maxima_162.html#applyb1">applyb1</a></code> commands:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) matchdeclare(l1,listp);
+(%o2)                                done
+(%i3) defrule(r1,m(l1,[]),(i1:idummy(),
+      g([l1[1],l1[2]],[])*q([i1],[])*e([],[i1])))$
+
+(%i4) defrule(r2,m([],l1),(i1:idummy(),
+      w([],[l1[1],l1[2]])*e([i1],[])*q([],[i1])))$
+
+(%i5) ishow(m([i,n],[])*m([],[i,m]))$
+</pre><pre class="example">                                    i m
+(%t5)                              m    m
+                                         i n
+</pre><pre class="example">(%i6) ishow(rename(applyb1(%,r1,r2)))$
+                           %1  %2  %3 m
+(%t6)                     e   q   w     q   e   g
+                                         %1  %2  %3 n
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="remcomps"></a><a name="Item_003a-Itensor_002fdeffn_002fremcomps"></a><dl>
+<dt><a name="index-remcomps"></a>Function: <strong>remcomps</strong> <em>(<var>tensor</var>)</em></dt>
+<dd>
+<p>Unbinds all values from <var>tensor</var> which were assigned with the
+<code><a href="#components">components</a></code> function.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+
+<a name="showcomps"></a><a name="Item_003a-Itensor_002fdeffn_002fshowcomps"></a><dl>
+<dt><a name="index-showcomps"></a>Function: <strong>showcomps</strong> <em>(<var>tensor</var>)</em></dt>
+<dd>
+<p>Shows component assignments of a tensor, as made using the <code><a href="#components">components</a></code>
+command. This function can be particularly useful when a matrix is assigned
+to an indicial tensor using <code>components</code>, as demonstrated by the
+following example:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;ctensor&quot;);
+(%o1)       /share/tensor/ctensor.mac
+(%i2) load(&quot;itensor&quot;);
+(%o2)      /share/tensor/itensor.lisp
+(%i3) lg:matrix([sqrt(r/(r-2*m)),0,0,0],[0,r,0,0],
+                [0,0,sin(theta)*r,0],[0,0,0,sqrt((r-2*m)/r)]);
+        [         r                                     ]
+        [ sqrt(-------)  0       0              0       ]
+        [      r - 2 m                                  ]
+        [                                               ]
+        [       0        r       0              0       ]
+(%o3)   [                                               ]
+        [       0        0  r sin(theta)        0       ]
+        [                                               ]
+        [                                      r - 2 m  ]
+        [       0        0       0        sqrt(-------) ]
+        [                                         r     ]
+(%i4) components(g([i,j],[]),lg);
+(%o4)                                done
+(%i5) showcomps(g([i,j],[]));
+             [         r                                     ]
+             [ sqrt(-------)  0       0              0       ]
+             [      r - 2 m                                  ]
+             [                                               ]
+             [       0        r       0              0       ]
+(%t5) g    = [                                               ]
+       i j   [       0        0  r sin(theta)        0       ]
+             [                                               ]
+             [                                      r - 2 m  ]
+             [       0        0       0        sqrt(-------) ]
+             [                                         r     ]
+(%o5)                                false
+
+</pre></div>
+
+<p>The <code>showcomps</code> command can also display components of a tensor of
+rank higher than 2.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="idummy"></a><a name="Item_003a-Itensor_002fdeffn_002fidummy"></a><dl>
+<dt><a name="index-idummy"></a>Function: <strong>idummy</strong> <em>()</em></dt>
+<dd>
+<p>Increments <code><a href="#icounter">icounter</a></code> and returns as its value an index of the form
+<code>%n</code> where n is a positive integer.  This guarantees that dummy indices
+which are needed in forming expressions will not conflict with indices
+already in use (see the example under <code><a href="#indices">indices</a></code>).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="idummyx"></a><a name="Item_003a-Itensor_002fdefvr_002fidummyx"></a><dl>
+<dt><a name="index-idummyx"></a>Option variable: <strong>idummyx</strong></dt>
+<dd><p>Default value: <code>%</code>
+</p>
+<p>Is the prefix for dummy indices (see the example under <code><a href="#indices">indices</a></code>).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="icounter"></a><a name="Item_003a-Itensor_002fdefvr_002ficounter"></a><dl>
+<dt><a name="index-icounter"></a>Option variable: <strong>icounter</strong></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p>Determines the numerical suffix to be used in
+generating the next dummy index in the tensor package.  The prefix is
+determined by the option <code><a href="#idummy">idummy</a></code> (default: <code>%</code>).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="kdelta"></a><a name="Item_003a-Itensor_002fdeffn_002fkdelta"></a><dl>
+<dt><a name="index-kdelta"></a>Function: <strong>kdelta</strong> <em>(<var>L1</var>, <var>L2</var>)</em></dt>
+<dd><p>is the generalized Kronecker delta function defined in
+the <code>itensor</code> package with <var>L1</var> the list of covariant indices and <var>L2</var>
+the list of contravariant indices.  <code>kdelta([i],[j])</code> returns the ordinary
+Kronecker delta.  The command <code>ev(<var>expr</var>,kdelta)</code> causes the evaluation of
+an expression containing <code>kdelta([],[])</code> to the dimension of the
+manifold.
+</p>
+<p>In what amounts to an abuse of this notation, <code>itensor</code> also allows
+<code>kdelta</code> to have 2 covariant and no contravariant, or 2 contravariant
+and no covariant indices, in effect providing a co(ntra)variant &quot;unit matrix&quot;
+capability. This is strictly considered a programming aid and not meant to
+imply that <code>kdelta([i,j],[])</code> is a valid tensorial object.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="kdels"></a><a name="Item_003a-Itensor_002fdeffn_002fkdels"></a><dl>
+<dt><a name="index-kdels"></a>Function: <strong>kdels</strong> <em>(<var>L1</var>, <var>L2</var>)</em></dt>
+<dd>
+<p>Symmetrized Kronecker delta, used in some calculations. For instance:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) kdelta([1,2],[2,1]);
+(%o2)                                 - 1
+(%i3) kdels([1,2],[2,1]);
+(%o3)                                  1
+(%i4) ishow(kdelta([a,b],[c,d]))$
+                             c       d         d       c
+(%t4)                  kdelta  kdelta  - kdelta  kdelta
+                             a       b         a       b
+(%i4) ishow(kdels([a,b],[c,d]))$
+                             c       d         d       c
+(%t4)                  kdelta  kdelta  + kdelta  kdelta
+                             a       b         a       b
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="levi_005fcivita"></a><a name="Item_003a-Itensor_002fdeffn_002flevi_005fcivita"></a><dl>
+<dt><a name="index-levi_005fcivita"></a>Function: <strong>levi_civita</strong> <em>(<var>L</var>)</em></dt>
+<dd><p>is the permutation (or Levi-Civita) tensor which yields 1 if
+the list <var>L</var> consists of an even permutation of integers, -1 if it
+consists of an odd permutation, and 0 if some indices in <var>L</var> are
+repeated.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="lc2kdt"></a><a name="Item_003a-Itensor_002fdeffn_002flc2kdt"></a><dl>
+<dt><a name="index-lc2kdt"></a>Function: <strong>lc2kdt</strong> <em>(<var>expr</var>)</em></dt>
+<dd><p>Simplifies expressions containing the Levi-Civita symbol, converting these
+to Kronecker-delta expressions when possible. The main difference between
+this function and simply evaluating the Levi-Civita symbol is that direct
+evaluation often results in Kronecker expressions containing numerical
+indices. This is often undesirable as it prevents further simplification.
+The <code>lc2kdt</code> function avoids this problem, yielding expressions that
+are more easily simplified with <code><a href="#rename">rename</a></code> or <code><a href="maxima_149.html#contract">contract</a></code>.
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) expr:ishow('levi_civita([],[i,j])
+                 *'levi_civita([k,l],[])*a([j],[k]))$
+                                  i j  k
+(%t2)                  levi_civita    a  levi_civita
+                                       j            k l
+(%i3) ishow(ev(expr,levi_civita))$
+                                  i j  k       1 2
+(%t3)                       kdelta    a  kdelta
+                                  1 2  j       k l
+(%i4) ishow(ev(%,kdelta))$
+             i       j         j       i   k
+(%t4) (kdelta  kdelta  - kdelta  kdelta ) a
+             1       2         1       2   j
+
+                               1       2         2       1
+                        (kdelta  kdelta  - kdelta  kdelta )
+                               k       l         k       l
+(%i5) ishow(lc2kdt(expr))$
+                     k       i       j    k       j       i
+(%t5)               a  kdelta  kdelta  - a  kdelta  kdelta
+                     j       k       l    j       k       l
+(%i6) ishow(contract(expand(%)))$
+                                 i           i
+(%t6)                           a  - a kdelta
+                                 l           l
+</pre></div>
+
+<p>The <code>lc2kdt</code> function sometimes makes use of the metric tensor.
+If the metric tensor was not defined previously with <code><a href="#imetric">imetric</a></code>,
+this results in an error.
+</p>
+<div class="example">
+<pre class="example">
+(%i7) expr:ishow('levi_civita([],[i,j])
+                 *'levi_civita([],[k,l])*a([j,k],[]))$
+</pre><pre class="example">                                 i j            k l
+(%t7)                 levi_civita    levi_civita    a
+                                                     j k
+</pre><pre class="example">(%i8) ishow(lc2kdt(expr))$
+Maxima encountered a Lisp error:
+
+ Error in $IMETRIC [or a callee]:
+ $IMETRIC [or a callee] requires less than two arguments.
+
+Automatically continuing.
+To re-enable the Lisp debugger set *debugger-hook* to nil.
+(%i9) imetric(g);
+(%o9)                                done
+(%i10) ishow(lc2kdt(expr))$
+         %3 i       k   %4 j       l     %3 i       l   %4 j
+(%t10) (g     kdelta   g     kdelta   - g     kdelta   g    
+                    %3             %4               %3
+              k
+        kdelta  ) a
+              %4   j k
+(%i11) ishow(contract(expand(%)))$
+                                  l i    l i  j
+(%t11)                           a    - g    a
+                                              j
+</pre></div>
+
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+
+<a name="lc_005fl"></a><a name="Item_003a-Itensor_002fdeffn_002flc_005fl"></a><dl>
+<dt><a name="index-lc_005fl"></a>Function: <strong>lc_l</strong></dt>
+<dd><p>Simplification rule used for expressions containing the unevaluated Levi-Civita
+symbol (<code><a href="#levi_005fcivita">levi_civita</a></code>). Along with <code><a href="#lc_005fu">lc_u</a></code>, it can be used to simplify
+many expressions more efficiently than the evaluation of <code>levi_civita</code>.
+For example:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) el1:ishow('levi_civita([i,j,k],[])*a([],[i])*a([],[j]))$
+                             i  j
+(%t2)                       a  a  levi_civita
+                                             i j k
+(%i3) el2:ishow('levi_civita([],[i,j,k])*a([i])*a([j]))$
+                                       i j k
+(%t3)                       levi_civita      a  a
+                                              i  j
+(%i4) canform(contract(expand(applyb1(el1,lc_l,lc_u))));
+(%t4)                                  0
+(%i5) canform(contract(expand(applyb1(el2,lc_l,lc_u))));
+(%t5)                                  0
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+
+<a name="lc_005fu"></a><a name="Item_003a-Itensor_002fdeffn_002flc_005fu"></a><dl>
+<dt><a name="index-lc_005fu"></a>Function: <strong>lc_u</strong></dt>
+<dd>
+<p>Simplification rule used for expressions containing the unevaluated Levi-Civita
+symbol (<code><a href="#levi_005fcivita">levi_civita</a></code>). Along with <code>lc_u</code>, it can be used to simplify
+many expressions more efficiently than the evaluation of <code>levi_civita</code>.
+For details, see <code><a href="#lc_005fl">lc_l</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="canten"></a><a name="Item_003a-Itensor_002fdeffn_002fcanten"></a><dl>
+<dt><a name="index-canten"></a>Function: <strong>canten</strong> <em>(<var>expr</var>)</em></dt>
+<dd><p>Simplifies <var>expr</var> by renaming (see <code><a href="#rename">rename</a></code>)
+and permuting dummy indices. <code>rename</code> is restricted to sums of tensor
+products in which no derivatives are present. As such it is limited
+and should only be used if <code><a href="#canform">canform</a></code> is not capable of carrying out the
+required simplification.
+</p>
+<p>The <code>canten</code> function returns a mathematically correct result only
+if its argument is an expression that is fully symmetric in its indices.
+For this reason, <code>canten</code> returns an error if <code><a href="#allsym">allsym</a></code> is not
+set to <code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="concan"></a><a name="Item_003a-Itensor_002fdeffn_002fconcan"></a><dl>
+<dt><a name="index-concan"></a>Function: <strong>concan</strong> <em>(<var>expr</var>)</em></dt>
+<dd><p>Similar to <code><a href="#canten">canten</a></code> but also performs index contraction.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="Tensor-symmetries"></a>
+<h4 class="subsection">25.2.2 Tensor symmetries</h4>
+
+<a name="allsym"></a><a name="Item_003a-Itensor_002fdefvr_002fallsym"></a><dl>
+<dt><a name="index-allsym"></a>Option variable: <strong>allsym</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>If <code>true</code> then all indexed objects
+are assumed symmetric in all of their covariant and contravariant
+indices. If <code>false</code> then no symmetries of any kind are assumed
+in these indices. Derivative indices are always taken to be symmetric
+unless <code>iframe_flag</code> is set to <code>true</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="decsym"></a><a name="Item_003a-Itensor_002fdeffn_002fdecsym"></a><dl>
+<dt><a name="index-decsym"></a>Function: <strong>decsym</strong> <em>(<var>tensor</var>, <var>m</var>, <var>n</var>, [<var>cov_1</var>, <var>cov_2</var>, ...], [<var>contr_1</var>, <var>contr_2</var>, ...])</em></dt>
+<dd>
+<p>Declares symmetry properties for <var>tensor</var> of <var>m</var> covariant and
+<var>n</var> contravariant indices. The <var>cov_i</var> and <var>contr_i</var> are
+pseudofunctions expressing symmetry relations among the covariant and
+contravariant indices respectively.  These are of the form
+<code>symoper(<var>index_1</var>, <var>index_2</var>,...)</code> where <code>symoper</code> is one of
+<code>sym</code>, <code>anti</code> or <code>cyc</code> and the <var>index_i</var> are integers
+indicating the position of the index in the <var>tensor</var>.  This will
+declare <var>tensor</var> to be symmetric, antisymmetric or cyclic respectively
+in the <var>index_i</var>. <code>symoper(all)</code> is also an allowable form which
+indicates all indices obey the symmetry condition. For example, given an
+object <code>b</code> with 5 covariant indices,
+<code>decsym(b,5,3,[sym(1,2),anti(3,4)],[cyc(all)])</code> declares <code>b</code>
+symmetric in its first and second and antisymmetric in its third and
+fourth covariant indices, and cyclic in all of its contravariant indices.
+Either list of symmetry declarations may be null.  The function which
+performs the simplifications is <code>canform</code> as the example below
+illustrates.
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) expr:contract( expand( a([i1, j1, k1], [])
+           *kdels([i, j, k], [i1, j1, k1])))$
+(%i3) ishow(expr)$
+</pre><pre class="example">(%t3)         a      + a      + a      + a      + a      + a
+               k j i    k i j    j k i    j i k    i k j    i j k
+</pre><pre class="example">(%i4) decsym(a,3,0,[sym(all)],[]);
+(%o4)                                done
+(%i5) ishow(canform(expr))$
+(%t5)                              6 a
+                                      i j k
+(%i6) remsym(a,3,0);
+(%o6)                                done
+(%i7) decsym(a,3,0,[anti(all)],[]);
+(%o7)                                done
+(%i8) ishow(canform(expr))$
+(%t8)                                  0
+(%i9) remsym(a,3,0);
+(%o9)                                done
+(%i10) decsym(a,3,0,[cyc(all)],[]);
+(%o10)                               done
+(%i11) ishow(canform(expr))$
+(%t11)                        3 a      + 3 a
+                                 i k j      i j k
+(%i12) dispsym(a,3,0);
+(%o12)                     [[cyc, [[1, 2, 3]], []]]
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="remsym"></a><a name="Item_003a-Itensor_002fdeffn_002fremsym"></a><dl>
+<dt><a name="index-remsym"></a>Function: <strong>remsym</strong> <em>(<var>tensor</var>, <var>m</var>, <var>n</var>)</em></dt>
+<dd><p>Removes all symmetry properties from <var>tensor</var> which has <var>m</var>
+covariant indices and <var>n</var> contravariant indices.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="dispsym"></a><a name="Item_003a-Itensor_002fdeffn_002fdispsym"></a><dl>
+<dt><a name="index-dispsym"></a>Function: <strong>dispsym</strong> <em>(<var>tensor</var>, <var>m</var>, <var>n</var>)</em></dt>
+<dd><p>Displays all of the defined symmetries from <var>tensor</var> which has <var>m</var>
+covariant indices and <var>n</var> contravariant indices. See <code><a href="#decsym">decsym</a></code>
+for an example.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="canform"></a><a name="Item_003a-Itensor_002fdeffn_002fcanform"></a><dl>
+<dt><a name="index-canform"></a>Function: <strong>canform</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>canform</tt> (<var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>canform</tt> (<var>expr</var>, <var>rename</var>)</em></dt>
+<dd>
+<p>Simplifies <var>expr</var> by renaming dummy
+indices and reordering all indices as dictated by symmetry conditions
+imposed on them. If <code>allsym</code> is <code>true</code> then all indices are assumed
+symmetric, otherwise symmetry information provided by <code>decsym</code>
+declarations will be used. The dummy indices are renamed in the same
+manner as in the <code><a href="#rename">rename</a></code> function. When <code>canform</code> is applied to a large
+expression the calculation may take a considerable amount of time.
+This time can be shortened by calling <code>rename</code> on the expression first.
+Also see the example under <code><a href="#decsym">decsym</a></code>. Note: <code>canform</code> may not be able to
+reduce an expression completely to its simplest form although it will
+always return a mathematically correct result.
+</p>
+<p>The optional second parameter <var>rename</var>, if set to <code>false</code>, suppresses renaming.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="Indicial-tensor-calculus"></a>
+<h4 class="subsection">25.2.3 Indicial tensor calculus</h4>
+
+<a name="itensor_005fdiff"></a><a name="Item_003a-Itensor_002fdeffn_002fdiff"></a><dl>
+<dt><a name="index-diff-1"></a>Function: <strong>diff</strong> <em>(<var>expr</var>, <var>v_1</var>, [<var>n_1</var>, [<var>v_2</var>, <var>n_2</var>] ...])</em></dt>
+<dd>
+<p>is the usual Maxima differentiation function which has been expanded
+in its abilities for <code>itensor</code>. It takes the derivative of <var>expr</var> with
+respect to <var>v_1</var> <var>n_1</var> times, with respect to <var>v_2</var> <var>n_2</var>
+times, etc. For the tensor package, the function has been modified so
+that the <var>v_i</var> may be integers from 1 up to the value of the variable
+<code>dim</code>.  This will cause the differentiation to be carried out with
+respect to the <var>v_i</var>th member of the list <code>vect_coords</code>.  If
+<code>vect_coords</code> is bound to an atomic variable, then that variable
+subscripted by <var>v_i</var> will be used for the variable of
+differentiation.  This permits an array of coordinate names or
+subscripted names like <code>x[1]</code>, <code>x[2]</code>, ...  to be used.
+</p>
+<p>A further extension adds the ability to <code>diff</code> to compute derivatives
+with respect to an indexed variable. In particular, the tensor package knows
+how to differentiate expressions containing combinations of the metric tensor
+and its derivatives with respect to the metric tensor and its first and
+second derivatives. This capability is particularly useful when considering
+Lagrangian formulations of a gravitational theory, allowing one to derive
+the Einstein tensor and field equations from the action principle.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="idiff"></a><a name="Item_003a-Itensor_002fdeffn_002fidiff"></a><dl>
+<dt><a name="index-idiff"></a>Function: <strong>idiff</strong> <em>(<var>expr</var>, <var>v_1</var>, [<var>n_1</var>, [<var>v_2</var>, <var>n_2</var>] ...])</em></dt>
+<dd><p>Indicial differentiation. Unlike <code>diff</code>, which differentiates
+with respect to an independent variable, <code>idiff)</code> can be used
+to differentiate with respect to a coordinate. For an indexed object,
+this amounts to appending the <var>v_i</var> as derivative indices.
+Subsequently, derivative indices will be sorted, unless <code>iframe_flag</code>
+is set to <code>true</code>.
+</p>
+<p><code>idiff</code> can also differentiate the determinant of the metric
+tensor. Thus, if <code>imetric</code> has been bound to <code>G</code> then
+<code>idiff(determinant(g),k)</code> will return
+<code>2 * determinant(g) * ichr2([%i,k],[%i])</code> where the dummy index <code>%i</code>
+is chosen appropriately.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="liediff"></a><a name="Item_003a-Itensor_002fdeffn_002fliediff"></a><dl>
+<dt><a name="index-liediff"></a>Function: <strong>liediff</strong> <em>(<var>v</var>, <var>ten</var>)</em></dt>
+<dd>
+<p>Computes the Lie-derivative of the tensorial expression <var>ten</var> with
+respect to the vector field <var>v</var>. <var>ten</var> should be any indexed
+tensor expression; <var>v</var> should be the name (without indices) of a vector
+field. For example:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) ishow(liediff(v,a([i,j],[])*b([],[k],l)))$
+       k    %2            %2          %2
+(%t2) b   (v   a       + v   a     + v   a    )
+       ,l       i j,%2    ,j  i %2    ,i  %2 j
+
+                          %1  k        %1  k      %1  k
+                      + (v   b      - b   v    + v   b   ) a
+                              ,%1 l    ,l  ,%1    ,l  ,%1   i j
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="rediff"></a><a name="Item_003a-Itensor_002fdeffn_002frediff"></a><dl>
+<dt><a name="index-rediff"></a>Function: <strong>rediff</strong> <em>(<var>ten</var>)</em></dt>
+<dd>
+<p>Evaluates all occurrences of the <code><a href="#idiff">idiff</a></code> command in the tensorial
+expression <var>ten</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="undiff"></a><a name="Item_003a-Itensor_002fdeffn_002fundiff"></a><dl>
+<dt><a name="index-undiff"></a>Function: <strong>undiff</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns an expression equivalent to <var>expr</var> but with all derivatives
+of indexed objects replaced by the noun form of the <code><a href="#idiff">idiff</a></code> function. Its
+arguments would yield that indexed object if the differentiation were
+carried out.  This is useful when it is desired to replace a
+differentiated indexed object with some function definition resulting
+in <var>expr</var> and then carry out the differentiation by saying
+<code>ev(<var>expr</var>, idiff)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="evundiff"></a><a name="Item_003a-Itensor_002fdeffn_002fevundiff"></a><dl>
+<dt><a name="index-evundiff"></a>Function: <strong>evundiff</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Equivalent to the execution of <code><a href="#undiff">undiff</a></code>, followed by <code><a href="maxima_43.html#ev">ev</a></code> and
+<code><a href="#rediff">rediff</a></code>.
+</p>
+<p>The point of this operation is to easily evaluate expressions that cannot
+be directly evaluated in derivative form. For instance, the following
+causes an error:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) icurvature([i,j,k],[l],m);
+Maxima encountered a Lisp error:
+
+ Error in $ICURVATURE [or a callee]:
+ $ICURVATURE [or a callee] requires less than three arguments.
+
+Automatically continuing.
+To re-enable the Lisp debugger set *debugger-hook* to nil.
+</pre></div>
+
+<p>However, if <code><a href="#icurvature">icurvature</a></code> is entered in noun form, it can be evaluated
+using <code>evundiff</code>:
+</p>
+<div class="example">
+<pre class="example">(%i3) ishow('icurvature([i,j,k],[l],m))$
+                                         l
+(%t3)                          icurvature
+                                         i j k,m
+(%i4) ishow(evundiff(%))$
+             l              l         %1           l           %1
+(%t4) - ichr2        - ichr2     ichr2      - ichr2       ichr2
+             i k,j m        %1 j      i k,m        %1 j,m      i k
+
+             l              l         %1           l           %1
+      + ichr2        + ichr2     ichr2      + ichr2       ichr2
+             i j,k m        %1 k      i j,m        %1 k,m      i j
+</pre></div>
+
+<p>Note: In earlier versions of Maxima, derivative forms of the
+Christoffel-symbols also could not be evaluated. This has been fixed now,
+so <code>evundiff</code> is no longer necessary for expressions like this:
+</p>
+<div class="example">
+<pre class="example">(%i5) imetric(g);
+(%o5)                                done
+(%i6) ishow(ichr2([i,j],[k],l))$
+       k %3
+      g     (g         - g         + g        )
+              j %3,i l    i j,%3 l    i %3,j l
+(%t6) -----------------------------------------
+                          2
+
+                         k %3
+                        g     (g       - g       + g      )
+                         ,l     j %3,i    i j,%3    i %3,j
+                      + -----------------------------------
+                                         2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="flush"></a><a name="Item_003a-Itensor_002fdeffn_002fflush"></a><dl>
+<dt><a name="index-flush"></a>Function: <strong>flush</strong> <em>(<var>expr</var>, <var>tensor_1</var>, <var>tensor_2</var>, ...)</em></dt>
+<dd><p>Set to zero, in
+<var>expr</var>, all occurrences of the <var>tensor_i</var> that have no derivative indices.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="flushd"></a><a name="Item_003a-Itensor_002fdeffn_002fflushd"></a><dl>
+<dt><a name="index-flushd"></a>Function: <strong>flushd</strong> <em>(<var>expr</var>, <var>tensor_1</var>, <var>tensor_2</var>, ...)</em></dt>
+<dd><p>Set to zero, in
+<var>expr</var>, all occurrences of the <var>tensor_i</var> that have derivative indices.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="flushnd"></a><a name="Item_003a-Itensor_002fdeffn_002fflushnd"></a><dl>
+<dt><a name="index-flushnd"></a>Function: <strong>flushnd</strong> <em>(<var>expr</var>, <var>tensor</var>, <var>n</var>)</em></dt>
+<dd><p>Set to zero, in <var>expr</var>, all
+occurrences of the differentiated object <var>tensor</var> that have <var>n</var> or more
+derivative indices as the following example demonstrates.
+</p><div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) ishow(a([i],[J,r],k,r)+a([i],[j,r,s],k,r,s))$
+                                J r      j r s
+(%t2)                          a      + a
+                                i,k r    i,k r s
+(%i3) ishow(flushnd(%,a,3))$
+                                     J r
+(%t3)                               a
+                                     i,k r
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="coord"></a><a name="Item_003a-Itensor_002fdeffn_002fcoord"></a><dl>
+<dt><a name="index-coord"></a>Function: <strong>coord</strong> <em>(<var>tensor_1</var>, <var>tensor_2</var>, ...)</em></dt>
+<dd>
+<p>Gives <var>tensor_i</var> the coordinate differentiation property that the
+derivative of contravariant vector whose name is one of the
+<var>tensor_i</var> yields a Kronecker delta. For example, if <code>coord(x)</code> has
+been done then <code>idiff(x([],[i]),j)</code> gives <code>kdelta([i],[j])</code>.
+<code>coord</code> is a list of all indexed objects having this property.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="remcoord"></a><a name="Item_003a-Itensor_002fdeffn_002fremcoord"></a><dl>
+<dt><a name="index-remcoord"></a>Function: <strong>remcoord</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>remcoord</tt> (<var>tensor_1</var>, <var>tensor_2</var>, ...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>remcoord</tt> (all)</em></dt>
+<dd>
+<p>Removes the coordinate differentiation property from the <code>tensor_i</code>
+that was established by the function <code>coord</code>.  <code>remcoord(all)</code>
+removes this property from all indexed objects.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="makebox"></a><a name="Item_003a-Itensor_002fdeffn_002fmakebox"></a><dl>
+<dt><a name="index-makebox"></a>Function: <strong>makebox</strong> <em>(<var>expr</var>,<var>g</var>)</em></dt>
+<dd><p>Display <var>expr</var> using the metric <var>g</var> such that
+any tensor d&rsquo;Alembertian occurring in <var>expr</var> will be indicated using the
+symbol <code>[]</code>.  For example, <code>[]p([m],[n])</code> represents
+<code>g([],[i,j])*p([m],[n],i,j)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="conmetderiv"></a><a name="Item_003a-Itensor_002fdeffn_002fconmetderiv"></a><dl>
+<dt><a name="index-conmetderiv"></a>Function: <strong>conmetderiv</strong> <em>(<var>expr</var>, <var>tensor</var>)</em></dt>
+<dd>
+<p>Simplifies expressions containing ordinary derivatives of
+both covariant and contravariant forms of the metric tensor (the
+current restriction).  For example, <code>conmetderiv</code> can relate the
+derivative of the contravariant metric tensor with the Christoffel
+symbols as seen from the following:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) ishow(g([],[a,b],c))$
+                                      a b
+(%t2)                                g
+                                      ,c
+(%i3) ishow(conmetderiv(%,g))$
+                         %1 b      a       %1 a      b
+(%t3)                 - g     ichr2     - g     ichr2
+                                   %1 c              %1 c
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="simpmetderiv"></a><a name="Item_003a-Itensor_002fdeffn_002fsimpmetderiv"></a><dl>
+<dt><a name="index-simpmetderiv"></a>Function: <strong>simpmetderiv</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>simpmetderiv</tt> (<var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>simpmetderiv</tt> (<var>expr</var>[, <var>stop</var>])</em></dt>
+<dd>
+<p>Simplifies expressions containing products of the derivatives of the
+metric tensor. Specifically, <code>simpmetderiv</code> recognizes two identities:
+</p>
+<div class="example">
+<pre class="example">
+   ab        ab           ab                 a
+  g   g   + g   g     = (g   g  )   = (kdelta )   = 0
+   ,d  bc        bc,d         bc ,d          c ,d
+
+</pre></div>
+
+<p>hence
+</p>
+<div class="example">
+<pre class="example">
+   ab          ab
+  g   g   = - g   g
+   ,d  bc          bc,d
+</pre></div>
+
+<p>and
+</p>
+<div class="example">
+<pre class="example">
+  ab          ab
+ g   g     = g   g
+  ,j  ab,i    ,i  ab,j
+
+</pre></div>
+
+<p>which follows from the symmetries of the Christoffel symbols.
+</p>
+<p>The <code>simpmetderiv</code> function takes one optional parameter which, when
+present, causes the function to stop after the first successful
+substitution in a product expression. The <code>simpmetderiv</code> function
+also makes use of the global variable <code><a href="#flipflag">flipflag</a></code> which determines
+how to apply a &ldquo;canonical&rdquo; ordering to the product indices.
+</p>
+<p>Put together, these capabilities can be used to achieve powerful
+simplifications that are difficult or impossible to accomplish otherwise.
+This is demonstrated through the following example that explicitly uses the
+partial simplification features of <code>simpmetderiv</code> to obtain a
+contractible expression:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) imetric(g);
+(%o2)                                done
+(%i3) ishow(g([],[a,b])*g([],[b,c])*g([a,b],[],d)*g([b,c],[],e))$
+                             a b  b c
+(%t3)                       g    g    g      g
+                                       a b,d  b c,e
+(%i4) ishow(canform(%))$
+
+errexp1 has improper indices
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i5) ishow(simpmetderiv(%))$
+                             a b  b c
+(%t5)                       g    g    g      g
+                                       a b,d  b c,e
+(%i6) flipflag:not flipflag;
+(%o6)                                true
+(%i7) ishow(simpmetderiv(%th(2)))$
+                               a b  b c
+(%t7)                         g    g    g    g
+                               ,d   ,e   a b  b c
+(%i8) flipflag:not flipflag;
+(%o8)                                false
+(%i9) ishow(simpmetderiv(%th(2),stop))$
+                               a b  b c
+(%t9)                       - g    g    g      g
+                                    ,e   a b,d  b c
+(%i10) ishow(contract(%))$
+                                    b c
+(%t10)                           - g    g
+                                    ,e   c b,d
+
+</pre></div>
+
+<p>See also <code>weyl.dem</code> for an example that uses <code><a href="#simpmetderiv">simpmetderiv</a></code>
+and <code><a href="#conmetderiv">conmetderiv</a></code> together to simplify contractions of the Weyl tensor.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="flush1deriv"></a><a name="Item_003a-Itensor_002fdeffn_002fflush1deriv"></a><dl>
+<dt><a name="index-flush1deriv"></a>Function: <strong>flush1deriv</strong> <em>(<var>expr</var>, <var>tensor</var>)</em></dt>
+<dd>
+<p>Set to zero, in <code>expr</code>, all occurrences of <code>tensor</code> that have
+exactly one derivative index.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="Tensors-in-curved-spaces"></a>
+<h4 class="subsection">25.2.4 Tensors in curved spaces</h4>
+
+<a name="imetric"></a><a name="Item_003a-Itensor_002fdeffn_002fimetric"></a><dl>
+<dt><a name="index-imetric"></a>Function: <strong>imetric</strong> <em>(<var>g</var>)</em></dt>
+<dt><a name="index-imetric-1"></a>System variable: <strong>imetric</strong></dt>
+<dd>
+<p>Specifies the metric by assigning the variable <code>imetric:<var>g</var></code> in
+addition, the contraction properties of the metric <var>g</var> are set up by
+executing the commands <code>defcon(<var>g</var>), defcon(<var>g</var>, <var>g</var>, kdelta)</code>.
+The variable <code>imetric</code> (unbound by default), is bound to the metric, assigned by
+the <code>imetric(<var>g</var>)</code> command.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="idim"></a><a name="Item_003a-Itensor_002fdeffn_002fidim"></a><dl>
+<dt><a name="index-idim"></a>Function: <strong>idim</strong> <em>(<var>n</var>)</em></dt>
+<dd><p>Sets the dimensions of the metric. Also initializes the antisymmetry
+properties of the Levi-Civita symbols for the given dimension.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ichr1"></a><a name="Item_003a-Itensor_002fdeffn_002fichr1"></a><dl>
+<dt><a name="index-ichr1"></a>Function: <strong>ichr1</strong> <em>([<var>i</var>, <var>j</var>, <var>k</var>])</em></dt>
+<dd><p>Yields the Christoffel symbol of the first kind via the
+definition
+</p><div class="example">
+<pre class="example">       (g      + g      - g     )/2 .
+         ik,j     jk,i     ij,k
+</pre></div>
+<p>To evaluate the Christoffel symbols for a particular metric, the
+variable <code>imetric</code> must be assigned a name as in the example under <code>chr2</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ichr2"></a><a name="Item_003a-Itensor_002fdeffn_002fichr2"></a><dl>
+<dt><a name="index-ichr2"></a>Function: <strong>ichr2</strong> <em>([<var>i</var>, <var>j</var>], [<var>k</var>])</em></dt>
+<dd><p>Yields the Christoffel symbol of the second kind
+defined by the relation
+</p><div class="example">
+<pre class="example">                       ks
+   ichr2([i,j],[k]) = g    (g      + g      - g     )/2
+                             is,j     js,i     ij,s
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="icurvature"></a><a name="Item_003a-Itensor_002fdeffn_002ficurvature"></a><dl>
+<dt><a name="index-icurvature"></a>Function: <strong>icurvature</strong> <em>([<var>i</var>, <var>j</var>, <var>k</var>], [<var>h</var>])</em></dt>
+<dd><p>Yields the Riemann
+curvature tensor in terms of the Christoffel symbols of the second
+kind (<code>ichr2</code>).  The following notation is used:
+</p><div class="example">
+<pre class="example">            h             h            h         %1         h
+  icurvature     = - ichr2      - ichr2     ichr2    + ichr2
+            i j k         i k,j        %1 j      i k        i j,k
+                            h          %1
+                     + ichr2      ichr2
+                            %1 k       i j
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="covdiff"></a><a name="Item_003a-Itensor_002fdeffn_002fcovdiff"></a><dl>
+<dt><a name="index-covdiff"></a>Function: <strong>covdiff</strong> <em>(<var>expr</var>, <var>v_1</var>, <var>v_2</var>, ...)</em></dt>
+<dd><p>Yields the covariant derivative of <var>expr</var> with
+respect to the variables <var>v_i</var> in terms of the Christoffel symbols of the
+second kind (<code>ichr2</code>).  In order to evaluate these, one should use
+<code>ev(<var>expr</var>,ichr2)</code>.
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) entertensor()$
+Enter tensor name: a;
+Enter a list of the covariant indices: [i,j];
+Enter a list of the contravariant indices: [k];
+Enter a list of the derivative indices: [];
+                                      k
+(%t2)                                a
+                                      i j
+(%i3) ishow(covdiff(%,s))$
+             k         %1     k         %1     k
+(%t3)     - a     ichr2    - a     ichr2    + a
+             i %1      j s    %1 j      i s    i j,s
+
+             k     %1
+      + ichr2     a
+             %1 s  i j
+(%i4) imetric:g;
+(%o4)                                  g
+(%i5) ishow(ev(%th(2),ichr2))$
+         %1 %4  k
+        g      a     (g       - g       + g      )
+                i %1   s %4,j    j s,%4    j %4,s
+(%t5) - ------------------------------------------
+                            2
+</pre><pre class="example">    %1 %3  k
+   g      a     (g       - g       + g      )
+           %1 j   s %3,i    i s,%3    i %3,s
+ - ------------------------------------------
+                       2
+    k %2  %1
+   g     a    (g        - g        + g       )
+          i j   s %2,%1    %1 s,%2    %1 %2,s     k
+ + ------------------------------------------- + a
+                        2                         i j,s
+</pre><pre class="example">(%i6)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="lorentz"></a><a name="Item_003a-Itensor_002fdeffn_002florentz_005fgauge"></a><dl>
+<dt><a name="index-lorentz_005fgauge"></a>Function: <strong>lorentz_gauge</strong> <em>(<var>expr</var>)</em></dt>
+<dd><p>Imposes the Lorentz condition by substituting 0 for all
+indexed objects in <var>expr</var> that have a derivative index identical to a
+contravariant index.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="igeodesic_005fcoords"></a><a name="Item_003a-Itensor_002fdeffn_002figeodesic_005fcoords"></a><dl>
+<dt><a name="index-igeodesic_005fcoords"></a>Function: <strong>igeodesic_coords</strong> <em>(<var>expr</var>, <var>name</var>)</em></dt>
+<dd>
+<p>Causes undifferentiated Christoffel symbols and
+first derivatives of the metric tensor vanish in <var>expr</var>. The <var>name</var>
+in the <code><a href="#igeodesic_005fcoords">igeodesic_coords</a></code> function refers to the metric <var>name</var>
+(if it appears in <var>expr</var>) while the connection coefficients must be
+called with the names <code>ichr1</code> and/or <code>ichr2</code>. The following example
+demonstrates the verification of the cyclic identity satisfied by the Riemann
+curvature tensor using the <code>igeodesic_coords</code> function.
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) ishow(icurvature([r,s,t],[u]))$
+             u            u         %1         u     
+(%t2) - ichr2      - ichr2     ichr2    + ichr2      
+             r t,s        %1 s      r t        r s,t 
+
+                                              u         %1
+                                       + ichr2     ichr2
+                                              %1 t      r s
+(%i3) ishow(igeodesic_coords(%,ichr2))$
+                                 u            u
+(%t3)                       ichr2      - ichr2
+                                 r s,t        r t,s
+(%i4) ishow(igeodesic_coords(icurvature([r,s,t],[u]),ichr2)+
+            igeodesic_coords(icurvature([s,t,r],[u]),ichr2)+
+            igeodesic_coords(icurvature([t,r,s],[u]),ichr2))$
+             u            u            u            u
+(%t4) - ichr2      + ichr2      + ichr2      - ichr2
+             t s,r        t r,s        s t,r        s r,t
+
+                                             u            u
+                                      - ichr2      + ichr2
+                                             r t,s        r s,t
+(%i5) canform(%);
+(%o5)                                  0
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="Moving-frames"></a>
+<h4 class="subsection">25.2.5 Moving frames</h4>
+
+<p>Maxima now has the ability to perform calculations using moving frames.
+These can be orthonormal frames (tetrads, vielbeins) or an arbitrary frame.
+</p>
+<p>To use frames, you must first set <code>iframe_flag</code> to <code>true</code>. This
+causes the Christoffel-symbols, <code>ichr1</code> and <code>ichr2</code>, to be replaced
+by the more general frame connection coefficients <code>icc1</code> and <code>icc2</code>
+in calculations. Specifically, the behavior of <code><a href="#covdiff">covdiff</a></code> and
+<code>icurvature</code> is changed.
+</p>
+<p>The frame is defined by two tensors: the inverse frame field (<code><a href="#ifri">ifri</a></code>,
+the dual basis tetrad),
+and the frame metric <code><a href="#ifg">ifg</a></code>. The frame metric is the identity matrix for
+orthonormal frames, or the Lorentz metric for orthonormal frames in Minkowski
+spacetime. The inverse frame field defines the frame base (unit vectors).
+Contraction properties are defined for the frame field and the frame metric.
+</p>
+<p>When <code>iframe_flag</code> is true, many <code>itensor</code> expressions use the frame
+metric <code>ifg</code> instead of the metric defined by <code>imetric</code> for
+raising and lowerind indices.
+</p>
+<p>IMPORTANT: Setting the variable <code>iframe_flag</code> to <code>true</code> does NOT
+undefine the contraction properties of a metric defined by a call to
+<code>defcon</code> or <code>imetric</code>. If a frame field is used, it is best to
+define the metric by assigning its name to the variable <code>imetric</code>
+and NOT invoke the <code>imetric</code> function.
+</p>
+<p>Maxima uses these two tensors to define the frame coefficients (<code>ifc1</code>
+and <code>ifc2</code>) which form part of the connection coefficients (<code>icc1</code>
+and <code>icc2</code>), as the following example demonstrates:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) iframe_flag:true;
+(%o2)                                true
+(%i3) ishow(covdiff(v([],[i]),j))$
+                               i        i     %1
+(%t3)                         v   + icc2     v
+                               ,j       %1 j
+(%i4) ishow(ev(%,icc2))$
+                               %1     i       i
+(%t4)                         v   ifc2     + v
+                                      %1 j    ,j
+(%i5) ishow(ev(%,ifc2))$
+                          %1    i %2                i
+(%t5)                    v   ifg     ifc1        + v
+                                         %1 j %2    ,j
+(%i6) ishow(ev(%,ifc1))$
+</pre><pre class="example">            %1    i %2
+           v   ifg     (ifb        - ifb        + ifb       )
+                           j %2 %1      %2 %1 j      %1 j %2     i
+(%t6)      -------------------------------------------------- + v
+                                   2                             ,j
+</pre><pre class="example">(%i7) ishow(ifb([a,b,c]))$
+                                                   %3    %4
+(%t7)               (ifri        - ifri       ) ifr   ifr
+                         a %3,%4       a %4,%3     b     c
+
+</pre></div>
+
+<p>An alternate method is used to compute the frame bracket (<code>ifb</code>) if
+the <code>iframe_bracket_form</code> flag is set to <code>false</code>:
+</p>
+<div class="example">
+<pre class="example">
+(%i8) block([iframe_bracket_form:false],ishow(ifb([a,b,c])))$
+                                %6    %5        %5      %6
+(%t8)              ifri     (ifr   ifr     - ifr     ifr  )
+                       a %5     b     c,%6      b,%6    c
+
+</pre></div>
+
+<a name="iframes"></a><a name="Item_003a-Itensor_002fdeffn_002fiframes"></a><dl>
+<dt><a name="index-iframes"></a>Function: <strong>iframes</strong> <em>()</em></dt>
+<dd>
+<p>Since in this version of Maxima, contraction identities for <code><a href="#ifr">ifr</a></code> and
+<code><a href="#ifri">ifri</a></code> are always defined, as is the frame bracket (<code><a href="#ifb">ifb</a></code>), this
+function does nothing.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ifb"></a><a name="Item_003a-Itensor_002fdefvr_002fifb"></a><dl>
+<dt><a name="index-ifb"></a>Variable: <strong>ifb</strong></dt>
+<dd>
+<p>The frame bracket. The contribution of the frame metric to the connection
+coefficients is expressed using the frame bracket:
+</p>
+<div class="example">
+<pre class="example">
+          - ifb      + ifb      + ifb
+               c a b      b c a      a b c
+ifc1    = --------------------------------
+    abc                  2
+
+</pre></div>
+
+<p>The frame bracket itself is defined in terms of the frame field and frame
+metric. Two alternate methods of computation are used depending on the
+value of <code>frame_bracket_form</code>. If true (the default) or if the
+<code>itorsion_flag</code> is <code>true</code>:
+</p>
+<div class="example">
+<pre class="example">
+          d      e                                      f
+ifb =  ifr    ifr   (ifri      - ifri      - ifri    itr   )
+   abc    b      c       a d,e       a e,d       a f    d e
+
+
+</pre></div>
+
+<p>Otherwise:
+</p>
+<div class="example">
+<pre class="example">
+             e      d        d      e
+ifb    = (ifr    ifr    - ifr    ifr   ) ifri
+   abc       b      c,e      b,e    c        a d
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="icc1"></a><a name="Item_003a-Itensor_002fdefvr_002ficc1"></a><dl>
+<dt><a name="index-icc1"></a>Variable: <strong>icc1</strong></dt>
+<dd>
+<p>Connection coefficients of the first kind. In <code>itensor</code>, defined as
+</p>
+<div class="example">
+<pre class="example">
+icc1    = ichr1    - ikt1    - inmc1
+    abc        abc       abc        abc
+
+</pre></div>
+
+<p>In this expression, if <code>iframe_flag</code> is true, the Christoffel-symbol
+<code>ichr1</code> is replaced with the frame connection coefficient <code>ifc1</code>.
+If <code>itorsion_flag</code> is <code>false</code>, <code><a href="#ikt1">ikt1</a></code>
+will be omitted. It is also omitted if a frame base is used, as the
+torsion is already calculated as part of the frame bracket.
+Lastly, of <code>inonmet_flag</code> is <code>false</code>,
+<code><a href="#inmc1">inmc1</a></code> will not be present.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="icc2"></a><a name="Item_003a-Itensor_002fdefvr_002ficc2"></a><dl>
+<dt><a name="index-icc2"></a>Variable: <strong>icc2</strong></dt>
+<dd>
+<p>Connection coefficients of the second kind. In <code>itensor</code>, defined as
+</p>
+<div class="example">
+<pre class="example">
+    c         c        c         c
+icc2   = ichr2   - ikt2   - inmc2
+    ab        ab       ab        ab
+
+</pre></div>
+
+<p>In this expression, if <code>iframe_flag</code> is true, the Christoffel-symbol
+<code>ichr2</code> is replaced with the frame connection coefficient <code>ifc2</code>.
+If <code>itorsion_flag</code> is <code>false</code>, <code>ikt2</code>
+will be omitted. It is also omitted if a frame base is used, as the
+torsion is already calculated as part of the frame bracket.
+Lastly, of <code>inonmet_flag</code> is <code>false</code>,
+<code><a href="#inmc2">inmc2</a></code> will not be present.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ifc1"></a><a name="Item_003a-Itensor_002fdefvr_002fifc1"></a><dl>
+<dt><a name="index-ifc1"></a>Variable: <strong>ifc1</strong></dt>
+<dd>
+<p>Frame coefficient of the first kind (also known as Ricci-rotation
+coefficients.) This tensor represents the contribution
+of the frame metric to the connection coefficient of the first kind. Defined
+as:
+</p>
+<div class="example">
+<pre class="example">
+          - ifb      + ifb      + ifb
+               c a b      b c a      a b c
+ifc1    = --------------------------------
+    abc                   2
+
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ifc2"></a><a name="Item_003a-Itensor_002fdefvr_002fifc2"></a><dl>
+<dt><a name="index-ifc2"></a>Variable: <strong>ifc2</strong></dt>
+<dd>
+<p>Frame coefficient of the second kind. This tensor represents the contribution
+of the frame metric to the connection coefficient of the second kind. Defined
+as a permutation of the frame bracket (<code><a href="#ifb">ifb</a></code>) with the appropriate
+indices raised and lowered as necessary:
+</p>
+<div class="example">
+<pre class="example">
+    c       cd
+ifc2   = ifg   ifc1
+    ab             abd
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ifr"></a><a name="Item_003a-Itensor_002fdefvr_002fifr"></a><dl>
+<dt><a name="index-ifr"></a>Variable: <strong>ifr</strong></dt>
+<dd>
+<p>The frame field. Contracts with the inverse frame field (<code><a href="#ifri">ifri</a></code>) to
+form the frame metric (<code><a href="#ifg">ifg</a></code>).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ifri"></a><a name="Item_003a-Itensor_002fdefvr_002fifri"></a><dl>
+<dt><a name="index-ifri"></a>Variable: <strong>ifri</strong></dt>
+<dd>
+<p>The inverse frame field. Specifies the frame base (dual basis vectors). Along
+with the frame metric, it forms the basis of all calculations based on
+frames.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ifg"></a><a name="Item_003a-Itensor_002fdefvr_002fifg"></a><dl>
+<dt><a name="index-ifg"></a>Variable: <strong>ifg</strong></dt>
+<dd>
+<p>The frame metric. Defaults to <code><a href="#kdelta">kdelta</a></code>, but can be changed using
+<code><a href="#components">components</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ifgi"></a><a name="Item_003a-Itensor_002fdefvr_002fifgi"></a><dl>
+<dt><a name="index-ifgi"></a>Variable: <strong>ifgi</strong></dt>
+<dd>
+<p>The inverse frame metric. Contracts with the frame metric (<code><a href="#ifg">ifg</a></code>)
+to <code><a href="#kdelta">kdelta</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="iframe_005fbracket_005fform"></a><a name="Item_003a-Itensor_002fdefvr_002fiframe_005fbracket_005fform"></a><dl>
+<dt><a name="index-iframe_005fbracket_005fform"></a>Option variable: <strong>iframe_bracket_form</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>Specifies how the frame bracket (<code><a href="#ifb">ifb</a></code>) is computed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="Torsion-and-nonmetricity"></a>
+<h4 class="subsection">25.2.6 Torsion and nonmetricity</h4>
+
+<p>Maxima can now take into account torsion and nonmetricity. When the flag
+<code>itorsion_flag</code> is set to <code>true</code>, the contribution of torsion
+is added to the connection coefficients. Similarly, when the flag
+<code>inonmet_flag</code> is true, nonmetricity components are included.
+</p>
+<a name="inm"></a><a name="Item_003a-Itensor_002fdefvr_002finm"></a><dl>
+<dt><a name="index-inm"></a>Variable: <strong>inm</strong></dt>
+<dd>
+<p>The nonmetricity vector. Conformal nonmetricity is defined through the
+covariant derivative of the metric tensor. Normally zero, the metric
+tensor&rsquo;s covariant derivative will evaluate to the following when
+<code>inonmet_flag</code> is set to <code>true</code>:
+</p>
+<div class="example">
+<pre class="example">
+g     =- g  inm
+ ij;k     ij   k
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="inmc1"></a><a name="Item_003a-Itensor_002fdefvr_002finmc1"></a><dl>
+<dt><a name="index-inmc1"></a>Variable: <strong>inmc1</strong></dt>
+<dd>
+<p>Covariant permutation of the nonmetricity vector components. Defined as
+</p>
+<div class="example">
+<pre class="example">
+           g   inm  - inm  g   - g   inm
+            ab    c      a  bc    ac    b
+inmc1    = ------------------------------
+     abc                 2
+
+</pre></div>
+
+<p>(Substitute <code><a href="#ifg">ifg</a></code> in place of <code>g</code> if a frame metric is used.)
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="inmc2"></a><a name="Item_003a-Itensor_002fdefvr_002finmc2"></a><dl>
+<dt><a name="index-inmc2"></a>Variable: <strong>inmc2</strong></dt>
+<dd>
+<p>Contravariant permutation of the nonmetricity vector components. Used
+in the connection coefficients if <code>inonmet_flag</code> is <code>true</code>. Defined
+as:
+</p>
+<div class="example">
+<pre class="example">
+                      c         c         cd
+          -inm  kdelta  - kdelta  inm  + g   inm  g
+     c        a       b         a    b          d  ab
+inmc2   = -------------------------------------------
+     ab                        2
+
+</pre></div>
+
+<p>(Substitute <code><a href="#ifg">ifg</a></code> in place of <code>g</code> if a frame metric is used.)
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ikt1"></a><a name="Item_003a-Itensor_002fdefvr_002fikt1"></a><dl>
+<dt><a name="index-ikt1"></a>Variable: <strong>ikt1</strong></dt>
+<dd>
+<p>Covariant permutation of the torsion tensor (also known as contorsion).
+Defined as:
+</p>
+<div class="example">
+<pre class="example">
+                  d           d       d
+          -g   itr  - g    itr   - itr   g
+            ad    cb    bd    ca      ab  cd
+ikt1    = ----------------------------------
+    abc                   2
+
+</pre></div>
+
+<p>(Substitute <code><a href="#ifg">ifg</a></code> in place of <code>g</code> if a frame metric is used.)
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="ikt2"></a><a name="Item_003a-Itensor_002fdefvr_002fikt2"></a><dl>
+<dt><a name="index-ikt2"></a>Variable: <strong>ikt2</strong></dt>
+<dd>
+<p>Contravariant permutation of the torsion tensor (also known as contorsion).
+Defined as:
+</p>
+<div class="example">
+<pre class="example">
+    c     cd
+ikt2   = g   ikt1
+    ab           abd
+
+</pre></div>
+
+<p>(Substitute <code><a href="#ifg">ifg</a></code> in place of <code>g</code> if a frame metric is used.)
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="itr"></a><a name="Item_003a-Itensor_002fdefvr_002fitr"></a><dl>
+<dt><a name="index-itr"></a>Variable: <strong>itr</strong></dt>
+<dd>
+<p>The torsion tensor. For a metric with torsion, repeated covariant
+differentiation on a scalar function will not commute, as demonstrated
+by the following example:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) imetric:g;
+(%o2)                                  g
+(%i3) covdiff( covdiff( f( [], []), i), j)
+                      - covdiff( covdiff( f( [], []), j), i)$
+(%i4) ishow(%)$
+                                   %4              %2
+(%t4)                    f    ichr2    - f    ichr2
+                          ,%4      j i    ,%2      i j
+(%i5) canform(%);
+(%o5)                                  0
+(%i6) itorsion_flag:true;
+(%o6)                                true
+(%i7) covdiff( covdiff( f( [], []), i), j)
+                      - covdiff( covdiff( f( [], []), j), i)$
+(%i8) ishow(%)$
+                           %8             %6
+(%t8)             f    icc2    - f    icc2    - f     + f
+                   ,%8     j i    ,%6     i j    ,j i    ,i j
+(%i9) ishow(canform(%))$
+                                   %1             %1
+(%t9)                     f    icc2    - f    icc2
+                           ,%1     j i    ,%1     i j
+(%i10) ishow(canform(ev(%,icc2)))$
+                                   %1             %1
+(%t10)                    f    ikt2    - f    ikt2
+                           ,%1     i j    ,%1     j i
+(%i11) ishow(canform(ev(%,ikt2)))$
+                      %2 %1                    %2 %1
+(%t11)          f    g      ikt1       - f    g      ikt1
+                 ,%2            i j %1    ,%2            j i %1
+(%i12) ishow(factor(canform(rename(expand(ev(%,ikt1))))))$
+                           %3 %2            %1       %1
+                     f    g      g      (itr    - itr   )
+                      ,%3         %2 %1     j i      i j
+(%t12)               ------------------------------------
+                                      2
+(%i13) decsym(itr,2,1,[anti(all)],[]);
+(%o13)                               done
+(%i14) defcon(g,g,kdelta);
+(%o14)                               done
+(%i15) subst(g,nounify(g),%th(3))$
+(%i16) ishow(canform(contract(%)))$
+                                           %1
+(%t16)                           - f    itr
+                                    ,%1    i j
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="Exterior-algebra"></a>
+<h4 class="subsection">25.2.7 Exterior algebra</h4>
+
+<p>The <code>itensor</code> package can perform operations on totally antisymmetric
+covariant tensor fields. A totally antisymmetric tensor field of rank
+(0,L) corresponds with a differential L-form. On these objects, a
+multiplication operation known as the exterior product, or wedge product,
+is defined.
+</p>
+<p>Unfortunately, not all authors agree on the definition of the wedge
+product. Some authors prefer a definition that corresponds with the
+notion of antisymmetrization: in these works, the wedge product of
+two vector fields, for instance, would be defined as
+</p>
+<div class="example">
+<pre class="example">            a a  - a a
+             i j    j i
+ a  /\ a  = -----------
+  i     j        2
+</pre></div>
+
+<p>More generally, the product of a p-form and a q-form would be defined as
+</p>
+<div class="example">
+<pre class="example">                       1     k1..kp l1..lq
+A       /\ B       = ------ D              A       B
+ i1..ip     j1..jq   (p+q)!  i1..ip j1..jq  k1..kp  l1..lq
+</pre></div>
+
+<p>where <code>D</code> stands for the Kronecker-delta.
+</p>
+<p>Other authors, however, prefer a &ldquo;geometric&rdquo; definition that corresponds
+with the notion of the volume element:
+</p>
+<div class="example">
+<pre class="example">a  /\ a  = a a  - a a
+ i     j    i j    j i
+</pre></div>
+
+<p>and, in the general case
+</p>
+<div class="example">
+<pre class="example">                       1    k1..kp l1..lq
+A       /\ B       = ----- D              A       B
+ i1..ip     j1..jq   p! q!  i1..ip j1..jq  k1..kp  l1..lq
+</pre></div>
+
+<p>Since <code>itensor</code> is a tensor algebra package, the first of these two
+definitions appears to be the more natural one. Many applications, however,
+utilize the second definition. To resolve this dilemma, a flag has been
+implemented that controls the behavior of the wedge product: if
+<code><a href="#igeowedge_005fflag">igeowedge_flag</a></code> is <code>false</code> (the default), the first, &quot;tensorial&quot;
+definition is used, otherwise the second, &quot;geometric&quot; definition will
+be applied.
+</p>
+<a name="g_t_007e"></a><a name="Item_003a-Itensor_002fdefvr_002f_007e"></a><dl>
+<dt><a name="index-_007e"></a>Operator: <strong>~</strong></dt>
+<dd><a name="index-Wedge-product"></a>
+
+<p>The wedge product operator is denoted by the tilde <code>~</code>. This is
+a binary operator. Its arguments should be expressions involving scalars,
+covariant tensors of rank one, or covariant tensors of rank <code>l</code> that
+have been declared antisymmetric in all covariant indices.
+</p>
+<p>The behavior of the wedge product operator is controlled by the
+<code><a href="#igeowedge_005fflag">igeowedge_flag</a></code> flag, as in the following example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) ishow(a([i])~b([j]))$
+                                 a  b  - b  a
+                                  i  j    i  j
+(%t2)                            -------------
+                                       2
+(%i3) decsym(a,2,0,[anti(all)],[]);
+(%o3)                                done
+(%i4) ishow(a([i,j])~b([k]))$
+                          a    b  + b  a    - a    b
+                           i j  k    i  j k    i k  j
+(%t4)                     ---------------------------
+                                       3
+(%i5) igeowedge_flag:true;
+(%o5)                                true
+(%i6) ishow(a([i])~b([j]))$
+(%t6)                            a  b  - b  a
+                                  i  j    i  j
+(%i7) ishow(a([i,j])~b([k]))$
+(%t7)                     a    b  + b  a    - a    b
+                           i j  k    i  j k    i k  j
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Operators">Operators</a>
+&middot;</div></dd></dl>
+
+<a name="g_t_007c"></a><a name="Item_003a-Itensor_002fdefvr_002f_007c"></a><dl>
+<dt><a name="index-_007c"></a>Operator: <strong>|</strong></dt>
+<dd><a name="index-Contraction-with-a-vector"></a>
+
+<p>The vertical bar <code>|</code> denotes the &quot;contraction with a vector&quot; binary
+operation. When a totally antisymmetric covariant tensor is contracted
+with a contravariant vector, the result is the same regardless which index
+was used for the contraction. Thus, it is possible to define the
+contraction operation in an index-free manner.
+</p>
+<p>In the <code>itensor</code> package, contraction with a vector is always carried out
+with respect to the first index in the literal sorting order. This ensures
+better simplification of expressions involving the <code>|</code> operator. For instance:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) decsym(a,2,0,[anti(all)],[]);
+(%o2)                                done
+(%i3) ishow(a([i,j],[])|v)$
+                                    %1
+(%t3)                              v   a
+                                        %1 j
+(%i4) ishow(a([j,i],[])|v)$
+                                     %1
+(%t4)                             - v   a
+                                         %1 j
+</pre></div>
+
+<p>Note that it is essential that the tensors used with the <code>|</code> operator be
+declared totally antisymmetric in their covariant indices. Otherwise,
+the results will be incorrect.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Operators">Operators</a>
+&middot;</div></dd></dl>
+
+<a name="extdiff"></a><a name="Item_003a-Itensor_002fdeffn_002fextdiff"></a><dl>
+<dt><a name="index-extdiff"></a>Function: <strong>extdiff</strong> <em>(<var>expr</var>, <var>i</var>)</em></dt>
+<dd>
+<p>Computes the exterior derivative of <var>expr</var> with respect to the index
+<var>i</var>. The exterior derivative is formally defined as the wedge
+product of the partial derivative operator and a differential form. As
+such, this operation is also controlled by the setting of <code><a href="#igeowedge_005fflag">igeowedge_flag</a></code>.
+For instance:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) ishow(extdiff(v([i]),j))$
+                                  v    - v
+                                   j,i    i,j
+(%t2)                             -----------
+                                       2
+(%i3) decsym(a,2,0,[anti(all)],[]);
+(%o3)                                done
+(%i4) ishow(extdiff(a([i,j]),k))$
+                           a      - a      + a
+                            j k,i    i k,j    i j,k
+(%t4)                      ------------------------
+                                      3
+(%i5) igeowedge_flag:true;
+(%o5)                                true
+(%i6) ishow(extdiff(v([i]),j))$
+(%t6)                             v    - v
+                                   j,i    i,j
+(%i7) ishow(extdiff(a([i,j]),k))$
+(%t7)                    - (a      - a      + a     )
+                             k j,i    k i,j    j i,k
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="hodge"></a><a name="Item_003a-Itensor_002fdeffn_002fhodge"></a><dl>
+<dt><a name="index-hodge"></a>Function: <strong>hodge</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Compute the Hodge-dual of <var>expr</var>. For instance:
+</p>
+<div class="example">
+<pre class="example">
+(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) imetric(g);
+(%o2)                            done
+(%i3) idim(4);
+(%o3)                            done
+(%i4) icounter:100;
+(%o4)                             100
+(%i5) decsym(A,3,0,[anti(all)],[])$
+
+(%i6) ishow(A([i,j,k],[]))$
+(%t6)                           A
+                                 i j k
+(%i7) ishow(canform(hodge(%)))$
+                          %1 %2 %3 %4
+               levi_civita            g        A
+                                       %1 %102  %2 %3 %4
+(%t7)          -----------------------------------------
+                                   6
+(%i8) ishow(canform(hodge(%)))$
+                 %1 %2 %3 %8            %4 %5 %6 %7
+(%t8) levi_civita            levi_civita            g       
+                                                     %1 %106
+                             g        g        g      A         /6
+                              %2 %107  %3 %108  %4 %8  %5 %6 %7
+(%i9) lc2kdt(%)$
+
+(%i10) %,kdelta$
+
+(%i11) ishow(canform(contract(expand(%))))$
+(%t11)                     - A
+                              %106 %107 %108
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="igeowedge_005fflag"></a><a name="Item_003a-Itensor_002fdefvr_002figeowedge_005fflag"></a><dl>
+<dt><a name="index-igeowedge_005fflag"></a>Option variable: <strong>igeowedge_flag</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>Controls the behavior of the wedge product and exterior derivative. When
+set to <code>false</code> (the default), the notion of differential forms will
+correspond with that of a totally antisymmetric covariant tensor field.
+When set to <code>true</code>, differential forms will agree with the notion
+of the volume element.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;</div></dd></dl>
+
+<a name="Exporting-TeX-expressions"></a>
+<h4 class="subsection">25.2.8 Exporting TeX expressions</h4>
+
+<p>The <code>itensor</code> package provides limited support for exporting tensor
+expressions to TeX. Since <code>itensor</code> expressions appear as function calls,
+the regular Maxima <code><a href="maxima_76.html#tex">tex</a></code> command will not produce the expected
+output. You can try instead the <code><a href="#tentex">tentex</a></code> command, which attempts
+to translate tensor expressions into appropriately indexed TeX objects.
+</p>
+<a name="tentex"></a><a name="Item_003a-Itensor_002fdeffn_002ftentex"></a><dl>
+<dt><a name="index-tentex"></a>Function: <strong>tentex</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>To use the <code>tentex</code> function, you must first load <code>tentex</code>,
+as in the following example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) load(&quot;tentex&quot;);
+(%o2)       /share/tensor/tentex.lisp
+(%i3) idummyx:m;
+(%o3)                                  m
+(%i4) ishow(icurvature([j,k,l],[i]))$
+            m1       i           m1       i           i
+(%t4)  ichr2    ichr2     - ichr2    ichr2     - ichr2
+            j k      m1 l        j l      m1 k        j l,k
+
+                                                      i
+                                               + ichr2
+                                                      j k,l
+(%i5) tentex(%)$
+$$\Gamma_{j\,k}^{m_1}\,\Gamma_{l\,m_1}^{i}-\Gamma_{j\,l}^{m_1}\,
+ \Gamma_{k\,m_1}^{i}-\Gamma_{j\,l,k}^{i}+\Gamma_{j\,k,l}^{i}$$
+</pre></div>
+
+<p>Note the use of the <code>idummyx</code> assignment, to avoid the appearance
+of the percent sign in the TeX expression, which may lead to compile errors.
+</p>
+<p>NB: This version of the <code>tentex</code> function is somewhat experimental.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;<a href="maxima_424.html#Category_003a-TeX-output">TeX output</a>
+&middot;</div></dd></dl>
+
+<a name="Interfacing-with-ctensor"></a>
+<h4 class="subsection">25.2.9 Interfacing with ctensor</h4>
+
+<p>The <code>itensor</code> package has the ability to generate Maxima code that can
+then be executed in the context of the <code>ctensor</code> package. The function that performs
+this task is <code><a href="#ic_005fconvert">ic_convert</a></code>.
+</p>
+<a name="ic_005fconvert"></a><a name="Item_003a-Itensor_002fdeffn_002fic_005fconvert"></a><dl>
+<dt><a name="index-ic_005fconvert"></a>Function: <strong>ic_convert</strong> <em>(<var>eqn</var>)</em></dt>
+<dd>
+<p>Converts the <code>itensor</code> equation <var>eqn</var> to a <code>ctensor</code> assignment statement.
+Implied sums over dummy indices are made explicit while indexed
+objects are transformed into arrays (the array subscripts are in the
+order of covariant followed by contravariant indices of the indexed
+objects). The derivative of an indexed object will be replaced by the
+noun form of <code><a href="maxima_101.html#diff">diff</a></code> taken with respect to <code><a href="maxima_134.html#ct_005fcoords">ct_coords</a></code> subscripted
+by the derivative index. The Christoffel symbols <code><a href="#ichr1">ichr1</a></code> and <code><a href="#ichr2">ichr2</a></code>
+will be translated to <code>lcs</code> and <code>mcs</code>, respectively and if
+<code>metricconvert</code> is <code>true</code> then all occurrences of the metric
+with two covariant (contravariant) indices will be renamed to <code>lg</code>
+(<code>ug</code>). In addition, <code><a href="maxima_175.html#do">do</a></code> loops will be introduced summing over
+all free indices so that the
+transformed assignment statement can be evaluated by just doing
+<code><a href="maxima_43.html#ev">ev</a></code>. The following examples demonstrate the features of this
+function.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;itensor&quot;);
+(%o1)      /share/tensor/itensor.lisp
+(%i2) eqn:ishow(t([i,j],[k])=f([],[])*g([l,m],[])*a([],[m],j)
+      *b([i],[l,k]))$
+                             k        m   l k
+(%t2)                       t    = f a   b    g
+                             i j      ,j  i    l m
+(%i3) ic_convert(eqn);
+(%o3) for i thru dim do (for j thru dim do (
+       for k thru dim do
+        t        : f sum(sum(diff(a , ct_coords ) b
+         i, j, k                   m           j   i, l, k
+
+ g    , l, 1, dim), m, 1, dim)))
+  l, m
+(%i4) imetric(g);
+(%o4)                                done
+(%i5) metricconvert:true;
+(%o5)                                true
+(%i6) ic_convert(eqn);
+(%o6) for i thru dim do (for j thru dim do (
+       for k thru dim do
+        t        : f sum(sum(diff(a , ct_coords ) b
+         i, j, k                   m           j   i, l, k
+
+ lg    , l, 1, dim), m, 1, dim)))
+   l, m
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-itensor">Package itensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-ctensor">Package ctensor</a>
+&middot;</div></dd></dl>
+
+<a name="Reserved-words"></a>
+<h4 class="subsection">25.2.10 Reserved words</h4>
+
+<p>The following Maxima words are used by the <code>itensor</code> package internally and
+should not be redefined:
+</p>
+<div class="example">
+<pre class="example">  Keyword    Comments
+  ------------------------------------------
+  indices2() Internal version of indices()
+  conti      Lists contravariant indices
+  covi       Lists covariant indices of an indexed object
+  deri       Lists derivative indices of an indexed object
+  name       Returns the name of an indexed object
+  concan
+  irpmon
+  lc0
+  _lc2kdt0
+  _lcprod
+  _extlc
+</pre></div>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_130.html#Introduction-to-itensor" accesskey="p" rel="previous">Introduction to itensor</a>, Up: <a href="maxima_129.html#itensor" accesskey="u" rel="up">itensor</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

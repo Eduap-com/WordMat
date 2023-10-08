@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>f90-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="f90-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="f90-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_58.html#finance_002dpkg" rel="next" title="finance-pkg">
+<link href="maxima_56.html#ezunits_002dpkg" rel="prev" title="ezunits-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="f90_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_58.html#finance_002dpkg" accesskey="n" rel="next">finance</a>, Previous: <a href="maxima_56.html#ezunits_002dpkg" accesskey="p" rel="prev">ezunits</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="f90">58 f90</h2>
+
+<a class="anchor" id="Item_003a-f90_002fnode_002fPackage-f90"></a><ul class="mini-toc">
+<li><a href="#Package-f90" accesskey="1">Package f90</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Package-f90">
+<div class="nav-panel">
+<p>
+Previous: <a href="#f90_002dpkg" accesskey="p" rel="prev">f90</a>, Up: <a href="#f90_002dpkg" accesskey="u" rel="up">f90</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Package-f90-1">58.1 Package f90</h3>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-f90">Package f90</a>
+&middot;
+</div>
+
+<a class="anchor" id="f90_005foutput_005fline_005flength_005fmax"></a><a class="anchor" id="Item_003a-f90_002fdefvr_002ff90_005foutput_005fline_005flength_005fmax"></a><dl class="first-defvr">
+<dt class="defvr" id="index-f90_005foutput_005fline_005flength_005fmax"><span class="category-def">Option variable: </span><span><strong class="def-name">f90_output_line_length_max</strong><a class="copiable-link" href='#index-f90_005foutput_005fline_005flength_005fmax'> &para;</a></span></dt>
+<dd><p>Default value: 65
+</p>
+<p><code class="code">f90_output_line_length_max</code> is the maximum number of characters of Fortran code
+which are output by <code class="code">f90</code> per line.
+Longer lines of code are divided, and printed with an ampersand <code class="code">&amp;</code> at the end of an output line
+and an ampersand at the beginning of the following line.
+</p>
+<p><code class="code">f90_output_line_length_max</code> must be a positive integer.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;f90&quot;)$
+(%i2) foo : expand ((xxx + yyy + 7)^4);
+         4            3         3        2    2             2
+(%o2) yyy  + 4 xxx yyy  + 28 yyy  + 6 xxx  yyy  + 84 xxx yyy
+          2        3             2
+ + 294 yyy  + 4 xxx  yyy + 84 xxx  yyy + 588 xxx yyy + 1372 yyy
+      4         3          2
+ + xxx  + 28 xxx  + 294 xxx  + 1372 xxx + 2401
+(%i3) f90_output_line_length_max;
+(%o3)                          65
+(%i4) f90 ('foo = foo);
+foo = yyy**4+4*xxx*yyy**3+28*yyy**3+6*xxx**2*yyy**2+84*xxx*yyy**2&amp;
+&amp;+294*yyy**2+4*xxx**3*yyy+84*xxx**2*yyy+588*xxx*yyy+1372*yyy+xxx**&amp;
+&amp;4+28*xxx**3+294*xxx**2+1372*xxx+2401
+(%o4)                         false
+(%i5) f90_output_line_length_max : 40 $
+(%i6) f90 ('foo = foo);
+foo = yyy**4+4*xxx*yyy**3+28*yyy**3+6*xx&amp;
+&amp;x**2*yyy**2+84*xxx*yyy**2+294*yyy**2+4*x&amp;
+&amp;xx**3*yyy+84*xxx**2*yyy+588*xxx*yyy+1372&amp;
+&amp;*yyy+xxx**4+28*xxx**3+294*xxx**2+1372*xx&amp;
+&amp;x+2401
+(%o6)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-f90">Package f90</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="function_005ff90"></a><a class="anchor" id="Item_003a-f90_002fdeffn_002ff90"></a><dl class="first-deffn">
+<dt class="deffn" id="index-f90"><span class="category-def">Function: </span><span><strong class="def-name">f90</strong> <var class="def-var-arguments">(<var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>)</var><a class="copiable-link" href='#index-f90'> &para;</a></span></dt>
+<dd>
+<p>Prints one or more expressions <var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>
+as a Fortran 90 program.
+Output is printed to the standard output.
+</p>
+<p><code class="code">f90</code> prints output in the so-called &quot;free form&quot; input format for
+Fortran 90: there is no special attention to column positions.
+Long lines are split at a fixed width with the ampersand <code class="code">&amp;</code> continuation
+character;
+the number of output characters per line, not including ampersands,
+is specified by <code class="code">f90_output_line_length_max</code>.
+<code class="code">f90</code> outputs an ampersand at the end of a split line
+and another at the beginning of the next line.
+</p>
+<p><code class="code">load(&quot;f90&quot;)</code> loads this function.  See also the function <code class="code"><a class="ref" href="maxima_12.html#fortran">fortran</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;f90&quot;)$
+(%i2) foo : expand ((xxx + yyy + 7)^4);
+         4            3         3        2    2             2
+(%o2) yyy  + 4 xxx yyy  + 28 yyy  + 6 xxx  yyy  + 84 xxx yyy
+          2        3             2
+ + 294 yyy  + 4 xxx  yyy + 84 xxx  yyy + 588 xxx yyy + 1372 yyy
+      4         3          2
+ + xxx  + 28 xxx  + 294 xxx  + 1372 xxx + 2401
+(%i3) f90 ('foo = foo);
+foo = yyy**4+4*xxx*yyy**3+28*yyy**3+6*xxx**2*yyy**2+84*xxx*yyy**2&amp;
+&amp;+294*yyy**2+4*xxx**3*yyy+84*xxx**2*yyy+588*xxx*yyy+1372*yyy+xxx**&amp;
+&amp;4+28*xxx**3+294*xxx**2+1372*xxx+2401
+(%o3)                         false
+</pre></div>
+
+<p>Multiple expressions.
+Capture standard output into a file via the <code class="code"><a class="ref" href="maxima_12.html#with_005fstdout">with_stdout</a></code> function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;f90&quot;)$
+(%i2) foo : sin (3*x + 1) - cos (7*x - 2);
+(%o2)              sin(3 x + 1) - cos(7 x - 2)
+(%i3) with_stdout (&quot;foo.f90&quot;,
+                   f90 (x=0.25, y=0.625, 'foo=foo, 'stop, 'end));
+(%o3)                         false
+(%i4) printfile (&quot;foo.f90&quot;);
+x = 0.25
+y = 0.625
+foo = sin(3*x+1)-cos(7*x-2)
+stop
+end
+(%o4)                        foo.f90
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-f90">Package f90</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_58.html#finance_002dpkg" accesskey="n" rel="next">finance</a>, Previous: <a href="maxima_56.html#ezunits_002dpkg" accesskey="p" rel="prev">ezunits</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

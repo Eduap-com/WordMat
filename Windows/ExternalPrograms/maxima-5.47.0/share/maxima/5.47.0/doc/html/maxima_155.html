@@ -1,0 +1,563 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Runtime Environment</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Runtime Environment">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Runtime Environment">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_152.html#Runtime-Environment" rel="up" title="Runtime Environment">
+<link href="maxima_156.html#Miscellaneous-Options" rel="next" title="Miscellaneous Options">
+<link href="maxima_154.html#Interrupts" rel="previous" title="Interrupts">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Runtime-Environment"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_154.html#Interrupts" accesskey="p" rel="previous">Interrupts</a>, Up: <a href="maxima_152.html#Runtime-Environment" accesskey="u" rel="up">Runtime Environment</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Runtime-Environment-1"></a>
+<h3 class="section">32.3 Functions and Variables for Runtime Environment</h3>
+
+<a name="maxima_005ftempdir"></a><a name="Item_003a-Runtime_002fdefvr_002fmaxima_005ftempdir"></a><dl>
+<dt><a name="index-maxima_005ftempdir"></a>System variable: <strong>maxima_tempdir</strong></dt>
+<dd>
+<p><code>maxima_tempdir</code> names the directory in which Maxima creates some temporary
+files.  In particular, temporary files for plotting are created in
+<code>maxima_tempdir</code>.
+</p>
+<p>The initial value of <code>maxima_tempdir</code> is the user&rsquo;s home directory, if
+Maxima can locate it; otherwise Maxima makes a guess about a suitable directory.
+</p>
+<p><code>maxima_tempdir</code> may be assigned a string which names a directory.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Global-variables">Global variables</a>
+&middot;</div></dd></dl>
+
+<a name="maxima_005fuserdir"></a><a name="Item_003a-Runtime_002fdefvr_002fmaxima_005fuserdir"></a><dl>
+<dt><a name="index-maxima_005fuserdir"></a>System variable: <strong>maxima_userdir</strong></dt>
+<dd>
+<p><code>maxima_userdir</code> names a directory which Maxima searches to find Maxima and
+Lisp files.  (Maxima searches some other directories as well;
+<code>file_search_maxima</code> and <code>file_search_lisp</code> are the complete lists.)
+</p>
+<p>The initial value of <code>maxima_userdir</code> is a subdirectory of the user&rsquo;s home
+directory, if Maxima can locate it; otherwise Maxima makes a guess about a
+suitable directory.
+</p>
+<p><code>maxima_userdir</code> may be assigned a string which names a directory.
+However, assigning to <code>maxima_userdir</code> does not automatically change
+<code>file_search_maxima</code> and <code>file_search_lisp</code>;
+those variables must be changed separately.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Global-variables">Global variables</a>
+&middot;</div></dd></dl>
+
+<a name="room"></a><a name="Item_003a-Runtime_002fdeffn_002froom"></a><dl>
+<dt><a name="index-room"></a>Function: <strong>room</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>room</tt> () <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>room</tt> (true) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>room</tt> (false)</em></dt>
+<dd>
+<p>Prints out a description of the state of storage and
+stack management in Maxima.  <code>room</code> calls the Lisp function of 
+the same name.
+</p>
+<ul>
+<li> <code>room ()</code> prints out a moderate description.
+</li><li> <code>room (true)</code> prints out a verbose description.
+</li><li> <code>room (false)</code> prints out a terse description.
+</li></ul>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+<a name="sstatus"></a><a name="Item_003a-Runtime_002fdeffn_002fsstatus"></a><dl>
+<dt><a name="index-sstatus"></a>Function: <strong>sstatus</strong> <em>(<var>keyword</var>, <var>item</var>)</em></dt>
+<dd>
+<p>When <var>keyword</var> is the symbol <code>feature</code>, <var>item</var> is put on the list
+of system features.  After <code>sstatus (keyword, item)</code> is executed,
+<code>status (feature, item)</code> returns <code>true</code>.  If <var>keyword</var> is the
+symbol <code>nofeature</code>, <var>item</var> is deleted from the list of system features.
+This can be useful for package writers, to keep track of what features they have
+loaded in.
+</p>
+<p>See also <code><a href="#status">status</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="status"></a><a name="Item_003a-Runtime_002fdeffn_002fstatus"></a><dl>
+<dt><a name="index-status"></a>Function: <strong>status</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>status</tt> (<code>feature</code>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>status</tt> (<code>feature</code>, <var>item</var>)</em></dt>
+<dd>
+<p>Returns information about the presence or absence of certain system-dependent 
+features.
+</p>
+<ul>
+<li> <code>status (feature)</code> returns a list of system features. These include Lisp 
+version, operating system type, etc. The list may vary from one Lisp type to 
+another.
+
+</li><li> <code>status (feature, item)</code> returns <code>true</code> if <var>item</var> is on the
+list of items returned by <code>status (feature)</code> and <code>false</code> otherwise.
+<code>status</code> quotes the argument <var>item</var>. The quote-quote operator 
+<code>'<!-- /@w -->'</code> defeats quotation. A feature whose name contains a special 
+character, such as a hyphen, must be given as a string argument. For example,
+<code>status (feature, &quot;ansi-cl&quot;)</code>.
+</li></ul>
+
+<p>See also <code><a href="#sstatus">sstatus</a></code>.
+</p>
+<p>The variable <code>features</code> contains a list of features which apply to 
+mathematical expressions. See <code>features</code> and <code>featurep</code> for more 
+information.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+
+<a name="system"></a><a name="Item_003a-Runtime_002fdeffn_002fsystem"></a><dl>
+<dt><a name="index-system"></a>Function: <strong>system</strong> <em>(<var>command</var>)</em></dt>
+<dd>
+<p>Executes <var>command</var> as a separate process.  The command is passed to the
+default shell for execution.  <code>system</code> is not supported by all operating
+systems, but generally exists in Unix and Unix-like environments.
+</p>
+<p>Supposing <code>_hist.out</code> is a list of frequencies which you wish to plot as a
+bar graph using <code>xgraph</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) (with_stdout(&quot;_hist.out&quot;,
+           for i:1 thru length(hist) do (
+             print(i,hist[i]))),
+       system(&quot;xgraph -bar -brw .7 -nl &lt; _hist.out&quot;));
+</pre></div>
+
+<p>In order to make the plot be done in the background (returning control to
+Maxima) and remove the temporary file after it is done do:
+</p>
+<div class="example">
+<pre class="example">system(&quot;(xgraph -bar -brw .7 -nl &lt; _hist.out;  rm -f _hist.out)&amp;&quot;)
+</pre></div>
+</dd></dl>
+
+<a name="time"></a><a name="Item_003a-Runtime_002fdeffn_002ftime"></a><dl>
+<dt><a name="index-time"></a>Function: <strong>time</strong> <em>(%o1, %o2, %o3, &hellip;)</em></dt>
+<dd>
+<p>Returns a list of the times, in seconds, taken to compute the output lines
+<code>%o1</code>, <code>%o2</code>, <code>%o3</code>, &hellip; The time returned is Maxima&rsquo;s
+estimate of the internal computation time, not the elapsed time.  <code>time</code>
+can only be applied to output line variables; for any other variables,
+<code>time</code> returns <code>unknown</code>.
+</p>
+<p>Set <code>showtime: true</code> to make Maxima print out the computation time 
+and elapsed time with each output line.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+<a name="timedate"></a><a name="Item_003a-Runtime_002fdeffn_002ftimedate"></a><dl>
+<dt><a name="index-timedate"></a>Function: <strong>timedate</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>timedate</tt> (<var>T</var>, <var>tz_offset</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>timedate</tt> (<var>T</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>timedate</tt> ()</em></dt>
+<dd>
+<p><code>timedate(<var>T</var>, <var>tz_offset</var>)</code> returns a string
+representing the time <var>T</var> in the time zone <var>tz_offset</var>.
+The string format is <code>YYYY-MM-DD HH:MM:SS.NNN[+|-]ZZ:ZZ</code>
+(using as many digits as necessary to represent the fractional part)
+if <var>T</var> has a nonzero fractional part,
+or <code>YYYY-MM-DD HH:MM:SS[+|-]ZZ:ZZ</code> if its fractional part is zero.
+</p>
+<p><var>T</var> measures time, in seconds, since midnight, January 1, 1900,
+in the GMT time zone.
+</p>
+<p><var>tz_offset</var> measures the offset of the time zone, in hours,
+east (positive) or west (negative) of GMT.
+<var>tz_offset</var> must be an integer, rational, or float between -24 and 24, inclusive.
+If <var>tz_offset</var> is not a multiple of 1/60, 
+it is rounded to the nearest multiple of 1/60.
+</p>
+<p><code>timedate(<var>T</var>)</code> is equivalent to <code>timedate(<var>T</var>, <var>tz_offset</var>)</code>
+with <var>tz_offset</var> equal to the offset of the local time zone.
+</p>
+<p><code>timedate()</code> is equivalent to <code>timedate(absolute_real_time())</code>.
+That is, it returns the current time in the local time zone.
+</p>
+<p>Example:
+</p>
+<p><code>timedate</code> with no argument returns a string representing the current time and date.
+</p>
+<div class="example">
+<pre class="example">(%i1) d : timedate ();
+(%o1)                      2010-06-08 04:08:09+01:00
+(%i2) print (&quot;timedate reports current time&quot;, d) $
+timedate reports current time 2010-06-08 04:08:09+01:00
+</pre></div>
+
+<p><code>timedate</code> with an argument returns a string representing the argument.
+</p>
+<div class="example">
+<pre class="example">(%i1) timedate (0);
+(%o1)                      1900-01-01 01:00:00+01:00
+(%i2) timedate (absolute_real_time () - 7*24*3600);
+(%o2)                      2010-06-01 04:19:51+01:00
+</pre></div>
+
+<p><code>timedate</code> with optional timezone offset.
+</p>
+<div class="example">
+<pre class="example">(%i1) timedate (1000000000, -9.5);
+(%o1)               1931-09-09 16:16:40-09:30
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Time-and-date-functions">Time and date functions</a>
+&middot;</div></dd></dl>
+
+<a name="parse_005ftimedate"></a><a name="Item_003a-Runtime_002fdeffn_002fparse_005ftimedate"></a><dl>
+<dt><a name="index-parse_005ftimedate"></a>Function: <strong>parse_timedate</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>parse_timedate</tt> (<var>S</var>)</em></dt>
+<dd>
+<p>Parses a string <var>S</var> representing a date or date and time of day
+and returns the number of seconds since midnight, January 1, 1900 GMT.
+If there is a nonzero fractional part, the value returned is a rational number,
+otherwise, it is an integer.
+<code>parse_timedate</code> returns <code>false</code>
+if it cannot parse <var>S</var> according to any of the allowed formats.
+</p>
+<p>The string <var>S</var> must have one of the following formats,
+optionally followed by a timezone designation:
+</p>
+<ul>
+<li> <code>YYYY-MM-DD[ T]hh:mm:ss[,.]nnn</code>
+</li><li> <code>YYYY-MM-DD[ T]hh:mm:ss</code>
+</li><li> <code>YYYY-MM-DD</code>
+</li></ul>
+
+<p>where the fields are year, month, day, hours, minutes, seconds, and fraction of a second,
+and square brackets indicate acceptable alternatives.
+The fraction may contain one or more digits.
+</p>
+<p>Except for the fraction of a second,
+each field must have exactly the number of digits indicated:
+four digits for the year, and two for the month, day of the month, hours, minutes, and seconds.
+</p>
+<p>A timezone designation must have one of the following forms:
+</p>
+<ul>
+<li> <code>[+-]hh:mm</code>
+</li><li> <code>[+-]hhmm</code>
+</li><li> <code>[+-]hh</code>
+</li><li> <code>Z</code>
+</li></ul>
+
+<p>where <code>hh</code> and <code>mm</code> indicate hours and minutes east (<code>+</code>) or west (<code>-</code>) of GMT.
+The timezone may be from +24 hours (inclusive) to -24 hours (inclusive).
+</p>
+<p>A literal character <code>Z</code> is equivalent to <code>+00:00</code> and its variants,
+indicating GMT.
+</p>
+<p>If no timezone is indicated,
+the time is assumed to be in the local time zone.
+</p>
+<p>Any leading or trailing whitespace (space, tab, newline, and carriage return) is ignored,
+but any other leading or trailing characters cause <code>parse_timedate</code> to fail and return <code>false</code>.
+</p>
+<p>See also <code><a href="#timedate">timedate</a></code> and <code><a href="#absolute_005freal_005ftime">absolute_real_time</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Midnight, January 1, 1900, in the local time zone, in each acceptable format.
+The result is the number of seconds the local time zone
+is ahead (negative result) or behind (positive result) GMT.
+In this example, the local time zone is 8 hours behind GMT.
+</p>
+<div class="example">
+<pre class="example">(%i1) parse_timedate (&quot;1900-01-01 00:00:00,000&quot;);
+(%o1)                         28800
+(%i2) parse_timedate (&quot;1900-01-01 00:00:00.000&quot;);
+(%o2)                         28800
+(%i3) parse_timedate (&quot;1900-01-01T00:00:00,000&quot;);
+(%o3)                         28800
+(%i4) parse_timedate (&quot;1900-01-01T00:00:00.000&quot;);
+(%o4)                         28800
+(%i5) parse_timedate (&quot;1900-01-01 00:00:00&quot;);
+(%o5)                         28800
+(%i6) parse_timedate (&quot;1900-01-01T00:00:00&quot;);
+(%o6)                         28800
+(%i7) parse_timedate (&quot;1900-01-01&quot;);
+(%o7)                         28800
+</pre></div>
+
+<p>Midnight, January 1, 1900, GMT, in different indicated time zones.
+</p>
+<div class="example">
+<pre class="example">(%i1) parse_timedate (&quot;1900-01-01 19:00:00+19:00&quot;);
+(%o1)                           0
+(%i2) parse_timedate (&quot;1900-01-01 07:00:00+07:00&quot;);
+(%o2)                           0
+(%i3) parse_timedate (&quot;1900-01-01 01:00:00+01:00&quot;);
+(%o3)                           0
+(%i4) parse_timedate (&quot;1900-01-01Z&quot;);
+(%o4)                           0
+(%i5) parse_timedate (&quot;1899-12-31 21:00:00-03:00&quot;);
+(%o5)                           0
+(%i6) parse_timedate (&quot;1899-12-31 13:00:00-11:00&quot;);
+(%o6)                           0
+(%i7) parse_timedate (&quot;1899-12-31 08:00:00-16:00&quot;);
+(%o7)                           0
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Time-and-date-functions">Time and date functions</a>
+&middot;</div></dd></dl>
+
+<a name="encode_005ftime"></a><a name="Item_003a-Runtime_002fdeffn_002fencode_005ftime"></a><dl>
+<dt><a name="index-encode_005ftime"></a>Function: <strong>encode_time</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>encode_time</tt> (<var>year</var>, <var>month</var>, <var>day</var>, <var>hours</var>, <var>minutes</var>, <var>seconds</var>, <var>tz_offset</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>encode_time</tt> (<var>year</var>, <var>month</var>, <var>day</var>, <var>hours</var>, <var>minutes</var>, <var>seconds</var>)</em></dt>
+<dd>
+<p>Given a time and date specified by
+<var>year</var>, <var>month</var>, <var>day</var>, <var>hours</var>, <var>minutes</var>, and <var>seconds</var>,
+<code>encode_time</code> returns the number of seconds (possibly including a fractional part)
+since midnight, January 1, 1900 GMT.
+</p>
+<p><var>year</var> must be an integer greater than or equal to 1899.
+However, 1899 is allowed only if the resulting encoded time is greater than or equal to 0.
+</p>
+<p><var>month</var> must be an integer from 1 to 12, inclusive.
+</p>
+<p><var>day</var> must be an integer from 1 to <var>n</var>, inclusive,
+where <var>n</var> is the number of days in the month specified by <var>month</var>.
+</p>
+<p><var>hours</var> must be an integer from 0 to 23, inclusive.
+</p>
+<p><var>minutes</var> must be an integer from 0 to 59, inclusive.
+</p>
+<p><var>seconds</var> must be an integer, rational, or float
+greater than or equal to 0 and less than 60.
+When <var>seconds</var> is not an integer,
+<code>encode_time</code> returns a rational,
+such that the fractional part of the return value is equal to the fractional part of <var>seconds</var>.
+Otherwise, <var>seconds</var> is an integer, and the return value is likewise an integer.
+</p>
+<p><var>tz_offset</var> measures the offset of the time zone, in hours,
+east (positive) or west (negative) of GMT.
+<var>tz_offset</var> must be an integer, rational, or float between -24 and 24, inclusive.
+If <var>tz_offset</var> is not a multiple of 1/3600, 
+it is rounded to the nearest multiple of 1/3600.
+</p>
+<p>If <var>tz_offset</var> is not present, the offset of the local time zone is assumed.
+</p>
+<p>See also <code><a href="#decode_005ftime">decode_time</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) encode_time (1900, 1, 1, 0, 0, 0, 0);
+(%o1)                           0
+(%i2) encode_time (1970, 1, 1, 0, 0, 0, 0);
+(%o2)                      2208988800
+(%i3) encode_time (1970, 1, 1, 8, 30, 0, 8.5);
+(%o3)                      2208988800
+(%i4) encode_time (1969, 12, 31, 16, 0, 0, -8);
+(%o4)                      2208988800
+(%i5) encode_time (1969, 12, 31, 16, 0, 1/1000, -8);
+                          2208988800001
+(%o5)                     -------------
+                              1000
+(%i6) % - 2208988800;
+                               1
+(%o6)                         ----
+                              1000
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Time-and-date-functions">Time and date functions</a>
+&middot;</div></dd></dl>
+
+<a name="decode_005ftime"></a><a name="Item_003a-Runtime_002fdeffn_002fdecode_005ftime"></a><dl>
+<dt><a name="index-decode_005ftime"></a>Function: <strong>decode_time</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>decode_time</tt> (<var>T</var>, <var>tz_offset</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>decode_time</tt> (<var>T</var>)</em></dt>
+<dd>
+<p>Given the number of seconds (possibly including a fractional part)
+since midnight, January 1, 1900 GMT,
+returns the date and time as represented by a list comprising
+the year, month, day of the month, hours, minutes, seconds, and time zone offset.
+</p>
+<p><var>tz_offset</var> measures the offset of the time zone, in hours,
+east (positive) or west (negative) of GMT.
+<var>tz_offset</var> must be an integer, rational, or float between -24 and 24, inclusive.
+If <var>tz_offset</var> is not a multiple of 1/3600, 
+it is rounded to the nearest multiple of 1/3600.
+</p>
+<p>If <var>tz_offset</var> is not present, the offset of the local time zone is assumed.
+</p>
+<p>See also <code><a href="#encode_005ftime">encode_time</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) decode_time (0, 0);
+(%o1)               [1900, 1, 1, 0, 0, 0, 0]
+(%i2) decode_time (0);
+(%o2)             [1899, 12, 31, 16, 0, 0, - 8]
+(%i3) decode_time (2208988800, 9.25);
+                                          37
+(%o3)              [1970, 1, 1, 9, 15, 0, --]
+                                          4
+(%i4) decode_time (2208988800);
+(%o4)             [1969, 12, 31, 16, 0, 0, - 8]
+(%i5) decode_time (2208988800 + 1729/1000, -6);
+                                      1729
+(%o5)           [1969, 12, 31, 18, 0, ----, - 6]
+                                      1000
+(%i6) decode_time (2208988800 + 1729/1000);
+                                      1729
+(%o6)           [1969, 12, 31, 16, 0, ----, - 8]
+                                      1000
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Time-and-date-functions">Time and date functions</a>
+&middot;</div></dd></dl>
+
+<a name="absolute_005freal_005ftime"></a><a name="Item_003a-Runtime_002fdeffn_002fabsolute_005freal_005ftime"></a><dl>
+<dt><a name="index-absolute_005freal_005ftime"></a>Function: <strong>absolute_real_time</strong> <em>()</em></dt>
+<dd>
+<p>Returns the number of seconds since midnight, January 1, 1900 GMT.
+The return value is an integer.
+</p>
+<p>See also <code><a href="#elapsed_005freal_005ftime">elapsed_real_time</a></code> and <code><a href="#elapsed_005frun_005ftime">elapsed_run_time</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) absolute_real_time ();
+(%o1)                      3385045277
+(%i2) 1900 + absolute_real_time () / (365.25 * 24 * 3600);
+(%o2)                   2007.265612087104
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Time-and-date-functions">Time and date functions</a>
+&middot;</div></dd></dl>
+
+<a name="elapsed_005freal_005ftime"></a><a name="Item_003a-Runtime_002fdeffn_002felapsed_005freal_005ftime"></a><dl>
+<dt><a name="index-elapsed_005freal_005ftime"></a>Function: <strong>elapsed_real_time</strong> <em>()</em></dt>
+<dd>
+<p>Returns the number of seconds (including fractions of a second)
+since Maxima was most recently started or restarted.
+The return value is a floating-point number.
+</p>
+<p>See also <code><a href="#absolute_005freal_005ftime">absolute_real_time</a></code> and <code><a href="#elapsed_005frun_005ftime">elapsed_run_time</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) elapsed_real_time ();
+(%o1)                       2.559324
+(%i2) expand ((a + b)^500)$
+(%i3) elapsed_real_time ();
+(%o3)                       7.552087
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Time-and-date-functions">Time and date functions</a>
+&middot;</div></dd></dl>
+
+<a name="elapsed_005frun_005ftime"></a><a name="Item_003a-Runtime_002fdeffn_002felapsed_005frun_005ftime"></a><dl>
+<dt><a name="index-elapsed_005frun_005ftime"></a>Function: <strong>elapsed_run_time</strong> <em>()</em></dt>
+<dd>
+<p>Returns an estimate of the number of seconds (including fractions of a second)
+which Maxima has spent in computations since Maxima was most recently started
+or restarted.  The return value is a floating-point number.
+</p>
+<p>See also <code><a href="#absolute_005freal_005ftime">absolute_real_time</a></code> and <code><a href="#elapsed_005freal_005ftime">elapsed_real_time</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) elapsed_run_time ();
+(%o1)                         0.04
+(%i2) expand ((a + b)^500)$
+(%i3) elapsed_run_time ();
+(%o3)                         1.26
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Time-and-date-functions">Time and date functions</a>
+&middot;</div></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_154.html#Interrupts" accesskey="p" rel="previous">Interrupts</a>, Up: <a href="maxima_152.html#Runtime-Environment" accesskey="u" rel="up">Runtime Environment</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

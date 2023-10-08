@@ -1,0 +1,1243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for descriptive statistics</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for descriptive statistics">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for descriptive statistics">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_211.html#descriptive_002dpkg" rel="up" title="descriptive-pkg">
+<link href="maxima_215.html#Functions-and-Variables-for-statistical-graphs" rel="next" title="Functions and Variables for statistical graphs">
+<link href="maxima_213.html#Functions-and-Variables-for-data-manipulation" rel="previous" title="Functions and Variables for data manipulation">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-descriptive-statistics"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_215.html#Functions-and-Variables-for-statistical-graphs" accesskey="n" rel="next">Functions and Variables for statistical graphs</a>, Previous: <a href="maxima_213.html#Functions-and-Variables-for-data-manipulation" accesskey="p" rel="previous">Functions and Variables for data manipulation</a>, Up: <a href="maxima_211.html#descriptive_002dpkg" accesskey="u" rel="up">descriptive-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-descriptive-statistics-1"></a>
+<h3 class="section">50.3 Functions and Variables for descriptive statistics</h3>
+
+
+
+<a name="mean"></a><a name="Item_003a-descriptive_002fdeffn_002fmean"></a><dl>
+<dt><a name="index-mean"></a>Function: <strong>mean</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>mean</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>mean</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>This is the sample mean, defined as
+</p><div class="example">
+<pre class="example">                       n
+                     ====
+             _   1   \
+             x = -    &gt;    x
+                 n   /      i
+                     ====
+                     i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) mean (s1);
+                               471
+(%o3)                          ---
+                               100
+</pre><pre class="example">(%i4) %, numer;
+(%o4)                         4.71
+</pre><pre class="example">(%i5) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i6) mean (s2);
+(%o6)     [9.9485, 10.1607, 10.8685, 15.7166, 14.8441]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="var"></a><a name="Item_003a-descriptive_002fdeffn_002fvar"></a><dl>
+<dt><a name="index-var"></a>Function: <strong>var</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>var</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>var</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>This is the sample variance, defined as
+</p><div class="example">
+<pre class="example">                     n
+                   ====
+           2   1   \          _ 2
+          s  = -    &gt;    (x - x)
+               n   /       i
+                   ====
+                   i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) var (s1), numer;
+(%o3)                   8.425899999999999
+</pre></div>
+
+<p>See also function <code><a href="#var1">var1</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="var1"></a><a name="Item_003a-descriptive_002fdeffn_002fvar1"></a><dl>
+<dt><a name="index-var1"></a>Function: <strong>var1</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>var1</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>var1</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>This is the sample variance, defined as
+</p><div class="example">
+<pre class="example">                     n
+                   ====
+               1   \          _ 2
+              ---   &gt;    (x - x)
+              n-1  /       i
+                   ====
+                   i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) var1 (s1), numer;
+(%o3)                    8.5110101010101
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) var1 (s2);
+(%o5) [17.39586540404041, 15.13912778787879, 15.63204924242424, 
+                            32.50152569696971, 24.66977392929294]
+</pre></div>
+
+<p>See also function <code><a href="#var">var</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="std"></a><a name="Item_003a-descriptive_002fdeffn_002fstd"></a><dl>
+<dt><a name="index-std"></a>Function: <strong>std</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>std</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>std</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>This is the square root of the function <code>var</code>, the variance with denominator <em>n</em>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) std (s1), numer;
+(%o3)                   2.902740084816414
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) std (s2);
+(%o5) [4.149928523480858, 3.871399812729241, 3.933920277534866, 
+                            5.672434260526957, 4.941970881136392]
+</pre></div>
+
+<p>See also functions <code><a href="#var">var</a></code> and <code><a href="#std1">std1</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="std1"></a><a name="Item_003a-descriptive_002fdeffn_002fstd1"></a><dl>
+<dt><a name="index-std1"></a>Function: <strong>std1</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>std1</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>std1</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>This is the square root of the function <code><a href="#var1">var1</a></code>, the variance with denominator <em>n-1</em>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) std1 (s1), numer;
+(%o3)                   2.917363553109228
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) std1 (s2);
+(%o5) [4.170835096721089, 3.89090320978032, 3.953738641137555, 
+                            5.701010936401517, 4.966867617451963]
+</pre></div>
+
+<p>See also functions <code><a href="#var1">var1</a></code> and <code><a href="#std">std</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="noncentral_005fmoment"></a><a name="Item_003a-descriptive_002fdeffn_002fnoncentral_005fmoment"></a><dl>
+<dt><a name="index-noncentral_005fmoment"></a>Function: <strong>noncentral_moment</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>noncentral_moment</tt> (<var>list</var>, <var>k</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>noncentral_moment</tt> (<var>matrix</var>, <var>k</var>)</em></dt>
+<dd>
+<p>The non central moment of order <em>k</em>, defined as
+</p><div class="example">
+<pre class="example">                       n
+                     ====
+                 1   \      k
+                 -    &gt;    x
+                 n   /      i
+                     ====
+                     i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) noncentral_moment (s1, 1), numer; /* the mean */
+(%o3)                         4.71
+</pre><pre class="example">(%i5) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i6) noncentral_moment (s2, 5);
+(%o6) [319793.8724761505, 320532.1923892463,
+      391249.5621381556, 2502278.205988911, 1691881.797742255]
+</pre></div>
+
+<p>See also function <code><a href="#central_005fmoment">central_moment</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="central_005fmoment"></a><a name="Item_003a-descriptive_002fdeffn_002fcentral_005fmoment"></a><dl>
+<dt><a name="index-central_005fmoment"></a>Function: <strong>central_moment</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>central_moment</tt> (<var>list</var>, <var>k</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>central_moment</tt> (<var>matrix</var>, <var>k</var>)</em></dt>
+<dd>
+<p>The central moment of order <em>k</em>, defined as
+</p><div class="example">
+<pre class="example">                    n
+                  ====
+              1   \          _ k
+              -    &gt;    (x - x)
+              n   /       i
+                  ====
+                  i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) central_moment (s1, 2), numer; /* the variance */
+(%o3)                   8.425899999999999
+</pre><pre class="example">(%i5) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i6) central_moment (s2, 3);
+(%o6) [11.29584771375004, 16.97988248298583, 5.626661952750102,
+                             37.5986572057918, 25.85981904394192]
+</pre></div>
+
+<p>See also functions <code><a href="#central_005fmoment">central_moment</a></code> and <code><a href="#mean">mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="cv"></a><a name="Item_003a-descriptive_002fdeffn_002fcv"></a><dl>
+<dt><a name="index-cv"></a>Function: <strong>cv</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cv</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cv</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The variation coefficient is the quotient between the sample standard deviation (<code><a href="#std">std</a></code>) and the <code><a href="#mean">mean</a></code>,
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) cv (s1), numer;
+(%o3)                   .6193977819764815
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) cv (s2);
+(%o5) [.4192426091090204, .3829365309260502, 0.363779605385983, 
+                            .3627381836021478, .3346021393989506]
+</pre></div>
+
+<p>See also functions <code><a href="#std">std</a></code> and <code><a href="#mean">mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="smin"></a><a name="Item_003a-descriptive_002fdeffn_002fsmin"></a><dl>
+<dt><a name="index-smin"></a>Function: <strong>smin</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>smin</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>smin</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>This is the minimum value of the sample <var>list</var>.
+When the argument is a matrix, <code><a href="#smin">smin</a></code> returns
+a list containing the minimum values of the columns,
+which are associated to statistical variables.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) smin (s1);
+(%o3)                           0
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) smin (s2);
+(%o5)             [0.58, 0.5, 2.67, 5.25, 5.17]
+</pre></div>
+
+<p>See also function <code><a href="#smax">smax</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="smax"></a><a name="Item_003a-descriptive_002fdeffn_002fsmax"></a><dl>
+<dt><a name="index-smax"></a>Function: <strong>smax</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>smax</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>smax</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>This is the maximum value of the sample <var>list</var>.
+When the argument is a matrix, <code><a href="#smax">smax</a></code> returns
+a list containing the maximum values of the columns,
+which are associated to statistical variables.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) smax (s1);
+(%o3)                           9
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) smax (s2);
+(%o5)          [20.25, 21.46, 20.04, 29.63, 27.63]
+</pre></div>
+
+<p>See also function <code><a href="#smin">smin</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="range"></a><a name="Item_003a-descriptive_002fdeffn_002frange"></a><dl>
+<dt><a name="index-range"></a>Function: <strong>range</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>range</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>range</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The range is the difference between the extreme values.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) range (s1);
+(%o3)                           9
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) range (s2);
+(%o5)          [19.67, 20.96, 17.37, 24.38, 22.46]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="quantile"></a><a name="Item_003a-descriptive_002fdeffn_002fquantile"></a><dl>
+<dt><a name="index-quantile"></a>Function: <strong>quantile</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quantile</tt> (<var>list</var>, <var>p</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quantile</tt> (<var>matrix</var>, <var>p</var>)</em></dt>
+<dd>
+<p>This is the <var>p</var>-quantile, with <var>p</var> a number in <em>[0, 1]</em>, of the sample <var>list</var>.
+Although there are several definitions for the sample quantile (Hyndman, R. J., Fan, Y. (1996) <var>Sample quantiles in statistical packages</var>. American Statistician, 50, 361-365), the one based on linear interpolation is implemented in package <a href="maxima_211.html#descriptive_002dpkg">descriptive-pkg</a>
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) /* 1st and 3rd quartiles */
+         [quantile (s1, 1/4), quantile (s1, 3/4)], numer;
+(%o3)                      [2.0, 7.25]
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) quantile (s2, 1/4);
+(%o5)    [7.2575, 7.477500000000001, 7.82, 11.28, 11.48]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="median"></a><a name="Item_003a-descriptive_002fdeffn_002fmedian"></a><dl>
+<dt><a name="index-median"></a>Function: <strong>median</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>median</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>median</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>Once the sample is ordered, if the sample size is odd the median is the central value, otherwise it is the mean of the two central values.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) median (s1);
+                                9
+(%o3)                           -
+                                2
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) median (s2);
+(%o5)         [10.06, 9.855, 10.73, 15.48, 14.105]
+</pre></div>
+
+<p>The median is the 1/2-quantile.
+</p>
+<p>See also function <code><a href="#quantile">quantile</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="qrange"></a><a name="Item_003a-descriptive_002fdeffn_002fqrange"></a><dl>
+<dt><a name="index-qrange"></a>Function: <strong>qrange</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>qrange</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>qrange</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The interquartilic range is the difference between the third and first quartiles, <code>quantile(<var>list</var>,3/4) - quantile(<var>list</var>,1/4)</code>,
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) qrange (s1);
+                               21
+(%o3)                          --
+                               4
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) qrange (s2);
+(%o5) [5.385, 5.572499999999998, 6.022500000000001, 
+                            8.729999999999999, 6.649999999999999]
+</pre></div>
+
+<p>See also function <code><a href="#quantile">quantile</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="mean_005fdeviation"></a><a name="Item_003a-descriptive_002fdeffn_002fmean_005fdeviation"></a><dl>
+<dt><a name="index-mean_005fdeviation"></a>Function: <strong>mean_deviation</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>mean_deviation</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>mean_deviation</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The mean deviation, defined as
+</p><div class="example">
+<pre class="example">                     n
+                   ====
+               1   \          _
+               -    &gt;    |x - x|
+               n   /       i
+                   ====
+                   i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) mean_deviation (s1);
+                               51
+(%o3)                          --
+                               20
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) mean_deviation (s2);
+(%o5) [3.287959999999999, 3.075342, 3.23907, 4.715664000000001, 
+                                               4.028546000000002]
+</pre></div>
+
+<p>See also function <code><a href="#mean">mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="median_005fdeviation"></a><a name="Item_003a-descriptive_002fdeffn_002fmedian_005fdeviation"></a><dl>
+<dt><a name="index-median_005fdeviation"></a>Function: <strong>median_deviation</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>median_deviation</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>median_deviation</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The median deviation, defined as
+</p><div class="example">
+<pre class="example">                 n
+               ====
+           1   \
+           -    &gt;    |x - med|
+           n   /       i
+               ====
+               i = 1
+</pre></div>
+<p>where <code>med</code> is the median of <var>list</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) median_deviation (s1);
+                                5
+(%o3)                           -
+                                2
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) median_deviation (s2);
+(%o5)           [2.75, 2.755, 3.08, 4.315, 3.31]
+</pre></div>
+
+<p>See also function <code><a href="#mean">mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="harmonic_005fmean"></a><a name="Item_003a-descriptive_002fdeffn_002fharmonic_005fmean"></a><dl>
+<dt><a name="index-harmonic_005fmean"></a>Function: <strong>harmonic_mean</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>harmonic_mean</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>harmonic_mean</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The harmonic mean, defined as
+</p><div class="example">
+<pre class="example">                  n
+               --------
+                n
+               ====
+               \     1
+                &gt;    --
+               /     x
+               ====   i
+               i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) y : [5, 7, 2, 5, 9, 5, 6, 4, 9, 2, 4, 2, 5]$
+</pre><pre class="example">(%i3) harmonic_mean (y), numer;
+(%o3)                   3.901858027632205
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) harmonic_mean (s2);
+(%o5) [6.948015590052786, 7.391967752360356, 9.055658197151745, 
+                            13.44199028193692, 13.01439145898509]
+</pre></div>
+
+<p>See also functions <code><a href="#mean">mean</a></code> and <code><a href="#geometric_005fmean">geometric_mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div>
+</dd></dl>
+
+
+
+<a name="geometric_005fmean"></a><a name="Item_003a-descriptive_002fdeffn_002fgeometric_005fmean"></a><dl>
+<dt><a name="index-geometric_005fmean"></a>Function: <strong>geometric_mean</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>geometric_mean</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>geometric_mean</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The geometric mean, defined as
+</p><div class="example">
+<pre class="example">                 /  n      \ 1/n
+                 | /===\   |
+                 |  ! !    |
+                 |  ! !  x |
+                 |  ! !   i|
+                 | i = 1   |
+                 \         /
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) y : [5, 7, 2, 5, 9, 5, 6, 4, 9, 2, 4, 2, 5]$
+</pre><pre class="example">(%i3) geometric_mean (y), numer;
+(%o3)                   4.454845412337012
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) geometric_mean (s2);
+(%o5) [8.82476274347979, 9.22652604739361, 10.0442675714889, 
+                            14.61274126349021, 13.96184163444275]
+</pre></div>
+
+<p>See also functions <code><a href="#mean">mean</a></code> and <code><a href="#harmonic_005fmean">harmonic_mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="kurtosis"></a><a name="Item_003a-descriptive_002fdeffn_002fkurtosis"></a><dl>
+<dt><a name="index-kurtosis"></a>Function: <strong>kurtosis</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kurtosis</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kurtosis</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The kurtosis coefficient, defined as
+</p><div class="example">
+<pre class="example">                    n
+                  ====
+            1     \          _ 4
+           ----    &gt;    (x - x)  - 3
+              4   /       i
+           n s    ====
+                  i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) kurtosis (s1), numer;
+(%o3)                  - 1.273247946514421
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) kurtosis (s2);
+(%o5) [- .2715445622195385, 0.119998784429451, 
+     - .4275233490482861, - .6405361979019522, - .4952382132352935]
+</pre></div>
+
+<p>See also functions <code><a href="#mean">mean</a></code>, <code><a href="#var">var</a></code> and <code><a href="#skewness">skewness</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="skewness"></a><a name="Item_003a-descriptive_002fdeffn_002fskewness"></a><dl>
+<dt><a name="index-skewness"></a>Function: <strong>skewness</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>skewness</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>skewness</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The skewness coefficient, defined as
+</p><div class="example">
+<pre class="example">                    n
+                  ====
+            1     \          _ 3
+           ----    &gt;    (x - x)
+              3   /       i
+           n s    ====
+                  i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) skewness (s1), numer;
+(%o3)                  .009196180476450424
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) skewness (s2);
+(%o5) [.1580509020000978, .2926379232061854, .09242174416107717, 
+                            .2059984348148687, .2142520248890831]
+</pre></div>
+
+<p>See also functions <code><a href="#mean">mean</a></code>,, <code><a href="#var">var</a></code> and <code><a href="#kurtosis">kurtosis</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="pearson_005fskewness"></a><a name="Item_003a-descriptive_002fdeffn_002fpearson_005fskewness"></a><dl>
+<dt><a name="index-pearson_005fskewness"></a>Function: <strong>pearson_skewness</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>pearson_skewness</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>pearson_skewness</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>Pearson&rsquo;s skewness coefficient, defined as 
+</p><div class="example">
+<pre class="example">                _
+             3 (x - med)
+             -----------
+                  s
+</pre></div>
+<p>where <var>med</var> is the median of <var>list</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) pearson_skewness (s1), numer;
+(%o3)                   .2159484029093895
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) pearson_skewness (s2);
+(%o5) [- .08019976629211892, .2357036272952649, 
+         .1050904062491204, .1245042340592368, .4464181795804519]
+</pre></div>
+
+<p>See also functions <code><a href="#mean">mean</a></code>, <code><a href="#var">var</a></code> and <code><a href="#median">median</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="quartile_005fskewness"></a><a name="Item_003a-descriptive_002fdeffn_002fquartile_005fskewness"></a><dl>
+<dt><a name="index-quartile_005fskewness"></a>Function: <strong>quartile_skewness</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quartile_skewness</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quartile_skewness</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>The quartile skewness coefficient, defined as 
+</p><div class="example">
+<pre class="example">               c    - 2 c    + c
+                3/4      1/2    1/4
+               --------------------
+                   c    - c
+                    3/4    1/4
+</pre></div>
+<p>where <em>c_p</em> is the <var>p</var>-quantile of sample <var>list</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) quartile_skewness (s1), numer;
+(%o3)                  .04761904761904762
+</pre><pre class="example">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i5) quartile_skewness (s2);
+(%o5) [- 0.0408542246982353, .1467025572005382, 
+       0.0336239103362392, .03780068728522298, .2105263157894735]
+</pre></div>
+
+<p>See also function <code><a href="#quantile">quantile</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="km"></a><a name="Item_003a-descriptive_002fdeffn_002fkm"></a><dl>
+<dt><a name="index-km"></a>Function: <strong>km</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>km</tt> (<var>list</var>, <var>option</var> ...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>km</tt> (<var>matrix</var>, <var>option</var> ...)</em></dt>
+<dd>
+<p>Kaplan Meier estimator of the survival, or reliability, function <em>S(x)=1-F(x)</em>.
+</p>
+<p>Data can be introduced as a list of pairs, or as a two column matrix. The first
+component is the observed time, and the second component a censoring index 
+(1 = non censored, 0 = right censored).
+</p>
+<p>The optional argument is the name of the variable in the returned expression,
+which is <var>x</var> by default.
+</p>
+<p>Examples:
+</p>
+<p>Sample as a list of pairs.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+</pre><pre class="example">(%i2) S: km([[2,1], [3,1], [5,0], [8,1]]);
+                       charfun((3 &lt;= x) and (x &lt; 8))
+(%o2) charfun(x &lt; 0) + -----------------------------
+                                     2
+                3 charfun((2 &lt;= x) and (x &lt; 3))
+              + ------------------------------- 
+                               4
+              + charfun((0 &lt;= x) and (x &lt; 2))
+</pre><pre class="example">(%i3) load (&quot;draw&quot;)$
+</pre><pre class="example">(%i4) draw2d(
+        line_width = 3, grid = true,
+        explicit(S, x, -0.1, 10))$
+</pre></div>
+
+<p>Estimate survival probabilities.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) S(t):= ''(km([[2,1], [3,1], [5,0], [8,1]], t)) $
+</pre><pre class="example">(%i3) S(6);
+                            1
+(%o3)                       -
+                            2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="cdf_005fempirical"></a><a name="Item_003a-descriptive_002fdeffn_002fcdf_005fempirical"></a><dl>
+<dt><a name="index-cdf_005fempirical"></a>Function: <strong>cdf_empirical</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cdf_empirical</tt> (<var>list</var>, <var>option</var> ...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cdf_empirical</tt> (<var>matrix</var>, <var>option</var> ...)</em></dt>
+<dd>
+<p>Empirical distribution function <em>F(x)</em>.
+</p>
+<p>Data can be introduced as a list of numbers, or as an one column matrix.
+</p>
+<p>The optional argument is the name of the variable in the returned expression,
+which is <var>x</var> by default.
+</p>
+<p>Example:
+</p>
+<p>Empirical distribution function.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+</pre><pre class="example">(%i2) F(x):= ''(cdf_empirical([1,3,3,5,7,7,7,8,9]));
+(%o2) F(x) := (charfun(x &gt;= 9) + charfun(x &gt;= 8)
+               + 3 charfun(x &gt;= 7) + charfun(x &gt;= 5)
+               + 2 charfun(x &gt;= 3) + charfun(x &gt;= 1))/9
+</pre><pre class="example">(%i3) F(6);
+                           4
+(%o3)                      -
+                           9
+</pre><pre class="example">(%i4) load(&quot;draw&quot;)$
+(%i5) draw2d(
+        line_width = 3,
+        grid       = true,
+        explicit(F(z), z, -2, 12)) $
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="cov"></a><a name="Item_003a-descriptive_002fdeffn_002fcov"></a><dl>
+<dt><a name="index-cov"></a>Function: <strong>cov</strong> <em>(<var>matrix</var>)</em></dt>
+<dd><p>The covariance matrix of the multivariate sample, defined as
+</p><div class="example">
+<pre class="example">              n
+             ====
+          1  \           _        _
+      S = -   &gt;    (X  - X) (X  - X)'
+          n  /       j        j
+             ====
+             j = 1
+</pre></div>
+<p>where <em>X_j</em> is the <em>j</em>-th row of the sample matrix.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) fpprintprec : 7$  /* change precision for pretty output */
+</pre><pre class="example">(%i4) cov (s2);
+      [ 17.22191  13.61811  14.37217  19.39624  15.42162 ]
+      [                                                  ]
+      [ 13.61811  14.98774  13.30448  15.15834  14.9711  ]
+      [                                                  ]
+(%o4) [ 14.37217  13.30448  15.47573  17.32544  16.18171 ]
+      [                                                  ]
+      [ 19.39624  15.15834  17.32544  32.17651  20.44685 ]
+      [                                                  ]
+      [ 15.42162  14.9711   16.18171  20.44685  24.42308 ]
+</pre></div>
+
+<p>See also function <code><a href="#cov1">cov1</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="cov1"></a><a name="Item_003a-descriptive_002fdeffn_002fcov1"></a><dl>
+<dt><a name="index-cov1"></a>Function: <strong>cov1</strong> <em>(<var>matrix</var>)</em></dt>
+<dd><p>The covariance matrix of the multivariate sample, defined as
+</p><div class="example">
+<pre class="example">              n
+             ====
+         1   \           _        _
+   S  = ---   &gt;    (X  - X) (X  - X)'
+    1   n-1  /       j        j
+             ====
+             j = 1
+</pre></div>
+<p>where <em>X_j</em> is the <em>j</em>-th row of the sample matrix.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) fpprintprec : 7$ /* change precision for pretty output */
+</pre><pre class="example">(%i4) cov1 (s2);
+      [ 17.39587  13.75567  14.51734  19.59216  15.5774  ]
+      [                                                  ]
+      [ 13.75567  15.13913  13.43887  15.31145  15.12232 ]
+      [                                                  ]
+(%o4) [ 14.51734  13.43887  15.63205  17.50044  16.34516 ]
+      [                                                  ]
+      [ 19.59216  15.31145  17.50044  32.50153  20.65338 ]
+      [                                                  ]
+      [ 15.5774   15.12232  16.34516  20.65338  24.66977 ]
+</pre></div>
+
+<p>See also function <code><a href="#cov">cov</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="global_005fvariances"></a><a name="Item_003a-descriptive_002fdeffn_002fglobal_005fvariances"></a><dl>
+<dt><a name="index-global_005fvariances"></a>Function: <strong>global_variances</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>global_variances</tt> (<var>matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>global_variances</tt> (<var>matrix</var>, <var>options</var> ...)</em></dt>
+<dd>
+<p>Function <code>global_variances</code> returns a list of global variance measures:
+</p>
+<ul>
+<li> <var>total variance</var>: <code>trace(S_1)</code>,
+</li><li> <var>mean variance</var>: <code>trace(S_1)/p</code>,
+</li><li> <var>generalized variance</var>: <code>determinant(S_1)</code>,
+</li><li> <var>generalized standard deviation</var>: <code>sqrt(determinant(S_1))</code>,
+</li><li> <var>effective variance</var> <code>determinant(S_1)^(1/p)</code>, (defined in: Pe&ntilde;a, D. (2002) <var>An&aacute;lisis de datos multivariantes</var>; McGraw-Hill, Madrid.)
+</li><li> <var>effective standard deviation</var>: <code>determinant(S_1)^(1/(2*p))</code>.
+</li></ul>
+<p>where <var>p</var> is the dimension of the multivariate random variable and <em>S_1</em> the covariance matrix returned by <code>cov1</code>.
+</p>
+<p>Option:
+</p>
+<ul>
+<li> <code>'data</code>, default <code>'true</code>, indicates whether the input matrix contains the sample data,
+in which case the covariance matrix <code>cov1</code> must be calculated, or not, and then the covariance
+matrix (symmetric) must be given, instead of the data.
+</li></ul>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i3) global_variances (s2);
+(%o3) [105.338342060606, 21.06766841212119, 12874.34690469686, 
+         113.4651792608501, 6.636590811800795, 2.576158149609762]
+</pre></div>
+
+<p>Calculate the <code>global_variances</code> from the covariance matrix.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) s : cov1 (s2)$
+</pre><pre class="example">(%i4) global_variances (s, data=false);
+(%o4) [105.338342060606, 21.06766841212119, 12874.34690469686, 
+         113.4651792608501, 6.636590811800795, 2.576158149609762]
+</pre></div>
+
+<p>See also <code><a href="#cov">cov</a></code> and <code><a href="#cov1">cov1</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="cor"></a><a name="Item_003a-descriptive_002fdeffn_002fcor"></a><dl>
+<dt><a name="index-cor"></a>Function: <strong>cor</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cor</tt> (<var>matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>cor</tt> (<var>matrix</var>, <var>logical_value</var>)</em></dt>
+<dd>
+<p>The correlation matrix of the multivariate sample.
+</p>
+<p>Option:
+</p>
+<ul>
+<li> <code>'data</code>, default <code>'true</code>, indicates whether the input matrix contains the sample data,
+in which case the covariance matrix <code>cov1</code> must be calculated, or not, and then the covariance
+matrix (symmetric) must be given, instead of the data.
+</li></ul>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) fpprintprec : 7 $
+(%i3) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i4) cor (s2);
+      [   1.0     .8476339  .8803515  .8239624  .7519506 ]
+      [                                                  ]
+      [ .8476339    1.0     .8735834  .6902622  0.782502 ]
+      [                                                  ]
+(%o4) [ .8803515  .8735834    1.0     .7764065  .8323358 ]
+      [                                                  ]
+      [ .8239624  .6902622  .7764065    1.0     .7293848 ]
+      [                                                  ]
+      [ .7519506  0.782502  .8323358  .7293848    1.0    ]
+</pre></div>
+
+<p>Calculate de correlation matrix from the covariance matrix.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) fpprintprec : 7 $
+(%i3) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i4) s : cov1 (s2)$
+</pre><pre class="example">(%i5) cor (s, data=false); /* this is faster */
+      [   1.0     .8476339  .8803515  .8239624  .7519506 ]
+      [                                                  ]
+      [ .8476339    1.0     .8735834  .6902622  0.782502 ]
+      [                                                  ]
+(%o5) [ .8803515  .8735834    1.0     .7764065  .8323358 ]
+      [                                                  ]
+      [ .8239624  .6902622  .7764065    1.0     .7293848 ]
+      [                                                  ]
+      [ .7519506  0.782502  .8323358  .7293848    1.0    ]
+</pre></div>
+
+<p>See also <code><a href="#cov">cov</a></code> and <code><a href="#cov1">cov1</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="list_005fcorrelations"></a><a name="Item_003a-descriptive_002fdeffn_002flist_005fcorrelations"></a><dl>
+<dt><a name="index-list_005fcorrelations"></a>Function: <strong>list_correlations</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>list_correlations</tt> (<var>matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>list_correlations</tt> (<var>matrix</var>, <var>options</var> ...)</em></dt>
+<dd>
+<p>Function <code>list_correlations</code> returns a list of correlation measures:
+</p>
+<ul>
+<li> <var>precision matrix</var>: the inverse of the covariance matrix <em>S_1</em>,
+<div class="example">
+<pre class="example">       -1     ij
+      S   = (s  )             
+       1         i,j = 1,2,...,p
+</pre></div>
+
+</li><li> <var>multiple correlation vector</var>:  <em>(R_1^2, R_2^2, ..., R_p^2)</em>, with 
+<div class="example">
+<pre class="example">       2          1
+      R  = 1 - -------
+       i        ii
+               s   s
+                    ii
+</pre></div>
+<p>being an indicator of the goodness of fit of the linear multivariate regression model on <em>X_i</em> when the rest of variables are used as regressors.
+</p>
+</li><li> <var>partial correlation matrix</var>: with element <em>(i, j)</em> being
+<div class="example">
+<pre class="example">                         ij
+                        s
+      r        = - ------------
+       ij.rest     / ii  jj\ 1/2
+                   |s   s  |
+                   \       /
+</pre></div>
+
+</li></ul>
+
+<p>Option:
+</p>
+<ul>
+<li> <code>'data</code>, default <code>'true</code>, indicates whether the input matrix contains the sample data,
+in which case the covariance matrix <code>cov1</code> must be calculated, or not, and then the covariance
+matrix (symmetric) must be given, instead of the data.
+</li></ul>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) z : list_correlations (s2)$
+(%i4) fpprintprec : 5$ /* for pretty output */
+</pre><pre class="example">(%i5) z[1];  /* precision matrix */
+      [  .38486   - .13856   - .15626   - .10239    .031179  ]
+      [                                                      ]
+      [ - .13856   .34107    - .15233    .038447   - .052842 ]
+      [                                                      ]
+(%o5) [ - .15626  - .15233    .47296    - .024816  - .10054  ]
+      [                                                      ]
+      [ - .10239   .038447   - .024816   .10937    - .034033 ]
+      [                                                      ]
+      [ .031179   - .052842  - .10054   - .034033   .14834   ]
+</pre><pre class="example">(%i6) z[2];  /* multiple correlation vector */
+(%o6)      [.85063, .80634, .86474, .71867, .72675]
+</pre><pre class="example">(%i7) z[3];  /* partial correlation matrix */
+      [  - 1.0     .38244   .36627   .49908   - .13049 ]
+      [                                                ]
+      [  .38244    - 1.0    .37927  - .19907   .23492  ]
+      [                                                ]
+(%o7) [  .36627    .37927   - 1.0    .10911    .37956  ]
+      [                                                ]
+      [  .49908   - .19907  .10911   - 1.0     .26719  ]
+      [                                                ]
+      [ - .13049   .23492   .37956   .26719    - 1.0   ]
+</pre></div>
+
+<p>See also <code><a href="#cov">cov</a></code> and <code><a href="#cov1">cov1</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+
+<a name="principal_005fcomponents"></a><a name="Item_003a-descriptive_002fdeffn_002fprincipal_005fcomponents"></a><dl>
+<dt><a name="index-principal_005fcomponents"></a>Function: <strong>principal_components</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>principal_components</tt> (<var>matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>principal_components</tt> (<var>matrix</var>, <var>options</var> ...)</em></dt>
+<dd>
+<p>Calculates the principal components of a multivariate sample. Principal components are
+used in multivariate statistical analysis to reduce the dimensionality of the sample.
+</p>
+<p>Option:
+</p>
+<ul>
+<li> <code>'data</code>, default <code>'true</code>, indicates whether the input matrix contains the sample data,
+in which case the covariance matrix <code><a href="#cov1">cov1</a></code> must be calculated, or not, and then the covariance
+matrix (symmetric) must be given, instead of the data.
+</li></ul>
+
+<p>The output of function <code>principal_components</code> is a list with the following results:
+</p>
+<ul>
+<li> variances of the principal components,
+</li><li> percentage of total variance explained by each principal component,
+</li><li> rotation matrix.
+</li></ul>
+
+<p>Examples:
+</p>
+<p>In this sample, the first component explains 83.13 per cent of total 
+variance.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) fpprintprec:4 $
+(%i4) res: principal_components(s2);
+0 errors, 0 warnings
+(%o4) [[87.57, 8.753, 5.515, 1.889, 1.613], 
+[83.13, 8.31, 5.235, 1.793, 1.531], 
+</pre><pre class="example">[ .4149  .03379   - .4757  - 0.581   - .5126 ]
+[                                            ]
+[ 0.369  - .3657  - .4298   .7237    - .1469 ]
+[                                            ]
+[ .3959  - .2178  - .2181  - .2749    .8201  ]]
+[                                            ]
+[ .5548   .7744    .1857    .2319    .06498  ]
+[                                            ]
+[ .4765  - .4669   0.712   - .09605  - .1969 ]
+</pre><pre class="example">(%i5) /* accumulated percentages  */
+    block([ap: copy(res[2])],
+      for k:2 thru length(ap) do ap[k]: ap[k]+ap[k-1],
+      ap);
+(%o5)                 [83.13, 91.44, 96.68, 98.47, 100.0]
+(%i6) /* sample dimension */
+      p: length(first(res));
+(%o6)                                  5
+(%i7) /* plot percentages to select number of
+         principal components for further work */
+     draw2d(
+        fill_density = 0.2,
+        apply(bars, makelist([k, res[2][k], 1/2], k, p)),
+        points_joined = true,
+        point_type    = filled_circle,
+        point_size    = 3,
+        points(makelist([k, res[2][k]], k, p)),
+        xlabel = &quot;Variances&quot;,
+        ylabel = &quot;Percentages&quot;,
+        xtics  = setify(makelist([concat(&quot;PC&quot;,k),k], k, p))) $
+</pre></div>
+
+<p>In case de covariance matrix is known, it can be passed to the function,
+but option <code>data=false</code> must be used.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) S: matrix([1,-2,0],[-2,5,0],[0,0,2]);
+                                [  1   - 2  0 ]
+                                [             ]
+(%o2)                           [ - 2   5   0 ]
+                                [             ]
+                                [  0    0   2 ]
+(%i3) fpprintprec:4 $
+(%i4) /* the argument is a covariance matrix */
+      res: principal_components(S, data=false);
+0 errors, 0 warnings
+                                                  [ - .3827  0.0  .9239 ]
+                                                  [                     ]
+(%o4) [[5.828, 2.0, .1716], [72.86, 25.0, 2.145], [  .9239   0.0  .3827 ]]
+                                                  [                     ]
+                                                  [   0.0    1.0   0.0  ]
+(%i5) /* transformation to get the principal components
+         from original records */
+      matrix([a1,b2,c3],[a2,b2,c2]).last(res);
+             [ .9239 b2 - .3827 a1  1.0 c3  .3827 b2 + .9239 a1 ]
+(%o5)        [                                                  ]
+             [ .9239 b2 - .3827 a2  1.0 c2  .3827 b2 + .9239 a2 ]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="Item_003a-descriptive_002fnode_002fFunctions-and-Variables-for-statistical-graphs"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_215.html#Functions-and-Variables-for-statistical-graphs" accesskey="n" rel="next">Functions and Variables for statistical graphs</a>, Previous: <a href="maxima_213.html#Functions-and-Variables-for-data-manipulation" accesskey="p" rel="previous">Functions and Variables for data manipulation</a>, Up: <a href="maxima_211.html#descriptive_002dpkg" accesskey="u" rel="up">descriptive-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

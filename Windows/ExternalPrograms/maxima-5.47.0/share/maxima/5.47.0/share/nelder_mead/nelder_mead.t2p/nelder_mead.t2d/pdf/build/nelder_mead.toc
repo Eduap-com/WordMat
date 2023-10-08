@@ -1,0 +1,5 @@
+@unnchapentry{}{10001}{Top}{1}
+@numchapentry{Package nelder_mead}{1}{}{2}
+@numsecentry{Introduction to package nelder_mead}{1.1}{Introduction to package nelder_mead}{2}
+@numsecentry{Definitions for package nelder_mead}{1.2}{Definitions for package nelder_mead}{2}
+@appentry{Function and variable index}{A}{Function and variable index}{3}

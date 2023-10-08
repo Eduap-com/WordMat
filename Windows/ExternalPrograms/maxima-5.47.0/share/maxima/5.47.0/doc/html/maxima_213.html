@@ -1,0 +1,484 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for data manipulation</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for data manipulation">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for data manipulation">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_211.html#descriptive_002dpkg" rel="up" title="descriptive-pkg">
+<link href="maxima_214.html#Functions-and-Variables-for-descriptive-statistics" rel="next" title="Functions and Variables for descriptive statistics">
+<link href="maxima_212.html#Introduction-to-descriptive" rel="previous" title="Introduction to descriptive">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-data-manipulation"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_214.html#Functions-and-Variables-for-descriptive-statistics" accesskey="n" rel="next">Functions and Variables for descriptive statistics</a>, Previous: <a href="maxima_212.html#Introduction-to-descriptive" accesskey="p" rel="previous">Introduction to descriptive</a>, Up: <a href="maxima_211.html#descriptive_002dpkg" accesskey="u" rel="up">descriptive-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-data-manipulation-1"></a>
+<h3 class="section">50.2 Functions and Variables for data manipulation</h3>
+
+
+
+<a name="build_005fsample"></a><a name="Item_003a-descriptive_002fdeffn_002fbuild_005fsample"></a><dl>
+<dt><a name="index-build_005fsample"></a>Function: <strong>build_sample</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>build_sample</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>build_sample</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>Builds a sample from a table of absolute frequencies.
+The input table can be a matrix or a list of lists, all of
+them of equal size. The number of columns or the length of
+the lists must be greater than 1. The last element of each
+row or list is interpreted as the absolute frequency.
+The output is always a sample in matrix form.
+</p>
+<p>Examples:
+</p>
+<p>Univariate frequency table.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) sam1: build_sample([[6,1], [j,2], [2,1]]);
+                       [ 6 ]
+                       [   ]
+                       [ j ]
+(%o2)                  [   ]
+                       [ j ]
+                       [   ]
+                       [ 2 ]
+(%i3) mean(sam1);
+                      2 j + 8
+(%o3)                [-------]
+                         4
+(%i4) barsplot(sam1) $
+</pre></div>
+
+<p>Multivariate frequency table.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) sam2: build_sample([[6,3,1], [5,6,2], [u,2,1],[6,8,2]]) ;
+                           [ 6  3 ]
+                           [      ]
+                           [ 5  6 ]
+                           [      ]
+                           [ 5  6 ]
+(%o2)                      [      ]
+                           [ u  2 ]
+                           [      ]
+                           [ 6  8 ]
+                           [      ]
+                           [ 6  8 ]
+(%i3) cov(sam2);
+       [   2                 2                            ]
+       [  u  + 158   (u + 28)     2 u + 174   11 (u + 28) ]
+       [  -------- - ---------    --------- - ----------- ]
+(%o3)  [     6          36            6           12      ]
+       [                                                  ]
+       [ 2 u + 174   11 (u + 28)            21            ]
+       [ --------- - -----------            --            ]
+       [     6           12                 4             ]
+(%i4) barsplot(sam2, grouping=stacked) $
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="continuous_005ffreq"></a><a name="Item_003a-descriptive_002fdeffn_002fcontinuous_005ffreq"></a><dl>
+<dt><a name="index-continuous_005ffreq"></a>Function: <strong>continuous_freq</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>continuous_freq</tt> (<var>data</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>continuous_freq</tt> (<var>data</var>, <var>m</var>)</em></dt>
+<dd>
+<p>Divides the range of <var>data</var> into intervals,
+and counts how many values fall into each one.
+</p>
+<p>A value <var>x</var> falls into an interval with left and right endpoints <var>a</var> and <var>b</var>
+if and only if <code><var>x</var> &gt; <var>a</var></code> and <code><var>x</var> &lt;= <var>b</var></code>,
+except for the first (least or leftmost) interval,
+for which <code><var>x</var> &gt;= <var>a</var></code> and <code><var>x</var> &lt;= <var>b</var></code>.
+That is, an interval excludes its left endpoint and includes its right endpoint,
+except for the first interval, which includes both the left and right endpoints.
+</p>
+<p><var>data</var> must be a list of numbers,
+or 1-dimensional array (as created by <code>make_array</code>).
+</p>
+<p><var>m</var> is optional, and equals either the number of classes (10 by default),
+or a list of two elements (the least and greatest values to be counted),
+or a list of three elements (the least and greatest values to be counted, and the number of classes),
+or a set containing the endpoints of the class intervals.
+</p>
+<p>It is assumed that class intervals are contiguous.
+That is, the right endpoint of one interval is equal to the left endpoint of the next.
+</p>
+<p><code>continuous_freq</code> returns a list of two lists.
+The first list comprises all the endpoints of the class intervals,
+concatenated into a single list.
+The second list contains the class counts for the intervals corresponding to elements of the first list.
+</p>
+<p>If sample values are all equal, this function returns exactly
+one class of width 2.
+</p>
+<p>Examples:
+</p>
+<p>Optional argument indicates the number of classes we want.
+The first list in the output contains the interval limits, and
+the second the corresponding counts: there are 16 digits inside 
+the interval <code>[0, 1.8]</code>, 24 digits in <code>(1.8, 3.6]</code>, and so on.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) continuous_freq (s1, 5);
+(%o3) [[0, 1.8, 3.6, 5.4, 7.2, 9.0], [16, 24, 18, 17, 25]]
+</pre></div>
+
+<p>Optional argument indicates we want 7 classes with limits
+-2 and 12:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) continuous_freq (s1, [-2,12,7]);
+(%o3) [[- 2, 0, 2, 4, 6, 8, 10, 12], [8, 20, 22, 17, 20, 13, 0]]
+</pre></div>
+
+<p>Optional argument indicates we want the default number of classes with limits
+-2 and 12:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) continuous_freq (s1, [-2,12]);
+                3  4  11  18     32  39  46  53
+(%o3)  [[- 2, - -, -, --, --, 5, --, --, --, --, 12], 
+                5  5  5   5      5   5   5   5
+               [0, 8, 20, 12, 18, 9, 8, 25, 0, 0]]
+</pre></div>
+
+<p>The first argument may be an array.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) a1 : make_array (fixnum, length (s1)) $
+(%i4) fillarray (a1, s1);
+(%o4) {Lisp Array: 
+#(3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3 2 3 8 4 6 2 6 4 3 3 8 3 2 7 9 \
+5 0 2 8 8 4 1 9 7 1 6 9 3 9 9 3 7 5 1 0 5 8 2 0 9 7 4 9 4 4 5 9
+  2 3 0 7 8 1 6 4 0 6 2 8 6 2 0 8 9 9 8 6 2 8 0 3 4 8 2 5 3 4 2 \
+1 1 7 0 6 7)}
+(%i5) continuous_freq (a1);
+           9   9  27  18  9  27  63  36  81
+(%o5) [[0, --, -, --, --, -, --, --, --, --, 9], 
+           10  5  10  5   2  5   10  5   10
+                             [8, 8, 12, 12, 10, 8, 9, 8, 12, 13]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="discrete_005ffreq"></a><a name="Item_003a-descriptive_002fdeffn_002fdiscrete_005ffreq"></a><dl>
+<dt><a name="index-discrete_005ffreq"></a>Function: <strong>discrete_freq</strong> <em>(<var>data</var>)</em></dt>
+<dd><p>Counts absolute frequencies in discrete samples, both numeric and categorical. Its unique argument is a list,
+or 1-dimensional array (as created by <code>make_array</code>).
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><pre class="example">(%i3) discrete_freq (s1);
+(%o3) [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 
+                             [8, 8, 12, 12, 10, 8, 9, 8, 12, 13]]
+</pre></div>
+
+<p>The first list gives the sample values and the second their absolute frequencies. Commands <code>? col</code> and <code>? transpose</code> should help you to understand the last input.
+</p>
+<p>The argument may be an array.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) a1 : make_array (fixnum, length (s1)) $
+(%i4) fillarray (a1, s1);
+(%o4) {Lisp Array: 
+#(3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3 2 3 8 4 6 2 6 4 3 3 8 3 2 7 9 \
+5 0 2 8 8 4 1 9 7 1 6 9 3 9 9 3 7 5 1 0 5 8 2 0 9 7 4 9 4 4 5 9
+  2 3 0 7 8 1 6 4 0 6 2 8 6 2 0 8 9 9 8 6 2 8 0 3 4 8 2 5 3 4 2 \
+1 1 7 0 6 7)}
+(%i5) discrete_freq (a1);
+(%o5) [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 
+                             [8, 8, 12, 12, 10, 8, 9, 8, 12, 13]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+
+<a name="standardize"></a><a name="Item_003a-descriptive_002fdeffn_002fstandardize"></a><dl>
+<dt><a name="index-standardize"></a>Function: <strong>standardize</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>standardize</tt> (<var>list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>standardize</tt> (<var>matrix</var>)</em></dt>
+<dd>
+<p>Subtracts to each element of the list the sample mean and divides
+the result by the standard deviation. When the input is a matrix,
+<code>standardize</code> subtracts to each row the multivariate mean, and then
+divides each component by the corresponding standard deviation.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+
+<a name="subsample"></a><a name="Item_003a-descriptive_002fdeffn_002fsubsample"></a><dl>
+<dt><a name="index-subsample"></a>Function: <strong>subsample</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>subsample</tt> (<var>data_matrix</var>, <var>predicate_function</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>subsample</tt> (<var>data_matrix</var>, <var>predicate_function</var>, <var>col_num1</var>, <var>col_num2</var>, ...)</em></dt>
+<dd>
+<p>This is a sort of variant of the Maxima <code>submatrix</code> function.
+The first argument is the data matrix, the second is a predicate function
+and optional additional arguments are the numbers of the columns to be taken.
+Its behaviour is better understood with examples.
+</p>
+<p>These are multivariate records in which the wind speed
+in the first meteorological station were greater than 18.
+See that in the lambda expression the <var>i</var>-th component is
+referred to as <code>v[i]</code>.
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><pre class="example">(%i3) subsample (s2, lambda([v], v[1] &gt; 18));
+              [ 19.38  15.37  15.12  23.09  25.25 ]
+              [                                   ]
+              [ 18.29  18.66  19.08  26.08  27.63 ]
+(%o3)         [                                   ]
+              [ 20.25  21.46  19.95  27.71  23.38 ]
+              [                                   ]
+              [ 18.79  18.96  14.46  26.38  21.84 ]
+</pre></div>
+
+<p>In the following example, we request only the first, second and fifth
+components of those records with wind speeds greater or equal than 16
+in station number 1 and less than 25 knots in station number 4. The sample
+contains only data from stations 1, 2 and 5. In this case,
+the predicate function is defined as an ordinary Maxima function.
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) g(x):= x[1] &gt;= 16 and x[4] &lt; 25$
+</pre><pre class="example">(%i4) subsample (s2, g, 1, 2, 5);
+                     [ 19.38  15.37  25.25 ]
+                     [                     ]
+                     [ 17.33  14.67  19.58 ]
+(%o4)                [                     ]
+                     [ 16.92  13.21  21.21 ]
+                     [                     ]
+                     [ 17.25  18.46  23.87 ]
+</pre></div>
+
+<p>Here is an example with the categorical variables of <code>biomed.data</code>.
+We want the records corresponding to those patients in group <code>B</code>
+who are older than 38 years.
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+(%i3) h(u):= u[1] = B and u[2] &gt; 38 $
+</pre><pre class="example">(%i4) subsample (s3, h);
+                [ B  39  28.0  102.3  17.1  146 ]
+                [                               ]
+                [ B  39  21.0  92.4   10.3  197 ]
+                [                               ]
+                [ B  39  23.0  111.5  10.0  133 ]
+                [                               ]
+                [ B  39  26.0  92.6   12.3  196 ]
+(%o4)           [                               ]
+                [ B  39  25.0  98.7   10.0  174 ]
+                [                               ]
+                [ B  39  21.0  93.2   5.9   181 ]
+                [                               ]
+                [ B  39  18.0  95.0   11.3  66  ]
+                [                               ]
+                [ B  39  39.0  88.5   7.6   168 ]
+</pre></div>
+
+<p>Probably, the statistical analysis will involve only the blood measures,
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+</pre><pre class="example">(%i3) subsample (s3, lambda([v], v[1] = B and v[2] &gt; 38),
+                 3, 4, 5, 6);
+                   [ 28.0  102.3  17.1  146 ]
+                   [                        ]
+                   [ 21.0  92.4   10.3  197 ]
+                   [                        ]
+                   [ 23.0  111.5  10.0  133 ]
+                   [                        ]
+                   [ 26.0  92.6   12.3  196 ]
+(%o3)              [                        ]
+                   [ 25.0  98.7   10.0  174 ]
+                   [                        ]
+                   [ 21.0  93.2   5.9   181 ]
+                   [                        ]
+                   [ 18.0  95.0   11.3  66  ]
+                   [                        ]
+                   [ 39.0  88.5   7.6   168 ]
+</pre></div>
+
+<p>This is the multivariate mean of <code>s3</code>,
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+</pre><pre class="example">(%i3) mean (s3);
+       65 B + 35 A  317          6 NA + 8144.999999999999
+(%o3) [-----------, ---, 87.178, ------------------------, 
+           100      10                     100
+                                                    3 NA + 19587
+                                            18.123, ------------]
+                                                        100
+</pre></div>
+
+<p>Here, the first component is meaningless, since <code>A</code> and <code>B</code> are categorical, the second component is the mean age of individuals in rational form, and the fourth and last values exhibit some strange behaviour. This is because symbol <code>NA</code> is used here to indicate <var>non available</var> data, and the two means are nonsense. A possible solution would be to take out from the matrix those rows with <code>NA</code> symbols, although this deserves some loss of information.
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+(%i3) g(v):= v[4] # NA and v[6] # NA $
+</pre><pre class="example">(%i4) mean (subsample (s3, g, 3, 4, 5, 6));
+(%o4) [79.4923076923077, 86.2032967032967, 16.93186813186813, 
+                                                            2514
+                                                            ----]
+                                                             13
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+
+
+<a name="transform_005fsample"></a><a name="Item_003a-descriptive_002fdeffn_002ftransform_005fsample"></a><dl>
+<dt><a name="index-transform_005fsample"></a>Function: <strong>transform_sample</strong> <em>(<var>matrix</var>, <var>varlist</var>, <var>exprlist</var>)</em></dt>
+<dd>
+<p>Transforms the sample <var>matrix</var>, where each column is called according to
+<var>varlist</var>, following expressions in <var>exprlist</var>.
+</p>
+<p>Examples:
+</p>
+<p>The second argument assigns names to the three columns. With these names,
+a list of expressions define the transformation of the sample.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) data: matrix([3,2,7],[3,7,2],[8,2,4],[5,2,4]) $
+</pre><pre class="example">(%i3) transform_sample(data, [a,b,c], [c, a*b, log(a)]);
+                               [ 7  6   log(3) ]
+                               [               ]
+                               [ 2  21  log(3) ]
+(%o3)                          [               ]
+                               [ 4  16  log(8) ]
+                               [               ]
+                               [ 4  10  log(5) ]
+</pre></div>
+
+<p>Add a constant column and remove the third variable.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;descriptive&quot;)$
+(%i2) data: matrix([3,2,7],[3,7,2],[8,2,4],[5,2,4]) $
+(%i3) transform_sample(data, [a,b,c], [makelist(1,k,length(data)),a,b]);
+</pre><pre class="example">                                  [ 1  3  2 ]
+                                  [         ]
+                                  [ 1  3  7 ]
+(%o3)                             [         ]
+                                  [ 1  8  2 ]
+                                  [         ]
+                                  [ 1  5  2 ]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;</div></dd></dl>
+
+
+
+
+
+
+
+<a name="Item_003a-descriptive_002fnode_002fFunctions-and-Variables-for-descriptive-statistics"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_214.html#Functions-and-Variables-for-descriptive-statistics" accesskey="n" rel="next">Functions and Variables for descriptive statistics</a>, Previous: <a href="maxima_212.html#Introduction-to-descriptive" accesskey="p" rel="previous">Introduction to descriptive</a>, Up: <a href="maxima_211.html#descriptive_002dpkg" accesskey="u" rel="up">descriptive-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

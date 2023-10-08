@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Package rducon</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Package rducon">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Package rducon">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_356.html#simplification_002dpkg" rel="up" title="simplification-pkg">
+<link href="maxima_363.html#Package-scifac" rel="next" title="Package scifac">
+<link href="maxima_361.html#Package-ineq" rel="previous" title="Package ineq">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Package-rducon"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_363.html#Package-scifac" accesskey="n" rel="next">Package scifac</a>, Previous: <a href="maxima_361.html#Package-ineq" accesskey="p" rel="previous">Package ineq</a>, Up: <a href="maxima_356.html#simplification_002dpkg" accesskey="u" rel="up">simplification-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Package-rducon-1"></a>
+<h3 class="section">87.6 Package rducon</h3>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-rducon">Package rducon</a>
+&middot;</div>
+
+<a name="reduce_005fconsts"></a><a name="Item_003a-simplifications_002fdeffn_002freduce_005fconsts"></a><dl>
+<dt><a name="index-reduce_005fconsts"></a>Function: <strong>reduce_consts</strong> <em>(<var>expr</var>)</em></dt>
+<dd><p>Replaces constant subexpressions of <var>expr</var> with
+constructed constant atoms, saving the definition of all these
+constructed constants in the list of equations <code>const_eqns</code>, and
+returning the modified <var>expr</var>.  Those parts of <var>expr</var> are constant which
+return <code>true</code> when operated on by the function <code>constantp</code>.  Hence,
+before invoking <code>reduce_consts</code>, one should do
+</p>
+<div class="example">
+<pre class="example">declare ([<var>objects to be given the constant property</var>], constant)$
+</pre></div>
+
+<p>to set up a database of the constant quantities occurring in your
+expressions.
+</p>
+<p>If you are planning to generate Fortran output after these symbolic
+calculations, one of the first code sections should be the calculation
+of all constants.  To generate this code segment, do
+</p>
+<div class="example">
+<pre class="example">map ('fortran, const_eqns)$
+</pre></div>
+
+<p>Variables besides <code>const_eqns</code> which affect <code>reduce_consts</code> are:
+</p>
+<p><code>const_prefix</code> (default value: <code>xx</code>) is the string of characters used to prefix all
+symbols generated by <code>reduce_consts</code> to represent constant subexpressions.
+</p>
+<p><code>const_counter</code> (default value: 1) is the integer index used to generate unique
+symbols to represent each constant subexpression found by <code>reduce_consts</code>.
+</p>
+<p><code>load (&quot;rducon&quot;)</code> loads this function.
+<code>demo (&quot;rducon&quot;)</code> shows a demonstration of this function.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-rducon">Package rducon</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="Item_003a-simplifications_002fnode_002fPackage-scifac"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_363.html#Package-scifac" accesskey="n" rel="next">Package scifac</a>, Previous: <a href="maxima_361.html#Package-ineq" accesskey="p" rel="previous">Package ineq</a>, Up: <a href="maxima_356.html#simplification_002dpkg" accesskey="u" rel="up">simplification-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+  echo "$0: no Maxima input files specified."
+  exit 1
+fi
+
+# First, build up the Maxima batch file
+rm -f tmp-mathmltest-input.mac
+echo "load (mathml);" > tmp-mathmltest-input.mac
+for i in $@
+do
+  echo "/* $i */" >> tmp-mathmltest-input.mac
+  awk 'BEGIN { count = 0; }
+       { line[count] = $0; count++; }
+       /; *$/ || /\$ *$/ { for (i=0; i < count; i++) print line[i];
+                           print "(tmp: %, block ([simp: false], mathml (_, \"tmp-mathmltest-output.xml\")));"
+                           print "mathml (tmp, \"tmp-mathmltest-output.xml\");"
+                           print "tmp;"
+                           delete line;
+                           count=0;
+                         }' $i >> tmp-mathmltest-input.mac
+done
+
+# Now run Maxima over the test file, to produce tmp-mathmltest-output.xml
+rm -f tmp-mathmltest-output.xml
+../../../maxima-local -b tmp-mathmltest-input.mac
+
+# Now insert some paragraph breaks
+sed 's/<pre>/<p\/><pre>/' tmp-mathmltest-output.xml > tmp$$
+sed 's/<math/<p\/><math/' tmp$$ > tmp-mathmltest-output.xml
+rm tmp$$
+
+# Make into XHTML
+echo "<?xml version=\"1.0\"?>
+<?xml-stylesheet type=\"text/xsl\" href=\"pmathml.xsl\"?>
+<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN\"
+               \"http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd\"
+[
+  <!ENTITY mathml \"http://www.w3.org/1998/Math/MathML\">
+]>  
+<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\" xml:lang=\"en\">
+<head>
+<title>Maxima MathML Output Test Page</title>
+</head>
+<body>" > tmp$$.xml
+cat tmp-mathmltest-output.xml >> tmp$$.xml
+mv tmp$$.xml tmp-mathmltest-output.xml
+
+echo "</body>
+</html>" >> tmp-mathmltest-output.xml
+

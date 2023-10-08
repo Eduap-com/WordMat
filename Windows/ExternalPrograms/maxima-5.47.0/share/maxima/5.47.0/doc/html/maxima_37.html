@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Debugging (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Debugging (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Debugging (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_38.html#alt_002ddisplay_002dpkg" rel="next" title="alt-display-pkg">
+<link href="maxima_36.html#Program-Flow" rel="prev" title="Program Flow">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Debugging">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_38.html#alt_002ddisplay_002dpkg" accesskey="n" rel="next">alt-display</a>, Previous: <a href="maxima_36.html#Program-Flow" accesskey="p" rel="prev">Program Flow</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Debugging-1">38 Debugging</h2>
+
+<a class="anchor" id="Item_003a-Debugging_002fnode_002fSource-Level-Debugging"></a><ul class="mini-toc">
+<li><a href="#Source-Level-Debugging" accesskey="1">Source Level Debugging</a></li>
+<li><a href="#Keyword-Commands" accesskey="2">Keyword Commands</a></li>
+<li><a href="#Functions-and-Variables-for-Debugging" accesskey="3">Functions and Variables for Debugging</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Source-Level-Debugging">
+<div class="nav-panel">
+<p>
+Next: <a href="#Keyword-Commands" accesskey="n" rel="next">Keyword Commands</a>, Up: <a href="#Debugging" accesskey="u" rel="up">Debugging</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Source-Level-Debugging-1">38.1 Source Level Debugging</h3>
+
+<p>Maxima has a built-in source level debugger.  
+The user can set a breakpoint at a function,
+and then step line by line from there.  The call
+stack may be examined, together with the variables bound at that level.
+</p>
+<p>The command <code class="code">:help</code> or <code class="code">:h</code> shows the list of debugger commands.
+(In general,
+commands may be abbreviated if the abbreviation is unique.  If not
+unique, the alternatives will be listed.)
+Within the debugger, the user can also use any ordinary Maxima
+functions to examine, define, and manipulate variables and expressions.
+</p>
+<p>A breakpoint is set by the <code class="code">:br</code> command at the Maxima prompt.
+Within the debugger,
+the user can advance one line at a time using the <code class="code">:n</code> (&ldquo;next&rdquo;) command.
+The <code class="code">:bt</code> (&ldquo;backtrace&rdquo;) command shows a list of stack frames.
+The <code class="code">:r</code> (&ldquo;resume&rdquo;) command exits the debugger and continues with 
+execution.  These commands are demonstrated in the example below.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;/tmp/foobar.mac&quot;);
+
+(%o1)                           /tmp/foobar.mac
+
+(%i2) :br foo
+Turning on debugging debugmode(true)
+Bkpt 0 for foo (in /tmp/foobar.mac line 1) 
+
+(%i2) bar (2,3);
+Bkpt 0:(foobar.mac 1)
+/tmp/foobar.mac:1::
+
+(dbm:1) :bt                        &lt;-- :bt typed here gives a backtrace
+#0: foo(y=5)(foobar.mac line 1)
+#1: bar(x=2,y=3)(foobar.mac line 9)
+
+(dbm:1) :n                         &lt;-- Here type :n to advance line
+(foobar.mac 2)
+/tmp/foobar.mac:2::
+
+(dbm:1) :n                         &lt;-- Here type :n to advance line
+(foobar.mac 3)
+/tmp/foobar.mac:3::
+
+(dbm:1) u;                         &lt;-- Investigate value of u
+28
+
+(dbm:1) u: 33;                     &lt;-- Change u to be 33
+33
+
+(dbm:1) :r                         &lt;-- Type :r to resume the computation
+
+(%o2)                                1094
+</pre></div>
+
+<p>The file <code class="code">/tmp/foobar.mac</code> is the following:
+</p>
+<div class="example">
+<pre class="example-preformatted">foo(y) := block ([u:y^2],
+  u: u+3,
+  u: u^2,
+  u);
+ 
+bar(x,y) := (
+  x: x+2,
+  y: y+2,
+  x: foo(y),
+  x+y);
+</pre></div>
+
+<p>USE OF THE DEBUGGER THROUGH EMACS
+</p>
+<p>If the user is running the code under GNU emacs in a shell
+window (dbl shell), or is running the graphical interface version,
+Xmaxima, then if he stops at a break point, he will see his
+current position in the source file which will be displayed in the
+other half of the window, either highlighted in red, or with a little
+arrow pointing at the right line.  He can advance single lines at a
+time by typing M-n (Alt-n).
+</p>
+<p>Under Emacs you should run in a <code class="code">dbl</code> shell, which requires the
+<code class="code">dbl.el</code> file in the elisp directory.
+Make sure you install the elisp files or add the Maxima elisp directory to
+your path:
+e.g., add the following to your <samp class="file">.emacs</samp> file or the <samp class="file">site-init.el</samp>
+</p>
+<div class="example">
+<pre class="example-preformatted">(setq load-path (cons &quot;/usr/share/maxima/5.9.1/emacs&quot; load-path))
+(autoload 'dbl &quot;dbl&quot;)
+</pre></div>
+
+<p>then in emacs 
+</p>
+<div class="example">
+<pre class="example-preformatted">M-x dbl
+</pre></div>
+
+<p>should start a shell window in which you can run programs, for example
+Maxima, gcl, gdb etc.   This shell window also knows about source level
+debugging, and display of source code in the other window.
+</p>
+<p>The user may set a break point at a certain line of the
+file by typing <code class="code">C-x space</code>.  This figures out which function
+the cursor is in, and then it sees which line of that function
+the cursor is on.   If the cursor is on, say, line 2 of <code class="code">foo</code>, then it will
+insert in the other window the command, &ldquo;<code class="code">:br foo 2</code>&rdquo;, to
+break <code class="code">foo</code> at its second line.   To have this enabled, the user must have
+maxima-mode.el turned on in the window in which the file <code class="code">foobar.mac</code> is
+visiting.  There are additional commands available in that file window, such as
+evaluating the function into the Maxima, by typing <code class="code">Alt-Control-x</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Debugging_002fnode_002fKeyword-Commands"></a><hr>
+</div>
+<div class="section-level-extent" id="Keyword-Commands">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Debugging" accesskey="n" rel="next">Functions and Variables for Debugging</a>, Previous: <a href="#Source-Level-Debugging" accesskey="p" rel="prev">Source Level Debugging</a>, Up: <a href="#Debugging" accesskey="u" rel="up">Debugging</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Keyword-Commands-1">38.2 Keyword Commands</h3>
+
+<p>Keyword commands are special keywords which are not interpreted as Maxima
+expressions.  A keyword command can be entered at the Maxima prompt or the
+debugger prompt, although not at the break prompt.
+Keyword commands start with a colon, &rsquo;<code class="code">:</code>&rsquo;.
+For example, to evaluate a Lisp form you
+may type <code class="code">:lisp</code> followed by the form to be evaluated.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) :lisp (+ 2 3) 
+5
+</pre></div>
+
+<p>The number of arguments taken depends on the particular command.  Also,
+you need not type the whole command, just enough to be unique among
+the break keywords.   Thus <code class="code">:br</code> would suffice for <code class="code">:break</code>.
+</p>
+<p>The keyword commands are listed below.
+</p>
+<dl class="table">
+<dt><code class="code">:break F n</code></dt>
+<dd><p>Set a breakpoint in function <code class="code">F</code> at line offset <code class="code">n</code>
+from the beginning of the function.
+If <code class="code">F</code> is given as a string, then it is assumed to be
+a file, and <code class="code">n</code> is the offset from the beginning of the file.
+The offset is optional. If not given, it is assumed to be zero
+(first line of the function or file).
+</p></dd>
+<dt><code class="code">:bt</code></dt>
+<dd><p>Print a backtrace of the stack frames
+</p></dd>
+<dt><code class="code">:continue</code></dt>
+<dd><p>Continue the computation
+</p></dd>
+<dt><code class="code">:delete</code></dt>
+<dd><p>Delete the specified breakpoints, or all if none are specified
+</p></dd>
+<dt><code class="code">:disable</code></dt>
+<dd><p>Disable the specified breakpoints, or all if none are specified
+</p></dd>
+<dt><code class="code">:enable</code></dt>
+<dd><p>Enable the specified breakpoints, or all if none are specified
+</p></dd>
+<dt><code class="code">:frame n</code></dt>
+<dd><p>Print stack frame <code class="code">n</code>, or the current frame if none is specified
+</p></dd>
+<dt><code class="code">:help</code></dt>
+<dd><p>Print help on a debugger command, or all commands if none is specified
+</p></dd>
+<dt><code class="code">:info</code></dt>
+<dd><p>Print information about item
+</p></dd>
+<dt><code class="code">:lisp some-form</code></dt>
+<dd><p>Evaluate <code class="code">some-form</code> as a Lisp form
+</p></dd>
+<dt><code class="code">:lisp-quiet some-form</code></dt>
+<dd><p>Evaluate Lisp form <code class="code">some-form</code> without any output
+</p></dd>
+<dt><code class="code">:next</code></dt>
+<dd><p>Like <code class="code">:step</code>, except <code class="code">:next</code> steps over function calls
+</p></dd>
+<dt><code class="code">:quit</code></dt>
+<dd><p>Quit the current debugger level without completing the computation
+</p></dd>
+<dt><code class="code">:resume</code></dt>
+<dd><p>Continue the computation
+</p></dd>
+<dt><code class="code">:step</code></dt>
+<dd><p>Continue the computation until it reaches a new source line
+</p></dd>
+<dt><code class="code">:top</code></dt>
+<dd><p>Return to the Maxima prompt (from any debugger level) without 
+completing the computation
+</p></dd>
+</dl>
+
+
+<p>Note: Keyword commands must (currently) start at the beginning of a line.
+Not even a single space character is allowed before the colon.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Debugging_002fnode_002fFunctions-and-Variables-for-Debugging"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Debugging">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Keyword-Commands" accesskey="p" rel="prev">Keyword Commands</a>, Up: <a href="#Debugging" accesskey="u" rel="up">Debugging</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Debugging-1">38.3 Functions and Variables for Debugging</h3>
+
+<a class="anchor" id="debugmode"></a><a class="anchor" id="Item_003a-Debugging_002fdefvr_002fdebugmode"></a><dl class="first-defvr">
+<dt class="defvr" id="index-debugmode"><span class="category-def">Option variable: </span><span><strong class="def-name">debugmode</strong><a class="copiable-link" href='#index-debugmode'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">debugmode</code> is <code class="code">true</code>, Maxima will start the Maxima debugger
+when a Maxima error occurs.  At this point the user may enter commands to
+examine the call stack, set breakpoints, step through Maxima code, and so on.
+See <code class="code">debugging</code> for a list of Maxima debugger commands.
+</p>
+<p>When <code class="code">debugmode</code> is <code class="code">lisp</code>, Maxima will start the Lisp debugger
+when a Maxima error occurs.
+</p>
+<p>In either case, enabling <code class="code">debugmode</code> will not catch Lisp errors.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="refcheck"></a><a class="anchor" id="Item_003a-Debugging_002fdefvr_002frefcheck"></a><dl class="first-defvr">
+<dt class="defvr" id="index-refcheck"><span class="category-def">Option variable: </span><span><strong class="def-name">refcheck</strong><a class="copiable-link" href='#index-refcheck'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">refcheck</code> is <code class="code">true</code>, Maxima prints a message
+each time a bound variable is used for the first time in a
+computation.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation">Evaluation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="setcheck"></a><a class="anchor" id="Item_003a-Debugging_002fdefvr_002fsetcheck"></a><dl class="first-defvr">
+<dt class="defvr" id="index-setcheck"><span class="category-def">Option variable: </span><span><strong class="def-name">setcheck</strong><a class="copiable-link" href='#index-setcheck'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>If <code class="code">setcheck</code> is set to a list of variables (which can
+be subscripted), 
+Maxima prints a message whenever the variables, or
+subscripted occurrences of them, are bound with the
+ordinary assignment operator <code class="code">:</code>, the <code class="code">::</code> assignment
+operator, or function argument binding,
+but not the function assignment <code class="code">:=</code> nor the macro assignment
+<code class="code">::=</code> operators.
+The message comprises the name of the variable and the
+value it is bound to.
+</p>
+<p><code class="code">setcheck</code> may be set to <code class="code">all</code> or <code class="code">true</code> thereby
+including all variables.
+</p>
+<p>Each new assignment of <code class="code">setcheck</code> establishes a new list of variables to
+check, and any variables previously assigned to <code class="code">setcheck</code> are forgotten.
+</p>
+<p>The names assigned to <code class="code">setcheck</code> must be quoted if they would otherwise
+evaluate to something other than themselves.
+For example, if <code class="code">x</code>, <code class="code">y</code>, and <code class="code">z</code> are already bound, then enter
+</p>
+<div class="example">
+<pre class="example-preformatted">setcheck: ['x, 'y, 'z]$
+</pre></div>
+
+<p>to put them on the list of variables to check.
+</p>
+<p>No printout is generated when a
+variable on the <code class="code">setcheck</code> list is assigned to itself, e.g., <code class="code">X: 'X</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="setcheckbreak"></a><a class="anchor" id="Item_003a-Debugging_002fdefvr_002fsetcheckbreak"></a><dl class="first-defvr">
+<dt class="defvr" id="index-setcheckbreak"><span class="category-def">Option variable: </span><span><strong class="def-name">setcheckbreak</strong><a class="copiable-link" href='#index-setcheckbreak'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">setcheckbreak</code> is <code class="code">true</code>,
+Maxima will present a break prompt 
+whenever a variable on the <code class="code">setcheck</code> list is assigned a new value.
+The break occurs before the assignment is carried out.
+At this point, <code class="code">setval</code> holds the value to which the variable is 
+about to be assigned.
+Hence, one may assign a different value by assigning to <code class="code">setval</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#setcheck">setcheck</a></code> and <code class="code"><a class="ref" href="#setval">setval</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="setval"></a><a class="anchor" id="Item_003a-Debugging_002fdefvr_002fsetval"></a><dl class="first-defvr">
+<dt class="defvr" id="index-setval"><span class="category-def">System variable: </span><span><strong class="def-name">setval</strong><a class="copiable-link" href='#index-setval'> &para;</a></span></dt>
+<dd>
+<p>Holds the value to which a variable is about to be set when
+a <code class="code"><a class="ref" href="#setcheckbreak">setcheckbreak</a></code> occurs.
+Hence, one may assign a different value by assigning to <code class="code"><a class="ref" href="#setval">setval</a></code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#setcheck">setcheck</a></code> and <code class="code"><a class="ref" href="#setcheckbreak">setcheckbreak</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="timer"></a><a class="anchor" id="Item_003a-Debugging_002fdeffn_002ftimer"></a><dl class="first-deffn">
+<dt class="deffn" id="index-timer"><span class="category-def">Function: </span><span><strong class="def-name">timer</strong> <var class="def-var-arguments">(<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">timer</code> (all) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">timer</code> ()</var><a class="copiable-link" href='#index-timer'> &para;</a></span></dt>
+<dd>
+<p>Given functions <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>, <code class="code">timer</code> puts each one on the
+list of functions for which timing statistics are collected.
+<code class="code">timer(f)$ timer(g)$</code> puts <code class="code">f</code> and then <code class="code">g</code> onto the list;
+the list accumulates from one call to the next.
+</p>
+<p><code class="code">timer(all)</code> puts all user-defined functions (as named by the global
+variable <code class="code">functions</code>) on the list of timed functions.
+</p>
+<p>With no arguments,  <code class="code">timer</code> returns the list of timed functions.
+</p>
+<p>Maxima records how much time is spent executing each function
+on the list of timed functions.
+<code class="code">timer_info</code> returns the timing statistics, including the
+average time elapsed per function call, the number of calls, and the
+total time elapsed.
+<code class="code">untimer</code> removes functions from the list of timed functions.
+</p>
+<p><code class="code">timer</code> quotes its arguments.
+<code class="code">f(x) := x^2$ g:f$ timer(g)$</code> does not put <code class="code">f</code> on the timer list.
+</p>
+<p>If <code class="code">trace(f)</code> is in effect, then <code class="code">timer(f)</code> has no effect;
+<code class="code">trace</code> and <code class="code">timer</code> cannot both be in effect at the same time.
+</p>
+<p>See also <code class="code"><a class="ref" href="#timer_005fdevalue">timer_devalue</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="untimer"></a><a class="anchor" id="Item_003a-Debugging_002fdeffn_002funtimer"></a><dl class="first-deffn">
+<dt class="deffn" id="index-untimer"><span class="category-def">Function: </span><span><strong class="def-name">untimer</strong> <var class="def-var-arguments">(<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">untimer</code> ()</var><a class="copiable-link" href='#index-untimer'> &para;</a></span></dt>
+<dd>
+<p>Given functions <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>,
+<code class="code">untimer</code> removes each function from the timer list.
+</p>
+<p>With no arguments, <code class="code">untimer</code> removes all functions currently on the timer
+list.
+</p>
+<p>After <code class="code">untimer (f)</code> is executed, <code class="code">timer_info (f)</code> still returns
+previously collected timing statistics,
+although <code class="code">timer_info()</code> (with no arguments) does not
+return information about any function not currently on the timer list.
+<code class="code">timer (f)</code> resets all timing statistics to zero
+and puts <code class="code">f</code> on the timer list again.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="timer_005fdevalue"></a><a class="anchor" id="Item_003a-Debugging_002fdefvr_002ftimer_005fdevalue"></a><dl class="first-defvr">
+<dt class="defvr" id="index-timer_005fdevalue"><span class="category-def">Option variable: </span><span><strong class="def-name">timer_devalue</strong><a class="copiable-link" href='#index-timer_005fdevalue'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">timer_devalue</code> is <code class="code">true</code>, Maxima subtracts from each timed
+function the time spent in other timed functions.  Otherwise, the time reported
+for each function includes the time spent in other functions.
+Note that time spent in untimed functions is not subtracted from the
+total time.
+</p>
+<p>See also <code class="code"><a class="ref" href="#timer">timer</a></code> and <code class="code"><a class="ref" href="#timer_005finfo">timer_info</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="timer_005finfo"></a><a class="anchor" id="Item_003a-Debugging_002fdeffn_002ftimer_005finfo"></a><dl class="first-deffn">
+<dt class="deffn" id="index-timer_005finfo"><span class="category-def">Function: </span><span><strong class="def-name">timer_info</strong> <var class="def-var-arguments">(<var class="var">f_1</var>, ..., <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">timer_info</code> ()</var><a class="copiable-link" href='#index-timer_005finfo'> &para;</a></span></dt>
+<dd>
+<p>Given functions <var class="var">f_1</var>, ..., <var class="var">f_n</var>, <code class="code">timer_info</code> returns a matrix
+containing timing information for each function.
+With no arguments, <code class="code">timer_info</code> returns timing information for
+all functions currently on the timer list.
+</p>
+<p>The matrix returned by <code class="code">timer_info</code> contains the function name,
+time per function call, number of function calls, total time,
+and <code class="code">gctime</code>, which meant &quot;garbage collection time&quot; in the original Macsyma
+but is now always zero.
+</p>
+<p>The data from which <code class="code">timer_info</code> constructs its return value
+can also be obtained by the <code class="code">get</code> function:
+</p>
+<div class="example">
+<pre class="example-preformatted">get(f, 'calls);  get(f, 'runtime);  get(f, 'gctime);
+</pre></div>
+
+<p>See also <code class="code"><a class="ref" href="#timer">timer</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="trace"></a><a class="anchor" id="Item_003a-Debugging_002fdeffn_002ftrace"></a><dl class="first-deffn">
+<dt class="deffn" id="index-trace"><span class="category-def">Function: </span><span><strong class="def-name">trace</strong> <var class="def-var-arguments">(<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">trace</code> (all) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">trace</code> ()</var><a class="copiable-link" href='#index-trace'> &para;</a></span></dt>
+<dd>
+<p>Given functions <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>, <code class="code">trace</code> instructs Maxima to
+print out debugging information whenever those functions are called.
+<code class="code">trace(f)$ trace(g)$</code> puts <code class="code">f</code> and then <code class="code">g</code> onto the list of
+functions to be traced; the list accumulates from one call to the next.
+</p>
+<p><code class="code">trace(all)</code> puts all user-defined functions (as named by the global
+variable <code class="code">functions</code>) on the list of functions to be traced.
+</p>
+<p>With no arguments,
+<code class="code">trace</code> returns a list of all the functions currently being traced.
+</p>
+<p>The <code class="code">untrace</code> function disables tracing.
+See also <code class="code"><a class="ref" href="#trace_005foptions">trace_options</a></code>.
+</p>
+<p><code class="code">trace</code> quotes its arguments.  Thus,
+<code class="code">f(x) := x^2$ g:f$ trace(g)$</code> does not put <code class="code">f</code> on the trace list.
+</p>
+<p>When a function is redefined, it is removed from the timer list.
+Thus after <code class="code">timer(f)$ f(x) := x^2$</code>,
+function <code class="code">f</code> is no longer on the timer list.
+</p>
+<p>If <code class="code">timer (f)</code> is in effect, then <code class="code">trace (f)</code> has no effect;
+<code class="code">trace</code> and <code class="code">timer</code> can&rsquo;t both be in effect for the same function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="trace_005foptions"></a><a class="anchor" id="Item_003a-Debugging_002fdeffn_002ftrace_005foptions"></a><dl class="first-deffn">
+<dt class="deffn" id="index-trace_005foptions"><span class="category-def">Function: </span><span><strong class="def-name">trace_options</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">option_1</var>, &hellip;, <var class="var">option_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">trace_options</code> (<var class="var">f</var>)</var><a class="copiable-link" href='#index-trace_005foptions'> &para;</a></span></dt>
+<dd>
+<p>Sets the trace options for function <var class="var">f</var>.
+Any previous options are superseded.
+<code class="code">trace_options (<var class="var">f</var>, ...)</code> has no effect unless <code class="code">trace (<var class="var">f</var>)</code>
+is also called (either before or after <code class="code">trace_options</code>).
+</p>
+<p><code class="code">trace_options (<var class="var">f</var>)</code> resets all options to their default values.
+</p>
+<p>The option keywords are:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">noprint</code>
+Do not print a message at function entry and exit.
+</li><li><code class="code">break</code>
+Put a breakpoint before the function is entered,
+and after the function is exited.  See <code class="code">break</code>.
+</li><li><code class="code">lisp_print</code>
+Display arguments and return values as Lisp objects.
+</li><li><code class="code">info</code>
+Print <code class="code">-&gt; true</code> at function entry and exit.
+</li><li><code class="code">errorcatch</code>
+Catch errors, giving the option to signal an error,
+retry the function call, or specify a return value.
+</li></ul>
+
+<p>Trace options are specified in two forms.  The presence of the option 
+keyword alone puts the option into effect unconditionally.
+(Note that option <var class="var">foo</var> is not put into effect by specifying 
+<code class="code"><var class="var">foo</var>: true</code> or a similar form; note also that keywords need not
+be quoted.) Specifying the option keyword with a predicate
+function makes the option conditional on the predicate.
+</p>
+<p>The argument list to the predicate function is always 
+<code class="code">[level, direction, function, item]</code> where <code class="code">level</code> is the recursion
+level for the function,  <code class="code">direction</code> is either <code class="code">enter</code> or <code class="code">exit</code>,
+<code class="code">function</code> is the name of the function, and <code class="code">item</code> is the argument
+list (on entering) or the return value (on exiting).
+</p>
+<p>Here is an example of unconditional trace options:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ff(n) := if equal(n, 0) then 1 else n * ff(n - 1)$
+
+(%i2) trace (ff)$
+
+(%i3) trace_options (ff, lisp_print, break)$
+
+(%i4) ff(3);
+</pre></div>
+
+<p>Here is the same function, with the <code class="code">break</code> option conditional
+on a predicate:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i5) trace_options (ff, break(pp))$
+
+(%i6) pp (level, direction, function, item) := block (print (item),
+    return (function = 'ff and level = 3 and direction = exit))$
+
+(%i7) ff(6);
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="untrace"></a><a class="anchor" id="Item_003a-Debugging_002fdeffn_002funtrace"></a><dl class="first-deffn">
+<dt class="deffn" id="index-untrace"><span class="category-def">Function: </span><span><strong class="def-name">untrace</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">untrace</code> (<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">untrace</code> ()</var><a class="copiable-link" href='#index-untrace'> &para;</a></span></dt>
+<dd>
+<p>Given functions <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>,
+<code class="code">untrace</code> disables tracing enabled by the <code class="code">trace</code> function.
+With no arguments, <code class="code">untrace</code> disables tracing for all functions.
+</p>
+<p><code class="code">untrace</code> returns a list of the functions for which 
+it disabled tracing.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_38.html#alt_002ddisplay_002dpkg" accesskey="n" rel="next">alt-display</a>, Previous: <a href="maxima_36.html#Program-Flow" accesskey="p" rel="prev">Program Flow</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

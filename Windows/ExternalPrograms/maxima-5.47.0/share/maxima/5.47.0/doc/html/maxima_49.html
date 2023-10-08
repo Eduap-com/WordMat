@@ -1,0 +1,2727 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>descriptive-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="descriptive-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="descriptive-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_50.html#diag_002dpkg" rel="next" title="diag-pkg">
+<link href="maxima_48.html#contrib_005fode_002dpkg" rel="prev" title="contrib_ode-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="descriptive_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_50.html#diag_002dpkg" accesskey="n" rel="next">diag</a>, Previous: <a href="maxima_48.html#contrib_005fode_002dpkg" accesskey="p" rel="prev">contrib_ode</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="descriptive">50 descriptive</h2>
+
+<a class="anchor" id="Item_003a-descriptive_002fnode_002fIntroduction-to-descriptive"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-descriptive" accesskey="1">Introduction to descriptive</a></li>
+<li><a href="#Functions-and-Variables-for-data-manipulation" accesskey="2">Functions and Variables for data manipulation</a></li>
+<li><a href="#Functions-and-Variables-for-descriptive-statistics" accesskey="3">Functions and Variables for descriptive statistics</a></li>
+<li><a href="#Functions-and-Variables-for-statistical-graphs" accesskey="4">Functions and Variables for statistical graphs</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-descriptive">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-data-manipulation" accesskey="n" rel="next">Functions and Variables for data manipulation</a>, Previous: <a href="#descriptive_002dpkg" accesskey="p" rel="prev">descriptive</a>, Up: <a href="#descriptive_002dpkg" accesskey="u" rel="up">descriptive</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-descriptive-1">50.1 Introduction to descriptive</h3>
+
+<p>Package <code class="code">descriptive</code> contains a set of functions for 
+making descriptive statistical computations and graphing. 
+Together with the source code there are three data sets in 
+your Maxima tree: <code class="code">pidigits.data</code>, <code class="code">wind.data</code> and <code class="code">biomed.data</code>.
+</p>
+<p>Any statistics manual can be used as a reference to the functions in package <code class="code">descriptive</code>.
+</p>
+<p>For comments, bugs or suggestions, please contact me at <var class="var">&rsquo;riotorto AT yahoo DOT com&rsquo;</var>.
+</p>
+<p>Here is a simple example on how the descriptive functions in <code class="code">descriptive</code> do they work, depending on the nature of their arguments, lists or matrices,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) /* univariate sample */   mean ([a, b, c]);
+                            c + b + a
+(%o2)                       ---------
+                                3
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) matrix ([a, b], [c, d], [e, f]);
+                            [ a  b ]
+                            [      ]
+(%o3)                       [ c  d ]
+                            [      ]
+                            [ e  f ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) /* multivariate sample */ mean (%);
+                      e + c + a  f + d + b
+(%o4)                [---------, ---------]
+                          3          3
+</pre></div></div>
+
+<p>Note that in multivariate samples the mean is calculated for each column.
+</p>
+<p>In case of several samples with possible different sizes, the Maxima function <code class="code">map</code> can be used to get the desired results for each sample,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) map (mean, [[a, b, c], [d, e]]);
+                        c + b + a  e + d
+(%o2)                  [---------, -----]
+                            3        2
+</pre></div></div>
+
+<p>In this case, two samples of sizes 3 and 2 were stored into a list.
+</p>
+<p>Univariate samples must be stored in lists like
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) s1 : [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+(%o1)           [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+</pre></div></div>
+
+<p>and multivariate samples in matrices as in
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) s2 : matrix ([13.17, 9.29], [14.71, 16.88], [18.50, 16.88],
+             [10.58, 6.63], [13.33, 13.25], [13.21,  8.12]);
+                        [ 13.17  9.29  ]
+                        [              ]
+                        [ 14.71  16.88 ]
+                        [              ]
+                        [ 18.5   16.88 ]
+(%o1)                   [              ]
+                        [ 10.58  6.63  ]
+                        [              ]
+                        [ 13.33  13.25 ]
+                        [              ]
+                        [ 13.21  8.12  ]
+</pre></div></div>
+
+<p>In this case, the number of columns equals the random variable dimension and the number of rows is the sample size.
+</p>
+<p>Data can be introduced by hand, but big samples are usually stored in plain text files. For example, file <code class="code">pidigits.data</code> contains the first 100 digits of number <code class="code">%pi</code>:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">      3
+      1
+      4
+      1
+      5
+      9
+      2
+      6
+      5
+      3 ...
+</pre></div></div>
+
+<p>In order to load these digits in Maxima,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i2) length (s1);
+(%o2)                          100
+</pre></div></div>
+
+<p>On the other hand, file <code class="code">wind.data</code> contains daily average wind speeds at 5 meteorological stations in the Republic of Ireland (This is part of a data set taken at 12 meteorological stations. The original file is freely downloadable from the StatLib Data Repository and its analysis is discussed in Haslett, J., Raftery, A. E. (1989) <var class="var">Space-time Modelling with Long-memory Dependence: Assessing Ireland&rsquo;s Wind Power Resource, with Discussion</var>. Applied Statistics 38, 1-50). This loads the data:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i2) length (s2);
+(%o2)                          100
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) s2 [%]; /* last record */
+(%o3)            [3.58, 6.0, 4.58, 7.62, 11.25]
+</pre></div></div>
+
+<p>Some samples contain non numeric data. As an example, file <code class="code">biomed.data</code> (which is part of another bigger one downloaded from the StatLib Data Repository) contains four blood measures taken from two groups of patients, <code class="code">A</code> and <code class="code">B</code>, of different ages,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i2) length (s3);
+(%o2)                          100
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) s3 [1]; /* first record */
+(%o3)            [A, 30, 167.0, 89.0, 25.6, 364]
+</pre></div></div>
+
+<p>The first individual belongs to group <code class="code">A</code>, is 30 years old and his/her blood measures were 167.0, 89.0, 25.6 and 364.
+</p>
+<p>One must take care when working with categorical data. In the next example, symbol <code class="code">a</code> is assigned a value in some previous moment and then a sample with categorical value <code class="code">a</code> is taken,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) a : 1$
+</pre><div class="group"><pre class="example-preformatted">(%i2) matrix ([a, 3], [b, 5]);
+                            [ 1  3 ]
+(%o2)                       [      ]
+                            [ b  5 ]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Descriptive-statistics">Descriptive statistics</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-descriptive_002fnode_002fFunctions-and-Variables-for-data-manipulation"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-data-manipulation">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-descriptive-statistics" accesskey="n" rel="next">Functions and Variables for descriptive statistics</a>, Previous: <a href="#Introduction-to-descriptive" accesskey="p" rel="prev">Introduction to descriptive</a>, Up: <a href="#descriptive_002dpkg" accesskey="u" rel="up">descriptive</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-data-manipulation-1">50.2 Functions and Variables for data manipulation</h3>
+
+
+
+<a class="anchor" id="build_005fsample"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fbuild_005fsample"></a><dl class="first-deffn">
+<dt class="deffn" id="index-build_005fsample"><span class="category-def">Function: </span><span><strong class="def-name">build_sample</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">build_sample</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">build_sample</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-build_005fsample'> &para;</a></span></dt>
+<dd>
+<p>Builds a sample from a table of absolute frequencies.
+The input table can be a matrix or a list of lists, all of
+them of equal size. The number of columns or the length of
+the lists must be greater than 1. The last element of each
+row or list is interpreted as the absolute frequency.
+The output is always a sample in matrix form.
+</p>
+<p>Examples:
+</p>
+<p>Univariate frequency table.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) sam1: build_sample([[6,1], [j,2], [2,1]]);
+                       [ 6 ]
+                       [   ]
+                       [ j ]
+(%o2)                  [   ]
+                       [ j ]
+                       [   ]
+                       [ 2 ]
+(%i3) mean(sam1);
+                      2 j + 8
+(%o3)                [-------]
+                         4
+(%i4) barsplot(sam1) $
+</pre></div>
+
+<p>Multivariate frequency table.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) sam2: build_sample([[6,3,1], [5,6,2], [u,2,1],[6,8,2]]) ;
+                           [ 6  3 ]
+                           [      ]
+                           [ 5  6 ]
+                           [      ]
+                           [ 5  6 ]
+(%o2)                      [      ]
+                           [ u  2 ]
+                           [      ]
+                           [ 6  8 ]
+                           [      ]
+                           [ 6  8 ]
+(%i3) cov(sam2);
+       [   2                 2                            ]
+       [  u  + 158   (u + 28)     2 u + 174   11 (u + 28) ]
+       [  -------- - ---------    --------- - ----------- ]
+(%o3)  [     6          36            6           12      ]
+       [                                                  ]
+       [ 2 u + 174   11 (u + 28)            21            ]
+       [ --------- - -----------            --            ]
+       [     6           12                 4             ]
+(%i4) barsplot(sam2, grouping=stacked) $
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="continuous_005ffreq"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fcontinuous_005ffreq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-continuous_005ffreq"><span class="category-def">Function: </span><span><strong class="def-name">continuous_freq</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">continuous_freq</code> (<var class="var">data</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">continuous_freq</code> (<var class="var">data</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-continuous_005ffreq'> &para;</a></span></dt>
+<dd>
+<p>Divides the range of <var class="var">data</var> into intervals,
+and counts how many values fall into each one.
+</p>
+<p>A value <var class="var">x</var> falls into an interval with left and right endpoints <var class="var">a</var> and <var class="var">b</var>
+if and only if <code class="code"><var class="var">x</var> &gt; <var class="var">a</var></code> and <code class="code"><var class="var">x</var> &lt;= <var class="var">b</var></code>,
+except for the first (least or leftmost) interval,
+for which <code class="code"><var class="var">x</var> &gt;= <var class="var">a</var></code> and <code class="code"><var class="var">x</var> &lt;= <var class="var">b</var></code>.
+That is, an interval excludes its left endpoint and includes its right endpoint,
+except for the first interval, which includes both the left and right endpoints.
+</p>
+<p><var class="var">data</var> must be a list of numbers,
+or 1-dimensional array (as created by <code class="code">make_array</code>).
+</p>
+<p><var class="var">m</var> is optional, and equals either the number of classes (10 by default),
+or a list of two elements (the least and greatest values to be counted),
+or a list of three elements (the least and greatest values to be counted, and the number of classes),
+or a set containing the endpoints of the class intervals.
+</p>
+<p>It is assumed that class intervals are contiguous.
+That is, the right endpoint of one interval is equal to the left endpoint of the next.
+</p>
+<p><code class="code">continuous_freq</code> returns a list of two lists.
+The first list comprises all the endpoints of the class intervals,
+concatenated into a single list.
+The second list contains the class counts for the intervals corresponding to elements of the first list.
+</p>
+<p>If sample values are all equal, this function returns exactly
+one class of width 2.
+</p>
+<p>Examples:
+</p>
+<p>Optional argument indicates the number of classes we want.
+The first list in the output contains the interval limits, and
+the second the corresponding counts: there are 16 digits inside 
+the interval <code class="code">[0, 1.8]</code>, 24 digits in <code class="code">(1.8, 3.6]</code>, and so on.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) continuous_freq (s1, 5);
+(%o3) [[0, 1.8, 3.6, 5.4, 7.2, 9.0], [16, 24, 18, 17, 25]]
+</pre></div>
+
+<p>Optional argument indicates we want 7 classes with limits
+-2 and 12:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) continuous_freq (s1, [-2,12,7]);
+(%o3) [[- 2, 0, 2, 4, 6, 8, 10, 12], [8, 20, 22, 17, 20, 13, 0]]
+</pre></div>
+
+<p>Optional argument indicates we want the default number of classes with limits
+-2 and 12:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) continuous_freq (s1, [-2,12]);
+                3  4  11  18     32  39  46  53
+(%o3)  [[- 2, - -, -, --, --, 5, --, --, --, --, 12], 
+                5  5  5   5      5   5   5   5
+               [0, 8, 20, 12, 18, 9, 8, 25, 0, 0]]
+</pre></div>
+
+<p>The first argument may be an array.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) a1 : make_array (fixnum, length (s1)) $
+(%i4) fillarray (a1, s1);
+(%o4) {Lisp Array: 
+#(3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3 2 3 8 4 6 2 6 4 3 3 8 3 2 7 9 \
+5 0 2 8 8 4 1 9 7 1 6 9 3 9 9 3 7 5 1 0 5 8 2 0 9 7 4 9 4 4 5 9
+  2 3 0 7 8 1 6 4 0 6 2 8 6 2 0 8 9 9 8 6 2 8 0 3 4 8 2 5 3 4 2 \
+1 1 7 0 6 7)}
+(%i5) continuous_freq (a1);
+           9   9  27  18  9  27  63  36  81
+(%o5) [[0, --, -, --, --, -, --, --, --, --, 9], 
+           10  5  10  5   2  5   10  5   10
+                             [8, 8, 12, 12, 10, 8, 9, 8, 12, 13]]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="discrete_005ffreq"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fdiscrete_005ffreq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-discrete_005ffreq"><span class="category-def">Function: </span><span><strong class="def-name">discrete_freq</strong> <var class="def-var-arguments">(<var class="var">data</var>)</var><a class="copiable-link" href='#index-discrete_005ffreq'> &para;</a></span></dt>
+<dd><p>Counts absolute frequencies in discrete samples, both numeric and categorical. Its unique argument is a list,
+or 1-dimensional array (as created by <code class="code">make_array</code>).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) discrete_freq (s1);
+(%o3) [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 
+                             [8, 8, 12, 12, 10, 8, 9, 8, 12, 13]]
+</pre></div></div>
+
+<p>The first list gives the sample values and the second their absolute frequencies. Commands <code class="code">? col</code> and <code class="code">? transpose</code> should help you to understand the last input.
+</p>
+<p>The argument may be an array.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) a1 : make_array (fixnum, length (s1)) $
+(%i4) fillarray (a1, s1);
+(%o4) {Lisp Array: 
+#(3 1 4 1 5 9 2 6 5 3 5 8 9 7 9 3 2 3 8 4 6 2 6 4 3 3 8 3 2 7 9 \
+5 0 2 8 8 4 1 9 7 1 6 9 3 9 9 3 7 5 1 0 5 8 2 0 9 7 4 9 4 4 5 9
+  2 3 0 7 8 1 6 4 0 6 2 8 6 2 0 8 9 9 8 6 2 8 0 3 4 8 2 5 3 4 2 \
+1 1 7 0 6 7)}
+(%i5) discrete_freq (a1);
+(%o5) [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 
+                             [8, 8, 12, 12, 10, 8, 9, 8, 12, 13]]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+
+<a class="anchor" id="standardize"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fstandardize"></a><dl class="first-deffn">
+<dt class="deffn" id="index-standardize"><span class="category-def">Function: </span><span><strong class="def-name">standardize</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">standardize</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">standardize</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-standardize'> &para;</a></span></dt>
+<dd>
+<p>Subtracts to each element of the list the sample mean and divides
+the result by the standard deviation. When the input is a matrix,
+<code class="code">standardize</code> subtracts to each row the multivariate mean, and then
+divides each component by the corresponding standard deviation.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+
+<a class="anchor" id="subsample"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fsubsample"></a><dl class="first-deffn">
+<dt class="deffn" id="index-subsample"><span class="category-def">Function: </span><span><strong class="def-name">subsample</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">subsample</code> (<var class="var">data_matrix</var>, <var class="var">predicate_function</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">subsample</code> (<var class="var">data_matrix</var>, <var class="var">predicate_function</var>, <var class="var">col_num1</var>, <var class="var">col_num2</var>, ...)</var><a class="copiable-link" href='#index-subsample'> &para;</a></span></dt>
+<dd>
+<p>This is a sort of variant of the Maxima <code class="code">submatrix</code> function.
+The first argument is the data matrix, the second is a predicate function
+and optional additional arguments are the numbers of the columns to be taken.
+Its behaviour is better understood with examples.
+</p>
+<p>These are multivariate records in which the wind speed
+in the first meteorological station were greater than 18.
+See that in the lambda expression the <var class="var">i</var>-th component is
+referred to as <code class="code">v[i]</code>.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) subsample (s2, lambda([v], v[1] &gt; 18));
+              [ 19.38  15.37  15.12  23.09  25.25 ]
+              [                                   ]
+              [ 18.29  18.66  19.08  26.08  27.63 ]
+(%o3)         [                                   ]
+              [ 20.25  21.46  19.95  27.71  23.38 ]
+              [                                   ]
+              [ 18.79  18.96  14.46  26.38  21.84 ]
+</pre></div></div>
+
+<p>In the following example, we request only the first, second and fifth
+components of those records with wind speeds greater or equal than 16
+in station number 1 and less than 25 knots in station number 4. The sample
+contains only data from stations 1, 2 and 5. In this case,
+the predicate function is defined as an ordinary Maxima function.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) g(x):= x[1] &gt;= 16 and x[4] &lt; 25$
+</pre><div class="group"><pre class="example-preformatted">(%i4) subsample (s2, g, 1, 2, 5);
+                     [ 19.38  15.37  25.25 ]
+                     [                     ]
+                     [ 17.33  14.67  19.58 ]
+(%o4)                [                     ]
+                     [ 16.92  13.21  21.21 ]
+                     [                     ]
+                     [ 17.25  18.46  23.87 ]
+</pre></div></div>
+
+<p>Here is an example with the categorical variables of <code class="code">biomed.data</code>.
+We want the records corresponding to those patients in group <code class="code">B</code>
+who are older than 38 years.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+(%i3) h(u):= u[1] = B and u[2] &gt; 38 $
+</pre><div class="group"><pre class="example-preformatted">(%i4) subsample (s3, h);
+                [ B  39  28.0  102.3  17.1  146 ]
+                [                               ]
+                [ B  39  21.0  92.4   10.3  197 ]
+                [                               ]
+                [ B  39  23.0  111.5  10.0  133 ]
+                [                               ]
+                [ B  39  26.0  92.6   12.3  196 ]
+(%o4)           [                               ]
+                [ B  39  25.0  98.7   10.0  174 ]
+                [                               ]
+                [ B  39  21.0  93.2   5.9   181 ]
+                [                               ]
+                [ B  39  18.0  95.0   11.3  66  ]
+                [                               ]
+                [ B  39  39.0  88.5   7.6   168 ]
+</pre></div></div>
+
+<p>Probably, the statistical analysis will involve only the blood measures,
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) subsample (s3, lambda([v], v[1] = B and v[2] &gt; 38),
+                 3, 4, 5, 6);
+                   [ 28.0  102.3  17.1  146 ]
+                   [                        ]
+                   [ 21.0  92.4   10.3  197 ]
+                   [                        ]
+                   [ 23.0  111.5  10.0  133 ]
+                   [                        ]
+                   [ 26.0  92.6   12.3  196 ]
+(%o3)              [                        ]
+                   [ 25.0  98.7   10.0  174 ]
+                   [                        ]
+                   [ 21.0  93.2   5.9   181 ]
+                   [                        ]
+                   [ 18.0  95.0   11.3  66  ]
+                   [                        ]
+                   [ 39.0  88.5   7.6   168 ]
+</pre></div></div>
+
+<p>This is the multivariate mean of <code class="code">s3</code>,
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) mean (s3);
+       65 B + 35 A  317          6 NA + 8144.999999999999
+(%o3) [-----------, ---, 87.178, ------------------------, 
+           100      10                     100
+                                                    3 NA + 19587
+                                            18.123, ------------]
+                                                        100
+</pre></div></div>
+
+<p>Here, the first component is meaningless, since <code class="code">A</code> and <code class="code">B</code> are categorical, the second component is the mean age of individuals in rational form, and the fourth and last values exhibit some strange behaviour. This is because symbol <code class="code">NA</code> is used here to indicate <var class="var">non available</var> data, and the two means are nonsense. A possible solution would be to take out from the matrix those rows with <code class="code">NA</code> symbols, although this deserves some loss of information.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s3 : read_matrix (file_search (&quot;biomed.data&quot;))$
+(%i3) g(v):= v[4] # NA and v[6] # NA $
+</pre><div class="group"><pre class="example-preformatted">(%i4) mean (subsample (s3, g, 3, 4, 5, 6));
+(%o4) [79.4923076923077, 86.2032967032967, 16.93186813186813, 
+                                                            2514
+                                                            ----]
+                                                             13
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+
+
+<a class="anchor" id="transform_005fsample"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002ftransform_005fsample"></a><dl class="first-deffn">
+<dt class="deffn" id="index-transform_005fsample"><span class="category-def">Function: </span><span><strong class="def-name">transform_sample</strong> <var class="def-var-arguments">(<var class="var">matrix</var>, <var class="var">varlist</var>, <var class="var">exprlist</var>)</var><a class="copiable-link" href='#index-transform_005fsample'> &para;</a></span></dt>
+<dd>
+<p>Transforms the sample <var class="var">matrix</var>, where each column is called according to
+<var class="var">varlist</var>, following expressions in <var class="var">exprlist</var>.
+</p>
+<p>Examples:
+</p>
+<p>The second argument assigns names to the three columns. With these names,
+a list of expressions define the transformation of the sample.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) data: matrix([3,2,7],[3,7,2],[8,2,4],[5,2,4]) $
+</pre><div class="group"><pre class="example-preformatted">(%i3) transform_sample(data, [a,b,c], [c, a*b, log(a)]);
+                               [ 7  6   log(3) ]
+                               [               ]
+                               [ 2  21  log(3) ]
+(%o3)                          [               ]
+                               [ 4  16  log(8) ]
+                               [               ]
+                               [ 4  10  log(5) ]
+</pre></div></div>
+
+<p>Add a constant column and remove the third variable.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) data: matrix([3,2,7],[3,7,2],[8,2,4],[5,2,4]) $
+(%i3) transform_sample(data, [a,b,c], [makelist(1,k,length(data)),a,b]);
+</pre><div class="group"><pre class="example-preformatted">                                  [ 1  3  2 ]
+                                  [         ]
+                                  [ 1  3  7 ]
+(%o3)                             [         ]
+                                  [ 1  8  2 ]
+                                  [         ]
+                                  [ 1  5  2 ]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+
+
+
+
+<a class="anchor" id="Item_003a-descriptive_002fnode_002fFunctions-and-Variables-for-descriptive-statistics"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-descriptive-statistics">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-statistical-graphs" accesskey="n" rel="next">Functions and Variables for statistical graphs</a>, Previous: <a href="#Functions-and-Variables-for-data-manipulation" accesskey="p" rel="prev">Functions and Variables for data manipulation</a>, Up: <a href="#descriptive_002dpkg" accesskey="u" rel="up">descriptive</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-descriptive-statistics-1">50.3 Functions and Variables for descriptive statistics</h3>
+
+
+
+<a class="anchor" id="mean"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fmean"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mean"><span class="category-def">Function: </span><span><strong class="def-name">mean</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">mean</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">mean</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-mean'> &para;</a></span></dt>
+<dd>
+<p>This is the sample mean, defined as
+</p><div class="example">
+<pre class="example-preformatted">                       n
+                     ====
+             _   1   \
+             x = -    &gt;    x
+                 n   /      i
+                     ====
+                     i = 1
+</pre></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) mean (s1);
+                               471
+(%o3)                          ---
+                               100
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) %, numer;
+(%o4)                         4.71
+</pre></div><pre class="example-preformatted">(%i5) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i6) mean (s2);
+(%o6)     [9.9485, 10.1607, 10.8685, 15.7166, 14.8441]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="var"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fvar"></a><dl class="first-deffn">
+<dt class="deffn" id="index-var"><span class="category-def">Function: </span><span><strong class="def-name">var</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">var</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">var</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-var'> &para;</a></span></dt>
+<dd>
+<p>This is the sample variance, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                     n
+                   ====
+           2   1   \          _ 2
+          s  = -    &gt;    (x - x)
+               n   /       i
+                   ====
+                   i = 1
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) var (s1), numer;
+(%o3)                   8.425899999999999
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#var1">var1</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="var1"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fvar1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-var1"><span class="category-def">Function: </span><span><strong class="def-name">var1</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">var1</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">var1</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-var1'> &para;</a></span></dt>
+<dd>
+<p>This is the sample variance, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                     n
+                   ====
+               1   \          _ 2
+              ---   &gt;    (x - x)
+              n-1  /       i
+                   ====
+                   i = 1
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) var1 (s1), numer;
+(%o3)                    8.5110101010101
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) var1 (s2);
+(%o5) [17.39586540404041, 15.13912778787879, 15.63204924242424, 
+                            32.50152569696971, 24.66977392929294]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#var">var</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="std"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fstd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-std"><span class="category-def">Function: </span><span><strong class="def-name">std</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">std</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">std</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-std'> &para;</a></span></dt>
+<dd>
+<p>This is the square root of the function <code class="code">var</code>, the variance with denominator <em class="math tex2jax_process">\(n\)</em>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) std (s1), numer;
+(%o3)                   2.902740084816414
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) std (s2);
+(%o5) [4.149928523480858, 3.871399812729241, 3.933920277534866, 
+                            5.672434260526957, 4.941970881136392]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#var">var</a></code> and <code class="code"><a class="ref" href="#std1">std1</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="std1"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fstd1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-std1"><span class="category-def">Function: </span><span><strong class="def-name">std1</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">std1</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">std1</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-std1'> &para;</a></span></dt>
+<dd>
+<p>This is the square root of the function <code class="code"><a class="ref" href="#var1">var1</a></code>, the variance with denominator <em class="math tex2jax_process">\(n-1\)</em>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) std1 (s1), numer;
+(%o3)                   2.917363553109228
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) std1 (s2);
+(%o5) [4.170835096721089, 3.89090320978032, 3.953738641137555, 
+                            5.701010936401517, 4.966867617451963]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#var1">var1</a></code> and <code class="code"><a class="ref" href="#std">std</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="noncentral_005fmoment"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fnoncentral_005fmoment"></a><dl class="first-deffn">
+<dt class="deffn" id="index-noncentral_005fmoment"><span class="category-def">Function: </span><span><strong class="def-name">noncentral_moment</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">noncentral_moment</code> (<var class="var">list</var>, <var class="var">k</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">noncentral_moment</code> (<var class="var">matrix</var>, <var class="var">k</var>)</var><a class="copiable-link" href='#index-noncentral_005fmoment'> &para;</a></span></dt>
+<dd>
+<p>The non central moment of order <em class="math tex2jax_process">\(k\)</em>, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                       n
+                     ====
+                 1   \      k
+                 -    &gt;    x
+                 n   /      i
+                     ====
+                     i = 1
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) noncentral_moment (s1, 1), numer; /* the mean */
+(%o3)                         4.71
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) noncentral_moment (s2, 5);
+(%o6) [319793.8724761505, 320532.1923892463,
+      391249.5621381556, 2502278.205988911, 1691881.797742255]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#central_005fmoment">central_moment</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="central_005fmoment"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fcentral_005fmoment"></a><dl class="first-deffn">
+<dt class="deffn" id="index-central_005fmoment"><span class="category-def">Function: </span><span><strong class="def-name">central_moment</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">central_moment</code> (<var class="var">list</var>, <var class="var">k</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">central_moment</code> (<var class="var">matrix</var>, <var class="var">k</var>)</var><a class="copiable-link" href='#index-central_005fmoment'> &para;</a></span></dt>
+<dd>
+<p>The central moment of order <em class="math tex2jax_process">\(k\)</em>, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                    n
+                  ====
+              1   \          _ k
+              -    &gt;    (x - x)
+              n   /       i
+                  ====
+                  i = 1
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) central_moment (s1, 2), numer; /* the variance */
+(%o3)                   8.425899999999999
+</pre></div><pre class="example-preformatted">(%i5) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i6) central_moment (s2, 3);
+(%o6) [11.29584771375004, 16.97988248298583, 5.626661952750102,
+                             37.5986572057918, 25.85981904394192]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#central_005fmoment">central_moment</a></code> and <code class="code"><a class="ref" href="#mean">mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="cv"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fcv"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cv"><span class="category-def">Function: </span><span><strong class="def-name">cv</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">cv</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">cv</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-cv'> &para;</a></span></dt>
+<dd>
+<p>The variation coefficient is the quotient between the sample standard deviation (<code class="code"><a class="ref" href="#std">std</a></code>) and the <code class="code"><a class="ref" href="#mean">mean</a></code>,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) cv (s1), numer;
+(%o3)                   .6193977819764815
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) cv (s2);
+(%o5) [.4192426091090204, .3829365309260502, 0.363779605385983, 
+                            .3627381836021478, .3346021393989506]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#std">std</a></code> and <code class="code"><a class="ref" href="#mean">mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="smin"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fsmin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-smin"><span class="category-def">Function: </span><span><strong class="def-name">smin</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">smin</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">smin</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-smin'> &para;</a></span></dt>
+<dd>
+<p>This is the minimum value of the sample <var class="var">list</var>.
+When the argument is a matrix, <code class="code"><a class="ref" href="#smin">smin</a></code> returns
+a list containing the minimum values of the columns,
+which are associated to statistical variables.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) smin (s1);
+(%o3)                           0
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) smin (s2);
+(%o5)             [0.58, 0.5, 2.67, 5.25, 5.17]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#smax">smax</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="smax"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fsmax"></a><dl class="first-deffn">
+<dt class="deffn" id="index-smax"><span class="category-def">Function: </span><span><strong class="def-name">smax</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">smax</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">smax</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-smax'> &para;</a></span></dt>
+<dd>
+<p>This is the maximum value of the sample <var class="var">list</var>.
+When the argument is a matrix, <code class="code"><a class="ref" href="#smax">smax</a></code> returns
+a list containing the maximum values of the columns,
+which are associated to statistical variables.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) smax (s1);
+(%o3)                           9
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) smax (s2);
+(%o5)          [20.25, 21.46, 20.04, 29.63, 27.63]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#smin">smin</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="range"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002frange"></a><dl class="first-deffn">
+<dt class="deffn" id="index-range"><span class="category-def">Function: </span><span><strong class="def-name">range</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">range</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">range</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-range'> &para;</a></span></dt>
+<dd>
+<p>The range is the difference between the extreme values.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) range (s1);
+(%o3)                           9
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) range (s2);
+(%o5)          [19.67, 20.96, 17.37, 24.38, 22.46]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="quantile"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fquantile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quantile"><span class="category-def">Function: </span><span><strong class="def-name">quantile</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quantile</code> (<var class="var">list</var>, <var class="var">p</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quantile</code> (<var class="var">matrix</var>, <var class="var">p</var>)</var><a class="copiable-link" href='#index-quantile'> &para;</a></span></dt>
+<dd>
+<p>This is the <var class="var">p</var>-quantile, with <var class="var">p</var> a number in <em class="math tex2jax_process">\([0, 1]\)</em>, of the sample <var class="var">list</var>.
+Although there are several definitions for the sample quantile (Hyndman, R. J., Fan, Y. (1996) <var class="var">Sample quantiles in statistical packages</var>. American Statistician, 50, 361-365), the one based on linear interpolation is implemented in package <a class="ref" href="#descriptive_002dpkg">descriptive</a>
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) /* 1st and 3rd quartiles */
+         [quantile (s1, 1/4), quantile (s1, 3/4)], numer;
+(%o3)                      [2.0, 7.25]
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) quantile (s2, 1/4);
+(%o5)    [7.2575, 7.477500000000001, 7.82, 11.28, 11.48]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="median"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fmedian"></a><dl class="first-deffn">
+<dt class="deffn" id="index-median"><span class="category-def">Function: </span><span><strong class="def-name">median</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">median</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">median</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-median'> &para;</a></span></dt>
+<dd>
+<p>Once the sample is ordered, if the sample size is odd the median is the central value, otherwise it is the mean of the two central values.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) median (s1);
+                                9
+(%o3)                           -
+                                2
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) median (s2);
+(%o5)         [10.06, 9.855, 10.73, 15.48, 14.105]
+</pre></div></div>
+
+<p>The median is the 1/2-quantile.
+</p>
+<p>See also function <code class="code"><a class="ref" href="#quantile">quantile</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="qrange"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fqrange"></a><dl class="first-deffn">
+<dt class="deffn" id="index-qrange"><span class="category-def">Function: </span><span><strong class="def-name">qrange</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">qrange</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">qrange</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-qrange'> &para;</a></span></dt>
+<dd>
+<p>The interquartilic range is the difference between the third and first quartiles, <code class="code">quantile(<var class="var">list</var>,3/4) - quantile(<var class="var">list</var>,1/4)</code>,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) qrange (s1);
+                               21
+(%o3)                          --
+                               4
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) qrange (s2);
+(%o5) [5.385, 5.572499999999998, 6.022500000000001, 
+                            8.729999999999999, 6.649999999999999]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#quantile">quantile</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="mean_005fdeviation"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fmean_005fdeviation"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mean_005fdeviation"><span class="category-def">Function: </span><span><strong class="def-name">mean_deviation</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">mean_deviation</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">mean_deviation</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-mean_005fdeviation'> &para;</a></span></dt>
+<dd>
+<p>The mean deviation, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                     n
+                   ====
+               1   \          _
+               -    &gt;    |x - x|
+               n   /       i
+                   ====
+                   i = 1
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) mean_deviation (s1);
+                               51
+(%o3)                          --
+                               20
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) mean_deviation (s2);
+(%o5) [3.287959999999999, 3.075342, 3.23907, 4.715664000000001, 
+                                               4.028546000000002]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#mean">mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="median_005fdeviation"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fmedian_005fdeviation"></a><dl class="first-deffn">
+<dt class="deffn" id="index-median_005fdeviation"><span class="category-def">Function: </span><span><strong class="def-name">median_deviation</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">median_deviation</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">median_deviation</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-median_005fdeviation'> &para;</a></span></dt>
+<dd>
+<p>The median deviation, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                 n
+               ====
+           1   \
+           -    &gt;    |x - med|
+           n   /       i
+               ====
+               i = 1
+</pre></div></div>
+<p>where <code class="code">med</code> is the median of <var class="var">list</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) median_deviation (s1);
+                                5
+(%o3)                           -
+                                2
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) median_deviation (s2);
+(%o5)           [2.75, 2.755, 3.08, 4.315, 3.31]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#mean">mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="harmonic_005fmean"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fharmonic_005fmean"></a><dl class="first-deffn">
+<dt class="deffn" id="index-harmonic_005fmean"><span class="category-def">Function: </span><span><strong class="def-name">harmonic_mean</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">harmonic_mean</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">harmonic_mean</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-harmonic_005fmean'> &para;</a></span></dt>
+<dd>
+<p>The harmonic mean, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                  n
+               --------
+                n
+               ====
+               \     1
+                &gt;    --
+               /     x
+               ====   i
+               i = 1
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) y : [5, 7, 2, 5, 9, 5, 6, 4, 9, 2, 4, 2, 5]$
+</pre><div class="group"><pre class="example-preformatted">(%i3) harmonic_mean (y), numer;
+(%o3)                   3.901858027632205
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) harmonic_mean (s2);
+(%o5) [6.948015590052786, 7.391967752360356, 9.055658197151745, 
+                            13.44199028193692, 13.01439145898509]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#mean">mean</a></code> and <code class="code"><a class="ref" href="#geometric_005fmean">geometric_mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+<a class="anchor" id="geometric_005fmean"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fgeometric_005fmean"></a><dl class="first-deffn">
+<dt class="deffn" id="index-geometric_005fmean"><span class="category-def">Function: </span><span><strong class="def-name">geometric_mean</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">geometric_mean</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">geometric_mean</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-geometric_005fmean'> &para;</a></span></dt>
+<dd>
+<p>The geometric mean, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                 /  n      \ 1/n
+                 | /===\   |
+                 |  ! !    |
+                 |  ! !  x |
+                 |  ! !   i|
+                 | i = 1   |
+                 \         /
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) y : [5, 7, 2, 5, 9, 5, 6, 4, 9, 2, 4, 2, 5]$
+</pre><div class="group"><pre class="example-preformatted">(%i3) geometric_mean (y), numer;
+(%o3)                   4.454845412337012
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) geometric_mean (s2);
+(%o5) [8.82476274347979, 9.22652604739361, 10.0442675714889, 
+                            14.61274126349021, 13.96184163444275]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#mean">mean</a></code> and <code class="code"><a class="ref" href="#harmonic_005fmean">harmonic_mean</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="kurtosis"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fkurtosis"></a><dl class="first-deffn">
+<dt class="deffn" id="index-kurtosis"><span class="category-def">Function: </span><span><strong class="def-name">kurtosis</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">kurtosis</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">kurtosis</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-kurtosis'> &para;</a></span></dt>
+<dd>
+<p>The kurtosis coefficient, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                    n
+                  ====
+            1     \          _ 4
+           ----    &gt;    (x - x)  - 3
+              4   /       i
+           n s    ====
+                  i = 1
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) kurtosis (s1), numer;
+(%o3)                  - 1.273247946514421
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) kurtosis (s2);
+(%o5) [- .2715445622195385, 0.119998784429451, 
+     - .4275233490482861, - .6405361979019522, - .4952382132352935]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#mean">mean</a></code>, <code class="code"><a class="ref" href="#var">var</a></code> and <code class="code"><a class="ref" href="#skewness">skewness</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="skewness"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fskewness"></a><dl class="first-deffn">
+<dt class="deffn" id="index-skewness"><span class="category-def">Function: </span><span><strong class="def-name">skewness</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">skewness</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">skewness</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-skewness'> &para;</a></span></dt>
+<dd>
+<p>The skewness coefficient, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                    n
+                  ====
+            1     \          _ 3
+           ----    &gt;    (x - x)
+              3   /       i
+           n s    ====
+                  i = 1
+</pre></div></div>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) skewness (s1), numer;
+(%o3)                  .009196180476450424
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) skewness (s2);
+(%o5) [.1580509020000978, .2926379232061854, .09242174416107717, 
+                            .2059984348148687, .2142520248890831]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#mean">mean</a></code>,, <code class="code"><a class="ref" href="#var">var</a></code> and <code class="code"><a class="ref" href="#kurtosis">kurtosis</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="pearson_005fskewness"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fpearson_005fskewness"></a><dl class="first-deffn">
+<dt class="deffn" id="index-pearson_005fskewness"><span class="category-def">Function: </span><span><strong class="def-name">pearson_skewness</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">pearson_skewness</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">pearson_skewness</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-pearson_005fskewness'> &para;</a></span></dt>
+<dd>
+<p>Pearson&rsquo;s skewness coefficient, defined as 
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">                _
+             3 (x - med)
+             -----------
+                  s
+</pre></div></div>
+<p>where <var class="var">med</var> is the median of <var class="var">list</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) pearson_skewness (s1), numer;
+(%o3)                   .2159484029093895
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) pearson_skewness (s2);
+(%o5) [- .08019976629211892, .2357036272952649, 
+         .1050904062491204, .1245042340592368, .4464181795804519]
+</pre></div></div>
+
+<p>See also functions <code class="code"><a class="ref" href="#mean">mean</a></code>, <code class="code"><a class="ref" href="#var">var</a></code> and <code class="code"><a class="ref" href="#median">median</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="quartile_005fskewness"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fquartile_005fskewness"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quartile_005fskewness"><span class="category-def">Function: </span><span><strong class="def-name">quartile_skewness</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quartile_skewness</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quartile_skewness</code> (<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-quartile_005fskewness'> &para;</a></span></dt>
+<dd>
+<p>The quartile skewness coefficient, defined as 
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">               c    - 2 c    + c
+                3/4      1/2    1/4
+               --------------------
+                   c    - c
+                    3/4    1/4
+</pre></div></div>
+<p>where <em class="math tex2jax_process">\(c_p\)</em> is the <var class="var">p</var>-quantile of sample <var class="var">list</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) quartile_skewness (s1), numer;
+(%o3)                  .04761904761904762
+</pre></div><pre class="example-preformatted">(%i4) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i5) quartile_skewness (s2);
+(%o5) [- 0.0408542246982353, .1467025572005382, 
+       0.0336239103362392, .03780068728522298, .2105263157894735]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#quantile">quantile</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="km"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fkm"></a><dl class="first-deffn">
+<dt class="deffn" id="index-km"><span class="category-def">Function: </span><span><strong class="def-name">km</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">km</code> (<var class="var">list</var>, <var class="var">option</var> ...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">km</code> (<var class="var">matrix</var>, <var class="var">option</var> ...)</var><a class="copiable-link" href='#index-km'> &para;</a></span></dt>
+<dd>
+<p>Kaplan Meier estimator of the survival, or reliability, function <em class="math tex2jax_process">\(S(x)=1-F(x)\)</em>.
+</p>
+<p>Data can be introduced as a list of pairs, or as a two column matrix. The first
+component is the observed time, and the second component a censoring index 
+(1 = non censored, 0 = right censored).
+</p>
+<p>The optional argument is the name of the variable in the returned expression,
+which is <var class="var">x</var> by default.
+</p>
+<p>Examples:
+</p>
+<p>Sample as a list of pairs.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) S: km([[2,1], [3,1], [5,0], [8,1]]);
+                       charfun((3 &lt;= x) and (x &lt; 8))
+(%o2) charfun(x &lt; 0) + -----------------------------
+                                     2
+                3 charfun((2 &lt;= x) and (x &lt; 3))
+              + ------------------------------- 
+                               4
+              + charfun((0 &lt;= x) and (x &lt; 2))
+</pre></div><pre class="example-preformatted">(%i3) load (&quot;draw&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) draw2d(
+        line_width = 3, grid = true,
+        explicit(S, x, -0.1, 10))$
+</pre></div></div>
+
+<p>Estimate survival probabilities.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) S(t):= ''(km([[2,1], [3,1], [5,0], [8,1]], t)) $
+</pre><div class="group"><pre class="example-preformatted">(%i3) S(6);
+                            1
+(%o3)                       -
+                            2
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="cdf_005fempirical"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fcdf_005fempirical"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cdf_005fempirical"><span class="category-def">Function: </span><span><strong class="def-name">cdf_empirical</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">cdf_empirical</code> (<var class="var">list</var>, <var class="var">option</var> ...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">cdf_empirical</code> (<var class="var">matrix</var>, <var class="var">option</var> ...)</var><a class="copiable-link" href='#index-cdf_005fempirical'> &para;</a></span></dt>
+<dd>
+<p>Empirical distribution function <em class="math tex2jax_process">\(F(x)\)</em>.
+</p>
+<p>Data can be introduced as a list of numbers, or as an one column matrix.
+</p>
+<p>The optional argument is the name of the variable in the returned expression,
+which is <var class="var">x</var> by default.
+</p>
+<p>Example:
+</p>
+<p>Empirical distribution function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) F(x):= ''(cdf_empirical([1,3,3,5,7,7,7,8,9]));
+(%o2) F(x) := (charfun(x &gt;= 9) + charfun(x &gt;= 8)
+               + 3 charfun(x &gt;= 7) + charfun(x &gt;= 5)
+               + 2 charfun(x &gt;= 3) + charfun(x &gt;= 1))/9
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) F(6);
+                           4
+(%o3)                      -
+                           9
+</pre></div><pre class="example-preformatted">(%i4) load(&quot;draw&quot;)$
+(%i5) draw2d(
+        line_width = 3,
+        grid       = true,
+        explicit(F(z), z, -2, 12)) $
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="cov"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fcov"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cov"><span class="category-def">Function: </span><span><strong class="def-name">cov</strong> <var class="def-var-arguments">(<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-cov'> &para;</a></span></dt>
+<dd><p>The covariance matrix of the multivariate sample, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">              n
+             ====
+          1  \           _        _
+      S = -   &gt;    (X  - X) (X  - X)'
+          n  /       j        j
+             ====
+             j = 1
+</pre></div></div>
+<p>where <em class="math tex2jax_process">\(X_j\)</em> is the <em class="math tex2jax_process">\(j\)</em>-th row of the sample matrix.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) fpprintprec : 7$  /* change precision for pretty output */
+</pre><div class="group"><pre class="example-preformatted">(%i4) cov (s2);
+      [ 17.22191  13.61811  14.37217  19.39624  15.42162 ]
+      [                                                  ]
+      [ 13.61811  14.98774  13.30448  15.15834  14.9711  ]
+      [                                                  ]
+(%o4) [ 14.37217  13.30448  15.47573  17.32544  16.18171 ]
+      [                                                  ]
+      [ 19.39624  15.15834  17.32544  32.17651  20.44685 ]
+      [                                                  ]
+      [ 15.42162  14.9711   16.18171  20.44685  24.42308 ]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#cov1">cov1</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="cov1"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fcov1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cov1"><span class="category-def">Function: </span><span><strong class="def-name">cov1</strong> <var class="def-var-arguments">(<var class="var">matrix</var>)</var><a class="copiable-link" href='#index-cov1'> &para;</a></span></dt>
+<dd><p>The covariance matrix of the multivariate sample, defined as
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">              n
+             ====
+         1   \           _        _
+   S  = ---   &gt;    (X  - X) (X  - X)'
+    1   n-1  /       j        j
+             ====
+             j = 1
+</pre></div></div>
+<p>where <em class="math tex2jax_process">\(X_j\)</em> is the <em class="math tex2jax_process">\(j\)</em>-th row of the sample matrix.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) fpprintprec : 7$ /* change precision for pretty output */
+</pre><div class="group"><pre class="example-preformatted">(%i4) cov1 (s2);
+      [ 17.39587  13.75567  14.51734  19.59216  15.5774  ]
+      [                                                  ]
+      [ 13.75567  15.13913  13.43887  15.31145  15.12232 ]
+      [                                                  ]
+(%o4) [ 14.51734  13.43887  15.63205  17.50044  16.34516 ]
+      [                                                  ]
+      [ 19.59216  15.31145  17.50044  32.50153  20.65338 ]
+      [                                                  ]
+      [ 15.5774   15.12232  16.34516  20.65338  24.66977 ]
+</pre></div></div>
+
+<p>See also function <code class="code"><a class="ref" href="#cov">cov</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="global_005fvariances"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fglobal_005fvariances"></a><dl class="first-deffn">
+<dt class="deffn" id="index-global_005fvariances"><span class="category-def">Function: </span><span><strong class="def-name">global_variances</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">global_variances</code> (<var class="var">matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">global_variances</code> (<var class="var">matrix</var>, <var class="var">options</var> ...)</var><a class="copiable-link" href='#index-global_005fvariances'> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code">global_variances</code> returns a list of global variance measures:
+</p>
+<ul class="itemize mark-bullet">
+<li><var class="var">total variance</var>: <code class="code">trace(S_1)</code>,
+</li><li><var class="var">mean variance</var>: <code class="code">trace(S_1)/p</code>,
+</li><li><var class="var">generalized variance</var>: <code class="code">determinant(S_1)</code>,
+</li><li><var class="var">generalized standard deviation</var>: <code class="code">sqrt(determinant(S_1))</code>,
+</li><li><var class="var">effective variance</var> <code class="code">determinant(S_1)^(1/p)</code>, (defined in: Pe&ntilde;a, D. (2002) <var class="var">An&aacute;lisis de datos multivariantes</var>; McGraw-Hill, Madrid.)
+</li><li><var class="var">effective standard deviation</var>: <code class="code">determinant(S_1)^(1/(2*p))</code>.
+</li></ul>
+<p>where <var class="var">p</var> is the dimension of the multivariate random variable and <em class="math tex2jax_process">\(S_1\)</em> the covariance matrix returned by <code class="code">cov1</code>.
+</p>
+<p>Option:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'data</code>, default <code class="code">'true</code>, indicates whether the input matrix contains the sample data,
+in which case the covariance matrix <code class="code">cov1</code> must be calculated, or not, and then the covariance
+matrix (symmetric) must be given, instead of the data.
+</li></ul>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) global_variances (s2);
+(%o3) [105.338342060606, 21.06766841212119, 12874.34690469686, 
+         113.4651792608501, 6.636590811800795, 2.576158149609762]
+</pre></div></div>
+
+<p>Calculate the <code class="code">global_variances</code> from the covariance matrix.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) s : cov1 (s2)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) global_variances (s, data=false);
+(%o4) [105.338342060606, 21.06766841212119, 12874.34690469686, 
+         113.4651792608501, 6.636590811800795, 2.576158149609762]
+</pre></div></div>
+
+<p>See also <code class="code"><a class="ref" href="#cov">cov</a></code> and <code class="code"><a class="ref" href="#cov1">cov1</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="cor"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fcor"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cor"><span class="category-def">Function: </span><span><strong class="def-name">cor</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">cor</code> (<var class="var">matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">cor</code> (<var class="var">matrix</var>, <var class="var">logical_value</var>)</var><a class="copiable-link" href='#index-cor'> &para;</a></span></dt>
+<dd>
+<p>The correlation matrix of the multivariate sample.
+</p>
+<p>Option:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'data</code>, default <code class="code">'true</code>, indicates whether the input matrix contains the sample data,
+in which case the covariance matrix <code class="code">cov1</code> must be calculated, or not, and then the covariance
+matrix (symmetric) must be given, instead of the data.
+</li></ul>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) fpprintprec : 7 $
+(%i3) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i4) cor (s2);
+      [   1.0     .8476339  .8803515  .8239624  .7519506 ]
+      [                                                  ]
+      [ .8476339    1.0     .8735834  .6902622  0.782502 ]
+      [                                                  ]
+(%o4) [ .8803515  .8735834    1.0     .7764065  .8323358 ]
+      [                                                  ]
+      [ .8239624  .6902622  .7764065    1.0     .7293848 ]
+      [                                                  ]
+      [ .7519506  0.782502  .8323358  .7293848    1.0    ]
+</pre></div></div>
+
+<p>Calculate de correlation matrix from the covariance matrix.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) fpprintprec : 7 $
+(%i3) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i4) s : cov1 (s2)$
+</pre><div class="group"><pre class="example-preformatted">(%i5) cor (s, data=false); /* this is faster */
+      [   1.0     .8476339  .8803515  .8239624  .7519506 ]
+      [                                                  ]
+      [ .8476339    1.0     .8735834  .6902622  0.782502 ]
+      [                                                  ]
+(%o5) [ .8803515  .8735834    1.0     .7764065  .8323358 ]
+      [                                                  ]
+      [ .8239624  .6902622  .7764065    1.0     .7293848 ]
+      [                                                  ]
+      [ .7519506  0.782502  .8323358  .7293848    1.0    ]
+</pre></div></div>
+
+<p>See also <code class="code"><a class="ref" href="#cov">cov</a></code> and <code class="code"><a class="ref" href="#cov1">cov1</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="list_005fcorrelations"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002flist_005fcorrelations"></a><dl class="first-deffn">
+<dt class="deffn" id="index-list_005fcorrelations"><span class="category-def">Function: </span><span><strong class="def-name">list_correlations</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">list_correlations</code> (<var class="var">matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">list_correlations</code> (<var class="var">matrix</var>, <var class="var">options</var> ...)</var><a class="copiable-link" href='#index-list_005fcorrelations'> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code">list_correlations</code> returns a list of correlation measures:
+</p>
+<ul class="itemize mark-bullet">
+<li><var class="var">precision matrix</var>: the inverse of the covariance matrix <em class="math tex2jax_process">\(S_1\)</em>,
+<div class="example">
+<div class="group"><pre class="example-preformatted">       -1     ij
+      S   = (s  )             
+       1         i,j = 1,2,...,p
+</pre></div></div>
+
+</li><li><var class="var">multiple correlation vector</var>:  <em class="math tex2jax_process">\((R_1^2, R_2^2, ..., R_p^2)\)</em>, with 
+<div class="example">
+<div class="group"><pre class="example-preformatted">       2          1
+      R  = 1 - -------
+       i        ii
+               s   s
+                    ii
+</pre></div></div>
+<p>being an indicator of the goodness of fit of the linear multivariate regression model on <em class="math tex2jax_process">\(X_i\)</em> when the rest of variables are used as regressors.
+</p>
+</li><li><var class="var">partial correlation matrix</var>: with element <em class="math tex2jax_process">\((i, j)\)</em> being
+<div class="example">
+<div class="group"><pre class="example-preformatted">                         ij
+                        s
+      r        = - ------------
+       ij.rest     / ii  jj\ 1/2
+                   |s   s  |
+                   \       /
+</pre></div></div>
+
+</li></ul>
+
+<p>Option:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'data</code>, default <code class="code">'true</code>, indicates whether the input matrix contains the sample data,
+in which case the covariance matrix <code class="code">cov1</code> must be calculated, or not, and then the covariance
+matrix (symmetric) must be given, instead of the data.
+</li></ul>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) z : list_correlations (s2)$
+(%i4) fpprintprec : 5$ /* for pretty output */
+</pre><div class="group"><pre class="example-preformatted">(%i5) z[1];  /* precision matrix */
+      [  .38486   - .13856   - .15626   - .10239    .031179  ]
+      [                                                      ]
+      [ - .13856   .34107    - .15233    .038447   - .052842 ]
+      [                                                      ]
+(%o5) [ - .15626  - .15233    .47296    - .024816  - .10054  ]
+      [                                                      ]
+      [ - .10239   .038447   - .024816   .10937    - .034033 ]
+      [                                                      ]
+      [ .031179   - .052842  - .10054   - .034033   .14834   ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) z[2];  /* multiple correlation vector */
+(%o6)      [.85063, .80634, .86474, .71867, .72675]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) z[3];  /* partial correlation matrix */
+      [  - 1.0     .38244   .36627   .49908   - .13049 ]
+      [                                                ]
+      [  .38244    - 1.0    .37927  - .19907   .23492  ]
+      [                                                ]
+(%o7) [  .36627    .37927   - 1.0    .10911    .37956  ]
+      [                                                ]
+      [  .49908   - .19907  .10911   - 1.0     .26719  ]
+      [                                                ]
+      [ - .13049   .23492   .37956   .26719    - 1.0   ]
+</pre></div></div>
+
+<p>See also <code class="code"><a class="ref" href="#cov">cov</a></code> and <code class="code"><a class="ref" href="#cov1">cov1</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+
+<a class="anchor" id="principal_005fcomponents"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fprincipal_005fcomponents"></a><dl class="first-deffn">
+<dt class="deffn" id="index-principal_005fcomponents"><span class="category-def">Function: </span><span><strong class="def-name">principal_components</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">principal_components</code> (<var class="var">matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">principal_components</code> (<var class="var">matrix</var>, <var class="var">options</var> ...)</var><a class="copiable-link" href='#index-principal_005fcomponents'> &para;</a></span></dt>
+<dd>
+<p>Calculates the principal components of a multivariate sample. Principal components are
+used in multivariate statistical analysis to reduce the dimensionality of the sample.
+</p>
+<p>Option:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'data</code>, default <code class="code">'true</code>, indicates whether the input matrix contains the sample data,
+in which case the covariance matrix <code class="code"><a class="ref" href="#cov1">cov1</a></code> must be calculated, or not, and then the covariance
+matrix (symmetric) must be given, instead of the data.
+</li></ul>
+
+<p>The output of function <code class="code">principal_components</code> is a list with the following results:
+</p>
+<ul class="itemize mark-bullet">
+<li>variances of the principal components,
+</li><li>percentage of total variance explained by each principal component,
+</li><li>rotation matrix.
+</li></ul>
+
+<p>Examples:
+</p>
+<p>In this sample, the first component explains 83.13 per cent of total 
+variance.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) fpprintprec:4 $
+(%i4) res: principal_components(s2);
+0 errors, 0 warnings
+(%o4) [[87.57, 8.753, 5.515, 1.889, 1.613], 
+[83.13, 8.31, 5.235, 1.793, 1.531], 
+</pre><div class="group"><pre class="example-preformatted">[ .4149  .03379   - .4757  - 0.581   - .5126 ]
+[                                            ]
+[ 0.369  - .3657  - .4298   .7237    - .1469 ]
+[                                            ]
+[ .3959  - .2178  - .2181  - .2749    .8201  ]]
+[                                            ]
+[ .5548   .7744    .1857    .2319    .06498  ]
+[                                            ]
+[ .4765  - .4669   0.712   - .09605  - .1969 ]
+</pre></div><pre class="example-preformatted">(%i5) /* accumulated percentages  */
+    block([ap: copy(res[2])],
+      for k:2 thru length(ap) do ap[k]: ap[k]+ap[k-1],
+      ap);
+(%o5)                 [83.13, 91.44, 96.68, 98.47, 100.0]
+(%i6) /* sample dimension */
+      p: length(first(res));
+(%o6)                                  5
+(%i7) /* plot percentages to select number of
+         principal components for further work */
+     draw2d(
+        fill_density = 0.2,
+        apply(bars, makelist([k, res[2][k], 1/2], k, p)),
+        points_joined = true,
+        point_type    = filled_circle,
+        point_size    = 3,
+        points(makelist([k, res[2][k]], k, p)),
+        xlabel = &quot;Variances&quot;,
+        ylabel = &quot;Percentages&quot;,
+        xtics  = setify(makelist([concat(&quot;PC&quot;,k),k], k, p))) $
+</pre></div>
+
+<p>In case de covariance matrix is known, it can be passed to the function,
+but option <code class="code">data=false</code> must be used.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) S: matrix([1,-2,0],[-2,5,0],[0,0,2]);
+                                [  1   - 2  0 ]
+                                [             ]
+(%o2)                           [ - 2   5   0 ]
+                                [             ]
+                                [  0    0   2 ]
+(%i3) fpprintprec:4 $
+(%i4) /* the argument is a covariance matrix */
+      res: principal_components(S, data=false);
+0 errors, 0 warnings
+                                                  [ - .3827  0.0  .9239 ]
+                                                  [                     ]
+(%o4) [[5.828, 2.0, .1716], [72.86, 25.0, 2.145], [  .9239   0.0  .3827 ]]
+                                                  [                     ]
+                                                  [   0.0    1.0   0.0  ]
+(%i5) /* transformation to get the principal components
+         from original records */
+      matrix([a1,b2,c3],[a2,b2,c2]).last(res);
+             [ .9239 b2 - .3827 a1  1.0 c3  .3827 b2 + .9239 a1 ]
+(%o5)        [                                                  ]
+             [ .9239 b2 - .3827 a2  1.0 c2  .3827 b2 + .9239 a2 ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+</div>
+</dd></dl>
+
+
+
+<a class="anchor" id="Item_003a-descriptive_002fnode_002fFunctions-and-Variables-for-statistical-graphs"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-statistical-graphs">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Functions-and-Variables-for-descriptive-statistics" accesskey="p" rel="prev">Functions and Variables for descriptive statistics</a>, Up: <a href="#descriptive_002dpkg" accesskey="u" rel="up">descriptive</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-statistical-graphs-1">50.4 Functions and Variables for statistical graphs</h3>
+
+
+
+<a class="anchor" id="barsplot"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fbarsplot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-barsplot"><span class="category-def">Function: </span><span><strong class="def-name">barsplot</strong> <var class="def-var-arguments">(<var class="var">data1</var>, <var class="var">data2</var>, &hellip;, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;)</var><a class="copiable-link" href='#index-barsplot'> &para;</a></span></dt>
+<dd>
+<p>Plots bars diagrams for discrete statistical variables,
+both for one or multiple samples.
+</p>
+<p><var class="var">data</var> can be a list of outcomes representing one sample, or a 
+matrix of <var class="var">m</var> rows and <var class="var">n</var> columns, representing <var class="var">n</var> samples of size 
+<var class="var">m</var> each.
+</p>
+<p>Available options are:
+</p>
+<ul class="itemize mark-bullet">
+<li><var class="var">box_width</var> (default, <code class="code">3/4</code>): relative width of rectangles. This 
+value must be in the range <code class="code">[0,1]</code>.
+
+</li><li><var class="var">grouping</var> (default, <code class="code">clustered</code>): indicates how multiple samples are
+shown. Valid values are: <code class="code">clustered</code> and <code class="code">stacked</code>.
+
+</li><li><var class="var">groups_gap</var> (default, <code class="code">1</code>): a positive integer number representing 
+the gap between two consecutive groups of bars.
+
+</li><li><var class="var">bars_colors</var> (default, <code class="code">[]</code>): a list of colors for multiple samples.
+When there are more samples than specified colors, the extra necessary colors 
+are chosen at random. See <code class="code">color</code> to learn more about them.
+
+</li><li><var class="var">frequency</var> (default, <code class="code">absolute</code>): indicates the scale of the
+ordinates. Possible values are:  <code class="code">absolute</code>, <code class="code">relative</code>, 
+and <code class="code">percent</code>.
+
+</li><li><var class="var">ordering</var> (default, <code class="code">orderlessp</code>): possible values are <code class="code">orderlessp</code> or <code class="code">ordergreatp</code>,
+indicating how statistical outcomes should be ordered on the <var class="var">x</var>-axis.
+
+</li><li><var class="var">sample_keys</var> (default, <code class="code">[]</code>): a list with the strings to be used in the legend.
+When the list length is other than 0 or the number of samples, an error message is returned.
+
+</li><li><var class="var">start_at</var> (default, <code class="code">0</code>): indicates where the plot begins to be plotted on the
+x axis.
+
+</li><li>All global <code class="code">draw</code> options, except <code class="code">xtics</code>, which is 
+internally assigned by <code class="code">barsplot</code>.
+If you want to set your own values for this option or want to build
+complex scenes, make use of <code class="code">barsplot_description</code>. See example below.
+
+</li><li>The following local <a class="ref" href="maxima_52.html#draw_002dpkg">draw</a> options: <code class="code"><a class="ref" href="maxima_52.html#key">key</a></code>, <code class="code"><a class="ref" href="maxima_52.html#color_005fdraw">color_draw</a></code>,
+<code class="code"><a class="ref" href="maxima_52.html#fill_005fcolor">fill_color</a></code>, <code class="code"><a class="ref" href="maxima_52.html#fill_005fdensity">fill_density</a></code> and <code class="code"><a class="ref" href="maxima_52.html#line_005fwidth">line_width</a></code>.
+See also
+<code class="code"><a class="ref" href="#barsplot">barsplot</a></code>.
+
+</li></ul>
+
+<p>There is also a function <code class="code">wxbarsplot</code> for creating embedded
+histograms in interfaces wxMaxima and iMaxima.  <code class="code">barsplot</code> in a
+multiplot context.
+</p>
+<p>Examples:
+</p>
+<p>Univariate sample in matrix form. Absolute frequencies.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) m : read_matrix (file_search (&quot;biomed.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) barsplot(
+        col(m,2),
+        title        = &quot;Ages&quot;,
+        xlabel       = &quot;years&quot;,
+        box_width    = 1/2,
+        fill_density = 3/4)$
+</pre></div></div>
+
+<p>Two samples of different sizes, with
+relative frequencies and user declared colors.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) l1:makelist(random(10),k,1,50)$
+(%i3) l2:makelist(random(10),k,1,100)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) barsplot(
+        l1,l2,
+        box_width    = 1,
+        fill_density = 1,
+        bars_colors  = [black, grey],
+        frequency = relative,
+        sample_keys = [&quot;A&quot;, &quot;B&quot;])$
+</pre></div></div>
+
+<p>Four non numeric samples of equal size.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) barsplot(
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        title  = &quot;Asking for something to four groups&quot;,
+        ylabel = &quot;# of individuals&quot;,
+        groups_gap   = 3,
+        fill_density = 0.5,
+        ordering     = ordergreatp)$
+</pre></div></div>
+
+<p>Stacked bars.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) barsplot(
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        makelist([Yes, No, Maybe][random(3)+1],k,1,50),
+        title  = &quot;Asking for something to four groups&quot;,
+        ylabel = &quot;# of individuals&quot;,
+        grouping     = stacked,
+        fill_density = 0.5,
+        ordering     = ordergreatp)$
+</pre></div></div>
+
+<p>For bars diagrams related options, see <code class="code"><a class="ref" href="#barsplot">barsplot</a></code> of package <a class="ref" href="maxima_52.html#draw_002dpkg">draw</a>
+See also functions <code class="code"><a class="ref" href="#histogram">histogram</a></code> and <code class="code"><a class="ref" href="#piechart">piechart</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="barsplot_005fdescription"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fbarsplot_005fdescription"></a><dl class="first-deffn">
+<dt class="deffn" id="index-barsplot_005fdescription"><span class="category-def">Function: </span><span><strong class="def-name">barsplot_description</strong> <var class="def-var-arguments">(&hellip;)</var><a class="copiable-link" href='#index-barsplot_005fdescription'> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code">barsplot_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects.
+</p>
+<p>Example: <code class="code">barsplot</code> in a multiplot context.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) l1:makelist(random(10),k,1,50)$
+(%i3) l2:makelist(random(10),k,1,100)$
+(%i4) bp1 : 
+        barsplot_description(
+         l1,
+         box_width = 1,
+         fill_density = 0.5,
+         bars_colors = [blue],
+         frequency = relative)$
+(%i5) bp2 : 
+        barsplot_description(
+         l2,
+         box_width = 1,
+         fill_density = 0.5,
+         bars_colors = [red],
+         frequency = relative)$
+(%i6) draw(gr2d(bp1), gr2d(bp2))$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="boxplot"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fboxplot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-boxplot"><span class="category-def">Function: </span><span><strong class="def-name">boxplot</strong> <var class="def-var-arguments">(<var class="var">data</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">boxplot</code> (<var class="var">data</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;)</var><a class="copiable-link" href='#index-boxplot'> &para;</a></span></dt>
+<dd>
+<p>This function plots box-and-whisker diagrams. Argument <var class="var">data</var> can be a list,
+which is not of great interest, since these diagrams are mainly used for
+comparing different samples, or a matrix, so it is possible to compare
+two or more components of a multivariate statistical variable. 
+But it is also allowed <var class="var">data</var> to be a list of samples with 
+possible different sample sizes, in fact this is the only function 
+in package <code class="code">descriptive</code> that admits this type of data structure.
+</p>
+<p>The box is plotted from the first quartile to the third, with an horizontal
+segment situated at the second quartile or median. By default, lower and 
+upper whiskers are plotted at the minimum and maximum values,
+respectively. Option <var class="var">range</var> can be used to indicate that values greater
+than <code class="code">quantile(x,3/4)+range*(quantile(x,3/4)-quantile(x,1/4))</code> or 
+less than <code class="code">quantile(x,1/4)-range*(quantile(x,3/4)-quantile(x,1/4))</code>
+must be considered as outliers, in which case they are plotted as
+isolated points, and the whiskers are located at the extremes of the rest of
+the sample.
+</p>
+<p>Available options are:
+</p>
+<ul class="itemize mark-bullet">
+<li><var class="var">box_width</var> (default, <code class="code">3/4</code>): relative width of boxes.
+This  value must be in the range <code class="code">[0,1]</code>.
+
+</li><li><var class="var">box_orientation</var> (default, <code class="code">vertical</code>): possible values: <code class="code">vertical</code>
+and <code class="code">horizontal</code>.
+
+</li><li><var class="var">range</var> (default, <code class="code">inf</code>): positive coefficient of the interquartilic range
+to set outliers boundaries.
+
+</li><li><var class="var">outliers_size</var> (default, <code class="code">1</code>): circle size for isolated outliers.
+
+</li><li>All <code class="code">draw</code> options, except <code class="code">points_joined</code>, <code class="code">point_size</code>, <code class="code">point_type</code>,
+<code class="code">xtics</code>, <code class="code">ytics</code>, <code class="code">xrange</code>, and <code class="code">yrange</code>, which are
+internally assigned by <code class="code">boxplot</code>.
+If you want to set your own values for this options or want to build
+complex scenes, make use of <code class="code">boxplot_description</code>.
+
+</li><li>The following local <code class="code">draw</code> options: <code class="code">key</code>, <code class="code">color</code>, 
+and <code class="code">line_width</code>.
+
+</li></ul>
+
+<p>There is also a function <code class="code">wxboxplot</code> for creating embedded
+histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Examples:
+</p>
+<p>Box-and-whisker diagram from a multivariate sample.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix(file_search(&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) boxplot(s2,
+        box_width  = 0.2,
+        title      = &quot;Windspeed in knots&quot;,
+        xlabel     = &quot;Stations&quot;,
+        color      = red,
+        line_width = 2)$
+</pre></div></div>
+
+<p>Box-and-whisker diagram from three samples of different sizes.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) A :
+       [[6, 4, 6, 2, 4, 8, 6, 4, 6, 4, 3, 2],
+        [8, 10, 7, 9, 12, 8, 10],
+        [16, 13, 17, 12, 11, 18, 13, 18, 14, 12]]$
+</pre></div><pre class="example-preformatted">(%i3) boxplot (A, box_orientation = horizontal)$
+</pre></div>
+
+<p>Option <var class="var">range</var> can be used to handle outliers.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) B: [[7, 15, 5, 8, 6, 5, 7, 3, 1],
+          [10, 8, 12, 8, 11, 9, 20],
+          [23, 17, 19, 7, 22, 19]] $
+</pre><div class="group"><pre class="example-preformatted">(%i3) boxplot (B, range=1)$
+(%i4) boxplot (B, range=1.5, box_orientation = horizontal)$
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) draw2d(
+        boxplot_description(
+          B,
+          range            = 1.5,
+          line_width       = 3,
+          outliers_size    = 2,
+          color            = red,
+          background_color = light_gray),
+        xtics = {[&quot;Low&quot;,1],[&quot;Medium&quot;,2],[&quot;High&quot;,3]}) $
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="boxplot_005fdescription"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fboxplot_005fdescription"></a><dl class="first-deffn">
+<dt class="deffn" id="index-boxplot_005fdescription"><span class="category-def">Function: </span><span><strong class="def-name">boxplot_description</strong> <var class="def-var-arguments">(&hellip;)</var><a class="copiable-link" href='#index-boxplot_005fdescription'> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code">boxplot_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="histogram"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fhistogram"></a><dl class="first-deffn">
+<dt class="deffn" id="index-histogram"><span class="category-def">Function: </span><span><strong class="def-name">histogram</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">histogram</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">histogram</code> (<var class="var">list</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">histogram</code> (<var class="var">one_column_matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">histogram</code> (<var class="var">one_column_matrix</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">histogram</code> (<var class="var">one_row_matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">histogram</code> (<var class="var">one_row_matrix</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;)</var><a class="copiable-link" href='#index-histogram'> &para;</a></span></dt>
+<dd>
+<p>Constructs and displays a histogram from a data sample.
+Data must be stored as a list of numbers, or a matrix of one row or one column.
+</p>
+<p>Optional arguments:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">nclasses</code> (default, 10):
+the number of classes (also called bins) in the histogram,
+or a list of two numbers (the least and greatest values included in the histogram),
+or a list of three numbers (the least and greatest values included in the histogram, and the number of classes),
+or a set containing the endpoints of the class intervals,
+or a symbol specifying the name of one of three algorithms to automatically determine the number of classes:
+<code class="code">fd</code> (Ref. [1]), <code class="code">scott</code> (Ref. [2]), or <code class="code">sturges</code> (Ref. [3]).
+
+<p>A class interval excludes its left endpoint and includes its right endpoint,
+except for the first interval, which includes both the left and right endpoints.
+It is assumed that class intervals are contiguous.
+That is, the right endpoint of one interval is equal to the left endpoint of the next.
+</p>
+</li><li><code class="code">frequency</code> (default, <code class="code">absolute</code>): indicates the scale of the vertical axis.
+Possible values are:  <code class="code">absolute</code> (heights of bars add up to number of data),
+<code class="code">relative</code> (heights of bars add up to 1),
+<code class="code">percent</code> (heights of bars add up to 100),
+and <code class="code">density</code> (total area of histogram is 1).
+
+</li><li><code class="code">htics</code> (default, <code class="code">auto</code>): format of tic marks on the horizontal axis.
+Possible values are: <code class="code">auto</code> (tics are placed automatically),
+<code class="code">endpoints</code> (tics are placed at the divisions between classes),
+<code class="code">intervals</code> (classes are labeled with the corresponding intervals),
+or a list of labels, one for each class. 
+
+</li><li>All global <code class="code">draw</code> options, except <code class="code">xrange</code>, <code class="code">yrange</code>, 
+and <code class="code">xtics</code>, which are internally assigned by <code class="code">histogram</code>.
+If you want to set your own values for these options, make use of 
+<code class="code">histogram_description</code>.
+
+</li><li>The following local <a class="ref" href="maxima_52.html#draw_002dpkg">draw</a> options: <code class="code"><a class="ref" href="maxima_52.html#key">key</a></code>,
+<code class="code"><a class="ref" href="maxima_52.html#fill_005fcolor">fill_color</a></code>, <code class="code"><a class="ref" href="maxima_52.html#fill_005fdensity">fill_density</a></code>, and <code class="code"><a class="ref" href="maxima_52.html#line_005fwidth">line_width</a></code>.
+Note that the outlines of bars,
+as well as the interior of bars when <code class="code">fill_density</code> is nonzero,
+are drawn with <code class="code">fill_color</code>, not <code class="code">color</code>.
+
+</li></ul>
+
+<p><code class="code">histogram</code> honors the global option <code class="code">histogram_skyline</code>.
+When <code class="code">histogram_skyline</code> is <code class="code">true</code>,
+<code class="code">histogram</code> and <code class="code">histogram_description</code> construct &quot;skyline&quot; plots,
+which shows the outline of the histogram bars,
+instead of drawing all the vertical segments.
+Otherwise (the default), histograms are displayed with bars showing vertical segments.
+</p>
+<p>There is also a function <code class="code">wxhistogram</code> for creating embedded
+histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>See also <code class="code"><a class="ref" href="#continuous_005ffreq">continuous_freq</a></code>,
+which, like <code class="code">histogram</code>,
+counts data in intervals,
+but returns the counts instead of displaying a graphic representation.
+</p>
+<p>See also <code class="code"><a class="ref" href="#barsplot">barsplot</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>A simple histogram with eight classes:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) histogram (
+           s1,
+           nclasses     = 8,
+           title        = &quot;pi digits&quot;,
+           xlabel       = &quot;digits&quot;,
+           ylabel       = &quot;Absolute frequency&quot;,
+           fill_color   = grey,
+           fill_density = 0.6)$
+</pre></div>
+
+<p>Setting the limits of the histogram to -2 and 12, with 3 classes.
+Also, we introduce predefined tics:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) histogram (
+           s1,
+           nclasses     = [-2,12,3],
+           htics        = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;],
+           terminal     = png,
+           fill_color   = &quot;#23afa0&quot;,
+           fill_density = 0.6)$
+</pre></div>
+
+<p>Bounds for varying class widths.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) histogram (s1, nclasses = {0,3,6,7,11})$
+</pre></div>
+
+<p>Freedman-Diaconis formula for the number of classes.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) histogram(s1, nclasses=fd) $
+</pre></div>
+
+<p>References:
+</p>
+<p>[1] Freedman, D., and Diaconis, P. (1981) On the histogram as a density estimator: L_2 theory.
+Zeitschrift f&uuml;r Wahrscheinlichkeitstheorie und verwandte Gebiete 57, 453-476.
+</p>
+<p>[2] Scott, D. W. (1979) On optimal and data-based histograms. Biometrika 66, 605-610.
+</p>
+<p>[3] Sturges, H. A. (1926) The choice of a class interval. Journal of the American Statistical Association 21, 65-66.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="histogram_005fdescription"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fhistogram_005fdescription"></a><dl class="first-deffn">
+<dt class="deffn" id="index-histogram_005fdescription"><span class="category-def">Function: </span><span><strong class="def-name">histogram_description</strong> <var class="def-var-arguments">(&hellip;)</var><a class="copiable-link" href='#index-histogram_005fdescription'> &para;</a></span></dt>
+<dd>
+<p>Creates a graphic object which represents a histogram.
+Such an object is suitable for creating complex scenes together with other graphic objects,
+to be displayed by <code class="code">draw2d</code>.
+</p>
+<p><code class="code">histogram_description</code> takes the same arguments
+as the stand-alone function <code class="code">histogram</code>.
+See <code class="code"><a class="ref" href="#histogram">histogram</a></code> for more information.
+</p>
+<p>Example:
+</p>
+<p>We make use of <code class="code">histogram_description</code> for setting 
+<code class="code">xrange</code> and adding an explicit curve into the scene:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) ( load(&quot;distrib&quot;),
+        m: 14, s: 2,
+        s2: random_normal(m, s, 1000) ) $
+(%i3) draw2d(
+        grid   = true,
+        xrange = [5, 25],
+        histogram_description(
+          s2,
+          nclasses     = 9,
+          frequency    = density,
+          fill_density = 0.5),
+        explicit(pdf_normal(x,m,s), x, m - 3*s, m + 3* s))$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="histogram_005fskyline"></a><a class="anchor" id="Item_003a-descriptive_002fdefvr_002fhistogram_005fskyline"></a><dl class="first-defvr">
+<dt class="defvr" id="index-histogram_005fskyline"><span class="category-def">Option variable: </span><span><strong class="def-name">histogram_skyline</strong><a class="copiable-link" href='#index-histogram_005fskyline'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">histogram_skyline</code> is <code class="code">true</code>,
+<code class="code">histogram</code> and <code class="code">histogram_description</code> construct &quot;skyline&quot; plots,
+which shows the outline of the histogram bars,
+instead of drawing all the vertical segments.
+</p>
+<p>The outline is drawn with the current <code class="code">fill_color</code> (not the current <code class="code">color</code>).
+The interior of the histogram is filled with <code class="code">fill_color</code>,
+but only if <code class="code">fill_density</code> is nonzero.
+</p>
+<p>Otherwise, histograms are displayed with bars showing vertical segments.
+</p>
+<p>Example:
+</p>
+<p>Construct a skyline histogram,
+and an ordinary histogram for comparison,
+on the same plot.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;) $
+(%i2) L: read_list (file_search (&quot;pidigits.data&quot;)) $
+(%i3) histogram_skyline: true $
+(%i4) skyline_hist: histogram_description (L) $
+(%i5) histogram_skyline: false $
+(%i6) ordinary_hist: histogram_description (L) $
+(%i7) draw (gr2d (skyline_hist), gr2d (ordinary_hist)) $
+</pre></div>
+
+<p>Continuing the preceding example.
+Set display options for <code class="code">fill_color</code> and <code class="code">fill_density</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i8) histogram_skyline: true $
+(%i9) skyline_hist: histogram_description (L, fill_color = blue, fill_density = 0.2) $
+(%i10) histogram_skyline: false $
+(%i11) ordinary_hist: histogram_description (L, fill_color = blue, fill_density = 0.2) $
+(%i12) draw (gr2d (skyline_hist), gr2d (ordinary_hist)) $
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="piechart"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fpiechart"></a><dl class="first-deffn">
+<dt class="deffn" id="index-piechart"><span class="category-def">Function: </span><span><strong class="def-name">piechart</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">piechart</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">piechart</code> (<var class="var">list</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">piechart</code> (<var class="var">one_column_matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">piechart</code> (<var class="var">one_column_matrix</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">piechart</code> (<var class="var">one_row_matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">piechart</code> (<var class="var">one_row_matrix</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;)</var><a class="copiable-link" href='#index-piechart'> &para;</a></span></dt>
+<dd>
+<p>Similar to <code class="code">barsplot</code>, but plots sectors instead of rectangles.
+</p>
+<p>Available options are:
+</p>
+<ul class="itemize mark-bullet">
+<li><var class="var">sector_colors</var> (default, <code class="code">[]</code>): a list of colors for sectors.
+When there are more sectors than specified colors, the extra necessary colors 
+are chosen at random. See <code class="code">color</code> to learn more about them.
+
+</li><li><var class="var">pie_center</var> (default, <code class="code">[0,0]</code>): diagram&rsquo;s center.
+
+</li><li><var class="var">pie_radius</var> (default, <code class="code">1</code>): diagram&rsquo;s radius.
+
+</li><li>All global <code class="code">draw</code> options, except <code class="code">key</code>, which is 
+internally assigned by <code class="code">piechart</code>.
+If you want to set your own values for this option or want to build
+complex scenes, make use of <code class="code">piechart_description</code>.
+
+</li><li>The following local <code class="code">draw</code> options: <code class="code">key</code>, <code class="code">color</code>, 
+<code class="code">fill_density</code> and <code class="code">line_width</code>. See also
+<code class="code">ellipse</code>
+
+</li></ul>
+
+<p>There is also a function <code class="code">wxpiechart</code> for 
+creating embedded histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s1 : read_list (file_search (&quot;pidigits.data&quot;))$
+(%i3) piechart(
+        s1,
+        xrange  = [-1.1, 1.3],
+        yrange  = [-1.1, 1.1],
+        title   = &quot;Digit frequencies in pi&quot;)$
+</pre></div>
+
+<p>See also function <code class="code"><a class="ref" href="#barsplot">barsplot</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="piechart_005fdescription"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fpiechart_005fdescription"></a><dl class="first-deffn">
+<dt class="deffn" id="index-piechart_005fdescription"><span class="category-def">Function: </span><span><strong class="def-name">piechart_description</strong> <var class="def-var-arguments">(&hellip;)</var><a class="copiable-link" href='#index-piechart_005fdescription'> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code">piechart_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scatterplot"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fscatterplot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scatterplot"><span class="category-def">Function: </span><span><strong class="def-name">scatterplot</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">scatterplot</code> (<var class="var">list</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">scatterplot</code> (<var class="var">list</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">scatterplot</code> (<var class="var">matrix</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">scatterplot</code> (<var class="var">matrix</var>, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;)</var><a class="copiable-link" href='#index-scatterplot'> &para;</a></span></dt>
+<dd>
+<p>Plots scatter diagrams both for univariate (<var class="var">list</var>) and multivariate 
+(<var class="var">matrix</var>) samples.
+</p>
+<p>Available options are the same admitted by <code class="code">histogram</code>.
+</p>
+<p>There is also a function <code class="code">wxscatterplot</code> for 
+creating embedded histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Examples:
+</p>
+<p>Univariate scatter diagram from a simulated Gaussian sample. 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) load (&quot;distrib&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) scatterplot(
+        random_normal(0,1,200),
+        xaxis      = true,
+        point_size = 2,
+        dimensions = [600,150])$
+</pre></div></div>
+
+<p>Two dimensional scatter plot.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) scatterplot(
+       submatrix(s2, 1,2,3),
+       title      = &quot;Data from stations #4 and #5&quot;,
+       point_type = diamant,
+       point_size = 2,
+       color      = blue)$
+</pre></div></div>
+
+<p>Three dimensional scatter plot.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+(%i3) scatterplot(submatrix (s2, 1,2), nclasses=4)$
+</pre></div>
+
+<p>Five dimensional scatter plot, with five classes histograms.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) s2 : read_matrix (file_search (&quot;wind.data&quot;))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) scatterplot(
+        s2,
+        nclasses     = 5,
+        frequency    = relative,
+        fill_color   = blue,
+        fill_density = 0.3,
+        xtics        = 5)$
+</pre></div></div>
+
+<p>For plotting isolated or line-joined points in two and three dimensions,
+see <code class="code">points</code>. See also <code class="code"><a class="ref" href="#histogram">histogram</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scatterplot_005fdescription"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fscatterplot_005fdescription"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scatterplot_005fdescription"><span class="category-def">Function: </span><span><strong class="def-name">scatterplot_description</strong> <var class="def-var-arguments">(&hellip;)</var><a class="copiable-link" href='#index-scatterplot_005fdescription'> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code">scatterplot_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="starplot"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fstarplot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-starplot"><span class="category-def">Function: </span><span><strong class="def-name">starplot</strong> <var class="def-var-arguments">(<var class="var">data1</var>, <var class="var">data2</var>, &hellip;, <var class="var">option_1</var>, <var class="var">option_2</var>, &hellip;)</var><a class="copiable-link" href='#index-starplot'> &para;</a></span></dt>
+<dd>
+<p>Plots star diagrams for discrete statistical variables,
+both for one or multiple samples.
+</p>
+<p><var class="var">data</var> can be a list of outcomes representing one sample, or a 
+matrix of <var class="var">m</var> rows and <var class="var">n</var> columns, representing <var class="var">n</var> samples of size 
+<var class="var">m</var> each.
+</p>
+<p>Available options are:
+</p>
+<ul class="itemize mark-bullet">
+<li><var class="var">stars_colors</var> (default, <code class="code">[]</code>): a list of colors for multiple samples.
+When there are more samples than specified colors, the extra necessary colors 
+are chosen at random. See <code class="code">color</code> to learn more about them.
+
+</li><li><var class="var">frequency</var> (default, <code class="code">absolute</code>): indicates the scale of the
+radii. Possible values are:  <code class="code">absolute</code> and <code class="code">relative</code>.
+
+</li><li><var class="var">ordering</var> (default, <code class="code">orderlessp</code>): possible values are <code class="code">orderlessp</code> or <code class="code">ordergreatp</code>,
+indicating how statistical outcomes should be ordered.
+
+</li><li><var class="var">sample_keys</var> (default, <code class="code">[]</code>): a list with the strings to be used in the legend.
+When the list length is other than 0 or the number of samples, an error message is returned.
+
+
+</li><li><var class="var">star_center</var> (default, <code class="code">[0,0]</code>): diagram&rsquo;s center.
+
+</li><li><var class="var">star_radius</var> (default, <code class="code">1</code>): diagram&rsquo;s radius.
+
+</li><li>All global <code class="code">draw</code> options, except <code class="code">points_joined</code>, <code class="code">point_type</code>, 
+and <code class="code">key</code>, which are internally assigned by <code class="code">starplot</code>.
+If you want to set your own values for this options or want to build
+complex scenes, make use of <code class="code">starplot_description</code>.
+
+</li><li>The following local <code class="code">draw</code> option: <code class="code">line_width</code>.
+
+</li></ul>
+
+<p>There is also a function <code class="code">wxstarplot</code> for 
+creating embedded histograms in interfaces wxMaxima and iMaxima.
+</p>
+<p>Example:
+</p>
+<p>Plot based on absolute frequencies.
+Location and radius defined by the user. 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) l1: makelist(random(10),k,1,50)$
+(%i3) l2: makelist(random(10),k,1,200)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) starplot(
+        l1, l2,
+        stars_colors = [blue,red],
+        sample_keys = [&quot;1st sample&quot;, &quot;2nd sample&quot;],
+        star_center = [1,2],
+        star_radius = 4,
+        proportional_axes = xy,
+        line_width = 2 ) $ 
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="starplot_005fdescription"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fstarplot_005fdescription"></a><dl class="first-deffn">
+<dt class="deffn" id="index-starplot_005fdescription"><span class="category-def">Function: </span><span><strong class="def-name">starplot_description</strong> <var class="def-var-arguments">(&hellip;)</var><a class="copiable-link" href='#index-starplot_005fdescription'> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code">starplot_description</code> creates a graphic object
+suitable for creating complex scenes, together with other
+graphic objects. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="stemplot"></a><a class="anchor" id="Item_003a-descriptive_002fdeffn_002fstemplot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-stemplot"><span class="category-def">Function: </span><span><strong class="def-name">stemplot</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stemplot</code> (<var class="var">data</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stemplot</code> (<var class="var">data</var>, <var class="var">option</var>)</var><a class="copiable-link" href='#index-stemplot'> &para;</a></span></dt>
+<dd>
+<p>Plots stem and leaf diagrams.
+</p>
+<p>Unique available option is:
+</p>
+<ul class="itemize mark-bullet">
+<li><var class="var">leaf_unit</var> (default, <code class="code">1</code>): indicates the unit of the leaves; must be a
+power of 10.
+
+</li></ul>
+
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;descriptive&quot;)$
+(%i2) load(&quot;distrib&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) stemplot(
+        random_normal(15, 6, 100),
+        leaf_unit = 0.1);
+-5|4
+ 0|37
+ 1|7
+ 3|6
+ 4|4
+ 5|4
+ 6|57
+ 7|0149
+ 8|3
+ 9|1334588
+10|07888
+11|01144467789
+12|12566889
+13|24778
+14|047
+15|223458
+16|4
+17|11557
+18|000247
+19|4467799
+20|00
+21|1
+22|2335
+23|01457
+24|12356
+25|455
+27|79
+key: 6|3 =  6.3
+(%o3)                  done
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-descriptive">Package descriptive</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_50.html#diag_002dpkg" accesskey="n" rel="next">diag</a>, Previous: <a href="maxima_48.html#contrib_005fode_002dpkg" accesskey="p" rel="prev">contrib_ode</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

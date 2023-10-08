@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Combinatorics</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Combinatorics">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Combinatorics">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_202.html#combinatorics_002dpkg" rel="up" title="combinatorics-pkg">
+<link href="maxima_205.html#contrib_005fode_002dpkg" rel="next" title="contrib_ode-pkg">
+<link href="maxima_203.html#Package-combinatorics" rel="previous" title="Package combinatorics">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Combinatorics"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_203.html#Package-combinatorics" accesskey="p" rel="previous">Package combinatorics</a>, Up: <a href="maxima_202.html#combinatorics_002dpkg" accesskey="u" rel="up">combinatorics-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Combinatorics-1"></a>
+<h3 class="section">48.2 Functions and Variables for Combinatorics</h3>
+
+<a name="apply_005fcycles"></a><a name="Item_003a-combinatorics_002fdeffn_002fapply_005fcycles"></a><dl>
+<dt><a name="index-apply_005fcycles"></a>Function: <strong>apply_cycles</strong> <em>(<var>cl</var>,<var>l</var>)</em></dt>
+<dd>
+<p>Permutes the list or set <var>l</var> applying to it the list of cycles
+<var>cl</var>. The cycles at the end of the list are applied first and the
+first cycle in the list <var>cl</var> is the last one to be applied.
+</p>
+<p>See also <code><a href="#permute">permute</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) lis1:[a,b*c^2,4,z,x/y,1/2,ff23(x),0];
+                        2        x  1
+(%o2)            [a, b c , 4, z, -, -, ff23(x), 0]
+                                 y  2
+</pre><pre class="example">(%i3) apply_cycles ([[1, 6], [2, 6, 5, 7]], lis1);
+                  x  1                       2
+(%o3)            [-, -, 4, z, ff23(x), a, b c , 0]
+                  y  2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="cyclep"></a><a name="Item_003a-combinatorics_002fdeffn_002fcyclep"></a><dl>
+<dt><a name="index-cyclep"></a>Function: <strong>cyclep</strong> <em>(<var>c</var>, <var>n</var>)</em></dt>
+<dd>
+<p>Returns true if <var>c</var> is a valid cycle of order <var>n</var> namely, a list
+of non-repeated positive integers less or equal to <var>n</var>. Otherwise,
+it returns false.
+</p>
+<p>See also <code><a href="#permp">permp</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) cyclep ([-2,3,4], 5);
+(%o2)                          false
+</pre><pre class="example">(%i3) cyclep ([2,3,4,2], 5);
+(%o3)                          false
+</pre><pre class="example">(%i4) cyclep ([6,3,4], 5);
+(%o4)                          false
+</pre><pre class="example">(%i5) cyclep ([6,3,4], 6);
+(%o5)                          true
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005fcycles"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005fcycles"></a><dl>
+<dt><a name="index-perm_005fcycles"></a>Function: <strong>perm_cycles</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Returns permutation <var>p</var> as a product of cycles. The cycles are
+written in a canonical form, in which the lowest index in the cycle is
+placed in the first position.
+</p>
+<p>See also <code><a href="#perm_005fdecomp">perm_decomp</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_cycles ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2)                 [[1, 4], [2, 6, 5, 7]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005fdecomp"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005fdecomp"></a><dl>
+<dt><a name="index-perm_005fdecomp"></a>Function: <strong>perm_decomp</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Returns the minimum set of adjacent transpositions whose product equals
+the given permutation <var>p</var>.
+</p>
+<p>See also <code><a href="#perm_005fcycles">perm_cycles</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_decomp ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2) [[6, 7], [5, 6], [6, 7], [3, 4], [4, 5], [2, 3], [3, 4], 
+                            [4, 5], [5, 6], [1, 2], [2, 3], [3, 4]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005finverse"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005finverse"></a><dl>
+<dt><a name="index-perm_005finverse"></a>Function: <strong>perm_inverse</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Returns the inverse of a permutation of <var>p</var>, namely, a permutation
+<var>q</var> such that the products <var>pq</var> and <var>qp</var> are equal to the
+identity permutation: [1, 2, 3, &hellip;, <var>n</var>], where <var>n</var> is the
+length of <var>p</var>.
+</p>
+<p>See also <code><a href="#permult">permult</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_inverse ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2)                [4, 7, 3, 1, 6, 2, 5, 8]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005flength"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005flength"></a><dl>
+<dt><a name="index-perm_005flength"></a>Function: <strong>perm_length</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Determines the minimum number of adjacent transpositions necessary to
+write permutation <var>p</var> as a product of adjacent transpositions. An
+adjacent transposition is a cycle with only two numbers, which are
+consecutive integers.
+</p>
+<p>See also <code><a href="#perm_005fdecomp">perm_decomp</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_length ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2)                           12
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005flex_005fnext"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005flex_005fnext"></a><dl>
+<dt><a name="index-perm_005flex_005fnext"></a>Function: <strong>perm_lex_next</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Returns the permutation that comes after the given permutation <var>p</var>,
+in the sequence of permutations in lexicographic order.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_lex_next ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2)                [4, 6, 3, 1, 7, 5, 8, 2]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005flex_005frank"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005flex_005frank"></a><dl>
+<dt><a name="index-perm_005flex_005frank"></a>Function: <strong>perm_lex_rank</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Finds the position of permutation <var>p</var>, an integer from 1 to the
+degree <var>n</var> of the permutation, in the sequence of permutations in
+lexicographic order.
+</p>
+<p>See also <code><a href="#perm_005flex_005funrank">perm_lex_unrank</a></code> and <code><a href="#perms_005flex">perms_lex</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_lex_rank ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2)                          18255
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005flex_005funrank"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005flex_005funrank"></a><dl>
+<dt><a name="index-perm_005flex_005funrank"></a>Function: <strong>perm_lex_unrank</strong> <em>(<var>n</var>, <var>i</var>)</em></dt>
+<dd>
+<p>Returns the <em>n</em>-degree permutation at position <var>i</var> (from 1 to
+<em>n</em>!) in the lexicographic ordering of permutations.
+</p>
+<p>See also <code><a href="#perm_005flex_005frank">perm_lex_rank</a></code> and <code><a href="#perms_005flex">perms_lex</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_lex_unrank (8, 18255);
+(%o2)                [4, 6, 3, 1, 7, 5, 2, 8]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005fnext"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005fnext"></a><dl>
+<dt><a name="index-perm_005fnext"></a>Function: <strong>perm_next</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Returns the permutation that comes after the given permutation <var>p</var>,
+in the sequence of permutations in Trotter-Johnson order.
+</p>
+<p>See also <code><a href="#perms">perms</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_next ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2)                [4, 6, 3, 1, 7, 5, 8, 2]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005fparity"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005fparity"></a><dl>
+<dt><a name="index-perm_005fparity"></a>Function: <strong>perm_parity</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Finds the parity of permutation <var>p</var>: 0 if the minimum number of
+adjacent transpositions necessary to write permutation <var>p</var> as a
+product of adjacent transpositions is even, or 1 if that number is odd.
+</p>
+<p>See also <code><a href="#perm_005fdecomp">perm_decomp</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_parity ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2)                            0
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005frank"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005frank"></a><dl>
+<dt><a name="index-perm_005frank"></a>Function: <strong>perm_rank</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Finds the position of permutation <var>p</var>, an integer from 1 to the
+degree <var>n</var> of the permutation, in the sequence of permutations in
+Trotter-Johnson order.
+</p>
+<p>See also <code><a href="#perm_005funrank">perm_unrank</a></code> and <code><a href="#perms">perms</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_rank ([4, 6, 3, 1, 7, 5, 2, 8]);
+(%o2)                          19729
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005fundecomp"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005fundecomp"></a><dl>
+<dt><a name="index-perm_005fundecomp"></a>Function: <strong>perm_undecomp</strong> <em>(<var>cl</var>, <var>n</var>)</em></dt>
+<dd>
+<p>Converts the list of cycles <var>cl</var> of degree <var>n</var> into an <var>n</var>
+degree permutation, equal to their product.
+</p>
+<p>See also <code><a href="#perm_005fdecomp">perm_decomp</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_undecomp ([[1,6],[2,6,5,7]], 8);
+(%o2)                [5, 6, 3, 4, 7, 1, 2, 8]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perm_005funrank"></a><a name="Item_003a-combinatorics_002fdeffn_002fperm_005funrank"></a><dl>
+<dt><a name="index-perm_005funrank"></a>Function: <strong>perm_unrank</strong> <em>(<var>n</var>, <var>i</var>)</em></dt>
+<dd>
+<p>Returns the <em>n</em>-degree permutation at position <var>i</var> (from 1 to
+<em>n</em>!) in the Trotter-Johnson ordering of permutations.
+</p>
+<p>See also <code><a href="#perm_005frank">perm_rank</a></code> and <code><a href="#perms">perms</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perm_unrank (8, 19729);
+(%o2)                [4, 6, 3, 1, 7, 5, 2, 8]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="permp"></a><a name="Item_003a-combinatorics_002fdeffn_002fpermp"></a><dl>
+<dt><a name="index-permp"></a>Function: <strong>permp</strong> <em>(<var>p</var>)</em></dt>
+<dd>
+<p>Returns true if <var>p</var> is a valid permutation namely, a list of length
+<var>n</var>, whose elements are all the positive integers from 1 to <var>n</var>,
+without repetitions. Otherwise, it returns false.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) permp ([2,0,3,1]);
+(%o2)                          false
+</pre><pre class="example">(%i3) permp ([2,1,4,3]);
+(%o3)                          true
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perms"></a><a name="Item_003a-combinatorics_002fdeffn_002fperms"></a><dl>
+<dt><a name="index-perms"></a>Function: <strong>perms</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>perms</tt> (<var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>perms</tt> (<var>n</var>, <var>i</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>perms</tt> (<var>n</var>, <var>i</var>, <var>j</var>)</em></dt>
+<dd>
+<p><code>perms(<var>n</var>)</code> returns a list of all
+<em>n</em>-degree permutations in the so-called Trotter-Johnson order.
+</p>
+<p><code>perms(<var>n</var>, <var>i</var>)</code> returns the <em>n</em>-degree
+permutation which is at the <em>i</em>th position (from 1 to <em>n</em>!) in
+the Trotter-Johnson ordering of the permutations.
+</p>
+<p><code>perms(<var>n</var>, <var>i</var>, <var>j</var>)</code> returns a list of the <em>n</em>-degree
+permutations between positions <var>i</var> and <var>j</var> in the Trotter-Johnson
+ordering of the permutations.
+</p>
+<p>The sequence of permutations in Trotter-Johnson order starts with the
+identity permutation and each consecutive permutation can be obtained
+from the previous one a by single adjacent transposition.
+</p>
+<p>See also <code><a href="#perm_005fnext">perm_next</a></code>, <code><a href="#perm_005frank">perm_rank</a></code> and <code><a href="#perm_005funrank">perm_unrank</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perms (4);
+(%o2) [[1, 2, 3, 4], [1, 2, 4, 3], [1, 4, 2, 3], [4, 1, 2, 3], 
+[4, 1, 3, 2], [1, 4, 3, 2], [1, 3, 4, 2], [1, 3, 2, 4], 
+[3, 1, 2, 4], [3, 1, 4, 2], [3, 4, 1, 2], [4, 3, 1, 2], 
+[4, 3, 2, 1], [3, 4, 2, 1], [3, 2, 4, 1], [3, 2, 1, 4], 
+[2, 3, 1, 4], [2, 3, 4, 1], [2, 4, 3, 1], [4, 2, 3, 1], 
+[4, 2, 1, 3], [2, 4, 1, 3], [2, 1, 4, 3], [2, 1, 3, 4]]
+</pre><pre class="example">(%i3) perms (4, 12);
+(%o3)                     [[4, 3, 1, 2]]
+</pre><pre class="example">(%i4) perms (4, 12, 14);
+(%o4)       [[4, 3, 1, 2], [4, 3, 2, 1], [3, 4, 2, 1]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="perms_005flex"></a><a name="Item_003a-combinatorics_002fdeffn_002fperms_005flex"></a><dl>
+<dt><a name="index-perms_005flex"></a>Function: <strong>perms_lex</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>perms_lex</tt> (<var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>perms_lex</tt> (<var>n</var>, <var>i</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>perms_lex</tt> (<var>n</var>, <var>i</var>, <var>j</var>)</em></dt>
+<dd>
+<p><code>perms_lex(<var>n</var>)</code> returns a list of all
+<em>n</em>-degree permutations in the so-called lexicographic order.
+</p>
+<p><code>perms_lex(<var>n</var>, <var>i</var>)</code> returns the <em>n</em>-degree
+permutation which is at the <em>i</em>th position (from 1 to <em>n</em>!) in
+the lexicographic ordering of the permutations.
+</p>
+<p><code>perms_lex(<var>n</var>, <var>i</var>, <var>j</var>)</code> returns a list of the <em>n</em>-degree
+permutations between positions <var>i</var> and <var>j</var> in the lexicographic
+ordering of the permutations.
+</p>
+<p>The sequence of permutations in lexicographic order starts with all the
+permutations with the lowest index, 1, followed by all permutations
+starting with the following index, 2, and so on. The permutations
+starting by an index <em>i</em> are the permutations of the first <em>n</em>
+integers different from <em>i</em> and they are also placed in
+lexicographic order, where the permutations with the lowest of those
+integers are placed first and so on.
+</p>
+<p>See also <code><a href="#perm_005flex_005fnext">perm_lex_next</a></code>, <code><a href="#perm_005flex_005frank">perm_lex_rank</a></code> and
+<code><a href="#perm_005flex_005funrank">perm_lex_unrank</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) perms_lex (4);
+(%o2) [[1, 2, 3, 4], [1, 2, 4, 3], [1, 3, 2, 4], [1, 3, 4, 2], 
+[1, 4, 2, 3], [1, 4, 3, 2], [2, 1, 3, 4], [2, 1, 4, 3], 
+[2, 3, 1, 4], [2, 3, 4, 1], [2, 4, 1, 3], [2, 4, 3, 1], 
+[3, 1, 2, 4], [3, 1, 4, 2], [3, 2, 1, 4], [3, 2, 4, 1], 
+[3, 4, 1, 2], [3, 4, 2, 1], [4, 1, 2, 3], [4, 1, 3, 2], 
+[4, 2, 1, 3], [4, 2, 3, 1], [4, 3, 1, 2], [4, 3, 2, 1]]
+</pre><pre class="example">(%i3) perms_lex (4, 12);
+(%o3)                     [[2, 4, 3, 1]]
+</pre><pre class="example">(%i4) perms_lex (4, 12, 14);
+(%o4)       [[2, 4, 3, 1], [3, 1, 2, 4], [3, 1, 4, 2]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="permult"></a><a name="Item_003a-combinatorics_002fdeffn_002fpermult"></a><dl>
+<dt><a name="index-permult"></a>Function: <strong>permult</strong> <em>(<var>p_1</var>, &hellip;, <var>p_m</var>)</em></dt>
+<dd>
+<p>Returns the product of two or more permutations <var>p_1</var>, &hellip;, <var>p_m</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) permult ([2,3,1], [3,1,2], [2,1,3]);
+(%o2)                        [2, 1, 3]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="permute"></a><a name="Item_003a-combinatorics_002fdeffn_002fpermute"></a><dl>
+<dt><a name="index-permute"></a>Function: <strong>permute</strong> <em>(<var>p</var>, <var>l</var>)</em></dt>
+<dd>
+<p>Applies the permutation <var>p</var> to the elements of the list (or set)
+<var>l</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) lis1: [a,b*c^2,4,z,x/y,1/2,ff23(x),0];
+                        2        x  1
+(%o2)            [a, b c , 4, z, -, -, ff23(x), 0]
+                                 y  2
+</pre><pre class="example">(%i3) permute ([4, 6, 3, 1, 7, 5, 2, 8], lis1);
+                     1                 x     2
+(%o3)            [z, -, 4, a, ff23(x), -, b c , 0]
+                     2                 y
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+<a name="random_005fperm"></a><a name="Item_003a-combinatorics_002fdeffn_002frandom_005fperm"></a><dl>
+<dt><a name="index-random_005fperm"></a>Function: <strong>random_perm</strong> <em>(<var>n</var>)</em></dt>
+<dd>
+<p>Returns a random permutation of degree <var>n</var>.
+</p>
+<p>See also <code><a href="maxima_165.html#random_005fpermutation">random_permutation</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;combinatorics&quot;)$
+</pre><pre class="example">(%i2) random_perm (7);
+(%o2)                  [6, 3, 4, 7, 5, 1, 2]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-combinatorics">Package combinatorics</a>
+&middot;</div>
+</dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_203.html#Package-combinatorics" accesskey="p" rel="previous">Package combinatorics</a>, Up: <a href="maxima_202.html#combinatorics_002dpkg" accesskey="u" rel="up">combinatorics-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

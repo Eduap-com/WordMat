@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>File Input and Output (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="File Input and Output (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="File Input and Output (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_13.html#Polynomials" rel="next" title="Polynomials">
+<link href="maxima_11.html#Plotting" rel="prev" title="Plotting">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+p.flushleft-paragraph {text-align:left}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="File-Input-and-Output">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_13.html#Polynomials" accesskey="n" rel="next">Polynomials</a>, Previous: <a href="maxima_11.html#Plotting" accesskey="p" rel="prev">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="File-Input-and-Output-1">13 File Input and Output</h2>
+
+<a class="anchor" id="Item_003a-Input_002fnode_002fComments"></a><ul class="mini-toc">
+<li><a href="#Comments" accesskey="1">Comments</a></li>
+<li><a href="#Files" accesskey="2">Files</a></li>
+<li><a href="#Functions-and-Variables-for-File-Input-and-Output" accesskey="3">Functions and Variables for File Input and Output</a></li>
+<li><a href="#Functions-and-Variables-for-TeX-Output" accesskey="4">Functions and Variables for TeX Output</a></li>
+<li><a href="#Functions-and-Variables-for-Fortran-Output" accesskey="5">Functions and Variables for Fortran Output</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Comments">
+<div class="nav-panel">
+<p>
+Next: <a href="#Files" accesskey="n" rel="next">Files</a>, Previous: <a href="#File-Input-and-Output" accesskey="p" rel="prev">File Input and Output</a>, Up: <a href="#File-Input-and-Output" accesskey="u" rel="up">File Input and Output</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Comments-1">13.1 Comments</h3>
+
+<p>A comment in Maxima input is any text between <code class="code">/*</code> and <code class="code">*/</code>.
+</p>
+<p>The Maxima parser treats a comment as whitespace for the purpose of finding
+tokens in the input stream; a token always ends at a comment.  An input such as
+<code class="code">a/* foo */b</code> contains two tokens, <code class="code">a</code> and <code class="code">b</code>,
+and not a single token <code class="code">ab</code>.  Comments are otherwise ignored by Maxima;
+neither the content nor the location of comments is stored in parsed input
+expressions.
+</p>
+<p>Comments can be nested to arbitrary depth.  The <code class="code">/*</code> and <code class="code">*/</code>
+delimiters form matching pairs.  There must be the same number of <code class="code">/*</code>
+as there are <code class="code">*/</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) /* aa is a variable of interest */  aa : 1234;
+(%o1)                         1234
+(%i2) /* Value of bb depends on aa */  bb : aa^2;
+(%o2)                        1522756
+(%i3) /* User-defined infix operator */  infix (&quot;b&quot;);
+(%o3)                           b
+(%i4) /* Parses same as a b c, not abc */  a/* foo */b/* bar */c;
+(%o4)                         a b c
+(%i5) /* Comments /* can be nested /* to any depth */ */ */  1 + xyz;
+(%o5)                        xyz + 1
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Syntax">Syntax</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Input_002fnode_002fFiles"></a><hr>
+</div>
+<div class="section-level-extent" id="Files">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-File-Input-and-Output" accesskey="n" rel="next">Functions and Variables for File Input and Output</a>, Previous: <a href="#Comments" accesskey="p" rel="prev">Comments</a>, Up: <a href="#File-Input-and-Output" accesskey="u" rel="up">File Input and Output</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Files-1">13.2 Files</h3>
+
+<p>A file is simply an area on a particular storage device which contains data 
+or text.  Files on the disks are figuratively grouped into &quot;directories&quot;.
+A directory is just a list of files.  Commands which deal with files are:
+</p>
+<pre class="verbatim">   appendfile           batch                 batchload
+   closefile            file_output_append    filename_merge
+   file_search          file_search_maxima    file_search_lisp
+   file_search_demo     file_search_usage     file_search_tests
+   file_type            file_type_lisp        file_type_maxima
+   load                 load_pathname         loadfile
+   loadprint            pathname_directory    pathname_name
+   pathname_type        printfile             save
+   stringout            with_stdout           writefile
+</pre>
+<p>When a file name is passed to functions like <code class="code"><a class="ref" href="maxima_11.html#plot2d">plot2d</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#save">save</a></code>, or <code class="code"><a class="ref" href="#writefile">writefile</a></code> and the file name does not include a path,
+Maxima stores the file in the current working directory.  The current working
+directory depends on the system like Windows or Linux and on the installation.
+</p>
+<a class="anchor" id="Item_003a-Input_002fnode_002fFunctions-and-Variables-for-File-Input-and-Output"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-File-Input-and-Output">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-TeX-Output" accesskey="n" rel="next">Functions and Variables for TeX Output</a>, Previous: <a href="#Files" accesskey="p" rel="prev">Files</a>, Up: <a href="#File-Input-and-Output" accesskey="u" rel="up">File Input and Output</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-File-Input-and-Output-1">13.3 Functions and Variables for File Input and Output</h3>
+
+<a class="anchor" id="appendfile"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fappendfile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-appendfile"><span class="category-def">Function: </span><span><strong class="def-name">appendfile</strong> <var class="def-var-arguments">(<var class="var">filename</var>)</var><a class="copiable-link" href='#index-appendfile'> &para;</a></span></dt>
+<dd>
+<p>Appends a console transcript to <var class="var">filename</var>.  <code class="code">appendfile</code> is the same
+as <code class="code"><a class="ref" href="#writefile">writefile</a></code>, except that the transcript file, if it exists, is
+always appended.
+</p>
+<p><code class="code"><a class="ref" href="#closefile">closefile</a></code> closes the transcript file opened by <code class="code">appendfile</code> or
+<code class="code">writefile</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="batch"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fbatch"></a><dl class="first-deffn">
+<dt class="deffn" id="index-batch"><span class="category-def">Function: </span><span><strong class="def-name">batch</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">batch</code> (<var class="var">filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">batch</code> (<var class="var">filename</var>, <var class="var">option</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">batch</code> (<var class="var">S</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">batch</code> (<var class="var">S</var>, <var class="var">option</var>)</var><a class="copiable-link" href='#index-batch'> &para;</a></span></dt>
+<dd>
+<p><code class="code">batch(<var class="var">filename</var>)</code> reads Maxima expressions from <var class="var">filename</var> and 
+evaluates them.  <code class="code">batch</code> searches for <var class="var">filename</var> in the list 
+<code class="code"><a class="ref" href="#file_005fsearch_005fmaxima">file_search_maxima</a></code>.  See also <code class="code"><a class="ref" href="#file_005fsearch">file_search</a></code>.
+</p>
+<p><code class="code">batch(<var class="var">S</var>)</code> reads Maxima expressions from the input stream <var class="var">S</var>
+as created by <code class="code"><a class="ref" href="maxima_90.html#openr">openr</a></code>.
+The behavior of <code class="code">batch</code> in this case is the same as if the input
+were a file name, and in the remainder of this description,
+what is said about input files applies to input streams as well,
+except that the comments about searching for files do not apply to streams.
+</p>
+<p><code class="code">batch(<var class="var">filename</var>, <code class="code">demo</code>)</code> is like <code class="code">demo(<var class="var">filename</var>)</code>.
+In this case <code class="code">batch</code> searches for <var class="var">filename</var> in the list
+<code class="code"><a class="ref" href="#file_005fsearch_005fdemo">file_search_demo</a></code>.  See <code class="code"><a class="ref" href="maxima_2.html#demo">demo</a></code>.
+</p>
+<p><code class="code">batch(<var class="var">filename</var>, <code class="code">test</code>)</code> is like <code class="code"><a class="ref" href="maxima_1.html#run_005ftestsuite">run_testsuite</a></code> with the
+option <code class="code">display_all=true</code>.  For this case <code class="code">batch</code> searches 
+<var class="var">filename</var> in the list <code class="code">file_search_maxima</code> and not in the list
+<code class="code"><a class="ref" href="#file_005fsearch_005ftests">file_search_tests</a></code> like <code class="code">run_testsuite</code>.  Furthermore,
+<code class="code">run_testsuite</code> runs tests which are in the list
+<code class="code"><a class="ref" href="maxima_1.html#testsuite_005ffiles">testsuite_files</a></code>.  With <code class="code">batch</code> it is possible to run any file in
+a test mode, which can be found in the list <code class="code">file_search_maxima</code>.  This is
+useful, when writing a test file.
+</p>
+<p><var class="var">filename</var> comprises a sequence of Maxima expressions, each terminated with
+<code class="code">;</code> or <code class="code">$</code>.  The special variable <code class="code"><a class="ref" href="maxima_3.html#g_t_0025">%</a></code> and the function
+<code class="code"><a class="ref" href="maxima_3.html#g_t_0025th">%th</a></code> refer to previous results within the file.  The file may include
+<code class="code">:lisp</code> constructs.  Spaces, tabs, and newlines in the file are ignored.
+A suitable input file may be created by a text editor or by the
+<code class="code"><a class="ref" href="#stringout">stringout</a></code> function.
+</p>
+<p><code class="code">batch</code> reads each input expression from <var class="var">filename</var>, displays the input
+to the console, computes the corresponding output expression, and displays the
+output expression.  Input labels are assigned to the input expressions and
+output labels are assigned to the output expressions.  <code class="code">batch</code> evaluates
+every input expression in the file unless there is an error.  If user input is
+requested (by <code class="code"><a class="ref" href="maxima_10.html#asksign">asksign</a></code> or <code class="code"><a class="ref" href="maxima_10.html#askinteger">askinteger</a></code>, for example) <code class="code">batch</code>
+pauses to collect the requisite input and then continue.
+</p>
+<p>It may be possible to halt <code class="code">batch</code> by typing <code class="code">control-C</code> at the
+console.  The effect of <code class="code">control-C</code> depends on the underlying Lisp
+implementation.
+</p>
+<p><code class="code">batch</code> has several uses, such as to provide a reservoir for working
+command lines, to give error-free demonstrations, or to help organize one&rsquo;s
+thinking in solving complex problems.
+</p>
+<p><code class="code">batch</code> evaluates its arguments.
+</p>
+<p>When called with no second argument or with the option <code class="code">demo</code>,
+<code class="code">batch</code> returns the path of <var class="var">filename</var>,
+if the argument is a file name,
+or the path of the file for which the input stream was opened,
+if the argument is a file input stream.
+If the argument is a string input stream,
+a representation of the input stream is returned.
+</p>
+<p>When called with the option <code class="code">test</code>, the return value
+is a an empty list <code class="code">[]</code> or a list with <var class="var">filename</var> and the numbers of
+the tests which have failed.
+</p>
+<p>See also <code class="code"><a class="ref" href="#load">load</a></code>, <code class="code"><a class="ref" href="#batchload">batchload</a></code>, and <code class="code"><a class="ref" href="maxima_2.html#demo">demo</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Session-management">Session management</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="batchload"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fbatchload"></a><dl class="first-deffn">
+<dt class="deffn" id="index-batchload"><span class="category-def">Function: </span><span><strong class="def-name">batchload</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">batchload</code> (<var class="var">filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">batchload</code> (<var class="var">S</var>)</var><a class="copiable-link" href='#index-batchload'> &para;</a></span></dt>
+<dd><p>Reads Maxima expressions from input file <var class="var">filename</var> or input stream <var class="var">S</var>
+and evaluates them,
+without displaying the input or output expressions and without assigning labels to
+output expressions.  Printed output (such as produced by <code class="code"><a class="ref" href="maxima_3.html#print">print</a></code> or
+<code class="code"><a class="ref" href="maxima_2.html#describe">describe</a></code>)) is displayed, however.
+</p>
+<p>The special variable <code class="code"><a class="ref" href="maxima_3.html#g_t_0025">%</a></code> and the function <code class="code"><a class="ref" href="maxima_3.html#g_t_0025th">%th</a></code> refer to previous
+results from the interactive interpreter, not results within the file.
+The file cannot include <code class="code">:lisp</code> constructs.
+</p>
+<p><code class="code">batchload</code> evaluates its argument.
+</p>
+<p><code class="code">batchload</code> returns the path of <var class="var">filename</var>,
+if the argument is a file name,
+or the path of the file for which the input stream was opened,
+if the argument is a file input stream.
+If the argument is a string input stream,
+a representation of the input stream is returned.
+</p>
+<p>See also <code class="code"><a class="ref" href="#batch">batch</a></code>, and <code class="code"><a class="ref" href="#load">load</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Session-management">Session management</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="closefile"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fclosefile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-closefile"><span class="category-def">Function: </span><span><strong class="def-name">closefile</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-closefile'> &para;</a></span></dt>
+<dd>
+<p>Closes the transcript file opened by <code class="code"><a class="ref" href="#writefile">writefile</a></code> or <code class="code"><a class="ref" href="#appendfile">appendfile</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="file_005foutput_005fappend"></a><a class="anchor" id="Item_003a-Input_002fdefvr_002ffile_005foutput_005fappend"></a><dl class="first-defvr">
+<dt class="defvr" id="index-file_005foutput_005fappend"><span class="category-def">Option variable: </span><span><strong class="def-name">file_output_append</strong><a class="copiable-link" href='#index-file_005foutput_005fappend'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p><code class="code">file_output_append</code> governs whether file output functions append or
+truncate their output file.  When <code class="code">file_output_append</code> is <code class="code">true</code>, such
+functions append to their output file.  Otherwise, the output file is truncated.
+</p>
+<p><code class="code"><a class="ref" href="#save">save</a></code>, <code class="code"><a class="ref" href="#stringout">stringout</a></code>, and <code class="code"><a class="ref" href="#with_005fstdout">with_stdout</a></code> respect
+<code class="code">file_output_append</code>.  Other functions which write output files do not
+respect <code class="code">file_output_append</code>.  In particular, plotting and translation
+functions always truncate their output file, and <code class="code"><a class="ref" href="#tex">tex</a></code> and
+<code class="code"><a class="ref" href="#appendfile">appendfile</a></code> always append.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="filename_005fmerge"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002ffilename_005fmerge"></a><dl class="first-deffn">
+<dt class="deffn" id="index-filename_005fmerge"><span class="category-def">Function: </span><span><strong class="def-name">filename_merge</strong> <var class="def-var-arguments">(<var class="var">path</var>, <var class="var">filename</var>)</var><a class="copiable-link" href='#index-filename_005fmerge'> &para;</a></span></dt>
+<dd>
+<p>Constructs a modified path from <var class="var">path</var> and <var class="var">filename</var>.  If the final
+component of <var class="var">path</var> is of the form <code class="code">###.<var class="var">something</var></code>, the component
+is replaced with <code class="code"><var class="var">filename</var>.<var class="var">something</var></code>.  Otherwise, the final
+component is simply replaced by <var class="var">filename</var>.
+</p>
+<p>The result is a Lisp pathname object.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="file_005fsearch"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002ffile_005fsearch"></a><dl class="first-deffn">
+<dt class="deffn" id="index-file_005fsearch"><span class="category-def">Function: </span><span><strong class="def-name">file_search</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">file_search</code> (<var class="var">filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">file_search</code> (<var class="var">filename</var>, <var class="var">pathlist</var>)</var><a class="copiable-link" href='#index-file_005fsearch'> &para;</a></span></dt>
+<dd>
+<p><code class="code">file_search</code> searches for the file <var class="var">filename</var> and returns the path to
+the file (as a string) if it can be found; otherwise <code class="code">file_search</code> returns
+<code class="code">false</code>.  <code class="code">file_search (<var class="var">filename</var>)</code> searches in the default
+search directories, which are specified by the
+<code class="code"><a class="ref" href="#file_005fsearch_005fmaxima">file_search_maxima</a></code>, <code class="code"><a class="ref" href="#file_005fsearch_005flisp">file_search_lisp</a></code>, and
+<code class="code"><a class="ref" href="#file_005fsearch_005fdemo">file_search_demo</a></code> variables.
+</p>
+<p><code class="code">file_search</code> first checks if the actual name passed exists,
+before attempting to match it to &ldquo;wildcard&rdquo; file search patterns.
+See <code class="code"><a class="ref" href="#file_005fsearch_005fmaxima">file_search_maxima</a></code> concerning file search patterns.
+</p>
+<p>The argument <var class="var">filename</var> can be a path and file name, or just a file name,
+or, if a file search directory includes a file search pattern, just the base of
+the file name (without an extension).  For example,
+</p>
+<div class="example">
+<pre class="example-preformatted">file_search (&quot;/home/wfs/special/zeta.mac&quot;);
+file_search (&quot;zeta.mac&quot;);
+file_search (&quot;zeta&quot;);
+</pre></div>
+
+<p>all find the same file, assuming the file exists and 
+<code class="code">/home/wfs/special/###.mac</code> is in <code class="code">file_search_maxima</code>.
+</p>
+<p><code class="code">file_search (<var class="var">filename</var>, <var class="var">pathlist</var>)</code> searches only in the
+directories specified by <var class="var">pathlist</var>, which is a list of strings.  The
+argument <var class="var">pathlist</var> supersedes the default search directories, so if the
+path list is given, <code class="code">file_search</code> searches only the ones specified, and not
+any of the default search directories.  Even if there is only one directory in
+<var class="var">pathlist</var>, it must still be given as an one-element list.
+</p>
+<p>The user may modify the default search directories.
+See <code class="code"><a class="ref" href="#file_005fsearch_005fmaxima">file_search_maxima</a></code>.
+</p>
+<p><code class="code">file_search</code> is invoked by <code class="code"><a class="ref" href="#load">load</a></code> with <code class="code">file_search_maxima</code> and
+<code class="code"><a class="ref" href="#file_005fsearch_005flisp">file_search_lisp</a></code> as the search directories.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="file_005fsearch_005fmaxima"></a><a class="anchor" id="file_005fsearch_005flisp"></a><a class="anchor" id="file_005fsearch_005fdemo"></a><a class="anchor" id="file_005fsearch_005fusage"></a><a class="anchor" id="file_005fsearch_005ftests"></a><a class="anchor" id="Item_003a-Input_002fdefvr_002ffile_005fsearch_005fmaxima"></a><dl class="first-defvr">
+<dt class="defvr" id="index-file_005fsearch_005fmaxima"><span class="category-def">Option variable: </span><span><strong class="def-name">file_search_maxima</strong><a class="copiable-link" href='#index-file_005fsearch_005fmaxima'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Input_002fdefvr_002ffile_005fsearch_005flisp"></a></dd><dt class="defvrx def-cmd-defvr" id="index-file_005fsearch_005flisp"><span class="category-def">Option variable: </span><span><strong class="def-name">file_search_lisp</strong><a class="copiable-link" href='#index-file_005fsearch_005flisp'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Input_002fdefvr_002ffile_005fsearch_005fdemo"></a></dd><dt class="defvrx def-cmd-defvr" id="index-file_005fsearch_005fdemo"><span class="category-def">Option variable: </span><span><strong class="def-name">file_search_demo</strong><a class="copiable-link" href='#index-file_005fsearch_005fdemo'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Input_002fdefvr_002ffile_005fsearch_005fusage"></a></dd><dt class="defvrx def-cmd-defvr" id="index-file_005fsearch_005fusage"><span class="category-def">Option variable: </span><span><strong class="def-name">file_search_usage</strong><a class="copiable-link" href='#index-file_005fsearch_005fusage'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Input_002fdefvr_002ffile_005fsearch_005ftests"></a></dd><dt class="defvrx def-cmd-defvr" id="index-file_005fsearch_005ftests"><span class="category-def">Option variable: </span><span><strong class="def-name">file_search_tests</strong><a class="copiable-link" href='#index-file_005fsearch_005ftests'> &para;</a></span></dt>
+<dd>
+<p>These variables specify lists of directories to be searched by
+<code class="code"><a class="ref" href="#load">load</a></code>, <code class="code"><a class="ref" href="maxima_2.html#demo">demo</a></code>, and some other Maxima functions.  The default
+values of these variables name various directories in the Maxima installation.
+</p>
+<p>The user can modify these variables, either to replace the default values or to
+append additional directories.  For example,
+</p>
+<div class="example">
+<pre class="example-preformatted">file_search_maxima: [&quot;/usr/local/foo/###.mac&quot;,
+    &quot;/usr/local/bar/###.mac&quot;]$
+</pre></div>
+
+<p>replaces the default value of <code class="code">file_search_maxima</code>, while
+</p>
+<div class="example">
+<pre class="example-preformatted">file_search_maxima: append (file_search_maxima,
+    [&quot;/usr/local/foo/###.mac&quot;, &quot;/usr/local/bar/###.mac&quot;])$
+</pre></div>
+
+<p>appends two additional directories.  It may be convenient to put such an
+expression in the file <code class="code">maxima-init.mac</code> so that the file search path is
+assigned automatically when Maxima starts.
+See also <a class="ref" href="maxima_31.html#Introduction-for-Runtime-Environment">Introduction for Runtime Environment</a>.
+</p>
+<p>Multiple filename extensions and multiple paths can be specified by special 
+&ldquo;wildcard&rdquo; constructions.  The string <code class="code">###</code> expands into the sought-after
+name, while a comma-separated list enclosed in curly braces
+<code class="code">{foo,bar,baz}</code> expands into multiple strings.  For example, supposing
+the sought-after name is <code class="code">neumann</code>,
+</p>
+<div class="example">
+<pre class="example-preformatted">&quot;/home/{wfs,gcj}/###.{lisp,mac}&quot;
+</pre></div>
+
+<div class="flushleft"><p class="flushleft-paragraph">expands into <code class="code">/home/wfs/neumann.lisp</code>, <code class="code">/home/gcj/neumann.lisp</code>,
+<code class="code">/home/wfs/neumann.mac</code>, and <code class="code">/home/gcj/neumann.mac</code>.
+</p></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="file_005ftype"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002ffile_005ftype"></a><dl class="first-deffn">
+<dt class="deffn" id="index-file_005ftype"><span class="category-def">Function: </span><span><strong class="def-name">file_type</strong> <var class="def-var-arguments">(<var class="var">filename</var>)</var><a class="copiable-link" href='#index-file_005ftype'> &para;</a></span></dt>
+<dd>
+<p>Returns a guess about the content of <var class="var">filename</var>, based on the filename 
+extension.  <var class="var">filename</var> need not refer to an actual file; no attempt is made 
+to open the file and inspect the content.
+</p>
+<p>The return value is a symbol, either <code class="code">object</code>, <code class="code">lisp</code>, or
+<code class="code">maxima</code>.  If the extension is matches one of the values in
+<code class="code">file_type_maxima</code>, <code class="code">file_type</code> returns <code class="code">maxima</code>.  If the
+extension matches one of the values in <code class="code">file_type_lisp</code>, <code class="code">file_type</code>
+returns <code class="code">lisp</code>.  If none of the above, <code class="code">file_type</code> returns
+<code class="code">object</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#pathname_005ftype">pathname_type</a></code>.
+</p>
+<p>See <code class="code"><a class="ref" href="#file_005ftype_005fmaxima">file_type_maxima</a></code> and <code class="code"><a class="ref" href="#file_005ftype_005flisp">file_type_lisp</a></code> for the default values.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) map('file_type,
+          [&quot;test.lisp&quot;, &quot;test.mac&quot;, &quot;test.dem&quot;, &quot;test.txt&quot;]);
+(%o2)            [lisp, maxima, maxima, object]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="file_005ftype_005flisp"></a><a class="anchor" id="Item_003a-Input_002fdefvr_002ffile_005ftype_005flisp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-file_005ftype_005flisp"><span class="category-def">Option variable: </span><span><strong class="def-name">file_type_lisp</strong><a class="copiable-link" href='#index-file_005ftype_005flisp'> &para;</a></span></dt>
+<dd><p>Default value:  <code class="code">[l, lsp, lisp]</code>
+</p>
+<p><code class="code">file_type_lisp</code> is a list of file extensions that maxima recognizes
+as denoting a Lisp source file.
+</p>
+<p>See also <code class="code"><a class="ref" href="#file_005ftype">file_type</a></code>.
+</p></dd></dl>
+
+<a class="anchor" id="file_005ftype_005fmaxima"></a><a class="anchor" id="Item_003a-Input_002fdefvr_002ffile_005ftype_005fmaxima"></a><dl class="first-defvr">
+<dt class="defvr" id="index-file_005ftype_005fmaxima"><span class="category-def">Option variable: </span><span><strong class="def-name">file_type_maxima</strong><a class="copiable-link" href='#index-file_005ftype_005fmaxima'> &para;</a></span></dt>
+<dd><p>Default value:  <code class="code">[mac, mc, demo, dem, dm1, dm2, dm3, dmt, wxm]</code>
+</p>
+<p><code class="code">file_type_maxima</code> is a list of file extensions that maxima recognizes
+as denoting a Maxima source file.
+</p>
+<p>See also <code class="code"><a class="ref" href="#file_005ftype">file_type</a></code>.
+</p></dd></dl>
+
+<a class="anchor" id="load"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fload"></a><dl class="first-deffn">
+<dt class="deffn" id="index-load"><span class="category-def">Function: </span><span><strong class="def-name">load</strong> <var class="def-var-arguments">(<var class="var">filename</var>)</var><a class="copiable-link" href='#index-load'> &para;</a></span></dt>
+<dd>
+<p>Evaluates expressions in <var class="var">filename</var>, thus bringing variables, functions, and
+other objects into Maxima.  The binding of any existing object is clobbered by
+the binding recovered from <var class="var">filename</var>.
+</p>
+<p><var class="var">filename</var> must be a string, symbol,
+or Lisp pathname (as created by <code class="code"><a class="ref" href="#filename_005fmerge">filename_merge</a></code>).
+To find the file, <code class="code">load</code> calls
+<code class="code"><a class="ref" href="#file_005fsearch">file_search</a></code> with <code class="code"><a class="ref" href="#file_005fsearch_005fmaxima">file_search_maxima</a></code> and
+<code class="code"><a class="ref" href="#file_005fsearch_005flisp">file_search_lisp</a></code> as the search directories.  If <code class="code">load</code> succeeds, it
+returns the name of the file.  Otherwise <code class="code">load</code> prints an error message.
+</p>
+<p><code class="code">load</code> works equally well for Lisp code and Maxima code.  Files created by
+<code class="code"><a class="ref" href="#save">save</a></code>, <code class="code"><a class="ref" href="maxima_35.html#translate_005ffile">translate_file</a></code>, and <code class="code"><a class="ref" href="maxima_35.html#compile_005ffile">compile_file</a></code>, which
+create Lisp code, and <code class="code"><a class="ref" href="#stringout">stringout</a></code>, which creates Maxima code, can all
+be processed by <code class="code">load</code>.  <code class="code">load</code> calls <code class="code"><a class="ref" href="#loadfile">loadfile</a></code> to load Lisp
+files and <code class="code"><a class="ref" href="#batchload">batchload</a></code> to load Maxima files.
+</p>
+<p><code class="code">load</code> does not recognize <code class="code">:lisp</code> constructs in Maxima files, and
+while processing <var class="var">filename</var>, the global variables <code class="code">_</code>, <code class="code">__</code>,
+<code class="code">%</code>, and <code class="code">%th</code> have whatever bindings they had when <code class="code">load</code> was
+called.
+</p>
+<p>Note also that structures will only be read back as structures if
+they have been defined by <code class="code">defstruct</code> before the <code class="code">load</code> command
+is called.
+</p>
+<p>See also <code class="code"><a class="ref" href="#loadfile">loadfile</a></code>, for Lisp files; and <code class="code"><a class="ref" href="#batch">batch</a></code>, <code class="code"><a class="ref" href="#batchload">batchload</a></code>, and
+<code class="code"><a class="ref" href="maxima_2.html#demo">demo</a></code>. for Maxima files.
+</p>
+<p>See <code class="code"><a class="ref" href="#file_005fsearch">file_search</a></code> for more detail about the file search mechanism.
+The <code class="code"><a class="ref" href="maxima_75.html#numericalio">numericalio</a></code> chapter describes many functions
+for loading csv and other data files.
+</p>
+<p>During Maxima file loading, the variable <code class="code"><a class="ref" href="#load_005fpathname">load_pathname</a></code> is bound to the pathname of the file
+being loaded.
+</p>
+<p><code class="code">load</code> evaluates its argument.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Session-management">Session management</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="load_005fpathname"></a><a class="anchor" id="Item_003a-Input_002fdefvr_002fload_005fpathname"></a><dl class="first-defvr">
+<dt class="defvr" id="index-load_005fpathname"><span class="category-def">System variable: </span><span><strong class="def-name">load_pathname</strong><a class="copiable-link" href='#index-load_005fpathname'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When a file is loaded with the functions <code class="code"><a class="ref" href="#load">load</a></code>, <code class="code"><a class="ref" href="#loadfile">loadfile</a></code> or
+<code class="code"><a class="ref" href="#batchload">batchload</a></code> the system variable <code class="code">load_pathname</code> is bound to the
+pathname of the file which is processed.
+</p>
+<p>The variable <code class="code">load_pathname</code> can be accessed from the file during the
+loading.
+</p>
+<p>Example:
+</p>
+<p>Suppose we have a batchfile <code class="code">test.mac</code> in the directory
+</p><div class="flushleft"><p class="flushleft-paragraph"><code class="code">&quot;/home/dieter/workspace/mymaxima/temp/&quot;</code> with the following commands
+</p></div>
+<div class="example">
+<pre class="example-preformatted">print(&quot;The value of load_pathname is: &quot;, load_pathname)$
+print(&quot;End of batchfile&quot;)$
+</pre></div>
+
+<p>then we get the following output
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;/home/dieter/workspace/mymaxima/temp/test.mac&quot;)$
+The value of load_pathname is:  
+                   /home/dieter/workspace/mymaxima/temp/test.mac 
+End of batchfile
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="loadfile"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002floadfile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-loadfile"><span class="category-def">Function: </span><span><strong class="def-name">loadfile</strong> <var class="def-var-arguments">(<var class="var">filename</var>)</var><a class="copiable-link" href='#index-loadfile'> &para;</a></span></dt>
+<dd>
+<p>Evaluates Lisp expressions in <var class="var">filename</var>.  <code class="code">loadfile</code> does not invoke
+<code class="code"><a class="ref" href="#file_005fsearch">file_search</a></code>, so <code class="code">filename</code> must include the file extension and
+as much of the path as needed to find the file.
+</p>
+<p><code class="code">loadfile</code> can process files created by <code class="code"><a class="ref" href="#save">save</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="maxima_35.html#translate_005ffile">translate_file</a></code>, and <code class="code"><a class="ref" href="maxima_35.html#compile_005ffile">compile_file</a></code>.  The user may find it
+more convenient to use <code class="code"><a class="ref" href="#load">load</a></code> instead of <code class="code">loadfile</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Session-management">Session management</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="loadprint"></a><a class="anchor" id="Item_003a-Input_002fdefvr_002floadprint"></a><dl class="first-defvr">
+<dt class="defvr" id="index-loadprint"><span class="category-def">Option variable: </span><span><strong class="def-name">loadprint</strong><a class="copiable-link" href='#index-loadprint'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">loadprint</code> tells whether to print a message when a file is loaded.
+</p>
+<ul class="itemize mark-bullet">
+<li>When <code class="code">loadprint</code> is <code class="code">true</code>, always print a message.
+</li><li>When <code class="code">loadprint</code> is <code class="code">'loadfile</code>, print a message only if
+a file is loaded by the function <code class="code">loadfile</code>.
+</li><li>When <code class="code">loadprint</code> is <code class="code">'autoload</code>,
+print a message only if a file is automatically loaded.
+See <code class="code"><a class="ref" href="maxima_32.html#setup_005fautoload">setup_autoload</a></code>.
+</li><li>When <code class="code">loadprint</code> is <code class="code">false</code>, never print a message.
+</li></ul>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="directory"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fdirectory"></a><dl class="first-deffn">
+<dt class="deffn" id="index-directory"><span class="category-def">Function: </span><span><strong class="def-name">directory</strong> <var class="def-var-arguments">(<var class="var">path</var>)</var><a class="copiable-link" href='#index-directory'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of the files and directories found in <var class="var">path</var>
+in the file system.
+</p>
+<p><var class="var">path</var> may contain wildcard characters (i.e., characters which represent
+unspecified parts of the path),
+which include at least the asterisk on most systems,
+and possibly other characters, depending on the system.
+</p>
+<p><code class="code">directory</code> relies on the Lisp function DIRECTORY,
+which may have implementation-specific behavior.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="pathname_005fdirectory"></a><a class="anchor" id="pathname_005fname"></a><a class="anchor" id="pathname_005ftype"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fpathname_005fdirectory"></a><dl class="first-deffn">
+<dt class="deffn" id="index-pathname_005fdirectory"><span class="category-def">Function: </span><span><strong class="def-name">pathname_directory</strong> <var class="def-var-arguments">(<var class="var">pathname</var>)</var><a class="copiable-link" href='#index-pathname_005fdirectory'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Input_002fdeffn_002fpathname_005fname"></a></dd><dt class="deffnx def-cmd-deffn" id="index-pathname_005fname"><span class="category-def">Function: </span><span><strong class="def-name">pathname_name</strong> <var class="def-var-arguments">(<var class="var">pathname</var>)</var><a class="copiable-link" href='#index-pathname_005fname'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Input_002fdeffn_002fpathname_005ftype"></a></dd><dt class="deffnx def-cmd-deffn" id="index-pathname_005ftype"><span class="category-def">Function: </span><span><strong class="def-name">pathname_type</strong> <var class="def-var-arguments">(<var class="var">pathname</var>)</var><a class="copiable-link" href='#index-pathname_005ftype'> &para;</a></span></dt>
+<dd>
+<p>These functions return the components of <var class="var">pathname</var>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) pathname_directory(&quot;/home/dieter/maxima/changelog.txt&quot;);
+(%o1)                 /home/dieter/maxima/
+(%i2) pathname_name(&quot;/home/dieter/maxima/changelog.txt&quot;);
+(%o2)                       changelog
+(%i3) pathname_type(&quot;/home/dieter/maxima/changelog.txt&quot;);
+(%o3)                          txt
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="printfile"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fprintfile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-printfile"><span class="category-def">Function: </span><span><strong class="def-name">printfile</strong> <var class="def-var-arguments">(<var class="var">path</var>)</var><a class="copiable-link" href='#index-printfile'> &para;</a></span></dt>
+<dd>
+<p>Prints the file named by <var class="var">path</var> to the console.  <var class="var">path</var> may be a string
+or a symbol; if it is a symbol, it is converted to a string.
+</p>
+<p>If <var class="var">path</var> names a file which is accessible from the current working
+directory, that file is printed to the console.  Otherwise, <code class="code">printfile</code>
+attempts to locate the file by appending <var class="var">path</var> to each of the elements of
+<code class="code"><a class="ref" href="#file_005fsearch_005fusage">file_search_usage</a></code> via <code class="code"><a class="ref" href="#filename_005fmerge">filename_merge</a></code>.
+</p>
+<p><code class="code">printfile</code> returns <var class="var">path</var> if it names an existing file,
+or otherwise the result of a successful filename merge.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="save"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fsave"></a><dl class="first-deffn">
+<dt class="deffn" id="index-save"><span class="category-def">Function: </span><span><strong class="def-name">save</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">save</code> (<var class="var">filename</var>, <var class="var">name_1</var>, <var class="var">name_2</var>, <var class="var">name_3</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">save</code> (<var class="var">filename</var>, values, functions, labels, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">save</code> (<var class="var">filename</var>, [<var class="var">m</var>, <var class="var">n</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">save</code> (<var class="var">filename</var>, <var class="var">name_1</var>=<var class="var">expr_1</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">save</code> (<var class="var">filename</var>, all) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">save</code> (<var class="var">filename</var>, <var class="var">name_1</var>=<var class="var">expr_1</var>, <var class="var">name_2</var>=<var class="var">expr_2</var>, &hellip;)</var><a class="copiable-link" href='#index-save'> &para;</a></span></dt>
+<dd>
+<p>Stores the current values of <var class="var">name_1</var>, <var class="var">name_2</var>, <var class="var">name_3</var>, &hellip;,
+in <var class="var">filename</var>.  The arguments are the names of variables, functions, or
+other objects.  If a name has no value or function associated with it, it is
+ignored.  <code class="code">save</code> returns <var class="var">filename</var>.
+</p>
+<p><code class="code">save</code> stores data in the form of Lisp expressions.
+If <var class="var">filename</var> ends in <code class="code">.lisp</code> the
+data stored by <code class="code">save</code> may be recovered by <code class="code">load (<var class="var">filename</var>)</code>.
+See <code class="code"><a class="ref" href="#load">load</a></code>.
+</p>
+<p>The global flag <code class="code"><a class="ref" href="#file_005foutput_005fappend">file_output_append</a></code> governs whether <code class="code">save</code> appends or
+truncates the output file.  When <code class="code">file_output_append</code> is <code class="code">true</code>,
+<code class="code">save</code> appends to the output file.  Otherwise, <code class="code">save</code> truncates the
+output file.  In either case, <code class="code">save</code> creates the file if it does not yet
+exist.
+</p>
+<p>The special form <code class="code">save (<var class="var">filename</var>, values, functions, labels, ...)</code>
+stores the items named by <code class="code"><a class="ref" href="maxima_3.html#values">values</a></code>, <code class="code"><a class="ref" href="maxima_35.html#functions">functions</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="maxima_3.html#labels">labels</a></code>, etc.  The names may be any specified by the variable
+<code class="code"><a class="ref" href="maxima_3.html#infolists">infolists</a></code>.  <code class="code">values</code> comprises all user-defined variables.
+</p>
+<p>The special form <code class="code">save (<var class="var">filename</var>, [<var class="var">m</var>, <var class="var">n</var>])</code> stores the
+values of input and output labels <var class="var">m</var> through <var class="var">n</var>.  Note that <var class="var">m</var>
+and <var class="var">n</var> must be literal integers.  Input and output labels may also be
+stored one by one, e.g., <code class="code">save (&quot;foo.1&quot;, %i42, %o42)</code>.
+<code class="code">save (<var class="var">filename</var>, labels)</code> stores all input and output labels.
+When the stored labels are recovered, they clobber existing labels.
+</p>
+<p>The special form <code class="code">save (<var class="var">filename</var>, <var class="var">name_1</var>=<var class="var">expr_1</var>,
+<var class="var">name_2</var>=<var class="var">expr_2</var>, ...)</code> stores the values of <var class="var">expr_1</var>,
+<var class="var">expr_2</var>, &hellip;, with names <var class="var">name_1</var>, <var class="var">name_2</var>, &hellip;
+It is useful to apply this form to input and output labels, e.g.,
+<code class="code">save (&quot;foo.1&quot;, aa=%o88)</code>.  The right-hand side of the equality in this
+form may be any expression, which is evaluated.  This form does not introduce
+the new names into the current Maxima environment, but only stores them in
+<var class="var">filename</var>.
+</p>
+<p>These special forms and the general form of <code class="code">save</code> may be mixed at will.
+For example, <code class="code">save (<var class="var">filename</var>, aa, bb, cc=42, functions, [11, 17])</code>.
+</p>
+<p>The special form <code class="code">save (<var class="var">filename</var>, all)</code> stores the current state of
+Maxima.  This includes all user-defined variables, functions, arrays, etc., as
+well as some automatically defined items.  The saved items include system
+variables, such as <code class="code"><a class="ref" href="#file_005fsearch_005fmaxima">file_search_maxima</a></code> or <code class="code"><a class="ref" href="maxima_3.html#showtime">showtime</a></code>, if they
+have been assigned new values by the user; see <code class="code"><a class="ref" href="maxima_3.html#myoptions">myoptions</a></code>.
+</p>
+<p><code class="code">save</code> evaluates <var class="var">filename</var> and quotes all other arguments.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Session-management">Session management</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="stringout"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fstringout"></a><dl class="first-deffn">
+<dt class="deffn" id="index-stringout"><span class="category-def">Function: </span><span><strong class="def-name">stringout</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stringout</code> (<var class="var">filename</var>, <var class="var">expr_1</var>, <var class="var">expr_2</var>, <var class="var">expr_3</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stringout</code> (<var class="var">filename</var>, [<var class="var">m</var>, <var class="var">n</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stringout</code> (<var class="var">filename</var>, input) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stringout</code> (<var class="var">filename</var>, functions) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stringout</code> (<var class="var">filename</var>, values)</var><a class="copiable-link" href='#index-stringout'> &para;</a></span></dt>
+<dd>
+<p><code class="code">stringout</code> writes expressions to a file in the same form the expressions
+would be typed for input.  The file can then be used as input for the
+<code class="code"><a class="ref" href="#batch">batch</a></code> or <code class="code"><a class="ref" href="maxima_2.html#demo">demo</a></code> commands, and it may be edited for any purpose.
+<code class="code">stringout</code> can be executed while <code class="code"><a class="ref" href="#writefile">writefile</a></code> is in progress.
+</p>
+<p>The global flag <code class="code"><a class="ref" href="#file_005foutput_005fappend">file_output_append</a></code> governs whether <code class="code">stringout</code>
+appends or truncates the output file.  When <code class="code">file_output_append</code> is
+<code class="code">true</code>, <code class="code">stringout</code> appends to the output file.  Otherwise,
+<code class="code">stringout</code> truncates the output file.  In either case, <code class="code">stringout</code>
+creates the file if it does not yet exist.
+</p>
+<p>The general form of <code class="code">stringout</code> writes the values of one or more 
+expressions to the output file.  Note that if an expression is a
+variable, only the value of the variable is written and not the name
+of the variable.  As a useful special case, the expressions may be
+input labels (<code class="code">%i1</code>, <code class="code">%i2</code>, <code class="code">%i3</code>, &hellip;) or output labels
+(<code class="code">%o1</code>, <code class="code">%o2</code>, <code class="code">%o3</code>, &hellip;).
+</p>
+<p>If <code class="code"><a class="ref" href="maxima_3.html#grind">grind</a></code> is <code class="code">true</code>, <code class="code">stringout</code> formats the output using the
+<code class="code">grind</code> format.  Otherwise the <code class="code">string</code> format is used.  See
+<code class="code">grind</code> and <code class="code">string</code>.
+</p>
+<p>The special form <code class="code">stringout (<var class="var">filename</var>, [<var class="var">m</var>, <var class="var">n</var>])</code> writes
+the values of input labels m through n, inclusive.
+</p>
+<p>The special form <code class="code">stringout (<var class="var">filename</var>, input)</code> writes all
+input labels to the file.
+</p>
+<p>The special form <code class="code">stringout (<var class="var">filename</var>, functions)</code> writes all
+user-defined functions (named by the global list <code class="code"><a class="ref" href="maxima_35.html#functions">functions</a></code>)) to the
+file.
+</p>
+<p>The special form <code class="code">stringout (<var class="var">filename</var>, values)</code> writes all
+user-assigned variables (named by the global list <code class="code"><a class="ref" href="maxima_3.html#values">values</a></code>)) to the file.
+Each variable is printed as an assignment statement, with the name of the
+variable, a colon, and its value.  Note that the general form of
+<code class="code">stringout</code> does not print variables as assignment statements.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Session-management">Session management</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="with_005fstdout"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fwith_005fstdout"></a><dl class="first-deffn">
+<dt class="deffn" id="index-with_005fstdout"><span class="category-def">Function: </span><span><strong class="def-name">with_stdout</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">with_stdout</code> (<var class="var">f</var>, <var class="var">expr_1</var>, <var class="var">expr_2</var>, <var class="var">expr_3</var>, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">with_stdout</code> (<var class="var">s</var>, <var class="var">expr_1</var>, <var class="var">expr_2</var>, <var class="var">expr_3</var>, &hellip;)</var><a class="copiable-link" href='#index-with_005fstdout'> &para;</a></span></dt>
+<dd>
+<p>Evaluates <var class="var">expr_1</var>, <var class="var">expr_2</var>, <var class="var">expr_3</var>, &hellip; and writes any
+output thus generated to a file <var class="var">f</var> or output stream <var class="var">s</var>.  The evaluated
+expressions are not written to the output.  Output may be generated by
+<code class="code"><a class="ref" href="maxima_3.html#print">print</a></code>, <code class="code"><a class="ref" href="maxima_3.html#display">display</a></code>, <code class="code"><a class="ref" href="maxima_3.html#grind">grind</a></code>, among other functions.
+</p>
+<p>The global flag <code class="code"><a class="ref" href="#file_005foutput_005fappend">file_output_append</a></code> governs whether <code class="code">with_stdout</code>
+appends or truncates the output file <var class="var">f</var>.  When <code class="code">file_output_append</code>
+is <code class="code">true</code>, <code class="code">with_stdout</code> appends to the output file.  Otherwise,
+<code class="code">with_stdout</code> truncates the output file.  In either case,
+<code class="code">with_stdout</code> creates the file if it does not yet exist.
+</p>
+<p><code class="code">with_stdout</code> returns the value of its final argument.
+</p>
+<p>See also <code class="code"><a class="ref" href="#writefile">writefile</a></code> and <code class="code"><a class="ref" href="maxima_3.html#display2d">display2d</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) with_stdout (&quot;tmp.out&quot;, for i:5 thru 10 do
+      print (i, &quot;! yields&quot;, i!))$
+(%i2) printfile (&quot;tmp.out&quot;)$
+5 ! yields 120 
+6 ! yields 720 
+7 ! yields 5040 
+8 ! yields 40320 
+9 ! yields 362880 
+10 ! yields 3628800
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="writefile"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fwritefile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-writefile"><span class="category-def">Function: </span><span><strong class="def-name">writefile</strong> <var class="def-var-arguments">(<var class="var">filename</var>)</var><a class="copiable-link" href='#index-writefile'> &para;</a></span></dt>
+<dd>
+<p>Begins writing a transcript of the Maxima session to <var class="var">filename</var>.
+All interaction between the user and Maxima is then recorded in this file,
+just as it appears on the console.
+</p>
+<p>As the transcript is printed in the console output format, it cannot be reloaded
+into Maxima.  To make a file containing expressions which can be reloaded,
+see <code class="code"><a class="ref" href="#save">save</a></code> and <code class="code"><a class="ref" href="#stringout">stringout</a></code>.  <code class="code">save</code> stores expressions in Lisp
+form, while <code class="code">stringout</code> stores expressions in Maxima form.
+</p>
+<p>The effect of executing <code class="code">writefile</code> when <var class="var">filename</var> already exists
+depends on the underlying Lisp implementation; the transcript file may be
+clobbered, or the file may be appended.  <code class="code"><a class="ref" href="#appendfile">appendfile</a></code> always appends to
+the transcript file.
+</p>
+<p>It may be convenient to execute <code class="code"><a class="ref" href="maxima_3.html#playback">playback</a></code> after <code class="code">writefile</code> to save
+the display of previous interactions.  As <code class="code">playback</code> displays only the
+input and output variables (<code class="code">%i1</code>, <code class="code">%o1</code>, etc.), any output generated
+by a print statement in a function (as opposed to a return value) is not
+displayed by <code class="code">playback</code>.
+</p>
+<p><code class="code"><a class="ref" href="#closefile">closefile</a></code> closes the transcript file opened by <code class="code">writefile</code> or
+<code class="code">appendfile</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Input_002fnode_002fFunctions-and-Variables-for-TeX-Output"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-TeX-Output">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Fortran-Output" accesskey="n" rel="next">Functions and Variables for Fortran Output</a>, Previous: <a href="#Functions-and-Variables-for-File-Input-and-Output" accesskey="p" rel="prev">Functions and Variables for File Input and Output</a>, Up: <a href="#File-Input-and-Output" accesskey="u" rel="up">File Input and Output</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-TeX-Output-1">13.4 Functions and Variables for TeX Output</h3>
+
+
+<p>Note that the built-in TeX output functionality of wxMaxima makes no use of
+the functions described here but uses its own implementation instead.
+</p>
+<a class="anchor" id="tex"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002ftex"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tex"><span class="category-def">Function: </span><span><strong class="def-name">tex</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tex</code> (<var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tex</code> (<var class="var">expr</var>, <var class="var">destination</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tex</code> (<var class="var">expr</var>, false) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tex</code> (<var class="var">label</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tex</code> (<var class="var">label</var>, <var class="var">destination</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tex</code> (<var class="var">label</var>, false)</var><a class="copiable-link" href='#index-tex'> &para;</a></span></dt>
+<dd>
+<p>Prints a representation of an expression suitable for the TeX document
+preparation system.  The result is a fragment of a document, which can be copied
+into a larger document but not processed by itself.
+</p>
+<p><code class="code">tex (<var class="var">expr</var>)</code> prints a TeX representation of <var class="var">expr</var> on the
+console.
+</p>
+<p><code class="code">tex (<var class="var">label</var>)</code> prints a TeX representation of the expression named by
+<var class="var">label</var> and assigns it an equation label (to be displayed to the left of the
+expression).  The TeX equation label is the same as the Maxima label.
+</p>
+<p><var class="var">destination</var> may be an output stream or file name.  When <var class="var">destination</var>
+is a file name, <code class="code">tex</code> appends its output to the file.  The functions
+<code class="code">openw</code> and <code class="code">opena</code> create output streams.
+</p>
+<p><code class="code">tex (<var class="var">expr</var>, false)</code> and <code class="code">tex (<var class="var">label</var>, false)</code>
+return their TeX output as a string.
+</p>
+<p><code class="code">tex</code> evaluates its first argument after testing it to see if it is a
+label.  Quote-quote <code class="code">''</code> forces evaluation of the argument, thereby
+defeating the test and preventing the label.
+</p>
+<p>See also <code class="code"><a class="ref" href="#tex1">tex1</a></code> and <code class="code"><a class="ref" href="#texput">texput</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) integrate (1/(1+x^3), x);
+                                    2 x - 1
+                  2            atan(-------)
+             log(x  - x + 1)        sqrt(3)    log(x + 1)
+(%o1)      - --------------- + ------------- + ----------
+                    6             sqrt(3)          3
+(%i2) tex (%o1);
+$$-{{\log \left(x^2-x+1\right)}\over{6}}+{{\arctan \left({{2\,x-1
+ }\over{\sqrt{3}}}\right)}\over{\sqrt{3}}}+{{\log \left(x+1\right)
+ }\over{3}}\leqno{\tt (\%o1)}$$
+(%o2)                          (\%o1)
+(%i3) tex (integrate (sin(x), x));
+$$-\cos x$$
+(%o3)                           false
+(%i4) tex (%o1, &quot;foo.tex&quot;);
+(%o4)                          (\%o1)
+</pre></div>
+
+<p><code class="code">tex (<var class="var">expr</var>, false)</code> returns its TeX output as a string.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) S : tex (x * y * z, false);
+(%o1) $$x\,y\,z$$
+(%i2) S;
+(%o2) $$x\,y\,z$$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-TeX-output">TeX output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tex1"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002ftex1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tex1"><span class="category-def">Function: </span><span><strong class="def-name">tex1</strong> <var class="def-var-arguments">(<var class="var">e</var>)</var><a class="copiable-link" href='#index-tex1'> &para;</a></span></dt>
+<dd>
+<p>Returns a string which represents the TeX output for the expressions <var class="var">e</var>.
+The TeX output is not enclosed in delimiters for an equation or any other
+environment.
+</p>
+<p>See also <code class="code"><a class="ref" href="#tex">tex</a></code> and <code class="code"><a class="ref" href="#texput">texput</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) tex1 (sin(x) + cos(x));
+(%o1)                     \sin x+\cos x
+</pre></div>
+</dd></dl>
+
+<a class="anchor" id="texput"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002ftexput"></a><dl class="first-deffn">
+<dt class="deffn" id="index-texput"><span class="category-def">Function: </span><span><strong class="def-name">texput</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">texput</code> (<var class="var">a</var>, <var class="var">s</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">texput</code> (<var class="var">a</var>, <var class="var">f</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">texput</code> (<var class="var">a</var>, <var class="var">s</var>, <var class="var">operator_type</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">texput</code> (<var class="var">a</var>, [<var class="var">s_1</var>, <var class="var">s_2</var>], matchfix) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">texput</code> (<var class="var">a</var>, [<var class="var">s_1</var>, <var class="var">s_2</var>, <var class="var">s_3</var>], matchfix)</var><a class="copiable-link" href='#index-texput'> &para;</a></span></dt>
+<dd>
+<p>Assign the TeX output for the atom <var class="var">a</var>, which can be a symbol or the name
+of an operator.
+</p>
+<p><code class="code">texput (<var class="var">a</var>, <var class="var">s</var>)</code> causes the <code class="code">tex</code> function to interpolate
+the string <var class="var">s</var> into the TeX output in place of <var class="var">a</var>.
+</p>
+<p><code class="code">texput (<var class="var">a</var>, <var class="var">f</var>)</code> causes the <code class="code">tex</code> function to call the
+function <var class="var">f</var> to generate TeX output.  <var class="var">f</var> must accept one argument,
+which is an expression which has operator <var class="var">a</var>,
+and must return either a string (the TeX output) or <code class="code">false</code>,
+indicating that the TeX function in effect when <code class="code">texput</code> is called
+should handle the expression.
+<var class="var">f</var> may call <code class="code">tex1</code> to generate TeX output for the
+arguments of the input expression.
+</p>
+<p><code class="code">texput (<var class="var">a</var>, <var class="var">s</var>, <var class="var">operator_type</var>)</code>, where <var class="var">operator_type</var>
+is <code class="code">prefix</code>, <code class="code">infix</code>, <code class="code">postfix</code>, <code class="code">nary</code>, or <code class="code">nofix</code>,
+causes the <code class="code">tex</code> function to interpolate <var class="var">s</var> into the TeX output in
+place of <var class="var">a</var>, and to place the interpolated text in the appropriate
+position.
+</p>
+<p><code class="code">texput (<var class="var">a</var>, [<var class="var">s_1</var>, <var class="var">s_2</var>], matchfix)</code> causes the <code class="code">tex</code>
+function to interpolate <var class="var">s_1</var> and <var class="var">s_2</var> into the TeX output on either
+side of the arguments of <var class="var">a</var>.  The arguments (if more than one) are
+separated by commas.
+</p>
+<p><code class="code">texput (<var class="var">a</var>, [<var class="var">s_1</var>, <var class="var">s_2</var>, <var class="var">s_3</var>], matchfix)</code> causes the
+<code class="code">tex</code> function to interpolate <var class="var">s_1</var> and <var class="var">s_2</var> into the TeX output
+on either side of the arguments of <var class="var">a</var>, with <var class="var">s_3</var> separating the
+arguments.
+</p>
+<p>See also <code class="code"><a class="ref" href="#tex">tex</a></code> and <code class="code"><a class="ref" href="#tex1">tex1</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Assign TeX output for a variable.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) texput (me,&quot;\\mu_e&quot;);
+(%o1)                         \mu_e
+(%i2) tex (me);
+$$\mu_e$$
+(%o2)                         false
+</pre></div>
+
+<p>Assign TeX output for an ordinary function (not an operator).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) texput (lcm, &quot;\\mathrm{lcm}&quot;);
+(%o1)                     \mathrm{lcm}
+(%i2) tex (lcm (a, b));
+$$\mathrm{lcm}\left(a , b\right)$$
+(%o2)                         false
+</pre></div>
+
+<p>Call a function to generate TeX output.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) texfoo (e) := block ([a, b], [a, b] : args (e),
+  concat(&quot;\\left[\\stackrel{&quot;,tex1(b),&quot;}{&quot;,tex1(a),&quot;}\\right]&quot;))$
+(%i2) texput (foo, texfoo);
+(%o2)                        texfoo
+(%i3) tex (foo (2^x, %pi));
+$$\left[\stackrel{\pi}{2^{x}}\right]$$
+(%o3)                         false
+</pre></div>
+
+<p>Assign TeX output for a prefix operator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) prefix (&quot;grad&quot;);
+(%o1)                         grad
+(%i2) texput (&quot;grad&quot;, &quot; \\nabla &quot;, prefix);
+(%o2)                        \nabla 
+(%i3) tex (grad f);
+$$ \nabla f$$
+(%o3)                         false
+</pre></div>
+
+<p>Assign TeX output for an infix operator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) infix (&quot;~&quot;);
+(%o1)                           ~
+(%i2) texput (&quot;~&quot;, &quot; \\times &quot;, infix);
+(%o2)                        \times 
+(%i3) tex (a ~ b);
+$$a \times b$$
+(%o3)                         false
+</pre></div>
+
+<p>Assign TeX output for a postfix operator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) postfix (&quot;##&quot;);
+(%o1)                          ##
+(%i2) texput (&quot;##&quot;, &quot;!!&quot;, postfix);
+(%o2)                          !!
+(%i3) tex (x ##);
+$$x!!$$
+(%o3)                         false
+</pre></div>
+
+<p>Assign TeX output for a nary operator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) nary (&quot;@@&quot;);
+(%o1)                          @@
+(%i2) texput (&quot;@@&quot;, &quot; \\circ &quot;, nary);
+(%o2)                         \circ 
+(%i3) tex (a @@ b @@ c @@ d);
+$$a \circ b \circ c \circ d$$
+(%o3)                         false
+</pre></div>
+
+<p>Assign TeX output for a nofix operator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) nofix (&quot;foo&quot;);
+(%o1)                          foo
+(%i2) texput (&quot;foo&quot;, &quot;\\mathsc{foo}&quot;, nofix);
+(%o2)                     \mathsc{foo}
+(%i3) tex (foo);
+$$\mathsc{foo}$$
+(%o3)                         false
+</pre></div>
+
+<p>Assign TeX output for a matchfix operator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) matchfix (&quot;&lt;&lt;&quot;, &quot;&gt;&gt;&quot;);
+(%o1)                          &lt;&lt;
+(%i2) texput (&quot;&lt;&lt;&quot;, [&quot; \\langle &quot;, &quot; \\rangle &quot;], matchfix);
+(%o2)                [ \langle ,  \rangle ]
+(%i3) tex (&lt;&lt;a&gt;&gt;);
+$$ \langle a \rangle $$
+(%o3)                         false
+(%i4) tex (&lt;&lt;a, b&gt;&gt;);
+$$ \langle a , b \rangle $$
+(%o4)                         false
+(%i5) texput (&quot;&lt;&lt;&quot;, [&quot; \\langle &quot;, &quot; \\rangle &quot;, &quot; \\, | \\,&quot;],
+      matchfix);
+(%o5)           [ \langle ,  \rangle ,  \, | \,]
+(%i6) tex (&lt;&lt;a&gt;&gt;);
+$$ \langle a \rangle $$
+(%o6)                         false
+(%i7) tex (&lt;&lt;a, b&gt;&gt;);
+$$ \langle a \, | \,b \rangle $$
+(%o7)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-TeX-output">TeX output</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="get_005ftex_005fenvironment"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fget_005ftex_005fenvironment"></a><dl class="first-deffn">
+<dt class="deffn" id="index-get_005ftex_005fenvironment"><span class="category-def">Function: </span><span><strong class="def-name">get_tex_environment</strong> <var class="def-var-arguments">(<var class="var">op</var>)</var><a class="copiable-link" href='#index-get_005ftex_005fenvironment'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Input_002fdeffn_002fset_005ftex_005fenvironment"></a></dd><dt class="deffnx def-cmd-deffn" id="index-set_005ftex_005fenvironment"><span class="category-def">Function: </span><span><strong class="def-name">set_tex_environment</strong> <var class="def-var-arguments">(<var class="var">op</var>, <var class="var">before</var>, <var class="var">after</var>)</var><a class="copiable-link" href='#index-set_005ftex_005fenvironment'> &para;</a></span></dt>
+<dd>
+<p>Customize the TeX environment output by <code class="code">tex</code>.
+As maintained by these functions, the TeX environment comprises two strings:
+one is printed before any other TeX output, and the other is printed after.
+</p>
+<p>Only the TeX environment of the top-level operator in an expression
+is output; TeX environments associated with other operators are ignored.
+</p>
+<p><code class="code">get_tex_environment</code> returns the TeX environment which is applied
+to the operator <var class="var">op</var>; returns the default if no other environment
+has been assigned.
+</p>
+<p><code class="code">set_tex_environment</code> assigns the TeX environment for the operator
+<var class="var">op</var>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) get_tex_environment (&quot;:=&quot;);
+(%o1) [
+\begin{verbatim}
+, ;
+\end{verbatim}
+]
+(%i2) tex (f (x) := 1 - x);
+
+\begin{verbatim}
+f(x):=1-x;
+\end{verbatim}
+
+(%o2)                         false
+(%i3) set_tex_environment (&quot;:=&quot;, &quot;$$&quot;, &quot;$$&quot;);
+(%o3)                       [$$, $$]
+(%i4) tex (f (x) := 1 - x);
+$$f(x):=1-x$$
+(%o4)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-TeX-output">TeX output</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="get_005ftex_005fenviroment_005fdefault"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002fget_005ftex_005fenvironment_005fdefault"></a><dl class="first-deffn">
+<dt class="deffn" id="index-get_005ftex_005fenvironment_005fdefault"><span class="category-def">Function: </span><span><strong class="def-name">get_tex_environment_default</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-get_005ftex_005fenvironment_005fdefault'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Input_002fdeffn_002fset_005ftex_005fenvironment_005fdefault"></a></dd><dt class="deffnx def-cmd-deffn" id="index-set_005ftex_005fenvironment_005fdefault"><span class="category-def">Function: </span><span><strong class="def-name">set_tex_environment_default</strong> <var class="def-var-arguments">(<var class="var">before</var>, <var class="var">after</var>)</var><a class="copiable-link" href='#index-set_005ftex_005fenvironment_005fdefault'> &para;</a></span></dt>
+<dd>
+<p>Customize the TeX environment output by <code class="code">tex</code>.
+As maintained by these functions, the TeX environment comprises two strings:
+one is printed before any other TeX output, and the other is printed after.
+</p>
+<p><code class="code">get_tex_environment_default</code> returns the TeX environment which is
+applied to expressions for which the top-level operator has no
+specific TeX environment (as assigned by <code class="code">set_tex_environment</code>).
+</p>
+<p><code class="code">set_tex_environment_default</code> assigns the default TeX environment.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) get_tex_environment_default ();
+(%o1)                       [$$, $$]
+(%i2) tex (f(x) + g(x));
+$$g\left(x\right)+f\left(x\right)$$
+(%o2)                         false
+(%i3) set_tex_environment_default (&quot;\\begin{equation}
+&quot;, &quot;
+\\end{equation}&quot;);
+(%o3) [\begin{equation}
+, 
+\end{equation}]
+(%i4) tex (f(x) + g(x));
+\begin{equation}
+g\left(x\right)+f\left(x\right)
+\end{equation}
+(%o4)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-TeX-output">TeX output</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Input_002fnode_002fFunctions-and-Variables-for-Fortran-Output"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Fortran-Output">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Functions-and-Variables-for-TeX-Output" accesskey="p" rel="prev">Functions and Variables for TeX Output</a>, Up: <a href="#File-Input-and-Output" accesskey="u" rel="up">File Input and Output</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Fortran-Output-1">13.5 Functions and Variables for Fortran Output</h3>
+
+<a class="anchor" id="fortindent"></a><a class="anchor" id="Item_003a-Input_002fdefvr_002ffortindent"></a><dl class="first-defvr">
+<dt class="defvr" id="index-fortindent"><span class="category-def">Option variable: </span><span><strong class="def-name">fortindent</strong><a class="copiable-link" href='#index-fortindent'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">0</code>
+</p>
+<p><code class="code">fortindent</code> controls the left margin indentation of
+expressions printed out by the <code class="code"><a class="ref" href="#fortran">fortran</a></code> command.  <code class="code">0</code> gives normal
+printout (i.e., 6 spaces), and positive values will causes the
+expressions to be printed farther to the right.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fortran"></a><a class="anchor" id="Item_003a-Input_002fdeffn_002ffortran"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fortran"><span class="category-def">Function: </span><span><strong class="def-name">fortran</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-fortran'> &para;</a></span></dt>
+<dd>
+<p>Prints <var class="var">expr</var> as a Fortran statement.
+The output line is indented with spaces.
+If the line is too long, <code class="code">fortran</code> prints continuation lines.
+<code class="code">fortran</code> prints the exponentiation operator <code class="code">^</code> as <code class="code">**</code>,
+and prints a complex number <code class="code">a + b %i</code> in the form <code class="code">(a,b)</code>.
+</p>
+<p><var class="var">expr</var> may be an equation.  If so, <code class="code">fortran</code> prints an assignment
+statement, assigning the right-hand side of the equation to the left-hand side.
+In particular, if the right-hand side of <var class="var">expr</var> is the name of a matrix,
+then <code class="code">fortran</code> prints an assignment statement for each element of the
+matrix.
+</p>
+<p>If <var class="var">expr</var> is not something recognized by <code class="code">fortran</code>,
+the expression is printed in <code class="code"><a class="ref" href="maxima_3.html#grind">grind</a></code> format without complaint.
+<code class="code">fortran</code> does not know about lists, arrays, or functions.
+</p>
+<p><code class="code"><a class="ref" href="#fortindent">fortindent</a></code> controls the left margin of the printed lines.
+<code class="code">0</code> is the normal margin (i.e., indented 6 spaces).  Increasing
+<code class="code">fortindent</code> causes expressions to be printed further to the right.
+</p>
+<p>When <code class="code"><a class="ref" href="#fortspaces">fortspaces</a></code> is <code class="code">true</code>, <code class="code">fortran</code> fills out
+each printed line with spaces to 80 columns.
+</p>
+<p><code class="code">fortran</code> evaluates its arguments; quoting an argument defeats evaluation.
+<code class="code">fortran</code> always returns <code class="code">done</code>.
+</p>
+<p>See also the function <code class="code"><a class="ref" href="maxima_57.html#function_005ff90">f90</a></code> for printing one or more
+expressions as a Fortran 90 program.
+</p>
+<p>Examples:
+</p>
+<pre class="verbatim">(%i1) expr: (a + b)^12$
+(%i2) fortran (expr);
+      (b+a)**12                                                                 
+(%o2)                         done
+(%i3) fortran ('x=expr);
+      x = (b+a)**12                                                             
+(%o3)                         done
+(%i4) fortran ('x=expand (expr));
+      x = b**12+12*a*b**11+66*a**2*b**10+220*a**3*b**9+495*a**4*b**8+792
+     1   *a**5*b**7+924*a**6*b**6+792*a**7*b**5+495*a**8*b**4+220*a**9*b
+     2   **3+66*a**10*b**2+12*a**11*b+a**12
+(%o4)                         done
+(%i5) fortran ('x=7+5*%i);
+      x = (7,5)                                                                 
+(%o5)                         done
+(%i6) fortran ('x=[1,2,3,4]);
+      x = [1,2,3,4]                                                             
+(%o6)                         done
+(%i7) f(x) := x^2$
+(%i8) fortran (f);
+      f                                                                         
+(%o8)                         done
+</pre>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fortspaces"></a><a class="anchor" id="Item_003a-Input_002fdefvr_002ffortspaces"></a><dl class="first-defvr">
+<dt class="defvr" id="index-fortspaces"><span class="category-def">Option variable: </span><span><strong class="def-name">fortspaces</strong><a class="copiable-link" href='#index-fortspaces'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">fortspaces</code> is <code class="code">true</code>, <code class="code">fortran</code> fills out
+each printed line with spaces to 80 columns.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_13.html#Polynomials" accesskey="n" rel="next">Polynomials</a>, Previous: <a href="maxima_11.html#Plotting" accesskey="p" rel="prev">Plotting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

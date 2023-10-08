@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>simplex-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="simplex-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="simplex-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_86.html#simplification_002dpkg" rel="next" title="simplification-pkg">
+<link href="maxima_84.html#romberg_002dpkg" rel="prev" title="romberg-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="simplex_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_86.html#simplification_002dpkg" accesskey="n" rel="next">simplification</a>, Previous: <a href="maxima_84.html#romberg_002dpkg" accesskey="p" rel="prev">romberg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="simplex">86 simplex</h2>
+
+<a class="anchor" id="Item_003a-simplex_002fnode_002fIntroduction-to-simplex"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-simplex" accesskey="1">Introduction to simplex</a></li>
+<li><a href="#Functions-and-Variables-for-simplex" accesskey="2">Functions and Variables for simplex</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-simplex">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-simplex" accesskey="n" rel="next">Functions and Variables for simplex</a>, Previous: <a href="#simplex_002dpkg" accesskey="p" rel="prev">simplex</a>, Up: <a href="#simplex_002dpkg" accesskey="u" rel="up">simplex</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-simplex-1">86.1 Introduction to simplex</h3>
+
+<p><code class="code">simplex</code> is a package for linear optimization using the simplex algorithm.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;simplex&quot;)$
+(%i2) minimize_lp(x+y, [3*x+2*y&gt;2, x+4*y&gt;3]);
+                  9        7       1
+(%o2)            [--, [y = --, x = -]]
+                  10       10      5
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Optimization">Optimization</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+</div>
+
+<ul class="mini-toc">
+<li><a href="#Tests-for-simplex" accesskey="1">Tests for simplex</a></li>
+</ul>
+<div class="subsection-level-extent" id="Tests-for-simplex">
+<h4 class="subsection">86.1.1 Tests for simplex</h4>
+
+<p>There are some tests in the directory <code class="code">share/simplex/Tests</code>.
+</p>
+<ul class="mini-toc">
+<li><a href="#klee_005fminty" accesskey="1">klee_minty</a></li>
+<li><a href="#NETLIB" accesskey="2">NETLIB</a></li>
+</ul>
+<div class="subsubsection-level-extent" id="klee_005fminty">
+<h4 class="subsubsection">86.1.1.1 klee_minty</h4>
+
+<p>The function <code class="code">klee_minty</code> produces input for <code class="code">linear_program</code>, for which
+exponential time for solving is required without scaling.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">load(&quot;klee_minty&quot;)$
+apply(linear_program, klee_minty(6));
+</pre></div>
+
+<p>A better approach:
+</p>
+<div class="example">
+<pre class="example-preformatted">epsilon_sx : 0$
+scale_sx : true$
+apply(linear_program, klee_minty(10));
+</pre></div>
+
+</div>
+<div class="subsubsection-level-extent" id="NETLIB">
+<h4 class="subsubsection">86.1.1.2 NETLIB</h4>
+
+<p>Some smaller problems from netlib (<a class="url" href="https://www.netlib.org/lp/data/">https://www.netlib.org/lp/data/</a>)
+test suite are converted to a format, readable by Maxima. Problems are
+<code class="code">adlittle</code>, <code class="code">afiro</code>, <code class="code">kb2</code>, <code class="code">sc50a</code> and
+<code class="code">share2b</code>. Each problem has three input files in CSV format for
+matrix <var class="var">A</var> and vectors <var class="var">b</var> and <var class="var">c</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">A : read_matrix(&quot;adlittle_A.csv&quot;, 'csv)$
+b : read_list(&quot;adlittle_b.csv&quot;, 'csv)$
+c : read_list(&quot;adlittle_c.csv&quot;, 'csv)$
+linear_program(A, b, c)$
+%[2];
+=&gt; 225494.9631623802
+</pre></div>
+
+<p>Results:
+</p>
+<div class="example">
+<pre class="example-preformatted">PROBLEM        MINIMUM                  SCALING
+adlittle       +2.2549496316E+05        false
+afiro          -4.6475314286E+02        false
+kb2            -1.7499001299E+03        true
+sc50a          -6.4575077059E+01        false
+share2b        -4.1573518187E+02        false
+</pre></div>
+
+<p>The Netlib website <a class="url" href="https://www.netlib.org/lp/data/readme">https://www.netlib.org/lp/data/readme</a> lists the values as
+</p>
+<div class="example">
+<pre class="example-preformatted">PROBLEM        MINIMUM
+adlittle       +2.2549496316E+05
+afiro          -4.6475314286E+02
+kb2            -1.7499001299E+03
+sc50a          -6.4575077059E+01
+share2b        -4.1573224074E+02
+</pre></div>
+
+<a class="anchor" id="Item_003a-simplex_002fnode_002fFunctions-and-Variables-for-simplex"></a><hr>
+</div>
+</div>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-simplex">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-simplex" accesskey="p" rel="prev">Introduction to simplex</a>, Up: <a href="#simplex_002dpkg" accesskey="u" rel="up">simplex</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-simplex-1">86.2 Functions and Variables for simplex</h3>
+
+<a class="anchor" id="epsilon_005flp"></a><a class="anchor" id="Item_003a-simplex_002fdefvr_002fepsilon_005flp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-epsilon_005flp"><span class="category-def">Option variable: </span><span><strong class="def-name">epsilon_lp</strong><a class="copiable-link" href='#index-epsilon_005flp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">10^-8</code>
+</p>
+<p>Epsilon used for numerical computations in <code class="code">linear_program</code>; it is
+set to 0 in <code class="code">linear_program</code> when all inputs are rational.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;simplex&quot;)$
+
+(%i2) minimize_lp(-x, [1e-9*x + y &lt;= 1], [x,y]);
+Warning: linear_program(A,b,c): non-rat inputs found, epsilon_lp= 1.0e-8
+Warning: Solution may be incorrect.
+(%o2)                        Problem not bounded!
+(%i3) minimize_lp(-x, [10^-9*x + y &lt;= 1], [x,y]);
+(%o3)               [- 1000000000, [y = 0, x = 1000000000]]
+(%i4) minimize_lp(-x, [1e-9*x + y &lt;= 1], [x,y]), epsilon_lp=0;
+(%o4)     [- 9.999999999999999e+8, [y = 0, x = 9.999999999999999e+8]]
+</pre></div>
+
+<p>See also: <code class="code"><a class="ref" href="#linear_005fprogram">linear_program</a></code>, <code class="code"><a class="ref" href="maxima_4.html#ratnump">ratnump</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="linear_005fprogram"></a><a class="anchor" id="Item_003a-simplex_002fdeffn_002flinear_005fprogram"></a><dl class="first-deffn">
+<dt class="deffn" id="index-linear_005fprogram"><span class="category-def">Function: </span><span><strong class="def-name">linear_program</strong> <var class="def-var-arguments">(<var class="var">A</var>, <var class="var">b</var>, <var class="var">c</var>)</var><a class="copiable-link" href='#index-linear_005fprogram'> &para;</a></span></dt>
+<dd>
+<p><code class="code">linear_program</code> is an implementation of the simplex algorithm.
+<code class="code">linear_program(A, b, c)</code> computes a vector <var class="var">x</var> for which
+<code class="code">c.x</code> is minimum possible among vectors for which <code class="code">A.x = b</code>
+and <code class="code">x &gt;= 0</code>. Argument <var class="var">A</var> is a matrix and arguments <var class="var">b</var>
+and <var class="var">c</var> are lists.
+</p>
+<p><code class="code">linear_program</code> returns a list which contains the minimizing
+vector <var class="var">x</var> and the minimum value <code class="code">c.x</code>. If the problem is not
+bounded, it returns &quot;Problem not bounded!&quot; and if the problem is not
+feasible, it returns &quot;Problem not feasible!&quot;.
+</p>
+<p>To use this function first load the <code class="code">simplex</code> package with
+<code class="code">load(&quot;simplex&quot;);</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) A: matrix([1,1,-1,0], [2,-3,0,-1], [4,-5,0,0])$
+(%i3) b: [1,1,6]$
+(%i4) c: [1,-2,0,0]$
+(%i5) linear_program(A, b, c);
+                   13     19        3
+(%o5)            [[--, 4, --, 0], - -]
+                   2      2         2
+</pre></div>
+
+<p>See also: <code class="code"><a class="ref" href="#minimize_005flp">minimize_lp</a></code>, <code class="code"><a class="ref" href="#scale_005flp">scale_lp</a></code>, and <code class="code"><a class="ref" href="#epsilon_005flp">epsilon_lp</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="maximize_005flp"></a><a class="anchor" id="Item_003a-simplex_002fdeffn_002fmaximize_005flp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-maximize_005flp"><span class="category-def">Function: </span><span><strong class="def-name">maximize_lp</strong> <var class="def-var-arguments">(<var class="var">obj</var>, <var class="var">cond</var>, [<var class="var">pos</var>])</var><a class="copiable-link" href='#index-maximize_005flp'> &para;</a></span></dt>
+<dd>
+<p>Maximizes linear objective function <var class="var">obj</var> subject to some linear
+constraints <var class="var">cond</var>. See <code class="code"><a class="ref" href="#minimize_005flp">minimize_lp</a></code> for detailed
+description of arguments and return value.
+</p>
+
+<p>See also: <code class="code"><a class="ref" href="#minimize_005flp">minimize_lp</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="minimize_005flp"></a><a class="anchor" id="Item_003a-simplex_002fdeffn_002fminimize_005flp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-minimize_005flp"><span class="category-def">Function: </span><span><strong class="def-name">minimize_lp</strong> <var class="def-var-arguments">(<var class="var">obj</var>, <var class="var">cond</var>, [<var class="var">pos</var>])</var><a class="copiable-link" href='#index-minimize_005flp'> &para;</a></span></dt>
+<dd>
+<p>Minimizes a linear objective function <var class="var">obj</var> subject to some linear
+constraints <var class="var">cond</var>. <var class="var">cond</var> a list of linear equations or
+inequalities. In strict inequalities <code class="code">&gt;</code> is replaced by <code class="code">&gt;=</code>
+and <code class="code">&lt;</code> by <code class="code">&lt;=</code>. The optional argument <var class="var">pos</var> is a list
+of decision variables which are assumed to be positive.
+</p>
+<p>If the minimum exists, <code class="code">minimize_lp</code> returns a list which
+contains the minimum value of the objective function and a list of
+decision variable values for which the minimum is attained. If the
+problem is not bounded, <code class="code">minimize_lp</code> returns &quot;Problem not
+bounded!&quot; and if the problem is not feasible, it returns &quot;Problem not
+feasible!&quot;.
+</p>
+<p>The decision variables are not assumed to be non-negative by default. If
+all decision variables are non-negative, set <code class="code">nonnegative_lp</code> to
+<code class="code">true</code> or include <code class="code">all</code> in the optional argument <var class="var">pos</var>. If
+only some of decision variables are positive, list them in the optional
+argument <var class="var">pos</var> (note that this is more efficient than adding
+constraints).
+</p>
+<p><code class="code">minimize_lp</code> uses the simplex algorithm which is implemented in
+maxima <code class="code">linear_program</code> function.
+</p>
+<p>To use this function first load the <code class="code">simplex</code> package with
+<code class="code">load(&quot;simplex&quot;);</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) minimize_lp(x+y, [3*x+y=0, x+2*y&gt;2]);
+                      4       6        2
+(%o1)                [-, [y = -, x = - -]]
+                      5       5        5
+(%i2) minimize_lp(x+y, [3*x+y&gt;0, x+2*y&gt;2]), nonnegative_lp=true;
+(%o2)                [1, [y = 1, x = 0]]
+(%i3) minimize_lp(x+y, [3*x+y&gt;0, x+2*y&gt;2], all);
+(%o3)                         [1, [y = 1, x = 0]]
+(%i4) minimize_lp(x+y, [3*x+y=0, x+2*y&gt;2]), nonnegative_lp=true;
+(%o4)                Problem not feasible!
+(%i5) minimize_lp(x+y, [3*x+y&gt;0]);
+(%o5)                Problem not bounded!
+
+</pre></div>
+
+<p>There is also a limited ability to solve linear programs with symbolic
+constants.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare(c,constant)$
+(%i2) maximize_lp(x+y, [y&lt;=-x/c+3, y&lt;=-x+4], [x, y]), epsilon_lp=0;
+Is (c-1)*c positive, negative or zero?
+p;
+Is c*(2*c-1) positive, negative or zero?
+p;
+Is c positive or negative?
+p;
+Is c-1 positive, negative or zero?
+p;
+Is 2*c-1 positive, negative or zero?
+p;
+Is 3*c-4 positive, negative or zero?
+p;
+                                 1                1
+(%o2)                 [4, [x = -----, y = 3 - ---------]]
+                                   1               1
+                               1 - -          (1 - -) c
+                                   c               c
+</pre></div>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) (assume(c&gt;4/3), declare(c,constant))$
+(%i2) maximize_lp(x+y, [y&lt;=-x/c+3, y&lt;=-x+4], [x, y]), epsilon_lp=0;
+                                 1                1
+(%o2)                 [4, [x = -----, y = 3 - ---------]]
+                                   1               1
+                               1 - -          (1 - -) c
+                                   c               c
+</pre></div>
+
+<p>See also: <code class="code"><a class="ref" href="#maximize_005flp">maximize_lp</a></code>, <code class="code"><a class="ref" href="#nonnegative_005flp">nonnegative_lp</a></code>, <code class="code"><a class="ref" href="#epsilon_005flp">epsilon_lp</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="nonnegative_005flp"></a><a class="anchor" id="Item_003a-simplex_002fdefvr_002fnonnegative_005flp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-nonnegative_005flp"><span class="category-def">Option variable: </span><span><strong class="def-name">nonnegative_lp</strong><a class="copiable-link" href='#index-nonnegative_005flp'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-simplex_002fdefvr_002fnonegative_005flp"></a></dd><dt class="defvrx def-cmd-defvr" id="index-nonegative_005flp"><span class="category-def">Option variable: </span><span><strong class="def-name">nonegative_lp</strong><a class="copiable-link" href='#index-nonegative_005flp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>If <code class="code">nonnegative_lp</code> is true all decision variables to
+<code class="code">minimize_lp</code> and <code class="code">maximize_lp</code> are assumed to be non-negative.
+<code class="code">nonegative_lp</code> is a deprecated alias.
+</p>                   
+<p>See also: <code class="code"><a class="ref" href="#minimize_005flp">minimize_lp</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="scale_005flp"></a><a class="anchor" id="Item_003a-simplex_002fdefvr_002fscale_005flp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-scale_005flp"><span class="category-def">Option variable: </span><span><strong class="def-name">scale_lp</strong><a class="copiable-link" href='#index-scale_005flp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">scale_lp</code> is <code class="code">true</code>,
+<code class="code">linear_program</code> scales its input so that the maximum absolute value in each row or column is 1.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="pivot_005fcount_005fsx"></a><a class="anchor" id="Item_003a-simplex_002fdefvr_002fpivot_005fcount_005fsx"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pivot_005fcount_005fsx"><span class="category-def">Variable: </span><span><strong class="def-name">pivot_count_sx</strong><a class="copiable-link" href='#index-pivot_005fcount_005fsx'> &para;</a></span></dt>
+<dd>
+<p>After <code class="code">linear_program</code> returns,
+<code class="code">pivot_count_sx</code> is the number of pivots in last computation.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="pivot_005fmax_005fsx"></a><a class="anchor" id="Item_003a-simplex_002fdefvr_002fpivot_005fmax_005fsx"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pivot_005fmax_005fsx"><span class="category-def">Variable: </span><span><strong class="def-name">pivot_max_sx</strong><a class="copiable-link" href='#index-pivot_005fmax_005fsx'> &para;</a></span></dt>
+<dd>
+<p><code class="code">pivot_max_sx</code> is the maximum number of pivots allowed by <code class="code">linear_program</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-simplex">Package simplex</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_86.html#simplification_002dpkg" accesskey="n" rel="next">simplification</a>, Previous: <a href="maxima_84.html#romberg_002dpkg" accesskey="p" rel="prev">romberg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

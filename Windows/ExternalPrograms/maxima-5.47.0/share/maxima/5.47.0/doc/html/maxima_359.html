@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Package facexp</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Package facexp">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Package facexp">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_356.html#simplification_002dpkg" rel="up" title="simplification-pkg">
+<link href="maxima_360.html#Package-functs" rel="next" title="Package functs">
+<link href="maxima_358.html#Package-absimp" rel="previous" title="Package absimp">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Package-facexp"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_360.html#Package-functs" accesskey="n" rel="next">Package functs</a>, Previous: <a href="maxima_358.html#Package-absimp" accesskey="p" rel="previous">Package absimp</a>, Up: <a href="maxima_356.html#simplification_002dpkg" accesskey="u" rel="up">simplification-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Package-facexp-1"></a>
+<h3 class="section">87.3 Package facexp</h3>
+
+<p>The <code>facexp</code> package contains several related  functions that
+provide the user with the ability to structure expressions by controlled
+expansion.   This capability  is especially  useful when  the expression
+contains variables that have physical meaning, because it is  often true
+that the most economical form  of such an expression can be  obtained by
+fully expanding the expression with respect to those variables, and then
+factoring their coefficients.  While it is  true that this  procedure is
+not difficult to carry out using standard Maxima  functions, additional
+fine-tuning may also  be desirable, and  these finishing touches  can be
+more  difficult to  apply.
+</p>
+<p>The  function <code>facsum</code>  and its  related forms
+provide a convenient means for controlling the structure  of expressions
+in this way.  Another function, <code>collectterms</code>, can be used to add  two or
+more expressions that have already been simplified to this form, without
+resimplifying the whole expression again.  This function may be
+useful when the expressions are very large.
+</p>
+
+<p><code>load (&quot;facexp&quot;)</code> loads this package.
+<code>demo (&quot;facexp&quot;)</code> shows a demonstration of this package.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;</div>
+
+<a name="facsum"></a><a name="Item_003a-simplifications_002fdeffn_002ffacsum"></a><dl>
+<dt><a name="index-facsum"></a>Function: <strong>facsum</strong> <em>(<var>expr</var>, <var>arg_1</var>, ..., <var>arg_n</var>)</em></dt>
+<dd><p>Returns  a form  of <var>expr</var>  which depends  on the
+arguments <var>arg_1</var>, ..., <var>arg_n</var>.
+The arguments can be any form suitable for <code>ratvars</code>, or they can be
+lists  of such  forms.  If  the arguments  are not  lists, then  the form
+returned is  fully expanded with respect  to the arguments,  and the
+coefficients of the arguments are factored.  These  coefficients are
+free of the arguments, except perhaps in a non-rational sense.
+</p>
+<p>If any of the arguments are  lists, then all such lists are combined
+into  a  single  list,   and  instead  of  calling  <code>factor</code>   on  the
+coefficients  of  the  arguments,  <code>facsum</code>  calls  itself   on  these
+coefficients, using  this newly constructed  single list as  the new
+argument list  for this  recursive  call.  This  process can  be  repeated to
+arbitrary depth by nesting the desired elements in lists.
+</p>
+<p>It is possible that one may wish to <code>facsum</code> with respect  to more
+complicated subexpressions,  such as  <code>log (x + y)</code>.  Such  arguments are
+also  permissible.   
+</p>
+
+<p>Occasionally the user may wish to obtain any of the  above forms
+for expressions which are specified only by their leading operators.
+For example, one may wish  to <code>facsum</code> with respect to all  <code>log</code>&rsquo;s.  In
+this situation, one may  include among the arguments either  the specific
+<code>log</code>&rsquo;s which are to be treated in this way, or  alternatively, either
+the expression  <code>operator (log)</code> or <code>'operator (log)</code>.   If one  wished to
+<code>facsum</code> the expression <var>expr</var> with respect to the operators <var>op_1</var>, ..., <var>op_n</var>,
+one   would  evaluate  <code>facsum (<var>expr</var>, operator (<var>op_1</var>, ..., <var>op_n</var>))</code>.
+The <code>operator</code> form may also appear inside list arguments.
+</p>
+<p>In  addition,  the  setting  of  the  switches   <code>facsum_combine</code>  and
+<code>nextlayerfactor</code> may affect the result of <code>facsum</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="nextlayerfactor"></a><a name="Item_003a-simplifications_002fdefvr_002fnextlayerfactor"></a><dl>
+<dt><a name="index-nextlayerfactor"></a>Global variable: <strong>nextlayerfactor</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>nextlayerfactor</code> is <code>true</code>, recursive calls  of <code>facsum</code>
+are applied  to  the  factors  of  the  factored  form   of  the
+coefficients of the arguments.
+</p>
+<p>When  <code>false</code>, <code>facsum</code> is applied to
+each coefficient as a whole whenever recursive calls to  <code>facsum</code> occur.
+</p>
+<p>Inclusion   of   the  atom
+<code>nextlayerfactor</code> in  the argument  list of <code>facsum</code>  has the  effect of
+<code>nextlayerfactor: true</code>, but for the next level of the expression <i>only</i>.
+Since <code>nextlayerfactor</code> is  always bound to  either <code>true</code> or  <code>false</code>, it
+must be presented single-quoted whenever it appears in the argument list of <code>facsum</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="facsum_005fcombine"></a><a name="Item_003a-simplifications_002fdefvr_002ffacsum_005fcombine"></a><dl>
+<dt><a name="index-facsum_005fcombine"></a>Global variable: <strong>facsum_combine</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p><code>facsum_combine</code> controls the form  of the final result  returned by
+<code>facsum</code>  when  its  argument  is  a  quotient  of   polynomials.   If
+<code>facsum_combine</code> is <code>false</code>  then the form will  be returned as  a fully
+expanded  sum  as described  above,  but if  <code>true</code>,  then  the expression
+returned is a ratio of polynomials, with each polynomial in the form
+described above.
+</p>
+<p>The <code>true</code> setting of this switch is useful when one
+wants to  <code>facsum</code> both  the numerator and  denominator of  a rational
+expression,  but  does not  want  the denominator  to  be multiplied
+through the terms of the numerator.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="factorfacsum"></a><a name="Item_003a-simplifications_002fdeffn_002ffactorfacsum"></a><dl>
+<dt><a name="index-factorfacsum"></a>Function: <strong>factorfacsum</strong> <em>(<var>expr</var>, <var>arg_1</var>, ... <var>arg_n</var>)</em></dt>
+<dd><p>Returns a  form of <var>expr</var>  which is
+obtained by calling  <code>facsum</code> on the factors  of <var>expr</var> with <var>arg_1</var>, ... <var>arg_n</var> as
+arguments.  If any of the factors of <var>expr</var> is raised to a  power, both
+the factor and the exponent will be processed in this way.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="collectterms"></a><a name="Item_003a-simplifications_002fdeffn_002fcollectterms"></a><dl>
+<dt><a name="index-collectterms"></a>Function: <strong>collectterms</strong> <em>(<var>expr</var>, <var>arg_1</var>, &hellip;, <var>arg_n</var>)</em></dt>
+<dd>
+<p>Collects all terms that contain <var>arg_1</var> ... <var>arg_n</var>.
+If several expressions have been simplified  with the following functions
+<code>facsum</code>, <code>factorfacsum</code>, <code>factenexpand</code>, <code>facexpten</code> or
+<code>factorfacexpten</code>, and they are to be added together, it may be desirable
+to combine them using the function  <code>collecterms</code>.  <code>collecterms</code> can
+take as arguments all of the arguments that can be given to these other
+associated functions with the exception of <code>nextlayerfactor</code>, which has no
+effect on <code>collectterms</code>.  The advantage of <code>collectterms</code> is that it
+returns a form  similar to <code>facsum</code>, but since it is adding forms that have
+already been processed by <code>facsum</code>, it does not need to repeat that effort.
+This capability is especially useful when the expressions to be summed are very
+large.
+</p>
+<p>See also <code><a href="maxima_80.html#factor">factor</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) (exp(x)+2)*x+exp(x);
+                             x          x
+(%o1)                   x (%e  + 2) + %e
+</pre><pre class="example">(%i2) collectterms(expand(%),exp(x));
+                                  x
+(%o2)                   (x + 1) %e  + 2 x
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-facexp">Package facexp</a>
+&middot;<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div></dd></dl>
+
+
+<a name="Item_003a-simplifications_002fnode_002fPackage-functs"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_360.html#Package-functs" accesskey="n" rel="next">Package functs</a>, Previous: <a href="maxima_358.html#Package-absimp" accesskey="p" rel="previous">Package absimp</a>, Up: <a href="maxima_356.html#simplification_002dpkg" accesskey="u" rel="up">simplification-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

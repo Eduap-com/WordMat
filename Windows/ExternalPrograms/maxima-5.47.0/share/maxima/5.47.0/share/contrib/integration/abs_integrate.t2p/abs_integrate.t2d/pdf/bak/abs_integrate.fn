@@ -1,0 +1,5 @@
+\entry{intfudu}{4}{\code {intfudu}}
+\entry{intfugudu}{5}{\code {intfugudu}}
+\entry{signum_to_abs}{5}{\code {signum_to_abs}}
+\entry{conditional_integrate}{6}{\code {conditional_integrate}}
+\entry{convert_to_signum}{6}{\code {convert_to_signum}}

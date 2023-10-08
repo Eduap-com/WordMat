@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Chi-squared Random Variable</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Chi-squared Random Variable">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Chi-squared Random Variable">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" rel="up" title="Functions and Variables for continuous distributions">
+<link href="maxima_225.html#Noncentral-Chi_002dsquared-Random-Variable" rel="next" title="Noncentral Chi-squared Random Variable">
+<link href="maxima_223.html#Noncentral-Student_0027s-t-Random-Variable" rel="previous" title="Noncentral Student's t Random Variable">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Chi_002dsquared-Random-Variable"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_225.html#Noncentral-Chi_002dsquared-Random-Variable" accesskey="n" rel="next">Noncentral Chi-squared Random Variable</a>, Previous: <a href="maxima_223.html#Noncentral-Student_0027s-t-Random-Variable" accesskey="p" rel="previous">Noncentral Student's t Random Variable</a>, Up: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="u" rel="up">Functions and Variables for continuous distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Chi_002dsquared-Random-Variable-1"></a>
+<h4 class="subsection">52.2.4 Chi-squared Random Variable</h4>
+
+<p>Let 
+\(X_1, X_2, \ldots, X_n\) be independent and identically distributed 
+\({\it Normal}(0, 1)\) variables.  Then
+$$
+X^2 = \sum_{i=1}^n X_i^2
+$$</p>
+
+<p>is said to follow a chi-square distribution with <em>n</em> degrees of
+freedom.
+</p>
+<a name="pdf_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002fpdf_005fchi2"></a><dl>
+<dt><a name="index-pdf_005fchi2"></a>Function: <strong>pdf_chi2</strong> <em>(<var>x</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the density function of a Chi-square random variable 
+\(\chi^2(n)\), with <em>n&gt;0</em>.
+The 
+\(\chi^2(n)\) random variable is equivalent to the 
+\(\Gamma\left(n/2,2\right)\).
+</p>
+<p>The pdf is
+</p>
+$$
+f(x; n) =
+\cases{
+ \displaystyle{x^{n/2-1} e^{-x/2} \over 2^{n/2}
+ \Gamma\left(\displaystyle{n\over 2}\right)} & for $x
+ > 0$ \cr
+\cr
+ 0 & otherwise
+}
+$$
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) pdf_chi2(x,n);
+                   n/2 - 1   - x/2
+                  x        %e      unit_step(x)
+(%o2)             -----------------------------
+                                n   n/2
+                          gamma(-) 2
+                                2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="cdf_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002fcdf_005fchi2"></a><dl>
+<dt><a name="index-cdf_005fchi2"></a>Function: <strong>cdf_chi2</strong> <em>(<var>x</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the value at <em>x</em> of the distribution function of a Chi-square random variable 
+\(\chi^2(n)\), with <em>n&gt;0</em>.
+</p>
+<p>The cdf is
+$$
+F(x; n) =
+\cases{
+1 - Q\left(\displaystyle{n\over 2}, {x\over 2}\right) & $x > 0$ \cr
+0 & otherwise
+}
+$$</p>
+<p>where <em>Q(a,z)</em> is the <a href="maxima_87.html#gamma_005fincomplete_005fregularized">gamma_incomplete_regularized</a> function.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) cdf_chi2(3,4);
+                                                 3
+(%o2)        1 - gamma_incomplete_regularized(2, -)
+                                                 2
+</pre><pre class="example">(%i3) float(%);
+(%o3)                  0.4421745996289252
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="quantile_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002fquantile_005fchi2"></a><dl>
+<dt><a name="index-quantile_005fchi2"></a>Function: <strong>quantile_chi2</strong> <em>(<var>q</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the <var>q</var>-quantile of a Chi-square random variable 
+\(\chi^2(n)\), with <em>n&gt;0</em>; in other words, this is the inverse of <code>cdf_chi2</code>. Argument <var>q</var> must be an element of <em>[0,1]</em>.
+</p>
+<p>This function has no closed form and it is numerically computed.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) quantile_chi2(0.99,9);
+(%o2)                   21.66599433346194
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="mean_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002fmean_005fchi2"></a><dl>
+<dt><a name="index-mean_005fchi2"></a>Function: <strong>mean_chi2</strong> <em>(<var>n</var>)</em></dt>
+<dd><p>Returns the mean of a Chi-square random variable 
+\(\chi^2(n)\), with <em>n&gt;0</em>.
+</p>
+<p>The 
+\(\chi^2(n)\) random variable is equivalent to the 
+\(\Gamma\left(n/2,2\right)\).
+</p>
+<p>The mean is
+$$
+E[X] = n
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) mean_chi2(n);
+(%o2)                           n
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="var_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002fvar_005fchi2"></a><dl>
+<dt><a name="index-var_005fchi2"></a>Function: <strong>var_chi2</strong> <em>(<var>n</var>)</em></dt>
+<dd><p>Returns the variance of a Chi-square random variable 
+\(\chi^2(n)\), with <em>n&gt;0</em>.
+</p>
+<p>The 
+\(\chi^2(n)\) random variable is equivalent to the 
+\(\Gamma\left(n/2,2\right)\).
+</p>
+<p>The variance is
+$$
+V[X] = 2n
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) var_chi2(n);
+(%o2)                          2 n
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="std_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002fstd_005fchi2"></a><dl>
+<dt><a name="index-std_005fchi2"></a>Function: <strong>std_chi2</strong> <em>(<var>n</var>)</em></dt>
+<dd><p>Returns the standard deviation of a Chi-square random variable 
+\(\chi^2(n)\), with <em>n&gt;0</em>.
+</p>
+<p>The 
+\(\chi^2(n)\) random variable is equivalent to the 
+\(\Gamma\left(n/2,2\right)\).
+</p>
+<p>The standard deviation is
+$$
+D[X] = \sqrt{2n}
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) std_chi2(n);
+(%o2)                    sqrt(2) sqrt(n)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="skewness_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002fskewness_005fchi2"></a><dl>
+<dt><a name="index-skewness_005fchi2"></a>Function: <strong>skewness_chi2</strong> <em>(<var>n</var>)</em></dt>
+<dd><p>Returns the skewness coefficient of a Chi-square random variable 
+\(\chi^2(n)\), with <em>n&gt;0</em>.
+</p>
+<p>The 
+\(\chi^2(n)\) random variable is equivalent to the 
+\(\Gamma\left(n/2,2\right)\).
+</p>
+<p>The skewness coefficient is
+$$
+SK[X] = \sqrt{8\over n}
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) skewness_chi2(n);
+                               3/2
+                              2
+(%o2)                        -------
+                             sqrt(n)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="kurtosis_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002fkurtosis_005fchi2"></a><dl>
+<dt><a name="index-kurtosis_005fchi2"></a>Function: <strong>kurtosis_chi2</strong> <em>(<var>n</var>)</em></dt>
+<dd><p>Returns the kurtosis coefficient of a Chi-square random variable 
+\(\chi^2(n)\), with <em>n&gt;0</em>.
+</p>
+<p>The 
+\(\chi^2(n)\) random variable is equivalent to the 
+\(\Gamma\left(n/2,2\right)\).
+</p>
+<p>The kurtosis coefficient is
+$$
+KU[X] = {12\over n}
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) kurtosis_chi2(n);
+                               12
+(%o2)                          --
+                               n
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="random_005fchi2"></a><a name="Item_003a-distrib_002fdeffn_002frandom_005fchi2"></a><dl>
+<dt><a name="index-random_005fchi2"></a>Function: <strong>random_chi2</strong> <em>(<var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>random_chi2</tt> (<var>n</var>,<var>m</var>)</em></dt>
+<dd>
+<p>Returns a Chi-square random variate 
+\(\chi^2(n)\), with <em>n&gt;0</em>. Calling <code>random_chi2</code> with a second argument <var>m</var>, a random sample of size <var>m</var> will be simulated.
+</p>
+<p>The simulation is based on the Ahrens-Cheng algorithm. See <code>random_gamma</code> for details.
+</p>
+<p>To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;<a href="maxima_424.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="Item_003a-distrib_002fnode_002fNoncentral-Chi_002dsquared-Random-Variable"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_225.html#Noncentral-Chi_002dsquared-Random-Variable" accesskey="n" rel="next">Noncentral Chi-squared Random Variable</a>, Previous: <a href="maxima_223.html#Noncentral-Student_0027s-t-Random-Variable" accesskey="p" rel="previous">Noncentral Student's t Random Variable</a>, Up: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="u" rel="up">Functions and Variables for continuous distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

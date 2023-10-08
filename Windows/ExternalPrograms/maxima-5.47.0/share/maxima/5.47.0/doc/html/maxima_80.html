@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>pslq-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="pslq-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="pslq-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_81.html#pytranslate" rel="next" title="pytranslate">
+<link href="maxima_79.html#orthopoly_002dpkg" rel="prev" title="orthopoly-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="pslq_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_81.html#pytranslate" accesskey="n" rel="next">pytranslate</a>, Previous: <a href="maxima_79.html#orthopoly_002dpkg" accesskey="p" rel="prev">orthopoly</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="pslq">81 pslq</h2>
+
+<a class="anchor" id="Item_003a-pslq_002fnode_002fIntroduction-to-pslq"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-pslq" accesskey="1">Introduction to pslq</a></li>
+<li><a href="#Functions-and-Variables-for-pslq" accesskey="2">Functions and Variables for pslq</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-pslq">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-pslq" accesskey="n" rel="next">Functions and Variables for pslq</a>, Previous: <a href="#pslq_002dpkg" accesskey="p" rel="prev">pslq</a>, Up: <a href="#pslq_002dpkg" accesskey="u" rel="up">pslq</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-pslq-1">81.1 Introduction to pslq</h3>
+
+<p>Package <code class="code">pslq</code> contains two functions.
+</p>
+<p>(1) <code class="code">guess_exact_value</code> tries to find
+an exact equivalent for an inexact number (float or bigfloat).
+</p>
+<p>(2) <code class="code">pslq_integer_relation</code> tries to find
+integer coefficients such that a linear combination of inexact numbers
+is approximately zero.
+</p>
+<a class="anchor" id="Item_003a-pslq_002fnode_002fFunctions-and-Variables-for-pslq"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-pslq">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-pslq" accesskey="p" rel="prev">Introduction to pslq</a>, Up: <a href="#pslq_002dpkg" accesskey="u" rel="up">pslq</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-pslq-1">81.2 Functions and Variables for pslq</h3>
+
+<a class="anchor" id="guess_005fexact_005fvalue"></a><a class="anchor" id="Item_003a-pslq_002fdeffn_002fguess_005fexact_005fvalue"></a><dl class="first-deffn">
+<dt class="deffn" id="index-guess_005fexact_005fvalue"><span class="category-def">Function: </span><span><strong class="def-name">guess_exact_value</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-guess_005fexact_005fvalue'> &para;</a></span></dt>
+<dd>
+<p>When <var class="var">x</var> is a floating point number or bigfloat,
+<code class="code">guess_exact_value</code> tries to find an exact expression
+(in terms of radicals, logarithms, exponentials, and the constant <code class="code">%pi</code>)
+which is nearly equal to the given number.
+If <code class="code">guess_exact_value</code> cannot find such an expression,
+<var class="var">x</var> is returned unchanged.
+</p>
+<p>When <var class="var">x</var> is rational number or other mapatom
+(other than a float or bigfloat),
+<var class="var">x</var> is returned unchanged.
+</p>
+<p>Otherwise, <var class="var">x</var> is a nonatomic expression,
+and <code class="code">guess_exact_value</code> is applied to each of the arguments of <var class="var">x</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;pslq.mac&quot;);
+(%o1)                       pslq.mac
+(%i2) root: float (sin (%pi/12));
+(%o2)                  0.2588190451025207
+(%i3) guess_exact_value (root);
+                        sqrt(2 - sqrt(3))
+(%o3)                   -----------------
+                                2
+(%i4) L: makelist (root^i, i, 0, 4);
+(%o4) [1.0, 0.2588190451025207, 0.06698729810778066, 
+                       0.01733758853025369, 0.004487298107780675]
+(%i5) m: pslq_integer_relation(%);
+(%o5)                 [- 1, 0, 16, 0, - 16]
+(%i6) makelist (x^i, i, 0, 4) . m;
+                             4        2
+(%o6)                 (- 16 x ) + 16 x  - 1
+(%i7) solve(%);
+             sqrt(sqrt(3) + 2)      sqrt(sqrt(3) + 2)
+(%o7) [x = - -----------------, x = -----------------, 
+                     2                      2
+                        sqrt(2 - sqrt(3))      sqrt(2 - sqrt(3))
+                  x = - -----------------, x = -----------------]
+                                2                      2
+</pre></div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-pslq_002fdeffn_002fpslq_005finteger_005frelation"></a><dl class="first-deffn">
+<dt class="deffn" id="index-pslq_005finteger_005frelation"><span class="category-def">Function: </span><span><strong class="def-name">pslq_integer_relation</strong> <var class="def-var-arguments">(<var class="var">L</var>)</var><a class="copiable-link" href='#index-pslq_005finteger_005frelation'> &para;</a></span></dt>
+<dd>
+<p>Implements the PSLQ algorithm [1] to find integer relations between bigfloat numbers.
+</p>
+<p>For a given list <var class="var">L</var> of floating point numbers,
+<code class="code">pslq_integer_relation</code> returns a list of integers <var class="var">m</var>
+such that <code class="code"><var class="var">m</var> . <var class="var">L</var> = 0</code>
+(with absolute residual error less than <code class="code">pslq_threshold</code>).
+</p>
+<p>[1] D.H.Bailey: Integer Relation Detection and Lattice Reduction.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;pslq.mac&quot;);
+(%o1)                       pslq.mac
+(%i2) root: float (sin (%pi/12));
+(%o2)                  0.2588190451025207
+(%i3) L: makelist (root^i, i, 0, 4);
+(%o3) [1.0, 0.2588190451025207, 0.06698729810778066, 
+                       0.01733758853025369, 0.004487298107780675]
+(%i4) m: pslq_integer_relation(%);
+(%o4)                 [- 1, 0, 16, 0, - 16]
+(%i5) m . L;
+(%o5)                - 2.359223927328458E-16
+(%i6) float (10^(2 - fpprec));
+(%o6)                        1.0E-14
+(%i7) is (abs (m . L) &lt; 10^(2 - fpprec));
+(%o7)                         true
+</pre></div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-pslq_002fdefvr_002fpslq_005fprecision"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pslq_005fprecision"><span class="category-def">Variable: </span><span><strong class="def-name">pslq_precision</strong><a class="copiable-link" href='#index-pslq_005fprecision'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">10^(fpprec - 2)</code>
+</p>
+<p>Maximum magnitude of some intermediate results in <code class="code">pslq_integer_relation</code>.
+The search fails if one of the intermediate results has elements
+larger than <code class="code">pslq_precision</code>.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-pslq_002fdefvr_002fpslq_005fthreshold"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pslq_005fthreshold"><span class="category-def">Variable: </span><span><strong class="def-name">pslq_threshold</strong><a class="copiable-link" href='#index-pslq_005fthreshold'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">10^(2 - fpprec)</code>
+</p>
+<p>Threshold for absolute residual error of integer relation found by <code class="code">pslq_integer_relation</code>.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-pslq_002fdefvr_002fpslq_005fdepth"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pslq_005fdepth"><span class="category-def">Variable: </span><span><strong class="def-name">pslq_depth</strong><a class="copiable-link" href='#index-pslq_005fdepth'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">20 * <var class="var">n</var></code>
+</p>
+<p>Number of iterations of the PSLQ algorithm.
+</p>
+<p>The default value is 20 times <var class="var">n</var>,
+where <var class="var">n</var> is the length of the list of numbers supplied to <code class="code">pslq_integer_relation</code>.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-pslq_002fdefvr_002fpslq_005fstatus"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pslq_005fstatus"><span class="category-def">Variable: </span><span><strong class="def-name">pslq_status</strong><a class="copiable-link" href='#index-pslq_005fstatus'> &para;</a></span></dt>
+<dd>
+<p>Indicates success or failure for an integer relation search by <code class="code">pslq_integer_relation</code>.
+</p>
+<p>When <code class="code">pslq_status</code> is 1, it indicates an integer relation was found,
+and the absolute residual error is less than <code class="code">pslq_threshold</code>.
+</p>
+<p>When <code class="code">pslq_status</code> is 2, it indicates an integer relation was not found
+because some intermediate results are larger than <code class="code">pslq_precision</code>.
+</p>
+<p>When <code class="code">pslq_status</code> is 3, it indicates an integer relation was not found
+because the number of iterations <code class="code">pslq_depth</code> was reached.
+</p>
+</dd></dl>
+
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_81.html#pytranslate" accesskey="n" rel="next">pytranslate</a>, Previous: <a href="maxima_79.html#orthopoly_002dpkg" accesskey="p" rel="prev">orthopoly</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

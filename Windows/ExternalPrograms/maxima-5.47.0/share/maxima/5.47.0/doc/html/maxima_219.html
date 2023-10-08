@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to distrib</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to distrib">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to distrib">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_218.html#distrib_002dpkg" rel="up" title="distrib-pkg">
+<link href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" rel="next" title="Functions and Variables for continuous distributions">
+<link href="maxima_218.html#distrib_002dpkg" rel="previous" title="distrib-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-distrib"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="n" rel="next">Functions and Variables for continuous distributions</a>, Up: <a href="maxima_218.html#distrib_002dpkg" accesskey="u" rel="up">distrib-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-distrib-1"></a>
+<h3 class="section">52.1 Introduction to distrib</h3>
+
+
+<p>Package <code>distrib</code> contains a set of functions for making probability computations on both discrete and continuous univariate models. 
+</p>
+<p>What follows is a short reminder of basic probabilistic related definitions.
+</p>
+<p>Let <em>f(x)</em> be the <var>density function</var> of an absolute continuous random variable <em>X</em>. The <var>distribution function</var> is defined as
+$$
+F\left(x\right)=\int_{ -\infty }^{x}{f\left(u\right)\;du}
+$$</p>
+<p>which equals the probability 
+\({\rm Pr}(X \le x)\).
+</p>
+<p>The <var>mean</var> value is a localization parameter and is defined as
+$$
+E\left[X\right]=\int_{ -\infty }^{\infty }{x\,f\left(x\right)\;dx}
+$$</p>
+
+<p>The <var>variance</var> is a measure of variation,
+$$
+V\left[X\right]=\int_{ -\infty }^{\infty }{f\left(x\right)\,\left(x
+ -E\left[X\right]\right)^2\;dx}
+$$</p>
+<p>which is a positive real number. The square root of the variance is
+the <var>standard deviation</var>, 
+\(D[x]=\sqrt{V[X]}\), and it is another measure of variation.
+</p>
+<p>The <var>skewness coefficient</var> is a measure of non-symmetry,
+$$
+SK\left[X\right]={{\int_{ -\infty }^{\infty }{f\left(x\right)\,
+ \left(x-E\left[X\right]\right)^3\;dx}}\over{D\left[X\right]^3}}
+$$</p>
+
+<p>And the <var>kurtosis coefficient</var> measures the peakedness of the distribution,
+$$
+KU\left[X\right]={{\int_{ -\infty }^{\infty }{f\left(x\right)\,
+ \left(x-E\left[X\right]\right)^4\;dx}}\over{D\left[X\right]^4}}-3
+$$</p>
+<p>If <em>X</em> is gaussian, <em>KU[X]=0</em>. In fact, both skewness and kurtosis are shape parameters used to measure the non&ndash;gaussianity of a distribution.
+</p>
+<p>If the random variable <em>X</em> is discrete, the density, or <var>probability</var>, function <em>f(x)</em> takes positive values within certain countable set of numbers <em>x_i</em>, and zero elsewhere. In this case, the distribution function is
+$$
+ F\left(x\right)=\sum_{x_{i}\leq x}{f\left(x_{i}\right)} 
+$$</p>
+
+<p>The mean, variance, standard deviation, skewness coefficient and kurtosis coefficient take the form
+$$
+\eqalign{
+E\left[X\right]&=\sum_{x_{i}}{x_{i}f\left(x_{i}\right)}, \cr
+V\left[X\right]&=\sum_{x_{i}}{f\left(x_{i}\right)\left(x_{i}-E\left[X\right]\right)^2},\cr
+D\left[X\right]&=\sqrt{V\left[X\right]},\cr
+SK\left[X\right]&={{\sum_{x_{i}}{f\left(x\right)\,
+ \left(x-E\left[X\right]\right)^3\;dx}}\over{D\left[X\right]^3}}, \cr
+KU\left[X\right]&={{\sum_{x_{i}}{f\left(x\right)\,
+ \left(x-E\left[X\right]\right)^4\;dx}}\over{D\left[X\right]^4}}-3, 
+}
+$$</p>
+<p>respectively.
+</p>
+<p>There is a naming convention in package <code>distrib</code>. Every function name has two parts, the first one makes reference to the function or parameter we want to calculate,
+</p><div class="example">
+<pre class="example">Functions:
+   Density function            (pdf_*)
+   Distribution function       (cdf_*)
+   Quantile                    (quantile_*)
+   Mean                        (mean_*)
+   Variance                    (var_*)
+   Standard deviation          (std_*)
+   Skewness coefficient        (skewness_*)
+   Kurtosis coefficient        (kurtosis_*)
+   Random variate              (random_*)
+</pre></div>
+
+<p>The second part is an explicit reference to the probabilistic model,
+</p><div class="example">
+<pre class="example">Continuous distributions:
+   Normal              (*normal)
+   Student             (*student_t)
+   Chi^2               (*chi2)
+   Noncentral Chi^2    (*noncentral_chi2)
+   F                   (*f)
+   Exponential         (*exp)
+   Lognormal           (*lognormal)
+   Gamma               (*gamma)
+   Beta                (*beta)
+   Continuous uniform  (*continuous_uniform)
+   Logistic            (*logistic)
+   Pareto              (*pareto)
+   Weibull             (*weibull)
+   Rayleigh            (*rayleigh)
+   Laplace             (*laplace)
+   Cauchy              (*cauchy)
+   Gumbel              (*gumbel)
+
+Discrete distributions:
+   Binomial             (*binomial)
+   Poisson              (*poisson)
+   Bernoulli            (*bernoulli)
+   Geometric            (*geometric)
+   Discrete uniform     (*discrete_uniform)
+   hypergeometric       (*hypergeometric)
+   Negative binomial    (*negative_binomial)
+   Finite discrete      (*general_finite_discrete)
+</pre></div>
+
+<p>For example, <code>pdf_student_t(x,n)</code> is the density function of the Student distribution with <var>n</var> degrees of freedom, <code>std_pareto(a,b)</code> is the standard deviation of the Pareto distribution with parameters <var>a</var> and <var>b</var> and <code>kurtosis_poisson(m)</code> is the kurtosis coefficient of the Poisson distribution with mean <var>m</var>.
+</p>
+
+<p>In order to make use of package <code>distrib</code> you need first to load it by typing
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;distrib&quot;)$
+</pre></div>
+
+<p>For comments, bugs or suggestions, please contact the author at <var>&rsquo;riotorto AT yahoo DOT com&rsquo;</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Statistical-functions">Statistical functions</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+
+
+
+<a name="Item_003a-distrib_002fnode_002fFunctions-and-Variables-for-continuous-distributions"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="n" rel="next">Functions and Variables for continuous distributions</a>, Up: <a href="maxima_218.html#distrib_002dpkg" accesskey="u" rel="up">distrib-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

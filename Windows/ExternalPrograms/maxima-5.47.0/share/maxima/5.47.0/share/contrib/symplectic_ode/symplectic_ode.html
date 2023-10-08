@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>symplectic_ode</title>
+
+<meta name="description" content="symplectic_ode">
+<meta name="keywords" content="symplectic_ode">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="#Top" rel="start" title="Top">
+<link href="#Function-and-variable-index" rel="index" title="Function and variable index">
+<link href="dir.html#Top" rel="up" title="(dir)">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<h1 class="settitle" align="center">symplectic_ode</h1>
+
+
+
+<a name="Top"></a>
+<div class="header">
+<p>
+Next: <a href="#Introduction-to-symplectic_005fode" accesskey="n" rel="next">Introduction to symplectic_ode</a>, Previous: <a href="dir.html#Top" accesskey="p" rel="previous">(dir)</a>, Up: <a href="dir.html#Top" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="SEC_Top"></a>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Introduction-to-symplectic_005fode" accesskey="1">Introduction to symplectic_ode</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Definitions-for-symplectic_005fode" accesskey="2">Definitions for symplectic_ode</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Function-and-variable-index" accesskey="3">Function and variable index</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+<a name="symplectic_005fode"></a>
+<h2 class="chapter">1 symplectic_ode</h2>
+
+
+<hr>
+<a name="Introduction-to-symplectic_005fode"></a>
+<div class="header">
+<p>
+Next: <a href="#Definitions-for-symplectic_005fode" accesskey="n" rel="next">Definitions for symplectic_ode</a>, Previous: <a href="#Top" accesskey="p" rel="previous">Top</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-symplectic_005fode-1"></a>
+<h3 class="section">1.1 Introduction to symplectic_ode</h3>
+
+<p>For a hamiltonian of the form F(p) + G(q), the function <code>symplectic_ode</code> numerically solves
+Hamilton&rsquo;s equations of motion <em>p' = -dH/dq, q' = dH/dp</em>, where <em>H</em> is the 
+hamiltonian. The method preserves the Poisson bracket of p and q. One time step is accomplished with the loop
+<br>
+</p><br>
+<pre class="verbatim">for k = 1 ... n 
+   q &lt;-  q + c(k)*diff(H,p)*dt ;update momentum p
+   p &lt;-  p - d(k)*diff(H,q)*dt ;use updated position q 
+</pre><br>
+<br>
+<p>where <em>c1, c2, &hellip;, cn</em> and <em>d1, d2, &hellip;, dn</em> are constants and <em>H</em> is the hamiltonian. 
+</p>
+<p>This code has built-in methods for the symplectic Euler, the Verlet method, and third and fourth order methods 
+that are due to Ronald Ruth. For a complete description of these methods, see 
+<a href="https://en.wikipedia.org/wiki/Symplectic_integrator">https://en.wikipedia.org/wiki/Symplectic_integrator</a>. Additionally, there is a fifth order method that is
+due to Kostas Tselios and T. E. Simos.
+</p>
+<p>The function <code>symplectic_ode</code> creates and compiles functions for updating <var>p</var> &amp; <var>q</var>. 
+The arguments to these functions are modedeclared to have type given by an optional argument 
+(defaults to float).  Of course, hand coding of these functions could increase speed or accuracy, 
+but the automatically generated functions are convenient.
+</p>
+<p>Unlike adaptive methods such as RK45, <code>symplectic_ode</code> uses a fixed step size. Generally 
+symplectic methods that use an adaptive step size lose their advantages over non-symplectic methods.
+</p>
+<hr>
+<a name="Definitions-for-symplectic_005fode"></a>
+<div class="header">
+<p>
+Next: <a href="#Function-and-variable-index" accesskey="n" rel="next">Function and variable index</a>, Previous: <a href="#Introduction-to-symplectic_005fode" accesskey="p" rel="previous">Introduction to symplectic_ode</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Definitions-for-symplectic_005fode-1"></a>
+<h3 class="section">1.2 Definitions for symplectic_ode</h3>
+
+<dl>
+<dt><a name="index-poisson_005fbracket"></a>Function: <strong>poisson_bracket</strong> <em>poisson_bracket(<var>f</var>, <var>g</var>, <var>p</var>, <var>q</var>) </em></dt>
+<dd><p>poisson_bracket(<var>f</var>, <var>g</var>, [<var>p1</var>,&hellip;, <var>pn</var>], [<var>q1</var>,&hellip;, <var>qn</var>]) 
+</p>
+<p>Compute the Poisson bracket of the expressions <var>f</var> and <var>g</var> with respect to the canonical 
+coordinates <var>p</var> and <var>q</var> (or <var>p1</var>, <var>p2</var>,&hellip;, <var>pn</var> and <var>p1</var>,  
+<var>p2</var>,&hellip;, <var>pn</var>).
+</p>
+<p><b>Examples:</b>
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;symplectic_ode&quot;)$
+(%i2) poisson_bracket(p,p^2/2+q^4,p,q);
+(%o2) -4*q^3
+
+(%i3) poisson_bracket(q,p^2/2+q^4,p,q);
+(%o3) p
+
+(%i4) poisson_bracket(q1,p1^2/2+p2^2/2+q1^4+q2^4,[p1,p2],[q1,q2]);
+(%o4) p1
+
+(%i5) poisson_bracket(p1,p1^2/2+p2^2/2+q1^4+q2^4,[p1,p2],[q1,q2]);
+(%o5) -4*q1^3
+
+</pre></div>
+</dd></dl>
+
+
+<dl>
+<dt><a name="index-symplectic_005fode"></a>Function: <strong>symplectic_ode</strong> <em>symplectic_ode(ham,p,q,po,qo,dt,N)</em></dt>
+<dd><p>symplectic_ode(ham,p,q,po,qo,dt,N,method) 
+     symplectic_ode(ham,p,q,po,qo,dt,N,method,type) 
+</p>
+<p>Numerically solve Hamilton&rsquo;s equations of motion using a symplectic method. Specifically:
+<br>
+</p><br>
+<ul>
+<li> The hamiltonian is the Maxima expression <var>ham</var> that depends on the canonical coordinates 
+<var>p</var> and <var>q</var>. The hamiltonian must be time independent. The method is symplectic when the 
+hamiltonian is separable; that is when it has the form <code>f(p) + g(q)</code>.
+   
+</li><li> The canonical coordinates are <var>p</var> and <var>q</var>. The arguments <var>p</var> and <var>q</var> should be 
+symbols or equal length lists of symbols.
+
+</li><li> The arguments <var>po</var> and <var>q0</var> are the initial values of <var>p</var> and <var>q</var>, respectively. 
+These should be expressions or equal length lists of expressions. Generally, the values of <var>po</var> and <var>q0</var>
+should be numbers. When the optional argument <var>type</var> is float, the code attempts to convert the values
+of <var>po</var> and <var>qo</var> into floating point numbers; when this isn&rsquo;t possible, the code signals an error.
+  
+</li><li> <var>dt</var> is the fixed time step.
+
+</li><li> <var>N</var> is the number of time steps.
+
+</li><li> The optional argument <var>method</var> determines the integration method. It must be either 
+symplectic_euler (default), verlet, symplectic_third_order, symplectic_fourth_order, or 
+symplectic_fifth_order. For an explanation of these methods, see https://en.wikipedia.org/wiki/Symplectic_integrator.
+     
+</li><li> The optional argument <var>type</var> determines the value for mode_declare for various 
+       automatically generated functions. The value <var>type</var> must be one of float (default), 
+      rational, or any (no type). Since <var>float</var> is a Maxima option variable, the <var>type</var> 
+      variable should be quoted, especially for type <var>float</var>.
+  
+</li></ul>
+<br>
+<br>
+ 
+<p>For both the scalar case (both <var>p</var> and <var>q</var> are mapatoms) and the nonscalar case 
+(both <var>p</var> and <var>q</var> are lists of mapatoms), <code>symplectic_ode</code> returns a list 
+of two lists. For the scalar case, the first list is a list of the values of <var>p</var> at 
+the times <code>0, dt, 2*dt,&hellip;, N*dt</code> and similarly for the second list.
+For a nonscalar case, the first list is a list of the form <em>[p1, p2,&hellip;, pn]</em> at 
+the times <code>0, dt, 2*dt,&hellip;, N*dt</code>.
+</p>
+<p><b>Examples:</b>
+</p><div class="example">
+<pre class="example">
+(%i2) load(&quot;symplectic_ode&quot;)$
+(%i3) symplectic_ode(p^2/2 + q^4/4,p,q,1,0,1/10,2);
+(%o3) [[1.0,1.0,0.9999],[0.0,0.1,0.19999]]
+
+(%i4) symplectic_ode(p^2/2 + q^4/4,[p],[q],[1],[0],1/10,2);
+(%o4) [[[1.0],[1.0],[0.9999]],[[0.0],[0.1],[0.19999]]]
+
+(%i5) symplectic_ode(p^2/2 + q^4/4,p,q,1,0,1/10,2,verlet);
+(%o5) [[1.0,0.9999875,0.9996500084374297],[0.0,0.099999375,0.1999812504218715]]
+
+(%i6) symplectic_ode(p^2/2 + q^4/4,p,q,1.0b0,0.0b0, 0.1b0,2,verlet,'any);
+(%o6) [[1.0b0,9.999875b-1,9.996500084374297b-1],[0.0b0,9.9999375b-2,1.999812504218715b-1]]
+
+</pre></div>
+
+
+</dd></dl>
+
+<hr>
+<a name="Function-and-variable-index"></a>
+<div class="header">
+<p>
+Previous: <a href="#Definitions-for-symplectic_005fode" accesskey="p" rel="previous">Definitions for symplectic_ode</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Function-and-variable-index-1"></a>
+<h2 class="appendix">Appendix A Function and variable index</h2>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Function-and-variable-index_fn_letter-P"><b>P</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Function-and-variable-index_fn_letter-S"><b>S</b></a>
+ &nbsp; 
+</td></tr></table>
+<table class="index-fn" border="0">
+<tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Function-and-variable-index_fn_letter-P">P</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-poisson_005fbracket"><code>poisson_bracket</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Definitions-for-symplectic_005fode">Definitions for symplectic_ode</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th><a name="Function-and-variable-index_fn_letter-S">S</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-symplectic_005fode"><code>symplectic_ode</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Definitions-for-symplectic_005fode">Definitions for symplectic_ode</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+</table>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Function-and-variable-index_fn_letter-P"><b>P</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Function-and-variable-index_fn_letter-S"><b>S</b></a>
+ &nbsp; 
+</td></tr></table>
+
+<hr>
+
+
+
+</body>
+</html>

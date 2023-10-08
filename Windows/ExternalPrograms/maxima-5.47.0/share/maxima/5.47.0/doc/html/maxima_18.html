@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Integration (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Integration (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Integration (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_19.html#Equations" rel="next" title="Equations">
+<link href="maxima_17.html#Differentiation" rel="prev" title="Differentiation">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Integration">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_19.html#Equations" accesskey="n" rel="next">Equations</a>, Previous: <a href="maxima_17.html#Differentiation" accesskey="p" rel="prev">Differentiation</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Integration-1">19 Integration</h2>
+
+<a class="anchor" id="Item_003a-Integration_002fnode_002fIntroduction-to-Integration"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Integration" accesskey="1">Introduction to Integration</a></li>
+<li><a href="#Functions-and-Variables-for-Integration" accesskey="2">Functions and Variables for Integration</a></li>
+<li><a href="#Introduction-to-QUADPACK" accesskey="3">Introduction to QUADPACK</a></li>
+<li><a href="#Functions-and-Variables-for-QUADPACK" accesskey="4">Functions and Variables for QUADPACK</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Integration">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Integration" accesskey="n" rel="next">Functions and Variables for Integration</a>, Previous: <a href="#Integration" accesskey="p" rel="prev">Integration</a>, Up: <a href="#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Integration-1">19.1 Introduction to Integration</h3>
+
+<p>Maxima has several routines for handling integration.
+The <code class="code"><a class="ref" href="#integrate">integrate</a></code> function makes use of most of them.  There is also the
+<code class="code"><a class="ref" href="maxima_17.html#antid">antid</a></code> package, which handles an unspecified function (and its
+derivatives, of course).  For numerical uses,
+there is a set of adaptive integrators from QUADPACK, named <code class="code"><a class="ref" href="#quad_005fqag">quad_qag</a></code>,
+<code class="code"><a class="ref" href="#quad_005fqags">quad_qags</a></code>, etc., which are described under the heading <code class="code">QUADPACK</code>.
+Hypergeometric functions are being worked on,
+see <code class="code"><a class="ref" href="#specint">specint</a></code> for details.
+Generally speaking, Maxima only handles integrals which are
+integrable in terms of the &quot;elementary functions&quot; (rational functions,
+trigonometrics, logs, exponentials, radicals, etc.) and a few
+extensions (error function, dilogarithm).  It does not handle
+integrals in terms of unknown functions such as <code class="code">g(x)</code> and <code class="code">h(x)</code>.
+</p>
+
+<a class="anchor" id="Item_003a-Integration_002fnode_002fFunctions-and-Variables-for-Integration"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Integration">
+<div class="nav-panel">
+<p>
+Next: <a href="#Introduction-to-QUADPACK" accesskey="n" rel="next">Introduction to QUADPACK</a>, Previous: <a href="#Introduction-to-Integration" accesskey="p" rel="prev">Introduction to Integration</a>, Up: <a href="#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Integration-1">19.2 Functions and Variables for Integration</h3>
+
+
+<a class="anchor" id="changevar"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fchangevar"></a><dl class="first-deffn">
+<dt class="deffn" id="index-changevar"><span class="category-def">Function: </span><span><strong class="def-name">changevar</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">f(x,y)</var>, <var class="var">y</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-changevar'> &para;</a></span></dt>
+<dd>
+<p>Makes the change of variable given by <code class="code"><var class="var">f(x,y)</var> = 0</code> in all integrals
+occurring in <var class="var">expr</var> with integration with respect to <var class="var">x</var>.
+The new variable is <var class="var">y</var>.
+</p>
+<p>The change of variable can also be written <code class="code"><var class="var">f(x)</var> = <var class="var">g(y)</var></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) assume(a &gt; 0)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) 'integrate (%e**sqrt(a*y), y, 0, 4);
+                      4
+                     /
+                     [    sqrt(a) sqrt(y)
+(%o2)                I  %e                dy
+                     ]
+                     /
+                      0
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) changevar (%, y-z^2/a, z, y);
+                      0
+                     /
+                     [                abs(z)
+                   2 I            z %e       dz
+                     ]
+                     /
+                      - 2 sqrt(a)
+(%o3)            - ----------------------------
+                                a
+</pre></div></div>
+
+<p>An expression containing a noun form, such as the instances of <code class="code">'integrate</code>
+above, may be evaluated by <code class="code">ev</code> with the <code class="code">nouns</code> flag.
+For example, the expression returned by <code class="code">changevar</code> above may be evaluated
+by <code class="code">ev (%o3, nouns)</code>.
+</p>
+<p><code class="code">changevar</code> may also be used to make changes in the indices of a sum or
+product.  However, it must be realized that when a change is made in a
+sum or product, this change must be a shift, i.e., <code class="code">i = j+ ...</code>, not a
+higher degree function.  E.g.,
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i4) sum (a[i]*x^(i-2), i, 0, inf);
+                         inf
+                         ====
+                         \         i - 2
+(%o4)                     &gt;    a  x
+                         /      i
+                         ====
+                         i = 0
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) changevar (%, i-2-n, n, i);
+                        inf
+                        ====
+                        \               n
+(%o5)                    &gt;      a      x
+                        /        n + 2
+                        ====
+                        n = - 2
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="dblint"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fdblint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dblint"><span class="category-def">Function: </span><span><strong class="def-name">dblint</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">r</var>, <var class="var">s</var>, <var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-dblint'> &para;</a></span></dt>
+<dd>
+<p>A double-integral routine which was written in
+top-level Maxima and then translated and compiled to machine code.
+Use <code class="code">load (&quot;dblint&quot;)</code> to access this package.  It uses the Simpson&rsquo;s rule
+method in both the x and y directions to calculate
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">/b /s(x)
+|  |
+|  |    f(x,y) dy dx
+|  |
+/a /r(x)
+</pre></div></div>
+
+<p>The function <var class="var">f</var> must be a translated or compiled function of two variables,
+and <var class="var">r</var> and <var class="var">s</var> must each be a translated or compiled function of one
+variable, while <var class="var">a</var> and <var class="var">b</var> must be floating point numbers.  The routine
+has two global variables which determine the number of divisions of the x and y
+intervals: <code class="code">dblint_x</code> and <code class="code">dblint_y</code>, both of which are initially 10,
+and can be changed independently to other integer values (there are
+<code class="code">2*dblint_x+1</code> points computed in the x direction, and <code class="code">2*dblint_y+1</code>
+in the y direction).  The routine subdivides the X axis and then for each value
+of X it first computes <code class="code"><var class="var">r</var>(x)</code> and <code class="code"><var class="var">s</var>(x)</code>; then the Y axis
+between <code class="code"><var class="var">r</var>(x)</code> and <code class="code"><var class="var">s</var>(x)</code> is subdivided and the integral
+along the Y axis is performed using Simpson&rsquo;s rule; then the integral along the
+X axis is done using Simpson&rsquo;s rule with the function values being the
+Y-integrals.  This procedure may be numerically unstable for a great variety of
+reasons, but is reasonably fast: avoid using it on highly oscillatory functions
+and functions with singularities (poles or branch points in the region).  The Y
+integrals depend on how far apart <code class="code"><var class="var">r</var>(x)</code> and <code class="code"><var class="var">s</var>(x)</code> are,
+so if the distance <code class="code"><var class="var">s</var>(x) - <var class="var">r</var>(x)</code> varies rapidly with X, there
+may be substantial errors arising from truncation with different step-sizes in
+the various Y integrals.  One can increase <code class="code">dblint_x</code> and <code class="code">dblint_y</code>
+in an effort to improve the coverage of the region, at the expense of
+computation time.  The function values are not saved, so if the function is very
+time-consuming, you will have to wait for re-computation if you change anything
+(sorry).  It is required that the functions <var class="var">f</var>, <var class="var">r</var>, and <var class="var">s</var> be
+either translated or compiled prior to calling <code class="code">dblint</code>.  This will result
+in orders of magnitude speed improvement over interpreted code in many cases!
+</p>
+<p><code class="code">demo (&quot;dblint&quot;)</code> executes a demonstration of <code class="code">dblint</code> applied to an
+example problem.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="defint"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fdefint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-defint"><span class="category-def">Function: </span><span><strong class="def-name">defint</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-defint'> &para;</a></span></dt>
+<dd>
+<p>Attempts to compute a definite integral.  <code class="code">defint</code> is called by
+<code class="code">integrate</code> when limits of integration are specified, i.e., when
+<code class="code">integrate</code> is called as
+<code class="code">integrate (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</code>.
+Thus from the user&rsquo;s point of view, it is sufficient to call <code class="code">integrate</code>.
+</p>
+<p><code class="code">defint</code> returns a symbolic expression, either the computed integral or the
+noun form of the integral.  See <code class="code"><a class="ref" href="#quad_005fqag">quad_qag</a></code> and related functions for
+numerical approximation of definite integrals.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="erfflag"></a><a class="anchor" id="Item_003a-Integration_002fdefvr_002ferfflag"></a><dl class="first-defvr">
+<dt class="defvr" id="index-erfflag"><span class="category-def">Option variable: </span><span><strong class="def-name">erfflag</strong><a class="copiable-link" href='#index-erfflag'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">erfflag</code> is <code class="code">false</code>, prevents <code class="code">risch</code> from introducing the
+<code class="code">erf</code> function in the answer if there were none in the integrand to
+begin with.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="ilt"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002filt"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ilt"><span class="category-def">Function: </span><span><strong class="def-name">ilt</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">s</var>, <var class="var">t</var>)</var><a class="copiable-link" href='#index-ilt'> &para;</a></span></dt>
+<dd>
+<p>Computes the inverse Laplace transform of <var class="var">expr</var> with
+respect to <var class="var">s</var> and parameter <var class="var">t</var>. <var class="var">expr</var> must be a ratio of
+polynomials whose denominator has only linear and quadratic factors;
+there is an extension of <code class="code">ilt</code>, called <code class="code"><a class="ref" href="#pwilt">pwilt</a></code> (Piece-Wise
+Inverse Laplace Transform) that handles several other cases where
+<code class="code">ilt</code> fails.
+</p>
+<p>By using the functions <code class="code">laplace</code> and <code class="code">ilt</code> together with the
+<code class="code">solve</code> or <code class="code">linsolve</code> functions the user can solve a single
+differential or convolution integral equation or a set of them.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) 'integrate (sinh(a*x)*f(t-x), x, 0, t) + b*f(t) = t**2;
+              t
+             /
+             [                                    2
+(%o1)        I  f(t - x) sinh(a x) dx + b f(t) = t
+             ]
+             /
+              0
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) laplace (%, t, s);
+                               a laplace(f(t), t, s)   2
+(%o2)  b laplace(f(t), t, s) + --------------------- = --
+                                       2    2           3
+                                      s  - a           s
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) linsolve ([%], ['laplace(f(t), t, s)]);
+                                        2      2
+                                     2 s  - 2 a
+(%o3)     [laplace(f(t), t, s) = --------------------]
+                                    5         2     3
+                                 b s  + (a - a  b) s
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) ilt (rhs (first (%)), s, t);
+Is  a b (a b - 1)  positive, negative, or zero?
+
+pos;
+               sqrt(a b (a b - 1)) t
+        2 cosh(---------------------)       2
+                         b               a t
+(%o4) - ----------------------------- + -------
+              3  2      2               a b - 1
+             a  b  - 2 a  b + a
+
+                                                       2
+                                             + ------------------
+                                                3  2      2
+                                               a  b  - 2 a  b + a
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="intanalysis"></a><a class="anchor" id="Item_003a-Integration_002fdefvr_002fintanalysis"></a><dl class="first-defvr">
+<dt class="defvr" id="index-intanalysis"><span class="category-def">Option variable: </span><span><strong class="def-name">intanalysis</strong><a class="copiable-link" href='#index-intanalysis'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">true</code>, definite integration tries to find poles in the integrand in 
+the interval of integration.  If there are, then the integral is evaluated
+appropriately as a principal value integral.  If intanalysis is <code class="code">false</code>, 
+this check is not performed and integration is done assuming there are no poles.
+</p>
+<p>See also <code class="code"><a class="ref" href="#ldefint">ldefint</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Maxima can solve the following integrals, when <code class="code"><a class="ref" href="#intanalysis">intanalysis</a></code> is set to
+<code class="code">false</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) integrate(1/(sqrt(x)+1),x,0,1);
+                                1
+                               /
+                               [       1
+(%o1)                          I  ----------- dx
+                               ]  sqrt(x) + 1
+                               /
+                                0
+
+(%i2) integrate(1/(sqrt(x)+1),x,0,1),intanalysis:false;
+(%o2)                            2 - 2 log(2)
+
+(%i3) integrate(cos(a)/sqrt((tan(a))^2 +1),a,-%pi/2,%pi/2);
+The number 1 isn't in the domain of atanh
+ -- an error. To debug this try: debugmode(true);
+
+(%i4) intanalysis:false$
+(%i5) integrate(cos(a)/sqrt((tan(a))^2+1),a,-%pi/2,%pi/2);
+                                      %pi
+(%o5)                                 ---
+                                       2
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="integrate"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fintegrate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-integrate"><span class="category-def">Function: </span><span><strong class="def-name">integrate</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">integrate</code> (<var class="var">expr</var>, <var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">integrate</code> (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-integrate'> &para;</a></span></dt>
+<dd>
+<p>Attempts to symbolically compute the integral of <var class="var">expr</var> with respect to
+<var class="var">x</var>.  <code class="code">integrate (<var class="var">expr</var>, <var class="var">x</var>)</code> is an indefinite integral,
+while <code class="code">integrate (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</code> is a definite
+integral, with limits of integration <var class="var">a</var> and <var class="var">b</var>.  The limits should
+not contain <var class="var">x</var>, although <code class="code">integrate</code> does not enforce this
+restriction.  <var class="var">a</var> need not be less than <var class="var">b</var>.
+If <var class="var">b</var> is equal to <var class="var">a</var>, <code class="code">integrate</code> returns zero.
+</p>
+<p>See <code class="code"><a class="ref" href="#quad_005fqag">quad_qag</a></code> and related functions for numerical approximation of
+definite integrals.  See <code class="code"><a class="ref" href="#residue">residue</a></code> for computation of residues
+(complex integration).  See <code class="code"><a class="ref" href="maxima_17.html#antid">antid</a></code> for an alternative means of computing
+indefinite integrals.
+</p>
+<p>The integral (an expression free of <code class="code">integrate</code>) is returned if
+<code class="code">integrate</code> succeeds.  Otherwise the return value is
+the noun form of the integral (the quoted operator <code class="code">'integrate</code>)
+or an expression containing one or more noun forms.
+The noun form of <code class="code">integrate</code> is displayed with an integral sign.
+</p>
+<p>In some circumstances it is useful to construct a noun form by hand, by quoting
+<code class="code">integrate</code> with a single quote, e.g.,
+<code class="code">'integrate (<var class="var">expr</var>, <var class="var">x</var>)</code>.  For example, the integral may depend
+on some parameters which are not yet computed.
+The noun may be applied to its arguments by <code class="code">ev (<var class="var">i</var>, nouns)</code>
+where <var class="var">i</var> is the noun form of interest.
+</p>
+<p><code class="code">integrate</code> handles definite integrals separately from indefinite, and
+employs a range of heuristics to handle each case.  Special cases of definite
+integrals include limits of integration equal to zero or infinity (<code class="code"><a class="ref" href="maxima_4.html#inf">inf</a></code> or
+<code class="code"><a class="ref" href="maxima_4.html#minf">minf</a></code>), trigonometric functions with limits of integration equal to zero
+and <code class="code">%pi</code> or <code class="code">2 %pi</code>, rational functions, integrals related to the
+definitions of the <code class="code"><a class="ref" href="maxima_14.html#beta">beta</a></code> and <code class="code"><a class="ref" href="maxima_25.html#psi">psi</a></code> functions, and some logarithmic
+and trigonometric integrals.  Processing rational functions may include
+computation of residues.  If an applicable special case is not found, an attempt
+will be made to compute the indefinite integral and evaluate it at the limits of
+integration.  This may include taking a limit as a limit of integration goes to
+infinity or negative infinity; see also <code class="code"><a class="ref" href="#ldefint">ldefint</a></code>.
+</p>
+<p>Special cases of indefinite integrals include trigonometric functions,
+exponential and logarithmic functions,
+and rational functions.
+<code class="code">integrate</code> may also make use of a short table of elementary integrals.
+</p>
+<p><code class="code">integrate</code> may carry out a change of variable
+if the integrand has the form <code class="code">f(g(x)) * diff(g(x), x)</code>.
+<code class="code">integrate</code> attempts to find a subexpression <code class="code">g(x)</code> such that
+the derivative of <code class="code">g(x)</code> divides the integrand.
+This search may make use of derivatives defined by the <code class="code">gradef</code> function.
+See also <code class="code"><a class="ref" href="#changevar">changevar</a></code> and <code class="code"><a class="ref" href="maxima_17.html#antid">antid</a></code>.
+</p>
+<p>If none of the preceding heuristics find the indefinite integral, the Risch
+algorithm is executed.  The flag <code class="code"><a class="ref" href="#risch">risch</a></code> may be set as an <code class="code"><a class="ref" href="maxima_7.html#evflag">evflag</a></code>,
+in a call to <code class="code">ev</code> or on the command line, e.g.,
+<code class="code">ev (integrate (<var class="var">expr</var>, <var class="var">x</var>), risch)</code> or
+<code class="code">integrate (<var class="var">expr</var>, <var class="var">x</var>), risch</code>.  If <code class="code">risch</code> is present,
+<code class="code">integrate</code> calls the <code class="code"><a class="ref" href="#risch">risch</a></code> function without attempting heuristics
+first.  See also <code class="code"><a class="ref" href="#risch">risch</a></code>.
+</p>
+<p><code class="code">integrate</code> works only with functional relations represented explicitly
+with the <code class="code">f(x)</code> notation.  <code class="code">integrate</code> does not respect implicit
+dependencies established by the <code class="code"><a class="ref" href="maxima_17.html#depends">depends</a></code> function.
+</p>
+<p><code class="code">integrate</code> may need to know some property of a parameter in the integrand.
+<code class="code">integrate</code> will first consult the <code class="code"><a class="ref" href="maxima_10.html#assume">assume</a></code> database,
+and, if the variable of interest is not there,
+<code class="code">integrate</code> will ask the user.
+Depending on the question,
+suitable responses are <code class="code">yes;</code> or <code class="code">no;</code>,
+or <code class="code">pos;</code>, <code class="code">zero;</code>, or <code class="code">neg;</code>.
+</p>
+<p><code class="code">integrate</code> is not, by default, declared to be linear.  See <code class="code">declare</code>
+and <code class="code">linear</code>.
+</p>
+<p><code class="code">integrate</code> attempts integration by parts only in a few special cases.
+</p>
+<p>Examples:
+</p>
+<ul class="itemize mark-bullet">
+<li>Elementary indefinite and definite integrals.
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) integrate (sin(x)^3, x);
+                           3
+                        cos (x)
+(%o1)                   ------- - cos(x)
+                           3
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate (x/ sqrt (b^2 - x^2), x);
+                                 2    2
+(%o2)                    - sqrt(b  - x )
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) integrate (cos(x)^2 * exp(x), x, 0, %pi);
+                               %pi
+                           3 %e      3
+(%o3)                      ------- - -
+                              5      5
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) integrate (x^2 * exp(-x^2), x, minf, inf);
+                            sqrt(%pi)
+(%o4)                       ---------
+                                2
+</pre></div></div>
+
+</li><li>Use of <code class="code">assume</code> and interactive query.
+
+<div class="example">
+<pre class="example-preformatted">(%i1) assume (a &gt; 1)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) integrate (x**a/(x+1)**(5/2), x, 0, inf);
+    2 a + 2
+Is  -------  an integer?
+       5
+
+no;
+Is  2 a - 3  positive, negative, or zero?
+
+neg;
+                                   3
+(%o2)                  beta(a + 1, - - a)
+                                   2
+</pre></div></div>
+
+</li><li>Change of variable.  There are two changes of variable in this example:
+one using a derivative established by <code class="code"><a class="ref" href="maxima_17.html#gradef">gradef</a></code>, and one using the
+derivation <code class="code">diff(r(x))</code> of an unspecified function <code class="code">r(x)</code>.
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i3) gradef (q(x), sin(x**2));
+(%o3)                         q(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) diff (log (q (r (x))), x);
+                      d               2
+                     (-- (r(x))) sin(r (x))
+                      dx
+(%o4)                ----------------------
+                            q(r(x))
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) integrate (%, x);
+(%o5)                     log(q(r(x)))
+</pre></div></div>
+
+</li><li>Return value contains the <code class="code">'integrate</code> noun form.  In this example, Maxima
+can extract one factor of the denominator of a rational function, but cannot
+factor the remainder or otherwise find its integral.  <code class="code"><a class="ref" href="maxima_3.html#grind">grind</a></code> shows the
+noun form <code class="code">'integrate</code> in the result.  See also
+<code class="code"><a class="ref" href="#integrate_005fuse_005frootsof">integrate_use_rootsof</a></code> for more on integrals of rational functions.
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) expand ((x-4) * (x^3+2*x+1));
+                    4      3      2
+(%o1)              x  - 4 x  + 2 x  - 7 x - 4
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate (1/%, x);
+                              /  2
+                              [ x  + 4 x + 18
+                              I ------------- dx
+                              ]  3
+                 log(x - 4)   / x  + 2 x + 1
+(%o2)            ---------- - ------------------
+                     73               73
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) grind (%);
+log(x-4)/73-('integrate((x^2+4*x+18)/(x^3+2*x+1),x))/73$
+</pre></div></div>
+
+</li><li>Defining a function in terms of an integral.  The body of a function is not
+evaluated when the function is defined.  Thus the body of <code class="code">f_1</code> in this
+example contains the noun form of <code class="code">integrate</code>.  The quote-quote operator
+<code class="code">'<!-- /@w -->'</code> causes the integral to be evaluated, and the result becomes the
+body of <code class="code">f_2</code>.
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) f_1 (a) := integrate (x^3, x, 1, a);
+                                     3
+(%o1)           f_1(a) := integrate(x , x, 1, a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) ev (f_1 (7), nouns);
+(%o2)                          600
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) /* Note parentheses around integrate(...) here */
+      f_2 (a) := ''(integrate (x^3, x, 1, a));
+                                   4
+                                  a    1
+(%o3)                   f_2(a) := -- - -
+                                  4    4
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) f_2 (7);
+(%o4)                          600
+</pre></div></div>
+</li></ul>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="integration_005fconstant"></a><a class="anchor" id="Item_003a-Integration_002fdefvr_002fintegration_005fconstant"></a><dl class="first-defvr">
+<dt class="defvr" id="index-integration_005fconstant"><span class="category-def">System variable: </span><span><strong class="def-name">integration_constant</strong><a class="copiable-link" href='#index-integration_005fconstant'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">%c</code>
+</p>
+<p>When a constant of integration is introduced by indefinite integration of an
+equation, the name of the constant is constructed by concatenating
+<code class="code">integration_constant</code> and <code class="code">integration_constant_counter</code>.
+</p>
+<p><code class="code">integration_constant</code> may be assigned any symbol.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o1)                     -- = x + %c1
+                          3
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integration_constant : 'k;
+(%o2)                           k
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) integrate (x^2 = 1, x);
+                            3
+                           x
+(%o3)                      -- = x + k2
+                           3
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="integration_005fconstant_005fcounter"></a><a class="anchor" id="Item_003a-Integration_002fdefvr_002fintegration_005fconstant_005fcounter"></a><dl class="first-defvr">
+<dt class="defvr" id="index-integration_005fconstant_005fcounter"><span class="category-def">System variable: </span><span><strong class="def-name">integration_constant_counter</strong><a class="copiable-link" href='#index-integration_005fconstant_005fcounter'> &para;</a></span></dt>
+<dd><p>Default value: 0
+</p>
+<p>When a constant of integration is introduced by indefinite integration of an
+equation, the name of the constant is constructed by concatenating
+<code class="code">integration_constant</code> and <code class="code">integration_constant_counter</code>.
+</p>
+<p><code class="code">integration_constant_counter</code> is incremented before constructing the next
+integration constant.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o1)                     -- = x + %c1
+                          3
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o2)                     -- = x + %c2
+                          3
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o3)                     -- = x + %c3
+                          3
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) reset (integration_constant_counter);
+(%o4)            [integration_constant_counter]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) integrate (x^2 = 1, x);
+                           3
+                          x
+(%o5)                     -- = x + %c1
+                          3
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="integrate_005fuse_005frootsof"></a><a class="anchor" id="Item_003a-Integration_002fdefvr_002fintegrate_005fuse_005frootsof"></a><dl class="first-defvr">
+<dt class="defvr" id="index-integrate_005fuse_005frootsof"><span class="category-def">Option variable: </span><span><strong class="def-name">integrate_use_rootsof</strong><a class="copiable-link" href='#index-integrate_005fuse_005frootsof'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">integrate_use_rootsof</code> is <code class="code">true</code> and the denominator of
+a rational function cannot be factored, <code class="code"><a class="ref" href="#integrate">integrate</a></code> returns the integral
+in a form which is a sum over the roots (not yet known) of the denominator.
+</p>
+<p>For example, with <code class="code">integrate_use_rootsof</code> set to <code class="code">false</code>,
+<code class="code">integrate</code> returns an unsolved integral of a rational function in noun
+form:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) integrate_use_rootsof: false$
+</pre><div class="group"><pre class="example-preformatted">(%i2) integrate (1/(1+x+x^5), x);
+        /  2
+        [ x  - 4 x + 5
+        I ------------ dx                            2 x + 1
+        ]  3    2                2            5 atan(-------)
+        / x  - x  + 1       log(x  + x + 1)          sqrt(3)
+(%o2)   ----------------- - --------------- + ---------------
+                7                 14             7 sqrt(3)
+</pre></div></div>
+
+<p>Now we set the flag to be true and the unsolved part of the integral will be
+expressed as a summation over the roots of the denominator of the rational
+function:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i3) integrate_use_rootsof: true$
+</pre><div class="group"><pre class="example-preformatted">(%i4) integrate (1/(1+x+x^5), x);
+      ====        2
+      \       (%r4  - 4 %r4 + 5) log(x - %r4)
+       &gt;      -------------------------------
+      /                    2
+      ====            3 %r4  - 2 %r4
+                        3      2
+      %r4 in rootsof(%r4  - %r4  + 1, %r4)
+(%o4) ----------------------------------------------------------
+               7
+
+                                                      2 x + 1
+                                  2            5 atan(-------)
+                             log(x  + x + 1)          sqrt(3)
+                           - --------------- + ---------------
+                                   14             7 sqrt(3)
+</pre></div></div>
+
+<p>Alternatively the user may compute the roots of the denominator separately,
+and then express the integrand in terms of these roots, e.g.,
+<code class="code">1/((x - a)*(x - b)*(x - c))</code> or <code class="code">1/((x^2 - (a+b)*x + a*b)*(x - c))</code>
+if the denominator is a cubic polynomial.
+Sometimes this will help Maxima obtain a more useful result.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="laplace"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002flaplace"></a><dl class="first-deffn">
+<dt class="deffn" id="index-laplace"><span class="category-def">Function: </span><span><strong class="def-name">laplace</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">t</var>, <var class="var">s</var>)</var><a class="copiable-link" href='#index-laplace'> &para;</a></span></dt>
+<dd>
+<p>Attempts to compute the Laplace transform of <var class="var">expr</var> with respect to the 
+variable <var class="var">t</var> and transform parameter <var class="var">s</var>.  The Laplace
+transform of the function <code class="code">f(t)</code> is the one-sided transform defined by
+$$
+F(s) = \int_0^{\infty} f(t) e^{-st} dt
+$$
+</p>
+
+<p>where <em class="math tex2jax_process">\(F(s)\)</em> is the transform of <em class="math tex2jax_process">\(f(t)\)</em>, represented by <var class="var">expr</var>.
+</p>
+<p><code class="code">laplace</code> recognizes in <var class="var">expr</var> the functions <code class="code"><a class="ref" href="maxima_17.html#delta">delta</a></code>, <code class="code"><a class="ref" href="maxima_9.html#exp">exp</a></code>,
+<code class="code"><a class="ref" href="maxima_9.html#log">log</a></code>, <code class="code"><a class="ref" href="maxima_9.html#sin">sin</a></code>, <code class="code"><a class="ref" href="maxima_9.html#cos">cos</a></code>, <code class="code"><a class="ref" href="maxima_9.html#sinh">sinh</a></code>, <code class="code"><a class="ref" href="maxima_9.html#cosh">cosh</a></code>, and <code class="code"><a class="ref" href="maxima_14.html#erf">erf</a></code>,
+as well as <code class="code">derivative</code>, <code class="code"><a class="ref" href="#integrate">integrate</a></code>, <code class="code"><a class="ref" href="maxima_27.html#sum">sum</a></code>, and <code class="code"><a class="ref" href="#ilt">ilt</a></code>. If
+<code class="code">laplace</code> fails to find a transform the function <code class="code"><a class="ref" href="#specint">specint</a></code> is called.
+<code class="code"><a class="ref" href="#specint">specint</a></code> can find the laplace transform for expressions with special
+functions like the bessel functions <code class="code"><a class="ref" href="maxima_14.html#bessel_005fj">bessel_j</a></code>, <code class="code"><a class="ref" href="maxima_14.html#bessel_005fi">bessel_i</a></code>, &hellip;
+and can handle the <code class="code"><a class="ref" href="maxima_79.html#unit_005fstep">unit_step</a></code> function.  See also <code class="code"><a class="ref" href="#specint">specint</a></code>.
+</p>
+<p>If <code class="code"><a class="ref" href="#specint">specint</a></code> cannot find a solution too, a noun <code class="code">laplace</code> is returned.
+</p>
+<p><var class="var">expr</var> may also be a linear, constant coefficient differential equation in
+which case <code class="code"><a class="ref" href="maxima_17.html#atvalue">atvalue</a></code> of the dependent variable is used.
+The required atvalue may be supplied either before or after the transform is
+computed.  Since the initial conditions must be specified at zero, if one has
+boundary conditions imposed elsewhere he can impose these on the general
+solution and eliminate the constants by solving the general solution
+for them and substituting their values back.
+</p>
+<p><code class="code">laplace</code> recognizes convolution integrals of the form
+$$
+\int_0^t f(x) g(t-x) dx
+$$
+</p>
+
+<p>Other kinds of convolutions are not recognized.
+</p>
+<p>Functional relations must be explicitly represented in <var class="var">expr</var>;
+implicit relations, established by <code class="code"><a class="ref" href="maxima_17.html#depends">depends</a></code>, are not recognized.
+That is, if <em class="math tex2jax_process">\(f\)</em> depends on <em class="math tex2jax_process">\(x\)</em> and <em class="math tex2jax_process">\(y\)</em>,
+<em class="math tex2jax_process">\(f (x, y)\)</em> must appear in <var class="var">expr</var>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#ilt">ilt</a></code>, the inverse Laplace transform.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) laplace (exp (2*t + a) * sin(t) * t, t, s);
+                            a
+                          %e  (2 s - 4)
+(%o1)                    ---------------
+                           2           2
+                         (s  - 4 s + 5)
+(%i2) laplace ('diff (f (x), x), x, s);
+(%o2)             s laplace(f(x), x, s) - f(0)
+(%i3) diff (diff (delta (t), t), t);
+                          2
+                         d
+(%o3)                    --- (delta(t))
+                           2
+                         dt
+(%i4) laplace (%, t, s);
+                            !
+               d            !         2
+(%o4)        - -- (delta(t))!      + s  - delta(0) s
+               dt           !
+                            !t = 0
+(%i5) assume(a&gt;0)$
+(%i6) laplace(gamma_incomplete(a,t),t,s),gamma_expand:true;
+                                              - a - 1
+                         gamma(a)   gamma(a) s
+(%o6)                    -------- - -----------------
+                            s            1     a
+                                        (- + 1)
+                                         s
+(%i7) factor(laplace(gamma_incomplete(1/2,t),t,s));
+                                              s + 1
+                      sqrt(%pi) (sqrt(s) sqrt(-----) - 1)
+                                                s
+(%o7)                 -----------------------------------
+                                3/2      s + 1
+                               s    sqrt(-----)
+                                           s
+(%i8) assume(exp(%pi*s)&gt;1)$
+(%i9) laplace(sum((-1)^n*unit_step(t-n*%pi)*sin(t),n,0,inf),t,s),
+         simpsum;
+</pre><div class="group"><pre class="example-preformatted">                         %i                         %i
+              ------------------------ - ------------------------
+                              - %pi s                    - %pi s
+              (s + %i) (1 - %e       )   (s - %i) (1 - %e       )
+(%o9)         ---------------------------------------------------
+                                       2
+</pre></div><pre class="example-preformatted">(%i9) factor(%);
+                                      %pi s
+                                    %e
+(%o9)                   -------------------------------
+                                             %pi s
+                        (s - %i) (s + %i) (%e      - 1)
+
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="ldefint"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fldefint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ldefint"><span class="category-def">Function: </span><span><strong class="def-name">ldefint</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-ldefint'> &para;</a></span></dt>
+<dd>
+<p>Attempts to compute the definite integral of <var class="var">expr</var> by using <code class="code"><a class="ref" href="maxima_16.html#limit">limit</a></code>
+to evaluate the indefinite integral of <var class="var">expr</var> with respect to <var class="var">x</var>
+at the upper limit <var class="var">b</var> and at the lower limit <var class="var">a</var>.
+If it fails to compute the definite integral,
+<code class="code">ldefint</code> returns an expression containing limits as noun forms.
+</p>
+<p><code class="code">ldefint</code> is not called from <code class="code"><a class="ref" href="#integrate">integrate</a></code>, so executing
+<code class="code">ldefint (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</code> may yield a different
+result than <code class="code">integrate (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</code>.
+<code class="code">ldefint</code> always uses the same method to evaluate the definite integral,
+while <code class="code">integrate</code> may employ various heuristics and may recognize some
+special cases.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="pwilt"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fpwilt"></a><dl class="first-deffn">
+<dt class="deffn" id="index-pwilt"><span class="category-def">Function: </span><span><strong class="def-name">pwilt</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">s</var>, <var class="var">t</var>)</var><a class="copiable-link" href='#index-pwilt'> &para;</a></span></dt>
+<dd>
+<p>Computes the inverse Laplace transform of <var class="var">expr</var> with
+respect to <var class="var">s</var> and parameter <var class="var">t</var>. Unlike <code class="code"><a class="ref" href="#ilt">ilt</a></code>,
+<code class="code">pwilt</code> is able to return piece-wise and periodic functions
+and can also handle some cases with polynomials of degree greater than 3
+in the denominator.
+</p>
+<p>Two examples where <code class="code">ilt</code> fails:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) pwilt (exp(-s)*s/(s^3-2*s-s+2), s, t);
+                                       t - 1       - 2 (t - 1)
+                             (t - 1) %e        2 %e
+(%o1)         hstep(t - 1) (--------------- - ---------------)
+                                    3                 9
+                                    
+(%i2) pwilt ((s^2+2)/(s^2-1), s, t);
+                                         t       - t
+                                     3 %e    3 %e
+(%o2)                    delta(t) + ----- - -------
+                                       2        2
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="potential"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fpotential"></a><dl class="first-deffn">
+<dt class="deffn" id="index-potential"><span class="category-def">Function: </span><span><strong class="def-name">potential</strong> <var class="def-var-arguments">(<var class="var">givengradient</var>)</var><a class="copiable-link" href='#index-potential'> &para;</a></span></dt>
+<dd>
+<p>The calculation makes use of the global variable <code class="code">potentialzeroloc[0]</code>
+which must be <code class="code">nonlist</code> or of the form
+</p>
+<div class="example">
+<pre class="example-preformatted">[indeterminatej=expressionj, indeterminatek=expressionk, ...]
+</pre></div>
+
+<p>the former being equivalent to the nonlist expression for all right-hand
+sides in the latter.  The indicated right-hand sides are used as the
+lower limit of integration.  The success of the integrations may
+depend upon their values and order.  <code class="code">potentialzeroloc</code> is initially set
+to 0.
+</p></dd></dl>
+
+<a class="anchor" id="prefer_005fd"></a><a class="anchor" id="Item_003a-Integration_002fdefvr_002fprefer_005fd"></a><dl class="first-defvr">
+<dt class="defvr" id="index-prefer_005fd"><span class="category-def">Option variable: </span><span><strong class="def-name">prefer_d</strong><a class="copiable-link" href='#index-prefer_005fd'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">prefer_d</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#specint">specint</a></code> will prefer to
+express solutions using <code class="code"><a class="ref" href="maxima_14.html#parabolic_005fcylinder_005fd">parabolic_cylinder_d</a></code> rather than
+hypergeometric functions.
+</p>
+<p>In the example below, the solution contains <code class="code"><a class="ref" href="maxima_14.html#parabolic_005fcylinder_005fd">parabolic_cylinder_d</a></code>
+when <code class="code">prefer_d</code> is <code class="code">true</code>. 
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) assume(s&gt;0);
+(%o1)                               [s &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) factor(specint(ex:%e^-(t^2/8)*exp(-s*t),t));
+                                         2
+                                      2 s
+(%o2)           - sqrt(2) sqrt(%pi) %e     (erf(sqrt(2) s) - 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) specint(ex,t),prefer_d=true;
+                                                          2
+                                                         s
+                                                         --
+                                                 s       8
+                    parabolic_cylinder_d(- 1, -------) %e
+                                              sqrt(2)
+(%o3)               ---------------------------------------
+                                    sqrt(2)
+
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Special-functions">Special functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="residue"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fresidue"></a><dl class="first-deffn">
+<dt class="deffn" id="index-residue"><span class="category-def">Function: </span><span><strong class="def-name">residue</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">z</var>, <var class="var">z_0</var>)</var><a class="copiable-link" href='#index-residue'> &para;</a></span></dt>
+<dd>
+<p>Computes the residue in the complex plane of the expression <var class="var">expr</var> when the
+variable <var class="var">z</var> assumes the value <var class="var">z_0</var>.  The residue is the coefficient of
+<code class="code">(<var class="var">z</var> - <var class="var">z_0</var>)^(-1)</code> in the Laurent series for <var class="var">expr</var>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) residue (s/(s**2+a**2), s, a*%i);
+                                1
+(%o1)                           -
+                                2
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) residue (sin(a*x)/x**4, x, 0);
+                                 3
+                                a
+(%o2)                         - --
+                                6
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="risch"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002frisch"></a><dl class="first-deffn">
+<dt class="deffn" id="index-risch"><span class="category-def">Function: </span><span><strong class="def-name">risch</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-risch'> &para;</a></span></dt>
+<dd>
+<p>Integrates <var class="var">expr</var> with respect to <var class="var">x</var> using the
+transcendental case of the Risch algorithm.  (The algebraic case of
+the Risch algorithm has not been implemented.)  This currently
+handles the cases of nested exponentials and logarithms which the main
+part of <code class="code">integrate</code> can&rsquo;t do.  <code class="code"><a class="ref" href="#integrate">integrate</a></code> will automatically apply
+<code class="code">risch</code> if given these cases.
+</p>
+<p><code class="code">erfflag</code>, if <code class="code">false</code>, prevents <code class="code">risch</code> from introducing the
+<code class="code">erf</code> function in the answer if there were none in the integrand to begin
+with.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) risch (x^2*erf(x), x);
+                                                        2
+             3                      2                - x
+        %pi x  erf(x) + (sqrt(%pi) x  + sqrt(%pi)) %e
+(%o1)   -------------------------------------------------
+                              3 %pi
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) diff(%, x), ratsimp;
+                             2
+(%o2)                       x  erf(x)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="specint"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fspecint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-specint"><span class="category-def">Function: </span><span><strong class="def-name">specint</strong> <var class="def-var-arguments">(exp(- s*<var class="var">t</var>) * <var class="var">expr</var>, <var class="var">t</var>)</var><a class="copiable-link" href='#index-specint'> &para;</a></span></dt>
+<dd>
+<p>Compute the Laplace transform of <var class="var">expr</var> with respect to the variable <var class="var">t</var>.
+The integrand <var class="var">expr</var> may contain special functions.   The
+parameter <var class="var">s</var> maybe be named something else; it is determined
+automatically, as the examples below show where <var class="var">p</var> is used in
+some places.
+</p>
+<p>The following special functions are handled by <code class="code">specint</code>: incomplete gamma 
+function, error functions (but not the error function <code class="code">erfi</code>, it is easy to 
+transform <code class="code">erfi</code> e.g. to the error function <code class="code">erf</code>), exponential 
+integrals, bessel functions (including products of bessel functions), hankel 
+functions, hermite and the laguerre polynomials.
+</p>
+<p>Furthermore, <code class="code">specint</code> can handle the hypergeometric function 
+<code class="code">%f[p,q]([],[],z)</code>, the Whittaker function of the first kind 
+<code class="code">%m[u,k](z)</code> and of the second kind <code class="code">%w[u,k](z)</code>.
+</p>
+<p>The result may be in terms of special functions and can include unsimplified 
+hypergeometric functions.  If variable <code class="code"><a class="ref" href="#prefer_005fd">prefer_d</a></code> is <code class="code">true</code>
+then the <code class="code"><a class="ref" href="maxima_14.html#parabolic_005fcylinder_005fd">parabolic_cylinder_d</a></code> function may be used in the result
+in preference to hypergeometric functions.
+</p>
+<p>When <code class="code"><a class="ref" href="#laplace">laplace</a></code> fails to find a Laplace transform, <code class="code">specint</code> is called. 
+Because <code class="code"><a class="ref" href="#laplace">laplace</a></code> knows more general rules for Laplace transforms, it is 
+preferable to use <code class="code"><a class="ref" href="#laplace">laplace</a></code> and not <code class="code">specint</code>.
+</p>
+<p><code class="code">demo(&quot;hypgeo&quot;)</code> displays several examples of Laplace transforms computed by 
+<code class="code">specint</code>.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) assume (p &gt; 0, a &gt; 0)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) specint (t^(1/2) * exp(-a*t/4) * exp(-p*t), t);
+                           sqrt(%pi)
+(%o2)                     ------------
+                                 a 3/2
+                          2 (p + -)
+                                 4
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) specint (t^(1/2) * bessel_j(1, 2 * a^(1/2) * t^(1/2))
+              * exp(-p*t), t);
+                                   - a/p
+                         sqrt(a) %e
+(%o3)                    ---------------
+                                2
+                               p
+</pre></div></div>
+
+<p>Examples for exponential integrals:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) assume(s&gt;0,a&gt;0,s-a&gt;0)$
+(%i5) ratsimp(specint(%e^(a*t)
+                      *(log(a)+expintegral_e1(a*t))*%e^(-s*t),t));
+                             log(s)
+(%o5)                        ------
+                             s - a
+(%i6) logarc:true$
+
+(%i7) gamma_expand:true$
+
+radcan(specint((cos(t)*expintegral_si(t)
+                     -sin(t)*expintegral_ci(t))*%e^(-s*t),t));
+                             log(s)
+(%o8)                        ------
+                              2
+                             s  + 1
+ratsimp(specint((2*t*log(a)+2/a*sin(a*t)
+                      -2*t*expintegral_ci(a*t))*%e^(-s*t),t));
+                               2    2
+                          log(s  + a )
+(%o9)                     ------------
+                                2
+                               s
+</pre></div>
+
+<p>Results when using the expansion of <code class="code"><a class="ref" href="maxima_14.html#gamma_005fincomplete">gamma_incomplete</a></code> and when changing 
+the representation to <code class="code"><a class="ref" href="maxima_14.html#expintegral_005fe1">expintegral_e1</a></code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i10) assume(s&gt;0)$
+(%i11) specint(1/sqrt(%pi*t)*unit_step(t-k)*%e^(-s*t),t);
+                                            1
+                            gamma_incomplete(-, k s)
+                                            2
+(%o11)                      ------------------------
+                               sqrt(%pi) sqrt(s)
+
+(%i12) gamma_expand:true$
+(%i13) specint(1/sqrt(%pi*t)*unit_step(t-k)*%e^(-s*t),t);
+                              erfc(sqrt(k) sqrt(s))
+(%o13)                        ---------------------
+                                     sqrt(s)
+
+(%i14) expintrep:expintegral_e1$
+(%i15) ratsimp(specint(1/(t+a)^2*%e^(-s*t),t));
+                              a s
+                        a s %e    expintegral_e1(a s) - 1
+(%o15)                - ---------------------------------
+                                        a
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="tldefint"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002ftldefint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tldefint"><span class="category-def">Function: </span><span><strong class="def-name">tldefint</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-tldefint'> &para;</a></span></dt>
+<dd>
+<p>Equivalent to <code class="code">ldefint</code> with <code class="code">tlimswitch</code> set to <code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-Integration_002fnode_002fIntroduction-to-QUADPACK"></a><hr>
+</div>
+<div class="section-level-extent" id="Introduction-to-QUADPACK">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-QUADPACK" accesskey="n" rel="next">Functions and Variables for QUADPACK</a>, Previous: <a href="#Functions-and-Variables-for-Integration" accesskey="p" rel="prev">Functions and Variables for Integration</a>, Up: <a href="#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-QUADPACK-1">19.3 Introduction to QUADPACK</h3>
+
+
+<p>QUADPACK is a collection of functions for the numerical
+computation of one-dimensional definite integrals.
+It originated from a joint project of
+R. Piessens <a class="footnote" id="DOCF1" href="#FOOT1"><sup>1</sup></a>,
+E. de Doncker <a class="footnote" id="DOCF2" href="#FOOT2"><sup>2</sup></a>,
+C. Ueberhuber <a class="footnote" id="DOCF3" href="#FOOT3"><sup>3</sup></a>,
+and D. Kahaner <a class="footnote" id="DOCF4" href="#FOOT4"><sup>4</sup></a>.
+</p>
+<p>The QUADPACK library included in Maxima is an automatic translation (via the
+program <code class="code">f2cl</code>) of the Fortran source code of QUADPACK as it appears in
+the SLATEC Common Mathematical Library, Version 4.1 <a class="footnote" id="DOCF5" href="#FOOT5"><sup>5</sup></a>.
+The SLATEC library is dated July 1993, but the QUADPACK functions
+were written some years before.
+There is another version of QUADPACK at Netlib <a class="footnote" id="DOCF6" href="#FOOT6"><sup>6</sup></a>;
+it is not clear how that version differs from the SLATEC version.
+</p>
+<p>The QUADPACK functions included in Maxima are all automatic, in the sense that
+these functions attempt to compute a result to a specified accuracy, requiring
+an unspecified number of function evaluations.  Maxima&rsquo;s Lisp translation of
+QUADPACK also includes some non-automatic functions, but they are not exposed
+at the Maxima level.
+</p>
+<p>Further information about QUADPACK can be found in the QUADPACK book
+<a class="footnote" id="DOCF7" href="#FOOT7"><sup>7</sup></a>.
+</p>
+<ul class="mini-toc">
+<li><a href="#Overview" accesskey="1">Overview</a></li>
+</ul>
+<div class="subsection-level-extent" id="Overview">
+<h4 class="subsection">19.3.1 Overview</h4>
+
+<dl class="table">
+<dt><code class="code"><code class="code"><a class="ref" href="#quad_005fqag">quad_qag</a></code></code></dt>
+<dd><p>Integration of a general function over a finite interval.
+<code class="code"><a class="ref" href="#quad_005fqag">quad_qag</a></code> implements a simple globally adaptive integrator using the
+strategy of Aind (Piessens, 1973).
+The caller may choose among 6 pairs of Gauss-Kronrod quadrature
+formulae for the rule evaluation component.
+The high-degree rules are suitable for strongly oscillating integrands.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#quad_005fqags">quad_qags</a></code></code></dt>
+<dd><p>Integration of a general function over a finite interval.
+<code class="code"><a class="ref" href="#quad_005fqags">quad_qags</a></code> implements globally adaptive interval subdivision with
+extrapolation (de Doncker, 1978) by the Epsilon algorithm (Wynn, 1956).
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#quad_005fqagi">quad_qagi</a></code></code></dt>
+<dd><p>Integration of a general function over an infinite or semi-infinite interval.
+The interval is mapped onto a finite interval and
+then the same strategy as in <code class="code">quad_qags</code> is applied.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#quad_005fqawo">quad_qawo</a></code></code></dt>
+<dd>
+<p>Integration of 
+\(\cos(\omega x) f(x)\)
+ or 
+\(\sin(\omega x) f(x)\)
+ over a
+finite interval, where 
+\(\omega\)
+ is a constant.
+The rule evaluation component is based on the modified Clenshaw-Curtis
+technique.  <code class="code"><a class="ref" href="#quad_005fqawo">quad_qawo</a></code> applies adaptive subdivision with extrapolation,
+similar to <code class="code"><a class="ref" href="#quad_005fqags">quad_qags</a></code>.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#quad_005fqawf">quad_qawf</a></code></code></dt>
+<dd><p>Calculates a Fourier cosine or Fourier sine transform on a semi-infinite
+interval.  The same approach as in <code class="code"><a class="ref" href="#quad_005fqawo">quad_qawo</a></code> is applied on successive
+finite intervals, and convergence acceleration by means of the Epsilon algorithm
+(Wynn, 1956) is applied to the series of the integral contributions.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#quad_005fqaws">quad_qaws</a></code></code></dt>
+<dd><p>Integration of 
+\(w(x)f(x)\)
+ over a finite interval <em class="math tex2jax_process">\([a, b]\)</em>, where
+<em class="math tex2jax_process">\(w\)</em> is a function of the form 
+\((x-a)^\alpha (b-x)^\beta v(x)\)
+ and
+<em class="math tex2jax_process">\(v(x)\)</em> is 1 or 
+\(\log(x-a)\)
+ or 
+\(\log(b-x)\)
+ or
+</p>
+\(\log(x-a)\log(b-x)\)
+<p>, and 
+\(\alpha > -1\)
+ and 
+\(\beta > -1\)
+.
+</p>
+<p>A globally adaptive subdivision strategy is applied, with modified
+Clenshaw-Curtis integration on the subintervals which contain <em class="math tex2jax_process">\(a\)</em>
+or <em class="math tex2jax_process">\(b\)</em>.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#quad_005fqawc">quad_qawc</a></code></code></dt>
+<dd><p>Computes the Cauchy principal value of <em class="math tex2jax_process">\(f(x)/(x - c)\)</em> over a finite
+interval <em class="math tex2jax_process">\((a, b)\)</em> and specified <em class="math tex2jax_process">\(c\)</em>.
+The strategy is globally adaptive, and modified
+Clenshaw-Curtis integration is used on the subranges
+which contain the point <em class="math tex2jax_process">\(x = c\)</em>.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#quad_005fqagp">quad_qagp</a></code></code></dt>
+<dd><p>Basically the same as <code class="code"><a class="ref" href="#quad_005fqags">quad_qags</a></code> but points of singularity or
+discontinuity of the integrand must be supplied.  This makes it easier
+for the integrator to produce a good solution.
+</p></dd>
+</dl>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Integration_002fnode_002fFunctions-and-Variables-for-QUADPACK"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-QUADPACK">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-QUADPACK" accesskey="p" rel="prev">Introduction to QUADPACK</a>, Up: <a href="#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-QUADPACK-1">19.4 Functions and Variables for QUADPACK</h3>
+
+
+<a class="anchor" id="quad_005fqag"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fqag"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fqag"><span class="category-def">Function: </span><span><strong class="def-name">quad_qag</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qag</code> (<var class="var">f(x)</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">key</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qag</code> (<var class="var">f</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">key</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>])</var><a class="copiable-link" href='#index-quad_005fqag'> &para;</a></span></dt>
+<dd>
+<p>Integration of a general function over a finite interval.  <code class="code">quad_qag</code>
+implements a simple globally adaptive integrator using the strategy of Aind
+(Piessens, 1973).  The caller may choose among 6 pairs of Gauss-Kronrod
+quadrature formulae for the rule evaluation component.  The high-degree rules
+are suitable for strongly oscillating integrands.
+</p>
+<p><code class="code">quad_qag</code> computes the integral
+</p>
+$$
+\int_a^b f(x)\, dx
+$$
+
+
+<p>The function to be integrated is <em class="math tex2jax_process">\(f(x)\)</em>, with dependent
+variable <em class="math tex2jax_process">\(x\)</em>, and the function is to be integrated between the
+limits <em class="math tex2jax_process">\(a\)</em> and <em class="math tex2jax_process">\(b\)</em>.  <var class="var">key</var> is the integrator to be used
+and should be an integer between 1 and 6, inclusive.  The value of
+<var class="var">key</var> selects the order of the Gauss-Kronrod integration rule.
+High-order rules are suitable for strongly oscillating integrands.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The numerical integration is done adaptively by subdividing the
+integration region into sub-intervals until the desired accuracy is
+achieved.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code class="code">key=val</code>.  The keyword arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code class="code">epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code class="code">limit</code></dt>
+<dd><p>Size of internal work array.  <var class="var">limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code class="code">quad_qag</code> returns a list of four elements:
+</p>
+<ul class="itemize mark-bullet">
+<li>an approximation to the integral,
+</li><li>the estimated absolute error of the approximation,
+</li><li>the number integrand evaluations,
+</li><li>an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>if no problems were encountered;
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>if too many sub-intervals were done;
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>if excessive roundoff error is detected;
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>if extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) quad_qag (x^(1/2)*log(1/x), x, 0, 1, 3, 'epsrel=5d-8);
+(%o1)    [.4444444444492108, 3.1700968502883E-9, 961, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate (x^(1/2)*log(1/x), x, 0, 1);
+                                4
+(%o2)                           -
+                                9
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="quad_005fqags"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fqags"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fqags"><span class="category-def">Function: </span><span><strong class="def-name">quad_qags</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qags</code> (<var class="var">f(x)</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qags</code> (<var class="var">f</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>])</var><a class="copiable-link" href='#index-quad_005fqags'> &para;</a></span></dt>
+<dd>
+<p>Integration of a general function over a finite interval.
+<code class="code">quad_qags</code> implements globally adaptive interval subdivision with
+extrapolation (de Doncker, 1978) by the Epsilon algorithm (Wynn, 1956).
+</p>
+<p><code class="code">quad_qags</code> computes the integral
+</p>
+$$
+\int_a^b f(x)\, dx
+$$
+
+
+<p>The function to be integrated is <em class="math tex2jax_process">\(f(x)\)</em>, with
+dependent variable <em class="math tex2jax_process">\(x\)</em>, and the function is to be integrated
+between the limits <em class="math tex2jax_process">\(a\)</em> and <em class="math tex2jax_process">\(b\)</em>.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code class="code">key=val</code>.  The keyword arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code class="code">epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code class="code">limit</code></dt>
+<dd><p>Size of internal work array.  <var class="var">limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code class="code">quad_qags</code> returns a list of four elements:
+</p>
+<ul class="itemize mark-bullet">
+<li>an approximation to the integral,
+</li><li>the estimated absolute error of the approximation,
+</li><li>the number integrand evaluations,
+</li><li>an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code class="code">4</code></dt>
+<dd><p>failed to converge
+</p></dd>
+<dt><code class="code">5</code></dt>
+<dd><p>integral is probably divergent or slowly convergent
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>if the input is invalid.
+</p></dd>
+</dl>
+
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) quad_qags (x^(1/2)*log(1/x), x, 0, 1, 'epsrel=1d-10);
+(%o1)   [.4444444444444448, 1.11022302462516E-15, 315, 0]
+</pre></div></div>
+
+<p>Note that <code class="code">quad_qags</code> is more accurate and efficient than <code class="code">quad_qag</code> for this integrand.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="quad_005fqagi"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fqagi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fqagi"><span class="category-def">Function: </span><span><strong class="def-name">quad_qagi</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qagi</code> (<var class="var">f(x)</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qagi</code> (<var class="var">f</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>])</var><a class="copiable-link" href='#index-quad_005fqagi'> &para;</a></span></dt>
+<dd>
+<p>Integration of a general function over an infinite or semi-infinite interval.
+The interval is mapped onto a finite interval and
+then the same strategy as in <code class="code">quad_qags</code> is applied.
+</p>
+<p><code class="code">quad_qagi</code> evaluates one of the following integrals
+</p>
+$$
+\int_a^\infty f(x) \, dx
+$$
+
+
+$$
+\int_\infty^a f(x) \, dx
+$$
+
+
+$$
+\int_{-\infty}^\infty f(x) \, dx
+$$
+
+
+<p>using the Quadpack QAGI routine.  The function to be integrated is
+<em class="math tex2jax_process">\(f(x)\)</em>, with dependent variable <em class="math tex2jax_process">\(x\)</em>, and the function is to
+be integrated over an infinite range.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>One of the limits of integration must be infinity.  If not, then
+<code class="code">quad_qagi</code> will just return the noun form.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code class="code">key=val</code>.  The keyword arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code class="code">epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code class="code">limit</code></dt>
+<dd><p>Size of internal work array.  <var class="var">limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code class="code">quad_qagi</code> returns a list of four elements:
+</p>
+<ul class="itemize mark-bullet">
+<li>an approximation to the integral,
+</li><li>the estimated absolute error of the approximation,
+</li><li>the number integrand evaluations,
+</li><li>an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code class="code">4</code></dt>
+<dd><p>failed to converge
+</p></dd>
+<dt><code class="code">5</code></dt>
+<dd><p>integral is probably divergent or slowly convergent
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) quad_qagi (x^2*exp(-4*x), x, 0, inf, 'epsrel=1d-8);
+(%o1)        [0.03125, 2.95916102995002E-11, 105, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate (x^2*exp(-4*x), x, 0, inf);
+                               1
+(%o2)                          --
+                               32
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="quad_005fqawc"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fqawc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fqawc"><span class="category-def">Function: </span><span><strong class="def-name">quad_qawc</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qawc</code> (<var class="var">f(x)</var>, <var class="var">x</var>, <var class="var">c</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qawc</code> (<var class="var">f</var>, <var class="var">x</var>, <var class="var">c</var>, <var class="var">a</var>, <var class="var">b</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>])</var><a class="copiable-link" href='#index-quad_005fqawc'> &para;</a></span></dt>
+<dd>
+<p>Computes the Cauchy principal value of <em class="math tex2jax_process">\(f(x)/(x - c)\)</em> over a finite
+interval.  The strategy is globally adaptive, and modified
+Clenshaw-Curtis integration is used on the subranges
+which contain the point <em class="math tex2jax_process">\(x = c\)</em>.
+</p>
+<p><code class="code">quad_qawc</code> computes the Cauchy principal value of
+</p>
+$$
+\int_{a}^{b}{{{f\left(x\right)}\over{x-c}}\>dx}
+$$
+
+
+<p>using the Quadpack QAWC routine.  The function to be integrated is
+<em class="math tex2jax_process">\(f(x)/(x-c)\)</em>, with dependent variable <em class="math tex2jax_process">\(x\)</em>, and the
+function is to be integrated over the interval <em class="math tex2jax_process">\(a\)</em> to <em class="math tex2jax_process">\(b\)</em>.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code class="code">key=val</code>.  The keyword arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code class="code">epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code class="code">limit</code></dt>
+<dd><p>Size of internal work array.  <var class="var">limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code class="code">quad_qawc</code> returns a list of four elements:
+</p>
+<ul class="itemize mark-bullet">
+<li>an approximation to the integral,
+</li><li>the estimated absolute error of the approximation,
+</li><li>the number integrand evaluations,
+</li><li>an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) quad_qawc (2^(-5)*((x-1)^2+4^(-5))^(-1), x, 2, 0, 5,
+                 'epsrel=1d-7);
+(%o1)    [- 3.130120337415925, 1.306830140249558E-8, 495, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate (2^(-alpha)*(((x-1)^2 + 4^(-alpha))*(x-2))^(-1),
+      x, 0, 5);
+Principal Value
+                       alpha
+        alpha       9 4                 9
+       4      log(------------- + -------------)
+                      alpha           alpha
+                  64 4      + 4   64 4      + 4
+(%o2) (-----------------------------------------
+                        alpha
+                     2 4      + 2
+
+       3 alpha                       3 alpha
+       -------                       -------
+          2            alpha/2          2          alpha/2
+    2 4        atan(4 4       )   2 4        atan(4       )   alpha
+  - --------------------------- - -------------------------)/2
+              alpha                        alpha
+           2 4      + 2                 2 4      + 2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ev (%, alpha=5, numer);
+(%o3)                    - 3.130120337415917
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="quad_005fqawf"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fqawf"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fqawf"><span class="category-def">Function: </span><span><strong class="def-name">quad_qawf</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qawf</code> (<var class="var">f(x)</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">omega</var>, <var class="var">trig</var>, [<var class="var">epsabs</var>, <var class="var">limit</var>, <var class="var">maxp1</var>, <var class="var">limlst</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qawf</code> (<var class="var">f</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">omega</var>, <var class="var">trig</var>, [<var class="var">epsabs</var>, <var class="var">limit</var>, <var class="var">maxp1</var>, <var class="var">limlst</var>])</var><a class="copiable-link" href='#index-quad_005fqawf'> &para;</a></span></dt>
+<dd>
+<p>Calculates a Fourier cosine or Fourier sine transform on a semi-infinite
+interval using the Quadpack QAWF function.  The same approach as in
+<code class="code">quad_qawo</code> is applied on successive finite intervals, and convergence
+acceleration by means of the Epsilon algorithm (Wynn, 1956) is applied to the
+series of the integral contributions.
+</p>
+<p><code class="code">quad_qawf</code> computes the integral
+</p>
+$$
+\int_a^\infty f(x) \, w(x) \, dx
+$$
+
+
+<p>The weight function <em class="math tex2jax_process">\(w\)</em> is selected by <var class="var">trig</var>:
+</p>
+<dl class="table">
+<dt><code class="code">cos</code></dt>
+<dd>
+\(w(x) = \cos\omega x\)
+
+</dd>
+<dt><code class="code">sin</code></dt>
+<dd>
+\(w(x) = \sin\omega x\)
+
+</dd>
+</dl>
+
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code class="code">key=val</code>.  The keyword arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 1d-10.
+</p></dd>
+<dt><code class="code">limit</code></dt>
+<dd><p>Size of internal work array.  (<var class="var">limit</var> - <var class="var">limlst</var>)/2 is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+<dt><code class="code">maxp1</code></dt>
+<dd><p>Maximum number of Chebyshev moments.  Must be greater than 0.  Default
+is 100.
+</p></dd>
+<dt><code class="code">limlst</code></dt>
+<dd><p>Upper bound on the number of cycles.  Must be greater than or equal to
+3.  Default is 10.
+</p></dd>
+</dl>
+
+<p><code class="code">quad_qawf</code> returns a list of four elements:
+</p>
+<ul class="itemize mark-bullet">
+<li>an approximation to the integral,
+</li><li>the estimated absolute error of the approximation,
+</li><li>the number integrand evaluations,
+</li><li>an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) quad_qawf (exp(-x^2), x, 0, 1, 'cos, 'epsabs=1d-9);
+(%o1)   [.6901942235215714, 2.84846300257552E-11, 215, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate (exp(-x^2)*cos(x), x, 0, inf);
+                          - 1/4
+                        %e      sqrt(%pi)
+(%o2)                   -----------------
+                                2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ev (%, numer);
+(%o3)                   .6901942235215714
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="quad_005fqawo"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fqawo"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fqawo"><span class="category-def">Function: </span><span><strong class="def-name">quad_qawo</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qawo</code> (<var class="var">f(x)</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">omega</var>, <var class="var">trig</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>, <var class="var">maxp1</var>, <var class="var">limlst</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qawo</code> (<var class="var">f</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">omega</var>, <var class="var">trig</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>, <var class="var">maxp1</var>, <var class="var">limlst</var>])</var><a class="copiable-link" href='#index-quad_005fqawo'> &para;</a></span></dt>
+<dd>
+<p>Integration of 
+\(\cos(\omega x) f(x)\)
+ or 
+\(\sin(\omega x)\)
+ over a finite interval,
+where 
+\(\omega\)
+ is a constant.
+The rule evaluation component is based on the modified
+Clenshaw-Curtis technique.  <code class="code">quad_qawo</code> applies adaptive subdivision with
+extrapolation, similar to <code class="code">quad_qags</code>.
+</p>
+<p><code class="code">quad_qawo</code> computes the integral using the Quadpack QAWO
+routine:
+</p>
+$$
+\int_a^b f(x) \, w(x) \, dx
+$$
+
+
+<p>The weight function <em class="math tex2jax_process">\(w\)</em> is selected by <var class="var">trig</var>:
+</p>
+<dl class="table">
+<dt><code class="code">cos</code></dt>
+<dd>
+\(w(x) = \cos\omega x\)
+
+</dd>
+<dt><code class="code">sin</code></dt>
+<dd>
+\(w(x) = \sin\omega x\)
+
+</dd>
+</dl>
+
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code class="code">key=val</code>.  The keyword arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code class="code">epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code class="code">limit</code></dt>
+<dd><p>Size of internal work array.  <var class="var">limit</var>/2 is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+<dt><code class="code">maxp1</code></dt>
+<dd><p>Maximum number of Chebyshev moments.  Must be greater than 0.  Default
+is 100.
+</p></dd>
+<dt><code class="code">limlst</code></dt>
+<dd><p>Upper bound on the number of cycles.  Must be greater than or equal to
+3.  Default is 10.
+</p></dd>
+</dl>
+
+<p><code class="code">quad_qawo</code> returns a list of four elements:
+</p>
+<ul class="itemize mark-bullet">
+<li>an approximation to the integral,
+</li><li>the estimated absolute error of the approximation,
+</li><li>the number integrand evaluations,
+</li><li>an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) quad_qawo (x^(-1/2)*exp(-2^(-2)*x), x, 1d-8, 20*2^2, 1, cos);
+(%o1)     [1.376043389877692, 4.72710759424899E-11, 765, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) rectform (integrate (x^(-1/2)*exp(-2^(-alpha)*x) * cos(x),
+      x, 0, inf));
+                   alpha/2 - 1/2            2 alpha
+        sqrt(%pi) 2              sqrt(sqrt(2        + 1) + 1)
+(%o2)   -----------------------------------------------------
+                               2 alpha
+                         sqrt(2        + 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ev (%, alpha=2, numer);
+(%o3)                     1.376043390090716
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="quad_005fqaws"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fqaws"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fqaws"><span class="category-def">Function: </span><span><strong class="def-name">quad_qaws</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qaws</code> (<var class="var">f(x)</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">alpha</var>, <var class="var">beta</var>, <var class="var">wfun</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qaws</code> (<var class="var">f</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">alpha</var>, <var class="var">beta</var>, <var class="var">wfun</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>])</var><a class="copiable-link" href='#index-quad_005fqaws'> &para;</a></span></dt>
+<dd>
+<p>Integration of <em class="math tex2jax_process">\(w(x) f(x)\)</em> over a finite interval, where <em class="math tex2jax_process">\(w(x)\)</em> is a
+certain algebraic or logarithmic function.  A globally adaptive subdivision
+strategy is applied, with modified Clenshaw-Curtis integration on the
+subintervals which contain the endpoints of the interval of integration.
+</p>
+<p><code class="code">quad_qaws</code> computes the integral using the Quadpack QAWS routine:
+</p>
+$$
+\int_a^b f(x) \, w(x) \, dx
+$$
+
+
+<p>The weight function <em class="math tex2jax_process">\(w\)</em> is selected by <var class="var">wfun</var>:
+</p>
+<dl class="table">
+<dt><code class="code">1</code></dt>
+<dd>
+\(w(x) = (x - a)^\alpha (b - x)^\beta\)
+
+</dd>
+<dt><code class="code">2</code></dt>
+<dd>
+\(w(x) = (x - a)^\alpha (b - x)^\beta \log(x - a)\)
+
+</dd>
+<dt><code class="code">3</code></dt>
+<dd>
+\(w(x) = (x - a)^\alpha (b - x)^\beta \log(b - x)\)
+
+</dd>
+<dt><code class="code">4</code></dt>
+<dd>
+\(w(x) = (x - a)^\alpha (b - x)^\beta \log(x - a) \log(b - x)\)
+
+</dd>
+</dl>
+
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code class="code">key=val</code>.  The keyword arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code class="code">epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code class="code">limit</code></dt>
+<dd><p>Size of internal work array.  <var class="var">limit</var>is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code class="code">quad_qaws</code> returns a list of four elements:
+</p>
+<ul class="itemize mark-bullet">
+<li>an approximation to the integral,
+</li><li>the estimated absolute error of the approximation,
+</li><li>the number integrand evaluations,
+</li><li>an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) quad_qaws (1/(x+1+2^(-4)), x, -1, 1, -0.5, -0.5, 1,
+                 'epsabs=1d-9);
+(%o1)     [8.750097361672832, 1.24321522715422E-10, 170, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate ((1-x*x)^(-1/2)/(x+1+2^(-alpha)), x, -1, 1);
+       alpha
+Is  4 2      - 1  positive, negative, or zero?
+
+pos;
+                          alpha         alpha
+                   2 %pi 2      sqrt(2 2      + 1)
+(%o2)              -------------------------------
+                               alpha
+                            4 2      + 2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ev (%, alpha=4, numer);
+(%o3)                     8.750097361672829
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="quad_005fqagp"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fqagp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fqagp"><span class="category-def">Function: </span><span><strong class="def-name">quad_qagp</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qagp</code> (<var class="var">f(x)</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">points</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">quad_qagp</code> (<var class="var">f</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">points</var>, [<var class="var">epsrel</var>, <var class="var">epsabs</var>, <var class="var">limit</var>])</var><a class="copiable-link" href='#index-quad_005fqagp'> &para;</a></span></dt>
+<dd>
+<p>Integration of a general function over a finite interval.
+<code class="code">quad_qagp</code> implements globally adaptive interval subdivision with
+extrapolation (de Doncker, 1978) by the Epsilon algorithm (Wynn, 1956).
+</p>
+<p><code class="code">quad_qagp</code> computes the integral
+</p>
+$$
+\int_a^b f(x) \, dx
+$$
+
+
+<p>The function to be integrated is <em class="math tex2jax_process">\(f(x)\)</em>, with
+dependent variable <em class="math tex2jax_process">\(x\)</em>, and the function is to be integrated
+between the limits <em class="math tex2jax_process">\(a\)</em> and <em class="math tex2jax_process">\(b\)</em>.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>To help the integrator, the user must supply a list of points where
+the integrand is singular or discontinuous.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code class="code">key=val</code>.  The keyword arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code class="code">epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code class="code">limit</code></dt>
+<dd><p>Size of internal work array.  <var class="var">limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code class="code">quad_qagp</code> returns a list of four elements:
+</p>
+<ul class="itemize mark-bullet">
+<li>an approximation to the integral,
+</li><li>the estimated absolute error of the approximation,
+</li><li>the number integrand evaluations,
+</li><li>an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code class="code">4</code></dt>
+<dd><p>failed to converge
+</p></dd>
+<dt><code class="code">5</code></dt>
+<dd><p>integral is probably divergent or slowly convergent
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>if the input is invalid.
+</p></dd>
+</dl>
+
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) quad_qagp(x^3*log(abs((x^2-1)*(x^2-2))),x,0,3,[1,sqrt(2)]);
+(%o1)   [52.74074838347143, 2.6247632689546663e-7, 1029, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) quad_qags(x^3*log(abs((x^2-1)*(x^2-2))), x, 0, 3);
+(%o2)   [52.74074847951494, 4.088443219529836e-7, 1869, 0]
+</pre></div></div>
+
+<p>The integrand has singularities at <code class="code">1</code> and <code class="code">sqrt(2)</code> so we supply
+these points to <code class="code">quad_qagp</code>.  We also note that <code class="code">quad_qagp</code> is
+more accurate and more efficient that <code class="code"><a class="ref" href="#quad_005fqags">quad_qags</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="quad_005fcontrol"></a><a class="anchor" id="Item_003a-Integration_002fdeffn_002fquad_005fcontrol"></a><dl class="first-deffn">
+<dt class="deffn" id="index-quad_005fcontrol"><span class="category-def">Function: </span><span><strong class="def-name">quad_control</strong> <var class="def-var-arguments">(<var class="var">parameter</var>, [<var class="var">value</var>])</var><a class="copiable-link" href='#index-quad_005fcontrol'> &para;</a></span></dt>
+<dd>
+<p>Control error handling for quadpack.  The parameter should be one of
+the following symbols:
+</p>
+<dl class="table">
+<dt><code class="code">current_error</code></dt>
+<dd><p>The current error number
+</p></dd>
+<dt><code class="code">control</code></dt>
+<dd><p>Controls if messages are printed or not.  If it is set to zero or
+less, messages are suppressed.
+</p></dd>
+<dt><code class="code">max_message</code></dt>
+<dd><p>The maximum number of times any message is to be printed.
+</p></dd>
+</dl>
+
+<p>If <var class="var">value</var> is not given, then the current value of the
+<var class="var">parameter</var> is returned.  If <var class="var">value</var> is given, the value of
+<var class="var">parameter</var> is set to the given value.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<div class="footnotes-segment">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h5 class="footnote-body-heading"><a id="FOOT1" href="#DOCF1">(1)</a></h5>
+<p>Applied Mathematics and Programming Division, K.U. Leuven</p>
+<h5 class="footnote-body-heading"><a id="FOOT2" href="#DOCF2">(2)</a></h5>
+<p>Applied Mathematics and Programming Division, K.U. Leuven</p>
+<h5 class="footnote-body-heading"><a id="FOOT3" href="#DOCF3">(3)</a></h5>
+<p>Institut f&uuml;r Mathematik, T.U. Wien</p>
+<h5 class="footnote-body-heading"><a id="FOOT4" href="#DOCF4">(4)</a></h5>
+<p>National Bureau of Standards, Washington, D.C., U.S.A</p>
+<h5 class="footnote-body-heading"><a id="FOOT5" href="#DOCF5">(5)</a></h5>
+<p><a class="url" href="https://www.netlib.org/slatec">https://www.netlib.org/slatec</a></p>
+<h5 class="footnote-body-heading"><a id="FOOT6" href="#DOCF6">(6)</a></h5>
+<p><a class="url" href="https://www.netlib.org/quadpack">https://www.netlib.org/quadpack</a></p>
+<h5 class="footnote-body-heading"><a id="FOOT7" href="#DOCF7">(7)</a></h5>
+<p>R. Piessens, E. de Doncker-Kapenga, C.W. Uberhuber, and D.K. Kahaner.
+<i class="i">QUADPACK: A Subroutine Package for Automatic Integration.</i>
+Berlin: Springer-Verlag, 1983, ISBN 0387125531.</p>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_19.html#Equations" accesskey="n" rel="next">Equations</a>, Previous: <a href="maxima_17.html#Differentiation" accesskey="p" rel="prev">Differentiation</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

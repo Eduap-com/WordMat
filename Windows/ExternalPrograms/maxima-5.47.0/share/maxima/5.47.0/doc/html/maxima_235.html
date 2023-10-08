@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Rayleigh Random Variable</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Rayleigh Random Variable">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Rayleigh Random Variable">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" rel="up" title="Functions and Variables for continuous distributions">
+<link href="maxima_236.html#Laplace-Random-Variable" rel="next" title="Laplace Random Variable">
+<link href="maxima_234.html#Weibull-Random-Variable" rel="previous" title="Weibull Random Variable">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Rayleigh-Random-Variable"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_236.html#Laplace-Random-Variable" accesskey="n" rel="next">Laplace Random Variable</a>, Previous: <a href="maxima_234.html#Weibull-Random-Variable" accesskey="p" rel="previous">Weibull Random Variable</a>, Up: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="u" rel="up">Functions and Variables for continuous distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Rayleigh-Random-Variable-1"></a>
+<h4 class="subsection">52.2.15 Rayleigh Random Variable</h4>
+
+<p>The <em>Rayleigh</em> distribution coincides with the 
+\(\chi^2\) distribution with two degrees of freedom.
+</p>
+<a name="pdf_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002fpdf_005frayleigh"></a><dl>
+<dt><a name="index-pdf_005frayleigh"></a>Function: <strong>pdf_rayleigh</strong> <em>(<var>x</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the density function of a 
+\({\it Rayleigh}(b)\) random variable, with <em>b&gt;0</em>.
+</p>
+<p>The 
+\({\it Rayleigh}(b)\) random variable is equivalent to the 
+\({\it Weibull}(2,1/b)\).
+</p>
+<p>The pdf is
+$$
+f(x; b) =
+\cases{
+2b^2 x e^{-b^2 x^2} & for $x \ge 0$ \cr
+0 & for $x < 0$
+}
+$$</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) pdf_rayleigh(x,b);
+                              2  2
+                     2     - b  x
+(%o2)             2 b  x %e        unit_step(x)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="cdf_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002fcdf_005frayleigh"></a><dl>
+<dt><a name="index-cdf_005frayleigh"></a>Function: <strong>cdf_rayleigh</strong> <em>(<var>x</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the distribution function of a 
+\({\it Rayleigh}(b)\) random variable, with <em>b&gt;0</em>.
+</p>
+<p>The 
+\({\it Rayleigh}(b)\) random variable is equivalent to the 
+\({\it Weibull}(2,1/b)\).
+</p>
+<p>The cdf is
+$$
+F(x; b) =
+\cases{
+1 - e^{-b^2 x^2} & for $x \ge 0$\cr
+0 & for $x < 0$
+}
+$$</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) cdf_rayleigh(x,b);
+                            2  2
+                         - b  x
+(%o2)             (1 - %e       ) unit_step(x)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="quantile_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002fquantile_005frayleigh"></a><dl>
+<dt><a name="index-quantile_005frayleigh"></a>Function: <strong>quantile_rayleigh</strong> <em>(<var>q</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the <var>q</var>-quantile of a 
+\({\it Rayleigh}(b)\) random variable, with <em>b&gt;0</em>; in other words, this is the inverse of <code>cdf_rayleigh</code>. Argument <var>q</var> must be an element of <em>[0,1]</em>.
+</p>
+<p>The 
+\({\it Rayleigh}(b)\) random variable is equivalent to the 
+\({\it Weibull}(2,1/b)\).
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) quantile_rayleigh(0.99,b);
+                        2.145966026289347
+(%o2)                   -----------------
+                                b
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="mean_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002fmean_005frayleigh"></a><dl>
+<dt><a name="index-mean_005frayleigh"></a>Function: <strong>mean_rayleigh</strong> <em>(<var>b</var>)</em></dt>
+<dd><p>Returns the mean of a 
+\({\it Rayleigh}(b)\) random variable, with <em>b&gt;0</em>.
+</p>
+<p>The 
+\({\it Rayleigh}(b)\) random variable is equivalent to the 
+\({\it Weibull}(2,1/b)\).
+</p>
+<p>The mean is
+$$
+E[X] = {\sqrt{\pi}\over 2b}
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) mean_rayleigh(b);
+                            sqrt(%pi)
+(%o2)                       ---------
+                               2 b
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="var_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002fvar_005frayleigh"></a><dl>
+<dt><a name="index-var_005frayleigh"></a>Function: <strong>var_rayleigh</strong> <em>(<var>b</var>)</em></dt>
+<dd><p>Returns the variance of a 
+\({\it Rayleigh}(b)\) random variable, with <em>b&gt;0</em>.
+</p>
+<p>The 
+\({\it Rayleigh}(b)\) random variable is equivalent to the 
+\({\it Weibull}(2,1/b)\).
+</p>
+<p>The variance is
+$$
+V[X] = {1\over b^2}\left(1-{\pi \over 4}\right)
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) var_rayleigh(b);
+                                 %pi
+                             1 - ---
+                                  4
+(%o2)                        -------
+                                2
+                               b
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="std_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002fstd_005frayleigh"></a><dl>
+<dt><a name="index-std_005frayleigh"></a>Function: <strong>std_rayleigh</strong> <em>(<var>b</var>)</em></dt>
+<dd><p>Returns the standard deviation of a 
+\({\it Rayleigh}(b)\) random variable, with <em>b&gt;0</em>.
+</p>
+<p>The 
+\({\it Rayleigh}(b)\) random variable is equivalent to the 
+\({\it Weibull}(2,1/b)\).
+</p>
+<p>The standard deviation is
+$$
+D[X] = {1\over b}\sqrt{\displaystyle 1 - {\pi\over 4}}
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) std_rayleigh(b);
+                                   %pi
+                          sqrt(1 - ---)
+                                    4
+(%o2)                     -------------
+                                b
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="skewness_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002fskewness_005frayleigh"></a><dl>
+<dt><a name="index-skewness_005frayleigh"></a>Function: <strong>skewness_rayleigh</strong> <em>(<var>b</var>)</em></dt>
+<dd><p>Returns the skewness coefficient of a 
+\({\it Rayleigh}(b)\) random variable, with <em>b&gt;0</em>.
+</p>
+<p>The 
+\({\it Rayleigh}(b)\) random variable is equivalent to the 
+\({\it Weibull}(2,1/b)\).
+</p>
+<p>The skewness coefficient is
+$$
+SK[X] = {2\sqrt{\pi}(\pi - 3)\over (4-\pi)^{3/2}}
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) skewness_rayleigh(b);
+                         3/2
+                      %pi      3 sqrt(%pi)
+                      ------ - -----------
+                        4           4
+(%o2)                 --------------------
+                               %pi 3/2
+                          (1 - ---)
+                                4
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="kurtosis_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002fkurtosis_005frayleigh"></a><dl>
+<dt><a name="index-kurtosis_005frayleigh"></a>Function: <strong>kurtosis_rayleigh</strong> <em>(<var>b</var>)</em></dt>
+<dd><p>Returns the kurtosis coefficient of a 
+\({\it Rayleigh}(b)\) random variable, with <em>b&gt;0</em>.
+</p>
+<p>The 
+\({\it Rayleigh}(b)\) random variable is equivalent to the 
+\({\it Weibull}(2,1/b)\).
+</p>
+<p>The kurtosis coefficient is
+$$
+KU[X] = {32-3\pi\over (4-\pi)^2} - 3
+$$</p>
+
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) kurtosis_rayleigh(b);
+                                  2
+                             3 %pi
+                         2 - ------
+                               16
+(%o2)                    ---------- - 3
+                              %pi 2
+                         (1 - ---)
+                               4
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="random_005frayleigh"></a><a name="Item_003a-distrib_002fdeffn_002frandom_005frayleigh"></a><dl>
+<dt><a name="index-random_005frayleigh"></a>Function: <strong>random_rayleigh</strong> <em>(<var>b</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>random_rayleigh</tt> (<var>b</var>,<var>n</var>)</em></dt>
+<dd>
+<p>Returns a 
+\({\it Rayleigh}(b)\) random variate, with <em>b&gt;0</em>. Calling <code>random_rayleigh</code> with a second argument <var>n</var>, a random sample of size <var>n</var> will be simulated.
+</p>
+<p>The implemented algorithm is based on the general inverse method.
+</p>
+<p>To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;<a href="maxima_424.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;</div>
+</dd></dl>
+
+
+
+<a name="Item_003a-distrib_002fnode_002fLaplace-Random-Variable"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_236.html#Laplace-Random-Variable" accesskey="n" rel="next">Laplace Random Variable</a>, Previous: <a href="maxima_234.html#Weibull-Random-Variable" accesskey="p" rel="previous">Weibull Random Variable</a>, Up: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="u" rel="up">Functions and Variables for continuous distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

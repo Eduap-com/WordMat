@@ -1,0 +1,2824 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Elementary Functions (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Elementary Functions (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Elementary Functions (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_10.html#Maxima_0027s-Database" rel="next" title="Maxima's Database">
+<link href="maxima_8.html#Simplification" rel="prev" title="Simplification">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Elementary-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_10.html#Maxima_0027s-Database" accesskey="n" rel="next">Maxima&rsquo;s Database</a>, Previous: <a href="maxima_8.html#Simplification" accesskey="p" rel="prev">Simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Elementary-Functions-1">10 Elementary Functions</h2>
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fFunctions-for-Numbers"></a><ul class="mini-toc">
+<li><a href="#Functions-for-Numbers" accesskey="1">Functions for Numbers</a></li>
+<li><a href="#Functions-for-Complex-Numbers" accesskey="2">Functions for Complex Numbers</a></li>
+<li><a href="#Combinatorial-Functions" accesskey="3">Combinatorial Functions</a></li>
+<li><a href="#Root-Exponential-and-Logarithmic-Functions" accesskey="4">Root, Exponential and Logarithmic Functions</a></li>
+<li><a href="#Trigonometric-Functions" accesskey="5">Trigonometric Functions</a></li>
+<li><a href="#Random-Numbers" accesskey="6">Random Numbers</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-for-Numbers">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-for-Complex-Numbers" accesskey="n" rel="next">Functions for Complex Numbers</a>, Up: <a href="#Elementary-Functions" accesskey="u" rel="up">Elementary Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-for-Numbers-1">10.1 Functions for Numbers</h3>
+
+<a class="anchor" id="abs"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fabs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-abs"><span class="category-def">Function: </span><span><strong class="def-name">abs</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-abs'> &para;</a></span></dt>
+<dd>
+<p>The <code class="code">abs</code> function represents the mathematical absolute value function and
+works for both numerical and symbolic values. If the argument, <var class="var">z</var>, is a
+real or complex number, <code class="code">abs</code> returns the absolute value of <var class="var">z</var>. If
+possible, symbolic expressions using the absolute value function are
+also simplified.
+</p>
+<p>Maxima can differentiate, integrate and calculate limits for expressions
+containing <code class="code">abs</code>. The <code class="code">abs_integrate</code> package further extends
+Maxima&rsquo;s ability to calculate integrals involving the abs function. See
+(%i12) in the examples below.
+</p>
+<p>When applied to a list or matrix, <code class="code">abs</code> automatically distributes over
+the terms. Similarly, it distributes over both sides of an
+equation. To alter this behaviour, see the variable <code class="code"><a class="ref" href="maxima_8.html#distribute_005fover">distribute_over</a></code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#cabs">cabs</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Calculation of <code class="code">abs</code> for real and complex numbers, including numerical
+constants and various infinities. The first example shows how <code class="code">abs</code>
+distributes over the elements of a list.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) abs([-4, 0, 1, 1+%i]);
+(%o1)                  [4, 0, 1, sqrt(2)]
+
+(%i2) abs((1+%i)*(1-%i));
+(%o2)                           2
+(%i3) abs(%e+%i);
+                                2
+(%o3)                    sqrt(%e  + 1)
+(%i4) abs([inf, infinity, minf]);
+(%o4)                   [inf, inf, inf]
+</pre></div>
+
+<p>Simplification of expressions containing <code class="code">abs</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i5) abs(x^2);
+                                2
+(%o5)                          x
+(%i6) abs(x^3);
+                             2
+(%o6)                       x  abs(x)
+
+(%i7) abs(abs(x));
+(%o7)                       abs(x)
+(%i8) abs(conjugate(x));
+(%o8)                       abs(x)
+</pre></div>
+
+<p>Integrating and differentiating with the <code class="code">abs</code> function. Note that more
+integrals involving the <code class="code">abs</code> function can be performed, if the
+<code class="code">abs_integrate</code> package is loaded. The last example shows the Laplace
+transform of <code class="code">abs</code>: see <code class="code"><a class="ref" href="maxima_18.html#laplace">laplace</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i9) diff(x*abs(x),x),expand;
+(%o9)                       2 abs(x)
+
+(%i10) integrate(abs(x),x);
+                             x abs(x)
+(%o10)                       --------
+                                2
+
+(%i11) integrate(x*abs(x),x);
+                           /
+                           [
+(%o11)                     I x abs(x) dx
+                           ]
+                           /
+
+(%i12) load(&quot;abs_integrate&quot;)$
+(%i13) integrate(x*abs(x),x);
+                      2           3
+                     x  abs(x)   x  signum(x)
+(%o13)               --------- - ------------
+                         2            6
+
+(%i14) integrate(abs(x),x,-2,%pi);
+                               2
+                            %pi
+(%o14)                      ---- + 2
+                             2
+
+(%i15) laplace(abs(x),x,s);
+                               1
+(%o15)                         --
+                                2
+                               s
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ceiling"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fceiling"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ceiling"><span class="category-def">Function: </span><span><strong class="def-name">ceiling</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-ceiling'> &para;</a></span></dt>
+<dd>
+<p>When <var class="var">x</var> is a real number, return the least integer that 
+is greater than or equal to <var class="var">x</var>.
+</p>
+<p>If <var class="var">x</var> is a constant expression (<code class="code">10 * %pi</code>, for example), 
+<code class="code">ceiling</code> evaluates <var class="var">x</var> using big floating point numbers, and 
+applies <code class="code">ceiling</code> to the resulting big float.  Because <code class="code">ceiling</code> uses
+floating point evaluation, it&rsquo;s possible, although unlikely, that <code class="code">ceiling</code>
+could return an erroneous value for constant inputs.  To guard against errors,
+the floating point evaluation is done using three values for <code class="code"><a class="ref" href="maxima_4.html#fpprec">fpprec</a></code>.
+</p>
+<p>For non-constant inputs, <code class="code">ceiling</code> tries to return a simplified value.
+Here are examples of the simplifications that <code class="code">ceiling</code> knows about:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) ceiling (ceiling (x));
+(%o1)                      ceiling(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) ceiling (floor (x));
+(%o2)                       floor(x)
+</pre></div><pre class="example-preformatted">(%i3) declare (n, integer)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) [ceiling (n), ceiling (abs (n)), ceiling (max (n, 6))];
+(%o4)                [n, abs(n), max(6, n)]
+</pre></div><pre class="example-preformatted">(%i5) assume (x &gt; 0, x &lt; 1)$
+</pre><div class="group"><pre class="example-preformatted">(%i6) ceiling (x);
+(%o6)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) tex (ceiling (a));
+$$\left \lceil a \right \rceil$$
+(%o7)                         false
+</pre></div></div>
+
+<p>The <code class="code">ceiling</code> function distributes over lists, matrices and equations.
+See <code class="code"><a class="ref" href="maxima_8.html#distribute_005fover">distribute_over</a></code>.
+</p>
+<p>Finally, for all inputs that are manifestly complex, <code class="code">ceiling</code> returns 
+a noun form.
+</p>
+<p>If the range of a function is a subset of the integers, it can be declared to
+be <code class="code">integervalued</code>.  Both the <code class="code">ceiling</code> and <code class="code"><a class="ref" href="#floor">floor</a></code> functions
+can use this information; for example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (f, integervalued)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) floor (f(x));
+(%o2)                         f(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ceiling (f(x) - 1);
+(%o3)                       f(x) - 1
+</pre></div></div>
+
+<p>Example use:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) unitfrac(r) := block([uf : [], q],
+    if not(ratnump(r)) then
+       error(&quot;unitfrac: argument must be a rational number&quot;),
+    while r # 0 do (
+        uf : cons(q : 1/ceiling(1/r), uf),
+        r : r - q),
+    reverse(uf));
+(%o1) unitfrac(r) := block([uf : [], q], 
+if not ratnump(r) then
+error(&quot;unitfrac: argument must be a rational number&quot;), 
+                                  1
+while r # 0 do (uf : cons(q : ----------, uf), r : r - q), 
+                                      1
+                              ceiling(-)
+                                      r
+reverse(uf))
+</pre><div class="group"><pre class="example-preformatted">(%i2) unitfrac (9/10);
+                            1  1  1
+(%o2)                      [-, -, --]
+                            2  3  15
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) apply (&quot;+&quot;, %);
+                               9
+(%o3)                          --
+                               10
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) unitfrac (-9/10);
+                                  1
+(%o4)                       [- 1, --]
+                                  10
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) apply (&quot;+&quot;, %);
+                                9
+(%o5)                         - --
+                                10
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) unitfrac (36/37);
+                        1  1  1  1    1
+(%o6)                  [-, -, -, --, ----]
+                        2  3  8  69  6808
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) apply (&quot;+&quot;, %);
+                               36
+(%o7)                          --
+                               37
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="entier"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fentier"></a><dl class="first-deffn">
+<dt class="deffn" id="index-entier"><span class="category-def">Function: </span><span><strong class="def-name">entier</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-entier'> &para;</a></span></dt>
+<dd>
+<p>Returns the largest integer less than or equal to <var class="var">x</var> where <var class="var">x</var> is
+numeric.  <code class="code"><a class="ref" href="#fix">fix</a></code> (as in <code class="code">fixnum</code>) is a synonym for this, so
+<code class="code">fix(<var class="var">x</var>)</code> is precisely the same.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="floor"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ffloor"></a><dl class="first-deffn">
+<dt class="deffn" id="index-floor"><span class="category-def">Function: </span><span><strong class="def-name">floor</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-floor'> &para;</a></span></dt>
+<dd>
+<p>When <var class="var">x</var> is a real number, return the largest integer that is less than or
+equal to <var class="var">x</var>.
+</p>
+<p>If <var class="var">x</var> is a constant expression (<code class="code">10 * %pi</code>, for example), <code class="code">floor</code>
+evaluates <var class="var">x</var> using big floating point numbers, and applies <code class="code">floor</code> to
+the resulting big float. Because <code class="code">floor</code> uses floating point evaluation,
+it&rsquo;s possible, although unlikely, that <code class="code">floor</code> could return an erroneous
+value for constant inputs.  To guard against errors, the floating point
+evaluation is done using three values for <code class="code"><a class="ref" href="maxima_4.html#fpprec">fpprec</a></code>.
+</p>
+<p>For non-constant inputs, <code class="code">floor</code> tries to return a simplified value.  Here
+are examples of the simplifications that <code class="code">floor</code> knows about:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) floor (ceiling (x));
+(%o1)                      ceiling(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) floor (floor (x));
+(%o2)                       floor(x)
+</pre></div><pre class="example-preformatted">(%i3) declare (n, integer)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) [floor (n), floor (abs (n)), floor (min (n, 6))];
+(%o4)                [n, abs(n), min(6, n)]
+</pre></div><pre class="example-preformatted">(%i5) assume (x &gt; 0, x &lt; 1)$
+</pre><div class="group"><pre class="example-preformatted">(%i6) floor (x);
+(%o6)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) tex (floor (a));
+$$\left \lfloor a \right \rfloor$$
+(%o7)                         false
+</pre></div></div>
+
+<p>The <code class="code">floor</code> function distributes over lists, matrices and equations.
+See <code class="code"><a class="ref" href="maxima_8.html#distribute_005fover">distribute_over</a></code>.
+</p>
+<p>Finally, for all inputs that are manifestly complex, <code class="code">floor</code> returns 
+a noun form.
+</p>
+<p>If the range of a function is a subset of the integers, it can be declared to
+be <code class="code">integervalued</code>.  Both the <code class="code"><a class="ref" href="#ceiling">ceiling</a></code> and <code class="code">floor</code> functions
+can use this information; for example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (f, integervalued)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) floor (f(x));
+(%o2)                         f(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ceiling (f(x) - 1);
+(%o3)                       f(x) - 1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fix"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ffix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fix"><span class="category-def">Function: </span><span><strong class="def-name">fix</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-fix'> &para;</a></span></dt>
+<dd>
+<p>A synonym for <code class="code">entier (<var class="var">x</var>)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="hstep"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fhstep"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hstep"><span class="category-def">Function: </span><span><strong class="def-name">hstep</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-hstep'> &para;</a></span></dt>
+<dd><p>The Heaviside unit step function, equal to 0 if <var class="var">x</var> is negative,
+equal to 1 if <var class="var">x</var> is positive and equal to 1/2 if <var class="var">x</var> is equal
+to zero.
+</p>
+<p>If you want a unit step function that takes on the value of 0 at <var class="var">x</var>
+equal to zero, use <code class="code"><a class="ref" href="maxima_79.html#unit_005fstep">unit_step</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="lmax"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002flmax"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lmax"><span class="category-def">Function: </span><span><strong class="def-name">lmax</strong> <var class="def-var-arguments">(<var class="var">L</var>)</var><a class="copiable-link" href='#index-lmax'> &para;</a></span></dt>
+<dd>
+<p>When <var class="var">L</var> is a list or a set, return <code class="code">apply ('max, args (<var class="var">L</var>))</code>.
+When <var class="var">L</var> is not a list or a set, signal an error.
+See also <code class="code"><a class="ref" href="#lmin">lmin</a></code> and <code class="code"><a class="ref" href="#max">max</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Lists">Lists</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="lmin"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002flmin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lmin"><span class="category-def">Function: </span><span><strong class="def-name">lmin</strong> <var class="def-var-arguments">(<var class="var">L</var>)</var><a class="copiable-link" href='#index-lmin'> &para;</a></span></dt>
+<dd>
+<p>When <var class="var">L</var> is a list or a set, return <code class="code">apply ('min, args (<var class="var">L</var>))</code>.
+When <var class="var">L</var> is not a list or a set, signal an error.
+See also <code class="code"><a class="ref" href="#lmax">lmax</a></code> and <code class="code"><a class="ref" href="#min">min</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Lists">Lists</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="max"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fmax"></a><dl class="first-deffn">
+<dt class="deffn" id="index-max"><span class="category-def">Function: </span><span><strong class="def-name">max</strong> <var class="def-var-arguments">(<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>)</var><a class="copiable-link" href='#index-max'> &para;</a></span></dt>
+<dd>
+<p>Return a simplified value for the numerical maximum of the expressions <var class="var">x_1</var> 
+through <var class="var">x_n</var>. For an empty argument list, <code class="code">max</code> yields <code class="code">minf</code>.
+</p>
+<p>The option variable <code class="code">maxmin_effort</code> controls which simplification methods are 
+applied. Using the default value of <em class="emph">twelve</em> for <code class="code">maxmin_effort</code>, 
+<code class="code">max</code> uses <em class="emph">all</em> available simplification methods. To to inhibit all 
+simplifications, set <code class="code">maxmin_effort</code> to zero.
+</p>
+<p>When <code class="code">maxmin_effort</code> is one or more, for an explicit list of real numbers, 
+<code class="code">max</code> returns a number. 
+</p>
+<p>Unless <code class="code">max</code> needs to simplify a lengthy list of expressions, we suggest using 
+the default value of <code class="code">maxmin_effort</code>. Setting <code class="code">maxmin_effort</code> to zero 
+(no simplifications), will cause problems for some Maxima functions; accordingly, 
+generally <code class="code">maxmin_effort</code> should be nonzero.
+</p>
+<p>See also <code class="code"><a class="ref" href="#min">min</a></code>, <code class="code"><a class="ref" href="#lmax">lmax</a></code>., and <code class="code"><a class="ref" href="#lmin">lmin</a></code>..
+</p>
+<p><b class="b">Examples:</b>
+</p>
+<p>In the first example, setting <code class="code">maxmin_effort</code> to zero suppresses simplifications.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) block([maxmin_effort : 0], max(1,2,x,x, max(a,b)));
+(%o1) max(1,2,max(a,b),x,x)
+
+(%i2) block([maxmin_effort : 1], max(1,2,x,x, max(a,b)));
+(%o2) max(2,a,b,x)
+</pre></div>
+
+<p>When <code class="code">maxmin_effort</code> is two or more, <code class="code">max</code> compares pairs of members:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) block([maxmin_effort : 1], max(x,x+1,x+3));
+(%o1) max(x,x+1,x+3)
+
+(%i2) block([maxmin_effort : 2], max(x,x+1,x+3));
+(%o2) x+3
+</pre></div>
+
+<p>Finally, when <code class="code">maxmin_effort</code> is three or more, <code class="code">max</code> compares triples 
+members and excludes those that are in between; for example
+</p><div class="example">
+<pre class="example-preformatted">(%i1) block([maxmin_effort : 4], max(x, 2*x, 3*x, 4*x));
+(%o1) max(x,4*x)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="min"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fmin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-min"><span class="category-def">Function: </span><span><strong class="def-name">min</strong> <var class="def-var-arguments">(<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>)</var><a class="copiable-link" href='#index-min'> &para;</a></span></dt>
+<dd>
+<p>Return a simplified value for the numerical minimum of the expressions <var class="var">x_1</var> 
+through <var class="var">x_n</var>. For an empty argument list, <code class="code">minf</code> yields <code class="code">inf</code>.
+</p>
+<p>The option variable <code class="code">maxmin_effort</code> controls which simplification methods are 
+applied. Using the default value of <em class="emph">twelve</em> for <code class="code">maxmin_effort</code>, 
+<code class="code">max</code> uses <em class="emph">all</em> available simplification methods. To to inhibit all 
+simplifications, set <code class="code">maxmin_effort</code> to zero.
+</p>
+<p>When <code class="code">maxmin_effort</code> is one or more, for an explicit list of real numbers, 
+<code class="code">min</code> returns a number. 
+</p>
+<p>Unless <code class="code">min</code> needs to simplify a lengthy list of expressions, we suggest using 
+the default value of <code class="code">maxmin_effort</code>. Setting <code class="code">maxmin_effort</code> to zero 
+(no simplifications), will cause problems for some Maxima functions; accordingly, 
+generally <code class="code">maxmin_effort</code> should be nonzero.
+</p>
+<p>See also <code class="code"><a class="ref" href="#max">max</a></code>, <code class="code"><a class="ref" href="#lmax">lmax</a></code>., and <code class="code"><a class="ref" href="#lmin">lmin</a></code>..
+</p>
+<p><b class="b">Examples:</b>
+</p>
+<p>In the first example, setting <code class="code">maxmin_effort</code> to zero suppresses simplifications.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) block([maxmin_effort : 0], min(1,2,x,x, min(a,b)));
+(%o1) min(1,2,a,b,x,x)
+
+(%i2) block([maxmin_effort : 1], min(1,2,x,x, min(a,b)));
+(%o2) min(1,a,b,x)
+</pre></div>
+
+<p>When <code class="code">maxmin_effort</code> is two or more, <code class="code">min</code> compares pairs of members:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) block([maxmin_effort : 1], min(x,x+1,x+3));
+(%o1) min(x,x+1,x+3)
+
+(%i2) block([maxmin_effort : 2], min(x,x+1,x+3));
+(%o2) x
+</pre></div>
+
+<p>Finally, when <code class="code">maxmin_effort</code> is three or more, <code class="code">min</code> compares triples 
+members and excludes those that are in between; for example
+</p><div class="example">
+<pre class="example-preformatted">(%i1) block([maxmin_effort : 4], min(x, 2*x, 3*x, 4*x));
+(%o1) max(x,4*x)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="round"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fround"></a><dl class="first-deffn">
+<dt class="deffn" id="index-round"><span class="category-def">Function: </span><span><strong class="def-name">round</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-round'> &para;</a></span></dt>
+<dd>
+<p>When <var class="var">x</var> is a real number, returns the closest integer to <var class="var">x</var>.
+Multiples of 1/2 are rounded to the nearest even integer.  Evaluation of
+<var class="var">x</var> is similar to <code class="code"><a class="ref" href="#floor">floor</a></code> and <code class="code"><a class="ref" href="#ceiling">ceiling</a></code>.
+</p>
+<p>The <code class="code">round</code> function distributes over lists, matrices and equations.
+See <code class="code"><a class="ref" href="maxima_8.html#distribute_005fover">distribute_over</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="signum"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fsignum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-signum"><span class="category-def">Function: </span><span><strong class="def-name">signum</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-signum'> &para;</a></span></dt>
+<dd>
+<p>For either real or complex numbers <var class="var">x</var>, the signum function returns
+0 if <var class="var">x</var> is zero; for a nonzero numeric input <var class="var">x</var>, the signum function
+returns <code class="code">x/abs(x)</code>.
+</p>
+<p>For non-numeric inputs, Maxima attempts to determine the sign of the input.
+When the sign is negative, zero, or positive, <code class="code">signum</code> returns -1,0, 1,
+respectively.  For all other values for the sign, <code class="code">signum</code> a simplified but
+equivalent form.  The simplifications include reflection (<code class="code">signum(-x)</code>
+gives <code class="code">-signum(x)</code>) and multiplicative identity (<code class="code">signum(x*y)</code> gives
+<code class="code">signum(x) * signum(y)</code>).
+</p>
+<p>The <code class="code">signum</code> function distributes over a list, a matrix, or an
+equation.  See <code class="code"><a class="ref" href="maxima_10.html#sign">sign</a></code> and <code class="code"><a class="ref" href="maxima_8.html#distribute_005fover">distribute_over</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="truncate"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ftruncate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-truncate"><span class="category-def">Function: </span><span><strong class="def-name">truncate</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-truncate'> &para;</a></span></dt>
+<dd>
+<p>When <var class="var">x</var> is a real number, return the closest integer to <var class="var">x</var> not
+greater in absolute value than <var class="var">x</var>.  Evaluation of <var class="var">x</var> is similar
+to <code class="code"><a class="ref" href="#floor">floor</a></code> and <code class="code"><a class="ref" href="#ceiling">ceiling</a></code>.
+</p>
+<p>The <code class="code">truncate</code> function distributes over lists, matrices and equations.
+See <code class="code"><a class="ref" href="maxima_8.html#distribute_005fover">distribute_over</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fFunctions-for-Complex-Numbers"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-for-Complex-Numbers">
+<div class="nav-panel">
+<p>
+Next: <a href="#Combinatorial-Functions" accesskey="n" rel="next">Combinatorial Functions</a>, Previous: <a href="#Functions-for-Numbers" accesskey="p" rel="prev">Functions for Numbers</a>, Up: <a href="#Elementary-Functions" accesskey="u" rel="up">Elementary Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-for-Complex-Numbers-1">10.2 Functions for Complex Numbers</h3>
+
+<a class="anchor" id="cabs"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fcabs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cabs"><span class="category-def">Function: </span><span><strong class="def-name">cabs</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-cabs'> &para;</a></span></dt>
+<dd>
+<p>Calculates the absolute value of an expression representing a complex
+number.  Unlike the function <code class="code"><a class="ref" href="#abs">abs</a></code>, the <code class="code">cabs</code> function always
+decomposes its argument into a real and an imaginary part.  If <code class="code">x</code> and
+<code class="code">y</code> represent real variables or expressions, the <code class="code">cabs</code> function
+calculates the absolute value of <code class="code">x + %i*y</code> as
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) cabs (1);
+(%o1)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) cabs (1 + %i);
+(%o2)                        sqrt(2)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) cabs (exp (%i));
+(%o3)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) cabs (exp (%pi * %i));
+(%o4)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) cabs (exp (3/2 * %pi * %i));
+(%o5)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) cabs (17 * exp (2 * %i));
+(%o6)                          17
+</pre></div></div>
+
+<p>If <code class="code">cabs</code> returns a noun form this most commonly is caused by
+some properties of the variables involved not being known:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) cabs (a+%i*b);
+                                2    2
+(%o1)                     sqrt(b  + a )
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare(a,real,b,real);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) cabs (a+%i*b);
+                                2    2
+(%o3)                     sqrt(b  + a )
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) assume(a&gt;0,b&gt;0);
+(%o4)                    [a &gt; 0, b &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) cabs (a+%i*b);
+                                2    2
+(%o5)                     sqrt(b  + a )
+</pre></div></div>
+
+<p>The <code class="code">cabs</code> function can use known properties like symmetry properties of
+complex functions to help it calculate the absolute value of an expression.  If
+such identities exist, they can be advertised to <code class="code">cabs</code> using function
+properties.  The symmetries that <code class="code">cabs</code> understands are: mirror symmetry,
+conjugate function and complex characteristic.
+</p>
+<p><code class="code">cabs</code> is a verb function and is not suitable for symbolic
+calculations.  For such calculations (including integration,
+differentiation and taking limits of expressions containing absolute
+values), use <code class="code"><a class="ref" href="#abs">abs</a></code>.
+</p>
+<p>The result of <code class="code">cabs</code> can include the absolute value function,
+<code class="code"><a class="ref" href="#abs">abs</a></code>, and the arc tangent, <code class="code"><a class="ref" href="#atan2">atan2</a></code>.
+</p>
+<p>When applied to a list or matrix, <code class="code">cabs</code> automatically distributes over
+the terms.  Similarly, it distributes over both sides of an equation.
+</p>
+<p>For further ways to compute with complex numbers, see the functions
+<code class="code"><a class="ref" href="#rectform">rectform</a></code>, <code class="code"><a class="ref" href="#realpart">realpart</a></code>, <code class="code"><a class="ref" href="#imagpart">imagpart</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#carg">carg</a></code>, <code class="code"><a class="ref" href="#conjugate">conjugate</a></code> and <code class="code"><a class="ref" href="#polarform">polarform</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Examples with <code class="code"><a class="ref" href="#sqrt">sqrt</a></code> and <code class="code"><a class="ref" href="#sin">sin</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) cabs(sqrt(1+%i*x));
+                             2     1/4
+(%o1)                      (x  + 1)
+(%i2) cabs(sin(x+%i*y));
+                    2        2         2        2
+(%o2)       sqrt(cos (x) sinh (y) + sin (x) cosh (y))
+</pre></div>
+
+<p>The error function, <code class="code"><a class="ref" href="maxima_14.html#erf">erf</a></code>, has mirror symmetry, which is used here in
+the calculation of the absolute value with a complex argument:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i3) cabs(erf(x+%i*y));
+                                          2
+           (erf(%i y + x) - erf(%i y - x))
+(%o3) sqrt(--------------------------------
+                          4
+                                                               2
+                                (erf(%i y + x) + erf(%i y - x))
+                              - --------------------------------)
+                                               4
+</pre></div>
+
+<p>Maxima knows complex identities for the Bessel functions, which allow
+it to compute the absolute value for complex arguments.  Here is an
+example for <code class="code"><a class="ref" href="maxima_14.html#bessel_005fj">bessel_j</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) cabs(bessel_j(1,%i));
+(%o4)                 abs(bessel_j(1, %i))
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="carg"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fcarg"></a><dl class="first-deffn">
+<dt class="deffn" id="index-carg"><span class="category-def">Function: </span><span><strong class="def-name">carg</strong> <var class="def-var-arguments">(<var class="var">z</var>)</var><a class="copiable-link" href='#index-carg'> &para;</a></span></dt>
+<dd>
+<p>Returns the complex argument of <var class="var">z</var>.  The complex argument is an angle
+<code class="code">theta</code> in <code class="code">(-%pi, %pi]</code> such that <code class="code">r exp (theta %i) = <var class="var">z</var></code>
+where <code class="code">r</code> is the magnitude of <var class="var">z</var>.
+</p>
+<p><code class="code">carg</code> is a computational function, not a simplifying function.
+</p>
+<p>See also <code class="code"><a class="ref" href="#abs">abs</a></code> (complex magnitude), <code class="code"><a class="ref" href="#polarform">polarform</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#rectform">rectform</a></code>, <code class="code"><a class="ref" href="#realpart">realpart</a></code>, and <code class="code"><a class="ref" href="#imagpart">imagpart</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) carg (1);
+(%o1)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) carg (1 + %i);
+                               %pi
+(%o2)                          ---
+                                4
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) carg (exp (%i));
+                               sin(1)
+(%o3)                     atan(------)
+                               cos(1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) carg (exp (%pi * %i));
+(%o4)                          %pi
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) carg (exp (3/2 * %pi * %i));
+                                %pi
+(%o5)                         - ---
+                                 2
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) carg (17 * exp (2 * %i));
+                            sin(2)
+(%o6)                  atan(------) + %pi
+                            cos(2)
+</pre></div></div>
+
+<p>If <code class="code">carg</code> returns a noun form this most commonly is caused by
+some properties of the variables involved not being known:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) carg (a+%i*b);
+(%o1)                      atan2(b, a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare(a,real,b,real);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) carg (a+%i*b);
+(%o3)                      atan2(b, a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) assume(a&gt;0,b&gt;0);
+(%o4)                    [a &gt; 0, b &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) carg (a+%i*b);
+                                  b
+(%o5)                        atan(-)
+                                  a
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="conjugate"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fconjugate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-conjugate"><span class="category-def">Function: </span><span><strong class="def-name">conjugate</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-conjugate'> &para;</a></span></dt>
+<dd>
+<p>Returns the complex conjugate of <var class="var">x</var>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) declare ([aa, bb], real, cc, complex, ii, imaginary);
+(%o1)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) conjugate (aa + bb*%i);
+(%o2)                      aa - %i bb
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) conjugate (cc);
+(%o3)                     conjugate(cc)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) conjugate (ii);
+(%o4)                         - ii
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) conjugate (xx + yy);
+(%o5)                        yy + xx
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="imagpart"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fimagpart"></a><dl class="first-deffn">
+<dt class="deffn" id="index-imagpart"><span class="category-def">Function: </span><span><strong class="def-name">imagpart</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-imagpart'> &para;</a></span></dt>
+<dd>
+<p>Returns the imaginary part of the expression <var class="var">expr</var>.
+</p>
+<p><code class="code">imagpart</code> is a computational function, not a simplifying function.
+</p>
+<p>See also <code class="code"><a class="ref" href="#abs">abs</a></code>, <code class="code"><a class="ref" href="#carg">carg</a></code>, <code class="code"><a class="ref" href="#polarform">polarform</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#rectform">rectform</a></code>, and <code class="code"><a class="ref" href="#realpart">realpart</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) imagpart (a+b*%i);
+(%o1)                           b
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) imagpart (1+sqrt(2)*%i);
+(%o2)                        sqrt(2)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) imagpart (1);
+(%o3)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) imagpart (sqrt(2)*%i);
+(%o4)                        sqrt(2)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="polarform"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fpolarform"></a><dl class="first-deffn">
+<dt class="deffn" id="index-polarform"><span class="category-def">Function: </span><span><strong class="def-name">polarform</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-polarform'> &para;</a></span></dt>
+<dd>
+<p>Returns an expression <code class="code">r %e^(%i theta)</code> equivalent to <var class="var">expr</var>,
+such that <code class="code">r</code> and <code class="code">theta</code> are purely real.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) polarform(a+b*%i);
+                       2    2    %i atan2(b, a)
+(%o1)            sqrt(b  + a ) %e
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) polarform(1+%i);
+                                  %i %pi
+                                  ------
+                                    4
+(%o2)                   sqrt(2) %e
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) polarform(1+2*%i);
+                                %i atan(2)
+(%o3)                 sqrt(5) %e
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="realpart"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002frealpart"></a><dl class="first-deffn">
+<dt class="deffn" id="index-realpart"><span class="category-def">Function: </span><span><strong class="def-name">realpart</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-realpart'> &para;</a></span></dt>
+<dd>
+<p>Returns the real part of <var class="var">expr</var>.  <code class="code">realpart</code> and <code class="code"><a class="ref" href="#imagpart">imagpart</a></code> will
+work on expressions involving trigonometric and hyperbolic functions,
+as well as square root, logarithm, and exponentiation.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) realpart (a+b*%i);
+(%o1)                           a
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) realpart (1+sqrt(2)*%i);
+(%o2)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) realpart (sqrt(2)*%i);
+(%o3)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) realpart (1);
+(%o4)                           1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="rectform"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002frectform"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rectform"><span class="category-def">Function: </span><span><strong class="def-name">rectform</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-rectform'> &para;</a></span></dt>
+<dd>
+<p>Returns an expression <code class="code">a + b %i</code> equivalent to <var class="var">expr</var>,
+such that <var class="var">a</var> and <var class="var">b</var> are purely real.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) rectform(sqrt(2)*%e^(%i*%pi/4));
+(%o1)                        %i + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) rectform(sqrt(b^2+a^2)*%e^(%i*atan2(b, a)));
+(%o2)                       %i b + a
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) rectform(sqrt(5)*%e^(%i*atan(2)));
+(%o3)                       2 %i + 1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fCombinatorial-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Combinatorial-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Root-Exponential-and-Logarithmic-Functions" accesskey="n" rel="next">Root, Exponential and Logarithmic Functions</a>, Previous: <a href="#Functions-for-Complex-Numbers" accesskey="p" rel="prev">Functions for Complex Numbers</a>, Up: <a href="#Elementary-Functions" accesskey="u" rel="up">Elementary Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Combinatorial-Functions-1">10.3 Combinatorial Functions</h3>
+
+<a class="anchor" id="g_t_0021_0021"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002f_0021_0021"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0021_0021"><span class="category-def">Operator: </span><span><strong class="def-name">!!</strong><a class="copiable-link" href='#index-_0021_0021'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Double-factorial"></a>
+
+<p>The double factorial operator.
+</p>
+<p>For an integer, float, or rational number <code class="code">n</code>, <code class="code">n!!</code> evaluates to the
+product <code class="code">n (n-2) (n-4) (n-6) ... (n - 2 (k-1))</code> where <code class="code">k</code> is equal to
+<code class="code">entier (n/2)</code>, that is, the largest integer less than or equal to
+<code class="code">n/2</code>.  Note that this definition does not coincide with other published
+definitions for arguments which are not integers.
+</p>
+<p>For an even (or odd) integer <code class="code">n</code>, <code class="code">n!!</code> evaluates to the product of
+all the consecutive even (or odd) integers from 2 (or 1) through <code class="code">n</code>
+inclusive.
+</p>
+<p>For an argument <code class="code">n</code> which is not an integer, float, or rational, <code class="code">n!!</code>
+yields a noun form <code class="code">genfact (n, n/2, 2)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="binomial"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fbinomial"></a><dl class="first-deffn">
+<dt class="deffn" id="index-binomial"><span class="category-def">Function: </span><span><strong class="def-name">binomial</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>)</var><a class="copiable-link" href='#index-binomial'> &para;</a></span></dt>
+<dd>
+<p>The binomial coefficient <code class="code"><var class="var">x</var>!/(<var class="var">y</var>! (<var class="var">x</var> - <var class="var">y</var>)!)</code>.
+If <var class="var">x</var> and <var class="var">y</var> are integers, then the numerical value of the binomial
+coefficient is computed.  If <var class="var">y</var>, or <var class="var">x - y</var>, is an integer, the
+binomial coefficient is expressed as a polynomial.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) binomial (11, 7);
+(%o1)                          330
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) 11! / 7! / (11 - 7)!;
+(%o2)                          330
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) binomial (x, 7);
+        (x - 6) (x - 5) (x - 4) (x - 3) (x - 2) (x - 1) x
+(%o3)   -------------------------------------------------
+                              5040
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) binomial (x + 7, x);
+      (x + 1) (x + 2) (x + 3) (x + 4) (x + 5) (x + 6) (x + 7)
+(%o4) -------------------------------------------------------
+                               5040
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) binomial (11, y);
+(%o5)                    binomial(11, y)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="factcomb"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ffactcomb"></a><dl class="first-deffn">
+<dt class="deffn" id="index-factcomb"><span class="category-def">Function: </span><span><strong class="def-name">factcomb</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-factcomb'> &para;</a></span></dt>
+<dd>
+<p>Tries to combine the coefficients of factorials in <var class="var">expr</var>
+with the factorials themselves by converting, for example, <code class="code">(n + 1)*n!</code>
+into <code class="code">(n + 1)!</code>.
+</p>
+<p><code class="code"><a class="ref" href="#sumsplitfact">sumsplitfact</a></code> if set to <code class="code">false</code> will cause <code class="code"><a class="ref" href="#minfactorial">minfactorial</a></code> to be
+applied after a <code class="code">factcomb</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) sumsplitfact;
+(%o1)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) (n + 1)*(n + 1)*n!;
+                                  2
+(%o2)                      (n + 1)  n!
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) factcomb (%);
+(%o3)                  (n + 2)! - (n + 1)!
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) sumsplitfact: not sumsplitfact;
+(%o4)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) (n + 1)*(n + 1)*n!;
+                                  2
+(%o5)                      (n + 1)  n!
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) factcomb (%);
+(%o6)                 n (n + 1)! + (n + 1)!
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_0021"></a><a class="anchor" id="factorial"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ffactorial"></a><dl class="first-deffn">
+<dt class="deffn" id="index-factorial"><span class="category-def">Function: </span><span><strong class="def-name">factorial</strong><a class="copiable-link" href='#index-factorial'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002f_0021"></a></dd><dt class="deffnx def-cmd-deffn" id="index-_0021"><span class="category-def">Operator: </span><span><strong class="def-name">!</strong><a class="copiable-link" href='#index-_0021'> &para;</a></span></dt>
+<dd>
+<p>Represents the factorial function.  Maxima treats <code class="code">factorial (<var class="var">x</var>)</code>
+the same as <code class="code"><var class="var">x</var>!</code>.
+</p>
+<p>For any complex number <code class="code">x</code>, except for negative integers, <code class="code">x!</code> is 
+defined as <code class="code">gamma(x+1)</code>.
+</p>
+<p>For an integer <code class="code">x</code>, <code class="code">x!</code> simplifies to the product of the integers 
+from 1 to <code class="code">x</code> inclusive.  <code class="code">0!</code> simplifies to 1.  For a real or complex 
+number in float or bigfloat precision <code class="code">x</code>, <code class="code">x!</code> simplifies to the 
+value of <code class="code">gamma (x+1)</code>.  For <code class="code">x</code> equal to <code class="code">n/2</code> where <code class="code">n</code> is 
+an odd integer, <code class="code">x!</code> simplifies to a rational factor times 
+<code class="code">sqrt (%pi)</code> (since <code class="code">gamma (1/2)</code> is equal to <code class="code">sqrt (%pi)</code>).
+</p>
+<p>The option variables <code class="code"><a class="ref" href="#factlim">factlim</a></code> and <code class="code"><a class="ref" href="maxima_14.html#gammalim">gammalim</a></code> control the numerical
+evaluation of factorials for integer and rational arguments.  The functions 
+<code class="code"><a class="ref" href="#minfactorial">minfactorial</a></code> and <code class="code"><a class="ref" href="#factcomb">factcomb</a></code> simplifies expressions containing
+factorials.
+</p>
+<p>The functions <code class="code"><a class="ref" href="maxima_14.html#gamma">gamma</a></code>, <code class="code"><a class="ref" href="maxima_14.html#bffac">bffac</a></code>, and <code class="code"><a class="ref" href="maxima_14.html#cbffac">cbffac</a></code> are
+varieties of the gamma function.  <code class="code">bffac</code> and <code class="code">cbffac</code> are called
+internally by <code class="code">gamma</code> to evaluate the gamma function for real and complex
+numbers in bigfloat precision.
+</p>
+<p><code class="code"><a class="ref" href="maxima_14.html#makegamma">makegamma</a></code> substitutes <code class="code">gamma</code> for factorials and related functions.
+</p>
+<p>Maxima knows the derivative of the factorial function and the limits for 
+specific values like negative integers.
+</p>
+<p>The option variable <code class="code"><a class="ref" href="#factorial_005fexpand">factorial_expand</a></code> controls the simplification of
+expressions like <code class="code">(n+x)!</code>, where <code class="code">n</code> is an integer.
+</p>
+<p>See also <code class="code"><a class="ref" href="#binomial">binomial</a></code>.
+</p>
+<p>The factorial of an integer is simplified to an exact number unless the operand 
+is greater than <code class="code">factlim</code>.  The factorial for real and complex numbers is 
+evaluated in float or bigfloat precision.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) factlim : 10;
+(%o1)                          10
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) [0!, (7/2)!, 8!, 20!];
+                     105 sqrt(%pi)
+(%o2)            [1, -------------, 40320, 20!]
+                          16
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) [4,77!, (1.0+%i)!];
+(%o3) [4, 77!, 0.3430658398165453 %i + 0.6529654964201667]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) [2.86b0!, (1.0b0+%i)!];
+(%o4) [5.046635586910012b0, 3.430658398165454b-1 %i
+                                          + 6.529654964201667b-1]
+</pre></div></div>
+
+<p>The factorial of a known constant, or general expression is not simplified.
+Even so it may be possible to simplify the factorial after evaluating the
+operand.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) [(%i + 1)!, %pi!, %e!, (cos(1) + sin(1))!];
+(%o1)      [(%i + 1)!, %pi!, %e!, (sin(1) + cos(1))!]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) ev (%, numer, %enumer);
+(%o2) [0.3430658398165453 %i + 0.6529654964201667, 
+         7.188082728976031, 4.260820476357003, 1.227580202486819]
+</pre></div></div>
+
+
+
+<p>Factorials are simplified, not evaluated.
+Thus <code class="code">x!</code> may be replaced even in a quoted expression.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) '([0!, (7/2)!, 4.77!, 8!, 20!]);
+          105 sqrt(%pi)
+(%o1) [1, -------------, 81.44668037931197, 40320, 
+               16
+                                             2432902008176640000]
+</pre></div></div>
+
+<p>Maxima knows the derivative of the factorial function.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) diff(x!,x);
+(%o1)                    x! psi (x + 1)
+                               0
+</pre></div></div>
+
+<p>The option variable <code class="code">factorial_expand</code> controls expansion and 
+simplification of expressions with the factorial function.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) (n+1)!/n!,factorial_expand:true;
+(%o1)                         n + 1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="factlim"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002ffactlim"></a><dl class="first-defvr">
+<dt class="defvr" id="index-factlim"><span class="category-def">Option variable: </span><span><strong class="def-name">factlim</strong><a class="copiable-link" href='#index-factlim'> &para;</a></span></dt>
+<dd><p>Default value: 100000
+</p>
+<p><code class="code">factlim</code> specifies the highest factorial which is
+automatically expanded.  If it is -1 then all integers are expanded.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="factorial_005fexpand"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002ffactorial_005fexpand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-factorial_005fexpand"><span class="category-def">Option variable: </span><span><strong class="def-name">factorial_expand</strong><a class="copiable-link" href='#index-factorial_005fexpand'> &para;</a></span></dt>
+<dd><p>Default value: false
+</p>
+<p>The option variable <code class="code">factorial_expand</code> controls the simplification of 
+expressions like <code class="code">(x+n)!</code>, where <code class="code">n</code> is an integer.
+See <code class="code"><a class="ref" href="#factorial">factorial</a></code> for an example.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="genfact"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fgenfact"></a><dl class="first-deffn">
+<dt class="deffn" id="index-genfact"><span class="category-def">Function: </span><span><strong class="def-name">genfact</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-genfact'> &para;</a></span></dt>
+<dd>
+<p>Returns the generalized factorial, defined as
+<code class="code">x (x-z) (x - 2 z) ... (x - (y - 1) z)</code>.  Thus, when <var class="var">x</var> is an integer,
+<code class="code">genfact (x, x, 1) = x!</code> and <code class="code">genfact (x, x/2, 2) = x!!</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="minfactorial"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fminfactorial"></a><dl class="first-deffn">
+<dt class="deffn" id="index-minfactorial"><span class="category-def">Function: </span><span><strong class="def-name">minfactorial</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-minfactorial'> &para;</a></span></dt>
+<dd>
+<p>Examines <var class="var">expr</var> for occurrences of two factorials
+which differ by an integer.
+<code class="code">minfactorial</code> then turns one into a polynomial times the other.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) n!/(n+2)!;
+                               n!
+(%o1)                       --------
+                            (n + 2)!
+(%i2) minfactorial (%);
+                                1
+(%o2)                    ---------------
+                         (n + 1) (n + 2)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sumsplitfact"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002fsumsplitfact"></a><dl class="first-defvr">
+<dt class="defvr" id="index-sumsplitfact"><span class="category-def">Option variable: </span><span><strong class="def-name">sumsplitfact</strong><a class="copiable-link" href='#index-sumsplitfact'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">sumsplitfact</code> is <code class="code">false</code>,
+<code class="code"><a class="ref" href="#minfactorial">minfactorial</a></code> is applied after a <code class="code"><a class="ref" href="#factcomb">factcomb</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) sumsplitfact;
+(%o1)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) n!/(n+2)!;
+                               n!
+(%o2)                       --------
+                            (n + 2)!
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) factcomb(%);
+                               n!
+(%o3)                       --------
+                            (n + 2)!
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) sumsplitfact: not sumsplitfact ;
+(%o4)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) n!/(n+2)!;
+                               n!
+(%o5)                       --------
+                            (n + 2)!
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) factcomb(%);
+                                1
+(%o6)                    ---------------
+                         (n + 1) (n + 2)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fRoot-Exponential-and-Logarithmic-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Root-Exponential-and-Logarithmic-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Trigonometric-Functions" accesskey="n" rel="next">Trigonometric Functions</a>, Previous: <a href="#Combinatorial-Functions" accesskey="p" rel="prev">Combinatorial Functions</a>, Up: <a href="#Elementary-Functions" accesskey="u" rel="up">Elementary Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Root_002c-Exponential-and-Logarithmic-Functions">10.4 Root, Exponential and Logarithmic Functions</h3>
+
+<a class="anchor" id="g_t_0025e_005fto_005fnumlog"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002f_0025e_005fto_005fnumlog"></a><dl class="first-defvr">
+<dt class="defvr" id="index-_0025e_005fto_005fnumlog"><span class="category-def">Option variable: </span><span><strong class="def-name">%e_to_numlog</strong><a class="copiable-link" href='#index-_0025e_005fto_005fnumlog'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">true</code>, <code class="code">r</code> some rational number, and <code class="code">x</code> some expression,
+<code class="code">%e^(r*log(x))</code> will be simplified into <code class="code">x^r</code> .  It should be noted
+that the <code class="code">radcan</code> command also does this transformation, and more
+complicated transformations of this ilk as well.  The <code class="code">logcontract</code>
+command &quot;contracts&quot; expressions containing <code class="code">log</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_0025emode"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002f_0025emode"></a><dl class="first-defvr">
+<dt class="defvr" id="index-_0025emode"><span class="category-def">Option variable: </span><span><strong class="def-name">%emode</strong><a class="copiable-link" href='#index-_0025emode'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">%emode</code> is <code class="code">true</code>, <code class="code">%e^(%pi %i x)</code> is simplified as
+follows.
+</p>
+<p><code class="code">%e^(%pi %i x)</code> simplifies to <code class="code">cos (%pi x) + %i sin (%pi x)</code> if
+<code class="code">x</code> is a floating point number, an integer, or a multiple of 1/2, 1/3, 1/4,
+or 1/6, and then further simplified.
+</p>
+<p>For other numerical <code class="code">x</code>, <code class="code">%e^(%pi %i x)</code> simplifies to
+<code class="code">%e^(%pi %i y)</code> where <code class="code">y</code> is <code class="code">x - 2 k</code> for some integer <code class="code">k</code>
+such that <code class="code">abs(y) &lt; 1</code>.
+</p>
+<p>When <code class="code">%emode</code> is <code class="code">false</code>, no special simplification of
+<code class="code">%e^(%pi %i x)</code> is carried out.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) %emode;
+(%o1)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) %e^(%pi*%i*1);
+(%o2)                          - 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) %e^(%pi*%i*216/144);
+(%o3)                         - %i
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) %e^(%pi*%i*192/144);
+                          sqrt(3) %i    1
+(%o4)                  (- ----------) - -
+                              2         2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) %e^(%pi*%i*180/144);
+                           %i          1
+(%o5)                 (- -------) - -------
+                         sqrt(2)    sqrt(2)
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) %e^(%pi*%i*120/144);
+                          %i   sqrt(3)
+(%o6)                     -- - -------
+                          2       2
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) %e^(%pi*%i*121/144);
+                            121 %i %pi
+                            ----------
+                               144
+(%o7)                     %e
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_0025enumer"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002f_0025enumer"></a><dl class="first-defvr">
+<dt class="defvr" id="index-_0025enumer"><span class="category-def">Option variable: </span><span><strong class="def-name">%enumer</strong><a class="copiable-link" href='#index-_0025enumer'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">%enumer</code> is <code class="code">true</code>, <code class="code">%e</code> is replaced by its numeric value
+2.718&hellip;  whenever <code class="code">numer</code> is <code class="code">true</code>.
+</p>
+<p>When <code class="code">%enumer</code> is <code class="code">false</code>, this substitution is carried out
+only if the exponent in <code class="code">%e^x</code> evaluates to a number.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_7.html#ev">ev</a></code> and <code class="code"><a class="ref" href="maxima_4.html#numer">numer</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) %enumer;
+(%o1)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) numer;
+(%o2)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) 2*%e;
+(%o3)                         2 %e
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) %enumer: not %enumer;
+(%o4)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) 2*%e;
+(%o5)                         2 %e
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) numer: not numer;
+(%o6)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) 2*%e;
+(%o7)                   5.43656365691809
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) 2*%e^1;
+(%o8)                   5.43656365691809
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) 2*%e^x;
+                                         x
+(%o9)                 2 2.718281828459045
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="exp"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fexp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-exp"><span class="category-def">Function: </span><span><strong class="def-name">exp</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-exp'> &para;</a></span></dt>
+<dd>
+<p>Represents the exponential function.  Instances of <code class="code">exp (<var class="var">x</var>)</code> in input
+are simplified to <code class="code">%e^<var class="var">x</var></code>; <code class="code">exp</code> does not appear in simplified
+expressions.
+</p>
+<p><code class="code">demoivre</code> if <code class="code">true</code> causes <code class="code">%e^(a + b %i)</code> to simplify to
+<code class="code">%e^(a (cos(b) + %i sin(b)))</code> if <code class="code">b</code> is free of <code class="code">%i</code>.
+See <code class="code"><a class="ref" href="maxima_8.html#demoivre">demoivre</a></code>.
+</p>
+<p><code class="code">%emode</code>, when <code class="code">true</code>, causes <code class="code">%e^(%pi %i x)</code> to be simplified.
+See <code class="code"><a class="ref" href="#g_t_0025emode">%emode</a></code>.
+</p>
+<p><code class="code">%enumer</code>, when <code class="code">true</code> causes <code class="code">%e</code> to be replaced by
+2.718&hellip; whenever <code class="code">numer</code> is <code class="code">true</code>.  See <code class="code"><a class="ref" href="#g_t_0025enumer">%enumer</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) demoivre;
+(%o1)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) %e^(a + b*%i);
+                             %i b + a
+(%o2)                      %e
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) demoivre: not demoivre;
+(%o3)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) %e^(a + b*%i);
+                      a
+(%o4)               %e  (%i sin(b) + cos(b))
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="li"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fli"></a><dl class="first-deffn">
+<dt class="deffn" id="index-li"><span class="category-def">Function: </span><span><strong class="def-name">li</strong> <var class="def-var-arguments">[<var class="var">s</var>] (<var class="var">z</var>)</var><a class="copiable-link" href='#index-li'> &para;</a></span></dt>
+<dd>
+<p>Represents the polylogarithm function of order <var class="var">s</var> and argument <var class="var">z</var>,
+defined by the infinite series
+</p>
+<div class="example">
+<pre class="example-preformatted">                                 inf
+                                 ====   k
+                                 \     z
+                        Li (z) =  &gt;    --
+                          s      /      s
+                                 ====  k
+                                 k = 1
+</pre></div>
+
+<p><code class="code">li [1]</code> is <code class="code">- log (1 - z)</code>.  <code class="code">li [2]</code> and <code class="code">li [3]</code> are the
+dilogarithm and trilogarithm functions, respectively.
+</p>
+<p>When the order is 1, the polylogarithm simplifies to <code class="code">- log (1 - z)</code>, which
+in turn simplifies to a numerical value if <var class="var">z</var> is a real or complex floating
+point number or the <code class="code">numer</code> evaluation flag is present.
+</p>
+<p>When the order is 2 or 3,
+the polylogarithm simplifies to a numerical value
+if <var class="var">z</var> is a real floating point number
+or the <code class="code">numer</code> evaluation flag is present.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) assume (x &gt; 0);
+(%o1)                        [x &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) integrate ((log (1 - t)) / t, t, 0, x);
+(%o2)                       - li (x)
+                                2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) li [2] (7);
+(%o3)                        li (7)
+                               2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) li [2] (7), numer;
+(%o4)       1.248273182099423 - 6.113257028817991 %i
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) li [3] (7);
+(%o5)                        li (7)
+                               3
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) li [3] (7), numer;
+(%o6)       5.319257992145674 - 5.94792444808033 %i
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) L : makelist (i / 4.0, i, 0, 8);
+(%o7)   [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) map (lambda ([x], li [2] (x)), L);
+(%o8) [0.0, 0.2676526390827326, 0.5822405264650125, 
+0.978469392930306, 1.644934066848226, 
+2.190177011441645 - 0.7010261415046585 %i, 
+2.37439527027248 - 1.2738062049196 %i, 
+2.448686765338205 - 1.758084848210787 %i, 
+2.467401100272339 - 2.177586090303601 %i]
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) map (lambda ([x], li [3] (x)), L);
+(%o9) [0.0, 0.2584613953442624, 0.537213192678042, 
+0.8444258046482203, 1.2020569, 1.642866878950322
+ - 0.07821473130035025 %i, 2.060877505514697
+ - 0.2582419849982037 %i, 2.433418896388322
+ - 0.4919260182322965 %i, 2.762071904015935
+ - 0.7546938285978846 %i]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="log"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002flog"></a><dl class="first-deffn">
+<dt class="deffn" id="index-log"><span class="category-def">Function: </span><span><strong class="def-name">log</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-log'> &para;</a></span></dt>
+<dd>
+<p>Represents the natural (base <em class="math tex2jax_process">\(e\)</em>) logarithm of <var class="var">x</var>.
+</p>
+<p>Maxima does not have a built-in function for the base 10 logarithm or other 
+bases. <code class="code">log10(x) := log(x) / log(10)</code> is a useful definition.
+</p>
+<p>Simplification and evaluation of logarithms is governed by several global flags:
+</p>
+<dl class="table">
+<dt><code class="code"><code class="code">logexpand</code></code></dt>
+<dd><p>causes <code class="code">log(a^b)</code> to become <code class="code">b*log(a)</code>. If it is 
+set to <code class="code">all</code>, <code class="code">log(a*b)</code> will also simplify to <code class="code">log(a)+log(b)</code>.
+If it is set to <code class="code">super</code>, then <code class="code">log(a/b)</code> will also simplify to 
+<code class="code">log(a)-log(b)</code> for rational numbers <code class="code">a/b</code>, <code class="code">a#1</code>. 
+(<code class="code">log(1/b)</code>, for <code class="code">b</code> integer, always simplifies.) If it is set to 
+<code class="code">false</code>, all of these simplifications will be turned off.
+</p>
+</dd>
+<dt><code class="code"><code class="code">logsimp</code></code></dt>
+<dd><p>if <code class="code">false</code> then no simplification of <code class="code">%e</code> to a power containing 
+<code class="code">log</code>&rsquo;s is done.
+</p>
+</dd>
+<dt><code class="code"><code class="code">lognegint</code></code></dt>
+<dd><p>if <code class="code">true</code> implements the rule <code class="code">log(-n) -&gt; log(n)+%i*%pi</code> for
+<code class="code">n</code> a positive integer.
+</p>
+</dd>
+<dt><code class="code"><code class="code">%e_to_numlog</code></code></dt>
+<dd><p>when <code class="code">true</code>, <code class="code">r</code> some rational number, and <code class="code">x</code> some expression,
+the expression <code class="code">%e^(r*log(x))</code> will be simplified into <code class="code">x^r</code>.  It
+should be noted that the <code class="code">radcan</code> command also does this transformation,
+and more complicated transformations of this as well. The <code class="code">logcontract</code> 
+command &quot;contracts&quot; expressions containing <code class="code">log</code>.
+</p></dd>
+</dl>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="logabs"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002flogabs"></a><dl class="first-defvr">
+<dt class="defvr" id="index-logabs"><span class="category-def">Option variable: </span><span><strong class="def-name">logabs</strong><a class="copiable-link" href='#index-logabs'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When doing indefinite integration where logs are generated, e.g.
+<code class="code">integrate(1/x,x)</code>, the answer is given in terms of <code class="code">log(abs(...))</code>
+if <code class="code">logabs</code> is <code class="code">true</code>, but in terms of <code class="code">log(...)</code> if
+<code class="code">logabs</code> is <code class="code">false</code>.  For definite integration, the <code class="code">logabs:true</code>
+setting is used, because here &quot;evaluation&quot; of the indefinite integral at the
+endpoints is often needed.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002flogarc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-logarc"><span class="category-def">Function: </span><span><strong class="def-name">logarc</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-logarc'> &para;</a></span></dt>
+<dd>
+<p>The function <code class="code">logarc(<var class="var">expr</var>)</code> carries out the replacement of
+inverse circular and hyperbolic functions with equivalent logarithmic
+functions for an expression <var class="var">expr</var> without setting the global
+variable <code class="code">logarc</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="logarc"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002flogarc"></a><dl class="first-defvr">
+<dt class="defvr" id="index-logarc-1"><span class="category-def">Option variable: </span><span><strong class="def-name">logarc</strong><a class="copiable-link" href='#index-logarc-1'> &para;</a></span></dt>
+<dd>
+<p>When the global variable <code class="code">logarc</code> is <code class="code">true</code>,
+inverse circular and hyperbolic functions are replaced by
+equivalent logarithmic functions.
+The default value of <code class="code">logarc</code> is <code class="code">false</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="logconcoeffp"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002flogconcoeffp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-logconcoeffp"><span class="category-def">Option variable: </span><span><strong class="def-name">logconcoeffp</strong><a class="copiable-link" href='#index-logconcoeffp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>Controls which coefficients are
+contracted when using <code class="code">logcontract</code>.  It may be set to the name of a
+predicate function of one argument.  E.g. if you like to generate
+SQRTs, you can do <code class="code">logconcoeffp:'logconfun$
+logconfun(m):=featurep(m,integer) or ratnump(m)$</code> .  Then
+<code class="code">logcontract(1/2*log(x));</code> will give <code class="code">log(sqrt(x))</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="logcontract"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002flogcontract"></a><dl class="first-deffn">
+<dt class="deffn" id="index-logcontract"><span class="category-def">Function: </span><span><strong class="def-name">logcontract</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-logcontract'> &para;</a></span></dt>
+<dd>
+<p>Recursively scans the expression <var class="var">expr</var>, transforming
+subexpressions of the form <code class="code">a1*log(b1) + a2*log(b2) + c</code> into
+<code class="code">log(ratsimp(b1^a1 * b2^a2)) + c</code>
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) 2*(a*log(x) + 2*a*log(y))$
+</pre><div class="group"><pre class="example-preformatted">(%i2) logcontract(%);
+                                 2  4
+(%o2)                     a log(x  y )
+</pre></div></div>
+
+<p>The declaration <code class="code">declare(n,integer)</code> causes
+<code class="code">logcontract(2*a*n*log(x))</code> to simplify to <code class="code">a*log(x^(2*n))</code>.  The
+coefficients that &quot;contract&quot; in this manner are those such as the 2 and the
+<code class="code">n</code> here which satisfy <code class="code">featurep(coeff,integer)</code>.  The user can
+control which coefficients are contracted by setting the option
+<code class="code">logconcoeffp</code> to the name of a predicate function of one argument.
+E.g. if you like to generate SQRTs, you can do <code class="code">logconcoeffp:'logconfun$
+logconfun(m):=featurep(m,integer) or ratnump(m)$</code> .  Then
+<code class="code">logcontract(1/2*log(x));</code> will give <code class="code">log(sqrt(x))</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="logexpand"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002flogexpand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-logexpand"><span class="category-def">Option variable: </span><span><strong class="def-name">logexpand</strong><a class="copiable-link" href='#index-logexpand'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>If <code class="code">true</code>, that is the default value, causes <code class="code">log(a^b)</code> to become
+<code class="code">b*log(a)</code>.  If it is set to <code class="code">all</code>, <code class="code">log(a*b)</code> will also simplify
+to <code class="code">log(a)+log(b)</code>.  If it is set to <code class="code">super</code>, then <code class="code">log(a/b)</code>
+will also simplify to <code class="code">log(a)-log(b)</code> for rational numbers <code class="code">a/b</code>,
+<code class="code">a#1</code>.  (<code class="code">log(1/b)</code>, for integer <code class="code">b</code>, always simplifies.) If it
+is set to <code class="code">false</code>, all of these simplifications will be turned off.
+</p>
+<p>When <code class="code">logexpand</code> is set to <code class="code">all</code> or <code class="code">super</code>,
+the logarithm of a product expression simplifies to a summation of logarithms.
+</p>
+<p>Examples:
+</p>
+<p>When <code class="code">logexpand</code> is <code class="code">true</code>,
+<code class="code">log(a^b)</code> simplifies to <code class="code">b*log(a)</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) log(n^2), logexpand=true;
+(%o1)                       2 log(n)
+</pre></div>
+
+<p>When <code class="code">logexpand</code> is <code class="code">all</code>,
+<code class="code">log(a*b)</code> simplifies to <code class="code">log(a)+log(b)</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) log(10*x), logexpand=all;
+(%o1)                   log(x) + log(10)
+</pre></div>
+
+<p>When <code class="code">logexpand</code> is <code class="code">super</code>,
+<code class="code">log(a/b)</code> simplifies to <code class="code">log(a)-log(b)</code>
+for rational numbers <code class="code">a/b</code> with <code class="code">a#1</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) log(a/(n + 1)), logexpand=super;
+(%o1)                  log(a) - log(n + 1)
+</pre></div>
+
+<p>When <code class="code">logexpand</code> is set to <code class="code">all</code> or <code class="code">super</code>,
+the logarithm of a product expression simplifies to a summation of logarithms.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) my_product : product (X(i), i, 1, n);
+                             n
+                           /===\
+                            ! !
+(%o1)                       ! !  X(i)
+                            ! !
+                           i = 1
+(%i2) log(my_product), logexpand=all;
+                          n
+                         ====
+                         \
+(%o2)                     &gt;    log(X(i))
+                         /
+                         ====
+                         i = 1
+(%i3) log(my_product), logexpand=super;
+                          n
+                         ====
+                         \
+(%o3)                     &gt;    log(X(i))
+                         /
+                         ====
+                         i = 1
+</pre></div>
+
+<p>When <code class="code">logexpand</code> is <code class="code">false</code>,
+these simplifications are disabled.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) logexpand : false $
+(%i2) log(n^2);
+                                  2
+(%o2)                        log(n )
+(%i3) log(10*x);
+(%o3)                       log(10 x)
+(%i4) log(a/(n + 1));
+                                 a
+(%o4)                      log(-----)
+                               n + 1
+(%i5) log ('product (X(i), i, 1, n));
+                               n
+                             /===\
+                              ! !
+(%o5)                    log( ! !  X(i))
+                              ! !
+                             i = 1
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="lognegint"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002flognegint"></a><dl class="first-defvr">
+<dt class="defvr" id="index-lognegint"><span class="category-def">Option variable: </span><span><strong class="def-name">lognegint</strong><a class="copiable-link" href='#index-lognegint'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>If <code class="code">true</code> implements the rule
+<code class="code">log(-n) -&gt; log(n)+%i*%pi</code> for <code class="code">n</code> a positive integer.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="logsimp"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002flogsimp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-logsimp"><span class="category-def">Option variable: </span><span><strong class="def-name">logsimp</strong><a class="copiable-link" href='#index-logsimp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>If <code class="code">false</code> then no simplification of <code class="code">%e</code> to a
+power containing <code class="code">log</code>&rsquo;s is done.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="plog"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fplog"></a><dl class="first-deffn">
+<dt class="deffn" id="index-plog"><span class="category-def">Function: </span><span><strong class="def-name">plog</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-plog'> &para;</a></span></dt>
+<dd>
+<p>Represents the principal branch of the complex-valued natural
+logarithm with <code class="code">-%pi &lt; carg(<var class="var">x</var>) &lt;= +%pi</code> .
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Exponential-and-logarithm-functions">Exponential and logarithm functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sqrt"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fsqrt"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sqrt"><span class="category-def">Function: </span><span><strong class="def-name">sqrt</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-sqrt'> &para;</a></span></dt>
+<dd>
+<p>The square root of <var class="var">x</var>.  It is represented internally by
+<code class="code"><var class="var">x</var>^(1/2)</code>.  See also <code class="code"><a class="ref" href="maxima_19.html#rootscontract">rootscontract</a></code> and <code class="code"><a class="ref" href="maxima_8.html#radexpand">radexpand</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fTrigonometric-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Trigonometric-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Random-Numbers" accesskey="n" rel="next">Random Numbers</a>, Previous: <a href="#Root-Exponential-and-Logarithmic-Functions" accesskey="p" rel="prev">Root, Exponential and Logarithmic Functions</a>, Up: <a href="#Elementary-Functions" accesskey="u" rel="up">Elementary Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Trigonometric-Functions-1">10.5 Trigonometric Functions</h3>
+
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fIntroduction-to-Trigonometric"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Trigonometric" accesskey="1">Introduction to Trigonometric</a></li>
+<li><a href="#Functions-and-Variables-for-Trigonometric" accesskey="2">Functions and Variables for Trigonometric</a></li>
+</ul>
+<hr>
+<div class="subsection-level-extent" id="Introduction-to-Trigonometric">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Trigonometric" accesskey="n" rel="next">Functions and Variables for Trigonometric</a>, Previous: <a href="#Trigonometric-Functions" accesskey="p" rel="prev">Trigonometric Functions</a>, Up: <a href="#Trigonometric-Functions" accesskey="u" rel="up">Trigonometric Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Introduction-to-Trigonometric-1">10.5.1 Introduction to Trigonometric</h4>
+
+<p>Maxima has many trigonometric functions defined.  Not all trigonometric
+identities are programmed, but it is possible for the user to add many
+of them using the pattern matching capabilities of the system.  The
+trigonometric functions defined in Maxima are: <code class="code"><a class="ref" href="#acos">acos</a></code>,
+<code class="code"><a class="ref" href="#acosh">acosh</a></code>, <code class="code"><a class="ref" href="#acot">acot</a></code>, <code class="code"><a class="ref" href="#acoth">acoth</a></code>, <code class="code"><a class="ref" href="#acsc">acsc</a></code>,
+<code class="code"><a class="ref" href="#acsch">acsch</a></code>, <code class="code"><a class="ref" href="#asec">asec</a></code>, <code class="code"><a class="ref" href="#asech">asech</a></code>, <code class="code"><a class="ref" href="#asin">asin</a></code>,
+<code class="code"><a class="ref" href="#asinh">asinh</a></code>, <code class="code"><a class="ref" href="#atan">atan</a></code>, <code class="code"><a class="ref" href="#atanh">atanh</a></code>, <code class="code"><a class="ref" href="#cos">cos</a></code>,
+<code class="code"><a class="ref" href="#cosh">cosh</a></code>, <code class="code"><a class="ref" href="#cot">cot</a></code>, <code class="code"><a class="ref" href="#coth">coth</a></code>, <code class="code"><a class="ref" href="#csc">csc</a></code>, <code class="code"><a class="ref" href="#csch">csch</a></code>,
+<code class="code"><a class="ref" href="#sec">sec</a></code>, <code class="code"><a class="ref" href="#sech">sech</a></code>, <code class="code"><a class="ref" href="#sin">sin</a></code>, <code class="code"><a class="ref" href="#sinh">sinh</a></code>, <code class="code"><a class="ref" href="#tan">tan</a></code>,
+and <code class="code"><a class="ref" href="#tanh">tanh</a></code>.  There are a number of commands especially for
+handling trigonometric functions, see <code class="code"><a class="ref" href="#trigexpand">trigexpand</a></code>,
+<code class="code"><a class="ref" href="#trigreduce">trigreduce</a></code>, and the switch <code class="code"><a class="ref" href="#trigsign">trigsign</a></code>.  Two share
+packages extend the simplification rules built into Maxima,
+<code class="code"><a class="ref" href="#ntrig">ntrig</a></code> and <code class="code"><a class="ref" href="#atrig1">atrig1</a></code>.  Do <code class="code">describe(<var class="var">command</var>)</code>
+for details.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fFunctions-and-Variables-for-Trigonometric"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Functions-and-Variables-for-Trigonometric">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-Trigonometric" accesskey="p" rel="prev">Introduction to Trigonometric</a>, Up: <a href="#Trigonometric-Functions" accesskey="u" rel="up">Trigonometric Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Functions-and-Variables-for-Trigonometric-1">10.5.2 Functions and Variables for Trigonometric</h4>
+
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fTrigonometric-and-Hyperbolic-Functions"></a><ul class="mini-toc">
+<li><a href="#Trigonometric-and-Hyperbolic-Functions" accesskey="1">Trigonometric and Hyperbolic Functions</a></li>
+<li><a href="#Options-Controlling-Simplification" accesskey="2">Options Controlling Simplification</a></li>
+<li><a href="#Explicit-Simplifications-Using-Identities" accesskey="3">Explicit Simplifications Using Identities</a></li>
+<li><a href="#Additional-Functions" accesskey="4">Additional Functions</a></li>
+</ul>
+<hr>
+<div class="subsubsection-level-extent" id="Trigonometric-and-Hyperbolic-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Options-Controlling-Simplification" accesskey="n" rel="next">Options Controlling Simplification</a>, Previous: <a href="#Functions-and-Variables-for-Trigonometric" accesskey="p" rel="prev">Functions and Variables for Trigonometric</a>, Up: <a href="#Functions-and-Variables-for-Trigonometric" accesskey="u" rel="up">Functions and Variables for Trigonometric</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsubsection" id="Trigonometric-and-Hyperbolic-Functions-1">10.5.2.1 Trigonometric and Hyperbolic Functions</h4>
+
+<a class="anchor" id="acos"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002facos"></a><dl class="first-deffn">
+<dt class="deffn" id="index-acos"><span class="category-def">Function: </span><span><strong class="def-name">acos</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-acos'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Arc Cosine.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="acosh"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002facosh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-acosh"><span class="category-def">Function: </span><span><strong class="def-name">acosh</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-acosh'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Arc Cosine.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="acot"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002facot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-acot"><span class="category-def">Function: </span><span><strong class="def-name">acot</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-acot'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Arc Cotangent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="acoth"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002facoth"></a><dl class="first-deffn">
+<dt class="deffn" id="index-acoth"><span class="category-def">Function: </span><span><strong class="def-name">acoth</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-acoth'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Arc Cotangent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="acsc"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002facsc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-acsc"><span class="category-def">Function: </span><span><strong class="def-name">acsc</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-acsc'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Arc Cosecant.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="acsch"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002facsch"></a><dl class="first-deffn">
+<dt class="deffn" id="index-acsch"><span class="category-def">Function: </span><span><strong class="def-name">acsch</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-acsch'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Arc Cosecant.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="asec"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fasec"></a><dl class="first-deffn">
+<dt class="deffn" id="index-asec"><span class="category-def">Function: </span><span><strong class="def-name">asec</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-asec'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Arc Secant.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="asech"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fasech"></a><dl class="first-deffn">
+<dt class="deffn" id="index-asech"><span class="category-def">Function: </span><span><strong class="def-name">asech</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-asech'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Arc Secant.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="asin"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fasin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-asin"><span class="category-def">Function: </span><span><strong class="def-name">asin</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-asin'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Arc Sine.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="asinh"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fasinh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-asinh"><span class="category-def">Function: </span><span><strong class="def-name">asinh</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-asinh'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Arc Sine.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="atan"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fatan"></a><dl class="first-deffn">
+<dt class="deffn" id="index-atan"><span class="category-def">Function: </span><span><strong class="def-name">atan</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-atan'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Arc Tangent.
+</p>
+<p>See also <code class="code"><a class="ref" href="#atan2">atan2</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="atan2"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fatan2"></a><dl class="first-deffn">
+<dt class="deffn" id="index-atan2"><span class="category-def">Function: </span><span><strong class="def-name">atan2</strong> <var class="def-var-arguments">(<var class="var">y</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-atan2'> &para;</a></span></dt>
+<dd>
+<p>&ndash; yields the value of 
+\(\tan^{-1}(y/x)\)
+ in the
+interval 
+\(-\pi\)
+ to 
+\(\pi\)
+ taking into
+consideration the quadrant of the point 
+\((x,y).\)
+</p>
+
+<p>See also <code class="code"><a class="ref" href="#atan">atan</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="atanh"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fatanh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-atanh"><span class="category-def">Function: </span><span><strong class="def-name">atanh</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-atanh'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Arc Tangent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="cos"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fcos"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cos"><span class="category-def">Function: </span><span><strong class="def-name">cos</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-cos'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Cosine.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="cosh"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fcosh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cosh"><span class="category-def">Function: </span><span><strong class="def-name">cosh</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-cosh'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Cosine.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="cot"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fcot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cot"><span class="category-def">Function: </span><span><strong class="def-name">cot</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-cot'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Cotangent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="coth"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fcoth"></a><dl class="first-deffn">
+<dt class="deffn" id="index-coth"><span class="category-def">Function: </span><span><strong class="def-name">coth</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-coth'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Cotangent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="csc"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fcsc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-csc"><span class="category-def">Function: </span><span><strong class="def-name">csc</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-csc'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Cosecant.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="csch"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fcsch"></a><dl class="first-deffn">
+<dt class="deffn" id="index-csch"><span class="category-def">Function: </span><span><strong class="def-name">csch</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-csch'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Cosecant.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sec"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fsec"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sec"><span class="category-def">Function: </span><span><strong class="def-name">sec</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-sec'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Secant.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sech"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fsech"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sech"><span class="category-def">Function: </span><span><strong class="def-name">sech</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-sech'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Secant.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sin"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fsin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sin"><span class="category-def">Function: </span><span><strong class="def-name">sin</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-sin'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Sine.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sinh"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fsinh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sinh"><span class="category-def">Function: </span><span><strong class="def-name">sinh</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-sinh'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Sine.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tan"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ftan"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tan"><span class="category-def">Function: </span><span><strong class="def-name">tan</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-tan'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Tangent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tanh"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ftanh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tanh"><span class="category-def">Function: </span><span><strong class="def-name">tanh</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-tanh'> &para;</a></span></dt>
+<dd>
+<p>&ndash; Hyperbolic Tangent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fOptions-Controlling-Simplification"></a><hr>
+</div>
+<div class="subsubsection-level-extent" id="Options-Controlling-Simplification">
+<div class="nav-panel">
+<p>
+Next: <a href="#Explicit-Simplifications-Using-Identities" accesskey="n" rel="next">Explicit Simplifications Using Identities</a>, Previous: <a href="#Trigonometric-and-Hyperbolic-Functions" accesskey="p" rel="prev">Trigonometric and Hyperbolic Functions</a>, Up: <a href="#Functions-and-Variables-for-Trigonometric" accesskey="u" rel="up">Functions and Variables for Trigonometric</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsubsection" id="Options-Controlling-Simplification-1">10.5.2.2 Options Controlling Simplification</h4>
+<a class="anchor" id="g_t_0025piargs"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002f_0025piargs"></a><dl class="first-defvr">
+<dt class="defvr" id="index-_0025piargs"><span class="category-def">Option variable: </span><span><strong class="def-name">%piargs</strong><a class="copiable-link" href='#index-_0025piargs'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">%piargs</code> is <code class="code">true</code>,
+trigonometric functions are simplified to algebraic constants
+when the argument is an integer multiple
+of 
+\(\pi,\)
+<!-- /@w --> 
+\(\pi/2,\)
+<!-- /@w --> 
+\(\pi/4,\)
+<!-- /@w --> or 
+\(\pi/6.\)
+</p>
+
+<p>Maxima knows some identities which can be applied when 
+\(\pi\)
+, etc.,
+are multiplied by an integer variable (that is, a symbol declared to be
+integer).
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) %piargs : false$
+</pre><div class="group"><pre class="example-preformatted">(%i2) [sin (%pi), sin (%pi/2), sin (%pi/3)];
+                                %pi       %pi
+(%o2)            [sin(%pi), sin(---), sin(---)]
+                                 2         3
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) [sin (%pi/4), sin (%pi/5), sin (%pi/6)];
+                      %pi       %pi       %pi
+(%o3)            [sin(---), sin(---), sin(---)]
+                       4         5         6
+</pre></div><pre class="example-preformatted">(%i4) %piargs : true$
+</pre><div class="group"><pre class="example-preformatted">(%i5) [sin (%pi), sin (%pi/2), sin (%pi/3)];
+                                sqrt(3)
+(%o5)                    [0, 1, -------]
+                                   2
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) [sin (%pi/4), sin (%pi/5), sin (%pi/6)];
+                         1         %pi   1
+(%o6)                [-------, sin(---), -]
+                      sqrt(2)       5    2
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) [cos (%pi/3), cos (10*%pi/3), tan (10*%pi/3),
+       cos (sqrt(2)*%pi/3)];
+                1    1               sqrt(2) %pi
+(%o7)          [-, - -, sqrt(3), cos(-----------)]
+                2    2                    3
+</pre></div></div>
+
+<p>Some identities are applied when 
+\(\pi\)
+ and 
+\(\pi/2\)
+ are
+multiplied by an integer variable.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (n, integer, m, even)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) [sin (%pi * n), cos (%pi * m), sin (%pi/2 * m),
+       cos (%pi/2 * m)];
+                                      m/2
+(%o2)                  [0, 1, 0, (- 1)   ]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="g_t_0025iargs"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002f_0025iargs"></a><dl class="first-defvr">
+<dt class="defvr" id="index-_0025iargs"><span class="category-def">Option variable: </span><span><strong class="def-name">%iargs</strong><a class="copiable-link" href='#index-_0025iargs'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">%iargs</code> is <code class="code">true</code>,
+trigonometric functions are simplified to hyperbolic functions
+when the argument is apparently a multiple of the imaginary
+unit 
+\(i.\)
+</p>
+
+<p>Even when the argument is demonstrably real, the simplification is applied;
+Maxima considers only whether the argument is a literal multiple
+of 
+\(i.\)
+</p>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) %iargs : false$
+</pre><div class="group"><pre class="example-preformatted">(%i2) [sin (%i * x), cos (%i * x), tan (%i * x)];
+(%o2)           [sin(%i x), cos(%i x), tan(%i x)]
+</pre></div><pre class="example-preformatted">(%i3) %iargs : true$
+</pre><div class="group"><pre class="example-preformatted">(%i4) [sin (%i * x), cos (%i * x), tan (%i * x)];
+(%o4)           [%i sinh(x), cosh(x), %i tanh(x)]
+</pre></div></div>
+
+<p>Even when the argument is demonstrably real, the simplification is applied.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (x, imaginary)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) [featurep (x, imaginary), featurep (x, real)];
+(%o2)                     [true, false]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) sin (%i * x);
+(%o3)                      %i sinh(x)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="halfangles"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002fhalfangles"></a><dl class="first-defvr">
+<dt class="defvr" id="index-halfangles"><span class="category-def">Option variable: </span><span><strong class="def-name">halfangles</strong><a class="copiable-link" href='#index-halfangles'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">halfangles</code> is <code class="code">true</code>, trigonometric functions of arguments 
+<code class="code"><var class="var">expr</var>/2</code> are simplified to functions of <var class="var">expr</var>.
+</p>
+<p>For a real argument <em class="math tex2jax_process">\(x\)</em> in the interval
+<!-- /@w -->
+\(0 \le x < 2\pi,\)
+<!-- /@w --> 
+\(\sin{x\over 2}\)
+ simplifies to a simple formula:
+$$
+{\sqrt{1-\cos x}\over\sqrt{2}}
+$$
+</p>
+
+<p>A complicated factor is needed to make this formula correct for all complex 
+arguments <em class="math tex2jax_process">\(z = x+iy\)</em>:
+$$
+(-1)^{\lfloor{x/(2\pi)}\rfloor}
+\left[1-\rm{unit\_step}(-y)
+\left(1+(-1)^{\lfloor{x/(2\pi)}\rfloor - \lceil{x/(2\pi)}\rceil}\right)\right]
+
+$$
+</p>
+
+<p>Maxima knows this factor and similar factors for the functions <code class="code">sin</code>, 
+<code class="code">cos</code>, <code class="code">sinh</code>, and <code class="code">cosh</code>.  For special values of the argument 
+<em class="math tex2jax_process">\(z\)</em> these factors simplify accordingly.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) halfangles : false$
+</pre><div class="group"><pre class="example-preformatted">(%i2) sin (x / 2);
+                                 x
+(%o2)                        sin(-)
+                                 2
+</pre></div><pre class="example-preformatted">(%i3) halfangles : true$
+</pre><div class="group"><pre class="example-preformatted">(%i4) sin (x / 2);
+                            x
+                    floor(-----)
+                          2 %pi
+               (- 1)             sqrt(1 - cos(x))
+(%o4)          ----------------------------------
+                            sqrt(2)
+</pre></div><pre class="example-preformatted">(%i5) assume(x&gt;0, x&lt;2*%pi)$
+</pre><div class="group"><pre class="example-preformatted">(%i6) sin(x / 2);
+                        sqrt(1 - cos(x))
+(%o6)                   ----------------
+                            sqrt(2)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="trigsign"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002ftrigsign"></a><dl class="first-defvr">
+<dt class="defvr" id="index-trigsign"><span class="category-def">Option variable: </span><span><strong class="def-name">trigsign</strong><a class="copiable-link" href='#index-trigsign'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">trigsign</code> is <code class="code">true</code>, it permits simplification of negative
+arguments to trigonometric functions.  E.g., 
+\(\sin(-x)\)
+ will
+become 
+\(-\sin x\)
+ only if <code class="code">trigsign</code> is <code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fExplicit-Simplifications-Using-Identities"></a><hr>
+</div>
+<div class="subsubsection-level-extent" id="Explicit-Simplifications-Using-Identities">
+<div class="nav-panel">
+<p>
+Next: <a href="#Additional-Functions" accesskey="n" rel="next">Additional Functions</a>, Previous: <a href="#Options-Controlling-Simplification" accesskey="p" rel="prev">Options Controlling Simplification</a>, Up: <a href="#Functions-and-Variables-for-Trigonometric" accesskey="u" rel="up">Functions and Variables for Trigonometric</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsubsection" id="Explicit-Simplifications-Using-Identities-1">10.5.2.3 Explicit Simplifications Using Identities</h4>
+
+<a class="anchor" id="trigexpand"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ftrigexpand"></a><dl class="first-deffn">
+<dt class="deffn" id="index-trigexpand"><span class="category-def">Function: </span><span><strong class="def-name">trigexpand</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-trigexpand'> &para;</a></span></dt>
+<dd>
+<p>Expands trigonometric and hyperbolic functions of
+sums of angles and of multiple angles occurring in <var class="var">expr</var>.  For best
+results, <var class="var">expr</var> should be expanded.  To enhance user control of
+simplification, this function expands only one level at a time,
+expanding sums of angles or multiple angles.  To obtain full expansion
+into sines and cosines immediately, set the switch <code class="code">trigexpand: true</code>.
+</p>
+<p><code class="code">trigexpand</code> is governed by the following global flags:
+</p>
+<dl class="table">
+<dt><code class="code"><a class="ref" href="#trigexpand">trigexpand</a></code></dt>
+<dd><p>If <code class="code">true</code> causes expansion of all
+expressions containing sin&rsquo;s and cos&rsquo;s occurring subsequently.
+</p></dd>
+<dt><code class="code"><a class="ref" href="#halfangles">halfangles</a></code></dt>
+<dd><p>If <code class="code">true</code> causes half-angles to be simplified
+away.
+</p></dd>
+<dt><code class="code"><a class="ref" href="#trigexpandplus">trigexpandplus</a></code></dt>
+<dd><p>Controls the &quot;sum&quot; rule for <code class="code">trigexpand</code>,
+expansion of sums (e.g. <code class="code">sin(x + y)</code>) will take place only if
+<code class="code">trigexpandplus</code> is <code class="code">true</code>.
+</p></dd>
+<dt><code class="code"><a class="ref" href="#trigexpandtimes">trigexpandtimes</a></code></dt>
+<dd><p>Controls the &quot;product&quot; rule for <code class="code">trigexpand</code>,
+expansion of products (e.g. <code class="code">sin(2 x)</code>) will take place only if
+<code class="code">trigexpandtimes</code> is <code class="code">true</code>.
+</p></dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) x+sin(3*x)/sin(x),trigexpand=true,expand;
+                         2            2
+(%o1)              (- sin (x)) + 3 cos (x) + x
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) trigexpand(sin(10*x+y));
+(%o2)          cos(10 x) sin(y) + sin(10 x) cos(y)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="trigexpandplus"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002ftrigexpandplus"></a><dl class="first-defvr">
+<dt class="defvr" id="index-trigexpandplus"><span class="category-def">Option variable: </span><span><strong class="def-name">trigexpandplus</strong><a class="copiable-link" href='#index-trigexpandplus'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">trigexpandplus</code> controls the &quot;sum&quot; rule for
+<code class="code"><a class="ref" href="#trigexpand">trigexpand</a></code>.  Thus, when the <code class="code"><a class="ref" href="#trigexpand">trigexpand</a></code> command is used or the
+<code class="code"><a class="ref" href="#trigexpand">trigexpand</a></code> switch set to <code class="code">true</code>, expansion of sums
+(e.g. <code class="code">sin(x+y))</code> will take place only if <code class="code">trigexpandplus</code> is
+<code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="trigexpandtimes"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002ftrigexpandtimes"></a><dl class="first-defvr">
+<dt class="defvr" id="index-trigexpandtimes"><span class="category-def">Option variable: </span><span><strong class="def-name">trigexpandtimes</strong><a class="copiable-link" href='#index-trigexpandtimes'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">trigexpandtimes</code> controls the &quot;product&quot; rule for <code class="code"><a class="ref" href="#trigexpand">trigexpand</a></code>.
+Thus, when the <code class="code"><a class="ref" href="#trigexpand">trigexpand</a></code> command is used or the <code class="code"><a class="ref" href="#trigexpand">trigexpand</a></code>
+switch set to <code class="code">true</code>, expansion of products (e.g. <code class="code">sin(2*x)</code>)
+will take place only if <code class="code">trigexpandtimes</code> is <code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="triginverses"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002ftriginverses"></a><dl class="first-defvr">
+<dt class="defvr" id="index-triginverses"><span class="category-def">Option variable: </span><span><strong class="def-name">triginverses</strong><a class="copiable-link" href='#index-triginverses'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">triginverses</code> controls the simplification of the
+composition of trigonometric and hyperbolic functions with their inverse
+functions.
+</p>
+<p>If <code class="code">all</code>, both e.g. <code class="code">atan(tan(<var class="var">x</var>))</code>
+and <code class="code">tan(atan(<var class="var">x</var>))</code> simplify to <var class="var">x</var>.
+</p>
+<p>If <code class="code">true</code>, the <code class="code"><var class="var">arcfun</var>(<var class="var">fun</var>(<var class="var">x</var>))</code>
+simplification is turned off.
+</p>
+<p>If <code class="code">false</code>, both the
+<code class="code"><var class="var">arcfun</var>(<var class="var">fun</var>(<var class="var">x</var>))</code> and
+<code class="code"><var class="var">fun</var>(<var class="var">arcfun</var>(<var class="var">x</var>))</code>
+simplifications are turned off.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="trigreduce"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ftrigreduce"></a><dl class="first-deffn">
+<dt class="deffn" id="index-trigreduce"><span class="category-def">Function: </span><span><strong class="def-name">trigreduce</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">trigreduce</code> (<var class="var">expr</var>, <var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">trigreduce</code> (<var class="var">expr</var>)</var><a class="copiable-link" href='#index-trigreduce'> &para;</a></span></dt>
+<dd>
+<p>Combines products and powers of trigonometric
+and hyperbolic sin&rsquo;s and cos&rsquo;s of <var class="var">x</var> into those of multiples of <var class="var">x</var>.
+It also tries to eliminate these functions when they occur in
+denominators.  If <var class="var">x</var> is omitted then all variables in <var class="var">expr</var> are used.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_27.html#poissimp">poissimp</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) trigreduce(-sin(x)^2+3*cos(x)^2+x);
+               cos(2 x)      cos(2 x)   1        1
+(%o1)          -------- + 3 (-------- + -) + x - -
+                  2             2       2        2
+</pre></div></div>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="trigsimp"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ftrigsimp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-trigsimp"><span class="category-def">Function: </span><span><strong class="def-name">trigsimp</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-trigsimp'> &para;</a></span></dt>
+<dd>
+
+<p>Employs the identities 
+\(\sin\left(x\right)^2 + \cos\left(x\right)^2 = 1\)
+ and 
+\(\cosh\left(x\right)^2 - \sinh\left(x\right)^2 = 1\)
+ to
+simplify expressions containing <code class="code">tan</code>, <code class="code">sec</code>,
+etc., to <code class="code">sin</code>, <code class="code">cos</code>, <code class="code">sinh</code>, <code class="code">cosh</code>.
+</p>
+<p><code class="code"><a class="ref" href="#trigreduce">trigreduce</a></code>, <code class="code"><a class="ref" href="maxima_13.html#ratsimp">ratsimp</a></code>, and <code class="code"><a class="ref" href="maxima_8.html#radcan">radcan</a></code> may be
+able to further simplify the result.
+</p>
+<p><code class="code">demo (&quot;trgsmp.dem&quot;)</code> displays some examples of <code class="code">trigsimp</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="trigrat"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002ftrigrat"></a><dl class="first-deffn">
+<dt class="deffn" id="index-trigrat"><span class="category-def">Function: </span><span><strong class="def-name">trigrat</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-trigrat'> &para;</a></span></dt>
+<dd>
+<p>Gives a canonical simplified quasilinear form of a trigonometrical expression;
+<var class="var">expr</var> is a rational fraction of several <code class="code">sin</code>, <code class="code">cos</code> or
+<code class="code">tan</code>, the arguments of them are linear forms in some variables (or
+kernels) and <code class="code">%pi/<var class="var">n</var></code> (<var class="var">n</var> integer) with integer coefficients.
+The result is a simplified fraction with numerator and denominator linear in
+<code class="code">sin</code> and <code class="code">cos</code>.  Thus <code class="code">trigrat</code> linearize always when it is
+possible.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) trigrat(sin(3*a)/sin(a+%pi/3));
+(%o1)            sqrt(3) sin(2 a) + cos(2 a) - 1
+</pre></div></div>
+
+<p>The following example is taken from
+Davenport, Siret, and Tournier, <i class="i">Calcul Formel</i>, Masson (or in English,
+Addison-Wesley), section 1.5.5, Morley theorem.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) c : %pi/3 - a - b$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bc : sin(a)*sin(3*c)/sin(a+b);
+                                           %pi
+                 sin(a) sin(3 ((- b) - a + ---))
+                                            3
+(%o2)            -------------------------------
+                           sin(b + a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ba : bc, c=a, a=c;
+                                         %pi
+                    sin(3 a) sin(b + a - ---)
+                                          3
+(%o3)               -------------------------
+                                  %pi
+                          sin(a - ---)
+                                   3
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) ac2 : ba^2 + bc^2 - 2*bc*ba*cos(b);
+         2         2         %pi
+      sin (3 a) sin (b + a - ---)
+                              3
+(%o4) ---------------------------
+                2     %pi
+             sin (a - ---)
+                       3
+                                         %pi
+ - (2 sin(a) sin(3 a) sin(3 ((- b) - a + ---)) cos(b)
+                                          3
+             %pi            %pi
+ sin(b + a - ---))/(sin(a - ---) sin(b + a))
+              3              3
+      2       2                %pi
+   sin (a) sin (3 ((- b) - a + ---))
+                                3
+ + ---------------------------------
+                 2
+              sin (b + a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) trigrat (ac2);
+(%o5) - (sqrt(3) sin(4 b + 4 a) - cos(4 b + 4 a)
+ - 2 sqrt(3) sin(4 b + 2 a) + 2 cos(4 b + 2 a)
+ - 2 sqrt(3) sin(2 b + 4 a) + 2 cos(2 b + 4 a)
+ + 4 sqrt(3) sin(2 b + 2 a) - 8 cos(2 b + 2 a) - 4 cos(2 b - 2 a)
+ + sqrt(3) sin(4 b) - cos(4 b) - 2 sqrt(3) sin(2 b) + 10 cos(2 b)
+ + sqrt(3) sin(4 a) - cos(4 a) - 2 sqrt(3) sin(2 a) + 10 cos(2 a)
+ - 9)/4
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fAdditional-Functions"></a><hr>
+</div>
+<div class="subsubsection-level-extent" id="Additional-Functions">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Explicit-Simplifications-Using-Identities" accesskey="p" rel="prev">Explicit Simplifications Using Identities</a>, Up: <a href="#Functions-and-Variables-for-Trigonometric" accesskey="u" rel="up">Functions and Variables for Trigonometric</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsubsection" id="Additional-Functions-1">10.5.2.4 Additional Functions</h4>
+
+<a class="anchor" id="atrig1"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002fatrig1"></a><dl class="first-defvr">
+<dt class="defvr" id="index-atrig1"><span class="category-def">Package: </span><span><strong class="def-name">atrig1</strong><a class="copiable-link" href='#index-atrig1'> &para;</a></span></dt>
+<dd>
+<p>The <code class="code">atrig1</code> package contains several additional simplification rules
+for inverse trigonometric functions.  Together with rules
+already known to Maxima, the following angles are fully implemented:
+<em class="math tex2jax_process">\(0\)</em>, 
+\(\pi/6,\)
+<!-- /@w --> 
+\(\pi/4,\)
+<!-- /@w --> 
+\(\pi/3,\)
+<!-- /@w --> and 
+\(\pi/2.\)
+</p>
+<p>Corresponding angles in the other three quadrants are also available.
+Do <code class="code">load(&quot;atrig1&quot;);</code> to use them.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-atrig1">Package atrig1</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="ntrig"></a><a class="anchor" id="Item_003a-MathFunctions_002fdefvr_002fntrig"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ntrig"><span class="category-def">Package: </span><span><strong class="def-name">ntrig</strong><a class="copiable-link" href='#index-ntrig'> &para;</a></span></dt>
+<dd>
+<p>The <code class="code">ntrig</code> package contains a set of simplification rules that are
+used to simplify trigonometric function whose arguments are of the form
+<code class="code"><var class="var">f</var>(<var class="var">n</var> %pi/10)</code> where <var class="var">f</var> is any of the functions
+<code class="code">sin</code>, <code class="code">cos</code>, <code class="code">tan</code>, <code class="code">csc</code>, <code class="code">sec</code> and <code class="code">cot</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-ntrig">Package ntrig</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-MathFunctions_002fnode_002fRandom-Numbers"></a><hr>
+</div>
+</div>
+</div>
+<div class="section-level-extent" id="Random-Numbers">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Trigonometric-Functions" accesskey="p" rel="prev">Trigonometric Functions</a>, Up: <a href="#Elementary-Functions" accesskey="u" rel="up">Elementary Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Random-Numbers-1">10.6 Random Numbers</h3>
+
+<a class="anchor" id="make_005frandom_005fstate"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fmake_005frandom_005fstate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-make_005frandom_005fstate"><span class="category-def">Function: </span><span><strong class="def-name">make_random_state</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">make_random_state</code> (<var class="var">n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">make_random_state</code> (<var class="var">s</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">make_random_state</code> (true) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">make_random_state</code> (false)</var><a class="copiable-link" href='#index-make_005frandom_005fstate'> &para;</a></span></dt>
+<dd>
+
+<p>A random state object represents the state of the random number generator.
+The state comprises 627 32-bit words.
+</p>
+<p><code class="code">make_random_state (<var class="var">n</var>)</code> returns a new random state object
+created from an integer seed value equal to <var class="var">n</var> modulo 2^32.
+<var class="var">n</var> may be negative.
+</p>
+
+<p><code class="code">make_random_state (<var class="var">s</var>)</code> returns a copy of the random state <var class="var">s</var>.
+</p>
+<p><code class="code">make_random_state (true)</code> returns a new random state object,
+using the current computer clock time as the seed.
+</p>
+<p><code class="code">make_random_state (false)</code> returns a copy of the current state
+of the random number generator.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="set_005frandom_005fstate"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002fset_005frandom_005fstate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-set_005frandom_005fstate"><span class="category-def">Function: </span><span><strong class="def-name">set_random_state</strong> <var class="def-var-arguments">(<var class="var">s</var>)</var><a class="copiable-link" href='#index-set_005frandom_005fstate'> &para;</a></span></dt>
+<dd>
+<p>Copies <var class="var">s</var> to the random number generator state.
+</p>
+<p><code class="code">set_random_state</code> always returns <code class="code">done</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="random"></a><a class="anchor" id="Item_003a-MathFunctions_002fdeffn_002frandom"></a><dl class="first-deffn">
+<dt class="deffn" id="index-random"><span class="category-def">Function: </span><span><strong class="def-name">random</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-random'> &para;</a></span></dt>
+<dd>
+<p>Returns a pseudorandom number.  If <var class="var">x</var> is an integer,
+<code class="code">random (<var class="var">x</var>)</code> returns an integer from 0 through <code class="code"><var class="var">x</var> - 1</code>
+inclusive.  If <var class="var">x</var> is a floating point number, <code class="code">random (<var class="var">x</var>)</code>
+returns a nonnegative floating point number less than <var class="var">x</var>.  <code class="code">random</code>
+complains with an error if <var class="var">x</var> is neither an integer nor a float, or if
+<var class="var">x</var> is not positive.
+</p>
+<p>The functions <code class="code">make_random_state</code> and <code class="code">set_random_state</code>
+maintain the state of the random number generator.
+</p>
+<p>The Maxima random number generator is an implementation of the Mersenne twister
+MT 19937.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s1: make_random_state (654321)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) set_random_state (s1);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) random (1000);
+(%o3)                          768
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) random (9573684);
+(%o4)                        7657880
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) random (2^75);
+(%o5)                11804491615036831636390
+</pre></div><pre class="example-preformatted">(%i6) s2: make_random_state (false)$
+</pre><div class="group"><pre class="example-preformatted">(%i7) random (1.0);
+(%o7)                  0.2310127244107132
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) random (10.0);
+(%o8)                   4.394553645870825
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) random (100.0);
+(%o9)                   32.28666704056853
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) set_random_state (s2);
+(%o10)                        done
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) random (1.0);
+(%o11)                 0.2310127244107132
+</pre></div><div class="group"><pre class="example-preformatted">(%i12) random (10.0);
+(%o12)                  4.394553645870825
+</pre></div><div class="group"><pre class="example-preformatted">(%i13) random (100.0);
+(%o13)                  32.28666704056853
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_10.html#Maxima_0027s-Database" accesskey="n" rel="next">Maxima&rsquo;s Database</a>, Previous: <a href="maxima_8.html#Simplification" accesskey="p" rel="prev">Simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

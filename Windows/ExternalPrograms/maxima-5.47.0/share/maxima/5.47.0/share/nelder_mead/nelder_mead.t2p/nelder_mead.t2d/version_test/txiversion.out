@@ -1,0 +1,13 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=etex)
+ restricted \write18 enabled.
+entering extended mode
+(./txiversion.tex
+(/tmp/maxima-5.47.0/crosscompile-windows/build/maxima-prefix/src/maxima/share/n
+elder_mead/texinfo.tex Loading texinfo [version 2013-02-01.11]: pdf, fonts,
+markup, glyphs, page headings, tables, conditionals, indexing, sectioning,
+toc, environments, defuns, macros, cross references, insertions,
+(/usr/share/texlive/texmf-dist/tex/generic/epsf/epsf.tex
+This is `epsf.tex' v2.7.4 <14 February 2011>
+) localization, formatting, and turning on texinfo input format.) )
+No pages of output.
+Transcript written on txiversion.log.

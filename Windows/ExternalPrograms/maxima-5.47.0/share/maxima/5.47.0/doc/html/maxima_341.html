@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for pslq</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for pslq">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for pslq">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_339.html#pslq_002dpkg" rel="up" title="pslq-pkg">
+<link href="maxima_342.html#pytranslate" rel="next" title="pytranslate">
+<link href="maxima_340.html#Introduction-to-pslq" rel="previous" title="Introduction to pslq">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-pslq"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_340.html#Introduction-to-pslq" accesskey="p" rel="previous">Introduction to pslq</a>, Up: <a href="maxima_339.html#pslq_002dpkg" accesskey="u" rel="up">pslq-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-pslq-1"></a>
+<h3 class="section">81.2 Functions and Variables for pslq</h3>
+
+<a name="guess_005fexact_005fvalue"></a><a name="Item_003a-pslq_002fdeffn_002fguess_005fexact_005fvalue"></a><dl>
+<dt><a name="index-guess_005fexact_005fvalue"></a>Function: <strong>guess_exact_value</strong> <em>(<var>x</var>)</em></dt>
+<dd>
+<p>When <var>x</var> is a floating point number or bigfloat,
+<code>guess_exact_value</code> tries to find an exact expression
+(in terms of radicals, logarithms, exponentials, and the constant <code>%pi</code>)
+which is nearly equal to the given number.
+If <code>guess_exact_value</code> cannot find such an expression,
+<var>x</var> is returned unchanged.
+</p>
+<p>When <var>x</var> is rational number or other mapatom
+(other than a float or bigfloat),
+<var>x</var> is returned unchanged.
+</p>
+<p>Otherwise, <var>x</var> is a nonatomic expression,
+and <code>guess_exact_value</code> is applied to each of the arguments of <var>x</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;pslq.mac&quot;);
+(%o1)                       pslq.mac
+(%i2) root: float (sin (%pi/12));
+(%o2)                  0.2588190451025207
+(%i3) guess_exact_value (root);
+                        sqrt(2 - sqrt(3))
+(%o3)                   -----------------
+                                2
+(%i4) L: makelist (root^i, i, 0, 4);
+(%o4) [1.0, 0.2588190451025207, 0.06698729810778066, 
+                       0.01733758853025369, 0.004487298107780675]
+(%i5) m: pslq_integer_relation(%);
+(%o5)                 [- 1, 0, 16, 0, - 16]
+(%i6) makelist (x^i, i, 0, 4) . m;
+                             4        2
+(%o6)                 (- 16 x ) + 16 x  - 1
+(%i7) solve(%);
+             sqrt(sqrt(3) + 2)      sqrt(sqrt(3) + 2)
+(%o7) [x = - -----------------, x = -----------------, 
+                     2                      2
+                        sqrt(2 - sqrt(3))      sqrt(2 - sqrt(3))
+                  x = - -----------------, x = -----------------]
+                                2                      2
+</pre></div>
+</dd></dl>
+
+<a name="Item_003a-pslq_002fdeffn_002fpslq_005finteger_005frelation"></a><dl>
+<dt><a name="index-pslq_005finteger_005frelation"></a>Function: <strong>pslq_integer_relation</strong> <em>(<var>L</var>)</em></dt>
+<dd>
+<p>Implements the PSLQ algorithm [1] to find integer relations between bigfloat numbers.
+</p>
+<p>For a given list <var>L</var> of floating point numbers,
+<code>pslq_integer_relation</code> returns a list of integers <var>m</var>
+such that <code><var>m</var> . <var>L</var> = 0</code>
+(with absolute residual error less than <code>pslq_threshold</code>).
+</p>
+<p>[1] D.H.Bailey: Integer Relation Detection and Lattice Reduction.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;pslq.mac&quot;);
+(%o1)                       pslq.mac
+(%i2) root: float (sin (%pi/12));
+(%o2)                  0.2588190451025207
+(%i3) L: makelist (root^i, i, 0, 4);
+(%o3) [1.0, 0.2588190451025207, 0.06698729810778066, 
+                       0.01733758853025369, 0.004487298107780675]
+(%i4) m: pslq_integer_relation(%);
+(%o4)                 [- 1, 0, 16, 0, - 16]
+(%i5) m . L;
+(%o5)                - 2.359223927328458E-16
+(%i6) float (10^(2 - fpprec));
+(%o6)                        1.0E-14
+(%i7) is (abs (m . L) &lt; 10^(2 - fpprec));
+(%o7)                         true
+</pre></div>
+</dd></dl>
+
+<a name="Item_003a-pslq_002fdefvr_002fpslq_005fprecision"></a><dl>
+<dt><a name="index-pslq_005fprecision"></a>Variable: <strong>pslq_precision</strong></dt>
+<dd><p>Default value: <code>10^(fpprec - 2)</code>
+</p>
+<p>Maximum magnitude of some intermediate results in <code>pslq_integer_relation</code>.
+The search fails if one of the intermediate results has elements
+larger than <code>pslq_precision</code>.
+</p>
+</dd></dl>
+
+<a name="Item_003a-pslq_002fdefvr_002fpslq_005fthreshold"></a><dl>
+<dt><a name="index-pslq_005fthreshold"></a>Variable: <strong>pslq_threshold</strong></dt>
+<dd><p>Default value: <code>10^(2 - fpprec)</code>
+</p>
+<p>Threshold for absolute residual error of integer relation found by <code>pslq_integer_relation</code>.
+</p>
+</dd></dl>
+
+<a name="Item_003a-pslq_002fdefvr_002fpslq_005fdepth"></a><dl>
+<dt><a name="index-pslq_005fdepth"></a>Variable: <strong>pslq_depth</strong></dt>
+<dd><p>Default value: <code>20 * <var>n</var></code>
+</p>
+<p>Number of iterations of the PSLQ algorithm.
+</p>
+<p>The default value is 20 times <var>n</var>,
+where <var>n</var> is the length of the list of numbers supplied to <code>pslq_integer_relation</code>.
+</p>
+</dd></dl>
+
+<a name="Item_003a-pslq_002fdefvr_002fpslq_005fstatus"></a><dl>
+<dt><a name="index-pslq_005fstatus"></a>Variable: <strong>pslq_status</strong></dt>
+<dd>
+<p>Indicates success or failure for an integer relation search by <code>pslq_integer_relation</code>.
+</p>
+<p>When <code>pslq_status</code> is 1, it indicates an integer relation was found,
+and the absolute residual error is less than <code>pslq_threshold</code>.
+</p>
+<p>When <code>pslq_status</code> is 2, it indicates an integer relation was not found
+because some intermediate results are larger than <code>pslq_precision</code>.
+</p>
+<p>When <code>pslq_status</code> is 3, it indicates an integer relation was not found
+because the number of iterations <code>pslq_depth</code> was reached.
+</p>
+</dd></dl>
+
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_340.html#Introduction-to-pslq" accesskey="p" rel="previous">Introduction to pslq</a>, Up: <a href="maxima_339.html#pslq_002dpkg" accesskey="u" rel="up">pslq-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

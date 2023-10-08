@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>orthopoly-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="orthopoly-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="orthopoly-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_80.html#pslq_002dpkg" rel="next" title="pslq-pkg">
+<link href="maxima_78.html#opsubst_002dpkg" rel="prev" title="opsubst-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="orthopoly_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_80.html#pslq_002dpkg" accesskey="n" rel="next">pslq</a>, Previous: <a href="maxima_78.html#opsubst_002dpkg" accesskey="p" rel="prev">opsubst</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="orthopoly">80 orthopoly</h2>
+
+<a class="anchor" id="Item_003a-orthopoly_002fnode_002fIntroduction-to-orthogonal-polynomials"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-orthogonal-polynomials" accesskey="1">Introduction to orthogonal polynomials</a></li>
+<li><a href="#Functions-and-Variables-for-orthogonal-polynomials" accesskey="2">Functions and Variables for orthogonal polynomials</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-orthogonal-polynomials">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-orthogonal-polynomials" accesskey="n" rel="next">Functions and Variables for orthogonal polynomials</a>, Previous: <a href="#orthopoly_002dpkg" accesskey="p" rel="prev">orthopoly</a>, Up: <a href="#orthopoly_002dpkg" accesskey="u" rel="up">orthopoly</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-orthogonal-polynomials-1">80.1 Introduction to orthogonal polynomials</h3>
+
+<p><code class="code">orthopoly</code> is a package for symbolic and numerical evaluation of
+several kinds of orthogonal polynomials, including Chebyshev,
+Laguerre, Hermite, Jacobi, Legendre, and ultraspherical (Gegenbauer) 
+polynomials. Additionally, <code class="code">orthopoly</code> includes support for the spherical Bessel, 
+spherical Hankel, and spherical harmonic functions.
+</p>
+<p>For the most part, <code class="code">orthopoly</code> follows the conventions of Abramowitz and Stegun
+<i class="i">Handbook of Mathematical Functions</i>, Chapter 22 (10th printing, December 1972);
+additionally, we use Gradshteyn and Ryzhik, 
+<i class="i">Table of Integrals, Series, and Products</i> (1980 corrected and 
+enlarged edition), and Eugen Merzbacher <i class="i">Quantum Mechanics</i> (2nd edition, 1970).
+</p>
+
+
+<p>Barton Willis of the University of Nebraska at Kearney (UNK) wrote
+the <code class="code">orthopoly</code> package and its documentation. The package 
+is released under the GNU General Public License (GPL).
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Orthogonal-polynomials">Orthogonal polynomials</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+<ul class="mini-toc">
+<li><a href="#Getting-Started-with-orthopoly" accesskey="1">Getting Started with orthopoly</a></li>
+<li><a href="#Limitations" accesskey="2">Limitations</a></li>
+<li><a href="#Floating-point-Evaluation-1" accesskey="3">Floating point Evaluation</a></li>
+<li><a href="#Graphics-and-orthopoly" accesskey="4">Graphics and <code class="code">orthopoly</code></a></li>
+<li><a href="#Miscellaneous-Functions" accesskey="5">Miscellaneous Functions</a></li>
+<li><a href="#Algorithms" accesskey="6">Algorithms</a></li>
+</ul>
+<div class="subsection-level-extent" id="Getting-Started-with-orthopoly">
+<h4 class="subsection">80.1.1 Getting Started with orthopoly</h4>
+
+<p><code class="code">load (&quot;orthopoly&quot;)</code> loads the <code class="code">orthopoly</code> package.
+</p>
+<p>To find the third-order Legendre polynomial,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) legendre_p (3, x);
+                      3             2
+             5 (1 - x)    15 (1 - x)
+(%o1)      - ---------- + ----------- - 6 (1 - x) + 1
+                 2             2
+</pre></div>
+
+<p>To express this as a sum of powers of <var class="var">x</var>, apply <var class="var">ratsimp</var> or <var class="var">rat</var>
+to the result.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) [ratsimp (%), rat (%)];
+                        3           3
+                     5 x  - 3 x  5 x  - 3 x
+(%o2)/R/            [----------, ----------]
+                         2           2
+</pre></div>
+
+<p>Alternatively, make the second argument to <code class="code">legendre_p</code> (its &ldquo;main&rdquo; variable) 
+a canonical rational expression (CRE).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) legendre_p (3, rat (x));
+                              3
+                           5 x  - 3 x
+(%o1)/R/                   ----------
+                               2
+</pre></div>
+
+<p>For floating point evaluation, <code class="code">orthopoly</code> uses a running error analysis
+to estimate an upper bound for the error. For example,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) jacobi_p (150, 2, 3, 0.2);
+(%o1) interval(- 0.062017037936715, 1.533267919277521E-11)
+</pre></div>
+
+<p>Intervals have the form <code class="code">interval (<var class="var">c</var>, <var class="var">r</var>)</code>, where <var class="var">c</var> is the
+center and <var class="var">r</var> is the radius of the interval. Since Maxima
+does not support arithmetic on intervals, in some situations, such
+as graphics, you want to suppress the error and output only the 
+center of the interval. To do this, set the option
+variable <code class="code">orthopoly_returns_intervals</code> to <code class="code">false</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) orthopoly_returns_intervals : false;
+(%o1)                         false
+(%i2) jacobi_p (150, 2, 3, 0.2);
+(%o2)                  - 0.062017037936715
+</pre></div>
+
+<p>Refer to the section see <a class="pxref" href="#Floating-point-Evaluation">Floating point Evaluation</a> for more information.
+</p>
+<p>Most functions in <code class="code">orthopoly</code> have a <code class="code">gradef</code> property; thus
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) diff (hermite (n, x), x);
+(%o1)                     2 n H     (x)
+                               n - 1
+(%i2) diff (gen_laguerre (n, a, x), x);
+              (a)               (a)
+           n L   (x) - (n + a) L     (x) unit_step(n)
+              n                 n - 1
+(%o2)      ------------------------------------------
+                               x
+</pre></div>
+
+<p>The unit step function in the second example prevents an error that would
+otherwise arise by evaluating with <var class="var">n</var> equal to 0.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i3) ev (%, n = 0);
+(%o3)                           0
+</pre></div>
+
+<p>The <code class="code">gradef</code> property only applies to the &ldquo;main&rdquo; variable; derivatives with 
+respect other arguments usually result in an error message; for example
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) diff (hermite (n, x), x);
+(%o1)                     2 n H     (x)
+                               n - 1
+(%i2) diff (hermite (n, x), n);
+
+Maxima doesn't know the derivative of hermite with respect the first
+argument
+ -- an error.  Quitting.  To debug this try debugmode(true);
+</pre></div>
+
+<p>Generally, functions in <code class="code">orthopoly</code> map over lists and matrices. For
+the mapping to fully evaluate, the option variables 
+<code class="code">doallmxops</code> and <code class="code">listarith</code> must both be <code class="code">true</code> (the defaults).
+To illustrate the mapping over matrices, consider
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) hermite (2, x);
+                                     2
+(%o1)                    - 2 (1 - 2 x )
+(%i2) m : matrix ([0, x], [y, 0]);
+                            [ 0  x ]
+(%o2)                       [      ]
+                            [ y  0 ]
+(%i3) hermite (2, m);
+               [                             2  ]
+               [      - 2        - 2 (1 - 2 x ) ]
+(%o3)          [                                ]
+               [             2                  ]
+               [ - 2 (1 - 2 y )       - 2       ]
+</pre></div>
+
+<p>In the second example, the <code class="code">i, j</code> element of the value
+is <code class="code">hermite (2, m[i,j])</code>; this is not the same as computing
+<code class="code">-2 + 4 m . m</code>, as seen in the next example.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) -2 * matrix ([1, 0], [0, 1]) + 4 * m . m;
+                    [ 4 x y - 2      0     ]
+(%o4)               [                      ]
+                    [     0      4 x y - 2 ]
+</pre></div>
+
+<p>If you evaluate a function at a point outside its domain, generally
+<code class="code">orthopoly</code> returns the function unevaluated. For example,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) legendre_p (2/3, x);
+(%o1)                        P   (x)
+                              2/3
+</pre></div>
+
+<p><code class="code">orthopoly</code> supports translation into TeX; it also does two-dimensional
+output on a terminal.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) spherical_harmonic (l, m, theta, phi);
+                          m
+(%o1)                    Y (theta, phi)
+                          l
+(%i2) tex (%);
+$$Y_{l}^{m}\left(\vartheta,\varphi\right)$$
+(%o2)                         false
+(%i3) jacobi_p (n, a, a - b, x/2);
+                          (a, a - b) x
+(%o3)                    P          (-)
+                          n          2
+(%i4) tex (%);
+$$P_{n}^{\left(a,a-b\right)}\left({{x}\over{2}}\right)$$
+(%o4)                         false
+</pre></div>
+
+</div>
+<div class="subsection-level-extent" id="Limitations">
+<h4 class="subsection">80.1.2 Limitations</h4>
+
+<p>When an expression involves several orthogonal polynomials with
+symbolic orders, it&rsquo;s possible that the expression actually
+vanishes, yet Maxima is unable to simplify it to zero. If you
+divide by such a quantity, you&rsquo;ll be in trouble. For example,
+the following expression vanishes for integers <var class="var">n</var> greater than 1, yet Maxima
+is unable to simplify it to zero.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) (2*n - 1) * legendre_p (n - 1, x) * x - n * legendre_p (n, x)
+      + (1 - n) * legendre_p (n - 2, x);
+(%o1)  (2 n - 1) P     (x) x - n P (x) + (1 - n) P     (x)
+                  n - 1           n               n - 2
+</pre></div>
+
+<p>For a specific <var class="var">n</var>, we can reduce the expression to zero.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) ev (% ,n = 10, ratsimp);
+(%o2)                           0
+</pre></div>
+
+<p>Generally, the polynomial form of an orthogonal polynomial is ill-suited
+for floating point evaluation. Here&rsquo;s an example.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) p : jacobi_p (100, 2, 3, x)$
+
+(%i2) subst (0.2, x, p);
+(%o2)                3.4442767023833592E+35
+(%i3) jacobi_p (100, 2, 3, 0.2);
+(%o3)  interval(0.18413609135169, 6.8990300925815987E-12)
+(%i4) float(jacobi_p (100, 2, 3, 2/10));
+(%o4)                   0.18413609135169
+</pre></div>
+
+<p>The true value is about 0.184; this calculation suffers from extreme
+subtractive cancellation error. Expanding the polynomial and then
+evaluating, gives a better result.
+</p><div class="example">
+<pre class="example-preformatted">(%i5) p : expand(p)$
+(%i6) subst (0.2, x, p);
+(%o6) 0.18413609766122982
+</pre></div>
+
+<p>This isn&rsquo;t a general rule; expanding the polynomial does not always
+result in an expression that is better suited for numerical evaluation.
+By far, the best way to do numerical evaluation is to make one or more
+of the function arguments floating point numbers. By doing that, 
+specialized floating point algorithms are used for evaluation.
+</p>
+<p>Maxima&rsquo;s <code class="code">float</code> function is somewhat indiscriminate; if you apply 
+<code class="code">float</code> to an expression involving an orthogonal polynomial with a
+symbolic degree or order parameter, these parameters may be 
+converted into floats; after that, the expression will not evaluate 
+fully. Consider
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) assoc_legendre_p (n, 1, x);
+                               1
+(%o1)                         P (x)
+                               n
+(%i2) float (%);
+                              1.0
+(%o2)                        P   (x)
+                              n
+(%i3) ev (%, n=2, x=0.9);
+                             1.0
+(%o3)                       P   (0.9)
+                             2
+</pre></div>
+
+<p>The expression in (%o3) will not evaluate to a float; <code class="code">orthopoly</code> doesn&rsquo;t
+recognize floating point values where it requires an integer. Similarly, 
+numerical evaluation of the <code class="code">pochhammer</code> function for orders that
+exceed <code class="code">pochhammer_max_index</code> can be troublesome; consider
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x :  pochhammer (1, 10), pochhammer_max_index : 5;
+(%o1)                         (1)
+                                 10
+</pre></div>
+
+<p>Applying <code class="code">float</code> doesn&rsquo;t evaluate <var class="var">x</var> to a float
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) float (x);
+(%o2)                       (1.0)
+                                 10.0
+</pre></div>
+
+<p>To evaluate <var class="var">x</var> to a float, you&rsquo;ll need to bind
+<code class="code">pochhammer_max_index</code> to 11 or greater and apply <code class="code">float</code> to <var class="var">x</var>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i3) float (x), pochhammer_max_index : 11;
+(%o3)                       3628800.0
+</pre></div>
+
+<p>The default value of <code class="code">pochhammer_max_index</code> is 100;
+change its value after loading <code class="code">orthopoly</code>.
+</p>
+<p>Finally, be aware that reference books vary on the definitions of the 
+orthogonal polynomials; we&rsquo;ve generally used the conventions 
+of Abramowitz and Stegun.
+</p>
+<p>Before you suspect a bug in orthopoly, check some special cases 
+to determine if your definitions match those used by <code class="code">orthopoly</code>. 
+Definitions often differ by a normalization; occasionally, authors
+use &ldquo;shifted&rdquo; versions of the functions that makes the family
+orthogonal on an interval other than <em class="math tex2jax_process">\((-1, 1)\)</em>. To define, for example,
+a Legendre polynomial that is orthogonal on <em class="math tex2jax_process">\((0, 1)\)</em>, define
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) shifted_legendre_p (n, x) := legendre_p (n, 2*x - 1)$
+
+(%i2) shifted_legendre_p (2, rat (x));
+                            2
+(%o2)/R/                 6 x  - 6 x + 1
+(%i3) legendre_p (2, rat (x));
+                               2
+                            3 x  - 1
+(%o3)/R/                    --------
+                               2
+</pre></div>
+
+<a class="anchor" id="Floating-point-Evaluation"></a></div>
+<div class="subsection-level-extent" id="Floating-point-Evaluation-1">
+<h4 class="subsection">80.1.3 Floating point Evaluation</h4>
+
+<p>Most functions in <code class="code">orthopoly</code> use a running error analysis to 
+estimate the error in floating point evaluation; the 
+exceptions are the spherical Bessel functions and the associated Legendre 
+polynomials of the second kind. For numerical evaluation, the spherical 
+Bessel functions call SLATEC functions. No specialized method is used
+for numerical evaluation of the associated Legendre polynomials of the
+second kind.
+</p>
+<p>The running error analysis ignores errors that are second or higher order
+in the machine epsilon (also known as unit roundoff). It also
+ignores a few other errors. It&rsquo;s possible (although unlikely) 
+that the actual error exceeds the estimate.
+</p>
+<p>Intervals have the form <code class="code">interval (<var class="var">c</var>, <var class="var">r</var>)</code>, where <var class="var">c</var> is the 
+center of the interval and <var class="var">r</var> is its radius. The 
+center of an interval can be a complex number, and the radius is always a positive real number.
+</p>
+<p>Here is an example.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) fpprec : 50$
+
+(%i2) y0 : jacobi_p (100, 2, 3, 0.2);
+(%o2) interval(0.1841360913516871, 6.8990300925815987E-12)
+(%i3) y1 : bfloat (jacobi_p (100, 2, 3, 1/5));
+(%o3) 1.8413609135168563091370224958913493690868904463668b-1
+</pre></div>
+
+<p>Let&rsquo;s test that the actual error is smaller than the error estimate
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) is (abs (part (y0, 1) - y1) &lt; part (y0, 2));
+(%o4)                         true
+</pre></div>
+
+<p>Indeed, for this example the error estimate is an upper bound for the
+true error.
+</p>
+<p>Maxima does not support arithmetic on intervals.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) legendre_p (7, 0.1) + legendre_p (8, 0.1);
+(%o1) interval(0.18032072148437508, 3.1477135311021797E-15)
+        + interval(- 0.19949294375000004, 3.3769353084291579E-15)
+</pre></div>
+
+<p>A user could define arithmetic operators that do interval math. To
+define interval addition, we can define
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) infix (&quot;@+&quot;)$
+
+(%i2) &quot;@+&quot;(x,y) := interval (part (x, 1) + part (y, 1), part (x, 2)
+      + part (y, 2))$
+
+(%i3) legendre_p (7, 0.1) @+ legendre_p (8, 0.1);
+(%o3) interval(- 0.019172222265624955, 6.5246488395313372E-15)
+</pre></div>
+
+<p>The special floating point routines get called when the arguments
+are complex.  For example,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) legendre_p (10, 2 + 3.0*%i);
+(%o1) interval(- 3.876378825E+7 %i - 6.0787748E+7, 
+                                           1.2089173052721777E-6)
+</pre></div>
+
+<p>Let&rsquo;s compare this to the true value.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) float (expand (legendre_p (10, 2 + 3*%i)));
+(%o1)          - 3.876378825E+7 %i - 6.0787748E+7
+</pre></div>
+
+<p>Additionally, when the arguments are big floats, the special floating point
+routines get called; however, the big floats are converted into double floats
+and the final result is a double.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ultraspherical (150, 0.5b0, 0.9b0);
+(%o1) interval(- 0.043009481257265, 3.3750051301228864E-14)
+</pre></div>
+
+</div>
+<div class="subsection-level-extent" id="Graphics-and-orthopoly">
+<h4 class="subsection">80.1.4 Graphics and <code class="code">orthopoly</code></h4>
+
+<p>To plot expressions that involve the orthogonal polynomials, you 
+must do two things:
+</p><ol class="enumerate">
+<li> Set the option variable <code class="code">orthopoly_returns_intervals</code> to <code class="code">false</code>,
+</li><li> Quote any calls to <code class="code">orthopoly</code> functions.
+</li></ol>
+<p>If function calls aren&rsquo;t quoted, Maxima evaluates them to polynomials before 
+plotting; consequently, the specialized floating point code doesn&rsquo;t get called.
+Here is an example of how to plot an expression that involves
+a Legendre polynomial.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d ('(legendre_p (5, x)), [x, 0, 1]),
+                        orthopoly_returns_intervals : false;
+(%o1)
+</pre></div>
+
+<img class="image" src="figures/orthopoly1.png" alt="figures/orthopoly1">
+
+<p>The <i class="i">entire</i> expression <code class="code">legendre_p (5, x)</code> is quoted; this is 
+different than just quoting the function name using <code class="code">'legendre_p (5, <var class="var">x</var>)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+</div>
+
+
+</div>
+<div class="subsection-level-extent" id="Miscellaneous-Functions">
+<h4 class="subsection">80.1.5 Miscellaneous Functions</h4>
+
+<p>The <code class="code">orthopoly</code> package defines the
+Pochhammer symbol and a unit step function. <code class="code">orthopoly</code> uses
+the Kronecker delta function and the unit step function in
+<code class="code">gradef</code> statements.
+</p>
+<p>To convert Pochhammer symbols into quotients of gamma functions,
+use <code class="code">makegamma</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) makegamma (pochhammer (x, n));
+                          gamma(x + n)
+(%o1)                     ------------
+                            gamma(x)
+(%i2) makegamma (pochhammer (1/2, 1/2));
+                                1
+(%o2)                       ---------
+                            sqrt(%pi)
+</pre></div>
+
+<p>Derivatives of the Pochhammer symbol are given in terms of the <code class="code">psi</code>
+function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) diff (pochhammer (x, n), x);
+(%o1)             (x)  (psi (x + n) - psi (x))
+                     n     0             0
+(%i2) diff (pochhammer (x, n), n);
+(%o2)                   (x)  psi (x + n)
+                           n    0
+</pre></div>
+
+<p>You need to be careful with the expression in (%o1); the difference of the
+<code class="code">psi</code> functions has polynomials when <code class="code"><var class="var">x</var> = -1, -2, .., -<var class="var">n</var></code>. These polynomials
+cancel with factors in <code class="code">pochhammer (<var class="var">x</var>, <var class="var">n</var>)</code> making the derivative a degree
+<code class="code"><var class="var">n</var> - 1</code> polynomial when <var class="var">n</var> is a positive integer.
+</p>
+<p>The Pochhammer symbol is defined for negative orders through its
+representation as a quotient of gamma functions. Consider
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) q : makegamma (pochhammer (x, n));
+                          gamma(x + n)
+(%o1)                     ------------
+                            gamma(x)
+(%i2) sublis ([x=11/3, n= -6], q);
+                               729
+(%o2)                        - ----
+                               2240
+</pre></div>
+
+<p>Alternatively, we can get this result directly.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) pochhammer (11/3, -6);
+                               729
+(%o1)                        - ----
+                               2240
+</pre></div>
+
+<p>The unit step function is left-continuous; thus
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [unit_step (-1/10), unit_step (0), unit_step (1/10)];
+(%o1)                       [0, 0, 1]
+</pre></div>
+
+<p>If you need a unit step function that is neither left or right continuous
+at zero, define your own using <code class="code">signum</code>; for example,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) xunit_step (x) := (1 + signum (x))/2$
+
+(%i2) [xunit_step (-1/10), xunit_step (0), xunit_step (1/10)];
+                                1
+(%o2)                       [0, -, 1]
+                                2
+</pre></div>
+
+<p>Do not redefine <code class="code">unit_step</code> itself; some code in <code class="code">orthopoly</code>
+requires that the unit step function be left-continuous.
+</p>
+</div>
+<div class="subsection-level-extent" id="Algorithms">
+<h4 class="subsection">80.1.6 Algorithms</h4>
+
+<p>Generally, <code class="code">orthopoly</code> does symbolic evaluation by using a hypergeometic 
+representation of the orthogonal polynomials. The hypergeometic 
+functions are evaluated using the (undocumented) functions <code class="code">hypergeo11</code> 
+and <code class="code">hypergeo21</code>. The exceptions are the half-integer Bessel functions 
+and the associated Legendre function of the second kind. The half-integer Bessel functions are
+evaluated using an explicit representation, and the associated Legendre 
+function of the second kind is evaluated using recursion.
+</p>
+<p>For floating point evaluation, we again convert most functions into
+a hypergeometic form; we evaluate the hypergeometic functions using 
+forward recursion. Again, the exceptions are the half-integer Bessel functions 
+and the associated Legendre function of the second kind. Numerically, 
+the half-integer Bessel functions are evaluated using the SLATEC code.
+</p>
+
+<a class="anchor" id="Item_003a-orthopoly_002fnode_002fFunctions-and-Variables-for-orthogonal-polynomials"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-orthogonal-polynomials">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-orthogonal-polynomials" accesskey="p" rel="prev">Introduction to orthogonal polynomials</a>, Up: <a href="#orthopoly_002dpkg" accesskey="u" rel="up">orthopoly</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-orthogonal-polynomials-1">80.2 Functions and Variables for orthogonal polynomials</h3>
+
+<a class="anchor" id="assoc_005flegendre_005fp"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fassoc_005flegendre_005fp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-assoc_005flegendre_005fp"><span class="category-def">Function: </span><span><strong class="def-name">assoc_legendre_p</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">m</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-assoc_005flegendre_005fp'> &para;</a></span></dt>
+<dd><p>The associated Legendre function of the first kind of degree <em class="math tex2jax_process">\(n\)</em> and
+order <em class="math tex2jax_process">\(m\)</em>, 
+\(P_{n}^{m}(z)\)
+, is a solution of the differential equation:
+</p>
+$$
+(1-z^2){d^2 w\over dz^2} - 2z{dw\over dz} + \left[n(n+1)-{m^2\over 1-z^2}\right] w = 0
+$$
+
+
+<p>This is related to the Legendre polynomial, 
+\(P_n(x)\)
+ via
+</p>
+$$
+P_n^m(x) = (-1)^m\left(1-x^2\right)^{m/2} {d^m\over dx^m} P_n(x)
+$$
+
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_779.htm">A&amp;S eqn 22.5.37</a>, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_334.htm">A&amp;S eqn 8.6.6</a>, and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_333.htm">A&amp;S eqn 8.2.5</a>.
+</p>
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) assoc_legendre_p(2,0,x);
+                                                 2
+                                        3 (1 - x)
+(%o1)                   (- 3 (1 - x)) + ---------- + 1
+                                            2
+(%i2) factor(%);
+                                      2
+                                   3 x  - 1
+(%o2)                              --------
+                                      2
+(%i3) factor(assoc_legendre_p(2,1,x));
+                                              2
+(%o3)                         - 3 x sqrt(1 - x )
+
+(%i4) (-1)^1*(1-x^2)^(1/2)*diff(legendre_p(2,x),x);
+                                                    2
+(%o4)                   - (3 - 3 (1 - x)) sqrt(1 - x )
+
+(%i5) factor(%);
+                                              2
+(%o5)                         - 3 x sqrt(1 - x )
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="assoc_005flegendre_005fq"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fassoc_005flegendre_005fq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-assoc_005flegendre_005fq"><span class="category-def">Function: </span><span><strong class="def-name">assoc_legendre_q</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">m</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-assoc_005flegendre_005fq'> &para;</a></span></dt>
+<dd><p>The associated Legendre function of the second kind of degree <em class="math tex2jax_process">\(n\)</em>
+and order <em class="math tex2jax_process">\(m\)</em>, 
+\(Q_{n}^{m}(z)\)
+, is a solution of the differential equation:
+</p>
+$$
+(1-z^2){d^2 w\over dz^2} - 2z{dw\over dz} + \left[n(n+1)-{m^2\over 1-z^2}\right] w = 0
+$$
+
+
+<p>Reference: Abramowitz and Stegun, equation 8.5.3 and 8.1.8.
+</p>
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) assoc_legendre_q(0,0,x);
+                                       x + 1
+                                 log(- -----)
+                                       x - 1
+(%o1)                            ------------
+                                      2
+(%i2) assoc_legendre_q(1,0,x);
+                                    x + 1
+                              log(- -----) x - 2
+                                    x - 1
+(%o2)/R/                      ------------------
+                                      2
+(%i3) assoc_legendre_q(1,1,x);
+(%o3)/R/ 
+          x + 1            2   2               2            x + 1            2
+    log(- -----) sqrt(1 - x ) x  - 2 sqrt(1 - x ) x - log(- -----) sqrt(1 - x )
+          x - 1                                             x - 1
+  - ---------------------------------------------------------------------------
+                                        2
+                                     2 x  - 2
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="chebyshev_005ft"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fchebyshev_005ft"></a><dl class="first-deffn">
+<dt class="deffn" id="index-chebyshev_005ft"><span class="category-def">Function: </span><span><strong class="def-name">chebyshev_t</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-chebyshev_005ft'> &para;</a></span></dt>
+<dd><p>The Chebyshev polynomial of the first kind of degree <em class="math tex2jax_process">\(n\)</em>, 
+\(T_n(x).\)
+</p>
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_779.htm">A&amp;S eqn 22.5.47</a>.
+</p>
+<p>The polynomials 
+\(T_n(x)\)
+ can be written in terms of a hypergeometric function:
+</p>
+$$
+T_n(x) = {_{2}}F_{1}\left(-n, n; {1\over 2}; {1-x\over 2}\right)
+$$
+
+
+<p>The polynomials can also be defined in terms of the sum
+</p>
+$$
+T_n(x) = {n\over 2} \sum_{r=0}^{\lfloor {n/2}\rfloor} {(-1)^r\over n-r} {n-r\choose k}(2x)^{n-2r}
+$$
+
+
+<p>or the Rodrigues formula
+</p>
+$$
+T_n(x) = {1\over \kappa_n  w(x)} {d^n\over dx^n}\left(w(x)(1-x^2)^n\right)
+$$
+
+
+<p>where
+</p>
+$$
+\eqalign{
+w(x) &= 1/\sqrt{1-x^2} \cr
+\kappa_n &= (-2)^n\left(1\over 2\right)_n
+}
+$$
+
+
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) chebyshev_t(2,x);
+                                                 2
+(%o1)                   (- 4 (1 - x)) + 2 (1 - x)  + 1
+(%i2) factor(%);
+                                      2
+(%o2)                              2 x  - 1
+(%i3) factor(chebyshev_t(3,x));
+                                       2
+(%o3)                            x (4 x  - 3)
+(%i4) factor(hgfred([-3,3],[1/2],(1-x)/2));
+                                       2
+(%o4)                            x (4 x  - 3)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="chebyshev_005fu"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fchebyshev_005fu"></a><dl class="first-deffn">
+<dt class="deffn" id="index-chebyshev_005fu"><span class="category-def">Function: </span><span><strong class="def-name">chebyshev_u</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-chebyshev_005fu'> &para;</a></span></dt>
+<dd><p>The Chebyshev polynomial of the second kind of degree <em class="math tex2jax_process">\(n\)</em>, 
+\(U_n(x)\)
+.
+</p>
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_779.htm">A&amp;S eqn 22.5.48</a>.
+</p>
+<p>The polynomials 
+\(U_n(x)\)
+ can be written in terms of a hypergeometric function:
+</p>
+$$
+U_n(x) = (n+1)\; {_{2}F_{1}}\left(-n, n+2; {3\over 2}; {1-x\over 2}\right)
+$$
+
+
+<p>The polynomials can also be defined in terms of the sum
+</p>
+$$
+U_n(x) = \sum_{r=0}^{\lfloor n/2 \rfloor} (-1)^r {n-r \choose r} (2x)^{n-2r}
+$$
+
+
+<p>or the Rodrigues formula
+</p>
+$$
+U_n(x) = {1\over \kappa_n  w(x)} {d^n\over dx^n}\left(w(x)(1-x^2)^n\right)
+$$
+
+
+<p>where
+</p>
+$$
+\eqalign{
+w(x) &= \sqrt{1-x^2} \cr
+\kappa_n &= {(-2)^n\left({3\over 2}\right)_n \over n+1}
+}
+$$
+<p>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) chebyshev_u(2,x);
+                                                  2
+                            8 (1 - x)    4 (1 - x)
+(%o1)                 3 ((- ---------) + ---------- + 1)
+                                3            3
+(%i2) expand(%);
+                                      2
+(%o2)                              4 x  - 1
+(%i3) expand(chebyshev_u(3,x));
+                                     3
+(%o3)                             8 x  - 4 x
+(%i4) expand(4*hgfred([-3,5],[3/2],(1-x)/2));
+                                     3
+(%o4)                             8 x  - 4 x
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="gen_005flaguerre"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fgen_005flaguerre"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gen_005flaguerre"><span class="category-def">Function: </span><span><strong class="def-name">gen_laguerre</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">a</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-gen_005flaguerre'> &para;</a></span></dt>
+<dd><p>The generalized Laguerre polynomial of degree <em class="math tex2jax_process">\(n\)</em>, 
+\(L_n^{(\alpha)}(x)\)
+.
+</p>
+<p>These can be defined by
+</p>
+$$
+L_n^{(\alpha)}(x) = {n+\alpha \choose n}\; {_1F_1}(-n; \alpha+1; x)
+$$
+
+
+<p>The polynomials can also be defined by the sum
+</p>
+$$
+L_n^{(\alpha)}(x) = \sum_{k=0}^n {(\alpha + k + 1)_{n-k} \over (n-k)! k!} (-x)^k
+$$
+
+
+<p>or the Rodrigues formula
+</p>
+$$
+L_n^{(\alpha)}(x) = {1\over \kappa_n  w(x)} {d^n\over dx^n}\left(w(x)x^n\right)
+$$
+
+
+<p>where
+</p>
+$$
+\eqalign{
+w(x) &= e^{-x}x^{\alpha} \cr
+\kappa_n &= n!
+}
+$$
+
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_780.htm">A&amp;S eqn 22.5.54</a>.
+</p>
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) gen_laguerre(1,k,x);
+                                             x
+(%o1)                         (k + 1) (1 - -----)
+                                           k + 1
+(%i2) gen_laguerre(2,k,x);
+                                         2
+                                        x            2 x
+                 (k + 1) (k + 2) (--------------- - ----- + 1)
+                                  (k + 1) (k + 2)   k + 1
+(%o2)            ---------------------------------------------
+                                       2
+(%i3) binomial(2+k,2)*hgfred([-2],[1+k],x);
+                                         2
+                                        x            2 x
+                 (k + 1) (k + 2) (--------------- - ----- + 1)
+                                  (k + 1) (k + 2)   k + 1
+(%o3)            ---------------------------------------------
+                                       2
+
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="hermite"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fhermite"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hermite"><span class="category-def">Function: </span><span><strong class="def-name">hermite</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-hermite'> &para;</a></span></dt>
+<dd><p>The Hermite polynomial of degree <em class="math tex2jax_process">\(n\)</em>, 
+\(H_n(x)\)
+.
+</p>
+<p>These polynomials may be defined by a hypergeometric function
+</p>
+$$
+H_n(x) = (2x)^n\; {_2F_0}\left(-{1\over 2} n, -{1\over 2}n+{1\over 2};;-{1\over x^2}\right)
+$$
+
+
+<p>or by the series
+</p>
+$$
+H_n(x) = n! \sum_{k=0}^{\lfloor n/2 \rfloor} {(-1)^k(2x)^{n-2k} \over k! (n-2k)!}
+$$
+
+
+<p>or the Rodrigues formula
+</p>
+$$
+H_n(x) = {1\over \kappa_n  w(x)} {d^n\over dx^n}\left(w(x)\right)
+$$
+
+
+<p>where
+</p>
+$$
+\eqalign{
+w(x) &= e^{-{x^2/2}} \cr
+\kappa_n &= (-1)^n
+}
+$$
+
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_780.htm">A&amp;S eqn 22.5.55</a>.
+</p>
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) hermite(3,x);
+                                              2
+                                           2 x
+(%o1)                          - 12 x (1 - ----)
+                                            3
+(%i2) expand(%);
+                                     3
+(%o2)                             8 x  - 12 x
+(%i3) expand(hermite(4,x));
+                                  4       2
+(%o3)                         16 x  - 48 x  + 12
+(%i4) expand((2*x)^4*hgfred([-2,-2+1/2],[],-1/x^2));
+                                  4       2
+(%o4)                         16 x  - 48 x  + 12
+(%i5) expand(4!*sum((-1)^k*(2*x)^(4-2*k)/(k!*(4-2*k)!),k,0,floor(4/2)));
+                                  4       2
+(%o5)                         16 x  - 48 x  + 12
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="intervalp"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fintervalp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-intervalp"><span class="category-def">Function: </span><span><strong class="def-name">intervalp</strong> <var class="def-var-arguments">(<var class="var">e</var>)</var><a class="copiable-link" href='#index-intervalp'> &para;</a></span></dt>
+<dd><p>Return <code class="code">true</code> if the input is an interval and return false if it isn&rsquo;t. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fp"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fjacobi_005fp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fp"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_p</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">a</var>, <var class="var">b</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-jacobi_005fp'> &para;</a></span></dt>
+<dd><p>The Jacobi polynomial, 
+\(P_n^{(a,b)}(x)\)
+.
+</p>
+<p>The Jacobi polynomials are actually defined for all
+<em class="math tex2jax_process">\(a\)</em> and <em class="math tex2jax_process">\(b\)</em>; however, the Jacobi polynomial
+weight <em class="math tex2jax_process">\((1 - x)^a (1 + x)^b\)</em> isn&rsquo;t integrable
+for 
+\(a \le -1\)
+ or 
+\(b \le -1\)
+. 
+</p>
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_779.htm">A&amp;S eqn 22.5.42</a>.
+</p>
+<p>The polynomial may be defined in terms of hypergeometric functions:
+</p>
+$$
+P_n^{(a,b)}(x) = {n+a\choose n} {_1F_2}\left(-n, n + a + b + 1; a+1; {1-x\over 2}\right)
+$$
+
+
+<p>or the Rodrigues formula
+</p>
+$$
+P_n^{(a, b)}(x) = {1\over \kappa_n  w(x)} {d^n\over dx^n}\left(w(x)\left(1-x^2\right)^n\right)
+$$
+
+
+<p>where
+</p>
+$$
+\eqalign{
+w(x) &= (1-x)^a(1-x)^b \cr
+\kappa_n &= (-2)^n n!
+}
+$$
+
+
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) jacobi_p(0,a,b,x);
+(%o1)                                  1
+(%i2) jacobi_p(1,a,b,x);
+                                    (b + a + 2) (1 - x)
+(%o2)                  (a + 1) (1 - -------------------)
+                                         2 (a + 1)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="laguerre"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002flaguerre"></a><dl class="first-deffn">
+<dt class="deffn" id="index-laguerre"><span class="category-def">Function: </span><span><strong class="def-name">laguerre</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-laguerre'> &para;</a></span></dt>
+<dd><p>The Laguerre polynomial, 
+\(L_n(x)\)
+ of degree <em class="math tex2jax_process">\(n\)</em>.
+</p>
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_778.htm">A&amp;S eqn 22.5.16</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_780.htm">A&amp;S eqn 22.5.54</a>.
+</p>
+<p>These are related to the generalized Laguerre polynomial by
+</p>
+$$
+L_n(x) = L_n^{(0)}(x)
+$$
+
+
+<p>The polynomials are given by the sum
+</p>
+$$
+L_n(x) = \sum_{k=0}^{n} {(-1)^k\over k!}{n \choose k} x^k
+$$
+
+
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) laguerre(1,x);
+(%o1)                                1 - x
+(%i2) laguerre(2,x);
+                                  2
+                                 x
+(%o2)                            -- - 2 x + 1
+                                 2
+(%i3) gen_laguerre(2,0,x);
+                                  2
+                                 x
+(%o3)                            -- - 2 x + 1
+                                 2
+(%i4) sum((-1)^k/k!*binomial(2,k)*x^k,k,0,2);
+                                  2
+                                 x
+(%o4)                            -- - 2 x + 1
+                                 2
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="legendre_005fp"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002flegendre_005fp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-legendre_005fp"><span class="category-def">Function: </span><span><strong class="def-name">legendre_p</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-legendre_005fp'> &para;</a></span></dt>
+<dd><p>The Legendre polynomial of the first kind, 
+\(P_n(x)\)
+, of degree <em class="math tex2jax_process">\(n\)</em>.
+</p>
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_779.htm">A&amp;S eqn 22.5.50</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_779.htm">A&amp;S eqn 22.5.51</a>.
+</p>
+<p>The Legendre polynomial is related to the Jacobi polynomials by
+</p>
+$$
+P_n(x) = P_n^{(0,0)}(x)
+$$
+
+
+<p>or the Rodrigues formula
+</p>
+$$
+P_n(x) = {1\over \kappa_n  w(x)} {d^n\over dx^n}\left(w(x)\left(1-x^2\right)^n\right)
+$$
+
+
+<p>where
+</p>
+$$
+\eqalign{
+w(x) &= 1 \cr
+\kappa_n &= (-2)^n n!
+}
+$$
+
+
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) legendre_p(1,x);
+(%o1)                                  x
+(%i2) legendre_p(2,x);
+                                                 2
+                                        3 (1 - x)
+(%o2)                   (- 3 (1 - x)) + ---------- + 1
+                                            2
+(%i3) expand(%);
+                                      2
+                                   3 x    1
+(%o3)                              ---- - -
+                                    2     2
+(%i4) expand(legendre_p(3,x));
+                                     3
+                                  5 x    3 x
+(%o4)                             ---- - ---
+                                   2      2
+(%i5) expand(jacobi_p(3,0,0,x));
+                                     3
+                                  5 x    3 x
+(%o5)                             ---- - ---
+                                   2      2
+</pre></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="legendre_005fq"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002flegendre_005fq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-legendre_005fq"><span class="category-def">Function: </span><span><strong class="def-name">legendre_q</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-legendre_005fq'> &para;</a></span></dt>
+<dd><p>The Legendre function of the second kind, 
+\(Q_n(x)\)
+ of degree <em class="math tex2jax_process">\(n\)</em>.
+</p>
+<p>Reference: Abramowitz and Stegun, equations 8.5.3 and 8.1.8.
+</p>
+<p>These are related to 
+\(Q_n^m(x)\)
+ by
+</p>
+$$
+Q_n(x) = Q_n^0(x)
+$$
+
+
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) legendre_q(0,x);
+                                       x + 1
+                                 log(- -----)
+                                       x - 1
+(%o1)                            ------------
+                                      2
+(%i2) legendre_q(1,x);
+                                    x + 1
+                              log(- -----) x - 2
+                                    x - 1
+(%o2)/R/                      ------------------
+                                      2
+(%i3) assoc_legendre_q(1,0,x);
+                                    x + 1
+                              log(- -----) x - 2
+                                    x - 1
+(%o3)/R/                      ------------------
+                                      2
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="orthopoly_005frecur"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002forthopoly_005frecur"></a><dl class="first-deffn">
+<dt class="deffn" id="index-orthopoly_005frecur"><span class="category-def">Function: </span><span><strong class="def-name">orthopoly_recur</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">args</var>)</var><a class="copiable-link" href='#index-orthopoly_005frecur'> &para;</a></span></dt>
+<dd><p>Returns a recursion relation for the orthogonal function family
+<var class="var">f</var> with arguments <var class="var">args</var>. The recursion is with 
+respect to the polynomial degree.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) orthopoly_recur (legendre_p, [n, x]);
+                    (2 n + 1) P (x) x - n P     (x)
+                               n           n - 1
+(%o1)   P     (x) = -------------------------------
+         n + 1                   n + 1
+</pre></div>
+
+<p>The second argument to <code class="code">orthopoly_recur</code> must be a list with the 
+correct number of arguments for the function <var class="var">f</var>; if it isn&rsquo;t, 
+Maxima signals an error.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) orthopoly_recur (jacobi_p, [n, x]);
+
+Function jacobi_p needs 4 arguments, instead it received 2
+ -- an error.  Quitting.  To debug this try debugmode(true);
+</pre></div>
+
+<p>Additionally, when <var class="var">f</var> isn&rsquo;t the name of one of the 
+families of orthogonal polynomials, an error is signalled.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) orthopoly_recur (foo, [n, x]);
+
+A recursion relation for foo isn't known to Maxima
+ -- an error.  Quitting.  To debug this try debugmode(true);
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-orthopoly_002fdefvr_002forthopoly_005freturns_005fintervals"></a><dl class="first-defvr">
+<dt class="defvr" id="index-orthopoly_005freturns_005fintervals"><span class="category-def">Variable: </span><span><strong class="def-name">orthopoly_returns_intervals</strong><a class="copiable-link" href='#index-orthopoly_005freturns_005fintervals'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">orthopoly_returns_intervals</code> is <code class="code">true</code>, floating point results are returned in
+the form <code class="code">interval (<var class="var">c</var>, <var class="var">r</var>)</code>, where <var class="var">c</var> is the center of an interval
+and <var class="var">r</var> is its radius. The center can be a complex number; in that
+case, the interval is a disk in the complex plane.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="orthopoly_005fweight"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002forthopoly_005fweight"></a><dl class="first-deffn">
+<dt class="deffn" id="index-orthopoly_005fweight"><span class="category-def">Function: </span><span><strong class="def-name">orthopoly_weight</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">args</var>)</var><a class="copiable-link" href='#index-orthopoly_005fweight'> &para;</a></span></dt>
+<dd>
+<p>Returns a three element list; the first element is 
+the formula of the weight for the orthogonal polynomial family
+<var class="var">f</var> with arguments given by the list <var class="var">args</var>; the 
+second and third elements give the lower and upper endpoints
+of the interval of orthogonality. For example,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) w : orthopoly_weight (hermite, [n, x]);
+                            2
+                         - x
+(%o1)                 [%e    , - inf, inf]
+(%i2) integrate(w[1]*hermite(3, x)*hermite(2, x), x, w[2], w[3]);
+(%o2)                           0
+</pre></div>
+
+<p>The main variable of <var class="var">f</var> must be a symbol; if it isn&rsquo;t, Maxima
+signals an error. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="pochhammer"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fpochhammer"></a><dl class="first-deffn">
+<dt class="deffn" id="index-pochhammer"><span class="category-def">Function: </span><span><strong class="def-name">pochhammer</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-pochhammer'> &para;</a></span></dt>
+<dd><p>The Pochhammer symbol, 
+\((x)_n\)
+. (See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_256.htm">A&amp;S eqn 6.1.22</a> and <a class="url" href="https://dlmf.nist.gov/5.2.iii">DLMF 5.2.iii</a>).
+</p>
+<p>For nonnegative
+integers <var class="var">n</var> with <code class="code"><var class="var">n</var> &lt;= pochhammer_max_index</code>, the
+expression 
+\((x)_n\)
+ evaluates to the
+product 
+\(x(x+1)(x+2)\cdots(x+n-1)\)
+ when 
+\(n > 0\)
+ and
+to 1 when <em class="math tex2jax_process">\(n = 0\)</em>.
+For negative <em class="math tex2jax_process">\(n\)</em>, 
+\((x)_n\)
+ is
+defined as 
+\((-1)^n/(1-x)_{-n}.\)
+</p>
+<p>Thus
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) pochhammer (x, 3);
+(%o1)                   x (x + 1) (x + 2)
+(%i2) pochhammer (x, -3);
+                                 1
+(%o2)               - -----------------------
+                      (1 - x) (2 - x) (3 - x)
+</pre></div>
+
+<p>To convert a Pochhammer symbol into a quotient of gamma functions,
+(see <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_256.htm">A&amp;S eqn 6.1.22</a>) use <code class="code">makegamma</code>; for example 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) makegamma (pochhammer (x, n));
+                          gamma(x + n)
+(%o1)                     ------------
+                            gamma(x)
+</pre></div>
+
+<p>When <var class="var">n</var> exceeds <code class="code">pochhammer_max_index</code> or when <var class="var">n</var> 
+is symbolic, <code class="code">pochhammer</code> returns a noun form.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) pochhammer (x, n);
+(%o1)                         (x)
+                                 n
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-orthopoly_002fdefvr_002fpochhammer_005fmax_005findex"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pochhammer_005fmax_005findex"><span class="category-def">Variable: </span><span><strong class="def-name">pochhammer_max_index</strong><a class="copiable-link" href='#index-pochhammer_005fmax_005findex'> &para;</a></span></dt>
+<dd><p>Default value: 100
+</p>
+<p><code class="code">pochhammer (<var class="var">n</var>, <var class="var">x</var>)</code> expands to a product if and only if
+<code class="code"><var class="var">n</var> &lt;= pochhammer_max_index</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) pochhammer (x, 3), pochhammer_max_index : 3;
+(%o1)                   x (x + 1) (x + 2)
+(%i2) pochhammer (x, 4), pochhammer_max_index : 3;
+(%o2)                         (x)
+                                 4
+</pre></div>
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_256.htm">A&amp;S eqn 6.1.16</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="spherical_005fbessel_005fj"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fspherical_005fbessel_005fj"></a><dl class="first-deffn">
+<dt class="deffn" id="index-spherical_005fbessel_005fj"><span class="category-def">Function: </span><span><strong class="def-name">spherical_bessel_j</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-spherical_005fbessel_005fj'> &para;</a></span></dt>
+<dd><p>The spherical Bessel function of the first kind, 
+\(j_n(x).\)
+</p>
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_437.htm">A&amp;S eqn 10.1.8</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_439.htm">A&amp;S eqn 10.1.15</a>.
+</p>
+<p>It is related to the Bessel function by
+</p>
+$$
+j_n(x) = \sqrt{\pi\over 2x} J_{n+1/2}(x)
+$$
+
+
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) spherical_bessel_j(1,x);
+                                sin(x)
+                                ------ - cos(x)
+                                  x
+(%o1)                           ---------------
+                                       x
+(%i2) spherical_bessel_j(2,x);
+                                3             3 cos(x)
+                        (- (1 - --) sin(x)) - --------
+                                 2               x
+                                x
+(%o2)                   ------------------------------
+                                      x
+(%i3) expand(%);
+                          sin(x)    3 sin(x)   3 cos(x)
+(%o3)                  (- ------) + -------- - --------
+                            x           3          2
+                                       x          x
+(%i4) expand(sqrt(%pi/(2*x))*bessel_j(2+1/2,x)),besselexpand:true;
+                          sin(x)    3 sin(x)   3 cos(x)
+(%o4)                  (- ------) + -------- - --------
+                            x           3          2
+                                       x          x
+</pre></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="spherical_005fbessel_005fy"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fspherical_005fbessel_005fy"></a><dl class="first-deffn">
+<dt class="deffn" id="index-spherical_005fbessel_005fy"><span class="category-def">Function: </span><span><strong class="def-name">spherical_bessel_y</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-spherical_005fbessel_005fy'> &para;</a></span></dt>
+<dd><p>The spherical Bessel function of the second kind, 
+\(y_n(x).\)
+</p>
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_437.htm">A&amp;S eqn 10.1.9</a> and <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_439.htm">A&amp;S eqn 10.1.15</a>.
+</p>
+<p>It is related to the Bessel function by
+</p>
+$$
+y_n(x) = \sqrt{\pi\over 2x} Y_{n+1/2}(x)
+$$
+
+
+<div class="example">
+<pre class="example-preformatted">(%i1) spherical_bessel_y(1,x);
+                                           cos(x)
+                              (- sin(x)) - ------
+                                             x
+(%o1)                         -------------------
+                                       x
+(%i2) spherical_bessel_y(2,x);
+                           3 sin(x)        3
+                           -------- - (1 - --) cos(x)
+                              x             2
+                                           x
+(%o2)                    - --------------------------
+                                       x
+(%i3) expand(%);
+                          3 sin(x)    cos(x)   3 cos(x)
+(%o3)                  (- --------) + ------ - --------
+                              2         x          3
+                             x                    x
+(%i4) expand(sqrt(%pi/(2*x))*bessel_y(2+1/2,x)),besselexpand:true;
+                          3 sin(x)    cos(x)   3 cos(x)
+(%o4)                  (- --------) + ------ - --------
+                              2         x          3
+                             x                    x
+</pre></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="spherical_005fhankel1"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fspherical_005fhankel1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-spherical_005fhankel1"><span class="category-def">Function: </span><span><strong class="def-name">spherical_hankel1</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-spherical_005fhankel1'> &para;</a></span></dt>
+<dd><p>The spherical Hankel function of the
+first kind, 
+\(h_n^{(1)}(x).\)
+</p>
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_439.htm">A&amp;S eqn 10.1.36</a>.
+</p>
+<p>This is defined by
+</p>
+$$
+h_n^{(1)}(x) = j_n(x) + iy_n(x)
+$$
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="spherical_005fhankel2"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fspherical_005fhankel2"></a><dl class="first-deffn">
+<dt class="deffn" id="index-spherical_005fhankel2"><span class="category-def">Function: </span><span><strong class="def-name">spherical_hankel2</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-spherical_005fhankel2'> &para;</a></span></dt>
+<dd><p>The spherical Hankel function of the
+second kind, 
+\(h_n^{(2)}(x).\)
+</p>
+
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_439.htm">A&amp;S eqn 10.1.17</a>.
+</p>
+<p>This is defined by
+</p>
+$$
+h_n^{(2)}(x) = j_n(x) + iy_n(x)
+$$
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Bessel-functions">Bessel functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="spherical_005fharmonic"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fspherical_005fharmonic"></a><dl class="first-deffn">
+<dt class="deffn" id="index-spherical_005fharmonic"><span class="category-def">Function: </span><span><strong class="def-name">spherical_harmonic</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">m</var>, <var class="var">theta</var>, <var class="var">phi</var>)</var><a class="copiable-link" href='#index-spherical_005fharmonic'> &para;</a></span></dt>
+<dd><p>The spherical harmonic function, 
+\(Y_n^m(\theta, \phi)\)
+.
+</p>
+<p>Spherical harmonics satisfy the angular part of Laplace&rsquo;s equation in spherical coordinates.
+</p>
+<p>For integers <em class="math tex2jax_process">\(n\)</em> and <em class="math tex2jax_process">\(m\)</em> such
+that 
+\(n \geq |m|\)
+ and
+for 
+\(\theta \in [0, \pi]\)
+, Maxima’s
+spherical harmonic function can be defined by
+</p>
+$$
+Y_n^m(\theta, \phi) = (-1)^m \sqrt{{2n+1\over 4\pi} {(n-m)!\over (n+m)!}} P_n^m(\cos\theta) e^{im\phi}
+$$
+
+ 
+
+<p>Further, when 
+\(n < |m|\)
+, the
+spherical harmonic function vanishes.
+</p>
+<p>The factor <em class="math tex2jax_process">\((-1)^m\)</em>, frequently used in Quantum mechanics, is
+called the <a class="url" href="https://en.wikipedia.org/wiki/Spherical_harmonics#Condon%E2%80%93Shortley_phase">Condon-Shortely phase</a>.
+Some references, including <em class="emph">NIST Digital Library of Mathematical Functions</em> omit
+this factor; see <a class="url" href="http://dlmf.nist.gov/14.30.E1">http://dlmf.nist.gov/14.30.E1</a>.
+</p>
+<p>Reference: Merzbacher 9.64.
+</p>
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) spherical_harmonic(1,0,theta,phi);
+                              sqrt(3) cos(theta)
+(%o1)                         ------------------
+                                 2 sqrt(%pi)
+(%i2) spherical_harmonic(1,1,theta,phi);
+                                    %i phi
+                          sqrt(3) %e       sin(theta)
+(%o2)                     ---------------------------
+                                 3/2
+                                2    sqrt(%pi)
+(%i3) spherical_harmonic(1,-1,theta,phi);
+                                    - %i phi
+                          sqrt(3) %e         sin(theta)
+(%o3)                   - -----------------------------
+                                  3/2
+                                 2    sqrt(%pi)
+(%i4) spherical_harmonic(2,0,theta,phi);
+                                                              2
+                                            3 (1 - cos(theta))
+          sqrt(5) ((- 3 (1 - cos(theta))) + ------------------- + 1)
+                                                     2
+(%o4)     ----------------------------------------------------------
+                                 2 sqrt(%pi)
+(%i5) factor(%);
+                                        2
+                          sqrt(5) (3 cos (theta) - 1)
+(%o5)                     ---------------------------
+                                  4 sqrt(%pi)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="unit_005fstep"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002funit_005fstep"></a><dl class="first-deffn">
+<dt class="deffn" id="index-unit_005fstep"><span class="category-def">Function: </span><span><strong class="def-name">unit_step</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-unit_005fstep'> &para;</a></span></dt>
+<dd><p>The left-continuous unit step function; thus
+<code class="code">unit_step (<var class="var">x</var>)</code> vanishes for <code class="code"><var class="var">x</var> &lt;= 0</code> and equals
+1 for <code class="code"><var class="var">x</var> &gt; 0</code>.
+</p>
+<p>If you want a unit step function that takes on the value 1/2 at zero,
+use <code class="code"><a class="ref" href="maxima_9.html#hstep">hstep</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ultraspherical"></a><a class="anchor" id="Item_003a-orthopoly_002fdeffn_002fultraspherical"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ultraspherical"><span class="category-def">Function: </span><span><strong class="def-name">ultraspherical</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">a</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-ultraspherical'> &para;</a></span></dt>
+<dd><p>The ultraspherical polynomial, 
+\(C_n^{(a)}(x)\)
+ (also known as the Gegenbauer polynomial).
+</p>
+<p>Reference: <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_779.htm">A&amp;S eqn 22.5.46</a>.
+</p>
+<p>These polynomials can be given in terms of Jacobi polynomials:
+</p>
+$$
+C_n^{(\alpha)}(x) = {\Gamma\left(\alpha + {1\over 2}\right) \over \Gamma(2\alpha)}
+   {\Gamma(n+2\alpha) \over \Gamma\left(n+\alpha + {1\over 2}\right)}
+   P_n^{(\alpha-1/2, \alpha-1/2)}(x)
+$$
+
+
+<p>or the series
+</p>
+$$
+C_n^{(\alpha)}(x) = \sum_{k=0}^{\lfloor n/2 \rfloor} {(-1)^k (\alpha)_{n-k} \over k! (n-2k)!}(2x)^{n-2k}
+$$
+
+
+<p>or the Rodrigues formula
+</p>
+$$
+C_n^{(\alpha)}(x) = {1\over \kappa_n  w(x)} {d^n\over dx^n}\left(w(x)\left(1-x^2\right)^n\right)
+$$
+
+
+<p>where
+</p>
+$$
+\eqalign{
+w(x) &= \left(1-x^2\right)^{\alpha-{1\over 2}} \cr
+\kappa_n &= {(-2)^n\left(\alpha + {1\over 2}\right)_n n!\over (2\alpha)_n} \cr
+}
+$$
+
+
+<p>Some examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) ultraspherical(1,a,x);
+                                   (2 a + 1) (1 - x)
+(%o1)                     2 a (1 - -----------------)
+                                              1
+                                       2 (a + -)
+                                              2
+(%i2) factor(%);
+(%o2)                                2 a x
+(%i3) factor(ultraspherical(2,a,x));
+                                     2      2
+(%o3)                        a (2 a x  + 2 x  - 1)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-orthopoly">Package orthopoly</a>
+&middot;
+</div>
+
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_80.html#pslq_002dpkg" accesskey="n" rel="next">pslq</a>, Previous: <a href="maxima_78.html#opsubst_002dpkg" accesskey="p" rel="prev">opsubst</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

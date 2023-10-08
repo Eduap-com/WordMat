@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions in pytranslate</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions in pytranslate">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions in pytranslate">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_342.html#pytranslate" rel="up" title="pytranslate">
+<link href="maxima_345.html#Extending-pytranslate" rel="next" title="Extending pytranslate">
+<link href="maxima_343.html#Introduction-to-pytranslate" rel="previous" title="Introduction to pytranslate">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-in-pytranslate"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_345.html#Extending-pytranslate" accesskey="n" rel="next">Extending pytranslate</a>, Previous: <a href="maxima_343.html#Introduction-to-pytranslate" accesskey="p" rel="previous">Introduction to pytranslate</a>, Up: <a href="maxima_342.html#pytranslate" accesskey="u" rel="up">pytranslate</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-in-pytranslate-1"></a>
+<h3 class="section">82.2 Functions in pytranslate</h3>
+
+<a name="Item_003a-pytranslate_002fdeffn_002fpytranslate"></a><dl>
+<dt><a name="index-pytranslate"></a>Function: <strong>pytranslate</strong> <em>(<var>expr</var>, [print-ir])</em></dt>
+<dd><p>Translates the expression <var>expr</var> to equivalent python3 statements. Output is printed in the stdout.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;pytranslate&quot;)$
+</pre><pre class="example">(%i2) pytranslate('(for i:8 step -1 unless i&lt;3 do (print(i))));
+(%o2) 
+v[&quot;i&quot;] = 8
+while not((v[&quot;i&quot;] &lt; 3)):
+    m[&quot;print&quot;](v[&quot;i&quot;])
+    v[&quot;i&quot;] = (v[&quot;i&quot;] + -1)
+del v[&quot;i&quot;]
+</pre></div>
+
+<p><var>expr</var> is evaluated, and the return value is used for translation. Hence, for statements like assignment, it might be useful to quote the statement:
+</p><div class="example">
+<pre class="example">(%i1) load (&quot;pytranslate&quot;)$
+</pre><pre class="example">(%i2) pytranslate(x:20);
+(%o2) 
+20
+</pre><pre class="example">(%i3) pytranslate('(x:20));
+(%o3) 
+v[&quot;x&quot;] = 20
+</pre></div>
+
+<p>Passing the optional parameter (<var>print-ir</var>) to <code>pytranslate</code> as t, will print the internal IR representation of <code>expr</code> and return the translated python3 code.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;pytranslate&quot;);
+(%o1) pytranslate
+</pre><pre class="example">(%i2) pytranslate('(plot3d(lambda([x, y], x^2+y^(-1)), [x, 1, 10],
+                   [y, 1, 10])), t);
+(body
+ (funcall (element-array &quot;m&quot; (string &quot;plot3d&quot;))
+          (lambda
+              ((symbol &quot;x&quot;) (symbol &quot;y&quot;)
+               (op-no-bracket
+                =
+                (symbol &quot;v&quot;)
+                (funcall (symbol &quot;stack&quot;) (dictionary) (symbol &quot;v&quot;))))
+            (op +
+                (funcall (element-array (symbol &quot;m&quot;) (string &quot;pow&quot;))
+                         (symbol &quot;x&quot;) (num 2 0))
+                (funcall (element-array (symbol &quot;m&quot;) (string &quot;pow&quot;))
+                         (symbol &quot;y&quot;) (unary-op - (num 1 0)))))
+          (struct-list (string &quot;x&quot;) (num 1 0) (num 10 0))
+          (struct-list (string &quot;y&quot;) (num 1 0) (num 10 0))))
+(%o2) 
+m[&quot;plot3d&quot;](lambda x, y, v = Stack({}, v): (m[&quot;pow&quot;](x, 2) + m[&quot;\
+pow&quot;](y, (-1))), [&quot;x&quot;, 1, 10], [&quot;y&quot;, 1, 10])
+</pre></div>
+</dd></dl>
+
+<a name="Item_003a-pytranslate_002fdeffn_002fshow_005fform"></a><dl>
+<dt><a name="index-show_005fform"></a>Function: <strong>show_form</strong> <em>(<var>expr</var>)</em></dt>
+<dd><p>Displays the internal maxima form of <code>expr</code>
+</p><div class="example">
+<pre class="example">(%i4) show_form(a^b);
+((mexpt) $a $b) 
+(%o4) a^b
+</pre></div>
+</dd></dl>
+
+<a name="Item_003a-pytranslate_002fnode_002fExtending-pytranslate"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_345.html#Extending-pytranslate" accesskey="n" rel="next">Extending pytranslate</a>, Previous: <a href="maxima_343.html#Introduction-to-pytranslate" accesskey="p" rel="previous">Introduction to pytranslate</a>, Up: <a href="maxima_342.html#pytranslate" accesskey="u" rel="up">pytranslate</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

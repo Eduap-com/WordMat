@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Gentran Option Variables</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Gentran Option Variables">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Gentran Option Variables">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_277.html#gentran_002dpkg" rel="up" title="gentran-pkg">
+<link href="maxima_282.html#Gentran-Evaluation-Forms" rel="next" title="Gentran Evaluation Forms">
+<link href="maxima_280.html#Gentran-Mode-Switches" rel="previous" title="Gentran Mode Switches">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Gentran-Option-Variables"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_282.html#Gentran-Evaluation-Forms" accesskey="n" rel="next">Gentran Evaluation Forms</a>, Previous: <a href="maxima_280.html#Gentran-Mode-Switches" accesskey="p" rel="previous">Gentran Mode Switches</a>, Up: <a href="maxima_277.html#gentran_002dpkg" accesskey="u" rel="up">gentran-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Gentran-Option-Variables-1"></a>
+<h3 class="section">61.4 Gentran Option Variables</h3>
+
+<a name="Item_003a-gentran_002fdefvr_002fgentranlang"></a><dl>
+<dt><a name="index-gentranlang"></a>Option variable: <strong>gentranlang</strong></dt>
+<dd><p>Default: fortran
+</p>
+<p>Selects the target numerical language. Currently, gentranlang must be
+fortran, ratfor, or c. Note that symbols entered in Maxima are
+case-sensitive. gentranlang should not be set to FORTRAN, RATFOR or C.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002ffortlinelen"></a><dl>
+<dt><a name="index-fortlinelen"></a>Option variable: <strong>fortlinelen</strong></dt>
+<dd><p>default: 72
+</p>
+<p>Maximum number of characters printed on each line of generated FORTRAN
+code.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fminfortlinelen"></a><dl>
+<dt><a name="index-minfortlinelen"></a>Option variable: <strong>minfortlinelen</strong></dt>
+<dd><p>Default: 40
+</p>
+<p>Minimum number of characters printed on each line of generated FORTRAN
+code.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002ffortcurrind"></a><dl>
+<dt><a name="index-fortcurrind"></a>Option variable: <strong>fortcurrind</strong></dt>
+<dd><p>Default: 0
+</p>
+<p>Number of blank spaces printed at the beginning of each line of
+generated FORTRAN code (after column 6).
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fratlinelen"></a><dl>
+<dt><a name="index-ratlinelen"></a>Option variable: <strong>ratlinelen</strong></dt>
+<dd><p>Default: 80
+</p>
+<p>Maximum number of characters printed on each line of generated Ratfor
+code.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fclinelen"></a><dl>
+<dt><a name="index-clinelen"></a>Option variable: <strong>clinelen</strong></dt>
+<dd><p>Default: 80
+</p>
+<p>Maximum number of characters printed on each line of generated &rsquo;C&rsquo; code.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fminclinelen"></a><dl>
+<dt><a name="index-minclinelen"></a>Option variable: <strong>minclinelen</strong></dt>
+<dd><p>Default: 40
+</p>
+<p>Minimum number of characters printed on each line of generated &rsquo;C&rsquo; code.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fccurind"></a><dl>
+<dt><a name="index-ccurind"></a>Option variable: <strong>ccurind</strong></dt>
+<dd><p>Default: 0
+</p>
+<p>Number of blank spaces printed at the beginning of each line of
+generated&rsquo;C&rsquo; code.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002ftablen"></a><dl>
+<dt><a name="index-tablen"></a>Option variable: <strong>tablen</strong></dt>
+<dd><p>Default: 4
+</p>
+<p>Number of blank spaces printed for each new level of indentation.
+(Automatic indentation can be turned off by setting this variable to 0.)
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fgenfloat"></a><dl>
+<dt><a name="index-genfloat"></a>Option variable: <strong>genfloat</strong></dt>
+<dd><p>Default: false
+</p>
+<p>When set to true (or any non-false value), causes integers in generated
+numerical code to be converted to floating point numbers, except in the
+following places: array subscripts, exponents, and initial, final, and
+step values in do-loops. An exception (for compatibility with Macsyma
+2.4) is that numbers in exponentials (with base %e only) are
+double-floated even when genfloat is false.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fdblfloat"></a><dl>
+<dt><a name="index-dblfloat"></a>Option variable: <strong>dblfloat</strong></dt>
+<dd><p>Default: <strong>false</strong> If dblfloat is set to
+true, floating point numbers in gentran output in implementations (such
+as Windows Maxima under CLISP) in which float and double-float are the
+same will be printed as *.d0. In implementations in which float and
+double-float are different, floats will be coerced to double-float
+before being printed.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fgentranseg"></a><dl>
+<dt><a name="index-gentranseg"></a>Option variable: <strong>gentranseg</strong></dt>
+<dd><p>Default: <strong>true</strong>
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fmaxexpprintlen"></a><dl>
+<dt><a name="index-maxexpprintlen"></a>Option variable: <strong>maxexpprintlen</strong></dt>
+<dd><p>Default: 800
+</p>
+<p>When <strong>gentranseg</strong> is true (or any non-false value), causes
+Gentran to &quot;segment&quot; large expressions into subexpressions of manageable
+size. The segmentation facility generates a sequence of assignment
+statements, each of which assigns a subexpression to an automatically
+generated temporary variable name. This sequence is generated in such a
+way that temporary variables are re-used as soon as possible, thereby
+keeping the number of automatically generated variables to a minimum.
+The maximum allowable expression size can be controlled by setting the
+<strong>maxexpprintlen</strong> variable to the maximum number of characters
+allowed in an expression printed in the target numerical language
+(excluding spaces and other whitespace characters automatically printed
+by the formatter). When the segmentation routine generates temporary
+variables, it places type declarations in the symbol table for those
+variables if possible. It uses the following rules to determine their
+type:
+</p>
+<p>1. If the type of the variable to which the large expression is being
+assigned is already known (i.e., has been declared by the user via a
+TYPE form), then the temporary variables will be declared to be of that
+same type. 2. If the global variable <strong>tempvartype</strong> has a
+non-false value, then the temporary variables are declared to be of that
+type. 3. Otherwise, the variables are not declared unless
+<strong>implicit</strong> has been set to <strong>true</strong>.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fgentranopt"></a><dl>
+<dt><a name="index-gentranopt"></a>Option variable: <strong>gentranopt</strong></dt>
+<dd><p>Default: <strong>false</strong>
+</p>
+<p>When set to true (or any non-false value), causes Gentran to replace
+each block of straightline code by an optimized sequence of assignments
+obtained from the Maxima optimize command. (The optimize command takes
+an expression and replaces common subexpressions by temporary variable
+names. It returns the resulting assignment statement, preceded by
+common-subexpression-to-temporary-variable assignments.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002ftempvarname"></a><dl>
+<dt><a name="index-tempvarname"></a>Option variable: <strong>tempvarname</strong></dt>
+<dd><p>Default: <strong>&rsquo;t</strong>
+</p>
+<p>Name used as the prefix when generating temporary variable names.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002foptimvarname"></a><dl>
+<dt><a name="index-optimvarname"></a>Option variable: <strong>optimvarname</strong></dt>
+<dd><p>default: <strong>&rsquo;u</strong>
+</p>
+<p>is the preface used
+to generate temporary file names produced by the optimizer when
+<strong>gentranopt</strong> is <strong>true</strong>. When both gentranseg and
+gentranopt are true, the optimizer generates temporary file names using
+<strong>optimvarname</strong> while the segmentation routine uses
+<strong>tempvarname</strong> preventing conflict.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002ftempvarnum"></a><dl>
+<dt><a name="index-tempvarnum"></a>Option variable: <strong>tempvarnum</strong></dt>
+<dd><p>Default: 0
+</p>
+<p>Number appended onto tempvarname to create a temporary variable name. If
+the temporary variable name resulting from appending tempvarnum onto the
+end of tempvarname has already been generated and still holds a useful
+value or has a different type than requested, then the number is
+incremented until one is found that was not previously generated or does
+not still hold a significant value or a different type.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002ftempvartype"></a><dl>
+<dt><a name="index-tempvartype"></a>Option variable: <strong>tempvartype</strong></dt>
+<dd><p>Default: <strong>false</strong>
+</p>
+<p>Target language variable type (e.g., INTEGER, REAL*8, FLOAT, etc.) used
+as a default for automatically generated variables whose type cannot be
+determined otherwise. If tempvartype is false, then generated temporary
+variables whose type cannot be determined are not automatically
+declared.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fimplicit"></a><dl>
+<dt><a name="index-implicit-1"></a>Option variable: <strong>implicit</strong></dt>
+<dd><p>Default: <strong>false</strong>
+</p>
+<p>If implicit is set to <strong>true</strong> temporary variables are assigned
+their implicit type according to Fortran rules based on the initial
+letter of the name. If gendecs is on, this results in printed type
+declarations.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fgentranparser"></a><dl>
+<dt><a name="index-gentranparser"></a>Option variable: <strong>gentranparser</strong></dt>
+<dd><p>Default: <strong>false</strong>
+</p>
+<p>If gentranparser is set to <strong>true</strong> Maxima forms input to gentran
+will be parsed and an error will be produced if an expression cannot be
+translated. Otherwise, untranslatable expressions may generate anomalous
+output, sometimes containing explicit calls to Maxima functions.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fgenstmtno"></a><dl>
+<dt><a name="index-genstmtno"></a>Option variable: <strong>genstmtno</strong></dt>
+<dd><p>Default: 25000
+</p>
+<p>Number used when a statement number must be generated. Note: it is the
+user&rsquo;s responsibility to make sure this number will not clash with
+statement numbers in template files.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fgenstmtincr"></a><dl>
+<dt><a name="index-genstmtincr"></a>Option variable: <strong>genstmtincr</strong></dt>
+<dd><p>Default: 1
+</p>
+<p>number by which genstmtno is incremented each time a new statement
+number is generated.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fusefortcomplex"></a><dl>
+<dt><a name="index-usefortcomplex"></a>Option variable: <strong>usefortcomplex</strong></dt>
+<dd><p>Default: <strong>false</strong>
+</p>
+<p>If usefortcomplex is true, real numbers in expressions declared to be
+complex by <em>type(complex,&hellip;)</em> will be printed in Fortran
+complex number format <em>(realpart,0.0)</em>. This is a purely syntactic
+device and does not carry out any complex calculations.
+</p>
+</dd></dl>
+
+<a name="Item_003a-gentran_002fnode_002fGentran-Evaluation-Forms"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_282.html#Gentran-Evaluation-Forms" accesskey="n" rel="next">Gentran Evaluation Forms</a>, Previous: <a href="maxima_280.html#Gentran-Mode-Switches" accesskey="p" rel="previous">Gentran Mode Switches</a>, Up: <a href="maxima_277.html#gentran_002dpkg" accesskey="u" rel="up">gentran-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

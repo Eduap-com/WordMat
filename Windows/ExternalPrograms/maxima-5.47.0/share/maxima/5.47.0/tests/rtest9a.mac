@@ -1,0 +1,578 @@
+/*************** -*- Mode: MACSYMA; Package: MAXIMA -*-  ******************/
+/***************************************************************************
+***                                                                    *****
+***     Copyright (c) 1984 by William Schelter,University of Texas     *****
+***     All rights reserved                                            *****
+***************************************************************************/
+
+
+kill(all);
+done;
+deftaylor(f(x),x^2+sum(x^i/(2^i*i!^2),i,4,inf));
+[f]$
+taylor(%e^sqrt(f(x)),x,0,4);
+1+x+x^2/2+3073*x^3/18432+12817*x^4/307200$
+
+ev(x+sin(3*x)/sin(x),trigexpand,expand);
+-sin(x)^2+3*cos(x)^2+x$
+trigexpand(sin(10*x+y));
+cos(10*x)*sin(y)+sin(10*x)*cos(y)$
+-sin(x)^2+3*cos(x)^2+x;
+-sin(x)^2+3*cos(x)^2+x$
+expand(trigreduce(%));
+2*cos(2*x)+x+1$
+declare(j,integer,e,even,o,odd);
+done$
+sin(x+(e+1/2)*%pi),expand;
+cos(x)$
+sin(x+(o+1/2)*%pi),expand;
+-cos(x)$
+(linel:500,diff(exp(x^2+y)/(x+y),x,2));
+4*x^2*%e^(y+x^2)/(y+x)+2*%e^(y+x^2)/(y+x)-4*x*%e^(y+x^2)/(y+x)^2 +2*%e^(y+x^2)/(y+x)^3$
+
+sconcat(optimize(%));
+"block([%1,%2,%3,%4],%1:y+x,%2:x^2,%3:%e^(y+%2),%4:1/%1,4*%2*%4*%3+2*%4*%3-(4*x*%3)/%1^2+(2*%3)/%1^3)"$
+
+linel:79;
+79$
+laplace(%e^(2*t+a)*sin(t)*t,t,s);
+%e^a*(2*s-4)/(s^2-4*s+5)^2$
+'integrate(sinh(a*x)*f(t-x),x,0,t)+b*f(t) = t^2;
+'integrate(f(t-x)*sinh(a*x),x,0,t)+b*f(t) = t^2$
+
+expand(laplace(%,t,s),0,0);
+''(expand(b*laplace(f(t),t,s)+a*laplace(f(t),t,s)/(s^2-a^2) = 2/s^3,0,0))$
+
+linsolve([%],['laplace(f(t),t,s)]);
+['laplace(f(t),t,s) = (2*s^2-2*a^2)/(b*s^5+(a-a^2*b)*s^3)]$
+
+(exp : %,0);
+0$
+
+assume(a>0,b>0,a*b>1);
+[a>0,b>0,a*b>1];
+ilt(ev(exp[1]),s,t);
+f(t)=-2*cosh(sqrt(a*b*(a*b-1))*t/b)/(a^3*b^2-2*a^2*b+a)+a*t^2/(a*b-1)+2/(a^3*b^2-2*a^2*b+a)$
+forget(a>0,b>0,a*b>1);
+[a>0,b>0,a*b>1];
+
+/* bug reported to mailing list 2015-02-16: expand phenomenon */
+
+block ([f1, f2], f1:y=(x+1)*(x+3), f2:expand(f1), string (expand(f1)=expand(f2)));
+"(y = x^2+4*x+3) = (y = x^2+4*x+3)";
+
+string ((a = b) = (c = d));
+"(a = b) = (c = d)";
+
+/* following is supposed to test pretty printing code path
+ * not sure if embedded newline will be recognized appropriately on Windows
+ */
+block ([s, stuff],
+  with_default_2d_display( 
+    s : make_string_output_stream (),
+    with_stdout (s, print ((a = b) = (c = d))),
+    stuff : get_output_stream_string (s),
+    close (s),
+    stuff));
+"(a = b) = (c = d) 
+";
+
+infix ("foo");
+"foo";
+
+string ((a foo b) foo (c foo d));
+"(a foo b) foo (c foo d)";
+
+/* following is supposed to test pretty printing code path
+ * not sure if embedded newline will be recognized appropriately on Windows
+ */
+block ([s, stuff],
+  with_default_2d_display( 
+    s : make_string_output_stream (),
+    with_stdout (s, print ((a foo b) foo (c foo d))),
+    stuff : get_output_stream_string (s),
+    close (s),
+    stuff));
+"(a foo b) foo (c foo d) 
+";
+
+kill ("foo");
+done;
+
+/* mailing list 2015-09-08 and SF bug #3019: "transfer function" */
+
+(verify_display_2d (expr, expected_output) :=
+  block ([S, output],
+    with_default_2d_display
+     (S : make_string_output_stream (),
+      with_stdout (S, print (expr)),
+      output : get_output_stream_string (S),
+      close (S),
+      if is (output = expected_output) then true else [expected_output, output])),
+ verify_display_1d (expr, expected_output) :=
+   block ([output : string (expr)], if is (output = expected_output) then true else [expected_output, output]),
+ 0);
+0;
+
+block ([powerdisp : false],
+  verify_display_2d ((x+1)/(x+2),
+"x + 1
+----- 
+x + 2
+"));
+true;
+
+block ([powerdisp : true],
+  verify_display_2d ((x+1)/(x+2),
+"1 + x
+----- 
+2 + x
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d ((x+1)/(x+2), "(x+1)/(x+2)"));
+true;
+
+block ([powerdisp : true], verify_display_1d ((x+1)/(x+2), "(1+x)/(2+x)"));
+true;
+
+(H : ( n2 * s^2 + n1 * s + n0 ) / ( d2 * s^2 + d1 * s + d0 ), 0);
+0;
+
+block ([powerdisp : false], verify_display_2d (H,
+"    2
+n2 s  + n1 s + n0
+----------------- 
+    2
+d2 s  + d1 s + d0
+"));
+true;
+
+block ([powerdisp : true], verify_display_2d (H,
+"                2
+n0 + n1 s + n2 s
+----------------- 
+                2
+d0 + d1 s + d2 s
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d (H, "(n2*s^2+n1*s+n0)/(d2*s^2+d1*s+d0)"));
+true;
+
+block ([powerdisp : true], verify_display_1d (H, "(n0+n1*s+n2*s^2)/(d0+d1*s+d2*s^2)"));
+true;
+
+
+/* mailing list 2015-09-08: "Maxima 5.37.1 changes in behaviour when simp:false" */
+
+simp:false;
+false;
+
+(p:1+x,
+ [?second (p), ?third (p)]);
+[1, x];
+
+string(p);
+"1+x";
+
+tex(p, false);
+"$$1+x$$
+";
+
+simp : true;
+true;
+
+(p:1+x,
+ [?second (p), ?third (p)]);
+[1, x];
+
+string(p);
+"x+1";
+
+tex(p, false);
+"$$x+1$$
+";
+
+block ([powerdisp : false], verify_display_2d (diff (x^n, x),
+"   n - 1
+n x      
+"));
+true;
+
+block ([powerdisp : true], verify_display_2d (diff (x^n, x),
+"   - 1 + n
+n x        
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d (diff (x^n, x), "n*x^(n-1)"));
+true;
+
+block ([powerdisp : true], verify_display_1d (diff (x^n, x), "n*x^(-1+n)"));
+true;
+
+/* mailing list 2015-09-04: "Inconsistent ordering: (x+1)^2 becomes (1+x)^2, but x+1 stays x+1" */
+
+block ([powerdisp : false], verify_display_2d ((x+1)^2,
+"       2
+(x + 1)  
+"));
+true;
+
+block ([powerdisp : true], verify_display_2d ((x+1)^2,
+"       2
+(1 + x)  
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d ((x+1)^2, "(x+1)^2"));
+true;
+block ([powerdisp : true], verify_display_1d ((x+1)^2, "(1+x)^2"));
+true;
+
+block ([powerdisp : false], verify_display_2d ((x^3+x^2+x+1)^2,
+"  3    2         2
+(x  + x  + x + 1)  
+"));
+true;
+
+block ([powerdisp : true], verify_display_2d ((x^3+x^2+x+1)^2,
+"          2    3 2
+(1 + x + x  + x )  
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d ((x^3+x^2+x+1)^2, "(x^3+x^2+x+1)^2"));
+true;
+block ([powerdisp : true], verify_display_1d ((x^3+x^2+x+1)^2, "(1+x+x^2+x^3)^2"));
+true;
+
+block ([powerdisp : false], verify_display_2d (x+1,
+"x + 1 
+"));
+true;
+
+block ([powerdisp : true], verify_display_2d (x+1,
+"1 + x 
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d (x+1, "x+1"));
+true;
+block ([powerdisp : true], verify_display_1d (x+1, "1+x"));
+true;
+
+block ([powerdisp : false], verify_display_2d (x^3+x^2+x+1,
+" 3    2
+x  + x  + x + 1 
+"));
+true;
+
+block ([powerdisp : true], verify_display_2d (x^3+x^2+x+1,
+"         2    3
+1 + x + x  + x  
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d (x^3+x^2+x+1, "x^3+x^2+x+1"));
+true;
+block ([powerdisp : true], verify_display_1d (x^3+x^2+x+1, "1+x+x^2+x^3"));
+true;
+
+block ([powerdisp : false], verify_display_2d (2^(x+1),
+" x + 1
+2      
+"));
+true;
+
+block ([powerdisp : true], verify_display_2d (2^(x+1),
+" 1 + x
+2      
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d (2^(x+1), "2^(x+1)"));
+true;
+block ([powerdisp : true], verify_display_1d (2^(x+1), "2^(1+x)"));
+true;
+
+block ([powerdisp : false], verify_display_2d (2^(x^3+x^2+x+1),
+"  3    2
+ x  + x  + x + 1
+2                
+"));
+true;
+
+block ([powerdisp : true], verify_display_2d (2^(x^3+x^2+x+1),
+"          2    3
+ 1 + x + x  + x
+2                
+"));
+true;
+
+block ([powerdisp : false], verify_display_1d (2^(x^3+x^2+x+1), "2^(x^3+x^2+x+1)"));
+true;
+block ([powerdisp : true], verify_display_1d (2^(x^3+x^2+x+1), "2^(1+x+x^2+x^3)"));
+true;
+
+/* SF bug #3046 "Changes of behaviour with simp:false" */
+
+block ([simp:false], string((3/6)*x));
+"(3/6)*x";
+
+string (lambda ([], (2/2)*u));
+"lambda([],(2/2)*u)";
+
+/* SF bug #4090: "output formatting: -x-1 has redundant parentheses: (-x)-1" */
+
+/* copied print_string_2d from rtest3.mac */
+(print_string_2d (e) := with_default_2d_display (printf (false, "~m", e)), 0);
+0;
+
+print_string_2d (-b-a);
+"- b - a
+";
+
+string (-b-a);
+"-b-a";
+
+print_string_2d (-c-a);
+"- c - a
+";
+
+string (-c-a);
+"-c-a";
+
+print_string_2d (-c-b);
+"- c - b
+";
+
+string (-c-b);
+"-c-b";
+
+print_string_2d (-c+b+a);
+"- c + b + a
+";
+
+string (-c+b+a);
+"-c+b+a";
+
+print_string_2d (-c+b-a);
+"- c + b - a
+";
+
+string (-c+b-a);
+"-c+b-a";
+
+print_string_2d (-c-b+a);
+"- c - b + a
+";
+
+string (-c-b+a);
+"-c-b+a";
+
+print_string_2d (-c-b-a);
+"- c - b - a
+";
+
+string (-c-b-a);
+"-c-b-a";
+
+print_string_2d (-a);
+"- a
+";
+
+string (-a);
+"-a";
+
+print_string_2d (a-b);
+"a - b
+";
+
+string (a-b);
+"a-b";
+
+print_string_2d (a-c);
+"a - c
+";
+
+string (a-c);
+"a-c";
+
+print_string_2d (b-a);
+"b - a
+";
+
+string (b-a);
+"b-a";
+
+print_string_2d (b-c);
+"b - c
+";
+
+string (b-c);
+"b-c";
+
+print_string_2d (c+b-a);
+"c + b - a
+";
+
+string (c+b-a);
+"c+b-a";
+
+print_string_2d (c-a);
+"c - a
+";
+
+string (c-a);
+"c-a";
+
+print_string_2d (c-b);
+"c - b
+";
+
+string (c-b);
+"c-b";
+
+print_string_2d (c-b+a);
+"c - b + a
+";
+
+string (c-b+a);
+"c-b+a";
+
+print_string_2d (c-b-a);
+"c - b - a
+";
+
+string (c-b-a);
+"c-b-a";
+
+/* -a/b, (-a)/b, and -(a/b) all parse to the same thing,
+ * therefore we should expect all three to be displayed the same.
+ */
+
+is ((-a)/b = -a/b);
+true;
+
+is (-(a/b) = -a/b);
+true;
+
+print_string_2d (-a/b);
+"  a
+- -
+  b
+";
+
+string (-a/b);
+"-(a/b)";
+
+print_string_2d (-(a/b));
+"  a
+- -
+  b
+";
+
+string (-(a/b));
+"-(a/b)";
+
+print_string_2d ((-a)/b);
+"  a
+- -
+  b
+";
+
+string ((-a)/b);
+"-(a/b)";
+
+/* -(a + b)/c and (-(a + b))/c parse to the same thing,
+ * but -((a + b)/c) parses to something else,
+ * therefore we should expect the first two are displayed the same,
+ * and the third is something different.
+ */
+
+is ((-(a + b))/c = -(a + b)/c);
+true;
+
+is (-((a + b)/c) = -(a + b)/c);
+false;
+
+print_string_2d (-(a + b)/c);
+"- b - a
+-------
+   c
+";
+
+string (-(a + b)/c);
+"(-b-a)/c";
+
+print_string_2d ((-(a + b))/c);
+"- b - a
+-------
+   c
+";
+
+string ((-(a + b))/c);
+"(-b-a)/c";
+
+print_string_2d (-((a + b)/c));
+"  b + a
+- -----
+    c
+";
+
+string (-((a + b)/c));
+"-((b+a)/c)";
+
+/* SF bug #4092: "Repeated factorial (n!)! displayed the same as double factorial n!!" */
+
+(kill (n), printf (false, "~m", (n!)!));
+"(n!)!
+";
+
+printf (false, "~a", (n!)!);
+"(n!)!";
+
+tex1 ((n!)!);
+"\\left(n!\\right)!";
+
+/* verify that "!" continues to interact correctly with other operators */
+
+(kill (m, o), 0);
+0;
+
+n! + m! + o!;
+(n!) + (m!) + (o!);
+
+(n! * m! * o!);
+(n!) * (m!) * (o!);
+
+'(n! := if n = 0 then 1 else n*(n - 1)!);
+(n!) := (if (n = 0) then 1 else (n*((n - 1)!)));
+
+'(n! : m!);
+(n!) : (m!);
+
+'(n! : m! : o!);
+(n!) : ((m!) : (o!));
+
+'(n! := m! : o!);
+(n!) := ((m!) : (o!));
+
+/* verify double factorial symbol continues to work the same */
+
+n!!;
+genfact(n, n/2, 2);
+
+n!!!;
+genfact(n, n/2, 2)!;
+
+n!!!!;
+genfact(genfact(n, n/2, 2), genfact(n, n/2, 2)/2, 2);
+
+(n!)!!;
+genfact(n!, n!/2, 2);
+
+n!!*m!!;
+genfact(m, m/2, 2)*genfact(n, n/2, 2);

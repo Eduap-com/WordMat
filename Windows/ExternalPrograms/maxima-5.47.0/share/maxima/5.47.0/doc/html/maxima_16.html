@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Limits (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Limits (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Limits (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_17.html#Differentiation" rel="next" title="Differentiation">
+<link href="maxima_15.html#Elliptic-Functions" rel="prev" title="Elliptic Functions">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Limits">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_17.html#Differentiation" accesskey="n" rel="next">Differentiation</a>, Previous: <a href="maxima_15.html#Elliptic-Functions" accesskey="p" rel="prev">Elliptic Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Limits-1">17 Limits</h2>
+
+<a class="anchor" id="Item_003a-Limits_002fnode_002fFunctions-and-Variables-for-Limits"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-Limits" accesskey="1">Functions and Variables for Limits</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-Limits">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Limits" accesskey="p" rel="prev">Limits</a>, Up: <a href="#Limits" accesskey="u" rel="up">Limits</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Limits-1">17.1 Functions and Variables for Limits</h3>
+
+<a class="anchor" id="lhospitallim"></a><a class="anchor" id="Item_003a-Limits_002fdefvr_002flhospitallim"></a><dl class="first-defvr">
+<dt class="defvr" id="index-lhospitallim"><span class="category-def">Option variable: </span><span><strong class="def-name">lhospitallim</strong><a class="copiable-link" href='#index-lhospitallim'> &para;</a></span></dt>
+<dd><p>Default value: 4
+</p>
+<p><code class="code">lhospitallim</code> is the maximum number of times L&rsquo;Hospital&rsquo;s
+rule is used in <code class="code"><a class="ref" href="#limit">limit</a></code>.  This prevents infinite looping in cases like
+<code class="code">limit (cot(x)/csc(x), x, 0)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Limits">Limits</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="limit"></a><a class="anchor" id="Item_003a-Limits_002fdeffn_002flimit"></a><dl class="first-deffn">
+<dt class="deffn" id="index-limit"><span class="category-def">Function: </span><span><strong class="def-name">limit</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">limit</code> (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">val</var>, <var class="var">dir</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">limit</code> (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">val</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">limit</code> (<var class="var">expr</var>)</var><a class="copiable-link" href='#index-limit'> &para;</a></span></dt>
+<dd>
+<p>Computes the limit of <var class="var">expr</var> as the real variable <var class="var">x</var> approaches the
+value <var class="var">val</var> from the direction <var class="var">dir</var>.  <var class="var">dir</var> may have the value
+<code class="code">plus</code> for a limit from above, <code class="code">minus</code> for a limit from below, or
+may be omitted (implying a two-sided limit is to be computed).
+</p>
+<p><code class="code">limit</code> uses the following special symbols: <code class="code">inf</code> (positive infinity)
+and <code class="code"><a class="ref" href="maxima_4.html#minf">minf</a></code> (negative infinity).  On output it may also use <code class="code"><a class="ref" href="maxima_4.html#und">und</a></code>
+(undefined), <code class="code"><a class="ref" href="maxima_4.html#ind">ind</a></code> (indefinite but bounded) and <code class="code"><a class="ref" href="maxima_4.html#infinity">infinity</a></code> (complex
+infinity).
+</p>
+<p><code class="code">infinity</code> (complex infinity) is returned when the limit of
+the absolute value of the expression is positive infinity, but
+the limit of the expression itself is not positive infinity or
+negative infinity.  This includes cases where the limit of the
+complex argument is a constant, as in <code class="code">limit(log(x), x, minf)</code>, 
+cases where the complex argument oscillates, as in
+<code class="code">limit((-2)^x, x, inf)</code>, and cases where the complex
+argument is different for either side of a two-sided limit, as in
+<code class="code">limit(1/x, x, 0)</code> and <code class="code">limit(log(x), x, 0)</code>.
+</p>
+<p><code class="code"><a class="ref" href="#lhospitallim">lhospitallim</a></code> is the maximum number of times L&rsquo;Hospital&rsquo;s rule
+is used in <code class="code">limit</code>.  This prevents infinite looping in cases like
+<code class="code">limit (cot(x)/csc(x), x, 0)</code>.
+</p>
+<p><code class="code"><a class="ref" href="#tlimswitch">tlimswitch</a></code> when true will allow the <code class="code">limit</code> command to use
+Taylor series expansion when necessary.
+</p>
+<p><code class="code"><a class="ref" href="#limsubst">limsubst</a></code> prevents <code class="code">limit</code> from attempting substitutions on
+unknown forms.  This is to avoid bugs like <code class="code">limit (f(n)/f(n+1), n, inf)</code>
+giving 1.  Setting <code class="code">limsubst</code> to <code class="code">true</code> will allow such
+substitutions.
+</p>
+<p><code class="code">limit</code> with one argument is often called upon to simplify constant
+expressions, for example, <code class="code">limit (inf-1)</code>.
+</p>
+<p><code class="code">example (limit)</code> displays some examples.
+</p>
+<p>For the method see Wang, P., &quot;Evaluation of Definite Integrals by Symbolic
+Manipulation&quot;, Ph.D. thesis, MAC TR-92, October 1971.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Limits">Limits</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="limsubst"></a><a class="anchor" id="Item_003a-Limits_002fdefvr_002flimsubst"></a><dl class="first-defvr">
+<dt class="defvr" id="index-limsubst"><span class="category-def">Option variable: </span><span><strong class="def-name">limsubst</strong><a class="copiable-link" href='#index-limsubst'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>prevents <code class="code"><a class="ref" href="#limit">limit</a></code> from attempting substitutions on unknown forms.  This is
+to avoid bugs like <code class="code">limit (f(n)/f(n+1), n, inf)</code> giving 1.  Setting
+<code class="code">limsubst</code> to <code class="code">true</code> will allow such substitutions.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Limits">Limits</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tlimit"></a><a class="anchor" id="Item_003a-Limits_002fdeffn_002ftlimit"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tlimit"><span class="category-def">Function: </span><span><strong class="def-name">tlimit</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tlimit</code> (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">val</var>, <var class="var">dir</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tlimit</code> (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">val</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tlimit</code> (<var class="var">expr</var>)</var><a class="copiable-link" href='#index-tlimit'> &para;</a></span></dt>
+<dd>
+<p>Take the limit of the Taylor series expansion of <code class="code">expr</code> in <code class="code">x</code>
+at <code class="code">val</code> from direction <code class="code">dir</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Limits">Limits</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tlimswitch"></a><a class="anchor" id="Item_003a-Limits_002fdefvr_002ftlimswitch"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tlimswitch"><span class="category-def">Option variable: </span><span><strong class="def-name">tlimswitch</strong><a class="copiable-link" href='#index-tlimswitch'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">tlimswitch</code> is <code class="code">true</code>, the <code class="code"><a class="ref" href="#limit">limit</a></code> command will use a
+Taylor series expansion if the limit of the input expression cannot be computed
+directly.  This allows evaluation of limits such as
+<code class="code">limit(x/(x-1)-1/log(x),x,1,plus)</code>.  When <code class="code">tlimswitch</code> is <code class="code">false</code>
+and the limit of input expression cannot be computed directly, <code class="code">limit</code> will
+return an unevaluated limit expression.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Limits">Limits</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gruntz"></a><a class="anchor" id="Item_003a-Limits_002fdeffn_002fgruntz"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gruntz"><span class="category-def">Function: </span><span><strong class="def-name">gruntz</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">gruntz</code> (<var class="var">expr</var>, <var class="var">var</var>, <var class="var">value</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">gruntz</code> (<var class="var">expr</var>, <var class="var">var</var>, <var class="var">value</var>, <var class="var">direction</var>)</var><a class="copiable-link" href='#index-gruntz'> &para;</a></span></dt>
+<dd>
+<p>Compute limit of expression <var class="var">expr</var> with respect to variable <var class="var">var</var> at <var class="var">value</var>.
+When <var class="var">value</var> is not infinite (i.e., not <code class="code">inf</code> or <code class="code">minf</code>),
+<var class="var">direction</var> must be supplied,
+either <code class="code">plus</code> for a limit from above,
+or <code class="code">minus</code> for a limit from below.
+</p>
+<p>If <code class="code">gruntz</code> cannot find the limit,
+an unevaluated expression <code class="code">gruntz(...)</code> is returned.
+</p>
+<p><code class="code">gruntz</code> implements the method described in the dissertation of
+Dominik Gruntz, &quot;On Computing Limits in a Symbolic Manipulation System&quot;
+(ETH Zurich, 1996).
+</p>
+<p>The algorithm identifies the most rapidly varying subexpression,
+replaces it with a new variable, rewrites the expression in terms
+of the new variable, and then repeats.
+</p>
+<p>The algorithm doesn&rsquo;t handle oscillating functions, so it can&rsquo;t do things like
+<code class="code">limit(sin(x)/x, x, inf)</code>.
+</p>
+<p>To handle limits involving functions such as <code class="code">gamma(x)</code> and <code class="code">erf(x)</code>,
+the Gruntz algorithm requires them to be written in terms of asymptotic expansions,
+which Maxima cannot currently do.
+</p>
+<p>The Gruntz algorithm assumes that variables and expressions are real,
+so, for example, it can&rsquo;t handle <code class="code">limit((-2)^x, x, inf)</code>.
+</p>
+<p><code class="code">gruntz</code> is one of the methods called from <code class="code">limit</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Limits">Limits</a>
+&middot;
+</div>
+
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_17.html#Differentiation" accesskey="n" rel="next">Differentiation</a>, Previous: <a href="maxima_15.html#Elliptic-Functions" accesskey="p" rel="prev">Elliptic Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

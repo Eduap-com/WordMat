@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to Sets</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to Sets">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to Sets">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_163.html#Sets" rel="up" title="Sets">
+<link href="maxima_165.html#Functions-and-Variables-for-Sets" rel="next" title="Functions and Variables for Sets">
+<link href="maxima_163.html#Sets" rel="previous" title="Sets">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-Sets"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_165.html#Functions-and-Variables-for-Sets" accesskey="n" rel="next">Functions and Variables for Sets</a>, Previous: <a href="maxima_163.html#Sets" accesskey="p" rel="previous">Sets</a>, Up: <a href="maxima_163.html#Sets" accesskey="u" rel="up">Sets</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-Sets-1"></a>
+<h3 class="section">35.1 Introduction to Sets</h3>
+
+<p>Maxima provides set functions, such as intersection and 
+union, for finite sets that are defined by explicit enumeration.
+Maxima treats 
+lists and sets as distinct objects. This feature makes it possible to
+work with sets that have members that are either lists or sets.
+</p>
+<p>In addition to functions for finite sets, Maxima provides some
+functions related to combinatorics; these include the Stirling
+numbers of the first and second kind, the Bell numbers, multinomial
+coefficients, partitions of nonnegative integers, and a few others. 
+Maxima also defines a Kronecker delta function.
+</p>
+<a name="Usage"></a>
+<h4 class="subsection">35.1.1 Usage</h4>
+
+<p>To construct a set with members <code>a_1, ..., a_n</code>, write
+<code>set(a_1, ..., a_n)</code> or <code>{a_1, ..., a_n}</code>;
+to construct the empty set, write <code>set()</code> or <code>{}</code>.
+In input, <code>set(...)</code> and <code>{ ... }</code> are equivalent.
+Sets are always displayed with curly braces.
+</p>
+<p>If a member is listed more than
+once, simplification eliminates the redundant member.
+</p>
+<div class="example">
+<pre class="example">(%i1) set();
+(%o1)                          {}
+(%i2) set(a, b, a);
+(%o2)                        {a, b}
+(%i3) set(a, set(b));
+(%o3)                       {a, {b}}
+(%i4) set(a, [b]);
+(%o4)                       {a, [b]}
+(%i5) {};
+(%o5)                          {}
+(%i6) {a, b, a};
+(%o6)                        {a, b}
+(%i7) {a, {b}};
+(%o7)                       {a, {b}}
+(%i8) {a, [b]};
+(%o8)                       {a, [b]}
+</pre></div>
+
+<p>Two would-be elements <var>x</var> and <var>y</var> are redundant
+(i.e., considered the same for the purpose of set construction)
+if and only if <code>is(<var>x</var> = <var>y</var>)</code> yields <code>true</code>.
+Note that <code>is(equal(<var>x</var>, <var>y</var>))</code> can yield <code>true</code>
+while <code>is(<var>x</var> = <var>y</var>)</code> yields <code>false</code>;
+in that case the elements <var>x</var> and <var>y</var> are considered distinct.
+</p>
+<div class="example">
+<pre class="example">(%i1) x: a/c + b/c;
+                              b   a
+(%o1)                         - + -
+                              c   c
+(%i2) y: a/c + b/c;
+                              b   a
+(%o2)                         - + -
+                              c   c
+(%i3) z: (a + b)/c;
+                              b + a
+(%o3)                         -----
+                                c
+(%i4) is (x = y);
+(%o4)                         true
+(%i5) is (y = z);
+(%o5)                         false
+(%i6) is (equal (y, z));
+(%o6)                         true
+(%i7) y - z;
+                           b + a   b   a
+(%o7)                    - ----- + - + -
+                             c     c   c
+(%i8) ratsimp (%);
+(%o8)                           0
+(%i9) {x, y, z};
+                          b + a  b   a
+(%o9)                    {-----, - + -}
+                            c    c   c
+</pre></div>
+
+<p>To construct a set from the elements of a list, use <code>setify</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) setify ([b, a]);
+(%o1)                        {a, b}
+</pre></div>
+
+<p>Set members <code>x</code> and <code>y</code> are equal provided <code>is(x = y)</code> 
+evaluates to <code>true</code>. Thus <code>rat(x)</code> and <code>x</code> are equal as set
+members; consequently, 
+</p>
+<div class="example">
+<pre class="example">(%i1) {x, rat(x)};
+(%o1)                          {x}
+</pre></div>
+
+<p>Further, since <code>is((x - 1)*(x + 1) = x^2 - 1)</code> evaluates to <code>false</code>, 
+<code>(x - 1)*(x + 1)</code> and <code>x^2 - 1</code> are distinct set members; thus 
+</p>
+<div class="example">
+<pre class="example">(%i1) {(x - 1)*(x + 1), x^2 - 1};
+                                       2
+(%o1)               {(x - 1) (x + 1), x  - 1}
+</pre></div>
+
+<p>To reduce this set to a singleton set, apply <code>rat</code> to each set member:
+</p>
+<div class="example">
+<pre class="example">(%i1) {(x - 1)*(x + 1), x^2 - 1};
+                                       2
+(%o1)               {(x - 1) (x + 1), x  - 1}
+(%i2) map (rat, %);
+                              2
+(%o2)/R/                    {x  - 1}
+</pre></div>
+
+<p>To remove redundancies from other sets, you may need to use other
+simplification functions. Here is an example that uses <code>trigsimp</code>:
+</p>
+<div class="example">
+<pre class="example">(%i1) {1, cos(x)^2 + sin(x)^2};
+                            2         2
+(%o1)                {1, sin (x) + cos (x)}
+(%i2) map (trigsimp, %);
+(%o2)                          {1}
+</pre></div>
+
+<p>A set is simplified when its members are non-redundant and
+sorted. The current version of the set functions uses the Maxima function
+<code>orderlessp</code> to order sets; however, <i>future versions of 
+the set functions might use a different ordering function</i>.
+</p>
+<p>Some operations on sets, such as substitution, automatically force a 
+re-simplification; for example,
+</p>
+<div class="example">
+<pre class="example">(%i1) s: {a, b, c}$
+(%i2) subst (c=a, s);
+(%o2)                        {a, b}
+(%i3) subst ([a=x, b=x, c=x], s);
+(%o3)                          {x}
+(%i4) map (lambda ([x], x^2), set (-1, 0, 1));
+(%o4)                        {0, 1}
+</pre></div>
+
+<p>Maxima treats lists and sets as distinct objects;
+functions such as <code>union</code> and <code>intersection</code> complain
+if any argument is not a set. If you need to apply a set
+function to a list, use the <code>setify</code> function to convert it
+to a set. Thus
+</p>
+<div class="example">
+<pre class="example">(%i1) union ([1, 2], {a, b});
+Function union expects a set, instead found [1,2]
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i2) union (setify ([1, 2]), {a, b});
+(%o2)                     {1, 2, a, b}
+</pre></div>
+
+<p>To extract all set elements of a set <code>s</code> that satisfy a predicate
+<code>f</code>, use <code>subset(s, f)</code>. (A <i>predicate</i> is a 
+boolean-valued function.) For example, to find the equations 
+in a given set that do not depend on a variable <code>z</code>, use
+</p>
+<div class="example">
+<pre class="example">(%i1) subset ({x + y + z, x - y + 4, x + y - 5},
+                                    lambda ([e], freeof (z, e)));
+(%o1)               {- y + x + 4, y + x - 5}
+</pre></div>
+
+<p>The section <a href="maxima_165.html#Functions-and-Variables-for-Sets">Functions and Variables for Sets</a> has a complete list of
+the set functions in Maxima.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sets">Sets</a>
+&middot;</div>
+<a name="Set-Member-Iteration"></a>
+<h4 class="subsection">35.1.2 Set Member Iteration</h4>
+
+<p>There two ways to to iterate over set members. One way is the use
+<code>map</code>; for example:
+</p>
+<div class="example">
+<pre class="example">(%i1) map (f, {a, b, c});
+(%o1)                  {f(a), f(b), f(c)}
+</pre></div>
+
+<p>The other way is to use <code>for <var>x</var> in <var>s</var> do</code>
+</p>
+<div class="example">
+<pre class="example">(%i1) s: {a, b, c};
+(%o1)                       {a, b, c}
+(%i2) for si in s do print (concat (si, 1));
+a1 
+b1 
+c1 
+(%o2)                         done
+</pre></div>
+
+<p>The Maxima functions <code>first</code> and <code>rest</code> work
+correctly on sets. Applied to a set, <code>first</code> returns the first
+displayed element of a set; which element that is may be
+implementation-dependent. If <code>s</code> is a set, then 
+<code>rest(s)</code> is equivalent to <code>disjoin(first(s), s)</code>.
+Currently, there are other Maxima functions that work correctly
+on sets.
+In future versions of the set functions,
+<code>first</code> and <code>rest</code> may function differently or not at all.
+</p>
+<p>Maxima&rsquo;s <code>orderless</code> and <code>ordergreat</code> mechanisms are 
+incompatible with the set functions. If you need to use either <code>orderless</code>
+or <code>ordergreat</code>, call those functions before constructing any sets,
+and do not call <code>unorder</code>. 
+</p>
+<a name="Authors"></a>
+<h4 class="subsection">35.1.3 Authors</h4>
+
+<p>Stavros Macrakis of Cambridge, Massachusetts and Barton Willis of the
+University of Nebraska at Kearney (UNK) wrote the Maxima set functions and their
+documentation. 
+</p>
+<a name="Item_003a-nset_002fnode_002fFunctions-and-Variables-for-Sets"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_165.html#Functions-and-Variables-for-Sets" accesskey="n" rel="next">Functions and Variables for Sets</a>, Previous: <a href="maxima_163.html#Sets" accesskey="p" rel="previous">Sets</a>, Up: <a href="maxima_163.html#Sets" accesskey="u" rel="up">Sets</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>6 The browser (Xmaxima Manual)</title>
+
+<meta name="description" content="6 The browser (Xmaxima Manual)">
+<meta name="keywords" content="6 The browser (Xmaxima Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style type="text/css">
+<!--
+div.example {margin-left: 3.2em}
+span.program-in-footer {font-size: smaller}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="The-browser">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="xmaxima_4.html" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="xmaxima_4.html" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="xmaxima.html" title="Up section"> Up </a>]</td>
+<td>[<a href="xmaxima_6.html" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="xmaxima_6.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="xmaxima.html" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td>[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="The-browser-1">6 The browser</h1>
+
+<p>Xmaxima&rsquo;s browser is a Web browser. It lacks many features available in
+any modern browser, such as style-sheets and tables support. On the
+other hand, that browser accepts two additional tags, which are not part
+of HTML, but are very useful to pass commands to Xmaxima from the html
+page.
+</p>
+<p>One example of that is the Maxima Primer that appears in the browser when
+Xmaxima starts. That primer has some fields where you can click to get
+the result inside the browser window. The syntax of the two additional
+tags is as follows
+</p>
+<div class="example">
+<pre class="example-preformatted">&lt;eval program=maxima doinsert=0&gt;maxima_command&lt;/eval&gt;
+&lt;eval program=maxima doinsert=1&gt;command&lt;/eval&gt;
+&lt;result modified&gt;result&lt;/result&gt;
+</pre></div>
+
+<p>The first form will highlight the given Maxima command, and when the user
+double clicks on it, it will be evaluated, but its result will not be
+inserted back into the original web page.
+</p>
+<p>The second form will act similarly to the first, but the result from
+Maxima will now be inserted back into the Web page, in the next tag
+&lsquo;<samp class="samp">result</samp>&rsquo; that appears in the page. The commands shown in the
+<code class="code">eval</code> tags can be edited and reenter.
+</p>
+<p>Some more sample active pages can be found in
+<a class="url" href="https://web.archive.org/web/20190926040445/https://web.ma.utexas.edu/users/wfs/netmath/netmath.html">https://web.archive.org/web/20190926040445/https://web.ma.utexas.edu/users/wfs/netmath/netmath.html</a>
+</p> 
+</div>
+<hr>
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="xmaxima_4.html" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="xmaxima_6.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="xmaxima.html" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td>[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+  <span class="program-in-footer">This document was generated on <em class="emph">June 2, 2023</em> using <a class="uref" href="https://www.gnu.org/software/texinfo/"><em class="emph">makeinfo</em></a>.</span>
+</p>
+
+
+</body>
+</html>

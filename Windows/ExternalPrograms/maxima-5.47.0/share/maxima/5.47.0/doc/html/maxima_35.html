@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Function Definition (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Function Definition (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Function Definition (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_36.html#Program-Flow" rel="next" title="Program Flow">
+<link href="maxima_34.html#Sets" rel="prev" title="Sets">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+p.flushleft-paragraph {text-align:left}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Function-Definition">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_36.html#Program-Flow" accesskey="n" rel="next">Program Flow</a>, Previous: <a href="maxima_34.html#Sets" accesskey="p" rel="prev">Sets</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Function-Definition-1">36 Function Definition</h2>
+
+<a class="anchor" id="Item_003a-Function_002fnode_002fIntroduction-to-Function-Definition"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Function-Definition" accesskey="1">Introduction to Function Definition</a></li>
+<li><a href="#Function" accesskey="2">Function</a></li>
+<li><a href="#Macros" accesskey="3">Macros</a></li>
+<li><a href="#Functions-and-Variables-for-Function-Definition" accesskey="4">Functions and Variables for Function Definition</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Function-Definition">
+<div class="nav-panel">
+<p>
+Next: <a href="#Function" accesskey="n" rel="next">Function</a>, Previous: <a href="#Function-Definition" accesskey="p" rel="prev">Function Definition</a>, Up: <a href="#Function-Definition" accesskey="u" rel="up">Function Definition</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Function-Definition-1">36.1 Introduction to Function Definition</h3>
+
+<a class="anchor" id="Item_003a-Function_002fnode_002fFunction"></a><hr>
+</div>
+<div class="section-level-extent" id="Function">
+<div class="nav-panel">
+<p>
+Next: <a href="#Macros" accesskey="n" rel="next">Macros</a>, Previous: <a href="#Introduction-to-Function-Definition" accesskey="p" rel="prev">Introduction to Function Definition</a>, Up: <a href="#Function-Definition" accesskey="u" rel="up">Function Definition</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Function-1">36.2 Function</h3>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Programming">Programming</a>
+&middot;
+</div>
+
+<ul class="mini-toc">
+<li><a href="#Ordinary-functions" accesskey="1">Ordinary functions</a></li>
+<li><a href="#Memoizing-Functions" accesskey="2">Memoizing Functions</a></li>
+</ul>
+<div class="subsection-level-extent" id="Ordinary-functions">
+<h4 class="subsection">36.2.1 Ordinary functions</h4>
+
+<p>To define a function in Maxima you use the <code class="code">:=</code> operator.
+E.g.
+</p>
+<div class="example">
+<pre class="example-preformatted">f(x) := sin(x)
+</pre></div>
+
+<p>defines a function <code class="code">f</code>.
+Anonymous functions may also be created using <code class="code">lambda</code>.
+For example
+</p>
+<div class="example">
+<pre class="example-preformatted">lambda ([i, j], ...)
+</pre></div>
+
+<p>can be used instead of <code class="code">f</code>
+where
+</p>
+<div class="example">
+<pre class="example-preformatted">f(i,j) := block ([], ...);
+map (lambda ([i], i+1), l)
+</pre></div>
+
+<p>would return a list with 1 added to each term.
+</p>
+<p>You may also define a function with a variable number of arguments,
+by having a final argument which is assigned to a list of the extra
+arguments:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) f ([u]) := u;
+(%o1)                      f([u]) := u
+(%i2) f (1, 2, 3, 4);
+(%o2)                     [1, 2, 3, 4]
+(%i3) f (a, b, [u]) := [a, b, u];
+(%o3)               f(a, b, [u]) := [a, b, u]
+(%i4) f (1, 2, 3, 4, 5, 6);
+(%o4)                 [1, 2, [3, 4, 5, 6]]
+</pre></div>
+
+<p>The right hand side of a function is an expression.  Thus
+if you want a sequence of expressions, you do
+</p>
+<div class="example">
+<pre class="example-preformatted">f(x) := (expr1, expr2, ...., exprn);
+</pre></div>
+
+<p>and the value of <var class="var">exprn</var> is what is returned by the function.
+</p>
+<p>If you wish to make a <code class="code">return</code> from some expression inside the
+function then you must use <code class="code">block</code> and <code class="code">return</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">block ([], expr1, ..., if (a &gt; 10) then return(a), ..., exprn)
+</pre></div>
+
+<p>is itself an expression, and so could take the place of the
+right hand side of a function definition.  Here it may happen
+that the return happens earlier than the last expression.
+</p>
+<p>The first <code class="code">[]</code> in the block, may contain a list of variables and
+variable assignments, such as <code class="code">[a: 3, b, c: []]</code>, which would cause the
+three variables <code class="code">a</code>,<code class="code">b</code>,and <code class="code">c</code> to not refer to their
+global values, but rather have these special values for as long as the
+code executes inside the <code class="code">block</code>, or inside functions called from
+inside the <code class="code">block</code>.  This is called <i class="i">dynamic</i> binding, since the
+variables last from the start of the block to the time it exits.  Once
+you return from the <code class="code">block</code>, or throw out of it, the old values (if
+any) of the variables will be restored.  It is certainly a good idea
+to protect your variables in this way.  Note that the assignments
+in the block variables, are done in parallel.  This means, that if
+you had used <code class="code">c: a</code> in the above, the value of <code class="code">c</code> would
+have been the value of <code class="code">a</code> at the time you just entered the block,
+but before <code class="code">a</code> was bound.  Thus doing something like
+</p>
+<div class="example">
+<pre class="example-preformatted">block ([a: a], expr1, ... a: a+3, ..., exprn)
+</pre></div>
+
+<p>will protect the external value of <code class="code">a</code> from being altered, but
+would let you access what that value was.  Thus the right hand
+side of the assignments, is evaluated in the entering context, before
+any binding occurs.
+Using just <code class="code">block ([x], ...)</code> would cause the <code class="code">x</code> to have itself
+as value, just as if it would have if you entered a fresh Maxima
+session.
+</p>
+<p>The actual arguments to a function are treated in exactly same way as
+the variables in a block.  Thus in
+</p>
+<div class="example">
+<pre class="example-preformatted">f(x) := (expr1, ..., exprn);
+</pre></div>
+
+<p>and
+</p>
+<div class="example">
+<pre class="example-preformatted">f(1);
+</pre></div>
+
+<p>we would have a similar context for evaluation of the expressions
+as if we had done
+</p>
+<div class="example">
+<pre class="example-preformatted">block ([x: 1], expr1, ..., exprn)
+</pre></div>
+
+<p>Inside functions, when the right hand side of a definition,
+may be computed at runtime, it is useful to use <code class="code">define</code> and
+possibly <code class="code">buildq</code>.
+</p>
+<a class="anchor" id="memoizing-function"></a><a class="anchor" id="memoizing-functions"></a><a class="anchor" id="Memoizing-function"></a><a class="anchor" id="Memoizing-functions"></a></div>
+<div class="subsection-level-extent" id="Memoizing-Functions">
+<h4 class="subsection">36.2.2 Memoizing Functions</h4>
+
+<p>A <i class="i">memoizing function</i> caches the result the first time it is called with a
+given argument, and returns the stored value, without recomputing it, when that
+same argument is given.  Memoizing functions are often called
+<i class="i">array function</i> and are in fact handled like arrays in many ways:
+</p>
+<p>The names of memoizing functions are appended to the global list <code class="code">arrays</code>
+(not the global list <code class="code">functions</code>).  <code class="code">arrayinfo</code> returns the list of
+arguments for which there are stored values, and <code class="code">listarray</code> returns the
+stored values.  <code class="code">dispfun</code> and <code class="code">fundef</code> return the array function
+definition.
+</p>
+<p><code class="code">arraymake</code> constructs an array function call,
+analogous to <code class="code">funmake</code> for ordinary functions.
+<code class="code">arrayapply</code> applies an array function to its arguments,
+analogous to <code class="code">apply</code> for ordinary functions.
+There is nothing exactly analogous to <code class="code">map</code> for array functions,
+although <code class="code">map(lambda([<var class="var">x</var>], <var class="var">a</var>[<var class="var">x</var>]), <var class="var">L</var>)</code> or
+<code class="code">makelist(<var class="var">a</var>[<var class="var">x</var>], <var class="var">x</var>, <var class="var">L</var>)</code>, where <var class="var">L</var> is a list,
+are not too far off the mark.
+</p>
+<p><code class="code">remarray</code> removes an array function definition (including any stored
+function values), analogous to <code class="code">remfunction</code> for ordinary functions.
+</p>
+<p><code class="code">kill(<var class="var">a</var>[<var class="var">x</var>])</code> removes the value of the array function <var class="var">a</var>
+stored for the argument <var class="var">x</var>;
+the next time <var class="var">a</var> is called with argument <var class="var">x</var>,
+the function value is recomputed.
+However, there is no way to remove all of the stored values at once,
+except for <code class="code">kill(<var class="var">a</var>)</code> or <code class="code">remarray(<var class="var">a</var>)</code>,
+which also remove the function definition.
+</p>
+
+<p>Examples
+</p>
+<p>If evaluating the function needs much time and only a limited number of points
+is ever evaluated (which means not much time is spent looking up results in a
+long list of cached results) Memoizing functions can speed up calculations
+considerably.
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) showtime:true$
+Evaluation took 0.0000 seconds (0.0000 elapsed) using 0 bytes.
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) a[x]:=float(sum(sin(x*t),t,1,10000));
+Evaluation took 0.0000 seconds (0.0000 elapsed) using 0 bytes.
+(%o2)        a  := float(sum(sin(x t), t, 1, 10000))
+              x
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) a[1];
+Evaluation took 5.1250 seconds (5.1260 elapsed) using 775.250 MB.
+(%o3)                   1.633891021792447
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) a[1];
+Evaluation took 0.0000 seconds (0.0000 elapsed) using 0 bytes.
+(%o4)                   1.633891021792447
+</pre></div></div>
+
+<p>As the memoizing function is only evaluated once for each input value
+changes in variables the memoizing function uses are not considered
+for values that are already cached:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) a[x]:=b*x;
+(%o1)                       a  := b x
+                             x
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) b:1;
+(%o2)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) a[2];
+(%o3)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) b:2;
+(%o4)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) a[1];
+(%o5)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) a[2];
+(%o6)                           2
+</pre></div></div>
+
+<a class="anchor" id="Item_003a-Function_002fnode_002fMacros"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Macros">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Function-Definition" accesskey="n" rel="next">Functions and Variables for Function Definition</a>, Previous: <a href="#Function" accesskey="p" rel="prev">Function</a>, Up: <a href="#Function-Definition" accesskey="u" rel="up">Function Definition</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Macros-1">36.3 Macros</h3>
+
+<a class="anchor" id="buildq"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fbuildq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-buildq"><span class="category-def">Function: </span><span><strong class="def-name">buildq</strong> <var class="def-var-arguments">(<var class="var">L</var>, <var class="var">expr</var>)</var><a class="copiable-link" href='#index-buildq'> &para;</a></span></dt>
+<dd>
+<p>Substitutes variables named by the list <var class="var">L</var> into the expression <var class="var">expr</var>,
+in parallel, without evaluating <var class="var">expr</var>.  The resulting expression is
+simplified, but not evaluated, after <code class="code">buildq</code> carries out the substitution.
+</p>
+<p>The elements of <var class="var">L</var> are symbols or assignment expressions
+<code class="code"><var class="var">symbol</var>: <var class="var">value</var></code>, evaluated in parallel.  That is, the binding
+of a variable on the right-hand side of an assignment is the binding of that
+variable in the context from which <code class="code">buildq</code> was called, not the binding of
+that variable in the variable list <var class="var">L</var>.  If some variable in <var class="var">L</var> is not
+given an explicit assignment, its binding in <code class="code">buildq</code> is the same as in
+the context from which <code class="code">buildq</code> was called.
+</p>
+<p>Then the variables named by <var class="var">L</var> are substituted into <var class="var">expr</var> in parallel.
+That is, the substitution for every variable is determined before any
+substitution is made, so the substitution for one variable has no effect on any
+other.
+</p>
+<p>If any variable <var class="var">x</var> appears as <code class="code">splice (<var class="var">x</var>)</code> in <var class="var">expr</var>,
+then <var class="var">x</var> must be bound to a list,
+and the list is spliced (interpolated) into <var class="var">expr</var> instead of substituted.
+</p>
+<p>Any variables in <var class="var">expr</var> not appearing in <var class="var">L</var> are carried into the result
+verbatim, even if they have bindings in the context from which <code class="code">buildq</code>
+was called.
+</p>
+<p>Examples
+</p>
+<p><code class="code">a</code> is explicitly bound to <code class="code">x</code>, while <code class="code">b</code> has the same binding
+(namely 29) as in the calling context, and <code class="code">c</code> is carried through verbatim.
+The resulting expression is not evaluated until the explicit evaluation
+<code class="code">''%</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) (a: 17, b: 29, c: 1729)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) buildq ([a: x, b], a + b + c);
+(%o2)                      x + c + 29
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ''%;
+(%o3)                       x + 1758
+</pre></div></div>
+
+<p><code class="code">e</code> is bound to a list, which appears as such in the arguments of
+<code class="code">foo</code>, and interpolated into the arguments of <code class="code">bar</code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) buildq ([e: [a, b, c]], foo (x, e, y));
+(%o1)                 foo(x, [a, b, c], y)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) buildq ([e: [a, b, c]], bar (x, splice (e), y));
+(%o2)                  bar(x, a, b, c, y)
+</pre></div></div>
+
+<p>The result is simplified after substitution.  If simplification were applied
+before substitution, these two results would be the same.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) buildq ([e: [a, b, c]], splice (e) + splice (e));
+(%o1)                    2 c + 2 b + 2 a
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) buildq ([e: [a, b, c]], 2 * splice (e));
+(%o2)                        2 a b c
+</pre></div></div>
+
+<p>The variables in <var class="var">L</var> are bound in parallel; if bound sequentially,
+the first result would be <code class="code">foo (b, b)</code>.
+Substitutions are carried out in parallel;
+compare the second result with the result of <code class="code">subst</code>,
+which carries out substitutions sequentially.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) buildq ([a: b, b: a], foo (a, b));
+(%o1)                       foo(b, a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) buildq ([u: v, v: w, w: x, x: y, y: z, z: u],
+              bar (u, v, w, x, y, z));
+(%o2)                 bar(v, w, x, y, z, u)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) subst ([u=v, v=w, w=x, x=y, y=z, z=u],
+             bar (u, v, w, x, y, z));
+(%o3)                 bar(u, u, u, u, u, u)
+</pre></div></div>
+
+<p>Construct a list of equations with some variables or expressions on the
+left-hand side and their values on the right-hand side.  <code class="code">macroexpand</code>
+shows the expression returned by <code class="code">show_values</code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) show_values ([L]) ::= buildq ([L], map (&quot;=&quot;, 'L, L));
+(%o1)   show_values([L]) ::= buildq([L], map(&quot;=&quot;, 'L, L))
+</pre></div><pre class="example-preformatted">(%i2) (a: 17, b: 29, c: 1729)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) show_values (a, b, c - a - b);
+(%o3)          [a = 17, b = 29, c - b - a = 1683]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) macroexpand (show_values (a, b, c - a - b));
+(%o4)    map(=, '([a, b, c - b - a]), [a, b, c - b - a])
+</pre></div></div>
+
+<p>Given a function of several arguments,
+create another function for which some of the arguments are fixed.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) curry (f, [a]) :=
+        buildq ([f, a], lambda ([[x]], apply (f, append (a, x))))$
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) by3 : curry (&quot;*&quot;, 3);
+(%o2)        lambda([[x]], apply(*, append([3], x)))
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) by3 (a + b);
+(%o3)                       3 (b + a)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="macroexpand"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fmacroexpand"></a><dl class="first-deffn">
+<dt class="deffn" id="index-macroexpand"><span class="category-def">Function: </span><span><strong class="def-name">macroexpand</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-macroexpand'> &para;</a></span></dt>
+<dd>
+<p>Returns the macro expansion of <var class="var">expr</var> without evaluating it,
+when <code class="code">expr</code> is a macro function call.
+Otherwise, <code class="code">macroexpand</code> returns <var class="var">expr</var>.
+</p>
+<p>If the expansion of <var class="var">expr</var> yields another macro function call,
+that macro function call is also expanded.
+</p>
+<p><code class="code">macroexpand</code> quotes its argument.
+However, if the expansion of a macro function call has side effects,
+those side effects are executed.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_6.html#g_t_003a_003a_003d">::=</a></code>, <code class="code"><a class="ref" href="#macros">macros</a></code>, and <code class="code"><a class="ref" href="#macroexpand1">macroexpand1</a></code>..
+</p>
+<p>Examples
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) g (x) ::= x / 99;
+                                    x
+(%o1)                      g(x) ::= --
+                                    99
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) h (x) ::= buildq ([x], g (x - a));
+(%o2)            h(x) ::= buildq([x], g(x - a))
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) a: 1234;
+(%o3)                         1234
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) macroexpand (h (y));
+                              y - a
+(%o4)                         -----
+                               99
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) h (y);
+                            y - 1234
+(%o5)                       --------
+                               99
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-application">Function application</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="macroexpand1"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fmacroexpand1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-macroexpand1"><span class="category-def">Function: </span><span><strong class="def-name">macroexpand1</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-macroexpand1'> &para;</a></span></dt>
+<dd>
+<p>Returns the macro expansion of <var class="var">expr</var> without evaluating it,
+when <code class="code">expr</code> is a macro function call.
+Otherwise, <code class="code">macroexpand1</code> returns <var class="var">expr</var>.
+</p>
+<p><code class="code">macroexpand1</code> quotes its argument.
+However, if the expansion of a macro function call has side effects,
+those side effects are executed.
+</p>
+<p>If the expansion of <var class="var">expr</var> yields another macro function call,
+that macro function call is not expanded.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_6.html#g_t_003a_003a_003d">::=</a></code>, <code class="code"><a class="ref" href="#macros">macros</a></code>, and <code class="code"><a class="ref" href="#macroexpand">macroexpand</a></code>.
+</p>
+<p>Examples
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) g (x) ::= x / 99;
+                                    x
+(%o1)                      g(x) ::= --
+                                    99
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) h (x) ::= buildq ([x], g (x - a));
+(%o2)            h(x) ::= buildq([x], g(x - a))
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) a: 1234;
+(%o3)                         1234
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) macroexpand1 (h (y));
+(%o4)                       g(y - a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) h (y);
+                            y - 1234
+(%o5)                       --------
+                               99
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-application">Function application</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="macros"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002fmacros"></a><dl class="first-defvr">
+<dt class="defvr" id="index-macros"><span class="category-def">Global variable: </span><span><strong class="def-name">macros</strong><a class="copiable-link" href='#index-macros'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[]</code>
+</p>
+<p><code class="code">macros</code> is the list of user-defined macro functions.
+The macro function definition operator <code class="code">::=</code> puts a new macro function
+onto this list, and <code class="code">kill</code>, <code class="code">remove</code>, and <code class="code">remfunction</code> remove
+macro functions from the list.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_3.html#infolists">infolists</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="splice"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fsplice"></a><dl class="first-deffn">
+<dt class="deffn" id="index-splice"><span class="category-def">Function: </span><span><strong class="def-name">splice</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-splice'> &para;</a></span></dt>
+<dd>
+<p>Splices (interpolates) the list named by the atom <var class="var">a</var> into an expression,
+but only if <code class="code">splice</code> appears within <code class="code">buildq</code>;
+otherwise, <code class="code">splice</code> is treated as an undefined function.
+If appearing within <code class="code">buildq</code> as <var class="var">a</var> alone (without <code class="code">splice</code>),
+<var class="var">a</var> is substituted (not interpolated) as a list into the result.
+The argument of <code class="code">splice</code> can only be an atom;
+it cannot be a literal list or an expression which yields a list.
+</p>
+<p>Typically <code class="code">splice</code> supplies the arguments for a function or operator.
+For a function <code class="code">f</code>, the expression <code class="code">f (splice (<var class="var">a</var>))</code> within
+<code class="code">buildq</code> expands to <code class="code">f (<var class="var">a</var>[1], <var class="var">a</var>[2], <var class="var">a</var>[3], ...)</code>.
+For an operator <code class="code">o</code>, the expression <code class="code">&quot;o&quot; (splice (<var class="var">a</var>))</code> within
+<code class="code">buildq</code> expands to <code class="code">&quot;o&quot; (<var class="var">a</var>[1], <var class="var">a</var>[2], <var class="var">a</var>[3], ...)</code>,
+where <code class="code">o</code> may be any type of operator (typically one which takes multiple
+arguments).  Note that the operator must be enclosed in double quotes <code class="code">&quot;</code>.
+</p>
+<p>Examples
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) buildq ([x: [1, %pi, z - y]], foo (splice (x)) / length (x));
+                       foo(1, %pi, z - y)
+(%o1)                -----------------------
+                     length([1, %pi, z - y])
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) buildq ([x: [1, %pi]], &quot;/&quot; (splice (x)));
+                                1
+(%o2)                          ---
+                               %pi
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) matchfix (&quot;&lt;&gt;&quot;, &quot;&lt;&gt;&quot;);
+(%o3)                          &lt;&gt;
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) buildq ([x: [1, %pi, z - y]], &quot;&lt;&gt;&quot; (splice (x)));
+(%o4)                   &lt;&gt;1, %pi, z - y&lt;&gt;
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-Function_002fnode_002fFunctions-and-Variables-for-Function-Definition"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Function-Definition">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Macros" accesskey="p" rel="prev">Macros</a>, Up: <a href="#Function-Definition" accesskey="u" rel="up">Function Definition</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Function-Definition-1">36.4 Functions and Variables for Function Definition</h3>
+
+<a class="anchor" id="apply"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fapply"></a><dl class="first-deffn">
+<dt class="deffn" id="index-apply"><span class="category-def">Function: </span><span><strong class="def-name">apply</strong> <var class="def-var-arguments">(<var class="var">F</var>, [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-apply'> &para;</a></span></dt>
+<dd>
+<p>Constructs and evaluates an expression <code class="code"><var class="var">F</var>(<var class="var">arg_1</var>, ...,
+<var class="var">arg_n</var>)</code>.
+</p>
+<p><code class="code">apply</code> does not attempt to distinguish a <code class="code"><a class="ref" href="#memoizing-function">memoizing function</a></code> from an ordinary 
+function; when <var class="var">F</var> is the name of a memoizing function, <code class="code">apply</code> evaluates
+<code class="code"><var class="var">F</var>(...)</code> (that is, a function call with parentheses instead of square
+brackets).  <code class="code">arrayapply</code> evaluates a function call with square brackets in
+this case.
+</p>
+<p>See also <code class="code"><a class="ref" href="#funmake">funmake</a></code> and <code class="code"><a class="ref" href="maxima_5.html#args">args</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">apply</code> evaluates its arguments.
+In this example, <code class="code">min</code> is applied to the value of <code class="code">L</code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) L : [1, 5, -10.2, 4, 3];
+(%o1)                 [1, 5, - 10.2, 4, 3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) apply (min, L);
+(%o2)                        - 10.2
+</pre></div></div>
+
+<p><code class="code">apply</code> evaluates arguments, even if the function <var class="var">F</var> quotes them.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) F (x) := x / 1729;
+                                   x
+(%o1)                     F(x) := ----
+                                  1729
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) fname : F;
+(%o2)                           F
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) dispfun (F);
+                                   x
+(%t3)                     F(x) := ----
+                                  1729
+
+(%o3)                         [%t3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) dispfun (fname);
+fundef: no such function: fname
+ -- an error. To debug this try: debugmode(true);
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) apply (dispfun, [fname]);
+                                   x
+(%t5)                     F(x) := ----
+                                  1729
+
+(%o5)                         [%t5]
+</pre></div></div>
+
+<p><code class="code">apply</code> evaluates the function name <var class="var">F</var>.
+Single quote <code class="code">'</code> defeats evaluation.
+<code class="code">demoivre</code> is the name of a global variable and also a function.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) demoivre;
+(%o1)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) demoivre (exp (%i * x));
+(%o2)                  %i sin(x) + cos(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) apply (demoivre, [exp (%i * x)]);
+apply: found false where a function was expected.
+ -- an error. To debug this try: debugmode(true);
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) apply ('demoivre, [exp (%i * x)]);
+(%o4)                  %i sin(x) + cos(x)
+</pre></div></div>
+
+<p>How to convert a nested list into a matrix:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) a:[[1,2],[3,4]];
+(%o1)                   [[1, 2], [3, 4]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) apply(matrix,a);
+                            [ 1  2 ]
+(%o2)                       [      ]
+                            [ 3  4 ]
+</pre></div></div>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-application">Function application</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="block"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fblock"></a><dl class="first-deffn">
+<dt class="deffn" id="index-block"><span class="category-def">Function: </span><span><strong class="def-name">block</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">block</code> ([<var class="var">v_1</var>, &hellip;, <var class="var">v_m</var>], <var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">block</code> (<var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>)</var><a class="copiable-link" href='#index-block'> &para;</a></span></dt>
+<dd>
+<p>The function <code class="code">block</code> allows to make the variables <var class="var">v_1</var>, &hellip;,
+<var class="var">v_m</var> to be local for a sequence of commands. If these variables
+are already bound <code class="code">block</code> saves the current values of the
+variables <var class="var">v_1</var>, &hellip;, <var class="var">v_m</var> (if any) upon entry to the
+block, then unbinds the variables so that they evaluate to themselves;
+The local variables may be bound to arbitrary values within the block
+but when the block is exited the saved values are restored, and the
+values assigned within the block are lost.
+</p>
+<p>If there is no need to define local variables then the list at the
+beginning of the <code class="code">block</code> command may be omitted.
+In this case if neither <code class="code"><a class="ref" href="maxima_36.html#return">return</a></code> nor <code class="code"><a class="ref" href="maxima_36.html#go">go</a></code> are used
+<code class="code">block</code> behaves similar to the following construct:
+</p>
+<div class="example">
+<pre class="example-preformatted">( expr_1, expr_2,... , expr_n );
+</pre></div>
+
+<p><var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var> will be evaluated in sequence and
+the value of the last expression will be returned. The sequence can be 
+modified by the <code class="code">go</code>, <code class="code">throw</code>, and <code class="code">return</code> functions.  The last
+expression is <var class="var">expr_n</var> unless <code class="code">return</code> or an expression containing
+<code class="code">throw</code> is evaluated.
+</p>
+<p>The declaration <code class="code">local(<var class="var">v_1</var>, ..., <var class="var">v_m</var>)</code> within <code class="code">block</code>
+saves the properties associated with the symbols <var class="var">v_1</var>, &hellip;, <var class="var">v_m</var>,
+removes any properties before evaluating other expressions, and restores any
+saved properties on exit from the block.  Some declarations are implemented as
+properties of a symbol, including <code class="code">:=</code>, <code class="code">array</code>, <code class="code">dependencies</code>,
+<code class="code">atvalue</code>, <code class="code">matchdeclare</code>, <code class="code">atomgrad</code>, <code class="code">constant</code>,
+<code class="code">nonscalar</code>, <code class="code">assume</code>, and some others.  The effect of <code class="code">local</code>
+is to make such declarations effective only within the block; otherwise
+declarations within a block are actually global declarations.
+</p>
+<p><code class="code">block</code> may appear within another <code class="code">block</code>.
+Local variables are established each time a new <code class="code">block</code> is evaluated.
+Local variables appear to be global to any enclosed blocks.
+If a variable is non-local in a block,
+its value is the value most recently assigned by an enclosing block, if any,
+otherwise, it is the value of the variable in the global environment.
+This policy may coincide with the usual understanding of &quot;dynamic scope&quot;.
+</p>
+<p>The value of the block is the value of the last statement or the
+value of the argument to the function <code class="code">return</code> which may be used to exit
+explicitly from the block. The function <code class="code">go</code> may be used to transfer
+control to the statement of the block that is tagged with the argument
+to <code class="code">go</code>.  To tag a statement, precede it by an atomic argument as
+another statement in the block.  For example:
+<code class="code">block ([x], x:1, loop, x: x+1, ..., go(loop), ...)</code>.  The argument to
+<code class="code">go</code> must be the name of a tag appearing within the block.  One cannot use
+<code class="code">go</code> to transfer to a tag in a block other than the one containing the
+<code class="code">go</code>.
+</p>
+<p>Blocks typically appear on the right side of a function definition
+but can be used in other places as well.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_36.html#return">return</a></code> and <code class="code"><a class="ref" href="maxima_36.html#go">go</a></code>.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Programming">Programming</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="break"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fbreak"></a><dl class="first-deffn">
+<dt class="deffn" id="index-break"><span class="category-def">Function: </span><span><strong class="def-name">break</strong> <var class="def-var-arguments">(<var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>)</var><a class="copiable-link" href='#index-break'> &para;</a></span></dt>
+<dd>
+<p>Evaluates and prints <var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var> and then
+causes a Maxima break at which point the user can examine and change
+his environment.  Upon typing <code class="code">exit;</code> the computation resumes.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Debugging">Debugging</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="catch"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fcatch"></a><dl class="first-deffn">
+<dt class="deffn" id="index-catch"><span class="category-def">Function: </span><span><strong class="def-name">catch</strong> <var class="def-var-arguments">(<var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>)</var><a class="copiable-link" href='#index-catch'> &para;</a></span></dt>
+<dd>
+<p>Evaluates <var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var> one by one; if any
+leads to the evaluation of an expression of the
+form <code class="code">throw (arg)</code>, then the value of the <code class="code">catch</code> is the value of
+<code class="code">throw (arg)</code>, and no further expressions are evaluated.
+This &quot;non-local return&quot; thus goes through any depth of
+nesting to the nearest enclosing <code class="code">catch</code>.  If there is no <code class="code">catch</code>
+enclosing a <code class="code">throw</code>, an error message is printed.
+</p>
+<p>If the evaluation of the arguments does not lead to the evaluation of any
+<code class="code">throw</code> then the value of <code class="code">catch</code> is the value of <var class="var">expr_n</var>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) lambda ([x], if x &lt; 0 then throw(x) else f(x))$
+(%i2) g(l) := catch (map (''%, l))$
+(%i3) g ([1, 2, 3, 7]);
+(%o3)               [f(1), f(2), f(3), f(7)]
+(%i4) g ([1, 2, -3, 7]);
+(%o4)                          - 3
+</pre></div>
+
+<p>The function <code class="code">g</code> returns a list of <code class="code">f</code> of each element of <code class="code">l</code> if
+<code class="code">l</code> consists only of non-negative numbers; otherwise, <code class="code">g</code> &quot;catches&quot;
+the first negative element of <code class="code">l</code> and &quot;throws&quot; it up.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Programming">Programming</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="compfile"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fcompfile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-compfile"><span class="category-def">Function: </span><span><strong class="def-name">compfile</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compfile</code> (<var class="var">filename</var>, <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compfile</code> (<var class="var">filename</var>, functions) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compfile</code> (<var class="var">filename</var>, all)</var><a class="copiable-link" href='#index-compfile'> &para;</a></span></dt>
+<dd>
+<p>Translates Maxima functions into Lisp and writes the translated code into the
+file <var class="var">filename</var>.
+</p>
+<p><code class="code">compfile(<var class="var">filename</var>, <var class="var">f_1</var>, ..., <var class="var">f_n</var>)</code> translates the
+specified functions.  <code class="code">compfile (<var class="var">filename</var>, functions)</code> and
+<code class="code">compfile (<var class="var">filename</var>, all)</code> translate all user-defined functions.
+</p>
+<p>The Lisp translations are not evaluated, nor is the output file processed by
+the Lisp compiler.
+<code class="code">translate</code> creates and evaluates Lisp translations.  <code class="code">compile_file</code>
+translates Maxima into Lisp, and then executes the Lisp compiler.
+</p>
+<p>See also <code class="code"><a class="ref" href="#translate">translate</a></code>, <code class="code"><a class="ref" href="#translate_005ffile">translate_file</a></code>, and <code class="code"><a class="ref" href="#compile_005ffile">compile_file</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="compile"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fcompile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-compile"><span class="category-def">Function: </span><span><strong class="def-name">compile</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compile</code> (<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compile</code> (functions) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compile</code> (all)</var><a class="copiable-link" href='#index-compile'> &para;</a></span></dt>
+<dd>
+<p>Translates Maxima functions <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var> into Lisp, evaluates
+the Lisp translations, and calls the Lisp function <code class="code">COMPILE</code> on each
+translated function.  <code class="code">compile</code> returns a list of the names of the
+compiled functions.
+</p>
+<p><code class="code">compile (all)</code> or <code class="code">compile (functions)</code> compiles all user-defined
+functions.
+</p>
+<p><code class="code">compile</code> quotes its arguments; 
+the quote-quote operator <code class="code">'<!-- /@w -->'</code> defeats quotation.
+</p>
+<p>Compiling a function to native code can mean a big increase in speed and might 
+cause the memory footprint to reduce drastically.
+Code tends to be especially effective when the flexibility it needs to provide
+is limited. If compilation doesn&rsquo;t provide the speed that is needed a few ways
+to limit the code&rsquo;s functionality are the following:
+</p><ul class="itemize mark-bullet">
+<li>If the function accesses global variables the complexity of the function
+      can be drastically be reduced by limiting these variables to one data type,
+      for example using <code class="code"><a class="ref" href="#mode_005fdeclare">mode_declare</a></code> or a statement like the following one:
+      <code class="code">put(x_1, bigfloat, numerical_type)</code>
+</li><li>The compiler might warn about undeclared variables if text could either be
+      a named option to a command or (if they are assigned a value to) the name
+      of a variable. Prepending the option with a single quote <code class="code">'</code>
+      tells the compiler that the text is meant as an option.
+</li></ul>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="define"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fdefine"></a><dl class="first-deffn">
+<dt class="deffn" id="index-define"><span class="category-def">Function: </span><span><strong class="def-name">define</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">define</code> (<var class="var">f</var>(<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>), <var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">define</code> (<var class="var">f</var>[<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>], <var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">define</code> (<var class="var">f</var>[<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>](<var class="var">y_1</var>, &hellip;, <var class="var">y_m</var>), <var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">define</code> (funmake (<var class="var">f</var>, [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>]), <var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">define</code> (arraymake (<var class="var">f</var>, [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>]), <var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">define</code> (ev (<var class="var">expr_1</var>), <var class="var">expr_2</var>)</var><a class="copiable-link" href='#index-define'> &para;</a></span></dt>
+<dd>
+<p>Defines a function named <var class="var">f</var> with arguments <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>
+and function body <var class="var">expr</var>.  <code class="code">define</code> always evaluates its second
+argument (unless explicitly quoted).  The function so defined may be an ordinary
+Maxima function (with arguments enclosed in parentheses) or a <code class="code"><a class="ref" href="#memoizing-function">memoizing function</a></code>
+(with arguments enclosed in square brackets).
+</p>
+<p>When the last or only function argument <var class="var">x_n</var> is a list of one element,
+the function defined by <code class="code">define</code> accepts a variable number of arguments.
+Actual arguments are assigned one-to-one to formal arguments <var class="var">x_1</var>, &hellip;,
+<var class="var">x_(n - 1)</var>, and any further actual arguments, if present, are assigned to
+<var class="var">x_n</var> as a list.
+</p>
+<p>When the first argument of <code class="code">define</code> is an expression of the form
+<code class="code"><var class="var">f</var>(<var class="var">x_1</var>, ..., <var class="var">x_n</var>)</code> or <code class="code"><var class="var">f</var>[<var class="var">x_1</var>, ...,
+<var class="var">x_n</var>]</code>, the function arguments are evaluated but <var class="var">f</var> is not evaluated,
+even if there is already a function or variable by that name.
+</p>
+<p>When the first argument is an expression with operator <code class="code">funmake</code>,
+<code class="code">arraymake</code>, or <code class="code">ev</code>, the first argument is evaluated;
+this allows for the function name to be computed, as well as the body.
+</p>
+<p>All function definitions appear in the same namespace; defining a function
+<code class="code">f</code> within another function <code class="code">g</code> does not automatically limit the scope
+of <code class="code">f</code> to <code class="code">g</code>.  However, <code class="code">local(f)</code> makes the definition of
+function <code class="code">f</code> effective only within the block or other compound expression
+in which <code class="code">local</code> appears.
+</p>
+<p>If some formal argument <var class="var">x_k</var> is a quoted symbol (after evaluation), the
+function defined by <code class="code">define</code> does not evaluate the corresponding actual
+argument.  Otherwise all actual arguments are evaluated.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_6.html#g_t_003a_003d">:=</a></code> and <code class="code"><a class="ref" href="maxima_6.html#g_t_003a_003a_003d">::=</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">define</code> always evaluates its second argument (unless explicitly quoted).
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) expr : cos(y) - sin(x);
+(%o1)                    cos(y) - sin(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) define (F1 (x, y), expr);
+(%o2)              F1(x, y) := cos(y) - sin(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) F1 (a, b);
+(%o3)                    cos(b) - sin(a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) F2 (x, y) := expr;
+(%o4)                   F2(x, y) := expr
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) F2 (a, b);
+(%o5)                    cos(y) - sin(x)
+</pre></div></div>
+
+<p>The function defined by <code class="code">define</code> may be an ordinary Maxima function or a
+<code class="code"><a class="ref" href="#memoizing-function">memoizing function</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) define (G1 (x, y), x.y - y.x);
+(%o1)               G1(x, y) := x . y - y . x
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) define (G2 [x, y], x.y - y.x);
+(%o2)                G2     := x . y - y . x
+                       x, y
+</pre></div></div>
+
+<p>When the last or only function argument <var class="var">x_n</var> is a list of one element,
+the function defined by <code class="code">define</code> accepts a variable number of arguments.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) define (H ([L]), '(apply (&quot;+&quot;, L)));
+(%o1)                H([L]) := apply(&quot;+&quot;, L)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) H (a, b, c);
+(%o2)                       c + b + a
+</pre></div></div>
+
+<p>When the first argument is an expression with operator <code class="code">funmake</code>,
+<code class="code">arraymake</code>, or <code class="code">ev</code>, the first argument is evaluated.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) [F : I, u : x];
+(%o1)                        [I, x]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) funmake (F, [u]);
+(%o2)                         I(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) define (funmake (F, [u]), cos(u) + 1);
+(%o3)                  I(x) := cos(x) + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) define (arraymake (F, [u]), cos(u) + 1);
+(%o4)                   I  := cos(x) + 1
+                         x
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) define (foo (x, y), bar (y, x));
+(%o5)                foo(x, y) := bar(y, x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) define (ev (foo (x, y)), sin(x) - cos(y));
+(%o6)             bar(y, x) := sin(x) - cos(y)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="define_005fvariable"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fdefine_005fvariable"></a><dl class="first-deffn">
+<dt class="deffn" id="index-define_005fvariable"><span class="category-def">Function: </span><span><strong class="def-name">define_variable</strong> <var class="def-var-arguments">(<var class="var">name</var>, <var class="var">default_value</var>, <var class="var">mode</var>)</var><a class="copiable-link" href='#index-define_005fvariable'> &para;</a></span></dt>
+<dd>
+<p>Introduces a global variable into the Maxima environment.
+<code class="code">define_variable</code> is useful in user-written packages, which are often
+translated or compiled as it gives the compiler hints of the type (&ldquo;mode&rdquo;)
+of a variable and therefore avoids requiring it to generate generic code that
+can deal with every variable being an integer, float, maxima object, array etc.
+</p>
+<p><code class="code">define_variable</code> carries out the following steps:
+</p>
+<ol class="enumerate">
+<li> <code class="code">mode_declare (<var class="var">name</var>, <var class="var">mode</var>)</code> declares the mode (&ldquo;type&rdquo;) of
+<var class="var">name</var> to the translator which can considerably speed up compiled code as
+it allows having to create generic code. See <code class="code"><a class="ref" href="#mode_005fdeclare">mode_declare</a></code> for a list of
+the possible modes.
+
+</li><li> If the variable is unbound, <var class="var">default_value</var> is assigned to <var class="var">name</var>.
+
+</li><li> Associates <var class="var">name</var> with a test function
+to ensure that <var class="var">name</var> is only assigned values of the declared mode.
+</li></ol>
+
+
+
+<p>The <code class="code">value_check</code> property can be assigned to any variable which has been
+defined via <code class="code">define_variable</code> with a mode other than <code class="code">any</code>.
+The <code class="code">value_check</code> property is a lambda expression or the name of a function
+of one variable, which is called when an attempt is made to assign a value to
+the variable.  The argument of the <code class="code">value_check</code> function is the would-be
+assigned value.
+</p>
+<p><code class="code">define_variable</code> evaluates <code class="code">default_value</code>, and quotes <code class="code">name</code>
+and <code class="code">mode</code>.  <code class="code">define_variable</code> returns the current value of
+<code class="code">name</code>, which is <code class="code">default_value</code> if <code class="code">name</code> was unbound before,
+and otherwise it is the previous value of <code class="code">name</code>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">foo</code> is a Boolean variable, with the initial value <code class="code">true</code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) define_variable (foo, true, boolean);
+(%o1)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) foo;
+(%o2)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) foo: false;
+(%o3)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) foo: %pi;
+translator: foo was declared with mode boolean
+                                          , but it has value: %pi
+ -- an error. To debug this try: debugmode(true);
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) foo;
+(%o5)                         false
+</pre></div></div>
+
+<p><code class="code">bar</code> is an integer variable, which must be prime.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) define_variable (bar, 2, integer);
+(%o1)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) qput (bar, prime_test, value_check);
+(%o2)                      prime_test
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) prime_test (y) := if not primep(y) then
+                           error (y, &quot;is not prime.&quot;);
+(%o3) prime_test(y) := if not primep(y)
+                                   then error(y, &quot;is not prime.&quot;)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bar: 1439;
+(%o4)                         1439
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bar: 1440;
+1440 is not prime.
+#0: prime_test(y=1440)
+ -- an error. To debug this try: debugmode(true);
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) bar;
+(%o6)                         1439
+</pre></div></div>
+
+<p><code class="code">baz_quux</code> is a variable which cannot be assigned a value.
+The mode <code class="code">any_check</code> is like <code class="code">any</code>, but <code class="code">any_check</code> enables the
+<code class="code">value_check</code> mechanism, and <code class="code">any</code> does not.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) define_variable (baz_quux, 'baz_quux, any_check);
+(%o1)                       baz_quux
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) F: lambda ([y], if y # 'baz_quux then
+                 error (&quot;Cannot assign to `baz_quux'.&quot;));
+(%o2) lambda([y], if y # 'baz_quux
+                        then error(Cannot assign to `baz_quux'.))
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) qput (baz_quux, ''F, value_check);
+(%o3) lambda([y], if y # 'baz_quux
+                        then error(Cannot assign to `baz_quux'.))
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) baz_quux: 'baz_quux;
+(%o4)                       baz_quux
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) baz_quux: sqrt(2);
+Cannot assign to `baz_quux'.
+#0: lambda([y],if y # 'baz_quux then
+            error(&quot;Cannot assign to `baz_quux'.&quot;))(y=sqrt(2))
+ -- an error. To debug this try: debugmode(true);
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) baz_quux;
+(%o6)                       baz_quux
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dispfun"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fdispfun"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dispfun"><span class="category-def">Function: </span><span><strong class="def-name">dispfun</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">dispfun</code> (<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">dispfun</code> (all)</var><a class="copiable-link" href='#index-dispfun'> &para;</a></span></dt>
+<dd>
+<p>Displays the definition of the user-defined functions <var class="var">f_1</var>, &hellip;,
+<var class="var">f_n</var>.  Each argument may be the name of a macro (defined with <code class="code">::=</code>),
+an ordinary function (defined with <code class="code">:=</code> or <code class="code">define</code>), an array
+function (defined with <code class="code">:=</code> or <code class="code">define</code>, but enclosing arguments in
+square brackets <code class="code">[ ]</code>), a subscripted function (defined with <code class="code">:=</code> or
+<code class="code">define</code>, but enclosing some arguments in square brackets and others in
+parentheses <code class="code">( )</code>), one of a family of subscripted functions selected by a
+particular subscript value, or a subscripted function defined with a constant
+subscript.
+</p>
+<p><code class="code">dispfun (all)</code> displays all user-defined functions as
+given by the <code class="code">functions</code>, <code class="code">arrays</code>, and <code class="code">macros</code> lists,
+omitting subscripted functions defined with constant subscripts.
+</p>
+<p><code class="code">dispfun</code> creates an intermediate expression label
+(<code class="code">%t1</code>, <code class="code">%t2</code>, etc.)
+for each displayed function, and assigns the function definition to the label.
+In contrast, <code class="code">fundef</code> returns the function definition.
+</p>
+<p><code class="code">dispfun</code> quotes its arguments; the quote-quote operator <code class="code">'<!-- /@w -->'</code>
+defeats quotation.  <code class="code">dispfun</code> returns the list of intermediate expression
+labels corresponding to the displayed functions.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) m(x, y) ::= x^(-y);
+                                     - y
+(%o1)                   m(x, y) ::= x
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) f(x, y) :=  x^(-y);
+                                     - y
+(%o2)                    f(x, y) := x
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) g[x, y] :=  x^(-y);
+                                    - y
+(%o3)                     g     := x
+                           x, y
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) h[x](y) :=  x^(-y);
+                                    - y
+(%o4)                     h (y) := x
+                           x
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) i[8](y) :=  8^(-y);
+                                    - y
+(%o5)                     i (y) := 8
+                           8
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) dispfun (m, f, g, h, h[5], h[10], i[8]);
+                                     - y
+(%t6)                   m(x, y) ::= x
+
+                                     - y
+(%t7)                    f(x, y) := x
+
+                                    - y
+(%t8)                     g     := x
+                           x, y
+
+                                    - y
+(%t9)                     h (y) := x
+                           x
+
+                                    1
+(%t10)                     h (y) := --
+                            5        y
+                                    5
+
+                                     1
+(%t11)                    h  (y) := ---
+                           10         y
+                                    10
+
+                                    - y
+(%t12)                    i (y) := 8
+                           8
+
+(%o12)       [%t6, %t7, %t8, %t9, %t10, %t11, %t12]
+</pre></div><div class="group"><pre class="example-preformatted">(%i13) ''%;
+                     - y              - y            - y
+(%o13) [m(x, y) ::= x   , f(x, y) := x   , g     := x   , 
+                                            x, y
+                  - y           1              1             - y
+        h (y) := x   , h (y) := --, h  (y) := ---, i (y) := 8   ]
+         x              5        y   10         y   8
+                                5             10
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Display-functions">Display functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fullmap"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002ffullmap"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fullmap"><span class="category-def">Function: </span><span><strong class="def-name">fullmap</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">expr_1</var>, &hellip;)</var><a class="copiable-link" href='#index-fullmap'> &para;</a></span></dt>
+<dd>
+<p>Similar to <code class="code">map</code>, but <code class="code">fullmap</code> keeps mapping down all subexpressions
+until the main operators are no longer the same.
+</p>
+<p><code class="code">fullmap</code> is used by the Maxima simplifier for certain matrix
+manipulations; thus, Maxima sometimes generates an error message concerning
+<code class="code">fullmap</code> even though <code class="code">fullmap</code> was not explicitly called by the user.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) a + b * c;
+(%o1)                        b c + a
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) fullmap (g, %);
+(%o2)                   g(b) g(c) + g(a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) map (g, %th(2));
+(%o3)                     g(b c) + g(a)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-application">Function application</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fullmapl"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002ffullmapl"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fullmapl"><span class="category-def">Function: </span><span><strong class="def-name">fullmapl</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">list_1</var>, &hellip;)</var><a class="copiable-link" href='#index-fullmapl'> &para;</a></span></dt>
+<dd>
+<p>Similar to <code class="code">fullmap</code>, but <code class="code">fullmapl</code> only maps onto lists and
+matrices.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) fullmapl (&quot;+&quot;, [3, [4, 5]], [[a, 1], [0, -1.5]]);
+(%o1)                [[a + 3, 4], [4, 3.5]]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-application">Function application</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="functions"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ffunctions"></a><dl class="first-defvr">
+<dt class="defvr" id="index-functions"><span class="category-def">System variable: </span><span><strong class="def-name">functions</strong><a class="copiable-link" href='#index-functions'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[]</code>
+</p>
+<p><code class="code">functions</code> is the list of ordinary Maxima functions
+in the current session.
+An ordinary function is a function constructed by
+<code class="code">define</code> or <code class="code">:=</code> and called with parentheses <code class="code">()</code>.
+A function may be defined at the Maxima prompt
+or in a Maxima file loaded by <code class="code">load</code> or <code class="code">batch</code>.
+</p>
+<p><code class="code"><a class="ref" href="#Memoizing-functions">Memoizing functions</a></code> (called with square brackets, e.g., <code class="code">F[x]</code>) and subscripted
+functions (called with square brackets and parentheses, e.g., <code class="code">F[x](y)</code>)
+are listed by the global variable <code class="code">arrays</code>, and not by <code class="code">functions</code>.
+</p>
+<p>Lisp functions are not kept on any list.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) F_1 (x) := x - 100;
+(%o1)                   F_1(x) := x - 100
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) F_2 (x, y) := x / y;
+                                      x
+(%o2)                    F_2(x, y) := -
+                                      y
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) define (F_3 (x), sqrt (x));
+(%o3)                   F_3(x) := sqrt(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) G_1 [x] := x - 100;
+(%o4)                    G_1  := x - 100
+                            x
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) G_2 [x, y] := x / y;
+                                     x
+(%o5)                     G_2     := -
+                             x, y    y
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) define (G_3 [x], sqrt (x));
+(%o6)                    G_3  := sqrt(x)
+                            x
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) H_1 [x] (y) := x^y;
+                                      y
+(%o7)                     H_1 (y) := x
+                             x
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) functions;
+(%o8)              [F_1(x), F_2(x, y), F_3(x)]
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) arrays;
+(%o9)                 [G_1, G_2, G_3, H_1]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="fundef"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002ffundef"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fundef"><span class="category-def">Function: </span><span><strong class="def-name">fundef</strong> <var class="def-var-arguments">(<var class="var">f</var>)</var><a class="copiable-link" href='#index-fundef'> &para;</a></span></dt>
+<dd>
+<p>Returns the definition of the function <var class="var">f</var>.
+</p>
+<p>The argument may be
+</p><ul class="itemize mark-bullet">
+<li>the name of a macro (defined with <code class="code">::=</code>),
+</li><li>an ordinary function (defined with <code class="code">:=</code> or <code class="code">define</code>),
+</li><li>a <code class="code"><a class="ref" href="#memoizing-function">memoizing function</a></code> (defined with <code class="code">:=</code> or <code class="code">define</code>, but enclosing arguments in square brackets <code class="code">[ ]</code>),
+</li><li>a subscripted function (defined with <code class="code">:=</code> or <code class="code">define</code>,
+but enclosing some arguments in square brackets and others in parentheses
+<code class="code">( )</code>),
+</li><li>one of a family of subscripted functions selected by a particular
+subscript value,
+</li><li>or a subscripted function defined with a constant subscript.
+</li></ul>
+
+<p><code class="code">fundef</code> quotes its argument;
+the quote-quote operator <code class="code">'<!-- /@w -->'</code> defeats quotation.
+</p>
+<p><code class="code">fundef (<var class="var">f</var>)</code> returns the definition of <var class="var">f</var>.
+In contrast, <code class="code">dispfun (<var class="var">f</var>)</code> creates an intermediate expression label
+and assigns the definition to the label.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="funmake"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002ffunmake"></a><dl class="first-deffn">
+<dt class="deffn" id="index-funmake"><span class="category-def">Function: </span><span><strong class="def-name">funmake</strong> <var class="def-var-arguments">(<var class="var">F</var>, [<var class="var">arg_1</var>, &hellip;, <var class="var">arg_n</var>])</var><a class="copiable-link" href='#index-funmake'> &para;</a></span></dt>
+<dd>
+<p>Returns an expression <code class="code"><var class="var">F</var>(<var class="var">arg_1</var>, ..., <var class="var">arg_n</var>)</code>.
+The return value is simplified, but not evaluated,
+so the function <var class="var">F</var> is not called, even if it exists.
+</p>
+<p><code class="code">funmake</code> does not attempt to distinguish <code class="code"><a class="ref" href="#memoizing-functions">memoizing functions</a></code> from ordinary 
+functions; when <var class="var">F</var> is the name of a memoizing function,
+<code class="code">funmake</code> returns <code class="code"><var class="var">F</var>(...)</code>
+(that is, a function call with parentheses instead of square brackets).
+<code class="code">arraymake</code> returns a function call with square brackets in this case.
+</p>
+<p><code class="code">funmake</code> evaluates its arguments.
+</p>
+<p>See also <code class="code"><a class="ref" href="#apply">apply</a></code> and <code class="code"><a class="ref" href="maxima_5.html#args">args</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">funmake</code> applied to an ordinary Maxima function.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) F (x, y) := y^2 - x^2;
+                                   2    2
+(%o1)                  F(x, y) := y  - x
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) funmake (F, [a + 1, b + 1]);
+(%o2)                    F(a + 1, b + 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ''%;
+                              2          2
+(%o3)                  (b + 1)  - (a + 1)
+</pre></div></div>
+
+<p><code class="code">funmake</code> applied to a macro.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) G (x) ::= (x - 1)/2;
+                                  x - 1
+(%o1)                    G(x) ::= -----
+                                    2
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) funmake (G, [u]);
+(%o2)                         G(u)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ''%;
+                              u - 1
+(%o3)                         -----
+                                2
+</pre></div></div>
+
+<p><code class="code">funmake</code> applied to a subscripted function.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) H [a] (x) := (x - 1)^a;
+                                        a
+(%o1)                   H (x) := (x - 1)
+                         a
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) funmake (H [n], [%e]);
+                                       n
+(%o2)               lambda([x], (x - 1) )(%e)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ''%;
+                                    n
+(%o3)                       (%e - 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) funmake ('(H [n]), [%e]);
+(%o4)                        H (%e)
+                              n
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) ''%;
+                                    n
+(%o5)                       (%e - 1)
+</pre></div></div>
+
+<p><code class="code">funmake</code> applied to a symbol which is not a defined function of any kind.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) funmake (A, [u]);
+(%o1)                         A(u)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) ''%;
+(%o2)                         A(u)
+</pre></div></div>
+
+<p><code class="code">funmake</code> evaluates its arguments, but not the return value.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) det(a,b,c) := b^2 -4*a*c;
+                                    2
+(%o1)              det(a, b, c) := b  - 4 a c
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) (x : 8, y : 10, z : 12);
+(%o2)                          12
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) f : det;
+(%o3)                          det
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) funmake (f, [x, y, z]);
+(%o4)                    det(8, 10, 12)
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) ''%;
+(%o5)                         - 284
+</pre></div></div>
+
+<p>Maxima simplifies <code class="code">funmake</code>&rsquo;s return value.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) funmake (sin, [%pi / 2]);
+(%o1)                           1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-application">Function application</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="lambda"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002flambda"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lambda"><span class="category-def">Function: </span><span><strong class="def-name">lambda</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">lambda</code> ([<var class="var">x_1</var>, &hellip;, <var class="var">x_m</var>], <var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">lambda</code> ([[<var class="var">L</var>]], <var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">lambda</code> ([<var class="var">x_1</var>, &hellip;, <var class="var">x_m</var>, [<var class="var">L</var>]], <var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>)</var><a class="copiable-link" href='#index-lambda'> &para;</a></span></dt>
+<dd>
+<p>Defines and returns a lambda expression (that is, an anonymous function).
+The function may have required arguments <var class="var">x_1</var>, &hellip;, <var class="var">x_m</var> and/or
+optional arguments <var class="var">L</var>, which appear within the function body as a list.
+The return value of the function is <var class="var">expr_n</var>.  A lambda expression can be
+assigned to a variable and evaluated like an ordinary function.  A lambda
+expression may appear in some contexts in which a function name is expected.
+</p>
+<p>When the function is evaluated, unbound local variables <var class="var">x_1</var>, &hellip;,
+<var class="var">x_m</var> are created.  <code class="code">lambda</code> may appear within <code class="code">block</code> or another
+<code class="code">lambda</code>; local variables are established each time another <code class="code">block</code> or
+<code class="code">lambda</code> is evaluated.  Local variables appear to be global to any enclosed
+<code class="code">block</code> or <code class="code">lambda</code>.  If a variable is not local, its value is the
+value most recently assigned in an enclosing <code class="code">block</code> or <code class="code">lambda</code>, if
+any, otherwise, it is the value of the variable in the global environment.
+This policy may coincide with the usual understanding of &quot;dynamic scope&quot;.
+</p>
+<p>After local variables are established, <var class="var">expr_1</var> through <var class="var">expr_n</var> are
+evaluated in turn.  The special variable <code class="code">%%</code>, representing the value of
+the preceding expression, is recognized.  <code class="code">throw</code> and <code class="code">catch</code> may also
+appear in the list of expressions.
+</p>
+<p><code class="code">return</code> cannot appear in a lambda expression unless enclosed by
+<code class="code">block</code>, in which case <code class="code">return</code> defines the return value of the block
+and not of the lambda expression, unless the block happens to be <var class="var">expr_n</var>.
+Likewise, <code class="code">go</code> cannot appear in a lambda expression unless enclosed by
+<code class="code">block</code>.
+</p>
+<p><code class="code">lambda</code> quotes its arguments; 
+the quote-quote operator <code class="code">'<!-- /@w -->'</code> defeats quotation.
+</p>
+<p>Examples:
+</p>
+<ul class="itemize mark-bullet">
+<li>A lambda expression can be assigned to a variable and evaluated like an ordinary
+function.
+</li></ul>
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) f: lambda ([x], x^2);
+                                      2
+(%o1)                    lambda([x], x )
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) f(a);
+                                2
+(%o2)                          a
+</pre></div></div>
+
+<ul class="itemize mark-bullet">
+<li>A lambda expression may appear in contexts in which a function evaluation is expected.
+</li></ul>
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) lambda ([x], x^2) (a);
+                                2
+(%o1)                          a
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) apply (lambda ([x], x^2), [a]);
+                                2
+(%o2)                          a
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) map (lambda ([x], x^2), [a, b, c, d, e]);
+                        2   2   2   2   2
+(%o3)                 [a , b , c , d , e ]
+</pre></div></div>
+
+<ul class="itemize mark-bullet">
+<li>Argument variables are local variables.
+Other variables appear to be global variables.
+Global variables are evaluated at the time the lambda expression is evaluated,
+unless some special evaluation is forced by some means, such as <code class="code">'<!-- /@w -->'</code>.
+</li></ul>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) a: %pi$
+(%i2) b: %e$
+</pre><div class="group"><pre class="example-preformatted">(%i3) g: lambda ([a], a*b);
+(%o3)                   lambda([a], a b)
+</pre></div><pre class="example-preformatted">(%i4) b: %gamma$
+</pre><div class="group"><pre class="example-preformatted">(%i5) g(1/2);
+                             %gamma
+(%o5)                        ------
+                               2
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) g2: lambda ([a], a*''b);
+(%o6)                 lambda([a], a %gamma)
+</pre></div><pre class="example-preformatted">(%i7) b: %e$
+</pre><div class="group"><pre class="example-preformatted">(%i8) g2(1/2);
+                             %gamma
+(%o8)                        ------
+                               2
+</pre></div></div>
+
+<ul class="itemize mark-bullet">
+<li>Lambda expressions may be nested.  Local variables within the outer lambda
+expression appear to be global to the inner expression unless masked by local
+variables of the same names.
+</li></ul>
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) h: lambda ([a, b], h2: lambda ([a], a*b), h2(1/2));
+                                                   1
+(%o1)     lambda([a, b], h2 : lambda([a], a b), h2(-))
+                                                   2
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) h(%pi, %gamma);
+                             %gamma
+(%o2)                        ------
+                               2
+</pre></div></div>
+
+<ul class="itemize mark-bullet">
+<li>Since <code class="code">lambda</code> quotes its arguments, lambda expression <code class="code">i</code> below does
+not define a &quot;multiply by <code class="code">a</code>&quot; function.  Such a function can be defined
+via <code class="code">buildq</code>, as in lambda expression <code class="code">i2</code> below.
+</li></ul>
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) i: lambda ([a], lambda ([x], a*x));
+(%o1)             lambda([a], lambda([x], a x))
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) i(1/2);
+(%o2)                   lambda([x], a x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) i2: lambda([a], buildq([a: a], lambda([x], a*x)));
+(%o3)    lambda([a], buildq([a : a], lambda([x], a x)))
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) i2(1/2);
+                                    1
+(%o4)                  lambda([x], (-) x)
+                                    2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) i2(1/2)(%pi);
+                               %pi
+(%o5)                          ---
+                                2
+</pre></div></div>
+
+<ul class="itemize mark-bullet">
+<li>A lambda expression may take a variable number of arguments,
+which are indicated by <code class="code">[<var class="var">L</var>]</code> as the sole or final argument.
+The arguments appear within the function body as a list.
+</li></ul>
+
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) f : lambda ([aa, bb, [cc]], aa * cc + bb);
+(%o1)          lambda([aa, bb, [cc]], aa cc + bb)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) f (foo, %i, 17, 29, 256);
+(%o2)       [17 foo + %i, 29 foo + %i, 256 foo + %i]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) g : lambda ([[aa]], apply (&quot;+&quot;, aa));
+(%o3)             lambda([[aa]], apply(+, aa))
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) g (17, 29, x, y, z, %e);
+(%o4)                  z + y + x + %e + 46
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="local"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002flocal"></a><dl class="first-deffn">
+<dt class="deffn" id="index-local"><span class="category-def">Function: </span><span><strong class="def-name">local</strong> <var class="def-var-arguments">(<var class="var">v_1</var>, &hellip;, <var class="var">v_n</var>)</var><a class="copiable-link" href='#index-local'> &para;</a></span></dt>
+<dd>
+<p>Saves the properties associated with the symbols <var class="var">v_1</var>, &hellip;, <var class="var">v_n</var>,
+removes any properties before evaluating other expressions,
+and restores any saved properties on exit
+from the block or other compound expression in which <code class="code">local</code> appears.
+</p>
+<p>Some declarations are implemented as properties of a symbol, including
+<code class="code">:=</code>, <code class="code">array</code>, <code class="code">dependencies</code>, <code class="code">atvalue</code>,
+<code class="code">matchdeclare</code>, <code class="code">atomgrad</code>, <code class="code">constant</code>, <code class="code">nonscalar</code>,
+<code class="code">assume</code>, and some others.  The effect of <code class="code">local</code> is to make such
+declarations effective only within the block or other compound expression in
+which <code class="code">local</code> appears; otherwise such declarations are global declarations.
+</p>
+<p><code class="code">local</code> can only appear in <code class="code">block</code>
+or in the body of a function definition or <code class="code">lambda</code> expression,
+and only one occurrence is permitted in each.
+</p>
+<p><code class="code">local</code> quotes its arguments.
+<code class="code">local</code> returns <code class="code">done</code>.
+</p>
+<p>Example:
+</p>
+<p>A local function definition.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) foo (x) := 1 - x;
+(%o1)                    foo(x) := 1 - x
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) foo (100);
+(%o2)                         - 99
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) block (local (foo), foo (x) := 2 * x, foo (100));
+(%o3)                          200
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) foo (100);
+(%o4)                         - 99
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Programming">Programming</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="macroexpansion"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002fmacroexpansion"></a><dl class="first-defvr">
+<dt class="defvr" id="index-macroexpansion"><span class="category-def">Option variable: </span><span><strong class="def-name">macroexpansion</strong><a class="copiable-link" href='#index-macroexpansion'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p><code class="code">macroexpansion</code> controls whether the expansion (that is, the return value)
+of a macro function is substituted for the macro function call.
+A substitution may speed up subsequent expression evaluations,
+at the cost of storing the expansion.
+</p>
+<dl class="table">
+<dt><code class="code">false</code></dt>
+<dd><p>The expansion of a macro function is not substituted for the macro function call.
+</p></dd>
+<dt><code class="code">expand</code></dt>
+<dd><p>The first time a macro function call is evaluated,
+the expansion is stored.
+The expansion is not recomputed on subsequent calls;
+any side effects (such as <code class="code">print</code> or assignment to global variables) happen
+only when the macro function call is first evaluated.
+Expansion in an expression does not affect other expressions
+which have the same macro function call.
+</p></dd>
+<dt><code class="code">displace</code></dt>
+<dd><p>The first time a macro function call is evaluated,
+the expansion is substituted for the call,
+thus modifying the expression from which the macro function was called.
+The expansion is not recomputed on subsequent calls;
+any side effects happen only when the macro function call is first evaluated.
+Expansion in an expression does not affect other expressions
+which have the same macro function call.
+</p></dd>
+</dl>
+
+<p>Examples
+</p>
+<p>When <code class="code">macroexpansion</code> is <code class="code">false</code>,
+a macro function is called every time the calling expression is evaluated,
+and the calling expression is not modified.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) f (x) := h (x) / g (x);
+                                  h(x)
+(%o1)                     f(x) := ----
+                                  g(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) g (x) ::= block (print (&quot;x + 99 is equal to&quot;, x),
+                       return (x + 99));
+(%o2) g(x) ::= block(print(&quot;x + 99 is equal to&quot;, x), 
+                                                  return(x + 99))
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) h (x) ::= block (print (&quot;x - 99 is equal to&quot;, x),
+                       return (x - 99));
+(%o3) h(x) ::= block(print(&quot;x - 99 is equal to&quot;, x), 
+                                                  return(x - 99))
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) macroexpansion: false;
+(%o4)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) f (a * b);
+x - 99 is equal to x 
+x + 99 is equal to x 
+                            a b - 99
+(%o5)                       --------
+                            a b + 99
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) dispfun (f);
+                                  h(x)
+(%t6)                     f(x) := ----
+                                  g(x)
+
+(%o6)                         [%t6]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) f (a * b);
+x - 99 is equal to x 
+x + 99 is equal to x 
+                            a b - 99
+(%o7)                       --------
+                            a b + 99
+</pre></div></div>
+
+<p>When <code class="code">macroexpansion</code> is <code class="code">expand</code>,
+a macro function is called once,
+and the calling expression is not modified.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) f (x) := h (x) / g (x);
+                                  h(x)
+(%o1)                     f(x) := ----
+                                  g(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) g (x) ::= block (print (&quot;x + 99 is equal to&quot;, x),
+                       return (x + 99));
+(%o2) g(x) ::= block(print(&quot;x + 99 is equal to&quot;, x), 
+                                                  return(x + 99))
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) h (x) ::= block (print (&quot;x - 99 is equal to&quot;, x),
+                       return (x - 99));
+(%o3) h(x) ::= block(print(&quot;x - 99 is equal to&quot;, x), 
+                                                  return(x - 99))
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) macroexpansion: expand;
+(%o4)                        expand
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) f (a * b);
+x - 99 is equal to x 
+x + 99 is equal to x 
+                            a b - 99
+(%o5)                       --------
+                            a b + 99
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) dispfun (f);
+                      mmacroexpanded(x - 99, h(x))
+(%t6)         f(x) := ----------------------------
+                      mmacroexpanded(x + 99, g(x))
+
+(%o6)                         [%t6]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) f (a * b);
+                            a b - 99
+(%o7)                       --------
+                            a b + 99
+</pre></div></div>
+
+<p>When <code class="code">macroexpansion</code> is <code class="code">displace</code>,
+a macro function is called once,
+and the calling expression is modified.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) f (x) := h (x) / g (x);
+                                  h(x)
+(%o1)                     f(x) := ----
+                                  g(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) g (x) ::= block (print (&quot;x + 99 is equal to&quot;, x),
+                       return (x + 99));
+(%o2) g(x) ::= block(print(&quot;x + 99 is equal to&quot;, x), 
+                                                  return(x + 99))
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) h (x) ::= block (print (&quot;x - 99 is equal to&quot;, x),
+                       return (x - 99));
+(%o3) h(x) ::= block(print(&quot;x - 99 is equal to&quot;, x), 
+                                                  return(x - 99))
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) macroexpansion: displace;
+(%o4)                       displace
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) f (a * b);
+x - 99 is equal to x 
+x + 99 is equal to x 
+                            a b - 99
+(%o5)                       --------
+                            a b + 99
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) dispfun (f);
+                                 x - 99
+(%t6)                    f(x) := ------
+                                 x + 99
+
+(%o6)                         [%t6]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) f (a * b);
+                            a b - 99
+(%o7)                       --------
+                            a b + 99
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-application">Function application</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="mode_005fdeclare"></a><a class="anchor" id="modedeclare"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fmode_005fdeclare"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mode_005fdeclare"><span class="category-def">Function: </span><span><strong class="def-name">mode_declare</strong> <var class="def-var-arguments">(<var class="var">y_1</var>, <var class="var">mode_1</var>, &hellip;, <var class="var">y_n</var>, <var class="var">mode_n</var>)</var><a class="copiable-link" href='#index-mode_005fdeclare'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Function_002fdeffn_002fmodedeclare"></a></dd><dt class="deffnx def-cmd-deffn" id="index-modedeclare"><span class="category-def">Function: </span><span><strong class="def-name">modedeclare</strong> <var class="def-var-arguments">(<var class="var">y_1</var>, <var class="var">mode_1</var>, &hellip;, <var class="var">y_n</var>, <var class="var">mode_n</var>)</var><a class="copiable-link" href='#index-modedeclare'> &para;</a></span></dt>
+<dd>
+<p>A <code class="code">mode_declare</code> informs the compiler which type (lisp programmers name the type:
+&ldquo;mode&rdquo;) a function parameter or its return value will be of. This can greatly
+boost the efficiency of the code the compiler generates: Without knowing the type of
+all variables and knowing the return value of all functions a function uses
+in advance very generic (and thus potentially slow) code needs to be generated.
+</p>
+<p>The arguments of <code class="code">mode_declare</code> are pairs consisting of a variable (or a list
+of variables all having the same mode) and a mode. Available modes (&ldquo;types&rdquo;) are:
+</p><div class="example">
+<pre class="example-preformatted">array            an declared array (see the detailed description below)
+boolean          true or false
+integer          integers (including arbitrary-size integers)
+fixnum           integers (excluding arbitrary-size integers)
+float            machine-size floating-point numbers
+real             machine-size floating-point or integer
+number           Numbers
+any              any kind of object (useful for arrays of any)
+</pre></div>
+
+<p>A function parameter named <code class="code">a</code> can be declared as an array filled with elements
+of the type <code class="code">t</code> the following way:
+</p><div class="example">
+<pre class="example-preformatted">mode_declare (a, array(t, dim1, dim2, ...))
+</pre></div>
+<p>If none of the elements of the array <code class="code">a</code> needs to be checked if it still doesn&rsquo;t
+contain a value additional code can be omitted by declaring this fact, too:
+</p><div class="example">
+<pre class="example-preformatted">mode_declare (a, array (t, complete, dim1, dim2, ...))
+</pre></div>
+<p>The <code class="code">complete</code> has no effect if all array elements are of the type
+<code class="code">fixnum</code> or <code class="code">float</code>: Machine-sized numbers inevitably contain a value
+(and will automatically be initialized to 0 in most lisp implementations).
+</p>
+<p>Another way to tell that all entries of the array <code class="code">a</code> are of the type
+(&ldquo;mode&rdquo;) <code class="code">m</code> and have been assigned a value to would be:
+</p><div class="example">
+<pre class="example-preformatted">mode_declare (completearray (a), m))
+</pre></div>
+
+<p>Numeric code using arrays might run faster still if the size of the array is
+known at compile time, as well, as in:
+</p><div class="example">
+<pre class="example-preformatted">mode_declare (completearray (a [10, 10]), float)
+</pre></div>
+<p>for a floating point number array named <code class="code">a</code> which is 10 x 10.
+</p>
+<p><code class="code">mode_declare</code> also can be used in order to declare the type of the result
+of a function. In this case the function compilation needs to be preceded by
+another <code class="code">mode_declare</code> statement. For example the expression,
+</p><div class="example">
+<pre class="example-preformatted">mode_declare ([function (f_1, f_2, ...)], fixnum)
+</pre></div>
+<p>declares that the values returned by <code class="code">f_1</code>, <code class="code">f_2</code>, &hellip; are
+single-word integers.
+</p>
+<p><code class="code">modedeclare</code> is a synonym for <code class="code">mode_declare</code>.
+</p>
+<p>If the type of function parameters and results doesn&rsquo;t match the declaration by
+<code class="code">mode_declare</code> the function may misbehave or a warning or an error might
+occur, see <code class="code"><a class="ref" href="#mode_005fcheckp">mode_checkp</a></code>, <code class="code"><a class="ref" href="#mode_005fcheck_005ferrorp">mode_check_errorp</a></code> and
+<code class="code"><a class="ref" href="#mode_005fcheck_005fwarnp">mode_check_warnp</a></code>.
+</p>
+<p>See <code class="code"><a class="ref" href="#mode_005fidentity">mode_identity</a></code> for declaring the type of lists and <code class="code"><a class="ref" href="#define_005fvariable">define_variable</a></code> for
+declaring the type of all global variables compiled code uses, as well.
+</p>
+<p>Example:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) square_float(f):=(
+     mode_declare(f,float),
+     f*f
+ );
+(%o1)   square_float(f) := (mode_declare(f, float), f f)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) mode_declare([function(f)],float);
+(%o2)                    [[function(f)]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) compile(square_float);
+(%o3)                    [square_float]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) square_float(100.0);
+(%o4)                        10000.0
+</pre></div></div>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="mode_005fcheckp"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002fmode_005fcheckp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-mode_005fcheckp"><span class="category-def">Option variable: </span><span><strong class="def-name">mode_checkp</strong><a class="copiable-link" href='#index-mode_005fcheckp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">mode_checkp</code> is <code class="code">true</code>, <code class="code"><a class="ref" href="#mode_005fdeclare">mode_declare</a></code> does not only define
+which type a variable will be of so the compiler can generate more efficient code,
+but will also create a runtime warning if the variable isn&rsquo;t of the variable type
+the code was compiled to deal with.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) mode_checkp:true;
+(%o1)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) square(f):=(
+    mode_declare(f,float),
+    f^2);
+                                                   2
+(%o2)       square(f) := (mode_declare(f, float), f )
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) compile(square);
+(%o3)                       [square]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) square(2.3);
+(%o4)                   5.289999999999999
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) square(4);
+Maxima encountered a Lisp error:
+
+ The value
+   4
+ is not of type
+   DOUBLE-FLOAT
+ when binding $F
+
+Automatically continuing.
+To enable the Lisp debugger set *debugger-hook* to nil.
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="mode_005fcheck_005ferrorp"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002fmode_005fcheck_005ferrorp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-mode_005fcheck_005ferrorp"><span class="category-def">Option variable: </span><span><strong class="def-name">mode_check_errorp</strong><a class="copiable-link" href='#index-mode_005fcheck_005ferrorp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">mode_check_errorp</code> is <code class="code">true</code>, <code class="code">mode_declare</code> calls
+error.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="mode_005fcheck_005fwarnp"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002fmode_005fcheck_005fwarnp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-mode_005fcheck_005fwarnp"><span class="category-def">Option variable: </span><span><strong class="def-name">mode_check_warnp</strong><a class="copiable-link" href='#index-mode_005fcheck_005fwarnp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">mode_check_warnp</code> is <code class="code">true</code>, mode errors are
+described.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="mode_005fidentity"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fmode_005fidentity"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mode_005fidentity"><span class="category-def">Function: </span><span><strong class="def-name">mode_identity</strong> <var class="def-var-arguments">(<var class="var">arg_1</var>, <var class="var">arg_2</var>)</var><a class="copiable-link" href='#index-mode_005fidentity'> &para;</a></span></dt>
+<dd>
+<p><code class="code">mode_identity</code> works similar to <code class="code"><a class="ref" href="#mode_005fdeclare">mode_declare</a></code>, but is used for
+informing the compiler that a thing like a <code class="code">macro</code> or a list operation
+will only return a specific type of object. The purpose of doing so is that
+maxima supports many objects: Machine integers, arbitrary length integers,
+equations, machine floats, big floats, which means that for everything that
+deals with return values of operations that can result in any object the
+compiler needs to output generic (and therefore potentially slow) code.
+</p>
+<p>The first argument to <code class="code">mode_identity</code> is the type of return value
+something will return (for possible types see <code class="code"><a class="ref" href="#mode_005fdeclare">mode_declare</a></code>).
+(i.e., one of <code class="code">float</code>, <code class="code">fixnum</code>, <code class="code">number</code>,
+The second argument is the expression that will return an object of this
+type.
+</p>
+<p>If the the return value of this expression is of a type the code was not
+compiled for error or warning is signalled.
+</p>
+<p>If you knew that <code class="code">first (l)</code> returned a number then you could write
+</p>
+<div class="example">
+<pre class="example-preformatted"><code class="code">mode_identity (number, first (l))</code>.
+</pre></div>
+<p>However, if you need this construct more often it would be more efficient
+to define a function that returns a number fist:
+</p><div class="example">
+<pre class="example-preformatted">firstnumb (x) ::= buildq ([x], mode_identity (number, first(x)));
+compile(firstnumb)
+</pre></div>
+<p><code class="code">firstnumb</code> now can be used every time you need the first element
+of a list that is guaranteed to be filled with numbers.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="remfunction"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fremfunction"></a><dl class="first-deffn">
+<dt class="deffn" id="index-remfunction"><span class="category-def">Function: </span><span><strong class="def-name">remfunction</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">remfunction</code> (<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">remfunction</code> (all)</var><a class="copiable-link" href='#index-remfunction'> &para;</a></span></dt>
+<dd>
+<p>Unbinds the function definitions of the symbols <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>.
+The arguments may be the names of ordinary functions (created by <code class="code"><a class="ref" href="maxima_6.html#g_t_003a_003d">:=</a></code> or
+<code class="code"><a class="ref" href="#define">define</a></code>) or macro functions (created by <code class="code"><a class="ref" href="maxima_6.html#g_t_003a_003a_003d">::=</a></code>).
+</p>
+<p><code class="code">remfunction (all)</code> unbinds all function definitions.
+</p>
+<p><code class="code">remfunction</code> quotes its arguments.
+</p>
+<p><code class="code">remfunction</code> returns a list of the symbols for which the function
+definition was unbound.  <code class="code">false</code> is returned in place of any symbol for
+which there is no function definition.
+</p>
+<p><code class="code">remfunction</code> does not apply to <code class="code"><a class="ref" href="#memoizing-functions">memoizing functions</a></code> or subscripted functions.
+<code class="code"><a class="ref" href="maxima_4.html#remarray">remarray</a></code> applies to those types of functions.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Function-definition">Function definition</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="savedef"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002fsavedef"></a><dl class="first-defvr">
+<dt class="defvr" id="index-savedef"><span class="category-def">Option variable: </span><span><strong class="def-name">savedef</strong><a class="copiable-link" href='#index-savedef'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">savedef</code> is <code class="code">true</code>, the Maxima version of a user function is
+preserved when the function is translated.  This permits the definition to be
+displayed by <code class="code">dispfun</code> and allows the function to be edited.
+</p>
+<p>When <code class="code">savedef</code> is <code class="code">false</code>, the names of translated functions are
+removed from the <code class="code">functions</code> list.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="translate"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002ftranslate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-translate"><span class="category-def">Function: </span><span><strong class="def-name">translate</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">translate</code> (<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">translate</code> (functions) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">translate</code> (all)</var><a class="copiable-link" href='#index-translate'> &para;</a></span></dt>
+<dd>
+<p>Translates the user-defined functions <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var> from the
+Maxima language into Lisp and evaluates the Lisp translations.
+Typically the translated functions run faster than the originals.
+</p>
+<p><code class="code">translate (all)</code> or <code class="code">translate (functions)</code> translates all
+user-defined functions.
+</p>
+<p>Functions to be translated should include a call to <code class="code">mode_declare</code> at the
+beginning when possible in order to produce more efficient code.  For example:
+</p>
+<div class="example">
+<pre class="example-preformatted">f (x_1, x_2, ...) := block ([v_1, v_2, ...],
+    mode_declare (v_1, mode_1, v_2, mode_2, ...), ...)
+</pre></div>
+
+<p>where the <var class="var">x_1</var>, <var class="var">x_2</var>, &hellip;  are the parameters to the function and
+the <var class="var">v_1</var>, <var class="var">v_2</var>, &hellip; are the local variables.
+</p>
+<p>The names of translated functions are removed from the <code class="code">functions</code> list
+if <code class="code">savedef</code> is <code class="code">false</code> (see below) and are added to the <code class="code">props</code>
+lists.
+</p>
+<p>Functions should not be translated unless they are fully debugged.
+</p>
+<p>Expressions are assumed simplified; if they are not, correct but non-optimal
+code gets generated.  Thus, the user should not set the <code class="code">simp</code> switch to
+<code class="code">false</code> which inhibits simplification of the expressions to be translated.
+</p>
+<p>The switch <code class="code">translate</code>, if <code class="code">true</code>, causes automatic
+translation of a user&rsquo;s function to Lisp.
+</p>
+<p>Note that translated
+functions may not run identically to the way they did before
+translation as certain incompatibilities may exist between the Lisp
+and Maxima versions.  Principally, the <code class="code">rat</code> function with more than
+one argument and the <code class="code">ratvars</code> function should not be used if any
+variables are <code class="code">mode_declare</code>&rsquo;d canonical rational expressions (CRE).
+Also the <code class="code">prederror: false</code> setting
+will not translate.
+</p>
+<p><code class="code">savedef</code> - if <code class="code">true</code> will cause the Maxima version of a user
+function to remain when the function is <code class="code">translate</code>&rsquo;d.  This permits the
+definition to be displayed by <code class="code">dispfun</code> and allows the function to be
+edited.
+</p>
+<p><code class="code">transrun</code> - if <code class="code">false</code> will cause the interpreted version of all
+functions to be run (provided they are still around) rather than the
+translated version.
+</p>
+<p>The result returned by <code class="code">translate</code> is a list of the names of the
+functions translated.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="translate_005ffile"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002ftranslate_005ffile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-translate_005ffile"><span class="category-def">Function: </span><span><strong class="def-name">translate_file</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">translate_file</code> (<var class="var">maxima_filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">translate_file</code> (<var class="var">maxima_filename</var>, <var class="var">lisp_filename</var>)</var><a class="copiable-link" href='#index-translate_005ffile'> &para;</a></span></dt>
+<dd>
+<p>Translates a file of Maxima code into a file of Lisp code.
+<code class="code">translate_file</code> returns a list of three filenames:
+the name of the Maxima file, the name of the Lisp file, and the name of file
+containing additional information about the translation.
+<code class="code">translate_file</code> evaluates its arguments.
+</p>
+<p><code class="code">translate_file (&quot;foo.mac&quot;); load(&quot;foo.LISP&quot;)</code> is the same as the command
+<code class="code">batch (&quot;foo.mac&quot;)</code> except for certain restrictions, the use of
+<code class="code">'<!-- /@w -->'</code> and <code class="code">%</code>, for example.
+</p>
+<p><code class="code">translate_file (<var class="var">maxima_filename</var>)</code> translates a Maxima file
+<var class="var">maxima_filename</var> into a similarly-named Lisp file.
+For example, <code class="code">foo.mac</code> is translated into <code class="code">foo.LISP</code>.
+The Maxima filename may include a directory name or names,
+in which case the Lisp output file is written
+to the same directory from which the Maxima input comes.
+</p>
+<p><code class="code">translate_file (<var class="var">maxima_filename</var>, <var class="var">lisp_filename</var>)</code> translates
+a Maxima file <var class="var">maxima_filename</var> into a Lisp file <var class="var">lisp_filename</var>.
+<code class="code">translate_file</code> ignores the filename extension, if any, of
+<code class="code">lisp_filename</code>; the filename extension of the Lisp output file is always
+<code class="code">LISP</code>.  The Lisp filename may include a directory name or names,
+in which case the Lisp output file is written to the specified directory.
+</p>
+<p><code class="code">translate_file</code> also writes a file of translator warning
+messages of various degrees of severity.
+The filename extension of this file is <code class="code">UNLISP</code>.
+This file may contain valuable information, though possibly obscure,
+for tracking down bugs in translated code.
+The <code class="code">UNLISP</code> file is always written
+to the same directory from which the Maxima input comes.
+</p>
+<p><code class="code">translate_file</code> emits Lisp code which causes
+some declarations and definitions to take effect as soon
+as the Lisp code is compiled.
+See <code class="code">compile_file</code> for more on this topic.
+</p>
+<p>See also 
+</p><div class="flushleft"><p class="flushleft-paragraph"><code class="code">tr_array_as_ref</code>
+<code class="code"><a class="ref" href="#tr_005fbound_005ffunction_005fapplyp">tr_bound_function_applyp</a></code>,
+<code class="code">tr_exponent</code>
+<code class="code"><a class="ref" href="#tr_005ffile_005ftty_005fmessagesp">tr_file_tty_messagesp</a></code>,
+<code class="code"><a class="ref" href="#tr_005ffloat_005fcan_005fbranch_005fcomplex">tr_float_can_branch_complex</a></code>,
+<code class="code"><a class="ref" href="#tr_005ffunction_005fcall_005fdefault">tr_function_call_default</a></code>,
+<code class="code"><a class="ref" href="#tr_005fnumer">tr_numer</a></code>,
+<code class="code"><a class="ref" href="#tr_005foptimize_005fmax_005floop">tr_optimize_max_loop</a></code>,
+<code class="code"><a class="ref" href="#tr_005fstate_005fvars">tr_state_vars</a></code>,
+<code class="code"><a class="ref" href="#tr_005fwarnings_005fget">tr_warnings_get</a></code>,
+<code class="code">tr_warn_bad_function_calls</code>
+<code class="code"><a class="ref" href="#tr_005fwarn_005ffexpr">tr_warn_fexpr</a></code>, 
+<code class="code"><a class="ref" href="#tr_005fwarn_005fmeval">tr_warn_meval</a></code>,
+<code class="code"><a class="ref" href="#tr_005fwarn_005fmode">tr_warn_mode</a></code>,
+<code class="code"><a class="ref" href="#tr_005fwarn_005fundeclared">tr_warn_undeclared</a></code>,
+and <code class="code"><a class="ref" href="#tr_005fwarn_005fundefined_005fvariable">tr_warn_undefined_variable</a></code>.
+</p></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="transrun"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftransrun"></a><dl class="first-defvr">
+<dt class="defvr" id="index-transrun"><span class="category-def">Option variable: </span><span><strong class="def-name">transrun</strong><a class="copiable-link" href='#index-transrun'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">transrun</code> is <code class="code">false</code> will cause the interpreted
+version of all functions to be run (provided they are still around)
+rather than the translated version.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="tr_005farray_005fas_005fref"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005farray_005fas_005fref"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005farray_005fas_005fref"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_array_as_ref</strong><a class="copiable-link" href='#index-tr_005farray_005fas_005fref'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>If <code class="code">translate_fast_arrays</code> is <code class="code">false</code>, array references in Lisp code
+emitted by <code class="code">translate_file</code> are affected by <code class="code">tr_array_as_ref</code>.
+When <code class="code">tr_array_as_ref</code> is <code class="code">true</code>,
+array names are evaluated,
+otherwise array names appear as literal symbols in translated code.
+</p>
+<p><code class="code">tr_array_as_ref</code> has no effect if <code class="code">translate_fast_arrays</code> is
+<code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="tr_005fbound_005ffunction_005fapplyp"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fbound_005ffunction_005fapplyp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fbound_005ffunction_005fapplyp"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_bound_function_applyp</strong><a class="copiable-link" href='#index-tr_005fbound_005ffunction_005fapplyp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">tr_bound_function_applyp</code> is <code class="code">true</code> and <code class="code">tr_function_call_default</code>
+is <code class="code">general</code>, if a bound variable (such as a function argument) is found being
+used as a function then Maxima will rewrite that function call using <code class="code">apply</code> and
+print a warning message.
+</p>
+<p>For example, if <code class="code">g</code> is defined by <code class="code">g(f,x) := f(x+1)</code> then translating
+<code class="code">g</code> will cause Maxima to print a warning and rewrite <code class="code">f(x+1)</code> as
+<code class="code">apply(f,[x+1])</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) f (x) := x^2$
+(%i2) g (f) := f (3)$
+(%i3) tr_bound_function_applyp : true$
+</pre><div class="group"><pre class="example-preformatted">(%i4) translate (g)$
+warning: f is a bound variable in f(3), but it is used as a function.
+note: instead I'll translate it as: apply(f,[3])
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) g (lambda ([x], x));
+(%o5)                           3
+</pre></div><pre class="example-preformatted">(%i6) tr_bound_function_applyp : false$
+(%i7) translate (g)$
+</pre><div class="group"><pre class="example-preformatted">(%i8) g (lambda ([x], x));
+(%o8)                           9
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005ffile_005ftty_005fmessagesp"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005ffile_005ftty_005fmessagesp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005ffile_005ftty_005fmessagesp"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_file_tty_messagesp</strong><a class="copiable-link" href='#index-tr_005ffile_005ftty_005fmessagesp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">tr_file_tty_messagesp</code> is <code class="code">true</code>, messages generated by
+<code class="code">translate_file</code> during translation of a file are displayed on the console
+and inserted into the UNLISP file.  When <code class="code">false</code>, messages about
+translation of the file are only inserted into the UNLISP file.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005ffloat_005fcan_005fbranch_005fcomplex"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005ffloat_005fcan_005fbranch_005fcomplex"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005ffloat_005fcan_005fbranch_005fcomplex"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_float_can_branch_complex</strong><a class="copiable-link" href='#index-tr_005ffloat_005fcan_005fbranch_005fcomplex'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>Tells the Maxima-to-Lisp translator to assume that the functions 
+<code class="code">acos</code>, <code class="code">asin</code>, <code class="code">asec</code>, <code class="code">acsc</code>, <code class="code">acosh</code>,
+<code class="code">asech</code>, <code class="code">atanh</code>, <code class="code">acoth</code>, <code class="code">log</code> and <code class="code">sqrt</code>
+can return complex results.
+</p>
+<p>When it is <code class="code">true</code> then <code class="code">acos(x)</code> is of mode <code class="code">any</code>
+even if <code class="code">x</code> is of mode <code class="code">float</code> (as set by <code class="code">mode_declare</code>).
+When <code class="code">false</code> then <code class="code">acos(x)</code> is of mode
+<code class="code">float</code> if and only if <code class="code">x</code> is of mode <code class="code">float</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005ffunction_005fcall_005fdefault"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005ffunction_005fcall_005fdefault"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005ffunction_005fcall_005fdefault"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_function_call_default</strong><a class="copiable-link" href='#index-tr_005ffunction_005fcall_005fdefault'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">general</code>
+</p>
+<p><code class="code">false</code> means give up and call <code class="code">meval</code>, <code class="code">expr</code> means assume Lisp
+fixed arg function.  <code class="code">general</code>, the default gives code good for
+<code class="code">mexprs</code> and <code class="code">mlexprs</code> but not <code class="code">macros</code>.  <code class="code">general</code> assures
+variable bindings are correct in compiled code.  In <code class="code">general</code> mode, when
+translating F(X), if F is a bound variable, then it assumes that
+<code class="code">apply (f, [x])</code> is meant, and translates a such, with appropriate warning.
+There is no need to turn this off.  With the default settings, no warning
+messages implies full compatibility of translated and compiled code with the
+Maxima interpreter.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005fnumer"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fnumer"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fnumer"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_numer</strong><a class="copiable-link" href='#index-tr_005fnumer'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">tr_numer</code> is <code class="code">true</code>, <code class="code">numer</code> properties are used for
+atoms which have them, e.g. <code class="code">%pi</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005foptimize_005fmax_005floop"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005foptimize_005fmax_005floop"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005foptimize_005fmax_005floop"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_optimize_max_loop</strong><a class="copiable-link" href='#index-tr_005foptimize_005fmax_005floop'> &para;</a></span></dt>
+<dd><p>Default value: 100
+</p>
+<p><code class="code">tr_optimize_max_loop</code> is the maximum number of times the
+macro-expansion and optimization pass of the translator will loop in
+considering a form.  This is to catch macro expansion errors, and
+non-terminating optimization properties.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="tr_005fstate_005fvars"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fstate_005fvars"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fstate_005fvars"><span class="category-def">System variable: </span><span><strong class="def-name">tr_state_vars</strong><a class="copiable-link" href='#index-tr_005fstate_005fvars'> &para;</a></span></dt>
+<dd><p>Default value:
+</p><div class="example">
+<pre class="example-preformatted">[translate_fast_arrays, tr_function_call_default, tr_bound_function_applyp,
+tr_array_as_ref, tr_numer, tr_float_can_branch_complex, define_variable]
+</pre></div>
+
+<p>The list of the switches that affect the form of the
+translated output.
+This information is useful to system people when
+trying to debug the translator.  By comparing the translated product
+to what should have been produced for a given state, it is possible to
+track down bugs.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="tr_005fwarnings_005fget"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002ftr_005fwarnings_005fget"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tr_005fwarnings_005fget"><span class="category-def">Function: </span><span><strong class="def-name">tr_warnings_get</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-tr_005fwarnings_005fget'> &para;</a></span></dt>
+<dd>
+<p>Prints a list of warnings which have been given by
+the translator during the current translation.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fbad_005ffunction_005fcalls"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fwarn_005fbad_005ffunction_005fcalls"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_warn_bad_function_calls</strong><a class="copiable-link" href='#index-tr_005fwarn_005fbad_005ffunction_005fcalls'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>- Gives a warning when
+when function calls are being made which may not be correct due to
+improper declarations that were made at translate time.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005fwarn_005ffexpr"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fwarn_005ffexpr"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fwarn_005ffexpr"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_warn_fexpr</strong><a class="copiable-link" href='#index-tr_005fwarn_005ffexpr'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">compfile</code>
+</p>
+<p>- Gives a warning if any FEXPRs are
+encountered.  FEXPRs should not normally be output in translated code,
+all legitimate special program forms are translated.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005fwarn_005fmeval"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fmeval"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fwarn_005fmeval"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_warn_meval</strong><a class="copiable-link" href='#index-tr_005fwarn_005fmeval'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">compfile</code>
+</p>
+<p>- Gives a warning if the function <code class="code">meval</code> gets called.  If <code class="code">meval</code> is
+called that indicates problems in the translation.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005fwarn_005fmode"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fmode"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fwarn_005fmode"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_warn_mode</strong><a class="copiable-link" href='#index-tr_005fwarn_005fmode'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">all</code>
+</p>
+<p>- Gives a warning when variables are
+assigned values inappropriate for their mode.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005fwarn_005fundeclared"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fundeclared"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fwarn_005fundeclared"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_warn_undeclared</strong><a class="copiable-link" href='#index-tr_005fwarn_005fundeclared'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">compile</code>
+</p>
+<p>- Determines when to send
+warnings about undeclared variables to the TTY.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="tr_005fwarn_005fundefined_005fvariable"></a><a class="anchor" id="Item_003a-Function_002fdefvr_002ftr_005fwarn_005fundefined_005fvariable"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tr_005fwarn_005fundefined_005fvariable"><span class="category-def">Option variable: </span><span><strong class="def-name">tr_warn_undefined_variable</strong><a class="copiable-link" href='#index-tr_005fwarn_005fundefined_005fvariable'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">all</code>
+</p>
+<p>- Gives a warning when
+undefined global variables are seen.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-flags-and-variables">Translation flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="compile_005ffile"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fcompile_005ffile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-compile_005ffile"><span class="category-def">Function: </span><span><strong class="def-name">compile_file</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compile_file</code> (<var class="var">filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compile_file</code> (<var class="var">filename</var>, <var class="var">compiled_filename</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">compile_file</code> (<var class="var">filename</var>, <var class="var">compiled_filename</var>, <var class="var">lisp_filename</var>)</var><a class="copiable-link" href='#index-compile_005ffile'> &para;</a></span></dt>
+<dd>
+<p>Translates the Maxima file <var class="var">filename</var> into Lisp, and executes the Lisp compiler.
+The compiled code is not loaded into Maxima.
+</p>
+<p><code class="code">compile_file</code> returns a list of the names of four files: the original
+Maxima file, the Lisp translation, notes on translation, and the compiled code.
+If the compilation fails, the fourth item is <code class="code">false</code>.
+</p>
+<p>Some declarations and definitions take effect as soon
+as the Lisp code is compiled (without loading the compiled code).
+These include functions defined with the <code class="code">:=</code> operator,
+macros define with the <code class="code">::=</code> operator,
+<code class="code">alias</code>, <code class="code">declare</code>,
+<code class="code">define_variable</code>,  <code class="code">mode_declare</code>,
+and 
+<code class="code">infix</code>, <code class="code">matchfix</code>,
+<code class="code">nofix</code>, <code class="code">postfix</code>, <code class="code">prefix</code>,
+and <code class="code">compfile</code>.
+</p>
+<p>Assignments and function calls are not evaluated until the compiled code is
+loaded.  In particular, within the Maxima file, assignments to the translation
+flags (<code class="code">tr_numer</code>, etc.) have no effect on the translation.
+</p>
+
+<p><var class="var">filename</var> may not contain <code class="code">:lisp</code> statements.
+</p>
+<p><code class="code">compile_file</code> evaluates its arguments.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="declare_005ftranslated"></a><a class="anchor" id="Item_003a-Function_002fdeffn_002fdeclare_005ftranslated"></a><dl class="first-deffn">
+<dt class="deffn" id="index-declare_005ftranslated"><span class="category-def">Function: </span><span><strong class="def-name">declare_translated</strong> <var class="def-var-arguments">(<var class="var">f_1</var>, <var class="var">f_2</var>, &hellip;)</var><a class="copiable-link" href='#index-declare_005ftranslated'> &para;</a></span></dt>
+<dd>
+<p>When translating a file of Maxima code
+to Lisp, it is important for the translator to know which functions it
+sees in the file are to be called as translated or compiled functions,
+and which ones are just Maxima functions or undefined.  Putting this
+declaration at the top of the file, lets it know that although a symbol
+does which does not yet have a Lisp function value, will have one at
+call time.  <code class="code">(MFUNCTION-CALL fn arg1 arg2 ...)</code> is generated when
+the translator does not know <code class="code">fn</code> is going to be a Lisp function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Translation-and-compilation">Translation and compilation</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_36.html#Program-Flow" accesskey="n" rel="next">Program Flow</a>, Previous: <a href="maxima_34.html#Sets" accesskey="p" rel="prev">Sets</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

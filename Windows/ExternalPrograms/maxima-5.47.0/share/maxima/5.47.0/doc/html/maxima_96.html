@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Error and warning messages (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Error and warning messages (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Error and warning messages (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_97.html#Command_002dline-options" rel="next" title="Command-line options">
+<link href="maxima_94.html#zeilberger_002dpkg" rel="prev" title="zeilberger-pkg">
+<style type="text/css">
+<!--
+div.example {margin-left: 3.2em}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Error-and-warning-messages">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_97.html#Command_002dline-options" accesskey="n" rel="next">Command-line options</a>, Previous: <a href="maxima_94.html#zeilberger_002dpkg" accesskey="p" rel="prev">zeilberger</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Error-and-warning-messages-1">97 Error and warning messages</h2>
+
+<p>This chapter provides detailed information about the meaning of some error messages
+or on how to recover from errors.
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fError-Messages"></a></p><ul class="mini-toc">
+<li><a href="#Error-Messages" accesskey="1">Error Messages</a></li>
+<li><a href="#Warning-Messages" accesskey="2">Warning Messages</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Error-Messages">
+<div class="nav-panel">
+<p>
+Next: <a href="#Warning-Messages" accesskey="n" rel="next">Warning Messages</a>, Up: <a href="#Error-and-warning-messages" accesskey="u" rel="up">Error and warning messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Error-Messages-1">97.1 Error Messages</h3>
+
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fNo-such-list-element"></a><ul class="mini-toc">
+<li><a href="#No-such-list-element" accesskey="1">apply: no such &quot;list&quot; element</a></li>
+<li><a href="#argument-must-be-a-non_002datomic-expression" accesskey="2">argument must be a non-atomic expression</a></li>
+<li><a href="#cannot-assign-to-function" accesskey="3">assignment: cannot assign to <code class="code">&lt;function name&gt;</code></a></li>
+<li><a href="#g_t0-to-a-negative-exponent" accesskey="4">expt: undefined:  0 to a negative exponent.</a></li>
+<li><a href="#Comma-is-not-a-prefix-operator" accesskey="5">incorrect syntax: , is not a prefix operator</a></li>
+<li><a href="#Illegal-use-of-delimiter" accesskey="6">incorrect syntax: Illegal use of delimiter )</a></li>
+<li><a href="#loadfile-failed-to-load" accesskey="7">loadfile: failed to load <code class="code">&lt;filename&gt;</code></a></li>
+<li><a href="#makelist-second-argument-must-evaluate-to-a-number" accesskey="8">makelist: second argument must evaluate to a number</a></li>
+<li><a href="#Only-symbols-can-be-bound" accesskey="9">Only symbols can be bound</a></li>
+<li><a href="#Operators-of-arguments-must-all-be-the-same">operators of arguments must all be the same</a></li>
+<li><a href="#out-of-memory">Out of memory</a></li>
+<li><a href="#part-fell-off-the-end">part: fell off the end</a></li>
+<li><a href="#undefined-variable-during-plotting">undefined variable (draw or plot)</a></li>
+<li><a href="#VTK-is-not-installed">VTK is not installed, which is required for Scene</a></li>
+</ul>
+<hr>
+<div class="subsection-level-extent" id="No-such-list-element">
+<div class="nav-panel">
+<p>
+Next: <a href="#argument-must-be-a-non_002datomic-expression" accesskey="n" rel="next">argument must be a non-atomic expression</a>, Previous: <a href="#Error-Messages" accesskey="p" rel="prev">Error Messages</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="apply_003a-no-such-_0022list_0022-element">97.1.1 apply: no such &quot;list&quot; element</h4>
+<p>One common cause for this error message is that square brackets operator
+(<code class="code">[ ]</code>) was used trying to access a list element that whose element
+number was <code class="code">&lt; 1</code> or <code class="code">&gt; length(list)</code>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fargument-must-be-a-non_002datomic-expression"></a><hr>
+</div>
+<div class="subsection-level-extent" id="argument-must-be-a-non_002datomic-expression">
+<div class="nav-panel">
+<p>
+Next: <a href="#cannot-assign-to-function" accesskey="n" rel="next">assignment: cannot assign to <code class="code">&lt;function name&gt;</code></a>, Previous: <a href="#No-such-list-element" accesskey="p" rel="prev">apply: no such &quot;list&quot; element</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="argument-must-be-a-non_002datomic-expression-1">97.1.2 argument must be a non-atomic expression</h4>
+<p>This normally means that a list, a set or something else that consists of more than one
+element was expected. One possible cause for this error message is a construct of the 
+following type:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) l:[1,2,3];
+(%o1)                       [1, 2, 3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) append(l,4);
+append: argument must be a non-atomic expression; found 4
+ -- an error. To debug this try: debugmode(true);
+</pre></div></div>
+<p>The correct way to append variables or numbers to a list is to wrap them in a
+single-element list first:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) l:[1,2,3];
+(%o1)                       [1, 2, 3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) append(l,[4]);
+(%o2)                     [1, 2, 3, 4]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fcannot-assign-to-function"></a><hr>
+</div>
+<div class="subsection-level-extent" id="cannot-assign-to-function">
+<div class="nav-panel">
+<p>
+Next: <a href="#g_t0-to-a-negative-exponent" accesskey="n" rel="next">expt: undefined:  0 to a negative exponent.</a>, Previous: <a href="#argument-must-be-a-non_002datomic-expression" accesskey="p" rel="prev">argument must be a non-atomic expression</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="assignment_003a-cannot-assign-to-_003cfunction-name_003e">97.1.3 assignment: cannot assign to <code class="code">&lt;function name&gt;</code></h4>
+<p>Maxima supports several assignment operators. When trying to define a function
+<code class="code">:=</code> has to be used.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002f0-to-a-negative-exponent"></a><hr>
+</div>
+<div class="subsection-level-extent" id="g_t0-to-a-negative-exponent">
+<div class="nav-panel">
+<p>
+Next: <a href="#Comma-is-not-a-prefix-operator" accesskey="n" rel="next">incorrect syntax: , is not a prefix operator</a>, Previous: <a href="#cannot-assign-to-function" accesskey="p" rel="prev">assignment: cannot assign to <code class="code">&lt;function name&gt;</code></a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="expt_003a-undefined_003a-0-to-a-negative-exponent_002e">97.1.4 expt: undefined:  0 to a negative exponent.</h4>
+<p>This message notifies about a classical division by zero error.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fComma-is-not-a-prefix-operator"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Comma-is-not-a-prefix-operator">
+<div class="nav-panel">
+<p>
+Next: <a href="#Illegal-use-of-delimiter" accesskey="n" rel="next">incorrect syntax: Illegal use of delimiter )</a>, Previous: <a href="#g_t0-to-a-negative-exponent" accesskey="p" rel="prev">expt: undefined:  0 to a negative exponent.</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="incorrect-syntax_003a-_002c-is-not-a-prefix-operator">97.1.5 incorrect syntax: , is not a prefix operator</h4>
+<p>This might be caused by a command starting with a comma (<code class="code">,</code>) or by one comma
+being directly followed by another one..
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fIllegal-use-of-delimiter"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Illegal-use-of-delimiter">
+<div class="nav-panel">
+<p>
+Next: <a href="#loadfile-failed-to-load" accesskey="n" rel="next">loadfile: failed to load <code class="code">&lt;filename&gt;</code></a>, Previous: <a href="#Comma-is-not-a-prefix-operator" accesskey="p" rel="prev">incorrect syntax: , is not a prefix operator</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="incorrect-syntax_003a-Illegal-use-of-delimiter-_0029">97.1.6 incorrect syntax: Illegal use of delimiter )</h4>
+<p>Common reasons for this error appearing are a closing parenthesis without an
+opening one or a closing parenthesis directly preceded by a comma.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002floadfile-failed-to-load"></a><hr>
+</div>
+<div class="subsection-level-extent" id="loadfile-failed-to-load">
+<div class="nav-panel">
+<p>
+Next: <a href="#makelist-second-argument-must-evaluate-to-a-number" accesskey="n" rel="next">makelist: second argument must evaluate to a number</a>, Previous: <a href="#Illegal-use-of-delimiter" accesskey="p" rel="prev">incorrect syntax: Illegal use of delimiter )</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="loadfile_003a-failed-to-load-_003cfilename_003e">97.1.7 loadfile: failed to load <code class="code">&lt;filename&gt;</code></h4>
+<p>This error message normally indicates that the file exists, but can not be read.
+If the file is present and readable there is another possible for this error
+message: Maxima can compile packages to native binary files in order to make them
+run faster. If after compiling the file something in the system has changed in a
+way that makes it incompatible with the binary the binary the file cannot be
+loaded any more. Maxima normally puts binary files it creates from its own packages
+in a folder named <code class="code">binary</code> within the folder whose name it is printed after
+typing:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) maxima_userdir;
+(%o1)                 /home/gunter/.maxima
+</pre></div></div>
+<p>If this directory is missing maxima will recreate it again as soon as it has to
+compile a package.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fmakelist-second-argument-must-evaluate-to-a-number"></a><hr>
+</div>
+<div class="subsection-level-extent" id="makelist-second-argument-must-evaluate-to-a-number">
+<div class="nav-panel">
+<p>
+Next: <a href="#Only-symbols-can-be-bound" accesskey="n" rel="next">Only symbols can be bound</a>, Previous: <a href="#loadfile-failed-to-load" accesskey="p" rel="prev">loadfile: failed to load <code class="code">&lt;filename&gt;</code></a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="makelist_003a-second-argument-must-evaluate-to-a-number">97.1.8 makelist: second argument must evaluate to a number</h4>
+<p><code class="code">makelist</code> expects the second argument to be the name of the variable whose value is to
+be stepped. This time instead of the name of a still-undefined variable maxima has found
+something else, possibly a list or the name of a list.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fOnly-symbols-can-be-bound"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Only-symbols-can-be-bound">
+<div class="nav-panel">
+<p>
+Next: <a href="#Operators-of-arguments-must-all-be-the-same" accesskey="n" rel="next">operators of arguments must all be the same</a>, Previous: <a href="#makelist-second-argument-must-evaluate-to-a-number" accesskey="p" rel="prev">makelist: second argument must evaluate to a number</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Only-symbols-can-be-bound-1">97.1.9 Only symbols can be bound</h4>
+<p>The most probable cause for this error is that there was an attempt to either
+use a number or a variable whose numerical value is known as a loop
+counter.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fOperators-of-arguments-must-all-be-the-same"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Operators-of-arguments-must-all-be-the-same">
+<div class="nav-panel">
+<p>
+Next: <a href="#out-of-memory" accesskey="n" rel="next">Out of memory</a>, Previous: <a href="#Only-symbols-can-be-bound" accesskey="p" rel="prev">Only symbols can be bound</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="operators-of-arguments-must-all-be-the-same">97.1.10 operators of arguments must all be the same</h4>
+<p>One possible reason for this error message to appear is a try to use <code class="code"><a class="ref" href="maxima_4.html#append">append</a></code> in order
+to add an equation to a list:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) l:[a=1,b=2,c=3];
+(%o1)                 [a = 1, b = 2, c = 3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) append(l,d=5);
+append: operators of arguments must all be the same.
+ -- an error. To debug this try: debugmode(true);
+</pre></div></div>
+<p>In order to add an equation to a list it has to be wrapped in a
+single-element list first:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) l:[a=1,b=2,c=3];
+(%o1)                 [a = 1, b = 2, c = 3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) append(l,[d=5]);
+(%o2)             [a = 1, b = 2, c = 3, d = 5]
+</pre></div></div>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fout-of-memory"></a><hr>
+</div>
+<div class="subsection-level-extent" id="out-of-memory">
+<div class="nav-panel">
+<p>
+Next: <a href="#part-fell-off-the-end" accesskey="n" rel="next">part: fell off the end</a>, Previous: <a href="#Operators-of-arguments-must-all-be-the-same" accesskey="p" rel="prev">operators of arguments must all be the same</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Out-of-memory">97.1.11 Out of memory</h4>
+<p>Lisp typically handles several types of memory containing at least one stack
+and a heap that contains user objects. To avoid running out of memory several
+approaches might be useful:
+</p><ul class="itemize mark-bullet">
+<li>If possible, the best solution normally is to use an algorithm that is
+      more memory-efficient.
+</li><li>Compiling a function might drastically reduce the amount of memory it
+      needs.
+</li><li>Arrays of a fixed type might be more memory-efficient than lists.
+</li><li>If maxima is run by sbcl sbcl&rsquo;s memory limit might be set to a value
+      that is too low to solve the current problem. In this case the
+      command-line option <code class="code">--dynamic-space-size &lt;n&gt;</code> allows to tell
+      sbcl to reserve <code class="code">n</code> megabytes for the heap. It is to note, though,
+      that sbcl has to handle several distinct types of memory and therefore
+      might be able to only reserve about half of the available physical
+      memory. Also note that 32-bit processes might only be able to access
+      2GB of physical memory.
+</li></ul>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fpart-fell-off-the-end"></a><hr>
+</div>
+<div class="subsection-level-extent" id="part-fell-off-the-end">
+<div class="nav-panel">
+<p>
+Next: <a href="#undefined-variable-during-plotting" accesskey="n" rel="next">undefined variable (draw or plot)</a>, Previous: <a href="#out-of-memory" accesskey="p" rel="prev">Out of memory</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="part_003a-fell-off-the-end">97.1.12 part: fell off the end</h4>
+<p><code class="code">part()</code> was used to access the <code class="code">n</code>th item in something that has less than
+<code class="code">n</code> items.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fundefined-variable-during-plotting"></a><hr>
+</div>
+<div class="subsection-level-extent" id="undefined-variable-during-plotting">
+<div class="nav-panel">
+<p>
+Next: <a href="#VTK-is-not-installed" accesskey="n" rel="next">VTK is not installed, which is required for Scene</a>, Previous: <a href="#part-fell-off-the-end" accesskey="p" rel="prev">part: fell off the end</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="undefined-variable-_0028draw-or-plot_0029">97.1.13 undefined variable (draw or plot)</h4>
+<p>A function could not be plotted since it still contained a variable maxima
+doesn&rsquo;t know the value of.
+</p>
+<p>In order to find out which variable this could be it is sometimes helpful to
+temporarily replace the name of the drawing command (<code class="code">draw2d</code>, <code class="code">plot2d</code>
+or similar) by a random name (for example <code class="code">ddraw2d</code>) that doesn&rsquo;t coincide
+with the name of an existing function to make maxima print out what parameters
+the drawing command sees.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;draw&quot;)$
+(%i2) f(x):=sin(omega*t);
+(%o2) f(x) := sin(omega t)
+(%i3) draw2d(
+        explicit(
+          f(x),
+          x,1,10
+        )
+      );
+draw2d (explicit): non defined variable
+ -- an error. To debug this try: debugmode(true);
+(%i4) ddraw2d(
+        explicit(
+          f(x),
+          x,1,10
+        )
+      );
+(%o4) ddraw2d(explicit(sin(omega t), x, 1, 10))
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fVTK-is-not-installed"></a><hr>
+</div>
+<div class="subsection-level-extent" id="VTK-is-not-installed">
+<div class="nav-panel">
+<p>
+Previous: <a href="#undefined-variable-during-plotting" accesskey="p" rel="prev">undefined variable (draw or plot)</a>, Up: <a href="#Error-Messages" accesskey="u" rel="up">Error Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="VTK-is-not-installed_002c-which-is-required-for-Scene">97.1.14 VTK is not installed, which is required for Scene</h4>
+
+<p>This might either mean that VTK is actually not installed - or cannot be found by
+maxima - or that Maxima has no write access to the temporary directory whose name is output
+if the following maxima command is entered:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) maxima_tempdir;
+(%o1)                         /tmp
+</pre></div></div>
+
+<p>Note: The <code class="code">scene()</code> command requrires VTK with TCL/TK bindings.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fWarning-Messages"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Warning-Messages">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Error-Messages" accesskey="p" rel="prev">Error Messages</a>, Up: <a href="#Error-and-warning-messages" accesskey="u" rel="up">Error and warning messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Warning-Messages-1">97.2 Warning Messages</h3>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002fundefined-variable-during-translation"></a><ul class="mini-toc">
+<li><a href="#undefined-variable-during-translation" accesskey="1">Encountered undefined variable <code class="code">&lt;x&gt;</code> in translation</a></li>
+<li><a href="#replaced-x-by-y" accesskey="2">Rat: replaced <code class="code">&lt;x&gt;</code> by <code class="code">&lt;y&gt; = &lt;z&gt;</code></a></li>
+</ul>
+<hr>
+<div class="subsection-level-extent" id="undefined-variable-during-translation">
+<div class="nav-panel">
+<p>
+Next: <a href="#replaced-x-by-y" accesskey="n" rel="next">Rat: replaced <code class="code">&lt;x&gt;</code> by <code class="code">&lt;y&gt; = &lt;z&gt;</code></a>, Previous: <a href="#Warning-Messages" accesskey="p" rel="prev">Warning Messages</a>, Up: <a href="#Warning-Messages" accesskey="u" rel="up">Warning Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Encountered-undefined-variable-_003cx_003e-in-translation">97.2.1 Encountered undefined variable <code class="code">&lt;x&gt;</code> in translation</h4>
+<p>A function was compiled but the type of the variable <code class="code">x</code> was not known.
+This means that the compiled command contains additional code that makes it
+retain all the flexibility maxima provides in respect to this variable.
+If <code class="code">x</code> isn&rsquo;t meant as a variable name but just a named option to a
+command prepending the named option by a single quote (<code class="code">'</code>) should
+resolve this issue.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Error-messages">Error messages</a>
+&middot;
+</div>
+</p>
+
+<a class="anchor" id="Item_003a-errormessages_002fnode_002freplaced-x-by-y"></a><hr>
+</div>
+<div class="subsection-level-extent" id="replaced-x-by-y">
+<div class="nav-panel">
+<p>
+Previous: <a href="#undefined-variable-during-translation" accesskey="p" rel="prev">Encountered undefined variable <code class="code">&lt;x&gt;</code> in translation</a>, Up: <a href="#Warning-Messages" accesskey="u" rel="up">Warning Messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Rat_003a-replaced-_003cx_003e-by-_003cy_003e-_003d-_003cz_003e">97.2.2 Rat: replaced <code class="code">&lt;x&gt;</code> by <code class="code">&lt;y&gt; = &lt;z&gt;</code></h4>
+<p><code class="code"><a class="ref" href="maxima_13.html#rat">rat</a></code> was called on an expression containing floating point
+numbers (including big floats) and <code class="code"><a class="ref" href="maxima_13.html#keepfloat">keepfloat</a></code> was false.  This
+means the number was replaced by a rational number approximating the
+floating-point number.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_13.html#ratprint">ratprint</a></code>, <code class="code"><a class="ref" href="maxima_4.html#ratepsilon">ratepsilon</a></code>, <code class="code"><a class="ref" href="maxima_4.html#bftorat">bftorat</a></code>, <code class="code"><a class="ref" href="maxima_4.html#fpprintprec">fpprintprec</a></code>
+and <code class="code"><a class="ref" href="maxima_4.html#rationalize">rationalize</a></code>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Warning-messages">Warning messages</a>
+&middot;
+</div>
+</p>
+</div>
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_97.html#Command_002dline-options" accesskey="n" rel="next">Command-line options</a>, Previous: <a href="maxima_94.html#zeilberger_002dpkg" accesskey="p" rel="prev">zeilberger</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for cobyla</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for cobyla">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for cobyla">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_198.html#cobyla_002dpkg" rel="up" title="cobyla-pkg">
+<link href="maxima_201.html#Examples-for-cobyla" rel="next" title="Examples for cobyla">
+<link href="maxima_199.html#Introduction-to-cobyla" rel="previous" title="Introduction to cobyla">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-cobyla"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_201.html#Examples-for-cobyla" accesskey="n" rel="next">Examples for cobyla</a>, Previous: <a href="maxima_199.html#Introduction-to-cobyla" accesskey="p" rel="previous">Introduction to cobyla</a>, Up: <a href="maxima_198.html#cobyla_002dpkg" accesskey="u" rel="up">cobyla-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-cobyla-1"></a>
+<h3 class="section">47.2 Functions and Variables for cobyla</h3>
+
+<a name="fmin_005fcobyla"></a><a name="Item_003a-cobyla_002fdeffn_002ffmin_005fcobyla"></a><dl>
+<dt><a name="index-fmin_005fcobyla"></a>Function: <strong>fmin_cobyla</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>fmin_cobyla</tt> (<var>F</var>, <var>X</var>, <var>Y</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>fmin_cobyla</tt> (<var>F</var>, <var>X</var>, <var>Y</var>, optional_args)</em></dt>
+<dd>
+<p>Returns an approximate minimum of the expression <var>F</var> with respect
+to the variables <var>X</var>, subject to an optional set of constraints.
+<var>Y</var> is a list of initial guesses for <var>X</var>.
+</p>
+<p><var>F</var> must be ordinary expressions, not names of functions or lambda expressions.
+</p>
+<p><code>optional_args</code> represents additional arguments,
+specified as <code><var>symbol</var> = <var>value</var></code>.
+The optional arguments recognized are:
+</p>
+<dl compact="compact">
+<dt><code>constraints</code></dt>
+<dd><p>List of inequality and equality constraints that must be satisfied by
+<var>X</var>.  The inequality constraints must be actual inequalities of
+the form 
+\(g(X) \ge h(X)\) or 
+\(g(X) \le h(X).\)  The equality constraints must be of the
+form 
+\(g(X) = h(X).\)</p> 
+</dd>
+<dt><code>rhobeg</code></dt>
+<dd><p>Initial value of the internal <var>RHO</var> variable which controls 
+the size of simplex.  (Defaults to 1.0)
+</p></dd>
+<dt><code>rhoend</code></dt>
+<dd><p>The desired final value rho parameter.  It is approximately
+ the accuracy in the variables. (Defaults to 1d-6.)
+</p></dd>
+<dt><code>iprint</code></dt>
+<dd><p>Verbose output level.  (Defaults to 0)
+</p><ul>
+<li> 0 - No output
+</li><li> 1 - Summary at the end of the calculation
+</li><li> 2 - Each new value of RHO and SIGMA is printed, including 
+ the vector of variables, some function information when RHO is reduced.
+</li><li> 3 - Like 2, but information is printed when F(X) is computed.
+</li></ul>
+</dd>
+<dt><code>maxfun</code></dt>
+<dd><p>The maximum number of function evaluations.  (Defaults to 1000).
+</p></dd>
+</dl>
+
+<p>On return, a vector is given:
+</p><ol>
+<li> The value of the variables giving the minimum.  This is a list of
+elements of the form <code><var>var</var> = <var>value</var></code> for each of the
+variables listed in <var>X</var>.
+</li><li> The minimized function value
+</li><li> The number of function evaluations.
+</li><li> Return code with the following meanings
+ <ul class="no-bullet">
+<li><!-- /@w --> 0 - No errors.
+ </li><li><!-- /@w --> 1 - Limit on maximum number of function evaluations reached.
+ </li><li><!-- /@w --> 2 - Rounding errors inhibiting progress.
+ </li><li><!-- /@w --> -1 - <var>MAXCV</var> value exceeds <var>RHOEND</var>.  This indicates that the
+  constraints were probably not satisfied.  User should investigate
+  the value of the constraints.
+
+</li></ul>
+</li></ol>
+
+<p><var>MAXCV</var> stands for &ldquo;MAXimum Constraint Violation&rdquo; and is the
+value of <em>max(0.0, -c1(x), -c2(x),...-cm(x))</em> where <em>ck(x)</em>
+denotes the k&rsquo;th constraint function.  (Note that maxima allows
+constraints of the form <em>f(x) = g(x)</em>, which are internally
+converted to <em>f(x)-g(x) &gt;= 0</em> and <em>g(x)-f(x) &gt;= 0</em> which is
+required by COBYLA).
+</p>
+<p><code>load(&quot;fmin_cobyla&quot;)</code> loads this function.
+</p>
+</dd></dl>
+
+<a name="bf_005ffmin_005fcobyla"></a><a name="Item_003a-cobyla_002fdeffn_002fbf_005ffmin_005fcobyla"></a><dl>
+<dt><a name="index-bf_005ffmin_005fcobyla"></a>Function: <strong>bf_fmin_cobyla</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>bf_fmin_cobyla</tt> (<var>F</var>, <var>X</var>, <var>Y</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>bf_fmin_cobyla</tt> (<var>F</var>, <var>X</var>, <var>Y</var>, optional_args)</em></dt>
+<dd>
+<p>This function is identical to <code>fmin_cobyla</code>, except that bigfloat
+operations are used, and the default value for <var>rhoend</var> is
+<code>10^(fpprec/2)</code>. 
+</p>
+<p>See <code><a href="#fmin_005fcobyla">fmin_cobyla</a></code> for more information.
+</p>
+<p><code>load(&quot;bf_fmin_cobyla&quot;)</code> loads this function.
+</p>
+</dd></dl>
+
+<a name="Item_003a-cobyla_002fnode_002fExamples-for-cobyla"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_201.html#Examples-for-cobyla" accesskey="n" rel="next">Examples for cobyla</a>, Previous: <a href="maxima_199.html#Introduction-to-cobyla" accesskey="p" rel="previous">Introduction to cobyla</a>, Up: <a href="maxima_198.html#cobyla_002dpkg" accesskey="u" rel="up">cobyla-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

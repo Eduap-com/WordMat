@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Command-line options (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Command-line options (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Command-line options (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="Function-and-Variable-Index.html" rel="next" title="Function and Variable Index">
+<link href="maxima_96.html#Error-and-warning-messages" rel="prev" title="Error and warning messages">
+<style type="text/css">
+<!--
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Command_002dline-options">
+<div class="nav-panel">
+<p>
+Next: <a href="Function-and-Variable-Index.html" accesskey="n" rel="next">Function and Variable Index</a>, Previous: <a href="maxima_96.html#Error-and-warning-messages" accesskey="p" rel="prev">Error and warning messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Command_002dline-options-1">98 Command-line options</h2>
+
+<a class="anchor" id="Item_003a-commandline_002doptions_002fnode_002fCommand-line-options"></a><ul class="mini-toc">
+<li><a href="#Command-line-options" accesskey="1">Command line options</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Command-line-options">
+<div class="nav-panel">
+<p>
+Up: <a href="#Command_002dline-options" accesskey="u" rel="up">Command-line options</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Command-line-options-1">98.1 Command line options</h3>
+
+
+<p>The following command line options are available for Maxima:
+</p>
+<dl class="table">
+<dt><code class="code">-f file, --batch=<var class="var">file</var></code></dt>
+<dd><p>Process file in noninteractive mode.
+</p>
+</dd>
+<dt><code class="code">--batch-lisp=<var class="var">file</var></code></dt>
+<dd><p>Process Lisp file file in noninteractive mode.
+</p>
+</dd>
+<dt><code class="code">--batch-string=<var class="var">string</var></code></dt>
+<dd><p>Process string in noninteractive mode.
+</p>
+</dd>
+<dt><code class="code">-d, --directories</code></dt>
+<dd><p>Display Maxima directory information.
+</p>
+</dd>
+<dt><code class="code">--disable-readline</code></dt>
+<dd><p>Disable readline support.
+</p></dd>
+<dt><code class="code">-g, --enable-lisp-debugger</code></dt>
+<dd><p>Enable Lisp debugger.
+</p></dd>
+<dt><code class="code">-h, --help</code></dt>
+<dd><p>Display a brief usage summary.
+</p></dd>
+<dt><code class="code">--init=string</code></dt>
+<dd><p>Load the Maxima and Lisp initialization files <code class="code">string.mac</code> and <code class="code">string.lisp</code> at startup.
+</p></dd>
+<dt><code class="code">--init-mac=<var class="var">file</var></code></dt>
+<dd><p>Load the Maxima initialization file file at startup.
+</p>
+</dd>
+<dt><code class="code">--init-lisp=<var class="var">file</var></code></dt>
+<dd><p>Load the Lisp initialization file file at startup.
+</p>
+</dd>
+<dt><code class="code">-l  <var class="var">lisp</var>, --lisp=<var class="var">lisp</var></code></dt>
+<dd><p>Use Lisp implementation lisp. Use <code class="code">--list-avail</code> to see the list of possible values.
+</p>
+</dd>
+<dt><code class="code">--list-avail</code></dt>
+<dd><p>List the available Lisp and Maxima versions.
+</p></dd>
+<dt><code class="code">-p  <var class="var">lisp_file</var>, --preload-lisp=<var class="var">lisp_file</var></code></dt>
+<dd><p>Preload <code class="code">lisp_file</code>.
+</p>
+</dd>
+<dt><code class="code">-q, --quiet</code></dt>
+<dd><p>Suppress Maxima start-up message.
+</p>
+</dd>
+<dt><code class="code">-r  <var class="var">string</var>, --run-string=<var class="var">string</var></code></dt>
+<dd><p>Process string in interactive mode.
+</p>
+</dd>
+<dt><code class="code">-s  <var class="var">port</var>, --server=<var class="var">port</var></code></dt>
+<dd><p>Connect Maxima to server on port.  Note that this does not create a Maxima server; Maxima is the client.
+</p>
+</dd>
+<dt><code class="code">-u  <var class="var">version</var>, --use-version=<var class="var">version</var></code></dt>
+<dd><p>Launch Maxima version version. Use <code class="code">--list-avail</code> to see the list of possible values.
+</p>
+</dd>
+<dt><code class="code">--userdir=<var class="var">directory</var></code></dt>
+<dd><p>Use directory for user directory (default is <code class="code">%USERPROFILE%/maxima</code> for Windows, <code class="code">$HOME/.maxima</code> for others)
+</p>
+</dd>
+<dt><code class="code">-v, --verbose</code></dt>
+<dd><p>Print extra information from the Maxima wrapper script.
+</p></dd>
+<dt><code class="code">--version</code></dt>
+<dd><p>Print the (default) installed version.
+</p>
+</dd>
+<dt><code class="code">--very-quiet</code></dt>
+<dd><p>Suppress expression labels and the Maxima start-up message.
+</p>
+</dd>
+<dt><code class="code">-X  <var class="var">Lisp options</var>, --lisp-options=<var class="var">Lisp options</var></code></dt>
+<dd><p>Options to be given to the underlying Lisp.
+</p>
+</dd>
+<dt><code class="code">--no-init, --norc</code></dt>
+<dd><p>Do not load the init file(s) on startup.
+</p>
+</dd>
+</dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Function-and-Variable-Index.html" accesskey="n" rel="next">Function and Variable Index</a>, Previous: <a href="maxima_96.html#Error-and-warning-messages" accesskey="p" rel="prev">Error and warning messages</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

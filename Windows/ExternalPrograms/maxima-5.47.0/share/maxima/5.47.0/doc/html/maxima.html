@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Introduction to Maxima (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Introduction to Maxima (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Introduction to Maxima (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_1.html#Bug-Detection-and-Reporting" rel="next" title="Bug Detection and Reporting">
+<link href="maxima_toc.html" rel="prev" title="Top">
+<style type="text/css">
+<!--
+div.example {margin-left: 3.2em}
+kbd.kbd {font-style: oblique}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Introduction-to-Maxima">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_1.html#Bug-Detection-and-Reporting" accesskey="n" rel="next">Bug Detection and Reporting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Introduction-to-Maxima-1">1 Introduction to Maxima</h2>
+<p>Start Maxima with the command &quot;maxima&quot;.  Maxima will display version
+information and a prompt.  End each Maxima command with a semicolon.
+End the session with the command &quot;<code class="code">quit();</code>&quot;.  Here&rsquo;s a sample session:
+</p>
+<div class="example">
+<pre class="example-preformatted">$ maxima
+Maxima 5.45.1 https://maxima.sourceforge.io
+using Lisp SBCL 2.0.1.debian
+Distributed under the GNU Public License. See the file COPYING.
+Dedicated to the memory of William Schelter.
+The function bug_report() provides bug reporting information.
+(%i1) factor(10!);
+                                   8  4  2
+(%o1)                             2  3  5  7
+(%i2) expand ((x + y)^6);
+           6        5       2  4       3  3       4  2      5      6
+(%o2)     y  + 6 x y  + 15 x  y  + 20 x  y  + 15 x  y  + 6 x  y + x
+(%i3) factor (x^6 - 1);
+                                     2            2
+(%o3)              (x - 1) (x + 1) (x  - x + 1) (x  + x + 1)
+(%i4) quit();
+$
+</pre></div>
+
+<p>Maxima can search the info pages.  Use the <code class="code"><a class="ref" href="maxima_2.html#describe">describe</a></code> command to show
+information about the command or all the commands and variables containing 
+a string.
+The question mark <code class="code"><a class="ref" href="maxima_3.html#g_t_003f">?</a></code> (exact search) and double question mark <code class="code"><a class="ref" href="maxima_3.html#g_t_003f_003f">??</a></code><!-- /@w -->
+(inexact search) are abbreviations for <code class="code">describe</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ?? integ
+ 0: Functions and Variables for Elliptic Integrals
+ 1: Functions and Variables for Integration
+ 2: Introduction to Elliptic Functions and Integrals
+ 3: Introduction to Integration
+ 4: askinteger  (Functions and Variables for Simplification)
+ 5: integerp  (Functions and Variables for Miscellaneous Options)
+ 6: integer_partitions  (Functions and Variables for Sets)
+ 7: integrate  (Functions and Variables for Integration)
+ 8: integrate_use_rootsof  (Functions and Variables for Integration)
+ 9: integration_constant_counter  (Functions and Variables for
+    Integration)
+ 10: nonnegintegerp  (Functions and Variables for linearalgebra)
+Enter space-separated numbers, `all' or `none': 5 4
+
+ -- Function: integerp (&lt;expr&gt;)
+     Returns `true' if &lt;expr&gt; is a literal numeric integer, otherwise
+     `false'.
+
+     `integerp' returns false if its argument is a symbol, even if the
+     argument is declared integer.
+
+     Examples:
+
+          (%i1) integerp (0);
+          (%o1)                         true
+          (%i2) integerp (1);
+          (%o2)                         true
+          (%i3) integerp (-17);
+          (%o3)                         true
+          (%i4) integerp (0.0);
+          (%o4)                         false
+          (%i5) integerp (1.0);
+          (%o5)                         false
+          (%i6) integerp (%pi);
+          (%o6)                         false
+          (%i7) integerp (n);
+          (%o7)                         false
+          (%i8) declare (n, integer);
+          (%o8)                         done
+          (%i9) integerp (n);
+          (%o9)                         false
+
+ -- Function: askinteger (&lt;expr&gt;, integer)
+ -- Function: askinteger (&lt;expr&gt;)
+ -- Function: askinteger (&lt;expr&gt;, even)
+ -- Function: askinteger (&lt;expr&gt;, odd)
+     `askinteger (&lt;expr&gt;, integer)' attempts to determine from the
+     `assume' database whether &lt;expr&gt; is an integer.  `askinteger'
+     prompts the user if it cannot tell otherwise, and attempt to
+     install the information in the database if possible.  `askinteger
+     (&lt;expr&gt;)' is equivalent to `askinteger (&lt;expr&gt;, integer)'.
+
+     `askinteger (&lt;expr&gt;, even)' and `askinteger (&lt;expr&gt;, odd)'
+     likewise attempt to determine if &lt;expr&gt; is an even integer or odd
+     integer, respectively.
+
+(%o1)                                true
+</pre></div>
+
+<p>To use a result in later calculations, you can assign it to a variable or
+refer to it by its automatically supplied label.  In addition, <code class="code"><a class="ref" href="maxima_3.html#g_t_0025">%</a></code><!-- /@w -->
+refers to the most recent calculated result:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) u: expand ((x + y)^6);
+       6        5       2  4       3  3       4  2      5      6
+(%o1) y  + 6 x y  + 15 x  y  + 20 x  y  + 15 x  y  + 6 x  y + x
+(%i2) diff (u, x);
+         5         4       2  3       3  2       4        5
+(%o2) 6 y  + 30 x y  + 60 x  y  + 60 x  y  + 30 x  y + 6 x
+(%i3) factor (%o2);
+                                    5
+(%o3)                      6 (y + x)
+</pre></div>
+
+<p>Maxima knows about complex numbers and numerical constants:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) cos(%pi);
+(%o1)                          - 1
+(%i2) exp(%i*%pi);
+(%o2)                          - 1
+</pre></div>
+
+<p>Maxima can do differential and integral calculus:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) u: expand ((x + y)^6);
+       6        5       2  4       3  3       4  2      5      6
+(%o1) y  + 6 x y  + 15 x  y  + 20 x  y  + 15 x  y  + 6 x  y + x
+(%i2) diff (%, x);
+         5         4       2  3       3  2       4        5
+(%o2) 6 y  + 30 x y  + 60 x  y  + 60 x  y  + 30 x  y + 6 x
+(%i3) integrate (1/(1 + x^3), x);
+                                  2 x - 1
+                2            atan(-------)
+           log(x  - x + 1)        sqrt(3)    log(x + 1)
+(%o3)    - --------------- + ------------- + ----------
+                  6             sqrt(3)          3
+</pre></div>
+
+<p>Maxima can solve linear systems and cubic equations:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) linsolve ([3*x + 4*y = 7, 2*x + a*y = 13], [x, y]);
+                        7 a - 52        25
+(%o1)              [x = --------, y = -------]
+                        3 a - 8       3 a - 8
+(%i2) solve (x^3 - 3*x^2 + 5*x = 15, x);
+(%o2)       [x = - sqrt(5) %i, x = sqrt(5) %i, x = 3]
+</pre></div>
+
+<p>Maxima can solve nonlinear sets of equations.  Note that if you don&rsquo;t
+want a result printed, you can finish your command with <kbd class="kbd">$</kbd> instead
+of <kbd class="kbd">;</kbd>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) eq_1: x^2 + 3*x*y + y^2 = 0$
+(%i2) eq_2: 3*x + y = 1$
+(%i3) solve ([eq_1, eq_2]);
+              3 sqrt(5) + 7      sqrt(5) + 3
+(%o3) [[y = - -------------, x = -----------], 
+                    2                 2
+
+                               3 sqrt(5) - 7        sqrt(5) - 3
+                          [y = -------------, x = - -----------]]
+                                     2                   2
+</pre></div>
+
+<p>Maxima can generate plots of one or more functions:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) plot2d (sin(x)/x, [x, -20, 20])$
+</pre></div>
+<img class="image" src="figures/introduction1.png" alt="figures/introduction1">
+<div class="example">
+<pre class="example-preformatted">(%i2) plot2d ([atan(x), erf(x), tanh(x)], [x, -5, 5], [y, -1.5, 2])$
+</pre></div>
+<img class="image" src="figures/introduction2.png" alt="figures/introduction2">
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i3) plot3d (sin(sqrt(x^2 + y^2))/sqrt(x^2 + y^2), 
+         [x, -12, 12], [y, -12, 12])$
+</pre></div></div>
+<img class="image" src="figures/introduction3.png" alt="figures/introduction3">
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+</div>
+
+
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_1.html#Bug-Detection-and-Reporting" accesskey="n" rel="next">Bug Detection and Reporting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

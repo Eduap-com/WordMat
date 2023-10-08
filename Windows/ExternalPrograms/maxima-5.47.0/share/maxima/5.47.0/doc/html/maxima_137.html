@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for atensor</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for atensor">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for atensor">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_135.html#atensor" rel="up" title="atensor">
+<link href="maxima_138.html#Sums-Products-and-Series" rel="next" title="Sums Products and Series">
+<link href="maxima_136.html#Introduction-to-atensor" rel="previous" title="Introduction to atensor">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-atensor"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_136.html#Introduction-to-atensor" accesskey="p" rel="previous">Introduction to atensor</a>, Up: <a href="maxima_135.html#atensor" accesskey="u" rel="up">atensor</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+<a name="Functions-and-Variables-for-atensor-1"></a>
+<h3 class="section">27.2 Functions and Variables for atensor</h3>
+
+<a name="init_005fatensor"></a><a name="Item_003a-Atensor_002fdeffn_002finit_005fatensor"></a><dl>
+<dt><a name="index-init_005fatensor"></a>Function: <strong>init_atensor</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>init_atensor</tt> (<var>alg_type</var>, <var>opt_dims</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>init_atensor</tt> (<var>alg_type</var>)</em></dt>
+<dd>
+<p>Initializes the <code>atensor</code> package with the specified algebra type. <var>alg_type</var>
+can be one of the following:
+</p>
+<p><code>universal</code>: The universal algebra has no commutation rules.
+</p>
+<p><code>grassmann</code>: The Grassman algebra is defined by the commutation
+relation <code>u.v+v.u=0</code>.
+</p>
+<p><code>clifford</code>: The Clifford algebra is defined by the commutation
+relation <code>u.v+v.u=-2*sf(u,v)</code> where <code>sf</code> is a symmetric
+scalar-valued function. For this algebra, <var>opt_dims</var> can be up
+to three nonnegative integers, representing the number of positive,
+degenerate, and negative dimensions of the algebra, respectively. If
+any <var>opt_dims</var> values are supplied, <code>atensor</code> will configure the
+values of <code>adim</code> and <code>aform</code> appropriately. Otherwise,
+<code>adim</code> will default to 0 and <code>aform</code> will not be defined.
+</p>
+<p><code>symmetric</code>: The symmetric algebra is defined by the commutation
+relation <code>u.v-v.u=0</code>.
+</p>
+<p><code>symplectic</code>: The symplectic algebra is defined by the commutation
+relation <code>u.v-v.u=2*af(u,v)</code> where <code>af</code> is an antisymmetric
+scalar-valued function. For the symplectic algebra, <var>opt_dims</var> can
+be up to two nonnegative integers, representing the nondegenerate and
+degenerate dimensions, respectively. If any <var>opt_dims</var> values are
+supplied, <code>atensor</code> will configure the values of <code>adim</code> and <code>aform</code>
+appropriately. Otherwise, <code>adim</code> will default to 0 and <code>aform</code>
+will not be defined.
+</p>
+<p><code>lie_envelop</code>: The algebra of the Lie envelope is defined by the
+commutation relation <code>u.v-v.u=2*av(u,v)</code> where <code>av</code> is
+an antisymmetric function.
+</p>
+<p>The <code>init_atensor</code> function also recognizes several predefined
+algebra types:
+</p>
+<p><code>complex</code> implements the algebra of complex numbers as the
+Clifford algebra Cl(0,1). The call <code>init_atensor(complex)</code> is
+equivalent to <code>init_atensor(clifford,0,0,1)</code>.
+</p>
+<p><code>quaternion</code> implements the algebra of quaternions. The call
+<code>init_atensor (quaternion)</code> is equivalent to
+<code>init_atensor (clifford,0,0,2)</code>.
+</p>
+<p><code>pauli</code> implements the algebra of Pauli-spinors as the Clifford-algebra
+Cl(3,0). A call to <code>init_atensor(pauli)</code> is equivalent to
+<code>init_atensor(clifford,3)</code>.
+</p>
+<p><code>dirac</code> implements the algebra of Dirac-spinors as the Clifford-algebra
+Cl(3,1). A call to <code>init_atensor(dirac)</code> is equivalent to
+<code>init_atensor(clifford,3,0,1)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;</div></dd></dl>
+
+
+<a name="atensimp"></a><a name="Item_003a-Atensor_002fdeffn_002fatensimp"></a><dl>
+<dt><a name="index-atensimp"></a>Function: <strong>atensimp</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Simplifies an algebraic tensor expression <var>expr</var> according to the rules
+configured by a call to <code>init_atensor</code>. Simplification includes
+recursive application of commutation relations and resolving calls
+to <code>sf</code>, <code>af</code>, and <code>av</code> where applicable. A
+safeguard is used to ensure that the function always terminates, even
+for complex expressions.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="alg_005ftype"></a><a name="Item_003a-Atensor_002fdeffn_002falg_005ftype"></a><dl>
+<dt><a name="index-alg_005ftype"></a>Function: <strong>alg_type</strong></dt>
+<dd><p>The algebra type. Valid values are <code>universal</code>, <code>grassmann</code>,
+<code>clifford</code>, <code>symmetric</code>, <code>symplectic</code> and <code>lie_envelop</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="adim"></a><a name="Item_003a-Atensor_002fdefvr_002fadim"></a><dl>
+<dt><a name="index-adim"></a>Variable: <strong>adim</strong></dt>
+<dd><p>Default value: 0
+</p>
+<p>The dimensionality of the algebra. <code>atensor</code> uses the value of <code>adim</code>
+to determine if an indexed object is a valid base vector.  See <code>abasep</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-variables">Global variables</a>
+&middot;</div>
+</dd></dl>
+
+<a name="aform"></a><a name="Item_003a-Atensor_002fdefvr_002faform"></a><dl>
+<dt><a name="index-aform"></a>Variable: <strong>aform</strong></dt>
+<dd><p>Default value: <code>ident(3)</code>
+</p>
+<p>Default values for the bilinear forms <code>sf</code>, <code>af</code>, and
+<code>av</code>. The default is the identity matrix <code>ident(3)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-variables">Global variables</a>
+&middot;</div>
+</dd></dl>
+
+<a name="asymbol"></a><a name="Item_003a-Atensor_002fdefvr_002fasymbol"></a><dl>
+<dt><a name="index-asymbol"></a>Variable: <strong>asymbol</strong></dt>
+<dd><p>Default value: <code>v</code>
+</p>
+<p>The symbol for base vectors.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-variables">Global variables</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sf"></a><a name="Item_003a-Atensor_002fdeffn_002fsf"></a><dl>
+<dt><a name="index-sf"></a>Function: <strong>sf</strong> <em>(<var>u</var>, <var>v</var>)</em></dt>
+<dd>
+<p>A symmetric scalar function that is used in commutation relations.
+The default implementation checks if both arguments are base vectors
+using <code>abasep</code> and if that is the case, substitutes the
+corresponding value from the matrix <code>aform</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="af"></a><a name="Item_003a-Atensor_002fdeffn_002faf"></a><dl>
+<dt><a name="index-af"></a>Function: <strong>af</strong> <em>(<var>u</var>, <var>v</var>)</em></dt>
+<dd>
+<p>An antisymmetric scalar function that is used in commutation relations.
+The default implementation checks if both arguments are base vectors
+using <code>abasep</code> and if that is the case, substitutes the
+corresponding value from the matrix <code>aform</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;</div>
+</dd></dl>
+
+<a name="av"></a><a name="Item_003a-Atensor_002fdeffn_002fav"></a><dl>
+<dt><a name="index-av"></a>Function: <strong>av</strong> <em>(<var>u</var>, <var>v</var>)</em></dt>
+<dd>
+<p>An antisymmetric function that is used in commutation relations.
+The default implementation checks if both arguments are base vectors
+using <code>abasep</code> and if that is the case, substitutes the
+corresponding value from the matrix <code>aform</code>.
+</p>
+<p>For instance:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;atensor&quot;);
+(%o1)       /share/tensor/atensor.mac
+(%i2) adim:3;
+(%o2)                                  3
+(%i3) aform:matrix([0,3,-2],[-3,0,1],[2,-1,0]);
+                               [  0    3   - 2 ]
+                               [               ]
+(%o3)                          [ - 3   0    1  ]
+                               [               ]
+                               [  2   - 1   0  ]
+(%i4) asymbol:x;
+(%o4)                                  x
+(%i5) av(x[1],x[2]);
+(%o5)                                 x
+                                       3
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="abasep"></a><a name="Item_003a-Atensor_002fdeffn_002fabasep"></a><dl>
+<dt><a name="index-abasep"></a>Function: <strong>abasep</strong> <em>(<var>v</var>)</em></dt>
+<dd>
+<p>Checks if its argument is an <code>atensor</code> base vector. That is, if it is
+an indexed symbol, with the symbol being the same as the value of
+<code>asymbol</code>, and the index having a numeric value between 1
+and <code>adim</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-atensor">Package atensor</a>
+&middot;<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;</div>
+</dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_136.html#Introduction-to-atensor" accesskey="p" rel="previous">Introduction to atensor</a>, Up: <a href="maxima_135.html#atensor" accesskey="u" rel="up">atensor</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

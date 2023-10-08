@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Help (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Help (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Help (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_3.html#Command-Line" rel="next" title="Command Line">
+<link href="maxima_1.html#Bug-Detection-and-Reporting" rel="prev" title="Bug Detection and Reporting">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Help">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_3.html#Command-Line" accesskey="n" rel="next">Command Line</a>, Previous: <a href="maxima_1.html#Bug-Detection-and-Reporting" accesskey="p" rel="prev">Bug Detection and Reporting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Help-1">3 Help</h2>
+
+<a class="anchor" id="Item_003a-Help_002fnode_002fDocumentation"></a><ul class="mini-toc">
+<li><a href="#Documentation" accesskey="1">Documentation</a></li>
+<li><a href="#Functions-and-Variables-for-Help" accesskey="2">Functions and Variables for Help</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Documentation">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Help" accesskey="n" rel="next">Functions and Variables for Help</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Documentation-1">3.1 Documentation</h3>
+
+
+<p>The Maxima on-line user&rsquo;s manual can be viewed in different forms.  From the
+Maxima interactive prompt, the user&rsquo;s manual is viewed as plain text by the
+<code class="code"><a class="ref" href="maxima_3.html#g_t_003f">?</a></code> command (i.e., the <code class="code"><a class="ref" href="#describe">describe</a></code> function).  The user&rsquo;s manual is
+viewed as <code class="code">info</code> hypertext by the <code class="code">info</code> viewer program and as a
+web page by any ordinary web browser.
+</p>
+<p><code class="code"><a class="ref" href="#example">example</a></code> displays examples for many Maxima functions.  For example,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) example (integrate);
+</pre></div>
+
+<p>yields
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) test(f):=block([u],u:integrate(f,x),ratsimp(f-diff(u,x)))
+(%o2) test(f) := block([u], u : integrate(f, x),
+                                         ratsimp(f - diff(u, x)))
+(%i3) test(sin(x))
+(%o3)                           0
+(%i4) test(1/(x+1))
+(%o4)                           0
+(%i5) test(1/(x^2+1))
+(%o5)                           0
+</pre></div>
+
+<p>and additional output.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Help_002fnode_002fFunctions-and-Variables-for-Help"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Help">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Documentation" accesskey="p" rel="prev">Documentation</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Help-1">3.2 Functions and Variables for Help</h3>
+
+<a class="anchor" id="apropos"></a><a class="anchor" id="Item_003a-Help_002fdeffn_002fapropos"></a><dl class="first-deffn">
+<dt class="deffn" id="index-apropos"><span class="category-def">Function: </span><span><strong class="def-name">apropos</strong> <var class="def-var-arguments">(<var class="var">name</var>)</var><a class="copiable-link" href='#index-apropos'> &para;</a></span></dt>
+<dd>
+<p>Searches for Maxima names which have <var class="var">name</var> appearing anywhere
+within them; <var class="var">name</var> must be a string or symbol. Thus, <code class="code">apropos
+(exp)</code> returns a list of all the flags and functions which have
+<code class="code">exp</code> as part of their names, such as <code class="code">expand</code>, <code class="code">exp</code>,
+and <code class="code">exponentialize</code>. So, if you can only remember part of the name
+of a Maxima command or variable, you can use this command to find the
+rest of the name. Similarly, you can type <code class="code">apropos (tr_)</code> to find
+a list of many of the switches relating to the translator, most of which
+begin with <code class="code">tr_</code>.
+</p>
+<p><code class="code">apropos(&quot;&quot;)</code> returns a list with all Maxima names.
+</p>
+<p><code class="code">apropos</code> returns the empty list <code class="code">[]</code>, if no name is found.
+</p>
+<p>Example:
+</p>
+<p>Show all Maxima symbols which have <code class="code">gamma</code> in the name:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) apropos(&quot;gamma&quot;);
+(%o1) [%gamma, Gamma, gamma_expand, gammalim, makegamma, 
+prefer_gamma_incomplete, gamma, gamma-incomplete, gamma_incomplete, 
+gamma_incomplete_generalized, gamma_incomplete_generalized_regularized, 
+gamma_incomplete_lower, gamma_incomplete_regularized, log_gamma]
+</pre></div><pre class="example-preformatted">
+
+The same example, using the symbol <code class="code">gamma</code>, rather than the string:
+</pre><div class="group"><pre class="example-preformatted">(%i2) apropos(gamma);
+(%o2) [%gamma, Gamma, gamma_expand, gammalim, makegamma, 
+prefer_gamma_incomplete, gamma, gamma-incomplete, gamma_incomplete, 
+gamma_incomplete_generalized, gamma_incomplete_generalized_regularized, 
+gamma_incomplete_lower, gamma_incomplete_regularized, log_gamma]
+</pre></div><pre class="example-preformatted">
+
+The number of symbols in the current Maxima session. This will vary.
+</pre><div class="group"><pre class="example-preformatted">(%i3) length(apropos(&quot;&quot;));
+(%o3)                                2338
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="demo"></a><a class="anchor" id="Item_003a-Help_002fdeffn_002fdemo"></a><dl class="first-deffn">
+<dt class="deffn" id="index-demo"><span class="category-def">Function: </span><span><strong class="def-name">demo</strong> <var class="def-var-arguments">(<var class="var">filename</var>)</var><a class="copiable-link" href='#index-demo'> &para;</a></span></dt>
+<dd>
+<p>Evaluates Maxima expressions in <var class="var">filename</var> and displays the results.
+<code class="code">demo</code> pauses after evaluating each expression and continues after the
+user enters a carriage return.  (If running in Xmaxima, <code class="code">demo</code> may need
+to see a semicolon <code class="code">;</code> followed by a carriage return.)
+</p>
+<p><code class="code">demo</code> searches the list of directories <code class="code"><a class="ref" href="maxima_12.html#file_005fsearch_005fdemo">file_search_demo</a></code> to find
+<code class="code">filename</code>.  If the file has the suffix <code class="code">dem</code>, the suffix may be
+omitted.  See also <code class="code"><a class="ref" href="maxima_12.html#file_005fsearch">file_search</a></code>.
+</p>
+<p><code class="code">demo</code> evaluates its argument.
+<code class="code">demo</code> returns the name of the demonstration file.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) demo (&quot;disol&quot;);
+
+batching /home/wfs/maxima/share/simplification/disol.dem
+ At the _ prompt, type ';' followed by enter to get next demo
+(%i2)                      load(&quot;disol&quot;)
+
+_
+(%i3)           exp1 : a (e (g + f) + b (d + c))
+(%o3)               a (e (g + f) + b (d + c))
+
+_
+(%i4)                disolate(exp1, a, b, e)
+(%t4)                         d + c
+
+(%t5)                         g + f
+
+(%o5)                   a (%t5 e + %t4 b)
+
+_
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="describe"></a><a class="index-entry-id" id="index-Help"></a>
+<a class="anchor" id="Item_003a-Help_002fdeffn_002fdescribe"></a><dl class="first-deffn">
+<dt class="deffn" id="index-describe"><span class="category-def">Function: </span><span><strong class="def-name">describe</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">describe</code> (<var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">describe</code> (<var class="var">string</var>, exact) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">describe</code> (<var class="var">string</var>, inexact)</var><a class="copiable-link" href='#index-describe'> &para;</a></span></dt>
+<dd>
+<p><code class="code">describe(<var class="var">string</var>)</code> is equivalent to
+<code class="code">describe(<var class="var">string</var>, exact)</code>.
+</p>
+<p><code class="code">describe(<var class="var">string</var>, exact)</code> finds an item with title equal
+(case-insensitive) to <var class="var">string</var>, if there is any such item.
+</p>
+<p><code class="code">describe(<var class="var">string</var>, inexact)</code> finds all documented items which contain
+<var class="var">string</var> in their titles.  If there is more than one such item, Maxima asks
+the user to select an item or items to display.
+</p>
+<p>At the interactive prompt, <code class="code">? foo</code> (with a space between <code class="code">?</code> and
+<code class="code">foo</code>) is equivalent to <code class="code">describe(&quot;foo&quot;, exact)</code>, and <code class="code">?? foo</code>
+is equivalent to <code class="code">describe(&quot;foo&quot;, inexact)</code>.
+</p>
+<p><code class="code">describe(&quot;&quot;, inexact)</code> yields a list of all topics documented in the
+on-line manual.
+</p>
+<p><code class="code">describe</code> quotes its argument.  <code class="code">describe</code> returns <code class="code">true</code> if
+some documentation is found, otherwise <code class="code">false</code>.
+</p>
+<p>To display the topics using a browser see <a class="ref" href="#output_005fformat_005ffor_005fhelp">output_format_for_help</a>.
+Also see <a class="ref" href="#browser">browser</a> and <a class="ref" href="#url_005fbase">url_base</a> to configure how to display
+the HTML files.
+</p>
+<p>See also <a class="ref" href="#Documentation">Documentation</a>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ?? integ
+ 0: Functions and Variables for Elliptic Integrals
+ 1: Functions and Variables for Integration
+ 2: Introduction to Elliptic Functions and Integrals
+ 3: Introduction to Integration
+ 4: askinteger  (Functions and Variables for Simplification)
+ 5: integerp  (Functions and Variables for Miscellaneous Options)
+ 6: integer_partitions  (Functions and Variables for Sets)
+ 7: integrate  (Functions and Variables for Integration)
+ 8: integrate_use_rootsof  (Functions and Variables for
+    Integration)
+ 9: integration_constant_counter  (Functions and Variables for
+    Integration)
+ 10: nonnegintegerp  (Functions and Variables for linearalgebra)
+Enter space-separated numbers, `all' or `none': 7 8
+
+ -- Function: integrate (&lt;expr&gt;, &lt;x&gt;)
+ -- Function: integrate (&lt;expr&gt;, &lt;x&gt;, &lt;a&gt;, &lt;b&gt;)
+     Attempts to symbolically compute the integral of &lt;expr&gt; with
+     respect to &lt;x&gt;.  `integrate (&lt;expr&gt;, &lt;x&gt;)' is an indefinite
+     integral, while `integrate (&lt;expr&gt;, &lt;x&gt;, &lt;a&gt;, &lt;b&gt;)' is a
+     definite integral, [...]
+     
+ -- Option variable: integrate_use_rootsof
+     Default value: `false'
+
+     When `integrate_use_rootsof' is `true' and the denominator of
+     a rational function cannot be factored, `integrate' returns
+     the integral in a form which is a sum over the roots (not yet
+     known) of the denominator.
+     [...]
+</pre></div>
+
+<p>In this example, items 7 and 8 were selected (output is shortened as indicated
+by <code class="code">[...]</code>).  All or none of the items could have been selected by entering
+<code class="code">all</code> or <code class="code">none</code>, which can be abbreviated <code class="code">a</code> or <code class="code">n</code>,
+respectively.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="output_005fformat_005ffor_005fhelp"></a><a class="anchor" id="Item_003a-Help_002fdefvr_002foutput_005fformat_005ffor_005fhelp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-output_005fformat_005ffor_005fhelp"><span class="category-def">Option variable: </span><span><strong class="def-name">output_format_for_help</strong><a class="copiable-link" href='#index-output_005fformat_005ffor_005fhelp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">text</code>
+</p>
+<p><code class="code">output_format_for_help</code> controls how <code class="code">describe</code> displays
+help.
+</p>
+<p><code class="code">output_format_for_help</code> can be set to one of the following
+values:
+</p><dl class="table">
+<dt><code class="code">text</code></dt>
+<dd><p>Help is displayed as plain text sent to a terminal.  This is the default.
+</p></dd>
+<dt><code class="code">html</code></dt>
+<dd><p>Help is displayed using a browser to display the HTML version of the
+manual.
+</p></dd>
+<dt><code class="code">frontend</code></dt>
+<dd><p>Help is displayed using the frontend&rsquo;s help system.  If no frontend is
+running then an error is signaled.  For example, wxMaxima and xmaxima
+are some frontends for maxima.
+</p></dd>
+</dl>
+
+<p>Any other value is a error.
+</p>
+
+<p>See also <code class="code"><a class="ref" href="#browser">browser</a></code>, and <code class="code"><a class="ref" href="#url_005fbase">url_base</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="browser"></a><a class="anchor" id="Item_003a-Help_002fdefvr_002fbrowser"></a><dl class="first-defvr">
+<dt class="defvr" id="index-browser"><span class="category-def">Option variable: </span><span><strong class="def-name">browser</strong><a class="copiable-link" href='#index-browser'> &para;</a></span></dt>
+<dd>
+<p>This specifies the command to use to open an HTML file.  This is a
+format string of the form <code class="code">&lt;cmd&gt; ~A</code> where <code class="code">~A</code> is replaced
+by the URL of the HTML file and <code class="code">&lt;cmd&gt;</code> is some program that
+takes an arg and opens up a browser to the given URL.
+</p>
+<p>On windows, the default setting is <code class="code">&quot;start ~A&quot;</code>,
+which uses the default browser to display the html file.  You may replace
+it with e.g. <code class="code">start firefox ~A</code>, <code class="code">start chrome ~A</code> or <code class="code">start iexplore ~A</code>
+if you want to use Firefox, Chrome, or Internet Explorer
+instead of the default browser.
+</p>
+<p>On other OSes, the user&rsquo;s default browser should be used
+automatically (using <code class="code">xdg-open</code> on Linux/Unix and <code class="code">open</code> on MacOS).
+You can also set the <code class="code">browser</code> variable to use
+a non default browser, e.g.
+<code class="code">browser:&quot;firefox '~A'&quot;;</code> or <code class="code">browser:&quot;chromium '~A'&quot;;</code>
+</p>
+<p>See also <code class="code"><a class="ref" href="#output_005fformat_005ffor_005fhelp">output_format_for_help</a></code>, and <code class="code"><a class="ref" href="#url_005fbase">url_base</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="url_005fbase"></a><a class="anchor" id="Item_003a-Help_002fdefvr_002furl_005fbase"></a><dl class="first-defvr">
+<dt class="defvr" id="index-url_005fbase"><span class="category-def">Option variable: </span><span><strong class="def-name">url_base</strong><a class="copiable-link" href='#index-url_005fbase'> &para;</a></span></dt>
+<dd>
+<p>When displaying help using a browser, <code class="code">url_base</code> defines the URL
+to use.  It defaults to a <code class="code">file://</code> path pointing to the
+directory containing the html files for documentation.  However, you
+could use <code class="code">http://localhost:8080/</code> or some other URL that has the HTML
+help files.  But this requires those URLs to have exactly the same
+HTML files in the info directory because a table is needed to
+translate a topic to the appropriate location in an html file.
+</p>
+<p>See also <a class="ref" href="#output_005fformat_005ffor_005fhelp">output_format_for_help</a> and <code class="code"><a class="ref" href="#browser">browser</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="example"></a><a class="anchor" id="Item_003a-Help_002fdeffn_002fexample"></a><dl class="first-deffn">
+<dt class="deffn" id="index-example"><span class="category-def">Function: </span><span><strong class="def-name">example</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">example</code> (<var class="var">topic</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">example</code> ()</var><a class="copiable-link" href='#index-example'> &para;</a></span></dt>
+<dd>
+<p><code class="code">example (<var class="var">topic</var>)</code> displays some examples of <var class="var">topic</var>, which is a
+symbol or a string.  To get examples for operators like <code class="code">if</code>, <code class="code">do</code>,
+or <code class="code">lambda</code> the argument must be a string, e.g. <code class="code">example (&quot;do&quot;)</code>.
+<code class="code">example</code> is not case sensitive.  Most topics are function names.
+</p>
+<p><code class="code">example ()</code> returns the list of all recognized topics.
+</p>
+<p>The name of the file containing the examples is given by the global option 
+variable <code class="code"><a class="ref" href="#manual_005fdemo">manual_demo</a></code>, which defaults to <code class="code">&quot;manual.demo&quot;</code>.
+</p>
+<p><code class="code">example</code> quotes its argument.  <code class="code">example</code> returns <code class="code">done</code> unless
+no examples are found or there is no argument, in which case <code class="code">example</code>
+returns the list of all recognized topics.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) example(append);
+(%i2) append([y+x,0,-3.2],[2.5e+20,x])
+(%o2)             [y + x, 0, - 3.2, 2.5e+20, x]
+(%o2)                         done
+</pre></div><pre class="example-preformatted">(%i3) example(&quot;lambda&quot;);
+(%i4) lambda([x,y,z],x^2+y^2+z^2)
+                                    2    2    2
+(%o4)            lambda([x, y, z], x  + y  + z )
+(%i5) %(1,2,a)
+                              2
+(%o5)                        a  + 5
+(%i6) 1+2+a
+(%o6)                         a + 3
+(%o6)                         done
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="manual_005fdemo"></a><a class="anchor" id="Item_003a-Help_002fdefvr_002fmanual_005fdemo"></a><dl class="first-defvr">
+<dt class="defvr" id="index-manual_005fdemo"><span class="category-def">Option variable: </span><span><strong class="def-name">manual_demo</strong><a class="copiable-link" href='#index-manual_005fdemo'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">&quot;manual.demo&quot;</code>
+</p>
+<p><code class="code">manual_demo</code> specifies the name of the file containing the examples for 
+the function <code class="code">example</code>.  See <code class="code"><a class="ref" href="#example">example</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Help">Help</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_3.html#Command-Line" accesskey="n" rel="next">Command Line</a>, Previous: <a href="maxima_1.html#Bug-Detection-and-Reporting" accesskey="p" rel="prev">Bug Detection and Reporting</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

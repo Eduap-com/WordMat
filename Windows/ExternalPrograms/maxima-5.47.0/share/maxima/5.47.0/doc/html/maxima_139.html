@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Sums and Products</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Sums and Products">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Sums and Products">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_138.html#Sums-Products-and-Series" rel="up" title="Sums Products and Series">
+<link href="maxima_140.html#Introduction-to-Series" rel="next" title="Introduction to Series">
+<link href="maxima_138.html#Sums-Products-and-Series" rel="previous" title="Sums Products and Series">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Sums-and-Products"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_140.html#Introduction-to-Series" accesskey="n" rel="next">Introduction to Series</a>, Previous: <a href="maxima_138.html#Sums-Products-and-Series" accesskey="p" rel="previous">Sums Products and Series</a>, Up: <a href="maxima_138.html#Sums-Products-and-Series" accesskey="u" rel="up">Sums Products and Series</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Sums-and-Products-1"></a>
+<h3 class="section">28.1 Functions and Variables for Sums and Products</h3>
+
+<a name="bashindices"></a><a name="Item_003a-Series_002fdeffn_002fbashindices"></a><dl>
+<dt><a name="index-bashindices"></a>Function: <strong>bashindices</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Transforms the expression <var>expr</var> by giving each summation and product a
+unique index.  This gives <code>changevar</code> greater precision when it is working
+with summations or products.  The form of the unique index is
+<code>j<var>number</var></code>. The quantity <var>number</var> is determined by referring to
+<code>gensumnum</code>, which can be changed by the user.  For example,
+<code>gensumnum:0$</code> resets it.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div></dd></dl>
+
+<a name="lsum"></a><a name="Item_003a-Series_002fdeffn_002flsum"></a><dl>
+<dt><a name="index-lsum"></a>Function: <strong>lsum</strong> <em>(<var>expr</var>, <var>x</var>, <var>L</var>)</em></dt>
+<dd>
+<p>Represents the sum of <var>expr</var> for each element <var>x</var> in <var>L</var>.
+A noun form <code>'lsum</code> is returned if the argument <var>L</var> does not evaluate
+to a list.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) lsum (x^i, i, [1, 2, 7]);
+                            7    2
+(%o1)                      x  + x  + x
+(%i2) lsum (i^2, i, rootsof (x^3 - 1, x));
+</pre><pre class="example">                     ====
+                     \      2
+(%o2)                 &gt;    i
+                     /
+                     ====
+                                   3
+                     i in rootsof(x  - 1, x)
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div></dd></dl>
+
+
+<a name="intosum"></a><a name="Item_003a-Series_002fdeffn_002fintosum"></a><dl>
+<dt><a name="index-intosum"></a>Function: <strong>intosum</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Moves multiplicative factors outside a summation to inside.
+If the index is used in the
+outside expression, then the function tries to find a reasonable
+index, the same as it does for <code>sumcontract</code>.  This is essentially the
+reverse idea of the <code>outative</code> property of summations, but note that it
+does not remove this property, it only bypasses it.
+</p>
+<p>In some cases, a <code>scanmap (multthru, <var>expr</var>)</code> may be necessary before
+the <code>intosum</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Expressions">Expressions</a>
+&middot;</div></dd></dl>
+
+<a name="simpproduct"></a><a name="Item_003a-Series_002fdefvr_002fsimpproduct"></a><dl>
+<dt><a name="index-simpproduct"></a>Option variable: <strong>simpproduct</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>simpproduct</code> is <code>true</code>, the result of a <code>product</code> is simplified.
+This simplification may sometimes be able to produce a closed form.  If
+<code>simpproduct</code> is <code>false</code> or if the quoted form <code>'product</code> is used, the
+value is a product noun form which is a representation of the pi notation used
+in mathematics.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;<a href="maxima_424.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="product"></a><a name="Item_003a-Series_002fdeffn_002fproduct"></a><dl>
+<dt><a name="index-product"></a>Function: <strong>product</strong> <em>(<var>expr</var>, <var>i</var>, <var>i_0</var>, <var>i_1</var>)</em></dt>
+<dd>
+<p>Represents a product of the values of <var>expr</var> as
+the index <var>i</var> varies from <var>i_0</var> to <var>i_1</var>.
+The noun form <code>'product</code> is displayed as an uppercase letter pi.
+</p>
+<p><code>product</code> evaluates <var>expr</var> and lower and upper limits <var>i_0</var> and
+<var>i_1</var>, <code>product</code> quotes (does not evaluate) the index <var>i</var>.
+</p>
+<p>If the upper and lower limits differ by an integer,
+<var>expr</var> is evaluated for each value of the index <var>i</var>,
+and the result is an explicit product.
+</p>
+<p>Otherwise, the range of the index is indefinite.
+Some rules are applied to simplify the product.
+When the global variable <code>simpproduct</code> is <code>true</code>, additional rules
+are applied.  In some cases, simplification yields a result which is not a
+product; otherwise, the result is a noun form <code>'product</code>.
+</p>
+<p>See also <code><a href="maxima_43.html#nouns">nouns</a></code> and <code><a href="maxima_43.html#evflag">evflag</a></code>.
+</p>
+<p>Examples:
+</p>
+
+<div class="example">
+<pre class="example">(%i1) product (x + i*(i+1)/2, i, 1, 4);
+(%o1)           (x + 1) (x + 3) (x + 6) (x + 10)
+(%i2) product (i^2, i, 1, 7);
+(%o2)                       25401600
+(%i3) product (a[i], i, 1, 7);
+(%o3)                 a  a  a  a  a  a  a
+                       1  2  3  4  5  6  7
+(%i4) product (a(i), i, 1, 7);
+(%o4)          a(1) a(2) a(3) a(4) a(5) a(6) a(7)
+(%i5) product (a(i), i, 1, n);
+                             n
+                           /===\
+                            ! !
+(%o5)                       ! !  a(i)
+                            ! !
+                           i = 1
+(%i6) product (k, k, 1, n);
+                               n
+                             /===\
+                              ! !
+(%o6)                         ! !  k
+                              ! !
+                             k = 1
+(%i7) product (k, k, 1, n), simpproduct;
+(%o7)                          n!
+(%i8) product (integrate (x^k, x, 0, 1), k, 1, n);
+                             n
+                           /===\
+                            ! !    1
+(%o8)                       ! !  -----
+                            ! !  k + 1
+                           k = 1
+(%i9) product (if k &lt;= 5 then a^k else b^k, k, 1, 10);
+                              15  40
+(%o9)                        a   b
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div></dd></dl>
+
+
+<a name="simpsum"></a><a name="Item_003a-Series_002fdefvr_002fsimpsum"></a><dl>
+<dt><a name="index-simpsum"></a>Option variable: <strong>simpsum</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>simpsum</code> is <code>true</code>, the result of a <code>sum</code> is simplified.
+This simplification may sometimes be able to produce a closed form.  If
+<code>simpsum</code> is <code>false</code> or if the quoted form <code>'sum</code> is used, the
+value is a sum noun form which is a representation of the sigma notation used
+in mathematics.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;<a href="maxima_424.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="sum"></a><a name="Item_003a-Series_002fdeffn_002fsum"></a><dl>
+<dt><a name="index-sum"></a>Function: <strong>sum</strong> <em>(<var>expr</var>, <var>i</var>, <var>i_0</var>, <var>i_1</var>)</em></dt>
+<dd>
+<p>Represents a summation of the values of <var>expr</var> as
+the index <var>i</var> varies from <var>i_0</var> to <var>i_1</var>.
+The noun form <code>'sum</code> is displayed as an uppercase letter sigma.
+</p>
+<p><code>sum</code> evaluates its summand <var>expr</var> and lower and upper limits <var>i_0</var>
+and <var>i_1</var>, <code>sum</code> quotes (does not evaluate) the index <var>i</var>.
+</p>
+<p>If the upper and lower limits differ by an integer, the summand <var>expr</var> is
+evaluated for each value of the summation index <var>i</var>, and the result is an
+explicit sum.
+</p>
+<p>Otherwise, the range of the index is indefinite.
+Some rules are applied to simplify the summation.
+When the global variable <code>simpsum</code> is <code>true</code>, additional rules are
+applied.  In some cases, simplification yields a result which is not a
+summation; otherwise, the result is a noun form <code>'sum</code>.
+</p>
+<p>When the <code>evflag</code> (evaluation flag) <code>cauchysum</code> is <code>true</code>,
+a product of summations is expressed as a Cauchy product,
+in which the index of the inner summation is a function of the
+index of the outer one, rather than varying independently.
+</p>
+<p>The global variable <code>genindex</code> is the alphabetic prefix used to generate
+the next index of summation, when an automatically generated index is needed.
+</p>
+<p><code>gensumnum</code> is the numeric suffix used to generate the next index of
+summation, when an automatically generated index is needed.
+When <code>gensumnum</code> is <code>false</code>, an automatically-generated index is only
+<code>genindex</code> with no numeric suffix.
+</p>
+<p>See also <code><a href="#lsum">lsum</a></code>, <code><a href="#sumcontract">sumcontract</a></code>, <code><a href="#intosum">intosum</a></code>,
+<code><a href="#bashindices">bashindices</a></code>, <code><a href="maxima_141.html#niceindices">niceindices</a></code>,
+<code><a href="maxima_43.html#nouns">nouns</a></code>, <code><a href="maxima_43.html#evflag">evflag</a></code>, and <a href="maxima_388.html#zeilberger_002dpkg">zeilberger-pkg</a>
+</p>
+<p>Examples:
+</p>
+
+<div class="example">
+<pre class="example">(%i1) sum (i^2, i, 1, 7);
+(%o1)                          140
+(%i2) sum (a[i], i, 1, 7);
+(%o2)           a  + a  + a  + a  + a  + a  + a
+                 7    6    5    4    3    2    1
+(%i3) sum (a(i), i, 1, 7);
+(%o3)    a(7) + a(6) + a(5) + a(4) + a(3) + a(2) + a(1)
+(%i4) sum (a(i), i, 1, n);
+                            n
+                           ====
+                           \
+(%o4)                       &gt;    a(i)
+                           /
+                           ====
+                           i = 1
+(%i5) sum (2^i + i^2, i, 0, n);
+                          n
+                         ====
+                         \       i    2
+(%o5)                     &gt;    (2  + i )
+                         /
+                         ====
+                         i = 0
+(%i6) sum (2^i + i^2, i, 0, n), simpsum;
+                              3      2
+                   n + 1   2 n  + 3 n  + n
+(%o6)             2      + --------------- - 1
+                                  6
+(%i7) sum (1/3^i, i, 1, inf);
+                            inf
+                            ====
+                            \     1
+(%o7)                        &gt;    --
+                            /      i
+                            ====  3
+                            i = 1
+(%i8) sum (1/3^i, i, 1, inf), simpsum;
+                                1
+(%o8)                           -
+                                2
+(%i9) sum (i^2, i, 1, 4) * sum (1/i^2, i, 1, inf);
+                              inf
+                              ====
+                              \     1
+(%o9)                      30  &gt;    --
+                              /      2
+                              ====  i
+                              i = 1
+(%i10) sum (i^2, i, 1, 4) * sum (1/i^2, i, 1, inf), simpsum;
+                                  2
+(%o10)                       5 %pi
+(%i11) sum (integrate (x^k, x, 0, 1), k, 1, n);
+                            n
+                           ====
+                           \       1
+(%o11)                      &gt;    -----
+                           /     k + 1
+                           ====
+                           k = 1
+(%i12) sum (if k &lt;= 5 then a^k else b^k, k, 1, 10);
+          10    9    8    7    6    5    4    3    2
+(%o12)   b   + b  + b  + b  + b  + a  + a  + a  + a  + a
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div></dd></dl>
+
+
+<a name="sumcontract"></a><a name="Item_003a-Series_002fdeffn_002fsumcontract"></a><dl>
+<dt><a name="index-sumcontract"></a>Function: <strong>sumcontract</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Combines all sums of an addition that have
+upper and lower bounds that differ by constants.  The result is an
+expression containing one summation for each set of such summations
+added to all appropriate extra terms that had to be extracted to form
+this sum.  <code>sumcontract</code> combines all compatible sums and uses one of
+the indices from one of the sums if it can, and then try to form a
+reasonable index if it cannot use any supplied.
+</p>
+<p>It may be necessary to do an <code>intosum (<var>expr</var>)</code> before the
+<code>sumcontract</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;</div></dd></dl>
+
+<a name="sumexpand"></a><a name="Item_003a-Series_002fdefvr_002fsumexpand"></a><dl>
+<dt><a name="index-sumexpand"></a>Option variable: <strong>sumexpand</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>sumexpand</code> is <code>true</code>, products of sums and
+exponentiated sums simplify to nested sums.
+</p>
+<p>See also <code><a href="maxima_141.html#cauchysum">cauchysum</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) sumexpand: true$
+(%i2) sum (f (i), i, 0, m) * sum (g (j), j, 0, n);
+</pre><pre class="example">                     m      n
+                    ====   ====
+                    \      \
+(%o2)                &gt;      &gt;     f(i1) g(i2)
+                    /      /
+                    ====   ====
+                    i1 = 0 i2 = 0
+</pre><pre class="example">(%i3) sum (f (i), i, 0, m)^2;
+                     m      m
+                    ====   ====
+                    \      \
+(%o3)                &gt;      &gt;     f(i3) f(i4)
+                    /      /
+                    ====   ====
+                    i3 = 0 i4 = 0
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;<a href="maxima_424.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="Item_003a-Series_002fnode_002fIntroduction-to-Series"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_140.html#Introduction-to-Series" accesskey="n" rel="next">Introduction to Series</a>, Previous: <a href="maxima_138.html#Sums-Products-and-Series" accesskey="p" rel="previous">Sums Products and Series</a>, Up: <a href="maxima_138.html#Sums-Products-and-Series" accesskey="u" rel="up">Sums Products and Series</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

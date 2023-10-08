@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Maxima's Database (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Maxima's Database (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Maxima's Database (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_11.html#Plotting" rel="next" title="Plotting">
+<link href="maxima_9.html#Elementary-Functions" rel="prev" title="Elementary Functions">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Maxima_0027s-Database">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_11.html#Plotting" accesskey="n" rel="next">Plotting</a>, Previous: <a href="maxima_9.html#Elementary-Functions" accesskey="p" rel="prev">Elementary Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Maxima_0027s-Database-1">11 Maxima&rsquo;s Database</h2>
+
+<a class="anchor" id="Item_003a-Database_002fnode_002fIntroduction-to-Maxima_0027s-Database"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Maxima_0027s-Database" accesskey="1">Introduction to Maxima&rsquo;s Database</a></li>
+<li><a href="#Functions-and-Variables-for-Properties" accesskey="2">Functions and Variables for Properties</a></li>
+<li><a href="#Functions-and-Variables-for-Facts" accesskey="3">Functions and Variables for Facts</a></li>
+<li><a href="#Functions-and-Variables-for-Predicates" accesskey="4">Functions and Variables for Predicates</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Maxima_0027s-Database">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Properties" accesskey="n" rel="next">Functions and Variables for Properties</a>, Previous: <a href="#Maxima_0027s-Database" accesskey="p" rel="prev">Maxima&rsquo;s Database</a>, Up: <a href="#Maxima_0027s-Database" accesskey="u" rel="up">Maxima&rsquo;s Database</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Maxima_0027s-Database-1">11.1 Introduction to Maxima&rsquo;s Database</h3>
+
+<a class="anchor" id="Item_003a-Database_002fnode_002fFunctions-and-Variables-for-Properties"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Properties">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Facts" accesskey="n" rel="next">Functions and Variables for Facts</a>, Previous: <a href="#Introduction-to-Maxima_0027s-Database" accesskey="p" rel="prev">Introduction to Maxima&rsquo;s Database</a>, Up: <a href="#Maxima_0027s-Database" accesskey="u" rel="up">Maxima&rsquo;s Database</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Properties-1">11.2 Functions and Variables for Properties</h3>
+
+<a class="anchor" id="alphabetic"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002falphabetic"></a><dl class="first-defvr">
+<dt class="defvr" id="index-alphabetic"><span class="category-def">Property: </span><span><strong class="def-name">alphabetic</strong><a class="copiable-link" href='#index-alphabetic'> &para;</a></span></dt>
+<dd>
+<p><code class="code">alphabetic</code> is a property type recognized by <code class="code"><a class="ref" href="#declare">declare</a></code>.<!-- /@w -->
+The expression <code class="code">declare(<var class="var">s</var>, alphabetic)</code> tells Maxima to recognize
+as alphabetic all of the characters in <var class="var">s</var>, which must be a string.
+</p>
+<p>See also <a class="ref" href="maxima_5.html#Identifiers">Identifiers</a>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) xx\~yy\`\@ : 1729;
+(%o1)                         1729
+(%i2) declare (&quot;~`@&quot;, alphabetic);
+(%o2)                         done
+(%i3) xx~yy`@ + @yy`xx + `xx@@yy~;
+(%o3)               `xx@@yy~ + @yy`xx + 1729
+(%i4) listofvars (%);
+(%o4)                  [@yy`xx, `xx@@yy~]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bindtest"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fbindtest"></a><dl class="first-defvr">
+<dt class="defvr" id="index-bindtest"><span class="category-def">Property: </span><span><strong class="def-name">bindtest</strong><a class="copiable-link" href='#index-bindtest'> &para;</a></span></dt>
+<dd>
+<p>The command <code class="code">declare(<var class="var">x</var>, bindtest)</code> tells Maxima to trigger an error
+when the symbol <var class="var">x</var> is evaluated unbound.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) aa + bb;
+(%o1)                        bb + aa
+(%i2) declare (aa, bindtest);
+(%o2)                         done
+(%i3) aa + bb;
+aa unbound variable
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i4) aa : 1234;
+(%o4)                         1234
+(%i5) aa + bb;
+(%o5)                       bb + 1234
+</pre></div>
+</dd></dl>
+
+
+<a class="anchor" id="constant"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fconstant"></a><dl class="first-deffn">
+<dt class="deffn" id="index-constant"><span class="category-def">Property: </span><span><strong class="def-name">constant</strong><a class="copiable-link" href='#index-constant'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(<var class="var">a</var>, constant)</code> declares <var class="var">a</var> to be a constant.  The
+declaration of a symbol to be constant does not prevent the assignment of a
+nonconstant value to the symbol.
+</p>
+<p>See <code class="code"><a class="ref" href="#constantp">constantp</a></code> and <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare(c, constant);
+(%o1)                         done
+(%i2) constantp(c);
+(%o2)                         true
+(%i3) c : x;
+(%o3)                           x
+(%i4) constantp(c);
+(%o4)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Constants">Constants</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="constantp"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fconstantp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-constantp"><span class="category-def">Function: </span><span><strong class="def-name">constantp</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-constantp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">expr</var> is a constant expression, otherwise returns
+<code class="code">false</code>.
+</p>
+<p>An expression is considered a constant expression if its arguments are
+numbers (including rational numbers, as displayed with <code class="code">/R/</code>),
+symbolic constants such as <code class="code"><a class="ref" href="maxima_4.html#g_t_0025pi">%pi</a></code>, <code class="code"><a class="ref" href="maxima_4.html#g_t_0025e">%e</a></code>, and <code class="code"><a class="ref" href="maxima_4.html#g_t_0025i">%i</a></code>,<!-- /@w -->
+variables bound to a constant or declared constant by <code class="code"><a class="ref" href="#declare">declare</a></code>,<!-- /@w -->
+or functions whose arguments are constant.
+</p>
+<p><code class="code">constantp</code> evaluates its arguments.
+</p>
+<p>See the property <code class="code"><a class="ref" href="#constant">constant</a></code> which declares a symbol to be constant.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) constantp (7 * sin(2));
+(%o1)                                true
+(%i2) constantp (rat (17/29));
+(%o2)                                true
+(%i3) constantp (%pi * sin(%e));
+(%o3)                                true
+(%i4) constantp (exp (x));
+(%o4)                                false
+(%i5) declare (x, constant);
+(%o5)                                done
+(%i6) constantp (exp (x));
+(%o6)                                true
+(%i7) constantp (foo (x) + bar (%e) + baz (2));
+(%o7)                                false
+(%i8) 
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Constants">Constants</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="declare"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fdeclare"></a><dl class="first-deffn">
+<dt class="deffn" id="index-declare"><span class="category-def">Function: </span><span><strong class="def-name">declare</strong> <var class="def-var-arguments">(<var class="var">a_1</var>, <var class="var">p_1</var>, <var class="var">a_2</var>, <var class="var">p_2</var>, &hellip;)</var><a class="copiable-link" href='#index-declare'> &para;</a></span></dt>
+<dd>
+<p>Assigns the atom or list of atoms <var class="var">a_i</var> the property or list of properties
+<var class="var">p_i</var>.  When <var class="var">a_i</var> and/or <var class="var">p_i</var> are lists, each of the atoms gets
+all of the properties.
+</p>
+<p><code class="code">declare</code> quotes its arguments.  <code class="code">declare</code> always returns <code class="code">done</code>.
+</p>
+<p>As noted in the description for each declaration flag, for some flags
+<code class="code">featurep(<var class="var">object</var>, <var class="var">feature</var>)</code> returns <code class="code">true</code> if <var class="var">object</var>
+has been declared to have <var class="var">feature</var>.
+</p>
+<p>For more information about the features system, see <code class="code"><a class="ref" href="#features">features</a></code>. To
+remove a property from an atom, use <code class="code"><a class="ref" href="#remove">remove</a></code>.
+</p>
+<p><code class="code">declare</code> recognizes the following properties:
+</p>
+<dl class="table">
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_8.html#additive">additive</a></code></code></dt>
+<dd><p>Tells Maxima to simplify <var class="var">a_i</var> expressions by the substitution
+<code class="code"><var class="var">a_i</var>(x + y + z + ...)</code> <code class="code">--&gt;</code>
+<code class="code"><var class="var">a_i</var>(x) + <var class="var">a_i</var>(y) + <var class="var">a_i</var>(z) + ...</code>.
+The substitution is carried out on the first argument only.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#alphabetic">alphabetic</a></code></code></dt>
+<dd><p>Tells Maxima to recognize all characters in <var class="var">a_i</var> (which must be a
+string) as alphabetic characters.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_8.html#antisymmetric">antisymmetric</a></code>, <code class="code"><a class="ref" href="maxima_8.html#commutative">commutative</a></code>, <code class="code"><a class="ref" href="maxima_8.html#symmetric">symmetric</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as a symmetric or antisymmetric
+function.  <code class="code">commutative</code> is the same as <code class="code">symmetric</code>.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#bindtest">bindtest</a></code></code></dt>
+<dd><p>Tells Maxima to trigger an error when <var class="var">a_i</var> is evaluated unbound.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#constant">constant</a></code></code></dt>
+<dd><p>Tells Maxima to consider <var class="var">a_i</var> a symbolic constant.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#even">even</a></code>, <code class="code"><a class="ref" href="#odd">odd</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as an even or odd integer variable.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_8.html#evenfun">evenfun</a></code>, <code class="code"><a class="ref" href="maxima_8.html#oddfun">oddfun</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as an odd or even function.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_7.html#evflag">evflag</a></code></code></dt>
+<dd><p>Makes <var class="var">a_i</var> known to the <code class="code">ev</code> function so that <var class="var">a_i</var> is bound
+to <code class="code">true</code> during the execution of <code class="code">ev</code> when <var class="var">a_i</var> appears as
+a flag argument of <code class="code">ev</code>.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_7.html#evfun">evfun</a></code></code></dt>
+<dd><p>Makes <var class="var">a_i</var> known to <code class="code">ev</code> so that the function named by <var class="var">a_i</var>
+is applied when <var class="var">a_i</var> appears as a flag argument of <code class="code">ev</code>.
+</p>
+
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#feature">feature</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as the name of a feature.
+Other atoms may then be declared to have the <var class="var">a_i</var> property.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#increasing">increasing</a></code>, <code class="code"><a class="ref" href="#decreasing">decreasing</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as an increasing or decreasing
+function.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#integer">integer</a></code>, <code class="code"><a class="ref" href="#noninteger">noninteger</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as an integer or noninteger variable.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#integervalued">integervalued</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as an integer-valued function.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_8.html#lassociative">lassociative</a></code>, <code class="code"><a class="ref" href="maxima_8.html#rassociative">rassociative</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as a right-associative or
+left-associative function.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_8.html#linear">linear</a></code></code></dt>
+<dd><p>Equivalent to declaring <var class="var">a_i</var> both <code class="code">outative</code> and
+<code class="code">additive</code>.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_5.html#mainvar">mainvar</a></code></code></dt>
+<dd><p>Tells Maxima to consider <var class="var">a_i</var> a &quot;main variable&quot;.  A main variable
+succeeds all other constants and variables in the canonical ordering of
+Maxima expressions, as determined by <code class="code"><a class="ref" href="maxima_5.html#ordergreatp">ordergreatp</a></code>.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_8.html#multiplicative">multiplicative</a></code></code></dt>
+<dd><p>Tells Maxima to simplify <var class="var">a_i</var> expressions by the substitution
+<code class="code"><var class="var">a_i</var>(x * y * z * ...)</code> <code class="code">--&gt;</code> 
+<code class="code"><var class="var">a_i</var>(x) * <var class="var">a_i</var>(y) * <var class="var">a_i</var>(z) * ...</code>.
+The substitution is carried out on the first argument only.
+</p>
+<a class="anchor" id="nary"></a></dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#nary">nary</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as an n-ary function.
+</p>
+<p>The <code class="code">nary</code> declaration is not the same as calling the <code class="code">nary</code>
+function.  The sole effect of <code class="code">declare(foo, nary)</code> is to instruct the
+Maxima simplifier to flatten nested expressions, for example, to simplify
+<code class="code">foo(x, foo(y, z))</code> to <code class="code">foo(x, y, z)</code>.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#nonarray">nonarray</a></code></code></dt>
+<dd><p>Tells Maxima to consider <var class="var">a_i</var> not an array.  This declaration
+prevents multiple evaluation of a subscripted variable name.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#nonscalar">nonscalar</a></code></code></dt>
+<dd><p>Tells Maxima to consider <var class="var">a_i</var> a nonscalar variable.  The usual
+application is to declare a variable as a symbolic vector or matrix.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_5.html#noun">noun</a></code></code></dt>
+<dd><p>Tells Maxima to parse <var class="var">a_i</var> as a noun.  The effect of this is to
+replace instances of <var class="var">a_i</var> with <code class="code">'<var class="var">a_i</var></code> or
+<code class="code">nounify(<var class="var">a_i</var>)</code>, depending on the context.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="maxima_8.html#outative">outative</a></code></code></dt>
+<dd><p>Tells Maxima to simplify <var class="var">a_i</var> expressions by pulling constant factors
+out of the first argument.
+</p>
+<p>When <var class="var">a_i</var> has one argument, a factor is considered constant if it is
+a literal or declared constant.
+</p>
+<p>When <var class="var">a_i</var> has two or more arguments, a factor is considered constant
+if the second argument is a symbol and the factor is free of the second
+argument.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#posfun">posfun</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as a positive function.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#rational">rational</a></code>, <code class="code"><a class="ref" href="#irrational">irrational</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as a rational or irrational real
+variable.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#real">real</a></code>, <code class="code"><a class="ref" href="#imaginary">imaginary</a></code>, <code class="code"><a class="ref" href="#complex">complex</a></code></code></dt>
+<dd><p>Tells Maxima to recognize <var class="var">a_i</var> as a real, pure imaginary, or complex
+variable.
+</p>
+</dd>
+<dt><code class="code"><code class="code"><a class="ref" href="#scalar">scalar</a></code></code></dt>
+<dd><p>Tells Maxima to consider <var class="var">a_i</var> a scalar variable.
+</p>
+</dd>
+</dl>
+
+<p>Examples of the usage of the properties are available in the documentation
+for each separate description of a property.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="decreasing"></a><a class="anchor" id="increasing"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fdecreasing"></a><dl class="first-defvr">
+<dt class="defvr" id="index-decreasing"><span class="category-def">Property: </span><span><strong class="def-name">decreasing</strong><a class="copiable-link" href='#index-decreasing'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Database_002fdefvr_002fincreasing"></a></dd><dt class="defvrx def-cmd-defvr" id="index-increasing"><span class="category-def">Property: </span><span><strong class="def-name">increasing</strong><a class="copiable-link" href='#index-increasing'> &para;</a></span></dt>
+<dd>
+<p>The commands <code class="code">declare(<var class="var">f</var>, decreasing)</code> or
+<code class="code">declare(<var class="var">f</var>, increasing)</code> tell Maxima to recognize the function
+<var class="var">f</var> as an decreasing or increasing function.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code> for more properties.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) assume(a &gt; b);
+(%o1)                        [a &gt; b]
+(%i2) is(f(a) &gt; f(b));
+(%o2)                        unknown
+(%i3) declare(f, increasing);
+(%o3)                         done
+(%i4) is(f(a) &gt; f(b));
+(%o4)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="even"></a><a class="anchor" id="odd"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002feven"></a><dl class="first-defvr">
+<dt class="defvr" id="index-even"><span class="category-def">Property: </span><span><strong class="def-name">even</strong><a class="copiable-link" href='#index-even'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Database_002fdefvr_002fodd"></a></dd><dt class="defvrx def-cmd-defvr" id="index-odd"><span class="category-def">Property: </span><span><strong class="def-name">odd</strong><a class="copiable-link" href='#index-odd'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(<var class="var">a</var>, even)</code> or <code class="code">declare(<var class="var">a</var>, odd)</code> tells Maxima to
+recognize the symbol <var class="var">a</var> as an even or odd integer variable.  The
+properties <code class="code">even</code> and <code class="code">odd</code> are not recognized by the functions
+<code class="code"><a class="ref" href="maxima_4.html#evenp">evenp</a></code>, <code class="code"><a class="ref" href="maxima_4.html#oddp">oddp</a></code>, and <code class="code"><a class="ref" href="maxima_4.html#integerp">integerp</a></code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code> and <code class="code"><a class="ref" href="#askinteger">askinteger</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare(n, even);
+(%o1)                         done
+(%i2) askinteger(n, even);
+(%o2)                          yes
+(%i3) askinteger(n);
+(%o3)                          yes
+(%i4) evenp(n);
+(%o4)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="feature"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002ffeature"></a><dl class="first-defvr">
+<dt class="defvr" id="index-feature"><span class="category-def">Property: </span><span><strong class="def-name">feature</strong><a class="copiable-link" href='#index-feature'> &para;</a></span></dt>
+<dd>
+<p>Maxima understands two distinct types of features, system features and features
+which apply to mathematical expressions.  See also <code class="code"><a class="ref" href="maxima_31.html#status">status</a></code> for information
+about system features.  See also <code class="code"><a class="ref" href="#features">features</a></code> and <code class="code"><a class="ref" href="#featurep">featurep</a></code> for
+information about mathematical features.
+</p>
+<p><code class="code">feature</code> itself is not the name of a function or variable.
+</p></dd></dl>
+
+
+<a class="anchor" id="featurep"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002ffeaturep"></a><dl class="first-deffn">
+<dt class="deffn" id="index-featurep"><span class="category-def">Function: </span><span><strong class="def-name">featurep</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">f</var>)</var><a class="copiable-link" href='#index-featurep'> &para;</a></span></dt>
+<dd>
+<p>Attempts to determine whether the object <var class="var">a</var> has the feature <var class="var">f</var> on the
+basis of the facts in the current database.  If so, it returns <code class="code">true</code>,
+else <code class="code">false</code>.
+</p>
+<p>Note that <code class="code">featurep</code> returns <code class="code">false</code> when neither <var class="var">f</var>
+nor the negation of <var class="var">f</var> can be established.
+</p>
+<p><code class="code">featurep</code> evaluates its argument.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code> and <code class="code"><a class="ref" href="#features">features</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (j, even)$
+(%i2) featurep (j, integer);
+(%o2)                           true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="features"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002ffeatures"></a><dl class="first-defvr">
+<dt class="defvr" id="index-features"><span class="category-def">Declaration: </span><span><strong class="def-name">features</strong><a class="copiable-link" href='#index-features'> &para;</a></span></dt>
+<dd>
+<p>Maxima recognizes certain mathematical properties of functions and variables.
+These are called &quot;features&quot;.
+</p>
+<p><code class="code">declare (<var class="var">x</var>, <var class="var">foo</var>)</code> gives the property <var class="var">foo</var>
+to the function or variable <var class="var">x</var>.
+</p>
+<p><code class="code">declare (<var class="var">foo</var>, feature)</code> declares a new feature <var class="var">foo</var>.
+For example,
+<code class="code">declare ([red, green, blue], feature)</code>
+declares three new features, <code class="code">red</code>, <code class="code">green</code>, and <code class="code">blue</code>.
+</p>
+<p>The predicate <code class="code">featurep (<var class="var">x</var>, <var class="var">foo</var>)</code>
+returns <code class="code">true</code> if <var class="var">x</var> has the <var class="var">foo</var> property,
+and <code class="code">false</code> otherwise.
+</p>
+<p>The infolist <code class="code">features</code> is a list of known features.  These are
+</p>
+<pre class="verbatim">   integer        noninteger      even
+   odd            rational        irrational
+   real           imaginary       complex
+   analytic       increasing      decreasing
+   oddfun         evenfun         posfun
+   constant       commutative     lassociative
+   rassociative   symmetric       antisymmetric
+   integervalued
+</pre>
+<p>plus any user-defined features.
+</p>
+<p><code class="code">features</code> is a list of mathematical features.  There is also a list of
+non-mathematical, system-dependent features.  See <code class="code"><a class="ref" href="maxima_31.html#status">status</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (FOO, feature);
+(%o1)                         done
+(%i2) declare (x, FOO);
+(%o2)                         done
+(%i3) featurep (x, FOO);
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="get"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fget"></a><dl class="first-deffn">
+<dt class="deffn" id="index-get"><span class="category-def">Function: </span><span><strong class="def-name">get</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">i</var>)</var><a class="copiable-link" href='#index-get'> &para;</a></span></dt>
+<dd>
+<p>Retrieves the user property indicated by <var class="var">i</var> associated with
+atom <var class="var">a</var> or returns <code class="code">false</code> if <var class="var">a</var> doesn&rsquo;t have property <var class="var">i</var>.
+</p>
+<p><code class="code">get</code> evaluates its arguments.
+</p>
+<p>See also <code class="code"><a class="ref" href="#put">put</a></code> and <code class="code"><a class="ref" href="#qput">qput</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) put (%e, 'transcendental, 'type);
+(%o1)                    transcendental
+(%i2) put (%pi, 'transcendental, 'type)$
+(%i3) put (%i, 'algebraic, 'type)$
+(%i4) typeof (expr) := block ([q],
+        if numberp (expr)
+        then return ('algebraic),
+        if not atom (expr)
+        then return (maplist ('typeof, expr)),
+        q: get (expr, 'type),
+        if q=false
+        then errcatch (error(expr,&quot;is not numeric.&quot;)) else q)$
+(%i5) typeof (2*%e + x*%pi);
+x is not numeric.
+(%o5)  [[transcendental, []], [algebraic, transcendental]]
+(%i6) typeof (2*%e + %pi);
+(%o6)     [transcendental, [algebraic, transcendental]]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="integer"></a><a class="anchor" id="noninteger"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002finteger"></a><dl class="first-defvr">
+<dt class="defvr" id="index-integer"><span class="category-def">Property: </span><span><strong class="def-name">integer</strong><a class="copiable-link" href='#index-integer'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Database_002fdefvr_002fnoninteger"></a></dd><dt class="defvrx def-cmd-defvr" id="index-noninteger"><span class="category-def">Property: </span><span><strong class="def-name">noninteger</strong><a class="copiable-link" href='#index-noninteger'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(<var class="var">a</var>, integer)</code> or <code class="code">declare(<var class="var">a</var>, noninteger)</code> tells
+Maxima to recognize <var class="var">a</var> as an integer or noninteger variable.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare(n, integer, x, noninteger);
+(%o1)                         done
+(%i2) askinteger(n);
+(%o2)                          yes
+(%i3) askinteger(x);
+(%o3)                          no
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="integervalued"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fintegervalued"></a><dl class="first-defvr">
+<dt class="defvr" id="index-integervalued"><span class="category-def">Property: </span><span><strong class="def-name">integervalued</strong><a class="copiable-link" href='#index-integervalued'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(<var class="var">f</var>, integervalued)</code> tells Maxima to recognize <var class="var">f</var> as an
+integer-valued function.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) exp(%i)^f(x);
+                              %i f(x)
+(%o1)                      (%e  )
+(%i2) declare(f, integervalued);
+(%o2)                         done
+(%i3) exp(%i)^f(x);
+                              %i f(x)
+(%o3)                       %e
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="nonarray"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fnonarray"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nonarray"><span class="category-def">Property: </span><span><strong class="def-name">nonarray</strong><a class="copiable-link" href='#index-nonarray'> &para;</a></span></dt>
+<dd>
+<p>The command <code class="code">declare(a, nonarray)</code> tells Maxima to consider <var class="var">a</var> not
+an array.  This declaration prevents multiple evaluation, if <var class="var">a</var> is a
+subscripted variable.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) a:'b$ b:'c$ c:'d$
+
+(%i4) a[x];
+(%o4)                          d
+                                x
+(%i5) declare(a, nonarray);
+(%o5)                         done
+(%i6) a[x];
+(%o6)                          a
+                                x
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="nonscalar"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fnonscalar"></a><dl class="first-defvr">
+<dt class="defvr" id="index-nonscalar"><span class="category-def">Property: </span><span><strong class="def-name">nonscalar</strong><a class="copiable-link" href='#index-nonscalar'> &para;</a></span></dt>
+<dd>
+<p>Makes atoms behave as does a list or matrix with respect to the dot operator.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Vectors">Vectors</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="nonscalarp"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fnonscalarp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-nonscalarp"><span class="category-def">Function: </span><span><strong class="def-name">nonscalarp</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-nonscalarp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">expr</var> is a non-scalar, i.e., it contains
+atoms declared as non-scalars, lists, or matrices.
+</p>
+<p>See also the predicate function <code class="code"><a class="ref" href="#scalarp">scalarp</a></code> and <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Vectors">Vectors</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="posfun"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fposfun"></a><dl class="first-defvr">
+<dt class="defvr" id="index-posfun"><span class="category-def">Property: </span><span><strong class="def-name">posfun</strong><a class="copiable-link" href='#index-posfun'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare (f, posfun)</code> declares <code class="code">f</code> to be a positive function.
+<code class="code">is (f(x) &gt; 0)</code> yields <code class="code">true</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="printprops"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fprintprops"></a><dl class="first-deffn">
+<dt class="deffn" id="index-printprops"><span class="category-def">Function: </span><span><strong class="def-name">printprops</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">printprops</code> (<var class="var">a</var>, <var class="var">i</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">printprops</code> ([<var class="var">a_1</var>, &hellip;, <var class="var">a_n</var>], <var class="var">i</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">printprops</code> (all, <var class="var">i</var>)</var><a class="copiable-link" href='#index-printprops'> &para;</a></span></dt>
+<dd>
+<p>Displays the property with the indicator <var class="var">i</var> associated with the atom
+<var class="var">a</var>.  <var class="var">a</var> may also be a list of atoms or the atom <code class="code">all</code> in which
+case all of the atoms with the given property will be used.  For example,
+<code class="code">printprops ([f, g], atvalue)</code>.  <code class="code">printprops</code> is for properties that
+cannot otherwise be displayed, i.e.  for <code class="code"><a class="ref" href="maxima_17.html#atvalue">atvalue</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="maxima_17.html#atomgrad">atomgrad</a></code>, <code class="code"><a class="ref" href="maxima_17.html#gradef">gradef</a></code>, and <code class="code"><a class="ref" href="maxima_33.html#matchdeclare">matchdeclare</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Display-functions">Display functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="properties"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fproperties"></a><dl class="first-deffn">
+<dt class="deffn" id="index-properties"><span class="category-def">Function: </span><span><strong class="def-name">properties</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-properties'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of the names of all the properties associated with the atom
+<var class="var">a</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="props"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fprops"></a><dl class="first-defvr">
+<dt class="defvr" id="index-props"><span class="category-def">System variable: </span><span><strong class="def-name">props</strong><a class="copiable-link" href='#index-props'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[]</code>
+</p>
+<p><code class="code">props</code> are atoms which have any property other than those explicitly
+mentioned in <code class="code"><a class="ref" href="maxima_3.html#infolists">infolists</a></code>, such as specified by <code class="code"><a class="ref" href="maxima_17.html#atvalue">atvalue</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="maxima_33.html#matchdeclare">matchdeclare</a></code>, etc., as well as properties specified in the
+<code class="code"><a class="ref" href="#declare">declare</a></code> function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="propvars"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fpropvars"></a><dl class="first-deffn">
+<dt class="deffn" id="index-propvars"><span class="category-def">Function: </span><span><strong class="def-name">propvars</strong> <var class="def-var-arguments">(<var class="var">prop</var>)</var><a class="copiable-link" href='#index-propvars'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of those atoms on the <code class="code"><a class="ref" href="#props">props</a></code> list which
+have the property indicated by <var class="var">prop</var>.  Thus <code class="code">propvars (atvalue)</code>
+returns a list of atoms which have atvalues.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="put"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fput"></a><dl class="first-deffn">
+<dt class="deffn" id="index-put"><span class="category-def">Function: </span><span><strong class="def-name">put</strong> <var class="def-var-arguments">(<var class="var">atom</var>, <var class="var">value</var>, <var class="var">indicator</var>)</var><a class="copiable-link" href='#index-put'> &para;</a></span></dt>
+<dd>
+<p>Assigns <var class="var">value</var> to the property (specified by <var class="var">indicator</var>) of
+<var class="var">atom</var>.  <var class="var">indicator</var> may be the name of any property, not just a
+system-defined property.
+</p>
+<p><code class="code"><a class="ref" href="#rem">rem</a></code> reverses the effect of <code class="code">put</code>.
+</p>
+<p><code class="code">put</code> evaluates its arguments.
+<code class="code">put</code> returns <var class="var">value</var>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#qput">qput</a></code> and <code class="code"><a class="ref" href="#get">get</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) put (foo, (a+b)^5, expr);
+                                   5
+(%o1)                       (b + a)
+(%i2) put (foo, &quot;Hello&quot;, str);
+(%o2)                         Hello
+(%i3) properties (foo);
+(%o3)            [[user properties, str, expr]]
+(%i4) get (foo, expr);
+                                   5
+(%o4)                       (b + a)
+(%i5) get (foo, str);
+(%o5)                         Hello
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="qput"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fqput"></a><dl class="first-deffn">
+<dt class="deffn" id="index-qput"><span class="category-def">Function: </span><span><strong class="def-name">qput</strong> <var class="def-var-arguments">(<var class="var">atom</var>, <var class="var">value</var>, <var class="var">indicator</var>)</var><a class="copiable-link" href='#index-qput'> &para;</a></span></dt>
+<dd>
+<p>Assigns <var class="var">value</var> to the property (specified by <var class="var">indicator</var>) of
+<var class="var">atom</var>.  This is the same as <code class="code"><a class="ref" href="#put">put</a></code>, except that the arguments are
+quoted.
+</p>
+<p>See also <code class="code"><a class="ref" href="#get">get</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) foo: aa$ 
+(%i2) bar: bb$
+(%i3) baz: cc$
+(%i4) put (foo, bar, baz);
+(%o4)                          bb
+(%i5) properties (aa);
+(%o5)                [[user properties, cc]]
+(%i6) get (aa, cc);
+(%o6)                          bb
+(%i7) qput (foo, bar, baz);
+(%o7)                          bar
+(%i8) properties (foo);
+(%o8)            [value, [user properties, baz]]
+(%i9) get ('foo, 'baz);
+(%o9)                          bar
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="rational"></a><a class="anchor" id="irrational"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002frational"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rational-1"><span class="category-def">Property: </span><span><strong class="def-name">rational</strong><a class="copiable-link" href='#index-rational-1'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Database_002fdefvr_002firrational"></a></dd><dt class="defvrx def-cmd-defvr" id="index-irrational"><span class="category-def">Property: </span><span><strong class="def-name">irrational</strong><a class="copiable-link" href='#index-irrational'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(<var class="var">a</var>, rational)</code> or <code class="code">declare(<var class="var">a</var>, irrational)</code> tells
+Maxima to recognize <var class="var">a</var> as a rational or irrational real variable.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="real"></a><a class="anchor" id="imaginary"></a><a class="anchor" id="complex"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002freal"></a><dl class="first-defvr">
+<dt class="defvr" id="index-real"><span class="category-def">Property: </span><span><strong class="def-name">real</strong><a class="copiable-link" href='#index-real'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Database_002fdefvr_002fimaginary"></a></dd><dt class="defvrx def-cmd-defvr" id="index-imaginary"><span class="category-def">Property: </span><span><strong class="def-name">imaginary</strong><a class="copiable-link" href='#index-imaginary'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Database_002fdefvr_002fcomplex"></a></dd><dt class="defvrx def-cmd-defvr" id="index-complex"><span class="category-def">Property: </span><span><strong class="def-name">complex</strong><a class="copiable-link" href='#index-complex'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(<var class="var">a</var>, real)</code>, <code class="code">declare(<var class="var">a</var>, imaginary)</code>, or
+<code class="code">declare(<var class="var">a</var>, complex)</code> tells Maxima to recognize <var class="var">a</var> as a real,
+pure imaginary, or complex variable.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="rem"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002frem"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rem"><span class="category-def">Function: </span><span><strong class="def-name">rem</strong> <var class="def-var-arguments">(<var class="var">atom</var>, <var class="var">indicator</var>)</var><a class="copiable-link" href='#index-rem'> &para;</a></span></dt>
+<dd>
+<p>Removes the property indicated by <var class="var">indicator</var> from <var class="var">atom</var>.
+<code class="code">rem</code> reverses the effect of <code class="code"><a class="ref" href="#put">put</a></code>.
+</p>
+<p><code class="code">rem</code> returns <code class="code">done</code> if <var class="var">atom</var> had an <var class="var">indicator</var> property
+when <code class="code">rem</code> was called, or <code class="code">false</code> if it had no such property.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="remove"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fremove"></a><dl class="first-deffn">
+<dt class="deffn" id="index-remove"><span class="category-def">Function: </span><span><strong class="def-name">remove</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">remove</code> (<var class="var">a_1</var>, <var class="var">p_1</var>, &hellip;, <var class="var">a_n</var>, <var class="var">p_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">remove</code> ([<var class="var">a_1</var>, &hellip;, <var class="var">a_m</var>], [<var class="var">p_1</var>, &hellip;, <var class="var">p_n</var>], &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">remove</code> (&quot;<var class="var">a</var>&quot;, operator) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">remove</code> (<var class="var">a</var>, transfun) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">remove</code> (all, <var class="var">p</var>)</var><a class="copiable-link" href='#index-remove'> &para;</a></span></dt>
+<dd>
+<p>Removes properties associated with atoms.
+</p>
+<p><code class="code">remove (<var class="var">a_1</var>, <var class="var">p_1</var>, ..., <var class="var">a_n</var>, <var class="var">p_n</var>)</code>
+removes property <code class="code">p_k</code> from atom <code class="code">a_k</code>.
+</p>
+<p><code class="code">remove ([<var class="var">a_1</var>, ..., <var class="var">a_m</var>], [<var class="var">p_1</var>, ..., <var class="var">p_n</var>], ...)</code>
+removes properties <code class="code"><var class="var">p_1</var>, ..., <var class="var">p_n</var></code>
+from atoms <var class="var">a_1</var>, &hellip;, <var class="var">a_m</var>.
+There may be more than one pair of lists.
+</p>
+<p><code class="code">remove (all, <var class="var">p</var>)</code> removes the property <var class="var">p</var> from all atoms which
+have it.
+</p>
+<p>The removed properties may be system-defined properties such as
+<code class="code">function</code>, <code class="code">macro</code>, or <code class="code"><a class="ref" href="maxima_35.html#mode_005fdeclare">mode_declare</a></code>.
+<code class="code">remove</code> does not remove properties defined by <code class="code"><a class="ref" href="#put">put</a></code>.
+</p>
+<p>A property may be <code class="code">transfun</code> to remove
+the translated Lisp version of a function.
+After executing this, the Maxima version of the function is executed
+rather than the translated version.
+</p>
+<p><code class="code">remove (&quot;<var class="var">a</var>&quot;, operator)</code> or, equivalently,
+<code class="code">remove (&quot;<var class="var">a</var>&quot;, op)</code> removes from <var class="var">a</var> the operator properties
+declared by <code class="code"><a class="ref" href="maxima_6.html#prefix">prefix</a></code>, <code class="code"><a class="ref" href="maxima_6.html#infix">infix</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="maxima_6.html#function_005fnary">nary</a></code>, <code class="code"><a class="ref" href="maxima_6.html#postfix">postfix</a></code>, <code class="code"><a class="ref" href="maxima_6.html#matchfix">matchfix</a></code>, or
+<code class="code"><a class="ref" href="maxima_6.html#nofix">nofix</a></code>.  Note that the name of the operator must be written as a quoted
+string.
+</p>
+<p><code class="code">remove</code> always returns <code class="code">done</code> whether or not an atom has a specified
+property.  This behavior is unlike the more specific remove functions
+<code class="code"><a class="ref" href="maxima_32.html#remvalue">remvalue</a></code>, <code class="code"><a class="ref" href="maxima_4.html#remarray">remarray</a></code>, <code class="code"><a class="ref" href="maxima_35.html#remfunction">remfunction</a></code>, and
+<code class="code"><a class="ref" href="maxima_33.html#remrule">remrule</a></code>.
+</p>
+<p><code class="code">remove</code> quotes its arguments.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scalar"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fscalar"></a><dl class="first-defvr">
+<dt class="defvr" id="index-scalar"><span class="category-def">Property: </span><span><strong class="def-name">scalar</strong><a class="copiable-link" href='#index-scalar'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(<var class="var">a</var>, scalar)</code> tells Maxima to consider <var class="var">a</var> a scalar
+variable.
+</p>
+<p>See also <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="scalarp"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fscalarp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scalarp"><span class="category-def">Function: </span><span><strong class="def-name">scalarp</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-scalarp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">expr</var> is a number, constant, or variable declared
+<code class="code"><a class="ref" href="#scalar">scalar</a></code> with <code class="code"><a class="ref" href="#declare">declare</a></code>, or composed entirely of numbers,
+constants, and such variables, but not containing matrices or lists.
+</p>
+<p>See also the predicate function <code class="code"><a class="ref" href="#nonscalarp">nonscalarp</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Vectors">Vectors</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Database_002fnode_002fFunctions-and-Variables-for-Facts"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Facts">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Predicates" accesskey="n" rel="next">Functions and Variables for Predicates</a>, Previous: <a href="#Functions-and-Variables-for-Properties" accesskey="p" rel="prev">Functions and Variables for Properties</a>, Up: <a href="#Maxima_0027s-Database" accesskey="u" rel="up">Maxima&rsquo;s Database</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Facts-1">11.3 Functions and Variables for Facts</h3>
+
+<a class="anchor" id="activate"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002factivate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-activate"><span class="category-def">Function: </span><span><strong class="def-name">activate</strong> <var class="def-var-arguments">(<var class="var">context_1</var>, &hellip;, <var class="var">context_n</var>)</var><a class="copiable-link" href='#index-activate'> &para;</a></span></dt>
+<dd>
+<p>Activates the contexts <var class="var">context_1</var>, &hellip;, <var class="var">context_n</var>.
+The facts in these contexts are then available to
+make deductions and retrieve information.
+The facts in these contexts are not listed by <code class="code">facts ()</code>.
+</p>
+<p>The variable <code class="code"><a class="ref" href="#activecontexts">activecontexts</a></code> is the list
+of contexts which are active by way of the <code class="code">activate</code> function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="activecontexts"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002factivecontexts"></a><dl class="first-defvr">
+<dt class="defvr" id="index-activecontexts"><span class="category-def">System variable: </span><span><strong class="def-name">activecontexts</strong><a class="copiable-link" href='#index-activecontexts'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[]</code>
+</p>
+<p><code class="code">activecontexts</code> is a list of the contexts which are active
+by way of the <code class="code"><a class="ref" href="#activate">activate</a></code> function, as opposed to being active because
+they are subcontexts of the current context.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="askequal"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002faskequal"></a><dl class="first-deffn">
+<dt class="deffn" id="index-askequal"><span class="category-def">Function: </span><span><strong class="def-name">askequal</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">askequal</code> (<var class="var">expr1</var>, <var class="var">expr2</var>)</var><a class="copiable-link" href='#index-askequal'> &para;</a></span></dt>
+<dd>
+<p><code class="code">askequal(<var class="var">expr1</var>, <var class="var">expr2</var>)</code> attempts to determine from the
+<code class="code">assume</code> database whether <var class="var">expr1</var> is equal to <var class="var">expr2</var>,
+and prompts the user if it cannot tell.
+</p>
+<p>If the user provides the answer,
+the answer is stored in the <code class="code">assume</code> database
+for the duration of the evaluation of the expression currently in progress.
+When the evaluation is completed,
+the user-provided answer is removed from the database.
+</p>
+<p><code class="code">askequal</code> returns <code class="code">yes</code> or <code class="code">no</code>,
+whether the answer was determined from the <code class="code">assume</code> database
+or provided by the user.
+</p>
+<p>See also <code class="code"><a class="ref" href="#equal">equal</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="askinteger"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002faskinteger"></a><dl class="first-deffn">
+<dt class="deffn" id="index-askinteger"><span class="category-def">Function: </span><span><strong class="def-name">askinteger</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">askinteger</code> (<var class="var">expr</var>, integer) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">askinteger</code> (<var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">askinteger</code> (<var class="var">expr</var>, even) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">askinteger</code> (<var class="var">expr</var>, odd)</var><a class="copiable-link" href='#index-askinteger'> &para;</a></span></dt>
+<dd>
+<p><code class="code">askinteger (<var class="var">expr</var>, integer)</code> attempts to determine from the
+<code class="code">assume</code> database whether <var class="var">expr</var> is an integer.
+<code class="code">askinteger</code> prompts the user if it cannot tell otherwise,
+and attempt to install the information in the database if possible.
+<code class="code">askinteger (<var class="var">expr</var>)</code> is equivalent to
+<code class="code">askinteger (<var class="var">expr</var>, integer)</code>.
+</p>
+<p><code class="code">askinteger (<var class="var">expr</var>, even)</code> and <code class="code">askinteger (<var class="var">expr</var>, odd)</code>
+likewise attempt to determine if <var class="var">expr</var> is an even integer or odd integer,
+respectively.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="asksign"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fasksign"></a><dl class="first-deffn">
+<dt class="deffn" id="index-asksign"><span class="category-def">Function: </span><span><strong class="def-name">asksign</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-asksign'> &para;</a></span></dt>
+<dd>
+<p>First attempts to determine whether the specified
+expression is positive, negative, or zero.  If it cannot, it asks the
+user the necessary questions to complete its deduction.  The user&rsquo;s
+answer is recorded in the data base for the duration of the current
+computation.  The return value of <code class="code">asksign</code> is one of <code class="code">pos</code>,
+<code class="code">neg</code>, or <code class="code">zero</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="assume"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fassume"></a><dl class="first-deffn">
+<dt class="deffn" id="index-assume"><span class="category-def">Function: </span><span><strong class="def-name">assume</strong> <var class="def-var-arguments">(<var class="var">pred_1</var>, &hellip;, <var class="var">pred_n</var>)</var><a class="copiable-link" href='#index-assume'> &para;</a></span></dt>
+<dd>
+<p>Adds predicates <var class="var">pred_1</var>, &hellip;, <var class="var">pred_n</var> to the current context.
+If a predicate is inconsistent or redundant with the predicates in the current
+context, it is not added to the context.  The context accumulates predicates
+from each call to <code class="code">assume</code>.
+</p>
+<p><code class="code">assume</code> returns a list whose elements are the predicates added to the
+context or the atoms <code class="code">redundant</code> or <code class="code">inconsistent</code> where applicable.
+</p>
+<p>The predicates <var class="var">pred_1</var>, &hellip;, <var class="var">pred_n</var> can only be expressions
+with the relational operators <code class="code">&lt; &lt;= equal notequal &gt;=</code> and <code class="code">&gt;</code>.
+Predicates cannot be literal equality <code class="code">=</code> or literal inequality <code class="code">#</code>
+expressions, nor can they be predicate functions such as <code class="code">integerp</code>.
+</p>
+<p>Compound predicates of the form <code class="code"><var class="var">pred_1</var> and ... and <var class="var">pred_n</var></code>
+are recognized, but not <code class="code"><var class="var">pred_1</var> or ... or <var class="var">pred_n</var></code>.
+<code class="code">not <var class="var">pred_k</var></code> is recognized if <var class="var">pred_k</var> is a relational predicate.
+Expressions of the form <code class="code">not (<var class="var">pred_1</var> and <var class="var">pred_2</var>)</code>
+and <code class="code">not (<var class="var">pred_1</var> or <var class="var">pred_2</var>)</code> are not recognized.
+</p>
+<p>Maxima&rsquo;s deduction mechanism is not very strong;
+there are many obvious consequences which cannot be determined by <code class="code"><a class="ref" href="#is">is</a></code>.
+This is a known weakness.
+</p>
+<p><code class="code">assume</code> does not handle predicates with complex numbers.  If a predicate
+contains a complex number <code class="code">assume</code> returns <code class="code">inconsistent</code> or 
+<code class="code">redundant</code>.
+</p>
+<p><code class="code">assume</code> evaluates its arguments.
+</p>
+<p>See also <code class="code"><a class="ref" href="#is">is</a></code>, <code class="code"><a class="ref" href="#facts">facts</a></code>, <code class="code"><a class="ref" href="#forget">forget</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#context">context</a></code>, and <code class="code"><a class="ref" href="#declare">declare</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) assume (xx &gt; 0, yy &lt; -1, zz &gt;= 0);
+(%o1)              [xx &gt; 0, yy &lt; - 1, zz &gt;= 0]
+(%i2) assume (aa &lt; bb and bb &lt; cc);
+(%o2)                  [bb &gt; aa, cc &gt; bb]
+(%i3) facts ();
+(%o3)     [xx &gt; 0, - 1 &gt; yy, zz &gt;= 0, bb &gt; aa, cc &gt; bb]
+(%i4) is (xx &gt; yy);
+(%o4)                         true
+(%i5) is (yy &lt; -yy);
+(%o5)                         true
+(%i6) is (sinh (bb - aa) &gt; 0);
+(%o6)                         true
+(%i7) forget (bb &gt; aa);
+(%o7)                       [bb &gt; aa]
+(%i8) prederror : false;
+(%o8)                         false
+(%i9) is (sinh (bb - aa) &gt; 0);
+(%o9)                        unknown
+(%i10) is (bb^2 &lt; cc^2);
+(%o10)                       unknown
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="assumescalar"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fassumescalar"></a><dl class="first-defvr">
+<dt class="defvr" id="index-assumescalar"><span class="category-def">Option variable: </span><span><strong class="def-name">assumescalar</strong><a class="copiable-link" href='#index-assumescalar'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">assumescalar</code> helps govern whether expressions <code class="code">expr</code>
+for which <code class="code">nonscalarp (expr)</code> is <code class="code">false</code>
+are assumed to behave like scalars for certain transformations.
+</p>
+<p>Let <code class="code">expr</code> represent any expression other than a list or a matrix,
+and let <code class="code">[1, 2, 3]</code> represent any list or matrix.
+Then <code class="code">expr . [1, 2, 3]</code> yields <code class="code">[expr, 2 expr, 3 expr]</code>
+if <code class="code">assumescalar</code> is <code class="code">true</code>, or <code class="code">scalarp (expr)</code> is
+<code class="code">true</code>, or <code class="code">constantp (expr)</code> is <code class="code">true</code>.
+</p>
+<p>If <code class="code">assumescalar</code> is <code class="code">true</code>, such
+expressions will behave like scalars only for commutative
+operators, but not for noncommutative multiplication <code class="code">.</code>.
+</p>
+<p>When <code class="code">assumescalar</code> is <code class="code">false</code>, such
+expressions will behave like non-scalars.
+</p>
+<p>When <code class="code">assumescalar</code> is <code class="code">all</code>, such expressions will behave like
+scalars for all the operators listed above.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="assume_005fpos"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fassume_005fpos"></a><dl class="first-defvr">
+<dt class="defvr" id="index-assume_005fpos"><span class="category-def">Option variable: </span><span><strong class="def-name">assume_pos</strong><a class="copiable-link" href='#index-assume_005fpos'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">assume_pos</code> is <code class="code">true</code> and the sign of a parameter <var class="var">x</var>
+cannot be determined from the current context
+or other considerations,
+<code class="code">sign</code> and <code class="code">asksign (<var class="var">x</var>)</code> return <code class="code">true</code>.
+This may forestall some automatically-generated <code class="code">asksign</code> queries,
+such as may arise from <code class="code">integrate</code> or other computations.
+</p>
+<p>By default, a parameter is <var class="var">x</var> such that <code class="code">symbolp (<var class="var">x</var>)</code>
+or <code class="code">subvarp (<var class="var">x</var>)</code>.
+The class of expressions considered parameters can be modified to some extent
+via the variable <code class="code">assume_pos_pred</code>.
+</p>
+<p><code class="code">sign</code> and <code class="code">asksign</code> attempt to deduce the sign of expressions
+from the sign of operands within the expression.
+For example, if <code class="code">a</code> and <code class="code">b</code> are both positive,
+then <code class="code">a + b</code> is also positive.
+</p>
+<p>However, there is no way to bypass all <code class="code">asksign</code> queries.
+In particular, when the <code class="code">asksign</code> argument is a
+difference <code class="code"><var class="var">x</var> - <var class="var">y</var></code> or a logarithm <code class="code">log(<var class="var">x</var>)</code>,
+<code class="code">asksign</code> always requests an input from the user,
+even when <code class="code">assume_pos</code> is <code class="code">true</code> and <code class="code">assume_pos_pred</code> is
+a function which returns <code class="code">true</code> for all arguments.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="assume_005fpos_005fpred"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fassume_005fpos_005fpred"></a><dl class="first-defvr">
+<dt class="defvr" id="index-assume_005fpos_005fpred"><span class="category-def">Option variable: </span><span><strong class="def-name">assume_pos_pred</strong><a class="copiable-link" href='#index-assume_005fpos_005fpred'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">assume_pos_pred</code> is assigned the name of a function
+or a lambda expression of one argument <var class="var">x</var>,
+that function is called to determine
+whether <var class="var">x</var> is considered a parameter for the purpose of <code class="code">assume_pos</code>.
+<code class="code">assume_pos_pred</code> is ignored when <code class="code">assume_pos</code> is <code class="code">false</code>.
+</p>
+<p>The <code class="code">assume_pos_pred</code> function is called by <code class="code">sign</code> and <code class="code">asksign</code>
+with an argument <var class="var">x</var>
+which is either an atom, a subscripted variable, or a function call expression.
+If the <code class="code">assume_pos_pred</code> function returns <code class="code">true</code>,
+<var class="var">x</var> is considered a parameter for the purpose of <code class="code">assume_pos</code>.
+</p>
+<p>By default, a parameter is <var class="var">x</var> such that <code class="code">symbolp (<var class="var">x</var>)</code>
+or <code class="code">subvarp (<var class="var">x</var>)</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#assume">assume</a></code> and <code class="code"><a class="ref" href="#assume_005fpos">assume_pos</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) assume_pos: true$
+(%i2) assume_pos_pred: symbolp$
+(%i3) sign (a);
+(%o3)                          pos
+(%i4) sign (a[1]);
+(%o4)                          pnz
+(%i5) assume_pos_pred: lambda ([x], display (x), true)$
+(%i6) asksign (a);
+                              x = a
+
+(%o6)                          pos
+(%i7) asksign (a[1]);
+                             x = a
+                                  1
+
+(%o7)                          pos
+(%i8) asksign (foo (a));
+                           x = foo(a)
+
+(%o8)                          pos
+(%i9) asksign (foo (a) + bar (b));
+                           x = foo(a)
+
+                           x = bar(b)
+
+(%o9)                          pos
+(%i10) asksign (log (a));
+                              x = a
+
+Is  a - 1  positive, negative, or zero?
+
+p;
+(%o10)                         pos
+(%i11) asksign (a - b);
+                              x = a
+
+                              x = b
+
+                              x = a
+
+                              x = b
+
+Is  b - a  positive, negative, or zero?
+
+p;
+(%o11)                         neg
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="context"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fcontext"></a><dl class="first-defvr">
+<dt class="defvr" id="index-context"><span class="category-def">Option variable: </span><span><strong class="def-name">context</strong><a class="copiable-link" href='#index-context'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">initial</code>
+</p>
+<p><code class="code">context</code> names the collection of facts maintained by <code class="code"><a class="ref" href="#assume">assume</a></code> and
+<code class="code"><a class="ref" href="#forget">forget</a></code>.  <code class="code">assume</code> adds facts to the collection named by
+<code class="code">context</code>, while <code class="code">forget</code> removes facts.
+</p>
+<p>Binding <code class="code">context</code> to a name <var class="var">foo</var> changes the current context to
+<var class="var">foo</var>.  If the specified context <var class="var">foo</var> does not yet exist,
+it is created automatically by a call to <code class="code"><a class="ref" href="#newcontext">newcontext</a></code>.
+The specified context is activated automatically.
+</p>
+<p>See <code class="code"><a class="ref" href="#contexts">contexts</a></code> for a general description of the context mechanism.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="contexts"></a><a class="anchor" id="Item_003a-Database_002fdefvr_002fcontexts"></a><dl class="first-defvr">
+<dt class="defvr" id="index-contexts"><span class="category-def">Option variable: </span><span><strong class="def-name">contexts</strong><a class="copiable-link" href='#index-contexts'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[initial, global]</code>
+</p>
+<p><code class="code">contexts</code> is a list of the contexts which
+currently exist, including the currently active context.
+</p>
+<p>The context mechanism makes it possible for a user to bind together
+and name a collection of facts, called a context.
+Once this is done, the user can have Maxima assume or forget large numbers
+of facts merely by activating or deactivating their context.
+</p>
+<p>Any symbolic atom can be a context, and the facts contained in that
+context will be retained in storage until destroyed one by one
+by calling <code class="code"><a class="ref" href="#forget">forget</a></code> or destroyed as a whole by calling <code class="code"><a class="ref" href="maxima_3.html#kill">kill</a></code><!-- /@w -->
+to destroy the context to which they belong.
+</p>
+<p>Contexts exist in a hierarchy, with the root always being
+the context <code class="code">global</code>, which contains information about Maxima that some
+functions need.  When in a given context, all the facts in that
+context are &quot;active&quot; (meaning that they are used in deductions and
+retrievals) as are all the facts in any context which is a subcontext
+of the active context.
+</p>
+<p>When a fresh Maxima is started up, the user is in a
+context called <code class="code">initial</code>, which has <code class="code">global</code> as a subcontext.
+</p>
+<p>See also <code class="code"><a class="ref" href="#facts">facts</a></code>, <code class="code"><a class="ref" href="#newcontext">newcontext</a></code>, <code class="code"><a class="ref" href="#supcontext">supcontext</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#killcontext">killcontext</a></code>, <code class="code"><a class="ref" href="#activate">activate</a></code>, <code class="code"><a class="ref" href="#deactivate">deactivate</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#assume">assume</a></code>, and <code class="code"><a class="ref" href="#forget">forget</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="deactivate"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fdeactivate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-deactivate"><span class="category-def">Function: </span><span><strong class="def-name">deactivate</strong> <var class="def-var-arguments">(<var class="var">context_1</var>, &hellip;, <var class="var">context_n</var>)</var><a class="copiable-link" href='#index-deactivate'> &para;</a></span></dt>
+<dd>
+<p>Deactivates the specified contexts <var class="var">context_1</var>, &hellip;, <var class="var">context_n</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="facts"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002ffacts"></a><dl class="first-deffn">
+<dt class="deffn" id="index-facts"><span class="category-def">Function: </span><span><strong class="def-name">facts</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">facts</code> (<var class="var">item</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">facts</code> ()</var><a class="copiable-link" href='#index-facts'> &para;</a></span></dt>
+<dd>
+<p>If <var class="var">item</var> is the name of a context, <code class="code">facts (<var class="var">item</var>)</code> returns a
+list of the facts in the specified context.
+</p>
+<p>If <var class="var">item</var> is not the name of a context, <code class="code">facts (<var class="var">item</var>)</code> returns a
+list of the facts known about <var class="var">item</var> in the current context.  Facts that
+are active, but in a different context, are not listed.
+</p>
+<p><code class="code">facts ()</code> (i.e., without an argument) lists the current context.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="forget"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fforget"></a><dl class="first-deffn">
+<dt class="deffn" id="index-forget"><span class="category-def">Function: </span><span><strong class="def-name">forget</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">forget</code> (<var class="var">pred_1</var>, &hellip;, <var class="var">pred_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">forget</code> (<var class="var">L</var>)</var><a class="copiable-link" href='#index-forget'> &para;</a></span></dt>
+<dd>
+<p>Removes predicates established by <code class="code"><a class="ref" href="#assume">assume</a></code>.
+The predicates may be expressions equivalent to (but not necessarily identical
+to) those previously assumed.
+</p>
+<p><code class="code">forget (<var class="var">L</var>)</code>, where <var class="var">L</var> is a list of predicates,
+forgets each item on the list.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="is"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fis"></a><dl class="first-deffn">
+<dt class="deffn" id="index-is"><span class="category-def">Function: </span><span><strong class="def-name">is</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-is'> &para;</a></span></dt>
+<dd>
+<p>Attempts to determine whether the predicate <var class="var">expr</var> is provable from the
+facts in the <code class="code">assume</code> database.
+</p>
+<p>If the predicate is provably <code class="code">true</code> or <code class="code">false</code>, <code class="code">is</code> returns
+<code class="code">true</code> or <code class="code">false</code>, respectively.  Otherwise, the return value is
+governed by the global flag <code class="code"><a class="ref" href="maxima_36.html#prederror">prederror</a></code>.  When <code class="code">prederror</code> is
+<code class="code">true</code>, <code class="code">is</code> complains with an error message.  Otherwise, <code class="code">is</code>
+returns <code class="code">unknown</code>.
+</p>
+<p><code class="code">ev(<var class="var">expr</var>, pred)</code> (which can be written  <code class="code"><var class="var">expr</var>, pred</code> at
+the interactive prompt) is equivalent to <code class="code">is(<var class="var">expr</var>)</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#assume">assume</a></code>, <code class="code"><a class="ref" href="#facts">facts</a></code>, and <code class="code"><a class="ref" href="#maybe">maybe</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">is</code> causes evaluation of predicates.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) %pi &gt; %e;
+(%o1)                       %pi &gt; %e
+(%i2) is (%pi &gt; %e);
+(%o2)                         true
+</pre></div>
+
+<p><code class="code">is</code> attempts to derive predicates from the <code class="code">assume</code> database.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) assume (a &gt; b);
+(%o1)                        [a &gt; b]
+(%i2) assume (b &gt; c);
+(%o2)                        [b &gt; c]
+(%i3) is (a &lt; b);
+(%o3)                         false
+(%i4) is (a &gt; c);
+(%o4)                         true
+(%i5) is (equal (a, c));
+(%o5)                         false
+</pre></div>
+
+<p>If <code class="code">is</code> can neither prove nor disprove a predicate from the <code class="code">assume</code>
+database, the global flag <code class="code">prederror</code> governs the behavior of <code class="code">is</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) assume (a &gt; b);
+(%o1)                        [a &gt; b]
+(%i2) prederror: true$
+(%i3) is (a &gt; 0);
+Maxima was unable to evaluate the predicate:
+a &gt; 0
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i4) prederror: false$
+(%i5) is (a &gt; 0);
+(%o5)                        unknown
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="killcontext"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fkillcontext"></a><dl class="first-deffn">
+<dt class="deffn" id="index-killcontext"><span class="category-def">Function: </span><span><strong class="def-name">killcontext</strong> <var class="def-var-arguments">(<var class="var">context_1</var>, &hellip;, <var class="var">context_n</var>)</var><a class="copiable-link" href='#index-killcontext'> &para;</a></span></dt>
+<dd>
+<p>Kills the contexts <var class="var">context_1</var>, &hellip;, <var class="var">context_n</var>.
+</p>
+<p>If one of the contexts is the current context, the new current context will
+become the first available subcontext of the current context which has not been
+killed.  If the first available unkilled context is <code class="code">global</code> then
+<code class="code">initial</code> is used instead.  If the <code class="code">initial</code> context is killed, a
+new, empty <code class="code">initial</code> context is created.
+</p>
+<p><code class="code">killcontext</code> refuses to kill a context which is
+currently active, either because it is a subcontext of the current
+context, or by use of the function <code class="code"><a class="ref" href="#activate">activate</a></code>.
+</p>
+<p><code class="code">killcontext</code> evaluates its arguments.
+<code class="code">killcontext</code> returns <code class="code">done</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="maybe"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fmaybe"></a><dl class="first-deffn">
+<dt class="deffn" id="index-maybe"><span class="category-def">Function: </span><span><strong class="def-name">maybe</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-maybe'> &para;</a></span></dt>
+<dd>
+<p>Attempts to determine whether the predicate <var class="var">expr</var> is provable from the
+facts in the <code class="code">assume</code> database.
+</p>
+<p>If the predicate is provably <code class="code">true</code> or <code class="code">false</code>, <code class="code">maybe</code> returns
+<code class="code">true</code> or <code class="code">false</code>, respectively.  Otherwise, <code class="code">maybe</code> returns
+<code class="code">unknown</code>.
+</p>
+<p><code class="code">maybe</code> is functionally equivalent to <code class="code">is</code> with
+<code class="code">prederror: false</code>, but the result is computed without actually assigning
+a value to <code class="code">prederror</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#assume">assume</a></code>, <code class="code"><a class="ref" href="#facts">facts</a></code>, and <code class="code"><a class="ref" href="#is">is</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) maybe (x &gt; 0);
+(%o1)                        unknown
+(%i2) assume (x &gt; 1);
+(%o2)                        [x &gt; 1]
+(%i3) maybe (x &gt; 0);
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="newcontext"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fnewcontext"></a><dl class="first-deffn">
+<dt class="deffn" id="index-newcontext"><span class="category-def">Function: </span><span><strong class="def-name">newcontext</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">newcontext</code> (<var class="var">name</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">newcontext</code> ()</var><a class="copiable-link" href='#index-newcontext'> &para;</a></span></dt>
+<dd>
+<p>Creates a new, empty context, called <var class="var">name</var>, which
+has <code class="code">global</code> as its only subcontext.  The newly-created context
+becomes the currently active context.
+</p>
+<p>If <var class="var">name</var> is not specified, a new name is created (via <code class="code">gensym</code>) and returned.
+</p>
+<p><code class="code">newcontext</code> evaluates its argument.
+<code class="code">newcontext</code> returns <var class="var">name</var> (if specified) or the new context name.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sign"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fsign"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sign"><span class="category-def">Function: </span><span><strong class="def-name">sign</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-sign'> &para;</a></span></dt>
+<dd>
+<p>Attempts to determine the sign of <var class="var">expr</var> on the basis of the facts in the
+current data base.  It returns one of the following answers: <code class="code">pos</code>
+(positive), <code class="code">neg</code> (negative), <code class="code">zero</code>, <code class="code">pz</code> (positive or zero),
+<code class="code">nz</code> (negative or zero), <code class="code">pn</code> (positive or negative), or <code class="code">pnz</code>
+(positive, negative, or zero, i.e. nothing known).
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_9.html#signum">signum</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="supcontext"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fsupcontext"></a><dl class="first-deffn">
+<dt class="deffn" id="index-supcontext"><span class="category-def">Function: </span><span><strong class="def-name">supcontext</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">supcontext</code> (<var class="var">name</var>, <var class="var">context</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">supcontext</code> (<var class="var">name</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">supcontext</code> ()</var><a class="copiable-link" href='#index-supcontext'> &para;</a></span></dt>
+<dd>
+<p>Creates a new context, called <var class="var">name</var>, which has <var class="var">context</var> as a
+subcontext.  <var class="var">context</var> must exist.
+</p>
+<p>If <var class="var">context</var> is not specified, the current context is assumed.
+</p>
+<p>If <var class="var">name</var> is not specified, a new name is created (via <code class="code">gensym</code>) and returned.
+</p>
+<p><code class="code">supcontext</code> evaluates its argument.
+<code class="code">supcontext</code> returns <var class="var">name</var> (if specified) or the new context name.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-Database_002fnode_002fFunctions-and-Variables-for-Predicates"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Predicates">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Functions-and-Variables-for-Facts" accesskey="p" rel="prev">Functions and Variables for Facts</a>, Up: <a href="#Maxima_0027s-Database" accesskey="u" rel="up">Maxima&rsquo;s Database</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Predicates-1">11.4 Functions and Variables for Predicates</h3>
+
+<a class="anchor" id="charfun"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fcharfun"></a><dl class="first-deffn">
+<dt class="deffn" id="index-charfun"><span class="category-def">Function: </span><span><strong class="def-name">charfun</strong> <var class="def-var-arguments">(<var class="var">p</var>)</var><a class="copiable-link" href='#index-charfun'> &para;</a></span></dt>
+<dd>
+<p>Return 0 when the predicate <var class="var">p</var> evaluates to <code class="code">false</code>; return 1 when
+the predicate evaluates to <code class="code">true</code>.  When the predicate evaluates to
+something other than <code class="code">true</code> or <code class="code">false</code> (unknown),  return a noun form.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) charfun (x &lt; 1);
+(%o1)                    charfun(x &lt; 1)
+(%i2) subst (x = -1, %);
+(%o2)                           1
+(%i3) e : charfun ('&quot;and&quot; (-1 &lt; x, x &lt; 1))$
+(%i4) [subst (x = -1, e), subst (x = 0, e), subst (x = 1, e)];
+(%o4)                       [0, 1, 0]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="compare"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fcompare"></a><dl class="first-deffn">
+<dt class="deffn" id="index-compare"><span class="category-def">Function: </span><span><strong class="def-name">compare</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>)</var><a class="copiable-link" href='#index-compare'> &para;</a></span></dt>
+<dd>
+<p>Return a comparison operator <var class="var">op</var> (<code class="code">&lt;</code>, <code class="code">&lt;=</code>, <code class="code">&gt;</code>, <code class="code">&gt;=</code>,
+<code class="code">=</code>, or <code class="code">#</code>) such that <code class="code">is (<var class="var">x</var> <var class="var">op</var> <var class="var">y</var>)</code> evaluates
+to <code class="code">true</code>; when either <var class="var">x</var> or <var class="var">y</var> depends on <code class="code">%i</code> and
+<code class="code"><var class="var">x</var> # <var class="var">y</var></code>, return <code class="code">notcomparable</code>; when there is no such
+operator or Maxima isn&rsquo;t able to determine the operator, return <code class="code">unknown</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) compare (1, 2);
+(%o1)                           &lt;
+(%i2) compare (1, x);
+(%o2)                        unknown
+(%i3) compare (%i, %i);
+(%o3)                           =
+(%i4) compare (%i, %i + 1);
+(%o4)                     notcomparable
+(%i5) compare (1/x, 0);
+(%o5)                           #
+(%i6) compare (x, abs(x));
+(%o6)                          &lt;=
+</pre></div>
+
+<p>The function <code class="code">compare</code> doesn&rsquo;t try to determine whether the real domains of
+its arguments are nonempty; thus
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) compare (acos (x^2 + 1), acos (x^2 + 1) + 1);
+(%o1)                           &lt;
+</pre></div>
+
+<p>The real domain of <code class="code">acos (x^2 + 1)</code> is empty.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="equal"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fequal"></a><dl class="first-deffn">
+<dt class="deffn" id="index-equal"><span class="category-def">Function: </span><span><strong class="def-name">equal</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-equal'> &para;</a></span></dt>
+<dd>
+<p>Represents equivalence, that is, equal value.
+</p>
+<p>By itself, <code class="code">equal</code> does not evaluate or simplify.
+The function <code class="code"><a class="ref" href="#is">is</a></code> attempts to evaluate <code class="code">equal</code> to a Boolean value.
+<code class="code">is(equal(<var class="var">a</var>, <var class="var">b</var>))</code> returns <code class="code">true</code> (or <code class="code">false</code>) if
+and only if <var class="var">a</var> and <var class="var">b</var> are equal (or not equal) for all possible
+values of their variables, as determined by evaluating
+<code class="code">ratsimp(<var class="var">a</var> - <var class="var">b</var>)</code>; if <code class="code"><a class="ref" href="maxima_13.html#ratsimp">ratsimp</a></code> returns 0, the two
+expressions are considered equivalent.  Two expressions may be equivalent even
+if they are not syntactically equal (i.e., identical).
+</p>
+<p>When <code class="code">is</code> fails to reduce <code class="code">equal</code> to <code class="code">true</code> or <code class="code">false</code>, the
+result is governed by the global flag <code class="code"><a class="ref" href="maxima_36.html#prederror">prederror</a></code>.  When <code class="code">prederror</code>
+is <code class="code">true</code>, <code class="code">is</code> complains with an error message.  Otherwise, <code class="code">is</code>
+returns <code class="code">unknown</code>.
+</p>
+<p>In addition to <code class="code">is</code>, some other operators evaluate <code class="code">equal</code> and
+<code class="code">notequal</code> to <code class="code">true</code> or <code class="code">false</code>, namely <code class="code"><a class="ref" href="maxima_36.html#if">if</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="maxima_6.html#and">and</a></code>, <code class="code"><a class="ref" href="maxima_6.html#or">or</a></code>, and <code class="code"><a class="ref" href="maxima_6.html#not">not</a></code>.
+</p>
+
+<p>The negation of <code class="code">equal</code> is <code class="code"><a class="ref" href="#notequal">notequal</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>By itself, <code class="code">equal</code> does not evaluate or simplify.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) equal (x^2 - 1, (x + 1) * (x - 1));
+                        2
+(%o1)            equal(x  - 1, (x - 1) (x + 1))
+(%i2) equal (x, x + 1);
+(%o2)                    equal(x, x + 1)
+(%i3) equal (x, y);
+(%o3)                      equal(x, y)
+</pre></div>
+
+<p>The function <code class="code">is</code> attempts to evaluate <code class="code">equal</code> to a Boolean value.
+<code class="code">is(equal(<var class="var">a</var>, <var class="var">b</var>))</code> returns <code class="code">true</code> when
+<code class="code">ratsimp(<var class="var">a</var> - <var class="var">b</var>)</code> returns 0.  Two expressions may be equivalent
+even if they are not syntactically equal (i.e., identical).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ratsimp (x^2 - 1 - (x + 1) * (x - 1));
+(%o1)                           0
+(%i2) is (equal (x^2 - 1, (x + 1) * (x - 1)));
+(%o2)                         true
+(%i3) is (x^2 - 1 = (x + 1) * (x - 1));
+(%o3)                         false
+(%i4) ratsimp (x - (x + 1));
+(%o4)                          - 1
+(%i5) is (equal (x, x + 1));
+(%o5)                         false
+(%i6) is (x = x + 1);
+(%o6)                         false
+(%i7) ratsimp (x - y);
+(%o7)                         x - y
+(%i8) is (equal (x, y));
+(%o8)                        unknown
+(%i9) is (x = y);
+(%o9)                         false
+</pre></div>
+
+<p>When <code class="code">is</code> fails to reduce <code class="code">equal</code> to <code class="code">true</code> or <code class="code">false</code>,
+the result is governed by the global flag <code class="code">prederror</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [aa : x^2 + 2*x + 1, bb : x^2 - 2*x - 1];
+                    2             2
+(%o1)             [x  + 2 x + 1, x  - 2 x - 1]
+(%i2) ratsimp (aa - bb);
+(%o2)                        4 x + 2
+(%i3) prederror : true;
+(%o3)                         true
+(%i4) is (equal (aa, bb));
+Maxima was unable to evaluate the predicate:
+       2             2
+equal(x  + 2 x + 1, x  - 2 x - 1)
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i5) prederror : false;
+(%o5)                         false
+(%i6) is (equal (aa, bb));
+(%o6)                        unknown
+</pre></div>
+
+<p>Some operators evaluate <code class="code">equal</code> and <code class="code">notequal</code> to <code class="code">true</code> or
+<code class="code">false</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) if equal (y, y - 1) then FOO else BAR;
+(%o1)                          BAR
+(%i2) eq_1 : equal (x, x + 1);
+(%o2)                    equal(x, x + 1)
+(%i3) eq_2 : equal (y^2 + 2*y + 1, (y + 1)^2);
+                         2                   2
+(%o3)             equal(y  + 2 y + 1, (y + 1) )
+(%i4) [eq_1 and eq_2, eq_1 or eq_2, not eq_1];
+(%o4)                  [false, true, true]
+</pre></div>
+
+<p>Because <code class="code">not <var class="var">expr</var></code> causes evaluation of <var class="var">expr</var>,
+<code class="code">not equal(<var class="var">a</var>, <var class="var">b</var>)</code> is equivalent to
+<code class="code">is(notequal(<var class="var">a</var>, <var class="var">b</var>))</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [notequal (2*z, 2*z - 1), not equal (2*z, 2*z - 1)];
+(%o1)            [notequal(2 z, 2 z - 1), true]
+(%i2) is (notequal (2*z, 2*z - 1));
+(%o2)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="notequal"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fnotequal"></a><dl class="first-deffn">
+<dt class="deffn" id="index-notequal"><span class="category-def">Function: </span><span><strong class="def-name">notequal</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-notequal'> &para;</a></span></dt>
+<dd>
+<p>Represents the negation of <code class="code">equal(<var class="var">a</var>, <var class="var">b</var>)</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) equal (a, b);
+(%o1)                      equal(a, b)
+(%i2) maybe (equal (a, b));
+(%o2)                        unknown
+(%i3) notequal (a, b);
+(%o3)                    notequal(a, b)
+(%i4) not equal (a, b);
+(%o4)                    notequal(a, b)
+(%i5) maybe (notequal (a, b));
+(%o5)                        unknown
+(%i6) assume (a &gt; b);
+(%o6)                        [a &gt; b]
+(%i7) equal (a, b);
+(%o7)                      equal(a, b)
+(%i8) maybe (equal (a, b));
+(%o8)                         false
+(%i9) notequal (a, b);
+(%o9)                    notequal(a, b)
+(%i10) maybe (notequal (a, b));
+(%o10)                        true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="unknown"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002funknown"></a><dl class="first-deffn">
+<dt class="deffn" id="index-unknown"><span class="category-def">Function: </span><span><strong class="def-name">unknown</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-unknown'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if and only if <var class="var">expr</var> contains an operator or function
+not recognized by the Maxima simplifier.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="zeroequiv"></a><a class="anchor" id="Item_003a-Database_002fdeffn_002fzeroequiv"></a><dl class="first-deffn">
+<dt class="deffn" id="index-zeroequiv"><span class="category-def">Function: </span><span><strong class="def-name">zeroequiv</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">v</var>)</var><a class="copiable-link" href='#index-zeroequiv'> &para;</a></span></dt>
+<dd>
+<p>Tests whether the expression <var class="var">expr</var> in the variable <var class="var">v</var> is equivalent
+to zero, returning <code class="code">true</code>, <code class="code">false</code>, or <code class="code">dontknow</code>.
+</p>
+<p><code class="code">zeroequiv</code> has these restrictions:
+</p>
+<ol class="enumerate">
+<li> Do not use functions that Maxima does not know how to
+differentiate and evaluate.
+</li><li> If the expression has poles on the real line, there may be errors
+in the result (but this is unlikely to occur).
+</li><li> If the expression contains functions which are not solutions to first order
+differential equations (e.g. Bessel functions) there may be incorrect results.
+</li><li> The algorithm uses evaluation at randomly chosen points for carefully selected
+subexpressions.  This is always a somewhat hazardous business, although the
+algorithm tries to minimize the potential for error.
+</li></ol>
+
+<p>For example <code class="code">zeroequiv (sin(2 * x) - 2 * sin(x) * cos(x), x)</code> returns
+<code class="code">true</code> and <code class="code">zeroequiv (%e^x + x, x)</code> returns <code class="code">false</code>.
+On the other hand <code class="code">zeroequiv (log(a * b) - log(a) - log(b), a)</code> returns 
+<code class="code">dontknow</code> because of the presence of an extra parameter <code class="code">b</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_11.html#Plotting" accesskey="n" rel="next">Plotting</a>, Previous: <a href="maxima_9.html#Elementary-Functions" accesskey="p" rel="prev">Elementary Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

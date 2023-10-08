@@ -1,0 +1,1016 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Program Flow</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Program Flow">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Program Flow">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_171.html#Program-Flow" rel="up" title="Program Flow">
+<link href="maxima_176.html#Debugging" rel="next" title="Debugging">
+<link href="maxima_174.html#Introduction-to-Program-Flow" rel="previous" title="Introduction to Program Flow">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Program-Flow"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_174.html#Introduction-to-Program-Flow" accesskey="p" rel="previous">Introduction to Program Flow</a>, Up: <a href="maxima_171.html#Program-Flow" accesskey="u" rel="up">Program Flow</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Program-Flow-1"></a>
+<h3 class="section">37.4 Functions and Variables for Program Flow</h3>
+
+<a name="backtrace"></a><a name="Item_003a-Program_002fdeffn_002fbacktrace"></a><dl>
+<dt><a name="index-backtrace"></a>Function: <strong>backtrace</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>backtrace</tt> () <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>backtrace</tt> (<var>n</var>)</em></dt>
+<dd>
+<p>Prints the call stack, that is, the list of functions which
+called the currently active function.
+</p>
+<p><code>backtrace ()</code> prints the entire call stack.
+</p>
+<p><code>backtrace (<var>n</var>)</code> prints the <var>n</var> most recent 
+functions, including the currently active function.
+</p>
+<p><code>backtrace</code> can be called from a script, a function, or the interactive
+prompt (not only in a debugging context).
+</p>
+<p>Examples:
+</p>
+<ul>
+<li> <code>backtrace ()</code> prints the entire call stack.
+
+<div class="example">
+<pre class="example">(%i1) h(x) := g(x/7)$
+(%i2) g(x) := f(x-11)$
+(%i3) f(x) := e(x^2)$
+(%i4) e(x) := (backtrace(), 2*x + 13)$
+(%i5) h(10);
+#0: e(x=4489/49)
+#1: f(x=-67/7)
+#2: g(x=10/7)
+#3: h(x=10)
+                              9615
+(%o5)                         ----
+                               49
+</pre></div>
+</li></ul>
+
+<ul>
+<li> <code>backtrace (<var>n</var>)</code> prints the <var>n</var> most recent 
+functions, including the currently active function.
+
+<div class="example">
+<pre class="example">(%i1) h(x) := (backtrace(1), g(x/7))$
+(%i2) g(x) := (backtrace(1), f(x-11))$
+(%i3) f(x) := (backtrace(1), e(x^2))$
+(%i4) e(x) := (backtrace(1), 2*x + 13)$
+(%i5) h(10);
+#0: h(x=10)
+#0: g(x=10/7)
+#0: f(x=-67/7)
+#0: e(x=4489/49)
+                              9615
+(%o5)                         ----
+                               49
+</pre></div>
+</li></ul>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+<a name="do"></a><a name="while"></a><a name="unless"></a><a name="for"></a><a name="from"></a><a name="thru"></a><a name="step"></a><a name="next"></a><a name="in"></a><a name="Item_003a-Program_002fdeffn_002fdo"></a><dl>
+<dt><a name="index-do"></a>Special operator: <strong>do</strong></dt>
+<dd><a name="Item_003a-Program_002fdeffn_002fwhile"></a></dd><dt><a name="index-while"></a>Special operator: <strong>while</strong></dt>
+<dd><a name="Item_003a-Program_002fdeffn_002funless"></a></dd><dt><a name="index-unless"></a>Special operator: <strong>unless</strong></dt>
+<dd><a name="Item_003a-Program_002fdeffn_002ffor"></a></dd><dt><a name="index-for"></a>Special operator: <strong>for</strong></dt>
+<dd><a name="Item_003a-Program_002fdeffn_002ffrom"></a></dd><dt><a name="index-from"></a>Special operator: <strong>from</strong></dt>
+<dd><a name="Item_003a-Program_002fdeffn_002fthru"></a></dd><dt><a name="index-thru"></a>Special operator: <strong>thru</strong></dt>
+<dd><a name="Item_003a-Program_002fdeffn_002fstep"></a></dd><dt><a name="index-step"></a>Special operator: <strong>step</strong></dt>
+<dd><a name="Item_003a-Program_002fdeffn_002fnext"></a></dd><dt><a name="index-next"></a>Special operator: <strong>next</strong></dt>
+<dd><a name="Item_003a-Program_002fdeffn_002fin"></a></dd><dt><a name="index-in"></a>Special operator: <strong>in</strong></dt>
+<dd>
+<p>The <code>do</code> statement is used for performing iteration. The general
+form of the <code>do</code> statements maxima supports is:
+</p>
+<ul>
+<li> <code>for <var>variable</var>: <var>initial_value</var> step <var>increment</var>
+      thru <var>limit</var> do <var>body</var></code>
+</li><li> <code>for <var>variable</var>: <var>initial_value</var> step <var>increment</var>
+      while <var>condition</var> do <var>body</var></code>
+</li><li> <code>for <var>variable</var>: <var>initial_value</var> step <var>increment</var>
+      unless <var>condition</var> do <var>body</var></code>
+</li><li> <code>for <var>variable</var> in <var>list</var> do <var>body</var></code>
+</li></ul>
+
+<p>If the loop is expected to generate a list as output the command
+<code><a href="maxima_21.html#makelist">makelist</a></code> may be the appropriate command to use instead,
+See <a href="maxima_22.html#Performance-considerations-for-Lists">Performance considerations for Lists</a>.
+</p>
+<p><var>initial_value</var>, <var>increment</var>, <var>limit</var>, and <var>body</var> can be any
+expression. <var>list</var> is a list.  If the increment is 1 then &quot;<code>step 1</code>&quot;
+may be omitted; As always, if <code>body</code> needs to contain more than one command
+these commands can be specified as a comma-separated list surrounded
+by parenthesis or as a <code><a href="maxima_170.html#block">block</a></code>.
+Due to its great generality the <code>do</code> statement will be described in two parts.
+The first form of the <code>do</code> statement (which is shown in the first three
+items above) is analogous to that used in
+several other programming languages (Fortran, Algol, PL/I, etc.); then
+the other features will be mentioned.
+</p>
+<p>The execution of the <code>do</code> statement proceeds by first assigning
+the <var>initial_value</var> to the <var>variable</var> (henceforth called the
+control-variable).  Then: (1) If the control-variable has exceeded the
+limit of a <code>thru</code> specification, or if the condition of the
+<code>unless</code> is <code>true</code>, or if the condition of the <code>while</code>
+is <code>false</code> then the <code>do</code> terminates.  (2) The <var>body</var> is
+evaluated.  (3) The increment is added to the control-variable.  The
+process from (1) to (3) is performed repeatedly until the termination
+condition is satisfied.  One may also give several termination
+conditions in which case the <code>do</code> terminates when any of them is
+satisfied.
+</p>
+<p>In general the <code>thru</code> test is satisfied when the control-variable
+is greater than the <var>limit</var> if the <var>increment</var> was
+non-negative, or when the control-variable is less than the
+<var>limit</var> if the <var>increment</var> was negative.  The
+<var>increment</var> and <var>limit</var> may be non-numeric expressions as
+long as this inequality can be determined.  However, unless the
+<var>increment</var> is syntactically negative (e.g. is a negative number)
+at the time the <code>do</code> statement is input, Maxima assumes it will
+be positive when the <code>do</code> is executed.  If it is not positive,
+then the <code>do</code> may not terminate properly.
+</p>
+<p>Note that the <var>limit</var>, <var>increment</var>, and termination condition are
+evaluated each time through the loop.  Thus if any of these involve
+much computation, and yield a result that does not change during all
+the executions of the <var>body</var>, then it is more efficient to set a
+variable to their value prior to the <code>do</code> and use this variable in the
+<code>do</code> form.
+</p>
+<p>The value normally returned by a <code>do</code> statement is the atom
+<code>done</code>.  However, the function <code>return</code> may be used inside
+the <var>body</var> to exit the <code>do</code> prematurely and give it any
+desired value.  Note however that a <code>return</code> within a <code>do</code>
+that occurs in a <code>block</code> will exit only the <code>do</code> and not the
+<code>block</code>.  Note also that the <code>go</code> function may not be used
+to exit from a <code>do</code> into a surrounding <code>block</code>.
+</p>
+<p>The control-variable is always local to the <code>do</code> and thus any
+variable may be used without affecting the value of a variable with
+the same name outside of the <code>do</code>.  The control-variable is unbound
+after the <code>do</code> terminates.
+</p>
+<div class="example">
+<pre class="example">(%i1) for a:-3 thru 26 step 7 do display(a)$
+                             a = - 3
+
+                              a = 4
+
+                             a = 11
+
+                             a = 18
+
+                             a = 25
+</pre></div>
+
+<div class="example">
+<pre class="example">(%i1) s: 0$
+(%i2) for i: 1 while i &lt;= 10 do s: s+i;
+(%o2)                         done
+(%i3) s;
+(%o3)                          55
+</pre></div>
+
+<p>Note that the condition <code>while i &lt;= 10</code>
+is equivalent to <code>unless i &gt; 10</code> and also <code>thru 10</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) series: 1$
+(%i2) term: exp (sin (x))$
+(%i3) for p: 1 unless p &gt; 7 do
+          (term: diff (term, x)/p, 
+           series: series + subst (x=0, term)*x^p)$
+(%i4) series;
+                  7    6     5    4    2
+                 x    x     x    x    x
+(%o4)            -- - --- - -- - -- + -- + x + 1
+                 90   240   15   8    2
+</pre></div>
+
+<p>which gives 8 terms of the Taylor series for <code>e^sin(x)</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) poly: 0$
+(%i2) for i: 1 thru 5 do
+          for j: i step -1 thru 1 do
+              poly: poly + i*x^j$
+(%i3) poly;
+                  5      4       3       2
+(%o3)          5 x  + 9 x  + 12 x  + 14 x  + 15 x
+(%i4) guess: -3.0$
+(%i5) for i: 1 thru 10 do
+          (guess: subst (guess, x, 0.5*(x + 10/x)),
+           if abs (guess^2 - 10) &lt; 0.00005 then return (guess));
+(%o5)                  - 3.162280701754386
+</pre></div>
+
+<p>This example computes the negative square root of 10 using the
+Newton- Raphson iteration a maximum of 10 times.  Had the convergence
+criterion not been met the value returned would have been <code>done</code>.
+</p>
+<p>Instead of always adding a quantity to the control-variable one
+may sometimes wish to change it in some other way for each iteration.
+In this case one may use <code>next <var>expression</var></code> instead of
+<code>step <var>increment</var></code>.  This will cause the control-variable to be set to
+the result of evaluating <var>expression</var> each time through the loop.
+</p>
+<div class="example">
+<pre class="example">(%i6) for count: 2 next 3*count thru 20 do display (count)$
+                            count = 2
+
+                            count = 6
+
+                           count = 18
+</pre></div>
+
+<p>As an alternative to <code>for <var>variable</var>: <var>value</var> ...do...</code>
+the syntax <code>for <var>variable</var> from <var>value</var> ...do...</code>  may be
+used.  This permits the <code>from <var>value</var></code> to be placed after the
+<code>step</code> or <code>next</code> value or after the termination condition.
+If <code>from <var>value</var></code> is omitted then 1 is used as the initial
+value.
+</p>
+<p>Sometimes one may be interested in performing an iteration where
+the control-variable is never actually used.  It is thus permissible
+to give only the termination conditions omitting the initialization
+and updating information as in the following example to compute the
+square-root of 5 using a poor initial guess.
+</p>
+<div class="example">
+<pre class="example">(%i1) x: 1000$
+(%i2) thru 20 do x: 0.5*(x + 5.0/x)$
+(%i3) x;
+(%o3)                   2.23606797749979
+(%i4) sqrt(5), numer;
+(%o4)                   2.23606797749979
+</pre></div>
+
+<p>If it is desired one may even omit the termination conditions entirely
+and just give <code>do <var>body</var></code> which will continue to evaluate the
+<var>body</var> indefinitely.  In this case the function <code>return</code>
+should be used to terminate execution of the <code>do</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) newton (f, x):= ([y, df, dfx], df: diff (f ('x), 'x),
+          do (y: ev(df), x: x - f(x)/y, 
+              if abs (f (x)) &lt; 5e-6 then return (x)))$
+(%i2) sqr (x) := x^2 - 5.0$
+(%i3) newton (sqr, 1000);
+(%o3)                   2.236068027062195
+</pre></div>
+
+<p>(Note that <code>return</code>, when executed, causes the current value of <code>x</code> to
+be returned as the value of the <code>do</code>.  The <code>block</code> is exited and this
+value of the <code>do</code> is returned as the value of the <code>block</code> because the
+<code>do</code> is the last statement in the block.)
+</p>
+<p>One other form of the <code>do</code> is available in Maxima.  The syntax is:
+</p>
+<div class="example">
+<pre class="example">for <var>variable</var> in <var>list</var> <var>end_tests</var> do <var>body</var>
+</pre></div>
+
+<p>The elements of <var>list</var> are any expressions which will successively
+be assigned to the <code>variable</code> on each iteration of the
+<var>body</var>.  The optional termination tests <var>end_tests</var> can be
+used to terminate execution of the <code>do</code>; otherwise it will
+terminate when the <var>list</var> is exhausted or when a <code>return</code> is
+executed in the <var>body</var>.  (In fact, <code>list</code> may be any
+non-atomic expression, and successive parts are taken.)
+</p>
+<div class="example">
+<pre class="example">(%i1)  for f in [log, rho, atan] do ldisp(f(1))$
+(%t1)                                  0
+(%t2)                                rho(1)
+                                     %pi
+(%t3)                                 ---
+                                      4
+(%i4) ev(%t3,numer);
+(%o4)                             0.78539816
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="errcatch"></a><a name="Item_003a-Program_002fdeffn_002ferrcatch"></a><dl>
+<dt><a name="index-errcatch"></a>Function: <strong>errcatch</strong> <em>(<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>Evaluates <var>expr_1</var>, &hellip;, <var>expr_n</var> one by one and
+returns <code>[<var>expr_n</var>]</code> (a list) if no error occurs.  If an
+error occurs in the evaluation of any argument, <code>errcatch</code> 
+prevents the error from propagating and
+returns the empty list <code>[]</code> without evaluating any more arguments.
+</p>
+<p><code>errcatch</code>
+is useful in <code>batch</code> files where one suspects an error might occur which
+would terminate the <code>batch</code> if the error weren&rsquo;t caught.
+</p>
+<p>See also <code><a href="#errormsg">errormsg</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="error"></a><a name="Item_003a-Program_002fdeffn_002ferror"></a><dl>
+<dt><a name="index-error"></a>Function: <strong>error</strong> <em>(<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dt><a name="index-error-1"></a>System variable: <strong>error</strong></dt>
+<dd>
+<p>Evaluates and prints <var>expr_1</var>, &hellip;, <var>expr_n</var>,
+and then causes an error return to top level Maxima
+or to the nearest enclosing <code>errcatch</code>.
+</p>
+<p>The variable <code>error</code> is set to a list describing the error.
+The first element of <code>error</code> is a format string, which merges all the
+strings among the arguments <var>expr_1</var>, &hellip;, <var>expr_n</var>,
+and the remaining elements are the values of any non-string arguments.
+</p>
+<p><code>errormsg()</code> formats and prints <code>error</code>.
+This is effectively reprinting the most recent error message.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="warning"></a><a name="Item_003a-Program_002fdeffn_002fwarning"></a><dl>
+<dt><a name="index-warning"></a>Function: <strong>warning</strong> <em>(<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>Evaluates and prints <var>expr_1</var>, &hellip;, <var>expr_n</var>,
+as a warning message that is formatted in a standard way so a maxima front-end
+may be able to recognize the warning and to format it accordingly.
+</p>
+<p>The function <code>warning</code> always returns false.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="error_005fsize"></a><a name="Item_003a-Program_002fdefvr_002ferror_005fsize"></a><dl>
+<dt><a name="index-error_005fsize"></a>Option variable: <strong>error_size</strong></dt>
+<dd><p>Default value: 60
+</p>
+<p><code>error_size</code> modifies error messages according to the size of expressions
+which appear in them.  If the size of an expression (as determined by the Lisp
+function <code>ERROR-SIZE</code>) is greater than <code>error_size</code>, the expression is
+replaced in the message by a symbol, and the symbol is assigned the expression.
+The symbols are taken from the list <code><a href="#error_005fsyms">error_syms</a></code>.
+</p>
+<p>Otherwise, the expression is smaller than <code>error_size</code>, and the expression
+is displayed in the message.
+</p>
+<p>See also <code><a href="#error">error</a></code> and <code><a href="#error_005fsyms">error_syms</a></code>.
+</p>
+<p>Example:
+</p>
+<p>The size of <code>U</code>, as determined by <code>ERROR-SIZE</code>, is 24.
+</p>
+<div class="example">
+<pre class="example">(%i1) U: (C^D^E + B + A)/(cos(X-1) + 1)$
+
+(%i2) error_size: 20$
+
+(%i3) error (&quot;Example expression is&quot;, U);
+
+Example expression is errexp1
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i4) errexp1;
+                            E
+                           D
+                          C   + B + A
+(%o4)                    --------------
+                         cos(X - 1) + 1
+(%i5) error_size: 30$
+
+(%i6) error (&quot;Example expression is&quot;, U);
+
+                         E
+                        D
+                       C   + B + A
+Example expression is --------------
+                      cos(X - 1) + 1
+ -- an error.  Quitting.  To debug this try debugmode(true);
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;<a href="maxima_424.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="error_005fsyms"></a><a name="Item_003a-Program_002fdefvr_002ferror_005fsyms"></a><dl>
+<dt><a name="index-error_005fsyms"></a>Option variable: <strong>error_syms</strong></dt>
+<dd><p>Default value: <code>[errexp1, errexp2, errexp3]</code>
+</p>
+<p>In error messages, expressions larger than <code><a href="#error_005fsize">error_size</a></code> are replaced by
+symbols, and the symbols are set to the expressions.  The symbols are taken from
+the list <code>error_syms</code>.  The first too-large expression is replaced by
+<code>error_syms[1]</code>, the second by <code>error_syms[2]</code>, and so on.
+</p>
+<p>If there are more too-large expressions than there are elements of
+<code>error_syms</code>, symbols are constructed automatically, with the <var>n</var>-th
+symbol equivalent to <code>concat ('errexp, <var>n</var>)</code>.
+</p>
+<p>See also <code><a href="#error">error</a></code> and <code><a href="#error_005fsize">error_size</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;<a href="maxima_424.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+&middot;</div></dd></dl>
+
+<a name="errormsg_005ffn"></a><a name="Item_003a-Program_002fdeffn_002ferrormsg"></a><dl>
+<dt><a name="index-errormsg"></a>Function: <strong>errormsg</strong> <em>()</em></dt>
+<dd>
+<p>Reprints the most recent error message.
+The variable <code>error</code> holds the message,
+and <code><a href="#errormsg">errormsg</a></code> formats and prints it.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="errormsg"></a><a name="Item_003a-Program_002fdefvr_002ferrormsg"></a><dl>
+<dt><a name="index-errormsg-1"></a>Option variable: <strong>errormsg</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>false</code> the output of error messages is suppressed.
+</p>
+<p>The option variable <code>errormsg</code> can not be set in a block to a local 
+value.  The global value of <code>errormsg</code> is always present.
+</p>
+<div class="example">
+<pre class="example">(%i1) errormsg;
+(%o1)                         true
+</pre><pre class="example">(%i2) sin(a,b);
+sin: wrong number of arguments.
+ -- an error. To debug this try: debugmode(true);
+</pre><pre class="example">(%i3) errormsg: false;
+(%o3)                         false
+</pre><pre class="example">(%i4) sin(a,b);
+ -- an error. To debug this try: debugmode(true);
+</pre></div>
+
+<p>The option variable <code>errormsg</code> can not be set in a block to a local value.
+</p>
+<div class="example">
+<pre class="example">(%i1) f(bool):=block([errormsg:bool],
+                     print (&quot;value of errormsg is&quot;,errormsg))$
+</pre><pre class="example">(%i2) errormsg:true;
+(%o2)                         true
+</pre><pre class="example">(%i3) f(false);
+value of errormsg is true 
+(%o3)                         true
+</pre><pre class="example">(%i4) errormsg:false;
+(%o4)                         false
+</pre><pre class="example">(%i5) f(true);
+value of errormsg is false 
+(%o5)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="go"></a><a name="Item_003a-Program_002fdeffn_002fgo"></a><dl>
+<dt><a name="index-go"></a>Function: <strong>go</strong> <em>(<var>tag</var>)</em></dt>
+<dd>
+<p>is used within a <code><a href="maxima_170.html#block">block</a></code> to transfer control to the statement
+of the block which is tagged with the argument to <code>go</code>.  To tag a
+statement, precede it by an atomic argument as another statement in
+the <code>block</code>.  For example:
+</p>
+<div class="example">
+<pre class="example">block ([x], x:1, loop, x+1, ..., go(loop), ...)
+</pre></div>
+
+<p>The argument to <code>go</code> must be the name of a tag appearing in the same
+<code>block</code>.  One cannot use <code>go</code> to transfer to tag in a <code>block</code>
+other than the one containing the <code>go</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+
+<a name="if"></a><a name="Item_003a-Program_002fdeffn_002fif"></a><dl>
+<dt><a name="index-if"></a>Special operator: <strong>if</strong></dt>
+<dd>
+<p>Represents conditional evaluation.  Various forms of <code>if</code> expressions are
+recognized.
+</p>
+<p><code>if <var>cond_1</var> then <var>expr_1</var> else <var>expr_0</var></code>
+evaluates to <var>expr_1</var> if <var>cond_1</var> evaluates to <code>true</code>,
+otherwise the expression evaluates to <var>expr_0</var>.
+</p>
+<p>The command <code>if <var>cond_1</var> then <var>expr_1</var> elseif <var>cond_2</var> then
+<var>expr_2</var> elseif ... else <var>expr_0</var></code> evaluates to <var>expr_k</var> if
+<var>cond_k</var> is <code>true</code> and all preceding conditions are <code>false</code>.  If
+none of the conditions are <code>true</code>, the expression evaluates to
+<code>expr_0</code>.
+</p>
+<p>A trailing <code>else false</code> is assumed if <code>else</code> is missing.  That is,
+the command <code>if <var>cond_1</var> then <var>expr_1</var></code> is equivalent to
+<code>if <var>cond_1</var> then <var>expr_1</var> else false</code>, and the command
+<code>if <var>cond_1</var> then <var>expr_1</var> elseif ... elseif <var>cond_n</var> then
+<var>expr_n</var></code> is equivalent to <code>if <var>cond_1</var> then <var>expr_1</var> elseif 
+... elseif <var>cond_n</var> then <var>expr_n</var> else false</code>.
+</p>
+<p>The alternatives <var>expr_0</var>, &hellip;, <var>expr_n</var> may be any Maxima
+expressions, including nested <code>if</code> expressions.  The alternatives are
+neither simplified nor evaluated unless the corresponding condition is
+<code>true</code>.
+</p>
+<p>The conditions <var>cond_1</var>, &hellip;, <var>cond_n</var> are expressions which
+potentially or actually evaluate to <code>true</code> or <code>false</code>.
+When a condition does not actually evaluate to <code>true</code> or <code>false</code>,
+the behavior of <code>if</code> is governed by the global flag <code>prederror</code>.
+When <code>prederror</code> is <code>true</code>, it is an error if any evaluated condition
+does not evaluate to <code>true</code> or <code>false</code>.  Otherwise, conditions which
+do not evaluate to <code>true</code> or <code>false</code> are accepted, and the result is
+a conditional expression.
+</p>
+<p>Among other elements, conditions may comprise relational and logical operators
+as follows.
+</p>
+<div class="indentedblock">
+<table>
+<thead><tr><th width="30%">Operation</th><th width="20%">Symbol</th><th width="30%">Type</th></tr></thead>
+<tr><td width="30%">less than</td><td width="20%"><code>&lt;</code></td><td width="30%">relational infix</td></tr>
+<tr><td width="30%">less than or equal to</td><td width="20%"><code>&lt;=</code></td><td width="30%">relational infix</td></tr>
+<tr><td width="30%">equality (syntactic)</td><td width="20%"><code>=</code></td><td width="30%">relational infix</td></tr>
+<tr><td width="30%">equality (value)</td><td width="20%"><code>equal</code></td><td width="30%">relational function</td></tr>
+<tr><td width="30%">negation of equal</td><td width="20%"><code>notequal</code></td><td width="30%">relational function</td></tr>
+<tr><td width="30%">greater than or equal to</td><td width="20%"><code>&gt;=</code></td><td width="30%">relational infix</td></tr>
+<tr><td width="30%">greater than</td><td width="20%"><code>&gt;</code></td><td width="30%">relational infix</td></tr>
+<tr><td width="30%">and</td><td width="20%"><code>and</code></td><td width="30%">logical infix</td></tr>
+<tr><td width="30%">or</td><td width="20%"><code>or</code></td><td width="30%">logical infix</td></tr>
+<tr><td width="30%">not</td><td width="20%"><code>not</code></td><td width="30%">logical infix</td></tr>
+</table>
+</div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;</div></dd></dl>
+
+
+<a name="map"></a><a name="Item_003a-Program_002fdeffn_002fmap"></a><dl>
+<dt><a name="index-map"></a>Function: <strong>map</strong> <em>(<var>f</var>, <var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>Returns an expression whose leading operator is the same as that of the
+expressions <var>expr_1</var>, &hellip;, <var>expr_n</var> but whose subparts are the
+results of applying <var>f</var> to the corresponding subparts of the expressions.
+<var>f</var> is either the name of a function of <em>n</em> arguments or is a
+<code>lambda</code> form of <em>n</em> arguments.
+</p>
+<p><code><a href="#maperror">maperror</a></code> - if <code>false</code> will cause all of the mapping
+functions to (1) stop when they finish going down the shortest
+<var>expr_i</var> if not all of the <var>expr_i</var> are of the same length and
+(2) apply <var>f</var> to [<var>expr_1</var>, <var>expr_2</var>, &hellip;]  if the
+<var>expr_i</var> are not all the same type of object.  If <code>maperror</code>
+is <code>true</code> then an error message will be given in the above two
+instances.
+</p>
+<p>One of the uses of this function is to <code>map</code> a function (e.g.
+<code><a href="maxima_146.html#partfrac">partfrac</a></code>) onto each term of a very large expression where it ordinarily
+wouldn&rsquo;t be possible to use the function on the entire expression due to an
+exhaustion of list storage space in the course of the computation.
+</p>
+<p>See also <code><a href="#scanmap">scanmap</a></code>, <code><a href="#maplist">maplist</a></code>, <code><a href="#outermap">outermap</a></code>, <code><a href="maxima_125.html#matrixmap">matrixmap</a></code> and <code><a href="maxima_170.html#apply">apply</a></code>.
+</p>
+
+<div class="example">
+<pre class="example">(%i1) map(f,x+a*y+b*z);
+(%o1)                        f(b z) + f(a y) + f(x)
+(%i2) map(lambda([u],partfrac(u,x)),x+1/(x^3+4*x^2+5*x+2));
+                           1       1        1
+(%o2)                     ----- - ----- + -------- + x
+                         x + 2   x + 1          2
+                                         (x + 1)
+(%i3) map(ratsimp, x/(x^2+x)+(y^2+y)/y);
+                                      1
+(%o3)                            y + ----- + 1
+                                    x + 1
+(%i4) map(&quot;=&quot;,[a,b],[-0.5,3]);
+(%o4)                          [a = - 0.5, b = 3]
+
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;</div></dd></dl>
+
+<a name="mapatom"></a><a name="Item_003a-Program_002fdeffn_002fmapatom"></a><dl>
+<dt><a name="index-mapatom"></a>Function: <strong>mapatom</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Returns <code>true</code> if and only if <var>expr</var> is treated by the mapping
+routines as an atom.  &quot;Mapatoms&quot; are atoms, numbers
+(including rational numbers), subscripted variables and structure
+references.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;</div></dd></dl>
+
+
+<a name="maperror"></a><a name="Item_003a-Program_002fdefvr_002fmaperror"></a><dl>
+<dt><a name="index-maperror"></a>Option variable: <strong>maperror</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>maperror</code> is <code>false</code>, causes all of the mapping functions,
+for example
+</p>
+<div class="example">
+<pre class="example">map (<var>f</var>, <var>expr_1</var>, <var>expr_2</var>, ...)
+</pre></div>
+
+<p>to (1) stop when they finish going down the shortest <var>expr_i</var> if
+not all of the <var>expr_i</var> are of the same length and (2) apply
+<var>f</var> to [<var>expr_1</var>, <var>expr_2</var>, &hellip;] if the <var>expr_i</var> are
+not all the same type of object.
+</p>
+<p>If <code>maperror</code> is <code>true</code> then an error message
+is displayed in the above two instances.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;</div></dd></dl>
+
+<a name="mapprint"></a><a name="Item_003a-Program_002fdefvr_002fmapprint"></a><dl>
+<dt><a name="index-mapprint"></a>Option variable: <strong>mapprint</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When <code>mapprint</code> is <code>true</code>, various information messages from
+<code><a href="#map">map</a></code>, <code><a href="#maplist">maplist</a></code>, and <code><a href="maxima_170.html#fullmap">fullmap</a></code> are produced in certain
+situations.  These include situations where <code>map</code> would use
+<code><a href="maxima_170.html#apply">apply</a></code>, or <code>map</code> is truncating on the shortest list.
+</p>
+<p>If <code><a href="#mapprint">mapprint</a></code> is <code>false</code>, these messages are suppressed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;</div></dd></dl>
+
+
+<a name="maplist"></a><a name="Item_003a-Program_002fdeffn_002fmaplist"></a><dl>
+<dt><a name="index-maplist"></a>Function: <strong>maplist</strong> <em>(<var>f</var>, <var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>Returns a list of the applications of <var>f</var> to the parts of the expressions
+<var>expr_1</var>, &hellip;, <var>expr_n</var>.  <var>f</var> is the name of a function, or a
+lambda expression.
+</p>
+<p><code>maplist</code> differs from <code>map(<var>f</var>, <var>expr_1</var>, ..., <var>expr_n</var>)</code>
+which returns an expression with the same main operator as <var>expr_i</var> has
+(except for simplifications and the case where <code><a href="#map">map</a></code> does an <code><a href="maxima_170.html#apply">apply</a></code>).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;</div></dd></dl>
+
+
+<a name="prederror"></a><a name="Item_003a-Program_002fdefvr_002fprederror"></a><dl>
+<dt><a name="index-prederror"></a>Option variable: <strong>prederror</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>prederror</code> is <code>true</code>, an error message is displayed whenever the
+predicate of an <code>if</code> statement or an <code><a href="maxima_63.html#is">is</a></code> function fails to evaluate
+to either <code>true</code> or <code>false</code>.
+</p>
+<p>If <code>false</code>, <code>unknown</code> is returned
+instead in this case.  The <code>prederror: false</code> mode is not supported in
+translated code;
+however, <code>maybe</code> is supported in translated code.
+</p>
+<p>See also <code><a href="maxima_63.html#is">is</a></code> and <code><a href="maxima_63.html#maybe">maybe</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="return"></a><a name="Item_003a-Program_002fdeffn_002freturn"></a><dl>
+<dt><a name="index-return"></a>Function: <strong>return</strong> <em>(<var>value</var>)</em></dt>
+<dd><p>May be used to exit explicitly from the current <code><a href="maxima_170.html#block">block</a></code>, <code><a href="#while">while</a></code>,
+<code><a href="#for">for</a></code> or <code><a href="#do">do</a></code> loop bringing its argument. It therefore can be compared
+with the <code>return</code> statement found in other programming languages but it yields
+one difference: In maxima only returns from the current block, not from the entire
+function it was called in. In this aspect it more closely resembles the <code>break</code>
+statement from C.
+</p>
+<div class="example">
+<pre class="example">(%i1) for i:1 thru 10 do o:i;
+(%o1)                         done
+</pre><pre class="example">(%i2) for i:1 thru 10 do if i=3 then return(i);
+(%o2)                           3
+</pre><pre class="example">(%i3) for i:1 thru 10 do
+    (
+        block([i],
+            i:3,
+            return(i)
+        ),
+        return(8)
+    );
+(%o3)                           8
+</pre><pre class="example">(%i4) block([i],
+    i:4,
+    block([o],
+        o:5,
+        return(o)
+    ),
+    return(i),
+    return(10)
+ );
+(%o4)                           4
+</pre></div>
+
+
+<p>See also <code><a href="#for">for</a></code>, <code><a href="#while">while</a></code>, <code><a href="#do">do</a></code> and <code><a href="maxima_170.html#block">block</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="scanmap"></a><a name="Item_003a-Program_002fdeffn_002fscanmap"></a><dl>
+<dt><a name="index-scanmap"></a>Function: <strong>scanmap</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>scanmap</tt> (<var>f</var>, <var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>scanmap</tt> (<var>f</var>, <var>expr</var>, bottomup)</em></dt>
+<dd>
+<p>Recursively applies <var>f</var> to <var>expr</var>, in a top
+down manner.  This is most useful when complete factorization is
+desired, for example:
+</p>
+<div class="example">
+<pre class="example">(%i1) exp:(a^2+2*a+1)*y + x^2$
+(%i2) scanmap(factor,exp);
+                                    2      2
+(%o2)                         (a + 1)  y + x
+</pre></div>
+
+<p>Note the way in which <code>scanmap</code> applies the given function
+<code>factor</code> to the constituent subexpressions of <var>expr</var>; if
+another form of <var>expr</var> is presented to <code>scanmap</code> then the
+result may be different.  Thus, <code>%o2</code> is not recovered when
+<code>scanmap</code> is applied to the expanded form of <code>exp</code>:
+</p>
+<div class="example">
+<pre class="example">(%i3) scanmap(factor,expand(exp));
+                           2                  2
+(%o3)                      a  y + 2 a y + y + x
+</pre></div>
+
+<p>Here is another example of the way in which <code>scanmap</code> recursively
+applies a given function to all subexpressions, including exponents:
+</p>
+<div class="example">
+<pre class="example">(%i4) expr : u*v^(a*x+b) + c$
+(%i5) scanmap('f, expr);
+                    f(f(f(a) f(x)) + f(b))
+(%o5) f(f(f(u) f(f(v)                      )) + f(c))
+</pre></div>
+
+<p><code>scanmap (<var>f</var>, <var>expr</var>, bottomup)</code> applies <var>f</var> to <var>expr</var> in a
+bottom-up manner.  E.g., for undefined <code>f</code>,
+</p>
+<div class="example">
+<pre class="example">scanmap(f,a*x+b) -&gt;
+   f(a*x+b) -&gt; f(f(a*x)+f(b)) -&gt; f(f(f(a)*f(x))+f(b))
+scanmap(f,a*x+b,bottomup) -&gt; f(a)*f(x)+f(b)
+    -&gt; f(f(a)*f(x))+f(b) -&gt;
+     f(f(f(a)*f(x))+f(b))
+</pre></div>
+
+<p>In this case, you get the same answer both
+ways.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;</div></dd></dl>
+
+<a name="throw"></a><a name="Item_003a-Program_002fdeffn_002fthrow"></a><dl>
+<dt><a name="index-throw"></a>Function: <strong>throw</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Evaluates <var>expr</var> and throws the value back to the most recent
+<code><a href="maxima_170.html#catch">catch</a></code>.  <code>throw</code> is used with <code>catch</code> as a nonlocal return
+mechanism.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div></dd></dl>
+
+<a name="outermap"></a><a name="Item_003a-Program_002fdeffn_002foutermap"></a><dl>
+<dt><a name="index-outermap"></a>Function: <strong>outermap</strong> <em>(<var>f</var>, <var>a_1</var>, &hellip;, <var>a_n</var>)</em></dt>
+<dd>
+<p>Applies the function <var>f</var> to each one of the elements of the outer product
+<var>a_1</var> cross <var>a_2</var> &hellip; cross <var>a_n</var>.
+</p>
+<p><var>f</var> is the name of a function of <em>n</em> arguments or a lambda expression
+of <em>n</em> arguments.  Each argument <var>a_k</var> may be a list or nested list,
+or a matrix, or any other kind of expression.
+</p>
+<p>The <code>outermap</code> return value is a nested structure.  Let <var>x</var> be the
+return value.  Then <var>x</var> has the same structure as the first list, nested
+list, or matrix argument, <code><var>x</var>[i_1]...[i_m]</code> has the same structure as
+the second list, nested list, or matrix argument,
+<code><var>x</var>[i_1]...[i_m][j_1]...[j_n]</code> has the same structure as the third
+list, nested list, or matrix argument, and so on, where <var>m</var>, <var>n</var>,
+&hellip; are the numbers of indices required to access the elements of each
+argument (one for a list, two for a matrix, one or more for a nested list).
+Arguments which are not lists or matrices have no effect on the structure of
+the return value.
+</p>
+<p>Note that the effect of <code>outermap</code> is different from that of applying
+<var>f</var> to each one of the elements of the outer product returned by
+<code><a href="maxima_165.html#cartesian_005fproduct">cartesian_product</a></code>.  <code>outermap</code> preserves the structure of the
+arguments in the return value, while <code>cartesian_product</code> does not.
+</p>
+<p><code>outermap</code> evaluates its arguments.
+</p>
+<p>See also <code><a href="#map">map</a></code>, <code><a href="#maplist">maplist</a></code>, and <code><a href="maxima_170.html#apply">apply</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Elementary examples of <code>outermap</code>.
+To show the argument combinations more clearly, <code>F</code> is left undefined.
+</p>
+<div class="example">
+<pre class="example">(%i1) outermap (F, [a, b, c], [1, 2, 3]);
+(%o1) [[F(a, 1), F(a, 2), F(a, 3)], [F(b, 1), F(b, 2), F(b, 3)], 
+                                     [F(c, 1), F(c, 2), F(c, 3)]]
+</pre><pre class="example">(%i2) outermap (F, matrix ([a, b], [c, d]), matrix ([1, 2], [3, 4]));
+         [ [ F(a, 1)  F(a, 2) ]  [ F(b, 1)  F(b, 2) ] ]
+         [ [                  ]  [                  ] ]
+         [ [ F(a, 3)  F(a, 4) ]  [ F(b, 3)  F(b, 4) ] ]
+(%o2)    [                                            ]
+         [ [ F(c, 1)  F(c, 2) ]  [ F(d, 1)  F(d, 2) ] ]
+         [ [                  ]  [                  ] ]
+         [ [ F(c, 3)  F(c, 4) ]  [ F(d, 3)  F(d, 4) ] ]
+</pre><pre class="example">(%i3) outermap (F, [a, b], x, matrix ([1, 2], [3, 4]));
+       [ F(a, x, 1)  F(a, x, 2) ]  [ F(b, x, 1)  F(b, x, 2) ]
+(%o3) [[                        ], [                        ]]
+       [ F(a, x, 3)  F(a, x, 4) ]  [ F(b, x, 3)  F(b, x, 4) ]
+</pre><pre class="example">(%i4) outermap (F, [a, b], matrix ([1, 2]), matrix ([x], [y]));
+       [ [ F(a, 1, x) ]  [ F(a, 2, x) ] ]
+(%o4) [[ [            ]  [            ] ], 
+       [ [ F(a, 1, y) ]  [ F(a, 2, y) ] ]
+                              [ [ F(b, 1, x) ]  [ F(b, 2, x) ] ]
+                              [ [            ]  [            ] ]]
+                              [ [ F(b, 1, y) ]  [ F(b, 2, y) ] ]
+</pre><pre class="example">(%i5) outermap (&quot;+&quot;, [a, b, c], [1, 2, 3]);
+(%o5) [[a + 1, a + 2, a + 3], [b + 1, b + 2, b + 3], 
+                                           [c + 1, c + 2, c + 3]]
+</pre></div>
+
+<p>A closer examination of the <code>outermap</code> return value.  The first, second,
+and third arguments are a matrix, a list, and a matrix, respectively.
+The return value is a matrix.
+Each element of that matrix is a list,
+and each element of each list is a matrix.
+</p>
+<div class="example">
+<pre class="example">(%i1) arg_1 :  matrix ([a, b], [c, d]);
+                            [ a  b ]
+(%o1)                       [      ]
+                            [ c  d ]
+</pre><pre class="example">(%i2) arg_2 : [11, 22];
+(%o2)                       [11, 22]
+</pre><pre class="example">(%i3) arg_3 : matrix ([xx, yy]);
+(%o3)                      [ xx  yy ]
+</pre><pre class="example">(%i4) xx_0 : outermap (lambda ([x, y, z], x / y + z), arg_1,
+                                                   arg_2, arg_3);
+               [  [      a        a  ]  [      a        a  ]  ]
+               [ [[ xx + --  yy + -- ], [ xx + --  yy + -- ]] ]
+               [  [      11       11 ]  [      22       22 ]  ]
+(%o4)  Col 1 = [                                              ]
+               [  [      c        c  ]  [      c        c  ]  ]
+               [ [[ xx + --  yy + -- ], [ xx + --  yy + -- ]] ]
+               [  [      11       11 ]  [      22       22 ]  ]
+                 [  [      b        b  ]  [      b        b  ]  ]
+                 [ [[ xx + --  yy + -- ], [ xx + --  yy + -- ]] ]
+                 [  [      11       11 ]  [      22       22 ]  ]
+         Col 2 = [                                              ]
+                 [  [      d        d  ]  [      d        d  ]  ]
+                 [ [[ xx + --  yy + -- ], [ xx + --  yy + -- ]] ]
+                 [  [      11       11 ]  [      22       22 ]  ]
+</pre><pre class="example">(%i5) xx_1 : xx_0 [1][1];
+           [      a        a  ]  [      a        a  ]
+(%o5)     [[ xx + --  yy + -- ], [ xx + --  yy + -- ]]
+           [      11       11 ]  [      22       22 ]
+</pre><pre class="example">(%i6) xx_2 : xx_0 [1][1] [1];
+                      [      a        a  ]
+(%o6)                 [ xx + --  yy + -- ]
+                      [      11       11 ]
+</pre><pre class="example">(%i7) xx_3 : xx_0 [1][1] [1] [1][1];
+                                  a
+(%o7)                        xx + --
+                                  11
+</pre><pre class="example">(%i8) [op (arg_1), op (arg_2), op (arg_3)];
+(%o8)                  [matrix, [, matrix]
+</pre><pre class="example">(%i9) [op (xx_0), op (xx_1), op (xx_2)];
+(%o9)                  [matrix, [, matrix]
+</pre></div>
+
+<p><code>outermap</code> preserves the structure of the arguments in the return value,
+while <code>cartesian_product</code> does not.
+</p>
+<div class="example">
+<pre class="example">(%i1) outermap (F, [a, b, c], [1, 2, 3]);
+(%o1) [[F(a, 1), F(a, 2), F(a, 3)], [F(b, 1), F(b, 2), F(b, 3)], 
+                                     [F(c, 1), F(c, 2), F(c, 3)]]
+</pre><pre class="example">(%i2) setify (flatten (%));
+(%o2) {F(a, 1), F(a, 2), F(a, 3), F(b, 1), F(b, 2), F(b, 3), 
+                                       F(c, 1), F(c, 2), F(c, 3)}
+</pre><pre class="example">(%i3) map (lambda ([L], apply (F, L)),
+                     cartesian_product ({a, b, c}, {1, 2, 3}));
+(%o3) {F(a, 1), F(a, 2), F(a, 3), F(b, 1), F(b, 2), F(b, 3), 
+                                       F(c, 1), F(c, 2), F(c, 3)}
+</pre><pre class="example">(%i4) is (equal (%, %th (2)));
+(%o4)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-application">Function application</a>
+&middot;</div></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_174.html#Introduction-to-Program-Flow" accesskey="p" rel="previous">Introduction to Program Flow</a>, Up: <a href="maxima_171.html#Program-Flow" accesskey="u" rel="up">Program Flow</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

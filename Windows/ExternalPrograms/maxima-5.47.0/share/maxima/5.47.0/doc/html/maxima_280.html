@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Gentran Mode Switches</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Gentran Mode Switches">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Gentran Mode Switches">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_277.html#gentran_002dpkg" rel="up" title="gentran-pkg">
+<link href="maxima_281.html#Gentran-Option-Variables" rel="next" title="Gentran Option Variables">
+<link href="maxima_279.html#Functions-for-Gentran" rel="previous" title="Functions for Gentran">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Gentran-Mode-Switches"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_281.html#Gentran-Option-Variables" accesskey="n" rel="next">Gentran Option Variables</a>, Previous: <a href="maxima_279.html#Functions-for-Gentran" accesskey="p" rel="previous">Functions for Gentran</a>, Up: <a href="maxima_277.html#gentran_002dpkg" accesskey="u" rel="up">gentran-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Gentran-Mode-Switches-1"></a>
+<h3 class="section">61.3 Gentran Mode Switches</h3>
+
+<a name="Item_003a-gentran_002fdefvr_002ffortran"></a><dl>
+<dt><a name="index-fortran-1"></a>Option variable: <strong>fortran</strong></dt>
+<dd><a name="Item_003a-gentran_002fdefvr_002fratfor"></a></dd><dt><a name="index-ratfor"></a>Option variable: <strong>ratfor</strong></dt>
+<dd><a name="Item_003a-gentran_002fdefvr_002fc"></a></dd><dt><a name="index-c"></a>Option variable: <strong>c</strong></dt>
+<dd><p>Default: off
+</p>
+<p>These mode switches change the default mode of Maxima from evaluation to
+translation. They can be turned on and off with the gentran commands
+gentran_on and gentran_off. Each time a new Maxima session is started
+up, the system is in evaluation mode. It prints a prompt on the user&rsquo;s
+terminal screen and waits for an expression or statement to be entered.
+It then proceeds to evaluate the expression, prints a new prompt, and
+waits for the user to enter another expression or statement. This mode
+can be changed to translation mode by turning on either the fortran,
+ratfor or c switches. After one of these switches is turned on and until
+it is turned off, every expression or statement entered by the user is
+translated into the corresponding language just as if it had been given
+as an argument to the gentran command. Each of the special functions
+that can be used from within a call to gentran can be used at the top
+level until the switch is turned off.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdefvr_002fgendecs"></a><dl>
+<dt><a name="index-gendecs-1"></a>Option variable: <strong>gendecs</strong></dt>
+<dd><p>Default: on
+</p>
+<p>When the gendecs switch is turned on, gentran generates type
+declarations whenever possible. When gendecs is switched off, type
+declarations are not generated. Instead, type information is stored in
+gentran&rsquo;s symbol table but is not retrieved in the form of declarations
+unless and until either the gendecs command is called or the gendecs
+flag is switched back. <strong>Note</strong>: Generated declarations may often
+be placed in an inappropriate place (<em>e.g.</em> in the middle of
+executable fortran code). Therefore the gendecs flag is turned off
+during processing of templates by <strong>gentranin</strong>.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fnode_002fGentran-Option-Variables"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_281.html#Gentran-Option-Variables" accesskey="n" rel="next">Gentran Option Variables</a>, Previous: <a href="maxima_279.html#Functions-for-Gentran" accesskey="p" rel="previous">Functions for Gentran</a>, Up: <a href="maxima_277.html#gentran_002dpkg" accesskey="u" rel="up">gentran-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

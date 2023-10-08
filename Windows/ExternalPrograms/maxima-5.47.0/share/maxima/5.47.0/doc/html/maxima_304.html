@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for lbfgs</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for lbfgs">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for lbfgs">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_302.html#lbfgs_002dpkg" rel="up" title="lbfgs-pkg">
+<link href="maxima_305.html#lindstedt_002dpkg" rel="next" title="lindstedt-pkg">
+<link href="maxima_303.html#Introduction-to-lbfgs" rel="previous" title="Introduction to lbfgs">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-lbfgs"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_303.html#Introduction-to-lbfgs" accesskey="p" rel="previous">Introduction to lbfgs</a>, Up: <a href="maxima_302.html#lbfgs_002dpkg" accesskey="u" rel="up">lbfgs-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-lbfgs-1"></a>
+<h3 class="section">69.2 Functions and Variables for lbfgs</h3>
+
+<a name="lbfgs_005ffunc"></a><a name="Item_003a-lbfgs_002fdeffn_002flbfgs"></a><dl>
+<dt><a name="index-lbfgs"></a>Function: <strong>lbfgs</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lbfgs</tt> (<var>FOM</var>, <var>X</var>, <var>X0</var>, <var>epsilon</var>, <var>iprint</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>lbfgs</tt> ([<var>FOM</var>, <var>grad</var>] <var>X</var>, <var>X0</var>, <var>epsilon</var>, <var>iprint</var>)</em></dt>
+<dd>
+<p>Finds an approximate solution of the unconstrained minimization of the figure of merit <var>FOM</var>
+over the list of variables <var>X</var>,
+starting from initial estimates <var>X0</var>,
+such that <em>norm(grad(FOM)) &lt; epsilon*max(1, norm(X))</em>.
+</p>
+<p><var>grad</var>, if present, is the gradient of <var>FOM</var> with respect to the variables <var>X</var>.
+<var>grad</var> may be a list or a function that returns a list, with one element for each element of <var>X</var>.
+If not present, the gradient is computed automatically by symbolic differentiation.
+If <var>FOM</var> is a function, the gradient <var>grad</var> must be supplied by the user.
+</p>
+<p>The algorithm applied is a limited-memory quasi-Newton (BFGS) algorithm [1].
+It is called a limited-memory method because a low-rank approximation of the
+Hessian matrix inverse is stored instead of the entire Hessian inverse.
+Each iteration of the algorithm is a line search, that is,
+a search along a ray in the variables <var>X</var>,
+with the search direction computed from the approximate Hessian inverse.
+The FOM is always decreased by a successful line search.
+Usually (but not always) the norm of the gradient of FOM also decreases.
+</p>
+<p><var>iprint</var> controls progress messages printed by <code>lbfgs</code>.
+</p>
+<dl compact="compact">
+<dt><code>iprint[1]</code></dt>
+<dd><p><code><var>iprint</var>[1]</code> controls the frequency of progress messages.
+</p><dl compact="compact">
+<dt><code>iprint[1] &lt; 0</code></dt>
+<dd><p>No progress messages.
+</p></dd>
+<dt><code>iprint[1] = 0</code></dt>
+<dd><p>Messages at the first and last iterations.
+</p></dd>
+<dt><code>iprint[1] &gt; 0</code></dt>
+<dd><p>Print a message every <code><var>iprint</var>[1]</code> iterations.
+</p></dd>
+</dl>
+</dd>
+<dt><code>iprint[2]</code></dt>
+<dd><p><code><var>iprint</var>[2]</code> controls the verbosity of progress messages.
+</p><dl compact="compact">
+<dt><code>iprint[2] = 0</code></dt>
+<dd><p>Print out iteration count, number of evaluations of <var>FOM</var>, value of <var>FOM</var>,
+norm of the gradient of <var>FOM</var>, and step length.
+</p></dd>
+<dt><code>iprint[2] = 1</code></dt>
+<dd><p>Same as <code><var>iprint</var>[2] = 0</code>, plus <var>X0</var> and the gradient of <var>FOM</var> evaluated at <var>X0</var>.
+</p></dd>
+<dt><code>iprint[2] = 2</code></dt>
+<dd><p>Same as <code><var>iprint</var>[2] = 1</code>, plus values of <var>X</var> at each iteration.
+</p></dd>
+<dt><code>iprint[2] = 3</code></dt>
+<dd><p>Same as <code><var>iprint</var>[2] = 2</code>, plus the gradient of <var>FOM</var> at each iteration.
+</p></dd>
+</dl>
+</dd>
+</dl>
+
+<p>The columns printed by <code>lbfgs</code> are the following.
+</p>
+<dl compact="compact">
+<dt><code>I</code></dt>
+<dd><p>Number of iterations. It is incremented for each line search.
+</p></dd>
+<dt><code>NFN</code></dt>
+<dd><p>Number of evaluations of the figure of merit.
+</p></dd>
+<dt><code>FUNC</code></dt>
+<dd><p>Value of the figure of merit at the end of the most recent line search.
+</p></dd>
+<dt><code>GNORM</code></dt>
+<dd><p>Norm of the gradient of the figure of merit at the end of the most recent line search.
+</p></dd>
+<dt><code>STEPLENGTH</code></dt>
+<dd><p>An internal parameter of the search algorithm.
+</p></dd>
+</dl>
+
+<p>Additional information concerning details of the algorithm are found in the
+comments of the original Fortran code [2].
+</p>
+<p>See also <code><a href="#lbfgs_005fnfeval_005fmax">lbfgs_nfeval_max</a></code> and <code><a href="#lbfgs_005fncorrections">lbfgs_ncorrections</a></code>.
+</p>
+<p>References:
+</p>
+<p>[1] D. Liu and J. Nocedal. &quot;On the limited memory BFGS method for large
+scale optimization&quot;. <i>Mathematical Programming B</i> 45:503&ndash;528 (1989)
+</p>
+<p>[2] <a href="https://www.netlib.org/opt/lbfgs_um.shar">https://www.netlib.org/opt/lbfgs_um.shar</a>
+</p>
+<p>Examples:
+</p>
+<p>The same FOM as computed by FGCOMPUTE in the program sdrive.f in the LBFGS package from Netlib.
+Note that the variables in question are subscripted variables.
+The FOM has an exact minimum equal to zero at <em>u[k] = 1</em> for <em>k = 1, ..., 8</em>.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;lbfgs&quot;)$
+(%i2) t1[j] := 1 - u[j];
+(%o2)                     t1  := 1 - u
+                            j         j
+(%i3) t2[j] := 10*(u[j + 1] - u[j]^2);
+                                          2
+(%o3)                t2  := 10 (u      - u )
+                       j         j + 1    j
+(%i4) n : 8;
+(%o4)                           8
+(%i5) FOM : sum (t1[2*j - 1]^2 + t2[2*j - 1]^2, j, 1, n/2);
+                 2 2           2              2 2           2
+(%o5) 100 (u  - u )  + (1 - u )  + 100 (u  - u )  + (1 - u )
+            8    7           7           6    5           5
+                     2 2           2              2 2           2
+        + 100 (u  - u )  + (1 - u )  + 100 (u  - u )  + (1 - u )
+                4    3           3           2    1           1
+(%i6) lbfgs (FOM, '[u[1],u[2],u[3],u[4],u[5],u[6],u[7],u[8]],
+       [-1.2, 1, -1.2, 1, -1.2, 1, -1.2, 1], 1e-3, [1, 0]);
+*************************************************
+  N=    8   NUMBER OF CORRECTIONS=25
+       INITIAL VALUES
+ F=  9.680000000000000D+01   GNORM=  4.657353755084533D+02
+*************************************************
+</pre></div>
+<div class="example">
+<pre class="example"> I NFN   FUNC                    GNORM                   STEPLENGTH
+
+ 1   3   1.651479526340304D+01   4.324359291335977D+00   7.926153934390631D-04
+ 2   4   1.650209316638371D+01   3.575788161060007D+00   1.000000000000000D+00
+ 3   5   1.645461701312851D+01   6.230869903601577D+00   1.000000000000000D+00
+ 4   6   1.636867301275588D+01   1.177589920974980D+01   1.000000000000000D+00
+ 5   7   1.612153014409201D+01   2.292797147151288D+01   1.000000000000000D+00
+ 6   8   1.569118407390628D+01   3.687447158775571D+01   1.000000000000000D+00
+ 7   9   1.510361958398942D+01   4.501931728123679D+01   1.000000000000000D+00
+ 8  10   1.391077875774293D+01   4.526061463810630D+01   1.000000000000000D+00
+ 9  11   1.165625686278198D+01   2.748348965356907D+01   1.000000000000000D+00
+10  12   9.859422687859144D+00   2.111494974231706D+01   1.000000000000000D+00
+11  13   7.815442521732282D+00   6.110762325764183D+00   1.000000000000000D+00
+12  15   7.346380905773044D+00   2.165281166715009D+01   1.285316401779678D-01
+13  16   6.330460634066464D+00   1.401220851761508D+01   1.000000000000000D+00
+14  17   5.238763939854303D+00   1.702473787619218D+01   1.000000000000000D+00
+15  18   3.754016790406625D+00   7.981845727632704D+00   1.000000000000000D+00
+16  20   3.001238402313225D+00   3.925482944745832D+00   2.333129631316462D-01
+17  22   2.794390709722064D+00   8.243329982586480D+00   2.503577283802312D-01
+18  23   2.563783562920545D+00   1.035413426522664D+01   1.000000000000000D+00
+19  24   2.019429976373283D+00   1.065187312340952D+01   1.000000000000000D+00
+20  25   1.428003167668592D+00   2.475962450735100D+00   1.000000000000000D+00
+21  27   1.197874264859232D+00   8.441707983339661D+00   4.303451060697367D-01
+22  28   9.023848942003913D-01   1.113189216665625D+01   1.000000000000000D+00
+23  29   5.508226405855795D-01   2.380830599637816D+00   1.000000000000000D+00
+24  31   3.902893258879521D-01   5.625595817143044D+00   4.834988416747262D-01
+25  32   3.207542206881058D-01   1.149444645298493D+01   1.000000000000000D+00
+26  33   1.874468266118200D-01   3.632482152347445D+00   1.000000000000000D+00
+27  34   9.575763380282112D-02   4.816497449000391D+00   1.000000000000000D+00
+28  35   4.085145106760390D-02   2.087009347116811D+00   1.000000000000000D+00
+29  36   1.931106005512628D-02   3.886818624052740D+00   1.000000000000000D+00
+30  37   6.894000636920714D-03   3.198505769992936D+00   1.000000000000000D+00
+31  38   1.443296008850287D-03   1.590265460381961D+00   1.000000000000000D+00
+32  39   1.571766574930155D-04   3.098257002223532D-01   1.000000000000000D+00
+33  40   1.288011779655132D-05   1.207784334505595D-02   1.000000000000000D+00
+34  41   1.806140190993455D-06   4.587890258846915D-02   1.000000000000000D+00
+35  42   1.769004612050548D-07   1.790537363138099D-02   1.000000000000000D+00
+36  43   3.312164244118216D-10   6.782068546986653D-04   1.000000000000000D+00
+</pre></div>
+<div class="example">
+<pre class="example">
+ THE MINIMIZATION TERMINATED WITHOUT DETECTING ERRORS.
+ IFLAG = 0
+(%o6) [u  = 1.000005339816132, u  = 1.000009942840108, 
+        1                       2
+u  = 1.000005339816132, u  = 1.000009942840108, 
+ 3                       4
+u  = 1.000005339816132, u  = 1.000009942840108, 
+ 5                       6
+u  = 1.000005339816132, u  = 1.000009942840108]
+ 7                       8
+</pre></div>
+
+<p>A regression problem.
+The FOM is the mean square difference between the predicted value <em>F(X[i])</em>
+and the observed value <em>Y[i]</em>.
+The function <em>F</em> is a bounded monotone function (a so-called &quot;sigmoidal&quot; function).
+In this example, <code>lbfgs</code> computes approximate values for the parameters of <em>F</em>
+and <code>plot2d</code> displays a comparison of <em>F</em> with the observed data.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;lbfgs&quot;)$
+(%i2) FOM : '((1/length(X))*sum((F(X[i]) - Y[i])^2, i, 1,
+                                                length(X)));
+                               2
+               sum((F(X ) - Y ) , i, 1, length(X))
+                       i     i
+(%o2)          -----------------------------------
+                            length(X)
+(%i3) X : [1, 2, 3, 4, 5];
+(%o3)                    [1, 2, 3, 4, 5]
+(%i4) Y : [0, 0.5, 1, 1.25, 1.5];
+(%o4)                [0, 0.5, 1, 1.25, 1.5]
+(%i5) F(x) := A/(1 + exp(-B*(x - C)));
+                                   A
+(%o5)            F(x) := ----------------------
+                         1 + exp((- B) (x - C))
+(%i6) ''FOM;
+                A               2            A                2
+(%o6) ((----------------- - 1.5)  + (----------------- - 1.25)
+          - B (5 - C)                  - B (4 - C)
+        %e            + 1            %e            + 1
+            A             2            A               2
+ + (----------------- - 1)  + (----------------- - 0.5)
+      - B (3 - C)                - B (2 - C)
+    %e            + 1          %e            + 1
+             2
+            A
+ + --------------------)/5
+      - B (1 - C)     2
+   (%e            + 1)
+(%i7) estimates : lbfgs (FOM, '[A, B, C], [1, 1, 1], 1e-4, [1, 0]);
+*************************************************
+  N=    3   NUMBER OF CORRECTIONS=25
+       INITIAL VALUES
+ F=  1.348738534246918D-01   GNORM=  2.000215531936760D-01
+*************************************************
+
+</pre></div>
+<div class="example">
+<pre class="example">I  NFN  FUNC                    GNORM                   STEPLENGTH
+1    3  1.177820636622582D-01   9.893138394953992D-02   8.554435968992371D-01  
+2    6  2.302653892214013D-02   1.180098521565904D-01   2.100000000000000D+01  
+3    8  1.496348495303004D-02   9.611201567691624D-02   5.257340567840710D-01  
+4    9  7.900460841091138D-03   1.325041647391314D-02   1.000000000000000D+00  
+5   10  7.314495451266914D-03   1.510670810312226D-02   1.000000000000000D+00  
+6   11  6.750147275936668D-03   1.914964958023037D-02   1.000000000000000D+00  
+7   12  5.850716021108202D-03   1.028089194579382D-02   1.000000000000000D+00  
+8   13  5.778664230657800D-03   3.676866074532179D-04   1.000000000000000D+00  
+9   14  5.777818823650780D-03   3.010740179797108D-04   1.000000000000000D+00  
+</pre></div>
+<div class="example">
+<pre class="example">
+ THE MINIMIZATION TERMINATED WITHOUT DETECTING ERRORS.
+ IFLAG = 0
+(%o7) [A = 1.461933911464101, B = 1.601593973254801, 
+                                           C = 2.528933072164855]
+(%i8) plot2d ([F(x), [discrete, X, Y]], [x, -1, 6]), ''estimates;
+(%o8) 
+</pre></div>
+
+<p>Gradient of FOM is specified (instead of computing it automatically).
+Both the FOM and its gradient are passed as functions to <code>lbfgs</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;lbfgs&quot;)$
+(%i2) F(a, b, c) := (a - 5)^2 + (b - 3)^4 + (c - 2)^6$
+(%i3) define(F_grad(a, b, c),
+             map (lambda ([x], diff (F(a, b, c), x)), [a, b, c]))$
+(%i4) estimates : lbfgs ([F, F_grad],
+                   [a, b, c], [0, 0, 0], 1e-4, [1, 0]);
+*************************************************
+  N=    3   NUMBER OF CORRECTIONS=25
+       INITIAL VALUES
+ F=  1.700000000000000D+02   GNORM=  2.205175729958953D+02
+*************************************************
+
+</pre></div>
+<div class="example">
+<pre class="example">   I  NFN     FUNC                    GNORM                   STEPLENGTH
+
+   1    2     6.632967565917637D+01   6.498411132518770D+01   4.534785987412505D-03  
+   2    3     4.368890936228036D+01   3.784147651974131D+01   1.000000000000000D+00  
+   3    4     2.685298972775191D+01   1.640262125898520D+01   1.000000000000000D+00  
+   4    5     1.909064767659852D+01   9.733664001790506D+00   1.000000000000000D+00  
+   5    6     1.006493272061515D+01   6.344808151880209D+00   1.000000000000000D+00  
+   6    7     1.215263596054292D+00   2.204727876126877D+00   1.000000000000000D+00  
+   7    8     1.080252896385329D-02   1.431637116951845D-01   1.000000000000000D+00  
+   8    9     8.407195124830860D-03   1.126344579730008D-01   1.000000000000000D+00  
+   9   10     5.022091686198525D-03   7.750731829225275D-02   1.000000000000000D+00  
+  10   11     2.277152808939775D-03   5.032810859286796D-02   1.000000000000000D+00  
+  11   12     6.489384688303218D-04   1.932007150271009D-02   1.000000000000000D+00  
+  12   13     2.075791943844547D-04   6.964319310814365D-03   1.000000000000000D+00  
+  13   14     7.349472666162258D-05   4.017449067849554D-03   1.000000000000000D+00  
+  14   15     2.293617477985238D-05   1.334590390856715D-03   1.000000000000000D+00  
+  15   16     7.683645404048675D-06   6.011057038099202D-04   1.000000000000000D+00  
+</pre></div>
+<div class="example">
+<pre class="example">
+ THE MINIMIZATION TERMINATED WITHOUT DETECTING ERRORS.
+ IFLAG = 0
+(%o4) [a = 5.000086823042934, b = 3.052395429705181, 
+                                           c = 1.927980629919583]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-lbfgs">Package lbfgs</a>
+&middot;</div>
+</dd></dl>
+
+<a name="lbfgs_005fnfeval_005fmax"></a><a name="Item_003a-lbfgs_002fdefvr_002flbfgs_005fnfeval_005fmax"></a><dl>
+<dt><a name="index-lbfgs_005fnfeval_005fmax"></a>Variable: <strong>lbfgs_nfeval_max</strong></dt>
+<dd><p>Default value: 100
+</p>
+<p><code>lbfgs_nfeval_max</code> is the maximum number of evaluations of the figure of merit (FOM) in <code>lbfgs</code>.
+When <code>lbfgs_nfeval_max</code> is reached,
+<code>lbfgs</code> returns the result of the last successful line search.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-lbfgs">Package lbfgs</a>
+&middot;</div>
+</dd></dl>
+
+<a name="lbfgs_005fncorrections"></a><a name="Item_003a-lbfgs_002fdefvr_002flbfgs_005fncorrections"></a><dl>
+<dt><a name="index-lbfgs_005fncorrections"></a>Variable: <strong>lbfgs_ncorrections</strong></dt>
+<dd><p>Default value: 25
+</p>
+<p><code>lbfgs_ncorrections</code> is the number of corrections applied
+to the approximate inverse Hessian matrix which is maintained by <code>lbfgs</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-lbfgs">Package lbfgs</a>
+&middot;</div>
+</dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_303.html#Introduction-to-lbfgs" accesskey="p" rel="previous">Introduction to lbfgs</a>, Up: <a href="maxima_302.html#lbfgs_002dpkg" accesskey="u" rel="up">lbfgs-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

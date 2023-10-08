@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>3 Entering commands (Xmaxima Manual)</title>
+
+<meta name="description" content="3 Entering commands (Xmaxima Manual)">
+<meta name="keywords" content="3 Entering commands (Xmaxima Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style type="text/css">
+<!--
+kbd.kbd {font-style: oblique}
+span.program-in-footer {font-size: smaller}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Entering-commands">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="xmaxima_1.html" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="xmaxima_1.html" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="xmaxima.html" title="Up section"> Up </a>]</td>
+<td>[<a href="#Input-lines-history" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="xmaxima_3.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="xmaxima.html" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td>[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="Entering-commands-1">3 Entering commands</h1>
+
+<p>Most commonly, you will enter Maxima commands in the last input line
+that appears on the text Window. That text will be rendered in green.
+If you press enter, without having written a command-termination
+character (either &lsquo;<samp class="samp">;</samp>&rsquo; or &lsquo;<samp class="samp">$</samp>&rsquo;) at the end, the text will remain
+green and you can continue to write a multi-line command.  When you type
+a command-end character and press the enter key, the text will become
+blue and a response from Maxima should appear in black. You can also use
+the key combination <kbd class="kbd">Ctrl-j</kbd> to move to a new line without sending
+the input for Maxima evaluation yet. If you want to clear all the
+current input (in green), even if it spans several lines, use the key
+combination <kbd class="kbd">Ctrl-u</kbd>.
+<a class="index-entry-id" id="index-_003b"></a>
+<a class="index-entry-id" id="index-_0024"></a>
+<a class="index-entry-id" id="index-Ctrl_002dj"></a>
+<a class="index-entry-id" id="index-Ctrl_002du"></a>
+</p>
+<p>If you move the cursor over the <code class="code">(%i1)</code> input label, or any other
+label or output text (in black), you will not be able to type any text
+there; that feature will prevent you from trying to enter a command in
+the wrong place, by mistake. If you really want to insert some
+additional text to modify Maxima&rsquo;s output, and which will not be
+interpreted by Maxima, you can do that using cut and paste (we will
+cover that later).
+</p>
+<p>You can also write a new input command for Maxima on top of a previous
+input line (in blue), for instance, if you do not want to write down
+again everything but just want to make a slight change. Once you press
+the enter key, the text you modified will appear at the last input line,
+as if you had written it down there; the input line you modified will
+continue the same in Xmaxima&rsquo;s and Maxima&rsquo;s memory, in spite of having
+changed in the screen.
+</p>
+<p>For example, suppose you entered &lsquo;<samp class="samp">a: 45;</samp>&rsquo; in input line
+<code class="code">(%i1)</code>, and something else in <code class="code">(%i2)</code>. You then move up over
+the <code class="code">(%i1) a: 45;</code> and change the 5 for an 8. Once you press enter,
+you will have in the screen <code class="code">(%i1) a: 48;</code> and <code class="code">(%i3) a: 48;</code>.
+But if you write, in the current input line, <code class="code">(%i1)</code> the original
+input &lsquo;<samp class="samp">a: 45;</samp>&rsquo; will reappear. If you navigate through the input
+lines history (see next section), you will also see that the first input
+keeps its original value.
+</p>
+<hr>
+<div class="section-level-extent" id="Input-lines-history">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Entering-commands" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Up section"> Up </a>]</td>
+<td>[<a href="#Cutting-and-pasting" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="xmaxima_3.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="xmaxima.html" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td>[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section">3.1 Input lines history</h2>
+<p>When the cursor is at the end of the last <code class="code">(%i)</code> label, you can use
+the key combinations <kbd class="kbd">Alt-p</kbd> and <kbd class="kbd">Alt-n</kbd> to recover the previous
+or next command that you entered. If you have just pressed <kbd class="kbd">Alt-n</kbd>,
+the &lsquo;<samp class="samp">next</samp>&rsquo; command means the first one you entered; but if you
+press it again it will mean the second one and so on.
+<a class="index-entry-id" id="index-Alt_002dp"></a>
+<a class="index-entry-id" id="index-Alt_002dn"></a>
+</p>
+<p>In the same way, if you press <kbd class="kbd">Alt-p</kbd> repeatedly, until you reached
+the first input, it will then continue to the last command you
+entered. Once you get on the screen the command that you were looking
+for, it will appear in green, as if you would have just type it, and you
+can modify it before you press enter.
+</p>
+<p>Those two key combinations can also be used to search for a previous
+input line with a particular string in it. You first write down the
+string to search, and then press <kbd class="kbd">Alt-p</kbd>, to search backwards, or
+<kbd class="kbd">Alt-n</kbd> to search forward. Pressing those key combinations
+repeatedly will allow you to cycle through all the lines that contain
+the string. If you want to try a different string in the middle of the
+search, you can delete the current input, type the new string, and start
+the search again.
+</p>
+<hr>
+</div>
+<div class="section-level-extent" id="Cutting-and-pasting">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Entering-commands" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Input-lines-history" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Up section"> Up </a>]</td>
+<td>[<a href="#Other-key-combinations" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="xmaxima_3.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="xmaxima.html" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td>[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section">3.2 Cutting and pasting</h2>
+<p>You can cut or copy a piece of text that you select, from anywhere on
+text window; not just from the input lines but also from the output text
+in black.
+</p>
+<p>To select the text, you can drag the cursor with the mouse while you
+keep its left button depressed, or you can hold the <kbd class="kbd">shift</kbd> key with
+one finger, while you move the cursor with the mouse or with the arrow
+keys.
+</p>
+<p>Once you have selected the text, you can either cut it, with
+<kbd class="kbd">Ctrl-x</kbd>, or copy it to an internal buffer, with
+<kbd class="kbd">Ctrl-c</kbd>. Instead of those key combinations, you can also use two
+options that appear inside the <code class="command">Edit</code> menu.
+<a class="index-entry-id" id="index-Ctrl_002dx"></a>
+<a class="index-entry-id" id="index-Ctrl_002dc"></a>
+<a class="index-entry-id" id="index-Cut"></a>
+<a class="index-entry-id" id="index-Copy"></a>
+</p>
+<p>The text that has been cut or copied more recently can be pasted
+anywhere, even in the output fields, using <kbd class="kbd">Ctrl-v</kbd> or an option in
+the <code class="command">Edit</code> menu.
+<a class="index-entry-id" id="index-Ctrl_002dv"></a>
+<a class="index-entry-id" id="index-Paste"></a>
+<a class="index-entry-id" id="index-Edit"></a>
+</p>
+<p>There is a command similar to &lsquo;<samp class="samp">cut</samp>&rsquo;, called &lsquo;<samp class="samp">kill</samp>&rsquo;
+(<kbd class="kbd">Ctrl-k</kbd>, with two major differences: it only works in input fields
+(blue or green) and instead of cutting a text that was selected, it will
+cut all the text from the cursor until the end of the input line where
+the cursor is.  The command &lsquo;<samp class="samp">Clear input</samp>&rsquo; (<kbd class="kbd">Ctrl-u</kbd>) is similar
+to &lsquo;<samp class="samp">kill</samp>&rsquo;, but it will cut the whole input line.
+<a class="index-entry-id" id="index-Ctrl_002dk"></a>
+<a class="index-entry-id" id="index-Ctrl_002du-1"></a>
+<a class="index-entry-id" id="index-Kill"></a>
+<a class="index-entry-id" id="index-Clear-input"></a>
+</p>
+<p>To paste the last text that you have cut with either &lsquo;<samp class="samp">kill</samp>&rsquo; or
+&lsquo;<samp class="samp">clear input</samp>&rsquo;, you should use the &lsquo;<samp class="samp">yank</samp>&rsquo; command,
+<kbd class="kbd">Ctrl-y</kbd>. If you prefer, you can use entries in the <code class="command">Edit</code>
+menu to kill, clear input and yank.
+<a class="index-entry-id" id="index-Ctrl_002dy"></a>
+<a class="index-entry-id" id="index-Yank"></a>
+</p>
+<hr>
+</div>
+<div class="section-level-extent" id="Other-key-combinations">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Entering-commands" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Cutting-and-pasting" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Up section"> Up </a>]</td>
+<td>[<a href="xmaxima_3.html" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="xmaxima_3.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="xmaxima.html" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td>[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section">3.3 Other key combinations</h2>
+<p>There are other useful key combinations, which are not particular to
+Xmaxima, but are defined in most Tcl/Tk programs:
+</p>
+<dl class="table">
+<dt><kbd class="kbd">Ctrl-f</kbd></dt>
+<dd><p>The same as the right arrow key.
+<a class="index-entry-id" id="index-Ctrl_002df"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-b</kbd></dt>
+<dd><p>The same as the left arrow key.
+<a class="index-entry-id" id="index-Ctrl_002db"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-p</kbd></dt>
+<dd><p>The same as the up arrow key.
+<a class="index-entry-id" id="index-Ctrl_002dp"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-n</kbd></dt>
+<dd><p>The same as the down arrow key.
+<a class="index-entry-id" id="index-Ctrl_002dn"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-a</kbd></dt>
+<dd><p>Moves to the first character in a line (either input or output)
+<a class="index-entry-id" id="index-Ctrl_002da-1"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-e</kbd></dt>
+<dd><p>Moves to the last character in a line (either input or output)
+<a class="index-entry-id" id="index-Ctrl_002de"></a>
+</p></dd>
+<dt><kbd class="kbd">PageUp</kbd></dt>
+<dd><p>Moves one page up
+<a class="index-entry-id" id="index-PageUp"></a>
+</p></dd>
+<dt><kbd class="kbd">PageDown</kbd></dt>
+<dd><p>Moves one page down
+<a class="index-entry-id" id="index-PageDown"></a>
+</p></dd>
+<dt><kbd class="kbd">Home</kbd></dt>
+<dd><p>Moves the first character in the text window.
+<a class="index-entry-id" id="index-Home"></a>
+</p></dd>
+<dt><kbd class="kbd">End</kbd></dt>
+<dd><p>Moves to the last character in the text window.
+<a class="index-entry-id" id="index-End"></a>
+</p></dd>
+</dl>
+
+</div>
+</div>
+<hr>
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Entering-commands" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="xmaxima_3.html" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="xmaxima.html" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td>[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+  <span class="program-in-footer">This document was generated on <em class="emph">June 2, 2023</em> using <a class="uref" href="https://www.gnu.org/software/texinfo/"><em class="emph">makeinfo</em></a>.</span>
+</p>
+
+
+</body>
+</html>

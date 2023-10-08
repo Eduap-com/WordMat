@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to contrib_ode</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to contrib_ode">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to contrib_ode">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_205.html#contrib_005fode_002dpkg" rel="up" title="contrib_ode-pkg">
+<link href="maxima_207.html#Functions-and-Variables-for-contrib_005fode" rel="next" title="Functions and Variables for contrib_ode">
+<link href="maxima_205.html#contrib_005fode_002dpkg" rel="previous" title="contrib_ode-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-contrib_005fode"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_207.html#Functions-and-Variables-for-contrib_005fode" accesskey="n" rel="next">Functions and Variables for contrib_ode</a>, Previous: <a href="maxima_205.html#contrib_005fode_002dpkg" accesskey="p" rel="previous">contrib_ode-pkg</a>, Up: <a href="maxima_205.html#contrib_005fode_002dpkg" accesskey="u" rel="up">contrib_ode-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+<a name="Introduction-to-contrib_005fode-1"></a>
+<h3 class="section">49.1 Introduction to contrib_ode</h3>
+
+<p>Maxima&rsquo;s ordinary differential equation (ODE) solver <code><a href="maxima_111.html#ode2">ode2</a></code> solves
+elementary linear ODEs of first and second order.  The function
+<code><a href="maxima_207.html#contrib_005fode">contrib_ode</a></code> extends <code>ode2</code> with additional methods for linear
+and non-linear first order ODEs and linear homogeneous second order ODEs.  
+The code is still under development and the calling sequence may change
+in future releases.  Once the code has stabilized it may be
+moved from the contrib directory and integrated into Maxima.
+</p>
+<p>This package must be loaded with the command <code>load(&quot;contrib_ode&quot;)</code>
+before use.
+</p>
+<p>The calling convention for <code>contrib_ode</code> is identical to <code>ode2</code>.  
+It takes
+three arguments: an ODE (only the left hand side need be given if the
+right hand side is 0), the dependent variable, and the independent
+variable.  When successful, it returns a list of solutions.
+</p>
+<p>The form of the solution differs from <code>ode2</code>.
+As non-linear equations can have multiple solutions, 
+<code>contrib_ode</code> returns a list of solutions.  Each  solution can 
+have a number of forms:
+</p><ul>
+<li> an explicit solution for the dependent variable,
+
+</li><li> an implicit solution for the dependent variable,
+
+</li><li> a parametric solution in terms of variable <code>%t</code>, or
+
+</li><li> a transformation into another ODE in variable <code>%u</code>.
+
+</li></ul>
+
+<p><code>contrib_ode</code> uses the global variables <code><a href="maxima_111.html#g_t_0025c">%c</a></code>, 
+<code><a href="maxima_111.html#g_t_0025k1">%k1</a></code>, <code><a href="maxima_111.html#g_t_0025k2">%k2</a></code>, <code><a href="maxima_111.html#method">method</a></code> and <code><a href="maxima_111.html#yp">yp</a></code>
+similarly to <code>ode2</code>.
+</p>
+<p>If <code>contrib_ode</code>
+cannot obtain a solution for whatever reason, it returns <code>false</code>, after
+perhaps printing out an error message.
+</p>
+<p>It is necessary to return a list of solutions, as even first order
+non-linear ODEs can have multiple solutions.  For example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><pre class="example">(%i2) eqn:x*'diff(y,x)^2-(1+x*y)*'diff(y,x)+y=0;
+                    dy 2             dy
+(%o2)            x (--)  - (1 + x y) -- + y = 0
+                    dx               dx
+</pre><pre class="example">(%i3) contrib_ode(eqn,y,x);
+                    dy 2             dy
+(%t3)            x (--)  - (1 + x y) -- + y = 0
+                    dx               dx
+
+              first order equation not linear in y'
+
+                                             x
+(%o3)             [y = log(x) + %c, y = %c %e ]
+</pre><pre class="example">(%i4) method;
+(%o4)                        factor
+</pre></div>
+
+<p>Nonlinear ODEs can have singular solutions without constants of
+integration, as in the second solution of the following example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><pre class="example">(%i2) eqn:'diff(y,x)^2+x*'diff(y,x)-y=0;
+                       dy 2     dy
+(%o2)                 (--)  + x -- - y = 0
+                       dx       dx
+</pre><pre class="example">(%i3) contrib_ode(eqn,y,x);
+                       dy 2     dy
+(%t3)                 (--)  + x -- - y = 0
+                       dx       dx
+
+              first order equation not linear in y'
+
+                                           2
+                                 2        x
+(%o3)              [y = %c x + %c , y = - --]
+                                          4
+</pre><pre class="example">(%i4) method;
+(%o4)                       clairaut
+</pre></div>
+
+
+<p>The following ODE has two parametric solutions in terms of the dummy
+variable <code>%t</code>.  In this case the parametric solutions can be manipulated
+to give explicit solutions.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><pre class="example">(%i2) eqn:'diff(y,x)=(x+y)^2;
+                          dy          2
+(%o2)                     -- = (x + y)
+                          dx
+</pre><pre class="example">(%i3) contrib_ode(eqn,y,x);
+(%o3) [[x = %c - atan(sqrt(%t)), y = (- x) - sqrt(%t)], 
+                     [x = atan(sqrt(%t)) + %c, y = sqrt(%t) - x]]
+</pre><pre class="example">(%i4) method;
+(%o4)                       lagrange
+</pre></div>
+
+<p>The following example (Kamke 1.112) demonstrates an implicit solution.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><pre class="example">(%i2) assume(x&gt;0,y&gt;0);
+(%o2)                    [x &gt; 0, y &gt; 0]
+</pre><pre class="example">(%i3) eqn:x*'diff(y,x)-x*sqrt(y^2+x^2)-y;
+                     dy           2    2
+(%o3)              x -- - x sqrt(y  + x ) - y
+                     dx
+</pre><pre class="example">(%i4) contrib_ode(eqn,y,x);
+                                  y
+(%o4)                  [x - asinh(-) = %c]
+                                  x
+</pre><pre class="example">(%i5) method;
+(%o5)                          lie
+</pre></div>
+
+ 
+
+<p>The following Riccati equation is transformed into a linear
+second order ODE in the variable <code>%u</code>.  Maxima is unable to
+solve the new ODE, so it is returned unevaluated.
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;contrib_ode&quot;)$
+</pre><pre class="example">(%i2) eqn:x^2*'diff(y,x)=a+b*x^n+c*x^2*y^2;
+                    2 dy      2  2      n
+(%o2)              x  -- = c x  y  + b x  + a
+                      dx
+</pre><pre class="example">(%i3) contrib_ode(eqn,y,x);
+               d%u
+               ---                            2
+               dx        2  a       n - 2    d %u
+(%o3)  [[y = - ----, %u c  (-- + b x     ) + ---- c = 0]]
+               %u c          2                 2
+                            x                dx
+</pre><pre class="example">(%i4) method;
+(%o4)                        riccati
+</pre></div>
+
+
+<p>For first order ODEs <code>contrib_ode</code> calls <code>ode2</code>.  It then tries the
+following methods: factorization, Clairaut, Lagrange, Riccati,
+Abel and Lie symmetry methods.  The Lie method is not attempted
+on Abel equations if the Abel method fails, but it is tried
+if the Riccati method returns an unsolved second order ODE.
+</p>
+<p>For second order ODEs <code>contrib_ode</code> calls <code>ode2</code> then <code><a href="maxima_207.html#odelin">odelin</a></code>.
+</p>
+<p>Extensive debugging traces and messages are displayed if the command
+<code>put('contrib_ode,true,'verbose)</code> is executed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;</div>
+
+<a name="Item_003a-contrib_005fode_002fnode_002fFunctions-and-Variables-for-contrib_005fode"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_207.html#Functions-and-Variables-for-contrib_005fode" accesskey="n" rel="next">Functions and Variables for contrib_ode</a>, Previous: <a href="maxima_205.html#contrib_005fode_002dpkg" accesskey="p" rel="previous">contrib_ode-pkg</a>, Up: <a href="maxima_205.html#contrib_005fode_002dpkg" accesskey="u" rel="up">contrib_ode-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

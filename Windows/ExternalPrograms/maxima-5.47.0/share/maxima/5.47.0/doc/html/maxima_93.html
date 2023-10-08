@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>wrstcse-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="wrstcse-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="wrstcse-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_94.html#zeilberger_002dpkg" rel="next" title="zeilberger-pkg">
+<link href="maxima_92.html#unit_002dpkg" rel="prev" title="unit-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="wrstcse_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_94.html#zeilberger_002dpkg" accesskey="n" rel="next">zeilberger</a>, Previous: <a href="maxima_92.html#unit_002dpkg" accesskey="p" rel="prev">unit</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="wrstcse">94 wrstcse</h2>
+
+<a class="anchor" id="Item_003a-wrstcse_002fnode_002fIntroduction-to-wrstcse"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-wrstcse" accesskey="1">Introduction to wrstcse</a></li>
+<li><a href="#Functions-and-Variables-for-wrstcse" accesskey="2">Functions and Variables for wrstcse</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-wrstcse">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-wrstcse" accesskey="n" rel="next">Functions and Variables for wrstcse</a>, Previous: <a href="#wrstcse_002dpkg" accesskey="p" rel="prev">wrstcse</a>, Up: <a href="#wrstcse_002dpkg" accesskey="u" rel="up">wrstcse</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-wrstcse-1">94.1 Introduction to wrstcse</h3>
+
+<p><code class="code">wrstcse</code> is a naive go at interval arithmetics is powerful enough to
+perform worst case calculations that appear in engineering by applying
+all combinations of tolerances to all parameters.
+</p>
+<p>This approach isn&rsquo;t guaranteed to find the exact combination of parameters
+that results in the worst-case. But it avoids the problems that make a true
+interval arithmetics affected by the halting problem as an equation can have
+an infinite number of local minima and maxima and it might be impossible to
+algorithmically determine which one is the global one.
+</p>
+<p>Tolerances are applied to parameters by providing the parameter with a <var class="var">tol[n]</var>
+that wrstcase will vary between -1 and 1. Using the same <var class="var">n</var> for two parameters
+will make both parameters tolerate in the same way.
+</p>
+<p><code class="code">load (&quot;wrstcse&quot;)</code> loads this package.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-wrstcse">Package wrstcse</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-wrstcse_002fnode_002fFunctions-and-Variables-for-wrstcse"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-wrstcse">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-wrstcse" accesskey="p" rel="prev">Introduction to wrstcse</a>, Up: <a href="#wrstcse_002dpkg" accesskey="u" rel="up">wrstcse</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-wrstcse-1">94.2 Functions and Variables for wrstcse</h3>
+
+<a class="anchor" id="wc_005ftypicalvalues"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005ftypicalvalues"></a><dl class="first-deffn">
+<dt class="deffn" id="index-wc_005ftypicalvalues"><span class="category-def">Function: </span><span><strong class="def-name">wc_typicalvalues</strong> <var class="def-var-arguments">(<var class="var">expression</var>, [<var class="var">num</var>])</var><a class="copiable-link" href='#index-wc_005ftypicalvalues'> &para;</a></span></dt>
+<dd>
+<p>Returns what happens if all tolerances (that are represented by tol [n] that can
+vary from 0 to 1) happen to be 0.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 2000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 2000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) divider:U_Out=U_In*R_1/(R_1+R_2);
+                                R_1 U_In
+(%o3)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_typicalvalues(vals);
+(%o4)             [R_1 = 1000.0, R_2 = 2000.0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) wc_typicalvalues(subst(vals,divider));
+(%o5)            U_Out = 0.3333333333333333 U_In
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005finputvalueranges"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005finputvalueranges"></a><dl class="first-deffn">
+<dt class="deffn" id="index-wc_005finputvalueranges"><span class="category-def">Function: </span><span><strong class="def-name">wc_inputvalueranges</strong> <var class="def-var-arguments">(<var class="var">expression</var>, [<var class="var">num</var>])</var><a class="copiable-link" href='#index-wc_005finputvalueranges'> &para;</a></span></dt>
+<dd>
+<p>Convenience function: Displays a list which parameter can vary between
+which values.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 2000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 2000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) wc_inputvalueranges(vals);
+        [ R_1  min = 990.0   typ = 1000.0  max = 1010.0 ]
+(%o3)   [                                               ]
+        [ R_2  min = 1980.0  typ = 2000.0  max = 2020.0 ]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fsystematic"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fsystematic"></a><dl class="first-deffn">
+<dt class="deffn" id="index-wc_005fsystematic"><span class="category-def">Function: </span><span><strong class="def-name">wc_systematic</strong> <var class="def-var-arguments">(<var class="var">expression</var>, [<var class="var">num</var>])</var><a class="copiable-link" href='#index-wc_005fsystematic'> &para;</a></span></dt>
+<dd>
+<p>Systematically introduces <var class="var">num</var> values per parameter into <var class="var">expression</var>
+and returns a list of the result. If no <var class="var">num</var> is given, <var class="var">num</var> defaults
+to 3.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fmontecarlo">wc_montecarlo</a></code>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 2000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 2000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) divider: U_Out=U_In*(R_1)/(R_1+R_2);
+                                R_1 U_In
+(%o3)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_systematic(subst(vals,rhs(divider)));
+(%o4) [0.3333333333333334 U_In, 0.3311036789297659 U_In, 
+0.3289036544850498 U_In, 0.3355704697986577 U_In, 
+0.3333333333333333 U_In, 0.3311258278145696 U_In, 
+0.3377926421404682 U_In, 0.3355481727574751 U_In, 
+0.3333333333333333 U_In]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fmontecarlo"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmontecarlo"></a><dl class="first-deffn">
+<dt class="deffn" id="index-wc_005fmontecarlo"><span class="category-def">Function: </span><span><strong class="def-name">wc_montecarlo</strong> <var class="def-var-arguments">(<var class="var">expression</var>, <var class="var">num</var>)</var><a class="copiable-link" href='#index-wc_005fmontecarlo'> &para;</a></span></dt>
+<dd>
+<p>Introduces <var class="var">num</var> random values per parameter into
+<var class="var">expression</var> and returns a list of the result.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fsystematic">wc_systematic</a></code>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 2000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 2000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) divider: U_Out=U_In*(R_1)/(R_1+R_2);
+                                R_1 U_In
+(%o3)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_montecarlo(subst(vals,rhs(divider)),10);
+(%o4) [0.3365488313167528 U_In, 0.3339089445851889 U_In, 
+0.314651402884122 U_In, 0.3447359711624277 U_In, 
+0.3294005710066001 U_In, 0.3330897542463686 U_In, 
+0.3397591863729343 U_In, 0.3227030530673181 U_In, 
+0.3385512773502185 U_In, 0.314764470912582 U_In]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fmintypmax"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmintypmax"></a><dl class="first-deffn">
+<dt class="deffn" id="index-wc_005fmintypmax"><span class="category-def">Function: </span><span><strong class="def-name">wc_mintypmax</strong> <var class="def-var-arguments">(<var class="var">expr</var>, [<var class="var">n</var>])</var><a class="copiable-link" href='#index-wc_005fmintypmax'> &para;</a></span></dt>
+<dd>
+<p>Prints the minimum, maximum and typical value of <var class="var">expr</var>. If <var class="var">n</var>
+is positive, <var class="var">n</var> values for each parameter will be tried systematically.
+If <var class="var">n</var> is negative, <var class="var">-n</var> random values are used instead.
+If no <var class="var">n</var> is given, 3 is assumed.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+(%i2) ratprint:false$
+</pre><div class="group"><pre class="example-preformatted">(%i3) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o3) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) assume(U_In&gt;0);
+(%o4)                      [U_In &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) divider:U_Out=U_In*R_1/(R_1+R_2);
+                                R_1 U_In
+(%o5)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) lhs(divider)=wc_mintypmax(subst(vals,rhs(divider)));
+(%o6) U_Out = [min = 0.495 U_In, typ = 0.5 U_In, 
+                                                max = 0.505 U_In]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005ftolappend"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005ftolappend"></a><dl class="first-deffn">
+<dt class="deffn" id="index-wc_005ftolappend"><span class="category-def">Function: </span><span><strong class="def-name">wc_tolappend</strong> <var class="def-var-arguments">(<var class="var">list</var>)</var><a class="copiable-link" href='#index-wc_005ftolappend'> &para;</a></span></dt>
+<dd>
+<p>Appends two list of parameters with tolerances renumbering the tolerances of
+both lists so they don&rsquo;t coincide.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) val_a: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) val_b: [
+   R_3= 1000.0*(1+tol[1]*.01),
+   R_4= 1000.0*(1+tol[2]*.01)
+ ];
+(%o3) [R_3 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_4 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_tolappend(val_a,val_b);
+(%o4) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             2
+R_2 = 1000.0 (0.01 tol  + 1), R_3 = 1000.0 (0.01 tol  + 1), 
+                      1                             4
+R_4 = 1000.0 (0.01 tol  + 1)]
+                      3
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fmintypmax2tol"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmintypmax2tol"></a><dl class="first-deffn">
+<dt class="deffn" id="index-wc_005fmintypmax2tol"><span class="category-def">Function: </span><span><strong class="def-name">wc_mintypmax2tol</strong> <var class="def-var-arguments">(<var class="var">tolname</var>, <var class="var">minval</var>, <var class="var">typval</var>, <var class="var">maxval</var>)</var><a class="copiable-link" href='#index-wc_005fmintypmax2tol'> &para;</a></span></dt>
+<dd>
+<p>Generates a parameter that uses the tolerance <var class="var">tolname</var> that tolerates between the
+given values.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) V_F: U_Diode=wc_mintypmax2tol(tol[1],.5,.75,.82);
+                                          2
+(%o2) U_Diode = (- 0.09000000000000002 tol ) + 0.16 tol  + 0.75
+                                          1            1
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) lhs(V_F)=wc_mintypmax(rhs(V_F));
+(%o3) U_Diode = [min = 0.5, typ = 0.75, max = 0.8199999999999998]
+</pre></div></div>
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_94.html#zeilberger_002dpkg" accesskey="n" rel="next">zeilberger</a>, Previous: <a href="maxima_92.html#unit_002dpkg" accesskey="p" rel="prev">unit</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

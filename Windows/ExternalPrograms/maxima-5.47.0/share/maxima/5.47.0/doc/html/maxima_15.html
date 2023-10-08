@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Elliptic Functions (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Elliptic Functions (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Elliptic Functions (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_16.html#Limits" rel="next" title="Limits">
+<link href="maxima_14.html#Special-Functions" rel="prev" title="Special Functions">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Elliptic-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_16.html#Limits" accesskey="n" rel="next">Limits</a>, Previous: <a href="maxima_14.html#Special-Functions" accesskey="p" rel="prev">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Elliptic-Functions-1">16 Elliptic Functions</h2>
+
+
+
+
+<a class="anchor" id="Item_003a-Elliptic_002fnode_002fIntroduction-to-Elliptic-Functions-and-Integrals"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Elliptic-Functions-and-Integrals" accesskey="1">Introduction to Elliptic Functions and Integrals</a></li>
+<li><a href="#Functions-and-Variables-for-Elliptic-Functions" accesskey="2">Functions and Variables for Elliptic Functions</a></li>
+<li><a href="#Functions-and-Variables-for-Elliptic-Integrals" accesskey="3">Functions and Variables for Elliptic Integrals</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Elliptic-Functions-and-Integrals">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Elliptic-Functions" accesskey="n" rel="next">Functions and Variables for Elliptic Functions</a>, Up: <a href="#Elliptic-Functions" accesskey="u" rel="up">Elliptic Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Elliptic-Functions-and-Integrals-1">16.1 Introduction to Elliptic Functions and Integrals</h3>
+
+<p>Maxima includes support for Jacobian elliptic functions and for
+complete and incomplete elliptic integrals.  This includes symbolic
+manipulation of these functions and numerical evaluation as well.
+Definitions of these functions and many of their properties can by
+found in Abramowitz and Stegun, <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_567.htm">A&amp;S Chapter 16</a> and
+<a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_587.htm">A&amp;S Chapter 17.</a>  See also <a class="url" href="https://dlmf.nist.gov/22.2">DLMF 22.2</a>.  As much as possible,
+we use the definitions and relationships given in Abramowitz and Stegun.
+</p>
+<p>In particular, all elliptic functions and integrals use the parameter
+<em class="math tex2jax_process">\(m\)</em> instead of the modulus <em class="math tex2jax_process">\(k\)</em> or the modular angle
+<em class="math tex2jax_process">\(\alpha\)</em>.  The following relationships are true:
+</p>
+$$
+\eqalign{
+m &= k^2 \cr
+k &= \sin\alpha
+}
+
+$$
+
+
+<p>Note that Abramowitz and Stegun uses the notation 
+\({\rm
+sn}(u|m)\)
+ where we use 
+\({\rm
+sn}(u,m)\)
+ instead.  The DLMF uses modulus <em class="math tex2jax_process">\(k\)</em>
+instead of the parameter <em class="math tex2jax_process">\(m\)</em>.
+</p>
+<p>The elliptic functions and integrals are primarily intended to support
+symbolic computation.  Therefore, most of derivatives of the functions
+and integrals are known.  However, if floating-point values are given,
+a floating-point result is returned.
+</p>
+<p>Support for most of the other properties of elliptic functions and
+integrals other than derivatives has not yet been written.
+</p>
+<p>Some examples of elliptic functions:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) jacobi_sn (u, m);
+(%o1)                    jacobi_sn(u, m)
+(%i2) jacobi_sn (u, 1);
+(%o2)                        tanh(u)
+(%i3) jacobi_sn (u, 0);
+(%o3)                        sin(u)
+(%i4) diff (jacobi_sn (u, m), u);
+(%o4)            jacobi_cn(u, m) jacobi_dn(u, m)
+(%i5) diff (jacobi_sn (u, m), m);
+(%o5) jacobi_cn(u, m) jacobi_dn(u, m)
+
+      elliptic_e(asin(jacobi_sn(u, m)), m)
+ (u - ------------------------------------)/(2 m)
+                     1 - m
+
+            2
+   jacobi_cn (u, m) jacobi_sn(u, m)
+ + --------------------------------
+              2 (1 - m)
+</pre></div>
+
+<p>Some examples of elliptic integrals:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) elliptic_f (phi, m);
+(%o1)                  elliptic_f(phi, m)
+(%i2) elliptic_f (phi, 0);
+(%o2)                          phi
+(%i3) elliptic_f (phi, 1);
+                               phi   %pi
+(%o3)                  log(tan(--- + ---))
+                                2     4
+(%i4) elliptic_e (phi, 1);
+(%o4)                       sin(phi)
+(%i5) elliptic_e (phi, 0);
+(%o5)                          phi
+(%i6) elliptic_kc (1/2);
+                                     1
+(%o6)                    elliptic_kc(-)
+                                     2
+(%i7) makegamma (%);
+                                 2 1
+                            gamma (-)
+                                   4
+(%o7)                      -----------
+                           4 sqrt(%pi)
+(%i8) diff (elliptic_f (phi, m), phi);
+                                1
+(%o8)                 ---------------------
+                                    2
+                      sqrt(1 - m sin (phi))
+(%i9) diff (elliptic_f (phi, m), m);
+       elliptic_e(phi, m) - (1 - m) elliptic_f(phi, m)
+(%o9) (-----------------------------------------------
+                              m
+
+                                 cos(phi) sin(phi)
+                             - ---------------------)/(2 (1 - m))
+                                             2
+                               sqrt(1 - m sin (phi))
+</pre></div>
+
+<p>Support for elliptic functions and integrals was written by Raymond
+Toy.  It is placed under the terms of the General Public License (GPL)
+that governs the distribution of Maxima.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Elliptic_002fnode_002fFunctions-and-Variables-for-Elliptic-Functions"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Elliptic-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Elliptic-Integrals" accesskey="n" rel="next">Functions and Variables for Elliptic Integrals</a>, Previous: <a href="#Introduction-to-Elliptic-Functions-and-Integrals" accesskey="p" rel="prev">Introduction to Elliptic Functions and Integrals</a>, Up: <a href="#Elliptic-Functions" accesskey="u" rel="up">Elliptic Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Elliptic-Functions-1">16.2 Functions and Variables for Elliptic Functions</h3>
+<p>See <a class="url" href="https://personal.math.ubc.ca/~cbm/aands/page_569.htm">A&amp;S Section 6.12</a> and <a class="url" href="https://dlmf.nist.gov/22.2">DLMF 22.2</a> for more
+information.
+</p>
+<a class="anchor" id="jacobi_005fsn"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fsn"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fsn"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_sn</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fsn'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm sn}(u,m).\)
+</p>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fcn"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fcn"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fcn"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_cn</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fcn'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm cn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fdn"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fdn"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fdn"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_dn</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fdn'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm dn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fns"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fns"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fns"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_ns</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fns'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm ns}(u,m) = 1/{\rm
+sn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fsc"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fsc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fsc"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_sc</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fsc'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm sc}(u,m) = {\rm
+sn}(u,m)/{\rm cn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fsd"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fsd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fsd"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_sd</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fsd'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm sd}(u,m) = {\rm
+sn}(u,m)/{\rm dn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fnc"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fnc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fnc"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_nc</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fnc'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm nc}(u,m) = 1/{\rm cn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fcs"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fcs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fcs"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_cs</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fcs'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm cs}(u,m) = {\rm
+cn}(u,m)/{\rm sn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fcd"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fcd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fcd"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_cd</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fcd'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm cd}(u,m) = {\rm cn}(u,m)/{\rm dn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fnd"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fnd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fnd"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_nd</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fnd'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm nd}(u,m) = 1/{\rm dn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fds"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fds"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fds"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_ds</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fds'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm ds}(u,m) =
+{\rm dn}(u,m)/{\rm sn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="jacobi_005fdc"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fjacobi_005fdc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-jacobi_005fdc"><span class="category-def">Function: </span><span><strong class="def-name">jacobi_dc</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-jacobi_005fdc'> &para;</a></span></dt>
+<dd><p>The Jacobian elliptic function 
+\({\rm dc}(u,m) =
+{\rm dn}(u,m)/{\rm cn}(u,m).\)
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fsn"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fsn"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fsn"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_sn</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fsn'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+sn}(u,m).\)
+  For 
+\(-1\le u \le 1,\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E12">DLMF 22.15.E12</a>):
+$$
+{\rm inverse\_jacobi\_sn}(u, m) = \int_0^u {dt\over \sqrt{(1-t^2)(1-mt^2)}}
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fcn"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fcn"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fcn"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_cn</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fcn'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+cn}(u,m).\)
+  For 
+\(-1\le u \le 1,\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E13">DLMF 22.15.E13</a>):
+$$
+{\rm inverse\_jacobi\_cn}(u, m) = \int_u^1 {dt\over \sqrt{(1-t^2)(1-m+mt^2)}}
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fdn"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fdn"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fdn"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_dn</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fdn'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+dn}(u,m).\)
+ For 
+\(\sqrt{1-m}\le u \le 1,\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E14">DLMF 22.15.E14</a>):
+$$
+{\rm inverse\_jacobi\_dn}(u, m) = \int_u^1 {dt\over \sqrt{(1-t^2)(t^2-(1-m))}}
+$$
+</p>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fns"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fns"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fns"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_ns</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fns'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+ns}(u,m).\)
+ For 
+\(1 \le u,\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E121">DLMF 22.15.E121</a>):
+$$
+{\rm inverse\_jacobi\_ns}(u, m) = \int_u^{\infty} {dt\over \sqrt{(1-t^2)(t^2-m)}}
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fsc"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fsc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fsc"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_sc</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fsc'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+sc}(u,m).\)
+ For all <em class="math tex2jax_process">\(u\)</em> it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E20">DLMF 22.15.E20</a>):
+$$
+{\rm inverse\_jacobi\_sc}(u, m) = \int_0^u {dt\over \sqrt{(1+t^2)(1+(1-m)t^2)}}
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fsd"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fsd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fsd"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_sd</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fsd'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+sd}(u,m).\)
+ For 
+\(-1/\sqrt{1-m}\le u \le
+1/\sqrt{1-m},\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E16">DLMF 22.15.E16</a>):
+$$
+{\rm inverse\_jacobi\_sd}(u, m) = \int_0^u {dt\over \sqrt{(1-(1-m)t^2)(1+mt^2)}}
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fnc"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fnc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fnc"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_nc</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fnc'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+nc}(u,m).\)
+ For 
+\(1\le u,\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E19">DLMF 22.15.E19</a>):
+$$
+{\rm inverse\_jacobi\_nc}(u, m) = \int_1^u {dt\over \sqrt{(t^2-1)(m+(1-m)t^2)}}
+$$
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fcs"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fcs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fcs"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_cs</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fcs'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+cs}(u,m).\)
+ For all <em class="math tex2jax_process">\(u\)</em> it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E23">DLMF 22.15.E23</a>):
+$$
+{\rm inverse\_jacobi\_cs}(u, m) = \int_u^{\infty} {dt\over \sqrt{(1+t^2)(t^2+(1-m))}}
+$$
+</p>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fcd"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fcd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fcd"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_cd</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fcd'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+cd}(u,m).\)
+ For 
+\(-1\le u \le 1,\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E15">DLMF 22.15.E15</a>):
+$$
+{\rm inverse\_jacobi\_cd}(u, m) = \int_u^1 {dt\over \sqrt{(1-t^2)(1-mt^2)}}
+$$
+</p>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fnd"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fnd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fnd"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_nd</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fnd'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+nd}(u,m).\)
+ For 
+\(1\le u \le 1/\sqrt{1-m},\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E17">DLMF 22.15.E17</a>):
+$$
+{\rm inverse\_jacobi\_nd}(u, m) = \int_1^u {dt\over \sqrt{(t^2-1)(1-(1-m)t^2)}}
+$$
+</p>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fds"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fds"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fds"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_ds</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fds'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+ds}(u,m).\)
+ For 
+\(\sqrt{1-m}\le u,\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E22">DLMF 22.15.E22</a>):
+$$
+{\rm inverse\_jacobi\_ds}(u, m) = \int_u^{\infty} {dt\over \sqrt{(t^2+m)(t^2-(1-m))}}
+$$
+</p>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="inverse_005fjacobi_005fdc"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002finverse_005fjacobi_005fdc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inverse_005fjacobi_005fdc"><span class="category-def">Function: </span><span><strong class="def-name">inverse_jacobi_dc</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-inverse_005fjacobi_005fdc'> &para;</a></span></dt>
+<dd><p>The inverse of the Jacobian elliptic function 
+\({\rm
+dc}(u,m).\)
+ For 
+\(1 \le u,\)
+ it can also be written (<a class="url" href="https://dlmf.nist.gov/22.15.E18">DLMF 22.15.E18</a>):
+$$
+{\rm inverse\_jacobi\_dc}(u, m) = \int_1^u {dt\over \sqrt{(t^2-1)(t^2-m)}}
+$$
+</p>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-functions">Elliptic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-Elliptic_002fnode_002fFunctions-and-Variables-for-Elliptic-Integrals"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Elliptic-Integrals">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Functions-and-Variables-for-Elliptic-Functions" accesskey="p" rel="prev">Functions and Variables for Elliptic Functions</a>, Up: <a href="#Elliptic-Functions" accesskey="u" rel="up">Elliptic Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Elliptic-Integrals-1">16.3 Functions and Variables for Elliptic Integrals</h3>
+
+<a class="anchor" id="elliptic_005ff"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002felliptic_005ff"></a><dl class="first-deffn">
+<dt class="deffn" id="index-elliptic_005ff"><span class="category-def">Function: </span><span><strong class="def-name">elliptic_f</strong> <var class="def-var-arguments">(<var class="var">phi</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-elliptic_005ff'> &para;</a></span></dt>
+<dd><p>The incomplete elliptic integral of the first kind, defined as
+</p>
+$$
+\int_0^{\phi} {\frac{d\theta}{\sqrt{1-m\sin^2\theta}}}
+
+$$
+
+
+<p>See also <a class="ref" href="#elliptic_005fe">elliptic_e</a> and <a class="ref" href="#elliptic_005fkc">elliptic_kc</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="elliptic_005fe"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002felliptic_005fe"></a><dl class="first-deffn">
+<dt class="deffn" id="index-elliptic_005fe"><span class="category-def">Function: </span><span><strong class="def-name">elliptic_e</strong> <var class="def-var-arguments">(<var class="var">phi</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-elliptic_005fe'> &para;</a></span></dt>
+<dd><p>The incomplete elliptic integral of the second kind, defined as
+</p>
+$$
+\int_0^\phi {\sqrt{1 - m\sin^2\theta}}\, d\theta
+
+$$
+
+
+<p>See also <a class="ref" href="#elliptic_005ff">elliptic_f</a> and <a class="ref" href="#elliptic_005fec">elliptic_ec</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="elliptic_005feu"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002felliptic_005feu"></a><dl class="first-deffn">
+<dt class="deffn" id="index-elliptic_005feu"><span class="category-def">Function: </span><span><strong class="def-name">elliptic_eu</strong> <var class="def-var-arguments">(<var class="var">u</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-elliptic_005feu'> &para;</a></span></dt>
+<dd><p>The incomplete elliptic integral of the second kind, defined as
+</p>
+$$
+E(u, m) = \int_0^u {\rm dn}(v, m)\, dv  = \int_0^\tau \sqrt{\frac{1-m t^2}{1-t^2}}\, dt
+
+$$
+
+
+<p>where 
+\(\tau = {\rm sn}(u,m)
+.\)
+</p>
+
+
+<p>This is related to <code class="code">elliptic_e</code> by
+</p>
+$$
+E(u,m) = E(\sin^{-1} {\rm sn}(u, m), m)
+
+$$
+
+
+<p>See also <a class="ref" href="#elliptic_005fe">elliptic_e</a>.
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</p></dd></dl>
+
+<a class="anchor" id="elliptic_005fpi"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002felliptic_005fpi"></a><dl class="first-deffn">
+<dt class="deffn" id="index-elliptic_005fpi"><span class="category-def">Function: </span><span><strong class="def-name">elliptic_pi</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">phi</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-elliptic_005fpi'> &para;</a></span></dt>
+<dd><p>The incomplete elliptic integral of the third kind, defined as
+</p>
+$$
+\int_0^\phi {{d\theta}\over{(1-n\sin^2 \theta)\sqrt{1 - m\sin^2\theta}}}
+
+$$
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="elliptic_005fkc"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002felliptic_005fkc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-elliptic_005fkc"><span class="category-def">Function: </span><span><strong class="def-name">elliptic_kc</strong> <var class="def-var-arguments">(<var class="var">m</var>)</var><a class="copiable-link" href='#index-elliptic_005fkc'> &para;</a></span></dt>
+<dd><p>The complete elliptic integral of the first kind, defined as
+</p>
+$$
+\int_0^{\frac{\pi}{2}} {{d\theta}\over{\sqrt{1 - m\sin^2\theta}}}
+
+$$
+
+
+<p>For certain values of <em class="math tex2jax_process">\(m\)</em>, the value of the integral is known in
+terms of <em class="math tex2jax_process">\(Gamma\)</em> functions.  Use <code class="code"><a class="ref" href="maxima_14.html#makegamma">makegamma</a></code> to evaluate them.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="elliptic_005fec"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002felliptic_005fec"></a><dl class="first-deffn">
+<dt class="deffn" id="index-elliptic_005fec"><span class="category-def">Function: </span><span><strong class="def-name">elliptic_ec</strong> <var class="def-var-arguments">(<var class="var">m</var>)</var><a class="copiable-link" href='#index-elliptic_005fec'> &para;</a></span></dt>
+<dd><p>The complete elliptic integral of the second kind, defined as
+</p>
+$$
+\int_0^{\frac{\pi}{2}} \sqrt{1 - m\sin^2\theta}\, d\theta
+
+$$
+
+
+<p>For certain values of <em class="math tex2jax_process">\(m\)</em>, the value of the integral is known in
+terms of <em class="math tex2jax_process">\(Gamma\)</em> functions.  Use <code class="code"><a class="ref" href="maxima_14.html#makegamma">makegamma</a></code> to evaluate them.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="carlson_005frc"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fcarlson_005frc"></a><dl class="first-deffn">
+<dt class="deffn" id="index-carlson_005frc"><span class="category-def">Function: </span><span><strong class="def-name">carlson_rc</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>)</var><a class="copiable-link" href='#index-carlson_005frc'> &para;</a></span></dt>
+<dd><p>Carlson&rsquo;s RC integral is defined by
+</p>
+$$
+R_C(x, y) = \frac{1}{2} \int_0^{\infty} \frac{1}{\sqrt{t+x}(t+y)}\, dt
+
+$$
+
+
+<p>This integral is related to many elementary functions in the following
+way:
+</p>
+$$
+\eqalign{
+\log x &= (x-1) R_C\left(\left({\frac{1+x}{2}}\right)^2, x\right), \quad x > 0 \cr
+\sin^{-1} x &= x R_C(1-x^2, 1), \quad |x| \le 1 \cr
+\cos^{-1} x &= \sqrt{1-x^2} R_C(x^2,1), \quad 0 \le x \le 1  \cr
+\tan^{-1} x &= x  R_C(1,1+x^2)  \cr
+\sinh^{-1} x &= x  R_C(1+x^2,1)  \cr
+\cosh^{-1} x &= \sqrt{x^2-1}  R_C(x^2,1), \quad x \ge 1  \cr
+\tanh^{-1}(x) &= x  R_C(1,1-x^2), \quad |x| \le 1
+}
+
+$$
+
+
+<p>Also, we have the relationship
+</p>
+$$
+R_C(x,y) = R_F(x,y,y)
+
+$$
+
+
+<p>Some special values:
+$$
+\eqalign{R_C(0, 1) &= \frac{\pi}{2} \cr
+R_C(0, 1/4) &= \pi \cr
+R_C(2,1) &= \log(\sqrt{2} + 1) \cr
+R_C(i,i+1) &= \frac{\pi}{4} + \frac{i}{2} \log(\sqrt{2}-1) \cr
+R_C(0,i) &= (1-i)\frac{\pi}{2\sqrt{2}} \cr
+}
+
+$$
+</p>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="carlson_005frd"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fcarlson_005frd"></a><dl class="first-deffn">
+<dt class="deffn" id="index-carlson_005frd"><span class="category-def">Function: </span><span><strong class="def-name">carlson_rd</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-carlson_005frd'> &para;</a></span></dt>
+<dd><p>Carlson&rsquo;s RD integral is defined by
+</p>
+$$
+R_D(x,y,z) = \frac{3}{2} \int_0^{\infty} \frac{1}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}\,(t+z)}\, dt
+
+$$
+
+
+<p>We also have the special values
+</p>
+$$
+\eqalign{
+R_D(x,x,x) &= x^{-\frac{3}{2}} \cr
+R_D(0,y,y) &= \frac{3}{4} \pi y^{-\frac{3}{2}} \cr
+R_D(0,2,1) &= 3 \sqrt{\pi} \frac{\Gamma(\frac{3}{4})}{\Gamma(\frac{1}{4})}
+}
+
+$$
+
+
+
+<p>It is also related to the complete elliptic E function as follows
+</p>
+$$
+E(m) = R_F(0, 1 - m, 1) - \frac{m}{3} R_D(0, 1 - m, 1)
+
+$$
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="carlson_005frf"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fcarlson_005frf"></a><dl class="first-deffn">
+<dt class="deffn" id="index-carlson_005frf"><span class="category-def">Function: </span><span><strong class="def-name">carlson_rf</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">z</var>)</var><a class="copiable-link" href='#index-carlson_005frf'> &para;</a></span></dt>
+<dd><p>Carlson&rsquo;s RF integral is defined by
+</p>
+$$
+R_F(x,y,z) = \frac{1}{2} \int_0^{\infty} \frac{1}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}}\, dt
+
+$$
+
+
+<p>We also have the special values
+</p>
+$$
+\eqalign{
+R_F(0,1,2)  &= \frac{\Gamma({\frac{1}{4}})^2}{4\sqrt{2\pi}} \cr
+R_F(i,-i,0) &= \frac{\Gamma({\frac{1}{4}})^2}{4\sqrt{\pi}}
+}
+
+$$
+
+
+<p>It is also related to the complete elliptic E function as follows
+</p>
+$$
+E(m) = R_F(0, 1 - m, 1) - \frac{m}{3} R_D(0, 1 - m, 1)
+
+$$
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="carlson_005frj"></a><a class="anchor" id="Item_003a-Elliptic_002fdeffn_002fcarlson_005frj"></a><dl class="first-deffn">
+<dt class="deffn" id="index-carlson_005frj"><span class="category-def">Function: </span><span><strong class="def-name">carlson_rj</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">z</var>, <var class="var">p</var>)</var><a class="copiable-link" href='#index-carlson_005frj'> &para;</a></span></dt>
+<dd><p>Carlson&rsquo;s RJ integral is defined by
+</p>
+$$
+R_J(x,y,z) = \frac{1}{2} \int_0^{\infty} \frac{1}{\sqrt{t+x}\sqrt{t+y}\sqrt{t+z}\,(t+p)}\, dt
+
+$$
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Elliptic-integrals">Elliptic integrals</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_16.html#Limits" accesskey="n" rel="next">Limits</a>, Previous: <a href="maxima_14.html#Special-Functions" accesskey="p" rel="prev">Special Functions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

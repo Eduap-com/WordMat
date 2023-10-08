@@ -1,0 +1,1167 @@
+/*************** -*- Mode: MACSYMA; Package: MAXIMA -*-  ******************/
+/***************************************************************************
+***                                                                    *****
+***     Copyright (c) 1984 by William Schelter,University of Texas     *****
+***     All rights reserved                                            *****
+***************************************************************************/
+
+
+kill(functions,arrays,values);
+done$
+use_fast_arrays:false;
+false;
+a[n]:=n*a[n-1];
+a[n]:=n*a[n-1]$
+a[0]:1;
+1$
+a[5];
+120$
+a[n]:=n;
+a[n]:=n$
+a[6];
+6$
+a[4];
+24$
+(use_fast_arrays:true,kill(a));
+done;
+lambda([x,y,z],x^2+y^2+z^2);
+lambda([x,y,z],x^2+y^2+z^2)$
+%(1,2,a);
+a^2+5$
+1+2+a;
+a+3$
+exp:[x^2,y/3,-2];
+[x^2,y/3,-2]$
+%[1]*x;
+x^3$
+[a,exp,%];
+[a,[x^2,y/3,-2],x^3]$
+m:matrix([a,0],[b,1]);
+matrix([a,0],[b,1])$
+m^2;
+matrix([a^2,0],[b^2,1])$
+exp:m . m;
+matrix([a^2,0],[a*b+b,1])$
+m[1,1]*m;
+matrix([a^2,0],[a*b,a])$
+%-exp+1;
+matrix([1,1],[1-b,a])$
+m^^(-1);
+matrix([1/a,0],[-b/a,1])$
+[x,y] . m;
+matrix([b*y+a*x,y])$
+matrix([a,b,c],[d,e,f],[g,h,i]);
+matrix([a,b,c],[d,e,f],[g,h,i])$
+%^^2;
+matrix([c*g+b*d+a^2,c*h+b*e+a*b,c*i+b*f+a*c],
+       [f*g+d*e+a*d,f*h+e^2+b*d,f*i+e*f+c*d],
+       [g*i+d*h+a*g,h*i+e*h+b*g,i^2+f*h+c*g])$
+exp:x+1 = y^2;
+x+1 = y^2$
+x-1 = 2*y+1;
+x-1 = 2*y+1$
+exp+%;
+2*x = y^2+2*y+1$
+exp/y;
+(x+1)/y = y$
+1/%;
+y/(x+1) = 1/y$
+fib[n]:=if n = 1 or n = 2 then 1 else fib[n-1]+fib[n-2];
+fib[n]:=if n = 1 or n = 2 then 1 else fib[n-1]+fib[n-2]$
+fib[1]+fib[2];
+2$
+fib[3];
+2$
+fib[5];
+5$
+eta(mu,nu):=if mu = nu then mu else (if mu > nu then mu-nu else mu+nu);
+eta(mu,nu):=if mu = nu then mu else (if mu > nu then mu-nu else mu+nu)$
+eta(5,6);
+11$
+eta(eta(7,7),eta(1,2));
+4$
+if not 5 >= 2 and 6 <= 5 or 4+1 > 3 then a else b;
+a$
+kill(f);
+done$
+
+kill(x,y,z);
+done$
+determinant(hessian(x^3-3*a*x*y*z+y^3,[x,y,z]));
+-3*a*y*(9*a^2*x*z+18*a*y^2)-27*a^3*x*y*z-54*a^2*x^3$
+
+subst(1,z,quotient(%,-54*a^2));
+y^3+a*x*y+x^3$
+f(x):=block([a,y],local(a),y:4,a[y]:x,display(a[y]));
+f(x):=block([a,y],local(a),y:4,a[y]:x,display(a[y]))$
+y:2;
+2$
+a[y+2]:0;
+0$
+f(9);
+done$
+a[y+2];
+0$
+
+(use_fast_arrays : false, kill(a), 0);
+0$
+
+/* ensure that matrix construction works as advertised */
+(L : makelist ([i], i, 1, 100), apply (matrix, L), [op (%%), args (%%)]);
+[matrix, ''(makelist ([i], i, 1, 100))];
+
+(L : makelist ([i], i, 1, 100), apply (matrix, L), transpose (%%));
+''(matrix (tree_reduce (append, L)));   /* call tree_reduce instead of append because GCL barfs ... */
+
+(matrix (), [op (%%), args (%%)]);
+[matrix, []];
+
+/* construct a matrix of modest size */
+(apply (matrix, makelist ([i], i, 1, 1000)), 0);
+0;
+
+/* construct a matrix of modest size */
+(apply (matrix, makelist ([i], i, 1, 10000)), 0);
+0;
+
+/* verify that arguments are evaluated exactly once */
+block ([a : b, b : c, c: d, d : 1], matrix ([a, b], [c, d]), [op (%%), args (%%)]);
+[matrix, '[[b, c], [d, 1]]];
+
+/* verify that arguments are evaluated exactly once */
+block ([a : b, b : c, c: d, d : 1, L1 : '[a, b], L2 : '[c, d]], matrix (L1, L2), [op (%%), args (%%)]);
+[matrix, '[[a, b], [c, d]]];
+
+/* another evaluation puzzle, derived from discussion on mailing list circa 2013-10-28 */
+
+(kill (q, x),
+ q : '[[x]],
+ x : 3,
+ apply (matrix, q));
+matrix ([x]);
+
+/* a more elaborate version of the preceding evaluation puzzle;
+ * result not checked for correctness
+ */
+
+(kill (all),
+ load (diag),
+ A : matrix ([a, 1], [1, 0]),
+ integer_pow(x) := block ([k], declare (k, integer), x^k),
+ mat_function (integer_pow, A));
+
+matrix([(sqrt(a^2+4)-a)^(k+1)*2^(-k-1)*(-1)^k
+         /((sqrt(a^2+4)+a)/2+(sqrt(a^2+4)-a)/2)
+         +(sqrt(a^2+4)+a)^(k+1)*2^(-k-1)
+          /((sqrt(a^2+4)+a)/2+(sqrt(a^2+4)-a)/2),
+        (sqrt(a^2+4)+a)^k/(((sqrt(a^2+4)+a)/2+(sqrt(a^2+4)-a)/2)*2^k)
+         -(sqrt(a^2+4)-a)^k*(-1)^k/(((sqrt(a^2+4)+a)/2+(sqrt(a^2+4)-a)/2)
+                                   *2^k)],
+       [(sqrt(a^2+4)-a)*(sqrt(a^2+4)+a)^(k+1)*2^(-k-2)
+         /((sqrt(a^2+4)+a)/2+(sqrt(a^2+4)-a)/2)
+         -(sqrt(a^2+4)-a)^(k+1)*(sqrt(a^2+4)+a)*2^(-k-2)*(-1)^k
+          /((sqrt(a^2+4)+a)/2+(sqrt(a^2+4)-a)/2),
+        (sqrt(a^2+4)-a)^k*(sqrt(a^2+4)+a)*2^(-k-1)*(-1)^k
+         /((sqrt(a^2+4)+a)/2+(sqrt(a^2+4)-a)/2)
+         +(sqrt(a^2+4)-a)*(sqrt(a^2+4)+a)^k*2^(-k-1)
+          /((sqrt(a^2+4)+a)/2+(sqrt(a^2+4)-a)/2)]);
+
+kill (all);
+done;
+
+/* should trigger an error */
+errcatch (matrix ([1], [1, 2]));
+[];
+
+/* should trigger an error */
+errcatch (matrix ([1], '(a + b)));
+[];
+
+/* SF bug # 3014545 "submatrix does not work as expected"
+ * works for me, throw in these tests to make sure
+ */
+
+(submatrix (10, 20, zeromatrix (20, 20)), [length (%%), length (%%[1])]);
+[18, 20];
+
+(kill (F), F : 1 + zeromatrix (5, 5), submatrix (2, 5, F, 2, 5));
+matrix ([1, 1, 1], [1, 1, 1], [1, 1, 1]);
+
+submatrix (3, 5, F, 3, 5);
+matrix ([1, 1, 1], [1, 1, 1], [1, 1, 1]);
+
+F;
+matrix ([1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]);
+
+(F : matrix ([1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]),
+ submatrix (F, 2, 4));
+matrix ([1, 3], [5, 7], [9, 11]);
+
+submatrix (1, 3, F);
+matrix ([5, 6, 7, 8]);
+
+/* next one is mostly just to ensure it doesn't trigger an error */
+submatrix (1, 2, 3, F);
+matrix ();
+
+/* next one is mostly just to ensure it doesn't trigger an error */
+submatrix (F, 1, 2, 3, 4);
+matrix ([], [], []);
+
+F;
+matrix ([1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]);
+
+submatrix (F);
+matrix ([1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]);
+
+/* name collision with special variables in 1-d output
+ * see mailing list circa 2012-01-09, "invert_by_lu does not work as expected"
+ */
+
+invert_by_lu (matrix ([v [0]]));
+matrix ([1 / v [0]]);
+
+/* additional tests for invert */
+
+/* Attempting to verify the effect of the ratmx and detout ev flags
+ * is quite a mess. ratmx produces CRE but the parser produces 
+ * expressions which have a different operator (RAT, versus MRAT for CRE).
+ * detout produces an unsimplified "*" expression, which is quite
+ * readily simplified away; I am reminded of 19th century efforts to
+ * isolate halogens and alkali metals. Anyway, we'll do what we can.
+ */
+
+/* symbolic elements */
+
+(kill (M, M1), M : matrix ([a, b], [c, d]), 0);
+0;
+
+M1 : invert (M), ratsimp;
+matrix([d/(a*d-b*c),-b/(a*d-b*c)],[-c/(a*d-b*c),a/(a*d-b*c)]);
+
+ratsimp ([M1 . M, M . M1]);
+[matrix ([1, 0], [0, 1]), matrix ([1, 0], [0, 1])];
+
+is (invert (M) = M^^-1);
+true;
+
+(M1 : ev (invert (M), detout=true, doscmxops=false, doallmxops=false),
+ block ([inflag:true], [op (M1), ratsimp (args (M1))]));
+["*",[1/(a*d-b*c),matrix([d,-b],[-c,a])]];
+
+is (invert (M) = M^^-1), detout=true, doscmxops=false, doallmxops=false;
+true;
+
+block ([foo : matrix([d/(d*a-c*b),-(b/(d*a-c*b))],[-(c/(d*a-c*b)),a/(d*a-c*b)])],
+ ev (invert (M), ratmx=true), if equal (%%, foo) then true else %%);
+true;
+
+is (invert (M) = M^^-1), ratmx=true;
+true;
+
+block ([foo : ev (invert (M), ratmx=true, detout=true, doscmxops=false, doallmxops=false)],
+  [op (foo), first (foo), second (foo)],
+  if equal (%%, ["/", matrix ([d, -b], [-c, a]), a*d - b*c]) then true else %%);
+true;
+
+is (invert (M) = M^^-1), ratmx=true, detout=true, doscmxops=false, doallmxops=false;
+true;
+
+/* bigfloat elements */
+
+(M : ev (M, a = 1b0, b = 2b0, c = 3b0, d = -4b0), 0);
+0;
+
+invert (M);
+matrix([4.0b-1,2.0b-1],[3.0b-1,-1.0b-1]);
+
+is (invert (M) = M^^-1);
+true;
+
+(M1 : ev (invert (M), detout=true, doscmxops=false, doallmxops=false),
+ ev ([op (M1), args (M1)], simp=false, inflag=true));
+["*", [-0.1b0, matrix([-4.0b0, -2.0b0], [-3.0b0, 1.0b0])]];
+
+is (invert (M) = M^^-1), detout=true, doscmxops=false, doallmxops=false;
+true;
+
+(M1 : ev (invert (M), ratmx=true),
+ if every (ratp, M1) and equal (M1, matrix ([2/5, 1/5], [3/10, -(1/10)])) then true else M1);
+true;
+
+is (invert (M) = M^^-1), ratmx=true;
+true;
+
+(M1 : ev (invert (M), ratmx=true, detout=true, doscmxops=false, doallmxops=false),
+ [o, a] : ev ([op (M1), args (M1)], simp=false, inflag=true),
+ if ?caar (a [1]) = ?rat and every (ratp (a [2])) and equal (%%, ["*", [-1/10, matrix ([-4, -2], [-3, 1])]]) then true else %%);
+true;
+
+is (invert (M) = M^^-1), ratmx=true, detout=true, doscmxops=false, doallmxops=false;
+true;
+
+/* float elements */
+
+(M : float (M), 0);
+0;
+
+invert (M);
+matrix([4.0e-1,2.0e-1],[3.0e-1,-1.0e-1]);
+
+is (invert (M) = M^^-1);
+true;
+
+(M1 : ev (invert (M), detout=true, doscmxops=false, doallmxops=false),
+ ev ([op (M1), args (M1)], simp=false, inflag=true));
+["*", [-0.1e0, matrix([-4.0e0, -2.0e0], [-3.0e0, 1.0e0])]];
+
+is (invert (M) = M^^-1), detout=true, doscmxops=false, doallmxops=false;
+true;
+
+(M1 : ev (invert (M), ratmx=true),
+ if every (ratp, M1) and equal (M1, matrix ([2/5, 1/5], [3/10, -(1/10)])) then true else M1);
+true;
+
+is (invert (M) = M^^-1), ratmx=true;
+true;
+
+(M1 : ev (invert (M), ratmx=true, detout=true, doscmxops=false, doallmxops=false),
+ [o, a] : ev ([op (M1), args (M1)], simp=false, inflag=true),
+ if ?caar (a [1]) = ?rat and every (ratp (a [2])) and equal (%%, ["*", [-1/10, matrix ([-4, -2], [-3, 1])]]) then true else %%);
+true;
+
+is (invert (M) = M^^-1), ratmx=true, detout=true, doscmxops=false, doallmxops=false;
+true;
+
+/* handle detout=true correctly when determinant=1
+ * reported to mailing list 2015-01-22, "Matrix inversion with detout = true?"
+ */
+M : ident (4) $
+matrix ([1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]) $
+
+M^^-1, detout=true, doscmxops=false, doallmxops=false;
+matrix ([1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]) $
+
+/* test the various matrix inversion functions to make sure they all handle detout correctly */
+
+M^^-1, detout=true, doscmxops=false, doallmxops=false, invert_method='adjoint;
+matrix ([1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]) $
+
+M^^-1, detout=true, doscmxops=false, doallmxops=false, invert_method='lu;
+matrix ([1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]) $
+
+M^^-1, detout=true, doscmxops=false, doallmxops=false, invert_method='gausselim;
+matrix ([1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]) $
+
+M : matrix ([17, 29], [1, 42]);
+matrix ([17, 29], [1, 42]);
+
+(M1 : ev (M^^-1, detout=true, doscmxops=false, doallmxops=false, invert_method='adjoint),
+ block ([inflag:true], [op(M1), args(M1)]));
+["*",[1/685,matrix([42,-29],[-1,17])]] $
+ 
+(M1 : ev (M^^-1, detout=true, doscmxops=false, doallmxops=false, invert_method='lu),
+ block ([inflag:true], [op(M1), args(M1)]));
+["*",[1/685,matrix([42,-29],[-1,17])]] $
+ 
+(M1 : ev (M^^-1, detout=true, doscmxops=false, doallmxops=false, invert_method='gausselim),
+ block ([inflag:true], [op(M1), args(M1)]));
+["*",[1/685,matrix([42,-29],[-1,17])]] $
+ 
+ 
+/* a matrix of modest size, the subject of bug report #2362 */
+
+(M:matrix([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+ [0,1,0,-1,0,1,-1,-1,1,3,0,-3,0,3,1,-1,-3,-3,-1,1,3,3,-3,-3,3],
+ [0,0,1,0,-1,1,1,-1,-1,0,3,0,-3,1,3,3,1,-1,-3,-3,-1,3,3,-3,-3],
+ [0,1,0,1,0,1,1,1,1,9,0,9,0,9,1,1,9,9,1,1,9,9,9,9,9],
+ [0,0,1,0,1,1,1,1,1,0,9,0,9,1,9,9,1,1,9,9,1,9,9,9,9],
+ [0,0,0,0,0,1,-1,1,-1,0,0,0,0,3,3,-3,-3,3,3,-3,-3,9,-9,9,-9],
+ [0,1,0,-1,0,1,-1,-1,1,27,0,-27,0,27,1,-1,-27,-27,-1,1,27,27,-27,-27,27],
+ [0,0,0,0,0,1,1,-1,-1,0,0,0,0,9,3,3,9,-9,-3,-3,-9,27,27,-27,-27],
+ [0,0,0,0,0,1,-1,-1,1,0,0,0,0,3,9,-9,-3,-3,-9,9,3,27,-27,-27,27],
+ [0,0,1,0,-1,1,1,-1,-1,0,27,0,-27,1,27,27,1,-1,-27,-27,-1,27,27,-27,-27],
+ [0,1,0,1,0,1,1,1,1,81,0,81,0,81,1,1,81,81,1,1,81,81,81,81,81],
+ [0,0,0,0,0,1,-1,1,-1,0,0,0,0,27,3,-3,-27,27,3,-3,-27,81,-81,81,-81],
+ [0,0,0,0,0,1,1,1,1,0,0,0,0,9,9,9,9,9,9,9,9,81,81,81,81],
+ [0,0,0,0,0,1,-1,1,-1,0,0,0,0,3,27,-27,-3,3,27,-27,-3,81,-81,81,-81],
+ [0,0,1,0,1,1,1,1,1,0,81,0,81,1,81,81,1,1,81,81,1,81,81,81,81],
+ [0,0,0,0,0,1,1,-1,-1,0,0,0,0,81,3,3,81,-81,-3,-3,-81,243,243,-243,-243],
+ [0,0,0,0,0,1,-1,-1,1,0,0,0,0,27,9,-9,-27,-27,-9,9,27,243,-243,-243,243],
+ [0,0,0,0,0,1,1,-1,-1,0,0,0,0,9,27,27,9,-9,-27,-27,-9,243,243,-243,-243],
+ [0,0,0,0,0,1,-1,-1,1,0,0,0,0,3,81,-81,-3,-3,-81,81,3,243,-243,-243,243],
+ [0,0,0,0,0,1,1,1,1,0,0,0,0,81,9,9,81,81,9,9,81,729,729,729,729],
+ [0,0,0,0,0,1,-1,1,-1,0,0,0,0,27,27,-27,-27,27,27,-27,-27,729,-729,729,-729],
+ [0,0,0,0,0,1,1,1,1,0,0,0,0,9,81,81,9,9,81,81,9,729,729,729,729],
+ [0,0,0,0,0,1,1,-1,-1,0,0,0,0,81,27,27,81,-81,-27,-27,-81,2187,2187,-2187,-2187],
+ [0,0,0,0,0,1,-1,-1,1,0,0,0,0,27,81,-81,-27,-27,-81,81,27,2187,-2187,-2187,2187],
+ [0,0,0,0,0,1,1,1,1,0,0,0,0,81,81,81,81,81,81,81,81,6561,6561,6561,6561]),
+ invert (M));
+matrix([1,0,0,-10/9,-10/9,0,0,0,0,0,1/9,0,100/81,0,1/9,0,0,0,0,-10/81,0,-10/81,0,0,1/81],
+       [0,9/16,0,9/16,0,0,-1/16,0,-5/8,0,-1/16,0,-5/8,0,0,0,5/72,0,1/16,5/72,0,1/16,0,-1/144,-1/144],
+       [0,0,9/16,0,9/16,0,0,-5/8,0,-1/16,0,0,-5/8,0,-1/16,1/16,0,5/72,0,1/16,0,5/72,-1/144,0,-1/144],
+       [0,-9/16,0,9/16,0,0,1/16,0,5/8,0,-1/16,0,-5/8,0,0,0,-5/72,0,-1/16,5/72,0,1/16,0,1/144,-1/144],
+       [0,0,-9/16,0,9/16,0,0,5/8,0,1/16,0,0,-5/8,0,-1/16,-1/16,0,-5/72,0,1/16,0,5/72,1/144,0,-1/144],
+       [0,0,0,0,0,81/256,0,81/256,81/256,0,0,-9/256,81/256,-9/256,0,-9/256,-9/256,-9/256,-9/256,-9/256,1/256,-9/256,1/256,1/256,1/256],
+       [0,0,0,0,0,-81/256,0,81/256,-81/256,0,0,9/256,81/256,9/256,0,-9/256,9/256,-9/256,9/256,-9/256,-1/256,-9/256,1/256,-1/256,1/256],
+       [0,0,0,0,0,81/256,0,-81/256,-81/256,0,0,-9/256,81/256,-9/256,0,9/256,9/256,9/256,9/256,-9/256,1/256,-9/256,-1/256,-1/256,1/256],
+       [0,0,0,0,0,-81/256,0,-81/256,81/256,0,0,9/256,81/256,9/256,0,9/256,-9/256,9/256,-9/256,-9/256,-1/256,-9/256,-1/256,1/256,1/256],
+       [0,-1/48,0,-1/144,0,0,1/48,0,5/216,0,1/144,0,5/648,0,0,0,-5/216,0,-1/432,-5/648,0,-1/1296,0,1/432,1/1296],
+       [0,0,-1/48,0,-1/144,0,0,5/216,0,1/48,0,0,5/648,0,1/144,-1/432,0,-5/216,0,-1/1296,0,-5/648,1/432,0,1/1296],
+       [0,1/48,0,-1/144,0,0,-1/48,0,-5/216,0,1/144,0,5/648,0,0,0,5/216,0,1/432,-5/648,0,-1/1296,0,-1/432,1/1296],
+       [0,0,1/48,0,-1/144,0,0,-5/216,0,-1/48,0,0,5/648,0,1/144,1/432,0,5/216,0,-1/1296,0,-5/648,-1/432,0,1/1296],
+       [0,0,0,0,0,-3/256,0,-1/256,-3/256,0,0,3/256,-1/256,1/768,0,1/256,3/256,1/2304,1/768,1/256,-1/768,1/2304,-1/2304,-1/768,-1/2304],
+       [0,0,0,0,0,-3/256,0,-3/256,-1/256,0,0,1/768,-1/256,3/256,0,1/768,1/2304,3/256,1/256,1/2304,-1/768,1/256,-1/768,-1/2304,-1/2304],
+       [0,0,0,0,0,3/256,0,-3/256,1/256,0,0,-1/768,-1/256,-3/256,0,1/768,-1/2304,3/256,-1/256,1/2304,1/768,1/256,-1/768,1/2304,-1/2304],
+       [0,0,0,0,0,3/256,0,-1/256,3/256,0,0,-3/256,-1/256,-1/768,0,1/256,-3/256,1/2304,-1/768,1/256,1/768,1/2304,-1/2304,1/768,-1/2304],
+       [0,0,0,0,0,-3/256,0,1/256,3/256,0,0,3/256,-1/256,1/768,0,-1/256,-3/256,-1/2304,-1/768,1/256,-1/768,1/2304,1/2304,1/768,-1/2304],
+       [0,0,0,0,0,-3/256,0,3/256,1/256,0,0,1/768,-1/256,3/256,0,-1/768,-1/2304,-3/256,-1/256,1/2304,-1/768,1/256,1/768,1/2304,-1/2304],
+       [0,0,0,0,0,3/256,0,3/256,-1/256,0,0,-1/768,-1/256,-3/256,0,-1/768,1/2304,-3/256,1/256,1/2304,1/768,1/256,1/768,-1/2304,-1/2304],
+       [0,0,0,0,0,3/256,0,1/256,-3/256,0,0,-3/256,-1/256,-1/768,0,-1/256,3/256,-1/2304,1/768,1/256,1/768,1/2304,1/2304,-1/768,-1/2304],
+       [0,0,0,0,0,1/2304,0,1/6912,1/6912,0,0,-1/2304,1/20736,-1/2304,0,-1/6912,-1/6912,-1/6912,-1/6912,-1/20736,1/2304,-1/20736,1/6912,1/6912,1/20736],
+       [0,0,0,0,0,-1/2304,0,1/6912,-1/6912,0,0,1/2304,1/20736,1/2304,0,-1/6912,1/6912,-1/6912,1/6912,-1/20736,-1/2304,-1/20736,1/6912,-1/6912,1/20736],
+       [0,0,0,0,0,1/2304,0,-1/6912,-1/6912,0,0,-1/2304,1/20736,-1/2304,0,1/6912,1/6912,1/6912,1/6912,-1/20736,1/2304,-1/20736,-1/6912,-1/6912,1/20736],
+       [0,0,0,0,0,-1/2304,0,-1/6912,1/6912,0,0,1/2304,1/20736,1/2304,0,1/6912,-1/6912,1/6912,-1/6912,-1/20736,-1/2304,-1/20736,-1/6912,1/6912,1/20736])$
+
+/* 16 by 16 example from mailing list 2013-06-27 */
+
+(kill (K, invK),
+ K:matrix([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,494.5054945054945,-178.5714285714286,0,0,54.94505494505494,-13.73626373626375,0,-4.578754578754582,109.8901098901099,4.578754578754582,0,59.52380952380952,-73.26007326007327,-59.52380952380952],[0,0,-178.5714285714286,494.5054945054945,0,0,13.73626373626375,-302.1978021978022,0,-73.26007326007327,4.578754578754582,109.8901098901099,0,-73.26007326007327,-4.578754578754582,109.8901098901099],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,54.94505494505494,13.73626373626375,0,0,494.5054945054945,178.5714285714286,0,59.52380952380952,73.26007326007327,-59.52380952380952,0,-4.578754578754582,-109.8901098901099,4.578754578754582],[0,0,-13.73626373626375,-302.1978021978022,0,0,178.5714285714286,494.5054945054945,0,73.26007326007327,-4.578754578754582,-109.8901098901099,0,73.26007326007327,4.578754578754582,-109.8901098901099],[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[0,0,-4.578754578754582,-73.26007326007327,0,0,59.52380952380952,73.26007326007327,0,110.2389673818245,19.84126984126984,-48.49119134833421,0,7.674864817721962,-19.84126984126984,-22.85016570730857],[0,0,109.8901098901099,4.578754578754582,0,0,73.26007326007327,-4.578754578754582,0,19.84126984126984,110.2389673818245,-19.84126984126984,0,19.84126984126984,-48.49119134833421,-19.84126984126984],[0,0,4.578754578754582,109.8901098901099,0,0,-59.52380952380952,-109.8901098901099,0,-48.49119134833421,-19.84126984126984,110.2389673818245,0,-22.85016570730857,19.84126984126984,7.674864817721962],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],[0,0,59.52380952380952,-73.26007326007327,0,0,-4.578754578754582,73.26007326007327,0,7.674864817721962,19.84126984126984,-22.85016570730857,0,110.2389673818245,-19.84126984126984,-48.49119134833421],[0,0,-73.26007326007327,-4.578754578754582,0,0,-109.8901098901099,4.578754578754582,0,-19.84126984126984,-48.49119134833421,19.84126984126984,0,-19.84126984126984,110.2389673818245,19.84126984126984],[0,0,-59.52380952380952,109.8901098901099,0,0,4.578754578754582,-109.8901098901099,0,-22.85016570730857,-19.84126984126984,7.674864817721962,0,-48.49119134833421,19.84126984126984,110.2389673818245]),
+ invK : invert (K),
+ is (mat_norm (K . invK - ident (16), inf) < 1e-14));
+true;
+
+/* 4 by 4 example from mailing list 2013-04-16 */
+
+(kill (invert_R_from_RealRefraction, R_from_RealRefraction, G, u, a, b, c, d),
+ R_from_RealRefraction: matrix(
+ [   G[a]^2-1,     -G[a]*u[a,1],   -G[a]*u[a,2] ,     -G[a]*u[a,3]   ],
+ [   -G[b]*u[b,1],  1+u[b,1]^2,       u[b,1]*u[b,2],    u[b,1]*u[b,3]  ],
+ [   -G[c]*u[c,2],  u[c,2]*u[c,1],    1+u[c,2]^2,       u[c,2]*u[c,3]  ],
+ [   -G[d]*u[d,3],  u[d,3]*u[d,1],    u[d,3]*u[d,2],    1+u[d,3]^2     ]
+ ),
+ invert_R_from_RealRefraction: invert(R_from_RealRefraction),
+ ratsimp (invert_R_from_RealRefraction . R_from_RealRefraction - ident (4)));
+matrix ([0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]);
+
+/* invert_by_adjoint exists */
+
+(kill (foo, foo_inv),
+ foo : matrix ([1, 7, -20], [-1, 4, -2], [3, -2, 7]),
+ foo_inv : invert_by_adjoint (foo),
+ foo . foo_inv);
+matrix ([1, 0, 0], [0, 1, 0], [0, 0, 1]);
+
+/* invert_by_gausselim exists */
+
+(kill (foo, foo_inv),
+ foo : matrix ([1, 7, -20], [-1, 4, -2], [3, -2, 7]),
+ foo_inv : invert_by_gausselim (foo),
+ foo . foo_inv);
+matrix ([1, 0, 0], [0, 1, 0], [0, 0, 1]);
+
+/* end additional tests for invert */
+
+/* float inf / SIGN1 mischief -- see also rtest_extra */
+
+block ([I, M],
+  I:87^611,
+  M:91^211,
+  sign(sqrt(I)-M));
+pos;
+
+/* verify that verbify is not applied to array name
+ * SF bug #2865: "Use exp as a list"
+ */
+exp : [1, 2, 3];
+[1, 2, 3];
+
+exp[1] : 123;
+123;
+
+exp;
+[123, 2, 3];
+
+exp[1];
+123;
+
+remvalue (exp);
+[exp];
+
+/* further tests */
+
+/* verify that $array does not apply $verbify to array name */
+
+(kill (foo),
+ apply (array, [nounify ('foo), 10]),
+ member (nounify ('foo), arrays));
+true;
+
+/* verify that arrstore does not apply $verbify to array name */
+
+((nounify ('foo)) [0] :: 123,
+ first (listarray (nounify ('foo))));
+123;
+
+'foo[1];
+'foo[1];
+
+ev ('foo[1], nouns);
+foo[1];
+
+/* verify that mdefine does not apply $verbify to array function name */
+
+(kill (foo, x, a), define (funmake (arraymake (nounify ('foo), [x]), [a]), x^a));
+'foo[x](a) := x^a;
+
+member (nounify (foo), arrays);
+true;
+
+/* verify that mdefine does not apply $verbify to function name */
+
+(kill (bar), define (funmake (nounify ('bar), ['x]), 2*'x), 0);
+0;
+
+(nounify ('bar))(u);
+'bar(u);
+
+ev ('bar(u), nouns);
+bar(u);
+
+/* verify that consfundef does not apply $verbify to function name */
+
+apply (fundef, [nounify ('bar)]);
+'bar(x) := 2*x;
+
+/* verify that consfundef does not apply $verbify to array function name */
+
+apply (fundef, [nounify ('foo)]);
+'foo[x](a) := x^a;
+
+/* function and array names which are strings are verbified, however */
+
+"bar"(x) := 1 + x;
+bar(x) := 1 + x;
+
+bar(u);
+1 + u;
+
+"bar"(z);
+1 + z;
+
+fundef (bar);
+bar(x) := 1 + x;
+
+fundef ("bar");
+bar(x) := 1 + x;
+
+member ('(bar(x)), functions);
+true;
+
+"baz"[x] := x^2;
+baz[x] := x^2;
+
+baz[10];
+100;
+
+"baz"[11];
+121;
+
+"quux"[u](v) := u - v;
+quux[u](v) := u - v;
+
+member (baz, arrays);
+true;
+
+member (quux, arrays);
+true;
+
+/* Bug #481: ('m)[1] (meval) */
+('m)[1];
+m[1];
+
+('m)(1);
+m(1);
+
+kill (functions, arrays);
+done;
+
+/* Verify that we catch malformed lambda expressions when they are simplified.
+ * These used to only be checked for if/when lambda expressions were applied
+ * to arguments.
+ */
+
+/* no parameter list */
+errcatch (lambda ())$
+[];
+
+/* empty body */
+errcatch (lambda ([x]))$
+[];
+
+/* non-symbol in parameter list */
+errcatch (lambda ([42], 'foo))$
+[];
+
+/* misplaced list parameter (for optional arguments) */
+errcatch (lambda ([[l], x], 'foo))$
+[];
+
+/* invalid list parameter (for optional arguments) */
+errcatch (lambda ([[l1, l2]], 'foo))$
+[];
+
+/* attempting to bind a constant is allowed */
+block ([c],
+  local (c),
+  declare (c, constant),
+  errcatch (lambda ([c], c)))$
+[lambda([c], c)];
+
+/* Verify that the parameter/variable lists of functions, lambda expressions,
+ * macros and blocks cannot contain duplicate variables.  Lots of cases...
+ */
+
+errcatch (foo (x, x) := x)$
+[];
+
+errcatch (foo (x, 'x) := x)$
+[];
+
+errcatch (foo (x, [x]) := x)$
+[];
+
+errcatch (foo (x, ['x]) := x)$
+[];
+
+errcatch (foo [x, x] := x)$
+[];
+
+errcatch (foo [x] (y, y) := y)$
+[];
+
+errcatch (foo [x] (y, 'y) := y)$
+[];
+
+errcatch (foo [x] (y, [y]) := y)$
+[];
+
+errcatch (foo [x] (y, ['y]) := y)$
+[];
+
+errcatch (foo [x, x] (y) := y)$
+[];
+
+errcatch (lambda ([x, x], x))$
+[];
+
+errcatch (lambda ([x, 'x], x))$
+[];
+
+errcatch (lambda ([x, [x]], x))$
+[];
+
+errcatch (lambda ([x, ['x]], x))$
+[];
+
+errcatch (foo (x, x) ::= x)$
+[];
+
+errcatch (foo (x, [x]) ::= x)$
+[];
+
+errcatch (block ([x, x], x))$
+[];
+
+errcatch (block ([x, x:foo], x))$
+[];
+
+/* Verify some WNA checks
+ *
+ * The ev tests are significant.  Previously missing args were
+ * effectively replaced with false and extra args were ignored.
+ */
+
+errcatch (define ());
+[];
+
+errcatch (ev (define ()));
+[];
+
+errcatch (define (f (x)));
+[];
+
+errcatch (ev (define (f (x))));
+[];
+
+errcatch (define (f (x), foo, bar, baz));
+[];
+
+errcatch (ev (define (f (x), foo, bar, baz)));
+[];
+
+/* try to verify that save(...) handles arrays correctly */
+
+(kill (all),
+ myundeclared[1234, foo] : sin(bar),
+ myundeclared[bar, baz + 1] : cos(quux),
+ myundeclared[1729, u^2] : tan(bar),
+ myundeclared[mumble, 7] : 9876,
+ array (mydeclared, 1, 1, 1),
+ mydeclared[0, 0, 0] : bar + 0,
+ mydeclared[0, 0, 1] : bar + 1,
+ mydeclared[0, 1, 0] : bar + 2,
+ mydeclared[0, 1, 1] : bar + 3,
+ mydeclared[1, 0, 0] : bar + 4,
+ mydeclared[1, 0, 1] : bar + 5,
+ mydeclared[1, 1, 0] : bar + 6,
+ mydeclared[1, 1, 1] : bar + 7,
+ myvalue : make_array (fixnum, 2, 2, 2, 2),
+ myvalue[0, 0, 0, 0] : %pi + 1,
+ myvalue[1, 1, 1, 1] : %e - 1,
+ use_fast_arrays : true,
+ myfast[foo, bar, baz] : blurf,
+ myfast["mumble", "abc", "xy", "Z"] : 2*blurf,
+ myfast[sin(foo), 1 - baz] : 3*blurf,
+ reset (use_fast_arrays),
+ save (sconcat (maxima_tempdir, "/tmpsavearrays.lisp"), arrays, values),
+ 0);
+0;
+
+[arrays, values];
+[[myundeclared, mydeclared], [myvalue, myfast]];
+
+arrayinfo (myundeclared);
+[hashed, 2, [1234,foo],[1729,u^2],[bar,baz+1],[mumble,7]];
+
+listarray (myundeclared);
+[sin(bar), tan(bar), cos(quux), 9876];
+
+arrayinfo (mydeclared);
+[declared, 3, [1, 1, 1]];
+
+listarray (mydeclared);
+[bar, bar + 1, bar + 2, bar + 3, bar + 4, bar + 5, bar + 6, bar + 7];
+
+arrayinfo (myvalue);
+[declared, 4, [1, 1, 1, 1]]; /* "declared" seems wrong here ... oh well */
+
+listarray (myvalue);
+[%pi + 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, %e - 1];
+
+(arrayinfo (myfast), [%%[1], %%[2], sort (rest (%%, 2))]);
+[hash_table, true, [["mumble", "abc", "xy", "Z"], [foo, bar, baz], [sin(foo), 1 - baz]]];
+
+sort (listarray (myfast));
+[blurf, 2*blurf, 3*blurf];
+
+kill (myundeclared, mydeclared, myvalue, myfast);
+done;
+
+[arrays, values];
+[[], []];
+
+[errcatch (arrayinfo (myundeclared)),
+ errcatch (arrayinfo (mydeclared)),
+ errcatch (arrayinfo (myvalue)),
+ errcatch (arrayinfo (myfast))];
+[[], [], [], []];
+
+[errcatch (listarray (myundeclared)),
+ errcatch (listarray (mydeclared)),
+ errcatch (listarray (myvalue)),
+ errcatch (listarray (myfast))];
+[[], [], [], []];
+
+(load (sconcat (maxima_tempdir, "/tmpsavearrays.lisp")), 0);
+0;
+
+[arrays, values];
+[[myundeclared, mydeclared], [myvalue, myfast]];
+
+arrayinfo (myundeclared);
+[hashed, 2, [1234,foo],[1729,u^2],[bar,baz+1],[mumble,7]];
+
+listarray (myundeclared);
+[sin(bar), tan(bar), cos(quux), 9876];
+
+arrayinfo (mydeclared);
+[declared, 3, [1, 1, 1]];
+
+listarray (mydeclared);
+[bar, bar + 1, bar + 2, bar + 3, bar + 4, bar + 5, bar + 6, bar + 7];
+
+arrayinfo (myvalue);
+[declared, 4, [1, 1, 1, 1]]; /* "declared" seems wrong here ... oh well */
+
+listarray (myvalue);
+[%pi + 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, %e - 1];
+
+(arrayinfo (myfast), [%%[1], %%[2], sort (rest (%%, 2))]);
+[hash_table, true, [["mumble", "abc", "xy", "Z"], [foo, bar, baz], [sin(foo), 1 - baz]]];
+
+sort (listarray (myfast));
+[blurf, 2*blurf, 3*blurf];
+
+/* firstn, lastn */
+
+(kill (a, b, z), mylist : [a, 3, %pi, b, -2, %e, z, 0, %phi], 0);
+0;
+
+firstn (mylist, 0);
+[];
+
+firstn (mylist, 1);
+[a];
+
+firstn (mylist, 4);
+[a, 3, %pi, b];
+
+firstn (mylist, 8);
+[a, 3, %pi, b, -2, %e, z, 0];
+
+firstn (mylist, 9);
+[a, 3, %pi, b, -2, %e, z, 0, %phi];
+
+firstn (mylist, 10);
+[a, 3, %pi, b, -2, %e, z, 0, %phi];
+
+firstn (mylist, 100);
+[a, 3, %pi, b, -2, %e, z, 0, %phi];
+
+errcatch (firstn (mylist, -4));
+[];
+
+lastn (mylist, 0);
+[];
+
+lastn (mylist, 1);
+[%phi];
+
+lastn (mylist, 4);
+[%e, z, 0, %phi];
+
+lastn (mylist, 8);
+[3, %pi, b, -2, %e, z, 0, %phi];
+
+lastn (mylist, 9);
+[a, 3, %pi, b, -2, %e, z, 0, %phi];
+
+lastn (mylist, 10);
+[a, 3, %pi, b, -2, %e, z, 0, %phi];
+
+lastn (mylist, 100);
+[a, 3, %pi, b, -2, %e, z, 0, %phi];
+
+errcatch (lastn (mylist, -4));
+[];
+
+(kill (foo), fooexpr : funmake (foo, mylist), 0);
+0;
+
+firstn (fooexpr, 0);
+foo();
+
+firstn (fooexpr, 1);
+foo(a);
+
+firstn (fooexpr, 4);
+foo(a, 3, %pi, b);
+
+firstn (fooexpr, 8);
+foo(a, 3, %pi, b, -2, %e, z, 0);
+
+firstn (fooexpr, 9);
+foo(a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+firstn (fooexpr, 10);
+foo(a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+firstn (fooexpr, 100);
+foo(a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+errcatch (firstn (fooexpr, -4));
+[];
+
+lastn (fooexpr, 0);
+foo();
+
+lastn (fooexpr, 1);
+foo(%phi);
+
+lastn (fooexpr, 4);
+foo(%e, z, 0, %phi);
+
+lastn (fooexpr, 8);
+foo(3, %pi, b, -2, %e, z, 0, %phi);
+
+lastn (fooexpr, 9);
+foo(a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+lastn (fooexpr, 10);
+foo(a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+lastn (fooexpr, 100);
+foo(a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+errcatch (lastn (fooexpr, -4));
+[];
+
+(kill (bar), nary ("bar"));
+"bar";
+
+barexpr : apply ("bar", mylist);
+a bar 3 bar %pi bar b bar (-2) bar %e bar z bar 0 bar %phi;
+
+firstn (barexpr, 0);
+"bar"();
+
+firstn (barexpr, 1);
+"bar"(a);
+
+firstn (barexpr, 4);
+a bar 3 bar %pi bar b;
+
+firstn (barexpr, 8);
+a bar 3 bar %pi bar b bar (-2) bar %e bar z bar 0;
+
+firstn (barexpr, 9);
+a bar 3 bar %pi bar b bar (-2) bar %e bar z bar 0 bar %phi;
+
+firstn (barexpr, 10);
+a bar 3 bar %pi bar b bar (-2) bar %e bar z bar 0 bar %phi;
+
+firstn (barexpr, 100);
+a bar 3 bar %pi bar b bar (-2) bar %e bar z bar 0 bar %phi;
+
+errcatch (firstn (barexpr, -4));
+[];
+
+lastn (barexpr, 0);
+"bar"();
+
+lastn (barexpr, 1);
+"bar"(%phi);
+
+lastn (barexpr, 4);
+%e bar z bar 0 bar %phi;
+
+lastn (barexpr, 8);
+3 bar %pi bar b bar (-2) bar %e bar z bar 0 bar %phi;
+
+lastn (barexpr, 9);
+a bar 3 bar %pi bar b bar (-2) bar %e bar z bar 0 bar %phi;
+
+lastn (barexpr, 10);
+a bar 3 bar %pi bar b bar (-2) bar %e bar z bar 0 bar %phi;
+
+lastn (barexpr, 100);
+a bar 3 bar %pi bar b bar (-2) bar %e bar z bar 0 bar %phi;
+
+errcatch (lastn (barexpr, -4));
+[];
+
+(kill ("bar", baz, k), bazexpr : funmake (baz[k], mylist), 0);
+0;
+
+firstn (bazexpr, 0);
+baz[k]();
+
+firstn (bazexpr, 1);
+baz[k](a);
+
+firstn (bazexpr, 4);
+baz[k](a, 3, %pi, b);
+
+firstn (bazexpr, 8);
+baz[k](a, 3, %pi, b, -2, %e, z, 0);
+
+firstn (bazexpr, 9);
+baz[k](a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+firstn (bazexpr, 10);
+baz[k](a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+firstn (bazexpr, 100);
+baz[k](a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+errcatch (firstn (bazexpr, -4));
+[];
+
+lastn (bazexpr, 0);
+baz[k]();
+
+lastn (bazexpr, 1);
+baz[k](%phi);
+
+lastn (bazexpr, 4);
+baz[k](%e, z, 0, %phi);
+
+lastn (bazexpr, 8);
+baz[k](3, %pi, b, -2, %e, z, 0, %phi);
+
+lastn (bazexpr, 9);
+baz[k](a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+lastn (bazexpr, 10);
+baz[k](a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+lastn (bazexpr, 100);
+baz[k](a, 3, %pi, b, -2, %e, z, 0, %phi);
+
+errcatch (lastn (bazexpr, -4));
+[];
+
+/* bug reported to mailing list 2017-09-05: "compiling a function including sorting" */
+
+(kill(test), test(L):=sort(L,lambda([s,t],s[2]>t[2])), 0);
+0;
+
+(L:[[b,2],[a,1],[d,4],[c,3]], test (L));
+[[d,4],[c,3],[b,2],[a,1]];
+
+(compile (test), test (L));
+[[d,4],[c,3],[b,2],[a,1]];
+
+(mycmp (s, t) := s[2]>t[2], 0);
+0;
+
+sort (L, mycmp);
+[[d,4],[c,3],[b,2],[a,1]];
+
+(compile (mycmp), is (?fboundp (mycmp) # false));
+true;
+
+sort (L, mycmp);
+[[d,4],[c,3],[b,2],[a,1]];
+
+
+/* bug reported to mailing list 2017-12-21: "array() with use_fast_arrays: true" */
+
+(use_fast_arrays : true,
+ kill (a, b, a0, a1),
+ array ([a, b], 1),
+ map (?arrayp, %%));
+[true, true];
+
+map (?length, [a, b]);
+[2, 2];
+
+(a[0] : a0,
+ a[1] : a1,
+ listarray (a));
+[a0, a1];
+
+listarray (b);
+[false, false];
+
+(reset (), 0);
+0;
+
+/* mailing list 2017-12-28: "op('(do 1))" */
+
+(e : '(for i:111 thru 114 do push(i, L)),
+ [op(e), args(e)]);
+["do", [i,111,false,false,114,false,push(i,L)]];
+
+e1 : apply (funmake, ["do", '[i,111,false,false,114,false,push(i,L)]]);
+for i:111 thru 114 do push(i, L);
+
+block ([L:[]], ev(e1), L);
+[114, 113, 112, 111];
+
+(e : '(for x in [100, 200, 300] do push(x - 1, M)),
+ [op(e), args(e)]);
+["do_in", [x,[100,200,300],false,false,false,false,push(x-1,M)]];
+
+e1 : apply (funmake, ["do_in", '[x,[100,200,300],false,false,false,false,push(x-1,M)]]);
+for x in [100, 200, 300] do push(x - 1, M);
+
+block ([M:[]], ev(e1), M);
+[299, 199, 99];
+
+(reset(use_fast_arrays),1);
+1;
+
+/* ensure arraymake cannot create an invalid expression
+ * follow-on work to commit 3140a35
+ */
+
+(kill (foo, bar, baz, quux),
+ arraymake (foo, [bar]));
+foo[bar];
+
+arraymake (foo[bar], [baz]);
+foo[bar][baz];
+
+arraymake (foo[bar][baz], [quux]);
+foo[bar][baz][quux];
+
+arraymake (foo[bar, baz], [111, 222]);
+foo[bar, baz][111, 222];
+
+errcatch (arraymake (1, [bar]));
+[];
+
+errcatch (arraymake ("foo", [bar]));
+[];
+
+errcatch (arraymake (lambda([x], x), [bar]));
+[];
+
+/* slightly unusual constructs which do yield valid expressions, and are therefore permissible */
+
+arraymake (foo + bar, [baz]);
+(foo + bar)[baz];
+
+arraymake (foo(bar), [baz]);
+foo(bar)[baz];
+
+/* A bug in MARRAYREF caused things like arrayapply to return
+ * MQAPPLY expressions with an incorrect header.
+ */
+
+arrayapply (foo (), [1]);
+foo () [1];
+
+arrayapply (foo (), [1, 2, 3]);
+foo () [1, 2, 3];
+
+/* A bug in MARRAYREF caused bogus indexing into hash tables and fast
+ * arrays.  This affected things like arrayapply.
+ */
+
+block ([use_fast_arrays : true,
+        arr],
+  arr[false] : 'wtf,
+  arr[1] : 2,
+  [arr[1], arrayapply (arr, [1])]);
+[2, 2];
+
+/* A bug in MARRAYREF caused things like arrayapply to return array
+ * references with an incorrect header.
+ */
+
+block ([use_fast_arrays : false,
+        arr],
+  local (arr),
+  array (arr, complete, 5),
+  [arr[3], arrayapply (arr, [3])]);
+[arr[3], arr[3]];
+
+/* SF bug #4097: "Bad string representation of integers in the first argument of `save`" */
+
+(kill (xyz),
+ xyz: 123,
+ expected_filename: "tmpsave123.lisp",
+ expected_path: sconcat (maxima_tempdir, "/", expected_filename),
+ save (sconcat (maxima_tempdir, "/tmpsave", xyz, ".lisp"), xyz),
+ /* call SUBSEQ to extract the filename from the path returned by 'save' */
+ ?subseq (%%, ?length (%%) - ?length (expected_filename)));
+''expected_filename;
+
+(kill (xyz),
+ load (expected_path),
+ xyz);
+123;
+

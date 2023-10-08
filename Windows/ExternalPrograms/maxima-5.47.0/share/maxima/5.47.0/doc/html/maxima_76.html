@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>odepack-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="odepack-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="odepack-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_77.html#operatingsystem_002dpkg" rel="next" title="operatingsystem-pkg">
+<link href="maxima_75.html#numericalio_002dpkg" rel="prev" title="numericalio-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="odepack_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_77.html#operatingsystem_002dpkg" accesskey="n" rel="next">operatingsystem</a>, Previous: <a href="maxima_75.html#numericalio_002dpkg" accesskey="p" rel="prev">numericalio</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="odepack">77 odepack</h2>
+
+
+<a class="anchor" id="Item_003a-odepack_002fnode_002fIntroduction-to-ODEPACK"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-ODEPACK" accesskey="1">Introduction to ODEPACK</a></li>
+<li><a href="#Functions-and-Variables-for-odepack" accesskey="2">Functions and Variables for odepack</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-ODEPACK">
+<div class="nav-panel">
+<p>
+Next: <a href="#Getting-Started-with-ODEPACK" accesskey="n" rel="next">Getting Started with ODEPACK</a>, Previous: <a href="maxima_75.html#numericalio_002dpkg" accesskey="p" rel="prev">numericalio</a>, Up: <a href="#odepack_002dpkg" accesskey="u" rel="up">odepack</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-ODEPACK-1">77.1 Introduction to ODEPACK</h3>
+
+<blockquote class="quotation">
+<p>ODEPACK is a collection of Fortran solvers for the initial value
+problem for ordinary differential equation systems.  It consists of nine
+solvers, namely a basic solver called LSODE and eight variants of it &ndash;
+LSODES, LSODA, LSODAR, LSODPK, LSODKR, LSODI, LSOIBT, and LSODIS.
+The collection is suitable for both stiff and nonstiff systems.  It
+includes solvers for systems given in explicit form, dy/dt = f(t,y),
+and also solvers for systems given in linearly implicit form, 
+A(t,y) dy/dt = g(t,y).  Two of the solvers use general sparse matrix
+solvers for the linear systems that arise.  Two others use iterative
+(preconditioned Krylov) methods instead of direct methods for these
+linear systems.  The most recent addition is LSODIS, which solves
+implicit problems with general sparse treatment of all matrices involved.
+</p></blockquote>
+<p><a class="footnote" id="DOCF9" href="#FOOT9"><sup>9</sup></a>
+</p>
+<p>References:
+[1] Fortran Code is from <a class="url" href="https://www.netlib.org/odepack/">https://www.netlib.org/odepack/</a>
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-odepack">Package odepack</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-odepack_002fnode_002fGetting-Started-with-ODEPACK"></a><ul class="mini-toc">
+<li><a href="#Getting-Started-with-ODEPACK" accesskey="1">Getting Started with ODEPACK</a></li>
+</ul>
+<hr>
+<div class="subsection-level-extent" id="Getting-Started-with-ODEPACK">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-odepack" accesskey="n" rel="next">Functions and Variables for odepack</a>, Previous: <a href="#Introduction-to-ODEPACK" accesskey="p" rel="prev">Introduction to ODEPACK</a>, Up: <a href="#odepack_002dpkg" accesskey="u" rel="up">odepack</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Getting-Started-with-ODEPACK-1">77.1.1 Getting Started with ODEPACK</h4>
+
+<p>Of the eight variants of the solver, Maxima currently only has an
+interface to <code class="code">dlsode</code>.
+</p>
+<p>Let&rsquo;s say we have this system of equations to solve:
+</p><div class="example">
+<pre class="example-preformatted">  f1 = -.04d0*y1 + 1d4*y2*y3
+  f3 = 3d7*y2*y2
+  dy1/dt = f1
+  dy2/dt = -f1 - f3
+  dy3/dt = f3
+</pre></div>
+<p>The independent variable is <em class="math tex2jax_process">\(t\)</em>; the  dependent variables are <em class="math tex2jax_process">\(y1\)</em>, <em class="math tex2jax_process">\(y2\)</em>,
+and <em class="math tex2jax_process">\(y3\)</em>, 
+</p>
+<p>To start the solution, set up the differential equations to solved:
+</p><div class="example">
+<pre class="example-preformatted">load(&quot;dlsode&quot;);
+f1: -.04d0*y1 + 1d4*y2*y3$
+f3: 3d7*y2*y2$
+f2: -f1 - f3$
+fex: [f1, f2, f3];
+</pre></div>
+
+<p>Initialize the solver, where we have selected method 21:
+</p><div class="example">
+<pre class="example-preformatted">(%i6) state : dlsode_init(fex, ['t,y1,y2,y3], 21);
+(%o6) [[f, #&lt;Function &quot;LAMBDA ($T $Y1 $Y2 $Y3)&quot; {49DAC061}&gt;], 
+[vars, [t, y1, y2, y3]], [mf, 21], [neq, 3], [lrw, 58], [liw, 23], [rwork, {Li\
+sp Array: #(0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+               0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+               0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+               0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0)}], 
+[iwork, {Lisp Array: #(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)}], 
+[fjac, #&lt;Function &quot;LAMBDA ($T $Y1 $Y2 $Y3)&quot; {49D52AC9}&gt;]]
+</pre></div>
+<p>The arrays rwork and iwork carry state between calls to
+<code class="code"><a class="ref" href="#dlsode_005fstep">dlsode_step</a></code>, so they should not be modified by the user.  In
+fact, this state should not be modified by the user at all.
+</p>
+<p>Now that the algorithm has been initialized we can compute solutions
+to the differential equation, using the <var class="var">state</var> returned above.
+</p>
+<p>For this example, we want to compute the solution at times
+<code class="code">0.4*10^k</code> for <em class="math tex2jax_process">\(k\)</em> from 0 to 11, with the initial values of 1, 0, 0
+for the dependent variables and with a relative tolerance of 1d-4 and
+absolute tolerances of 1e-6, 1e-10, and 1d-6 for the dependent
+variables.
+</p>
+<p>Then
+</p><div class="example">
+<pre class="example-preformatted">y: [1d0, 0d0, 0d0];
+t: 0d0;
+rtol : 1d-4;
+atol: [1d-6, 1d-10, 1d-6];
+istate: 1;
+t:0d0;
+tout:.4d0;
+
+for k : 1 thru 12 do
+  block([],
+    result: dlsode_step(y, t, tout, rtol, atol, istate, state),
+    printf(true, &quot;At t = ~12,4,2e   y = ~{~14,6,2e~}~%&quot;, result[1], result[2]),
+    istate : result[3],
+    tout : tout * 10);
+</pre></div>
+
+<p>This produces the output:
+</p><div class="example">
+<pre class="example-preformatted">At t =   4.0000e-01   y =   9.851726e-01  3.386406e-05  1.479357e-02
+At t =   4.0000e+00   y =   9.055142e-01  2.240418e-05  9.446344e-02
+At t =   4.0000e+01   y =   7.158050e-01  9.184616e-06  2.841858e-01
+At t =   4.0000e+02   y =   4.504846e-01  3.222434e-06  5.495122e-01
+At t =   4.0000e+03   y =   1.831701e-01  8.940379e-07  8.168290e-01
+At t =   4.0000e+04   y =   3.897016e-02  1.621193e-07  9.610297e-01
+At t =   4.0000e+05   y =   4.935213e-03  1.983756e-08  9.950648e-01
+At t =   4.0000e+06   y =   5.159269e-04  2.064759e-09  9.994841e-01
+At t =   4.0000e+07   y =   5.306413e-05  2.122677e-10  9.999469e-01
+At t =   4.0000e+08   y =   5.494530e-06  2.197824e-11  9.999945e-01
+At t =   4.0000e+09   y =   5.129458e-07  2.051784e-12  9.999995e-01
+At t =   4.0000e+10   y =  -7.170563e-08 -2.868225e-13  1.000000e+00
+</pre></div>
+
+
+<a class="anchor" id="Item_003a-odepack_002fnode_002fFunctions-and-Variables-for-odepack"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-odepack">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_77.html#operatingsystem_002dpkg" accesskey="n" rel="next">operatingsystem</a>, Previous: <a href="#Getting-Started-with-ODEPACK" accesskey="p" rel="prev">Getting Started with ODEPACK</a>, Up: <a href="#odepack_002dpkg" accesskey="u" rel="up">odepack</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-odepack-1">77.2 Functions and Variables for odepack</h3>
+
+<a class="anchor" id="dlsode_005finit"></a><a class="anchor" id="Item_003a-odepack_002fdeffn_002fdlsode_005finit"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dlsode_005finit"><span class="category-def">Function: </span><span><strong class="def-name">dlsode_init</strong> <var class="def-var-arguments">(<var class="var">fex</var>, <var class="var">vars</var>, <var class="var">method</var>)</var><a class="copiable-link" href='#index-dlsode_005finit'> &para;</a></span></dt>
+<dd>
+<p>This must be called before running the solver.  This function returns
+a state object for use in the solver.  The user must not modify the
+state.
+</p>
+<p>The ODE to be solved is given in <var class="var">fex</var>, which is a list of the
+equations.  <var class="var">vars</var> is a list of independent variable and the
+dependent variables.  The list of dependent variables must be in the
+same order as the equations if <var class="var">fex</var>.  Finally, <var class="var">method</var>
+indicates the method to be used by the solver:
+</p>
+<dl class="table">
+<dt><code class="code">10</code></dt>
+<dd><p>Nonstiff (Adams) method, no Jacobian used.
+</p></dd>
+<dt><code class="code">21</code></dt>
+<dd><p>Stiff (BDF) method, user-supplied full Jacobian.
+</p></dd>
+<dt><code class="code">22</code></dt>
+<dd><p>Stiff method, internally generated full Jacobian.
+</p></dd>
+</dl>
+
+<p>The returned state object is a list of lists.  The sublist is a list
+of two elements:
+</p><dl class="table">
+<dt><code class="code">f</code></dt>
+<dd><p>The compiled function for the ODE.
+</p></dd>
+<dt><code class="code">vars</code></dt>
+<dd><p>The list independent and dependent variables (<var class="var">vars</var>).
+</p></dd>
+<dt><code class="code">mf</code></dt>
+<dd><p>The method to be used (<var class="var">method</var>).
+</p></dd>
+<dt><code class="code">neq</code></dt>
+<dd><p>The number of equations.
+</p></dd>
+<dt><code class="code">lrw</code></dt>
+<dd><p>Length of the work vector for real values.
+</p></dd>
+<dt><code class="code">liw</code></dt>
+<dd><p>Length of the work vector for integer values.
+</p></dd>
+<dt><code class="code">rwork</code></dt>
+<dd><p>Lisp array holding the real-valued work vector.
+</p></dd>
+<dt><code class="code">iwork</code></dt>
+<dd><p>Lisp array holding the integer-valued work vector.
+</p></dd>
+<dt><code class="code">fjac</code></dt>
+<dd><p>Compiled analytical Jacobian of the equations
+</p></dd>
+</dl>
+
+<p>See also <code class="code"><a class="ref" href="#dlsode_005fstep">dlsode_step</a></code>.  See <a class="xref" href="#Getting-Started-with-ODEPACK">Getting Started with ODEPACK</a> for
+an example of usage.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-odepack">Package odepack</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="dlsode_005fstep"></a><a class="anchor" id="Item_003a-odepack_002fdeffn_002fdlsode_005fstep"></a><dl class="first-deffn">
+<dt class="deffn" id="index-dlsode_005fstep"><span class="category-def">Function: </span><span><strong class="def-name">dlsode_step</strong> <var class="def-var-arguments">(<var class="var">inity</var>, <var class="var">t</var>, <var class="var">tout</var>, <var class="var">rtol</var>, <var class="var">atol</var>, <var class="var">istate</var>, <var class="var">state</var>)</var><a class="copiable-link" href='#index-dlsode_005fstep'> &para;</a></span></dt>
+<dd>
+<p>Performs one step of the solver, returning the values of the
+independent and dependent variables, a success or error code.
+</p>
+<dl class="table">
+<dt><code class="code">inity</code></dt>
+<dd><p>For the first call (when istate = 1), the initial values
+</p></dd>
+<dt><code class="code">t</code></dt>
+<dd><p>Current value of the independent value
+</p></dd>
+<dt><code class="code">tout</code></dt>
+<dd><p>Next point where output is desired which must not be equal to <var class="var">t</var>.
+</p></dd>
+<dt><code class="code">rtol</code></dt>
+<dd><p>relative tolerance parameter
+</p></dd>
+<dt><code class="code">atol</code></dt>
+<dd><p>Absolute tolerance parameter, scalar of vector.  If
+scalar, it applies to all dependent variables.
+Otherwise it must be the tolerance for each dependent
+variable.
+</p>
+<p>Use <var class="var">rtol</var> = 0 for pure absolute error and use <var class="var">atol</var> = 0
+for pure relative error.
+</p>         
+</dd>
+<dt><code class="code">istate</code></dt>
+<dd><p>1 for the first call to dlsode, 2 for subsequent calls.
+</p></dd>
+<dt><code class="code">state</code></dt>
+<dd><p>state returned by dlsode_init.
+</p></dd>
+</dl>
+
+<p>The output is a list of the following items:
+</p><dl class="table">
+<dt><code class="code">t</code></dt>
+<dd><p>independent variable value
+</p></dd>
+<dt><code class="code">y</code></dt>
+<dd><p>list of values of the dependent variables at time t.
+</p></dd>
+<dt><code class="code">istate</code></dt>
+<dd><p>Integration status:
+</p><dl class="table">
+<dt><code class="code">1</code></dt>
+<dd><p>no work because tout = tt
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>successful result
+</p></dd>
+<dt><code class="code">-1</code></dt>
+<dd><p>Excess work done on this call
+</p></dd>
+<dt><code class="code">-2</code></dt>
+<dd><p>Excess accuracy requested
+</p></dd>
+<dt><code class="code">-3</code></dt>
+<dd><p>Illegal input detected
+</p></dd>
+<dt><code class="code">-4</code></dt>
+<dd><p>Repeated error test failures
+</p></dd>
+<dt><code class="code">-5</code></dt>
+<dd><p>Repeated convergence failures (perhaps bad Jacobian or wrong choice of
+mf or tolerances)
+</p></dd>
+<dt><code class="code">-6</code></dt>
+<dd><p>Error weight because zero during problem (solution component is
+vanished and atol(i) = 0.
+</p></dd>
+</dl>
+</dd>
+<dt><code class="code">info</code></dt>
+<dd><p>association list of various bits of information:
+</p><dl class="table">
+<dt><code class="code">n_steps</code></dt>
+<dd><p>total steps taken thus far
+</p></dd>
+<dt><code class="code">n_f_eval</code></dt>
+<dd><p>total number of function evals
+</p></dd>
+<dt><code class="code">n_j_eval</code></dt>
+<dd><p>total number of Jacobian evals
+</p></dd>
+<dt><code class="code">method_order</code></dt>
+<dd><p>method order
+</p></dd>
+<dt><code class="code">len_rwork</code></dt>
+<dd><p>Actual length used for real work array
+</p></dd>
+<dt><code class="code">len_iwork</code></dt>
+<dd><p>Actual length used for integer work array
+</p></dd>
+</dl>
+</dd>
+</dl>
+
+<p>See also <code class="code"><a class="ref" href="#dlsode_005finit">dlsode_init</a></code>.  See <a class="xref" href="#Getting-Started-with-ODEPACK">Getting Started with ODEPACK</a> for
+an example of usage.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-odepack">Package odepack</a>
+&middot;
+</div>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="footnotes-segment">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h5 class="footnote-body-heading"><a id="FOOT9" href="#DOCF9">(9)</a></h5>
+<p>From <a class="url" href="https://www.netlib.org/odepack/opkd-sum">https://www.netlib.org/odepack/opkd-sum</a></p>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_77.html#operatingsystem_002dpkg" accesskey="n" rel="next">operatingsystem</a>, Previous: <a href="maxima_75.html#numericalio_002dpkg" accesskey="p" rel="prev">numericalio</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

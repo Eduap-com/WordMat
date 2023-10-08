@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to alt-display</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to alt-display">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to alt-display">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_180.html#alt_002ddisplay_002dpkg" rel="up" title="alt-display-pkg">
+<link href="maxima_182.html#Functions-and-Variables-for-alt_002ddisplay" rel="next" title="Functions and Variables for alt-display">
+<link href="maxima_180.html#alt_002ddisplay_002dpkg" rel="previous" title="alt-display-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-alt_002ddisplay"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_182.html#Functions-and-Variables-for-alt_002ddisplay" accesskey="n" rel="next">Functions and Variables for alt-display</a>, Previous: <a href="maxima_180.html#alt_002ddisplay_002dpkg" accesskey="p" rel="previous">alt-display-pkg</a>, Up: <a href="maxima_180.html#alt_002ddisplay_002dpkg" accesskey="u" rel="up">alt-display-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-alt_002ddisplay-1"></a>
+<h3 class="section">39.1 Introduction to alt-display</h3>
+
+<p>The <em>alt-display</em> package provides a means to change the way that
+Maxima displays its output. The <var>*alt-display1d*</var> and
+<var>*alt-display2d*</var> Lisp hooks were introduced to Maxima in 2002, but
+were not easily accessible from the Maxima REPL until the introduction
+of this package.
+</p>
+<p>The package provides a general purpose function to define alternative
+display functions, and a separate function to set the display
+function. The package also provides customized display functions to
+produce output in TeX, Texinfo, XML and all three output formats
+within Texinfo.
+</p>
+<p>Here is a sample session:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;alt-display.mac&quot;)$
+(%i2) set_alt_display(2,tex_display)$
+
+(%i3) x/(x^2+y^2) = 1;
+\mbox{\tt\red({\it \%o_3}) \black}$${{x}\over{y^2+x^2}}=1$$
+
+(%i4) set_alt_display(2,mathml_display)$
+
+(%i5) x/(x^2+y^2) = 1;
+&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt; &lt;mi&gt;mlabel&lt;/mi&gt; 
+&lt;mfenced separators=&quot;&quot;&gt;&lt;msub&gt;&lt;mi&gt;%o&lt;/mi&gt; &lt;mn&gt;5&lt;/mn&gt;&lt;/msub&gt; 
+&lt;mo&gt;,&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt; &lt;/mrow&gt; &lt;mrow&gt;&lt;msup&gt;&lt;mrow&gt;
+&lt;mi&gt;y&lt;/mi&gt; &lt;/mrow&gt; &lt;mn&gt;2&lt;/mn&gt; &lt;/msup&gt; &lt;mo&gt;+&lt;/mo&gt; &lt;msup&gt;&lt;mrow&gt;
+&lt;mi&gt;x&lt;/mi&gt; &lt;/mrow&gt; &lt;mn&gt;2&lt;/mn&gt; &lt;/msup&gt; &lt;/mrow&gt;&lt;/mfrac&gt; &lt;mo&gt;=&lt;/mo&gt; 
+&lt;mn&gt;1&lt;/mn&gt; &lt;/mfenced&gt; &lt;/math&gt;
+
+(%i6) set_alt_display(2,multi_display_for_texinfo)$
+
+(%i7) x/(x^2+y^2) = 1;
+
+@iftex
+@tex
+\mbox{\tt\red({\it \%o_7}) \black}$${{x}\over{y^2+x^2}}=1$$
+@end tex
+@end iftex
+@ifhtml
+@html
+
+&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt; &lt;mi&gt;mlabel&lt;/mi&gt; 
+&lt;mfenced separators=&quot;&quot;&gt;&lt;msub&gt;&lt;mi&gt;%o&lt;/mi&gt; &lt;mn&gt;7&lt;/mn&gt;&lt;/msub&gt; 
+&lt;mo&gt;,&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt; &lt;/mrow&gt; &lt;mrow&gt;&lt;msup&gt;&lt;mrow&gt;
+&lt;mi&gt;y&lt;/mi&gt; &lt;/mrow&gt; &lt;mn&gt;2&lt;/mn&gt; &lt;/msup&gt; &lt;mo&gt;+&lt;/mo&gt; &lt;msup&gt;&lt;mrow&gt;
+&lt;mi&gt;x&lt;/mi&gt; &lt;/mrow&gt; &lt;mn&gt;2&lt;/mn&gt; &lt;/msup&gt; &lt;/mrow&gt;&lt;/mfrac&gt; &lt;mo&gt;=&lt;/mo&gt; 
+&lt;mn&gt;1&lt;/mn&gt; &lt;/mfenced&gt; &lt;/math&gt;
+@end html
+@end ifhtml
+@ifinfo
+@example
+(%o7) x/(y^2+x^2) = 1
+@end example
+@end ifinfo
+</pre></div>
+
+<p>If the alternative display function causes an error, the error is
+trapped and the display function is reset to the default display. In the
+following example, the <code>error</code> function is set to display the
+output. This throws an error, which is handled by resetting the
+2d-display to the default.
+</p>
+<div class="example">
+<pre class="example">(%i8) set_alt_display(2,?error)$
+
+(%i9) x;
+
+Error in *alt-display2d*.
+Message: Condition designator ((MLABEL) $%O9 $X) is not of type
+        (OR SYMBOL STRING FUNCTION).
+*alt-display2d* reset to nil.
+ -- an error. To debug this try: debugmode(true);
+
+(%i10) x;
+(%o10)                                 x
+</pre></div>
+
+<a name="Item_003a-alt_002ddisplay_002fnode_002fFunctions-and-Variables-for-alt_002ddisplay"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_182.html#Functions-and-Variables-for-alt_002ddisplay" accesskey="n" rel="next">Functions and Variables for alt-display</a>, Previous: <a href="maxima_180.html#alt_002ddisplay_002dpkg" accesskey="p" rel="previous">alt-display-pkg</a>, Up: <a href="maxima_180.html#alt_002ddisplay_002dpkg" accesskey="u" rel="up">alt-display-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

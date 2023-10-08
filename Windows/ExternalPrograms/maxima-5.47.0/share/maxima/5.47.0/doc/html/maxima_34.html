@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Sets (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Sets (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Sets (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_35.html#Function-Definition" rel="next" title="Function Definition">
+<link href="maxima_33.html#Rules-and-Patterns" rel="prev" title="Rules and Patterns">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Sets">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_35.html#Function-Definition" accesskey="n" rel="next">Function Definition</a>, Previous: <a href="maxima_33.html#Rules-and-Patterns" accesskey="p" rel="prev">Rules and Patterns</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Sets-1">35 Sets</h2>
+
+<a class="anchor" id="Item_003a-nset_002fnode_002fIntroduction-to-Sets"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Sets" accesskey="1">Introduction to Sets</a></li>
+<li><a href="#Functions-and-Variables-for-Sets" accesskey="2">Functions and Variables for Sets</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Sets">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Sets" accesskey="n" rel="next">Functions and Variables for Sets</a>, Previous: <a href="#Sets" accesskey="p" rel="prev">Sets</a>, Up: <a href="#Sets" accesskey="u" rel="up">Sets</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Sets-1">35.1 Introduction to Sets</h3>
+
+<p>Maxima provides set functions, such as intersection and 
+union, for finite sets that are defined by explicit enumeration.
+Maxima treats 
+lists and sets as distinct objects. This feature makes it possible to
+work with sets that have members that are either lists or sets.
+</p>
+<p>In addition to functions for finite sets, Maxima provides some
+functions related to combinatorics; these include the Stirling
+numbers of the first and second kind, the Bell numbers, multinomial
+coefficients, partitions of nonnegative integers, and a few others. 
+Maxima also defines a Kronecker delta function.
+</p>
+<ul class="mini-toc">
+<li><a href="#Usage" accesskey="1">Usage</a></li>
+<li><a href="#Set-Member-Iteration" accesskey="2">Set Member Iteration</a></li>
+<li><a href="#Authors" accesskey="3">Authors</a></li>
+</ul>
+<div class="subsection-level-extent" id="Usage">
+<h4 class="subsection">35.1.1 Usage</h4>
+
+<p>To construct a set with members <code class="code">a_1, ..., a_n</code>, write
+<code class="code">set(a_1, ..., a_n)</code> or <code class="code">{a_1, ..., a_n}</code>;
+to construct the empty set, write <code class="code">set()</code> or <code class="code">{}</code>.
+In input, <code class="code">set(...)</code> and <code class="code">{ ... }</code> are equivalent.
+Sets are always displayed with curly braces.
+</p>
+<p>If a member is listed more than
+once, simplification eliminates the redundant member.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) set();
+(%o1)                          {}
+(%i2) set(a, b, a);
+(%o2)                        {a, b}
+(%i3) set(a, set(b));
+(%o3)                       {a, {b}}
+(%i4) set(a, [b]);
+(%o4)                       {a, [b]}
+(%i5) {};
+(%o5)                          {}
+(%i6) {a, b, a};
+(%o6)                        {a, b}
+(%i7) {a, {b}};
+(%o7)                       {a, {b}}
+(%i8) {a, [b]};
+(%o8)                       {a, [b]}
+</pre></div>
+
+<p>Two would-be elements <var class="var">x</var> and <var class="var">y</var> are redundant
+(i.e., considered the same for the purpose of set construction)
+if and only if <code class="code">is(<var class="var">x</var> = <var class="var">y</var>)</code> yields <code class="code">true</code>.
+Note that <code class="code">is(equal(<var class="var">x</var>, <var class="var">y</var>))</code> can yield <code class="code">true</code>
+while <code class="code">is(<var class="var">x</var> = <var class="var">y</var>)</code> yields <code class="code">false</code>;
+in that case the elements <var class="var">x</var> and <var class="var">y</var> are considered distinct.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x: a/c + b/c;
+                              b   a
+(%o1)                         - + -
+                              c   c
+(%i2) y: a/c + b/c;
+                              b   a
+(%o2)                         - + -
+                              c   c
+(%i3) z: (a + b)/c;
+                              b + a
+(%o3)                         -----
+                                c
+(%i4) is (x = y);
+(%o4)                         true
+(%i5) is (y = z);
+(%o5)                         false
+(%i6) is (equal (y, z));
+(%o6)                         true
+(%i7) y - z;
+                           b + a   b   a
+(%o7)                    - ----- + - + -
+                             c     c   c
+(%i8) ratsimp (%);
+(%o8)                           0
+(%i9) {x, y, z};
+                          b + a  b   a
+(%o9)                    {-----, - + -}
+                            c    c   c
+</pre></div>
+
+<p>To construct a set from the elements of a list, use <code class="code">setify</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) setify ([b, a]);
+(%o1)                        {a, b}
+</pre></div>
+
+<p>Set members <code class="code">x</code> and <code class="code">y</code> are equal provided <code class="code">is(x = y)</code> 
+evaluates to <code class="code">true</code>. Thus <code class="code">rat(x)</code> and <code class="code">x</code> are equal as set
+members; consequently, 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) {x, rat(x)};
+(%o1)                          {x}
+</pre></div>
+
+<p>Further, since <code class="code">is((x - 1)*(x + 1) = x^2 - 1)</code> evaluates to <code class="code">false</code>, 
+<code class="code">(x - 1)*(x + 1)</code> and <code class="code">x^2 - 1</code> are distinct set members; thus 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) {(x - 1)*(x + 1), x^2 - 1};
+                                       2
+(%o1)               {(x - 1) (x + 1), x  - 1}
+</pre></div>
+
+<p>To reduce this set to a singleton set, apply <code class="code">rat</code> to each set member:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) {(x - 1)*(x + 1), x^2 - 1};
+                                       2
+(%o1)               {(x - 1) (x + 1), x  - 1}
+(%i2) map (rat, %);
+                              2
+(%o2)/R/                    {x  - 1}
+</pre></div>
+
+<p>To remove redundancies from other sets, you may need to use other
+simplification functions. Here is an example that uses <code class="code">trigsimp</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) {1, cos(x)^2 + sin(x)^2};
+                            2         2
+(%o1)                {1, sin (x) + cos (x)}
+(%i2) map (trigsimp, %);
+(%o2)                          {1}
+</pre></div>
+
+<p>A set is simplified when its members are non-redundant and
+sorted. The current version of the set functions uses the Maxima function
+<code class="code">orderlessp</code> to order sets; however, <i class="i">future versions of 
+the set functions might use a different ordering function</i>.
+</p>
+<p>Some operations on sets, such as substitution, automatically force a 
+re-simplification; for example,
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: {a, b, c}$
+(%i2) subst (c=a, s);
+(%o2)                        {a, b}
+(%i3) subst ([a=x, b=x, c=x], s);
+(%o3)                          {x}
+(%i4) map (lambda ([x], x^2), set (-1, 0, 1));
+(%o4)                        {0, 1}
+</pre></div>
+
+<p>Maxima treats lists and sets as distinct objects;
+functions such as <code class="code">union</code> and <code class="code">intersection</code> complain
+if any argument is not a set. If you need to apply a set
+function to a list, use the <code class="code">setify</code> function to convert it
+to a set. Thus
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) union ([1, 2], {a, b});
+Function union expects a set, instead found [1,2]
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i2) union (setify ([1, 2]), {a, b});
+(%o2)                     {1, 2, a, b}
+</pre></div>
+
+<p>To extract all set elements of a set <code class="code">s</code> that satisfy a predicate
+<code class="code">f</code>, use <code class="code">subset(s, f)</code>. (A <i class="i">predicate</i> is a 
+boolean-valued function.) For example, to find the equations 
+in a given set that do not depend on a variable <code class="code">z</code>, use
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) subset ({x + y + z, x - y + 4, x + y - 5},
+                                    lambda ([e], freeof (z, e)));
+(%o1)               {- y + x + 4, y + x - 5}
+</pre></div>
+
+<p>The section <a class="ref" href="#Functions-and-Variables-for-Sets">Functions and Variables for Sets</a> has a complete list of
+the set functions in Maxima.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</div>
+<div class="subsection-level-extent" id="Set-Member-Iteration">
+<h4 class="subsection">35.1.2 Set Member Iteration</h4>
+
+<p>There two ways to to iterate over set members. One way is the use
+<code class="code">map</code>; for example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) map (f, {a, b, c});
+(%o1)                  {f(a), f(b), f(c)}
+</pre></div>
+
+<p>The other way is to use <code class="code">for <var class="var">x</var> in <var class="var">s</var> do</code>
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: {a, b, c};
+(%o1)                       {a, b, c}
+(%i2) for si in s do print (concat (si, 1));
+a1 
+b1 
+c1 
+(%o2)                         done
+</pre></div>
+
+<p>The Maxima functions <code class="code">first</code> and <code class="code">rest</code> work
+correctly on sets. Applied to a set, <code class="code">first</code> returns the first
+displayed element of a set; which element that is may be
+implementation-dependent. If <code class="code">s</code> is a set, then 
+<code class="code">rest(s)</code> is equivalent to <code class="code">disjoin(first(s), s)</code>.
+Currently, there are other Maxima functions that work correctly
+on sets.
+In future versions of the set functions,
+<code class="code">first</code> and <code class="code">rest</code> may function differently or not at all.
+</p>
+<p>Maxima&rsquo;s <code class="code">orderless</code> and <code class="code">ordergreat</code> mechanisms are 
+incompatible with the set functions. If you need to use either <code class="code">orderless</code>
+or <code class="code">ordergreat</code>, call those functions before constructing any sets,
+and do not call <code class="code">unorder</code>. 
+</p>
+</div>
+<div class="subsection-level-extent" id="Authors">
+<h4 class="subsection">35.1.3 Authors</h4>
+
+<p>Stavros Macrakis of Cambridge, Massachusetts and Barton Willis of the
+University of Nebraska at Kearney (UNK) wrote the Maxima set functions and their
+documentation. 
+</p>
+<a class="anchor" id="Item_003a-nset_002fnode_002fFunctions-and-Variables-for-Sets"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Sets">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-Sets" accesskey="p" rel="prev">Introduction to Sets</a>, Up: <a href="#Sets" accesskey="u" rel="up">Sets</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Sets-1">35.2 Functions and Variables for Sets</h3>
+
+<a class="anchor" id="adjoin"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fadjoin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-adjoin"><span class="category-def">Function: </span><span><strong class="def-name">adjoin</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">a</var>)</var><a class="copiable-link" href='#index-adjoin'> &para;</a></span></dt>
+<dd>
+<p>Returns the union of the set <var class="var">a</var> with <code class="code">{<var class="var">x</var>}</code>.
+</p>
+<p><code class="code">adjoin</code> complains if <var class="var">a</var> is not a literal set.
+</p>
+<p><code class="code">adjoin(<var class="var">x</var>, <var class="var">a</var>)</code> and <code class="code">union(set(<var class="var">x</var>), <var class="var">a</var>)</code>
+are equivalent;
+however, <code class="code">adjoin</code> may be somewhat faster than <code class="code">union</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#disjoin">disjoin</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) adjoin (c, {a, b});
+(%o1)                       {a, b, c}
+(%i2) adjoin (a, {a, b});
+(%o2)                        {a, b}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="belln"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fbelln"></a><dl class="first-deffn">
+<dt class="deffn" id="index-belln"><span class="category-def">Function: </span><span><strong class="def-name">belln</strong> <var class="def-var-arguments">(<var class="var">n</var>)</var><a class="copiable-link" href='#index-belln'> &para;</a></span></dt>
+<dd>
+<p>Represents the <em class="math tex2jax_process">\(n\)</em>-th Bell number.
+<code class="code">belln(n)</code> is the number of partitions of a set with <var class="var">n</var> members.
+</p>
+<p>For nonnegative integers <var class="var">n</var>,
+<code class="code">belln(<var class="var">n</var>)</code> simplifies to the <em class="math tex2jax_process">\(n\)</em>-th Bell number.
+<code class="code">belln</code> does not simplify for any other arguments.
+</p>
+<p><code class="code">belln</code> distributes over equations, lists, matrices, and sets.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">belln</code> applied to nonnegative integers.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) makelist (belln (i), i, 0, 6);
+(%o1)               [1, 1, 2, 5, 15, 52, 203]
+(%i2) is (cardinality (set_partitions ({})) = belln (0));
+(%o2)                         true
+(%i3) is (cardinality (set_partitions ({1, 2, 3, 4, 5, 6})) =
+                       belln (6));
+(%o3)                         true
+</pre></div>
+
+<p><code class="code">belln</code> applied to arguments which are not nonnegative integers.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [belln (x), belln (sqrt(3)), belln (-9)];
+(%o1)        [belln(x), belln(sqrt(3)), belln(- 9)]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cardinality"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fcardinality"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cardinality"><span class="category-def">Function: </span><span><strong class="def-name">cardinality</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-cardinality'> &para;</a></span></dt>
+<dd>
+<p>Returns the number of distinct elements of the set <var class="var">a</var>. 
+</p>
+<p><code class="code">cardinality</code> ignores redundant elements
+even when simplification is disabled.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) cardinality ({});
+(%o1)                           0
+(%i2) cardinality ({a, a, b, c});
+(%o2)                           3
+(%i3) simp : false;
+(%o3)                         false
+(%i4) cardinality ({a, a, b, c});
+(%o4)                           3
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cartesian_005fproduct"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fcartesian_005fproduct"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cartesian_005fproduct"><span class="category-def">Function: </span><span><strong class="def-name">cartesian_product</strong> <var class="def-var-arguments">(<var class="var">b_1</var>, ... , <var class="var">b_n</var>)</var><a class="copiable-link" href='#index-cartesian_005fproduct'> &para;</a></span></dt>
+<dd><p>Returns a set of lists of the form <code class="code">[<var class="var">x_1</var>, ..., <var class="var">x_n</var>]</code>, where
+<var class="var">x_1</var>, ..., <var class="var">x_n</var> are elements of the sets <var class="var">b_1</var>, ... , <var class="var">b_n</var>,
+respectively.
+</p>
+<p><code class="code">cartesian_product</code> complains if any argument is not a literal set.
+</p>
+<p>See also <code class="code"><a class="ref" href="#cartesian_005fproduct_005flist">cartesian_product_list</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) cartesian_product ({0, 1});
+(%o1)                      {[0], [1]}
+(%i2) cartesian_product ({0, 1}, {0, 1});
+(%o2)           {[0, 0], [0, 1], [1, 0], [1, 1]}
+(%i3) cartesian_product ({x}, {y}, {z});
+(%o3)                      {[x, y, z]}
+(%i4) cartesian_product ({x}, {-1, 0, 1});
+(%o4)              {[x, - 1], [x, 0], [x, 1]}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="cartesian_005fproduct_005flist"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fcartesian_005fproduct_005flist"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cartesian_005fproduct_005flist"><span class="category-def">Function: </span><span><strong class="def-name">cartesian_product_list</strong> <var class="def-var-arguments">(<var class="var">b_1</var>, ... , <var class="var">b_n</var>)</var><a class="copiable-link" href='#index-cartesian_005fproduct_005flist'> &para;</a></span></dt>
+<dd><p>Returns a list of lists of the form <code class="code">[<var class="var">x_1</var>, ..., <var class="var">x_n</var>]</code>, where
+<var class="var">x_1</var>, ..., <var class="var">x_n</var> are elements of the lists <var class="var">b_1</var>, ... , <var class="var">b_n</var>, respectively,
+comprising all possible combinations of the elements of <var class="var">b_1</var>, ... , <var class="var">b_n</var>.
+</p>
+<p>The list returned by <code class="code">cartesian_product_list</code> is equivalent to the
+following recursive definition.
+Let <var class="var">L</var> be the list returned by <code class="code">cartesian_product_list(<var class="var">b_2</var>, ..., <var class="var">b_n</var>)</code>.
+Then <code class="code">cartesian_product_list(<var class="var">b_1</var>, <var class="var">b_2</var>, ..., <var class="var">b_n</var>)</code>
+(i.e., <var class="var">b_1</var> in addition to <var class="var">b_2</var>, ..., <var class="var">b_n</var>)
+returns a list comprising each element of <var class="var">L</var> appended to the first element of <var class="var">b_1</var>,
+each element of <var class="var">L</var> appended to the second element of <var class="var">b_1</var>,
+each element of <var class="var">L</var> appended to the third element of <var class="var">b_1</var>, etc.
+The order of the list returned by <code class="code">cartesian_product_list(<var class="var">b_1</var>, <var class="var">b_2</var>, ..., <var class="var">b_n</var>)</code>
+may therefore be summarized by saying the lesser indices (1, 2, 3, ...) vary more slowly than the greater indices.
+</p>
+<p>The list returned by <code class="code">cartesian_product_list</code> contains duplicate elements
+if any argument <var class="var">b_1</var>, ..., <var class="var">b_n</var> contains duplicates.
+In this respect, <code class="code">cartesian_product_list</code> differs from <code class="code">cartesian_product</code>,
+which returns no duplicates.
+Also, the ordering of the list returned <code class="code">cartesian_product_list</code>
+is determined by the order of the elements of <var class="var">b_1</var>, ..., <var class="var">b_n</var>.
+Again, this differs from <code class="code">cartesian_product</code>,
+which returns a set (with order determined by <code class="code">orderlessp</code>).
+</p>
+<p>The length of the list returned by <code class="code">cartesian_product_list</code>
+is equal to the product of the lengths of the arguments <var class="var">b_1</var>, ..., <var class="var">b_n</var>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#cartesian_005fproduct">cartesian_product</a></code>.
+</p>
+<p><code class="code">cartesian_product_list</code> complains if any argument is not a list.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">cartesian_product_list</code> returns a list of lists comprising all possible combinations.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) cartesian_product_list ([0, 1]);
+(%o1)                      [[0], [1]]
+(%i2) cartesian_product_list ([0, 1], [0, 1]);
+(%o2)           [[0, 0], [0, 1], [1, 0], [1, 1]]
+(%i3) cartesian_product_list ([x], [y], [z]);
+(%o3)                      [[x, y, z]]
+(%i4) cartesian_product_list ([x], [-1, 0, 1]);
+(%o4)              [[x, - 1], [x, 0], [x, 1]]
+(%i5) cartesian_product_list ([a, h, e], [c, b, 4]);
+(%o5) [[a, c], [a, b], [a, 4], [h, c], [h, b], [h, 4], [e, c], 
+                                                  [e, b], [e, 4]]
+</pre></div>
+
+<p>The order of the list returned by <code class="code">cartesian_product_list</code>
+may be summarized by saying the lesser indices vary more slowly than the greater indices.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) cartesian_product_list ([1, 2, 3], [a, b], [i, ii]);
+(%o1) [[1, a, i], [1, a, ii], [1, b, i], [1, b, ii], [2, a, i], 
+[2, a, ii], [2, b, i], [2, b, ii], [3, a, i], [3, a, ii], 
+[3, b, i], [3, b, ii]]
+</pre></div>
+
+<p>The list returned by <code class="code">cartesian_product_list</code> contains duplicate elements
+if any argument contains duplicates.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) cartesian_product_list ([e, h], [3, 7, 3]);
+(%o1)   [[e, 3], [e, 7], [e, 3], [h, 3], [h, 7], [h, 3]]
+</pre></div>
+
+<p>The length of the list returned by <code class="code">cartesian_product_list</code>
+is equal to the product of the lengths of the arguments.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) foo: cartesian_product_list ([1, 1, 2, 2, 3], [h, z, h]);
+(%o1) [[1, h], [1, z], [1, h], [1, h], [1, z], [1, h], [2, h], 
+  [2, z], [2, h], [2, h], [2, z], [2, h], [3, h], [3, z], [3, h]]
+(%i2) is (length (foo) = 5*3);
+(%o2)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="disjoin"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fdisjoin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-disjoin"><span class="category-def">Function: </span><span><strong class="def-name">disjoin</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">a</var>)</var><a class="copiable-link" href='#index-disjoin'> &para;</a></span></dt>
+<dd><p>Returns the set <var class="var">a</var> without the member <var class="var">x</var>.
+If <var class="var">x</var> is not a member of <var class="var">a</var>, return <var class="var">a</var> unchanged.
+</p>
+<p><code class="code">disjoin</code> complains if <var class="var">a</var> is not a literal set.
+</p>
+<p><code class="code">disjoin(<var class="var">x</var>, <var class="var">a</var>)</code>, <code class="code">delete(<var class="var">x</var>, <var class="var">a</var>)</code>, and
+<code class="code">setdifference(<var class="var">a</var>, set(<var class="var">x</var>))</code> are all equivalent. 
+Of these, <code class="code">disjoin</code> is generally faster than the others.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) disjoin (a, {a, b, c, d});
+(%o1)                       {b, c, d}
+(%i2) disjoin (a + b, {5, z, a + b, %pi});
+(%o2)                      {5, %pi, z}
+(%i3) disjoin (a - b, {5, z, a + b, %pi});
+(%o3)                  {5, %pi, b + a, z}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="disjointp"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fdisjointp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-disjointp"><span class="category-def">Function: </span><span><strong class="def-name">disjointp</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-disjointp'> &para;</a></span></dt>
+<dd><p>Returns <code class="code">true</code> if and only if the sets <var class="var">a</var> and <var class="var">b</var> are disjoint.
+</p>
+<p><code class="code">disjointp</code> complains if either <var class="var">a</var> or <var class="var">b</var> is not a literal set.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) disjointp ({a, b, c}, {1, 2, 3});
+(%o1)                         true
+(%i2) disjointp ({a, b, 3}, {1, 2, 3});
+(%o2)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="divisors"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fdivisors"></a><dl class="first-deffn">
+<dt class="deffn" id="index-divisors"><span class="category-def">Function: </span><span><strong class="def-name">divisors</strong> <var class="def-var-arguments">(<var class="var">n</var>)</var><a class="copiable-link" href='#index-divisors'> &para;</a></span></dt>
+<dd>
+<p>Represents the set of divisors of <var class="var">n</var>.
+</p>
+<p><code class="code">divisors(<var class="var">n</var>)</code> simplifies to a set of integers
+when <var class="var">n</var> is a nonzero integer.
+The set of divisors includes the members 1 and <var class="var">n</var>.
+The divisors of a negative integer are the divisors of its absolute value.
+</p>
+<p><code class="code">divisors</code> distributes over equations, lists, matrices, and sets.
+</p>
+<p>Examples:
+</p>
+<p>We can verify that 28 is a perfect number:
+the sum of its divisors (except for itself) is 28.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: divisors(28);
+(%o1)                 {1, 2, 4, 7, 14, 28}
+(%i2) lreduce (&quot;+&quot;, args(s)) - 28;
+(%o2)                          28
+</pre></div>
+
+<p><code class="code">divisors</code> is a simplifying function.
+Substituting 8 for <code class="code">a</code> in <code class="code">divisors(a)</code>
+yields the divisors without reevaluating <code class="code">divisors(8)</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) divisors (a);
+(%o1)                      divisors(a)
+(%i2) subst (8, a, %);
+(%o2)                     {1, 2, 4, 8}
+</pre></div>
+
+<p><code class="code">divisors</code> distributes over equations, lists, matrices, and sets.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) divisors (a = b);
+(%o1)               divisors(a) = divisors(b)
+(%i2) divisors ([a, b, c]);
+(%o2)        [divisors(a), divisors(b), divisors(c)]
+(%i3) divisors (matrix ([a, b], [c, d]));
+                  [ divisors(a)  divisors(b) ]
+(%o3)             [                          ]
+                  [ divisors(c)  divisors(d) ]
+(%i4) divisors ({a, b, c});
+(%o4)        {divisors(a), divisors(b), divisors(c)}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integers">Integers</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="elementp"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002felementp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-elementp"><span class="category-def">Function: </span><span><strong class="def-name">elementp</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">a</var>)</var><a class="copiable-link" href='#index-elementp'> &para;</a></span></dt>
+<dd><p>Returns <code class="code">true</code> if and only if <var class="var">x</var> is a member of the 
+set <var class="var">a</var>.
+</p>
+<p><code class="code">elementp</code> complains if <var class="var">a</var> is not a literal set.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) elementp (sin(1), {sin(1), sin(2), sin(3)});
+(%o1)                         true
+(%i2) elementp (sin(1), {cos(1), cos(2), cos(3)});
+(%o2)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="emptyp"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002femptyp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-emptyp"><span class="category-def">Function: </span><span><strong class="def-name">emptyp</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-emptyp'> &para;</a></span></dt>
+<dd><p>Return <code class="code">true</code> if and only if <var class="var">a</var> is the empty set or
+the empty list.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) map (emptyp, [{}, []]);
+(%o1)                     [true, true]
+(%i2) map (emptyp, [a + b, {{}}, %pi]);
+(%o2)                 [false, false, false]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+</div>
+
+</dd></dl>
+       
+<a class="anchor" id="equiv_005fclasses"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fequiv_005fclasses"></a><dl class="first-deffn">
+<dt class="deffn" id="index-equiv_005fclasses"><span class="category-def">Function: </span><span><strong class="def-name">equiv_classes</strong> <var class="def-var-arguments">(<var class="var">s</var>, <var class="var">F</var>)</var><a class="copiable-link" href='#index-equiv_005fclasses'> &para;</a></span></dt>
+<dd><p>Returns a set of the equivalence classes of the set <var class="var">s</var> with respect
+to the equivalence relation <var class="var">F</var>.
+</p>
+<p><var class="var">F</var> is a function of two variables defined on the Cartesian product of <var class="var">s</var> with <var class="var">s</var>.
+The return value of <var class="var">F</var> is either <code class="code">true</code> or <code class="code">false</code>,
+or an expression <var class="var">expr</var> such that <code class="code">is(<var class="var">expr</var>)</code> is either <code class="code">true</code> or <code class="code">false</code>.
+</p>
+<p>When <var class="var">F</var> is not an equivalence relation,
+<code class="code">equiv_classes</code> accepts it without complaint,
+but the result is generally incorrect in that case.
+</p>
+
+<p>Examples:
+</p>
+<p>The equivalence relation is a lambda expression which returns <code class="code">true</code> or <code class="code">false</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) equiv_classes ({1, 1.0, 2, 2.0, 3, 3.0},
+                        lambda ([x, y], is (equal (x, y))));
+(%o1)            {{1, 1.0}, {2, 2.0}, {3, 3.0}}
+</pre></div>
+
+<p>The equivalence relation is the name of a relational function
+which <code class="code">is</code> evaluates to <code class="code">true</code> or <code class="code">false</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) equiv_classes ({1, 1.0, 2, 2.0, 3, 3.0}, equal);
+(%o1)            {{1, 1.0}, {2, 2.0}, {3, 3.0}}
+</pre></div>
+
+<p>The equivalence classes are numbers which differ by a multiple of 3.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) equiv_classes ({1, 2, 3, 4, 5, 6, 7},
+                     lambda ([x, y], remainder (x - y, 3) = 0));
+(%o1)              {{1, 4, 7}, {2, 5}, {3, 6}}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="every"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fevery"></a><dl class="first-deffn">
+<dt class="deffn" id="index-every"><span class="category-def">Function: </span><span><strong class="def-name">every</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">every</code> (<var class="var">f</var>, <var class="var">s</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">every</code> (<var class="var">f</var>, <var class="var">L_1</var>, ..., <var class="var">L_n</var>)</var><a class="copiable-link" href='#index-every'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if the predicate <var class="var">f</var> is <code class="code">true</code> for all given arguments.
+</p>
+<p>Given one set as the second argument, 
+<code class="code">every(<var class="var">f</var>, <var class="var">s</var>)</code> returns <code class="code">true</code>
+if <code class="code">is(<var class="var">f</var>(<var class="var">a_i</var>))</code> returns <code class="code">true</code> for all <var class="var">a_i</var> in <var class="var">s</var>.
+<code class="code">every</code> may or may not evaluate <var class="var">f</var> for all <var class="var">a_i</var> in <var class="var">s</var>.
+Since sets are unordered,
+<code class="code">every</code> may evaluate <code class="code"><var class="var">f</var>(<var class="var">a_i</var>)</code> in any order.
+</p>
+<p>Given one or more lists as arguments,
+<code class="code">every(<var class="var">f</var>, <var class="var">L_1</var>, ..., <var class="var">L_n</var>)</code> returns <code class="code">true</code>
+if <code class="code">is(<var class="var">f</var>(<var class="var">x_1</var>, ..., <var class="var">x_n</var>))</code> returns <code class="code">true</code> 
+for all <var class="var">x_1</var>, ..., <var class="var">x_n</var> in <var class="var">L_1</var>, ..., <var class="var">L_n</var>, respectively.
+<code class="code">every</code> may or may not evaluate 
+<var class="var">f</var> for every combination <var class="var">x_1</var>, ..., <var class="var">x_n</var>.
+<code class="code">every</code> evaluates lists in the order of increasing index.
+</p>
+<p>Given an empty set <code class="code">{}</code> or empty lists <code class="code">[]</code> as arguments,
+<code class="code">every</code> returns <code class="code">true</code>.
+</p>
+<p>When the global flag <code class="code">maperror</code> is <code class="code">true</code>, all lists 
+<var class="var">L_1</var>, ..., <var class="var">L_n</var> must have equal lengths.
+When <code class="code">maperror</code> is <code class="code">false</code>, list arguments are
+effectively truncated to the length of the shortest list. 
+</p>
+<p>Return values of the predicate <var class="var">f</var> which evaluate (via <code class="code">is</code>)
+to something other than <code class="code">true</code> or <code class="code">false</code>
+are governed by the global flag <code class="code">prederror</code>.
+When <code class="code">prederror</code> is <code class="code">true</code>,
+such values are treated as <code class="code">false</code>,
+and the return value from <code class="code">every</code> is <code class="code">false</code>.
+When <code class="code">prederror</code> is <code class="code">false</code>,
+such values are treated as <code class="code">unknown</code>,
+and the return value from <code class="code">every</code> is <code class="code">unknown</code>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">every</code> applied to a single set.
+The predicate is a function of one argument.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) every (integerp, {1, 2, 3, 4, 5, 6});
+(%o1)                         true
+(%i2) every (atom, {1, 2, sin(3), 4, 5 + y, 6});
+(%o2)                         false
+</pre></div>
+
+<p><code class="code">every</code> applied to two lists.
+The predicate is a function of two arguments.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) every (&quot;=&quot;, [a, b, c], [a, b, c]);
+(%o1)                         true
+(%i2) every (&quot;#&quot;, [a, b, c], [a, b, c]);
+(%o2)                         false
+</pre></div>
+
+<p>Return values of the predicate <var class="var">f</var> which evaluate
+to something other than <code class="code">true</code> or <code class="code">false</code>
+are governed by the global flag <code class="code">prederror</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) prederror : false;
+(%o1)                         false
+(%i2) map (lambda ([a, b], is (a &lt; b)), [x, y, z],
+                   [x^2, y^2, z^2]);
+(%o2)              [unknown, unknown, unknown]
+(%i3) every (&quot;&lt;&quot;, [x, y, z], [x^2, y^2, z^2]);
+(%o3)                        unknown
+(%i4) prederror : true;
+(%o4)                         true
+(%i5) every (&quot;&lt;&quot;, [x, y, z], [x^2, y^2, z^2]);
+(%o5)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+ 
+<a class="anchor" id="extremal_005fsubset"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fextremal_005fsubset"></a><dl class="first-deffn">
+<dt class="deffn" id="index-extremal_005fsubset"><span class="category-def">Function: </span><span><strong class="def-name">extremal_subset</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">extremal_subset</code> (<var class="var">s</var>, <var class="var">f</var>, max) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">extremal_subset</code> (<var class="var">s</var>, <var class="var">f</var>, min)</var><a class="copiable-link" href='#index-extremal_005fsubset'> &para;</a></span></dt>
+<dd>
+<p>Returns the subset of <var class="var">s</var> for which the function <var class="var">f</var> takes on maximum or minimum values.
+</p>
+<p><code class="code">extremal_subset(<var class="var">s</var>, <var class="var">f</var>, max)</code> returns the subset of the set or 
+list <var class="var">s</var> for which the real-valued function <var class="var">f</var> takes on its maximum value.
+</p>
+<p><code class="code">extremal_subset(<var class="var">s</var>, <var class="var">f</var>, min)</code> returns the subset of the set or 
+list <var class="var">s</var> for which the real-valued function <var class="var">f</var> takes on its minimum value.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) extremal_subset ({-2, -1, 0, 1, 2}, abs, max);
+(%o1)                       {- 2, 2}
+(%i2) extremal_subset ({sqrt(2), 1.57, %pi/2}, sin, min);
+(%o2)                       {sqrt(2)}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="flatten"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fflatten"></a><dl class="first-deffn">
+<dt class="deffn" id="index-flatten"><span class="category-def">Function: </span><span><strong class="def-name">flatten</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-flatten'> &para;</a></span></dt>
+<dd>
+<p>Collects arguments of subexpressions which have the same operator as <var class="var">expr</var>
+and constructs an expression from these collected arguments.
+</p>
+<p>Subexpressions in which the operator is different from the main operator of <code class="code">expr</code>
+are copied without modification,
+even if they, in turn, contain some subexpressions in which the operator is the same as for <code class="code">expr</code>.
+</p>
+<p>It may be possible for <code class="code">flatten</code> to construct expressions in which the number
+of arguments differs from the declared arguments for an operator;
+this may provoke an error message from the simplifier or evaluator.
+<code class="code">flatten</code> does not try to detect such situations.
+</p>
+<p>Expressions with special representations, for example, canonical rational expressions (CRE), 
+cannot be flattened; in such cases, <code class="code">flatten</code> returns its argument unchanged.
+</p>
+<p>Examples:
+</p>
+<p>Applied to a list, <code class="code">flatten</code> gathers all list elements that are lists.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) flatten ([a, b, [c, [d, e], f], [[g, h]], i, j]);
+(%o1)            [a, b, c, d, e, f, g, h, i, j]
+</pre></div>
+
+<p>Applied to a set, <code class="code">flatten</code> gathers all members of set elements that are sets.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) flatten ({a, {b}, {{c}}});
+(%o1)                       {a, b, c}
+(%i2) flatten ({a, {[a], {a}}});
+(%o2)                       {a, [a]}
+</pre></div>
+
+<p><code class="code">flatten</code> is similar to the effect of declaring the main operator n-ary.
+However, <code class="code">flatten</code> has no effect on subexpressions which have an operator
+different from the main operator, while an n-ary declaration affects those.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expr: flatten (f (g (f (f (x)))));
+(%o1)                     f(g(f(f(x))))
+(%i2) declare (f, nary);
+(%o2)                         done
+(%i3) ev (expr);
+(%o3)                      f(g(f(x)))
+</pre></div>
+
+<p><code class="code">flatten</code> treats subscripted functions the same as any other operator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) flatten (f[5] (f[5] (x, y), z));
+(%o1)                      f (x, y, z)
+                            5
+</pre></div>
+
+<p>It may be possible for <code class="code">flatten</code> to construct expressions in which the number
+of arguments differs from the declared arguments for an operator;
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) 'mod (5, 'mod (7, 4));
+(%o1)                   mod(5, mod(7, 4))
+(%i2) flatten (%);
+(%o2)                     mod(5, 7, 4)
+(%i3) ''%, nouns;
+Wrong number of arguments to mod
+ -- an error.  Quitting.  To debug this try debugmode(true);
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Lists">Lists</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="full_005flistify"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002ffull_005flistify"></a><dl class="first-deffn">
+<dt class="deffn" id="index-full_005flistify"><span class="category-def">Function: </span><span><strong class="def-name">full_listify</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-full_005flistify'> &para;</a></span></dt>
+<dd><p>Replaces every set operator in <var class="var">a</var> by a list operator,
+and returns the result.
+<code class="code">full_listify</code> replaces set operators in nested subexpressions,
+even if the main operator is not <code class="code">set</code>.
+</p>
+<p><code class="code">listify</code> replaces only the main operator.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) full_listify ({a, b, {c, {d, e, f}, g}});
+(%o1)               [a, b, [c, [d, e, f], g]]
+(%i2) full_listify (F (G ({a, b, H({c, d, e})})));
+(%o2)              F(G([a, b, H([c, d, e])]))
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="fullsetify"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002ffullsetify"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fullsetify"><span class="category-def">Function: </span><span><strong class="def-name">fullsetify</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-fullsetify'> &para;</a></span></dt>
+<dd><p>When <var class="var">a</var> is a list, replaces the list operator with a set operator,
+and applies <code class="code">fullsetify</code> to each member which is a set.
+When <var class="var">a</var> is not a list, it is returned unchanged.
+</p>
+<p><code class="code">setify</code> replaces only the main operator.
+</p>
+<p>Examples:
+</p>
+<p>In line <code class="code">(%o2)</code>, the argument of <code class="code">f</code> isn&rsquo;t converted to a set
+because the main operator of <code class="code">f([b])</code> isn&rsquo;t a list.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) fullsetify ([a, [a]]);
+(%o1)                       {a, {a}}
+(%i2) fullsetify ([a, f([b])]);
+(%o2)                      {a, f([b])}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Lists">Lists</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="identity"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fidentity"></a><dl class="first-deffn">
+<dt class="deffn" id="index-identity"><span class="category-def">Function: </span><span><strong class="def-name">identity</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-identity'> &para;</a></span></dt>
+<dd>
+<p>Returns <var class="var">x</var> for any argument <var class="var">x</var>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">identity</code> may be used as a predicate when the arguments
+are already Boolean values.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) every (identity, [true, true]);
+(%o1)                         true
+</pre></div>
+</dd></dl>
+
+<a class="anchor" id="integer_005fpartitions"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002finteger_005fpartitions"></a><dl class="first-deffn">
+<dt class="deffn" id="index-integer_005fpartitions"><span class="category-def">Function: </span><span><strong class="def-name">integer_partitions</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">integer_partitions</code> (<var class="var">n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">integer_partitions</code> (<var class="var">n</var>, <var class="var">len</var>)</var><a class="copiable-link" href='#index-integer_005fpartitions'> &para;</a></span></dt>
+<dd>
+<p>Returns integer partitions of <var class="var">n</var>, that is,
+lists of integers which sum to <var class="var">n</var>.
+</p>
+<p><code class="code">integer_partitions(<var class="var">n</var>)</code> returns the set of
+all partitions of the integer <var class="var">n</var>.
+Each partition is a list sorted from greatest to least.
+</p>
+<p><code class="code">integer_partitions(<var class="var">n</var>, <var class="var">len</var>)</code>
+returns all partitions that have length <var class="var">len</var> or less; in this
+case, zeros are appended to each partition with fewer than <var class="var">len</var>
+terms to make each partition have exactly <var class="var">len</var> terms.
+Each partition is a list sorted from greatest to least.
+</p>
+<p>A list <em class="math tex2jax_process">\([a_1, ..., a_m]\)</em> is a partition of a nonnegative integer
+<em class="math tex2jax_process">\(n\)</em> when (1) each <em class="math tex2jax_process">\(a_i\)</em> is a nonzero integer, and (2) 
+<em class="math tex2jax_process">\(a_1 + ... + a_m = n.\)</em> Thus 0 has no partitions.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) integer_partitions (3);
+(%o1)               {[1, 1, 1], [2, 1], [3]}
+(%i2) s: integer_partitions (25)$
+(%i3) cardinality (s);
+(%o3)                         1958
+(%i4) map (lambda ([x], apply (&quot;+&quot;, x)), s);
+(%o4)                         {25}
+(%i5) integer_partitions (5, 3);
+(%o5) {[2, 2, 1], [3, 1, 1], [3, 2, 0], [4, 1, 0], [5, 0, 0]}
+(%i6) integer_partitions (5, 2);
+(%o6)               {[3, 2], [4, 1], [5, 0]}
+</pre></div>
+
+<p>To find all partitions that satisfy a condition, use the function <code class="code">subset</code>;
+here is an example that finds all partitions of 10 that consist of prime numbers.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: integer_partitions (10)$
+(%i2) cardinality (s);
+(%o2)                          42
+(%i3) xprimep(x) := integerp(x) and (x &gt; 1) and primep(x)$
+(%i4) subset (s, lambda ([x], every (xprimep, x)));
+(%o4) {[2, 2, 2, 2, 2], [3, 3, 2, 2], [5, 3, 2], [5, 5], [7, 3]}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integers">Integers</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="intersect"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fintersect"></a><dl class="first-deffn">
+<dt class="deffn" id="index-intersect"><span class="category-def">Function: </span><span><strong class="def-name">intersect</strong> <var class="def-var-arguments">(<var class="var">a_1</var>, ..., <var class="var">a_n</var>)</var><a class="copiable-link" href='#index-intersect'> &para;</a></span></dt>
+<dd>
+<p><code class="code">intersect</code> is the same as <code class="code">intersection</code>, which see.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="intersection"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fintersection"></a><dl class="first-deffn">
+<dt class="deffn" id="index-intersection"><span class="category-def">Function: </span><span><strong class="def-name">intersection</strong> <var class="def-var-arguments">(<var class="var">a_1</var>, ..., <var class="var">a_n</var>)</var><a class="copiable-link" href='#index-intersection'> &para;</a></span></dt>
+<dd><p>Returns a set containing the elements that are common to the 
+sets <var class="var">a_1</var> through <var class="var">a_n</var>.
+</p>
+<p><code class="code">intersection</code> complains if any argument is not a literal set.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) S_1 : {a, b, c, d};
+(%o1)                     {a, b, c, d}
+(%i2) S_2 : {d, e, f, g};
+(%o2)                     {d, e, f, g}
+(%i3) S_3 : {c, d, e, f};
+(%o3)                     {c, d, e, f}
+(%i4) S_4 : {u, v, w};
+(%o4)                       {u, v, w}
+(%i5) intersection (S_1, S_2);
+(%o5)                          {d}
+(%i6) intersection (S_2, S_3);
+(%o6)                       {d, e, f}
+(%i7) intersection (S_1, S_2, S_3);
+(%o7)                          {d}
+(%i8) intersection (S_1, S_2, S_3, S_4);
+(%o8)                          {}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-nset_002fdeffn_002fkron_005fdelta"></a><dl class="first-deffn">
+<dt class="deffn" id="index-kron_005fdelta"><span class="category-def">Function: </span><span><strong class="def-name">kron_delta</strong> <var class="def-var-arguments">(<var class="var">x1</var>, <var class="var">x2</var>, &hellip;, <var class="var">xp</var>)</var><a class="copiable-link" href='#index-kron_005fdelta'> &para;</a></span></dt>
+<dd>
+<p>Represents the Kronecker delta function.
+</p>
+<p><code class="code">kron_delta</code> simplifies to 1 when <var class="var">xi</var> and <var class="var">yj</var> are equal
+for all pairs of arguments, and it simplifies to 0 when <var class="var">xi</var> and
+<var class="var">yj</var> are not equal for some pair of arguments. Equality is
+determined using <code class="code">is(equal(xi,xj))</code> and inequality by
+<code class="code">is(notequal(xi,xj))</code>. For exactly one argument, <code class="code">kron_delta</code>
+signals an error.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) kron_delta(a,a);
+(%o1)                                  1
+(%i2) kron_delta(a,b,a,b);
+(%o2)                          kron_delta(a, b)
+(%i3) kron_delta(a,a,b,a+1);
+(%o3)                                  0
+(%i4) assume(equal(x,y));
+(%o4)                            [equal(x, y)]
+(%i5) kron_delta(x,y);
+(%o5)                                  1
+</pre></div>
+
+
+</dd></dl>
+
+<a class="anchor" id="listify"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002flistify"></a><dl class="first-deffn">
+<dt class="deffn" id="index-listify"><span class="category-def">Function: </span><span><strong class="def-name">listify</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-listify'> &para;</a></span></dt>
+<dd>
+<p>Returns a list containing the members of <var class="var">a</var> when <var class="var">a</var> is a set.
+Otherwise, <code class="code">listify</code> returns <var class="var">a</var>.
+</p>
+<p><code class="code">full_listify</code> replaces all set operators in <var class="var">a</var> by list operators.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) listify ({a, b, c, d});
+(%o1)                     [a, b, c, d]
+(%i2) listify (F ({a, b, c, d}));
+(%o2)                    F({a, b, c, d})
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="makeset"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fmakeset"></a><dl class="first-deffn">
+<dt class="deffn" id="index-makeset"><span class="category-def">Function: </span><span><strong class="def-name">makeset</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">s</var>)</var><a class="copiable-link" href='#index-makeset'> &para;</a></span></dt>
+<dd>
+<p>Returns a set with members generated from the expression <var class="var">expr</var>,
+where <var class="var">x</var> is a list of variables in <var class="var">expr</var>,
+and <var class="var">s</var> is a set or list of lists.
+To generate each set member,
+<var class="var">expr</var> is evaluated with the variables <var class="var">x</var> bound in parallel to a member of <var class="var">s</var>.
+</p>
+<p>Each member of <var class="var">s</var> must have the same length as <var class="var">x</var>.
+The list of variables <var class="var">x</var> must be a list of symbols, without subscripts.
+Even if there is only one symbol, <var class="var">x</var> must be a list of one element,
+and each member of <var class="var">s</var> must be a list of one element.
+</p>
+
+<p>See also <code class="code"><a class="ref" href="maxima_4.html#makelist">makelist</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) makeset (i/j, [i, j], [[1, a], [2, b], [3, c], [4, d]]);
+                           1  2  3  4
+(%o1)                     {-, -, -, -}
+                           a  b  c  d
+(%i2) S : {x, y, z}$
+(%i3) S3 : cartesian_product (S, S, S);
+(%o3) {[x, x, x], [x, x, y], [x, x, z], [x, y, x], [x, y, y], 
+[x, y, z], [x, z, x], [x, z, y], [x, z, z], [y, x, x], 
+[y, x, y], [y, x, z], [y, y, x], [y, y, y], [y, y, z], 
+[y, z, x], [y, z, y], [y, z, z], [z, x, x], [z, x, y], 
+[z, x, z], [z, y, x], [z, y, y], [z, y, z], [z, z, x], 
+[z, z, y], [z, z, z]}
+(%i4) makeset (i + j + k, [i, j, k], S3);
+(%o4) {3 x, 3 y, y + 2 x, 2 y + x, 3 z, z + 2 x, z + y + x, 
+                                       z + 2 y, 2 z + x, 2 z + y}
+(%i5) makeset (sin(x), [x], {[1], [2], [3]});
+(%o5)               {sin(1), sin(2), sin(3)}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="moebius"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fmoebius"></a><dl class="first-deffn">
+<dt class="deffn" id="index-moebius"><span class="category-def">Function: </span><span><strong class="def-name">moebius</strong> <var class="def-var-arguments">(<var class="var">n</var>)</var><a class="copiable-link" href='#index-moebius'> &para;</a></span></dt>
+<dd>
+<p>Represents the Moebius function.
+</p>
+<p>When <var class="var">n</var> is product of <em class="math tex2jax_process">\(k\)</em> distinct primes,
+<code class="code">moebius(<var class="var">n</var>)</code> simplifies to <em class="math tex2jax_process">\((-1)^k\)</em>;
+when <em class="math tex2jax_process">\(\mathit{n} = 1\)</em>, it simplifies to 1;
+and it simplifies to 0 for all other positive integers. 
+</p>
+<p><code class="code">moebius</code> distributes over equations, lists, matrices, and sets.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) moebius (1);
+(%o1)                           1
+(%i2) moebius (2 * 3 * 5);
+(%o2)                          - 1
+(%i3) moebius (11 * 17 * 29 * 31);
+(%o3)                           1
+(%i4) moebius (2^32);
+(%o4)                           0
+(%i5) moebius (n);
+(%o5)                      moebius(n)
+(%i6) moebius (n = 12);
+(%o6)                    moebius(n) = 0
+(%i7) moebius ([11, 11 * 13, 11 * 13 * 15]);
+(%o7)                      [- 1, 1, 1]
+(%i8) moebius (matrix ([11, 12], [13, 14]));
+                           [ - 1  0 ]
+(%o8)                      [        ]
+                           [ - 1  1 ]
+(%i9) moebius ({21, 22, 23, 24});
+(%o9)                      {- 1, 0, 1}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integers">Integers</a>
+&middot;
+</div>
+
+</dd></dl>
+ 
+<a class="anchor" id="multinomial_005fcoeff"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fmultinomial_005fcoeff"></a><dl class="first-deffn">
+<dt class="deffn" id="index-multinomial_005fcoeff"><span class="category-def">Function: </span><span><strong class="def-name">multinomial_coeff</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">multinomial_coeff</code> (<var class="var">a_1</var>, ..., <var class="var">a_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">multinomial_coeff</code> ()</var><a class="copiable-link" href='#index-multinomial_005fcoeff'> &para;</a></span></dt>
+<dd>
+<p>Returns the multinomial coefficient.
+</p>
+<p>When each <var class="var">a_k</var> is a nonnegative integer, the multinomial coefficient
+gives the number of ways of placing <code class="code"><var class="var">a_1</var> + ... + <var class="var">a_n</var></code> 
+distinct objects into <em class="math tex2jax_process">\(n\)</em> boxes with <var class="var">a_k</var> elements in the 
+<em class="math tex2jax_process">\(k\)</em>&rsquo;th box. In general, <code class="code">multinomial_coeff (<var class="var">a_1</var>, ..., <var class="var">a_n</var>)</code>
+evaluates to <code class="code">(<var class="var">a_1</var> + ... + <var class="var">a_n</var>)!/(<var class="var">a_1</var>! ... <var class="var">a_n</var>!)</code>.
+</p>
+<p><code class="code">multinomial_coeff()</code> (with no arguments) evaluates to 1.
+</p>
+<p><code class="code">minfactorial</code> may be able to simplify the value returned by <code class="code">multinomial_coeff</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) multinomial_coeff (1, 2, x);
+                            (x + 3)!
+(%o1)                       --------
+                              2 x!
+(%i2) minfactorial (%);
+                     (x + 1) (x + 2) (x + 3)
+(%o2)                -----------------------
+                                2
+(%i3) multinomial_coeff (-6, 2);
+                             (- 4)!
+(%o3)                       --------
+                            2 (- 6)!
+(%i4) minfactorial (%);
+(%o4)                          10
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integers">Integers</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="num_005fdistinct_005fpartitions"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fnum_005fdistinct_005fpartitions"></a><dl class="first-deffn">
+<dt class="deffn" id="index-num_005fdistinct_005fpartitions"><span class="category-def">Function: </span><span><strong class="def-name">num_distinct_partitions</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">num_distinct_partitions</code> (<var class="var">n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">num_distinct_partitions</code> (<var class="var">n</var>, list)</var><a class="copiable-link" href='#index-num_005fdistinct_005fpartitions'> &para;</a></span></dt>
+<dd>
+<p>Returns the number of distinct integer partitions of <var class="var">n</var>
+when <var class="var">n</var> is a nonnegative integer.
+Otherwise, <code class="code">num_distinct_partitions</code> returns a noun expression.
+</p>
+<p><code class="code">num_distinct_partitions(<var class="var">n</var>, list)</code> returns a 
+list of the number of distinct partitions of 1, 2, 3, ..., <var class="var">n</var>. 
+</p>
+<p>A distinct partition of <var class="var">n</var> is
+a list of distinct positive integers <em class="math tex2jax_process">\(k_1\)</em>, ..., <em class="math tex2jax_process">\(k_m\)</em>
+such that <em class="math tex2jax_process">\(\mathit{n} = k_1 + ... + k_m\)</em>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) num_distinct_partitions (12);
+(%o1)                          15
+(%i2) num_distinct_partitions (12, list);
+(%o2)      [1, 1, 1, 2, 2, 3, 4, 5, 6, 8, 10, 12, 15]
+(%i3) num_distinct_partitions (n);
+(%o3)              num_distinct_partitions(n)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integers">Integers</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="num_005fpartitions"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fnum_005fpartitions"></a><dl class="first-deffn">
+<dt class="deffn" id="index-num_005fpartitions"><span class="category-def">Function: </span><span><strong class="def-name">num_partitions</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">num_partitions</code> (<var class="var">n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">num_partitions</code> (<var class="var">n</var>, list)</var><a class="copiable-link" href='#index-num_005fpartitions'> &para;</a></span></dt>
+<dd>
+<p>Returns the number of integer partitions of <var class="var">n</var>
+when <var class="var">n</var> is a nonnegative integer.
+Otherwise, <code class="code">num_partitions</code> returns a noun expression.
+</p>
+<p><code class="code">num_partitions(<var class="var">n</var>, list)</code> returns a
+list of the number of integer partitions of 1, 2, 3, ..., <var class="var">n</var>.
+</p>
+<p>For a nonnegative integer <var class="var">n</var>, <code class="code">num_partitions(<var class="var">n</var>)</code> is equal to
+<code class="code">cardinality(integer_partitions(<var class="var">n</var>))</code>; however, <code class="code">num_partitions</code> 
+does not actually construct the set of partitions, so it is much faster.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) num_partitions (5) = cardinality (integer_partitions (5));
+(%o1)                         7 = 7
+(%i2) num_partitions (8, list);
+(%o2)            [1, 1, 2, 3, 5, 7, 11, 15, 22]
+(%i3) num_partitions (n);
+(%o3)                   num_partitions(n)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integers">Integers</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+<a class="anchor" id="partition_005fset"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fpartition_005fset"></a><dl class="first-deffn">
+<dt class="deffn" id="index-partition_005fset"><span class="category-def">Function: </span><span><strong class="def-name">partition_set</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">f</var>)</var><a class="copiable-link" href='#index-partition_005fset'> &para;</a></span></dt>
+<dd>
+<p>Partitions the set <var class="var">a</var> according to the predicate <var class="var">f</var>.
+</p>
+<p><code class="code">partition_set</code> returns a list of two sets.
+The first set comprises the elements of <var class="var">a</var> for which <var class="var">f</var> evaluates to <code class="code">false</code>,
+and the second comprises any other elements of <var class="var">a</var>.
+<code class="code">partition_set</code> does not apply <code class="code">is</code> to the return value of <var class="var">f</var>.
+</p>
+<p><code class="code">partition_set</code> complains if <var class="var">a</var> is not a literal set.
+</p>
+<p>See also <code class="code"><a class="ref" href="#subset">subset</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) partition_set ({2, 7, 1, 8, 2, 8}, evenp);
+(%o1)                   [{1, 7}, {2, 8}]
+(%i2) partition_set ({x, rat(y), rat(y) + z, 1},
+                     lambda ([x], ratp(x)));
+(%o2)/R/              [{1, x}, {y, y + z}]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="permutations"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fpermutations"></a><dl class="first-deffn">
+<dt class="deffn" id="index-permutations"><span class="category-def">Function: </span><span><strong class="def-name">permutations</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-permutations'> &para;</a></span></dt>
+<dd>
+<p>Returns a set of all distinct permutations of the members of 
+the list or set <var class="var">a</var>. Each permutation is a list, not a set. 
+</p>
+<p>When <var class="var">a</var> is a list, duplicate members of <var class="var">a</var> are included
+in the permutations.
+</p>
+<p><code class="code">permutations</code> complains if <var class="var">a</var> is not a literal list or set.
+</p>
+<p>See also <code class="code"><a class="ref" href="#random_005fpermutation">random_permutation</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) permutations ([a, a]);
+(%o1)                       {[a, a]}
+(%i2) permutations ([a, a, b]);
+(%o2)           {[a, a, b], [a, b, a], [b, a, a]}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Lists">Lists</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="powerset"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fpowerset"></a><dl class="first-deffn">
+<dt class="deffn" id="index-powerset"><span class="category-def">Function: </span><span><strong class="def-name">powerset</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">powerset</code> (<var class="var">a</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">powerset</code> (<var class="var">a</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-powerset'> &para;</a></span></dt>
+<dd>
+<p>Returns the set of all subsets of <var class="var">a</var>, or a subset of that set.
+</p>
+<p><code class="code">powerset(<var class="var">a</var>)</code> returns the set of all subsets of the set <var class="var">a</var>.
+<code class="code">powerset(<var class="var">a</var>)</code> has <code class="code">2^cardinality(<var class="var">a</var>)</code> members.
+</p>
+<p><code class="code">powerset(<var class="var">a</var>, <var class="var">n</var>)</code> returns the set of all subsets of <var class="var">a</var> that have 
+cardinality <var class="var">n</var>.
+</p>
+<p><code class="code">powerset</code> complains if <var class="var">a</var> is not a literal set,
+or if <var class="var">n</var> is not a nonnegative integer.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) powerset ({a, b, c});
+(%o1) {{}, {a}, {a, b}, {a, b, c}, {a, c}, {b}, {b, c}, {c}}
+(%i2) powerset ({w, x, y, z}, 4);
+(%o2)                    {{w, x, y, z}}
+(%i3) powerset ({w, x, y, z}, 3);
+(%o3)     {{w, x, y}, {w, x, z}, {w, y, z}, {x, y, z}}
+(%i4) powerset ({w, x, y, z}, 2);
+(%o4)   {{w, x}, {w, y}, {w, z}, {x, y}, {x, z}, {y, z}}
+(%i5) powerset ({w, x, y, z}, 1);
+(%o5)                 {{w}, {x}, {y}, {z}}
+(%i6) powerset ({w, x, y, z}, 0);
+(%o6)                         {{}}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="random_005fpermutation"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002frandom_005fpermutation"></a><dl class="first-deffn">
+<dt class="deffn" id="index-random_005fpermutation"><span class="category-def">Function: </span><span><strong class="def-name">random_permutation</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-random_005fpermutation'> &para;</a></span></dt>
+<dd>
+<p>Returns a random permutation of the set or list <var class="var">a</var>,
+as constructed by the Knuth shuffle algorithm.
+</p>
+<p>The return value is a new list, which is distinct
+from the argument even if all elements happen to be the same.
+However, the elements of the argument are not copied.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) random_permutation ([a, b, c, 1, 2, 3]);
+(%o1)                  [c, 1, 2, 3, a, b]
+(%i2) random_permutation ([a, b, c, 1, 2, 3]);
+(%o2)                  [b, 3, 1, c, a, 2]
+(%i3) random_permutation ({x + 1, y + 2, z + 3});
+(%o3)                 [y + 2, z + 3, x + 1]
+(%i4) random_permutation ({x + 1, y + 2, z + 3});
+(%o4)                 [x + 1, y + 2, z + 3]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Lists">Lists</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="setdifference"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fsetdifference"></a><dl class="first-deffn">
+<dt class="deffn" id="index-setdifference"><span class="category-def">Function: </span><span><strong class="def-name">setdifference</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-setdifference'> &para;</a></span></dt>
+<dd>
+<p>Returns a set containing the elements in the set <var class="var">a</var> that are
+not in the set <var class="var">b</var>.
+</p>
+<p><code class="code">setdifference</code> complains if either <var class="var">a</var> or <var class="var">b</var> is not a literal set.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) S_1 : {a, b, c, x, y, z};
+(%o1)                  {a, b, c, x, y, z}
+(%i2) S_2 : {aa, bb, c, x, y, zz};
+(%o2)                 {aa, bb, c, x, y, zz}
+(%i3) setdifference (S_1, S_2);
+(%o3)                       {a, b, z}
+(%i4) setdifference (S_2, S_1);
+(%o4)                     {aa, bb, zz}
+(%i5) setdifference (S_1, S_1);
+(%o5)                          {}
+(%i6) setdifference (S_1, {});
+(%o6)                  {a, b, c, x, y, z}
+(%i7) setdifference ({}, S_1);
+(%o7)                          {}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="setequalp"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fsetequalp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-setequalp"><span class="category-def">Function: </span><span><strong class="def-name">setequalp</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-setequalp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if sets <var class="var">a</var> and <var class="var">b</var> have the same number of elements
+and <code class="code">is(<var class="var">x</var> = <var class="var">y</var>)</code> is <code class="code">true</code>
+for <code class="code">x</code> in the elements of <var class="var">a</var>
+and <code class="code">y</code> in the elements of <var class="var">b</var>,
+considered in the order determined by <code class="code">listify</code>.
+Otherwise, <code class="code">setequalp</code> returns <code class="code">false</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) setequalp ({1, 2, 3}, {1, 2, 3});
+(%o1)                         true
+(%i2) setequalp ({a, b, c}, {1, 2, 3});
+(%o2)                         false
+(%i3) setequalp ({x^2 - y^2}, {(x + y) * (x - y)});
+(%o3)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="setify"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fsetify"></a><dl class="first-deffn">
+<dt class="deffn" id="index-setify"><span class="category-def">Function: </span><span><strong class="def-name">setify</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-setify'> &para;</a></span></dt>
+<dd>
+<p>Constructs a set from the elements of the list <var class="var">a</var>. Duplicate
+elements of the list <var class="var">a</var> are deleted and the elements
+are sorted according to the predicate <code class="code">orderlessp</code>.
+</p>
+<p><code class="code">setify</code> complains if <var class="var">a</var> is not a literal list.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) setify ([1, 2, 3, a, b, c]);
+(%o1)                  {1, 2, 3, a, b, c}
+(%i2) setify ([a, b, c, a, b, c]);
+(%o2)                       {a, b, c}
+(%i3) setify ([7, 13, 11, 1, 3, 9, 5]);
+(%o3)                {1, 3, 5, 7, 9, 11, 13}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Lists">Lists</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="setp"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fsetp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-setp"><span class="category-def">Function: </span><span><strong class="def-name">setp</strong> <var class="def-var-arguments">(<var class="var">a</var>)</var><a class="copiable-link" href='#index-setp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if and only if <var class="var">a</var> is a Maxima set.
+</p>
+<p><code class="code">setp</code> returns <code class="code">true</code> for unsimplified sets (that is, sets with redundant members)
+as well as simplified sets.
+</p>
+<p><code class="code">setp</code> is equivalent to the Maxima function
+<code class="code">setp(a) := not atom(a) and op(a) = 'set</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) simp : false;
+(%o1)                         false
+(%i2) {a, a, a};
+(%o2)                       {a, a, a}
+(%i3) setp (%);
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="set_005fpartitions"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fset_005fpartitions"></a><dl class="first-deffn">
+<dt class="deffn" id="index-set_005fpartitions"><span class="category-def">Function: </span><span><strong class="def-name">set_partitions</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">set_partitions</code> (<var class="var">a</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">set_partitions</code> (<var class="var">a</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-set_005fpartitions'> &para;</a></span></dt>
+<dd>
+<p>Returns the set of all partitions of <var class="var">a</var>, or a subset of that set.
+</p>
+<p><code class="code">set_partitions(<var class="var">a</var>, <var class="var">n</var>)</code> returns a set of all
+decompositions of <var class="var">a</var> into <var class="var">n</var> nonempty disjoint subsets.
+</p>
+<p><code class="code">set_partitions(<var class="var">a</var>)</code> returns the set of all partitions.
+</p>
+<p><code class="code">stirling2</code> returns the cardinality of the set of partitions of a set.
+</p>
+<p>A set of sets <em class="math tex2jax_process">\(P\)</em> is a partition of a set <em class="math tex2jax_process">\(S\)</em> when
+</p>
+<ol class="enumerate">
+<li> each member of <em class="math tex2jax_process">\(P\)</em> is a nonempty set,
+</li><li> distinct members of <em class="math tex2jax_process">\(P\)</em> are disjoint,
+</li><li> the union of the members of <em class="math tex2jax_process">\(P\)</em> equals <em class="math tex2jax_process">\(S\)</em>.
+</li></ol>
+
+<p>Examples:
+</p>
+<p>The empty set is a partition of itself, the conditions 1 and 2 being vacuously true.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) set_partitions ({});
+(%o1)                         {{}}
+</pre></div>
+
+<p>The cardinality of the set of partitions of a set can be found using <code class="code">stirling2</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: {0, 1, 2, 3, 4, 5}$
+(%i2) p: set_partitions (s, 3)$ 
+(%i3) cardinality(p) = stirling2 (6, 3);
+(%o3)                        90 = 90
+</pre></div>
+
+<p>Each member of <code class="code">p</code> should have <var class="var">n</var> = 3 members; let&rsquo;s check.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: {0, 1, 2, 3, 4, 5}$
+(%i2) p: set_partitions (s, 3)$ 
+(%i3) map (cardinality, p);
+(%o3)                          {3}
+</pre></div>
+
+<p>Finally, for each member of <code class="code">p</code>, the union of its members should 
+equal <code class="code">s</code>; again let&rsquo;s check.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: {0, 1, 2, 3, 4, 5}$
+(%i2) p: set_partitions (s, 3)$ 
+(%i3) map (lambda ([x], apply (union, listify (x))), p);
+(%o3)                 {{0, 1, 2, 3, 4, 5}}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="some"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fsome"></a><dl class="first-deffn">
+<dt class="deffn" id="index-some"><span class="category-def">Function: </span><span><strong class="def-name">some</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">some</code> (<var class="var">f</var>, <var class="var">a</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">some</code> (<var class="var">f</var>, <var class="var">L_1</var>, ..., <var class="var">L_n</var>)</var><a class="copiable-link" href='#index-some'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if the predicate <var class="var">f</var> is <code class="code">true</code> for one or more given arguments.
+</p>
+<p>Given one set as the second argument, 
+<code class="code">some(<var class="var">f</var>, <var class="var">s</var>)</code> returns <code class="code">true</code>
+if <code class="code">is(<var class="var">f</var>(<var class="var">a_i</var>))</code> returns <code class="code">true</code> for one or more <var class="var">a_i</var> in <var class="var">s</var>.
+<code class="code">some</code> may or may not evaluate <var class="var">f</var> for all <var class="var">a_i</var> in <var class="var">s</var>.
+Since sets are unordered,
+<code class="code">some</code> may evaluate <code class="code"><var class="var">f</var>(<var class="var">a_i</var>)</code> in any order.
+</p>
+<p>Given one or more lists as arguments,
+<code class="code">some(<var class="var">f</var>, <var class="var">L_1</var>, ..., <var class="var">L_n</var>)</code> returns <code class="code">true</code>
+if <code class="code">is(<var class="var">f</var>(<var class="var">x_1</var>, ..., <var class="var">x_n</var>))</code> returns <code class="code">true</code> 
+for one or more <var class="var">x_1</var>, ..., <var class="var">x_n</var> in <var class="var">L_1</var>, ..., <var class="var">L_n</var>, respectively.
+<code class="code">some</code> may or may not evaluate 
+<var class="var">f</var> for some combinations <var class="var">x_1</var>, ..., <var class="var">x_n</var>.
+<code class="code">some</code> evaluates lists in the order of increasing index.
+</p>
+<p>Given an empty set <code class="code">{}</code> or empty lists <code class="code">[]</code> as arguments,
+<code class="code">some</code> returns <code class="code">false</code>.
+</p>
+<p>When the global flag <code class="code">maperror</code> is <code class="code">true</code>, all lists 
+<var class="var">L_1</var>, ..., <var class="var">L_n</var> must have equal lengths.
+When <code class="code">maperror</code> is <code class="code">false</code>, list arguments are
+effectively truncated to the length of the shortest list. 
+</p>
+<p>Return values of the predicate <var class="var">f</var> which evaluate (via <code class="code">is</code>)
+to something other than <code class="code">true</code> or <code class="code">false</code>
+are governed by the global flag <code class="code">prederror</code>.
+When <code class="code">prederror</code> is <code class="code">true</code>,
+such values are treated as <code class="code">false</code>.
+When <code class="code">prederror</code> is <code class="code">false</code>,
+such values are treated as <code class="code">unknown</code>.
+</p>
+<p>Examples:
+</p>
+<p><code class="code">some</code> applied to a single set.
+The predicate is a function of one argument.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) some (integerp, {1, 2, 3, 4, 5, 6});
+(%o1)                         true
+(%i2) some (atom, {1, 2, sin(3), 4, 5 + y, 6});
+(%o2)                         true
+</pre></div>
+
+<p><code class="code">some</code> applied to two lists.
+The predicate is a function of two arguments.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) some (&quot;=&quot;, [a, b, c], [a, b, c]);
+(%o1)                         true
+(%i2) some (&quot;#&quot;, [a, b, c], [a, b, c]);
+(%o2)                         false
+</pre></div>
+
+<p>Return values of the predicate <var class="var">f</var> which evaluate
+to something other than <code class="code">true</code> or <code class="code">false</code>
+are governed by the global flag <code class="code">prederror</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) prederror : false;
+(%o1)                         false
+(%i2) map (lambda ([a, b], is (a &lt; b)), [x, y, z],
+           [x^2, y^2, z^2]);
+(%o2)              [unknown, unknown, unknown]
+(%i3) some (&quot;&lt;&quot;, [x, y, z], [x^2, y^2, z^2]);
+(%o3)                        unknown
+(%i4) some (&quot;&lt;&quot;, [x, y, z], [x^2, y^2, z + 1]);
+(%o4)                         true
+(%i5) prederror : true;
+(%o5)                         true
+(%i6) some (&quot;&lt;&quot;, [x, y, z], [x^2, y^2, z^2]);
+(%o6)                         false
+(%i7) some (&quot;&lt;&quot;, [x, y, z], [x^2, y^2, z + 1]);
+(%o7)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Lists">Lists</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="stirling1"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fstirling1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-stirling1"><span class="category-def">Function: </span><span><strong class="def-name">stirling1</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-stirling1'> &para;</a></span></dt>
+<dd>
+<p>Represents the Stirling number of the first kind.
+</p>
+<p>When <var class="var">n</var> and <var class="var">m</var> are nonnegative 
+integers, the magnitude of <code class="code">stirling1 (<var class="var">n</var>, <var class="var">m</var>)</code> is the number of 
+permutations of a set with <var class="var">n</var> members that have <var class="var">m</var> cycles.
+</p>
+<p><code class="code">stirling1</code> is a simplifying function.
+Maxima knows the following identities:
+</p>
+<ol class="enumerate">
+<li> <em class="math tex2jax_process">\(stirling1(1,k) = kron_delta(1,k), k >= 0\)</em>,(see <a class="url" href="https://dlmf.nist.gov/26.8.E2">https://dlmf.nist.gov/26.8.E2</a>)
+</li><li> <em class="math tex2jax_process">\(stirling1(n,n) = 1, n >= 0\)</em> (see <a class="url" href="https://dlmf.nist.gov/26.8.E1">https://dlmf.nist.gov/26.8.E1</a>)
+</li><li> <em class="math tex2jax_process">\(stirling1(n,n-1) = -binomial(n,2), n >= 1\)</em>, (see <a class="url" href="https://dlmf.nist.gov/26.8.E16">https://dlmf.nist.gov/26.8.E16</a>)
+</li><li> <em class="math tex2jax_process">\(stirling1(n,0) = kron_delta(n,0), n >=0\)</em>  (see <a class="url" href="https://dlmf.nist.gov/26.8.E14">https://dlmf.nist.gov/26.8.E14</a> and
+   <a class="url" href="https://dlmf.nist.gov/26.8.E1">https://dlmf.nist.gov/26.8.E1</a>)
+</li><li> <em class="math tex2jax_process">\(stirling1(n,1) =(-1)^(n-1) (n-1)!, n >= 1\)</em> (see <a class="url" href="https://dlmf.nist.gov/26.8.E14">https://dlmf.nist.gov/26.8.E14</a>)
+</li><li> <em class="math tex2jax_process">\(stirling1(n,k) = 0, n >= 0\)</em> and <em class="math tex2jax_process">\(k > n\)</em>.
+</li></ol>
+
+<p>These identities are applied when the arguments are literal integers
+or symbols declared as integers, and the first argument is nonnegative.
+<code class="code">stirling1</code> does not simplify for non-integer arguments.
+</p>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (n, integer)$
+(%i2) assume (n &gt;= 0)$
+(%i3) stirling1 (n, n);
+(%o3)                           1
+</pre></div>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integers">Integers</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="stirling2"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fstirling2"></a><dl class="first-deffn">
+<dt class="deffn" id="index-stirling2"><span class="category-def">Function: </span><span><strong class="def-name">stirling2</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-stirling2'> &para;</a></span></dt>
+<dd>
+<p>Represents the Stirling number of the second kind.
+</p>
+<p>When <var class="var">n</var> and <var class="var">m</var> are nonnegative 
+integers, <code class="code">stirling2 (<var class="var">n</var>, <var class="var">m</var>)</code> is the number of ways a set with 
+cardinality <var class="var">n</var> can be partitioned into <var class="var">m</var> disjoint subsets.
+</p>
+<p><code class="code">stirling2</code> is a simplifying function.
+Maxima knows the following identities.
+</p>
+<ol class="enumerate">
+<li> <em class="math tex2jax_process">\(stirling2(n,0) = 1, n >= 1\)</em> (see <a class="url" href="https://dlmf.nist.gov/26.8.E17">https://dlmf.nist.gov/26.8.E17</a> and stirling2(0,0) = 1)
+</li><li> <em class="math tex2jax_process">\(stirling2(n,n) = 1, n >= 0\)</em>, (see <a class="url" href="https://dlmf.nist.gov/26.8.E4">https://dlmf.nist.gov/26.8.E4</a>)
+</li><li> <em class="math tex2jax_process">\(stirling2(n,1) = 1, n >= 1\)</em>, (see <a class="url" href="https://dlmf.nist.gov/26.8.E17">https://dlmf.nist.gov/26.8.E17</a> and stirling2(0,1) = 0)
+</li><li> <em class="math tex2jax_process">\(stirling2(n,2) = 2^(n-1) -1, n >= 1\)</em>, (see <a class="url" href="https://dlmf.nist.gov/26.8.E17">https://dlmf.nist.gov/26.8.E17</a>)
+</li><li> <em class="math tex2jax_process">\(stirling2(n,n-1) = binomial(n,2), n>= 1\)</em> (see <a class="url" href="https://dlmf.nist.gov/26.8.E16">https://dlmf.nist.gov/26.8.E16</a>)
+</li><li> <em class="math tex2jax_process">\(stirling2(n,k) = 0, n >= 0\)</em> and <em class="math tex2jax_process">\(k > n\)</em>.
+</li></ol>
+
+<p>These identities are applied when the arguments are literal integers
+or symbols declared as integers, and the first argument is nonnegative.
+<code class="code">stirling2</code> does not simplify for non-integer arguments.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (n, integer)$
+(%i2) assume (n &gt;= 0)$
+(%i3) stirling2 (n, n);
+(%o3)                           1
+</pre></div>
+
+<p><code class="code">stirling2</code> does not simplify for non-integer arguments.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) stirling2 (%pi, %pi);
+(%o1)                  stirling2(%pi, %pi)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integers">Integers</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="subset"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fsubset"></a><dl class="first-deffn">
+<dt class="deffn" id="index-subset"><span class="category-def">Function: </span><span><strong class="def-name">subset</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">f</var>)</var><a class="copiable-link" href='#index-subset'> &para;</a></span></dt>
+<dd>
+<p>Returns the subset of the set <var class="var">a</var> that satisfies the predicate <var class="var">f</var>. 
+</p>
+<p><code class="code">subset</code> returns a set which comprises the elements of <var class="var">a</var>
+for which <var class="var">f</var> returns anything other than <code class="code">false</code>.
+<code class="code">subset</code> does not apply <code class="code">is</code> to the return value of <var class="var">f</var>.
+</p>
+<p><code class="code">subset</code> complains if <var class="var">a</var> is not a literal set.
+</p>
+<p>See also <code class="code"><a class="ref" href="#partition_005fset">partition_set</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) subset ({1, 2, x, x + y, z, x + y + z}, atom);
+(%o1)                     {1, 2, x, z}
+(%i2) subset ({1, 2, 7, 8, 9, 14}, evenp);
+(%o2)                      {2, 8, 14}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="subsetp"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fsubsetp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-subsetp"><span class="category-def">Function: </span><span><strong class="def-name">subsetp</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-subsetp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if and only if the set <var class="var">a</var> is a subset of <var class="var">b</var>.
+</p>
+<p><code class="code">subsetp</code> complains if either <var class="var">a</var> or <var class="var">b</var> is not a literal set.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) subsetp ({1, 2, 3}, {a, 1, b, 2, c, 3});
+(%o1)                         true
+(%i2) subsetp ({a, 1, b, 2, c, 3}, {1, 2, 3});
+(%o2)                         false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="symmdifference"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002fsymmdifference"></a><dl class="first-deffn">
+<dt class="deffn" id="index-symmdifference"><span class="category-def">Function: </span><span><strong class="def-name">symmdifference</strong> <var class="def-var-arguments">(<var class="var">a_1</var>, &hellip;, <var class="var">a_n</var>)</var><a class="copiable-link" href='#index-symmdifference'> &para;</a></span></dt>
+<dd>
+<p>Returns the symmetric difference of sets <var class="var">a_1</var>, &hellip;, <var class="var">a_n</var>.
+</p>
+<p>Given two arguments, <code class="code">symmdifference (<var class="var">a</var>, <var class="var">b</var>)</code> is the same as
+<code class="code">union (setdifference (<var class="var">a</var>, <var class="var">b</var>), setdifference (<var class="var">b</var>,
+<var class="var">a</var>))</code>.
+</p>
+<p><code class="code">symmdifference</code> complains if any argument is not a literal set.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) S_1 : {a, b, c};
+(%o1)                       {a, b, c}
+(%i2) S_2 : {1, b, c};
+(%o2)                       {1, b, c}
+(%i3) S_3 : {a, b, z};
+(%o3)                       {a, b, z}
+(%i4) symmdifference ();
+(%o4)                          {}
+(%i5) symmdifference (S_1);
+(%o5)                       {a, b, c}
+(%i6) symmdifference (S_1, S_2);
+(%o6)                        {1, a}
+(%i7) symmdifference (S_1, S_2, S_3);
+(%o7)                        {1, b, z}
+(%i8) symmdifference ({}, S_1, S_2, S_3);
+(%o8)                        {1,b, z}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="union"></a><a class="anchor" id="Item_003a-nset_002fdeffn_002funion"></a><dl class="first-deffn">
+<dt class="deffn" id="index-union"><span class="category-def">Function: </span><span><strong class="def-name">union</strong> <var class="def-var-arguments">(<var class="var">a_1</var>, ..., <var class="var">a_n</var>)</var><a class="copiable-link" href='#index-union'> &para;</a></span></dt>
+<dd><p>Returns the union of the sets <var class="var">a_1</var> through <var class="var">a_n</var>. 
+</p>
+<p><code class="code">union()</code> (with no arguments) returns the empty set.
+</p>
+<p><code class="code">union</code> complains if any argument is not a literal set.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) S_1 : {a, b, c + d, %e};
+(%o1)                   {%e, a, b, d + c}
+(%i2) S_2 : {%pi, %i, %e, c + d};
+(%o2)                 {%e, %i, %pi, d + c}
+(%i3) S_3 : {17, 29, 1729, %pi, %i};
+(%o3)                {17, 29, 1729, %i, %pi}
+(%i4) union ();
+(%o4)                          {}
+(%i5) union (S_1);
+(%o5)                   {%e, a, b, d + c}
+(%i6) union (S_1, S_2);
+(%o6)              {%e, %i, %pi, a, b, d + c}
+(%i7) union (S_1, S_2, S_3);
+(%o7)       {17, 29, 1729, %e, %i, %pi, a, b, d + c}
+(%i8) union ({}, S_1, S_2, S_3);
+(%o8)       {17, 29, 1729, %e, %i, %pi, a, b, d + c}
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sets">Sets</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_35.html#Function-Definition" accesskey="n" rel="next">Function Definition</a>, Previous: <a href="maxima_33.html#Rules-and-Patterns" accesskey="p" rel="prev">Rules and Patterns</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

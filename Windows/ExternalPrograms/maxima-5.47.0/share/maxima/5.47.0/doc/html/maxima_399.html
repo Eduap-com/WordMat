@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Evaluation of Trignometric Functions</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Evaluation of Trignometric Functions">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Evaluation of Trignometric Functions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_393.html#Functions-and-Variables-for-trigtools" rel="up" title="Functions and Variables for trigtools">
+<link href="maxima_400.html#Contract-atan-Functions" rel="next" title="Contract atan Functions">
+<link href="maxima_398.html#Solve-Trignometric-Equations" rel="previous" title="Solve Trignometric Equations">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Evaluation-of-Trignometric-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_400.html#Contract-atan-Functions" accesskey="n" rel="next">Contract atan Functions</a>, Previous: <a href="maxima_398.html#Solve-Trignometric-Equations" accesskey="p" rel="previous">Solve Trignometric Equations</a>, Up: <a href="maxima_393.html#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Evaluation-of-Trignometric-Functions-1"></a>
+<h4 class="subsection">96.2.6 Evaluation of Trignometric Functions</h4>
+
+<a name="trigvalue"></a><a name="Item_003a-trigtools_002fdeffn_002ftrigvalue"></a><dl>
+<dt><a name="index-trigvalue"></a>Function: <strong>trigvalue</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>The function trigvalue compute values of 
+\(\sin
+{m\pi\over n},\)<!-- /@w --> 
+\(\cos
+{m\pi\over n},\)<!-- /@w --> 
+\(\tan
+{m\pi\over n},\)<!-- /@w --> and 
+\(\cot
+{m\pi\over n}\) in radicals.
+</p></dd></dl>
+
+<a name="trigeval"></a><a name="Item_003a-trigtools_002fdeffn_002ftrigeval"></a><dl>
+<dt><a name="index-trigeval"></a>Function: <strong>trigeval</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>The function trigeval compute values of expressions with 
+\(\sin
+{m\pi\over n},\)<!-- /@w --> 
+\(\cos
+{m\pi\over n},\)<!-- /@w --> 
+\(\tan
+{m\pi\over n},\)<!-- /@w --> and 
+\(\cot
+{m\pi\over n}\) in radicals.
+</p></dd></dl>
+
+<p>Examples:
+</p><ol>
+<li> Values of trignometric functions
+<div class="example">
+<pre class="example">(%i1) load(trigtools)$
+</pre><pre class="example">(%i2) trigvalue(sin(%pi/10));
+                                  sqrt(5) - 1
+(%o2)                             -----------
+                                       4
+</pre><pre class="example">(%i3) trigvalue(cos(%pi/10));
+                               sqrt(sqrt(5) + 5)
+(%o3)                          -----------------
+                                      3/2
+                                     2
+</pre><pre class="example">(%i4) trigvalue(tan(%pi/10));
+                              sqrt(5 - 2 sqrt(5))
+(%o4)                         -------------------
+                                    sqrt(5)
+</pre><pre class="example">(%i5) float(%), numer;
+(%o5)                         0.3249196962329063
+(%i6) float(tan(%pi/10)), numer;
+(%o6)                         0.3249196962329063
+(%i7) trigvalue(cot(%pi/10));
+(%o7)                         sqrt(2 sqrt(5) + 5)
+(%i8) float(%), numer;
+(%o8)                          3.077683537175254
+(%i9) float(cot(%pi/10)), numer;
+(%o9)                          3.077683537175254
+(%i10) trigvalue(sin(%pi/32));
+                     sqrt(2 - sqrt(sqrt(sqrt(2) + 2) + 2))
+(%o10)               -------------------------------------
+                                       2
+(%i11) trigvalue(cos(%pi/32));
+                     sqrt(sqrt(sqrt(sqrt(2) + 2) + 2) + 2)
+(%o11)               -------------------------------------
+                                       2
+(%i12) trigvalue(cos(%pi/256));
+       sqrt(sqrt(sqrt(sqrt(sqrt(sqrt(sqrt(2) + 2) + 2) + 2) + 2) + 2) + 2)
+(%o12) -------------------------------------------------------------------
+                                        2
+(%i13) trigvalue(cos(%pi/60));
+        sqrt(sqrt(sqrt(2) sqrt(3) sqrt(sqrt(5) + 5) + sqrt(5) + 7) + 4)
+(%o13)  ---------------------------------------------------------------
+                                      3/2
+                                     2
+</pre><pre class="example">(%i14) trigvalue(sin(%pi/60));
+        sqrt(4 - sqrt(sqrt(2) sqrt(3) sqrt(sqrt(5) + 5) + sqrt(5) + 7))
+(%o14)  ---------------------------------------------------------------
+                                      3/2
+                                     2
+</pre><pre class="example">(%i15) trigvalue(sin(%pi/18));
+                                       %pi
+(%o15)                             sin(---)
+                                       18
+</pre><pre class="example">(%i16) trigvalue(sin(%pi/20));
+                      sqrt(4 - sqrt(2) sqrt(sqrt(5) + 5))
+(%o16)                -----------------------------------
+                                      3/2
+                                     2
+</pre></div>
+
+</li><li> ode example
+<div class="example">
+<pre class="example">(%i17) load(odes)$
+</pre><pre class="example">(%i18) eq:'diff(y,x,5)+2*y=0;
+                                  5
+                                 d y
+(%o18)                           --- + 2 y = 0
+                                   5
+                                 dx
+</pre><pre class="example">(%i19) odeL(eq,y,x);
+</pre><pre class="example">                   1/5     4 %pi
+                - 2    cos(-----) x
+                             5           1/5     4 %pi
+(%o19) y = C5 %e                    sin(2    sin(-----) x)
+                                                   5
+           1/5     4 %pi
+        - 2    cos(-----) x
+                     5           1/5     4 %pi
+ + C4 %e                    cos(2    sin(-----) x)
+                                           5
+           1/5     2 %pi
+        - 2    cos(-----) x
+                     5           1/5     2 %pi
+ + C3 %e                    sin(2    sin(-----) x)
+                                           5
+           1/5     2 %pi
+        - 2    cos(-----) x                                  1/5
+                     5           1/5     2 %pi            - 2    x
+ + C2 %e                    cos(2    sin(-----) x) + C1 %e
+                                           5
+</pre><pre class="example">(%i20) sol:trigeval(%);
+                  (sqrt(5) - 1) x
+                - ---------------
+                        9/5
+                       2              sqrt(sqrt(5) + 5) x
+(%o20) y = C3 %e                  sin(-------------------)
+                                             13/10
+                                            2
+          (sqrt(5) - 1) x
+        - ---------------
+                9/5
+               2              sqrt(sqrt(5) + 5) x
+ + C2 %e                  cos(-------------------)
+                                     13/10
+                                    2
+        (sqrt(5) + 1) x
+        ---------------
+              9/5
+             2              sqrt(5 - sqrt(5)) x
+ + C5 %e                sin(-------------------)
+                                   13/10
+                                  2
+        (sqrt(5) + 1) x
+        ---------------
+              9/5                                          1/5
+             2              sqrt(5 - sqrt(5)) x         - 2    x
+ + C4 %e                cos(-------------------) + C1 %e
+                                   13/10
+                                  2
+</pre><pre class="example">(%i21) subst(sol,eq)$
+(%i22) ev(%, nouns)$
+(%i23) radcan(%);
+(%o23)                               0 = 0
+</pre></div>
+
+</li><li> n-th root of complex number
+
+<p>Example. Find the 4-th roots of %i
+</p><div class="example">
+<pre class="example">(%i24) solve(x^4=%i,x);
+                 1/8                1/8             1/8              1/8
+(%o24) [x = (- 1)    %i, x = - (- 1)   , x = - (- 1)    %i, x = (- 1)   ]
+</pre><pre class="example">(%i25) rectform(%);
+                   %pi        %pi                 %pi         %pi
+(%o25) [x = %i cos(---) - sin(---), x = (- %i sin(---)) - cos(---), 
+                    8          8                   8           8
+                                %pi           %pi              %pi        %pi
+                        x = sin(---) - %i cos(---), x = %i sin(---) + cos(---)]
+                                 8             8                8          8
+</pre><pre class="example">(%i26) trigeval(%);
+            sqrt(sqrt(2) + 2) %i   sqrt(2 - sqrt(2))
+(%o26) [x = -------------------- - -----------------, 
+                     2                     2
+       sqrt(2 - sqrt(2)) %i    sqrt(sqrt(2) + 2)
+x = (- --------------------) - -----------------, 
+                2                      2
+    sqrt(2 - sqrt(2))   sqrt(sqrt(2) + 2) %i
+x = ----------------- - --------------------, 
+            2                    2
+    sqrt(2 - sqrt(2)) %i   sqrt(sqrt(2) + 2)
+x = -------------------- + -----------------]
+             2                     2
+</pre></div>
+</li></ol>
+
+<a name="Item_003a-trigtools_002fnode_002fContract-atan-Functions"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_400.html#Contract-atan-Functions" accesskey="n" rel="next">Contract atan Functions</a>, Previous: <a href="maxima_398.html#Solve-Trignometric-Equations" accesskey="p" rel="previous">Solve Trignometric Equations</a>, Up: <a href="maxima_393.html#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

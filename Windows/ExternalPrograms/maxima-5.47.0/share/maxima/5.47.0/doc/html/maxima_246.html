@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Hypergeometric Random Variable</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Hypergeometric Random Variable">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Hypergeometric Random Variable">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_239.html#Functions-and-Variables-for-discrete-distributions" rel="up" title="Functions and Variables for discrete distributions">
+<link href="maxima_247.html#Negative-Binomial-Random-Variable" rel="next" title="Negative Binomial Random Variable">
+<link href="maxima_245.html#Discrete-Uniform-Random-Variable" rel="previous" title="Discrete Uniform Random Variable">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Hypergeometric-Random-Variable"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_247.html#Negative-Binomial-Random-Variable" accesskey="n" rel="next">Negative Binomial Random Variable</a>, Previous: <a href="maxima_245.html#Discrete-Uniform-Random-Variable" accesskey="p" rel="previous">Discrete Uniform Random Variable</a>, Up: <a href="maxima_239.html#Functions-and-Variables-for-discrete-distributions" accesskey="u" rel="up">Functions and Variables for discrete distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Hypergeometric-Random-Variable-1"></a>
+<h4 class="subsection">52.3.7 Hypergeometric Random Variable</h4>
+
+<p>The <em>hypergeometric distribution</em> is a discrete probability
+distribution.
+</p>
+<p>Let <em>n_1</em> be the number of objects of a class
+<em>A</em> and <em>n_2</em> be the number of objects of class <em>B</em>.
+We take out <em>n</em> objects, <em>without</em> replacment.  Then the
+hypergeometric distribution is the probability that exactly <em>k</em>
+objects are from class <em>A</em>.  Of course <em>n \leq n_1 + n_2</em>.
+</p>
+<a name="pdf_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002fpdf_005fhypergeometric"></a><dl>
+<dt><a name="index-pdf_005fhypergeometric"></a>Function: <strong>pdf_hypergeometric</strong> <em>(<var>x</var>,<var>n_1</var>,<var>n_2</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the probability function of a 
+\({\it Hypergeometric}(n1,n2,n)\)</p>
+<p>random variable, with <em>n_1</em>, <em>n_2</em> and <em>n</em> non negative
+integers and <em>n\leq n_1+n_2</em>.
+Being <em>n_1</em> the number of objects of class A, <em>n_2</em> the number of objects of class B, and
+<em>n</em> the size of the sample without replacement, this function returns the probability of
+event &quot;exactly <var>x</var> objects are of class A&quot;. 
+</p>
+<p>To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The pdf is
+$$
+f(x; n_1, n_2, n) = {\displaystyle{n_1\choose x} {n_2 \choose n-x}
+\over \displaystyle{n_2+n_1 \choose n}}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="cdf_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002fcdf_005fhypergeometric"></a><dl>
+<dt><a name="index-cdf_005fhypergeometric"></a>Function: <strong>cdf_hypergeometric</strong> <em>(<var>x</var>,<var>n_1</var>,<var>n_2</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the distribution function of a 
+\({\it Hypergeometric}(n1,n2,n)\)</p> 
+<p>random variable, with <em>n_1</em>, <em>n_2</em> and <em>n</em> non negative
+integers and <em>n\leq n_1+n_2</em>. 
+See <code>pdf_hypergeometric</code> for a more complete description.
+</p>
+<p>To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The cdf is
+$$
+F(x; n_1, n_2, n) = {n_2+n_1\choose n}^{-1}
+\sum_{k=0}^{\lfloor x \rfloor} {n_1 \choose k} {n_2 \choose n - k}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="quantile_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002fquantile_005fhypergeometric"></a><dl>
+<dt><a name="index-quantile_005fhypergeometric"></a>Function: <strong>quantile_hypergeometric</strong> <em>(<var>q</var>,<var>n1</var>,<var>n2</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the <var>q</var>-quantile of a 
+\({\it Hypergeometric}(n1,n2,n)\) random
+variable, with <var>n1</var>, <var>n2</var> and <var>n</var> non negative integers
+and <em>n\leq n1+n2</em>; in other words, this is the inverse of <code>cdf_hypergeometric</code>. Argument <var>q</var> must be an element of <em>[0,1]</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="mean_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002fmean_005fhypergeometric"></a><dl>
+<dt><a name="index-mean_005fhypergeometric"></a>Function: <strong>mean_hypergeometric</strong> <em>(<var>n_1</var>,<var>n_2</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the mean of a discrete uniform random variable 
+\({\it Hypergeometric}(n_1,n_2,n)\), with <em>n_1</em>, <em>n_2</em> and <em>n</em> non negative integers and <em>n\leq n_1+n_2</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The mean is
+$$
+E[X] = {n n_1\over n_2+n_1}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="var_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002fvar_005fhypergeometric"></a><dl>
+<dt><a name="index-var_005fhypergeometric"></a>Function: <strong>var_hypergeometric</strong> <em>(<var>n1</var>,<var>n2</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the variance of a hypergeometric  random variable 
+\({\it Hypergeometric}(n_1,n_2,n)\), with <em>n1</em>, <em>n2</em> and <em>n</em> non negative integers and <em>n&lt;=n1+n2</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The variance is
+$$
+V[X] = {n n_1 n_2 (n_1 + n_2 - n)
+ \over
+ (n_1 + n_2 - 1) (n_1 + n_2)^2}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="std_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002fstd_005fhypergeometric"></a><dl>
+<dt><a name="index-std_005fhypergeometric"></a>Function: <strong>std_hypergeometric</strong> <em>(<var>n_1</var>,<var>n_2</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the standard deviation of a 
+\({\it Hypergeometric}(n_1,n_2,n)\) random variable, with <em>n_1</em>, <em>n_2</em> and <em>n</em> non negative integers and <em>n\leq n_1+n_2</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The standard deviation is
+$$
+D[X] = {1\over n_1+n_2}\sqrt{n n_1 n_2 (n_1 + n_2 - n) \over n_1+n_2-1}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="skewness_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002fskewness_005fhypergeometric"></a><dl>
+<dt><a name="index-skewness_005fhypergeometric"></a>Function: <strong>skewness_hypergeometric</strong> <em>(<var>n_1</var>,<var>n_2</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the skewness coefficient of a 
+\({\it Hypergeometric}(n1,n2,n)\) random variable, with <em>n_1</em>, <em>n_2</em> and <em>n</em> non negative integers and <em>n\leq n1+n2</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The skewness coefficient is
+$$
+SK[X] = {(n_2-n_2)(n_1+n_2-2n)\over n_1+n_2-2}
+\sqrt{n_1+n_2-1 \over n n_1 n_2 (n_1+n_2-n)}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="kurtosis_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002fkurtosis_005fhypergeometric"></a><dl>
+<dt><a name="index-kurtosis_005fhypergeometric"></a>Function: <strong>kurtosis_hypergeometric</strong> <em>(<var>n_1</var>,<var>n_2</var>,<var>n</var>)</em></dt>
+<dd><p>Returns the kurtosis coefficient of a 
+\({\it Hypergeometric}(n_1,n_2,n)\) random variable, with <em>n_1</em>, <em>n_2</em> and <em>n</em> non negative integers and <em>n\leq n1+n2</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The kurtosis coefficient is
+$$
+
+\eqalign{
+KU[X] = &
+ \left[{C(1)C(0)^2
+   \over
+  n n_1 n_2 C(3)C(2)C(n)}\right. \cr
+  & \times 
+  \left.\left(
+    {3n_1n_2\left((n-2)C(0)^2+6nC(n)-n^2C(0)\right)
+    \over
+    C(0)^2
+    }
+    -6nC(n) + C(0)C(-1)
+  \right)\right] \cr
+  &-3
+}
+$$</p>
+<p>where 
+\(C(k) = n_1+n_2-k\).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="random_005fhypergeometric"></a><a name="Item_003a-distrib_002fdeffn_002frandom_005fhypergeometric"></a><dl>
+<dt><a name="index-random_005fhypergeometric"></a>Function: <strong>random_hypergeometric</strong> <em>(<var>n1</var>,<var>n2</var>,<var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>random_hypergeometric</tt> (<var>n1</var>,<var>n2</var>,<var>n</var>,<var>m</var>)</em></dt>
+<dd>
+<p>Returns a 
+\({\it Hypergeometric}(n1,n2,n)\) random variate, with <var>n1</var>, <var>n2</var> and <var>n</var> non negative integers and <em>n&lt;=n1+n2</em>. Calling <code>random_hypergeometric</code> with a fourth argument <var>m</var>, a random sample of size <var>m</var> will be simulated.
+</p>
+<p>Algorithm described in Kachitvichyanukul, V., Schmeiser, B.W. (1985) <var>Computer generation of hypergeometric random variates.</var> Journal of Statistical Computation and Simulation 22, 127-145.
+</p>
+<p>To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;<a href="maxima_424.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-distrib_002fnode_002fNegative-Binomial-Random-Variable"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_247.html#Negative-Binomial-Random-Variable" accesskey="n" rel="next">Negative Binomial Random Variable</a>, Previous: <a href="maxima_245.html#Discrete-Uniform-Random-Variable" accesskey="p" rel="previous">Discrete Uniform Random Variable</a>, Up: <a href="maxima_239.html#Functions-and-Variables-for-discrete-distributions" accesskey="u" rel="up">Functions and Variables for discrete distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -45,6 +45,7 @@ Sub RunTestSequence()
     MaximaVidNotation = False
     Radians = False
     MaximaComplex = False
+    AllTrig = False
     
     PrepareMaxima
     
@@ -99,12 +100,11 @@ Sub RunTestSequence()
 
    'til test af enkelt
 
-   
-'    GoTo slut
-   
+
+   ' Man kan indtaste flere korrekte resultater, bare adskil med @$
     'calculation tests
     If TestBeregn("2+3", "=5") Then GoTo slut
-    TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
+    TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2@$=-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,899830495714724" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
     If StopNow Then GoTo slut
     TestBeregn "1/5 2", "=2/5"
     If StopNow Then GoTo slut
@@ -136,14 +136,14 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", "=(180" & VBA.ChrW(183) & "cos^(-1)" & VBA.ChrW(8289) & "(2))/" & VBA.ChrW(960) ' burde måske give fejl
     If StopNow Then GoTo slut
-    TestBeregn "(" & VBA.ChrW(8730) & "((x+1)^2+(2" & VBA.ChrW(183) & "(x+1)/x)^2 ))^'", "=((-(8" & VBA.ChrW(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW(183) & "(x+1))/x^(2)+2" & VBA.ChrW(183) & "(x+1))/(2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "((4" & VBA.ChrW(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))"
+    TestBeregn "(" & VBA.ChrW(8730) & "((x+1)^2+(2" & VBA.ChrW(183) & "(x+1)/x)^2 ))^'", "=((-(8" & VBA.ChrW(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW(183) & "(x+1))/x^(2)+2" & VBA.ChrW(183) & "(x+1))/(2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "((4" & VBA.ChrW(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))@$=(-((8" & VBA.ChrW(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW(183) & "(x+1))/x^(2)+2" & VBA.ChrW(183) & "(x+1))/(2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "((4" & VBA.ChrW(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))"
     If StopNow Then GoTo slut
     
     ' equation solving
     InsertHeadingtext "Ligningsløsning"
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
     If StopNow Then GoTo slut
-    TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) "
+    TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) @$n=-(ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) )"
     If StopNow Then GoTo slut
     TestSolve VBA.ChrW(8747) & "_0^a" & VBA.ChrW(9618) & "x^2 dx=4", "a", "a=12^(1/3)"
     If StopNow Then GoTo slut
@@ -201,7 +201,7 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestSolve "2" & VBA.ChrW(183) & "3^x=4" & VBA.ChrW(183) & "5^2x", "x", "x=ln" & VBA.ChrW(8289) & "(2)/ln" & VBA.ChrW(8289) & "(3/25)"
     If StopNow Then GoTo slut
-    TestSolve "2" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "1,1" & VBA.ChrW(12311) & "^x=3" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "1,05" & VBA.ChrW(12311) & "^x", "x", "x=ln" & VBA.ChrW(8289) & "(3/2)" & VBA.ChrW(183) & "21,49612"
+    TestSolve "2" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "1,1" & VBA.ChrW(12311) & "^x=3" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "1,05" & VBA.ChrW(12311) & "^x", "x", "x=ln" & VBA.ChrW(8289) & "(3/2)" & VBA.ChrW(183) & "21,49612@$x=21,49612" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(3/2)"
     If StopNow Then GoTo slut
     TestSolve "2" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "(11/10)" & VBA.ChrW(12311) & "^x=3" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "(105/100)" & VBA.ChrW(12311) & "^x", "x", "x=ln" & VBA.ChrW(8289) & "(3/2)/ln" & VBA.ChrW(8289) & "(22/21)"
     If StopNow Then GoTo slut
@@ -211,7 +211,9 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestSolve "x^2+x-12" & VBA.ChrW(8805) & "8", "x", "x" & VBA.ChrW(8804) & "-5   " & VBA.ChrW(8744) & "   x" & VBA.ChrW(8805) & "4" ' ulighed
     If StopNow Then GoTo slut
-'    TestSolve "", "x", "x="
+    If TestSolve("e^(-x)=2", "x", "x=-ln" & VBA.ChrW(8289) & "(2)") Then GoTo slut
+    
+    '    TestSolve "", "x", "x="
 '    If StopNow Then GoTo slut
     
     'Often fails, but not always ??? then works numerically
@@ -219,7 +221,7 @@ Sub RunTestSequence()
         TestSolve "40=72" & VBA.ChrW(183) & "e^((0,619/0,22" & VBA.ChrW(8729) & "(e^22-e^0,22t )) )", "t", "t=100@$t=ln" & VBA.ChrW(8289) & "(ln" & VBA.ChrW(8289) & "(5/9)" & VBA.ChrW(183) & "-0,355412+e^22 )" & VBA.ChrW(183) & "4,545455" ' resultat er numerisk 100. Nogle gange kører denne i lykke og skal gentages numerisk. Ukendt hvorfor.
         If StopNow Then GoTo slut
     End If
-    
+        
     ' Defintion test
     InsertTestMath "T_2" & VBA.ChrW(8788) & "8"
     Selection.TypeParagraph
@@ -249,12 +251,23 @@ Sub RunTestSequence()
     InsertSletDef
     If StopNow Then GoTo slut
 
+    MaximaExact = 1 ' exact
+    AllTrig = True
+    Radians = True
+    InsertTestMath "Definer: -7,5<x<7,5"
+    If TestSolve("1,386" & VBA.ChrW(183) & "cos" & VBA.ChrW(8289) & "(0,63" & VBA.ChrW(183) & "x)=0", "x", "x=" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "-2,380952    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "-0,7936508    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "0,7936508    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "2,380952@$x=-(2,380952" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")    " & VBA.ChrW(8744) & "    x=-(0,7936508" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")    " & VBA.ChrW(8744) & "    x=0,7936508" & VBA.ChrW(183) & "" & VBA.ChrW(960) & "    " & VBA.ChrW(8744) & "    x=2,380952" & VBA.ChrW(183) & "" & VBA.ChrW(960)) Then GoTo slut
+    InsertSletDef
+    
+    ' denne fejler, men ikke hvis den byttes om med ovenstående, så er det den som fejler ????
     Radians = True
     InsertTestMath "Definer: -2<x<2"
     Selection.TypeParagraph
     TestSolve "sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " " & VBA.ChrW(8730) & "(cos" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " )=0", "x", "x=0    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "/2"
     InsertSletDef
     If StopNow Then GoTo slut
+    
+    MaximaExact = 0
+    AllTrig = False
     Radians = False
 
 '    TestSolve "", "x", "x="
@@ -296,7 +309,7 @@ Sub RunTestSequence()
     Selection.TypeParagraph
     TestSolve "f^' (x)=-32", "x", "x=0,251239    " & VBA.ChrW(8744) & "    x=5,464284"
     If StopNow Then GoTo slut
-    TestBeregn "y=f^' (x_1 )" & VBA.ChrW(183) & "(x-x_1 )+f(x_1 )", VBA.ChrW(8776) & "-32,3125" & VBA.ChrW(183) & "x+16,04688"
+    TestBeregn "y=f^' (x_1 )" & VBA.ChrW(183) & "(x-x_1 )+f(x_1 )", VBA.ChrW(8776) & "-32,3125" & VBA.ChrW(183) & "x+16,04688@$" & VBA.ChrW(8776) & "16,04688-32,3125" & VBA.ChrW(183) & "x"
     InsertSletDef
     If StopNow Then GoTo slut
 
@@ -320,7 +333,7 @@ Sub RunTestSequence()
     ' Differential- og integralregning
     MaximaExact = 0
     ShowSettings "Differential- og integralregning"
-    If TestBeregn(VBA.ChrW(8747) & "_1^10" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(x^(-2)+1) dx", "=-(ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2" & VBA.ChrW(8776) & "9,417202") Then GoTo slut
+    If TestBeregn(VBA.ChrW(8747) & "_1^10" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(x^(-2)+1) dx", "=-(ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2" & VBA.ChrW(8776) & "9,417202@$=-((ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2)" & VBA.ChrW(8776) & "9,417202") Then GoTo slut
     InsertTestMath "Definer: f(x)=" & VBA.ChrW(8730) & "(3x+9)  ;g(x)=x+3"
     If TestSolve(VBA.ChrW(8747) & "_0^k" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "g(x)-f(x) " & VBA.ChrW(12311) & " dx=1,5", "k", "k=-3    " & VBA.ChrW(8744) & "    k=7/3") Then GoTo slut
     
@@ -328,7 +341,7 @@ Sub RunTestSequence()
     ' Vektortest
     MaximaExact = 0
     ShowSettings "Vektorer"
-    If TestBeregn("((" & VBA.ChrW(9608) & "(-4@3))" & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(1@7)))/|((" & VBA.ChrW(9608) & "(-4@3)))|^2 " & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(-4@3))", "=(" & VBA.ChrW(9632) & "(-68/25@51/25))=(" & VBA.ChrW(9632) & "(-2,72@2,04))") Then GoTo slut
+    If TestBeregn("((" & VBA.ChrW(9608) & "(-4@3))" & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(1@7)))/|((" & VBA.ChrW(9608) & "(-4@3)))|^2 " & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(-4@3))", "=(" & VBA.ChrW(9632) & "(-68/25@51/25))=(" & VBA.ChrW(9632) & "(-2,72@2,04))@$=(" & VBA.ChrW(9632) & "(-(68/25)@51/25))=(" & VBA.ChrW(9632) & "(-2,72@2,04))") Then GoTo slut
     If TestBeregn("(" & VBA.ChrW(9632) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9632) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo slut 'To forskellige måde at taste vektorer på:
     If TestBeregn("(" & VBA.ChrW(9608) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9608) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo slut
 
@@ -357,7 +370,7 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestSolveDE "2y^'+y^2-5y=0", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=5    " & VBA.ChrW(8744) & "    y=5/(c" & VBA.ChrW(183) & "e^(-((5" & VBA.ChrW(183) & "x)/2) )+1)"
     If StopNow Then GoTo slut
-    TestSolveDE "y^'=5y" & VBA.ChrW(183) & "(y+1)", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=-1    " & VBA.ChrW(8744) & "    y=-1/(c" & VBA.ChrW(183) & "e^(-(5" & VBA.ChrW(183) & "x) )+1)"
+    TestSolveDE "y^'=5y" & VBA.ChrW(183) & "(y+1)", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=-1    " & VBA.ChrW(8744) & "    y=-1/(c" & VBA.ChrW(183) & "e^(-(5" & VBA.ChrW(183) & "x) )+1)@$y=0    " & VBA.ChrW(8744) & "    y=-1    " & VBA.ChrW(8744) & "    y=-(1/(c" & VBA.ChrW(183) & "e^(-(5" & VBA.ChrW(183) & "x) )+1))"
     If StopNow Then GoTo slut
     TestSolveDE "y^'=b" & VBA.ChrW(183) & "y" & VBA.ChrW(183) & "(b/a-y)", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=b/a    " & VBA.ChrW(8744) & "    y=b/(c" & VBA.ChrW(183) & "a" & VBA.ChrW(183) & "e^(-((b^2" & VBA.ChrW(183) & "x)/a) )+a)"
     If StopNow Then GoTo slut
@@ -745,6 +758,7 @@ Sub InsertTestMath(s As String, Optional NewLine As Boolean = True)
     Selection.Range.Font.Bold = False
 
     If Len(s) > 500 Then
+'        If MsgBox("Output is " & Len(s) & " characters long. Click OK to insert all characters in Word. Cancel to insert the first 500", vbOKCancel, Sprog.Warning) = vbCancel Then
         s = Left(s, 500) + Sprog.A(119)
     End If
     Set mo = Selection.OMaths.Add(Selection.Range)

@@ -1,0 +1,67 @@
+/* For loading into the image that handles units after loading solvereal*/
+/* No special charaters in this file. Will not work on mac*/
+define_variable(usersetunits,[],list)$
+
+matchdeclare(aliz,all)$
+matchdeclare(aliznum,numberp)$
+
+display2d:false$
+ratprint:false$
+numer:true$ 
+domain:real$
+dotscrules:true$ /* dotproduct -> * when scalar involved*/
+numer_pbranch:true$/* (-2)^0,75 konverteres da til imaginaertal. Maa goere det lidt nemmere at identificere imag loesninger*/
+ratsimpexpons:true$/*simplify exponents*/
+assumescalar:all$/*variables assumes scalar if not declare(x,nonscalar) og senere kill(x)*/
+logabs:true$/*integrate(1/x,x)=log(abs(x))*/
+breakup:false$/*3. og 4. gradspolynomier deles ikke op i underudtryk*/
+algebraic:false$/*false er default value, simplifikation af algebraiske heltal bl.a. noget med %i. Udtryk der er relle bliver ikke reduceret saa %i fjernes helt hvis denne er false*/
+logexpand:true$/*alle log regneregler   true: log(a^x)=x*log(a)  all: log(a*b)=log(a)+log(b)  super: log(a/b)=log(a)-log(b)*/
+triginverses:all$/*noget med sin^-1(sin(x))=x altid og begge veje*/
+intanalysis:false$/*Kan loese flere bestemte integraler. Noget med ikke at soege efter poler i omraadet og altid integrere.*/
+listconstvars:true$/*for at %i ogsaa kommer med blandt variable saa kompleks kan findes*/
+defrule(unitrule,aliz,convert(aliz,[]))$
+
+defrule(dectalrul,aliz,dectal(aliz))$ /* aendret i version 1.07 defrule(dectalrul,aliznum,dectal(aliznum))$ */
+
+dectal(udt):=block([qudt,antbsf],
+if numberp(udt) then go(hop),
+if atom(udt)  then return(printf(false,concat("~a"),udt)),
+if not(numberp(udt)) then return(udt),
+hop,
+if udt=0 or udt=0.0 then return(0),qudt:abs(udt),
+ if qudt<10^-4 then return(scinot(udt)) elseif qudt>10^NoSigFig then return(scinot(udt)),
+if qudt>1 then antbsf:NoSigFig+1 else antbsf:NoSigFig+2-floor(log(qudt)/log(10)),
+if udt<0 then antbsf:antbsf+1,
+udt:printf(false,concat("~",antbsf,"f"),udt),udt:striml(" ",udt),udt:strimr("0",udt),strimr(".",udt) 
+)$
+
+dectalallNum(udt):=block([qout],
+udt:ev(udt,lgog(x):=if x=%e then 0.4342944819032518 elseif numberp(x) then ev(log(x)/log(10),numer) else 'lgog(x),numer),qout:errcatch(apply1(udt,dectalrul)),if qout=[] then udt else qout[1]
+)$
+
+defrule(scinotrul,aliznum,scinot(aliznum))$
+scinot(udt):=block([talfakt,antbsf],if not(numberp(udt)) then return(udt),if udt=0 then return(0),if abs(udt)<1 then antbsf:NoSigFig+4 else antbsf:NoSigFig+4,if udt<0 then antbsf:antbsf+1,(if udt<-10 or (udt>-1 and udt<1) or udt>10 then return(sremove(" ",printf(false,concat("~",antbsf,"e"),udt))) else return(dectal(udt))))$
+scinotall(udt):=block([],apply1(udt,scinotrul))$
+
+keepfloat:false$
+fpprintprec:14$ /* if 16 or above problems: 2*nm = 2.00000000001E-9 m */
+exprsize(exprq):=length(charlist(string(exprq)))$
+
+usersetunits:[N,J,W,Pa,C,V,F,Ohm,T,H,K]$
+
+ConvertUnit(exprq):=block([sexprq,sexprq2,sizexpr],
+sizexpr:exprsize(exprq),
+sexprq:applyb1(exprq,unitrule),
+if exprsize(sexprq)<exprsize(exprq) then exprq:sexprq,
+sexprq:scanmap(processunits,exprq),
+if exprsize(sexprq)<exprsize(exprq) then exprq:sexprq,
+exprq
+)$
+
+load(unit)$
+
+Solve(lignqw,varqw):=block([solu_1a,solu_2b],solu_1a:[],
+errcatch(if domain=real then (solu_1a:solvereal(lignqw,varqw)),if IsAnySolved(solu_1a,varqw) then go(slutqw)),
+errcatch(if polynomialp(ev(lhs(lignqw)-rhs(lignqw),simp),[varqw]) then (if domain=real then solu_1a:flatten(ev(realroots(lignqw),numer)) else solu_1a:flatten(algsys([lignqw],[varqw]))) else go(nxqsol0)),if domain=real then solu_1a:RemoveImag(solu_1a),solu_1a: CheckSolutions(lignqw,varqw,solu_1a), if IsAnySolved(solu_1a,varqw) then go(slutqw) ,nxqsol0,solu_1a:ev(solve(lignqw,varqw),simp),if domain=real then solu_1a:RemoveImag(solu_1a),solu_1a: CheckSolutions(lignqw,varqw,solu_1a), if IsAnySolved(solu_1a,varqw) then go(slutqw),nxqsol3,solu_1a:ev(solve(lignqw,varqw),simp,numer,radexpand),if domain=real then solu_1a:RemoveImag(solu_1a),solu_1a: CheckSolutions(lignqw,varqw,solu_1a), if IsAnySolved(solu_1a,varqw) then go(slutqw),nxqsol4,solu_1a:ev(solve(lignqw,varqw),simp,radcan,numer),if domain=real then solu_1a:RemoveImag(solu_1a),solu_1a: CheckSolutions(lignqw,varqw,solu_1a),slutqw, 
+solu_1a )$

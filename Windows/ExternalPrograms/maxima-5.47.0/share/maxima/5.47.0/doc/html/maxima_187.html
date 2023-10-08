@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for augmented_lagrangian</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for augmented_lagrangian">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for augmented_lagrangian">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_186.html#augmented_005flagrangian_002dpkg" rel="up" title="augmented_lagrangian-pkg">
+<link href="maxima_188.html#Bernstein_002dpkg" rel="next" title="Bernstein-pkg">
+<link href="maxima_186.html#augmented_005flagrangian_002dpkg" rel="previous" title="augmented_lagrangian-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-augmented_005flagrangian"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_186.html#augmented_005flagrangian_002dpkg" accesskey="p" rel="previous">augmented_lagrangian-pkg</a>, Up: <a href="maxima_186.html#augmented_005flagrangian_002dpkg" accesskey="u" rel="up">augmented_lagrangian-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-augmented_005flagrangian-1"></a>
+<h3 class="section">41.1 Functions and Variables for augmented_lagrangian</h3>
+
+<a name="augmented_005flagrangian_005fmethod"></a><a name="Item_003a-augmented_005flagrangian_002fdeffn_002faugmented_005flagrangian_005fmethod"></a><dl>
+<dt><a name="index-augmented_005flagrangian_005fmethod"></a>Function: <strong>augmented_lagrangian_method</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>augmented_lagrangian_method</tt> (<var>FOM</var>, <var>xx</var>, <var>C</var>, <var>yy</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>augmented_lagrangian_method</tt> (<var>FOM</var>, <var>xx</var>, <var>C</var>, <var>yy</var>, optional_args) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>augmented_lagrangian_method</tt> ([<var>FOM</var>, <var>grad</var>], <var>xx</var>, <var>C</var>, <var>yy</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>augmented_lagrangian_method</tt> ([<var>FOM</var>, <var>grad</var>], <var>xx</var>, <var>C</var>, <var>yy</var>, optional_args)</em></dt>
+<dd>
+<p>Returns an approximate minimum of the expression <var>FOM</var>
+with respect to the variables <var>xx</var>,
+holding the constraints <var>C</var> equal to zero.
+<var>yy</var> is a list of initial guesses for <var>xx</var>.
+The method employed is the augmented Lagrangian method (see Refs [1] and [2]).
+</p>
+<p><var>grad</var>, if present, is the gradient of <var>FOM</var> with respect to <var>xx</var>,
+represented as a list of expressions,
+one for each variable in <var>xx</var>.
+If not present, the gradient is constructed automatically.
+</p>
+<p><var>FOM</var> and each element of <var>grad</var>, if present,
+must be ordinary expressions, not names of functions or lambda expressions.
+</p>
+<p><code>optional_args</code> represents additional arguments,
+specified as <code><var>symbol</var> = <var>value</var></code>.
+The optional arguments recognized are:
+</p>
+<dl compact="compact">
+<dt><code>niter</code></dt>
+<dd><p>Number of iterations of the augmented Lagrangian algorithm
+</p></dd>
+<dt><code>lbfgs_tolerance</code></dt>
+<dd><p>Tolerance supplied to LBFGS
+</p></dd>
+<dt><code>iprint</code></dt>
+<dd><p>IPRINT parameter (a list of two integers which controls verbosity) supplied to LBFGS
+</p></dd>
+<dt><code>%lambda</code></dt>
+<dd><p>Initial value of <code>%lambda</code> to be used for calculating the augmented Lagrangian
+</p></dd>
+</dl>
+
+<p>This implementation minimizes the augmented Lagrangian by
+applying the limited-memory BFGS (LBFGS) algorithm,
+which is a quasi-Newton algorithm.
+</p>
+<p><code>load(&quot;augmented_lagrangian&quot;)</code> loads this function.
+</p>
+<p>See also <a href="maxima_302.html#lbfgs_002dpkg">lbfgs-pkg</a>
+</p>
+<p>References:
+</p>
+<p>[1] <a href="http://www-fp.mcs.anl.gov/otc/Guide/OptWeb/continuous/constrained/nonlinearcon/auglag.html">http://www-fp.mcs.anl.gov/otc/Guide/OptWeb/continuous/constrained/nonlinearcon/auglag.html</a>
+</p>
+<p>[2] <a href="http://www.cs.ubc.ca/spider/ascher/542/chap10.pdf">http://www.cs.ubc.ca/spider/ascher/542/chap10.pdf</a>
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;lbfgs&quot;);
+(%o1)  /home/gunter/src/maxima-code/share/lbfgs/lbfgs.mac
+</pre><pre class="example">(%i2) load (&quot;augmented_lagrangian&quot;);
+(%o2) /home/gunter/src/maxima-code/share/contrib/augmented_lagra\
+ngian.mac
+</pre><pre class="example">(%i3) FOM: x^2 + 2*y^2;
+                               2    2
+(%o3)                       2 y  + x
+</pre><pre class="example">(%i4) xx: [x, y];
+(%o4)                        [x, y]
+</pre><pre class="example">(%i5) C: [x + y - 1];
+(%o5)                      [y + x - 1]
+</pre><pre class="example">(%i6) yy: [1, 1];
+(%o6)                        [1, 1]
+</pre><pre class="example">(%i7) augmented_lagrangian_method(FOM, xx, C, yy, iprint=[-1,0]);
+(%o7) [[x = 0.666659841080023, y = 0.333340272455448], 
+                                 %lambda = [- 1.333337940892518]]
+</pre></div>
+
+<p>Same example as before, but this time the gradient is supplied as an argument.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;lbfgs&quot;)$
+(%i2) load (&quot;augmented_lagrangian&quot;)$
+</pre><pre class="example">(%i3) FOM: x^2 + 2*y^2;
+                               2    2
+(%o3)                       2 y  + x
+</pre><pre class="example">(%i4) xx: [x, y];
+(%o4)                        [x, y]
+</pre><pre class="example">(%i5) grad : [2*x, 4*y];
+(%o5)                      [2 x, 4 y]
+</pre><pre class="example">(%i6) C: [x + y - 1];
+(%o6)                      [y + x - 1]
+</pre><pre class="example">(%i7) yy: [1, 1];
+(%o7)                        [1, 1]
+</pre><pre class="example">(%i8) augmented_lagrangian_method ([FOM, grad], xx, C, yy,
+                             iprint = [-1, 0]);
+(%o8) [[x = 0.6666598410800247, y = 0.3333402724554464], 
+                                 %lambda = [- 1.333337940892525]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Optimization">Optimization</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-augmented_005flagrangian">Package augmented_lagrangian</a>
+&middot;</div>
+</dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_186.html#augmented_005flagrangian_002dpkg" accesskey="p" rel="previous">augmented_lagrangian-pkg</a>, Up: <a href="maxima_186.html#augmented_005flagrangian_002dpkg" accesskey="u" rel="up">augmented_lagrangian-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

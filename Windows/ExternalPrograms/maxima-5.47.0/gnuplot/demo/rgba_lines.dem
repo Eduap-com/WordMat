@@ -1,0 +1,33 @@
+#
+# Demonstrate use of RGBA (Alpha channel + RGB) colors for lines and filled areas.
+# Color is represented by 32 bits AARRGGBB  (i.e. Alpha is in the high bits)
+# Alpha = 0 is opaque;  Alpha = 255 is transparent
+# This is BACKWARDS from the convention used by 'set style fill TRANSPARENT SOLID'
+# It is also BACKWARDS from the convention used by 'with rgbalpha'
+#
+set angle degrees
+set style arrow 1 size screen 0.03,15,90 noborder
+set style arrow 1 lc rgb variable lw 3
+
+fade(i) = (int(255.*i/360.) << 24) + 0xEF8000
+
+set obj  1 rect from -.5,-.5 to -.3,0   fs solid fc rgb "#00bbbbbb" front
+set obj  2 rect from -.3,-.3 to -.1,0.2 fs solid fc rgb "#55bbbbbb" front
+set obj  3 rect from -.1,-.1 to  .3,0.3 fs solid fc rgb "#aabbbbbb" front
+set obj  4 rect from  .3,-.4 to  .4,0.4 fs solid fc rgb "#22bbbbbb" back
+set obj 10 circle at 0.15, -0.15 radius 0.5 fs solid fc  rgb "cyan" behind
+
+
+unset border
+unset xtics
+unset ytics
+unset key
+set xrange [-1:1]
+set yrange [-1:1]
+set size square
+
+plot sample [i=5:360:5] '+' using (0):(0):(cos(i)):(sin(i)):(fade(i)) \
+     with vector as 1
+
+pause -1 "Hit return to continue"
+reset

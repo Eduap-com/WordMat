@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>stringproc-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="stringproc-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="stringproc-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_91.html#to_005fpoly_005fsolve_002dpkg" rel="next" title="to_poly_solve-pkg">
+<link href="maxima_89.html#stirling_002dpkg" rel="prev" title="stirling-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="stringproc_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_91.html#to_005fpoly_005fsolve_002dpkg" accesskey="n" rel="next">to_poly_solve</a>, Previous: <a href="maxima_89.html#stirling_002dpkg" accesskey="p" rel="prev">stirling</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="stringproc">91 stringproc</h2>
+
+<a class="anchor" id="Item_003a-stringproc_002fnode_002fIntroduction-to-String-Processing"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-String-Processing" accesskey="1">Introduction to String Processing</a></li>
+<li><a href="#String-Input-and-Output" accesskey="2">String Input and Output</a></li>
+<li><a href="#Characters" accesskey="3">Characters</a></li>
+<li><a href="#String-Processing" accesskey="4">String Processing</a></li>
+<li><a href="#Octets-and-Utilities-for-Cryptography" accesskey="5">Octets and Utilities for Cryptography</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-String-Processing">
+<div class="nav-panel">
+<p>
+Next: <a href="#String-Input-and-Output" accesskey="n" rel="next">String Input and Output</a>, Previous: <a href="#stringproc_002dpkg" accesskey="p" rel="prev">stringproc</a>, Up: <a href="#stringproc_002dpkg" accesskey="u" rel="up">stringproc</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-String-Processing-1">91.1 Introduction to String Processing</h3>
+
+<p>The package <code class="code">stringproc</code> contains functions for processing strings 
+and characters including formatting, encoding and data streams. 
+This package is completed by some tools for cryptography, e.g. base64 and hash 
+functions.
+</p>
+<p>It can be directly loaded via <code class="code">load(&quot;stringproc&quot;)</code> or automatically by 
+using one of its functions.
+</p>
+<p>For questions and bug reports please contact the author. The following 
+command prints his e-mail-address.
+</p>
+<p><code class="code">printf(true, &quot;~{~a~}@gmail.com&quot;, split(sdowncase(&quot;Volker van Nek&quot;)))$</code>
+</p>
+
+<p>A string is constructed by typing e.g. <code class="code">&quot;Text&quot;</code>. 
+When the option variable <code class="code"><a class="ref" href="maxima_4.html#stringdisp">stringdisp</a></code> is set to <code class="code">false</code>, which is 
+the default, the double quotes won&rsquo;t be printed. 
+<a class="ref" href="#stringp">stringp</a> is a test, if an object is a string.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) str: &quot;Text&quot;;
+(%o1)                         Text
+(%i2) stringp(str);
+(%o2)                         true
+</pre></div>
+
+<p>Characters are represented by a string of length 1. 
+<a class="ref" href="#charp">charp</a> is the corresponding test.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) char: &quot;e&quot;;
+(%o1)                           e
+(%i2) charp(char);
+(%o2)                         true
+</pre></div>
+
+<p>In Maxima position indices in strings are like in list 1-indexed 
+which results to the following consistency.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) is(charat(&quot;Lisp&quot;,1) = charlist(&quot;Lisp&quot;)[1]);
+(%o1)                         true
+</pre></div>
+
+<p>A string may contain Maxima expressions. 
+These can be parsed with <a class="ref" href="#parse_005fstring">parse_string</a>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) map(parse_string, [&quot;42&quot; ,&quot;sqrt(2)&quot;, &quot;%pi&quot;]);
+(%o1)                   [42, sqrt(2), %pi]
+(%i2) map('float, %);
+(%o2)        [42.0, 1.414213562373095, 3.141592653589793]
+</pre></div>
+
+<p>Strings can be processed as characters or in binary form as octets. 
+Functions for conversions are <a class="ref" href="#string_005fto_005foctets">string_to_octets</a> and <a class="ref" href="#octets_005fto_005fstring">octets_to_string</a>.
+Usable encodings depend on the platform, the application and the 
+underlying Lisp.
+(The following shows Maxima in GNU/Linux, compiled with SBCL.)
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) obase: 16.$
+(%i2) string_to_octets(&quot;$&pound;&euro;&quot;, &quot;cp1252&quot;);
+(%o2)                     [24, 0A3, 80]
+(%i3) string_to_octets(&quot;$&pound;&euro;&quot;, &quot;utf-8&quot;);
+(%o3)               [24, 0C2, 0A3, 0E2, 82, 0AC]
+</pre></div>
+
+<p>Strings may be written to character streams or as octets to binary streams. 
+The following example demonstrates file in and output of characters.
+</p>
+<p><a class="ref" href="#openw">openw</a> returns an output stream to a file, 
+<a class="ref" href="#printf">printf</a> writes formatted to that file and by e.g. 
+<a class="ref" href="#close">close</a> all characters contained in the stream are written to the file.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: openw(&quot;file.txt&quot;);
+(%o1)                #&lt;output stream file.txt&gt;
+(%i2) printf(s, &quot;~%~d ~f ~a ~a ~f ~e ~a~%&quot;, 
+42, 1.234, sqrt(2), %pi, 1.0e-2, 1.0e-2, 1.0b-2)$
+(%i3) close(s)$
+</pre></div>
+
+<p><a class="ref" href="#openr">openr</a> then returns an input stream from the previously used file and 
+<a class="ref" href="#readline">readline</a> returns the line read as a string.
+The string may be tokenized by e.g. <a class="ref" href="#split">split</a> or <a class="ref" href="#tokens">tokens</a> and 
+finally parsed by <a class="ref" href="#parse_005fstring">parse_string</a>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i4) s: openr(&quot;file.txt&quot;);
+(%o4)                 #&lt;input stream file.txt&gt;
+(%i5) readline(s);
+(%o5)          42 1.234 sqrt(2) %pi 0.01 1.0E-2 1.0b-2
+(%i6) map(parse_string, split(%));
+(%o6)       [42, 1.234, sqrt(2), %pi, 0.01, 0.01, 1.0b-2]
+(%i7) close(s)$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Strings">Strings</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-stringproc_002fnode_002fString-Input-and-Output"></a><hr>
+</div>
+<div class="section-level-extent" id="String-Input-and-Output">
+<div class="nav-panel">
+<p>
+Next: <a href="#Characters" accesskey="n" rel="next">Characters</a>, Previous: <a href="#Introduction-to-String-Processing" accesskey="p" rel="prev">Introduction to String Processing</a>, Up: <a href="#stringproc_002dpkg" accesskey="u" rel="up">stringproc</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="String-Input-and-Output-1">91.2 String Input and Output</h3>
+
+<p>Example: Formatted printing to a file.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: openw(&quot;file.txt&quot;);
+(%o1)                      #&lt;output stream file.txt&gt;
+(%i2) control: 
+&quot;~2tAn atom: ~20t~a~%~2tand a list: ~20t~{~r ~}~%~2t\
+and an integer: ~20t~d~%&quot;$
+(%i3) printf( s,control, 'true,[1,2,3],42 )$
+(%o3)                                false
+(%i4) close(s);
+(%o4)                                true
+(%i5) s: openr(&quot;file.txt&quot;);
+(%o5)                      #&lt;input stream file.txt&gt;
+(%i6) while stringp( tmp:readline(s) ) do print(tmp)$
+  An atom:          true 
+  and a list:       one two three  
+  and an integer:   42 
+(%i7) close(s)$
+</pre></div>
+
+<a class="anchor" id="close"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fclose"></a><dl class="first-deffn">
+<dt class="deffn" id="index-close"><span class="category-def">Function: </span><span><strong class="def-name">close</strong> <var class="def-var-arguments">(<var class="var">stream</var>)</var><a class="copiable-link" href='#index-close'> &para;</a></span></dt>
+<dd>
+<p>Closes <var class="var">stream</var> and returns <code class="code">true</code> if <var class="var">stream</var> had been open. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="flength"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fflength"></a><dl class="first-deffn">
+<dt class="deffn" id="index-flength"><span class="category-def">Function: </span><span><strong class="def-name">flength</strong> <var class="def-var-arguments">(<var class="var">stream</var>)</var><a class="copiable-link" href='#index-flength'> &para;</a></span></dt>
+<dd>
+<p><var class="var">stream</var> has to be an open stream from or to a file. 
+<code class="code">flength</code> then returns the number of bytes which are currently present in this file.
+</p>
+<p>Example: See <a class="ref" href="#writebyte">writebyte</a> .
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="flush_005foutput"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fflush_005foutput"></a><dl class="first-deffn">
+<dt class="deffn" id="index-flush_005foutput"><span class="category-def">Function: </span><span><strong class="def-name">flush_output</strong> <var class="def-var-arguments">(<var class="var">stream</var>)</var><a class="copiable-link" href='#index-flush_005foutput'> &para;</a></span></dt>
+<dd>
+<p>Flushes <var class="var">stream</var> where <var class="var">stream</var> has to be an output stream to a file. 
+</p>
+<p>Example: See <a class="ref" href="#writebyte">writebyte</a> .
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="fposition"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002ffposition"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fposition"><span class="category-def">Function: </span><span><strong class="def-name">fposition</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">fposition</code> (<var class="var">stream</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">fposition</code> (<var class="var">stream</var>, <var class="var">pos</var>)</var><a class="copiable-link" href='#index-fposition'> &para;</a></span></dt>
+<dd>
+<p>Returns the current position in <var class="var">stream</var>, if <var class="var">pos</var> is not used. 
+If <var class="var">pos</var> is used, <code class="code">fposition</code> sets the position in <var class="var">stream</var>.
+<var class="var">stream</var> has to be a stream from or to a file and 
+<var class="var">pos</var> has to be a positive number.
+</p>
+<p>Positions in data streams are like in strings or lists 1-indexed, 
+i.e. the first element in <var class="var">stream</var> is in position 1.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="freshline"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002ffreshline"></a><dl class="first-deffn">
+<dt class="deffn" id="index-freshline"><span class="category-def">Function: </span><span><strong class="def-name">freshline</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">freshline</code> ()  <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">freshline</code> (<var class="var">stream</var>)</var><a class="copiable-link" href='#index-freshline'> &para;</a></span></dt>
+<dd>
+<p>Writes a new line to the standard output stream 
+if the position is not at the beginning of a line and returns <code class="code">true</code>.
+Using the optional argument <var class="var">stream</var> the new line is written to that stream. 
+There are some cases, where <code class="code">freshline()</code> does not work as expected. 
+</p>
+<p>See also <a class="ref" href="#newline">newline</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="get_005foutput_005fstream_005fstring"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fget_005foutput_005fstream_005fstring"></a><dl class="first-deffn">
+<dt class="deffn" id="index-get_005foutput_005fstream_005fstring"><span class="category-def">Function: </span><span><strong class="def-name">get_output_stream_string</strong> <var class="def-var-arguments">(<var class="var">stream</var>)</var><a class="copiable-link" href='#index-get_005foutput_005fstream_005fstring'> &para;</a></span></dt>
+<dd>
+<p>Returns a string containing all the characters currently present in 
+<var class="var">stream</var> which must be an open string-output stream. 
+The returned characters are removed from <var class="var">stream</var>.
+</p>
+<p>Example: See <a class="ref" href="#make_005fstring_005foutput_005fstream">make_string_output_stream</a> .
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="make_005fstring_005finput_005fstream"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fmake_005fstring_005finput_005fstream"></a><dl class="first-deffn">
+<dt class="deffn" id="index-make_005fstring_005finput_005fstream"><span class="category-def">Function: </span><span><strong class="def-name">make_string_input_stream</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">make_string_input_stream</code> (<var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">make_string_input_stream</code> (<var class="var">string</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">make_string_input_stream</code> (<var class="var">string</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-make_005fstring_005finput_005fstream'> &para;</a></span></dt>
+<dd>
+<p>Returns an input stream which contains parts of <var class="var">string</var> and an end of file. 
+Without optional arguments the stream contains the entire string 
+and is positioned in front of the first character. 
+<var class="var">start</var> and <var class="var">end</var> define the substring contained in the stream. 
+The first character is available at position 1.
+</p> 
+<div class="example">
+<pre class="example-preformatted">(%i1) istream : make_string_input_stream(&quot;text&quot;, 1, 4);
+(%o1)              #&lt;string-input stream from &quot;text&quot;&gt;
+(%i2) (while (c : readchar(istream)) # false do sprint(c), newline())$
+t e x 
+(%i3) close(istream)$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="make_005fstring_005foutput_005fstream"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fmake_005fstring_005foutput_005fstream"></a><dl class="first-deffn">
+<dt class="deffn" id="index-make_005fstring_005foutput_005fstream"><span class="category-def">Function: </span><span><strong class="def-name">make_string_output_stream</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-make_005fstring_005foutput_005fstream'> &para;</a></span></dt>
+<dd>
+<p>Returns an output stream that accepts characters. Characters currently present 
+in this stream can be retrieved by <a class="ref" href="#get_005foutput_005fstream_005fstring">get_output_stream_string</a>.
+</p> 
+<div class="example">
+<pre class="example-preformatted">(%i1) ostream : make_string_output_stream();
+(%o1)               #&lt;string-output stream 09622ea0&gt;
+(%i2) printf(ostream, &quot;foo&quot;)$
+
+(%i3) printf(ostream, &quot;bar&quot;)$
+
+(%i4) string : get_output_stream_string(ostream);
+(%o4)                            foobar
+(%i5) printf(ostream, &quot;baz&quot;)$
+
+(%i6) string : get_output_stream_string(ostream);
+(%o6)                              baz
+(%i7) close(ostream)$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="newline"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fnewline"></a><dl class="first-deffn">
+<dt class="deffn" id="index-newline"><span class="category-def">Function: </span><span><strong class="def-name">newline</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">newline</code> ()  <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">newline</code> (<var class="var">stream</var>)</var><a class="copiable-link" href='#index-newline'> &para;</a></span></dt>
+<dd>
+<p>Writes a new line to the standard output stream. 
+Using the optional argument <var class="var">stream</var> the new line is written to that stream. 
+There are some cases, where <code class="code">newline()</code> does not work as expected. 
+</p>
+<p>See <a class="ref" href="#sprint">sprint</a> for an example of using <code class="code">newline()</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="opena"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fopena"></a><dl class="first-deffn">
+<dt class="deffn" id="index-opena"><span class="category-def">Function: </span><span><strong class="def-name">opena</strong> <var class="def-var-arguments">(<var class="var">file</var>)</var><a class="copiable-link" href='#index-opena'> &para;</a></span></dt>
+<dd>
+<p>Returns a character output stream to <var class="var">file</var>.
+If an existing file is opened, <code class="code">opena</code> appends elements at the end of <var class="var">file</var>.
+</p>
+<p>For binary output see <a class="ref" href="maxima_75.html#Functions-and-Variables-for-binary-input-and-output">opena_binary</a> .
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="openr"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fopenr"></a><dl class="first-deffn">
+<dt class="deffn" id="index-openr"><span class="category-def">Function: </span><span><strong class="def-name">openr</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">openr</code> (<var class="var">file</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">openr</code> (<var class="var">file</var>, <var class="var">encoding</var>)</var><a class="copiable-link" href='#index-openr'> &para;</a></span></dt>
+<dd>
+
+<p>Returns a character input stream to <var class="var">file</var>.
+<code class="code">openr</code> assumes that <var class="var">file</var> already exists.
+If reading the file results in a lisp error about its encoding
+passing the correct string as the argument <var class="var">encoding</var> might help.
+The available encodings and their names depend on the lisp being used.
+For sbcl a list of suitable strings can be found at
+<a class="url" href="http://www.sbcl.org/manual/#External-Formats">http://www.sbcl.org/manual/#External-Formats</a>.
+</p>
+<p>For binary input see <a class="ref" href="maxima_75.html#Functions-and-Variables-for-binary-input-and-output">openr_binary</a> .
+See also <code class="code"><a class="ref" href="#close">close</a></code> and <code class="code"><a class="ref" href="#openw">openw</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) istream : openr(&quot;data.txt&quot;,&quot;EUC-JP&quot;);
+(%o1)     #&lt;FD-STREAM for &quot;file /home/gunter/data.txt&quot; {10099A3AE3}&gt;
+(%i2) close(istream);
+(%o2)                                true
+</pre></div>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="openw"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fopenw"></a><dl class="first-deffn">
+<dt class="deffn" id="index-openw"><span class="category-def">Function: </span><span><strong class="def-name">openw</strong> <var class="def-var-arguments">(<var class="var">file</var>)</var><a class="copiable-link" href='#index-openw'> &para;</a></span></dt>
+<dd>
+<p>Returns a character output stream to <var class="var">file</var>.
+If <var class="var">file</var> does not exist, it will be created.
+If an existing file is opened, <code class="code">openw</code> destructively modifies <var class="var">file</var>.
+</p>
+<p>For binary output see <a class="ref" href="maxima_75.html#Functions-and-Variables-for-binary-input-and-output">openw_binary</a> .
+</p>
+<p>See also <code class="code"><a class="ref" href="#close">close</a></code> and <code class="code"><a class="ref" href="#openr">openr</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="printf"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fprintf"></a><dl class="first-deffn">
+<dt class="deffn" id="index-printf"><span class="category-def">Function: </span><span><strong class="def-name">printf</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">printf</code> (<var class="var">dest</var>, <var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">printf</code> (<var class="var">dest</var>, <var class="var">string</var>, <var class="var">expr_1</var>, ..., <var class="var">expr_n</var>)</var><a class="copiable-link" href='#index-printf'> &para;</a></span></dt>
+<dd>
+<p>Produces formatted output by outputting the characters of control-string 
+<var class="var">string</var> and observing that a tilde introduces a directive.
+The character after the tilde, possibly preceded by prefix parameters 
+and modifiers, specifies what kind of formatting is desired.
+Most directives use one or more elements of the arguments 
+<var class="var">expr_1</var>, ..., <var class="var">expr_n</var> to create their output.
+</p>
+<p>If <var class="var">dest</var> is a stream or <code class="code">true</code>, then <code class="code">printf</code> returns <code class="code">false</code>.
+Otherwise, <code class="code">printf</code> returns a string containing the output.
+By default the streams <var class="var">stdin</var>, <var class="var">stdout</var> and <var class="var">stderr</var> are defined.
+If Maxima is running as a network client (which is the normal case if Maxima is communicating
+with a graphical user interface, which must be the server) <code class="code">setup-client</code>
+will define <var class="var">old_stdout</var> and <var class="var">old_stderr</var>, too.
+</p>
+<p><code class="code">printf</code> provides the Common Lisp function <code class="code">format</code> in Maxima. 
+The following example illustrates the general relation between these two 
+functions.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) printf(true, &quot;R~dD~d~%&quot;, 2, 2);
+R2D2
+(%o1)                                false
+(%i2) :lisp (format t &quot;R~dD~d~%&quot; 2 2)
+R2D2
+NIL
+</pre></div>
+
+<p>The following description is limited to a rough sketch of the possibilities of 
+<code class="code">printf</code>.
+The Lisp function <code class="code">format</code> is described in detail in many reference books. 
+Of good help is e.g. the free available online-manual 
+&quot;Common Lisp the Language&quot; by Guy L. Steele. See chapter 22.3.3 there. 
+</p>
+<p>In addition, <code class="code">printf</code> recognizes two format directives which are not known to Lisp <code class="code">format</code>.
+The format directive <code class="code">~m</code> indicates Maxima pretty printer output.
+The format directive <code class="code">~h</code> indicates a bigfloat number.
+</p>
+<div class="example">
+<pre class="example-preformatted">   ~%       new line
+   ~&amp;       fresh line
+   ~t       tab
+   ~$       monetary
+   ~d       decimal integer
+   ~b       binary integer
+   ~o       octal integer
+   ~x       hexadecimal integer
+   ~br      base-b integer
+   ~r       spell an integer
+   ~p       plural
+   ~f       floating point
+   ~e       scientific notation
+   ~g       ~f or ~e, depending upon magnitude
+   ~h       bigfloat
+   ~a       uses Maxima function string
+   ~m       Maxima pretty printer output
+   ~s       like ~a, but output enclosed in &quot;double quotes&quot;
+   ~~       ~
+   ~&lt;       justification, ~&gt; terminates
+   ~(       case conversion, ~) terminates 
+   ~[       selection, ~] terminates 
+   ~{       iteration, ~} terminates
+</pre></div>
+
+<p>Note that the directive ~* is not supported.
+</p>
+<p>If <var class="var">dest</var> is a stream or <code class="code">true</code>, then <code class="code">printf</code> returns <code class="code">false</code>.
+Otherwise, <code class="code">printf</code> returns a string containing the output.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) printf( false, &quot;~a ~a ~4f ~a ~@r&quot;, 
+              &quot;String&quot;,sym,bound,sqrt(12),144), bound = 1.234;
+(%o1)                 String sym 1.23 2*sqrt(3) CXLIV
+(%i2) printf( false,&quot;~{~a ~}&quot;,[&quot;one&quot;,2,&quot;THREE&quot;] );
+(%o2)                          one 2 THREE 
+(%i3) printf(true,&quot;~{~{~9,1f ~}~%~}&quot;,mat ),
+          mat = args(matrix([1.1,2,3.33],[4,5,6],[7,8.88,9]))$
+      1.1       2.0       3.3 
+      4.0       5.0       6.0 
+      7.0       8.9       9.0 
+(%i4) control: &quot;~:(~r~) bird~p ~[is~;are~] singing.&quot;$
+(%i5) printf( false,control, n,n,if n=1 then 1 else 2 ), n=2;
+(%o5)                    Two birds are singing.
+</pre></div>
+
+<p>The directive ~h has been introduced to handle bigfloats. 
+</p>
+<div class="example">
+<pre class="example-preformatted">~w,d,e,x,o,p@H
+ w : width
+ d : decimal digits behind floating point
+ e : minimal exponent digits
+ x : preferred exponent
+ o : overflow character
+ p : padding character
+ @ : display sign for positive numbers
+</pre></div>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) fpprec : 1000$
+(%i2) printf(true, &quot;|~h|~%&quot;, 2.b0^-64)$
+|0.0000000000000000000542101086242752217003726400434970855712890625|
+(%i3) fpprec : 26$
+(%i4) printf(true, &quot;|~h|~%&quot;, sqrt(2))$
+|1.4142135623730950488016887|
+(%i5) fpprec : 24$
+(%i6) printf(true, &quot;|~h|~%&quot;, sqrt(2))$
+|1.41421356237309504880169|
+(%i7) printf(true, &quot;|~28h|~%&quot;, sqrt(2))$
+|   1.41421356237309504880169|
+(%i8) printf(true, &quot;|~28,,,,,'*h|~%&quot;, sqrt(2))$
+|***1.41421356237309504880169|
+(%i9) printf(true, &quot;|~,18h|~%&quot;, sqrt(2))$
+|1.414213562373095049|
+(%i10) printf(true, &quot;|~,,,-3h|~%&quot;, sqrt(2))$
+|1414.21356237309504880169b-3|
+(%i11) printf(true, &quot;|~,,2,-3h|~%&quot;, sqrt(2))$
+|1414.21356237309504880169b-03|
+(%i12) printf(true, &quot;|~20h|~%&quot;, sqrt(2))$
+|1.41421356237309504880169|
+(%i13) printf(true, &quot;|~20,,,,'+h|~%&quot;, sqrt(2))$
+|++++++++++++++++++++|
+</pre></div>
+
+<p>For conversion of objects to strings also see <code class="code"><a class="ref" href="maxima_4.html#concat">concat</a></code>, <code class="code"><a class="ref" href="maxima_4.html#sconcat">sconcat</a></code>,
+<code class="code"><a class="ref" href="maxima_4.html#string">string</a></code> and <code class="code"><a class="ref" href="#simplode">simplode</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="readbyte"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002freadbyte"></a><dl class="first-deffn">
+<dt class="deffn" id="index-readbyte"><span class="category-def">Function: </span><span><strong class="def-name">readbyte</strong> <var class="def-var-arguments">(<var class="var">stream</var>)</var><a class="copiable-link" href='#index-readbyte'> &para;</a></span></dt>
+<dd>
+<p>Removes and returns the first byte in <var class="var">stream</var> which must be a binary input stream. 
+If the end of file is encountered <code class="code">readbyte</code> returns <code class="code">false</code>.
+</p>
+<p>Example: Read the first 16 bytes from a file encrypted with AES in OpenSSL. 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase: obase: 16.$
+
+(%i2) in: openr_binary(&quot;msg.bin&quot;);
+(%o2)                       #&lt;input stream msg.bin&gt;
+(%i3) (L:[],  thru 16. do push(readbyte(in), L),  L:reverse(L));
+(%o3) [53, 61, 6C, 74, 65, 64, 5F, 5F, 88, 56, 0DE, 8A, 74, 0FD,
+       0AD, 0F0]
+(%i4) close(in);
+(%o4)                                true
+(%i5) map(ascii, rest(L,-8));
+(%o5)                      [S, a, l, t, e, d, _, _]
+(%i6) salt: octets_to_number(rest(L,8));
+(%o6)                          8856de8a74fdadf0
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="readchar"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002freadchar"></a><dl class="first-deffn">
+<dt class="deffn" id="index-readchar"><span class="category-def">Function: </span><span><strong class="def-name">readchar</strong> <var class="def-var-arguments">(<var class="var">stream</var>)</var><a class="copiable-link" href='#index-readchar'> &para;</a></span></dt>
+<dd>
+<p>Removes and returns the first character in <var class="var">stream</var>. 
+If the end of file is encountered <code class="code">readchar</code> returns <code class="code">false</code>.
+</p>
+<p>Example: See <a class="ref" href="#make_005fstring_005finput_005fstream">make_string_input_stream</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="readline"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002freadline"></a><dl class="first-deffn">
+<dt class="deffn" id="index-readline"><span class="category-def">Function: </span><span><strong class="def-name">readline</strong> <var class="def-var-arguments">(<var class="var">stream</var>)</var><a class="copiable-link" href='#index-readline'> &para;</a></span></dt>
+<dd>
+<p>Returns a string containing all characters starting at the current position 
+in <var class="var">stream</var> up to the end of the line or <code class="code">false</code> 
+if the end of the file is encountered.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-input">File input</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sprint"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsprint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sprint"><span class="category-def">Function: </span><span><strong class="def-name">sprint</strong> <var class="def-var-arguments">(<var class="var">expr_1</var>, &hellip;, <var class="var">expr_n</var>)</var><a class="copiable-link" href='#index-sprint'> &para;</a></span></dt>
+<dd>
+<p>Evaluates and displays its arguments one after the other &lsquo;on a line&rsquo; starting at
+the leftmost position.  The expressions are printed with a space character right next 
+to the number, and it disregards line length.  
+<code class="code">newline()</code> might be used for line breaking.
+</p>
+<p>Example: Sequential printing with <code class="code">sprint</code>. 
+Creating a new line with <code class="code">newline()</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) for n:0 thru 19 do sprint(fib(n))$
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181
+(%i2) for n:0 thru 22 do ( 
+         sprint(fib(n)), 
+         if mod(n,10) = 9 then newline() )$
+0 1 1 2 3 5 8 13 21 34 
+55 89 144 233 377 610 987 1597 2584 4181 
+6765 10946 17711 
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="writebyte"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fwritebyte"></a><dl class="first-deffn">
+<dt class="deffn" id="index-writebyte"><span class="category-def">Function: </span><span><strong class="def-name">writebyte</strong> <var class="def-var-arguments">(<var class="var">byte</var>, <var class="var">stream</var>)</var><a class="copiable-link" href='#index-writebyte'> &para;</a></span></dt>
+<dd>
+<p>Writes <var class="var">byte</var> to <var class="var">stream</var> which must be a binary output stream. 
+<code class="code">writebyte</code> returns <code class="code">byte</code>.
+</p>
+<p>Example: Write some bytes to a binary file output stream. 
+In this example all bytes correspond to printable characters and are printed 
+by <code class="code">printfile</code>. 
+The bytes remain in the stream until <code class="code">flush_output</code> or <code class="code">close</code> have been called.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase: obase: 16.$
+
+(%i2) bytes: map(cint, charlist(&quot;GNU/Linux&quot;));
+(%o2)                [47, 4E, 55, 2F, 4C, 69, 6E, 75, 78]
+(%i3) out: openw_binary(&quot;test.bin&quot;);
+(%o3)                      #&lt;output stream test.bin&gt;
+(%i4) for i thru 3 do writebyte(bytes[i], out);
+(%o4)                                done
+(%i5) printfile(&quot;test.bin&quot;)$
+
+(%i6) flength(out);
+(%o6)                                  0
+(%i7) flush_output(out);
+(%o7)                                true
+(%i8) flength(out);
+(%o8)                                  3
+(%i9) printfile(&quot;test.bin&quot;)$
+GNU
+(%i0A) for b in rest(bytes,3) do writebyte(b, out);
+(%o0A)                               done
+(%i0B) close(out);
+(%o0B)                               true
+(%i0C) printfile(&quot;test.bin&quot;)$
+GNU/Linux
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-File-output">File output</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-stringproc_002fnode_002fCharacters"></a><hr>
+</div>
+<div class="section-level-extent" id="Characters">
+<div class="nav-panel">
+<p>
+Next: <a href="#String-Processing" accesskey="n" rel="next">String Processing</a>, Previous: <a href="#String-Input-and-Output" accesskey="p" rel="prev">String Input and Output</a>, Up: <a href="#stringproc_002dpkg" accesskey="u" rel="up">stringproc</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Characters-1">91.3 Characters</h3>
+
+<p>Characters are strings of length 1.
+</p>
+<a class="anchor" id="adjust_005fexternal_005fformat"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fadjust_005fexternal_005fformat"></a><dl class="first-deffn">
+<dt class="deffn" id="index-adjust_005fexternal_005fformat"><span class="category-def">Function: </span><span><strong class="def-name">adjust_external_format</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-adjust_005fexternal_005fformat'> &para;</a></span></dt>
+<dd>
+<p>Prints information about the current external format of the Lisp reader 
+and in case the external format encoding differs from the encoding of the 
+application which runs Maxima <code class="code">adjust_external_format</code> tries to adjust 
+the encoding or prints some help or instruction.
+<code class="code">adjust_external_format</code> returns <code class="code">true</code> when the external format has 
+been changed and <code class="code">false</code> otherwise.
+</p>
+<p>Functions like <a class="ref" href="#cint">cint</a>, <a class="ref" href="#unicode">unicode</a>, <a class="ref" href="#octets_005fto_005fstring">octets_to_string</a> 
+and <a class="ref" href="#string_005fto_005foctets">string_to_octets</a> need UTF-8 as the external format of the 
+Lisp reader to work properly over the full range of Unicode characters. 
+</p>
+<p>Examples (Maxima on Windows, March 2016): 
+Using <code class="code">adjust_external_format</code> when the default external format 
+is not equal to the encoding provided by the application.
+</p>
+<p>1. Command line Maxima
+</p>
+<p>In case a terminal session is preferred it is recommended to use Maxima compiled 
+with SBCL. Here Unicode support is provided by default and calls to 
+<code class="code">adjust_external_format</code> are unnecessary. 
+</p>
+<p>If Maxima is compiled with CLISP or GCL it is recommended to change 
+the terminal encoding from CP850 to CP1252. 
+<code class="code">adjust_external_format</code> prints some help. 
+</p>
+<p>CCL reads UTF-8 while the terminal input is CP850 by default. 
+CP1252 is not supported by CCL. <code class="code">adjust_external_format</code> 
+prints instructions for changing the terminal encoding and external format 
+both to iso-8859-1.
+</p>
+<p>2. wxMaxima
+</p>
+<p>In wxMaxima SBCL reads CP1252 by default but the input from the application 
+is UTF-8 encoded. Adjustment is needed. 
+</p>
+<p>Calling <code class="code">adjust_external_format</code> and restarting Maxima 
+permanently changes the default external format to UTF-8.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1)adjust_external_format();
+The line
+(setf sb-impl::*default-external-format* :utf-8)
+has been appended to the init file
+C:/Users/Username/.sbclrc
+Please restart Maxima to set the external format to UTF-8.
+(%i1) false
+</pre></div>
+
+<p>Restarting Maxima.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) adjust_external_format();
+The external format is currently UTF-8
+and has not been changed.
+(%i1) false
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="alphacharp"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002falphacharp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-alphacharp"><span class="category-def">Function: </span><span><strong class="def-name">alphacharp</strong> <var class="def-var-arguments">(<var class="var">char</var>)</var><a class="copiable-link" href='#index-alphacharp'> &para;</a></span></dt>
+<dd>  
+<p>Returns <code class="code">true</code> if <var class="var">char</var> is an alphabetic character. 
+</p>
+<p>To identify a non-US-ASCII character as an alphabetic character 
+the underlying Lisp must provide full Unicode support. 
+E.g. a German umlaut is detected as an alphabetic character with SBCL in GNU/Linux 
+but not with GCL. 
+(In Windows Maxima, when compiled with SBCL, must be set to UTF-8. 
+See <a class="ref" href="#adjust_005fexternal_005fformat">adjust_external_format</a> for more.) 
+</p>
+<p>Example: Examination of non-US-ASCII characters.
+</p>
+<p>The underlying Lisp (SBCL, GNU/Linux) is able to convert the typed character 
+into a Lisp character and to examine.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) alphacharp(&quot;&uuml;&quot;);
+(%o1)                          true
+</pre></div>
+
+<p>In GCL this is not possible. An error break occurs.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) alphacharp(&quot;u&quot;);
+(%o1)                          true
+(%i2) alphacharp(&quot;&uuml;&quot;);
+
+package stringproc: &uuml; cannot be converted into a Lisp character.
+ -- an error.
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="alphanumericp"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002falphanumericp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-alphanumericp"><span class="category-def">Function: </span><span><strong class="def-name">alphanumericp</strong> <var class="def-var-arguments">(<var class="var">char</var>)</var><a class="copiable-link" href='#index-alphanumericp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">char</var> is an alphabetic character or a digit 
+(only corresponding US-ASCII characters are regarded as digits). 
+</p>
+<p>Note: See remarks on <a class="ref" href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ascii"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fascii"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ascii"><span class="category-def">Function: </span><span><strong class="def-name">ascii</strong> <var class="def-var-arguments">(<var class="var">int</var>)</var><a class="copiable-link" href='#index-ascii'> &para;</a></span></dt>
+<dd>
+<p>Returns the US-ASCII character corresponding to the integer <var class="var">int</var>
+which has to be less than <code class="code">128</code>.
+</p>
+<p>See <a class="ref" href="#unicode">unicode</a> for converting code points larger than <code class="code">127</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) for n from 0 thru 127 do ( 
+        ch: ascii(n), 
+        if alphacharp(ch) then sprint(ch),
+        if n = 96 then newline() )$
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cequal"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcequal"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cequal"><span class="category-def">Function: </span><span><strong class="def-name">cequal</strong> <var class="def-var-arguments">(<var class="var">char_1</var>, <var class="var">char_2</var>)</var><a class="copiable-link" href='#index-cequal'> &para;</a></span></dt>
+<dd>         
+<p>Returns <code class="code">true</code> if <var class="var">char_1</var> and <var class="var">char_2</var> are the same character. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cequalignore"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcequalignore"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cequalignore"><span class="category-def">Function: </span><span><strong class="def-name">cequalignore</strong> <var class="def-var-arguments">(<var class="var">char_1</var>, <var class="var">char_2</var>)</var><a class="copiable-link" href='#index-cequalignore'> &para;</a></span></dt>
+<dd>  
+<p>Like <code class="code">cequal</code> but ignores case which is only possible for non-US-ASCII 
+characters when the underlying Lisp is able to recognize a character as an 
+alphabetic character. See remarks on <a class="ref" href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cgreaterp"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcgreaterp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cgreaterp"><span class="category-def">Function: </span><span><strong class="def-name">cgreaterp</strong> <var class="def-var-arguments">(<var class="var">char_1</var>, <var class="var">char_2</var>)</var><a class="copiable-link" href='#index-cgreaterp'> &para;</a></span></dt>
+<dd>  
+<p>Returns <code class="code">true</code> if the code point of <var class="var">char_1</var> is greater than the 
+code point of <var class="var">char_2</var>. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cgreaterpignore"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcgreaterpignore"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cgreaterpignore"><span class="category-def">Function: </span><span><strong class="def-name">cgreaterpignore</strong> <var class="def-var-arguments">(<var class="var">char_1</var>, <var class="var">char_2</var>)</var><a class="copiable-link" href='#index-cgreaterpignore'> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">cgreaterp</code> but ignores case which is only possible for non-US-ASCII 
+characters when the underlying Lisp is able to recognize a character as an 
+alphabetic character. See remarks on <a class="ref" href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="charp"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcharp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-charp"><span class="category-def">Function: </span><span><strong class="def-name">charp</strong> <var class="def-var-arguments">(<var class="var">obj</var>)</var><a class="copiable-link" href='#index-charp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">obj</var> is a Maxima-character.
+See introduction for example.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cint"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cint"><span class="category-def">Function: </span><span><strong class="def-name">cint</strong> <var class="def-var-arguments">(<var class="var">char</var>)</var><a class="copiable-link" href='#index-cint'> &para;</a></span></dt>
+<dd>
+<p>Returns the Unicode code point of <var class="var">char</var> which must be a 
+Maxima character, i.e. a string of length <code class="code">1</code>.
+</p>
+<p>Examples: The hexadecimal code point of some characters 
+(Maxima with SBCL on GNU/Linux). 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) obase: 16.$
+(%i2) map(cint, [&quot;$&quot;,&quot;&pound;&quot;,&quot;&euro;&quot;]);
+(%o2)                           [24, 0A3, 20AC]
+</pre></div>
+
+<p>Warning: It is not possible to enter characters corresponding to code points 
+larger than 16 bit in wxMaxima with SBCL on Windows when the external format 
+has not been set to UTF-8. See <a class="ref" href="#adjust_005fexternal_005fformat">adjust_external_format</a>.
+</p>
+
+<p>CMUCL doesn&rsquo;t process these characters as one character. 
+<code class="code">cint</code> then returns <code class="code">false</code>. 
+Converting a character to a code point via UTF-8-octets may serve as a workaround: 
+</p>
+<p><code class="code">utf8_to_unicode(string_to_octets(character));</code>
+</p>
+
+<p>See <a class="ref" href="#utf8_005fto_005funicode">utf8_to_unicode</a>, <a class="ref" href="#string_005fto_005foctets">string_to_octets</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="clessp"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fclessp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-clessp"><span class="category-def">Function: </span><span><strong class="def-name">clessp</strong> <var class="def-var-arguments">(<var class="var">char_1</var>, <var class="var">char_2</var>)</var><a class="copiable-link" href='#index-clessp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if the code point of <var class="var">char_1</var> is less than the 
+code point of <var class="var">char_2</var>. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="clesspignore"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fclesspignore"></a><dl class="first-deffn">
+<dt class="deffn" id="index-clesspignore"><span class="category-def">Function: </span><span><strong class="def-name">clesspignore</strong> <var class="def-var-arguments">(<var class="var">char_1</var>, <var class="var">char_2</var>)</var><a class="copiable-link" href='#index-clesspignore'> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">clessp</code> but ignores case which is only possible for non-US-ASCII 
+characters when the underlying Lisp is able to recognize a character as an 
+alphabetic character. See remarks on <a class="ref" href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="constituent"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fconstituent"></a><dl class="first-deffn">
+<dt class="deffn" id="index-constituent"><span class="category-def">Function: </span><span><strong class="def-name">constituent</strong> <var class="def-var-arguments">(<var class="var">char</var>)</var><a class="copiable-link" href='#index-constituent'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">char</var> is a graphic character but not a space character.
+A graphic character is a character one can see, plus the space character.
+(<code class="code">constituent</code> is defined by Paul Graham. 
+See Paul Graham, ANSI Common Lisp, 1996, page 67.)
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) for n from 0 thru 255 do ( 
+tmp: ascii(n), if constituent(tmp) then sprint(tmp) )$
+! &quot; #  %  ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ? @ A B
+C D E F G H I J K L M N O P Q R S T U V W X Y Z [ \ ] ^ _ ` a b c
+d e f g h i j k l m n o p q r s t u v w x y z { | } ~
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="digitcharp"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fdigitcharp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-digitcharp"><span class="category-def">Function: </span><span><strong class="def-name">digitcharp</strong> <var class="def-var-arguments">(<var class="var">char</var>)</var><a class="copiable-link" href='#index-digitcharp'> &para;</a></span></dt>
+<dd>  
+<p>Returns <code class="code">true</code> if <var class="var">char</var> is a digit where only the corresponding 
+US-ASCII-character is regarded as a digit.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="lowercasep"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002flowercasep"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lowercasep"><span class="category-def">Function: </span><span><strong class="def-name">lowercasep</strong> <var class="def-var-arguments">(<var class="var">char</var>)</var><a class="copiable-link" href='#index-lowercasep'> &para;</a></span></dt>
+<dd>   
+<p>Returns <code class="code">true</code> if <var class="var">char</var> is a lowercase character. 
+</p>
+<p>Note: See remarks on <a class="ref" href="#alphacharp">alphacharp</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="newline_005fvariable"></a><a class="anchor" id="Item_003a-stringproc_002fdefvr_002fnewline"></a><dl class="first-defvr">
+<dt class="defvr" id="index-newline-1"><span class="category-def">Variable: </span><span><strong class="def-name">newline</strong><a class="copiable-link" href='#index-newline-1'> &para;</a></span></dt>
+<dd>
+<p>The newline character (ASCII-character 10). 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="space_005fvariable"></a><a class="anchor" id="Item_003a-stringproc_002fdefvr_002fspace"></a><dl class="first-defvr">
+<dt class="defvr" id="index-space"><span class="category-def">Variable: </span><span><strong class="def-name">space</strong><a class="copiable-link" href='#index-space'> &para;</a></span></dt>
+<dd>
+<p>The space character.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="tab_005fvariable"></a><a class="anchor" id="Item_003a-stringproc_002fdefvr_002ftab"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tab"><span class="category-def">Variable: </span><span><strong class="def-name">tab</strong><a class="copiable-link" href='#index-tab'> &para;</a></span></dt>
+<dd>
+<p>The tab character.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="unicode"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002funicode"></a><dl class="first-deffn">
+<dt class="deffn" id="index-unicode"><span class="category-def">Function: </span><span><strong class="def-name">unicode</strong> <var class="def-var-arguments">(<var class="var">arg</var>)</var><a class="copiable-link" href='#index-unicode'> &para;</a></span></dt>
+<dd>
+<p>Returns the character defined by <var class="var">arg</var> which might be a Unicode code point 
+or a name string if the underlying Lisp provides full Unicode support. 
+</p>
+<p>Example: Characters defined by hexadecimal code points
+(Maxima with SBCL on GNU/Linux). 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase: 16.$
+(%i2) map(unicode, [24, 0A3, 20AC]);
+(%o2)                            [$, &pound;, &euro;]
+</pre></div>
+
+<p>Warning: In wxMaxima with SBCL on Windows it is not possible to convert 
+code points larger than 16 bit to characters when the external format 
+has not been set to UTF-8. See <a class="ref" href="#adjust_005fexternal_005fformat">adjust_external_format</a> for more information.
+</p>
+
+<p>CMUCL doesn&rsquo;t process code points larger than 16 bit. 
+In these cases <code class="code">unicode</code> returns <code class="code">false</code>. 
+Converting a code point to a character via UTF-8 octets may serve as a workaround: 
+</p>
+<p><code class="code">octets_to_string(unicode_to_utf8(code_point));</code>
+</p>
+
+<p>See <a class="ref" href="#octets_005fto_005fstring">octets_to_string</a>, <a class="ref" href="#unicode_005fto_005futf8">unicode_to_utf8</a>.
+</p>
+<p>In case the underlying Lisp provides full Unicode support the character might be 
+specified by its name. The following is possible in ECL, CLISP and SBCL, 
+where in SBCL on Windows the external format has to be set to UTF-8.
+<code class="code">unicode(name)</code> is supported by CMUCL too but again limited to 16 bit 
+characters. 
+</p>
+<p>The string argument to <code class="code">unicode</code> is basically the same string returned by 
+<code class="code">printf</code> using the &quot;~@c&quot; specifier. 
+But as shown below the prefix &quot;#\&quot; must be omitted. 
+Underlines might be replaced by spaces and uppercase letters by lowercase ones.
+</p>
+<p>Example (continued): Characters defined by names 
+(Maxima with SBCL on GNU/Linux). 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i3) printf(false, &quot;~@c&quot;, unicode(0DF));
+(%o3)                    #\LATIN_SMALL_LETTER_SHARP_S
+(%i4) unicode(&quot;LATIN_SMALL_LETTER_SHARP_S&quot;);
+(%o4)                                  &szlig;
+(%i5) unicode(&quot;Latin small letter sharp s&quot;);
+(%o5)                                  &szlig;
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="unicode_005fto_005futf8"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002funicode_005fto_005futf8"></a><dl class="first-deffn">
+<dt class="deffn" id="index-unicode_005fto_005futf8"><span class="category-def">Function: </span><span><strong class="def-name">unicode_to_utf8</strong> <var class="def-var-arguments">(<var class="var">code_point</var>)</var><a class="copiable-link" href='#index-unicode_005fto_005futf8'> &para;</a></span></dt>
+<dd>
+<p>Returns a list containing the UTF-8 code corresponding to the Unicode <var class="var">code_point</var>.
+</p>
+<p>Examples: Converting Unicode code points to UTF-8 and vice versa. 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase: obase: 16.$
+(%i2) map(cint, [&quot;$&quot;,&quot;&pound;&quot;,&quot;&euro;&quot;]);
+(%o2)                           [24, 0A3, 20AC]
+(%i3) map(unicode_to_utf8, %);
+(%o3)                 [[24], [0C2, 0A3], [0E2, 82, 0AC]]
+(%i4) map(utf8_to_unicode, %);
+(%o4)                           [24, 0A3, 20AC]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="uppercasep"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fuppercasep"></a><dl class="first-deffn">
+<dt class="deffn" id="index-uppercasep"><span class="category-def">Function: </span><span><strong class="def-name">uppercasep</strong> <var class="def-var-arguments">(<var class="var">char</var>)</var><a class="copiable-link" href='#index-uppercasep'> &para;</a></span></dt>
+<dd>  
+<p>Returns <code class="code">true</code> if <var class="var">char</var> is an uppercase character. 
+</p>
+<p>Note: See remarks on <a class="ref" href="#alphacharp">alphacharp</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="us_005fascii_005fonly"></a><a class="anchor" id="Item_003a-stringproc_002fdefvr_002fus_005fascii_005fonly"></a><dl class="first-defvr">
+<dt class="defvr" id="index-us_005fascii_005fonly"><span class="category-def">Variable: </span><span><strong class="def-name">us_ascii_only</strong><a class="copiable-link" href='#index-us_005fascii_005fonly'> &para;</a></span></dt>
+<dd>
+<p>This option variable affects Maxima when the character encoding 
+provided by the application which runs Maxima is UTF-8 but the 
+external format of the Lisp reader is not equal to UTF-8. 
+</p>
+<p>On GNU/Linux this is true when Maxima is built with GCL 
+and on Windows in wxMaxima with GCL- and SBCL-builds. 
+With SBCL it is recommended to change the external format to UTF-8. 
+Setting <code class="code">us_ascii_only</code> is unnecessary then. 
+See <a class="ref" href="#adjust_005fexternal_005fformat">adjust_external_format</a> for details. 
+</p>
+<p><code class="code">us_ascii_only</code> is <code class="code">false</code> by default. 
+Maxima itself then (i.e. in the above described situation) parses the UTF-8 encoding.
+</p>
+<p>When <code class="code">us_ascii_only</code> is set to <code class="code">true</code> it is assumed that all strings 
+used as arguments to string processing functions do not contain Non-US-ASCII characters. 
+Given that promise, Maxima avoids parsing UTF-8 and strings can be processed more efficiently.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="utf8_005fto_005funicode"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002futf8_005fto_005funicode"></a><dl class="first-deffn">
+<dt class="deffn" id="index-utf8_005fto_005funicode"><span class="category-def">Function: </span><span><strong class="def-name">utf8_to_unicode</strong> <var class="def-var-arguments">(<var class="var">list</var>)</var><a class="copiable-link" href='#index-utf8_005fto_005funicode'> &para;</a></span></dt>
+<dd>
+<p>Returns a Unicode code point corresponding to the <var class="var">list</var> which must contain 
+the UTF-8 encoding of a single character.
+</p>
+<p>Examples: See <a class="ref" href="#unicode_005fto_005futf8">unicode_to_utf8</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-stringproc_002fnode_002fString-Processing"></a><hr>
+</div>
+<div class="section-level-extent" id="String-Processing">
+<div class="nav-panel">
+<p>
+Next: <a href="#Octets-and-Utilities-for-Cryptography" accesskey="n" rel="next">Octets and Utilities for Cryptography</a>, Previous: <a href="#Characters" accesskey="p" rel="prev">Characters</a>, Up: <a href="#stringproc_002dpkg" accesskey="u" rel="up">stringproc</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="String-Processing-1">91.4 String Processing</h3>
+
+<p>Position indices in strings are 1-indexed like in Maxima lists. 
+See example in <a class="ref" href="#charat">charat</a>.
+</p>
+<a class="anchor" id="charat"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcharat"></a><dl class="first-deffn">
+<dt class="deffn" id="index-charat"><span class="category-def">Function: </span><span><strong class="def-name">charat</strong> <var class="def-var-arguments">(<var class="var">string</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-charat'> &para;</a></span></dt>
+<dd>
+<p>Returns the <var class="var">n</var>-th character of <var class="var">string</var>.
+The first character in <var class="var">string</var> is returned with <var class="var">n</var> = 1. 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) charat(&quot;Lisp&quot;,1);
+(%o1)                           L
+(%i2) charlist(&quot;Lisp&quot;)[1];
+(%o2)                           L
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="charlist"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcharlist"></a><dl class="first-deffn">
+<dt class="deffn" id="index-charlist"><span class="category-def">Function: </span><span><strong class="def-name">charlist</strong> <var class="def-var-arguments">(<var class="var">string</var>)</var><a class="copiable-link" href='#index-charlist'> &para;</a></span></dt>
+<dd>
+<p>Returns the list of all characters in <var class="var">string</var>. 
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) charlist(&quot;Lisp&quot;);
+(%o1)                     [L, i, s, p]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="eval_005fstring"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002feval_005fstring"></a><dl class="first-deffn">
+<dt class="deffn" id="index-eval_005fstring"><span class="category-def">Function: </span><span><strong class="def-name">eval_string</strong> <var class="def-var-arguments">(<var class="var">str</var>)</var><a class="copiable-link" href='#index-eval_005fstring'> &para;</a></span></dt>
+<dd>
+<p>Parse the string <var class="var">str</var> as a Maxima expression and evaluate it.
+The string <var class="var">str</var> may or may not have a terminator (dollar sign <code class="code">$</code> or semicolon <code class="code">;</code>).
+Only the first expression is parsed and evaluated, if there is more than one.
+</p>
+<p>Complain if <var class="var">str</var> is not a string.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) eval_string (&quot;foo: 42; bar: foo^2 + baz&quot;);
+(%o1)                       42
+(%i2) eval_string (&quot;(foo: 42, bar: foo^2 + baz)&quot;);
+(%o2)                   baz + 1764
+</pre></div>
+
+<p>See also <a class="ref" href="#parse_005fstring">parse_string</a> and <a class="ref" href="maxima_3.html#eval_005fstring_005flisp">eval_string_lisp</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="parse_005fstring"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fparse_005fstring"></a><dl class="first-deffn">
+<dt class="deffn" id="index-parse_005fstring"><span class="category-def">Function: </span><span><strong class="def-name">parse_string</strong> <var class="def-var-arguments">(<var class="var">str</var>)</var><a class="copiable-link" href='#index-parse_005fstring'> &para;</a></span></dt>
+<dd>
+<p>Parse the string <var class="var">str</var> as a Maxima expression (do not evaluate it).
+The string <var class="var">str</var> may or may not have a terminator (dollar sign <code class="code">$</code> or semicolon <code class="code">;</code>).
+Only the first expression is parsed, if there is more than one.
+</p>
+<p>Complain if <var class="var">str</var> is not a string.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) parse_string (&quot;foo: 42; bar: foo^2 + baz&quot;);
+(%o1)                    foo : 42
+(%i2) parse_string (&quot;(foo: 42, bar: foo^2 + baz)&quot;);
+                                   2
+(%o2)          (foo : 42, bar : foo  + baz)
+</pre></div>
+
+<p>See also <a class="ref" href="#eval_005fstring">eval_string</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="scopy"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fscopy"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scopy"><span class="category-def">Function: </span><span><strong class="def-name">scopy</strong> <var class="def-var-arguments">(<var class="var">string</var>)</var><a class="copiable-link" href='#index-scopy'> &para;</a></span></dt>
+<dd>
+<p>Returns a copy of <var class="var">string</var> as a new string. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sdowncase"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsdowncase"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sdowncase"><span class="category-def">Function: </span><span><strong class="def-name">sdowncase</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sdowncase</code> (<var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sdowncase</code> (<var class="var">string</var>, <var class="var">start</var>)  <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sdowncase</code> (<var class="var">string</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-sdowncase'> &para;</a></span></dt>
+<dd>
+<p>Like <a class="ref" href="#supcase">supcase</a> but uppercase characters are converted to lowercase. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sequal"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsequal"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sequal"><span class="category-def">Function: </span><span><strong class="def-name">sequal</strong> <var class="def-var-arguments">(<var class="var">string_1</var>, <var class="var">string_2</var>)</var><a class="copiable-link" href='#index-sequal'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">string_1</var> and <var class="var">string_2</var> contain the same 
+sequence of characters. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sequalignore"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsequalignore"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sequalignore"><span class="category-def">Function: </span><span><strong class="def-name">sequalignore</strong> <var class="def-var-arguments">(<var class="var">string_1</var>, <var class="var">string_2</var>)</var><a class="copiable-link" href='#index-sequalignore'> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">sequal</code> but ignores case which is only possible for non-US-ASCII 
+characters when the underlying Lisp is able to recognize a character as an 
+alphabetic character. See remarks on <a class="ref" href="#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sexplode"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsexplode"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sexplode"><span class="category-def">Function: </span><span><strong class="def-name">sexplode</strong> <var class="def-var-arguments">(<var class="var">string</var>)</var><a class="copiable-link" href='#index-sexplode'> &para;</a></span></dt>
+<dd>
+<p><code class="code">sexplode</code> is an alias for function <code class="code">charlist</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="simplode"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsimplode"></a><dl class="first-deffn">
+<dt class="deffn" id="index-simplode"><span class="category-def">Function: </span><span><strong class="def-name">simplode</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">simplode</code> (<var class="var">list</var>)   <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">simplode</code> (<var class="var">list</var>, <var class="var">delim</var>)</var><a class="copiable-link" href='#index-simplode'> &para;</a></span></dt>
+<dd>
+<p><code class="code">simplode</code> takes a list of expressions and concatenates them into a string.
+If no delimiter <var class="var">delim</var> is specified, <code class="code">simplode</code> uses no delimiter.
+<var class="var">delim</var> can be any string.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_4.html#concat">concat</a></code>, <code class="code"><a class="ref" href="maxima_4.html#sconcat">sconcat</a></code>, <code class="code"><a class="ref" href="maxima_4.html#string">string</a></code> and <code class="code"><a class="ref" href="#printf">printf</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) simplode([&quot;xx[&quot;,3,&quot;]:&quot;,expand((x+y)^3)]);
+(%o1)             xx[3]:y^3+3*x*y^2+3*x^2*y+x^3
+(%i2) simplode( sexplode(&quot;stars&quot;),&quot; * &quot; );
+(%o2)                   s * t * a * r * s
+(%i3) simplode( [&quot;One&quot;,&quot;more&quot;,&quot;coffee.&quot;],&quot; &quot; );
+(%o3)                   One more coffee.
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sinsert"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsinsert"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sinsert"><span class="category-def">Function: </span><span><strong class="def-name">sinsert</strong> <var class="def-var-arguments">(<var class="var">seq</var>, <var class="var">string</var>, <var class="var">pos</var>)</var><a class="copiable-link" href='#index-sinsert'> &para;</a></span></dt>
+<dd><p>Returns a string that is a concatenation of <code class="code">substring(<var class="var">string</var>, 1, <var class="var">pos</var>-1)</code>,
+the string <var class="var">seq</var> and <code class="code">substring (<var class="var">string</var>, <var class="var">pos</var>)</code>.
+Note that the first character in <var class="var">string</var> is in position 1.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) s: &quot;A submarine.&quot;$
+(%i2) concat( substring(s,1,3),&quot;yellow &quot;,substring(s,3) );
+(%o2)                  A yellow submarine.
+(%i3) sinsert(&quot;hollow &quot;,s,3);
+(%o3)                  A hollow submarine.
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sinvertcase"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsinvertcase"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sinvertcase"><span class="category-def">Function: </span><span><strong class="def-name">sinvertcase</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sinvertcase</code> (<var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sinvertcase</code> (<var class="var">string</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sinvertcase</code> (<var class="var">string</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-sinvertcase'> &para;</a></span></dt>
+<dd>
+<p>Returns <var class="var">string</var> except that each character from position <var class="var">start</var> to <var class="var">end</var> is inverted.
+If <var class="var">end</var> is not given,
+all characters from <var class="var">start</var> to the end of <var class="var">string</var> are replaced.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) sinvertcase(&quot;sInvertCase&quot;);
+(%o1)                      SiNVERTcASE
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="slength"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fslength"></a><dl class="first-deffn">
+<dt class="deffn" id="index-slength"><span class="category-def">Function: </span><span><strong class="def-name">slength</strong> <var class="def-var-arguments">(<var class="var">string</var>)</var><a class="copiable-link" href='#index-slength'> &para;</a></span></dt>
+<dd>
+<p>Returns the number of characters in <var class="var">string</var>. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="smake"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsmake"></a><dl class="first-deffn">
+<dt class="deffn" id="index-smake"><span class="category-def">Function: </span><span><strong class="def-name">smake</strong> <var class="def-var-arguments">(<var class="var">num</var>, <var class="var">char</var>)</var><a class="copiable-link" href='#index-smake'> &para;</a></span></dt>
+<dd>
+<p>Returns a new string with a number of <var class="var">num</var> characters <var class="var">char</var>. 
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) smake(3,&quot;w&quot;);
+(%o1)                          www
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="smismatch"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsmismatch"></a><dl class="first-deffn">
+<dt class="deffn" id="index-smismatch"><span class="category-def">Function: </span><span><strong class="def-name">smismatch</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">smismatch</code> (<var class="var">string_1</var>, <var class="var">string_2</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">smismatch</code> (<var class="var">string_1</var>, <var class="var">string_2</var>, <var class="var">test</var>)</var><a class="copiable-link" href='#index-smismatch'> &para;</a></span></dt>
+<dd>
+<p>Returns the position of the first character of <var class="var">string_1</var> at which <var class="var">string_1</var> and <var class="var">string_2</var> differ or <code class="code">false</code>.
+Default test function for matching is <code class="code">sequal</code>.
+If <code class="code">smismatch</code> should ignore case, use <code class="code">sequalignore</code> as test.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) smismatch(&quot;seven&quot;,&quot;seventh&quot;);
+(%o1)                           6
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="split"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsplit"></a><dl class="first-deffn">
+<dt class="deffn" id="index-split"><span class="category-def">Function: </span><span><strong class="def-name">split</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">split</code> (<var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">split</code> (<var class="var">string</var>, <var class="var">delim</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">split</code> (<var class="var">string</var>, <var class="var">delim</var>, <var class="var">multiple</var>)</var><a class="copiable-link" href='#index-split'> &para;</a></span></dt>
+<dd>
+<p>Returns the list of all tokens in <var class="var">string</var>.
+Each token is an unparsed string.
+<code class="code">split</code> uses <var class="var">delim</var> as delimiter.
+If <var class="var">delim</var> is not given, the space character is the default delimiter.
+<var class="var">multiple</var> is a boolean variable with <code class="code">true</code> by default.
+Multiple delimiters are read as one.
+This is useful if tabs are saved as multiple space characters.
+If <var class="var">multiple</var> is set to <code class="code">false</code>, each delimiter is noted.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) split(&quot;1.2   2.3   3.4   4.5&quot;);
+(%o1)                 [1.2, 2.3, 3.4, 4.5]
+(%i2) split(&quot;first;;third;fourth&quot;,&quot;;&quot;,false);
+(%o2)               [first, , third, fourth]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sposition"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsposition"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sposition"><span class="category-def">Function: </span><span><strong class="def-name">sposition</strong> <var class="def-var-arguments">(<var class="var">char</var>, <var class="var">string</var>)</var><a class="copiable-link" href='#index-sposition'> &para;</a></span></dt>
+<dd><p>Returns the position of the first character in <var class="var">string</var> which matches <var class="var">char</var>.
+The first character in <var class="var">string</var> is in position 1.
+For matching characters ignoring case see <a class="ref" href="#ssearch">ssearch</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sremove"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsremove"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sremove"><span class="category-def">Function: </span><span><strong class="def-name">sremove</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sremove</code> (<var class="var">seq</var>, <var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sremove</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sremove</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sremove</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-sremove'> &para;</a></span></dt>
+<dd>
+<p>Returns a string like <var class="var">string</var> but without all substrings matching <var class="var">seq</var>.
+Default test function for matching is <code class="code">sequal</code>.
+If <code class="code">sremove</code> should ignore case while searching for <var class="var">seq</var>, use <code class="code">sequalignore</code> as test.
+Use <var class="var">start</var> and <var class="var">end</var> to limit searching.
+Note that the first character in <var class="var">string</var> is in position 1.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) sremove(&quot;n't&quot;,&quot;I don't like coffee.&quot;);
+(%o1)                   I do like coffee.
+(%i2) sremove (&quot;DO &quot;,%,'sequalignore);
+(%o2)                    I like coffee.
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sremovefirst"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsremovefirst"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sremovefirst"><span class="category-def">Function: </span><span><strong class="def-name">sremovefirst</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sremovefirst</code> (<var class="var">seq</var>, <var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sremovefirst</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sremovefirst</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sremovefirst</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-sremovefirst'> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">sremove</code> except that only the first substring that matches <var class="var">seq</var> is removed.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sreverse"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsreverse"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sreverse"><span class="category-def">Function: </span><span><strong class="def-name">sreverse</strong> <var class="def-var-arguments">(<var class="var">string</var>)</var><a class="copiable-link" href='#index-sreverse'> &para;</a></span></dt>
+<dd>
+<p>Returns a string with all the characters of <var class="var">string</var> in reverse order. 
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_4.html#reverse">reverse</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ssearch"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fssearch"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ssearch"><span class="category-def">Function: </span><span><strong class="def-name">ssearch</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssearch</code> (<var class="var">seq</var>, <var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssearch</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssearch</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssearch</code> (<var class="var">seq</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-ssearch'> &para;</a></span></dt>
+<dd>
+<p>Returns the position of the first substring of <var class="var">string</var> that matches the string <var class="var">seq</var>.
+Default test function for matching is <code class="code">sequal</code>.
+If <code class="code">ssearch</code> should ignore case, use <code class="code">sequalignore</code> as test.
+Use <var class="var">start</var> and <var class="var">end</var> to limit searching.
+Note that the first character in <var class="var">string</var> is in position 1.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ssearch(&quot;~s&quot;,&quot;~{~S ~}~%&quot;,'sequalignore);
+(%o1)                                  4
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ssort"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fssort"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ssort"><span class="category-def">Function: </span><span><strong class="def-name">ssort</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssort</code> (<var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssort</code> (<var class="var">string</var>, <var class="var">test</var>)</var><a class="copiable-link" href='#index-ssort'> &para;</a></span></dt>
+<dd>
+<p>Returns a string that contains all characters from <var class="var">string</var> in an order such there are no two successive characters <var class="var">c</var> and <var class="var">d</var> such that <code class="code">test (<var class="var">c</var>, <var class="var">d</var>)</code> is <code class="code">false</code> and <code class="code">test (<var class="var">d</var>, <var class="var">c</var>)</code> is <code class="code">true</code>.
+Default test function for sorting is <var class="var">clessp</var>.
+The set of test functions is <code class="code">{clessp, clesspignore, cgreaterp, cgreaterpignore, cequal, cequalignore}</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ssort(&quot;I don't like Mondays.&quot;);
+(%o1)                    '.IMaddeiklnnoosty
+(%i2) ssort(&quot;I don't like Mondays.&quot;,'cgreaterpignore);
+(%o2)                 ytsoonnMlkIiedda.'   
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ssubst"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fssubst"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ssubst"><span class="category-def">Function: </span><span><strong class="def-name">ssubst</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssubst</code> (<var class="var">new</var>, <var class="var">old</var>, <var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssubst</code> (<var class="var">new</var>, <var class="var">old</var>, <var class="var">string</var>, <var class="var">test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssubst</code> (<var class="var">new</var>, <var class="var">old</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssubst</code> (<var class="var">new</var>, <var class="var">old</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-ssubst'> &para;</a></span></dt>
+<dd>
+<p>Returns a string like <var class="var">string</var> except that all substrings matching <var class="var">old</var> are replaced by <var class="var">new</var>.
+<var class="var">old</var> and <var class="var">new</var> need not to be of the same length.
+Default test function for matching is <code class="code">sequal</code>.
+If <code class="code">ssubst</code> should ignore case while searching for old, use <code class="code">sequalignore</code> as test.
+Use <var class="var">start</var> and <var class="var">end</var> to limit searching.
+Note that the first character in <var class="var">string</var> is in position 1.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ssubst(&quot;like&quot;,&quot;hate&quot;,&quot;I hate Thai food. I hate green tea.&quot;);
+(%o1)          I like Thai food. I like green tea.
+(%i2) ssubst(&quot;Indian&quot;,&quot;thai&quot;,%,'sequalignore,8,12);
+(%o2)         I like Indian food. I like green tea.
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ssubstfirst"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fssubstfirst"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ssubstfirst"><span class="category-def">Function: </span><span><strong class="def-name">ssubstfirst</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssubstfirst</code> (<var class="var">new</var>, <var class="var">old</var>, <var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssubstfirst</code> (<var class="var">new</var>, <var class="var">old</var>, <var class="var">string</var>, <var class="var">test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssubstfirst</code> (<var class="var">new</var>, <var class="var">old</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">ssubstfirst</code> (<var class="var">new</var>, <var class="var">old</var>, <var class="var">string</var>, <var class="var">test</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-ssubstfirst'> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">subst</code> except that only the first substring that matches <var class="var">old</var> is replaced.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="strim"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fstrim"></a><dl class="first-deffn">
+<dt class="deffn" id="index-strim"><span class="category-def">Function: </span><span><strong class="def-name">strim</strong> <var class="def-var-arguments">(<var class="var">seq</var>,<var class="var">string</var>)</var><a class="copiable-link" href='#index-strim'> &para;</a></span></dt>
+<dd>
+<p>Returns a string like <var class="var">string</var>,
+but with all characters that appear in <var class="var">seq</var> removed from both ends. 
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) &quot;/* comment */&quot;$
+(%i2) strim(&quot; /*&quot;,%);
+(%o2)                        comment
+(%i3) slength(%);
+(%o3)                           7
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="striml"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fstriml"></a><dl class="first-deffn">
+<dt class="deffn" id="index-striml"><span class="category-def">Function: </span><span><strong class="def-name">striml</strong> <var class="def-var-arguments">(<var class="var">seq</var>, <var class="var">string</var>)</var><a class="copiable-link" href='#index-striml'> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">strim</code> except that only the left end of <var class="var">string</var> is trimmed. 
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="strimr"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fstrimr"></a><dl class="first-deffn">
+<dt class="deffn" id="index-strimr"><span class="category-def">Function: </span><span><strong class="def-name">strimr</strong> <var class="def-var-arguments">(<var class="var">seq</var>, <var class="var">string</var>)</var><a class="copiable-link" href='#index-strimr'> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">strim</code> except that only the right end of <var class="var">string</var> is trimmed.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="stringp"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fstringp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-stringp"><span class="category-def">Function: </span><span><strong class="def-name">stringp</strong> <var class="def-var-arguments">(<var class="var">obj</var>)</var><a class="copiable-link" href='#index-stringp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">obj</var> is a string.
+See introduction for example.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="substring"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsubstring"></a><dl class="first-deffn">
+<dt class="deffn" id="index-substring"><span class="category-def">Function: </span><span><strong class="def-name">substring</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">substring</code> (<var class="var">string</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">substring</code> (<var class="var">string</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-substring'> &para;</a></span></dt>
+<dd>
+<p>Returns the substring of <var class="var">string</var> beginning at position <var class="var">start</var> and ending at position <var class="var">end</var>.
+The character at position <var class="var">end</var> is not included.
+If <var class="var">end</var> is not given, the substring contains the rest of the string.
+Note that the first character in <var class="var">string</var> is in position 1.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) substring(&quot;substring&quot;,4);
+(%o1)                        string
+(%i2) substring(%,4,6);
+(%o2)                          in
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="supcase"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsupcase"></a><dl class="first-deffn">
+<dt class="deffn" id="index-supcase"><span class="category-def">Function: </span><span><strong class="def-name">supcase</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">supcase</code> (<var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">supcase</code> (<var class="var">string</var>, <var class="var">start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">supcase</code> (<var class="var">string</var>, <var class="var">start</var>, <var class="var">end</var>)</var><a class="copiable-link" href='#index-supcase'> &para;</a></span></dt>
+<dd>
+<p>Returns <var class="var">string</var> except that lowercase characters from position <var class="var">start</var> to <var class="var">end</var> are replaced by the corresponding uppercase ones.
+If <var class="var">end</var> is not given,
+all lowercase characters from <var class="var">start</var> to the end of <var class="var">string</var> are replaced.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) supcase(&quot;english&quot;,1,2);
+(%o1)                        English
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="tokens"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002ftokens"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tokens"><span class="category-def">Function: </span><span><strong class="def-name">tokens</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tokens</code> (<var class="var">string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">tokens</code> (<var class="var">string</var>, <var class="var">test</var>)</var><a class="copiable-link" href='#index-tokens'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of tokens, which have been extracted from <var class="var">string</var>.
+The tokens are substrings whose characters satisfy a certain test function.
+If test is not given, <var class="var">constituent</var> is used as the default test.
+<code class="code">{constituent, alphacharp, digitcharp, lowercasep, uppercasep, charp, characterp, alphanumericp}</code> is the set of test functions. 
+(The Lisp-version of <code class="code">tokens</code> is written by Paul Graham. ANSI Common Lisp, 1996, page 67.)
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) tokens(&quot;24 October 2005&quot;);
+(%o1)                  [24, October, 2005]
+(%i2) tokens(&quot;05-10-24&quot;,'digitcharp);
+(%o2)                     [05, 10, 24]
+(%i3) map(parse_string,%);
+(%o3)                      [5, 10, 24]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-stringproc_002fnode_002fOctets-and-Utilities-for-Cryptography"></a><hr>
+</div>
+<div class="section-level-extent" id="Octets-and-Utilities-for-Cryptography">
+<div class="nav-panel">
+<p>
+Previous: <a href="#String-Processing" accesskey="p" rel="prev">String Processing</a>, Up: <a href="#stringproc_002dpkg" accesskey="u" rel="up">stringproc</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Octets-and-Utilities-for-Cryptography-1">91.5 Octets and Utilities for Cryptography</h3>
+
+<a class="anchor" id="base64"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fbase64"></a><dl class="first-deffn">
+<dt class="deffn" id="index-base64"><span class="category-def">Function: </span><span><strong class="def-name">base64</strong> <var class="def-var-arguments">(<var class="var">arg</var>)</var><a class="copiable-link" href='#index-base64'> &para;</a></span></dt>
+<dd>
+<p>Returns the base64-representation of <var class="var">arg</var> as a string. 
+The argument <var class="var">arg</var> may be a string, a non-negative integer or a list of octets.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) base64: base64(&quot;foo bar baz&quot;);
+(%o1)                          Zm9vIGJhciBiYXo=
+(%i2) string: base64_decode(base64);
+(%o2)                            foo bar baz
+(%i3) obase: 16.$
+(%i4) integer: base64_decode(base64, 'number);
+(%o4)                       666f6f206261722062617a
+(%i5) octets: base64_decode(base64, 'list);
+(%o5)            [66, 6F, 6F, 20, 62, 61, 72, 20, 62, 61, 7A]
+(%i6) ibase: 16.$
+(%i7) base64(octets);
+(%o7)                          Zm9vIGJhciBiYXo=
+</pre></div>
+
+<p>Note that if <var class="var">arg</var> contains umlauts (resp. octets larger than 127) 
+the resulting base64-string is platform dependent.
+However the decoded string will be equal to the original.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="base64_005fdecode"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fbase64_005fdecode"></a><dl class="first-deffn">
+<dt class="deffn" id="index-base64_005fdecode"><span class="category-def">Function: </span><span><strong class="def-name">base64_decode</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">base64_decode</code> (<var class="var">base64-string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">base64_decode</code> (<var class="var">base64-string</var>, <var class="var">return-type</var>)</var><a class="copiable-link" href='#index-base64_005fdecode'> &para;</a></span></dt>
+<dd>
+<p>By default <code class="code">base64_decode</code> decodes the <var class="var">base64-string</var> back to the original string. 
+</p>
+<p>The optional argument <var class="var">return-type</var> allows <code class="code">base64_decode</code> to 
+alternatively return the corresponding number or list of octets.
+<var class="var">return-type</var> may be <code class="code">string</code>, <code class="code">number</code> or <code class="code">list</code>.
+</p>
+<p>Example: See <a class="ref" href="#base64">base64</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="crc24sum"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fcrc24sum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-crc24sum"><span class="category-def">Function: </span><span><strong class="def-name">crc24sum</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">crc24sum</code> (<var class="var">octets</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">crc24sum</code> (<var class="var">octets</var>, <var class="var">return-type</var>)</var><a class="copiable-link" href='#index-crc24sum'> &para;</a></span></dt>
+<dd>
+<p>By default <code class="code">crc24sum</code> returns the <code class="code">CRC24</code> checksum of an octet-list 
+as a string.
+</p>
+<p>The optional argument <var class="var">return-type</var> allows <code class="code">crc24sum</code> to 
+alternatively return the corresponding number or list of octets.
+<var class="var">return-type</var> may be <code class="code">string</code>, <code class="code">number</code> or <code class="code">list</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iQEcBAEBAgAGBQJVdCTzAAoJEG/1Mgf2DWAqCSYH/AhVFwhu1D89C3/QFcgVvZTM
+wnOYzBUURJAL/cT+IngkLEpp3hEbREcugWp+Tm6aw3R4CdJ7G3FLxExBH/5KnDHi
+rBQu+I7+3ySK2hpryQ6Wx5J9uZSa4YmfsNteR8up0zGkaulJeWkS4pjiRM+auWVe
+vajlKZCIK52P080DG7Q2dpshh4fgTeNwqCuCiBhQ73t8g1IaLdhDN6EzJVjGIzam
+/spqT/sTo6sw8yDOJjvU+Qvn6/mSMjC/YxjhRMaQt9EMrR1AZ4ukBF5uG1S7mXOH
+WdiwkSPZ3gnIBhM9SuC076gLWZUNs6NqTeE3UzMjDAFhH3jYk1T7mysCvdtIkms=
+=WmeC
+-----END PGP SIGNATURE-----
+</pre></div>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase : obase : 16.$
+(%i2) sig64 : sconcat(
+ &quot;iQEcBAEBAgAGBQJVdCTzAAoJEG/1Mgf2DWAqCSYH/AhVFwhu1D89C3/QFcgVvZTM&quot;,
+ &quot;wnOYzBUURJAL/cT+IngkLEpp3hEbREcugWp+Tm6aw3R4CdJ7G3FLxExBH/5KnDHi&quot;,
+ &quot;rBQu+I7+3ySK2hpryQ6Wx5J9uZSa4YmfsNteR8up0zGkaulJeWkS4pjiRM+auWVe&quot;,
+ &quot;vajlKZCIK52P080DG7Q2dpshh4fgTeNwqCuCiBhQ73t8g1IaLdhDN6EzJVjGIzam&quot;,
+ &quot;/spqT/sTo6sw8yDOJjvU+Qvn6/mSMjC/YxjhRMaQt9EMrR1AZ4ukBF5uG1S7mXOH&quot;,
+ &quot;WdiwkSPZ3gnIBhM9SuC076gLWZUNs6NqTeE3UzMjDAFhH3jYk1T7mysCvdtIkms=&quot; )$
+(%i3) octets: base64_decode(sig64, 'list)$
+(%i4) crc24: crc24sum(octets, 'list);
+(%o4)                          [5A, 67, 82]
+(%i5) base64(crc24);
+(%o5)                              WmeC
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="md5sum"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fmd5sum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-md5sum"><span class="category-def">Function: </span><span><strong class="def-name">md5sum</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">md5sum</code> (<var class="var">arg</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">md5sum</code> (<var class="var">arg</var>, <var class="var">return-type</var>)</var><a class="copiable-link" href='#index-md5sum'> &para;</a></span></dt>
+<dd>
+<p>Returns the <code class="code">MD5</code> checksum of a string, non-negative integer,
+list of octets, or binary (not character) input stream.
+A file for which an input stream is opened may be an ordinary text file;
+it is the stream which needs to be binary, not the file itself.
+</p>
+<p>When the argument is an input stream,
+<code class="code">md5sum</code> reads the entire content of the stream,
+but does not close the stream.
+</p>
+<p>The default return value is a string containing 32 hex characters.
+The optional argument <var class="var">return-type</var> allows <code class="code">md5sum</code> to alternatively 
+return the corresponding number or list of octets.
+<var class="var">return-type</var> may be <code class="code">string</code>, <code class="code">number</code> or <code class="code">list</code>.
+</p>
+<p>Note that in case <var class="var">arg</var> contains German umlauts or other non-ASCII 
+characters (resp. octets larger than 127) the <code class="code">MD5</code> checksum is platform dependent.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase: obase: 16.$
+(%i2) msg: &quot;foo bar baz&quot;$
+(%i3) string: md5sum(msg);
+(%o3)                  ab07acbb1e496801937adfa772424bf7
+(%i4) integer: md5sum(msg, 'number);
+(%o4)                 0ab07acbb1e496801937adfa772424bf7
+(%i5) octets: md5sum(msg, 'list);
+(%o5)        [0AB,7,0AC,0BB,1E,49,68,1,93,7A,0DF,0A7,72,42,4B,0F7]
+(%i6) sdowncase( printf(false, &quot;~{~2,'0x~^:~}&quot;, octets) );
+(%o6)           ab:07:ac:bb:1e:49:68:01:93:7a:df:a7:72:42:4b:f7
+</pre></div>
+
+<p>The argument may be a binary input stream.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) S: openr_binary (file_search (&quot;md5.lisp&quot;));
+(%o1) #&lt;INPUT BUFFERED FILE-STREAM (UNSIGNED-BYTE 8)
+  /home/robert/maxima/maxima-code/share/stringproc/md5.lisp&gt;
+(%i2) md5sum (S);
+(%o2)           31a512ed53daf5b99495c9d05559355f
+(%i3) close (S);
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="mgf1_005fsha1"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fmgf1_005fsha1"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mgf1_005fsha1"><span class="category-def">Function: </span><span><strong class="def-name">mgf1_sha1</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">mgf1_sha1</code> (<var class="var">seed</var>, <var class="var">len</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">mgf1_sha1</code> (<var class="var">seed</var>, <var class="var">len</var>, <var class="var">return-type</var>)</var><a class="copiable-link" href='#index-mgf1_005fsha1'> &para;</a></span></dt>
+<dd>
+<p>Returns a pseudo random number of variable length. 
+By default the returned value is a number with a length of <var class="var">len</var> octets.
+</p>
+<p>The optional argument <var class="var">return-type</var> allows <code class="code">mgf1_sha1</code> to alternatively 
+return the corresponding list of <var class="var">len</var> octets.
+<var class="var">return-type</var> may be <code class="code">number</code> or <code class="code">list</code>.
+</p>
+<p>The computation of the returned value is described in <code class="code">RFC 3447</code>, 
+appendix <code class="code">B.2.1 MGF1</code>. 
+<code class="code">SHA1</code> is used as hash function, i.e. the randomness of the computed number
+relies on the randomness of <code class="code">SHA1</code> hashes.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase: obase: 16.$
+(%i2) number: mgf1_sha1(4711., 8);
+(%o2)                        0e0252e5a2a42fea1
+(%i3) octets: mgf1_sha1(4711., 8, 'list);
+(%o3)                  [0E0,25,2E,5A,2A,42,0FE,0A1]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="number_005fto_005foctets"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fnumber_005fto_005foctets"></a><dl class="first-deffn">
+<dt class="deffn" id="index-number_005fto_005foctets"><span class="category-def">Function: </span><span><strong class="def-name">number_to_octets</strong> <var class="def-var-arguments">(<var class="var">number</var>)</var><a class="copiable-link" href='#index-number_005fto_005foctets'> &para;</a></span></dt>
+<dd>
+<p>Returns an octet-representation of <var class="var">number</var> as a list of octets.
+The <var class="var">number</var> must be a non-negative integer.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase : obase : 16.$
+(%i2) octets: [0ca,0fe,0ba,0be]$
+(%i3) number: octets_to_number(octets);
+(%o3)                            0cafebabe
+(%i4) number_to_octets(number);
+(%o4)                      [0CA, 0FE, 0BA, 0BE]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="octets_005fto_005fnumber"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002foctets_005fto_005fnumber"></a><dl class="first-deffn">
+<dt class="deffn" id="index-octets_005fto_005fnumber"><span class="category-def">Function: </span><span><strong class="def-name">octets_to_number</strong> <var class="def-var-arguments">(<var class="var">octets</var>)</var><a class="copiable-link" href='#index-octets_005fto_005fnumber'> &para;</a></span></dt>
+<dd>
+<p>Returns a number by concatenating the octets in the list of <var class="var">octets</var>.
+</p>
+<p>Example: See <a class="ref" href="#number_005fto_005foctets">number_to_octets</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="octets_005fto_005foid"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002foctets_005fto_005foid"></a><dl class="first-deffn">
+<dt class="deffn" id="index-octets_005fto_005foid"><span class="category-def">Function: </span><span><strong class="def-name">octets_to_oid</strong> <var class="def-var-arguments">(<var class="var">octets</var>)</var><a class="copiable-link" href='#index-octets_005fto_005foid'> &para;</a></span></dt>
+<dd>
+<p>Computes an object identifier (OID) from the list of <var class="var">octets</var>.
+</p>
+<p>Example: RSA encryption OID
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase : obase : 16.$
+(%i2) oid: octets_to_oid([2A,86,48,86,0F7,0D,1,1,1]);
+(%o2)                      1.2.840.113549.1.1.1
+(%i3) oid_to_octets(oid);
+(%o3)               [2A, 86, 48, 86, 0F7, 0D, 1, 1, 1]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="octets_005fto_005fstring"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002foctets_005fto_005fstring"></a><dl class="first-deffn">
+<dt class="deffn" id="index-octets_005fto_005fstring"><span class="category-def">Function: </span><span><strong class="def-name">octets_to_string</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">octets_to_string</code> (<var class="var">octets</var>)  <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">octets_to_string</code> (<var class="var">octets</var>, <var class="var">encoding</var>)</var><a class="copiable-link" href='#index-octets_005fto_005fstring'> &para;</a></span></dt>
+<dd>
+<p>Decodes the list of <var class="var">octets</var> into a string according to current system defaults. 
+When decoding octets corresponding to Non-US-ASCII characters 
+the result depends on the platform, application and underlying Lisp.
+</p>
+<p>Example: Using system defaults 
+(Maxima compiled with GCL, which uses no format definition and 
+simply passes through the UTF-8-octets encoded by the GNU/Linux terminal).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) octets: string_to_octets(&quot;abc&quot;);
+(%o1)                            [61, 62, 63]
+(%i2) octets_to_string(octets);
+(%o2)                                 abc
+(%i3) ibase: obase: 16.$
+(%i4) unicode(20AC);
+(%o4)                                  &euro;
+(%i5) octets: string_to_octets(%);
+(%o5)                           [0E2, 82, 0AC]
+(%i6) octets_to_string(octets);
+(%o6)                                  &euro;
+(%i7) utf8_to_unicode(octets);
+(%o7)                                20AC
+</pre></div>
+
+<p>In case the external format of the Lisp reader is equal to UTF-8 the optional 
+argument <var class="var">encoding</var> allows to set the encoding for the octet to string conversion. 
+If necessary see <a class="ref" href="#adjust_005fexternal_005fformat">adjust_external_format</a> for changing the external format. 
+</p>
+<p>Some names of supported encodings (see corresponding Lisp manual for more): <br>
+CCL, CLISP, SBCL: <code class="code">utf-8, ucs-2be, ucs-4be, iso-8859-1, cp1252, cp850</code> <br>
+CMUCL: <code class="code">utf-8, utf-16-be, utf-32-be, iso8859-1, cp1252</code> <br>
+ECL: <code class="code">utf-8, ucs-2be, ucs-4be, iso-8859-1, windows-cp1252, dos-cp850</code> 
+</p>   
+<p>Example (continued): Using the optional encoding argument 
+(Maxima compiled with SBCL, GNU/Linux terminal).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i8) string_to_octets(&quot;&euro;&quot;, &quot;ucs-2be&quot;);
+(%o8)                              [20, 0AC]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="oid_005fto_005foctets"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002foid_005fto_005foctets"></a><dl class="first-deffn">
+<dt class="deffn" id="index-oid_005fto_005foctets"><span class="category-def">Function: </span><span><strong class="def-name">oid_to_octets</strong> <var class="def-var-arguments">(<var class="var">oid-string</var>)</var><a class="copiable-link" href='#index-oid_005fto_005foctets'> &para;</a></span></dt>
+<dd>
+<p>Converts an object identifier (OID) to a list of <var class="var">octets</var>.
+</p>
+<p>Example: See <a class="ref" href="#octets_005fto_005foid">octets_to_oid</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sha1sum"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsha1sum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sha1sum"><span class="category-def">Function: </span><span><strong class="def-name">sha1sum</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sha1sum</code> (<var class="var">arg</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sha1sum</code> (<var class="var">arg</var>, <var class="var">return-type</var>)</var><a class="copiable-link" href='#index-sha1sum'> &para;</a></span></dt>
+<dd>
+<p>Returns the <code class="code">SHA1</code> fingerprint of a string, a non-negative integer or 
+a list of octets. The default return value is a string containing 40 hex characters.
+</p>
+<p>The optional argument <var class="var">return-type</var> allows <code class="code">sha1sum</code> to alternatively 
+return the corresponding number or list of octets.
+<var class="var">return-type</var> may be <code class="code">string</code>, <code class="code">number</code> or <code class="code">list</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) ibase: obase: 16.$
+(%i2) msg: &quot;foo bar baz&quot;$
+(%i3) string: sha1sum(msg);
+(%o3)              c7567e8b39e2428e38bf9c9226ac68de4c67dc39
+(%i4) integer: sha1sum(msg, 'number);
+(%o4)             0c7567e8b39e2428e38bf9c9226ac68de4c67dc39
+(%i5) octets: sha1sum(msg, 'list);
+(%o5)  [0C7,56,7E,8B,39,0E2,42,8E,38,0BF,9C,92,26,0AC,68,0DE,4C,67,0DC,39]
+(%i6) sdowncase( printf(false, &quot;~{~2,'0x~^:~}&quot;, octets) );
+(%o6)     c7:56:7e:8b:39:e2:42:8e:38:bf:9c:92:26:ac:68:de:4c:67:dc:39
+</pre></div>
+
+<p>Note that in case <var class="var">arg</var> contains German umlauts or other non-ASCII 
+characters (resp. octets larger than 127) the <code class="code">SHA1</code> fingerprint is platform dependent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sha256sum"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fsha256sum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sha256sum"><span class="category-def">Function: </span><span><strong class="def-name">sha256sum</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sha256sum</code> (<var class="var">arg</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">sha256sum</code> (<var class="var">arg</var>, <var class="var">return-type</var>)</var><a class="copiable-link" href='#index-sha256sum'> &para;</a></span></dt>
+<dd>
+<p>Returns the <code class="code">SHA256</code> fingerprint of a string, a non-negative integer or 
+a list of octets. The default return value is a string containing 64 hex characters.
+</p>
+<p>The optional argument <var class="var">return-type</var> allows <code class="code">sha256sum</code> to alternatively 
+return the corresponding number or list of octets (see <a class="ref" href="#sha1sum">sha1sum</a>).
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) string: sha256sum(&quot;foo bar baz&quot;);
+(%o1)  dbd318c1c462aee872f41109a4dfd3048871a03dedd0fe0e757ced57dad6f2d7
+</pre></div>
+
+<p>Note that in case <var class="var">arg</var> contains German umlauts or other non-ASCII 
+characters (resp. octets larger than 127) the <code class="code">SHA256</code> fingerprint is platform dependent.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="string_005fto_005foctets"></a><a class="anchor" id="Item_003a-stringproc_002fdeffn_002fstring_005fto_005foctets"></a><dl class="first-deffn">
+<dt class="deffn" id="index-string_005fto_005foctets"><span class="category-def">Function: </span><span><strong class="def-name">string_to_octets</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">string_to_octets</code> (<var class="var">string</var>)  <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">string_to_octets</code> (<var class="var">string</var>, <var class="var">encoding</var>)</var><a class="copiable-link" href='#index-string_005fto_005foctets'> &para;</a></span></dt>
+<dd>
+<p>Encodes a <var class="var">string</var> into a list of octets according to current system defaults. 
+When encoding strings containing Non-US-ASCII characters 
+the result depends on the platform, application and underlying Lisp.
+</p>
+<p>In case the external format of the Lisp reader is equal to UTF-8 the optional 
+argument <var class="var">encoding</var> allows to set the encoding for the string to octet conversion. 
+If necessary see <a class="ref" href="#adjust_005fexternal_005fformat">adjust_external_format</a> for changing the external format. 
+</p>
+<p>See <a class="ref" href="#octets_005fto_005fstring">octets_to_string</a> for examples and some more information.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_91.html#to_005fpoly_005fsolve_002dpkg" accesskey="n" rel="next">to_poly_solve</a>, Previous: <a href="maxima_89.html#stirling_002dpkg" accesskey="p" rel="prev">stirling</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

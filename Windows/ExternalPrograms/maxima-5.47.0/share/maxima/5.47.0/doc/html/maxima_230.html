@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Beta Random Variable</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Beta Random Variable">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Beta Random Variable">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" rel="up" title="Functions and Variables for continuous distributions">
+<link href="maxima_231.html#Continuous-Uniform-Random-Variable" rel="next" title="Continuous Uniform Random Variable">
+<link href="maxima_229.html#Gamma-Random-Variable" rel="previous" title="Gamma Random Variable">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Beta-Random-Variable"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_231.html#Continuous-Uniform-Random-Variable" accesskey="n" rel="next">Continuous Uniform Random Variable</a>, Previous: <a href="maxima_229.html#Gamma-Random-Variable" accesskey="p" rel="previous">Gamma Random Variable</a>, Up: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="u" rel="up">Functions and Variables for continuous distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Beta-Random-Variable-1"></a>
+<h4 class="subsection">52.2.10 Beta Random Variable</h4>
+
+<p>The <em>beta</em> distribution is a family of distributions defined over
+<em>[0,1]</em> parameterized by two positive shape parameters <em>a</em>,
+and <em>b</em>.
+</p>
+<a name="pdf_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002fpdf_005fbeta"></a><dl>
+<dt><a name="index-pdf_005fbeta"></a>Function: <strong>pdf_beta</strong> <em>(<var>x</var>,<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the density function of a 
+\({\it Beta}(a,b)\) random variable, with <em>a,b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The pdf is
+$$
+f(x; a, b) =
+\cases{
+\displaystyle{x^{a-1}(1-x)^{b-1} \over B(a,b)} & for $0 \le x \le 1$
+\cr
+\cr
+0 & otherwise
+}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+
+<a name="cdf_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002fcdf_005fbeta"></a><dl>
+<dt><a name="index-cdf_005fbeta"></a>Function: <strong>cdf_beta</strong> <em>(<var>x</var>,<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the distribution function of a 
+\({\it Beta}(a,b)\) random variable, with <em>a,b&gt;0</em>.
+</p>
+<p>The cdf is
+$$
+F(x; a, b) =
+\cases{
+0 & $x < 0$ \cr
+I_x(a,b) & $0 \le x \le 1$ \cr
+1 & $x > 1$
+}
+$$</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) cdf_beta(1/3,15,2);
+                               11
+(%o2)                       --------
+                            14348907
+</pre><pre class="example">(%i3) float(%);
+(%o3)                 7.666089131388195e-7
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="quantile_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002fquantile_005fbeta"></a><dl>
+<dt><a name="index-quantile_005fbeta"></a>Function: <strong>quantile_beta</strong> <em>(<var>q</var>,<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the <var>q</var>-quantile of a 
+\({\it Beta}(a,b)\) random variable, with <em>a,b&gt;0</em>; in other words, this is the inverse of <code>cdf_beta</code>. Argument <var>q</var> must be an element of <em>[0,1]</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="mean_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002fmean_005fbeta"></a><dl>
+<dt><a name="index-mean_005fbeta"></a>Function: <strong>mean_beta</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the mean of a 
+\({\it Beta}(a,b)\) random variable, with <em>a,b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The mean is
+$$
+E[X] = {a\over a+b}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="var_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002fvar_005fbeta"></a><dl>
+<dt><a name="index-var_005fbeta"></a>Function: <strong>var_beta</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the variance of a 
+\({\it Beta}(a,b)\) random variable, with <em>a,b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The variance is
+$$
+V[X] = {ab \over (a+b)^2(a+b+1)}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+<a name="std_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002fstd_005fbeta"></a><dl>
+<dt><a name="index-std_005fbeta"></a>Function: <strong>std_beta</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the standard deviation of a 
+\({\it Beta}(a,b)\) random variable, with <em>a,b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The standard deviation is
+$$
+D[X] = {1\over a+b}\sqrt{ab\over a+b+1}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="skewness_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002fskewness_005fbeta"></a><dl>
+<dt><a name="index-skewness_005fbeta"></a>Function: <strong>skewness_beta</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the skewness coefficient of a 
+\({\it Beta}(a,b)\) random variable, with <em>a,b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The skewness coefficient is
+$$
+SK[X] = {2(b-a)\sqrt{a+b+1} \over (a+b+2)\sqrt{ab}}
+$$</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="kurtosis_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002fkurtosis_005fbeta"></a><dl>
+<dt><a name="index-kurtosis_005fbeta"></a>Function: <strong>kurtosis_beta</strong> <em>(<var>a</var>,<var>b</var>)</em></dt>
+<dd><p>Returns the kurtosis coefficient of a 
+\({\it Beta}(a,b)\) random variable, with <em>a,b&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The kurtosis coefficient is
+$$
+KU[X] = {3(a+b+1)\left(2(a+b)^2+ab(a+b-6)\right) \over
+ab(a+b+2)(a+b+3)} - 3
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="random_005fbeta"></a><a name="Item_003a-distrib_002fdeffn_002frandom_005fbeta"></a><dl>
+<dt><a name="index-random_005fbeta"></a>Function: <strong>random_beta</strong> <em>(<var>a</var>,<var>b</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>random_beta</tt> (<var>a</var>,<var>b</var>,<var>n</var>)</em></dt>
+<dd>
+<p>Returns a 
+\({\it Beta}(a,b)\) random variate, with <em>a,b&gt;0</em>. Calling <code>random_beta</code> with a third argument <var>n</var>, a random sample of size <var>n</var> will be simulated.
+</p>
+<p>The implemented algorithm is defined in Cheng, R.C.H.  (1978). <var>Generating Beta Variates with Nonintegral Shape Parameters</var>. Communications of the ACM, 21:317-322
+</p>
+<p>To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;<a href="maxima_424.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-distrib_002fnode_002fContinuous-Uniform-Random-Variable"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_231.html#Continuous-Uniform-Random-Variable" accesskey="n" rel="next">Continuous Uniform Random Variable</a>, Previous: <a href="maxima_229.html#Gamma-Random-Variable" accesskey="p" rel="previous">Gamma Random Variable</a>, Up: <a href="maxima_220.html#Functions-and-Variables-for-continuous-distributions" accesskey="u" rel="up">Functions and Variables for continuous distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Xmaxima Manual</title>
+
+<meta name="description" content="Xmaxima Manual">
+<meta name="keywords" content="Xmaxima Manual">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style type="text/css">
+<!--
+a.summary-letter-printindex {text-decoration: none}
+div.example {margin-left: 3.2em}
+kbd.kbd {font-style: oblique}
+span.program-in-footer {font-size: smaller}
+td.button-direction-about {text-align:center}
+td.menu-entry-description {vertical-align: top}
+td.menu-entry-destination {vertical-align: top}
+td.name-direction-about {text-align:center}
+td.printindex-index-entry {vertical-align: top}
+td.printindex-index-section {vertical-align: top}
+th.entries-header-printindex {text-align:left}
+th.sections-header-printindex {text-align:left}
+ul.mark-bullet {list-style-type: disc}
+ul.toc-numbered-mark {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<h1 class="title">Xmaxima Manual</h1>
+<strong class="author">Jaime E. Villate</strong><br>
+<p>Copyright &copy; 2006 Jaime E. Villate
+</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+</p>
+<p>You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301, USA.
+</p>
+<hr>
+
+
+
+
+<a class="node" id="Top"></a><table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[ &lt;&lt; ]</td>
+<td>[ &lt; ]</td>
+<td>[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td>[<a href="#Main-Window" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Main-Window" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+
+<p><em class="dfn">Xmaxima</em> is a graphical interface for <em class="dfn">Maxima</em>, written in
+<em class="dfn">Tcl/Tk</em>. It also provides the <em class="dfn">xmaxima</em> plotting program for
+Maxima (formerly called &rsquo;openmath&rsquo;), which can do some of the plots done by Maxima&rsquo;s default plotter
+(<em class="dfn">gnuplot</em>) and a few more that gnuplot cannot do.
+</p>
+<p>This manual was written for Xmaxima - the screenshots are from the Linux version of Maxima 5.43.2. Some familiarity
+with Maxima is assumed. There is a separate reference manual for
+Maxima, which can be browsed and studied from Xmaxima.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td class="menu-entry-destination"><a href="#Command_002dline-options">1 Command-line options</a></td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+</td></tr>
+<tr><td class="menu-entry-destination"><a href="#Main-Window">2 Xmaxima Window</a></td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+</td></tr>
+<tr><td class="menu-entry-destination"><a href="#Entering-commands">3 Entering commands</a></td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+</td></tr>
+<tr><td class="menu-entry-destination"><a href="#Session-control">4 Session control</a></td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+</td></tr>
+<tr><td class="menu-entry-destination"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+</td></tr>
+<tr><td class="menu-entry-destination"><a href="#The-browser">6 The browser</a></td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+</td></tr>
+<tr><td class="menu-entry-destination"><a href="#Getting-Help">7 Getting Help</a></td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+</td></tr>
+<tr><td class="menu-entry-destination"><a href="#Concept-Index" rel="index">Concept Index</a></td><td>&nbsp;&nbsp;</td><td class="menu-entry-description">
+</td></tr>
+</table>
+
+<div class="chapter-level-extent" id="Command_002dline-options">
+<h1 class="chapter" id="Command_002dline-options-1">1 Command-line options</h1>
+
+<p>The executable program, xmaxima, accepts the following command-line
+options:
+</p>
+<dl class="table">
+<dt><samp class="option"><code class="code">--help</code></samp></dt>
+<dt><samp class="option"><code class="code">-h</code></samp></dt>
+<dd><p>Displays a brief usage summary.
+</p></dd>
+<dt><samp class="option"><code class="code">--url</code> site</samp></dt>
+<dd><p>Start Xmaxima&rsquo;s browser with the page at the URL &lsquo;<samp class="samp">site</samp>&rsquo;
+</p></dd>
+<dt><samp class="option"><code class="code">--use-version</code> ver</samp></dt>
+<dt><samp class="option"><code class="code">-u</code> ver</samp></dt>
+<dd><p>Launch version &lsquo;<samp class="samp">ver</samp>&rsquo; of Maxima.
+</p></dd>
+<dt><samp class="option"><code class="code">--lisp</code> flavor</samp></dt>
+<dt><samp class="option"><code class="code">-l</code> flavor</samp></dt>
+<dd><p>Use the lisp implementation &lsquo;<samp class="samp">flavor</samp>&rsquo; of Maxima.
+</p></dd>
+<dt><samp class="option"><code class="code">--lisp-options</code> lisp-options</samp></dt>
+<dt><samp class="option"><code class="code">-X</code> lisp-options</samp></dt>
+<dd><p>Options to be given to the underlying Lisp.
+Option lines containing spaces have to be
+quoted to be passed to the lisp as a whole.
+</p></dd>
+</dl>
+
+<hr>
+</div>
+<div class="chapter-level-extent" id="Main-Window">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Command_002dline-options" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Command_002dline-options" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td>[<a href="#Entering-commands" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="Xmaxima-Window">2 Xmaxima Window</h1>
+
+<p>By default, Xmaxima creates two windows, a command window, where all
+the commands for Maxima will be entered and the output returned by
+Maxima will be printed.
+<a class="index-entry-id" id="index-text-window"></a>
+</p>
+<p>The second window is Xmaxima&rsquo;s browser; it is used to show a quick
+primer, a copy of the Maxima manual and any other HTML you might want to
+download from the Web.
+<a class="index-entry-id" id="index-browser"></a>
+</p>
+<img class="image" src="figures/xmaximawindow.png" alt="figures/xmaximawindow">
+
+<img class="image" src="figures/xmaximabrowser.png" alt="figures/xmaximabrowser">
+
+<p>The cursor is the small vertical bar that blinks in the text window. The
+text that is currently being written in the text window and which could
+be submitted to Maxima for evaluation is rendered in green. The text
+sent back by Maxima is rendered in black, and the text that has been
+previously entered by the user and that was already evaluated by Maxima
+is rendered in blue.
+</p>
+
+<p>You can also choose different types and sizes for the fonts, in the
+section &lsquo;<samp class="samp">Preferences</samp>&rsquo; of the <code class="code">Options</code> menu; those settings
+will be saved for future sessions.
+<a class="index-entry-id" id="index-Preferences"></a>
+</p>
+<hr>
+</div>
+<div class="chapter-level-extent" id="Entering-commands">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Main-Window" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Main-Window" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td>[<a href="#Input-lines-history" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Session-control" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="Entering-commands-1">3 Entering commands</h1>
+
+<p>Most commonly, you will enter Maxima commands in the last input line
+that appears on the text Window. That text will be rendered in green.
+If you press enter, without having written a command-termination
+character (either &lsquo;<samp class="samp">;</samp>&rsquo; or &lsquo;<samp class="samp">$</samp>&rsquo;) at the end, the text will remain
+green and you can continue to write a multi-line command.  When you type
+a command-end character and press the enter key, the text will become
+blue and a response from Maxima should appear in black. You can also use
+the key combination <kbd class="kbd">Ctrl-j</kbd> to move to a new line without sending
+the input for Maxima evaluation yet. If you want to clear all the
+current input (in green), even if it spans several lines, use the key
+combination <kbd class="kbd">Ctrl-u</kbd>.
+<a class="index-entry-id" id="index-_003b"></a>
+<a class="index-entry-id" id="index-_0024"></a>
+<a class="index-entry-id" id="index-Ctrl_002dj"></a>
+<a class="index-entry-id" id="index-Ctrl_002du"></a>
+</p>
+<p>If you move the cursor over the <code class="code">(%i1)</code> input label, or any other
+label or output text (in black), you will not be able to type any text
+there; that feature will prevent you from trying to enter a command in
+the wrong place, by mistake. If you really want to insert some
+additional text to modify Maxima&rsquo;s output, and which will not be
+interpreted by Maxima, you can do that using cut and paste (we will
+cover that later).
+</p>
+<p>You can also write a new input command for Maxima on top of a previous
+input line (in blue), for instance, if you do not want to write down
+again everything but just want to make a slight change. Once you press
+the enter key, the text you modified will appear at the last input line,
+as if you had written it down there; the input line you modified will
+continue the same in Xmaxima&rsquo;s and Maxima&rsquo;s memory, in spite of having
+changed in the screen.
+</p>
+<p>For example, suppose you entered &lsquo;<samp class="samp">a: 45;</samp>&rsquo; in input line
+<code class="code">(%i1)</code>, and something else in <code class="code">(%i2)</code>. You then move up over
+the <code class="code">(%i1) a: 45;</code> and change the 5 for an 8. Once you press enter,
+you will have in the screen <code class="code">(%i1) a: 48;</code> and <code class="code">(%i3) a: 48;</code>.
+But if you write, in the current input line, <code class="code">(%i1)</code> the original
+input &lsquo;<samp class="samp">a: 45;</samp>&rsquo; will reappear. If you navigate through the input
+lines history (see next section), you will also see that the first input
+keeps its original value.
+</p>
+<hr>
+<div class="section-level-extent" id="Input-lines-history">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Entering-commands" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Up section"> Up </a>]</td>
+<td>[<a href="#Cutting-and-pasting" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Session-control" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section">3.1 Input lines history</h2>
+<p>When the cursor is at the end of the last <code class="code">(%i)</code> label, you can use
+the key combinations <kbd class="kbd">Alt-p</kbd> and <kbd class="kbd">Alt-n</kbd> to recover the previous
+or next command that you entered. If you have just pressed <kbd class="kbd">Alt-n</kbd>,
+the &lsquo;<samp class="samp">next</samp>&rsquo; command means the first one you entered; but if you
+press it again it will mean the second one and so on.
+<a class="index-entry-id" id="index-Alt_002dp"></a>
+<a class="index-entry-id" id="index-Alt_002dn"></a>
+</p>
+<p>In the same way, if you press <kbd class="kbd">Alt-p</kbd> repeatedly, until you reached
+the first input, it will then continue to the last command you
+entered. Once you get on the screen the command that you were looking
+for, it will appear in green, as if you would have just type it, and you
+can modify it before you press enter.
+</p>
+<p>Those two key combinations can also be used to search for a previous
+input line with a particular string in it. You first write down the
+string to search, and then press <kbd class="kbd">Alt-p</kbd>, to search backwards, or
+<kbd class="kbd">Alt-n</kbd> to search forward. Pressing those key combinations
+repeatedly will allow you to cycle through all the lines that contain
+the string. If you want to try a different string in the middle of the
+search, you can delete the current input, type the new string, and start
+the search again.
+</p>
+<hr>
+</div>
+<div class="section-level-extent" id="Cutting-and-pasting">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Entering-commands" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Input-lines-history" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Up section"> Up </a>]</td>
+<td>[<a href="#Other-key-combinations" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Session-control" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section">3.2 Cutting and pasting</h2>
+<p>You can cut or copy a piece of text that you select, from anywhere on
+text window; not just from the input lines but also from the output text
+in black.
+</p>
+<p>To select the text, you can drag the cursor with the mouse while you
+keep its left button depressed, or you can hold the <kbd class="kbd">shift</kbd> key with
+one finger, while you move the cursor with the mouse or with the arrow
+keys.
+</p>
+<p>Once you have selected the text, you can either cut it, with
+<kbd class="kbd">Ctrl-x</kbd>, or copy it to an internal buffer, with
+<kbd class="kbd">Ctrl-c</kbd>. Instead of those key combinations, you can also use two
+options that appear inside the <code class="command">Edit</code> menu.
+<a class="index-entry-id" id="index-Ctrl_002dx"></a>
+<a class="index-entry-id" id="index-Ctrl_002dc"></a>
+<a class="index-entry-id" id="index-Cut"></a>
+<a class="index-entry-id" id="index-Copy"></a>
+</p>
+<p>The text that has been cut or copied more recently can be pasted
+anywhere, even in the output fields, using <kbd class="kbd">Ctrl-v</kbd> or an option in
+the <code class="command">Edit</code> menu.
+<a class="index-entry-id" id="index-Ctrl_002dv"></a>
+<a class="index-entry-id" id="index-Paste"></a>
+<a class="index-entry-id" id="index-Edit"></a>
+</p>
+<p>There is a command similar to &lsquo;<samp class="samp">cut</samp>&rsquo;, called &lsquo;<samp class="samp">kill</samp>&rsquo;
+(<kbd class="kbd">Ctrl-k</kbd>, with two major differences: it only works in input fields
+(blue or green) and instead of cutting a text that was selected, it will
+cut all the text from the cursor until the end of the input line where
+the cursor is.  The command &lsquo;<samp class="samp">Clear input</samp>&rsquo; (<kbd class="kbd">Ctrl-u</kbd>) is similar
+to &lsquo;<samp class="samp">kill</samp>&rsquo;, but it will cut the whole input line.
+<a class="index-entry-id" id="index-Ctrl_002dk"></a>
+<a class="index-entry-id" id="index-Ctrl_002du-1"></a>
+<a class="index-entry-id" id="index-Kill"></a>
+<a class="index-entry-id" id="index-Clear-input"></a>
+</p>
+<p>To paste the last text that you have cut with either &lsquo;<samp class="samp">kill</samp>&rsquo; or
+&lsquo;<samp class="samp">clear input</samp>&rsquo;, you should use the &lsquo;<samp class="samp">yank</samp>&rsquo; command,
+<kbd class="kbd">Ctrl-y</kbd>. If you prefer, you can use entries in the <code class="command">Edit</code>
+menu to kill, clear input and yank.
+<a class="index-entry-id" id="index-Ctrl_002dy"></a>
+<a class="index-entry-id" id="index-Yank"></a>
+</p>
+<hr>
+</div>
+<div class="section-level-extent" id="Other-key-combinations">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Entering-commands" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Cutting-and-pasting" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Entering-commands" title="Up section"> Up </a>]</td>
+<td>[<a href="#Session-control" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Session-control" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section">3.3 Other key combinations</h2>
+<p>There are other useful key combinations, which are not particular to
+Xmaxima, but are defined in most Tcl/Tk programs:
+</p>
+<dl class="table">
+<dt><kbd class="kbd">Ctrl-f</kbd></dt>
+<dd><p>The same as the right arrow key.
+<a class="index-entry-id" id="index-Ctrl_002df"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-b</kbd></dt>
+<dd><p>The same as the left arrow key.
+<a class="index-entry-id" id="index-Ctrl_002db"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-p</kbd></dt>
+<dd><p>The same as the up arrow key.
+<a class="index-entry-id" id="index-Ctrl_002dp"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-n</kbd></dt>
+<dd><p>The same as the down arrow key.
+<a class="index-entry-id" id="index-Ctrl_002dn"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-a</kbd></dt>
+<dd><p>Moves to the first character in a line (either input or output)
+<a class="index-entry-id" id="index-Ctrl_002da-1"></a>
+</p></dd>
+<dt><kbd class="kbd">Ctrl-e</kbd></dt>
+<dd><p>Moves to the last character in a line (either input or output)
+<a class="index-entry-id" id="index-Ctrl_002de"></a>
+</p></dd>
+<dt><kbd class="kbd">PageUp</kbd></dt>
+<dd><p>Moves one page up
+<a class="index-entry-id" id="index-PageUp"></a>
+</p></dd>
+<dt><kbd class="kbd">PageDown</kbd></dt>
+<dd><p>Moves one page down
+<a class="index-entry-id" id="index-PageDown"></a>
+</p></dd>
+<dt><kbd class="kbd">Home</kbd></dt>
+<dd><p>Moves the first character in the text window.
+<a class="index-entry-id" id="index-Home"></a>
+</p></dd>
+<dt><kbd class="kbd">End</kbd></dt>
+<dd><p>Moves to the last character in the text window.
+<a class="index-entry-id" id="index-End"></a>
+</p></dd>
+</dl>
+
+<hr>
+</div>
+</div>
+<div class="chapter-level-extent" id="Session-control">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Entering-commands" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Other-key-combinations" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td>[<a href="#Xmaxima-plots" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Xmaxima-plots" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="Session-control-1">4 Session control</h1>
+
+<p>The <code class="command">File</code> menu has sections to manage the work session in
+Xmaxima. The &lsquo;<samp class="samp">Batch file</samp>&rsquo; and &lsquo;<samp class="samp">Batch file silently</samp>&rsquo; sections
+are equivalent to Maxima&rsquo;s commands <code class="command">batch</code> and
+<code class="command">batchload</code>, which can also be used in Xmaxima. The advantage of
+those two options is that they will open a dialog box that will allow
+you to navigate through your directories, until you find the one that
+you are looking for.
+<a class="index-entry-id" id="index-Batch-file"></a>
+<a class="index-entry-id" id="index-File"></a>
+</p>
+<p>The &lsquo;<samp class="samp">Restore Maxima State</samp>&rsquo; (<kbd class="kbd">Alt-i</kbd>) section allows you to
+reload the state of a Maxima session that you saved using the &lsquo;<samp class="samp">Save
+Maxima State to File</samp>&rsquo; section. The latter saves the state as a Lisp file
+using Maxima&rsquo;s <code class="command">save</code> command.
+<a class="index-entry-id" id="index-Save-Maxima-State"></a>
+<a class="index-entry-id" id="index-Restore-Maxima-State"></a>
+<a class="index-entry-id" id="index-Alt_002di"></a>
+</p>
+<p>The &lsquo;<samp class="samp">Save Maxima Input to File</samp>&rsquo; (<kbd class="kbd">Ctrl-a</kbd>) section saves each
+input line as Maxima code using the Maxima <code class="command">stringout</code>
+command. This code can be manually edited in a text editor and loaded
+into Xmaxima using &lsquo;<samp class="samp">Batch file</samp>&rsquo;.
+<a class="index-entry-id" id="index-Save-Maxima-Input"></a>
+<a class="index-entry-id" id="index-Ctrl_002da"></a>
+</p>
+<p>In the menu <code class="command">Edit</code> there is also an option &lsquo;<samp class="samp">Save console to
+file</samp>&rsquo; which will save the complete contents of the text window into a
+file. The input and output will be saved as they look on the screen, and
+not as they were originally written.
+<a class="index-entry-id" id="index-Edit-1"></a>
+</p>
+<p>The option &lsquo;<samp class="samp">Input prompt</samp>&rsquo; (<kbd class="kbd">Alt-s</kbd>) will repeat the last input
+label sent back by Maxima. That will be useful if you are working on a text
+that is not near the last input label and you want to move quickly to
+the last input.
+<a class="index-entry-id" id="index-Alt_002ds"></a>
+</p>
+<p>Option &lsquo;<samp class="samp">Interrupt</samp>&rsquo; (<kbd class="kbd">Alt-g</kbd>) can be used to interrupt a
+calculation. And the option &lsquo;<samp class="samp">Restart</samp>&rsquo; will end the current
+execution of Maxima; a new Maxima process will be invoked, so the input
+prompt will start again as <code class="code">(%i1)</code>.
+<a class="index-entry-id" id="index-Alt_002dg"></a>
+<a class="index-entry-id" id="index-Interrupt"></a>
+<a class="index-entry-id" id="index-Restart"></a>
+</p>
+<hr>
+</div>
+<div class="chapter-level-extent" id="Xmaxima-plots">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Session-control" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Session-control" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td>[<a href="#The-browser" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#The-browser" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="Xmaxima-plots-1">5 Xmaxima plots</h1>
+
+<p><em class="dfn">Xmaxima</em> can be used either directly or from Maxima, to plot 2d
+and 3d graphs. From Maxima, it will be used by the functions
+<code class="command">plot2d</code> and <code class="command">plot3d</code>, if the option <code class="code">[plot_format,
+xmaxima]</code> is used. There are other plotting functions in Maxima that
+will only work with the xmaxima plot_format: <code class="command">plotdf</code>, <code class="command">openplot_curves</code>
+and <code class="command">graph2d</code>. All those plotting functions are documented in
+the Maxima Reference Manual.
+<a class="index-entry-id" id="index-plot2d"></a>
+<a class="index-entry-id" id="index-plot3d"></a>
+<a class="index-entry-id" id="index-plotdf"></a>
+<a class="index-entry-id" id="index-openplot_005fcurves"></a>
+<a class="index-entry-id" id="index-graph2d"></a>
+</p>
+<p>A command used to create a 2d xmaxima plot, for example:
+</p>
+<div class="example">
+<pre class="example-preformatted">plot2d(sin(x), [x, -%pi, %pi], [plot_format, xmaxima]);
+</pre></div>
+
+<p>creates a window with a menu bar with the following options:
+</p>
+<ul class="itemize mark-bullet">
+<li><em class="dfn">Close</em>. Destroys the plot window and sends the control back
+to Maxima.
+<a class="index-entry-id" id="index-Close"></a>
+
+</li><li><em class="dfn">Config</em>. Allows you to change some configurations of the
+plot.
+<a class="index-entry-id" id="index-Config"></a>
+
+</li><li><em class="dfn">Replot</em>. After configuration changes are made, this
+menu option should be selected, to activate the new settings.
+<a class="index-entry-id" id="index-Replot"></a>
+
+</li><li><em class="dfn">Zoom</em>. Will change the behavior of the mouse so that it will
+allow you to zoom in on a region of the plot by clicking with the left
+button. Each click near a point magnifies the plot, keeping the center
+at the point where you clicked. Holding the <kbd class="kbd">Shift</kbd> key while
+clicking, zooms out to the previous magnification.
+<a class="index-entry-id" id="index-Zoom"></a>
+
+</li><li><em class="dfn">Dragging</em>.  Holding the right mouse button down while the
+cursor is moved, the plot can be moved sideways or up and down.
+<a class="index-entry-id" id="index-Dragging"></a>
+
+</li><li><em class="dfn">Save</em>. Can be used to save a copy of the plot in a Postscript
+file.
+<a class="index-entry-id" id="index-Save"></a>
+
+</li><li><em class="dfn">Help</em>. Will show a short summary of the plot window options.
+<a class="index-entry-id" id="index-Help"></a>
+
+</li></ul>
+
+<img class="image" src="figures/xmaximaplot.png" alt="figures/xmaximaplot">
+
+<p>By default, each plot will be opened in a new separate window. However,
+the plot windows can be embedded into Xmaxima&rsquo;s text window, by
+selecting the option &lsquo;<samp class="samp">Plot windows -&gt; Embedded</samp>&rsquo; in the
+<code class="command">Options</code> menu, before the plot command is issued.
+<a class="index-entry-id" id="index-Embedded"></a>
+</p>
+<img class="image" src="figures/xmaximaembedded.png" alt="figures/xmaximaembedded">
+
+<p>The 3d plot has a menu very similar to that obtained with
+<code class="command">plot2d</code>, but with one additional option: <em class="dfn">Rotate</em>. Normally,
+if you click on the plot, it will not be enlarged, as the 2d
+plots. Clicking on the left button, while dragging the mouse, will
+rotate the plot, allowing to control two angles: azimuth and elevation.
+<a class="index-entry-id" id="index-Rotate"></a>
+</p>
+<p>The menu option &lsquo;<samp class="samp">Zoom</samp>&rsquo;, will change that default behavior, making
+the mouse enlarge the plot, as in the 2d case. To return to the default
+behavior (the mouse makes the plot rotate), the Rotate button should be
+used.
+</p>
+<p>If Xmaxima is executed from the command line, giving as argument the
+name of a file, it will open that file and interpret it as a plot command,
+with a syntax specific of Xmaxima. The graph generated by the commands
+in the file will be plotted in a plot window, and the main window of
+Xmaxima will not be opened and no communication with Maxima will be
+established. An example of the contents of a file that can be passed
+directly to Xmaxima is the following:
+</p>
+<div class="example">
+<pre class="example-preformatted">plot2d -xfun &quot;sin(A*x);cos(x)&quot; -yradius 10
+       -sliders {A=1:6} -parameters {A=1}
+</pre></div>
+
+<p>that file will generate a plot of a cosine function with fixed period,
+and a sine function with a period that can be changed by moving the
+slider that appears on the bottom.
+</p>
+<img class="image" src="figures/xmaximaslider.png" alt="figures/xmaximaslider">
+
+<p>the sliders option of xmaxima is one feature that cannot be accessed
+directly from <code class="command">plot2d</code> in Maxima. Other examples of input
+files for xmaxima are the files <samp class="file">maxoutNNNN.xmaxima</samp> (where NNNN
+is the process id (an unique number) of the maxima process, that Maxima
+creates; when Maxima is run from the command line, and a plotting
+function that involves xmaxima is used, the data is not passed directly
+to Xmaxima, but it is rather saved into that file and then xmaxima is
+executed with the name of that file as argument.
+</p>
+<p>The strings used in those files must be properly represented as Tcl/Tk
+strings. 
+</p>
+<hr>
+</div>
+<div class="chapter-level-extent" id="The-browser">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Xmaxima-plots" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Xmaxima-plots" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td>[<a href="#Getting-Help" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Getting-Help" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="The-browser-1">6 The browser</h1>
+
+<p>Xmaxima&rsquo;s browser is a Web browser. It lacks many features available in
+any modern browser, such as style-sheets and tables support. On the
+other hand, that browser accepts two additional tags, which are not part
+of HTML, but are very useful to pass commands to Xmaxima from the html
+page.
+</p>
+<p>One example of that is the Maxima Primer that appears in the browser when
+Xmaxima starts. That primer has some fields where you can click to get
+the result inside the browser window. The syntax of the two additional
+tags is as follows
+</p>
+<div class="example">
+<pre class="example-preformatted">&lt;eval program=maxima doinsert=0&gt;maxima_command&lt;/eval&gt;
+&lt;eval program=maxima doinsert=1&gt;command&lt;/eval&gt;
+&lt;result modified&gt;result&lt;/result&gt;
+</pre></div>
+
+<p>The first form will highlight the given Maxima command, and when the user
+double clicks on it, it will be evaluated, but its result will not be
+inserted back into the original web page.
+</p>
+<p>The second form will act similarly to the first, but the result from
+Maxima will now be inserted back into the Web page, in the next tag
+&lsquo;<samp class="samp">result</samp>&rsquo; that appears in the page. The commands shown in the
+<code class="code">eval</code> tags can be edited and reenter.
+</p>
+<p>Some more sample active pages can be found in
+<a class="url" href="https://web.archive.org/web/20190926040445/https://web.ma.utexas.edu/users/wfs/netmath/netmath.html">https://web.archive.org/web/20190926040445/https://web.ma.utexas.edu/users/wfs/netmath/netmath.html</a>
+</p> 
+<hr>
+</div>
+<div class="chapter-level-extent" id="Getting-Help">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#The-browser" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#The-browser" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td>[<a href="#Concept-Index" title="Next section in reading order"> &gt; </a>]</td>
+<td>[<a href="#Concept-Index" title="Next chapter"> &gt;&gt; </a>]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="Getting-Help-1">7 Getting Help</h1>
+
+<p>Xmaxima can be used to access Maxima&rsquo;s documentation in several
+different forms. The <code class="command">describe</code> of Maxima should work exactly
+as it does in Maxima. The <code class="code">Help</code> menu has a link to the local copy
+of the manual, which is distributed with Maxima. In that menu there is
+also a link to the Website of Maxima, where some other documentation can be
+found.
+</p>
+
+<hr>
+</div>
+<div class="unnumbered-level-extent" id="Concept-Index">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Getting-Help" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td>[<a href="#Getting-Help" title="Previous section in reading order"> &lt; </a>]</td>
+<td>[<a href="#Command_002dline-options" title="Up section"> Up </a>]</td>
+<td>[ &gt; ]</td>
+<td>[ &gt;&gt; ]</td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td> &nbsp; </td>
+<td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="unnumbered" id="Concept-Index-1">Concept Index</h1>
+
+<div class="printindex cp-printindex">
+<table class="cp-letters-header-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Concept-Index-1_cp_symbol-1"><b>$</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_symbol-2"><b>;</b></a>
+ &nbsp; 
+<br>
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-A"><b>A</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-C"><b>C</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-D"><b>D</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-E"><b>E</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-F"><b>F</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-G"><b>G</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-H"><b>H</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-I"><b>I</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-K"><b>K</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-O"><b>O</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-P"><b>P</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-R"><b>R</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-S"><b>S</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-T"><b>T</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-Y"><b>Y</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-Z"><b>Z</b></a>
+ &nbsp; 
+</td></tr></table>
+<table class="cp-entries-printindex" border="0">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><td>&nbsp;</td><th class="sections-header-printindex"> Section</th></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_symbol-1">$</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-_0024">$</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Entering-commands">3 Entering commands</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_symbol-2">;</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-_003b">;</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Entering-commands">3 Entering commands</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-A">A</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Alt_002dg">Alt-g</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Alt_002di">Alt-i</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Alt_002dn">Alt-n</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Input-lines-history">3.1 Input lines history</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Alt_002dp">Alt-p</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Input-lines-history">3.1 Input lines history</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Alt_002ds">Alt-s</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-B">B</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Batch-file">Batch file</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-browser">browser</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Main-Window">2 Xmaxima Window</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-C">C</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Clear-input">Clear input</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Close">Close</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Config">Config</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Copy">Copy</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002da">Ctrl-a</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002da-1">Ctrl-a</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002db">Ctrl-b</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002dc">Ctrl-c</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002de">Ctrl-e</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002df">Ctrl-f</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002dj">Ctrl-j</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Entering-commands">3 Entering commands</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002dk">Ctrl-k</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002dn">Ctrl-n</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002dp">Ctrl-p</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002du">Ctrl-u</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Entering-commands">3 Entering commands</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002du-1">Ctrl-u</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002dv">Ctrl-v</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002dx">Ctrl-x</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Ctrl_002dy">Ctrl-y</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Cut">Cut</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-D">D</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Dragging">Dragging</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-E">E</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Edit">Edit</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Edit-1">Edit</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Embedded">Embedded</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-End">End</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-F">F</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-File">File</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-G">G</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-graph2d">graph2d</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-H">H</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Help">Help</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Home">Home</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-I">I</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Interrupt">Interrupt</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-K">K</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Kill">Kill</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-O">O</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-openplot_005fcurves">openplot_curves</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-P">P</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-PageDown">PageDown</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-PageUp">PageUp</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Paste">Paste</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-plot2d">plot2d</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-plot3d">plot3d</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-plotdf">plotdf</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Preferences">Preferences</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Main-Window">2 Xmaxima Window</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-R">R</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Replot">Replot</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Restart">Restart</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Restore-Maxima-State">Restore Maxima State</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Rotate">Rotate</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-S">S</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Save">Save</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Save-Maxima-Input">Save Maxima Input</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Save-Maxima-State">Save Maxima State</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Session-control">4 Session control</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-T">T</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-text-window">text window</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Main-Window">2 Xmaxima Window</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-Y">Y</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Yank">Yank</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-Z">Z</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Zoom">Zoom</a></td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Xmaxima-plots">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+</table>
+<table class="cp-letters-footer-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Concept-Index-1_cp_symbol-1"><b>$</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_symbol-2"><b>;</b></a>
+ &nbsp; 
+<br>
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-A"><b>A</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-C"><b>C</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-D"><b>D</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-E"><b>E</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-F"><b>F</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-G"><b>G</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-H"><b>H</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-I"><b>I</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-K"><b>K</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-O"><b>O</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-P"><b>P</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-R"><b>R</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-S"><b>S</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-T"><b>T</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-Y"><b>Y</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-Z"><b>Z</b></a>
+ &nbsp; 
+</td></tr></table>
+</div>
+<hr style="height: 6px;">
+</div>
+<div class="element-contents" id="SEC_Contents">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="contents-heading">Table of Contents</h1>
+
+<div class="contents">
+<ul class="toc-numbered-mark">
+<li><a id="toc-Command_002dline-options-1" href="#Command_002dline-options">1 Command-line options</a></li>
+<li><a id="toc-Xmaxima-Window" href="#Main-Window">2 Xmaxima Window</a></li>
+<li><a id="toc-Entering-commands-1" href="#Entering-commands">3 Entering commands</a>
+<ul class="toc-numbered-mark">
+  <li><a id="toc-Input-lines-history" href="#Input-lines-history">3.1 Input lines history</a></li>
+  <li><a id="toc-Cutting-and-pasting" href="#Cutting-and-pasting">3.2 Cutting and pasting</a></li>
+  <li><a id="toc-Other-key-combinations" href="#Other-key-combinations">3.3 Other key combinations</a></li>
+</ul></li>
+<li><a id="toc-Session-control-1" href="#Session-control">4 Session control</a></li>
+<li><a id="toc-Xmaxima-plots-1" href="#Xmaxima-plots">5 Xmaxima plots</a></li>
+<li><a id="toc-The-browser-1" href="#The-browser">6 The browser</a></li>
+<li><a id="toc-Getting-Help-1" href="#Getting-Help">7 Getting Help</a></li>
+<li><a id="toc-Concept-Index-1" href="#Concept-Index" rel="index">Concept Index</a></li>
+
+</ul>
+</div>
+</div><hr>
+<div class="element-about" id="SEC_About">
+<table class="nav-panel" cellpadding="1" cellspacing="1" border="0">
+<tr><td>[<a href="#Command_002dline-options" title="Cover (top) of document">Top</a>]</td>
+<td>[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td>[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td>[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="about-heading">About This Document</h1>
+
+<p>
+  This document was generated on <em class="emph">June 2, 2023</em> using <a class="uref" href="https://www.gnu.org/software/texinfo/"><em class="emph">makeinfo</em></a>.
+</p>
+<p>
+  The buttons in the navigation panels have the following meaning:
+</p>
+<table border="1">
+  <tr>
+    <th> Button </th>
+    <th> Name </th>
+    <th> Go to </th>
+    <th> From 1.2.3 go to</th>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [ &lt;&lt; ] </td>
+    <td class="name-direction-about">FastBack</td>
+    <td>Beginning of this chapter or previous chapter</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [ &lt; ] </td>
+    <td class="name-direction-about">Back</td>
+    <td>Previous section in reading order</td>
+    <td>1.2.2</td>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [ Up ] </td>
+    <td class="name-direction-about">Up</td>
+    <td>Up section</td>
+    <td>1.2</td>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [ &gt; ] </td>
+    <td class="name-direction-about">Forward</td>
+    <td>Next section in reading order</td>
+    <td>1.2.4</td>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [ &gt;&gt; ] </td>
+    <td class="name-direction-about">FastForward</td>
+    <td>Next chapter</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [Top] </td>
+    <td class="name-direction-about">Top</td>
+    <td>Cover (top) of document</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [Contents] </td>
+    <td class="name-direction-about">Contents</td>
+    <td>Table of contents</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [Index] </td>
+    <td class="name-direction-about">Index</td>
+    <td>Index</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td class="button-direction-about"> [ ? ] </td>
+    <td class="name-direction-about">About</td>
+    <td>About (help)</td>
+    <td> &nbsp; </td>
+  </tr>
+</table>
+
+<p>
+  where the <strong class="strong"> Example </strong> assumes that the current position is at <strong class="strong"> Subsubsection One-Two-Three </strong> of a document of the following structure:
+</p>
+
+<ul>
+  <li> 1. Section One
+    <ul>
+      <li>1.1 Subsection One-One
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.2 Subsection One-Two
+        <ul>
+          <li>1.2.1 Subsubsection One-Two-One</li>
+          <li>1.2.2 Subsubsection One-Two-Two</li>
+          <li>1.2.3 Subsubsection One-Two-Three &nbsp; &nbsp;
+            <strong>&lt;== Current Position </strong></li>
+          <li>1.2.4 Subsubsection One-Two-Four</li>
+        </ul>
+      </li>
+      <li>1.3 Subsection One-Three
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.4 Subsection One-Four</li>
+    </ul>
+  </li>
+</ul>
+</div><hr>
+<p>
+  <span class="program-in-footer">This document was generated on <em class="emph">June 2, 2023</em> using <a class="uref" href="https://www.gnu.org/software/texinfo/"><em class="emph">makeinfo</em></a>.</span>
+</p>
+
+
+</body>
+</html>

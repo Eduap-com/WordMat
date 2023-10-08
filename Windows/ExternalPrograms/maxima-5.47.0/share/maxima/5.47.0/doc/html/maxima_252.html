@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for worldmap</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for worldmap">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for worldmap">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_248.html#draw_002dpkg" rel="up" title="draw-pkg">
+<link href="maxima_253.html#drawdf_002dpkg" rel="next" title="drawdf-pkg">
+<link href="maxima_251.html#Functions-and-Variables-for-pictures" rel="previous" title="Functions and Variables for pictures">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-worldmap"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_251.html#Functions-and-Variables-for-pictures" accesskey="p" rel="previous">Functions and Variables for pictures</a>, Up: <a href="maxima_248.html#draw_002dpkg" accesskey="u" rel="up">draw-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-worldmap-1"></a>
+<h3 class="section">53.4 Functions and Variables for worldmap</h3>
+
+<a name="Variables-and-Functions"></a>
+<h4 class="subsection">53.4.1 Variables and Functions</h4>
+
+
+
+<a name="boundaries_005farray"></a><a name="Item_003a-draw_002fdefvr_002fboundaries_005farray"></a><dl>
+<dt><a name="index-boundaries_005farray"></a>Global variable: <strong>boundaries_array</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p><code>boundaries_array</code> is where the graphic object <code>geomap</code> looks
+for boundaries coordinates.
+</p>
+<p>Each component of <code>boundaries_array</code> is an array of floating
+point quantities, the coordinates of a polygonal segment or map boundary.
+</p>
+<p>See also <code><a href="#geomap">geomap</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+</dd></dl>
+
+
+
+
+
+<a name="numbered_005fboundaries"></a><a name="Item_003a-draw_002fdeffn_002fnumbered_005fboundaries"></a><dl>
+<dt><a name="index-numbered_005fboundaries"></a>Function: <strong>numbered_boundaries</strong> <em>(<var>nlist</var>)</em></dt>
+<dd><p>Draws a list of polygonal segments (boundaries), labeled by
+its numbers (<code>boundaries_array</code> coordinates). This is of great
+help when building new geographical entities.
+</p>
+<p>Example:
+</p>
+<p>Map of Europe labeling borders with their component number in
+<code>boundaries_array</code>.
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) european_borders: 
+           region_boundaries(-31.81,74.92,49.84,32.06)$
+(%i3) numbered_boundaries(european_borders)$
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+</dd></dl>
+
+
+
+
+<a name="make_005fpoly_005fcontinent"></a><a name="Item_003a-draw_002fdeffn_002fmake_005fpoly_005fcontinent"></a><dl>
+<dt><a name="index-make_005fpoly_005fcontinent"></a>Function: <strong>make_poly_continent</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>make_poly_continent</tt> (<var>continent_name</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>make_poly_continent</tt> (<var>country_list</var>)</em></dt>
+<dd>
+<p>Makes the necessary polygons to draw a colored continent
+or a list of countries.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) /* A continent */
+      make_poly_continent(Africa)$
+(%i3) apply(draw2d, %)$
+</pre></div>
+<img src="./figures/worldmap_make_poly_continent.png" alt="./figures/worldmap_make_poly_continent">
+<div class="example">
+<pre class="example">(%i4) /* A list of countries */
+      make_poly_continent([Germany,Denmark,Poland])$
+(%i5) apply(draw2d, %)$
+</pre></div>
+<img src="./figures/worldmap_make_poly_continent2.png" alt="./figures/worldmap_make_poly_continent2">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+</dd></dl>
+
+
+
+
+
+<a name="make_005fpoly_005fcountry"></a><a name="Item_003a-draw_002fdeffn_002fmake_005fpoly_005fcountry"></a><dl>
+<dt><a name="index-make_005fpoly_005fcountry"></a>Function: <strong>make_poly_country</strong> <em>(<var>country_name</var>)</em></dt>
+<dd><p>Makes the necessary polygons to draw a colored country.
+If islands exist, one country can be defined with more than
+just one polygon.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) make_poly_country(India)$
+(%i3) apply(draw2d, %)$
+</pre></div>
+<img src="./figures/worldmap_make_poly_country.png" alt="./figures/worldmap_make_poly_country">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+</dd></dl>
+
+
+
+
+
+<a name="make_005fpolygon"></a><a name="Item_003a-draw_002fdeffn_002fmake_005fpolygon"></a><dl>
+<dt><a name="index-make_005fpolygon"></a>Function: <strong>make_polygon</strong> <em>(<var>nlist</var>)</em></dt>
+<dd><p>Returns a <code>polygon</code> object from boundary indices. Argument
+<var>nlist</var> is a list of components of <code>boundaries_array</code>.
+</p>
+<p>Example:
+</p>
+<p>Bhutan is defined by boundary numbers 171, 173
+and 1143, so that <code>make_polygon([171,173,1143])</code>
+appends arrays of coordinates <code>boundaries_array[171]</code>,
+<code>boundaries_array[173]</code> and <code>boundaries_array[1143]</code> and 
+returns a <code>polygon</code> object suited to be plotted by 
+<code>draw</code>. To avoid an error message, arrays must be
+compatible in the sense that any two consecutive
+arrays have two coordinates in the extremes in common. In this
+example, the two first components of <code>boundaries_array[171]</code> are
+equal to the last two coordinates of <code>boundaries_array[173]</code>, and 
+the two first of <code>boundaries_array[173]</code> are equal to the two first
+of <code>boundaries_array[1143]</code>; in conclusion, boundary numbers
+171, 173 and 1143 (in this order) are compatible and the colored 
+polygon can be drawn.
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) Bhutan;
+(%o2)                        [[171, 173, 1143]]
+(%i3) boundaries_array[171];
+(%o3) {Array:  
+       #(88.750549 27.14727 88.806351 27.25305 88.901367 27.282221
+         88.917877 27.321039)}
+(%i4) boundaries_array[173];
+(%o4) {Array:
+       #(91.659554 27.76511 91.6008 27.66666 91.598022 27.62499
+         91.631348 27.536381 91.765533 27.45694 91.775253 27.4161 
+         92.007751 27.471939 92.11441 27.28583 92.015259 27.168051
+         92.015533 27.08083 92.083313 27.02277 92.112183 26.920271
+         92.069977 26.86194 91.997192 26.85194 91.915253 26.893881
+         91.916924 26.85416 91.8358 26.863331 91.712479 26.799999 
+         91.542191 26.80444 91.492188 26.87472 91.418854 26.873329
+         91.371353 26.800831 91.307457 26.778049 90.682457 26.77417
+         90.392197 26.903601 90.344131 26.894159 90.143044 26.75333
+         89.98996 26.73583 89.841919 26.70138 89.618301 26.72694 
+         89.636093 26.771111 89.360786 26.859989 89.22081 26.81472
+         89.110237 26.829161 88.921631 26.98777 88.873016 26.95499
+         88.867737 27.080549 88.843307 27.108601 88.750549 
+         27.14727)}
+(%i5) boundaries_array[1143];
+(%o5) {Array:  
+       #(91.659554 27.76511 91.666924 27.88888 91.65831 27.94805 
+         91.338028 28.05249 91.314972 28.096661 91.108856 27.971109
+         91.015808 27.97777 90.896927 28.05055 90.382462 28.07972
+         90.396088 28.23555 90.366074 28.257771 89.996353 28.32333
+         89.83165 28.24888 89.58609 28.139999 89.35997 27.87166 
+         89.225517 27.795 89.125793 27.56749 88.971077 27.47361
+         88.917877 27.321039)}
+(%i6) Bhutan_polygon: make_polygon([171,173,1143])$
+(%i7) draw2d(Bhutan_polygon)$
+</pre></div>
+<img src="./figures/worldmap_make_polygon.png" alt="./figures/worldmap_make_polygon">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+</dd></dl>
+
+
+
+
+
+<a name="region_005fboundaries"></a><a name="Item_003a-draw_002fdeffn_002fregion_005fboundaries"></a><dl>
+<dt><a name="index-region_005fboundaries"></a>Function: <strong>region_boundaries</strong> <em>(<var>x1</var>,<var>y1</var>,<var>x2</var>,<var>y2</var>)</em></dt>
+<dd><p>Detects polygonal segments of global variable <code>boundaries_array</code>
+fully contained in the rectangle with vertices (<var>x1</var>,<var>y1</var>) -upper left- 
+and (<var>x2</var>,<var>y2</var>) -bottom right-.
+</p>
+<p>Example:
+</p>
+<p>Returns segment numbers for plotting southern Italy.
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) region_boundaries(10.4,41.5,20.7,35.4);
+(%o2)                [1846, 1863, 1864, 1881, 1888, 1894]
+(%i3) draw2d(geomap(%))$
+</pre></div>
+<img src="./figures/worldmap_region_boundaries.png" alt="./figures/worldmap_region_boundaries">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+</dd></dl>
+
+
+
+<a name="region_005fboundaries_005fplus"></a><a name="Item_003a-draw_002fdeffn_002fregion_005fboundaries_005fplus"></a><dl>
+<dt><a name="index-region_005fboundaries_005fplus"></a>Function: <strong>region_boundaries_plus</strong> <em>(<var>x1</var>,<var>y1</var>,<var>x2</var>,<var>y2</var>)</em></dt>
+<dd><p>Detects polygonal segments of global variable <code>boundaries_array</code>
+containing at least one vertex in the rectangle defined by vertices (<var>x1</var>,<var>y1</var>)
+-upper left- and (<var>x2</var>,<var>y2</var>) -bottom right-.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) region_boundaries_plus(10.4,41.5,20.7,35.4);
+(%o2) [1060, 1062, 1076, 1835, 1839, 1844, 1846, 1858,
+       1861, 1863, 1864, 1871, 1881, 1888, 1894, 1897]
+(%i3) draw2d(geomap(%))$
+</pre></div>
+<img src="./figures/worldmap_region_boundaries_plus.png" alt="./figures/worldmap_region_boundaries_plus">
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+</dd></dl>
+
+
+
+
+<a name="Graphic-objects"></a>
+<h4 class="subsection">53.4.2 Graphic objects</h4>
+
+
+<a name="geomap"></a><a name="Item_003a-draw_002fdeffn_002fgeomap"></a><dl>
+<dt><a name="index-geomap"></a>Graphic object: <strong>geomap</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>geomap</tt> (<var>numlist</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>geomap</tt> (<var>numlist</var>,<var>3Dprojection</var>)</em></dt>
+<dd>
+<p>Draws cartographic maps in 2D and 3D.
+</p>
+<p><b>2D</b>
+</p>
+<p>This function works together with global variable <code>boundaries_array</code>.
+</p>
+<p>Argument <var>numlist</var> is a list containing numbers or lists of numbers.
+All these numbers must be integers greater or equal than zero, 
+representing the components of global array <code>boundaries_array</code>.
+</p>
+<p>Each component of <code>boundaries_array</code> is an array of floating
+point quantities, the coordinates of a polygonal segment or map boundary.
+</p>
+<p><code>geomap (<var>numlist</var>)</code> flattens its arguments and draws the
+associated boundaries in <code>boundaries_array</code>.
+</p>
+<p>This object is affected by the following <i>graphic options</i>: <code><a href="maxima_250.html#line_005fwidth">line_width</a></code>, 
+<code><a href="maxima_250.html#line_005ftype">line_type</a></code> and <code>color</code>.
+</p>
+<p>Examples:
+</p>
+<p>A simple map defined by hand:
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) /* Vertices of boundary #0: {(1,1),(2,5),(4,3)} */
+   ( bnd0: make_array(flonum,6),
+     bnd0[0]:1.0, bnd0[1]:1.0, bnd0[2]:2.0,
+     bnd0[3]:5.0, bnd0[4]:4.0, bnd0[5]:3.0 )$
+(%i3) /* Vertices of boundary #1: {(4,3),(5,4),(6,4),(5,1)} */
+   ( bnd1: make_array(flonum,8),
+     bnd1[0]:4.0, bnd1[1]:3.0, bnd1[2]:5.0, bnd1[3]:4.0,
+     bnd1[4]:6.0, bnd1[5]:4.0, bnd1[6]:5.0, bnd1[7]:1.0)$
+(%i4) /* Vertices of boundary #2: {(5,1), (3,0), (1,1)} */
+   ( bnd2: make_array(flonum,6),
+     bnd2[0]:5.0, bnd2[1]:1.0, bnd2[2]:3.0,
+     bnd2[3]:0.0, bnd2[4]:1.0, bnd2[5]:1.0 )$
+(%i5) /* Vertices of boundary #3: {(1,1), (4,3)} */
+   ( bnd3: make_array(flonum,4),
+     bnd3[0]:1.0, bnd3[1]:1.0, bnd3[2]:4.0, bnd3[3]:3.0)$
+(%i6) /* Vertices of boundary #4: {(4,3), (5,1)} */
+   ( bnd4: make_array(flonum,4),
+     bnd4[0]:4.0, bnd4[1]:3.0, bnd4[2]:5.0, bnd4[3]:1.0)$
+(%i7) /* Pack all together in boundaries_array */
+   ( boundaries_array: make_array(any,5),
+     boundaries_array[0]: bnd0, boundaries_array[1]: bnd1,
+     boundaries_array[2]: bnd2, boundaries_array[3]: bnd3,
+     boundaries_array[4]: bnd4 )$
+(%i8) draw2d(geomap([0,1,2,3,4]))$
+</pre></div>
+<img src="./figures/worldmap_geomap.png" alt="./figures/worldmap_geomap">
+
+<p>The auxiliary package <code>worldmap</code> sets the global variable
+<code>boundaries_array</code> to real world boundaries in
+(longitude, latitude) coordinates. These data are in the 
+public domain and come from 
+<a href="https://web.archive.org/web/20100310124019/http://www-cger.nies.go.jp/grid-e/gridtxt/grid19.html">https://web.archive.org/web/20100310124019/http://www-cger.nies.go.jp/grid-e/gridtxt/grid19.html</a>.
+Package <code>worldmap</code> defines also boundaries for countries,
+continents and coastlines as lists with the necessary components of 
+<code>boundaries_array</code> (see file <code>share/draw/worldmap.mac</code>
+for more information). Package <code>worldmap</code> automatically loads 
+package <code>worldmap</code>.
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) c1: gr2d(geomap([Canada,United_States,
+                       Mexico,Cuba]))$
+(%i3) c2: gr2d(geomap(Africa))$
+(%i4) c3: gr2d(geomap([Oceania,China,Japan]))$
+(%i5) c4: gr2d(geomap([France,Portugal,Spain,
+                       Morocco,Western_Sahara]))$
+(%i6) draw(columns  = 2,
+           c1,c2,c3,c4)$
+</pre></div>
+<img src="./figures/worldmap_geomap2.png" alt="./figures/worldmap_geomap2">
+
+<p>Package <code>worldmap</code> is also useful for plotting
+countries as polygons. In this case, graphic object
+<code>geomap</code> is no longer necessary and the <code>polygon</code>
+object is used instead. Since lists are now used and not
+arrays, maps rendering will be slower. See also <code><a href="#make_005fpoly_005fcountry">make_poly_country</a></code>
+and <code><a href="#make_005fpoly_005fcontinent">make_poly_continent</a></code> to understand the following code.
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) mymap: append(
+   [color      = white],  /* borders are white */
+   [fill_color = red],             make_poly_country(Bolivia),
+   [fill_color = cyan],            make_poly_country(Paraguay),
+   [fill_color = green],           make_poly_country(Colombia),
+   [fill_color = blue],            make_poly_country(Chile),
+   [fill_color = &quot;#23ab0f&quot;],       make_poly_country(Brazil),
+   [fill_color = goldenrod],       make_poly_country(Argentina),
+   [fill_color = &quot;midnight-blue&quot;], make_poly_country(Uruguay))$
+(%i3) apply(draw2d, mymap)$
+</pre></div>
+<img src="./figures/worldmap_geomap3.png" alt="./figures/worldmap_geomap3">
+
+
+<p><b>3D</b>
+</p>
+<p><code>geomap (<var>numlist</var>)</code> projects map boundaries on the sphere of radius 1
+centered at (0,0,0). It is possible to change the sphere or the projection type
+by using <code>geomap (<var>numlist</var>,<var>3Dprojection</var>)</code>.
+</p>
+<p>Available 3D projections:
+</p>
+<ul>
+<li> <code>[spherical_projection,<var>x</var>,<var>y</var>,<var>z</var>,<var>r</var>]</code>: projects map boundaries on the sphere of
+radius <var>r</var> centered at (<var>x</var>,<var>y</var>,<var>z</var>).
+<div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) draw3d(geomap(Australia), /* default projection */
+             geomap(Australia,
+                    [spherical_projection,2,2,2,3]))$
+</pre></div>
+<img src="./figures/worldmap_geomap4.png" alt="./figures/worldmap_geomap4">
+
+</li><li> <code>[cylindrical_projection,<var>x</var>,<var>y</var>,<var>z</var>,<var>r</var>,<var>rc</var>]</code>: re-projects spherical map boundaries on the cylinder of radius
+<var>rc</var> and axis passing through the poles of the globe of radius <var>r</var> centered at (<var>x</var>,<var>y</var>,<var>z</var>).
+<div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) draw3d(geomap([America_coastlines,Eurasia_coastlines],
+                    [cylindrical_projection,2,2,2,3,4]))$
+</pre></div>
+<img src="./figures/worldmap_geomap5.png" alt="./figures/worldmap_geomap5">
+
+</li><li> <code>[conic_projection,<var>x</var>,<var>y</var>,<var>z</var>,<var>r</var>,<var>alpha</var>]</code>: re-projects spherical map boundaries on the cones of angle <var>alpha</var>,
+with axis passing through the poles of the globe of radius <var>r</var> centered at (<var>x</var>,<var>y</var>,<var>z</var>). Both 
+the northern and southern cones are tangent to sphere.
+<div class="example">
+<pre class="example">(%i1) load(&quot;worldmap&quot;)$
+(%i2) draw3d(geomap(World_coastlines,
+                    [conic_projection,0,0,0,1,90]))$
+</pre></div>
+</li></ul>
+<img src="./figures/worldmap_geomap6.png" alt="./figures/worldmap_geomap6">
+
+<p>See also <a href="http://riotorto.users.sf.net/gnuplot/geomap">http://riotorto.users.sf.net/gnuplot/geomap</a>
+for more elaborated examples.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+</dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_251.html#Functions-and-Variables-for-pictures" accesskey="p" rel="previous">Functions and Variables for pictures</a>, Up: <a href="maxima_248.html#draw_002dpkg" accesskey="u" rel="up">draw-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

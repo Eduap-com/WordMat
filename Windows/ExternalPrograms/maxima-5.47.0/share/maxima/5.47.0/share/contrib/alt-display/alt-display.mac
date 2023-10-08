@@ -1,0 +1,52 @@
+/* -*- Mode: maxima; Package: MAXIMA -*- */
+/*
+;; Copyright Leo Butler (l_butler@users.sourceforge.net) 2013
+;; Released under the terms of GPLv2+
+*/
+
+if ?fboundp(printf)=false then load("stringproc");  /* needed for printf */
+if ?fboundp(mathml)=false then load("mathml.lisp"); /* share/contrib/lurkmathml/mathml.lisp */
+load("tex-display.lisp");
+load("alt-display.lisp");
+
+alt_display_text_prefix:""; /* rim: "TEXT;>>"; */
+alt_display_text_suffix:""; /* rim: "<<TEXT;"; */
+alt_display_text(x) := printf(true,"~%~a~a~a~%",alt_display_text_prefix,first(x),alt_display_text_suffix);
+
+define_alt_display(f,body) ::= buildq(
+  [f:f, fargs:first(args(f)),
+  body:psubst([
+    alt_display1d='?\*alt\-display1d\*,
+    alt_display2d='?\*alt\-display2d\*,
+    prompt_prefix='?\*prompt\-prefix\*,
+    prompt_suffix='?\*prompt\-suffix\*,
+    displa='?displa,
+    linear_displa='?linear\-displa
+    ],
+    body)],
+  f := if alt_display_output_type(fargs)='text then alt_display_text(fargs) else body);
+
+define_alt_display(info_display(x),block([alt_display1d:false,alt_display2d:false],linear_displa(x)));
+define_alt_display(tex_display(x),block([alt_display1d:false,alt_display2d:false],printf(true,"~a",tex_displa(x))));
+define_alt_display(mathml_display(x),block([alt_display1d:false,alt_display2d:false],mathml(x)));
+define_alt_display(twod_display(x),block([alt_display1d:false,alt_display2d:false,display2d:true],displa(x)));
+define_alt_display(oned_display(x),block([alt_display1d:false,alt_display2d:false,display2d:false],displa(x)));
+
+define_alt_display(multi_display_for_texinfo(x),
+  block([alt_display1d:false,alt_display2d:false],
+    printf(true,"~&@iftex~%@tex~%")      ,tex_display(x)    ,printf(true,"~&@end tex~%@end iftex~%"),
+    printf(true,"~&@ifhtml~%@html~%")    ,mathml_display(x) ,printf(true,"~&@end html~%@end ifhtml~%"),
+    printf(true,"~&@ifinfo~%@example~%") ,info_display(x)   ,printf(true,"~&@end example~%@end ifinfo~%")));
+
+reset_displays() := (reset_prompts(), set_alt_display(1,false), set_alt_display(2,false));
+
+define_alt_display(multi_display_for_rim(x),
+  block([alt_display1d:false,alt_display2d:false],
+    printf(true,"~&tex;>>~%")     ,tex_display(x)    ,printf(true,"~&<<endtex;~%"),
+    printf(true,"~&html;>>~%")    ,mathml_display(x) ,printf(true,"~&<<endhtml;~%"),
+    printf(true,"~&1d;>>~%")      ,oned_display(x)   ,printf(true,"~&<<end1d;~%"),
+    printf(true,"~&2d;>>~%")      ,twod_display(x)   ,printf(true,"~&<<end2d;~%")
+    ));
+
+
+/* end of alt-display.mac */

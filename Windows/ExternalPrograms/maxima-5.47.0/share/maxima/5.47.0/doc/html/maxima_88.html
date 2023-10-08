@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>stats-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="stats-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="stats-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_89.html#stirling_002dpkg" rel="next" title="stirling-pkg">
+<link href="maxima_87.html#solve_005frec_002dpkg" rel="prev" title="solve_rec-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="stats_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_89.html#stirling_002dpkg" accesskey="n" rel="next">stirling</a>, Previous: <a href="maxima_87.html#solve_005frec_002dpkg" accesskey="p" rel="prev">solve_rec</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="stats">89 stats</h2>
+
+<a class="anchor" id="Item_003a-stats_002fnode_002fIntroduction-to-stats"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-stats" accesskey="1">Introduction to stats</a></li>
+<li><a href="#Functions-and-Variables-for-inference_005fresult" accesskey="2">Functions and Variables for inference_result</a></li>
+<li><a href="#Functions-and-Variables-for-stats" accesskey="3">Functions and Variables for stats</a></li>
+<li><a href="#Functions-and-Variables-for-special-distributions" accesskey="4">Functions and Variables for special distributions</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-stats">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-inference_005fresult" accesskey="n" rel="next">Functions and Variables for inference_result</a>, Up: <a href="#stats_002dpkg" accesskey="u" rel="up">stats</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-stats-1">89.1 Introduction to stats</h3>
+
+
+<p>Package <code class="code">stats</code> contains a set of classical statistical inference and
+hypothesis testing procedures.
+</p>
+<p>All these functions return an <code class="code">inference_result</code> Maxima object which contains
+the necessary results for population inferences and decision making.
+</p>
+<p>Global variable <code class="code">stats_numer</code> controls whether results are given in 
+floating point or symbolic and rational format; its default value is <code class="code">true</code>
+and results are returned in floating point format.
+</p>
+<p>Package <code class="code">descriptive</code> contains some utilities to manipulate data structures
+(lists and matrices); for example, to extract subsamples. It also contains some
+examples on how to use package <code class="code">numericalio</code> to read data from plain text
+files. See <code class="code">descriptive</code> and <code class="code">numericalio</code> for more details.
+</p>
+<p>Package <code class="code">stats</code> loads packages <code class="code">descriptive</code>, <code class="code">distrib</code> and
+<code class="code">inference_result</code>.
+</p>
+<p>For comments, bugs or suggestions, please contact the author at
+</p>
+<p><var class="var">&rsquo;mario AT edu DOT xunta DOT es&rsquo;</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Statistical-inference">Statistical inference</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-stats_002fnode_002fFunctions-and-Variables-for-inference_005fresult"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-inference_005fresult">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-stats" accesskey="n" rel="next">Functions and Variables for stats</a>, Previous: <a href="#Introduction-to-stats" accesskey="p" rel="prev">Introduction to stats</a>, Up: <a href="#stats_002dpkg" accesskey="u" rel="up">stats</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-inference_005fresult-1">89.2 Functions and Variables for inference_result</h3>
+
+<a class="anchor" id="inference_005fresult"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002finference_005fresult"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inference_005fresult"><span class="category-def">Function: </span><span><strong class="def-name">inference_result</strong> <var class="def-var-arguments">(<var class="var">title</var>, <var class="var">values</var>, <var class="var">numbers</var>)</var><a class="copiable-link" href='#index-inference_005fresult'> &para;</a></span></dt>
+<dd>
+<p>Constructs an <code class="code">inference_result</code> object of the type returned by the
+stats functions. Argument <var class="var">title</var> is a
+string with the name of the procedure; <var class="var">values</var> is a list with
+elements of the form <code class="code">symbol = value</code> and <var class="var">numbers</var> is a list
+with positive integer numbers ranging from one to <code class="code">length(<var class="var">values</var>)</code>,
+indicating which values will be shown by default.
+</p>
+<p>Example:
+</p>
+<p>This is a simple example showing results concerning a rectangle. The title of
+this object is the string <code class="code">&quot;Rectangle&quot;</code>, it stores five results, named
+<code class="code">'base</code>, <code class="code">'height</code>, <code class="code">'diagonal</code>, <code class="code">'area</code>,
+and <code class="code">'perimeter</code>, but only the first, second, fifth, and fourth
+will be displayed. The <code class="code">'diagonal</code> is stored in this object, but it is
+not displayed; to access its value, make use of function <code class="code">take_inference</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;inference_result&quot;)$
+(%i2) b: 3$ h: 2$
+(%i3) inference_result(&quot;Rectangle&quot;,
+                        ['base=b,
+                         'height=h,
+                         'diagonal=sqrt(b^2+h^2),
+                         'area=b*h,
+                         'perimeter=2*(b+h)],
+                        [1,2,5,4] );
+                        |   Rectangle
+                        |
+                        |    base = 3
+                        |
+(%o3)                   |   height = 2
+                        |
+                        | perimeter = 10
+                        |
+                        |    area = 6
+(%i4) take_inference('diagonal,%);
+(%o4)                        sqrt(13)
+</pre></div>
+
+<p>See also <code class="code"><a class="ref" href="#take_005finference">take_inference</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+
+<a class="anchor" id="inferencep"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002finferencep"></a><dl class="first-deffn">
+<dt class="deffn" id="index-inferencep"><span class="category-def">Function: </span><span><strong class="def-name">inferencep</strong> <var class="def-var-arguments">(<var class="var">obj</var>)</var><a class="copiable-link" href='#index-inferencep'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> or <code class="code">false</code>, depending on whether <var class="var">obj</var> is an
+<code class="code">inference_result</code> object or not.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+
+<a class="anchor" id="items_005finference"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002fitems_005finference"></a><dl class="first-deffn">
+<dt class="deffn" id="index-items_005finference"><span class="category-def">Function: </span><span><strong class="def-name">items_inference</strong> <var class="def-var-arguments">(<var class="var">obj</var>)</var><a class="copiable-link" href='#index-items_005finference'> &para;</a></span></dt>
+<dd>
+<p>Returns a list with the names of the items stored in <var class="var">obj</var>, which must
+be an <code class="code">inference_result</code> object.
+</p>
+<p>Example:
+</p>
+<p>The <code class="code">inference_result</code> object stores two values, named <code class="code">'pi</code> and <code class="code">'e</code>,
+but only the second is displayed. The <code class="code">items_inference</code> function returns the names
+of all items, no matter they are displayed or not.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;inference_result&quot;)$
+(%i2) inference_result(&quot;Hi&quot;, ['pi=%pi,'e=%e],[2]);
+                            |   Hi
+(%o2)                       |
+                            | e = %e
+(%i3) items_inference(%);
+(%o3)                        [pi, e]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+
+
+<a class="anchor" id="take_005finference"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftake_005finference"></a><dl class="first-deffn">
+<dt class="deffn" id="index-take_005finference"><span class="category-def">Function: </span><span><strong class="def-name">take_inference</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">take_inference</code> (<var class="var">n</var>, <var class="var">obj</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">take_inference</code> (<var class="var">name</var>, <var class="var">obj</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">take_inference</code> (<var class="var">list</var>, <var class="var">obj</var>)</var><a class="copiable-link" href='#index-take_005finference'> &para;</a></span></dt>
+<dd>
+<p>Returns the <var class="var">n</var>-th value stored in <var class="var">obj</var> if <var class="var">n</var> is a positive integer,
+or the item named <var class="var">name</var> if this is the name of an item. If the first
+argument is a list of numbers and/or symbols, function <code class="code">take_inference</code> returns
+a list with the corresponding results.
+</p>
+<p>Example:
+</p>
+<p>Given an <code class="code">inference_result</code> object, function <code class="code">take_inference</code> is
+called in order to extract some information stored in it.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;inference_result&quot;)$
+(%i2) b: 3$ h: 2$
+(%i3) sol: inference_result(&quot;Rectangle&quot;,
+                            ['base=b,
+                             'height=h,
+                             'diagonal=sqrt(b^2+h^2),
+                             'area=b*h,
+                             'perimeter=2*(b+h)],
+                            [1,2,5,4] );
+                        |   Rectangle
+                        |
+                        |    base = 3
+                        |
+(%o3)                   |   height = 2
+                        |
+                        | perimeter = 10
+                        |
+                        |    area = 6
+(%i4) take_inference('base,sol);
+(%o4)                           3
+(%i5) take_inference(5,sol);
+(%o5)                          10
+(%i6) take_inference([1,'diagonal],sol);
+(%o6)                     [3, sqrt(13)]
+(%i7) take_inference(items_inference(sol),sol);
+(%o7)                [3, 2, sqrt(13), 6, 10]
+</pre></div>
+
+<p>See also <code class="code"><a class="ref" href="#inference_005fresult">inference_result</a></code>, and <code class="code"><a class="ref" href="#take_005finference">take_inference</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+
+
+
+
+<a class="anchor" id="Item_003a-stats_002fnode_002fFunctions-and-Variables-for-stats"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-stats">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-special-distributions" accesskey="n" rel="next">Functions and Variables for special distributions</a>, Previous: <a href="#Functions-and-Variables-for-inference_005fresult" accesskey="p" rel="prev">Functions and Variables for inference_result</a>, Up: <a href="#stats_002dpkg" accesskey="u" rel="up">stats</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-stats-1">89.3 Functions and Variables for stats</h3>
+
+
+<a class="anchor" id="stats_005fnumer"></a><a class="anchor" id="Item_003a-stats_002fdefvr_002fstats_005fnumer"></a><dl class="first-defvr">
+<dt class="defvr" id="index-stats_005fnumer"><span class="category-def">Option variable: </span><span><strong class="def-name">stats_numer</strong><a class="copiable-link" href='#index-stats_005fnumer'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>If <code class="code">stats_numer</code> is <code class="code">true</code>, inference statistical functions 
+return their results in floating point numbers. If it is <code class="code">false</code>,
+results are given in symbolic and rational format.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-evaluation">Numerical evaluation</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+<a class="anchor" id="test_005fmean"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fmean"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fmean"><span class="category-def">Function: </span><span><strong class="def-name">test_mean</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_mean</code> (<var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_mean</code> (<var class="var">x</var>, <var class="var">options</var> ...)</var><a class="copiable-link" href='#index-test_005fmean'> &para;</a></span></dt>
+<dd>
+<p>This is the mean <var class="var">t</var>-test. Argument <var class="var">x</var> is a list or a column matrix
+containing an one dimensional sample. It also performs an asymptotic test
+based on the <i class="i">Central Limit Theorem</i> if option <code class="code">'asymptotic</code> is
+<code class="code">true</code>.
+</p>
+<p>Options:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'mean</code>, default <code class="code">0</code>, is the mean value to be checked.
+
+</li><li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code>, <code class="code">'greater</code> and <code class="code">'less</code>.
+
+</li><li><code class="code">'dev</code>, default <code class="code">'unknown</code>, this is the value of the standard deviation when it is 
+known; valid values are: <code class="code">'unknown</code> or a positive expression.
+
+</li><li><code class="code">'conflevel</code>, default <code class="code">95/100</code>, confidence level for the confidence interval; it must
+be an expression which takes a value in (0,1).
+
+</li><li><code class="code">'asymptotic</code>, default <code class="code">false</code>, indicates whether it performs an exact <var class="var">t</var>-test or
+an asymptotic one based on the <i class="i">Central Limit Theorem</i>;
+valid values are <code class="code">true</code> and <code class="code">false</code>.
+
+</li></ul>
+
+<p>The output of function <code class="code">test_mean</code> is an <code class="code">inference_result</code> Maxima object
+showing the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'mean_estimate</code>: the sample mean.
+
+</li><li> <code class="code">'conf_level</code>: confidence level selected by the user.
+
+</li><li> <code class="code">'conf_interval</code>: confidence interval for the population mean.
+
+</li><li> <code class="code">'method</code>: inference procedure.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameter(s).
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>Performs an exact <var class="var">t</var>-test with unknown variance. The null hypothesis
+is <em class="math tex2jax_process">\(H_0: mean=50\)</em> against the one sided alternative <em class="math tex2jax_process">\(H_1: mean<50\)</em>;
+according to the results, the <em class="math tex2jax_process">\(p\)</em>-value is too great, there are no
+evidence for rejecting <em class="math tex2jax_process">\(H_0\)</em>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) data: [78,64,35,45,45,75,43,74,42,42]$
+(%i3) test_mean(data,'conflevel=0.9,'alternative='less,'mean=50);
+          |                 MEAN TEST
+          |
+          |            mean_estimate = 54.3
+          |
+          |              conf_level = 0.9
+          |
+          | conf_interval = [minf, 61.51314273502712]
+          |
+(%o3)     |  method = Exact t-test. Unknown variance.
+          |
+          | hypotheses = H0: mean = 50 , H1: mean &lt; 50
+          |
+          |       statistic = .8244705235071678
+          |
+          |       distribution = [student_t, 9]
+          |
+          |        p_value = .7845100411786889
+</pre></div>
+
+<p>This time Maxima performs an asymptotic test, based on the <i class="i">Central Limit Theorem</i>.
+The null hypothesis is <em class="math tex2jax_process">\(H_0: equal(mean, 50)\)</em> against the two sided alternative <em class="math tex2jax_process">\(H_1: not equal(mean, 50)\)</em>;
+according to the results, the <em class="math tex2jax_process">\(p\)</em>-value is very small, <em class="math tex2jax_process">\(H_0\)</em> should be rejected in
+favor of the alternative <em class="math tex2jax_process">\(H_1\)</em>. Note that, as indicated by the <code class="code">Method</code> component,
+this procedure should be applied to large samples.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) test_mean([36,118,52,87,35,256,56,178,57,57,89,34,25,98,35,
+              98,41,45,198,54,79,63,35,45,44,75,42,75,45,45,
+              45,51,123,54,151],
+              'asymptotic=true,'mean=50);
+          |                       MEAN TEST
+          |
+          |           mean_estimate = 74.88571428571429
+          |
+          |                   conf_level = 0.95
+          |
+          | conf_interval = [57.72848600856194, 92.04294256286663]
+          |
+(%o2)     |    method = Large sample z-test. Unknown variance.
+          |
+          |       hypotheses = H0: mean = 50 , H1: mean # 50
+          |
+          |             statistic = 2.842831192874313
+          |
+          |             distribution = [normal, 0, 1]
+          |
+          |             p_value = .004471474652002261
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+
+
+<a class="anchor" id="test_005fmeans_005fdifference"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fmeans_005fdifference"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fmeans_005fdifference"><span class="category-def">Function: </span><span><strong class="def-name">test_means_difference</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_means_difference</code> (<var class="var">x1</var>, <var class="var">x2</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_means_difference</code> (<var class="var">x1</var>, <var class="var">x2</var>, <var class="var">options</var> ...)</var><a class="copiable-link" href='#index-test_005fmeans_005fdifference'> &para;</a></span></dt>
+<dd>
+<p>This is the difference of means <var class="var">t</var>-test for two samples.
+Arguments <var class="var">x1</var> and <var class="var">x2</var> are lists or column matrices
+containing two independent samples. In case of different unknown variances
+(see options <code class="code">'dev1</code>, <code class="code">'dev2</code> and <code class="code">'varequal</code> bellow),
+the degrees of freedom are computed by means of the Welch approximation.
+It also performs an asymptotic test
+based on the <i class="i">Central Limit Theorem</i> if option <code class="code">'asymptotic</code> is
+set to <code class="code">true</code>.
+</p>
+<p>Options:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code>, <code class="code">'greater</code> and <code class="code">'less</code>.
+
+</li><li><code class="code">'dev1</code>, default <code class="code">'unknown</code>, this is the value of the standard deviation
+of the <var class="var">x1</var> sample when it is known; valid values are: <code class="code">'unknown</code> or a positive expression.
+
+</li><li><code class="code">'dev2</code>, default <code class="code">'unknown</code>, this is the value of the standard deviation
+of the <var class="var">x2</var> sample when it is known; valid values are: <code class="code">'unknown</code> or a positive expression.
+
+</li><li><code class="code">'varequal</code>, default <code class="code">false</code>, whether variances should be considered to be equal or not;
+this option takes effect only when <code class="code">'dev1</code> and/or <code class="code">'dev2</code> are  <code class="code">'unknown</code>.
+
+</li><li><code class="code">'conflevel</code>, default <code class="code">95/100</code>, confidence level for the confidence interval; it must
+be an expression which takes a value in (0,1).
+
+</li><li><code class="code">'asymptotic</code>, default <code class="code">false</code>, indicates whether it performs an exact <var class="var">t</var>-test or
+an asymptotic one based on the <i class="i">Central Limit Theorem</i>;
+valid values are <code class="code">true</code> and <code class="code">false</code>.
+
+</li></ul>
+
+<p>The output of function <code class="code">test_means_difference</code> is an <code class="code">inference_result</code> Maxima object
+showing the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'diff_estimate</code>: the difference of means estimate.
+
+</li><li> <code class="code">'conf_level</code>: confidence level selected by the user.
+
+</li><li> <code class="code">'conf_interval</code>: confidence interval for the difference of means.
+
+</li><li> <code class="code">'method</code>: inference procedure.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameter(s).
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>The equality of means is tested with two small samples <var class="var">x</var> and <var class="var">y</var>,
+against the alternative <em class="math tex2jax_process">\(H_1: m_1>m_2\)</em>, being <em class="math tex2jax_process">\(m_1\)</em> and <em class="math tex2jax_process">\(m_2\)</em>
+the populations means; variances are unknown and supposed to be different.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x: [20.4,62.5,61.3,44.2,11.1,23.7]$
+(%i3) y: [1.2,6.9,38.7,20.4,17.2]$
+(%i4) test_means_difference(x,y,'alternative='greater);
+            |              DIFFERENCE OF MEANS TEST
+            |
+            |         diff_estimate = 20.31999999999999
+            |
+            |                 conf_level = 0.95
+            |
+            |    conf_interval = [- .04597417812882298, inf]
+            |
+(%o4)       |        method = Exact t-test. Welch approx.
+            |
+            | hypotheses = H0: mean1 = mean2 , H1: mean1 &gt; mean2
+            |
+            |           statistic = 1.838004300728477
+            |
+            |    distribution = [student_t, 8.62758740184604]
+            |
+            |            p_value = .05032746527991905
+</pre></div>
+
+<p>The same test as before, but now variances are supposed to be
+equal.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x: [20.4,62.5,61.3,44.2,11.1,23.7]$
+(%i3) y: matrix([1.2],[6.9],[38.7],[20.4],[17.2])$
+(%i4) test_means_difference(x,y,'alternative='greater,
+                                                 'varequal=true);
+            |              DIFFERENCE OF MEANS TEST
+            |
+            |         diff_estimate = 20.31999999999999
+            |
+            |                 conf_level = 0.95
+            |
+            |     conf_interval = [- .7722627696897568, inf]
+            |
+(%o4)       |   method = Exact t-test. Unknown equal variances
+            |
+            | hypotheses = H0: mean1 = mean2 , H1: mean1 &gt; mean2
+            |
+            |           statistic = 1.765996124515009
+            |
+            |           distribution = [student_t, 9]
+            |
+            |            p_value = .05560320992529344
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="test_005fvariance"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fvariance"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fvariance"><span class="category-def">Function: </span><span><strong class="def-name">test_variance</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_variance</code> (<var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_variance</code> (<var class="var">x</var>, <var class="var">options</var>, ...)</var><a class="copiable-link" href='#index-test_005fvariance'> &para;</a></span></dt>
+<dd>
+<p>This is the variance <var class="var">chi^2</var>-test. Argument <var class="var">x</var> is a list or a column matrix
+containing an one dimensional sample taken from a normal population.
+</p>
+<p>Options:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'mean</code>, default <code class="code">'unknown</code>, is the population&rsquo;s mean, when it is known.
+
+</li><li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code>, <code class="code">'greater</code> and <code class="code">'less</code>.
+
+</li><li><code class="code">'variance</code>, default <code class="code">1</code>, this is the variance value (positive) to be checked.
+
+</li><li><code class="code">'conflevel</code>, default <code class="code">95/100</code>, confidence level for the confidence interval; it must
+be an expression which takes a value in (0,1).
+
+</li></ul>
+
+<p>The output of function <code class="code">test_variance</code> is an <code class="code">inference_result</code> Maxima object
+showing the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'var_estimate</code>: the sample variance.
+
+</li><li> <code class="code">'conf_level</code>: confidence level selected by the user.
+
+</li><li> <code class="code">'conf_interval</code>: confidence interval for the population variance.
+
+</li><li> <code class="code">'method</code>: inference procedure.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameter.
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>It is tested whether the variance of a population with unknown mean
+is equal to or greater than 200.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x: [203,229,215,220,223,233,208,228,209]$
+(%i3) test_variance(x,'alternative='greater,'variance=200);
+             |                  VARIANCE TEST
+             |
+             |              var_estimate = 110.75
+             |
+             |                conf_level = 0.95
+             |
+             |     conf_interval = [57.13433376937479, inf]
+             |
+(%o3)        | method = Variance Chi-square test. Unknown mean.
+             |
+             |    hypotheses = H0: var = 200 , H1: var &gt; 200
+             |
+             |                 statistic = 4.43
+             |
+             |             distribution = [chi2, 8]
+             |
+             |           p_value = .8163948512777689
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+
+
+<a class="anchor" id="test_005fvariance_005fratio"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fvariance_005fratio"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fvariance_005fratio"><span class="category-def">Function: </span><span><strong class="def-name">test_variance_ratio</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_variance_ratio</code> (<var class="var">x1</var>, <var class="var">x2</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_variance_ratio</code> (<var class="var">x1</var>, <var class="var">x2</var>, <var class="var">options</var> ...)</var><a class="copiable-link" href='#index-test_005fvariance_005fratio'> &para;</a></span></dt>
+<dd>
+<p>This is the variance ratio <var class="var">F</var>-test for two normal populations.
+Arguments <var class="var">x1</var> and <var class="var">x2</var> are lists or column matrices
+containing two independent samples.
+</p>
+<p>Options:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code>, <code class="code">'greater</code> and <code class="code">'less</code>.
+
+</li><li><code class="code">'mean1</code>, default <code class="code">'unknown</code>, when it is known, this is the mean of
+the population from which <var class="var">x1</var> was taken.
+
+</li><li><code class="code">'mean2</code>, default <code class="code">'unknown</code>, when it is known, this is the mean of
+the population from which <var class="var">x2</var> was taken.
+
+</li><li><code class="code">'conflevel</code>, default <code class="code">95/100</code>, confidence level for the confidence interval of the
+ratio; it must be an expression which takes a value in (0,1).
+
+</li></ul>
+
+<p>The output of function <code class="code">test_variance_ratio</code> is an <code class="code">inference_result</code> Maxima object
+showing the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'ratio_estimate</code>: the sample variance ratio.
+
+</li><li> <code class="code">'conf_level</code>: confidence level selected by the user.
+
+</li><li> <code class="code">'conf_interval</code>: confidence interval for the variance ratio.
+
+</li><li> <code class="code">'method</code>: inference procedure.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameters.
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+
+<p>Examples:
+</p>
+<p>The equality of the variances of two normal populations is checked
+against the alternative that the first is greater than the second.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x: [20.4,62.5,61.3,44.2,11.1,23.7]$
+(%i3) y: [1.2,6.9,38.7,20.4,17.2]$
+(%i4) test_variance_ratio(x,y,'alternative='greater);
+              |              VARIANCE RATIO TEST
+              |
+              |       ratio_estimate = 2.316933391522034
+              |
+              |               conf_level = 0.95
+              |
+              |    conf_interval = [.3703504689507268, inf]
+              |
+(%o4)         | method = Variance ratio F-test. Unknown means.
+              |
+              | hypotheses = H0: var1 = var2 , H1: var1 &gt; var2
+              |
+              |         statistic = 2.316933391522034
+              |
+              |            distribution = [f, 5, 4]
+              |
+              |          p_value = .2179269692254457
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+<a class="anchor" id="test_005fproportion"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fproportion"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fproportion"><span class="category-def">Function: </span><span><strong class="def-name">test_proportion</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_proportion</code> (<var class="var">x</var>, <var class="var">n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_proportion</code> (<var class="var">x</var>, <var class="var">n</var>, <var class="var">options</var> ...)</var><a class="copiable-link" href='#index-test_005fproportion'> &para;</a></span></dt>
+<dd>
+<p>Inferences on a proportion. Argument <var class="var">x</var> is the number of successes
+in <var class="var">n</var> trials in a Bernoulli experiment with unknown probability.
+</p>
+<p>Options:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'proportion</code>, default <code class="code">1/2</code>, is the value of the proportion to be checked.
+
+</li><li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code>, <code class="code">'greater</code> and <code class="code">'less</code>.
+
+</li><li><code class="code">'conflevel</code>, default <code class="code">95/100</code>, confidence level for the confidence interval; it must
+be an expression which takes a value in (0,1).
+
+</li><li><code class="code">'asymptotic</code>, default <code class="code">false</code>, indicates whether it performs an exact test
+based on the binomial distribution, or an asymptotic one based on the <i class="i">Central Limit Theorem</i>;
+valid values are <code class="code">true</code> and <code class="code">false</code>.
+
+</li><li><code class="code">'correct</code>, default <code class="code">true</code>, indicates whether Yates correction is applied or not.
+
+</li></ul>
+
+<p>The output of function <code class="code">test_proportion</code> is an <code class="code">inference_result</code> Maxima object
+showing the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'sample_proportion</code>: the sample proportion.
+
+</li><li> <code class="code">'conf_level</code>: confidence level selected by the user.
+
+</li><li> <code class="code">'conf_interval</code>: Wilson confidence interval for the proportion.
+
+</li><li> <code class="code">'method</code>: inference procedure.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameters.
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>Performs an exact test. The null hypothesis
+is <em class="math tex2jax_process">\(H_0: p=1/2\)</em> against the one sided alternative <em class="math tex2jax_process">\(H_1: p<1/2\)</em>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) test_proportion(45, 103, alternative = less);
+         |            PROPORTION TEST              
+         |                                         
+         | sample_proportion = .4368932038834951   
+         |                                         
+         |           conf_level = 0.95             
+         |                                         
+         | conf_interval = [0, 0.522714149150231]  
+         |                                         
+(%o2)    |     method = Exact binomial test.       
+         |                                         
+         | hypotheses = H0: p = 0.5 , H1: p &lt; 0.5  
+         |                                         
+         |             statistic = 45              
+         |                                         
+         |  distribution = [binomial, 103, 0.5]    
+         |                                         
+         |      p_value = .1184509388901454 
+</pre></div>
+
+<p>A two sided asymptotic test. Confidence level is 99/100.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) fpprintprec:7$
+(%i3) test_proportion(45, 103, 
+                  conflevel = 99/100, asymptotic=true);
+      |                 PROPORTION TEST                  
+      |                                                  
+      |           sample_proportion = .43689             
+      |                                                  
+      |                conf_level = 0.99                 
+      |                                                  
+      |        conf_interval = [.31422, .56749]          
+      |                                                  
+(%o3) | method = Asympthotic test with Yates correction.
+      |                                                  
+      |     hypotheses = H0: p = 0.5 , H1: p # 0.5       
+      |                                                  
+      |               statistic = .43689                 
+      |                                                  
+      |      distribution = [normal, 0.5, .048872]       
+      |                                                  
+      |                p_value = .19662
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+<a class="anchor" id="test_005fproportions_005fdifference"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fproportions_005fdifference"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fproportions_005fdifference"><span class="category-def">Function: </span><span><strong class="def-name">test_proportions_difference</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_proportions_difference</code> (<var class="var">x1</var>, <var class="var">n1</var>, <var class="var">x2</var>, <var class="var">n2</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_proportions_difference</code> (<var class="var">x1</var>, <var class="var">n1</var>, <var class="var">x2</var>, <var class="var">n2</var>, <var class="var">options</var> &hellip;)</var><a class="copiable-link" href='#index-test_005fproportions_005fdifference'> &para;</a></span></dt>
+<dd>
+<p>Inferences on the difference of two proportions. Argument <var class="var">x1</var> is the number of successes
+in <var class="var">n1</var> trials in a Bernoulli experiment in the first population, and <var class="var">x2</var> and <var class="var">n2</var>
+are the corresponding values in the second population. Samples are independent and the test
+is asymptotic.
+</p>
+<p>Options:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code> (<code class="code">p1 # p2</code>), <code class="code">'greater</code> (<code class="code">p1 &gt; p2</code>)
+and <code class="code">'less</code> (<code class="code">p1 &lt; p2</code>).
+
+</li><li><code class="code">'conflevel</code>, default <code class="code">95/100</code>, confidence level for the confidence interval; it must
+be an expression which takes a value in (0,1).
+
+</li><li><code class="code">'correct</code>, default <code class="code">true</code>, indicates whether Yates correction is applied or not.
+
+</li></ul>
+
+<p>The output of function <code class="code">test_proportions_difference</code> is an <code class="code">inference_result</code> Maxima object
+showing the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'proportions</code>: list with the two sample proportions.
+
+</li><li> <code class="code">'conf_level</code>: confidence level selected by the user.
+
+</li><li> <code class="code">'conf_interval</code>: Confidence interval for the difference of proportions <code class="code">p1 - p2</code>.
+
+</li><li> <code class="code">'method</code>: inference procedure and warning message in case of any of the samples sizes
+is less than 10.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameters.
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>A machine produced 10 defective articles in a batch of 250.
+After some maintenance work, it produces 4 defective in a batch of 150.
+In order to know if the machine has improved, we test the null
+hypothesis <code class="code">H0:p1=p2</code>, against the alternative <code class="code">H0:p1&gt;p2</code>,
+where <code class="code">p1</code> and <code class="code">p2</code> are the probabilities for one produced
+article to be defective before and after maintenance. According to
+the p value, there is not enough evidence to accept the alternative.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) fpprintprec:7$
+(%i3) test_proportions_difference(10, 250, 4, 150,
+                                alternative = greater);
+      |       DIFFERENCE OF PROPORTIONS TEST         
+      |                                              
+      |       proportions = [0.04, .02666667]        
+      |                                              
+      |              conf_level = 0.95               
+      |                                              
+      |      conf_interval = [- .02172761, 1]        
+      |                                              
+(%o3) | method = Asymptotic test. Yates correction.  
+      |                                              
+      |   hypotheses = H0: p1 = p2 , H1: p1 &gt; p2     
+      |                                              
+      |            statistic = .01333333             
+      |                                              
+      |    distribution = [normal, 0, .01898069]     
+      |                                              
+      |             p_value = .2411936 
+</pre></div>
+
+<p>Exact standard deviation of the asymptotic normal
+distribution when the data are unknown.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) stats_numer: false$
+(%i3) sol: test_proportions_difference(x1,n1,x2,n2)$
+(%i4) last(take_inference('distribution,sol));
+               1    1                  x2 + x1
+              (-- + --) (x2 + x1) (1 - -------)
+               n2   n1                 n2 + n1
+(%o4)    sqrt(---------------------------------)
+                           n2 + n1
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="test_005fsign"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fsign"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fsign"><span class="category-def">Function: </span><span><strong class="def-name">test_sign</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_sign</code> (<var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_sign</code> (<var class="var">x</var>, <var class="var">options</var> &hellip;)</var><a class="copiable-link" href='#index-test_005fsign'> &para;</a></span></dt>
+<dd>
+<p>This is the non parametric sign test for the median of a continuous population.
+Argument <var class="var">x</var> is a list or a column matrix containing an one dimensional sample.
+</p>
+<p>Options:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code>, <code class="code">'greater</code> and <code class="code">'less</code>.
+
+</li><li><code class="code">'median</code>, default <code class="code">0</code>, is the median value to be checked.
+
+</li></ul>
+
+<p>The output of function <code class="code">test_sign</code> is an <code class="code">inference_result</code> Maxima object
+showing the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'med_estimate</code>: the sample median.
+
+</li><li> <code class="code">'method</code>: inference procedure.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameter(s).
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>Checks whether the population from which the sample was taken has median 6, 
+against the alternative <em class="math tex2jax_process">\(H_1: median > 6\)</em>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x: [2,0.1,7,1.8,4,2.3,5.6,7.4,5.1,6.1,6]$
+(%i3) test_sign(x,'median=6,'alternative='greater);
+               |                  SIGN TEST
+               |
+               |              med_estimate = 5.1
+               |
+               |      method = Non parametric sign test.
+               |
+(%o3)          | hypotheses = H0: median = 6 , H1: median &gt; 6
+               |
+               |                statistic = 7
+               |
+               |      distribution = [binomial, 10, 0.5]
+               |
+               |         p_value = .05468749999999989
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="test_005fsigned_005frank"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fsigned_005frank"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fsigned_005frank"><span class="category-def">Function: </span><span><strong class="def-name">test_signed_rank</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_signed_rank</code> (<var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_signed_rank</code> (<var class="var">x</var>, <var class="var">options</var> &hellip;)</var><a class="copiable-link" href='#index-test_005fsigned_005frank'> &para;</a></span></dt>
+<dd>
+<p>This is the Wilcoxon signed rank test to make inferences about the median of a
+continuous population. Argument <var class="var">x</var> is a list or a column matrix
+containing an one dimensional sample. Performs normal approximation if the
+sample size is greater than 20, or if there are zeroes or ties.
+</p>
+<p>See also <code class="code">pdf_rank_test</code> and <code class="code">cdf_rank_test</code>
+</p>
+<p>Options:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'median</code>, default <code class="code">0</code>, is the median value to be checked.
+
+</li><li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code>, <code class="code">'greater</code> and <code class="code">'less</code>.
+
+</li></ul>
+
+<p>The output of function <code class="code">test_signed_rank</code> is an <code class="code">inference_result</code> Maxima object
+with the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'med_estimate</code>: the sample median.
+
+</li><li> <code class="code">'method</code>: inference procedure.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameter(s).
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>Checks the null hypothesis <em class="math tex2jax_process">\(H_0: median = 15\)</em> against the 
+alternative <em class="math tex2jax_process">\(H_1: median > 15\)</em>. This is an exact test, since
+there are no ties.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x: [17.1,15.9,13.7,13.4,15.5,17.6]$
+(%i3) test_signed_rank(x,median=15,alternative=greater);
+                 |             SIGNED RANK TEST
+                 |
+                 |           med_estimate = 15.7
+                 |
+                 |           method = Exact test
+                 |
+(%o3)            | hypotheses = H0: med = 15 , H1: med &gt; 15
+                 |
+                 |              statistic = 14
+                 |
+                 |     distribution = [signed_rank, 6]
+                 |
+                 |            p_value = 0.28125
+</pre></div>
+
+<p>Checks the null hypothesis <em class="math tex2jax_process">\(H_0: equal(median, 2.5)\)</em> against the 
+alternative <em class="math tex2jax_process">\(H_1: not equal(median, 2.5)\)</em>. This is an approximated test,
+since there are ties.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) y:[1.9,2.3,2.6,1.9,1.6,3.3,4.2,4,2.4,2.9,1.5,3,2.9,4.2,3.1]$
+(%i3) test_signed_rank(y,median=2.5);
+             |                 SIGNED RANK TEST
+             |
+             |                med_estimate = 2.9
+             |
+             |          method = Asymptotic test. Ties
+             |
+(%o3)        |    hypotheses = H0: med = 2.5 , H1: med # 2.5
+             |
+             |                 statistic = 76.5
+             |
+             | distribution = [normal, 60.5, 17.58195097251724]
+             |
+             |           p_value = .3628097734643669
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="test_005frank_005fsum"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005frank_005fsum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005frank_005fsum"><span class="category-def">Function: </span><span><strong class="def-name">test_rank_sum</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_rank_sum</code> (<var class="var">x1</var>, <var class="var">x2</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">test_rank_sum</code> (<var class="var">x1</var>, <var class="var">x2</var>, <var class="var">option</var>)</var><a class="copiable-link" href='#index-test_005frank_005fsum'> &para;</a></span></dt>
+<dd>
+<p>This is the Wilcoxon-Mann-Whitney test for comparing the medians of two
+continuous populations. The first two arguments <var class="var">x1</var> and <var class="var">x2</var> are lists
+or column matrices with the data of two independent samples. Performs normal
+approximation if any of the sample sizes is greater than 10, or if there are ties.
+</p>
+<p>Option:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'alternative</code>, default <code class="code">'twosided</code>, is the alternative hypothesis;
+valid values are: <code class="code">'twosided</code>, <code class="code">'greater</code> and <code class="code">'less</code>.
+
+</li></ul>
+
+<p>The output of function <code class="code">test_rank_sum</code> is an <code class="code">inference_result</code> Maxima object
+with the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'method</code>: inference procedure.
+
+</li><li> <code class="code">'hypotheses</code>: null and alternative hypotheses to be tested.
+
+</li><li> <code class="code">'statistic</code>: value of the sample statistic used for testing the null hypothesis.
+
+</li><li> <code class="code">'distribution</code>: distribution of the sample statistic, together with its parameters.
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value of the test.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>Checks whether populations have similar medians. Samples sizes
+are small and an exact test is made.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x:[12,15,17,38,42,10,23,35,28]$
+(%i3) y:[21,18,25,14,52,65,40,43]$
+(%i4) test_rank_sum(x,y);
+              |                 RANK SUM TEST
+              |
+              |              method = Exact test
+              |
+              | hypotheses = H0: med1 = med2 , H1: med1 # med2
+(%o4)         |
+              |                 statistic = 22
+              |
+              |        distribution = [rank_sum, 9, 8]
+              |
+              |          p_value = .1995886466474702
+</pre></div>
+
+<p>Now, with greater samples and ties, the procedure makes 
+normal approximation. The alternative hypothesis is
+<em class="math tex2jax_process">\(H_1: median1 < median2\)</em>.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x: [39,42,35,13,10,23,15,20,17,27]$
+(%i3) y: [20,52,66,19,41,32,44,25,14,39,43,35,19,56,27,15]$
+(%i4) test_rank_sum(x,y,'alternative='less);
+             |                  RANK SUM TEST
+             |
+             |          method = Asymptotic test. Ties
+             |
+             |  hypotheses = H0: med1 = med2 , H1: med1 &lt; med2
+(%o4)        |
+             |                 statistic = 48.5
+             |
+             | distribution = [normal, 79.5, 18.95419580097078]
+             |
+             |           p_value = .05096985666598441
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+
+
+<a class="anchor" id="test_005fnormality"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002ftest_005fnormality"></a><dl class="first-deffn">
+<dt class="deffn" id="index-test_005fnormality"><span class="category-def">Function: </span><span><strong class="def-name">test_normality</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-test_005fnormality'> &para;</a></span></dt>
+<dd>
+<p>Shapiro-Wilk test for normality. Argument <var class="var">x</var> is a list of numbers, and sample
+size must be greater than 2 and less or equal than 5000, otherwise, function
+<code class="code">test_normality</code> signals an error message.
+</p>
+<p>Reference:
+</p>
+<p>[1] Algorithm AS R94, Applied Statistics (1995), vol.44, no.4, 547-551
+</p>
+<p>The output of function <code class="code">test_normality</code> is an <code class="code">inference_result</code> Maxima object
+with the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'statistic</code>: value of the <var class="var">W</var> statistic.
+
+</li><li> <code class="code">'p_value</code>: <em class="math tex2jax_process">\(p\)</em>-value under normal assumption.
+
+</li></ol>
+
+<p>Examples:
+</p>
+<p>Checks for the normality of a population, based on a sample of size 9.
+</p>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;stats&quot;)$
+(%i2) x:[12,15,17,38,42,10,23,35,28]$
+(%i3) test_normality(x);
+                       |      SHAPIRO - WILK TEST
+                       |
+(%o3)                  | statistic = .9251055695162436
+                       |
+                       |  p_value = .4361763918860381
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="linear_005fregression"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002flinear_005fregression"></a><dl class="first-deffn">
+<dt class="deffn" id="index-linear_005fregression"><span class="category-def">Function: </span><span><strong class="def-name">linear_regression</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">linear_regression</code> (<var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">linear_regression</code> (<var class="var">x</var> <var class="var">option</var>)</var><a class="copiable-link" href='#index-linear_005fregression'> &para;</a></span></dt>
+<dd>
+<p>Multivariate linear regression, 
+<em class="math tex2jax_process">\(y_i = b0 + b1*x_1i + b2*x_2i + ... + bk*x_ki + u_i\)</em>,
+where <em class="math tex2jax_process">\(u_i\)</em> are <em class="math tex2jax_process">\(N(0,sigma)\)</em> independent random variables.
+Argument <var class="var">x</var> must be a matrix with more than one column. The
+last column is considered as the responses (<em class="math tex2jax_process">\(y_i\)</em>).
+</p>
+<p>Option:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">'conflevel</code>, default <code class="code">95/100</code>, confidence level for the
+confidence intervals; it must be an expression which takes a value
+in (0,1).
+</li></ul>
+
+<p>The output of function <code class="code">linear_regression</code> is an 
+<code class="code">inference_result</code> Maxima object with the following results:
+</p>
+<ol class="enumerate">
+<li> <code class="code">'b_estimation</code>: regression coefficients estimates.
+
+</li><li> <code class="code">'b_covariances</code>: covariance matrix of the regression 
+coefficients estimates.
+
+</li><li> <code class="code">b_conf_int</code>: confidence intervals of the regression coefficients.
+
+</li><li> <code class="code">b_statistics</code>: statistics for testing coefficient.
+
+</li><li> <code class="code">b_p_values</code>: p-values for coefficient tests.
+
+</li><li> <code class="code">b_distribution</code>: probability distribution for coefficient tests.
+
+</li><li> <code class="code">v_estimation</code>: unbiased variance estimator.
+
+</li><li> <code class="code">v_conf_int</code>: variance confidence interval.
+
+</li><li> <code class="code">v_distribution</code>: probability distribution for variance test.
+
+</li><li> <code class="code">residuals</code>: residuals.
+
+</li><li> <code class="code">adc</code>: adjusted determination coefficient.
+
+</li><li> <code class="code">aic</code>: Akaike&rsquo;s information criterion.
+
+</li><li> <code class="code">bic</code>: Bayes&rsquo;s information criterion.
+
+</li></ol>
+
+<p>Only items 1, 4, 5, 6, 7, 8, 9 and 11 above, in this order, 
+are shown by default. The rest remain hidden until the user
+makes use of functions <code class="code">items_inference</code> and <code class="code">take_inference</code>.
+</p>
+<p>Example:
+</p>
+<p>Fitting a linear model to a trivariate sample. The
+last column is considered as the responses (<em class="math tex2jax_process">\(y_i\)</em>).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i2) load(&quot;stats&quot;)$
+(%i3) X:matrix(
+    [58,111,64],[84,131,78],[78,158,83],
+    [81,147,88],[82,121,89],[102,165,99],
+    [85,174,101],[102,169,102])$
+(%i4) fpprintprec: 4$
+(%i5) res: linear_regression(X);
+             |       LINEAR REGRESSION MODEL         
+             |                                       
+             | b_estimation = [9.054, .5203, .2397]  
+             |                                       
+             | b_statistics = [.6051, 2.246, 1.74]   
+             |                                       
+             | b_p_values = [.5715, .07466, .1423]   
+             |                                       
+(%o5)        |   b_distribution = [student_t, 5]     
+             |                                       
+             |         v_estimation = 35.27          
+             |                                       
+             |     v_conf_int = [13.74, 212.2]       
+             |                                       
+             |      v_distribution = [chi2, 5]       
+             |                                       
+             |             adc = .7922               
+(%i6) items_inference(res);
+(%o6) [b_estimation, b_covariances, b_conf_int, b_statistics, 
+b_p_values, b_distribution, v_estimation, v_conf_int, 
+v_distribution, residuals, adc, aic, bic]
+(%i7) take_inference('b_covariances, res);
+                  [  223.9    - 1.12   - .8532  ]
+                  [                             ]
+(%o7)             [ - 1.12    .05367   - .02305 ]
+                  [                             ]
+                  [ - .8532  - .02305   .01898  ]
+(%i8) take_inference('bic, res);
+(%o8)                          30.98
+(%i9) load(&quot;draw&quot;)$
+(%i10) draw2d(
+    points_joined = true,
+    grid = true,
+    points(take_inference('residuals, res)) )$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Statistical-estimation">Statistical estimation</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+
+
+<a class="anchor" id="Item_003a-stats_002fnode_002fFunctions-and-Variables-for-special-distributions"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-special-distributions">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Functions-and-Variables-for-stats" accesskey="p" rel="prev">Functions and Variables for stats</a>, Up: <a href="#stats_002dpkg" accesskey="u" rel="up">stats</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-special-distributions-1">89.4 Functions and Variables for special distributions</h3>
+
+
+<a class="anchor" id="pdf_005fsigned_005frank"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002fpdf_005fsigned_005frank"></a><dl class="first-deffn">
+<dt class="deffn" id="index-pdf_005fsigned_005frank"><span class="category-def">Function: </span><span><strong class="def-name">pdf_signed_rank</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-pdf_005fsigned_005frank'> &para;</a></span></dt>
+<dd><p>Probability density function of the exact distribution of the
+signed rank statistic. Argument <var class="var">x</var> is a real
+number and <var class="var">n</var> a positive integer.
+</p>
+<p>See also <code class="code"><a class="ref" href="#test_005fsigned_005frank">test_signed_rank</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cdf_005fsigned_005frank"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002fcdf_005fsigned_005frank"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cdf_005fsigned_005frank"><span class="category-def">Function: </span><span><strong class="def-name">cdf_signed_rank</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-cdf_005fsigned_005frank'> &para;</a></span></dt>
+<dd><p>Cumulative density function of the exact distribution of the
+signed rank statistic. Argument <var class="var">x</var> is a real
+number and <var class="var">n</var> a positive integer. 
+</p>
+<p>See also <code class="code"><a class="ref" href="#test_005fsigned_005frank">test_signed_rank</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="pdf_005frank_005fsum"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002fpdf_005frank_005fsum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-pdf_005frank_005fsum"><span class="category-def">Function: </span><span><strong class="def-name">pdf_rank_sum</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-pdf_005frank_005fsum'> &para;</a></span></dt>
+<dd><p>Probability density function of the exact distribution of the
+rank sum statistic. Argument <var class="var">x</var> is a real
+number and <var class="var">n</var> and <var class="var">m</var> are both positive integers. 
+</p>
+<p>See also <code class="code"><a class="ref" href="#test_005frank_005fsum">test_rank_sum</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="cdf_005frank_005fsum"></a><a class="anchor" id="Item_003a-stats_002fdeffn_002fcdf_005frank_005fsum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cdf_005frank_005fsum"><span class="category-def">Function: </span><span><strong class="def-name">cdf_rank_sum</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">m</var>)</var><a class="copiable-link" href='#index-cdf_005frank_005fsum'> &para;</a></span></dt>
+<dd><p>Cumulative density function of the exact distribution of the
+rank sum statistic. Argument <var class="var">x</var> is a real
+number and <var class="var">n</var> and <var class="var">m</var> are both positive integers. 
+</p>
+<p>See also <code class="code"><a class="ref" href="#test_005frank_005fsum">test_rank_sum</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stats">Package stats</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_89.html#stirling_002dpkg" accesskey="n" rel="next">stirling</a>, Previous: <a href="maxima_87.html#solve_005frec_002dpkg" accesskey="p" rel="prev">solve_rec</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

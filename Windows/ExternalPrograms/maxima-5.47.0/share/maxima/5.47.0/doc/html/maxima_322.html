@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to numericalio</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to numericalio">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to numericalio">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_321.html#numericalio_002dpkg" rel="up" title="numericalio-pkg">
+<link href="maxima_323.html#Functions-and-Variables-for-plain_002dtext-input-and-output" rel="next" title="Functions and Variables for plain-text input and output">
+<link href="maxima_321.html#numericalio_002dpkg" rel="previous" title="numericalio-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-numericalio"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_323.html#Functions-and-Variables-for-plain_002dtext-input-and-output" accesskey="n" rel="next">Functions and Variables for plain-text input and output</a>, Previous: <a href="maxima_318.html#mnewton_002dpkg" accesskey="p" rel="previous">mnewton-pkg</a>, Up: <a href="maxima_321.html#numericalio_002dpkg" accesskey="u" rel="up">numericalio-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-numericalio-1"></a>
+<h3 class="section">76.1 Introduction to numericalio</h3>
+
+<p><code>numericalio</code> is a collection of functions to read and write files and streams.
+Functions for plain-text input and output
+can read and write numbers (integer, float, or bigfloat), symbols, and strings.
+Functions for binary input and output
+can read and write only floating-point numbers.
+</p>
+<p>If there already exists a list, matrix, or array object to store input data,
+<code>numericalio</code> input functions can write data into that object.
+Otherwise, <code>numericalio</code> can guess, to some degree, the structure of an object
+to store the data, and return that object.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-numericalio">Package numericalio</a>
+&middot;</div>
+<a name="Plain_002dtext-input-and-output"></a>
+<h4 class="subsection">76.1.1 Plain-text input and output</h4>
+
+<p>In plain-text input and output,
+it is assumed that each item to read or write is an atom:
+an integer, float, bigfloat, string, or symbol,
+and not a rational or complex number or any other kind of nonatomic expression.
+The <code>numericalio</code> functions may attempt to do something sensible faced with nonatomic expressions,
+but the results are not specified here and subject to change.
+</p>
+<p>Atoms in both input and output files have the same format as
+in Maxima batch files or the interactive console.
+In particular, strings are enclosed in double quotes,
+backslash <code>\</code> prevents any special interpretation of the next character,
+and the question mark <code>?</code> is recognized at the beginning of a symbol
+to mean a Lisp symbol (as opposed to a Maxima symbol).
+No continuation character (to join broken lines) is recognized.
+</p>
+<a name="Separator-flag-values-for-input"></a>
+<h4 class="subsection">76.1.2 Separator flag values for input</h4>
+
+<p>The functions for plain-text input and output take an optional argument,
+<var>separator_flag</var>, that tells what character separates data.
+</p>
+<p>For plain-text input, these values of <var>separator_flag</var> are recognized:
+<code>comma</code> for comma separated values,
+<code>pipe</code> for values separated by the vertical bar character <code>|</code>,
+<code>semicolon</code> for values separated by semicolon <code>;</code>, 
+and <code>space</code> for values separated by space or tab characters.
+Equivalently, the separator may be specified as a string of one character:
+<code>&quot;,&quot;</code> (comma), <code>&quot;|&quot;</code> (pipe), <code>&quot;;&quot;</code> (semicolon),
+<code>&quot; &quot;</code> (space), or <code>&quot;    &quot;</code> (tab).
+</p>
+<p>If the file name ends in <code>.csv</code> and <var>separator_flag</var> is not specified,
+<code>comma</code> is assumed.
+If the file name ends in something other than <code>.csv</code> and <code>separator_flag</code> is not specified,
+<code>space</code> is assumed.
+</p>
+<p>In plain-text input, multiple successive space and tab characters count as a single separator.
+However, multiple comma, pipe, or semicolon characters are significant.
+Successive comma, pipe, or semicolon characters (with or without intervening spaces or tabs)
+are considered to have <code>false</code> between the separators.
+For example, <code>1234,,Foo</code> is treated the same as <code>1234,false,Foo</code>.
+</p>
+<a name="Separator-flag-values-for-output"></a>
+<h4 class="subsection">76.1.3 Separator flag values for output</h4>
+
+<p>For plain-text output, <code>tab</code>, for values separated by the tab character,
+is recognized as a value of <var>separator_flag</var>,
+as well as <code>comma</code>, <code>pipe</code>, <code>semicolon</code>, and <code>space</code>.
+</p>
+<p>In plain-text output, <code>false</code> atoms are written as such;
+a list <code>[1234, false, Foo]</code> is written <code>1234,false,Foo</code>,
+and there is no attempt to collapse the output to <code>1234,,Foo</code>.
+</p>
+<a name="Binary-floating_002dpoint-input-and-output"></a>
+<h4 class="subsection">76.1.4 Binary floating-point input and output</h4>
+
+<p><code>numericalio</code> functions can read and write 8-byte IEEE 754 floating-point numbers.
+These numbers can be stored either least significant byte first or most significant byte first,
+according to the global flag set by <code>assume_external_byte_order</code>.
+If not specified, <code>numericalio</code> assumes the external byte order is most-significant byte first.
+</p>
+<p>Other kinds of numbers are coerced to 8-byte floats;
+<code>numericalio</code> cannot read or write binary non-numeric data.
+</p>
+<p>Some Lisp implementations do not recognize IEEE 754 special values
+(positive and negative infinity, not-a-number values, denormalized values).
+The effect of reading such values with <code>numericalio</code> is undefined.
+</p>
+<p><code>numericalio</code> includes functions to open a stream for reading or writing a stream of bytes.
+</p>
+
+<a name="Item_003a-numericalio_002fnode_002fFunctions-and-Variables-for-plain_002dtext-input-and-output"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_323.html#Functions-and-Variables-for-plain_002dtext-input-and-output" accesskey="n" rel="next">Functions and Variables for plain-text input and output</a>, Previous: <a href="maxima_318.html#mnewton_002dpkg" accesskey="p" rel="previous">mnewton-pkg</a>, Up: <a href="maxima_321.html#numericalio_002dpkg" accesskey="u" rel="up">numericalio-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

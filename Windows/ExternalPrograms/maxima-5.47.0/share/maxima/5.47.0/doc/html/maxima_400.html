@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Contract atan Functions</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Contract atan Functions">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Contract atan Functions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_393.html#Functions-and-Variables-for-trigtools" rel="up" title="Functions and Variables for trigtools">
+<link href="maxima_401.html#References" rel="next" title="References">
+<link href="maxima_399.html#Evaluation-of-Trignometric-Functions" rel="previous" title="Evaluation of Trignometric Functions">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Contract-atan-Functions"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_399.html#Evaluation-of-Trignometric-Functions" accesskey="p" rel="previous">Evaluation of Trignometric Functions</a>, Up: <a href="maxima_393.html#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Contract-atan-Functions-1"></a>
+<h4 class="subsection">96.2.7 Contract atan Functions</h4>
+
+<a name="atan_005fcontract"></a><a name="Item_003a-trigtools_002fdeffn_002fatan_005fcontract"></a><dl>
+<dt><a name="index-atan_005fcontract"></a>Function: <strong>atan_contract</strong> <em>(<var>r</var>)</em></dt>
+<dd><p>The function atan_contract(r) contracts atan functions. We
+assume: 
+\(|r| < {\pi\over 2}.\)</p>
+
+<p>Examples:
+</p><div class="example">
+<pre class="example">(%i1) load(trigtools)$
+</pre></div>
+
+<ol>
+<li> &nbsp;<!-- /@w -->
+<div class="example">
+<pre class="example">(%i2) atan_contract(atan(x)+atan(y));
+(%o2)                          atan(y) + atan(x)
+(%i3) assume(abs(atan(x)+atan(y))&lt;%pi/2)$
+(%i4) atan(x)+atan(y)=atan_contract(atan(x)+atan(y));
+                                                 y + x
+(%o4)                  atan(y) + atan(x) = atan(-------)
+                                                1 - x y
+</pre></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example">
+<pre class="example">(%i5) atan(1/3)+atan(1/5)+atan(1/7)+atan(1/8)$ %=atan_contract(%);
+                       1         1         1         1    %pi
+(%o6)             atan(-) + atan(-) + atan(-) + atan(-) = ---
+                       3         5         7         8     4
+</pre></div>
+
+</li><li> Machin&rsquo;s formulae
+<div class="example">
+<pre class="example">(%i7) 4*atan(1/5)-atan(1/239)=atan_contract(4*atan(1/5)-atan(1/239));
+                                 1          1     %pi
+(%o7)                     4 atan(-) - atan(---) = ---
+                                 5         239     4
+</pre></div>
+
+</li><li> see <a href="http://en.wikipedia.org/wiki/Machin-like_formula">http://en.wikipedia.org/wiki/Machin-like_formula</a>
+<div class="example">
+<pre class="example">(%i8) 12*atan(1/49)+32*atan(1/57)-5*atan(1/239)+12*atan(1/110443)$
+%=atan_contract(%);
+                1             1             1               1       %pi
+(%o9)   12 atan(--) + 32 atan(--) - 5 atan(---) + 12 atan(------) = ---
+                49            57           239            110443     4
+</pre></div>
+</li></ol>
+
+</dd></dl>
+
+<a name="Item_003a-trigtools_002fnode_002fReferences"></a><hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_399.html#Evaluation-of-Trignometric-Functions" accesskey="p" rel="previous">Evaluation of Trignometric Functions</a>, Up: <a href="maxima_393.html#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

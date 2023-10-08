@@ -1,0 +1,303 @@
+/*******************************************************************************
+ *
+ *          Examples for the package vect
+ *
+ ******************************************************************************/
+
+kill(all);
+done;
+
+(load("vect.mac"),done);
+done;
+
+declare([a,b,c,d],nonscalar);
+done;
+
+/* ---------- Check some rules for vectors  ----------------------------------*/
+
+/* This does not simplify to zero, because we have removed the property 
+ * commutative for the operator "." */
+a . b - b . a;
+0;
+
+a ~ b + b ~ a;
+0;
+
+vectorsimp(a.(b+c)-(a.b+a.c)),expandall:true;
+0;
+
+vectorsimp(a~(b+c)-(a~b+a~c)),expandall:true;
+0;
+
+vectorsimp(a~(b~c)-(b*(a.c)-c*(a.b))),expandall:true;
+0;
+
+/* Lagrange's identity does not simplify as expected */
+vectorsimp((a~b).(c~d)-((a.c)*(b.d)-(b.c)*(a.d))),expandall:true;
+0;
+
+/* Does not simplify to the expected result. */
+vectorsimp((3*a-2*b)~(2*a+b)),expandall:true;
+7*(a~b);
+
+/* ---------- Check some rules for the gradient ------------------------------*/
+
+declare([u,v],scalar, c,constant);
+done;
+depends([u,v],[x,y,z]);
+[u(x,y,z), v(x,y,z)];
+
+grad c;
+0;
+
+grad (c*u);
+c*grad u;
+
+vectorsimp(grad (u+v)),expandall:true;
+grad u + grad v;
+
+/* ---------- Check some rules for the divergence ----------------------------*/
+
+div c;
+0;
+
+div (c*u);
+c*div u;
+
+vectorsimp(div (u+v)),expandall:true;
+div u + div v;
+
+/* The error is a . grad u -> a grad u */
+vectorsimp(div (u*a)) - (u*div a + (grad u) . a),expandall:true;
+0;
+
+/* There is no rule do expand the following */
+vectorsimp(div (a ~ b)),expandall:true;
+b . curl a - a . curl b;
+
+/* ---------- Check some rules for the curl ----------------------------------*/
+
+curl c;
+0;
+
+curl (c*u);
+c* curl u;
+
+vectorsimp(curl (a+b)),expandall:true;
+curl a + curl b;
+
+vectorsimp(curl (a*u)),expandall:true;
+u*curl a + grad u ~ a;
+
+vectorsimp(curl (a ~ b)),expandall:true;
+b . grad a - a . grad b + a * div b - b * div a;
+
+/* ---------- Combinations of the operators ----------------------------------*/
+
+div curl a;
+0;
+curl grad u;
+[0, 0, 0];
+vectorsimp(curl curl a),expandall:true;
+grad div a - laplacian a;
+
+/* ---------- Examples from bug reports --------------------------------------*/
+
+/* Bud ID: 838301 - vect negate cross product simplification 
+ * a and b are declare to be nonscalar, c to be constant 
+ */
+
+c*(a ~ b);
+c * (a ~ b);
+c*(b ~ a);
+-c * (a ~ b);
+
+/* Bug ID: 1212598 - bug in the VECT.MAK - VECTORSIMP cross product 
+ * a,b,c,d are declared to be nonscalar
+ */
+
+vectorsimp( (b+2*a) ~ (c+d) ),expandall:true;
+b ~ d+b ~ c+2*a ~ d+2*a ~ c;
+
+
+/* Bug ID: 2806446 - ev_diff in vect.mac */
+
+potential([y*z,x*z,x*y],[x,y,z]);
+x*y*z;
+
+/* Bug ID: 2011228 -vect redefines "." as commutative, was:Matrix multiplication
+ * Two examples which does not work when "." is declared commutative
+ */
+
+invert(matrix([-2, -2, 1], [3, 1, 1], [3, 3, 1]));
+matrix([-1/5,1/2,-3/10],[0,-1/2,1/2],[3/5,0,2/5]);
+
+(a : matrix([1,2],[6,7]), b : matrix([1,2],[1,6]), done);
+done;
+a.b-b.a;
+matrix([-10,-2],[-24,10]);
+
+/*
+
+Some syntax errors can be detected by comparing the declared part of
+speech to an actual expression. (see documentation for `infix'.). The
+tests are not automatic because a syntax error is not captured by
+`errcatch'.
+
+errcatch(if a~b then 1 else 0);
+[]$
+
+errcatch(if grad a then 1 else 0);
+[]$
+
+*/
+
+/* SF bug #3337: "Wrong scalefactor for cartesian2d" */
+
+(scalefactors (cartesian2d), sf);
+[1, 1];
+
+(scalefactors (cartesian3d), sf);
+[1, 1, 1];
+
+/* Additional tests for #3337. These are weak in the sense that
+ * they aren't testing for specific values, but we would have to
+ * work out what is the correct result in each case.
+ */
+
+(scalefactors (polar), is (length(sf) = length(first(polar))));
+true;
+
+(scalefactors (polarcylindrical), is (length(sf) = length(first(polarcylindrical))));
+true;
+
+(scalefactors (spherical), is (length(sf) = length(first(spherical))));
+true;
+
+(scalefactors (elliptic), is (length(sf) = length(first(elliptic))));
+true;
+
+(scalefactors (ellipticcylindrical), is (length(sf) = length(first(ellipticcylindrical))));
+true;
+
+(scalefactors (confocalelliptic), is (length(sf) = length(first(confocalelliptic))));
+true;
+
+(scalefactors (prolatespheroidalsqrt), is (length(sf) = length(first(prolatespheroidalsqrt))));
+true;
+
+(scalefactors (oblatespheroidalsqrt), is (length(sf) = length(first(oblatespheroidalsqrt))));
+true;
+
+(scalefactors (parabolic), is (length(sf) = length(first(parabolic))));
+true;
+
+(scalefactors (paraboliccylindrical), is (length(sf) = length(first(paraboliccylindrical))));
+true;
+
+(scalefactors (paraboloidal), is (length(sf) = length(first(paraboloidal))));
+true;
+
+(scalefactors (prolatespheroidal), is (length(sf) = length(first(prolatespheroidal))));
+true;
+
+(scalefactors (oblatespheroidal), is (length(sf) = length(first(oblatespheroidal))));
+true;
+
+(scalefactors (bipolar), is (length(sf) = length(first(bipolar))));
+true;
+
+(scalefactors (bipolarcylindrical), is (length(sf) = length(first(bipolarcylindrical))));
+true;
+
+(scalefactors (toroidal), is (length(sf) = length(first(toroidal))));
+true;
+
+(scalefactors (conical), is (length(sf) = length(first(conical))));
+true;
+
+(scalefactors (confocalellipsoidal), is (length(sf) = length(first(confocalellipsoidal))));
+true;
+
+(reset(tr_bound_function_applyp,vect_cross,dotexptsimp,dotassoc,dotscrules),0);
+0$
+
+/* SF bug #3287: "cross product scalar zero versus vector zero result" */
+
+kill (f, g);
+done;
+
+0 ~ f(a, b);
+[0, 0, 0];
+
+g(c, d) ~ 0;
+[0, 0, 0];
+
+f(a, g(b, c)) ~ f(a, g(b, c));
+[0, 0, 0];
+
+curl (grad (f (a, b, c)));
+[0, 0, 0];
+
+/* examples from the bug report */
+
+express([0,1,1]~[0,1,2]);
+[1, 0, 0];
+
+express([0,1,1]~[0,1,1]);
+[0, 0, 0];
+
+(e:ident(3),
+ a_:[a_1,a_2,a_3],
+ b_:[b_1,b_2,b_3],
+ /* Levi-Civita Symbol */
+ ε(i,j,k):=e[i].express(e[j]~e[k]),
+0);
+0;
+
+ε(1,2,3);
+1;
+
+ε(1,3,2);
+-1;
+
+ε(1,2,2);
+0;
+
+express(ε(1,2,3)*a_[2]*b_[3]);
+a_2*b_3;
+
+express(ε(1,3,2)*a_[2]*b_[3]);
+-a_2*b_3;
+
+express(ε(1,2,2)*a_[2]*b_[2]);
+0;
+
+makelist(sum(sum(ε(i,j,k)*a_[j]*b_[k],j,1,3),k,1,3),i,3);
+[a_2*b_3 - a_3*b_2, a_3*b_1 - a_1*b_3, a_1*b_2 - a_2*b_1];
+
+/* bug reported to mailing list 2022-01-04: "Bad vect package?" */
+
+/* example from email -- grad */
+
+(scalefactors(polarcylindrical),
+ kill (u, E, rho, I, D),
+ depends(u,r),
+ E:[-rho*I,0,0],
+ 0);
+0;
+
+foo: D*(grad(u)+E*u);
+D*([- I*rho*u, 0, 0] + grad(u));
+
+ev (express (foo), 'diff);
+[D*('diff(u, r) - I*rho*u), 0, 0];
+
+/* other examples -- cross product, curl */
+
+(kill (a, b, x, y, z),
+ (a ~ b) + [x, y, z]);
+(a ~ b) + [x, y, z];
+
+curl(a) + [x, y, z];
+curl(a) + [x, y, z];

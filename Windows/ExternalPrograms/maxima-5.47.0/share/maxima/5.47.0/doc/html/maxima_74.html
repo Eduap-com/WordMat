@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>mnewton-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="mnewton-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="mnewton-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_75.html#numericalio_002dpkg" rel="next" title="numericalio-pkg">
+<link href="maxima_73.html#makeOrders_002dpkg" rel="prev" title="makeOrders-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="mnewton_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_75.html#numericalio_002dpkg" accesskey="n" rel="next">numericalio</a>, Previous: <a href="maxima_73.html#makeOrders_002dpkg" accesskey="p" rel="prev">makeOrders</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="mnewton-1">75 mnewton</h2>
+
+<a class="anchor" id="Item_003a-mnewton_002fnode_002fIntroduction-to-mnewton"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-mnewton" accesskey="1">Introduction to mnewton</a></li>
+<li><a href="#Functions-and-Variables-for-mnewton" accesskey="2">Functions and Variables for mnewton</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-mnewton">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-mnewton" accesskey="n" rel="next">Functions and Variables for mnewton</a>, Previous: <a href="#mnewton_002dpkg" accesskey="p" rel="prev">mnewton</a>, Up: <a href="#mnewton_002dpkg" accesskey="u" rel="up">mnewton</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-mnewton-1">75.1 Introduction to mnewton</h3>
+
+<p><code class="code">mnewton</code> is an implementation of Newton&rsquo;s method for solving nonlinear
+equations in one or more variables.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-mnewton_002fnode_002fFunctions-and-Variables-for-mnewton"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-mnewton">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-mnewton" accesskey="p" rel="prev">Introduction to mnewton</a>, Up: <a href="#mnewton_002dpkg" accesskey="u" rel="up">mnewton</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-mnewton-1">75.2 Functions and Variables for mnewton</h3>
+
+<a class="anchor" id="newtonepsilon"></a><a class="anchor" id="Item_003a-mnewton_002fdefvr_002fnewtonepsilon"></a><dl class="first-defvr">
+<dt class="defvr" id="index-newtonepsilon"><span class="category-def">Option variable: </span><span><strong class="def-name">newtonepsilon</strong><a class="copiable-link" href='#index-newtonepsilon'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">10.0^(-fpprec/2)</code>
+</p>
+<p>Precision to determine when the <code class="code">mnewton</code> function has converged towards
+the solution.
+</p>
+<p>When <code class="code">newtonepsilon</code> is a bigfloat,
+<code class="code">mnewton</code> computations are done with bigfloats;
+otherwise, ordinary floats are used.
+</p>
+<p>See also <code class="code"><a class="ref" href="#mnewton">mnewton</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="newtonmaxiter"></a><a class="anchor" id="Item_003a-mnewton_002fdefvr_002fnewtonmaxiter"></a><dl class="first-defvr">
+<dt class="defvr" id="index-newtonmaxiter"><span class="category-def">Option variable: </span><span><strong class="def-name">newtonmaxiter</strong><a class="copiable-link" href='#index-newtonmaxiter'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">50</code>
+</p>
+<p>Maximum number of iterations to stop the <code class="code">mnewton</code> function
+if it does not converge or if it converges too slowly.
+</p>
+<p>See also <code class="code"><a class="ref" href="#mnewton">mnewton</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="newtondebug"></a><a class="anchor" id="Item_003a-mnewton_002fdefvr_002fnewtondebug"></a><dl class="first-defvr">
+<dt class="defvr" id="index-newtondebug"><span class="category-def">Option variable: </span><span><strong class="def-name">newtondebug</strong><a class="copiable-link" href='#index-newtondebug'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">newtondebug</code> is <code class="code">true</code>, 
+<code class="code">mnewton</code> prints out debugging information while solving a problem.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="mnewton"></a><a class="anchor" id="Item_003a-mnewton_002fdeffn_002fmnewton"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mnewton"><span class="category-def">Function: </span><span><strong class="def-name">mnewton</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">mnewton</code> (<var class="var">FuncList</var>, <var class="var">VarList</var>, <var class="var">GuessList</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">mnewton</code> (<var class="var">FuncList</var>, <var class="var">VarList</var>, <var class="var">GuessList</var>, <var class="var">DF</var>)</var><a class="copiable-link" href='#index-mnewton'> &para;</a></span></dt>
+<dd>
+<p>Approximate solution of multiple nonlinear equations by Newton&rsquo;s method.
+</p>
+<p><var class="var">FuncList</var> is a list of functions to solve,
+<var class="var">VarList</var> is a list of variable names, and
+<var class="var">GuessList</var> is a list of initial approximations.
+The optional argument <var class="var">DF</var> is the Jacobian matrix of the list of functions;
+if not supplied, it is calculated automatically from <var class="var">FuncList</var>.
+</p>
+<p><var class="var">FuncList</var> may be specified as a list of equations,
+in which case the function to be solved is the left-hand side of each equation minus the right-hand side.
+</p>
+<p>If there is only a single function, variable, and initial point,
+they may be specified as a single expression, variable, and initial value;
+they need not be lists of one element.
+</p>
+<p>A variable may be a simple symbol or a subscripted symbol.
+</p>
+<p>The solution, if any, is returned as a list of one element,
+which is a list of equations, one for each variable,
+specifying an approximate solution;
+this is the same format as returned by <code class="code">solve</code>.
+If the solution is not found, <code class="code">[]</code> is returned.
+</p>
+<p>Functions and initial points may contain complex numbers,
+and solutions likewise may contain complex numbers.
+</p>
+<p><code class="code">mnewton</code> is governed by global variables <code class="code"><a class="ref" href="#newtonepsilon">newtonepsilon</a></code> and
+<code class="code"><a class="ref" href="#newtonmaxiter">newtonmaxiter</a></code>, and the global flag <code class="code"><a class="ref" href="#newtondebug">newtondebug</a></code>.
+</p>
+<p><code class="code">load(&quot;mnewton&quot;)</code> loads this function.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_19.html#realroots">realroots</a></code>, <code class="code"><a class="ref" href="maxima_19.html#allroots">allroots</a></code>, <code class="code"><a class="ref" href="maxima_21.html#find_005froot">find_root</a></code> and
+<code class="code"><a class="ref" href="maxima_21.html#newton">newton</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;mnewton&quot;)$
+
+(%i2) mnewton([x1+3*log(x1)-x2^2, 2*x1^2-x1*x2-5*x1+1],
+              [x1, x2], [5, 5]);
+(%o2) [[x1 = 3.756834008012769, x2 = 2.779849592817897]]
+(%i3) mnewton([2*a^a-5],[a],[1]);
+(%o3)             [[a = 1.70927556786144]]
+(%i4) mnewton([2*3^u-v/u-5, u+2^v-4], [u, v], [2, 2]);
+(%o4) [[u = 1.066618389595407, v = 1.552564766841786]]
+</pre></div>
+
+<p>The variable <code class="code">newtonepsilon</code> controls the precision of the
+approximations.  It also controls if computations are performed with
+floats or bigfloats.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;mnewton&quot;)$
+
+(%i2) (fpprec : 25, newtonepsilon : bfloat(10^(-fpprec+5)))$
+
+(%i3) mnewton([2*3^u-v/u-5, u+2^v-4], [u, v], [2, 2]);
+(%o3) [[u = 1.066618389595406772591173b0, 
+                               v = 1.552564766841786450100418b0]]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_75.html#numericalio_002dpkg" accesskey="n" rel="next">numericalio</a>, Previous: <a href="maxima_73.html#makeOrders_002dpkg" accesskey="p" rel="prev">makeOrders</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

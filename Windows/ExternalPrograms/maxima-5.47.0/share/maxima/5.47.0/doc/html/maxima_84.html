@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>romberg-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="romberg-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="romberg-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_85.html#simplex_002dpkg" rel="next" title="simplex-pkg">
+<link href="maxima_83.html#ratpow_002dpkg" rel="prev" title="ratpow-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="romberg_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_85.html#simplex_002dpkg" accesskey="n" rel="next">simplex</a>, Previous: <a href="maxima_83.html#ratpow_002dpkg" accesskey="p" rel="prev">ratpow</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="romberg">85 romberg</h2>
+
+<a class="anchor" id="Item_003a-romberg_002fnode_002fFunctions-and-Variables-for-romberg"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-romberg" accesskey="1">Functions and Variables for romberg</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-romberg">
+<div class="nav-panel">
+<p>
+Up: <a href="#romberg_002dpkg" accesskey="u" rel="up">romberg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-romberg-1">85.1 Functions and Variables for romberg</h3>
+
+<a class="anchor" id="romberg_005ffunction"></a><a class="anchor" id="Item_003a-romberg_002fdeffn_002fromberg"></a><dl class="first-deffn">
+<dt class="deffn" id="index-romberg"><span class="category-def">Function: </span><span><strong class="def-name">romberg</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">romberg</code> (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">romberg</code> (<var class="var">F</var>, <var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-romberg'> &para;</a></span></dt>
+<dd>
+<p>Computes a numerical integration by Romberg&rsquo;s method.
+</p>
+<p><code class="code">romberg(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</code>
+returns an estimate of the integral <code class="code">integrate(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">a</var>, <var class="var">b</var>)</code>.
+<var class="var">expr</var> must be an expression which evaluates to a floating point value
+when <var class="var">x</var> is bound to a floating point value.
+</p>
+<p><code class="code">romberg(<var class="var">F</var>, <var class="var">a</var>, <var class="var">b</var>)</code>
+returns an estimate of the integral <code class="code">integrate(<var class="var">F</var>(x), x, <var class="var">a</var>, <var class="var">b</var>)</code>
+where <code class="code">x</code> represents the unnamed, sole argument of <var class="var">F</var>;
+the actual argument is not named <code class="code">x</code>.
+<var class="var">F</var> must be a Maxima or Lisp function which returns a floating point value
+when the argument is a floating point value.
+<var class="var">F</var> may name a translated or compiled Maxima function.
+</p>
+<p>The accuracy of <code class="code">romberg</code> is governed by the global variables
+<code class="code">rombergabs</code> and <code class="code">rombergtol</code>.
+<code class="code">romberg</code> terminates successfully when
+the absolute difference between successive approximations is less than <code class="code">rombergabs</code>,
+or the relative difference in successive approximations is less than <code class="code">rombergtol</code>.
+Thus when <code class="code">rombergabs</code> is 0.0 (the default)
+only the relative error test has any effect on <code class="code">romberg</code>.
+</p>
+<p><code class="code">romberg</code> halves the stepsize at most <code class="code">rombergit</code> times before it gives up;
+the maximum number of function evaluations is therefore <code class="code">2^rombergit</code>.
+If the error criterion established by <code class="code">rombergabs</code> and <code class="code">rombergtol</code>
+is not satisfied, <code class="code">romberg</code> prints an error message.
+<code class="code">romberg</code> always makes at least <code class="code">rombergmin</code> iterations;
+this is a heuristic intended to prevent spurious termination when the integrand is oscillatory.
+</p>
+<p><code class="code">romberg</code> repeatedly evaluates the integrand after binding the variable
+of integration to a specific value (and not before).
+This evaluation policy makes it possible to nest calls to <code class="code">romberg</code>,
+to compute multidimensional integrals.
+However, the error calculations do not take the errors of nested integrations
+into account, so errors may be underestimated.
+Also, methods devised especially for multidimensional problems may yield
+the same accuracy with fewer function evaluations.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_18.html#Introduction-to-QUADPACK">Introduction to QUADPACK</a></code>, a collection of numerical integration functions.
+</p>
+<p>Examples:
+</p>
+<p>A 1-dimensional integration.
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) f(x) := 1/((x - 1)^2 + 1/100) + 1/((x - 2)^2 + 1/1000)
+              + 1/((x - 3)^2 + 1/200);
+                    1                 1                1
+(%o1) f(x) := -------------- + --------------- + --------------
+                     2    1           2    1            2    1
+              (x - 1)  + ---   (x - 2)  + ----   (x - 3)  + ---
+                         100              1000              200
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) rombergtol : 1e-6;
+(%o2)                 9.999999999999999e-7
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) rombergit : 15;
+(%o3)                          15
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) estimate : romberg (f(x), x, -5, 5);
+(%o4)                   173.6730736617464
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) exact : integrate (f(x), x, -5, 5);
+        3/2          3/2      3/2          3/2
+(%o5) 10    atan(7 10   ) + 10    atan(3 10   )
+      3/2         9/2       3/2         5/2
+ + 5 2    atan(5 2   ) + 5 2    atan(5 2   ) + 10 atan(60)
+ + 10 atan(40)
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) abs (estimate - exact) / exact, numer;
+(%o6)                 7.552722451569877e-11
+</pre></div></div>
+
+<p>A 2-dimensional integration, implemented by nested calls to <code class="code">romberg</code>.
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) g(x, y) := x*y / (x + y);
+                                    x y
+(%o1)                   g(x, y) := -----
+                                   x + y
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) rombergtol : 1e-6;
+(%o2)                 9.999999999999999e-7
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) estimate : romberg (romberg (g(x, y), y, 0, x/2), x, 1, 3);
+(%o3)                  0.8193023962835647
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) assume (x &gt; 0);
+(%o4)                        [x &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) integrate (integrate (g(x, y), y, 0, x/2), x, 1, 3);
+                                           3
+                                     2 log(-) - 1
+                    9                      2        9
+(%o5)      (- 9 log(-)) + 9 log(3) + ------------ + -
+                    2                     6         2
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) exact : radcan (%);
+                    26 log(3) - 26 log(2) - 13
+(%o6)             - --------------------------
+                                3
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) abs (estimate - exact) / exact, numer;
+(%o7)                 1.371197987185102e-10
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-romberg">Package romberg</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="rombergabs"></a><a class="anchor" id="Item_003a-romberg_002fdefvr_002frombergabs"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rombergabs"><span class="category-def">Option variable: </span><span><strong class="def-name">rombergabs</strong><a class="copiable-link" href='#index-rombergabs'> &para;</a></span></dt>
+<dd><p>Default value: 0.0
+</p>
+<p>The accuracy of <code class="code">romberg</code> is governed by the global variables
+<code class="code">rombergabs</code> and <code class="code">rombergtol</code>.
+<code class="code">romberg</code> terminates successfully when
+the absolute difference between successive approximations is less than <code class="code">rombergabs</code>,
+or the relative difference in successive approximations is less than <code class="code">rombergtol</code>.
+Thus when <code class="code">rombergabs</code> is 0.0 (the default)
+only the relative error test has any effect on <code class="code">romberg</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#rombergit">rombergit</a></code> and <code class="code"><a class="ref" href="#rombergmin">rombergmin</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-romberg">Package romberg</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="rombergit"></a><a class="anchor" id="Item_003a-romberg_002fdefvr_002frombergit"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rombergit"><span class="category-def">Option variable: </span><span><strong class="def-name">rombergit</strong><a class="copiable-link" href='#index-rombergit'> &para;</a></span></dt>
+<dd><p>Default value: 11
+</p>
+<p><code class="code">romberg</code> halves the stepsize at most <code class="code">rombergit</code> times before it gives up;
+the maximum number of function evaluations is therefore <code class="code">2^rombergit</code>.
+<code class="code">romberg</code> always makes at least <code class="code">rombergmin</code> iterations;
+this is a heuristic intended to prevent spurious termination when the integrand is oscillatory.
+</p>
+<p>See also <code class="code"><a class="ref" href="#rombergabs">rombergabs</a></code> and <code class="code"><a class="ref" href="#rombergtol">rombergtol</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-romberg">Package romberg</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="rombergmin"></a><a class="anchor" id="Item_003a-romberg_002fdefvr_002frombergmin"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rombergmin"><span class="category-def">Option variable: </span><span><strong class="def-name">rombergmin</strong><a class="copiable-link" href='#index-rombergmin'> &para;</a></span></dt>
+<dd><p>Default value: 0
+</p>
+<p><code class="code">romberg</code> always makes at least <code class="code">rombergmin</code> iterations;
+this is a heuristic intended to prevent spurious termination when the integrand is oscillatory.
+</p>
+<p>See also <code class="code"><a class="ref" href="#rombergit">rombergit</a></code>, <code class="code"><a class="ref" href="#rombergabs">rombergabs</a></code>, and <code class="code"><a class="ref" href="#rombergtol">rombergtol</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-romberg">Package romberg</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="rombergtol"></a><a class="anchor" id="Item_003a-romberg_002fdefvr_002frombergtol"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rombergtol"><span class="category-def">Option variable: </span><span><strong class="def-name">rombergtol</strong><a class="copiable-link" href='#index-rombergtol'> &para;</a></span></dt>
+<dd><p>Default value: 1e-4
+</p>
+<p>The accuracy of <code class="code">romberg</code> is governed by the global variables
+<code class="code">rombergabs</code> and <code class="code">rombergtol</code>.
+<code class="code">romberg</code> terminates successfully when
+the absolute difference between successive approximations is less than <code class="code">rombergabs</code>,
+or the relative difference in successive approximations is less than <code class="code">rombergtol</code>.
+Thus when <code class="code">rombergabs</code> is 0.0 (the default)
+only the relative error test has any effect on <code class="code">romberg</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#rombergit">rombergit</a></code> and <code class="code"><a class="ref" href="#rombergmin">rombergmin</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-romberg">Package romberg</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_85.html#simplex_002dpkg" accesskey="n" rel="next">simplex</a>, Previous: <a href="maxima_83.html#ratpow_002dpkg" accesskey="p" rel="prev">ratpow</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

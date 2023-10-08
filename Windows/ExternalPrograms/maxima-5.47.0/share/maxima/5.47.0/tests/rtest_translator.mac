@@ -1,0 +1,3145 @@
+/* A nice test of the translator would be to translate the entire test suite ...
+ * In the meantime here are some tests to verify some specific bugs are fixed.
+ */
+
+(kill (all), 0);
+0;
+
+/* There are various cases where (by design) translate and compile don't
+ * signal an error when a function fails to translate.  So here we define
+ * translate_or_lose and compile_or_lose so we don't have to explicitly
+ * check the return values of translate and compile in every test.
+ *
+ * Passing `all' or `functions' is not supported.  I'm not sure how much
+ * sense those make here for tests, but something could be added later if
+ * a test really wants them for some reason.
+ */
+block ([translate : false],
+  local (make_tester),
+  make_tester (trfun) ::=
+    buildq ([trfun, name : concat (trfun, '_or_lose)],
+      (name (['fns]) :=
+         block ([ret : apply ('trfun, fns), losers : []],
+           if ret # fns then
+             /* Report failures in the same order as the given args */
+             (for f in fns do if not (member (f, ret)) then push (f, losers),
+              error ('trfun, "failed unexpectedly for", reverse (losers))),
+           fns),
+       /* Prevent this from being killed during kill(all), etc.
+        * We can remove this later if we're more precise about
+        * what we're killing throughout this file.
+        */
+       ?mfunction\-delete ('name, functions))),
+  make_tester (translate),
+  make_tester (compile),
+  0);
+0;
+
+/* SF [ 1728888 ] translator bugs: no mnot mprogn */
+
+(foo (e,v) := block([vi], for vi in v while not(emptyp(e)) do (print(vi), e : rest(e)), e),
+ foo ([1, 2, 3], [a, b]));
+[3];
+
+(translate_or_lose (foo), foo ([1, 2, 3], [a, b]));
+[3];
+
+/* simpler function featuring mprogn and mnot */
+
+(bar (x) := (x : 2*x, x : 3*x, not (x < 100)), bar (3));
+false;
+
+(translate_or_lose (bar), bar (3));
+false;
+
+/* SF [ 1646525 ] no function mdoin */
+
+(try_me(x) := block([acc : 0], for i in x while i > 5 do acc : acc + i, acc),
+ try_me ([10, 9, 8, 7, 6, 5, 4, 5, 6, 7, 8, 9, 10]));
+40;
+
+(translate_or_lose (try_me), try_me ([10, 9, 8, 7, 6, 5, 4, 5, 6, 7, 8, 9, 10]));
+40;
+
+/* SF [ 1818645 ] Compiled maxima code containing $ARRAY gets a Lisp error. */
+
+(test_array_comp (x) :=
+  block ([abc, i],
+    array (abc, 3),
+    for i thru 3 do (abc[i]: i*i),
+    abc[3] : x, 
+    [abc, abc[3], abc[2]]),
+  test_array_comp (100));
+[abc, 100, 4];
+
+(translate_or_lose (test_array_comp), test_array_comp (100));
+[abc, 100, 4];
+
+/* SF [ 545794 ] Local Array does not compile properly */
+
+(trial (a) :=
+  block ([myvar, i],
+    local(myvar),
+    array (myvar, 7),
+    for i : 0 thru 7 do myvar [i] : a^i,
+    [member (myvar, arrays), listarray (myvar)]),
+ trial (2));
+[true, [1, 2, 4, 8, 16, 32, 64, 128]];
+
+(translate_or_lose (trial), trial (2));
+[true, [1, 2, 4, 8, 16, 32, 64, 128]];
+
+/* This next test used to fail because local properties would leak out
+ * in the translated case.  This test is expected to pass now.  There
+ * are more local tests below for bug #2976.
+ */
+
+[member (myvar, arrays), errcatch (listarray (myvar))];
+[false, []];
+
+/* for loop variable not special
+ * reported to mailing list 2009-08-13 "Why won't this compile?"
+ */
+
+(kill (foo1, bar1),
+ foo1 () := bar1 + 1,
+ baz1 (n) := block ([S : 0], for bar1:0 thru n - 1 do S : S + foo1 (), S),
+ translate_or_lose (baz1),
+ baz1 (10));
+55;
+
+/* original example */
+
+(fun(A,b,s,VF,x,h):= block
+ ([Y],
+   Y[1]:  x,
+   for i:2 thru s do
+    Y[i]:  x + h*(sum(A[i,j]*VF(Y[j]),j,1,i-1)),
+   x: expand(x + h*sum(b[i]*VF(Y[i]),i,1,s))),
+  A: matrix([1,1],[1,1]),
+  b: [1,1],
+ 0);
+0;
+
+fun(A,b,2,f,[1,1],.01);
+0.01*f(0.01*f([1,1])+[1,1])+0.01*f([1,1])+[1,1]$
+
+(translate_or_lose (fun), fun(A,b,2,f,[1,1],.01));
+0.01*f(0.01*f([1,1])+[1,1])+0.01*f([1,1])+[1,1]$
+
+/* incorrect code emitted for call from translated function to untranslated
+ * SF bug # 2934064 "problem loading ezunits"
+ */
+
+(f0001 (x) := [f0002 (x), f0003 (x)],
+ f0002 (x) := x,
+ f0003 (x) := x,
+ translate_or_lose (f0002, f0001),
+ f0001 (1));
+[1, 1];
+
+(translate_or_lose (f0003), f0001 (1));
+[1, 1];
+
+(compile_or_lose (f0003), f0001 (1));
+[1, 1];
+
+(compile_or_lose (f0003, f0002, f0001), f0001 (1));
+[1, 1];
+
+/* SF bug # 2938716 "too much evaluation in translated code"
+ */
+
+(g0001 (x) := [g0002 (x), g0003 (x)],
+ g0002 (x) := x,
+ g0003 (x) := x,
+ translate_or_lose (g0002, g0001),
+ kill (aa, bb, cc),
+ aa : 'bb,
+ bb : 'cc,
+ g0001 (aa));
+[bb, bb];
+
+(translate_or_lose (g0003), g0001 (aa));
+[bb, bb];
+
+(compile_or_lose (g0003), g0001 (aa));
+[bb, bb];
+
+(compile_or_lose (g0003, g0002, g0001), g0001 (aa));
+[bb, bb];
+
+/* SF bug # 3035313 "some array references translated incorrectly"
+ */
+
+(kill (aa1, aa3, bb1, bb3, cc1, cc3),
+ array (aa1, 15),
+ array (aa3, 12, 4, 6),
+ array (bb1, flonum, 15),
+ array (bb3, flonum, 5, 6, 7),
+ array (cc1, fixnum, 8),
+ array (cc3, fixnum, 6, 10, 4),
+ 0);
+0;
+
+(kill (faa, gaa, fbb, gbb, fcc, gcc),
+ faa (n) := aa1[n] + aa3[n, n - 1, n - 2],
+ gaa (n) := (aa1[n] : 123, aa3[n, n - 1, n - 2] : 321),
+ fbb (n) := bb1[n] + bb3[n, n - 1, n - 2],
+ gbb (n) := (bb1[n] : 123, bb3[n, n - 1, n - 2] : 321),
+ fcc (n) := cc1[n] + cc3[n, n - 1, n - 2],
+ gcc (n) := (cc1[n] : 123, cc3[n, n - 1, n - 2] : 321),
+ 0);
+0;
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+translate_or_lose (faa, gaa, fbb, gbb, fcc, gcc);
+[faa, gaa, fbb, gbb, fcc, gcc];
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+compile_or_lose (faa, gaa, fbb, gbb, fcc, gcc);
+[faa, gaa, fbb, gbb, fcc, gcc];
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+/* try same stuff again w/ undeclared arrays ...
+ * no type spec => only one kind of array
+ */
+
+(kill (aa1, aa3, bb1, bb3, cc1, cc3),
+ ?fmakunbound (faa),
+ ?fmakunbound (fbb),
+ [gaa (4), faa (4)]);
+[321, 444];
+
+(translate_or_lose (faa, gaa), [gaa (4), faa (4)]);
+[321, 444];
+
+(compile_or_lose (faa, gaa), [gaa (4), faa (4)]);
+[321, 444];
+
+/* try same stuff again w/ Lisp arrays */
+
+(kill (aa1, aa3, bb1, bb3, cc1, cc3),
+ map (?fmakunbound, [faa, fbb, fcc, gaa, gbb, gcc]),
+ aa1 : make_array (any, 15),
+ aa3 : make_array (any, 12, 4, 6),
+ bb1 : make_array (flonum, 15),
+ bb3 : make_array (flonum, 5, 6, 7),
+ cc1 : make_array (fixnum, 8),
+ cc3 : make_array (fixnum, 6, 10, 4),
+ 0);
+0;
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+translate_or_lose (faa, gaa, fbb, gbb, fcc, gcc);
+[faa, gaa, fbb, gbb, fcc, gcc];
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+compile_or_lose (faa, gaa, fbb, gbb, fcc, gcc);
+[faa, gaa, fbb, gbb, fcc, gcc];
+
+[gaa (4), gbb (4), gcc (4)];
+[321, 321, 321];
+
+[faa (4), fbb (4), fcc (4)];
+[444, 444, 444];
+
+/* SF bug # 2569: "translate rat(1,x) and rat([1]) incorrect" */
+
+(kill (f), f () := rat (x, x), translate_or_lose (f), f ());
+''(rat (x, x));
+
+(kill (f), f () := rat ([1]), translate_or_lose (f), f ());
+''(rat ([1]));
+
+(kill (foo, y1a, y1b, y2a, y2b), 
+  foo(x) := block (mode_declare (x, float),
+     [tanh (x), tan (x), sech (x), sec (x), acos (x), acot (x), sin (x),
+      acsc (x), asinh (x), acsch (x), cosh (x), coth (x), realpart (x),
+      asec (x), asin (x), erf (x), log (x), cos (x), cot (x), csc (x),
+      sinh (x), csch (x), sqrt (x), exp (x)]),
+  0);
+0;
+
+y1a : foo (0.5);
+[.4621171572600097,.5463024898437905,0.886818883970074,1.139493927324549,
+ 1.047197551196597,1.107148717794091,0.479425538604203,
+ 1.570796326794897-1.316957896924817*%i,.4812118250596035,1.44363547517881,
+ 1.127625965206381,2.163953413738653,0.5,1.316957896924817*%i,
+ 0.523598775598299,.5204998778130465,-.6931471805599453,.8775825618903728,
+ 1.830487721712452,2.085829642933488,.5210953054937474,1.919034751334944,
+ .7071067811865476,1.648721270700128]$
+
+y1b : foo (1.5);
+[.9051482536448664,14.10141994717172,.4250960349422805,14.1368329029699,
+ .9624236501192069*%i,.5880026035475675,.9974949866040544,.7297276562269662,
+ 1.194763217287109,.6251451172504168,2.352409615243247,1.104791392982512,1.5,
+ .8410686705679303,1.570796326794897-.9624236501192069*%i,.9661051464753108,
+ .4054651081081644,0.0707372016677029,.07091484430265245,1.002511304246725,
+ 2.129279455094817,.4696424405952246,1.224744871391589,4.481689070338065]$
+
+y1c : foo (1.0);
+[0.7615941559557649,1.557407724654902,0.6480542736638855,
+ 1.850815717680925,0.0,0.7853981633974483,0.8414709848078965,
+ 1.570796326794897,0.881373587019543,0.881373587019543,
+ 1.543080634815244,1.313035285499331,1.0,0.0,1.570796326794897,
+ 0.8427007929497148,0.0,0.5403023058681398,0.6420926159343306,
+ 1.188395105778121,1.175201193643801,0.8509181282393216,1.0,
+ 2.718281828459045]$
+
+(translate_or_lose (foo), y2a : foo (0.5), y2b : foo (1.5), 0);
+0;
+
+is (y1a = y2a);
+true;
+
+is (y1b = y2b);
+true;
+
+block ([tr_float_can_branch_complex : false],
+  translate_or_lose (foo),
+  y2c : foo (1.0),
+  0);
+0;
+
+is (y1c = y2c);
+true;
+
+/* verify that save/compfile/compile_file/translate_file preserves upper/lower case in symbol names */
+
+/* save */
+
+(kill (all),
+ foo (x) := my_foo * x,
+ Foo (x) := my_Foo * x,
+ FOO (x) := my_FOO * x,
+ [my_foo, my_Foo, my_FOO] : [123, 456, 789],
+ results : [foo (2), Foo (3), FOO (4)],
+ my_test () := is (results = [2*123, 3*456, 4*789]),
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ lisp_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-save-", lisp_name, ".lisp"),
+ save (lisp_filename, values, functions),
+ kill (allbut (lisp_filename)),
+ load (lisp_filename),
+ my_test ());
+true;
+
+/* compfile */
+
+(kill (all),
+ foo (x) := my_foo * x,
+ Foo (x) := my_Foo * x,
+ FOO (x) := my_FOO * x,
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ lisp_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-compfile-", lisp_name, ".lisp"),
+ compfile (lisp_filename, functions),
+ kill (functions), 
+ load (lisp_filename),
+ [my_foo, my_Foo, my_FOO] : [123, 456, 789],
+ results : [foo (2), Foo (3), FOO (4)],
+ my_test () := is (results = [2*123, 3*456, 4*789]),
+ my_test ());
+true;
+ 
+/* compile_file */
+
+/* skip this test (and fail) if Lisp = ECL because stream i/o causes "stack smashing" error
+ * see: https://sourceforge.net/p/maxima/bugs/3291/
+ */
+if build_info()@lisp_name # "ECL" then
+(kill (all),
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ maxima_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-compile_file-", lisp_name, ".mac"),
+ fasl_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-compile_file-", lisp_name, ".fasl"),
+ lisp_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-compile_file-", lisp_name, ".LISP"),
+ maxima_output : openw (maxima_filename),
+ maxima_content :
+"foo (x) := my_foo * x;
+Foo (x) := my_Foo * x;
+FOO (x) := my_FOO * x;
+[my_foo, my_Foo, my_FOO] : [123, 456, 789];
+results : [foo (2), Foo (3), FOO (4)];
+my_test () := is (results = [2*123, 3*456, 4*789]);",
+ printf (maxima_output, maxima_content),
+ close (maxima_output),
+ compile_file (maxima_filename, fasl_filename, lisp_filename),
+ kill (allbut (lisp_filename)),
+ load (lisp_filename),
+ my_test ());
+true;
+
+/* translate_file */
+
+/* skip this test (and fail) if Lisp = ECL because stream i/o causes "stack smashing" error
+ * see: https://sourceforge.net/p/maxima/bugs/3291/
+ */
+if build_info()@lisp_name # "ECL" then
+(kill (all),
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ maxima_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-translate_file-", lisp_name, ".mac"),
+ lisp_filename : sconcat (maxima_tempdir, "/tmp-rtest_translator-translate_file-", lisp_name, ".LISP"),
+ maxima_output : openw (maxima_filename),
+ maxima_content :
+"foo (x) := my_foo * x;
+Foo (x) := my_Foo * x;
+FOO (x) := my_FOO * x;
+[my_foo, my_Foo, my_FOO] : [123, 456, 789];
+results : [foo (2), Foo (3), FOO (4)];
+my_test () := is (results = [2*123, 3*456, 4*789]);",
+ printf (maxima_output, maxima_content),
+ close (maxima_output),
+ translate_file (maxima_filename, lisp_filename),
+ kill (allbut (lisp_filename)),
+ load (lisp_filename),
+ my_test ());
+true;
+
+/* Bug 2934:
+
+   Translating a literal exponent that comes out as a float shouldn't
+   produce assigned type any. This test runs the translation for a
+   trivial function that triggered the bug then looks in the unlisp
+   file (which contains messages from the translator) and checks that
+   there aren't any warnings.
+*/
+/* skip this test (and fail) if Lisp = ECL because stream i/o causes "stack smashing" error
+ * see: https://sourceforge.net/p/maxima/bugs/3291/
+ */
+if build_info()@lisp_name # "ECL" then
+(kill (all),
+ lisp_name : ssubst ("_", " ", build_info()@lisp_name),
+ basename: sconcat (maxima_tempdir, "/tmp-rtest_translator-2934-", lisp_name),
+ maxima_filename : sconcat (basename, ".mac"),
+ lisp_filename : sconcat (basename, ".LISP"),
+ maxima_output : openw (maxima_filename),
+ maxima_content : "f () := block([y], mode_declare(y,float), y: 3^0.33, y)$",
+ printf (maxima_output, maxima_content),
+ close (maxima_output),
+ translate_file (maxima_filename, lisp_filename),
+ kill (allbut(basename)),
+ /* Any warning messages end up at .UNLISP */
+ block ([unlisp: openr (sconcat (basename, ".UNLISP")),
+         line, acc: []],
+   while stringp (line: readline(unlisp)) do
+     if is ("warning" = split(line, ":")[1]) then push(line, acc),
+   acc));
+[]$
+
+/* makelist translated incorrectly
+ * SF bug #3083: "Error on compiling a working maxima function"
+ */
+
+(kill(all),
+ f1(n) := makelist (1, n),
+ f2(n) := makelist (i^2, i, n),
+ f3(l) := makelist (i^3, i, l),
+ f4(n) := makelist (i^4, i, 1, n),
+ f5(m, n) := makelist (i^5, i, 1, n, m),
+ translate_or_lose(f1, f2, f3, f4, f5),
+ 0);
+0;
+
+f1(5);
+[1,1,1,1,1];
+
+f2(5);
+[1, 4, 9, 16, 25];
+
+f3([1,2,3]);
+[1, 8, 27];
+
+f4(4);
+[1, 16, 81, 256];
+
+f5(2, 10);
+[1, 243, 3125, 16807, 59049];
+
+/* original function from bug report */
+
+(ordersort(lis,vars,oper):=block([negsumdispflag:false,liss:lis,varlist:vars,temp], /*Does lexicographical sort */
+ for i:1 thru length(varlist) do (
+     for j:1 thru i do (
+         liss:sort(liss,lambda([x,y],apply("and",map(oper,makelist(part(x,2)[k],k,1,i)
+                             ,makelist(part(y,2)[k],k,1,i)))))
+     )),liss),
+ translate_or_lose (ordersort),
+ [member ('transfun, properties (ordersort)),
+  ordersort([[-7,[0,2,1]],[3,[1,2,1]],[1,[0,4,1]],[6,[4,3,3]],[6,[4,4,3]],
+             [-7,[3,5,4]],[2,[0,0,5]],[-10,[2,2,5]],[-10,[3,4,7]],[7,[3,8,9]]],
+	     [x,y,z],
+	     ">=")]);
+[true,
+ [[6,[4,4,3]],[6,[4,3,3]],[7,[3,8,9]],[-7,[3,5,4]],[-10,[3,4,7]],
+  [-10,[2,2,5]],[3,[1,2,1]],[1,[0,4,1]],[-7,[0,2,1]],[2,[0,0,5]]]];
+
+/* 'define' translated incorrectly, reported to mailing list circa 2017-01-24 */
+
+(kill(foo, bar, baz, quux, mumble, blurf, umm, f, x, y),
+ foo(y) := define(bar(x), x + y),
+ baz(f, y) := define(funmake(f, [x]), x + y),
+ quux() := (mumble(x) := 1 + x),
+ [foo(10), baz(blurf, 20), quux()]);
+/* note that results match because rhs of ":=" isn't simplified */
+[bar(x) := 10 + x, blurf(x) := 20 + x, mumble(x) := 1 + x];
+
+[bar(5), blurf(5), mumble(5)];
+[15, 25, 6];
+
+(kill(bar, blurf, mumble),
+ translate_or_lose(foo, baz, quux),
+ [foo(11), baz(umm, 21), quux()]);
+/* note that results match because rhs of ":=" isn't simplified */
+[bar(x) := 11 + x, umm(x) := 21 + x, mumble(x) := 1 + x];
+
+makelist (is (x # false), x, map (?fboundp, [foo, baz, quux])); /* test for generalized Boolean value */
+[true, true, true];
+
+[bar(5), umm(5), mumble(5)];
+[16, 26, 6];
+
+/* mailing list 2017-03-04: "An example that is broken by compile()"
+ * translated code tickles a bug elsewhere (bug not in translator)
+ */
+
+(kill(fun, trigfunc, t1),
+ fun():=block([trigfunc],
+        trigfunc:lambda([cur],cur>t1),
+        apply('trigfunc,[1])),
+ 0);
+0;
+
+/* I (Robert Dodier) believe this result should be trigfunc(1),
+ * but, in any event, interpreted and compiled code should agree.
+ * But if MAPPLY1 is ever changed, we can adjust these results.
+ */
+fun();
+1 > t1;
+
+(compile_or_lose(fun), fun());
+1 > t1;
+
+(kill(fun, trigfunc, t1),
+ fun():=block([trigfunc],
+        trigfunc:lambda([cur],cur>t1),
+        apply(trigfunc,[1])),
+ 0);
+0;
+
+fun();
+1 > t1;
+
+(compile_or_lose(fun), fun());
+1 > t1;
+
+/* Verify that we catch malformed lambda expressions during translation.
+ * More checks need to be added to the translator and more tests need to
+ * be added here.
+ */
+
+/* no parameter list */
+(kill (f),
+ f () := lambda (),
+ translate (f))$
+[];
+
+/* empty body */
+(kill (f),
+ f () := lambda ([x]),
+ translate (f))$
+[];
+
+/* non-symbol in parameter list */
+(kill (f),
+ f () := lambda ([42], 'foo),
+ translate (f))$
+[];
+
+/* misplaced "rest" parameter */
+(kill (f),
+ f () := lambda ([[l], x], 'foo),
+ translate (f))$
+[];
+
+/* invalid "rest" parameter */
+(kill (f),
+ f () := lambda ([[l1, l2]], 'foo),
+ translate (f))$
+[];
+
+/* attempting to bind a constant;
+ * now OK, after commit 0517895
+ */
+block ([c, f],
+  local (c, f),
+  declare (c, constant),
+  f () := lambda ([c], c),
+  translate_or_lose (f))$
+[f];
+
+/* Verify that parameter/variable lists cannot contain duplicate variables.
+ *
+ * We only test a couple of cases here.  Many more tests for non-translated
+ * code are in rtest2.  Do we want to test them all here as well?
+ */
+
+(kill(f),
+ f () := lambda ([x, [x]], x),
+ translate (f))$
+[];
+
+(kill(f),
+ f () := block ([x, x:'foo], x),
+ translate (f))$
+[];
+
+/* ensure that a null OPERATORS property doesn't interfere with
+ * translation of local variable used as a function name.
+ * This is the bug that caused failures in rtest_fractals when executed after run_testsuite.
+ */
+
+(kill(aa, foobarbaz, mumbleblurf, hhh),
+ matchdeclare (aa, all),
+ tellsimp (mumbleblurf(aa), 1 - aa),
+ kill (mumbleblurf), /* as of 2018-01-28, this leaves (OPERATORS NIL) in property list */
+ hhh(mumbleblurf, u) := mumbleblurf(u),
+ foobarbaz(x) := 100 + x,
+ translate_or_lose (hhh),
+ hhh (foobarbaz, 11));
+111;
+
+/* SF bug report #3402: "Unbinding defined variable generates error in compiled functions" */
+
+define_variable (zorble, 0, fixnum);
+0;
+
+(kill(f), f() := block ([zorble], 42), f());
+42;
+
+(translate_or_lose(f), f());
+42;
+
+/* bug reported to mailing list 2018-12-03: "error in compiling function with global variable" */
+
+(test_f():= block( [a,b,c,d], niceindicespref:[a,b,c,d], disp("ciao"), return() ),
+ 0);
+0;
+
+(test_f (), niceindicespref);
+[a,b,c,d];
+
+(reset (niceindicespref),
+ niceindicespref);
+[i,j,k,l,m,n];
+
+(translate_or_lose (test_f),
+ test_f (),
+ niceindicespref);
+[a,b,c,d];
+
+(reset (niceindicespref), 0);
+0;
+
+/* additional tests with variables which have ASSIGN property */
+
+(set_error_stuff_permanently () :=
+  block (error_syms : '[myerr1, myerr2, myerr3], error_size : 40),
+ set_error_stuff_temporarily() :=
+   block([error_syms : '[myerror1, myerror2, myerror3], error_size : 55],
+         [error_syms, error_size]),
+ 0);
+0;
+
+(reset (error_syms, error_size),
+ set_error_stuff_permanently (),
+ [error_syms, error_size]);
+[[myerr1, myerr2, myerr3], 40];
+
+(reset (error_syms, error_size),
+ translate_or_lose (set_error_stuff_permanently),
+ set_error_stuff_permanently (),
+ [error_syms, error_size]);
+[[myerr1, myerr2, myerr3], 40];
+
+(reset (error_syms, error_size),
+ set_error_stuff_temporarily());
+[[myerror1, myerror2, myerror3], 55];
+
+[error_syms, error_size];
+[[errexp1, errexp2, errexp3], 60];
+
+(translate_or_lose (set_error_stuff_temporarily),
+ set_error_stuff_temporarily());
+[[myerror1, myerror2, myerror3], 55];
+
+[error_syms, error_size];
+[[errexp1, errexp2, errexp3], 60];
+
+(kill(all), reset(), 0);
+0;
+
+/* SF bug #3412: "Bug when translating functions that contain an \"if\" (in my case an implicit if)" */
+/* Bug #4008: translator and prederror */
+
+(f(x):=if cabs(1/(x+1)) < 1 then 1/(x+1) else 1,
+ f(x + %i*y));
+if 1/sqrt(y^2+(x+1)^2) < 1 then 1/(%i*y+x+1) else 1;
+
+makelist (f(xy[1] + %i*xy[2]), xy, [[0, 0], [0, 1], [1, 1], [1, 0], [0, 2], [2, 2], [2, 0]]);
+[1, 1/(%i+1), 1/(%i+2), 1/2, 1/(2*%i+1), 1/(2*%i+3), 1/3]$
+
+compile_or_lose (f);
+[f];
+
+block ([prederror : false],
+  f(x + %i*y));
+if 1 - 1/sqrt(y^2+(x+1)^2) > 0 then 1/(%i*y+x+1) else 1;
+
+block ([prederror : true],
+  errcatch (f(x + %i*y)));
+[];
+
+'(f(x + %i*y));
+f(x + %i*y);
+
+makelist (f(xy[1] + %i*xy[2]), xy, [[0, 0], [0, 1], [1, 1], [1, 0], [0, 2], [2, 2], [2, 0]]);
+[1, 1/(%i+1), 1/(%i+2), 1/2, 1/(2*%i+1), 1/(2*%i+3), 1/3]$
+
+(if draw_version = 'draw_version then load (draw),
+ draw3d(contour='map,
+        proportional_axes=xy,
+        nticks=100,
+        contour_levels=20,
+        explicit('(f(x+%i*y)),x,-2,2,y,-2,2)),
+ 0);
+0;
+
+/* nested if example -- note top-level "if" doesn't have an "else" clause, so the result is sometimes 'false' */
+
+(g(a, b, c) := if a + b > c
+                 then (if a > c
+                         then (if b > c
+                                 then (a + b + c)
+                                 elseif b > c/2
+                                   then (a - b - c)
+                                   else (b - a - c))
+                         else (a/2)),
+ 0);
+0;
+
+(aa: [3,9/4,5/4,11/4,1,0,9/4,1/4,5/2,9/4,3,5/2],
+ bb: [3/2,3,1/4,3/4,5/2,7/4,5/2,3/4,1/2,3,13/4,7/2],
+ cc: [7/2,15/4,5/2,5/4,15/4,1,1/4,7/4,2,11/4,1/4,7/4],
+ map (g, aa, bb, cc));
+[3/2,9/8,false,3/4,false,0,5,false,-4,9/8,13/2,31/4]$
+
+(translate_or_lose (g),
+ map (g, aa, bb, cc));
+[3/2,9/8,false,3/4,false,0,5,false,-4,9/8,13/2,31/4]$
+
+block ([prederror : false],
+  g (1, 1, z));
+''(if 2 - z > 0 then (if 1 > z then (if 1 > z then z + 2 elseif 1 > z / 2 then -z else -z) else 1/2));
+
+block ([prederror : true],
+  errcatch (g (1, 1, z)));
+[];
+
+/* SF bug #3556: "5.43.0 translate / compile error"
+ * Ensure that "if" within lambda is translated correctly.
+ * The fix for #3412 tickled this bug.
+ */
+
+(kill (f),
+ f(x, m) := map (lambda ([u], if m > 0 then u^m), [x, 2*x, 3*x]),
+ 0);
+0;
+
+is (?fboundp (f) # false);
+false;
+
+(kill (y),
+ [f(y, 2), f(y, -2)]);
+[[y^2, 4*y^2, 9*y^2], [false, false, false]];
+
+(kill (n),
+ errcatch (f(10, n)));
+/* ensure that conditional expressions get simplified to expunge $FALSE ... sigh. */
+''([[if n > 0 then 10^n, if n > 0 then 20^n, if n > 0 then 30^n]]);
+
+(translate_or_lose (f),
+ is (?fboundp (f) # false)); /* test for generalized Boolean value */
+true;
+
+[f(y, 2), f(y, -2)];
+[[y^2, 4*y^2, 9*y^2], [false, false, false]];
+
+block ([prederror : false],
+  f(10, n));
+''([if n > 0 then 10^n, if n > 0 then 20^n, if n > 0 then 30^n]);
+
+block ([prederror : true],
+  errcatch (f(10, n)));
+[];
+
+/* apply2 was translated incorrectly for several years.  applyb2
+ * was translated incorrectly for decades.
+ */
+
+(defrule (foorule, foo (), 1),
+ f () := apply2 ('(foo ()), foorule),
+ translate_or_lose (f),
+ f ());
+1;
+
+(defrule (barrule, bar (), 2),
+ g () := applyb2 ('(bar ()), barrule),
+ translate_or_lose (g),
+ g ());
+2;
+
+(kill (foorule, f, barrule, g), 0);
+0;
+
+/* atan and atan2 calls with float arguments were translated
+ * incorrectly for over a decade.  atan always caused a lisp error
+ * and atan2 had a range between 0 and 2*%pi that was inconsistent
+ * with the interpreted and non-float cases (where the range is
+ * between -%pi and %pi).
+ */
+
+(foo () := [atan2 (-1.0, -1.0), atan2 (-1.0, 1.0)],
+ translate_or_lose (foo),
+ foo ());
+[-2.356194490192345, -0.7853981633974483];
+
+(bar () := atan (-1.0),
+ translate_or_lose (bar),
+ bar ());
+-0.7853981633974483;
+
+(kill (foo, bar), 0);
+0;
+
+/* The translation of a signum call with a float argument was
+ * inconsistent when compared to the interpreted case and other
+ * translated cases.  signum should return an integer or a float
+ * when given an integer or a float argument, respectively.
+ */
+
+(foo () := [signum (0),  signum (0.0),
+            signum (2),  signum (2.0),
+            signum (-3), signum (-3.0)],
+ translate_or_lose (foo),
+ foo ());
+[0, 0.0, 1, 1.0, -1, -1.0];
+
+(kill (foo), 0);
+0;
+
+/* The translation of declare was broken for decades.  It worked
+ * under Maclisp, but it had never worked under Common Lisp.
+ */
+
+(foo () := declare (n, integer, [x, y], noninteger),
+ translate_or_lose (foo),
+ foo (),
+ [?kindp (n, integer),
+  ?kindp (n, noninteger),
+  ?kindp (x, integer),
+  ?kindp (x, noninteger),
+  ?kindp (y, integer),
+  ?kindp (y, noninteger)]);
+[true, false, false, true, false, true];
+
+(kill (foo, n, x, y), 0);
+0;
+
+/* If a variable was declared to be of mode rational, then a lisp
+ * error could occur during translation when attempting to convert
+ * it to a float.
+ */
+
+(foo (x) := (mode_declare (x, rational), float (x)),
+ bar (y) := (mode_declare (y, rational), 1.0 + y),
+ translate_or_lose (foo, bar),
+ [foo (1/4), bar (1/2)]);
+[0.25, 1.5];
+
+(kill (foo, bar, x, y), 0);
+0;
+
+/* The translation of an atan2 call with one float and one rational
+ * argument was broken because the rational was not converted to a
+ * float before calling ATAN.
+ */
+
+(foo () :=
+   [atan2 (0.0, -1/2),
+    atan2 (-1/2, 0.0),
+    atan2 (0.0, -1),
+    atan2 (1, 0.0)],
+ bar (y, x) := (mode_declare (x, float, y, rational), atan2 (y, x)),
+ l1 : [foo (), bar (1/3, 0.0)],
+ translate_or_lose (foo, bar),
+ l2 : [foo (), bar (1/3, 0.0)],
+ is (l1 = l2));
+true;
+
+(kill (foo, bar, x, y, l1, l2), 0);
+0;
+
+/* When attempting to apply float contagion to the arguments, some
+ * translations of max and min with mixed float and rational arguments
+ * were broken because the rationals were not converted to floats before
+ * calling MAX or MIN (like atan2 above).  Also, due to implementation-
+ * dependent behavior in the underlying lisp regarding what to return
+ * from MAX and MIN, the wrong mode could be used during translation and
+ * some of the translations were possibly inconsistent with interpreted
+ * cases.
+ */
+
+(foo (x) :=
+   (mode_declare (x, rational),
+    [max (),         min (),
+     max (1),        min (1),
+     max (1.0),      min (1.0),
+     max (9/10),     min (9/10),
+     max (x)   ,     min (x),
+     max (0.0, 1),   min (0.0, 1),
+     max (0, 1),     min (0, 1),
+     max (1.0, 1),   min (1.0, 1),
+     max (1, 1.0),   min (1, 1.0),
+     max (2.0, 3.0), min (2.0, 3.0),
+     max (-1, 1/2),  min (-1, 1/2),
+     max (3/4, 1/2), min (3/4, 1/2),
+     max (0.0, 1/2), min (0.0, 1/2),
+     max (0, x),     min (0, x),
+     max (-1.0, x),  min (-1.0, x),
+     max (5/6, x),   min (5/6, x),
+     max (x, 1),     min (x, 1)]),
+ l1 : foo (2/3),
+ translate_or_lose (foo),
+ l2 : foo (2/3),
+ is (l1 = l2));
+true;
+
+(kill (foo, x, l1, l2), 0);
+0;
+
+/* log and sqrt did not honor tr_float_can_branch_complex */
+
+(foo (x) :=
+   (mode_declare (x, float),
+    [log  (-1.0), log  (x),
+     sqrt (-1.0), sqrt (x)]),
+ /* l1 is a list of Maxima complex numbers */
+ l1 : foo (-2.0),
+ some (lambda ([x], freeof (%i, x)), l1));
+false;
+
+block ([tr_float_can_branch_complex : false],
+  translate_or_lose (foo),
+  /* l2 is a list of lisp complex numbers because we told the
+   * translator to assume the return values of log and sqrt
+   * would not be complex, and it correctly returned the complex
+   * numbers returned by LOG and SQRT directly.
+   */
+  l2 : foo (-2.0),
+  [every (?complexp, l2),
+   every ("#", l1, l2)]);
+[true,
+ true];
+
+block ([tr_float_can_branch_complex : true],
+  translate_or_lose (foo),
+  /* l3 is a list of Maxima complex numbers because we told the
+   * translator to assume the return values of log and sqrt
+   * could be complex, and it converted the lisp complex numbers
+   * returned by LOG and SQRT to Maxima complex numbers.
+   */
+  l3 : foo (-2.0),
+  every (lambda ([x, y], cabs (x - y) < 1e-15), l1, l3));
+true;
+
+(kill (foo, x, l1, l2, l3), 0);
+0;
+
+/* The translations for evaluating = and # expressions to boolean
+ * values with one float argument and a different numerical argument
+ * (e.g. a fixnum) gave bogus results because the translator was
+ * incorrectly applying float contagion to the arguments.
+ */
+
+(foo (s, w, x, y, z) :=
+  (mode_declare (w, number, x, fixnum, y, flonum),
+   [/* These translate to EQL comparisons */
+    is (1 = 1),                 is (1 # 1),
+    is (1 = 1.0),               is (1 # 1.0),
+    is (1 = float (1)),         is (1 # float (1)),
+    is (1.0 = float (1)),       is (1.0 # float (1)),
+    is (w = 2),                 is (w # 2),
+    is (w = 2.0),               is (w # 2.0),
+    is (x = 3),                 is (x # 3),
+    is (x = 3.0),               is (x # 3.0),
+    is (x = float (3)),         is (x # float (3)),
+    is (x = float (x)),         is (x # float (x)),
+    is (y = 4),                 is (y # 4),
+    is (y = 4.0),               is (y # 4.0),
+    is (y = float (4)),         is (y # float (4)),
+    is (y = float (y)),         is (y # float (y)),
+    /* These translate to LIKE comparisons */
+    is (z = 5),                 is (z # 5),
+    is (z = 5.0),               is (z # 5.0),
+    is (z = float (5)),         is (z # float (5)),
+    is (z = float (z)),         is (z # float (z)),
+    is (1/2 = 1/2),             is (1/2 # 1/2),
+    is (1/2 = rat (1/2)),       is (1/2 # rat (1/2)),
+    is (rat (1/2) = rat (1/2)), is (rat (1/2) # rat (1/2)),
+    is (1/2 = 0.5),             is (1/2 # 0.5),
+    is (1/2 = float (1/2)),     is (1/2 # float (1/2)),
+    is (%i = %i),               is (%i # %i),
+    is (1 + %i = 1 + %i),       is (1 + %i # 1 + %i),
+    is (s = s),                 is (s # s),
+    is (s = 'bar),              is (s # 'bar),
+    is (s = 1),                 is (s # 1),
+    is (s = 1.0),               is (s # 1.0),
+    is (s = 1/2),               is (s # 1/2),
+    is ('f (0) = 'f (0)),       is ('f (0) # 'f (0)),
+    is ('g (s) = 'g (s)),       is ('g (s) # 'g (s)),
+    is ('h (w) = 'h (w)),       is ('h (w) # 'h (w)),
+    is ('i (x) = 'i (x)),       is ('i (x) # 'i (x)),
+    is ('j (y) = 'j (y)),       is ('j (y) # 'j (y)),
+    is ('k (z) = 'k (z)),       is ('k (z) # 'k (z))]),
+ l1 : foo ('bar, 2, 3, 4.0, 5),
+ translate_or_lose (foo),
+ l2 : foo ('bar, 2, 3, 4.0, 5),
+ [every (lambda ([x], ?typep (x, ?boolean)), l2),
+  is (l1 = l2)]);
+[true,
+ true];
+
+(kill (foo, w, x, y, l1, l2), 0);
+0;
+
+/* Bug #3048: notequal is not translated properly
+ *
+ * notequal expressions were only generically translated like user
+ * function calls and the use of notequal in translated code caused
+ * a runtime warning about it being totally undefined.  Also the
+ * evaluation of notequal expressions to boolean values (via is, if,
+ * etc.) were translated like the evaluation of an unknown predicate.
+ */
+
+(assume (equal (a, b), notequal (c, d)),
+ foo () :=
+  [is (equal (1, 1)),
+   is (notequal (1, 1)),
+   is (equal (1, 1.0)),
+   is (notequal (1, 1.0)),
+   is (equal (1, 1.0b0)),
+   is (notequal (1, 1.0b0)),
+   is (equal (1/2, 0.5)),
+   is (notequal (1/2, 0.5)),
+   is (equal (1/2, 0.5b0)),
+   is (notequal (1/2, 0.5b0)),
+   is (equal (1, 2)),
+   is (notequal (1, 2)),
+   is (equal ('ind, 'ind)),
+   is (notequal ('ind, 'ind)),
+   is (equal ('und, 'und)),
+   is (notequal ('und, 'und)),
+   is (equal ('a, 'b)),
+   is (notequal ('a, 'b)),
+   is (equal ('c, 'd)),
+   is (notequal ('c, 'd)),
+   is (equal (x^2 - 1, (x + 1) * (x - 1))),
+   is (notequal (x^2 - 1, (x + 1) * (x - 1)))],
+ l1 : foo (),
+ translate_or_lose (foo),
+ l2 : foo (),
+ [every (lambda ([x], ?typep (x, ?boolean)), l2),
+  is (l1 = l2)]);
+[true,
+ true];
+
+(kill (foo, l1, l2),
+ forget (equal (a, b), notequal (c, d)),
+ 0);
+0;
+
+/* The translation of a call to random with a float argument could
+ * cause the generation of bogus code because this always had the
+ * mode of fixnum.
+ */
+
+(foo (w, x, y, z) :=
+  (mode_declare (w, fixnum, x, float),
+   [[random (10),
+     random (w),
+     random (y)],
+    [random (1.0),
+     random (x),
+     random (z),
+     random (x) / 2,
+     random (z) / 2,
+     1 / (1 + random (x))],
+    [random (10) / 2,
+     random (w) / 3,
+     random (y) / 4,
+     1 / (1 + random (w)),
+     1 / (1 + random (y))]]),
+ translate_or_lose (foo),
+ l : foo (50, 5.0, 100, 10.0),
+ [every (integerp, first (l)),
+  every (floatnump, second (l)),
+  every (ratnump, third (l))]);
+[true,
+ true,
+ true];
+
+(kill (foo, w, x, l), 0);
+0;
+
+/* acosh, asech, atanh and acoth now have special translations for
+ * float arguments.  These all honor tr_float_can_branch_complex.
+ */
+
+(foo (x) :=
+   (mode_declare (x, float),
+    [acosh (x), asech (x), atanh (x)]),
+ bar (x) :=
+   (mode_declare (x, float),
+    [acoth (x)]),
+ /* l1 is a list of Maxima complex numbers */
+ l1 : append (foo (-3.0), foo (-2.0), bar (-0.5), bar (0.5)),
+ some (lambda ([x], freeof (%i, x)), l1));
+false;
+
+block ([tr_float_can_branch_complex : false],
+  translate_or_lose (foo, bar),
+  /* l2 is a list of lisp complex numbers because we told the
+   * translator to assume the return values would not be complex,
+   * and it correctly returned the lisp complex numbers directly.
+   */
+  l2 : append (foo (-3.0), foo (-2.0), bar (-0.5), bar (0.5)),
+  [every (?complexp, l2),
+   every ("#", l1, l2),
+   every ("=", l1, map (?complexify, l2))]);
+[true,
+ true,
+ true];
+
+block ([tr_float_can_branch_complex : true],
+  translate_or_lose (foo, bar),
+  /* l3 is a list of Maxima complex numbers because we told the
+   * translator to assume the return values could be complex, and
+   * it converted the lisp complex numbers to Maxima complex numbers.
+   */
+  l3 : append (foo (-3.0), foo (-2.0), bar (-0.5), bar (0.5)),
+  every ("=", l1, l3));
+true;
+
+(kill (foo, bar, x, l1, l2, l3), 0);
+0;
+
+/* Bug #3642: Lisp error when translating assume
+ *
+ * Translating an assume call with an atomic argument would cause a
+ * lisp error during translation.
+ */
+
+(foo () :=
+   block ([ctx : supcontext (),
+           x : a > 0,
+           y : b > 0,
+           r],
+     assume (x, y, equal (c, 0)),
+     r : [is (a > 0), is (b < 0), is (equal (c, 0))],
+     killcontext (ctx),
+     r),
+ translate_or_lose (foo),
+ foo ());
+[true, false, true];
+
+(kill (foo), 0);
+0;
+
+/* The translation of errcatch was broken because the mode of the
+ * whole form was always assumed to be the same as the mode of the
+ * last subform.  Since errcatch always yields a list, lisp errors
+ * could easily occur.
+ */
+
+(foo () :=
+   block ([listarith : true],
+     [errcatch (1),
+      1 + errcatch (2),
+      1.0 * errcatch (2.0),
+      errcatch (error ("oops")),
+      errcatch (?error ("oops")),
+      errcatch (1 / 0)]),
+ translate_or_lose (foo),
+ foo ());
+[[1],
+ [3],
+ [2.0],
+ [],
+ [],
+ []];
+
+(kill (foo), 0);
+0;
+
+/* Attempting to translate multiple functions containing local would
+ * cause an error.  Similarly, translating the same function multiple
+ * times would cause an error if that function contained local.
+ */
+
+(foo () := local (), /* just something with local (not within a block) */
+ bar () := local (), /* something else with local (not within a block) */
+ translate_or_lose (foo),
+ translate_or_lose (bar),
+ translate_or_lose (foo, bar));
+[foo, bar];
+
+(kill (foo, bar), 0);
+0;
+
+/* Bug #2976: "local" doesn't work in translated code
+ *
+ * For decades no attempt was being made to clean up any local
+ * properties.
+ */
+
+/* The internal LOCLIST used by local should be empty right now */
+?null (?loclist);
+true;
+
+(f0 () := "one",
+ foo1 () :=
+   (local (f0),
+    f0 () := "two",
+    f0 ()),
+ translate_or_lose (foo1),
+ block ([v : foo1 ()],
+   [f0 (), v]));
+["one", "two"];
+
+(kill (f0, foo1), 0);
+0;
+
+(arr1 [0] : "three",
+ foo2 () :=
+   block ([g : lambda ([],
+                 local (arr1, arr2),
+                 arr1 [0] : "four",
+                 arr2 [5] : "five",
+                 [arr1 [0],
+                  arr2 [5],
+                  arrayinfo (arr2)])],
+     apply (g, [])),
+ translate_or_lose (foo2),
+ block ([v : foo2 ()],
+   [arr1 [0],
+    v,
+    errcatch (arrayinfo (arr2))]));
+["three",
+ ["four",
+  "five",
+  [hashed, 1, [5]]],
+ []];
+
+(kill (arr1, foo2), 0);
+0;
+
+(foo3 (n) :=
+   (local (h),
+    h () := n + 1,
+    if n = 10 then
+      n
+    else
+      foo3 (h ())),
+ translate_or_lose (foo3),
+ foo3 (0));
+10;
+
+(kill (foo3), 0);
+0;
+
+/* The internal LOCLIST used by local should be empty right now */
+?null (?loclist);
+true;
+
+/* The fpprintprec itself is not important in this test.  I'm
+ * just picking something that has an ASSIGN property because
+ * that's a separate internal case in the translator.
+ *
+ * This test is ugly, but it's testing different cases and
+ * their interactions.
+ */
+block ([v],
+  local (f1, f2, arr),
+  f1 () := 0,
+  f2 () := 123,
+  arr [1] : "a",
+  bar (fpprintprec) :=
+    (local (f1, arr),
+     fpprintprec : 5,
+     f1 () := 42,
+     arr [1] : "b",
+     [block (
+        local (f2, arr),
+        f2 () := 69,
+        arr [1] : "c",
+        [f1 (), f2 (), arr [1]]),
+      [f1 (), f2 (), arr [1]]]),
+  translate_or_lose (bar),
+  v : bar (3),
+  [is (?get ('fpprintprec, '?assign) = false),
+   v,
+   [f1 (), f2 (), arr [1]]]);
+[false,
+ [[42, 69, "c"],
+  [42, 123, "b"]],
+ [0, 123, "a"]];
+
+(kill (bar), 0);
+0;
+
+/* This is testing to make sure there are no bad interactions
+ * between the usual local cleanup and errcatch cleanup (this
+ * also mixes the interpreted and translated cases).  This test
+ * is also ugly.
+ *
+ * The original implementation of local properties (from decades
+ * ago) not only failed to clean up local properties at all, but
+ * it wasn't even setting up the internal state to keep up with
+ * these properties correctly.  An initial attempt at fixing bug
+ * #2976 made this problem clear because with that it was easy to
+ * cause an infinite loop during certain things like errcatch
+ * cleanup.
+ */
+block ([translate : false,
+        vi, vt],
+  local (f3),
+  f3 () := -10,
+  baz1 () :=
+    (error ("oops 1"),
+     local (f4),
+     f4 () := 0),
+  baz2 () :=
+    (local (f5),
+     f5 () := 1,
+     error ("oops 2")),
+  translate_or_lose (baz1, baz2),
+  baz_test () :=
+    [block (
+       local (f3),
+       f3 () := -1,
+       errcatch (baz1 ()),
+       f3 ()),
+     block (
+       local (f3),
+       f3 () := -2,
+       errcatch (baz2 ()),
+       f3 ())],
+  vi : baz_test (),
+  translate_or_lose (baz_test),
+  vt : baz_test (),
+  [vi,
+   vt,
+   is (f3 () = -10),
+   is (f4 () = 0),
+   is (f5 () = 1)]);
+[[-1, -2],
+ [-1, -2],
+ true,
+ false,
+ false];
+
+/* The internal LOCLIST used by local should be empty right now */
+?null (?loclist);
+true;
+
+(kill (baz1, baz2, baz_test), 0);
+0;
+
+/***** This ends the bug #2976 tests *****/
+
+/* compile wasn't always compiling the correct function
+ *
+ * This test not only depends on the internal details of how certain
+ * functions are currently translated, but it also depends on internal
+ * details about how DEFMFUN defines functions.  This also doesn't
+ * really test that the correct function gets compiled because the
+ * lisp implementation could have just compiled it itself anyway.  Ugh.
+ */
+
+(foo () := 1,
+ compile_or_lose (foo),
+ ?compiled\-function\-p (?symbol\-function (?get (foo, ?impl\-name))));
+true;
+
+(kill (foo), 0);
+0;
+
+/* Some internal function definitions and compiler macros were not
+ * being cleaned up, and this could cause confusing and bogus results
+ * when an outdated compiler macro was being used.
+ *
+ * Specifically one problem we had involved translating a function,
+ * redefining it and then translating the new definition.  The internal
+ * function and compiler macro from the original function could be used
+ * when compiling calls to the new function if they were not overwritten.
+ *
+ * This all depended on lisp implementation-dependent behavior because
+ * implementations are not required to ever use compiler macros.  Ugh.
+ *
+ * This test also depends on internal details of how certain functions
+ * are currently translated.  Double ugh.
+ */
+
+(foo () := 0,
+ translate_or_lose (foo),
+ kill (foo),
+ foo ([l]) := l,
+ translate_or_lose (foo),
+ test1 () := foo (),
+ test2 () := foo (1, 2, 3),
+ compile_or_lose (test1, test2),
+ /* Previously we observed test1 returning 0 and test2 causing a lisp
+  * error because the compiler macro and old internal function from
+  * the first foo were being used.
+  */
+ [test1 (), test2 ()]);
+[[], [1, 2, 3]];
+
+(kill (foo, test1, test2), 0);
+0;
+
+/* https://stackoverflow.com/questions/64631208/compilation-global-variables-with-warning
+ *
+ * First verify that error_syms and niceindicespref assignments work as expected.
+ */
+
+kill (aa, bb, cc);
+done;
+
+errcatch (error_syms: 123);
+[];
+
+errcatch (error_syms: [aa, bb, 123]);
+[];
+
+error_syms: [aa, bb, cc];
+[aa, bb, cc];
+
+errcatch (niceindicespref: 123);
+[];
+
+errcatch (niceindicespref: []);
+[];
+
+niceindicespref: [aa, bb, cc];
+[aa, bb, cc];
+
+(reset (error_syms, niceindicespref), 0);
+0;
+
+/* now the example from the Stackoverflow question */
+
+(program_content:
+"define_variable(foo, true, boolean)$
+foo: true$
+
+exprp(that) := if foo = false and listp(that) and not emptyp(that) and member(that[1], [\"+\", \"*\"]) then(foo: true, true)$
+matchdeclare(exprm, exprp)$
+defrule(rule_1, exprm, subst(exprm[1], \"[\", exprm[2]))$
+
+calc(list) := block([steps: []],
+while foo do(
+    steps: endcons(list, steps),
+    foo: false,
+    list: applyb1(list, rule_1)
+),
+steps
+)$
+
+calc_result: calc([\"+\", [[\"*\", [1, 2, 3]], [\"+\", [3, 4, 6]]]]);",
+program_file_name: sconcat (maxima_tempdir, "/tmp_program.mac"),
+with_stdout (program_file_name, print (program_content)),
+0);
+0;
+
+kill (calc_result);
+done;
+
+([file_name_original, file_name_LISP, file_name_UNLISP, file_name_compiled]: compile_file (program_file_name), 0);
+0;
+
+stringp (file_name_compiled);
+true;
+
+calc_result;
+calc_result;
+
+(load (file_name_compiled),
+ calc_result);
+[["+", [["*", [1, 2, 3]], ["+", [3, 4, 6]]]],
+ ["+", [6, ["+", [3, 4, 6]]]],
+ ["+", [6, 13]],
+ 19];
+
+(kill (program_content, program_file_name, file_name_original, file_name_LISP, file_name_UNLISP, file_name_compiled, calc_result), 0);
+0;
+
+
+/* Some additional basic tests for functions with rest args */
+
+block ([translate : false],
+  foo ([r]) := r,
+  bar (a, b, [c]) := [a, b, c],
+  test () :=
+    [foo (),
+     foo (1),
+     foo (1, 2, 3),
+     errcatch (bar ()),
+     errcatch (bar (1)),
+     bar (1, 2),
+     bar (1, 2, 3),
+     bar (1, 2, 3, 4, 5)],
+
+  /* l1: foo, bar and test are interpreted */
+  l1 : test (),
+
+  /* l2: foo and bar are translated, and test is interpreted */
+  translate_or_lose (foo, bar),
+  l2 : test (),
+
+  /* l3: foo, bar and test are translated */
+  translate_or_lose (test),
+  l3 : test (),
+
+  [is (l1 = l2),
+   is (l2 = l3),
+   l1]);
+[true,
+ true,
+ [[],
+  [1],
+  [1, 2, 3],
+  [],
+  [],
+  [1, 2, []],
+  [1, 2, [3]],
+  [1, 2, [3, 4, 5]]]];
+
+(kill (foo, bar, test, l1, l2, l3), 0);
+0;
+
+/* Attempting to translate a macro with a rest arg always caused an
+ * error during translation because the translator was constructing
+ * bogus Maclisp-style lexpr lambda expressions.
+ */
+
+block ([translate : false],
+  foo ([r]) ::=
+    buildq ([r], ['r, r]),
+  bar (a, b, [c]) ::=
+    buildq ([a, b, c], ['a, a, 'b, b, 'c, c]),
+  test1 () :=
+    block ([x : 1, z : 3],
+      [foo (),
+       foo (x),
+       foo (x, y, z),
+       bar (x, y),
+       bar (x, y, z),
+       bar (x, y, z, 4, 5, 6)]),
+  /* test2 cannot be translated due to the WNA error during macro
+   * expansion, but we can call and test it in the interpreter
+   */
+  test2 () :=
+    [errcatch (bar ()),
+     errcatch (bar (1))],
+
+  /* l1: foo, bar and test1 are interpreted */
+  l1 : test1 (),
+
+  /* l2: foo and bar are translated, and test1 is interpreted */
+  translate_or_lose (foo, bar),
+  l2 : test1 (),
+
+  /* l3: foo, bar and test1 are translated */
+  translate_or_lose (test1),
+  l3 : test1 (),
+
+  [test2 (),
+   is (l1 = l2),
+   is (l2 = l3),
+   l1]);
+[[[], []],
+ true,
+ true,
+ [[[], []],
+  [['x], [1]],
+  [['x, 'y, 'z], [1, 'y, 3]],
+  ['x, 1, 'y, 'y, [], []],
+  ['x, 1, 'y, 'y, ['z], [3]],
+  ['x, 1, 'y, 'y, ['z, 4, 5, 6], [3, 4, 5, 6]]]];
+
+(kill (foo, bar, test1, test2, l1, l2, l3), 0);
+0;
+
+/* Some additional basic tests for conditionals.
+ *
+ * We test both elseif and else-if ("else if").
+ */
+
+block ([translate : false],
+  mysignum1 (x) := if x > 0 then 1 elseif  x < 0 then -1 else 0,
+  mysignum2 (x) := if x > 0 then 1 else if x < 0 then -1 else 0,
+  foo () :=
+    [if true then 1,
+     if false then 1,
+     if true then 1 else 2,
+     if false then 1 else 2,
+     if 1 < 2 then 'y,
+     if 1 < 2 then 'y else 'n,
+     if 1 > 2 then 'n,
+     if 1 > 2 then 'n else 'y,
+     if 1 > 2 then 'n elseif  1 = 2 then 'n else 'y,
+     if 1 > 2 then 'n else if 1 = 2 then 'n else 'y,
+     mysignum1 (-3),
+     mysignum2 (-3),
+     mysignum1 (0),
+     mysignum2 (0),
+     mysignum1 (2),
+     mysignum2 (2)],
+  l1 : foo (),
+  translate_or_lose (mysignum1, mysignum2, foo),
+  l2 : foo (),
+  [is (l1 = l2),
+   l2]);
+[true,
+ [1, false, 1, 2, 'y, 'y, false, 'y, 'y, 'y, -1, -1, 0, 0, 1, 1]];
+
+(kill (mysignum1, mysignum2, foo, l1, l2), 0);
+0;
+
+/* Bogus translations of nested conditionals in elseif clauses
+ *
+ * The translation of a conditional with another conditional nested
+ * directly under an elseif clause was totally wrong.  Using else-if
+ * ("else if") instead of elseif would work fine.
+ *
+ *
+ * We use the with_both_elseifs macro so we can test both elseif and
+ * else-if without having to duplicate portions of the tests below.
+ * Give this macro a conditional expression with elseifs and it will
+ * expand into a list: the first element is the same expression given
+ * to it (with elseifs), and the second element is that same expression
+ * rewritten to use else-ifs instead of elseifs.
+ */
+
+(to_else_if (expr) :=
+   if mapatom (expr) then
+     expr
+   else
+     block ([op : op (expr), args : args (expr)],
+       if op = "if" and length (args) > 4 then
+         funmake (op, map ('to_else_if, append (firstn (args, 2), [true, funmake (op, rest (args, 2))])))
+       else
+         funmake (op, map ('to_else_if, args))),
+ with_both_elseifs (expr) ::=
+   buildq ([expr, texpr : to_else_if (expr)],
+     [expr, texpr]),
+  0);
+0;
+
+block ([translate : false],
+  foo () :=
+    with_both_elseifs (
+      if false then
+        'lose1
+      elseif false then
+        'lose2
+      elseif false then
+        if true then
+          'lose3
+        else
+          'lose4
+      else
+        'win),
+
+  /* l1: foo is interpreted */
+  l1 : foo (),
+
+  translate_or_lose (foo),
+
+  /* l2: foo is translated
+   *
+   * foo used to give lose3 instead of win in the elseif case.
+   */
+  l2 : foo (),
+
+  [is (l1 = l2),
+   l2]);
+[true,
+ ['win, 'win]];
+
+block ([translate : false],
+  /* There is nothing special about bar here.  This is just some
+   * function that has several branches with nested conditionals.
+   */
+  bar (x) :=
+    with_both_elseifs (
+      if x > 5 then
+        if x > 7 then
+          'more_than_seven
+        elseif x > 6 then
+          'seven
+        else
+          'six
+      elseif x > 2 then
+        if x > 4 then
+          'five
+        elseif x > 3 then
+          'four
+        else
+          'three
+      elseif x >= 0 then
+        if x > 1 then
+          'two
+        elseif x > 0 then
+          'one
+        else
+          'zero
+      else
+        'negative),
+
+  /* We test bar with the integers -2 to 9 */
+  inputs : makelist (k, k, -2, 9),
+
+  /* l1: bar is interpreted */
+  l1 : map (bar, inputs),
+
+  translate_or_lose (bar),
+
+  /* l2: bar is translated
+   *
+   * bar used to give incorrect results in the elseif case for every
+   * number less than or equal to 2 (which means we got incorrect
+   * results for the integers -2 to 2 in this test).
+   */
+  l2 : map (bar, inputs),
+
+  [is (l2 = l1),
+   l2]);
+[true,
+ [['negative, 'negative],
+  ['negative, 'negative],
+  ['zero, 'zero],
+  ['one, 'one],
+  ['two, 'two],
+  ['three, 'three],
+  ['four, 'four],
+  ['five, 'five],
+  ['six, 'six],
+  ['seven, 'seven],
+  ['more_than_seven, 'more_than_seven],
+  ['more_than_seven, 'more_than_seven]]];
+
+(kill (foo, bar, l1, l2, inputs, to_else_if, with_both_elseifs), 0);
+0;
+
+/* Bogus translations of conditionals with tests that translated to T
+ * and consequents that translated to NIL.
+ */
+
+block ([translate : false],
+  foo () :=
+    [if true then false else 1,
+     if true then false elseif true then 1 else 2,
+     if false then true elseif true then false else 1],
+
+  /* l1: foo is interpreted */
+  l1 : foo (),
+
+  translate_or_lose (foo),
+
+  /* l2: foo is translated
+   *
+   * foo used to return [1, 1, 1]
+   */
+  l2 : foo (),
+
+  [is (l2 = l1),
+   l2]);
+[true,
+ [false, false, false]];
+
+(kill (foo, l1, l2), 0);
+0;
+
+/* Bug #3704: Translator gives internal error
+ *
+ * The hyper_to_summand function is from the bug report.
+ */
+
+(hyper_to_summand(e,k) := subst(hypergeometric = lambda([P,Q,x], 
+    P : xreduce("*", map(lambda([zz], pochhammer(zz,k)),P)),
+    Q : xreduce("*", map(lambda([zz], pochhammer(zz,k)),Q)),
+    P*x^k/(k! * Q)),e),
+ l1 : hyper_to_summand (hypergeometric ([1/2], [2/5], x), 2),
+ translate_or_lose (hyper_to_summand),
+ l2 : hyper_to_summand (hypergeometric ([1/2], [2/5], x), 2),
+ [is (l1 = l2), l2]);
+[true, 75 * x^2 / 112];
+
+(foo () := lambda ([], x!),
+ translate_or_lose (foo),
+ block ([x : 5], foo () ()));
+120;
+
+(kill (hyper_to_summand, foo, l1, l2), 0);
+0;
+
+/* go tags can be integers
+ *
+ * This has been allowed, but it used to give a warning and an extra
+ * trivial run through the translator to translate the integer go tags.
+ * Now we allow integers directly without giving a warning.
+ *
+ * We don't actually bother to check for warnings in the test below.
+ * We're really just verifying that using an integer go tag works.
+ */
+
+block ([translate : false],
+  foo () := block ([i : 0], tag, i : i + 1, if i < 5 then go (tag), i),
+  bar () := block ([i : 0], 123, i : i + 1, if i < 5 then go (123), i),
+  l1 : [foo (), bar ()],
+  translate_or_lose (foo, bar),
+  l2 : [foo (), bar ()],
+  [is (l1 = l2), l2]);
+[true, [5, 5]];
+
+(kill (foo, bar, l1, l2), 0);
+0;
+
+/* A bug in MARRAYREF caused things like translated array references
+ * to yield MQAPPLY expressions with an incorrect header.
+ */
+
+block ([translate : false],
+  foo () := 'baz () [1],
+  bar () := 'baz () [1, 2, 3],
+  l1 : [foo (), bar ()],
+  translate_or_lose (foo, bar),
+  l2 : [foo (), bar ()],
+  [is (l1 = l2), l2]);
+[true, ['baz () [1], 'baz () [1, 2, 3]]];
+
+(kill (foo, bar, l1, l2), 0);
+0;
+
+/* A bug in MARRAYREF caused bogus indexing into hash tables and fast
+ * arrays.  This affected things like translated array references.
+ */
+
+block ([translate : false,
+        use_fast_arrays : true],
+
+  foo () := block ([a],
+              a[false] : 'wtf,
+              a[1] : 2,
+              a[1]),
+
+  /* This would correctly yield 2 */
+  l1 : foo (),
+
+  translate_or_lose (foo),
+
+  /* This used to incorrectly yield wtf */
+  l2 : foo (),
+
+  [is (l1 = l2), l2]);
+[true, 2];
+
+(kill (foo, l1, l2), 0);
+0;
+
+/* A bug in MARRAYREF caused things like translated array references
+ * to yield expressions with an incorrect header.
+ */
+
+block ([translate : false],
+  foo () := block ([a],
+              local (a),
+              array (a, complete, 5),
+              a[3]),
+
+  /* This would correctly yield a[3] */
+  l1 : foo(),
+
+  translate_or_lose (foo),
+
+  /* This would incorrectly yield a(3) */
+  l2 : foo(),
+
+  [is (l1 = l2), l2]);
+[true, 'a[3]];
+
+(kill (foo, l1, l2), 0);
+0;
+
+/* When translate_fast_arrays:true, a lisp error would occur at runtime
+ * during an attempted MQAPPLY array assignment
+ */
+
+block ([translate : false],
+  foo () := block ([a],
+              local (a, b),
+              a : make_array ('fixnum, 5),
+              b () := a,
+              b () [3] : 17,
+              b () [3]),
+
+  /* This would correctly yield 17 */
+  l1 : foo(),
+
+  block ([translate_fast_arrays : false],
+    translate_or_lose (foo)),
+
+  /* This would correctly yield 17 */
+  l2 : foo(),
+
+  block ([translate_fast_arrays : true],
+    translate_or_lose (foo)),
+
+  /* This would cause a lisp error */
+  l3 : foo(),
+
+  [is (l1 = l2), is (l2 = l3), l3]);
+[true, true, 17];
+
+(kill (foo, l1, l2, l3), 0);
+0;
+
+/* The string "**" no longer translates to the string "^".
+ * This test compares the interpreted and translated results.
+ */
+
+block ([translate : false],
+  foo () := ["^", "^" (2, 3), apply ("^", [2, 3]),
+             "**", "**" (2, 3), apply ("**", [2, 3])],
+  l1 : foo (),
+  translate_or_lose (foo),
+  l2 : foo (),
+  [l2, is (l1 = l2)]);
+[["^", 8, 8, "**", 8, 8], true];
+
+(kill (foo, l1, l2), 0);
+0;
+
+/* Attempting to translate some atoms like lisp arrays would
+ * cause lisp errors during translation.
+ */
+
+(a : make_array (fixnum, 1),
+ a[0] : 13,
+ define (foo (), a),
+ translate_or_lose (foo),
+ listarray (foo ()));
+[13];
+
+(kill (foo, a), 0);
+0;
+
+/* Simple tests for catch and throw */
+
+block ([translate : false, l1, l2],
+  local (foo, bar, baz),
+
+  foo (p) := if p then throw (13) else 2,
+  bar () := catch (1, foo (false), 3),
+  baz () := catch (1, foo (true), 3),
+
+  l1 : [bar (), baz ()],
+
+  translate_or_lose (foo, bar, baz),
+
+  l2 : [bar (), baz ()],
+
+  [l2, is (l1 = l2)]);
+[[3, 13], true];
+
+/* Translating a define_variable form with translate (but not
+ * translate_file or compfile) used to invoke undefined behavior.
+ * This would cause a lisp error during translation under some
+ * (but not all) lisp implementations.
+ */
+
+block ([translate : false],
+  local (foo),
+  foo () := (define_variable (x, 1, fixnum), x),
+  translate_or_lose (foo),
+  foo ());
+1;
+
+(kill (foo, x), 0);
+0;
+
+/* If local was used on a matchdeclared pattern variable, and this
+ * was all translated with something besides translate_file (e.g.,
+ * translate, compfile, etc.), then the MATCHDECLARE property would
+ * not be on the pattern variable.
+ */
+
+block ([translate : false, l1, l2],
+  local (foo),
+
+  foo () := (local (x), matchdeclare (x, true), let (a * x, x), letsimp (a * q)),
+
+  /* This would yield q */
+  l1 : foo (),
+
+  translate_or_lose (foo),
+
+  /* This used to yield a*q */
+  l2 : foo (),
+
+  [l2, is (l1 = l2)]);
+[q, true];
+
+(kill (foo), 0);
+0;
+
+/* Rest args are now allowed in lambda expressions in MQAPPLY
+ * lambda forms
+ */
+
+block ([translate : false, l1, l2],
+  local (foo, bar, baz),
+
+  /* foo used to fail to translate due to the rest arg */
+  foo () :=
+    block ([x : 1, z : 3],
+      lambda ([[x]], x) (x, x + 1, z)),
+  bar () :=
+    block ([x : 2, z : 4],
+      apply (lambda ([[x]], x), [x, x + 1, z])),
+  baz () :=
+    block ([x : 3, z : 5],
+      block ([f : lambda ([[x]], x)],
+        f (x, x + 1, z))),
+
+  l1 : [foo (), bar (), baz ()],
+
+  translate_or_lose (foo, bar, baz),
+
+  l2 : [foo (), bar (), baz ()],
+
+  [l1, is (l1 = l2)]);
+[[[1, 2, 3],[2, 3, 4],[3, 4, 5]], true];
+
+/* Validation has been improved for lambda expressions in MQAPPLY
+ * lambda forms
+ */
+
+block ([translate : false],
+  local (foo, bar),
+
+  /* These should both fail to translate */
+  foo () := lambda ([]) (),
+  bar () := lambda ([x, x], x) (1, 2),
+
+  translate (foo, bar));
+[];
+
+/* The translation of array functions was broken for decades */
+
+block ([translate : false, l1, l2],
+  local (foo, bar),
+
+  foo[x] := x,
+  bar[n] := if n = 1 then 1 else n * bar[n - 1],
+
+  l1 : [foo[0], foo[5], bar[5], bar[10]],
+
+  translate_or_lose (foo, bar),
+
+  l2 : [foo[0], foo[5], bar[5], bar[10]],
+
+  [l1, is (l1 = l2)]);
+[[0, 5, 120, 3628800], true];
+
+(kill (foo, bar), 0);
+0;
+
+/* The translation of upward funargs (including those created by
+ * subscripted functions) easily lead to lisp errors.
+ */
+
+/* Tests involving returned lambdas without free vars that were
+ * bound during definition
+ */
+block ([l1, l2,
+        translate : false,
+        listarith : true],
+  local (foo, bar, test),
+
+  foo () := lambda ([x], 2 * x + q),
+  bar () := lambda ([x, [y]], x * y + q),
+
+  test () :=
+    block ([f : foo (),
+            b : bar ()],
+      [f (3), f (5), b (2, 3, 4), b (5, 6, 7)]),
+
+  l1 : test (),
+
+  translate_or_lose (foo, bar),
+
+  l2 : test (),
+
+  [l2, is (l1 = l2)]);
+[['q + 6, 'q + 10, ['q + 6, 'q + 8], ['q + 30, 'q + 35]],
+ true];
+
+(kill (foo, bar), 0);
+0;
+
+/* Tests involving returned lambdas with free vars that were
+ * bound during definition.  These do not cause the capture of
+ * values.
+ */
+block ([l1, l2,
+        x : 'ux,
+        translate : false,
+        listarith : true],
+  local (foo, bar, baz, test),
+
+  foo (x) := lambda ([y], x + y + q),
+  bar (x) := lambda ([y, [z]], q + x + y * z),
+  baz (v) := lambda ([], v),
+
+  test () :=
+    block ([f : foo (3),
+            b : bar (4),
+            c : baz (5)],
+      [f (5), b (2, 3, 4), c ()]),
+
+  l1 : test (),
+
+  translate_or_lose (foo, bar, baz),
+
+  l2 : test (),
+
+  [l2, is (l1 = l2)]);
+[['q + 'ux + 5,
+  ['q + 'ux + 6, 'q + 'ux + 8],
+  'v],
+ true];
+
+(kill (foo, bar, baz), 0);
+0;
+
+/* Tests involving subscripted functions.  These do cause the capture
+ * of values.
+ */
+block ([l1, l2,
+        x : 'ux, y : 'uy,
+        translate : false],
+  local (foo, bar, baz, def, test),
+
+  def () := (
+    foo[x, y](a, b) := [x, y, a, b, q],
+    bar[x, y](a, [b]) := [x, y, a, b, q],
+    baz[v]() := v),
+
+  test () :=
+    block ([f : foo[1, 2],
+            b : bar[3, 4],
+            c : baz[5]],
+      [f (6, 7), b (8, 9, 10), c ()]),
+
+  def (),
+
+  l1 : test (),
+
+  /* just kill and redefine */
+
+  kill (foo, bar, baz),
+
+  def (),
+
+  translate_or_lose (foo, bar, baz),
+
+  l2 : test (),
+
+  [l2, is (l1 = l2)]);
+[[[1, 2, 6, 7, 'q],
+  [3, 4, 8, [9, 10], 'q],
+  5],
+ true];
+
+(kill (foo, bar, baz), 0);
+0;
+
+/* More tests involving multiple nested lambdas */
+block ([l1, l2,
+        x : 'ux, y : 'uy, z : 'uz,
+        translate : false],
+  local (foo, bar, baz, quux, def, test),
+
+  def () := (
+    /* nothing should be captured */
+    foo (x) := lambda ([y], lambda ([z], [x, y, z])),
+    /* x should be captured and used */
+    bar[x](y) := lambda ([z], [x, y, z]),
+    /* x should be captured and used */
+    baz[x](y) := lambda ([z], lambda ([], [x, y, z])),
+    /* nothing should be captured since x is bound by the inner lambda */
+    quux[x](y) := lambda ([x], [x, y])),
+
+  test () :=
+    block ([a : foo (1),
+            b : bar[2],
+            c : baz[3],
+            d : quux[4]],
+      [a (10) (11), b (12) (13), c (14) (15) (), d (16) (17)]),
+
+  def (),
+
+  l1 : test (),
+
+  /* just kill and redefine */
+
+  kill (foo, bar, baz, quux),
+
+  def (),
+
+  translate_or_lose (foo, bar, baz, quux),
+
+  l2 : test (),
+
+  [l2, is (l1 = l2)]);
+[[['ux, 'uy, 11],
+  [2, 'uy, 13],
+  [3, 'uy, 'uz],
+  [17, 'uy]],
+ true];
+
+(kill (foo, bar, baz, quux), 0);
+0;
+
+/* The translator was not correctly determining the mode of expressions
+ * when a boolean mode was involved.
+ *
+ * It was easy to get lisp errors.
+ */
+block ([translate : false, l1, l2],
+  local (test),
+
+  foo () :=
+    [  1 + if true then 0,
+       1 + if true then 0.0,
+     1.0 + if true then 0,
+     1.0 + if true then 0.0,
+
+       1 + if false then 0,
+       1 + if false then 0.0,
+     1.0 + if false then 0,
+     1.0 + if false then 0.0],
+
+  bar (x) :=
+    [  1 + if x then 0,
+       1 + if x then 0.0,
+     1.0 + if x then 0,
+     1.0 + if x then 0.0],
+
+  test () :=
+    block ([res : []],
+      for prederror in [true, false] do
+        push (foo (), res),
+        for x in [true, false] do
+          push (bar (x), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo, bar),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo, bar), 0);
+0;
+
+/*
+ * Bug #4008: translator and prederror
+ */
+
+(kill (pred, foo, bar, x, r), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  foo (n, q, x) :=
+    [if true then q + r,
+     if false then q + r,
+
+     if x then q,
+     if not x then q,
+     if not not x then q,
+     if not not not x then q,
+
+     n + if x then q + r,
+     n + if not x then q + r,
+     n + if not not x then q + r,
+     n + if not not not x then q + r],
+
+  test () :=
+    block ([res : []],
+      for prederror in [true, false] do
+        for n in [1, 1.0, %i, 1.0 * %i] do
+          for q in [1, 1.0, %i, 1.0 * %i, 'z] do
+            for x in [true, false] do
+              push (foo (n, q, x), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  foo (x, y) :=
+    block ([q : 'z],
+      [if "and" () then q else r,
+       if "and" (x) then q else r,
+       if "and" (y) then q else r,
+       if x and y then q else r,
+       if not x and y then q else r,
+       if x and not y then q else r,
+       if not x and not y then q else r,
+       if not (x and y) then q else r,
+       if not (not x and y) then q else r,
+       if not (x and not y) then q else r,
+       if not (not x and not y) then q else r,
+
+       if "or" () then q else r,
+       if "or" (x) then q else r,
+       if "or" (y) then q else r,
+       if x or y then q else r,
+       if not x or y then q else r,
+       if x or not y then q else r,
+       if not x or not y then q else r,
+       if not (x or y) then q else r,
+       if not (not x or y) then q else r,
+       if not (x or not y) then q else r,
+       if not (not x or not y) then q else r]),
+
+  test () :=
+    block ([res : []],
+      for prederror in [true, false] do
+        for x in [true, false] do
+          for y in [true, false] do
+            push (foo (x, y), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test, make_fun),
+
+  make_fun (name, pr) ::=
+    buildq ([name, pr],
+      name (x, y) :=
+        block ([q : 'z],
+          [pr ("and" ()),
+           pr ("and" (x)),
+           pr ("and" (y)),
+           pr (x and y),
+           pr (not x and y),
+           pr (x and not y),
+           pr (not x and not y),
+           pr (not (x and y)),
+           pr (not (not x and y)),
+           pr (not (x and not y)),
+           pr (not (not x and not y)),
+
+           pr ("or" ()),
+           pr ("or" (x)),
+           pr ("or" (y)),
+           pr (x or y),
+           pr (not x or y),
+           pr (x or not y),
+           pr (not x or not y),
+           pr (not (x or y)),
+           pr (not (not x or y)),
+           pr (not (x or not y)),
+           pr (not (not x or not y))])),
+
+  make_fun (foo, is),
+  make_fun (bar, maybe),
+
+  test () :=
+    block ([res : []],
+      for prederror in [true, false] do
+        for x in [true, false] do
+          for y in [true, false] do (
+            push (foo (x, y), res),
+            push (bar (x, y), res)),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo, bar),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo, bar), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  pred (a, b) := equal (a, b),
+
+  foo (x, y) :=
+    block ([q : 'z],
+      [if x < y then q else r,
+       if not (x < y) then q else r,
+       if x <= y then q else r,
+       if not (x <= y) then q else r,
+       if x > y then q else r,
+       if not (x > y) then q else r,
+       if x >= y then q else r,
+       if not (x >= y) then q else r,
+
+       if x = y then q else r,
+       if x # y then q else r,
+       if not (x = y) then q else r,
+       if not (x # y) then q else r,
+       if not not (x = y) then q else r,
+       if not not (x # y) then q else r,
+       if not not not (x = y) then q else r,
+       if not not not (x # y) then q else r,
+
+       if equal (x, y) then q else r,
+       if notequal (x, y) then q else r,
+       if not equal (x, y) then q else r,
+       if not not equal (x, y) then q else r,
+       if not notequal (x, y) then q else r,
+       if not not not equal (x, y) then q else r,
+       if not not notequal (x, y) then q else r,
+
+       if pred (x, y) then q else r,
+       if not pred (x, y) then q else r,
+       if not not pred (x, y) then q else r,
+       if not not not pred (x, y) then q else r]),
+
+  test () :=
+    block ([res : []],
+      for prederror in [true, false] do
+        for x in [1, 2] do
+          for y in [1, 2] do
+            push (foo (x, y), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (pred, foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (pred, foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test, make_fun),
+
+  pred (a, b) := equal (a, b),
+
+  make_fun (name, pr) ::=
+    buildq ([name, pr],
+      name (x, y) :=
+        block ([q : 'z],
+          [pr (x = y),
+           pr (x # y),
+           pr (not (x = y)),
+           pr (not (x # y)),
+           pr (not not (x = y)),
+           pr (not not (x # y)),
+           pr (not not not (x = y)),
+           pr (not not not (x # y)),
+
+           pr (equal (x, y)),
+           pr (not equal (x, y)),
+           pr (notequal (x, y)),
+           pr (not not equal (x, y)),
+           pr (not notequal (x, y)),
+           pr (not not not equal (x, y)),
+           pr (not not notequal (x, y)),
+
+           pr (pred (x, y)),
+           pr (not pred (x, y)),
+           pr (not not pred (x, y)),
+           pr (not not not pred (x, y))])),
+
+  make_fun (foo, is),
+  make_fun (bar, maybe),
+
+  test () :=
+    block ([res : []],
+      for prederror in [true, false] do
+        for x in [1, 2] do
+          for y in [1, 2] do (
+            push (foo (x, y), res),
+            push (bar (x, y), res)),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (pred, foo, bar),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (pred, foo, bar), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  foo (x, q) :=
+    [if (1, 2, q, x) then q else r,
+     if not (1, 2, q, x) then q else r,
+     if (1, 2, q, not x) then q else r],
+
+  test () :=
+    block ([res : []],
+      for prederror in [true, false] do
+        for x in [true, false] do
+          push (foo (x, 17), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test, make_fun),
+
+  make_fun (name, pr) ::=
+    buildq ([name, pr],
+      name (x, y) :=
+        [pr (x),
+         pr (not x),
+         pr (not not x),
+         pr (not not not x),
+
+         pr (y),
+         pr (not y),
+         pr (not not y),
+         pr (not not not y),
+
+         pr (x and y),
+         pr (x or y),
+         pr (not (x and y)),
+         pr (not (x or y)),
+         pr (not not (x and y)),
+         pr (not not (x or y)),
+         pr (not not not (x and y)),
+         pr (not not not (x or y)),
+
+         pr (x and not y),
+         pr (x or not y),
+         pr (x and not not y),
+         pr (x or not not y),
+         pr (not (x and not y)),
+         pr (not (x or not y)),
+         pr (not (x and not not y)),
+         pr (not (x or not not y)),
+
+         pr (not x and y),
+         pr (not x or y),
+         pr (not not x and y),
+         pr (not not x or y),
+         pr (not (not x and y)),
+         pr (not (not x or y)),
+         pr (not (not not x and y)),
+         pr (not (not not x or y)),
+
+         pr (not x and not y),
+         pr (not x or not y),
+         pr (not (not x and not y)),
+         pr (not (not x or not y)),
+
+         pr (x > 1),
+         pr (not x > 1),
+         pr (x > 1 and y),
+         pr (x > 1 or y),
+         pr (x > 1 and not y),
+         pr (x > 1 or not y),
+         pr (not x > 1 and y),
+         pr (not x > 1 or y),
+         pr (not x > 1 and not y),
+         pr (not x > 1 or not y),
+
+         pr (y <= 1),
+         pr (not y <= 1),
+         pr (x and y <= 1),
+         pr (x or y <= 1),
+         pr (x and not y <= 1),
+         pr (x or not y <= 1),
+         pr (not x and y <= 1),
+         pr (not x or y <= 1),
+         pr (not x and not y <= 1),
+         pr (not x or not y <= 1)]),
+
+  make_fun (foo, is),
+  make_fun (bar, maybe),
+
+  test () :=
+    block ([prederror : false,
+            l : [true, false, 1, 2.0, 'q, 'q ()],
+            res : []],
+      for x in l do
+        for y in l do (
+          push (foo (x, y), res),
+          push (bar (x, y), res)),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo, bar),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo, bar), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test, make_fun),
+
+  make_fun (name, pr) ::=
+    buildq ([name, pr],
+      name (x) :=
+        [pr (x <  1),
+         pr (x <= 1),
+         pr (x >  1),
+         pr (x >= 1),
+
+         pr (not (x <  1)),
+         pr (not (x <= 1)),
+         pr (not (x >  1)),
+         pr (not (x >= 1)),
+
+         pr (not not (x <  1)),
+         pr (not not (x <= 1)),
+         pr (not not (x >  1)),
+         pr (not not (x >= 1)),
+
+         pr (x = 1),
+         pr (x # 1),
+         pr (not (x = 1)),
+         pr (not (x # 1)),
+         pr (not not (x = 1)),
+         pr (not not (x # 1)),
+
+         pr (equal (x, 1)),
+         pr (notequal (x, 1)),
+         pr (not equal (x, 1)),
+         pr (not notequal (x, 1)),
+         pr (not not equal (x, 1)),
+         pr (not not notequal (x, 1))]),
+
+  make_fun (foo, is),
+  make_fun (bar, maybe),
+
+  test () :=
+    block ([res : []],
+      block ([prederror : true],
+        push (errcatch (foo ('z)), res)),
+      block ([prederror : false,
+              l : [0, 0.0, 0.0b0,
+                   1, 1.0, 1.0b0,
+                   2, 2.0, 2.0b0,
+                   %i, 1.0 * %i, 1.0b0 * %i,
+                   2 * %i, 2.0 * %i, 2.0b0 * %i,
+                   true, false,
+                   'z, 'z ()]],
+        for x in l do (
+          push (foo (x), res),
+          push (bar (x), res))),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo, bar),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo, bar), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  foo (x, q, prederror) :=
+    block ([r],
+      [if x then 0,
+       if not x then 0,
+       if not not x then 0,
+       if not not not x then 0,
+       if x then q + r,
+       if not x then q + r,
+       if not not x then q + r,
+       if not not not x then q + r,
+       if x then 1 else 2,
+       if not x then 1 else 2,
+       if not not x then 1 else 2,
+       if not not not x then 1 else 2,
+       if x then x else q + r,
+       if not x then x else q + r,
+       if not not x then x else q + r,
+       if not not not x then x else q + r,
+       if x = 1 then x else q + r,
+       if x # 1 then x else q + r,
+       if not x = 1 then x else q + r,
+       if not x # 1 then x else q + r,
+       if not not x = 1 then x else q + r,
+       if not not x # 1 then x else q + r,
+       if not not not x = 1 then x else q + r,
+       if not not not x # 1 then x else q + r]),
+
+  test () :=
+    block ([l : [true, false, 1, 2.0, 3.0b0, 'z, 'z ()],
+            res : []],
+      push (errcatch (foo (1, 2, true)), res),
+      for x in l do
+        for q in l do
+          push (foo (x, q, false), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (rewritehack, eqhack, test),
+
+  /* Take a relational expr and potentially rewrite it in some
+   * equivalent way, e.g.  x<1  =>  1-x>0
+   */
+  rewritehack (r) :=
+    eval_string_lisp ("(apply #'mevalp2 $r (mop $r) (margs $r))")[1],
+
+  /* Translated code can produce relational exprs that are in a
+   * different, but equivalent, form compared to the exprs produce
+   * by interpreted code.
+   *
+   * Compare two conditionals by requiring that everything matches
+   * exactly, except possibly the first (only) test.  The tests
+   * should match exactly after applying rewritehack to them.
+   */
+  eqhack (interp, transl) :=
+    if atom (interp) or atom (transl) or op (interp) # "if" or op (transl) # "if" then
+      is (interp = transl)
+    else
+      is (rest (interp) = rest (transl)
+          and
+          rewritehack (first (interp)) = rewritehack (first (transl))),
+
+  foo (x) :=
+    block ([r],
+      [if x <  1 then x else r,
+       if x <= 1 then x else r,
+       if x >  1 then x else r,
+       if x >= 1 then x else r,
+
+       if not (x <  1) then x else r,
+       if not (x <= 1) then x else r,
+       if not (x >  1) then x else r,
+       if not (x >= 1) then x else r,
+
+       if not not (x <  1) then x else r,
+       if not not (x <= 1) then x else r,
+       if not not (x >  1) then x else r,
+       if not not (x >= 1) then x else r,
+
+       if x = 1 then x else r,
+       if x # 1 then x else r,
+       if not (x = 1) then x else r,
+       if not (x # 1) then x else r,
+       if not not (x = 1) then x else r,
+       if not not (x # 1) then x else r,
+
+       if equal (x, 1) then x else r,
+       if notequal (x, 1) then x else r,
+       if not equal (x, 1) then x else r,
+       if not notequal (x, 1) then x else r,
+       if not not equal (x, 1) then x else r,
+       if not not notequal (x, 1) then x else r]),
+
+  test () :=
+    block ([res : []],
+      block ([prederror : true],
+        push (errcatch (foo ('z)), res)),
+      block ([prederror : false,
+              l : [0, 0.0, 0.0b0,
+                   1, 1.0, 1.0b0,
+                   2, 2.0, 2.0b0,
+                       %i, 1.0 * %i, 1.0b0 * %i,
+                   2 * %i, 2.0 * %i, 2.0b0 * %i,
+                   true, false,
+                   'z, 'z ()]],
+        for x in l do
+          res : append (foo (x), res)),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo),
+
+  l2 : test (),
+
+  every (eqhack, l1, l2));
+true;
+
+(kill (foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  foo (x, y, z) :=
+    block ([r],
+      [if x >  0 and y >  0 and z >  0 then x + y = z else r,
+       if x >  0 or  y >  0 or  z >  0 then x + y = z else r,
+       if x >= 1 and y >= 1 and z >= 1 then x + y = z else r,
+       if x >= 1 or  y >= 1 or  z >= 1 then x + y = z else r,
+       if x <= 2 and y <= 2 and z <= 2 then x + y = z else r,
+       if x <= 2 or  y <= 2 or  z <= 2 then x + y = z else r,
+       if x <  3 and y <  3 and z <  3 then x + y = z else r,
+       if x <  3 or  y <  3 or  z <  3 then x + y = z else r]),
+
+  test () :=
+    block ([l : [1, 2.0, 3.0b0, %i],
+            res : []],
+      for x in l do
+        for y in l do
+          for z in l do
+            push (foo (x, y, z), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  foo (p, x, y, z) :=
+    (modedeclare (p, boolean, x, fixnum, y, flonum, z, number),
+      block ([r],
+        [if p and x >  0 and y >  0 and z >  0 then x + y - z else r,
+         if p or  x >  0 or  y >  0 or  z >  0 then x + y - z else r,
+         if p and x >= 1 and y >= 1 and z >= 1 then x + y - z else r,
+         if p or  x >= 1 or  y >= 1 or  z >= 1 then x + y - z else r,
+         if p and x <= 2 and y <= 2 and z <= 2 then x + y - z else r,
+         if p or  x <= 2 or  y <= 2 or  z <= 2 then x + y - z else r,
+         if p and x <  3 and y <  3 and z <  3 then x + y - z else r,
+         if p or  x <  3 or  y <  3 or  z <  3 then x + y - z else r,
+
+         if p and x >  y and y >  z and z >  3 then x + y + z else r,
+         if p or  x >  y or  y >  z or  z >  3 then x + y + z else r,
+         if p and x >= y and y >= z and z >= 2 then x + y + z else r,
+         if p or  x >= y or  y >= z or  z >= 2 then x + y + z else r,
+         if p and x <= y and y <= z and z <= 1 then x + y + z else r,
+         if p or  x <= y or  y <= z or  z <= 1 then x + y + z else r,
+         if p and x <  y and y <  z and z <  0 then x + y + z else r,
+         if p or  x <  y or  y <  z or  z <  0 then x + y + z else r])),
+
+  test () :=
+    block ([bool : [true, false],
+            fixl : [0, 1, 2, 3, 4],
+            flol : [0.0, 1.0, 2.0, 3.0, 4.0],
+            numl : [0, 1.0, 2, 3.0, 4],
+            res : []],
+      for p in bool do
+        for x in fixl do
+          for y in flol do
+            for z in numl do
+              push (foo (p, x, y, z), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo, p, x, y, z), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  foo (p, x, y, z) :=
+    block ([r],
+      [if p and x and y and z then x + y = z else r,
+       if p or  x or  y or  z then x + y = z else r,
+
+       if p and equal (x, 1) and equal (y, 1) and equal (z, 1) then x + y = z else r,
+       if p or  equal (x, 1) or  equal (y, 1) or  equal (z, 1) then x + y = z else r,
+
+       if not p and not equal (x, 1) and not equal (y, 1) and not equal (z, 1) then x + y = z else r,
+       if not p or  not equal (x, 1) or  not equal (y, 1) or  not equal (z, 1) then x + y = z else r,
+
+       if p and notequal (x, 1) and notequal (y, 1) and notequal (z, 1) then x + y = z else r,
+       if p or  notequal (x, 1) or  notequal (y, 1) or  notequal (z, 1) then x + y = z else r,
+
+       if not p and not notequal (x, 1) and not notequal (y, 1) and not notequal (z, 1) then x + y = z else r,
+       if not p or  not notequal (x, 1) or  not notequal (y, 1) or  not notequal (z, 1) then x + y = z else r]),
+
+  test () :=
+    block ([prederror : false,
+            l : [true, false, 1, 2.0, 3.0b0, %i, 'z, 'z ()],
+            res : []],
+      for p in [true, false] do
+        for x in l do
+          for y in l do
+            for z in l do
+              push (foo (p, x, y, z), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  pred (a, b) := equal (a, b),
+
+  foo (x, q) :=
+    block ([r, var1, var2, v1 : 'var1, v2 : 'var2],
+      [if pred (x, 1) then x,
+       if not pred (x, 1) then x,
+       if pred (x, 1) or pred (x, 2) then x,
+       if pred (x, 1) then x else q + r,
+       if not pred (x, 1) then x else q + r,
+       if pred (x, 1) or pred (x, 2) then x else q + r,
+       if pred (x, 1) then f (x + q) elseif pred (x, 2) then g (x + q) elseif pred (x, q) then v1 :: r * x else var1 : q * r,
+       if pred (x, 1) then f (x + q) else if pred (x, 2) then g (x + q) else if pred (x, q) then v2 :: r * x else var2 : q * r,
+       if pred (x, 1) and q then f (x + q) elseif pred (x, 2) or q then g (x + q) elseif not pred (x, q) then v1 :: r * x else var1 : q * r,
+       if pred (x, 1) and q then f (x + q) else if pred (x, 2) or q then g (x + q) else if not pred (x, q) then v2 :: r * x else var2 : q * r,
+       if pred (x, 1) and not q then f (x + q) elseif pred (x, 2) or not q then g (x + q) elseif not pred (x, q) then v1 :: r * x else var1 : q * r,
+       if pred (x, 1) and not q then f (x + q) else if pred (x, 2) or not q then g (x + q) else if not pred (x, q) then v2 :: r * x else var2 : q * r]),
+
+  test () :=
+    block ([res : []],
+      block ([prederror : false],
+        push (errcatch (foo (true, false)), res)),
+      block ([prederror : false,
+              l : [true, false, 1, 2.0, 3.0b0, %i, 'z, 'z ()]],
+        for x in l do
+          for q in l do
+            push (foo (x, q), res)),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (pred, foo),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (pred, foo), 0);
+0;
+
+block ([translate : false, l1, l2],
+  local (test),
+
+  /* I really want push(x,a) below in foo, bar and baz,
+   * but the translation of the push special form just
+   * punts to MEVAL.  I want the loop bodies translated
+   * better than that, especially in baz, so just do
+   * a:cons(x,a) everywhere here.
+   */
+
+  foo () :=
+    [block ([a : []],
+       for x : 1 thru 5 do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 while x < 3 do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 while x > 3 do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 while x < 10 do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 while x > 10 do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 unless x < 3 do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 unless x > 3 do a : cons (x, a),
+       a)],
+
+  bar (p) :=
+    [block ([a : []],
+       for x : 1 thru 5 while p do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 while x < 3 and p do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 while x < 3 or p do a : cons (x, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 while x < 10 or 'z do a : cons (x, a),
+       a)],
+
+  baz () :=
+    [block ([a : []],
+       for x : 1 thru 5 do a : cons (if x then x else false, a),
+       a),
+     block ([a : []],
+       for x : 1 thru 5 while x < 3 do a : cons (if x then x else false, a),
+       a)],
+
+  test () :=
+    block ([res : []],
+      push (foo (), res),
+      for p in [true, false] do
+        push (bar (p), res),
+      push (baz (), res),
+      push (errcatch (bar ('z)), res),
+      res),
+
+  l1 : test (),
+
+  translate_or_lose (foo, bar, baz),
+
+  l2 : test (),
+
+  is (l1 = l2));
+true;
+
+(kill (foo, bar, baz), 0);
+0;
+
+
+
+
+
+/*** KILLING THESE FUNCTIONS SHOULD BE THE LAST TEST IN THIS FILE ***/
+(kill (translate_or_lose, compile_or_lose), 0);
+0;
+/*** THERE SHOULD BE NO TESTS BEYOND THIS POINT ***/

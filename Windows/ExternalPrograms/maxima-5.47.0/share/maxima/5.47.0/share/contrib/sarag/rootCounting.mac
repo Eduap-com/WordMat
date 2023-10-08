@@ -1,0 +1,841 @@
+/* ---------------------------------------------------------------- */
+/* SARAG - Root Counting                                            */
+/* by Fabrizio Caruso  modified by Alexandre Le meur and Marie-Françoise Roy              */
+
+
+/* Verbosity levels */
+NONVERBOSE : 0;
+SUMMARY : 1;
+NORMAL : 2;
+VERY : 3;
+EXTRA : 4;
+
+padWithZeros(seq,size) :=
+  append(seq,makelist(0,i,1,size-length(seq)));
+
+/* signed pseudo-remainder of p divised by q*/
+sPsRem(p,q,var):=
+if degree(p,var)<degree(q,var) then p
+else (if remainder(degree(p,var)-degree(q,var),2)=1 then
+remainder(leadCoeff(q,var)**(degree(p,var)-degree(q,var)+1)*p,q,var)
+else remainder(leadCoeff(q,var)**(degree(p,var)-degree(q,var)+2)*p,q,var)
+) /* end else */
+;
+
+/* Signed Remainder Sequence */
+sRem(a,b,var) :=
+  block([aa,bb,rOld,rNew,quo,res,seq,srsRes],
+  
+  aa : expandIf(a),
+  bb : expandIf(b),
+
+  rOld : aa,
+  rNew : bb,
+  srsRes : [aa],
+
+  while not(rNew = 0) do
+    (
+    srsRes : endcons(rNew,srsRes), 
+
+    res : remainder(rOld,rNew,var),
+
+    rOld : rNew,
+    rNew : -res
+    ), /* end while */
+  
+  return(srsRes)
+  ); /* end proc */
+
+
+
+/* Extended Signed Remainder Sequence */
+sRemExt(a,b,var) :=
+  block([rOld,rNew,uOld,uNew,vOld,vNew,rRes, uRes, vRes,quo,rList,uList,vList,rAux,uAux,vAux],
+  
+  a : expandIf(a),
+  b : expandIf(b),
+
+  rOld : a,
+  rNew : b,
+  uOld : 1, vOld : 0,
+  uNew : 0, vNew : 1,
+  rList : [a],
+  uList : [uOld],
+  vList : [vOld],
+
+  while not(rNew = 0 ) do
+     (
+     rList : endcons(rNew,rList),
+     uList : endcons(uNew,uList),
+     vList : endcons(vNew,vList),
+
+     rRes : divide(rOld,rNew,var),
+
+     quo : first(rRes),
+     
+     rAux : rNew,
+     uAux : uNew,
+     vAux : vNew,
+
+     uNew : ratexpand(-uOld + quo*uNew),
+     vNew : ratexpand(-vOld + quo*vNew),
+
+     rOld : rAux,
+     uOld : uAux,
+     vOld : vAux,
+     rNew : -second(rRes)
+
+     ),/* end while */
+  return([rList,endcons(uNew,uList),endcons(vNew,vList)])
+  );/* end proc */
+      
+
+/* It counts the sign change of a determinant after */
+/* i consecutive row changes */
+revRowsCount(i) := (-1)^(i*(i-1)/2);
+
+/* ------------------------------------------------------- */
+/* Part concerning the computation of signed subresultants */
+
+
+sSubResPol(p,q,var) :=
+  block([pp,qq,degA,degB,i,j,k,h,lcA,lcB,delta,
+         SR,s,sOld,res],
+    
+    pp : expandIf(p),
+    qq : expandIf(q),
+    
+    degA : degree(pp,var),
+    degB : degree(qq,var),
+    if degA<=degB then
+      (
+      print("sSubRes) Error: inconsistent degrees"),
+      return(false)
+      ), /* end if */
+    
+    SR : make_array('any,degA+1),
+    s : make_array('any,degA+1),
+    sOld : make_array('any,degA+1),
+
+
+    lcA : leadCoeff(pp,var),
+    lcB : leadCoeff(qq,var),
+
+    SR[degA] : pp,
+  s[degA] : 1,
+      
+    sOld[degA] : 1,
+
+    SR[degA-1] : qq,
+    sOld[degA-1] : lcB,
+
+    i : degA + 1,
+    j : degA,
+
+    while j>=1 and not(SR[j-1]=0) do
+      (
+      
+      k : degree(SR[j-1],var),
+     
+      if k = j-1 then
+        (
+        s[j-1] : sOld[j-1],
+        
+        if k>=1 then
+           SR[k-1] : NORM_ALGORITHM(-remainder(s[j-1]^2*SR[i-1],SR[j-1],var)/
+                         (s[j]*sOld[i-1]))
+        ), /* end if */
+      if k < j-1 then
+        (
+        /* Computation of s[k] */
+        for delta : 1 thru min(j-k-1,j-1) do
+           sOld[j-delta-1] : (-1)^delta * (sOld[j-1]*sOld[j-delta])/s[j],
+        s[k] : sOld[k],
+        s[j-1] : 0,
+        SR[k] : NORM_ALGORITHM(s[k]*SR[j-1]/sOld[j-1]),
+        
+        for h : k+1 thru j-2 do
+          (
+          SR[h] : 0,
+          s[h] : 0
+          ), /* end for */
+        
+        /* Computation of SR[k-1] */
+        /* ratexpand or expand */
+        if k>= 1 then 
+          SR[k-1] : NORM_ALGORITHM(-remainder(sOld[j-1]*s[k]*SR[i-1],
+                                             SR[j-1],var)/
+                         (s[j]*sOld[i-1]))
+        ), /* end if */
+      
+      if k>= 1 then
+         sOld[k-1] : leadCoeff(SR[k-1],var),
+      i : j,
+      j : k
+   
+      ), /*end while */
+
+
+res : padWithZeros(makelist(SR[degA-i],i,0,degA-j),degA+1),
+
+     return(res)
+ ); /* end proc */
+
+
+
+sSubResCoeff(p,q,var) :=
+block([s,pp,qq],
+pp:expand(p),
+qq:expand(q),
+s :  sSubResPol(pp,qq,var),
+return(
+makelist(coeff(s[j],var,degree(pp,var)+1-j),j,1,degree(pp,var)+1)
+)
+);
+
+
+
+/* Extended Signed Subresultant Sequence      */
+/* Algorithm 8.75                             */
+/* (A variation of this algorithm is used in  */
+/* Algorithm 9.47 and Algorithm 10.17         */
+
+
+/* Extended Signed Subresultant Sequence*/
+
+sSubResExt(a,b,var) :=
+  sSubResExtVerbose(a,b,var,DEFAULT_VERBOSITY);
+
+sSubResExtVerbose(a,b,var,verbosity) :=
+   block([q,degA,degB,i,j,k,lcA,lcB,delta,
+          SR:make_array('any),s:make_array('any),sOld:make_array('any),
+          u:make_array('any),v:make_array('any)],
+   
+   a : expandIf(a),
+   b : expandIf(b),
+  
+   degA : degree(a,var),
+   degB : degree(b,var),
+   if degA<=degB then
+      (
+      print("sSubResExt) Error: inconsistent degrees"),
+      return(false)
+      ),
+
+
+   SR : make_array('any,degA+1),
+   s : make_array('any,degA+1),
+   sOld : make_array('any,degA+1),
+   u : make_array('any,degA+2),
+   v : make_array('any,degA+2),
+
+
+   lcA : leadCoeff(a,var),
+   lcB : leadCoeff(b,var),
+
+   SR[degA] : a,
+
+
+      s[degA] : 1,
+      
+   sOld[degA] : s[degA],
+   SR[degA-1] : b,
+    
+   sOld[degA-1] : lcB,
+
+   u[degA+1] : 1,
+   v[degA+1] : 0,
+   u[degA-1+1] : 0,
+   v[degA-1+1] : 1,
+
+   i : degA + 1,
+   j : degA,
+  
+   while j>=1 and not(SR[j-1]=0) do
+     (
+     k : degree(SR[j-1],var),
+     if verbosity>=EXTRA then
+        (
+        print("sSubResExt) j : ", j),
+        print("sSubResExt) k : ", k)
+        ),
+     if k = j-1 then
+       (
+       
+       s[j-1] : sOld[j-1],
+       q : quotient(s[j-1]^2 * SR[i-1], SR[j-1],var),
+       if verbosity >= VERY then
+         print("sSubResExt) q : ", q),
+
+       if k>=1 then                
+         SR[k-1] : NORM_ALGORITHM((-s[j-1]^2 * 
+                                 SR[i-1] + q * SR[j-1])/(s[j]*sOld[i-1])),
+         
+        
+       u[k-1+1] : NORM_ALGORITHM((-s[j-1]^2 * 
+                                u[i-1+1] + q * u[j-1+1])/(s[j]*sOld[i-1])),
+       v[k-1+1] : NORM_ALGORITHM((-s[j-1]^2 * 
+                                v[i-1+1] + q * v[j-1+1])/(s[j]*sOld[i-1]))
+        
+       ),
+
+     if k<j-1 then
+       ( 
+       s[j-1] : 0,
+       /*  Computation of s[k] */ 
+       for delta : 1 thru min(j-k-1,j-1) do
+          sOld[j-delta-1] : (-1)^delta * (sOld[j-1]*sOld[j-delta])/s[j],
+             
+       if k>=0 then
+         (
+         s[k] : sOld[k],
+             
+         SR[k] : NORM_ALGORITHM(s[k]*SR[j-1]/sOld[j-1])
+         ),
+       u[k+1] : NORM_ALGORITHM(s[k]*u[j-1+1]/sOld[j-1]),
+       v[k+1] : NORM_ALGORITHM(s[k]*v[j-1+1]/sOld[j-1]),
+         
+        
+       for h : k+1 thru j-2 do
+          (
+          SR[h] : 0,
+          u[h+1] : 0,
+          v[h+1] : 0,
+          s[h] : 0
+          ),
+     
+       /* Computation of SR[k-1], u[k-1], v[k-1] */ 
+       q : quotient(s[k]*sOld[j-1]*SR[i-1],SR[j-1],var),
+       if k>=1 then
+         SR[k-1] : NORM_ALGORITHM((-sOld[j-1] * s[k] * SR[i-1] + 
+                           q * SR[j-1])/(s[j]*sOld[i-1])),
+   
+       u[k-1+1] : NORM_ALGORITHM((-sOld[j-1] * s[k] * u[i-1+1] + 
+                           q * u[j-1+1])/(s[j]*sOld[i-1])),
+       v[k-1+1] : NORM_ALGORITHM((-sOld[j-1] * s[k] * v[i-1+1] + 
+                          q * v[j-1+1])/(s[j]*sOld[i-1]))
+         
+       ),
+
+     if k>=1 then     
+        sOld[k-1] : leadCoeff(SR[k-1],var),
+     i : j,
+     j : k,
+      
+     if verbosity>= NORMAL and k>= 1 then
+        print("sSubResExt) SR[", k-1,"] : ", SR[k-1])
+     ),
+for h : 0 thru j-2 do
+   (
+   SR[h] : 0,
+   s[h] : 0,
+   u[h+1] : 0,
+   v[h+1] : 0
+   ),
+
+
+  s[degA]:lcA,
+
+return(
+       [padWithZeros(makelist(SR[degA-i],i,0,degA-j),degA+1),
+        makelist(u[degA-i+1],i,0,degA-j+1),
+        makelist(v[degA-i+1],i,0,degA-j+1)])
+);
+
+
+/* last non zero element of a sequence */
+
+lastNonZero(seq) :=
+block([i],
+  for i:1 thru length(seq) do
+    if not(seq[length(seq)-i+1] = 0) then
+      return(seq[length(seq)-i+1])
+);  /* end proc */
+
+/* index of last non zero element of a sequence */
+lastNonZeroIndex(seq) :=
+block([i],
+  for i:1 thru length(seq) do
+    if not(seq[length(seq)-i+1] = 0) then
+      return(length(seq)-i+1)
+);  /* end proc */
+
+/* index of first non zero element of a sequence */
+firstNonZeroIndex(seq) :=
+block([i],
+  for i:1 thru length(seq) do
+    if not(seq[i] = 0) then
+      return(i)
+);  /* end proc */
+         
+/* Gcd and Gcd-Free part computation */
+/* It outputs : */
+/* gcd(p,q) and p/gcd(p,q) */
+
+gcdFreePart(p,q,var) :=
+block([r],
+r:sSubResExt(ratexpand(p),sPsRem(ratexpand(q),ratexpand(p),var),var),
+return ([lastNonZero(r[1]),lastNonZero(r[3])])
+); /* end proc */
+
+
+gcdFreePartWithZ(p,q,var) :=
+block([r,u,v,c],
+r:sSubResExt(p,sPsRem(ratexpand(q),ratexpand(p),var),var),
+c:leadCoeff(expand(p),var),
+v:lastNonZero(r[3]),
+return ([ratexpand(c*lastNonZero(r[1])/leadCoeff(lastNonZero(r[1]),var)),ratexpand(c*v/leadCoeff(v,var))])
+); /*  end proc */
+
+
+
+sSubResCoeffLast(p,q,var) :=
+  last(sSubResCoeff(p,q,var));
+
+sylvesterResultant(p,q,var) :=
+  block([aux,pp ,qq],
+    pp : expandIf(p),
+    qq : expandIf(q),
+    if degree(pp,var)>degree(qq,var) then
+      return(epsilon(degree(pp,var))*sSubResCoeffLast(pp,qq,var))
+    else
+      if degree(pp,var)<degree(qq,var) then
+        return((-1)^(degree(pp,var)*degree(pp,var))*sylvesterResultant(qq,pp,var))
+      else
+        (
+        aux : expand(leadCoeff(pp,var)*qq-leadCoeff(qq,var)*pp),
+       
+        return(expand(epsilon(degree(pp,var))*sSubResCoeffLast(pp,aux,var)/leadCoeff(pp,var)^degree(aux,var)))
+        ) /* end else */
+      ); /* end proc */
+
+
+
+subDiscr(p,var) :=
+  block([pcRes,pRes,cRes],
+    pcRes : sSubRes(p,diff(p,var),var),
+    pRes : first(pcRes/leadCoeff(expand(p),var)),
+    pRes : cons(first(pRes),expand(rest(pRes)/leadCoeff(expand(p),var))),
+    cRes : second(pcRes),
+    cRes :  cons(first(cRes),expand(rest(cRes)/leadCoeff(expand(p),var))),
+    return([pRes,cRes])
+    ); /* end proc */
+
+subDiscrCoeff(p,var):=
+  block([cRes],
+  cRes : sSubResCoeff(p,diff(p,var),var),
+  cRes : cons(first(cRes)/leadCoeff(expand(p),var),expand(rest(cRes)/leadCoeff(expand(p),var))),
+  return(cRes)
+  ); /* end proc */
+
+discriminant(p,var):=
+subDiscrCoeff(p,var)[degree(expand(p),var)+1];
+
+
+/* --------------------------------------------- */
+/* Part concerning the signed remainder sequence */
+
+/* In the following S(P,Q) is the signed remainder sequence of P and Q */
+
+/* Number of sign changes (notation "V") */
+/* of sequence containing non-zero elements */
+
+
+nonZeroSignChanges(seq) := 
+block([variations,i],
+ variations:0,
+ if length(seq) > 1 then
+   for i:1 thru length(seq)-1 do
+     if seq[i]*seq[i+1] < 0 then
+       variations:variations+1,
+return(variations)
+); /* end proc */
+
+signChanges(seq) :=
+  nonZeroSignChanges(trimZeros(seq));
+
+
+/* Number of sign changes of a polynomial at a certain value */
+/* Notation "V(P;a)" */
+/* We use proposition 2.4 for the signs at infinities */
+signChangesAt(seq,var,a) :=
+  if a = inf then
+     signChanges(makelist(leadCoeff(seq[i],var),i,1,length(seq)))
+  else
+     if a = -inf then
+       signChanges(makelist((-1)^(degree(seq[i],var))*
+                            leadCoeff(seq[i],var),i,1,length(seq)))
+     else
+       signChanges(makelist(subst(a,var,seq[i]),i,1,length(seq)));
+/* end proc */
+
+
+/* Difference between the no. of changes a two points */
+/* Notation "V(P;a,b)" */
+signChangesDiff(seq,var,a,b) :=
+  signChangesAt(seq,var,a) - signChangesAt(seq,var,b);
+
+/* Sign changes of the i-th coefficients of a polynomial */
+/* Notation "V(P)" (P is a polynomial) */
+signChangesPolyCoeff(poly,var) :=
+  signChanges(makelist(coeff(poly,var,i),i,0,degree(poly,var)));
+
+/* Sequence of the derivatives of a polynomial */
+/* Notation "Der(P)" */
+derSeq(f,var) :=
+  makelist(diff(f,var,i),i,0,degree(f,var));
+
+/* Cauchy Index */
+/* Theorem 2.52 */
+/* V(S(P,Q);a,b) = Ind(Q/P;a,b) */
+
+sRemCauchyIndexBetween(num,den,var,a,b) :=
+  signChangesDiff(sRem(den,num,var),var,a,b);
+
+sRemCauchyIndex(num,den,var) :=
+  signChangesDiff(sRem(den,num,var),
+                      var,-inf,+inf);
+
+/* Tarski query computed by Sylvester's theorem's formula */
+/* Theorem 2.55 */
+/* V(S(P,P'Q);a,b) = SQ(Q,P;a,b) */
+
+sRemTarskiQueryBetween(q,p,var,a,b) :=
+  signChangesDiff(sRem(p,diff(p,var)*q,var),var,a,b);
+
+sRemTarskiQuery(q,p,var) :=
+  signChangesDiff(sRem(p,diff(p,var)*q,var),
+                       var,-inf,+inf);
+
+
+/* Number of roots counted by Tarski's theorem's formula */
+/* Theorem 2.56 */
+/* V(S(P,P');a,b) */
+sRemNumberOfRootsBetween(p,var,a,b) :=
+  sRemTarskiQueryBetween(1,p,var,a,b);
+
+sRemNumberOfRoots(p,var) :=
+  sRemTarskiQuery(1,p,var);
+
+/* Tarski sequence */
+/* defined as: S(P,P') */
+sturmSequence(p,var) :=
+   sRem(p,diff(p,var),var);
+
+
+/* ------------------------------------------------- */
+/* Part concerning signed subresultants coefficients */
+/* and the Cauchy Index in all R(Subsection 9.1.2)   */
+
+
+/* Notation taken from Remark 4.36 and used by Notation 9.4 */
+epsilon(x) :=
+  (-1)^(x*(x-1)/2);
+
+/* It counts and removes the trailing zeros out of a sequence */
+
+trimZeroCount(seq,count) :=
+block([list,count,i],
+list:[],
+count:0,
+if length(seq)>0 then
+  for i:1 thru length(seq) do
+     if seq[i] = 0 then
+count:count+1
+     else
+list:append(list,[seq[i]]),
+return([list,count])
+); /* end proc */
+
+/* Interface function */
+trimZero(seq) :=
+  trimZeroCount(seq,0);
+
+
+
+/* Notation 9.4 ("D(s)") */
+/* When there are no zeros this gives the difference between */
+/* the sign permanencies and the number of sign changes */
+ 
+genPermMVar(seq) :=
+block([res,count,i],
+  res:0, i:1,
+   ( while not(i>length(seq)-1) do
+if not(seq[i]=0) then
+(count:1,
+  (while (seq[i+count]=0 and not(i+count>length(seq)-1)) do count:count+1), /* end while */
+    ( if  remainder(count,2)=1 then  
+res:res+(-1)^((count)*(count-1)/2)*sgn(seq[i]*seq[i+count])),
+i:i+count) /* end if */
+else i:i+1), /* end while */
+return(res)
+); /* end proc */
+
+
+/* Cauchy Index by signed subresultant */
+/* Algorithm 9.27 */
+
+sSubResCauchyIndex(q,p,var) :=
+genPermMVar(sSubResCoeff(p,sPsRem(ratexpand(q),ratexpand(p),var),var));
+
+/* Tarski Query by signed subresultant */
+/* Algorithm 9.28 */
+sSubResTarskiQuery(q,p,var) :=
+genPermMVar(sSubResCoeff(p,sPsRem(ratexpand(diff(p,var)*q),p,var),var));
+
+sSubResNumberOfRoots(p,var) :=
+sSubResTarskiQuery(1,p,var);
+
+
+
+/* ----------------------------------------------  */
+/* Part concerning the Bezoutian (subsection 9.1.3) */
+
+/* Bezoutian (Notation 9.14) */
+bez(p,q,var,x,y) :=
+   (subst(y,var,q) * subst(x,var,p) - 
+    subst(x,var,q) * subst(y,var,p))/(x-y); /* end proc */
+
+
+
+/* ----------------------------------------------- */
+/* Part concerning the Cauchy Index on an interval */
+/* (Subsection 9.1.5)                              */
+
+/* Modified number of sign changes */
+/* Notation 9.29, ("W(s)") */
+/* Modified Sign Changes: */
+/* counting as two sign changes the groups +,0,0,+ and -,0,0,- */
+
+
+modifiedSignChanges(seq) := 
+block([variations,i],
+ variations:signChanges(seq),
+ if length(seq) > 1 then
+   for i:1 thru length(seq)-3 do
+if (seq[i+1]=0 and seq[i+2]=0 and seq[i]*seq[i+3] > 0) then
+       variations:variations+2,
+return(variations)
+); /* end proc */
+
+
+/* Remove identically zero elements from a list */
+
+
+removeZeros(seq) :=
+block([list,i],
+list:[],
+if length(seq)>0 then
+  for i:1 thru length(seq) do
+     if not (seq[i] = 0) then
+list:append(list,[seq[i]]),
+return(list)
+); /* end proc */
+
+
+/* Modified Sign Changes at a certain value */
+/* Notation "W(P;a)" */
+modifiedSignChangesAt(seq,var,value) :=
+   if value = inf then
+      signChanges(makelist(leadCoeff(seq[i],var),i,1,length(seq)))
+   else
+     if value = -inf then
+       signChanges(makelist((-1)^(degree(seq[i],var))*
+                            leadCoeff(seq[i],var),i,1,length(seq)))
+     else
+       modifiedSignChanges(subst(value,var,removeZeros(seq))); /* end proc */
+
+
+/* Modified Sign Changes Difference */
+/* Notation "W(P;a,b)" */
+modifiedSignChangesDiff(seq,var,a,b) :=
+   modifiedSignChangesAt(seq,var,a)-
+   modifiedSignChangesAt(seq,var,b);
+
+
+
+/* Cauchy Index in an interval computed by subresultants */
+/* Theorem 9.30 */
+/* W(SR(P,Q);a,b) = Ind(Q/P;a,b) */
+
+sSubResCauchyIndexBetween(num,den,var,a,b) :=
+  modifiedSignChangesDiff(sSubResPol(den,sPsRem(num,den,var),var),var,a,b);
+
+/* Tarski Query by subresultants */
+/* Corallary 9.32 */
+/* W(SR(P,Remainder(P,Q));a,b) = SQ(Q,P;a,b) */
+sSubResTarskiQueryBetween(q,p,var,a,b) :=
+  modifiedSignChangesDiff(sSubResPol(p,
+                              sPsRem(ratexpand(diff(p,var)*q),p,var),var),var,a,b);
+
+/* Number of roots on an interval by signed subresultants */
+/* Consequence of Corollary 9.32 */
+sSubResNumberOfRootsBetween(p,var,a,b) :=
+  sSubResCauchyIndexBetween(diff(p,var),p,var,a,b);
+
+
+/* ------------------------------- */
+/* Part concerning Hankel Matrices */
+
+
+/* It computes the signature of a Hankel quadratic form */
+/* Algorithm 9.47 */
+
+
+hankelSignature(seq) :=
+  block([m,n,sLen,trimRes,trimmed,count,c,p,q,t,i,SR,j,defective],
+   sLen : length(seq),
+   if evenp(sLen) then
+     (
+     print("hankelSignature) Number of elements must be odd"),
+     return(false)
+     ), /* end if */
+   n : (sLen+1)/2,
+
+   trimRes : trimZero(seq),
+
+   if length(trimRes) = 0 then
+      return(0)
+   else
+       c:firstNonZeroIndex(seq),
+      (if c>=n then
+         (if oddp(c) then 
+            return(sgn(seq[c]))
+         else
+            return(0)) /* end if */
+        else m:lastNonZeroIndex(seq),
+         (if m <= n then
+           (if oddp(2*n-m) then
+              return(sgn(seq[m])) 
+           else
+              return(0)) /* end if */
+         else
+           (
+           p : t^m,
+           q : sum(seq[i]*t^(m-i),i,1,m),
+
+           SR : sSubResPol(p,q,t),
+
+           /* check of defectiveness */
+           j : m-n,
+           defective : true,
+           while defective do
+              if degree(SR[m-j+1],t) = j then
+                 defective : false
+              else 
+                 j : j-1,
+
+           return(genPermMVar(
+                   makelist(sSubResCoeff(p,q,t)[i],
+                     i,1,m-j+1))) 
+
+           ) /* end else */
+         ) /* end if */
+         
+      ) /* end if */
+   
+); /* end proc */
+
+
+/* It build a Hankel matrix out of an odd-numbered sequence */
+hankelMatrix(seq) :=
+  block([n,len],
+  len : length(seq),
+  n : (len+1)/2,
+  return(makelist(
+           makelist(
+                  seq[i+j+1],
+               j,0,n-1),
+           i,0,n-1)
+         )
+  ); /* end proc */
+
+
+
+/* ----------------------------------------------------- */
+/* Part concerning complex roots with negative real part */
+
+
+evenPart(pol,var) :=
+  sum(ratcoeff(pol,var,i*2)*var^i,
+      i,0,floor(degree(pol,var)/2));
+
+oddPart(pol,var) :=
+  sum(ratcoeff(pol,var,i*2+1)*var^i,
+      i,0,ceiling(degree(pol,var)/2));
+
+lienardChipartConditions(pol,var) :=
+  block([F,G,SR,degP,m],
+  F : evenPart(pol,var),
+  
+  G : oddPart(pol,var),
+
+  degP : degree(pol,var),
+
+  if evenp(degP) then
+    (
+    m = p/2,
+    SR : sSubResCoeff(F,G,var),
+
+    return(setify(append(poly2list(pol,var),SR)))
+    ) /* end if */
+  else
+    (
+    m = (p-1)/2,
+    SR : sSubResCoeff(var*G,F,var),
+
+    return(setify(append(poly2list(pol,var),SR)))
+    ) /* end else */
+); /* end proc */
+     
+
+
+
+/* It computes the difference between the number of roots of P */
+/* with positive real parts and the number of roots with negative real parts */
+/* Theorem 9.48 (notation "n(P)") */
+posNegDiff(a,var) :=
+  block([p,degP,m,f,g,i],
+  p : expandIf(a),
+  degP : degree(p,var),
+  
+  if evenp(degP) then
+     (
+     m : degP/2,
+     f : sum(coeff(p,var,i*2)* var^i,i,0,m),
+     g : sum(coeff(p,var,i*2+1)*var^i,i,0,m-1),
+    
+
+     return(-sSubResCauchyIndex(g,f,var)+
+             sSubResCauchyIndexBetween(sPsRem(var*g,f,x),f,var))
+     ) /* end if */
+  else
+     ( 
+     m : (degP-1)/2, 
+     f : sum(coeff(p,var,i*2)* var^i,i,0,m),
+     g : sum(coeff(p,var,2*i+1)* var^i,i,0,m),
+     
+
+     return(-sRemCauchyIndexBetween(f,NORM_ALGORITHM(var*g),
+            var,-inf,+inf)+
+             sRemCauchyIndexBetween(f,g,
+            var,-inf,+inf))
+     ) /* end else */
+  ); /* end proc */
+
+  /* New name for Horner evaluation */
+
+hornerEval(pol,var,value) :=saragHorner(pol,var,value) ;
+
+saragHorner(pol,var,value) :=
+  block([res,i,degP],
+
+  degP : degree(pol,var),
+  
+  res : leadCoeff(pol,var),
+
+  for i : 1 thru degP do
+     res : value*res+ratcoeff(pol,var,degP-i),
+
+  return(res) 
+  ); /* end proc */

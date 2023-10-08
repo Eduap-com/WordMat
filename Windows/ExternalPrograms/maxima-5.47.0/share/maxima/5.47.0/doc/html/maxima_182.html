@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for alt-display</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for alt-display">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for alt-display">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_180.html#alt_002ddisplay_002dpkg" rel="up" title="alt-display-pkg">
+<link href="maxima_183.html#asympa_002dpkg" rel="next" title="asympa-pkg">
+<link href="maxima_181.html#Introduction-to-alt_002ddisplay" rel="previous" title="Introduction to alt-display">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-alt_002ddisplay"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_181.html#Introduction-to-alt_002ddisplay" accesskey="p" rel="previous">Introduction to alt-display</a>, Up: <a href="maxima_180.html#alt_002ddisplay_002dpkg" accesskey="u" rel="up">alt-display-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-alt_002ddisplay-1"></a>
+<h3 class="section">39.2 Functions and Variables for alt-display</h3>
+
+<a name="alt_005fdisplay_005foutput_005ftype"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002falt_005fdisplay_005foutput_005ftype"></a><dl>
+<dt><a name="index-alt_005fdisplay_005foutput_005ftype"></a>Function: <strong>alt_display_output_type</strong> <em>(<var>form</var>)</em></dt>
+<dd>
+<p>Determine the type of output to be printed. <var>Form</var> must be a lisp
+form suitable for printing via Maxima&rsquo;s built-in <code>displa</code>
+function. At present, this function returns one of three values:
+<var>text</var>, <var>label</var> or <var>unknown</var>.
+</p>
+<p>An example where <code>alt_display_output_type</code> is used. In
+<code>my_display</code>, a text form is printed between a pair of tags
+<tt>TEXT;&gt;&gt;</tt> and <tt>&lt;&lt;TEXT;</tt> while a label form is printed between
+a pair tags <tt>OUT;&gt;&gt;</tt> and <tt>&lt;&lt;OUT;</tt> in addition to the usual
+output label.
+</p>
+<p>The function <code><a href="#set_005fprompt">set_prompt</a></code> also ensures that input labels are
+printed between matching <tt>PROMPT;&gt;&gt;</tt> and <tt>&lt;&lt;PROMPT;</tt> tags.
+</p>
+<p>Thanks to
+<a href="https://sourceforge.net/p/maxima/mailman/maxima-discuss/thread/7792c096-7e07-842d-0c3a-b2f039ef1f15%40gmail.com/#msg37235035">Eric
+Stemmler</a>.
+</p>
+<pre class="verbatim">(%i1) (load(&quot;mactex-utilities&quot;), load(&quot;alt-display.mac&quot;)) $
+
+(%i2) define_alt_display(my_display(form),
+block([type,txttmplt,labtmplt], 
+txttmplt:&quot;~%TEXT;&gt;&gt;~%~a~%&lt;&lt;TEXT;~%&quot;,
+labtmplt:&quot;~%OUT;&gt;&gt;~%(~a) ~a~a~a~%&lt;&lt;OUT;~%&quot;,
+type:alt_display_output_type(form),
+if type='text then 
+   printf(true,txttmplt,first(form))
+else if type='label then 
+     printf(true,labtmplt,first(form),&quot;$$&quot;,tex1(second(form)),&quot;$$&quot;)
+else 
+     block([alt_display1d:false, alt_display2d:false], displa(form)))) $
+
+(%i3) (set_prompt('prefix, &quot;PROMPT;&gt;&gt;&quot;,'suffix, &quot;&lt;&lt;PROMPT;&quot;), 
+      set_alt_display(1,my_display)) $
+
+PROMPT;&gt;&gt;(%i4) &lt;&lt;PROMPT;integrate(x^n,x);
+PROMPT;&gt;&gt;
+TEXT;&gt;&gt;
+Is n equal to -1?
+&lt;&lt;TEXT;
+&lt;&lt;PROMPT;
+n;
+
+OUT;&gt;&gt;
+(%o4) $$\frac{x^{n+1}}{n+1}$$
+&lt;&lt;OUT;
+PROMPT;&gt;&gt;(%i5) &lt;&lt;PROMPT;
+</pre>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+         
+<a name="define_005falt_005fdisplay"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002fdefine_005falt_005fdisplay"></a><dl>
+<dt><a name="index-define_005falt_005fdisplay"></a>Function: <strong>define_alt_display</strong> <em>(<var>function</var>(<var>input</var>), <var>expr</var>)</em></dt>
+<dd><p>This function is similar to <code>define</code>: it evaluates its arguments
+and expands into a function definition. The <var>function</var> is a
+function of a single input <var>input</var>. For convenience, a substitution
+is applied to <var>expr</var> after evaluation, to provide easy access to
+Lisp variable names.
+</p>
+<p>Set a time-stamp on each prompt:
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;alt-display.mac&quot;)$
+
+(%i2) display2d: false$
+
+(%i3) define_alt_display(time_stamp(x),
+                block([alt_display1d:false,alt_display2d:false],
+                      prompt_prefix:printf(false,&quot;~a~%&quot;,timedate()),
+                      displa(x)));
+
+(%o3) time_stamp(x):=block(
+                 [\*alt\-display1d\*:false,
+                  \*alt\-display2d\*:false],
+                 \*prompt\-prefix\*
+                  :printf(false,&quot;~a~%&quot;,timedate()),displa(x))
+(%i4) set_alt_display(1,time_stamp);
+
+(%o4) done
+2017-11-27 16:15:58-06:00
+(%i5) 
+</pre></div>
+
+<p>The input line <code>%i3</code> defines <code>time_stamp</code> using
+<code>define_alt_display</code>. The output line <code>%o3</code> shows that the
+Maxima variable names <code>alt_display1d</code>, <code>alt_display2d</code> and
+<code>prompt_prefix</code> have been replaced by their Lisp translations, as
+has <code>displa</code> been replaced by <code>?displa</code> (the display
+function).
+</p>
+<p>The display variables <code>alt_display1d</code> and <code>alt_display2d</code> are
+both bound to <code>false</code> in the body of <code>time_stamp</code> to prevent
+an infinite recursion in <code>displa</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+<a name="info_005fdisplay"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002finfo_005fdisplay"></a><dl>
+<dt><a name="index-info_005fdisplay"></a>Function: <strong>info_display</strong> <em>(<var>form</var>)</em></dt>
+<dd><p>This is an alias for the default 1-d display function. It may be used as
+an alternative 1-d or 2-d display function.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;alt-display.mac&quot;)$
+
+(%i2) set_alt_display(2,info_display);
+
+(%o2) done
+(%i3) x/y;
+
+(%o3) x/y
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+<a name="mathml_005fdisplay"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002fmathml_005fdisplay"></a><dl>
+<dt><a name="index-mathml_005fdisplay"></a>Function: <strong>mathml_display</strong> <em>(<var>form</var>)</em></dt>
+<dd><p>Produces MathML output.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;alt-display.mac&quot;)$
+
+(%i2) set_alt_display(2,mathml_display);
+&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt; &lt;mi&gt;mlabel&lt;/mi&gt; 
+ &lt;mfenced separators=&quot;&quot;&gt;&lt;msub&gt;&lt;mi&gt;%o&lt;/mi&gt; &lt;mn&gt;2&lt;/mn&gt;&lt;/msub&gt; 
+ &lt;mo&gt;,&lt;/mo&gt;&lt;mi&gt;done&lt;/mi&gt; &lt;/mfenced&gt; &lt;/math&gt;
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+<a name="tex_005fdisplay"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002ftex_005fdisplay"></a><dl>
+<dt><a name="index-tex_005fdisplay"></a>Function: <strong>tex_display</strong> <em>(<var>form</var>)</em></dt>
+<dd><p>Produces TeX output.
+</p>
+<div class="example">
+<pre class="example">(%i2) set_alt_display(2,tex_display);
+\mbox{\tt\red({\it \%o_2}) \black}$$\mathbf{done}$$
+(%i3) x/(x^2+y^2);
+\mbox{\tt\red({\it \%o_3}) \black}$${{x}\over{y^2+x^2}}$$
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+<a name="multi_005fdisplay_005ffor_005ftexinfo"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002fmulti_005fdisplay_005ffor_005ftexinfo"></a><dl>
+<dt><a name="index-multi_005fdisplay_005ffor_005ftexinfo"></a>Function: <strong>multi_display_for_texinfo</strong> <em>(<var>form</var>)</em></dt>
+<dd><p>Produces Texinfo output using all three display functions.
+</p>
+<div class="example">
+<pre class="example">(%i2) set_alt_display(2,multi_display_for_texinfo)$
+
+(%i3) x/(x^2+y^2);
+
+@iftex
+@tex
+\mbox{\tt\red({\it \%o_3}) \black}$${{x}\over{y^2+x^2}}$$
+@end tex
+@end iftex
+@ifhtml
+@html
+
+   &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt; &lt;mi&gt;mlabel&lt;/mi&gt; 
+   &lt;mfenced separators=&quot;&quot;&gt;&lt;msub&gt;&lt;mi&gt;%o&lt;/mi&gt; &lt;mn&gt;3&lt;/mn&gt;&lt;/msub&gt; 
+   &lt;mo&gt;,&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt; &lt;/mrow&gt; &lt;mrow&gt;&lt;msup&gt;&lt;mrow&gt;
+   &lt;mi&gt;y&lt;/mi&gt; &lt;/mrow&gt; &lt;mn&gt;2&lt;/mn&gt; &lt;/msup&gt; &lt;mo&gt;+&lt;/mo&gt; &lt;msup&gt;&lt;mrow&gt;
+   &lt;mi&gt;x&lt;/mi&gt; &lt;/mrow&gt; &lt;mn&gt;2&lt;/mn&gt; &lt;/msup&gt; &lt;/mrow&gt;&lt;/mfrac&gt; &lt;/mfenced&gt; &lt;/math&gt;
+@end html
+@end ifhtml
+@ifinfo
+@example
+(%o3) x/(y^2+x^2)
+@end example
+@end ifinfo
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+<a name="reset_005fdisplays"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002freset_005fdisplays"></a><dl>
+<dt><a name="index-reset_005fdisplays"></a>Functions: <strong>reset_displays</strong> <em>()</em></dt>
+<dd><p>Resets the prompt prefix and suffix to the empty string, and sets both
+1-d and 2-d display functions to the default.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+<a name="set_005falt_005fdisplay"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002fset_005falt_005fdisplay"></a><dl>
+<dt><a name="index-set_005falt_005fdisplay"></a>Function: <strong>set_alt_display</strong> <em>(<var>num</var>, <var>display-function</var>)</em></dt>
+<dd><p>The input <var>num</var> is the display to set; it may be either 1 or 2. The
+second input <var>display-function</var> is the display function to use. The
+display function may be either a Maxima function or a <code>lambda</code>
+expression.
+</p>
+<p>Here is an example where the display function is a <code>lambda</code>
+expression; it just displays the result as TeX.
+</p><div class="example">
+<pre class="example">(%i1) load(&quot;alt-display.mac&quot;)$
+
+(%i2) set_alt_display(2, lambda([form], tex(?caddr(form))))$
+
+(%i3) integrate(exp(-t^2),t,0,inf);
+$${{\sqrt{\pi}}\over{2}}$$
+</pre></div>
+
+<p>A user-defined display function should take care that it <em>prints</em>
+its output. A display function that returns a string will appear to
+display nothing, nor cause any errors.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+<a name="set_005fprompt"></a><a name="Item_003a-alt_002ddisplay_002fdeffn_002fset_005fprompt"></a><dl>
+<dt><a name="index-set_005fprompt"></a>Function: <strong>set_prompt</strong> <em>(<var>fix</var>, <var>expr</var>)</em></dt>
+<dd><p>Set the prompt prefix or suffix to <var>expr</var>. The input <var>fix</var> must
+evaluate to one of <code>prefix</code>, <code>suffix</code>, <code>general</code>,
+<code>prolog</code> or <code>epilog</code>. The input <var>expr</var> must evaluate to
+either a string or <code>false</code>; if <code>false</code>, the <var>fix</var> is reset
+to the default value.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;alt-display.mac&quot;)$
+(%i2) set_prompt('prefix,printf(false,&quot;It is now: ~a~%&quot;,timedate()))$
+
+It is now: 2014-01-07 15:23:23-05:00
+(%i3) 
+</pre></div>
+
+<p>The following example shows the effect of each option, except
+<code>prolog</code>. Note that the <code>epilog</code> prompt is printed as Maxima
+closes down. The <code>general</code> is printed between the end of input and
+the output, unless the input line ends in <code>$</code>.
+</p>
+<p>Here is an example to show where the prompt strings are placed.
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;alt-display.mac&quot;)$
+
+(%i2) set_prompt(prefix, &quot;&lt;&lt;prefix&gt;&gt; &quot;, suffix, &quot;&lt;&lt;suffix&gt;&gt; &quot;,
+                 general, printf(false,&quot;&lt;&lt;general&gt;&gt;~%&quot;),
+                 epilog, printf(false,&quot;&lt;&lt;epilog&gt;&gt;~%&quot;));
+
+(%o2)                                done
+&lt;&lt;prefix&gt;&gt; (%i3) &lt;&lt;suffix&gt;&gt; x/y;
+&lt;&lt;general&gt;&gt;
+                                       x
+(%o3)                                  -
+                                       y
+&lt;&lt;prefix&gt;&gt; (%i4) &lt;&lt;suffix&gt;&gt; quit();
+&lt;&lt;general&gt;&gt;
+&lt;&lt;epilog&gt;&gt;
+</pre></div>
+
+<p>Here is an example that shows how to colorize the input and output when
+Maxima is running in a terminal or terminal emulator like
+Emacs<a name="DOCF8" href="#FOOT8"><sup>8</sup></a>.
+</p>
+<img src="./figures/color_terminal.png" alt="./figures/color_terminal">
+
+<p>Each prompt string starts with the ASCII escape character (27) followed
+by an open square bracket (91); each string ends with a lower-case m
+(109). The webpages
+<a href="https://misc.flogisoft.com/bash/tip_colors_and_formatting">https://misc.flogisoft.com/bash/tip_colors_and_formatting</a> and
+<a href="https://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html">https://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html</a> provide
+information on how to use control strings to set the terminal colors.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-alt_002ddisplay">Package alt-display</a>
+&middot;</div>
+</dd></dl>
+
+
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT8" href="#DOCF8">(8)</a></h3>
+<p>Readers using the <code>info</code> reader in <code>Emacs</code> will
+see the actual prompt strings; other readers will see the colorized
+output</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_181.html#Introduction-to-alt_002ddisplay" accesskey="p" rel="previous">Introduction to alt-display</a>, Up: <a href="maxima_180.html#alt_002ddisplay_002dpkg" accesskey="u" rel="up">alt-display-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

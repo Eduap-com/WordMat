@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>bitwise-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="bitwise-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="bitwise-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_43.html#bode_002dpkg" rel="next" title="bode-pkg">
+<link href="maxima_41.html#Bernstein_002dpkg" rel="prev" title="Bernstein-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="bitwise_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_43.html#bode_002dpkg" accesskey="n" rel="next">bode</a>, Previous: <a href="maxima_41.html#Bernstein_002dpkg" accesskey="p" rel="prev">Bernstein</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="bitwise">43 bitwise</h2>
+<p>The package <code class="code">bitwise</code> provides functions that allow to manipulate
+bits of integer constants. As always maxima attempts to simplify the result
+of the operation if the actual value of a constant isn&rsquo;t known considering
+attributes that might be known for the variables, see the <code class="code"><a class="ref" href="maxima_10.html#declare">declare</a></code>
+mechanism.
+</p>
+
+<a class="anchor" id="Item_003a-bitwise_002fnode_002fFunctions-and-Variables-for-bitwise"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-bitwise" accesskey="1">Functions and Variables for bitwise</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-bitwise">
+<div class="nav-panel">
+<p>
+ &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-bitwise-1">43.1 Functions and Variables for bitwise</h3>
+
+<a class="anchor" id="bit_005fnot"></a><a class="anchor" id="Item_003a-bitwise_002fdeffn_002fbit_005fnot"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bit_005fnot"><span class="category-def">Function: </span><span><strong class="def-name">bit_not</strong> <var class="def-var-arguments">(<var class="var">int</var>)</var><a class="copiable-link" href='#index-bit_005fnot'> &para;</a></span></dt>
+<dd>
+<p>Inverts all bits of a signed integer. The result of this action reads
+<code class="code">-int - 1</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_not(i);
+(%o2)                      bit_not(i)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_not(bit_not(i));
+(%o3)                           i
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_not(3);
+(%o4)                          - 4
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_not(100);
+(%o5)                         - 101
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) bit_not(-101);
+(%o6)                          100
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Binary-operations">Binary operations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bitwise">Package bitwise</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bit_005fand"></a><a class="anchor" id="Item_003a-bitwise_002fdeffn_002fbit_005fand"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bit_005fand"><span class="category-def">Function: </span><span><strong class="def-name">bit_and</strong> <var class="def-var-arguments">(<var class="var">int1</var>, ...)</var><a class="copiable-link" href='#index-bit_005fand'> &para;</a></span></dt>
+<dd>
+<p>This function calculates a bitwise <code class="code">and</code> of two or more signed integers.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_and(i,i);
+(%o2)                           i
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_and(i,i,i);
+(%o3)                           i
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_and(1,3);
+(%o4)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_and(-7,7);
+(%o5)                           1
+</pre></div></div>
+
+<p>If it is known if one of the parameters to <code class="code">bit_and</code> is even this information
+is taken into consideration by the function.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) declare(e,even,o,odd);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_and(1,e);
+(%o3)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_and(1,o);
+(%o4)                           1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Binary-operations">Binary operations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bitwise">Package bitwise</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bit_005for"></a><a class="anchor" id="Item_003a-bitwise_002fdeffn_002fbit_005for"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bit_005for"><span class="category-def">Function: </span><span><strong class="def-name">bit_or</strong> <var class="def-var-arguments">(<var class="var">int1</var>, ...)</var><a class="copiable-link" href='#index-bit_005for'> &para;</a></span></dt>
+<dd>
+<p>This function calculates a bitwise <code class="code">or</code> of two or more signed integers.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_or(i,i);
+(%o2)                           i
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_or(i,i,i);
+(%o3)                           i
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_or(1,3);
+(%o4)                           3
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_or(-7,7);
+(%o5)                          - 1
+</pre></div></div>
+
+<p>If it is known if one of the parameters to <code class="code">bit_or</code> is even this information
+is taken into consideration by the function.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) declare(e,even,o,odd);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_or(1,e);
+(%o3)                         e + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_or(1,o);
+(%o4)                           o
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Binary-operations">Binary operations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bitwise">Package bitwise</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bit_005fxor"></a><a class="anchor" id="Item_003a-bitwise_002fdeffn_002fbit_005fxor"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bit_005fxor"><span class="category-def">Function: </span><span><strong class="def-name">bit_xor</strong> <var class="def-var-arguments">(<var class="var">int1</var>, ...)</var><a class="copiable-link" href='#index-bit_005fxor'> &para;</a></span></dt>
+<dd>
+<p>This function calculates a bitwise <code class="code">or</code> of two or more signed integers.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_xor(i,i);
+(%o2)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_xor(i,i,i);
+(%o3)                           i
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_xor(1,3);
+(%o4)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_xor(-7,7);
+(%o5)                          - 2
+</pre></div></div>
+
+<p>If it is known if one of the parameters to <code class="code">bit_xor</code> is even this information
+is taken into consideration by the function.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) declare(e,even,o,odd);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_xor(1,e);
+(%o3)                         e + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_xor(1,o);
+(%o4)                         o - 1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Binary-operations">Binary operations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bitwise">Package bitwise</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="bit_005flsh"></a><a class="anchor" id="Item_003a-bitwise_002fdeffn_002fbit_005flsh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bit_005flsh"><span class="category-def">Function: </span><span><strong class="def-name">bit_lsh</strong> <var class="def-var-arguments">(<var class="var">int</var>, <var class="var">nBits</var>)</var><a class="copiable-link" href='#index-bit_005flsh'> &para;</a></span></dt>
+<dd>
+<p>This function shifts all bits of the signed integer <code class="code">int</code> to the left by
+<code class="code">nBits</code> bits. The width of the integer is extended by <code class="code">nBits</code> for
+this process. The result of <code class="code">bit_lsh</code> therefore is <code class="code">int * 2</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_lsh(0,1);
+(%o2)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_lsh(1,0);
+(%o3)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_lsh(1,1);
+(%o4)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_lsh(1,i);
+(%o5)                     bit_lsh(1, i)
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) bit_lsh(-3,1);
+(%o6)                          - 6
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) bit_lsh(-2,1);
+(%o7)                          - 4
+</pre></div></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Binary-operations">Binary operations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bitwise">Package bitwise</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="bit_005frsh"></a><a class="anchor" id="Item_003a-bitwise_002fdeffn_002fbit_005frsh"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bit_005frsh"><span class="category-def">Function: </span><span><strong class="def-name">bit_rsh</strong> <var class="def-var-arguments">(<var class="var">int</var>, <var class="var">nBits</var>)</var><a class="copiable-link" href='#index-bit_005frsh'> &para;</a></span></dt>
+<dd>
+<p>This function shifts all bits of the signed integer <code class="code">int</code> to the right by
+<code class="code">nBits</code> bits. The width of the integer is reduced by <code class="code">nBits</code> for
+this process.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_rsh(0,1);
+(%o2)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_rsh(2,0);
+(%o3)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_rsh(2,1);
+(%o4)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_rsh(2,2);
+(%o5)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) bit_rsh(-3,1);
+(%o6)                          - 2
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) bit_rsh(-2,1);
+(%o7)                          - 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) bit_rsh(-2,2);
+(%o8)                          - 1
+</pre></div></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Binary-operations">Binary operations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bitwise">Package bitwise</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bit_005flength"></a><a class="anchor" id="Item_003a-bitwise_002fdeffn_002fbit_005flength"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bit_005flength"><span class="category-def">Function: </span><span><strong class="def-name">bit_length</strong> <var class="def-var-arguments">(<var class="var">int</var>)</var><a class="copiable-link" href='#index-bit_005flength'> &para;</a></span></dt>
+<dd>
+<p>determines how many bits a variable needs to be long in order to store the
+number <code class="code">int</code>. This function only operates on positive numbers.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_length(0);
+(%o2)                           0
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_length(1);
+(%o3)                           1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_length(7);
+(%o4)                           3
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_length(8);
+(%o5)                           4
+</pre></div></div>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Binary-operations">Binary operations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bitwise">Package bitwise</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="bit_005fonep"></a><a class="anchor" id="Item_003a-bitwise_002fdeffn_002fbit_005fonep"></a><dl class="first-deffn">
+<dt class="deffn" id="index-bit_005fonep"><span class="category-def">Function: </span><span><strong class="def-name">bit_onep</strong> <var class="def-var-arguments">(<var class="var">int</var>, <var class="var">nBit</var>)</var><a class="copiable-link" href='#index-bit_005fonep'> &para;</a></span></dt>
+<dd>
+<p>determines if bits <code class="code">nBit</code> is set in the signed integer <code class="code">int</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_onep(85,0);
+(%o2)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_onep(85,1);
+(%o3)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_onep(85,2);
+(%o4)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_onep(85,3);
+(%o5)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) bit_onep(85,100);
+(%o6)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) bit_onep(i,100);
+(%o7)                   bit_onep(i, 100)
+</pre></div></div>
+
+<p>For signed numbers the sign bit is interpreted to be more than <code class="code">nBit</code> to the
+left of the leftmost bit of <code class="code">int</code> that reads <code class="code">1</code>.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) bit_onep(-2,0);
+(%o2)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_onep(-2,1);
+(%o3)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_onep(-2,2);
+(%o4)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) bit_onep(-2,3);
+(%o5)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) bit_onep(-2,4);
+(%o6)                         true
+</pre></div></div>
+
+
+<p>If it is known if the number to be tested is even this information
+is taken into consideration by the function.
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bitwise&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) declare(e,even,o,odd);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) bit_onep(e,0);
+(%o3)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) bit_onep(o,0);
+(%o4)                         true
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Number-theory">Number theory</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Binary-operations">Binary operations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bitwise">Package bitwise</a>
+&middot;
+</div>
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_43.html#bode_002dpkg" accesskey="n" rel="next">bode</a>, Previous: <a href="maxima_41.html#Bernstein_002dpkg" accesskey="p" rel="prev">Bernstein</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

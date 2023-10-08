@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Differentiation (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Differentiation (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Differentiation (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_18.html#Integration" rel="next" title="Integration">
+<link href="maxima_16.html#Limits" rel="prev" title="Limits">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Differentiation">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_18.html#Integration" accesskey="n" rel="next">Integration</a>, Previous: <a href="maxima_16.html#Limits" accesskey="p" rel="prev">Limits</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Differentiation-1">18 Differentiation</h2>
+
+<a class="anchor" id="Item_003a-Differentiation_002fnode_002fFunctions-and-Variables-for-Differentiation"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-Differentiation" accesskey="1">Functions and Variables for Differentiation</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-Differentiation">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Differentiation" accesskey="p" rel="prev">Differentiation</a>, Up: <a href="#Differentiation" accesskey="u" rel="up">Differentiation</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Differentiation-1">18.1 Functions and Variables for Differentiation</h3>
+
+<a class="anchor" id="antid"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fantid"></a><dl class="first-deffn">
+<dt class="deffn" id="index-antid"><span class="category-def">Function: </span><span><strong class="def-name">antid</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">u(x)</var>)</var><a class="copiable-link" href='#index-antid'> &para;</a></span></dt>
+<dd>
+<p>Returns a two-element list, such that an antiderivative of <var class="var">expr</var> with
+respect to <var class="var">x</var> can be constructed from the list.  The expression <var class="var">expr</var>
+may contain an unknown function <var class="var">u</var> and its derivatives.
+</p>
+<p>Let <var class="var">L</var>, a list of two elements, be the return value of <code class="code">antid</code>.
+Then <code class="code"><var class="var">L</var>[1] + 'integrate (<var class="var">L</var>[2], <var class="var">x</var>)</code>
+is an antiderivative of <var class="var">expr</var> with respect to <var class="var">x</var>.
+</p>
+<p>When <code class="code">antid</code> succeeds entirely,
+the second element of the return value is zero.
+Otherwise, the second element is nonzero,
+and the first element is nonzero or zero.
+If <code class="code">antid</code> cannot make any progress,
+the first element is zero and the second nonzero.
+</p>
+<p><code class="code">load (&quot;antid&quot;)</code> loads this function.  The <code class="code">antid</code> package also
+defines the functions <code class="code">nonzeroandfreeof</code> and <code class="code">linear</code>.
+</p>
+<p><code class="code">antid</code> is related to <code class="code"><a class="ref" href="#antidiff">antidiff</a></code> as follows.
+Let <var class="var">L</var>, a list of two elements, be the return value of <code class="code">antid</code>.
+Then the return value of <code class="code">antidiff</code> is equal to
+<code class="code"><var class="var">L</var>[1] + 'integrate (<var class="var">L</var>[2], <var class="var">x</var>)</code> where <var class="var">x</var> is the
+variable of integration.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;antid&quot;)$
+(%i2) expr: exp (z(x)) * diff (z(x), x) * y(x);
+                            z(x)  d
+(%o2)                y(x) %e     (-- (z(x)))
+                                  dx
+(%i3) a1: antid (expr, x, z(x));
+                       z(x)      z(x)  d
+(%o3)          [y(x) %e    , - %e     (-- (y(x)))]
+                                       dx
+(%i4) a2: antidiff (expr, x, z(x));
+                            /
+                     z(x)   [   z(x)  d
+(%o4)         y(x) %e     - I %e     (-- (y(x))) dx
+                            ]         dx
+                            /
+(%i5) a2 - (first (a1) + 'integrate (second (a1), x));
+(%o5)                           0
+(%i6) antid (expr, x, y(x));
+                             z(x)  d
+(%o6)             [0, y(x) %e     (-- (z(x)))]
+                                   dx
+(%i7) antidiff (expr, x, y(x));
+                  /
+                  [        z(x)  d
+(%o7)             I y(x) %e     (-- (z(x))) dx
+                  ]              dx
+                  /
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="antidiff"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fantidiff"></a><dl class="first-deffn">
+<dt class="deffn" id="index-antidiff"><span class="category-def">Function: </span><span><strong class="def-name">antidiff</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x</var>, <var class="var">u</var>(<var class="var">x</var>))</var><a class="copiable-link" href='#index-antidiff'> &para;</a></span></dt>
+<dd>
+<p>Returns an antiderivative of <var class="var">expr</var> with respect to <var class="var">x</var>.
+The expression <var class="var">expr</var> may contain an unknown function <var class="var">u</var> and its
+derivatives.
+</p>
+<p>When <code class="code">antidiff</code> succeeds entirely, the resulting expression is free of
+integral signs (that is, free of the <code class="code">integrate</code> noun).
+Otherwise, <code class="code">antidiff</code> returns an expression
+which is partly or entirely within an integral sign.
+If <code class="code">antidiff</code> cannot make any progress,
+the return value is entirely within an integral sign.
+</p>
+<p><code class="code">load (&quot;antid&quot;)</code> loads this function.
+The <code class="code">antid</code> package also defines the functions <code class="code">nonzeroandfreeof</code> and
+<code class="code">linear</code>.
+</p>
+<p><code class="code">antidiff</code> is related to <code class="code">antid</code> as follows.
+Let <var class="var">L</var>, a list of two elements, be the return value of <code class="code">antid</code>.
+Then the return value of <code class="code">antidiff</code> is equal to
+<code class="code"><var class="var">L</var>[1] + 'integrate (<var class="var">L</var>[2], <var class="var">x</var>)</code> where <var class="var">x</var> is the
+variable of integration.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;antid&quot;)$
+(%i2) expr: exp (z(x)) * diff (z(x), x) * y(x);
+                            z(x)  d
+(%o2)                y(x) %e     (-- (z(x)))
+                                  dx
+(%i3) a1: antid (expr, x, z(x));
+                       z(x)      z(x)  d
+(%o3)          [y(x) %e    , - %e     (-- (y(x)))]
+                                       dx
+(%i4) a2: antidiff (expr, x, z(x));
+                            /
+                     z(x)   [   z(x)  d
+(%o4)         y(x) %e     - I %e     (-- (y(x))) dx
+                            ]         dx
+                            /
+(%i5) a2 - (first (a1) + 'integrate (second (a1), x));
+(%o5)                           0
+(%i6) antid (expr, x, y(x));
+                             z(x)  d
+(%o6)             [0, y(x) %e     (-- (z(x)))]
+                                   dx
+(%i7) antidiff (expr, x, y(x));
+                  /
+                  [        z(x)  d
+(%o7)             I y(x) %e     (-- (z(x))) dx
+                  ]              dx
+                  /
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Integral-calculus">Integral calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="at"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fat"></a><dl class="first-deffn">
+<dt class="deffn" id="index-at"><span class="category-def">Function: </span><span><strong class="def-name">at</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">at</code> (<var class="var">expr</var>, [<var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_n</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">at</code> (<var class="var">expr</var>, <var class="var">eqn</var>)</var><a class="copiable-link" href='#index-at'> &para;</a></span></dt>
+<dd>
+<p>Evaluates the expression <var class="var">expr</var> with the variables assuming the values as
+specified for them in the list of equations <code class="code">[<var class="var">eqn_1</var>, ...,
+<var class="var">eqn_n</var>]</code> or the single equation <var class="var">eqn</var>.
+</p>
+<p>If a subexpression depends on any of the variables for which a value is
+specified but there is no <code class="code">atvalue</code> specified and it can&rsquo;t be otherwise
+evaluated, then a noun form of the <code class="code">at</code> is returned which displays in a
+two-dimensional form.
+</p>
+<p><code class="code">at</code> carries out multiple substitutions in parallel.
+</p>
+<p>See also <code class="code"><a class="ref" href="#atvalue">atvalue</a></code>.  For other functions which carry out substitutions,
+see also <code class="code"><a class="ref" href="maxima_5.html#subst">subst</a></code> and <code class="code"><a class="ref" href="maxima_7.html#ev">ev</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) atvalue (f(x,y), [x = 0, y = 1], a^2);
+                                2
+(%o1)                          a
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) atvalue ('diff (f(x,y), x), x = 0, 1 + y);
+(%o2)                        @2 + 1
+</pre></div><pre class="example-preformatted">(%i3) printprops (all, atvalue);
+                                !
+                  d             !
+                 --- (f(@1, @2))!       = @2 + 1
+                 d@1            !
+                                !@1 = 0
+
+                                     2
+                          f(0, 1) = a
+
+(%o3)                         done
+</pre><div class="group"><pre class="example-preformatted">(%i4) diff (4*f(x, y)^2 - u(x, y)^2, x);
+                  d                          d
+(%o4)  8 f(x, y) (-- (f(x, y))) - 2 u(x, y) (-- (u(x, y)))
+                  dx                         dx
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) at (%, [x = 0, y = 1]);
+                                            !
+                 2              d           !
+(%o5)        16 a  - 2 u(0, 1) (-- (u(x, 1))!     )
+                                dx          !
+                                            !x = 0
+</pre></div></div>
+
+<p>Note that in the last line <code class="code">y</code> is treated differently to <code class="code">x</code>
+as <code class="code">y</code> isn&rsquo;t used as a differentiation variable.
+</p>
+<p>The difference between <code class="code"><a class="ref" href="maxima_5.html#subst">subst</a></code>, <code class="code"><a class="ref" href="#at">at</a></code> and <code class="code"><a class="ref" href="maxima_7.html#ev">ev</a></code> can be
+seen in the following example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) e1:I(t)=C*diff(U(t),t)$
+(%i2) e2:U(t)=L*diff(I(t),t)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) at(e1,e2);
+                               !
+                      d        !
+(%o3)       I(t) = C (-- (U(t))!                    )
+                      dt       !          d
+                               !U(t) = L (-- (I(t)))
+                                          dt
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) subst(e2,e1);
+                            d      d
+(%o4)             I(t) = C (-- (L (-- (I(t)))))
+                            dt     dt
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) ev(e1,e2,diff);
+                                  2
+                                 d
+(%o5)                I(t) = C L (--- (I(t)))
+                                   2
+                                 dt
+</pre></div></div>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation">Evaluation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="atomgrad"></a><a class="anchor" id="Item_003a-Differentiation_002fdefvr_002fatomgrad"></a><dl class="first-defvr">
+<dt class="defvr" id="index-atomgrad"><span class="category-def">Property: </span><span><strong class="def-name">atomgrad</strong><a class="copiable-link" href='#index-atomgrad'> &para;</a></span></dt>
+<dd>
+<p><code class="code">atomgrad</code> is the atomic gradient property of an expression.
+This property is assigned by <code class="code">gradef</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="atvalue"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fatvalue"></a><dl class="first-deffn">
+<dt class="deffn" id="index-atvalue"><span class="category-def">Function: </span><span><strong class="def-name">atvalue</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">atvalue</code> (<var class="var">expr</var>, [<var class="var">x_1</var> = <var class="var">a_1</var>, &hellip;, <var class="var">x_m</var> = <var class="var">a_m</var>], <var class="var">c</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">atvalue</code> (<var class="var">expr</var>, <var class="var">x_1</var> = <var class="var">a_1</var>, <var class="var">c</var>)</var><a class="copiable-link" href='#index-atvalue'> &para;</a></span></dt>
+<dd>
+<p>Assigns the value <var class="var">c</var> to <var class="var">expr</var> at the point <code class="code"><var class="var">x</var> = <var class="var">a</var></code>.
+Typically boundary values are established by this mechanism.
+</p>
+<p><var class="var">expr</var> is a function evaluation, <code class="code"><var class="var">f</var>(<var class="var">x_1</var>, ..., <var class="var">x_m</var>)</code>,
+or a derivative, <code class="code">diff (<var class="var">f</var>(<var class="var">x_1</var>, ..., <var class="var">x_m</var>), <var class="var">x_1</var>,
+<var class="var">n_1</var>, ..., <var class="var">x_n</var>, <var class="var">n_m</var>)</code>
+in which the function arguments explicitly appear.
+<var class="var">n_i</var> is the order of differentiation with respect to <var class="var">x_i</var>.
+</p>
+<p>The point at which the atvalue is established is given by the list of equations
+<code class="code">[<var class="var">x_1</var> = <var class="var">a_1</var>, ..., <var class="var">x_m</var> = <var class="var">a_m</var>]</code>.
+If there is a single variable <var class="var">x_1</var>,
+the sole equation may be given without enclosing it in a list.
+</p>
+<p><code class="code">printprops ([<var class="var">f_1</var>, <var class="var">f_2</var>, ...], atvalue)</code> displays the atvalues
+of the functions <code class="code"><var class="var">f_1</var>, <var class="var">f_2</var>, ...</code> as specified by calls to
+<code class="code">atvalue</code>.  <code class="code">printprops (<var class="var">f</var>, atvalue)</code> displays the atvalues of
+one function <var class="var">f</var>.  <code class="code">printprops (all, atvalue)</code> displays the atvalues
+of all functions for which atvalues are defined.
+</p>
+<p>The symbols <code class="code">@1</code>, <code class="code">@2</code>, &hellip; represent the
+variables <var class="var">x_1</var>, <var class="var">x_2</var>, &hellip; when atvalues are displayed.
+</p>
+<p><code class="code">atvalue</code> evaluates its arguments.
+<code class="code">atvalue</code> returns <var class="var">c</var>, the atvalue.
+</p>
+<p>See also <code class="code"><a class="ref" href="#at">at</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) atvalue (f(x,y), [x = 0, y = 1], a^2);
+                                2
+(%o1)                          a
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) atvalue ('diff (f(x,y), x), x = 0, 1 + y);
+(%o2)                        @2 + 1
+</pre></div><pre class="example-preformatted">(%i3) printprops (all, atvalue);
+                                !
+                  d             !
+                 --- (f(@1, @2))!       = @2 + 1
+                 d@1            !
+                                !@1 = 0
+
+                                     2
+                          f(0, 1) = a
+
+(%o3)                         done
+</pre><div class="group"><pre class="example-preformatted">(%i4) diff (4*f(x,y)^2 - u(x,y)^2, x);
+                  d                          d
+(%o4)  8 f(x, y) (-- (f(x, y))) - 2 u(x, y) (-- (u(x, y)))
+                  dx                         dx
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) at (%, [x = 0, y = 1]);
+                                            !
+                 2              d           !
+(%o5)        16 a  - 2 u(0, 1) (-- (u(x, 1))!     )
+                                dx          !
+                                            !x = 0
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="cartan"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fcartan"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cartan"><span class="category-def">Function: </span><span><strong class="def-name">cartan</strong><a class="copiable-link" href='#index-cartan'> &para;</a></span></dt>
+<dd>
+<p>The exterior calculus of differential forms is a basic tool
+of differential geometry developed by Elie Cartan and has important
+applications in the theory of partial differential equations.
+The <code class="code">cartan</code> package
+implements the functions <code class="code">ext_diff</code> and <code class="code">lie_diff</code>,
+along with the operators <code class="code">~</code> (wedge product) and <code class="code">|</code> (contraction
+of a form with a vector.)
+Type <code class="code">demo (&quot;tensor&quot;)</code> to see a brief
+description of these commands along with examples.
+</p>
+<p><code class="code">cartan</code> was implemented by F.B. Estabrook and H.D. Wahlquist.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-geometry">Differential geometry</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="init_005fcartan"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002finit_005fcartan"></a><dl class="first-deffn">
+<dt class="deffn" id="index-init_005fcartan"><span class="category-def">Function: </span><span><strong class="def-name">init_cartan</strong> <var class="def-var-arguments">([<var class="var">x_1</var>, ..., <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-init_005fcartan'> &para;</a></span></dt>
+<dd>
+<p><code class="code">init_cartan([<var class="var">x_1</var>, ..., <var class="var">x_n</var>])</code> initializes global variables
+for the <code class="code">cartan</code> package.
+The sole argument is a list of symbols, from which the Cartan basis is constructed.
+</p>
+<p><code class="code">init_cartan</code> returns the basis which is constructed.
+</p>
+<p><code class="code">init_cartan</code> assigns values to the following global variables:
+<code class="code">cartan_coords</code>, <code class="code">cartan_dim</code>, <code class="code">extdim</code>, and <code class="code">cartan_basis</code>.
+In addition, the following arrays are assigned:
+<code class="code">extsub</code> and <code class="code">extsubb</code>.
+</p>
+<p>Note: Because of the internal implementation of the <code class="code">cartan</code> package,
+it is necessary for <code class="code">init_cartan</code> to be called before any expression
+containing the Cartan coordinates <code class="code"><var class="var">x_1</var>, ..., <var class="var">x_n</var></code> is parsed.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-geometry">Differential geometry</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-cartan">Package cartan</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="del"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fdel"></a><dl class="first-deffn">
+<dt class="deffn" id="index-del"><span class="category-def">Function: </span><span><strong class="def-name">del</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-del'> &para;</a></span></dt>
+<dd>
+<p><code class="code">del (<var class="var">x</var>)</code> represents the differential of the variable <em class="math tex2jax_process">\(x\)</em>.
+</p>
+<p><code class="code">diff</code> returns an expression containing <code class="code">del</code>
+if an independent variable is not specified.
+In this case, the return value is the so-called &quot;total differential&quot;.
+</p>
+<p>See also <code class="code"><a class="ref" href="#diff">diff</a></code>, <code class="code"><a class="ref" href="#del">del</a></code> and <code class="code"><a class="ref" href="#derivdegree">derivdegree</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) diff (log (x));
+                             del(x)
+(%o1)                        ------
+                               x
+(%i2) diff (exp (x*y));
+                     x y              x y
+(%o2)            x %e    del(y) + y %e    del(x)
+(%i3) diff (x*y*z);
+(%o3)         x y del(z) + x z del(y) + y z del(x)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="delta"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fdelta"></a><dl class="first-deffn">
+<dt class="deffn" id="index-delta"><span class="category-def">Function: </span><span><strong class="def-name">delta</strong> <var class="def-var-arguments">(<var class="var">t</var>)</var><a class="copiable-link" href='#index-delta'> &para;</a></span></dt>
+<dd>
+<p>The Dirac Delta function.
+</p>
+<p>Currently only <code class="code"><a class="ref" href="maxima_18.html#laplace">laplace</a></code> knows about the <code class="code">delta</code> function.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) laplace (delta (t - a) * sin(b*t), t, s);
+Is  a  positive, negative, or zero?
+
+p;
+                                   - a s
+(%o1)                   sin(a b) %e
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Mathematical-functions">Mathematical functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dependencies"></a><a class="anchor" id="Item_003a-Differentiation_002fdefvr_002fdependencies"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dependencies"><span class="category-def">System variable: </span><span><strong class="def-name">dependencies</strong><a class="copiable-link" href='#index-dependencies'> &para;</a></span></dt>
+<dt class="defvrx def-cmd-defvr" id="index-dependencies-1"><span class="category-def">Function: </span><span><strong class="def-name">dependencies</strong> <var class="def-var-arguments">(<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>)</var><a class="copiable-link" href='#index-dependencies-1'> &para;</a></span></dt>
+<dd>
+<p>The variable <code class="code">dependencies</code> is the list of atoms which have functional
+dependencies, assigned by <code class="code"><a class="ref" href="#depends">depends</a></code>, the function <code class="code">dependencies</code>, or <code class="code"><a class="ref" href="#gradef">gradef</a></code>.
+The <code class="code">dependencies</code> list is cumulative:
+each call to <code class="code">depends</code>, <code class="code">dependencies</code>, or <code class="code">gradef</code> appends additional items.
+The default value of <code class="code">dependencies</code> is <code class="code">[]</code>.
+</p>
+<p>The function <code class="code">dependencies(<var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>)</code> appends <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var>,
+to the <code class="code">dependencies</code> list,
+where <var class="var">f_1</var>, &hellip;, <var class="var">f_n</var> are expressions of the form <code class="code"><var class="var">f</var>(<var class="var">x_1</var>, &hellip;, <var class="var">x_m</var>)</code>,
+and <var class="var">x_1</var>, &hellip;, <var class="var">x_m</var> are any number of arguments.
+</p>
+<p><code class="code">dependencies(<var class="var">f</var>(<var class="var">x_1</var>, &hellip;, <var class="var">x_m</var>))</code> is equivalent to <code class="code">depends(<var class="var">f</var>, [<var class="var">x_1</var>, &hellip;, <var class="var">x_m</var>])</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#depends">depends</a></code> and <code class="code"><a class="ref" href="#gradef">gradef</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) dependencies;
+(%o1)                          []
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) depends (foo, [bar, baz]);
+(%o2)                    [foo(bar, baz)]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) depends ([g, h], [a, b, c]);
+(%o3)               [g(a, b, c), h(a, b, c)]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) dependencies;
+(%o4)        [foo(bar, baz), g(a, b, c), h(a, b, c)]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) dependencies (quux (x, y), mumble (u));
+(%o5)                [quux(x, y), mumble(u)]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) dependencies;
+(%o6) [foo(bar, baz), g(a, b, c), h(a, b, c), quux(x, y), 
+                                                       mumble(u)]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) remove (quux, dependency);
+(%o7)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) dependencies;
+(%o8)  [foo(bar, baz), g(a, b, c), h(a, b, c), mumble(u)]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="depends"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fdepends"></a><dl class="first-deffn">
+<dt class="deffn" id="index-depends"><span class="category-def">Function: </span><span><strong class="def-name">depends</strong> <var class="def-var-arguments">(<var class="var">f_1</var>, <var class="var">x_1</var>, &hellip;, <var class="var">f_n</var>, <var class="var">x_n</var>)</var><a class="copiable-link" href='#index-depends'> &para;</a></span></dt>
+<dd>
+<p>Declares functional dependencies among variables for the purpose of computing
+derivatives.  In the absence of declared dependence, <code class="code">diff (f, x)</code> yields
+zero.  If <code class="code">depends (f, x)</code> is declared, <code class="code">diff (f, x)</code> yields a
+symbolic derivative (that is, a <code class="code">diff</code> noun).
+</p>
+<p>Each argument <var class="var">f_1</var>, <var class="var">x_1</var>, etc., can be the name of a variable or
+array, or a list of names.
+Every element of <var class="var">f_i</var> (perhaps just a single element)
+is declared to depend
+on every element of <var class="var">x_i</var> (perhaps just a single element).
+If some <var class="var">f_i</var> is the name of an array or contains the name of an array,
+all elements of the array depend on <var class="var">x_i</var>.
+</p>
+<p><code class="code">diff</code> recognizes indirect dependencies established by <code class="code">depends</code>
+and applies the chain rule in these cases.
+</p>
+<p><code class="code">remove (<var class="var">f</var>, dependency)</code> removes all dependencies declared for
+<var class="var">f</var>.
+</p>
+<p><code class="code">depends</code> returns a list of the dependencies established.
+The dependencies are appended to the global variable <code class="code"><a class="ref" href="#dependencies">dependencies</a></code>.
+<code class="code">depends</code> evaluates its arguments.
+</p>
+<p><code class="code">diff</code> is the only Maxima command which recognizes dependencies established
+by <code class="code">depends</code>.  Other functions (<code class="code">integrate</code>, <code class="code">laplace</code>, etc.)
+only recognize dependencies explicitly represented by their arguments.
+For example, <code class="code"><a class="ref" href="maxima_18.html#integrate">integrate</a></code> does not recognize the dependence of <code class="code">f</code> on
+<code class="code">x</code> unless explicitly represented as <code class="code">integrate (f(x), x)</code>.
+</p>
+<p><code class="code">depends(<var class="var">f</var>, [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>])</code> is equivalent to <code class="code">dependencies(<var class="var">f</var>(<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>))</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#diff">diff</a></code>, <code class="code"><a class="ref" href="#del">del</a></code>, <code class="code"><a class="ref" href="#derivdegree">derivdegree</a></code> and
+<code class="code"><a class="ref" href="#derivabbrev">derivabbrev</a></code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) depends ([f, g], x);
+(%o1)                     [f(x), g(x)]
+(%i2) depends ([r, s], [u, v, w]);
+(%o2)               [r(u, v, w), s(u, v, w)]
+(%i3) depends (u, t);
+(%o3)                        [u(t)]
+(%i4) dependencies;
+(%o4)      [f(x), g(x), r(u, v, w), s(u, v, w), u(t)]
+(%i5) diff (r.s, u);
+                         dr           ds
+(%o5)                    -- . s + r . --
+                         du           du
+</pre></div>
+
+<div class="example">
+<pre class="example-preformatted">(%i6) diff (r.s, t);
+                      dr du           ds du
+(%o6)                 -- -- . s + r . -- --
+                      du dt           du dt
+</pre></div>
+
+<div class="example">
+<pre class="example-preformatted">(%i7) remove (r, dependency);
+(%o7)                         done
+(%i8) diff (r.s, t);
+                                ds du
+(%o8)                       r . -- --
+                                du dt
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="derivabbrev"></a><a class="anchor" id="Item_003a-Differentiation_002fdefvr_002fderivabbrev"></a><dl class="first-defvr">
+<dt class="defvr" id="index-derivabbrev"><span class="category-def">Option variable: </span><span><strong class="def-name">derivabbrev</strong><a class="copiable-link" href='#index-derivabbrev'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">derivabbrev</code> is <code class="code">true</code>,
+symbolic derivatives (that is, <code class="code">diff</code> nouns) are displayed as subscripts.
+Otherwise, derivatives are displayed in the Leibniz notation <code class="code">dy/dx</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-flags">Global flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="derivdegree"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fderivdegree"></a><dl class="first-deffn">
+<dt class="deffn" id="index-derivdegree"><span class="category-def">Function: </span><span><strong class="def-name">derivdegree</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">y</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-derivdegree'> &para;</a></span></dt>
+<dd>
+<p>Returns the highest degree of the derivative
+of the dependent variable <var class="var">y</var> with respect to the independent variable
+<var class="var">x</var> occurring in <var class="var">expr</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) 'diff (y, x, 2) + 'diff (y, z, 3) + 'diff (y, x) * x^2;
+                         3     2
+                        d y   d y    2 dy
+(%o1)                   --- + --- + x  --
+                          3     2      dx
+                        dz    dx
+(%i2) derivdegree (%, y, x);
+(%o2)                           2
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="derivlist"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fderivlist"></a><dl class="first-deffn">
+<dt class="deffn" id="index-derivlist"><span class="category-def">Function: </span><span><strong class="def-name">derivlist</strong> <var class="def-var-arguments">(<var class="var">var_1</var>, &hellip;, <var class="var">var_k</var>)</var><a class="copiable-link" href='#index-derivlist'> &para;</a></span></dt>
+<dd>
+<p>Causes only differentiations with respect to
+the indicated variables, within the <code class="code"><a class="ref" href="maxima_7.html#ev">ev</a></code> command.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation">Evaluation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="derivsubst"></a><a class="anchor" id="Item_003a-Differentiation_002fdefvr_002fderivsubst"></a><dl class="first-defvr">
+<dt class="defvr" id="index-derivsubst"><span class="category-def">Option variable: </span><span><strong class="def-name">derivsubst</strong><a class="copiable-link" href='#index-derivsubst'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">derivsubst</code> is <code class="code">true</code>, a non-syntactic substitution such as
+<code class="code">subst (x, 'diff (y, t), 'diff (y, t, 2))</code> yields <code class="code">'diff (x, t)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="diff"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fdiff"></a><dl class="first-deffn">
+<dt class="deffn" id="index-diff"><span class="category-def">Function: </span><span><strong class="def-name">diff</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">diff</code> (<var class="var">expr</var>, <var class="var">x_1</var>, <var class="var">n_1</var>, &hellip;, <var class="var">x_m</var>, <var class="var">n_m</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">diff</code> (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">diff</code> (<var class="var">expr</var>, <var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">diff</code> (<var class="var">expr</var>)</var><a class="copiable-link" href='#index-diff'> &para;</a></span></dt>
+<dd>
+<p>Returns the derivative or differential of <var class="var">expr</var> with respect to some or
+all variables in <var class="var">expr</var>.
+</p>
+<p><code class="code">diff (<var class="var">expr</var>, <var class="var">x</var>, <var class="var">n</var>)</code> returns the <var class="var">n</var>&rsquo;th derivative of
+<var class="var">expr</var> with respect to <var class="var">x</var>.
+</p>
+<p><code class="code">diff (<var class="var">expr</var>, <var class="var">x_1</var>, <var class="var">n_1</var>, ..., <var class="var">x_m</var>, <var class="var">n_m</var>)</code>
+returns the mixed partial derivative of <var class="var">expr</var> with respect to <var class="var">x_1</var>, 
+&hellip;, <var class="var">x_m</var>.  It is equivalent to <code class="code">diff (... (diff (<var class="var">expr</var>,
+<var class="var">x_m</var>, <var class="var">n_m</var>) ...), <var class="var">x_1</var>, <var class="var">n_1</var>)</code>.
+</p>
+<p><code class="code">diff (<var class="var">expr</var>, <var class="var">x</var>)</code>
+returns the first derivative of <var class="var">expr</var> with respect to
+the variable <var class="var">x</var>.
+</p>
+<p><code class="code">diff (<var class="var">expr</var>)</code> returns the total differential of <var class="var">expr</var>, that is,
+the sum of the derivatives of <var class="var">expr</var> with respect to each its variables
+times the differential <code class="code">del</code> of each variable.
+No further simplification of <code class="code">del</code> is offered.
+</p>
+<p>The noun form of <code class="code">diff</code> is required in some contexts,
+such as stating a differential equation.
+In these cases, <code class="code">diff</code> may be quoted (as <code class="code">'diff</code>) to yield the noun
+form instead of carrying out the differentiation.
+</p>
+<p>When <code class="code">derivabbrev</code> is <code class="code">true</code>, derivatives are displayed as subscripts.
+Otherwise, derivatives are displayed in the Leibniz notation, <code class="code">dy/dx</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#depends">depends</a></code>, <code class="code"><a class="ref" href="#del">del</a></code>, <code class="code"><a class="ref" href="#derivdegree">derivdegree</a></code>, <code class="code"><a class="ref" href="#derivabbrev">derivabbrev</a></code>, and <code class="code"><a class="ref" href="#gradef">gradef</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) diff (exp (f(x)), x, 2);
+                     2
+              f(x)  d               f(x)  d         2
+(%o1)       %e     (--- (f(x))) + %e     (-- (f(x)))
+                      2                   dx
+                    dx
+(%i2) derivabbrev: true$
+(%i3) 'integrate (f(x, y), y, g(x), h(x));
+                         h(x)
+                        /
+                        [
+(%o3)                   I     f(x, y) dy
+                        ]
+                        /
+                         g(x)
+(%i4) diff (%, x);
+       h(x)
+      /
+      [
+(%o4) I     f(x, y)  dy + f(x, h(x)) h(x)  - f(x, g(x)) g(x)
+      ]            x                     x                  x
+      /
+       g(x)
+</pre></div>
+
+<p>For the tensor package, the following modifications have been
+incorporated:
+</p>
+<p>(1) The derivatives of any indexed objects in <var class="var">expr</var> will have the
+variables <var class="var">x_i</var> appended as additional arguments.  Then all the
+derivative indices will be sorted.
+</p>
+<p>(2) The <var class="var">x_i</var> may be integers from 1 up to the value of the variable
+<code class="code">dimension</code> [default value: 4].  This will cause the differentiation to be
+carried out with respect to the <var class="var">x_i</var>&rsquo;th member of the list
+<code class="code">coordinates</code> which should be set to a list of the names of the
+coordinates, e.g., <code class="code">[x, y, z, t]</code>. If <code class="code">coordinates</code> is bound to an
+atomic variable, then that variable subscripted by <var class="var">x_i</var> will be used for
+the variable of differentiation.  This permits an array of coordinate names or
+subscripted names like <code class="code">X[1]</code>, <code class="code">X[2]</code>, &hellip; to be used.  If
+<code class="code">coordinates</code> has not been assigned a value, then the variables will be
+treated as in (1) above.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="symbol_005fdiff"></a><a class="anchor" id="Item_003a-Differentiation_002fdefvr_002fdiff"></a><dl class="first-defvr">
+<dt class="defvr" id="index-diff-2"><span class="category-def">Special symbol: </span><span><strong class="def-name">diff</strong><a class="copiable-link" href='#index-diff-2'> &para;</a></span></dt>
+<dd>
+<p>When <code class="code">diff</code> is present as an <code class="code">evflag</code> in call to <code class="code">ev</code>,
+all differentiations indicated in <code class="code">expr</code> are carried out.
+</p>
+</dd></dl>
+
+<a class="anchor" id="express"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fexpress"></a><dl class="first-deffn">
+<dt class="deffn" id="index-express"><span class="category-def">Function: </span><span><strong class="def-name">express</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-express'> &para;</a></span></dt>
+<dd>
+
+<p>Expands differential operator nouns into expressions in terms of partial
+derivatives.  <code class="code">express</code> recognizes the operators <code class="code">grad</code>, <code class="code">div</code>,
+<code class="code">curl</code>, <code class="code">laplacian</code>.  <code class="code">express</code> also expands the cross product
+<code class="code"><a class="ref" href="maxima_24.html#g_t_007e">~</a></code>.
+</p>
+<p>Symbolic derivatives (that is, <code class="code">diff</code> nouns)
+in the return value of express may be evaluated by including <code class="code">diff</code>
+in the <code class="code">ev</code> function call or command line.
+In this context, <code class="code"><a class="ref" href="#diff">diff</a></code> acts as an <code class="code"><a class="ref" href="maxima_7.html#evfun">evfun</a></code>.
+</p>
+<p><code class="code">load (&quot;vect&quot;)</code> loads this function.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;vect&quot;)$
+(%i2) grad (x^2 + y^2 + z^2);
+                              2    2    2
+(%o2)                  grad (z  + y  + x )
+(%i3) express (%);
+       d    2    2    2   d    2    2    2   d    2    2    2
+(%o3) [-- (z  + y  + x ), -- (z  + y  + x ), -- (z  + y  + x )]
+       dx                 dy                 dz
+(%i4) ev (%, diff);
+(%o4)                    [2 x, 2 y, 2 z]
+(%i5) div ([x^2, y^2, z^2]);
+                              2   2   2
+(%o5)                   div [x , y , z ]
+(%i6) express (%);
+                   d    2    d    2    d    2
+(%o6)              -- (z ) + -- (y ) + -- (x )
+                   dz        dy        dx
+(%i7) ev (%, diff);
+(%o7)                    2 z + 2 y + 2 x
+(%i8) curl ([x^2, y^2, z^2]);
+                               2   2   2
+(%o8)                   curl [x , y , z ]
+(%i9) express (%);
+       d    2    d    2   d    2    d    2   d    2    d    2
+(%o9) [-- (z ) - -- (y ), -- (x ) - -- (z ), -- (y ) - -- (x )]
+       dy        dz       dz        dx       dx        dy
+(%i10) ev (%, diff);
+(%o10)                      [0, 0, 0]
+(%i11) laplacian (x^2 * y^2 * z^2);
+                                  2  2  2
+(%o11)                laplacian (x  y  z )
+(%i12) express (%);
+         2                2                2
+        d     2  2  2    d     2  2  2    d     2  2  2
+(%o12)  --- (x  y  z ) + --- (x  y  z ) + --- (x  y  z )
+          2                2                2
+        dz               dy               dx
+(%i13) ev (%, diff);
+                      2  2      2  2      2  2
+(%o13)             2 y  z  + 2 x  z  + 2 x  y
+(%i14) [a, b, c] ~ [x, y, z];
+(%o14)                [a, b, c] ~ [x, y, z]
+(%i15) express (%);
+(%o15)          [b z - c y, c x - a z, a y - b x]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Vectors">Vectors</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="gradef"></a><a class="anchor" id="Item_003a-Differentiation_002fdeffn_002fgradef"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gradef"><span class="category-def">Function: </span><span><strong class="def-name">gradef</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">gradef</code> (<var class="var">f</var>(<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>), <var class="var">g_1</var>, &hellip;, <var class="var">g_m</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">gradef</code> (<var class="var">a</var>, <var class="var">x</var>, <var class="var">expr</var>)</var><a class="copiable-link" href='#index-gradef'> &para;</a></span></dt>
+<dd>
+<p>Defines the partial derivatives (i.e., the components of the gradient) of the
+function <var class="var">f</var> or variable <var class="var">a</var>.
+</p>
+<p><code class="code">gradef (<var class="var">f</var>(<var class="var">x_1</var>, ..., <var class="var">x_n</var>), <var class="var">g_1</var>, ..., <var class="var">g_m</var>)</code>
+defines <code class="code">d<var class="var">f</var>/d<var class="var">x_i</var></code> as <var class="var">g_i</var>, where <var class="var">g_i</var> is an
+expression; <var class="var">g_i</var> may be a function call, but not the name of a function.
+The number of partial derivatives <var class="var">m</var> may be less than the number of
+arguments <var class="var">n</var>, in which case derivatives are defined with respect to
+<var class="var">x_1</var> through <var class="var">x_m</var> only.
+</p>
+<p><code class="code">gradef (<var class="var">a</var>, <var class="var">x</var>, <var class="var">expr</var>)</code> defines the derivative of variable
+<var class="var">a</var> with respect to <var class="var">x</var> as <var class="var">expr</var>.  This also establishes the
+dependence of <var class="var">a</var> on <var class="var">x</var> (via <code class="code">depends (<var class="var">a</var>, <var class="var">x</var>)</code>).
+</p>
+<p>The first argument <code class="code"><var class="var">f</var>(<var class="var">x_1</var>, ..., <var class="var">x_n</var>)</code> or <var class="var">a</var> is
+quoted, but the remaining arguments <var class="var">g_1</var>, ..., <var class="var">g_m</var> are evaluated.
+<code class="code">gradef</code> returns the function or variable for which the partial derivatives
+are defined.
+</p>
+<p><code class="code">gradef</code> can redefine the derivatives of Maxima&rsquo;s built-in functions.
+For example, <code class="code">gradef (sin(x), sqrt (1 - sin(x)^2))</code> redefines the
+derivative of <code class="code">sin</code>.
+</p>
+<p><code class="code">gradef</code> cannot define partial derivatives for a subscripted function.
+</p>
+<p><code class="code">printprops ([<var class="var">f_1</var>, ..., <var class="var">f_n</var>], gradef)</code> displays the partial
+derivatives of the functions <var class="var">f_1</var>, ..., <var class="var">f_n</var>, as defined by
+<code class="code">gradef</code>.
+</p>
+<p><code class="code">printprops ([<var class="var">a_n</var>, ..., <var class="var">a_n</var>], atomgrad)</code> displays the partial
+derivatives of the variables <var class="var">a_n</var>, ..., <var class="var">a_n</var>, as defined by
+<code class="code">gradef</code>.
+</p>
+<p><code class="code">gradefs</code> is the list of the functions
+for which partial derivatives have been defined by <code class="code">gradef</code>.
+<code class="code">gradefs</code> does not include any variables
+for which partial derivatives have been defined by <code class="code">gradef</code>.
+</p>
+<p>Gradients are needed when, for example, a function is not known
+explicitly but its first derivatives are and it is desired to obtain
+higher order derivatives.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gradefs"></a><a class="anchor" id="Item_003a-Differentiation_002fdefvr_002fgradefs"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gradefs"><span class="category-def">System variable: </span><span><strong class="def-name">gradefs</strong><a class="copiable-link" href='#index-gradefs'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[]</code>
+</p>
+<p><code class="code">gradefs</code> is the list of the functions
+for which partial derivatives have been defined by <code class="code">gradef</code>.
+<code class="code">gradefs</code> does not include any variables
+for which partial derivatives have been defined by <code class="code">gradef</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_18.html#Integration" accesskey="n" rel="next">Integration</a>, Previous: <a href="maxima_16.html#Limits" accesskey="p" rel="prev">Limits</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

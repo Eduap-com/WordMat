@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>lsquares-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="lsquares-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="lsquares-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_72.html#minpack_002dpkg" rel="next" title="minpack-pkg">
+<link href="maxima_70.html#linearalgebra_002dpkg" rel="prev" title="linearalgebra-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="lsquares_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_72.html#minpack_002dpkg" accesskey="n" rel="next">minpack</a>, Previous: <a href="maxima_70.html#linearalgebra_002dpkg" accesskey="p" rel="prev">linearalgebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="lsquares">72 lsquares</h2>
+
+<a class="anchor" id="Item_003a-lsquares_002fnode_002fIntroduction-to-lsquares"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-lsquares" accesskey="1">Introduction to lsquares</a></li>
+<li><a href="#Functions-and-Variables-for-lsquares" accesskey="2">Functions and Variables for lsquares</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-lsquares">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-lsquares" accesskey="n" rel="next">Functions and Variables for lsquares</a>, Previous: <a href="#lsquares_002dpkg" accesskey="p" rel="prev">lsquares</a>, Up: <a href="#lsquares_002dpkg" accesskey="u" rel="up">lsquares</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-lsquares-1">72.1 Introduction to lsquares</h3>
+
+<p><code class="code">lsquares</code> is a collection of functions to implement the method of least squares
+to estimate parameters for a model from numerical data.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Statistical-estimation">Statistical estimation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lsquares">Package lsquares</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-lsquares_002fnode_002fFunctions-and-Variables-for-lsquares"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-lsquares">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-lsquares" accesskey="p" rel="prev">Introduction to lsquares</a>, Up: <a href="#lsquares_002dpkg" accesskey="u" rel="up">lsquares</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-lsquares-1">72.2 Functions and Variables for lsquares</h3>
+
+<a class="anchor" id="lsquares_005festimates"></a><a class="anchor" id="Item_003a-lsquares_002fdeffn_002flsquares_005festimates"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lsquares_005festimates"><span class="category-def">Function: </span><span><strong class="def-name">lsquares_estimates</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">lsquares_estimates</code> (<var class="var">D</var>, <var class="var">x</var>, <var class="var">e</var>, <var class="var">a</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">lsquares_estimates</code> (<var class="var">D</var>, <var class="var">x</var>, <var class="var">e</var>, <var class="var">a</var>, initial = <var class="var">L</var>, tol = <var class="var">t</var>)</var><a class="copiable-link" href='#index-lsquares_005festimates'> &para;</a></span></dt>
+<dd>
+<p>Estimate parameters <var class="var">a</var> to best fit the equation <var class="var">e</var>
+in the variables <var class="var">x</var> and <var class="var">a</var> to the data <var class="var">D</var>,
+as determined by the method of least squares.
+<code class="code">lsquares_estimates</code> first seeks an exact solution,
+and if that fails, then seeks an approximate solution.
+</p>
+<p>The return value is a list of lists of equations of the form <code class="code">[a = ..., b = ..., c = ...]</code>.
+Each element of the list is a distinct, equivalent minimum of the mean square error.
+</p>
+<p>The data <var class="var">D</var> must be a matrix.
+Each row is one datum (which may be called a &lsquo;record&rsquo; or &lsquo;case&rsquo; in some contexts),
+and each column contains the values of one variable across all data.
+The list of variables <var class="var">x</var> gives a name for each column of <var class="var">D</var>,
+even the columns which do not enter the analysis.
+The list of parameters <var class="var">a</var> gives the names of the parameters for which
+estimates are sought.
+The equation <var class="var">e</var> is an expression or equation in the variables <var class="var">x</var> and <var class="var">a</var>;
+if <var class="var">e</var> is not an equation, it is treated the same as <code class="code"><var class="var">e</var> = 0</code>.
+</p>
+<p>Additional arguments to <code class="code">lsquares_estimates</code>
+are specified as equations and passed on verbatim to the function <code class="code">lbfgs</code>
+which is called to find estimates by a numerical method
+when an exact result is not found.
+</p>
+<p>If some exact solution can be found (via <code class="code">solve</code>),
+the data <var class="var">D</var> may contain non-numeric values.
+However, if no exact solution is found,
+each element of <var class="var">D</var> must have a numeric value.
+This includes numeric constants such as <code class="code">%pi</code> and <code class="code">%e</code> as well as literal numbers
+(integers, rationals, ordinary floats, and bigfloats).
+Numerical calculations are carried out with ordinary floating-point arithmetic,
+so all other kinds of numbers are converted to ordinary floats for calculations.
+</p>
+<p>If <code class="code">lsquares_estimates</code> needs excessive amounts of time or runs out of memory
+<code class="code"><a class="ref" href="#lsquares_005festimates_005fapproximate">lsquares_estimates_approximate</a></code>, which skips the attempt to find an exact 
+solution, might still succeed.
+</p>
+<p><code class="code">load(&quot;lsquares&quot;)</code> loads this function.
+</p>
+<p>See also
+<code class="code"><a class="ref" href="#lsquares_005festimates_005fexact">lsquares_estimates_exact</a></code>,
+<code class="code"><a class="ref" href="#lsquares_005festimates_005fapproximate">lsquares_estimates_approximate</a></code>,<br>
+<code class="code"><a class="ref" href="#lsquares_005fmse">lsquares_mse</a></code>,
+<code class="code"><a class="ref" href="#lsquares_005fresiduals">lsquares_residuals</a></code>,
+and <code class="code"><a class="ref" href="#lsquares_005fresidual_005fmse">lsquares_residual_mse</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>A problem for which an exact solution is found.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lsquares&quot;)$
+(%i2) M : matrix (
+        [1,1,1], [3/2,1,2], [9/4,2,1], [3,2,2], [2,2,1]);
+                           [ 1  1  1 ]
+                           [         ]
+                           [ 3       ]
+                           [ -  1  2 ]
+                           [ 2       ]
+                           [         ]
+(%o2)                      [ 9       ]
+                           [ -  2  1 ]
+                           [ 4       ]
+                           [         ]
+                           [ 3  2  2 ]
+                           [         ]
+                           [ 2  2  1 ]
+</pre><div class="group"><pre class="example-preformatted">(%i3) lsquares_estimates (
+         M, [z,x,y], (z+D)^2 = A*x+B*y+C, [A,B,C,D]);
+                  59        27      10921        107
+(%o3)     [[A = - --, B = - --, C = -----, D = - ---]]
+                  16        16      1024         32
+</pre></div></div>
+
+<p>A problem for which no exact solution is found,
+so <code class="code">lsquares_estimates</code> resorts to numerical approximation.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lsquares&quot;)$
+(%i2) M : matrix ([1, 1], [2, 7/4], [3, 11/4], [4, 13/4]);
+                            [ 1  1  ]
+                            [       ]
+                            [    7  ]
+                            [ 2  -  ]
+                            [    4  ]
+                            [       ]
+(%o2)                       [    11 ]
+                            [ 3  -- ]
+                            [    4  ]
+                            [       ]
+                            [    13 ]
+                            [ 4  -- ]
+                            [    4  ]
+</pre><div class="group"><pre class="example-preformatted">(%i3) lsquares_estimates (
+  M, [x,y], y=a*x^b+c, [a,b,c], initial=[3,3,3], iprint=[-1,0]);
+(%o3) [[a = 1.375751433061394, b = 0.7148891534417651, 
+                                       c = - 0.4020908910062951]]
+</pre></div></div>
+
+<p>Exponential functions aren&rsquo;t well-conditioned for least min square fitting.
+In case that fitting to them fails it might be possible to get rid of the
+exponential function using an logarithm.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lsquares&quot;)$
+(%i2) yvalues: [1,3,5,60,200,203,80]$
+(%i3) time: [1,2,4,5,6,8,10]$
+</pre><div class="group"><pre class="example-preformatted">(%i4) f: y=a*exp(b*t);
+                                   b t
+(%o4)                      y = a %e
+</pre></div><pre class="example-preformatted">(%i5) yvalues_log: log(yvalues)$
+</pre><div class="group"><pre class="example-preformatted">(%i6) f_log: log(subst(y=exp(y),f));
+                                    b t
+(%o6)                   y = log(a %e   )
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) lsquares_estimates (transpose(matrix(yvalues_log,time)),
+                          [y,t], f_log, [a,b]);
+*************************************************
+  N=    2   NUMBER OF CORRECTIONS=25
+       INITIAL VALUES
+ F=  6.802906290754687D+00   GNORM=  2.851243373781393D+01
+*************************************************
+
+I NFN FUNC                  GNORM                 STEPLENGTH
+
+1   3 1.141838765593467D+00 1.067358003667488D-01 1.390943719972406D-02  
+2   5 1.141118195694385D+00 1.237977833033414D-01 5.000000000000000D+00  
+3   6 1.136945723147959D+00 3.806696991691383D-01 1.000000000000000D+00  
+4   7 1.133958243220262D+00 3.865103550379243D-01 1.000000000000000D+00  
+5   8 1.131725773805499D+00 2.292258231154026D-02 1.000000000000000D+00  
+6   9 1.131625585698168D+00 2.664440547017370D-03 1.000000000000000D+00  
+7  10 1.131620564856599D+00 2.519366958715444D-04 1.000000000000000D+00  
+
+ THE MINIMIZATION TERMINATED WITHOUT DETECTING ERRORS.
+ IFLAG = 0
+(%o7)   [[a = 1.155904145765554, b = 0.5772666876959847]]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lsquares">Package lsquares</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="lsquares_005festimates_005fexact"></a><a class="anchor" id="Item_003a-lsquares_002fdeffn_002flsquares_005festimates_005fexact"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lsquares_005festimates_005fexact"><span class="category-def">Function: </span><span><strong class="def-name">lsquares_estimates_exact</strong> <var class="def-var-arguments">(<var class="var">MSE</var>, <var class="var">a</var>)</var><a class="copiable-link" href='#index-lsquares_005festimates_005fexact'> &para;</a></span></dt>
+<dd>
+<p>Estimate parameters <var class="var">a</var> to minimize the mean square error <var class="var">MSE</var>,
+by constructing a system of equations and attempting to solve them symbolically via <code class="code">solve</code>.
+The mean square error is an expression in the parameters <var class="var">a</var>,
+such as that returned by <code class="code">lsquares_mse</code>.
+</p>
+<p>The return value is a list of lists of equations of the form <code class="code">[a = ..., b = ..., c = ...]</code>.
+The return value may contain zero, one, or two or more elements.
+If two or more elements are returned,
+each represents a distinct, equivalent minimum of the mean square error.
+</p>
+<p>See also
+<code class="code"><a class="ref" href="#lsquares_005festimates">lsquares_estimates</a></code>,
+<code class="code"><a class="ref" href="#lsquares_005festimates_005fapproximate">lsquares_estimates_approximate</a></code>,
+<code class="code"><a class="ref" href="#lsquares_005fmse">lsquares_mse</a></code>,
+<code class="code"><a class="ref" href="#lsquares_005fresiduals">lsquares_residuals</a></code>,
+and <code class="code"><a class="ref" href="#lsquares_005fresidual_005fmse">lsquares_residual_mse</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lsquares&quot;)$
+(%i2) M : matrix (
+         [1,1,1], [3/2,1,2], [9/4,2,1], [3,2,2], [2,2,1]);
+                           [ 1  1  1 ]
+                           [         ]
+                           [ 3       ]
+                           [ -  1  2 ]
+                           [ 2       ]
+                           [         ]
+(%o2)                      [ 9       ]
+                           [ -  2  1 ]
+                           [ 4       ]
+                           [         ]
+                           [ 3  2  2 ]
+                           [         ]
+                           [ 2  2  1 ]
+(%i3) mse : lsquares_mse (M, [z, x, y], (z + D)^2 = A*x + B*y + C);
+         5
+        ====
+        \                                         2     2
+         &gt;    ((- B M    ) - A M     + (M     + D)  - C)
+        /            i, 3       i, 2     i, 1
+        ====
+        i = 1
+(%o3)   -------------------------------------------------
+                                5
+</pre><div class="group"><pre class="example-preformatted">(%i4) lsquares_estimates_exact (mse, [A, B, C, D]);
+                  59        27      10921        107
+(%o4)     [[A = - --, B = - --, C = -----, D = - ---]]
+                  16        16      1024         32
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lsquares">Package lsquares</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="lsquares_005festimates_005fapproximate"></a><a class="anchor" id="Item_003a-lsquares_002fdeffn_002flsquares_005festimates_005fapproximate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lsquares_005festimates_005fapproximate"><span class="category-def">Function: </span><span><strong class="def-name">lsquares_estimates_approximate</strong> <var class="def-var-arguments">(<var class="var">MSE</var>, <var class="var">a</var>, initial = <var class="var">L</var>, tol = <var class="var">t</var>)</var><a class="copiable-link" href='#index-lsquares_005festimates_005fapproximate'> &para;</a></span></dt>
+<dd>
+<p>Estimate parameters <var class="var">a</var> to minimize the mean square error <var class="var">MSE</var>,
+via the numerical minimization function <code class="code">lbfgs</code>.
+The mean square error is an expression in the parameters <var class="var">a</var>,
+such as that returned by <code class="code">lsquares_mse</code>.
+</p>
+<p>The solution returned by <code class="code">lsquares_estimates_approximate</code> is a local (perhaps global) minimum
+of the mean square error.
+For consistency with <code class="code">lsquares_estimates_exact</code>,
+the return value is a nested list which contains one element,
+namely a list of equations of the form <code class="code">[a = ..., b = ..., c = ...]</code>.
+</p>
+<p>Additional arguments to <code class="code">lsquares_estimates_approximate</code>
+are specified as equations and passed on verbatim to the function <code class="code">lbfgs</code>.
+</p>
+<p><var class="var">MSE</var> must evaluate to a number when the parameters are assigned numeric values.
+This requires that the data from which <var class="var">MSE</var> was constructed
+comprise only numeric constants such as <code class="code">%pi</code> and <code class="code">%e</code> and literal numbers
+(integers, rationals, ordinary floats, and bigfloats).
+Numerical calculations are carried out with ordinary floating-point arithmetic,
+so all other kinds of numbers are converted to ordinary floats for calculations.
+</p>
+<p><code class="code">load(&quot;lsquares&quot;)</code> loads this function.
+</p>
+<p>See also
+<code class="code"><a class="ref" href="#lsquares_005festimates">lsquares_estimates</a></code>,
+<code class="code"><a class="ref" href="#lsquares_005festimates_005fexact">lsquares_estimates_exact</a></code>,
+<code class="code"><a class="ref" href="#lsquares_005fmse">lsquares_mse</a></code>,<br>
+<code class="code"><a class="ref" href="#lsquares_005fresiduals">lsquares_residuals</a></code>,
+and <code class="code"><a class="ref" href="#lsquares_005fresidual_005fmse">lsquares_residual_mse</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lsquares&quot;)$
+(%i2) M : matrix (
+         [1,1,1], [3/2,1,2], [9/4,2,1], [3,2,2], [2,2,1]);
+                           [ 1  1  1 ]
+                           [         ]
+                           [ 3       ]
+                           [ -  1  2 ]
+                           [ 2       ]
+                           [         ]
+(%o2)                      [ 9       ]
+                           [ -  2  1 ]
+                           [ 4       ]
+                           [         ]
+                           [ 3  2  2 ]
+                           [         ]
+                           [ 2  2  1 ]
+(%i3) mse : lsquares_mse (M, [z, x, y], (z + D)^2 = A*x + B*y + C);
+         5
+        ====
+        \                                         2     2
+         &gt;    ((- B M    ) - A M     + (M     + D)  - C)
+        /            i, 3       i, 2     i, 1
+        ====
+        i = 1
+(%o3)   -------------------------------------------------
+                                5
+</pre><div class="group"><pre class="example-preformatted">(%i4) lsquares_estimates_approximate (
+        mse, [A, B, C, D], iprint = [-1, 0]);
+(%o4) [[A = - 3.678504947401971, B = - 1.683070351177937, 
+                 C = 10.63469950148714, D = - 3.340357993175297]]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lsquares">Package lsquares</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="lsquares_005fmse"></a><a class="anchor" id="Item_003a-lsquares_002fdeffn_002flsquares_005fmse"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lsquares_005fmse"><span class="category-def">Function: </span><span><strong class="def-name">lsquares_mse</strong> <var class="def-var-arguments">(<var class="var">D</var>, <var class="var">x</var>, <var class="var">e</var>)</var><a class="copiable-link" href='#index-lsquares_005fmse'> &para;</a></span></dt>
+<dd>
+<p>Returns the mean square error (MSE), a summation expression, for the equation <var class="var">e</var>
+in the variables <var class="var">x</var>, with data <var class="var">D</var>.
+</p>
+<p>The MSE is defined as:
+</p>
+<div class="example">
+<pre class="example-preformatted">                    n
+                   ====
+               1   \                        2
+               -    &gt;    (lhs(e ) - rhs(e ))
+               n   /           i         i
+                   ====
+                   i = 1
+</pre></div>
+
+<p>where <var class="var">n</var> is the number of data and <code class="code"><var class="var">e</var>[i]</code> is the equation <var class="var">e</var>
+evaluated with the variables in <var class="var">x</var> assigned values from the <code class="code">i</code>-th datum, <code class="code"><var class="var">D</var>[i]</code>.
+</p>
+<p><code class="code">load(&quot;lsquares&quot;)</code> loads this function.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lsquares&quot;)$
+(%i2) M : matrix (
+         [1,1,1], [3/2,1,2], [9/4,2,1], [3,2,2], [2,2,1]);
+                           [ 1  1  1 ]
+                           [         ]
+                           [ 3       ]
+                           [ -  1  2 ]
+                           [ 2       ]
+                           [         ]
+(%o2)                      [ 9       ]
+                           [ -  2  1 ]
+                           [ 4       ]
+                           [         ]
+                           [ 3  2  2 ]
+                           [         ]
+                           [ 2  2  1 ]
+(%i3) mse : lsquares_mse (M, [z, x, y], (z + D)^2 = A*x + B*y + C);
+         5
+        ====
+        \                                         2     2
+         &gt;    ((- B M    ) - A M     + (M     + D)  - C)
+        /            i, 3       i, 2     i, 1
+        ====
+        i = 1
+(%o3)   -------------------------------------------------
+                                5
+(%i4) diff (mse, D);
+(%o4) 
+      5
+     ====
+     \                                                     2
+   4  &gt;    (M     + D) ((- B M    ) - A M     + (M     + D)  - C)
+     /       i, 1             i, 3       i, 2     i, 1
+     ====
+     i = 1
+   --------------------------------------------------------------
+                                 5
+</pre><div class="group"><pre class="example-preformatted">(%i5) ''mse, nouns;
+               2                 2         9 2               2
+(%o5) (((D + 3)  - C - 2 B - 2 A)  + ((D + -)  - C - B - 2 A)
+                                           4
+           2               2         3 2               2
+ + ((D + 2)  - C - B - 2 A)  + ((D + -)  - C - 2 B - A)
+                                     2
+           2             2
+ + ((D + 1)  - C - B - A) )/5
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) mse : lsquares_mse (M, [z, x, y], (z + D)^2 = A*x + B*y + C);
+           5
+          ====
+          \                 2                         2
+           &gt;    ((D + M    )  - C - M     B - M     A)
+          /            i, 1          i, 3      i, 2
+          ====
+          i = 1
+(%o3)     ---------------------------------------------
+                                5
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) diff (mse, D);
+         5
+        ====
+        \                             2
+      4  &gt;    (D + M    ) ((D + M    )  - C - M     B - M     A)
+        /           i, 1         i, 1          i, 3      i, 2
+        ====
+        i = 1
+(%o4) ----------------------------------------------------------
+                                  5
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) ''mse, nouns;
+</pre></div><div class="group"><pre class="example-preformatted">               2                 2         9 2               2
+(%o5) (((D + 3)  - C - 2 B - 2 A)  + ((D + -)  - C - B - 2 A)
+                                           4
+           2               2         3 2               2
+ + ((D + 2)  - C - B - 2 A)  + ((D + -)  - C - 2 B - A)
+                                     2
+           2             2
+ + ((D + 1)  - C - B - A) )/5
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lsquares">Package lsquares</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="lsquares_005fresiduals"></a><a class="anchor" id="Item_003a-lsquares_002fdeffn_002flsquares_005fresiduals"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lsquares_005fresiduals"><span class="category-def">Function: </span><span><strong class="def-name">lsquares_residuals</strong> <var class="def-var-arguments">(<var class="var">D</var>, <var class="var">x</var>, <var class="var">e</var>, <var class="var">a</var>)</var><a class="copiable-link" href='#index-lsquares_005fresiduals'> &para;</a></span></dt>
+<dd>
+<p>Returns the residuals for the equation <var class="var">e</var>
+with specified parameters <var class="var">a</var> and data <var class="var">D</var>.
+</p>
+<p><var class="var">D</var> is a matrix, <var class="var">x</var> is a list of variables,
+<var class="var">e</var> is an equation or general expression;
+if not an equation, <var class="var">e</var> is treated as if it were <code class="code"><var class="var">e</var> = 0</code>.
+<var class="var">a</var> is a list of equations which specify values for any free parameters in <var class="var">e</var> aside from <var class="var">x</var>.
+</p>
+<p>The residuals are defined as:
+</p>
+<div class="example">
+<pre class="example-preformatted">                        lhs(e ) - rhs(e )
+                             i         i
+</pre></div>
+
+<p>where <code class="code"><var class="var">e</var>[i]</code> is the equation <var class="var">e</var>
+evaluated with the variables in <var class="var">x</var> assigned values from the <code class="code">i</code>-th datum, <code class="code"><var class="var">D</var>[i]</code>,
+and assigning any remaining free variables from <var class="var">a</var>.
+</p>
+<p><code class="code">load(&quot;lsquares&quot;)</code> loads this function.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lsquares&quot;)$
+(%i2) M : matrix (
+         [1,1,1], [3/2,1,2], [9/4,2,1], [3,2,2], [2,2,1]);
+                           [ 1  1  1 ]
+                           [         ]
+                           [ 3       ]
+                           [ -  1  2 ]
+                           [ 2       ]
+                           [         ]
+(%o2)                      [ 9       ]
+                           [ -  2  1 ]
+                           [ 4       ]
+                           [         ]
+                           [ 3  2  2 ]
+                           [         ]
+                           [ 2  2  1 ]
+</pre><div class="group"><pre class="example-preformatted">(%i3) a : lsquares_estimates (
+          M, [z,x,y], (z+D)^2 = A*x+B*y+C, [A,B,C,D]);
+                  59        27      10921        107
+(%o3)     [[A = - --, B = - --, C = -----, D = - ---]]
+                  16        16      1024         32
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) lsquares_residuals (
+          M, [z,x,y], (z+D)^2 = A*x+B*y+C, first(a));
+                     13    13    13  13  13
+(%o4)               [--, - --, - --, --, --]
+                     64    64    32  64  64
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lsquares">Package lsquares</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="lsquares_005fresidual_005fmse"></a><a class="anchor" id="Item_003a-lsquares_002fdeffn_002flsquares_005fresidual_005fmse"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lsquares_005fresidual_005fmse"><span class="category-def">Function: </span><span><strong class="def-name">lsquares_residual_mse</strong> <var class="def-var-arguments">(<var class="var">D</var>, <var class="var">x</var>, <var class="var">e</var>, <var class="var">a</var>)</var><a class="copiable-link" href='#index-lsquares_005fresidual_005fmse'> &para;</a></span></dt>
+<dd>
+<p>Returns the residual mean square error (MSE) for the equation <var class="var">e</var>
+with specified parameters <var class="var">a</var> and data <var class="var">D</var>.
+</p>
+<p>The residual MSE is defined as:
+</p>
+<div class="example">
+<pre class="example-preformatted">                    n
+                   ====
+               1   \                        2
+               -    &gt;    (lhs(e ) - rhs(e ))
+               n   /           i         i
+                   ====
+                   i = 1
+</pre></div>
+
+<p>where <code class="code"><var class="var">e</var>[i]</code> is the equation <var class="var">e</var>
+evaluated with the variables in <var class="var">x</var> assigned values from the <code class="code">i</code>-th datum, <code class="code"><var class="var">D</var>[i]</code>,
+and assigning any remaining free variables from <var class="var">a</var>.
+</p>
+<p><code class="code">load(&quot;lsquares&quot;)</code> loads this function.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lsquares&quot;)$
+(%i2) M : matrix (
+         [1,1,1], [3/2,1,2], [9/4,2,1], [3,2,2], [2,2,1]);
+                           [ 1  1  1 ]
+                           [         ]
+                           [ 3       ]
+                           [ -  1  2 ]
+                           [ 2       ]
+                           [         ]
+(%o2)                      [ 9       ]
+                           [ -  2  1 ]
+                           [ 4       ]
+                           [         ]
+                           [ 3  2  2 ]
+                           [         ]
+                           [ 2  2  1 ]
+</pre><div class="group"><pre class="example-preformatted">(%i3) a : lsquares_estimates (
+       M, [z,x,y], (z+D)^2 = A*x+B*y+C, [A,B,C,D]);
+                  59        27      10921        107
+(%o3)     [[A = - --, B = - --, C = -----, D = - ---]]
+                  16        16      1024         32
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) lsquares_residual_mse (
+       M, [z,x,y], (z + D)^2 = A*x + B*y + C, first (a));
+                              169
+(%o4)                         ----
+                              2560
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lsquares">Package lsquares</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="plsquares"></a><a class="anchor" id="Item_003a-lsquares_002fdeffn_002fplsquares"></a><dl class="first-deffn">
+<dt class="deffn" id="index-plsquares"><span class="category-def">Function: </span><span><strong class="def-name">plsquares</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plsquares</code> (<var class="var">Mat</var>,<var class="var">VarList</var>,<var class="var">depvars</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plsquares</code> (<var class="var">Mat</var>,<var class="var">VarList</var>,<var class="var">depvars</var>,<var class="var">maxexpon</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">plsquares</code> (<var class="var">Mat</var>,<var class="var">VarList</var>,<var class="var">depvars</var>,<var class="var">maxexpon</var>,<var class="var">maxdegree</var>)</var><a class="copiable-link" href='#index-plsquares'> &para;</a></span></dt>
+<dd><p>Multivariable polynomial adjustment of a data table by the &quot;least squares&quot;
+method. <var class="var">Mat</var> is a matrix containing the data, <var class="var">VarList</var> is a list of variable names (one for each Mat column, but use &quot;-&quot; instead of varnames to ignore Mat columns), <var class="var">depvars</var> is the name of a dependent variable or a list with one or more names of dependent variables (which names should be in <var class="var">VarList</var>), <var class="var">maxexpon</var> is the optional maximum exponent for each independent variable (1 by default), and <var class="var">maxdegree</var> is the optional maximum polynomial degree (<var class="var">maxexpon</var> by default); note that the sum of exponents of each term must be equal or smaller than <var class="var">maxdegree</var>, and if <code class="code">maxdgree = 0</code> then no limit is applied.
+</p>
+<p>If <var class="var">depvars</var> is the name of a dependent variable (not in a list), <code class="code">plsquares</code> returns the adjusted polynomial. If <var class="var">depvars</var> is a list of one or more dependent variables, <code class="code">plsquares</code> returns a list with the adjusted polynomial(s). The Coefficients of Determination  are displayed in order to inform about the goodness of fit, which ranges from 0 (no correlation) to 1 (exact correlation). These values are also stored in the global variable <var class="var">DETCOEF</var> (a list if <var class="var">depvars</var> is a list).
+</p>
+
+<p>A simple example of multivariable linear adjustment:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;plsquares&quot;)$
+
+(%i2) plsquares(matrix([1,2,0],[3,5,4],[4,7,9],[5,8,10]),
+                [x,y,z],z);
+     Determination Coefficient for z = .9897039897039897
+                       11 y - 9 x - 14
+(%o2)              z = ---------------
+                              3
+</pre></div>
+
+<p>The same example without degree restrictions:
+</p><div class="example">
+<pre class="example-preformatted">(%i3) plsquares(matrix([1,2,0],[3,5,4],[4,7,9],[5,8,10]),
+                [x,y,z],z,1,0);
+     Determination Coefficient for z = 1.0
+                    x y + 23 y - 29 x - 19
+(%o3)           z = ----------------------
+                              6
+</pre></div>
+
+<p>How many diagonals does a N-sides polygon have? What polynomial degree should be used?
+</p><div class="example">
+<pre class="example-preformatted">(%i4) plsquares(matrix([3,0],[4,2],[5,5],[6,9],[7,14],[8,20]),
+                [N,diagonals],diagonals,5);
+     Determination Coefficient for diagonals = 1.0
+                                2
+                               N  - 3 N
+(%o4)              diagonals = --------
+                                  2
+(%i5) ev(%, N=9);   /* Testing for a 9 sides polygon */
+(%o5)                 diagonals = 27
+</pre></div>
+
+<p>How many ways do we have to put two queens without they are threatened into a n x n chessboard?
+</p><div class="example">
+<pre class="example-preformatted">(%i6) plsquares(matrix([0,0],[1,0],[2,0],[3,8],[4,44]),
+                [n,positions],[positions],4);
+     Determination Coefficient for [positions] = [1.0]
+</pre><div class="group"><pre class="example-preformatted">                         4       3      2
+                      3 n  - 10 n  + 9 n  - 2 n
+(%o6)    [positions = -------------------------]
+                                  6
+</pre></div><pre class="example-preformatted">(%i7) ev(%[1], n=8); /* Testing for a (8 x 8) chessboard */
+(%o7)                positions = 1288
+</pre></div>
+
+<p>An example with six dependent variables:
+</p><div class="example">
+<pre class="example-preformatted">(%i8) mtrx:matrix([0,0,0,0,0,1,1,1],[0,1,0,1,1,1,0,0],
+                  [1,0,0,1,1,1,0,0],[1,1,1,1,0,0,0,1])$
+(%i8) plsquares(mtrx,[a,b,_And,_Or,_Xor,_Nand,_Nor,_Nxor],
+                     [_And,_Or,_Xor,_Nand,_Nor,_Nxor],1,0);
+      Determination Coefficient for
+[_And, _Or, _Xor, _Nand, _Nor, _Nxor] =
+[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+(%o2) [_And = a b, _Or = - a b + b + a,
+_Xor = - 2 a b + b + a, _Nand = 1 - a b,
+_Nor = a b - b - a + 1, _Nxor = 2 a b - b - a + 1]
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;lsquares&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lsquares">Package lsquares</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_72.html#minpack_002dpkg" accesskey="n" rel="next">minpack</a>, Previous: <a href="maxima_70.html#linearalgebra_002dpkg" accesskey="p" rel="prev">linearalgebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>operatingsystem-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="operatingsystem-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="operatingsystem-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_78.html#opsubst_002dpkg" rel="next" title="opsubst-pkg">
+<link href="maxima_76.html#odepack_002dpkg" rel="prev" title="odepack-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="operatingsystem_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_78.html#opsubst_002dpkg" accesskey="n" rel="next">opsubst</a>, Previous: <a href="maxima_76.html#odepack_002dpkg" accesskey="p" rel="prev">odepack</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="operatingsystem">78 operatingsystem</h2>
+
+<a class="anchor" id="Item_003a-operatingsystem_002fnode_002fIntroduction-to-operatingsystem"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-operatingsystem" accesskey="1">Introduction to operatingsystem</a></li>
+<li><a href="#Directory-operations" accesskey="2">Directory operations</a></li>
+<li><a href="#File-operations" accesskey="3">File operations</a></li>
+<li><a href="#Environment-operations" accesskey="4">Environment operations</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-operatingsystem">
+<div class="nav-panel">
+<p>
+Next: <a href="#Directory-operations" accesskey="n" rel="next">Directory operations</a>, Previous: <a href="#operatingsystem_002dpkg" accesskey="p" rel="prev">operatingsystem</a>, Up: <a href="#operatingsystem_002dpkg" accesskey="u" rel="up">operatingsystem</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-operatingsystem-1">78.1 Introduction to operatingsystem</h3>
+
+<p>Package <code class="code">operatingsystem</code> contains functions for operatingsystem-tasks, like file system operations.
+</p>
+
+<a class="anchor" id="Item_003a-operatingsystem_002fnode_002fDirectory-operations"></a><hr>
+</div>
+<div class="section-level-extent" id="Directory-operations">
+<div class="nav-panel">
+<p>
+Next: <a href="#File-operations" accesskey="n" rel="next">File operations</a>, Previous: <a href="#Introduction-to-operatingsystem" accesskey="p" rel="prev">Introduction to operatingsystem</a>, Up: <a href="#operatingsystem_002dpkg" accesskey="u" rel="up">operatingsystem</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Directory-operations-1">78.2 Directory operations</h3>
+
+
+<a class="anchor" id="chdir"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fchdir"></a><dl class="first-deffn">
+<dt class="deffn" id="index-chdir"><span class="category-def">Function: </span><span><strong class="def-name">chdir</strong> <var class="def-var-arguments">(<var class="var">dir</var>)</var><a class="copiable-link" href='#index-chdir'> &para;</a></span></dt>
+<dd><p>Change to directory <var class="var">dir</var>
+</p></dd></dl>
+
+<a class="anchor" id="mkdir"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fmkdir"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mkdir"><span class="category-def">Function: </span><span><strong class="def-name">mkdir</strong> <var class="def-var-arguments">(<var class="var">dir</var>)</var><a class="copiable-link" href='#index-mkdir'> &para;</a></span></dt>
+<dd><p>Create directory <var class="var">dir</var>
+</p></dd></dl>
+
+<a class="anchor" id="rmdir"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002frmdir"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rmdir"><span class="category-def">Function: </span><span><strong class="def-name">rmdir</strong> <var class="def-var-arguments">(<var class="var">dir</var>)</var><a class="copiable-link" href='#index-rmdir'> &para;</a></span></dt>
+<dd><p>remove directory <var class="var">dir</var>
+</p></dd></dl>
+
+<a class="anchor" id="getcurrentdirectory"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fgetcurrentdirectory"></a><dl class="first-deffn">
+<dt class="deffn" id="index-getcurrentdirectory"><span class="category-def">Function: </span><span><strong class="def-name">getcurrentdirectory</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-getcurrentdirectory'> &para;</a></span></dt>
+<dd><p>returns the current working directory.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_12.html#directory">directory</a></code>.
+</p>
+</dd></dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;operatingsystem&quot;)$
+(%i2) mkdir(&quot;testdirectory&quot;)$
+(%i3) chdir(&quot;testdirectory&quot;)$
+(%i4) chdir(&quot;..&quot;)$
+(%i5) rmdir(&quot;testdirectory&quot;)$
+</pre></div>
+
+<a class="anchor" id="Item_003a-operatingsystem_002fnode_002fFile-operations"></a><hr>
+</div>
+<div class="section-level-extent" id="File-operations">
+<div class="nav-panel">
+<p>
+Next: <a href="#Environment-operations" accesskey="n" rel="next">Environment operations</a>, Previous: <a href="#Directory-operations" accesskey="p" rel="prev">Directory operations</a>, Up: <a href="#operatingsystem_002dpkg" accesskey="u" rel="up">operatingsystem</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="File-operations-1">78.3 File operations</h3>
+
+
+<a class="anchor" id="copy_005ffile"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fcopy_005ffile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-copy_005ffile"><span class="category-def">Function: </span><span><strong class="def-name">copy_file</strong> <var class="def-var-arguments">(<var class="var">file1</var>, <var class="var">file2</var>)</var><a class="copiable-link" href='#index-copy_005ffile'> &para;</a></span></dt>
+<dd><p>copies file <var class="var">file1</var> to <var class="var">file2</var>
+</p></dd></dl>
+
+<a class="anchor" id="rename_005ffile"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002frename_005ffile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rename_005ffile"><span class="category-def">Function: </span><span><strong class="def-name">rename_file</strong> <var class="def-var-arguments">(<var class="var">file1</var>, <var class="var">file2</var>)</var><a class="copiable-link" href='#index-rename_005ffile'> &para;</a></span></dt>
+<dd><p>renames file <var class="var">file1</var> to <var class="var">file2</var>
+</p></dd></dl>
+
+<a class="anchor" id="delete_005ffile"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fdelete_005ffile"></a><dl class="first-deffn">
+<dt class="deffn" id="index-delete_005ffile"><span class="category-def">Function: </span><span><strong class="def-name">delete_file</strong> <var class="def-var-arguments">(<var class="var">file1</var>)</var><a class="copiable-link" href='#index-delete_005ffile'> &para;</a></span></dt>
+<dd><p>deletes file <var class="var">file1</var>
+</p></dd></dl>
+
+
+<a class="anchor" id="Item_003a-operatingsystem_002fnode_002fEnvironment-operations"></a><hr>
+</div>
+<div class="section-level-extent" id="Environment-operations">
+<div class="nav-panel">
+<p>
+Previous: <a href="#File-operations" accesskey="p" rel="prev">File operations</a>, Up: <a href="#operatingsystem_002dpkg" accesskey="u" rel="up">operatingsystem</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Environment-operations-1">78.4 Environment operations</h3>
+
+
+<a class="anchor" id="getenv"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fgetenv"></a><dl class="first-deffn">
+<dt class="deffn" id="index-getenv"><span class="category-def">Function: </span><span><strong class="def-name">getenv</strong> <var class="def-var-arguments">(<var class="var">env</var>)</var><a class="copiable-link" href='#index-getenv'> &para;</a></span></dt>
+<dd><p>Get the value of the environment variable <var class="var">env</var>
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;operatingsystem&quot;)$
+(%i2) getenv(&quot;PATH&quot;);
+(%o2) /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+</pre></div>
+
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_78.html#opsubst_002dpkg" accesskey="n" rel="next">opsubst</a>, Previous: <a href="maxima_76.html#odepack_002dpkg" accesskey="p" rel="prev">odepack</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

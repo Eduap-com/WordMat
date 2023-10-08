@@ -1,0 +1,590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: String Input and Output</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: String Input and Output">
+<meta name="keywords" content="Maxima 5.47.0 Manual: String Input and Output">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_374.html#stringproc_002dpkg" rel="up" title="stringproc-pkg">
+<link href="maxima_377.html#Characters" rel="next" title="Characters">
+<link href="maxima_375.html#Introduction-to-String-Processing" rel="previous" title="Introduction to String Processing">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="String-Input-and-Output"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_377.html#Characters" accesskey="n" rel="next">Characters</a>, Previous: <a href="maxima_375.html#Introduction-to-String-Processing" accesskey="p" rel="previous">Introduction to String Processing</a>, Up: <a href="maxima_374.html#stringproc_002dpkg" accesskey="u" rel="up">stringproc-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="String-Input-and-Output-1"></a>
+<h3 class="section">91.2 String Input and Output</h3>
+
+<p>Example: Formatted printing to a file.
+</p>
+<div class="example">
+<pre class="example">(%i1) s: openw(&quot;file.txt&quot;);
+(%o1)                      #&lt;output stream file.txt&gt;
+(%i2) control: 
+&quot;~2tAn atom: ~20t~a~%~2tand a list: ~20t~{~r ~}~%~2t\
+and an integer: ~20t~d~%&quot;$
+(%i3) printf( s,control, 'true,[1,2,3],42 )$
+(%o3)                                false
+(%i4) close(s);
+(%o4)                                true
+(%i5) s: openr(&quot;file.txt&quot;);
+(%o5)                      #&lt;input stream file.txt&gt;
+(%i6) while stringp( tmp:readline(s) ) do print(tmp)$
+  An atom:          true 
+  and a list:       one two three  
+  and an integer:   42 
+(%i7) close(s)$
+</pre></div>
+
+<a name="close"></a><a name="Item_003a-stringproc_002fdeffn_002fclose"></a><dl>
+<dt><a name="index-close"></a>Function: <strong>close</strong> <em>(<var>stream</var>) </em></dt>
+<dd>
+<p>Closes <var>stream</var> and returns <code>true</code> if <var>stream</var> had been open. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="flength"></a><a name="Item_003a-stringproc_002fdeffn_002fflength"></a><dl>
+<dt><a name="index-flength"></a>Function: <strong>flength</strong> <em>(<var>stream</var>)</em></dt>
+<dd>
+<p><var>stream</var> has to be an open stream from or to a file. 
+<code>flength</code> then returns the number of bytes which are currently present in this file.
+</p>
+<p>Example: See <a href="#writebyte">writebyte</a> .
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="flush_005foutput"></a><a name="Item_003a-stringproc_002fdeffn_002fflush_005foutput"></a><dl>
+<dt><a name="index-flush_005foutput"></a>Function: <strong>flush_output</strong> <em>(<var>stream</var>)</em></dt>
+<dd>
+<p>Flushes <var>stream</var> where <var>stream</var> has to be an output stream to a file. 
+</p>
+<p>Example: See <a href="#writebyte">writebyte</a> .
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="fposition"></a><a name="Item_003a-stringproc_002fdeffn_002ffposition"></a><dl>
+<dt><a name="index-fposition"></a>Function: <strong>fposition</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>fposition</tt> (<var>stream</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>fposition</tt> (<var>stream</var>, <var>pos</var>)</em></dt>
+<dd>
+<p>Returns the current position in <var>stream</var>, if <var>pos</var> is not used. 
+If <var>pos</var> is used, <code>fposition</code> sets the position in <var>stream</var>.
+<var>stream</var> has to be a stream from or to a file and 
+<var>pos</var> has to be a positive number.
+</p>
+<p>Positions in data streams are like in strings or lists 1-indexed, 
+i.e. the first element in <var>stream</var> is in position 1.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="freshline"></a><a name="Item_003a-stringproc_002fdeffn_002ffreshline"></a><dl>
+<dt><a name="index-freshline"></a>Function: <strong>freshline</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>freshline</tt> ()  <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>freshline</tt> (<var>stream</var>) </em></dt>
+<dd>
+<p>Writes a new line to the standard output stream 
+if the position is not at the beginning of a line and returns <code>true</code>.
+Using the optional argument <var>stream</var> the new line is written to that stream. 
+There are some cases, where <code>freshline()</code> does not work as expected. 
+</p>
+<p>See also <a href="#newline">newline</a>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="get_005foutput_005fstream_005fstring"></a><a name="Item_003a-stringproc_002fdeffn_002fget_005foutput_005fstream_005fstring"></a><dl>
+<dt><a name="index-get_005foutput_005fstream_005fstring"></a>Function: <strong>get_output_stream_string</strong> <em>(<var>stream</var>)</em></dt>
+<dd>
+<p>Returns a string containing all the characters currently present in 
+<var>stream</var> which must be an open string-output stream. 
+The returned characters are removed from <var>stream</var>.
+</p>
+<p>Example: See <a href="#make_005fstring_005foutput_005fstream">make_string_output_stream</a> .
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="make_005fstring_005finput_005fstream"></a><a name="Item_003a-stringproc_002fdeffn_002fmake_005fstring_005finput_005fstream"></a><dl>
+<dt><a name="index-make_005fstring_005finput_005fstream"></a>Function: <strong>make_string_input_stream</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>make_string_input_stream</tt> (<var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>make_string_input_stream</tt> (<var>string</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>make_string_input_stream</tt> (<var>string</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Returns an input stream which contains parts of <var>string</var> and an end of file. 
+Without optional arguments the stream contains the entire string 
+and is positioned in front of the first character. 
+<var>start</var> and <var>end</var> define the substring contained in the stream. 
+The first character is available at position 1.
+</p> 
+<div class="example">
+<pre class="example">(%i1) istream : make_string_input_stream(&quot;text&quot;, 1, 4);
+(%o1)              #&lt;string-input stream from &quot;text&quot;&gt;
+(%i2) (while (c : readchar(istream)) # false do sprint(c), newline())$
+t e x 
+(%i3) close(istream)$
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="make_005fstring_005foutput_005fstream"></a><a name="Item_003a-stringproc_002fdeffn_002fmake_005fstring_005foutput_005fstream"></a><dl>
+<dt><a name="index-make_005fstring_005foutput_005fstream"></a>Function: <strong>make_string_output_stream</strong> <em>()</em></dt>
+<dd>
+<p>Returns an output stream that accepts characters. Characters currently present 
+in this stream can be retrieved by <a href="#get_005foutput_005fstream_005fstring">get_output_stream_string</a>.
+</p> 
+<div class="example">
+<pre class="example">(%i1) ostream : make_string_output_stream();
+(%o1)               #&lt;string-output stream 09622ea0&gt;
+(%i2) printf(ostream, &quot;foo&quot;)$
+
+(%i3) printf(ostream, &quot;bar&quot;)$
+
+(%i4) string : get_output_stream_string(ostream);
+(%o4)                            foobar
+(%i5) printf(ostream, &quot;baz&quot;)$
+
+(%i6) string : get_output_stream_string(ostream);
+(%o6)                              baz
+(%i7) close(ostream)$
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="newline"></a><a name="Item_003a-stringproc_002fdeffn_002fnewline"></a><dl>
+<dt><a name="index-newline"></a>Function: <strong>newline</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>newline</tt> ()  <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>newline</tt> (<var>stream</var>) </em></dt>
+<dd>
+<p>Writes a new line to the standard output stream. 
+Using the optional argument <var>stream</var> the new line is written to that stream. 
+There are some cases, where <code>newline()</code> does not work as expected. 
+</p>
+<p>See <a href="#sprint">sprint</a> for an example of using <code>newline()</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="opena"></a><a name="Item_003a-stringproc_002fdeffn_002fopena"></a><dl>
+<dt><a name="index-opena"></a>Function: <strong>opena</strong> <em>(<var>file</var>) </em></dt>
+<dd>
+<p>Returns a character output stream to <var>file</var>.
+If an existing file is opened, <code>opena</code> appends elements at the end of <var>file</var>.
+</p>
+<p>For binary output see <a href="maxima_324.html#Functions-and-Variables-for-binary-input-and-output">opena_binary</a> .
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="openr"></a><a name="Item_003a-stringproc_002fdeffn_002fopenr"></a><dl>
+<dt><a name="index-openr"></a>Function: <strong>openr</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>openr</tt> (<var>file</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>openr</tt> (<var>file</var>, <var>encoding</var>) </em></dt>
+<dd>
+
+<p>Returns a character input stream to <var>file</var>.
+<code>openr</code> assumes that <var>file</var> already exists.
+If reading the file results in a lisp error about its encoding
+passing the correct string as the argument <var>encoding</var> might help.
+The available encodings and their names depend on the lisp being used.
+For sbcl a list of suitable strings can be found at
+<a href="http://www.sbcl.org/manual/#External-Formats">http://www.sbcl.org/manual/#External-Formats</a>.
+</p>
+<p>For binary input see <a href="maxima_324.html#Functions-and-Variables-for-binary-input-and-output">openr_binary</a> .
+See also <code><a href="#close">close</a></code> and <code><a href="#openw">openw</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) istream : openr(&quot;data.txt&quot;,&quot;EUC-JP&quot;);
+(%o1)     #&lt;FD-STREAM for &quot;file /home/gunter/data.txt&quot; {10099A3AE3}&gt;
+(%i2) close(istream);
+(%o2)                                true
+</pre></div>
+
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="openw"></a><a name="Item_003a-stringproc_002fdeffn_002fopenw"></a><dl>
+<dt><a name="index-openw"></a>Function: <strong>openw</strong> <em>(<var>file</var>) </em></dt>
+<dd>
+<p>Returns a character output stream to <var>file</var>.
+If <var>file</var> does not exist, it will be created.
+If an existing file is opened, <code>openw</code> destructively modifies <var>file</var>.
+</p>
+<p>For binary output see <a href="maxima_324.html#Functions-and-Variables-for-binary-input-and-output">openw_binary</a> .
+</p>
+<p>See also <code><a href="#close">close</a></code> and <code><a href="#openr">openr</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="printf"></a><a name="Item_003a-stringproc_002fdeffn_002fprintf"></a><dl>
+<dt><a name="index-printf"></a>Function: <strong>printf</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>printf</tt> (<var>dest</var>, <var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>printf</tt> (<var>dest</var>, <var>string</var>, <var>expr_1</var>, ..., <var>expr_n</var>)</em></dt>
+<dd>
+<p>Produces formatted output by outputting the characters of control-string 
+<var>string</var> and observing that a tilde introduces a directive.
+The character after the tilde, possibly preceded by prefix parameters 
+and modifiers, specifies what kind of formatting is desired.
+Most directives use one or more elements of the arguments 
+<var>expr_1</var>, ..., <var>expr_n</var> to create their output.
+</p>
+<p>If <var>dest</var> is a stream or <code>true</code>, then <code>printf</code> returns <code>false</code>.
+Otherwise, <code>printf</code> returns a string containing the output.
+By default the streams <var>stdin</var>, <var>stdout</var> and <var>stderr</var> are defined.
+If Maxima is running as a network client (which is the normal case if Maxima is communicating
+with a graphical user interface, which must be the server) <code>setup-client</code>
+will define <var>old_stdout</var> and <var>old_stderr</var>, too.
+</p>
+<p><code>printf</code> provides the Common Lisp function <code>format</code> in Maxima. 
+The following example illustrates the general relation between these two 
+functions.
+</p>
+<div class="example">
+<pre class="example">(%i1) printf(true, &quot;R~dD~d~%&quot;, 2, 2);
+R2D2
+(%o1)                                false
+(%i2) :lisp (format t &quot;R~dD~d~%&quot; 2 2)
+R2D2
+NIL
+</pre></div>
+
+<p>The following description is limited to a rough sketch of the possibilities of 
+<code>printf</code>.
+The Lisp function <code>format</code> is described in detail in many reference books. 
+Of good help is e.g. the free available online-manual 
+&quot;Common Lisp the Language&quot; by Guy L. Steele. See chapter 22.3.3 there. 
+</p>
+<p>In addition, <code>printf</code> recognizes two format directives which are not known to Lisp <code>format</code>.
+The format directive <code>~m</code> indicates Maxima pretty printer output.
+The format directive <code>~h</code> indicates a bigfloat number.
+</p>
+<div class="example">
+<pre class="example">   ~%       new line
+   ~&amp;       fresh line
+   ~t       tab
+   ~$       monetary
+   ~d       decimal integer
+   ~b       binary integer
+   ~o       octal integer
+   ~x       hexadecimal integer
+   ~br      base-b integer
+   ~r       spell an integer
+   ~p       plural
+   ~f       floating point
+   ~e       scientific notation
+   ~g       ~f or ~e, depending upon magnitude
+   ~h       bigfloat
+   ~a       uses Maxima function string
+   ~m       Maxima pretty printer output
+   ~s       like ~a, but output enclosed in &quot;double quotes&quot;
+   ~~       ~
+   ~&lt;       justification, ~&gt; terminates
+   ~(       case conversion, ~) terminates 
+   ~[       selection, ~] terminates 
+   ~{       iteration, ~} terminates
+</pre></div>
+
+<p>Note that the directive ~* is not supported.
+</p>
+<p>If <var>dest</var> is a stream or <code>true</code>, then <code>printf</code> returns <code>false</code>.
+Otherwise, <code>printf</code> returns a string containing the output.
+</p>
+<div class="example">
+<pre class="example">(%i1) printf( false, &quot;~a ~a ~4f ~a ~@r&quot;, 
+              &quot;String&quot;,sym,bound,sqrt(12),144), bound = 1.234;
+(%o1)                 String sym 1.23 2*sqrt(3) CXLIV
+(%i2) printf( false,&quot;~{~a ~}&quot;,[&quot;one&quot;,2,&quot;THREE&quot;] );
+(%o2)                          one 2 THREE 
+(%i3) printf(true,&quot;~{~{~9,1f ~}~%~}&quot;,mat ),
+          mat = args(matrix([1.1,2,3.33],[4,5,6],[7,8.88,9]))$
+      1.1       2.0       3.3 
+      4.0       5.0       6.0 
+      7.0       8.9       9.0 
+(%i4) control: &quot;~:(~r~) bird~p ~[is~;are~] singing.&quot;$
+(%i5) printf( false,control, n,n,if n=1 then 1 else 2 ), n=2;
+(%o5)                    Two birds are singing.
+</pre></div>
+
+<p>The directive ~h has been introduced to handle bigfloats. 
+</p>
+<div class="example">
+<pre class="example">~w,d,e,x,o,p@H
+ w : width
+ d : decimal digits behind floating point
+ e : minimal exponent digits
+ x : preferred exponent
+ o : overflow character
+ p : padding character
+ @ : display sign for positive numbers
+</pre></div>
+
+<div class="example">
+<pre class="example">(%i1) fpprec : 1000$
+(%i2) printf(true, &quot;|~h|~%&quot;, 2.b0^-64)$
+|0.0000000000000000000542101086242752217003726400434970855712890625|
+(%i3) fpprec : 26$
+(%i4) printf(true, &quot;|~h|~%&quot;, sqrt(2))$
+|1.4142135623730950488016887|
+(%i5) fpprec : 24$
+(%i6) printf(true, &quot;|~h|~%&quot;, sqrt(2))$
+|1.41421356237309504880169|
+(%i7) printf(true, &quot;|~28h|~%&quot;, sqrt(2))$
+|   1.41421356237309504880169|
+(%i8) printf(true, &quot;|~28,,,,,'*h|~%&quot;, sqrt(2))$
+|***1.41421356237309504880169|
+(%i9) printf(true, &quot;|~,18h|~%&quot;, sqrt(2))$
+|1.414213562373095049|
+(%i10) printf(true, &quot;|~,,,-3h|~%&quot;, sqrt(2))$
+|1414.21356237309504880169b-3|
+(%i11) printf(true, &quot;|~,,2,-3h|~%&quot;, sqrt(2))$
+|1414.21356237309504880169b-03|
+(%i12) printf(true, &quot;|~20h|~%&quot;, sqrt(2))$
+|1.41421356237309504880169|
+(%i13) printf(true, &quot;|~20,,,,'+h|~%&quot;, sqrt(2))$
+|++++++++++++++++++++|
+</pre></div>
+
+<p>For conversion of objects to strings also see <code><a href="maxima_16.html#concat">concat</a></code>, <code><a href="maxima_16.html#sconcat">sconcat</a></code>,
+<code><a href="maxima_16.html#string">string</a></code> and <code><a href="maxima_378.html#simplode">simplode</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="readbyte"></a><a name="Item_003a-stringproc_002fdeffn_002freadbyte"></a><dl>
+<dt><a name="index-readbyte"></a>Function: <strong>readbyte</strong> <em>(<var>stream</var>)</em></dt>
+<dd>
+<p>Removes and returns the first byte in <var>stream</var> which must be a binary input stream. 
+If the end of file is encountered <code>readbyte</code> returns <code>false</code>.
+</p>
+<p>Example: Read the first 16 bytes from a file encrypted with AES in OpenSSL. 
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase: obase: 16.$
+
+(%i2) in: openr_binary(&quot;msg.bin&quot;);
+(%o2)                       #&lt;input stream msg.bin&gt;
+(%i3) (L:[],  thru 16. do push(readbyte(in), L),  L:reverse(L));
+(%o3) [53, 61, 6C, 74, 65, 64, 5F, 5F, 88, 56, 0DE, 8A, 74, 0FD,
+       0AD, 0F0]
+(%i4) close(in);
+(%o4)                                true
+(%i5) map(ascii, rest(L,-8));
+(%o5)                      [S, a, l, t, e, d, _, _]
+(%i6) salt: octets_to_number(rest(L,8));
+(%o6)                          8856de8a74fdadf0
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="readchar"></a><a name="Item_003a-stringproc_002fdeffn_002freadchar"></a><dl>
+<dt><a name="index-readchar"></a>Function: <strong>readchar</strong> <em>(<var>stream</var>)</em></dt>
+<dd>
+<p>Removes and returns the first character in <var>stream</var>. 
+If the end of file is encountered <code>readchar</code> returns <code>false</code>.
+</p>
+<p>Example: See <a href="#make_005fstring_005finput_005fstream">make_string_input_stream</a>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="readline"></a><a name="Item_003a-stringproc_002fdeffn_002freadline"></a><dl>
+<dt><a name="index-readline"></a>Function: <strong>readline</strong> <em>(<var>stream</var>) </em></dt>
+<dd>
+<p>Returns a string containing all characters starting at the current position 
+in <var>stream</var> up to the end of the line or <code>false</code> 
+if the end of the file is encountered.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-input">File input</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sprint"></a><a name="Item_003a-stringproc_002fdeffn_002fsprint"></a><dl>
+<dt><a name="index-sprint"></a>Function: <strong>sprint</strong> <em>(<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em></dt>
+<dd>
+<p>Evaluates and displays its arguments one after the other &lsquo;on a line&rsquo; starting at
+the leftmost position.  The expressions are printed with a space character right next 
+to the number, and it disregards line length.  
+<code>newline()</code> might be used for line breaking.
+</p>
+<p>Example: Sequential printing with <code>sprint</code>. 
+Creating a new line with <code>newline()</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) for n:0 thru 19 do sprint(fib(n))$
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181
+(%i2) for n:0 thru 22 do ( 
+         sprint(fib(n)), 
+         if mod(n,10) = 9 then newline() )$
+0 1 1 2 3 5 8 13 21 34 
+55 89 144 233 377 610 987 1597 2584 4181 
+6765 10946 17711 
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div></dd></dl>
+
+<a name="writebyte"></a><a name="Item_003a-stringproc_002fdeffn_002fwritebyte"></a><dl>
+<dt><a name="index-writebyte"></a>Function: <strong>writebyte</strong> <em>(<var>byte</var>, <var>stream</var>)</em></dt>
+<dd>
+<p>Writes <var>byte</var> to <var>stream</var> which must be a binary output stream. 
+<code>writebyte</code> returns <code>byte</code>.
+</p>
+<p>Example: Write some bytes to a binary file output stream. 
+In this example all bytes correspond to printable characters and are printed 
+by <code>printfile</code>. 
+The bytes remain in the stream until <code>flush_output</code> or <code>close</code> have been called.
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase: obase: 16.$
+
+(%i2) bytes: map(cint, charlist(&quot;GNU/Linux&quot;));
+(%o2)                [47, 4E, 55, 2F, 4C, 69, 6E, 75, 78]
+(%i3) out: openw_binary(&quot;test.bin&quot;);
+(%o3)                      #&lt;output stream test.bin&gt;
+(%i4) for i thru 3 do writebyte(bytes[i], out);
+(%o4)                                done
+(%i5) printfile(&quot;test.bin&quot;)$
+
+(%i6) flength(out);
+(%o6)                                  0
+(%i7) flush_output(out);
+(%o7)                                true
+(%i8) flength(out);
+(%o8)                                  3
+(%i9) printfile(&quot;test.bin&quot;)$
+GNU
+(%i0A) for b in rest(bytes,3) do writebyte(b, out);
+(%o0A)                               done
+(%i0B) close(out);
+(%o0B)                               true
+(%i0C) printfile(&quot;test.bin&quot;)$
+GNU/Linux
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-File-output">File output</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-stringproc_002fnode_002fCharacters"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_377.html#Characters" accesskey="n" rel="next">Characters</a>, Previous: <a href="maxima_375.html#Introduction-to-String-Processing" accesskey="p" rel="previous">Introduction to String Processing</a>, Up: <a href="maxima_374.html#stringproc_002dpkg" accesskey="u" rel="up">stringproc-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

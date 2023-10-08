@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>gentran-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="gentran-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="gentran-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_61.html#ggf_002dpkg" rel="next" title="ggf-pkg">
+<link href="maxima_59.html#fractals_002dpkg" rel="prev" title="fractals-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="gentran_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_61.html#ggf_002dpkg" accesskey="n" rel="next">ggf</a>, Previous: <a href="maxima_59.html#fractals_002dpkg" accesskey="p" rel="prev">fractals</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Gentran">61 Gentran</h2>
+
+<a class="anchor" id="Item_003a-gentran_002fnode_002fIntroduction-to-Gentran"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Gentran" accesskey="1">Introduction to Gentran</a></li>
+<li><a href="#Functions-for-Gentran" accesskey="2">Functions for Gentran</a></li>
+<li><a href="#Gentran-Mode-Switches" accesskey="3">Gentran Mode Switches</a></li>
+<li><a href="#Gentran-Option-Variables" accesskey="4">Gentran Option Variables</a></li>
+<li><a href="#Gentran-Evaluation-Forms" accesskey="5">Gentran Evaluation Forms</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Gentran">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-for-Gentran" accesskey="n" rel="next">Functions for Gentran</a>, Previous: <a href="#gentran_002dpkg" accesskey="p" rel="prev">Gentran</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Gentran-1">61.1 Introduction to Gentran</h3>
+
+<p>Original Authors Barbara Gates and Paul Wang
+</p>
+<p>Gentran is a powerful generator of foreign language code. Currently it
+can generate FORTRAN, &rsquo;C&rsquo;, and RATFOR code from Maxima language code.
+Gentran can translate mathematical expressions, iteration loops,
+conditional branching statements, data type information, function
+definitions, matrtices and arrays, and more.
+</p>
+<a class="anchor" id="Item_003a-gentran_002fnode_002fFunctions-for-Gentran"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-for-Gentran">
+<div class="nav-panel">
+<p>
+Next: <a href="#Gentran-Mode-Switches" accesskey="n" rel="next">Gentran Mode Switches</a>, Previous: <a href="#Introduction-to-Gentran" accesskey="p" rel="prev">Introduction to Gentran</a>, Up: <a href="#gentran_002dpkg" accesskey="u" rel="up">Gentran</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-for-Gentran-1">61.2 Functions for Gentran</h3>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentran"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentran"><span class="category-def">Function: </span><span><strong class="def-name">gentran</strong> <var class="def-var-arguments">(<var class="var">stmt1</var>, <var class="var">stmt2</var>, ... , <var class="var">stmtn</var> , <var class="var">[f1, f2, ... , fm]</var>)</var><a class="copiable-link" href='#index-gentran'> &para;</a></span></dt>
+<dd><p>Translates each stmt into formatted code in the target language. A
+substantial subset of expressions and statements in the Maxima
+programming language can be translated directly into numerical code. The
+<strong class="strong">gentran</strong> command translates Maxima statements or procedure
+definitions into code in the target language (<strong class="strong">gentranlang:</strong>
+fortran, c, or ratfor). Expressions may optionally be given to Maxima
+for evaluation prior to translation.
+</p>
+<p><em class="emph">stmt1, stmt2, ... , stmtn</em> is a sequence of one or more
+statements, each of which is any Maxima user level expression, (simple,
+group, or block) statement, or procedure definition that can be
+translated into the target language.
+</p>
+<p><em class="emph">[f1, f2, ... , fm]</em> is an optional list of output files to which
+translated output will be written. They can be any of the following:
+</p>
+<p><em class="emph"><strong class="strong">string</strong></em> = the name of an output file in quotes
+</p>
+<p><strong class="strong">true</strong> (no quotes) = the terminal
+</p>
+<p><strong class="strong">false</strong> = the current output file(s)
+</p>
+<p><strong class="strong">all</strong> = all files currently open for output by gentran
+</p>
+<p>If the files are not open they will be opened; if they are open, output
+will be appended to them. Filenames are given as quoted strings. If the
+optional variable <strong class="strong">genoutpath</strong> (string, including the final /)
+default <strong class="strong">false</strong> is set, it will be prepended to the output file
+names. If the output file list is omitted, output will be written to the
+current output, generally the terminal. <strong class="strong">gentran</strong> returns (a list
+of) the name(s) of file(s) to which code was written.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentranout"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentranout"><span class="category-def">Function: </span><span><strong class="def-name">gentranout</strong> <var class="def-var-arguments">(<var class="var">f1</var>, <var class="var">f2</var>, ... , <var class="var">fn</var>)</var><a class="copiable-link" href='#index-gentranout'> &para;</a></span></dt>
+<dd>
+<p>Gentran maintains a list of files currently open for output by gentran
+commands only. gentranout inserts each file name represented by
+<em class="emph">f1, f2,... , fn</em> into that list and opens each one for output. It
+also resets the current output file(s) to include all files in
+<em class="emph">f1, f2, ... , fn</em>. gentranout returns the list of files represented by
+<em class="emph">f1, f2, ... , fn</em>; i.e., the current output file(s) after the
+command has been executed.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentranshut"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentranshut"><span class="category-def">Function: </span><span><strong class="def-name">gentranshut</strong> <var class="def-var-arguments">(<var class="var">f1</var>, <var class="var">f2</var>, ... , <var class="var">fn</var>)</var><a class="copiable-link" href='#index-gentranshut'> &para;</a></span></dt>
+<dd>
+<p>gentranshut creates a list of file names from <em class="emph">f1, f2, ... , fn</em>,
+deletes each from the output file list, and closes the corresponding
+files. If (all of) the current output file(s) are closed, then the
+current output file is reset to the terminal. gentranshut returns (a
+list of) the current output file(s) after the command has been executed.
+<strong class="strong">gentranshut</strong>(<strong class="strong">all</strong>) will close all gentran output files.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentranpush"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentranpush"><span class="category-def">Function: </span><span><strong class="def-name">gentranpush</strong> <var class="def-var-arguments">(<var class="var">f1</var>, <var class="var">f2</var>, ... , <var class="var">fn</var>)</var><a class="copiable-link" href='#index-gentranpush'> &para;</a></span></dt>
+<dd>
+<p>gentranpush pushes the file list onto the output stack. Each file in the
+list that is not already open for output is opened at this time. The
+current output file is reset to this new element on the top of the
+stack.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentranpop"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentranpop"><span class="category-def">Function: </span><span><strong class="def-name">gentranpop</strong> <var class="def-var-arguments">(<var class="var">f1</var>, <var class="var">f2</var>, ... , <var class="var">fn</var>)</var><a class="copiable-link" href='#index-gentranpop'> &para;</a></span></dt>
+<dd>
+<p>gentranpop deletes the top-most occurrence of the single element
+containing the file name(s) represented by <em class="emph">f1, f2, ... , fn</em> from
+the output stack. Files whose names have been completely removed from
+the output stack are closed. The current output file is reset to the
+(new) element on the top of the output stack. gentranpop returns the
+current output file(s) after this command has been executed.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentranin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentranin"><span class="category-def">Function: </span><span><strong class="def-name">gentranin</strong> <var class="def-var-arguments">(<var class="var">f1</var>, <var class="var">f2</var>, ... , <var class="var">fn</var>, [<var class="var">f1</var>,<var class="var">f2</var>, ... , <var class="var">fm</var>])</var><a class="copiable-link" href='#index-gentranin'> &para;</a></span></dt>
+<dd>
+<p>gentranin processes mixed-language template files consisting of active
+parts (delimited by &lt;&lt;&hellip;&gt;&gt;) containing Maxima statements, including
+calls to gentran, and passive parts, assumed to contain statements in
+the target language (including comments), which are transcribed
+verbatim. Input files are processed sequentially and the results
+appended to the output. The presence of &gt;&gt; in passive parts of the file
+(except for in comments) is interpreted as an end-of-file and terminates
+processing of that file. The optional list of output files <em class="emph">[f1,f2,
+... , fm]</em> each receive a copy of the entire output. All filespecs are
+quoted strings. Input files may be given as (quoted string) filenames,
+which will be located by Maxima <strong class="strong">file_search</strong>. The optional
+variable <strong class="strong">geninpath</strong> (default <strong class="strong">false</strong> ) must be a
+<em class="emph">list</em> of quoted strings describing the paths to be searched for
+the input files. If it is set, that list replaces the standard Maxima
+search paths.
+</p>
+<p>Active parts may contain any number of Maxima expressions and
+statements. They are not copied directly to the output. Instead, they
+are given to Maxima for evaluation. All output generated by each
+evaluation is sent to the output file(s). Returned values are only
+printed on the terminal. Active parts will most likely contain calls to
+gentran to generate code. This means that the result of processing a
+template file will be the original template file with all active parts
+replaced by generated code. If <em class="emph">[f1, f2, ... , fm]</em> is not
+supplied, then generated code is simply written to the current output
+file(s). However, if it is given, then the current output file is
+temporarily overridden. Generated code is written to each file
+represented by <em class="emph">f1, f2, ... , fn</em> for this command only. Files which
+were open prior to the call to gentranin will remain open after the
+call, and files which did not exist prior to the call will be created,
+opened, written to, and closed. The output file stack will be exactly
+the same both before and after the call. gentranin returns (to the
+terminal) the name(s) of (all) file(s) written to by this command.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentraninshut"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentraninshut"><span class="category-def">Function: </span><span><strong class="def-name">gentraninshut</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href='#index-gentraninshut'> &para;</a></span></dt>
+<dd>
+<p>A cleanup function to close input files in case where gentranin hung due
+to error in template.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002ftempvar"></a><dl class="first-deffn">
+<dt class="deffn" id="index-tempvar"><span class="category-def">Function: </span><span><strong class="def-name">tempvar</strong> <var class="def-var-arguments">(<var class="var">type</var>)</var><a class="copiable-link" href='#index-tempvar'> &para;</a></span></dt>
+<dd>
+<p>Generates temporary variable names by concatenating <strong class="strong">tempvarname</strong>
+(default <strong class="strong">&rsquo;t</strong>) with sequence numbers. If <em class="emph">type</em> is
+non-false, <em class="emph">e.g.</em> &quot;real*8&quot; the corresponding type is assigned to
+the variable in the gentran symbol table, which may be used to generate
+declarations depending on the setting of the <strong class="strong">gendecs</strong> flag. It
+is the users responsibility to make sure temporary variable names do not
+conflict with the main program.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fmarkvar"></a><dl class="first-deffn">
+<dt class="deffn" id="index-markvar"><span class="category-def">Function: </span><span><strong class="def-name">markvar</strong> <var class="def-var-arguments">(<var class="var">vname</var>)</var><a class="copiable-link" href='#index-markvar'> &para;</a></span></dt>
+<dd>
+<p>markvar &quot;marks&quot; variable name <em class="emph">vname</em> to indicate that it currently
+holds a significant value.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002funmarkvar"></a><dl class="first-deffn">
+<dt class="deffn" id="index-unmarkvar"><span class="category-def">Function: </span><span><strong class="def-name">unmarkvar</strong> <var class="def-var-arguments">(<var class="var">vname</var>)</var><a class="copiable-link" href='#index-unmarkvar'> &para;</a></span></dt>
+<dd>
+<p>unmarkvar &quot;unmarks&quot; variable name <em class="emph">vname</em> to indicate that it no
+longer holds a significant value.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fmarkedvarp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-markedvarp"><span class="category-def">Function: </span><span><strong class="def-name">markedvarp</strong> <var class="def-var-arguments">(<var class="var">vname</var>)</var><a class="copiable-link" href='#index-markedvarp'> &para;</a></span></dt>
+<dd>
+<p>markedvarp tests whether the variable name <em class="emph">vname</em> is currently
+marked.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgendecs"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gendecs"><span class="category-def">Function: </span><span><strong class="def-name">gendecs</strong> <var class="def-var-arguments">(<var class="var">name</var>)</var><a class="copiable-link" href='#index-gendecs'> &para;</a></span></dt>
+<dd>
+<p>The gendecs command can be called any time the gendecs flag is switched
+off to retrieve all type declarations from Gentran&rsquo;s symbol table for
+the given subprogram name (or the &quot;current&quot; subprogram if false is given
+as its argument).
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentran_005fon"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentran_005fon"><span class="category-def">Function: </span><span><strong class="def-name">gentran_on</strong> <var class="def-var-arguments">(<var class="var">sw</var>)</var><a class="copiable-link" href='#index-gentran_005fon'> &para;</a></span></dt>
+<dd>
+<p>Turns on the mode switch <em class="emph">sw</em>.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fgentran_005foff"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gentran_005foff"><span class="category-def">Function: </span><span><strong class="def-name">gentran_off</strong> <var class="def-var-arguments">(<var class="var">sw</var>)</var><a class="copiable-link" href='#index-gentran_005foff'> &para;</a></span></dt>
+<dd>
+<p>Turns the given switch, <em class="emph">sw</em>, off.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fnode_002fGentran-Mode-Switches"></a><hr>
+</div>
+<div class="section-level-extent" id="Gentran-Mode-Switches">
+<div class="nav-panel">
+<p>
+Next: <a href="#Gentran-Option-Variables" accesskey="n" rel="next">Gentran Option Variables</a>, Previous: <a href="#Functions-for-Gentran" accesskey="p" rel="prev">Functions for Gentran</a>, Up: <a href="#gentran_002dpkg" accesskey="u" rel="up">Gentran</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Gentran-Mode-Switches-1">61.3 Gentran Mode Switches</h3>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002ffortran"></a><dl class="first-defvr">
+<dt class="defvr" id="index-fortran-1"><span class="category-def">Option variable: </span><span><strong class="def-name">fortran</strong><a class="copiable-link" href='#index-fortran-1'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-gentran_002fdefvr_002fratfor"></a></dd><dt class="defvrx def-cmd-defvr" id="index-ratfor"><span class="category-def">Option variable: </span><span><strong class="def-name">ratfor</strong><a class="copiable-link" href='#index-ratfor'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-gentran_002fdefvr_002fc"></a></dd><dt class="defvrx def-cmd-defvr" id="index-c"><span class="category-def">Option variable: </span><span><strong class="def-name">c</strong><a class="copiable-link" href='#index-c'> &para;</a></span></dt>
+<dd><p>Default: off
+</p>
+<p>These mode switches change the default mode of Maxima from evaluation to
+translation. They can be turned on and off with the gentran commands
+gentran_on and gentran_off. Each time a new Maxima session is started
+up, the system is in evaluation mode. It prints a prompt on the user&rsquo;s
+terminal screen and waits for an expression or statement to be entered.
+It then proceeds to evaluate the expression, prints a new prompt, and
+waits for the user to enter another expression or statement. This mode
+can be changed to translation mode by turning on either the fortran,
+ratfor or c switches. After one of these switches is turned on and until
+it is turned off, every expression or statement entered by the user is
+translated into the corresponding language just as if it had been given
+as an argument to the gentran command. Each of the special functions
+that can be used from within a call to gentran can be used at the top
+level until the switch is turned off.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fgendecs"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gendecs-1"><span class="category-def">Option variable: </span><span><strong class="def-name">gendecs</strong><a class="copiable-link" href='#index-gendecs-1'> &para;</a></span></dt>
+<dd><p>Default: on
+</p>
+<p>When the gendecs switch is turned on, gentran generates type
+declarations whenever possible. When gendecs is switched off, type
+declarations are not generated. Instead, type information is stored in
+gentran&rsquo;s symbol table but is not retrieved in the form of declarations
+unless and until either the gendecs command is called or the gendecs
+flag is switched back. <strong class="strong">Note</strong>: Generated declarations may often
+be placed in an inappropriate place (<em class="emph">e.g.</em> in the middle of
+executable fortran code). Therefore the gendecs flag is turned off
+during processing of templates by <strong class="strong">gentranin</strong>.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fnode_002fGentran-Option-Variables"></a><hr>
+</div>
+<div class="section-level-extent" id="Gentran-Option-Variables">
+<div class="nav-panel">
+<p>
+Next: <a href="#Gentran-Evaluation-Forms" accesskey="n" rel="next">Gentran Evaluation Forms</a>, Previous: <a href="#Gentran-Mode-Switches" accesskey="p" rel="prev">Gentran Mode Switches</a>, Up: <a href="#gentran_002dpkg" accesskey="u" rel="up">Gentran</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Gentran-Option-Variables-1">61.4 Gentran Option Variables</h3>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fgentranlang"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gentranlang"><span class="category-def">Option variable: </span><span><strong class="def-name">gentranlang</strong><a class="copiable-link" href='#index-gentranlang'> &para;</a></span></dt>
+<dd><p>Default: fortran
+</p>
+<p>Selects the target numerical language. Currently, gentranlang must be
+fortran, ratfor, or c. Note that symbols entered in Maxima are
+case-sensitive. gentranlang should not be set to FORTRAN, RATFOR or C.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002ffortlinelen"></a><dl class="first-defvr">
+<dt class="defvr" id="index-fortlinelen"><span class="category-def">Option variable: </span><span><strong class="def-name">fortlinelen</strong><a class="copiable-link" href='#index-fortlinelen'> &para;</a></span></dt>
+<dd><p>default: 72
+</p>
+<p>Maximum number of characters printed on each line of generated FORTRAN
+code.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fminfortlinelen"></a><dl class="first-defvr">
+<dt class="defvr" id="index-minfortlinelen"><span class="category-def">Option variable: </span><span><strong class="def-name">minfortlinelen</strong><a class="copiable-link" href='#index-minfortlinelen'> &para;</a></span></dt>
+<dd><p>Default: 40
+</p>
+<p>Minimum number of characters printed on each line of generated FORTRAN
+code.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002ffortcurrind"></a><dl class="first-defvr">
+<dt class="defvr" id="index-fortcurrind"><span class="category-def">Option variable: </span><span><strong class="def-name">fortcurrind</strong><a class="copiable-link" href='#index-fortcurrind'> &para;</a></span></dt>
+<dd><p>Default: 0
+</p>
+<p>Number of blank spaces printed at the beginning of each line of
+generated FORTRAN code (after column 6).
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fratlinelen"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ratlinelen"><span class="category-def">Option variable: </span><span><strong class="def-name">ratlinelen</strong><a class="copiable-link" href='#index-ratlinelen'> &para;</a></span></dt>
+<dd><p>Default: 80
+</p>
+<p>Maximum number of characters printed on each line of generated Ratfor
+code.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fclinelen"></a><dl class="first-defvr">
+<dt class="defvr" id="index-clinelen"><span class="category-def">Option variable: </span><span><strong class="def-name">clinelen</strong><a class="copiable-link" href='#index-clinelen'> &para;</a></span></dt>
+<dd><p>Default: 80
+</p>
+<p>Maximum number of characters printed on each line of generated &rsquo;C&rsquo; code.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fminclinelen"></a><dl class="first-defvr">
+<dt class="defvr" id="index-minclinelen"><span class="category-def">Option variable: </span><span><strong class="def-name">minclinelen</strong><a class="copiable-link" href='#index-minclinelen'> &para;</a></span></dt>
+<dd><p>Default: 40
+</p>
+<p>Minimum number of characters printed on each line of generated &rsquo;C&rsquo; code.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fccurind"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ccurind"><span class="category-def">Option variable: </span><span><strong class="def-name">ccurind</strong><a class="copiable-link" href='#index-ccurind'> &para;</a></span></dt>
+<dd><p>Default: 0
+</p>
+<p>Number of blank spaces printed at the beginning of each line of
+generated&rsquo;C&rsquo; code.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002ftablen"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tablen"><span class="category-def">Option variable: </span><span><strong class="def-name">tablen</strong><a class="copiable-link" href='#index-tablen'> &para;</a></span></dt>
+<dd><p>Default: 4
+</p>
+<p>Number of blank spaces printed for each new level of indentation.
+(Automatic indentation can be turned off by setting this variable to 0.)
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fgenfloat"></a><dl class="first-defvr">
+<dt class="defvr" id="index-genfloat"><span class="category-def">Option variable: </span><span><strong class="def-name">genfloat</strong><a class="copiable-link" href='#index-genfloat'> &para;</a></span></dt>
+<dd><p>Default: false
+</p>
+<p>When set to true (or any non-false value), causes integers in generated
+numerical code to be converted to floating point numbers, except in the
+following places: array subscripts, exponents, and initial, final, and
+step values in do-loops. An exception (for compatibility with Macsyma
+2.4) is that numbers in exponentials (with base %e only) are
+double-floated even when genfloat is false.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fdblfloat"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dblfloat"><span class="category-def">Option variable: </span><span><strong class="def-name">dblfloat</strong><a class="copiable-link" href='#index-dblfloat'> &para;</a></span></dt>
+<dd><p>Default: <strong class="strong">false</strong> If dblfloat is set to
+true, floating point numbers in gentran output in implementations (such
+as Windows Maxima under CLISP) in which float and double-float are the
+same will be printed as *.d0. In implementations in which float and
+double-float are different, floats will be coerced to double-float
+before being printed.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fgentranseg"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gentranseg"><span class="category-def">Option variable: </span><span><strong class="def-name">gentranseg</strong><a class="copiable-link" href='#index-gentranseg'> &para;</a></span></dt>
+<dd><p>Default: <strong class="strong">true</strong>
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fmaxexpprintlen"></a><dl class="first-defvr">
+<dt class="defvr" id="index-maxexpprintlen"><span class="category-def">Option variable: </span><span><strong class="def-name">maxexpprintlen</strong><a class="copiable-link" href='#index-maxexpprintlen'> &para;</a></span></dt>
+<dd><p>Default: 800
+</p>
+<p>When <strong class="strong">gentranseg</strong> is true (or any non-false value), causes
+Gentran to &quot;segment&quot; large expressions into subexpressions of manageable
+size. The segmentation facility generates a sequence of assignment
+statements, each of which assigns a subexpression to an automatically
+generated temporary variable name. This sequence is generated in such a
+way that temporary variables are re-used as soon as possible, thereby
+keeping the number of automatically generated variables to a minimum.
+The maximum allowable expression size can be controlled by setting the
+<strong class="strong">maxexpprintlen</strong> variable to the maximum number of characters
+allowed in an expression printed in the target numerical language
+(excluding spaces and other whitespace characters automatically printed
+by the formatter). When the segmentation routine generates temporary
+variables, it places type declarations in the symbol table for those
+variables if possible. It uses the following rules to determine their
+type:
+</p>
+<p>1. If the type of the variable to which the large expression is being
+assigned is already known (i.e., has been declared by the user via a
+TYPE form), then the temporary variables will be declared to be of that
+same type. 2. If the global variable <strong class="strong">tempvartype</strong> has a
+non-false value, then the temporary variables are declared to be of that
+type. 3. Otherwise, the variables are not declared unless
+<strong class="strong">implicit</strong> has been set to <strong class="strong">true</strong>.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fgentranopt"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gentranopt"><span class="category-def">Option variable: </span><span><strong class="def-name">gentranopt</strong><a class="copiable-link" href='#index-gentranopt'> &para;</a></span></dt>
+<dd><p>Default: <strong class="strong">false</strong>
+</p>
+<p>When set to true (or any non-false value), causes Gentran to replace
+each block of straightline code by an optimized sequence of assignments
+obtained from the Maxima optimize command. (The optimize command takes
+an expression and replaces common subexpressions by temporary variable
+names. It returns the resulting assignment statement, preceded by
+common-subexpression-to-temporary-variable assignments.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002ftempvarname"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tempvarname"><span class="category-def">Option variable: </span><span><strong class="def-name">tempvarname</strong><a class="copiable-link" href='#index-tempvarname'> &para;</a></span></dt>
+<dd><p>Default: <strong class="strong">&rsquo;t</strong>
+</p>
+<p>Name used as the prefix when generating temporary variable names.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002foptimvarname"></a><dl class="first-defvr">
+<dt class="defvr" id="index-optimvarname"><span class="category-def">Option variable: </span><span><strong class="def-name">optimvarname</strong><a class="copiable-link" href='#index-optimvarname'> &para;</a></span></dt>
+<dd><p>default: <strong class="strong">&rsquo;u</strong>
+</p>
+<p>is the preface used
+to generate temporary file names produced by the optimizer when
+<strong class="strong">gentranopt</strong> is <strong class="strong">true</strong>. When both gentranseg and
+gentranopt are true, the optimizer generates temporary file names using
+<strong class="strong">optimvarname</strong> while the segmentation routine uses
+<strong class="strong">tempvarname</strong> preventing conflict.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002ftempvarnum"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tempvarnum"><span class="category-def">Option variable: </span><span><strong class="def-name">tempvarnum</strong><a class="copiable-link" href='#index-tempvarnum'> &para;</a></span></dt>
+<dd><p>Default: 0
+</p>
+<p>Number appended onto tempvarname to create a temporary variable name. If
+the temporary variable name resulting from appending tempvarnum onto the
+end of tempvarname has already been generated and still holds a useful
+value or has a different type than requested, then the number is
+incremented until one is found that was not previously generated or does
+not still hold a significant value or a different type.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002ftempvartype"></a><dl class="first-defvr">
+<dt class="defvr" id="index-tempvartype"><span class="category-def">Option variable: </span><span><strong class="def-name">tempvartype</strong><a class="copiable-link" href='#index-tempvartype'> &para;</a></span></dt>
+<dd><p>Default: <strong class="strong">false</strong>
+</p>
+<p>Target language variable type (e.g., INTEGER, REAL*8, FLOAT, etc.) used
+as a default for automatically generated variables whose type cannot be
+determined otherwise. If tempvartype is false, then generated temporary
+variables whose type cannot be determined are not automatically
+declared.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fimplicit"></a><dl class="first-defvr">
+<dt class="defvr" id="index-implicit-1"><span class="category-def">Option variable: </span><span><strong class="def-name">implicit</strong><a class="copiable-link" href='#index-implicit-1'> &para;</a></span></dt>
+<dd><p>Default: <strong class="strong">false</strong>
+</p>
+<p>If implicit is set to <strong class="strong">true</strong> temporary variables are assigned
+their implicit type according to Fortran rules based on the initial
+letter of the name. If gendecs is on, this results in printed type
+declarations.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fgentranparser"></a><dl class="first-defvr">
+<dt class="defvr" id="index-gentranparser"><span class="category-def">Option variable: </span><span><strong class="def-name">gentranparser</strong><a class="copiable-link" href='#index-gentranparser'> &para;</a></span></dt>
+<dd><p>Default: <strong class="strong">false</strong>
+</p>
+<p>If gentranparser is set to <strong class="strong">true</strong> Maxima forms input to gentran
+will be parsed and an error will be produced if an expression cannot be
+translated. Otherwise, untranslatable expressions may generate anomalous
+output, sometimes containing explicit calls to Maxima functions.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fgenstmtno"></a><dl class="first-defvr">
+<dt class="defvr" id="index-genstmtno"><span class="category-def">Option variable: </span><span><strong class="def-name">genstmtno</strong><a class="copiable-link" href='#index-genstmtno'> &para;</a></span></dt>
+<dd><p>Default: 25000
+</p>
+<p>Number used when a statement number must be generated. Note: it is the
+user&rsquo;s responsibility to make sure this number will not clash with
+statement numbers in template files.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fgenstmtincr"></a><dl class="first-defvr">
+<dt class="defvr" id="index-genstmtincr"><span class="category-def">Option variable: </span><span><strong class="def-name">genstmtincr</strong><a class="copiable-link" href='#index-genstmtincr'> &para;</a></span></dt>
+<dd><p>Default: 1
+</p>
+<p>number by which genstmtno is incremented each time a new statement
+number is generated.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdefvr_002fusefortcomplex"></a><dl class="first-defvr">
+<dt class="defvr" id="index-usefortcomplex"><span class="category-def">Option variable: </span><span><strong class="def-name">usefortcomplex</strong><a class="copiable-link" href='#index-usefortcomplex'> &para;</a></span></dt>
+<dd><p>Default: <strong class="strong">false</strong>
+</p>
+<p>If usefortcomplex is true, real numbers in expressions declared to be
+complex by <em class="emph">type(complex,&hellip;)</em> will be printed in Fortran
+complex number format <em class="emph">(realpart,0.0)</em>. This is a purely syntactic
+device and does not carry out any complex calculations.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fnode_002fGentran-Evaluation-Forms"></a><hr>
+</div>
+<div class="section-level-extent" id="Gentran-Evaluation-Forms">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Gentran-Option-Variables" accesskey="p" rel="prev">Gentran Option Variables</a>, Up: <a href="#gentran_002dpkg" accesskey="u" rel="up">Gentran</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Gentran-Evaluation-Forms-1">61.5 Gentran Evaluation Forms</h3>
+
+<p>The following special functions can be included in Maxima statements
+which are to be translated by the gentran command to indicate that they
+are to be partially or fully evaluated by Maxima before being translated
+into numerical code. Note that these functions have the described effect
+only when supplied in arguments to the gentran command.
+</p>
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002feval"></a><dl class="first-deffn">
+<dt class="deffn" id="index-eval"><span class="category-def">Function: </span><span><strong class="def-name">eval</strong> <var class="def-var-arguments">(<var class="var">exp</var>)</var><a class="copiable-link" href='#index-eval'> &para;</a></span></dt>
+<dd>
+<p>Where <em class="emph">exp</em> is any Maxima expression or statement which, after
+evaluation by Maxima, results in an expression that can be translated by
+gentran into the target language. When eval is called from an argument
+that is to be translated, it tells gentran to give the expression to
+Maxima for evaluation first, and then to translate the result of that
+evaluation.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002frsetq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rsetq"><span class="category-def">Function: </span><span><strong class="def-name">rsetq</strong> <var class="def-var-arguments">(<var class="var">var</var>, <var class="var">exp</var>)</var><a class="copiable-link" href='#index-rsetq'> &para;</a></span></dt>
+<dd>
+<p>Where <em class="emph">var</em> is any Maxima variable, matrix or array element, and
+<em class="emph">exp</em> is any Maxima expression which, after evaluation by Maxima
+results in an expression that can be translated by Gentran into the
+target language. This is equivalent to VAR : EVAL(EXP) ;
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002flsetq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lsetq"><span class="category-def">Function: </span><span><strong class="def-name">lsetq</strong> <var class="def-var-arguments">(<em class="emph">var</em>, <em class="emph">exp</em>)</var><a class="copiable-link" href='#index-lsetq'> &para;</a></span></dt>
+<dd>
+<p>Where <em class="emph">var</em> is any Maxima user level matrix or array element with
+indices which, after evaluation by Maxima, will result in expressions
+that can be translated by Gentran, and <em class="emph">exp</em> is any Maxima user
+level expression that can be translated into the target language. This
+is equivalent to <code class="code">var[eval(s1), eval(s2), ...]: exp</code> where <var class="var">s1</var>, <var class="var">s2</var>, ...
+are indices.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002flrsetq"></a><dl class="first-deffn">
+<dt class="deffn" id="index-lrsetq"><span class="category-def">Function: </span><span><strong class="def-name">lrsetq</strong> <var class="def-var-arguments">(<em class="emph">var</em>, <em class="emph">exp</em>)</var><a class="copiable-link" href='#index-lrsetq'> &para;</a></span></dt>
+<dd>
+<p>Where <em class="emph">var</em> is any Maxima matrix or array element with indices
+which, after evaluation by Maxima, will result in expressions that can
+be translated by Gentran; and <em class="emph">exp</em> is any user level expression
+which, after evaluation, will result in an expression that can be
+translated by Gentran into the target language. This is equivalent to
+<code class="code">var[eval(s1), eval(s2), ...]: eval(exp);</code>.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002ftype"></a><dl class="first-deffn">
+<dt class="deffn" id="index-type"><span class="category-def">Function: </span><span><strong class="def-name">type</strong> <var class="def-var-arguments">(<em class="emph">type,v1&hellip;vn</em>)</var><a class="copiable-link" href='#index-type'> &para;</a></span></dt>
+<dd>
+<p>Places information in the gentran symbol table to assign <em class="emph">type</em> to
+variables <em class="emph">v1&hellip;vn</em>. This may result in type declarations
+printed by gentran depending on the setting of gendecs. <strong class="strong">type</strong>
+must be called from within gentran and does not evaluate its arguments
+unless <strong class="strong">eval</strong>() is used.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-gentran_002fdeffn_002fliteral"></a><dl class="first-deffn">
+<dt class="deffn" id="index-literal"><span class="category-def">Function: </span><span><strong class="def-name">literal</strong> <var class="def-var-arguments">(<em class="emph">arg1, arg2, ... , argn</em>)</var><a class="copiable-link" href='#index-literal'> &para;</a></span></dt>
+<dd>
+<p>where arg1, arg2, ... , argn is an argument list containing one or more
+arg&rsquo;s, each of which either is, or evaluates to, an atom. The atoms
+<em class="emph">tab</em> and <em class="emph">cr</em> have special meanings. arg&rsquo;s are not evaluated
+unless given as arguments to eval. This function call is replaced by the
+character sequence resulting from concatenation of the given atoms.
+Double quotes are stripped from all string type arg&rsquo;s, and each
+occurrence of the reserved atom <em class="emph">tab</em> or <em class="emph">cr</em> is replaced by a
+tab to the current level of indentation, or an end-of-line character.
+</p>
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_61.html#ggf_002dpkg" accesskey="n" rel="next">ggf</a>, Previous: <a href="maxima_59.html#fractals_002dpkg" accesskey="p" rel="prev">fractals</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

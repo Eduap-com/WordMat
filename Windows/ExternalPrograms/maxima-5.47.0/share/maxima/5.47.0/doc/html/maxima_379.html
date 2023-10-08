@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Octets and Utilities for Cryptography</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Octets and Utilities for Cryptography">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Octets and Utilities for Cryptography">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_374.html#stringproc_002dpkg" rel="up" title="stringproc-pkg">
+<link href="maxima_380.html#to_005fpoly_005fsolve_002dpkg" rel="next" title="to_poly_solve-pkg">
+<link href="maxima_378.html#String-Processing" rel="previous" title="String Processing">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Octets-and-Utilities-for-Cryptography"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_378.html#String-Processing" accesskey="p" rel="previous">String Processing</a>, Up: <a href="maxima_374.html#stringproc_002dpkg" accesskey="u" rel="up">stringproc-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Octets-and-Utilities-for-Cryptography-1"></a>
+<h3 class="section">91.5 Octets and Utilities for Cryptography</h3>
+
+<a name="base64"></a><a name="Item_003a-stringproc_002fdeffn_002fbase64"></a><dl>
+<dt><a name="index-base64"></a>Function: <strong>base64</strong> <em>(<var>arg</var>)</em></dt>
+<dd>
+<p>Returns the base64-representation of <var>arg</var> as a string. 
+The argument <var>arg</var> may be a string, a non-negative integer or a list of octets.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) base64: base64(&quot;foo bar baz&quot;);
+(%o1)                          Zm9vIGJhciBiYXo=
+(%i2) string: base64_decode(base64);
+(%o2)                            foo bar baz
+(%i3) obase: 16.$
+(%i4) integer: base64_decode(base64, 'number);
+(%o4)                       666f6f206261722062617a
+(%i5) octets: base64_decode(base64, 'list);
+(%o5)            [66, 6F, 6F, 20, 62, 61, 72, 20, 62, 61, 7A]
+(%i6) ibase: 16.$
+(%i7) base64(octets);
+(%o7)                          Zm9vIGJhciBiYXo=
+</pre></div>
+
+<p>Note that if <var>arg</var> contains umlauts (resp. octets larger than 127) 
+the resulting base64-string is platform dependent.
+However the decoded string will be equal to the original.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="base64_005fdecode"></a><a name="Item_003a-stringproc_002fdeffn_002fbase64_005fdecode"></a><dl>
+<dt><a name="index-base64_005fdecode"></a>Function: <strong>base64_decode</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>base64_decode</tt> (<var>base64-string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>base64_decode</tt> (<var>base64-string</var>, <var>return-type</var>)</em></dt>
+<dd>
+<p>By default <code>base64_decode</code> decodes the <var>base64-string</var> back to the original string. 
+</p>
+<p>The optional argument <var>return-type</var> allows <code>base64_decode</code> to 
+alternatively return the corresponding number or list of octets.
+<var>return-type</var> may be <code>string</code>, <code>number</code> or <code>list</code>.
+</p>
+<p>Example: See <a href="#base64">base64</a>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="crc24sum"></a><a name="Item_003a-stringproc_002fdeffn_002fcrc24sum"></a><dl>
+<dt><a name="index-crc24sum"></a>Function: <strong>crc24sum</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>crc24sum</tt> (<var>octets</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>crc24sum</tt> (<var>octets</var>, <var>return-type</var>)</em></dt>
+<dd>
+<p>By default <code>crc24sum</code> returns the <code>CRC24</code> checksum of an octet-list 
+as a string.
+</p>
+<p>The optional argument <var>return-type</var> allows <code>crc24sum</code> to 
+alternatively return the corresponding number or list of octets.
+<var>return-type</var> may be <code>string</code>, <code>number</code> or <code>list</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iQEcBAEBAgAGBQJVdCTzAAoJEG/1Mgf2DWAqCSYH/AhVFwhu1D89C3/QFcgVvZTM
+wnOYzBUURJAL/cT+IngkLEpp3hEbREcugWp+Tm6aw3R4CdJ7G3FLxExBH/5KnDHi
+rBQu+I7+3ySK2hpryQ6Wx5J9uZSa4YmfsNteR8up0zGkaulJeWkS4pjiRM+auWVe
+vajlKZCIK52P080DG7Q2dpshh4fgTeNwqCuCiBhQ73t8g1IaLdhDN6EzJVjGIzam
+/spqT/sTo6sw8yDOJjvU+Qvn6/mSMjC/YxjhRMaQt9EMrR1AZ4ukBF5uG1S7mXOH
+WdiwkSPZ3gnIBhM9SuC076gLWZUNs6NqTeE3UzMjDAFhH3jYk1T7mysCvdtIkms=
+=WmeC
+-----END PGP SIGNATURE-----
+</pre></div>
+
+<div class="example">
+<pre class="example">(%i1) ibase : obase : 16.$
+(%i2) sig64 : sconcat(
+ &quot;iQEcBAEBAgAGBQJVdCTzAAoJEG/1Mgf2DWAqCSYH/AhVFwhu1D89C3/QFcgVvZTM&quot;,
+ &quot;wnOYzBUURJAL/cT+IngkLEpp3hEbREcugWp+Tm6aw3R4CdJ7G3FLxExBH/5KnDHi&quot;,
+ &quot;rBQu+I7+3ySK2hpryQ6Wx5J9uZSa4YmfsNteR8up0zGkaulJeWkS4pjiRM+auWVe&quot;,
+ &quot;vajlKZCIK52P080DG7Q2dpshh4fgTeNwqCuCiBhQ73t8g1IaLdhDN6EzJVjGIzam&quot;,
+ &quot;/spqT/sTo6sw8yDOJjvU+Qvn6/mSMjC/YxjhRMaQt9EMrR1AZ4ukBF5uG1S7mXOH&quot;,
+ &quot;WdiwkSPZ3gnIBhM9SuC076gLWZUNs6NqTeE3UzMjDAFhH3jYk1T7mysCvdtIkms=&quot; )$
+(%i3) octets: base64_decode(sig64, 'list)$
+(%i4) crc24: crc24sum(octets, 'list);
+(%o4)                          [5A, 67, 82]
+(%i5) base64(crc24);
+(%o5)                              WmeC
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="md5sum"></a><a name="Item_003a-stringproc_002fdeffn_002fmd5sum"></a><dl>
+<dt><a name="index-md5sum"></a>Function: <strong>md5sum</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>md5sum</tt> (<var>arg</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>md5sum</tt> (<var>arg</var>, <var>return-type</var>)</em></dt>
+<dd>
+<p>Returns the <code>MD5</code> checksum of a string, non-negative integer,
+list of octets, or binary (not character) input stream.
+A file for which an input stream is opened may be an ordinary text file;
+it is the stream which needs to be binary, not the file itself.
+</p>
+<p>When the argument is an input stream,
+<code>md5sum</code> reads the entire content of the stream,
+but does not close the stream.
+</p>
+<p>The default return value is a string containing 32 hex characters.
+The optional argument <var>return-type</var> allows <code>md5sum</code> to alternatively 
+return the corresponding number or list of octets.
+<var>return-type</var> may be <code>string</code>, <code>number</code> or <code>list</code>.
+</p>
+<p>Note that in case <var>arg</var> contains German umlauts or other non-ASCII 
+characters (resp. octets larger than 127) the <code>MD5</code> checksum is platform dependent.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase: obase: 16.$
+(%i2) msg: &quot;foo bar baz&quot;$
+(%i3) string: md5sum(msg);
+(%o3)                  ab07acbb1e496801937adfa772424bf7
+(%i4) integer: md5sum(msg, 'number);
+(%o4)                 0ab07acbb1e496801937adfa772424bf7
+(%i5) octets: md5sum(msg, 'list);
+(%o5)        [0AB,7,0AC,0BB,1E,49,68,1,93,7A,0DF,0A7,72,42,4B,0F7]
+(%i6) sdowncase( printf(false, &quot;~{~2,'0x~^:~}&quot;, octets) );
+(%o6)           ab:07:ac:bb:1e:49:68:01:93:7a:df:a7:72:42:4b:f7
+</pre></div>
+
+<p>The argument may be a binary input stream.
+</p>
+<div class="example">
+<pre class="example">(%i1) S: openr_binary (file_search (&quot;md5.lisp&quot;));
+(%o1) #&lt;INPUT BUFFERED FILE-STREAM (UNSIGNED-BYTE 8)
+  /home/robert/maxima/maxima-code/share/stringproc/md5.lisp&gt;
+(%i2) md5sum (S);
+(%o2)           31a512ed53daf5b99495c9d05559355f
+(%i3) close (S);
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="mgf1_005fsha1"></a><a name="Item_003a-stringproc_002fdeffn_002fmgf1_005fsha1"></a><dl>
+<dt><a name="index-mgf1_005fsha1"></a>Function: <strong>mgf1_sha1</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>mgf1_sha1</tt> (<var>seed</var>, <var>len</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>mgf1_sha1</tt> (<var>seed</var>, <var>len</var>, <var>return-type</var>)</em></dt>
+<dd>
+<p>Returns a pseudo random number of variable length. 
+By default the returned value is a number with a length of <var>len</var> octets.
+</p>
+<p>The optional argument <var>return-type</var> allows <code>mgf1_sha1</code> to alternatively 
+return the corresponding list of <var>len</var> octets.
+<var>return-type</var> may be <code>number</code> or <code>list</code>.
+</p>
+<p>The computation of the returned value is described in <code>RFC 3447</code>, 
+appendix <code>B.2.1 MGF1</code>. 
+<code>SHA1</code> is used as hash function, i.e. the randomness of the computed number
+relies on the randomness of <code>SHA1</code> hashes.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase: obase: 16.$
+(%i2) number: mgf1_sha1(4711., 8);
+(%o2)                        0e0252e5a2a42fea1
+(%i3) octets: mgf1_sha1(4711., 8, 'list);
+(%o3)                  [0E0,25,2E,5A,2A,42,0FE,0A1]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="number_005fto_005foctets"></a><a name="Item_003a-stringproc_002fdeffn_002fnumber_005fto_005foctets"></a><dl>
+<dt><a name="index-number_005fto_005foctets"></a>Function: <strong>number_to_octets</strong> <em>(<var>number</var>)</em></dt>
+<dd>
+<p>Returns an octet-representation of <var>number</var> as a list of octets.
+The <var>number</var> must be a non-negative integer.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase : obase : 16.$
+(%i2) octets: [0ca,0fe,0ba,0be]$
+(%i3) number: octets_to_number(octets);
+(%o3)                            0cafebabe
+(%i4) number_to_octets(number);
+(%o4)                      [0CA, 0FE, 0BA, 0BE]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="octets_005fto_005fnumber"></a><a name="Item_003a-stringproc_002fdeffn_002foctets_005fto_005fnumber"></a><dl>
+<dt><a name="index-octets_005fto_005fnumber"></a>Function: <strong>octets_to_number</strong> <em>(<var>octets</var>)</em></dt>
+<dd>
+<p>Returns a number by concatenating the octets in the list of <var>octets</var>.
+</p>
+<p>Example: See <a href="#number_005fto_005foctets">number_to_octets</a>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="octets_005fto_005foid"></a><a name="Item_003a-stringproc_002fdeffn_002foctets_005fto_005foid"></a><dl>
+<dt><a name="index-octets_005fto_005foid"></a>Function: <strong>octets_to_oid</strong> <em>(<var>octets</var>)</em></dt>
+<dd>
+<p>Computes an object identifier (OID) from the list of <var>octets</var>.
+</p>
+<p>Example: RSA encryption OID
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase : obase : 16.$
+(%i2) oid: octets_to_oid([2A,86,48,86,0F7,0D,1,1,1]);
+(%o2)                      1.2.840.113549.1.1.1
+(%i3) oid_to_octets(oid);
+(%o3)               [2A, 86, 48, 86, 0F7, 0D, 1, 1, 1]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="octets_005fto_005fstring"></a><a name="Item_003a-stringproc_002fdeffn_002foctets_005fto_005fstring"></a><dl>
+<dt><a name="index-octets_005fto_005fstring"></a>Function: <strong>octets_to_string</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>octets_to_string</tt> (<var>octets</var>)  <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>octets_to_string</tt> (<var>octets</var>, <var>encoding</var>) </em></dt>
+<dd>
+<p>Decodes the list of <var>octets</var> into a string according to current system defaults. 
+When decoding octets corresponding to Non-US-ASCII characters 
+the result depends on the platform, application and underlying Lisp.
+</p>
+<p>Example: Using system defaults 
+(Maxima compiled with GCL, which uses no format definition and 
+simply passes through the UTF-8-octets encoded by the GNU/Linux terminal).
+</p>
+<div class="example">
+<pre class="example">(%i1) octets: string_to_octets(&quot;abc&quot;);
+(%o1)                            [61, 62, 63]
+(%i2) octets_to_string(octets);
+(%o2)                                 abc
+(%i3) ibase: obase: 16.$
+(%i4) unicode(20AC);
+(%o4)                                  &euro;
+(%i5) octets: string_to_octets(%);
+(%o5)                           [0E2, 82, 0AC]
+(%i6) octets_to_string(octets);
+(%o6)                                  &euro;
+(%i7) utf8_to_unicode(octets);
+(%o7)                                20AC
+</pre></div>
+
+<p>In case the external format of the Lisp reader is equal to UTF-8 the optional 
+argument <var>encoding</var> allows to set the encoding for the octet to string conversion. 
+If necessary see <a href="maxima_377.html#adjust_005fexternal_005fformat">adjust_external_format</a> for changing the external format. 
+</p>
+<p>Some names of supported encodings (see corresponding Lisp manual for more): <br>
+CCL, CLISP, SBCL: <code>utf-8, ucs-2be, ucs-4be, iso-8859-1, cp1252, cp850</code> <br>
+CMUCL: <code>utf-8, utf-16-be, utf-32-be, iso8859-1, cp1252</code> <br>
+ECL: <code>utf-8, ucs-2be, ucs-4be, iso-8859-1, windows-cp1252, dos-cp850</code> 
+</p>   
+<p>Example (continued): Using the optional encoding argument 
+(Maxima compiled with SBCL, GNU/Linux terminal).
+</p>
+<div class="example">
+<pre class="example">(%i8) string_to_octets(&quot;&euro;&quot;, &quot;ucs-2be&quot;);
+(%o8)                              [20, 0AC]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="oid_005fto_005foctets"></a><a name="Item_003a-stringproc_002fdeffn_002foid_005fto_005foctets"></a><dl>
+<dt><a name="index-oid_005fto_005foctets"></a>Function: <strong>oid_to_octets</strong> <em>(<var>oid-string</var>)</em></dt>
+<dd>
+<p>Converts an object identifier (OID) to a list of <var>octets</var>.
+</p>
+<p>Example: See <a href="#octets_005fto_005foid">octets_to_oid</a>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sha1sum"></a><a name="Item_003a-stringproc_002fdeffn_002fsha1sum"></a><dl>
+<dt><a name="index-sha1sum"></a>Function: <strong>sha1sum</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sha1sum</tt> (<var>arg</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sha1sum</tt> (<var>arg</var>, <var>return-type</var>)</em></dt>
+<dd>
+<p>Returns the <code>SHA1</code> fingerprint of a string, a non-negative integer or 
+a list of octets. The default return value is a string containing 40 hex characters.
+</p>
+<p>The optional argument <var>return-type</var> allows <code>sha1sum</code> to alternatively 
+return the corresponding number or list of octets.
+<var>return-type</var> may be <code>string</code>, <code>number</code> or <code>list</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) ibase: obase: 16.$
+(%i2) msg: &quot;foo bar baz&quot;$
+(%i3) string: sha1sum(msg);
+(%o3)              c7567e8b39e2428e38bf9c9226ac68de4c67dc39
+(%i4) integer: sha1sum(msg, 'number);
+(%o4)             0c7567e8b39e2428e38bf9c9226ac68de4c67dc39
+(%i5) octets: sha1sum(msg, 'list);
+(%o5)  [0C7,56,7E,8B,39,0E2,42,8E,38,0BF,9C,92,26,0AC,68,0DE,4C,67,0DC,39]
+(%i6) sdowncase( printf(false, &quot;~{~2,'0x~^:~}&quot;, octets) );
+(%o6)     c7:56:7e:8b:39:e2:42:8e:38:bf:9c:92:26:ac:68:de:4c:67:dc:39
+</pre></div>
+
+<p>Note that in case <var>arg</var> contains German umlauts or other non-ASCII 
+characters (resp. octets larger than 127) the <code>SHA1</code> fingerprint is platform dependent.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sha256sum"></a><a name="Item_003a-stringproc_002fdeffn_002fsha256sum"></a><dl>
+<dt><a name="index-sha256sum"></a>Function: <strong>sha256sum</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sha256sum</tt> (<var>arg</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sha256sum</tt> (<var>arg</var>, <var>return-type</var>)</em></dt>
+<dd>
+<p>Returns the <code>SHA256</code> fingerprint of a string, a non-negative integer or 
+a list of octets. The default return value is a string containing 64 hex characters.
+</p>
+<p>The optional argument <var>return-type</var> allows <code>sha256sum</code> to alternatively 
+return the corresponding number or list of octets (see <a href="#sha1sum">sha1sum</a>).
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) string: sha256sum(&quot;foo bar baz&quot;);
+(%o1)  dbd318c1c462aee872f41109a4dfd3048871a03dedd0fe0e757ced57dad6f2d7
+</pre></div>
+
+<p>Note that in case <var>arg</var> contains German umlauts or other non-ASCII 
+characters (resp. octets larger than 127) the <code>SHA256</code> fingerprint is platform dependent.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="string_005fto_005foctets"></a><a name="Item_003a-stringproc_002fdeffn_002fstring_005fto_005foctets"></a><dl>
+<dt><a name="index-string_005fto_005foctets"></a>Function: <strong>string_to_octets</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>string_to_octets</tt> (<var>string</var>)  <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>string_to_octets</tt> (<var>string</var>, <var>encoding</var>) </em></dt>
+<dd>
+<p>Encodes a <var>string</var> into a list of octets according to current system defaults. 
+When encoding strings containing Non-US-ASCII characters 
+the result depends on the platform, application and underlying Lisp.
+</p>
+<p>In case the external format of the Lisp reader is equal to UTF-8 the optional 
+argument <var>encoding</var> allows to set the encoding for the string to octet conversion. 
+If necessary see <a href="maxima_377.html#adjust_005fexternal_005fformat">adjust_external_format</a> for changing the external format. 
+</p>
+<p>See <a href="#octets_005fto_005fstring">octets_to_string</a> for examples and some more information.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_378.html#String-Processing" accesskey="p" rel="previous">String Processing</a>, Up: <a href="maxima_374.html#stringproc_002dpkg" accesskey="u" rel="up">stringproc-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

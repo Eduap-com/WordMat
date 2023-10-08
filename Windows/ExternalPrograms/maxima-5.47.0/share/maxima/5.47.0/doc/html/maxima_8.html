@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Simplification (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Simplification (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Simplification (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_9.html#Elementary-Functions" rel="next" title="Elementary Functions">
+<link href="maxima_7.html#Evaluation" rel="prev" title="Evaluation">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Simplification">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_9.html#Elementary-Functions" accesskey="n" rel="next">Elementary Functions</a>, Previous: <a href="maxima_7.html#Evaluation" accesskey="p" rel="prev">Evaluation</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Simplification-1">9 Simplification</h2>
+
+<a class="anchor" id="Item_003a-Simplification_002fnode_002fIntroduction-to-Simplification"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Simplification" accesskey="1">Introduction to Simplification</a></li>
+<li><a href="#Functions-and-Variables-for-Simplification" accesskey="2">Functions and Variables for Simplification</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Simplification">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Simplification" accesskey="n" rel="next">Functions and Variables for Simplification</a>, Up: <a href="#Simplification" accesskey="u" rel="up">Simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Simplification-1">9.1 Introduction to Simplification</h3>
+
+<p>Maxima interacts with the user through a cycle of actions called the read-eval-print loop (REPL).
+This consists of three steps: reading and parsing, evaluating and simplifying, 
+and outputting. Parsing converts a syntactically valid sequence of typed characters into
+a internal data structure. Evaluation
+replaces variable and function names with their values and simplification rewrites 
+expressions to be easier for the user or other programs to understand. Output 
+displays results in a variety of different formats and notations.
+</p>
+<p>Evaluation and simplification sometimes appear to have similar functionality, and
+Maxima uses simplification in many cases where other systems use evaluation.
+For example, arithmetic both on numbers and on symbolic expressions is simplification, not evaluation:
+<code class="code">2+2</code> simplifies to <code class="code">4</code>, <code class="code">2+x+x</code> simplifies to <code class="code">2+2*x</code>, and
+<code class="code">sqrt(7)^4</code> simplifies to <code class="code">49</code>.
+Evaluation and simplification are interleaved.
+For example, <code class="code">factor(integrate(x+1,x))</code> first calls the built-in function <code class="code"><a class="ref" href="maxima_18.html#integrate">integrate</a></code>,
+giving <code class="code">x+x*x*2^-1</code>;
+that simplifies to <code class="code">x+(1/2)*x^2</code>; this in turn is passed to the <code class="code"><a class="ref" href="maxima_13.html#factor">factor</a></code> function,
+which returns <code class="code">(x*(x+2))/2</code>.
+</p>
+<p>Evaluation is what makes Maxima a programming language: it implements
+functions, subroutines, variables, values, loops, assignments and so on.
+Evaluation replaces built-in or user-defined function names by their definitions and
+variables by their values. This is largely the same as activities of a 
+conventional programming language, but extended to work with symbolic mathematical data. 
+The system has various optional &quot;flags&quot; which the user can set to control the details of
+evaluation. See <a class="xref" href="maxima_7.html#Functions-and-Variables-for-Evaluation">Functions and Variables for Evaluation</a>.
+</p>
+<p>Simplification maintains the value of an expression 
+while re-formulating its form to be smaller, simpler to understand, or to 
+conform to a particular specification (like expanded). For
+example, <code class="code">sin(%pi/2)</code> to <code class="code">1</code>, and <code class="code">x+x</code> to <code class="code">2*x</code>.
+There are many flags which control simplification. For example,
+with <code class="code">triginverses:true</code>, <code class="code">atan(tan(x))</code> does not simplify to <code class="code">x</code>,
+but with <code class="code">triginverses:all</code>, it does.
+</p>
+<p>Simplification can be provided in three ways:
+</p><ul class="itemize mark-bullet">
+<li>The internal, built-in automated simplifier,
+</li><li>User-written pattern-matching transformations, linked to the simplifier by using
+      &quot;tellsimp&quot; or &quot;tellsimpafter&quot; and called automatically,
+</li><li>User-written simplification routines adding using the <code class="code">simplifying</code> subsystem.
+</li></ul>
+
+<p>The internal simplifier belongs to the heart of Maxima. It is a large and 
+complicated collection of programs, and it has been refined over many years and by 
+thousands of users. Nevertheless, especially if you are trying out novel ideas or 
+unconventional notation, you may find it helpful to make small (or large) changes 
+to the program yourself. For details see for example the paper at the end of
+<a class="url" href="https://people.eecs.berkeley.edu/~fateman/papers/intro5.txt">https://people.eecs.berkeley.edu/~fateman/papers/intro5.txt</a>.
+</p>
+<p>Maxima internally represents expressions as &quot;trees&quot; with operators or &quot;roots&quot;
+like <code class="code">+</code>, <code class="code">*</code> , <code class="code">=</code> and operands (&quot;leaves&quot;) which are variables like
+<var class="var">x</var>, <var class="var">y</var>, <var class="var">z</var>, functions
+or sub-trees, like <code class="code">x*y</code>. Each operator has a simplification program
+associated with it.  <code class="code">+</code> (which also covers binary <code class="code">-</code> since
+<code class="code">a-b = a+(-1)*b)</code> and <code class="code">*</code> (which also covers <code class="code">/</code> 
+since <code class="code">a/b = a*b^(-1)</code>) have rather elaborate simplification programs. These 
+simplification programs (simplus, simptimes, simpexpt, etc.) are called whenever 
+the simplifier encounters the respective arithmetic operators in an expression 
+tree to be analyzed. 
+</p>
+<p>The structure of the simplifier dates back to 1965, and many hands have worked 
+on it through the years. It is data-directed, or object-oriented in the sense that
+it dispatches to the appropriate routine 
+depending on the root of some sub-tree of the expression, recursively. This general
+approach means that modifications to simplification are generally localized.
+In many cases it is straightforward to add an 
+operator and its simplification routine without disturbing existing code.
+</p>
+<p>Maxima also provides a variety of transformation routines that can change the form of an
+expression, including <code class="code"><a class="ref" href="maxima_13.html#factor">factor</a></code> (polynomial factorization), <code class="code"><a class="ref" href="maxima_21.html#horner">horner</a></code>
+(reorganize a polynomial using Horner&rsquo;s rule), <code class="code"><a class="ref" href="maxima_28.html#partfrac">partfrac</a></code>
+(rewrite a rational function as partial fractions),
+<code class="code"><a class="ref" href="maxima_9.html#trigexpand">trigexpand</a></code> (apply the sum formulas for trigonometric functions),
+and so on.
+</p>
+<p>Users can also write routines that change the form of an expression.
+</p>
+<p>Besides this general simplifier operating on algebraic 
+expression trees, there are several other representations of expressions in 
+Maxima which have separate methods. For example, the
+<code class="code"><a class="ref" href="maxima_13.html#rat">rat</a></code> function converts polynomials to vectors of coefficients to
+assist in rapid manipulation of such forms. Other representations include
+Taylor series and the (rarely used) Poisson series.
+</p>
+<p>All operators introduced by the user initially have no simplification
+programs associated with them.  Maxima does not know anything about
+function &quot;f&quot;  and so typing <code class="code">f(a,b)</code> will result in simplifying
+<var class="var">a</var>,<var class="var">b</var>, but not <code class="code">f</code>. 
+Even some built-in operators have no simplifications. For example,
+<code class="code">=</code> does not &quot;simplify&quot; &ndash; it is a place-holder with no
+simplification semantics other 
+than to simplify its two arguments, in this case referred to as the left and 
+right sides. Other parts of Maxima such as the solve program take special 
+note of equations, that is, trees with <code class="code">=</code> as the root. 
+(Note &ndash; in Maxima, the assignment operation is <code class="code">:</code> . That is, <code class="code">q: 4</code>
+sets the value of the symbol <var class="var">q</var> to <code class="code">4</code>.
+Function definition is done with <code class="code">:=</code>. )
+</p>
+<p>The general simplifier returns results with an internal flag indicating the 
+expression and each sub-expression has been simplified. This does not 
+guarantee that it is unique over all possible equivalent expressions. That&rsquo;s 
+too hard (theoretically, not possible given the generality of what can be 
+expressed in Maxima). However, some aspects of the expression, such as the 
+ordering of terms in a sum or product, are made uniform. This is important 
+for the other programs to work properly.
+</p>
+<p>A number of option variables control simplification. Indeed, simplification
+can be turned off entirely using <code class="code">simp:false</code>. However, many
+internal routines will not operate correctly with <code class="code">simp:false</code>.
+(About the only time it seems plausible to turn off the simplifier 
+is in the rare case that you want to over-ride a built-in simplification. 
+In that case  you might temporarily disable the simplifier, put in the new 
+transformation via <code class="code"><a class="ref" href="maxima_33.html#tellsimp">tellsimp</a></code>, and then re-enable the simplifier
+by <code class="code">simp:true</code>.)
+</p>
+<p>It is more plausible for you to associate user-defined symbolic function names 
+or operators with properties (<code class="code"><a class="ref" href="#additive">additive</a></code>,
+<code class="code"><a class="ref" href="#lassociative">lassociative</a></code>, <code class="code"><a class="ref" href="#oddfun">oddfun</a></code>, <code class="code"><a class="ref" href="#antisymmetric">antisymmetric</a></code>,
+<code class="code"><a class="ref" href="#linear">linear</a></code>, <code class="code"><a class="ref" href="#outative">outative</a></code>, <code class="code"><a class="ref" href="#commutative">commutative</a></code>, 
+<code class="code"><a class="ref" href="#multiplicative">multiplicative</a></code>, <code class="code"><a class="ref" href="#rassociative">rassociative</a></code>, <code class="code"><a class="ref" href="#evenfun">evenfun</a></code>,
+<code class="code"><a class="ref" href="maxima_10.html#nary">nary</a></code> and <code class="code"><a class="ref" href="#symmetric">symmetric</a></code>). These options steer 
+the simplifier processing in systematic directions.
+</p>
+<p>For example, <code class="code">declare(f,oddfun)</code> specifies that <code class="code">f</code> is an odd function.
+Maxima will simplify <code class="code">f(-x)</code> to <code class="code">-f(x)</code>. In the case of an even
+function, that is <code class="code">declare(g,evenfun)</code>, 
+Maxima will simplify <code class="code">g(-x)</code> to <code class="code">g(x)</code>. You can also associate a
+programming function with a name such as <code class="code">h(x):=x^2+1</code>. In that case the
+evaluator will immediately replace 
+<code class="code">h(3)</code> by <code class="code">10</code>, and <code class="code">h(a+1)</code> by <code class="code">(a+1)^2+1</code>, so any properties
+of <code class="code">h</code> will be ignored.
+</p>
+<p>In addition to these directly related properties set up by the user, facts and 
+properties from the actual context may have an impact on the simplifier&rsquo;s behavior, 
+too. See <a class="xref" href="maxima_10.html#Introduction-to-Maxima_0027s-Database">Introduction to Maxima&rsquo;s Database</a>.
+</p>
+<p>Example: <code class="code">sin(n*%pi)</code> is simplified to zero, if <var class="var">n</var> is an integer.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) sin(n*%pi);
+(%o1)                      sin(%pi n)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare(n, integer);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) sin(n*%pi);
+(%o3)                           0
+</pre></div></div>
+
+<p>If automated simplification is not sufficient, you can consider a variety of 
+built-in, but explicitly called simplfication functions (<code class="code"><a class="ref" href="maxima_13.html#ratsimp">ratsimp</a></code>,
+<code class="code"><a class="ref" href="#expand">expand</a></code>, <code class="code"><a class="ref" href="maxima_13.html#factor">factor</a></code>, <code class="code"><a class="ref" href="#radcan">radcan</a></code> and others). There are
+also flags that will push simplification into one or another direction.
+Given <code class="code">demoivre:true</code> the simplifier rewrites 
+complex exponentials as trigonometric forms. Given <code class="code">exponentialize:true</code>
+the  simplifier tries to do the reverse: rewrite trigonometric forms as complex 
+exponentials.
+</p>
+<p>As everywhere in Maxima, by writing your own functions (be it in the Maxima 
+user language or in the implementation language Lisp) and explicitly calling them 
+at selected places in the program, you can respond to your individual 
+simplification needs. Lisp gives you a handle on all the internal mechanisms, but 
+you rarely need this full generality. &quot;Tellsimp&quot; is designed to generate much 
+of the Lisp internal interface into the simplifier automatically.
+See See <a class="xref" href="maxima_33.html#Rules-and-Patterns">Rules and Patterns</a>.
+</p>
+<p>Over the years (Maxima/Macsyma&rsquo;s origins date back to about 1966!) users have 
+contributed numerous application packages and tools to extend or alter its 
+functional behavior. Various non-standard and &quot;share&quot; packages exist to modify 
+or extend simplification as well. You are invited to look into this more 
+experimental material where work is still in progress See <a class="xref" href="maxima_86.html#simplification_002dpkg">simplification</a>.
+</p>
+<p>The following appended material is optional on a first reading, and reading it 
+is not necessary for productive use of Maxima. It is for the curious user who 
+wants to understand what is going on, or the ambitious programmer who might 
+wish to change the (open-source) code. Experimentation with redefining Maxima 
+Lisp code is easily possible: to change the definition of a Lisp program (say 
+the one that simplifies <code class="code">cos()</code>, named <code class="code">simp%cos</code>), you simply
+load into Maxima a text file that will overwrite the <code class="code">simp%cos</code> function
+from the maxima package.
+</p>
+<a class="anchor" id="Item_003a-Simplification_002fnode_002fFunctions-and-Variables-for-Simplification"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Simplification">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-Simplification" accesskey="p" rel="prev">Introduction to Simplification</a>, Up: <a href="#Simplification" accesskey="u" rel="up">Simplification</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Simplification-1">9.2 Functions and Variables for Simplification</h3>
+
+<a class="anchor" id="additive"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fadditive"></a><dl class="first-defvr">
+<dt class="defvr" id="index-additive"><span class="category-def">Property: </span><span><strong class="def-name">additive</strong><a class="copiable-link" href='#index-additive'> &para;</a></span></dt>
+<dd>
+<p>If <code class="code">declare(f,additive)</code> has been executed, then:
+</p>
+<p>(1) If <code class="code">f</code> is univariate, whenever the simplifier encounters <code class="code">f</code>
+applied to a sum, <code class="code">f</code> will be distributed over that sum.  I.e.
+<code class="code">f(y+x)</code> will simplify to <code class="code">f(y)+f(x)</code>.
+</p>
+<p>(2) If <code class="code">f</code> is a function of 2 or more arguments, additivity is defined as
+additivity in the first argument to <code class="code">f</code>, as in the case of <code class="code">sum</code> or
+<code class="code">integrate</code>, i.e.  <code class="code">f(h(x)+g(x),x)</code> will simplify to
+<code class="code">f(h(x),x)+f(g(x),x)</code>.  This simplification does not occur when <code class="code">f</code> is
+applied to expressions of the form <code class="code">sum(x[i],i,lower-limit,upper-limit)</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) F3 (a + b + c);
+(%o1)                     F3(c + b + a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare (F3, additive);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) F3 (a + b + c);
+(%o3)                 F3(c) + F3(b) + F3(a)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="antisymmetric"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fantisymmetric"></a><dl class="first-defvr">
+<dt class="defvr" id="index-antisymmetric"><span class="category-def">Property: </span><span><strong class="def-name">antisymmetric</strong><a class="copiable-link" href='#index-antisymmetric'> &para;</a></span></dt>
+<dd>
+<p>If <code class="code">declare(h,antisymmetric)</code> is done, this tells the simplifier that
+<code class="code">h</code> is antisymmetric.  E.g.  <code class="code">h(x,z,y)</code> will simplify to 
+<code class="code">- h(x, y, z)</code>.  That is, it will give (-1)^n times the result given by
+<code class="code"><a class="ref" href="#symmetric">symmetric</a></code> or <code class="code"><a class="ref" href="#commutative">commutative</a></code>, where n is the number of interchanges
+of two arguments necessary to convert it to that form.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) S (b, a);
+(%o1)                        S(b, a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare (S, symmetric);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) S (b, a);
+(%o3)                        S(a, b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) S (a, c, e, d, b);
+(%o4)                   S(a, b, c, d, e)
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) T (b, a);
+(%o5)                        T(b, a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) declare (T, antisymmetric);
+(%o6)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) T (b, a);
+(%o7)                       - T(a, b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) T (a, c, e, d, b);
+(%o8)                   T(a, b, c, d, e)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="combine"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fcombine"></a><dl class="first-deffn">
+<dt class="deffn" id="index-combine"><span class="category-def">Function: </span><span><strong class="def-name">combine</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-combine'> &para;</a></span></dt>
+<dd>
+<p>Simplifies the sum <var class="var">expr</var> by combining terms with the same
+denominator into a single term.
+</p>
+<p>See also: <code class="code"><a class="ref" href="maxima_32.html#rncombine">rncombine</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) 1*f/2*b + 2*c/3*a + 3*f/4*b +c/5*b*a;
+                      5 b f   a b c   2 a c
+(%o1)                 ----- + ----- + -----
+                        4       5       3
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) combine (%);
+                  75 b f + 4 (3 a b c + 10 a c)
+(%o2)             -----------------------------
+                               60
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="commutative"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fcommutative"></a><dl class="first-defvr">
+<dt class="defvr" id="index-commutative"><span class="category-def">Property: </span><span><strong class="def-name">commutative</strong><a class="copiable-link" href='#index-commutative'> &para;</a></span></dt>
+<dd>
+<p>If <code class="code">declare(h, commutative)</code> is done, this tells the simplifier that
+<code class="code">h</code> is a commutative function.  E.g.  <code class="code">h(x, z, y)</code> will simplify to
+<code class="code">h(x, y, z)</code>.  This is the same as <code class="code"><a class="ref" href="#symmetric">symmetric</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) S (b, a);
+(%o1)                        S(b, a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) S (a, b) + S (b, a);
+(%o2)                   S(b, a) + S(a, b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) declare (S, commutative);
+(%o3)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) S (b, a);
+(%o4)                        S(a, b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) S (a, b) + S (b, a);
+(%o5)                       2 S(a, b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) S (a, c, e, d, b);
+(%o6)                   S(a, b, c, d, e)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="demoivre"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fdemoivre"></a><dl class="first-deffn">
+<dt class="deffn" id="index-demoivre"><span class="category-def">Function: </span><span><strong class="def-name">demoivre</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-demoivre'> &para;</a></span></dt>
+<dt class="deffnx def-cmd-deffn" id="index-demoivre-1"><span class="category-def">Option variable: </span><span><strong class="def-name">demoivre</strong><a class="copiable-link" href='#index-demoivre-1'> &para;</a></span></dt>
+<dd>
+<p>The function <code class="code">demoivre (expr)</code> converts one expression
+without setting the global variable <code class="code">demoivre</code>.
+</p>
+<p>When the variable <code class="code">demoivre</code> is <code class="code">true</code>, complex exponentials are
+converted into equivalent expressions in terms of circular functions:
+<code class="code">exp (a + b*%i)</code> simplifies to <code class="code">%e^a * (cos(b) + %i*sin(b))</code>
+if <code class="code">b</code> is free of <code class="code">%i</code>.  <code class="code">a</code> and <code class="code">b</code> are not expanded.
+</p>
+<p>The default value of <code class="code">demoivre</code> is <code class="code">false</code>.
+</p>
+<p><code class="code">exponentialize</code> converts circular and hyperbolic functions to exponential
+form.  <code class="code">demoivre</code> and <code class="code">exponentialize</code> cannot both be true at the same
+time.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="function_005fdistrib"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fdistrib"></a><dl class="first-deffn">
+<dt class="deffn" id="index-distrib"><span class="category-def">Function: </span><span><strong class="def-name">distrib</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-distrib'> &para;</a></span></dt>
+<dd>
+<p>Distributes sums over products.  It differs from <code class="code">expand</code> in that it works
+at only the top level of an expression, i.e., it doesn&rsquo;t recurse and it is
+faster than <code class="code">expand</code>.  It differs from <code class="code">multthru</code> in that it expands
+all sums at that level.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) distrib ((a+b) * (c+d));
+(%o1)                 b d + a d + b c + a c
+(%i2) multthru ((a+b) * (c+d));
+(%o2)                 (b + a) d + (b + a) c
+(%i3) distrib (1/((a+b) * (c+d)));
+                                1
+(%o3)                    ---------------
+                         (b + a) (d + c)
+(%i4) expand (1/((a+b) * (c+d)), 1, 0);
+                                1
+(%o4)                 ---------------------
+                      b d + a d + b c + a c
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="distribute_005fover"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fdistribute_005fover"></a><dl class="first-defvr">
+<dt class="defvr" id="index-distribute_005fover"><span class="category-def">Option variable: </span><span><strong class="def-name">distribute_over</strong><a class="copiable-link" href='#index-distribute_005fover'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">distribute_over</code> controls the mapping of functions over bags like lists, 
+matrices, and equations.  At this time not all Maxima functions have this 
+property.  It is possible to look up this property with the command
+<code class="code"><a class="ref" href="maxima_10.html#properties">properties</a></code>..
+</p>
+<p>The mapping of functions is switched off, when setting <code class="code">distribute_over</code> 
+to the value <code class="code">false</code>.
+</p>
+<p>Examples:
+</p>
+<p>The <code class="code">sin</code> function maps over a list:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) sin([x,1,1.0]);
+(%o1)         [sin(x), sin(1), 0.8414709848078965]
+</pre></div></div>
+
+<p><code class="code">mod</code> is a function with two arguments which maps over lists.  Mapping over 
+nested lists is possible too:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) mod([x,11,2*a],10);
+(%o1)             [mod(x, 10), 1, 2 mod(a, 5)]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) mod([[x,y,z],11,2*a],10);
+(%o2) [[mod(x, 10), mod(y, 10), mod(z, 10)], 1, 2 mod(a, 5)]
+</pre></div></div>
+
+<p>Mapping of the <code class="code">floor</code> function over a matrix and an equation:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) floor(matrix([a,b],[c,d]));
+                     [ floor(a)  floor(b) ]
+(%o1)                [                    ]
+                     [ floor(c)  floor(d) ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) floor(a=b);
+(%o2)                  floor(a) = floor(b)
+</pre></div></div>
+
+<p>Functions with more than one argument map over any of the arguments or all
+arguments:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) expintegral_e([1,2],[x,y]);
+(%o1) [[expintegral_e(1, x), expintegral_e(1, y)], 
+                      [expintegral_e(2, x), expintegral_e(2, y)]]
+</pre></div></div>
+
+<p>Check if a function has the property distribute_over:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) properties(abs);
+(%o1) [integral, rule, distributes over bags, noun, gradef, 
+                                                 system function]
+</pre></div></div>
+
+<p>The mapping of functions is switched off, when setting <code class="code">distribute_over</code> 
+to the value <code class="code">false</code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) distribute_over;
+(%o1)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) sin([x,1,1.0]);
+(%o2)         [sin(x), sin(1), 0.8414709848078965]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) distribute_over : not distribute_over;
+(%o3)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) sin([x,1,1.0]);
+(%o4)                   sin([x, 1, 1.0])
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="domain"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fdomain"></a><dl class="first-defvr">
+<dt class="defvr" id="index-domain"><span class="category-def">Option variable: </span><span><strong class="def-name">domain</strong><a class="copiable-link" href='#index-domain'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">real</code>
+</p>
+<p>When <code class="code">domain</code> is set to <code class="code">complex</code>, <code class="code">sqrt (x^2)</code> will remain
+<code class="code">sqrt (x^2)</code> instead of returning <code class="code">abs(x)</code>.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="evenfun"></a><a class="anchor" id="oddfun"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fevenfun"></a><dl class="first-defvr">
+<dt class="defvr" id="index-evenfun"><span class="category-def">Property: </span><span><strong class="def-name">evenfun</strong><a class="copiable-link" href='#index-evenfun'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Simplification_002fdefvr_002foddfun"></a></dd><dt class="defvrx def-cmd-defvr" id="index-oddfun"><span class="category-def">Property: </span><span><strong class="def-name">oddfun</strong><a class="copiable-link" href='#index-oddfun'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(f, evenfun)</code> or <code class="code">declare(f, oddfun)</code> tells Maxima to recognize
+the function <code class="code">f</code> as an even or odd function.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) o (- x) + o (x);
+(%o1)                     o(x) + o(- x)
+(%i2) declare (o, oddfun);
+(%o2)                         done
+(%i3) o (- x) + o (x);
+(%o3)                           0
+(%i4) e (- x) - e (x);
+(%o4)                     e(- x) - e(x)
+(%i5) declare (e, evenfun);
+(%o5)                         done
+(%i6) e (- x) - e (x);
+(%o6)                           0
+</pre></div>
+</dd></dl>
+
+<a class="anchor" id="expand"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fexpand"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expand"><span class="category-def">Function: </span><span><strong class="def-name">expand</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">expand</code> (<var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">expand</code> (<var class="var">expr</var>, <var class="var">p</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-expand'> &para;</a></span></dt>
+<dd>
+<p>Expand expression <var class="var">expr</var>.
+Products of sums and exponentiated sums are
+multiplied out, numerators of rational expressions which are sums are
+split into their respective terms, and multiplication (commutative
+and non-commutative) are distributed over addition at all levels of
+<var class="var">expr</var>.
+</p>
+<p>For polynomials one should usually use <code class="code">ratexpand</code> which uses a
+more efficient algorithm.
+</p>
+<p><code class="code">maxnegex</code> and <code class="code">maxposex</code> control the maximum negative and
+positive exponents, respectively, which will expand.
+</p>
+<p><code class="code">expand (<var class="var">expr</var>, <var class="var">p</var>, <var class="var">n</var>)</code> expands <var class="var">expr</var>, 
+using <var class="var">p</var> for <code class="code">maxposex</code> and <var class="var">n</var> for <code class="code">maxnegex</code>.
+This is useful in order to expand part but not all of an expression.
+</p>
+<p><code class="code">expon</code> - the exponent of the largest negative power which is
+automatically expanded (independent of calls to <code class="code">expand</code>).  For example
+if <code class="code">expon</code> is 4 then <code class="code">(x+1)^(-5)</code> will not be automatically expanded.
+</p>
+<p><code class="code">expop</code> - the highest positive exponent which is automatically expanded.
+Thus <code class="code">(x+1)^3</code>, when typed, will be automatically expanded only if
+<code class="code">expop</code> is greater than or equal to 3.  If it is desired to have
+<code class="code">(x+1)^n</code> expanded where <code class="code">n</code> is greater than <code class="code">expop</code> then
+executing <code class="code">expand ((x+1)^n)</code> will work only if <code class="code">maxposex</code> is not
+less than <code class="code">n</code>.
+</p>
+<p><code class="code">expand(expr, 0, 0)</code> causes a resimplification of <code class="code">expr</code>.  <code class="code">expr</code>
+is not reevaluated.  In distinction from <code class="code">ev(expr, noeval)</code> a special
+representation (e. g. a CRE form) is removed.  See also <code class="code"><a class="ref" href="maxima_7.html#ev">ev</a></code>.
+</p>
+<p>The <code class="code">expand</code> flag used with <code class="code">ev</code> causes expansion.
+</p>
+<p>The file <samp class="file">share/simplification/facexp.mac</samp>
+contains several related functions (in particular <code class="code">facsum</code>,
+<code class="code">factorfacsum</code> and <code class="code">collectterms</code>, which are autoloaded) and variables
+(<code class="code">nextlayerfactor</code> and <code class="code">facsum_combine</code>) that provide the user with
+the ability to structure expressions by controlled expansion.
+Brief function descriptions are available in <samp class="file">simplification/facexp.usg</samp>.
+A demo is available by doing <code class="code">demo(&quot;facexp&quot;)</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) expr:(x+1)^2*(y+1)^3;
+                               2        3
+(%o1)                   (x + 1)  (y + 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) expand(expr);
+       2  3        3    3      2  2        2      2      2
+(%o2) x  y  + 2 x y  + y  + 3 x  y  + 6 x y  + 3 y  + 3 x  y
+                                                      2
+                                     + 6 x y + 3 y + x  + 2 x + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) expand(expr,2);
+               2        3              3          3
+(%o3)         x  (y + 1)  + 2 x (y + 1)  + (y + 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) expr:(x+1)^-2*(y+1)^3;
+                                   3
+                            (y + 1)
+(%o4)                       --------
+                                   2
+                            (x + 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) expand(expr);
+            3               2
+           y             3 y            3 y             1
+(%o5) ------------ + ------------ + ------------ + ------------
+       2              2              2              2
+      x  + 2 x + 1   x  + 2 x + 1   x  + 2 x + 1   x  + 2 x + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) expand(expr,2,2);
+                                   3
+                            (y + 1)
+(%o6)                     ------------
+                           2
+                          x  + 2 x + 1
+</pre></div></div>
+
+<p>Resimplify an expression without expansion:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) expr:(1+x)^2*sin(x);
+                                2
+(%o1)                    (x + 1)  sin(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) exponentialize:true;
+(%o2)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) expand(expr,0,0);
+                            2    %i x     - %i x
+                  %i (x + 1)  (%e     - %e      )
+(%o3)           - -------------------------------
+                                 2
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="expandwrt"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fexpandwrt"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expandwrt"><span class="category-def">Function: </span><span><strong class="def-name">expandwrt</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>)</var><a class="copiable-link" href='#index-expandwrt'> &para;</a></span></dt>
+<dd>
+<p>Expands expression <code class="code">expr</code> with respect to the 
+variables <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>.
+All products involving the variables appear explicitly.  The form returned
+will be free of products of sums of expressions that are not free of
+the variables.  <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>
+may be variables, operators, or expressions.
+</p>
+<p>By default, denominators are not expanded, but this can be controlled by
+means of the switch <code class="code">expandwrt_denom</code>.
+</p>
+<p>This function is autoloaded from
+<samp class="file">simplification/stopex.mac</samp>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expandwert_005fdenom"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fexpandwrt_005fdenom"></a><dl class="first-defvr">
+<dt class="defvr" id="index-expandwrt_005fdenom"><span class="category-def">Option variable: </span><span><strong class="def-name">expandwrt_denom</strong><a class="copiable-link" href='#index-expandwrt_005fdenom'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p><code class="code">expandwrt_denom</code> controls the treatment of rational
+expressions by <code class="code">expandwrt</code>.  If <code class="code">true</code>, then both the numerator and
+denominator of the expression will be expanded according to the
+arguments of <code class="code">expandwrt</code>, but if <code class="code">expandwrt_denom</code> is <code class="code">false</code>,
+then only the numerator will be expanded in that way.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="expandwrt_005ffactored"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fexpandwrt_005ffactored"></a><dl class="first-deffn">
+<dt class="deffn" id="index-expandwrt_005ffactored"><span class="category-def">Function: </span><span><strong class="def-name">expandwrt_factored</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>)</var><a class="copiable-link" href='#index-expandwrt_005ffactored'> &para;</a></span></dt>
+<dd>
+<p>is similar to <code class="code">expandwrt</code>, but treats expressions that are products
+somewhat differently.  <code class="code">expandwrt_factored</code> expands only on those factors
+of <code class="code">expr</code> that contain the variables <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>.
+</p>
+<p>This function is autoloaded from <samp class="file">simplification/stopex.mac</samp>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="expon"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fexpon"></a><dl class="first-defvr">
+<dt class="defvr" id="index-expon"><span class="category-def">Option variable: </span><span><strong class="def-name">expon</strong><a class="copiable-link" href='#index-expon'> &para;</a></span></dt>
+<dd><p>Default value: 0
+</p>
+<p><code class="code">expon</code> is the exponent of the largest negative power which
+is automatically expanded (independent of calls to <code class="code">expand</code>).  For
+example, if <code class="code">expon</code> is 4 then <code class="code">(x+1)^(-5)</code> will not be automatically
+expanded.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="exponentialize"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fexponentialize"></a><dl class="first-deffn">
+<dt class="deffn" id="index-exponentialize"><span class="category-def">Function: </span><span><strong class="def-name">exponentialize</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-exponentialize'> &para;</a></span></dt>
+<dt class="deffnx def-cmd-deffn" id="index-exponentialize-1"><span class="category-def">Option variable: </span><span><strong class="def-name">exponentialize</strong><a class="copiable-link" href='#index-exponentialize-1'> &para;</a></span></dt>
+<dd>
+<p>The function <code class="code">exponentialize (expr)</code> converts 
+circular and hyperbolic functions in <var class="var">expr</var> to exponentials,
+without setting the global variable <code class="code">exponentialize</code>.
+</p>
+<p>When the variable <code class="code">exponentialize</code> is <code class="code">true</code>,
+all circular and hyperbolic functions are converted to exponential form.
+The default value is <code class="code">false</code>.
+</p>
+<p><code class="code">demoivre</code> converts complex exponentials into circular functions.
+<code class="code">exponentialize</code> and <code class="code">demoivre</code> cannot
+both be true at the same time.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Complex-variables">Complex variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="expop"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fexpop"></a><dl class="first-defvr">
+<dt class="defvr" id="index-expop"><span class="category-def">Option variable: </span><span><strong class="def-name">expop</strong><a class="copiable-link" href='#index-expop'> &para;</a></span></dt>
+<dd><p>Default value: 0
+</p>
+<p><code class="code">expop</code> is the highest positive exponent which is automatically expanded.
+Thus <code class="code">(x + 1)^3</code>, when typed, will be automatically expanded only if
+<code class="code">expop</code> is greater than or equal to 3.  If it is desired to have
+<code class="code">(x + 1)^n</code> expanded where <code class="code">n</code> is greater than <code class="code">expop</code> then
+executing <code class="code">expand ((x + 1)^n)</code> will work only if <code class="code">maxposex</code> is not
+less than n.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="lassociative"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002flassociative"></a><dl class="first-defvr">
+<dt class="defvr" id="index-lassociative"><span class="category-def">Property: </span><span><strong class="def-name">lassociative</strong><a class="copiable-link" href='#index-lassociative'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare (g, lassociative)</code> tells the Maxima simplifier that <code class="code">g</code> is
+left-associative.  E.g., <code class="code">g (g (a, b), g (c, d))</code> will simplify to
+<code class="code">g (g (g (a, b), c), d)</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#rassociative">rassociative</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification">Simplification</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="linear"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002flinear"></a><dl class="first-defvr">
+<dt class="defvr" id="index-linear-1"><span class="category-def">Property: </span><span><strong class="def-name">linear</strong><a class="copiable-link" href='#index-linear-1'> &para;</a></span></dt>
+<dd>
+<p>One of Maxima&rsquo;s operator properties.  For univariate <code class="code">f</code> so
+declared, &quot;expansion&quot; <code class="code">f(x + y)</code> yields <code class="code">f(x) + f(y)</code>,
+<code class="code">f(a*x)</code> yields <code class="code">a*f(x)</code> takes
+place where <code class="code">a</code> is a &quot;constant&quot;.  For functions of two or more arguments,
+&quot;linearity&quot; is defined to be as in the case of <code class="code"><a class="ref" href="maxima_27.html#sum">sum</a></code> or <code class="code"><a class="ref" href="maxima_18.html#integrate">integrate</a></code>,
+i.e., <code class="code">f (a*x + b, x)</code> yields <code class="code">a*f(x,x) + b*f(1,x)</code>
+for <code class="code">a</code> and <code class="code">b</code> free of <code class="code">x</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) declare (f, linear);
+(%o1)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) f(x+y);
+(%o2)                      f(y) + f(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) declare (a, constant);
+(%o3)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) f(a*x);
+(%o4)                        a f(x)
+</pre></div></div>
+
+<p><code class="code">linear</code> is equivalent to <code class="code"><a class="ref" href="#additive">additive</a></code> and <code class="code"><a class="ref" href="#outative">outative</a></code>.
+See also <code class="code"><a class="ref" href="#opproperties">opproperties</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) 'sum (F(k) + G(k), k, 1, inf);
+                       inf
+                       ====
+                       \
+(%o1)                   &gt;    (G(k) + F(k))
+                       /
+                       ====
+                       k = 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare (nounify (sum), linear);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) 'sum (F(k) + G(k), k, 1, inf);
+                     inf          inf
+                     ====         ====
+                     \            \
+(%o3)                 &gt;    G(k) +  &gt;    F(k)
+                     /            /
+                     ====         ====
+                     k = 1        k = 1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification">Simplification</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="maxnegex"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fmaxnegex"></a><dl class="first-defvr">
+<dt class="defvr" id="index-maxnegex"><span class="category-def">Option variable: </span><span><strong class="def-name">maxnegex</strong><a class="copiable-link" href='#index-maxnegex'> &para;</a></span></dt>
+<dd><p>Default value: 1000
+</p>
+<p><code class="code">maxnegex</code> is the largest negative exponent which will
+be expanded by the <code class="code">expand</code> command, see also <code class="code"><a class="ref" href="#maxposex">maxposex</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="maxposex"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fmaxposex"></a><dl class="first-defvr">
+<dt class="defvr" id="index-maxposex"><span class="category-def">Option variable: </span><span><strong class="def-name">maxposex</strong><a class="copiable-link" href='#index-maxposex'> &para;</a></span></dt>
+<dd><p>Default value: 1000
+</p>
+<p><code class="code">maxposex</code> is the largest exponent which will be
+expanded with the <code class="code">expand</code> command, see also <code class="code"><a class="ref" href="#maxnegex">maxnegex</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="multiplicative"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fmultiplicative"></a><dl class="first-defvr">
+<dt class="defvr" id="index-multiplicative"><span class="category-def">Property: </span><span><strong class="def-name">multiplicative</strong><a class="copiable-link" href='#index-multiplicative'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(f, multiplicative)</code> tells the Maxima simplifier that <code class="code">f</code>
+is multiplicative.
+</p>
+<ol class="enumerate">
+<li> If <code class="code">f</code> is univariate, whenever the simplifier encounters <code class="code">f</code> applied
+to a product, <code class="code">f</code> distributes over that product.  E.g., <code class="code">f(x*y)</code>
+simplifies to <code class="code">f(x)*f(y)</code>.
+This simplification is not applied to expressions of the form <code class="code">f('product(...))</code>.
+</li><li> If <code class="code">f</code> is a function of 2 or more arguments, multiplicativity is
+defined as multiplicativity in the first argument to <code class="code">f</code>, e.g.,
+<code class="code">f (g(x) * h(x), x)</code> simplifies to <code class="code">f (g(x) ,x) * f (h(x), x)</code>.
+</li></ol>
+
+<p><code class="code">declare(nounify(product), multiplicative)</code> tells Maxima to simplify symbolic products.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) F2 (a * b * c);
+(%o1)                       F2(a b c)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare (F2, multiplicative);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) F2 (a * b * c);
+(%o3)                   F2(a) F2(b) F2(c)
+</pre></div></div>
+
+<p><code class="code">declare(nounify(product), multiplicative)</code> tells Maxima to simplify symbolic products.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) product (a[i] * b[i], i, 1, n);
+                             n
+                           /===\
+                            ! !
+(%o1)                       ! !  a  b
+                            ! !   i  i
+                           i = 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare (nounify (product), multiplicative);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) product (a[i] * b[i], i, 1, n);
+                          n         n
+                        /===\     /===\
+                         ! !       ! !
+(%o3)                  ( ! !  a )  ! !  b
+                         ! !   i   ! !   i
+                        i = 1     i = 1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification">Simplification</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="multthru"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fmultthru"></a><dl class="first-deffn">
+<dt class="deffn" id="index-multthru"><span class="category-def">Function: </span><span><strong class="def-name">multthru</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">multthru</code> (<var class="var">expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">multthru</code> (<var class="var">expr_1</var>, <var class="var">expr_2</var>)</var><a class="copiable-link" href='#index-multthru'> &para;</a></span></dt>
+<dd>
+<p>Multiplies a factor (which should be a sum) of <var class="var">expr</var> by the other factors
+of <var class="var">expr</var>.  That is, <var class="var">expr</var> is <code class="code"><var class="var">f_1</var> <var class="var">f_2</var> ... <var class="var">f_n</var></code>
+where at least one factor, say <var class="var">f_i</var>, is a sum of terms.  Each term in that
+sum is multiplied by the other factors in the product.  (Namely all the factors
+except <var class="var">f_i</var>).  <code class="code">multthru</code> does not expand exponentiated sums.
+This function is the fastest way to distribute products (commutative or
+noncommutative) over sums.  Since quotients are represented as products
+<code class="code">multthru</code> can be used to divide sums by products as well.
+</p>
+<p><code class="code">multthru (<var class="var">expr_1</var>, <var class="var">expr_2</var>)</code> multiplies each term in
+<var class="var">expr_2</var> (which should be a sum or an equation) by <var class="var">expr_1</var>.  If
+<var class="var">expr_1</var> is not itself a sum then this form is equivalent to
+<code class="code">multthru (<var class="var">expr_1</var>*<var class="var">expr_2</var>)</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x/(x-y)^2 - 1/(x-y) - f(x)/(x-y)^3;
+                      1        x         f(x)
+(%o1)             - ----- + -------- - --------
+                    x - y          2          3
+                            (x - y)    (x - y)
+(%i2) multthru ((x-y)^3, %);
+                           2
+(%o2)             - (x - y)  + x (x - y) - f(x)
+(%i3) ratexpand (%);
+                           2
+(%o3)                   - y  + x y - f(x)
+(%i4) ((a+b)^10*s^2 + 2*a*b*s + (a*b)^2)/(a*b*s^2);
+                        10  2              2  2
+                 (b + a)   s  + 2 a b s + a  b
+(%o4)            ------------------------------
+                                  2
+                             a b s
+(%i5) multthru (%);  /* note that this does not expand (b+a)^10 */
+                                        10
+                       2   a b   (b + a)
+(%o5)                  - + --- + ---------
+                       s    2       a b
+                           s
+(%i6) multthru (a.(b+c.(d+e)+f));
+(%o6)            a . f + a . c . (e + d) + a . b
+(%i7) expand (a.(b+c.(d+e)+f));
+(%o7)         a . f + a . c . e + a . c . d + a . b
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="property_005fnary"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fnary"></a><dl class="first-defvr">
+<dt class="defvr" id="index-nary-1"><span class="category-def">Property: </span><span><strong class="def-name">nary</strong><a class="copiable-link" href='#index-nary-1'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(f, nary)</code> tells Maxima to recognize the function <code class="code">f</code> as an
+n-ary function.
+</p>
+<p>The <code class="code">nary</code> declaration is not the same as calling the
+<code class="code"><a class="ref" href="maxima_6.html#function_005fnary">nary</a></code> function.  The sole effect of
+<code class="code">declare(f, nary)</code> is to instruct the Maxima simplifier to flatten nested
+expressions, for example, to simplify <code class="code">foo(x, foo(y, z))</code> to
+<code class="code">foo(x, y, z)</code>.  See also <code class="code"><a class="ref" href="maxima_10.html#declare">declare</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) H (H (a, b), H (c, H (d, e)));
+(%o1)               H(H(a, b), H(c, H(d, e)))
+(%i2) declare (H, nary);
+(%o2)                         done
+(%i3) H (H (a, b), H (c, H (d, e)));
+(%o3)                   H(a, b, c, d, e)
+</pre></div>
+</dd></dl>
+
+
+<a class="anchor" id="negdistrib"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fnegdistrib"></a><dl class="first-defvr">
+<dt class="defvr" id="index-negdistrib"><span class="category-def">Option variable: </span><span><strong class="def-name">negdistrib</strong><a class="copiable-link" href='#index-negdistrib'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">negdistrib</code> is <code class="code">true</code>, -1 distributes over an expression.
+E.g., <code class="code">-(x + y)</code> becomes <code class="code">- y - x</code>.  Setting it to <code class="code">false</code>
+will allow <code class="code">- (x + y)</code> to be displayed like that.  This is sometimes useful
+but be very careful: like the <code class="code">simp</code> flag, this is one flag you do not
+want to set to <code class="code">false</code> as a matter of course or necessarily for other
+than local use in your Maxima.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) negdistrib;
+(%o1)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) -(x+y);
+(%o2)                       (- y) - x
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) negdistrib : not negdistrib ;
+(%o3)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) -(x+y);
+(%o4)                       - (y + x)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="opproperties"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fopproperties"></a><dl class="first-defvr">
+<dt class="defvr" id="index-opproperties"><span class="category-def">System variable: </span><span><strong class="def-name">opproperties</strong><a class="copiable-link" href='#index-opproperties'> &para;</a></span></dt>
+<dd>
+<p><code class="code">opproperties</code> is the list of the special operator properties recognized
+by the Maxima simplifier.
+</p>
+<p>Items are added to the <code class="code">opproperties</code> list by the function <code class="code"><a class="ref" href="#define_005fopproperty">define_opproperty</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) opproperties;
+(%o1) [linear, additive, multiplicative, outative, evenfun, 
+oddfun, commutative, symmetric, antisymmetric, nary, 
+lassociative, rassociative]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Global-variables">Global variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification">Simplification</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="define_005fopproperty"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fdefine_005fopproperty"></a><dl class="first-deffn">
+<dt class="deffn" id="index-define_005fopproperty"><span class="category-def">Function: </span><span><strong class="def-name">define_opproperty</strong> <var class="def-var-arguments">(<var class="var">property_name</var>, <var class="var">simplifier_fn</var>)</var><a class="copiable-link" href='#index-define_005fopproperty'> &para;</a></span></dt>
+<dd>
+<p>Declares the symbol <var class="var">property_name</var> to be an operator property,
+which is simplified by <var class="var">simplifier_fn</var>,
+which may be the name of a Maxima or Lisp function or a lambda expression.
+After <code class="code">define_opproperty</code> is called,
+functions and operators may be declared to have the <var class="var">property_name</var> property,
+and <var class="var">simplifier_fn</var> is called to simplify them.
+</p>
+<p><var class="var">simplifier_fn</var> must be a function of one argument,
+which is an expression in which the main operator is declared to have the <var class="var">property_name</var> property.
+</p>
+<p><var class="var">simplifier_fn</var> is called with the global flag <code class="code">simp</code> disabled.
+Therefore <var class="var">simplifier_fn</var> must be able to carry out its simplification
+without making use of the general simplifier.
+</p>
+<p><code class="code">define_opproperty</code> appends <var class="var">property_name</var> to the
+global list <code class="code"><a class="ref" href="#opproperties">opproperties</a></code>.
+</p>
+<p><code class="code">define_opproperty</code> returns <code class="code">done</code>.
+</p>
+<p>Example:
+</p>
+<p>Declare a new property, <code class="code">identity</code>, which is simplified by <code class="code">simplify_identity</code>.
+Declare that <code class="code">f</code> and <code class="code">g</code> have the new property.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) define_opproperty (identity, simplify_identity);
+(%o1)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) simplify_identity(e) := first(e);
+(%o2)           simplify_identity(e) := first(e)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) declare ([f, g], identity);
+(%o3)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) f(10 + t);
+(%o4)                        t + 10
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) g(3*u) - f(2*u);
+(%o5)                           u
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification">Simplification</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="outative"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002foutative"></a><dl class="first-defvr">
+<dt class="defvr" id="index-outative"><span class="category-def">Property: </span><span><strong class="def-name">outative</strong><a class="copiable-link" href='#index-outative'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare(f, outative)</code> tells the Maxima simplifier that constant factors
+in the argument of <code class="code">f</code> can be pulled out.
+</p>
+<ol class="enumerate">
+<li> If <code class="code">f</code> is univariate, whenever the simplifier encounters <code class="code">f</code> applied
+to a product, that product will be partitioned into factors that are constant
+and factors that are not and the constant factors will be pulled out.  E.g.,
+<code class="code">f(a*x)</code> will simplify to <code class="code">a*f(x)</code> where <code class="code">a</code> is a constant.
+Non-atomic constant factors will not be pulled out.
+</li><li> If <code class="code">f</code> is a function of 2 or more arguments, outativity is defined as in
+the case of <code class="code"><a class="ref" href="maxima_27.html#sum">sum</a></code> or <code class="code"><a class="ref" href="maxima_18.html#integrate">integrate</a></code>, i.e., <code class="code">f (a*g(x), x)</code> will
+simplify to <code class="code">a * f(g(x), x)</code> for <code class="code">a</code> free of <code class="code">x</code>.
+</li></ol>
+
+<p><code class="code"><a class="ref" href="maxima_27.html#sum">sum</a></code>, <code class="code"><a class="ref" href="maxima_18.html#integrate">integrate</a></code>, and <code class="code"><a class="ref" href="maxima_16.html#limit">limit</a></code> are all <code class="code">outative</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) F1 (100 * x);
+(%o1)                       F1(100 x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) declare (F1, outative);
+(%o2)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) F1 (100 * x);
+(%o3)                       100 F1(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) declare (zz, constant);
+(%o4)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) F1 (zz * y);
+(%o5)                       zz F1(y)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="radcan"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fradcan"></a><dl class="first-deffn">
+<dt class="deffn" id="index-radcan"><span class="category-def">Function: </span><span><strong class="def-name">radcan</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-radcan'> &para;</a></span></dt>
+<dd>
+<p>Simplifies <var class="var">expr</var>, which can contain logs, exponentials, and radicals, by 
+converting it into a form which is canonical over a large class of expressions 
+and a given ordering of variables; that is, all functionally equivalent forms 
+are mapped into a unique form.  For a somewhat larger class of expressions,
+<code class="code">radcan</code> produces a regular form.  Two equivalent expressions in this class 
+do not necessarily have the same appearance, but their difference can be 
+simplified by <code class="code">radcan</code> to zero.
+</p>
+<p>For some expressions <code class="code">radcan</code> is quite time consuming.  This is the cost 
+of exploring certain relationships among the components of the expression for 
+simplifications based on factoring and partial-fraction expansions of exponents.
+</p>
+
+
+
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) radcan((log(x+x^2)-log(x))^a/log(1+x)^(a/2));
+                                    a/2
+(%o1)                     log(x + 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) radcan((log(1+2*a^x+a^(2*x))/log(1+a^x)));
+(%o2)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) radcan((%e^x-1)/(1+%e^(x/2)));
+                              x/2
+(%o3)                       %e    - 1
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="radexpand"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fradexpand"></a><dl class="first-defvr">
+<dt class="defvr" id="index-radexpand"><span class="category-def">Option variable: </span><span><strong class="def-name">radexpand</strong><a class="copiable-link" href='#index-radexpand'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">radexpand</code> controls some simplifications of radicals.
+</p>
+<p>When <code class="code">radexpand</code> is <code class="code">all</code>, causes nth roots of factors of a product
+which are powers of n to be pulled outside of the radical.  E.g. if
+<code class="code">radexpand</code> is <code class="code">all</code>, <code class="code">sqrt (16*x^2)</code> simplifies to <code class="code">4*x</code>.
+</p>
+<p>More particularly, consider <code class="code">sqrt (x^2)</code>.
+</p><ul class="itemize mark-bullet">
+<li>If <code class="code">radexpand</code> is <code class="code">all</code> or <code class="code">assume (x &gt; 0)</code> has been executed, 
+<code class="code">sqrt(x^2)</code> simplifies to <code class="code">x</code>.
+</li><li>If <code class="code">radexpand</code> is <code class="code">true</code> and <code class="code">domain</code> is <code class="code">real</code>
+(its default), <code class="code">sqrt(x^2)</code> simplifies to <code class="code">abs(x)</code>.
+</li><li>If <code class="code">radexpand</code> is <code class="code">false</code>, or <code class="code">radexpand</code> is <code class="code">true</code> and
+<code class="code">domain</code> is <code class="code">complex</code>, <code class="code">sqrt(x^2)</code> is not simplified.
+</li></ul>
+
+<p>Note that <code class="code">domain</code> only matters when <code class="code">radexpand</code> is <code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="rassociative"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002frassociative"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rassociative"><span class="category-def">Property: </span><span><strong class="def-name">rassociative</strong><a class="copiable-link" href='#index-rassociative'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare (g, rassociative)</code> tells the Maxima
+simplifier that <code class="code">g</code> is right-associative.  E.g.,
+<code class="code">g(g(a, b), g(c, d))</code> simplifies to <code class="code">g(a, g(b, g(c, d)))</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#lassociative">lassociative</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="scsimp"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fscsimp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scsimp"><span class="category-def">Function: </span><span><strong class="def-name">scsimp</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">rule_1</var>, &hellip;, <var class="var">rule_n</var>)</var><a class="copiable-link" href='#index-scsimp'> &para;</a></span></dt>
+<dd>
+<p>Sequential Comparative Simplification (method due to Stoute).
+<code class="code">scsimp</code> attempts to simplify <var class="var">expr</var>
+according to the rules <var class="var">rule_1</var>, &hellip;, <var class="var">rule_n</var>.
+If a smaller expression is obtained, the process repeats.  Otherwise after all
+simplifications are tried, it returns the original answer.
+</p>
+<p><code class="code">example (scsimp)</code> displays some examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="simp"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fsimp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-simp"><span class="category-def">Option variable: </span><span><strong class="def-name">simp</strong><a class="copiable-link" href='#index-simp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p><code class="code">simp</code> enables simplification.  This is the default.  <code class="code">simp</code> is also
+an <code class="code">evflag</code>, which is recognized by the function <code class="code">ev</code>.  See <code class="code"><a class="ref" href="maxima_7.html#ev">ev</a></code>.
+</p>
+<p>When <code class="code">simp</code> is used as an <code class="code">evflag</code> with a value <code class="code">false</code>, the 
+simplification is suppressed only during the evaluation phase of an expression.
+The flag does not suppress the simplification which follows the evaluation 
+phase.
+</p>
+<p>Many Maxima functions and operations require simplification to be enabled to work normally.
+When simplification is disabled, many results will be incomplete,
+and in addition there may be incorrect results or program errors.
+</p>
+<p>Examples:
+</p>
+<p>The simplification is switched off globally.  The expression <code class="code">sin(1.0)</code> is
+not simplified to its numerical value.  The <code class="code">simp</code>-flag switches the
+simplification on.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) simp:false;
+(%o1)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) sin(1.0);
+(%o2)                       sin(1.0)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) sin(1.0),simp;
+(%o3)                  0.8414709848078965
+</pre></div></div>
+
+<p>The simplification is switched on again.  The <code class="code">simp</code>-flag cannot suppress
+the simplification completely.  The output shows a simplified expression, but
+the variable <code class="code">x</code> has an unsimplified expression as a value, because the
+assignment has occurred during the evaluation phase of the expression.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) simp:true;
+(%o1)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) x:sin(1.0),simp:false;
+(%o2)                  0.8414709848078965
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) :lisp $x
+((%SIN) 1.0)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="symmetric"></a><a class="anchor" id="Item_003a-Simplification_002fdefvr_002fsymmetric"></a><dl class="first-defvr">
+<dt class="defvr" id="index-symmetric"><span class="category-def">Property: </span><span><strong class="def-name">symmetric</strong><a class="copiable-link" href='#index-symmetric'> &para;</a></span></dt>
+<dd>
+<p><code class="code">declare (h, symmetric)</code> tells the Maxima
+simplifier that <code class="code">h</code> is a symmetric function.  E.g., <code class="code">h (x, z, y)</code> 
+simplifies to <code class="code">h (x, y, z)</code>.
+</p>
+<p><code class="code"><a class="ref" href="#commutative">commutative</a></code> is synonymous with <code class="code">symmetric</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="xthru"></a><a class="anchor" id="Item_003a-Simplification_002fdeffn_002fxthru"></a><dl class="first-deffn">
+<dt class="deffn" id="index-xthru"><span class="category-def">Function: </span><span><strong class="def-name">xthru</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-xthru'> &para;</a></span></dt>
+<dd>
+<p>Combines all terms of <var class="var">expr</var> (which should be a sum) over a common
+denominator without expanding products and exponentiated sums as <code class="code">ratsimp</code>
+does.  <code class="code">xthru</code> cancels common factors in the numerator and denominator of
+rational expressions but only if the factors are explicit.
+</p>
+<p>Sometimes it is better to use <code class="code">xthru</code> before <code class="code">ratsimp</code>ing an
+expression in order to cause explicit factors of the gcd of the numerator and
+denominator to be canceled thus simplifying the expression to be
+<code class="code">ratsimp</code>ed.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) ((x+2)^20 - 2*y)/(x+y)^20 + (x+y)^(-19) - x/(x+y)^20;
+                                20
+                 1       (x + 2)   - 2 y       x
+(%o1)        --------- + --------------- - ---------
+                    19             20             20
+             (y + x)        (y + x)        (y + x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) xthru (%);
+                                 20
+                          (x + 2)   - y
+(%o2)                     -------------
+                                   20
+                            (y + x)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_9.html#Elementary-Functions" accesskey="n" rel="next">Elementary Functions</a>, Previous: <a href="maxima_7.html#Evaluation" accesskey="p" rel="prev">Evaluation</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions for numerical solution of equations</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions for numerical solution of equations">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions for numerical solution of equations">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_112.html#Numerical" rel="up" title="Numerical">
+<link href="maxima_117.html#Introduction-to-numerical-solution-of-differential-equations" rel="next" title="Introduction to numerical solution of differential equations">
+<link href="maxima_115.html#Functions-and-Variables-for-FFTPACK5" rel="previous" title="Functions and Variables for FFTPACK5">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-for-numerical-solution-of-equations"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_117.html#Introduction-to-numerical-solution-of-differential-equations" accesskey="n" rel="next">Introduction to numerical solution of differential equations</a>, Previous: <a href="maxima_115.html#Functions-and-Variables-for-FFTPACK5" accesskey="p" rel="previous">Functions and Variables for FFTPACK5</a>, Up: <a href="maxima_112.html#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-for-numerical-solution-of-equations-1"></a>
+<h3 class="section">22.4 Functions for numerical solution of equations</h3>
+
+<a name="horner"></a><a name="Item_003a-Numerical_002fdeffn_002fhorner"></a><dl>
+<dt><a name="index-horner"></a>Function: <strong>horner</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>horner</tt> (<var>expr</var>, <var>x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>horner</tt> (<var>expr</var>)</em></dt>
+<dd>
+<p>Returns a rearranged representation of <var>expr</var> as in Horner&rsquo;s rule, using
+<var>x</var> as the main variable if it is specified.  <code>x</code> may be omitted in
+which case the main variable of the canonical rational expression form of
+<var>expr</var> is used.
+</p>
+<p><code>horner</code> sometimes improves stability if <code>expr</code> is
+to be numerically evaluated.  It is also useful if Maxima is used to
+generate programs to be run in Fortran.  See also <code><a href="maxima_75.html#stringout">stringout</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) expr: 1e-155*x^2 - 5.5*x + 5.2e155;
+                           2
+(%o1)             1.e-155 x  - 5.5 x + 5.2e+155
+(%i2) expr2: horner (%, x), keepfloat: true;
+(%o2)         1.0 ((1.e-155 x - 5.5) x + 5.2e+155)
+(%i3) ev (expr, x=1e155);
+Maxima encountered a Lisp error:
+
+ arithmetic error FLOATING-POINT-OVERFLOW signalled
+
+Automatically continuing.
+To enable the Lisp debugger set *debugger-hook* to nil.
+(%i4) ev (expr2, x=1e155);
+(%o4)                 7.00000000000001e+154
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;</div></dd></dl>
+
+<a name="find_005froot"></a><a name="bf_005ffind_005froot"></a><a name="find_005froot_005ferror"></a><a name="find_005froot_005fabs"></a><a name="find_005froot_005frel"></a><a name="Item_003a-Numerical_002fdeffn_002ffind_005froot"></a><dl>
+<dt><a name="index-find_005froot"></a>Function: <strong>find_root</strong> <em>(<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>, [<var>abserr</var>, <var>relerr</var>])</em></dt>
+<dt><a name="index-find_005froot-1"></a>Function: <strong>find_root</strong> <em>(<var>f</var>, <var>a</var>, <var>b</var>, [<var>abserr</var>, <var>relerr</var>])</em></dt>
+<dd><a name="Item_003a-Numerical_002fdeffn_002fbf_005ffind_005froot"></a></dd><dt><a name="index-bf_005ffind_005froot"></a>Function: <strong>bf_find_root</strong> <em>(<var>expr</var>, <var>x</var>, <var>a</var>, <var>b</var>, [<var>abserr</var>, <var>relerr</var>])</em></dt>
+<dt><a name="index-bf_005ffind_005froot-1"></a>Function: <strong>bf_find_root</strong> <em>(<var>f</var>, <var>a</var>, <var>b</var>, [<var>abserr</var>, <var>relerr</var>])</em></dt>
+<dd><a name="Item_003a-Numerical_002fdeffn_002ffind_005froot_005ferror"></a></dd><dt><a name="index-find_005froot_005ferror"></a>Option variable: <strong>find_root_error</strong></dt>
+<dd><a name="Item_003a-Numerical_002fdeffn_002ffind_005froot_005fabs"></a></dd><dt><a name="index-find_005froot_005fabs"></a>Option variable: <strong>find_root_abs</strong></dt>
+<dd><a name="Item_003a-Numerical_002fdeffn_002ffind_005froot_005frel"></a></dd><dt><a name="index-find_005froot_005frel"></a>Option variable: <strong>find_root_rel</strong></dt>
+<dd>
+<p>Finds a root of the expression <var>expr</var> or the function <var>f</var> over the
+closed interval <em>[<var>a</var>, <var>b</var>]</em>.  The expression <var>expr</var> may be an
+equation, in which case <code><a href="#find_005froot">find_root</a></code> seeks a root of
+<code>lhs(<var>expr</var>) - rhs(<var>expr</var>)</code>.
+</p>
+<p>Given that Maxima can evaluate <var>expr</var> or <var>f</var> over
+<em>[<var>a</var>, <var>b</var>]</em> and that <var>expr</var> or <var>f</var> is continuous,
+<code>find_root</code> is guaranteed to find the root,
+or one of the roots if there is more than one.
+</p>
+<p><code>find_root</code> initially applies binary search.
+If the function in question appears to be smooth enough,
+<code>find_root</code> applies linear interpolation instead.
+</p>
+<p><code>bf_find_root</code> is a bigfloat version of <code>find_root</code>.  The
+function is computed using bigfloat arithmetic and a bigfloat result
+is returned.  Otherwise, <code>bf_find_root</code> is identical to
+<code>find_root</code>, and the following description is equally applicable
+to <code>bf_find_root</code>.
+</p>
+<p>The accuracy of <code>find_root</code> is governed by <code>abserr</code> and
+<code>relerr</code>, which are optional keyword arguments to
+<code>find_root</code>.  These keyword arguments take the form
+<code>key=val</code>.  The keyword arguments are
+</p>
+<dl compact="compact">
+<dt><code>abserr</code></dt>
+<dd><p>Desired absolute error of function value at root.  Default is
+<code>find_root_abs</code>.
+</p></dd>
+<dt><code>relerr</code></dt>
+<dd><p>Desired relative error of root.  Default is <code>find_root_rel</code>.
+</p></dd>
+</dl>
+
+<p><code>find_root</code> stops when the function in question evaluates to
+something less than or equal to <code>abserr</code>, or if successive
+approximants <var>x_0</var>, <var>x_1</var> differ by no more than <code>relerr
+* max(abs(x_0), abs(x_1))</code>.  The default values of
+<code>find_root_abs</code> and <code>find_root_rel</code> are both zero.
+</p>
+<p><code>find_root</code> expects the function in question to have a different sign at
+the endpoints of the search interval.
+When the function evaluates to a number at both endpoints
+and these numbers have the same sign,
+the behavior of <code>find_root</code> is governed by <code>find_root_error</code>.
+When <code>find_root_error</code> is <code>true</code>,
+<code>find_root</code> prints an error message.
+Otherwise <code>find_root</code> returns the value of <code>find_root_error</code>.
+The default value of <code>find_root_error</code> is <code>true</code>.
+</p>
+<p>If <var>f</var> evaluates to something other than a number at any step in the search
+algorithm, <code>find_root</code> returns a partially-evaluated <code>find_root</code>
+expression.
+</p>
+<p>The order of <var>a</var> and <var>b</var> is ignored; the region in which a root is
+sought is <em>[min(<var>a</var>, <var>b</var>), max(<var>a</var>, <var>b</var>)]</em>.
+</p>
+<p>Examples:
+</p>
+
+<div class="example">
+<pre class="example">(%i1) f(x) := sin(x) - x/2;
+                                        x
+(%o1)                  f(x) := sin(x) - -
+                                        2
+(%i2) find_root (sin(x) - x/2, x, 0.1, %pi);
+(%o2)                   1.895494267033981
+(%i3) find_root (sin(x) = x/2, x, 0.1, %pi);
+(%o3)                   1.895494267033981
+(%i4) find_root (f(x), x, 0.1, %pi);
+(%o4)                   1.895494267033981
+(%i5) find_root (f, 0.1, %pi);
+(%o5)                   1.895494267033981
+(%i6) find_root (exp(x) = y, x, 0, 100);
+                            x
+(%o6)           find_root(%e  = y, x, 0.0, 100.0)
+(%i7) find_root (exp(x) = y, x, 0, 100), y = 10;
+(%o7)                   2.302585092994046
+(%i8) log (10.0);
+(%o8)                   2.302585092994046
+(%i9) fpprec:32;
+(%o9)                           32
+(%i10) bf_find_root (exp(x) = y, x, 0, 100), y = 10;
+(%o10)                  2.3025850929940456840179914546844b0
+(%i11) log(10b0);
+(%o11)                  2.3025850929940456840179914546844b0
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;</div></dd></dl>
+
+<a name="newton"></a><a name="Item_003a-Numerical_002fdeffn_002fnewton"></a><dl>
+<dt><a name="index-newton"></a>Function: <strong>newton</strong> <em>(<var>expr</var>, <var>x</var>, <var>x_0</var>, <var>eps</var>)</em></dt>
+<dd>
+<p>Returns an approximate solution of <code><var>expr</var> = 0</code> by Newton&rsquo;s method,
+considering <var>expr</var> to be a function of one variable, <var>x</var>.
+The search begins with <code><var>x</var> = <var>x_0</var></code>
+and proceeds until <code>abs(<var>expr</var>) &lt; <var>eps</var></code>
+(with <var>expr</var> evaluated at the current value of <var>x</var>).
+</p>
+<p><code>newton</code> allows undefined variables to appear in <var>expr</var>,
+so long as the termination test <code>abs(<var>expr</var>) &lt; <var>eps</var></code> evaluates
+to <code>true</code> or <code>false</code>.
+Thus it is not necessary that <var>expr</var> evaluate to a number.
+</p>
+<p><code>load(&quot;newton1&quot;)</code> loads this function.
+</p>
+<p>See also <code><a href="maxima_108.html#realroots">realroots</a></code>, <code><a href="maxima_108.html#allroots">allroots</a></code>, <code><a href="#find_005froot">find_root</a></code> and
+<code><a href="maxima_320.html#mnewton">mnewton</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;newton1&quot;);
+(%o1)  /maxima/share/numeric/newton1.mac
+(%i2) newton (cos (u), u, 1, 1/100);
+(%o2)                   1.570675277161251
+(%i3) ev (cos (u), u = %);
+(%o3)                 1.2104963335033529e-4
+(%i4) assume (a &gt; 0);
+(%o4)                        [a &gt; 0]
+(%i5) newton (x^2 - a^2, x, a/2, a^2/100);
+(%o5)                  1.00030487804878 a
+(%i6) ev (x^2 - a^2, x = %);
+                                           2
+(%o6)                6.098490481853958e-4 a
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Algebraic-equations">Algebraic equations</a>
+&middot;<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;</div></dd></dl>
+
+<a name="Item_003a-Numerical_002fnode_002fIntroduction-to-numerical-solution-of-differential-equations"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_117.html#Introduction-to-numerical-solution-of-differential-equations" accesskey="n" rel="next">Introduction to numerical solution of differential equations</a>, Previous: <a href="maxima_115.html#Functions-and-Variables-for-FFTPACK5" accesskey="p" rel="previous">Functions and Variables for FFTPACK5</a>, Up: <a href="maxima_112.html#Numerical" accesskey="u" rel="up">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

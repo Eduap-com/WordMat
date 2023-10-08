@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Visualization with VTK</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Visualization with VTK">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Visualization with VTK">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_256.html#dynamics_002dpkg" rel="up" title="dynamics-pkg">
+<link href="maxima_260.html#engineering_002dformat_002dpkg" rel="next" title="engineering-format-pkg">
+<link href="maxima_258.html#Graphical-analysis-of-discrete-dynamical-systems" rel="previous" title="Graphical analysis of discrete dynamical systems">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Visualization-with-VTK"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_258.html#Graphical-analysis-of-discrete-dynamical-systems" accesskey="p" rel="previous">Graphical analysis of discrete dynamical systems</a>, Up: <a href="maxima_256.html#dynamics_002dpkg" accesskey="u" rel="up">dynamics-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Visualization-with-VTK-1"></a>
+<h3 class="section">55.3 Visualization with VTK</h3>
+
+<p>Function scene creates 3D images and animations using the <em>Visualization
+ToolKit</em> (VTK) software. In order to use that function, Xmaxima and VTK should be
+installed in your system (including the TCL bindings of VTK, which in
+some system might come in a separate package).
+</p>
+<a name="scene"></a><a name="Item_003a-dynamics_002fdeffn_002fscene"></a><dl>
+<dt><a name="index-scene"></a>Function: <strong>scene</strong> <em>(<var>objects</var>, &hellip;, <var>options</var>, &hellip;);</em></dt>
+<dd>
+<p>Accepts an empty list or a list of several <code><a href="#scene_005fobjects">objects</a></code>
+and <code><a href="#scene_005foptions">options</a></code>. The program launches Xmaxima, which
+opens an external window representing the given objects in a
+3-dimensional space and applying the options given. Each object must
+belong to one of the following 4 classes: sphere, cube, cylinder or cone
+(see <code><a href="#scene_005fobjects">Scene objects</a></code>). Objects are identified by
+giving their name or by a list in which the first element is the class
+name and the following elements are options for that object.
+</p> 
+<p><strong>Example</strong>. A hexagonal pyramid with a blue background:
+</p><div class="example">
+<pre class="example">(%i1) scene(cone, [background,&quot;#9980e5&quot;])$
+</pre></div>
+<img src="./figures/scene1.png" alt="./figures/scene1">
+
+<p>By holding down the left button of the mouse while it is moved on the
+graphics window, the camera can be rotated showing different views of
+the pyramid. The two plot options <code><a href="#scene_005felevation">elevation</a></code> and
+<code><a href="#scene_005fazimuth">azimuth</a></code> can also be used to change the initial
+orientation of the viewing camera. The camera can be moved by holding
+the middle mouse button while moving it and holding the right-side mouse
+button while moving it up or down will zoom in or out.
+</p>
+<p>Each object option should be a list starting with the option name,
+followed by its value. The list of allowed options can be found in the
+<code><a href="#object_005foptions">Scene object's options</a></code> section.
+</p>
+<p><strong>Example</strong>. This will show a sphere falling to the ground and
+bouncing off without losing any energy. To start or pause the
+animation, press the play/pause button.
+</p>
+<div class="example">
+<pre class="example">(%i1) p: makelist ([0,0,2.1- 9.8*t^2/2], t, 0, 0.64, 0.01)$
+
+(%i2) p: append (p, reverse(p))$
+
+(%i3) ball: [sphere, [radius,0.1], [thetaresolution,20],
+  [phiresolution,20], [position,0,0,2.1], [color,red],
+  [animate,position,p]]$
+
+(%i4) ground: [cube, [xlength,2], [ylength,2], [zlength,0.2],
+  [position,0,0,-0.1],[color,violet]]$
+
+(%i5) scene (ball, ground, restart)$
+</pre></div>
+<img src="./figures/scene2.png" alt="./figures/scene2">
+
+<p>The <var>restart</var> option was used to make the animation restart
+automatically every time the last point in the position list is reached.
+The accepted values for the colors are the same as for the <code><a href="maxima_69.html#color">color</a></code>
+option of plot2d. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div>
+</dd></dl>
+
+<a name="scene_005foptions"></a><a name="Scene-options"></a>
+<h4 class="subsection">55.3.1 Scene options</h4>
+
+<a name="scene_005fazimuth"></a><a name="Item_003a-dynamics_002fdefvr_002fazimuth"></a><dl>
+<dt><a name="index-azimuth-1"></a>Scene option: <strong>azimuth</strong> <em>[azimuth, <var>angle</var>]</em></dt>
+<dd><p>Default value: <code>135</code>
+</p>
+<p>The rotation of the camera on the horizontal (x, y) plane. <var>angle</var>
+must be a real number; an angle of 0 means that the camera points in the
+direction of the y axis and the x axis will appear on the right.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005fbackground"></a><a name="Item_003a-dynamics_002fdefvr_002fbackground"></a><dl>
+<dt><a name="index-background"></a>Scene option: <strong>background</strong> <em>[background, <var>color</var>]</em></dt>
+<dd><p>Default value: <code>black</code>
+</p>
+<p>The color of the graphics window&rsquo;s background. It accepts color names or
+hexadecimal red-green-blue strings (see the <code><a href="maxima_69.html#color">color</a></code> option of plot2d).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005felevation"></a><a name="Item_003a-dynamics_002fdefvr_002felevation"></a><dl>
+<dt><a name="index-elevation-1"></a>Scene option: <strong>elevation</strong> <em>[elevation, <var>angle</var>]</em></dt>
+<dd><p>Default value: <code>30</code>
+</p>
+<p>The vertical rotation of the camera. The <var>angle</var> must be a real
+number; an angle of 0 means that the camera points on the horizontal,
+and the default angle of 30 means that the camera is pointing 30 degrees
+down from the horizontal.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005fheight"></a><a name="Item_003a-dynamics_002fdefvr_002fheight"></a><dl>
+<dt><a name="index-height"></a>Scene option: <strong>height</strong> <em>[height, <var>pixels</var>]</em></dt>
+<dd><p>Default value: <code>500</code>
+</p>
+<p>The height, in pixels, of the graphics window. <var>pixels</var> must be a
+positive integer number.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005frestart"></a><a name="Item_003a-dynamics_002fdefvr_002frestart"></a><dl>
+<dt><a name="index-restart"></a>Scene option: <strong>restart</strong> <em>[restart, <var>value</var>]</em></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>A true value means that animations will restart automatically when the
+end of the list is reached. Writing just &ldquo;restart&rdquo; is equivalent to
+[restart, <var>true</var>].
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005ftstep"></a><a name="Item_003a-dynamics_002fdefvr_002ftstep"></a><dl>
+<dt><a name="index-tstep"></a>Scene option: <strong>tstep</strong> <em>[tstep, <var>time</var>]</em></dt>
+<dd><p>Default value: <code>10</code>
+</p>
+<p>The amount of time, in mili-seconds, between iterations among
+consecutive animation frames. <var>time</var> must be a real number.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005fwidth"></a><a name="Item_003a-dynamics_002fdefvr_002fwidth"></a><dl>
+<dt><a name="index-width"></a>Scene option: <strong>width</strong> <em>[width, <var>pixels</var>]</em></dt>
+<dd><p>Default value: <code>500</code>
+</p>
+<p>The width, in pixels, of the graphics window. <var>pixels</var> must be a
+positive integer number.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005fwindowname"></a><a name="Item_003a-dynamics_002fdefvr_002fwindowname"></a><dl>
+<dt><a name="index-windowname"></a>Scene option: <strong>windowname</strong> <em>[windowtitle, <var>name</var>]</em></dt>
+<dd><p>Default value: <code>.scene</code>
+</p>
+<p><var>name</var> must be a string that can be used as the name of the Tk
+window created by Xmaxima for the <code>scene</code> graphics. The default
+value <code>.scene</code> implies that a new top level window will be created.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005fwindowtitle"></a><a name="Item_003a-dynamics_002fdefvr_002fwindowtitle"></a><dl>
+<dt><a name="index-windowtitle"></a>Scene option: <strong>windowtitle</strong> <em>[windowtitle, <var>name</var>]</em></dt>
+<dd><p>Default value: <code>Xmaxima: scene</code>
+</p>
+<p><var>name</var> must be a string that will be written in the title of the
+window created by <code>scene</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="scene_005fobjects"></a><a name="Scene-objects"></a>
+<h4 class="subsection">55.3.2 Scene objects</h4>
+
+<a name="cone"></a><a name="Item_003a-dynamics_002fdefvr_002fcone"></a><dl>
+<dt><a name="index-cone"></a>Scene object: <strong>cone</strong> <em>[cone, <var>options</var>]</em></dt>
+<dd>
+<p>Creates a regular pyramid with height equal to 1 and a hexagonal base
+with vertices 0.5 units away from the axis. Options
+<code><a href="#object_005fheight">height</a></code> and <code><a href="#object_005fradius">radius</a></code> can be used
+to change those defaults and option <code><a href="#object_005fresolution">resolution</a></code>
+can be used to change the number of edges of the base; higher values
+will make it look like a cone. By default, the axis will be along the x
+axis, the middle point of the axis will be at the origin and the vertex
+on the positive side of the x axis; use options
+<code><a href="#object_005forientation">orientation</a></code> and <code><a href="#object_005fcenter">center</a></code> to
+change those defaults.
+</p>
+<p><strong>Example</strong>. This shows a pyramid that starts rotating around the z
+axis when the play button is pressed.
+</p> 
+<div class="example">
+<pre class="example">(%i1) scene([cone, [orientation,0,30,0], [tstep,100],
+   [animate,orientation,makelist([0,30,i],i,5,360,5)]], restart)$
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="cube"></a><a name="Item_003a-dynamics_002fdefvr_002fcube"></a><dl>
+<dt><a name="index-cube"></a>Scene object: <strong>cube</strong> <em>[cube, <var>options</var>]</em></dt>
+<dd>
+<p>A cube with edges of 1 unit and faces parallel to the xy, xz and yz
+planes. The lengths of the three edges can be changed with options
+<code><a href="#object_005fxlength">xlength</a></code>, <code><a href="#object_005fylength">ylength</a></code> and
+<code><a href="#object_005fzlength">zlength</a></code>, turning it into a rectangular box and
+the faces can be rotated with option <code><a href="#object_005forientation">orientation</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="cylinder"></a><a name="Item_003a-dynamics_002fdefvr_002fcylinder"></a><dl>
+<dt><a name="index-cylinder"></a>Scene object: <strong>cylinder</strong> <em>[cylinder, <var>options</var>]</em></dt>
+<dd>
+<p>Creates a regular prism with height equal to 1 and a hexagonal base with
+vertices 0.5 units away from the axis. Options
+<code><a href="#object_005fheight">height</a></code> and <code><a href="#object_005fradius">radius</a></code> can be
+used to change those defaults and option <code><a href="#object_005fresolution">resolution</a></code> can be used to change the number of edges of the base;
+higher values will make it look like a cylinder. The default height can
+be changed with the option <code><a href="#object_005fheight">height</a></code>. By default,
+the axis will be along the x axis and the middle point of the axis will
+be at the origin; use options <code><a href="#object_005forientation">orientation</a></code> and
+<code><a href="#object_005fcenter">center</a></code> to change those defaults.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="sphere"></a><a name="Item_003a-dynamics_002fdefvr_002fsphere"></a><dl>
+<dt><a name="index-sphere"></a>Scene object: <strong>sphere</strong> <em>[sphere, <var>options</var>]</em></dt>
+<dd>
+<p>A sphere with default radius of 0.5 units and center at the origin. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005foptions"></a><a name="Scene-object_0027s-options"></a>
+<h4 class="subsection">55.3.3 Scene object&rsquo;s options</h4>
+
+<a name="object_005fanimation"></a><a name="Item_003a-dynamics_002fdefvr_002fanimation"></a><dl>
+<dt><a name="index-animation"></a>Object option: <strong>animation</strong> <em>[animation, <var>property</var>, <var>positions</var>]</em></dt>
+<dd>
+<p><var>property</var> should be one of the following 4 object&rsquo;s properties:
+<code><a href="#object_005forigin">origin</a></code>, <code><a href="#object_005fscale">scale</a></code>,
+<code><a href="#object_005fposition">position</a></code> or
+<code><a href="#object_005forientation">orientation</a></code> and <var>positions</var> should be a
+list of points. When the play button is pressed, the object property
+will be changed sequentially through all the values in the list, at
+intervals of time given by the option <code><a href="#scene_005ftstep">tstep</a></code>. The
+rewind button can be used to point at the start of the sequence making
+the animation restart after the play button is pressed again.
+</p>
+<p>See also <code><a href="#object_005ftrack">track</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fcapping"></a><a name="Item_003a-dynamics_002fdefvr_002fcapping"></a><dl>
+<dt><a name="index-capping-1"></a>Object option: <strong>capping</strong> <em>[capping, <var>number</var>]</em></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p>In a cone or a cylinder, it defines whether the base (or bases) will be
+shown. A value of 1 for <var>number</var> makes the base visible and a value
+of 0 makes it invisible.
+</p> 
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fcenter"></a><a name="Item_003a-dynamics_002fdefvr_002fcenter"></a><dl>
+<dt><a name="index-center"></a>Object option: <strong>center</strong> <em>[center, <var>point</var>]</em></dt>
+<dd><p>Default value: <code>[0, 0, 0]</code>
+</p>
+<p>The coordinates of the object&rsquo;s geometric center, with respect to its
+<code><a href="#object_005fposition">position</a></code>. <var>point</var> can be a list with 3
+real numbers, or 3 real numbers separated by commas. In a cylinder, cone
+or cube it will be at half its height and in a sphere at its center.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fcolor"></a><a name="Item_003a-dynamics_002fdefvr_002fcolor"></a><dl>
+<dt><a name="index-color-2"></a>Object option: <strong>color</strong> <em>[color, <var>colorname</var>]</em></dt>
+<dd><p>Default value: <code>white</code>
+</p>
+<p>The color of the object. It accepts color names or hexadecimal
+red-green-blue strings (see the <code><a href="maxima_69.html#color">color</a></code> option of plot2d).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fendphi"></a><a name="Item_003a-dynamics_002fdefvr_002fendphi"></a><dl>
+<dt><a name="index-endphi"></a>Object option: <strong>endphi</strong> <em>[endphi, <var>angle</var>]</em></dt>
+<dd><p>Default value: <code>180</code>
+</p>
+<p>In a sphere phi is the angle on the vertical plane that passes through
+the z axis, measured from the positive part of the z axis. <var>angle</var>
+must be a number between 0 and 180 that sets the final value of phi at
+which the surface will end. A value smaller than 180 will eliminate a
+part of the sphere&rsquo;s surface.
+</p>
+<p>See also <code><a href="#object_005fstartphi">startphi</a></code> and
+<code><a href="#object_005fphiresolution">phiresolution</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fendtheta"></a><a name="Item_003a-dynamics_002fdefvr_002fendtheta"></a><dl>
+<dt><a name="index-endtheta"></a>Object option: <strong>endtheta</strong> <em>[endtheta, <var>angle</var>]</em></dt>
+<dd><p>Default value: <code>360</code>
+</p>
+<p>In a sphere theta is the angle on the horizontal plane (longitude),
+measured from the positive part of the x axis. <var>angle</var> must be a
+number between 0 and 360 that sets the final value of theta at which the
+surface will end. A value smaller than 360 will eliminate a part of
+the sphere&rsquo;s surface.
+</p>
+<p>See also <code><a href="#object_005fstarttheta">starttheta</a></code> and
+<code><a href="#object_005fthetaresolution">thetaresolution</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fheight"></a><dl>
+<dt><a name="index-height-1"></a>Object option: <strong>height</strong> <em>[height, <var>value</var>]</em></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p><var>value</var> must be a positive number which sets the height of a cone
+or a cylinder.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005flinewidth"></a><a name="Item_003a-dynamics_002fdefvr_002flinewidth"></a><dl>
+<dt><a name="index-linewidth"></a>Object option: <strong>linewidth</strong> <em>[linewidth, <var>value</var>]</em></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p>The width of the lines, when option <code><a href="#object_005fwireframe">wireframe</a></code> is
+used. <var>value</var> must be a positive number.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fopacity"></a><a name="Item_003a-dynamics_002fdefvr_002fopacity"></a><dl>
+<dt><a name="index-opacity"></a>Object option: <strong>opacity</strong> <em>[opacity, <var>value</var>]</em></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p><var>value</var> must be a number between 0 and 1. The lower the number, the
+more transparent the object will become. The default value of 1 means a
+completely opaque object.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005forientation"></a><a name="Item_003a-dynamics_002fdefvr_002forientation"></a><dl>
+<dt><a name="index-orientation"></a>Object option: <strong>orientation</strong> <em>[orientation, <var>angles</var>]</em></dt>
+<dd><p>Default value: <code>[0, 0, 0]</code>
+</p>
+<p>Three angles by which the object will be rotated with respect to the
+three axis. <var>angles</var> can be a list with 3 real numbers, or 3 real
+numbers separated by commas. <strong>Example</strong>: <code>[0, 0, 90]</code> rotates
+the x axis of the object to the y axis of the reference frame.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005forigin"></a><a name="Item_003a-dynamics_002fdefvr_002forigin"></a><dl>
+<dt><a name="index-origin"></a>Object option: <strong>origin</strong> <em>[origin, <var>point</var>]</em></dt>
+<dd><p>Default value: <code>[0, 0, 0]</code>
+</p>
+<p>The coordinates of the object&rsquo;s origin, with respect to which its
+other dimensions are defined. <var>point</var> can be a list with 3
+real numbers, or 3 real numbers separated by commas.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fphiresolution"></a><a name="Item_003a-dynamics_002fdefvr_002fphiresolution"></a><dl>
+<dt><a name="index-phiresolution"></a>Object option: <strong>phiresolution</strong> <em>[phiresolution, <var>num</var>]</em></dt>
+<dd><p>Default value: <code></code>
+</p>
+<p>The number of sub-intervals into which the phi angle interval from
+<code><a href="#object_005fstartphi">startphi</a></code> to <code><a href="#object_005fendphi">endphi</a></code>
+will be divided. <var>num</var> must be a positive integer.
+</p>
+<p>See also <code><a href="#object_005fstartphi">startphi</a></code> and
+<code><a href="#object_005fendphi">endphi</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fpoints"></a><a name="Item_003a-dynamics_002fdefvr_002fpoints"></a><dl>
+<dt><a name="index-points-1"></a>Object option: <strong>points</strong> <em>[points]</em></dt>
+<dd>
+<p>Only the vertices of the triangulation used to render the surface will
+be shown. <strong>Example</strong>: <code>[sphere, [points]]</code>
+</p>
+<p>See also <code><a href="#object_005fsurface">surface</a></code> and
+<code><a href="#object_005fwireframe">wireframe</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fpointsize"></a><a name="Item_003a-dynamics_002fdefvr_002fpointsize"></a><dl>
+<dt><a name="index-pointsize"></a>Object option: <strong>pointsize</strong> <em>[pointsize, <var>value</var>]</em></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p>The size of the points, when option <code><a href="#object_005fpoints">points</a></code> is
+used. <var>value</var> must be a positive number.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fposition"></a><a name="Item_003a-dynamics_002fdefvr_002fposition"></a><dl>
+<dt><a name="index-position"></a>Object option: <strong>position</strong> <em>[position, <var>point</var>]</em></dt>
+<dd><p>Default value: <code>[0, 0, 0]</code>
+</p>
+<p>The coordinates of the object&rsquo;s position. <var>point</var> can be a list with 3
+real numbers, or 3 real numbers separated by commas.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fradius"></a><a name="Item_003a-dynamics_002fdefvr_002fradius"></a><dl>
+<dt><a name="index-radius-1"></a>Object option: <strong>radius</strong> <em>[radius, <var>value</var>]</em></dt>
+<dd><p>Default value: <code>0.5</code>
+</p>
+<p>The radius or a sphere or the distance from the axis to the base&rsquo;s
+vertices in a cylinder or a cone. <var>value</var> must be a positive number.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fresolution"></a><a name="Item_003a-dynamics_002fdefvr_002fresolution"></a><dl>
+<dt><a name="index-resolution"></a>Object option: <strong>resolution</strong> <em>[resolution, <var>number</var>]</em></dt>
+<dd><p>Default value: <code>6</code>
+</p>
+<p><var>number</var> must be an integer greater than 2 that sets the number of
+edges in the base of a cone or a cylinder.
+</p> 
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fscale"></a><a name="Item_003a-dynamics_002fdefvr_002fscale"></a><dl>
+<dt><a name="index-scale"></a>Object option: <strong>scale</strong> <em>[scale, <var>factors</var>]</em></dt>
+<dd><p>Default value: <code>[1, 1, 1]</code>
+</p>
+<p>Three numbers by which the object will be scaled with respect to the
+three axis. <var>factors</var> can be a list with 3 real numbers, or 3 real
+numbers separated by commas. <strong>Example</strong>: <code>[2, 0.5, 1]</code>
+enlarges the object to twice its size in the x direction, reduces the
+dimensions in the y direction to half and leaves the z dimensions
+unchanged.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fstartphi"></a><a name="Item_003a-dynamics_002fdefvr_002fstartphi"></a><dl>
+<dt><a name="index-startphi"></a>Object option: <strong>startphi</strong> <em>[startphi, <var>angle</var>]</em></dt>
+<dd><p>Default value: <code>0</code>
+</p>
+<p>In a sphere phi is the angle on the vertical plane that passes through
+the z axis, measured from the positive part of the z axis. <var>angle</var>
+must be a number between 0 and 180 that sets the initial value of phi at
+which the surface will start. A value bigger than 0 will eliminate a
+part of the sphere&rsquo;s surface.
+</p>
+<p>See also <code><a href="#object_005fendphi">endphi</a></code> and
+<code><a href="#object_005fphiresolution">phiresolution</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fstarttheta"></a><a name="Item_003a-dynamics_002fdefvr_002fstarttheta"></a><dl>
+<dt><a name="index-starttheta"></a>Object option: <strong>starttheta</strong> <em>[starttheta, <var>angle</var>]</em></dt>
+<dd><p>Default value: <code>0</code>
+</p>
+<p>In a sphere theta is the angle on the horizontal plane (longitude),
+measured from the positive part of the x axis. <var>angle</var> must be a
+number between 0 and 360 that sets the initial value of theta at which
+the surface will start. A value bigger than 0 will eliminate a part of
+the sphere&rsquo;s surface.
+</p>
+<p>See also <code><a href="#object_005fendtheta">endtheta</a></code> and
+<code><a href="#object_005fthetaresolution">thetaresolution</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fsurface"></a><a name="Item_003a-dynamics_002fdefvr_002fsurface"></a><dl>
+<dt><a name="index-surface"></a>Object option: <strong>surface</strong> <em>[surface]</em></dt>
+<dd>
+<p>The surfaces of the object will be rendered and the lines and points of
+the triangulation used to build the surface will not be shown. This is
+the default behavior, which can be changed using either the option
+<code><a href="#object_005fpoints">points</a></code> or <code><a href="#object_005fwireframe">wireframe</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fthetaresolution"></a><a name="Item_003a-dynamics_002fdefvr_002fthetaresolution"></a><dl>
+<dt><a name="index-thetaresolution"></a>Object option: <strong>thetaresolution</strong> <em>[thetaresolution, <var>num</var>]</em></dt>
+<dd><p>Default value: <code></code>
+</p>
+<p>The number of sub-intervals into which the theta angle interval from
+<code><a href="#object_005fstarttheta">starttheta</a></code> to <code><a href="#object_005fendtheta">endtheta</a></code>
+will be divided. <var>num</var> must be a positive integer.
+</p>
+<p>See also <code><a href="#object_005fstarttheta">starttheta</a></code> and
+<code><a href="#object_005fendtheta">endtheta</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005ftrack"></a><a name="Item_003a-dynamics_002fdefvr_002ftrack"></a><dl>
+<dt><a name="index-track"></a>Object option: <strong>track</strong> <em>[track, <var>positions</var>]</em></dt>
+<dd>
+<p><var>positions</var> should be a list of points. When the play button is
+pressed, the object position will be changed sequentially through all
+the points in the list, at intervals of time given by the option
+<code><a href="#scene_005ftstep">tstep</a></code>, leaving behind a track of the object&rsquo;s
+trajectory. The rewind button can be used to point at the start of the
+sequence making the animation restart after the play button is pressed
+again.
+</p>
+<p><strong>Example</strong>. This will show the trajectory of a ball thrown with
+speed of 5 m/s, at an angle of 45 degrees, when the air resistance can
+be neglected:
+</p>
+<div class="example">
+<pre class="example">(%i1) p: makelist ([0,4*t,4*t- 9.8*t^2/2], t, 0, 0.82, 0.01)$
+
+(%i2) ball: [sphere, [radius,0.1], [color,red], [track,p]]$
+
+(%i3) ground: [cube, [xlength,2], [ylength,4], [zlength,0.2],
+      [position,0,1.5,-0.2],[color,green]]$
+
+(%i4) scene (ball, ground)$
+</pre></div>
+
+<p>See also <code><a href="#object_005fanimation">animation</a></code>.
+</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fxlength"></a><a name="Item_003a-dynamics_002fdefvr_002fxlength"></a><dl>
+<dt><a name="index-xlength"></a>Object option: <strong>xlength</strong> <em>[xlength, <var>length</var>]</em></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p>The height of a cube in the x direction. <var>length</var> must be a positive
+number. See also <code><a href="#object_005fylength">ylength</a></code> and
+<code><a href="#object_005fzlength">zlength</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fylength"></a><a name="Item_003a-dynamics_002fdefvr_002fylength"></a><dl>
+<dt><a name="index-ylength"></a>Object option: <strong>ylength</strong> <em>[ylength, <var>length</var>]</em></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p>The height of a cube in the y direction. <var>length</var> must be a positive
+number. See also <code><a href="#object_005fxlength">xlength</a></code> and
+<code><a href="#object_005fzlength">zlength</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fzlength"></a><a name="Item_003a-dynamics_002fdefvr_002fzlength"></a><dl>
+<dt><a name="index-zlength"></a>Object option: <strong>zlength</strong> <em>[zlength, <var>length</var>]</em></dt>
+<dd><p>Default value: <code>1</code>
+</p>
+<p>The height of a cube in z the direction. <var>length</var> must be a positive
+ number.  See also <code><a href="#object_005fxlength">xlength</a></code> and
+ <code><a href="#object_005fylength">ylength</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<a name="object_005fwireframe"></a><a name="Item_003a-dynamics_002fdefvr_002fwireframe"></a><dl>
+<dt><a name="index-wireframe"></a>Object option: <strong>wireframe</strong> <em>[wireframe]</em></dt>
+<dd>
+<p>Only the edges of the triangulation used to render the surface will be
+shown. <strong>Example</strong>: <code>[cube, [wireframe]]</code>
+</p>
+<p>See also <code><a href="#object_005fsurface">surface</a></code> and
+<code><a href="#object_005fpoints">points</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-dynamics">Package dynamics</a>
+&middot;<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;</div></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_258.html#Graphical-analysis-of-discrete-dynamical-systems" accesskey="p" rel="previous">Graphical analysis of discrete dynamical systems</a>, Up: <a href="maxima_256.html#dynamics_002dpkg" accesskey="u" rel="up">dynamics-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

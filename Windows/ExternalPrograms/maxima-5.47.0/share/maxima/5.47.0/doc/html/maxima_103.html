@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to Integration</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to Integration">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to Integration">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_102.html#Integration" rel="up" title="Integration">
+<link href="maxima_104.html#Functions-and-Variables-for-Integration" rel="next" title="Functions and Variables for Integration">
+<link href="maxima_102.html#Integration" rel="previous" title="Integration">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-Integration"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_104.html#Functions-and-Variables-for-Integration" accesskey="n" rel="next">Functions and Variables for Integration</a>, Previous: <a href="maxima_102.html#Integration" accesskey="p" rel="previous">Integration</a>, Up: <a href="maxima_102.html#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-Integration-1"></a>
+<h3 class="section">19.1 Introduction to Integration</h3>
+
+<p>Maxima has several routines for handling integration.
+The <code><a href="maxima_104.html#integrate">integrate</a></code> function makes use of most of them.  There is also the
+<code><a href="maxima_101.html#antid">antid</a></code> package, which handles an unspecified function (and its
+derivatives, of course).  For numerical uses,
+there is a set of adaptive integrators from QUADPACK, named <code><a href="maxima_106.html#quad_005fqag">quad_qag</a></code>,
+<code><a href="maxima_106.html#quad_005fqags">quad_qags</a></code>, etc., which are described under the heading <code>QUADPACK</code>.
+Hypergeometric functions are being worked on,
+see <code><a href="maxima_104.html#specint">specint</a></code> for details.
+Generally speaking, Maxima only handles integrals which are
+integrable in terms of the &quot;elementary functions&quot; (rational functions,
+trigonometrics, logs, exponentials, radicals, etc.) and a few
+extensions (error function, dilogarithm).  It does not handle
+integrals in terms of unknown functions such as <code>g(x)</code> and <code>h(x)</code>.
+</p>
+
+<a name="Item_003a-Integration_002fnode_002fFunctions-and-Variables-for-Integration"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_104.html#Functions-and-Variables-for-Integration" accesskey="n" rel="next">Functions and Variables for Integration</a>, Previous: <a href="maxima_102.html#Integration" accesskey="p" rel="previous">Integration</a>, Up: <a href="maxima_102.html#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

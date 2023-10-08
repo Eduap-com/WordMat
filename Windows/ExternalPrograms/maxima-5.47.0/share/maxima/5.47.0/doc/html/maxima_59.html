@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>fractals-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="fractals-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="fractals-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_60.html#gentran_002dpkg" rel="next" title="gentran-pkg">
+<link href="maxima_58.html#finance_002dpkg" rel="prev" title="finance-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="fractals_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_60.html#gentran_002dpkg" accesskey="n" rel="next">Gentran</a>, Previous: <a href="maxima_58.html#finance_002dpkg" accesskey="p" rel="prev">finance</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="fractals">60 fractals</h2>
+
+
+
+
+<a class="anchor" id="Item_003a-fractals_002fnode_002fIntroduction-to-fractals"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-fractals" accesskey="1">Introduction to fractals</a></li>
+<li><a href="#Definitions-for-IFS-fractals" accesskey="2">Definitions for IFS fractals</a></li>
+<li><a href="#Definitions-for-complex-fractals" accesskey="3">Definitions for complex fractals</a></li>
+<li><a href="#Definitions-for-Koch-snowflakes" accesskey="4">Definitions for Koch snowflakes</a></li>
+<li><a href="#Definitions-for-Peano-maps" accesskey="5">Definitions for Peano maps</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-fractals">
+<div class="nav-panel">
+<p>
+Next: <a href="#Definitions-for-IFS-fractals" accesskey="n" rel="next">Definitions for IFS fractals</a>, Previous: <a href="#fractals_002dpkg" accesskey="p" rel="prev">fractals</a>, Up: <a href="#fractals_002dpkg" accesskey="u" rel="up">fractals</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-fractals-1">60.1 Introduction to fractals</h3>
+
+
+<p>This package defines some well known fractals: 
+</p>
+<p>- with random IFS (Iterated Function System): the Sierpinsky triangle, a
+Tree and a Fern
+</p>
+<p>- Complex Fractals: the  Mandelbrot and Julia Sets
+</p>
+<p>- the Koch snowflake sets
+</p>
+<p>- Peano maps: the Sierpinski and Hilbert maps
+</p>
+<p>Author: Jos&eacute; Ram&iacute;rez Labrador.
+</p>
+<p>For questions, suggestions and  bugs, please feel free
+to contact me at
+</p>
+<p>pepe DOT ramirez AAATTT uca DOT es
+</p>
+<a class="anchor" id="Item_003a-fractals_002fnode_002fDefinitions-for-IFS-fractals"></a><hr>
+</div>
+<div class="section-level-extent" id="Definitions-for-IFS-fractals">
+<div class="nav-panel">
+<p>
+Next: <a href="#Definitions-for-complex-fractals" accesskey="n" rel="next">Definitions for complex fractals</a>, Previous: <a href="#Introduction-to-fractals" accesskey="p" rel="prev">Introduction to fractals</a>, Up: <a href="#fractals_002dpkg" accesskey="u" rel="up">fractals</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Definitions-for-IFS-fractals-1">60.2 Definitions for IFS fractals</h3>
+
+<p>Some fractals can be generated by iterative applications 
+of contractive affine transformations in a random way; see 
+</p>
+<p>Hoggar S. G., &quot;Mathematics for computer graphics&quot;, Cambridge University
+Press 1994.
+</p>
+<p>We define a list with several contractive affine transformations, 
+and  we randomly select the transformation in a recursive way. 
+The probability of the choice of a transformation must be related 
+with the contraction ratio.
+</p>
+<p>You can change the transformations and find another fractal
+</p>
+<a class="anchor" id="sierpinskiale"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002fsierpinskiale"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sierpinskiale"><span class="category-def">Function: </span><span><strong class="def-name">sierpinskiale</strong> <var class="def-var-arguments">(<var class="var">n</var>)</var><a class="copiable-link" href='#index-sierpinskiale'> &para;</a></span></dt>
+<dd>
+<p>Sierpinski Triangle: 3 contractive maps; .5 contraction constant and translations;
+all maps have the same contraction ratio. Argument <var class="var">n</var> must be great enough, 10000 or greater.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) n: 10000$
+(%i3) plot2d([discrete,sierpinskiale(n)], [style,dots])$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="treefale"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002ftreefale"></a><dl class="first-deffn">
+<dt class="deffn" id="index-treefale"><span class="category-def">Function: </span><span><strong class="def-name">treefale</strong> <var class="def-var-arguments">(<var class="var">n</var>)</var><a class="copiable-link" href='#index-treefale'> &para;</a></span></dt>
+<dd>
+<p>3 contractive maps all with the same contraction ratio.
+Argument <var class="var">n</var> must be great enough, 10000 or greater.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) n: 10000$
+(%i3) plot2d([discrete,treefale(n)], [style,dots])$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="fernfale"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002ffernfale"></a><dl class="first-deffn">
+<dt class="deffn" id="index-fernfale"><span class="category-def">Function: </span><span><strong class="def-name">fernfale</strong> <var class="def-var-arguments">(<var class="var">n</var>)</var><a class="copiable-link" href='#index-fernfale'> &para;</a></span></dt>
+<dd>
+<p>4 contractive maps, the probability to choice a transformation must be related 
+with the contraction ratio. Argument <var class="var">n</var> must be great enough, 10000 or greater.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) n: 10000$
+(%i3) plot2d([discrete,fernfale(n)], [style,dots])$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-fractals_002fnode_002fDefinitions-for-complex-fractals"></a><hr>
+</div>
+<div class="section-level-extent" id="Definitions-for-complex-fractals">
+<div class="nav-panel">
+<p>
+Next: <a href="#Definitions-for-Koch-snowflakes" accesskey="n" rel="next">Definitions for Koch snowflakes</a>, Previous: <a href="#Definitions-for-IFS-fractals" accesskey="p" rel="prev">Definitions for IFS fractals</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Definitions-for-complex-fractals-1">60.3 Definitions for complex fractals</h3>
+
+<a class="anchor" id="mandelbrot_005fset"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002fmandelbrot_005fset"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mandelbrot_005fset"><span class="category-def">Function: </span><span><strong class="def-name">mandelbrot_set</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>)</var><a class="copiable-link" href='#index-mandelbrot_005fset'> &para;</a></span></dt>
+<dd>
+<p>Mandelbrot set.
+</p>
+<p>Example:
+</p>
+<p>This program is time consuming because it must make a lot of operations; 
+the computing time is also related with the number of grid points.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) plot3d (mandelbrot_set, [x, -2.5, 1], [y, -1.5, 1.5],
+                [gnuplot_preamble, &quot;set view map&quot;],
+                [gnuplot_pm3d, true],
+                [grid, 150, 150])$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+<a class="anchor" id="julia_005fset"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002fjulia_005fset"></a><dl class="first-deffn">
+<dt class="deffn" id="index-julia_005fset"><span class="category-def">Function: </span><span><strong class="def-name">julia_set</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>)</var><a class="copiable-link" href='#index-julia_005fset'> &para;</a></span></dt>
+<dd>
+<p>Julia sets.
+</p>
+<p>This program is time consuming because it must make a lot of operations; 
+the computing time is also related with the number of grid points.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) plot3d (julia_set, [x, -2, 1], [y, -1.5, 1.5],
+                [gnuplot_preamble, &quot;set view map&quot;],
+                [gnuplot_pm3d, true],
+                [grid, 150, 150])$
+</pre></div>
+
+<p>See also <code class="code"><a class="ref" href="#julia_005fparameter">julia_parameter</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+<a class="anchor" id="julia_005fparameter"></a><a class="anchor" id="Item_003a-fractals_002fdefvr_002fjulia_005fparameter"></a><dl class="first-defvr">
+<dt class="defvr" id="index-julia_005fparameter"><span class="category-def">Optional variable: </span><span><strong class="def-name">julia_parameter</strong><a class="copiable-link" href='#index-julia_005fparameter'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code"><a class="ref" href="maxima_4.html#g_t_0025i">%i</a></code>
+</p>
+<p>Complex parameter for Julia fractals.
+Its default value is <code class="code"><a class="ref" href="maxima_4.html#g_t_0025i">%i</a></code>; we  suggest the  values <code class="code">-.745+%i*.113002</code>, 
+<code class="code">-.39054-%i*.58679</code>, <code class="code">-.15652+%i*1.03225</code>, <code class="code">-.194+%i*.6557</code> and 
+<code class="code">.011031-%i*.67037</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+
+<a class="anchor" id="julia_005fsin"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002fjulia_005fsin"></a><dl class="first-deffn">
+<dt class="deffn" id="index-julia_005fsin"><span class="category-def">Function: </span><span><strong class="def-name">julia_sin</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>)</var><a class="copiable-link" href='#index-julia_005fsin'> &para;</a></span></dt>
+<dd>
+<p>While function <code class="code">julia_set</code> implements the transformation <code class="code">julia_parameter+z^2</code>,
+function <code class="code">julia_sin</code> implements <code class="code">julia_parameter*sin(z)</code>. See source code
+for more details.
+</p>
+<p>This program runs slowly  because it calculates a lot of sines.
+</p>
+<p>Example:
+</p>
+<p>This program is time consuming because it must make a lot of operations; 
+the computing time is also related with the number of grid points.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) julia_parameter:1+.1*%i$
+(%i3) plot3d (julia_sin, [x, -2, 2], [y, -3, 3], 
+                [gnuplot_preamble, &quot;set view map&quot;],
+                [gnuplot_pm3d, true],
+                [grid, 150, 150])$
+</pre></div>
+
+<p>See also <code class="code"><a class="ref" href="#julia_005fparameter">julia_parameter</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-fractals_002fnode_002fDefinitions-for-Koch-snowflakes"></a><hr>
+</div>
+<div class="section-level-extent" id="Definitions-for-Koch-snowflakes">
+<div class="nav-panel">
+<p>
+Next: <a href="#Definitions-for-Peano-maps" accesskey="n" rel="next">Definitions for Peano maps</a>, Previous: <a href="#Definitions-for-complex-fractals" accesskey="p" rel="prev">Definitions for complex fractals</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Definitions-for-Koch-snowflakes-1">60.4 Definitions for Koch snowflakes</h3>
+
+
+
+<a class="anchor" id="snowmap"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002fsnowmap"></a><dl class="first-deffn">
+<dt class="deffn" id="index-snowmap"><span class="category-def">Function: </span><span><strong class="def-name">snowmap</strong> <var class="def-var-arguments">(<var class="var">ent</var>, <var class="var">nn</var>)</var><a class="copiable-link" href='#index-snowmap'> &para;</a></span></dt>
+<dd>
+<p>Koch snowflake sets. Function <code class="code">snowmap</code> plots the snow Koch map 
+over the vertex of an initial closed polygonal, in the complex plane. Here  
+the orientation of the polygon is important. Argument <var class="var">nn</var> is the number of 
+recursive applications of Koch transformation; <var class="var">nn</var> must be small (5 or 6).
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) plot2d([discrete,
+              snowmap([1,exp(%i*%pi*2/3),exp(-%i*%pi*2/3),1],4)])$
+(%i3) plot2d([discrete,
+              snowmap([1,exp(-%i*%pi*2/3),exp(%i*%pi*2/3),1],4)])$
+(%i4) plot2d([discrete, snowmap([0,1,1+%i,%i,0],4)])$
+(%i5) plot2d([discrete, snowmap([0,%i,1+%i,1,0],4)])$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-fractals_002fnode_002fDefinitions-for-Peano-maps"></a><hr>
+</div>
+<div class="section-level-extent" id="Definitions-for-Peano-maps">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Definitions-for-Koch-snowflakes" accesskey="p" rel="prev">Definitions for Koch snowflakes</a>, Up: <a href="#fractals_002dpkg" accesskey="u" rel="up">fractals</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Definitions-for-Peano-maps-1">60.5 Definitions for Peano maps</h3>
+
+<p>Continuous curves that cover an area. Warning: 
+the number of points exponentially grows with <var class="var">n</var>.
+</p>
+<a class="anchor" id="hilbertmap"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002fhilbertmap"></a><dl class="first-deffn">
+<dt class="deffn" id="index-hilbertmap"><span class="category-def">Function: </span><span><strong class="def-name">hilbertmap</strong> <var class="def-var-arguments">(<var class="var">nn</var>)</var><a class="copiable-link" href='#index-hilbertmap'> &para;</a></span></dt>
+<dd>
+<p>Hilbert map. Argument <var class="var">nn</var> must be small (5, for example).
+Maxima can crash if <var class="var">nn</var> is 7 or greater.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) plot2d([discrete,hilbertmap(6)])$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="sierpinskimap"></a><a class="anchor" id="Item_003a-fractals_002fdeffn_002fsierpinskimap"></a><dl class="first-deffn">
+<dt class="deffn" id="index-sierpinskimap"><span class="category-def">Function: </span><span><strong class="def-name">sierpinskimap</strong> <var class="def-var-arguments">(<var class="var">nn</var>)</var><a class="copiable-link" href='#index-sierpinskimap'> &para;</a></span></dt>
+<dd>
+<p>Sierpinski map. Argument <var class="var">nn</var> must be small (5, for example).
+Maxima can crash if <var class="var">nn</var> is 7 or greater.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;fractals&quot;)$
+(%i2) plot2d([discrete,sierpinskimap(6)])$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-fractals">Package fractals</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_60.html#gentran_002dpkg" accesskey="n" rel="next">Gentran</a>, Previous: <a href="maxima_58.html#finance_002dpkg" accesskey="p" rel="prev">finance</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

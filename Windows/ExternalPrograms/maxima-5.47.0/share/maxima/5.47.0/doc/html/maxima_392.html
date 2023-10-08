@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to trigtools</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to trigtools">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to trigtools">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_391.html#trigtools_002dpkg" rel="up" title="trigtools-pkg">
+<link href="maxima_393.html#Functions-and-Variables-for-trigtools" rel="next" title="Functions and Variables for trigtools">
+<link href="maxima_391.html#trigtools_002dpkg" rel="previous" title="trigtools-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-trigtools"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_393.html#Functions-and-Variables-for-trigtools" accesskey="n" rel="next">Functions and Variables for trigtools</a>, Previous: <a href="maxima_391.html#trigtools_002dpkg" accesskey="p" rel="previous">trigtools-pkg</a>, Up: <a href="maxima_391.html#trigtools_002dpkg" accesskey="u" rel="up">trigtools-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<div align="center"><h1 class="titlefont">Trigtools Package</h1>
+</div><br>
+<br>
+<div align="center"><b>Aleksas Dormarkas</b>
+</div><div align="center"><a href="mailto:aleksasd873@gmail.com">aleksasd873@gmail.com</a>
+</div><div align="center"><a href="mailto:aleksas.domarkas@mif.vu.lt">aleksas.domarkas@mif.vu.lt</a>
+</div><div align="center">December 1, 2013
+</div>
+<a name="Introduction-to-trigtools-1"></a>
+<h3 class="section">96.1 Introduction to trigtools</h3>
+<p>We use open-source computer algebra system(CAS) maxima 5.31.2.
+The trigtools package<a name="DOCF10" href="#FOOT10"><sup>10</sup></a> contains commands that help you work with
+trigonometric expessions. List of functions in trigtools package:
+</p>
+<ul>
+<li> <code><a href="maxima_394.html#c2sin">c2sin</a></code>
+</li><li> <code><a href="maxima_394.html#c2cos">c2cos</a></code>
+</li><li> <code><a href="maxima_395.html#c2trig">c2trig</a></code>
+</li><li> <code><a href="maxima_396.html#c2hyp">c2hyp</a></code>
+</li><li> <code><a href="maxima_397.html#trigfactor">trigfactor</a></code>
+</li><li> <code><a href="maxima_398.html#trigsolve">trigsolve</a></code>
+</li><li> <code><a href="maxima_399.html#trigvalue">trigvalue</a></code>
+</li><li> <code><a href="maxima_399.html#trigeval">trigeval</a></code>
+</li><li> <code><a href="maxima_400.html#atan_005fcontract">atan_contract</a></code>
+</li></ul>
+
+
+<a name="Item_003a-trigtools_002fnode_002fFunctions-and-Variables-for-trigtools"></a><div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT10" href="#DOCF10">(10)</a></h3>
+<p>This is a conversion by hand of the original &ldquo;trigtools-doc.pdf&rdquo; file in &ldquo;share/contrib/trigtools&rdquo;, by Raymond Toy.  See the pdf for the definitive version.</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_393.html#Functions-and-Variables-for-trigtools" accesskey="n" rel="next">Functions and Variables for trigtools</a>, Previous: <a href="maxima_391.html#trigtools_002dpkg" accesskey="p" rel="previous">trigtools-pkg</a>, Up: <a href="maxima_391.html#trigtools_002dpkg" accesskey="u" rel="up">trigtools-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>pytranslate (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="pytranslate (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="pytranslate (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_82.html#quantum_005fcomputing_002dpkg" rel="next" title="quantum_computing-pkg">
+<link href="maxima_80.html#pslq_002dpkg" rel="prev" title="pslq-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="pytranslate">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_82.html#quantum_005fcomputing_002dpkg" accesskey="n" rel="next">quantum_computing-pkg</a>, Previous: <a href="maxima_80.html#pslq_002dpkg" accesskey="p" rel="prev">pslq</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="pytranslate-1">82 pytranslate</h2>
+
+<a class="anchor" id="Item_003a-pytranslate_002fnode_002fIntroduction-to-pytranslate"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-pytranslate" accesskey="1">Introduction to pytranslate</a></li>
+<li><a href="#Functions-in-pytranslate" accesskey="2">Functions in pytranslate</a></li>
+<li><a href="#Extending-pytranslate" accesskey="3">Extending pytranslate</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-pytranslate">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-in-pytranslate" accesskey="n" rel="next">Functions in pytranslate</a>, Up: <a href="#pytranslate" accesskey="u" rel="up">pytranslate</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-pytranslate-1">82.1 Introduction to pytranslate</h3>
+
+<p><code class="code">pytranslate</code> package provides Maxima to Python translation functionality. The package is experimental, and the specifications of the functions in this package might change. It was written as a Google Summer of Code project by Lakshya A Agrawal (Undergraduate Student, IIIT-Delhi) in 2019. A detailed project report is available as a <a class="url" href="https://gist.github.com/LakshyAAAgrawal/33eee2d33c4788764087eef1fa67269e">GitHub Gist</a>.<br>
+</p>
+<p>The package needs to be loaded in a Maxima instance for use, by executing <code class="code">load(&quot;pytranslate&quot;);</code><br>
+The statements are converted to python3 syntax. The file pytranslate.py must be imported for all translations to run, as shown in example.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;pytranslate&quot;)$
+</pre><div class="group"><pre class="example-preformatted">/* Define an example function to calculate factorial */
+(%i2) pytranslate(my_factorial(x) := if (x = 1 or x = 0) then 1
+                  else x * my_factorial(x - 1));
+(%o2) 
+def my_factorial(x, v = v):
+    v = Stack({}, v)
+    v.ins({&quot;x&quot; : x})
+    return((1 if ((v[&quot;x&quot;] == 1) or (v[&quot;x&quot;] == 0)) \
+              else (v[&quot;x&quot;] * my_factorial((v[&quot;x&quot;] + (-1))))))
+m[&quot;my_factorial&quot;] = my_factorial
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) my_factorial(5);
+(%o3)                          120
+</pre></div><div class="group"><pre class="example-preformatted">&gt;&gt;&gt; from pytranslate import *
+&gt;&gt;&gt; def my_factorial(x, v = v):
+...     v = Stack({}, v)
+...     v.ins({&quot;x&quot; : x})
+...     return((1 if ((v[&quot;x&quot;] == 1) or (v[&quot;x&quot;] == 0)) \
+...     else (v[&quot;x&quot;] * my_factorial((v[&quot;x&quot;] + (-1))))))
+... 
+&gt;&gt;&gt; my_factorial(5)
+120
+</pre></div></div>
+
+<p>The Maxima to Python Translator works in two stages:<br>
+1. Conversion of the internal Maxima representation to a defined Intermediate Representation, henceforth referred as IR(mapping is present in <samp class="file">share/pytranslate/maxima-to-ir.html</samp>)<br>
+2. The conversion of IR to Python.
+</p>
+<p>Supported Maxima forms:<br>
+1. <code class="code"><a class="ref" href="maxima_4.html#Numbers">Numbers</a></code>(including complex numbers)<br>
+2. <code class="code"><a class="ref" href="maxima_6.html#Assignment-operators">Assignment operators</a></code><br>
+3. <code class="code"><a class="ref" href="maxima_6.html#Arithmetic-operators">Arithmetic operators</a></code>(+, -, *, ^, /, !)<br>
+4. <code class="code"><a class="ref" href="maxima_6.html#Logical-operators">Logical operators</a></code>(and, or, not)<br>
+5. <code class="code"><a class="ref" href="maxima_6.html#Relational-operators">Relational operators</a></code>(<code class="code">&gt;</code>, <code class="code">&lt;</code>, <code class="code">&gt;=</code>, <code class="code">&lt;=</code>, <code class="code">!=</code>, <code class="code">==</code>)<br>
+6. <code class="code"><a class="ref" href="maxima_4.html#Lists">Lists</a></code><br>
+7. <code class="code"><a class="ref" href="maxima_4.html#Arrays">Arrays</a></code><br>
+8. <code class="code"><a class="ref" href="maxima_35.html#block">block</a></code><br>
+9. <code class="code"><a class="ref" href="maxima_35.html#Function">Function</a></code> and function calls<br>
+10. <code class="code"><a class="ref" href="maxima_36.html#if">if</a></code>-else converted to Python conditionals<br>
+11. <code class="code"><a class="ref" href="maxima_36.html#for">for</a></code> loops<br>
+12. <code class="code"><a class="ref" href="maxima_35.html#lambda">lambda</a></code> form
+</p>
+<ul class="mini-toc">
+<li><a href="#Tests-for-pytranslate" accesskey="1">Tests for pytranslate</a></li>
+</ul>
+<div class="subsection-level-extent" id="Tests-for-pytranslate">
+<h4 class="subsection">82.1.1 Tests for pytranslate</h4>
+<p>The tests for <code class="code">pytranslate</code> are present at <samp class="file">share/pytranslate/rtest_pytranslate.mac</samp> and can be run by executing <code class="code">batch(rtest_pytranslate, test);</code>
+</p>
+<a class="anchor" id="Item_003a-pytranslate_002fnode_002fFunctions-in-pytranslate"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Functions-in-pytranslate">
+<div class="nav-panel">
+<p>
+Next: <a href="#Extending-pytranslate" accesskey="n" rel="next">Extending pytranslate</a>, Previous: <a href="#Introduction-to-pytranslate" accesskey="p" rel="prev">Introduction to pytranslate</a>, Up: <a href="#pytranslate" accesskey="u" rel="up">pytranslate</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-in-pytranslate-1">82.2 Functions in pytranslate</h3>
+
+<a class="anchor" id="Item_003a-pytranslate_002fdeffn_002fpytranslate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-pytranslate"><span class="category-def">Function: </span><span><strong class="def-name">pytranslate</strong> <var class="def-var-arguments">(<var class="var">expr</var>, [print-ir])</var><a class="copiable-link" href='#index-pytranslate'> &para;</a></span></dt>
+<dd><p>Translates the expression <var class="var">expr</var> to equivalent python3 statements. Output is printed in the stdout.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;pytranslate&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) pytranslate('(for i:8 step -1 unless i&lt;3 do (print(i))));
+(%o2) 
+v[&quot;i&quot;] = 8
+while not((v[&quot;i&quot;] &lt; 3)):
+    m[&quot;print&quot;](v[&quot;i&quot;])
+    v[&quot;i&quot;] = (v[&quot;i&quot;] + -1)
+del v[&quot;i&quot;]
+</pre></div></div>
+
+<p><var class="var">expr</var> is evaluated, and the return value is used for translation. Hence, for statements like assignment, it might be useful to quote the statement:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;pytranslate&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) pytranslate(x:20);
+(%o2) 
+20
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) pytranslate('(x:20));
+(%o3) 
+v[&quot;x&quot;] = 20
+</pre></div></div>
+
+<p>Passing the optional parameter (<var class="var">print-ir</var>) to <code class="code">pytranslate</code> as t, will print the internal IR representation of <code class="code">expr</code> and return the translated python3 code.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) load(&quot;pytranslate&quot;);
+(%o1) pytranslate
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) pytranslate('(plot3d(lambda([x, y], x^2+y^(-1)), [x, 1, 10],
+                   [y, 1, 10])), t);
+(body
+ (funcall (element-array &quot;m&quot; (string &quot;plot3d&quot;))
+          (lambda
+              ((symbol &quot;x&quot;) (symbol &quot;y&quot;)
+               (op-no-bracket
+                =
+                (symbol &quot;v&quot;)
+                (funcall (symbol &quot;stack&quot;) (dictionary) (symbol &quot;v&quot;))))
+            (op +
+                (funcall (element-array (symbol &quot;m&quot;) (string &quot;pow&quot;))
+                         (symbol &quot;x&quot;) (num 2 0))
+                (funcall (element-array (symbol &quot;m&quot;) (string &quot;pow&quot;))
+                         (symbol &quot;y&quot;) (unary-op - (num 1 0)))))
+          (struct-list (string &quot;x&quot;) (num 1 0) (num 10 0))
+          (struct-list (string &quot;y&quot;) (num 1 0) (num 10 0))))
+(%o2) 
+m[&quot;plot3d&quot;](lambda x, y, v = Stack({}, v): (m[&quot;pow&quot;](x, 2) + m[&quot;\
+pow&quot;](y, (-1))), [&quot;x&quot;, 1, 10], [&quot;y&quot;, 1, 10])
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-pytranslate_002fdeffn_002fshow_005fform"></a><dl class="first-deffn">
+<dt class="deffn" id="index-show_005fform"><span class="category-def">Function: </span><span><strong class="def-name">show_form</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-show_005fform'> &para;</a></span></dt>
+<dd><p>Displays the internal maxima form of <code class="code">expr</code>
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i4) show_form(a^b);
+((mexpt) $a $b) 
+(%o4) a^b
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-pytranslate_002fnode_002fExtending-pytranslate"></a><hr>
+</div>
+<div class="section-level-extent" id="Extending-pytranslate">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Functions-in-pytranslate" accesskey="p" rel="prev">Functions in pytranslate</a>, Up: <a href="#pytranslate" accesskey="u" rel="up">pytranslate</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Extending-pytranslate-1">82.3 Extending pytranslate</h3>
+<p>Working of pytranslate:
+</p><ul class="itemize mark-bullet">
+<li>The entry point for pytranslate is the function <code class="code">$pytranslate</code> defined in <samp class="file">share/pytranslate/pytranslate.lisp</samp>.
+</li><li><code class="code">$pytranslate</code> calls the function <code class="code">maxima-to-ir</code> with the Maxima expression as an argument(henceforth referred as <code class="code">expr</code>).
+</li><li><code class="code">maxima-to-ir</code> determines if <code class="code">expr</code> is atomic or non-atomic(lisp cons form). If atomic, <code class="code">atom-to-ir</code> is called with <code class="code">expr</code> which returns the IR for the atomic expression.<br>
+To define/modify translation for atomic expressions, make changes to the definition of <code class="code">atom-to-ir</code> in accordance with the IR.
+</li><li>If <code class="code">expr</code> is non-atomic, the function <code class="code">cons-to-ir</code> is called with <code class="code">expr</code> as an argument.<br>
+<ul class="itemize mark-bullet">
+<li><code class="code">cons-to-ir</code> looks for <code class="code">(caar expr)</code> which specifies the type of <code class="code">expr</code>, in hash-table <var class="var">*maxima-direct-ir-map*</var> and if the type is found, then appends the retrieved IR with the result of lisp call <code class="code">(mapcar #'maxima-to-ir (cdr expr))</code>, which applies maxima-to-ir function to all the elements present in the list. Effectively, recursively generate IR for all the elements present in <code class="code">expr</code> and append them to the IR map for the type.<br>
+Example:
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i9) show_form(a+b);
+((MPLUS) $B $A)
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) pytranslate(a+b, t);
+(body (op + (element-array (symbol &quot;v&quot;) (string &quot;b&quot;)) \
+(element-array (symbol &quot;v&quot;) (string &quot;a&quot;))))
+(%o10) 
+(v[&quot;b&quot;] + v[&quot;a&quot;])
+</pre></div></div>
+<p>Here, operator + with internal maxima representation, <code class="code">(mplus)</code> is present in <var class="var">*maxima-direct-ir-map*</var> and mapped to <code class="code">(op +)</code> to which the result of generating IR for all other elements of the list (a b), i.e. <code class="code">(ELEMENT-ARRAY (SYMBOL &quot;v&quot;) (STRING &quot;b&quot;)) (ELEMENT-ARRAY (SYMBOL &quot;v&quot;) (STRING &quot;a&quot;))</code> is appended.<br>
+</p>
+</li><li>If <code class="code">(caar expr)</code> is not found in <var class="var">*maxima-direct-ir-map*</var>, then <code class="code">cons-to-ir</code> looks for the type in <var class="var">*maxima-special-ir-map*</var> which returns the function to handle the translation of the type of <code class="code">expr</code>. <code class="code">cons-to-ir</code> then calls the returned function with argument <code class="code">expr</code> as an argument.<br>
+Example:
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i11) show_form(g(x) := x^2);
+((mdefine simp) (($g) $x) ((mexpt) $x 2))
+</pre></div><div class="group"><pre class="example-preformatted">(%i12) pytranslate(g(x):=x^2, t);
+(body
+ (body
+  (func-def (symbol &quot;g&quot;)
+            ((symbol &quot;x&quot;) (op-no-bracket = (symbol &quot;v&quot;) (symbol &quot;v&quot;)))
+            (body-indented
+                (op-no-bracket = (symbol &quot;v&quot;) (funcall (symbol &quot;stack&quot;) \
+                (dictionary) (symbol &quot;v&quot;)))
+                (obj-funcall (symbol &quot;v&quot;) (symbol &quot;ins&quot;) (dictionary \
+                ((string &quot;x&quot;) (symbol &quot;x&quot;))))
+                (funcall (symbol &quot;return&quot;)
+                    (funcall (element-array (symbol &quot;f&quot;) (string &quot;pow&quot;))
+                         (element-array (symbol &quot;v&quot;) (string &quot;x&quot;))
+                                  (num 2 0)))))
+  (op-no-bracket = (element-array (symbol &quot;f&quot;) (string &quot;g&quot;)) \
+  (symbol &quot;g&quot;))))  
+(%o12) 
+def g(x, v = v):
+    v = Stack({}, v)
+    v.ins({&quot;x&quot; : x})
+    return(f[&quot;pow&quot;](v[&quot;x&quot;], 2))
+f[&quot;g&quot;] = g
+
+</pre></div></div>
+<p>Here, <code class="code">mdefine</code>, which is the type of <code class="code">expr</code> is present in <var class="var">*maxima-special-ir-map*</var> which returns <code class="code">func-def-to-ir</code> as handler function, which is then called with <code class="code">expr</code> to generate the IR.<br>
+To define/modify translation for a type, add an entry to <var class="var">*maxima-direct-ir-map*</var> if only a part of the IR needs to be generated and the rest can be appended, otherwise, for complete handling of <code class="code">expr</code>, add an entry to <var class="var">*maxima-special-ir-map*</var> and define a function with the name defined in <var class="var">*maxima-special-ir-map*</var> which returns the IR for the form. The function naming convention for ir generators is (type)-to-ir, where type is the <code class="code">(caar expr)</code> for expression(<code class="code">mdefine -&gt; func-def-to-ir</code>). The function must return a valid IR for the specific type.
+</p></li></ul>
+</li><li>After the generation of IR, the function <code class="code">ir-to-python</code> is called with the generated <code class="code">ir</code> as an argument, which performs the codegen in a recursive manner.
+<ul class="itemize mark-bullet">
+<li><code class="code">ir-to-python</code> looks for lisp <code class="code">(car ir)</code> in the hash-table <var class="var">*ir-python-direct-templates*</var>, which maps IR type to function handlers and calls the function returned with <code class="code">ir</code> as an argument.
+</li></ul>
+</li><li>To extend the IR of pytranslate, define a function with the naming convention (type)-to-python and add the name to <var class="var">*ir-python-direct-templates*</var>.
+</li></ul>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_82.html#quantum_005fcomputing_002dpkg" accesskey="n" rel="next">quantum_computing-pkg</a>, Previous: <a href="maxima_80.html#pslq_002dpkg" accesskey="p" rel="prev">pslq</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

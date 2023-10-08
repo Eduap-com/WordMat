@@ -1,0 +1,240 @@
+/*************** -*- Mode: MACSYMA; Package: MAXIMA -*-  ******************/
+/***************************************************************************
+***                                                                    *****
+***     Copyright (c) 1984 by William Schelter,University of Texas     *****
+***     All rights reserved                                            *****
+***************************************************************************/
+
+
+/* -*- Mode: MACSYMA -*- */
+/* batch("me:test6a.mac");
+It asked is a pos answred yes
+   and is i+1 zero or nonzero and I answered nonzero 
+  so should add assume (a>0,not(equal(i+1,0)))  */
+kill(all);
+done;
+risch(x^2*erf(x),x);
+(%pi*x^3*erf(x)+(sqrt(%pi)*x^2+sqrt(%pi))*%e^-x^2)/(3*%pi);
+ev(diff(%,x),ratsimp);
+x^2*erf(x);
+assume(a>0);
+[a>0];
+'integrate(%e^(sqrt(a)*sqrt(y)),y,0,4);
+'integrate(%e^(sqrt(a)*sqrt(y)),y,0,4);
+changevar(%,y-z^2/a,z,y);
+/* on lispm -2*('integrate(z*%e^abs(z),z,-2*sqrt(a),0))/a; */
+- 'integrate(2*z*%e^abs(z)/a,z,-2*sqrt(a),0);
+x+y/z^2;
+y/z^2+x;
+part(%,1,2,2);
+2;
+remvalue(x);
+[false];
+'integrate(f(x),x,a,b)+x;
+'integrate(f(x),x,a,b)+x;
+part(%,1,1);
+f(x);
+x^2+2*x = y^2;
+x^2+2*x = y^2;
+exp:%+1;
+x^2+2*x+1 = y^2+1;
+lhs(%);
+x^2+2*x+1;
+part(exp,2);
+y^2+1;
+part(%,1);
+y^2;
+27*y^3+54*x*y^2+36*x^2*y+y+8*x^3+x+1;
+27*y^3+54*x*y^2+36*x^2*y+y+8*x^3+x+1;
+part(%,2,[1,3]);
+54*y^2;
+sqrt(piece/54);
+abs(y);
+x+y+w*z;
+w*z+y+x;
+inpart(%,3,2);
+z;
+'limit(f(x)^g(x+1),x,0,minus);
+'limit(f(x)^g(x+1),x,0,minus);
+inpart(%,1,2);
+g(x+1);
+'limit(f(x)^g(x+1),x,0,minus);
+'limit(f(x)^g(x+1),x,0,minus);
+is(inpart(%,0) = nounify(limit));
+true;
+dpart(x+y/z^2,1,2,1);
+y/?mbox(z)^2+x;
+exp:expand((b+a)^4);
+b^4+4*a*b^3+6*a^2*b^2+4*a^3*b+a^4;
+(b+a)^2*(y+x)^2;
+(b+a)^2*(y+x)^2;
+expand(%);
+b^2*y^2+2*a*b*y^2+a^2*y^2+2*b^2*x*y+4*a*b*x*y+2*a^2*x*y+b^2*x^2+2*a*b*x^2+a^2*x^2;
+exp:exp/%;
+(b^4+4*a*b^3+6*a^2*b^2+4*a^3*b+a^4)/(b^2*y^2+2*a*b*y^2+a^2*y^2+2*b^2*x*y+4*a*b*x*y+2*a^2*x*y+b^2*x^2+2*a*b*x^2+a^2*x^2);
+factor(%);
+(b+a)^2/(y+x)^2;
+dpart(exp,2,4);
+(b^4+4*a*b^3+6*a^2*b^2+4*a^3*b+a^4)/(b^2*y^2+2*a*b*y^2+a^2*y^2+?mbox(2*b^2*x*y)+4*a*b*x*y+2*a^2*x*y+b^2*x^2+2*a*b*x^2+a^2*x^2);
+part(exp,2,4);
+2*b^2*x*y;
+
+op(x+y);
+"+"$
+
+operatorp(x+y,"+");
+true$
+operatorp(x+y,["+"]);
+true$
+operatorp(x+y,["*"]);
+false$
+operatorp(x+y,"*");
+false$
+
+subst(a,x+y,x+(x+y)^2+y);
+y+x+a^2;
+subst(-%i,%i,a+b*%i);
+a-%i*b;
+subst(x,y,x+y);
+2*x;
+subst(x = 0,diff(sin(x),x));
+1;
+errcatch(ev(diff(sin(x),x),x = 0));
+[];
+(assume(not(equal(i,-1))),0);
+0$
+ev(integrate(x^i,x),i = -1);
+log(x);
+errcatch(subst(-1,i,integrate(x^i,x)));
+[];
+matrix([a,b],[c,d]);
+matrix([a,b],[c,d]);
+subst("[",matrix,%);
+[[a,b],[c,d]];
+ratsubst(a,x*y^2,x^4*y^8+x^4*y^3);
+a*x^3*y+a^4;
+1+cos(x)+cos(x)^2+cos(x)^3+cos(x)^4;
+cos(x)^4+cos(x)^3+cos(x)^2+cos(x)+1;
+ratsubst(1-sin(x)^2,cos(x)^2,%);
+sin(x)^4-3*sin(x)^2+cos(x)*(2-sin(x)^2)+3;
+ratsubst(1-cos(x)^2,sin(x)^2,sin(x)^4);
+cos(x)^4-2*cos(x)^2+1;
+
+/* SF bug #2907: ratsubst(z, sin(x + 1), 0) crashes when radsubstflag = true */
+
+ratsubst (z, sin(x + 1), 0), radsubstflag=true;
+0;
+
+ratsubst (z, sin(2*x), 0), radsubstflag=true;
+0;
+
+ratsubst (z, log(x + 1), 0), radsubstflag=true;
+0;
+
+ratsubst (u, sqrt(x), x), radsubstflag=true;
+u^2;
+
+/* additional ratsubst/radsubstflag cases -- dunno how meaningful these are, oh well */
+
+ratsubst (z, sin(x + 1), 1 + sin(x + 1)^2), radsubstflag=false;
+1 + z^2;
+
+ratsubst (z, sin(x + 1), 1 + sin(x + 1)^2), radsubstflag=true;
+1 + z^2;
+
+ratsubst (z, sqrt(x + 1), 1 + (x + 1)^2), radsubstflag=false;
+2 + 2*x + x^2;
+
+ratsubst (z, sqrt(x + 1), 1 + (x + 1)^2), radsubstflag=true;
+2 + 2*x + x^2;
+
+ratsubst (z, sqrt(x + 1), 1 + (x + 1)^(3/2)), radsubstflag=false;
+1 + z^3;
+
+ratsubst (z, sqrt(x + 1), 1 + (x + 1)^(3/2)), radsubstflag=true;
+1 + z^3;
+
+/* SF bug #3658: "" */
+
+ratsubst (1.1, x, 0.001*cos(x));
+cos(11/10)/1000;
+
+(load(lrats), 0);
+0;
+
+/* SF bug #3376: fullratsubst doesn't catch infinite recursions
+   In this example, fullratsubst1 should loop exactly lrats_max_iter=30 times,
+   adding a power of b each time.
+*/
+fullratsubst(b*a^2,a^2,a^3), lrats_max_iter=30;
+a^3*b^30;
+
+/* SF bug #3706: lratsusbst causes bind stack overflow on large lists */
+block([l:makelist(concat('x,i)=concat('x,i+1),i,0,5000)], lratsubst(l,x0)) $
+x5001 $
+
+/* SF bug #3154 lratsubst NOT as described in Help file */
+lratsubst([[a=b,b=c]],a) $
+c $
+
+/* first argument to lratsbust should throw an error */
+errcatch(lratsubst([[a=b,b=c],[b=c]],a)) $
+[] $
+
+lratsubst1 ([phi_2 = 1.1], 0.001*cos(phi_2)), numer;
+0.001*cos(11/10);
+
+/* original example from #3658;
+ * note that this assumes load(lrats) already.
+ * result is not checked, just whether or not it runs without error.
+ */
+block ([mat21,theta_1,mat22,phi_2,theta_2,mat23,t,t1,t2,fl,theta1,theta2,phi2,tt],
+[mat21:matrix([cos(theta_1/2),
+%i*sin(theta_1/2)],[%i*sin(theta_1/2),
+cos(theta_1/2)]),
+mat22:matrix([cos(theta_2/2)
+*exp(%i*phi_2/2),
+%i*sin(theta_2/2)*exp(%i*phi_2/2)],
+[%i*sin(theta_2/2)*exp(-%i*phi_2/2),cos(theta_2/2)
+*exp(-%i*phi_2/2)]),
+mat23:mat21.mat22,
+t:expand(mat23[2,2]*mat23[1,1]),
+t1:expand(demoivre(t)),
+t2:trigsimp(trigreduce(2*t1-1))],
+fl:true,
+for theta1:0 thru %pi step 1.1 do  
+for theta2:0 thru %pi step 1.1 do 
+for phi2:0  thru 2*%pi step 1.1
+do (tt:float(ev(lratsubst([theta_1=theta1,theta_2=theta2,phi_2=phi2],
+abs(t2-(cos(theta_1)*cos(theta_2) - sin(theta_1)*sin(theta_2)*cos(phi_2)))),
+numer)),
+if tt>1e-5 then(fl:false,disp(tt))),
+fl,
+0);
+0;
+
+/* SF bug #2012: "Lisp stack overflow with dpart." */
+
+dpart(cos(a+b),1);
+cos(?mbox(a+b));
+
+/* SF bug #3390: "?great mishandles box" */
+
+?great(box(x+t),-box(x+t));
+true;
+
+?great(-box(x+t),box(x+t));
+false;
+
+/* SF bug #3848: "ratsubst error ZEROP: ((MMINUS) 1) is not a number" */
+
+(kill (y),
+ d:-(3^(3/2)*%i+1)^(1/2)/3,
+ ratsubst(y,5,d));
+-(sqrt(3^(3/2)*%i+1)/3);
+
+ratsubst (1, 1, -1/2);
+-1/2;
+
+kill(all);
+done;

@@ -1,0 +1,1288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Symmetries</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Symmetries">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Symmetries">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_147.html#Symmetries" rel="up" title="Symmetries">
+<link href="maxima_150.html#Groups" rel="next" title="Groups">
+<link href="maxima_148.html#Introduction-to-Symmetries" rel="previous" title="Introduction to Symmetries">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Symmetries"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_148.html#Introduction-to-Symmetries" accesskey="p" rel="previous">Introduction to Symmetries</a>, Up: <a href="maxima_147.html#Symmetries" accesskey="u" rel="up">Symmetries</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Symmetries-1"></a>
+<h3 class="section">30.2 Functions and Variables for Symmetries</h3>
+
+
+<a name="Changing-bases"></a>
+<h4 class="subsection">30.2.1 Changing bases</h4>
+
+<a name="comp2pui"></a><a name="Item_003a-Symmetries_002fdeffn_002fcomp2pui"></a><dl>
+<dt><a name="index-comp2pui"></a>Function: <strong>comp2pui</strong> <em>(<var>n</var>, <var>L</var>)</em></dt>
+<dd><p>implements passing from the complete symmetric functions given in the list
+<var>L</var> to the elementary symmetric functions from 0 to <var>n</var>. If the
+list <var>L</var> contains fewer than <var>n+1</var> elements, it will be completed with
+formal values of the type <var>h1</var>, <var>h2</var>, etc. If the first element
+of the list <var>L</var> exists, it specifies the size of the alphabet,
+otherwise the size is set to <var>n</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) comp2pui (3, [4, g]);
+                        2                    2
+(%o1)    [4, g, 2 h2 - g , 3 h3 - g h2 + g (g  - 2 h2)]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="ele2pui"></a><a name="Item_003a-Symmetries_002fdeffn_002fele2pui"></a><dl>
+<dt><a name="index-ele2pui"></a>Function: <strong>ele2pui</strong> <em>(<var>m</var>, <var>L</var>)</em></dt>
+<dd><p>goes from the elementary symmetric functions to the complete functions.
+Similar to <code>comp2ele</code> and <code>comp2pui</code>.
+</p>
+<p>Other functions for changing bases: <code>comp2ele</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="ele2comp"></a><a name="Item_003a-Symmetries_002fdeffn_002fele2comp"></a><dl>
+<dt><a name="index-ele2comp"></a>Function: <strong>ele2comp</strong> <em>(<var>m</var>, <var>L</var>)</em></dt>
+<dd><p>Goes from the elementary symmetric functions to the compete functions.
+Similar to <code>comp2ele</code> and <code>comp2pui</code>.
+</p>
+<p>Other functions for changing bases: <code>comp2ele</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="elem"></a><a name="Item_003a-Symmetries_002fdeffn_002felem"></a><dl>
+<dt><a name="index-elem"></a>Function: <strong>elem</strong> <em>(<var>ele</var>, <var>sym</var>, <var>lvar</var>)</em></dt>
+<dd><p>decomposes the symmetric polynomial <var>sym</var>, in the variables
+contained in the list <var>lvar</var>, in terms of the elementary symmetric
+functions given in the list <var>ele</var>.  If the first element of
+<var>ele</var> is given, it will be the size of the alphabet, otherwise the
+size will be the degree of the polynomial <var>sym</var>.  If values are
+missing in the list <var>ele</var>, formal values of the type <var>e1</var>,
+<var>e2</var>, etc. will be added.  The polynomial <var>sym</var> may be given in
+three different forms: contracted (<code>elem</code> should then be 1, its
+default value), partitioned (<code>elem</code> should be 3), or extended
+(i.e. the entire polynomial, and <code>elem</code> should then be 2).  The
+function <code>pui</code> is used in the same way.
+</p>
+<p>On an alphabet of size 3 with <var>e1</var>, the first elementary symmetric
+function, with value 7, the symmetric polynomial in 3 variables whose
+contracted form (which here depends on only two of its variables) is
+<var>x^4-2*x*y</var> decomposes as follows in elementary symmetric functions:
+</p>
+<div class="example">
+<pre class="example">(%i1) elem ([3, 7], x^4 - 2*x*y, [x, y]);
+(%o1) 7 (e3 - 7 e2 + 7 (49 - e2)) + 21 e3
+
+                                         + (- 2 (49 - e2) - 2) e2
+</pre><pre class="example">(%i2) ratsimp (%);
+                              2
+(%o2)             28 e3 + 2 e2  - 198 e2 + 2401
+</pre></div>
+
+<p>Other functions for changing bases: <code>comp2ele</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="mon2schur"></a><a name="Item_003a-Symmetries_002fdeffn_002fmon2schur"></a><dl>
+<dt><a name="index-mon2schur"></a>Function: <strong>mon2schur</strong> <em>(<var>L</var>)</em></dt>
+<dd><p>The list <var>L</var> represents the Schur function <em>S_L</em>: we have
+<em>L = [i_1, i_2, ..., i_q]</em>, with <em>i_1 &lt;= i_2 &lt;= ... &lt;= i_q</em>.
+The Schur function <em>S_[i_1, i_2, ..., i_q]</em> is the minor
+of the infinite matrix <em>h_[i-j]</em>, <em>i &lt;= 1, j &lt;= 1</em>,
+consisting of the <em>q</em> first rows and the columns <em>1 + i_1,
+2 + i_2, ..., q + i_q</em>.
+</p>
+<p>This Schur function can be written in terms of monomials by using
+<code><a href="#treinat">treinat</a></code> and <code><a href="#kostka">kostka</a></code>.  The form returned is a symmetric
+polynomial in a contracted representation in the variables
+<em>x_1,x_2,...</em>
+</p>
+<div class="example">
+<pre class="example">(%i1) mon2schur ([1, 1, 1]);
+(%o1)                       x1 x2 x3
+</pre><pre class="example">(%i2) mon2schur ([3]);
+                                  2        3
+(%o2)                x1 x2 x3 + x1  x2 + x1
+</pre><pre class="example">(%i3) mon2schur ([1, 2]);
+                                      2
+(%o3)                  2 x1 x2 x3 + x1  x2
+</pre></div>
+
+<p>which means that for 3 variables this gives:
+</p>
+<div class="example">
+<pre class="example">   2 x1 x2 x3 + x1^2 x2 + x2^2 x1 + x1^2 x3 + x3^2 x1
+    + x2^2 x3 + x3^2 x2
+</pre></div>
+<p>Other functions for changing bases: <code>comp2ele</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="multi"></a><a name="Item_003a-Symmetries_002fdeffn_002fmulti_005felem"></a><dl>
+<dt><a name="index-multi_005felem"></a>Function: <strong>multi_elem</strong> <em>(<var>l_elem</var>, <var>multi_pc</var>, <var>l_var</var>)</em></dt>
+<dd><p>decomposes a multi-symmetric polynomial in the multi-contracted form
+<var>multi_pc</var> in the groups of variables contained in the list of lists
+<var>l_var</var> in terms of the elementary symmetric functions contained in
+<var>l_elem</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) multi_elem ([[2, e1, e2], [2, f1, f2]], a*x + a^2 + x^3,
+      [[x, y], [a, b]]);
+                                                  3
+(%o1)         - 2 f2 + f1 (f1 + e1) - 3 e1 e2 + e1
+</pre><pre class="example">(%i2) ratsimp (%);
+                         2                       3
+(%o2)         - 2 f2 + f1  + e1 f1 - 3 e1 e2 + e1
+</pre></div>
+
+<p>Other functions for changing bases: <code>comp2ele</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="multi_005fpui"></a><a name="Item_003a-Symmetries_002fdeffn_002fmulti_005fpui"></a><dl>
+<dt><a name="index-multi_005fpui"></a>Function: <strong>multi_pui</strong></dt>
+<dd><p>is to the function <code>pui</code> what the function <code>multi_elem</code> is to
+the function <code>elem</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) multi_pui ([[2, p1, p2], [2, t1, t2]], a*x + a^2 + x^3,
+      [[x, y], [a, b]]);
+                                            3
+                                3 p1 p2   p1
+(%o1)              t2 + p1 t1 + ------- - ---
+                                   2       2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="pui"></a><a name="Item_003a-Symmetries_002fdeffn_002fpui"></a><dl>
+<dt><a name="index-pui"></a>Function: <strong>pui</strong> <em>(<var>L</var>, <var>sym</var>, <var>lvar</var>)</em></dt>
+<dd><p>decomposes the symmetric polynomial <var>sym</var>, in the variables in the
+list <var>lvar</var>, in terms of the power functions in the list <var>L</var>.
+If the first element of <var>L</var> is given, it will be the size of the
+alphabet, otherwise the size will be the degree of the polynomial
+<var>sym</var>.  If values are missing in the list <var>L</var>, formal values of
+the type <var>p1</var>, <var>p2</var> , etc. will be added. The polynomial
+<var>sym</var> may be given in three different forms: contracted (<code>elem</code>
+should then be 1, its default value), partitioned (<code>elem</code> should be
+3), or extended (i.e. the entire polynomial, and <code>elem</code> should then
+be 2). The function <code>pui</code> is used in the same way.
+</p>
+<div class="example">
+<pre class="example">(%i1) pui;
+(%o1)                           1
+</pre><pre class="example">(%i2) pui ([3, a, b], u*x*y*z, [x, y, z]);
+                       2
+                   a (a  - b) u   (a b - p3) u
+(%o2)              ------------ - ------------
+                        6              3
+</pre><pre class="example">(%i3) ratsimp (%);
+                                       3
+                      (2 p3 - 3 a b + a ) u
+(%o3)                 ---------------------
+                                6
+</pre></div>
+<p>Other functions for changing bases: <code>comp2ele</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="pui2comp"></a><a name="Item_003a-Symmetries_002fdeffn_002fpui2comp"></a><dl>
+<dt><a name="index-pui2comp"></a>Function: <strong>pui2comp</strong> <em>(<var>n</var>, <var>lpui</var>)</em></dt>
+<dd><p>renders the list of the first <var>n</var> complete functions (with the
+length first) in terms of the power functions given in the list
+<var>lpui</var>. If the list <var>lpui</var> is empty, the cardinal is <var>n</var>,
+otherwise it is its first element (as in <code>comp2ele</code> and
+<code>comp2pui</code>).
+</p>
+<div class="example">
+<pre class="example">(%i1) pui2comp (2, []);
+                                       2
+                                p2 + p1
+(%o1)                   [2, p1, --------]
+                                   2
+</pre><pre class="example">(%i2) pui2comp (3, [2, a1]);
+                                            2
+                                 a1 (p2 + a1 )
+                         2  p3 + ------------- + a1 p2
+                  p2 + a1              2
+(%o2)     [2, a1, --------, --------------------------]
+                     2                  3
+</pre><pre class="example">(%i3) ratsimp (%);
+                            2                     3
+                     p2 + a1   2 p3 + 3 a1 p2 + a1
+(%o3)        [2, a1, --------, --------------------]
+                        2               6
+</pre></div>
+<p>Other functions for changing bases: <code>comp2ele</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="pui2ele"></a><a name="Item_003a-Symmetries_002fdeffn_002fpui2ele"></a><dl>
+<dt><a name="index-pui2ele"></a>Function: <strong>pui2ele</strong> <em>(<var>n</var>, <var>lpui</var>)</em></dt>
+<dd><p>effects the passage from power functions to the elementary symmetric functions.
+If the flag <code>pui2ele</code> is <code>girard</code>, it will return the list of
+elementary symmetric functions from 1 to <var>n</var>, and if the flag is
+<code>close</code>, it will return the <var>n</var>-th elementary symmetric function.
+</p>
+<p>Other functions for changing bases: <code>comp2ele</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="puireduc"></a><a name="Item_003a-Symmetries_002fdeffn_002fpuireduc"></a><dl>
+<dt><a name="index-puireduc"></a>Function: <strong>puireduc</strong> <em>(<var>n</var>, <var>lpui</var>)</em></dt>
+<dd><p><var>lpui</var> is a list whose first element is an integer <var>m</var>.
+<code>puireduc</code> gives the first <var>n</var> power functions in terms of the
+first <var>m</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) puireduc (3, [2]);
+                                         2
+                                   p1 (p1  - p2)
+(%o1)          [2, p1, p2, p1 p2 - -------------]
+                                         2
+</pre><pre class="example">(%i2) ratsimp (%);
+                                           3
+                               3 p1 p2 - p1
+(%o2)              [2, p1, p2, -------------]
+                                     2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="schur2comp"></a><a name="Item_003a-Symmetries_002fdeffn_002fschur2comp"></a><dl>
+<dt><a name="index-schur2comp"></a>Function: <strong>schur2comp</strong> <em>(<var>P</var>, <var>l_var</var>)</em></dt>
+<dd><p><var>P</var> is a polynomial in the variables of the list <var>l_var</var>.  Each
+of these variables represents a complete symmetric function.  In
+<var>l_var</var> the <var>i</var>-th complete symmetric function is represented by
+the concatenation of the letter <code>h</code> and the integer <var>i</var>:
+<code>h<var>i</var></code>.  This function expresses <var>P</var> in terms of Schur
+functions.
+</p>
+
+<div class="example">
+<pre class="example">(%i1) schur2comp (h1*h2 - h3, [h1, h2, h3]);
+(%o1)                         s
+                               1, 2
+</pre><pre class="example">(%i2) schur2comp (a*h3, [h3]);
+(%o2)                         s  a
+                               3
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+
+
+
+<a name="Changing-representations"></a>
+<h4 class="subsection">30.2.2 Changing representations</h4>
+<a name="cont2part"></a><a name="Item_003a-Symmetries_002fdeffn_002fcont2part"></a><dl>
+<dt><a name="index-cont2part"></a>Function: <strong>cont2part</strong> <em>(<var>pc</var>, <var>lvar</var>)</em></dt>
+<dd><p>returns the partitioned polynomial associated to the contracted form
+<var>pc</var> whose variables are in <var>lvar</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) pc: 2*a^3*b*x^4*y + x^5;
+                           3    4      5
+(%o1)                   2 a  b x  y + x
+</pre><pre class="example">(%i2) cont2part (pc, [x, y]);
+                                   3
+(%o2)              [[1, 5, 0], [2 a  b, 4, 1]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="contract"></a><a name="Item_003a-Symmetries_002fdeffn_002fcontract"></a><dl>
+<dt><a name="index-contract-1"></a>Function: <strong>contract</strong> <em>(<var>psym</var>, <var>lvar</var>)</em></dt>
+<dd><p>returns a contracted form (i.e. a monomial orbit under the action of the
+symmetric group) of the polynomial <var>psym</var> in the variables contained
+in the list <var>lvar</var>.  The function <code>explose</code> performs the
+inverse operation.  The function <code>tcontract</code> tests the symmetry of
+the polynomial.
+</p>
+<div class="example">
+<pre class="example">(%i1) psym: explose (2*a^3*b*x^4*y, [x, y, z]);
+         3      4      3      4      3    4        3    4
+(%o1) 2 a  b y z  + 2 a  b x z  + 2 a  b y  z + 2 a  b x  z
+
+                                           3      4      3    4
+                                      + 2 a  b x y  + 2 a  b x  y
+</pre><pre class="example">(%i2) contract (psym, [x, y, z]);
+                              3    4
+(%o2)                      2 a  b x  y
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="explose"></a><a name="Item_003a-Symmetries_002fdeffn_002fexplose"></a><dl>
+<dt><a name="index-explose"></a>Function: <strong>explose</strong> <em>(<var>pc</var>, <var>lvar</var>)</em></dt>
+<dd><p>returns the symmetric polynomial associated with the contracted form
+<var>pc</var>. The list <var>lvar</var> contains the variables.
+</p>
+<div class="example">
+<pre class="example">(%i1) explose (a*x + 1, [x, y, z]);
+(%o1)                  a z + a y + a x + 1
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="part2cont"></a><a name="Item_003a-Symmetries_002fdeffn_002fpart2cont"></a><dl>
+<dt><a name="index-part2cont"></a>Function: <strong>part2cont</strong> <em>(<var>ppart</var>, <var>lvar</var>)</em></dt>
+<dd><p>goes from the partitioned form to the contracted form of a symmetric polynomial.
+The contracted form is rendered with the variables in <var>lvar</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) part2cont ([[2*a^3*b, 4, 1]], [x, y]);
+                              3    4
+(%o1)                      2 a  b x  y
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="partpol"></a><a name="Item_003a-Symmetries_002fdeffn_002fpartpol"></a><dl>
+<dt><a name="index-partpol"></a>Function: <strong>partpol</strong> <em>(<var>psym</var>, <var>lvar</var>)</em></dt>
+<dd><p><var>psym</var> is a symmetric polynomial in the variables of the list
+<var>lvar</var>. This function returns its partitioned representation.
+</p>
+<div class="example">
+<pre class="example">(%i1) partpol (-a*(x + y) + 3*x*y, [x, y]);
+(%o1)               [[3, 1, 1], [- a, 1, 0]]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="tcontract"></a><a name="Item_003a-Symmetries_002fdeffn_002ftcontract"></a><dl>
+<dt><a name="index-tcontract"></a>Function: <strong>tcontract</strong> <em>(<var>pol</var>, <var>lvar</var>)</em></dt>
+<dd><p>tests if the polynomial <var>pol</var> is symmetric in the variables of the
+list <var>lvar</var>.  If so, it returns a contracted representation like the
+function <code>contract</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="tpartpol"></a><a name="Item_003a-Symmetries_002fdeffn_002ftpartpol"></a><dl>
+<dt><a name="index-tpartpol"></a>Function: <strong>tpartpol</strong> <em>(<var>pol</var>, <var>lvar</var>)</em></dt>
+<dd><p>tests if the polynomial <var>pol</var> is symmetric in the variables of the
+list <var>lvar</var>.  If so, it returns its partitioned representation like
+the function <code>partpol</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+
+
+<a name="Groups-and-orbits"></a>
+<h4 class="subsection">30.2.3 Groups and orbits</h4>
+
+<a name="direct"></a><a name="Item_003a-Symmetries_002fdeffn_002fdirect"></a><dl>
+<dt><a name="index-direct"></a>Function: <strong>direct</strong> <em>([<var>p_1</var>, ..., <var>p_n</var>], <var>y</var>, <var>f</var>, [<var>lvar_1</var>, ..., <var>lvar_n</var>])</em></dt>
+<dd><p>calculates the direct image (see M. Giusti, D. Lazard et A. Valibouze,
+ISSAC 1988, Rome) associated to the function <var>f</var>, in the lists of
+variables <var>lvar_1</var>, ..., <var>lvar_n</var>, and in the polynomials
+<var>p_1</var>, ..., <var>p_n</var> in a variable <var>y</var>.  The arity of the
+function <var>f</var> is important for the calculation.  Thus, if the
+expression for <var>f</var> does not depend on some variable, it is useless
+to include this variable, and not including it will also considerably
+reduce the amount of computation.
+</p>
+<div class="example">
+<pre class="example">(%i1) direct ([z^2  - e1* z + e2, z^2  - f1* z + f2],
+              z, b*v + a*u, [[u, v], [a, b]]);
+       2
+(%o1) y  - e1 f1 y
+
+                                 2            2             2   2
+                  - 4 e2 f2 - (e1  - 2 e2) (f1  - 2 f2) + e1  f1
+                + -----------------------------------------------
+                                         2
+</pre><pre class="example">(%i2) ratsimp (%);
+              2                2                   2
+(%o2)        y  - e1 f1 y + (e1  - 4 e2) f2 + e2 f1
+</pre><pre class="example">(%i3) ratsimp (direct ([z^3-e1*z^2+e2*z-e3,z^2  - f1* z + f2],
+              z, b*v + a*u, [[u, v], [a, b]]));
+       6            5         2                        2    2   4
+(%o3) y  - 2 e1 f1 y  + ((2 e1  - 6 e2) f2 + (2 e2 + e1 ) f1 ) y
+
+                          3                               3   3
+ + ((9 e3 + 5 e1 e2 - 2 e1 ) f1 f2 + (- 2 e3 - 2 e1 e2) f1 ) y
+
+         2       2        4    2
+ + ((9 e2  - 6 e1  e2 + e1 ) f2
+
+                    2       2       2                   2    4
+ + (- 9 e1 e3 - 6 e2  + 3 e1  e2) f1  f2 + (2 e1 e3 + e2 ) f1 )
+
+  2          2                      2     3          2
+ y  + (((9 e1  - 27 e2) e3 + 3 e1 e2  - e1  e2) f1 f2
+
+                 2            2    3                5
+ + ((15 e2 - 2 e1 ) e3 - e1 e2 ) f1  f2 - 2 e2 e3 f1 ) y
+
+           2                   3           3     2   2    3
+ + (- 27 e3  + (18 e1 e2 - 4 e1 ) e3 - 4 e2  + e1  e2 ) f2
+
+         2      3                   3    2   2
+ + (27 e3  + (e1  - 9 e1 e2) e3 + e2 ) f1  f2
+
+                   2    4        2   6
+ + (e1 e2 e3 - 9 e3 ) f1  f2 + e3  f1
+</pre></div>
+
+<p>Finding the polynomial whose roots are the sums <em>a+u</em> where <em>a</em>
+is a root of <em>z^2 - e_1 z + e_2</em> and <em>u</em> is a root of <em>z^2 -
+f_1 z + f_2</em>.
+</p>
+<div class="example">
+<pre class="example">(%i1) ratsimp (direct ([z^2 - e1* z + e2, z^2 - f1* z + f2],
+                          z, a + u, [[u], [a]]));
+       4                    3             2
+(%o1) y  + (- 2 f1 - 2 e1) y  + (2 f2 + f1  + 3 e1 f1 + 2 e2
+
+     2   2                              2               2
+ + e1 ) y  + ((- 2 f1 - 2 e1) f2 - e1 f1  + (- 2 e2 - e1 ) f1
+
+                  2                     2            2
+ - 2 e1 e2) y + f2  + (e1 f1 - 2 e2 + e1 ) f2 + e2 f1  + e1 e2 f1
+
+     2
+ + e2
+</pre></div>
+
+<p><code>direct</code> accepts two flags: <code>elementaires</code> and
+<code>puissances</code> (default) which allow decomposing the symmetric
+polynomials appearing in the calculation into elementary symmetric
+functions, or power functions, respectively.
+</p>
+<p>Functions of <code>sym</code> used in this function:
+</p>
+<p><code>multi_orbit</code> (so <code>orbit</code>), <code>pui_direct</code>, <code>multi_elem</code>
+(so <code>elem</code>), <code>multi_pui</code> (so <code>pui</code>), <code>pui2ele</code>, <code>ele2pui</code>
+(if the flag <code>direct</code> is in <code>puissances</code>).
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="multi_005forbit"></a><a name="Item_003a-Symmetries_002fdeffn_002fmulti_005forbit"></a><dl>
+<dt><a name="index-multi_005forbit"></a>Function: <strong>multi_orbit</strong> <em>(<var>P</var>, [<var>lvar_1</var>, <var>lvar_2</var>,..., <var>lvar_p</var>])</em></dt>
+<dd>
+<p><var>P</var> is a polynomial in the set of variables contained in the lists
+<var>lvar_1</var>, <var>lvar_2</var>, ..., <var>lvar_p</var>. This function returns the
+orbit of the polynomial <var>P</var> under the action of the product of the
+symmetric groups of the sets of variables represented in these <var>p</var>
+lists.
+</p>
+<div class="example">
+<pre class="example">(%i1) multi_orbit (a*x + b*y, [[x, y], [a, b]]);
+(%o1)                [b y + a x, a y + b x]
+</pre><pre class="example">(%i2) multi_orbit (x + y + 2*a, [[x, y], [a, b, c]]);
+(%o2)        [y + x + 2 c, y + x + 2 b, y + x + 2 a]
+</pre></div>
+<p>Also see: <code>orbit</code> for the action of a single symmetric group.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+
+<a name="multsym"></a><a name="Item_003a-Symmetries_002fdeffn_002fmultsym"></a><dl>
+<dt><a name="index-multsym"></a>Function: <strong>multsym</strong> <em>(<var>ppart_1</var>, <var>ppart_2</var>, <var>n</var>)</em></dt>
+<dd><p>returns the product of the two symmetric polynomials in <var>n</var>
+variables by working only modulo the action of the symmetric group of
+order <var>n</var>. The polynomials are in their partitioned form.
+</p>
+<p>Given the 2 symmetric polynomials in <var>x</var>, <var>y</var>:  <code>3*(x + y)
++ 2*x*y</code> and <code>5*(x^2 + y^2)</code> whose partitioned forms are <code>[[3,
+1], [2, 1, 1]]</code> and <code>[[5, 2]]</code>, their product will be
+</p>
+<div class="example">
+<pre class="example">(%i1) multsym ([[3, 1], [2, 1, 1]], [[5, 2]], 2);
+(%o1)         [[10, 3, 1], [15, 3, 0], [15, 2, 1]]
+</pre></div>
+<p>that is <code>10*(x^3*y + y^3*x) + 15*(x^2*y + y^2*x) + 15*(x^3 + y^3)</code>.
+</p>
+<p>Functions for changing the representations of a symmetric polynomial:
+</p>
+<p><code>contract</code>, <code>cont2part</code>, <code>explose</code>, <code>part2cont</code>,
+<code>partpol</code>, <code>tcontract</code>, <code>tpartpol</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="orbit"></a><a name="Item_003a-Symmetries_002fdeffn_002forbit"></a><dl>
+<dt><a name="index-orbit"></a>Function: <strong>orbit</strong> <em>(<var>P</var>, <var>lvar</var>)</em></dt>
+<dd><p>computes the orbit of the polynomial <var>P</var> in the variables in the list
+<var>lvar</var> under the action of the symmetric group of the set of
+variables in the list <var>lvar</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) orbit (a*x + b*y, [x, y]);
+(%o1)                [a y + b x, b y + a x]
+</pre><pre class="example">(%i2) orbit (2*x + x^2, [x, y]);
+                        2         2
+(%o2)                 [y  + 2 y, x  + 2 x]
+</pre></div>
+<p>See also <code><a href="#multi_005forbit">multi_orbit</a></code> for the action of a product of symmetric
+groups on a polynomial.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="pui_005fdirect"></a><a name="Item_003a-Symmetries_002fdeffn_002fpui_005fdirect"></a><dl>
+<dt><a name="index-pui_005fdirect"></a>Function: <strong>pui_direct</strong> <em>(<var>orbite</var>, [<var>lvar_1</var>, ..., <var>lvar_n</var>], [<var>d_1</var>, <var>d_2</var>, ..., <var>d_n</var>])</em></dt>
+<dd>
+<p>Let <var>f</var> be a polynomial in <var>n</var> blocks of variables <var>lvar_1</var>,
+..., <var>lvar_n</var>.  Let <var>c_i</var> be the number of variables in
+<var>lvar_i</var>, and <var>SC</var> be the product of <var>n</var> symmetric groups of
+degree <var>c_1</var>, ..., <var>c_n</var>. This group acts naturally on <var>f</var>.
+The list <var>orbite</var> is the orbit, denoted <code><var>SC</var>(<var>f</var>)</code>, of
+the function <var>f</var> under the action of <var>SC</var>. (This list may be
+obtained by the function <code>multi_orbit</code>.)  The <var>di</var> are integers
+s.t.
+<em>c_1 &lt;= d_1, c_2 &lt;= d_2, ..., c_n &lt;= d_n</em>.
+</p>
+<p>Let <var>SD</var> be the product of the symmetric groups <em>S_[d_1] x
+S_[d_2] x ... x S_[d_n]</em>.
+The function <code>pui_direct</code> returns
+the first <var>n</var> power functions of <code><var>SD</var>(<var>f</var>)</code> deduced
+from the power functions of <code><var>SC</var>(<var>f</var>)</code>, where <var>n</var> is
+the size of <code><var>SD</var>(<var>f</var>)</code>.
+</p>
+<p>The result is in multi-contracted form w.r.t. <var>SD</var>, i.e. only one
+element is kept per orbit, under the action of <var>SD</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) l: [[x, y], [a, b]];
+(%o1)                   [[x, y], [a, b]]
+</pre><pre class="example">(%i2) pui_direct (multi_orbit (a*x + b*y, l), l, [2, 2]);
+                                       2  2
+(%o2)               [a x, 4 a b x y + a  x ]
+</pre><pre class="example">(%i3) pui_direct (multi_orbit (a*x + b*y, l), l, [3, 2]);
+                             2  2     2    2        3  3
+(%o3) [2 a x, 4 a b x y + 2 a  x , 3 a  b x  y + 2 a  x , 
+
+    2  2  2  2      3    3        4  4
+12 a  b  x  y  + 4 a  b x  y + 2 a  x , 
+
+    3  2  3  2      4    4        5  5
+10 a  b  x  y  + 5 a  b x  y + 2 a  x , 
+
+    3  3  3  3       4  2  4  2      5    5        6  6
+40 a  b  x  y  + 15 a  b  x  y  + 6 a  b x  y + 2 a  x ]
+</pre><pre class="example">(%i4) pui_direct ([y + x + 2*c, y + x + 2*b, y + x + 2*a],
+      [[x, y], [a, b, c]], [2, 3]);
+                             2              2
+(%o4) [3 x + 2 a, 6 x y + 3 x  + 4 a x + 4 a , 
+
+                 2                   3        2       2        3
+              9 x  y + 12 a x y + 3 x  + 6 a x  + 12 a  x + 8 a ]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+
+
+
+
+<a name="Partitions"></a>
+<h4 class="subsection">30.2.4 Partitions</h4>
+<a name="kostka"></a><a name="Item_003a-Symmetries_002fdeffn_002fkostka"></a><dl>
+<dt><a name="index-kostka"></a>Function: <strong>kostka</strong> <em>(<var>part_1</var>, <var>part_2</var>)</em></dt>
+<dd><p>written by P. Esperet, calculates the Kostka number of the partition
+<var>part_1</var> and <var>part_2</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) kostka ([3, 3, 3], [2, 2, 2, 1, 1, 1]);
+(%o1)                           6
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="lgtreillis"></a><a name="Item_003a-Symmetries_002fdeffn_002flgtreillis"></a><dl>
+<dt><a name="index-lgtreillis"></a>Function: <strong>lgtreillis</strong> <em>(<var>n</var>, <var>m</var>)</em></dt>
+<dd><p>returns the list of partitions of weight <var>n</var> and length <var>m</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) lgtreillis (4, 2);
+(%o1)                   [[3, 1], [2, 2]]
+</pre></div>
+<p>Also see: <code><a href="#ltreillis">ltreillis</a></code>, <code><a href="#treillis">treillis</a></code> and <code><a href="#treinat">treinat</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="ltreillis"></a><a name="Item_003a-Symmetries_002fdeffn_002fltreillis"></a><dl>
+<dt><a name="index-ltreillis"></a>Function: <strong>ltreillis</strong> <em>(<var>n</var>, <var>m</var>)</em></dt>
+<dd><p>returns the list of partitions of weight <var>n</var> and length less than or
+equal to <var>m</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) ltreillis (4, 2);
+(%o1)               [[4, 0], [3, 1], [2, 2]]
+</pre></div>
+<p>Also see: <code><a href="#lgtreillis">lgtreillis</a></code>, <code><a href="#treillis">treillis</a></code> and <code><a href="#treinat">treinat</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="treillis"></a><a name="Item_003a-Symmetries_002fdeffn_002ftreillis"></a><dl>
+<dt><a name="index-treillis"></a>Function: <strong>treillis</strong> <em>(<var>n</var>)</em></dt>
+<dd><p>returns all partitions of weight <var>n</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) treillis (4);
+(%o1)    [[4], [3, 1], [2, 2], [2, 1, 1], [1, 1, 1, 1]]
+</pre></div>
+
+<p>See also: <code><a href="#lgtreillis">lgtreillis</a></code>, <code><a href="#ltreillis">ltreillis</a></code> and <code><a href="#treinat">treinat</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="treinat"></a><a name="Item_003a-Symmetries_002fdeffn_002ftreinat"></a><dl>
+<dt><a name="index-treinat"></a>Function: <strong>treinat</strong> <em>(<var>part</var>)</em></dt>
+<dd><p>returns the list of partitions inferior to the partition <var>part</var> w.r.t.
+the natural order.
+</p>
+<div class="example">
+<pre class="example">(%i1) treinat ([5]);
+(%o1)                         [[5]]
+</pre><pre class="example">(%i2) treinat ([1, 1, 1, 1, 1]);
+(%o2) [[5], [4, 1], [3, 2], [3, 1, 1], [2, 2, 1], [2, 1, 1, 1], 
+
+                                                 [1, 1, 1, 1, 1]]
+</pre><pre class="example">(%i3) treinat ([3, 2]);
+(%o3)                 [[5], [4, 1], [3, 2]]
+</pre></div>
+
+<p>See also: <code><a href="#lgtreillis">lgtreillis</a></code>, <code><a href="#ltreillis">ltreillis</a></code> and <code><a href="#treillis">treillis</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+
+
+
+<a name="Polynomials-and-their-roots"></a>
+<h4 class="subsection">30.2.5 Polynomials and their roots</h4>
+
+<a name="ele2polynome"></a><a name="Item_003a-Symmetries_002fdeffn_002fele2polynome"></a><dl>
+<dt><a name="index-ele2polynome"></a>Function: <strong>ele2polynome</strong> <em>(<var>L</var>, <var>z</var>)</em></dt>
+<dd><p>returns the polynomial in <var>z</var> s.t. the elementary symmetric
+functions of its roots are in the list <code><var>L</var> = [<var>n</var>,
+<var>e_1</var>, ..., <var>e_n</var>]</code>, where <var>n</var> is the degree of the
+polynomial and <var>e_i</var> the <var>i</var>-th elementary symmetric function.
+</p>
+<div class="example">
+<pre class="example">(%i1) ele2polynome ([2, e1, e2], z);
+                          2
+(%o1)                    z  - e1 z + e2
+</pre><pre class="example">(%i2) polynome2ele (x^7 - 14*x^5 + 56*x^3  - 56*x + 22, x);
+(%o2)          [7, 0, - 14, 0, 56, 0, - 56, - 22]
+</pre><pre class="example">(%i3) ele2polynome ([7, 0, -14, 0, 56, 0, -56, -22], x);
+                  7       5       3
+(%o3)            x  - 14 x  + 56 x  - 56 x + 22
+</pre></div>
+<p>The inverse: <code>polynome2ele (<var>P</var>, <var>z</var>)</code>.
+</p>
+<p>Also see:
+<code>polynome2ele</code>, <code>pui2polynome</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="polynome2ele"></a><a name="Item_003a-Symmetries_002fdeffn_002fpolynome2ele"></a><dl>
+<dt><a name="index-polynome2ele"></a>Function: <strong>polynome2ele</strong> <em>(<var>P</var>, <var>x</var>)</em></dt>
+<dd><p>gives the list <code><var>l</var> = [<var>n</var>, <var>e_1</var>, ..., <var>e_n</var>]</code>
+where <var>n</var> is the degree of the polynomial <var>P</var> in the variable
+<var>x</var> and <var>e_i</var> is the <var>i</var>-the elementary symmetric function
+of the roots of <var>P</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) polynome2ele (x^7 - 14*x^5 + 56*x^3 - 56*x + 22, x);
+(%o1)          [7, 0, - 14, 0, 56, 0, - 56, - 22]
+</pre><pre class="example">(%i2) ele2polynome ([7, 0, -14, 0, 56, 0, -56, -22], x);
+                  7       5       3
+(%o2)            x  - 14 x  + 56 x  - 56 x + 22
+</pre></div>
+<p>The inverse: <code>ele2polynome (<var>l</var>, <var>x</var>)</code>
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="prodrac"></a><a name="Item_003a-Symmetries_002fdeffn_002fprodrac"></a><dl>
+<dt><a name="index-prodrac"></a>Function: <strong>prodrac</strong> <em>(<var>L</var>, <var>k</var>)</em></dt>
+<dd><p><var>L</var> is a list containing the elementary symmetric functions 
+on a set <var>A</var>. <code>prodrac</code> returns the polynomial whose roots
+are the <var>k</var> by <var>k</var> products of the elements of <var>A</var>.
+</p>
+<p>Also see <code>somrac</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="pui2polynome"></a><a name="Item_003a-Symmetries_002fdeffn_002fpui2polynome"></a><dl>
+<dt><a name="index-pui2polynome"></a>Function: <strong>pui2polynome</strong> <em>(<var>x</var>, <var>lpui</var>)</em></dt>
+<dd><p>calculates the polynomial in <var>x</var> whose power functions of the roots
+are given in the list <var>lpui</var>.
+</p>
+<div class="example">
+<pre class="example">(%i1) pui;
+(%o1)                           1
+</pre><pre class="example">(%i2) kill(labels);
+(%o0)                         done
+</pre><pre class="example">(%i1) polynome2ele (x^3 - 4*x^2 + 5*x - 1, x);
+(%o1)                     [3, 4, 5, 1]
+</pre><pre class="example">(%i2) ele2pui (3, %);
+(%o2)                     [3, 4, 6, 7]
+</pre><pre class="example">(%i3) pui2polynome (x, %);
+                        3      2
+(%o3)                  x  - 4 x  + 5 x - 1
+</pre></div>
+<p>See also:
+<code><a href="#polynome2ele">polynome2ele</a></code>, <code><a href="#ele2polynome">ele2polynome</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="somrac"></a><a name="Item_003a-Symmetries_002fdeffn_002fsomrac"></a><dl>
+<dt><a name="index-somrac"></a>Function: <strong>somrac</strong> <em>(<var>L</var>, <var>k</var>)</em></dt>
+<dd><p>The list <var>L</var> contains elementary symmetric functions of a polynomial
+<var>P</var> . The function computes the polynomial whose roots are the 
+<var>k</var> by <var>k</var> distinct sums of the roots of <var>P</var>. 
+</p>
+<p>Also see <code>prodrac</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+
+
+
+<a name="Resolvents"></a>
+<h4 class="subsection">30.2.6 Resolvents</h4>
+
+<a name="resolvante"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante"></a><dl>
+<dt><a name="index-resolvante"></a>Function: <strong>resolvante</strong> <em>(<var>P</var>, <var>x</var>, <var>f</var>, [<var>x_1</var>,..., <var>x_d</var>]) </em></dt>
+<dd><p>calculates the resolvent of the polynomial <var>P</var> in <var>x</var> of degree
+<code>n &gt;= d</code> by the function <var>f</var> expressed in the variables
+<var>x_1</var>, ..., <var>x_d</var>.  For efficiency of computation it is
+important to not include in the list <code>[<var>x_1</var>, ..., <var>x_d</var>]</code>
+variables which do not appear in the transformation function <var>f</var>.
+</p>
+<p>To increase the efficiency of the computation one may set flags in
+<code>resolvante</code> so as to use appropriate algorithms:
+</p>
+<p>If the function <var>f</var> is unitary:
+</p><ul>
+<li> A polynomial in a single variable,
+</li><li> linear,
+</li><li> alternating,
+</li><li> a sum,
+</li><li> symmetric,
+</li><li> a product,
+</li><li> the function of the Cayley resolvent (usable up to degree 5)
+
+<div class="example">
+<pre class="example">(x1*x2 + x2*x3 + x3*x4 + x4*x5 + x5*x1 -
+     (x1*x3 + x3*x5 + x5*x2 + x2*x4 + x4*x1))^2
+</pre></div>
+
+<p>general,
+</p></li></ul>
+<p>the flag of <code>resolvante</code> may be, respectively:
+</p><ul>
+<li> unitaire,
+</li><li> lineaire,
+</li><li> alternee,
+</li><li> somme,
+</li><li> produit,
+</li><li> cayley,
+</li><li> generale.
+</li></ul>
+
+<div class="example">
+<pre class="example">(%i1) resolvante: unitaire$
+</pre><pre class="example">(%i2) resolvante (x^7 - 14*x^5 + 56*x^3 - 56*x + 22, x, x^3 - 1,
+      [x]);
+
+&quot; resolvante unitaire &quot; [7, 0, 28, 0, 168, 0, 1120, - 154, 7840,
+                         - 2772, 56448, - 33880, 
+
+413952, - 352352, 3076668, - 3363360, 23114112, - 30494464, 
+
+175230832, - 267412992, 1338886528, - 2292126760] 
+  3       6      3       9      6      3
+[x  - 1, x  - 2 x  + 1, x  - 3 x  + 3 x  - 1, 
+
+ 12      9      6      3       15      12       9       6      3
+x   - 4 x  + 6 x  - 4 x  + 1, x   - 5 x   + 10 x  - 10 x  + 5 x
+
+       18      15       12       9       6      3
+ - 1, x   - 6 x   + 15 x   - 20 x  + 15 x  - 6 x  + 1, 
+
+ 21      18       15       12       9       6      3
+x   - 7 x   + 21 x   - 35 x   + 35 x  - 21 x  + 7 x  - 1] 
+[- 7, 1127, - 6139, 431767, - 5472047, 201692519, - 3603982011] 
+       7      6        5         4          3           2
+(%o2) y  + 7 y  - 539 y  - 1841 y  + 51443 y  + 315133 y
+
+                                              + 376999 y + 125253
+</pre><pre class="example">(%i3) resolvante: lineaire$
+</pre><pre class="example">(%i4) resolvante (x^4 - 1, x, x1 + 2*x2 + 3*x3, [x1, x2, x3]);
+
+&quot; resolvante lineaire &quot; 
+       24       20         16            12             8
+(%o4) y   + 80 y   + 7520 y   + 1107200 y   + 49475840 y
+
+                                                    4
+                                       + 344489984 y  + 655360000
+</pre><pre class="example">(%i5) resolvante: general$
+</pre><pre class="example">(%i6) resolvante (x^4 - 1, x, x1 + 2*x2 + 3*x3, [x1, x2, x3]);
+
+&quot; resolvante generale &quot; 
+       24       20         16            12             8
+(%o6) y   + 80 y   + 7520 y   + 1107200 y   + 49475840 y
+
+                                                    4
+                                       + 344489984 y  + 655360000
+</pre><pre class="example">(%i7) resolvante (x^4 - 1, x, x1 + 2*x2 + 3*x3, [x1, x2, x3, x4]);
+
+&quot; resolvante generale &quot; 
+       24       20         16            12             8
+(%o7) y   + 80 y   + 7520 y   + 1107200 y   + 49475840 y
+
+                                                    4
+                                       + 344489984 y  + 655360000
+</pre><pre class="example">(%i8) direct ([x^4 - 1], x, x1 + 2*x2 + 3*x3, [[x1, x2, x3]]);
+       24       20         16            12             8
+(%o8) y   + 80 y   + 7520 y   + 1107200 y   + 49475840 y
+
+                                                    4
+                                       + 344489984 y  + 655360000
+</pre><pre class="example">(%i9) resolvante :lineaire$
+</pre><pre class="example">(%i10) resolvante (x^4 - 1, x, x1 + x2 + x3, [x1, x2, x3]);
+
+&quot; resolvante lineaire &quot; 
+                              4
+(%o10)                       y  - 1
+</pre><pre class="example">(%i11) resolvante: symetrique$
+</pre><pre class="example">(%i12) resolvante (x^4 - 1, x, x1 + x2 + x3, [x1, x2, x3]);
+
+&quot; resolvante symetrique &quot; 
+                              4
+(%o12)                       y  - 1
+</pre><pre class="example">(%i13) resolvante (x^4 + x + 1, x, x1 - x2, [x1, x2]);
+
+&quot; resolvante symetrique &quot; 
+                           6      2
+(%o13)                    y  - 4 y  - 1
+</pre><pre class="example">(%i14) resolvante: alternee$
+</pre><pre class="example">(%i15) resolvante (x^4 + x + 1, x, x1 - x2, [x1, x2]);
+
+&quot; resolvante alternee &quot; 
+            12      8       6        4        2
+(%o15)     y   + 8 y  + 26 y  - 112 y  + 216 y  + 229
+</pre><pre class="example">(%i16) resolvante: produit$
+</pre><pre class="example">(%i17) resolvante (x^7 - 7*x + 3, x, x1*x2*x3, [x1, x2, x3]);
+
+&quot; resolvante produit &quot;
+        35      33         29        28         27        26
+(%o17) y   - 7 y   - 1029 y   + 135 y   + 7203 y   - 756 y
+
+         24           23          22            21           20
+ + 1323 y   + 352947 y   - 46305 y   - 2463339 y   + 324135 y
+
+          19           18             17              15
+ - 30618 y   - 453789 y   - 40246444 y   + 282225202 y
+
+             14              12             11            10
+ - 44274492 y   + 155098503 y   + 12252303 y   + 2893401 y
+
+              9            8            7             6
+ - 171532242 y  + 6751269 y  + 2657205 y  - 94517766 y
+
+            5             3
+ - 3720087 y  + 26040609 y  + 14348907
+</pre><pre class="example">(%i18) resolvante: symetrique$
+</pre><pre class="example">(%i19) resolvante (x^7 - 7*x + 3, x, x1*x2*x3, [x1, x2, x3]);
+
+&quot; resolvante symetrique &quot; 
+        35      33         29        28         27        26
+(%o19) y   - 7 y   - 1029 y   + 135 y   + 7203 y   - 756 y
+
+         24           23          22            21           20
+ + 1323 y   + 352947 y   - 46305 y   - 2463339 y   + 324135 y
+
+          19           18             17              15
+ - 30618 y   - 453789 y   - 40246444 y   + 282225202 y
+
+             14              12             11            10
+ - 44274492 y   + 155098503 y   + 12252303 y   + 2893401 y
+
+              9            8            7             6
+ - 171532242 y  + 6751269 y  + 2657205 y  - 94517766 y
+
+            5             3
+ - 3720087 y  + 26040609 y  + 14348907
+</pre><pre class="example">(%i20) resolvante: cayley$
+</pre><pre class="example">(%i21) resolvante (x^5 - 4*x^2 + x + 1, x, a, []);
+
+&quot; resolvante de Cayley &quot;
+        6       5         4          3            2
+(%o21) x  - 40 x  + 4080 x  - 92928 x  + 3772160 x  + 37880832 x
+
+                                                       + 93392896
+</pre></div>
+
+<p>For the Cayley resolvent, the 2 last arguments are neutral and the input
+polynomial must necessarily be of degree 5.
+</p>
+<p>See also:
+</p><p align="left"><code><a href="#resolvante_005fbipartite">resolvante_bipartite</a></code>, <code><a href="#resolvante_005fproduit_005fsym">resolvante_produit_sym</a></code>,
+<code><a href="#resolvante_005funitaire">resolvante_unitaire</a></code>, <code><a href="#resolvante_005falternee1">resolvante_alternee1</a></code>, <code><a href="#resolvante_005fklein">resolvante_klein</a></code>, 
+<code><a href="#resolvante_005fklein3">resolvante_klein3</a></code>, <code><a href="#resolvante_005fvierer">resolvante_vierer</a></code>, <code><a href="#resolvante_005fdiedrale">resolvante_diedrale</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="resolvante_005falternee1"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante_005falternee1"></a><dl>
+<dt><a name="index-resolvante_005falternee1"></a>Function: <strong>resolvante_alternee1</strong> <em>(<var>P</var>, <var>x</var>)</em></dt>
+<dd><p>calculates the transformation
+<code><var>P</var>(<var>x</var>)</code> of degree <var>n</var> by the function
+<em>product(x_i - x_j, 1 &lt;= i &lt; j &lt;= n - 1)</em>.
+</p>
+<p>See also:
+</p><p align="left"><code><a href="#resolvante_005fproduit_005fsym">resolvante_produit_sym</a></code>, <code><a href="#resolvante_005funitaire">resolvante_unitaire</a></code>,
+<code><a href="#resolvante">resolvante</a></code>,  <code><a href="#resolvante_005fklein">resolvante_klein</a></code>, <code><a href="#resolvante_005fklein3">resolvante_klein3</a></code>,
+<code><a href="#resolvante_005fvierer">resolvante_vierer</a></code>, <code><a href="#resolvante_005fdiedrale">resolvante_diedrale</a></code>, <code><a href="#resolvante_005fbipartite">resolvante_bipartite</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="resolvante_005fbipartite"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante_005fbipartite"></a><dl>
+<dt><a name="index-resolvante_005fbipartite"></a>Function: <strong>resolvante_bipartite</strong> <em>(<var>P</var>, <var>x</var>)</em></dt>
+<dd><p>calculates the transformation of
+<code><var>P</var>(<var>x</var>)</code> of even degree <var>n</var> by the function 
+<em>x_1 x_2 ... x_[n/2] + x_[n/2 + 1] ... x_n</em>.
+</p>
+<div class="example">
+<pre class="example">(%i1) resolvante_bipartite (x^6 + 108, x);
+              10        8           6             4
+(%o1)        y   - 972 y  + 314928 y  - 34012224 y
+</pre></div>
+
+<p>See also:
+</p><p align="left"><code><a href="#resolvante_005fproduit_005fsym">resolvante_produit_sym</a></code>, <code><a href="#resolvante_005funitaire">resolvante_unitaire</a></code>,
+<code><a href="#resolvante">resolvante</a></code>, <code><a href="#resolvante_005fklein">resolvante_klein</a></code>, <code><a href="#resolvante_005fklein3">resolvante_klein3</a></code>,
+<code><a href="#resolvante_005fvierer">resolvante_vierer</a></code>, <code><a href="#resolvante_005fdiedrale">resolvante_diedrale</a></code>, <code><a href="#resolvante_005falternee1">resolvante_alternee1</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="resolvante_005fdiedrale"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante_005fdiedrale"></a><dl>
+<dt><a name="index-resolvante_005fdiedrale"></a>Function: <strong>resolvante_diedrale</strong> <em>(<var>P</var>, <var>x</var>)</em></dt>
+<dd><p>calculates the transformation of <code><var>P</var>(<var>x</var>)</code> by the function
+<code><var>x_1</var> <var>x_2</var> + <var>x_3</var> <var>x_4</var></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) resolvante_diedrale (x^5 - 3*x^4 + 1, x);
+       15       12       11       10        9         8         7
+(%o1) x   - 21 x   - 81 x   - 21 x   + 207 x  + 1134 x  + 2331 x
+
+        6         5          4          3          2
+ - 945 x  - 4970 x  - 18333 x  - 29079 x  - 20745 x  - 25326 x
+
+ - 697
+</pre></div>
+
+<p>See also:
+</p><p align="left"><code><a href="#resolvante_005fproduit_005fsym">resolvante_produit_sym</a></code>, <code><a href="#resolvante_005funitaire">resolvante_unitaire</a></code>,
+<code><a href="#resolvante_005falternee1">resolvante_alternee1</a></code>, <code><a href="#resolvante_005fklein">resolvante_klein</a></code>, <code><a href="#resolvante_005fklein3">resolvante_klein3</a></code>,
+<code><a href="#resolvante_005fvierer">resolvante_vierer</a></code>, <code><a href="#resolvante">resolvante</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="resolvante_005fklein"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante_005fklein"></a><dl>
+<dt><a name="index-resolvante_005fklein"></a>Function: <strong>resolvante_klein</strong> <em>(<var>P</var>, <var>x</var>)</em></dt>
+<dd><p>calculates the transformation of <code><var>P</var>(<var>x</var>)</code> by the function
+<code><var>x_1</var> <var>x_2</var> <var>x_4</var> + <var>x_4</var></code>.
+</p>
+<p>See also:
+</p><p align="left"><code><a href="#resolvante_005fproduit_005fsym">resolvante_produit_sym</a></code>, <code><a href="#resolvante_005funitaire">resolvante_unitaire</a></code>,
+<code><a href="#resolvante_005falternee1">resolvante_alternee1</a></code>, <code><a href="#resolvante">resolvante</a></code>, <code><a href="#resolvante_005fklein3">resolvante_klein3</a></code>,
+<code><a href="#resolvante_005fvierer">resolvante_vierer</a></code>, <code><a href="#resolvante_005fdiedrale">resolvante_diedrale</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="resolvante_005fklein3"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante_005fklein3"></a><dl>
+<dt><a name="index-resolvante_005fklein3"></a>Function: <strong>resolvante_klein3</strong> <em>(<var>P</var>, <var>x</var>)</em></dt>
+<dd><p>calculates the transformation of <code><var>P</var>(<var>x</var>)</code> by the function
+<code><var>x_1</var> <var>x_2</var> <var>x_4</var> + <var>x_4</var></code>.
+</p>
+<p>See also:
+</p><p align="left"><code><a href="#resolvante_005fproduit_005fsym">resolvante_produit_sym</a></code>, <code><a href="#resolvante_005funitaire">resolvante_unitaire</a></code>,
+<code><a href="#resolvante_005falternee1">resolvante_alternee1</a></code>, <code><a href="#resolvante_005fklein">resolvante_klein</a></code>, <code><a href="#resolvante">resolvante</a></code>,
+<code><a href="#resolvante_005fvierer">resolvante_vierer</a></code>, <code><a href="#resolvante_005fdiedrale">resolvante_diedrale</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="resolvante_005fproduit_005fsym"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante_005fproduit_005fsym"></a><dl>
+<dt><a name="index-resolvante_005fproduit_005fsym"></a>Function: <strong>resolvante_produit_sym</strong> <em>(<var>P</var>, <var>x</var>)</em></dt>
+<dd><p>calculates the list of all product resolvents of the polynomial
+<code><var>P</var>(<var>x</var>)</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) resolvante_produit_sym (x^5 + 3*x^4 + 2*x - 1, x);
+        5      4             10      8       7       6       5
+(%o1) [y  + 3 y  + 2 y - 1, y   - 2 y  - 21 y  - 31 y  - 14 y
+
+    4       3      2       10      8       7    6       5       4
+ - y  + 14 y  + 3 y  + 1, y   + 3 y  + 14 y  - y  - 14 y  - 31 y
+
+       3      2       5      4
+ - 21 y  - 2 y  + 1, y  - 2 y  - 3 y - 1, y - 1]
+</pre><pre class="example">(%i2) resolvante: produit$
+</pre><pre class="example">(%i3) resolvante (x^5 + 3*x^4 + 2*x - 1, x, a*b*c, [a, b, c]);
+
+&quot; resolvante produit &quot;
+       10      8       7    6        5       4       3     2
+(%o3) y   + 3 y  + 14 y  - y  - 14 y  - 31 y  - 21 y  - 2 y  + 1
+</pre></div>
+
+<p>See also:
+</p><p align="left"><code><a href="#resolvante">resolvante</a></code>, <code><a href="#resolvante_005funitaire">resolvante_unitaire</a></code>,
+<code><a href="#resolvante_005falternee1">resolvante_alternee1</a></code>, <code><a href="#resolvante_005fklein">resolvante_klein</a></code>,
+<code><a href="#resolvante_005fklein3">resolvante_klein3</a></code>, <code><a href="#resolvante_005fvierer">resolvante_vierer</a></code>,
+<code><a href="#resolvante_005fdiedrale">resolvante_diedrale</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+<a name="resolvante_005funitaire"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante_005funitaire"></a><dl>
+<dt><a name="index-resolvante_005funitaire"></a>Function: <strong>resolvante_unitaire</strong> <em>(<var>P</var>, <var>Q</var>, <var>x</var>)</em></dt>
+<dd><p>computes the resolvent of the polynomial <code><var>P</var>(<var>x</var>)</code> by the
+polynomial <code><var>Q</var>(<var>x</var>)</code>. 
+</p>
+<p>See also:
+</p><p align="left"><code><a href="#resolvante_005fproduit_005fsym">resolvante_produit_sym</a></code>, <code><a href="#resolvante">resolvante</a></code>,
+<code><a href="#resolvante_005falternee1">resolvante_alternee1</a></code>, <code><a href="#resolvante_005fklein">resolvante_klein</a></code>, <code><a href="#resolvante_005fklein3">resolvante_klein3</a></code>,
+<code><a href="#resolvante_005fvierer">resolvante_vierer</a></code>, <code><a href="#resolvante_005fdiedrale">resolvante_diedrale</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="resolvante_005fvierer"></a><a name="Item_003a-Symmetries_002fdeffn_002fresolvante_005fvierer"></a><dl>
+<dt><a name="index-resolvante_005fvierer"></a>Function: <strong>resolvante_vierer</strong> <em>(<var>P</var>, <var>x</var>)</em></dt>
+<dd><p>computes the transformation of
+<code><var>P</var>(<var>x</var>)</code> by the function <code><var>x_1</var> <var>x_2</var> -
+<var>x_3</var> <var>x_4</var></code>.
+</p>
+<p>See also:
+</p><p align="left"><code><a href="#resolvante_005fproduit_005fsym">resolvante_produit_sym</a></code>, <code><a href="#resolvante_005funitaire">resolvante_unitaire</a></code>,
+<code><a href="#resolvante_005falternee1">resolvante_alternee1</a></code>, <code><a href="#resolvante_005fklein">resolvante_klein</a></code>, <code><a href="#resolvante_005fklein3">resolvante_klein3</a></code>,
+<code><a href="#resolvante">resolvante</a></code>, <code><a href="#resolvante_005fdiedrale">resolvante_diedrale</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+
+
+
+<a name="Miscellaneous"></a>
+<h4 class="subsection">30.2.7 Miscellaneous</h4>
+
+<a name="multinomial"></a><a name="Item_003a-Symmetries_002fdeffn_002fmultinomial"></a><dl>
+<dt><a name="index-multinomial"></a>Function: <strong>multinomial</strong> <em>(<var>r</var>, <var>part</var>)</em></dt>
+<dd><p>where <var>r</var> is the weight of the partition <var>part</var>.  This function
+returns the associate multinomial coefficient: if the parts of
+<var>part</var> are <var>i_1</var>, <var>i_2</var>, ..., <var>i_k</var>, the result is
+<code><var>r</var>!/(<var>i_1</var>! <var>i_2</var>! ... <var>i_k</var>!)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;</div></dd></dl>
+
+<a name="permut"></a><a name="Item_003a-Symmetries_002fdeffn_002fpermut"></a><dl>
+<dt><a name="index-permut"></a>Function: <strong>permut</strong> <em>(<var>L</var>)</em></dt>
+<dd><p>returns the list of permutations of the list <var>L</var>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-sym">Package sym</a>
+&middot;<a href="maxima_424.html#Category_003a-Lists">Lists</a>
+&middot;</div></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_148.html#Introduction-to-Symmetries" accesskey="p" rel="previous">Introduction to Symmetries</a>, Up: <a href="maxima_147.html#Symmetries" accesskey="u" rel="up">Symmetries</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

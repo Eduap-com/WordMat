@@ -1,0 +1,1228 @@
+/*************** -*- Mode: MACSYMA; Package: MAXIMA -*-  ******************/
+/***************************************************************************
+***                                                                    *****
+***     Copyright (c) 1984 by William Schelter,University of Texas     *****
+***     All rights reserved                                            *****
+***************************************************************************/
+
+
+(kill(all), use_fast_arrays: true, 0);
+0;
+display(b[1,2]);
+done$
+exp1:integrate(1/(x^3+2),x);  
+-log(x^2-2^(1/3)*x+2^(2/3))/(6*2^(2/3))+atan((2*x-2^(1/3))/(2^(1/3)*sqrt(3)))
+					/(2^(2/3)*sqrt(3))
+				       +log(x+2^(1/3))/(3*2^(2/3));
+/* tops 20 got exp1 below but exp2 is also ok.*/
+/* lispm got
+-2^(1/3)*log(2^(2/3)*x^2-2*x+2*2^(1/3))/12
+ +2^(1/3)*atan((2*2^(2/3)*x-2)/(2*sqrt(3)))/(2*sqrt(3))
+ +2^(1/3)*log(x+2^(1/3))/6$ */
+exp2:diff(exp1,x);
+1/(3*((2*x-2^(1/3))^2/(3*2^(2/3))+1))-(2*x-2^(1/3))
+                               /(6*2^(2/3)*(x^2-2^(1/3)*x+2^(2/3)))
+                              +1/(3*2^(2/3)*(x+2^(1/3)))$  
+				
+/* was 1/(3*((2*2^(2/3)*x-2)^2/12+1))-2^(1/3)*(2*2^(2/3)*x-2)
+			       /(12*(2^(2/3)*x^2-2*x+2*2^(1/3)))
+			      +2^(1/3)/(6*(x+2^(1/3)))$
+				which is equal
+*/				
+radcan(exp2);
+1/(x^3+2)$
+(exp1:-log(x^2-2^(1/3)*x+2^(2/3))/(6*2^(2/3))+atan((2*x-2^(1/3))/(2^(1/3)*sqrt(3)))
+					/(2^(2/3)*sqrt(3))
+				       +log(x+2^(1/3))/(3*2^(2/3)),0);
+0$
+
+/* It's not easy to test reveal. Let's not worry about it too much. */
+expand(reveal(exp1,2),0,0);
+Negterm + 2 * Quotient$
+
+expand(reveal(exp1,3),0,0);
+log/Product(2)+atan/Product(2)-Quotient$
+
+g(l):=catch(map(lambda([x],if x < 0 then throw(x) else f(x)),l));
+g(l):=catch(map(lambda([x],if x < 0 then throw(x) else f(x)),l))$
+g([1,2,3,7]);
+[f(1),f(2),f(3),f(7)]$
+g([1,2,-3,7]);
+-3$
+
+(kill(b),0);
+0$
+
+exp1:y^2+b*x;
+y^2+b*x$
+
+orderless(y);
+done$
+
+y^2+b*x;
+b*x+y^2$
+
+string(%-exp1);
+"y^2-y^2"$
+
+unorder();
+[y]$
+exp:a^2+b*x;
+b*x+a^2$
+ordergreat(a);
+done$
+
+a^2+b*x;
+a^2+b*x$
+
+string(%-exp);
+"a^2-a^2"$
+
+unorder();
+[a]$
+
+exp:a^2+b*x;
+b*x+a^2$
+
+ordergreat(a);
+done$
+
+a^2+b*x;
+a^2+b*x$
+
+string(%-exp);
+"a^2-a^2"$
+
+unorder();
+[a]$
+declare(f,linear);
+done$
+f(2*a+3*b);
+3*f(b)+2*f(a)$
+f(2*x+y,x);
+f(1,x)*y+2*f(x,x)$
+declare (c1, constant);
+done;
+f (x*c1/2 + 2*y/c1);
+c1*f(x)/2 + 2*f(y)/c1;
+declare(f,additive);
+done$
+f(2*a+3*b);
+3*f(b)+2*f(a)$
+declare(f,outative);
+done$
+f(2*a);
+2*f(a)$
+declare(f,multiplicative);
+done$
+f(2*a*b);
+2*f(a)*f(b)$
+(kill(functions),declare(g,lassociative));
+done$
+g(g(a,b),g(c,d));
+g(g(g(a,b),c),d)$
+g(g(a,b),g(c,d))-g(a,g(b,g(c,d)));
+0$
+declare(g,rassociative);
+done$
+g(g(a,b),g(c,d));
+g(g(g(a,b),c),d)$
+g(g(a,b),g(c,d))-g(a,g(b,g(c,d)));
+0$
+(kill(h),declare(h,commutative));
+done$
+h(x,z,y);
+h(x,y,z)$
+(kill(h),declare(h,symmetric));
+done$
+h(x,z,y);
+h(x,y,z)$
+(kill(h),declare(h,antisymmetric));
+done$
+h(x,z,y);
+-h(x,y,z)$
+h[x,z,y]$
+-h[x,y,z];
+(kill(all),declare(j,nary));
+done$
+j(j(a,b),j(c,d));
+j(a,b,c,d)$
+declare(f,oddfun);
+done$
+f(-x);
+-f(x)$
+declare(g,evenfun);
+done$
+g(-x);
+g(x)$
+(kill(all),kill(g),declare(f,posfun));
+done$
+is(f(x) > 0);
+true$
+
+(kill (foo), declare (foo, [nary, symmetric]));
+done;
+
+foo (a, 1, h, 2, z, d, %pi);
+foo (1, 2, %pi, a, d, h, z);
+
+foo (a, foo (1, foo (h, 2), z), foo (d, %pi));
+foo (1, 2, %pi, a, d, h, z);
+
+(kill(all),b[1,x]:1);
+1$
+
+(array(f,2,3),0);
+0$
+
+arrayinfo(b);
+[hash_table, true, [1, x]]$
+/* tops 20:  this is incompatible difference [hashed,2,[1,x]]$ */
+arrayinfo(f);
+[declared,2,[2,3]]$
+block([use_fast_arrays:false],kill(bb),bb[1,x]:7,arrayinfo(bb));
+[hashed, 2, [1, x]];
+block([use_fast_arrays:true],kill(bb),bb[1,x]:7,arrayinfo(bb));
+[hash_table, true, [1, x]]$
+properties(?cons);
+["system function"]$
+assume(var1 > 0);
+[var1 > 0]$
+properties(var1);
+["database info",var1 > 0]$
+var2:2;
+2$
+properties(var2);
+[value]$
+gradef(r,x,x/r);
+r$
+gradef(r,y,y/r);
+r$
+printprops(r,atomgrad);
+done$
+propvars(atomgrad);
+[r]$
+gradef(r,x,x/r);
+r$
+gradef(r,y,y/r);
+r$
+printprops(r,atomgrad);
+done$
+propvars(atomgrad);
+[r]$
+put(%e,transcendental,type);
+transcendental$
+put(%pi,transcendental,type);
+transcendental$
+block([algebraic:false],put(%i,algebraic,type));
+false$
+typeof(x):=block([q],if numberp(x) then return(algebraic),
+       if not atom(x) then return(maplist(typeof,x)),q:get(x,type),
+       if q = false then error("not numeric") else q);
+typeof(x):=block([q],if numberp(x) then return(algebraic),
+       if not atom(x) then return(maplist(typeof,x)),q:get(x,type),
+       if q = false then error("not numeric") else q)$
+block([algebraic:false],errcatch(typeof(2*%e+x*%pi)));
+[]$
+block([algebraic:false],typeof(2*%e+%pi));
+[transcendental,[false,transcendental]]$
+is(x^2 >= 2*x-1);
+true$
+assume(a > 1);
+[a > 1]$
+is(log(log(a+1)+1) > 0 and a^2+1 > 2*a);
+true$
+freeof(y,sin(x+2*y));
+false$
+freeof(cos(y),"*",sin(y)+cos(x));
+true$
+
+/* freeof should try both noun and verb forms */
+
+(kill (f, g, h, x, n), 0);
+0;
+
+freeof (sin, sin (x));
+false;
+
+freeof (integrate, 'integrate (f(x), x));
+false;
+
+freeof (diff, 'diff (f(x), x));
+false;
+
+freeof (sum, 'sum (f(x), x, 1, n));
+false;
+
+freeof (limit, 'limit (f(x), x, inf));
+false;
+
+freeof (sin, f (g (1 + sin (h (x)))));
+false;
+
+freeof (integrate, f (g (x - 'integrate (h (x), x))));
+false;
+
+freeof (diff, f (g (x * 'diff (h (x), x, 3))));
+false;
+
+freeof (sum, f (g (x / 'sum (h (x), x, 2, n))));
+false;
+
+freeof (limit, f (g (x ^ 'limit (h (x), x, inf))));
+false;
+
+/* Additional freeof tests */
+
+lfreeof([x],y);
+true$
+lfreeof([x],y+z);
+true$
+lfreeof([x,y],y+z);
+false$
+use_fast_arrays: false;
+false;
+
+/* Check various lambda list possibilities */
+freeof (x, lambda ([], x));
+false$
+freeof (x, lambda ([x], x));
+true$
+freeof (x, lambda (['x], x));
+true$
+freeof (x, lambda ([[x]], x));
+true$
+freeof (x, lambda ([['x]], x));
+true$
+
+freeof (x, 'block ([x], x));
+true$
+freeof (x, 'block ([x : foo], x));
+true$
+
+/* Check the loop variable */
+freeof (x, '(for x thru 3 do print (x)));
+true$
+freeof (x, '(for x in [1, 2, 3] do print (x)));
+true$
+
+/* It would be nice to test foreign language characters here.
+ * Is there a way to make such tests independent of environment stuff like $LANG ??
+ */
+
+declare ("|~`", alphabetic);
+done;
+
+[member ('alphabetic, properties ("|")), member ('alphabetic, properties ("`")), member ('alphabetic, properties ("~"))];
+[true, true, true];
+
+~`||`~ : ~|^`~ - |~^~`;
+~|^`~ - |~^~`;
+
+(kill (~`||`~), ~`||`~);
+'~`||`~;
+
+(remove ("`~", alphabetic), remove ("|", alphabetic));
+done;
+
+[member ('alphabetic, properties ("|")), member ('alphabetic, properties ("`")), member ('alphabetic, properties ("~"))];
+[false, false, false];
+
+/* SF bug #3320: "Cannot declare string of one character as alphabetic"
+ */
+
+kill (a, b, c, foo, bar, baz);
+done;
+
+[foo, bar, baz] : [a\+b, a+b, a + b];
+[a\+b, b + a, b + a];
+
+[is(foo = bar), is(foo = baz), is(bar = baz)];
+[false, false, true];
+
+[symbolp(foo), symbolp(bar), symbolp(baz)];
+[true, false, false];
+
+declare ("+", alphabetic);
+done;
+
+[foo, bar, baz] : [a\+b, a+b, a + b];
+[a\+b, a\+b, b + a];
+
+[is(foo = bar), is(foo = baz), is(bar = baz)];
+[true, false, false];
+
+[symbolp(foo), symbolp(bar), symbolp(baz)];
+[true, true, false];
+
+remove ("+", alphabetic);
+done;
+
+[foo, bar, baz] : [a\+b, a+b, a + b];
+[a\+b, b + a, b + a];
+
+[is(foo = bar), is(foo = baz), is(bar = baz)];
+[false, false, true];
+
+[symbolp(foo), symbolp(bar), symbolp(baz)];
+[true, false, false];
+
+/* Verify that time functions are defined and return numbers.
+ * Don't bother trying to verify if the values are reasonable.
+ */
+[integerp (absolute_real_time ()), floatnump (elapsed_real_time ()), floatnump (elapsed_run_time ())];
+[true, true, true];
+
+stringp (timedate ());
+true;
+
+stringp (timedate (100*365*24*3600));
+true;
+
+/* date formatting */
+
+timedate (0, 0);
+"1900-01-01 00:00:00+00:00";
+
+timedate (86400, -1927/225);
+"1900-01-01 15:26:00-08:34";
+
+timedate (86400, 1927/225);
+"1900-01-02 08:34:00+08:34";
+
+timedate (0, float (0));
+"1900-01-01 00:00:00+00:00";
+
+timedate (86400, float (-1927/225));
+"1900-01-01 15:26:00-08:34";
+
+timedate (86400, float (1927/225));
+"1900-01-02 08:34:00+08:34";
+
+/* date parsing */
+
+parse_timedate (timedate (86400));
+86400;
+
+parse_timedate (timedate (86401));
+86401;
+
+parse_timedate (timedate (87400));
+87400;
+
+parse_timedate (timedate (1000000));
+1000000;
+
+parse_timedate (timedate (1000000000));
+1000000000;
+
+parse_timedate (timedate (10000000000));
+10000000000;
+
+parse_timedate (timedate (86400, 8.75));
+86400;
+
+parse_timedate (timedate (86401, -1/4));
+86401;
+
+parse_timedate (timedate (87400, 24));
+87400;
+
+parse_timedate (timedate (1000000, -24.0));
+1000000;
+
+parse_timedate (timedate (1000000000, 0));
+1000000000;
+
+parse_timedate (timedate (10000000000, float (1927/225)));
+10000000000;
+
+map (parse_timedate,
+["1951-02-28 05:39:56,000-08",
+ "1951-02-28 05:39:56.000-08",
+ "1951-02-28 05:39:56,000-08:00",
+ "1951-02-28 05:39:56,000-0800",
+ "1951-02-28 05:39:56.000-08:00",
+ "1951-02-28 05:39:56.000-0800",
+ "1951-02-28 05:39:56-08",
+ "1951-02-28 05:39:56-08:00",
+ "1951-02-28 05:39:56-0800",
+ "1951-02-28T05:39:56,000-08",
+ "1951-02-28T05:39:56.000-08",
+ "1951-02-28T05:39:56,000-08:00",
+ "1951-02-28T05:39:56,000-0800",
+ "1951-02-28T05:39:56.000-08:00",
+ "1951-02-28T05:39:56.000-0800",
+ "1951-02-28T05:39:56-08",
+ "1951-02-28T05:39:56-08:00",
+ "1951-02-28T05:39:56-0800"]);
+[1614433196, 1614433196, 1614433196, 1614433196, 1614433196, 1614433196, 1614433196, 1614433196, 1614433196,
+ 1614433196, 1614433196, 1614433196, 1614433196, 1614433196, 1614433196, 1614433196, 1614433196, 1614433196];
+
+map (parse_timedate,
+["2029-11-03 15:29:53-00:00",
+ "2029-11-03 15:29:53-0000",
+ "2029-11-03 15:29:53-00",
+ "2029-11-03 15:29:53+00:00",
+ "2029-11-03 15:29:53+0000",
+ "2029-11-03 15:29:53+00",
+ "2029-11-03 15:29:53Z",
+ "2029-11-03T15:29:53-00:00",
+ "2029-11-03T15:29:53-0000",
+ "2029-11-03T15:29:53-00",
+ "2029-11-03T15:29:53+00:00",
+ "2029-11-03T15:29:53+0000",
+ "2029-11-03T15:29:53+00",
+ "2029-11-03T15:29:53Z"]);
+[4097402993, 4097402993, 4097402993, 4097402993, 4097402993, 4097402993, 4097402993,
+ 4097402993, 4097402993, 4097402993, 4097402993, 4097402993, 4097402993, 4097402993];
+
+map (parse_timedate,
+[
+ "1900-01-02 00:00:00+24:00",
+ "1900-01-01 23:00:00+23:00",
+ "1900-01-01 22:00:00+22:00",
+ "1900-01-01 21:00:00+21:00",
+ "1900-01-01 20:00:00+20:00",
+ "1900-01-01 19:00:00+19:00",
+ "1900-01-01 18:00:00+18:00",
+ "1900-01-01 17:00:00+17:00",
+ "1900-01-01 16:00:00+16:00",
+ "1900-01-01 15:00:00+15:00",
+ "1900-01-01 14:00:00+14:00",
+ "1900-01-01 13:00:00+13:00",
+ "1900-01-01 12:00:00+12:00",
+ "1900-01-01 11:00:00+11:00",
+ "1900-01-01 10:00:00+10:00",
+ "1900-01-01 09:00:00+09:00",
+ "1900-01-01 08:00:00+08:00",
+ "1900-01-01 07:00:00+07:00",
+ "1900-01-01 06:00:00+06:00",
+ "1900-01-01 05:00:00+05:00",
+ "1900-01-01 04:00:00+04:00",
+ "1900-01-01 03:00:00+03:00",
+ "1900-01-01 02:00:00+02:00",
+ "1900-01-01 01:00:00+01:00",
+ "1900-01-01 00:00:00+00:00",
+ "1900-01-01Z",
+ "1900-01-01 00:00:00-00:00",
+ "1899-12-31 23:00:00-01:00",
+ "1899-12-31 22:00:00-02:00",
+ "1899-12-31 21:00:00-03:00",
+ "1899-12-31 20:00:00-04:00",
+ "1899-12-31 19:00:00-05:00",
+ "1899-12-31 18:00:00-06:00",
+ "1899-12-31 17:00:00-07:00",
+ "1899-12-31 16:00:00-08:00",
+ "1899-12-31 15:00:00-09:00",
+ "1899-12-31 14:00:00-10:00",
+ "1899-12-31 13:00:00-11:00",
+ "1899-12-31 12:00:00-12:00",
+ "1899-12-31 11:00:00-13:00",
+ "1899-12-31 10:00:00-14:00",
+ "1899-12-31 09:00:00-15:00",
+ "1899-12-31 08:00:00-16:00",
+ "1899-12-31 07:00:00-17:00",
+ "1899-12-31 06:00:00-18:00",
+ "1899-12-31 05:00:00-19:00",
+ "1899-12-31 04:00:00-20:00",
+ "1899-12-31 03:00:00-21:00",
+ "1899-12-31 02:00:00-22:00",
+ "1899-12-31 01:00:00-23:00",
+ "1899-12-31 00:00:00-24:00"]);
+[0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+ 0, 0, 0];
+
+map (parse_timedate,
+["1995-08-15 11:01:48-12:00",
+ "1995-08-15 12:01:48-11:00",
+ "1995-08-15 13:01:48-10:00",
+ "1995-08-15 14:01:48-09:00",
+ "1995-08-15 15:01:48-08:00",
+ "1995-08-15 16:01:48-07:00",
+ "1995-08-15 17:01:48-06:00",
+ "1995-08-15 18:01:48-05:00",
+ "1995-08-15 19:01:48-04:00",
+ "1995-08-15 20:01:48-03:00",
+ "1995-08-15 21:01:48-02:00",
+ "1995-08-15 22:01:48-01:00",
+ "1995-08-15 23:01:48+00:00",
+ "1995-08-16 00:01:48+01:00",
+ "1995-08-16 01:01:48+02:00",
+ "1995-08-16 02:01:48+03:00",
+ "1995-08-16 03:01:48+04:00",
+ "1995-08-16 04:01:48+05:00",
+ "1995-08-16 05:01:48+06:00",
+ "1995-08-16 06:01:48+07:00",
+ "1995-08-16 07:01:48+08:00",
+ "1995-08-16 08:01:48+09:00",
+ "1995-08-16 09:01:48+10:00",
+ "1995-08-16 10:01:48+11:00",
+ "1995-08-16 11:01:48+12:00",
+ "1995-08-15 10:54:48-12:07",
+ "1995-08-15 11:54:48-11:07",
+ "1995-08-15 12:54:48-10:07",
+ "1995-08-15 13:54:48-09:07",
+ "1995-08-15 14:54:48-08:07",
+ "1995-08-15 15:54:48-07:07",
+ "1995-08-15 16:54:48-06:07",
+ "1995-08-15 17:54:48-05:07",
+ "1995-08-15 18:54:48-04:07",
+ "1995-08-15 19:54:48-03:07",
+ "1995-08-15 20:54:48-02:07",
+ "1995-08-15 21:54:48-01:07",
+ "1995-08-15 23:08:48+00:07",
+ "1995-08-16 00:08:48+01:07",
+ "1995-08-16 01:08:48+02:07",
+ "1995-08-16 02:08:48+03:07",
+ "1995-08-16 03:08:48+04:07",
+ "1995-08-16 04:08:48+05:07",
+ "1995-08-16 05:08:48+06:07",
+ "1995-08-16 06:08:48+07:07",
+ "1995-08-16 07:08:48+08:07",
+ "1995-08-16 08:08:48+09:07",
+ "1995-08-16 09:08:48+10:07",
+ "1995-08-16 10:08:48+11:07",
+ "1995-08-16 11:08:48+12:07"]);
+[3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508,
+ 3017516508, 3017516508, 3017516508, 3017516508, 3017516508];
+
+map (parse_timedate,
+["1937-01-08 19:23:57Z",
+ "1937-01-08 19:23:57.4Z",
+ "1937-01-08 19:23:57,4Z",
+ "1937-01-08 19:23:57.49Z",
+ "1937-01-08 19:23:57,49Z",
+ "1937-01-08 19:23:57.492Z",
+ "1937-01-08 19:23:57,492Z",
+ "1937-01-08 19:23:57.4927Z",
+ "1937-01-08 19:23:57,4927Z",
+ "1937-01-08 19:23:57.49275Z",
+ "1937-01-08 19:23:57,49275Z",
+ "1937-01-08 19:23:57.492756Z",
+ "1937-01-08 19:23:57,492756Z"]);
+''(1168284237 + [0, 4/10, 4/10, 49/100, 49/100, 492/1000, 492/1000,
+                 4927/10000, 4927/10000, 49275/100000, 49275/100000,
+                 492756/1000000, 492756/1000000]);
+
+map (parse_timedate,
+["2016-08-06 20:30:39-07:00", "1939-04-07 03:37:19-08:00",
+ "1905-12-14 08:56:45-08:00", "1904-07-09 13:46:49-08:00",
+ "1907-10-12 18:35:02-08:00", "2023-02-05 13:03:42-08:00",
+ "1971-12-28 15:31:52-08:00", "1929-06-05 17:51:35-08:00",
+ "1929-02-17 15:26:28-08:00", "1997-08-16 10:17:57-07:00"]);
+[3679529439, 1239017839, 187808205, 142638409, 245471702,
+ 3884619822, 2271799912, 928633895, 919293988, 3080740677];
+
+map (parse_timedate,
+["    2016-08-06 20:30:39-07:00    ", "     1939-04-07 03:37:19-08:00",
+ "1905-12-14 08:56:45-08:00     ", "                1904-07-09 13:46:49-08:00",
+ "
+1907-10-12 18:35:02-08:00", "2023-02-05 13:03:42-08:00
+",
+ "
+ 
+   1971-12-28 15:31:52-08:00", "
+
+1929-06-05 17:51:35-08:00
+
+",
+ "1929-02-17 15:26:28-08:00            ", "       1997-08-16 10:17:57-07:00       "]);
+[3679529439, 1239017839, 187808205, 142638409, 245471702,
+ 3884619822, 2271799912, 928633895, 919293988, 3080740677];
+
+map (parse_timedate,
+["2016-08-06 20:30:39 (America/Los_Angeles)",
+ "1939-04-07 03:37:19 (GMT-8)",
+ "1905-12-14 8:56:45",
+ "1904-7-1",
+ "1907-10-12 18:35:02-8:00",
+ "2023-02-05 13:03:42-08:0",
+ "1971-12-28 15:31:52:123",
+ "1929-06-05 7:51:35-08:00",
+ "1929-02-17 15:26:28 -08:00",
+ "1997-08-16 10.17.57",
+ "2015-01-12  01:02:03",
+ "1982-05-28 T18:17:16"]);
+[false, false, false, false, false,
+ false, false, false, false, false,
+ false, false];
+
+/* test cases adapted from similar examples for timedate/parse_timedate */
+
+decode_time (0, 0);
+[1900, 1, 1, 0, 0, 0, 0];
+
+/* output differs from similar timedate because decode_time doesn't round tz offset */
+decode_time (86400, -1927/225);
+[1900, 1, 1, 15, 26, 8, -1927/225];
+
+/* output differs from similar timedate because decode_time doesn't round tz offset */
+decode_time (86400, 1927/225);
+[1900, 1, 2, 8, 33, 52, 1927/225];
+
+decode_time (0, float (0));
+[1900, 1, 1, 0, 0, 0, 0];
+
+/* output differs from similar timedate because decode_time doesn't round tz offset */
+decode_time (86400, float (-1927/225));
+[1900, 1, 1, 15, 26, 8, -1927/225];
+
+/* output differs from similar timedate because decode_time doesn't round tz offset */
+decode_time (86400, float (1927/225));
+[1900, 1, 2, 8, 33, 52, 1927/225];
+
+encode_time (1951, 2, 28, 5, 39, 56, -8);
+1614433196;
+
+decode_time (1614433196, -8);
+[1951, 2, 28, 5, 39, 56, -8];
+
+encode_time (2029, 11, 3, 15, 29, 53, 0);
+4097402993;
+
+decode_time (4097402993, 0);
+[2029, 11, 3, 15, 29, 53, 0];
+
+map (lambda ([l], apply (encode_time, l)),
+[[1900, 1, 2, 0, 0, 0, +24],
+ [1900, 1, 1, 23, 0, 0, +23],
+ [1900, 1, 1, 22, 0, 0, +22],
+ [1900, 1, 1, 21, 0, 0, +21],
+ [1900, 1, 1, 20, 0, 0, +20],
+ [1900, 1, 1, 19, 0, 0, +19],
+ [1900, 1, 1, 18, 0, 0, +18],
+ [1900, 1, 1, 17, 0, 0, +17],
+ [1900, 1, 1, 16, 0, 0, +16],
+ [1900, 1, 1, 15, 0, 0, +15],
+ [1900, 1, 1, 14, 0, 0, +14],
+ [1900, 1, 1, 13, 0, 0, +13],
+ [1900, 1, 1, 12, 0, 0, +12],
+ [1900, 1, 1, 11, 0, 0, +11],
+ [1900, 1, 1, 10, 0, 0, +10],
+ [1900, 1, 1, 9, 0, 0, +09],
+ [1900, 1, 1, 8, 0, 0, +08],
+ [1900, 1, 1, 7, 0, 0, +07],
+ [1900, 1, 1, 6, 0, 0, +06],
+ [1900, 1, 1, 5, 0, 0, +05],
+ [1900, 1, 1, 4, 0, 0, +04],
+ [1900, 1, 1, 3, 0, 0, +03],
+ [1900, 1, 1, 2, 0, 0, +02],
+ [1900, 1, 1, 1, 0, 0, +01],
+ [1900, 1, 1, 0, 0, 0, +00],
+ [1900, 1, 1, 0, 0, 0, -00],
+ [1899, 12, 31, 23, 0, 0, -01],
+ [1899, 12, 31, 22, 0, 0, -02],
+ [1899, 12, 31, 21, 0, 0, -03],
+ [1899, 12, 31, 20, 0, 0, -04],
+ [1899, 12, 31, 19, 0, 0, -05],
+ [1899, 12, 31, 18, 0, 0, -06],
+ [1899, 12, 31, 17, 0, 0, -07],
+ [1899, 12, 31, 16, 0, 0, -08],
+ [1899, 12, 31, 15, 0, 0, -09],
+ [1899, 12, 31, 14, 0, 0, -10],
+ [1899, 12, 31, 13, 0, 0, -11],
+ [1899, 12, 31, 12, 0, 0, -12],
+ [1899, 12, 31, 11, 0, 0, -13],
+ [1899, 12, 31, 10, 0, 0, -14],
+ [1899, 12, 31, 9, 0, 0, -15],
+ [1899, 12, 31, 8, 0, 0, -16],
+ [1899, 12, 31, 7, 0, 0, -17],
+ [1899, 12, 31, 6, 0, 0, -18],
+ [1899, 12, 31, 5, 0, 0, -19],
+ [1899, 12, 31, 4, 0, 0, -20],
+ [1899, 12, 31, 3, 0, 0, -21],
+ [1899, 12, 31, 2, 0, 0, -22],
+ [1899, 12, 31, 1, 0, 0, -23],
+ [1899, 12, 31, 0, 0, 0, -24]]);
+[0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+ 0, 0];
+
+map (lambda ([tz], decode_time (0, tz)),
+     append (makelist (24 - h, h, 0, 24), makelist (-h, h, 0, 24)));
+[[1900, 1, 2, 0, 0, 0, +24],
+ [1900, 1, 1, 23, 0, 0, +23],
+ [1900, 1, 1, 22, 0, 0, +22],
+ [1900, 1, 1, 21, 0, 0, +21],
+ [1900, 1, 1, 20, 0, 0, +20],
+ [1900, 1, 1, 19, 0, 0, +19],
+ [1900, 1, 1, 18, 0, 0, +18],
+ [1900, 1, 1, 17, 0, 0, +17],
+ [1900, 1, 1, 16, 0, 0, +16],
+ [1900, 1, 1, 15, 0, 0, +15],
+ [1900, 1, 1, 14, 0, 0, +14],
+ [1900, 1, 1, 13, 0, 0, +13],
+ [1900, 1, 1, 12, 0, 0, +12],
+ [1900, 1, 1, 11, 0, 0, +11],
+ [1900, 1, 1, 10, 0, 0, +10],
+ [1900, 1, 1, 9, 0, 0, +09],
+ [1900, 1, 1, 8, 0, 0, +08],
+ [1900, 1, 1, 7, 0, 0, +07],
+ [1900, 1, 1, 6, 0, 0, +06],
+ [1900, 1, 1, 5, 0, 0, +05],
+ [1900, 1, 1, 4, 0, 0, +04],
+ [1900, 1, 1, 3, 0, 0, +03],
+ [1900, 1, 1, 2, 0, 0, +02],
+ [1900, 1, 1, 1, 0, 0, +01],
+ [1900, 1, 1, 0, 0, 0, +00],
+ [1900, 1, 1, 0, 0, 0, -00],
+ [1899, 12, 31, 23, 0, 0, -01],
+ [1899, 12, 31, 22, 0, 0, -02],
+ [1899, 12, 31, 21, 0, 0, -03],
+ [1899, 12, 31, 20, 0, 0, -04],
+ [1899, 12, 31, 19, 0, 0, -05],
+ [1899, 12, 31, 18, 0, 0, -06],
+ [1899, 12, 31, 17, 0, 0, -07],
+ [1899, 12, 31, 16, 0, 0, -08],
+ [1899, 12, 31, 15, 0, 0, -09],
+ [1899, 12, 31, 14, 0, 0, -10],
+ [1899, 12, 31, 13, 0, 0, -11],
+ [1899, 12, 31, 12, 0, 0, -12],
+ [1899, 12, 31, 11, 0, 0, -13],
+ [1899, 12, 31, 10, 0, 0, -14],
+ [1899, 12, 31, 9, 0, 0, -15],
+ [1899, 12, 31, 8, 0, 0, -16],
+ [1899, 12, 31, 7, 0, 0, -17],
+ [1899, 12, 31, 6, 0, 0, -18],
+ [1899, 12, 31, 5, 0, 0, -19],
+ [1899, 12, 31, 4, 0, 0, -20],
+ [1899, 12, 31, 3, 0, 0, -21],
+ [1899, 12, 31, 2, 0, 0, -22],
+ [1899, 12, 31, 1, 0, 0, -23],
+ [1899, 12, 31, 0, 0, 0, -24]];
+
+map (lambda ([tz], decode_time (3017516508, tz)), makelist (h, h, -12, 12));
+[[1995, 8, 15, 11, 1, 48, -12],
+ [1995, 8, 15, 12, 1, 48, -11],
+ [1995, 8, 15, 13, 1, 48, -10],
+ [1995, 8, 15, 14, 1, 48, -09],
+ [1995, 8, 15, 15, 1, 48, -08],
+ [1995, 8, 15, 16, 1, 48, -07],
+ [1995, 8, 15, 17, 1, 48, -06],
+ [1995, 8, 15, 18, 1, 48, -05],
+ [1995, 8, 15, 19, 1, 48, -04],
+ [1995, 8, 15, 20, 1, 48, -03],
+ [1995, 8, 15, 21, 1, 48, -02],
+ [1995, 8, 15, 22, 1, 48, -01],
+ [1995, 8, 15, 23, 1, 48, +00],
+ [1995, 8, 16, 0, 1, 48, +01],
+ [1995, 8, 16, 1, 1, 48, +02],
+ [1995, 8, 16, 2, 1, 48, +03],
+ [1995, 8, 16, 3, 1, 48, +04],
+ [1995, 8, 16, 4, 1, 48, +05],
+ [1995, 8, 16, 5, 1, 48, +06],
+ [1995, 8, 16, 6, 1, 48, +07],
+ [1995, 8, 16, 7, 1, 48, +08],
+ [1995, 8, 16, 8, 1, 48, +09],
+ [1995, 8, 16, 9, 1, 48, +10],
+ [1995, 8, 16, 10, 1, 48, +11],
+ [1995, 8, 16, 11, 1, 48, +12]];
+
+map (lambda ([tz], decode_time (3017516508, tz)),
+     append (makelist (-(12 - h + 7/60), h, 0, 11),
+             makelist (+(h + 7/60), h, 0, 12)));
+[[1995, 8, 15, 10, 54, 48, -12 - 7/60],
+ [1995, 8, 15, 11, 54, 48, -11 - 7/60],
+ [1995, 8, 15, 12, 54, 48, -10 - 7/60],
+ [1995, 8, 15, 13, 54, 48, -09 - 7/60],
+ [1995, 8, 15, 14, 54, 48, -08 - 7/60],
+ [1995, 8, 15, 15, 54, 48, -07 - 7/60],
+ [1995, 8, 15, 16, 54, 48, -06 - 7/60],
+ [1995, 8, 15, 17, 54, 48, -05 - 7/60],
+ [1995, 8, 15, 18, 54, 48, -04 - 7/60],
+ [1995, 8, 15, 19, 54, 48, -03 - 7/60],
+ [1995, 8, 15, 20, 54, 48, -02 - 7/60],
+ [1995, 8, 15, 21, 54, 48, -01 - 7/60],
+ [1995, 8, 15, 23, 8, 48, +00 + 7/60],
+ [1995, 8, 16, 0, 8, 48, +01 + 7/60],
+ [1995, 8, 16, 1, 8, 48, +02 + 7/60],
+ [1995, 8, 16, 2, 8, 48, +03 + 7/60],
+ [1995, 8, 16, 3, 8, 48, +04 + 7/60],
+ [1995, 8, 16, 4, 8, 48, +05 + 7/60],
+ [1995, 8, 16, 5, 8, 48, +06 + 7/60],
+ [1995, 8, 16, 6, 8, 48, +07 + 7/60],
+ [1995, 8, 16, 7, 8, 48, +08 + 7/60],
+ [1995, 8, 16, 8, 8, 48, +09 + 7/60],
+ [1995, 8, 16, 9, 8, 48, +10 + 7/60],
+ [1995, 8, 16, 10, 8, 48, +11 + 7/60],
+ [1995, 8, 16, 11, 8, 48, +12 + 7/60]];
+
+map (lambda ([l], apply (encode_time, l)),
+[[2016, 8, 6, 20, 30, 39, -7], [1939, 4, 7, 3, 37, 19, -8],
+ [1905, 12, 14, 8, 56, 45, -8], [1904, 7, 9, 13, 46, 49, -8],
+ [1907, 10, 12, 18, 35, 2, -8], [2023, 2, 5, 13, 3, 42, -8],
+ [1971, 12, 28, 15, 31, 52, -8], [1929, 6, 5, 17, 51, 35, -8],
+ [1929, 2, 17, 15, 26, 28, -8], [1997, 8, 16, 10, 17, 57, -7]]);
+[3679529439, 1239017839, 187808205, 142638409, 245471702,
+ 3884619822, 2271799912, 928633895, 919293988, 3080740677];
+
+map (lambda ([l], apply (decode_time, l)),
+[[3679529439, -7], [1239017839, -8], [187808205, -8], [142638409, -8], [245471702, -8],
+ [3884619822, -8], [2271799912, -8], [928633895, -8], [919293988, -8], [3080740677, -7]]);
+[[2016, 8, 6, 20, 30, 39, -7], [1939, 4, 7, 3, 37, 19, -8],
+ [1905, 12, 14, 8, 56, 45, -8], [1904, 7, 9, 13, 46, 49, -8],
+ [1907, 10, 12, 18, 35, 2, -8], [2023, 2, 5, 13, 3, 42, -8],
+ [1971, 12, 28, 15, 31, 52, -8], [1929, 6, 5, 17, 51, 35, -8],
+ [1929, 2, 17, 15, 26, 28, -8], [1997, 8, 16, 10, 17, 57, -7]];
+
+/* encode_time and decode_time should be inverses, for a given timezone offset. */
+
+(unix_epoch_seconds : parse_timedate ("1970-01-01 00:00:00+00:00"),
+ encode_decode_test_with_tz_offset () :=
+   block ([t, m, t_decoded, t_decoded_encoded, tz_offset],
+     t : random (2^32 + unix_epoch_seconds),
+     m : random (3),
+     tz_offset : random (48*60^m) / 60^m - 24,
+     t_decoded : decode_time (t, tz_offset),
+     t_decoded_encoded : apply (encode_time, t_decoded),
+     if t_decoded_encoded = t
+       then true
+       else ('apply (encode_time, 'decode_time (t, tz_offset)) = t_decoded_encoded) # t),
+  sublist (makelist (encode_decode_test_with_tz_offset (), 200), lambda ([e], e # true)));
+[];
+
+(encode_decode_test_with_tz_default () :=
+   block ([t, t_decoded, t_decoded_encoded],
+     t : random (2^32 + unix_epoch_seconds),
+     t_decoded : decode_time (t),
+     t_decoded_encoded : apply (encode_time, t_decoded),
+     if t_decoded_encoded = t
+       then true
+       else ('apply (encode_time, 'decode_time (t)) = t_decoded_encoded) # t),
+  sublist (makelist (encode_decode_test_with_tz_default (), 200), lambda ([e], e # true)));
+[];
+
+(decode_encode_test_with_tz_offset () :=
+   block ([m, args_mins, args_maxs, args_scale, n, tz_offset, a, a_encoded, a_encoded_decoded],
+     m : random (3),
+     args_mins : [1901, 1,  1,  0,  0,  0],
+     args_maxs : [ 200,12, 28, 24, 60, 60*10^m],
+     args_scale: [   1, 1,  1,  1,  1, 10^m],
+     n : 1 + random (6),
+     tz_offset : random (48*60^m) / 60^m - 24,
+     a : append (makelist (args_mins[i] + random (args_maxs[i])/args_scale[i], i, 1, n),
+                 makelist (args_mins[i], i, n + 1, 6),
+                 [tz_offset]),
+     a_encoded : apply (encode_time, a),
+     a_encoded_decoded : decode_time (a_encoded, tz_offset),
+     if a_encoded_decoded = a
+        then true
+        else ('decode_time (funmake (encode_time, a), tz_offset) = a_encoded_decoded) # a),
+  sublist (makelist (decode_encode_test_with_tz_offset (), 200), lambda ([e], e # true)));
+[];
+
+(decode_encode_test_with_tz_default () :=
+   block ([m, args_mins, args_maxs, args_scale, n, a, a_encoded, a_encoded_decoded],
+     m : random (3),
+     args_mins : [1901, 1,  1,  0,  0,  0],
+     args_maxs : [ 200,12, 28, 24, 60, 60*10^m],
+     args_scale: [   1, 1,  1,  1,  1, 10^m],
+     n : 1 + random (6),
+     a : append (makelist (args_mins[i] + random (args_maxs[i])/args_scale[i], i, 1, n),
+                 makelist (args_mins[i], i, n + 1, 6)),
+     a_encoded : apply (encode_time, a),
+     a_encoded_decoded : decode_time (a_encoded),
+     if firstn (a_encoded_decoded, 6) = a
+        then true
+        else ('decode_time (funmake (encode_time, a)) = a_encoded_decoded) # a),
+  sublist (makelist (decode_encode_test_with_tz_default (), 200), lambda ([e], e # true)));
+[];
+
+/* Do the right thing when listarray and arrayinfo are called within
+ * a function and the name of the formal argument coincides with the
+ * name of the actual argument. (Was a bug in ARRAYINFO-AUX.)
+ */
+
+(foo(x) := apply (arrayinfo, [x]),
+ bar(x) := listarray (x),
+ kill (x),
+ x[1] : 1234,
+ foo(x));
+[hashed, 1, [1]];
+
+bar(x);
+[1234];
+
+(kill(y),
+ y[2] : 2345,
+ foo(y));
+[hashed, 1, [2]];
+
+bar(y);
+[2345];
+
+/* constant declaration -- bug reported to mailing list 2009-05-02 */
+
+(kill (aa, xx, yy, zz), sort (listofvars (xx + yy * zz)));
+[xx, yy, zz];
+
+(aa : newcontext (), declare (zz, constant));
+done;
+
+facts (aa);
+[kind (zz, constant)];
+
+[featurep (xx, constant), featurep (yy, constant), featurep (zz, constant)];
+[false, false, true];
+
+constantp (zz);
+true;
+
+sort (listofvars (xx + yy * zz));
+[xx, yy];
+
+constantp (sin(xx)/exp(yy) + %pi^zz);
+false;
+
+declare ([xx, yy], constant);
+done;
+
+sort (facts (aa));
+[kind (xx, constant), kind (yy, constant), kind (zz, constant)];
+
+[featurep (xx, constant), featurep (yy, constant), featurep (zz, constant)];
+[true, true, true];
+
+constantp (sin(xx)/exp(yy) + %pi^zz);
+true;
+
+kill (zz);
+done;
+
+sort (facts (aa));
+[kind (xx, constant), kind (yy, constant)];
+
+[featurep (xx, constant), featurep (yy, constant), featurep (zz, constant)];
+[true, true, false];
+
+constantp (zz);
+false;
+
+listofvars (xx + yy * zz);
+[zz];
+
+constantp (sin(xx)/exp(yy));
+true;
+
+constantp (sin(xx)/exp(yy) + %pi^zz);
+false;
+
+kill (xx, yy);
+done;
+
+facts (aa);
+[];
+
+[constantp (xx), constantp (yy), constantp (zz), constantp (xx + yy + zz)];
+[false, false, false, false];
+
+sort (listofvars (xx + yy * zz));
+[xx, yy, zz];
+
+killcontext (aa);
+done;
+
+/* tellsimp interaction with rassociative declaration
+ * from the mailing list circa 2011-03-25
+ */
+
+(kill (zand, zor, a, b, c), declare (zand, rassociative));
+done;
+
+zand (a, zand (b, c));
+zand (a, zand (b, c));
+
+zand (zand (a, b), c);
+zand (a, zand (b, c));
+
+(matchdeclare ([var1, var2, var3], all),
+ tellsimp (zand (zor (var1, var2), var3), zor (zand (var1, var3), zand (var2, var3))),
+ tellsimp (zand (var1, zor (var2, var3)), zor (zand (var1, var2), zand (var1, var3))),
+ 0);
+0;
+
+zand (zor (a, b), c);
+zor (zand (a, c), zand (b, c));
+
+zand (a, zor (b, c));
+zor (zand (a, b), zand (a, c));
+
+zand (a, zand (b, c));
+zand (a, zand (b, c));
+
+zand (zand (a, b), c);
+zand (a, zand (b, c));
+
+/* try it w/ lassociative as well */
+
+(remove (zand, rassociative), declare (zand, lassociative));
+done;
+
+zand (zand (a, b), c);
+zand (zand (a, b), c);
+
+zand (a, zand (b, c));
+zand (zand (a, b), c);
+
+zand (zor (a, b), c);
+zor (zand (a, c), zand (b, c));
+
+zand (a, zor (b, c));
+zor (zand (a, b), zand (a, c));
+
+/* another lassociative/rassociative bug, tickled by rule which returns an atom
+ * reported to mailing list 2015-03-16: "Requesting advice on simplification rules for user-defined operators"
+ */
+
+kill (a, b, c, d, e, f, z);
+done;
+
+(kill ("wedge"),
+ nary ("wedge"),
+ declare ("wedge", [commutative, lassociative]),
+ matchdeclare (var, true),
+ 0);
+0;
+
+(tellsimpafter (0 wedge var, 0),
+ 0);
+0;
+
+ev (a wedge (b wedge (c wedge (0 wedge d))) wedge (e wedge f), infeval);
+0;
+
+(kill ("wedge"),
+ nary ("wedge"),
+ declare ("wedge", [commutative, rassociative]),
+ matchdeclare (var, true),
+ 0);
+0;
+
+(tellsimpafter (var wedge z, z),
+ 0);
+0;
+
+ev (a wedge (b wedge (c wedge (z wedge d))) wedge (e wedge f), infeval);
+z;
+
+/* Bug #2876: Error simplifying infix operators declared l/rassociative */
+
+(infix ("++"), 0);
+0;
+
+a ++ b ++ c ++ d;
+((a ++ b) ++ c) ++ d;
+
+/* Here, ++ is an infix operator with no associativity declared.
+ * Applying ++ to less than two args or more than two args is
+ * an error.
+ */
+errcatch ("++" ());
+[];
+
+errcatch ("++" (a, b, c, d));
+[];
+
+(declare ("++", lassociative), 0);
+0;
+
+a ++ b ++ c ++ d;
+((a ++ b) ++ c) ++ d;
+
+/* Here, ++ is an infix operator that's declared lassociative.
+ * Applying ++ to less than two args or more than two args is
+ * not an error.
+ */
+"++" ();
+"++" ();
+
+"++" (a, b, c, d);
+((a ++ b) ++ c) ++ d;
+
+(remove ("++", lassociative),
+ declare ("++", rassociative),
+ 0);
+0;
+
+a ++ b ++ c ++ d;
+a ++ (b ++ (c ++ d));
+
+/* Here, ++ is an infix operator that's declared rassociative.
+ * Applying ++ to less than two args or more than two args is
+ * not an error.
+ */
+"++" ();
+"++" ();
+
+"++" (a, b, c, d);
+a ++ (b ++ (c ++ d));
+
+(kill ("++"), 0);
+0;
+
+/* some tests for partition */
+
+(kill (foo, u, e1, e2, e3),
+ e1 : 'at ('diff (foo (u), u), u = 0),
+ e2 : 'integrate (foo (u), u, 0, 1),
+ e3 : 'sum (foo (u), u, 1, n),
+ [freeof (u, e1), freeof (u, e2), freeof (u, e3)]);
+[true, true, true];
+
+partition (e1 * sin (u), u);
+[''e1, sin (u)];
+
+partition (e2 * sin (u), u);
+[''e2, sin (u)];
+
+partition (e3 * sin (u), u);
+[''e3, sin (u)];
+
+integrate (e1 * cos (u), u);
+sin (u) * ''e1;
+
+integrate (e1 * cos (u), u, 1, 2);
+(sin (2) - sin (1)) * ''e1;
+
+integrate (e2 * cos (u), u);
+sin (u) * ''e2;
+
+integrate (e2 * cos (u), u, 1, 2);
+(sin (2) - sin (1)) * ''e2;
+
+integrate (e3 * cos (u), u);
+sin (u) * ''e3;
+
+integrate (e3 * cos (u), u, 1, 2);
+(sin (2) - sin (1)) * ''e3;
+
+diff (e1 * sin (u), u);
+''e1 * cos (u);
+
+diff (e2 * sin (u), u);
+''e2 * cos (u);
+
+diff (e3 * sin (u), u);
+''e3 * cos (u);
+
+(reset(use_fast_arrays),1);
+1;
+
+/* ensure that remove(..., rule) works OK when applied to a string */
+
+remove ("ierieidkkcmxc", rule);
+done;

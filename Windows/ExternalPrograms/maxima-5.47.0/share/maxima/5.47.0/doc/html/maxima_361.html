@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Package ineq</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Package ineq">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Package ineq">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_356.html#simplification_002dpkg" rel="up" title="simplification-pkg">
+<link href="maxima_362.html#Package-rducon" rel="next" title="Package rducon">
+<link href="maxima_360.html#Package-functs" rel="previous" title="Package functs">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Package-ineq"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_362.html#Package-rducon" accesskey="n" rel="next">Package rducon</a>, Previous: <a href="maxima_360.html#Package-functs" accesskey="p" rel="previous">Package functs</a>, Up: <a href="maxima_356.html#simplification_002dpkg" accesskey="u" rel="up">simplification-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Package-ineq-1"></a>
+<h3 class="section">87.5 Package ineq</h3>
+
+<p>The <code>ineq</code> package contains simplification rules
+for inequalities.
+</p>
+<p>Example session:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;ineq&quot;)$
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+tellsimp: warning: rule will treat '+
+                          ' as noncommutative and nonassociative.
+</pre><pre class="example">(%i2) a&gt;=4;  /* a sample inequality */
+(%o2)                        a &gt;= 4
+(%o3)                     b + a &gt; c + 4
+(%o4)                       7 x &lt; 7 y
+(%o5)                    - 2 x &lt;= - 6 z
+                                 2
+(%o6)                      1 &lt;= a  + 1
+(%o8)                       2 x &lt; 3 x
+(%o9)                        a &gt;= b
+(%o10)                   a + 3 &gt;= b + 3
+(%o11)                       a &gt;= b
+(%o12)                     a &gt;= c - b
+(%o13)                     b + a &gt;= c
+(%o14)                 (- c) + b + a &gt;= 0
+(%o15)                   c - b - a &lt;= 0
+                               2
+(%o16)                  (z - 1)  &gt; - 2 z
+                            2
+(%o17)                     z  + 1 &gt; 0
+(%o18)                        true
+</pre><pre class="example">(%i19) (b&gt;c)+%; /* add a second, strict inequality */
+</pre></div>
+
+<p>Be careful about using parentheses
+around the inequalities: when the user types in <code>(A &gt; B) + (C = 5)</code> the
+result is <code>A + C &gt; B + 5</code>, but <code>A &gt; B + C = 5</code> is a syntax error,
+and <code>(A &gt; B + C) = 5</code> is something else entirely.
+</p>
+<p>Do <code>disprule (all)</code> to see a complete listing
+of the rule definitions.
+</p>
+<p>The user will be queried if Maxima is
+unable to decide the sign of a quantity multiplying an inequality.
+</p>
+<p>The most common mis-feature is illustrated by:
+</p>
+<div class="example">
+<pre class="example">(%i1) eq: a &gt; b;
+(%o1)                         a &gt; b
+</pre><pre class="example">(%i2) 2*eq;
+(%o2)                       2 (a &gt; b)
+</pre><pre class="example">(%i3) % - eq;
+(%o3)                         a &gt; b
+</pre></div>
+
+<p>Another problem is 0 times an inequality; the default to have this
+turn into 0 has been left alone. However, if you type 
+<code>X*<var>some_inequality</var></code> and Maxima asks about the sign of <code>X</code> and you
+respond <code>zero</code> (or <code>z</code>), the program returns <code>X*<var>some_inequality</var></code>
+and not use the information that <code>X</code> is 0. You should do <code>ev (%, x: 0)</code> in such
+a case, as the database will only be used for comparison purposes
+in decisions, and not for the purpose of evaluating <code>X</code>.
+</p>
+<p>The user may note a slower response when this package is loaded, as
+the simplifier is forced to examine more rules than without the
+package, so you might wish to remove the rules after making use of
+them. Do <code>kill (rules)</code> to eliminate all of the rules (including any
+that you might have defined); or you may be more selective by
+killing only some of them; or use <code>remrule</code> on a specific rule.
+</p>
+<p>Note that if you load this package after defining your own
+rules you will clobber your rules that have the same name. The
+rules in this package are:
+<code>*rule1</code>, ..., <code>*rule8</code>,
+<code>+rule1</code>, ..., <code>+rule18</code>,
+and you must enclose the rulename in quotes to refer to it, as
+in <code>remrule (&quot;+&quot;, &quot;+rule1&quot;)</code> to specifically remove the first rule on <code>&quot;+&quot;</code>
+or <code>disprule (&quot;*rule2&quot;)</code> to display the definition of the second multiplicative rule.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;<a href="maxima_424.html#Category_003a-Rules-and-patterns">Rules and patterns</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-ineq">Package ineq</a>
+&middot;</div>
+
+
+<a name="Item_003a-simplifications_002fnode_002fPackage-rducon"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_362.html#Package-rducon" accesskey="n" rel="next">Package rducon</a>, Previous: <a href="maxima_360.html#Package-functs" accesskey="p" rel="previous">Package functs</a>, Up: <a href="maxima_356.html#simplification_002dpkg" accesskey="u" rel="up">simplification-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Debugging</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Debugging">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Debugging">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_176.html#Debugging" rel="up" title="Debugging">
+<link href="maxima_180.html#alt_002ddisplay_002dpkg" rel="next" title="alt-display-pkg">
+<link href="maxima_178.html#Keyword-Commands" rel="previous" title="Keyword Commands">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Debugging"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_178.html#Keyword-Commands" accesskey="p" rel="previous">Keyword Commands</a>, Up: <a href="maxima_176.html#Debugging" accesskey="u" rel="up">Debugging</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Debugging-1"></a>
+<h3 class="section">38.3 Functions and Variables for Debugging</h3>
+
+<a name="debugmode"></a><a name="Item_003a-Debugging_002fdefvr_002fdebugmode"></a><dl>
+<dt><a name="index-debugmode"></a>Option variable: <strong>debugmode</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>debugmode</code> is <code>true</code>, Maxima will start the Maxima debugger
+when a Maxima error occurs.  At this point the user may enter commands to
+examine the call stack, set breakpoints, step through Maxima code, and so on.
+See <code>debugging</code> for a list of Maxima debugger commands.
+</p>
+<p>When <code>debugmode</code> is <code>lisp</code>, Maxima will start the Lisp debugger
+when a Maxima error occurs.
+</p>
+<p>In either case, enabling <code>debugmode</code> will not catch Lisp errors.
+</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-flags">Global flags</a>
+&middot;</div></dd></dl>
+
+<a name="refcheck"></a><a name="Item_003a-Debugging_002fdefvr_002frefcheck"></a><dl>
+<dt><a name="index-refcheck"></a>Option variable: <strong>refcheck</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>refcheck</code> is <code>true</code>, Maxima prints a message
+each time a bound variable is used for the first time in a
+computation.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Evaluation">Evaluation</a>
+&middot;<a href="maxima_424.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-flags">Global flags</a>
+&middot;</div></dd></dl>
+
+<a name="setcheck"></a><a name="Item_003a-Debugging_002fdefvr_002fsetcheck"></a><dl>
+<dt><a name="index-setcheck"></a>Option variable: <strong>setcheck</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>If <code>setcheck</code> is set to a list of variables (which can
+be subscripted), 
+Maxima prints a message whenever the variables, or
+subscripted occurrences of them, are bound with the
+ordinary assignment operator <code>:</code>, the <code>::</code> assignment
+operator, or function argument binding,
+but not the function assignment <code>:=</code> nor the macro assignment
+<code>::=</code> operators.
+The message comprises the name of the variable and the
+value it is bound to.
+</p>
+<p><code>setcheck</code> may be set to <code>all</code> or <code>true</code> thereby
+including all variables.
+</p>
+<p>Each new assignment of <code>setcheck</code> establishes a new list of variables to
+check, and any variables previously assigned to <code>setcheck</code> are forgotten.
+</p>
+<p>The names assigned to <code>setcheck</code> must be quoted if they would otherwise
+evaluate to something other than themselves.
+For example, if <code>x</code>, <code>y</code>, and <code>z</code> are already bound, then enter
+</p>
+<div class="example">
+<pre class="example">setcheck: ['x, 'y, 'z]$
+</pre></div>
+
+<p>to put them on the list of variables to check.
+</p>
+<p>No printout is generated when a
+variable on the <code>setcheck</code> list is assigned to itself, e.g., <code>X: 'X</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-flags">Global flags</a>
+&middot;</div></dd></dl>
+
+<a name="setcheckbreak"></a><a name="Item_003a-Debugging_002fdefvr_002fsetcheckbreak"></a><dl>
+<dt><a name="index-setcheckbreak"></a>Option variable: <strong>setcheckbreak</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>setcheckbreak</code> is <code>true</code>,
+Maxima will present a break prompt 
+whenever a variable on the <code>setcheck</code> list is assigned a new value.
+The break occurs before the assignment is carried out.
+At this point, <code>setval</code> holds the value to which the variable is 
+about to be assigned.
+Hence, one may assign a different value by assigning to <code>setval</code>.
+</p>
+<p>See also <code><a href="#setcheck">setcheck</a></code> and <code><a href="#setval">setval</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-flags">Global flags</a>
+&middot;</div></dd></dl>
+
+<a name="setval"></a><a name="Item_003a-Debugging_002fdefvr_002fsetval"></a><dl>
+<dt><a name="index-setval"></a>System variable: <strong>setval</strong></dt>
+<dd>
+<p>Holds the value to which a variable is about to be set when
+a <code><a href="#setcheckbreak">setcheckbreak</a></code> occurs.
+Hence, one may assign a different value by assigning to <code><a href="#setval">setval</a></code>.
+</p>
+<p>See also <code><a href="#setcheck">setcheck</a></code> and <code><a href="#setcheckbreak">setcheckbreak</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-variables">Global variables</a>
+&middot;</div></dd></dl>
+
+<a name="timer"></a><a name="Item_003a-Debugging_002fdeffn_002ftimer"></a><dl>
+<dt><a name="index-timer"></a>Function: <strong>timer</strong> <em>(<var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>timer</tt> (all) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>timer</tt> ()</em></dt>
+<dd>
+<p>Given functions <var>f_1</var>, &hellip;, <var>f_n</var>, <code>timer</code> puts each one on the
+list of functions for which timing statistics are collected.
+<code>timer(f)$ timer(g)$</code> puts <code>f</code> and then <code>g</code> onto the list;
+the list accumulates from one call to the next.
+</p>
+<p><code>timer(all)</code> puts all user-defined functions (as named by the global
+variable <code>functions</code>) on the list of timed functions.
+</p>
+<p>With no arguments,  <code>timer</code> returns the list of timed functions.
+</p>
+<p>Maxima records how much time is spent executing each function
+on the list of timed functions.
+<code>timer_info</code> returns the timing statistics, including the
+average time elapsed per function call, the number of calls, and the
+total time elapsed.
+<code>untimer</code> removes functions from the list of timed functions.
+</p>
+<p><code>timer</code> quotes its arguments.
+<code>f(x) := x^2$ g:f$ timer(g)$</code> does not put <code>f</code> on the timer list.
+</p>
+<p>If <code>trace(f)</code> is in effect, then <code>timer(f)</code> has no effect;
+<code>trace</code> and <code>timer</code> cannot both be in effect at the same time.
+</p>
+<p>See also <code><a href="#timer_005fdevalue">timer_devalue</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+<a name="untimer"></a><a name="Item_003a-Debugging_002fdeffn_002funtimer"></a><dl>
+<dt><a name="index-untimer"></a>Function: <strong>untimer</strong> <em>(<var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>untimer</tt> ()</em></dt>
+<dd>
+<p>Given functions <var>f_1</var>, &hellip;, <var>f_n</var>,
+<code>untimer</code> removes each function from the timer list.
+</p>
+<p>With no arguments, <code>untimer</code> removes all functions currently on the timer
+list.
+</p>
+<p>After <code>untimer (f)</code> is executed, <code>timer_info (f)</code> still returns
+previously collected timing statistics,
+although <code>timer_info()</code> (with no arguments) does not
+return information about any function not currently on the timer list.
+<code>timer (f)</code> resets all timing statistics to zero
+and puts <code>f</code> on the timer list again.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+<a name="timer_005fdevalue"></a><a name="Item_003a-Debugging_002fdefvr_002ftimer_005fdevalue"></a><dl>
+<dt><a name="index-timer_005fdevalue"></a>Option variable: <strong>timer_devalue</strong></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>timer_devalue</code> is <code>true</code>, Maxima subtracts from each timed
+function the time spent in other timed functions.  Otherwise, the time reported
+for each function includes the time spent in other functions.
+Note that time spent in untimed functions is not subtracted from the
+total time.
+</p>
+<p>See also <code><a href="#timer">timer</a></code> and <code><a href="#timer_005finfo">timer_info</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;<a href="maxima_424.html#Category_003a-Global-flags">Global flags</a>
+&middot;</div></dd></dl>
+
+<a name="timer_005finfo"></a><a name="Item_003a-Debugging_002fdeffn_002ftimer_005finfo"></a><dl>
+<dt><a name="index-timer_005finfo"></a>Function: <strong>timer_info</strong> <em>(<var>f_1</var>, ..., <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>timer_info</tt> ()</em></dt>
+<dd>
+<p>Given functions <var>f_1</var>, ..., <var>f_n</var>, <code>timer_info</code> returns a matrix
+containing timing information for each function.
+With no arguments, <code>timer_info</code> returns timing information for
+all functions currently on the timer list.
+</p>
+<p>The matrix returned by <code>timer_info</code> contains the function name,
+time per function call, number of function calls, total time,
+and <code>gctime</code>, which meant &quot;garbage collection time&quot; in the original Macsyma
+but is now always zero.
+</p>
+<p>The data from which <code>timer_info</code> constructs its return value
+can also be obtained by the <code>get</code> function:
+</p>
+<div class="example">
+<pre class="example">get(f, 'calls);  get(f, 'runtime);  get(f, 'gctime);
+</pre></div>
+
+<p>See also <code><a href="#timer">timer</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+<a name="trace"></a><a name="Item_003a-Debugging_002fdeffn_002ftrace"></a><dl>
+<dt><a name="index-trace"></a>Function: <strong>trace</strong> <em>(<var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>trace</tt> (all) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>trace</tt> ()</em></dt>
+<dd>
+<p>Given functions <var>f_1</var>, &hellip;, <var>f_n</var>, <code>trace</code> instructs Maxima to
+print out debugging information whenever those functions are called.
+<code>trace(f)$ trace(g)$</code> puts <code>f</code> and then <code>g</code> onto the list of
+functions to be traced; the list accumulates from one call to the next.
+</p>
+<p><code>trace(all)</code> puts all user-defined functions (as named by the global
+variable <code>functions</code>) on the list of functions to be traced.
+</p>
+<p>With no arguments,
+<code>trace</code> returns a list of all the functions currently being traced.
+</p>
+<p>The <code>untrace</code> function disables tracing.
+See also <code><a href="#trace_005foptions">trace_options</a></code>.
+</p>
+<p><code>trace</code> quotes its arguments.  Thus,
+<code>f(x) := x^2$ g:f$ trace(g)$</code> does not put <code>f</code> on the trace list.
+</p>
+<p>When a function is redefined, it is removed from the timer list.
+Thus after <code>timer(f)$ f(x) := x^2$</code>,
+function <code>f</code> is no longer on the timer list.
+</p>
+<p>If <code>timer (f)</code> is in effect, then <code>trace (f)</code> has no effect;
+<code>trace</code> and <code>timer</code> can&rsquo;t both be in effect for the same function.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+<a name="trace_005foptions"></a><a name="Item_003a-Debugging_002fdeffn_002ftrace_005foptions"></a><dl>
+<dt><a name="index-trace_005foptions"></a>Function: <strong>trace_options</strong> <em>(<var>f</var>, <var>option_1</var>, &hellip;, <var>option_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>trace_options</tt> (<var>f</var>)</em></dt>
+<dd>
+<p>Sets the trace options for function <var>f</var>.
+Any previous options are superseded.
+<code>trace_options (<var>f</var>, ...)</code> has no effect unless <code>trace (<var>f</var>)</code>
+is also called (either before or after <code>trace_options</code>).
+</p>
+<p><code>trace_options (<var>f</var>)</code> resets all options to their default values.
+</p>
+<p>The option keywords are:
+</p>
+<ul>
+<li> <code>noprint</code>
+Do not print a message at function entry and exit.
+</li><li> <code>break</code>
+Put a breakpoint before the function is entered,
+and after the function is exited.  See <code>break</code>.
+</li><li> <code>lisp_print</code>
+Display arguments and return values as Lisp objects.
+</li><li> <code>info</code>
+Print <code>-&gt; true</code> at function entry and exit.
+</li><li> <code>errorcatch</code>
+Catch errors, giving the option to signal an error,
+retry the function call, or specify a return value.
+</li></ul>
+
+<p>Trace options are specified in two forms.  The presence of the option 
+keyword alone puts the option into effect unconditionally.
+(Note that option <var>foo</var> is not put into effect by specifying 
+<code><var>foo</var>: true</code> or a similar form; note also that keywords need not
+be quoted.) Specifying the option keyword with a predicate
+function makes the option conditional on the predicate.
+</p>
+<p>The argument list to the predicate function is always 
+<code>[level, direction, function, item]</code> where <code>level</code> is the recursion
+level for the function,  <code>direction</code> is either <code>enter</code> or <code>exit</code>,
+<code>function</code> is the name of the function, and <code>item</code> is the argument
+list (on entering) or the return value (on exiting).
+</p>
+<p>Here is an example of unconditional trace options:
+</p>
+<div class="example">
+<pre class="example">(%i1) ff(n) := if equal(n, 0) then 1 else n * ff(n - 1)$
+
+(%i2) trace (ff)$
+
+(%i3) trace_options (ff, lisp_print, break)$
+
+(%i4) ff(3);
+</pre></div>
+
+<p>Here is the same function, with the <code>break</code> option conditional
+on a predicate:
+</p>
+<div class="example">
+<pre class="example">(%i5) trace_options (ff, break(pp))$
+
+(%i6) pp (level, direction, function, item) := block (print (item),
+    return (function = 'ff and level = 3 and direction = exit))$
+
+(%i7) ff(6);
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+<a name="untrace"></a><a name="Item_003a-Debugging_002fdeffn_002funtrace"></a><dl>
+<dt><a name="index-untrace"></a>Function: <strong>untrace</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>untrace</tt> (<var>f_1</var>, &hellip;, <var>f_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>untrace</tt> ()</em></dt>
+<dd>
+<p>Given functions <var>f_1</var>, &hellip;, <var>f_n</var>,
+<code>untrace</code> disables tracing enabled by the <code>trace</code> function.
+With no arguments, <code>untrace</code> disables tracing for all functions.
+</p>
+<p><code>untrace</code> returns a list of the functions for which 
+it disabled tracing.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_178.html#Keyword-Commands" accesskey="p" rel="previous">Keyword Commands</a>, Up: <a href="maxima_176.html#Debugging" accesskey="u" rel="up">Debugging</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

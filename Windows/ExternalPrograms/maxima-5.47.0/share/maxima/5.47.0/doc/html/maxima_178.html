@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Keyword Commands</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Keyword Commands">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Keyword Commands">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_176.html#Debugging" rel="up" title="Debugging">
+<link href="maxima_179.html#Functions-and-Variables-for-Debugging" rel="next" title="Functions and Variables for Debugging">
+<link href="maxima_177.html#Source-Level-Debugging" rel="previous" title="Source Level Debugging">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Keyword-Commands"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_179.html#Functions-and-Variables-for-Debugging" accesskey="n" rel="next">Functions and Variables for Debugging</a>, Previous: <a href="maxima_177.html#Source-Level-Debugging" accesskey="p" rel="previous">Source Level Debugging</a>, Up: <a href="maxima_176.html#Debugging" accesskey="u" rel="up">Debugging</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Keyword-Commands-1"></a>
+<h3 class="section">38.2 Keyword Commands</h3>
+
+<p>Keyword commands are special keywords which are not interpreted as Maxima
+expressions.  A keyword command can be entered at the Maxima prompt or the
+debugger prompt, although not at the break prompt.
+Keyword commands start with a colon, &rsquo;<code>:</code>&rsquo;.
+For example, to evaluate a Lisp form you
+may type <code>:lisp</code> followed by the form to be evaluated.
+</p>
+<div class="example">
+<pre class="example">(%i1) :lisp (+ 2 3) 
+5
+</pre></div>
+
+<p>The number of arguments taken depends on the particular command.  Also,
+you need not type the whole command, just enough to be unique among
+the break keywords.   Thus <code>:br</code> would suffice for <code>:break</code>.
+</p>
+<p>The keyword commands are listed below.
+</p>
+<dl compact="compact">
+<dt><code>:break F n</code></dt>
+<dd><p>Set a breakpoint in function <code>F</code> at line offset <code>n</code>
+from the beginning of the function.
+If <code>F</code> is given as a string, then it is assumed to be
+a file, and <code>n</code> is the offset from the beginning of the file.
+The offset is optional. If not given, it is assumed to be zero
+(first line of the function or file).
+</p></dd>
+<dt><code>:bt</code></dt>
+<dd><p>Print a backtrace of the stack frames
+</p></dd>
+<dt><code>:continue</code></dt>
+<dd><p>Continue the computation
+</p></dd>
+<dt><code>:delete</code></dt>
+<dd><p>Delete the specified breakpoints, or all if none are specified
+</p></dd>
+<dt><code>:disable</code></dt>
+<dd><p>Disable the specified breakpoints, or all if none are specified
+</p></dd>
+<dt><code>:enable</code></dt>
+<dd><p>Enable the specified breakpoints, or all if none are specified
+</p></dd>
+<dt><code>:frame n</code></dt>
+<dd><p>Print stack frame <code>n</code>, or the current frame if none is specified
+</p></dd>
+<dt><code>:help</code></dt>
+<dd><p>Print help on a debugger command, or all commands if none is specified
+</p></dd>
+<dt><code>:info</code></dt>
+<dd><p>Print information about item
+</p></dd>
+<dt><code>:lisp some-form</code></dt>
+<dd><p>Evaluate <code>some-form</code> as a Lisp form
+</p></dd>
+<dt><code>:lisp-quiet some-form</code></dt>
+<dd><p>Evaluate Lisp form <code>some-form</code> without any output
+</p></dd>
+<dt><code>:next</code></dt>
+<dd><p>Like <code>:step</code>, except <code>:next</code> steps over function calls
+</p></dd>
+<dt><code>:quit</code></dt>
+<dd><p>Quit the current debugger level without completing the computation
+</p></dd>
+<dt><code>:resume</code></dt>
+<dd><p>Continue the computation
+</p></dd>
+<dt><code>:step</code></dt>
+<dd><p>Continue the computation until it reaches a new source line
+</p></dd>
+<dt><code>:top</code></dt>
+<dd><p>Return to the Maxima prompt (from any debugger level) without 
+completing the computation
+</p></dd>
+</dl>
+
+
+<p>Note: Keyword commands must (currently) start at the beginning of a line.
+Not even a single space character is allowed before the colon.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Debugging">Debugging</a>
+&middot;</div>
+<a name="Item_003a-Debugging_002fnode_002fFunctions-and-Variables-for-Debugging"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_179.html#Functions-and-Variables-for-Debugging" accesskey="n" rel="next">Functions and Variables for Debugging</a>, Previous: <a href="maxima_177.html#Source-Level-Debugging" accesskey="p" rel="previous">Source Level Debugging</a>, Up: <a href="maxima_176.html#Debugging" accesskey="u" rel="up">Debugging</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

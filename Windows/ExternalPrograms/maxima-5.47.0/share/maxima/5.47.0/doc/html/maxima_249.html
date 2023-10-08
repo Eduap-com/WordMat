@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to draw</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to draw">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to draw">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_248.html#draw_002dpkg" rel="up" title="draw-pkg">
+<link href="maxima_250.html#Functions-and-Variables-for-draw" rel="next" title="Functions and Variables for draw">
+<link href="maxima_248.html#draw_002dpkg" rel="previous" title="draw-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-draw"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_250.html#Functions-and-Variables-for-draw" accesskey="n" rel="next">Functions and Variables for draw</a>, Previous: <a href="maxima_248.html#draw_002dpkg" accesskey="p" rel="previous">draw-pkg</a>, Up: <a href="maxima_248.html#draw_002dpkg" accesskey="u" rel="up">draw-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-draw-1"></a>
+<h3 class="section">53.1 Introduction to draw</h3>
+
+
+<p><code>draw</code> is a Maxima-Gnuplot and a Maxima-VTK interface.
+</p>
+<p>There are three main functions to be used at Maxima level: 
+</p><ul>
+<li> <code><a href="maxima_250.html#draw2d">draw2d</a></code>, draws a single 2D scene.
+</li><li> <code><a href="maxima_250.html#draw3d">draw3d</a></code>, draws a single 3D scene.
+</li><li> <code><a href="maxima_250.html#draw">draw</a></code>, can be filled with multiple <code><a href="maxima_250.html#gr2d">gr2d</a></code> and <code><a href="maxima_250.html#gr3d">gr3d</a></code>
+      commands that each creates a draw scene all sharing the same window.
+</li></ul>
+<p>Each scene can contain any number of objects and <code>key=value</code> pairs
+with options for the scene or the following objects.
+</p>
+<p>A selection of useful objects a scene can be made up from are:
+</p><ul>
+<li> <code><a href="maxima_250.html#explicit">explicit</a></code> plots a function.
+</li><li> <code><a href="maxima_250.html#implicit">implicit</a></code> plots all points an equation is true at.
+</li><li> <code><a href="maxima_250.html#points">points</a></code> plots points that are connected by lines if the option
+      <code><a href="maxima_250.html#points_005fjoined">points_joined</a></code> was set to <code>true</code> in a previous line of the
+      current scene.
+</li><li> <code><a href="maxima_250.html#parametric">parametric</a></code> allows to specify separate expressions that calculate
+      the x, y (and in 3d plots also for the z) variable.
+</li></ul>
+
+<p>A short description of all draw commands and options including example plots
+(in the html and pdf version of this manual) can be found in the section
+See <a href="maxima_250.html#Functions-and-Variables-for-draw">Functions and Variables for draw</a>. An online version of the html manual can be
+found at <a href="https://maxima.sourceforge.io/docs/manual/maxima_singlepage.html#draw">https://maxima.sourceforge.io/docs/manual/maxima_singlepage.html#draw</a>.
+More elaborated examples of this package can be found at the following locations:
+</p>
+<p><a href="http://riotorto.users.sourceforge.net/Maxima/gnuplot/">http://riotorto.users.sourceforge.net/Maxima/gnuplot/</a> <br>
+<a href="http://riotorto.users.sourceforge.net/Maxima/vtk/">http://riotorto.users.sourceforge.net/Maxima/vtk/</a>
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) draw2d(
+          title=&quot;Two simple plots&quot;,
+          xlabel=&quot;x&quot;,ylabel=&quot;y&quot;,grid=true,
+
+          color=red,key=&quot;A sinus&quot;,
+          explicit(sin(x),x,1,10),
+          color=blue,line_type=dots,key=&quot;A cosinus&quot;,
+          explicit(cos(x),x,1,10)
+)$
+</pre></div>
+<img src="./figures/draw_intro.png" alt="./figures/draw_intro">
+
+<p>You need Gnuplot 4.2 or newer to run draw; If you are using wxMaxima as a
+front end <code>wxdraw</code>, <code>wxdraw2d</code> and <code>wxdraw3d</code> are drop-in
+replacements for draw that do the same as <code><a href="maxima_250.html#draw">draw</a></code>, <code><a href="maxima_250.html#draw2d">draw2d</a></code> and
+<code><a href="maxima_250.html#draw3d">draw3d</a></code> but embed the resulting plot in the worksheet.
+</p>
+<p>If you want to use VTK with draw, you need VTK with the Python interface installed
+(the <a href="maxima_256.html#dynamics_002dpkg">dynamics-pkg</a> uses VTK with the TCL interface!) and set the variable:
+</p>
+<p><code>draw_renderer: 'vtk $</code>
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Plotting">Plotting</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-draw">Package draw</a>
+&middot;</div>
+
+<a name="Item_003a-draw_002fnode_002fFunctions-and-Variables-for-draw"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_250.html#Functions-and-Variables-for-draw" accesskey="n" rel="next">Functions and Variables for draw</a>, Previous: <a href="maxima_248.html#draw_002dpkg" accesskey="p" rel="previous">draw-pkg</a>, Up: <a href="maxima_248.html#draw_002dpkg" accesskey="u" rel="up">draw-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

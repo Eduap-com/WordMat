@@ -1035,8 +1035,11 @@ start:
             End If
 
         Else    ' notation med x=...
-            MaximaOutput = RemoveBrackets(MaximaOutput)
-            MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
+            ConvertOutputToSolved2
+            If InStr(MaximaOutput, ";") Then ' hvis alm ligning
+                MaximaOutput = RemoveBrackets(MaximaOutput)
+                MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
+            End If
         End If
 
         '    MaximaOutput = Replace(MaximaOutput, "%i", "i")
@@ -3076,7 +3079,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     '    Loop While pos > 0
 
 
-'  stykkevis definerede funktioner defineret med en tuborg parantes.
+'  stykkevis definerede funktioner defineret med en tuborg parantes. gaffelfunktioner
    Dim ass As String, k As Long
     ea.Text = Text
     ea.SetNormalBrackets
@@ -3125,6 +3128,13 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                   End If
                 If UBound(arr3) > 0 Then
                   ass = Replace(ass, "" & ChrW(8743) & " ", "&&and&&")
+                  ass = Replace(ass, " " & ChrW(8743) & " ", "&&and&&")
+                  ass = Replace(ass, "" & ChrW(8744) & " ", "&&or&&")
+                  ass = Replace(ass, " " & ChrW(8744) & " ", "&&or&&")
+                  ass = Replace(ass, " AND ", "&&and&&")
+                  ass = Replace(ass, " and ", "&&and&&")
+                  ass = Replace(ass, " OR ", "&&or&&")
+                  ass = Replace(ass, " or ", "&&or&&")
                   If CasType = 0 Then
                     s = s & sqbrAssump(SplitAssump(Trim(ass))) & "&&then&&(" & Trim(arr3(0)) & ")"
                   Else
@@ -6264,7 +6274,9 @@ Sub InsertMaximaOutput()
     '    mo.OMaths(1).BuildUp
 
     If Len(MaximaOutput) > 500 Then
-        MaximaOutput = Left(MaximaOutput, 500) + Sprog.A(119)
+        If MsgBox("Output is " & Len(s) & " characters long. Click OK to insert all characters in Word. Cancel to insert the first 500", vbOKCancel, Sprog.Warning) = vbCancel Then
+            MaximaOutput = Left(MaximaOutput, 500) + Sprog.A(119)
+        End If
     End If
     Set mo = Selection.OMaths.Add(Selection.Range)
     If mo.OMaths(1).Range.Bold Then ' Der er en fejl i Word build virker ikke korrekt med fed skrift. Fx løsningen af 2000=3000*0,85?x
@@ -7343,8 +7355,8 @@ slut:
 End Function
 
 Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Optional ByVal Sep As String = ",") As String
-' checker om en liste af ligninger er løst helt
-' true hvis en er løst, false hvis ingen. All hvis alle.
+    ' checker om en liste af ligninger er løst helt
+    ' true hvis en er løst, false hvis ingen. All hvis alle.
     Dim oneSolved As Boolean
     Dim allsolved As Boolean
     Dim arr As Variant
@@ -7369,6 +7381,18 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
                 allsolved = False
             End If
         Next
+        
+        If InStr(ligninger, VBA.ChrW(8743)) > 0 Then ' der kan være ligningsystemer, hvis der er sendt vektorligninger ind
+            arr = Split(ligninger, VBA.ChrW(8743))
+            For i = 0 To UBound(arr)
+                If IsSolved(arr(i), variabel) Then
+                    oneSolved = True
+                Else
+                    allsolved = False
+                End If
+            Next
+        End If
+        
     End If
 slut:
     If allsolved Then

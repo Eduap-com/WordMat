@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Evaluation (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Evaluation (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Evaluation (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_8.html#Simplification" rel="next" title="Simplification">
+<link href="maxima_6.html#Operators" rel="prev" title="Operators">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Evaluation">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_8.html#Simplification" accesskey="n" rel="next">Simplification</a>, Previous: <a href="maxima_6.html#Operators" accesskey="p" rel="prev">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Evaluation-1">8 Evaluation</h2>
+
+<a class="anchor" id="Item_003a-Evaluation_002fnode_002fFunctions-and-Variables-for-Evaluation"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-Evaluation" accesskey="1">Functions and Variables for Evaluation</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-Evaluation">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Evaluation" accesskey="p" rel="prev">Evaluation</a>, Up: <a href="#Evaluation" accesskey="u" rel="up">Evaluation</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Evaluation-1">8.1 Functions and Variables for Evaluation</h3>
+
+
+<a class="anchor" id="quote"></a><a class="anchor" id="Item_003a-Evaluation_002fdeffn_002f_0027"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0027"><span class="category-def">Operator: </span><span><strong class="def-name">'</strong><a class="copiable-link" href='#index-_0027'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Quote-operator"></a>
+
+<p>The single quote operator <code class="code">'</code> prevents evaluation.
+</p>
+<p>Applied to a symbol, the single quote prevents evaluation of the symbol.
+</p>
+<p>Applied to a function call, the single quote prevents evaluation of the function
+call, although the arguments of the function are still evaluated (if evaluation
+is not otherwise prevented).  The result is the noun form of the function call.
+</p>
+<p>Applied to a parenthesized expression, the single quote prevents evaluation of
+all symbols and function calls in the expression.
+E.g., <code class="code">'(f(x))</code> means do not evaluate the expression <code class="code">f(x)</code>.
+<code class="code">'f(x)</code> (with the single quote applied to <code class="code">f</code> instead of <code class="code">f(x)</code>)
+means return the noun form of <code class="code">f</code> applied to <code class="code">[x]</code>.
+</p>
+<p>The single quote does not prevent simplification.
+</p>
+<p>When the global flag <code class="code"><a class="ref" href="maxima_5.html#noundisp">noundisp</a></code> is <code class="code">true</code>, nouns display with a single
+quote.  This switch is always <code class="code">true</code> when displaying function definitions.
+</p>
+<p>See also the quote-quote operator <code class="code"><a class="ref" href="#quote_002dquote">''</a></code> and <code class="code"><a class="ref" href="#nouns">nouns</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Applied to a symbol,
+the single quote prevents evaluation of the symbol.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) aa: 1024;
+(%o1)                         1024
+(%i2) aa^2;
+(%o2)                        1048576
+(%i3) 'aa^2;
+                                 2
+(%o3)                          aa
+(%i4) ''%;
+(%o4)                        1048576
+</pre></div>
+
+<p>Applied to a function call, the single quote prevents evaluation of the function
+call.  The result is the noun form of the function call.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x0: 5;
+(%o1)                           5
+(%i2) x1: 7;
+(%o2)                           7
+(%i3) integrate (x^2, x, x0, x1);
+                               218
+(%o3)                          ---
+                                3
+(%i4) 'integrate (x^2, x, x0, x1);
+</pre><div class="group"><pre class="example-preformatted">                             7
+                            /
+                            [   2
+(%o4)                       I  x  dx
+                            ]
+                            /
+                             5
+</pre></div><pre class="example-preformatted">(%i5) %, nouns;
+                               218
+(%o5)                          ---
+                                3
+</pre></div>
+
+<p>Applied to a parenthesized expression, the single quote prevents evaluation of
+all symbols and function calls in the expression.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) aa: 1024;
+(%o1)                         1024
+(%i2) bb: 19;
+(%o2)                          19
+(%i3) sqrt(aa) + bb;
+(%o3)                          51
+(%i4) '(sqrt(aa) + bb);
+(%o4)                     bb + sqrt(aa)
+(%i5) ''%;
+(%o5)                          51
+</pre></div>
+
+<p>The single quote does not prevent simplification.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) sin (17 * %pi) + cos (17 * %pi);
+(%o1)                          - 1
+(%i2) '(sin (17 * %pi) + cos (17 * %pi));
+(%o2)                          - 1
+</pre></div>
+
+<p>Maxima considers floating point operations by its in-built mathematical
+functions to be a simplification.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) sin(1.0);
+(%o1)                          .8414709848078965
+(%i2) '(sin(1.0));
+(%o2)                          .8414709848078965
+</pre></div>
+
+<p>When the global flag <code class="code"><a class="ref" href="maxima_5.html#noundisp">noundisp</a></code> is <code class="code">true</code>, nouns display with a single
+quote.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x:%pi;
+(%o1)                                 %pi
+(%i2) bfloat(x);
+(%o2)                         3.141592653589793b0
+(%i3) sin(x);
+(%o3)                                  0
+(%i4) noundisp;
+(%o4)                                false
+(%i5) 'bfloat(x);
+(%o5)                             bfloat(%pi)
+(%i6) bfloat('x);
+(%o6)                                  x
+(%i7) 'sin(x);
+(%o7)                                  0
+(%i8) sin('x);
+(%o8)                               sin(x)
+(%i9) noundisp : not noundisp;
+(%o9)                                true
+(%i10) 'bfloat(x);
+(%o10)                           'bfloat(%pi)
+(%i11) bfloat('x);
+(%o11)                                 x
+(%i12) 'sin(x);
+(%o12)                                 0
+(%i13) sin('x);
+(%o13)                              sin(x)
+(%i14)
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation">Evaluation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="quote_002dquote"></a><a class="anchor" id="Item_003a-Evaluation_002fdeffn_002f_0027_0027"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0027_0027"><span class="category-def">Operator: </span><span><strong class="def-name">''</strong><a class="copiable-link" href='#index-_0027_0027'> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-Quote_002dquote-operator"></a>
+
+<p>The quote-quote operator <code class="code">'<!-- /@w -->'</code> (two single quote marks) modifies
+evaluation in input expressions.
+</p>
+<p>Applied to a general expression <var class="var">expr</var>, quote-quote causes the value of
+<var class="var">expr</var> to be substituted for <var class="var">expr</var> in the input expression.
+</p>
+<p>Applied to the operator of an expression, quote-quote changes the operator from
+a noun to a verb (if it is not already a verb).
+</p>
+<p>The quote-quote operator is applied by the input parser; it is not stored as
+part of a parsed input expression.  The quote-quote operator is always applied
+as soon as it is parsed, and cannot be quoted.  Thus quote-quote causes
+evaluation when evaluation is otherwise suppressed, such as in function
+definitions, lambda expressions, and expressions quoted by single quote
+<code class="code">'</code>.
+</p>
+<p>Quote-quote is recognized by <code class="code"><a class="ref" href="maxima_12.html#batch">batch</a></code> and <code class="code"><a class="ref" href="maxima_12.html#load">load</a></code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#ev">ev</a></code>, the single-quote operator <code class="code"><a class="ref" href="#quote">'</a></code> and <code class="code"><a class="ref" href="#nouns">nouns</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>Applied to a general expression <var class="var">expr</var>, quote-quote causes the value of
+<var class="var">expr</var> to be substituted for <var class="var">expr</var> in the input expression.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) expand ((a + b)^3);
+                     3        2      2      3
+(%o1)               b  + 3 a b  + 3 a  b + a
+(%i2) [_, ''_];
+                         3    3        2      2      3
+(%o2)     [expand((b + a) ), b  + 3 a b  + 3 a  b + a ]
+(%i3) [%i1, ''%i1];
+                         3    3        2      2      3
+(%o3)     [expand((b + a) ), b  + 3 a b  + 3 a  b + a ]
+(%i4) [aa : cc, bb : dd, cc : 17, dd : 29];
+(%o4)                   [cc, dd, 17, 29]
+(%i5) foo_1 (x) := aa - bb * x;
+(%o5)                 foo_1(x) := aa - bb x
+(%i6) foo_1 (10);
+(%o6)                      cc - 10 dd
+(%i7) ''%;
+(%o7)                         - 273
+(%i8) ''(foo_1 (10));
+(%o8)                         - 273
+(%i9) foo_2 (x) := ''aa - ''bb * x;
+(%o9)                 foo_2(x) := cc - dd x
+(%i10) foo_2 (10);
+(%o10)                        - 273
+(%i11) [x0 : x1, x1 : x2, x2 : x3];
+(%o11)                    [x1, x2, x3]
+(%i12) x0;
+(%o12)                         x1
+(%i13) ''x0;
+(%o13)                         x2
+(%i14) '' ''x0;
+(%o14)                         x3
+</pre></div>
+
+<p>Applied to the operator of an expression, quote-quote changes the operator from
+a noun to a verb (if it is not already a verb).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (foo, noun);
+(%o1)                         done
+(%i2) foo (x) := x - 1729;
+(%o2)                 ''foo(x) := x - 1729
+(%i3) foo (100);
+(%o3)                       foo(100)
+(%i4) ''foo (100);
+(%o4)                        - 1629
+</pre></div>
+
+<p>The quote-quote operator is applied by the input parser; it is not stored as
+part of a parsed input expression.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [aa : bb, cc : dd, bb : 1234, dd : 5678];
+(%o1)                 [bb, dd, 1234, 5678]
+(%i2) aa + cc;
+(%o2)                        dd + bb
+(%i3) display (_, op (_), args (_));
+                           _ = cc + aa
+
+                         op(cc + aa) = +
+
+                    args(cc + aa) = [cc, aa]
+
+(%o3)                         done
+(%i4) ''(aa + cc);
+(%o4)                         6912
+(%i5) display (_, op (_), args (_));
+                           _ = dd + bb
+
+                         op(dd + bb) = +
+
+                    args(dd + bb) = [dd, bb]
+
+(%o5)                         done
+</pre></div>
+
+<p>Quote-quote causes evaluation when evaluation is otherwise suppressed, such as
+in function definitions, lambda expressions, and expressions quoted by single
+quote <code class="code">'</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) foo_1a (x) := ''(integrate (log (x), x));
+(%o1)               foo_1a(x) := x log(x) - x
+(%i2) foo_1b (x) := integrate (log (x), x);
+(%o2)           foo_1b(x) := integrate(log(x), x)
+(%i3) dispfun (foo_1a, foo_1b);
+(%t3)               foo_1a(x) := x log(x) - x
+
+(%t4)           foo_1b(x) := integrate(log(x), x)
+
+(%o4)                      [%t3, %t4]
+(%i5) integrate (log (x), x);
+(%o5)                     x log(x) - x
+(%i6) foo_2a (x) := ''%;
+(%o6)               foo_2a(x) := x log(x) - x
+(%i7) foo_2b (x) := %;
+(%o7)                    foo_2b(x) := %
+(%i8) dispfun (foo_2a, foo_2b);
+(%t8)               foo_2a(x) := x log(x) - x
+
+(%t9)                    foo_2b(x) := %
+
+(%o9)                      [%t7, %t8]
+(%i10) F : lambda ([u], diff (sin (u), u));
+(%o10)             lambda([u], diff(sin(u), u))
+(%i11) G : lambda ([u], ''(diff (sin (u), u)));
+(%o11)                  lambda([u], cos(u))
+(%i12) '(sum (a[k], k, 1, 3) + sum (b[k], k, 1, 3));
+(%o12)         sum(b , k, 1, 3) + sum(a , k, 1, 3)
+                    k                  k
+(%i13) '(''(sum (a[k], k, 1, 3)) + ''(sum (b[k], k, 1, 3)));
+(%o13)             b  + a  + b  + a  + b  + a
+                    3    3    2    2    1    1
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation">Evaluation</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Operators">Operators</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="ev"></a><a class="anchor" id="Item_003a-Evaluation_002fdeffn_002fev"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ev"><span class="category-def">Function: </span><span><strong class="def-name">ev</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">arg_1</var>, &hellip;, <var class="var">arg_n</var>)</var><a class="copiable-link" href='#index-ev'> &para;</a></span></dt>
+<dd>
+<p>Evaluates the expression <var class="var">expr</var> in the environment specified by the
+arguments <var class="var">arg_1</var>, &hellip;, <var class="var">arg_n</var>.  The arguments are switches
+(Boolean flags), assignments, equations, and functions.  <code class="code">ev</code> returns the
+result (another expression) of the evaluation.
+</p>
+<p>The evaluation is carried out in steps, as follows.
+</p>
+<ol class="enumerate">
+<li> First the environment is set up by scanning the arguments which may
+be any or all of the following.
+
+<ul class="itemize mark-bullet">
+<li><code class="code"><a class="ref" href="maxima_8.html#simp">simp</a></code> causes <var class="var">expr</var> to be simplified regardless of the setting of the
+switch <code class="code">simp</code> which inhibits simplification if <code class="code">false</code>.
+</li><li><code class="code"><a class="ref" href="#noeval">noeval</a></code> suppresses the evaluation phase of <code class="code">ev</code> (see step (4) below).
+This is useful in conjunction with the other switches and in causing
+<var class="var">expr</var> to be resimplified without being reevaluated.
+</li><li><code class="code"><a class="ref" href="#nouns">nouns</a></code> causes the evaluation of noun forms (typically unevaluated
+functions such as <code class="code">'integrate</code> or <code class="code">'diff</code>) in <var class="var">expr</var>.
+</li><li><code class="code"><a class="ref" href="maxima_8.html#expand">expand</a></code> causes expansion.
+</li><li><code class="code">expand (<var class="var">m</var>, <var class="var">n</var>)</code> causes expansion, setting the values of
+<code class="code"><a class="ref" href="maxima_8.html#maxposex">maxposex</a></code> and <code class="code"><a class="ref" href="maxima_8.html#maxnegex">maxnegex</a></code> to <var class="var">m</var> and <var class="var">n</var> respectively.
+</li><li><code class="code"><a class="ref" href="maxima_22.html#detout">detout</a></code> causes any matrix inverses computed in <var class="var">expr</var> to have their
+determinant kept outside of the inverse rather than dividing through
+each element.
+</li><li><code class="code"><a class="ref" href="maxima_17.html#diff">diff</a></code> causes all differentiations indicated in <var class="var">expr</var> to be performed.
+</li><li><code class="code">derivlist (<var class="var">x</var>, <var class="var">y</var>, <var class="var">z</var>, ...)</code> causes only differentiations
+with respect to the indicated variables.  See also <code class="code"><a class="ref" href="maxima_17.html#derivlist">derivlist</a></code>.
+</li><li><code class="code">risch</code> causes integrals in <var class="var">expr</var> to be evaluated using the Risch
+algorithm.  See <code class="code"><a class="ref" href="maxima_18.html#risch">risch</a></code>.  The standard integration routine is invoked
+when using the special symbol <code class="code"><a class="ref" href="#nouns">nouns</a></code>.
+</li><li><code class="code"><a class="ref" href="maxima_4.html#float">float</a></code> causes non-integral rational numbers to be converted to floating
+point.
+</li><li><code class="code"><a class="ref" href="maxima_4.html#numer">numer</a></code> causes some mathematical functions (including exponentiation)
+with numerical arguments to be evaluated in floating point.  It causes
+variables in <var class="var">expr</var> which have been given numervals to be replaced by
+their values.  It also sets the <code class="code"><a class="ref" href="maxima_4.html#float">float</a></code> switch on.
+</li><li><code class="code"><a class="ref" href="#pred">pred</a></code> causes predicates (expressions which evaluate to <code class="code">true</code> or
+<code class="code">false</code>) to be evaluated.
+</li><li><code class="code"><a class="ref" href="#eval">eval</a></code> causes an extra post-evaluation of <var class="var">expr</var> to occur.
+(See step (5) below.)
+<code class="code">eval</code> may occur multiple times.  For each instance of <code class="code">eval</code>, the
+expression is evaluated again.
+</li><li><code class="code">A</code> where <code class="code">A</code> is an atom declared to be an evaluation flag
+<code class="code"><a class="ref" href="#evflag">evflag</a></code> causes <code class="code">A</code> to be bound to <code class="code">true</code> during the evaluation
+of <var class="var">expr</var>.
+</li><li><code class="code">V: expression</code> (or alternately <code class="code">V=expression</code>) causes <code class="code">V</code> to be
+bound to the value of <code class="code">expression</code> during the evaluation of <var class="var">expr</var>.
+Note that if <code class="code">V</code> is a Maxima option, then <code class="code">expression</code> is used for
+its value during the evaluation of <var class="var">expr</var>.  If more than one argument to
+<code class="code">ev</code> is of this type then the binding is done in parallel.  If <code class="code">V</code> is
+a non-atomic expression then a substitution rather than a binding is performed.
+</li><li><code class="code">F</code> where <code class="code">F</code>, a function name, has been declared to be an evaluation
+function <code class="code"><a class="ref" href="#evfun">evfun</a></code> causes <code class="code">F</code> to be applied to <var class="var">expr</var>.
+</li><li>Any other function names, e.g. <code class="code"><a class="ref" href="maxima_27.html#sum">sum</a></code>, cause evaluation of occurrences
+of those names in <var class="var">expr</var> as though they were verbs.
+</li><li>In addition a function occurring in <var class="var">expr</var> (say <code class="code">F(x)</code>) may be defined
+locally for the purpose of this evaluation of <var class="var">expr</var> by giving
+<code class="code">F(x) := expression</code> as an argument to <code class="code">ev</code>.
+</li><li>If an atom not mentioned above or a subscripted variable or subscripted
+expression was given as an argument, it is evaluated and if the result is an
+equation or assignment then the indicated binding or substitution is performed.
+If the result is a list then the members of the list are treated as if they were
+additional arguments given to <code class="code">ev</code>.  This permits a list of equations to be
+given (e.g. <code class="code">[X=1, Y=A**2]</code>) or a list of names of equations (e.g.,
+<code class="code">[%t1, %t2]</code> where <code class="code">%t1</code> and <code class="code">%t2</code> are equations) such as that
+returned by <code class="code"><a class="ref" href="maxima_19.html#solve">solve</a></code>.
+</li></ul>
+
+<p>The arguments of <code class="code">ev</code> may be given in any order with the exception of
+substitution equations which are handled in sequence, left to right, and
+evaluation functions which are composed, e.g., <code class="code">ev (<var class="var">expr</var>, ratsimp,
+realpart)</code> is handled as <code class="code">realpart (ratsimp (<var class="var">expr</var>))</code>.
+</p>
+<p>The <code class="code"><a class="ref" href="maxima_8.html#simp">simp</a></code>, <code class="code"><a class="ref" href="maxima_4.html#numer">numer</a></code>, and <code class="code"><a class="ref" href="maxima_4.html#float">float</a></code> switches may also be set
+locally in a block, or globally in Maxima so that they will remain in effect
+until being reset.
+</p>
+<p>If <var class="var">expr</var> is a canonical rational expression (CRE), then the expression
+returned by <code class="code">ev</code> is also a CRE, provided the <code class="code">numer</code> and <code class="code">float</code>
+switches are not both <code class="code">true</code>.
+</p>
+</li><li> During step (1), a list is made of the non-subscripted variables appearing on
+the left side of equations in the arguments or in the value of some arguments
+if the value is an equation.  The variables (subscripted variables which do not
+have associated <code class="code"><a class="ref" href="maxima_35.html#memoizing-functions">memoizing functions</a></code> as well as non-subscripted variables) in the
+expression <var class="var">expr</var> are replaced by their global values, except for those
+appearing in this list.  Usually, <var class="var">expr</var> is just a label or <code class="code">%</code> (as in
+<code class="code">%i2</code> in the example below), so this step simply retrieves the expression
+named by the label, so that <code class="code">ev</code> may work on it.
+
+</li><li> If any substitutions are indicated by the arguments, they are carried out now.
+
+</li><li> The resulting expression is then re-evaluated (unless one of the arguments was
+<code class="code"><a class="ref" href="#noeval">noeval</a></code>) and simplified according to the arguments.  Note that any
+function calls in <var class="var">expr</var> will be carried out after the variables in it are
+evaluated and that <code class="code">ev(F(x))</code> thus may behave like <code class="code">F(ev(x))</code>.
+
+</li><li> For each instance of <code class="code"><a class="ref" href="#eval">eval</a></code> in the arguments, steps (3) and (4) are
+repeated.
+</li></ol>
+
+<p>See also <code class="code"><a class="ref" href="#quote_002dquote">''</a></code>, <code class="code"><a class="ref" href="maxima_17.html#at">at</a></code> and <code class="code"><a class="ref" href="maxima_5.html#subst">subst</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) sin(x) + cos(y) + (w+1)^2 + 'diff (sin(w), w);
+                                     d                    2
+(%o1)              cos(y) + sin(x) + -- (sin(w)) + (w + 1)
+                                     dw
+(%i2) ev (%, numer, expand, diff, x=2, y=1);
+                               2
+(%o2)                cos(w) + w  + 2 w + 2.449599732693821
+</pre></div>
+
+<p>An alternate top level syntax has been provided for <code class="code">ev</code>, whereby one
+may just type in its arguments, without the <code class="code">ev()</code>.  That is, one may
+write simply
+</p>
+<div class="example">
+<pre class="example-preformatted"><var class="var">expr</var>, <var class="var">arg_1</var>, ..., <var class="var">arg_n</var>
+</pre></div>
+
+<p>This is not permitted as part of another expression, e.g., in functions,
+blocks, etc.
+</p>
+<p>Notice the parallel binding process in the following example.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i3) programmode: false;
+(%o3)                                false
+(%i4) x+y, x: a+y, y: 2;
+(%o4)                              y + a + 2
+(%i5) 2*x - 3*y = 3$
+(%i6) -3*x + 2*y = -4$
+(%i7) solve ([%o5, %o6]);
+Solution
+
+                                          1
+(%t7)                               y = - -
+                                          5
+
+                                         6
+(%t8)                                x = -
+                                         5
+(%o8)                            [[%t7, %t8]]
+(%i8) %o6, %o8;
+(%o8)                              - 4 = - 4
+(%i9) x + 1/x &gt; gamma (1/2);
+                                   1
+(%o9)                          x + - &gt; sqrt(%pi)
+                                   x
+(%i10) %, numer, x=1/2;
+(%o10)                      2.5 &gt; 1.772453850905516
+(%i11) %, pred;
+(%o11)                               true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation">Evaluation</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="eval"></a><a class="anchor" id="Item_003a-Evaluation_002fdefvr_002feval"></a><dl class="first-defvr">
+<dt class="defvr" id="index-eval-1"><span class="category-def">Special symbol: </span><span><strong class="def-name">eval</strong><a class="copiable-link" href='#index-eval-1'> &para;</a></span></dt>
+<dd>
+<p>As an argument in a call to <code class="code">ev (<var class="var">expr</var>)</code>, <code class="code">eval</code> causes an extra
+evaluation of <var class="var">expr</var>.  See <code class="code"><a class="ref" href="#ev">ev</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) [a:b,b:c,c:d,d:e];
+(%o1)                            [b, c, d, e]
+(%i2) a;
+(%o2)                                  b
+(%i3) ev(a);
+(%o3)                                  c
+(%i4) ev(a),eval;
+(%o4)                                  e
+(%i5) a,eval,eval;
+(%o5)                                  e
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="evflag"></a><a class="anchor" id="Item_003a-Evaluation_002fdefvr_002fevflag"></a><dl class="first-defvr">
+<dt class="defvr" id="index-evflag"><span class="category-def">Property: </span><span><strong class="def-name">evflag</strong><a class="copiable-link" href='#index-evflag'> &para;</a></span></dt>
+<dd>
+<p>When a symbol <var class="var">x</var> has the <code class="code">evflag</code> property, the expressions
+<code class="code">ev(<var class="var">expr</var>, <var class="var">x</var>)</code> and <code class="code"><var class="var">expr</var>, <var class="var">x</var></code> (at the
+interactive prompt) are equivalent to <code class="code">ev(<var class="var">expr</var>, <var class="var">x</var> = true)</code>.
+That is, <var class="var">x</var> is bound to <code class="code">true</code> while <var class="var">expr</var> is evaluated.
+</p>
+<p>The expression <code class="code">declare(<var class="var">x</var>, evflag)</code> gives the <code class="code">evflag</code> property
+to the variable <var class="var">x</var>.
+</p>
+<p>The flags which have the <code class="code">evflag</code> property by default are the following:
+</p>
+<pre class="verbatim">   algebraic          cauchysum       demoivre
+   dotscrules         %emode          %enumer
+   exponentialize     exptisolate     factorflag
+   float              halfangles      infeval
+   isolate_wrt_times  keepfloat       letrat
+   listarith          logabs          logarc 
+   logexpand          lognegint       
+   m1pbranch          numer_pbranch   programmode 
+   radexpand          ratalgdenom     ratfac 
+   ratmx              ratsimpexpons   simp 
+   simpproduct        simpsum         sumexpand
+   trigexpand
+</pre>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) sin (1/2);
+                                 1
+(%o1)                        sin(-)
+                                 2
+(%i2) sin (1/2), float;
+(%o2)                   0.479425538604203
+(%i3) sin (1/2), float=true;
+(%o3)                   0.479425538604203
+(%i4) simp : false;
+(%o4)                         false
+(%i5) 1 + 1;
+(%o5)                         1 + 1
+(%i6) 1 + 1, simp;
+(%o6)                           2
+(%i7) simp : true;
+(%o7)                         true
+(%i8) sum (1/k^2, k, 1, inf);
+                            inf
+                            ====
+                            \     1
+(%o8)                        &gt;    --
+                            /      2
+                            ====  k
+                            k = 1
+(%i9) sum (1/k^2, k, 1, inf), simpsum;
+                                 2
+                              %pi
+(%o9)                         ----
+                               6
+(%i10) declare (aa, evflag);
+(%o10)                        done
+(%i11) if aa = true then YES else NO;
+(%o11)                         NO
+(%i12) if aa = true then YES else NO, aa;
+(%o12)                         YES
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="evfun"></a><a class="anchor" id="Item_003a-Evaluation_002fdefvr_002fevfun"></a><dl class="first-defvr">
+<dt class="defvr" id="index-evfun"><span class="category-def">Property: </span><span><strong class="def-name">evfun</strong><a class="copiable-link" href='#index-evfun'> &para;</a></span></dt>
+<dd>
+<p>When a function <var class="var">F</var> has the <code class="code">evfun</code> property, the expressions
+<code class="code">ev(<var class="var">expr</var>, <var class="var">F</var>)</code> and <code class="code"><var class="var">expr</var>, <var class="var">F</var></code> (at the
+interactive prompt) are equivalent to <code class="code"><var class="var">F</var>(ev(<var class="var">expr</var>))</code>.
+</p>
+<p>If two or more <code class="code">evfun</code> functions <var class="var">F</var>, <var class="var">G</var>, etc., are specified,
+the functions are applied in the order that they are specified.
+</p>
+<p>The expression <code class="code">declare(<var class="var">F</var>, evfun)</code> gives the <code class="code">evfun</code> property
+to the function <var class="var">F</var>.  The functions which have the <code class="code">evfun</code> property by
+default are the following:
+</p>
+<pre class="verbatim">   bfloat          factor       fullratsimp
+   logcontract     polarform    radcan
+   ratexpand       ratsimp      rectform
+   rootscontract   trigexpand   trigreduce
+</pre>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) x^3 - 1;
+                              3
+(%o1)                        x  - 1
+(%i2) x^3 - 1, factor;
+                                2
+(%o2)                 (x - 1) (x  + x + 1)
+(%i3) factor (x^3 - 1);
+                                2
+(%o3)                 (x - 1) (x  + x + 1)
+(%i4) cos(4 * x) / sin(x)^4;
+</pre><div class="group"><pre class="example-preformatted">                            cos(4 x)
+(%o4)                       --------
+                               4
+                            sin (x)
+</pre></div><pre class="example-preformatted">(%i5) cos(4 * x) / sin(x)^4, trigexpand;
+                 4           2       2         4
+              sin (x) - 6 cos (x) sin (x) + cos (x)
+(%o5)         -------------------------------------
+                                4
+                             sin (x)
+(%i6) cos(4 * x) / sin(x)^4, trigexpand, ratexpand;
+                           2         4
+                      6 cos (x)   cos (x)
+(%o6)               - --------- + ------- + 1
+                          2          4
+                       sin (x)    sin (x)
+(%i7) ratexpand (trigexpand (cos(4 * x) / sin(x)^4));
+                           2         4
+                      6 cos (x)   cos (x)
+(%o7)               - --------- + ------- + 1
+                          2          4
+                       sin (x)    sin (x)
+(%i8) declare ([F, G], evfun);
+(%o8)                         done
+(%i9) (aa : bb, bb : cc, cc : dd);
+(%o9)                          dd
+(%i10) aa;
+(%o10)                         bb
+(%i11) aa, F;
+(%o11)                        F(cc)
+(%i12) F (aa);
+(%o12)                        F(bb)
+(%i13) F (ev (aa));
+(%o13)                        F(cc)
+(%i14) aa, F, G;
+(%o14)                      G(F(cc))
+(%i15) G (F (ev (aa)));
+(%o15)                      G(F(cc))
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="infeval"></a><a class="anchor" id="Item_003a-Evaluation_002fdefvr_002finfeval"></a><dl class="first-defvr">
+<dt class="defvr" id="index-infeval"><span class="category-def">Option variable: </span><span><strong class="def-name">infeval</strong><a class="copiable-link" href='#index-infeval'> &para;</a></span></dt>
+<dd>
+<p>Enables &quot;infinite evaluation&quot; mode.  <code class="code"><a class="ref" href="#ev">ev</a></code> repeatedly evaluates an
+expression until it stops changing.  To prevent a variable, say <code class="code">X</code>, from
+being evaluated away in this mode, simply include <code class="code">X='X</code> as an argument to
+<code class="code">ev</code>.  Of course expressions such as <code class="code">ev (X, X=X+1, infeval)</code> will
+generate an infinite loop.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="noeval"></a><a class="anchor" id="Item_003a-Evaluation_002fdefvr_002fnoeval"></a><dl class="first-defvr">
+<dt class="defvr" id="index-noeval"><span class="category-def">Special symbol: </span><span><strong class="def-name">noeval</strong><a class="copiable-link" href='#index-noeval'> &para;</a></span></dt>
+<dd>
+<p><code class="code">noeval</code> suppresses the evaluation phase of <code class="code"><a class="ref" href="#ev">ev</a></code>.  This is useful in
+conjunction with other switches and in causing expressions      
+to be resimplified without being reevaluated.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="nouns"></a><a class="anchor" id="Item_003a-Evaluation_002fdefvr_002fnouns"></a><dl class="first-defvr">
+<dt class="defvr" id="index-nouns"><span class="category-def">Special symbol: </span><span><strong class="def-name">nouns</strong><a class="copiable-link" href='#index-nouns'> &para;</a></span></dt>
+<dd>
+<p><code class="code">nouns</code> is an <code class="code"><a class="ref" href="#evflag">evflag</a></code>.  When used as an option to the <code class="code"><a class="ref" href="#ev">ev</a></code><!-- /@w -->
+command, <code class="code">nouns</code> converts all &quot;noun&quot; forms occurring in the expression
+being <code class="code">ev</code>&rsquo;d to &quot;verbs&quot;, i.e., evaluates them.  See also
+<code class="code"><a class="ref" href="maxima_5.html#noun">noun</a></code>, <code class="code"><a class="ref" href="maxima_5.html#nounify">nounify</a></code>, <code class="code">verb</code>, and <code class="code"><a class="ref" href="maxima_5.html#verbify">verbify</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Nouns-and-verbs">Nouns and verbs</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="pred"></a><a class="anchor" id="Item_003a-Evaluation_002fdefvr_002fpred"></a><dl class="first-defvr">
+<dt class="defvr" id="index-pred"><span class="category-def">Special symbol: </span><span><strong class="def-name">pred</strong><a class="copiable-link" href='#index-pred'> &para;</a></span></dt>
+<dd>
+<p>As an argument in a call to <code class="code">ev (<var class="var">expr</var>)</code>, <code class="code">pred</code> causes 
+predicates (expressions which evaluate to <code class="code">true</code> or <code class="code">false</code>) to be 
+evaluated.  See <code class="code"><a class="ref" href="#ev">ev</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) 1&lt;2;
+(%o1)                                1 &lt; 2
+(%i2) 1&lt;2,pred;
+(%o2)                                true
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_8.html#Simplification" accesskey="n" rel="next">Simplification</a>, Previous: <a href="maxima_6.html#Operators" accesskey="p" rel="prev">Operators</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

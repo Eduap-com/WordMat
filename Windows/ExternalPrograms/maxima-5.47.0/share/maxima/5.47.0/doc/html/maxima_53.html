@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>drawdf-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="drawdf-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="drawdf-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_54.html#dynamics_002dpkg" rel="next" title="dynamics-pkg">
+<link href="maxima_52.html#draw_002dpkg" rel="prev" title="draw-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="drawdf_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_54.html#dynamics_002dpkg" accesskey="n" rel="next">dynamics</a>, Previous: <a href="maxima_52.html#draw_002dpkg" accesskey="p" rel="prev">draw</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="drawdf-1">54 drawdf</h2>
+
+<a class="anchor" id="Item_003a-drawdf_002fnode_002fIntroduction-to-drawdf"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-drawdf" accesskey="1">Introduction to drawdf</a></li>
+<li><a href="#Functions-and-Variables-for-drawdf" accesskey="2">Functions and Variables for drawdf</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-drawdf">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-drawdf" accesskey="n" rel="next">Functions and Variables for drawdf</a>, Previous: <a href="#drawdf_002dpkg" accesskey="p" rel="prev">drawdf</a>, Up: <a href="#drawdf_002dpkg" accesskey="u" rel="up">drawdf</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-drawdf-1">54.1 Introduction to drawdf</h3>
+
+<p>The function <code class="code">drawdf</code> draws the direction field of a first-order
+Ordinary Differential Equation (ODE) or a system of two autonomous
+first-order ODE&rsquo;s.
+</p>
+<p>Since this is an additional package, in order to use it you must first
+load it with <code class="code">load(&quot;drawdf&quot;)</code>.  Drawdf is built upon the <code class="code">draw</code>
+package, which requires Gnuplot 4.2.
+</p>
+<p>To plot the direction field of a single ODE, the ODE must be written in
+the form:
+</p><div class="example">
+<pre class="example-preformatted">       dy
+       -- = F(x,y)
+       dx
+</pre></div>
+
+<p>and the function <var class="var">F</var> should be given as the argument for
+<code class="code">drawdf</code>. If the independent and dependent variables are not <var class="var">x</var>,
+and <var class="var">y</var>, as in the equation above, then those two variables should
+be named explicitly in a list given as an argument to the drawdf command
+(see the examples).
+</p>
+<p>To plot the direction field of a set of two autonomous ODE&rsquo;s, they must
+be written in the form
+</p><div class="example">
+<pre class="example-preformatted">       dx             dy
+       -- = G(x,y)    -- = F(x,y) 
+       dt             dt
+</pre></div>
+
+<p>and the argument for <code class="code">drawdf</code> should be a list with the two
+functions <var class="var">G</var> and <var class="var">F</var>, in that order; namely, the first
+expression in the list will be taken to be the time derivative of the
+variable represented on the horizontal axis, and the second expression
+will be the time derivative of the variable represented on the vertical
+axis. Those two variables do not have to be <var class="var">x</var> and <var class="var">y</var>, but if
+they are not, then the second argument given to drawdf must be another
+list naming the two variables, first the one on the horizontal axis and
+then the one on the vertical axis.
+</p>
+<p>If only one ODE is given, <code class="code">drawdf</code> will implicitly admit
+<code class="code">x=t</code>, and <code class="code">G(x,y)=1</code>, transforming the non-autonomous
+equation into a system of two autonomous equations.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-drawdf">Package drawdf</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-draw">Package draw</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-drawdf_002fnode_002fFunctions-and-Variables-for-drawdf"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-drawdf">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-drawdf" accesskey="p" rel="prev">Introduction to drawdf</a>, Up: <a href="#drawdf_002dpkg" accesskey="u" rel="up">drawdf</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-drawdf-1">54.2 Functions and Variables for drawdf</h3>
+
+<ul class="mini-toc">
+<li><a href="#Functions-1" accesskey="1">Functions</a></li>
+</ul>
+<div class="subsection-level-extent" id="Functions-1">
+<h4 class="subsection">54.2.1 Functions</h4>
+
+<a class="anchor" id="drawdf"></a><a class="anchor" id="Item_003a-drawdf_002fdeffn_002fdrawdf"></a><dl class="first-deffn">
+<dt class="deffn" id="index-drawdf"><span class="category-def">Function: </span><span><strong class="def-name">drawdf</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">drawdf</code> (<var class="var">dydx</var>, ...options and objects...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">drawdf</code> (<var class="var">dvdu</var>, [<var class="var">u</var>,<var class="var">v</var>], ...options and objects...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">drawdf</code> (<var class="var">dvdu</var>, [<var class="var">u</var>,<var class="var">umin</var>,<var class="var">umax</var>], [<var class="var">v</var>,<var class="var">vmin</var>,<var class="var">vmax</var>], ...options and objects...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">drawdf</code> ([<var class="var">dxdt</var>,<var class="var">dydt</var>], ...options and objects...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">drawdf</code> ([<var class="var">dudt</var>,<var class="var">dvdt</var>], [<var class="var">u</var>,<var class="var">v</var>], ...options and objects...) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">drawdf</code> ([<var class="var">dudt</var>,<var class="var">dvdt</var>], [<var class="var">u</var>,<var class="var">umin</var>,<var class="var">umax</var>], [<var class="var">v</var>,<var class="var">vmin</var>,<var class="var">vmax</var>], ...options and objects...)</var><a class="copiable-link" href='#index-drawdf'> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code">drawdf</code> draws a 2D direction field with optional
+solution curves and other graphics using the <code class="code">draw</code> package.
+</p>
+<p>The first argument specifies the derivative(s), and must be either an
+expression or a list of two expressions.  <var class="var">dydx</var>, <var class="var">dxdt</var> and
+<var class="var">dydt</var> are expressions that depend on <var class="var">x</var> and <var class="var">y</var>.
+<var class="var">dvdu</var>, <var class="var">dudt</var> and <var class="var">dvdt</var> are expressions that depend on
+<var class="var">u</var> and <var class="var">v</var>.
+</p>
+<p>If the independent and dependent variables are not <var class="var">x</var> and
+<var class="var">y</var>, then their names must be specified immediately following the
+derivative(s), either as a list of two names
+<code class="code">[</code><var class="var">u</var>,<var class="var">v</var><code class="code">]</code>, or as two lists of the form
+<code class="code">[</code><var class="var">u</var>,<var class="var">umin</var>,<var class="var">umax</var><code class="code">]</code> and
+<code class="code">[</code><var class="var">v</var>,<var class="var">vmin</var>,<var class="var">vmax</var><code class="code">]</code>.
+</p>
+<p>The remaining arguments are <i class="i">graphic options</i>, <i class="i">graphic objects</i>,
+or lists containing graphic options and objects, nested to arbitrary
+depth.  The set of graphic options and objects supported by
+<code class="code">drawdf</code> is a superset of those supported by <code class="code">draw2d</code> and
+<code class="code">gr2d</code> from the <code class="code">draw</code> package.
+</p>
+<p>The arguments are interpreted sequentially: <i class="i">graphic options</i> affect
+all following <i class="i">graphic objects</i>.  Furthermore, <i class="i">graphic objects</i>
+are drawn on the canvas in order specified, and may obscure graphics
+drawn earlier.  Some <i class="i">graphic options</i> affect the global appearance
+of the scene.
+</p>
+<p>The additional <i class="i">graphic objects</i> supported by <code class="code">drawdf</code> include:
+<code class="code">solns_at</code>, <code class="code">points_at</code>, <code class="code">saddles_at</code>, <code class="code">soln_at</code>,
+<code class="code">point_at</code>, and <code class="code">saddle_at</code>.
+</p>
+<p>The additional <i class="i">graphic options</i> supported by <code class="code">drawdf</code> include:
+<code class="code">field_degree</code>, <code class="code">soln_arrows</code>, <code class="code">field_arrows</code>,
+<code class="code">field_grid</code>, <code class="code">field_color</code>, <code class="code">show_field</code>,
+<code class="code">tstep</code>, <code class="code">nsteps</code>, <code class="code">duration</code>, <code class="code">direction</code>,
+<code class="code">field_tstep</code>, <code class="code">field_nsteps</code>, and <code class="code">field_duration</code>.
+</p>
+<p>Commonly used <i class="i">graphic objects</i> inherited from the <code class="code">draw</code>
+package include: <code class="code">explicit</code>, <code class="code">implicit</code>, <code class="code">parametric</code>,
+<code class="code">polygon</code>, <code class="code">points</code>, <code class="code">vector</code>, <code class="code">label</code>, and all
+others supported by <code class="code">draw2d</code> and <code class="code">gr2d</code>.
+</p>
+<p>Commonly used <i class="i">graphic options</i> inherited from the <code class="code">draw</code>
+package include:<br>
+<code class="code">points_joined</code>, <code class="code">color</code>,
+<code class="code">point_type</code>, <code class="code">point_size</code>, <code class="code">line_width</code>,
+<code class="code">line_type</code>, <code class="code">key</code>, <code class="code">title</code>, <code class="code">xlabel</code>,
+<code class="code">ylabel</code>, <code class="code">user_preamble</code>, <code class="code">terminal</code>,
+<code class="code">dimensions</code>, <code class="code">file_name</code>, and all
+others supported by <code class="code">draw2d</code> and <code class="code">gr2d</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_52.html#draw2d">draw2d</a></code>, <code class="code"><a class="ref" href="maxima_21.html#rk">rk</a></code>, <code class="code"><a class="ref" href="maxima_20.html#desolve">desolve</a></code> and 
+<code class="code"><a class="ref" href="maxima_20.html#ode2">ode2</a></code>.
+</p>
+<p>Users of wxMaxima or Imaxima may optionally use <code class="code">wxdrawdf</code>, which
+is identical to <code class="code">drawdf</code> except that the graphics are drawn
+within the notebook using <code class="code">wxdraw</code>.
+</p>
+<p>To make use of this function, write first <code class="code">load(&quot;drawdf&quot;)</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;drawdf&quot;)$
+(%i2) drawdf(exp(-x)+y)$        /* default vars: x,y */
+(%i3) drawdf(exp(-t)+y, [t,y])$ /* default range: [-10,10] */
+(%i4) drawdf([y,-9*sin(x)-y/5], [x,1,5], [y,-2,2])$
+</pre></div>
+
+<p>For backward compatibility, <code class="code">drawdf</code> accepts
+most of the parameters supported by plotdf.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i5) drawdf(2*cos(t)-1+y, [t,y], [t,-5,10], [y,-4,9],
+             [trajectory_at,0,0])$
+</pre></div>
+
+<p><code class="code">soln_at</code> and <code class="code">solns_at</code> draw solution curves
+passing through the specified points, using a slightly
+enhanced 4th-order Runge Kutta numerical integrator.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i6) drawdf(2*cos(t)-1+y, [t,-5,10], [y,-4,9],
+             solns_at([0,0.1],[0,-0.1]),
+             color=blue, soln_at(0,0))$
+</pre></div>
+
+<p><code class="code">field_degree=2</code> causes the field to be composed of quadratic
+splines, based on the first and second derivatives at each grid point.
+<code class="code">field_grid=[</code><var class="var">COLS</var>,<var class="var">ROWS</var><code class="code">]</code> specifies the number
+of columns and rows in the grid.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i7) drawdf(2*cos(t)-1+y, [t,-5,10], [y,-4,9],
+             field_degree=2, field_grid=[20,15],
+             solns_at([0,0.1],[0,-0.1]),
+             color=blue, soln_at(0,0))$
+</pre></div>
+
+<p><code class="code">soln_arrows=true</code> adds arrows to the solution curves, and (by
+default) removes them from the direction field.  It also changes the
+default colors to emphasize the solution curves.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i8) drawdf(2*cos(t)-1+y, [t,-5,10], [y,-4,9],
+             soln_arrows=true,
+             solns_at([0,0.1],[0,-0.1],[0,0]))$
+</pre></div>
+
+<p><code class="code">duration=40</code> specifies the time duration of numerical
+integration (default 10).  Integration will also stop automatically if
+the solution moves too far away from the plotted region, or if the
+derivative becomes complex or infinite.  Here we also specify
+<code class="code">field_degree=2</code> to plot quadratic splines.  The equations below
+model a predator-prey system.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i9) drawdf([x*(1-x-y), y*(3/4-y-x/2)], [x,0,1.1], [y,0,1],
+             field_degree=2, duration=40,
+             soln_arrows=true, point_at(1/2,1/2),
+             solns_at([0.1,0.2], [0.2,0.1], [1,0.8], [0.8,1],
+                      [0.1,0.1], [0.6,0.05], [0.05,0.4],
+                      [1,0.01], [0.01,0.75]))$
+</pre></div>
+
+<p><code class="code">field_degree='solns</code> causes the field to be composed
+of many small solution curves computed by 4th-order
+Runge Kutta, with better results in this case.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i10) drawdf([x*(1-x-y), y*(3/4-y-x/2)], [x,0,1.1], [y,0,1],
+              field_degree='solns, duration=40,
+              soln_arrows=true, point_at(1/2,1/2),
+              solns_at([0.1,0.2], [0.2,0.1], [1,0.8],
+                       [0.8,1], [0.1,0.1], [0.6,0.05],
+                       [0.05,0.4], [1,0.01], [0.01,0.75]))$
+</pre></div>
+
+<p><code class="code">saddles_at</code> attempts to automatically linearize the equation at
+each saddle, and to plot a numerical solution corresponding to each
+eigenvector, including the separatrices.  <code class="code">tstep=0.05</code> specifies
+the maximum time step for the numerical integrator (the default is
+0.1).  Note that smaller time steps will sometimes be used in order to
+keep the x and y steps small.  The equations below model a damped
+pendulum.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i11) drawdf([y,-9*sin(x)-y/5], tstep=0.05,
+              soln_arrows=true, point_size=0.5,
+              points_at([0,0], [2*%pi,0], [-2*%pi,0]),
+              field_degree='solns,
+              saddles_at([%pi,0], [-%pi,0]))$
+</pre></div>
+
+<p><code class="code">show_field=false</code> suppresses the field entirely.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i12) drawdf([y,-9*sin(x)-y/5], tstep=0.05,
+              show_field=false, soln_arrows=true,
+              point_size=0.5,
+              points_at([0,0], [2*%pi,0], [-2*%pi,0]),
+              saddles_at([3*%pi,0], [-3*%pi,0],
+                         [%pi,0], [-%pi,0]))$
+</pre></div>
+
+<p><code class="code">drawdf</code> passes all unrecognized parameters to <code class="code">draw2d</code> or
+<code class="code">gr2d</code>, allowing you to combine the full power of the <code class="code">draw</code>
+package with <code class="code">drawdf</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i13) drawdf(x^2+y^2, [x,-2,2], [y,-2,2], field_color=gray,
+              key=&quot;soln 1&quot;, color=black, soln_at(0,0),
+              key=&quot;soln 2&quot;, color=red, soln_at(0,1),
+              key=&quot;isocline&quot;, color=green, line_width=2,
+              nticks=100, parametric(cos(t),sin(t),t,0,2*%pi))$
+</pre></div>
+
+<p><code class="code">drawdf</code> accepts nested lists of graphic options and objects,
+allowing convenient use of makelist and other function calls to
+generate graphics.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i14) colors : ['red,'blue,'purple,'orange,'green]$
+(%i15) drawdf([x-x*y/2, (x*y - 3*y)/4],
+              [x,2.5,3.5], [y,1.5,2.5],
+              field_color = gray,
+              makelist([ key   = concat(&quot;soln&quot;,k),
+                         color = colors[k],
+                         soln_at(3, 2 + k/20) ],
+                       k,1,5))$
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-drawdf">Package drawdf</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_54.html#dynamics_002dpkg" accesskey="n" rel="next">dynamics</a>, Previous: <a href="maxima_52.html#draw_002dpkg" accesskey="p" rel="prev">draw</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Function</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Function">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Function">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_166.html#Function-Definition" rel="up" title="Function Definition">
+<link href="maxima_169.html#Macros" rel="next" title="Macros">
+<link href="maxima_167.html#Introduction-to-Function-Definition" rel="previous" title="Introduction to Function Definition">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Function"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_169.html#Macros" accesskey="n" rel="next">Macros</a>, Previous: <a href="maxima_167.html#Introduction-to-Function-Definition" accesskey="p" rel="previous">Introduction to Function Definition</a>, Up: <a href="maxima_166.html#Function-Definition" accesskey="u" rel="up">Function Definition</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Function-1"></a>
+<h3 class="section">36.2 Function</h3>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Function-definition">Function definition</a>
+&middot;<a href="maxima_424.html#Category_003a-Programming">Programming</a>
+&middot;</div>
+<a name="Ordinary-functions"></a>
+<h4 class="subsection">36.2.1 Ordinary functions</h4>
+
+<p>To define a function in Maxima you use the <code>:=</code> operator.
+E.g.
+</p>
+<div class="example">
+<pre class="example">f(x) := sin(x)
+</pre></div>
+
+<p>defines a function <code>f</code>.
+Anonymous functions may also be created using <code>lambda</code>.
+For example
+</p>
+<div class="example">
+<pre class="example">lambda ([i, j], ...)
+</pre></div>
+
+<p>can be used instead of <code>f</code>
+where
+</p>
+<div class="example">
+<pre class="example">f(i,j) := block ([], ...);
+map (lambda ([i], i+1), l)
+</pre></div>
+
+<p>would return a list with 1 added to each term.
+</p>
+<p>You may also define a function with a variable number of arguments,
+by having a final argument which is assigned to a list of the extra
+arguments:
+</p>
+<div class="example">
+<pre class="example">(%i1) f ([u]) := u;
+(%o1)                      f([u]) := u
+(%i2) f (1, 2, 3, 4);
+(%o2)                     [1, 2, 3, 4]
+(%i3) f (a, b, [u]) := [a, b, u];
+(%o3)               f(a, b, [u]) := [a, b, u]
+(%i4) f (1, 2, 3, 4, 5, 6);
+(%o4)                 [1, 2, [3, 4, 5, 6]]
+</pre></div>
+
+<p>The right hand side of a function is an expression.  Thus
+if you want a sequence of expressions, you do
+</p>
+<div class="example">
+<pre class="example">f(x) := (expr1, expr2, ...., exprn);
+</pre></div>
+
+<p>and the value of <var>exprn</var> is what is returned by the function.
+</p>
+<p>If you wish to make a <code>return</code> from some expression inside the
+function then you must use <code>block</code> and <code>return</code>.
+</p>
+<div class="example">
+<pre class="example">block ([], expr1, ..., if (a &gt; 10) then return(a), ..., exprn)
+</pre></div>
+
+<p>is itself an expression, and so could take the place of the
+right hand side of a function definition.  Here it may happen
+that the return happens earlier than the last expression.
+</p>
+<p>The first <code>[]</code> in the block, may contain a list of variables and
+variable assignments, such as <code>[a: 3, b, c: []]</code>, which would cause the
+three variables <code>a</code>,<code>b</code>,and <code>c</code> to not refer to their
+global values, but rather have these special values for as long as the
+code executes inside the <code>block</code>, or inside functions called from
+inside the <code>block</code>.  This is called <i>dynamic</i> binding, since the
+variables last from the start of the block to the time it exits.  Once
+you return from the <code>block</code>, or throw out of it, the old values (if
+any) of the variables will be restored.  It is certainly a good idea
+to protect your variables in this way.  Note that the assignments
+in the block variables, are done in parallel.  This means, that if
+you had used <code>c: a</code> in the above, the value of <code>c</code> would
+have been the value of <code>a</code> at the time you just entered the block,
+but before <code>a</code> was bound.  Thus doing something like
+</p>
+<div class="example">
+<pre class="example">block ([a: a], expr1, ... a: a+3, ..., exprn)
+</pre></div>
+
+<p>will protect the external value of <code>a</code> from being altered, but
+would let you access what that value was.  Thus the right hand
+side of the assignments, is evaluated in the entering context, before
+any binding occurs.
+Using just <code>block ([x], ...)</code> would cause the <code>x</code> to have itself
+as value, just as if it would have if you entered a fresh Maxima
+session.
+</p>
+<p>The actual arguments to a function are treated in exactly same way as
+the variables in a block.  Thus in
+</p>
+<div class="example">
+<pre class="example">f(x) := (expr1, ..., exprn);
+</pre></div>
+
+<p>and
+</p>
+<div class="example">
+<pre class="example">f(1);
+</pre></div>
+
+<p>we would have a similar context for evaluation of the expressions
+as if we had done
+</p>
+<div class="example">
+<pre class="example">block ([x: 1], expr1, ..., exprn)
+</pre></div>
+
+<p>Inside functions, when the right hand side of a definition,
+may be computed at runtime, it is useful to use <code>define</code> and
+possibly <code>buildq</code>.
+</p>
+<a name="memoizing-function"></a><a name="memoizing-functions"></a><a name="Memoizing-function"></a><a name="Memoizing-functions"></a><a name="Memoizing-Functions"></a>
+<h4 class="subsection">36.2.2 Memoizing Functions</h4>
+
+<p>A <i>memoizing function</i> caches the result the first time it is called with a
+given argument, and returns the stored value, without recomputing it, when that
+same argument is given.  Memoizing functions are often called
+<i>array function</i> and are in fact handled like arrays in many ways:
+</p>
+<p>The names of memoizing functions are appended to the global list <code>arrays</code>
+(not the global list <code>functions</code>).  <code>arrayinfo</code> returns the list of
+arguments for which there are stored values, and <code>listarray</code> returns the
+stored values.  <code>dispfun</code> and <code>fundef</code> return the array function
+definition.
+</p>
+<p><code>arraymake</code> constructs an array function call,
+analogous to <code>funmake</code> for ordinary functions.
+<code>arrayapply</code> applies an array function to its arguments,
+analogous to <code>apply</code> for ordinary functions.
+There is nothing exactly analogous to <code>map</code> for array functions,
+although <code>map(lambda([<var>x</var>], <var>a</var>[<var>x</var>]), <var>L</var>)</code> or
+<code>makelist(<var>a</var>[<var>x</var>], <var>x</var>, <var>L</var>)</code>, where <var>L</var> is a list,
+are not too far off the mark.
+</p>
+<p><code>remarray</code> removes an array function definition (including any stored
+function values), analogous to <code>remfunction</code> for ordinary functions.
+</p>
+<p><code>kill(<var>a</var>[<var>x</var>])</code> removes the value of the array function <var>a</var>
+stored for the argument <var>x</var>;
+the next time <var>a</var> is called with argument <var>x</var>,
+the function value is recomputed.
+However, there is no way to remove all of the stored values at once,
+except for <code>kill(<var>a</var>)</code> or <code>remarray(<var>a</var>)</code>,
+which also remove the function definition.
+</p>
+
+<p>Examples
+</p>
+<p>If evaluating the function needs much time and only a limited number of points
+is ever evaluated (which means not much time is spent looking up results in a
+long list of cached results) Memoizing functions can speed up calculations
+considerably.
+</p><div class="example">
+<pre class="example">(%i1) showtime:true$
+Evaluation took 0.0000 seconds (0.0000 elapsed) using 0 bytes.
+</pre><pre class="example">(%i2) a[x]:=float(sum(sin(x*t),t,1,10000));
+Evaluation took 0.0000 seconds (0.0000 elapsed) using 0 bytes.
+(%o2)        a  := float(sum(sin(x t), t, 1, 10000))
+              x
+</pre><pre class="example">(%i3) a[1];
+Evaluation took 5.1250 seconds (5.1260 elapsed) using 775.250 MB.
+(%o3)                   1.633891021792447
+</pre><pre class="example">(%i4) a[1];
+Evaluation took 0.0000 seconds (0.0000 elapsed) using 0 bytes.
+(%o4)                   1.633891021792447
+</pre></div>
+
+<p>As the memoizing function is only evaluated once for each input value
+changes in variables the memoizing function uses are not considered
+for values that are already cached:
+</p><div class="example">
+<pre class="example">(%i1) a[x]:=b*x;
+(%o1)                       a  := b x
+                             x
+</pre><pre class="example">(%i2) b:1;
+(%o2)                           1
+</pre><pre class="example">(%i3) a[2];
+(%o3)                           2
+</pre><pre class="example">(%i4) b:2;
+(%o4)                           2
+</pre><pre class="example">(%i5) a[1];
+(%o5)                           2
+</pre><pre class="example">(%i6) a[2];
+(%o6)                           2
+</pre></div>
+
+<a name="Item_003a-Function_002fnode_002fMacros"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_169.html#Macros" accesskey="n" rel="next">Macros</a>, Previous: <a href="maxima_167.html#Introduction-to-Function-Definition" accesskey="p" rel="previous">Introduction to Function Definition</a>, Up: <a href="maxima_166.html#Function-Definition" accesskey="u" rel="up">Function Definition</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

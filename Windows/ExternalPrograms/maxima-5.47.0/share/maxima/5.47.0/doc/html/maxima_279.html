@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions for Gentran</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions for Gentran">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions for Gentran">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_277.html#gentran_002dpkg" rel="up" title="gentran-pkg">
+<link href="maxima_280.html#Gentran-Mode-Switches" rel="next" title="Gentran Mode Switches">
+<link href="maxima_278.html#Introduction-to-Gentran" rel="previous" title="Introduction to Gentran">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-for-Gentran"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_280.html#Gentran-Mode-Switches" accesskey="n" rel="next">Gentran Mode Switches</a>, Previous: <a href="maxima_278.html#Introduction-to-Gentran" accesskey="p" rel="previous">Introduction to Gentran</a>, Up: <a href="maxima_277.html#gentran_002dpkg" accesskey="u" rel="up">gentran-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-for-Gentran-1"></a>
+<h3 class="section">61.2 Functions for Gentran</h3>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentran"></a><dl>
+<dt><a name="index-gentran"></a>Function: <strong>gentran</strong> <em>(<var>stmt1</var>, <var>stmt2</var>, ... , <var>stmtn</var> , <var>[f1, f2, ... , fm]</var>)</em></dt>
+<dd><p>Translates each stmt into formatted code in the target language. A
+substantial subset of expressions and statements in the Maxima
+programming language can be translated directly into numerical code. The
+<strong>gentran</strong> command translates Maxima statements or procedure
+definitions into code in the target language (<strong>gentranlang:</strong>
+fortran, c, or ratfor). Expressions may optionally be given to Maxima
+for evaluation prior to translation.
+</p>
+<p><em>stmt1, stmt2, ... , stmtn</em> is a sequence of one or more
+statements, each of which is any Maxima user level expression, (simple,
+group, or block) statement, or procedure definition that can be
+translated into the target language.
+</p>
+<p><em>[f1, f2, ... , fm]</em> is an optional list of output files to which
+translated output will be written. They can be any of the following:
+</p>
+<p><em><strong>string</strong></em> = the name of an output file in quotes
+</p>
+<p><strong>true</strong> (no quotes) = the terminal
+</p>
+<p><strong>false</strong> = the current output file(s)
+</p>
+<p><strong>all</strong> = all files currently open for output by gentran
+</p>
+<p>If the files are not open they will be opened; if they are open, output
+will be appended to them. Filenames are given as quoted strings. If the
+optional variable <strong>genoutpath</strong> (string, including the final /)
+default <strong>false</strong> is set, it will be prepended to the output file
+names. If the output file list is omitted, output will be written to the
+current output, generally the terminal. <strong>gentran</strong> returns (a list
+of) the name(s) of file(s) to which code was written.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentranout"></a><dl>
+<dt><a name="index-gentranout"></a>Function: <strong>gentranout</strong> <em>(<var>f1</var>, <var>f2</var>, ... , <var>fn</var>)</em></dt>
+<dd>
+<p>Gentran maintains a list of files currently open for output by gentran
+commands only. gentranout inserts each file name represented by
+<em>f1, f2,... , fn</em> into that list and opens each one for output. It
+also resets the current output file(s) to include all files in
+<em>f1, f2, ... , fn</em>. gentranout returns the list of files represented by
+<em>f1, f2, ... , fn</em>; i.e., the current output file(s) after the
+command has been executed.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentranshut"></a><dl>
+<dt><a name="index-gentranshut"></a>Function: <strong>gentranshut</strong> <em>(<var>f1</var>, <var>f2</var>, ... , <var>fn</var>)</em></dt>
+<dd>
+<p>gentranshut creates a list of file names from <em>f1, f2, ... , fn</em>,
+deletes each from the output file list, and closes the corresponding
+files. If (all of) the current output file(s) are closed, then the
+current output file is reset to the terminal. gentranshut returns (a
+list of) the current output file(s) after the command has been executed.
+<strong>gentranshut</strong>(<strong>all</strong>) will close all gentran output files.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentranpush"></a><dl>
+<dt><a name="index-gentranpush"></a>Function: <strong>gentranpush</strong> <em>(<var>f1</var>, <var>f2</var>, ... , <var>fn</var>)</em></dt>
+<dd>
+<p>gentranpush pushes the file list onto the output stack. Each file in the
+list that is not already open for output is opened at this time. The
+current output file is reset to this new element on the top of the
+stack.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentranpop"></a><dl>
+<dt><a name="index-gentranpop"></a>Function: <strong>gentranpop</strong> <em>(<var>f1</var>, <var>f2</var>, ... , <var>fn</var>)</em></dt>
+<dd>
+<p>gentranpop deletes the top-most occurrence of the single element
+containing the file name(s) represented by <em>f1, f2, ... , fn</em> from
+the output stack. Files whose names have been completely removed from
+the output stack are closed. The current output file is reset to the
+(new) element on the top of the output stack. gentranpop returns the
+current output file(s) after this command has been executed.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentranin"></a><dl>
+<dt><a name="index-gentranin"></a>Function: <strong>gentranin</strong> <em>(<var>f1</var>, <var>f2</var>, ... , <var>fn</var>, [<var>f1</var>,<var>f2</var>, ... , <var>fm</var>])</em></dt>
+<dd>
+<p>gentranin processes mixed-language template files consisting of active
+parts (delimited by &lt;&lt;&hellip;&gt;&gt;) containing Maxima statements, including
+calls to gentran, and passive parts, assumed to contain statements in
+the target language (including comments), which are transcribed
+verbatim. Input files are processed sequentially and the results
+appended to the output. The presence of &gt;&gt; in passive parts of the file
+(except for in comments) is interpreted as an end-of-file and terminates
+processing of that file. The optional list of output files <em>[f1,f2,
+... , fm]</em> each receive a copy of the entire output. All filespecs are
+quoted strings. Input files may be given as (quoted string) filenames,
+which will be located by Maxima <strong>file_search</strong>. The optional
+variable <strong>geninpath</strong> (default <strong>false</strong> ) must be a
+<em>list</em> of quoted strings describing the paths to be searched for
+the input files. If it is set, that list replaces the standard Maxima
+search paths.
+</p>
+<p>Active parts may contain any number of Maxima expressions and
+statements. They are not copied directly to the output. Instead, they
+are given to Maxima for evaluation. All output generated by each
+evaluation is sent to the output file(s). Returned values are only
+printed on the terminal. Active parts will most likely contain calls to
+gentran to generate code. This means that the result of processing a
+template file will be the original template file with all active parts
+replaced by generated code. If <em>[f1, f2, ... , fm]</em> is not
+supplied, then generated code is simply written to the current output
+file(s). However, if it is given, then the current output file is
+temporarily overridden. Generated code is written to each file
+represented by <em>f1, f2, ... , fn</em> for this command only. Files which
+were open prior to the call to gentranin will remain open after the
+call, and files which did not exist prior to the call will be created,
+opened, written to, and closed. The output file stack will be exactly
+the same both before and after the call. gentranin returns (to the
+terminal) the name(s) of (all) file(s) written to by this command.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentraninshut"></a><dl>
+<dt><a name="index-gentraninshut"></a>Function: <strong>gentraninshut</strong> <em>()</em></dt>
+<dd>
+<p>A cleanup function to close input files in case where gentranin hung due
+to error in template.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002ftempvar"></a><dl>
+<dt><a name="index-tempvar"></a>Function: <strong>tempvar</strong> <em>(<var>type</var>)</em></dt>
+<dd>
+<p>Generates temporary variable names by concatenating <strong>tempvarname</strong>
+(default <strong>&rsquo;t</strong>) with sequence numbers. If <em>type</em> is
+non-false, <em>e.g.</em> &quot;real*8&quot; the corresponding type is assigned to
+the variable in the gentran symbol table, which may be used to generate
+declarations depending on the setting of the <strong>gendecs</strong> flag. It
+is the users responsibility to make sure temporary variable names do not
+conflict with the main program.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fmarkvar"></a><dl>
+<dt><a name="index-markvar"></a>Function: <strong>markvar</strong> <em>(<var>vname</var>)</em></dt>
+<dd>
+<p>markvar &quot;marks&quot; variable name <em>vname</em> to indicate that it currently
+holds a significant value.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002funmarkvar"></a><dl>
+<dt><a name="index-unmarkvar"></a>Function: <strong>unmarkvar</strong> <em>(<var>vname</var>)</em></dt>
+<dd>
+<p>unmarkvar &quot;unmarks&quot; variable name <em>vname</em> to indicate that it no
+longer holds a significant value.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fmarkedvarp"></a><dl>
+<dt><a name="index-markedvarp"></a>Function: <strong>markedvarp</strong> <em>(<var>vname</var>)</em></dt>
+<dd>
+<p>markedvarp tests whether the variable name <em>vname</em> is currently
+marked.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgendecs"></a><dl>
+<dt><a name="index-gendecs"></a>Function: <strong>gendecs</strong> <em>(<var>name</var>)</em></dt>
+<dd>
+<p>The gendecs command can be called any time the gendecs flag is switched
+off to retrieve all type declarations from Gentran&rsquo;s symbol table for
+the given subprogram name (or the &quot;current&quot; subprogram if false is given
+as its argument).
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentran_005fon"></a><dl>
+<dt><a name="index-gentran_005fon"></a>Function: <strong>gentran_on</strong> <em>(<var>sw</var>)</em></dt>
+<dd>
+<p>Turns on the mode switch <em>sw</em>.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fdeffn_002fgentran_005foff"></a><dl>
+<dt><a name="index-gentran_005foff"></a>Function: <strong>gentran_off</strong> <em>(<var>sw</var>)</em></dt>
+<dd>
+<p>Turns the given switch, <em>sw</em>, off.
+</p></dd></dl>
+
+<a name="Item_003a-gentran_002fnode_002fGentran-Mode-Switches"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_280.html#Gentran-Mode-Switches" accesskey="n" rel="next">Gentran Mode Switches</a>, Previous: <a href="maxima_278.html#Introduction-to-Gentran" accesskey="p" rel="previous">Introduction to Gentran</a>, Up: <a href="maxima_277.html#gentran_002dpkg" accesskey="u" rel="up">gentran-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

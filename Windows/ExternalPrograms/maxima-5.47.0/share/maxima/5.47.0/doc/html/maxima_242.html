@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Poisson Random Variable</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Poisson Random Variable">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Poisson Random Variable">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_239.html#Functions-and-Variables-for-discrete-distributions" rel="up" title="Functions and Variables for discrete distributions">
+<link href="maxima_243.html#Bernoulli-Random-Variable" rel="next" title="Bernoulli Random Variable">
+<link href="maxima_241.html#Binomial-Random-Variable" rel="previous" title="Binomial Random Variable">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Poisson-Random-Variable"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_243.html#Bernoulli-Random-Variable" accesskey="n" rel="next">Bernoulli Random Variable</a>, Previous: <a href="maxima_241.html#Binomial-Random-Variable" accesskey="p" rel="previous">Binomial Random Variable</a>, Up: <a href="maxima_239.html#Functions-and-Variables-for-discrete-distributions" accesskey="u" rel="up">Functions and Variables for discrete distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Poisson-Random-Variable-1"></a>
+<h4 class="subsection">52.3.3 Poisson Random Variable</h4>
+
+<p>The <em>Poisson distribution</em> is a discrete probability
+distribution. It is the probability that a given number of events
+occur in a fixed interval when the events occur independently of the
+time of the last event, and the events occur with a known constant
+rate.
+</p>
+<a name="pdf_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002fpdf_005fpoisson"></a><dl>
+<dt><a name="index-pdf_005fpoisson"></a>Function: <strong>pdf_poisson</strong> <em>(<var>x</var>,<var>m</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the probability function of a 
+\({\it Poisson}(m)\) random variable, with <em>m&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The pdf is
+$$
+f(x; m) = {m^x e^{-m}\over x!}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="cdf_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002fcdf_005fpoisson"></a><dl>
+<dt><a name="index-cdf_005fpoisson"></a>Function: <strong>cdf_poisson</strong> <em>(<var>x</var>,<var>m</var>)</em></dt>
+<dd><p>Returns the value at <var>x</var> of the distribution function of a 
+\({\it Poisson}(m)\) random variable, with <em>m&gt;0</em>.
+</p>
+<p>The cdf is
+$$
+F(x; m) = Q(\lfloor x \rfloor + 1, m)
+$$</p>
+<p>where <em>Q(x,m)</em> is the <a href="maxima_87.html#gamma_005fincomplete_005fregularized">gamma_incomplete_regularized</a>
+function.
+</p>
+<div class="example">
+<pre class="example">(%i1) load (&quot;distrib&quot;)$
+</pre><pre class="example">(%i2) cdf_poisson(3,5);
+(%o2)          gamma_incomplete_regularized(4, 5)
+</pre><pre class="example">(%i3) float(%);
+(%o3)                  0.2650259152973619
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="quantile_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002fquantile_005fpoisson"></a><dl>
+<dt><a name="index-quantile_005fpoisson"></a>Function: <strong>quantile_poisson</strong> <em>(<var>q</var>,<var>m</var>)</em></dt>
+<dd><p>Returns the <var>q</var>-quantile of a 
+\({\it Poisson}(m)\) random variable, with <em>m&gt;0</em>; in other words, this is the inverse of <code>cdf_poisson</code>. Argument <var>q</var> must be an element of <em>[0,1]</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="mean_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002fmean_005fpoisson"></a><dl>
+<dt><a name="index-mean_005fpoisson"></a>Function: <strong>mean_poisson</strong> <em>(<var>m</var>)</em></dt>
+<dd><p>Returns the mean of a 
+\({\it Poisson}(m)\) random variable, with  <em>m&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The mean is
+$$
+E[X] = m
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="var_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002fvar_005fpoisson"></a><dl>
+<dt><a name="index-var_005fpoisson"></a>Function: <strong>var_poisson</strong> <em>(<var>m</var>)</em></dt>
+<dd><p>Returns the variance of a 
+\({\it Poisson}(m)\) random variable, with  <em>m&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The variance is
+$$
+V[X] = m
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="std_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002fstd_005fpoisson"></a><dl>
+<dt><a name="index-std_005fpoisson"></a>Function: <strong>std_poisson</strong> <em>(<var>m</var>)</em></dt>
+<dd><p>Returns the standard deviation of a 
+\({\it Poisson}(m)\) random variable, with <em>m&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The standard deviation is
+$$
+V[X] = \sqrt{m}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="skewness_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002fskewness_005fpoisson"></a><dl>
+<dt><a name="index-skewness_005fpoisson"></a>Function: <strong>skewness_poisson</strong> <em>(<var>m</var>)</em></dt>
+<dd><p>Returns the skewness coefficient of a 
+\({\it Poisson}(m)\) random variable, with <em>m&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The skewness is
+$$
+SK[X] = {1\over \sqrt{m}}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="kurtosis_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002fkurtosis_005fpoisson"></a><dl>
+<dt><a name="index-kurtosis_005fpoisson"></a>Function: <strong>kurtosis_poisson</strong> <em>(<var>m</var>)</em></dt>
+<dd><p>Returns the kurtosis coefficient of a Poisson random variable  <em>Poi(m)</em>, with <em>m&gt;0</em>. To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<p>The kurtosis coefficient is
+$$
+KU[X] = {1\over m}
+$$</p>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="random_005fpoisson"></a><a name="Item_003a-distrib_002fdeffn_002frandom_005fpoisson"></a><dl>
+<dt><a name="index-random_005fpoisson"></a>Function: <strong>random_poisson</strong> <em>(<var>m</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>random_poisson</tt> (<var>m</var>,<var>n</var>)</em></dt>
+<dd>
+<p>Returns a 
+\({\it Poisson}(m)\) random variate, with <em>m&gt;0</em>. Calling <code>random_poisson</code> with a second argument <var>n</var>, a random sample of size <var>n</var> will be simulated.
+</p>
+<p>The implemented algorithm is the one described in Ahrens, J.H. and Dieter, U. (1982) <var>Computer Generation of Poisson Deviates From Modified Normal Distributions</var>. ACM Trans. Math. Software, 8, 2, June,163-179.
+</p>
+<p>To make use of this function, write first <code>load(&quot;distrib&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-distrib">Package distrib</a>
+&middot;<a href="maxima_424.html#Category_003a-Random-numbers">Random numbers</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-distrib_002fnode_002fBernoulli-Random-Variable"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_243.html#Bernoulli-Random-Variable" accesskey="n" rel="next">Bernoulli Random Variable</a>, Previous: <a href="maxima_241.html#Binomial-Random-Variable" accesskey="p" rel="previous">Binomial Random Variable</a>, Up: <a href="maxima_239.html#Functions-and-Variables-for-discrete-distributions" accesskey="u" rel="up">Functions and Variables for discrete distributions</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

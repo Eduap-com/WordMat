@@ -1,0 +1,924 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for QUADPACK</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for QUADPACK">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for QUADPACK">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_102.html#Integration" rel="up" title="Integration">
+<link href="maxima_107.html#Equations" rel="next" title="Equations">
+<link href="maxima_105.html#Introduction-to-QUADPACK" rel="previous" title="Introduction to QUADPACK">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-QUADPACK"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_105.html#Introduction-to-QUADPACK" accesskey="p" rel="previous">Introduction to QUADPACK</a>, Up: <a href="maxima_102.html#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-QUADPACK-1"></a>
+<h3 class="section">19.4 Functions and Variables for QUADPACK</h3>
+
+
+<a name="quad_005fqag"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fqag"></a><dl>
+<dt><a name="index-quad_005fqag"></a>Function: <strong>quad_qag</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qag</tt> (<var>f(x)</var>, <var>x</var>, <var>a</var>, <var>b</var>, <var>key</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qag</tt> (<var>f</var>, <var>x</var>, <var>a</var>, <var>b</var>, <var>key</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>])</em></dt>
+<dd>
+<p>Integration of a general function over a finite interval.  <code>quad_qag</code>
+implements a simple globally adaptive integrator using the strategy of Aind
+(Piessens, 1973).  The caller may choose among 6 pairs of Gauss-Kronrod
+quadrature formulae for the rule evaluation component.  The high-degree rules
+are suitable for strongly oscillating integrands.
+</p>
+<p><code>quad_qag</code> computes the integral
+</p>
+$$
+\int_a^b f(x)\, dx
+$$
+
+<p>The function to be integrated is <em>f(x)</em>, with dependent
+variable <em>x</em>, and the function is to be integrated between the
+limits <em>a</em> and <em>b</em>.  <var>key</var> is the integrator to be used
+and should be an integer between 1 and 6, inclusive.  The value of
+<var>key</var> selects the order of the Gauss-Kronrod integration rule.
+High-order rules are suitable for strongly oscillating integrands.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The numerical integration is done adaptively by subdividing the
+integration region into sub-intervals until the desired accuracy is
+achieved.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code>key=val</code>.  The keyword arguments are:
+</p>
+<dl compact="compact">
+<dt><code>epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code>epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code>limit</code></dt>
+<dd><p>Size of internal work array.  <var>limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code>quad_qag</code> returns a list of four elements:
+</p>
+<ul>
+<li> an approximation to the integral,
+</li><li> the estimated absolute error of the approximation,
+</li><li> the number integrand evaluations,
+</li><li> an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>if no problems were encountered;
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>if too many sub-intervals were done;
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>if excessive roundoff error is detected;
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>if extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) quad_qag (x^(1/2)*log(1/x), x, 0, 1, 3, 'epsrel=5d-8);
+(%o1)    [.4444444444492108, 3.1700968502883E-9, 961, 0]
+</pre><pre class="example">(%i2) integrate (x^(1/2)*log(1/x), x, 0, 1);
+                                4
+(%o2)                           -
+                                9
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+
+<a name="quad_005fqags"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fqags"></a><dl>
+<dt><a name="index-quad_005fqags"></a>Function: <strong>quad_qags</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qags</tt> (<var>f(x)</var>, <var>x</var>, <var>a</var>, <var>b</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qags</tt> (<var>f</var>, <var>x</var>, <var>a</var>, <var>b</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>])</em></dt>
+<dd>
+<p>Integration of a general function over a finite interval.
+<code>quad_qags</code> implements globally adaptive interval subdivision with
+extrapolation (de Doncker, 1978) by the Epsilon algorithm (Wynn, 1956).
+</p>
+<p><code>quad_qags</code> computes the integral
+</p>
+$$
+\int_a^b f(x)\, dx
+$$
+
+<p>The function to be integrated is <em>f(x)</em>, with
+dependent variable <em>x</em>, and the function is to be integrated
+between the limits <em>a</em> and <em>b</em>.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code>key=val</code>.  The keyword arguments are:
+</p>
+<dl compact="compact">
+<dt><code>epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code>epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code>limit</code></dt>
+<dd><p>Size of internal work array.  <var>limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code>quad_qags</code> returns a list of four elements:
+</p>
+<ul>
+<li> an approximation to the integral,
+</li><li> the estimated absolute error of the approximation,
+</li><li> the number integrand evaluations,
+</li><li> an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code>4</code></dt>
+<dd><p>failed to converge
+</p></dd>
+<dt><code>5</code></dt>
+<dd><p>integral is probably divergent or slowly convergent
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>if the input is invalid.
+</p></dd>
+</dl>
+
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) quad_qags (x^(1/2)*log(1/x), x, 0, 1, 'epsrel=1d-10);
+(%o1)   [.4444444444444448, 1.11022302462516E-15, 315, 0]
+</pre></div>
+
+<p>Note that <code>quad_qags</code> is more accurate and efficient than <code>quad_qag</code> for this integrand.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+
+<a name="quad_005fqagi"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fqagi"></a><dl>
+<dt><a name="index-quad_005fqagi"></a>Function: <strong>quad_qagi</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qagi</tt> (<var>f(x)</var>, <var>x</var>, <var>a</var>, <var>b</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qagi</tt> (<var>f</var>, <var>x</var>, <var>a</var>, <var>b</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>])</em></dt>
+<dd>
+<p>Integration of a general function over an infinite or semi-infinite interval.
+The interval is mapped onto a finite interval and
+then the same strategy as in <code>quad_qags</code> is applied.
+</p>
+<p><code>quad_qagi</code> evaluates one of the following integrals
+</p>
+$$
+\int_a^\infty f(x) \, dx
+$$
+
+$$
+\int_\infty^a f(x) \, dx
+$$
+
+$$
+\int_{-\infty}^\infty f(x) \, dx
+$$
+
+<p>using the Quadpack QAGI routine.  The function to be integrated is
+<em>f(x)</em>, with dependent variable <em>x</em>, and the function is to
+be integrated over an infinite range.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>One of the limits of integration must be infinity.  If not, then
+<code>quad_qagi</code> will just return the noun form.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code>key=val</code>.  The keyword arguments are:
+</p>
+<dl compact="compact">
+<dt><code>epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code>epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code>limit</code></dt>
+<dd><p>Size of internal work array.  <var>limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code>quad_qagi</code> returns a list of four elements:
+</p>
+<ul>
+<li> an approximation to the integral,
+</li><li> the estimated absolute error of the approximation,
+</li><li> the number integrand evaluations,
+</li><li> an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code>4</code></dt>
+<dd><p>failed to converge
+</p></dd>
+<dt><code>5</code></dt>
+<dd><p>integral is probably divergent or slowly convergent
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) quad_qagi (x^2*exp(-4*x), x, 0, inf, 'epsrel=1d-8);
+(%o1)        [0.03125, 2.95916102995002E-11, 105, 0]
+</pre><pre class="example">(%i2) integrate (x^2*exp(-4*x), x, 0, inf);
+                               1
+(%o2)                          --
+                               32
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+
+<a name="quad_005fqawc"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fqawc"></a><dl>
+<dt><a name="index-quad_005fqawc"></a>Function: <strong>quad_qawc</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qawc</tt> (<var>f(x)</var>, <var>x</var>, <var>c</var>, <var>a</var>, <var>b</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qawc</tt> (<var>f</var>, <var>x</var>, <var>c</var>, <var>a</var>, <var>b</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>])</em></dt>
+<dd>
+<p>Computes the Cauchy principal value of <em>f(x)/(x - c)</em> over a finite
+interval.  The strategy is globally adaptive, and modified
+Clenshaw-Curtis integration is used on the subranges
+which contain the point <em>x = c</em>.
+</p>
+<p><code>quad_qawc</code> computes the Cauchy principal value of
+</p>
+$$
+\int_{a}^{b}{{{f\left(x\right)}\over{x-c}}\>dx}
+$$
+
+<p>using the Quadpack QAWC routine.  The function to be integrated is
+<em>f(x)/(x-c)</em>, with dependent variable <em>x</em>, and the
+function is to be integrated over the interval <em>a</em> to <em>b</em>.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code>key=val</code>.  The keyword arguments are:
+</p>
+<dl compact="compact">
+<dt><code>epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code>epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code>limit</code></dt>
+<dd><p>Size of internal work array.  <var>limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code>quad_qawc</code> returns a list of four elements:
+</p>
+<ul>
+<li> an approximation to the integral,
+</li><li> the estimated absolute error of the approximation,
+</li><li> the number integrand evaluations,
+</li><li> an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) quad_qawc (2^(-5)*((x-1)^2+4^(-5))^(-1), x, 2, 0, 5,
+                 'epsrel=1d-7);
+(%o1)    [- 3.130120337415925, 1.306830140249558E-8, 495, 0]
+</pre><pre class="example">(%i2) integrate (2^(-alpha)*(((x-1)^2 + 4^(-alpha))*(x-2))^(-1),
+      x, 0, 5);
+Principal Value
+                       alpha
+        alpha       9 4                 9
+       4      log(------------- + -------------)
+                      alpha           alpha
+                  64 4      + 4   64 4      + 4
+(%o2) (-----------------------------------------
+                        alpha
+                     2 4      + 2
+
+       3 alpha                       3 alpha
+       -------                       -------
+          2            alpha/2          2          alpha/2
+    2 4        atan(4 4       )   2 4        atan(4       )   alpha
+  - --------------------------- - -------------------------)/2
+              alpha                        alpha
+           2 4      + 2                 2 4      + 2
+</pre><pre class="example">(%i3) ev (%, alpha=5, numer);
+(%o3)                    - 3.130120337415917
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+
+<a name="quad_005fqawf"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fqawf"></a><dl>
+<dt><a name="index-quad_005fqawf"></a>Function: <strong>quad_qawf</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qawf</tt> (<var>f(x)</var>, <var>x</var>, <var>a</var>, <var>omega</var>, <var>trig</var>, [<var>epsabs</var>, <var>limit</var>, <var>maxp1</var>, <var>limlst</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qawf</tt> (<var>f</var>, <var>x</var>, <var>a</var>, <var>omega</var>, <var>trig</var>, [<var>epsabs</var>, <var>limit</var>, <var>maxp1</var>, <var>limlst</var>])</em></dt>
+<dd>
+<p>Calculates a Fourier cosine or Fourier sine transform on a semi-infinite
+interval using the Quadpack QAWF function.  The same approach as in
+<code>quad_qawo</code> is applied on successive finite intervals, and convergence
+acceleration by means of the Epsilon algorithm (Wynn, 1956) is applied to the
+series of the integral contributions.
+</p>
+<p><code>quad_qawf</code> computes the integral
+</p>
+$$
+\int_a^\infty f(x) \, w(x) \, dx
+$$
+
+<p>The weight function <em>w</em> is selected by <var>trig</var>:
+</p>
+<dl compact="compact">
+<dt><code>cos</code></dt>
+<dd>
+\(w(x) = \cos\omega x\)
+</dd>
+<dt><code>sin</code></dt>
+<dd>
+\(w(x) = \sin\omega x\)
+</dd>
+</dl>
+
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code>key=val</code>.  The keyword arguments are:
+</p>
+<dl compact="compact">
+<dt><code>epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 1d-10.
+</p></dd>
+<dt><code>limit</code></dt>
+<dd><p>Size of internal work array.  (<var>limit</var> - <var>limlst</var>)/2 is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+<dt><code>maxp1</code></dt>
+<dd><p>Maximum number of Chebyshev moments.  Must be greater than 0.  Default
+is 100.
+</p></dd>
+<dt><code>limlst</code></dt>
+<dd><p>Upper bound on the number of cycles.  Must be greater than or equal to
+3.  Default is 10.
+</p></dd>
+</dl>
+
+<p><code>quad_qawf</code> returns a list of four elements:
+</p>
+<ul>
+<li> an approximation to the integral,
+</li><li> the estimated absolute error of the approximation,
+</li><li> the number integrand evaluations,
+</li><li> an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) quad_qawf (exp(-x^2), x, 0, 1, 'cos, 'epsabs=1d-9);
+(%o1)   [.6901942235215714, 2.84846300257552E-11, 215, 0]
+</pre><pre class="example">(%i2) integrate (exp(-x^2)*cos(x), x, 0, inf);
+                          - 1/4
+                        %e      sqrt(%pi)
+(%o2)                   -----------------
+                                2
+</pre><pre class="example">(%i3) ev (%, numer);
+(%o3)                   .6901942235215714
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+
+<a name="quad_005fqawo"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fqawo"></a><dl>
+<dt><a name="index-quad_005fqawo"></a>Function: <strong>quad_qawo</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qawo</tt> (<var>f(x)</var>, <var>x</var>, <var>a</var>, <var>b</var>, <var>omega</var>, <var>trig</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>, <var>maxp1</var>, <var>limlst</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qawo</tt> (<var>f</var>, <var>x</var>, <var>a</var>, <var>b</var>, <var>omega</var>, <var>trig</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>, <var>maxp1</var>, <var>limlst</var>])</em></dt>
+<dd>
+<p>Integration of 
+\(\cos(\omega x) f(x)\) or 
+\(\sin(\omega x)\) over a finite interval,
+where 
+\(\omega\) is a constant.
+The rule evaluation component is based on the modified
+Clenshaw-Curtis technique.  <code>quad_qawo</code> applies adaptive subdivision with
+extrapolation, similar to <code>quad_qags</code>.
+</p>
+<p><code>quad_qawo</code> computes the integral using the Quadpack QAWO
+routine:
+</p>
+$$
+\int_a^b f(x) \, w(x) \, dx
+$$
+
+<p>The weight function <em>w</em> is selected by <var>trig</var>:
+</p>
+<dl compact="compact">
+<dt><code>cos</code></dt>
+<dd>
+\(w(x) = \cos\omega x\)
+</dd>
+<dt><code>sin</code></dt>
+<dd>
+\(w(x) = \sin\omega x\)
+</dd>
+</dl>
+
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code>key=val</code>.  The keyword arguments are:
+</p>
+<dl compact="compact">
+<dt><code>epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code>epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code>limit</code></dt>
+<dd><p>Size of internal work array.  <var>limit</var>/2 is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+<dt><code>maxp1</code></dt>
+<dd><p>Maximum number of Chebyshev moments.  Must be greater than 0.  Default
+is 100.
+</p></dd>
+<dt><code>limlst</code></dt>
+<dd><p>Upper bound on the number of cycles.  Must be greater than or equal to
+3.  Default is 10.
+</p></dd>
+</dl>
+
+<p><code>quad_qawo</code> returns a list of four elements:
+</p>
+<ul>
+<li> an approximation to the integral,
+</li><li> the estimated absolute error of the approximation,
+</li><li> the number integrand evaluations,
+</li><li> an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) quad_qawo (x^(-1/2)*exp(-2^(-2)*x), x, 1d-8, 20*2^2, 1, cos);
+(%o1)     [1.376043389877692, 4.72710759424899E-11, 765, 0]
+</pre><pre class="example">(%i2) rectform (integrate (x^(-1/2)*exp(-2^(-alpha)*x) * cos(x),
+      x, 0, inf));
+                   alpha/2 - 1/2            2 alpha
+        sqrt(%pi) 2              sqrt(sqrt(2        + 1) + 1)
+(%o2)   -----------------------------------------------------
+                               2 alpha
+                         sqrt(2        + 1)
+</pre><pre class="example">(%i3) ev (%, alpha=2, numer);
+(%o3)                     1.376043390090716
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+
+<a name="quad_005fqaws"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fqaws"></a><dl>
+<dt><a name="index-quad_005fqaws"></a>Function: <strong>quad_qaws</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qaws</tt> (<var>f(x)</var>, <var>x</var>, <var>a</var>, <var>b</var>, <var>alpha</var>, <var>beta</var>, <var>wfun</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qaws</tt> (<var>f</var>, <var>x</var>, <var>a</var>, <var>b</var>, <var>alpha</var>, <var>beta</var>, <var>wfun</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>])</em></dt>
+<dd>
+<p>Integration of <em>w(x) f(x)</em> over a finite interval, where <em>w(x)</em> is a
+certain algebraic or logarithmic function.  A globally adaptive subdivision
+strategy is applied, with modified Clenshaw-Curtis integration on the
+subintervals which contain the endpoints of the interval of integration.
+</p>
+<p><code>quad_qaws</code> computes the integral using the Quadpack QAWS routine:
+</p>
+$$
+\int_a^b f(x) \, w(x) \, dx
+$$
+
+<p>The weight function <em>w</em> is selected by <var>wfun</var>:
+</p>
+<dl compact="compact">
+<dt><code>1</code></dt>
+<dd>
+\(w(x) = (x - a)^\alpha (b - x)^\beta\)
+</dd>
+<dt><code>2</code></dt>
+<dd>
+\(w(x) = (x - a)^\alpha (b - x)^\beta \log(x - a)\)
+</dd>
+<dt><code>3</code></dt>
+<dd>
+\(w(x) = (x - a)^\alpha (b - x)^\beta \log(b - x)\)
+</dd>
+<dt><code>4</code></dt>
+<dd>
+\(w(x) = (x - a)^\alpha (b - x)^\beta \log(x - a) \log(b - x)\)
+</dd>
+</dl>
+
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code>key=val</code>.  The keyword arguments are:
+</p>
+<dl compact="compact">
+<dt><code>epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code>epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code>limit</code></dt>
+<dd><p>Size of internal work array.  <var>limit</var>is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code>quad_qaws</code> returns a list of four elements:
+</p>
+<ul>
+<li> an approximation to the integral,
+</li><li> the estimated absolute error of the approximation,
+</li><li> the number integrand evaluations,
+</li><li> an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>if the input is invalid.
+</p>
+</dd>
+</dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) quad_qaws (1/(x+1+2^(-4)), x, -1, 1, -0.5, -0.5, 1,
+                 'epsabs=1d-9);
+(%o1)     [8.750097361672832, 1.24321522715422E-10, 170, 0]
+</pre><pre class="example">(%i2) integrate ((1-x*x)^(-1/2)/(x+1+2^(-alpha)), x, -1, 1);
+       alpha
+Is  4 2      - 1  positive, negative, or zero?
+
+pos;
+                          alpha         alpha
+                   2 %pi 2      sqrt(2 2      + 1)
+(%o2)              -------------------------------
+                               alpha
+                            4 2      + 2
+</pre><pre class="example">(%i3) ev (%, alpha=4, numer);
+(%o3)                     8.750097361672829
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+
+<a name="quad_005fqagp"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fqagp"></a><dl>
+<dt><a name="index-quad_005fqagp"></a>Function: <strong>quad_qagp</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qagp</tt> (<var>f(x)</var>, <var>x</var>, <var>a</var>, <var>b</var>, <var>points</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>quad_qagp</tt> (<var>f</var>, <var>x</var>, <var>a</var>, <var>b</var>, <var>points</var>, [<var>epsrel</var>, <var>epsabs</var>, <var>limit</var>])</em></dt>
+<dd>
+<p>Integration of a general function over a finite interval.
+<code>quad_qagp</code> implements globally adaptive interval subdivision with
+extrapolation (de Doncker, 1978) by the Epsilon algorithm (Wynn, 1956).
+</p>
+<p><code>quad_qagp</code> computes the integral
+</p>
+$$
+\int_a^b f(x) \, dx
+$$
+
+<p>The function to be integrated is <em>f(x)</em>, with
+dependent variable <em>x</em>, and the function is to be integrated
+between the limits <em>a</em> and <em>b</em>.
+</p>
+<p>The integrand may be specified as the name of a Maxima or Lisp function or
+operator, a Maxima lambda expression, or a general Maxima expression.
+</p>
+<p>To help the integrator, the user must supply a list of points where
+the integrand is singular or discontinuous.
+</p>
+<p>The keyword arguments are optional and may be specified in any order.
+They all take the form <code>key=val</code>.  The keyword arguments are:
+</p>
+<dl compact="compact">
+<dt><code>epsrel</code></dt>
+<dd><p>Desired relative error of approximation.  Default is 1d-8.
+</p></dd>
+<dt><code>epsabs</code></dt>
+<dd><p>Desired absolute error of approximation.  Default is 0.
+</p></dd>
+<dt><code>limit</code></dt>
+<dd><p>Size of internal work array.  <var>limit</var> is the
+maximum number of subintervals to use.  Default is 200.
+</p></dd>
+</dl>
+
+<p><code>quad_qagp</code> returns a list of four elements:
+</p>
+<ul>
+<li> an approximation to the integral,
+</li><li> the estimated absolute error of the approximation,
+</li><li> the number integrand evaluations,
+</li><li> an error code.
+</li></ul>
+
+<p>The error code (fourth element of the return value) can have the values:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>no problems were encountered;
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>too many sub-intervals were done;
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>excessive roundoff error is detected;
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>extremely bad integrand behavior occurs;
+</p></dd>
+<dt><code>4</code></dt>
+<dd><p>failed to converge
+</p></dd>
+<dt><code>5</code></dt>
+<dd><p>integral is probably divergent or slowly convergent
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>if the input is invalid.
+</p></dd>
+</dl>
+
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) quad_qagp(x^3*log(abs((x^2-1)*(x^2-2))),x,0,3,[1,sqrt(2)]);
+(%o1)   [52.74074838347143, 2.6247632689546663e-7, 1029, 0]
+</pre><pre class="example">(%i2) quad_qags(x^3*log(abs((x^2-1)*(x^2-2))), x, 0, 3);
+(%o2)   [52.74074847951494, 4.088443219529836e-7, 1869, 0]
+</pre></div>
+
+<p>The integrand has singularities at <code>1</code> and <code>sqrt(2)</code> so we supply
+these points to <code>quad_qagp</code>.  We also note that <code>quad_qagp</code> is
+more accurate and more efficient that <code><a href="#quad_005fqags">quad_qags</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+<a name="quad_005fcontrol"></a><a name="Item_003a-Integration_002fdeffn_002fquad_005fcontrol"></a><dl>
+<dt><a name="index-quad_005fcontrol"></a>Function: <strong>quad_control</strong> <em>(<var>parameter</var>, [<var>value</var>])</em></dt>
+<dd>
+<p>Control error handling for quadpack.  The parameter should be one of
+the following symbols:
+</p>
+<dl compact="compact">
+<dt><code>current_error</code></dt>
+<dd><p>The current error number
+</p></dd>
+<dt><code>control</code></dt>
+<dd><p>Controls if messages are printed or not.  If it is set to zero or
+less, messages are suppressed.
+</p></dd>
+<dt><code>max_message</code></dt>
+<dd><p>The maximum number of times any message is to be printed.
+</p></dd>
+</dl>
+
+<p>If <var>value</var> is not given, then the current value of the
+<var>parameter</var> is returned.  If <var>value</var> is given, the value of
+<var>parameter</var> is set to the given value.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quadpack">Package quadpack</a>
+&middot;</div></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_105.html#Introduction-to-QUADPACK" accesskey="p" rel="previous">Introduction to QUADPACK</a>, Up: <a href="maxima_102.html#Integration" accesskey="u" rel="up">Integration</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

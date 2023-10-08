@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for Differential Equations</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for Differential Equations">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for Differential Equations">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_109.html#Differential-Equations" rel="up" title="Differential Equations">
+<link href="maxima_112.html#Numerical" rel="next" title="Numerical">
+<link href="maxima_110.html#Introduction-to-Differential-Equations" rel="previous" title="Introduction to Differential Equations">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-Differential-Equations"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_110.html#Introduction-to-Differential-Equations" accesskey="p" rel="previous">Introduction to Differential Equations</a>, Up: <a href="maxima_109.html#Differential-Equations" accesskey="u" rel="up">Differential Equations</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-Differential-Equations-1"></a>
+<h3 class="section">21.2 Functions and Variables for Differential Equations</h3>
+
+<a name="bc2"></a><a name="Item_003a-Differential_002fdeffn_002fbc2"></a><dl>
+<dt><a name="index-bc2"></a>Function: <strong>bc2</strong> <em>(<var>solution</var>, <var>xval1</var>, <var>yval1</var>, <var>xval2</var>, <var>yval2</var>)</em></dt>
+<dd><p>Solves a boundary value problem for a second order differential equation.
+Here: <var>solution</var> is a general solution to the equation, as found by
+<code><a href="#ode2">ode2</a></code>; <var>xval1</var> specifies the value of the independent variable
+in a first point, in the form <code><var>x</var> = <var>x1</var></code>, and <var>yval1</var>
+gives the value of the dependent variable in that point, in the form
+<code><var>y</var> = <var>y1</var></code>. The expressions <var>xval2</var> and <var>yval2</var>
+give the values for these variables at a second point, using the same
+form.
+</p>
+<p>See <code><a href="#ode2">ode2</a></code> for an example of its usage.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;</div></dd></dl>
+
+<a name="desolve"></a><a name="Item_003a-Differential_002fdeffn_002fdesolve"></a><dl>
+<dt><a name="index-desolve"></a>Function: <strong>desolve</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>desolve</tt> (<var>eqn</var>, <var>y</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>desolve</tt> ([<var>eqn_1</var>, ..., <var>eqn_n</var>], [<var>y_1</var>, ..., <var>y_n</var>])</em></dt>
+<dd>
+<p>The function <code>desolve</code> solves systems of linear ordinary
+differential equations using Laplace transform. Here the <var>eqn</var>&rsquo;s are
+differential equations in the dependent variables <var>y_1</var>, ...,
+<var>y_n</var>. The functional dependence of <var>y_1</var>, ..., <var>y_n</var> on an
+independent variable, for instance <var>x</var>, must be explicitly indicated
+in the variables and its derivatives. For example, the <em>correct</em>
+way to define the differential equations would be:
+</p>
+<div class="example">
+<pre class="example">eqn_1: 'diff(f(x),x,2) = sin(x) + 'diff(g(x),x);
+eqn_2: 'diff(f(x),x) + x^2 - f(x) = 2*'diff(g(x),x,2);
+</pre></div>
+
+<p>The call to the function <code>desolve</code> would then be:
+</p><div class="example">
+<pre class="example">desolve([eqn_1, eqn_2], [f(x),g(x)]);
+</pre></div>
+
+<p>If initial conditions at <code>x=0</code> are known, they can be supplied before
+calling <code>desolve</code> by using <code><a href="maxima_101.html#atvalue">atvalue</a></code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) 'diff(f(x),x)='diff(g(x),x)+sin(x);
+                 d           d
+(%o1)            -- (f(x)) = -- (g(x)) + sin(x)
+                 dx          dx
+(%i2) 'diff(g(x),x,2)='diff(f(x),x)-cos(x);
+</pre><pre class="example">                  2
+                 d            d
+(%o2)            --- (g(x)) = -- (f(x)) - cos(x)
+                   2          dx
+                 dx
+</pre><pre class="example">(%i3) atvalue('diff(g(x),x),x=0,a);
+(%o3)                           a
+(%i4) atvalue(f(x),x=0,1);
+(%o4)                           1
+(%i5) desolve([%o1,%o2],[f(x),g(x)]);
+                  x
+(%o5) [f(x) = a %e  - a + 1, g(x) = 
+
+                                                x
+                                   cos(x) + a %e  - a + g(0) - 1]
+(%i6) [%o1,%o2],%o5,diff;
+             x       x      x                x
+(%o6)   [a %e  = a %e , a %e  - cos(x) = a %e  - cos(x)]
+
+</pre></div>
+
+<p>If <code>desolve</code> cannot obtain a solution, it returns <code>false</code>.
+</p>
+<p>See also <code><a href="#ode2">ode2</a></code>, <code><a href="maxima_255.html#drawdf">drawdf</a></code> and <code><a href="maxima_118.html#rk">rk</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;<a href="maxima_424.html#Category_003a-Laplace-transform">Laplace transform</a>
+&middot;</div></dd></dl>
+<a name="ic1"></a><a name="Item_003a-Differential_002fdeffn_002fic1"></a><dl>
+<dt><a name="index-ic1"></a>Function: <strong>ic1</strong> <em>(<var>solution</var>, <var>xval</var>, <var>yval</var>)</em></dt>
+<dd><p>Solves initial value problems for first order differential equations.
+Here <var>solution</var> is a general solution to the equation, as found by
+<code><a href="#ode2">ode2</a></code>, <var>xval</var> gives an initial value for the independent
+variable in the form <code><var>x</var> = <var>x0</var></code>, and <var>yval</var> gives the
+initial value for the dependent variable in the form <code><var>y</var> =
+<var>y0</var></code>.
+</p>
+<p>See <code><a href="#ode2">ode2</a></code> for an example of its usage.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;</div></dd></dl>
+<a name="ic2"></a><a name="Item_003a-Differential_002fdeffn_002fic2"></a><dl>
+<dt><a name="index-ic2"></a>Function: <strong>ic2</strong> <em>(<var>solution</var>, <var>xval</var>, <var>yval</var>, <var>dval</var>)</em></dt>
+<dd><p>Solves initial value problems for second-order differential equations.
+Here <var>solution</var> is a general solution to the equation, as found by
+<code>ode2</code>, <var>xval</var> gives the initial value for the independent
+variable in the form <code><var>x</var> = <var>x0</var></code>, <var>yval</var> gives the
+initial value of the dependent variable in the form <code><var>y</var> =
+<var>y0</var></code>, and <var>dval</var> gives the initial value for the first
+derivative of the dependent variable with respect to independent
+variable, in the form <code>diff(<var>y</var>,<var>x</var>) = <var>dy0</var></code>
+(<code>diff</code> does not have to be quoted).
+</p>
+<p>See <code><a href="#ode2">ode2</a></code> for an example of its usage.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;</div></dd></dl>
+
+<a name="ode2"></a><a name="Item_003a-Differential_002fdeffn_002fode2"></a><dl>
+<dt><a name="index-ode2"></a>Function: <strong>ode2</strong> <em>(<var>eqn</var>, <var>dvar</var>, <var>ivar</var>)</em></dt>
+<dd><p>The function <code>ode2</code> solves an ordinary differential equation (ODE)
+of first or second order. It takes three arguments: an ODE given by
+<var>eqn</var>, the dependent variable <var>dvar</var>, and the independent
+variable <var>ivar</var>. When successful, it returns either an explicit or
+implicit solution for the dependent variable. <code><a href="#g_t_0025c">%c</a></code> is used to
+represent the integration constant in the case of first-order equations,
+and <code><a href="#g_t_0025k1">%k1</a></code> and <code><a href="#g_t_0025k2">%k2</a></code> the constants for second-order
+equations. The dependence of the dependent variable on the independent
+variable does not have to be written explicitly, as in the case of
+<code><a href="#desolve">desolve</a></code>, but the independent variable must always be given as the
+third argument.
+</p>
+<p>If <code>ode2</code> cannot obtain a solution for whatever reason, it returns
+<code>false</code>, after perhaps printing out an error message. The methods
+implemented for first order equations in the order in which they are
+tested are: linear, separable, exact - perhaps requiring an integrating
+factor, homogeneous, Bernoulli&rsquo;s equation, and a generalized homogeneous
+method. The types of second-order equations which can be solved are:
+constant coefficients, exact, linear homogeneous with non-constant
+coefficients which can be transformed to constant coefficients, the
+Euler or equi-dimensional equation, equations solvable by the method of
+variation of parameters, and equations which are free of either the
+independent or of the dependent variable so that they can be reduced to
+two first order linear equations to be solved sequentially.
+</p>
+<p>In the course of solving ODE&rsquo;s, several variables are set purely for
+informational purposes: <code><a href="#method">method</a></code> denotes the method of solution
+used (e.g., <code>linear</code>), <code>intfactor</code> denotes any integrating
+factor used, <code>odeindex</code> denotes the index for Bernoulli&rsquo;s method or
+for the generalized homogeneous method, and <code><a href="#yp">yp</a></code> denotes the
+particular solution for the variation of parameters technique.
+</p>
+<p>In order to solve initial value problems (IVP) functions <code><a href="#ic1">ic1</a></code> and
+<code><a href="#ic2">ic2</a></code> are available for first and second order equations, and to
+solve second-order boundary value problems (BVP) the function <code><a href="#bc2">bc2</a></code>
+can be used.
+</p>
+<p>See also <code><a href="#desolve">desolve</a></code>, <code><a href="maxima_255.html#drawdf">drawdf</a></code> and <code><a href="maxima_118.html#rk">rk</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) x^2*'diff(y,x) + 3*y*x = sin(x)/x;
+                      2 dy           sin(x)
+(%o1)                x  -- + 3 x y = ------
+                        dx             x
+(%i2) ode2(%,y,x);
+                             %c - cos(x)
+(%o2)                    y = -----------
+                                  3
+                                 x
+(%i3) ic1(%o2,x=%pi,y=0);
+                              cos(x) + 1
+(%o3)                   y = - ----------
+                                   3
+                                  x
+(%i4) 'diff(y,x,2) + y*'diff(y,x)^3 = 0;
+                         2
+                        d y      dy 3
+(%o4)                   --- + y (--)  = 0
+                          2      dx
+                        dx
+(%i5) ode2(%,y,x);
+                      3
+                     y  + 6 %k1 y
+(%o5)                ------------ = x + %k2
+                          6
+(%i6) ratsimp(ic2(%o5,x=0,y=0,'diff(y,x)=2));
+</pre><pre class="example">                             3
+                          2 y  - 3 y
+(%o6)                   - ---------- = x
+                              6
+</pre><pre class="example">(%i7) bc2(%o5,x=0,y=1,x=1,y=3);
+                         3
+                        y  - 10 y       3
+(%o7)                   --------- = x - -
+                            6           2
+
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;</div></dd></dl>
+
+<a name="method"></a><a name="Item_003a-Differential_002fdefvr_002fmethod"></a><dl>
+<dt><a name="index-method"></a>System variable: <strong>method</strong></dt>
+<dd>
+<p>The variable <code>method</code> is set by <code><a href="#ode2">ode2</a></code> to the successful solution
+method. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;</div>
+</dd></dl>
+
+<a name="g_t_0025c"></a><a name="Item_003a-Differential_002fdefvr_002f_0025c"></a><dl>
+<dt><a name="index-_0025c"></a>Variable: <strong>%c</strong></dt>
+<dd>
+<p><code>%c</code> is the integration constant in the solutions of first
+order ODEs returned from <code><a href="#ode2">ode2</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;</div>
+</dd></dl>
+
+<a name="g_t_0025k1"></a><a name="Item_003a-Differential_002fdefvr_002f_0025k1"></a><dl>
+<dt><a name="index-_0025k1"></a>Variable: <strong>%k1</strong></dt>
+<dd>
+<p><code>%k1</code> is the first integration constant in the solutions of second
+order ODEs returned from <code><a href="#ode2">ode2</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;</div>
+</dd></dl>
+
+<a name="g_t_0025k2"></a><a name="Item_003a-Differential_002fdefvr_002f_0025k2"></a><dl>
+<dt><a name="index-_0025k2"></a>Variable: <strong>%k2</strong></dt>
+<dd>
+<p><code>%k2</code> is the second integration constant in the solutions of second
+order ODEs returned from <code><a href="#ode2">ode2</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-contrib_005fode">Package contrib_ode</a>
+&middot;</div>
+</dd></dl>
+
+
+<a name="yp"></a><a name="Item_003a-Differential_002fdefvr_002fyp"></a><dl>
+<dt><a name="index-yp"></a>Variable: <strong>yp</strong></dt>
+<dd>
+<p><code><a href="#yp">yp</a></code> is the particular solution of an ODE found by <code><a href="#ode2">ode2</a></code>
+when using the variation of parameters technique.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;</div>
+</dd></dl>
+
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_110.html#Introduction-to-Differential-Equations" accesskey="p" rel="previous">Introduction to Differential Equations</a>, Up: <a href="maxima_109.html#Differential-Equations" accesskey="u" rel="up">Differential Equations</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

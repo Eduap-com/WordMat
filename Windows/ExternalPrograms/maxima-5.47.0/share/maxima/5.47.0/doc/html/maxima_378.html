@@ -1,0 +1,625 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: String Processing</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: String Processing">
+<meta name="keywords" content="Maxima 5.47.0 Manual: String Processing">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_374.html#stringproc_002dpkg" rel="up" title="stringproc-pkg">
+<link href="maxima_379.html#Octets-and-Utilities-for-Cryptography" rel="next" title="Octets and Utilities for Cryptography">
+<link href="maxima_377.html#Characters" rel="previous" title="Characters">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="String-Processing"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_379.html#Octets-and-Utilities-for-Cryptography" accesskey="n" rel="next">Octets and Utilities for Cryptography</a>, Previous: <a href="maxima_377.html#Characters" accesskey="p" rel="previous">Characters</a>, Up: <a href="maxima_374.html#stringproc_002dpkg" accesskey="u" rel="up">stringproc-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="String-Processing-1"></a>
+<h3 class="section">91.4 String Processing</h3>
+
+<p>Position indices in strings are 1-indexed like in Maxima lists. 
+See example in <a href="#charat">charat</a>.
+</p>
+<a name="charat"></a><a name="Item_003a-stringproc_002fdeffn_002fcharat"></a><dl>
+<dt><a name="index-charat"></a>Function: <strong>charat</strong> <em>(<var>string</var>, <var>n</var>) </em></dt>
+<dd>
+<p>Returns the <var>n</var>-th character of <var>string</var>.
+The first character in <var>string</var> is returned with <var>n</var> = 1. 
+</p>
+<div class="example">
+<pre class="example">(%i1) charat(&quot;Lisp&quot;,1);
+(%o1)                           L
+(%i2) charlist(&quot;Lisp&quot;)[1];
+(%o2)                           L
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="charlist"></a><a name="Item_003a-stringproc_002fdeffn_002fcharlist"></a><dl>
+<dt><a name="index-charlist"></a>Function: <strong>charlist</strong> <em>(<var>string</var>) </em></dt>
+<dd>
+<p>Returns the list of all characters in <var>string</var>. 
+</p>
+<div class="example">
+<pre class="example">(%i1) charlist(&quot;Lisp&quot;);
+(%o1)                     [L, i, s, p]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="eval_005fstring"></a><a name="Item_003a-stringproc_002fdeffn_002feval_005fstring"></a><dl>
+<dt><a name="index-eval_005fstring"></a>Function: <strong>eval_string</strong> <em>(<var>str</var>)</em></dt>
+<dd>
+<p>Parse the string <var>str</var> as a Maxima expression and evaluate it.
+The string <var>str</var> may or may not have a terminator (dollar sign <code>$</code> or semicolon <code>;</code>).
+Only the first expression is parsed and evaluated, if there is more than one.
+</p>
+<p>Complain if <var>str</var> is not a string.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) eval_string (&quot;foo: 42; bar: foo^2 + baz&quot;);
+(%o1)                       42
+(%i2) eval_string (&quot;(foo: 42, bar: foo^2 + baz)&quot;);
+(%o2)                   baz + 1764
+</pre></div>
+
+<p>See also <a href="#parse_005fstring">parse_string</a> and <a href="maxima_8.html#eval_005fstring_005flisp">eval_string_lisp</a>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="parse_005fstring"></a><a name="Item_003a-stringproc_002fdeffn_002fparse_005fstring"></a><dl>
+<dt><a name="index-parse_005fstring"></a>Function: <strong>parse_string</strong> <em>(<var>str</var>)</em></dt>
+<dd>
+<p>Parse the string <var>str</var> as a Maxima expression (do not evaluate it).
+The string <var>str</var> may or may not have a terminator (dollar sign <code>$</code> or semicolon <code>;</code>).
+Only the first expression is parsed, if there is more than one.
+</p>
+<p>Complain if <var>str</var> is not a string.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) parse_string (&quot;foo: 42; bar: foo^2 + baz&quot;);
+(%o1)                    foo : 42
+(%i2) parse_string (&quot;(foo: 42, bar: foo^2 + baz)&quot;);
+                                   2
+(%o2)          (foo : 42, bar : foo  + baz)
+</pre></div>
+
+<p>See also <a href="#eval_005fstring">eval_string</a>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="scopy"></a><a name="Item_003a-stringproc_002fdeffn_002fscopy"></a><dl>
+<dt><a name="index-scopy"></a>Function: <strong>scopy</strong> <em>(<var>string</var>) </em></dt>
+<dd>
+<p>Returns a copy of <var>string</var> as a new string. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sdowncase"></a><a name="Item_003a-stringproc_002fdeffn_002fsdowncase"></a><dl>
+<dt><a name="index-sdowncase"></a>Function: <strong>sdowncase</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sdowncase</tt> (<var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sdowncase</tt> (<var>string</var>, <var>start</var>)  <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sdowncase</tt> (<var>string</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Like <a href="#supcase">supcase</a> but uppercase characters are converted to lowercase. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sequal"></a><a name="Item_003a-stringproc_002fdeffn_002fsequal"></a><dl>
+<dt><a name="index-sequal"></a>Function: <strong>sequal</strong> <em>(<var>string_1</var>, <var>string_2</var>) </em></dt>
+<dd>
+<p>Returns <code>true</code> if <var>string_1</var> and <var>string_2</var> contain the same 
+sequence of characters. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sequalignore"></a><a name="Item_003a-stringproc_002fdeffn_002fsequalignore"></a><dl>
+<dt><a name="index-sequalignore"></a>Function: <strong>sequalignore</strong> <em>(<var>string_1</var>, <var>string_2</var>)</em></dt>
+<dd>
+<p>Like <code>sequal</code> but ignores case which is only possible for non-US-ASCII 
+characters when the underlying Lisp is able to recognize a character as an 
+alphabetic character. See remarks on <a href="maxima_377.html#alphacharp">alphacharp</a>. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sexplode"></a><a name="Item_003a-stringproc_002fdeffn_002fsexplode"></a><dl>
+<dt><a name="index-sexplode"></a>Function: <strong>sexplode</strong> <em>(<var>string</var>)</em></dt>
+<dd>
+<p><code>sexplode</code> is an alias for function <code>charlist</code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="simplode"></a><a name="Item_003a-stringproc_002fdeffn_002fsimplode"></a><dl>
+<dt><a name="index-simplode"></a>Function: <strong>simplode</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>simplode</tt> (<var>list</var>)   <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>simplode</tt> (<var>list</var>, <var>delim</var>)  </em></dt>
+<dd>
+<p><code>simplode</code> takes a list of expressions and concatenates them into a string.
+If no delimiter <var>delim</var> is specified, <code>simplode</code> uses no delimiter.
+<var>delim</var> can be any string.
+</p>
+<p>See also <code><a href="maxima_16.html#concat">concat</a></code>, <code><a href="maxima_16.html#sconcat">sconcat</a></code>, <code><a href="maxima_16.html#string">string</a></code> and <code><a href="maxima_376.html#printf">printf</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) simplode([&quot;xx[&quot;,3,&quot;]:&quot;,expand((x+y)^3)]);
+(%o1)             xx[3]:y^3+3*x*y^2+3*x^2*y+x^3
+(%i2) simplode( sexplode(&quot;stars&quot;),&quot; * &quot; );
+(%o2)                   s * t * a * r * s
+(%i3) simplode( [&quot;One&quot;,&quot;more&quot;,&quot;coffee.&quot;],&quot; &quot; );
+(%o3)                   One more coffee.
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sinsert"></a><a name="Item_003a-stringproc_002fdeffn_002fsinsert"></a><dl>
+<dt><a name="index-sinsert"></a>Function: <strong>sinsert</strong> <em>(<var>seq</var>, <var>string</var>, <var>pos</var>)  </em></dt>
+<dd><p>Returns a string that is a concatenation of <code>substring(<var>string</var>, 1, <var>pos</var>-1)</code>,
+the string <var>seq</var> and <code>substring (<var>string</var>, <var>pos</var>)</code>.
+Note that the first character in <var>string</var> is in position 1.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) s: &quot;A submarine.&quot;$
+(%i2) concat( substring(s,1,3),&quot;yellow &quot;,substring(s,3) );
+(%o2)                  A yellow submarine.
+(%i3) sinsert(&quot;hollow &quot;,s,3);
+(%o3)                  A hollow submarine.
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sinvertcase"></a><a name="Item_003a-stringproc_002fdeffn_002fsinvertcase"></a><dl>
+<dt><a name="index-sinvertcase"></a>Function: <strong>sinvertcase</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sinvertcase</tt> (<var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sinvertcase</tt> (<var>string</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sinvertcase</tt> (<var>string</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Returns <var>string</var> except that each character from position <var>start</var> to <var>end</var> is inverted.
+If <var>end</var> is not given,
+all characters from <var>start</var> to the end of <var>string</var> are replaced.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) sinvertcase(&quot;sInvertCase&quot;);
+(%o1)                      SiNVERTcASE
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="slength"></a><a name="Item_003a-stringproc_002fdeffn_002fslength"></a><dl>
+<dt><a name="index-slength"></a>Function: <strong>slength</strong> <em>(<var>string</var>) </em></dt>
+<dd>
+<p>Returns the number of characters in <var>string</var>. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="smake"></a><a name="Item_003a-stringproc_002fdeffn_002fsmake"></a><dl>
+<dt><a name="index-smake"></a>Function: <strong>smake</strong> <em>(<var>num</var>, <var>char</var>) </em></dt>
+<dd>
+<p>Returns a new string with a number of <var>num</var> characters <var>char</var>. 
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) smake(3,&quot;w&quot;);
+(%o1)                          www
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="smismatch"></a><a name="Item_003a-stringproc_002fdeffn_002fsmismatch"></a><dl>
+<dt><a name="index-smismatch"></a>Function: <strong>smismatch</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>smismatch</tt> (<var>string_1</var>, <var>string_2</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>smismatch</tt> (<var>string_1</var>, <var>string_2</var>, <var>test</var>)</em></dt>
+<dd>
+<p>Returns the position of the first character of <var>string_1</var> at which <var>string_1</var> and <var>string_2</var> differ or <code>false</code>.
+Default test function for matching is <code>sequal</code>.
+If <code>smismatch</code> should ignore case, use <code>sequalignore</code> as test.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) smismatch(&quot;seven&quot;,&quot;seventh&quot;);
+(%o1)                           6
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="split"></a><a name="Item_003a-stringproc_002fdeffn_002fsplit"></a><dl>
+<dt><a name="index-split"></a>Function: <strong>split</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>split</tt> (<var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>split</tt> (<var>string</var>, <var>delim</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>split</tt> (<var>string</var>, <var>delim</var>, <var>multiple</var>)</em></dt>
+<dd>
+<p>Returns the list of all tokens in <var>string</var>.
+Each token is an unparsed string.
+<code>split</code> uses <var>delim</var> as delimiter.
+If <var>delim</var> is not given, the space character is the default delimiter.
+<var>multiple</var> is a boolean variable with <code>true</code> by default.
+Multiple delimiters are read as one.
+This is useful if tabs are saved as multiple space characters.
+If <var>multiple</var> is set to <code>false</code>, each delimiter is noted.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) split(&quot;1.2   2.3   3.4   4.5&quot;);
+(%o1)                 [1.2, 2.3, 3.4, 4.5]
+(%i2) split(&quot;first;;third;fourth&quot;,&quot;;&quot;,false);
+(%o2)               [first, , third, fourth]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sposition"></a><a name="Item_003a-stringproc_002fdeffn_002fsposition"></a><dl>
+<dt><a name="index-sposition"></a>Function: <strong>sposition</strong> <em>(<var>char</var>, <var>string</var>) </em></dt>
+<dd><p>Returns the position of the first character in <var>string</var> which matches <var>char</var>.
+The first character in <var>string</var> is in position 1.
+For matching characters ignoring case see <a href="#ssearch">ssearch</a>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sremove"></a><a name="Item_003a-stringproc_002fdeffn_002fsremove"></a><dl>
+<dt><a name="index-sremove"></a>Function: <strong>sremove</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sremove</tt> (<var>seq</var>, <var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sremove</tt> (<var>seq</var>, <var>string</var>, <var>test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sremove</tt> (<var>seq</var>, <var>string</var>, <var>test</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sremove</tt> (<var>seq</var>, <var>string</var>, <var>test</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Returns a string like <var>string</var> but without all substrings matching <var>seq</var>.
+Default test function for matching is <code>sequal</code>.
+If <code>sremove</code> should ignore case while searching for <var>seq</var>, use <code>sequalignore</code> as test.
+Use <var>start</var> and <var>end</var> to limit searching.
+Note that the first character in <var>string</var> is in position 1.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) sremove(&quot;n't&quot;,&quot;I don't like coffee.&quot;);
+(%o1)                   I do like coffee.
+(%i2) sremove (&quot;DO &quot;,%,'sequalignore);
+(%o2)                    I like coffee.
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sremovefirst"></a><a name="Item_003a-stringproc_002fdeffn_002fsremovefirst"></a><dl>
+<dt><a name="index-sremovefirst"></a>Function: <strong>sremovefirst</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sremovefirst</tt> (<var>seq</var>, <var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sremovefirst</tt> (<var>seq</var>, <var>string</var>, <var>test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sremovefirst</tt> (<var>seq</var>, <var>string</var>, <var>test</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>sremovefirst</tt> (<var>seq</var>, <var>string</var>, <var>test</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Like <code>sremove</code> except that only the first substring that matches <var>seq</var> is removed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="sreverse"></a><a name="Item_003a-stringproc_002fdeffn_002fsreverse"></a><dl>
+<dt><a name="index-sreverse"></a>Function: <strong>sreverse</strong> <em>(<var>string</var>) </em></dt>
+<dd>
+<p>Returns a string with all the characters of <var>string</var> in reverse order. 
+</p>
+<p>See also <code><a href="maxima_21.html#reverse">reverse</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ssearch"></a><a name="Item_003a-stringproc_002fdeffn_002fssearch"></a><dl>
+<dt><a name="index-ssearch"></a>Function: <strong>ssearch</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssearch</tt> (<var>seq</var>, <var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssearch</tt> (<var>seq</var>, <var>string</var>, <var>test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssearch</tt> (<var>seq</var>, <var>string</var>, <var>test</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssearch</tt> (<var>seq</var>, <var>string</var>, <var>test</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Returns the position of the first substring of <var>string</var> that matches the string <var>seq</var>.
+Default test function for matching is <code>sequal</code>.
+If <code>ssearch</code> should ignore case, use <code>sequalignore</code> as test.
+Use <var>start</var> and <var>end</var> to limit searching.
+Note that the first character in <var>string</var> is in position 1.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) ssearch(&quot;~s&quot;,&quot;~{~S ~}~%&quot;,'sequalignore);
+(%o1)                                  4
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ssort"></a><a name="Item_003a-stringproc_002fdeffn_002fssort"></a><dl>
+<dt><a name="index-ssort"></a>Function: <strong>ssort</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssort</tt> (<var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssort</tt> (<var>string</var>, <var>test</var>)</em></dt>
+<dd>
+<p>Returns a string that contains all characters from <var>string</var> in an order such there are no two successive characters <var>c</var> and <var>d</var> such that <code>test (<var>c</var>, <var>d</var>)</code> is <code>false</code> and <code>test (<var>d</var>, <var>c</var>)</code> is <code>true</code>.
+Default test function for sorting is <var>clessp</var>.
+The set of test functions is <code>{clessp, clesspignore, cgreaterp, cgreaterpignore, cequal, cequalignore}</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) ssort(&quot;I don't like Mondays.&quot;);
+(%o1)                    '.IMaddeiklnnoosty
+(%i2) ssort(&quot;I don't like Mondays.&quot;,'cgreaterpignore);
+(%o2)                 ytsoonnMlkIiedda.'   
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ssubst"></a><a name="Item_003a-stringproc_002fdeffn_002fssubst"></a><dl>
+<dt><a name="index-ssubst"></a>Function: <strong>ssubst</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssubst</tt> (<var>new</var>, <var>old</var>, <var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssubst</tt> (<var>new</var>, <var>old</var>, <var>string</var>, <var>test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssubst</tt> (<var>new</var>, <var>old</var>, <var>string</var>, <var>test</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssubst</tt> (<var>new</var>, <var>old</var>, <var>string</var>, <var>test</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Returns a string like <var>string</var> except that all substrings matching <var>old</var> are replaced by <var>new</var>.
+<var>old</var> and <var>new</var> need not to be of the same length.
+Default test function for matching is <code>sequal</code>.
+If <code>ssubst</code> should ignore case while searching for old, use <code>sequalignore</code> as test.
+Use <var>start</var> and <var>end</var> to limit searching.
+Note that the first character in <var>string</var> is in position 1.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) ssubst(&quot;like&quot;,&quot;hate&quot;,&quot;I hate Thai food. I hate green tea.&quot;);
+(%o1)          I like Thai food. I like green tea.
+(%i2) ssubst(&quot;Indian&quot;,&quot;thai&quot;,%,'sequalignore,8,12);
+(%o2)         I like Indian food. I like green tea.
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="ssubstfirst"></a><a name="Item_003a-stringproc_002fdeffn_002fssubstfirst"></a><dl>
+<dt><a name="index-ssubstfirst"></a>Function: <strong>ssubstfirst</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssubstfirst</tt> (<var>new</var>, <var>old</var>, <var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssubstfirst</tt> (<var>new</var>, <var>old</var>, <var>string</var>, <var>test</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssubstfirst</tt> (<var>new</var>, <var>old</var>, <var>string</var>, <var>test</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>ssubstfirst</tt> (<var>new</var>, <var>old</var>, <var>string</var>, <var>test</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Like <code>subst</code> except that only the first substring that matches <var>old</var> is replaced.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="strim"></a><a name="Item_003a-stringproc_002fdeffn_002fstrim"></a><dl>
+<dt><a name="index-strim"></a>Function: <strong>strim</strong> <em>(<var>seq</var>,<var>string</var>) </em></dt>
+<dd>
+<p>Returns a string like <var>string</var>,
+but with all characters that appear in <var>seq</var> removed from both ends. 
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) &quot;/* comment */&quot;$
+(%i2) strim(&quot; /*&quot;,%);
+(%o2)                        comment
+(%i3) slength(%);
+(%o3)                           7
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="striml"></a><a name="Item_003a-stringproc_002fdeffn_002fstriml"></a><dl>
+<dt><a name="index-striml"></a>Function: <strong>striml</strong> <em>(<var>seq</var>, <var>string</var>) </em></dt>
+<dd>
+<p>Like <code>strim</code> except that only the left end of <var>string</var> is trimmed. 
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="strimr"></a><a name="Item_003a-stringproc_002fdeffn_002fstrimr"></a><dl>
+<dt><a name="index-strimr"></a>Function: <strong>strimr</strong> <em>(<var>seq</var>, <var>string</var>) </em></dt>
+<dd>
+<p>Like <code>strim</code> except that only the right end of <var>string</var> is trimmed.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="stringp"></a><a name="Item_003a-stringproc_002fdeffn_002fstringp"></a><dl>
+<dt><a name="index-stringp"></a>Function: <strong>stringp</strong> <em>(<var>obj</var>) </em></dt>
+<dd>
+<p>Returns <code>true</code> if <var>obj</var> is a string.
+See introduction for example.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="substring"></a><a name="Item_003a-stringproc_002fdeffn_002fsubstring"></a><dl>
+<dt><a name="index-substring"></a>Function: <strong>substring</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>substring</tt> (<var>string</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>substring</tt> (<var>string</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Returns the substring of <var>string</var> beginning at position <var>start</var> and ending at position <var>end</var>.
+The character at position <var>end</var> is not included.
+If <var>end</var> is not given, the substring contains the rest of the string.
+Note that the first character in <var>string</var> is in position 1.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) substring(&quot;substring&quot;,4);
+(%o1)                        string
+(%i2) substring(%,4,6);
+(%o2)                          in
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="supcase"></a><a name="Item_003a-stringproc_002fdeffn_002fsupcase"></a><dl>
+<dt><a name="index-supcase"></a>Function: <strong>supcase</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>supcase</tt> (<var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>supcase</tt> (<var>string</var>, <var>start</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>supcase</tt> (<var>string</var>, <var>start</var>, <var>end</var>)</em></dt>
+<dd>
+<p>Returns <var>string</var> except that lowercase characters from position <var>start</var> to <var>end</var> are replaced by the corresponding uppercase ones.
+If <var>end</var> is not given,
+all lowercase characters from <var>start</var> to the end of <var>string</var> are replaced.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) supcase(&quot;english&quot;,1,2);
+(%o1)                        English
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="tokens"></a><a name="Item_003a-stringproc_002fdeffn_002ftokens"></a><dl>
+<dt><a name="index-tokens"></a>Function: <strong>tokens</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>tokens</tt> (<var>string</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>tokens</tt> (<var>string</var>, <var>test</var>)</em></dt>
+<dd>
+<p>Returns a list of tokens, which have been extracted from <var>string</var>.
+The tokens are substrings whose characters satisfy a certain test function.
+If test is not given, <var>constituent</var> is used as the default test.
+<code>{constituent, alphacharp, digitcharp, lowercasep, uppercasep, charp, characterp, alphanumericp}</code> is the set of test functions. 
+(The Lisp-version of <code>tokens</code> is written by Paul Graham. ANSI Common Lisp, 1996, page 67.)
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) tokens(&quot;24 October 2005&quot;);
+(%o1)                  [24, October, 2005]
+(%i2) tokens(&quot;05-10-24&quot;,'digitcharp);
+(%o2)                     [05, 10, 24]
+(%i3) map(parse_string,%);
+(%o3)                      [5, 10, 24]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-stringproc">Package stringproc</a>
+&middot;</div>
+</dd></dl>
+
+<a name="Item_003a-stringproc_002fnode_002fOctets-and-Utilities-for-Cryptography"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_379.html#Octets-and-Utilities-for-Cryptography" accesskey="n" rel="next">Octets and Utilities for Cryptography</a>, Previous: <a href="maxima_377.html#Characters" accesskey="p" rel="previous">Characters</a>, Up: <a href="maxima_374.html#stringproc_002dpkg" accesskey="u" rel="up">stringproc-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

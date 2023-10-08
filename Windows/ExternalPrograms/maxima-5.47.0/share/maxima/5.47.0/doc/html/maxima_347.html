@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Package quantum_computing</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Package quantum_computing">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Package quantum_computing">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_346.html#quantum_005fcomputing_002dpkg" rel="up" title="quantum_computing-pkg">
+<link href="maxima_348.html#Functions-and-Variables-for-Quantum_005fComputing" rel="next" title="Functions and Variables for Quantum_Computing">
+<link href="maxima_346.html#quantum_005fcomputing_002dpkg" rel="previous" title="quantum_computing-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Package-quantum_005fcomputing"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_348.html#Functions-and-Variables-for-Quantum_005fComputing" accesskey="n" rel="next">Functions and Variables for Quantum_Computing</a>, Previous: <a href="maxima_346.html#quantum_005fcomputing_002dpkg" accesskey="p" rel="previous">quantum_computing-pkg</a>, Up: <a href="maxima_346.html#quantum_005fcomputing_002dpkg" accesskey="u" rel="up">quantum_computing-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Package-quantum_005fcomputing-1"></a>
+<h3 class="section">83.1 Package quantum_computing</h3>
+
+<p>The <code>quantum_computing</code> package provides several functions to
+simulate quantum computing circuits. The state of a system of <var>n</var>
+qubits is represented by a list of 2^<var>n</var> complex numbers and an
+operator acting on <var>m</var> qubits is represented by a 2^<var>m</var> by
+2^<var>m</var> matrix. A hash array <var>qmatrix</var> is defined with 6 common
+one-qubit matrices: the identity, the Pauli matrices, the Hadamard
+matrix and the phase matrix.
+</p>
+<p>The major disadvantage compared to a real quantum computer is very slow
+computing times even with a few qubits. An advantage is that, unlike a
+quantum computer, in this simulator a quantum state can be cloned using
+<code><a href="maxima_21.html#copylist">copylist</a></code>.
+</p>
+<p>This is an additional package that must be loaded with
+<code>load(&quot;quantum_computing&quot;)</code> in order to use it.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-quantum_005fcomputing">Package quantum_computing</a>
+&middot;</div>
+<a name="Item_003a-quantum_005fcomputing_002fnode_002fFunctions-and-Variables-for-Quantum_005fComputing"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_348.html#Functions-and-Variables-for-Quantum_005fComputing" accesskey="n" rel="next">Functions and Variables for Quantum_Computing</a>, Previous: <a href="maxima_346.html#quantum_005fcomputing_002dpkg" accesskey="p" rel="previous">quantum_computing-pkg</a>, Up: <a href="maxima_346.html#quantum_005fcomputing_002dpkg" accesskey="u" rel="up">quantum_computing-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

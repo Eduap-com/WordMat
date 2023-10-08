@@ -437,9 +437,7 @@ Sub MaximaSolve()
 '        GeoGebraWeb "CAS", "solve"
 '        Exit Sub
 '    End If
-    
     MaximaSolvePar
-
 End Sub
 'Sub MaximaSolve(Optional variabel As String)
 Sub MaximaSolvePar(Optional variabel As String)
@@ -453,7 +451,11 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim UFSolvenumeric As New UserFormNumericQuestion
     Dim ea As New ExpressionAnalyser, SaveKommando As String
     scrollpos = ActiveWindow.VerticalPercentScrolled
+    Dim oData As New DataObject, ClipText As String
+    
     TempCas = CASengine
+    oData.GetFromClipboard
+    ClipText = oData.GetText
     '    PrepareMaximaNoSplash  ' ved ikke hvorfor det var nosplash, erstattet
     PrepareMaxima
     omax.prevspr = ""
@@ -490,6 +492,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     End If
 
     omax.ReadSelection
+    On Error Resume Next: oData.SetText ClipText: oData.PutInClipboard: On Error GoTo fejl
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut

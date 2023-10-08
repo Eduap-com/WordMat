@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>stirling-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="stirling-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="stirling-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_90.html#stringproc_002dpkg" rel="next" title="stringproc-pkg">
+<link href="maxima_88.html#stats_002dpkg" rel="prev" title="stats-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="stirling_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_90.html#stringproc_002dpkg" accesskey="n" rel="next">stringproc</a>, Previous: <a href="maxima_88.html#stats_002dpkg" accesskey="p" rel="prev">stats</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="stirling-1">90 stirling</h2>
+
+<a class="anchor" id="Item_003a-stirling_002fnode_002fFunctions-and-Variables-for-stirling"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-stirling" accesskey="1">Functions and Variables for stirling</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-stirling">
+<div class="nav-panel">
+<p>
+Previous: <a href="#stirling_002dpkg" accesskey="p" rel="prev">stirling</a>, Up: <a href="#stirling_002dpkg" accesskey="u" rel="up">stirling</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-stirling-1">90.1 Functions and Variables for stirling</h3>
+
+<a class="anchor" id="stirling"></a><a class="anchor" id="Item_003a-stirling_002fdeffn_002fstirling"></a><dl class="first-deffn">
+<dt class="deffn" id="index-stirling"><span class="category-def">Function: </span><span><strong class="def-name">stirling</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stirling</code> (<var class="var">z</var>,<var class="var">n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">stirling</code> (<var class="var">z</var>,<var class="var">n</var>,<var class="var">pred</var>)</var><a class="copiable-link" href='#index-stirling'> &para;</a></span></dt>
+<dd>
+<p>Replace <code class="code">gamma(x)</code> with the <em class="math tex2jax_process">\(O(1/x^{2n-1})\)</em> Stirling formula. when <var class="var">n</var> isn&rsquo;t
+a nonnegative integer, signal an error. With the optional third argument <code class="code">pred</code>,
+the Stirling formula is applied only when <code class="code">pred</code> is true.
+</p>
+<p>Reference: Abramowitz &amp; Stegun, &quot; Handbook of mathematical functions&quot;, 6.1.40.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;stirling&quot;)$
+
+(%i2) stirling(gamma(%alpha+x)/gamma(x),1);
+       1/2 - x             x + %alpha - 1/2
+(%o2) x        (x + %alpha)
+                                   1           1
+                            --------------- - ---- - %alpha
+                            12 (x + %alpha)   12 x
+                          %e
+(%i3) taylor(%,x,inf,1);
+                    %alpha       2    %alpha
+          %alpha   x       %alpha  - x       %alpha
+(%o3)/T/ x       + -------------------------------- + . . .
+                                 2 x
+(%i4) map('factor,%);
+                                       %alpha - 1
+         %alpha   (%alpha - 1) %alpha x
+(%o4)   x       + -------------------------------
+                                  2
+</pre></div>
+
+<p>The function <code class="code">stirling</code> knows the difference between the variable &rsquo;gamma&rsquo; and
+the function gamma:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i5) stirling(gamma + gamma(x),0);
+                                    x - 1/2   - x
+(%o5)    gamma + sqrt(2) sqrt(%pi) x        %e
+(%i6) stirling(gamma(y) + gamma(x),0);
+                         y - 1/2   - y
+(%o6) sqrt(2) sqrt(%pi) y        %e
+                                              x - 1/2   - x
+                         + sqrt(2) sqrt(%pi) x        %e
+</pre></div>
+
+<p>To apply the Stirling formula only to terms that involve the variable <code class="code">k</code>,
+use an optional third argument; for example
+</p><div class="example">
+<pre class="example-preformatted">(%i7) makegamma(pochhammer(a,k)/pochhammer(b,k));
+(%o7) (gamma(b)*gamma(k+a))/(gamma(a)*gamma(k+b))
+(%i8) stirling(%,1, lambda([s], not(freeof(k,s))));
+(%o8) (%e^(b-a)*gamma(b)*(k+a)^(k+a-1/2)*(k+b)^(-k-b+1/2))/gamma(a)
+</pre></div>
+<p>The terms <code class="code">gamma(a)</code> and <code class="code">gamma(b)</code> are free of <code class="code">k</code>, so the Stirling formula
+was not applied to these two terms.
+</p>
+<p>To use this function write first <code class="code">load(&quot;stirling&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Gamma-and-factorial-functions">Gamma and factorial functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-stirling">Package stirling</a>
+&middot;
+</div>
+
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_90.html#stringproc_002dpkg" accesskey="n" rel="next">stringproc</a>, Previous: <a href="maxima_88.html#stats_002dpkg" accesskey="p" rel="prev">stats</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

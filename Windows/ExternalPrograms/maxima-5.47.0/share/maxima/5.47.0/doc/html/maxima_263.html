@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Introduction to ezunits</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Introduction to ezunits">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Introduction to ezunits">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_262.html#ezunits_002dpkg" rel="up" title="ezunits-pkg">
+<link href="maxima_264.html#Introduction-to-physical_005fconstants" rel="next" title="Introduction to physical_constants">
+<link href="maxima_262.html#ezunits_002dpkg" rel="previous" title="ezunits-pkg">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Introduction-to-ezunits"></a>
+<div class="header">
+<p>
+Next: <a href="maxima_264.html#Introduction-to-physical_005fconstants" accesskey="n" rel="next">Introduction to physical_constants</a>, Previous: <a href="maxima_262.html#ezunits_002dpkg" accesskey="p" rel="previous">ezunits-pkg</a>, Up: <a href="maxima_262.html#ezunits_002dpkg" accesskey="u" rel="up">ezunits-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Introduction-to-ezunits-1"></a>
+<h3 class="section">57.1 Introduction to ezunits</h3>
+
+<p><code>ezunits</code> is a package for working with dimensional quantities,
+including some functions for dimensional analysis.
+<code>ezunits</code> can carry out arithmetic operations on dimensional quantities and unit conversions.
+The built-in units include Systeme Internationale (SI) and US customary units,
+and other units can be declared.
+See also <code><a href="maxima_264.html#physical_005fconstants">physical_constants</a></code>, a collection of physical constants.
+</p>
+<p><code>load(&quot;ezunits&quot;)</code> loads this package.
+<code>demo(&quot;ezunits&quot;)</code> displays several examples.
+The convenience function <code>known_units</code> returns a list of
+the built-in and user-declared units,
+while <code>display_known_unit_conversions</code> displays
+the set of known conversions in an easy-to-read format.
+</p>
+<p>An expression <em>a ` b</em> represents a dimensional quantity,
+with <code>a</code> indicating a nondimensional quantity and <code>b</code> indicating the dimensional units.
+A symbol can be used as a unit without declaring it as such;
+unit symbols need not have any special properties.
+The quantity and unit of an expression <em>a ` b</em> can
+be extracted by the <code>qty</code> and <code>units</code> functions, respectively.
+</p>
+<p>A symbol may be declared to be a dimensional quantity,
+with specified quantity or specified units or both.
+</p>
+<p>An expression <em>a ` b `<!-- /@w -->` c</em> converts from unit <code>b</code> to unit <code>c</code>.
+<code>ezunits</code> has built-in conversions for SI base units,
+SI derived units, and some non-SI units.
+Unit conversions not already known to <code>ezunits</code> can be declared.
+The unit conversions known to <code>ezunits</code> are specified by the
+global variable <code>known_unit_conversions</code>,
+which comprises built-in and user-defined conversions.
+Conversions for products, quotients, and powers of units are
+derived from the set of known unit conversions.
+</p>
+<p>As Maxima generally prefers exact numbers (integers or rationals)
+to inexact (float or bigfloat),
+so <code>ezunits</code> preserves exact numbers when they appear
+in dimensional quantities.
+All built-in unit conversions are expressed in terms of exact numbers;
+inexact numbers in declared conversions are coerced to exact.
+</p>
+<p>There is no preferred system for display of units;
+input units are not converted to other units
+unless conversion is explicitly indicated.
+<code>ezunits</code> recognizes the prefixes m-, k-, M, and G-
+(for milli-, kilo-, mega-, and giga-)
+as applied to SI base units and SI derived units,
+but such prefixes are applied only when indicated by an explicit conversion.
+</p>
+<p>Arithmetic operations on dimensional quantities are carried out by
+conventional rules for such operations.
+</p>
+<ul>
+<li> <em>(x ` a) * (y ` b)</em> is equal to <em>(x * y) ` (a * b)</em>.
+</li><li> <em>(x ` a) + (y ` a)</em> is equal to <em>(x + y) ` a</em>.
+</li><li> <em>(x ` a)^y</em> is equal to <em>x^y ` a^y</em> when <code>y</code> is nondimensional.
+</li></ul>
+
+<p><code>ezunits</code> does not require that units in a sum have the same dimensions;
+such terms are not added together, and no error is reported.
+</p>
+<p><code>ezunits</code> includes functions for elementary dimensional analysis,
+namely the fundamental dimensions and fundamental units
+of a dimensional quantity,
+and computation of dimensionless quantities and natural units.
+The functions for dimensional analysis were adapted from similar
+functions in another package, written by Barton Willis.
+</p>
+<p>For the purpose of dimensional analysis,
+a list of fundamental dimensions and an associated list of fundamental units
+are maintained;
+by default the fundamental dimensions are
+length, mass, time, charge, temperature, and quantity,
+and the fundamental units are the associated SI units,
+but other fundamental dimensions and units can be declared.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Physical-units">Physical units</a>
+&middot;<a href="maxima_424.html#Category_003a-Share-packages">Share packages</a>
+&middot;<a href="maxima_424.html#Category_003a-Package-ezunits">Package ezunits</a>
+&middot;</div>
+<a name="Item_003a-ezunits_002fnode_002fIntroduction-to-physical_005fconstants"></a><hr>
+<div class="header">
+<p>
+Next: <a href="maxima_264.html#Introduction-to-physical_005fconstants" accesskey="n" rel="next">Introduction to physical_constants</a>, Previous: <a href="maxima_262.html#ezunits_002dpkg" accesskey="p" rel="previous">ezunits-pkg</a>, Up: <a href="maxima_262.html#ezunits_002dpkg" accesskey="u" rel="up">ezunits-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

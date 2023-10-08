@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>zeilberger-pkg (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="zeilberger-pkg (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="zeilberger-pkg (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_96.html#Error-and-warning-messages" rel="next" title="Error and warning messages">
+<link href="maxima_93.html#wrstcse_002dpkg" rel="prev" title="wrstcse-pkg">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="zeilberger_002dpkg">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_96.html#Error-and-warning-messages" accesskey="n" rel="next">Error and warning messages</a>, Previous: <a href="maxima_93.html#wrstcse_002dpkg" accesskey="p" rel="prev">wrstcse</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="zeilberger">95 zeilberger</h2>
+
+<a class="anchor" id="Item_003a-zeilberger_002fnode_002fIntroduction-to-zeilberger"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-zeilberger" accesskey="1">Introduction to zeilberger</a></li>
+<li><a href="#Functions-and-Variables-for-zeilberger" accesskey="2">Functions and Variables for zeilberger</a></li>
+<li><a href="#General-global-variables" accesskey="3">General global variables</a></li>
+<li><a href="#Variables-related-to-the-modular-test" accesskey="4">Variables related to the modular test</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-zeilberger">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-zeilberger" accesskey="n" rel="next">Functions and Variables for zeilberger</a>, Previous: <a href="#zeilberger_002dpkg" accesskey="p" rel="prev">zeilberger</a>, Up: <a href="#zeilberger_002dpkg" accesskey="u" rel="up">zeilberger</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-zeilberger-1">95.1 Introduction to zeilberger</h3>
+
+<p><code class="code">zeilberger</code> is an implementation of Zeilberger&rsquo;s algorithm
+for definite hypergeometric summation, and also 
+Gosper&rsquo;s algorithm for indefinite hypergeometric
+summation.
+</p>
+<p><code class="code">zeilberger</code> makes use of the &quot;filtering&quot; optimization method developed by Axel Riese.
+</p>
+<p><code class="code">zeilberger</code> was developed by Fabrizio Caruso.
+</p>
+<p><code class="code">load (&quot;zeilberger&quot;)</code> loads this package.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+<ul class="mini-toc">
+<li><a href="#The-indefinite-summation-problem" accesskey="1">The indefinite summation problem</a></li>
+<li><a href="#The-definite-summation-problem" accesskey="2">The definite summation problem</a></li>
+<li><a href="#Verbosity-levels" accesskey="3">Verbosity levels</a></li>
+</ul>
+<div class="subsection-level-extent" id="The-indefinite-summation-problem">
+<h4 class="subsection">95.1.1 The indefinite summation problem</h4>
+
+<p><code class="code">zeilberger</code> implements Gosper&rsquo;s algorithm for indefinite hypergeometric summation.
+Given a hypergeometric term <em class="math tex2jax_process">\(F_k\)</em> in <em class="math tex2jax_process">\(k\)</em> we want to find its hypergeometric
+anti-difference, that is, a hypergeometric term <em class="math tex2jax_process">\(f_k\)</em> such that
+</p>
+$$
+F_k = f_{k+1} - f_k.
+$$
+
+
+</div>
+<div class="subsection-level-extent" id="The-definite-summation-problem">
+<h4 class="subsection">95.1.2 The definite summation problem</h4>
+
+<p><code class="code">zeilberger</code> implements Zeilberger&rsquo;s algorithm for definite hypergeometric summation.
+Given a proper hypergeometric term (in <em class="math tex2jax_process">\(n\)</em> and <em class="math tex2jax_process">\(k\)</em>) 
+\(F_{n,k}\)
+ and
+a positive integer <em class="math tex2jax_process">\(d\)</em> we want to find a <em class="math tex2jax_process">\(d\)</em>-th order linear
+recurrence with polynomial coefficients (in <em class="math tex2jax_process">\(n\)</em>) for 
+\(F_{n,k}\)
+ and
+a rational function <em class="math tex2jax_process">\(R\)</em> in <em class="math tex2jax_process">\(n\)</em> and <em class="math tex2jax_process">\(k\)</em> such that
+</p>
+$$
+a_0 \, F_{n,k} + \ldots + a_d \, F_{n+d,k} = \Delta_K \left(R\left(n,k\right) F_{n,k}\right),
+$$
+
+<p>where 
+\(\Delta_k\)
+ is the <em class="math tex2jax_process">\(k\)</em>-forward difference
+operator, i.e., 
+\(\Delta_k \left(t_k\right) \equiv t_{k+1} - t_k.\)
+</p>
+
+</div>
+<div class="subsection-level-extent" id="Verbosity-levels">
+<h4 class="subsection">95.1.3 Verbosity levels</h4>
+
+<p>There are also verbose versions of the commands
+which are called by adding one of the following prefixes:
+</p>
+<dl class="table">
+<dt><code class="code">Summary</code></dt>
+<dd><p>Just a summary at the end is shown
+</p></dd>
+<dt><code class="code">Verbose</code></dt>
+<dd><p>Some information in the intermediate steps
+</p></dd>
+<dt><code class="code">VeryVerbose</code></dt>
+<dd><p>More information
+</p></dd>
+<dt><code class="code">Extra</code></dt>
+<dd><p>Even more information including information on
+the linear system in Zeilberger&rsquo;s algorithm
+</p></dd>
+</dl>
+
+<p>For example:<br>
+<code class="code">GosperVerbose</code>, <code class="code">parGosperVeryVerbose</code>,
+<code class="code">ZeilbergerExtra</code>, <code class="code">AntiDifferenceSummary</code>.
+</p>
+
+<a class="anchor" id="Item_003a-zeilberger_002fnode_002fFunctions-and-Variables-for-zeilberger"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-zeilberger">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-zeilberger" accesskey="p" rel="prev">Introduction to zeilberger</a>, Up: <a href="#zeilberger_002dpkg" accesskey="u" rel="up">zeilberger</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-zeilberger-1">95.2 Functions and Variables for zeilberger</h3>
+
+<a class="anchor" id="AntiDifference"></a><a class="anchor" id="Item_003a-zeilberger_002fdeffn_002fAntiDifference"></a><dl class="first-deffn">
+<dt class="deffn" id="index-AntiDifference"><span class="category-def">Function: </span><span><strong class="def-name">AntiDifference</strong> <var class="def-var-arguments">(<em class="math tex2jax_process">\(F_k\)</em>, <var class="var">k</var>)</var><a class="copiable-link" href='#index-AntiDifference'> &para;</a></span></dt>
+<dd>
+<p>Returns the hypergeometric anti-difference of <em class="math tex2jax_process">\(F_k\)</em>, if it exists.<br>
+Otherwise <code class="code">AntiDifference</code> returns <code class="code">no_hyp_antidifference</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Gosper"></a><a class="anchor" id="Item_003a-zeilberger_002fdeffn_002fGosper"></a><dl class="first-deffn">
+<dt class="deffn" id="index-Gosper"><span class="category-def">Function: </span><span><strong class="def-name">Gosper</strong> <var class="def-var-arguments">(<em class="math tex2jax_process">\(F_k\)</em>, <var class="var">k</var>)</var><a class="copiable-link" href='#index-Gosper'> &para;</a></span></dt>
+<dd><p>Returns the rational certificate <em class="math tex2jax_process">\(R(k)\)</em> for <em class="math tex2jax_process">\(F_k\)</em>, that is,
+a rational function such
+that 
+\(F_k = R\left(k+1\right) \, F_{k+1} - R\left(k\right) \, F_k,\)
+ if it exists.
+Otherwise, <code class="code">Gosper</code> returns <code class="code">no_hyp_sol</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="GosperSum"></a><a class="anchor" id="Item_003a-zeilberger_002fdeffn_002fGosperSum"></a><dl class="first-deffn">
+<dt class="deffn" id="index-GosperSum"><span class="category-def">Function: </span><span><strong class="def-name">GosperSum</strong> <var class="def-var-arguments">(<em class="math tex2jax_process">\(F_k\)</em>, <var class="var">k</var>, <var class="var">a</var>, <var class="var">b</var>)</var><a class="copiable-link" href='#index-GosperSum'> &para;</a></span></dt>
+<dd>
+<p>Returns the summation of <em class="math tex2jax_process">\(F_k\)</em> from <em class="math tex2jax_process">\(\mathit{k} = \mathit{a}\)</em> to <em class="math tex2jax_process">\(\mathit{k} = \mathit{b}\)</em>
+if <em class="math tex2jax_process">\(F_k\)</em> has a hypergeometric anti-difference.
+Otherwise, <code class="code">GosperSum</code> returns <code class="code">nongosper_summable</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;zeilberger&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) GosperSum ((-1)^k*k / (4*k^2 - 1), k, 1, n);
+Dependent equations eliminated:  (1)
+                           3       n + 1
+                      (n + -) (- 1)
+                           2               1
+(%o2)               - ------------------ - -
+                                  2        4
+                      2 (4 (n + 1)  - 1)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) GosperSum (1 / (4*k^2 - 1), k, 1, n);
+                                3
+                          - n - -
+                                2       1
+(%o3)                  -------------- + -
+                                2       2
+                       4 (n + 1)  - 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) GosperSum (x^k, k, 1, n);
+                          n + 1
+                         x          x
+(%o4)                    ------ - -----
+                         x - 1    x - 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) GosperSum ((-1)^k*a! / (k!*(a - k)!), k, 1, n);
+                                n + 1
+                a! (n + 1) (- 1)              a!
+(%o5)       - ------------------------- - ----------
+              a (- n + a - 1)! (n + 1)!   a (a - 1)!
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) GosperSum (k*k!, k, 1, n);
+Dependent equations eliminated:  (1)
+(%o6)                     (n + 1)! - 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) GosperSum ((k + 1)*k! / (k + 1)!, k, 1, n);
+                  (n + 1) (n + 2) (n + 1)!
+(%o7)             ------------------------ - 1
+                          (n + 2)!
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) GosperSum (1 / ((a - k)!*k!), k, 1, n);
+(%o8)                  NON_GOSPER_SUMMABLE
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="parGosper"></a><a class="anchor" id="Item_003a-zeilberger_002fdeffn_002fparGosper"></a><dl class="first-deffn">
+<dt class="deffn" id="index-parGosper"><span class="category-def">Function: </span><span><strong class="def-name">parGosper</strong> <var class="def-var-arguments">(<em class="math tex2jax_process">\(F_(n,k)\)</em>, <var class="var">k</var>, <var class="var">n</var>, <var class="var">d</var>)</var><a class="copiable-link" href='#index-parGosper'> &para;</a></span></dt>
+<dd>
+<p>Attempts to find a <var class="var">d</var>-th order recurrence for <em class="math tex2jax_process">\(F_(n,k)\)</em>.
+</p>
+<p>The algorithm yields a sequence <em class="math tex2jax_process">\([s_1, s_2, ..., s_m]\)</em> of solutions.
+Each solution has the form
+</p>
+<p><em class="math tex2jax_process">\([R(n, k), [a_0, a_1, ..., a_d]].\)</em>
+</p>
+<p><code class="code">parGosper</code> returns <code class="code">[]</code> if it fails to find a recurrence.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="Zeilberger"></a><a class="anchor" id="Item_003a-zeilberger_002fdeffn_002fZeilberger"></a><dl class="first-deffn">
+<dt class="deffn" id="index-Zeilberger"><span class="category-def">Function: </span><span><strong class="def-name">Zeilberger</strong> <var class="def-var-arguments">(<em class="math tex2jax_process">\(F_(n,k)\)</em>, <var class="var">k</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-Zeilberger'> &para;</a></span></dt>
+<dd>
+<p>Attempts to compute the indefinite hypergeometric summation of <em class="math tex2jax_process">\(F_(n,k)\)</em>.
+</p>
+<p><code class="code">Zeilberger</code> first invokes <code class="code">Gosper</code>, and if that fails to find a solution, then invokes
+<code class="code">parGosper</code> with order 1, 2, 3, ..., up to <code class="code">MAX_ORD</code>.
+If Zeilberger finds a solution before reaching <code class="code">MAX_ORD</code>,
+it stops and returns the solution.
+</p>
+<p>The algorithms yields a sequence <em class="math tex2jax_process">\([s_1, s_2, ..., s_m]\)</em> of solutions.
+Each solution has the form
+</p>
+<p><em class="math tex2jax_process">\([R(n,k), [a_0, a_1, ..., a_d]].\)</em>
+</p>
+<p><code class="code">Zeilberger</code> returns <code class="code">[]</code> if it fails to find a solution.
+</p>
+<p><code class="code">Zeilberger</code> invokes <code class="code">Gosper</code> only if <code class="code">Gosper_in_Zeilberger</code> is <code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+</div>
+<div class="section-level-extent" id="General-global-variables">
+<h3 class="section">95.3 General global variables</h3>
+
+<a class="anchor" id="MAX_005fORD"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fMAX_005fORD"></a><dl class="first-defvr">
+<dt class="defvr" id="index-MAX_005fORD"><span class="category-def">Global variable: </span><span><strong class="def-name">MAX_ORD</strong><a class="copiable-link" href='#index-MAX_005fORD'> &para;</a></span></dt>
+<dd><p>Default value: 5
+</p>
+<p><code class="code">MAX_ORD</code> is the maximum recurrence order attempted by <code class="code">Zeilberger</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="simplified_005foutput"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fsimplified_005foutput"></a><dl class="first-defvr">
+<dt class="defvr" id="index-simplified_005foutput"><span class="category-def">Global variable: </span><span><strong class="def-name">simplified_output</strong><a class="copiable-link" href='#index-simplified_005foutput'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">simplified_output</code> is <code class="code">true</code>,
+functions in the <code class="code">zeilberger</code> package attempt
+further simplification of the solution.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="linear_005fsolver"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002flinear_005fsolver"></a><dl class="first-defvr">
+<dt class="defvr" id="index-linear_005fsolver"><span class="category-def">Global variable: </span><span><strong class="def-name">linear_solver</strong><a class="copiable-link" href='#index-linear_005fsolver'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">linsolve</code>
+</p>
+<p><code class="code">linear_solver</code> names the solver which is used to solve the system
+of equations in Zeilberger&rsquo;s algorithm.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="warnings"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fwarnings"></a><dl class="first-defvr">
+<dt class="defvr" id="index-warnings"><span class="category-def">Global variable: </span><span><strong class="def-name">warnings</strong><a class="copiable-link" href='#index-warnings'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">warnings</code> is <code class="code">true</code>,
+functions in the <code class="code">zeilberger</code> package print
+warning messages during execution.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Gosper_005fin_005fZeilberger"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fGosper_005fin_005fZeilberger"></a><dl class="first-defvr">
+<dt class="defvr" id="index-Gosper_005fin_005fZeilberger"><span class="category-def">Global variable: </span><span><strong class="def-name">Gosper_in_Zeilberger</strong><a class="copiable-link" href='#index-Gosper_005fin_005fZeilberger'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">Gosper_in_Zeilberger</code> is <code class="code">true</code>,
+the <code class="code">Zeilberger</code> function calls <code class="code">Gosper</code> before calling <code class="code">parGosper</code>.
+Otherwise, <code class="code">Zeilberger</code> goes immediately to <code class="code">parGosper</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="trivial_005fsolutions"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002ftrivial_005fsolutions"></a><dl class="first-defvr">
+<dt class="defvr" id="index-trivial_005fsolutions"><span class="category-def">Global variable: </span><span><strong class="def-name">trivial_solutions</strong><a class="copiable-link" href='#index-trivial_005fsolutions'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">trivial_solutions</code> is <code class="code">true</code>,
+<code class="code">Zeilberger</code> returns solutions
+which have certificate equal to zero, or all coefficients equal to zero.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+</div>
+<div class="section-level-extent" id="Variables-related-to-the-modular-test">
+<h3 class="section">95.4 Variables related to the modular test</h3>
+
+<a class="anchor" id="mod_005ftest"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fmod_005ftest"></a><dl class="first-defvr">
+<dt class="defvr" id="index-mod_005ftest"><span class="category-def">Global variable: </span><span><strong class="def-name">mod_test</strong><a class="copiable-link" href='#index-mod_005ftest'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">mod_test</code> is <code class="code">true</code>,
+<code class="code">parGosper</code> executes a
+modular test for discarding systems with no solutions.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="modular_005flinear_005fsolver"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fmodular_005flinear_005fsolver"></a><dl class="first-defvr">
+<dt class="defvr" id="index-modular_005flinear_005fsolver"><span class="category-def">Global variable: </span><span><strong class="def-name">modular_linear_solver</strong><a class="copiable-link" href='#index-modular_005flinear_005fsolver'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">linsolve</code>
+</p>
+<p><code class="code">modular_linear_solver</code> names the linear solver used by the modular test in <code class="code">parGosper</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="ev_005fpoint"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fev_005fpoint"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ev_005fpoint"><span class="category-def">Global variable: </span><span><strong class="def-name">ev_point</strong><a class="copiable-link" href='#index-ev_005fpoint'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">big_primes[10]</code>
+</p>
+<p><code class="code">ev_point</code> is the value at which the variable <var class="var">n</var> is evaluated
+when executing the modular test in <code class="code">parGosper</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="mod_005fbig_005fprime"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fmod_005fbig_005fprime"></a><dl class="first-defvr">
+<dt class="defvr" id="index-mod_005fbig_005fprime"><span class="category-def">Global variable: </span><span><strong class="def-name">mod_big_prime</strong><a class="copiable-link" href='#index-mod_005fbig_005fprime'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">big_primes[1]</code>
+</p>
+<p><code class="code">mod_big_prime</code> is the modulus used by the modular test in <code class="code">parGosper</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="mod_005fthreshold"></a><a class="anchor" id="Item_003a-zeilberger_002fdefvr_002fmod_005fthreshold"></a><dl class="first-defvr">
+<dt class="defvr" id="index-mod_005fthreshold"><span class="category-def">Global variable: </span><span><strong class="def-name">mod_threshold</strong><a class="copiable-link" href='#index-mod_005fthreshold'> &para;</a></span></dt>
+<dd><p>Default value: 4
+</p>
+<p><code class="code">mod_threshold</code> is the
+greatest order for which the modular test in <code class="code">parGosper</code> is attempted.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-zeilberger">Package zeilberger</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_96.html#Error-and-warning-messages" accesskey="n" rel="next">Error and warning messages</a>, Previous: <a href="maxima_93.html#wrstcse_002dpkg" accesskey="p" rel="prev">wrstcse</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

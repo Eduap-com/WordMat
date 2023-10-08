@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Matrices and Linear Algebra (Maxima 5.47.0 Manual)</title>
+
+<meta name="description" content="Matrices and Linear Algebra (Maxima 5.47.0 Manual)">
+<meta name="keywords" content="Matrices and Linear Algebra (Maxima 5.47.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="maxima_toc.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_toc.html" rel="up" title="Top">
+<link href="maxima_23.html#Affine" rel="next" title="Affine">
+<link href="maxima_21.html#Numerical" rel="prev" title="Numerical">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+p.flushleft-paragraph {text-align:left}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Matrices-and-Linear-Algebra">
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_23.html#Affine" accesskey="n" rel="next">Affine</a>, Previous: <a href="maxima_21.html#Numerical" accesskey="p" rel="prev">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Matrices-and-Linear-Algebra-1">23 Matrices and Linear Algebra</h2>
+
+<a class="anchor" id="Item_003a-Matrices_002fnode_002fIntroduction-to-Matrices-and-Linear-Algebra"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-Matrices-and-Linear-Algebra" accesskey="1">Introduction to Matrices and Linear Algebra</a></li>
+<li><a href="#Functions-and-Variables-for-Matrices-and-Linear-Algebra" accesskey="2">Functions and Variables for Matrices and Linear Algebra</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-Matrices-and-Linear-Algebra">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-Matrices-and-Linear-Algebra" accesskey="n" rel="next">Functions and Variables for Matrices and Linear Algebra</a>, Previous: <a href="#Matrices-and-Linear-Algebra" accesskey="p" rel="prev">Matrices and Linear Algebra</a>, Up: <a href="#Matrices-and-Linear-Algebra" accesskey="u" rel="up">Matrices and Linear Algebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-Matrices-and-Linear-Algebra-1">23.1 Introduction to Matrices and Linear Algebra</h3>
+
+
+<a class="anchor" id="Item_003a-Matrices_002fnode_002fDot"></a><ul class="mini-toc">
+<li><a href="#Dot" accesskey="1">Dot</a></li>
+<li><a href="#Matrices" accesskey="2">Matrices</a></li>
+<li><a href="#Vectors" accesskey="3">Vectors</a></li>
+<li><a href="#eigen" accesskey="4">eigen</a></li>
+</ul>
+<hr>
+<div class="subsection-level-extent" id="Dot">
+<div class="nav-panel">
+<p>
+Next: <a href="#Matrices" accesskey="n" rel="next">Matrices</a>, Previous: <a href="#Introduction-to-Matrices-and-Linear-Algebra" accesskey="p" rel="prev">Introduction to Matrices and Linear Algebra</a>, Up: <a href="#Introduction-to-Matrices-and-Linear-Algebra" accesskey="u" rel="up">Introduction to Matrices and Linear Algebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Dot-1">23.1.1 Dot</h4>
+
+<p>The operator <code class="code">.</code> represents noncommutative multiplication and scalar
+product.  When the operands are 1-column or 1-row matrices <code class="code">a</code> and
+<code class="code">b</code>, the expression <code class="code">a.b</code> is equivalent to
+<code class="code">sum (a[i]*b[i], i, 1, length(a))</code>.  If <code class="code">a</code> and <code class="code">b</code> are not
+complex, this is the scalar product, also called the inner product or dot
+product, of <code class="code">a</code> and <code class="code">b</code>.  The scalar product is defined as
+<code class="code">conjugate(a).b</code> when <code class="code">a</code> and <code class="code">b</code> are complex;
+<code class="code"><a class="ref" href="#innerproduct">innerproduct</a></code> in the <code class="code">eigen</code> package provides the complex scalar
+product.
+</p>
+<p>When the operands are more general matrices,
+the product is the matrix product <code class="code">a</code> and <code class="code">b</code>.
+The number of rows of <code class="code">b</code> must equal the number of columns of <code class="code">a</code>,
+and the result has number of rows equal to the number of rows of <code class="code">a</code>
+and number of columns equal to the number of columns of <code class="code">b</code>.
+</p>
+<p>To distinguish <code class="code">.</code> as an arithmetic operator from the decimal point in a
+floating point number, it may be necessary to leave spaces on either side.
+For example, <code class="code">5.e3</code> is <code class="code">5000.0</code> but <code class="code">5 . e3</code> is <code class="code">5</code>
+times <code class="code">e3</code>.
+</p>
+<p>There are several flags which govern the simplification of expressions
+involving <code class="code">.</code>, namely <code class="code"><a class="ref" href="#dot0nscsimp">dot0nscsimp</a></code>, <code class="code"><a class="ref" href="#dot0simp">dot0simp</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#dot1simp">dot1simp</a></code>, <code class="code"><a class="ref" href="#dotassoc">dotassoc</a></code>, <code class="code"><a class="ref" href="#dotconstrules">dotconstrules</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#dotdistrib">dotdistrib</a></code>, <code class="code"><a class="ref" href="#dotexptsimp">dotexptsimp</a></code>, <code class="code"><a class="ref" href="#dotident">dotident</a></code>, and
+<code class="code"><a class="ref" href="#dotscrules">dotscrules</a></code>.
+</p>
+<a class="anchor" id="Item_003a-Matrices_002fnode_002fMatrices"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Matrices">
+<div class="nav-panel">
+<p>
+Next: <a href="#Vectors" accesskey="n" rel="next">Vectors</a>, Previous: <a href="#Dot" accesskey="p" rel="prev">Dot</a>, Up: <a href="#Introduction-to-Matrices-and-Linear-Algebra" accesskey="u" rel="up">Introduction to Matrices and Linear Algebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Matrices-1">23.1.2 Matrices</h4>
+<p>Matrices are handled with speed and memory-efficiency in mind. This means that
+assigning a matrix to a variable will create a reference to, not a copy of the
+matrix. If the matrix is modified all references to the matrix point to the
+modified object (See <code class="code"><a class="ref" href="#copymatrix">copymatrix</a></code> for a way of avoiding this):
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) M1: matrix([0,0],[0,0]);
+                            [ 0  0 ]
+(%o1)                       [      ]
+                            [ 0  0 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) M2: M1;
+                            [ 0  0 ]
+(%o2)                       [      ]
+                            [ 0  0 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) M1[1][1]: 2;
+(%o3)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) M2;
+                            [ 2  0 ]
+(%o4)                       [      ]
+                            [ 0  0 ]
+</pre></div></div>
+
+<p>Converting a matrix to nested lists and vice versa works the following way:
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) l: [[1,2],[3,4]];
+(%o1)                   [[1, 2], [3, 4]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) M1: apply('matrix,l);
+                            [ 1  2 ]
+(%o2)                       [      ]
+                            [ 3  4 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) M2: transpose(M1);
+                            [ 1  3 ]
+(%o3)                       [      ]
+                            [ 2  4 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) args(M2);
+(%o4)                   [[1, 3], [2, 4]]
+</pre></div></div>
+<a class="anchor" id="Item_003a-Matrices_002fnode_002fVectors"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Vectors">
+<div class="nav-panel">
+<p>
+Next: <a href="#eigen" accesskey="n" rel="next">eigen</a>, Previous: <a href="#Matrices" accesskey="p" rel="prev">Matrices</a>, Up: <a href="#Introduction-to-Matrices-and-Linear-Algebra" accesskey="u" rel="up">Introduction to Matrices and Linear Algebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Vectors-1">23.1.3 Vectors</h4>
+
+<p><code class="code">vect</code> is a package of functions for vector analysis.  <code class="code">load (&quot;vect&quot;)</code>
+loads this package, and <code class="code">demo (&quot;vect&quot;)</code> displays a demonstration.
+</p>
+<p>The vector analysis package can combine and simplify symbolic 
+expressions including dot products and cross products, together with
+the gradient, divergence, curl, and Laplacian operators.  The
+distribution of these operators over sums or products is governed
+by several flags, as are various other expansions, including expansion
+into components in any specific orthogonal coordinate systems.
+There are also functions for deriving the scalar or vector potential
+of a field.
+</p>
+<p>The <code class="code">vect</code> package contains these functions:
+<code class="code"><a class="ref" href="#vectorsimp">vectorsimp</a></code>, <code class="code"><a class="ref" href="#scalefactors">scalefactors</a></code>, <code class="code"><a class="ref" href="maxima_17.html#express">express</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="maxima_18.html#potential">potential</a></code>, and <code class="code"><a class="ref" href="#vectorpotential">vectorpotential</a></code>.
+</p>
+<p>By default the <code class="code">vect</code> package does not declare the dot operator to be a
+commutative operator.  To get a commutative dot operator <code class="code">.</code>, the command
+<code class="code">declare(&quot;.&quot;, commutative)</code> must be executed.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Vectors">Vectors</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-vect">Package vect</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-Matrices_002fnode_002feigen"></a><hr>
+</div>
+<div class="subsection-level-extent" id="eigen">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Vectors" accesskey="p" rel="prev">Vectors</a>, Up: <a href="#Introduction-to-Matrices-and-Linear-Algebra" accesskey="u" rel="up">Introduction to Matrices and Linear Algebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="eigen-1">23.1.4 eigen</h4>
+
+<p>The package <code class="code">eigen</code> contains several functions devoted to the
+symbolic computation of eigenvalues and eigenvectors.
+Maxima loads the package automatically if one of the functions
+<code class="code">eigenvalues</code> or <code class="code">eigenvectors</code> is invoked.
+The package may be loaded explicitly as <code class="code">load (&quot;eigen&quot;)</code>.
+</p>
+<p><code class="code">demo (&quot;eigen&quot;)</code> displays a demonstration of the capabilities
+of this package.
+<code class="code">batch (&quot;eigen&quot;)</code> executes the same demonstration,
+but without the user prompt between successive computations.
+</p>
+<p>The functions in the <code class="code">eigen</code> package are:<br>
+<code class="code"><a class="ref" href="#innerproduct">innerproduct</a></code>, <code class="code"><a class="ref" href="#unitvector">unitvector</a></code>, <code class="code"><a class="ref" href="#columnvector">columnvector</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#gramschmidt">gramschmidt</a></code>, <code class="code"><a class="ref" href="#eigenvalues">eigenvalues</a></code>,<br>
+<code class="code"><a class="ref" href="#eigenvectors">eigenvectors</a></code>, <code class="code"><a class="ref" href="#uniteigenvectors">uniteigenvectors</a></code>, and
+<code class="code"><a class="ref" href="#similaritytransform">similaritytransform</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Vectors">Vectors</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-eigen">Package eigen</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-Matrices_002fnode_002fFunctions-and-Variables-for-Matrices-and-Linear-Algebra"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-Matrices-and-Linear-Algebra">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-Matrices-and-Linear-Algebra" accesskey="p" rel="prev">Introduction to Matrices and Linear Algebra</a>, Up: <a href="#Matrices-and-Linear-Algebra" accesskey="u" rel="up">Matrices and Linear Algebra</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-Matrices-and-Linear-Algebra-1">23.2 Functions and Variables for Matrices and Linear Algebra</h3>
+
+<a class="anchor" id="addcol"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002faddcol"></a><dl class="first-deffn">
+<dt class="deffn" id="index-addcol"><span class="category-def">Function: </span><span><strong class="def-name">addcol</strong> <var class="def-var-arguments">(<var class="var">M</var>, <var class="var">list_1</var>, &hellip;, <var class="var">list_n</var>)</var><a class="copiable-link" href='#index-addcol'> &para;</a></span></dt>
+<dd>
+<p>Appends the column(s) given by the one
+or more lists (or matrices) onto the matrix <var class="var">M</var>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#addrow">addrow</a></code> and <code class="code"><a class="ref" href="maxima_4.html#append">append</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="addrow"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002faddrow"></a><dl class="first-deffn">
+<dt class="deffn" id="index-addrow"><span class="category-def">Function: </span><span><strong class="def-name">addrow</strong> <var class="def-var-arguments">(<var class="var">M</var>, <var class="var">list_1</var>, &hellip;, <var class="var">list_n</var>)</var><a class="copiable-link" href='#index-addrow'> &para;</a></span></dt>
+<dd>
+<p>Appends the row(s) given by the one or
+more lists (or matrices) onto the matrix <var class="var">M</var>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#addcol">addcol</a></code> and <code class="code"><a class="ref" href="maxima_4.html#append">append</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="adjoint"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fadjoint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-adjoint"><span class="category-def">Function: </span><span><strong class="def-name">adjoint</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-adjoint'> &para;</a></span></dt>
+<dd>
+<p>Returns the adjoint of the matrix <var class="var">M</var>.
+The adjoint matrix is the transpose of the matrix of cofactors of <var class="var">M</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="augcoefmatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002faugcoefmatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-augcoefmatrix"><span class="category-def">Function: </span><span><strong class="def-name">augcoefmatrix</strong> <var class="def-var-arguments">([<var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_m</var>], [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-augcoefmatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns the augmented coefficient
+matrix for the variables <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var> of the system of linear
+equations <var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_m</var>.  This is the coefficient matrix
+with a column adjoined for the constant terms in each equation (i.e., those
+terms not dependent upon <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>).
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) m: [2*x - (a - 1)*y = 5*b, c + b*y + a*x = 0]$
+(%i2) augcoefmatrix (m, [x, y]);
+                       [ 2  1 - a  - 5 b ]
+(%o2)                  [                 ]
+                       [ a    b      c   ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Linear-equations">Linear equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="cauchy_005fmatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fcauchy_005fmatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-cauchy_005fmatrix"><span class="category-def">Function: </span><span><strong class="def-name">cauchy_matrix</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">cauchy_matrix</code> ([<var class="var">x_1</var>, <var class="var">x_2</var>, &hellip;, <var class="var">x_m</var>], [<var class="var">y_1</var>, <var class="var">y_2</var>, &hellip;, <var class="var">y_n</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">cauchy_matrix</code> ([<var class="var">x_1</var>, <var class="var">x_2</var>, &hellip;, <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-cauchy_005fmatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns a <code class="code">n</code> by <var class="var">m</var> Cauchy matrix with the elements <var class="var">a[i,j]</var> 
+= 1/(<var class="var">x_i</var>+<var class="var">y_i</var>).  The second argument of <code class="code">cauchy_matrix</code> is 
+optional.  For this case the elements of the Cauchy matrix are  
+<var class="var">a[i,j]</var> = 1/(<var class="var">x_i</var>+<var class="var">x_j</var>).
+</p>
+<p>Remark: In the literature the Cauchy matrix can be found defined in two forms.
+A second definition is <var class="var">a[i,j]</var> = 1/(<var class="var">x_i</var>-<var class="var">y_i</var>).
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) cauchy_matrix([x1, x2], [y1, y2]);
+</pre><div class="group"><pre class="example-preformatted">                      [    1        1    ]
+                      [ -------  ------- ]
+                      [ y1 + x1  y2 + x1 ]
+(%o1)                 [                  ]
+                      [    1        1    ]
+                      [ -------  ------- ]
+                      [ y1 + x2  y2 + x2 ]
+</pre></div><pre class="example-preformatted">
+
+(%i2) cauchy_matrix([x1, x2]);
+                      [   1         1    ]
+                      [  ----    ------- ]
+                      [  2 x1    x2 + x1 ]
+(%o2)                 [                  ]
+                      [    1       1     ]
+                      [ -------   ----   ]
+                      [ x2 + x1   2 x2   ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="charpoly"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fcharpoly"></a><dl class="first-deffn">
+<dt class="deffn" id="index-charpoly"><span class="category-def">Function: </span><span><strong class="def-name">charpoly</strong> <var class="def-var-arguments">(<var class="var">M</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-charpoly'> &para;</a></span></dt>
+<dd>
+<p>Returns the characteristic polynomial for the matrix <var class="var">M</var>
+with respect to variable <var class="var">x</var>.  That is,
+<code class="code">determinant (<var class="var">M</var> - diagmatrix (length (<var class="var">M</var>), <var class="var">x</var>))</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) a: matrix ([3, 1], [2, 4]);
+                            [ 3  1 ]
+(%o1)                       [      ]
+                            [ 2  4 ]
+(%i2) expand (charpoly (a, lambda));
+                           2
+(%o2)                lambda  - 7 lambda + 10
+(%i3) (programmode: true, solve (%));
+(%o3)               [lambda = 5, lambda = 2]
+(%i4) matrix ([x1], [x2]);
+                             [ x1 ]
+(%o4)                        [    ]
+                             [ x2 ]
+(%i5) ev (a . % - lambda*%, %th(2)[1]);
+                          [ x2 - 2 x1 ]
+(%o5)                     [           ]
+                          [ 2 x1 - x2 ]
+(%i6) %[1, 1] = 0;
+(%o6)                     x2 - 2 x1 = 0
+(%i7) x2^2 + x1^2 = 1;
+                            2     2
+(%o7)                     x2  + x1  = 1
+(%i8) solve ([%th(2), %], [x1, x2]);
+</pre><div class="group"><pre class="example-preformatted">                  1               2
+(%o8) [[x1 = - -------, x2 = - -------], 
+               sqrt(5)         sqrt(5)
+
+                                             1             2
+                                    [x1 = -------, x2 = -------]]
+                                          sqrt(5)       sqrt(5)
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="coefmatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fcoefmatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-coefmatrix"><span class="category-def">Function: </span><span><strong class="def-name">coefmatrix</strong> <var class="def-var-arguments">([<var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_m</var>], [<var class="var">x_1</var>, &hellip;, <var class="var">x_n</var>])</var><a class="copiable-link" href='#index-coefmatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns the coefficient matrix for the
+variables <var class="var">x_1</var>, &hellip;, <var class="var">x_n</var> of the system of linear equations
+<var class="var">eqn_1</var>, &hellip;, <var class="var">eqn_m</var>.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) coefmatrix([2*x-(a-1)*y+5*b = 0, b*y+a*x = 3], [x,y]);
+                                 [ 2  1 - a ]
+(%o1)                            [          ]
+                                 [ a    b   ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Linear-equations">Linear equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="col"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fcol"></a><dl class="first-deffn">
+<dt class="deffn" id="index-col"><span class="category-def">Function: </span><span><strong class="def-name">col</strong> <var class="def-var-arguments">(<var class="var">M</var>, <var class="var">i</var>)</var><a class="copiable-link" href='#index-col'> &para;</a></span></dt>
+<dd>
+<p>Returns the <var class="var">i</var>&rsquo;th column of the matrix <var class="var">M</var>.
+The return value is a matrix.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="columnvector"></a><a class="anchor" id="covect"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fcolumnvector"></a><dl class="first-deffn">
+<dt class="deffn" id="index-columnvector"><span class="category-def">Function: </span><span><strong class="def-name">columnvector</strong> <var class="def-var-arguments">(<var class="var">L</var>)</var><a class="copiable-link" href='#index-columnvector'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fcovect"></a></dd><dt class="deffnx def-cmd-deffn" id="index-covect"><span class="category-def">Function: </span><span><strong class="def-name">covect</strong> <var class="def-var-arguments">(<var class="var">L</var>)</var><a class="copiable-link" href='#index-covect'> &para;</a></span></dt>
+<dd>
+<p>Returns a matrix of one column and <code class="code">length (<var class="var">L</var>)</code> rows,
+containing the elements of the list <var class="var">L</var>.
+</p>
+<p><code class="code">covect</code> is a synonym for <code class="code">columnvector</code>.
+</p>
+<p><code class="code">load (&quot;eigen&quot;)</code> loads this function.
+</p>
+<p>This is useful if you want to use parts of the outputs of
+the functions in this package in matrix calculations.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;eigen&quot;)$
+Warning - you are redefining the Macsyma function eigenvalues
+Warning - you are redefining the Macsyma function eigenvectors
+(%i2) columnvector ([aa, bb, cc, dd]);
+                             [ aa ]
+                             [    ]
+                             [ bb ]
+(%o2)                        [    ]
+                             [ cc ]
+                             [    ]
+                             [ dd ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="copymatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fcopymatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-copymatrix"><span class="category-def">Function: </span><span><strong class="def-name">copymatrix</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-copymatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns a copy of the matrix <var class="var">M</var>.  This is the only way
+to make a copy aside from copying <var class="var">M</var> element by element.
+</p>
+<p>Note that an assignment of one matrix to another, as in <code class="code">m2: m1</code>, does not
+copy <code class="code">m1</code>.  An assignment <code class="code">m2 [i,j]: x</code> or <code class="code">setelmx(x, i, j, m2)</code>
+also modifies <code class="code">m1 [i,j]</code>.  Creating a copy with <code class="code">copymatrix</code> and then
+using assignment creates a separate, modified copy.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="determinant"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fdeterminant"></a><dl class="first-deffn">
+<dt class="deffn" id="index-determinant"><span class="category-def">Function: </span><span><strong class="def-name">determinant</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-determinant'> &para;</a></span></dt>
+<dd>
+<p>Computes the determinant of <var class="var">M</var> by a method similar to
+Gaussian elimination.
+</p>
+<p>The form of the result depends upon the setting of the switch <code class="code"><a class="ref" href="#ratmx">ratmx</a></code>.
+</p>
+<p>There is a special routine for computing sparse determinants which is called
+when the switches <code class="code">ratmx</code> and <code class="code"><a class="ref" href="#sparse">sparse</a></code> are both <code class="code">true</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="detout"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdetout"></a><dl class="first-defvr">
+<dt class="defvr" id="index-detout"><span class="category-def">Option variable: </span><span><strong class="def-name">detout</strong><a class="copiable-link" href='#index-detout'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">detout</code> is <code class="code">true</code>, the determinant of a
+matrix whose inverse is computed is factored out of the inverse.
+</p>
+<p>For this switch to have an effect <code class="code"><a class="ref" href="#doallmxops">doallmxops</a></code> and <code class="code"><a class="ref" href="#doscmxops">doscmxops</a></code> should
+be <code class="code">false</code> (see their descriptions).  Alternatively this switch can be
+given to <code class="code"><a class="ref" href="maxima_7.html#ev">ev</a></code> which causes the other two to be set correctly.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) m: matrix ([a, b], [c, d]);
+                            [ a  b ]
+(%o1)                       [      ]
+                            [ c  d ]
+(%i2) detout: true$
+(%i3) doallmxops: false$
+(%i4) doscmxops: false$
+(%i5) invert (m);
+                          [  d   - b ]
+                          [          ]
+                          [ - c   a  ]
+(%o5)                     ------------
+                           a d - b c
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Evaluation-flags">Evaluation flags</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="diagmatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fdiagmatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-diagmatrix"><span class="category-def">Function: </span><span><strong class="def-name">diagmatrix</strong> <var class="def-var-arguments">(<var class="var">n</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-diagmatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns a diagonal matrix of size <var class="var">n</var> by <var class="var">n</var> with the diagonal elements
+all equal to <var class="var">x</var>.  <code class="code">diagmatrix (<var class="var">n</var>, 1)</code> returns an identity matrix
+(same as <code class="code">ident (<var class="var">n</var>)</code>).
+</p>
+<p><var class="var">n</var> must evaluate to an integer, otherwise <code class="code">diagmatrix</code> complains with
+an error message.
+</p>
+<p><var class="var">x</var> can be any kind of expression, including another matrix.  If <var class="var">x</var> is
+a matrix, it is not copied; all diagonal elements refer to the same instance,
+<var class="var">x</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="doallmxops"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdoallmxops"></a><dl class="first-defvr">
+<dt class="defvr" id="index-doallmxops"><span class="category-def">Option variable: </span><span><strong class="def-name">doallmxops</strong><a class="copiable-link" href='#index-doallmxops'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">doallmxops</code> is <code class="code">true</code>,
+all operations relating to matrices are carried out.
+When it is <code class="code">false</code> then the setting of the
+individual <code class="code">dot</code> switches govern which operations are performed.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="domxexpt"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdomxexpt"></a><dl class="first-defvr">
+<dt class="defvr" id="index-domxexpt"><span class="category-def">Option variable: </span><span><strong class="def-name">domxexpt</strong><a class="copiable-link" href='#index-domxexpt'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">domxexpt</code> is <code class="code">true</code>,
+a matrix exponential, <code class="code">exp (<var class="var">M</var>)</code> where <var class="var">M</var> is a matrix, is
+interpreted as a matrix with element <code class="code">[i,j]</code> equal to <code class="code">exp (m[i,j])</code>.
+Otherwise <code class="code">exp (<var class="var">M</var>)</code> evaluates to <code class="code">exp (<var class="var">ev(M)</var>)</code>.
+</p>
+<p><code class="code">domxexpt</code> affects all expressions of the form
+<code class="code"><var class="var">base</var>^<var class="var">power</var></code> where <var class="var">base</var> is an expression assumed scalar
+or constant, and <var class="var">power</var> is a list or matrix.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) m: matrix ([1, %i], [a+b, %pi]);
+                         [   1    %i  ]
+(%o1)                    [            ]
+                         [ b + a  %pi ]
+(%i2) domxexpt: false$
+(%i3) (1 - c)^m;
+                             [   1    %i  ]
+                             [            ]
+                             [ b + a  %pi ]
+(%o3)                 (1 - c)
+(%i4) domxexpt: true$
+(%i5) (1 - c)^m;
+                  [                      %i  ]
+                  [    1 - c      (1 - c)    ]
+(%o5)             [                          ]
+                  [        b + a         %pi ]
+                  [ (1 - c)       (1 - c)    ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="domxmxops"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdomxmxops"></a><dl class="first-defvr">
+<dt class="defvr" id="index-domxmxops"><span class="category-def">Option variable: </span><span><strong class="def-name">domxmxops</strong><a class="copiable-link" href='#index-domxmxops'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">domxmxops</code> is <code class="code">true</code>, all matrix-matrix or
+matrix-list operations are carried out (but not scalar-matrix
+operations); if this switch is <code class="code">false</code> such operations are not carried out.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="domxnctimes"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdomxnctimes"></a><dl class="first-defvr">
+<dt class="defvr" id="index-domxnctimes"><span class="category-def">Option variable: </span><span><strong class="def-name">domxnctimes</strong><a class="copiable-link" href='#index-domxnctimes'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">domxnctimes</code> is <code class="code">true</code>, non-commutative products of
+matrices are carried out.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dontfactor"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdontfactor"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dontfactor"><span class="category-def">Option variable: </span><span><strong class="def-name">dontfactor</strong><a class="copiable-link" href='#index-dontfactor'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[]</code>
+</p>
+<p><code class="code">dontfactor</code> may be set to a list of variables with respect to which
+factoring is not to occur.  (The list is initially empty.) Factoring also will
+not take place with respect to any variables which are less important, according
+the variable ordering assumed for canonical rational expression (CRE) form, than
+those on the <code class="code">dontfactor</code> list.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Expressions">Expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="doscmxops"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdoscmxops"></a><dl class="first-defvr">
+<dt class="defvr" id="index-doscmxops"><span class="category-def">Option variable: </span><span><strong class="def-name">doscmxops</strong><a class="copiable-link" href='#index-doscmxops'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">doscmxops</code> is <code class="code">true</code>, scalar-matrix operations are
+carried out.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="doscmxplus"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdoscmxplus"></a><dl class="first-defvr">
+<dt class="defvr" id="index-doscmxplus"><span class="category-def">Option variable: </span><span><strong class="def-name">doscmxplus</strong><a class="copiable-link" href='#index-doscmxplus'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">doscmxplus</code> is <code class="code">true</code>, scalar-matrix operations yield
+a matrix result.  This switch is not subsumed under <code class="code"><a class="ref" href="#doallmxops">doallmxops</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dot0nscsimp"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdot0nscsimp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dot0nscsimp"><span class="category-def">Option variable: </span><span><strong class="def-name">dot0nscsimp</strong><a class="copiable-link" href='#index-dot0nscsimp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">dot0nscsimp</code> is <code class="code">true</code>, a non-commutative product of zero
+and a nonscalar term is simplified to a commutative product.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dot0simp"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdot0simp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dot0simp"><span class="category-def">Option variable: </span><span><strong class="def-name">dot0simp</strong><a class="copiable-link" href='#index-dot0simp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">dot0simp</code> is <code class="code">true</code>,
+a non-commutative product of zero and
+a scalar term is simplified to a commutative product.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dot1simp"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdot1simp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dot1simp"><span class="category-def">Option variable: </span><span><strong class="def-name">dot1simp</strong><a class="copiable-link" href='#index-dot1simp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">dot1simp</code> is <code class="code">true</code>,
+a non-commutative product of one and
+another term is simplified to a commutative product.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dotassoc"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdotassoc"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dotassoc"><span class="category-def">Option variable: </span><span><strong class="def-name">dotassoc</strong><a class="copiable-link" href='#index-dotassoc'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">dotassoc</code> is <code class="code">true</code>, an expression <code class="code">(A.B).C</code> simplifies to
+<code class="code">A.(B.C)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dotconstrules"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdotconstrules"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dotconstrules"><span class="category-def">Option variable: </span><span><strong class="def-name">dotconstrules</strong><a class="copiable-link" href='#index-dotconstrules'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">dotconstrules</code> is <code class="code">true</code>, a non-commutative product of a
+constant and another term is simplified to a commutative product.
+Turning on this flag effectively turns on <code class="code"><a class="ref" href="#dot0simp">dot0simp</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#dot0nscsimp">dot0nscsimp</a></code>, and <code class="code"><a class="ref" href="#dot1simp">dot1simp</a></code> as well.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dotdistrib"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdotdistrib"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dotdistrib"><span class="category-def">Option variable: </span><span><strong class="def-name">dotdistrib</strong><a class="copiable-link" href='#index-dotdistrib'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">dotdistrib</code> is <code class="code">true</code>, an expression <code class="code">A.(B + C)</code> simplifies
+to <code class="code">A.B + A.C</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dotexptsimp"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdotexptsimp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dotexptsimp"><span class="category-def">Option variable: </span><span><strong class="def-name">dotexptsimp</strong><a class="copiable-link" href='#index-dotexptsimp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">dotexptsimp</code> is <code class="code">true</code>, an expression <code class="code">A.A</code> simplifies to
+<code class="code">A^^2</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dotident"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdotident"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dotident"><span class="category-def">Option variable: </span><span><strong class="def-name">dotident</strong><a class="copiable-link" href='#index-dotident'> &para;</a></span></dt>
+<dd><p>Default value: 1
+</p>
+<p><code class="code">dotident</code> is the value returned by <code class="code">X^^0</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="dotscrules"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fdotscrules"></a><dl class="first-defvr">
+<dt class="defvr" id="index-dotscrules"><span class="category-def">Option variable: </span><span><strong class="def-name">dotscrules</strong><a class="copiable-link" href='#index-dotscrules'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">dotscrules</code> is <code class="code">true</code>, an expression <code class="code">A.SC</code> or <code class="code">SC.A</code>
+simplifies to <code class="code">SC*A</code> and <code class="code">A.(SC*B)</code> simplifies to <code class="code">SC*(A.B)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="echelon"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fechelon"></a><dl class="first-deffn">
+<dt class="deffn" id="index-echelon"><span class="category-def">Function: </span><span><strong class="def-name">echelon</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-echelon'> &para;</a></span></dt>
+<dd>
+<p>Returns the echelon form of the matrix <var class="var">M</var>,
+as produced by Gaussian elimination.
+The echelon form is computed from <var class="var">M</var>
+by elementary row operations such that the first
+non-zero element in each row in the resulting matrix is one and the
+column elements under the first one in each row are all zero.
+</p>
+<p><code class="code"><a class="ref" href="#triangularize">triangularize</a></code> also carries out Gaussian elimination, but it does not
+normalize the leading non-zero element in each row.
+</p>
+<p><code class="code"><a class="ref" href="maxima_70.html#lu_005ffactor">lu_factor</a></code> and <code class="code"><a class="ref" href="maxima_70.html#cholesky">cholesky</a></code> are other functions which yield
+triangularized matrices.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) M: matrix ([3, 7, aa, bb], [-1, 8, 5, 2], [9, 2, 11, 4]);
+                       [  3   7  aa  bb ]
+                       [                ]
+(%o1)                  [ - 1  8  5   2  ]
+                       [                ]
+                       [  9   2  11  4  ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) echelon (M);
+                  [ 1  - 8  - 5      - 2     ]
+                  [                          ]
+                  [         28       11      ]
+                  [ 0   1   --       --      ]
+(%o2)             [         37       37      ]
+                  [                          ]
+                  [              37 bb - 119 ]
+                  [ 0   0    1   ----------- ]
+                  [              37 aa - 313 ]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Linear-equations">Linear equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="eigenvalues"></a><a class="anchor" id="eivals"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002feigenvalues"></a><dl class="first-deffn">
+<dt class="deffn" id="index-eigenvalues"><span class="category-def">Function: </span><span><strong class="def-name">eigenvalues</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-eigenvalues'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Matrices_002fdeffn_002feivals"></a></dd><dt class="deffnx def-cmd-deffn" id="index-eivals"><span class="category-def">Function: </span><span><strong class="def-name">eivals</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-eivals'> &para;</a></span></dt>
+<dd>
+<p>Returns a list of two lists containing the eigenvalues of the matrix <var class="var">M</var>.
+The first sublist of the return value is the list of eigenvalues of the
+matrix, and the second sublist is the list of the
+multiplicities of the eigenvalues in the corresponding order.
+</p>
+<p><code class="code">eivals</code> is a synonym for <code class="code">eigenvalues</code>.
+</p>
+<p><code class="code">eigenvalues</code> calls the function <code class="code"><a class="ref" href="maxima_19.html#solve">solve</a></code> to find the roots of the
+characteristic polynomial of the matrix.  Sometimes <code class="code">solve</code> may not be able
+to find the roots of the polynomial; in that case some other functions in this
+package (except <code class="code"><a class="ref" href="#innerproduct">innerproduct</a></code>, <code class="code"><a class="ref" href="#unitvector">unitvector</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#columnvector">columnvector</a></code> and <code class="code"><a class="ref" href="#gramschmidt">gramschmidt</a></code>) will not work.
+Sometimes <code class="code">solve</code> may find only a subset of the roots of the polynomial.
+This may happen when the factoring of the polynomial contains polynomials
+of degree 5 or more. In such cases a warning message is displayed and the
+only the roots found and their corresponding multiplicities are returned.
+</p>
+<p>In some cases the eigenvalues found by <code class="code">solve</code> may be complicated
+expressions.  (This may happen when <code class="code">solve</code> returns a not-so-obviously real
+expression for an eigenvalue which is known to be real.)  It may be possible to
+simplify the eigenvalues using some other functions.
+</p>
+<p>The package <code class="code">eigen.mac</code> is loaded automatically when
+<code class="code">eigenvalues</code> or <code class="code"><a class="ref" href="#eigenvectors">eigenvectors</a></code> is referenced.
+If <code class="code">eigen.mac</code> is not already loaded,
+<code class="code">load (&quot;eigen&quot;)</code> loads it.
+After loading, all functions and variables in the package are available.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-eigen">Package eigen</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="eigenvectors"></a><a class="anchor" id="eivects"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002feigenvectors"></a><dl class="first-deffn">
+<dt class="deffn" id="index-eigenvectors"><span class="category-def">Function: </span><span><strong class="def-name">eigenvectors</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-eigenvectors'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Matrices_002fdeffn_002feivects"></a></dd><dt class="deffnx def-cmd-deffn" id="index-eivects"><span class="category-def">Function: </span><span><strong class="def-name">eivects</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-eivects'> &para;</a></span></dt>
+<dd>
+<p>Computes eigenvectors of the matrix <var class="var">M</var>.
+The return value is a list of two elements.
+The first is a list of the eigenvalues of <var class="var">M</var>
+and a list of the multiplicities of the eigenvalues.
+The second is a list of lists of eigenvectors.
+There is one list of eigenvectors for each eigenvalue.
+There may be one or more eigenvectors in each list.
+</p>
+<p><code class="code">eivects</code> is a synonym for <code class="code">eigenvectors</code>.
+</p>
+<p>The package <code class="code">eigen.mac</code> is loaded automatically when
+<code class="code"><a class="ref" href="#eigenvalues">eigenvalues</a></code> or <code class="code">eigenvectors</code> is referenced.
+If <code class="code">eigen.mac</code> is not already loaded,
+<code class="code">load (&quot;eigen&quot;)</code> loads it.
+After loading, all functions and variables in the package are available.
+</p>
+<p>Note that <code class="code">eigenvectors</code> internally calls <code class="code">eigenvalues</code> to
+obtain eigenvalues. So, when <code class="code">eigenvalues</code> returns a subset of
+all the eigenvalues, the <code class="code">eigenvectors</code> returns the corresponding
+subset of the all the eigenvectors, with the same warning displayed as
+<code class="code">eigenvalues</code>.
+</p>
+<p>The flags that affect this function are:
+</p>
+<p><code class="code">nondiagonalizable</code> is set to <code class="code">true</code> or <code class="code">false</code> depending on
+whether the matrix is nondiagonalizable or diagonalizable after
+<code class="code">eigenvectors</code> returns.
+</p>
+<p><code class="code">hermitianmatrix</code> when <code class="code">true</code>, causes the degenerate
+eigenvectors of the Hermitian matrix to be orthogonalized using the
+Gram-Schmidt algorithm.
+</p>
+<p><code class="code">knowneigvals</code> when <code class="code">true</code> causes the <code class="code">eigen</code> package to assume
+the eigenvalues of the matrix are known to the user and stored under the global
+name <code class="code">listeigvals</code>.  <code class="code">listeigvals</code> should be set to a list similar
+to the output <code class="code">eigenvalues</code>.
+</p>
+<p>The function <code class="code"><a class="ref" href="maxima_19.html#algsys">algsys</a></code> is used here to solve for the eigenvectors.
+Sometimes if the eigenvalues are messy, <code class="code">algsys</code> may not be able to find a
+solution.  In some cases, it may be possible to simplify the eigenvalues by
+first finding them using <code class="code">eigenvalues</code> command and then using other
+functions to reduce them to something simpler.  Following simplification,
+<code class="code">eigenvectors</code> can be called again with the <code class="code">knowneigvals</code> flag set
+to <code class="code">true</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="#eigenvalues">eigenvalues</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>A matrix which has just one eigenvector per eigenvalue.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) M1: matrix ([11, -1], [1, 7]);
+                           [ 11  - 1 ]
+(%o1)                      [         ]
+                           [ 1    7  ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) [vals, vecs] : eigenvectors (M1);
+(%o2) [[[9 - sqrt(3), sqrt(3) + 9], [1, 1]], 
+                        [[[1, sqrt(3) + 2]], [[1, 2 - sqrt(3)]]]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) for i thru length (vals[1]) do disp (val[i] = vals[1][i],
+  mult[i] = vals[2][i], vec[i] = vecs[i]);
+                       val  = 9 - sqrt(3)
+                          1
+
+                            mult  = 1
+                                1
+
+                    vec  = [[1, sqrt(3) + 2]]
+                       1
+
+                       val  = sqrt(3) + 9
+                          2
+
+                            mult  = 1
+                                2
+
+                    vec  = [[1, 2 - sqrt(3)]]
+                       2
+
+(%o3)                         done
+</pre></div></div>
+
+<p>A matrix which has two eigenvectors for one eigenvalue (namely 2).
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) M1: matrix ([0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 2, 0],
+                  [0, 0, 0, 2]);
+                        [ 0  1  0  0 ]
+                        [            ]
+                        [ 0  0  0  0 ]
+(%o1)                   [            ]
+                        [ 0  0  2  0 ]
+                        [            ]
+                        [ 0  0  0  2 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) [vals, vecs]: eigenvectors (M1);
+(%o2) [[[0, 2], [2, 2]], [[[1, 0, 0, 0]], 
+                                   [[0, 0, 1, 0], [0, 0, 0, 1]]]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) for i thru length (vals[1]) do disp (val[i] = vals[1][i],
+  mult[i] = vals[2][i], vec[i] = vecs[i]);
+                            val  = 0
+                               1
+
+                            mult  = 2
+                                1
+
+                      vec  = [[1, 0, 0, 0]]
+                         1
+
+                            val  = 2
+                               2
+
+                            mult  = 2
+                                2
+
+               vec  = [[0, 0, 1, 0], [0, 0, 0, 1]]
+                  2
+
+(%o3)                         done
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-eigen">Package eigen</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ematrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fematrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ematrix"><span class="category-def">Function: </span><span><strong class="def-name">ematrix</strong> <var class="def-var-arguments">(<var class="var">m</var>, <var class="var">n</var>, <var class="var">x</var>, <var class="var">i</var>, <var class="var">j</var>)</var><a class="copiable-link" href='#index-ematrix'> &para;</a></span></dt>
+<dd>
+<p>Returns an <var class="var">m</var> by <var class="var">n</var> matrix, all elements of which
+are zero except for the <code class="code">[<var class="var">i</var>, <var class="var">j</var>]</code> element which is <var class="var">x</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="entermatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fentermatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-entermatrix"><span class="category-def">Function: </span><span><strong class="def-name">entermatrix</strong> <var class="def-var-arguments">(<var class="var">m</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-entermatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns an <var class="var">m</var> by <var class="var">n</var> matrix, reading the elements interactively.
+</p>
+<p>If <var class="var">n</var> is equal to <var class="var">m</var>, Maxima prompts for the type of the matrix
+(diagonal, symmetric, antisymmetric, or general) and for each element.
+Each response is terminated by a semicolon <code class="code">;</code> or dollar sign <code class="code">$</code>.
+</p>
+<p>If <var class="var">n</var> is not equal to <var class="var">m</var>,
+Maxima prompts for each element.
+</p>
+<p>The elements may be any expressions, which are evaluated.
+<code class="code">entermatrix</code> evaluates its arguments.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) n: 3$
+(%i2) m: entermatrix (n, n)$
+
+Is the matrix  1. Diagonal  2. Symmetric  3. Antisymmetric 
+4. General
+Answer 1, 2, 3 or 4 : 
+1$
+Row 1 Column 1: 
+(a+b)^n$
+Row 2 Column 2: 
+(a+b)^(n+1)$
+Row 3 Column 3: 
+(a+b)^(n+2)$
+
+Matrix entered.
+(%i3) m;
+                [        3                     ]
+                [ (b + a)      0         0     ]
+                [                              ]
+(%o3)           [                  4           ]
+                [    0      (b + a)      0     ]
+                [                              ]
+                [                            5 ]
+                [    0         0      (b + a)  ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Console-interaction">Console interaction</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="genmatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fgenmatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-genmatrix"><span class="category-def">Function: </span><span><strong class="def-name">genmatrix</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">genmatrix</code> (<var class="var">a</var>, <var class="var">i_2</var>, <var class="var">j_2</var>, <var class="var">i_1</var>, <var class="var">j_1</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">genmatrix</code> (<var class="var">a</var>, <var class="var">i_2</var>, <var class="var">j_2</var>, <var class="var">i_1</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">genmatrix</code> (<var class="var">a</var>, <var class="var">i_2</var>, <var class="var">j_2</var>)</var><a class="copiable-link" href='#index-genmatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns a matrix generated from <var class="var">a</var>, taking element
+<code class="code"><var class="var">a</var>[<var class="var">i_1</var>, <var class="var">j_1</var>]</code> as the upper-left element and
+<code class="code"><var class="var">a</var>[<var class="var">i_2</var>, <var class="var">j_2</var>]</code> as the lower-right element of the matrix.
+Here <var class="var">a</var> is a declared array (created by <code class="code">array</code> but not by
+<code class="code"><a class="ref" href="maxima_4.html#make_005farray">make_array</a></code>) or a <code class="code"><a class="ref" href="maxima_4.html#hashed-array">hashed array</a></code>, or a <code class="code"><a class="ref" href="maxima_35.html#memoizing-function">memoizing function</a></code>, or a lambda
+expression of two arguments.  (A <code class="code"><a class="ref" href="maxima_35.html#memoizing-function">memoizing function</a></code> is created like other functions
+with <code class="code"><a class="ref" href="maxima_6.html#g_t_003a_003d">:=</a></code> or <code class="code"><a class="ref" href="maxima_35.html#define">define</a></code>, but arguments are enclosed in square
+brackets instead of parentheses.)
+</p>
+<p>If <var class="var">j_1</var> is omitted, it is assumed equal to <var class="var">i_1</var>.
+If both <var class="var">j_1</var> and <var class="var">i_1</var> are omitted, both are assumed equal to 1.
+</p>
+<p>If a selected element <code class="code">i,j</code> of the array is undefined,
+the matrix will contain a symbolic element <code class="code"><var class="var">a</var>[i,j]</code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) h [i, j] := 1 / (i + j - 1);
+                                    1
+(%o1)                  h     := ---------
+                        i, j    i + j - 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) genmatrix (h, 3, 3);
+                           [    1  1 ]
+                           [ 1  -  - ]
+                           [    2  3 ]
+                           [         ]
+                           [ 1  1  1 ]
+(%o2)                      [ -  -  - ]
+                           [ 2  3  4 ]
+                           [         ]
+                           [ 1  1  1 ]
+                           [ -  -  - ]
+                           [ 3  4  5 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) array (a, fixnum, 2, 2);
+(%o3)                           a
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) a [1, 1] : %e;
+(%o4)                          %e
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) a [2, 2] : %pi;
+(%o5)                          %pi
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) genmatrix (a, 2, 2);
+                           [ %e   0  ]
+(%o6)                      [         ]
+                           [ 0   %pi ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) genmatrix (lambda ([i, j], j - i), 3, 3);
+                         [  0    1   2 ]
+                         [             ]
+(%o7)                    [ - 1   0   1 ]
+                         [             ]
+                         [ - 2  - 1  0 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) genmatrix (B, 2, 2);
+                        [ B      B     ]
+                        [  1, 1   1, 2 ]
+(%o8)                   [              ]
+                        [ B      B     ]
+                        [  2, 1   2, 2 ]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="gramschmidt"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fgramschmidt"></a><dl class="first-deffn">
+<dt class="deffn" id="index-gramschmidt"><span class="category-def">Function: </span><span><strong class="def-name">gramschmidt</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">gramschmidt</code> (<var class="var">x</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">gramschmidt</code> (<var class="var">x</var>, <var class="var">F</var>)</var><a class="copiable-link" href='#index-gramschmidt'> &para;</a></span></dt>
+<dd>
+<p>Carries out the Gram-Schmidt orthogonalization algorithm on <var class="var">x</var>, which is
+either a matrix or a list of lists.  <var class="var">x</var> is not modified by
+<code class="code">gramschmidt</code>.  The inner product employed by <code class="code">gramschmidt</code> is
+<var class="var">F</var>, if present, otherwise the inner product is the function
+<code class="code"><a class="ref" href="#innerproduct">innerproduct</a></code>.
+</p>
+<p>If <var class="var">x</var> is a matrix, the algorithm is applied to the rows of <var class="var">x</var>.  If
+<var class="var">x</var> is a list of lists, the algorithm is applied to the sublists, which must
+have equal numbers of elements.  In either case, the return value is a list of
+lists, the sublists of which are orthogonal and span the same space as <var class="var">x</var>.
+If the dimension of the span of <var class="var">x</var> is less than the number of rows or
+sublists, some sublists of the return value are zero.
+</p>
+<p><code class="code"><a class="ref" href="maxima_13.html#factor">factor</a></code> is called at each stage of the algorithm to simplify intermediate
+results.  As a consequence, the return value may contain factored integers.
+</p>
+<p><code class="code">load(&quot;eigen&quot;)</code> loads this function.
+</p>
+<p>Example:
+</p>
+<p>Gram-Schmidt algorithm using default inner product function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;eigen&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) x: matrix ([1, 2, 3], [9, 18, 30], [12, 48, 60]);
+                         [ 1   2   3  ]
+                         [            ]
+(%o2)                    [ 9   18  30 ]
+                         [            ]
+                         [ 12  48  60 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) y: gramschmidt (x);
+                       2      2            4     3
+                      3      3   3 5      2  3  2  3
+(%o3)  [[1, 2, 3], [- ---, - --, ---], [- ----, ----, 0]]
+                      2 7    7   2 7       5     5
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) map (innerproduct, [y[1], y[2], y[3]], [y[2], y[3], y[1]]);
+(%o4)                       [0, 0, 0]
+</pre></div></div>
+
+<p>Gram-Schmidt algorithm using a specified inner product function.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;eigen&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) ip (f, g) := integrate (f * g, u, a, b);
+(%o2)          ip(f, g) := integrate(f g, u, a, b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) y: gramschmidt ([1, sin(u), cos(u)], ip), a=-%pi/2, b=%pi/2;
+                               %pi cos(u) - 2
+(%o3)              [1, sin(u), --------------]
+                                    %pi
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) map (ip, [y[1], y[2], y[3]], [y[2], y[3], y[1]]), a=-%pi/2,
+         b=%pi/2;
+(%o4)                       [0, 0, 0]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-eigen">Package eigen</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ident"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fident"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ident"><span class="category-def">Function: </span><span><strong class="def-name">ident</strong> <var class="def-var-arguments">(<var class="var">n</var>)</var><a class="copiable-link" href='#index-ident'> &para;</a></span></dt>
+<dd>
+<p>Returns an <var class="var">n</var> by <var class="var">n</var> identity matrix.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="innerproduct"></a><a class="anchor" id="inprod"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002finnerproduct"></a><dl class="first-deffn">
+<dt class="deffn" id="index-innerproduct"><span class="category-def">Function: </span><span><strong class="def-name">innerproduct</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>)</var><a class="copiable-link" href='#index-innerproduct'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Matrices_002fdeffn_002finprod"></a></dd><dt class="deffnx def-cmd-deffn" id="index-inprod"><span class="category-def">Function: </span><span><strong class="def-name">inprod</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">y</var>)</var><a class="copiable-link" href='#index-inprod'> &para;</a></span></dt>
+<dd>
+<p>Returns the inner product (also called the scalar product or dot product) of
+<var class="var">x</var> and <var class="var">y</var>, which are lists of equal length, or both 1-column or 1-row
+matrices of equal length.  The return value is <code class="code">conjugate (x) . y</code>,
+where <code class="code">.</code> is the noncommutative multiplication operator.
+</p>
+<p><code class="code">load (&quot;eigen&quot;)</code> loads this function.
+</p>
+<p><code class="code">inprod</code> is a synonym for <code class="code">innerproduct</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-eigen">Package eigen</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="invert_005fby_005fadjoint"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002finvert_005fby_005fadjoint"></a><dl class="first-deffn">
+<dt class="deffn" id="index-invert_005fby_005fadjoint"><span class="category-def">Function: </span><span><strong class="def-name">invert_by_adjoint</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-invert_005fby_005fadjoint'> &para;</a></span></dt>
+<dd><p>Returns the inverse of the matrix <var class="var">M</var>.
+The inverse is computed by the adjoint method.
+</p>
+<p><code class="code">invert_by_adjoint</code> honors the <code class="code"><a class="ref" href="#ratmx">ratmx</a></code> and <code class="code"><a class="ref" href="#detout">detout</a></code> flags,
+the same as <code class="code"><a class="ref" href="#invert">invert</a></code>.
+</p>
+</dd></dl>
+
+<a class="anchor" id="invert"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002finvert"></a><dl class="first-deffn">
+<dt class="deffn" id="index-invert"><span class="category-def">Function: </span><span><strong class="def-name">invert</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-invert'> &para;</a></span></dt>
+<dd>
+<p>Returns the inverse of the matrix <var class="var">M</var>.
+The inverse is computed via the LU decomposition.
+</p>
+<p>When <code class="code"><a class="ref" href="#ratmx">ratmx</a></code> is <code class="code">true</code>,
+elements of <var class="var">M</var> are converted to canonical rational expressions (CRE),
+and the elements of the return value are also CRE.
+</p>
+<p>When <code class="code"><a class="ref" href="#ratmx">ratmx</a></code> is <code class="code">false</code>,
+elements of <var class="var">M</var> are not converted to a common representation.
+In particular, float and bigfloat elements are not converted to rationals.
+</p>
+<p>When <code class="code"><a class="ref" href="#detout">detout</a></code> is <code class="code">true</code>, the determinant is factored out of the inverse.
+The global flags <code class="code"><a class="ref" href="#doallmxops">doallmxops</a></code> and <code class="code"><a class="ref" href="#doscmxops">doscmxops</a></code> must be <code class="code">false</code>
+to prevent the determinant from being absorbed into the inverse.
+<code class="code"><a class="ref" href="maxima_8.html#xthru">xthru</a></code> can multiply the determinant into the inverse.
+</p>
+<p><code class="code"><a class="ref" href="#invert">invert</a></code> does not apply any simplifications to the elements of the inverse
+apart from the default arithmetic simplifications.
+<code class="code"><a class="ref" href="maxima_13.html#ratsimp">ratsimp</a></code> and <code class="code"><a class="ref" href="maxima_8.html#expand">expand</a></code> can apply additional simplifications.
+In particular, when <var class="var">M</var> has polynomial elements,
+<code class="code">expand(invert(<var class="var">M</var>))</code> might be preferable.
+</p>
+<p><code class="code">invert(<var class="var">M</var>)</code> is equivalent to <code class="code"><var class="var">M</var>^^-1</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="list_005fmatrix_005fentries"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002flist_005fmatrix_005fentries"></a><dl class="first-deffn">
+<dt class="deffn" id="index-list_005fmatrix_005fentries"><span class="category-def">Function: </span><span><strong class="def-name">list_matrix_entries</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-list_005fmatrix_005fentries'> &para;</a></span></dt>
+<dd>
+<p>Returns a list containing the elements of the matrix <var class="var">M</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) list_matrix_entries(matrix([a,b],[c,d]));
+(%o1)                     [a, b, c, d]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="lmxchar"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002flmxchar"></a><dl class="first-defvr">
+<dt class="defvr" id="index-lmxchar"><span class="category-def">Option variable: </span><span><strong class="def-name">lmxchar</strong><a class="copiable-link" href='#index-lmxchar'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">[</code>
+</p>
+<p><code class="code">lmxchar</code> is the character displayed as the left delimiter of a matrix.
+See also <code class="code"><a class="ref" href="#rmxchar">rmxchar</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) lmxchar: &quot;|&quot;$
+(%i2) matrix ([a, b, c], [d, e, f], [g, h, i]);
+                           | a  b  c ]
+                           |         ]
+(%o2)                      | d  e  f ]
+                           |         ]
+                           | g  h  i ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="matrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fmatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-matrix"><span class="category-def">Function: </span><span><strong class="def-name">matrix</strong> <var class="def-var-arguments">(<var class="var">row_1</var>, &hellip;, <var class="var">row_n</var>)</var><a class="copiable-link" href='#index-matrix'> &para;</a></span></dt>
+<dd>
+<p>Returns a rectangular matrix which has the rows <var class="var">row_1</var>, &hellip;,
+<var class="var">row_n</var>.  Each row is a list of expressions.  All rows must be the same
+length.
+</p>
+<p>The operations <code class="code">+</code> (addition), <code class="code">-</code> (subtraction), <code class="code">*</code>
+(multiplication), and <code class="code">/</code> (division), are carried out element by element
+when the operands are two matrices, a scalar and a matrix, or a matrix and a
+scalar.  The operation <code class="code">^</code> (exponentiation, equivalently <code class="code">**</code>)
+is carried out element by element if the operands are a scalar and a matrix or
+a matrix and a scalar, but not if the operands are two matrices.
+All operations are normally carried out in full,
+including <code class="code">.</code> (noncommutative multiplication).
+</p>
+<p>Matrix multiplication is represented by the noncommutative multiplication
+operator <code class="code">.</code>.  The corresponding noncommutative exponentiation operator
+is <code class="code">^^</code>.  For a matrix <code class="code"><var class="var">A</var></code>, <code class="code"><var class="var">A</var>.<var class="var">A</var> = <var class="var">A</var>^^2</code>
+and <code class="code"><var class="var">A</var>^^-1</code> is the inverse of <var class="var">A</var>, if it exists.
+<code class="code"><var class="var">A</var>^^-1</code> is equivalent to <code class="code">invert(<var class="var">A</var>)</code>.
+</p>
+<p>There are switches for controlling simplification of expressions involving dot
+and matrix-list operations.  These are
+<code class="code"><a class="ref" href="#doallmxops">doallmxops</a></code>, <code class="code"><a class="ref" href="#domxexpt">domxexpt</a></code>, <code class="code"><a class="ref" href="#domxmxops">domxmxops</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#doscmxops">doscmxops</a></code>, and <code class="code"><a class="ref" href="#doscmxplus">doscmxplus</a></code>.
+</p>
+<p>There are additional options which are related to matrices.  These are:
+<code class="code"><a class="ref" href="#lmxchar">lmxchar</a></code>, <code class="code"><a class="ref" href="#rmxchar">rmxchar</a></code>, <code class="code"><a class="ref" href="#ratmx">ratmx</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="maxima_4.html#listarith">listarith</a></code>, <code class="code"><a class="ref" href="#detout">detout</a></code>, <code class="code">scalarmatrix</code> and
+<code class="code"><a class="ref" href="#sparse">sparse</a></code>.
+</p>
+<p>There are a number of functions which take matrices as arguments or yield
+matrices as return values.
+See <code class="code"><a class="ref" href="#eigenvalues">eigenvalues</a></code>, <code class="code"><a class="ref" href="#eigenvectors">eigenvectors</a></code>, <code class="code"><a class="ref" href="#determinant">determinant</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#charpoly">charpoly</a></code>, <code class="code"><a class="ref" href="#genmatrix">genmatrix</a></code>, <code class="code"><a class="ref" href="#addcol">addcol</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#addrow">addrow</a></code>, <code class="code"><a class="ref" href="#copymatrix">copymatrix</a></code>, <code class="code"><a class="ref" href="#transpose">transpose</a></code>,<!-- /@w -->
+<code class="code"><a class="ref" href="#echelon">echelon</a></code>, and <code class="code"><a class="ref" href="#rank">rank</a></code>.
+</p>
+<p>Examples:
+</p>
+<ul class="itemize mark-bullet">
+<li>Construction of matrices from lists.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i1) x: matrix ([17, 3], [-8, 11]);
+                           [ 17   3  ]
+(%o1)                      [         ]
+                           [ - 8  11 ]
+(%i2) y: matrix ([%pi, %e], [a, b]);
+                           [ %pi  %e ]
+(%o2)                      [         ]
+                           [  a   b  ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Addition, element by element.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i3) x + y;
+                      [ %pi + 17  %e + 3 ]
+(%o3)                 [                  ]
+                      [  a - 8    b + 11 ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Subtraction, element by element.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i4) x - y;
+                      [ 17 - %pi  3 - %e ]
+(%o4)                 [                  ]
+                      [ - a - 8   11 - b ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Multiplication, element by element.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i5) x * y;
+                        [ 17 %pi  3 %e ]
+(%o5)                   [              ]
+                        [ - 8 a   11 b ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Division, element by element.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i6) x / y;
+                        [ 17       - 1 ]
+                        [ ---  3 %e    ]
+                        [ %pi          ]
+(%o6)                   [              ]
+                        [   8    11    ]
+                        [ - -    --    ]
+                        [   a    b     ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Matrix to a scalar exponent, element by element.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i7) x ^ 3;
+                         [ 4913    27  ]
+(%o7)                    [             ]
+                         [ - 512  1331 ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Scalar base to a matrix exponent, element by element.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i8) exp(y); 
+                         [   %pi    %e ]
+                         [ %e     %e   ]
+(%o8)                    [             ]
+                         [    a     b  ]
+                         [  %e    %e   ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Matrix base to a matrix exponent.  This is not carried out element by element.
+See also <code class="code"><a class="ref" href="#matrixexp">matrixexp</a></code>.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i9) x ^ y;
+                                [ %pi  %e ]
+                                [         ]
+                                [  a   b  ]
+                     [ 17   3  ]
+(%o9)                [         ]
+                     [ - 8  11 ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Noncommutative matrix multiplication.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i10) x . y;
+                  [ 3 a + 17 %pi  3 b + 17 %e ]
+(%o10)            [                           ]
+                  [ 11 a - 8 %pi  11 b - 8 %e ]
+(%i11) y . x;
+                [ 17 %pi - 8 %e  3 %pi + 11 %e ]
+(%o11)          [                              ]
+                [  17 a - 8 b     11 b + 3 a   ]
+</pre></div>
+<ul class="itemize mark-bullet">
+<li>Noncommutative matrix exponentiation.
+A scalar base <var class="var">b</var> to a matrix power <var class="var">M</var>
+is carried out element by element and so <code class="code">b^^m</code> is the same as <code class="code">b^m</code>.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i12) x ^^ 3;
+                        [  3833   1719 ]
+(%o12)                  [              ]
+                        [ - 4584  395  ]
+(%i13) %e ^^ y;
+</pre><div class="group"><pre class="example-preformatted">                         [   %pi    %e ]
+                         [ %e     %e   ]
+(%o13)                   [             ]
+                         [    a     b  ]
+                         [  %e    %e   ]
+</pre></div></div>
+<ul class="itemize mark-bullet">
+<li>A matrix raised to a -1 exponent with noncommutative exponentiation is the
+matrix inverse, if it exists.
+</li></ul>
+<div class="example">
+<pre class="example-preformatted">(%i14) x ^^ -1;
+                         [ 11      3  ]
+                         [ ---  - --- ]
+                         [ 211    211 ]
+(%o14)                   [            ]
+                         [  8    17   ]
+                         [ ---   ---  ]
+                         [ 211   211  ]
+(%i15) x . (x ^^ -1);
+                            [ 1  0 ]
+(%o15)                      [      ]
+                            [ 0  1 ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="matrixexp"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fmatrixexp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-matrixexp"><span class="category-def">Function: </span><span><strong class="def-name">matrixexp</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">matrixexp</code> (<var class="var">M</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">matrixexp</code> (<var class="var">M</var>, <var class="var">n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">matrixexp</code> (<var class="var">M</var>, <var class="var">V</var>)</var><a class="copiable-link" href='#index-matrixexp'> &para;</a></span></dt>
+<dd>
+<p>Calculates the matrix exponential
+</p>
+\(e^{M\cdot V}\)
+
+<p>. Instead of the vector <var class="var">V</var> a number <var class="var">n</var> can be specified as the second
+argument. If this argument is omitted <code class="code">matrixexp</code> replaces it by <code class="code">1</code>.
+</p>
+<p>The matrix exponential of a matrix <var class="var">M</var> can be expressed as a power series:
+$$
+e^M=\sum_{k=0}^\infty{\left(\frac{M^k}{k!}\right)}
+$$
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="matrixmap"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fmatrixmap"></a><dl class="first-deffn">
+<dt class="deffn" id="index-matrixmap"><span class="category-def">Function: </span><span><strong class="def-name">matrixmap</strong> <var class="def-var-arguments">(<var class="var">f</var>, <var class="var">M</var>)</var><a class="copiable-link" href='#index-matrixmap'> &para;</a></span></dt>
+<dd>
+<p>Returns a matrix with element <code class="code">i,j</code> equal to <code class="code"><var class="var">f</var>(<var class="var">M</var>[i,j])</code>.
+</p>
+<p>See also <code class="code"><a class="ref" href="maxima_36.html#map">map</a></code>, <code class="code"><a class="ref" href="maxima_35.html#fullmap">fullmap</a></code>, <code class="code"><a class="ref" href="maxima_35.html#fullmapl">fullmapl</a></code>, and
+<code class="code"><a class="ref" href="maxima_35.html#apply">apply</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="matrixp"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fmatrixp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-matrixp"><span class="category-def">Function: </span><span><strong class="def-name">matrixp</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-matrixp'> &para;</a></span></dt>
+<dd>
+<p>Returns <code class="code">true</code> if <var class="var">expr</var> is a matrix, otherwise <code class="code">false</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Predicate-functions">Predicate functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="matrix_005felement_005fadd"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fmatrix_005felement_005fadd"></a><dl class="first-defvr">
+<dt class="defvr" id="index-matrix_005felement_005fadd"><span class="category-def">Option variable: </span><span><strong class="def-name">matrix_element_add</strong><a class="copiable-link" href='#index-matrix_005felement_005fadd'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">+</code>
+</p>
+<p><code class="code">matrix_element_add</code> is the operation 
+invoked in place of addition in a matrix multiplication.
+<code class="code">matrix_element_add</code> can be assigned any n-ary operator
+(that is, a function which handles any number of arguments).
+The assigned value may be the name of an operator enclosed in quote marks,
+the name of a function,
+or a lambda expression.
+</p>
+<p>See also <code class="code"><a class="ref" href="#matrix_005felement_005fmult">matrix_element_mult</a></code> and <code class="code"><a class="ref" href="#matrix_005felement_005ftranspose">matrix_element_transpose</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) matrix_element_add: &quot;*&quot;$
+(%i2) matrix_element_mult: &quot;^&quot;$
+(%i3) aa: matrix ([a, b, c], [d, e, f]);
+                           [ a  b  c ]
+(%o3)                      [         ]
+                           [ d  e  f ]
+(%i4) bb: matrix ([u, v, w], [x, y, z]);
+</pre><div class="group"><pre class="example-preformatted">                           [ u  v  w ]
+(%o4)                      [         ]
+                           [ x  y  z ]
+</pre></div><pre class="example-preformatted">(%i5) aa . transpose (bb);
+                     [  u  v  w   x  y  z ]
+                     [ a  b  c   a  b  c  ]
+(%o5)                [                    ]
+                     [  u  v  w   x  y  z ]
+                     [ d  e  f   d  e  f  ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="matrix_005felement_005fmult"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fmatrix_005felement_005fmult"></a><dl class="first-defvr">
+<dt class="defvr" id="index-matrix_005felement_005fmult"><span class="category-def">Option variable: </span><span><strong class="def-name">matrix_element_mult</strong><a class="copiable-link" href='#index-matrix_005felement_005fmult'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">*</code>
+</p>
+<p><code class="code">matrix_element_mult</code> is the operation 
+invoked in place of multiplication in a matrix multiplication.
+<code class="code">matrix_element_mult</code> can be assigned any binary operator.
+The assigned value may be the name of an operator enclosed in quote marks,
+the name of a function,
+or a lambda expression.
+</p>
+<p>The dot operator <code class="code">.</code> is a useful choice in some contexts.
+</p>
+<p>See also <code class="code"><a class="ref" href="#matrix_005felement_005fadd">matrix_element_add</a></code> and <code class="code"><a class="ref" href="#matrix_005felement_005ftranspose">matrix_element_transpose</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) matrix_element_add: lambda ([[x]], sqrt (apply (&quot;+&quot;, x)))$
+(%i2) matrix_element_mult: lambda ([x, y], (x - y)^2)$
+(%i3) [a, b, c] . [x, y, z];
+                          2          2          2
+(%o3)         sqrt((c - z)  + (b - y)  + (a - x) )
+(%i4) aa: matrix ([a, b, c], [d, e, f]);
+                           [ a  b  c ]
+(%o4)                      [         ]
+                           [ d  e  f ]
+(%i5) bb: matrix ([u, v, w], [x, y, z]);
+                           [ u  v  w ]
+(%o5)                      [         ]
+                           [ x  y  z ]
+(%i6) aa . transpose (bb);
+               [             2          2          2  ]
+               [ sqrt((c - w)  + (b - v)  + (a - u) ) ]
+(%o6)  Col 1 = [                                      ]
+               [             2          2          2  ]
+               [ sqrt((f - w)  + (e - v)  + (d - u) ) ]
+
+                         [             2          2          2  ]
+                         [ sqrt((c - z)  + (b - y)  + (a - x) ) ]
+                 Col 2 = [                                      ]
+                         [             2          2          2  ]
+                         [ sqrt((f - z)  + (e - y)  + (d - x) ) ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="matrix_005felement_005ftranspose"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fmatrix_005felement_005ftranspose"></a><dl class="first-defvr">
+<dt class="defvr" id="index-matrix_005felement_005ftranspose"><span class="category-def">Option variable: </span><span><strong class="def-name">matrix_element_transpose</strong><a class="copiable-link" href='#index-matrix_005felement_005ftranspose'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p><code class="code">matrix_element_transpose</code> is the operation 
+applied to each element of a matrix when it is transposed.
+<code class="code"><a class="ref" href="#matrix_005felement_005fmult">matrix_element_mult</a></code> can be assigned any unary operator.
+The assigned value may be the name of an operator enclosed in quote marks,
+the name of a function, or a lambda expression.
+</p>
+<p>When <code class="code">matrix_element_transpose</code> equals <code class="code"><a class="ref" href="#transpose">transpose</a></code>,
+the <code class="code">transpose</code> function is applied to every element.
+When <code class="code">matrix_element_transpose</code> equals <code class="code">nonscalars</code>,
+the <code class="code">transpose</code> function is applied to every nonscalar element.
+If some element is an atom, the <code class="code">nonscalars</code> option applies
+<code class="code">transpose</code> only if the atom is declared nonscalar,
+while the <code class="code">transpose</code> option always applies <code class="code">transpose</code>.
+</p>
+<p>The default value, <code class="code">false</code>, means no operation is applied.
+</p>
+<p>See also <code class="code"><a class="ref" href="#matrix_005felement_005fadd">matrix_element_add</a></code> and <code class="code"><a class="ref" href="#matrix_005felement_005fmult">matrix_element_mult</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) declare (a, nonscalar)$
+(%i2) transpose ([a, b]);
+                        [ transpose(a) ]
+(%o2)                   [              ]
+                        [      b       ]
+(%i3) matrix_element_transpose: nonscalars$
+(%i4) transpose ([a, b]);
+                        [ transpose(a) ]
+(%o4)                   [              ]
+                        [      b       ]
+(%i5) matrix_element_transpose: transpose$
+(%i6) transpose ([a, b]);
+                        [ transpose(a) ]
+(%o6)                   [              ]
+                        [ transpose(b) ]
+(%i7) matrix_element_transpose: lambda ([x], realpart(x)
+      - %i*imagpart(x))$
+(%i8) m: matrix ([1 + 5*%i, 3 - 2*%i], [7*%i, 11]);
+                     [ 5 %i + 1  3 - 2 %i ]
+(%o8)                [                    ]
+                     [   7 %i       11    ]
+(%i9) transpose (m);
+                      [ 1 - 5 %i  - 7 %i ]
+(%o9)                 [                  ]
+                      [ 2 %i + 3    11   ]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="mattrace"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fmattrace"></a><dl class="first-deffn">
+<dt class="deffn" id="index-mattrace"><span class="category-def">Function: </span><span><strong class="def-name">mattrace</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-mattrace'> &para;</a></span></dt>
+<dd>
+<p>Returns the trace (that is, the sum of the elements on the main diagonal) of
+the square matrix <var class="var">M</var>.
+</p>
+<p><code class="code">mattrace</code> is called by <code class="code"><a class="ref" href="#ncharpoly">ncharpoly</a></code>, an alternative to Maxima&rsquo;s
+<code class="code"><a class="ref" href="#charpoly">charpoly</a></code>.
+</p>
+<p><code class="code">load (&quot;nchrpl&quot;)</code> loads this function.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-nchrpl">Package nchrpl</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="minor"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fminor"></a><dl class="first-deffn">
+<dt class="deffn" id="index-minor"><span class="category-def">Function: </span><span><strong class="def-name">minor</strong> <var class="def-var-arguments">(<var class="var">M</var>, <var class="var">i</var>, <var class="var">j</var>)</var><a class="copiable-link" href='#index-minor'> &para;</a></span></dt>
+<dd>
+<p>Returns the <var class="var">i</var>, <var class="var">j</var> minor of the matrix <var class="var">M</var>.  That is, <var class="var">M</var>
+with row <var class="var">i</var> and column <var class="var">j</var> removed.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ncharpoly"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fncharpoly"></a><dl class="first-deffn">
+<dt class="deffn" id="index-ncharpoly"><span class="category-def">Function: </span><span><strong class="def-name">ncharpoly</strong> <var class="def-var-arguments">(<var class="var">M</var>, <var class="var">x</var>)</var><a class="copiable-link" href='#index-ncharpoly'> &para;</a></span></dt>
+<dd>
+<p>Returns the characteristic polynomial of the matrix <var class="var">M</var>
+with respect to <var class="var">x</var>.  This is an alternative to Maxima&rsquo;s <code class="code"><a class="ref" href="#charpoly">charpoly</a></code>.
+</p>
+<p><code class="code">ncharpoly</code> works by computing traces of powers of the given matrix,
+which are known to be equal to sums of powers of the roots of the
+characteristic polynomial.  From these quantities the symmetric
+functions of the roots can be calculated, which are nothing more than
+the coefficients of the characteristic polynomial.  <code class="code">charpoly</code> works by
+forming the determinant of <code class="code"><var class="var">x</var> * ident [n] - a</code>.  Thus
+<code class="code">ncharpoly</code> wins, for example, in the case of large dense matrices filled
+with integers, since it avoids polynomial arithmetic altogether.
+</p>
+<p><code class="code">load (&quot;nchrpl&quot;)</code> loads this file.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-nchrpl">Package nchrpl</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="newdet"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fnewdet"></a><dl class="first-deffn">
+<dt class="deffn" id="index-newdet"><span class="category-def">Function: </span><span><strong class="def-name">newdet</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-newdet'> &para;</a></span></dt>
+<dd>
+<p>Computes the determinant of the matrix <var class="var">M</var> by the Johnson-Gentleman tree 
+minor algorithm.  <code class="code">newdet</code> returns the result in CRE form.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="permanent"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fpermanent"></a><dl class="first-deffn">
+<dt class="deffn" id="index-permanent"><span class="category-def">Function: </span><span><strong class="def-name">permanent</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-permanent'> &para;</a></span></dt>
+<dd>
+<p>Computes the permanent of the matrix <var class="var">M</var> by the Johnson-Gentleman tree
+minor algorithm.  A permanent is like a determinant but with no sign changes.
+<code class="code">permanent</code> returns the result in CRE form.
+</p>
+<p>See also <code class="code">newdet</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="rank"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002frank"></a><dl class="first-deffn">
+<dt class="deffn" id="index-rank"><span class="category-def">Function: </span><span><strong class="def-name">rank</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-rank'> &para;</a></span></dt>
+<dd>
+<p>Computes the rank of the matrix <var class="var">M</var>.  That is, the order of the
+largest non-singular subdeterminant of <var class="var">M</var>.
+</p>
+<p><var class="var">rank</var> may return the
+wrong answer if it cannot determine that a matrix element that is
+equivalent to zero is indeed so.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="ratmx"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fratmx"></a><dl class="first-defvr">
+<dt class="defvr" id="index-ratmx"><span class="category-def">Option variable: </span><span><strong class="def-name">ratmx</strong><a class="copiable-link" href='#index-ratmx'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">ratmx</code> is <code class="code">false</code>, determinant and matrix
+addition, subtraction, and multiplication are performed in the
+representation of the matrix elements and cause the result of
+matrix inversion to be left in general representation.
+</p>
+<p>When <code class="code">ratmx</code> is <code class="code">true</code>,
+the 4 operations mentioned above are performed in CRE form and the
+result of matrix inverse is in CRE form.  Note that this may
+cause the elements to be expanded (depending on the setting of <code class="code"><a class="ref" href="maxima_13.html#ratfac">ratfac</a></code>)
+which might not always be desired.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Rational-expressions">Rational expressions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="row"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002frow"></a><dl class="first-deffn">
+<dt class="deffn" id="index-row"><span class="category-def">Function: </span><span><strong class="def-name">row</strong> <var class="def-var-arguments">(<var class="var">M</var>, <var class="var">i</var>)</var><a class="copiable-link" href='#index-row'> &para;</a></span></dt>
+<dd>
+<p>Returns the <var class="var">i</var>&rsquo;th row of the matrix <var class="var">M</var>.
+The return value is a matrix.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="rmxchar"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002frmxchar"></a><dl class="first-defvr">
+<dt class="defvr" id="index-rmxchar"><span class="category-def">Option variable: </span><span><strong class="def-name">rmxchar</strong><a class="copiable-link" href='#index-rmxchar'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">]</code>
+</p>
+<p><code class="code">rmxchar</code> is the character drawn on the right-hand side of a matrix.
+</p>
+<p>See also <code class="code"><a class="ref" href="#lmxchar">lmxchar</a></code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="scalarmatrixp"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fscalarmatrixp"></a><dl class="first-defvr">
+<dt class="defvr" id="index-scalarmatrixp"><span class="category-def">Option variable: </span><span><strong class="def-name">scalarmatrixp</strong><a class="copiable-link" href='#index-scalarmatrixp'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">true</code>
+</p>
+<p>When <code class="code">scalarmatrixp</code> is <code class="code">true</code>, then whenever a 1 x 1 matrix
+is produced as a result of computing the dot product of matrices it
+is simplified to a scalar, namely the sole element of the matrix.
+</p>
+<p>When <code class="code">scalarmatrixp</code> is <code class="code">all</code>,
+then all 1 x 1 matrices are simplified to scalars.
+</p>
+<p>When <code class="code">scalarmatrixp</code> is <code class="code">false</code>, 1 x 1 matrices are not simplified
+to scalars.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="scalefactors"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fscalefactors"></a><dl class="first-deffn">
+<dt class="deffn" id="index-scalefactors"><span class="category-def">Function: </span><span><strong class="def-name">scalefactors</strong> <var class="def-var-arguments">(<var class="var">coordinatetransform</var>)</var><a class="copiable-link" href='#index-scalefactors'> &para;</a></span></dt>
+<dd>
+<p>Here the argument <var class="var">coordinatetransform</var> evaluates to the form
+<code class="code">[[expression1, expression2, ...], indeterminate1, indeterminat2, ...]</code>,
+where the variables <var class="var">indeterminate1</var>, <var class="var">indeterminate2</var>, etc. are the
+curvilinear coordinate variables and where a set of rectangular Cartesian
+components is given in terms of the curvilinear coordinates by
+<code class="code">[expression1, expression2, ...]</code>.  <code class="code">coordinates</code> is set to the vector
+<code class="code">[indeterminate1, indeterminate2,...]</code>, and <code class="code">dimension</code> is set to the
+length of this vector.  SF[1], SF[2], &hellip;, SF[DIMENSION] are set to the
+coordinate scale factors, and <code class="code">sfprod</code> is set to the product of these scale
+factors.  Initially, <code class="code">coordinates</code> is <code class="code">[X, Y, Z]</code>, <code class="code">dimension</code>
+is 3, and SF[1]=SF[2]=SF[3]=SFPROD=1, corresponding to 3-dimensional rectangular
+Cartesian coordinates.  To expand an expression into physical components in the
+current coordinate system, there is a function with usage of the form
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-vect">Package vect</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="setelmx"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fsetelmx"></a><dl class="first-deffn">
+<dt class="deffn" id="index-setelmx"><span class="category-def">Function: </span><span><strong class="def-name">setelmx</strong> <var class="def-var-arguments">(<var class="var">x</var>, <var class="var">i</var>, <var class="var">j</var>, <var class="var">M</var>)</var><a class="copiable-link" href='#index-setelmx'> &para;</a></span></dt>
+<dd>
+<p>Assigns <var class="var">x</var> to the (<var class="var">i</var>, <var class="var">j</var>)&rsquo;th element of the matrix <var class="var">M</var>,
+and returns the altered matrix.
+</p>
+<p><code class="code"><var class="var">M</var> [<var class="var">i</var>, <var class="var">j</var>]: <var class="var">x</var></code> has the same effect,
+but returns <var class="var">x</var> instead of <var class="var">M</var>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="similaritytransform"></a><a class="anchor" id="simtran"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fsimilaritytransform"></a><dl class="first-deffn">
+<dt class="deffn" id="index-similaritytransform"><span class="category-def">Function: </span><span><strong class="def-name">similaritytransform</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-similaritytransform'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fsimtran"></a></dd><dt class="deffnx def-cmd-deffn" id="index-simtran"><span class="category-def">Function: </span><span><strong class="def-name">simtran</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-simtran'> &para;</a></span></dt>
+<dd>
+<p><code class="code">similaritytransform</code> computes a similarity transform of the matrix
+<code class="code">M</code>.  It returns a list which is the output of the <code class="code">uniteigenvectors</code>
+command.  In addition if the flag <code class="code">nondiagonalizable</code> is <code class="code">false</code> two
+global matrices <code class="code">leftmatrix</code> and <code class="code">rightmatrix</code> are computed.  These
+matrices have the property that <code class="code">leftmatrix . <var class="var">M</var> . rightmatrix</code> is a
+diagonal matrix with the eigenvalues of <var class="var">M</var> on the diagonal.  If
+<code class="code">nondiagonalizable</code> is <code class="code">true</code> the left and right matrices are not
+computed.
+</p>
+<p>If the flag <code class="code">hermitianmatrix</code> is <code class="code">true</code> then <code class="code">leftmatrix</code> is the
+complex conjugate of the transpose of <code class="code">rightmatrix</code>.  Otherwise
+<code class="code">leftmatrix</code> is the inverse of <code class="code">rightmatrix</code>.
+</p>
+<p><code class="code">rightmatrix</code> is the matrix the columns of which are the unit
+eigenvectors of <var class="var">M</var>.  The other flags (see <code class="code">eigenvalues</code> and
+<code class="code">eigenvectors</code>) have the same effects since
+<code class="code">similaritytransform</code> calls the other functions in the package in order
+to be able to form <code class="code">rightmatrix</code>.
+</p>
+<p><code class="code">load (&quot;eigen&quot;)</code> loads this function.
+</p>
+<p><code class="code">simtran</code> is a synonym for <code class="code">similaritytransform</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-eigen">Package eigen</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="sparse"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fsparse"></a><dl class="first-defvr">
+<dt class="defvr" id="index-sparse"><span class="category-def">Option variable: </span><span><strong class="def-name">sparse</strong><a class="copiable-link" href='#index-sparse'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">sparse</code> is <code class="code">true</code>, and if <code class="code">ratmx</code> is <code class="code">true</code>, then
+<code class="code">determinant</code> will use special routines for computing sparse determinants.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="submatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fsubmatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-submatrix"><span class="category-def">Function: </span><span><strong class="def-name">submatrix</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">submatrix</code> (<var class="var">i_1</var>, &hellip;, <var class="var">i_m</var>, <var class="var">M</var>, <var class="var">j_1</var>, &hellip;, <var class="var">j_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">submatrix</code> (<var class="var">i_1</var>, &hellip;, <var class="var">i_m</var>, <var class="var">M</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<code class="t">submatrix</code> (<var class="var">M</var>, <var class="var">j_1</var>, &hellip;, <var class="var">j_n</var>)</var><a class="copiable-link" href='#index-submatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns a new matrix composed of the matrix <var class="var">M</var> with rows <var class="var">i_1</var>,
+&hellip;, <var class="var">i_m</var> deleted, and columns <var class="var">j_1</var>, &hellip;, <var class="var">j_n</var> deleted.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="transpose"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002ftranspose"></a><dl class="first-deffn">
+<dt class="deffn" id="index-transpose"><span class="category-def">Function: </span><span><strong class="def-name">transpose</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-transpose'> &para;</a></span></dt>
+<dd>
+<p>Returns the transpose of <var class="var">M</var>.
+</p>
+<p>If <var class="var">M</var> is a matrix, the return value is another matrix <var class="var">N</var>
+such that <code class="code">N[i,j] = M[j,i]</code>.
+</p>
+<p>If <var class="var">M</var> is a list, the return value is a matrix <var class="var">N</var>
+of <code class="code">length (m)</code> rows and 1 column, such that <code class="code">N[i,1] = M[i]</code>.
+</p>
+<p>Otherwise <var class="var">M</var> is a symbol,
+and the return value is a noun expression <code class="code">'transpose (<var class="var">M</var>)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="triangularize"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002ftriangularize"></a><dl class="first-deffn">
+<dt class="deffn" id="index-triangularize"><span class="category-def">Function: </span><span><strong class="def-name">triangularize</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-triangularize'> &para;</a></span></dt>
+<dd>
+<p>Returns the upper triangular form of the matrix <code class="code">M</code>,
+as produced by Gaussian elimination.
+The return value is the same as <code class="code">echelon</code>,
+except that the leading nonzero coefficient in each row is not normalized to 1.
+</p>
+<p><code class="code">lu_factor</code> and <code class="code">cholesky</code> are other functions which yield
+triangularized matrices.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) M: matrix ([3, 7, aa, bb], [-1, 8, 5, 2], [9, 2, 11, 4]);
+                       [  3   7  aa  bb ]
+                       [                ]
+(%o1)                  [ - 1  8  5   2  ]
+                       [                ]
+                       [  9   2  11  4  ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) triangularize (M);
+             [ - 1   8         5            2      ]
+             [                                     ]
+(%o2)        [  0   - 74     - 56         - 22     ]
+             [                                     ]
+             [  0    0    626 - 74 aa  238 - 74 bb ]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Linear-equations">Linear equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="uniteigenvectors"></a><a class="anchor" id="ueivects"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002funiteigenvectors"></a><dl class="first-deffn">
+<dt class="deffn" id="index-uniteigenvectors"><span class="category-def">Function: </span><span><strong class="def-name">uniteigenvectors</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-uniteigenvectors'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fueivects"></a></dd><dt class="deffnx def-cmd-deffn" id="index-ueivects"><span class="category-def">Function: </span><span><strong class="def-name">ueivects</strong> <var class="def-var-arguments">(<var class="var">M</var>)</var><a class="copiable-link" href='#index-ueivects'> &para;</a></span></dt>
+<dd>
+<p>Computes unit eigenvectors of the matrix <var class="var">M</var>.
+The return value is a list of lists, the first sublist of which is the
+output of the <code class="code">eigenvalues</code> command, and the other sublists of which are
+the unit eigenvectors of the matrix corresponding to those eigenvalues
+respectively.
+</p>
+<p>The flags mentioned in the description of the
+<code class="code">eigenvectors</code> command have the same effects in this one as well.
+</p>
+<p>When <code class="code">knowneigvects</code> is <code class="code">true</code>, the <code class="code">eigen</code> package assumes
+that the eigenvectors of the matrix are known to the user and are
+stored under the global name <code class="code">listeigvects</code>.  <code class="code">listeigvects</code> should
+be set to a list similar to the output of the <code class="code">eigenvectors</code> command.
+</p>
+<p>If <code class="code">knowneigvects</code> is set to <code class="code">true</code> and the list of eigenvectors is
+given the setting of the flag <code class="code">nondiagonalizable</code> may not be correct.  If
+that is the case please set it to the correct value.  The author assumes that
+the user knows what he is doing and will not try to diagonalize a matrix the
+eigenvectors of which do not span the vector space of the appropriate dimension.
+</p>
+<p><code class="code">load (&quot;eigen&quot;)</code> loads this function.
+</p>
+<p><code class="code">ueivects</code> is a synonym for <code class="code">uniteigenvectors</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-eigen">Package eigen</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="unitvector"></a><a class="anchor" id="uvect"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002funitvector"></a><dl class="first-deffn">
+<dt class="deffn" id="index-unitvector"><span class="category-def">Function: </span><span><strong class="def-name">unitvector</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-unitvector'> &para;</a></span></dt>
+<dd><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fuvect"></a></dd><dt class="deffnx def-cmd-deffn" id="index-uvect"><span class="category-def">Function: </span><span><strong class="def-name">uvect</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href='#index-uvect'> &para;</a></span></dt>
+<dd>
+<p>Returns <em class="math tex2jax_process">\(\mathit{x}/norm(\mathit{x})\)</em>;
+this is a unit vector in the same direction as <var class="var">x</var>.
+</p>
+<p><code class="code">load (&quot;eigen&quot;)</code> loads this function.
+</p>
+<p><code class="code">uvect</code> is a synonym for <code class="code">unitvector</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-eigen">Package eigen</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="vectorpotential"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fvectorpotential"></a><dl class="first-deffn">
+<dt class="deffn" id="index-vectorpotential"><span class="category-def">Function: </span><span><strong class="def-name">vectorpotential</strong> <var class="def-var-arguments">(<var class="var">givencurl</var>)</var><a class="copiable-link" href='#index-vectorpotential'> &para;</a></span></dt>
+<dd>
+<p>Returns the vector potential of a given curl vector, in the current coordinate
+system.  <code class="code">potentialzeroloc</code> has a similar role as for <code class="code">potential</code>, but
+the order of the left-hand sides of the equations must be a cyclic permutation
+of the coordinate variables.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-vect">Package vect</a>
+&middot;
+</div>
+</dd></dl>
+
+
+<a class="anchor" id="vectorsimp"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fvectorsimp"></a><dl class="first-deffn">
+<dt class="deffn" id="index-vectorsimp"><span class="category-def">Function: </span><span><strong class="def-name">vectorsimp</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href='#index-vectorsimp'> &para;</a></span></dt>
+<dd>
+<p>Applies simplifications and expansions according to the following global flags:
+</p>
+<div class="flushleft"><p class="flushleft-paragraph"><code class="code">expandall</code>, <code class="code">expanddot</code>, <code class="code">expanddotplus</code>, <code class="code">expandcross</code>, <code class="code">expandcrossplus</code>,
+<code class="code">expandcrosscross</code>, <code class="code">expandgrad</code>, <code class="code">expandgradplus</code>, <code class="code">expandgradprod</code>,
+<code class="code">expanddiv</code>, <code class="code">expanddivplus</code>, <code class="code">expanddivprod</code>, <code class="code">expandcurl</code>, <code class="code">expandcurlplus</code>,
+<code class="code">expandcurlcurl</code>, <code class="code">expandlaplacian</code>, <code class="code">expandlaplacianplus</code>,
+and <code class="code">expandlaplacianprod</code>.
+</p></div>
+<p>All these flags have default value <code class="code">false</code>.  The <code class="code">plus</code> suffix refers
+to employing additivity or distributivity.  The <code class="code">prod</code> suffix refers to the
+expansion for an operand that is any kind of product.
+</p>
+<dl class="table">
+<dt><code class="code">expandcrosscross</code></dt>
+<dd><p>Simplifies 
+\(p \sim (q \sim r)\)
+ to 
+\((p . r)q - (p . q)r\)
+.
+</p></dd>
+<dt><code class="code">expandcurlcurl</code></dt>
+<dd><p>Simplifies 
+\({\rm curl}\; {\rm curl}\; p\)
+ to 
+\({\rm grad}\; {\rm div}\; p + {\rm div}\; {\rm grad}\; p\)
+.
+</p></dd>
+<dt><code class="code">expandlaplaciantodivgrad</code></dt>
+<dd><p>Simplifies 
+\({\rm laplacian}\; p\)
+ to 
+\({\rm div}\; {\rm grad}\; p\)
+.
+</p></dd>
+<dt><code class="code">expandcross</code></dt>
+<dd><p>Enables <code class="code">expandcrossplus</code> and <code class="code">expandcrosscross</code>.
+</p></dd>
+<dt><code class="code">expandplus</code></dt>
+<dd><div class="flushleft"><p class="flushleft-paragraph">Enables <code class="code">expanddotplus</code>, <code class="code">expandcrossplus</code>, <code class="code">expandgradplus</code>,
+<code class="code">expanddivplus</code>, <code class="code">expandcurlplus</code>, and <code class="code">expandlaplacianplus</code>.
+</p></div></dd>
+<dt><code class="code">expandprod</code></dt>
+<dd><p>Enables <code class="code">expandgradprod</code>, <code class="code">expanddivprod</code>, and <code class="code">expandlaplacianprod</code>.
+</p></dd>
+</dl>
+
+<p>These flags have all been declared <code class="code">evflag</code>.
+</p>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-vect">Package vect</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="vect_005fcross"></a><a class="anchor" id="Item_003a-Matrices_002fdefvr_002fvect_005fcross"></a><dl class="first-defvr">
+<dt class="defvr" id="index-vect_005fcross"><span class="category-def">Option variable: </span><span><strong class="def-name">vect_cross</strong><a class="copiable-link" href='#index-vect_005fcross'> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">vect_cross</code> is <code class="code">true</code>, it allows DIFF(X~Y,T) to work where
+~ is defined in SHARE;VECT (where VECT_CROSS is set to <code class="code">true</code>, anyway.)
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-vect">Package vect</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-calculus">Differential calculus</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="zeromatrix"></a><a class="anchor" id="Item_003a-Matrices_002fdeffn_002fzeromatrix"></a><dl class="first-deffn">
+<dt class="deffn" id="index-zeromatrix"><span class="category-def">Function: </span><span><strong class="def-name">zeromatrix</strong> <var class="def-var-arguments">(<var class="var">m</var>, <var class="var">n</var>)</var><a class="copiable-link" href='#index-zeromatrix'> &para;</a></span></dt>
+<dd>
+<p>Returns an <var class="var">m</var> by <var class="var">n</var> matrix, all elements of which are zero.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Matrices">Matrices</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="maxima_23.html#Affine" accesskey="n" rel="next">Affine</a>, Previous: <a href="maxima_21.html#Numerical" accesskey="p" rel="prev">Numerical</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

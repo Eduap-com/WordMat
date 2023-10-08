@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for minpack</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for minpack">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for minpack">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_313.html#minpack_002dpkg" rel="up" title="minpack-pkg">
+<link href="maxima_316.html#makeOrders_002dpkg" rel="next" title="makeOrders-pkg">
+<link href="maxima_314.html#Introduction-to-minpack" rel="previous" title="Introduction to minpack">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-minpack"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_314.html#Introduction-to-minpack" accesskey="p" rel="previous">Introduction to minpack</a>, Up: <a href="maxima_313.html#minpack_002dpkg" accesskey="u" rel="up">minpack-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-minpack-1"></a>
+<h3 class="section">73.2 Functions and Variables for minpack</h3>
+
+<a name="minpack_005flsquares"></a><a name="Item_003a-minpack_002fdeffn_002fminpack_005flsquares"></a><dl>
+<dt><a name="index-minpack_005flsquares"></a>Function: <strong>minpack_lsquares</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>minpack_lsquares</tt> (<var>flist</var>, <var>varlist</var>, <var>guess</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>minpack_lsquares</tt> (..., 'tolerance = <var>tolerance</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>minpack_lsquares</tt> (..., 'jacobian = <var>jacobian</var>)</em></dt>
+<dd>
+<p>Compute the point that minimizes the sum of the squares of the
+functions in the list <var>flist</var>.  The variables are in the list
+<var>varlist</var>.  An initial guess of the optimum point must be provided
+in <var>guess</var>.  
+</p>
+<p>The optional keyword arguments, <var>tolerance</var> and <var>jacobian</var>
+provide some control over the algorithm.  <var>tolerance</var> is the
+estimated relative error desired in the sum of squares.
+<var>jacobian</var> can be used to specify the Jacobian.  If <var>jacobian</var>
+is not given or is <code>true</code> (the default), the Jacobian is computed
+from <var>flist</var>.  If <var>jacobian</var> is <code>false</code>, a numerical
+approximation is used.
+</p>
+<p><code>minpack_lsquares</code> returns a list.  The first item is the
+estimated solution; the second is the sum of squares, and the third
+indicates the success of the algorithm.  The possible values are
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>improper input parameters.
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>algorithm estimates that the relative error in the sum of squares is
+at most <code>tolerance</code>. 
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>algorithm estimates that the relative error between x and the solution
+is at most <code>tolerance</code>. 
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>conditions for info = 1 and info = 2 both hold.
+</p></dd>
+<dt><code>4</code></dt>
+<dd><p>fvec is orthogonal to the columns of the jacobian to machine
+precision. 
+</p></dd>
+<dt><code>5</code></dt>
+<dd><p>number of calls to fcn with iflag = 1 has reached 100*(n+1).
+</p></dd>
+<dt><code>6</code></dt>
+<dd><p>tol is too small. no further reduction in the sum of squares is
+possible. 
+</p></dd>
+<dt><code>7</code></dt>
+<dd><p>tol is too small. no further improvement in the approximate solution x
+is possible. 
+</p></dd>
+</dl>
+
+<div class="example">
+<pre class="example">/* Problem 6: Powell singular function */
+(%i1) powell(x1,x2,x3,x4) := 
+         [x1+10*x2, sqrt(5)*(x3-x4), (x2-2*x3)^2, 
+              sqrt(10)*(x1-x4)^2]$
+(%i2) minpack_lsquares(powell(x1,x2,x3,x4), [x1,x2,x3,x4], 
+                       [3,-1,0,1]);
+(%o2) [[1.652117596168394e-17, - 1.652117596168393e-18, 
+        2.643388153869468e-18, 2.643388153869468e-18], 
+       6.109327859207777e-34, 4] 
+</pre></div>
+
+<div class="example">
+<pre class="example">/* Same problem but use numerical approximation to Jacobian */
+(%i3) minpack_lsquares(powell(x1,x2,x3,x4), [x1,x2,x3,x4], 
+                       [3,-1,0,1], jacobian = false);
+(%o3) [[5.060282149485331e-11, - 5.060282149491206e-12, 
+        2.179447843547218e-11, 2.179447843547218e-11], 
+       3.534491794847031e-21, 5]
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-minpack">Package minpack</a>
+&middot;</div>
+</dd></dl>
+
+<a name="minpack_005fsolve"></a><a name="Item_003a-minpack_002fdeffn_002fminpack_005fsolve"></a><dl>
+<dt><a name="index-minpack_005fsolve"></a>Function: <strong>minpack_solve</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>minpack_solve</tt> (<var>flist</var>, <var>varlist</var>, <var>guess</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>minpack_solve</tt> (..., 'tolerance = <var>tolerance</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>minpack_solve</tt> (..., 'jacobian = <var>jacobian</var>)</em></dt>
+<dd>
+<p>Solve a system of <code>n</code> equations in <code>n</code> unknowns.
+The <code>n</code> equations are given in the list <var>flist</var>, and the
+unknowns are in <var>varlist</var>.  An initial guess of the solution must
+be provided in <var>guess</var>.
+</p>
+<p>The optional keyword arguments, <var>tolerance</var> and <var>jacobian</var>
+provide some control over the algorithm.  <var>tolerance</var> is the
+estimated relative error desired in the sum of squares.
+<var>jacobian</var> can be used to specify the Jacobian.  If <var>jacobian</var>
+is not given or is <code>true</code> (the default), the Jacobian is computed
+from <var>flist</var>.  If <var>jacobian</var> is <code>false</code>, a numerical
+approximation is used.
+</p>
+<p><code>minpack_solve</code> returns a list.  The first item is the
+estimated solution; the second is the sum of squares, and the third
+indicates the success of the algorithm.  The possible values are
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>improper input parameters.
+</p></dd>
+<dt><code>1</code></dt>
+<dd><p>algorithm estimates that the relative error in the solution is
+at most <code>tolerance</code>. 
+</p></dd>
+<dt><code>2</code></dt>
+<dd><p>number of calls to fcn with iflag = 1 has reached 100*(n+1).
+</p></dd>
+<dt><code>3</code></dt>
+<dd><p>tol is too small. no further reduction in the sum of squares is
+possible. 
+</p></dd>
+<dt><code>4</code></dt>
+<dd><p>Iteration is not making good progress.
+</p></dd>
+</dl>
+
+<div class="example">
+<pre class="example">/* Problem 6: Powell singular function */
+(%i1) powell(x1,x2,x3,x4) := 
+         [x1+10*x2, sqrt(5)*(x3-x4), (x2-2*x3)^2, 
+              sqrt(10)*(x1-x4)^2]$
+(%i2) minpack_lsquares(powell(x1,x2,x3,x4), [x1,x2,x3,x4], 
+                       [3,-1,0,1]);
+(%o2) [[8.586306796471285e-19, - 8.586306796471285e-20, 
+       1.902656479186597e-18, 1.902656479186597e-18], 1.552862701642987e-35, 4]
+</pre></div>
+<p>In this particular case, we can solve this analytically:
+</p><div class="example">
+<pre class="example">(%i3) solve(powell(x1,x2,x3,x4),[x1,x2,x3,x4]);
+(%o3)       [[x1 = 0, x2 = 0, x3 = 0, x4 = 0]] 
+</pre></div>
+<p>and we see that the numerical solution is quite close the analytical one.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-minpack">Package minpack</a>
+&middot;</div>
+</dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_314.html#Introduction-to-minpack" accesskey="p" rel="previous">Introduction to minpack</a>, Up: <a href="maxima_313.html#minpack_002dpkg" accesskey="u" rel="up">minpack-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

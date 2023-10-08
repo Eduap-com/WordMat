@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.1, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>Maxima 5.47.0 Manual: Functions and Variables for solve_rec</title>
+
+<meta name="description" content="Maxima 5.47.0 Manual: Functions and Variables for solve_rec">
+<meta name="keywords" content="Maxima 5.47.0 Manual: Functions and Variables for solve_rec">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="maxima_toc.html#Top" rel="start" title="Top">
+<link href="maxima_423.html#Function-and-Variable-Index" rel="index" title="Function and Variable Index">
+<link href="maxima_toc.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_364.html#solve_005frec_002dpkg" rel="up" title="solve_rec-pkg">
+<link href="maxima_367.html#stats_002dpkg" rel="next" title="stats-pkg">
+<link href="maxima_365.html#Introduction-to-solve_005frec" rel="previous" title="Introduction to solve_rec">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6>"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Functions-and-Variables-for-solve_005frec"></a>
+<div class="header">
+<p>
+Previous: <a href="maxima_365.html#Introduction-to-solve_005frec" accesskey="p" rel="previous">Introduction to solve_rec</a>, Up: <a href="maxima_364.html#solve_005frec_002dpkg" accesskey="u" rel="up">solve_rec-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<a name="Functions-and-Variables-for-solve_005frec-1"></a>
+<h3 class="section">88.2 Functions and Variables for solve_rec</h3>
+
+<a name="harmonic_005fnumber"></a><a name="Item_003a-solve_005frec_002fdeffn_002fharmonic_005fnumber"></a><dl>
+<dt><a name="index-harmonic_005fnumber"></a>Function: <strong>harmonic_number</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>When <var>x</var> is positive integer <em>n</em>, <code>harmonic_number</code> is
+the <em>n</em>&rsquo;th harmonic number.  More generally,
+<code>harmonic_number(x) = psi[0](x+1) + %gamma</code>.  (See <a href="maxima_87.html#polygamma">polygamma</a>).
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;simplify_sum&quot;)$
+</pre><pre class="example">(%i2) harmonic_number(5);
+                               137
+(%o2)                          ---
+                               60
+</pre><pre class="example">(%i3) sum(1/k, k, 1, 5);
+                               137
+(%o3)                          ---
+                               60
+</pre><pre class="example">(%i4) float(harmonic_number(sqrt(2)));
+(%o4)              %gamma + 0.6601971549171388
+</pre><pre class="example">(%i5) float(psi[0](1+sqrt(2)))+%gamma;
+(%o5)              %gamma + 0.6601971549171388
+</pre></div>
+</dd></dl>
+
+<a name="harmonic_005fto_005fpsi"></a><a name="Item_003a-solve_005frec_002fdeffn_002fharmonic_005fto_005fpsi"></a><dl>
+<dt><a name="index-harmonic_005fto_005fpsi"></a>Function: <strong>harmonic_to_psi</strong> <em>(<var>x</var>)</em></dt>
+<dd><p>Converts expressions with <code>harmonic_number</code> to the equivalent
+expression involving <code>psi[0]</code> (see <a href="maxima_87.html#polygamma">polygamma</a>).
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;simplify_sum&quot;)$
+</pre><pre class="example">(%i2) harmonic_to_psi(harmonic_number(sqrt(2)));
+(%o2)              psi (sqrt(2) + 1) + %gamma
+                      0
+</pre></div>
+</dd></dl>
+
+<a name="reduce_005forder"></a><a name="Item_003a-solve_005frec_002fdeffn_002freduce_005forder"></a><dl>
+<dt><a name="index-reduce_005forder"></a>Function: <strong>reduce_order</strong> <em>(<var>rec</var>, <var>sol</var>, <var>var</var>)</em></dt>
+<dd>
+<p>Reduces the order of linear recurrence <var>rec</var> when a particular solution
+<var>sol</var> is known. The reduced reccurence can be used to get other solutions.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i3) rec: x[n+2] = x[n+1] + x[n]/n;
+                                      x
+                                       n
+(%o3)               x      = x      + --
+                     n + 2    n + 1   n
+</pre><pre class="example">(%i4) solve_rec(rec, x[n]);
+WARNING: found some hypergeometrical solutions! 
+(%o4)                    x  = %k  n
+                          n     1
+</pre><pre class="example">(%i5) reduce_order(rec, n, x[n]);
+(%t5)                    x  = n %z
+                          n       n
+
+                           n - 1
+                           ====
+                           \
+(%t6)                %z  =  &gt;     %u
+                       n   /        %j
+                           ====
+                           %j = 0
+
+(%o6)             (- n - 2) %u     - %u
+                              n + 1     n
+</pre><pre class="example">(%i6) solve_rec((n+2)*%u[n+1] + %u[n], %u[n]);
+                                     n
+                            %k  (- 1)
+                              1
+(%o6)                 %u  = ----------
+                        n    (n + 1)!
+
+So the general solution is
+
+             n - 1
+             ====        j
+             \      (- 1)
+       %k  n  &gt;    -------- + %k  n
+         2   /     (j + 1)!     1
+             ====
+             j = 0
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-solve_005frec">Package solve_rec</a>
+&middot;</div>
+</dd></dl>
+
+<a name="simplify_005fproducts"></a><a name="Item_003a-solve_005frec_002fdefvr_002fsimplify_005fproducts"></a><dl>
+<dt><a name="index-simplify_005fproducts"></a>Option variable: <strong>simplify_products</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>If <code>simplify_products</code> is <code>true</code>, <code>solve_rec</code> will try to
+simplify products in result.
+</p>
+<p>See also: <code><a href="#solve_005frec">solve_rec</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-solve_005frec">Package solve_rec</a>
+&middot;</div>
+</dd></dl>
+
+<a name="simplify_005fsum"></a><a name="Item_003a-solve_005frec_002fdeffn_002fsimplify_005fsum"></a><dl>
+<dt><a name="index-simplify_005fsum"></a>Function: <strong>simplify_sum</strong> <em>(<var>expr</var>)</em></dt>
+<dd>
+<p>Tries to simplify all sums appearing in <var>expr</var> to a closed form.
+</p>
+<p>To use this function first load the <code>simplify_sum</code> package with
+<code>load(&quot;simplify_sum&quot;)</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;simplify_sum&quot;)$
+</pre><pre class="example">(%i2) sum(binomial(n+k,k)/2^k, k, 1, n) + sum(binomial(2*n, 2*k), k, 1,n);
+        n                          n
+       ====                       ====
+       \     binomial(n + k, k)   \
+(%o2)   &gt;    ------------------ +  &gt;    binomial(2 n, 2 k)
+       /              k           /
+       ====          2            ====
+       k = 1                      k = 1
+</pre><pre class="example">(%i3) simplify_sum(%);
+                         2 n - 1    n
+(%o3)                   2        + 2  - 2
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-solve_005frec">Package solve_rec</a>
+&middot;<a href="maxima_424.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;<a href="maxima_424.html#Category_003a-Simplification-functions">Simplification functions</a>
+&middot;</div>
+</dd></dl>
+
+<a name="solve_005frec"></a><a name="Item_003a-solve_005frec_002fdeffn_002fsolve_005frec"></a><dl>
+<dt><a name="index-solve_005frec"></a>Function: <strong>solve_rec</strong> <em>(<var>eqn</var>, <var>var</var>, [<var>init</var>])</em></dt>
+<dd><p>Solves for hypergeometrical solutions to linear recurrence <var>eqn</var> with
+polynomials coefficient in variable <var>var</var>. Optional arguments <var>init</var>
+are initial conditions.
+</p>
+<p><code>solve_rec</code> can solve linear recurrences with constant coefficients,
+finds hypergeometrical solutions to homogeneous linear recurrences with
+polynomial coefficients, rational solutions to linear recurrences with
+polynomial coefficients and can solve Ricatti type recurrences.
+</p>
+<p>Note that the running time of the algorithm used to find hypergeometrical
+solutions is exponential in the degree of the leading and trailing
+coefficient.
+</p>
+<p>To use this function first load the <code>solve_rec</code> package with
+<code>load(&quot;solve_rec&quot;);</code>.
+</p>
+<p>Example of linear recurrence with constant coefficients:
+</p>
+<div class="example">
+<pre class="example">(%i2) solve_rec(a[n]=a[n-1]+a[n-2]+n/2^n, a[n]);
+                        n          n
+           (sqrt(5) - 1)  %k  (- 1)
+                            1           n
+(%o2) a  = ------------------------- - ----
+       n               n                  n
+                      2                5 2
+                                                n
+                                   (sqrt(5) + 1)  %k
+                                                    2    2
+                                 + ------------------ - ----
+                                            n              n
+                                           2            5 2
+</pre></div>
+
+<p>Example of linear recurrence with polynomial coefficients:
+</p>
+<div class="example">
+<pre class="example">(%i7) 2*x*(x+1)*y[x] - (x^2+3*x-2)*y[x+1] + (x-1)*y[x+2];
+                         2
+(%o7) (x - 1) y      - (x  + 3 x - 2) y      + 2 x (x + 1) y
+               x + 2                   x + 1                x
+</pre><pre class="example">(%i8) solve_rec(%, y[x], y[1]=1, y[3]=3);
+                              x
+                           3 2    x!
+(%o9)                 y  = ---- - --
+                       x    4     2
+</pre></div>
+
+<p>Example of Ricatti type recurrence:
+</p>
+<div class="example">
+<pre class="example">(%i2) x*y[x+1]*y[x] - y[x+1]/(x+2) + y[x]/(x-1) = 0;
+                            y         y
+                             x + 1     x
+(%o2)         x y  y      - ------ + ----- = 0
+                 x  x + 1   x + 2    x - 1
+</pre><pre class="example">(%i3) solve_rec(%, y[x], y[3]=5)$
+</pre><pre class="example">(%i4) ratsimp(minfactorial(factcomb(%)));
+                                   3
+                               30 x  - 30 x
+(%o4) y  = - -------------------------------------------------
+       x        6      5       4       3       2
+             5 x  - 3 x  - 25 x  + 15 x  + 20 x  - 12 x - 1584
+</pre></div>
+
+
+<p>See also: <code><a href="#solve_005frec_005frat">solve_rec_rat</a></code>, <code><a href="#simplify_005fproducts">simplify_products</a></code> and <code><a href="#product_005fuse_005fgamma">product_use_gamma</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-solve_005frec">Package solve_rec</a>
+&middot;</div>
+</dd></dl>
+
+<a name="solve_005frec_005frat"></a><a name="Item_003a-solve_005frec_002fdeffn_002fsolve_005frec_005frat"></a><dl>
+<dt><a name="index-solve_005frec_005frat"></a>Function: <strong>solve_rec_rat</strong> <em>(<var>eqn</var>, <var>var</var>, [<var>init</var>])</em></dt>
+<dd>
+<p>Solves for rational solutions to linear recurrences. See solve_rec for
+description of arguments.
+</p>
+<p>To use this function first load the <code>solve_rec</code> package with
+<code>load(&quot;solve_rec&quot;);</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) (x+4)*a[x+3] + (x+3)*a[x+2] - x*a[x+1] + (x^2-1)*a[x];
+(%o1)  (x + 4) a      + (x + 3) a      - x a
+                x + 3            x + 2      x + 1
+                                                   2
+                                               + (x  - 1) a
+                                                            x
+</pre><pre class="example">(%i2) solve_rec_rat(% = (x+2)/(x+1), a[x]);
+                       1
+(%o2)      a  = ---------------
+            x   (x - 1) (x + 1)
+</pre></div>
+
+
+<p>See also: <code><a href="#solve_005frec">solve_rec</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-solve_005frec">Package solve_rec</a>
+&middot;</div>
+</dd></dl>
+
+<a name="product_005fuse_005fgamma"></a><a name="Item_003a-solve_005frec_002fdefvr_002fproduct_005fuse_005fgamma"></a><dl>
+<dt><a name="index-product_005fuse_005fgamma"></a>Option variable: <strong>product_use_gamma</strong></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p>When simplifying products, <code>solve_rec</code> introduces gamma function
+into the expression if <code>product_use_gamma</code> is <code>true</code>.
+</p>
+<p>See also: <code><a href="#simplify_005fproducts">simplify_products</a></code>, <code><a href="#solve_005frec">solve_rec</a></code>.
+</p>
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-solve_005frec">Package solve_rec</a>
+&middot;</div>
+</dd></dl>
+
+<a name="summand_005fto_005frec"></a><a name="Item_003a-solve_005frec_002fdeffn_002fsummand_005fto_005frec"></a><dl>
+<dt><a name="index-summand_005fto_005frec"></a>Function: <strong>summand_to_rec</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>summand_to_rec</tt> (<var>summand</var>, <var>k</var>, <var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>summand_to_rec</tt> (<var>summand</var>, [<var>k</var>, <var>lo</var>, <var>hi</var>], <var>n</var>)</em></dt>
+<dd>
+<p>Returns the recurrence satisfied by the sum
+</p>
+<div class="example">
+<pre class="example">     hi
+    ====
+    \
+     &gt;     summand
+    /
+    ====
+  k = lo
+</pre></div>
+
+<p>where summand is hypergeometrical in <var>k</var> and <var>n</var>. If <var>lo</var> and <var>hi</var>
+are omitted, they are assumed to be <code>lo = -inf</code> and <code>hi = inf</code>.
+</p>
+<p>To use this function first load the <code>simplify_sum</code> package with
+<code>load(&quot;simplify_sum&quot;)</code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;simplify_sum&quot;)$
+</pre><pre class="example">(%i2) summand: binom(n,k);
+(%o2)                           binomial(n, k)
+</pre><pre class="example">(%i3) summand_to_rec(summand,k,n);
+(%o3)                      2 sm  - sm      = 0
+                               n     n + 1
+</pre><pre class="example">(%i7) summand: binom(n, k)/(k+1);
+                                binomial(n, k)
+(%o7)                           --------------
+                                    k + 1
+</pre><pre class="example">(%i8) summand_to_rec(summand, [k, 0, n], n);
+(%o8)               2 (n + 1) sm  - (n + 2) sm      = - 1
+                                n             n + 1
+</pre></div>
+
+<div class=categorybox>
+Categories:<a href="maxima_424.html#Category_003a-Package-solve_005frec">Package solve_rec</a>
+&middot;</div>
+</dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_365.html#Introduction-to-solve_005frec" accesskey="p" rel="previous">Introduction to solve_rec</a>, Up: <a href="maxima_364.html#solve_005frec_002dpkg" accesskey="u" rel="up">solve_rec-pkg</a> &nbsp; [<a href="maxima_toc.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_423.html#Function-and-Variable-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
