@@ -188,8 +188,9 @@ Sub PlotDF()
         End If
         s = ea.Text
         s = "SlopeField(" & s & ");"
-        s = s & "A=(-10, 2);B=(10, 0);"
-        s = s & "SolveODE(" & ea.Text & ", x(A), y(A), x(B), 0.1)" ' y(A) virker ikke
+        s = s & "A=(1, 2);Xmin=-100;Xmax=100;Tic=0.1;"
+        s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
+        s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmax, Tic)"
         OpenGeoGebraWeb s, "Classic", True, True
         GoTo slut
 #If Mac Then

@@ -37,6 +37,49 @@ Private Sub CommandButton_cancel_Click()
     Unload Me
 End Sub
 
+Private Sub CommandButton_GeoGebraDF_Click()
+    Dim s As String, Fundet As Boolean
+    s = "SlopeField(" & TextBox_dfligning.Text & ");Xmin=-100;Xmax=100;Tic=0.1;"
+    If TextBox_dfsol1x.Text <> vbNullString And TextBox_dfsol1y.Text <> vbNullString Then
+        s = s & "A=(" & TextBox_dfsol1x.Text & ", " & TextBox_dfsol1y.Text & ");"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(A), y(A), Xmax, Tic);" ' y(A) virker ikke
+        Fundet = True
+    End If
+    If TextBox_dfsol2x.Text <> vbNullString And TextBox_dfsol2y.Text <> vbNullString Then
+        s = s & "B=(" & TextBox_dfsol2x.Text & ", " & TextBox_dfsol2y.Text & ");"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(B), y(B), Xmin, Tic);" ' y(A) virker ikke
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(B), y(B), Xmax, Tic);" ' y(A) virker ikke
+        Fundet = True
+    End If
+    If TextBox_dfsol3x.Text <> vbNullString And TextBox_dfsol3y.Text <> vbNullString Then
+        s = s & "C=(" & TextBox_dfsol3x.Text & ", " & TextBox_dfsol3y.Text & ");"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(C), y(C), Xmin, Tic);"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(C), y(C), Xmax, Tic);"
+        Fundet = True
+    End If
+    If TextBox_dfsol4x.Text <> vbNullString And TextBox_dfsol4y.Text <> vbNullString Then
+        s = s & "D=(" & TextBox_dfsol4x.Text & ", " & TextBox_dfsol4y.Text & ");"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(D), y(D), Xmin, Tic);"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(D), y(D), Xmax, Tic);"
+        Fundet = True
+    End If
+    If TextBox_dfsol5x.Text <> vbNullString And TextBox_dfsol5y.Text <> vbNullString Then
+        s = s & "E=(" & TextBox_dfsol5x.Text & ", " & TextBox_dfsol5y.Text & ");"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(E), y(E), Xmin, Tic);"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(E), y(E), Xmax, Tic);"
+        Fundet = True
+    End If
+    
+    If Not Fundet Then
+        s = s & "A=(1, 2);"
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
+        s = s & "SolveODE(" & TextBox_dfligning.Text & ", x(A), y(A), Xmax, Tic);" ' y(A) virker ikke
+    End If
+    OpenGeoGebraWeb s, "Classic", True, True
+    
+End Sub
+
 Private Sub Label_helpmarker_Click()
 MsgBox Sprog.A(195), vbOKOnly, Sprog.Help
 End Sub
@@ -2277,7 +2320,7 @@ Dim i As Integer
         End If
         End If
     Next
-    If var <> "" And var <> "if" And var <> "then" And var <> "else" And var <> "elseif" And var <> "and" And var <> "or" Then
+    If var <> "" And var <> "if" And var <> "then" And var <> "else" And var <> "elseif" And var <> "and" Then
 '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
         If Len(TextBox_definitioner.Text) > 0 Then
             TextBox_definitioner.Text = TextBox_definitioner.Text & VbCrLfMac
@@ -2471,7 +2514,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

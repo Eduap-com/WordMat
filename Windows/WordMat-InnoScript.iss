@@ -1,7 +1,7 @@
 ; Inno script for creating WordMat installer
 
 #define MyAppName "WordMat"
-#define MyAppVersion "1.26.0"
+#define MyAppVersion "1.27.0"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -218,7 +218,7 @@ Source: MathMenu.dll\MathMenu.tlb; DestDir: {app}; Flags: ignoreversion regtypel
 
 Source: ExternalPrograms\dotNetFx40_Client_setup.exe; DestDir: {tmp}; Flags: dontcopy
 
-Source: ExternalPrograms\Maxima-5.45.1\*; DestDir: {app}\Maxima-5.45.1; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; AfterInstall: ReplacePathInBat(); 
+Source: ExternalPrograms\Maxima-5.47.0\*; DestDir: {app}\Maxima-5.47.0; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; AfterInstall: ReplacePathInBat(); 
 ;Source: Maxima-5.23.2\*; DestDir: {app}\Maxima-5.23.2; Flags: ignoreversion
 ;Source: Maxima-5.23.2\bin\*; DestDir: {app}\Maxima-5.23.2\bin; Flags: ignoreversion recursesubdirs
 ;Source: Maxima-5.23.2\gnuplot\*; DestDir: {app}\Maxima-5.23.2\gnuplot; Flags: ignoreversion recursesubdirs
@@ -230,9 +230,9 @@ Source: ExternalPrograms\Maxima-5.45.1\*; DestDir: {app}\Maxima-5.45.1; Flags: i
                                       
 ;egne mac-filer
 ;Source: mac-files\*; DestDir: {app}\Maxima-5.25.1-gcl\share\maxima\5.25.1\share; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\SolveReal.mac; DestDir: {app}\Maxima-5.45.1\share\maxima\5.45.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\WordMatUnitAddon.mac; DestDir: {app}\Maxima-5.45.1\share\maxima\5.45.1\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\Maxima-files\unit.mac; DestDir: {app}\Maxima-5.45.1\share\maxima\5.45.1\share\contrib\unit; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\SolveReal.mac; DestDir: {app}\Maxima-5.47.0\share\maxima\5.47.0\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\WordMatUnitAddon.mac; DestDir: {app}\Maxima-5.47.0\share\maxima\5.47.0\share\contrib; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\Maxima-files\unit.mac; DestDir: {app}\Maxima-5.47.0\share\maxima\5.47.0\share\contrib\unit; Flags: ignoreversion overwritereadonly uninsremovereadonly
 
 ;Source: C:\Users\Mikael\Documents\Eduap\MathMenu\MathMenu.dll; DestDir: {app}; Flags: ignoreversion gacinstall ; StrongAssemblyName: "MathMenu, Version=1.0.0.1, Culture=neutral, PublicKeyToken=89e88f8548e16f37, ProcessorArchitecture=MSIL"
 
@@ -1489,7 +1489,7 @@ begin
 {  strFilename := strApp + '\Maxima-5.30.0\bin\maxima.bat';}
   strFilename := strApp + '\' + MaximaPath;
   strFind := 'set maxima_prefix';
-  strApp := strApp + '\Maxima-5.45.1\';
+  strApp := strApp + '\Maxima-5.47.0\';
   strNewLine := 'set maxima_prefix='+PathWithoutSpaces(strApp);
   
   { Load textfile into string array }
@@ -1512,7 +1512,7 @@ end;
 // this I believe is deprecated
 procedure ReplacePathInBat();
 begin
-//  ReplaceApp('Maxima-5.45.1\bin\maxima.bat');
-//  ReplaceApp('Maxima-5.45.1\bin\maximaunit.bat');  
+//  ReplaceApp('Maxima-5.47.0\bin\maxima.bat');
+//  ReplaceApp('Maxima-5.47.0\bin\maximaunit.bat');  
 end;
 
