@@ -844,7 +844,7 @@ Sub Rib_HelpMaxima(control As IRibbonControl)
 Dim ReturnValue
 Dim sti As String
     On Error GoTo fejl
-    OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\html\index.html"
+    OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.47.0\share\maxima\5.47.0\doc\html\maxima_toc.html#SEC_Contents"
 '    sti = "cmd /C """ & GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\chm\maxima.chm"""
 '    ReturnValue = Shell(sti, vbHide)
 GoTo slut
