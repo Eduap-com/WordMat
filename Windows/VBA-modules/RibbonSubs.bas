@@ -169,7 +169,7 @@ Sub Rib_FSekspligning3(control As IRibbonControl)
 End Sub
 'Callback for eksp6 onAction
 Sub Rib_FSekspligning4(control As IRibbonControl)
-    insertribformel "", "y=b" & VBA.ChrW(183) & "(1/2)^(x/T__)"
+    insertribformel "", "y=b" & VBA.ChrW(183) & "(1/2)^(x/T_" & ChrW(189) & ")"
 End Sub
 
 'Callback for eksp2 onAction
@@ -225,11 +225,62 @@ Sub Rib_FSarealtrekant(control As IRibbonControl)
 End Sub
 'Callback for sandbin1 onAction
 Sub Rib_FSbinfrekvens(control As IRibbonControl)
-    insertribformel "", "p(r)" & VBA.ChrW(8797) & "K(n,r)" & VBA.ChrW(183) & "p^r" & VBA.ChrW(183) & "(1-p)^(n-r)"
+    Dim s As String, Arr() As String
+    PrepareMaxima
+    omax.FindDefinitions
+    If Not InStr(omax.DefString, "K(n,r):=") > 0 Then
+        insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)" ' chrw8801 er 3 streget =
+        Selection.TypeParagraph
+    End If
+    
+    If Not InStr(omax.DefString, "p:") > 0 Then
+        s = "p=0,5 ; "
+    End If
+    If Not InStr(omax.DefString, "n:") > 0 Then
+        s = s & "n=20"
+    End If
+    s = Trim(s)
+    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    If s <> vbNullString Then
+        s = InputBox("Indtast nødvendige definitioner", "Definitioner", s)
+        s = Replace(s, ";", " , ")
+        s = Replace(s, "  ", " ")
+    
+        insertribformel "", "Definer: " & s
+        Selection.TypeParagraph
+    End If
+    
+    insertribformel "", "P(r)" & VBA.ChrW(8797) & "K(n,r)" & VBA.ChrW(183) & "p^r" & VBA.ChrW(183) & "(1-p)^(n-r)"
+    Selection.TypeParagraph
 End Sub
 'Callback for sandbin5 onAction
 Sub Rib_FSbinkum(control As IRibbonControl)
-    insertribformel "", "P(m)" & VBA.ChrW(8797) & "" & VBA.ChrW(8721) & "_(r=0)^m" & VBA.ChrW(9618) & VBA.ChrW(12310) & "K(n,r)" & VBA.ChrW(183) & "p^r" & VBA.ChrW(183) & "(1-p)^(n-r)" & VBA.ChrW(12311)
+    Dim s As String, Arr() As String
+    PrepareMaxima
+    omax.FindDefinitions
+    If Not InStr(omax.DefString, "K(n,r):=") > 0 Then
+        insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)" ' chrw8801 er 3 streget =
+        Selection.TypeParagraph
+    End If
+    
+    If Not InStr(omax.DefString, "p:") > 0 Then
+        s = "p=0,5 ; "
+    End If
+    If Not InStr(omax.DefString, "n:") > 0 Then
+        s = s & "n=20"
+    End If
+    s = Trim(s)
+    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    If s <> vbNullString Then
+        s = InputBox("Indtast nødvendige definitioner", "Definitioner", s)
+        s = Replace(s, ";", " , ")
+        s = Replace(s, "  ", " ")
+    
+        insertribformel "", "Definer: " & s
+        Selection.TypeParagraph
+    End If
+    insertribformel "", "P_kum (m)" & VBA.ChrW(8797) & "" & VBA.ChrW(8721) & "_(r=0)^m" & VBA.ChrW(9618) & VBA.ChrW(12310) & "K(n,r)" & VBA.ChrW(183) & "p^r" & VBA.ChrW(183) & "(1-p)^(n-r)" & VBA.ChrW(12311)
+    Selection.TypeParagraph
 End Sub
 
 'Callback for sandbin2 onAction
@@ -253,12 +304,59 @@ End Sub
 
 'Callback for sandnorm1 onAction
 Sub Rib_FSnormfrekvens(control As IRibbonControl)
+    Dim s As String, Arr() As String
+    PrepareMaxima
+    omax.FindDefinitions
+    
+    If Not InStr(omax.DefString, "mu:") > 0 Then ' sigma
+        s = VBA.ChrW(956) & "=0 ; "
+    End If
+    If Not InStr(omax.DefString, "sigma:") > 0 Then ' mu
+        s = s & "s=1"
+    End If
+    s = Trim(s)
+    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    If s <> vbNullString Then
+        s = InputBox("Indtast nødvendige definitioner", "Definitioner", s)
+        s = Replace(s, "s=", VBA.ChrW(963) & "=")
+        s = Replace(s, VBA.ChrW(181) & "=", VBA.ChrW(956) & "=")
+        s = Replace(s, ";", " , ")
+        s = Replace(s, "  ", " ")
+    
+        insertribformel "", "Definer: " & s
+        Selection.TypeParagraph
+    End If
+
     insertribformel "", "f(x)" & VBA.ChrW(8797) & "1/(" & VBA.ChrW(&H221A) & "(2" & VBA.ChrW(960) & ")" & VBA.ChrW(183) & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((x-" & VBA.ChrW(956) & ")/" & VBA.ChrW(963) & ")^2)"
+    Selection.TypeParagraph
 End Sub
 
 'Callback for sandnorm2 onAction
 Sub Rib_FSnormkum(control As IRibbonControl)
+    Dim s As String, Arr() As String
+    PrepareMaxima
+    omax.FindDefinitions
+    
+    If Not InStr(omax.DefString, "mu:") > 0 Then ' sigma
+        s = VBA.ChrW(956) & "=0 ; "
+    End If
+    If Not InStr(omax.DefString, "sigma:") > 0 Then ' mu
+        s = s & "s=1"
+    End If
+    s = Trim(s)
+    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    If s <> vbNullString Then
+        s = InputBox("Indtast nødvendige definitioner", "Definitioner", s)
+        s = Replace(s, "s=", VBA.ChrW(963) & "=")
+        s = Replace(s, VBA.ChrW(181) & "=", VBA.ChrW(956) & "=")
+        s = Replace(s, ";", " , ")
+        s = Replace(s, "  ", " ")
+    
+        insertribformel "", "Definer: " & s
+        Selection.TypeParagraph
+    End If
     insertribformel "", "F(x)" & VBA.ChrW(8797) & VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^x" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(&H221A) & "(2" & VBA.ChrW(960) & ")" & VBA.ChrW(183) & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((y-" & VBA.ChrW(956) & ")/" & VBA.ChrW(963) & ")^2) dy"
+    Selection.TypeParagraph
 End Sub
 'Callback for sandchiford onAction
 Sub Rib_FSchi2ford(control As IRibbonControl)
@@ -286,6 +384,23 @@ Sub Rib_FSplanparamlinje(control As IRibbonControl) '
 End Sub
 
 Sub Rib_FSvektorvinkel(control As IRibbonControl)
+    Dim s As String, Arr() As String
+    PrepareMaxima
+    omax.FindDefinitions
+    
+    If Not InStr(omax.DefString, "aSymVecta:") > 0 Then ' vector a
+        s = "a" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2)), "
+    End If
+    If Not InStr(omax.DefString, "bSymVecta:") > 0 Then ' vector b
+        s = s & "b" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2))"
+    End If
+    s = Trim(s)
+    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    If s <> vbNullString Then
+        insertribformel "", "Definer: " & s
+        Selection.TypeParagraph
+    End If
+   
    If CASengine = 0 Then
     insertribformel "", "cos(v)=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
    Else
@@ -293,6 +408,23 @@ Sub Rib_FSvektorvinkel(control As IRibbonControl)
    End If
 End Sub
 Sub Rib_FSvektorproj(control As IRibbonControl)
+    Dim s As String, Arr() As String
+    PrepareMaxima
+    omax.FindDefinitions
+    
+    If Not InStr(omax.DefString, "aSymVecta:") > 0 Then ' vector a
+        s = "a" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2)), "
+    End If
+    If Not InStr(omax.DefString, "bSymVecta:") > 0 Then ' vector b
+        s = s & "b" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2))"
+    End If
+    s = Trim(s)
+    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    If s <> vbNullString Then
+        insertribformel "", "Definer: " & s
+        Selection.TypeParagraph
+    End If
+    
     insertribformel "", "b" & VBA.ChrW(8407) & "_a=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|^2) a" & VBA.ChrW(8407)
 End Sub
 Sub Rib_FSdistpunkt(control As IRibbonControl)
@@ -315,9 +447,10 @@ End Sub
 
 'Callback for rumafstandpunktlinje onAction
 Sub Rib_FSrumpunktlinje(control As IRibbonControl)
-    insertribformel "", "definer: r" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(r_1@r_2@r_3)) ,  (P_0 P)" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0))"
+    insertribformel "", "definer: r" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(r_1@r_2@r_3)) ,  (P0P)" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0))"
     Selection.TypeParagraph
-    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & "_(P_0 P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
+'    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & "_(P_0 P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & VBA.ChrW(215) & "(P0P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
 End Sub
 
 'Callback for rumligningplan onAction

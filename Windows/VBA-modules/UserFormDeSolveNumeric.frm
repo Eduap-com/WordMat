@@ -607,7 +607,7 @@ Function SolveDE() As Boolean
     ListOutput = omax.MaximaOutput
     
     Dim s As String, i As Long, j As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     ReDim PointArr(Npoints, n)
     ea.Text = ListOutput
     ea.SetSquareBrackets
@@ -616,9 +616,9 @@ Function SolveDE() As Boolean
     End If
     Do
         s = ea.GetNextBracketContent(0)
-        arr = Split(s, ListSeparator)
+        Arr = Split(s, ListSeparator)
         For j = 0 To n 'UBound(Arr)
-            PointArr(i, j) = arr(j)
+            PointArr(i, j) = Arr(j)
         Next
         i = i + 1
     Loop While ea.Pos < ea.Length - 1 And i < 10000
@@ -822,7 +822,7 @@ Sub OpdaterDefinitioner()
    Dim var As String, var2 As String
    Dim ea As New ExpressionAnalyser
    Dim ea2 As New ExpressionAnalyser
-   Dim arr As Variant
+   Dim Arr As Variant
    Dim arr2 As Variant
    Dim i As Integer, s As String
    Validate
@@ -855,15 +855,15 @@ Sub OpdaterDefinitioner()
    Do While right(TextBox_definitioner.Text, 2) = VbCrLfMac
       TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
    Loop
-   arr = Split(TextBox_definitioner.Text, VbCrLfMac)
+   Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
    
-   For i = 0 To UBound(arr) ' Hvis variabel indgår i def, skal den fjernes
-      If arr(i) <> "" Then
-         var2 = Split(arr(i), "=")(0)
+   For i = 0 To UBound(Arr) ' Hvis variabel indgår i def, skal den fjernes
+      If Arr(i) <> "" Then
+         var2 = Split(Arr(i), "=")(0)
          If var2 = TextBox_varx.Text Then
-            arr(i) = ""
+            Arr(i) = ""
          End If
-         If arr(i) <> "" Then s = s & arr(i) & VbCrLfMac
+         If Arr(i) <> "" Then s = s & Arr(i) & VbCrLfMac
       End If
    Next
    Do While right(s, 2) = vbCrLf
@@ -871,13 +871,13 @@ Sub OpdaterDefinitioner()
    Loop
    TextBox_definitioner.Text = s
    
-   arr = Split(TextBox_definitioner.Text, VbCrLfMac)
+   Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
    Do
       var = ea.GetNextListItem(ea.Pos)
       var = Replace(var, vbCrLf, "")
-      For i = 0 To UBound(arr)
-         If arr(i) <> "" Then
-            var2 = Split(arr(i), "=")(0)
+      For i = 0 To UBound(Arr)
+         If Arr(i) <> "" Then
+            var2 = Split(Arr(i), "=")(0)
             If var2 = var Then
                var = ""
                Exit For

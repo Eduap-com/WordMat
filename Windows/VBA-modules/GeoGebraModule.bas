@@ -17,7 +17,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Dim var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
     Dim DefS As String
-    Dim arr As Variant, uvar As String
+    Dim Arr As Variant, uvar As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
 
@@ -95,9 +95,9 @@ End If
             If Len(udtryk) > 0 Then
                 If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                     If InStr(udtryk, "=") > 0 Then
-                        arr = Split(udtryk, "=")
-                        lhs = arr(0)
-                        rhs = arr(1)
+                        Arr = Split(udtryk, "=")
+                        lhs = Arr(0)
+                        rhs = Arr(1)
                         ea.Text = lhs
                         fktnavn = ea.GetNextVar(1)
                         varnavn = ea.GetNextBracketContent(1)
@@ -183,7 +183,7 @@ slut:
 End Sub
 
 Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True)
-    Dim UrlLink As String, arr() As String, c As Variant, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
+    Dim UrlLink As String, Arr() As String, c As Variant, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
     Dim DefS As String
        
      If UseDefs Then
@@ -233,7 +233,7 @@ End Sub
 
 Sub FindGeoGebraDefsAndAssumes()
 ' sætter stregene GeoGebraDefs og GeoGebraAssumes ud fra omax
-Dim arr() As String, i As Integer
+Dim Arr() As String, i As Integer
 '    MsgBox omax.DefString
 '    MsgBox omax.defstringtext ' alle definitioner og assumes, men i maxima syntaks
     
@@ -241,22 +241,22 @@ Dim arr() As String, i As Integer
     GeoGebraDefs = ""
     
     ' Tilføj definitioner og assumes der er skrevet i mat-felter
-    arr = Split(omax.DefString, "$")
-    For i = 0 To UBound(arr) - 1
-        If Left(arr(i), 7) = "assume(" Then
-            GeoGebraAssumes = GeoGebraAssumes & Mid(arr(i), 8, Len(arr(i)) - 8) & ChrW(8743)
+    Arr = Split(omax.DefString, "$")
+    For i = 0 To UBound(Arr) - 1
+        If Left(Arr(i), 7) = "assume(" Then
+            GeoGebraAssumes = GeoGebraAssumes & Mid(Arr(i), 8, Len(Arr(i)) - 8) & ChrW(8743)
         Else
-            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(arr(i), False) & ";"
+            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(Arr(i), False) & ";"
         End If
     Next
     
     ' Tilføj midlertidige definitioner og assumes
-    arr = Split(omax.TempDefs, ";") ' alle midlertidige definitioner og assumes adskilt ad semikolon
-    For i = 0 To UBound(arr)
-        If InStr(arr(i), ">") > 0 Or InStr(arr(i), "<") > 0 Then
-            GeoGebraAssumes = GeoGebraAssumes & arr(i) & ChrW(8743)
+    Arr = Split(omax.TempDefs, ";") ' alle midlertidige definitioner og assumes adskilt ad semikolon
+    For i = 0 To UBound(Arr)
+        If InStr(Arr(i), ">") > 0 Or InStr(Arr(i), "<") > 0 Then
+            GeoGebraAssumes = GeoGebraAssumes & Arr(i) & ChrW(8743)
         Else
-            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(arr(i)) & ";"
+            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(Arr(i)) & ";"
         End If
     Next
     If GeoGebraAssumes <> "" Then GeoGebraAssumes = Left(GeoGebraAssumes, Len(GeoGebraAssumes) - 1)
@@ -269,7 +269,7 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
     Dim cmd As String, i As Integer, k As Integer, j As Integer, fktudtryk As String, UrlLink As String, p As Integer
     Dim sl As New CSortList
     Dim var As String, DefList As String
-    Dim ea As New ExpressionAnalyser, arr() As String
+    Dim ea As New ExpressionAnalyser, Arr() As String
     Dim geogebrafil As New CGeoGebraFile
     
     ea.SetNormalBrackets
@@ -399,7 +399,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
 '    Dim geogebrafil As New CGeoGebraFile
 ' definitioner vil allerede være kørt igennem codeforMaxima, så der skal convertmaxima være false
 
-   Dim p As Integer, p2 As Integer, arr() As String, p3 As Integer, sp As Integer, ep As Integer
+   Dim p As Integer, p2 As Integer, Arr() As String, p3 As Integer, sp As Integer, ep As Integer
    Dim ea As ExpressionAnalyser, s As String, t As String, gexpr As String, i As Integer, n As Integer
    Set ea = New ExpressionAnalyser
    ea.SetNormalBrackets
@@ -508,8 +508,8 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
         If p > 0 Then
           ea.Text = Text
           s = ea.GetNextBracketContent(p + 7)
-          arr = Split(s, ",")
-          If UBound(arr) > 0 Then Text = Left(Text, p - 1) & "log(" & arr(1) & "," & arr(0) & right(Text, Len(Text) - p - Len(s) - 7)
+          Arr = Split(s, ",")
+          If UBound(Arr) > 0 Then Text = Left(Text, p - 1) & "log(" & Arr(1) & "," & Arr(0) & right(Text, Len(Text) - p - Len(s) - 7)
         End If
         p = InStr(Text, "logbase(")
       Loop
@@ -804,7 +804,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
     Dim i As Integer, j As Integer
     Dim DefS As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
     Dim dd As New DocData
     Dim ea As New ExpressionAnalyser
@@ -880,9 +880,9 @@ Sub CreateGeoGebraFil(geogebrasti As String)
         If Len(udtryk) > 0 Then
             If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(udtryk, "=") > 0 Then
-                    arr = Split(udtryk, "=")
-                    lhs = arr(0)
-                    rhs = arr(1)
+                    Arr = Split(udtryk, "=")
+                    lhs = Arr(0)
+                    rhs = Arr(1)
                     ea.Text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)

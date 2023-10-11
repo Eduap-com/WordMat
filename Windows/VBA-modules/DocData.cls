@@ -307,7 +307,7 @@ Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim r() As String
-Dim arr As Variant
+Dim Arr As Variant
 Dim i As Integer
 On Error GoTo slut
 
