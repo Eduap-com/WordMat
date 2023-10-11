@@ -109,6 +109,7 @@ linenum:-1;
 load(solvereal)$
 load(draw)$
 load(WordMatUnitAddon)$
+solvereal(x^2=9,x);
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
 :lisp (sb-ext:save-lisp-and-die "maximaunit.core" :toplevel #'cl-user::run)
@@ -128,7 +129,7 @@ The version of Maxima used is the most recent version which I could get to work 
 ### Compiling maxima.core on Mac
 Must be done separately on intel and M1
 - Ensure you have a functioning MaximaWM folder. (See above)
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac From Shared/Maxima-files to *MaximaWM/maxima/share/maxima/5.45.1/share/contrib/*
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac From Shared/Maxima-files to *MaximaWM/maxima/share/maxima/5.47.0/share/contrib/*
 - Copy unit.mac to the subfolder unit of the contrib-folder
 - Run maxima
     Open terminal 
@@ -138,6 +139,7 @@ Must be done separately on intel and M1
 ```
 *Open solvereal.mac and copy/paste content to terminal*
 load(draw)$
+solvereal(x^2=9,x);
 gnuplot_command:"/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot";
 set_plot_option([gnuplot_term, aqua])$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
@@ -147,12 +149,23 @@ linenum:-1;
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *Users/youruser* or same dir as maxima
-- Copy *Users/youruser/maxima.core* to  *MaximaWM/maxima/lib/maxima/5.45.1/binary-sbcl/* in the Mac folder in the GitHub repository
+- Copy *Users/youruser/maxima.core* to  *MaximaWM/maxima/lib/maxima/5.47.0/binary-sbcl/* in the Mac folder in the GitHub repository
 - The new maxima.core file can be run using the command 'sbcl --core maxima.core'
     This is handled by maxima.sh
     You can test the new core by cd to MaximaWM. Then run 'sh maximatext.sh'
     
 Repeat the process to generate the maximaunit.core, but also copy the content from WordMatUnitaddon.mac into the terminal, after copying from solvereal.mac
+```
+*Open solvereal.mac and copy/paste content to terminal*
+*Open WordMatUnitAddon.mac and copy/paste content to terminal*
+load(draw)$
+solvereal(x^2=9,x);
+gnuplot_command:"/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot";
+set_plot_option([gnuplot_term, aqua])$
+:lisp(sb-vm::set-floating-point-modes :traps nil)
+linenum:-1;
+:lisp (sb-ext:save-lisp-and-die "/users/mikael/maximaunit.core" :toplevel #'cl-user::run)
+```
 
 ## Creating WordMatMac.dotm for Mac
 Whenever there are changes to the VBA code in WordMat.dotm a new Mac-version of the same file must be prepared. This file is called *WordMatMac.dotm*
