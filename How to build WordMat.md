@@ -38,8 +38,8 @@ This must be done for intel and M1 Macs separately. These folders are already ma
 2. Install Macports.  macports.org. 
     If already installed just update 'sudo port selfupdate' A new MacOS might require a new install though
 3. Install Maxima through Macports 'sudo port install maxima'. (Also see instructions in dmg download from maxima.sourceforge.io if you have problems)
-4. Install gnuplot via macport 'sudo port install gnuplot'
-5. Install gnu core utils using macport 'sudo port install coreutils'
+4. (Install gnuplot via macport 'sudo port install gnuplot') 
+5. (Install gnu core utils using macport 'sudo port install coreutils')
 6. From /opt/local/bin find the folowing files:
 sbcl
 gtimeout
@@ -52,12 +52,12 @@ and copy to MaximaWM/maxima/bin
     cd to MaximaWM by dragging the path from finder
     './maxima/bin/maxima'
     create maxima.core and maximaunit.core(see description below)
-9. Place the core-files in MaximaWM/maxima/lib/maxima/5.45.1/binary-sbcl/
+9. Place the core-files in MaximaWM/maxima/lib/maxima/5.47.0/binary-sbcl/
 
 **Structure of MaximaWM**
 maxima/bin      contains all executables(sbcl,Maximatimeout)
 maxima/info     Must be present for maxima to run
-maxima/lib/maxima/5.45.1/binary-sbcl/   maxima.core and maximaunit.core files
+maxima/lib/maxima/5.47.0/binary-sbcl/   maxima.core and maximaunit.core files
 maxima/share    Contains math-files that can be loaded into Maxima.
 root            maxima.sh used by WordMat to run Maxima (and maybe other scripts to test maxima)
 
@@ -80,14 +80,14 @@ Whenever a new release is compiled the following checklist must be followed
 
 ## Buidling a new maxima.core
 The default installation of Maxima loads the compiled *maxima.core* file from this location:
-*Maxima-sbcl-5.45.1\lib\maxima\5.45.1\binary-sbcl\\*
+*Maxima-sbcl-5.47.0\lib\maxima\5.47.0\binary-sbcl\\*
 It is however posible to load maxima, make some changes and save a new maxima.core file.
 This makes it much faster to start up Maxima, instead of having to load all special function and settings upon startup.
 
 ### Compiling maxima.core on Windows
 - In the following use a normal maxima 5.45.1 installation from the programs folder and not from the GitHub repository
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.45.1\share\maxima\5.45.1\share\contrib*
-- run *Maxima-sbcl-5.45.1\bin\maxima.bat* by right clicking and choosing *'run as administrator'*
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac to *Maxima-sbcl-5.47.0\share\maxima\5.47.0\share\contrib*
+- run *Maxima-sbcl-5.47.0\bin\maxima.bat* by right clicking and choosing *'run as administrator'*
 If you fail to run as administrator you will recieve a permission denied error in the last step.
 - Run the following commands in the command window (You can copy/paste all in one go)
 ```
@@ -101,20 +101,21 @@ linenum:-1;
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *C:\Windows\System32* or possibly in the same folder as maxima.bat
-- Copy *C:\Windows\System32\maxima.core* to *Maxima-sbcl-5.45.1\lib\maxima\5.45.1\binary-sbcl* in the GitHub repository
+- Copy *C:\Windows\System32\maxima.core* to *Maxima-sbcl-5.47.0\lib\maxima\5.47.0\binary-sbcl* in the GitHub repository
 
-- Again run *Maxima-sbcl-5.45.1\bin\maxima.bat* as administrator
+- Again run *Maxima-sbcl-5.47.0\bin\maxima.bat* as administrator
 - Run the following commands in the command window
 ```
 load(solvereal)$
 load(draw)$
 load(WordMatUnitAddon)$
+solvereal(x^2=9,x);
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
 :lisp (sb-ext:save-lisp-and-die "maximaunit.core" :toplevel #'cl-user::run)
 ```
 
-- Copy *C:\Windows\System32\maximaunit.core* to *Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\\*
+- Copy *C:\Windows\System32\maximaunit.core* to *Maxima-sbcl-5.47.0\lib\maxima\5.47.0\binary-sbcl\\*
 
 **Explanation of commands**
 >*:lisp(sb-vm::set-floating-point-modes :traps nil)*  is a command which ensures that Maxima does not crash on overflow errors.
@@ -128,7 +129,7 @@ The version of Maxima used is the most recent version which I could get to work 
 ### Compiling maxima.core on Mac
 Must be done separately on intel and M1
 - Ensure you have a functioning MaximaWM folder. (See above)
-- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac From Shared/Maxima-files to *MaximaWM/maxima/share/maxima/5.45.1/share/contrib/*
+- Copy the most recent versions of solvereal.mac and WordMatunitaddon.mac From Shared/Maxima-files to *MaximaWM/maxima/share/maxima/5.47.0/share/contrib/*
 - Copy unit.mac to the subfolder unit of the contrib-folder
 - Run maxima
     Open terminal 
@@ -138,6 +139,7 @@ Must be done separately on intel and M1
 ```
 *Open solvereal.mac and copy/paste content to terminal*
 load(draw)$
+solvereal(x^2=9,x);
 gnuplot_command:"/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot";
 set_plot_option([gnuplot_term, aqua])$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
@@ -147,12 +149,23 @@ linenum:-1;
 
 - The command window will now close if everything went fine
 - The new *maxima.core* file will be placed in *Users/youruser* or same dir as maxima
-- Copy *Users/youruser/maxima.core* to  *MaximaWM/maxima/lib/maxima/5.45.1/binary-sbcl/* in the Mac folder in the GitHub repository
+- Copy *Users/youruser/maxima.core* to  *MaximaWM/maxima/lib/maxima/5.47.0/binary-sbcl/* in the Mac folder in the GitHub repository
 - The new maxima.core file can be run using the command 'sbcl --core maxima.core'
     This is handled by maxima.sh
     You can test the new core by cd to MaximaWM. Then run 'sh maximatext.sh'
     
 Repeat the process to generate the maximaunit.core, but also copy the content from WordMatUnitaddon.mac into the terminal, after copying from solvereal.mac
+```
+*Open solvereal.mac and copy/paste content to terminal*
+*Open WordMatUnitAddon.mac and copy/paste content to terminal*
+load(draw)$
+solvereal(x^2=9,x);
+gnuplot_command:"/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot";
+set_plot_option([gnuplot_term, aqua])$
+:lisp(sb-vm::set-floating-point-modes :traps nil)
+linenum:-1;
+:lisp (sb-ext:save-lisp-and-die "/users/mikael/maximaunit.core" :toplevel #'cl-user::run)
+```
 
 ## Creating WordMatMac.dotm for Mac
 Whenever there are changes to the VBA code in WordMat.dotm a new Mac-version of the same file must be prepared. This file is called *WordMatMac.dotm*
