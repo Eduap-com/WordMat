@@ -64,11 +64,11 @@ End Sub
 
 Private Sub CommandButton_insertpic_Click()
 Dim ils As InlineShape
-Dim s As String, Arr As Variant, Sep As String
+Dim s As String, arr As Variant, Sep As String
 On Error GoTo fejl
 omax.GoToEndOfSelectedMaths
 Selection.TypeParagraph
-Arr = Split(Label_ligning.Caption, "=")
+arr = Split(Label_ligning.Caption, "=")
 #If Mac Then
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.pdf", False, True)
 #Else
@@ -78,8 +78,8 @@ Arr = Split(Label_ligning.Caption, "=")
 Sep = "|"
 s = "WordMat" & Sep & AppVersion & Sep & "" & Sep & "" & Sep & TextBox_variabel.Text & Sep & "" & Sep
 s = s & TextBox_xmin.Text & Sep & TextBox_xmax.Text & Sep & "" & Sep & "" & Sep
-s = s & Arr(0) & Sep & TextBox_variabel.Text & Sep & "" & Sep & "" & Sep & "" & Sep
-s = s & Arr(1) & Sep & TextBox_variabel.Text & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & arr(0) & Sep & TextBox_variabel.Text & Sep & "" & Sep & "" & Sep & "" & Sep
+s = s & arr(1) & Sep & TextBox_variabel.Text & Sep & "" & Sep & "" & Sep & "" & Sep
 ils.AlternativeText = s
 GoTo slut
 fejl:
@@ -292,11 +292,11 @@ Sub OpdaterGraf()
 On Error GoTo fejl
 #If Mac Then
 Dim Text As String
-Dim Arr As Variant
-    Arr = Split(Label_ligning.Caption, "=")
+Dim arr As Variant
+    arr = Split(Label_ligning.Caption, "=")
     
-    Text = "line_width=2,color=green,explicit(" & Arr(0) & "," & TextBox_variabel.Text & "," & TextBox_xmin.Text & "," & TextBox_xmax.Text & "),"
-    Text = Text & "color=red,explicit(" & Arr(1) & "," & TextBox_variabel.Text & "," & TextBox_xmin.Text & "," & TextBox_xmax.Text & ")"
+    Text = "line_width=2,color=green,explicit(" & arr(0) & "," & TextBox_variabel.Text & "," & TextBox_xmin.Text & "," & TextBox_xmax.Text & "),"
+    Text = Text & "color=red,explicit(" & arr(1) & "," & TextBox_variabel.Text & "," & TextBox_xmin.Text & "," & TextBox_xmax.Text & ")"
 '    If Len(TextBox_xmin.text) > 0 And Len(TextBox_xmax.text) > 0 Then
 '        text = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.text) & "," & ConvertNumberToMaxima(TextBox_xmax.text) & "]"
 '    End If
@@ -327,7 +327,7 @@ slut:
 
 End Sub
 Private Sub UserForm_Activate()
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer
 On Error Resume Next
     SetCaptions
@@ -362,7 +362,7 @@ On Error GoTo fejl
     TextBox_xmin.Text = "-5"
     TextBox_xmax.Text = "5"
     Label_ligning.Caption = omax.ConvertToAscii(udtryk)
-    Arr = Split(vars, ";")
+    arr = Split(vars, ";")
     Set gemr = Selection.Range
     gemstartr = Selection.Range.start
     gemslutr = Selection.Range.End
@@ -374,8 +374,8 @@ On Error GoTo fejl
 '    If ListBox_vars.ListCount > 0 Then
 '        ListBox_vars.ListIndex = SelVarIndex
 '    End If
-    If UBound(Arr) >= 0 And TextBox_variabel.Text = vbNullString Then
-        TextBox_variabel.Text = Arr(0)
+    If UBound(arr) >= 0 And TextBox_variabel.Text = vbNullString Then
+        TextBox_variabel.Text = arr(0)
     End If
     
 '    If omax Is Nothing Then

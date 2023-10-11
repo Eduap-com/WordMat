@@ -35,7 +35,7 @@ Sub Chi2Test()
     InsertOpenExcel "chi2test.xltm"
 #Else
     Dim s As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim r As Integer
     Dim c As Integer
     
@@ -48,10 +48,10 @@ Dim signiv As Integer
 signiv = InputBox(Sprog.A(349), Sprog.A(350), "5")
 If Selection.Tables.Count = 0 Then
     s = InputBox(Sprog.A(351), Sprog.A(352), "2x2")
-    Arr = Split(s, "x")
-    If UBound(Arr) < 1 Then Arr = Split(s, ",")
-    r = Arr(0)
-    c = Arr(1)
+    arr = Split(s, "x")
+    If UBound(arr) < 1 Then arr = Split(s, ",")
+    r = arr(0)
+    c = arr(1)
 End If
 
 'Application.ScreenUpdating = False

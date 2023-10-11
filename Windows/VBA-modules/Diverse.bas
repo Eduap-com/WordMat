@@ -885,7 +885,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     Dim posca As Integer
     Dim poseller As Integer
     Dim Pos As Integer
-    Dim Arr(20) As String
+    Dim arr(20) As String
     Dim i As Integer
     
     Do ' gå tilbage til nærmeste ligmed
@@ -905,11 +905,11 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     End If
     If Pos = Len(Text) Then Pos = 0
     If Pos > 0 Then
-        Arr(i) = Left(Text, Pos - 1)
+        arr(i) = Left(Text, Pos - 1)
         Text = right(Text, Len(Text) - Pos)
         i = i + 1
     Else
-        Arr(i) = Text
+        arr(i) = Text
     End If
     Loop While Pos > 0
     
@@ -918,7 +918,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
         KlipTilLigmed = Text
         ResIndex = -1
     Else
-        KlipTilLigmed = Arr(i - indeks)
+        KlipTilLigmed = arr(i - indeks)
     End If
     
     ' fjern retur og mellemrum mm.
@@ -2078,7 +2078,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo fejl
     Application.ScreenUpdating = False
-    Dim F As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, Arr As Variant
+    Dim F As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox Sprog.A(345), vbOKOnly, Sprog.Error
@@ -2098,12 +2098,12 @@ On Error GoTo fejl
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(Sprog.A(346), Sprog.A(6), F.result & "." & f2.result)
-            Arr = Split(n, ".")
-            If UBound(Arr) > 0 Then
-                SetFieldNo F, CStr(Arr(0))
-                SetFieldNo f2, CStr(Arr(1))
+            arr = Split(n, ".")
+            If UBound(arr) > 0 Then
+                SetFieldNo F, CStr(arr(0))
+                SetFieldNo f2, CStr(arr(1))
             Else
-                SetFieldNo F, CStr(Arr(0))
+                SetFieldNo F, CStr(arr(0))
             End If
         Else
             n = InputBox(Sprog.A(346), Sprog.A(6), F.result)
@@ -2303,7 +2303,7 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
 ' Sletter genveje til WordMat makroer der ved en fejl skulle være blevet gemt i normal.dotm
     Dim GemT As Template, WT As Template
     Dim KB As KeyBinding
-    Dim Arr(50) As String, i As Integer
+    Dim arr(50) As String, i As Integer
 '    On Error Resume Next
     
     Set GemT = CustomizationContext
