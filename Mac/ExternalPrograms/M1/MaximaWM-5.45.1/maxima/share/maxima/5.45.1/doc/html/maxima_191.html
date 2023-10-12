@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for clebsch_gordan (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for clebsch_gordan (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for clebsch_gordan (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_190.html" rel="up" title="clebsch_gordan-pkg">
+<link href="maxima_190.html" rel="prev" title="clebsch_gordan-pkg">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Functions-and-Variables-for-clebsch_005fgordan">
+<div class="header">
+<p>
+Previous: <a href="maxima_190.html" accesskey="p" rel="prev">clebsch_gordan</a>, Up: <a href="maxima_190.html" accesskey="u" rel="up">clebsch_gordan</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-clebsch_005fgordan-1"></span><h3 class="section">46.1 Functions and Variables for clebsch_gordan</h3>
+
+<span id="clebsch_005fgordan"></span><span id="Item_003a-clebsch_005fgordan_002fdeffn_002fclebsch_005fgordan"></span><dl class="def">
+<dt id="index-clebsch_005fgordan"><span class="category">Function: </span><span><strong>clebsch_gordan</strong> <em>(<var>j1</var>, <var>j2</var>, <var>m1</var>, <var>m2</var>, <var>j</var>, <var>m</var>)</em><a href='#index-clebsch_005fgordan' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Compute the Clebsch-Gordan coefficient <tt>&lt;j1, j2, m1, m2 | j, m&gt;</tt>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-clebsch_005fgordan">clebsch_gordan</a>
+</div>
+</p></dd></dl>
+
+<span id="racah_005fv"></span><span id="Item_003a-clebsch_005fgordan_002fdeffn_002fracah_005fv"></span><dl class="def">
+<dt id="index-racah_005fv"><span class="category">Function: </span><span><strong>racah_v</strong> <em>(<var>a</var>, <var>b</var>, <var>c</var>, <var>a1</var>, <var>b1</var>, <var>c1</var>)</em><a href='#index-racah_005fv' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Compute Racah&rsquo;s V coefficient (computed in terms of a related
+Clebsch-Gordan coefficient).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-clebsch_005fgordan">clebsch_gordan</a>
+</div>
+</p></dd></dl>
+
+<span id="racah_005fw"></span><span id="Item_003a-clebsch_005fgordan_002fdeffn_002fracah_005fw"></span><dl class="def">
+<dt id="index-racah_005fw"><span class="category">Function: </span><span><strong>racah_w</strong> <em>(<var>j1</var>, <var>j2</var>, <var>j5</var>, <var>j4</var>, <var>j3</var>, <var>j6</var>)</em><a href='#index-racah_005fw' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Compute Racah&rsquo;s W coefficient (computed in terms of a Wigner <tt>6j</tt> symbol)
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-clebsch_005fgordan">clebsch_gordan</a>
+</div>
+</p></dd></dl>
+
+<span id="wigner_005f3j"></span><span id="Item_003a-clebsch_005fgordan_002fdeffn_002fwigner_005f3j"></span><dl class="def">
+<dt id="index-wigner_005f3j"><span class="category">Function: </span><span><strong>wigner_3j</strong> <em>(<var>j1</var>, <var>j2</var>, <var>j3</var>, <var>m1</var>, <var>m2</var>, <var>m3</var>)</em><a href='#index-wigner_005f3j' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Compute Wigner&rsquo;s <tt>3j</tt> symbol (computed in terms of a related
+Clebsch-Gordan coefficient).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-clebsch_005fgordan">clebsch_gordan</a>
+</div>
+</p></dd></dl>
+
+<span id="wigner_005f6j"></span><span id="Item_003a-clebsch_005fgordan_002fdeffn_002fwigner_005f6j"></span><dl class="def">
+<dt id="index-wigner_005f6j"><span class="category">Function: </span><span><strong>wigner_6j</strong> <em>(<var>j1</var>, <var>j2</var>, <var>j3</var>, <var>j4</var>, <var>j5</var>, <var>j6</var>)</em><a href='#index-wigner_005f6j' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Compute Wigner&rsquo;s <tt>6j</tt> symbol.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-clebsch_005fgordan">clebsch_gordan</a>
+</div>
+</p></dd></dl>
+
+<span id="wigner_005f9j"></span><span id="Item_003a-clebsch_005fgordan_002fdeffn_002fwigner_005f9j"></span><dl class="def">
+<dt id="index-wigner_005f9j"><span class="category">Function: </span><span><strong>wigner_9j</strong> <em>(<var>a</var>, <var>b</var>, <var>c</var>, <var>d</var>, <var>e</var>, <var>f</var>, <var>g</var>, <var>h</var>, <var>i</var>, <var>j</var>,)</em><a href='#index-wigner_005f9j' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Compute Wigner&rsquo;s <tt>9j</tt> symbol.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-clebsch_005fgordan">clebsch_gordan</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-include_002dmaxima_002fnode_002fcobyla_002dpkg"></span></div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="maxima_190.html" accesskey="p" rel="prev">clebsch_gordan</a>, Up: <a href="maxima_190.html" accesskey="u" rel="up">clebsch_gordan</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
