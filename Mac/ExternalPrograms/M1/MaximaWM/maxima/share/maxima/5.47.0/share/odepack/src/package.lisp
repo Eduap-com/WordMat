@@ -1,2 +1,0 @@
-(defpackage #:odepack
-  (:use #:cl))

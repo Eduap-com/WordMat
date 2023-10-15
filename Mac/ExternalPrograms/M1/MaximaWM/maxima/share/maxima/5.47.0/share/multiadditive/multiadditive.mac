@@ -1,6 +1,0 @@
-load ("multiadditive.lisp");
-
-define_opproperty (multiadditive, ?multiadditive);
-define_opproperty (threadable, ?threadable);
-define_opproperty (idempotent, ?idempotent);
-define_opproperty (involution, ?involution);
