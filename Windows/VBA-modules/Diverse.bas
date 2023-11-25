@@ -573,6 +573,11 @@ fejl:
 slut:
 'MsgBox GetProgramFilesDir
 End Function
+
+Function GetDownloadsFolder() As String
+    GetDownloadsFolder = RegKeyRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\{374DE290-123F-4565-9164-39C4925E467B}")
+    GetDownloadsFolder = Replace(GetDownloadsFolder, "%USERPROFILE%", Environ$("USERPROFILE"))
+End Function
 Function RegKeyRead(i_RegKey As String) As String
 'eks syntaks
 '"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir"
@@ -665,7 +670,7 @@ On Error Resume Next
     End If
 #Else
     If Script Then
-        Shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus
+        shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus
     Else
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True
     End If
@@ -1387,6 +1392,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     End If
     
     If RunSilent Then
+        If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo slut ' ikke automatisk opdatere i maj og juni
         If IsDate(LastUpdateCheck) Then
             If DateDiff("d", LastUpdateCheck, Date) < 14 Then GoTo slut ' hvis der er checket indenfor de sidste 14 dage så afslut
         End If
@@ -1463,18 +1469,18 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
    
     If UpdateNow Then
         If MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbYesNo, Sprog.A(23)) = vbYes Then
-'            FilNavn = "WordMat" & Replace(NewVersion, ".", "") & ".exe"
-'            If DownloadFile("https://github.com/Eduap-com/WordMat/releases/download/v." & NewVersion & "/", FilNavn) Then
-'            If DownloadFile("https://www.eduap.com/download/download.php?f=WordMatMacM1-127S.pkg", "WordMatMacM1-127S.pkg") Then
-'                RunApplication Environ("TEMP") & "\" & FilNavn
-'                Application.quit
-'            Else
+            '            FilNavn = "WordMat" & Replace(NewVersion, ".", "") & ".exe"
+            '            If DownloadFile("https://github.com/Eduap-com/WordMat/releases/download/v." & NewVersion & "/", FilNavn) Then
+            '            If DownloadFile("https://www.eduap.com/download/download.php?f=WordMatMacM1-127S.pkg", "WordMatMacM1-127S.pkg") Then
+            '                RunApplication Environ("TEMP") & "\" & FilNavn
+            '                Application.quit
+            '            Else
             If Sprog.Language = 1 Then
                 OpenLink "https://www.eduap.com/da/download-wordmat/"
             Else
                 OpenLink "https://www.eduap.com/download-wordmat/"
             End If
-'            End If
+            '            End If
         End If
     Else
         If Not RunSilent Then
@@ -1511,12 +1517,13 @@ Function DownloadFile(URL As String, FilNavn As String) As Boolean
     End If
     DownloadFile = True
 End Function
-Sub RunApplication(AppPath As String)
-   ' RunApplication("C:\Your\Path\Roboapp.exe")
-   Dim varProc As Variant
-   On Error Resume Next
-   varProc = Shell(AppPath, 1)
-End Sub
+Function RunApplication(AppPath As String) As Boolean
+    ' RunApplication("C:\Your\Path\Roboapp.exe")
+    Dim varProc As Variant
+    On Error Resume Next
+    varProc = shell(AppPath, vbNormalFocus)
+    RunApplication = Not IsEmpty(varProc)
+End Function
 Sub CheckForUpdateSilentOld()
 ' maxproc skal være oprettet
 #If Mac Then
@@ -1547,9 +1554,6 @@ End Sub
 Sub CheckForUpdateSilent()
 ' maxproc skal være oprettet
     On Error GoTo fejl
-
-   If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo slut ' ikke automatisk opdatere i maj og juni
-   If DateDiff("d", LastUpdateCheck, Date) < 14 Then GoTo slut
 
 #If Mac Then
     CheckForUpdateF True
@@ -2282,7 +2286,7 @@ Sub SaveBackup()
     On Error GoTo fejl
     Dim path As String
     Dim UFbackup As UserFormBackup
-    Dim UFwait As UserFormWaitForMaxima
+    Dim UfWait As UserFormWaitForMaxima
     Const lCancelled_c As Long = 0
     Dim tempDoc2 As Document
     
@@ -2307,16 +2311,16 @@ Sub SaveBackup()
         MsgBox Sprog.A(679)
         Exit Sub
     End If
-    Set UFwait = New UserFormWaitForMaxima
-    UFwait.Show vbModeless
-    UFwait.Label_tip.Caption = "Saving backup" ' to " & VbCrLfMac & "documents\WordMat-Backup"
-    UFwait.Label_progress.Caption = "*"
+    Set UfWait = New UserFormWaitForMaxima
+    UfWait.Show vbModeless
+    UfWait.Label_tip.Caption = "Saving backup" ' to " & VbCrLfMac & "documents\WordMat-Backup"
+    UfWait.Label_progress.Caption = "*"
     DoEvents
    
     
 '    Application.ScreenUpdating = False
     If ActiveDocument.Saved = False Then ActiveDocument.Save
-    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     BackupNo = BackupNo + 1
     If BackupNo > BackupMaxNo Then BackupNo = 1
@@ -2327,13 +2331,13 @@ Sub SaveBackup()
 #End If
 '    If Dir(path, vbDirectory) = "" Then MkDir path
     If Not FileExists(path) Then MkDir path
-    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     path = path & "WordMatBackup" & BackupNo & ".docx"
     If VBA.LenB(path) = lCancelled_c Then Exit Sub
     
     Set tempDoc2 = Application.Documents.Add(Template:=ActiveDocument.FullName, visible:=False)
-    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
 #If Mac Then
     tempDoc2.ActiveWindow.Left = 2000
@@ -2341,7 +2345,7 @@ Sub SaveBackup()
 #Else
     tempDoc2.SaveAs2 path
 #End If
-    UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     tempDoc2.Close
 
@@ -2350,7 +2354,7 @@ fejl:
     MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
 slut:
 On Error Resume Next
-    If Not UFwait Is Nothing Then Unload UFwait
+    If Not UfWait Is Nothing Then Unload UfWait
     Application.ScreenUpdating = True
 End Sub
 
@@ -2375,7 +2379,7 @@ MsgBox Sprog.A(681), vbOKOnly, ""
     RunScript "OpenFinder", UserDir
 #Else
     UserDir = Environ$("username")
-    Shell "explorer.exe " & "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates", vbNormalFocus
+    shell "explorer.exe " & "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates", vbNormalFocus
 #End If
 End Sub
 Sub DeleteKeyboardShortcutsInNormalDotm()

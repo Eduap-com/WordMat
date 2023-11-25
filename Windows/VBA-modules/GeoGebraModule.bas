@@ -703,11 +703,11 @@ End Sub
 
 Sub GeoGebra()
 ' sender den valgte ligning og definitioner over i GeoGebra 5
- '   On Error GoTo Fejl
+    On Error GoTo fejl
     Dim geogebrasti As String
     Dim geogebrafilersti As String
     Dim appnr As Long
-    Dim UFwait As New UserFormWaitForMaxima
+    Dim UfWait As New UserFormWaitForMaxima
     Dim TempCas As Integer
     
     TempCas = CASengine
@@ -715,13 +715,16 @@ Sub GeoGebra()
     
     PrepareMaxima ' omax bliver brugt
     
-    UFwait.Label_tip.Caption = Sprog.A(362)
-    UFwait.Label_progress.Caption = "***"
-    UFwait.CommandButton_stop.visible = False
-    UFwait.Show vbModeless
+    UfWait.Label_tip.Caption = Sprog.A(362)
+    UfWait.Label_progress.Caption = "***"
+    UfWait.CommandButton_stop.visible = False
+    UfWait.Show vbModeless
     
     geogebrasti = GeoGebraPath()
-    If geogebrasti = "" Then GoTo fejl ' hvis geogebra ikke installeret så fejl
+    If geogebrasti = "" Then ' hvis geogebra ikke installeret
+        InstallGeoGebra
+        GoTo slut
+    End If
 '    geogebrafilersti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     geogebrafilersti = GetTempDir()
     
@@ -729,7 +732,7 @@ Sub GeoGebra()
     
     geogebrafilersti = geogebrafilersti & "geogebra.ggb"
     
-    UFwait.Label_progress.Caption = "******"
+    UfWait.Label_progress.Caption = "******"
     If FileExists(geogebrafilersti) Then ' check om geogebrafilen er lavet
         geogebrasti = geogebrasti & " """ & geogebrafilersti & """"
     Else
@@ -740,21 +743,71 @@ Sub GeoGebra()
 #If Mac Then
     RunScript "OpenGeoGebra", geogebrafilersti
 #Else
-    appnr = Shell(geogebrasti, vbNormalFocus)   'vbNormalFocus vbMinimizedFocus ' til offline installer
+    appnr = shell(geogebrasti, vbNormalFocus)   'vbNormalFocus vbMinimizedFocus ' til offline installer
 #End If
 ' til webstart:
 '    appnr = Shell("javaws -system -open """ & geogebrafilersti & "geogebra.ggb""" & " http://www.geogebra.org/webstart/geogebra.jnlp", vbNormalFocus)    'vbNormalFocus vbMinimizedFocus
     
-    UFwait.Label_progress.Caption = "*********"
+    UfWait.Label_progress.Caption = "*********"
     On Error Resume Next
     DoEvents
-    Unload UFwait
+    Unload UfWait
     
     GoTo slut
 fejl:
-    UserFormGeoGebra.Show
+'    UserFormGeoGebra.Show
 slut:
+    If Not UfWait Is Nothing Then Unload UfWait
     CASengine = TempCas
+End Sub
+Sub InstallGeoGebra()
+    Dim i As Long, DDir As String, FN As String
+    Dim UfWait As UserFormWaitForMaxima
+    
+    UserFormGeoGebra.Show
+#If Mac Then
+    MsgBox "The download page will now open. Install GeoGebra classic 5", vbOKOnly, "Download"
+    OpenLink "https://www.geogebra.org/download"
+#Else ' win
+
+    If UserFormGeoGebra.ReturnVal = 1 Then
+        Set UfWait = New UserFormWaitForMaxima
+        UfWait.Label_tip.Font.Size = 10
+        UfWait.Label_tip.Font.Italic = False
+        UfWait.Show vbModeless
+        UfWait.Label_tip.Caption = "Downloader GeoGebra 5"
+        UfWait.Label_progress.Caption = "*"
+        '    DownloadFile "https://download.geogebra.org/package/win"
+        OpenLink "https://download.geogebra.org/package/win" ' åbning af dette link starter automatisk download af den rigtige fil
+    
+        DDir = GetDownloadsFolder
+        Do While i < 12
+            Sleep2 1
+            FN = Dir(DDir & "\GeoGebra-Windows-Installer-5*.exe")
+            If FN <> "" Then Exit Do
+            UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
+            i = i + 1
+        Loop
+        UfWait.Hide
+        If i < 12 Then
+            If Not RunApplication(DDir & "\" & FN) Then
+                MsgBox "The GeoGebra installation file is now in the downloadsfolder. Go run it", vbOKOnly, "Run installer"
+                shell "explorer.exe " & DDir, vbNormalFocus
+            End If
+        Else ' hvis der ikke er blevet hentet en fil, må brugeren selv hente
+            MsgBox "The download page will now be shown. Download and install the 'GeoGebra Classic 5' version", vbOKOnly, "Download page"
+            OpenLink "https://www.geogebra.org/download"
+        End If
+    Else
+        GeoGebraWeb
+    End If
+#End If
+    
+    GoTo slut
+fejl:
+
+slut:
+    Unload UfWait
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found

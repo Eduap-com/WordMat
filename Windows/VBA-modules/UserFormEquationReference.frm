@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Option Explicit
 Public EqName As String
 Private Sub CommandButton_cancel_Click()
@@ -48,6 +49,6 @@ Sub SetCaptions()
     Me.Caption = Sprog.A(15)
     CommandButton_ok.Caption = Sprog.OK
     CommandButton_cancel.Caption = Sprog.Cancel
-    Label_Ligninger.Caption = Sprog.Equations
+    Label_ligninger.Caption = Sprog.Equations
     
 End Sub

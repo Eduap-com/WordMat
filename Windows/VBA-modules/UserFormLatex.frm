@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Public EventsOn As Boolean
 Private Sub CheckBox_contents_Change()
    If EventsOn Then SaveSet2

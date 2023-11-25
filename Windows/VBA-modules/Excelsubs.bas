@@ -230,7 +230,7 @@ Dim statistiksti As String
     statistiksti = """" & GetProgramFilesDir & "\WordMat\Chi2Fordeling.xltx"""
 '    statistiksti = """" & Environ("ProgramFiles") & "\WordMat\Statistik.xltm"""
     On Error GoTo fejl
-    appnr = Shell(excelsti & " /t " & statistiksti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
+    appnr = shell(excelsti & " /t " & statistiksti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
     GoTo slut
 fejl:
     MsgBox Sprog.A(96) & statistiksti, vbOKOnly, Sprog.Error

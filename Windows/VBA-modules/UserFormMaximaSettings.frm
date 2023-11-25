@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Private MustRestart As Boolean
 Private LoadUnits As Boolean
@@ -258,7 +259,7 @@ On Error Resume Next
 #If Mac Then
     RunScript "OpenFinder", GetTempDir() & "/WordMat-backup"
 #Else
-    Shell "explorer.exe" & " " & GetDocumentsDir & "\WordMat-Backup", vbNormalFocus
+    shell "explorer.exe" & " " & GetDocumentsDir & "\WordMat-Backup", vbNormalFocus
 #End If
 End Sub
 

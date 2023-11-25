@@ -19,7 +19,7 @@ Public Fontsize As String
 Public UseWordMargins As Boolean
 Private Log As String
 
-Public UFwait As UserFormWaitForMaxima
+Public UfWait As UserFormWaitForMaxima
 
 Private MikTex64bit As Boolean
 
@@ -240,7 +240,7 @@ Dim filnr As Integer, filren As String, s As String
 Dim fsT As Object
 'On Error GoTo fejl
 
-   UFwait.Label_tip.Caption = "Gemmer Tex-fil"
+   UfWait.Label_tip.Caption = "Gemmer Tex-fil"
 LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
 filren = Split(FilNavn, ".")(0)
 On Error Resume Next
@@ -308,7 +308,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
       'Kill Mappe & "\" & filnavn & ".dvi"
       On Error GoTo fejl
 
-      appnr = Shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
+      appnr = shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
 
       ' vent på maxima har genereret outputfil
       i = 0
@@ -347,16 +347,16 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
 #Else
    Dim x64 As String
    
-   UFwait.Label_tip.Caption = "Gemmer pdf-fil"
+   UfWait.Label_tip.Caption = "Gemmer pdf-fil"
    
    MikTexPath ' called to set miktex64bit
    If MikTex64bit Then
       x64 = "x64\"
    End If
    
-   Set UFwait = New UserFormWaitForMaxima
+   Set UfWait = New UserFormWaitForMaxima
    
-   UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "*"
+   UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
    mtpath = MikTexPath
    If mtpath = "" Then
       MsgBox Sprog.A(409), vbOKOnly
@@ -369,15 +369,15 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
    shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & FilNavn & ".tex" '/K holder cmd åben /C lukker
    Do
-      UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "**"
-      UFwait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
+      UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "**"
+      UfWait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
       ReRun = False
       On Error Resume Next
       If Dir(Mappe & "\" & FilNavn & ".pdf") <> "" Then Kill Mappe & "\" & FilNavn & ".pdf"
       If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
       On Error GoTo 0 'Fejl
 
-      Shell shellcmd, vbNormal
+      shell shellcmd, vbNormal
       'appnr = Shell(shellcmd, vbNormal) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
       ' vent på maxima har genereret outputfil
       i = 0

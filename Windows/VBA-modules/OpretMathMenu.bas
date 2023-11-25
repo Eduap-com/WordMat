@@ -858,7 +858,7 @@ Sub GoToLink()
 
     explorersti = """" & GetProgramFilesDir & "\Internet Explorer\iexplore.exe"" " & Link
 '    On Error GoTo fejl
-    appnr = Shell(explorersti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
+    appnr = shell(explorersti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
 GoTo slut
 fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
