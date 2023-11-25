@@ -1,0 +1,36 @@
+{
+  "logFormatVersion": 1,
+  "jobId": "ac29185c-1633-46dd-a035-82a83dfdaab6",
+  "status": "Accepted",
+  "statusSummary": "Ready for distribution",
+  "statusCode": 0,
+  "archiveFilename": "WordMatMacM1-127S.pkg",
+  "uploadDate": "2023-11-22T21:06:00.091Z",
+  "sha256": "62c39f3eda72e08b4051f6a4da360f923ab3682b5b1bd716c3fe9483f939efae",
+  "ticketContents": [
+    {
+      "path": "WordMatMacM1-127S.pkg",
+      "digestAlgorithm": "SHA-1",
+      "cdhash": "543a8c1c71e5aa3b6015917cd907bb7db8c02a3c"
+    },
+    {
+      "path": "WordMatMacM1-127S.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/Maximatimeout",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "e9ee674dd99debea98ca3301e8f2f3581a5212da",
+      "arch": "arm64"
+    },
+    {
+      "path": "WordMatMacM1-127S.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/sbcl",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "f8b7f745f4c5c729ce602b18c9373c7da4d91d15",
+      "arch": "arm64"
+    },
+    {
+      "path": "WordMatMacM1-127S.pkg/WordMat.pkg Contents/Payload/opt/local/lib/libzstd.1.5.5.dylib",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "8386300f8214c7bbd02d646623c32a8e003b3bb5",
+      "arch": "arm64"
+    }
+  ],
+  "issues": null
+}
