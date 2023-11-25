@@ -342,7 +342,7 @@ End Function
 
 Sub ConvertImagesToLatex(d As Document)
 '   On Error GoTo Fejl
-   Dim Filnavn As String, ImagFilDir As String, tDoc As Document, sh As InlineShape, si As Integer, sh2 As Shape, sha As Variant, i As Integer
+   Dim FilNavn As String, ImagFilDir As String, tDoc As Document, sh As InlineShape, si As Integer, sh2 As Shape, sha As Variant, i As Integer
    Dim ImagCol As New Collection
    If d.InlineShapes.Count = 0 And d.Shapes.Count = 0 Then
       latexfil.ImagDir = ""
@@ -361,21 +361,21 @@ Sub ConvertImagesToLatex(d As Document)
 '   Selection.PasteAndFormat (wdSingleCellText)
    '   Selection.Paste
     
-   Filnavn = LatexFilePath & "\" & "Images.htm"
-   If Dir(Filnavn) <> "" Then Kill Filnavn
+   FilNavn = LatexFilePath & "\" & "Images.htm"
+   If Dir(FilNavn) <> "" Then Kill FilNavn
    ImagFilDir = LatexFilePath & "\" & Dir(LatexFilePath & "\Images*", vbDirectory)
    If Len(Dir(ImagFilDir, vbDirectory)) > 1 Then
       Kill ImagFilDir & "\*.*"
       RmDir ImagFilDir
    End If
-   tDoc.SaveAs2 FileName:=Filnavn, FileFormat:=wdFormatFilteredHTML, LockComments:=False, Password:="", AddToRecentFiles:=False, WritePassword:="", ReadOnlyRecommended:=False, EmbedTrueTypeFonts:=False, SaveNativePictureFormat:=False, SaveFormsData:=False, SaveAsAOCELetter:=False, CompatibilityMode:=0
+   tDoc.SaveAs2 FileName:=FilNavn, FileFormat:=wdFormatFilteredHTML, LockComments:=False, Password:="", AddToRecentFiles:=False, WritePassword:="", ReadOnlyRecommended:=False, EmbedTrueTypeFonts:=False, SaveNativePictureFormat:=False, SaveFormsData:=False, SaveAsAOCELetter:=False, CompatibilityMode:=0
 '   ImagFilDir = LatexFilePath & "\" & Dir(LatexFilePath & "\Images-*", vbDirectory)
    latexfil.ImagDir = Dir(LatexFilePath & "\Images-*", vbDirectory)
    tDoc.Close
    Set tDoc = Nothing
 
-   If Dir(Filnavn, vbNormal) <> "" Then
-      Kill Filnavn
+   If Dir(FilNavn, vbNormal) <> "" Then
+      Kill FilNavn
    End If
 
    For Each sh In d.InlineShapes

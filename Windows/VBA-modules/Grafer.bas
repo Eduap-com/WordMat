@@ -905,7 +905,7 @@ Set ils = ActiveDocument.InlineShapes.AddOLEObject(FileName:=path, LinkToFile:=F
 DisplayAsIcon:=False, Range:=Selection.Range)
 
 End Sub
-Function InsertIndlejret(Filnavn As String, Optional startark As String) As Object
+Function InsertIndlejret(FilNavn As String, Optional startark As String) As Object
 'indsætter exceldokument som indlejret dokument
 ' bemærk fejler hvis google cloud connect installeret
 Dim path As String
@@ -923,9 +923,9 @@ EnableExcelMacros
         DoEvents
         UfWait2.Label_progress = "***"
 #If Mac Then
-path = GetWordMatDir() & "Excelfiles/" & Filnavn
+path = GetWordMatDir() & "Excelfiles/" & FilNavn
 #Else
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & Filnavn & """"
+path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
 #End If
     If Selection.Range.Tables.Count > 0 Then
 '        Selection.Copy

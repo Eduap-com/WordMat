@@ -931,30 +931,30 @@ TextBox_A.Enabled = True
     ImageTrekant.Picture = LoadPicture(GetProgramFilesDir & "\WordMat\Images\trekantreth.emf")
 #End If
 TextBox_A.Left = 32
-TextBox_A.top = 186
+TextBox_A.Top = 186
 TextBox_B.Left = 318
-TextBox_B.top = 24
+TextBox_B.Top = 24
 TextBox_C.Left = 318
-TextBox_C.top = 174
+TextBox_C.Top = 174
 TextBox_captionA.Left = 48
-TextBox_captionA.top = 174
+TextBox_captionA.Top = 174
 TextBox_captionB.Left = 300
-TextBox_captionB.top = 24
+TextBox_captionB.Top = 24
 TextBox_captionC.Left = 300
-TextBox_captionC.top = 174
+TextBox_captionC.Top = 174
 
 TextBox_sa.Left = 320
-TextBox_sa.top = 90
+TextBox_sa.Top = 90
 TextBox_sb.Left = 151
-TextBox_sb.top = 192
+TextBox_sb.Top = 192
 TextBox_sc.Left = 120
-TextBox_sc.top = 90
+TextBox_sc.Top = 90
 TextBox_captionsa.Left = 305
-TextBox_captionsa.top = 90
+TextBox_captionsa.Top = 90
 TextBox_captionsb.Left = 162
-TextBox_captionsb.top = 180
+TextBox_captionsb.Top = 180
 TextBox_captionsc.Left = 160
-TextBox_captionsc.top = 90
+TextBox_captionsc.Top = 90
 Me.Repaint
 
 End Sub
@@ -971,30 +971,30 @@ ImageTrekant.Picture = LoadPicture(GetProgramFilesDir & "\WordMat\Images\trekant
 #End If
 
 TextBox_A.Left = 32
-TextBox_A.top = 186
+TextBox_A.Top = 186
 TextBox_B.Left = 10
-TextBox_B.top = 24
+TextBox_B.Top = 24
 TextBox_C.Left = 318
-TextBox_C.top = 174
+TextBox_C.Top = 174
 TextBox_captionA.Left = 48
-TextBox_captionA.top = 174
+TextBox_captionA.Top = 174
 TextBox_captionB.Left = 48
-TextBox_captionB.top = 24
+TextBox_captionB.Top = 24
 TextBox_captionC.Left = 300
-TextBox_captionC.top = 174
+TextBox_captionC.Top = 174
 
 TextBox_sa.Left = 195
-TextBox_sa.top = 90
+TextBox_sa.Top = 90
 TextBox_sb.Left = 151
-TextBox_sb.top = 192
+TextBox_sb.Top = 192
 TextBox_sc.Left = 5
-TextBox_sc.top = 88
+TextBox_sc.Top = 88
 TextBox_captionsa.Left = 180
-TextBox_captionsa.top = 90
+TextBox_captionsa.Top = 90
 TextBox_captionsb.Left = 162
-TextBox_captionsb.top = 180
+TextBox_captionsb.Top = 180
 TextBox_captionsc.Left = 41
-TextBox_captionsc.top = 90
+TextBox_captionsc.Top = 90
 Me.Repaint
 
 End Sub
@@ -1009,30 +1009,30 @@ ImageTrekant.Picture = LoadPicture(GetProgramFilesDir & "\WordMat\Images\trekant
 #End If
 
 TextBox_A.Left = 32
-TextBox_A.top = 186
+TextBox_A.Top = 186
 TextBox_B.Left = 115
-TextBox_B.top = 12
+TextBox_B.Top = 12
 TextBox_C.Left = 318
-TextBox_C.top = 174
+TextBox_C.Top = 174
 TextBox_captionA.Left = 48
-TextBox_captionA.top = 174
+TextBox_captionA.Top = 174
 TextBox_captionB.Left = 126
-TextBox_captionB.top = 24
+TextBox_captionB.Top = 24
 TextBox_captionC.Left = 300
-TextBox_captionC.top = 174
+TextBox_captionC.Top = 174
 
 TextBox_sa.Left = 234
-TextBox_sa.top = 84
+TextBox_sa.Top = 84
 TextBox_sb.Left = 151
-TextBox_sb.top = 192
+TextBox_sb.Top = 192
 TextBox_sc.Left = 38
-TextBox_sc.top = 90
+TextBox_sc.Top = 90
 TextBox_captionsa.Left = 216
-TextBox_captionsa.top = 84
+TextBox_captionsa.Top = 84
 TextBox_captionsb.Left = 162
-TextBox_captionsb.top = 180
+TextBox_captionsb.Top = 180
 TextBox_captionsc.Left = 78
-TextBox_captionsc.top = 90
+TextBox_captionsc.Top = 90
 Me.Repaint
 
 End Sub

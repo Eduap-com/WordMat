@@ -70,6 +70,7 @@ slut:
 #End If
     End Sub
 Public Sub SletRCMenu()
+    Exit Sub ' RCmenu bruges ikke
 #If Mac Then
 #Else
 On Error Resume Next

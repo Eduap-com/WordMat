@@ -45,7 +45,7 @@ End If
 XLapp.visible = vis
 Set xlwb = XLapp.Workbooks.Add
 End Sub
-Sub LoadFile(Filnavn As String)
+Sub LoadFile(FilNavn As String)
 Dim wordmatsti As String
 On Error Resume Next
 If XLapp Is Nothing Then
@@ -62,7 +62,7 @@ XLapp.visible = vis
 '    Set XLapp = CreateObject("Excel.Application")
 'End If
     XLapp.visible = True
-wordmatsti = GetProgramFilesDir & "\WordMat\ExcelFiles\" & Filnavn & ""
+wordmatsti = GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & ""
 If Dir(wordmatsti) <> "" Then
     Set xlwb = XLapp.Workbooks.Add(wordmatsti)
 End If
@@ -120,7 +120,7 @@ On Error Resume Next
     XLapp.ScreenUpdating = True
     XLapp.DisplayAlerts = True
 End Sub
-Function InsertIndlejret(Filnavn As String, Optional startark As String)
+Function InsertIndlejret(FilNavn As String, Optional startark As String)
 'indsætter exceldokument som indlejret dokument
 Dim path As String
 Dim ils As InlineShape
@@ -142,7 +142,7 @@ EnableExcelMacros
 '    ufwait2.Show vbModeless
         DoEvents
 '        ufwait2.Label_progress = "***"
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & Filnavn & """"
+path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
     If Selection.Range.Tables.Count > 0 Then
 '        Selection.Copy
         Selection.Tables(Selection.Tables.Count).Select
