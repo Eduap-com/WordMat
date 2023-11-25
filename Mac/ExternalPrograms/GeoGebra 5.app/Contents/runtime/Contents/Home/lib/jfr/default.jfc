@@ -408,6 +408,11 @@
       <setting name="enabled" control="gc-enabled-normal">true</setting>
     </event>
 
+    <event name="jdk.GCPhaseParallel">
+      <setting name="enabled" control="gc-enabled-normal">true</setting>
+      <setting name="threshold">0 ms</setting>
+    </event>
+ 
     <event name="jdk.G1BasicIHOP">
       <setting name="enabled" control="gc-enabled-normal">true</setting>
     </event>
@@ -443,6 +448,15 @@
     </event>
 
     <event name="jdk.G1HeapRegionTypeChange">
+      <setting name="enabled" control="gc-enabled-all">false</setting>
+    </event>
+
+    <event name="jdk.ShenandoahHeapRegionInformation">
+      <setting name="enabled" control="gc-enabled-all">false</setting>
+      <setting name="period">everyChunk</setting>
+    </event>
+
+    <event name="jdk.ShenandoahHeapRegionStateChange">
       <setting name="enabled" control="gc-enabled-all">false</setting>
     </event>
 
@@ -579,6 +593,16 @@
       <setting name="period">everyChunk</setting>
     </event>
 
+    <event name="jdk.ModuleRequire">
+      <setting name="enabled">true</setting>
+      <setting name="period">endChunk</setting>
+    </event>
+
+    <event name="jdk.ModuleExport">
+      <setting name="enabled">true</setting>
+      <setting name="period">endChunk</setting>
+    </event>
+
     <event name="jdk.FileForce">
       <setting name="enabled">true</setting>
       <setting name="stackTrace">true</setting>
@@ -607,6 +631,11 @@
       <setting name="enabled">true</setting>
       <setting name="stackTrace">true</setting>
       <setting name="threshold" control="socket-io-threshold">20 ms</setting>
+    </event>
+
+    <event name="jdk.Deserialization">
+       <setting name="enabled">false</setting>
+       <setting name="stackTrace">true</setting>
     </event>
 
     <event name="jdk.SecurityPropertyModification">

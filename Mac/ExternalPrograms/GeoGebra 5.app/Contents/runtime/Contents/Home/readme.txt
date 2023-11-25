@@ -1,4 +1,4 @@
- 
+
 
  Certain portions of this software are based on source code from OpenJDK
 (http://openjdk.java.net/)  and  licensed  under  the GNU General Public
@@ -14,7 +14,7 @@ source distribution.
   Please email azul_openjdk@azul.com for further information.
 
   Include this version code in your email:
-  zsrc8.70.0.23-jdk8.0.372 b7b2c20118ed09003144850e2b5affabf51ea4db
-  CRS 1.0.26
+  zsrc11.62.17-jdk11.0.18 9430fae58165be0c49140c2bf197f7050bd39ea8
+  CRS 1.0.11
 
 To read more about Azul products visit https://www.azul.com/products/?r=zulu
