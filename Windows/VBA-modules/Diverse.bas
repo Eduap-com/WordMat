@@ -964,25 +964,25 @@ Do
     i = i + 1
 Loop While i < 10
 End Sub
-Sub OpenFormulae(Filnavn As String)
+Sub OpenFormulae(FilNavn As String)
 On Error GoTo fejl
 #If Mac Then
-    Documents.Open "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/WordDocs/" & Filnavn
+    Documents.Open "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/WordDocs/" & FilNavn
 #Else
-    OpenWordFile "" & Filnavn
+    OpenWordFile "" & FilNavn
 #End If
 GoTo slut
 fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
-Sub OpenWordFile(Filnavn As String)
+Sub OpenWordFile(FilNavn As String)
 ' OpenWordFile ("Figurer.docx")
 
 Dim filnavn1 As String
 #If Mac Then
-    Filnavn = Replace(Filnavn, "\", "/")
-    filnavn1 = GetWordMatDir() & "WordDocs/" & Filnavn
+    FilNavn = Replace(FilNavn, "\", "/")
+    filnavn1 = GetWordMatDir() & "WordDocs/" & FilNavn
     Documents.Open filnavn1
 #Else
 Dim filnavn2 As String
@@ -991,8 +991,8 @@ Dim fs
 On Error GoTo fejl
 Set fs = CreateObject("Scripting.FileSystemObject")
 appdir = Environ("AppData")
-filnavn1 = appdir & "\WordMat\WordDocs\" & Filnavn
-filnavn2 = GetProgramFilesDir & "\WordMat\WordDocs\" & Filnavn
+filnavn1 = appdir & "\WordMat\WordDocs\" & FilNavn
+filnavn2 = GetProgramFilesDir & "\WordMat\WordDocs\" & FilNavn
 
 If Dir(filnavn1) = "" And Dir(filnavn2) <> "" Then
     If Dir(appdir & "\WordMat\WordDocs\", vbDirectory) = "" Then MkDir appdir & "\WordDocs\WordMat"
@@ -1004,13 +1004,13 @@ If Dir(filnavn1) <> "" Then
 ElseIf Dir(filnavn2) <> "" Then
     Documents.Open FileName:=filnavn2, ReadOnly:=True
 Else
-    MsgBox Sprog.A(111) & Filnavn, vbOKOnly, Sprog.Error
+    MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
 End If
 #End If
 
 GoTo slut
 fejl:
-    MsgBox Sprog.A(111) & Filnavn, vbOKOnly, Sprog.Error
+    MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
 slut:
 
 End Sub
@@ -1377,70 +1377,145 @@ End Sub
 Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     On Error GoTo fejl
     Dim NewVersion As String, p As Integer, p2 As Integer, News As String, s As String, v As String
-    Dim Filnavn As String, FilDir As String, FilPath As String, result As VbMsgBoxResult
+    Dim FilNavn As String, FilDir As String, FilPath As String, result As VbMsgBoxResult
+    Dim UpdateNow As Boolean
     
    
     If GetInternetConnectedState = False Then
         If Not RunSilent Then MsgBox "Ingen internetforbindelse", vbOKOnly, "Fejl"
         Exit Sub
     End If
-   
-    s = GetHTML("https://www.eduap.com/wordmat-version-history/")
+    
+    If RunSilent Then
+        If IsDate(LastUpdateCheck) Then
+            If DateDiff("d", LastUpdateCheck, Date) < 14 Then GoTo slut ' hvis der er checket indenfor de sidste 14 dage så afslut
+        End If
+    End If
+    LastUpdateCheck = Date ' denne skal være her, og ikke i slutningen, for hvis der sker en fejl i opdateringen, skal den kun komme én gang
+    
+    '    s = GetHTML("https://www.eduap.com/wordmat-version-history/")
+    s = GetHTML("http://screinfo.eduap.com/wordmatversion.txt")
+    
     If Len(s) = 0 Then
         If Not RunSilent Then
             MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
             GoTo slut
         End If
     End If
-    
-            p = InStr(s, "<body")
-        p = InStr(p, s, "Version ")
-        If p <= 0 Then GoTo fejl
-        v = Trim(Mid(s, p + 8, 4))
-        p2 = InStr(p + 10, s, "Version " & AppVersion)
-        If p2 <= 0 Then p2 = InStr(p + 10, s, "Version")
-        If p2 <= 0 Then p2 = p + 50
-'        p3 = InStr(p, s, "<p>")
-        News = Mid(s, p, p2 - p)
-'        News = Replace(News, "- ", vbCrLf & "- ")
-        News = Replace(News, "&#8211;", vbCr & " -") ' bindestreg
-        News = Replace(News, "Version ", vbCrLf & "Version ") ' bindestreg
-        News = Replace(News, "<br />", "")
-        News = Replace(News, "<strong>", "")
-        News = Replace(News, "</strong>", "")
-        News = Replace(News, "<p>", "")
-        News = Replace(News, "</p>", "")
-
-    If Len(v) = 0 Then
+    NewVersion = s
+    p = InStr(NewVersion, vbLf)
+    If p > 0 Then
+        News = right(NewVersion, Len(NewVersion) - p)
+        NewVersion = Trim(Left(NewVersion, p - 1))
+    Else
+        p = InStr(NewVersion, vbLf)
+        If p > 0 Then
+            News = right(NewVersion, Len(NewVersion) - p)
+            NewVersion = Trim(Left(NewVersion, p - 1))
+        End If
+    End If
+   
+    If Len(NewVersion) = 0 Or Len(NewVersion) > 15 Then
         If Not RunSilent Then
             MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
             GoTo slut
         End If
     End If
-
+    
+    '        p = InStr(s, "<body")
+    '        p = InStr(p, s, "Version ")
+    '        If p <= 0 Then GoTo fejl
+    '        v = Trim(Mid(s, p + 8, 4))
+    '        p2 = InStr(p + 10, s, "Version " & AppVersion)
+    '        If p2 <= 0 Then p2 = InStr(p + 10, s, "Version")
+    '        If p2 <= 0 Then p2 = p + 50
+    '        News = Mid(s, p, p2 - p)
+    '        News = Replace(News, "&#8211;", vbCr & " -") ' bindestreg
+    '        News = Replace(News, "Version ", vbCrLf & "Version ") ' bindestreg
+    '        News = Replace(News, "<br />", "")
+    '        News = Replace(News, "<strong>", "")
+    '        News = Replace(News, "</strong>", "")
+    '        News = Replace(News, "<p>", "")
+    '        News = Replace(News, "</p>", "")
+    '    If Len(v) = 0 Then
+    '        If Not RunSilent Then
+    '            MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
+    '            GoTo slut
+    '        End If
+    '    End If
+    '    If AppVersion <> v Then
+    '        '      If UFreminder.Visible = True Then UFreminder.Top = 100
+    '        result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
+    '        If result = vbYes Then
+    '            OpenLink "https://eduap.com/da/download-wordmat/"
+    '        End If
+    '    Else
+    '        If Not RunSilent Then
+    '            MsgBox "Du har allerede den nyeste version installeret", vbOKOnly, "Ingen opdatering"
+    '        End If
+    '    End If
    
-    If AppVersion <> v Then
-        '      If UFreminder.Visible = True Then UFreminder.Top = 100
-        result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
-        If result = vbYes Then
-            OpenLink "https://eduap.com/da/download-wordmat/"
+    If IsNumeric(AppVersion) And IsNumeric(NewVersion) Then
+        If val(AppVersion) < val(NewVersion) Then UpdateNow = True
+    Else
+        If AppVersion <> NewVersion Then UpdateNow = True
+    End If
+   
+    If UpdateNow Then
+        If MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbYesNo, Sprog.A(23)) = vbYes Then
+'            FilNavn = "WordMat" & Replace(NewVersion, ".", "") & ".exe"
+'            If DownloadFile("https://github.com/Eduap-com/WordMat/releases/download/v." & NewVersion & "/", FilNavn) Then
+'            If DownloadFile("https://www.eduap.com/download/download.php?f=WordMatMacM1-127S.pkg", "WordMatMacM1-127S.pkg") Then
+'                RunApplication Environ("TEMP") & "\" & FilNavn
+'                Application.quit
+'            Else
+            If Sprog.Language = 1 Then
+                OpenLink "https://www.eduap.com/da/download-wordmat/"
+            Else
+                OpenLink "https://www.eduap.com/download-wordmat/"
+            End If
+'            End If
         End If
     Else
         If Not RunSilent Then
-            MsgBox "Du har allerede den nyeste version installeret", vbOKOnly, "Ingen opdatering"
+            MsgBox "Du har allerede den nyeste version af WordMat installeret.", vbOKOnly, "Ingen opdatering"
         End If
     End If
+   
+   
    
     GoTo slut
 fejl:
     '   MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure CheckForUpdate, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     If Not RunSilent Then
-      MsgBox "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com"
-      OpenLink "https://www.eduap.com/da/download-wordmat/"
-'        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
+        MsgBox "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com"
+        OpenLink "https://www.eduap.com/da/download-wordmat/"
+        '        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     End If
 slut:
 
+End Sub
+Sub testdl()
+DownloadFile "https://www.eduap.com/download/download.php?f=WordMatMacM1-127S.pkg", "WordMatMacM1-127S.pkg"
+End Sub
+
+Function DownloadFile(URL As String, FilNavn As String) As Boolean
+   'downloadFile("http://screinfo.eduap.com/","outlecsynkversion.txt")
+    Dim LocalFileName As String
+'    URL = "http://screinfo.eduap.com/" & FilNavn 'Here is the web address
+    LocalFileName = Environ("TEMP") & "\" & FilNavn 'here the drive and download directory
+    If URLDownloadToFile(0, URL & FilNavn, LocalFileName, 0, 0) <> 0 Then
+        DownloadFile = False
+        Exit Function
+'        MsgBox "Der opstod et problem med at downloade den nye version", vbOKOnly, "Fejl"
+    End If
+    DownloadFile = True
+End Function
+Sub RunApplication(AppPath As String)
+   ' RunApplication("C:\Your\Path\Roboapp.exe")
+   Dim varProc As Variant
+   On Error Resume Next
+   varProc = Shell(AppPath, 1)
 End Sub
 Sub CheckForUpdateSilentOld()
 ' maxproc skal være oprettet
@@ -1472,6 +1547,10 @@ End Sub
 Sub CheckForUpdateSilent()
 ' maxproc skal være oprettet
     On Error GoTo fejl
+
+   If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo slut ' ikke automatisk opdatere i maj og juni
+   If DateDiff("d", LastUpdateCheck, Date) < 14 Then GoTo slut
+
 #If Mac Then
     CheckForUpdateF True
 #Else
@@ -1482,10 +1561,10 @@ fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
 slut:
 End Sub
-Function GetHTML(Url As String) As String
+Function GetHTML(URL As String) As String
     Dim html As String
     With CreateObject("MSXML2.XMLHTTP")
-        .Open "GET", Url & "?cb=" & Timer() * 100, False  ' timer sikrer at det ikke er cached version
+        .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer sikrer at det ikke er cached version
         .Send
         GetHTML = .ResponseText
     End With
@@ -2340,11 +2419,11 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
     CustomizationContext = GemT
 End Sub
 
-Function ReadTextfileToString(Filnavn As String) As String
+Function ReadTextfileToString(FilNavn As String) As String
 #If Mac Then
    Dim filnr As Integer
    filnr = FreeFile()
-   Open Filnavn For Input As filnr   ' Open file
+   Open FilNavn For Input As filnr   ' Open file
    ReadTextfileToString = Input$(LOF(1), 1)
    Close #filnr
    
@@ -2356,7 +2435,7 @@ Function ReadTextfileToString(Filnavn As String) As String
    fsT.Type = 2 'Specify stream type - we want To save text/string data.
    fsT.Charset = "iso-8859-1" 'Specify charset For the source text data. (Alternate: utf-8)
    fsT.Open 'Open the stream
-   fsT.LoadFromFile Filnavn
+   fsT.LoadFromFile FilNavn
    ReadTextfileToString = fsT.ReadText()
    fsT.Close
    Set fsT = Nothing
@@ -2369,11 +2448,11 @@ slut:
 
 End Function
 
-Sub WriteTextfileToString(Filnavn As String, WriteText As String)
+Sub WriteTextfileToString(FilNavn As String, WriteText As String)
 #If Mac Then
    Dim filnr As Integer
    filnr = FreeFile()
-   Open Filnavn For Output As filnr   ' Open file for output.
+   Open FilNavn For Output As filnr   ' Open file for output.
    
    Print #filnr, WriteText  ' print skriver uden " "
    Close #filnr    ' Close file.
@@ -2381,9 +2460,9 @@ Sub WriteTextfileToString(Filnavn As String, WriteText As String)
    Dim fsT As Object
    'On Error GoTo fejl
 
-   If Filnavn = "" Then GoTo slut
+   If FilNavn = "" Then GoTo slut
    If WriteText = "" Then
-      If Dir(Filnavn) <> "" Then Kill Filnavn
+      If Dir(FilNavn) <> "" Then Kill FilNavn
          GoTo slut
    End If
    Set fsT = CreateObject("ADODB.Stream")
@@ -2391,7 +2470,7 @@ Sub WriteTextfileToString(Filnavn As String, WriteText As String)
    fsT.Charset = "iso-8859-1" 'Specify charset For the source text data. utf-8
    fsT.Open 'Open the stream And write binary data To the object
    fsT.WriteText WriteText
-   fsT.SaveToFile Filnavn, 2 'Save binary data To disk
+   fsT.SaveToFile FilNavn, 2 'Save binary data To disk
    fsT.Close
    Set fsT = Nothing
 #End If

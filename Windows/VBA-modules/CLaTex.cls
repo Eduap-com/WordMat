@@ -235,14 +235,14 @@ Public Function FixedLatexPreamble2() As String
    FixedLatexPreamble2 = s
 End Function
 
-Public Sub SaveTex(ByVal Mappe As String, ByVal Filnavn As String)
+Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
 Dim filnr As Integer, filren As String, s As String
 Dim fsT As Object
 'On Error GoTo fejl
 
    UFwait.Label_tip.Caption = "Gemmer Tex-fil"
 LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
-filren = Split(Filnavn, ".")(0)
+filren = Split(FilNavn, ".")(0)
 On Error Resume Next
 s = Mappe & "\" & filren & ".log"
 If Dir(s) <> "" Then Kill Mappe & "\" & filren & ".*"
@@ -251,7 +251,7 @@ If Dir(s) <> "" Then Kill Mappe & "\" & filren & ".*"
 'Kill Mappe & "\*.*"
 On Error GoTo 0
 
-WriteTextfileToString Mappe & "\" & Filnavn, LaTexDoc
+WriteTextfileToString Mappe & "\" & FilNavn, LaTexDoc
 
 'Set fsT = CreateObject("ADODB.Stream")
 'fsT.Type = 2 'Specify stream type - we want To save text/string data.
@@ -275,7 +275,7 @@ fejl:
 slut:
 
 End Sub
-Sub Savedvi(ByVal Mappe As String, ByVal Filnavn As String)
+Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
    ' skal ikke bruges. pdf er bedre. fx includegraphics skal have flere parametre med denne
    Dim shellcmd As String
    Dim appnr As Integer
@@ -296,15 +296,15 @@ Sub Savedvi(ByVal Mappe As String, ByVal Filnavn As String)
       GoTo slut
    End If
 
-   SaveTex Mappe, Filnavn & ".tex"
+   SaveTex Mappe, FilNavn & ".tex"
 
    'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
-   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & Filnavn & ".tex" '/K holder cmd åben /C lukker
+   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & FilNavn & ".tex" '/K holder cmd åben /C lukker
    ' x64 er for 64bit installtion af miktex
 
    For j = 0 To 1
       On Error Resume Next
-      If Dir(Mappe & "\" & Filnavn & ".dvi") <> "" Then Kill Mappe & "\" & Filnavn & ".dvi"
+      If Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Then Kill Mappe & "\" & FilNavn & ".dvi"
       'Kill Mappe & "\" & filnavn & ".dvi"
       On Error GoTo fejl
 
@@ -315,15 +315,15 @@ Sub Savedvi(ByVal Mappe As String, ByVal Filnavn As String)
       Do
          i = i + 1
          Wait (0.1)
-      Loop Until Dir(Mappe & "\" & Filnavn & ".dvi") <> "" Or i > 80
+      Loop Until Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Or i > 80
    Next
 
    Wait 1
-   If Dir(Mappe & "\" & Filnavn & ".dvi") > "" Then
-      RunDefaultProgram Mappe & "\" & Filnavn & ".dvi", Mappe
+   If Dir(Mappe & "\" & FilNavn & ".dvi") > "" Then
+      RunDefaultProgram Mappe & "\" & FilNavn & ".dvi", Mappe
    Else
       MsgBox "Could not create dvi-file. The tex-file is now opening so you can identify the error", vbOKOnly, Sprog.Error
-      RunDefaultProgram Filnavn & ".tex", Mappe
+      RunDefaultProgram FilNavn & ".tex", Mappe
    End If
 
    'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
@@ -334,7 +334,7 @@ slut:
 #End If
 End Sub
 
-Sub SavePdf(ByVal Mappe As String, ByVal Filnavn As String)
+Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    ' filnavn uden extension
    Dim shellcmd As String
    Dim appnr As Integer, p As Long, p2 As Long, ErrorS As String
@@ -364,17 +364,17 @@ Sub SavePdf(ByVal Mappe As String, ByVal Filnavn As String)
       GoTo slut
    End If
 
-   SaveTex Mappe, Filnavn & ".tex"
+   SaveTex Mappe, FilNavn & ".tex"
    
    'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
-   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & Filnavn & ".tex" '/K holder cmd åben /C lukker
+   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & FilNavn & ".tex" '/K holder cmd åben /C lukker
    Do
       UFwait.Label_progress.Caption = UFwait.Label_progress.Caption & "**"
       UFwait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
       ReRun = False
       On Error Resume Next
-      If Dir(Mappe & "\" & Filnavn & ".pdf") <> "" Then Kill Mappe & "\" & Filnavn & ".pdf"
-      If Dir(Mappe & "\" & Filnavn & ".log") <> "" Then Kill Mappe & "\" & Filnavn & ".log"
+      If Dir(Mappe & "\" & FilNavn & ".pdf") <> "" Then Kill Mappe & "\" & FilNavn & ".pdf"
+      If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
       On Error GoTo 0 'Fejl
 
       Shell shellcmd, vbNormal
@@ -384,9 +384,9 @@ Sub SavePdf(ByVal Mappe As String, ByVal Filnavn As String)
       Do
          i = i + 1
          Wait (0.1)
-      Loop Until Dir(Mappe & "\" & Filnavn & ".log") > "" Or i > 80
+      Loop Until Dir(Mappe & "\" & FilNavn & ".log") > "" Or i > 80
       Wait 1
-      Log = ReadTextFile(Mappe & "\" & Filnavn & ".log")
+      Log = ReadTextFile(Mappe & "\" & FilNavn & ".log")
       If InStr(Log, "Rerun to get cross-references right") > 0 Then ReRun = True
       ErrorS = ""
       p2 = 1
@@ -402,17 +402,17 @@ Sub SavePdf(ByVal Mappe As String, ByVal Filnavn As String)
    Loop While ReRun And j < 6
    
    If ErrorS <> "" Then
-      If MsgBox("The tex-document failed to compile with the following error:" & vbCrLf & vbCrLf & ErrorS & vbCrLf & vbCrLf & "Click OK to open the tex-file", vbOKCancel, Sprog.Error) = vbOK Then RunDefaultProgram Filnavn & ".tex", Mappe
+      If MsgBox("The tex-document failed to compile with the following error:" & vbCrLf & vbCrLf & ErrorS & vbCrLf & vbCrLf & "Click OK to open the tex-file", vbOKCancel, Sprog.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
    Else
       Wait 1
-      If Dir(Mappe & "\" & Filnavn & ".pdf") > "" Then
-         RunDefaultProgram Filnavn & ".pdf", Mappe
+      If Dir(Mappe & "\" & FilNavn & ".pdf") > "" Then
+         RunDefaultProgram FilNavn & ".pdf", Mappe
       Else
-         If MsgBox("Could not locate the pdf-file. Click OK to open the tex-file so you can identify the error", vbOKOnly, Sprog.Error) = vbOK Then RunDefaultProgram Filnavn & ".tex", Mappe
+         If MsgBox("Could not locate the pdf-file. Click OK to open the tex-file so you can identify the error", vbOKOnly, Sprog.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
       End If
-      If Dir(Mappe & "\" & Filnavn & ".log") <> "" Then Kill Mappe & "\" & Filnavn & ".log"
-      If Dir(Mappe & "\" & Filnavn & ".aux") <> "" Then Kill Mappe & "\" & Filnavn & ".aux"
-      If Dir(Mappe & "\" & Filnavn & ".aux") <> "" Then Kill Mappe & "\" & Filnavn & ".toc"
+      If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
+      If Dir(Mappe & "\" & FilNavn & ".aux") <> "" Then Kill Mappe & "\" & FilNavn & ".aux"
+      If Dir(Mappe & "\" & FilNavn & ".aux") <> "" Then Kill Mappe & "\" & FilNavn & ".toc"
       
    End If
 #End If

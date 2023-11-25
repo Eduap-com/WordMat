@@ -28,7 +28,7 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     If Not SettingsRead Then ReadAllSettingsFromRegistry
 
     If omax Is Nothing Then
-        LavRCMenu    ' højreklikmenu på ligninger
+'        LavRCMenu    ' højreklikmenu på ligninger
         SetMathAutoCorrect
         If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
         UfWait2.Show vbModeless
@@ -161,7 +161,7 @@ Public Sub PrepareMaximaNoSplash()
     On Error GoTo slut
     If Not SettingsRead Then ReadAllSettingsFromRegistry
     If omax Is Nothing Then
-        LavRCMenu    ' højreklikmenu på ligninger
+'        LavRCMenu    ' højreklikmenu på ligninger
         Set omax = New CMaxima
         If MaxProc Is Nothing Then
             '        Set MaxProc = New MathMenu.MaximaProcessClass

@@ -237,10 +237,10 @@ fejl:
 slut:
 
 End Sub
-Function OpenExcelWB(Filnavn As String, Optional startark As String, Optional WorkBookName As String) As Object
+Function OpenExcelWB(FilNavn As String, Optional startark As String, Optional WorkBookName As String) As Object
 On Error Resume Next
 #If Mac Then
-    OpenExcelMac Filnavn & ";" & startark
+    OpenExcelMac FilNavn & ";" & startark
 #Else
 'Dim xclapp As Excel.Application
 Dim xclapp As Object 'Excel.Application
@@ -250,7 +250,7 @@ If Err.Number <> 0 Then
 End If
 Dim wordmatsti As String
 xclapp.visible = True
-wordmatsti = GetProgramFilesDir & "\WordMat\Excelfiles\" & Filnavn
+wordmatsti = GetProgramFilesDir & "\WordMat\Excelfiles\" & FilNavn
 If Dir(wordmatsti) <> "" Then
     Set OpenExcelWB = xclapp.Workbooks.Add(wordmatsti)
     If WorkBookName <> "" Then
@@ -276,25 +276,25 @@ Function GetExcelSti() As String
         GetExcelSti = ""
     End If
 End Function
-Function InsertOpenExcel(Filnavn As String, Optional startark As String = "", Optional WorkBookName As String) As Object
+Function InsertOpenExcel(FilNavn As String, Optional startark As String = "", Optional WorkBookName As String) As Object
 ' indsætter indlejret eller åbner afhængig af indstilling
 On Error GoTo fejl
     If ExcelIndlejret Then
-        Set InsertOpenExcel = InsertIndlejret(Filnavn, startark)
+        Set InsertOpenExcel = InsertIndlejret(FilNavn, startark)
     Else
-        Set InsertOpenExcel = OpenExcelWB(Filnavn, startark, WorkBookName)
+        Set InsertOpenExcel = OpenExcelWB(FilNavn, startark, WorkBookName)
     End If
 
 fejl:
 End Function
 Sub Chi2Graf()
-    InsertOpenExcel Filnavn:="Chi2Fordeling.xltm", WorkBookName:=Sprog.A(483)
+    InsertOpenExcel FilNavn:="Chi2Fordeling.xltm", WorkBookName:=Sprog.A(483)
 End Sub
 Sub NormalFordelingGraf()
-    InsertOpenExcel Filnavn:="NormalFordeling.xltm", WorkBookName:=Sprog.A(482)
+    InsertOpenExcel FilNavn:="NormalFordeling.xltm", WorkBookName:=Sprog.A(482)
 End Sub
 Sub BinomialFordeling()
-    InsertOpenExcel Filnavn:="BinomialFordeling.xltm", WorkBookName:=Sprog.A(585)
+    InsertOpenExcel FilNavn:="BinomialFordeling.xltm", WorkBookName:=Sprog.A(585)
 End Sub
 Sub GoodnessofFit()
 '    InsertOpenExcel "GoodnessofFit.xltm"

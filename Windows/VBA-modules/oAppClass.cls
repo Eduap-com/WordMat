@@ -32,7 +32,7 @@ cxl.CloseExcel
 '           d.Close (False)
 '       End If
 '    Next
-    SletRCMenu
+'    SletRCMenu
 End If
 End Sub
 

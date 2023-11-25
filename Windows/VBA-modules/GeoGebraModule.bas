@@ -1014,9 +1014,9 @@ End Sub
 
  
 
-Sub CreateZipFile(zipfilnavn As Variant, Filnavn As Variant, Optional filnavn2 As Variant = "", Optional filnavn3 As Variant = "", Optional filnavn4 As Variant = "")
+Sub CreateZipFile(zipfilnavn As Variant, FilNavn As Variant, Optional filnavn2 As Variant = "", Optional filnavn3 As Variant = "", Optional filnavn4 As Variant = "")
 #If Mac Then
-    RunScript "ZipFile", zipfilnavn & ";" & Filnavn
+    RunScript "ZipFile", zipfilnavn & ";" & FilNavn
 #Else
 '
 ' s. http://www.rondebruin.nl/windowsxpzip.htm
@@ -1036,7 +1036,7 @@ Sub CreateZipFile(zipfilnavn As Variant, Filnavn As Variant, Optional filnavn2 A
     Set objFolder = oApp.Namespace(zipfilnavn)
     
     i = 1
-    objFolder.CopyHere Filnavn
+    objFolder.CopyHere FilNavn
     If filnavn2 <> "" Then
         objFolder.CopyHere filnavn2
         i = i + 1
