@@ -35,6 +35,10 @@ Private Sub CommandButton_webstart_Click()
     Me.Hide
 End Sub
 
+Private Sub Label2_Click()
+
+End Sub
+
 Private Sub UserForm_Activate()
     Label1.Caption = Sprog.A(292)
     Label2.Caption = Sprog.A(293)

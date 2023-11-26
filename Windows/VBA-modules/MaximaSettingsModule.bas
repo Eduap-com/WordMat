@@ -134,7 +134,7 @@ On Error Resume Next
 '    If MsgBox("Indstillingerne kan ikke findes. Vil du genoprette og nulstille alle indstillinger?", vbOKCancel, Sprog.Error) Then
     MaximaForklaring = True
     MaximaKommando = False
-    MaximaExact = 0
+    MaximaExact = 2 ' numerisk
     Radians = False
     MaximaCifre = 7
     MaximaSeparator = False

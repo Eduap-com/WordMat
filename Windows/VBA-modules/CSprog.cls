@@ -1767,16 +1767,16 @@ SA(291, 0) = "Månens middelradius"
 SA(291, 1) = "Moon mean radius"
 SA(291, 2) = ""
 
-SA(292, 0) = "GeoGebra er ikke installeret. Vil du installere GeoGebra eller vil du køre GeoGebra i en browser?"
-SA(292, 1) = "GeoGebra is not installed. Do you want to install GeoGebra or run GeoGebra from a Browser?"
+SA(292, 0) = "GeoGebra er ikke installeret." & vbCrLf & " Vil du installere GeoGebra eller vil du køre GeoGebra i en browser?"
+SA(292, 1) = "GeoGebra is not installed." & vbCrLf & " Do you want to install GeoGebra or run GeoGebra from a Browser?"
 SA(292, 2) = ""
 
-SA(293, 0) = "Bedste måde at få GeoGebra til at virke sammen med WordMat på. Husk dog selv at se efter opdateringer."
-SA(293, 1) = "Best way to use GeoGebra but requires an installation."
+SA(293, 0) = "Nogle foretrækker at arbejde i GeoGebra 5 programmet, men det er langsommere om at starte op end browserversionen"
+SA(293, 1) = "GeoGebra 5 is familiar to many, but is a bit slow to start."
 SA(293, 2) = ""
 
-SA(294, 0) = "Udmærket midlertidig løsning. Giver altid nyeste version. "
-SA(294, 1) = "Good temporary solution"
+SA(294, 0) = "Browser-versionen kører off-line. Alt er installeret med WordMat."
+SA(294, 1) = "The browser-version is running off-line. everything is installed with WordMat."
 SA(294, 2) = ""
 
 SA(295, 0) = "Installer GeoGebra"
