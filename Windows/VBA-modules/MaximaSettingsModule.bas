@@ -149,7 +149,7 @@ On Error Resume Next
     OutUnits = ""
     AutoStart = False
     Antalberegninger = 0
-    SettCheckForUpdate = False
+    SettCheckForUpdate = True
     MaximaIndex = False
     PolarOutput = False
 #If Mac Then
