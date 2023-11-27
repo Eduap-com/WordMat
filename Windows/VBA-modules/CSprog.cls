@@ -1771,12 +1771,12 @@ SA(292, 0) = "GeoGebra er ikke installeret." & vbCrLf & " Vil du installere GeoG
 SA(292, 1) = "GeoGebra is not installed." & vbCrLf & " Do you want to install GeoGebra or run GeoGebra from a Browser?"
 SA(292, 2) = ""
 
-SA(293, 0) = "Nogle foretrækker at arbejde i GeoGebra 5 programmet, men det er langsommere om at starte op end browserversionen"
-SA(293, 1) = "GeoGebra 5 is familiar to many, but is a bit slow to start."
+SA(293, 0) = "Knappen sender dig til hjemmesiden. WordMat understøtter 'GeoGebra classic 5' og 'GeoGebra Classic 6'"
+SA(293, 1) = "The buuton will send you to the download page. WordMat supports 'GeoGebra classic 5' and 'GeoGebra Classic 6'"
 SA(293, 2) = ""
 
 SA(294, 0) = "Browser-versionen kører off-line. Alt er installeret med WordMat."
-SA(294, 1) = "The browser-version is running off-line. everything is installed with WordMat."
+SA(294, 1) = "The browser-version runs off-line. everything is installed with WordMat."
 SA(294, 2) = ""
 
 SA(295, 0) = "Installer GeoGebra"

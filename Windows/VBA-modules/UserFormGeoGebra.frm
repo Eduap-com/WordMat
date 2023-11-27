@@ -35,7 +35,8 @@ Private Sub CommandButton_webstart_Click()
     Me.Hide
 End Sub
 
-Private Sub Label2_Click()
+
+Private Sub Label1_Click()
 
 End Sub
 

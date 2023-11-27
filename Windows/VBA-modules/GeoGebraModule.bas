@@ -771,33 +771,34 @@ Sub InstallGeoGebra()
 #Else ' win
 
     If UserFormGeoGebra.ReturnVal = 1 Then
-        Set UfWait = New UserFormWaitForMaxima
-        UfWait.Label_tip.Font.Size = 10
-        UfWait.Label_tip.Font.Italic = False
-        UfWait.Show vbModeless
-        UfWait.Label_tip.Caption = "Downloader GeoGebra 5"
-        UfWait.Label_progress.Caption = "*"
-        '    DownloadFile "https://download.geogebra.org/package/win"
-        OpenLink "https://download.geogebra.org/package/win" ' åbning af dette link starter automatisk download af den rigtige fil
-    
-        DDir = GetDownloadsFolder
-        Do While i < 12
-            Sleep2 1
-            FN = Dir(DDir & "\GeoGebra-Windows-Installer-5*.exe")
-            If FN <> "" Then Exit Do
-            UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-            i = i + 1
-        Loop
-        UfWait.Hide
-        If i < 12 Then
-            If Not RunApplication(DDir & "\" & FN) Then
-                MsgBox "The GeoGebra installation file is now in the downloadsfolder. Go run it", vbOKOnly, "Run installer"
-                shell "explorer.exe " & DDir, vbNormalFocus
-            End If
-        Else ' hvis der ikke er blevet hentet en fil, må brugeren selv hente
-            MsgBox "The download page will now be shown. Download and install the 'GeoGebra Classic 5' version", vbOKOnly, "Download page"
+' dette virker til at downloade installationsfilen, men efter understøttelse af både 5 og 6. Faldt valget på at brugeren selv tilgår download-siden.
+'        Set UfWait = New UserFormWaitForMaxima
+'        UfWait.Label_tip.Font.Size = 10
+'        UfWait.Label_tip.Font.Italic = False
+'        UfWait.Show vbModeless
+'        UfWait.Label_tip.Caption = "Downloader GeoGebra 5"
+'        UfWait.Label_progress.Caption = "*"
+'        '    DownloadFile "https://download.geogebra.org/package/win"
+'        OpenLink "https://download.geogebra.org/package/win" ' åbning af dette link starter automatisk download af den rigtige fil
+'
+'        DDir = GetDownloadsFolder
+'        Do While i < 12
+'            Sleep2 1
+'            FN = Dir(DDir & "\GeoGebra-Windows-Installer-5*.exe")
+'            If FN <> "" Then Exit Do
+'            UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
+'            i = i + 1
+'        Loop
+'        UfWait.Hide
+'        If i < 12 Then
+'            If Not RunApplication(DDir & "\" & FN) Then
+'                MsgBox "The GeoGebra installation file is now in the downloadsfolder. Go run it", vbOKOnly, "Run installer"
+'                shell "explorer.exe " & DDir, vbNormalFocus
+'            End If
+'        Else ' hvis der ikke er blevet hentet en fil, må brugeren selv hente
+'            MsgBox "The download page will now be shown. Download and install the 'GeoGebra Classic 5' version", vbOKOnly, "Download page"
             OpenLink "https://www.geogebra.org/download"
-        End If
+'        End If
     Else
         GeoGebraWeb
     End If
@@ -811,6 +812,7 @@ slut:
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found
+Dim DN As String
 On Error GoTo fejl
 #If Mac Then
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
@@ -824,14 +826,21 @@ On Error GoTo fejl
     GeoGebraPath = ""
 #Else
     
-'    GeoGebraPath = GetProgramFilesDir & "\GeoGebra 4.2\GeoGebra.exe"
 '    GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 5.*", vbDirectory)
     GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 5*", vbDirectory)
+    If GeoGebraPath <> "" Then
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> "" ' vi henter den GeoGebra 5 med højdt versions nr. Den vil være sidst på listen
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = """" & DN & """"
+        End If
+    End If
+    
     If GeoGebraPath = "" Then
         GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 6*", vbDirectory)
-    End If
-    If GeoGebraPath = "" Then
-        GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 4.*", vbDirectory)
     End If
     If GeoGebraPath = "" Then
         GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra Classic*", vbDirectory)
@@ -839,14 +848,52 @@ On Error GoTo fejl
     If GeoGebraPath = "" Then
         GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra*", vbDirectory)
     End If
-'    If GeoGebraPath = "" Then
-'        GeoGebraPath = GetProgramFilesDir & "\WordMat\GeoGebra\GeoGebra.exe"
-'    Else
-    
     If Not GeoGebraPath = "" Then
         GeoGebraPath = GetProgramFilesDir & "\" & GeoGebraPath & "\GeoGebra.exe"
         GeoGebraPath = """" & GeoGebraPath & """"
+        GoTo slut
     End If
+    
+    If GeoGebraPath = "" Then
+        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_6\app-6*", vbDirectory)
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> ""
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_6\" & DN & "\GeoGebra.exe"
+            GeoGebraPath = """" & GeoGebraPath & """"
+            GoTo slut
+        End If
+    End If
+    
+    If GeoGebraPath = "" Then
+        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\app-*", vbDirectory)
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> ""
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\" & DN & "\GeoGebraCalculator.exe"
+            GeoGebraPath = """" & GeoGebraPath & """"
+        End If
+    End If
+    
+    If GeoGebraPath = "" Then
+        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Graphing\app-*", vbDirectory)
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> ""
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Graphing\" & DN & "\GeoGebraGraphing.exe"
+            GeoGebraPath = """" & GeoGebraPath & """"
+        End If
+    End If
+    
 #End If
     GoTo slut
 fejl:
