@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Bessel Functions (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Bessel Functions (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Bessel Functions (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_77.html" rel="up" title="Special Functions">
+<link href="maxima_80.html" rel="next" title="Airy Functions">
+<link href="maxima_78.html" rel="prev" title="Introduction to Special Functions">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Bessel-Functions">
+<div class="header">
+<p>
+Next: <a href="maxima_80.html" accesskey="n" rel="next">Airy Functions</a>, Previous: <a href="maxima_78.html" accesskey="p" rel="prev">Introduction to Special Functions</a>, Up: <a href="maxima_77.html" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Bessel-Functions-1"></span><h3 class="section">15.2 Bessel Functions</h3>
+
+<span id="bessel_005fj"></span><span id="Item_003a-Special_002fdeffn_002fbessel_005fj"></span><dl class="def">
+<dt id="index-bessel_005fj"><span class="category">Function: </span><span><strong>bessel_j</strong> <em>(<var>v</var>, <var>z</var>)</em><a href='#index-bessel_005fj' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The Bessel function of the first kind of order <em class='math'>v</em> and argument <em class='math'>z</em>.
+</p>
+<p><code>bessel_j</code> is defined as
+</p>
+<div class="example">
+<pre class="example">                inf
+                ====       k  - v - 2 k  v + 2 k
+                \     (- 1)  2          z
+                 &gt;    --------------------------
+                /        k! gamma(v + k + 1)
+                ====
+                k = 0
+</pre></div>
+
+
+<p>although the infinite series is not used for computations.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="bessel_005fy"></span><span id="Item_003a-Special_002fdeffn_002fbessel_005fy"></span><dl class="def">
+<dt id="index-bessel_005fy"><span class="category">Function: </span><span><strong>bessel_y</strong> <em>(<var>v</var>, <var>z</var>)</em><a href='#index-bessel_005fy' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The Bessel function of the second kind of order <em class='math'>v</em> and argument <em class='math'>z</em>.
+</p>
+<p><code>bessel_y</code> is defined as
+</p><div class="example">
+<pre class="example">              cos(%pi v) bessel_j(v, z) - bessel_j(-v, z)
+              -------------------------------------------
+                             sin(%pi v)
+</pre></div>
+
+
+<p>when <em class='math'>v</em> is not an integer.  When <em class='math'>v</em> is an integer <em class='math'>n</em>,
+the limit as <em class='math'>v</em> approaches <em class='math'>n</em> is taken.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="bessel_005fi"></span><span id="Item_003a-Special_002fdeffn_002fbessel_005fi"></span><dl class="def">
+<dt id="index-bessel_005fi"><span class="category">Function: </span><span><strong>bessel_i</strong> <em>(<var>v</var>, <var>z</var>)</em><a href='#index-bessel_005fi' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The modified Bessel function of the first kind of order <em class='math'>v</em> and argument
+<em class='math'>z</em>.
+</p>
+<p><code>bessel_i</code> is defined as
+</p><div class="example">
+<pre class="example">                    inf
+                    ====   - v - 2 k  v + 2 k
+                    \     2          z
+                     &gt;    -------------------
+                    /     k! gamma(v + k + 1)
+                    ====
+                    k = 0
+</pre></div>
+
+
+<p>although the infinite series is not used for computations.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="bessel_005fk"></span><span id="Item_003a-Special_002fdeffn_002fbessel_005fk"></span><dl class="def">
+<dt id="index-bessel_005fk"><span class="category">Function: </span><span><strong>bessel_k</strong> <em>(<var>v</var>, <var>z</var>)</em><a href='#index-bessel_005fk' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The modified Bessel function of the second kind of order <em class='math'>v</em> and argument
+<em class='math'>z</em>.
+</p>
+<p><code>bessel_k</code> is defined as
+</p><div class="example">
+<pre class="example">           %pi csc(%pi v) (bessel_i(-v, z) - bessel_i(v, z))
+           -------------------------------------------------
+                                  2
+</pre></div>
+
+<p>when <em class='math'>v</em> is not an integer.  If <em class='math'>v</em> is an integer <em class='math'>n</em>,
+then the limit as <em class='math'>v</em> approaches <em class='math'>n</em> is taken.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="hankel_005f1"></span><span id="Item_003a-Special_002fdeffn_002fhankel_005f1"></span><dl class="def">
+<dt id="index-hankel_005f1"><span class="category">Function: </span><span><strong>hankel_1</strong> <em>(<var>v</var>, <var>z</var>)</em><a href='#index-hankel_005f1' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The Hankel function of the first kind of order <em class='math'>v</em> and argument <em class='math'>z</em>
+(A&amp;S 9.1.3). <code>hankel_1</code> is defined as
+</p>
+<div class="example">
+<pre class="example">   bessel_j(v,z) + %i * bessel_y(v,z)
+</pre></div>
+
+<p>Maxima evaluates <code>hankel_1</code> numerically for a complex order <em class='math'>v</em> and 
+complex argument <em class='math'>z</em> in float precision. The numerical evaluation in 
+bigfloat precision is not supported.
+</p>
+<p>When <code>besselexpand</code> is <code>true</code>, <code>hankel_1</code> is expanded in terms
+of elementary functions when the order <em class='math'>v</em> is half of an odd integer. 
+See <code>besselexpand</code>.
+</p>
+<p>Maxima knows the derivative of <code>hankel_1</code> wrt the argument <em class='math'>z</em>.
+</p>
+<p>Examples:
+</p>
+<p>Numerical evaluation:
+</p>
+<div class="example">
+<pre class="example">(%i1) hankel_1(1,0.5);
+(%o1)        0.24226845767487 - 1.471472392670243 %i
+</pre><pre class="example">(%i2) hankel_1(1,0.5+%i);
+(%o2)       - 0.25582879948621 %i - 0.23957560188301
+</pre></div>
+
+<p>Expansion of <code>hankel_1</code> when <code>besselexpand</code> is <code>true</code>:
+</p>
+<div class="example">
+<pre class="example">(%i1) hankel_1(1/2,z),besselexpand:true;
+               sqrt(2) sin(z) - sqrt(2) %i cos(z)
+(%o1)          ----------------------------------
+                       sqrt(%pi) sqrt(z)
+</pre></div>
+
+<p>Derivative of <code>hankel_1</code> wrt the argument <em class='math'>z</em>. The derivative wrt the 
+order <em class='math'>v</em> is not supported. Maxima returns a noun form:
+</p>
+<div class="example">
+<pre class="example">(%i1) diff(hankel_1(v,z),z);
+             hankel_1(v - 1, z) - hankel_1(v + 1, z)
+(%o1)        ---------------------------------------
+                                2
+</pre><pre class="example">(%i2) diff(hankel_1(v,z),v);
+                       d
+(%o2)                  -- (hankel_1(v, z))
+                       dv
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="hankel_005f2"></span><span id="Item_003a-Special_002fdeffn_002fhankel_005f2"></span><dl class="def">
+<dt id="index-hankel_005f2"><span class="category">Function: </span><span><strong>hankel_2</strong> <em>(<var>v</var>, <var>z</var>)</em><a href='#index-hankel_005f2' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The Hankel function of the second kind of order <em class='math'>v</em> and argument <em class='math'>z</em>
+(A&amp;S 9.1.4). <code>hankel_2</code> is defined as
+</p>
+<div class="example">
+<pre class="example">   bessel_j(v,z) - %i * bessel_y(v,z)
+</pre></div>
+
+<p>Maxima evaluates <code>hankel_2</code> numerically for a complex order <em class='math'>v</em> and 
+complex argument <em class='math'>z</em> in float precision. The numerical evaluation in 
+bigfloat precision is not supported.
+</p>
+<p>When <code>besselexpand</code> is <code>true</code>, <code>hankel_2</code> is expanded in terms
+of elementary functions when the order <em class='math'>v</em> is half of an odd integer. 
+See <code>besselexpand</code>.
+</p>
+<p>Maxima knows the derivative of <code>hankel_2</code> wrt the argument <em class='math'>z</em>.
+</p>
+<p>For examples see <code>hankel_1</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="besselexpand"></span><span id="Item_003a-Special_002fdefvr_002fbesselexpand"></span><dl class="def">
+<dt id="index-besselexpand"><span class="category">Option variable: </span><span><strong>besselexpand</strong><a href='#index-besselexpand' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>Controls expansion of the Bessel functions when the order is half of
+an odd integer.  In this case, the Bessel functions can be expanded
+in terms of other elementary functions.  When <code>besselexpand</code> is <code>true</code>,
+the Bessel function is expanded.
+</p>
+<div class="example">
+<pre class="example">(%i1) besselexpand: false$
+(%i2) bessel_j (3/2, z);
+                                    3
+(%o2)                      bessel_j(-, z)
+                                    2
+(%i3) besselexpand: true$
+(%i4) bessel_j (3/2, z);
+                                        sin(z)   cos(z)
+                       sqrt(2) sqrt(z) (------ - ------)
+                                           2       z
+                                          z
+(%o4)                  ---------------------------------
+                                   sqrt(%pi)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Simplification-flags-and-variables">Simplification flags and variables</a> 
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="scaled_005fbessel_005fi"></span><span id="Item_003a-Special_002fdeffn_002fscaled_005fbessel_005fi"></span><dl class="def">
+<dt id="index-scaled_005fbessel_005fi"><span class="category">Function: </span><span><strong>scaled_bessel_i</strong> <em>(<var>v</var>, <var>z</var>)</em><a href='#index-scaled_005fbessel_005fi' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The scaled modified Bessel function of the first kind of order
+<em class='math'>v</em> and argument <em class='math'>z</em>.  That is, <em class='math'>scaled\_bessel_i(v,z) =
+exp(-abs(z))*bessel_i(v, z)</em>.  This function is particularly useful
+for calculating <em class='math'>bessel_i</em> for large <em class='math'>z</em>, which is large.
+However, maxima does not otherwise know much about this function.  For
+symbolic work, it is probably preferable to work with the expression
+<code>exp(-abs(z))*bessel_i(v, z)</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+</div>
+</p></dd></dl>
+
+<span id="scaled_005fbessel_005fi0"></span><span id="Item_003a-Special_002fdeffn_002fscaled_005fbessel_005fi0"></span><dl class="def">
+<dt id="index-scaled_005fbessel_005fi0"><span class="category">Function: </span><span><strong>scaled_bessel_i0</strong> <em>(<var>z</var>)</em><a href='#index-scaled_005fbessel_005fi0' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Identical to <code>scaled_bessel_i(0,z)</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="scaled_005fbessel_005fi1"></span><span id="Item_003a-Special_002fdeffn_002fscaled_005fbessel_005fi1"></span><dl class="def">
+<dt id="index-scaled_005fbessel_005fi1"><span class="category">Function: </span><span><strong>scaled_bessel_i1</strong> <em>(<var>z</var>)</em><a href='#index-scaled_005fbessel_005fi1' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Identical to <code>scaled_bessel_i(1,z)</code>.
+<div class=categorybox>
+
+<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Special_002fdeffn_002f_0025s"></span><dl class="def">
+<dt id="index-_0025s"><span class="category">Function: </span><span><strong>%s</strong> <em>[<var>u</var>,<var>v</var>] (<var>z</var>)</em><a href='#index-_0025s' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Lommel&rsquo;s little s[u,v](z) function.  
+Probably Gradshteyn &amp; Ryzhik 8.570.1.
+<div class=categorybox>
+
+<a href="maxima_369.html#Category_003a-Bessel-functions">Bessel functions</a>
+
+<a href="maxima_369.html#Category_003a-Special-functions">Special functions</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Special_002fnode_002fAiry-Functions"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_80.html" accesskey="n" rel="next">Airy Functions</a>, Previous: <a href="maxima_78.html" accesskey="p" rel="prev">Introduction to Special Functions</a>, Up: <a href="maxima_77.html" accesskey="u" rel="up">Special Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Introduction to Polynomials (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Introduction to Polynomials (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Introduction to Polynomials (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_76.html" rel="next" title="Functions and Variables for Polynomials">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Introduction-to-Polynomials">
+<div class="header">
+<p>
+Next: <a href="maxima_76.html" accesskey="n" rel="next">Functions and Variables for Polynomials</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Introduction-to-Polynomials-1"></span><h3 class="section">14.1 Introduction to Polynomials</h3>
+
+<p>Polynomials are stored in Maxima either in General Form or as Canonical
+Rational Expressions (CRE) form. The latter is a standard form, and is
+used internally by operations such as <code><a href="maxima_76.html#factor">factor</a></code>, <code><a href="maxima_76.html#ratsimp">ratsimp</a></code>, and
+so on.
+</p>
+<p>Canonical Rational Expressions constitute a kind of representation
+which is especially suitable for expanded polynomials and rational
+functions (as well as for partially factored polynomials and rational
+functions when <code><a href="maxima_76.html#ratfac">ratfac</a></code> is set to <code>true</code>). In this CRE form an
+ordering of variables (from most to least main) is assumed for each
+expression.
+</p>
+<p>Polynomials are represented recursively by a list consisting of the main
+variable followed by a series of pairs of expressions, one for each term
+of the polynomial. The first member of each pair is the exponent of the
+main variable in that term and the second member is the coefficient of
+that term which could be a number or a polynomial in another variable
+again represented in this form. Thus the principal part of the CRE form
+of <code>3*x^2-1</code> is <code>(X 2 3 0 -1)</code> and that of <code>2*x*y+x-3</code>
+is <code>(Y 1 (X 1 2) 0 (X 1 1 0 -3))</code> assuming <code>y</code> is the main
+variable, and is <code>(X 1 (Y 1 2 0 1) 0 -3)</code> assuming <code>x</code> is the
+main variable. &quot;Main&quot;-ness is usually determined by reverse alphabetical
+order.
+</p>
+<p>The &quot;variables&quot; of a CRE expression needn&rsquo;t be atomic. In fact any
+subexpression whose main operator is not <code>+</code>, <code>-</code>, <code>*</code>,
+<code>/</code> or <code>^</code> with integer power will be considered a &quot;variable&quot;
+of the expression (in CRE form) in which it occurs. For example the CRE
+variables of the expression <code>x+sin(x+1)+2*sqrt(x)+1</code> are <code>x</code>,
+<code>sqrt(X)</code>, and <code>sin(x+1)</code>. If the user does not specify an
+ordering of variables by using the <code><a href="maxima_76.html#ratvars">ratvars</a></code> function Maxima will
+choose an alphabetic one.
+</p>
+<p>In general, CRE&rsquo;s represent rational expressions, that is, ratios of
+polynomials, where the numerator and denominator have no common factors,
+and the denominator is positive. The internal form is essentially a pair
+of polynomials (the numerator and denominator) preceded by the variable
+ordering list. If an expression to be displayed is in CRE form or if it
+contains any subexpressions in CRE form, the symbol <code>/R/</code> will follow the
+line label.
+</p>
+
+<p>See the <code><a href="maxima_76.html#rat">rat</a></code> function for converting an expression to CRE form.
+</p>
+<p>An extended CRE form is used for the representation of Taylor
+series. The notion of a rational expression is extended so that the
+exponents of the variables can be positive or negative rational numbers
+rather than just positive integers and the coefficients can themselves
+be rational expressions as described above rather than just polynomials.
+These are represented internally by a recursive polynomial form which is
+similar to and is a generalization of CRE form, but carries additional
+information such as the degree of truncation. As with CRE form, the
+symbol <code>/T/</code> follows the line label of such expressions.
+</p>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Polynomials">Polynomials</a>
+
+<a href="maxima_369.html#Category_003a-Rational-expressions">Rational expressions</a>
+</div>
+</p>
+
+<span id="Item_003a-Polynomials_002fnode_002fFunctions-and-Variables-for-Polynomials"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_76.html" accesskey="n" rel="next">Functions and Variables for Polynomials</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
