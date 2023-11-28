@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Public raekker As Integer
 Public kolonner As Integer
 Private Sub CommandButton_ok_Click()
@@ -25,7 +26,7 @@ End Sub
 
 Private Sub Labeladd_Click()
 AddNewRow
-Labeladd.top = 34 + 12 * raekker
+Labeladd.Top = 34 + 12 * raekker
 MsgBox PunktText
 End Sub
 
@@ -53,7 +54,7 @@ Dim tb As MSForms.TextBox
 Set tb = Me.Controls.Add("Forms.textbox.1")
         With tb
             .Name = n
-            .top = t
+            .Top = t
             .Left = l
             .Width = 24
             .Height = 12
@@ -72,7 +73,7 @@ Set la = Me.Controls.Add("Forms.label.1")
         With la
             .Name = ""
             .Caption = n
-            .top = t
+            .Top = t
             .Left = l
             .Width = 8
             .Height = 12

@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Private gemx As Single
 Private gemy As Single
@@ -168,9 +169,9 @@ On Error Resume Next
     If Opened Then Exit Sub
     Opened = True
     Me.Left = 10
-    Me.top = 80
+    Me.Top = 80
     Label_wait.Left = 180
-    Label_wait.top = 270
+    Label_wait.Top = 270
     Label_zoom.visible = False
     Kill GetTempDir() & "WordMatGraf.pdf"
 #Else
@@ -2013,7 +2014,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         End If
     Else
     Label_zoom.Left = gemx + Image1.Left
-    Label_zoom.top = gemy + Image1.top
+    Label_zoom.Top = gemy + Image1.Top
     Label_zoom.Width = 1
     Label_zoom.Height = 1
     Label_zoom.visible = True
@@ -2026,7 +2027,7 @@ On Error Resume Next
 'hDC, 0, 0, ScaleWidth, ScaleHeight, 0, p.Height, p.Width, -p.Height, ByVal 0
     If Label_zoom.visible Then
     Label_zoom.Left = gemx + Image1.Left
-    Label_zoom.top = gemy + Image1.top
+    Label_zoom.Top = gemy + Image1.Top
     Label_zoom.Width = x - gemx
     Label_zoom.Height = y - gemy
     End If

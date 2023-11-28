@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Option Explicit
 Public udtryk As String
 Public dispudtryk As String
@@ -231,7 +232,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
     gemx = x
     gemy = y
     Label_zoom.Left = gemx + Image1.Left
-    Label_zoom.top = gemy + Image1.top
+    Label_zoom.Top = gemy + Image1.Top
     Label_zoom.Width = 1
     Label_zoom.Height = 1
     Label_zoom.visible = True
@@ -243,7 +244,7 @@ On Error Resume Next
 'hDC, 0, 0, ScaleWidth, ScaleHeight, 0, p.Height, p.Width, -p.Height, ByVal 0
     If Label_zoom.visible Then
     Label_zoom.Left = gemx + Image1.Left
-    Label_zoom.top = gemy + Image1.top
+    Label_zoom.Top = gemy + Image1.Top
     Label_zoom.Width = x - gemx
     Label_zoom.Height = y - gemy
     End If
@@ -333,21 +334,21 @@ On Error Resume Next
     SetCaptions
 #If Mac Then
     Me.Left = 10
-    Me.top = 80
+    Me.Top = 80
     Me.Width = 113
     Me.Height = 500
     CommandButton_insertpic.Left = 5
-    CommandButton_insertpic.top = 380
+    CommandButton_insertpic.Top = 380
     TextBox_xmin.Left = 5
-    TextBox_xmin.top = 315
+    TextBox_xmin.Top = 315
     TextBox_xmax.Left = 50
-    TextBox_xmax.top = 315
+    TextBox_xmax.Top = 315
     Label5.Left = 5
-    Label5.top = 300
+    Label5.Top = 300
     Label6.Left = 50
-    Label6.top = 300
+    Label6.Top = 300
     CommandButton_opdater.Left = 25
-    CommandButton_opdater.top = 350
+    CommandButton_opdater.Top = 350
     
 '    Label_zoom.visible = False
     Kill GetTempDir() & "WordMatGraf.pdf"

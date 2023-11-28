@@ -479,12 +479,12 @@ Sub OmMathMenu()
     MsgBox Sprog.A(20), vbOKOnly, AppNavn & " version " & v
 End Sub
 Sub hjaelpeMenu()
-Dim Filnavn As String
+Dim FilNavn As String
 On Error GoTo fejl
 'filnavn = """" & Environ("ProgramFiles") & "\MathMenu\MathMenuManual.docx"""
-Filnavn = GetProgramFilesDir & "\WordMat\WordMatManual.docx"
-If Dir(Filnavn) <> "" Then
-    Documents.Open FileName:=Filnavn, ReadOnly:=True
+FilNavn = GetProgramFilesDir & "\WordMat\WordMatManual.docx"
+If Dir(FilNavn) <> "" Then
+    Documents.Open FileName:=FilNavn, ReadOnly:=True
 Else
     MsgBox "Cant locate the help-file", vbOKOnly, Sprog.Error
 End If
@@ -858,7 +858,7 @@ Sub GoToLink()
 
     explorersti = """" & GetProgramFilesDir & "\Internet Explorer\iexplore.exe"" " & Link
 '    On Error GoTo fejl
-    appnr = Shell(explorersti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
+    appnr = shell(explorersti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
 GoTo slut
 fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error

@@ -848,6 +848,6 @@ Dim ReturnValue
 Dim sti As String
     sti = """" & GetProgramFilesDir & "\WordMat\janis.jnlp"""
 
-ReturnValue = Shell(sti, vbNormalFocus)
+ReturnValue = shell(sti, vbNormalFocus)
 End Sub
 

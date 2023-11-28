@@ -623,7 +623,7 @@ Public Sub RunMaximaFileOld()
     shellcmd = "cmd /C " & maximasti & " < " & inputfil & " > " & outputfil   '/K holder cmd åben
     'shellcmd = "cmd /C " & maximasti & " maxima.bat < " & InputFil & " > " & OutputFil   '/K holder cmd åben
     'shellcmd = "cmd /C " & maximasti & " start /high ""maxima.bat < " & InputFil & " > " & OutputFil & """"   '/K holder cmd åben
-    appnr = Shell(shellcmd, vbHide)    'vbNormalFocus vbMinimizedNoFocus vbhide
+    appnr = shell(shellcmd, vbHide)    'vbNormalFocus vbMinimizedNoFocus vbhide
 
     ' vent på maxima har genereret outputfil
     i = 0
@@ -697,7 +697,7 @@ Public Sub RunwxMaxima()
     result = MsgBox("Det er ikke muligt at løse problemet uden at stille nogle spørgsmål." & vbCrLf & "Du bliver nu sendt til wxMaxima hvor du skal svare på et eller flere spørgsmål. Angiv svar som y for yes eller n for no etc. tryk shift-enter efter svarene." & vbCrLf & vbCrLf & "Det resulterende udtryk kan så kopieres til Word igen.", vbOKCancel, "wxMaxima")
 
     If result = vbOK Then
-        appnr = Shell(shellcmd, vbNormalFocus)    'vbNormalFocus vbMinimizedNoFocus vbhide
+        appnr = shell(shellcmd, vbNormalFocus)    'vbNormalFocus vbMinimizedNoFocus vbhide
     End If
 
 End Sub
@@ -2402,7 +2402,7 @@ Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As Stri
 End Sub
 Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As String, grid As Boolean, SaveFile As Boolean, ByVal resolution As Integer)
     Dim Text As String
-    Dim waittime As Integer
+    Dim WaitTime As Integer
     If df = "" Then
 #If Mac Then
 '        text = "gnuplot_command:""/Applications/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw2d("
@@ -2412,7 +2412,7 @@ Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As
 #Else
         Text = "draw2d("
 #End If
-        waittime = -400
+        WaitTime = -400
     Else
 #If Mac Then
     Text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/gnuplot""$set_plot_option([gnuplot_term, aqua])$load(drawdf)$drawdf(" & df & ","
@@ -2421,7 +2421,7 @@ Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As
 #Else
         Text = "load(drawdf)$drawdf(" & df & ","
 #End If
-        waittime = -600
+        WaitTime = -600
     End If
 
 
@@ -2469,13 +2469,13 @@ Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As
 #If Mac Then
     If MaximaUnits Then
         MaximaUnits = False
-        Call RunMaxima(waittime)
+        Call RunMaxima(WaitTime)
         MaximaUnits = True
     Else
-        Call RunMaxima(waittime)
+        Call RunMaxima(WaitTime)
     End If
 #Else
-        Call RunMaxima(waittime)
+        Call RunMaxima(WaitTime)
 #End If
 
 End Sub
@@ -5916,7 +5916,7 @@ Sub ReadSelection()
     Dim sstart As Long
     Dim sslut As Long
     Dim j As Integer, antalgenstart As Integer
-    On Error GoTo slut
+    On Error GoTo fejl
 
     ' hvis bold giver det buildup problemer ' i v. 1.24.1 forsøges det håndteret uden at ændre i originalen
 '        For j = 1 To Selection.OMaths.Count
@@ -6008,7 +6008,10 @@ hop:
         ReDim Preserve Kommandoer(0 To antal - 1)
         sr.Select
     End If
-
+    GoTo slut
+fejl:
+    On Error GoTo slut
+    ReadSelectionOld
 slut:
     Selection.start = sstart
     Selection.End = sslut
@@ -6048,8 +6051,9 @@ Function ReadEquationCopy(Optional ir As Range) As String
 ' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
 ' Oversætter selection der er omath til streng
 ' 22/8-2023 Har oplevet nogle win 11 computere, der fryser lige når selection.copy eksekveres. Det virker at skifte til readselectionold (men det er der også ulemper ved)
-
     Dim sr As Range, r As Range
+
+On Error GoTo fejl
     '    Dim t As Variant
     '    t = Timer
     If ir Is Nothing Then
@@ -6062,8 +6066,8 @@ Function ReadEquationCopy(Optional ir As Range) As String
     Selection.Copy
 
     Set r = tempDoc.Range
-    
     With r
+'        .Text = "x" ' for at undgå at næste linje med paste en sjælden gang giver fejl
         .Paste
         .Font.Bold = False
         .OMaths.BuildUp
@@ -6079,6 +6083,9 @@ Function ReadEquationCopy(Optional ir As Range) As String
 
     '    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
     '    MsgBox Timer - t
+    GoTo slut
+fejl:
+slut:
 End Function
 Function ReadEquation2(ir As Range) As String
     Dim sr As Range

@@ -13,34 +13,31 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
 Option Explicit
+Public ReturnVal As Integer ' 1=Install, 2=browser
+
 Private Sub CommandButton_Installer_Click()
-'Dim explorersti As String
-'Dim appnr As Integer
-'    explorersti = """" & Environ("ProgramFiles") & "\Internet Explorer\iexplore.exe"" http://www.geogebra.org/webstart/geogebra.jnlp"
-    MsgBox "The download page will now open. Install GeoGebra classic - not the graphing calculator"
-#If Mac Then
-    OpenLink "https://www.geogebra.org/download"
-#Else
-    OpenLink "https://www.geogebra.org/download"
-#End If
+
 '    explorersti = """" & Environ("ProgramFiles") & "\Internet Explorer\iexplore.exe"" http://www.geogebra.org/cms/da/installers"
 
 '    appnr = Shell(explorersti, vbMaximizedFocus) 'vbNormalFocus vbMinimizedFocus
+    ReturnVal = 1
     Me.Hide
 End Sub
 
 Private Sub CommandButton_webstart_Click()
 'Dim explorersti As String
 'Dim appnr As Integer
-    OpenLink "https://www.geogebra.org/classic/"
+'    OpenLink "https://www.geogebra.org/classic/"
 '    explorersti = """" & Environ("ProgramFiles") & "\Internet Explorer\iexplore.exe"" http://www.geogebra.org/webstart/geogebra.html"
 '    appnr = Shell(explorersti, vbMaximizedFocus) 'vbNormalFocus vbMinimizedFocus
+    ReturnVal = 2
     Me.Hide
+End Sub
+
+
+Private Sub Label1_Click()
+
 End Sub
 
 Private Sub UserForm_Activate()
@@ -50,7 +47,7 @@ Private Sub UserForm_Activate()
     
     CommandButton_Installer.Caption = Sprog.A(295)
     CommandButton_webstart.Caption = Sprog.A(296)
-    
+    ReturnVal = 0
 End Sub
 
 

@@ -391,10 +391,10 @@ End Function
 ' @param {Dictionary} [Options.UrlSegments]
 ' @return {WebResponse} Response
 ''
-Public Function GetJson(Url As String, Optional Options As Dictionary) As WebResponse
+Public Function GetJson(URL As String, Optional Options As Dictionary) As WebResponse
     Dim web_Request As New WebRequest
     web_Request.CreateFromOptions Options
-    web_Request.Resource = Url
+    web_Request.Resource = URL
     web_Request.Format = WebFormat.Json
     web_Request.Method = WebMethod.HttpGet
 
@@ -438,10 +438,10 @@ End Function
 ' @param {Dictionary} [Options.UrlSegments]
 ' @return {WebResponse} Response
 ''
-Public Function PostJson(Url As String, Body As Variant, Optional Options As Dictionary) As WebResponse
+Public Function PostJson(URL As String, Body As Variant, Optional Options As Dictionary) As WebResponse
     Dim web_Request As New WebRequest
     web_Request.CreateFromOptions Options
-    web_Request.Resource = Url
+    web_Request.Resource = URL
     web_Request.Format = WebFormat.Json
     web_Request.Method = WebMethod.HttpPost
     If VBA.IsObject(Body) Then

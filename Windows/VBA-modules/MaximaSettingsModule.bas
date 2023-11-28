@@ -47,6 +47,7 @@ Private mLatexWordMargins As Boolean
 Private mLatexTitlePage As Integer
 Private mLatexTOC As Integer
 Private mCASengine As Integer
+Private mLastUpdateCheck As String
 
 
 
@@ -97,6 +98,7 @@ On Error Resume Next
     mLatexTitlePage = CInt(GetRegSettingLong("LatexTitlePage"))
     mLatexTOC = CInt(GetRegSettingLong("LatexToc"))
     mCASengine = CInt(GetRegSettingLong("CASengine"))
+    mLastUpdateCheck = GetRegSettingString("LastUpdateCheck")
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -132,7 +134,7 @@ On Error Resume Next
 '    If MsgBox("Indstillingerne kan ikke findes. Vil du genoprette og nulstille alle indstillinger?", vbOKCancel, Sprog.Error) Then
     MaximaForklaring = True
     MaximaKommando = False
-    MaximaExact = 0
+    MaximaExact = 2 ' numerisk
     Radians = False
     MaximaCifre = 7
     MaximaSeparator = False
@@ -147,7 +149,7 @@ On Error Resume Next
     OutUnits = ""
     AutoStart = False
     Antalberegninger = 0
-    SettCheckForUpdate = False
+    SettCheckForUpdate = True
     MaximaIndex = False
     PolarOutput = False
 #If Mac Then
@@ -348,7 +350,13 @@ Public Property Let EqAskRef(ByVal Text As Boolean)
     SetRegSetting "EqAskRef", Abs(CInt(Text))
     maskref = Text
 End Property
-
+Public Property Get LastUpdateCheck() As String
+    LastUpdateCheck = mLastUpdateCheck
+End Property
+Public Property Let LastUpdateCheck(ByVal Text As String)
+    SetRegSettingString "LastUpdateCheck", Text
+    mLastUpdateCheck = Text
+End Property
 
 Public Property Get OutUnits() As String
     OutUnits = moutunits
@@ -513,18 +521,18 @@ End Property
 
 Public Property Get LatexPreamble() As String
    If mLatexPreamble = "" Then
-      Dim Filnavn As String
-      Filnavn = Environ("AppData") & "\WordMat\WordMatLatexPreamble.tex"
-      If Dir(Filnavn) <> "" Then mLatexPreamble = ReadTextfileToString(Filnavn)
+      Dim FilNavn As String
+      FilNavn = Environ("AppData") & "\WordMat\WordMatLatexPreamble.tex"
+      If Dir(FilNavn) <> "" Then mLatexPreamble = ReadTextfileToString(FilNavn)
    End If
    LatexPreamble = mLatexPreamble
 End Property
 Public Property Let LatexPreamble(ByVal preAmble As String)
-    Dim Filnavn As String
+    Dim FilNavn As String
     mLatexPreamble = preAmble
-    Filnavn = Environ("AppData") & "\WordMat\WordMatLatexPreamble.tex"
-    If Dir(Filnavn) <> "" Then Kill Filnavn
-    WriteTextfileToString Filnavn, preAmble
+    FilNavn = Environ("AppData") & "\WordMat\WordMatLatexPreamble.tex"
+    If Dir(FilNavn) <> "" Then Kill FilNavn
+    WriteTextfileToString FilNavn, preAmble
 End Property
 Public Property Get LatexSectionNumbering() As Boolean
     LatexSectionNumbering = mLatexSectionNumbering
@@ -573,7 +581,7 @@ End Property
 Private Function GetRegSetting(Key As String) As Integer
     GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key)
 End Function
-Private Sub SetRegSetting(Key As String, val As Integer)
+Private Sub SetRegSetting(ByVal Key As String, ByVal val As Integer)
     RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_DWORD"
 End Sub
 

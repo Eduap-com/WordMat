@@ -50,10 +50,10 @@ CreateConstructionElement
 End Sub
 
 
-Public Sub Save(Filnavn As String)
+Public Sub Save(FilNavn As String)
     If Show3D Then CreateEuclidianView3DElement
     CreateKernelElement
-    GeoXMLdom.Save (Filnavn)
+    GeoXMLdom.Save (FilNavn)
 End Sub
 
 Sub CreateGuiElement()

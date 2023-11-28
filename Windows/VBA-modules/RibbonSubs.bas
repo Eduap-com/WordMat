@@ -741,7 +741,7 @@ Sub Rib_insertgeogebra(control As IRibbonControl)
 End Sub
 'Callback for ButtonStatistik onAction
 Sub Rib_Statistik(control As IRibbonControl)
-    InsertOpenExcel Filnavn:="statistik.xltm", WorkBookName:=Sprog.A(563)
+    InsertOpenExcel FilNavn:="statistik.xltm", WorkBookName:=Sprog.A(563)
 End Sub
 Sub Rib_plot3D(control As IRibbonControl)
 '#If Mac Then
@@ -818,7 +818,7 @@ Sub Rib_goodnessoffit(control As IRibbonControl)
 End Sub
 'Callback for ButtonSimulering onAction
 Sub Rib_simulering(control As IRibbonControl)
-    InsertOpenExcel Filnavn:="Simulering.xltm", WorkBookName:=Sprog.A(599)
+    InsertOpenExcel FilNavn:="Simulering.xltm", WorkBookName:=Sprog.A(599)
 End Sub
 'Callback for Buttonbinomialfordeling onAction
 Sub Rib_binomialfordeling(control As IRibbonControl)
@@ -833,7 +833,7 @@ Sub Rib_chi2fordelinggraf(control As IRibbonControl)
     Chi2Graf
 End Sub
 Sub Rib_tfordelinggraf(control As IRibbonControl)
-    InsertOpenExcel Filnavn:="studenttFordeling.xltm", WorkBookName:="t" 'Sprog.A(483)
+    InsertOpenExcel FilNavn:="studenttFordeling.xltm", WorkBookName:="t" 'Sprog.A(483)
 End Sub
 'Callback for ButtonGrupper onAction
 Sub Rib_Grupper(control As IRibbonControl)

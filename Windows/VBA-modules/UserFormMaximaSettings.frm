@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 Private MustRestart As Boolean
 Private LoadUnits As Boolean
@@ -36,23 +37,23 @@ Private Sub CommandButton_annuller_Click()
     Me.Hide
 End Sub
 
-Private Sub NulstilWordDoc(Filnavn As String)
+Private Sub NulstilWordDoc(FilNavn As String)
 Dim appdir As String
 Dim fs, F, s
 On Error GoTo fejl
     
-If MsgBox(Sprog.A(665) & ", " & Filnavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo slut
+If MsgBox(Sprog.A(665) & ", " & FilNavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo slut
     
 #If Mac Then
 ' cant
 '    FileCopy "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/" & filnavn, "~/Library/Containers/com.microsoft.Word/Data/WordMat/" & Replace(filnavn, "\", "/")
 #Else
 Set fs = CreateObject("Scripting.FileSystemObject")
-Filnavn = GetProgramFilesDir & "\WordMat\" & Filnavn
+FilNavn = GetProgramFilesDir & "\WordMat\" & FilNavn
 appdir = Environ("AppData")
-If Dir(Filnavn) <> "" And appdir <> "" Then
-  fs.CopyFile Filnavn, appdir & "\WordMat\"
-  MsgBox Sprog.A(668) & " " & Filnavn & " " & Sprog.A(669), vbOKOnly, Sprog.A(670)
+If Dir(FilNavn) <> "" And appdir <> "" Then
+  fs.CopyFile FilNavn, appdir & "\WordMat\"
+  MsgBox Sprog.A(668) & " " & FilNavn & " " & Sprog.A(669), vbOKOnly, Sprog.A(670)
 Else
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Filen " & filnavn & " kunne ikke findes eller appdata mappen kunne ikke findes"
 End If
@@ -258,7 +259,7 @@ On Error Resume Next
 #If Mac Then
     RunScript "OpenFinder", GetTempDir() & "/WordMat-backup"
 #Else
-    Shell "explorer.exe" & " " & GetDocumentsDir & "\WordMat-Backup", vbNormalFocus
+    shell "explorer.exe" & " " & GetDocumentsDir & "\WordMat-Backup", vbNormalFocus
 #End If
 End Sub
 

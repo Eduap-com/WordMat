@@ -33,7 +33,7 @@ Private mError As Integer
 Private mAntalCifre As Integer
 Private mIndex As LongPtr
 
-Sub StartMaximaProcess(Optional waittime As LongPtr = 15)
+Sub StartMaximaProcess(Optional WaitTime As LongPtr = 15)
     Dim r As LongPtr
     mFinished = 0
     mQuestion = 0
@@ -43,10 +43,10 @@ Sub StartMaximaProcess(Optional waittime As LongPtr = 15)
     End If
     SetMaximaPath "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/Maxima.app/Contents/Resources/maxima.sh"
 '    SetMaximaPath "/Applications/WordMat/Maxima.app/Contents/Resources/maxima.sh"
-    If waittime = 0 Then
+    If WaitTime = 0 Then
         r = StartMaxima()
     Else
-        r = StartMaximaWait(waittime)
+        r = StartMaximaWait(WaitTime)
     ' Mac: pga ændring af operator _, som ikke  virker på Mac. Skal vel være i image. Er nu puttet i image v. 1.03.
 '        Dim Command As String
 '        Command = "infix(""##"",115,115)$""##""(qwa,qwb):=block(if scalarp(qwa) or scalarp(qwb) then return(qwa*qwb) else return(qwa.qwb))$" & Command
@@ -63,13 +63,13 @@ Sub CloseProcess()
     CloseMaxima
 End Sub
 
-Function StartMaximaWait(waittime As LongPtr) As LongPtr
+Function StartMaximaWait(WaitTime As LongPtr) As LongPtr
     Dim l As LongPtr, i As LongPtr
     Dim OutputBuffer As String
     Dim Startupstring As String
     Dim retval As LongPtr
 
-    i = waittime * 20
+    i = WaitTime * 20
     OutputBuffer = GetEmptyString()
     retval = StartMaxima()
 

@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Public luk As Boolean
 Public InsertType As Integer
@@ -495,7 +496,7 @@ Private Sub UserForm_Activate()
     Label_wait.visible = False
 #If Mac Then
     Me.Left = 0
-    Me.top = 350
+    Me.Top = 350
     CommandButton_toExcel.visible = False
     CommandButton_insertgraph.visible = False
     CheckBox_pointsjoined.visible = False

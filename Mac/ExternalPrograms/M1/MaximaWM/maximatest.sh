@@ -21,6 +21,6 @@ then
 fi
 
 #exec "$MAXIMA_PREFIX/bin/maxima" "$1" "$2" "$3" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
-"./maxima/bin/sbcl" --core "./maxima/lib/maxima/5.45.1/binary-sbcl/maxima.core"
+"./maxima/bin/sbcl" --core "./maxima/lib/maxima/5.47.0/binary-sbcl/maxima.core"
 # "$MAXIMA_PREFIX/bin/Maximatimeout" 10
 #"$MAXIMA_PREFIX/bin/Maximatimeout" --signal=0 --kill-after=$MaxTime $MaxTime "$MAXIMA_PREFIX/bin/sbcl" --core "$MAXIMA_PREFIX/lib/maxima/5.45.1/binary-sbcl/maxima.core"

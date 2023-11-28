@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Option Explicit
 Private Sub CommandButton_nulstil_Click()
     TextBox_data.Text = ""

@@ -72,7 +72,7 @@ GraphText = GraphText & "" & vbCrLf
 
 End Sub
 
-Public Sub Save(Filnavn As String)
+Public Sub Save(FilNavn As String)
 Dim filnr As Integer
 On Error GoTo fejl
 
@@ -80,7 +80,7 @@ InsertDataSection
 InsertCustomFunctions
 
 filnr = FreeFile()
-Open Filnavn For Output As filnr    ' Open file for output.
+Open FilNavn For Output As filnr    ' Open file for output.
 
 Print #filnr, GraphText  ' print skriver uden " "
 'Print #filnr, "Hello World"  ' print skriver uden " "
