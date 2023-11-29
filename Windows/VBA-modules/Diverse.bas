@@ -1501,10 +1501,8 @@ fejl:
 slut:
 
 End Sub
-Sub testdl()
-DownloadFile "https://www.eduap.com/download/download.php?f=WordMatMacM1-127S.pkg", "WordMatMacM1-127S.pkg"
-End Sub
-
+#If Mac Then
+#Else
 Function DownloadFile(URL As String, FilNavn As String) As Boolean
    'downloadFile("http://screinfo.eduap.com/","outlecsynkversion.txt")
     Dim LocalFileName As String
@@ -1517,6 +1515,7 @@ Function DownloadFile(URL As String, FilNavn As String) As Boolean
     End If
     DownloadFile = True
 End Function
+#End If
 Function RunApplication(AppPath As String) As Boolean
     ' RunApplication("C:\Your\Path\Roboapp.exe")
     Dim varProc As Variant
