@@ -222,8 +222,11 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
     UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
 #Else
 '    UrlLink = "https://geogebra.org/calculator"
-'    UrlLink = "file:///C:/Program%20Files%20(x86)/WordMat/geogebra-math-apps/GeoGebraApplet.html"
-    UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
+    If Gtype = "" Then
+        UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html"
+    Else
+        UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
+    End If
 #End If
     UrlLink = UrlLink & "?command=" & cmd
 
@@ -812,6 +815,7 @@ slut:
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found
+' Der hentes til den nyeste version hvis muligt
 Dim DN As String
 On Error GoTo fejl
 #If Mac Then
@@ -824,18 +828,75 @@ On Error GoTo fejl
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra Graphing Calculator.app"
     If FileExists(GeoGebraPath) Then Exit Function
     GeoGebraPath = ""
-#Else
+#Else ' Windows
     
-'    GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 5.*", vbDirectory)
+    If GeoGebraPath = "" Then 'Matematikværktøjssuite
+        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\app-*", vbDirectory)
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> ""
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\" & DN & "\GeoGebraCalculator.exe"
+            GeoGebraPath = """" & GeoGebraPath & """"
+            GoTo slut
+        End If
+    End If
+    
+    If GeoGebraPath = "" Then ' GeoGebra classic 6
+        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_6\app-6*", vbDirectory)
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> ""
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_6\" & DN & "\GeoGebra.exe"
+            GeoGebraPath = """" & GeoGebraPath & """"
+            GoTo slut
+        End If
+    End If
+    
+    If GeoGebraPath = "" Then ' Graftegner
+        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Graphing\app-*", vbDirectory)
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> ""
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Graphing\" & DN & "\GeoGebraGraphing.exe"
+            GeoGebraPath = """" & GeoGebraPath & """"
+            GoTo slut
+        End If
+    End If
+        
+    If GeoGebraPath = "" Then ' CAS Regnemaskine kan også tegnegrafer
+        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_CAS\app-*", vbDirectory)
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> ""
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_CAS\" & DN & "\GeoGebraCAS.exe"
+            GeoGebraPath = """" & GeoGebraPath & """"
+            GoTo slut
+        End If
+    End If
+    
+    ' se i program files for de lidt ældre programmer
     GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 5*", vbDirectory)
     If GeoGebraPath <> "" Then
         DN = GeoGebraPath
-        Do While GeoGebraPath <> "" ' vi henter den GeoGebra 5 med højdt versions nr. Den vil være sidst på listen
+        Do While GeoGebraPath <> "" ' vi henter den GeoGebra 5 med højst versions nr. Den vil være sidst på listen
             GeoGebraPath = Dir()
             If GeoGebraPath <> "" Then DN = GeoGebraPath
         Loop
         If DN <> "" Then
             GeoGebraPath = """" & DN & """"
+            GoTo slut
         End If
     End If
     
@@ -854,45 +915,6 @@ On Error GoTo fejl
         GoTo slut
     End If
     
-    If GeoGebraPath = "" Then
-        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_6\app-6*", vbDirectory)
-        DN = GeoGebraPath
-        Do While GeoGebraPath <> ""
-            GeoGebraPath = Dir()
-            If GeoGebraPath <> "" Then DN = GeoGebraPath
-        Loop
-        If DN <> "" Then
-            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_6\" & DN & "\GeoGebra.exe"
-            GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo slut
-        End If
-    End If
-    
-    If GeoGebraPath = "" Then
-        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\app-*", vbDirectory)
-        DN = GeoGebraPath
-        Do While GeoGebraPath <> ""
-            GeoGebraPath = Dir()
-            If GeoGebraPath <> "" Then DN = GeoGebraPath
-        Loop
-        If DN <> "" Then
-            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\" & DN & "\GeoGebraCalculator.exe"
-            GeoGebraPath = """" & GeoGebraPath & """"
-        End If
-    End If
-    
-    If GeoGebraPath = "" Then
-        GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Graphing\app-*", vbDirectory)
-        DN = GeoGebraPath
-        Do While GeoGebraPath <> ""
-            GeoGebraPath = Dir()
-            If GeoGebraPath <> "" Then DN = GeoGebraPath
-        Loop
-        If DN <> "" Then
-            GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Graphing\" & DN & "\GeoGebraGraphing.exe"
-            GeoGebraPath = """" & GeoGebraPath & """"
-        End If
-    End If
     
 #End If
     GoTo slut
