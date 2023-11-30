@@ -18,6 +18,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Option Explicit
 Private palindex As Integer
 Private Sub CommandButton_geogebra_Click()

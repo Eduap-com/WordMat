@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Public ReturnVal As Integer ' 1=Install, 2=browser
 
@@ -35,10 +36,6 @@ Private Sub CommandButton_webstart_Click()
     Me.Hide
 End Sub
 
-
-Private Sub Label1_Click()
-
-End Sub
 
 Private Sub UserForm_Activate()
     Label1.Caption = Sprog.A(292)

@@ -18,6 +18,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Option Explicit
 Public udtryk As String
 Public dispudtryk As String
