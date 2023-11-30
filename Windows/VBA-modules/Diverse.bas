@@ -660,9 +660,11 @@ ErrorHandler:
 #End If
 End Function
 Sub OpenLink(Link As String, Optional Script As Boolean = False)
+' obs: Script er altid true på mac for at forhindre advarsel
 On Error Resume Next
 
 #If Mac Then
+    Script = True
     If Script Then
         RunScript "OpenLink", Link
     Else
@@ -1403,11 +1405,10 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     
     '    s = GetHTML("https://www.eduap.com/wordmat-version-history/")
 #If Mac Then
-    s = GetHTML("http://screinfo.eduap.com/wordmatversion.txt")
-#Else
     s = RunScript("CheckUpdate", vbNullString)
-    If Len(s) > 0 Then s = Mid(s, 2, Len(s) - 2)
     If InStr(s, "404 Not Found") > 0 Then s = vbNullString
+#Else
+    s = GetHTML("http://screinfo.eduap.com/wordmatversion.txt")
 #End If
     If Len(s) = 0 Then
         If Not RunSilent Then
@@ -1420,8 +1421,8 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     If p > 0 Then
         News = right(NewVersion, Len(NewVersion) - p)
         NewVersion = Trim(Left(NewVersion, p - 1))
-    Else
-        p = InStr(NewVersion, vbLf)
+    Else ' mac
+        p = InStr(NewVersion, vbCr)
         If p > 0 Then
             News = right(NewVersion, Len(NewVersion) - p)
             NewVersion = Trim(Left(NewVersion, p - 1))
@@ -1482,7 +1483,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
             '                RunApplication Environ("TEMP") & "\" & FilNavn
             '                Application.quit
             '            Else
-            If Sprog.Language = 1 Then
+            If Sprog.SprogNr = 1 Then
                 OpenLink "https://www.eduap.com/da/download-wordmat/"
             Else
                 OpenLink "https://www.eduap.com/download-wordmat/"
