@@ -1476,7 +1476,8 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     End If
    
     If UpdateNow Then
-        If MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbYesNo, Sprog.A(23)) = vbYes Then
+        MsgBox Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, Sprog.A(23)
+'        If MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbYesNo, Sprog.A(23)) = vbYes Then
             '            FilNavn = "WordMat" & Replace(NewVersion, ".", "") & ".exe"
             '            If DownloadFile("https://github.com/Eduap-com/WordMat/releases/download/v." & NewVersion & "/", FilNavn) Then
             '            If DownloadFile("https://www.eduap.com/download/download.php?f=WordMatMacM1-127S.pkg", "WordMatMacM1-127S.pkg") Then
@@ -1488,8 +1489,6 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
             Else
                 OpenLink "https://www.eduap.com/download-wordmat/"
             End If
-            '            End If
-        End If
     Else
         If Not RunSilent Then
             MsgBox "Du har allerede den nyeste version af WordMat installeret.", vbOKOnly, "Ingen opdatering"
