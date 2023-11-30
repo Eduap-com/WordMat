@@ -1398,7 +1398,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     If RunSilent Then
         If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo slut ' ikke automatisk opdatere i maj og juni
         If IsDate(LastUpdateCheck) Then
-            If DateDiff("d", LastUpdateCheck, Date) < 14 Then GoTo slut ' hvis der er checket indenfor de sidste 14 dage så afslut
+            If DateDiff("d", LastUpdateCheck, Date) < 7 Then GoTo slut ' hvis der er checket indenfor de sidste 7 dage så afslut
         End If
     End If
     LastUpdateCheck = Date ' denne skal være her, og ikke i slutningen, for hvis der sker en fejl i opdateringen, skal den kun komme én gang
