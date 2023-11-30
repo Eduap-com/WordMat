@@ -1290,13 +1290,14 @@ fejl:
 slut:
 End Sub
 Sub CheckForUpdate()
-#If Mac Then
-    CheckForUpdateF False
-#Else
+'#If Mac Then
+'    CheckForUpdateF False
+'#Else
     CheckForUpdateWindows False
-#End If
+'#End If
 End Sub
 Sub CheckForUpdateF(Optional Silent As Boolean = False)
+' Denne skulle virke på mac og windows via speciel webrequest klasse, men det giver fejl i dictionary klassen på mac.
     ' Create a WebClient for executing requests
     ' and set a base url that all requests will be appended to
     Dim p As Long, p2 As Long, p3 As Long, s As String, v As String, News As String
@@ -1380,6 +1381,7 @@ fejl:
 slut:
 End Sub
 Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
+' selvom den hedder windows er det nu også mac
     On Error GoTo fejl
     Dim NewVersion As String, p As Integer, p2 As Integer, News As String, s As String, v As String
     Dim FilNavn As String, FilDir As String, FilPath As String, result As VbMsgBoxResult
@@ -1400,13 +1402,18 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     LastUpdateCheck = Date ' denne skal være her, og ikke i slutningen, for hvis der sker en fejl i opdateringen, skal den kun komme én gang
     
     '    s = GetHTML("https://www.eduap.com/wordmat-version-history/")
+#If Mac Then
     s = GetHTML("http://screinfo.eduap.com/wordmatversion.txt")
-    
+#Else
+    s = RunScript("CheckUpdate", vbNullString)
+    If Len(s) > 0 Then s = Mid(s, 2, Len(s) - 2)
+    If InStr(s, "404 Not Found") > 0 Then s = vbNullString
+#End If
     If Len(s) = 0 Then
         If Not RunSilent Then
             MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
-            GoTo slut
         End If
+        GoTo slut
     End If
     NewVersion = s
     p = InStr(NewVersion, vbLf)
@@ -1424,8 +1431,8 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     If Len(NewVersion) = 0 Or Len(NewVersion) > 15 Then
         If Not RunSilent Then
             MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
-            GoTo slut
         End If
+        GoTo slut
     End If
     
     '        p = InStr(s, "<body")
@@ -1554,11 +1561,11 @@ Sub CheckForUpdateSilent()
 ' maxproc skal være oprettet
     On Error GoTo fejl
 
-#If Mac Then
-    CheckForUpdateF True
-#Else
+'#If Mac Then
+'    CheckForUpdateF True
+'#Else
     CheckForUpdateWindows True
-#End If
+'#End If
 GoTo slut
 fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
