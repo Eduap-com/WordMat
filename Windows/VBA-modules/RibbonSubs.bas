@@ -1287,13 +1287,6 @@ End Sub
 Sub Rib_GetLabelShowGraph(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.RibShowGraph
 End Sub
-Sub Rib_getVisibleLatex(control As IRibbonControl, ByRef returnedVal)
-#If Mac Then
-    returnedVal = False
-#Else
-    returnedVal = True
-#End If
-End Sub
 
 Sub Rib_getVisibleGnuPlot(control As IRibbonControl, ByRef returnedVal)
 #If Mac Then
