@@ -659,12 +659,14 @@ ErrorHandler:
   RegKeyDelete = False
 #End If
 End Function
+Sub TestLink()
+    OpenLink "https://dr.dk"
+End Sub
 Sub OpenLink(Link As String, Optional Script As Boolean = False)
 ' obs: Script er altid true på mac for at forhindre advarsel
 On Error Resume Next
 
 #If Mac Then
-    Script = True
     If Script Then
         RunScript "OpenLink", Link
     Else
@@ -674,7 +676,7 @@ On Error Resume Next
     If Script Then
         shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus
     Else
-        ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True
+        ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' hvis linket ikke virker så sker der bare ingen ting
     End If
 #End If
 fejl:
@@ -1298,90 +1300,90 @@ Sub CheckForUpdate()
     CheckForUpdateWindows False
 '#End If
 End Sub
-Sub CheckForUpdateF(Optional Silent As Boolean = False)
-' Denne skulle virke på mac og windows via speciel webrequest klasse, men det giver fejl i dictionary klassen på mac.
-    ' Create a WebClient for executing requests
-    ' and set a base url that all requests will be appended to
-    Dim p As Long, p2 As Long, p3 As Long, s As String, v As String, News As String
-    Dim MapsClient As New WebClient
-'   On Error GoTo fejl
-'#If Mac Then
-'    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
-'    OpenLink "http://eduap.com/download-wordmat/"
-'#Else
-    Dim result As VbMsgBoxResult
-    MapsClient.BaseUrl = "https://www.eduap.com/wordmat-version-history/"
-
-    ' Use GetJSON helper to execute simple request and work with response
-    Dim Resource As String
-    Dim Response As WebResponse
-    Dim Request As New WebRequest
-    '    Request.Resource = "index.html"
-    
-    Request.Format = WebFormat.PlainText
-
-    Request.Method = WebMethod.HttpGet
-    '    Request.ResponseFormat = PlainText
-    '    Request.Method = WebMethod.HttpGet
-    '    Request.Method = WebMethod.HttpPost
-'    Resource = "" '
-    '    "directions/json?" & _
-    '        "origin=" & Origin & _
-    '        "&destination=" & Destination & _
-    '        "&sensor=false"
-    
-    '    Set Response = MapsClient.GetJson(Resource)
-    Set Response = MapsClient.Execute(Request)
-    ' => GET https://maps.../api/directions/json?origin=...&destination=...&sensor=false
-    '    MsgBox Response.StatusCode & " - " & Response.StatusDescription
-
-    If Response.StatusCode = WebStatusCode.OK Or Response.StatusCode = 301 Then ' af ukendte årsager kommer der 301 fejl på mac, men det virker
-        '        MsgBox Response.Content
-'        p = InStr(s, "Version history")
-        
-'        v = Trim(Mid(s, p + 16, 4))
-        '        MsgBox Response.Content
-        s = Response.Content
-        p = InStr(s, "<body")
-        p = InStr(p, s, "Version ")
-        If p <= 0 Then GoTo fejl
-        v = Trim(Mid(s, p + 8, 4))
-        p2 = InStr(p + 10, s, "Version " & AppVersion)
-        If p2 <= 0 Then p2 = InStr(p + 10, s, "Version")
-        If p2 <= 0 Then p2 = p + 50
-'        p3 = InStr(p, s, "<p>")
-        News = Mid(s, p, p2 - p)
-'        News = Replace(News, "- ", vbCrLf & "- ")
-        News = Replace(News, "&#8211;", vbCr & " -") ' bindestreg
-        News = Replace(News, "Version ", vbCrLf & "Version ") ' bindestreg
-        News = Replace(News, "<br />", "")
-        News = Replace(News, "<strong>", "")
-        News = Replace(News, "</strong>", "")
-        News = Replace(News, "<p>", "")
-        News = Replace(News, "</p>", "")
-        If v = AppVersion Then
-            If Not Silent Then
-                MsgBox Sprog.A(344) & " " & AppNavn, vbOKOnly, Sprog.OK
-            End If
-        Else
-            result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
-            If result = vbYes Then
-                OpenLink "https://www.eduap.com/da/download-wordmat/"
-            End If
-        End If
-    Else
-        GoTo slut
-    End If
-    
-    If Response.StatusCode = WebStatusCode.OK Or Response.StatusCode = 301 Then
-    End If
-    
-'#End If
-    GoTo slut
-fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
-End Sub
+'Sub CheckForUpdateF(Optional Silent As Boolean = False)
+'' Denne skulle virke på mac og windows via speciel webrequest klasse, men det giver fejl i dictionary klassen på mac.
+'    ' Create a WebClient for executing requests
+'    ' and set a base url that all requests will be appended to
+'    Dim p As Long, p2 As Long, p3 As Long, s As String, v As String, News As String
+'    Dim MapsClient As New WebClient
+''   On Error GoTo fejl
+''#If Mac Then
+''    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
+''    OpenLink "http://eduap.com/download-wordmat/"
+''#Else
+'    Dim result As VbMsgBoxResult
+'    MapsClient.BaseUrl = "https://www.eduap.com/wordmat-version-history/"
+'
+'    ' Use GetJSON helper to execute simple request and work with response
+'    Dim Resource As String
+'    Dim Response As WebResponse
+'    Dim Request As New WebRequest
+'    '    Request.Resource = "index.html"
+'
+'    Request.Format = WebFormat.PlainText
+'
+'    Request.Method = WebMethod.HttpGet
+'    '    Request.ResponseFormat = PlainText
+'    '    Request.Method = WebMethod.HttpGet
+'    '    Request.Method = WebMethod.HttpPost
+''    Resource = "" '
+'    '    "directions/json?" & _
+'    '        "origin=" & Origin & _
+'    '        "&destination=" & Destination & _
+'    '        "&sensor=false"
+'
+'    '    Set Response = MapsClient.GetJson(Resource)
+'    Set Response = MapsClient.Execute(Request)
+'    ' => GET https://maps.../api/directions/json?origin=...&destination=...&sensor=false
+'    '    MsgBox Response.StatusCode & " - " & Response.StatusDescription
+'
+'    If Response.StatusCode = WebStatusCode.OK Or Response.StatusCode = 301 Then ' af ukendte årsager kommer der 301 fejl på mac, men det virker
+'        '        MsgBox Response.Content
+''        p = InStr(s, "Version history")
+'
+''        v = Trim(Mid(s, p + 16, 4))
+'        '        MsgBox Response.Content
+'        s = Response.Content
+'        p = InStr(s, "<body")
+'        p = InStr(p, s, "Version ")
+'        If p <= 0 Then GoTo fejl
+'        v = Trim(Mid(s, p + 8, 4))
+'        p2 = InStr(p + 10, s, "Version " & AppVersion)
+'        If p2 <= 0 Then p2 = InStr(p + 10, s, "Version")
+'        If p2 <= 0 Then p2 = p + 50
+''        p3 = InStr(p, s, "<p>")
+'        News = Mid(s, p, p2 - p)
+''        News = Replace(News, "- ", vbCrLf & "- ")
+'        News = Replace(News, "&#8211;", vbCr & " -") ' bindestreg
+'        News = Replace(News, "Version ", vbCrLf & "Version ") ' bindestreg
+'        News = Replace(News, "<br />", "")
+'        News = Replace(News, "<strong>", "")
+'        News = Replace(News, "</strong>", "")
+'        News = Replace(News, "<p>", "")
+'        News = Replace(News, "</p>", "")
+'        If v = AppVersion Then
+'            If Not Silent Then
+'                MsgBox Sprog.A(344) & " " & AppNavn, vbOKOnly, Sprog.OK
+'            End If
+'        Else
+'            result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
+'            If result = vbYes Then
+'                OpenLink "https://www.eduap.com/da/download-wordmat/"
+'            End If
+'        End If
+'    Else
+'        GoTo slut
+'    End If
+'
+'    If Response.StatusCode = WebStatusCode.OK Or Response.StatusCode = 301 Then
+'    End If
+'
+''#End If
+'    GoTo slut
+'fejl:
+'    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+'slut:
+'End Sub
 Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
 ' selvom den hedder windows er det nu også mac
     On Error GoTo fejl

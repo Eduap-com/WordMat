@@ -974,20 +974,23 @@ Sub Rib_HelpOnline(control As IRibbonControl)
     OpenLink "https://sites.google.com/site/wordmat/"
 End Sub
 Sub Rib_HelpMaxima(control As IRibbonControl)
-#If Mac Then
-    OpenLink "http://maxima.sourceforge.net/docs/manual/en/maxima.html"
-#Else
-Dim ReturnValue
-Dim sti As String
-    On Error GoTo fejl
-    OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\html\index.html"
-'    sti = "cmd /C """ & GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\chm\maxima.chm"""
-'    ReturnValue = Shell(sti, vbHide)
-GoTo slut
-fejl:
-    OpenLink "http://maxima.sourceforge.net/docs/manual/en/maxima.html"
-slut:
-#End If
+    OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
+' Der er ikke længere lokal hjælp med i Maxima distributionen
+'#If Mac Then
+'    OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
+'#Else
+'Dim ReturnValue
+'Dim sti As String
+'    On Error GoTo fejl
+'    OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.47.0\share\maxima\5.47.0\doc\html\index.html", True
+''    OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.47.0\share\maxima\5.47.0\doc\html\index.html", True
+''    sti = "cmd /C """ & GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\chm\maxima.chm"""
+''    ReturnValue = Shell(sti, vbHide)
+'GoTo slut
+'fejl:
+'    OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
+'slut:
+'#End If
 End Sub
 'Callback for ButtonCheckUpdate onAction
 Sub Rib_CheckForUpdate(control As IRibbonControl)
@@ -1283,6 +1286,21 @@ Sub Rib_GetLabelPlotting(control As IRibbonControl, ByRef returnedVal As Variant
 End Sub
 Sub Rib_GetLabelShowGraph(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.RibShowGraph
+End Sub
+Sub Rib_getVisibleLatex(control As IRibbonControl, ByRef returnedVal)
+#If Mac Then
+    returnedVal = False
+#Else
+    returnedVal = True
+#End If
+End Sub
+
+Sub Rib_getVisibleGnuPlot(control As IRibbonControl, ByRef returnedVal)
+#If Mac Then
+    returnedVal = False
+#Else
+    returnedVal = True
+#End If
 End Sub
 Sub Rib_getVisibleGraph(control As IRibbonControl, ByRef returnedVal)
 #If Mac Then
