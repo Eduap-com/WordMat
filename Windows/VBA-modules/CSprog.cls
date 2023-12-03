@@ -1779,8 +1779,8 @@ SA(294, 0) = "GeoGebra Calculator Suite er allerede installeret. Den køres i en 
 SA(294, 1) = "GeoGebra Calculator Suite is already installed. It runs in a browser, and does not require internet. Starts quickly."
 SA(294, 2) = ""
 
-SA(295, 0) = "Installer GeoGebra 5"
-SA(295, 1) = "Install GeoGebra 5"
+SA(295, 0) = "Installer GeoGebra"
+SA(295, 1) = "Install GeoGebra"
 SA(295, 2) = ""
 
 SA(296, 0) = "Kør GeoGebra Calculator Suite"

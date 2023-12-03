@@ -28,9 +28,9 @@ On Error Resume Next
     Loop
 End Sub
 
-Sub RunDefaultProgram(filepath As String, Optional Mappe As String = "c:\")
+Sub RunDefaultProgram(FilePath As String, Optional Mappe As String = "c:\")
   On Error Resume Next
-  retval = ShellExecute(0, "open", filepath, "", Mappe, SW_SHOWMAXIMIZED)
+  retval = ShellExecute(0, "open", FilePath, "", Mappe, SW_SHOWMAXIMIZED)
 
 End Sub
 

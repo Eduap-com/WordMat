@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormGeoGebra 
    Caption         =   "GeoGebra"
-   ClientHeight    =   4035
+   ClientHeight    =   3390
    ClientLeft      =   -15
    ClientTop       =   75
-   ClientWidth     =   6585
+   ClientWidth     =   7665
    OleObjectBlob   =   "UserFormGeoGebra.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

@@ -729,6 +729,7 @@ Sub GeoGebra()
     
     geogebrasti = GeoGebraPath()
     If geogebrasti = "" Then ' hvis geogebra ikke installeret
+        Unload UfWait
         InstallGeoGebra
         GoTo slut
     End If
@@ -777,6 +778,7 @@ Sub InstallGeoGebra()
         OpenLink "https://download.geogebra.org/mac", True
         UserFormGeoGebraMacInstall.Show
     Else
+        GeoGebraWeb
     End If
 '    MsgBox "The download page will now open. Install GeoGebra classic 5", vbOKOnly, "Download"
 '    OpenLink "https://www.geogebra.org/download"
