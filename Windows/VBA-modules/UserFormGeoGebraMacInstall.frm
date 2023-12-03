@@ -42,19 +42,21 @@ End Sub
 Private Sub CommandButton_test_Click()
     Dim FilePath As String
     
-    FilePath = GetDownloadsFolder & "GeoGebra.app"
+    FilePath = GetProgramFilesDir & "GeoGebra.app"
     
     If Dir(FilePath, vbDirectory) = vbNullString Then
         MsgBox "GeoGebra er ikke blevet installeret endnu. Vent til download er færdig.", vbOKOnly, "Vent"
         GoTo slut
     End If
     
+    TestDone = True
     GeoGebra
 '    RunScript "OpenGeoGebra", geogebrafilersti
-    TestDone = True
 slut:
 End Sub
+Private Sub UserForm_Initialize()
 
+End Sub
 Private Sub UserForm_Activate()
     Dim FilePath As String, i As Integer
     Dim s As String
@@ -63,6 +65,10 @@ Private Sub UserForm_Activate()
     CommandButton_test.visible = False
     Label_progress.Caption = "*"
     CommandButton_stop.visible = True
+    i = 0
+    
+    FilePath = GetProgramFilesDir & "GeoGebra.app"
+    If Dir(FilePath, vbDirectory) <> vbNullString Then GoTo slut ' Efter test kan klik på formen aktivere dette event igen, så skal der ikke ventes på download igen.
     
     FilePath = GetDownloadsFolder & "GeoGebra.app"
     
@@ -79,11 +85,12 @@ Private Sub UserForm_Activate()
         GoTo slut
     Else
         CommandButton_stop.visible = False
+        Label_progress.Caption = ""
         s = RunScript("MoveGeoGebraToApplications", "")
         If s = "ok" Then
             RunScript "OpenApps", ""
             Label1.Caption = "Åben GeoGebra på følgende måde"
-            Label2.Caption = "Apps skulle nu gerne være blevet åbnet med Finder." & vbCrLf & vbCrLf & "1. Hold 'Control' nede mens du klikker på 'GeoGebra'" & vbCrLf & "2. Klik Åben" & vbCrLf & "3. Klik Åben igen" & vbCrLf & "4. Gentag punkt 1+2 Så skulle GeoGebra gerne åbne, og WordMat vil fremover også kunne åbne GeoGebra." & vbCrLf & "4. Slut af med at klikke på knappen 'Test' herunder for at se om WordMat kan starte GeoGebra 5"
+            Label2.Caption = "Apps skulle nu gerne være blevet åbnet med Finder." & vbCrLf & vbCrLf & "0. Tildel adgang til GeoGebra når du bliver spurgt om det" & vbCrLf & "1. Hold 'Control' nede mens du klikker på 'GeoGebra'" & vbCrLf & "2. Klik Åben" & vbCrLf & "3. Klik 'OK' " & vbCrLf & "4. Hold 'Control' nede mens du klikker på 'GeoGebra' en gang til" & vbCrLf & "5. Klik 'Åbn' " & vbCrLf & "   Så skulle GeoGebra gerne åbne, og WordMat vil fremover også kunne åbne GeoGebra." & vbCrLf & "6. Slut af med at klikke på knappen 'Test' herunder for at se om WordMat kan starte GeoGebra 5"
             Label2.visible = True
             CommandButton_test.visible = True
         End If
@@ -91,4 +98,5 @@ Private Sub UserForm_Activate()
 
 slut:
 End Sub
+
 
