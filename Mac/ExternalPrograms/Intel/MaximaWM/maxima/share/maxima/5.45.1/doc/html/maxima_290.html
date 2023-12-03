@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for odepack (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for odepack (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for odepack (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_287.html" rel="up" title="odepack-pkg">
+<link href="maxima_291.html" rel="next" title="operatingsystem-pkg">
+<link href="maxima_289.html" rel="prev" title="Getting Started with ODEPACK">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Functions-and-Variables-for-odepack">
+<div class="header">
+<p>
+Next: <a href="maxima_291.html" accesskey="n" rel="next">operatingsystem</a>, Previous: <a href="maxima_289.html" accesskey="p" rel="prev">Getting Started with ODEPACK</a>, Up: <a href="maxima_287.html" accesskey="u" rel="up">odepack</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-odepack-1"></span><h3 class="section">76.2 Functions and Variables for odepack</h3>
+
+<span id="dlsode_005finit"></span><span id="Item_003a-odepack_002fdeffn_002fdlsode_005finit"></span><dl class="def">
+<dt id="index-dlsode_005finit"><span class="category">Function: </span><span><strong>dlsode_init</strong> <em>(<var>fex</var>, <var>vars</var>, <var>method</var>)</em><a href='#index-dlsode_005finit' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>This must be called before running the solver.  This function returns
+a state object for use in the solver.  The user must not modify the
+state.
+</p>
+<p>The ODE to be solved is given in <var>fex</var>, which is a list of the
+equations.  <var>vars</var> is a list of independent variable and the
+dependent variables.  The list of dependent variables must be in the
+same order as the equations if <var>fex</var>.  Finally, <var>method</var>
+indicates the method to be used by the solver:
+</p>
+<dl compact="compact">
+<dt><span><code>10</code></span></dt>
+<dd><p>Nonstiff (Adams) method, no Jacobian used.
+</p></dd>
+<dt><span><code>21</code></span></dt>
+<dd><p>Stiff (BDF) method, user-supplied full Jacobian.
+</p></dd>
+<dt><span><code>22</code></span></dt>
+<dd><p>Stiff method, internally generated full Jacobian.
+</p></dd>
+</dl>
+
+<p>The returned state object is a list of lists.  The sublist is a list
+of two elements:
+</p><dl compact="compact">
+<dt><span><code>f</code></span></dt>
+<dd><p>The compiled function for the ODE.
+</p></dd>
+<dt><span><code>vars</code></span></dt>
+<dd><p>The list independent and dependent variables (<var>vars</var>).
+</p></dd>
+<dt><span><code>mf</code></span></dt>
+<dd><p>The method to be used (<var>method</var>).
+</p></dd>
+<dt><span><code>neq</code></span></dt>
+<dd><p>The number of equations.
+</p></dd>
+<dt><span><code>lrw</code></span></dt>
+<dd><p>Length of the work vector for real values.
+</p></dd>
+<dt><span><code>liw</code></span></dt>
+<dd><p>Length of the work vector for integer values.
+</p></dd>
+<dt><span><code>rwork</code></span></dt>
+<dd><p>Lisp array holding the real-valued work vector.
+</p></dd>
+<dt><span><code>iwork</code></span></dt>
+<dd><p>Lisp array holding the integer-valued work vector.
+</p></dd>
+<dt><span><code>fjac</code></span></dt>
+<dd><p>Compiled analytical Jacobian of the equations
+</p></dd>
+</dl>
+
+<p>See also <code><a href="#dlsode_005fstep">dlsode_step</a></code>.
+</p>
+</dd></dl>
+
+<span id="dlsode_005fstep"></span><span id="Item_003a-odepack_002fdeffn_002fdlsode_005fstep"></span><dl class="def">
+<dt id="index-dlsode_005fstep"><span class="category">Function: </span><span><strong>dlsode_step</strong> <em>(<var>inity</var>, <var>t</var>, <var>tout</var>, <var>rtol</var>, <var>atol</var>, <var>istate</var>, <var>state</var>)</em><a href='#index-dlsode_005fstep' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Performs one step of the solver, returning the values of the
+independent and dependent variables, a success or error code.
+</p>
+<dl compact="compact">
+<dt><span><code>inity</code></span></dt>
+<dd><p>For the first call (when istate = 1), the initial values
+</p></dd>
+<dt><span><code>t</code></span></dt>
+<dd><p>Current value of the independent value
+</p></dd>
+<dt><span><code>tout</code></span></dt>
+<dd><p>Next point where output is desired which must not be equal to <var>t</var>.
+</p></dd>
+<dt><span><code>rtol</code></span></dt>
+<dd><p>relative tolerance parameter
+</p></dd>
+<dt><span><code>atol</code></span></dt>
+<dd><p>Absolute tolerance parameter, scalar of vector.  If
+scalar, it applies to all dependent variables.
+Otherwise it must be the tolerance for each dependent
+variable.
+</p>
+<p>Use <var>rtol</var> = 0 for pure absolute error and use <var>atol</var> = 0
+for pure relative error.
+</p>         
+</dd>
+<dt><span><code>istate</code></span></dt>
+<dd><p>1 for the first call to dlsode, 2 for subsequent calls.
+</p></dd>
+<dt><span><code>state</code></span></dt>
+<dd><p>state returned by dlsode_init.
+</p></dd>
+</dl>
+
+<p>The output is a list of the following items:
+</p><dl compact="compact">
+<dt><span><code>t</code></span></dt>
+<dd><p>independent variable value
+</p></dd>
+<dt><span><code>y</code></span></dt>
+<dd><p>list of values of the dependent variables at time t.
+</p></dd>
+<dt><span><code>istate</code></span></dt>
+<dd><p>Integration status:
+</p><dl compact="compact">
+<dt><span><code>1</code></span></dt>
+<dd><p>no work because tout = tt
+</p></dd>
+<dt><span><code>2</code></span></dt>
+<dd><p>successful result
+</p></dd>
+<dt><span><code>-1</code></span></dt>
+<dd><p>Excess work done on this call
+</p></dd>
+<dt><span><code>-2</code></span></dt>
+<dd><p>Excess accuracy requested
+</p></dd>
+<dt><span><code>-3</code></span></dt>
+<dd><p>Illegal input detected
+</p></dd>
+<dt><span><code>-4</code></span></dt>
+<dd><p>Repeated error test failures
+</p></dd>
+<dt><span><code>-5</code></span></dt>
+<dd><p>Repeated convergence failures (perhaps bad Jacobian or wrong choice of
+mf or tolerances)
+</p></dd>
+<dt><span><code>-6</code></span></dt>
+<dd><p>Error weight because zero during problem (solution component is
+vanished and atol(i) = 0.
+</p></dd>
+</dl>
+</dd>
+<dt><span><code>info</code></span></dt>
+<dd><p>association list of various bits of information:
+</p><dl compact="compact">
+<dt><span><code>n_steps</code></span></dt>
+<dd><p>total steps taken thus far
+</p></dd>
+<dt><span><code>n_f_eval</code></span></dt>
+<dd><p>total number of function evals
+</p></dd>
+<dt><span><code>n_j_eval</code></span></dt>
+<dd><p>total number of Jacobian evals
+</p></dd>
+<dt><span><code>method_order</code></span></dt>
+<dd><p>method order
+</p></dd>
+<dt><span><code>len_rwork</code></span></dt>
+<dd><p>Actual length used for real work array
+</p></dd>
+<dt><span><code>len_iwork</code></span></dt>
+<dd><p>Actual length used for integer work array
+</p></dd>
+</dl>
+</dd>
+</dl>
+
+<p>See also <code><a href="#dlsode_005finit">dlsode_init</a></code>.
+</p>
+</dd></dl>
+
+<span id="Item_003a-include_002dmaxima_002fnode_002foperatingsystem_002dpkg"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_291.html" accesskey="n" rel="next">operatingsystem</a>, Previous: <a href="maxima_289.html" accesskey="p" rel="prev">Getting Started with ODEPACK</a>, Up: <a href="maxima_287.html" accesskey="u" rel="up">odepack</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

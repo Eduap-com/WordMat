@@ -1,0 +1,173 @@
+/*************** -*- Mode: MACSYMA; Package: MAXIMA -*-  ******************/
+/***************************************************************************
+***                                                                    *****
+***     Copyright (c) 1984 by William Schelter,University of Texas     *****
+***     All rights reserved                                            *****
+***************************************************************************/
+
+(reset(), kill(all),0);
+0;
+
+integrate(x^(5/4)/(x+1)^(5/2),x,0,inf);
+beta(9/4,1/4);
+gradef(q(x),sin(x^2));
+q(x);
+diff(log(q(r(x))),x);
+'diff(r(x),x,1)*sin(r(x)^2)/q(r(x));
+integrate(%,x);
+log(q(r(x)));
+
+?nformat(?complex(1,2));
+2*%i + 1;
+?nformat(?/(1,2)); /* ?/(1,2) equivalent to (/ 1 2) in Lisp */
+1/2$
+
+/* example for now-disable interval struct in src/nforma.lisp
+?typep(interval(1,2),?ri);
+true$
+ */
+is(part(?complex(1,2),0)="+");
+true$
+
+/* bug reported to mailing list 2013-05-22 */
+
+block ([a, L],
+  a : make_array (fixnum, 3),
+  L : buildq ([a], lambda ([x], a[x])),
+  print (L, L(0))); /* print(L) --> calls NFORMAT and therefore tickles bug */
+0;
+
+/* expressions like f(x)(y) */
+
+(kill (f, x, y), f(x)(y));
+f(x)(y);
+
+(f(x)(y), [op (%%), args (%%)]);
+[f(x), [y]];
+
+(f(x)(y), [op (op (%%)), args (op (%%))]);
+[f, [x]];
+
+apply (f(x), [y]);
+f(x)(y);
+
+(kill (z), f(x)(y)(z));
+f(x)(y)(z);
+
+(f(x)(y)(z), [op (%%), args (%%), op (op (%%)), args (op (%%)), op (op (op (%%))), args (op (op (%%)))]);
+[f(x)(y), [z], f(x), [y], f, [x]];
+
+ev (f(x)(y), f(u) := buildq ([u], lambda ([v], v*u)));
+x*y;
+
+apply (f(x)(y), [z]);
+f(x)(y)(z);
+
+map (f(x), [1, 2, 3]);
+[f(x)(1), f(x)(2), f(x)(3)];
+
+(f(u) := subst (u, 'u, lambda ([v], v^u)),
+ [f(x), f(x)(y)]);
+[lambda ([v], v^x), y^x];
+
+(kill (f),
+ matchdeclare (xx, integerp),
+ tellsimp (f(xx), subst ('xx = xx, lambda ([a], a - xx))),
+ [f(1), f(1)(y)]);
+[lambda ([a], a - 1), y - 1];
+
+(remrule (f, all), 0);
+0;
+
+(matchdeclare ([xx, yy], integerp),
+ tellsimp (f(xx)(yy), yy*xx),
+ [f(2), f(2)(3)]);
+[f(2), 6];
+
+kill (rules);
+done;
+
+/* verify that subscripted functions are formatted without superfluous parentheses
+ * see SF bug #2998: "extra () in display2d:false output"
+ */
+
+(kill (foo, x, y),
+ string (foo[x](y)));
+"foo[x](y)";
+
+[string (li[2](x)), string (psi[3](y))];
+["li[2](x)", "psi[3](y)"];
+
+/* further tests for #2998 combining subscripted functions with various user-defined operators */
+
+block ([opsies : ["infixie", "prefixie", "postfixie", "naryie", "matchfixie", "nofixie"]],
+  apply (kill, opsies),
+  map (lambda ([f, a], apply (f, [a])), [infix, prefix, postfix, nary, lambda ([a], matchfix (a, a)), nofix], opsies),
+  kill (foo, bar, baz, a, b, c, x, y, z),
+  0);
+0;
+
+foo[x, y](a) infixie bar[z](b, c);
+(foo[x, y](a)) infixie (bar[z](b, c));
+
+string ((foo[x, y](a)) infixie (bar[z](b, c)));
+"foo[x,y](a) infixie bar[z](b,c)";
+
+bar[a, a](x, x) naryie baz[a](x, y) naryie prefixie foo[a, b](x, y);
+(bar[a, a](x, x)) naryie (baz[a](x, y)) naryie (prefixie (foo[a, b](x, y)));
+
+string ((bar[a, a](x, x)) naryie (baz[a](x, y)) naryie (prefixie (foo[a, b](x, y))));
+"bar[a,a](x,x) naryie baz[a](x,y) naryie prefixie foo[a,b](x,y)";
+
+matchfixie foo[1](z) matchfixie;
+matchfixie (foo[1](z)) matchfixie;
+
+string (matchfixie (foo[1](z)) matchfixie);
+"matchfixiefoo[1](z)matchfixie";
+
+/* ... and with built-in operators */
+
+foo[x, y](a)^bar[z](b, c);
+(foo[x, y](a))^(bar[z](b, c));
+
+string ((foo[x, y](a))^(bar[z](b, c)));
+"foo[x,y](a)^bar[z](b,c)";
+
+bar[a, a](x, x) and baz[a](x, y) and not foo[a, b](x, y);
+(bar[a, a](x, x)) and (baz[a](x, y)) and (not (foo[a, b](x, y)));
+
+string ((bar[a, a](x, x)) and (baz[a](x, y)) and (not (foo[a, b](x, y))));
+"bar[a,a](x,x) and baz[a](x,y) and not foo[a,b](x,y)";
+
+[ foo[1](z) ];
+[ (foo[1](z)) ];
+
+string ([ (foo[1](z)) ]);
+"[foo[1](z)]";
+
+/* mailing list 2015-10-05: "Wrong result from integrate?" */
+
+(kill(t, R), integrate(sqrt(sin(t)^2*R^2+(1-cos(t))^2*R^2),t,0,2*%pi));
+8*R;
+
+/* SF bug #2845: "Avoid initialization-time compile in commac.lisp"
+ * Ensure that functions to strip trailing zero digits continue to work.
+ */
+
+string (25.0);
+"25.0";
+
+string(1/16.0);
+"0.0625";
+
+(string(2e7), %% = "2.0e+7" or %% = "2.0E+7" or %%);
+true;
+
+(string(2e-7), %% = "2.0e-7" or %% = "2.0E-7" or %%);
+true;
+
+(string(12345000000.0), %% = "1.2345e+10" or %% = "1.2345E+10" or %%);
+true;
+
+(string(1/1024.0), %% = "9.765625e-4" or %% = "9.765625E-4" or %%);
+true;

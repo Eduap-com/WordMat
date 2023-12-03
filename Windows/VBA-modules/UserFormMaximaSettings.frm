@@ -35,7 +35,7 @@ Private Sub ComboBox_language_Change()
 End Sub
 
 Private Sub CommandButton_annuller_Click()
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub NulstilWordDoc(FilNavn As String)
@@ -219,7 +219,7 @@ On Error Resume Next
         
     SetMathAutoCorrect
     
-    UFMSettings.Hide
+    UFMSettings.hide
     Sprog.CheckSetting
     RibbonSubs.RefreshRibbon
 '#If Mac Then
@@ -347,6 +347,11 @@ Private Sub UserForm_Activate()
     FillComboBoxBackupTime
     SetCaptions
     
+    If Sprog.SprogNr = 1 Then
+        Label_geogebraexplain.Caption = "GeoGebra Calculator Suite bliver installeret sammen med WordMat. Det kører i en browser, men kræver ikke internet. Det fungerer ens på Windows og Mac, og starter hurtigt op." & vbCrLf & "GeoGebra 5 fungerer ens på Windows og Mac, men kræver separat installation." & vbCrLf & "Windows understøtter også de andre app-versioner af GeoGebra som Geogebra 6, Graphing calculator mm. Disse vil blive anvendt, hvis GeoGebra 5 ikke er installeret."
+    Else
+        Label_geogebraexplain.Caption = "GeoGebra Calculator Suite is installed with WordMat. It runs in a browser, but doesn't require internet. It works the same on Windows and Mac, and starts quickly." & vbCrLf & "GeoGebra 5 Works the same on Windows and Mac, but requires installation." & vbCrLf & "Windows also supports the other app-versions of GeoGebra like Geogebra 6, Graphing Calculator etc. These will be used if GeoGebra 5 isn't installed."
+    End If
 #If Mac Then
     OptionButton_graph.visible = False
     OptionButton_gnuplot.visible = False
@@ -355,7 +360,9 @@ Private Sub UserForm_Activate()
     CommandButton_nulstilkemiformler.visible = False
     CommandButton_nulstilmatformler.visible = False
     OptionButton_casgeogebradirect.visible = True
+    OptionButton_geogebra.Caption = "GeoGebra 5"
 #Else
+    OptionButton_geogebra.Caption = "GeoGebra 5 (6, App-versions ...)"
 '    OptionButton_casgeogebradirect.visible = False
 #End If
 

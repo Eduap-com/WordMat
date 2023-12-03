@@ -1,0 +1,648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for Facts (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for Facts (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for Facts (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_56.html" rel="up" title="Maxima's Database">
+<link href="maxima_60.html" rel="next" title="Functions and Variables for Predicates">
+<link href="maxima_58.html" rel="prev" title="Functions and Variables for Properties">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Functions-and-Variables-for-Facts">
+<div class="header">
+<p>
+Next: <a href="maxima_60.html" accesskey="n" rel="next">Functions and Variables for Predicates</a>, Previous: <a href="maxima_58.html" accesskey="p" rel="prev">Functions and Variables for Properties</a>, Up: <a href="maxima_56.html" accesskey="u" rel="up">Maxima&rsquo;s Database</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-Facts-1"></span><h3 class="section">11.3 Functions and Variables for Facts</h3>
+
+<span id="activate"></span><span id="Item_003a-Database_002fdeffn_002factivate"></span><dl class="def">
+<dt id="index-activate"><span class="category">Function: </span><span><strong>activate</strong> <em>(<var>context_1</var>, &hellip;, <var>context_n</var>)</em><a href='#index-activate' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Activates the contexts <var>context_1</var>, &hellip;, <var>context_n</var>.
+The facts in these contexts are then available to
+make deductions and retrieve information.
+The facts in these contexts are not listed by <code>facts ()</code>.
+</p>
+<p>The variable <code><a href="#activecontexts">activecontexts</a></code> is the list
+of contexts which are active by way of the <code>activate</code> function.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="activecontexts"></span><span id="Item_003a-Database_002fdefvr_002factivecontexts"></span><dl class="def">
+<dt id="index-activecontexts"><span class="category">System variable: </span><span><strong>activecontexts</strong><a href='#index-activecontexts' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>[]</code>
+</p>
+<p><code>activecontexts</code> is a list of the contexts which are active
+by way of the <code><a href="#activate">activate</a></code> function, as opposed to being active because
+they are subcontexts of the current context.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+
+<span id="askinteger"></span><span id="Item_003a-Database_002fdeffn_002faskinteger"></span><dl class="def">
+<dt id="index-askinteger"><span class="category">Function: </span><span><strong>askinteger</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>askinteger</tt> (<var>expr</var>, integer) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>askinteger</tt> (<var>expr</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>askinteger</tt> (<var>expr</var>, even) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>askinteger</tt> (<var>expr</var>, odd)</em><a href='#index-askinteger' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>askinteger (<var>expr</var>, integer)</code> attempts to determine from the
+<code>assume</code> database whether <var>expr</var> is an integer.
+<code>askinteger</code> prompts the user if it cannot tell otherwise,
+and attempt to install the information in the database if possible.
+<code>askinteger (<var>expr</var>)</code> is equivalent to
+<code>askinteger (<var>expr</var>, integer)</code>.
+</p>
+<p><code>askinteger (<var>expr</var>, even)</code> and <code>askinteger (<var>expr</var>, odd)</code>
+likewise attempt to determine if <var>expr</var> is an even integer or odd integer,
+respectively.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+
+<span id="asksign"></span><span id="Item_003a-Database_002fdeffn_002fasksign"></span><dl class="def">
+<dt id="index-asksign"><span class="category">Function: </span><span><strong>asksign</strong> <em>(<var>expr</var>)</em><a href='#index-asksign' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>First attempts to determine whether the specified
+expression is positive, negative, or zero.  If it cannot, it asks the
+user the necessary questions to complete its deduction.  The user&rsquo;s
+answer is recorded in the data base for the duration of the current
+computation.  The return value of <code>asksign</code> is one of <code>pos</code>,
+<code>neg</code>, or <code>zero</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="assume"></span><span id="Item_003a-Database_002fdeffn_002fassume"></span><dl class="def">
+<dt id="index-assume"><span class="category">Function: </span><span><strong>assume</strong> <em>(<var>pred_1</var>, &hellip;, <var>pred_n</var>)</em><a href='#index-assume' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Adds predicates <var>pred_1</var>, &hellip;, <var>pred_n</var> to the current context.
+If a predicate is inconsistent or redundant with the predicates in the current
+context, it is not added to the context.  The context accumulates predicates
+from each call to <code>assume</code>.
+</p>
+<p><code>assume</code> returns a list whose elements are the predicates added to the
+context or the atoms <code>redundant</code> or <code>inconsistent</code> where applicable.
+</p>
+<p>The predicates <var>pred_1</var>, &hellip;, <var>pred_n</var> can only be expressions
+with the relational operators <code>&lt; &lt;= equal notequal &gt;=</code> and <code>&gt;</code>.
+Predicates cannot be literal equality <code>=</code> or literal inequality <code>#</code>
+expressions, nor can they be predicate functions such as <code>integerp</code>.
+</p>
+<p>Compound predicates of the form <code><var>pred_1</var> and ... and <var>pred_n</var></code>
+are recognized, but not <code><var>pred_1</var> or ... or <var>pred_n</var></code>.
+<code>not <var>pred_k</var></code> is recognized if <var>pred_k</var> is a relational predicate.
+Expressions of the form <code>not (<var>pred_1</var> and <var>pred_2</var>)</code>
+and <code>not (<var>pred_1</var> or <var>pred_2</var>)</code> are not recognized.
+</p>
+<p>Maxima&rsquo;s deduction mechanism is not very strong;
+there are many obvious consequences which cannot be determined by <code><a href="#is">is</a></code>.
+This is a known weakness.
+</p>
+<p><code>assume</code> does not handle predicates with complex numbers.  If a predicate
+contains a complex number <code>assume</code> returns <code>inconsistent</code> or 
+<code>redundant</code>.
+</p>
+<p><code>assume</code> evaluates its arguments.
+</p>
+<p>See also <code><a href="#is">is</a></code>, <code><a href="#facts">facts</a></code>, <code><a href="#forget">forget</a></code>,<!-- /@w -->
+<code><a href="#context">context</a></code>, and <code><a href="maxima_58.html#declare">declare</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) assume (xx &gt; 0, yy &lt; -1, zz &gt;= 0);
+(%o1)              [xx &gt; 0, yy &lt; - 1, zz &gt;= 0]
+(%i2) assume (aa &lt; bb and bb &lt; cc);
+(%o2)                  [bb &gt; aa, cc &gt; bb]
+(%i3) facts ();
+(%o3)     [xx &gt; 0, - 1 &gt; yy, zz &gt;= 0, bb &gt; aa, cc &gt; bb]
+(%i4) is (xx &gt; yy);
+(%o4)                         true
+(%i5) is (yy &lt; -yy);
+(%o5)                         true
+(%i6) is (sinh (bb - aa) &gt; 0);
+(%o6)                         true
+(%i7) forget (bb &gt; aa);
+(%o7)                       [bb &gt; aa]
+(%i8) prederror : false;
+(%o8)                         false
+(%i9) is (sinh (bb - aa) &gt; 0);
+(%o9)                        unknown
+(%i10) is (bb^2 &lt; cc^2);
+(%o10)                       unknown
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="assumescalar"></span><span id="Item_003a-Database_002fdefvr_002fassumescalar"></span><dl class="def">
+<dt id="index-assumescalar"><span class="category">Option variable: </span><span><strong>assumescalar</strong><a href='#index-assumescalar' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>true</code>
+</p>
+<p><code>assumescalar</code> helps govern whether expressions <code>expr</code>
+for which <code>nonscalarp (expr)</code> is <code>false</code>
+are assumed to behave like scalars for certain transformations.
+</p>
+<p>Let <code>expr</code> represent any expression other than a list or a matrix,
+and let <code>[1, 2, 3]</code> represent any list or matrix.
+Then <code>expr . [1, 2, 3]</code> yields <code>[expr, 2 expr, 3 expr]</code>
+if <code>assumescalar</code> is <code>true</code>, or <code>scalarp (expr)</code> is
+<code>true</code>, or <code>constantp (expr)</code> is <code>true</code>.
+</p>
+<p>If <code>assumescalar</code> is <code>true</code>, such
+expressions will behave like scalars only for commutative
+operators, but not for noncommutative multiplication <code>.</code>.
+</p>
+<p>When <code>assumescalar</code> is <code>false</code>, such
+expressions will behave like non-scalars.
+</p>
+<p>When <code>assumescalar</code> is <code>all</code>, such expressions will behave like
+scalars for all the operators listed above.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="assume_005fpos"></span><span id="Item_003a-Database_002fdefvr_002fassume_005fpos"></span><dl class="def">
+<dt id="index-assume_005fpos"><span class="category">Option variable: </span><span><strong>assume_pos</strong><a href='#index-assume_005fpos' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>assume_pos</code> is <code>true</code> and the sign of a parameter <var>x</var>
+cannot be determined from the current context
+or other considerations,
+<code>sign</code> and <code>asksign (<var>x</var>)</code> return <code>true</code>.
+This may forestall some automatically-generated <code>asksign</code> queries,
+such as may arise from <code>integrate</code> or other computations.
+</p>
+<p>By default, a parameter is <var>x</var> such that <code>symbolp (<var>x</var>)</code>
+or <code>subvarp (<var>x</var>)</code>.
+The class of expressions considered parameters can be modified to some extent
+via the variable <code>assume_pos_pred</code>.
+</p>
+<p><code>sign</code> and <code>asksign</code> attempt to deduce the sign of expressions
+from the sign of operands within the expression.
+For example, if <code>a</code> and <code>b</code> are both positive,
+then <code>a + b</code> is also positive.
+</p>
+<p>However, there is no way to bypass all <code>asksign</code> queries.
+In particular, when the <code>asksign</code> argument is a
+difference <code><var>x</var> - <var>y</var></code> or a logarithm <code>log(<var>x</var>)</code>,
+<code>asksign</code> always requests an input from the user,
+even when <code>assume_pos</code> is <code>true</code> and <code>assume_pos_pred</code> is
+a function which returns <code>true</code> for all arguments.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="assume_005fpos_005fpred"></span><span id="Item_003a-Database_002fdefvr_002fassume_005fpos_005fpred"></span><dl class="def">
+<dt id="index-assume_005fpos_005fpred"><span class="category">Option variable: </span><span><strong>assume_pos_pred</strong><a href='#index-assume_005fpos_005fpred' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>assume_pos_pred</code> is assigned the name of a function
+or a lambda expression of one argument <var>x</var>,
+that function is called to determine
+whether <var>x</var> is considered a parameter for the purpose of <code>assume_pos</code>.
+<code>assume_pos_pred</code> is ignored when <code>assume_pos</code> is <code>false</code>.
+</p>
+<p>The <code>assume_pos_pred</code> function is called by <code>sign</code> and <code>asksign</code>
+with an argument <var>x</var>
+which is either an atom, a subscripted variable, or a function call expression.
+If the <code>assume_pos_pred</code> function returns <code>true</code>,
+<var>x</var> is considered a parameter for the purpose of <code>assume_pos</code>.
+</p>
+<p>By default, a parameter is <var>x</var> such that <code>symbolp (<var>x</var>)</code>
+or <code>subvarp (<var>x</var>)</code>.
+</p>
+<p>See also <code><a href="#assume">assume</a></code> and <code><a href="#assume_005fpos">assume_pos</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) assume_pos: true$
+(%i2) assume_pos_pred: symbolp$
+(%i3) sign (a);
+(%o3)                          pos
+(%i4) sign (a[1]);
+(%o4)                          pnz
+(%i5) assume_pos_pred: lambda ([x], display (x), true)$
+(%i6) asksign (a);
+                              x = a
+
+(%o6)                          pos
+(%i7) asksign (a[1]);
+                             x = a
+                                  1
+
+(%o7)                          pos
+(%i8) asksign (foo (a));
+                           x = foo(a)
+
+(%o8)                          pos
+(%i9) asksign (foo (a) + bar (b));
+                           x = foo(a)
+
+                           x = bar(b)
+
+(%o9)                          pos
+(%i10) asksign (log (a));
+                              x = a
+
+Is  a - 1  positive, negative, or zero?
+
+p;
+(%o10)                         pos
+(%i11) asksign (a - b);
+                              x = a
+
+                              x = b
+
+                              x = a
+
+                              x = b
+
+Is  b - a  positive, negative, or zero?
+
+p;
+(%o11)                         neg
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="context"></span><span id="Item_003a-Database_002fdefvr_002fcontext"></span><dl class="def">
+<dt id="index-context"><span class="category">Option variable: </span><span><strong>context</strong><a href='#index-context' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>initial</code>
+</p>
+<p><code>context</code> names the collection of facts maintained by <code><a href="#assume">assume</a></code> and
+<code><a href="#forget">forget</a></code>.  <code>assume</code> adds facts to the collection named by
+<code>context</code>, while <code>forget</code> removes facts.
+</p>
+<p>Binding <code>context</code> to a name <var>foo</var> changes the current context to
+<var>foo</var>.  If the specified context <var>foo</var> does not yet exist,
+it is created automatically by a call to <code><a href="#newcontext">newcontext</a></code>.
+The specified context is activated automatically.
+</p>
+<p>See <code><a href="#contexts">contexts</a></code> for a general description of the context mechanism.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+
+<span id="contexts"></span><span id="Item_003a-Database_002fdefvr_002fcontexts"></span><dl class="def">
+<dt id="index-contexts"><span class="category">Option variable: </span><span><strong>contexts</strong><a href='#index-contexts' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>[initial, global]</code>
+</p>
+<p><code>contexts</code> is a list of the contexts which
+currently exist, including the currently active context.
+</p>
+<p>The context mechanism makes it possible for an user to bind together
+and name a collection of facts, called a context.
+Once this is done, the user can have Maxima assume or forget large numbers
+of facts merely by activating or deactivating their context.
+</p>
+<p>Any symbolic atom can be a context, and the facts contained in that
+context will be retained in storage until destroyed one by one
+by calling <code><a href="#forget">forget</a></code> or destroyed as a whole by calling <code><a href="maxima_8.html#kill">kill</a></code><!-- /@w -->
+to destroy the context to which they belong.
+</p>
+<p>Contexts exist in a hierarchy, with the root always being
+the context <code>global</code>, which contains information about Maxima that some
+functions need.  When in a given context, all the facts in that
+context are &quot;active&quot; (meaning that they are used in deductions and
+retrievals) as are all the facts in any context which is a subcontext
+of the active context.
+</p>
+<p>When a fresh Maxima is started up, the user is in a
+context called <code>initial</code>, which has <code>global</code> as a subcontext.
+</p>
+<p>See also <code><a href="#facts">facts</a></code>, <code><a href="#newcontext">newcontext</a></code>, <code><a href="#supcontext">supcontext</a></code>,<!-- /@w -->
+<code><a href="#killcontext">killcontext</a></code>, <code><a href="#activate">activate</a></code>, <code><a href="#deactivate">deactivate</a></code>,<!-- /@w -->
+<code><a href="#assume">assume</a></code>, and <code><a href="#forget">forget</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="deactivate"></span><span id="Item_003a-Database_002fdeffn_002fdeactivate"></span><dl class="def">
+<dt id="index-deactivate"><span class="category">Function: </span><span><strong>deactivate</strong> <em>(<var>context_1</var>, &hellip;, <var>context_n</var>)</em><a href='#index-deactivate' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Deactivates the specified contexts <var>context_1</var>, &hellip;, <var>context_n</var>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="facts"></span><span id="Item_003a-Database_002fdeffn_002ffacts"></span><dl class="def">
+<dt id="index-facts"><span class="category">Function: </span><span><strong>facts</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>facts</tt> (<var>item</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>facts</tt> ()</em><a href='#index-facts' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>If <var>item</var> is the name of a context, <code>facts (<var>item</var>)</code> returns a
+list of the facts in the specified context.
+</p>
+<p>If <var>item</var> is not the name of a context, <code>facts (<var>item</var>)</code> returns a
+list of the facts known about <var>item</var> in the current context.  Facts that
+are active, but in a different context, are not listed.
+</p>
+<p><code>facts ()</code> (i.e., without an argument) lists the current context.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="forget"></span><span id="Item_003a-Database_002fdeffn_002fforget"></span><dl class="def">
+<dt id="index-forget"><span class="category">Function: </span><span><strong>forget</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>forget</tt> (<var>pred_1</var>, &hellip;, <var>pred_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>forget</tt> (<var>L</var>)</em><a href='#index-forget' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Removes predicates established by <code><a href="#assume">assume</a></code>.
+The predicates may be expressions equivalent to (but not necessarily identical
+to) those previously assumed.
+</p>
+<p><code>forget (<var>L</var>)</code>, where <var>L</var> is a list of predicates,
+forgets each item on the list.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="is"></span><span id="Item_003a-Database_002fdeffn_002fis"></span><dl class="def">
+<dt id="index-is"><span class="category">Function: </span><span><strong>is</strong> <em>(<var>expr</var>)</em><a href='#index-is' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Attempts to determine whether the predicate <var>expr</var> is provable from the
+facts in the <code>assume</code> database.
+</p>
+<p>If the predicate is provably <code>true</code> or <code>false</code>, <code>is</code> returns
+<code>true</code> or <code>false</code>, respectively.  Otherwise, the return value is
+governed by the global flag <code><a href="maxima_169.html#prederror">prederror</a></code>.  When <code>prederror</code> is
+<code>true</code>, <code>is</code> complains with an error message.  Otherwise, <code>is</code>
+returns <code>unknown</code>.
+</p>
+<p><code>ev(<var>expr</var>, pred)</code> (which can be written  <code><var>expr</var>, pred</code> at
+the interactive prompt) is equivalent to <code>is(<var>expr</var>)</code>.
+</p>
+<p>See also <code><a href="#assume">assume</a></code>, <code><a href="#facts">facts</a></code>, and <code><a href="#maybe">maybe</a></code>.
+</p>
+<p>Examples:
+</p>
+<p><code>is</code> causes evaluation of predicates.
+</p>
+<div class="example">
+<pre class="example">(%i1) %pi &gt; %e;
+(%o1)                       %pi &gt; %e
+(%i2) is (%pi &gt; %e);
+(%o2)                         true
+</pre></div>
+
+<p><code>is</code> attempts to derive predicates from the <code>assume</code> database.
+</p>
+<div class="example">
+<pre class="example">(%i1) assume (a &gt; b);
+(%o1)                        [a &gt; b]
+(%i2) assume (b &gt; c);
+(%o2)                        [b &gt; c]
+(%i3) is (a &lt; b);
+(%o3)                         false
+(%i4) is (a &gt; c);
+(%o4)                         true
+(%i5) is (equal (a, c));
+(%o5)                         false
+</pre></div>
+
+<p>If <code>is</code> can neither prove nor disprove a predicate from the <code>assume</code>
+database, the global flag <code>prederror</code> governs the behavior of <code>is</code>.
+</p>
+<div class="example">
+<pre class="example">(%i1) assume (a &gt; b);
+(%o1)                        [a &gt; b]
+(%i2) prederror: true$
+(%i3) is (a &gt; 0);
+Maxima was unable to evaluate the predicate:
+a &gt; 0
+ -- an error.  Quitting.  To debug this try debugmode(true);
+(%i4) prederror: false$
+(%i5) is (a &gt; 0);
+(%o5)                        unknown
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="killcontext"></span><span id="Item_003a-Database_002fdeffn_002fkillcontext"></span><dl class="def">
+<dt id="index-killcontext"><span class="category">Function: </span><span><strong>killcontext</strong> <em>(<var>context_1</var>, &hellip;, <var>context_n</var>)</em><a href='#index-killcontext' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Kills the contexts <var>context_1</var>, &hellip;, <var>context_n</var>.
+</p>
+<p>If one of the contexts is the current context, the new current context will
+become the first available subcontext of the current context which has not been
+killed.  If the first available unkilled context is <code>global</code> then
+<code>initial</code> is used instead.  If the <code>initial</code> context is killed, a
+new, empty <code>initial</code> context is created.
+</p>
+<p><code>killcontext</code> refuses to kill a context which is
+currently active, either because it is a subcontext of the current
+context, or by use of the function <code><a href="#activate">activate</a></code>.
+</p>
+<p><code>killcontext</code> evaluates its arguments.
+<code>killcontext</code> returns <code>done</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="maybe"></span><span id="Item_003a-Database_002fdeffn_002fmaybe"></span><dl class="def">
+<dt id="index-maybe"><span class="category">Function: </span><span><strong>maybe</strong> <em>(<var>expr</var>)</em><a href='#index-maybe' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Attempts to determine whether the predicate <var>expr</var> is provable from the
+facts in the <code>assume</code> database.
+</p>
+<p>If the predicate is provably <code>true</code> or <code>false</code>, <code>maybe</code> returns
+<code>true</code> or <code>false</code>, respectively.  Otherwise, <code>maybe</code> returns
+<code>unknown</code>.
+</p>
+<p><code>maybe</code> is functionally equivalent to <code>is</code> with
+<code>prederror: false</code>, but the result is computed without actually assigning
+a value to <code>prederror</code>.
+</p>
+<p>See also <code><a href="#assume">assume</a></code>, <code><a href="#facts">facts</a></code>, and <code><a href="#is">is</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) maybe (x &gt; 0);
+(%o1)                        unknown
+(%i2) assume (x &gt; 1);
+(%o2)                        [x &gt; 1]
+(%i3) maybe (x &gt; 0);
+(%o3)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Predicate-functions">Predicate functions</a>
+
+<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="newcontext"></span><span id="Item_003a-Database_002fdeffn_002fnewcontext"></span><dl class="def">
+<dt id="index-newcontext"><span class="category">Function: </span><span><strong>newcontext</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>newcontext</tt> (<var>name</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>newcontext</tt> ()</em><a href='#index-newcontext' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Creates a new, empty context, called <var>name</var>, which
+has <code>global</code> as its only subcontext.  The newly-created context
+becomes the currently active context.
+</p>
+<p>If <var>name</var> is not specified, a new name is created (via <code>gensym</code>) and returned.
+</p>
+<p><code>newcontext</code> evaluates its argument.
+<code>newcontext</code> returns <var>name</var> (if specified) or the new context name.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="sign"></span><span id="Item_003a-Database_002fdeffn_002fsign"></span><dl class="def">
+<dt id="index-sign"><span class="category">Function: </span><span><strong>sign</strong> <em>(<var>expr</var>)</em><a href='#index-sign' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Attempts to determine the sign of <var>expr</var> on the basis of the facts in the
+current data base.  It returns one of the following answers: <code>pos</code>
+(positive), <code>neg</code> (negative), <code>zero</code>, <code>pz</code> (positive or zero),
+<code>nz</code> (negative or zero), <code>pn</code> (positive or negative), or <code>pnz</code>
+(positive, negative, or zero, i.e. nothing known).
+</p>
+<p>See also <code><a href="maxima_48.html#signum">signum</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="supcontext"></span><span id="Item_003a-Database_002fdeffn_002fsupcontext"></span><dl class="def">
+<dt id="index-supcontext"><span class="category">Function: </span><span><strong>supcontext</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>supcontext</tt> (<var>name</var>, <var>context</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>supcontext</tt> (<var>name</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>supcontext</tt> ()</em><a href='#index-supcontext' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Creates a new context, called <var>name</var>, which has <var>context</var> as a
+subcontext.  <var>context</var> must exist.
+</p>
+<p>If <var>context</var> is not specified, the current context is assumed.
+</p>
+<p>If <var>name</var> is not specified, a new name is created (via <code>gensym</code>) and returned.
+</p>
+<p><code>supcontext</code> evaluates its argument.
+<code>supcontext</code> returns <var>name</var> (if specified) or the new context name.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Database_002fnode_002fFunctions-and-Variables-for-Predicates"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_60.html" accesskey="n" rel="next">Functions and Variables for Predicates</a>, Previous: <a href="maxima_58.html" accesskey="p" rel="prev">Functions and Variables for Properties</a>, Up: <a href="maxima_56.html" accesskey="u" rel="up">Maxima&rsquo;s Database</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

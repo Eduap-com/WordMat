@@ -22,37 +22,37 @@ Attribute VB_Exposed = False
 Public ChosenCAS As Integer
 Private Sub CommandButton_cancel_Click()
     ChosenCAS = -1
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_GeoGebraBrowser_Click()
     ChosenCAS = 5
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_GeoGebraGrafisk_Click()
     ChosenCAS = 6
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_GeoGebraNum_Click()
     ChosenCAS = 4
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_GeoGebraSym_Click()
     ChosenCAS = 3
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_maximaNum_Click()
     ChosenCAS = 2
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_MaximaSym_Click()
     ChosenCAS = 1
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub UserForm_Activate()

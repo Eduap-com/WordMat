@@ -1,0 +1,995 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Functions and Variables for Command Line (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Functions and Variables for Command Line (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Functions and Variables for Command Line (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_6.html" rel="up" title="Command Line">
+<link href="maxima_9.html" rel="next" title="Functions and Variables for Display">
+<link href="maxima_7.html" rel="prev" title="Introduction to Command Line">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Functions-and-Variables-for-Command-Line">
+<div class="header">
+<p>
+Next: <a href="maxima_9.html" accesskey="n" rel="next">Functions and Variables for Display</a>, Previous: <a href="maxima_7.html" accesskey="p" rel="prev">Introduction to Command Line</a>, Up: <a href="maxima_6.html" accesskey="u" rel="up">Command Line</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Functions-and-Variables-for-Command-Line-1"></span><h3 class="section">4.2 Functions and Variables for Command Line</h3>
+
+<span id="g_t_005f_005f"></span><span id="Item_003a-Command_002fdefvr_002f_005f_005f"></span><dl class="def">
+<dt id="index-_005f_005f"><span class="category">System variable: </span><span><strong>__</strong><a href='#index-_005f_005f' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>__</code> is the input expression currently being evaluated.  That is, while an
+input expression <var>expr</var> is being evaluated, <code>__</code> is <var>expr</var>.
+</p>
+<p><code>__</code> is assigned the input expression before the input is simplified or
+evaluated.  However, the value of <code>__</code> is simplified (but not evaluated)
+when it is displayed.
+</p>
+<p><code>__</code> is recognized by <code><a href="maxima_71.html#batch">batch</a></code> and <code><a href="maxima_71.html#load">load</a></code>.  In a file processed
+by <code>batch</code>, <code>__</code> has the same meaning as at the interactive prompt.
+In a file processed by <code>load</code>, <code>__</code> is bound to the input expression
+most recently entered at the interactive prompt or in a batch file; <code>__</code>
+is not bound to the input expressions in the file being processed.  In
+particular, when <code>load (<var>filename</var>)</code> is called from the interactive
+prompt, <code>__</code> is bound to <code>load (<var>filename</var>)</code> while the file is
+being processed.
+</p>
+<p>See also <code><a href="#g_t_005f">_</a></code> and <code><a href="#g_t_0025">%</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) print (&quot;I was called as&quot;, __);
+I was called as print(I was called as, __) 
+(%o1)              print(I was called as, __)
+</pre><pre class="example">(%i2) foo (__);
+(%o2)                     foo(foo(__))
+</pre><pre class="example">(%i3) g (x) := (print (&quot;Current input expression =&quot;, __), 0);
+(%o3) g(x) := (print(&quot;Current input expression =&quot;, __), 0)
+</pre><pre class="example">(%i4) [aa : 1, bb : 2, cc : 3];
+(%o4)                       [1, 2, 3]
+</pre><pre class="example">(%i5) (aa + bb + cc)/(dd + ee + g(x));
+                            cc + bb + aa
+Current input expression = -------------- 
+                           g(x) + ee + dd
+                                6
+(%o5)                        -------
+                             ee + dd
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_005f"></span><span id="Item_003a-Command_002fdefvr_002f_005f"></span><dl class="def">
+<dt id="index-_005f"><span class="category">System variable: </span><span><strong>_</strong><a href='#index-_005f' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>_</code> is the most recent input expression (e.g., <code>%i1</code>, <code>%i2</code>,
+<code>%i3</code>, &hellip;).
+</p>
+<p><code>_</code> is assigned the input expression before the input is simplified or
+evaluated.  However, the value of <code>_</code> is simplified (but not evaluated)
+when it is displayed.
+</p>
+<p><code>_</code> is recognized by <code><a href="maxima_71.html#batch">batch</a></code> and <code><a href="maxima_71.html#load">load</a></code>.  In a file processed
+by <code>batch</code>, <code>_</code> has the same meaning as at the interactive prompt.
+In a file processed by <code>load</code>, <code>_</code> is bound to the input expression
+most recently evaluated at the interactive prompt or in a batch file; <code>_</code>
+is not bound to the input expressions in the file being processed.
+</p>
+<p>See also <code><a href="#g_t_005f_005f">__</a></code> and <code><a href="#g_t_0025">%</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) 13 + 29;
+(%o1)                          42
+</pre><pre class="example">(%i2) :lisp $_
+((MPLUS) 13 29)
+</pre><pre class="example">(%i2) _;
+(%o2)                          42
+</pre><pre class="example">(%i3) sin (%pi/2);
+(%o3)                           1
+</pre><pre class="example">(%i4) :lisp $_
+((%SIN) ((MQUOTIENT) $%PI 2))
+</pre><pre class="example">(%i4) _;
+(%o4)                           1
+</pre><pre class="example">(%i5) a: 13$
+(%i6) b: 29$
+</pre><pre class="example">(%i7) a + b;
+(%o7)                          42
+</pre><pre class="example">(%i8) :lisp $_
+((MPLUS) $A $B)
+</pre><pre class="example">(%i8) _;
+(%o8)                         b + a
+</pre><pre class="example">(%i9) a + b;
+(%o9)                          42
+</pre><pre class="example">(%i10) ev (_);
+(%o10)                         42
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+
+<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_0025"></span><span id="Item_003a-Command_002fdefvr_002f_0025"></span><dl class="def">
+<dt id="index-_0025"><span class="category">System variable: </span><span><strong>%</strong><a href='#index-_0025' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p><code>%</code> is the output expression (e.g., <code>%o1</code>, <code>%o2</code>, <code>%o3</code>,
+&hellip;) most recently computed by Maxima, whether or not it was displayed.
+</p>
+<p><code>%</code> is recognized by <code><a href="maxima_71.html#batch">batch</a></code> and <code><a href="maxima_71.html#load">load</a></code>.  In a file processed
+by <code>batch</code>, <code>%</code> has the same meaning as at the interactive prompt.
+In a file processed by <code>load</code>, <code>%</code> is bound to the output expression
+most recently computed at the interactive prompt or in a batch file; <code>%</code>
+is not bound to output expressions in the file being processed.
+</p>
+<p>See also <code><a href="#g_t_005f">_</a></code>, <code><a href="#g_t_0025_0025">%%</a></code>, and <code><a href="#g_t_0025th">%th</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+
+<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_0025_0025"></span><span id="Item_003a-Command_002fdefvr_002f_0025_0025"></span><dl class="def">
+<dt id="index-_0025_0025"><span class="category">System variable: </span><span><strong>%%</strong><a href='#index-_0025_0025' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>In compound statements, namely <code><a href="maxima_164.html#block">block</a></code>, <code><a href="maxima_164.html#lambda">lambda</a></code>, or
+<code>(<var>s_1</var>, ..., <var>s_n</var>)</code>, <code>%%</code> is the value of the previous
+statement.
+</p>
+<p>At the first statement in a compound statement, or outside of a compound
+statement, <code>%%</code> is undefined.
+</p>
+<p><code>%%</code> is recognized by <code><a href="maxima_71.html#batch">batch</a></code> and <code><a href="maxima_71.html#load">load</a></code>, and it has the
+same meaning as at the interactive prompt.
+</p>
+<p>See also <code><a href="#g_t_0025">%</a></code>.
+</p>
+<p>Examples:
+</p>
+<p>The following two examples yield the same result.
+</p>
+<div class="example">
+<pre class="example">(%i1) block (integrate (x^5, x), ev (%%, x=2) - ev (%%, x=1));
+                               21
+(%o1)                          --
+                               2
+(%i2) block ([prev], prev: integrate (x^5, x),
+               ev (prev, x=2) - ev (prev, x=1));
+                               21
+(%o2)                          --
+                               2
+
+</pre></div>
+
+<p>A compound statement may comprise other compound statements.  Whether a
+statement be simple or compound, <code>%%</code> is the value of the previous
+statement.
+</p>
+<div class="example">
+<pre class="example">(%i3) block (block (a^n, %%*42), %%/6);
+                                 n
+(%o3)                         7 a
+</pre></div>
+
+<p>Within a compound statement, the value of <code>%%</code> may be inspected at a break
+prompt, which is opened by executing the <code><a href="maxima_164.html#break">break</a></code> function.  For example,
+entering <code>%%;</code> in the following example yields <code>42</code>.
+</p>
+<div class="example">
+<pre class="example">(%i4) block (a: 42, break ())$
+
+Entering a Maxima break point. Type 'exit;' to resume.
+_%%;
+42
+_
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_0025th"></span><span id="Item_003a-Command_002fdeffn_002f_0025th"></span><dl class="def">
+<dt id="index-_0025th"><span class="category">Function: </span><span><strong>%th</strong> <em>(<var>i</var>)</em><a href='#index-_0025th' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The value of the <var>i</var>&rsquo;th previous output expression.  That is, if the next
+expression to be computed is the <var>n</var>&rsquo;th output, <code>%th (<var>m</var>)</code> is the
+(<var>n</var> - <var>m</var>)&rsquo;th output.
+</p>
+<p><code>%th</code> is recognized by <code><a href="maxima_71.html#batch">batch</a></code> and <code><a href="maxima_71.html#load">load</a></code>.  In a file processed
+by <code>batch</code>, <code>%th</code> has the same meaning as at the interactive prompt.
+In a file processed by <code>load</code>, <code>%th</code> refers to output expressions most
+recently computed at the interactive prompt or in a batch file; <code>%th</code> does
+not refer to output expressions in the file being processed.
+</p>
+<p>See also <code><a href="#g_t_0025">%</a></code> and <code><a href="#g_t_0025_0025">%%</a></code>.
+</p>
+<p>Example:
+</p>
+<p><code>%th</code> is useful in <code>batch</code> files or for referring to a group of
+output expressions.  This example sets <code>s</code> to the sum of the last five
+output expressions.
+</p>
+<div class="example">
+<pre class="example">(%i1) 1;2;3;4;5;
+(%o1)                           1
+(%o2)                           2
+(%o3)                           3
+(%o4)                           4
+(%o5)                           5
+(%i6) block (s: 0, for i:1 thru 5 do s: s + %th(i), s);
+(%o6)                          15
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_003f"></span><span id="Item_003a-Command_002fdeffn_002f_003f"></span><dl class="def">
+<dt id="index-_003f"><span class="category">Special symbol: </span><span><strong>?</strong><a href='#index-_003f' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>As prefix to a function or variable name, <code>?</code> signifies that the name is a
+Lisp name, not a Maxima name.  For example, <code>?round</code> signifies the Lisp
+function <code>ROUND</code>.  See <a href="maxima_166.html">Lisp and Maxima</a> for more on this point.
+</p>
+<p>The notation <code>? word</code> (a question mark followed a word, separated by
+whitespace) is equivalent to <code>describe(&quot;word&quot;)</code>.  The question mark must
+occur at the beginning of an input line; otherwise it is not recognized as a
+request for documentation.  See also <code><a href="maxima_5.html#describe">describe</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Help">Help</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_003f_003f"></span><span id="Item_003a-Command_002fdeffn_002f_003f_003f"></span><dl class="def">
+<dt id="index-_003f_003f"><span class="category">Special symbol: </span><span><strong>??</strong><a href='#index-_003f_003f' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The notation <code>?? word</code> (<code>??</code> followed a word, separated by whitespace)
+is equivalent to <code>describe(&quot;word&quot;, inexact)</code>.  The question mark must occur
+at the beginning of an input line; otherwise it is not recognized as a request
+for documentation.  See also <code><a href="maxima_5.html#describe">describe</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Help">Help</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="g_t_0024"></span><span id="Item_003a-Command_002fdeffn_002f_0024"></span><dl class="def">
+<dt id="index-_0024"><span class="category">Input terminator: </span><span><strong>$</strong><a href='#index-_0024' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The dollar sign <code>$</code> terminates an input expression,
+and the most recent output <code>%</code> and an output label, e.g. <code>%o1</code>,
+are assigned the result, but the result is not displayed.
+</p>
+<p>See also <code><a href="#g_t_003b">;</a></code>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) 1 + 2 + 3 $
+</pre><pre class="example">(%i2) %;
+(%o2)                           6
+</pre><pre class="example">(%i3) %o1;
+(%o3)                           6
+</pre></div>
+</dd></dl>
+
+<span id="g_t_003b"></span><span id="Item_003a-Command_002fdeffn_002f_003b"></span><dl class="def">
+<dt id="index-_003b"><span class="category">Input terminator: </span><span><strong>;</strong><a href='#index-_003b' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The semicolon <code>;</code> terminates an input expression,
+and the resulting output is displayed.
+</p>
+<p>See also <code><a href="#g_t_0024">$</a></code>.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example">(%i1) 1 + 2 + 3;
+(%o1)                           6
+</pre></div>
+</dd></dl>
+
+<span id="inchar"></span><span id="Item_003a-Command_002fdefvr_002finchar"></span><dl class="def">
+<dt id="index-inchar"><span class="category">Option variable: </span><span><strong>inchar</strong><a href='#index-inchar' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>%i</code>
+</p>
+<p><code>inchar</code> is the prefix of the labels of expressions entered by the user.
+Maxima automatically constructs a label for each input expression by 
+concatenating <code>inchar</code> and <code><a href="#linenum">linenum</a></code>.
+</p>
+<p><code>inchar</code> may be assigned any string or symbol, not necessarily a single 
+character.  Because Maxima internally takes into account only the first char of
+the prefix, the prefixes <code>inchar</code>, <code><a href="#outchar">outchar</a></code>, and
+<code><a href="#linechar">linechar</a></code> should have a different first char.  Otherwise some commands
+like <code>kill(inlabels)</code> do not work as expected.
+</p>
+<p>See also <code><a href="#labels">labels</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) inchar: &quot;input&quot;;
+(%o1)                         input
+</pre><pre class="example">(input2) expand((a+b)^3);
+                     3        2      2      3
+(%o2)               b  + 3 a b  + 3 a  b + a
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="infolists"></span><span id="Item_003a-Command_002fdefvr_002finfolists"></span><dl class="def">
+<dt id="index-infolists"><span class="category">System variable: </span><span><strong>infolists</strong><a href='#index-infolists' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>[]</code>
+</p>
+<p><code>infolists</code> is a list of the names of all of the information
+lists in Maxima.  These are:
+</p>
+<dl compact="compact">
+<dt><span><code>labels</code></span></dt>
+<dd><p>All bound <code>%i</code>, <code>%o</code>, and <code>%t</code> labels.
+</p></dd>
+<dt><span><code>values</code></span></dt>
+<dd><p>All bound atoms which are user variables, not Maxima options or switches,
+created by <code><a href="maxima_40.html#g_t_003a">:</a></code> or <code><a href="maxima_40.html#g_t_003a_003a">::</a></code> or functional binding.
+</p></dd>
+<dt><span><code>functions</code></span></dt>
+<dd><p>All user-defined functions, created by <code><a href="maxima_40.html#g_t_003a_003d">:=</a></code> or <code><a href="maxima_164.html#define">define</a></code>.
+</p></dd>
+<dt><span><code>arrays</code></span></dt>
+<dd><p>All arrays, <code><a href="maxima_23.html#hashed-arrays">hashed arrays</a></code> and <code><a href="maxima_162.html#memoizing-functions">memoizing functions</a></code>.
+</p></dd>
+<dt><span><code>macros</code></span></dt>
+<dd><p>All user-defined macro functions, created by <code><a href="maxima_40.html#g_t_003a_003a_003d">::=</a></code>.
+</p></dd>
+<dt><span><code>myoptions</code></span></dt>
+<dd><p>All options ever reset by the user (whether or not they
+are later reset to their default values).
+</p></dd>
+<dt><span><code>rules</code></span></dt>
+<dd><p>All user-defined pattern matching and simplification rules, created
+by <code><a href="maxima_156.html#tellsimp">tellsimp</a></code>, <code><a href="maxima_156.html#tellsimpafter">tellsimpafter</a></code>, <code><a href="maxima_156.html#defmatch">defmatch</a></code>, or
+<code><a href="maxima_156.html#defrule">defrule</a></code>.
+</p></dd>
+<dt><span><code>aliases</code></span></dt>
+<dd><p>All atoms which have an user-defined alias, created by the <code><a href="maxima_33.html#alias">alias</a></code>,<!-- /@w -->
+<code><a href="maxima_33.html#ordergreat">ordergreat</a></code>, <code><a href="maxima_33.html#orderless">orderless</a></code> functions or by declaring the atom as a
+<code><a href="maxima_33.html#noun">noun</a></code> with <code><a href="maxima_58.html#declare">declare</a></code>.
+</p></dd>
+<dt><span><code>dependencies</code></span></dt>
+<dd><p>All atoms which have functional dependencies, created by the
+<code><a href="maxima_95.html#depends">depends</a></code>, <code><a href="maxima_95.html#dependencies">dependencies</a></code>, or <code><a href="maxima_95.html#gradef">gradef</a></code> functions.
+</p></dd>
+<dt><span><code>gradefs</code></span></dt>
+<dd><p>All functions which have user-defined derivatives, created by the
+<code><a href="maxima_95.html#gradef">gradef</a></code> function.
+</p></dd>
+<dt><span><code>props</code></span></dt>
+<dd><p>All atoms which have any property other than those mentioned above, such as
+properties established by <code><a href="maxima_95.html#atvalue">atvalue</a></code> or <code><a href="maxima_156.html#matchdeclare">matchdeclare</a></code>, etc.,
+as well as properties established in the <code><a href="maxima_58.html#declare">declare</a></code> function.
+</p></dd>
+<dt><span><code>structures</code></span></dt>
+<dd><p>All structs defined using <code><a href="maxima_27.html#defstruct">defstruct</a></code>.
+</p></dd>
+<dt><span><code>let_rule_packages</code></span></dt>
+<dd><p>All user-defined <code><a href="maxima_156.html#let">let</a></code> rule packages
+plus the special package <code><a href="maxima_156.html#default_005flet_005frule_005fpackage">default_let_rule_package</a></code>.
+(<code>default_let_rule_package</code> is the name of the rule package used when
+one is not explicitly set by the user.)
+</p></dd>
+</dl>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Declarations-and-inferences">Declarations and inferences</a>
+
+<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+
+<span id="kill"></span><span id="Item_003a-Command_002fdeffn_002fkill"></span><dl class="def">
+<dt id="index-kill"><span class="category">Function: </span><span><strong>kill</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kill</tt> (<var>a_1</var>, &hellip;, <var>a_n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kill</tt> (labels) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kill</tt> (inlabels, outlabels, linelabels) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kill</tt> (<var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kill</tt> ([<var>m</var>, <var>n</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kill</tt> (values, functions, arrays, &hellip;) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kill</tt> (all) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>kill</tt> (allbut (<var>a_1</var>, &hellip;, <var>a_n</var>))</em><a href='#index-kill' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Removes all bindings (value, function, array, or rule) from the arguments
+<var>a_1</var>, &hellip;, <var>a_n</var>.  An argument <var>a_k</var> may be a symbol or a
+single array element.  When <var>a_k</var> is a single array element, <code>kill</code>
+unbinds that element without affecting any other elements of the array.
+</p>
+<p>Several special arguments are recognized.  Different kinds of arguments
+may be combined, e.g., <code>kill (inlabels, functions, allbut (foo, bar))</code>.
+</p>
+<p><code>kill (labels)</code> unbinds all input, output, and intermediate expression
+labels created so far.  <code>kill (inlabels)</code> unbinds only input labels which
+begin with the current value of <code><a href="#inchar">inchar</a></code>.  Likewise,
+<code>kill (outlabels)</code> unbinds only output labels which begin with the current
+value of <code><a href="#outchar">outchar</a></code>, and <code>kill (linelabels)</code> unbinds only
+intermediate expression labels which begin with the current value of
+<code><a href="#linechar">linechar</a></code>.
+</p>
+<p><code>kill (<var>n</var>)</code>, where <var>n</var> is an integer,
+unbinds the <var>n</var> most recent input and output labels.
+</p>
+<p><code>kill ([<var>m</var>, <var>n</var>])</code> unbinds input and output labels <var>m</var> through
+<var>n</var>.
+</p>
+<p><code>kill (<var>infolist</var>)</code>, where <var>infolist</var> is any item in
+<code>infolists</code> (such as <code><a href="#values">values</a></code>, <code><a href="maxima_164.html#functions">functions</a></code>, or
+<code><a href="maxima_24.html#arrays">arrays</a></code>) unbinds all items in <var>infolist</var>.
+See also <code><a href="#infolists">infolists</a></code>.
+</p>
+<p><code>kill (all)</code> unbinds all items on all infolists.  <code>kill (all)</code> does
+not reset global variables to their default values; see <code><a href="#reset">reset</a></code> on this
+point.
+</p>
+<p><code>kill (allbut (<var>a_1</var>, ..., <var>a_n</var>))</code> unbinds all items on all
+infolists except for <var>a_1</var>, &hellip;, <var>a_n</var>.
+<code>kill (allbut (<var>infolist</var>))</code> unbinds all items except for the ones on
+<var>infolist</var>, where <var>infolist</var> is <code><a href="#values">values</a></code>,<!-- /@w -->
+<code><a href="maxima_164.html#functions">functions</a></code>, <code><a href="maxima_24.html#arrays">arrays</a></code>, etc.
+</p>
+<p>The memory taken up by a bound property is not released until all symbols are
+unbound from it.  In particular, to release the memory taken up by the value of
+a symbol, one unbinds the output label which shows the bound value, as well as
+unbinding the symbol itself.
+</p>
+<p><code>kill</code> quotes its arguments.  The quote-quote operator <code>'<!-- /@w -->'</code>
+defeats quotation.
+</p>
+<p><code>kill (<var>symbol</var>)</code> unbinds all properties of <var>symbol</var>.  In contrast,
+the functions <code><a href="maxima_153.html#remvalue">remvalue</a></code>, <code><a href="maxima_164.html#remfunction">remfunction</a></code>,<!-- /@w -->
+<code><a href="maxima_24.html#remarray">remarray</a></code>, and <code><a href="maxima_156.html#remrule">remrule</a></code> unbind a specific property.
+Note that facts declared by <code><a href="maxima_59.html#assume">assume</a></code> don&rsquo;t require a symbol they apply to,
+therefore aren&rsquo;t stored as properties of symbols and therefore aren&rsquo;t affected
+by <code>kill</code>.
+</p>
+<p><code>kill</code> always returns <code>done</code>, even if an argument has no binding.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Evaluation">Evaluation</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+
+<a href="maxima_369.html#Category_003a-Session-management">Session management</a>
+</div>
+</p></dd></dl>
+
+<span id="labels"></span><span id="Item_003a-Command_002fdeffn_002flabels"></span><dl class="def">
+<dt id="index-labels"><span class="category">Function: </span><span><strong>labels</strong> <em>(<var>symbol</var>)</em><a href='#index-labels' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Returns the list of input, output, or intermediate expression labels which begin
+with <var>symbol</var>.  Typically <var>symbol</var> is the value of
+<code><a href="#inchar">inchar</a></code>, <code><a href="#outchar">outchar</a></code>, or <code><a href="#linechar">linechar</a></code>.
+If no labels begin with <var>symbol</var>, <code>labels</code> returns an empty list.
+</p>
+<p>By default, Maxima displays the result of each user input expression, giving the
+result an output label.  The output display is suppressed by terminating the
+input with <code>$</code> (dollar sign) instead of <code>;</code> (semicolon).  An output
+label is constructed and bound to the result, but not displayed, and the label
+may be referenced in the same way as displayed output labels.  See also
+<code><a href="#g_t_0025">%</a></code>, <code><a href="#g_t_0025_0025">%%</a></code>, and <code><a href="#g_t_0025th">%th</a></code>.
+</p>
+<p>Intermediate expression labels can be generated by some functions.  The option
+variable <code><a href="maxima_102.html#programmode">programmode</a></code> controls whether <code><a href="maxima_102.html#solve">solve</a></code> and some other
+functions generate intermediate expression labels instead of returning a list of
+expressions.  Some other functions, such as <code><a href="maxima_9.html#ldisplay">ldisplay</a></code>, always generate
+intermediate expression labels.
+</p>
+<p>See also <code><a href="#inchar">inchar</a></code>, <code><a href="#outchar">outchar</a></code>, <code><a href="#linechar">linechar</a></code>, and
+<code><a href="#infolists">infolists</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-functions">Display functions</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Command_002fdefvr_002flabels"></span><dl class="def">
+<dt id="index-labels-1"><span class="category">System variable: </span><span><strong>labels</strong><a href='#index-labels-1' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The variable <code>labels</code> is the list of input, output, and intermediate
+expression labels, including all previous labels if <code>inchar</code>,
+<code>outchar</code>, or <code>linechar</code> were redefined.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="linechar"></span><span id="Item_003a-Command_002fdefvr_002flinechar"></span><dl class="def">
+<dt id="index-linechar"><span class="category">Option variable: </span><span><strong>linechar</strong><a href='#index-linechar' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>%t</code>
+</p>
+<p><code>linechar</code> is the prefix of the labels of intermediate expressions 
+generated by Maxima.  Maxima constructs a label for each intermediate expression 
+(if displayed) by concatenating <code>linechar</code> and <code><a href="#linenum">linenum</a></code>.
+</p>
+<p><code>linechar</code> may be assigned any string or symbol, not necessarily a single 
+character.  Because Maxima internally takes into account only the first char of
+the prefix, the prefixes <code><a href="#inchar">inchar</a></code>, <code><a href="#outchar">outchar</a></code>, and
+<code>linechar</code> should have a different first char.  Otherwise some commands
+like <code>kill(inlabels)</code> do not work as expected.
+</p>
+<p>Intermediate expressions might or might not be displayed.
+See <code><a href="maxima_102.html#programmode">programmode</a></code> and <code><a href="#labels">labels</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+</div>
+</p></dd></dl>
+
+
+<span id="linenum"></span><span id="Item_003a-Command_002fdefvr_002flinenum"></span><dl class="def">
+<dt id="index-linenum"><span class="category">System variable: </span><span><strong>linenum</strong><a href='#index-linenum' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>The line number of the current pair of input and output expressions.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+
+<span id="myoptions"></span><span id="Item_003a-Command_002fdefvr_002fmyoptions"></span><dl class="def">
+<dt id="index-myoptions"><span class="category">System variable: </span><span><strong>myoptions</strong><a href='#index-myoptions' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>[]</code>
+</p>
+<p><code>myoptions</code> is the list of all options ever reset by the user,
+whether or not they get reset to their default value.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+
+<a href="maxima_369.html#Category_003a-Session-management">Session management</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="nolabels"></span><span id="Item_003a-Command_002fdefvr_002fnolabels"></span><dl class="def">
+<dt id="index-nolabels"><span class="category">Option variable: </span><span><strong>nolabels</strong><a href='#index-nolabels' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>nolabels</code> is <code>true</code>, input and output result labels (<code>%i</code>
+and <code>%o</code>, respectively) are displayed, but the labels are not bound to
+results, and the labels are not appended to the <code><a href="#labels">labels</a></code> list.  Since
+labels are not bound to results, garbage collection can recover the memory taken
+up by the results.
+</p>
+<p>Otherwise input and output result labels are bound to results, and the labels
+are appended to the <code>labels</code> list.
+</p>
+<p>Intermediate expression labels (<code>%t</code>) are not affected by <code>nolabels</code>;
+whether <code>nolabels</code> is <code>true</code> or <code>false</code>, intermediate expression
+labels are bound and appended to the <code>labels</code> list.
+</p>
+<p>See also <code><a href="maxima_71.html#batch">batch</a></code>, <code><a href="maxima_71.html#load">load</a></code>, and <code><a href="#labels">labels</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-flags">Global flags</a>
+
+<a href="maxima_369.html#Category_003a-Session-management">Session management</a>
+</div>
+</p></dd></dl>
+
+
+<span id="optionset"></span><span id="Item_003a-Command_002fdefvr_002foptionset"></span><dl class="def">
+<dt id="index-optionset"><span class="category">Option variable: </span><span><strong>optionset</strong><a href='#index-optionset' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>optionset</code> is <code>true</code>, Maxima prints out a message whenever a
+Maxima option is reset.  This is useful if the user is doubtful of the spelling
+of some option and wants to make sure that the variable he assigned a value to
+was truly an option variable.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) optionset:true;
+assignment: assigning to option optionset
+(%o1)                         true
+(%i2) gamma_expand:true;
+assignment: assigning to option gamma_expand
+(%o2)                         true
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-flags">Global flags</a>
+
+<a href="maxima_369.html#Category_003a-Session-management">Session management</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="outchar"></span><span id="Item_003a-Command_002fdefvr_002foutchar"></span><dl class="def">
+<dt id="index-outchar"><span class="category">Option variable: </span><span><strong>outchar</strong><a href='#index-outchar' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>%o</code>
+</p>
+<p><code>outchar</code> is the prefix of the labels of expressions computed by Maxima.
+Maxima automatically constructs a label for each computed expression by 
+concatenating <code>outchar</code> and <code><a href="#linenum">linenum</a></code>.
+</p>
+<p><code>outchar</code> may be assigned any string or symbol, not necessarily a single 
+character.  Because Maxima internally takes into account only the first char of
+the prefix, the prefixes <code><a href="#inchar">inchar</a></code>, <code>outchar</code> and
+<code><a href="#linechar">linechar</a></code> should have a different first char.  Otherwise some commands
+like <code>kill(inlabels)</code> do not work as expected.
+</p>
+<p>See also <code><a href="#labels">labels</a></code>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) outchar: &quot;output&quot;;
+(output1)                    output
+</pre><pre class="example">(%i2) expand((a+b)^3);
+                     3        2      2      3
+(output2)           b  + 3 a b  + 3 a  b + a
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+</div>
+</p></dd></dl>
+
+<span id="playback"></span><span id="Item_003a-Command_002fdeffn_002fplayback"></span><dl class="def">
+<dt id="index-playback"><span class="category">Function: </span><span><strong>playback</strong> <em><br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>playback</tt> () <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>playback</tt> (<var>n</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>playback</tt> ([<var>m</var>, <var>n</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>playback</tt> ([<var>m</var>]) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>playback</tt> (input) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>playback</tt> (slow) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>playback</tt> (time) <br>&nbsp;&nbsp;&nbsp;&nbsp;<tt>playback</tt> (grind)</em><a href='#index-playback' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Displays input, output, and intermediate expressions, without recomputing them.
+<code>playback</code> only displays the expressions bound to labels; any other output
+(such as text printed by <code><a href="maxima_9.html#print">print</a></code> or <code><a href="maxima_5.html#describe">describe</a></code>, or error messages)
+is not displayed.  See also <code><a href="#labels">labels</a></code>.
+</p>
+<p><code>playback</code> quotes its arguments.  The quote-quote operator <code>'<!-- /@w -->'</code>
+defeats quotation.  <code>playback</code> always returns <code>done</code>.
+</p>
+<p><code>playback ()</code> (with no arguments) displays all input, output, and
+intermediate expressions generated so far.  An output expression is displayed
+even if it was suppressed by the <code>$</code> terminator when it was originally
+computed.
+</p>
+<p><code>playback (<var>n</var>)</code> displays the most recent <var>n</var> expressions.
+Each input, output, and intermediate expression counts as one.
+</p>
+<p><code>playback ([<var>m</var>, <var>n</var>])</code> displays input, output, and intermediate
+expressions with numbers from <var>m</var> through <var>n</var>, inclusive.
+</p>
+<p><code>playback ([<var>m</var>])</code> is equivalent to
+<code>playback ([<var>m</var>, <var>m</var>])</code>; this usually prints one pair of input and
+output expressions.
+</p>
+<p><code>playback (input)</code> displays all input expressions generated so far.
+</p>
+<p><code>playback (slow)</code> pauses between expressions and waits for the user to
+press <code>enter</code>.  This behavior is similar to <code><a href="maxima_5.html#demo">demo</a></code>.
+<code>playback (slow)</code> is useful in conjunction with <code>save</code> or
+<code><a href="maxima_71.html#stringout">stringout</a></code> when creating a secondary-storage file in order to pick out
+useful expressions.
+</p>
+<p><code>playback (time)</code> displays the computation time for each expression.
+</p>
+<p><code>playback (grind)</code> displays input expressions in the same format as the
+<code>grind</code> function.  Output expressions are not affected by the <code>grind</code>
+option.  See <code><a href="maxima_9.html#grind">grind</a></code>.
+</p>
+<p>Arguments may be combined, e.g., <code>playback ([5, 10], grind, time, slow)</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-functions">Display functions</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="prompt"></span><span id="Item_003a-Command_002fdefvr_002fprompt"></span><dl class="def">
+<dt id="index-prompt"><span class="category">Option variable: </span><span><strong>prompt</strong><a href='#index-prompt' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>_</code>
+</p>
+<p><code>prompt</code> is the prompt symbol of the <code><a href="maxima_5.html#demo">demo</a></code> function,
+<code>playback (slow)</code> mode, and the Maxima break loop (as invoked by
+<code><a href="maxima_164.html#break">break</a></code>).
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+
+<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="quit"></span><span id="Item_003a-Command_002fdeffn_002fquit"></span><dl class="def">
+<dt id="index-quit"><span class="category">Function: </span><span><strong>quit</strong> <em>()</em><a href='#index-quit' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Terminates the Maxima session.  Note that the function must be invoked as
+<code>quit();</code> or <code>quit()$</code>, not <code>quit</code> by itself.
+</p>
+<p>To stop a lengthy computation, type <code>control-C</code>.  The default action is to
+return to the Maxima prompt.  If <code>*debugger-hook*</code> is <code>nil</code>,
+<code>control-C</code> opens the Lisp debugger.  See also <a href="maxima_170.html">Debugging</a>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="read"></span><span id="Item_003a-Command_002fdeffn_002fread"></span><dl class="def">
+<dt id="index-read"><span class="category">Function: </span><span><strong>read</strong> <em>(<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em><a href='#index-read' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Prints <var>expr_1</var>, &hellip;, <var>expr_n</var>, then reads one expression from the
+console and returns the evaluated expression.  The expression is terminated with
+a semicolon <code>;</code> or dollar sign <code>$</code>.
+</p>
+<p>See also <code><a href="#readonly">readonly</a></code>
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) foo: 42$ 
+(%i2) foo: read (&quot;foo is&quot;, foo, &quot; -- enter new value.&quot;)$
+foo is 42  -- enter new value. 
+(a+b)^3;
+(%i3) foo;
+                                     3
+(%o3)                         (b + a)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="readonly"></span><span id="Item_003a-Command_002fdeffn_002freadonly"></span><dl class="def">
+<dt id="index-readonly"><span class="category">Function: </span><span><strong>readonly</strong> <em>(<var>expr_1</var>, &hellip;, <var>expr_n</var>)</em><a href='#index-readonly' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Prints <var>expr_1</var>, &hellip;, <var>expr_n</var>, then reads one expression from the
+console and returns the expression (without evaluation).  The expression is
+terminated with a <code>;</code> (semicolon) or <code>$</code> (dollar sign).
+</p>
+<p>See also <code><a href="#read">read</a></code>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example">(%i1) aa: 7$
+(%i2) foo: readonly (&quot;Enter an expression:&quot;);
+Enter an expression: 
+2^aa;
+                                  aa
+(%o2)                            2
+(%i3) foo: read (&quot;Enter an expression:&quot;);
+Enter an expression: 
+2^aa;
+(%o3)                            128
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="reset"></span><span id="Item_003a-Command_002fdeffn_002freset"></span><dl class="def">
+<dt id="index-reset"><span class="category">Function: </span><span><strong>reset</strong> <em>()</em><a href='#index-reset' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Resets many global variables and options, and some other variables, to their
+default values.
+</p>
+<p><code>reset</code> processes the variables on the Lisp list
+<code>*variable-initial-values*</code>.  The Lisp macro <code>defmvar</code> puts variables
+on this list (among other actions).  Many, but not all, global variables and
+options are defined by <code>defmvar</code>, and some variables defined by
+<code>defmvar</code> are not global variables or options.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Session-management">Session management</a>
+</div>
+</p></dd></dl>
+
+<span id="showtime"></span><span id="Item_003a-Command_002fdefvr_002fshowtime"></span><dl class="def">
+<dt id="index-showtime"><span class="category">Option variable: </span><span><strong>showtime</strong><a href='#index-showtime' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Default value: <code>false</code>
+</p>
+<p>When <code>showtime</code> is <code>true</code>, the computation time and elapsed time is
+printed with each output expression.
+</p>
+<p>The computation time is always recorded, so <code><a href="maxima_149.html#time">time</a></code> and <code><a href="#playback">playback</a></code> can
+display the computation time even when <code>showtime</code> is <code>false</code>.
+</p>
+<p>See also <code><a href="maxima_173.html#timer">timer</a></code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Display-flags-and-variables">Display flags and variables</a>
+
+<a href="maxima_369.html#Category_003a-Debugging">Debugging</a>
+</div>
+</p></dd></dl>
+
+<span id="to_005flisp"></span><span id="Item_003a-Command_002fdeffn_002fto_005flisp"></span><dl class="def">
+<dt id="index-to_005flisp"><span class="category">Function: </span><span><strong>to_lisp</strong> <em>()</em><a href='#index-to_005flisp' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>Enters the Lisp system under Maxima.  <code>(to-maxima)</code> returns to Maxima.
+</p>
+<p>Example:
+</p>
+<p>Define a function and enter the Lisp system under Maxima.  The definition is
+inspected on the property list, then the function definition is extracted,
+factored and stored in the variable <code>$result</code>.  The variable can be used in Maxima
+after returning to Maxima.
+</p>
+<div class="example">
+<pre class="example">(%i1) f(x):=x^2+x;
+                                  2
+(%o1)                    f(x) := x  + x
+(%i2) to_lisp();
+Type (to-maxima) to restart, ($quit) to quit Maxima.
+MAXIMA&gt; (symbol-plist '$f)
+(MPROPS (NIL MEXPR ((LAMBDA) ((MLIST) $X) 
+                             ((MPLUS) ((MEXPT) $X 2) $X))))
+MAXIMA&gt; (setq $result ($factor (caddr (mget '$f 'mexpr))))
+((MTIMES SIMP FACTORED) $X ((MPLUS SIMP IRREDUCIBLE) 1 $X))
+MAXIMA&gt; (to-maxima)
+Returning to Maxima
+(%o2)                         true
+(%i3) result;
+(%o3)                       x (x + 1)
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Console-interaction">Console interaction</a>
+</div>
+</p></dd></dl>
+
+<span id="values"></span><span id="Item_003a-Command_002fdefvr_002fvalues"></span><dl class="def">
+<dt id="index-values"><span class="category">System variable: </span><span><strong>values</strong><a href='#index-values' class='copiable-anchor'> &para;</a></span></dt>
+<dd><p>Initial value: <code>[]</code>
+</p>
+<p><code>values</code> is a list of all bound user variables (not Maxima options or
+switches).  The list comprises symbols bound by <code><a href="maxima_40.html#g_t_003a">:</a></code>, or <code><a href="maxima_40.html#g_t_003a_003a">::</a></code>.
+</p>
+<p>If the value of a variable is removed with the commands <code>kill</code>, 
+<code><a href="maxima_58.html#remove">remove</a></code>, or <code><a href="maxima_153.html#remvalue">remvalue</a></code> the variable is deleted from
+<code>values</code>.
+</p>
+<p>See <code><a href="maxima_164.html#functions">functions</a></code> for a list of user defined functions.
+</p>
+<p>Examples:
+</p>
+<p>First, <code>values</code> shows the symbols <code>a</code>, <code>b</code>, and <code>c</code>, but 
+not <code>d</code>, it is not bound to a value, and not the user function <code>f</code>.
+The values are removed from the variables.  <code>values</code> is the empty list.
+</p>
+<div class="example">
+<pre class="example">(%i1) [a:99, b:: a-90, c:a-b, d, f(x):=x^2];
+                                           2
+(%o1)              [99, 9, 90, d, f(x) := x ]
+</pre><pre class="example">(%i2) values;
+(%o2)                       [a, b, c]
+</pre><pre class="example">(%i3) [kill(a), remove(b,value), remvalue(c)];
+(%o3)                   [done, done, [c]]
+</pre><pre class="example">(%i4) values;
+(%o4)                          []
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Evaluation">Evaluation</a>
+
+<a href="maxima_369.html#Category_003a-Global-variables">Global variables</a>
+</div>
+</p></dd></dl>
+
+<span id="Item_003a-Command_002fnode_002fFunctions-and-Variables-for-Display"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_9.html" accesskey="n" rel="next">Functions and Variables for Display</a>, Previous: <a href="maxima_7.html" accesskey="p" rel="prev">Introduction to Command Line</a>, Up: <a href="maxima_6.html" accesskey="u" rel="up">Command Line</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

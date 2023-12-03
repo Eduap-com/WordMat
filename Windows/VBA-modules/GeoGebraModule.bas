@@ -218,8 +218,12 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
     cmd = Replace(cmd, "+", "%2B")
         
 #If Mac Then
-'    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html"
-    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
+'    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
+    If Gtype = "" Then
+        UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html"
+    Else
+        UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
+    End If
 #Else
 '    UrlLink = "https://geogebra.org/calculator"
     If Gtype = "" Then
@@ -769,8 +773,13 @@ Sub InstallGeoGebra()
     
     UserFormGeoGebra.Show
 #If Mac Then
-    MsgBox "The download page will now open. Install GeoGebra classic 5", vbOKOnly, "Download"
-    OpenLink "https://www.geogebra.org/download"
+    If UserFormGeoGebra.ReturnVal = 1 Then
+        OpenLink "https://download.geogebra.org/mac", True
+        UserFormGeoGebraMacInstall.Show
+    Else
+    End If
+'    MsgBox "The download page will now open. Install GeoGebra classic 5", vbOKOnly, "Download"
+'    OpenLink "https://www.geogebra.org/download"
 #Else ' win
 
     If UserFormGeoGebra.ReturnVal = 1 Then
@@ -814,21 +823,35 @@ slut:
     Unload UfWait
 End Sub
 Function GeoGebraPath() As String
-' path to the geogebra executable. Returns "" if not found
+' path to the geogebra executable. Returns "" if not found. OBS: På mac bruges stien ikke. Der er applescript til det, men funktionen bruges til at afgøre om der er en GeoGebra installation.
 ' Der hentes til den nyeste version hvis muligt
 Dim DN As String
 On Error GoTo fejl
 #If Mac Then
-    GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
-    If FileExists(GeoGebraPath) Then Exit Function
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra.app"
     If FileExists(GeoGebraPath) Then Exit Function
-    GeoGebraPath = GetProgramFilesDir() & "GeoGebra 6.app"
+    GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
     If FileExists(GeoGebraPath) Then Exit Function
-    GeoGebraPath = GetProgramFilesDir() & "GeoGebra Graphing Calculator.app"
-    If FileExists(GeoGebraPath) Then Exit Function
+' Disse kan godt startes på Mac, men de kan ikke åbne en ggb-fil som argument
+'    GeoGebraPath = GetProgramFilesDir() & "GeoGebra 6.app"
+'    If FileExists(GeoGebraPath) Then Exit Function
+'    GeoGebraPath = GetProgramFilesDir() & "GeoGebra Graphing Calculator.app"
+'    If FileExists(GeoGebraPath) Then Exit Function
     GeoGebraPath = ""
 #Else ' Windows
+    
+    GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 5*", vbDirectory)
+    If GeoGebraPath <> "" Then
+        DN = GeoGebraPath
+        Do While GeoGebraPath <> "" ' vi henter den GeoGebra 5 med højst versions nr. Den vil være sidst på listen
+            GeoGebraPath = Dir()
+            If GeoGebraPath <> "" Then DN = GeoGebraPath
+        Loop
+        If DN <> "" Then
+            GeoGebraPath = """" & DN & """"
+            GoTo slut
+        End If
+    End If
     
     If GeoGebraPath = "" Then 'Matematikværktøjssuite
         GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\app-*", vbDirectory)
@@ -887,18 +910,6 @@ On Error GoTo fejl
     End If
     
     ' se i program files for de lidt ældre programmer
-    GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 5*", vbDirectory)
-    If GeoGebraPath <> "" Then
-        DN = GeoGebraPath
-        Do While GeoGebraPath <> "" ' vi henter den GeoGebra 5 med højst versions nr. Den vil være sidst på listen
-            GeoGebraPath = Dir()
-            If GeoGebraPath <> "" Then DN = GeoGebraPath
-        Loop
-        If DN <> "" Then
-            GeoGebraPath = """" & DN & """"
-            GoTo slut
-        End If
-    End If
     
     If GeoGebraPath = "" Then
         GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 6*", vbDirectory)

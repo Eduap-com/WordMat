@@ -85,7 +85,7 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
 #If Mac Then
     ShowPreviewMac
 #Else
-    Me.Hide
+    Me.hide
 #End If
     GoTo slut
 fejl:

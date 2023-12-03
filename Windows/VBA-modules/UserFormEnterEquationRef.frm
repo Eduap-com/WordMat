@@ -23,7 +23,7 @@ Option Explicit
 Public EquationName As String
 Private Sub CommandButton_cancel_Click()
     EquationName = ""
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
@@ -46,7 +46,7 @@ For i = 1 To ActiveDocument.Bookmarks.Count
     End If
 Next
     
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)

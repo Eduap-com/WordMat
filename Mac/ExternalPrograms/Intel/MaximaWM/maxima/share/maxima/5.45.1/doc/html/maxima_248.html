@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Introduction to graphs (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Introduction to graphs (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Introduction to graphs (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_247.html" rel="up" title="graphs-pkg">
+<link href="maxima_249.html" rel="next" title="Functions and Variables for graphs">
+<link href="maxima_247.html" rel="prev" title="graphs-pkg">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Introduction-to-graphs">
+<div class="header">
+<p>
+Next: <a href="maxima_249.html" accesskey="n" rel="next">Functions and Variables for graphs</a>, Previous: <a href="maxima_247.html" accesskey="p" rel="prev">graphs</a>, Up: <a href="maxima_247.html" accesskey="u" rel="up">graphs</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Introduction-to-graphs-1"></span><h3 class="section">62.1 Introduction to graphs</h3>
+
+<p>The <code>graphs</code> package provides graph and digraph data structure for
+Maxima. Graphs and digraphs are simple (have no multiple edges nor
+loops), although digraphs can have a directed edge from <var>u</var> to
+<var>v</var> and a directed edge from <var>v</var> to <var>u</var>.
+</p>
+<p>Internally graphs are represented by adjacency lists and implemented as
+a lisp structures. Vertices are identified by their ids (an id is an
+integer). Edges/arcs are represented by lists of length 2. Labels can be
+assigned to vertices of graphs/digraphs and weights can be assigned to
+edges/arcs of graphs/digraphs.
+</p>
+<p>There is a <code>draw_graph</code> function for drawing graphs. Graphs are
+drawn using a force based vertex positioning
+algorithm. <code>draw_graph</code> can also use graphviz programs available
+from <a href="https://www.graphviz.org">https://www.graphviz.org</a>. <code>draw_graph</code> is based on the maxima
+<code>draw</code> package.
+</p>
+<p>To use the <code>graphs</code> package, first load it with <code>load(&quot;graphs&quot;)</code>.
+</p>
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Share-packages">Share packages</a>
+
+<a href="maxima_369.html#Category_003a-Package-graphs">Package graphs</a>
+</div>
+</p>
+<span id="Item_003a-graphs_002fnode_002fFunctions-and-Variables-for-graphs"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_249.html" accesskey="n" rel="next">Functions and Variables for graphs</a>, Previous: <a href="maxima_247.html" accesskey="p" rel="prev">graphs</a>, Up: <a href="maxima_247.html" accesskey="u" rel="up">graphs</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -153,9 +153,9 @@ On Error Resume Next
     MaximaIndex = False
     PolarOutput = False
 #If Mac Then
-    GraphApp = 4
+    GraphApp = 4 ' geogebraweb
 #Else
-    GraphApp = 0
+    GraphApp = 4
 #End If
     LanguageSetting = 0
     dAsDiffChr = False
@@ -166,7 +166,7 @@ On Error Resume Next
     EqNumPlacement = False
     EqNumType = False
     EqAskRef = False
-    BackupType = 0
+    BackupType = 2 ' spørg ikke
     BackupNo = 1
     BackupMaxNo = 20
     BackupTime = 5

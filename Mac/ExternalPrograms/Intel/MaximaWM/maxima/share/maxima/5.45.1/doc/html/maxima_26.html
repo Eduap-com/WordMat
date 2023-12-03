@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Introduction to Structures (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Introduction to Structures (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Introduction to Structures (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_25.html" rel="up" title="Structures">
+<link href="maxima_27.html" rel="next" title="Functions and Variables for Structures">
+<link href="maxima_25.html" rel="prev" title="Structures">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="subsection" id="Introduction-to-Structures">
+<div class="header">
+<p>
+Next: <a href="maxima_27.html" accesskey="n" rel="next">Functions and Variables for Structures</a>, Previous: <a href="maxima_25.html" accesskey="p" rel="prev">Structures</a>, Up: <a href="maxima_25.html" accesskey="u" rel="up">Structures</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Introduction-to-Structures-1"></span><h4 class="subsection">5.6.1 Introduction to Structures</h4>
+
+<p>Maxima provides a simple data aggregate called a structure.
+A structure is an expression in which arguments are identified by name (the field name)
+and the expression as a whole is identified by its operator (the structure name).
+A field value can be any expression.
+</p>
+<p>A structure is defined by the <code>defstruct</code> function;
+the global variable <code>structures</code> is the list of user-defined structures.
+The function <code>new</code> creates instances of structures.
+The <code>@</code> operator refers to fields.
+<code>kill(<var>S</var>)</code> removes the structure definition <var>S</var>,
+and <code>kill(<var>x</var>@ <var>a</var>)</code> unbinds the field <var>a</var> of the structure instance <var>x</var>.
+</p>
+<p>In the pretty-printing console display (with <code><a href="maxima_9.html#display2d">display2d</a></code> equal to <code>true</code>),
+structure instances are displayed with the value of each field
+represented as an equation, with the field name on the left-hand side
+and the value on the right-hand side.
+(The equation is only a display construct; only the value is actually stored.)
+In 1-dimensional display (via <code>grind</code> or with <code><a href="maxima_9.html#display2d">display2d</a></code> equal to <code>false</code>),
+structure instances are displayed without the field names.
+</p>
+<p>There is no way to use a field name as a function name,
+although a field value can be a lambda expression.
+Nor can the values of fields be restricted to certain types; any field can be assigned any kind of expression.
+There is no way to make some fields accessible or inaccessible in different contexts;
+all fields are always visible.
+</p>
+<span id="Item_003a-defstruct_002fnode_002fFunctions-and-Variables-for-Structures"></span></div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_27.html" accesskey="n" rel="next">Functions and Variables for Structures</a>, Previous: <a href="maxima_25.html" accesskey="p" rel="prev">Structures</a>, Up: <a href="maxima_25.html" accesskey="u" rel="up">Structures</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -22,7 +22,7 @@ Attribute VB_Exposed = False
 Public raekker As Integer
 Public kolonner As Integer
 Private Sub CommandButton_ok_Click()
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub Labeladd_Click()
