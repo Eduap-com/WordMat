@@ -575,8 +575,12 @@ slut:
 End Function
 
 Function GetDownloadsFolder() As String
+#If Mac Then
+    GetDownloadsFolder = RunScript("GetDownloadsFolder", vbNullString)
+#Else
     GetDownloadsFolder = RegKeyRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\{374DE290-123F-4565-9164-39C4925E467B}")
     GetDownloadsFolder = Replace(GetDownloadsFolder, "%USERPROFILE%", Environ$("USERPROFILE"))
+#End If
 End Function
 Function RegKeyRead(i_RegKey As String) As String
 'eks syntaks
@@ -667,6 +671,7 @@ Sub OpenLink(Link As String, Optional Script As Boolean = False)
 On Error Resume Next
 
 #If Mac Then
+    Script = True
     If Script Then
         RunScript "OpenLink", Link
     Else
@@ -2610,7 +2615,8 @@ End Function
 
 Sub NewEquation()
     Dim r As Range
-    On Error GoTo fejl
+'    On Error GoTo fejl
+    On Error Resume Next
     If Selection.OMaths.Count = 0 Then
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then

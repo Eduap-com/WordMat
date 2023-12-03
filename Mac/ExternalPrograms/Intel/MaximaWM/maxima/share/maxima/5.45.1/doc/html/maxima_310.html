@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Introduction to simplex (Maxima 5.45.1 Manual)</title>
+
+<meta name="description" content="Introduction to simplex (Maxima 5.45.1 Manual)">
+<meta name="keywords" content="Introduction to simplex (Maxima 5.45.1 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="maxima_368.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="maxima_309.html" rel="up" title="simplex-pkg">
+<link href="maxima_311.html" rel="next" title="Functions and Variables for simplex">
+<link href="maxima_309.html" rel="prev" title="simplex-pkg">
+<style type="text/css">
+<!--
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
+ul.no-bullet {list-style: none}
+body {color: black; background: white;  margin-left: 8%; margin-right: 13%;
+      font-family: "FreeSans", sans-serif}
+h1 {font-size: 150%; font-family: "FreeSans", sans-serif}
+h2 {font-size: 125%; font-family: "FreeSans", sans-serif}
+h3 {font-size: 100%; font-family: "FreeSans", sans-serif}
+a[href] {color: rgb(0,0,255); text-decoration: none;}
+a[href]:hover {background: rgb(220,220,220);}
+div.textbox {border: solid; border-width: thin; padding-top: 1em;
+    padding-bottom: 1em; padding-left: 2em; padding-right: 2em}
+div.titlebox {border: none; padding-top: 1em; padding-bottom: 1em;
+    padding-left: 2em; padding-right: 2em; background: rgb(200,255,255);
+    font-family: sans-serif}
+div.synopsisbox {
+    border: none; padding-top: 1em; padding-bottom: 1em; padding-left: 2em;
+    padding-right: 2em; background: rgb(255,220,255);}
+pre.example {border: 1px solid rgb(180,180,180); padding-top: 1em;
+    padding-bottom: 1em; padding-left: 1em; padding-right: 1em;
+    background-color: rgb(238,238,255)}
+div.spacerbox {border: none; padding-top: 2em; padding-bottom: 2em}
+div.image {margin: 0; padding: 1em; text-align: center}
+div.categorybox {border: 1px solid gray; padding-top: 0px; padding-bottom: 0px;
+    padding-left: 1em; padding-right: 1em; background: rgb(247,242,220)}
+img {max-width:80%; max-height: 80%; display: block; margin-left: auto; margin-right: auto}
+
+-->
+</style>
+
+<link rel="icon" href="figures/favicon.ico">
+
+</head>
+
+<body lang="en">
+<div class="section" id="Introduction-to-simplex">
+<div class="header">
+<p>
+Next: <a href="maxima_311.html" accesskey="n" rel="next">Functions and Variables for simplex</a>, Previous: <a href="maxima_309.html" accesskey="p" rel="prev">simplex</a>, Up: <a href="maxima_309.html" accesskey="u" rel="up">simplex</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Introduction-to-simplex-1"></span><h3 class="section">83.1 Introduction to simplex</h3>
+
+<p><code>simplex</code> is a package for linear optimization using the simplex algorithm.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">(%i1) load(&quot;simplex&quot;)$
+(%i2) minimize_lp(x+y, [3*x+2*y&gt;2, x+4*y&gt;3]);
+                  9        7       1
+(%o2)            [--, [y = --, x = -]]
+                  10       10      5
+</pre></div>
+
+<div class=categorybox>
+
+<p>Categories:&nbsp;&nbsp;<a href="maxima_369.html#Category_003a-Numerical-methods">Numerical methods</a> 
+
+<a href="maxima_369.html#Category_003a-Optimization">Optimization</a>
+
+<a href="maxima_369.html#Category_003a-Share-packages">Share packages</a>
+
+<a href="maxima_369.html#Category_003a-Package-simplex">Package simplex</a>
+</div>
+</p>
+<ul class="section-toc">
+<li><a href="#Tests-for-simplex" accesskey="1">Tests for simplex</a></li>
+</ul>
+<div class="subsection" id="Tests-for-simplex">
+<h4 class="subsection">83.1.1 Tests for simplex</h4>
+
+<p>There are some tests in the directory <code>share/simplex/Tests</code>.
+</p>
+<ul class="section-toc">
+<li><a href="#klee_005fminty" accesskey="1">klee_minty</a></li>
+<li><a href="#NETLIB" accesskey="2">NETLIB</a></li>
+</ul>
+<div class="subsubsection" id="klee_005fminty">
+<h4 class="subsubsection">83.1.1.1 klee_minty</h4>
+
+<p>The function <code>klee_minty</code> produces input for <code>linear_program</code>, for which
+exponential time for solving is required without scaling.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">load(klee_minty)$
+apply(linear_program, klee_minty(6));
+</pre></div>
+
+<p>A better approach:
+</p>
+<div class="example">
+<pre class="example">epsilon_sx : 0$
+scale_sx : true$
+apply(linear_program, klee_minty(10));
+</pre></div>
+
+</div>
+<div class="subsubsection" id="NETLIB">
+<h4 class="subsubsection">83.1.1.2 NETLIB</h4>
+
+<p>Some smaller problems from netlib (<a href="https://www.netlib.org/lp/data/">https://www.netlib.org/lp/data/</a>)
+test suite are converted to a format, readable by Maxima. Problems are
+<code>adlittle</code>, <code>afiro</code>, <code>kb2</code>, <code>sc50a</code> and
+<code>share2b</code>. Each problem has three input files in CSV format for
+matrix <var>A</var> and vectors <var>b</var> and <var>c</var>.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">A : read_matrix(&quot;adlittle_A.csv&quot;, 'csv)$
+b : read_list(&quot;adlittle_b.csv&quot;, 'csv)$
+c : read_list(&quot;adlittle_c.csv&quot;, 'csv)$
+linear_program(A, b, c)$
+%[2];
+=&gt; 225494.9631623802
+</pre></div>
+
+<p>Results:
+</p>
+<div class="example">
+<pre class="example">PROBLEM        MINIMUM                  SCALING
+adlittle       +2.2549496316E+05        false
+afiro          -4.6475314286E+02        false
+kb2            -1.7499001299E+03        true
+sc50a          -6.4575077059E+01        false
+share2b        -4.1573518187E+02        false
+</pre></div>
+
+<p>The Netlib website <a href="https://www.netlib.org/lp/data/readme">https://www.netlib.org/lp/data/readme</a> lists the values as
+</p>
+<div class="example">
+<pre class="example">PROBLEM        MINIMUM
+adlittle       +2.2549496316E+05
+afiro          -4.6475314286E+02
+kb2            -1.7499001299E+03
+sc50a          -6.4575077059E+01
+share2b        -4.1573224074E+02
+</pre></div>
+
+<span id="Item_003a-simplex_002fnode_002fFunctions-and-Variables-for-simplex"></span></div>
+</div>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="maxima_311.html" accesskey="n" rel="next">Functions and Variables for simplex</a>, Previous: <a href="maxima_309.html" accesskey="p" rel="prev">simplex</a>, Up: <a href="maxima_309.html" accesskey="u" rel="up">simplex</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="maxima_368.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

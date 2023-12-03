@@ -29,7 +29,7 @@ Public Eliminate As Boolean
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
 
 Private Sub CommandButton_cancel_Click()
-    UFSelectVars.Hide
+    UFSelectVars.hide
     Application.ScreenUpdating = False
 End Sub
 
@@ -93,7 +93,7 @@ On Error GoTo fejl
 fejl:
     SelectedVar = ""
 slut:
-    UFSelectVars.Hide
+    UFSelectVars.hide
     Application.ScreenUpdating = False
 End Sub
 

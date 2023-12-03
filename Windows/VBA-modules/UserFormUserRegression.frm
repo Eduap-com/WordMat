@@ -23,11 +23,11 @@ Option Explicit
 Private EventsOn As Boolean
 Private Sub CommandButton_cancel_Click()
     TextBox_function.Text = ""
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)

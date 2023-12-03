@@ -1,0 +1,133 @@
+After SARAG 1.3
+
+In order to enforce naming rules the following changes were made:
+1.) arag_test.mac was renamed to rtest_arag.mac
+2.) hard_test.mac was renamed to rtest_arag_hard.mac
+
+SARAG 1.3
+
+Feb 2017 (Merge with fork developed at the Univ. of Rennes 1 + fixes and minor extra features by Fabrizio Caruso)
+
+1. Merge of a separate branch of the SARAG packaged developed at the Univ. of Rennes 1: 
+- Univariate certificate is now computed as in Maxima with its usual output format.
+- All other files use the updated code developed at the Univ. of Rennes1.
+
+2. Fix multivariate certificate of positivity.
+Multivariate certificate is now working and enabled.
+No warnings about deprecated gnuplot attributes are any longer displayed by "drawMultiCerticificate".
+Moreover a bug on a global variable was fixed in "standard_mid".
+Unit-tests have been added into arag_test.mac and 1 computationally heavy test has been added
+into hard_test.mac.
+
+3. DRAW_TOPOLOGY (false by default) when set to true, will trigger the display of the topology diagram. 
+Remark: When DRAW_TOPOLOGY set to true and you compute a topology, you will need first to close the pop-up windonw to get the result.
+
+4. In order to further simply its use "drawTopology" works with the second output of "topology" as well as the full output of topology
+
+5. New "revRowsCount" function (sign change after i-th row switch) from Maxima version.
+
+6. Verbosity parameters have been removed in almost of functions.
+
+7. Fix of many local variables that were not declared as such.
+
+8. Removed unused files (examples.mac, topology_examples.mac, whichversion.txti, etc.)
+
+9. Fix of multiple misspellings.
+
+---------------------------------------------------------
+---------------------------------------------------------
+
+SARAG 1.2
+
+22 may 2016
+
+Merge with external code developed at the Univ. of Rennes 1
+by Matthieu Kohli new file quickSignDetermination.mac
+
+slight modification of discriminant 
+
+sylvesterResultant in the case of two polynomials of equal degree fixed
+ 
+coefficients in certificates of positivity changed
+
+newtonFromPoly(pol,var,len) now takes three arguments:
+and  computes a sequence of Newton sums of length "len"
+
+---------------------------------------------------
+---------------------------------------------------
+SARAG 1.1
+
+August 3rd 2009
+
+
+by Fabrizio Caruso (caruso@dm.unipi.it)
+with a contribution by Richard Leroy
+(multivariate certificate of positivity)
+
+---------------------------------------------------
+---------------------------------------------------
+
+SARAG 1.1
+
+(1) small fix in the univariate certificate
+
+(2) integration of Richard Leroy's code 
+for the multivariate certificate of positivity
+("multiCertificateOfPositivity.mac").
+
+
+---------------------------------------------------
+
+SARAG 1.0.1
+
+(1) certificate of positivity: 
+- "certificateOfPositivity.mac"
+This files contains routines for the certificate of
+positivity, which can be used to produce formal
+proof of positivity/negativity or existence of roots
+for univariate polynomials. Try for example
+"certificateProof((2*x-1)^2+x^4,x,[-1,1]);"
+for a proof of positivity in [-1,1]. 
+
+(2) updated "readme.txt" and "arag_test.mac". 
+
+---------------------------------------------------
+SARAG 1.0
+
+(Some bug fixes)
+
+(1) gcdFreePart should be now correct
+
+(2) sRem and sSubRes compute sequences that
+are now longer by one element
+
+
+---------------------------------------------------
+SARAG beta 0.3
+
+(1) bug fixes
+- drawTopology: 
+it now computes
+the correct topology of points
+at infinity
+
+(2) new functions
+- echelonMod : 
+it computes
+the Echelon form of a matrix
+
+(3) test files:
+- "arag_test.mac"
+It tests the examples contained
+in the book "Algorithms in Real
+Algebraic Geometry" (which contains
+SARAG and uses Maxima in its electronic version)
+- "hard_test.mac"
+It tests some other commands involve
+more computation  (mostly topology computations)
+
+(4) updated "readme.txt"
+
+
+
+

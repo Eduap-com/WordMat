@@ -1,0 +1,74 @@
+/* -*- mode: maxima -*- */
+eval_when(batch,ttyoff:true)$
+/*ASB;LRATS 3
+5:05pm  Tuesday, 14 July 1981
+7:53pm  Saturday, 29 May 1982
+  Added a DIAGEVAL_VERSION for this file.
+1:43pm  Saturday, 12 June 1982
+  Changed loadflags to getversions, DEFINE_VARIABLE:'MODE.
+*/
+
+eval_when(translate,
+	  define_variable:'mode)$
+
+put('lrats,3,'diageval_version)$
+
+define_variable(messlrats2,"Invalid argument to FULLRATSUBST:",any)$
+
+define_variable(fullratsubstflag,false,boolean)$
+
+lratsubst(listofeqns,expr):=block(
+  [partswitch:true,inflag:true,piece],
+  if not listp(listofeqns)
+  then if inpart(listofeqns,0)="="
+       then listofeqns:[listofeqns]
+       else if fullratsubstflag=true
+            then error(messlrats2,[listofeqns,expr])
+            else error("Invalid argument to lratsubst:",[listofeqns,expr]),
+  if listp(inpart(listofeqns,1)) then if length(listofeqns)>1 then error("lratsubst: improper argument:",listofeqns) else listofeqns:inpart(listofeqns,1),
+  for idum in listofeqns do
+      if inpart(idum,0)#"="
+      then if fullratsubstflag=true
+           then error(messlrats2,[listofeqns,expr])
+	   else error("Invalid argument to lratsubst:",[listofeqns,expr]),
+  lratsubst1(listofeqns,expr))$
+
+define_variable(lrats_max_iter,100000,integer)$
+qput(lrats_max_iter,lambda([v], if v<=0 then error("lrats_max_iter must be set to a positive integer.")),value_check);
+
+lratsubst1(listofeqns,expr):=block([dum,lrats_iter:0,l],
+  begin_outer_loop,
+  l:listofeqns,
+  while dum='dum do (
+    dum:if l = [] then expr
+    else (if rest(l) = []
+      then ratsubst(inpart(l,1,2),inpart(l,1,1),expr)
+      else 'dum),
+    expr:if fullratsubstflag = true
+    then fullratsubst1(inpart(l,1,2),inpart(l,1,1),expr)
+    else ratsubst(inpart(l,1,2),inpart(l,1,1),expr),
+    l:rest(l)),
+  if fullratsubstflag = true and dum # expr and lrats_iter<lrats_max_iter then (lrats_iter:lrats_iter+1,go(begin_outer_loop))
+  else (if dum # expr then dum else expr))$
+
+fullratsubst1(substexpr,forexpr,expr):=block(
+  [dum,lrats_iter:0],
+  while lrats_iter<lrats_max_iter and dum#expr do (
+    [dum,expr]:[expr,ratsubst(substexpr,forexpr,expr)],
+    lrats_iter:1+lrats_iter),
+  if lrats_iter>=lrats_max_iter then warning("fullratsubst1(substexpr,forexpr,expr): reached maximum iterations of",lrats_max_iter,". Increase `lrats_max_iter' to increase this limit."),
+  expr)$
+    
+
+fullratsubst([arglist]):=block(
+  [fullratsubstflag:true,larglistdum:length(arglist),farglist,
+   partswitch:true,inflag:true,piece],
+  if larglistdum=2
+  then if listp(farglist:first(arglist)) or inpart(farglist,0)="="
+       then lratsubst(farglist,last(arglist))
+       else error(messlrats2,arglist)
+  else if larglistdum=3
+       then apply('fullratsubst1,arglist)
+       else error(messlrats2,arglist))$
+
+eval_when(batch,ttyoff:false)$

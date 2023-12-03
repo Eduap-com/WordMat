@@ -83,7 +83,7 @@ If CheckBox_msol.Value = True Then Text = Text & "m_" & Sprog.A(260) & "=1" & De
 'End If
 
 slut:
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub Label1_Click()

@@ -762,7 +762,7 @@ End Sub
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
   If CloseMode = 0 Then
     Cancel = 1
-    Me.Hide
+    Me.hide
   End If
 End Sub
 

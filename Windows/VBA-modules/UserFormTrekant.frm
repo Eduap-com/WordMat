@@ -271,7 +271,7 @@ slut:
 #If Mac Then
     Unload Me
 #Else
-    Me.Hide
+    Me.hide
 #End If
 
 End Sub
