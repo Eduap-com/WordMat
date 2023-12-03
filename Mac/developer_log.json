@@ -1,36 +1,1853 @@
 {
   "logFormatVersion": 1,
-  "jobId": "ac29185c-1633-46dd-a035-82a83dfdaab6",
-  "status": "Accepted",
-  "statusSummary": "Ready for distribution",
-  "statusCode": 0,
-  "archiveFilename": "WordMatMacM1-127S.pkg",
-  "uploadDate": "2023-11-22T21:06:00.091Z",
-  "sha256": "62c39f3eda72e08b4051f6a4da360f923ab3682b5b1bd716c3fe9483f939efae",
-  "ticketContents": [
+  "jobId": "0f60ac15-6499-4fd4-aca7-8037cebb4669",
+  "status": "Invalid",
+  "statusSummary": "Archive contains critical validation errors",
+  "statusCode": 4000,
+  "archiveFilename": "WordMatMacM1-127P.pkg",
+  "uploadDate": "2023-12-01T22:20:30.509Z",
+  "sha256": "6e2ef1bbbd0574947f90441ab58b0b474ff6d8d11d8edcb5d22b727cf0f179eb",
+  "ticketContents": null,
+  "issues": [
     {
-      "path": "WordMatMacM1-127S.pkg",
-      "digestAlgorithm": "SHA-1",
-      "cdhash": "543a8c1c71e5aa3b6015917cd907bb7db8c02a3c"
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/MacOS/GeoGebra",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "x86_64"
     },
     {
-      "path": "WordMatMacM1-127S.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/Maximatimeout",
-      "digestAlgorithm": "SHA-256",
-      "cdhash": "e9ee674dd99debea98ca3301e8f2f3581a5212da",
-      "arch": "arm64"
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/MacOS/GeoGebra",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "arm64"
     },
     {
-      "path": "WordMatMacM1-127S.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/sbcl",
-      "digestAlgorithm": "SHA-256",
-      "cdhash": "f8b7f745f4c5c729ce602b18c9373c7da4d91d15",
-      "arch": "arm64"
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/javagiac-mac.jar/libjavagiac.jnilib",
+      "message": "The binary is not signed.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
     },
     {
-      "path": "WordMatMacM1-127S.pkg/WordMat.pkg Contents/Payload/opt/local/lib/libzstd.1.5.5.dylib",
-      "digestAlgorithm": "SHA-256",
-      "cdhash": "8386300f8214c7bbd02d646623c32a8e003b3bb5",
-      "arch": "arm64"
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/javagiac-mac.jar/libjavagiac.jnilib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/javagiac-mac.jar/libjavagiac-arm64.jnilib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/javagiac-mac.jar/libjavagiac-arm64.jnilib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/gluegen-rt-natives-macosx-universal.jar/natives/macosx-universal/libgluegen_rt.dylib",
+      "message": "The binary is not signed.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/gluegen-rt-natives-macosx-universal.jar/natives/macosx-universal/libgluegen_rt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/gluegen-rt-natives-macosx-universal.jar/natives/macosx-universal/libgluegen_rt.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/gluegen-rt-natives-macosx-universal.jar/natives/macosx-universal/libgluegen_rt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnativewindow_awt.dylib",
+      "message": "The binary is not signed.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnativewindow_awt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnativewindow_awt.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnativewindow_awt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnativewindow_macosx.dylib",
+      "message": "The binary is not signed.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnativewindow_macosx.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnativewindow_macosx.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnativewindow_macosx.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libjogl_mobile.dylib",
+      "message": "The binary is not signed.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libjogl_mobile.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libjogl_mobile.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libjogl_mobile.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnewt_head.dylib",
+      "message": "The binary is not signed.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnewt_head.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnewt_head.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libnewt_head.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libjogl_desktop.dylib",
+      "message": "The binary is not signed.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libjogl_desktop.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libjogl_desktop.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/app/jogl.all-natives-macosx-universal.jar/natives/macosx-universal/libjogl_desktop.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jfr",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jfr",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jfr",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jfr",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jfr",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jfr",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/rmiregistry",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/rmiregistry",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/rmiregistry",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/rmiregistry",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/rmiregistry",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/rmiregistry",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jrunscript",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jrunscript",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jrunscript",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jrunscript",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jrunscript",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/jrunscript",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/java",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/java",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/java",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/java",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/java",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/java",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/keytool",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/keytool",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/keytool",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/keytool",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/keytool",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/bin/keytool",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libnet.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libnet.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libnet.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libnet.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libnio.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libnio.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libnio.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libnio.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libinstrument.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libinstrument.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libinstrument.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libinstrument.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libzip.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libzip.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libzip.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libzip.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libfreetype.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libfreetype.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libfreetype.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libfreetype.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libsplashscreen.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libsplashscreen.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libsplashscreen.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libsplashscreen.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement_ext.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement_ext.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement_ext.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement_ext.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libdt_socket.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libdt_socket.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libdt_socket.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libdt_socket.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2pkcs11.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2pkcs11.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2pkcs11.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2pkcs11.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjimage.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjimage.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjimage.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjimage.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxkrb5.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxkrb5.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxkrb5.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxkrb5.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxui.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxui.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxui.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxui.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement_agent.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement_agent.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement_agent.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement_agent.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/librmi.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/librmi.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/librmi.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/librmi.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjdwp.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjdwp.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjdwp.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjdwp.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libsunec.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libsunec.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libsunec.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libsunec.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libawt_lwawt.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libawt_lwawt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libawt_lwawt.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libawt_lwawt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjavajpeg.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjavajpeg.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjavajpeg.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjavajpeg.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmlib_image.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmlib_image.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmlib_image.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmlib_image.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libmanagement.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjsound.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjsound.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjsound.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjsound.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2pcsc.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2pcsc.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2pcsc.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2pcsc.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjsig.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjsig.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjsig.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjsig.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libprefs.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libprefs.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libprefs.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libprefs.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjawt.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjawt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjawt.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjawt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libfontmanager.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libfontmanager.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libfontmanager.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libfontmanager.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jspawnhelper",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jspawnhelper",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jspawnhelper",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jspawnhelper",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jspawnhelper",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jspawnhelper",
+      "message": "The executable does not have the hardened runtime enabled.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxsecurity.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxsecurity.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxsecurity.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxsecurity.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libextnet.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libextnet.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libextnet.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libextnet.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjaas.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjaas.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjaas.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjaas.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/liblcms.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/liblcms.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/liblcms.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/liblcms.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libverify.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libverify.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libverify.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libverify.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2gss.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2gss.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2gss.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libj2gss.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjava.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjava.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjava.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libjava.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libawt.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libawt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libawt.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libawt.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libunpack.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libunpack.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libunpack.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libunpack.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosx.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosx.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosx.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosx.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxapp.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxapp.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxapp.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/libosxapp.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jli/libjli.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jli/libjli.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jli/libjli.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/jli/libjli.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/server/libjvm.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/server/libjvm.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/server/libjvm.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/server/libjvm.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/server/libjsig.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/server/libjsig.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/server/libjsig.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/Home/lib/server/libjsig.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/MacOS/libjli.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/MacOS/libjli.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "x86_64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/MacOS/libjli.dylib",
+      "message": "The binary is not signed with a valid Developer ID certificate.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
+      "architecture": "arm64"
+    },
+    {
+      "severity": "error",
+      "code": null,
+      "path": "WordMatMacM1-127P.pkg/WordMat.pkg Contents/Payload/Applications/GeoGebra 5.app/Contents/runtime/Contents/MacOS/libjli.dylib",
+      "message": "The signature does not include a secure timestamp.",
+      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
+      "architecture": "arm64"
     }
-  ],
-  "issues": null
+  ]
 }
