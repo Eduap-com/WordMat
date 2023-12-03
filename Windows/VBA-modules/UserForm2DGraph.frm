@@ -2516,7 +2516,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

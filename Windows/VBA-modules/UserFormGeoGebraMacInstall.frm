@@ -15,35 +15,77 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private StopNow As Boolean
+Private TestDone As Boolean
 
 Private Sub CommandButton_cancel_Click()
-    Me.hide
-End Sub
-
-Private Sub CommandButton_downloads_Click()
-
-End Sub
-
-Private Sub CommandButton_moveApps_Click()
-    Dim s As String
-    s = RunScript("MoveGeoGebraToApplications", "")
-    If s = "ok" Then
-        RunScript "OpenApps", ""
-        Label_step2.Caption = "1. Hold 'Control' nede mens du klikker på GeoGebra" & vbCrLf & "4. Klik Åben" & vbCrLf & "5. Klik Åben igen" & vbCrLf & "Så skulle GeoGebra gerne åbne, og WordMat vil fremover også kunne åbne GeoGebra."
-        Label_step2.visible = True
+    Dim FilePath As String
+    FilePath = GetProgramFilesDir & "GeoGebra.app"
+    
+    If Dir(FilePath) = vbNullString Then
+        If MsgBox("GeoGebra 5 er ikke blevet færdiginstalleret. Vil du afslutte?", vbYesNo, "Ikke færdig") = vbYes Then
+            Me.hide
+        End If
     End If
+    If Not TestDone Then
+        If MsgBox("GeoGebra 5 er ikke blevet testet. Vil du afslutte?", vbYesNo, "Ikke testet") = vbYes Then
+            Me.hide
+        End If
+    End If
+
+End Sub
+
+Private Sub CommandButton_stop_Click()
+    StopNow = True
+End Sub
+
+Private Sub CommandButton_test_Click()
+    Dim FilePath As String
+    
+    FilePath = GetDownloadsFolder & "GeoGebra.app"
+    
+    If Dir(FilePath, vbNormal) = vbNullString Then
+        MsgBox "GeoGebra er ikke blevet installeret endnu. Vent til download er færdig.", vbOKOnly, "Vent"
+        GoTo slut
+    End If
+    
+    GeoGebra
+'    RunScript "OpenGeoGebra", geogebrafilersti
+    TestDone = True
+slut:
 End Sub
 
 Private Sub UserForm_Activate()
     Dim FilePath As String, i As Integer
+    Dim s As String
     StopNow = False
+    TestDone = False
+    CommandButton_test.visible = False
+    
     FilePath = GetDownloadsFolder & "GeoGebra.app"
-    Do While Dir(FilePath, vbNormal) = vbNullString And i < 10
+    
+    Do While Dir(FilePath, vbNormal) = vbNullString And i < 30
         DoEvents
-        If StopNow Then Exit Do
+        If StopNow Then GoTo slut
         Wait 1
         Label_progress.Caption = Label_progress.Caption & "."
         i = i + 1
     Loop
+    If i = 30 Then
+        Label1.Caption = "Fejl ved download af GeoGebra"
+        Label1.Caption = "Filen kunne ikke findes. (Det kan skyldes, at det tager meget lang tid at hente filen)"
+        GoTo slut
+    Else
+        s = RunScript("MoveGeoGebraToApplications", "")
+        If s = "ok" Then
+            RunScript "OpenApps", ""
+            Label1.Caption = "Åben GeoGebra på følgende måde"
+            Label2.Caption = "Apps skulle nu gerne være blevet åbnet med Finder." & vbCrLf & vbCrLf & "1. Hold 'Control' nede mens du klikker på 'GeoGebra'" & vbCrLf & "2. Klik Åben" & vbCrLf & "3. Klik Åben igen" & vbCrLf & "   Så skulle GeoGebra gerne åbne, og WordMat vil fremover også kunne åbne GeoGebra." & vbCrLf & "4. Slut af med at klikke på knappen 'Test' herunder for at se om WordMat kan starte GeoGebra 5"
+            Label2.visible = True
+            CommandButton_test.visible = True
+        End If
+    End If
+
+slut:
 End Sub
 
