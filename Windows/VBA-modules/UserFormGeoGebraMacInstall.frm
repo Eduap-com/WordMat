@@ -22,7 +22,7 @@ Private Sub CommandButton_cancel_Click()
     Dim FilePath As String
     FilePath = GetProgramFilesDir & "GeoGebra.app"
     
-    If Dir(FilePath) = vbNullString Then
+    If Dir(FilePath, vbDirectory) = vbNullString Then
         If MsgBox("GeoGebra 5 er ikke blevet færdiginstalleret. Vil du afslutte?", vbYesNo, "Ikke færdig") = vbYes Then
             Me.hide
         End If
@@ -44,7 +44,7 @@ Private Sub CommandButton_test_Click()
     
     FilePath = GetDownloadsFolder & "GeoGebra.app"
     
-    If Dir(FilePath, vbNormal) = vbNullString Then
+    If Dir(FilePath, vbDirectory) = vbNullString Then
         MsgBox "GeoGebra er ikke blevet installeret endnu. Vent til download er færdig.", vbOKOnly, "Vent"
         GoTo slut
     End If
@@ -61,14 +61,16 @@ Private Sub UserForm_Activate()
     StopNow = False
     TestDone = False
     CommandButton_test.visible = False
+    Label_progress.Caption = "*"
+    CommandButton_stop.visible = True
     
     FilePath = GetDownloadsFolder & "GeoGebra.app"
     
-    Do While Dir(FilePath, vbNormal) = vbNullString And i < 30
+    Do While Dir(FilePath, vbDirectory) = vbNullString And i < 30
         DoEvents
         If StopNow Then GoTo slut
         Wait 1
-        Label_progress.Caption = Label_progress.Caption & "."
+        Label_progress.Caption = Label_progress.Caption & "*"
         i = i + 1
     Loop
     If i = 30 Then
@@ -76,11 +78,12 @@ Private Sub UserForm_Activate()
         Label1.Caption = "Filen kunne ikke findes. (Det kan skyldes, at det tager meget lang tid at hente filen)"
         GoTo slut
     Else
+        CommandButton_stop.visible = False
         s = RunScript("MoveGeoGebraToApplications", "")
         If s = "ok" Then
             RunScript "OpenApps", ""
             Label1.Caption = "Åben GeoGebra på følgende måde"
-            Label2.Caption = "Apps skulle nu gerne være blevet åbnet med Finder." & vbCrLf & vbCrLf & "1. Hold 'Control' nede mens du klikker på 'GeoGebra'" & vbCrLf & "2. Klik Åben" & vbCrLf & "3. Klik Åben igen" & vbCrLf & "   Så skulle GeoGebra gerne åbne, og WordMat vil fremover også kunne åbne GeoGebra." & vbCrLf & "4. Slut af med at klikke på knappen 'Test' herunder for at se om WordMat kan starte GeoGebra 5"
+            Label2.Caption = "Apps skulle nu gerne være blevet åbnet med Finder." & vbCrLf & vbCrLf & "1. Hold 'Control' nede mens du klikker på 'GeoGebra'" & vbCrLf & "2. Klik Åben" & vbCrLf & "3. Klik Åben igen" & vbCrLf & "4. Gentag punkt 1+2 Så skulle GeoGebra gerne åbne, og WordMat vil fremover også kunne åbne GeoGebra." & vbCrLf & "4. Slut af med at klikke på knappen 'Test' herunder for at se om WordMat kan starte GeoGebra 5"
             Label2.visible = True
             CommandButton_test.visible = True
         End If

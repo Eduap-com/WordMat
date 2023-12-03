@@ -775,7 +775,8 @@ Sub InstallGeoGebra()
     UserFormGeoGebra.Show
 #If Mac Then
     If UserFormGeoGebra.ReturnVal = 1 Then
-        OpenLink "https://download.geogebra.org/mac", True
+        Kill GetDownloadsFolder & "GeoGebra.app"
+        OpenLink "https://download.geogebra.org/package/mac", True
         UserFormGeoGebraMacInstall.Show
     Else
         GeoGebraWeb

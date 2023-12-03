@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormGeoGebra 
    Caption         =   "GeoGebra"
-   ClientHeight    =   3390
+   ClientHeight    =   2580
    ClientLeft      =   -15
    ClientTop       =   75
    ClientWidth     =   7665
@@ -53,7 +53,7 @@ Private Sub UserForm_Activate()
         Label_title.Caption = "GeoGebra 5 is not installed"
     End If
     
-    Label1.Caption = Sprog.A(292)
+'    Label1.Caption = Sprog.A(292)
 '    Label2.Caption = Sprog.A(293)
     Label3.Caption = Sprog.A(294)
     
