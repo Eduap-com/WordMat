@@ -69,7 +69,7 @@ ElseIf OptionButton22.Value = True Then
   tegn = ChrW(136)
 End If
 
-Me.Hide
+Me.hide
 
 GoTo slut
 fejl:

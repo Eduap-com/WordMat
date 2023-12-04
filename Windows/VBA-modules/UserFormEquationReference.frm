@@ -23,17 +23,17 @@ Option Explicit
 Public EqName As String
 Private Sub CommandButton_cancel_Click()
     EqName = ""
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
     EqName = ListBox1.Text
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     EqName = ListBox1.Text
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub UserForm_Activate()

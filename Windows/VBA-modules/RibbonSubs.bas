@@ -996,6 +996,9 @@ End Sub
 Sub Rib_CheckForUpdate(control As IRibbonControl)
     CheckForUpdate
 End Sub
+Sub Rib_CheckForUpdateGeoGebra(control As IRibbonControl)
+    InstallGeoGebra False
+End Sub
 
 'Callback for ButtonGenveje onAction
 Sub Rib_Genveje(control As IRibbonControl)

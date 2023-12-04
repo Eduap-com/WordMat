@@ -23,7 +23,7 @@ On Error Resume Next
     omax.StopNow = True
     StopNow = True
 '    omax.CloseCmd
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub UserForm_Activate()

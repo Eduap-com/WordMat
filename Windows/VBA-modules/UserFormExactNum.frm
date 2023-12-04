@@ -26,11 +26,11 @@ Private Sub UserForm_Activate()
         DoEvents    ' Yield to other processes.
     Loop
 On Error Resume Next
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub UserForm_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -90,7 +90,7 @@ On Error GoTo slut
         start = Timer    ' Set start time.
     End If
     Else
-        Me.Hide
+        Me.hide
     End If
     WoMatRibbon.Invalidate
 slut:

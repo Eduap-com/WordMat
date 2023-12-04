@@ -772,14 +772,31 @@ slut:
     End If
     CASengine = TempCas
 End Sub
-Sub InstallGeoGebra()
+Sub TestKill()
+    MsgBox GetDownloadsFolder & "\GeoGebra*"
+        Kill GetDownloadsFolder & "\GeoGebra*"
+
+End Sub
+
+Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
     Dim i As Long, DDir As String, FN As String
     Dim UfWait As UserFormWaitForMaxima
     
-    UserFormGeoGebra.Show
+    If ConfirmPrompt Then
+        UserFormGeoGebra.Show
+    Else
+        UserFormGeoGebra.ReturnVal = 1
+    End If
 #If Mac Then
     If UserFormGeoGebra.ReturnVal = 1 Then
-        Kill GetDownloadsFolder & "GeoGebra.app"
+        If Dir(GetDownloadsFolder & "GeoGebra.app", vbDirectory) <> "" Then
+            If GrantAccessToMultipleFiles(Array(GetDownloadsFolder & "GeoGebra.app")) = "true" Then
+                RmDir GetDownloadsFolder & "GeoGebra.app"
+            Else
+                MsgBox "Du skal give adgang før end GeoGebra 5 kan blive installeret", vbOKOnly, "Fejl"
+                GoTo slut
+            End If
+        End If
         OpenLink "https://download.geogebra.org/package/mac", True
         UserFormGeoGebraMacInstall.Show
     Else
@@ -827,7 +844,7 @@ Sub InstallGeoGebra()
 fejl:
 
 slut:
-    Unload UfWait
+    If Not UfWait Is Nothing Then Unload UfWait
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found. OBS: På mac bruges stien ikke. Der er applescript til det, men funktionen bruges til at afgøre om der er en GeoGebra installation.

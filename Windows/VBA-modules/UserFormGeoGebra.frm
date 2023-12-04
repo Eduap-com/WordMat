@@ -23,7 +23,7 @@ Private Sub CommandButton_Installer_Click()
 
 '    appnr = Shell(explorersti, vbMaximizedFocus) 'vbNormalFocus vbMinimizedFocus
     ReturnVal = 1
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_webstart_Click()
@@ -33,7 +33,7 @@ Private Sub CommandButton_webstart_Click()
 '    explorersti = """" & Environ("ProgramFiles") & "\Internet Explorer\iexplore.exe"" http://www.geogebra.org/webstart/geogebra.html"
 '    appnr = Shell(explorersti, vbMaximizedFocus) 'vbNormalFocus vbMinimizedFocus
     ReturnVal = 2
-    Me.Hide
+    Me.hide
 End Sub
 
 

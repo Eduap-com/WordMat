@@ -60,7 +60,7 @@ slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
-    Me.Hide
+    Me.hide
 
 End Sub
 
@@ -101,7 +101,7 @@ slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
-    Me.Hide
+    Me.hide
 
 End Sub
 

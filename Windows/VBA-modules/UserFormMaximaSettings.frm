@@ -35,7 +35,7 @@ Private Sub ComboBox_language_Change()
 End Sub
 
 Private Sub CommandButton_annuller_Click()
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub NulstilWordDoc(FilNavn As String)
@@ -219,7 +219,7 @@ On Error Resume Next
         
     SetMathAutoCorrect
     
-    UFMSettings.Hide
+    UFMSettings.hide
     Sprog.CheckSetting
     RibbonSubs.RefreshRibbon
 '#If Mac Then
