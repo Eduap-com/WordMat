@@ -1039,6 +1039,9 @@ start:
             If InStr(MaximaOutput, ";") Then ' hvis alm ligning
                 MaximaOutput = RemoveBrackets(MaximaOutput)
                 MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
+            ElseIf ListSeparator = "," And InStr(MaximaOutput, ",") Then
+                MaximaOutput = RemoveBrackets(MaximaOutput)
+                MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
             End If
         End If
 
@@ -1691,6 +1694,8 @@ start:
         'GoTo slut
     End If
     
+    If ListSeparator = "," Then MaximaOutput = Replace(MaximaOutput, ",", ", ") ' primært nødvendigt ved lister
+    
     
     'If InStr(KommentarOutput, "rat: replaced") Then
     '    KommentarOutput = ""
@@ -1822,8 +1827,6 @@ Sub ConvertOutputToSolved2(Optional Variable As String)
 ' kun beregnet til symbolsk løsning og mnewton og SolveIneq
     Dim arr As Variant
     Dim i As Integer
-
-
 
     If MaximaOutput = "[]" Then
         If LmSet Then

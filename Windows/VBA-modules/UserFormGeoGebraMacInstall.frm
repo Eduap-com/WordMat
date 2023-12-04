@@ -66,8 +66,8 @@ Private Sub UserForm_Activate()
     Label2.Caption = "Vent først til GeoGebra er blevet downloadet..." & vbCrLf & "Så vil du blive bedt om at tildele adgang til GeoGebra."
     i = 0
     
-    FilePath = GetProgramFilesDir & "GeoGebra.app"
-    If Dir(FilePath, vbDirectory) <> vbNullString Then GoTo slut ' Efter test kan klik på formen aktivere dette event igen, så skal der ikke ventes på download igen.
+'    FilePath = GetProgramFilesDir & "GeoGebra.app"
+'    If Dir(FilePath, vbDirectory) <> vbNullString Then GoTo slut ' Efter test kan klik på formen aktivere dette event igen, så skal der ikke ventes på download igen.
     
     FilePath = GetDownloadsFolder & "GeoGebra.app"
     
