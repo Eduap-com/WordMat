@@ -290,7 +290,7 @@ function setupWaitForBodyLoad(callback) {
       // __PERMUTATIONS_BEGIN__
       // Permutation logic is injected here. this code populates the
       // answers variable.
-      strongName = '5E20CFF71E3A45C430160D7C6859D388';// __PERMUTATIONS_END__
+      strongName = '6ABF78829C2171CCC51F4860906C1B31';// __PERMUTATIONS_END__
       var idx = strongName.indexOf(':');
       if (idx != -1) {
         softPermutationId = parseInt(strongName.substring(idx + 1), 10);
