@@ -23,17 +23,17 @@ Option Explicit
 Public EqName As String
 Private Sub CommandButton_cancel_Click()
     EqName = ""
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
     EqName = ListBox1.Text
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     EqName = ListBox1.Text
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()
@@ -50,6 +50,6 @@ Sub SetCaptions()
     Me.Caption = Sprog.A(15)
     CommandButton_ok.Caption = Sprog.OK
     CommandButton_cancel.Caption = Sprog.Cancel
-    Label_ligninger.Caption = Sprog.Equations
+    Label_Ligninger.Caption = Sprog.Equations
     
 End Sub

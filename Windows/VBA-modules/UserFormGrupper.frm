@@ -38,7 +38,7 @@ Dim arrint As Variant
 Dim i As Integer
 Dim j As Integer
 On Error GoTo fejl
-Me.hide
+Me.Hide
 'Application.ScreenUpdating = False
 Data = TextBox_data.Text
 intervaller = TextBox_intervaller.Text

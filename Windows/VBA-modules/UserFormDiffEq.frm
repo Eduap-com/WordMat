@@ -28,7 +28,7 @@ Private Svars As Variant ' array der holder variabelnavne som de skal returneres
 
 Private Sub CommandButton_cancel_Click()
     luk = True
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
@@ -57,7 +57,7 @@ Dim i As Integer
     End If
     End If
     
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_solvenum_Click()
@@ -69,7 +69,7 @@ Private Sub CommandButton_solvenum_Click()
       Exit Sub
    End If
    luk = True
-   Me.hide
+   Me.Hide
    UserFormDeSolveNumeric.TextBox_varx.Text = TextBox_variabel.Text
    UserFormDeSolveNumeric.TextBox_var1.Text = TextBox_funktion.Text
    UserFormDeSolveNumeric.TextBox_eq1.Text = F

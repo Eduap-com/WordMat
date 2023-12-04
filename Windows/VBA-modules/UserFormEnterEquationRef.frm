@@ -23,7 +23,7 @@ Option Explicit
 Public EquationName As String
 Private Sub CommandButton_cancel_Click()
     EquationName = ""
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
@@ -46,7 +46,7 @@ For i = 1 To ActiveDocument.Bookmarks.Count
     End If
 Next
     
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
@@ -79,7 +79,7 @@ Sub SetCaptions()
     Label_name.Caption = Sprog.A(5)
     CommandButton_cancel.Caption = Sprog.Cancel
     CommandButton_ok.Caption = Sprog.OK
-    Label_ligninger.Caption = Sprog.A(10)
+    Label_Ligninger.Caption = Sprog.A(10)
     Label_help.Caption = Sprog.A(11)
     Label_error.Caption = Sprog.A(12)
 End Sub

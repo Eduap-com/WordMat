@@ -26,7 +26,7 @@ Public SammeLinje As Boolean
 
 Private Sub CommandButton_annuller_Click()
     annuller = True
-    Me.hide
+    Me.Hide
 End Sub
 Sub ExecuteOK()
     If OptionButton_numonly.Value = True Then
@@ -72,7 +72,7 @@ Sub ExecuteOK()
     End If
 
 
-    Me.hide
+    Me.Hide
     Application.ScreenUpdating = falses
 
 End Sub
