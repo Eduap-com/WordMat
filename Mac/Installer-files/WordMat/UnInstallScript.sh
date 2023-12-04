@@ -9,7 +9,7 @@ Echo
 
 
 #Main Add-in file. Removes WordMat from Word menu
-sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMatWinMac.dotm
+sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMatMac.dotm
 
 #Main installation
 sudo rm -rf /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Add-ins.localized/WordMat/
