@@ -64,7 +64,8 @@ Private Sub UserForm_Activate()
     CommandButton_test.visible = False
     Label_progress.Caption = "*"
     CommandButton_stop.visible = True
-    Label_progress.Caption = "GeoGebra 5 er ved at blive hentet"
+    Label1.Caption = "GeoGebra 5 er ved at blive hentet"
+    Label2.Caption = "Det er vigtigt, at du gør præcis som der står her for at fuldføre installationen." & vbCrLf & "Vent først til GeoGebra er blevet downloadet..." & vbCrLf & "Så vil du blive bedt om at tildele adgang til GeoGebra."
     i = 0
     
     FilePath = GetProgramFilesDir & "GeoGebra.app"
@@ -90,7 +91,7 @@ Private Sub UserForm_Activate()
         If s = "ok" Then
             If RunScript("OpenApps", "") = "OK" Then
                 Label1.Caption = "Åben GeoGebra på følgende måde"
-                Label2.Caption = "Apps skulle nu gerne være blevet åbnet med Finder." & vbCrLf & vbCrLf & "0. Tildel adgang til GeoGebra når du bliver spurgt om det" & vbCrLf & "1. Hold 'Control' nede mens du klikker på 'GeoGebra'" & vbCrLf & "2. Klik Åben" & vbCrLf & "3. Klik 'OK' " & vbCrLf & "4. Hold 'Control' nede mens du klikker på 'GeoGebra' en gang til" & vbCrLf & "5. Klik 'Åbn' " & vbCrLf & "   Så skulle GeoGebra gerne åbne, og WordMat vil fremover også kunne åbne GeoGebra." & vbCrLf & "6. Slut af med at klikke på knappen 'Test' herunder for at se om WordMat kan starte GeoGebra 5"
+                Label2.Caption = "Apps-mappen skulle nu gerne være blevet åbnet i Finder her til højre." & vbCrLf & vbCrLf & "1. Klik 'Vælg...' og 'Tildel adgang' til GeoGebra når du bliver spurgt om det" & vbCrLf & "2. Hold 'Control' nede mens du klikker på 'GeoGebra'" & vbCrLf & "3. Klik Åben" & vbCrLf & "4. Klik 'OK' " & vbCrLf & "5. Hold 'Control' nede mens du klikker på 'GeoGebra' en gang til" & vbCrLf & "6. Klik 'Åbn' " & vbCrLf & "   Så skulle GeoGebra gerne åbne, og WordMat vil fremover også kunne åbne GeoGebra." & vbCrLf & "6. Slut af med at klikke på knappen 'Test' herunder for at se om WordMat kan starte GeoGebra 5"
                 Label2.visible = True
                 CommandButton_test.visible = True
             Else
@@ -98,6 +99,7 @@ Private Sub UserForm_Activate()
                 Label2.Caption = "Der er sket en fejl. Måske er GeoGebra ikke blevet hentet korrekt, eller du har ikke tildelt adgang"
                 Label2.visible = True
                 CommandButton_test.visible = False
+                TestDone = True
             End If
         End If
     End If

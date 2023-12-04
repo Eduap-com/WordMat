@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormGeoGebra 
    Caption         =   "GeoGebra"
-   ClientHeight    =   2580
+   ClientHeight    =   2655
    ClientLeft      =   -15
    ClientTop       =   75
-   ClientWidth     =   7665
+   ClientWidth     =   7515
    OleObjectBlob   =   "UserFormGeoGebra.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -45,7 +45,7 @@ Private Sub UserForm_Activate()
     If Sprog.SprogNr = 1 Then
         Label_title.Caption = "GeoGebra 5 er ikke installeret"
 #If Mac Then
-        Label2.Caption = "Knappen downloader GeoGebra 5 til 'overførsler' på din Mac. Du skal efterfølgende åbne Finder og åbne GeoGebra med Control + Klik, for at tillade brugen."
+        Label2.Caption = "Knappen downloader GeoGebra 5 til 'overførsler' på din Mac. Du bliver efterfølgende guidet igennem opsætningen."
 #Else
         Label2.Caption = "Knappen sender dig til hjemmesiden, hvor du kan installere GeoGebra. WordMat på Windows understøtter 'GeoGebra classic 5', 'GeoGebra Calculator Suite', 'GeoGebra Classic 6' samt de fleste andre App-udgaver af GeoGebra."
 #End If

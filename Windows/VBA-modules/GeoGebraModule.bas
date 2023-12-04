@@ -760,12 +760,16 @@ Sub GeoGebra()
     On Error Resume Next
     DoEvents
     Unload UfWait
+    Set UfWait = Nothing
     
     GoTo slut
 fejl:
 '    UserFormGeoGebra.Show
 slut:
-    If Not UfWait Is Nothing Then Unload UfWait
+    If Not UfWait Is Nothing Then
+        Unload UfWait
+        Set UfWait = Nothing
+    End If
     CASengine = TempCas
 End Sub
 Sub InstallGeoGebra()
