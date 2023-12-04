@@ -772,11 +772,6 @@ slut:
     End If
     CASengine = TempCas
 End Sub
-Sub TestKill()
-    MsgBox GetDownloadsFolder & "\GeoGebra*"
-        Kill GetDownloadsFolder & "\GeoGebra*"
-
-End Sub
 
 Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
     Dim i As Long, DDir As String, FN As String
@@ -788,10 +783,12 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
         UserFormGeoGebra.ReturnVal = 1
     End If
 #If Mac Then
+    FN = GetDownloadsFolder & "GeoGebra.app"
     If UserFormGeoGebra.ReturnVal = 1 Then
-        If Dir(GetDownloadsFolder & "GeoGebra.app", vbDirectory) <> "" Then
-            If GrantAccessToMultipleFiles(Array(GetDownloadsFolder & "GeoGebra.app")) = "true" Then
-                RmDir GetDownloadsFolder & "GeoGebra.app"
+        If Dir(FN, vbDirectory) <> "" Then
+            If GrantAccessToMultipleFiles(Array(FN)) = "true" Then
+'                RmDir FN
+                RunScript "RemoveApp", FN
             Else
                 MsgBox "Du skal give adgang før end GeoGebra 5 kan blive installeret", vbOKOnly, "Fejl"
                 GoTo slut

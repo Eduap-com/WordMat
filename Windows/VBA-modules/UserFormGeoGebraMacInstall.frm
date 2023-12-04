@@ -18,14 +18,6 @@ Option Explicit
 Private StopNow As Boolean
 
 Private Sub CommandButton_cancel_Click()
-
-End Sub
-
-Private Sub CommandButton_cancel_Click()
-    Unload Me
-End Sub
-
-Private Sub CommandButton_cancel_Click()
     Dim FilePath As String
     FilePath = GetProgramFilesDir & "GeoGebra.app"
     
@@ -39,6 +31,7 @@ Private Sub CommandButton_cancel_Click()
 '            Me.Hide
 '        End If
 '    End If
+    Unload Me
 
 End Sub
 
