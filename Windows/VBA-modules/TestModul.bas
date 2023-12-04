@@ -258,8 +258,11 @@ Sub RunTestSequence()
     If TestSolve("1,386" & VBA.ChrW(183) & "cos" & VBA.ChrW(8289) & "(0,63" & VBA.ChrW(183) & "x)=0", "x", "x=" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "-2,380952    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "-0,7936508    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "0,7936508    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "2,380952@$x=-(2,380952" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")    " & VBA.ChrW(8744) & "    x=-(0,7936508" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")    " & VBA.ChrW(8744) & "    x=0,7936508" & VBA.ChrW(183) & "" & VBA.ChrW(960) & "    " & VBA.ChrW(8744) & "    x=2,380952" & VBA.ChrW(183) & "" & VBA.ChrW(960)) Then GoTo slut
     InsertSletDef
     
+    
     ' denne fejler, men ikke hvis den byttes om med ovenstående, så er det den som fejler ????
     Radians = True
+    Selection.TypeText "Den næste fejler, men ikke hvis den byttes om med ovenstående, så er det den som fejler..."
+    Selection.TypeParagraph
     InsertTestMath "Definer: -2<x<2"
     Selection.TypeParagraph
     TestSolve "sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " " & VBA.ChrW(8730) & "(cos" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " )=0", "x", "x=0    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "/2"
