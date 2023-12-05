@@ -28,34 +28,6 @@
 							<key>CHILDREN</key>
 							<array>
 								<dict>
-									<key>BUNDLE_CAN_DOWNGRADE</key>
-									<false/>
-									<key>BUNDLE_POSTINSTALL_PATH</key>
-									<dict>
-										<key>PATH_TYPE</key>
-										<integer>0</integer>
-									</dict>
-									<key>BUNDLE_PREINSTALL_PATH</key>
-									<dict>
-										<key>PATH_TYPE</key>
-										<integer>0</integer>
-									</dict>
-									<key>CHILDREN</key>
-									<array/>
-									<key>GID</key>
-									<integer>80</integer>
-									<key>PATH</key>
-									<string>ExternalPrograms/GeoGebra 5.app</string>
-									<key>PATH_TYPE</key>
-									<integer>1</integer>
-									<key>PERMISSIONS</key>
-									<integer>493</integer>
-									<key>TYPE</key>
-									<integer>3</integer>
-									<key>UID</key>
-									<integer>0</integer>
-								</dict>
-								<dict>
 									<key>CHILDREN</key>
 									<array/>
 									<key>GID</key>
@@ -1181,7 +1153,7 @@
 				<key>USE_HFS+_COMPRESSION</key>
 				<false/>
 				<key>VERSION</key>
-				<string>1.27.0</string>
+				<string>1.28.0</string>
 			</dict>
 			<key>TYPE</key>
 			<integer>0</integer>
@@ -1304,7 +1276,7 @@
 					</dict>
 				</dict>
 				<key>MODE</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<key>INSTALLATION_STEPS</key>
 			<array>
@@ -1479,7 +1451,7 @@
 					<key>DICTIONARY</key>
 					<dict>
 						<key>IC_REQUIREMENT_CPU_ARCHITECTURE_FAMILY</key>
-						<integer>2</integer>
+						<integer>3</integer>
 						<key>IC_REQUIREMENT_CPU_INTEL_ARCHITECTURE_TYPE</key>
 						<integer>0</integer>
 						<key>IC_REQUIREMENT_CPU_MINIMUM_CPU_CORES_COUNT</key>
@@ -1494,7 +1466,24 @@
 					<key>IDENTIFIER</key>
 					<string>fr.whitebox.Packages.requirement.cpu</string>
 					<key>MESSAGE</key>
-					<array/>
+					<array>
+						<dict>
+							<key>LANGUAGE</key>
+							<string>English</string>
+							<key>SECONDARY_VALUE</key>
+							<string>Go back to WordMaths download page and get the version for Apple Silicon (M1)</string>
+							<key>VALUE</key>
+							<string>This installation file is for Apple Silicon Macs. You have an Intel Mac. </string>
+						</dict>
+						<dict>
+							<key>LANGUAGE</key>
+							<string>Danish</string>
+							<key>SECONDARY_VALUE</key>
+							<string>Gå tilbage til WordMats downloadside og hent udgaven til Apple Silicon (M1)</string>
+							<key>VALUE</key>
+							<string>Denne installationsfil er til Apple Silicon Macs. Du har en Intel Mac.</string>
+						</dict>
+					</array>
 					<key>NAME</key>
 					<string>Processor</string>
 					<key>STATE</key>
