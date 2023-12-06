@@ -841,8 +841,8 @@ On Error GoTo fejl
 #If Mac Then
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra.app"
     If FileExists(GeoGebraPath) Then Exit Function
-    GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
-    If FileExists(GeoGebraPath) Then Exit Function
+'    GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
+'    If FileExists(GeoGebraPath) Then Exit Function
 ' Disse kan godt startes på Mac, men de kan ikke åbne en ggb-fil som argument
 '    GeoGebraPath = GetProgramFilesDir() & "GeoGebra 6.app"
 '    If FileExists(GeoGebraPath) Then Exit Function

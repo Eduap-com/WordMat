@@ -139,9 +139,9 @@ Public Sub DownloadNow()
         Label_progress.Caption = Label_progress.Caption & "*"
         If i = 60 Then
             If Sprog.SprogNr = 1 Then
-                Label2.Caption = Label2.Caption & vbCrLf & "Download tager lang tid. Du kan klikke stop hvis der ikke er fremgang."
+                Label2.Caption = Label2.Caption & vbCrLf & "Download tager lang tid. Check i Safari om det ser ud til at der er en download igang. Du kan klikke stop hvis der ikke er fremgang."
             Else
-                Label2.Caption = Label2.Caption & vbCrLf & "Download is slow. You can click stop if there is no progress."
+                Label2.Caption = Label2.Caption & vbCrLf & "Download is slow. Check Safari if the download is progressing. You can click stop if there is no progress."
             End If
         End If
         i = i + 1

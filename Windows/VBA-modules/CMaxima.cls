@@ -3632,9 +3632,10 @@ msat:
         End If
     Loop While Pos > 0
 
-   ' nabla operator, grad og div
+   ' nabla operator, grad og div  håndtering hvor der fx skrives nabla f(1;2)
     Do
-        Pos = InStr(Text, ChrW(8711) & ChrW(13))
+'        Pos = InStr(Text, ChrW(8711) & ChrW(13))
+        Pos = InStr(Text, "gradq")
         If Pos > 0 Then
             ea.Text = Text
             ea.Pos = Pos
