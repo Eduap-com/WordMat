@@ -54,7 +54,7 @@ Private Sub CommandButton_test_Click()
 '    RunScript "OpenGeoGebra", geogebrafilersti
 slut:
 End Sub
-Private Sub UserForm_Activate()
+Public Sub DownloadNow()
     Dim FilePath As String, i As Integer
     Dim s As String
     StopNow = False
@@ -62,9 +62,30 @@ Private Sub UserForm_Activate()
     CommandButton_test.visible = False
     CommandButton_stop.visible = True
     Label_progress.Caption = "*"
-    Label1.Caption = "GeoGebra 5 er ved at blive hentet"
-    Label2.Caption = "Vent først til GeoGebra er blevet downloadet..." & vbCrLf & "Så vil du blive bedt om at tildele adgang til GeoGebra."
+    If Sprog.SprogNr = 1 Then
+        Label1.Caption = "GeoGebra 5 er ved at blive hentet"
+        Label2.Caption = "Vent først til GeoGebra er blevet downloadet..." & vbCrLf & "Så vil du blive bedt om at tildele adgang til GeoGebra."
+    Else
+        Label1.Caption = "Downloading GeoGebra 5"
+        Label2.Caption = "Wait until download is complete..." & vbCrLf & "Then you will be asked to grant access to GeoGebra."
+    End If
     i = 0
+    
+    FN = GetDownloadsFolder & "GeoGebra.app"
+    If Dir(FN, vbDirectory) <> "" Then
+        If GrantAccessToMultipleFiles(Array(FN)) = "true" Then
+'                RmDir FN
+            RunScript "RemoveApp", FN
+        Else
+            Label1.Caption = "Download stoppet"
+            Label2.Caption = "Du skal give adgang før end GeoGebra 5 kan blive installeret"
+            GoTo slut
+        End If
+    End If
+    OpenLink "https://download.geogebra.org/package/mac", True
+    AppActivate "Microsoft Word"
+    AppActivate "Word"
+    Me.Label1.SetFocus
     
 '    FilePath = GetProgramFilesDir & "GeoGebra.app"
 '    If Dir(FilePath, vbDirectory) <> vbNullString Then GoTo slut ' Efter test kan klik på formen aktivere dette event igen, så skal der ikke ventes på download igen.
@@ -96,6 +117,8 @@ Private Sub UserForm_Activate()
         Label2.Caption = "Der skulle nu gerne åbne et vindue der hedder 'Giv adgang til fil'." & vbCrLf & vbCrLf & "1. Klik 'Vælg...' " & vbCrLf & "2. Klik 'Tildel adgang' "
         Label_progress.Caption = ""
         If GrantAccessToMultipleFiles(Array(GetDownloadsFolder & "GeoGebra.app")) = "true" Then ' selvom der kun er en fil, er det en fordel at spørge om lov først, da man så får svar tilbage
+            Label1.Caption = "Flytter GeoGebra til Apps"
+            Label2.Caption = ""
             s = RunScript("MoveGeoGebraToApplications", "") ' flytter GeoGebra til Apps og fjerner quarantine
             If s = "ok" Then
                 CommandButton_test.visible = True
@@ -122,6 +145,7 @@ Private Sub UserForm_Activate()
 
 slut:
 End Sub
+
 #End If
 
 

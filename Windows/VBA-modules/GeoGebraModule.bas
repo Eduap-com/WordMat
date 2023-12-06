@@ -775,7 +775,7 @@ End Sub
 
 Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
     Dim i As Long, DDir As String, FN As String
-    Dim UfWait As UserFormWaitForMaxima
+'    Dim UfWait As UserFormWaitForMaxima
     
     If ConfirmPrompt Then
         UserFormGeoGebra.Show
@@ -783,19 +783,9 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
         UserFormGeoGebra.ReturnVal = 1
     End If
 #If Mac Then
-    FN = GetDownloadsFolder & "GeoGebra.app"
     If UserFormGeoGebra.ReturnVal = 1 Then
-        If Dir(FN, vbDirectory) <> "" Then
-            If GrantAccessToMultipleFiles(Array(FN)) = "true" Then
-'                RmDir FN
-                RunScript "RemoveApp", FN
-            Else
-                MsgBox "Du skal give adgang før end GeoGebra 5 kan blive installeret", vbOKOnly, "Fejl"
-                GoTo slut
-            End If
-        End If
-        OpenLink "https://download.geogebra.org/package/mac", True
         UserFormGeoGebraMacInstall.Show
+        UserFormGeoGebraMacInstall.DownloadNow
     Else
         GeoGebraWeb
     End If
@@ -841,7 +831,7 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
 fejl:
 
 slut:
-    If Not UfWait Is Nothing Then Unload UfWait
+'    If Not UfWait Is Nothing Then Unload UfWait
 End Sub
 Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found. OBS: På mac bruges stien ikke. Der er applescript til det, men funktionen bruges til at afgøre om der er en GeoGebra installation.
@@ -869,7 +859,7 @@ On Error GoTo fejl
             If GeoGebraPath <> "" Then DN = GeoGebraPath
         Loop
         If DN <> "" Then
-            GeoGebraPath = """" & DN & """"
+            GeoGebraPath = """" & GetProgramFilesDir & "\" & DN & "\GeoGebra.exe"""
             GoTo slut
         End If
     End If
