@@ -106,7 +106,7 @@ Public Sub DownloadNow()
     
     FilePath = GetDownloadsFolder & "GeoGebra.app"
     
-    Do While Dir(FilePath, vbDirectory) = vbNullString And i < 45
+    Do While Dir(FilePath, vbDirectory) = vbNullString And i < 60 * 10
         DoEvents
         If StopNow Then
             If Sprog.SprogNr = 1 Then
@@ -122,7 +122,7 @@ Public Sub DownloadNow()
             CommandButton_retry.visible = True
             GoTo slut
         End If
-        If GrantAccessToMultipleFiles(Array(FN)) = "false" Then
+        If GrantAccessToMultipleFiles(Array(FilePath)) = "false" Then
             If Sprog.SprogNr = 1 Then
                 Label1.Caption = "Fejl"
                 Label2.Caption = "Du fik ikke givet tilladelse til GeoGebra. Klik på 'Retry' for at prøve igen."
@@ -137,9 +137,16 @@ Public Sub DownloadNow()
         End If
         Wait 1
         Label_progress.Caption = Label_progress.Caption & "*"
+        If i = 60 Then
+            If Sprog.SprogNr = 1 Then
+                Label2.Caption = Label2.Caption & vbCrLf & "Download tager lang tid. Du kan klikke stop hvis der ikke er fremgang."
+            Else
+                Label2.Caption = Label2.Caption & vbCrLf & "Download is slow. You can click stop if there is no progress."
+            End If
+        End If
         i = i + 1
     Loop
-    If i = 45 Then
+    If i >= 600 Then
         If Sprog.SprogNr = 1 Then
             Label1.Caption = "Fejl ved download af GeoGebra"
             Label2.Caption = "Filen kunne ikke findes i overførsler." & vbCrLf & "Du kan klikke 'Retry' forneden, hvis WordMat skal lede igen."
