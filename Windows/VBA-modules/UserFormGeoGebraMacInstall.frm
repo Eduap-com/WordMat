@@ -171,10 +171,10 @@ Public Sub DownloadNow()
         If GrantAccessToMultipleFiles(Array(GetDownloadsFolder & "GeoGebra.app")) = "true" Then ' selvom der kun er en fil, er det en fordel at spørge om lov først, da man så får svar tilbage
             If Sprog.SprogNr = 1 Then
                 Label1.Caption = "Flytter GeoGebra til Apps"
-                Label2.Caption = ""
+                Label2.Caption = "Du skal muligvis give tilladelse til 'System events' bare klik OK."
             Else
                 Label1.Caption = "Moving GeoGebra to Apps"
-                Label2.Caption = ""
+                Label2.Caption = "You may be required to allow permission for 'System events'. Just click OK."
             End If
             s = RunScript("MoveGeoGebraToApplications", "") ' flytter GeoGebra til Apps og fjerner quarantine
             If s = "ok" Then
