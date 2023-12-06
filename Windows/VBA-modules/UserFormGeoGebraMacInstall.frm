@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormGeoGebraMacInstall 
    Caption         =   "GeoGebra 5 Installation"
-   ClientHeight    =   4560
+   ClientHeight    =   4845
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   9840.001
+   ClientWidth     =   11565
    OleObjectBlob   =   "UserFormGeoGebraMacInstall.frx":0000
    ShowModal       =   0   'False
 End
@@ -67,35 +67,42 @@ Public Sub DownloadNow()
     CommandButton_stop.visible = True
     Label_progress.Caption = "*"
     If Sprog.SprogNr = 1 Then
+        Label1.Caption = "Slet gamle version"
+        Label2.Caption = "Før den nye version kan hentes, skal den gamle version i Overførsler fjernes." & vbCrLf & "1. Der skulle gerne åbne et vindue, der hedder 'Giv adgang til fil'." & vbCrLf & "2. Klik 'Vælg...'  " & vbCrLf & "3. Klik 'Tildel adgang' "
+    Else
+        Label1.Caption = "Remove old version"
+        Label2.Caption = "Before the new version can be downloaded, the old version in Downloads must be removed." & vbCrLf & "You will be asked to grant access to GeoGebra."
+    End If
+    i = 0
+    
+    FN = GetDownloadsFolder & "GeoGebra.app"
+    If GrantAccessToMultipleFiles(Array(FN)) = "true" Then ' true hvis filen ikke finde
+        If Dir(FN, vbDirectory) <> "" Then
+            '                RmDir FN
+            RunScript "RemoveApp", FN
+        End If
+    Else
+        If Sprog.SprogNr = 1 Then
+            Label1.Caption = "Download stoppet"
+            Label2.Caption = "Du skal give adgang til GeoGebra.app før end installationen kan fortsætte"
+        Else
+            Label1.Caption = "Download stopped"
+            Label2.Caption = "You must grant access to GeoGebra.app for the installation to proceed"
+        End If
+        GoTo slut
+    End If
+    If Sprog.SprogNr = 1 Then
         Label1.Caption = "GeoGebra 5 er ved at blive hentet"
         Label2.Caption = "1. Vent først til GeoGebra 5 er blevet downloadet." & vbCrLf & "2. Når download er gennemført skulle der gerne åbne et vindue, der hedder 'Giv adgang til fil'." & vbCrLf & "3. Klik 'Vælg...'  " & vbCrLf & "4. Klik 'Tildel adgang' "
     Else
         Label1.Caption = "Downloading GeoGebra 5"
         Label2.Caption = "Wait until download is complete." & vbCrLf & "When the download is complete you will be asked to grant access to GeoGebra."
     End If
-    i = 0
-    
-    FN = GetDownloadsFolder & "GeoGebra.app"
-    If Dir(FN, vbDirectory) <> "" Then
-        If GrantAccessToMultipleFiles(Array(FN)) = "true" Then
-'                RmDir FN
-            RunScript "RemoveApp", FN
-        Else
-            If Sprog.SprogNr = 1 Then
-                Label1.Caption = "Download stoppet"
-                Label2.Caption = "Du skal give adgang til GeoGebra.app før end installationen kan fortsætte"
-            Else
-                Label1.Caption = "Download stopped"
-                Label2.Caption = "You must grant access to GeoGebra.app for the installation to proceed"
-            End If
-            GoTo slut
-        End If
-    End If
     OpenLink "https://download.geogebra.org/package/mac", True
     AppActivate "Microsoft Word"
     
-'    FilePath = GetProgramFilesDir & "GeoGebra.app"
-'    If Dir(FilePath, vbDirectory) <> vbNullString Then GoTo slut ' Efter test kan klik på formen aktivere dette event igen, så skal der ikke ventes på download igen.
+    '    FilePath = GetProgramFilesDir & "GeoGebra.app"
+    '    If Dir(FilePath, vbDirectory) <> vbNullString Then GoTo slut ' Efter test kan klik på formen aktivere dette event igen, så skal der ikke ventes på download igen.
     
     FilePath = GetDownloadsFolder & "GeoGebra.app"
     
@@ -111,6 +118,21 @@ Public Sub DownloadNow()
             End If
             Label_progress.Caption = ""
             CommandButton_stop.visible = False
+            CommandButton_test.visible = False
+            CommandButton_retry.visible = True
+            GoTo slut
+        End If
+        If GrantAccessToMultipleFiles(Array(FN)) = "false" Then
+            If Sprog.SprogNr = 1 Then
+                Label1.Caption = "Fejl"
+                Label2.Caption = "Du fik ikke givet tilladelse til GeoGebra. Klik på 'Retry' for at prøve igen."
+            Else
+                Label1.Caption = "Error"
+                Label2.Caption = "You did not grant access to GeGebra. Click 'Retry' to try again."
+            End If
+            CommandButton_stop.visible = False
+            CommandButton_test.visible = False
+            CommandButton_retry.visible = True
             GoTo slut
         End If
         Wait 1
@@ -157,15 +179,15 @@ Public Sub DownloadNow()
                     Label1.Caption = "Installation complete!"
                     Label2.Caption = "GeoGebra 5 is now installed." & vbCrLf & "Click 'Continue' to open GeoGebra."
                 End If
-'                If RunScript("OpenApps", "") = "OK" Then
-'                    CommandButton_test.visible = True
-'                Else
-'                    Label1.Caption = "Fejl"
-'                    Label2.Caption = "Der er sket en fejl. Måske er GeoGebra ikke blevet hentet korrekt, eller du har ikke tildelt adgang"
-'                    Label2.visible = True
-'                    CommandButton_test.visible = False
-'                    TestDone = True
-'                End If
+                '                If RunScript("OpenApps", "") = "OK" Then
+                '                    CommandButton_test.visible = True
+                '                Else
+                '                    Label1.Caption = "Fejl"
+                '                    Label2.Caption = "Der er sket en fejl. Måske er GeoGebra ikke blevet hentet korrekt, eller du har ikke tildelt adgang"
+                '                    Label2.visible = True
+                '                    CommandButton_test.visible = False
+                '                    TestDone = True
+                '                End If
             Else
             End If
         Else
