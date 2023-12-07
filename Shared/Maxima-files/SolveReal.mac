@@ -1558,7 +1558,13 @@ else false
 
 /* Grad og div*/
 prefix("gradq")$
-gradq(parq):=block(if member('z,listofvars(parq)) then matrix([diff(parq,'x,1)],[diff(parq,'y,1)],[diff(parq,'z,1)]) else matrix([diff(parq,'x,1)],[diff(parq,'y,1)]))$
+gradq(parq)::=block([qargs,funn,varq,varq2],qargs:args(parq), funn:op(parq),
+    if length(qargs)>2 then (
+        if numberp(qargs[1]) then (
+            matrix([subst(qargs[1],varq,diff(funn(varq,qargs[2],qargs[3]),varq,1))],[subst(qargs[2],varq2,diff(funn(qargs[1],varq2,qargs[3]),varq2,1))],[subst(qargs[3],varq2,diff(funn(qargs[1],qargs[2],varq2),varq2,1))])) else ev(matrix([diff(parq,'x,1)],[diff(parq,'y,1)],[diff(parq,'z,1)]))
+    )
+    else (
+        if numberp(qargs[1]) then (matrix([subst(qargs[1],varq,diff(funn(varq,qargs[2]),varq,1))],[subst(qargs[2],varq2,diff(funn(qargs[1],varq2),varq2,1))])) else ev(matrix([diff(parq,'x,1)],[diff(parq,'y,1)]))))$
 prefix("divq")$
 divq(parq):=block(if length(parq)<2 then diff(parq,'x,1) elseif length(parq)<3 then diff(parq[1,1],'x,1)+diff(parq[2,1],'y,1) elseif length(parq)<4 then diff(parq[1,1],'x,1)+diff(parq[2,1],'y,1)+diff(parq[3,1],'z,1) else 'divq(parq))$
 prefix("laplaceq")$
