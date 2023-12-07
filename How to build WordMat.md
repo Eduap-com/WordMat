@@ -134,7 +134,7 @@ Must be done separately on intel and M1
 - Run maxima
     Open terminal 
     cd to MaximaWM
-    ./maxima/bin/maxima 
+    ./maxima/bin/maxima   eller 'sh maximarun.sh'
 - Run the following commands in the terminal window (Make sure to adjust the path in the last line to your user)
 ```
 *Open solvereal.mac and copy/paste content to terminal*
