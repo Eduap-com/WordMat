@@ -678,11 +678,11 @@ On Error Resume Next
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True
     End If
 #Else
-    If Script Then
-        shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus
-    Else
+'    If Script Then
+'        shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus ' giver problemer med bitdefender
+'    Else
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' hvis linket ikke virker så sker der bare ingen ting
-    End If
+'    End If
 #End If
 fejl:
 End Sub
@@ -1530,40 +1530,7 @@ Function DownloadFile(URL As String, FilNavn As String) As Boolean
     DownloadFile = True
 End Function
 #End If
-Function RunApplication(AppPath As String) As Boolean
-    ' RunApplication("C:\Your\Path\Roboapp.exe")
-    Dim varProc As Variant
-    On Error Resume Next
-    varProc = shell(AppPath, vbNormalFocus)
-    RunApplication = Not IsEmpty(varProc)
-End Function
-Sub CheckForUpdateSilentOld()
-' maxproc skal være oprettet
-#If Mac Then
-#Else
-    Dim nyversion As String, News As String
-    Dim result As VbMsgBoxResult
-    On Error GoTo fejl
-    nyversion = MaxProc.CheckForUpdate()
-    If nyversion = "" Then
-        Exit Sub
-    End If
 
-    If nyversion <> AppVersion Then
-        News = MaxProc.GetVersionNews()
-        result = MsgBox(Sprog.A(21) & News & vbCrLf & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
-        If result = vbYes Then
-            OpenLink ("http://www.eduap.com/wordmat/download.aspx")
-        End If
-    End If
-
-
-GoTo slut
-fejl:
-'    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
-slut:
-#End If
-End Sub
 Sub CheckForUpdateSilent()
 ' maxproc skal være oprettet
     On Error GoTo fejl
@@ -1953,11 +1920,6 @@ Sub GenerateAutoCorrect()
     Application.OMathAutoCorrect.Entries.Add "\imp", VBA.ChrW(8658) ' implikationspil højre
 End Sub
 
-Sub testpf()
-MsgBox Environ("%programfiles%")
-MsgBox Environ("programfiles")
-End Sub
-
 Sub RestartWordMat()
 ' genstart Maxima og genopretter doc1
 RestartMaxima
@@ -1966,11 +1928,7 @@ LukTempDoc
 'Set tempDoc = Nothing
 OpretTempdoc
 End Sub
-Sub TestVector()
-PrepareMaxima
-    omax.ReadSelection
-    MsgBox Get2DVector(omax.Kommando)
-End Sub
+
 Function Get2DVector(Text As String) As String
     Dim ea As New ExpressionAnalyser
 '    Dim c As Collection
@@ -2392,7 +2350,8 @@ MsgBox Sprog.A(681), vbOKOnly, ""
     RunScript "OpenFinder", UserDir
 #Else
     UserDir = Environ$("username")
-    shell "explorer.exe " & "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates", vbNormalFocus
+    MsgBox "Open and delete this normal.dotm in this folder" & vbCrLf & "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates"
+'    shell "explorer.exe " & "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates", vbNormalFocus ' Bitdefender problems
 #End If
 End Sub
 Sub DeleteKeyboardShortcutsInNormalDotm()

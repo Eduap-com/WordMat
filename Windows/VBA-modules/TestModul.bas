@@ -846,11 +846,3 @@ MsgBox s
 End Sub
 
 
-Sub OpenJanis()
-Dim ReturnValue
-Dim sti As String
-    sti = """" & GetProgramFilesDir & "\WordMat\janis.jnlp"""
-
-ReturnValue = shell(sti, vbNormalFocus)
-End Sub
-

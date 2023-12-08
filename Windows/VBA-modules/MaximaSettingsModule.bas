@@ -48,6 +48,7 @@ Private mLatexTitlePage As Integer
 Private mLatexTOC As Integer
 Private mCASengine As Integer
 Private mLastUpdateCheck As String
+Private mRegAppVersion As String
 
 
 
@@ -148,7 +149,7 @@ On Error Resume Next
     AllTrig = False
     OutUnits = ""
     AutoStart = False
-    Antalberegninger = 0
+'    Antalberegninger = 0 ' skal vel aldrig nulstilles
     SettCheckForUpdate = True
     MaximaIndex = False
     PolarOutput = False
@@ -576,7 +577,18 @@ Public Property Let CASengine(xval As Integer)
     SetRegSetting "CASengine", xval
     mCASengine = xval
 End Property
-
+Public Property Get RegAppVersion() As String
+    If mRegAppVersion <> vbNullString Then
+        RegAppVersion = mRegAppVersion
+    Else
+        RegAppVersion = GetRegSettingString("AppVersion")
+        mRegAppVersion = RegAppVersion
+    End If
+End Property
+Public Property Let RegAppVersion(ByVal v As String)
+    SetRegSettingString "AppVersion", v
+    mRegAppVersion = v
+End Property
 
 Private Function GetRegSetting(Key As String) As Integer
     GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key)

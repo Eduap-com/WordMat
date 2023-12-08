@@ -606,156 +606,129 @@ start:
     Unload UfWait2
 #End If
 End Sub
-Public Sub RunMaximaFileOld()
-' starts maxima and sends inputfile. Then waits til Outputfile is generated.
-    Dim maximasti As String
-    Dim inputfil As String
-    Dim outputfil As String
-    Dim appnr As Integer
+'Public Sub RunMaximaFileOld()
+'' starts maxima and sends inputfile. Then waits til Outputfile is generated.
+'    Dim maximasti As String
+'    Dim inputfil As String
+'    Dim outputfil As String
+'    Dim appnr As Integer
+'
+'    AntalKommandoer = AntalKommandoer + 2
+'    If Definitions Then AntalKommandoer = AntalKommandoer + 1
+'
+'    Dim shellcmd As String
+'    Dim i As Integer
+'
+'    'UserFormWaitForMaxima.sh
+'    shellcmd = "cmd /C " & maximasti & " < " & inputfil & " > " & outputfil   '/K holder cmd åben
+'    'shellcmd = "cmd /C " & maximasti & " maxima.bat < " & InputFil & " > " & OutputFil   '/K holder cmd åben
+'    'shellcmd = "cmd /C " & maximasti & " start /high ""maxima.bat < " & InputFil & " > " & OutputFil & """"   '/K holder cmd åben
+'    appnr = shell(shellcmd, vbHide)    'vbNormalFocus vbMinimizedNoFocus vbhide
+'
+'    ' vent på maxima har genereret outputfil
+'    i = 0
+'    Do
+'        i = i + 1
+'        Wait (0.1)
+'    Loop Until Dir(outputfil) > "" Or i > 80
+'
+'    FindCmdTask    ' find kommandoprompten mens der ventes alligevel
+'
+'    ' vent på outputfilen er skrevet færdig
+'ventmere:
+'    If WaitForMaxima(30) Then
+'        FindLastMaximaOutput
+'    Else
+'        FindLastMaximaOutput
+'        '    Dim result As VbMsgBoxResult
+'        '    result = MsgBox("Maxima tager meget lang tid om beregningen. Tryk Ok hvis du vil vente mere eller annuller for at afslutte Maxima.", vbOKCancel, "Langsom")
+'        '    If result = vbOK Then
+'        '        i = 0
+'        '        GoTo ventmere
+'        '    Else
+'        '        KommentarOutput = "Maxima tager meget lang tid om beregning. Maxima blev afsluttet"
+'        '        On Error Resume Next
+'        '    End If
+'        CloseCmd
+'
+'        '    MsgBox "Maxima tog meget lang tid om beregningen. Så den blev afsluttet inden den var færdig.", vbOKOnly, "Fejl"
+'    End If
+'
+'
+'    ' vent på maximakommandoprompt er lukket
+'    'Dim maximaopen As Boolean
+'    'maximaopen = False
+'    'Do
+'    'i = i + 1
+'    'Wait (0.1)
+'    'For Each task1 In Tasks
+'    ''    MsgBox task1.Name & " - " & task1.Application & " - " & task1.Creator
+'    '    maximaopen = False
+'    '    If InStr(task1.Name, "cmd.exe") > 0 Then '  And InStr(task1.Name, "Maxima") > 0
+'    '        MsgBox task1.Application & " - " & task1.Creator
+'    '        Set CmdTask = task1
+'    '        maximaopen = True
+'    '        Exit For
+'    '    Else
+'    '    End If
+'    'Next
+'    'Loop Until Not maximaopen Or i > 80
+'
+'End Sub
 
-    AntalKommandoer = AntalKommandoer + 2
-    If Definitions Then AntalKommandoer = AntalKommandoer + 1
-
-    Dim shellcmd As String
-    Dim i As Integer
-
-    'UserFormWaitForMaxima.sh
-    shellcmd = "cmd /C " & maximasti & " < " & inputfil & " > " & outputfil   '/K holder cmd åben
-    'shellcmd = "cmd /C " & maximasti & " maxima.bat < " & InputFil & " > " & OutputFil   '/K holder cmd åben
-    'shellcmd = "cmd /C " & maximasti & " start /high ""maxima.bat < " & InputFil & " > " & OutputFil & """"   '/K holder cmd åben
-    appnr = shell(shellcmd, vbHide)    'vbNormalFocus vbMinimizedNoFocus vbhide
-
-    ' vent på maxima har genereret outputfil
-    i = 0
-    Do
-        i = i + 1
-        Wait (0.1)
-    Loop Until Dir(outputfil) > "" Or i > 80
-
-    FindCmdTask    ' find kommandoprompten mens der ventes alligevel
-
-    ' vent på outputfilen er skrevet færdig
-ventmere:
-    If WaitForMaxima(30) Then
-        FindLastMaximaOutput
-    Else
-        FindLastMaximaOutput
-        '    Dim result As VbMsgBoxResult
-        '    result = MsgBox("Maxima tager meget lang tid om beregningen. Tryk Ok hvis du vil vente mere eller annuller for at afslutte Maxima.", vbOKCancel, "Langsom")
-        '    If result = vbOK Then
-        '        i = 0
-        '        GoTo ventmere
-        '    Else
-        '        KommentarOutput = "Maxima tager meget lang tid om beregning. Maxima blev afsluttet"
-        '        On Error Resume Next
-        '    End If
-        CloseCmd
-
-        '    MsgBox "Maxima tog meget lang tid om beregningen. Så den blev afsluttet inden den var færdig.", vbOKOnly, "Fejl"
-    End If
-
-
-    ' vent på maximakommandoprompt er lukket
-    'Dim maximaopen As Boolean
-    'maximaopen = False
-    'Do
-    'i = i + 1
-    'Wait (0.1)
-    'For Each task1 In Tasks
-    ''    MsgBox task1.Name & " - " & task1.Application & " - " & task1.Creator
-    '    maximaopen = False
-    '    If InStr(task1.Name, "cmd.exe") > 0 Then '  And InStr(task1.Name, "Maxima") > 0
-    '        MsgBox task1.Application & " - " & task1.Creator
-    '        Set CmdTask = task1
-    '        maximaopen = True
-    '        Exit For
-    '    Else
-    '    End If
-    'Next
-    'Loop Until Not maximaopen Or i > 80
-
-End Sub
-Public Sub RunwxMaxima()
-    Dim shellcmd As String
-    Dim i As Integer
-    Dim result As VbMsgBoxResult
-    Dim MaximaInputStrengNonInteractive As String
-    Dim maximasti As String
-    Dim inputfil As String
-    Dim appnr As Integer
-
-    MaximaInputStreng = Left(MaximaInputStreng, Len(MaximaInputStreng) - 7) & "print(outpudtr);"
-    MaximaInputStreng = Replace(MaximaInputStreng, "display2d:false", "display2d:true", 1, 1)
-    MaximaInputStrengNonInteractive = ""
-
-    WriteInputFile (False)
-    maximasti = Dir(Environ("ProgramFiles") & "\Maxima*", vbDirectory)
-    maximasti = """" & Environ("ProgramFiles") & "\" & maximasti & "\wxMaxima\wxMaxima.exe"""
-
-    shellcmd = maximasti & " /o " & inputfil
-
-    result = MsgBox("Det er ikke muligt at løse problemet uden at stille nogle spørgsmål." & vbCrLf & "Du bliver nu sendt til wxMaxima hvor du skal svare på et eller flere spørgsmål. Angiv svar som y for yes eller n for no etc. tryk shift-enter efter svarene." & vbCrLf & vbCrLf & "Det resulterende udtryk kan så kopieres til Word igen.", vbOKCancel, "wxMaxima")
-
-    If result = vbOK Then
-        appnr = shell(shellcmd, vbNormalFocus)    'vbNormalFocus vbMinimizedNoFocus vbhide
-    End If
-
-End Sub
-
-Public Function WaitForMaxima(t As Integer) As Boolean
-' vent på outputfil er genereret færdig eller indtil der er gået t sekunder
-' returnerer true hvis den er færdig
-    Dim fillen As Integer
-    Dim fillen2 As Integer
-    Dim i As Integer
-    Dim filtext As String
-    Dim NoRuns As Integer
-    Dim arr As Variant
-    Dim MaximaInputStrengNonInteractive As String
-    i = 0
-    StopNow = False
-    Do
-        i = i + 1
-        filtext = FilOutput
-        fillen2 = fillen
-        fillen = Len(filtext)
-        Wait (0.1)    ' vent til beregnet
-        If StopNow Then
-            On Error Resume Next
-            CloseCmd
-            Exit Function
-        End If
-    Loop Until (fillen >= 297 And InStr(280, filtext, "(%i" & AntalKommandoer & ")") > 0) Or i > t * 10 Or fillen > 4000 Or InStr(279, filtext, "Incorrect syntax")  ' 301 er korteste mulige outputfil der er færdig
-    'ekstra sikkerhed fjernet: fillen = fillen2 And
-    'MsgBox Len(FilOutput)
-
-    If fillen > 4000 And NoRuns = 0 Then
-        CloseCmd
-        arr = Split(vars, ";")
-        Dim decl As String
-        decl = "declare(["
-        decl = decl & Replace(vars, ";", ",")
-        decl = decl & "],integer)"
-
-        decl = "[" & decl & ",assume_pos:true,load(noninteractive)]$"
-        '    decl = decl & "[matchdeclare ([aa, bb, cc, dd], true),simp: false,tellsimpafter (if aa then bb else bb, bb),tellsimpafter (if aa then bb elseif cc then bb else bb, bb),tellsimpafter (if aa then bb elseif cc then dd else dd, if aa then bb else dd),tellsimpafter (if aa then bb elseif cc then bb else dd, if aa or cc then bb else dd),tellsimpafter ('if aa then bb else bb, bb),tellsimpafter ('if aa then bb elseif cc then bb else bb, bb),tellsimpafter ('if aa then bb elseif cc then dd else dd, 'if aa then bb else dd),tellsimpafter ('if aa then bb elseif cc then bb else dd, 'if aa or cc then bb else dd),simp: true]$"
-        MaximaInputStrengNonInteractive = decl
-
-        AntalKommandoer = AntalKommandoer - 1
-        WriteInputFile (False)
-        WaitTilClosed
-        '    Kill outputfil
-        NoRuns = NoRuns + 1
-        RunMaxima
-    End If
-
-    If i > t * 10 Then
-        WaitForMaxima = False
-    Else
-        WaitForMaxima = True
-    End If
-
-End Function
+'Public Function WaitForMaxima(t As Integer) As Boolean
+'' vent på outputfil er genereret færdig eller indtil der er gået t sekunder
+'' returnerer true hvis den er færdig
+'    Dim fillen As Integer
+'    Dim fillen2 As Integer
+'    Dim i As Integer
+'    Dim filtext As String
+'    Dim NoRuns As Integer
+'    Dim arr As Variant
+'    Dim MaximaInputStrengNonInteractive As String
+'    i = 0
+'    StopNow = False
+'    Do
+'        i = i + 1
+'        filtext = FilOutput
+'        fillen2 = fillen
+'        fillen = Len(filtext)
+'        Wait (0.1)    ' vent til beregnet
+'        If StopNow Then
+'            On Error Resume Next
+'            CloseCmd
+'            Exit Function
+'        End If
+'    Loop Until (fillen >= 297 And InStr(280, filtext, "(%i" & AntalKommandoer & ")") > 0) Or i > t * 10 Or fillen > 4000 Or InStr(279, filtext, "Incorrect syntax")  ' 301 er korteste mulige outputfil der er færdig
+'    'ekstra sikkerhed fjernet: fillen = fillen2 And
+'    'MsgBox Len(FilOutput)
+'
+'    If fillen > 4000 And NoRuns = 0 Then
+'        CloseCmd
+'        arr = Split(vars, ";")
+'        Dim decl As String
+'        decl = "declare(["
+'        decl = decl & Replace(vars, ";", ",")
+'        decl = decl & "],integer)"
+'
+'        decl = "[" & decl & ",assume_pos:true,load(noninteractive)]$"
+'        '    decl = decl & "[matchdeclare ([aa, bb, cc, dd], true),simp: false,tellsimpafter (if aa then bb else bb, bb),tellsimpafter (if aa then bb elseif cc then bb else bb, bb),tellsimpafter (if aa then bb elseif cc then dd else dd, if aa then bb else dd),tellsimpafter (if aa then bb elseif cc then bb else dd, if aa or cc then bb else dd),tellsimpafter ('if aa then bb else bb, bb),tellsimpafter ('if aa then bb elseif cc then bb else bb, bb),tellsimpafter ('if aa then bb elseif cc then dd else dd, 'if aa then bb else dd),tellsimpafter ('if aa then bb elseif cc then bb else dd, 'if aa or cc then bb else dd),simp: true]$"
+'        MaximaInputStrengNonInteractive = decl
+'
+'        AntalKommandoer = AntalKommandoer - 1
+'        WriteInputFile (False)
+'        WaitTilClosed
+'        '    Kill outputfil
+'        NoRuns = NoRuns + 1
+'        RunMaxima
+'    End If
+'
+'    If i > t * 10 Then
+'        WaitForMaxima = False
+'    Else
+'        WaitForMaxima = True
+'    End If
+'End Function
 Public Sub CloseCmd()
     On Error GoTo slut
 
@@ -767,43 +740,7 @@ fejl:
     KillMaxima
 slut:
 End Sub
-Sub FindCmdTask()
-    On Error Resume Next
-    'For Each task1 In Tasks
-    '    If InStr(task1.Name, "cmd.exe") > 0 And task1.Visible = False Then '  And InStr(task1.Name, "Maxima") > 0
-    ''        MsgBox task1.Application & " - " & task1.Creator
-    '        Set CmdTask = task1
-    '        Exit For
-    '    Else
-    '    End If
-    'Next
 
-End Sub
-Private Sub WaitTilClosed()
-    On Error Resume Next
-    'dim b As Boolean
-    'Dim i As Integer
-    'start:
-    'b = False
-    'i = i + 1
-    'For Each task1 In Tasks
-    '    If InStr(task1.Name, "cmd.exe") > 0 Then '  And InStr(task1.Name, "Maxima") > 0
-    ''        MsgBox task1.Application & " - " & task1.Creator
-    '        b = True
-    '        Exit For
-    '    Else
-    '    End If
-    'Next
-    'If b And i < 1000 Then GoTo start
-
-End Sub
-Public Sub WriteInputFile(Optional quit As Boolean = True)
-' generates the inputfile from the variable MaximaInputStreng
-    Dim filnr As Integer
-
-    'If quit Then MaximaInputStreng = MaximaInputStreng & "quit()$"
-
-End Sub
 Sub InsertKillDef()
     If Len(KillDef) > 0 Then
         KillDef = Left(KillDef, Len(KillDef) - 1)    'fjern sidste komma

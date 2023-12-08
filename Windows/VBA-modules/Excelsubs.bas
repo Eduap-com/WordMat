@@ -219,24 +219,6 @@ fejl:
 slut:
 End Function
 
-Sub OpenSpreadSheet()
-' denne metode er problematisk da der åbnes ny instans af excel hver gang. Brug OpenExcelWB
-Dim excelsti As String
-Dim appnr As Integer
-Dim statistiksti As String
-    excelsti = GetExcelSti
-'    excelsti = """" & Environ("ProgramFiles") & "\Microsoft Office\Office12\Excel.exe"""
-'    statistiksti = """" & GetProgramFilesDir & "\WordMat\Statistik.xltm"""
-    statistiksti = """" & GetProgramFilesDir & "\WordMat\Chi2Fordeling.xltx"""
-'    statistiksti = """" & Environ("ProgramFiles") & "\WordMat\Statistik.xltm"""
-    On Error GoTo fejl
-    appnr = shell(excelsti & " /t " & statistiksti, vbNormalFocus) 'vbNormalFocus vbMinimizedFocus
-    GoTo slut
-fejl:
-    MsgBox Sprog.A(96) & statistiksti, vbOKOnly, Sprog.Error
-slut:
-
-End Sub
 Function OpenExcelWB(FilNavn As String, Optional startark As String, Optional WorkBookName As String) As Object
 On Error Resume Next
 #If Mac Then
