@@ -189,33 +189,43 @@ Source: Images\Trekant*.emf; DestDir: {%appdata}\WordMat\Images;tasks: installer
 ;Source: Other\OpretWordMenu.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\ReaktiverWordMat.vbs; DestDir: {app};tasks: installeralle; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\ReaktiverWordMat.vbs; DestDir: {%appdata}\WordMat\;tasks: installerbruger; Flags: ignoreversion overwritereadonly uninsremovereadonly
+
 ; These files are in a folder a level up from the Windows folder as they are shared with the Mac version
-Source: ..\Shared\WordDocs\WordMatManual.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\WordMatManual_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer_english.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\Figurer_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\MatFormler_english.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\FysikFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\FysikFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\FysikFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\FysikFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
-Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: ..\Shared\geogebra-math-apps\*; DestDir: {app}\geogebra-math-apps\; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
-Source: MathMenu.dll\MathMenu.dll; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: MathMenu.dll\MathMenu.tlb; DestDir: {app}; Flags: ignoreversion regtypelib overwritereadonly uninsremovereadonly
+; Kopier alle docx og dotx dokumenter til WordDocs
+Source: ..\Shared\WordDocs\*.do*; DestDir: {app}\WordDocs;tasks: installeralle; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: ..\Shared\WordDocs\*.do*; DestDir: {%appdata}\WordMat\WordDocs\;tasks: installerbruger; Flags: ignoreversion overwritereadonly uninsremovereadonly
+
+; Disse kan formentlig slettes efter ovenstående er indført med wildcard
+;Source: ..\Shared\WordDocs\WordMatManual.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\WordMatManual_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\Figurer.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\Figurer.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\Figurer_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\Figurer_english.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\Figurer_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\Figurer_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\MatFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\MatFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\MatFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\MatFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\MatFormler_english.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\MatFormler_english.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\FysikFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\FysikFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\FysikFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\FysikFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\KemiFormler.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {app}\WordDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\KemiFormler_spansk.docx; DestDir: {%appdata}\WordMat\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion uninsneveruninstall overwritereadonly uninsremovereadonly
+;Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}\WordDocs\; Check: VOverWriteDocs; Flags: ignoreversion overwritereadonly uninsremovereadonly
+
+Source: ..\Shared\geogebra-math-apps\*; DestDir: {app}\geogebra-math-apps\;tasks: installeralle; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: ..\Shared\geogebra-math-apps\*; DestDir: {%appdata}\WordMat\geogebra-math-apps\;tasks: installerbruger; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: MathMenu.dll\MathMenu.dll; DestDir: {app};tasks: installeralle; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: MathMenu.dll\MathMenu.tlb; DestDir: {app};tasks: installeralle; Flags: ignoreversion regtypelib overwritereadonly uninsremovereadonly
+Source: MathMenu.dll\MathMenu.dll; DestDir: {%appdata}\WordMat\;tasks: installerbruger; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: MathMenu.dll\MathMenu.tlb; DestDir: {%appdata}\WordMat\;tasks: installerbruger; Flags: ignoreversion regtypelib overwritereadonly uninsremovereadonly
 
 ;fjernet da overgået til geogebra silent install /S
 ;Source: GeoGebra\*; DestDir: {app}\GeoGebra; Flags: ignoreversion overwritereadonly uninsremovereadonly
@@ -223,7 +233,8 @@ Source: MathMenu.dll\MathMenu.tlb; DestDir: {app}; Flags: ignoreversion regtypel
 
 Source: ExternalPrograms\dotNetFx40_Client_setup.exe; DestDir: {tmp}; Flags: dontcopy
 
-Source: ExternalPrograms\Maxima-5.47.0\*; DestDir: {app}\Maxima-5.47.0; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; AfterInstall: ReplacePathInBat(); 
+Source: ExternalPrograms\Maxima-5.47.0\*; DestDir: {app}\Maxima-5.47.0;tasks: installeralle; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; AfterInstall: ReplacePathInBat(); 
+Source: ExternalPrograms\Maxima-5.47.0\*; DestDir: {%appdata}\WordMat\Maxima-5.47.0;tasks: installerbruger; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; AfterInstall: ReplacePathInBat(); 
 ;Source: Maxima-5.23.2\*; DestDir: {app}\Maxima-5.23.2; Flags: ignoreversion
 ;Source: Maxima-5.23.2\bin\*; DestDir: {app}\Maxima-5.23.2\bin; Flags: ignoreversion recursesubdirs
 ;Source: Maxima-5.23.2\gnuplot\*; DestDir: {app}\Maxima-5.23.2\gnuplot; Flags: ignoreversion recursesubdirs
@@ -262,7 +273,8 @@ Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {reg:HKCU\Software\M
 ;Source: ..\Shared\WordDocs\LatexWordTemplate.dotx; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\WordDocs\BibWord_Stylesheet.xsl; DestDir: {code:WordInstallFolder|15}\Bibliography\Style; Flags: ignoreversion overwritereadonly uninsremovereadonly
         
-Source: WebViewWrap\*; DestDir: {app}\WebViewWrap; Flags: ignoreversion overwritereadonly uninsremovereadonly recursesubdirs
+Source: WebViewWrap\*; DestDir: {app}\WebViewWrap;tasks: installeralle; Flags: ignoreversion overwritereadonly uninsremovereadonly recursesubdirs
+Source: WebViewWrap\*; DestDir: {%appdata}\WordMat\WebViewWrap;tasks: installerbruger; Flags: ignoreversion overwritereadonly uninsremovereadonly recursesubdirs
 
 [Components]
 Name: "GeoGebra"; Description: "Installs GeoGebra 5"; Types: full
@@ -378,18 +390,22 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Options"; ValueType: st
 
 [Run]
 ;Filename:"{dotnet40}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
-Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /codebase" ;WorkingDir: "{app}";tasks: installeralle; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\MathMenu.dll"" /codebase" ;WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Registrerer MathMenu.dll ..."; Flags: runhidden;
 Filename: {app}\SetupGraph-4.4.2.exe; Parameters: "/verysilent /SUPPRESSMSGBOXES"; StatusMsg: "Installerer Graph..."; check:InstallGraph; Components: Graph ; Flags: nowait
 Filename: {app}\GeoGebra.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;
 ;Filename: msiexec; Parameters: "/i ""{app}\GeoGebra-Windows-Installer-4-4-10-0.msi"" /quiet";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra..."; Components: GeoGebra ;
 ;Filename: javaws ; Parameters: "-import -system -silent -association -shortcut http://www.geogebra.org/webstart/geogebra.jnlp"; StatusMsg: "Installerer GeoGebra...";
-Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{app}"; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{app}";tasks: installeralle; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
 
 
 [UninstallRun]
 ;Filename:"{dotnet40}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /u " ; WorkingDir: "{app}"; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
-Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /u " ; WorkingDir: "{app}"; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
-Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /u " ; WorkingDir: "{app}"; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /u " ; WorkingDir: "{app}";tasks: installeralle; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\MathMenu.dll"" /u " ; WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /u " ; WorkingDir: "{app}";tasks: installeralle; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
+Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /u " ; WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
 
 [UninstallDelete]
 ;Type: files; Name: "{code:VUserStartupFolder12}\MathMenu.dotm"
@@ -1347,7 +1363,8 @@ begin
   Office14Installed:=Word14Installed and Excel14Installed;
   Office15Installed:=Word15Installed and Excel15Installed;
   Office16Installed:=Word16Installed and Excel16Installed;
-  OverWriteDocs:=OverWriteFigurer();
+//  OverWriteDocs:=OverWriteFigurer();
+  OverWriteDocs:=True;
 
   //ShowParameters();
 
