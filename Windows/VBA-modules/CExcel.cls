@@ -348,7 +348,7 @@ Dim cellval As String
 Dim tal As Double
 Dim i As Integer
 Dim j As Integer
-Dim n As Integer
+Dim N As Integer
 Dim oFS As Integer
 Dim r As Range
 
@@ -371,9 +371,9 @@ Else
     Set rws = Selection.Columns
     oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
 End If
-n = rws.Count
+N = rws.Count
 
-If n < 2 Then ' hvis intet valgt på forhånd
+If N < 2 Then ' hvis intet valgt på forhånd
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
         oFS = 0
@@ -381,9 +381,9 @@ If n < 2 Then ' hvis intet valgt på forhånd
         Set rws = Selection.Tables(1).Columns
         oFS = 0
     End If
-    n = rws.Count
+    N = rws.Count
     On Error Resume Next
-    For i = 1 To n ' bestem hvor der ligger tal
+    For i = 1 To N ' bestem hvor der ligger tal
         For j = 1 To rws(1).Cells.Count
         cellval = rws(i).Cells(j).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
@@ -399,17 +399,17 @@ If n < 2 Then ' hvis intet valgt på forhånd
     Next
 End If
 
-If n < 2 Then
+If N < 2 Then
     GoTo fejl
 End If
 
-    ReDim xval(1 To n) As Double
-    ReDim yval(1 To n) As Double
+    ReDim xval(1 To N) As Double
+    ReDim yval(1 To N) As Double
 '    ReDim Preserve x(1 To n) As Double
 '    ReDim Preserve y(1 To n) As Double
     On Error Resume Next
     i = 0
-    For j = 1 To n
+    For j = 1 To N
         i = i + 1
 
         cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")

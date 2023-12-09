@@ -184,9 +184,9 @@ End Sub
 
 Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True)
     Dim UrlLink As String, arr() As String, c As Variant, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
-    Dim DefS As String
+    Dim DefS As String, DN As String
        
-     If UseDefs Then
+    If UseDefs Then
         FindGeoGebraDefsAndAssumes
         If GeoGebraDefs <> "" Then
             ArrDef = Split(GeoGebraDefs, ";")
@@ -205,38 +205,58 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
         For i = 0 To UBound(ArrCas)
             ArrCas(i) = ConvertToGeogebraSyntax(ArrCas(i), ConvertSyntax)
             If AssumeString <> "" Then
-                    cmd = cmd & AssumeString & " , " & ArrCas(i) & ");"
+                cmd = cmd & AssumeString & " , " & ArrCas(i) & ");"
             Else
-                    cmd = cmd & ArrCas(i) & ";"
+                cmd = cmd & ArrCas(i) & ";"
             End If
         Next
     End If
     
     If Len(cmd) > 0 Then If right(cmd, 1) = ";" Then cmd = Left(cmd, Len(cmd) - 1)
-'    If ConvertSyntax Then Cmd = ConvertToGeogebraSyntax(Cmd, True)
+    '    If ConvertSyntax Then Cmd = ConvertToGeogebraSyntax(Cmd, True)
     cmd = DefS & cmd
     cmd = Replace(cmd, "+", "%2B")
         
 #If Mac Then
-'    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
+    '    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
     If Gtype = "" Then
-        UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html"
+        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html"
     Else
-        UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
+        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra" & Gtype & "Applet.html"
     End If
 #Else
-'    UrlLink = "https://geogebra.org/calculator"
-    If Gtype = "" Then
-        UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html"
-    Else
-        UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
+    '    UrlLink = "https://geogebra.org/calculator"
+    DN = GetGeoGebraMathAppsFolder()
+    If DN <> vbNullString Then
+        If Gtype = "" Then
+            UrlLink = "file://" & DN & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        Else
+            UrlLink = "file://" & DN & "GeoGebra" & Gtype & "Applet.html"
+        End If
+    Else: GoTo slut
     End If
 #End If
     UrlLink = UrlLink & "?command=" & cmd
 
     OpenLink UrlLink, True
-
+slut:
 End Sub
+
+Function GetGeoGebraMathAppsFolder() As String
+#If Mac Then
+    GetGeoGebraMathAppsFolder = "/Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/"
+#Else
+    Dim DN As String
+    DN = GetProgramFilesDir & "/WordMat/geogebra-math-apps/"
+    If Dir(DN, vbDirectory) = vbNullString Then
+        DN = Environ("AppData") & "/WordMat/geogebra-math-apps/"
+        If Dir(DN, vbDirectory) = vbNullString Then
+            MsgBox "geogebra-math-apps could not be found", vbOKOnly, "Error"
+        End If
+    End If
+    GetGeoGebraMathAppsFolder = DN
+#End If
+End Function
 
 Sub FindGeoGebraDefsAndAssumes()
 ' sætter stregene GeoGebraDefs og GeoGebraAssumes ud fra omax
@@ -407,7 +427,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
 ' definitioner vil allerede være kørt igennem codeforMaxima, så der skal convertmaxima være false
 
    Dim p As Integer, p2 As Integer, arr() As String, p3 As Integer, sp As Integer, ep As Integer
-   Dim ea As ExpressionAnalyser, s As String, t As String, gexpr As String, i As Integer, n As Integer
+   Dim ea As ExpressionAnalyser, s As String, t As String, gexpr As String, i As Integer, N As Integer
    Set ea = New ExpressionAnalyser
    ea.SetNormalBrackets
     
@@ -539,12 +559,12 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
             If p3 <= 0 Then p3 = Len(s) + 1
 '            gexpr = gexpr & "If[" & Trim(Mid(s, p + 2, p2 - p - 2)) & "," & Trim(Mid(s, p2 + 4, p3 - p2 - 4)) & ","
             gexpr = gexpr & "If(" & Trim(Mid(s, p + 2, p2 - p - 2)) & "," & Trim(Mid(s, p2 + 4, p3 - p2 - 4)) & ","
-            n = n + 1
+            N = N + 1
             If p3 = Len(s) + 1 Then Exit Do
             p3 = p3 + 1
          Loop While p3 < Len(s)
          If right(gexpr, 1) = "," Then gexpr = Left(gexpr, Len(gexpr) - 1)
-         For i = 1 To n
+         For i = 1 To N
 '            gexpr = gexpr & "]"
             gexpr = gexpr & ")"
          Next
@@ -566,7 +586,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
 '    Set geogebrafil = Nothing
 End Function
 Function ConvertGeoGebraSyntaxToWord(ByVal Text As String) As String
-    Dim p As Long, p2 As Long, ea As New ExpressionAnalyser, mtext As String, s As String, n As Integer
+    Dim p As Long, p2 As Long, ea As New ExpressionAnalyser, mtext As String, s As String, N As Integer
     ea.SetNormalBrackets
     
     Text = TrimB(Text, """")

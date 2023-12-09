@@ -18,11 +18,11 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
 
 #If Mac Then
 '    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html"
-    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra3dApplet.html"
+    UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
 #Else
 '    UrlLink = "https://geogebra.org/calculator"
 '    UrlLink = "file:///C:/Program%20Files%20(x86)/WordMat/geogebra-math-apps/GeoGebraApplet.html"
-    UrlLink = "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebra3dApplet.html"
+    UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
 #End If
     UrlLink = UrlLink & "?command="
     PrepareMaxima

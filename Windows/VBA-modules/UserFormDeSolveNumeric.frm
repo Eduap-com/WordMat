@@ -358,10 +358,10 @@ XLapp.visible = True
     Next
     Unload Me
 End Sub
-Function ConvertNumberToExcel(n As String) As String
-    n = Replace(n, ",", ".")
-    n = Replace(n, VBA.ChrW(183), "*")
-    ConvertNumberToExcel = n
+Function ConvertNumberToExcel(N As String) As String
+    N = Replace(N, ",", ".")
+    N = Replace(N, VBA.ChrW(183), "*")
+    ConvertNumberToExcel = N
 End Function
 Private Sub CommandButton_tolist_Click()
     InsertType = 3
@@ -531,7 +531,7 @@ End Sub
 Function SolveDE() As Boolean
     Dim variabel As String, xmin As String, xmax As String, xstep As String, DElist As String, varlist As String, guesslist As String
     Dim ea As New ExpressionAnalyser
-    Dim n As Integer, Npoints As Long
+    Dim N As Integer, Npoints As Long
     On Error GoTo fejl
     variabel = TextBox_varx.Text
     xmin = Replace(TextBox_xmin.Text, ",", ".")
@@ -544,55 +544,55 @@ Function SolveDE() As Boolean
         MsgBox "Der mangler data", vbOKOnly, Sprog.Error
         GoTo slut
     Else
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var1.Text & ","
         guesslist = guesslist & Replace(TextBox_init1.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq1.Text & " ,"
     End If
     If TextBox_var2.Text <> vbNullString And TextBox_eq2.Text <> vbNullString And TextBox_init2.Text <> vbNullString Then
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var2.Text & ","
         guesslist = guesslist & Replace(TextBox_init2.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq2.Text & " ,"
     End If
     If TextBox_var3.Text <> vbNullString And TextBox_eq3.Text <> vbNullString And TextBox_init3.Text <> vbNullString Then
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var3.Text & ","
         guesslist = guesslist & Replace(TextBox_init3.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq3.Text & " ,"
     End If
     If TextBox_var4.Text <> vbNullString And TextBox_eq4.Text <> vbNullString And TextBox_init4.Text <> vbNullString Then
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var4.Text & ","
         guesslist = guesslist & Replace(TextBox_init4.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq4.Text & " ,"
     End If
     If TextBox_var5.Text <> vbNullString And TextBox_eq5.Text <> vbNullString And TextBox_init5.Text <> vbNullString Then
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var5.Text & ","
         guesslist = guesslist & Replace(TextBox_init5.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq5.Text & " ,"
     End If
     If TextBox_var6.Text <> vbNullString And TextBox_eq6.Text <> vbNullString And TextBox_init6.Text <> vbNullString Then
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var6.Text & ","
         guesslist = guesslist & Replace(TextBox_init6.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq6.Text & " ,"
     End If
     If TextBox_var7.Text <> vbNullString And TextBox_eq7.Text <> vbNullString And TextBox_init7.Text <> vbNullString Then
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var7.Text & ","
         guesslist = guesslist & Replace(TextBox_init7.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq7.Text & " ,"
     End If
     If TextBox_var8.Text <> vbNullString And TextBox_eq8.Text <> vbNullString And TextBox_init8.Text <> vbNullString Then
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var8.Text & ","
         guesslist = guesslist & Replace(TextBox_init8.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq8.Text & " ,"
     End If
     If TextBox_var9.Text <> vbNullString And TextBox_eq9.Text <> vbNullString And TextBox_init9.Text <> vbNullString Then
-        n = n + 1
+        N = N + 1
         varlist = varlist & TextBox_var9.Text & ","
         guesslist = guesslist & Replace(TextBox_init9.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq9.Text & " ,"
@@ -610,7 +610,7 @@ Function SolveDE() As Boolean
     
     Dim s As String, i As Long, j As Integer
     Dim arr As Variant
-    ReDim PointArr(Npoints, n)
+    ReDim PointArr(Npoints, N)
     ea.Text = ListOutput
     ea.SetSquareBrackets
     If ea.Length > 2 Then
@@ -619,7 +619,7 @@ Function SolveDE() As Boolean
     Do
         s = ea.GetNextBracketContent(0)
         arr = Split(s, ListSeparator)
-        For j = 0 To n 'UBound(Arr)
+        For j = 0 To N 'UBound(Arr)
             PointArr(i, j) = arr(j)
         Next
         i = i + 1

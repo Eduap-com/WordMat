@@ -31,21 +31,21 @@ Private Sub CommandButton_ok_Click()
 End Sub
 
 Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
-    Dim n As Long
+    Dim N As Long
     On Error GoTo fejl
     If Not EventsOn Then Exit Sub
     EventsOn = False
-    n = val(TextBox_eps.Text)
-    If n > 0 And n < 5 Then
+    N = val(TextBox_eps.Text)
+    If N > 0 And N < 5 Then
         Label_epswarning.Caption = ""
 '        Label_epswarning.visible = False
-    ElseIf n > 4 And n < 7 Then
+    ElseIf N > 4 And N < 7 Then
         Label_epswarning.Caption = Sprog.A(44)
         Label_eps.visible = True
-    ElseIf n > 6 Then
+    ElseIf N > 6 Then
         Label_epswarning.Caption = Sprog.A(43)
         Label_eps.visible = True
-    ElseIf n < 0 Then
+    ElseIf N < 0 Then
         Label_epswarning.Caption = Sprog.A(45)
         Label_eps.visible = True
     Else

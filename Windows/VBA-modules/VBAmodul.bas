@@ -525,11 +525,11 @@ GetTimeString = Year(d) & Month(d) & Day(d) & AddZero(Hour(d)) & AddZero(Minute(
 
 End Function
 
-Function AddZero(n As Integer) As String
-If n < 10 Then
-    AddZero = "0" & n
+Function AddZero(N As Integer) As String
+If N < 10 Then
+    AddZero = "0" & N
 Else
-    AddZero = n
+    AddZero = N
 End If
 End Function
 

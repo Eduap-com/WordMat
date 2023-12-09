@@ -441,7 +441,7 @@ Sub MaximaSolve()
 End Sub
 'Sub MaximaSolve(Optional variabel As String)
 Sub MaximaSolvePar(Optional variabel As String)
-    Dim arr As Variant, s As String, t As String, v As String
+    Dim arr As Variant, s As String, t As String, V As String
     Dim fejlm As String
     On Error GoTo fejl
     Application.ScreenUpdating = False
@@ -517,11 +517,11 @@ newcas:
                 ea.Text = Replace(ea.Text, VBA.ChrW(8289), "")
                 s = ""
                 Do
-                    v = ea.GetNextVar()
-                    If v = "sin" Or v = "cos" Or v = "tan" Then
+                    V = ea.GetNextVar()
+                    If V = "sin" Or V = "cos" Or V = "tan" Then
                         t = ea.GetNextBracketContent()
                         If InStr(t, omax.vars) > 0 Then
-                            If v = "cos" Then
+                            If V = "cos" Then
                                 s = "180"
                             Else
                                 s = "90"
@@ -529,7 +529,7 @@ newcas:
                         End If
                     End If
                     ea.Pos = ea.Pos + 1
-                Loop While v <> ""
+                Loop While V <> ""
                 If s <> "" And Radians Then
                     If s = "90" Then
                         s = "pi/2"
@@ -1151,7 +1151,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     '    LockWindow
     Dim IsSolved As Boolean
     Dim scrollpos As Double
-    Dim ea As New ExpressionAnalyser, s As String, v As String, t As String
+    Dim ea As New ExpressionAnalyser, s As String, V As String, t As String
     scrollpos = ActiveWindow.VerticalPercentScrolled
 
     '    PrepareMaximaNoSplash
@@ -1208,13 +1208,13 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
                 ea.Text = Replace(ea.Text, VBA.ChrW(8289), "")
                 s = ""
                 Do
-                    v = ea.GetNextVar()
-                    If v = "sin" Or v = "cos" Or v = "tan" Then
+                    V = ea.GetNextVar()
+                    If V = "sin" Or V = "cos" Or V = "tan" Then
                         t = ea.GetNextBracketContent()
                         If InStr(t, omax.vars) > 0 Then s = "90"
                     End If
                     ea.Pos = ea.Pos + 1
-                Loop While v <> ""
+                Loop While V <> ""
                 If s <> "" And Radians Then s = "pi/2"
                 If s <> "" Then
                     UFSelectVar.TextBox_def.Text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
@@ -2801,24 +2801,24 @@ Sub UnicodeValsToString()
     Dim Text As String
     Dim j As Integer
     Dim i As Integer
-    Dim k As Integer, n As Integer
+    Dim k As Integer, N As Integer
     Dim s As String
     Dim mo As OMath
     Dim arr() As String
     Dim MoArr() As Variant
 
-    n = Selection.OMaths.Count
-    If n = 0 Then
+    N = Selection.OMaths.Count
+    If N = 0 Then
         MsgBox "You must select an equation", vbOKOnly, "Error"
         Exit Sub
     End If
-    ReDim arr(n - 1)
-    ReDim MoArr(n - 1)
+    ReDim arr(N - 1)
+    ReDim MoArr(N - 1)
 '    Selection.OMaths.Linearize
-    For k = 0 To n - 1
+    For k = 0 To N - 1
         Set MoArr(k) = Selection.OMaths(k + 1)
     Next
-    For k = 0 To n - 1
+    For k = 0 To N - 1
         Set mo = MoArr(k)
         mo.Linearize
         mo.ConvertToNormalText
@@ -2867,7 +2867,7 @@ End Sub
 #End If
 
 Function ValidateInput(Expr) As Boolean
-   Dim n As Integer
+   Dim N As Integer
    
    ValidateInput = True
    ' validate brackets

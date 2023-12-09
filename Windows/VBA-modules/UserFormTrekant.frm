@@ -13,12 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
     Dim vA As Double
     Dim vB As Double
@@ -923,6 +917,7 @@ Private Sub OptionButton_navngivstorlille_Change()
 OpdaterNavngivning
 End Sub
 Private Sub OptionButton_reth_Click()
+Dim FN As String
 On Error Resume Next
 TextBox_C.Text = 90
 If CSng(TextBox_A.Text) >= 90 Then TextBox_A.Text = ""
@@ -930,7 +925,9 @@ TextBox_C.Enabled = False
 TextBox_A.Enabled = True
 #If Mac Then
 #Else
-    ImageTrekant.Picture = LoadPicture(GetProgramFilesDir & "\WordMat\Images\trekantreth.emf")
+    FN = GetProgramFilesDir & "\WordMat\Images\trekantreth.emf"
+    If Dir(FN) = vbNullString Then FN = Environ("AppData") & "\WordMat\Images\trekantreth.emf"
+    If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
 #End If
 TextBox_A.Left = 32
 TextBox_A.Top = 186
@@ -962,6 +959,7 @@ Me.Repaint
 End Sub
 
 Private Sub OptionButton_retv_Click()
+Dim FN As String
 On Error Resume Next
 TextBox_A.Text = 90
 If CSng(TextBox_C.Text) >= 90 Then TextBox_C.Text = ""
@@ -969,7 +967,9 @@ TextBox_A.Enabled = False
 TextBox_C.Enabled = True
 #If Mac Then
 #Else
-ImageTrekant.Picture = LoadPicture(GetProgramFilesDir & "\WordMat\Images\trekantretv.emf")
+    FN = GetProgramFilesDir & "\WordMat\Images\trekantretv.emf"
+    If Dir(FN) = vbNullString Then FN = Environ("AppData") & "\WordMat\Images\trekantretv.emf"
+    If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
 #End If
 
 TextBox_A.Left = 32
@@ -1002,12 +1002,15 @@ Me.Repaint
 End Sub
 
 Private Sub OptionButton_vilk_Click()
+Dim FN As String
 On Error Resume Next
 TextBox_A.Enabled = True
 TextBox_C.Enabled = True
 #If Mac Then
 #Else
-ImageTrekant.Picture = LoadPicture(GetProgramFilesDir & "\WordMat\Images\trekantvilk.emf")
+    FN = GetProgramFilesDir & "\WordMat\Images\trekantvilk.emf"
+    If Dir(FN) = vbNullString Then FN = Environ("AppData") & "\WordMat\Images\trekantvilk.emf"
+    If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
 #End If
 
 TextBox_A.Left = 32

@@ -585,9 +585,9 @@ Public Property Get RegAppVersion() As String
         mRegAppVersion = RegAppVersion
     End If
 End Property
-Public Property Let RegAppVersion(ByVal v As String)
-    SetRegSettingString "AppVersion", v
-    mRegAppVersion = v
+Public Property Let RegAppVersion(ByVal V As String)
+    SetRegSettingString "AppVersion", V
+    mRegAppVersion = V
 End Property
 
 Private Function GetRegSetting(Key As String) As Integer

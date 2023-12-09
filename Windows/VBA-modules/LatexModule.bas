@@ -330,13 +330,13 @@ Sub ConvertList(l As List)
    End If
 
 End Sub
-Function Get3DigitImageNo(n As Integer) As String
-   If n < 10 Then
-      Get3DigitImageNo = "00" & n
-   ElseIf n < 100 Then
-      Get3DigitImageNo = "0" & n
+Function Get3DigitImageNo(N As Integer) As String
+   If N < 10 Then
+      Get3DigitImageNo = "00" & N
+   ElseIf N < 100 Then
+      Get3DigitImageNo = "0" & N
    Else
-      Get3DigitImageNo = n
+      Get3DigitImageNo = N
    End If
 End Function
 

@@ -20,6 +20,7 @@ using System.Collections;
     {
         void StartMaximaProcess();
         void SetSettings();
+        void SetMaximaPath(string MaxSti);
         void Reset(string extrakommando);
         void CloseProcess();
         void ConsoleInterrupt();
@@ -86,6 +87,7 @@ using System.Collections;
             private int question;
             public int errCode = 0; //0 ingen fejl, 1 - Maxima ikke installeret, 
             public bool LastWasOutput; // true hvis forrige linje var en outputlinje false hvis input
+            public string MaximaPath=""; // Til hovedmappen hvor Maxima er.
             private int complex = 0; // true hvis der regnes med komplekse tal
             private int units = 0; // true hvis der regnes med enheder.
             private int exact = 0; // 0- auto 1-exact 2-numer  (tidligere:0-exact 1-num 2-både exact og num)
@@ -113,6 +115,10 @@ using System.Collections;
                 catch { }
             }
 
+    public void SetMaximaPath(string MaxSti)
+    {
+        MaximaPath = MaxSti;
+    }
             
             public void StartMaximaProcess()
             {
@@ -129,32 +135,39 @@ using System.Collections;
                 try
                 {
                     maximaProcess = new Process();
-//maxima aldrig 64                    maximasti = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            //maxima aldrig 64                    maximasti = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            if (MaximaPath == "")
+            {
+                try
+                {
+                    maximasti = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+                    DirectoryInfo di = new DirectoryInfo(maximasti);
+                    di = di.GetDirectories(@"WordMat\maxima*", SearchOption.TopDirectoryOnly)[di.GetDirectories(@"WordMat\maxima*", SearchOption.TopDirectoryOnly).Length - 1];
+                    maximasti = di.FullName;
+                }
+                //if (di.FullName == "")
+                catch
+                {
                     try
                     {
-                        maximasti = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+                        maximasti = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
                         DirectoryInfo di = new DirectoryInfo(maximasti);
                         di = di.GetDirectories(@"WordMat\maxima*", SearchOption.TopDirectoryOnly)[di.GetDirectories(@"WordMat\maxima*", SearchOption.TopDirectoryOnly).Length - 1];
                         maximasti = di.FullName;
                     }
-                    //if (di.FullName == "")
                     catch
                     {
-                        try
-                        {
-                            maximasti = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                            DirectoryInfo di = new DirectoryInfo(maximasti);
-                            di = di.GetDirectories(@"WordMat\maxima*", SearchOption.TopDirectoryOnly)[di.GetDirectories(@"WordMat\maxima*", SearchOption.TopDirectoryOnly).Length - 1];
-                            maximasti = di.FullName;
-                        }
-                        catch 
-                        {
-                            maximasti = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-                            DirectoryInfo di = new DirectoryInfo(maximasti);
-                            di = di.GetDirectories("maxima*", SearchOption.TopDirectoryOnly)[di.GetDirectories("maxima*", SearchOption.TopDirectoryOnly).Length - 1];
-                            maximasti = di.FullName;
-                        }
+                        maximasti = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+                        DirectoryInfo di = new DirectoryInfo(maximasti);
+                        di = di.GetDirectories("maxima*", SearchOption.TopDirectoryOnly)[di.GetDirectories("maxima*", SearchOption.TopDirectoryOnly).Length - 1];
+                        maximasti = di.FullName;
                     }
+                }
+            }
+            else
+            {
+                maximasti = MaximaPath;
+            }
                     if (units == 1)
                     {
                         maximasti = maximasti + @"\bin\maximaunit.bat";

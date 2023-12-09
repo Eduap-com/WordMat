@@ -666,6 +666,22 @@ End Function
 Sub TestLink()
     OpenLink "https://dr.dk"
 End Sub
+Sub TestLink2()
+' virker ikke, men det burde være sådan
+   ' ActiveDocument.FollowHyperlink Address:="file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html", Method:=msoMethodGet, NewWindow:=True, ExtraInfo:="command=f(x)=x"
+   'virker heller ikke5
+'    CreateObject("Shell.Application").Open "C:\Program Files (x86)\WordMat\geogebra-math-apps\GeoGebra\HTML5\5.0\GeoGebra.html"
+'    RunDefaultProgram "C:\Program Files (x86)\WordMat\geogebra-math-apps\GeoGebra\HTML5\5.0\GeoGebra.html?id=3"
+'    shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" ""file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x""", vbNormalFocus
+'    CreateObject("Shell.Application").Open CVar(GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe ""file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x""")
+'    CreateObject("Shell.Application").Open GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe 'file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x'"
+   Dim shellcmd As String
+'   shellcmd = "cmd /K ""C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"" ""file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x""" '/K holder cmd åben /C lukker
+   shellcmd = "cmd /S /K """"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" ""file://C:\\Program Files (x86)\\WordMat\\geogebra-math-apps\\GeoGebra\\HTML5\\5.0\\GeoGebra.html?command=f(x)=x"""""
+'   shellcmd = "cmd /K C:\Program\\ Files\\ (x86)\Microsoft\Edge\Application\msedge.exe ""file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x""" '/K holder cmd åben /C lukker
+'    Debug.Print shellcmd
+'   shell shellcmd, vbNormalFocus
+End Sub
 Sub OpenLink(Link As String, Optional Script As Boolean = False)
 ' obs: Script er altid true på mac for at forhindre advarsel
 On Error Resume Next
@@ -678,11 +694,13 @@ On Error Resume Next
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True
     End If
 #Else
-'    If Script Then
-'        shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus ' giver problemer med bitdefender
-'    Else
+' ActiveDocument.FollowHyperlink fjerner parametre som fx. ?command=...   Derfor kan det være nødvendigt at bruge script
+    If Script Then
+        shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus ' giver problemer med bitdefender
+'        shell "cmd /S /C """"" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """""", vbNormalFocus ' Denne bliver ikke fanget ved install, men bitdefender blokerer den ved kørsel
+    Else
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' hvis linket ikke virker så sker der bare ingen ting
-'    End If
+    End If
 #End If
 fejl:
 End Sub
@@ -991,38 +1009,41 @@ fejl:
 slut:
 End Sub
 Sub OpenWordFile(FilNavn As String)
-' OpenWordFile ("Figurer.docx")
+    ' OpenWordFile ("Figurer.docx")
 
-Dim filnavn1 As String
+    Dim filnavn1 As String
 #If Mac Then
     FilNavn = Replace(FilNavn, "\", "/")
     filnavn1 = GetWordMatDir() & "WordDocs/" & FilNavn
     Documents.Open filnavn1
 #Else
-Dim filnavn2 As String
-Dim appdir As String
-Dim fs
-On Error GoTo fejl
-Set fs = CreateObject("Scripting.FileSystemObject")
-appdir = Environ("AppData")
-filnavn1 = appdir & "\WordMat\WordDocs\" & FilNavn
-filnavn2 = GetProgramFilesDir & "\WordMat\WordDocs\" & FilNavn
+    Dim filnavn2 As String
+    Dim appdir As String
+    Dim fs
+    On Error GoTo fejl
+    Set fs = CreateObject("Scripting.FileSystemObject")
+    appdir = Environ("AppData")
+    filnavn1 = appdir & "\WordMat\WordDocs\" & FilNavn
 
-If Dir(filnavn1) = "" And Dir(filnavn2) <> "" Then
-    If Dir(appdir & "\WordMat\WordDocs\", vbDirectory) = "" Then MkDir appdir & "\WordDocs\WordMat"
-    fs.CopyFile filnavn2, appdir & "\WordMat\WordDocs\"
-End If
+    If filnavn1 = vbNullString Then
+        filnavn2 = GetProgramFilesDir & "\WordMat\WordDocs\" & FilNavn
 
-If Dir(filnavn1) <> "" Then
-    Documents.Open FileName:=filnavn1
-ElseIf Dir(filnavn2) <> "" Then
-    Documents.Open FileName:=filnavn2, ReadOnly:=True
-Else
-    MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
-End If
+        If Dir(filnavn2) <> vbNullString Then
+            If Dir(appdir & "\WordMat\WordDocs\", vbDirectory) = "" Then MkDir appdir & "\WordDocs\WordMat"
+            fs.CopyFile filnavn2, appdir & "\WordMat\WordDocs\"
+        End If
+    End If
+    
+    If Dir(filnavn1) <> "" Then
+        Documents.Open FileName:=filnavn1
+    ElseIf Dir(filnavn2) <> "" Then
+        Documents.Open FileName:=filnavn2, ReadOnly:=True
+    Else
+        MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
+    End If
 #End If
 
-GoTo slut
+    GoTo slut
 fejl:
     MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
 slut:
@@ -1031,34 +1052,34 @@ End Sub
 
 Function GetRandomTip()
     Dim i As Integer
-    Dim n As Integer
+    Dim N As Integer
     Dim mindste As Integer
     Dim tip As String
-    n = 29 ' antal tip
+    N = 29 ' antal tip
     mindste = 0
     
     If AntalB < 10 Then
         mindste = 0
-        n = 5
+        N = 5
     ElseIf AntalB < 20 Then
         mindste = 0
-        n = 12
+        N = 12
     ElseIf AntalB < 50 Then
         mindste = 0
-        n = 15
+        N = 15
     ElseIf AntalB < 100 Then
         mindste = 3
-        n = 20
+        N = 20
     ElseIf AntalB < 130 Then
         mindste = 0
-        n = 29
+        N = 29
     Else
         mindste = 3
-        n = 29
+        N = 29
     End If
     
     Randomize
-    i = Int(Rnd(1) * (n - mindste) + mindste) ' tilfældigt tal 0-(n-1)
+    i = Int(Rnd(1) * (N - mindste) + mindste) ' tilfældigt tal 0-(n-1)
 'hævet a " & VBA.ChrW(7491) & " hævet b " & VBA.ChrW(7495) & " hævet p  " & VBA.ChrW(7510) & "  hævet q " & VBA.ChrW(8319) & "
 ' sænket 0 " & VBA.ChrW(8320) & " sænket 1 " & VBA.ChrW(8321) & " hævet 2 " & VBA.ChrW(8322) & "_
 
@@ -1392,7 +1413,7 @@ End Sub
 Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
 ' selvom den hedder windows er det nu også mac
     On Error GoTo fejl
-    Dim NewVersion As String, p As Integer, p2 As Integer, News As String, s As String, v As String
+    Dim NewVersion As String, p As Integer, p2 As Integer, News As String, s As String, V As String
     Dim FilNavn As String, FilDir As String, FilPath As String, result As VbMsgBoxResult
     Dim UpdateNow As Boolean
     
@@ -1572,31 +1593,31 @@ Public Function GetInternetConnectedState() As Boolean
 #End If
 End Function
 
-Function ConvertNumberToString(ByVal n As Double) As String
+Function ConvertNumberToString(ByVal N As Double) As String
     Dim ns As String
     Dim i As Integer
     For i = 1 To MaximaCifre
         ns = ns & "#"
     Next
-    If n = 0 Then
+    If N = 0 Then
         ConvertNumberToString = "0"
         Exit Function
     End If
-    If MaximaVidNotation Or Abs(n) > 10 ^ 6 Or Abs(n) < 10 ^ -6 Then
+    If MaximaVidNotation Or Abs(N) > 10 ^ 6 Or Abs(N) < 10 ^ -6 Then
 '#If Mac Then
 '    ConvertNumberToString = n
 '    ConvertNumberToString = Replace(ConvertNumberToString, "e", "E")
 '    ConvertNumberToString = Replace(ConvertNumberToString, "+0", "+")
 '    ConvertNumberToString = Replace(ConvertNumberToString, "-0", "-")
 '#Else
-            ConvertNumberToString = VBA.Format(n, "0.0" & ns & "E-0")
+            ConvertNumberToString = VBA.Format(N, "0.0" & ns & "E-0")
 '#End If
     Else
 '        ConvertNumberToString = Format(n, "General Number")
 #If Mac Then
-        ConvertNumberToString = VBA.Format(n, "#################0.0####################;-#################0.0####################")
+        ConvertNumberToString = VBA.Format(N, "#################0.0####################;-#################0.0####################")
 #Else
-        ConvertNumberToString = VBA.Format(n, "#################0.0####################")
+        ConvertNumberToString = VBA.Format(N, "#################0.0####################")
 #End If
         If Len(ConvertNumberToString) > 1 Then
             If right(ConvertNumberToString, 2) = ".0" Then
@@ -1619,12 +1640,12 @@ Function ConvertNumberToString(ByVal n As Double) As String
     
 slut:
 End Function
-Function ConvertNumberToStringBC(n As Double, Optional bc As Integer) As String
+Function ConvertNumberToStringBC(N As Double, Optional bc As Integer) As String
 ' konverter tal til streng med angivet antal betydende cifre. Hvis ingen angives anvendes maximacifre
     If bc > 0 Then
-        ConvertNumberToStringBC = ConvertNumberToString(betcif(n, bc))
+        ConvertNumberToStringBC = ConvertNumberToString(betcif(N, bc))
     Else
-        ConvertNumberToStringBC = ConvertNumberToString(betcif(n, MaximaCifre))
+        ConvertNumberToStringBC = ConvertNumberToString(betcif(N, MaximaCifre))
     End If
 End Function
 
@@ -1644,22 +1665,22 @@ On Error Resume Next
     End If
 End Function
 
-Function ConvertNumberToMaxima(n As String) As String
+Function ConvertNumberToMaxima(N As String) As String
 ' tager højde for E, men ikke helt entydigt.
 Dim ea As New ExpressionAnalyser
 
-    n = Replace(n, ",", ".")
+    N = Replace(N, ",", ".")
     
-    If InStr(n, "E+") > 0 Or InStr(n, "E-") > 0 Then
-    n = Replace(n, "E-0", "*10^(-")
-    n = Replace(n, "E-", "*10^(")
-    n = Replace(n, "E+0", "*10^(")
-    n = Replace(n, "E+", "*10^(")
-    n = n & ")"
+    If InStr(N, "E+") > 0 Or InStr(N, "E-") > 0 Then
+    N = Replace(N, "E-0", "*10^(-")
+    N = Replace(N, "E-", "*10^(")
+    N = Replace(N, "E+0", "*10^(")
+    N = Replace(N, "E+", "*10^(")
+    N = N & ")"
 '    n = Replace(n, "E", "*10^(") & ")"
     End If
-    n = omax.CodeForMaxima(n)
-    ConvertNumberToMaxima = n
+    N = omax.CodeForMaxima(N)
+    ConvertNumberToMaxima = N
 End Function
 
 Sub LandScapePage()
@@ -2132,7 +2153,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo fejl
     Application.ScreenUpdating = False
-    Dim F As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, arr As Variant
+    Dim F As Field, f2 As Field, t As String, N As String, i As Integer, p As Integer, arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox Sprog.A(345), vbOKOnly, Sprog.Error
@@ -2141,18 +2162,18 @@ On Error GoTo fejl
     
     Set F = Selection.Fields(1)
     If Selection.Fields.Count = 1 And InStr(F.Code.Text, "LISTNUM") > 0 Then
-        n = InputBox(Sprog.A(346), Sprog.A(6), "1")
+        N = InputBox(Sprog.A(346), Sprog.A(6), "1")
         p = InStr(F.Code.Text, "\S")
         If p > 0 Then
             F.Code.Text = Left(F.Code.Text, p - 1)
         End If
-        F.Code.Text = F.Code.Text & "\S" & n
+        F.Code.Text = F.Code.Text & "\S" & N
         F.Update
     ElseIf Selection.Fields.Count = 1 Or Selection.Fields.Count = 2 And InStr(F.Code.Text, "WMeq") > 0 Then
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
-            n = InputBox(Sprog.A(346), Sprog.A(6), F.result & "." & f2.result)
-            arr = Split(n, ".")
+            N = InputBox(Sprog.A(346), Sprog.A(6), F.result & "." & f2.result)
+            arr = Split(N, ".")
             If UBound(arr) > 0 Then
                 SetFieldNo F, CStr(arr(0))
                 SetFieldNo f2, CStr(arr(1))
@@ -2160,8 +2181,8 @@ On Error GoTo fejl
                 SetFieldNo F, CStr(arr(0))
             End If
         Else
-            n = InputBox(Sprog.A(346), Sprog.A(6), F.result)
-            SetFieldNo F, n
+            N = InputBox(Sprog.A(346), Sprog.A(6), F.result)
+            SetFieldNo F, N
         End If
         
     End If
@@ -2173,7 +2194,7 @@ fejl:
 slut:
 End Sub
 
-Sub SetFieldNo(F As Field, n As String)
+Sub SetFieldNo(F As Field, N As String)
     Dim p As Integer, p2 As Integer
 On Error GoTo fejl
     p = InStr(F.Code.Text, "\r")
@@ -2182,7 +2203,7 @@ On Error GoTo fejl
     If p > 0 Then
         F.Code.Text = Left(F.Code.Text, p - 1)
     End If
-    F.Code.Text = F.Code.Text & "\r" & n & " \c"
+    F.Code.Text = F.Code.Text & "\r" & N & " \c"
     F.Update
     ActiveDocument.Fields.Update
     GoTo slut
@@ -2552,14 +2573,14 @@ Sub SetMathAutoCorrect()
     End If
 End Sub
 
-Function ConvertNumber(ByVal n As String) As String
+Function ConvertNumber(ByVal N As String) As String
 ' sørger for at streng har maximaindstilling med separatorer
 
 If DecSeparator = "," Then
 '    n = Replace(n, ",", ";")
-    ConvertNumber = Replace(n, ".", ",")
+    ConvertNumber = Replace(N, ".", ",")
 Else
-    ConvertNumber = Replace(n, ",", ".")
+    ConvertNumber = Replace(N, ",", ".")
 '    n = Replace(n, ";", ",")
 End If
 

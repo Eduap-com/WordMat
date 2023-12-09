@@ -35,11 +35,11 @@ Public Sub Save(Destination)
     fh = FreeFile
     Open Destination For Output As fh
     
-    Dim n As Integer
+    Dim N As Integer
     Dim i As Integer
     
-    n = m_children.Count
-    For i = 1 To n
+    N = m_children.Count
+    For i = 1 To N
         Dim node As IXMLDOMNode
         Set node = m_children(i)
         node.Save (fh)

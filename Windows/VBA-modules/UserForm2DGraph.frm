@@ -696,21 +696,21 @@ slut2:
 'Selection.PasteSpecial DataType:=wdPasteOLEObject
 'Selection.PasteSpecial DataType:=wdPasteShape
 End Sub
-Sub SetLineStyle(cb As ComboBox, n As Integer)
+Sub SetLineStyle(cb As ComboBox, N As Integer)
 ' sætter linestyle efter hvad comboxen er sat til
 
 If cb.ListIndex = 0 Then
-XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlContinuous '
+XLapp.ActiveChart.SeriesCollection(N).Border.LineStyle = xlContinuous '
 ElseIf cb.ListIndex = 1 Then
-XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlDot 'xlContinuous '
+XLapp.ActiveChart.SeriesCollection(N).Border.LineStyle = xlDot 'xlContinuous '
 ElseIf cb.ListIndex = 2 Then
-XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlDash 'xlContinuous '
+XLapp.ActiveChart.SeriesCollection(N).Border.LineStyle = xlDash 'xlContinuous '
 ElseIf cb.ListIndex = 3 Then
-XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlDashDot 'xlContinuous '
+XLapp.ActiveChart.SeriesCollection(N).Border.LineStyle = xlDashDot 'xlContinuous '
 ElseIf cb.ListIndex = 4 Then
-XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlDashDotDot 'xlContinuous '
+XLapp.ActiveChart.SeriesCollection(N).Border.LineStyle = xlDashDotDot 'xlContinuous '
 Else
-XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlContinuous '
+XLapp.ActiveChart.SeriesCollection(N).Border.LineStyle = xlContinuous '
 End If
 
 End Sub
@@ -2513,7 +2513,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

@@ -282,8 +282,8 @@ t = t & " ]"
 GetListFormS = t
 
 End Function
-Function ConvertSeparator(ByVal t As String, n As Integer)
-If n = 0 Then
+Function ConvertSeparator(ByVal t As String, N As Integer)
+If N = 0 Then
     ConvertSeparator = ConvertToPunktum(t)
 Else
     ConvertSeparator = ConvertToKomma(t)
@@ -303,7 +303,7 @@ Dim p As String
 Dim xs As String
 Dim ys As String
 Dim Text As String
-Dim n As Integer
+Dim N As Integer
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim r() As String
@@ -368,16 +368,16 @@ End If
 For i = 1 To nrows
     ea.Text = r(i)
     ea.Pos = 1
-    n = 0
+    N = 0
     Do
         p = ea.GetNextListItem(0, ",")
-        n = n + 1
-        If p <> "" And n > ncolumns Then
-            ncolumns = n
+        N = N + 1
+        If p <> "" And N > ncolumns Then
+            ncolumns = N
         End If
         If Not (MaximaSeparator) Then p = Replace(p, ".", ",")
-        tabels(i, n) = omax.ConvertToAscii(p)
-    Loop While ea.Pos < Len(ea.Text) And n < 1000
+        tabels(i, N) = omax.ConvertToAscii(p)
+    Loop While ea.Pos < Len(ea.Text) And N < 1000
 Next
     
 If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt så er det formentlig kun et matematikfelt og ikke en liste eller tabel

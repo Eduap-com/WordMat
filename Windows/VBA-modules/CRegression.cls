@@ -43,11 +43,11 @@ Public Property Let Datatext(ByVal Text As Variant)
     Dim lsep As String
     Dim arr As Variant
     Dim arr2 As Variant
-    Dim n As Integer
+    Dim N As Integer
     arr = Split(Text, VbCrLfMac)
-    n = UBound(arr)
-    ReDim xval(1 To n + 1) As Double
-    ReDim yval(1 To n + 1) As Double
+    N = UBound(arr)
+    ReDim xval(1 To N + 1) As Double
+    ReDim yval(1 To N + 1) As Double
     For j = 0 To UBound(arr)
         If InStr(arr(j), ";") Then
             lsep = ";"
@@ -72,7 +72,7 @@ Dim cellval As String
 Dim tal As Double
 Dim i As Integer
 Dim j As Integer
-Dim n As Integer
+Dim N As Integer
 Dim oFS As Integer
 Dim r As Range
 
@@ -95,9 +95,9 @@ Else
     Set rws = Selection.Columns
     oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
 End If
-n = rws.Count
+N = rws.Count
 
-If n < 2 Then ' hvis intet valgt på forhånd
+If N < 2 Then ' hvis intet valgt på forhånd
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
         oFS = 0
@@ -105,9 +105,9 @@ If n < 2 Then ' hvis intet valgt på forhånd
         Set rws = Selection.Tables(1).Columns
         oFS = 0
     End If
-    n = rws.Count
+    N = rws.Count
     On Error Resume Next
-    For i = 1 To n ' bestem hvor der ligger tal
+    For i = 1 To N ' bestem hvor der ligger tal
         For j = 1 To rws(1).Cells.Count
         cellval = rws(i).Cells(j).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
@@ -124,17 +124,17 @@ If n < 2 Then ' hvis intet valgt på forhånd
     Next
 End If
 
-If n < 2 Then
+If N < 2 Then
     GoTo fejl
 End If
 
-    ReDim xval(1 To n) As Double
-    ReDim yval(1 To n) As Double
+    ReDim xval(1 To N) As Double
+    ReDim yval(1 To N) As Double
 '    ReDim Preserve x(1 To n) As Double
 '    ReDim Preserve y(1 To n) As Double
     On Error Resume Next
     i = 0
-    For j = 1 To n
+    For j = 1 To N
         i = i + 1
         If rws(j).Cells(1 + oFS).Range.OMaths.Count > 0 Then
             PrepareMaxima
@@ -185,7 +185,7 @@ End Sub
 Public Sub GetTableDataOld()
 Dim rws As Variant
 Dim cellval As String
-Dim i, j, n, oFS As Integer
+Dim i, j, N, oFS As Integer
 'On Error GoTo fejl
 '    If Selection.Tables.Count = 0 Then
 '        Call MsgBox("Du skal lave en tabel med to kolonner. x-værdier i venstre kolonne og y-værdier i højrekolonne")
@@ -204,7 +204,7 @@ Else
     Set rws = Selection.Columns
     oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
 End If
-n = rws.Count
+N = rws.Count
 GoTo Prepare
 heletabel:
 
@@ -219,7 +219,7 @@ End If
 GoTo tableonly
 
 Prepare:
-If n < 2 Then
+If N < 2 Then
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
         oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
@@ -227,18 +227,18 @@ If n < 2 Then
         Set rws = Selection.Tables(1).Columns
         oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
     End If
-    n = rws.Count
+    N = rws.Count
 End If
-If n < 2 Then
+If N < 2 Then
     GoTo fejl
 End If
 
-    ReDim xval(1 To n) As Double
-    ReDim yval(1 To n) As Double
+    ReDim xval(1 To N) As Double
+    ReDim yval(1 To N) As Double
 '    ReDim Preserve x(1 To n) As Double
 '    ReDim Preserve y(1 To n) As Double
     On Error Resume Next
-    For j = 1 To n
+    For j = 1 To N
         i = i + 1
         
         cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
@@ -271,7 +271,7 @@ Dim p As String
 Dim xs As String
 Dim ys As String
 Dim Text As String
-Dim n As Integer
+Dim N As Integer
 Dim ea As New ExpressionAnalyser
 Dim arr As Variant
 
@@ -293,16 +293,16 @@ Else
     arr = Split(p, ",")
 End If
 If UBound(arr) > 0 Then
-    n = n + 1
+    N = N + 1
 '    xval(n) = CDbl(arr(0))
 '    yval(n) = CDbl(arr(1))
-    xval(n) = val(Replace(arr(0), ",", "."))
-    yval(n) = val(Replace(arr(1), ",", "."))
+    xval(N) = val(Replace(arr(0), ",", "."))
+    yval(N) = val(Replace(arr(1), ",", "."))
 End If
-Loop While Not (p = "") And n < 1000
+Loop While Not (p = "") And N < 1000
 
-    ReDim Preserve xval(1 To n) As Double
-    ReDim Preserve yval(1 To n) As Double
+    ReDim Preserve xval(1 To N) As Double
+    ReDim Preserve yval(1 To N) As Double
 
 End Sub
 
@@ -310,11 +310,11 @@ Private Function ComputeRegr(x() As Double, y() As Double) As Boolean
 'Udfører lineær regression på to arrays og returnerer a,b og R^2
 
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
-Dim n As Integer
+Dim N As Integer
 Dim i As Integer
 On Error GoTo fejl
 
-n = UBound(x) - LBound(x) + 1
+N = UBound(x) - LBound(x) + 1
                
 For i = LBound(x) To UBound(x)
     sumx = sumx + x(i)
@@ -324,13 +324,13 @@ For i = LBound(x) To UBound(x)
     sumyy = sumyy + y(i) ^ 2
 Next
 
-A = (n * sumxy - sumx * sumy) / (n * sumxx - sumx ^ 2)
+A = (N * sumxy - sumx * sumy) / (N * sumxx - sumx ^ 2)
 A = betcif(A, 16)   ' sikrer at man ikke får små værdier for b der egentlig er 0
-b = (sumy - A * sumx) / n
-If n * sumxx - sumx ^ 2 = 0 Or (n * sumyy - sumy ^ 2) = 0 Then
+b = (sumy - A * sumx) / N
+If N * sumxx - sumx ^ 2 = 0 Or (N * sumyy - sumy ^ 2) = 0 Then
     r = 1
 Else
-    r = (n * sumxy - sumx * sumy) ^ 2 / (n * sumxx - sumx ^ 2) / (n * sumyy - sumy ^ 2)
+    r = (N * sumxy - sumx * sumy) ^ 2 / (N * sumxx - sumx ^ 2) / (N * sumyy - sumy ^ 2)
     r = betcif(r, MaximaCifre)
 End If
 If r > 1 Then r = 1
@@ -345,12 +345,12 @@ End Function
 
 Function Logv(val() As Double) As Variant
 'tager log af alle elementer i array
-    Dim n As Integer, j As Integer, i As Integer
+    Dim N As Integer, j As Integer, i As Integer
     
     ReDim arrlog(LBound(val) To UBound(val)) As Double
     
-    n = UBound(val) - LBound(val) + 1
-    For i = 1 To n
+    N = UBound(val) - LBound(val) + 1
+    For i = 1 To N
         If val(i) > 0 Then
             j = j + 1
             arrlog(j) = Log(val(i))
@@ -392,7 +392,7 @@ Sub ComputeLinRegr()
 
 End Sub
 Sub ComputeExpRegr()
-    Dim n As Integer
+    Dim N As Integer
     Dim astr As String
     ReDim logy(LBound(yval) To UBound(yval)) As Double
     
@@ -424,7 +424,7 @@ End Sub
 
 Sub ComputePowRegr()
 On Error GoTo fejl
-    Dim n As Integer
+    Dim N As Integer
     ReDim logx(LBound(xval) To UBound(xval)) As Double
     ReDim logy(LBound(yval) To UBound(yval)) As Double
     
@@ -564,13 +564,13 @@ Sub ComputePolRegrKvad()
     End If
 End Sub
 Sub ComputePolRegr()
-    Dim i As Integer, orden As Integer, n As Integer
+    Dim i As Integer, orden As Integer, N As Integer
     On Error Resume Next
-    n = UBound(xval) - LBound(xval)
-    orden = InputBox(Sprog.A(35) & n & ")" & vbCrLf & vbCrLf & Sprog.A(36), Sprog.A(37), "2")
+    N = UBound(xval) - LBound(xval)
+    orden = InputBox(Sprog.A(35) & N & ")" & vbCrLf & vbCrLf & Sprog.A(36), Sprog.A(37), "2")
     On Error GoTo fejl
-    If orden < 1 Or orden > n Then
-        MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, Sprog.Error
+    If orden < 1 Or orden > N Then
+        MsgBox "You have stated an invalid order. it must be between 1 and " & N, vbOKOnly, Sprog.Error
         Exit Sub
     End If
     
@@ -634,7 +634,7 @@ Function polregr(x() As Double, y() As Double, orden As Integer, Optional ByVal 
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
-Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
+Dim N As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
@@ -656,7 +656,7 @@ ReDim M(1 To orden + 1, 1 To orden + 2)
 ReDim s(2 * orden)
 ReDim t(orden)
 
-n = UBound(x) - LBound(x) + 1
+N = UBound(x) - LBound(x) + 1
                
 For j = 0 To orden ' T(i) sættes op (højre kolonne af matrix)
     For i = 0 To np - 1
@@ -715,7 +715,7 @@ tving:
 
 End If
              
-ymean = t(0) / n
+ymean = t(0) / N
 Dim FV As Double
 For i = LBound(x) To UBound(x)
   SStotal = SStotal + (y(i) - ymean) ^ 2
@@ -740,13 +740,13 @@ Function polregrkvad(x() As Double, y() As Double, Optional ByVal tving As Boole
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
-Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
+Dim N As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M(3, 4)
 
 On Error GoTo fejl
 
-n = UBound(x) - LBound(x) + 1
+N = UBound(x) - LBound(x) + 1
                
 For i = LBound(x) To UBound(x)
     sumx = sumx + x(i)
@@ -762,7 +762,7 @@ If tving = False Then
 
 M(1, 1) = sumxx
 M(1, 2) = sumx
-M(1, 3) = n
+M(1, 3) = N
 M(1, 4) = sumy
 M(2, 1) = sumx3
 M(2, 2) = sumxx
@@ -805,7 +805,7 @@ c = 0
 
 End If
              
-ymean = sumy / n
+ymean = sumy / N
 
 For i = LBound(x) To UBound(x)
   SStotal = SStotal + (y(i) - ymean) ^ 2

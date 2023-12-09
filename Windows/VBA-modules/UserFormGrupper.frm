@@ -28,10 +28,10 @@ End Sub
 Private Sub CommandButton_ok_Click()
 Dim Data As String
 Dim intervaller As String
-Dim v As Double
+Dim V As Double
 Dim Min As Double
 Dim Max As Double
-Dim n As Integer
+Dim N As Integer
 Dim arr As Variant
 Dim arrdata As Variant
 Dim arrint As Variant
@@ -44,9 +44,9 @@ Data = TextBox_data.Text
 intervaller = TextBox_intervaller.Text
 arrdata = Split(Data, vbCrLf)
 arrint = Split(intervaller, vbCrLf)
-n = UBound(arrint)
+N = UBound(arrint)
 
-If n > 0 Then
+If N > 0 Then
 ' indsæt data
 If CheckBox_data.Value = True Then
     Dim t As String
@@ -80,7 +80,7 @@ Tabel.Cell(1, 3).Range.Text = "Hyppighed"
 Tabel.Columns.Width = 50
 
 ' fyld tabel med data
-For i = 0 To n
+For i = 0 To N
     arr = Split(arrint(i), "-")
     Min = arr(0)
     If UBound(arr) = 0 Then
@@ -98,10 +98,10 @@ For i = 0 To n
         On Error Resume Next
         If Trim(arrdata(j)) <> "" Then
             arrdata(j) = Replace(arrdata(j), ",", ".")
-            v = CDbl(arrdata(j))
-            v = val(arrdata(j))
+            V = CDbl(arrdata(j))
+            V = val(arrdata(j))
             On Error GoTo fejl
-            If v > Min And v <= Max Then
+            If V > Min And V <= Max Then
                 Tabel.Cell(i + 2, 3).Range.Text = val(Tabel.Cell(i + 2, 3).Range.Text) + 1
             End If
         End If

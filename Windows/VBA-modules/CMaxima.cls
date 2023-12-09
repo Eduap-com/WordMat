@@ -44,36 +44,76 @@ Private at As AutoTextEntry
 Public ConvertLnLog As Boolean    ' whethter converttomaxima converts ln(x) -> log(x) and log(x)-> log(x)/log(10)
 Public prevspr As String    ' bruges til når Maxima spr. gentagne gange om det samme
 Public prevsvar As String
+Public MaximaSti As String
 
 
 Private Sub Class_Initialize()
+' Finder Maximastien. søger i Appdata og programfiles. Hvis der er Maxima begge steder så bruges nyeste version
+    Dim FN As String, DN As String, V As Single, s As String
+    Dim FN1 As String, DN1 As String, V1 As Single
     On Error Resume Next
     ConvertLnLog = True
 #If Mac Then
     MaximaInstalled = True
 #Else
-    Dim maximasti As String
-    maximasti = Dir(Environ("ProgramFiles") & "\WordMat\Maxima*", vbDirectory)
-    If maximasti = "" Then
-        maximasti = Dir(Environ("ProgramFiles") & "\Maxima*", vbDirectory)
-        If maximasti = "" Then
-            maximasti = Dir(GetProgramFilesDir() & "\WordMat\Maxima*", vbDirectory)
+
+    DN = Environ("AppData") & "\WordMat\"
+    FN = Dir(DN & "Maxima*", vbDirectory)
+    V = GetVersion(FN)
+    Do
+        s = Dir()
+        If GetVersion(s) > V Then
+            FN = s
+            V = GetVersion(FN)
+        End If
+    Loop While s <> ""
+    
+    DN1 = GetProgramFilesDir() & "\WordMat\"
+    FN1 = Dir(DN1 & "Maxima*", vbDirectory)
+    If FN = vbNullString Then
+        DN = DN1
+        FN = FN1
+        V = GetVersion(FN)
+    Else
+        V1 = GetVersion(FN1)
+        If V1 > V Then
+            DN = DN1
+            FN = FN1
+            V = V1
         End If
     End If
-
-    If maximasti = "" Then
+    If FN = vbNullString Then
+        DN = Environ("ProgramFiles") & "\"
+        FN = Dir(Environ("ProgramFiles") & "\Maxima*", vbDirectory)
+    End If
+    
+    If FN = vbNullString Then
         MaximaInstalled = False
         MsgBox "WordMat could not locate the Maxima installation. Try to reinstall", vbOKOnly, Sprog.Error
         Exit Sub
     Else
         MaximaInstalled = True
     End If
+    
+    MaximaSti = DN & FN
+    MaxProc.SetMaximaPath MaximaSti
+    
     OpretTempdoc
 #End If
     'If at Is Nothing Then ' giver fejl hvis køres i autoexec
     '    Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
     'End If
 End Sub
+Public Function GetVersion(N As String) As Single
+' finder versionsnr ud fra mappenavn på maxima
+Dim V As String, p As Integer
+    p = InStr(N, "-")
+    If p > 0 Then
+        V = right(N, Len(N) - p)
+    End If
+    GetVersion = val(V)
+End Function
+
 Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
     Dim DefS As String
     On Error Resume Next    ' der kommer fejl ved autoexec
@@ -157,7 +197,6 @@ Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
     '    MaximaInputStreng = MaximaInputStreng & "setunits([N,J])$"  '
     '    AntalKommandoer = AntalKommandoer + 1
     'End If
-
 fejl:
     MsgBox Sprog.ErrorGeneral & vbCrLf & " preparing maxima", vbOKOnly, Sprog.Error
 
@@ -4290,7 +4329,7 @@ Function ConvertUnits(ByVal Text As String) As String
 
 End Function
 Function ConvertDegreeToRad(Text As String, trigfunc As String) As String
-    Dim Pos, spos As Integer, s As String, v As String, F As Boolean
+    Dim Pos, spos As Integer, s As String, V As String, F As Boolean
     Dim ea As New ExpressionAnalyser ', ea2 As New ExpressionAnalyser
     ea.SetNormalBrackets
 '    ea2.SetNormalBrackets
@@ -5467,7 +5506,7 @@ Function ConvertToLatex(Text As String) As String
 
     ' /
     Pos = InStr(ea.Text, "/")
-    Dim n As String
+    Dim N As String
     Do While Pos > 0
         If ea.ChrByIndex(Pos - 1) = ")" Then
             ea.SetNormalBrackets
@@ -5506,13 +5545,13 @@ Function ConvertToLatex(Text As String) As String
         ''            pos2 = ea.FindNextBreak
         pos2 = ea.FindHierakiBreak(3, False)
         
-        n = Mid(ea.Text, Pos + 1, pos2 - Pos)
-        If Left(n, 1) = "(" And right(n, 1) = ")" Then
-            n = Mid(n, 2, Len(n) - 2)
+        N = Mid(ea.Text, Pos + 1, pos2 - Pos)
+        If Left(N, 1) = "(" And right(N, 1) = ")" Then
+            N = Mid(N, 2, Len(N) - 2)
         End If
         pos2 = pos2 + 1
         '        End If
-        ea.Text = Left(ea.Text, pos1 - 1) & "\frac{" & t & "}{" & n & "}" & right(ea.Text, NotZero(Len(ea.Text) - pos2 + 1))
+        ea.Text = Left(ea.Text, pos1 - 1) & "\frac{" & t & "}{" & N & "}" & right(ea.Text, NotZero(Len(ea.Text) - pos2 + 1))
         Pos = InStr(ea.Text, "/")
     Loop
 
@@ -5788,7 +5827,7 @@ End Function
 Function ConvertLatexToWord(Text As String) As String
     Dim ea As New ExpressionAnalyser
     Dim p As Integer
-    Dim t As String, n As String
+    Dim t As String, N As String
 
     Text = Replace(Text, VBA.ChrW(11), "")    ' shift-enter
     Text = Replace(Text, vbCrLf, "")    ' enter
@@ -5839,8 +5878,8 @@ Function ConvertLatexToWord(Text As String) As String
     p = InStr(ea.Text, "\frac")
     Do While p > 0
         t = ea.GetNextBracketContent
-        n = ea.GetNextBracketContent
-        ea.Text = Left(ea.Text, p - 1) & "(" & t & ")/(" & n & ")" & right(ea.Text, ea.Length - ea.Pos + 1)
+        N = ea.GetNextBracketContent
+        ea.Text = Left(ea.Text, p - 1) & "(" & t & ")/(" & N & ")" & right(ea.Text, ea.Length - ea.Pos + 1)
         p = InStr(ea.Text, "\frac")
     Loop
 
@@ -7053,7 +7092,7 @@ End Function
 Function SplitAssump(s As String) As String
 ' Deler  0<x<5 op til x>0 and x<5
    Dim ea As New ExpressionAnalyser
-   Dim v As String, p As Integer, p2 As Integer
+   Dim V As String, p As Integer, p2 As Integer
    Dim pre As String, pst As String
    
    ea.SetNormalBrackets
@@ -7063,46 +7102,46 @@ Function SplitAssump(s As String) As String
 
    ea.Text = s
    
-   v = ea.GetNextVar()
-   If v = "" Then
+   V = ea.GetNextVar()
+   If V = "" Then
       SplitAssump = s
       Exit Function
    End If
    
-   p = InStr(s, "<=" & v & "<=")
+   p = InStr(s, "<=" & V & "<=")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 4)
-      SplitAssump = v & ">=" & pre & "&&and&&" & v & "<=" & pst
+      SplitAssump = V & ">=" & pre & "&&and&&" & V & "<=" & pst
 '      SplitAssump = pre & "<=" & v & " and " & v & "<=" & pst
       Exit Function
    End If
-   p = InStr(s, "<=" & v & "<")
+   p = InStr(s, "<=" & V & "<")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 3)
-      SplitAssump = pre & "<=" & v & "&&and&&" & v & "<" & pst
+      SplitAssump = pre & "<=" & V & "&&and&&" & V & "<" & pst
       Exit Function
    End If
-   p = InStr(s, "<" & v & "<=")
+   p = InStr(s, "<" & V & "<=")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 3)
-      SplitAssump = pre & "<" & v & "&&and&&" & v & "<=" & pst
+      SplitAssump = pre & "<" & V & "&&and&&" & V & "<=" & pst
       Exit Function
    End If
-   p = InStr(s, "<" & v & "<")
+   p = InStr(s, "<" & V & "<")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 2)
-      SplitAssump = pre & "<" & v & "&&and&&" & v & "<" & pst
+      SplitAssump = pre & "<" & V & "&&and&&" & V & "<" & pst
       Exit Function
    End If
    SplitAssump = s
 End Function
 Function sqbrAssump(s As String) As String
    Dim ea As ExpressionAnalyser, t As String
-   Dim v As String, p As Integer, p2 As Integer, c As String
+   Dim V As String, p As Integer, p2 As Integer, c As String
    Dim pre As String, pst As String, arr() As String, l1 As String, l2 As String
    t = s
    p = InStr(s, VBA.ChrW(8712))
@@ -7112,8 +7151,8 @@ Function sqbrAssump(s As String) As String
    End If
    Set ea = New ExpressionAnalyser
    ea.Text = s
-   v = ea.GetNextVar()
-   If v = "" Then
+   V = ea.GetNextVar()
+   If V = "" Then
       sqbrAssump = s
       Exit Function
    End If
@@ -7152,7 +7191,7 @@ Function sqbrAssump(s As String) As String
    End If
    arr = Split(s, c)
    If UBound(arr) = 1 Then
-      sqbrAssump = v & l1 & arr(0) & "&&and&&" & arr(1) & l2 & v
+      sqbrAssump = V & l1 & arr(0) & "&&and&&" & arr(1) & l2 & V
    Else
       sqbrAssump = t
    End If

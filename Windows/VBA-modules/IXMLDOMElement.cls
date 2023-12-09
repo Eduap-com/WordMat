@@ -67,20 +67,20 @@ Public Sub IXMLDOMNode_Save(dest)
     
     s = "<" & m_tagname
     
-    Dim n As Integer
+    Dim N As Integer
     Dim i As Integer
-    n = m_attnames.Count
+    N = m_attnames.Count
     
-    For i = 1 To n
+    For i = 1 To N
         s = s & " " & m_attnames(i) & "=""" & m_attvalues(i) & """"
     Next
     
-    n = m_children.Count
-    If n < 1 Then
+    N = m_children.Count
+    If N < 1 Then
         Print #dest, s & " />"
     Else
         Print #dest, s & ">"
-        For i = 1 To n
+        For i = 1 To N
             Dim node As IXMLDOMNode
             Set node = m_children(i)
             node.Save (dest)

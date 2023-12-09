@@ -1455,7 +1455,7 @@ Public Function IsArrayAllocated(arr As Variant) As Boolean
 ' This function is just the reverse of IsArrayEmpty.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-Dim n As Long
+Dim N As Long
 On Error Resume Next
 
 ' if Arr is not an array, return FALSE and get out.
@@ -1466,7 +1466,7 @@ End If
 
 ' Attempt to get the UBound of the array. If the array has not been allocated,
 ' an error will occur. Test Err.Number to see if an error occurred.
-n = UBound(arr, 1)
+N = UBound(arr, 1)
 If (Err.Number = 0) Then
     ''''''''''''''''''''''''''''''''''''''
     ' Under some circumstances, if an array
@@ -2342,7 +2342,7 @@ Public Function SetObjectArrayToNothing(InputArray As Variant) As Boolean
 ' The function returns True if successful, False otherwise.
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-Dim n As Long
+Dim N As Long
 
 ''''''''''''''''''''''''''''''''''''''
 ' Ensure InputArray is an array.
@@ -2372,12 +2372,12 @@ End If
 ' get set to Nothing.
 ''''''''''''''''''''''''''''''''''''''''''''''''
 If IsArrayAllocated(arr:=InputArray) = True Then
-    For n = LBound(InputArray) To UBound(InputArray)
-        If IsObject(InputArray(n)) = False Then
+    For N = LBound(InputArray) To UBound(InputArray)
+        If IsObject(InputArray(N)) = False Then
             SetObjectArrayToNothing = False
             Exit Function
         End If
-    Next n
+    Next N
 Else
     SetObjectArrayToNothing = True
     Exit Function
@@ -2387,9 +2387,9 @@ End If
 '''''''''''''''''''''''''''''''''''''''''''''
 ' Set each element of InputArray to Nothing.
 '''''''''''''''''''''''''''''''''''''''''''''
-For n = LBound(InputArray) To UBound(InputArray)
-    Set InputArray(n) = Nothing
-Next n
+For N = LBound(InputArray) To UBound(InputArray)
+    Set InputArray(N) = Nothing
+Next N
 
 SetObjectArrayToNothing = True
 
@@ -3248,7 +3248,7 @@ Dim Done As Boolean
 Dim result() As Variant
 Dim ResultTrans() As Variant
 
-Dim v As Variant
+Dim V As Variant
 
 
 '''''''''''''''''''''''''''''''
@@ -3347,8 +3347,8 @@ Do Until Done
     For RowNdx1 = LBound(Arr1, 1) To UBound(Arr1, 1)
         RowNdxResult = RowNdxResult + 1
         For ColNdx1 = LBound(Arr1, 2) To UBound(Arr1, 2)
-            v = Arr1(RowNdx1, ColNdx1)
-            result(RowNdxResult, ColNdx1) = v
+            V = Arr1(RowNdx1, ColNdx1)
+            result(RowNdxResult, ColNdx1) = V
         Next ColNdx1
     Next RowNdx1
 
@@ -3358,8 +3358,8 @@ Do Until Done
     For RowNdx2 = LBound(arr2, 1) To UBound(arr2, 1)
         RowNdxResult = RowNdxResult + 1
         For ColNdx2 = LBound(arr2, 2) To UBound(arr2, 2)
-            v = arr2(RowNdx2, ColNdx2)
-            result(RowNdxResult, ColNdx2) = v
+            V = arr2(RowNdx2, ColNdx2)
+            result(RowNdxResult, ColNdx2) = V
         Next ColNdx2
     Next RowNdx2
     
@@ -3523,7 +3523,7 @@ Function SwapArrayRows(arr As Variant, Row1 As Long, Row2 As Long) As Variant
 ' This function returns an array based on Arr with Row1 and Row2 swapped.
 ' It returns the result array or NULL if an error occurred.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Dim v As Variant
+Dim V As Variant
 Dim result As Variant
 Dim RowNdx As Long
 Dim ColNdx As Long
@@ -3571,14 +3571,14 @@ End If
 '''''''''''''''''''''''''''''''''''''''''
 ' Redim V to the number of columns.
 '''''''''''''''''''''''''''''''''''''''''
-ReDim v(LBound(arr, 2) To UBound(arr, 2))
+ReDim V(LBound(arr, 2) To UBound(arr, 2))
 '''''''''''''''''''''''''''''''''''''''''
 ' Put Row1 in V
 '''''''''''''''''''''''''''''''''''''''''
 For ColNdx = LBound(arr, 2) To UBound(arr, 2)
-    v(ColNdx) = arr(Row1, ColNdx)
+    V(ColNdx) = arr(Row1, ColNdx)
     result(Row1, ColNdx) = arr(Row2, ColNdx)
-    result(Row2, ColNdx) = v(ColNdx)
+    result(Row2, ColNdx) = V(ColNdx)
 Next ColNdx
 
 SwapArrayRows = result
@@ -3592,7 +3592,7 @@ Function SwapArrayColumns(arr As Variant, Col1 As Long, Col2 As Long) As Variant
 ' This function returns an array based on Arr with Col1 and Col2 swapped.
 ' It returns the result array or NULL if an error occurred.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Dim v As Variant
+Dim V As Variant
 Dim result As Variant
 Dim RowNdx As Long
 Dim ColNdx As Long
@@ -3640,14 +3640,14 @@ End If
 '''''''''''''''''''''''''''''''''''''''''
 ' Redim V to the number of columns.
 '''''''''''''''''''''''''''''''''''''''''
-ReDim v(LBound(arr, 1) To UBound(arr, 1))
+ReDim V(LBound(arr, 1) To UBound(arr, 1))
 '''''''''''''''''''''''''''''''''''''''''
 ' Put Col2 in V
 '''''''''''''''''''''''''''''''''''''''''
 For RowNdx = LBound(arr, 1) To UBound(arr, 1)
-    v(RowNdx) = arr(RowNdx, Col1)
+    V(RowNdx) = arr(RowNdx, Col1)
     result(RowNdx, Col1) = arr(RowNdx, Col2)
-    result(RowNdx, Col2) = v(RowNdx)
+    result(RowNdx, Col2) = V(RowNdx)
 Next RowNdx
 
 SwapArrayColumns = result

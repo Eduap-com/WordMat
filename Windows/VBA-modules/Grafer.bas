@@ -152,7 +152,7 @@ End Sub
 
 Sub PlotDF()
 ' plot retningsfelt
-    Dim forskrifter As String, s As String, v As String
+    Dim forskrifter As String, s As String, V As String
     Dim arr As Variant
     Dim i As Integer
     Dim j As Integer
@@ -176,14 +176,14 @@ Sub PlotDF()
             Exit Sub
         End If
         ea.Text = s
-        v = ea.GetNextVar
-        If v <> "x" And v <> "y" Then
-            If v = "t" Then
+        V = ea.GetNextVar
+        If V <> "x" And V <> "y" Then
+            If V = "t" Then
                 ea.ReplaceVar "t", "x"
-            ElseIf v = "N" Then
-                ea.ReplaceVar v, "y"
+            ElseIf V = "N" Then
+                ea.ReplaceVar V, "y"
             Else
-                ea.ReplaceVar v, "y"
+                ea.ReplaceVar V, "y"
             End If
         End If
         s = ea.Text
@@ -875,8 +875,7 @@ Dim ils As InlineShape
             Selection.Collapse (wdCollapseEnd)
             Selection.TypeParagraph
         End If
-        Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Package", _
-        FileName:=GetTempDir() & "geogebra.ggb", LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+        Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Package", FileName:=GetTempDir() & "geogebra.ggb", LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 '        ils.OLEFormat.DoVerb (wdOLEVerbOpen)
     End If
 #End If

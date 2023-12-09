@@ -2,6 +2,7 @@ Attribute VB_Name = "WebViewModule"
 Public WebV As Object ' WebViewWrap.Browser
 Public GeoGebraWindowOpen As Boolean
 Sub OpenWebV()
+    Dim DN As String, FN As String
     Set UfWait2 = New UserFormWaitForMaxima
     UfWait2.Label_tip.Font.Size = 10
     UfWait2.Label_tip.Font.Italic = False
@@ -10,7 +11,18 @@ Sub OpenWebV()
     UfWait2.Label_progress.Caption = "**"
     
     Set WebV = CreateObject("WebViewWrap.Browser")
-    WebV.navigate "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebraCASApplet.html"
+    DN = GetGeoGebraMathAppsFolder()
+    If FN = vbNullString Then
+        MsgBox "geogebra-math-apps could not be located"
+        GoTo slut
+    End If
+    FN = DN & "GeoGebraCASApplet.html"
+    If Dir(FN) = vbNullString Then
+        MsgBox "geogebra-math-apps/GeoGebraCASApplet.html could not be located"
+        GoTo slut
+    End If
+    
+    WebV.navigate "file://" & FN
     WebV.WaitWV
     
     Wait (2)
@@ -18,10 +30,10 @@ Sub OpenWebV()
     Dim JS As String, i As Integer, j As Integer
 
     JS = "ggbApplet.initCAS();2+3;ggbApplet.evalCommandCAS('2+3');"
-'    JS = "2+3;"
+    '    JS = "2+3;"
     UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
 hop:
-'    Res = WebV.ExecuteScriptWaitTime(JS, 15000)
+    '    Res = WebV.ExecuteScriptWaitTime(JS, 15000)
     WebV.ExecuteScriptNonBlock (JS)
     Do Until WebV.WaitUntilScriptFinished(1000) Or j >= 5
         UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
