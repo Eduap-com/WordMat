@@ -408,10 +408,10 @@ Filename: {app}\GeoGebra.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg:
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{app}";tasks: installeralle installerbruger; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
 
-Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\STARTUP";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser
-Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\START";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser
+Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\STARTUP";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser runhidden
+Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\START";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser runhidden
 
-Filename: cscript.exe; Parameters: {app}\CopyWordMat.vbs ; StatusMsg: "Kopierer WordMat";tasks: installerbruger;  Flags: runasoriginaluser
+Filename: cscript.exe; Parameters: {app}\CopyWordMat.vbs ; StatusMsg: "Kopierer WordMat";tasks: installerbruger;  Flags: runasoriginaluser runhidden
 
 
 [UninstallRun]
