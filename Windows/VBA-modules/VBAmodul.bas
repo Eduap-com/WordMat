@@ -29,7 +29,7 @@ Sub ReplaceToASCIIseq()
          Next
       End If
    Next
-'   GenerateKeyboardShortcuts
+'   GenerateKeyboardShortcutsWordMat
 '   ActiveDocument.VBProject.VBComponents(i).CodeModule.InsertLines(
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub

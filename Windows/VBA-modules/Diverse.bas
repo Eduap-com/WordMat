@@ -363,9 +363,9 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     If Not NonInteractive Then
         MsgBox s, vbOKOnly, "KeyBindings"
     ElseIf KeyBindings.Count < 10 Then
-        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er kun " & KeyBindings.Count & " tastaturveje i WordMat*.dotm. Der skal nok køres GenerateKeyBoardShortcuts." & vbCrLf
+        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er kun " & KeyBindings.Count & " tastaturveje i WordMat*.dotm. Der skal nok køres GenerateKeyboardShortcutsWordMat." & vbCrLf
     ElseIf KBerr Then
-        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er problemer med Genvejene i WordMat*.dotm. Der skal nok køres GenerateKeyBoardShortcuts på Mac." & vbCrLf
+        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er problemer med Genvejene i WordMat*.dotm. Der skal nok køres GenerateKeyboardShortcutsWordMat på Mac." & vbCrLf
     End If
     
 slut:
@@ -399,7 +399,7 @@ Public Sub GenerateKeyboardShortcutsNormalDotm()
 ' Det kan give problemer ved en opdatering at benytte denne metode
     GenerateKeyboardShortcutsPar True
 End Sub
-Public Sub GenerateKeyboardShortcuts()
+Public Sub GenerateKeyboardShortcutsWordMat()
 ' gemmer KeyboardShortcuts i WordMat.dotm, men kun hvis det er selve wordMat.dotm filen der er åbnet
     GenerateKeyboardShortcutsPar False
 End Sub
@@ -519,37 +519,35 @@ End Sub
 
 
 Function GetProgramFilesDir() As String
-' bruges ikke af maxima mere da det er dll-filen der står for det nu.
-' bruges af de Worddokumenter mm. der skal findes
-'MsgBox GetProgFilesPath
-On Error GoTo fejl
+    ' bruges ikke af maxima mere da det er dll-filen der står for det nu.
+    ' bruges af de Worddokumenter mm. der skal findes
+    'MsgBox GetProgFilesPath
+    On Error GoTo fejl
 #If Mac Then
     GetProgramFilesDir = "/Applications/"
 #Else
-  If ProgramFilesDir <> "" Then
-    GetProgramFilesDir = ProgramFilesDir
-  Else
-  
- GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir")
- If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
-     GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramW6432Dir")
- End If
- If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
-     GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir (x86)")
- End If
- If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
-     GetProgramFilesDir = Environ("ProgramFiles")
- End If
- ProgramFilesDir = GetProgramFilesDir
- End If
-
+    If ProgramFilesDir <> "" Then
+        GetProgramFilesDir = ProgramFilesDir
+    Else
+        GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir")
+        If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
+            GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramW6432Dir")
+        End If
+        If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
+            GetProgramFilesDir = Environ("ProgramFiles")
+        End If
+        If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
+            GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir (x86)")
+        End If
+        ProgramFilesDir = GetProgramFilesDir
+    End If
 #End If
 
-GoTo slut
+    GoTo slut
 fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
 slut:
-'MsgBox GetProgramFilesDir
+    'MsgBox GetProgramFilesDir
 End Function
 Function GetDocumentsDir() As String
 On Error GoTo fejl
@@ -1025,11 +1023,12 @@ Sub OpenWordFile(FilNavn As String)
     appdir = Environ("AppData")
     filnavn1 = appdir & "\WordMat\WordDocs\" & FilNavn
 
-    If filnavn1 = vbNullString Then
+    If Dir(filnavn1) = vbNullString Then
         filnavn2 = GetProgramFilesDir & "\WordMat\WordDocs\" & FilNavn
 
         If Dir(filnavn2) <> vbNullString Then
-            If Dir(appdir & "\WordMat\WordDocs\", vbDirectory) = "" Then MkDir appdir & "\WordDocs\WordMat"
+            If Dir(appdir & "\WordMat\", vbDirectory) = vbNullString Then MkDir appdir & "\WordMat\"
+            If Dir(appdir & "\WordMat\WordDocs\", vbDirectory) = vbNullString Then MkDir appdir & "\WordMat\WordDocs\"
             fs.CopyFile filnavn2, appdir & "\WordMat\WordDocs\"
         End If
     End If

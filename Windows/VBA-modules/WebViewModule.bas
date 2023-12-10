@@ -12,7 +12,7 @@ Sub OpenWebV()
     
     Set WebV = CreateObject("WebViewWrap.Browser")
     DN = GetGeoGebraMathAppsFolder()
-    If FN = vbNullString Then
+    If DN = vbNullString Then
         MsgBox "geogebra-math-apps could not be located"
         GoTo slut
     End If

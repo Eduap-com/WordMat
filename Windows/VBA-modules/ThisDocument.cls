@@ -43,7 +43,7 @@ Private Sub Document_Open()
     Dim s As String
     s = CheckKeyboardShortcutsPar(True)
     If s <> vbNullString Then
-       MsgBox "Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & "Du skal gøre følgende: " & vbCrLf & "1. Compile på mac (Alt+F11)" & vbCrLf & "2. Kør makro 'GenerateKeyBoardShortcuts'" & vbCrLf & "3. Kør Macro 'Check KeyboardShortCuts' for at se om alt er korrekt", vbOKOnly, "Compile"
+       MsgBox "Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & "Du skal gøre følgende: " & vbCrLf & "1. Compile på mac (Alt+F11)" & vbCrLf & "2. Kør makro 'GenerateKeyboardShortcutsWordMat'" & vbCrLf & "3. Kør Macro 'Check KeyboardShortCuts' for at se om alt er korrekt", vbOKOnly, "Compile"
        ' Hvis der ikke er compilet får man ikke ret mange makroer op med Alt+F8 på Mac
        
 ' Denne metode fungerer ikke når WordMat ikke er compilet på Mac. Genvejene bliver ikke tilknyttet korrekt
