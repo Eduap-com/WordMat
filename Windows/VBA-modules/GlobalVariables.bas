@@ -3,7 +3,7 @@ Option Explicit
 Public Const AppNavn = "WordMat"
 Public Const AppVersion = "1.28"
 #If Mac Then ' WordMat shows patchVersion attached to AppVersion. if ".1" then shows as 1.24.1. or " beta" -> "1.24 beta" A new PatchVersion does not trigger autoupdate
-    Public Const PatchVersion = "" ' Mac  ".1"
+    Public Const PatchVersion = "1" ' Mac  ".1"
 #Else
     Public Const PatchVersion = "1" ' Windows ".1"
 #End If
