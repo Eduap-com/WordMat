@@ -1,11 +1,10 @@
 '' WordMat script
-'' Mikael Sï¿½rensen, EDUAP
+'' Mikael Sørensen, EDUAP
 '' 10/12-2023
 ''
 
 Option Explicit
 Dim objFSO, objFolder, objShell
-Dim objSubFolder, objFile
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objShell = CreateObject( "WScript.Shell" )
