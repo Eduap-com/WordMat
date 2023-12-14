@@ -627,15 +627,15 @@ End Function
 Function FindVar(svar As String) As Long
 ' searches for the given var or function and returns the position
 Dim i As Integer
-Dim var As String
-    var = GetNextVar()
+Dim Var As String
+    Var = GetNextVar()
     FindVar = -1
-    Do While Len(var) > 0 And i < 200
-        If var = svar Then
+    Do While Len(Var) > 0 And i < 200
+        If Var = svar Then
             FindVar = Pos
             Exit Function
         End If
-        var = GetNextVar()
+        Var = GetNextVar()
         i = i + 1
     Loop
     
@@ -645,7 +645,7 @@ Sub InsertMultSigns()
 ' indsætter underforståede gangetegn
 Dim navn As String
 Dim C1 As Integer, C2 As Integer, gempos As Long
-Dim c As String, var As String
+Dim c As String, Var As String
     On Error Resume Next
     Do
     c = AscW(ChrByIndex(Pos))
@@ -655,8 +655,8 @@ Dim c As String, var As String
     ElseIf IsNumber Then  ' tal eller pi 'And c <> 960
         If (IsLetterPos(Pos + 1)) And (Not (IsLetterPos(Pos - 1, False)) Or Pos = 1) Then  ' c=960 indført v1.24 pga geogebra laver pi2 som skal give ->pi*2
             gempos = Pos
-            var = GetPrevVar(Pos) ' checker om tallet kan være en tal i slutningen af en funktion, så skal der ikke indsættes gangetegn
-            If Not (Len(var) > 0 And Pos = gempos) Then
+            Var = GetPrevVar(Pos) ' checker om tallet kan være en tal i slutningen af en funktion, så skal der ikke indsættes gangetegn
+            If Not (Len(Var) > 0 And Pos = gempos) Then
                 InsertAfterPos "*", gempos
             End If
             Pos = gempos
@@ -957,61 +957,61 @@ Function GetTextInterval(ByVal p1 As Long, ByVal p2 As Long) As String
     End If
 End Function
 
-Sub ReplaceVar(ByVal var As String, ByVal replvar As String, Optional StartPos As Long = 1, Optional Count As Long = -1)
+Sub ReplaceVar(ByVal Var As String, ByVal replvar As String, Optional StartPos As Long = 1, Optional Count As Long = -1)
 ' finder var i text og erstatter med replvar
 
     Dim pos2 As Long
     
-    pos2 = InStr(StartPos, Text, var)
+    pos2 = InStr(StartPos, Text, Var)
     
     Do While pos2 > 0 And Count <> 0
     If pos2 = 1 Then
-        If Not (IsLetterPos(pos2 + Len(var), False) Or IsNumber(pos2 + Len(var))) Then
-            Text = Left(Text, pos2 - 1) & Replace(Text, var, replvar, pos2, 1)
+        If Not (IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
+            Text = Left(Text, pos2 - 1) & Replace(Text, Var, replvar, pos2, 1)
             pos2 = pos2 + Len(replvar)
         End If
-    ElseIf pos2 + Len(var) = Len(Text) + 1 Then
+    ElseIf pos2 + Len(Var) = Len(Text) + 1 Then
         If Not (IsLetterPos(pos2 - 1, False)) Then
-            Text = Left(Text, pos2 - 1) & Replace(Text, var, replvar, pos2, 1)
+            Text = Left(Text, pos2 - 1) & Replace(Text, Var, replvar, pos2, 1)
             pos2 = pos2 + Len(replvar)
         End If
     Else
-        If Not (IsLetterPos(pos2 - 1, False) Or IsLetterPos(pos2 + Len(var), False) Or IsNumber(pos2 + Len(var))) Then
-            Text = Left(Text, pos2 - 1) & Replace(Text, var, replvar, pos2, 1)
+        If Not (IsLetterPos(pos2 - 1, False) Or IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
+            Text = Left(Text, pos2 - 1) & Replace(Text, Var, replvar, pos2, 1)
             pos2 = pos2 + Len(replvar)
         End If
     End If
-    pos2 = InStr(pos2 + 1, Text, var)
+    pos2 = InStr(pos2 + 1, Text, Var)
     Count = Count - 1
     Loop
 End Sub
-Sub ReplaceTrigPow(ByVal var As String, ByVal replvar As String, Optional StartPos As Long = 1, Optional Count As Long = -1)
+Sub ReplaceTrigPow(ByVal Var As String, ByVal replvar As String, Optional StartPos As Long = 1, Optional Count As Long = -1)
 ' finder var i text og erstatter med replvar
 ' var skal være en trig funktion. tager højde for sin^2 & ChrW(8289)
 
     Dim pos2 As Long
     
-    pos2 = InStr(StartPos, Text, var & "^")
+    pos2 = InStr(StartPos, Text, Var & "^")
     
     Do While pos2 > 0 And Count <> 0
         FindNextBreak
         If pos2 = 1 Then
-            If Not (IsLetterPos(pos2 + Len(var), False) Or IsNumber(pos2 + Len(var))) Then
-                Text = Left(Text, pos2 - 1) & Replace(Text, var, replvar, pos2, 1)
+            If Not (IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
+                Text = Left(Text, pos2 - 1) & Replace(Text, Var, replvar, pos2, 1)
                 pos2 = pos2 + Len(replvar)
             End If
-        ElseIf pos2 + Len(var) = Len(Text) + 1 Then
+        ElseIf pos2 + Len(Var) = Len(Text) + 1 Then
             If Not (IsLetterPos(pos2 - 1, False)) Then
-                Text = Left(Text, pos2 - 1) & Replace(Text, var, replvar, pos2, 1)
+                Text = Left(Text, pos2 - 1) & Replace(Text, Var, replvar, pos2, 1)
                 pos2 = pos2 + Len(replvar)
             End If
         Else
-            If Not (IsLetterPos(pos2 - 1, False) Or IsLetterPos(pos2 + Len(var), False) Or IsNumber(pos2 + Len(var))) Then
-                Text = Left(Text, pos2 - 1) & Replace(Text, var, replvar, pos2, 1)
+            If Not (IsLetterPos(pos2 - 1, False) Or IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
+                Text = Left(Text, pos2 - 1) & Replace(Text, Var, replvar, pos2, 1)
                 pos2 = pos2 + Len(replvar)
             End If
         End If
-        pos2 = InStr(pos2 + 1, Text, var & "^")
+        pos2 = InStr(pos2 + 1, Text, Var & "^")
         Count = Count - 1
     Loop
 End Sub
@@ -1282,7 +1282,7 @@ Loop While p > 0
 
 End Sub
 
-Function ContainsVar(var As String) As Boolean
+Function ContainsVar(Var As String) As Boolean
 ' afgør om variabel var er i text
 Dim ivar As String
 
@@ -1291,7 +1291,7 @@ Pos = 0
 
 Do
     ivar = GetNextVar(Pos + 1)
-    If ivar = var Then
+    If ivar = Var Then
         ContainsVar = True
     End If
 Loop While ivar <> "" And Pos < Len(Text)

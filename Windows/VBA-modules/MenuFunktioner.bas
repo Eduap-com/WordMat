@@ -67,15 +67,15 @@ fejl:
 slut:
 End Function
 Sub DefinerVar()
-    Dim var As String
+    Dim Var As String
     On Error GoTo fejl
 '    var = InputBox("Indtast definitionen på den nye variabel" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke før. Hvis der indsættes en clearvars: kommando længere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes på 4 forskellige måder" & vbCrLf & vbCrLf & "definer: variabel=værdi" & vbCrLf & "variabel:værdi" & vbCrLf & "variabel:=værdi" & vbCrLf & "variabel" & VBA.ChrW(&H2261) & "værdi  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere variable i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. a:1 ; b:2", "Ny variabel", "a=1")
-    var = InputBox(Sprog.A(120), Sprog.A(121), "a=1")
-    var = Replace(var, ":=", "=")
+    Var = InputBox(Sprog.A(120), Sprog.A(121), "a=1")
+    Var = Replace(Var, ":=", "=")
 '    var = Replace(var, "=", VBA.ChrW(&H2261))
-    If var <> "" Then
-        var = Sprog.A(126) & ": " & var
-        Selection.InsertAfter (var)
+    If Var <> "" Then
+        Var = Sprog.A(126) & ": " & Var
+        Selection.InsertAfter (Var)
         Selection.OMaths.Add Range:=Selection.Range
         Selection.OMaths(1).BuildUp
         Selection.MoveRight Unit:=wdCharacter, Count:=2
@@ -87,16 +87,16 @@ fejl:
 slut:
 End Sub
 Sub DefinerFunktion()
-    Dim var As String
+    Dim Var As String
 On Error GoTo fejl
 '    var = InputBox("Indtast definitionen på den nye funktion" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke før. Hvis der indsættes en clearvars: kommando længere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes på 3 forskellige måder" & vbCrLf & vbCrLf & "f(x):forskrift" & vbCrLf & "f(x):=forskrift" & vbCrLf & "f(x)" & VBA.ChrW(&H2261) & "forskrift  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere funktioner i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. f(x)=x ; g(x)=2x+1", "Ny funktion", "f(x)=x+1")
-    var = InputBox(Sprog.A(122), Sprog.A(123), "f(x)=x+1")
-    var = Replace(var, ":=", "=")
+    Var = InputBox(Sprog.A(122), Sprog.A(123), "f(x)=x+1")
+    Var = Replace(Var, ":=", "=")
 '    var = Replace(var, "=", VBA.ChrW(&H2261))
     
-    If var <> "" Then
-        var = Sprog.A(126) & ": " & var
-        Selection.InsertAfter (var)
+    If Var <> "" Then
+        Var = Sprog.A(126) & ": " & Var
+        Selection.InsertAfter (Var)
         Selection.OMaths.Add Range:=Selection.Range
         Selection.OMaths(1).BuildUp
         Selection.MoveRight Unit:=wdCharacter, Count:=2
@@ -107,13 +107,13 @@ fejl:
 slut:
 End Sub
 Sub DefinerLigning()
-    Dim var As String
+    Dim Var As String
 On Error GoTo fejl
-    var = InputBox(Sprog.A(115), Sprog.A(124), Sprog.A(125) & ":     Area:A=1/2*h*b")
+    Var = InputBox(Sprog.A(115), Sprog.A(124), Sprog.A(125) & ":     Area:A=1/2*h*b")
 '    var = Replace(var, "=", VBA.ChrW(&H2261))
     
-    If var <> "" Then
-        Selection.InsertAfter (var)
+    If Var <> "" Then
+        Selection.InsertAfter (Var)
         Selection.OMaths.Add Range:=Selection.Range
         Selection.OMaths(1).BuildUp
         Selection.MoveRight Unit:=wdCharacter, Count:=2

@@ -821,7 +821,7 @@ End Function
 Sub OpdaterDefinitioner()
    ' ser efter variable i textboxene og indsætter under definitioner
    Dim vars As String
-   Dim var As String, var2 As String
+   Dim Var As String, var2 As String
    Dim ea As New ExpressionAnalyser
    Dim ea2 As New ExpressionAnalyser
    Dim arr As Variant
@@ -875,23 +875,23 @@ Sub OpdaterDefinitioner()
    
    arr = Split(TextBox_definitioner.Text, VbCrLfMac)
    Do
-      var = ea.GetNextListItem(ea.Pos)
-      var = Replace(var, vbCrLf, "")
+      Var = ea.GetNextListItem(ea.Pos)
+      Var = Replace(Var, vbCrLf, "")
       For i = 0 To UBound(arr)
          If arr(i) <> "" Then
             var2 = Split(arr(i), "=")(0)
-            If var2 = var Then
-               var = ""
+            If var2 = Var Then
+               Var = ""
                Exit For
             End If
          End If
       Next
-      If var <> "" Then
+      If Var <> "" Then
          '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
          If Len(TextBox_definitioner.Text) > 0 Then
             TextBox_definitioner.Text = TextBox_definitioner.Text & VbCrLfMac
          End If
-         TextBox_definitioner.Text = TextBox_definitioner.Text & var & "=1"
+         TextBox_definitioner.Text = TextBox_definitioner.Text & Var & "=1"
       End If
    Loop While ea.Pos <= Len(ea.Text)
 
@@ -909,15 +909,15 @@ Dim ea As New ExpressionAnalyser
     End If
 End Function
 
-Function RemoveVar(Text As String, var As String)
+Function RemoveVar(Text As String, Var As String)
 ' fjerner var fra string
 Dim ea As New ExpressionAnalyser
-If var = vbNullString Then
+If Var = vbNullString Then
     RemoveVar = Text
     Exit Function
 End If
 ea.Text = Text
-Call ea.ReplaceVar(var, "")
+Call ea.ReplaceVar(Var, "")
 Text = Replace(ea.Text, ";;", ";")
 If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
 If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)

@@ -479,7 +479,7 @@ Function StopNow() As Boolean
     End If
     StopNow = False
 End Function
-Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional var As String, Optional Instruk As String)
+Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional Var As String, Optional Instruk As String)
     Dim s As String, TypeText As String, Oresul As String, arr() As String, ResultOK As Boolean, i As Integer
     If TestType = 1 Then
         TypeText = "Calculate"
@@ -499,9 +499,9 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
     If TestType = 1 Then
         beregn
     ElseIf TestType = 2 Then
-        MaximaSolvePar (var)
+        MaximaSolvePar (Var)
     ElseIf TestType = 3 Then 'solvede
-        arr = Split(var, ",")
+        arr = Split(Var, ",")
         SolveDEpar arr(0), arr(1)
     End If
     Wait 0.2
@@ -547,12 +547,12 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional v
             Selection.TypeParagraph
             Selection.TypeText "Brug denne kode-streng:"
             Selection.TypeParagraph
-            Selection.TypeText vbTab & "If TestSolve(" & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
+            Selection.TypeText vbTab & "If TestSolve(" & Trim(ConvertToVBAString(komm)) & " , """ & Var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
         ElseIf TestType = 3 Then
             Selection.TypeParagraph
             Selection.TypeText "Brug denne kode-streng:"
             Selection.TypeParagraph
-            Selection.TypeText vbTab & "If TestSolveDE(" & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
+            Selection.TypeText vbTab & "If TestSolveDE(" & Trim(ConvertToVBAString(komm)) & " , """ & Var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
         End If
         Selection.TypeParagraph
         ErrCount = ErrCount + 1
@@ -576,7 +576,7 @@ End Sub
 
 Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
    Dim s As String, TypeText As String, Oresul As String, arr() As String, ResultOK As Boolean, i As Integer
-   Dim komm As String, var As String, varpar As String
+   Dim komm As String, Var As String, varpar As String
     
    omax.ReadSelection
    komm = TrimR(omax.Kommando, vbCr)
@@ -585,16 +585,16 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
       TestType = 3
    ElseIf InStr(komm, "y^'=") > 0 Or TestType = 4 Then
      TestType = 4
-      var = InputBox("Enter dependent and independent variable to DEsolve for", "Variable", "y,x")
-      If Trim(var) = vbNullString Then Exit Sub
-      arr = Split(var, ",")
+      Var = InputBox("Enter dependent and independent variable to DEsolve for", "Variable", "y,x")
+      If Trim(Var) = vbNullString Then Exit Sub
+      arr = Split(Var, ",")
       If UBound(arr) < 1 Then Exit Sub
       SolveDEpar arr(0), arr(1)
    ElseIf InStr(komm, "=") > 0 Or TestType = 2 Then
       TestType = 2
-      var = InputBox("Enter variable to solve for", "Variable", "x")
-      If Trim(var) = vbNullString Then Exit Sub
-      MaximaSolvePar (var)
+      Var = InputBox("Enter variable to solve for", "Variable", "x")
+      If Trim(Var) = vbNullString Then Exit Sub
+      MaximaSolvePar (Var)
    Else
       TestType = 1
       beregn
@@ -622,7 +622,7 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
       Selection.TypeParagraph
       Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
       Selection.TypeParagraph
-      Selection.TypeText vbTab & "If TestSolve(" & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
+      Selection.TypeText vbTab & "If TestSolve(" & Trim(ConvertToVBAString(komm)) & " , """ & Var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
    ElseIf TestType = 3 Then
       Selection.TypeParagraph
       Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
@@ -632,7 +632,7 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
       Selection.TypeParagraph
       Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
       Selection.TypeParagraph
-      Selection.TypeText vbTab & "If TestSolveDE(" & Trim(ConvertToVBAString(komm)) & " , """ & var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
+      Selection.TypeText vbTab & "If TestSolveDE(" & Trim(ConvertToVBAString(komm)) & " , """ & Var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
    End If
    Selection.TypeParagraph
 
@@ -678,8 +678,8 @@ Function TestBeregn(komm As String, resul As String) As Boolean
     PerformTest 1, komm, resul
     If StopNow Then TestBeregn = True ' betyder stop
 End Function
-Function TestSolveDE(komm As String, var As String, resul As String) As Boolean
-    PerformTest 3, komm, resul, var
+Function TestSolveDE(komm As String, Var As String, resul As String) As Boolean
+    PerformTest 3, komm, resul, Var
     If StopNow Then TestSolveDE = True ' betyder stop
 End Function
 Sub GotoPrevEq()
@@ -688,8 +688,8 @@ Sub GotoPrevEq()
         Selection.EndKey Unit:=wdLine
     Loop
 End Sub
-Function TestSolve(komm As String, var As String, resul As String, Optional Instruk As String) As Boolean
-    PerformTest 2, komm, resul, var, Instruk
+Function TestSolve(komm As String, Var As String, resul As String, Optional Instruk As String) As Boolean
+    PerformTest 2, komm, resul, Var, Instruk
     If StopNow Then TestSolve = True ' betyder stop
     
     Exit Function
@@ -702,7 +702,7 @@ Function TestSolve(komm As String, var As String, resul As String, Optional Inst
         UfWait2.Label_tip.Caption = komm & vbCrLf & Instruk
     End If
     InsertTestMath komm, False
-    MaximaSolvePar (var)
+    MaximaSolvePar (Var)
     MoveCursorToEndOfCalculation
     If Not omax.MaximaOutput = resul Then
         Selection.Font.ColorIndex = wdRed
@@ -727,10 +727,10 @@ Function TestSolve(komm As String, var As String, resul As String, Optional Inst
     TestCount = TestCount + 1
 End Function
 
-Sub TestSolve2(komm As String, var As String, resul As String)
+Sub TestSolve2(komm As String, Var As String, resul As String)
     omax.Kommando = komm
     DoEvents
-    omax.MaximaSolve (var)
+    omax.MaximaSolve (Var)
     Wait 0.5
     If Not omax.MaximaOutput = resul Then
         Selection.TypeText (" - Fejl - " & omax.Kommando & " - " & omax.MaximaOutput)

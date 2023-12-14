@@ -14,7 +14,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     ' gtype="", "3d", "CAS"
     Dim cmd As String, UrlLink As String
     Dim sl As New CSortList
-    Dim var As String, DefList As String
+    Dim Var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
     Dim DefS As String
     Dim arr As Variant, uvar As String
@@ -41,8 +41,8 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     For i = 0 To omax.defindex - 1
         DefList = DefList & "," & omax.DefName(i)
         ea.Text = omax.DefValue(i)
-        var = ea.GetNextVar
-        If var = "" Then
+        Var = ea.GetNextVar
+        If Var = "" Then
             sl.Add omax.DefName(i), omax.DefValue(i), 0
         Else
             k = 0
@@ -295,7 +295,7 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
 ' bruges ikke mere, men måske er metoden bedre, da den gør noget med rækkefølgen
     Dim cmd As String, i As Integer, k As Integer, j As Integer, fktudtryk As String, UrlLink As String, p As Integer
     Dim sl As New CSortList
-    Dim var As String, DefList As String
+    Dim Var As String, DefList As String
     Dim ea As New ExpressionAnalyser, arr() As String
     Dim geogebrafil As New CGeoGebraFile
     
@@ -305,8 +305,8 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
     For i = 0 To omax.defindex - 1
         ea.Text = omax.DefValue(i)
         DefList = DefList & "," & omax.DefName(i)
-        var = ea.GetNextVar
-        If var = "" Then
+        Var = ea.GetNextVar
+        If Var = "" Then
             sl.Add omax.DefName(i), omax.DefValue(i), 0
         Else
             k = 0
@@ -991,15 +991,15 @@ Sub CreateGeoGebraFil(geogebrasti As String)
 '    defs = ConvertToAscii(omax.defstring)
 '    arr = Split(defs, ";")
     Dim sl As New CSortList
-    Dim var As String, DefList As String
+    Dim Var As String, DefList As String
     Dim k As Integer
     
     ' sæt definitioner i rigtig rækkefølge
     For i = 0 To omax.defindex - 1
         ea.Text = omax.DefValue(i)
         DefList = DefList & "," & omax.DefName(i)
-        var = ea.GetNextVar
-        If var = "" Then
+        Var = ea.GetNextVar
+        If Var = "" Then
             sl.Add omax.DefName(i), omax.DefValue(i), 0
         Else
             k = 0
@@ -1130,30 +1130,30 @@ Function DefinerKonstanter(Expr As String, ByRef DefList As String, Optional ByR
 ' deflist er en liste af variable der er defineret
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim var As String, var2 As String, i As Integer, p As Integer
+Dim Var As String, var2 As String, i As Integer, p As Integer
 Dim varval As String
     ea.Text = DefList
     ea2.Text = Expr
     ea2.Pos = 0
     Do
-        var = ea2.GetNextVar
+        Var = ea2.GetNextVar
 '        MsgBox AscW(var) & vbCrLf & VBA.ChrW(960)
         ea2.Pos = ea2.Pos + 1
 '        If var = "z" Then geogebrafil.Show3D = True  ' ikke implementeret endnu
-        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (Left(var, 1) = "_") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "z" And var <> "e" And var <> "pi" And var <> "matrix" And var <> "if" And var <> "elseif" And var <> "then" And var <> "and" And var <> "or" And var <> "else" And var <> "amp" And var <> VBA.ChrW(960) Then  ' 960=pi
-            varval = InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(364), Sprog.A(365), "1")
+        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (Left(Var, 1) = "_") And Not (ea.IsFunction(Var)) And Not (ea.ContainsVar(Var)) And Var <> "" And Var <> "x" And Var <> "y" And Var <> "z" And Var <> "e" And Var <> "pi" And Var <> "matrix" And Var <> "if" And Var <> "elseif" And Var <> "then" And Var <> "and" And Var <> "or" And Var <> "else" And Var <> "amp" And Var <> VBA.ChrW(960) Then  ' 960=pi
+            varval = InputBox(Sprog.A(363) & " " & Var & vbCrLf & vbCrLf & Sprog.A(364), Sprog.A(365), "1")
             If Len(varval) > 0 Then
                 If Not geogebrafil Is Nothing Then
-                    geogebrafil.CreateFunction var, varval, False, False
+                    geogebrafil.CreateFunction Var, varval, False, False
                 Else
-                    UrlLink = UrlLink & var & "=" & varval & ";"
+                    UrlLink = UrlLink & Var & "=" & varval & ";"
                 End If
-                DefList = DefList & "," & var
+                DefList = DefList & "," & Var
                 ea.Text = DefList
                 i = i + 1
             End If
         End If
-    Loop While var <> ""
+    Loop While Var <> ""
     
 '    If i > 1 Then ' kan ikke lige se hvad denne sektion er nÀdvendig for
 '        var = Split(DefList, ",")(0)
@@ -1167,7 +1167,7 @@ Dim varval As String
 '            End If
 '    End If
     
-    DefinerKonstanter = var
+    DefinerKonstanter = Var
 End Function
 Sub TestZipFile()
 

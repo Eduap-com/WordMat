@@ -563,16 +563,16 @@ Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
         ElseIf InStr(MaxProc.LastMaximaOutput, "Is the matrix  1. Diagonal  2. Symmetric  3. Antisymmetric  4. General") Then
             svar = InputBox(MaxProc.LastMaximaOutput, "spr", "")    ' MaxProc.Question skal først til passes
         ElseIf InStr(MaxProc.LastMaximaOutput, "variables to solve for?") Then
-            Dim antalvar As Integer, var As String, ea As New ExpressionAnalyser, sprtext As String
+            Dim antalvar As Integer, Var As String, ea As New ExpressionAnalyser, sprtext As String
             Pos = InStr(MaxProc.LastMaximaOutput, " variables to solve for?")
             antalvar = val(Mid(MaxProc.LastMaximaOutput, Pos - 2, 2))
             sprtext = Sprog.A(416) & " " & antalvar & " " & Sprog.A(417)
             ea.Text = right(MaxProc.LastMaximaOutput, Len(MaxProc.LastMaximaOutput) - Pos - 24)
             ea.SetSquareBrackets
             ea.Pos = 0
-            var = ea.GetNextBracketContent
+            Var = ea.GetNextBracketContent
 igen:
-            svar = InputBox(sprtext, "spr", var)
+            svar = InputBox(sprtext, "spr", Var)
             If svar = "" Then
                 svar = "end;%;%;%"
             Else
@@ -607,7 +607,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 ' for mac. Starts maxima, sends command, receives output. closes maxima
 #If Mac Then
 
-    Dim s As String, i As Integer, WT As String, p As Long, p2 As Long
+    Dim s As String, i As Integer, WT As String, p As Long, p2 As Long, Var As String
     Dim FN As String
     Dim UfWait2 As UserFormWaitForMaxima
     If StopTime > 0 Then
@@ -635,12 +635,23 @@ start:
             StopNow = True
         End If
     ElseIf InStr(s, "positive or negative?") > 0 Then
-        p = InStrRev(s, vbLf)
-        p2 = InStr(p, s, " ")
-'        If Sprog.SprogNr = 1 Then
-            MsgBox "Problemet kunne ikke løses da fortegnet på en variabel er ukendt. Du kan formenlig løse problemet ved at indsætte en definition som fx 'Definer: " & Mid(s, p, p2 - p) & ">0'" & vbCrLf & vbCrLf & "Maxima spurgte om:" & vbCrLf & right(s, Len(s) - p)
-'        Else
-'        End If
+        p = InStrRev(s, vbCr)
+        p = InStrRev(s, vbCr, p - 2)
+        If p > 0 Then
+            p2 = InStr(p + 4, s, " ")
+            If p2 > 0 Then
+                Var = Mid(s, p + 2, p2 - p)
+            Else
+                Var = "x"
+            End If
+        Else
+            Var = "x"
+        End If
+        If Sprog.SprogNr = 1 Then
+            MsgBox "Problemet kunne ikke løses da fortegnet på en variabel er ukendt. Du kan formenlig løse problemet ved at indsætte en definition som fx" & vbCr & " 'Definer: " & Var & ">0'" & vbCrLf & "Maxima spurgte om:" & vbCrLf & right(s, Len(s) - p)
+        Else
+            MsgBox "The problem could not be solved, because the sign of a variable is unknown. You can probably solve the problem by inserting a definition. Example:" & vbCr & " 'Define: " & Var & ">0'" & vbCrLf & "Maxima Asked:" & vbCrLf & right(s, Len(s) - p)
+        End If
     End If
 '    i = 0
 '    Do Until Dir(FN) > "" Or i > 80
@@ -2149,11 +2160,11 @@ Sub Differentier(variabel As String)
     Call RunMaxima
 slut:
 End Sub
-Sub UserRegression(fkt As String, var As String, xlist As String, ylist As String, prec As Integer, VarGuess As String)
+Sub UserRegression(fkt As String, Var As String, xlist As String, ylist As String, prec As Integer, VarGuess As String)
     Dim pkommando As String
     pkommando = fkt
 
-    Kommando = "GeneralRegr(" & CodeForMaxima(fkt) & "," & var & "," & xlist & "," & ylist & ",1e-" & prec & "," & VarGuess & ")"
+    Kommando = "GeneralRegr(" & CodeForMaxima(fkt) & "," & Var & "," & xlist & "," & ylist & ",1e-" & prec & "," & VarGuess & ")"
     If Not Radians Then
         Kommando = "ConvertToDegr(" & Kommando & ")"
     End If
@@ -2340,7 +2351,7 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
 
 slut:
 End Sub
-Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String, Optional SaveFile As Boolean = False)
+Sub Plot2D(forskrifter As String, punkter As String, Var As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String, Optional SaveFile As Boolean = False)
 ' forskrifter adskilt ad komma
 '    text = "load(draw)$draw2d("
     Dim Text As String
@@ -2365,7 +2376,7 @@ Sub Plot2D(forskrifter As String, punkter As String, var As String, xmin As Stri
     arr = Split(forskrifter, ";")
     For i = 0 To UBound(arr)
         fkt = omax.CodeForMaxima(arr(i))
-        Text = Text & ",key=""" & ConvertToAscii(arr(i)) & """,color=" & GetNextColor() & ",explicit(" & fkt & "," & var & "," & xmin & "," & xmax & ")"
+        Text = Text & ",key=""" & ConvertToAscii(arr(i)) & """,color=" & GetNextColor() & ",explicit(" & fkt & "," & Var & "," & xmin & "," & xmax & ")"
     Next
     If punkter <> "" Then
         Text = Text & ",key=""punkter"",point_type=filled_circle,point_size=1,points(" & punkter & ")"
@@ -2636,7 +2647,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     Dim pos5 As Long
     Dim posog As Long
     Dim arr As Variant, arr2() As String, arr3() As String
-    Dim var As String
+    Dim Var As String
     Dim startn As String
     Dim slutn As String
     Dim Expr As String
@@ -3389,7 +3400,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 MsgBox Sprog.A(425), vbOKOnly, Sprog.Error '"Notationen for sumtegnet er ikke korrekt. Den nedre grænse skal skrives f.eks. i=1"
                 GoTo videre
             End If
-            var = arr(0)
+            Var = arr(0)
             startn = arr(1)
             slutn = Mid(Text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
@@ -3407,7 +3418,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
             '            If sluts < 1 Then sluts = Len(text)
             '            expr = Mid(text, ends + 1, sluts - ends)
             '        End If
-            Text = Left(Text, Pos - 1) & "sum(" & Expr & "," & var & "," & startn & "," & slutn & ")" & right(Text, Len(Text) - sluts)
+            Text = Left(Text, Pos - 1) & "sum(" & Expr & "," & Var & "," & startn & "," & slutn & ")" & right(Text, Len(Text) - sluts)
         End If
     Loop While Pos > 0
 
@@ -3428,12 +3439,12 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 MsgBox Sprog.A(426)
                 GoTo videre
             End If
-            var = arr(0)
+            Var = arr(0)
             startn = arr(1)
             slutn = Mid(Text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
             Expr = Mid(Text, ends + 1, sluts - ends)
-            Text = Left(Text, Pos - 1) & "product(" & Expr & "," & var & "," & startn & "," & slutn & ")" & right(Text, Len(Text) - sluts)
+            Text = Left(Text, Pos - 1) & "product(" & Expr & "," & Var & "," & startn & "," & slutn & ")" & right(Text, Len(Text) - sluts)
         End If
     Loop While Pos > 0
 
@@ -3449,7 +3460,7 @@ videre:
             ea.Text = Text
             If ea.ChrByIndex(Pos + 3) = VBA.ChrW(9516) Or ea.ChrByIndex(Pos + 3) = "_" Then
                 ea.Pos = Pos
-                var = ea.GetNextBracketContent
+                Var = ea.GetNextBracketContent
                 ends = ea.Pos
 
                 '        If ea.ChrByIndex(ends) = VBA.ChrW(12310) Then
@@ -3476,16 +3487,16 @@ videre:
                 sluts = ea.FindHierakiBreak(2)
                 Expr = Mid(Text, ends, sluts - ends + 1)
 
-                arr = Split(var, VBA.ChrW(8594))
-                var = Trim(arr(0))
-                DiffEqVar = var
+                arr = Split(Var, VBA.ChrW(8594))
+                Var = Trim(arr(0))
+                DiffEqVar = Var
                 app = Trim(arr(1))
                 If right(app, 2) = "^+" Then
                     app = Left(app, Len(app) - 2) & ",plus"
                 ElseIf right(app, 2) = "^-" Then
                     app = Left(app, Len(app) - 2) & ",minus"
                 End If
-                Text = Left(Text, Pos - 1) & "limit(" & Expr & "," & var & "," & app & ")" & right(Text, Len(Text) - sluts)
+                Text = Left(Text, Pos - 1) & "limit(" & Expr & "," & Var & "," & app & ")" & right(Text, Len(Text) - sluts)
             Else
                 Pos = Pos + 3
             End If
@@ -3524,13 +3535,13 @@ videre:
 
             If ea.ChrByIndex(Pos + antalm + 1) = "(" Then
                 '            var = ea.ChrByIndex(pos + 3 + antalm)
-                var = ea.GetNextBracketContent(Pos + 1 + antalm)
-                varl = Len(var) + 2
+                Var = ea.GetNextBracketContent(Pos + 1 + antalm)
+                varl = Len(Var) + 2
             Else
                 If DiffEqVar = "" Then
-                    var = "x"    ' hvis ingen variabel antages x
+                    Var = "x"    ' hvis ingen variabel antages x
                 Else
-                    var = DiffEqVar    ' hvis diffligning så antages diffeqvar
+                    Var = DiffEqVar    ' hvis diffligning så antages diffeqvar
                 End If
                 varl = 0
             End If
@@ -3557,10 +3568,10 @@ videre:
                     '                GoTo fejl
                 ElseIf ea.IsLetterPos(ea.Pos - 2) Then    ' sin(x)'
                     F = ea.GetPrevVar(ea.Pos - 1)
-                    Text = Left(Text, ea.Pos - Len(F)) & "subst(" & var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
+                    Text = Left(Text, ea.Pos - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
                     di = di + 1
                 Else    ' (x^2)'
-                    Text = Left(ea.Text, ea.Pos - 2) & "diff(" & udtryk & "," & var & "," & antalmS & ")" & right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
+                    Text = Left(ea.Text, ea.Pos - 2) & "diff(" & udtryk & "," & Var & "," & antalmS & ")" & right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
                 End If
             ElseIf ea.ChrByIndex(Pos - 2 - Len(subt)) = ")" And Len(subt) > 0 And Len(subt) = antalm Then ' partiel (...)_xy''
                   s = ea.GetPrevBracketContent(Pos - 2)
@@ -3577,15 +3588,15 @@ videre:
                   Next
                  Text = Left(Text, Pos - 1 - Len(F)) & s & right(Text, Len(Text) - Pos - varl - antalm)
                Else
-                Text = Left(Text, Pos - 1 - Len(F)) & "diff(" & F & "," & var & "," & antalmS & ")" & right(Text, Len(Text) - Pos - varl - antalm)
+                Text = Left(Text, Pos - 1 - Len(F)) & "diff(" & F & "," & Var & "," & antalmS & ")" & right(Text, Len(Text) - Pos - varl - antalm)
                End If
             ElseIf ea.ChrByIndex(Pos + antalm + 1) = "(" Then    ' hvis f'(x)
 msat:
-                If DiffEqVar = var Or CasType = 1 Or CasType = 2 Then  'hvis diffligning så ingen subst
+                If DiffEqVar = Var Or CasType = 1 Or CasType = 2 Then  'hvis diffligning så ingen subst
                   If Len(subt) > 0 And Len(subt) = antalm Then ' hvis partiel
-                        Text = Left(Text, Pos - 1 - Len(F)) & "diff(" & F & "(" & var & ")," & var & "," & antalmS & ")" & right(Text, Len(Text) - Pos - varl - antalm)
+                        Text = Left(Text, Pos - 1 - Len(F)) & "diff(" & F & "(" & Var & ")," & Var & "," & antalmS & ")" & right(Text, Len(Text) - Pos - varl - antalm)
                     Else
-                        Text = Left(Text, Pos - 1 - Len(F)) & "substitute(diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & var & ")" & right(Text, Len(Text) - Pos - varl - antalm)
+                        Text = Left(Text, Pos - 1 - Len(F)) & "substitute(diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & right(Text, Len(Text) - Pos - varl - antalm)
                         di = di + 1
                     End If
                 Else    ' ikke diff ligning
@@ -3593,7 +3604,7 @@ msat:
 '                     s = Left(f, pos2 - 1) & "(" & var & ")"
                      f2 = Left(F, pos2 - 1)
                      s = "last(fundef(" & f2 & "))"
-                     vararr = Split(var, ",") ' ;?
+                     vararr = Split(Var, ",") ' ;?
                      For i = 1 To antalm
 '                        s = "diff(" & s & "," & Mid(subt, i, 1) & ",1)"
                         s = "diff(" & s & "," & Mid(subt, i, 1) & ",1)"
@@ -3605,7 +3616,7 @@ msat:
                      s = Left(s2, Len(s2) - 1) & "]," & s & ")"
                     Text = Left(Text, Pos - 1 - Len(F)) & s & right(Text, Len(Text) - Pos - varl - antalm)
                   Else ' alm ikke partiel f'(x)
-                    Text = Left(Text, Pos - 1 - Len(F)) & "subst(" & var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
+                    Text = Left(Text, Pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
                     di = di + 1
                   End If
                 End If
@@ -3657,22 +3668,22 @@ msat:
                     pos2 = ea.Pos
                 End If
             End If
-            var = ea.GetNextVar(ea.Pos - 1)
+            Var = ea.GetNextVar(ea.Pos - 1)
             If Len(integrand) > 0 Then
-                If Len(integrand) < 3 And Mid(ea.Text, pos2 - Len(var), 2 + Len(var)) = "(" & var & ")" Then    ' hvis speciel notation med \int (dx)/(bla bla)
+                If Len(integrand) < 3 And Mid(ea.Text, pos2 - Len(Var), 2 + Len(Var)) = "(" & Var & ")" Then    ' hvis speciel notation med \int (dx)/(bla bla)
                     ea.SetNormalBrackets
                     integrand = ea.GetNextBracketContent(pos2 + 1)
                     pos2 = ea.Pos - 1
                 End If
-                If Len(var) < 2 Then
+                If Len(Var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
                     GoTo slut
                 End If
-                var = right(var, Len(var) - 1)
+                Var = right(Var, Len(Var) - 1)
                 integrand = Trim(integrand)
-                pos2 = pos2 + Len(var)
-                If Len(integrand) > 0 And Len(var) > 0 Then
-                    IntegrationVars = IntegrationVars & var & ";"
+                pos2 = pos2 + Len(Var)
+                If Len(integrand) > 0 And Len(Var) > 0 Then
+                    IntegrationVars = IntegrationVars & Var & ";"
                     poss = InStr(integrand, VBA.ChrW(9618))
                     posn = InStr(integrand, "_")
                     If Mid(integrand, posn + 1, 1) = "(" Then
@@ -3688,10 +3699,10 @@ msat:
                         upper = Mid(integrand, poso + 1, poss - poso - 1)
                         '        text = Left(text, posn - 1) & Mid(text, poss + 1, pos2 - poss - 1) & "," & Mid(text, pos2 + 1, 1) & "," & nedre & "," & upper & ")" & Mid(text, pos2 + 2, Len(text) - pos2 - 1)
                         If CasType = 0 Then
-                           integrand = right(integrand, Len(integrand) - poss) & "," & var & "," & nedre & "," & upper & ")"
+                           integrand = right(integrand, Len(integrand) - poss) & "," & Var & "," & nedre & "," & upper & ")"
                         Else ' geogebra understøtter kun at variabel er x
                            ea2.Text = right(integrand, Len(integrand) - poss)
-                           If var <> "x" Then ea2.ReplaceVar var, "x", 1
+                           If Var <> "x" Then ea2.ReplaceVar Var, "x", 1
                            integrand = ea2.Text & "," & nedre & "," & upper & ")"
                         End If
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktiontegn
@@ -3699,17 +3710,17 @@ msat:
                         End If
                         If MaximaExact = 2 Then
                             '                        ea.text = Replace(ea.text, VBA.ChrW(8747), "NIntegrate(", 1, 1)
-                            ea.Text = Left(ea.Text, Pos - 1) & "NIntegrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) + 2)
+                            ea.Text = Left(ea.Text, Pos - 1) & "NIntegrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
                         Else
-                            ea.Text = Left(ea.Text, Pos - 1) & "Integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) + 2)
+                            ea.Text = Left(ea.Text, Pos - 1) & "Integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
                             '                        ea.text = Replace(ea.text, VBA.ChrW(8747), "Integrate(", 1, 1)
                         End If
                     Else    ' ubestemt integrale
-                        integrand = integrand & "," & var & ")"
+                        integrand = integrand & "," & Var & ")"
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktionstegn
                             integrand = right(integrand, Len(integrand) - 1)
                         End If
-                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) + 2)
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
                     End If
                     i = i + 1
                 End If
@@ -3742,12 +3753,12 @@ msat:
                 pos2 = ea.Pos
             End If
             If Len(integrand) > 0 Then
-                var = ea.GetNextVar(ea.Pos - 1)
-                If Len(var) < 2 Then
+                Var = ea.GetNextVar(ea.Pos - 1)
+                If Len(Var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
                     GoTo slut
                 End If
-                var = right(var, Len(var) - 1)
+                Var = right(Var, Len(Var) - 1)
                 var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
                     ConvertErrorText = Sprog.A(428)
@@ -3755,9 +3766,9 @@ msat:
                 End If
                 var2 = right(var2, Len(var2) - 1)
                 integrand = Trim(integrand)
-                pos2 = pos2 + Len(var)
-                If Len(integrand) > 0 And Len(var) > 0 And Len(var2) > 0 Then
-                    IntegrationVars = IntegrationVars & var & ";"
+                pos2 = pos2 + Len(Var)
+                If Len(integrand) > 0 And Len(Var) > 0 And Len(var2) > 0 Then
+                    IntegrationVars = IntegrationVars & Var & ";"
                     poss = InStr(integrand, VBA.ChrW(9618))
                     posn = InStr(integrand, "_")
                     If Mid(integrand, posn + 1, 1) = "(" Then
@@ -3772,11 +3783,11 @@ msat:
                         ConvertErrorText = Sprog.A(429)
                         GoTo slut
                     Else    ' ubestemt integrale
-                        integrand = integrand & "," & var & ")," & var2 & ")"
+                        integrand = integrand & "," & Var & ")," & var2 & ")"
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktionstegn
                             integrand = right(integrand, Len(integrand) - 1)
                         End If
-                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) - Len(var2))
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) - Len(var2))
                     End If
                     i = i + 1
                 End If
@@ -3808,12 +3819,12 @@ msat:
                 pos2 = ea.Pos
             End If
             If Len(integrand) > 0 Then
-                var = ea.GetNextVar(ea.Pos - 1)
-                If Len(var) < 2 Then
+                Var = ea.GetNextVar(ea.Pos - 1)
+                If Len(Var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
                     GoTo slut
                 End If
-                var = right(var, Len(var) - 1)
+                Var = right(Var, Len(Var) - 1)
                 var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
                     ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. Måske har du brugt d i anden sammenhæng. Brug da differential d \dd"
@@ -3827,9 +3838,9 @@ msat:
                 End If
                 var3 = right(var3, Len(var3) - 1)
                 integrand = Trim(integrand)
-                pos2 = pos2 + Len(var)
-                If Len(integrand) > 0 And Len(var) > 0 And Len(var2) > 0 Then
-                    IntegrationVars = IntegrationVars & var & ";"
+                pos2 = pos2 + Len(Var)
+                If Len(integrand) > 0 And Len(Var) > 0 And Len(var2) > 0 Then
+                    IntegrationVars = IntegrationVars & Var & ";"
                     poss = InStr(integrand, VBA.ChrW(9618))
                     posn = InStr(integrand, "_")
                     If Mid(integrand, posn + 1, 1) = "(" Then
@@ -3844,11 +3855,11 @@ msat:
                         ConvertErrorText = Sprog.A(429) '"Du kan ikke bruge dobbeltintegraltegnet til bestemte integraler. Brug to enkeltintegraler."
                         GoTo slut
                     Else    ' ubestemt integrale
-                        integrand = integrand & "," & var & ")," & var2 & ")," & var3 & ")"
+                        integrand = integrand & "," & Var & ")," & var2 & ")," & var3 & ")"
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktionstegn
                             integrand = right(integrand, Len(integrand) - 1)
                         End If
-                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(var) - Len(var2) - Len(var3) - 2)
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) - Len(var2) - Len(var3) - 2)
                     End If
                     i = i + 1
                 End If
@@ -4205,7 +4216,7 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
     
     Dim num As String, dem As String, vararr(9) As String, varind As Integer, antalm2 As Integer
     Dim udtryk1 As String, udtryk2 As String, Pos As Integer, pos3 As Integer, antalm As Integer
-    Dim pos2 As Integer, var As String, i As Integer, udtryk As String, posstart As Integer, posslut As Integer
+    Dim pos2 As Integer, Var As String, i As Integer, udtryk As String, posstart As Integer, posslut As Integer
     Dim ea As New ExpressionAnalyser
     ea.SetNormalBrackets
     Do
@@ -4225,10 +4236,10 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
                 pos2 = InStr(dem, DiffChr)
                 Do
                     If Mid(dem, pos2 + 2, 1) = "^" Then
-                        var = Mid(dem, pos2 + 1, 1)
+                        Var = Mid(dem, pos2 + 1, 1)
                         antalm2 = Mid(dem, pos2 + 3, 1)
                         For i = varind To varind + antalm2 - 1
-                            vararr(varind) = var
+                            vararr(varind) = Var
                             varind = varind + 1
                         Next
                     Else
@@ -6768,7 +6779,7 @@ slut:
 End Sub
 Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
 ' finder variable i texten og putter dem i Vars-string
-    Dim var As String
+    Dim Var As String
     Dim Pos As Integer
     Dim i As Integer
     Dim j As Integer
@@ -6807,27 +6818,27 @@ Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
             End If
         Next
     End If
-    var = ea.GetNextVar()
-    var = Replace(var, vbCrLf, "")
-    Do While var <> ""
-        If ea.ChrByIndex(ea.Pos + 1) <> "(" And ea.ChrByIndex(ea.Pos + 1) <> "'" And ea.ChrByIndex(ea.Pos + 1) <> VBA.ChrW(8289) And Not (InStr(DefString, var & ":") = 1 Or InStr(DefString, "$" & var & ":") > 0) And InStr(var, "qkqg") < 1 Then
+    Var = ea.GetNextVar()
+    Var = Replace(Var, vbCrLf, "")
+    Do While Var <> ""
+        If ea.ChrByIndex(ea.Pos + 1) <> "(" And ea.ChrByIndex(ea.Pos + 1) <> "'" And ea.ChrByIndex(ea.Pos + 1) <> VBA.ChrW(8289) And Not (InStr(DefString, Var & ":") = 1 Or InStr(DefString, "$" & Var & ":") > 0) And InStr(Var, "qkqg") < 1 Then
             varexists = False
             For i = 1 To varind - 1
-                If vararr(i) = var Then varexists = True
+                If vararr(i) = Var Then varexists = True
             Next
-            If Not (varexists) And var <> "e" And var <> "i" And var <> "pi" And var <> "inf" And var <> "minf" Then
+            If Not (varexists) And Var <> "e" And Var <> "i" And Var <> "pi" And Var <> "inf" And Var <> "minf" Then
                 If vars <> "" Then
-                    vars = vars & ";" & var
+                    vars = vars & ";" & Var
                 Else
-                    vars = var
+                    vars = Var
                 End If
-                vararr(varind) = var
+                vararr(varind) = Var
                 varind = varind + 1
                 AntalVars = AntalVars + 1
             End If
         End If
         ea.Pos = ea.Pos + 1
-        var = ea.GetNextVar()
+        Var = ea.GetNextVar()
     Loop
 
 
@@ -7310,7 +7321,7 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
     On Error GoTo slut
     Dim NotSolved As Boolean
     Dim ea As New ExpressionAnalyser
-    Dim var As String
+    Dim Var As String
     Dim arr As Variant
     If CASengine > 0 Then
         ea.SetTuborgBrackets
@@ -7322,13 +7333,13 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
         ea.Text = arr(1)    'højresiden
         IsSolved = True
         Do
-            var = ea.GetNextVar
+            Var = ea.GetNextVar
             ea.Pos = ea.Pos + 1
-            If var = variabel Then
+            If Var = variabel Then
                 IsSolved = False    'variabel fundet på højresiden så er det ihvertfald ikke løst
                 GoTo slut
             End If
-        Loop Until var = ""
+        Loop Until Var = ""
 
         If Left(Ligning, 1 + Len(variabel)) = variabel & "=" Then  '  ikke nok alene
             IsSolved = True

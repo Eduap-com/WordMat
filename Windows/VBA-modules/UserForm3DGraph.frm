@@ -24,7 +24,7 @@ Private palindex As Integer
 Private Sub CommandButton_geogebra_Click()
 Dim s As String, vekt As String, arr() As String, i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String, cmd As String
-    Dim sl As New CSortList, DefList As String, var As String, k As Integer, fktudtryk As String, UrlLink As String, p As Integer
+    Dim sl As New CSortList, DefList As String, Var As String, k As Integer, fktudtryk As String, UrlLink As String, p As Integer
     
     ea.SetNormalBrackets
 
@@ -35,8 +35,8 @@ Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As 
     For i = 0 To omax.defindex - 1
         DefList = DefList & "," & omax.DefName(i)
         ea.Text = omax.DefValue(i)
-        var = ea.GetNextVar
-        If var = "" Then
+        Var = ea.GetNextVar
+        If Var = "" Then
             sl.Add omax.DefName(i), omax.DefValue(i), 0
         Else
             k = 0

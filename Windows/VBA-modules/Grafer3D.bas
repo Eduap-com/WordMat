@@ -6,7 +6,7 @@ Dim Kommando As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim arr As Variant
 Dim i As Integer, UrlLink As String, cmd As String, j As Integer
-    Dim var As String, DefList As String
+    Dim Var As String, DefList As String
 
     Dim ea As New ExpressionAnalyser
 '    Dim ea2 As New ExpressionAnalyser

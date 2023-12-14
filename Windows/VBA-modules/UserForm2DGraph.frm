@@ -2278,7 +2278,7 @@ End Function
 Sub OpdaterDefinitioner()
 ' ser efter variable i textboxene og indsætter under definitioner
 Dim vars As String
-Dim var As String, var2 As String
+Dim Var As String, var2 As String
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim arr As Variant
@@ -2308,23 +2308,23 @@ Dim i As Integer
     arr = Split(TextBox_definitioner.Text, VbCrLfMac)
     
     Do
-    var = ea.GetNextListItem
-    var = Replace(var, VbCrLfMac, "")
+    Var = ea.GetNextListItem
+    Var = Replace(Var, VbCrLfMac, "")
     For i = 0 To UBound(arr)
         If arr(i) <> "" Then
         var2 = Split(arr(i), "=")(0)
-        If var2 = var Then
-            var = ""
+        If var2 = Var Then
+            Var = ""
             Exit For
         End If
         End If
     Next
-    If var <> "" And var <> "if" And var <> "then" And var <> "else" And var <> "elseif" And var <> "and" And var <> "or" Then
+    If Var <> "" And Var <> "if" And Var <> "then" And Var <> "else" And Var <> "elseif" And Var <> "and" And Var <> "or" Then
 '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
         If Len(TextBox_definitioner.Text) > 0 Then
             TextBox_definitioner.Text = TextBox_definitioner.Text & VbCrLfMac
         End If
-        TextBox_definitioner.Text = TextBox_definitioner.Text & var & "=1"
+        TextBox_definitioner.Text = TextBox_definitioner.Text & Var & "=1"
     End If
     Loop While ea.Pos <= Len(ea.Text)
 
@@ -2332,20 +2332,20 @@ Dim i As Integer
 End Sub
 Function GetTextboxVars(tb As TextBox, tbvar As TextBox) As String
 Dim ea As New ExpressionAnalyser
-Dim var As String
+Dim Var As String
     If Len(tb.Text) > 0 Then
         omax.vars = ""
         omax.FindVariable (tb.Text)
         If InStr(omax.vars, "x") > 0 Then
-            var = "x"
+            Var = "x"
         ElseIf InStr(omax.vars, "t") > 0 Then
-            var = "t"
+            Var = "t"
         Else
             ea.Text = omax.vars
-            var = ea.GetNextVar(1)
+            Var = ea.GetNextVar(1)
         End If
-        If Len(var) > 0 Then
-            tbvar.Text = var
+        If Len(Var) > 0 Then
+            tbvar.Text = Var
         End If
         omax.vars = RemoveVar(omax.vars, tbvar.Text)
         If Len(omax.vars) > 0 Then
@@ -2355,7 +2355,7 @@ Dim var As String
 End Function
 Function GetTextboxLignVars(tb As TextBox) As String
 Dim ea As New ExpressionAnalyser
-Dim var As String
+Dim Var As String
     If Len(tb.Text) > 0 Then
         omax.vars = ""
         omax.FindVariable (tb.Text)
@@ -2366,12 +2366,12 @@ Dim var As String
         End If
     End If
 End Function
-Function RemoveVar(Text As String, var As String)
+Function RemoveVar(Text As String, Var As String)
 ' fjerner var fra string
 Dim ea As New ExpressionAnalyser
 
 ea.Text = Text
-Call ea.ReplaceVar(var, "")
+Call ea.ReplaceVar(Var, "")
 Text = Replace(ea.Text, ";;", ";")
 If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
 If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
@@ -2468,16 +2468,16 @@ ea2.SetNormalBrackets
     
 End Sub
 
-Sub InsertBoundary(var As String, assumetext As String, tbmin As TextBox, tbmax As TextBox)
+Sub InsertBoundary(Var As String, assumetext As String, tbmin As TextBox, tbmax As TextBox)
 Dim dlhs As String, drhs As String
 Dim arr As Variant
     arr = Split(assumetext, "<")
     If UBound(arr) > 0 Then
         dlhs = Replace(arr(0), "=", "")
         drhs = Replace(arr(1), "=", "")
-        If dlhs = var Then
+        If dlhs = Var Then
             tbmax.Text = drhs
-        ElseIf drhs = var Then
+        ElseIf drhs = Var Then
             tbmin.Text = dlhs
         End If
     End If
@@ -2485,9 +2485,9 @@ Dim arr As Variant
     If UBound(arr) > 0 Then
         dlhs = Replace(arr(0), "=", "")
         drhs = Replace(arr(1), "=", "")
-        If dlhs = var Then
+        If dlhs = Var Then
             tbmin.Text = drhs
-        ElseIf drhs = var Then
+        ElseIf drhs = Var Then
             tbmax.Text = dlhs
         End If
     End If
@@ -2513,7 +2513,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

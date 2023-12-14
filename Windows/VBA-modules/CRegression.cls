@@ -456,7 +456,7 @@ Sub ComputeUserRegr()
     Dim ea As New ExpressionAnalyser
     Dim arr As Variant
     Dim xlist As String, ylist As String
-    Dim i As Long, guess As String, var As String, p As Integer, eps As String
+    Dim i As Long, guess As String, Var As String, p As Integer, eps As String
     On Error GoTo fejl
     xlist = "["
     For i = LBound(xval) To UBound(xval)
@@ -481,23 +481,23 @@ Sub ComputeUserRegr()
     End If
     
     If InStr(fkt, "x") > 0 Then
-        var = "x"
+        Var = "x"
     ElseIf InStr(fkt, "t") > 0 Then
-        var = "t"
+        Var = "t"
     ElseIf InStr(fkt, "a") > 0 Then
-        var = "a"
+        Var = "a"
     ElseIf InStr(fkt, "b") > 0 Then
-        var = "b"
+        Var = "b"
     ElseIf InStr(fkt, "c") > 0 Then
-        var = "c"
+        Var = "c"
     ElseIf InStr(fkt, "y") > 0 Then
-        var = "y"
+        Var = "y"
     ElseIf fkt = vbNullString Then
-        var = "x"
+        Var = "x"
     Else
-        var = ""
+        Var = ""
     End If
-    UserFormUserRegression.TextBox_var.Text = var
+    UserFormUserRegression.TextBox_var.Text = Var
     
     UserFormUserRegression.TextBox_eps.Text = MaximaCifre
     
@@ -507,9 +507,9 @@ Sub ComputeUserRegr()
     fkt = UserFormUserRegression.TextBox_function.Text
     fkt = Replace(fkt, "*", MaximaGangeTegn)
     guess = "[" & UserFormUserRegression.TextBox_guess & "]"
-    var = UserFormUserRegression.TextBox_var.Text
-    If var <> vbNullString And fkt <> vbNullString Then
-        omax.UserRegression ConvertSep(fkt), var, xlist, ylist, CInt(eps), ConvertSep(guess)
+    Var = UserFormUserRegression.TextBox_var.Text
+    If Var <> vbNullString And fkt <> vbNullString Then
+        omax.UserRegression ConvertSep(fkt), Var, xlist, ylist, CInt(eps), ConvertSep(guess)
         p = InStr(omax.KommentarOutput, "R^2=")
         If p > 0 Then
             r = ConvertStringToNumber(right(omax.KommentarOutput, Len(omax.KommentarOutput) - p - 3))

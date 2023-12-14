@@ -459,19 +459,19 @@ Sub DefinerKonstanterGraph(Expr As String, DefList As String, ByRef graphfil As 
 ' deflist er en liste af variable der er defineret
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim var As String
+Dim Var As String
     ea.Text = DefList
     If noty Then ea.Text = ea.Text & ",y"
     ea2.Text = Expr
     ea2.Pos = 0
     Do
-        var = ea2.GetNextVar
+        Var = ea2.GetNextVar
         ea2.Pos = ea2.Pos + 1
-        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (ea.IsFunction(var)) And Not (ea.ContainsVar(var)) And var <> "" And var <> "x" And var <> "y" And var <> "e" And var <> "pi" And var <> "matrix" Then ' måske ikke y? kopieret fra geogebra
-            graphfil.AddCustomFunction var & "=" & InputBox(Sprog.A(363) & " " & var & vbCrLf & vbCrLf & Sprog.A(367), Sprog.A(365), "1")
-            DefList = DefList & "," & var
+        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (ea.IsFunction(Var)) And Not (ea.ContainsVar(Var)) And Var <> "" And Var <> "x" And Var <> "y" And Var <> "e" And Var <> "pi" And Var <> "matrix" Then ' måske ikke y? kopieret fra geogebra
+            graphfil.AddCustomFunction Var & "=" & InputBox(Sprog.A(363) & " " & Var & vbCrLf & vbCrLf & Sprog.A(367), Sprog.A(365), "1")
+            DefList = DefList & "," & Var
         End If
-    Loop While var <> ""
+    Loop While Var <> ""
 
 End Sub
 #End If
@@ -479,16 +479,16 @@ Function ReplaceIndepvarX(fkt As String, Optional ByRef uvar = "") As String
 ' sørger for at indsætte x som uafh variabel
 ' hvis den ikke er i udtrykket spørges
 Dim ea As New ExpressionAnalyser
-Dim var As String
+Dim Var As String
 'Dim uvar As String
 ea.Text = fkt
-var = ea.GetNextVar
+Var = ea.GetNextVar
 ReplacedVar = "x"
-If Not (ea.ContainsVar("x")) And var <> "" And var <> "matrix" Then
+If Not (ea.ContainsVar("x")) And Var <> "" And Var <> "matrix" Then
     If ea.ContainsVar("t") Then
         uvar = "t"
     Else
-        uvar = var
+        uvar = Var
     End If
     uvar = InputBox(Sprog.A(368) & vbCrLf & vbCrLf & "   " & fkt & vbCrLf & vbCrLf, Sprog.A(369), uvar)
     If uvar = "" Then uvar = "x"

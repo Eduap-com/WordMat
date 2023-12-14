@@ -1442,7 +1442,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
     '   UnLockWindow
 End Sub
-Sub MaximaSolveNumeric(Optional var As String)
+Sub MaximaSolveNumeric(Optional Var As String)
 ' grafisk løsning + newton + intervalmetode
 ' var indsættes som den variabel der løses for
     On Error GoTo fejl
@@ -1494,9 +1494,9 @@ Sub MaximaSolveNumeric(Optional var As String)
 
         omax.ReadSelection
         omax.FindVariable
-        If var <> vbNullString Then
-            variabel = var
-            UFSolvenumeric.TextBox_variabel.Text = var
+        If Var <> vbNullString Then
+            variabel = Var
+            UFSolvenumeric.TextBox_variabel.Text = Var
         End If
         UFSolvenumeric.udtryk = omax.Kommando
         UFSolvenumeric.Show
@@ -2510,7 +2510,7 @@ End Function
 Function GetLHSvar(s As String) As String
     Dim arr As Variant
     Dim ea As New ExpressionAnalyser
-    Dim var As String, i As Integer
+    Dim Var As String, i As Integer
     If s = vbNullString Then
         GetLHSvar = vbNullString
         Exit Function
@@ -2520,14 +2520,14 @@ Function GetLHSvar(s As String) As String
     s = arr(0)
     ea.Text = s
     Do
-        var = ea.GetNextVar()
-        If InStr(DeVarList, var) <= 0 Or DeVarList = vbNullString Then
-            DeVarList = DeVarList & var & ","
-            GetLHSvar = var
+        Var = ea.GetNextVar()
+        If InStr(DeVarList, Var) <= 0 Or DeVarList = vbNullString Then
+            DeVarList = DeVarList & Var & ","
+            GetLHSvar = Var
             Exit Function
         End If
         i = i + 1
-    Loop While var <> vbNullString And i < 10
+    Loop While Var <> vbNullString And i < 10
 End Function
 Sub SolveDE()
     SolveDEpar
