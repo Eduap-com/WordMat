@@ -640,7 +640,7 @@ start:
         If p > 0 Then
             p2 = InStr(p + 4, s, " ")
             If p2 > 0 Then
-                Var = Mid(s, p + 2, p2 - p)
+                Var = Mid(s, p + 3, p2 - p - 3)
             Else
                 Var = "x"
             End If
@@ -4115,7 +4115,8 @@ spring:
         '        text = Replace(text, "])^", "])^^")  ' matrix ^ enkelt ^ opløfter kun hvert enkelt element
         Text = Replace(Text, "^", "^^")  ' definerede matricer blev ikke håndteret korrekt med ovenstående. Forsøger nu at erstatte alle og håber det ikke giver andre problemer
 '#If Mac Then ' from 1.18  windows is also sbcl
-        Text = Replace(Text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen ## operator istedet for . Der var tidligere to af disse linjer med _ som *, men det er nok et andet symbol som er forsvundet ved mac åbning. Tror ikke den er vigtig, så fjernet 1.28.1
+        Text = Replace(Text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
+        Text = Replace(Text, "_", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
 '#Else
 '        text = Replace(text, "*", " _ ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
 '#End If
@@ -6826,7 +6827,7 @@ Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
             For i = 1 To varind - 1
                 If vararr(i) = Var Then varexists = True
             Next
-            If Not (varexists) And Var <> "e" And Var <> "i" And Var <> "pi" And Var <> "inf" And Var <> "minf" Then
+            If Not (varexists) And Var <> "e" And Var <> "i" And Var <> "pi" Then
                 If vars <> "" Then
                     vars = vars & ";" & Var
                 Else
