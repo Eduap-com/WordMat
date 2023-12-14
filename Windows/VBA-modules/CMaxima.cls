@@ -607,7 +607,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 ' for mac. Starts maxima, sends command, receives output. closes maxima
 #If Mac Then
 
-    Dim s As String, i As Integer, WT As String
+    Dim s As String, i As Integer, WT As String, p As Long, p2 As Long
     Dim FN As String
     Dim UfWait2 As UserFormWaitForMaxima
     If StopTime > 0 Then
@@ -634,6 +634,13 @@ start:
         Else
             StopNow = True
         End If
+    ElseIf InStr(s, "positive or negative?") > 0 Then
+        p = InStrRev(s, vbLf)
+        p2 = InStr(p, s, " ")
+'        If Sprog.SprogNr = 1 Then
+            MsgBox "Problemet kunne ikke løses da fortegnet på en variabel er ukendt. Du kan formenlig løse problemet ved at indsætte en definition som fx 'Definer: " & Mid(s, p, p2 - p) & ">0'" & vbCrLf & vbCrLf & "Maxima spurgte om:" & vbCrLf & right(s, Len(s) - p)
+'        Else
+'        End If
     End If
 '    i = 0
 '    Do Until Dir(FN) > "" Or i > 80
@@ -4097,8 +4104,7 @@ spring:
         '        text = Replace(text, "])^", "])^^")  ' matrix ^ enkelt ^ opløfter kun hvert enkelt element
         Text = Replace(Text, "^", "^^")  ' definerede matricer blev ikke håndteret korrekt med ovenstående. Forsøger nu at erstatte alle og håber det ikke giver andre problemer
 '#If Mac Then ' from 1.18  windows is also sbcl
-        Text = Replace(Text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
-        Text = Replace(Text, "_", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
+        Text = Replace(Text, "*", " ## ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen ## operator istedet for . Der var tidligere to af disse linjer med _ som *, men det er nok et andet symbol som er forsvundet ved mac åbning. Tror ikke den er vigtig, så fjernet 1.28.1
 '#Else
 '        text = Replace(text, "*", " _ ")    ' egentlig kun vigtig ved matrix gangetegn og problematisk når * ikke er matrix multiplikation, da der så er problemer med hieraki 2/3 . matrix([2],[3]) her ganges 3 ind først. Dog løst med egen _ operator istedet for .
 '#End If
@@ -6809,7 +6815,7 @@ Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
             For i = 1 To varind - 1
                 If vararr(i) = var Then varexists = True
             Next
-            If Not (varexists) And var <> "e" And var <> "i" And var <> "pi" Then
+            If Not (varexists) And var <> "e" And var <> "i" And var <> "pi" And var <> "inf" And var <> "minf" Then
                 If vars <> "" Then
                     vars = vars & ";" & var
                 Else

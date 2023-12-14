@@ -5,6 +5,7 @@
 
 Option Explicit
 Dim objFSO, objFolder, objShell
+
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objShell = CreateObject( "WScript.Shell" )
 
@@ -20,26 +21,21 @@ if Not objFSO.FileExists(sourceFile) Then
 	Wscript.Quit
 End If
 
-CopyFileToSubfolders sourceFile, topLevelFolder
+if Not objFSO.FolderExists(topLevelFolder & "\STARTUP") Then
+	objFSO.CreateFolder(topLevelFolder & "\STARTUP")
+End If
+
+if Not objFSO.FolderExists(topLevelFolder & "\START") Then
+	objFSO.CreateFolder(topLevelFolder & "\START")
+End If
+
+Set objFolder = objFSO.GetFolder(topLevelFolder)
+
+    For Each objSubFolder in objFolder.Subfolders
+		objFSO.CopyFile sourceFile, objSubFolder.Path & "\WordMat.dotm", TRUE
+    Next
 
 set objFSO = Nothing
 set objShell = Nothing
 
 Wscript.Quit
-
-' Recursive subroutine to copy the file to the folder and its subfolders
-Sub CopyFileToSubfolders(sourceFile, folderPath)
-    Dim objFolder, objSubFolder, objFile
-    Set objFolder = objFSO.GetFolder(folderPath)
-
-    ' Copy the file to the current folder
- '   objFSO.CopyFile sourceFile, objFolder.Path & "\"
-
-    ' Recurse through each subfolder
-    For Each objSubFolder in objFolder.Subfolders
-'        CopyFileToSubfolders sourceFile, objSubFolder.Path
-		objFSO.CopyFile sourceFile, objSubFolder.Path & "\"
-    Next
-End Sub
-
-
