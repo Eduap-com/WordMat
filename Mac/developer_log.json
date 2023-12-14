@@ -1,61 +1,29 @@
 {
   "logFormatVersion": 1,
-  "jobId": "ad6e2fb6-1f60-427f-b8fe-9248efbb198b",
+  "jobId": "1cecf1ae-c886-464e-82ce-ae49de1d9335",
   "status": "Invalid",
   "statusSummary": "Archive contains critical validation errors",
   "statusCode": 4000,
   "archiveFilename": "WordMatMacM1-128P.pkg",
-  "uploadDate": "2023-12-05T20:35:31.293Z",
-  "sha256": "4f8b5b19a024c6f21aff7efc3d187d10f5756e1484c371b11693c5ef0f65d869",
+  "uploadDate": "2023-12-07T21:21:05.482Z",
+  "sha256": "f6ca93d19079b9ee3643580549e095cd16b3b2129b5f132365fec0df967209e7",
   "ticketContents": null,
   "issues": [
     {
       "severity": "error",
       "code": null,
-      "path": "WordMatMacM1-128P.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/sbcl 2",
+      "path": "WordMatMacM1-128P.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libpicture.dylib",
       "message": "The binary is not signed.",
       "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
-      "architecture": "x86_64"
+      "architecture": "i386"
     },
     {
       "severity": "error",
       "code": null,
-      "path": "WordMatMacM1-128P.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/sbcl 2",
+      "path": "WordMatMacM1-128P.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libpicture.dylib",
       "message": "The signature does not include a secure timestamp.",
       "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
-      "architecture": "x86_64"
-    },
-    {
-      "severity": "error",
-      "code": null,
-      "path": "WordMatMacM1-128P.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/sbcl 2",
-      "message": "The executable does not have the hardened runtime enabled.",
-      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
-      "architecture": "x86_64"
-    },
-    {
-      "severity": "error",
-      "code": null,
-      "path": "WordMatMacM1-128P.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/Maximatimeout 2",
-      "message": "The binary is not signed.",
-      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087721",
-      "architecture": "x86_64"
-    },
-    {
-      "severity": "error",
-      "code": null,
-      "path": "WordMatMacM1-128P.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/Maximatimeout 2",
-      "message": "The signature does not include a secure timestamp.",
-      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087733",
-      "architecture": "x86_64"
-    },
-    {
-      "severity": "error",
-      "code": null,
-      "path": "WordMatMacM1-128P.pkg/WordMat.pkg Contents/Payload/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima/bin/Maximatimeout 2",
-      "message": "The executable does not have the hardened runtime enabled.",
-      "docUrl": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/resolving_common_notarization_issues#3087724",
-      "architecture": "x86_64"
+      "architecture": "i386"
     }
   ]
 }

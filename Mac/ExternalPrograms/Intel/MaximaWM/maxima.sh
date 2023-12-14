@@ -23,3 +23,5 @@ fi
 #exec "$MAXIMA_PREFIX/bin/maxima" "$1" "$2" "$3" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
 # "$MAXIMA_PREFIX/bin/Maximatimeout" 10
 "$MAXIMA_PREFIX/bin/Maximatimeout" --signal=0 --kill-after=$MaxTime $MaxTime "$MAXIMA_PREFIX/bin/sbcl" --core "$MAXIMA_PREFIX/lib/maxima/5.47.0/binary-sbcl/maxima.core" --batch-string="$2"
+# Denne echo linje skal være der til slut, for at der returneres fra applescript, hvis der spørges om fortegn.
+echo " "
