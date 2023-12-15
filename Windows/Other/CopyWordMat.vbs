@@ -4,7 +4,7 @@
 ''
 
 Option Explicit
-Dim objFSO, objFolder, objShell
+Dim objFSO, objFolder, objSubFolder, objShell
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objShell = CreateObject( "WScript.Shell" )
