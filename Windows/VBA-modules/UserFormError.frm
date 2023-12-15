@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormError
    Caption         =   "Fejl"
    ClientHeight    =   5865
    ClientLeft      =   -30
-   ClientTop       =   75
-   ClientWidth     =   7425
+   ClientTop       =   80
+   ClientWidth     =   7430
    OleObjectBlob   =   "UserFormError.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

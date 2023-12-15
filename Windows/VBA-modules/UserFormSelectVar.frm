@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar
    Caption         =   "Løs ligning"
    ClientHeight    =   4185
    ClientLeft      =   -30
-   ClientTop       =   75
+   ClientTop       =   80
    ClientWidth     =   9360.001
    OleObjectBlob   =   "UserFormSelectVar.frx":0000
    StartUpPosition =   1  'CenterOwner
