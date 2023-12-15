@@ -99,8 +99,7 @@ Sub RunTestSequence()
 '    Application.ScreenRefresh
 
    'til test af enkelt
-
-
+    
    ' Man kan indtaste flere korrekte resultater, bare adskil med @$
     'calculation tests
     If TestBeregn("2+3", "=5") Then GoTo slut
@@ -213,6 +212,12 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     If TestSolve("e^(-x)=2", "x", "x=-ln" & VBA.ChrW(8289) & "(2)") Then GoTo slut
     
+    MaximaExact = 2
+    InsertTestMath "Definer: " & VBA.ChrW(963) & ">0"
+    If TestSolve("0,1=" & VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^5" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "" & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((y-7)/" & VBA.ChrW(963) & ")^2 ) dy", "sigma", VBA.ChrW(963) & "=1,560608") Then GoTo slut
+    InsertSletDef
+    MaximaExact = 1
+    
     '    TestSolve "", "x", "x="
 '    If StopNow Then GoTo slut
     
@@ -250,6 +255,10 @@ Sub RunTestSequence()
     TestBeregn "g(h(a+b))", "=100"
     InsertSletDef
     If StopNow Then GoTo slut
+
+    InsertTestMath "Definer: f(x;y)=x^2" & VBA.ChrW(183) & "y+2y"
+    If TestBeregn(VBA.ChrW(8711) & "f(1;2)", "=(" & VBA.ChrW(9632) & "(4@3))") Then GoTo slut
+    InsertSletDef
 
     MaximaExact = 1 ' exact
     AllTrig = True
@@ -444,6 +453,8 @@ slut:
     
     MaximaVidNotation = False
     MaximaUnits = False
+    MaximaExact = 0 ' Auto
+    CASengine = 0 ' Maxima
     
     AllR.End = Selection.End
     AllR.Select

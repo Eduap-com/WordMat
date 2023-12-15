@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormEquationReference
    Caption         =   "Ligningsreference"
    ClientHeight    =   5505
    ClientLeft      =   30
-   ClientTop       =   170
+   ClientTop       =   165
    ClientWidth     =   4890
    OleObjectBlob   =   "UserFormEquationReference.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -50,6 +50,6 @@ Sub SetCaptions()
     Me.Caption = Sprog.A(15)
     CommandButton_ok.Caption = Sprog.OK
     CommandButton_cancel.Caption = Sprog.Cancel
-    Label_ligninger.Caption = Sprog.Equations
+    Label_Ligninger.Caption = Sprog.Equations
     
 End Sub
