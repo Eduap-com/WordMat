@@ -355,6 +355,8 @@ Sub Rib_FSnormkum(control As IRibbonControl)
         s = Replace(s, ";", " , ")
         s = Replace(s, "  ", " ")
     
+        insertribformel "", "Definer: " & VBA.ChrW(963) & ">0"
+        Selection.TypeParagraph
         insertribformel "", "Definer: " & s
         Selection.TypeParagraph
     End If
