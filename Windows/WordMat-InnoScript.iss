@@ -194,6 +194,9 @@ Source: Images\Trekant*.emf; DestDir: {app}\Images;tasks: installeralle installe
 Source: Other\ReaktiverWordMat.vbs; DestDir: {app};tasks: installeralle installerbruger; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\ReaktiverWordMat.vbs; DestDir: {%appdata}\WordMat\;tasks: installerbruger; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\CopyWordMat.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: Other\CopyWordMat.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: Other\RemoveWordMatFromWordUser.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: Other\RemoveWordMatFromWordAll.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 
 ; These files are in a folder a level up from the Windows folder as they are shared with the Mac version
 ; Kopier alle docx og dotx dokumenter til WordDocs
@@ -408,8 +411,10 @@ Filename: {app}\GeoGebra.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg:
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{app}";tasks: installeralle installerbruger; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
 
-Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\STARTUP\WordMat.dotm";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser runhidden
-;Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\START\WordMat.dotm";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser runhidden
+Filename: {cmd}; Parameters: "/c mkdir %appdata%\Microsoft\Word\STARTUP";tasks: installerbruger  ; StatusMsg: "Opretter START";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
+Filename: {cmd}; Parameters: "/c mkdir %appdata%\Microsoft\Word\START";tasks: installerbruger  ; StatusMsg: "Opretter START";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
+Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\START";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
+Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\STARTUP";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
 
 Filename: cscript.exe; Parameters: {app}\CopyWordMat.vbs ; StatusMsg: "Kopierer WordMat";tasks: installerbruger;  Flags: runasoriginaluser runhidden
 
