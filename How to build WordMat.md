@@ -144,7 +144,7 @@ gnuplot_command:"/Library/'Application Support'/Microsoft/Office365/'User Conten
 set_plot_option([gnuplot_term, aqua])$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
-:lisp (sb-ext:save-lisp-and-die "/users/mikael/maxima.core" :toplevel #'cl-user::run)
+:lisp (sb-ext:save-lisp-and-die "/users/test/maxima.core" :toplevel #'cl-user::run)
 ```
 
 - The command window will now close if everything went fine
@@ -164,7 +164,7 @@ gnuplot_command:"/Library/'Application Support'/Microsoft/Office365/'User Conten
 set_plot_option([gnuplot_term, aqua])$
 :lisp(sb-vm::set-floating-point-modes :traps nil)
 linenum:-1;
-:lisp (sb-ext:save-lisp-and-die "/users/mikael/maximaunit.core" :toplevel #'cl-user::run)
+:lisp (sb-ext:save-lisp-and-die "/users/test/maximaunit.core" :toplevel #'cl-user::run)
 ```
 
 ## Creating WordMatMac.dotm for Mac
