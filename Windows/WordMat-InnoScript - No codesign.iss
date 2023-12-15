@@ -411,7 +411,8 @@ Filename: {app}\GeoGebra.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg:
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{app}";tasks: installeralle installerbruger; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
 
-Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\START\WordMat.dotm";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
+Filename: {cmd}; Parameters: "/c mkdir %appdata%\Microsoft\Word\START";tasks: installerbruger  ; StatusMsg: "Opretter START";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
+Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\START";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
 Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\STARTUP";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
 
 ;Filename: cscript.exe; Parameters: {app}\CopyWordMat.vbs ; StatusMsg: "Kopierer WordMat";tasks: installerbruger;  Flags: runasoriginaluser runhidden
@@ -423,6 +424,8 @@ Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" 
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\MathMenu.dll"" /u " ; WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /u " ; WorkingDir: "{app}";tasks: installeralle; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /u " ; WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
+Filename: {cmd}; Parameters: "/c del %appdata%\Microsoft\Word\START\WordMat.dotm";tasks: installerbruger  ; StatusMsg: "Sletter WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
+Filename: {cmd}; Parameters: "/c del %appdata%\Microsoft\Word\STARTUP\WordMat.dotm";tasks: installerbruger  ; StatusMsg: "Sletter WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
 
 [UninstallDelete]
 ;Type: files; Name: "{code:VUserStartupFolder12}\MathMenu.dotm"
@@ -437,6 +440,7 @@ Type: files; Name: "{code:VStartupFolderAll12}\WordMat.dotm"
 Type: files; Name: "{code:VStartupFolderAll14}\WordMat.dotm" 
 Type: files; Name: "{code:VStartupFolderAll15}\WordMat.dotm" 
 Type: files; Name: "{code:VStartupFolderAll16}\WordMat.dotm" 
+Type: files; Name: "{code:VUserStartupFolder161}\WordMat.dotm"
 Type: filesandordirs; Name: "{%appdata}\WordMat" 
 Type: filesandordirs; Name: "{app}\WebViewWrap"
 Type: filesandordirs; Name: "{app}\geogebra-math-apps"
