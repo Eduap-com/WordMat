@@ -1,4 +1,4 @@
-'' OpretWordMenu.vbs
+'' OpretWordMatMenu.vbs
 '' Mikael Sørensen, Nyborg Gymnasium
 '' 20/8-2010
 '' Bruges ikke længere
@@ -43,7 +43,7 @@ objShell.run "cmd /K copy " & filnavn & " """ & dir & """",0 ,false   ' 1, true 
 if err.number=0 then
 	msgbox "Menuen blev oprettet i Word. Genstart Word og se efter menuen tilføjelsesprogrammer.",vbokonly,"Færdig"
 else
-	msgbox "Der skete en fejl under installationen. Problemet kan skyldes en af to ting" & vbcrlf & vbcrlf &"1. Luk Word inden du installerer." & vbcrlf & "2. Det kan også være et rettighedsproblem, er du administrator på denne computer?" & vbcrlf & vbcrlf & "Du kan selv prøve at installere MarkMenu ved at kopiere filen '" & filnavn & "' til den mappe der åbnes nu", vbokonly,"Fejl ved installation"
+	msgbox "Der skete en fejl under installationen. Problemet kan skyldes en af to ting" & vbcrlf & vbcrlf &"1. Luk Word inden du installerer." & vbcrlf & "2. Det kan også være et rettighedsproblem, er du administrator på denne computer?" & vbcrlf & vbcrlf & "Du kan selv prøve at installere WordMat ved at kopiere filen '" & filnavn & "' til den mappe der åbnes nu", vbokonly,"Fejl ved installation"
 	strPath = "explorer.exe /e," & dir
 	objShell.Run strPath
 end if
