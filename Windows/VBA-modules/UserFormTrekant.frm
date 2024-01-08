@@ -284,7 +284,7 @@ End Sub
 
 Sub FindSolutions(Optional advarsler As Boolean = False)
 
-    Dim tn As Double
+    Dim TN As Double
     Dim d As Double
     Dim san As String
     Dim sbn As String

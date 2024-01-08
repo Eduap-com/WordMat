@@ -635,3 +635,23 @@ Sub SetCaptions()
     
 End Sub
 
+Sub ScaleForm(SF As Double)
+' SF er scalefactor. Ændrer størrelsen på en formen og justerer font og position af alle elementer på formen
+Dim c As control
+    For Each c In Me.Controls
+        c.Left = c.Left * SF
+        c.Top = c.Top * SF
+        c.Width = c.Width * SF
+        c.Height = c.Height * SF
+        c.Font.Size = CInt(c.Font.Size * SF)
+    Next
+    Me.Width = Me.Width * SF
+    Me.Height = Me.Height * SF
+    Me.Font.Size = CInt(Me.Font.Size * SF)
+End Sub
+
+Private Sub UserForm_Initialize()
+#If Mac Then
+    ScaleForm 1.5
+#End If
+End Sub

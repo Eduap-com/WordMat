@@ -225,7 +225,7 @@ Sub Rib_FSarealtrekant(control As IRibbonControl)
 End Sub
 'Callback for sandbin1 onAction
 Sub Rib_FSbinfrekvens(control As IRibbonControl)
-    Dim s As String, arr() As String
+    Dim s As String, Arr() As String
     PrepareMaxima
     omax.FindDefinitions
     If Not InStr(omax.DefString, "K(n,r):=") > 0 Then
@@ -255,7 +255,7 @@ Sub Rib_FSbinfrekvens(control As IRibbonControl)
 End Sub
 'Callback for sandbin5 onAction
 Sub Rib_FSbinkum(control As IRibbonControl)
-    Dim s As String, arr() As String
+    Dim s As String, Arr() As String
     PrepareMaxima
     omax.FindDefinitions
     If Not InStr(omax.DefString, "K(n,r):=") > 0 Then
@@ -304,7 +304,7 @@ End Sub
 
 'Callback for sandnorm1 onAction
 Sub Rib_FSnormfrekvens(control As IRibbonControl)
-    Dim s As String, arr() As String
+    Dim s As String, Arr() As String
     PrepareMaxima
     omax.FindDefinitions
     
@@ -336,7 +336,7 @@ End Sub
 
 'Callback for sandnorm2 onAction
 Sub Rib_FSnormkum(control As IRibbonControl)
-    Dim s As String, arr() As String
+    Dim s As String, Arr() As String
     PrepareMaxima
     omax.FindDefinitions
     
@@ -389,7 +389,7 @@ Sub Rib_FSplanparamlinje(control As IRibbonControl) '
 End Sub
 
 Sub Rib_FSvektorvinkel(control As IRibbonControl)
-    Dim s As String, arr() As String
+    Dim s As String, Arr() As String
     PrepareMaxima
     omax.FindDefinitions
     
@@ -413,7 +413,7 @@ Sub Rib_FSvektorvinkel(control As IRibbonControl)
    End If
 End Sub
 Sub Rib_FSvektorproj(control As IRibbonControl)
-    Dim s As String, arr() As String
+    Dim s As String, Arr() As String
     PrepareMaxima
     omax.FindDefinitions
     

@@ -13,19 +13,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
+
 Public vars As String
 Public DefS As String
 Public TempDefs As String
 Public SelectedVar As String
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
-
 
 Private Sub CommandButton_cancel_Click()
     UFSelectVar.hide
@@ -34,7 +28,7 @@ End Sub
 
 Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
-Dim arr As Variant
+Dim Arr As Variant
 Dim i As Integer
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
@@ -43,7 +37,7 @@ Dim i As Integer
     Else
         MaximaExact = 0
     End If
-
+    
     
     MaximaVidNotation = CheckBox_vidnotation.Value
     MaximaCifre = ComboBox_cifre.Value
@@ -66,13 +60,13 @@ Dim i As Integer
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    arr = Split(TempDefs, VbCrLfMac)
+    Arr = Split(TempDefs, VbCrLfMac)
 
     TempDefs = ""
-    For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not right(arr(i), 1) = "=" Then
-            If Split(arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
-                TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
+    For i = 0 To UBound(Arr)
+        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+            If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
+                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & SelectedVar & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
@@ -209,6 +203,9 @@ End Sub
 Private Sub UserForm_Initialize()
     FillComboBoxCifre
     FillComboBoxCAS
+    
+    ScaleForm 1.5
+    
 End Sub
 Private Sub SetCaptions()
     Me.Caption = Sprog.SolveEquation
@@ -227,6 +224,21 @@ Private Sub SetCaptions()
     Label6.Caption = Sprog.SignificantFigures
     Label_enheder.Caption = Sprog.OutputUnits
     Label_unitwarning.Caption = Sprog.UnitWarning
-    
 End Sub
+
+Sub ScaleForm(SF As Double)
+' SF er scalefactor. Ændrer størrelsen på en formen og justerer font og position af alle elementer på formen
+Dim c As control
+    For Each c In Me.Controls
+        c.Left = c.Left * SF
+        c.Top = c.Top * SF
+        c.Width = c.Width * SF
+        c.Height = c.Height * SF
+        c.Font.Size = c.Font.Size * SF
+    Next
+    Me.Width = Me.Width * SF
+    Me.Height = Me.Height * SF
+    Me.Font.Size = Me.Font.Size * SF
+End Sub
+
 

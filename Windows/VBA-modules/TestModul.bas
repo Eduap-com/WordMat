@@ -491,7 +491,7 @@ Function StopNow() As Boolean
     StopNow = False
 End Function
 Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional Var As String, Optional Instruk As String)
-    Dim s As String, TypeText As String, Oresul As String, arr() As String, ResultOK As Boolean, i As Integer
+    Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
     If TestType = 1 Then
         TypeText = "Calculate"
     ElseIf TestType = 2 Then
@@ -512,8 +512,8 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
     ElseIf TestType = 2 Then
         MaximaSolvePar (Var)
     ElseIf TestType = 3 Then 'solvede
-        arr = Split(Var, ",")
-        SolveDEpar arr(0), arr(1)
+        Arr = Split(Var, ",")
+        SolveDEpar Arr(0), Arr(1)
     End If
     Wait 0.2
     Application.ScreenUpdating = True
@@ -530,9 +530,9 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
     End If
     
     ResultOK = False
-    arr = Split(resul, "@$")
-    For i = 0 To UBound(arr)
-        If Trim(arr(i)) = Trim(Oresul) Then
+    Arr = Split(resul, "@$")
+    For i = 0 To UBound(Arr)
+        If Trim(Arr(i)) = Trim(Oresul) Then
             ResultOK = True
             Exit For
         End If
@@ -586,7 +586,7 @@ Sub CreateTestBeregnDE()
 End Sub
 
 Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
-   Dim s As String, TypeText As String, Oresul As String, arr() As String, ResultOK As Boolean, i As Integer
+   Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
    Dim komm As String, Var As String, varpar As String
     
    omax.ReadSelection
@@ -598,9 +598,9 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
      TestType = 4
       Var = InputBox("Enter dependent and independent variable to DEsolve for", "Variable", "y,x")
       If Trim(Var) = vbNullString Then Exit Sub
-      arr = Split(Var, ",")
-      If UBound(arr) < 1 Then Exit Sub
-      SolveDEpar arr(0), arr(1)
+      Arr = Split(Var, ",")
+      If UBound(Arr) < 1 Then Exit Sub
+      SolveDEpar Arr(0), Arr(1)
    ElseIf InStr(komm, "=") > 0 Or TestType = 2 Then
       TestType = 2
       Var = InputBox("Enter variable to solve for", "Variable", "x")

@@ -343,7 +343,7 @@ Sub ImportAllModules()
     Dim szExportPath As String
     Dim szFileName As String
     Dim StrFile As String, i As Integer
-    Dim arr() As String, FileList As String, MBP As Integer
+    Dim Arr() As String, FileList As String, MBP As Integer
     Dim cmpComponent As VBIDE.VBComponent
     Dim ModuleFolder As String, C1 As Long
     Dim ImportCount As Integer, EAge As String
@@ -397,7 +397,7 @@ Sub ImportAllModules()
         End If
         StrFile = Dir
     Loop
-    arr = Split(FileList, vbCrLf)
+    Arr = Split(FileList, vbCrLf)
 '    FileList = Replace(FileList, vbCrLf, " | ")
     q = ""
     If Not ActiveDocument.Saved Then
@@ -430,10 +430,10 @@ Sub ImportAllModules()
     
    DeleteAllModules False
     ImportCount = 0
-    For i = 0 To UBound(arr)
+    For i = 0 To UBound(Arr)
 '        If arr(i) <> "" And InStr(arr(i), ".frx") <= 0 And InStr(arr(i), ".log") <= 0 Then  'Arr(i) <> "VBAmodul.bas" And
-        If (InStr(arr(i), ".bas") > 0 Or InStr(arr(i), ".cls") > 0 Or InStr(arr(i), ".frm") > 0) And arr(i) <> "ThisDocument.cls" Then 'Arr(i) <> "VBAmodul.bas" And
-            wkbSource.VBProject.VBComponents.Import szExportPath & arr(i)
+        If (InStr(Arr(i), ".bas") > 0 Or InStr(Arr(i), ".cls") > 0 Or InStr(Arr(i), ".frm") > 0) And Arr(i) <> "ThisDocument.cls" Then 'Arr(i) <> "VBAmodul.bas" And
+            wkbSource.VBProject.VBComponents.Import szExportPath & Arr(i)
             ImportCount = ImportCount + 1
         End If
     Next
