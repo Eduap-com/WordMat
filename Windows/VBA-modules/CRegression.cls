@@ -306,7 +306,7 @@ Loop While Not (p = "") And N < 1000
 
 End Sub
 
-Private Function ComputeRegr(x() As Double, y() As Double) As Boolean
+Private Function ComputeRegr(X() As Double, Y() As Double) As Boolean
 'Udfører lineær regression på to arrays og returnerer a,b og R^2
 
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
@@ -314,14 +314,14 @@ Dim N As Integer
 Dim i As Integer
 On Error GoTo fejl
 
-N = UBound(x) - LBound(x) + 1
+N = UBound(X) - LBound(X) + 1
                
-For i = LBound(x) To UBound(x)
-    sumx = sumx + x(i)
-    sumy = sumy + y(i)
-    sumxy = sumxy + x(i) * y(i)
-    sumxx = sumxx + x(i) ^ 2
-    sumyy = sumyy + y(i) ^ 2
+For i = LBound(X) To UBound(X)
+    sumx = sumx + X(i)
+    sumy = sumy + Y(i)
+    sumxy = sumxy + X(i) * Y(i)
+    sumxx = sumxx + X(i) ^ 2
+    sumyy = sumyy + Y(i) ^ 2
 Next
 
 A = (N * sumxy - sumx * sumy) / (N * sumxx - sumx ^ 2)
@@ -629,7 +629,7 @@ fejl:
 slut:
 End Sub
 
-Function polregr(x() As Double, y() As Double, orden As Integer, Optional ByVal tving As Boolean = False) As Boolean
+Function polregr(X() As Double, Y() As Double, orden As Integer, Optional ByVal tving As Boolean = False) As Boolean
 'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
@@ -640,12 +640,12 @@ Dim M() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
 On Error GoTo fejl
 
-If Not (UBound(x) = UBound(y)) Then
+If Not (UBound(X) = UBound(Y)) Then
     polregr = False
     Exit Function
 End If
 
-np = UBound(x) - LBound(x) + 1
+np = UBound(X) - LBound(X) + 1
 
 If np <= orden Then
     polregr = False
@@ -656,17 +656,17 @@ ReDim M(1 To orden + 1, 1 To orden + 2)
 ReDim s(2 * orden)
 ReDim t(orden)
 
-N = UBound(x) - LBound(x) + 1
+N = UBound(X) - LBound(X) + 1
                
 For j = 0 To orden ' T(i) sættes op (højre kolonne af matrix)
     For i = 0 To np - 1
-        t(j) = t(j) + y(i + 1) * x(i + 1) ^ j
+        t(j) = t(j) + Y(i + 1) * X(i + 1) ^ j
     Next
 Next
                
 For j = 0 To 2 * orden ' S(i) sættes op (elementer til det indre af matrix)
     For i = 0 To np - 1
-        s(j) = s(j) + x(i + 1) ^ j
+        s(j) = s(j) + X(i + 1) ^ j
     Next
 Next
 
@@ -717,11 +717,11 @@ End If
              
 ymean = t(0) / N
 Dim FV As Double
-For i = LBound(x) To UBound(x)
-  SStotal = SStotal + (y(i) - ymean) ^ 2
+For i = LBound(X) To UBound(X)
+  SStotal = SStotal + (Y(i) - ymean) ^ 2
   FV = -ymean
   For j = 0 To orden
-    FV = FV + Coeff(j) * x(i) ^ j
+    FV = FV + Coeff(j) * X(i) ^ j
   Next
   SSregr = SSregr + FV ^ 2
 Next
@@ -735,7 +735,7 @@ fejl:
 '  MsgBox Err.Number
 slut:
 End Function
-Function polregrkvad(x() As Double, y() As Double, Optional ByVal tving As Boolean = False) As Boolean
+Function polregrkvad(X() As Double, Y() As Double, Optional ByVal tving As Boolean = False) As Boolean
 'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2 via userdefined datatype
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
@@ -746,16 +746,16 @@ Dim M(3, 4)
 
 On Error GoTo fejl
 
-N = UBound(x) - LBound(x) + 1
+N = UBound(X) - LBound(X) + 1
                
-For i = LBound(x) To UBound(x)
-    sumx = sumx + x(i)
-    sumy = sumy + y(i)
-    sumxy = sumxy + x(i) * y(i)
-    sumx2y = sumx2y + x(i) ^ 2 * y(i)
-    sumxx = sumxx + x(i) ^ 2
-    sumx3 = sumx3 + x(i) ^ 3
-    sumx4 = sumx4 + x(i) ^ 4
+For i = LBound(X) To UBound(X)
+    sumx = sumx + X(i)
+    sumy = sumy + Y(i)
+    sumxy = sumxy + X(i) * Y(i)
+    sumx2y = sumx2y + X(i) ^ 2 * Y(i)
+    sumxx = sumxx + X(i) ^ 2
+    sumx3 = sumx3 + X(i) ^ 3
+    sumx4 = sumx4 + X(i) ^ 4
 Next
 
 If tving = False Then
@@ -807,9 +807,9 @@ End If
              
 ymean = sumy / N
 
-For i = LBound(x) To UBound(x)
-  SStotal = SStotal + (y(i) - ymean) ^ 2
-  SSregr = SSregr + (A * x(i) ^ 2 + b * x(i) + c - ymean) ^ 2
+For i = LBound(X) To UBound(X)
+  SStotal = SStotal + (Y(i) - ymean) ^ 2
+  SSregr = SSregr + (A * X(i) ^ 2 + b * X(i) + c - ymean) ^ 2
 Next
              
 r = SSregr / SStotal

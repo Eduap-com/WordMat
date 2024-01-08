@@ -946,8 +946,8 @@ Dim parx As String
 Dim pary As String
 Dim tmin As String
 Dim tmax As String
-Dim x As String
-Dim y As String
+Dim X As String
+Dim Y As String
 
 colindex = 0
 xming = ConvertNumberToMaxima(TextBox_xmin.Text)
@@ -1301,9 +1301,9 @@ If TextBox_markerpunkter.Text <> "" Then
 '        End If
         arr2 = Split(Arr(i), ",")
         If UBound(arr2) = 1 Then
-            x = arr2(0)
-            y = arr2(1)
-            punkttekst = punkttekst & "points([[" & x & ",0],[" & x & "," & y & "],[0," & y & "]]),"
+            X = arr2(0)
+            Y = arr2(1)
+            punkttekst = punkttekst & "points([[" & X & ",0],[" & X & "," & Y & "],[0," & Y & "]]),"
         End If
         End If
     Next
@@ -1971,9 +1971,9 @@ Function ConvertDegreeToRad(Text As String, trigfunc As String) As String
 
 End Function
 
-Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
-    gemx = x
-    gemy = y
+Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    gemx = X
+    gemy = Y
     If Len(etikettext) > 0 Then
         If Len(TextBox_labels.Text) > 0 Then
         TextBox_labels.Text = TextBox_labels.Text & VbCrLfMac
@@ -1981,7 +1981,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_labels.Text = TextBox_labels.Text & etikettext & ";" & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
+        TextBox_labels.Text = TextBox_labels.Text & etikettext & ";" & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
         etikettext = ""
         OpdaterGraf
         Me.Repaint
@@ -1994,7 +1994,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_punkter2.Text = TextBox_punkter2.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
+        TextBox_punkter2.Text = TextBox_punkter2.Text & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
         OpdaterGraf
         Me.Repaint
         End If
@@ -2005,7 +2005,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
+        TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
         nytmarkerpunkt = False
         OpdaterGraf
         Me.Repaint
@@ -2019,19 +2019,19 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
     End If
 End Sub
 
-Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
 On Error Resume Next
 'image1.Picture.Render(image1.Picture.Handle,0,0,600,600,image1.Picture.Width,image1.Picture.Height
 'hDC, 0, 0, ScaleWidth, ScaleHeight, 0, p.Height, p.Width, -p.Height, ByVal 0
     If Label_zoom.visible Then
     Label_zoom.Left = gemx + Image1.Left
     Label_zoom.Top = gemy + Image1.Top
-    Label_zoom.Width = x - gemx
-    Label_zoom.Height = y - gemy
+    Label_zoom.Width = X - gemx
+    Label_zoom.Height = Y - gemy
     End If
 End Sub
 
-Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
 Dim xmin As Single
 Dim xmax As Single
 Dim Ymin As Single
@@ -2040,7 +2040,7 @@ Dim Temp As Single
 Dim s As String
 
 Label_zoom.visible = False
-If Abs(x - gemx) < 5 Then GoTo slut
+If Abs(X - gemx) < 5 Then GoTo slut
 
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
@@ -2048,10 +2048,10 @@ Ymin = ConvertStringToNumber(TextBox_ymin.Text)
 Ymax = ConvertStringToNumber(TextBox_ymax.Text)
 
 s = ConvertPixelToCoordX(gemx)
-TextBox_xmax.Text = ConvertPixelToCoordX(x)
+TextBox_xmax.Text = ConvertPixelToCoordX(X)
 TextBox_xmin.Text = s
 If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
-    s = ConvertPixelToCoordY(y)
+    s = ConvertPixelToCoordY(Y)
     TextBox_ymax.Text = ConvertPixelToCoordY(gemy)
     TextBox_ymin.Text = s
 End If
@@ -2069,7 +2069,7 @@ Dim cfakt As Single
 Dim dx As Single, dy As Single
 Dim midt As Single
 Dim nyy As Single
-Dim x As Single
+Dim X As Single
 Dim s As String
 Label_zoom.visible = False
 
@@ -2102,23 +2102,23 @@ fejl:
 slut:
     
 End Sub
-Function ConvertPixelToCoordX(x As Single) As Single
+Function ConvertPixelToCoordX(X As Single) As Single
 Dim xmin As Single, xmax As Single, cfakt As Single
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
 cfakt = (xmax - xmin) / (Image1.Width * 0.9)
-x = x - Image1.Width * 0.06
-ConvertPixelToCoordX = xmin + cfakt * x
+X = X - Image1.Width * 0.06
+ConvertPixelToCoordX = xmin + cfakt * X
 'MsgBox ConvertPixelToCoordX
 End Function
-Function ConvertPixelToCoordY(y As Single) As Single
+Function ConvertPixelToCoordY(Y As Single) As Single
 Dim Ymin As Single, Ymax As Single, cfakt As Single
 Ymin = ConvertStringToNumber(TextBox_ymin.Text)
 Ymax = ConvertStringToNumber(TextBox_ymax.Text)
 cfakt = (Ymax - Ymin) / (Image1.Height * 0.9)
-y = Image1.Height - y
-y = y - Image1.Height * 0.08
-ConvertPixelToCoordY = Ymin + cfakt * y
+Y = Image1.Height - Y
+Y = Y - Image1.Height * 0.08
+ConvertPixelToCoordY = Ymin + cfakt * Y
 End Function
 Private Sub CommandButton_zoom_Click()
 Dim dx As Single, dy As Single

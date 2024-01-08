@@ -4401,7 +4401,7 @@ End Property
 Public Property Get OutputUnits() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Output enheder"
+Case 1: s = "Outputenheder"
 Case 3: s = "Unidades de salida"
 Case 4: s = ""
 Case Else: s = "Output units"
@@ -4788,10 +4788,10 @@ End Property
 Public Property Get ChooseVariable() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Vælg variabel"
-Case 3: s = "Escoger variable"
+Case 1: s = "Variabel"
+Case 3: s = "Variable" 'Escoger
 Case 4: s = ""
-Case Else: s = "Choose variable"
+Case Else: s = "Variable"
 End Select
 ChooseVariable = s
 End Property
@@ -4828,20 +4828,20 @@ End Property
 Public Property Get TempDefs() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Midl. definitioner/antagelser"
-Case 3: s = "Definiciones/suposiciones temporales"
+Case 1: s = "Midl. definitioner"
+Case 3: s = "Definiciones temporales" '/suposiciones
 Case 4: s = ""
-Case Else: s = "Temp. definitions/assumptions"
+Case Else: s = "Temp. definitions"
 End Select
 TempDefs = s
 End Property
 Public Property Get UnitWarning() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Advarsel: Enheder er slået til. Ligningsløsning påvirkes negativt." & VbCrLfMac & "Pas også på variable, der er enheder fx A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
+Case 1: s = "Advarsel: Enheder er slået til." & VbCrLfMac & "Ligningsløsning påvirkes negativt." & VbCrLfMac & "Pas også på variable, der er enheder fx A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
 Case 3: s = "Advertencia: Las unidades están encendidas. " & VbCrLfMac & "Cuidado con las variables que son unidades como: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
 Case 4: s = ""
-Case Else: s = "Warning: Units are turned on. Equation solving will be poorer" & VbCrLfMac & "Watch out for variables which are units like: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
+Case Else: s = "Warning: Units are turned on." & VbCrLfMac & "Equation solving will be poorer" & VbCrLfMac & "Watch out for variables which are units like: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s"
 End Select
 UnitWarning = s
 End Property

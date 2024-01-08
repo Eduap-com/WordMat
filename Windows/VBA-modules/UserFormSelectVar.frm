@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar 
    Caption         =   "Løs ligning"
-   ClientHeight    =   4185
+   ClientHeight    =   4695
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   9360.001
+   ClientWidth     =   10560
    OleObjectBlob   =   "UserFormSelectVar.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -20,11 +20,6 @@ Public DefS As String
 Public TempDefs As String
 Public SelectedVar As String
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
-
-Private Sub CommandButton_cancel_Click()
-    UFSelectVar.hide
-    Application.ScreenUpdating = False
-End Sub
 
 Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
@@ -105,6 +100,31 @@ slut:
     Application.ScreenUpdating = False
 End Sub
 
+Private Sub Label_cancel_Click()
+    Me.hide
+    Application.ScreenUpdating = False
+End Sub
+
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+
+Private Sub Label_ok_Click()
+    CommandButton_ok_Click
+End Sub
+
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
+
 Private Sub ListBox_vars_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     CommandButton_ok_Click
 End Sub
@@ -117,9 +137,9 @@ Private Sub TextBox_def_Enter()
 End Sub
 
 Private Sub UserForm_Activate()
-'Dim arr As Variant
+    'Dim arr As Variant
 
-Dim i As Integer, svar As String
+    Dim i As Integer, svar As String
     SetCaptions
     TextBox_def.WordWrap = True
     TextBox_def.WordWrap = False
@@ -163,19 +183,107 @@ Dim i As Integer, svar As String
     
     ' definitioner vises
     If Len(DefS) > 3 Then
-'    defs = Mid(defs, 2, Len(defs) - 3)
-    DefS = omax.ConvertToAscii(DefS)
-    DefS = Replace(DefS, "$", vbCrLf)
-    DefS = Replace(DefS, ":=", vbTab & "= ")
-    DefS = Replace(DefS, ":", vbTab & "= ")
-    If DecSeparator = "," Then
-        DefS = Replace(DefS, ",", ";")
-        DefS = Replace(DefS, ".", ",")
-    End If
+        '    defs = Mid(defs, 2, Len(defs) - 3)
+        DefS = " " & omax.ConvertToAscii(DefS)
+        DefS = Replace(DefS, "$", vbCrLf & " ")
+        DefS = Replace(DefS, ":=", " = ")
+        DefS = Replace(DefS, ":", " = ")
+        
+        If Not Radians Then DefS = Replace(DefS, "%pi/180*", "")
+        
+        DefS = Replace(DefS, "*", MaximaGangeTegn)
+        
+        DefS = Replace(DefS, "%pi", ChrW(&H3C0))
+        DefS = Replace(DefS, "%i", "i")
+        DefS = Replace(DefS, "log(", "ln(")
+        DefS = Replace(DefS, "log10(", "log(")
+        DefS = Replace(DefS, "^(x)", ChrW(&H2E3))
+        DefS = Replace(DefS, "^(2)", ChrW(&HB2))
+        DefS = Replace(DefS, "^(3)", ChrW(&HB3))
+        DefS = Replace(DefS, "^(4)", ChrW(&H2074))
+        DefS = Replace(DefS, "^(5)", ChrW(&H2075))
+        DefS = Replace(DefS, "^(6)", ChrW(&H2076))
+        DefS = Replace(DefS, "^(7)", ChrW(&H2077))
+        DefS = Replace(DefS, "^(8)", ChrW(&H2078))
+        DefS = Replace(DefS, "^(9)", ChrW(&H2079))
+        DefS = Replace(DefS, "^(-1)", ChrW(&H207B) & ChrW(&HB9))
+        DefS = Replace(DefS, "^(-2)", ChrW(&H207B) & ChrW(&HB2))
+        DefS = Replace(DefS, "^(-3)", ChrW(&H207B) & ChrW(&HB3))
+        
+        DefS = Replace(DefS, "_0(", ChrW(&H2080) & "(")
+        DefS = Replace(DefS, "_1(", ChrW(&H2081) & "(")
+        DefS = Replace(DefS, "_2(", ChrW(&H2082) & "(")
+        DefS = Replace(DefS, "_3(", ChrW(&H2083) & "(")
+        DefS = Replace(DefS, "_4(", ChrW(&H2084) & "(")
+        DefS = Replace(DefS, "_5(", ChrW(&H2085) & "(")
+        DefS = Replace(DefS, "_6(", ChrW(&H2086) & "(")
+        DefS = Replace(DefS, "_7(", ChrW(&H2087) & "(")
+        DefS = Replace(DefS, "_8(", ChrW(&H2088) & "(")
+        DefS = Replace(DefS, "_9(", ChrW(&H2089) & "(")
+        DefS = Replace(DefS, "_a(", ChrW(&H2090) & "(")
+        DefS = Replace(DefS, "_x(", ChrW(&H2093) & "(")
+        DefS = Replace(DefS, "_n(", ChrW(&H2099) & "(")
+        
+        DefS = Replace(DefS, "minf", "-" & ChrW(&H221E))
+        DefS = Replace(DefS, "inf", ChrW(&H221E))
+        
+        DefS = Replace(DefS, "sqrt(", ChrW(&H221A) & "(")
+        DefS = Replace(DefS, "NIntegrate(", ChrW(&H222B) & "(")
+        DefS = Replace(DefS, "Integrate(", ChrW(&H222B) & "(")
+        DefS = Replace(DefS, "integrate(", ChrW(&H222B) & "(")
+        DefS = Replace(DefS, "<=", VBA.ChrW(8804))
+        DefS = Replace(DefS, ">=", VBA.ChrW(8805))
+        DefS = Replace(DefS, "ae", "æ")
+        DefS = Replace(DefS, "oe", "ø")
+        DefS = Replace(DefS, "aa", "å")
+        DefS = Replace(DefS, "AE", "Æ")
+        DefS = Replace(DefS, "OE", "Ø")
+        DefS = Replace(DefS, "AA", "Å")
+        
+        'græske bogstaver
+        DefS = Replace(DefS, "gamma", VBA.ChrW(915))    ' stort gammategn
+        DefS = Replace(DefS, "Delta", VBA.ChrW(916))
+        DefS = Replace(DefS, "delta", VBA.ChrW(948))
+        DefS = Replace(DefS, "alpha", VBA.ChrW(945))
+        DefS = Replace(DefS, "beta", VBA.ChrW(946))
+        DefS = Replace(DefS, "gammaLB", VBA.ChrW(947))
+        DefS = Replace(DefS, "theta", VBA.ChrW(952))
+        DefS = Replace(DefS, "Theta", VBA.ChrW(920))
+        DefS = Replace(DefS, "lambda", VBA.ChrW(955))
+        DefS = Replace(DefS, "Lambda", VBA.ChrW(923))
+        DefS = Replace(DefS, "mu", VBA.ChrW(956))
+        DefS = Replace(DefS, "rho", VBA.ChrW(961))
+        DefS = Replace(DefS, "sigma", VBA.ChrW(963))
+        DefS = Replace(DefS, "Sigma", VBA.ChrW(931))
+        DefS = Replace(DefS, "varphi", VBA.ChrW(966))
+        DefS = Replace(DefS, "phi", VBA.ChrW(981))
+        DefS = Replace(DefS, "Phi", VBA.ChrW(934))
+        DefS = Replace(DefS, "varepsilon", VBA.ChrW(949))
+        DefS = Replace(DefS, "epsilon", VBA.ChrW(1013))
+        DefS = Replace(DefS, "psi", VBA.ChrW(968))
+        DefS = Replace(DefS, "Psi", VBA.ChrW(936))
+        DefS = Replace(DefS, "Xi", VBA.ChrW(926))
+        DefS = Replace(DefS, "xi", VBA.ChrW(958))
+        DefS = Replace(DefS, "Chi", VBA.ChrW(935))
+        DefS = Replace(DefS, "chi", VBA.ChrW(967))
+        DefS = Replace(DefS, "Pi", VBA.ChrW(928))
+        DefS = Replace(DefS, "tau", VBA.ChrW(964))
+        DefS = Replace(DefS, "greek-nu", VBA.ChrW(957))
+        DefS = Replace(DefS, "kappa", VBA.ChrW(954))
+        DefS = Replace(DefS, "eta", VBA.ChrW(951))
+        DefS = Replace(DefS, "zeta", VBA.ChrW(950))
+        DefS = Replace(DefS, "omega", VBA.ChrW(969))    ' lille omega
+    
+        DefS = Replace(DefS, "((x))", "(x)")
+    
+        If DecSeparator = "," Then
+            '        DefS = Replace(DefS, ",", ";")
+            DefS = Replace(DefS, ".", ",")
+        End If
     End If
     Label_def.Caption = DefS
     
-     For i = 0 To UBound(Svars)
+    For i = 0 To UBound(Svars)
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
             ListBox_vars.AddItem (svar)
@@ -204,15 +312,15 @@ Private Sub UserForm_Initialize()
     FillComboBoxCifre
     FillComboBoxCAS
     
-    ScaleForm 1.5
+'    ScaleForm 1.5
     
 End Sub
 Private Sub SetCaptions()
     Me.Caption = Sprog.SolveEquation
     Label1.Caption = Sprog.ChooseVariable
     Label2.Caption = Sprog.WriteVariable
-    CommandButton_ok.Caption = Sprog.OK
-    CommandButton_cancel.Caption = Sprog.Cancel
+    Label_ok.Caption = Sprog.OK
+    Label_cancel.Caption = Sprog.Cancel
     Label4.Caption = Sprog.PresentDefs
     Label5.Caption = Sprog.TempDefs
     Label8.Caption = Sprog.RibSettings
@@ -222,7 +330,7 @@ Private Sub SetCaptions()
     OptionButton_numonly.Caption = Sprog.Numeric
     CheckBox_vidnotation.Caption = Sprog.ScientificNotation
     Label6.Caption = Sprog.SignificantFigures
-    Label_enheder.Caption = Sprog.OutputUnits
+    Label_enheder.Caption = Sprog.OutputUnits & ":"
     Label_unitwarning.Caption = Sprog.UnitWarning
 End Sub
 
@@ -242,3 +350,7 @@ Dim c As control
 End Sub
 
 
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
+End Sub

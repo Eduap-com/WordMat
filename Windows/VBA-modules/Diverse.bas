@@ -2484,7 +2484,7 @@ Public Function Local_Document_Path(ByRef Doc As Document, Optional bPathOnly As
 #If Mac Then
    Local_Document_Path = Doc.path
 #Else
-Dim i As Long, x As Long
+Dim i As Long, X As Long
 Dim OneDrivePath As String
 Dim ShortName As String
 Dim testWbkPath As String
@@ -2499,7 +2499,7 @@ If InStr(1, Doc.FullName, "https://", vbTextCompare) > 0 Then
         ShortName = Replace(Doc.FullName, "/", "\")
 
         'Remove the first four backslashes
-        For x = 1 To 4
+        For X = 1 To 4
             ShortName = RemoveTopFolderFromPath(ShortName)
         Next
         'Choose the version of Onedrive

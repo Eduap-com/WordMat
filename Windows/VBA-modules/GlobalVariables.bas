@@ -1,11 +1,12 @@
 Attribute VB_Name = "GlobalVariables"
 Option Explicit
+
 Public Const AppNavn = "WordMat"
-Public Const AppVersion = "1.28"
+Public Const AppVersion = "1.29"
 #If Mac Then ' WordMat shows patchVersion attached to AppVersion. if ".1" then shows as 1.24.1. or " beta" -> "1.24 beta" A new PatchVersion does not trigger autoupdate
-    Public Const PatchVersion = ".1" ' Mac  ".1"
+    Public Const PatchVersion = "" ' Mac  ".1"
 #Else
-    Public Const PatchVersion = ".1" ' Windows ".1"
+    Public Const PatchVersion = "" ' Windows ".1"
 #End If
 'Public DebugWM As Boolean = True
 Public DebugWM As Boolean ' brug toggledebug funktion
@@ -32,6 +33,14 @@ Public MaxProc As MaximaProcess
 Public MaxProc As Object
 Public MaxProcUnit As Object
 #End If
+
+' Farvekoder til LabelButtons
+Public Const LBColorFont = &H242424 'ForeColor
+Public Const LBColorBorder = &H616161 'BorderColor
+Public Const LBColorInactive = &HFFFFFF 'BackColor
+Public Const LBColorHover = &HF5F5F5 'BackColor
+Public Const LBColorPress = &HEBEBEB 'ForeColor
+
 
 Public ResFeltIndex As Integer
 Public ResIndex As Integer
