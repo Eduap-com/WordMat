@@ -758,7 +758,7 @@ Sub GeoGebra()
     
     UfWait.Label_tip.Caption = Sprog.A(362)
     UfWait.Label_progress.Caption = "***"
-    UfWait.CommandButton_stop.visible = False
+    UfWait.Label_stop.visible = False
     UfWait.Show vbModeless
     
     geogebrasti = GeoGebraPath()

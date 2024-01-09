@@ -14,17 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-'Public VarParam As String
-'Public Param2 As String
 Public StopNow As Boolean
-
-Private Sub CommandButton_stop_Click()
-On Error Resume Next
-    omax.StopNow = True
-    StopNow = True
-'    omax.CloseCmd
-    Me.hide
-End Sub
 
 Private Sub UserForm_Activate()
     StopNow = False
@@ -43,7 +33,25 @@ Private Sub SetCaptions()
     Me.Caption = Sprog.A(673)
     Label_tip.Caption = Sprog.A(674)
     Frame1.Caption = Sprog.Activity
-    CommandButton_stop.Caption = Sprog.StopLabel
+    Label_stop.Caption = Sprog.StopLabel
     Label1.Caption = Sprog.Wait
 End Sub
 
+Private Sub label_stop_Click()
+On Error Resume Next
+    omax.StopNow = True
+    StopNow = True
+    Me.hide
+End Sub
+
+Private Sub label_stop_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_stop.BackColor = LBColorPress
+End Sub
+
+Private Sub label_stop_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_stop.BackColor = LBColorHover
+End Sub
+
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_stop.BackColor = LBColorInactive
+End Sub

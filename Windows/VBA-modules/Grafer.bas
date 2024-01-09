@@ -289,7 +289,7 @@ ea.SetNormalBrackets
     Dim UfWait As New UserFormWaitForMaxima
     UfWait.Label_tip.Caption = Sprog.A(371)
     UfWait.Label_progress.Caption = "***"
-    UfWait.CommandButton_stop.visible = False
+    UfWait.Label_stop.visible = False
     UfWait.Show vbModeless
 On Error GoTo fejl
 Application.ScreenUpdating = False
@@ -915,7 +915,7 @@ Application.ScreenUpdating = False
 EnableExcelMacros
     
     Dim UfWait2 As New UserFormWaitForMaxima
-    UfWait2.CommandButton_stop.visible = False
+    UfWait2.Label_stop.visible = False
     UfWait2.Label_tip.Caption = "      " & Sprog.A(372) & "..."
     UfWait2.Label_progress.Caption = Sprog.A(373) ' "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
     UfWait2.Show vbModeless

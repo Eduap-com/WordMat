@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormTrekant 
    Caption         =   "Trekantsløser"
-   ClientHeight    =   6390
+   ClientHeight    =   6585
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   11115
+   ClientWidth     =   11130
    OleObjectBlob   =   "UserFormTrekant.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -37,7 +37,7 @@ Option Explicit
     Dim Bfejl As Boolean
     Dim inputtext As String
 
-Private Sub CommandButton_nulstil_Click()
+Private Sub Label_nulstil_Click()
     TextBox_A.Text = ""
     TextBox_B.Text = ""
     TextBox_C.Text = ""
@@ -53,9 +53,9 @@ Private Sub CommandButton_nulstil_Click()
     
 End Sub
 
-Private Sub CommandButton_ok_Click()
+Private Sub Label_ok_Click()
 
-'On Error GoTo fejl
+On Error GoTo fejl
 
     Dim cv As Shape
     Dim t As Table
@@ -1268,7 +1268,7 @@ End Sub
 
 Private Sub SetCaptions()
     Me.Caption = Sprog.TriangleSolver
-    CommandButton_ok.Caption = Sprog.OK
+    Label_ok.Caption = Sprog.OK
     Frame1.Caption = Sprog.RightAngled & "?"
     Frame2.Caption = Sprog.Naming
     OptionButton_navngivmanuel.Caption = Sprog.Manuel
@@ -1279,12 +1279,44 @@ Private Sub SetCaptions()
     Label1.Caption = Sprog.TriangleSolverExplanation1
     Label2.Caption = Sprog.TriangleSolverExplanation2
     OptionButton_vilk.Caption = Sprog.AnyTriangle
-    CommandButton_nulstil.Caption = Sprog.Clear
+    Label_nulstil.Caption = Sprog.Clear
     
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
     SaveSettings
+End Sub
+
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
+Private Sub Label_cancel_Click()
+    Me.hide
+    Application.ScreenUpdating = False
+End Sub
+
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub Label_nulstil_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_nulstil.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_nulstil_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_nulstil.BackColor = LBColorHover
+End Sub
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
+    Label_nulstil.BackColor = LBColorInactive
 End Sub
 
 

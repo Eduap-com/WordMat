@@ -2,7 +2,7 @@ Attribute VB_Name = "Maxima"
 Option Explicit
 'Public UFWait As UserFormWaitForMaxima
 Public UFSelectVar As UserFormSelectVar
-Public UFSelectVars As UserFormSelectVars
+'Public UFSelectVars As UserFormSelectVars
 Public omax As CMaxima
 Public tid As Double
 Private DeVarList As String
@@ -450,6 +450,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim scrollpos As Double
     Dim UFSolvenumeric As New UserFormNumericQuestion
     Dim ea As New ExpressionAnalyser, SaveKommando As String
+    Dim sstart As Long, sslut As Long
     scrollpos = ActiveWindow.VerticalPercentScrolled
     Dim oData As New DataObject, ClipText As String
     
@@ -460,8 +461,8 @@ Sub MaximaSolvePar(Optional variabel As String)
     omax.prevspr = ""
 
     Set UFSelectVar = New UserFormSelectVar
-    Set UFSelectVars = New UserFormSelectVars
-    Dim sstart As Long, sslut As Long
+'    Set UFSelectVars = New UserFormSelectVars
+    UFSelectVar.NoEq = 1
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    If UFWait Is Nothing Then Set UFWait = New UserFormWaitForMaxima
     '    Set UFWait = New UserFormWaitForMaxima
@@ -731,16 +732,16 @@ stophop:     If omax.AntalVars > 1 Then
     Else    ' ligningssystem
 
         omax.FindVariable
-        UFSelectVars.NoEq = omax.AntalKom
-        UFSelectVars.vars = omax.vars
-        UFSelectVars.DefS = omax.DefString
-        UFSelectVars.Show
-        variabel = UFSelectVars.SelectedVar
+        UFSelectVar.NoEq = omax.AntalKom
+        UFSelectVar.vars = omax.vars
+        UFSelectVar.DefS = omax.DefString
+        UFSelectVar.Show
+        variabel = UFSelectVar.SelectedVar
 
         '    variabel = InputBox("Indtast variable som ligningssystemet skal løses for adskilt af komma", "Variable", "x,y")
 
         If variabel = "" Then GoTo slut
-        omax.TempDefs = UFSelectVars.TempDefs
+        omax.TempDefs = UFSelectVar.TempDefs
         '    UFWait.ActionToPerform = "solvesystem"
         '    UFWait.VarParam = variabel
 
@@ -990,7 +991,7 @@ Sub MaximaEliminate()
     PrepareMaxima
     omax.prevspr = ""
     '    Set UFSelectVar = New UserFormSelectVar
-    Set UFSelectVars = New UserFormSelectVars
+    Set UFSelectVar = New UserFormSelectVar
     Dim variabel As String
     Dim sstart As Long, sslut As Long
     If Not omax.MaximaInstalled Then GoTo slut
@@ -1023,18 +1024,18 @@ Sub MaximaEliminate()
 
         omax.ReadSelection
         omax.FindVariable
-        UFSelectVars.Eliminate = True
-        UFSelectVars.NoEq = omax.AntalKom
-        UFSelectVars.vars = omax.vars
-        UFSelectVars.DefS = omax.DefString
-        UFSelectVars.Caption = Sprog.A(377)
-        UFSelectVars.Show
-        variabel = UFSelectVars.SelectedVar
+        UFSelectVar.Eliminate = True
+        UFSelectVar.NoEq = omax.AntalKom
+        UFSelectVar.vars = omax.vars
+        UFSelectVar.DefS = omax.DefString
+        UFSelectVar.Caption = Sprog.A(377)
+        UFSelectVar.Show
+        variabel = UFSelectVar.SelectedVar
 
         '    variabel = InputBox("Indtast variable som ligningssystemet skal løses for adskilt af komma", "Variable", "x,y")
 
         If variabel = "" Then GoTo slut
-        omax.TempDefs = UFSelectVars.TempDefs
+        omax.TempDefs = UFSelectVar.TempDefs
         '    UFWait.ActionToPerform = "solvesystem"
         '    UFWait.VarParam = variabel
         '    Set UFWait.omax = omax
@@ -1157,7 +1158,8 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     PrepareMaxima
     omax.prevspr = ""
     Set UFSelectVar = New UserFormSelectVar
-    Set UFSelectVars = New UserFormSelectVars
+    UFSelectVar.NoEq = 1
+'    Set UFSelectVars = New UserFormSelectVars
 '    Dim variabel As String
     Dim sstart As Long, sslut As Long
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
@@ -1352,10 +1354,10 @@ ghop:
 
         omax.ReadSelection
         omax.FindVariable
-        UFSelectVars.NoEq = Selection.OMaths.Count
-        UFSelectVars.vars = omax.vars
-        UFSelectVars.Show
-        Variable = UFSelectVars.SelectedVar
+        UFSelectVar.NoEq = Selection.OMaths.Count
+        UFSelectVar.vars = omax.vars
+        UFSelectVar.Show
+        Variable = UFSelectVar.SelectedVar
         Variable = Replace(Variable, ",", "=1" & ListSeparator)
         Variable = Variable & "=1"
         inp = InputBox(Sprog.A(379), Sprog.A(380), Variable)
@@ -1465,7 +1467,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
     '    Set UFWait = New UserFormWaitForMaxima
     Dim UFSolvenumeric As New UserFormSolveNumeric
 
-    Set UFSelectVars = New UserFormSelectVars
+'    Set UFSelectVars = New UserFormSelectVars
 
     '    MsgBox WordWindowNavn
     Dim Sep As String

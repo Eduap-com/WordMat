@@ -15,16 +15,18 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public vars As String
-Public DefS As String
-Public TempDefs As String
-Public SelectedVar As String
-Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
+Public vars As String ' semikolon separeret liste over de variable som der skal vælges mellem. Sættes inden show kaldes
+Public DefS As String ' definitioner der er i dokumentet. Sættes inden show kaldes
+Public TempDefs As String ' Kan både sættes før show kaldes og på formen
+Public SelectedVar As String ' Den variabel der er blevet valgt
+Public NoEq As Integer ' no of equations to solve for
+Public Eliminate As Boolean
+Private Svars As Variant ' array der holder variabelnavne.  som de skal returneres dvs. uden asciikonvertering
 
 Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
 Dim Arr As Variant
-Dim i As Integer
+Dim i As Integer, c As Integer
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
     ElseIf OptionButton_exactonly.Value = True Then
@@ -44,11 +46,32 @@ Dim i As Integer
         End If
     End If
     
-    If TextBox_variabel.Text = "" Then
-        SelectedVar = Svars(ListBox_vars.ListIndex)
-'        SelectedVar = ListBox_vars.value
+    If NoEq <= 1 Then
+        ListBox_vars.MultiSelect = fmMultiSelectSingle
+        If TextBox_variabel.Text = "" Then
+            SelectedVar = Svars(ListBox_vars.ListIndex)
+    '        SelectedVar = ListBox_vars.value
+        Else
+            SelectedVar = TextBox_variabel.Text
+        End If
     Else
-        SelectedVar = TextBox_variabel.Text
+        For i = 0 To ListBox_vars.ListCount - 1
+            If ListBox_vars.Selected(i) Then
+    '            SelectedVar = SelectedVar & ListBox_vars.List(i) & ","
+                SelectedVar = SelectedVar & Svars(i) & ","
+                c = c + 1
+            End If
+        Next
+        If Len(TextBox_variabel.Text) > 0 Then
+            Arr = Split(TextBox_variabel.Text, ",")
+            For i = 0 To UBound(Arr)
+                    SelectedVar = SelectedVar & Arr(i) & ","
+                    c = c + 1
+            Next
+        End If
+        If SelectedVar <> "" Then
+            SelectedVar = Left(SelectedVar, Len(SelectedVar) - 1)
+        End If
     End If
     
     TempDefs = TextBox_def.Text
@@ -57,7 +80,7 @@ Dim i As Integer
     TempDefs = Replace(TempDefs, ",", ".")
     Arr = Split(TempDefs, VbCrLfMac)
 
-    TempDefs = ""
+    TempDefs = vbNullString
     For i = 0 To UBound(Arr)
         If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
             If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
@@ -69,7 +92,7 @@ Dim i As Integer
         End If
     Next
     
-    ' Hvis units er on så må man ikke løse for en enhed
+    ' Hvis units er on, så må man ikke løse for en enhed
     If MaximaUnits Then
         If InStr("A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s", SelectedVar) Then
             MsgBox Sprog.A(254), vbOKOnly, Sprog.Warning
@@ -94,9 +117,9 @@ Dim i As Integer
     
     GoTo slut
 fejl:
-    SelectedVar = ""
+    SelectedVar = vbNullString
 slut:
-    UFSelectVar.hide
+    Me.hide
     Application.ScreenUpdating = False
 End Sub
 
@@ -137,14 +160,14 @@ Private Sub TextBox_def_Enter()
 End Sub
 
 Private Sub UserForm_Activate()
-    'Dim arr As Variant
-
     Dim i As Integer, svar As String
+    
     SetCaptions
     TextBox_def.WordWrap = True
     TextBox_def.WordWrap = False
     TextBox_def.WordWrap = True
     Application.ScreenUpdating = True
+    
     
     If MaximaUnits Then
         Label_unitwarning.visible = True
@@ -294,6 +317,24 @@ Private Sub UserForm_Activate()
         ListBox_vars.ListIndex = 0
     End If
     
+    If Eliminate Then
+        ListBox_vars.MultiSelect = fmMultiSelectMulti
+        For i = 0 To NoEq - 2
+            ListBox_vars.Selected(i) = True
+        Next
+        Label_choose.Caption = Sprog.A(247) & " " & NoEq - 1 & " " & Sprog.A(245)
+        Label_tast.Caption = Sprog.A(248) & " " & NoEq - 1 & " " & Sprog.A(249)
+    ElseIf NoEq > 1 Then
+        ListBox_vars.MultiSelect = fmMultiSelectMulti
+        For i = 0 To NoEq - 1
+            ListBox_vars.Selected(i) = True
+        Next
+        Label_choose.Caption = Sprog.A(250) & " " & NoEq & " " & Sprog.A(245)
+        Label_tast.Caption = Sprog.A(251) & " " & NoEq & " " & Sprog.A(249)
+    Else
+        ListBox_vars.MultiSelect = fmMultiSelectSingle
+    End If
+
     ListBox_vars.SetFocus
 End Sub
 Sub FillComboBoxCifre()
@@ -316,9 +357,15 @@ Private Sub UserForm_Initialize()
     
 End Sub
 Private Sub SetCaptions()
-    Me.Caption = Sprog.SolveEquation
-    Label1.Caption = Sprog.ChooseVariable
-    Label2.Caption = Sprog.WriteVariable
+    If NoEq > 1 Then
+        Me.Caption = Sprog.SolveSystem
+        Label_choose.Caption = Sprog.ChooseVariables
+    Else
+        Me.Caption = Sprog.SolveEquation
+        Label_choose.Caption = Sprog.ChooseVariable
+    End If
+
+    Label_tast.Caption = Sprog.WriteVariable
     Label_ok.Caption = Sprog.OK
     Label_cancel.Caption = Sprog.Cancel
     Label4.Caption = Sprog.PresentDefs
