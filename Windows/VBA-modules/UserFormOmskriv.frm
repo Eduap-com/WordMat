@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormOmskriv 
    Caption         =   "Omskriv"
-   ClientHeight    =   5475
+   ClientHeight    =   5595
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   9480.001
+   ClientWidth     =   10620
    OleObjectBlob   =   "UserFormOmskriv.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -29,6 +29,8 @@ Private Sub CommandButton_annuller_Click()
     Me.hide
 End Sub
 Sub ExecuteOK()
+    SammeLinje = CheckBox_sammelinje.Value
+
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
     ElseIf OptionButton_exactonly.Value = True Then
@@ -77,12 +79,6 @@ Sub ExecuteOK()
 
 End Sub
 Private Sub CommandButton_ok_Click()
-    SammeLinje = False
-    ExecuteOK
-End Sub
-
-Private Sub CommandButton_oksammelinje_Click()
-    SammeLinje = True
     ExecuteOK
 End Sub
 
@@ -155,7 +151,7 @@ Private Sub SetCaptions()
     Me.Caption = Sprog.RibReduce
     Label5.Caption = Sprog.TempDefs
     Frame6.Caption = Sprog.Logarithm & " output"
-    CommandButton_annuller.Caption = Sprog.Cancel
+    Label_cancel.Caption = Sprog.Cancel
     Label_enheder.Caption = Sprog.OutputUnits
     Label6.Caption = Sprog.SignificantFigures
     CheckBox_vidnotation.Caption = Sprog.ScientificNotation
@@ -173,7 +169,40 @@ Private Sub SetCaptions()
     Label_rationaliser.Caption = Sprog.RationalizeExplain
     CheckBox_trigreduce.Caption = Sprog.TrigReduce
     Label_trigreduce.Caption = Sprog.TrigReduceExplain
-    CommandButton_oksammelinje.Caption = Sprog.OKSame
-    CommandButton_ok.Caption = Sprog.OKNew
+    CommandButton_ok.Caption = Sprog.OK
     
+    If Sprog.SprogNr = 0 Then
+        CheckBox_sammelinje.Caption = "Indsæt samme linje"
+    Else
+        CheckBox_sammelinje.Caption = "Insert same line"
+    End If
+    
+End Sub
+
+Private Sub Label_ok_Click()
+    CommandButton_ok_Click
+End Sub
+
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
+Private Sub Label_cancel_Click()
+    annuller = True
+    Me.hide
+End Sub
+
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
 End Sub

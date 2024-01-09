@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormGeoGebra 
    Caption         =   "GeoGebra"
-   ClientHeight    =   2655
+   ClientHeight    =   3510
    ClientLeft      =   -15
    ClientTop       =   75
-   ClientWidth     =   7515
+   ClientWidth     =   8775.001
    OleObjectBlob   =   "UserFormGeoGebra.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -17,25 +17,20 @@ Attribute VB_Exposed = False
 Option Explicit
 Public ReturnVal As Integer ' 1=Install, 2=browser
 
-Private Sub CommandButton_Installer_Click()
-
-'    explorersti = """" & Environ("ProgramFiles") & "\Internet Explorer\iexplore.exe"" http://www.geogebra.org/cms/da/installers"
-
-'    appnr = Shell(explorersti, vbMaximizedFocus) 'vbNormalFocus vbMinimizedFocus
+Private Sub Label_Installer_Click()
     ReturnVal = 1
     Me.hide
 End Sub
 
 Private Sub CommandButton_webstart_Click()
-'Dim explorersti As String
-'Dim appnr As Integer
-'    OpenLink "https://www.geogebra.org/classic/"
-'    explorersti = """" & Environ("ProgramFiles") & "\Internet Explorer\iexplore.exe"" http://www.geogebra.org/webstart/geogebra.html"
-'    appnr = Shell(explorersti, vbMaximizedFocus) 'vbNormalFocus vbMinimizedFocus
     ReturnVal = 2
     Me.hide
 End Sub
 
+
+Private Sub Label_webstart_Click()
+    CommandButton_webstart_Click
+End Sub
 
 Private Sub UserForm_Activate()
 #If Mac Then
@@ -57,15 +52,34 @@ Private Sub UserForm_Activate()
 '    Label2.Caption = Sprog.A(293)
     Label3.Caption = Sprog.A(294)
     
-    CommandButton_webstart.Caption = Sprog.A(296)
+    Label_webstart.Caption = Sprog.A(296)
     
 #If Mac Then
-    CommandButton_Installer.Caption = Sprog.A(295) & " 5"
+    Label_Installer.Caption = Sprog.A(295) & " 5"
 #Else
-    CommandButton_Installer.Caption = Sprog.A(295)
+    Label_Installer.Caption = Sprog.A(295)
 #End If
     
     ReturnVal = 0
 End Sub
 
+Private Sub Label_Installer_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_Installer.BackColor = LBColorPress
+End Sub
 
+Private Sub Label_Installer_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_Installer.BackColor = LBColorHover
+End Sub
+
+Private Sub Label_webstart_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_webstart.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_webstart_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_webstart.BackColor = LBColorHover
+End Sub
+
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_Installer.BackColor = LBColorInactive
+    Label_webstart.BackColor = LBColorInactive
+End Sub

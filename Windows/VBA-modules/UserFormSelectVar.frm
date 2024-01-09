@@ -123,31 +123,6 @@ slut:
     Application.ScreenUpdating = False
 End Sub
 
-Private Sub Label_cancel_Click()
-    Me.hide
-    Application.ScreenUpdating = False
-End Sub
-
-Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
-    Label_cancel.BackColor = LBColorPress
-End Sub
-
-Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
-    Label_cancel.BackColor = LBColorHover
-End Sub
-
-Private Sub Label_ok_Click()
-    CommandButton_ok_Click
-End Sub
-
-Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
-    Label_ok.BackColor = LBColorPress
-End Sub
-
-Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
-    Label_ok.BackColor = LBColorHover
-End Sub
-
 Private Sub ListBox_vars_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     CommandButton_ok_Click
 End Sub
@@ -397,7 +372,28 @@ Dim c As control
 End Sub
 
 
+Private Sub Label_cancel_Click()
+    Me.hide
+    Application.ScreenUpdating = False
+End Sub
+Private Sub Label_ok_Click()
+    CommandButton_ok_Click
+End Sub
+
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
 Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
 End Sub
+

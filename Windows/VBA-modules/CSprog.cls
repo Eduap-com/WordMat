@@ -3348,8 +3348,8 @@ SA(684, 0) = "Starter Safari"
 SA(684, 1) = "Opening Safari"
 SA(684, 2) = ""
 
-SA(685, 0) = "Problemet kunne ikke løses. Vil du prøve med en anden metode eller CAS-motor?"
-SA(685, 1) = "The problem copuld not be solved. Do you want to try another method or CAS-engine?"
+SA(685, 0) = "Problemet kunne ikke løses." & VbCrLfMac & "Vil du prøve med en anden metode eller CAS-motor?"
+SA(685, 1) = "The problem copuld not be solved." & VbCrLfMac & "Do you want to try another method or CAS-engine?"
 SA(685, 2) = ""
 
 SA(686, 0) = "CAS motor"

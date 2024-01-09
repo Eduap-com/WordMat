@@ -1154,7 +1154,7 @@ Dim varval As String
 '        MsgBox AscW(var) & vbCrLf & VBA.ChrW(960)
         ea2.Pos = ea2.Pos + 1
 '        If var = "z" Then geogebrafil.Show3D = True  ' ikke implementeret endnu
-        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (Left(Var, 1) = "_") And Not (ea.IsFunction(Var)) And Not (ea.ContainsVar(Var)) And Var <> "" And Var <> "x" And Var <> "y" And Var <> "z" And Var <> "e" And Var <> "pi" And Var <> "matrix" And Var <> "if" And Var <> "elseif" And Var <> "then" And Var <> "and" And Var <> "or" And Var <> "else" And Var <> "amp" And Var <> VBA.ChrW(960) Then  ' 960=pi
+        If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (Left(Var, 1) = "_") And Not (ea.IsFunction(Var)) And Not (ea.ContainsVar(Var)) And Var <> "" And Var <> "x" And Var <> "y" And Var <> "z" And Var <> "e" And Var <> "pi" And Var <> "matrix" And Var <> "if" And Var <> "elseif" And Var <> "then" And Var <> "and" And Var <> "or" And Var <> "else" And Var <> "amp" And Var <> "infinity" And Var <> VBA.ChrW(960) Then  ' 960=pi
             varval = InputBox(Sprog.A(363) & " " & Var & vbCrLf & vbCrLf & Sprog.A(364), Sprog.A(365), "1")
             If Len(varval) > 0 Then
                 If Not geogebrafil Is Nothing Then
