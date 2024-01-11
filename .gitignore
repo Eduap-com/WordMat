@@ -13,6 +13,7 @@ Windows/WordMat*- Kopi*.dotm
 
 # Dont upload Backup folders
 Windows/Backup
+Windows/VBA-Modules-Backup*
 Mac/Backup
 
 #mac folder files
