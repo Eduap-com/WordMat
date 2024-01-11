@@ -12,9 +12,9 @@ Mac/WordMat*.pkg
 Windows/WordMat*- Kopi*.dotm
 
 # Dont upload Backup folders
-Windows/Backup
-Windows/VBA-Modules-Backup*
-Mac/Backup
+/Windows/Backup/
+/Windows/VBA-Modules-Backup*/
+/Mac/Backup/
 
 #mac folder files
 */.DS_Store
