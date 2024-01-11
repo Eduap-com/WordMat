@@ -12,12 +12,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
 Dim start
 Private Sub UserForm_Activate()
@@ -34,7 +28,7 @@ Private Sub UserForm_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 End Sub
 
 Private Sub UserForm_Initialize()
-    Call RemoveCaption(Me)
+'    Call RemoveCaption(Me) ' virker ikke særlig godt
     Me.Caption = ""
     Label_auto.Caption = Sprog.Auto
     Label_exact.Caption = Sprog.Exact
