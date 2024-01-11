@@ -197,6 +197,7 @@ Public Sub ExportAllModules()
     Dim ModuleFolder As String
     Dim ModuleBackupFolder As String
     Dim NoOfModules As Integer
+    Dim BackupFolder As String, n As Integer, ns As String
     '    Dim UfWait2 As UserFormWaitForMaxima ' det duer ikke at bruge noget der refererer uden for vbamodul, da de bliver slettet, og så fejler hele modulet og der kan ikke importeres
     '    Set UfWait2 = New UserFormWaitForMaxima
     On Error GoTo fejl
@@ -218,27 +219,43 @@ Public Sub ExportAllModules()
     ''' The code below create this folder if it not exist
     ''' or delete all files in the folder if it exist.
     ModuleFolder = FolderWithVBAProjectFiles
-    ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup\"
-    
     If ModuleFolder = "Error" Then
         MsgBox "Export Folder does not exist and could not be created", vbOKOnly, "Error"
         Exit Sub
     End If
-    If Dir(ModuleBackupFolder) <> "" Then
-        If MsgBox("There is already a backup-folder. Do you want to overwrite the contents?", vbYesNo, "Confirm") = vbYes Then
-            Err.Clear
-            On Error Resume Next
-            Kill ModuleBackupFolder & "*.*"
-            RmDir ModuleBackupFolder
-            On Error GoTo fejl
-            If Err.Number > 0 Then
-                MsgBox "Could not delete backupfolder"
-                GoTo slut
-            End If
-        Else
-            MsgBox "Export aborted", vbOKOnly, "Aborted"
-            GoTo slut
+    ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup\"
+    If Dir(ModuleBackupFolder, vbDirectory) <> "" Then
+        BackupFolder = Dir(Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup*", vbDirectory)
+        ns = right(BackupFolder, Len(BackupFolder) - Len(VBAModulesFolder) - 7)
+        If IsNumeric(ns) Then
+            If CInt(ns) > n Then n = CInt(ns)
         End If
+        Do
+            BackupFolder = Dir()
+            If BackupFolder <> vbNullString Then
+                ns = right(BackupFolder, Len(BackupFolder) - Len(VBAModulesFolder) - 7)
+                If IsNumeric(ns) Then
+                    If CInt(ns) > n Then n = CInt(ns)
+                End If
+            End If
+        Loop While BackupFolder <> vbNullString
+        n = n + 1
+        ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup" & n & "\"
+        
+        '        If MsgBox("There is already a backup-folder. Do you want to overwrite the contents?", vbYesNo, "Confirm") = vbYes Then
+        '            Err.Clear
+        '            On Error Resume Next
+        '            Kill ModuleBackupFolder & "*.*"
+        '            RmDir ModuleBackupFolder
+        '            On Error GoTo fejl
+        '            If Err.Number > 0 Then
+        '                MsgBox "Could not delete backupfolder"
+        '                GoTo slut
+        '            End If
+        '        Else
+        '            MsgBox "Export aborted", vbOKOnly, "Aborted"
+        '            GoTo slut
+        '        End If
     End If
     Name ModuleFolder As ModuleBackupFolder ' omdøber eksisterende folder til backup
     ModuleFolder = FolderWithVBAProjectFiles ' genskaber ny folder
@@ -320,8 +337,8 @@ Public Sub ExportAllModules()
             MsgBox "The number of files in the export is significantly smaller than the previous export. Please check that this is correct." & vbCrLf & "The previous export has not been deleted and is backed up in:" & vbCrLf & ModuleBackupFolder, vbOKOnly, "Alert"
         Else
             On Error Resume Next
-            Kill ModuleBackupFolder & "*.*"
-            RmDir ModuleBackupFolder
+'            Kill ModuleBackupFolder & "*.*"
+'            RmDir ModuleBackupFolder
             On Error GoTo fejl
         End If
     Else
@@ -525,11 +542,11 @@ GetTimeString = Year(d) & Month(d) & Day(d) & AddZero(Hour(d)) & AddZero(Minute(
 
 End Function
 
-Function AddZero(N As Integer) As String
-If N < 10 Then
-    AddZero = "0" & N
+Function AddZero(n As Integer) As String
+If n < 10 Then
+    AddZero = "0" & n
 Else
-    AddZero = N
+    AddZero = n
 End If
 End Function
 
