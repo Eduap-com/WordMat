@@ -197,7 +197,7 @@ Public Sub ExportAllModules()
     Dim ModuleFolder As String
     Dim ModuleBackupFolder As String
     Dim NoOfModules As Integer
-    Dim BackupFolder As String, n As Integer, ns As String
+    Dim backupFolder As String, n As Integer, ns As String
     '    Dim UfWait2 As UserFormWaitForMaxima ' det duer ikke at bruge noget der refererer uden for vbamodul, da de bliver slettet, og så fejler hele modulet og der kan ikke importeres
     '    Set UfWait2 = New UserFormWaitForMaxima
     On Error GoTo fejl
@@ -225,20 +225,20 @@ Public Sub ExportAllModules()
     End If
     ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup\"
     If Dir(ModuleBackupFolder, vbDirectory) <> "" Then
-        BackupFolder = Dir(Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup*", vbDirectory)
-        ns = right(BackupFolder, Len(BackupFolder) - Len(VBAModulesFolder) - 7)
+        backupFolder = Dir(Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup*", vbDirectory)
+        ns = right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
         If IsNumeric(ns) Then
             If CInt(ns) > n Then n = CInt(ns)
         End If
         Do
-            BackupFolder = Dir()
-            If BackupFolder <> vbNullString Then
-                ns = right(BackupFolder, Len(BackupFolder) - Len(VBAModulesFolder) - 7)
+            backupFolder = Dir()
+            If backupFolder <> vbNullString Then
+                ns = right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
                 If IsNumeric(ns) Then
                     If CInt(ns) > n Then n = CInt(ns)
                 End If
             End If
-        Loop While BackupFolder <> vbNullString
+        Loop While backupFolder <> vbNullString
         n = n + 1
         ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup" & n & "\"
         
@@ -469,20 +469,20 @@ Public Sub RemoveAllModules()
     DeleteAllModules True
 End Sub
 Function CountFilesInFolder(FolderPath As String, Optional OnlyModules As Boolean = False) As Long
-    Dim FileName As String
+    Dim fileName As String
     Dim FileCount As Long
     If right(FolderPath, 1) = "\" Then
-        FileName = Dir(FolderPath & "*")
+        fileName = Dir(FolderPath & "*")
     Else
-        FileName = Dir(FolderPath & "\*")
+        fileName = Dir(FolderPath & "\*")
     End If
-    Do While FileName <> ""
+    Do While fileName <> ""
         If OnlyModules Then
-            If (InStr(FileName, ".bas") > 0 Or InStr(FileName, ".cls") > 0 Or InStr(FileName, ".frm") > 0) Then FileCount = FileCount + 1
+            If (InStr(fileName, ".bas") > 0 Or InStr(fileName, ".cls") > 0 Or InStr(fileName, ".frm") > 0) Then FileCount = FileCount + 1
         Else
             FileCount = FileCount + 1
         End If
-        FileName = Dir()
+        fileName = Dir()
     Loop
     CountFilesInFolder = FileCount
 End Function
@@ -593,4 +593,65 @@ Sub RemoveCommentOutThisDocument()
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
 
+Sub BackupThisDocument()
+' saves a backup of this document in Backupfolder. Attaches number not to overwrite existing backups in that folder
+    Dim sourcePath As String
+    Dim destinationPath As String
+    Dim fileName As String
+    Dim fileExtension As String
+    Dim backupFolder As String
+    Dim fileNumber As Integer
+    Dim currentFile As String
+    Dim BackupFilePath As String
+    Dim fso As Object
+    
+    ActiveDocument.Save
 
+    ' Get the full path of the active document
+    sourcePath = ActiveDocument.FullName
+    
+    ' Extract the file name and extension from the source path
+    fileName = Mid(sourcePath, InStrRev(sourcePath, "\") + 1, InStrRev(sourcePath, ".") - InStrRev(sourcePath, "\") - 1)
+    fileExtension = Mid(sourcePath, InStrRev(sourcePath, "."))
+    
+    ' Define the backup folder
+    backupFolder = Left(sourcePath, InStrRev(sourcePath, "\")) & "Backup\"
+    
+    ' Create the backup folder if it doesn't exist
+    If Dir(backupFolder, vbDirectory) = "" Then
+        MkDir backupFolder
+    End If
+    
+    ' Initialize the file number
+    fileNumber = 1
+    
+    ' Loop through all the files in the backup folder
+    currentFile = Dir(backupFolder & fileName & "*")
+    Do While currentFile <> ""
+        ' Extract the number from the current file name
+        Dim currentNumber As Integer, currentNumberS As String
+        currentNumberS = Mid(currentFile, Len(fileName) + 1, Len(currentFile) - Len(fileName) - Len(fileExtension))
+        If IsNumeric(currentNumberS) Then
+            currentNumber = val(currentNumberS)
+            ' Update the file number if the current number is larger
+            If currentNumber >= fileNumber Then
+                fileNumber = currentNumber + 1
+            End If
+        End If
+        
+        ' Get the next file
+        currentFile = Dir
+    Loop
+    
+    ' Define the destination path
+    BackupFilePath = backupFolder & fileName & fileExtension
+    destinationPath = backupFolder & fileName & fileNumber & fileExtension
+    
+    If Dir(BackupFilePath) <> vbNullString Then
+        Name BackupFilePath As destinationPath   ' omdøber eksisterende backup til backup med nummer
+    End If
+       
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    fso.CopyFile sourcePath, BackupFilePath
+    Set fso = Nothing
+End Sub
