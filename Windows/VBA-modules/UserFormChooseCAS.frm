@@ -56,6 +56,7 @@ Private Sub UserForm_Activate()
 Label_MaximaSym.Enabled = True
 Label_GeoGebraSym.Enabled = True
 Label_GeoGebraBrowser.Enabled = True
+SetAllInactive
 If CASengine = 0 Then
     Label_MaximaSym.Enabled = False
 '    Label_GeoGebraSym.SetFocus

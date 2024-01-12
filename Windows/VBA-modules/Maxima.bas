@@ -8,7 +8,7 @@ Public tid As Double
 Private DeVarList As String
 Private TempCas As Integer
 
-Public Sub PrepareMaxima(Optional Unit As Boolean = False)
+Public Function PrepareMaxima(Optional Unit As Boolean = False) As Boolean
     '    Dim UFwait2 As UserFormWaitForMaxima
 
     On Error GoTo fejl
@@ -107,8 +107,9 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
     End If
 #End If
     omax.ConvertLnLog = True ' andre funktioner kan ændre denne. den nulstilles
-    omax.PrepareNewCommand    ' nulstiller og finder definitioner
-
+    If Not omax.PrepareNewCommand Then    ' nulstiller og finder definitioner
+        GoTo fejl
+    End If
     On Error Resume Next
     If op Then
         Unload UfWait2
@@ -116,12 +117,14 @@ Public Sub PrepareMaxima(Optional Unit As Boolean = False)
         d.Activate
 #End If
     End If
+    PrepareMaxima = True
     GoTo slut
 fejl:
     On Error Resume Next
     Unload UfWait2
+    PrepareMaxima = False
 slut:
-End Sub
+End Function
 #If Mac Then
 Function GetMaxProc() As MaximaProcess
         Set GetMaxProc = New MaximaProcess
@@ -703,11 +706,18 @@ stophop:     If omax.AntalVars > 1 Then
                 UFSolvenumeric.variabel = variabel
                 UFSolvenumeric.Show
             End If
-            If UFSolvenumeric.result = "num" Then
+            If UFSolvenumeric.result = "num" Then ' grafisk løsning valgt
                 Selection.End = sslut    ' slut skal være først eller går det galt
                 Selection.start = sstart
                 ActiveWindow.VerticalPercentScrolled = scrollpos
-                MaximaSolveNumeric UFSelectVar.ListBox_vars.Text
+                If GraphApp = 0 And CASengine = 0 Then
+                    MaximaSolveNumeric UFSelectVar.ListBox_vars.Text
+                Else
+                    CASengine = 1
+                    Selection.MoveLeft wdCharacter, 1
+                    MaximaNsolve variabel
+                    GoTo slut
+                End If
             Else
                 If UFSolvenumeric.result = "nsolve" Then
                     InsertForklaring Sprog.EquationSolvedNumFor & variabel & Sprog.ByCAS, False
@@ -724,12 +734,13 @@ stophop:     If omax.AntalVars > 1 Then
         Else    ' hvis der er løsning
             omax.InsertMaximaOutput
         End If
+
 #If Mac Then
 #Else
         Oundo.EndCustomRecord
 #End If
 
-    Else    ' ligningssystem
+    Else    '--------------- ligningssystem ----------------------
 
         omax.FindVariable
         UFSelectVar.NoEq = omax.AntalKom
@@ -1146,7 +1157,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     Dim fejlm As String
     Dim solutions As String
     Dim UFnsolve As New UserFormNumericQuestion
-    '    On Error GoTo fejl
+        On Error GoTo fejl
     Application.ScreenUpdating = False
     '    LockWindow
     Dim IsSolved As Boolean
@@ -1246,7 +1257,11 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             If MaximaForklaring Then
                 omax.GoToEndOfSelectedMaths
                 Selection.TypeParagraph
-                InsertForklaring "Ligningen blev løst med GeoGebra:", False
+                If Sprog.SprogNr = 1 Then
+                    InsertForklaring "Ligningen blev løst grafisk med GeoGebra:", False
+                Else
+                    InsertForklaring "Equation was solved graphically using GeoGebra:", False
+                End If
                 Selection.TypeParagraph
             End If
             s = Replace(omax.Kommando, ",", ".")
@@ -1620,7 +1635,7 @@ Sub beregn()
     '    st = Timer
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    Set UFWait = New UserFormWaitForMaxima
-    PrepareMaxima
+    If Not PrepareMaxima Then GoTo slut
     omax.prevspr = ""
 
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
@@ -2868,15 +2883,26 @@ End Sub
 #End If
 
 Function ValidateInput(Expr) As Boolean
-   Dim n As Integer
+    Dim n As Integer
    
-   ValidateInput = True
-   ' validate brackets
+    ValidateInput = True
+'    ' validate brackets
    
-   If GetCountOfChar(Expr, "(") <> GetCountOfChar(Expr, ")") Then
-      MsgBox "The number of brackets do not match in" & vbCrLf & Expr, vbOKOnly, "Syntax error"
-      ValidateInput = False
-   End If
+    If GetCountOfChar(Expr, "(") <> GetCountOfChar(Expr, ")") Then
+        If Sprog.SprogNr = 1 Then
+            MsgBox "Antallet af parenteser passer ikke i udtrykket" & vbCrLf & vbCrLf & Expr, vbOKOnly, "Syntaks fejl"
+        Else
+            MsgBox "The number of brackets do not match in" & vbCrLf & vbCrLf & Expr, vbOKOnly, "Syntax error"
+        End If
+        ValidateInput = False
+    ElseIf InStr(Expr, "\left(") Then
+        If Sprog.SprogNr = 1 Then
+            MsgBox "Du har en forkert indstilling i Word." & vbCrLf & "I Ligningsmenuen skal du skifte fra Latex til Unicode for at WordMat virker", vbOKOnly, "Forkert indstilling"
+        Else
+            MsgBox "You have a wrong setting in Words equation menu." & vbCrLf & "Change from Latex to Unicode.", vbOKOnly, "Wrong setting"
+        End If
+        ValidateInput = False
+    End If
    
 End Function
 

@@ -104,11 +104,11 @@ SA(6, 3) = ""
 SA(6, 2) = "Numere la ecuación"
 SA(6, 5) = ""
 
-SA(7, 0) = "Nummerede ligninger"
-SA(7, 1) = "Numbered equations"
+SA(7, 0) = "Num. lign."
+SA(7, 1) = "Num. eq."
 SA(7, 4) = ""
 SA(7, 3) = ""
-SA(7, 2) = "Ecuaciones numeradas"
+SA(7, 2) = "Ec. num." 'Ecuaciones numeradas
 SA(7, 5) = ""
 
 SA(8, 0) = "Indsæt Ligningssektion nr."
@@ -5088,10 +5088,10 @@ End Property
 Public Property Get SeekGraphically() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Søg flere løsninger grafisk"
-Case 3: s = "Buscar soluciones múltiples gráficamente"
+Case 1: s = "Grafisk løsning" 'Søg flere løsninger grafisk
+Case 3: s = "Soluciones gráficamente" 'Buscar soluciones múltiples gráficamente
 Case 4: s = ""
-Case Else: s = "Seek more solutions graphically"
+Case Else: s = "Graphical solutions"
 End Select
 SeekGraphically = s
 End Property
@@ -5691,9 +5691,6 @@ Case Else: s = "Complex calculation done exactly can take a very long time. Do y
 End Select
 RetryNum = s
 End Property
-
-
-
 
 Public Property Get dAsDiffChr() As String
 Dim s As String

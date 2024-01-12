@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormNumericQuestion 
    Caption         =   "Numerisk løsning"
-   ClientHeight    =   4710
+   ClientHeight    =   4155
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   8955.001
+   ClientWidth     =   10485
    OleObjectBlob   =   "UserFormNumericQuestion.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,19 +13,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
+
 Public result As String
 Public variabel As String
 Public FejlMeld As String
 Public Ligning As String
 Public Kommentar As String
 Public Finished As Boolean
+Public SorryNoAnalyticSol As Boolean ' Changes title
 
 Private Sub Label_cancel_Click()
     result = "afbryd"
@@ -56,7 +52,7 @@ Private Sub Label_nsolveB_Click()
     Me.hide
 End Sub
 
-Private Sub CommandButton_numeric_Click()
+Private Sub Label_numeric_Click()
     If Not Finished Then
         MaxProc.CloseProcess
         MaxProc.StartMaximaProcess
@@ -89,10 +85,11 @@ Private Sub UserForm_Activate()
 
     If CASengine > 0 Then
         Label2.Caption = ""
-        Label_overskrift.Caption = "Hvordan vil du løse ligningen numerisk?"
+        Label_nsolve.Caption = Replace(Label_nsolve.Caption, "=", " = ")
+        Label_overskrift.Caption = Sprog.NumericSolution
         Label_omskrevet.Caption = ""
         Finished = True
-        CommandButton_Omskrevet.visible = False
+'        CommandButton_Omskrevet.visible = False
 '        CommandButton_nsolve.SetFocus
         Exit Sub
     End If
@@ -102,13 +99,13 @@ Private Sub UserForm_Activate()
     Finished = False
     Label_nsolveB.visible = False
     Label_nsolve.Caption = ""
-    If Label_omskrevet.Caption = "" Then
-        Label_omskrevet.visible = False
-        CommandButton_Omskrevet.visible = False
-    Else
-        Label_omskrevet.visible = True
-        CommandButton_Omskrevet.visible = True
-    End If
+'    If Label_omskrevet.Caption = "" Then
+'        Label_omskrevet.visible = False
+'        CommandButton_Omskrevet.visible = False
+'    Else
+'        Label_omskrevet.visible = True
+'        CommandButton_Omskrevet.visible = True
+'    End If
     DoEvents
     Label_fejlmeld.Caption = FejlMeld
     
@@ -117,7 +114,8 @@ Private Sub UserForm_Activate()
     omax.Nsolve variabel, 0, 2, 15, 1, 0, 0
     If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
-    If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = omax.MaximaOutput
+    If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")
+    
     If Len(omax.MaximaOutput) > 1 Then
         Label_nsolveB.visible = True
 '        Label_nsolveB.SetFocus
@@ -135,7 +133,7 @@ Private Sub UserForm_Activate()
     omax.Nsolve variabel, -3, 3, 15, 5, 0, 0
     If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
-    If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = omax.MaximaOutput
+    If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")
     If Len(omax.MaximaOutput) > 1 Then
         Label_nsolveB.visible = True
 '        Label_nsolveB.SetFocus
@@ -153,7 +151,7 @@ Private Sub UserForm_Activate()
     omax.Nsolve variabel, -6, 6, 15, 20, 0, 0
     If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
-    If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = omax.MaximaOutput
+    If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")
     If Len(omax.MaximaOutput) > 1 Then
         Label_nsolveB.visible = True
 '        CommandButton_nsolve.SetFocus
@@ -171,7 +169,7 @@ Private Sub UserForm_Activate()
     omax.Nsolve variabel, -15, 15, 15, 20, 30, 30, True
     If Finished Then GoTo slut
     If omax.StopNow Then GoTo afslut
-    If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = omax.MaximaOutput
+    If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")
     If Len(omax.MaximaOutput) > 1 Then
         Label_nsolveB.visible = True
 '        CommandButton_nsolve.SetFocus
@@ -205,10 +203,20 @@ End Sub
 Private Sub SetCaptions()
     Me.Caption = Sprog.NumericSolution
     Label_nsolveB.Caption = Sprog.InsertSolutions
-    CommandButton_numeric.Caption = Sprog.SeekGraphically
-    CommandButton_Omskrevet.Caption = Sprog.InsertCASresult
+    Label_numeric.Caption = Sprog.SeekGraphically
+'    CommandButton_Omskrevet.Caption = Sprog.InsertCASresult
     Label_cancel.Caption = Sprog.Cancel
-    Label_overskrift.Caption = Sprog.NoAnalyticResult
+    If SorryNoAnalyticSol Then
+        Label_overskrift.Caption = Sprog.NoAnalyticResult
+    Else
+        Label_overskrift.Caption = Sprog.NumericSolution
+    End If
+    
+    If Sprog.SprogNr = 1 Then
+        Label_graphexplain.Caption = "Numerisk løsning giver ingen garanti for at alle løsninger er fundet. Overvej at forsøge grafisk løsning. Ved grafisk løsning viser man grafen for venstresiden og højresiden af ligningen i samme koordinatsystem. Løsningerne er så x-værdierne af grafernes skæringspunkter."
+    Else
+        Label_graphexplain.Caption = "Numerical solutions does not guarantee that alle solutions have been found. Consider trying graphical solution."
+    End If
     
 End Sub
 
@@ -224,7 +232,14 @@ End Sub
 Private Sub Label_nsolveB_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_nsolveB.BackColor = LBColorHover
 End Sub
+Private Sub Label_numeric_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_numeric.BackColor = LBColorPress
+End Sub
+Private Sub Label_numeric_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_numeric.BackColor = LBColorHover
+End Sub
 Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_nsolveB.BackColor = LBColorInactive
+    Label_numeric.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
 End Sub

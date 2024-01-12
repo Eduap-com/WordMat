@@ -40,6 +40,7 @@ Public Const LBColorBorder = &H616161 'BorderColor
 Public Const LBColorInactive = &HFFFFFF 'BackColor
 Public Const LBColorHover = &HF5F5F5 'BackColor
 Public Const LBColorPress = &HEBEBEB 'ForeColor
+Public Const LBColorTABPress = &HE0E0E0 'ForeColor
 
 
 Public ResFeltIndex As Integer

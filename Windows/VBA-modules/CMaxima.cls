@@ -113,7 +113,7 @@ Dim V As String, p As Integer
     GetVersion = val(V)
 End Function
 
-Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
+Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
     Dim DefS As String
     On Error Resume Next    ' der kommer fejl ved autoexec
     '    If at Is Nothing Then    ' giver fejl hvis køres i autoexec så skal også prøves her . 19/2  bruges vel ikke mere
@@ -146,15 +146,20 @@ Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
         Definitions = False
         InsertKillDef
         DefS = FindDefinitions
+        If DefS = "error" Then
+            PrepareNewCommand = False
+            GoTo slut
+        End If
         If Len(DefS) > 0 Then
             MaximaInputStreng = MaximaInputStreng & "[" & Left(Replace(DefS, "$", ","), Len(DefS) - 1) & "]$"
         End If
         MaximaInputStreng = MaximaInputStreng & "fejl;"
     End If
 
-    Exit Sub
+    PrepareNewCommand = True
+    GoTo slut
 
-    ' skal nok bruges til mac på et tidspunkt:
+    ' -------------------- skal nok bruges til mac på et tidspunkt: --------------
     Dim fkommando As String
     MaximaInputStreng = "["
     'MaximaInputStreng = MaximaInputStreng & "display2d:false,"
@@ -198,8 +203,10 @@ Public Sub PrepareNewCommand(Optional finddef As Boolean = True)
     'End If
 fejl:
     MsgBox Sprog.ErrorGeneral & vbCrLf & " preparing maxima", vbOKOnly, Sprog.Error
+    PrepareNewCommand = False
+slut:
 
-End Sub
+End Function
 Private Sub Class_Terminate()
 'lukker kommandoprompt
     On Error Resume Next
@@ -5938,8 +5945,7 @@ Sub ReadSelection()
         '    If Selection.OMaths(1).Range.End < Selection.Range.End Then
         '        Selection.OMaths(1).Range.Select
         '    End If
-        Selection.OMaths(1).Range.Select    ' ovenstående var ikke nok, men hvorfor var det der?
-
+        Selection.OMaths(1).ParentOMath.Range.Select ' ovenstående var ikke nok, men hvorfor var det der?
         antalgenstart = 0
 genstart:
         Kommando = ReadEquationCopy()
@@ -6879,7 +6885,10 @@ Function FindDefinitions() As String
 #Else
             s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range)
 #End If
-
+            If Not ValidateInput(s) Then
+                FindDefinitions = "error"
+                Exit Function
+            End If
             t = AddDefinition(s)
             If t = "STOP" Then Exit For
             FindDefinitions = t & FindDefinitions
@@ -6904,7 +6913,6 @@ slut:
     Selection.start = start
     Selection.End = sslut
     '    Selection.Collapse (wdCollapseStart)
-
 End Function
 Function AddDefinition(s As String) As String
    Dim t As String, i As Integer, Expr As String, c As String, j As Integer, Pos As Integer, pos2 As Integer, k As Integer

@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMaximaSettings 
    Caption         =   "Indstillinger"
-   ClientHeight    =   5340
+   ClientHeight    =   5955
    ClientLeft      =   -15
    ClientTop       =   45
-   ClientWidth     =   9780.001
+   ClientWidth     =   10410
    OleObjectBlob   =   "UserFormMaximaSettings.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,10 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
 Option Explicit
+
 Private MustRestart As Boolean
 Private LoadUnits As Boolean
 Private UserUnits As Boolean
@@ -34,7 +32,7 @@ Private Sub ComboBox_language_Change()
     LangChange = True
 End Sub
 
-Private Sub CommandButton_annuller_Click()
+Private Sub Label_cancel_Click()
     Me.hide
 End Sub
 
@@ -67,6 +65,11 @@ slut:
 
 
 End Sub
+
+Private Sub CommandButton_annuller_Click()
+
+End Sub
+
 Private Sub CommandButton_nulstilfigurer_Click()
 
 NulstilWordDoc ("Figurer.docx")
@@ -330,7 +333,27 @@ Private Sub CommandButton_sletenheder_Click()
     TextBox_outunits.Text = ""
 End Sub
 
-
+Private Sub Label4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+End Sub
+Private Sub Label5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+End Sub
+Private Sub Label6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+End Sub
+Private Sub Label7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+End Sub
+Private Sub Label8_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+End Sub
+Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+End Sub
+Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+End Sub
 
 Private Sub OptionButton_casmaxima_Change()
     SetCasButtons
@@ -565,7 +588,15 @@ Sub SetCaptions()
     MultiPage1.Pages("Page5").Caption = Sprog.Graph
     MultiPage1.Pages("Page6").Caption = Sprog.A(7)
     
-    CommandButton_annuller.Caption = Sprog.Cancel
+    Label_TAB1.Caption = "CAS"
+    Label_TAB2.Caption = Sprog.Notation
+    Label_TAB3.Caption = Sprog.Graph
+    Label_TAB4.Caption = Sprog.Units
+    Label_TAB5.Caption = Sprog.A(7)
+    Label_TAB6.Caption = "Backup"
+    Label_TAB7.Caption = Sprog.Advanced
+    
+    Label_cancel.Caption = Sprog.Cancel
     CommandButton_ok.Caption = Sprog.OK
     Label_sigfig.Caption = Sprog.SignificantFigures
     CheckBox_vidnotation.Caption = Sprog.ScientificNotation
@@ -631,6 +662,7 @@ Sub SetCaptions()
     Label_casexplain.visible = True
 #Else
     Label_casexplain.visible = False
+    Frame_casengine.Height = 75
 #End If
     
 End Sub
@@ -651,7 +683,126 @@ Dim c As control
 End Sub
 
 Private Sub UserForm_Initialize()
+    MultiPage1.Value = 0
 #If Mac Then
     ScaleForm 1.5
 #End If
+End Sub
+
+Private Sub Label_ok_Click()
+    CommandButton_ok_Click
+End Sub
+
+Private Sub Label_TAB1_Click()
+    MultiPage1.Value = 0
+    SetTabsInactive
+    Label_TAB1.BackColor = LBColorTABPress
+End Sub
+Private Sub Label_TAB2_Click()
+    MultiPage1.Value = 1
+    SetTabsInactive
+    Label_TAB2.BackColor = LBColorTABPress
+End Sub
+Private Sub Label_TAB3_Click()
+    MultiPage1.Value = 2
+    SetTabsInactive
+    Label_TAB3.BackColor = LBColorTABPress
+End Sub
+Private Sub Label_TAB4_Click()
+    MultiPage1.Value = 3
+    SetTabsInactive
+    Label_TAB4.BackColor = LBColorTABPress
+End Sub
+Private Sub Label_TAB5_Click()
+    MultiPage1.Value = 4
+    SetTabsInactive
+    Label_TAB5.BackColor = LBColorTABPress
+End Sub
+Private Sub Label_TAB6_Click()
+    MultiPage1.Value = 5
+    SetTabsInactive
+    Label_TAB6.BackColor = LBColorTABPress
+End Sub
+Private Sub Label_TAB7_Click()
+    MultiPage1.Value = 6
+    SetTabsInactive
+    Label_TAB7.BackColor = LBColorTABPress
+End Sub
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
+Private Sub Label_TAB1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_TAB1.BackColor = LBColorPress
+End Sub
+Private Sub Label_TAB1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+    If MultiPage1.Value <> 0 Then Label_TAB1.BackColor = LBColorHover
+End Sub
+Private Sub Label_TAB2_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_TAB2.BackColor = LBColorPress
+End Sub
+Private Sub Label_TAB2_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+    If MultiPage1.Value <> 1 Then Label_TAB2.BackColor = LBColorHover
+End Sub
+Private Sub Label_TAB3_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_TAB3.BackColor = LBColorPress
+End Sub
+Private Sub Label_TAB3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+    If MultiPage1.Value <> 2 Then Label_TAB3.BackColor = LBColorHover
+End Sub
+Private Sub Label_TAB4_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_TAB4.BackColor = LBColorPress
+End Sub
+Private Sub Label_TAB4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+    If MultiPage1.Value <> 3 Then Label_TAB4.BackColor = LBColorHover
+End Sub
+Private Sub Label_TAB5_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_TAB5.BackColor = LBColorPress
+End Sub
+Private Sub Label_TAB5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+    If MultiPage1.Value <> 4 Then Label_TAB5.BackColor = LBColorHover
+End Sub
+Private Sub Label_TAB6_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_TAB6.BackColor = LBColorPress
+End Sub
+Private Sub Label_TAB6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+    If MultiPage1.Value <> 5 Then Label_TAB6.BackColor = LBColorHover
+End Sub
+Private Sub Label_TAB7_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_TAB7.BackColor = LBColorPress
+End Sub
+Private Sub Label_TAB7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+    If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorHover
+End Sub
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
+    SetTabsInactive
+End Sub
+
+Sub SetTabsInactive()
+    
+    If MultiPage1.Value <> 0 Then Label_TAB1.BackColor = LBColorInactive
+    If MultiPage1.Value <> 1 Then Label_TAB2.BackColor = LBColorInactive
+    If MultiPage1.Value <> 2 Then Label_TAB3.BackColor = LBColorInactive
+    If MultiPage1.Value <> 3 Then Label_TAB4.BackColor = LBColorInactive
+    If MultiPage1.Value <> 4 Then Label_TAB5.BackColor = LBColorInactive
+    If MultiPage1.Value <> 5 Then Label_TAB6.BackColor = LBColorInactive
+    If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorInactive
+    
 End Sub
