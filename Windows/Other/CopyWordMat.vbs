@@ -1,5 +1,5 @@
 '' WordMat script
-'' Mikael Sørensen, EDUAP
+'' Mikael Sï¿½rensen, EDUAP
 '' 10/12-2023
 ''
 
@@ -33,6 +33,7 @@ Set objFolder = objFSO.GetFolder(topLevelFolder)
 
     For Each objSubFolder in objFolder.Subfolders
 		objFSO.CopyFile sourceFile, objSubFolder.Path & "\WordMat.dotm", TRUE
+		objFSO.CopyFile sourceFile, objSubFolder.Path & "\WordMatP.dotm", TRUE
     Next
 
 set objFSO = Nothing

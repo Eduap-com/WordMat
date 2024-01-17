@@ -1,7 +1,7 @@
 ; Inno script for creating WordMat installer
 
 #define MyAppName "WordMat"
-#define MyAppVersion "1.28.1"
+#define MyAppVersion "1.29.0"
 
 ; Installer for bruger installerer også i program files
 ; Det er kun WordMat.dotm der placeres anderledes
@@ -176,7 +176,9 @@ Source: WordMat.dotm; DestDir: {code:VStartupFolderAll12}; Check: VOffice12Insta
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll14}; Check: VOffice14Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll15}; Check: VOffice15Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll16}; Check: VOffice16Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: WordMatP.dotm; DestDir: {code:VStartupFolderAll16}; Check: VOffice16Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {app}; tasks: installeralle installerbruger; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: WordMatP.dotm; DestDir: {app}; tasks: installeralle installerbruger; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 ;Source: Other\WordMatLommeregner.docm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: ExternalPrograms\SetupGraph-4.4.2.exe; DestDir: {app}; Components: Graph ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 Source: ExternalPrograms\GeoGebra.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
@@ -414,6 +416,7 @@ Filename: {cmd}; Parameters: "/c mkdir %appdata%\Microsoft\Word\STARTUP";tasks: 
 Filename: {cmd}; Parameters: "/c mkdir %appdata%\Microsoft\Word\START";tasks: installerbruger  ; StatusMsg: "Opretter START";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
 Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\START";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
 Filename: {cmd}; Parameters: "/c copy ""{app}\WordMat.dotm"" %appdata%\Microsoft\Word\STARTUP";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
+Filename: {cmd}; Parameters: "/c copy ""{app}\WordMatP.dotm"" %appdata%\Microsoft\Word\STARTUP";tasks: installerbruger  ; StatusMsg: "Kopierer WordMat til bruger";  Flags: shellexec runasoriginaluser waituntilterminated runhidden
 
 Filename: cscript.exe; Parameters: {app}\CopyWordMat.vbs ; StatusMsg: "Kopierer WordMat";tasks: installerbruger;  Flags: runasoriginaluser runhidden
 
