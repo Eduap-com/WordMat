@@ -56,11 +56,11 @@ Dim s As String
                         SetRow Tabel, RowNo
                     End If
                 Else
-                    GoTo slut
+                    GoTo Slut
                 End If
             Next
         End If
-slut:
+Slut:
 End Sub
 
 Private Sub CommandButton_nexttable_Click()
@@ -95,8 +95,8 @@ Sub AllTables()
     TextBox_status.Text = TextBox_status.Text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemført " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
 
 
-fejl:
-slut:
+Fejl:
+Slut:
 End Sub
 
 Sub SetRow(t As Table, r As Integer)

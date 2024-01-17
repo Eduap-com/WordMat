@@ -22,16 +22,16 @@ Sub LavRCMenu()
     Dim cmdb As CommandBar
     Dim but As CommandBarControl
     Dim i As Integer
-On Error GoTo slut
+On Error GoTo Slut
     SletRCMenu ' sikrer at der ikke oprettes dobbelt
     
     Set cmdb = Application.CommandBars("Equation Popup")
 '    Set ctrl = Application.CommandBars("Equation Popup").Controls.Add _
 '    (Type:=msoControlPopup, Before:=1)
-    If cmdb Is Nothing Then GoTo slut
+    If cmdb Is Nothing Then GoTo Slut
     
     Set but = cmdb.Controls.Add(Type:=msoControlButton)
-    If but Is Nothing Then GoTo slut
+    If but Is Nothing Then GoTo Slut
     With but
         .Caption = Sprog.RibBeregn '"Beregn"
         .begingroup = True
@@ -66,7 +66,7 @@ On Error GoTo slut
 '        .FaceId = 17 ' Diagram
 '        .FaceId = 477 ' integrale
 '        .FaceId = 42 ' graf
-slut:
+Slut:
 #End If
     End Sub
 Public Sub SletRCMenu()

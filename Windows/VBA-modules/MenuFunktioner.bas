@@ -11,7 +11,7 @@ Sub OmMathMenu()
 End Sub
 
 Sub indsaetformel()
-    On Error GoTo fejl
+    On Error GoTo Fejl
 '    MsgBox CommandBars.ActionControl.Caption
 #If Mac Then
 #Else
@@ -35,15 +35,15 @@ Sub indsaetformel()
         Oundo.EndCustomRecord
 #End If
 
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Function VisDef() As String
 'Dim omax As New CMaxima
 Dim deftext As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
     PrepareMaxima
     deftext = omax.DefString
     
@@ -54,14 +54,14 @@ Dim deftext As String
         deftext = Sprog.A(114)
     End If
     VisDef = deftext
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Function
 Sub DefinerVar()
     Dim Var As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
 '    var = InputBox("Indtast definitionen på den nye variabel" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke før. Hvis der indsættes en clearvars: kommando længere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes på 4 forskellige måder" & vbCrLf & vbCrLf & "definer: variabel=værdi" & vbCrLf & "variabel:værdi" & vbCrLf & "variabel:=værdi" & vbCrLf & "variabel" & VBA.ChrW(&H2261) & "værdi  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere variable i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. a:1 ; b:2", "Ny variabel", "a=1")
     Var = InputBox(Sprog.A(120), Sprog.A(121), "a=1")
     Var = Replace(Var, ":=", "=")
@@ -74,14 +74,14 @@ Sub DefinerVar()
         Selection.MoveRight Unit:=wdCharacter, Count:=2
     End If
     
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub DefinerFunktion()
     Dim Var As String
-On Error GoTo fejl
+On Error GoTo Fejl
 '    var = InputBox("Indtast definitionen på den nye funktion" & vbCrLf & vbCrLf & "Definitionen kan benyttes i resten af dokumentet, men ikke før. Hvis der indsættes en clearvars: kommando længere nede i dokumentet kan den ikke benyttes derefter." & vbCrLf & vbCrLf & "Definitionen kan indtastes på 3 forskellige måder" & vbCrLf & vbCrLf & "f(x):forskrift" & vbCrLf & "f(x):=forskrift" & vbCrLf & "f(x)" & VBA.ChrW(&H2261) & "forskrift  (Definitions ligmed)" & vbCrLf & "Der kan defineres flere funktioner i en ligningsboks ved at adskille definitionerne med semikolon. f.eks. f(x)=x ; g(x)=2x+1", "Ny funktion", "f(x)=x+1")
     Var = InputBox(Sprog.A(122), Sprog.A(123), "f(x)=x+1")
     Var = Replace(Var, ":=", "=")
@@ -94,14 +94,14 @@ On Error GoTo fejl
         Selection.OMaths(1).BuildUp
         Selection.MoveRight Unit:=wdCharacter, Count:=2
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub DefinerLigning()
     Dim Var As String
-On Error GoTo fejl
+On Error GoTo Fejl
     Var = InputBox(Sprog.A(115), Sprog.A(124), Sprog.A(125) & ":     Area:A=1/2*h*b")
 '    var = Replace(var, "=", VBA.ChrW(&H2261))
     
@@ -111,17 +111,17 @@ On Error GoTo fejl
         Selection.OMaths(1).BuildUp
         Selection.MoveRight Unit:=wdCharacter, Count:=2
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub ErstatPunktum()
 '
 ' ErstatPunktum Makro
 '
 '
-On Error GoTo fejl
+On Error GoTo Fejl
     Selection.HomeKey Unit:=wdStory
     Selection.Find.ClearFormatting
     Selection.Find.Font.Name = "Cambria Math"
@@ -157,17 +157,17 @@ On Error GoTo fejl
         .MatchAllWordForms = False
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub ErstatKomma()
 '
 ' ErstatPunktum Makro
 '
 '
-On Error GoTo fejl
+On Error GoTo Fejl
     Selection.HomeKey Unit:=wdStory
     Selection.Find.ClearFormatting
     Selection.Find.Font.Name = "Cambria Math"
@@ -203,10 +203,10 @@ On Error GoTo fejl
         .MatchAllWordForms = False
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Sub Gange()
@@ -221,7 +221,7 @@ End Sub
 Sub SimpelUdregning()
 ' laver simpel udregning med 4 regningsarter og ^
     
-    On Error GoTo slut
+    On Error GoTo Slut
     Dim crange As Range
     Dim r As Range
     Dim sindex As Integer
@@ -265,46 +265,46 @@ Sub SimpelUdregning()
     Selection.MoveRight Unit:=wdCharacter, Count:=1
 '    Selection.TypeText (" ")
 
-slut:
+Slut:
 End Sub
 
 Sub ReplaceStarMult()
 ' fjerner stjerner og indsætter alm. gangetegn
 Application.ScreenUpdating = False
-On Error GoTo fejl
+On Error GoTo Fejl
 
 '    Call ActiveDocument.Range.Find.Execute(chr(42), , , , , , , , , VBA.ChrW(183), wdReplaceAll)
     Call ActiveDocument.Range.Find.Execute(VBA.ChrW(8727), , , , , , , , , VBA.ChrW(183), wdReplaceAll) ' nødvendig til mathboxes
     Call ActiveDocument.Range.Find.Execute("*", , , , , , , , , VBA.ChrW(183), wdReplaceAll)
 
 '    MsgBox "Alle * er nu lavet om til " & VBA.ChrW(183)
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub ReplaceStarMultBack()
 ' fjerner alm gangetegn og indsætter *
 Application.ScreenUpdating = False
-On Error GoTo fejl
+On Error GoTo Fejl
     Call Selection.Range.Find.Execute(VBA.ChrW(183), , , , , , , , , "*", wdReplaceAll)
     Call Selection.Range.Find.Execute(VBA.ChrW(8901), , , , , , , , , "*", wdReplaceAll) '\cdot
     Call Selection.Range.Find.Execute(VBA.ChrW(8729), , , , , , , , , "*", wdReplaceAll) ' \cdot
     Call Selection.Range.Find.Execute(VBA.ChrW(8226), , , , , , , , , "*", wdReplaceAll) ' tyk prik
     
 '    MsgBox "Alle " & VBA.ChrW(183) & " er nu lavet om til *"
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub MaximaSettings()
-On Error GoTo fejl
+On Error GoTo Fejl
     If UFMSettings Is Nothing Then Set UFMSettings = New UserFormMaximaSettings
     UFMSettings.Show
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     Set UFMSettings = New UserFormMaximaSettings
     UFMSettings.Show
-slut:
+Slut:
 End Sub

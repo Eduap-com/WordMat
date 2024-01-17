@@ -344,7 +344,7 @@ Dim Arr As Variant
 Dim i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser
 
-On Error GoTo fejl
+On Error GoTo Fejl
 'Me.Hide
 Label_vent.visible = True
 colindex = 0
@@ -547,7 +547,7 @@ End If
 
 
 
-If grafobj = "" Then GoTo slut
+If grafobj = "" Then GoTo Slut
 
 If OptionButton_kunlinjer Then
     If Not CheckBox_transp.Value Then
@@ -610,10 +610,10 @@ End If
 '    End If
     omax.PrepareNewCommand
     Label_vent.visible = False
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 End Sub
 Function GetNextEnhFunc() As String

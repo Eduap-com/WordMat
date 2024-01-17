@@ -164,16 +164,16 @@ Pos = pos2 + 1
 End Function
 
 Public Property Get ChrByIndex(ByVal Pos As Long) As String
-On Error GoTo fejl
+On Error GoTo Fejl
     If Pos <= Len(Text) And Pos > 0 Then
         ChrByIndex = Mid(Text, Pos, 1)
     Else
         ChrByIndex = VBA.ChrW(0)
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
         ChrByIndex = VBA.ChrW(0)
-slut:
+Slut:
 End Property
 
 Public Function FindNextBreak(Optional stopforbrackets As Boolean = False) As Long
@@ -681,7 +681,7 @@ Sub ReplaceSpaceByMult()
 ' bogstav mellemrum (
 
 Dim p As Long
-On Error GoTo slut
+On Error GoTo Slut
 p = 0
 Do
     p = InStr(p + 1, Text, " ")
@@ -702,7 +702,7 @@ Do
     End If
 Loop While p > 0
 
-slut:
+Slut:
 End Sub
 Sub RemoveMultSign()
 ' fjerner gangetegn
@@ -1047,7 +1047,7 @@ Do
     
     If c = Sep Or c = vbTab Then
         Pos = Pos
-        GoTo slut
+        GoTo Slut
     Else
         cs = c
         If c = "(" Then
@@ -1075,7 +1075,7 @@ Do
     Loop Until bracketlevel = 0 Or Pos > Len(Text) ' ændret fra >= til > da der var eksempel på fejl med streng der slutter på )
 Loop Until Pos > Len(Text)
 
-slut:
+Slut:
 GetNextListItem = Mid(Text, spos, Pos - spos)
 If right(GetNextListItem, 1) = Sep Then
     GetNextListItem = Left(GetNextListItem, Len(GetNextListItem) - 1)
@@ -1196,7 +1196,7 @@ Sub RemoveSpaceAfterSubSuperscript(tegn As String)
 ' fjerner mellemrum efter f.eks. f_a (x)
 ' man så ellers kan erstatte mellemrum med *
 Dim p As Long
-On Error GoTo slut
+On Error GoTo Slut
 
 Do
     Pos = InStr(Pos + 1, Text, tegn)
@@ -1210,7 +1210,7 @@ Do
     End If
 Loop While Pos > 0
 
-slut:
+Slut:
 End Sub
 Sub AddSpaceAfterSubSuperscript(tegn As String)
 ' tilføjer mellemrum efter f.eks. f_a (x)
@@ -1239,7 +1239,7 @@ Do
     End If
 Loop While Pos > 0
 Pos = p
-slut:
+Slut:
 End Sub
 
 Sub InsertFunctionBrackets()
@@ -1392,7 +1392,7 @@ Dim p As String
 
 If E = "kWh" Or E = "min" Then ' godkend dem der kan forveksles med præfiks
     IsUnit = True
-    GoTo slut
+    GoTo Slut
 End If
 
 If Len(E) > 1 Then ' fjern evt. præfiks
@@ -1408,7 +1408,7 @@ Else
     IsUnit = False
 End If
 
-slut:
+Slut:
 End Function
 
 Function SubString(StartPos As Long, endpos As Long)

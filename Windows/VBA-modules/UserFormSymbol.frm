@@ -21,7 +21,7 @@ Attribute VB_Exposed = False
 
 Public tegn As String
 Private Sub CommandButton1_Click()
-On Error GoTo fejl
+On Error GoTo Fejl
 
 If OptionButton1.Value = True Then
   tegn = VBA.ChrW(916) ' Delta
@@ -71,9 +71,9 @@ End If
 
 Me.Hide
 
-GoTo slut
-fejl:
-slut:
+GoTo Slut
+Fejl:
+Slut:
 End Sub
 
 

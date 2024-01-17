@@ -45,8 +45,8 @@ End Sub
 Private Sub oapp_WindowBeforeDoubleClick(ByVal Sel As Selection, Cancel As Boolean)
 Dim s As String
 Dim Arr As Variant
-On Error GoTo slut
-If Sel.InlineShapes.Count = 0 Then GoTo slut
+On Error GoTo Slut
+If Sel.InlineShapes.Count = 0 Then GoTo Slut
 If Sel.InlineShapes(1).Type = wdInlineShapePicture Then
     Set UF2Dgraph = New UserForm2DGraph
     s = Sel.InlineShapes(1).AlternativeText
@@ -141,7 +141,7 @@ If Sel.InlineShapes(1).Type = wdInlineShapePicture Then
         PicOpen = True
         Cancel = True
     End If
-slut:
+Slut:
 End If
 
 End Sub

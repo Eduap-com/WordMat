@@ -2,7 +2,7 @@ Attribute VB_Name = "WolframAlpha"
 Option Explicit
 Sub OpenWolframAlpha(Optional pretext As String)
 Dim Text As String
-On Error GoTo fejl
+On Error GoTo Fejl
     PrepareMaxima
     omax.ReadSelection
     If omax.AntalKom = 1 Then
@@ -15,10 +15,10 @@ On Error GoTo fejl
     Text = pretext & " " & Text
     
     OpenLink ("http://www.wolframalpha.com/input/?i=" & Text)
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Function ConvertToWolfram(Text As String)

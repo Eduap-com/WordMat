@@ -200,7 +200,7 @@ Public Sub ExportAllModules()
     Dim backupFolder As String, n As Integer, ns As String
     '    Dim UfWait2 As UserFormWaitForMaxima ' det duer ikke at bruge noget der refererer uden for vbamodul, da de bliver slettet, og så fejler hele modulet og der kan ikke importeres
     '    Set UfWait2 = New UserFormWaitForMaxima
-    On Error GoTo fejl
+    On Error GoTo Fejl
     
 
 #If Mac Then
@@ -339,17 +339,17 @@ Public Sub ExportAllModules()
             On Error Resume Next
 '            Kill ModuleBackupFolder & "*.*"
 '            RmDir ModuleBackupFolder
-            On Error GoTo fejl
+            On Error GoTo Fejl
         End If
     Else
         MsgBox "An error occurred during Export. The module folder only contains " & C1 & " files. " & vbCrLf & "Your previous Export is saved to a backup folder: " & vbCrLf & ModuleBackupFolder, vbOKOnly, "Error"
     End If
     
     ExportDatetime = Now
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox "An error occurred during Export. Your previous Export is saved to a backup folder: " & VBAModulesFolder & "-Backup", vbOKOnly, "Error"
-slut:
+Slut:
     '    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
 End Sub
 Sub ImportAllModules()
@@ -385,9 +385,9 @@ Sub ImportAllModules()
     C1 = CountFilesInFolder(ModuleFolder)
     If C1 < 2 Then
         MsgBox "There is only " & C1 & " files in import folder. Import aborted", vbOKOnly, "Aborted"
-        GoTo slut
+        GoTo Slut
     ElseIf C1 < 10 Then
-        If MsgBox("There is only " & C1 & " files in import folder. Are you sure you wish to continue?", vbYesNo, "Warning!") = vbNo Then GoTo slut
+        If MsgBox("There is only " & C1 & " files in import folder. Are you sure you wish to continue?", vbYesNo, "Warning!") = vbNo Then GoTo Slut
     End If
     szSourceWorkbook = ActiveDocument.Name
     Set wkbSource = Application.ActiveDocument
@@ -461,9 +461,9 @@ Sub ImportAllModules()
     Else
         MsgBox ImportCount & " files successfully imported from folder '" & VBAModulesFolder & "'", vbOKOnly, "Import complete"
     End If
-    GoTo slut
-fejl:
-slut:
+    GoTo Slut
+Fejl:
+Slut:
 End Sub
 Public Sub RemoveAllModules()
     DeleteAllModules True

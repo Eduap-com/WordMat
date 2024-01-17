@@ -31,7 +31,7 @@ Private Sub CommandButton_ok_Click()
     Dim kunlinjer As Boolean
     Dim gridlines As Integer
     Dim grafobj As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
     
     Label_vent.visible = True
     Sxmin = Replace(TextBox_xmin.Text, ",", ".")
@@ -87,10 +87,10 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
 #Else
     Me.Hide
 #End If
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
     Label_vent.visible = False
 End Sub
 Private Sub UserForm_Initialize()

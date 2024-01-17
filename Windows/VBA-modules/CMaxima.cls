@@ -148,7 +148,7 @@ Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
         DefS = FindDefinitions
         If DefS = "error" Then
             PrepareNewCommand = False
-            GoTo slut
+            GoTo Slut
         End If
         If Len(DefS) > 0 Then
             MaximaInputStreng = MaximaInputStreng & "[" & Left(Replace(DefS, "$", ","), Len(DefS) - 1) & "]$"
@@ -157,7 +157,7 @@ Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
     End If
 
     PrepareNewCommand = True
-    GoTo slut
+    GoTo Slut
 
     ' -------------------- skal nok bruges til mac på et tidspunkt: --------------
     Dim fkommando As String
@@ -201,10 +201,10 @@ Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
     '    MaximaInputStreng = MaximaInputStreng & "setunits([N,J])$"  '
     '    AntalKommandoer = AntalKommandoer + 1
     'End If
-fejl:
+Fejl:
     MsgBox Sprog.ErrorGeneral & vbCrLf & " preparing maxima", vbOKOnly, Sprog.Error
     PrepareNewCommand = False
-slut:
+Slut:
 
 End Function
 Private Sub Class_Terminate()
@@ -316,7 +316,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         WaitForMaximaUntil (-1 * StopTime)
 #End If
         '        Wait (2)
-        If StopNow Then GoTo slut
+        If StopNow Then GoTo Slut
         If MaxProc.Question = 1 Then
             AnswerQuestion StopTime, False ' muligvis problematisk efter ændret til at form kan vises med answerquestion
 #If Mac Then
@@ -344,7 +344,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         '        MaxProc.CloseProcess ' gør at den hænger lidt, måske nødvendig
         ShowDebug
         Exit Sub
-        GoTo slut
+        GoTo Slut
     Else
 
         If MaxProc.Finished = 0 Then
@@ -398,10 +398,10 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     End If
     On Error Resume Next
     Unload UfWait2
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) As String
 ' Converts a maxima expression, using the maxima-image with units loaded
@@ -457,7 +457,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
         On Error Resume Next
         UfWait2.Show vbModeless
         DoEvents
-        On Error GoTo fejl
+        On Error GoTo Fejl
         i = 0
         Do While MaxProc.Finished = 0 And i < StopTime
 #If Mac Then
@@ -518,10 +518,10 @@ Sub WaitForMaximaForm(StopTime As Integer)
             Unload UfWait2
         End If
     End If
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub ShowDebug(Optional vis As Boolean = False)
     If DebugWM Or vis Then
@@ -793,15 +793,15 @@ End Sub
 '    End If
 'End Function
 Public Sub CloseCmd()
-    On Error GoTo slut
+    On Error GoTo Slut
 
     If Not CmdTask Is Nothing Then
         CmdTask.Close
     End If
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     KillMaxima
-slut:
+Slut:
 End Sub
 
 Sub InsertKillDef()
@@ -873,10 +873,10 @@ Public Sub ExecuteMaximaCommand(Optional MaxCmd As String, Optional TranslateToM
         MaximaInputStreng = MaximaInputStreng & Kommando & ";"
     End If
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
 
-slut:
+Slut:
 End Sub
 
 Sub MaximaSolve(variabel As String)
@@ -1050,7 +1050,7 @@ start:
     ResetMaxima
 
     If gemMaxExct >= 0 Then MaximaExact = gemMaxExct
-slut:
+Slut:
 End Sub
 Sub MaximaSolveInequality(variabel As String)
     Dim nr As Integer
@@ -1069,7 +1069,7 @@ Sub MaximaSolveInequality(variabel As String)
     AddStandardSecondary
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     nr = UBound(Minput)
     If Not MaximaExact = 2 Then
@@ -1078,7 +1078,7 @@ Sub MaximaSolveInequality(variabel As String)
 
     ConvertOutputToSolved2 (variabel)
 
-    GoTo slut
+    GoTo Slut
 
 
 
@@ -1143,7 +1143,7 @@ Sub MaximaSolveInequality(variabel As String)
     End If
     MaximaOutput = Replace(MaximaOutput, "%i", "i")
 
-slut:
+Slut:
 
 End Sub
 Sub MaximaSolveNumeric(ByVal variabel As String, ByVal guess As String, Optional ByVal eps As String)
@@ -1173,7 +1173,7 @@ Sub MaximaSolveNumeric(ByVal variabel As String, ByVal guess As String, Optional
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec & ";"
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     If LmSet Then
         ' notation med L={}
@@ -1193,7 +1193,7 @@ Sub MaximaSolveNumeric(ByVal variabel As String, ByVal guess As String, Optional
         MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    " & variabel & VBA.ChrW(&H2248))    ' komma erstattes med eller
     End If
 
-slut:
+Slut:
 End Sub
 Sub MaximaFindRoot(ByVal variabel As String, ByVal xmin As String, ByVal xmax As String, Optional ByVal eps As String)
     If variabel = "" Then Exit Sub
@@ -1212,7 +1212,7 @@ Sub MaximaFindRoot(ByVal variabel As String, ByVal xmin As String, ByVal xmax As
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec & ";"
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     MaximaOutput = Trim(MaximaOutput)
     If InStr(MaximaOutput, "find_root") > 0 Then
@@ -1235,7 +1235,7 @@ Sub MaximaFindRoot(ByVal variabel As String, ByVal xmin As String, ByVal xmax As
         MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    " & variabel & VBA.ChrW(&H2248))    ' komma erstattes med eller
     End If
 
-slut:
+Slut:
 End Sub
 Sub Nsolve(ByVal variabel As String, ByVal qn As Integer, ByVal qm As Integer, ByVal qtid As Integer, ByVal maxsol As Integer, Optional ByVal qnn As Integer = 30, Optional ByVal qmm As Integer = 30, Optional newt As Boolean = False)
     If variabel = "" Then Exit Sub
@@ -1255,7 +1255,7 @@ Sub Nsolve(ByVal variabel As String, ByVal qn As Integer, ByVal qm As Integer, B
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec & ";"
 
     RunMaxima -150
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     If LmSet Then
         ' notation med L={}
@@ -1277,7 +1277,7 @@ Sub Nsolve(ByVal variabel As String, ByVal qn As Integer, ByVal qm As Integer, B
         '    MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    " & variabel & VBA.ChrW(&H2248)) ' komma erstattes med eller
     End If
 
-slut:
+Slut:
 End Sub
 
 Sub SolveSystem(Variable As String)
@@ -1364,11 +1364,11 @@ Sub SolveSystem(Variable As String)
     AddStandardSecondary
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     ConvertOutputToSolved2 (Variable)
 
-slut:
+Slut:
 End Sub
 Sub Eliminate(Variable As String)
     Dim Kommentar As String
@@ -1416,7 +1416,7 @@ Sub Eliminate(Variable As String)
     AddStandardSecondary
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     MaximaOutput = Mid(MaximaOutput, 2, Len(MaximaOutput) - 2)
     Arr = Split(MaximaOutput, ListSeparator)
@@ -1433,7 +1433,7 @@ Sub Eliminate(Variable As String)
         End If
     Next
 
-slut:
+Slut:
 End Sub
 Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional ByVal eps As String)
     Dim Kommentar As String
@@ -1468,13 +1468,13 @@ Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional
 
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     '    MaximaOutput = Mid(MaximaOutput, 2, Len(MaximaOutput) - 2)
 
     ConvertOutputToSolved2 (Variable)
 
-slut:
+Slut:
 End Sub
 Sub beregn()
     Dim inkom As String, pkommando As String, StartKommando2 As String, StartKommando3 As String
@@ -1716,7 +1716,7 @@ start:
     'End If
     
     If gemMaxExct >= 0 Then MaximaExact = gemMaxExct
-slut:
+Slut:
 End Sub
 Sub PolySolve(ByVal variabel As String)
 ' løser polynomium numerisk vha. speciel metode der giver alle løsninger
@@ -1733,10 +1733,10 @@ Sub PolySolve(ByVal variabel As String)
 
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
     ConvertOutputToSolved
 
-slut:
+Slut:
 End Sub
 Sub ConvertOutputToSolved()
 ' konverterer output fra [1,3] til x=1 v x=3 eller L={1,3}
@@ -1968,9 +1968,9 @@ Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid
 
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
-slut:
+Slut:
 End Sub
 Sub Reduce()
     Dim pkommando As String
@@ -2013,9 +2013,9 @@ Sub Reduce()
 
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
-slut:
+Slut:
 End Sub
 Sub CompareTest()
     Dim pkommando As String
@@ -2051,10 +2051,10 @@ Sub CompareTest()
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
 
-slut:
+Slut:
 End Sub
 Sub Factor()
     Dim pkommando As String
@@ -2090,10 +2090,10 @@ Sub Factor()
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
 
-slut:
+Slut:
 End Sub
 Sub Expand()
     Dim pkommando As String
@@ -2131,11 +2131,11 @@ Sub Expand()
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     '    MaximaOutput = Replace(MaximaOutput, "%i", "i")
 
-slut:
+Slut:
 End Sub
 Sub Differentier(variabel As String)
     Dim pkommando As String
@@ -2164,7 +2164,7 @@ Sub Differentier(variabel As String)
     AddStandardSecondary
 
     Call RunMaxima
-slut:
+Slut:
 End Sub
 Sub UserRegression(fkt As String, Var As String, xlist As String, ylist As String, prec As Integer, VarGuess As String)
     Dim pkommando As String
@@ -2197,11 +2197,11 @@ Sub UserRegression(fkt As String, Var As String, xlist As String, ylist As Strin
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     '    MaximaOutput = Replace(MaximaOutput, "%i", "i")
 
-slut:
+Slut:
 
 End Sub
 Sub Integrer(variabel As String)
@@ -2233,7 +2233,7 @@ Sub Integrer(variabel As String)
 
     Call RunMaxima
 
-slut:
+Slut:
 End Sub
 Sub SolveDENumeric(variabel As String, xmin As String, xmax As String, xstep As String, yvarlist As String, initguesslist As String, DElist As String)
     
@@ -2256,9 +2256,9 @@ Sub SolveDENumeric(variabel As String, xmin As String, xmax As String, xstep As 
     AddStandardSecondary
 
     Call RunMaxima
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
     
-slut:
+Slut:
 End Sub
 Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx As String, Optional starty As String, Optional startdiffy, Optional bcx, Optional bcy)
     Dim pkommando As String
@@ -2344,7 +2344,7 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
         Call RunMaxima
     End If
     
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     If funktion = "qvar" Then
         MaximaOutput = Replace(MaximaOutput, "qvar", gemfkt)
@@ -2355,7 +2355,7 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
         MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
     End If
 
-slut:
+Slut:
 End Sub
 Sub Plot2D(forskrifter As String, punkter As String, Var As String, xmin As String, xmax As String, Ymin As String, Ymax As String, xaksetitel As String, yaksetitel As String, Optional SaveFile As Boolean = False)
 ' forskrifter adskilt ad komma
@@ -2935,7 +2935,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 s = ea.GetPrevVar(Pos)
                 If Pos - Len(s) - 2 < 0 Then
                   MsgBox "An error orrcured with hat operator. "
-                  GoTo fejl
+                  GoTo Fejl
                 Else
                    Text = Left(Text, Pos - Len(s) - 2) & "tvvec(" & Mid(Text, Pos - Len(s) - 1, Len(s)) & ")" & right(Text, Len(Text) - Pos)
                 End If
@@ -3235,20 +3235,20 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     If Left(Text, 5) = "Fejl!" Then
         Text = ea.Text
         ConvertErrorText = Text
-        GoTo slut
+        GoTo Slut
     End If
     Text = ConvertDifferentials(Text, VBA.ChrW(8706)) ' \partial
     If Left(Text, 5) = "Fejl!" Then
         Text = ea.Text
         ConvertErrorText = Text
-        GoTo slut
+        GoTo Slut
     End If
     If dAsDiffChr Then
         Text = ConvertDifferentials(Text, "d") ' normal d
         If Left(Text, 5) = "Fejl!" Then
             Text = ea.Text
             ConvertErrorText = Text
-            GoTo slut
+            GoTo Slut
         End If
     End If
     
@@ -3383,7 +3383,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                     Text = Left(ea.Text, Pos + 1) & right(ea.Text, Len(ea.Text) - posog)
                 ElseIf UBound(Arr) = -1 Then ' tilføjet v1.09 pga uendelig løkke ved mangl parentes
                     MsgBox Sprog.A(169), vbOKOnly, Sprog.Error
-                    GoTo fejl
+                    GoTo Fejl
                 End If
             End If
         End If
@@ -3627,7 +3627,7 @@ msat:
                   End If
                 End If
             Else
-                GoTo fejl
+                GoTo Fejl
             End If
         End If
     Loop While Pos > 0
@@ -3683,7 +3683,7 @@ msat:
                 End If
                 If Len(Var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
-                    GoTo slut
+                    GoTo Slut
                 End If
                 Var = right(Var, Len(Var) - 1)
                 integrand = Trim(integrand)
@@ -3762,13 +3762,13 @@ msat:
                 Var = ea.GetNextVar(ea.Pos - 1)
                 If Len(Var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
-                    GoTo slut
+                    GoTo Slut
                 End If
                 Var = right(Var, Len(Var) - 1)
                 var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
                     ConvertErrorText = Sprog.A(428)
-                    GoTo slut
+                    GoTo Slut
                 End If
                 var2 = right(var2, Len(var2) - 1)
                 integrand = Trim(integrand)
@@ -3787,7 +3787,7 @@ msat:
                     End If
                     If posn > 0 And poso > 0 And posn < poss And poso < poss Then
                         ConvertErrorText = Sprog.A(429)
-                        GoTo slut
+                        GoTo Slut
                     Else    ' ubestemt integrale
                         integrand = integrand & "," & Var & ")," & var2 & ")"
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktionstegn
@@ -3828,19 +3828,19 @@ msat:
                 Var = ea.GetNextVar(ea.Pos - 1)
                 If Len(Var) < 2 Then
                     ConvertErrorText = Sprog.A(427)
-                    GoTo slut
+                    GoTo Slut
                 End If
                 Var = right(Var, Len(Var) - 1)
                 var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
                     ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. Måske har du brugt d i anden sammenhæng. Brug da differential d \dd"
-                    GoTo slut
+                    GoTo Slut
                 End If
                 var2 = right(var2, Len(var2) - 1)
                 var3 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var3) < 2 Or (Left(var3, 1) <> "d" And Left(var3, 1) <> VBA.ChrW(8518)) Then
                     ConvertErrorText = Sprog.A(428) '"Der er problemer med syntaxen. Der skal bruges to dx (eller lign) som afslutning af et dobbletintegrale. Måske har du brugt d i anden sammenhæng. Brug da differential d \dd"
-                    GoTo slut
+                    GoTo Slut
                 End If
                 var3 = right(var3, Len(var3) - 1)
                 integrand = Trim(integrand)
@@ -3859,7 +3859,7 @@ msat:
                     End If
                     If posn > 0 And poso > 0 And posn < poss And poso < poss Then
                         ConvertErrorText = Sprog.A(429) '"Du kan ikke bruge dobbeltintegraltegnet til bestemte integraler. Brug to enkeltintegraler."
-                        GoTo slut
+                        GoTo Slut
                     Else    ' ubestemt integrale
                         integrand = integrand & "," & Var & ")," & var2 & ")," & var3 & ")"
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'fjern funktionstegn
@@ -4205,10 +4205,10 @@ spring:
     '    text = Replace(text, VBA.ChrW(8744), ",")  og
     '    text = Replace(text, VBA.ChrW(8743), ",") eller
 
-    GoTo slut:
-fejl:
+    GoTo Slut:
+Fejl:
     MsgBox Sprog.A(99), vbOKOnly, Sprog.Error
-slut:
+Slut:
     If Len(ConvertErrorText) > 0 Then
         MsgBox ConvertErrorText, vbOKOnly, Sprog.Error
         CodeForMaxima = ""
@@ -4234,7 +4234,7 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
             pos3 = ea.Pos
             num = ea.GetPrevBracketContent(Pos)
             If Left(num, 1) <> DiffChr Then
-                GoTo slut
+                GoTo Slut
             End If
             Pos = ea.Pos
             varind = 0
@@ -4257,14 +4257,14 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
                 Loop While pos2 > 0
                 If antalm <> varind Then
                     Text = Sprog.A(430)
-                    GoTo slut
+                    GoTo Slut
                 End If
                 ElseIf Left(num, 1) = DiffChr Then
                     antalm = 1
                     vararr(0) = Mid(dem, 2, 1)
                 Else
                     Text = Sprog.A(430)
-                    GoTo slut
+                    GoTo Slut
             End If
 
             For i = 0 To antalm - 1
@@ -4309,7 +4309,7 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
             '            End If
         End If
     Loop While Pos > 0
-slut:
+Slut:
     ConvertDifferentials = Text
 End Function
 Function ConvertUnits(ByVal Text As String) As String
@@ -4470,7 +4470,7 @@ Function ConvertToAscii(ByVal Text As String) As String
     ConvertToAscii = Text
 End Function
 Function ConvertToWordSymbols(ByVal Text As String) As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
     Dim gtegn As String
     Dim ea As New ExpressionAnalyser
     Dim Pos As Long, pos2 As Long
@@ -4712,7 +4712,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
             If UBound(Arr) > 0 Then
                 Text = Left(Text, Pos - 1) & "" & VBA.ChrW(8730) & "(" & Arr(1) & "&" & Arr(0) & ")" & right(Text, Len(Text) - pos2 + 1)
             Else
-                GoTo fejl
+                GoTo Fejl
             End If
         End If
     Loop While Pos > 0
@@ -5077,17 +5077,17 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     If Not MaximaComplex Then
         If InStr(Text, "%i") > 0 Or InStr(Text, VBA.ChrW(943)) > 0 Then
             Text = Sprog.A(433) & " " & VBA.ChrW(8477)
-            GoTo slut
+            GoTo Slut
         End If
     Else
         Text = Replace(Text, "%i", "i")
     End If
 
     '    text = Replace(text, "", "\")
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.A(100) & vbCrLf & vbCrLf & Text, vbOKOnly, Sprog.Error
-slut:
+Slut:
     ConvertToWordSymbols = Text
 End Function
 Function ConvertRadToDegree(Text As String, trigfunc As String) As String
@@ -5840,11 +5840,11 @@ Function ConvertToLatexMaxima(Optional Text As String) As String
     Call RunMaxima(0, True, False)
     MaximaOutput = TrimB(MaximaOutput, """")
     MaximaOutput = Replace(MaximaOutput, "\\", "\")
-    If StopNow Then GoTo slut
+    If StopNow Then GoTo Slut
 
     '    MaximaOutput = Replace(MaximaOutput, "%i", "i")
     ConvertToLatexMaxima = MaximaOutput
-slut:
+Slut:
 
 
 End Function
@@ -5920,7 +5920,7 @@ Sub ReadSelection()
     Dim sstart As Long
     Dim sslut As Long
     Dim j As Integer, antalgenstart As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     ' hvis bold giver det buildup problemer ' i v. 1.24.1 forsøges det håndteret uden at ændre i originalen
 '        For j = 1 To Selection.OMaths.Count
@@ -6011,11 +6011,11 @@ hop:
         ReDim Preserve Kommandoer(0 To antal - 1)
         sr.Select
     End If
-    GoTo slut
-fejl:
-    On Error GoTo slut
+    GoTo Slut
+Fejl:
+    On Error GoTo Slut
     ReadSelectionOld
-slut:
+Slut:
     Selection.start = sstart
     Selection.End = sslut
 
@@ -6056,7 +6056,7 @@ Function ReadEquationCopy(Optional ir As Range) As String
 ' 22/8-2023 Har oplevet nogle win 11 computere, der fryser lige når selection.copy eksekveres. Det virker at skifte til readselectionold (men det er der også ulemper ved)
     Dim sr As Range, r As Range
 
-On Error GoTo fejl
+On Error GoTo Fejl
     '    Dim t As Variant
     '    t = Timer
     If ir Is Nothing Then
@@ -6086,9 +6086,9 @@ On Error GoTo fejl
 
     '    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
     '    MsgBox Timer - t
-    GoTo slut
-fejl:
-slut:
+    GoTo Slut
+Fejl:
+Slut:
 End Function
 Function ReadEquation2(ir As Range) As String
     Dim sr As Range
@@ -6215,9 +6215,9 @@ Sub GoToEndOfSelectedMaths2()
     Set mc = Selection.OMaths
     On Error Resume Next
     mc(mc.Count).ParentOMath.Range.Select    ' parentomath nødvendig hvis cursor står i lyseblå firkant
-    On Error GoTo slut
+    On Error GoTo Slut
     '        mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
-slut:
+Slut:
     Selection.Collapse wdCollapseEnd
     Dim r As Range
     Set r = Selection.Range
@@ -6246,7 +6246,7 @@ Sub GoToEndOfSelectedMaths()
     If mc.Count > 0 Then
         On Error Resume Next
         mc(mc.Count).ParentOMath.Range.Select
-        On Error GoTo slut
+        On Error GoTo Slut
         mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
     Else
         i = 0
@@ -6255,7 +6255,7 @@ Sub GoToEndOfSelectedMaths()
             i = i + 1
         Loop
     End If
-slut:
+Slut:
     On Error Resume Next
     Selection.Collapse wdCollapseEnd
     Dim r As Range
@@ -6383,7 +6383,7 @@ Sub InsertAssumptions()
     Dim mo As Range
     Dim assum As String
 
-    If Not (ShowAssum) Then GoTo slut
+    If Not (ShowAssum) Then GoTo Slut
 
     If InStr(KommentarOutput, "Assumptions:") > 0 Then
         Dim Pos As Integer
@@ -6393,7 +6393,7 @@ Sub InsertAssumptions()
         ea.Pos = Pos
         assum = Trim(omax.ConvertToWordSymbols(Replace(ea.GetNextBracketContent, ",", " , ")))
     End If
-    If Len(assum) < 2 Then GoTo slut
+    If Len(assum) < 2 Then GoTo Slut
 
     gemfontsize = Selection.Font.Size
     gemitalic = Selection.Font.Italic
@@ -6432,9 +6432,9 @@ Sub InsertAssumptions()
         '        .SpaceAfterAuto = False
     End With
 
-    GoTo slut
-fejl:
-slut:
+    GoTo Slut
+Fejl:
+Slut:
 
 End Sub
 
@@ -6442,12 +6442,12 @@ Function FindMaximaOutput(Text As String) As String
 ' plukker output2 fra hele maxima output
     Dim opos, ipos As Integer
     Dim text2 As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     opos = InStr(Text, "(%o2)")
     ipos = InStr(Text, "(%i3)")
     'MsgBox text
-    If opos < 1 Then GoTo fejl
+    If opos < 1 Then GoTo Fejl
 
     text2 = Trim(Mid(Text, opos + 5, ipos - opos - 5))
     text2 = Replace(text2, "[", "")
@@ -6456,15 +6456,15 @@ Function FindMaximaOutput(Text As String) As String
 
     FindMaximaOutput = text2
 
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     opos = InStr(Text, "(%i2)")
     text2 = right(Text, Len(Text) - opos - 4)
     text2 = Replace(text2, "(%i2)", "")
     text2 = Sprog.A(108) & vbCrLf & vbCrLf & text2
     MsgBox text2, vbOKOnly, Sprog.A(109)
     FindMaximaOutput = ""
-slut:
+Slut:
 
 End Function
 Sub FindLastMaximaOutput(Optional ConvertToWord As Boolean = True, Optional Mcommand As String = "")
@@ -6502,9 +6502,9 @@ Dim same As Boolean
     '    KommentarOutput = "Der kom følgende fejlmelding fra Maxima:" & vbCrLf & vbCrLf & KommentarOutput
     'End If
 
-    GoTo slut
-fejl:
-slut:
+    GoTo Slut
+Fejl:
+Slut:
 End Sub
 Sub GenerateOutputArray(Optional Text As String)
 '    Dim text As String
@@ -6517,7 +6517,7 @@ Sub GenerateOutputArray(Optional Text As String)
     Dim ArrIndex As Integer 'mac
     ArrIndex = 1 'mac
 
-    On Error GoTo fejl
+    On Error GoTo Fejl
     If Text = "" Then Text = MaxProc.LastMaximaOutput
     'text = Right(text, Len(text) - 270)
     ReDim Minput(1 To 100) As String
@@ -6533,7 +6533,7 @@ Sub GenerateOutputArray(Optional Text As String)
     'pos2 = InStr(pos + 2, text, vbLf & "(%")
     Do
         If Pos < 1 Then
-            GoTo slut
+            GoTo Slut
         End If
         If pos2 < 1 Then
             pos2 = Len(Text)
@@ -6595,17 +6595,17 @@ Sub GenerateOutputArray(Optional Text As String)
 
     '    ShowOutputArray ' til test
 
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     '    MsgBox text
-slut:
+Slut:
    If nr < 1 Then nr = 1
     ReDim Preserve Minput(1 To nr) As String
     ReDim Preserve moutput(1 To nr) As String
 End Sub
 Function FindNextio(StartPos As Long, Text As String) As Long
 
-On Error GoTo fejl
+On Error GoTo Fejl
 Dim Pos As Long, pos2 As Long, io As String
 Dim ea As New ExpressionAnalyser
 
@@ -6624,11 +6624,11 @@ Do
    StartPos = Pos + 2
 Loop While StartPos < Len(Text)
    
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
    FindNextio = 0
 '    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure FindNextio, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
-slut:
+Slut:
 End Function
 '#If Mac Then
 Function RemovePrintetBool(s As String) As String
@@ -6636,7 +6636,7 @@ Function RemovePrintetBool(s As String) As String
 ' mac auto. Der kan blive printet et true eller false i slutningen
     Dim Arr As Variant
     Dim t As String, ant As Integer, i As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
     s = TrimR(Trim(s), vbLf)
     s = TrimR(Trim(s), vbCr)
 '#If Mac Then ' vbcrlfmac can ikke bruges her, da det er lf på mac. Ikke efter 1.23
@@ -6656,10 +6656,10 @@ Arr = Split(s, VbCrLfMac) ' ændret v. 1.23
             Next
         End If
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox "removeprintetbool error", vbOKOnly, Sprog.Error
-slut:
+Slut:
 
     RemovePrintetBool = s
 End Function
@@ -6677,7 +6677,7 @@ Function GetMaximaUnitOutput() As String
     Dim moutputU() As String
     
 
-    On Error GoTo fejl
+    On Error GoTo Fejl
 #If Mac Then
     Text = MaxProc.LastMaximaOutput
 #Else
@@ -6731,10 +6731,10 @@ Function GetMaximaUnitOutput() As String
     '    ShowOutputArray ' til test
     GetMaximaUnitOutput = moutputU(nr)
 
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     '    MsgBox text
-slut:
+Slut:
 End Function
 Sub ShowOutputArray()
 ' til test
@@ -6778,10 +6778,10 @@ Sub ActivateTask(navn As String)
 start:
     i = i + 1
     Wait (0.1)
-    If i > 1 Then GoTo slut
+    If i > 1 Then GoTo Slut
     tasksave.Activate
 
-slut:
+Slut:
 End Sub
 Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
 ' finder variable i texten og putter dem i Vars-string
@@ -6796,7 +6796,7 @@ Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
     If Text = "" Then
         Text = Kommando
         If Text = "" Then
-            On Error GoTo fejl
+            On Error GoTo Fejl
             For j = 0 To UBound(Kommandoer)
                 Text = Text & "+" & Kommandoer(j)    ' der skal bare være tegn mellem som ikke kan indgå i variabel
             Next
@@ -6853,7 +6853,7 @@ Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
     '    End If
 
     '    ReDim Preserve Vars(1 To i - 1)
-fejl:
+Fejl:
 End Sub
 Function FindDefinitions() As String
     Dim s As String
@@ -6862,7 +6862,7 @@ Function FindDefinitions() As String
     Dim start As Long, sslut As Long
     Dim ra As Range
 
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     Application.ScreenUpdating = False
     Definitions = False
@@ -6899,12 +6899,12 @@ Function FindDefinitions() As String
         ReDim Preserve ldefvalue(defindex - 1)
     End If
 
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     DefFejl = True
     '    DefString = ""
     FindDefinitions = ""
-slut:
+Slut:
     If FindDefinitions <> "" Then
         '            FindDefinitions = "[" & Left(FindDefinitions, Len(FindDefinitions) - 1) & "]$"
         Definitions = True
@@ -7232,7 +7232,7 @@ Function ValidateDef(ByVal lhs As String, ByVal rhs As String) As Boolean
 ' returnerer false hvis der er fejl
     Dim ea As New ExpressionAnalyser
     Dim Pos As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
     ValidateDef = False
 
     Pos = InStr(lhs, "[")    ' Man kan skrive alt muligt i subscript/index
@@ -7253,7 +7253,7 @@ Function ValidateDef(ByVal lhs As String, ByVal rhs As String) As Boolean
 
 
     ValidateDef = True
-fejl:
+Fejl:
 End Function
 Function GetAssumeText(defenk) As String
 ' tager text fra word og omdanner til assume samt indsætter til forget
@@ -7326,7 +7326,7 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
 ' checker om ligningen er helt løst for variabelen
 ' starter den med variabel= ?
 ' indgår variabel på højresiden af =tegn
-    On Error GoTo slut
+    On Error GoTo Slut
     Dim NotSolved As Boolean
     Dim ea As New ExpressionAnalyser
     Dim Var As String
@@ -7345,7 +7345,7 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
             ea.Pos = ea.Pos + 1
             If Var = variabel Then
                 IsSolved = False    'variabel fundet på højresiden så er det ihvertfald ikke løst
-                GoTo slut
+                GoTo Slut
             End If
         Loop Until Var = ""
 
@@ -7360,10 +7360,10 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
         IsSolved = False
     End If
 
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     IsSolved = False
-slut:
+Slut:
 End Function
 
 Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Optional ByVal Sep As String = ",") As String
@@ -7381,7 +7381,7 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
     End If
 
     If Not LmSet Then
-        If InStr(ligninger, "%if(") > 0 Then GoTo slut
+        If InStr(ligninger, "%if(") > 0 Then GoTo Slut
 
         ligninger = RemoveBrackets(ligninger)
         Arr = Split(ligninger, Sep)
@@ -7406,7 +7406,7 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
         End If
         
     End If
-slut:
+Slut:
     If allsolved Then
         IsAllSolved = "all"
     ElseIf oneSolved Then
@@ -7420,7 +7420,7 @@ End Function
 
 Public Property Get KommandoerStreng() As Variant
     Dim i As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     If Kommando <> "" Then
         KommandoerStreng = Replace(Kommando, vbCr, "")
@@ -7431,10 +7431,10 @@ Public Property Get KommandoerStreng() As Variant
         KommandoerStreng = Left(KommandoerStreng, Len(KommandoerStreng) - 1)
     End If
 
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     KommandoerStreng = ""
-slut:
+Slut:
 End Property
 Private Function TrigFunction(Expr As String) As Boolean
     TrigFunction = False
@@ -7448,16 +7448,16 @@ Private Function TrigFunction(Expr As String) As Boolean
 End Function
 Public Property Get AntalKom() As Integer
 ' antal ligninger/udtryk
-    On Error GoTo fejl
+    On Error GoTo Fejl
     AntalKom = UBound(Kommandoer) + 1
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     If Kommando <> "" Then
         AntalKom = 1
     Else
         AntalKom = 0
     End If
-slut:
+Slut:
 End Property
 
 

@@ -76,7 +76,7 @@ Dim n As Integer
 Dim oFS As Integer
 Dim r As Range
 
-On Error GoTo fejl
+On Error GoTo Fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -125,7 +125,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
 End If
 
 If n < 2 Then
-    GoTo fejl
+    GoTo Fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -176,10 +176,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 End Sub
 Public Sub GetTableDataOld()
@@ -230,7 +230,7 @@ If n < 2 Then
     n = rws.Count
 End If
 If n < 2 Then
-    GoTo fejl
+    GoTo Fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -259,10 +259,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 End Sub
 Public Sub GetSetData()
@@ -312,7 +312,7 @@ Private Function ComputeRegr(X() As Double, Y() As Double) As Boolean
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
 Dim n As Integer
 Dim i As Integer
-On Error GoTo fejl
+On Error GoTo Fejl
 
 n = UBound(X) - LBound(X) + 1
                
@@ -336,11 +336,11 @@ End If
 If r > 1 Then r = 1
 
 ComputeRegr = True
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     ComputeRegr = False
     MsgBox Sprog.A(28), vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Function
 
 Function Logv(val() As Double) As Variant
@@ -356,10 +356,10 @@ Function Logv(val() As Double) As Variant
             arrlog(j) = Log(val(i))
         Else
             MsgBox Sprog.A(672), vbOKOnly, Sprog.Error
-            GoTo slut
+            GoTo Slut
         End If
     Next
-slut:
+Slut:
     ReDim Preserve arrlog(LBound(val) To j) As Double
 
     Logv = arrlog
@@ -423,7 +423,7 @@ Sub ComputeExpRegr()
 End Sub
 
 Sub ComputePowRegr()
-On Error GoTo fejl
+On Error GoTo Fejl
     Dim n As Integer
     ReDim logx(LBound(xval) To UBound(xval)) As Double
     ReDim logy(LBound(yval) To UBound(yval)) As Double
@@ -446,10 +446,10 @@ On Error GoTo fejl
         c = 0
         r = 0
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(32), vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Sub ComputeUserRegr()
     Dim fkt As String
@@ -457,7 +457,7 @@ Sub ComputeUserRegr()
     Dim Arr As Variant
     Dim xlist As String, ylist As String
     Dim i As Long, guess As String, Var As String, p As Integer, eps As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
     xlist = "["
     For i = LBound(xval) To UBound(xval)
         xlist = xlist & Replace((xval(i)), ",", ".") & ","
@@ -518,10 +518,10 @@ Sub ComputeUserRegr()
         Ligning = omax.MaximaOutput
     End If
     
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 Function ConvertSep(Text As String) As String
     ' kommaer og listeseparator
@@ -568,7 +568,7 @@ Sub ComputePolRegr()
     On Error Resume Next
     n = UBound(xval) - LBound(xval)
     orden = InputBox(Sprog.A(35) & n & ")" & vbCrLf & vbCrLf & Sprog.A(36), Sprog.A(37), "2")
-    On Error GoTo fejl
+    On Error GoTo Fejl
     If orden < 1 Or orden > n Then
         MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, Sprog.Error
         Exit Sub
@@ -623,10 +623,10 @@ Sub ComputePolRegr()
         c = 0
         r = 0
     End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Function polregr(X() As Double, Y() As Double, orden As Integer, Optional ByVal tving As Boolean = False) As Boolean
@@ -638,7 +638,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
-On Error GoTo fejl
+On Error GoTo Fejl
 
 If Not (UBound(X) = UBound(Y)) Then
     polregr = False
@@ -729,11 +729,11 @@ Next
 r = SSregr / SStotal
              
 polregr = True
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
   polregr = False
 '  MsgBox Err.Number
-slut:
+Slut:
 End Function
 Function polregrkvad(X() As Double, Y() As Double, Optional ByVal tving As Boolean = False) As Boolean
 'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2 via userdefined datatype
@@ -744,7 +744,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M(3, 4)
 
-On Error GoTo fejl
+On Error GoTo Fejl
 
 n = UBound(X) - LBound(X) + 1
                
@@ -815,11 +815,11 @@ Next
 r = SSregr / SStotal
              
 polregrkvad = True
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
   polregrkvad = False
 '  MsgBox Err.Number
-slut:
+Slut:
 End Function
 
 

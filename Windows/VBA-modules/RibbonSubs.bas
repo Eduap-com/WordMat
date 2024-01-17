@@ -39,7 +39,7 @@ Sub RefreshRibbon()
         WoMatRibbon.Invalidate
     End If
 #Else
-    On Error GoTo fejl
+    On Error GoTo Fejl
    Dim lngRibPtr As LongPtr
    Dim lngRibPtrBackup As LongPtr
    Dim objRibbon As Object
@@ -63,17 +63,17 @@ Sub RefreshRibbon()
         ' It is exactly what we should have instead of that brute force reload mechanism.
     End If
 
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(394), vbOKOnly, Sprog.Error
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
-slut:
+Slut:
 #End If
 End Sub
 ' events der fyres når der trykkes på ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
-    On Error GoTo fejl
+    On Error GoTo Fejl
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -99,10 +99,10 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
         Oundo.EndCustomRecord
 #End If
     
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.A(395), vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Public Sub Rib_Settings(control As IRibbonControl)
@@ -843,16 +843,16 @@ End Sub
 
 'Callback for ButtonNyLig onAction
 Sub Rib_nylign(control As IRibbonControl)
-    On Error GoTo fejl
+    On Error GoTo Fejl
 
     Application.ScreenUpdating = False
     Selection.OMaths.Add Range:=Selection.Range
 '    Selection.OMaths(1).BuildUp
     
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 'Callback for ButtonNumEq onAction
 Sub Rib_nynumlign(control As IRibbonControl)

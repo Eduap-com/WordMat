@@ -113,7 +113,7 @@ Dim ils As InlineShape
 Dim Sep As String, s As String
 Dim pointText As String, i As Long
 Dim pointText2 As String
-    On Error GoTo fejl
+    On Error GoTo Fejl
     InsertType = 1
     If ListOutput = vbNullString Then SolveDE
     PlotOutput 3
@@ -163,17 +163,17 @@ s = s & "true" & Sep & "false" & Sep & "false" & Sep & "false" & Sep
 
 ils.AlternativeText = s
 Unload Me
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 Application.ScreenUpdating = True
 End Sub
 
 Private Sub CommandButton_inserttabel_Click()
 Dim Tabel As Table
 Dim i As Long, j As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
     If ListOutput = vbNullString Then SolveDE
     InsertType = 2
         Application.ScreenUpdating = False
@@ -263,10 +263,10 @@ Dim i As Long, j As Integer
     Next
     
     Unload Me
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -457,7 +457,7 @@ Dim st As Double
 End Sub
 
 Private Sub Validate()
-On Error GoTo slut
+On Error GoTo Slut
    Dim st As Double
    Label_validate.Caption = ""
    Label_validate.visible = False
@@ -476,7 +476,7 @@ On Error GoTo slut
 #Else
    End If
 #End If
-slut:
+Slut:
    If Label_validate.Caption <> vbNullString Then Label_validate.visible = True
 End Sub
 Function StrToDbl(s As String) As Double
@@ -529,7 +529,7 @@ Function SolveDE() As Boolean
     Dim variabel As String, xmin As String, xmax As String, xstep As String, DElist As String, varlist As String, guesslist As String
     Dim ea As New ExpressionAnalyser
     Dim n As Integer, Npoints As Long
-    On Error GoTo fejl
+    On Error GoTo Fejl
     variabel = TextBox_varx.Text
     xmin = Replace(TextBox_xmin.Text, ",", ".")
     xmax = Replace(TextBox_xmax.Text, ",", ".")
@@ -539,7 +539,7 @@ Function SolveDE() As Boolean
     DElist = "["
     If TextBox_var1.Text = vbNullString Or TextBox_eq1.Text = vbNullString Or TextBox_init1.Text = vbNullString Then
         MsgBox "Der mangler data", vbOKOnly, Sprog.Error
-        GoTo slut
+        GoTo Slut
     Else
         n = n + 1
         varlist = varlist & TextBox_var1.Text & ","
@@ -622,19 +622,19 @@ Function SolveDE() As Boolean
         i = i + 1
     Loop While ea.Pos < ea.Length - 1 And i < 10000
 SolveDE = True
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
    If i >= Npoints Then
     SolveDE = True
    Else
     SolveDE = False
     End If
-slut:
+Slut:
 End Function
 
 Sub PlotOutput(Optional highres As Double = 1)
 Dim Text As String, yAxislabel As String
-On Error GoTo fejl
+On Error GoTo Fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
@@ -755,7 +755,7 @@ On Error GoTo fejl
         If omax.MaximaOutput = "" Then
             Label_wait.Caption = "Fejl!"
             Label_wait.visible = True
-            GoTo slut
+            GoTo Slut
         Else
             DoEvents
 #If Mac Then
@@ -770,15 +770,15 @@ On Error GoTo fejl
         Label_wait.visible = False
     End If
     Label_wait.visible = False
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     On Error Resume Next
     Label_wait.Caption = Sprog.A(94)
     Label_wait.Font.Size = 12
     Label_wait.Width = 150
     Label_wait.visible = True
     Image1.Picture = Nothing
-slut:
+Slut:
 
 End Sub
 

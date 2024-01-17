@@ -54,7 +54,7 @@ End Sub
 
 Private Sub UserForm_Activate()
 Dim i As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
     SetCaptions
     EquationName = ""
     Label_error.visible = False
@@ -65,7 +65,7 @@ For i = 1 To ActiveDocument.Bookmarks.Count
 Next
 TextBox1.SetFocus
 
-fejl:
+Fejl:
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)

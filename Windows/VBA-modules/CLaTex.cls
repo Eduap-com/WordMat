@@ -269,10 +269,10 @@ WriteTextfileToString Mappe & "\" & FilNavn, LaTexDoc
 'Close #filnr    ' Close file.
 
 
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
-slut:
+Slut:
 
 End Sub
 Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
@@ -293,7 +293,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
    If mtpath = "" Then
       MsgBox Sprog.A(409)
       OpenLink "http://miktex.org"
-      GoTo slut
+      GoTo Slut
    End If
 
    SaveTex Mappe, FilNavn & ".tex"
@@ -306,7 +306,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
       On Error Resume Next
       If Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Then Kill Mappe & "\" & FilNavn & ".dvi"
       'Kill Mappe & "\" & filnavn & ".dvi"
-      On Error GoTo fejl
+      On Error GoTo Fejl
 
       appnr = shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
 
@@ -327,10 +327,10 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
    End If
 
    'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
-   GoTo slut
-fejl:
+   GoTo Slut
+Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 #End If
 End Sub
 
@@ -361,7 +361,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    If mtpath = "" Then
       MsgBox Sprog.A(409), vbOKOnly
       OpenLink "http://miktex.org"
-      GoTo slut
+      GoTo Slut
    End If
 
    SaveTex Mappe, FilNavn & ".tex"
@@ -416,10 +416,10 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
       
    End If
 #End If
-   GoTo slut
-fejl:
+   GoTo Slut
+Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Function MikTexPath() As String
@@ -429,26 +429,26 @@ path = Environ("ProgramW6432") & "\MikTex*"
 If Dir(path, vbDirectory) <> "" Then
    MikTex64bit = True
    path = Environ("ProgramW6432") & "\" & Dir(path, vbDirectory) & "\miktex"
-   GoTo slut
+   GoTo Slut
 End If
 path = Environ("ProgramFiles") & "\MikTex*"
 If Dir(path, vbDirectory) <> "" Then
     MikTex64bit = False
    path = Environ("ProgramFiles") & "\" & Dir(path, vbDirectory) & "\miktex"
-   GoTo slut
+   GoTo Slut
 End If
 
 path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' hvis installeret i userprofile
-If Dir(path, vbDirectory) <> "" Then GoTo slut
+If Dir(path, vbDirectory) <> "" Then GoTo Slut
 
 path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' hvis installeret i userprofile
-If Dir(path, vbDirectory) <> "" Then GoTo slut
+If Dir(path, vbDirectory) <> "" Then GoTo Slut
 
 'path = GetProgramFilesDir() & "\MikTex*"
 'If Dir(path, vbDirectory) <> "" Then GoTo Slut
 
 path = ""
-slut:
+Slut:
 MikTexPath = path
 End Function
 Function IsMikTexInstalled() As Boolean

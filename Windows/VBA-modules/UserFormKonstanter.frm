@@ -82,7 +82,7 @@ If CheckBox_msol.Value = True Then Text = Text & "m_" & Sprog.A(260) & "=1" & De
     insertribformel "", Text
 'End If
 
-slut:
+Slut:
     Me.Hide
 End Sub
 

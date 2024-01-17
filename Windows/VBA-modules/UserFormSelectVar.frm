@@ -24,7 +24,7 @@ Public Eliminate As Boolean
 Private Svars As Variant ' array der holder variabelnavne.  som de skal returneres dvs. uden asciikonvertering
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo fejl
+On Error GoTo Fejl
 Dim Arr As Variant
 Dim i As Integer, c As Integer
     If OptionButton_numonly.Value = True Then
@@ -115,10 +115,10 @@ Dim i As Integer, c As Integer
         CASengine = 1
     End If
     
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     SelectedVar = vbNullString
-slut:
+Slut:
     Me.Hide
     Application.ScreenUpdating = False
 End Sub

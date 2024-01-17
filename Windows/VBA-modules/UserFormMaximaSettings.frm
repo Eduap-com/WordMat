@@ -39,9 +39,9 @@ End Sub
 Private Sub NulstilWordDoc(FilNavn As String)
 Dim appdir As String
 Dim fs, F, s
-On Error GoTo fejl
+On Error GoTo Fejl
     
-If MsgBox(Sprog.A(665) & ", " & FilNavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo slut
+If MsgBox(Sprog.A(665) & ", " & FilNavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo Slut
     
 #If Mac Then
 ' cant
@@ -58,10 +58,10 @@ Else
 End If
 #End If
 
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 
 End Sub

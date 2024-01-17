@@ -23,7 +23,7 @@ Public Sub Plot2DGraph()
     Dim Arr As Variant
     Dim i As Integer
     Dim j As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
     Dim sstart As Long, sslut As Long
     Dim TempCas As Integer
     
@@ -96,15 +96,15 @@ Public Sub Plot2DGraph()
     Selection.start = sstart
     UF2Dgraph.Show vbModeless
     
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
     CASengine = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
 Dim Arr As Variant
-On Error GoTo fejl
+On Error GoTo Fejl
 Ligning = Replace(Ligning, VBA.ChrW(8788), "=") ' :=
 Ligning = Replace(Ligning, VBA.ChrW(8797), "=") ' tripel =
 Ligning = Replace(Ligning, VBA.ChrW(8801), "=") ' def =
@@ -144,10 +144,10 @@ ElseIf UF2Dgraph.TextBox_ligning5.Text = "" Then
 ElseIf UF2Dgraph.TextBox_ligning6.Text = "" Then
     UF2Dgraph.TextBox_ligning6.Text = Ligning
 End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Sub PlotDF()
@@ -192,7 +192,7 @@ Sub PlotDF()
         s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
         s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmax, Tic)"
         OpenGeoGebraWeb s, "Classic", True, True
-        GoTo slut
+        GoTo Slut
 #If Mac Then
 #Else
     End If
@@ -234,10 +234,10 @@ Sub PlotDF()
     UF2Dgraph.MultiPage1.SetFocus
     UF2Dgraph.Show vbModeless
 
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Sub InsertEmptyGraphOleObject()
@@ -291,7 +291,7 @@ ea.SetNormalBrackets
     UfWait.Label_progress.Caption = "***"
     UfWait.Label_stop.visible = False
     UfWait.Show vbModeless
-On Error GoTo fejl
+On Error GoTo Fejl
 Application.ScreenUpdating = False
 
 If Not FileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
@@ -442,12 +442,12 @@ Dim i As Integer
     Unload UfWait
 
 Application.ScreenUpdating = True
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(97), vbOKOnly, Sprog.Error
     omax.ConvertLnLog = True
     Unload UfWait
-slut:
+Slut:
     omax.ConvertLnLog = True
     
 #End If
@@ -520,7 +520,7 @@ Dim Arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
 Dim srange As Range
-On Error GoTo fejl
+On Error GoTo Fejl
 ea.SetNormalBrackets
     Dim sstart As Long, sslut As Long
     sstart = Selection.start
@@ -655,10 +655,10 @@ End If
     srange.Select
     Selection.Collapse wdCollapseEnd
 
-GoTo slut:
-fejl:
+GoTo Slut:
+Fejl:
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
-slut:
+Slut:
 On Error GoTo slut2
     UfWait2.Label_progress = UfWait2.Label_progress & "**"
     xlap.Run ("Auto_open")
@@ -850,7 +850,7 @@ ws.Activate
 'Dim excel As excel.Application
 'Set excel = CreateObject("Excel.Application")
 'Set wb = excel.Workbooks(excel.Workbooks.Count)
-slut:
+Slut:
 DisableExcelMacros
 End Sub
 
@@ -910,7 +910,7 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String) As Obje
 Dim path As String
 Dim ils As InlineShape
 Dim vers As String
-On Error GoTo fejl
+On Error GoTo Fejl
 Application.ScreenUpdating = False
 EnableExcelMacros
     
@@ -973,12 +973,12 @@ Unload UfWait2
 'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     On Error Resume Next
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     Unload UfWait2
-slut:
+Slut:
 End Function
 
 Sub InsertPindeDiagram()

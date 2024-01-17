@@ -70,11 +70,11 @@ End If
 
 End Sub
 Public Sub CloseExcel()
-On Error GoTo fejl
+On Error GoTo Fejl
 xlwb.Close False ' close the workbook without saving
 XLapp.quit ' close the Excel application
 
-fejl:
+Fejl:
 Set xlwb = Nothing
 Set XLapp = Nothing
 
@@ -103,10 +103,10 @@ If Err.Number <> 0 Then
     Set XLapp = CreateObject("Excel.Application")
 '    Set XLapp = New excel.Application
 End If
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     RestartExcel
-slut:
+Slut:
 End Sub
 Public Sub Freeze()
 On Error Resume Next
@@ -131,7 +131,7 @@ On Error Resume Next
 '    Set XLapp = CreateObject("Excel.Application")
 '    Set XLapp = New Excel.Application
 'End If
-On Error GoTo slut
+On Error GoTo Slut
 Application.ScreenUpdating = False
 EnableExcelMacros
     
@@ -184,12 +184,12 @@ End If
 'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     On Error Resume Next
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 '    Unload ufwait2
-slut:
+Slut:
 End Function
 
 
@@ -352,7 +352,7 @@ Dim n As Integer
 Dim oFS As Integer
 Dim r As Range
 
-On Error GoTo fejl
+On Error GoTo Fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -400,7 +400,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
 End If
 
 If n < 2 Then
-    GoTo fejl
+    GoTo Fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -434,10 +434,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo slut
-fejl:
+GoTo Slut
+Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-slut:
+Slut:
 
 End Sub
 Public Function GetTableData() As Boolean

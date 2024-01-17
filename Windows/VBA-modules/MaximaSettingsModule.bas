@@ -51,7 +51,6 @@ Private mLastUpdateCheck As String
 Private mRegAppVersion As String
 
 
-
 Public Sub ReadAllSettingsFromRegistry()
 Dim setn As Integer
 On Error Resume Next

@@ -132,8 +132,8 @@ Exit Sub
     
     UserFormOmdrejninglegeme.Show
     
-fejl:
-slut:
+Fejl:
+Slut:
 End Sub
 
 Sub Plot3DGraph()
@@ -141,7 +141,7 @@ Sub Plot3DGraph()
     Dim result As Variant
     Dim Arr As Variant
     Dim i As Integer
-    On Error GoTo fejl
+    On Error GoTo Fejl
     
     PrepareMaxima
     omax.ReadSelection
@@ -178,10 +178,10 @@ Sub Plot3DGraph()
     End If
     
     UserForm3DGraph.Show
-    GoTo slut
-fejl:
+    GoTo Slut
+Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
+Slut:
 End Sub
 
 Sub Insert3DEquation(Equation As String)
