@@ -23,7 +23,7 @@ Private Sub CommandButton_cancel_Click()
     
     If Dir(FilePath, vbDirectory) = vbNullString Then
         If MsgBox("GeoGebra 5 er ikke blevet færdiginstalleret. Vil du afslutte?", vbYesNo, "Ikke færdig") = vbYes Then
-            Me.hide
+            Me.Hide
         End If
     End If
 '    If Not TestDone Then
@@ -53,7 +53,7 @@ Private Sub CommandButton_test_Click()
         GoTo slut
     End If
     
-    Me.hide
+    Me.Hide
     GeoGebra
 '    RunScript "OpenGeoGebra", geogebrafilersti
 slut:

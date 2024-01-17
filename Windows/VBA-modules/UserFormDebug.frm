@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDebug
    ClientHeight    =   9360.001
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   16725
+   ClientWidth     =   16200
    OleObjectBlob   =   "UserFormDebug.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,14 +13,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
+Option Explicit
 
 Private Sub CommandButton_ok_Click()
-Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()

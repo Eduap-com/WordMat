@@ -16,11 +16,11 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub CommandButton_ok_Click()
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_ok_Click()
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()

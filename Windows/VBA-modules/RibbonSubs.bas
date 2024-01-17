@@ -840,10 +840,6 @@ End Sub
 Sub Rib_tfordelinggraf(control As IRibbonControl)
     InsertOpenExcel FilNavn:="studenttFordeling.xltm", WorkBookName:="t" 'Sprog.A(483)
 End Sub
-'Callback for ButtonGrupper onAction
-Sub Rib_Grupper(control As IRibbonControl)
-    GrupperIntervaller
-End Sub
 
 'Callback for ButtonNyLig onAction
 Sub Rib_nylign(control As IRibbonControl)

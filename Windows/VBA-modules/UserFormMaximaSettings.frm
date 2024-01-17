@@ -33,7 +33,7 @@ Private Sub ComboBox_language_Change()
 End Sub
 
 Private Sub Label_cancel_Click()
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub NulstilWordDoc(FilNavn As String)
@@ -222,7 +222,7 @@ On Error Resume Next
         
     SetMathAutoCorrect
     
-    UFMSettings.hide
+    UFMSettings.Hide
     Sprog.CheckSetting
     RibbonSubs.RefreshRibbon
 '#If Mac Then
@@ -369,6 +369,8 @@ Private Sub UserForm_Activate()
     FillComboBoxBackupNo
     FillComboBoxBackupTime
     SetCaptions
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
     
     If Sprog.SprogNr = 1 Then
         Label_geogebraexplain.Caption = "GeoGebra Calculator Suite bliver installeret sammen med WordMat. Det kører i en browser, men kræver ikke internet. Det fungerer ens på Windows og Mac, og starter hurtigt op." & vbCrLf & "GeoGebra 5 fungerer ens på Windows og Mac, men kræver separat installation." & vbCrLf & "Windows understøtter også de andre app-versioner af GeoGebra som Geogebra 6, Graphing calculator mm. Disse vil blive anvendt, hvis GeoGebra 5 ikke er installeret."
@@ -385,7 +387,8 @@ Private Sub UserForm_Activate()
     OptionButton_casgeogebradirect.visible = True
     OptionButton_geogebra.Caption = "GeoGebra 5"
 #Else
-    OptionButton_geogebra.Caption = "GeoGebra 5 (6, App-versions ...)"
+    OptionButton_geogebra.Caption = "GeoGebra 5"
+'    OptionButton_geogebra.Caption = "GeoGebra 5 (6, App-versions ...)"
 '    OptionButton_casgeogebradirect.visible = False
 #End If
 
@@ -618,7 +621,7 @@ Sub SetCaptions()
     Frame3.Caption = Sprog.Separators
     Label_list.Caption = Sprog.List
     Frame2.Caption = Sprog.Multsign
-    OptionButton_prik.Caption = VBA.ChrW(183) & " " & Sprog.Dot
+    OptionButton_prik.Caption = VBA.ChrW(183) & " (" & Sprog.Dot & ")"
     Frame4.Caption = Sprog.SolutionType
     OptionButton_lmbool.Caption = Sprog.SolutionBoolean & ": x=1 v x=2"
     OptionButton_lmset.Caption = Sprog.SolutionSet & ": L={1,2}"

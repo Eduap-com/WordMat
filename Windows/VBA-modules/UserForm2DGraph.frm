@@ -524,7 +524,7 @@ Dim i As Integer
 
 If cxl Is Nothing Then Set cxl = New CExcel
 Application.ScreenUpdating = False
-Me.hide
+Me.Hide
     Dim UfWait2 As New UserFormWaitForMaxima
     UfWait2.Show vbModeless
     DoEvents
@@ -1918,7 +1918,7 @@ Private Sub MMathPlot()
 '    objEq.BuildUp
     Selection.TypeParagraph
 
-    hide
+    Hide
     
 slut:
 End Sub

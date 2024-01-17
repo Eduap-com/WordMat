@@ -336,50 +336,49 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisable
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"C:\Program Files\Microsoft Office\Root\Office16\STARTUP\WordMat.dotm"; ValueData: 1 
 
 
-; WordMat settings
-Root: HKCU; Subkey: "Software\WordMat"; Flags: 
-Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: 
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AllTrig"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Exact"; ValueData: 2 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Separator"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "LogOutput"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Complex"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Units"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "SolveBoolOrSet"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "SigFig"; ValueData: 7 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "VidNot"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Radians"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Forklaring"; ValueData: 1 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "MaximaCommand"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "ExcelEmbed"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Gangetegn"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "OutUnits"; ValueData: "" ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Index"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AntalBeregninger"; ValueData: 0 ; Flags: createvalueifdoesntexist
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 0 ; Flags: uninsdeletekey
-;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: TaskAutoStart
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey
-;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: Taskcheckforupdates;
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "RibbonPointer"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BigFloat"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "ShowAssum"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "PolarOutput"; ValueData: 0 ; Flags: uninsdeletekey
+; WordMat settings  ; V. 1.29 fjernet for at sikre at de ikke nulstilles ved opdatering
+;Root: HKCU; Subkey: "Software\WordMat"; Flags: 
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: 
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AllTrig"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Exact"; ValueData: 2 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Separator"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "LogOutput"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Complex"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Units"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "SolveBoolOrSet"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "SigFig"; ValueData: 7 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "VidNot"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Radians"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Forklaring"; ValueData: 1 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "MaximaCommand"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "ExcelEmbed"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Gangetegn"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "OutUnits"; ValueData: "" ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Index"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AntalBeregninger"; ValueData: 0 ; Flags: createvalueifdoesntexist
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 0 ; Flags: uninsdeletekey
+;;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: TaskAutoStart
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey
+;;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: Taskcheckforupdates;
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "RibbonPointer"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BigFloat"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "ShowAssum"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "PolarOutput"; ValueData: 0 ; Flags: uninsdeletekey
 
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "GraphApp"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Language"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "dAsDiffChr"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "LatexStart"; ValueData: "" ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "LatexSlut"; ValueData: "" ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "LatexUnits"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "ConvertTexWithMaxima"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "EqNumPlacement"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "EqNumType"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "EqAskRef"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Backup"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BackupNo"; ValueData: 0 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BackupMaxNo"; ValueData: 20 ; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BackupTime"; ValueData: 5 ; Flags: uninsdeletekey
-
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "GraphApp"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Language"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "dAsDiffChr"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "LatexStart"; ValueData: "" ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "LatexSlut"; ValueData: "" ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "LatexUnits"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "ConvertTexWithMaxima"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "EqNumPlacement"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "EqNumType"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "EqAskRef"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Backup"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BackupNo"; ValueData: 0 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BackupMaxNo"; ValueData: 20 ; Flags: uninsdeletekey
+;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BackupTime"; ValueData: 5 ; Flags: uninsdeletekey
 
 ; GeoGebra fileassociation
 ;Root: HKCR; Subkey: ".ggb"; ValueType: string; ValueName: ""; ValueData: "WordMatGeoGebra"; Flags: uninsdeletevalue createvalueifdoesntexist
@@ -1458,55 +1457,56 @@ begin
      end;
 
 
-procedure DeinitializeSetup();
-begin
-//     if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
-  //         if not FileExists(Office14Folder + 'STARTUP\WordMat.dotm') then
-    //            if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
-    if AntalBeregninger>0 then
-    begin
-    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
-//    if IsTaskSelected('AutoStart') then
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AutoStart', AutoStart);
-//    if IsTaskSelected('CheckForUpdate') then
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'CheckForUpdate', CheckForUpdate);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','AllTrig', AllTrig);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Complex', Complex);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Exact', Exact);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ExcelEmbed', ExcelEmbed);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Forklaring', Forklaring);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Gangetegn', Gangetegn);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LogOutput', LogOutput);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','MaximaCommand', MaximaCommand);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Radians', Radians);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Separator', Separator);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','SigFig', SigFig );
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','SolveBoolOrSet', SolveBoolOrSet);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Units', Units);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','VidNot', VidNot);
-      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','OutUnits', OutUnits);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Index', mIndex);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BigFloat', BigFloat);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ShowAssum', ShowAssum);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','PolarOutput', PolarOutput);
+// Fjernet 1.29 for at undgå at indstillinger fjernes ved opdatering
+//procedure DeinitializeSetup();
+//begin
+////     if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
+//  //         if not FileExists(Office14Folder + 'STARTUP\WordMat.dotm') then
+//    //            if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
+//    if AntalBeregninger>0 then
+//    begin
+//    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
+////    if IsTaskSelected('AutoStart') then
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AutoStart', AutoStart);
+////    if IsTaskSelected('CheckForUpdate') then
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'CheckForUpdate', CheckForUpdate);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','AllTrig', AllTrig);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Complex', Complex);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Exact', Exact);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ExcelEmbed', ExcelEmbed);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Forklaring', Forklaring);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Gangetegn', Gangetegn);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LogOutput', LogOutput);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','MaximaCommand', MaximaCommand);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Radians', Radians);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Separator', Separator);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','SigFig', SigFig );
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','SolveBoolOrSet', SolveBoolOrSet);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Units', Units);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','VidNot', VidNot);
+//      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','OutUnits', OutUnits);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Index', mIndex);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BigFloat', BigFloat);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ShowAssum', ShowAssum);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','PolarOutput', PolarOutput);
 
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','GraphApp', GraphApp);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Language', Language);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','dAsDiffChr', dAsDiffChr);
-      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexStart', LatexStart);
-      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexSlut', LatexSlut);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexUnits', LatexUnits);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ConvertTexWithMaxima', ConvertTexWithMaxima);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqNumPlacement', EqNumPlacement);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqNumType', EqNumType);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqAskRef', EqAskRef);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Backup', Backup);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupNo', BackupNo);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupMaxNo', BackupMaxNo);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupTime', BackupTime);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','GraphApp', GraphApp);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Language', Language);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','dAsDiffChr', dAsDiffChr);
+//      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexStart', LatexStart);
+//      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexSlut', LatexSlut);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexUnits', LatexUnits);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ConvertTexWithMaxima', ConvertTexWithMaxima);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqNumPlacement', EqNumPlacement);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqNumType', EqNumType);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqAskRef', EqAskRef);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Backup', Backup);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupNo', BackupNo);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupMaxNo', BackupMaxNo);
+//      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupTime', BackupTime);
 
-     end;
-end;
+//     end;
+//end;
 
 function InitializeUninstall(): Boolean;
 begin

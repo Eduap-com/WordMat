@@ -41,7 +41,7 @@ Private Sub label_stop_Click()
 On Error Resume Next
     omax.StopNow = True
     StopNow = True
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub label_stop_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)

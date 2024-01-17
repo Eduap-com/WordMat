@@ -655,3 +655,4 @@ Sub BackupThisDocument()
     fso.CopyFile sourcePath, BackupFilePath
     Set fso = Nothing
 End Sub
+

@@ -1,6 +1,6 @@
 Attribute VB_Name = "Statistik"
 Option Explicit
-Public UFgrupper As UserFormGrupper
+
 Sub Chi2Fordeling()
     Dim k As Integer
     Dim g As Variant
@@ -96,34 +96,4 @@ Function Lgamma(z As Variant) As Variant
     
 End Function
 
-'Function ConvertNumberToString(n As Double) As String
-'    ConvertNumberToString = Replace(Replace(n, ",", "."), "E", VBA.ChrW(183) & "10^(")
-'    If InStr(ConvertNumberToString, "10^(") Then
-'        ConvertNumberToString = ConvertNumberToString & ") "
-'    End If
-'End Function
 
-Sub GrupperIntervaller()
-    On Error GoTo fejl
-    Dim Sdata As String
-    Dim Sintervaller As String
-    
-    If Not (UFgrupper Is Nothing) Then
-        Sdata = UFgrupper.TextBox_data.Text
-        Sintervaller = UFgrupper.TextBox_intervaller.Text
-    End If
-    Set UFgrupper = New UserFormGrupper
-    UFgrupper.TextBox_data.Text = Sdata
-    UFgrupper.TextBox_intervaller.Text = Sintervaller
-    
-    Dim t As String
-    t = Selection.Text
-    If Len(t) > 3 Then
-        t = Replace(t, ListSeparator, vbCrLf)
-        UFgrupper.TextBox_data.Text = t
-    End If
-    Selection.Collapse wdCollapseEnd
-    Selection.TypeParagraph
-    UFgrupper.Show vbModeless
-fejl:
-End Sub

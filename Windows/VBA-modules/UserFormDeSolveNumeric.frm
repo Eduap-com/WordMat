@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDeSolveNumeric 
    Caption         =   "Løs differentialligning(er) numerisk"
-   ClientHeight    =   7935
+   ClientHeight    =   8130
    ClientLeft      =   45
    ClientTop       =   150
    ClientWidth     =   16725
@@ -13,8 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
 Option Explicit
 Public luk As Boolean
 Public InsertType As Integer
@@ -22,7 +20,6 @@ Public ListOutput As String
 Private PointArr() As String
 Public xlwb As Object
 'Public xlwb As Excel.Workbook
-
 
 Private Sub CheckBox_autostep_Click()
    If CheckBox_autostep.Value Then
@@ -32,12 +29,12 @@ End Sub
 
 Private Sub ComboBox_graphapp_Change()
    If ComboBox_graphapp.ListIndex > 0 Then
-      CommandButton_insertgraph.visible = False
+      Label_insertgraph.visible = False
       CheckBox_pointsjoined.visible = False
       CheckBox_visforklaring.visible = False
-      Me.Width = 345
+      Me.Width = 347
    Else
-      CommandButton_insertgraph.visible = True
+      Label_insertgraph.visible = True
       CheckBox_pointsjoined.visible = True
       CheckBox_visforklaring.visible = True
       Me.Width = 848
@@ -45,7 +42,7 @@ Private Sub ComboBox_graphapp_Change()
    Validate
 End Sub
 
-Private Sub CommandButton_cancel_Click()
+Private Sub Label_cancel_Click()
     luk = True
     On Error Resume Next
     If MaxProc.Finished = 0 Then
@@ -273,7 +270,7 @@ slut:
 Application.ScreenUpdating = True
 End Sub
 
-Private Sub CommandButton_opdater_Click()
+Private Sub Label_opdater_Click()
 #If Mac Then
    GeoGebraPlot
 #Else
@@ -525,7 +522,7 @@ End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 '    luk = True
-    CommandButton_cancel_Click
+    Label_cancel_Click
 End Sub
 
 Function SolveDE() As Boolean
@@ -930,17 +927,18 @@ Sub SetCaptions()
     Label6.Caption = Sprog.A(86)
     Label7.Caption = Sprog.A(87)
     Label_Graf.Caption = Sprog.Graph
-    CommandButton_opdater.Caption = Sprog.RibShowGraph 'Sprog.Update
-    CommandButton_cancel.Caption = Sprog.A(661)
+    Label_opdater.Caption = Sprog.RibShowGraph 'Sprog.Update
+    Label_cancel.Caption = Sprog.A(661)
     Label_var.Caption = Sprog.IndepVar
     Label3.Caption = Sprog.A(88)
     Label5.Caption = Sprog.Definitions
     Label_wait.Caption = Sprog.Wait & "!"
     CheckBox_pointsjoined.Caption = Sprog.A(89)
     CheckBox_visforklaring.Caption = Sprog.A(90)
-    CommandButton_tolist.Caption = Sprog.A(91)
-    CommandButton_inserttabel.Caption = Sprog.A(92)
-    CommandButton_insertgraph.Caption = Sprog.A(93)
+    Label_tolist.Caption = Sprog.A(91)
+    Label_inserttabel.Caption = Sprog.A(92)
+    Label_insertgraph.Caption = Sprog.A(93)
+    Label_toExcel.Caption = ChrW(&H2192) & " Excel"
     
 #If Mac Then
     ComboBox_graphapp.visible = False
@@ -961,3 +959,57 @@ Sub ShowPreviewMac()
 #End If
 End Sub
 
+Private Sub Label_opdater_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_opdater.BackColor = LBColorPress
+End Sub
+Private Sub Label_opdater_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetLabelsInactive
+    Label_opdater.BackColor = LBColorHover
+End Sub
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetLabelsInactive
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub Label_insertgraph_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_insertgraph.BackColor = LBColorPress
+End Sub
+Private Sub Label_insertgraph_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetLabelsInactive
+    Label_insertgraph.BackColor = LBColorHover
+End Sub
+Private Sub Label_tolist_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_tolist.BackColor = LBColorPress
+End Sub
+Private Sub Label_tolist_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetLabelsInactive
+    Label_tolist.BackColor = LBColorHover
+End Sub
+Private Sub Label_toExcel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_toExcel.BackColor = LBColorPress
+End Sub
+Private Sub Label_toExcel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetLabelsInactive
+    Label_toExcel.BackColor = LBColorHover
+End Sub
+Private Sub Label_inserttabel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_inserttabel.BackColor = LBColorPress
+End Sub
+Private Sub Label_inserttabel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetLabelsInactive
+    Label_inserttabel.BackColor = LBColorHover
+End Sub
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetLabelsInactive
+End Sub
+
+Sub SetLabelsInactive()
+    Label_opdater.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
+    Label_insertgraph.BackColor = LBColorInactive
+    Label_tolist.BackColor = LBColorInactive
+    Label_inserttabel.BackColor = LBColorInactive
+    Label_toExcel.BackColor = LBColorInactive
+End Sub

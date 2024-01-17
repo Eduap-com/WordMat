@@ -119,7 +119,7 @@ Dim i As Integer, c As Integer
 fejl:
     SelectedVar = vbNullString
 slut:
-    Me.hide
+    Me.Hide
     Application.ScreenUpdating = False
 End Sub
 
@@ -277,7 +277,7 @@ End Sub
 
 
 Private Sub Label_cancel_Click()
-    Me.hide
+    Me.Hide
     Application.ScreenUpdating = False
 End Sub
 Private Sub Label_ok_Click()

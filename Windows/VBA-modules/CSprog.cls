@@ -4747,7 +4747,7 @@ Public Property Get DefError3() As String
 Dim s As String
 Select Case SprogNr
 'Case 1: s = "Du har en fejl i en af dine definitioner! " & VbCrLfMac & " kig på listen over definitioner nedenfor og se om du kan lokalisere fejlen. Alternativt indsæt en  'slet definitioner' kommando og se om det så virker. "
-Case 1: s = "Du har en skrevet noget som WordMat ikke kan forstå."
+Case 1: s = "Du har skrevet noget som WordMat ikke kan forstå."
 Case 3: s = "Hay un error en una de sus definiciones! " & VbCrLfMac & " Vea la lista de definiciones a continuación y compruebe si puede localizar el error. También puede tratar de insertar el comando 'delete def' para depurar."
 Case 4: s = ""
 Case Else: s = "You have written something which WordMat does not understand."

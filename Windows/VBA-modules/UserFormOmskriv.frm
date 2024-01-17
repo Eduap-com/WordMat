@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormOmskriv
    ClientHeight    =   5595
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   10620
+   ClientWidth     =   10545
    OleObjectBlob   =   "UserFormOmskriv.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -22,7 +22,7 @@ Public SammeLinje As Boolean
 
 Private Sub CommandButton_annuller_Click()
     annuller = True
-    Me.hide
+    Me.Hide
 End Sub
 Sub ExecuteOK()
     Dim Arr() As String, i As Integer
@@ -71,7 +71,7 @@ Sub ExecuteOK()
     End If
 
 
-    Me.hide
+    Me.Hide
     Application.ScreenUpdating = False
 
 End Sub
@@ -189,7 +189,7 @@ Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 Private Sub Label_cancel_Click()
     annuller = True
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)

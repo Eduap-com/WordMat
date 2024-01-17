@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormKonstanter 
    Caption         =   "Konstanter"
-   ClientHeight    =   7020
+   ClientHeight    =   7125
    ClientLeft      =   -15
    ClientTop       =   75
-   ClientWidth     =   7890
+   ClientWidth     =   8025
    OleObjectBlob   =   "UserFormKonstanter.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,14 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
-Private Sub CommandButton_annuller_Click()
+Private Sub Label_cancel_Click()
 Unload Me
 '    Me.Hide
 End Sub
@@ -78,12 +72,22 @@ If CheckBox_msol.Value = True Then Text = Text & "m_" & Sprog.A(260) & "=1" & De
 '    If DecSeparator = "." Then
 '        text = Replace(text, ",", ".")
 '    End If
+    
+    Text = Trim(Text)
+
+    If right(Text, 1) = ";" Or right(Text, 1) = "," Then
+        Text = Left(Text, Len(Text) - 1)
+    End If
 
     insertribformel "", Text
 'End If
 
 slut:
-    Me.hide
+    Me.Hide
+End Sub
+
+Private Sub Label_ok_Click()
+    CommandButton_ok_Click
 End Sub
 
 Private Sub Label1_Click()
@@ -116,8 +120,8 @@ Sub SetCaptions()
     MultiPage1.Pages(2).Caption = Sprog.A(263)
     MultiPage1.Pages(3).Caption = Sprog.A(264)
     MultiPage1.Pages(4).Caption = Sprog.A(265)
-    CommandButton_annuller.Caption = Sprog.Cancel
-    CommandButton_ok.Caption = Sprog.OK
+    Label_cancel.Caption = Sprog.Cancel
+    Label_ok.Caption = Sprog.OK
     Label1.Caption = Sprog.A(71)
     
     CheckBox_c.Caption = "c = 299792458 m s" & ChrW(&H207B) & ChrW(185) & "   -   " & Sprog.A(266)
@@ -158,3 +162,19 @@ Sub SetCaptions()
     
 End Sub
 
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
+End Sub

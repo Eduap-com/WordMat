@@ -19,12 +19,12 @@ Public ReturnVal As Integer ' 1=Install, 2=browser
 
 Private Sub Label_Installer_Click()
     ReturnVal = 1
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_webstart_Click()
     ReturnVal = 2
-    Me.hide
+    Me.Hide
 End Sub
 
 

@@ -19,37 +19,37 @@ Public ChosenCAS As Integer
 
 Private Sub Label_cancel_Click()
     ChosenCAS = -1
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_GeoGebraBrowser_Click()
     ChosenCAS = 5
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_GeoGebraGrafisk_Click()
     ChosenCAS = 6
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_GeoGebraNum_Click()
     ChosenCAS = 4
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_GeoGebraSym_Click()
     ChosenCAS = 3
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_maximaNum_Click()
     ChosenCAS = 2
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_MaximaSym_Click()
     ChosenCAS = 1
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()

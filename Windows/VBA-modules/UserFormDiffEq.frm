@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDiffEq 
    Caption         =   "Løsning af differentialligning"
-   ClientHeight    =   4680
+   ClientHeight    =   4920
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   6225
+   ClientWidth     =   6855
    OleObjectBlob   =   "UserFormDiffEq.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,28 +13,22 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
+
 Public DefS As String
 Public vars As String
 Public TempDefs As String
 Public luk As Boolean
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
 
-Private Sub CommandButton_cancel_Click()
+Private Sub Label_cancel_Click()
     luk = True
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
 Dim Arr As Variant
 Dim i As Integer
-    
     
     TempDefs = TextBox_def.Text
     TempDefs = Trim(TempDefs)
@@ -57,19 +51,19 @@ Dim i As Integer
     End If
     End If
     
-    Me.hide
+    Me.Hide
 End Sub
 
-Private Sub CommandButton_solvenum_Click()
+Private Sub Label_solvenum_Click()
    Dim F As String, Arr() As String
    Arr = Split(Label_ligning.Caption, "=")
-   If UBound(Arr) > 0 Then F = Arr(1)
-   If Len(Arr(0)) > 2 Then
+   If UBound(Arr) > 0 Then F = Trim(Arr(1))
+   If Len(Trim(Arr(0))) > 2 Then
       MsgBox "Differentialligningen skal være på formen y'=...  for at den kan løses numerisk" & vbCrLf & "", vbOKOnly, "Fejl"
       Exit Sub
    End If
    luk = True
-   Me.hide
+   Me.Hide
    UserFormDeSolveNumeric.TextBox_varx.Text = TextBox_variabel.Text
    UserFormDeSolveNumeric.TextBox_var1.Text = TextBox_funktion.Text
    UserFormDeSolveNumeric.TextBox_eq1.Text = F
@@ -84,6 +78,11 @@ Private Sub CommandButton_solvenum_Click()
    UserFormDeSolveNumeric.Show
 End Sub
 
+
+Private Sub Label_ok_Click()
+    CommandButton_ok_Click
+End Sub
+
 Private Sub TextBox_funktion_Change()
     opdaterLabels
 End Sub
@@ -96,6 +95,8 @@ Private Sub UserForm_Activate()
 Dim i As Integer
 Dim svar As String
     SetCaptions
+    
+    Label_ligning.Caption = Replace(Label_ligning.Caption, "=", " = ")
 
     If InStr(Label_ligning.Caption, ChrW(180) & ChrW(180)) > 0 Then ' "´´" to accenter der vender opad
         Label_diffy.visible = True
@@ -105,7 +106,7 @@ Dim svar As String
         Label7.visible = True
         Label8.visible = True
         TextBox_bcy.visible = True
-        CommandButton_solvenum.visible = False
+        Label_solvenum.visible = False
     Else
         Label_diffy.visible = False
         TextBox_starty2.visible = False
@@ -114,7 +115,7 @@ Dim svar As String
         Label7.visible = False
         Label8.visible = False
         TextBox_bcy.visible = False
-        CommandButton_solvenum.visible = True
+        Label_solvenum.visible = True
     End If
 
     Svars = Split(vars, ";")
@@ -147,12 +148,40 @@ End Sub
 
 Sub SetCaptions()
     Me.Caption = Sprog.SolveDE
-    Label1.Caption = Sprog.DifferentialEquation
+    Label1.Caption = Sprog.DifferentialEquation & ":"
     Label3.Caption = Sprog.IndepVar
     Label2.Caption = Sprog.DepVar
-    Label4.Caption = Sprog.StartCond
+    Label4.Caption = Sprog.StartCond & ":"
     Label8.Caption = Sprog.A(297)
     Label_temp.Caption = Sprog.TempDefs
-    CommandButton_cancel.Caption = Sprog.Cancel
-    CommandButton_ok.Caption = Sprog.OK
+    Label_cancel.Caption = Sprog.Cancel
+    Label_ok.Caption = Sprog.OK
+    If Sprog.SprogNr = 1 Then
+        Label_solvenum.Caption = "Løs numerisk"
+    Else
+        Label_solvenum.Caption = "Solve numerical"
+    End If
+End Sub
+Private Sub Label_solvenum_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_solvenum.BackColor = LBColorPress
+End Sub
+Private Sub Label_solvenum_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_solvenum.BackColor = LBColorHover
+End Sub
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
+    Label_solvenum.BackColor = LBColorInactive
 End Sub

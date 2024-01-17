@@ -23,7 +23,7 @@ Public MaximaInstalled As Boolean
 Public CmdTask As Task
 Public StopNow As Boolean
 Public TempDefs As String    ' midlertidige definitioner kun for denne kommando
-Public deffejl As Boolean    ' sættes hvis der er fejl i definitioner
+Public DefFejl As Boolean    ' sættes hvis der er fejl i definitioner
 Public Definitions As Boolean    ' sættes hvis der er definitioner i dokumentet
 Public DefString As String    ' contains the output from finddefinition
 Public defstringtext As String    ' contains definitions from finddefinitions before ConvertToMaxima
@@ -120,7 +120,7 @@ Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
     '        Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
     '    End If
     StopNow = False
-    deffejl = False
+    DefFejl = False
     DiffEqVar = ""
     Kommando = ""
     matvekt = False
@@ -1634,7 +1634,7 @@ start:
 
     If nr <= 1 Then
         MaximaOutput = ""
-        KommentarOutput = moutput(1)
+        KommentarOutput = Minput(1) ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
     ElseIf MaximaExact = 0 And Not MaximaVidNotation And Not MaximaUnits Then
         Dim exactres As String
         Dim numres As String
@@ -6554,12 +6554,12 @@ Sub GenerateOutputArray(Optional Text As String)
 
         Output = Mid(Text, posb + 1, pos2 - Pos - 4 - AntalCifre)
         If Mid(Text, Pos + 3, 1) = "o" Then Output = RemovePrintetBool(Output)
-        Output = Replace(Trim(Output), VbCrLfMac, "")
 '#If Mac Then ' SBCL
         If Mid(Text, Pos + 3, 1) = "i" Then
             ' næste er input
             Minput(ArrIndex) = Minput(ArrIndex) & Output
         Else
+            Output = Replace(Trim(Output), VbCrLfMac, "") ' v. 1.29 denne nu kun for output, da input kan være fejl, med flere linjer. Her er det vigtigt med pil
             ' næste er output
             moutput(ArrIndex) = moutput(ArrIndex) & Output
             ArrIndex = ArrIndex + 1 'mac
@@ -6901,7 +6901,7 @@ Function FindDefinitions() As String
 
     GoTo slut
 fejl:
-    deffejl = True
+    DefFejl = True
     '    DefString = ""
     FindDefinitions = ""
 slut:
@@ -7460,127 +7460,7 @@ fejl:
 slut:
 End Property
 
-Function CheckForError() As Boolean
-    Dim UFerror As UserFormError
-    Dim fejltekst As String
-    Dim Pos As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
-    Dim t As String
-    Dim deffejl As Boolean
-    Dim ndeferror As Integer
 
-    If DefString <> "" Then
-        ndeferror = 5
-    Else
-        ndeferror = 3
-    End If
-    On Error Resume Next
-    CheckForError = False
-    If InStr(MaximaOutput, "syntax error") > 0 Then
-        fejltekst = Sprog.SyntaxErrorLong
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "incorrectsyntax:Missing") > 0 Then
-        Pos = InStr(MaximaOutput, "incorrectsyntax:Missing")
-        fejltekst = Sprog.SyntaxError & ". " & vbCrLf & Sprog.Missing & " " & Mid(MaximaOutput, Pos + 22, 1)
-        deffejl = True
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "incorrectsyntax:Toomany") > 0 Then
-        Pos = InStr(KommentarOutput, "incorrectsyntax:Toomany")
-        fejltekst = Sprog.SyntaxError & ". " & vbCrLf & Sprog.TooMany & " " & Mid(MaximaOutput, Pos + 29, 1)
-        deffejl = True
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "isnotaprefixoperator") > 0 Then
-        fejltekst = GetErrorText("isnotaprefixoperator")
-        deffejl = True
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "isnotaninfixoperator") > 0 Then
-        fejltekst = GetErrorText("isnotaninfixoperator")
-        deffejl = True
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "Prematureterminationofinputat") > 0 Then
-        fejltekst = GetErrorText("Prematureterminationofinputat")
-        deffejl = True
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "incorrectsyntax:") > 0 Then
-        fejltekst = Sprog.SyntaxError & "."
-        deffejl = True
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "lisp error") And InStr(omax.MaximaOutput, "[") > 0 Then
-        fejltekst = Sprog.LispError
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "encounteredaLisperror") > 0 Then
-        fejltekst = Sprog.LispError
-        CheckForError = True
-'    ElseIf InStr(KommentarOutput, "Division by 0") > 0 Then ' maybe not relevant in SBCL
-'        fejltekst = Sprog.DivisionByZero
-'        CheckForError = True
-    ElseIf InStr(MaximaOutput, "expt:undefined:0toanegativeexponent") > 0 Then
-        fejltekst = Sprog.DivisionByZero
-        CheckForError = True
-    ElseIf InStr(MaximaOutput, "anerrorTodebugthistry:debugmode(true)") > 0 Then
-        fejltekst = Sprog.LispError
-        CheckForError = True
-    ElseIf MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
-        fejltekst = Sprog.A(133) '"Du har bedt om at løse ligningen for en variabel der allerede er defineret. Indsæt en 'slet def:' kommando før ligningen"
-        CheckForError = True
-    ElseIf (omax.deffejl = True) Then
-        fejltekst = Sprog.DefError & vbCrLf & VisDef
-        CheckForError = True
-    End If
-
-    If CheckForError Then
-        Set UFerror = New UserFormError
-        UFerror.Label_maximaoutput.Caption = KommentarOutput & vbCrLf & vbCrLf & MaximaOutput    ' eller maxproc.lastmaximaoutput
-        If deffejl Then
-            If UBound(Minput) < ndeferror Then
-                fejltekst = fejltekst & vbCrLf & vbCrLf & Sprog.DefError2
-            Else
-                fejltekst = fejltekst & vbCrLf & vbCrLf & Sprog.DefError3
-            End If
-            UFerror.TextBox_definitioner.Text = DefinitionsNice
-        Else
-            UFerror.TextBox_definitioner.visible = False
-            UFerror.Label_definitioner.visible = False
-        End If
-        UFerror.Label_fejltekst.Caption = fejltekst
-        UFerror.Show
-    End If
-
-End Function
-
-Function GetErrorText(Text As String) As String
-    Dim Pos As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
-    Dim t As String
-    Dim l As Integer
-    On Error Resume Next
-    l = Len(Text)
-    Pos = InStr(MaximaOutput, "incorrectsyntax")
-    pos2 = InStr(Pos, MaximaOutput, Text)
-    pos4 = InStr(pos2 + l, MaximaOutput, "^")
-    If pos4 < 1 Then
-        pos4 = Len(MaximaOutput)
-    End If
-    t = Mid(MaximaOutput, pos2 + l, pos4 - pos2 - l + 1)
-    t = Replace(t, "^", vbCrLf & "    ^", 1, 1)
-    GetErrorText = Sprog.SyntaxError & vbCrLf & Sprog.IllegalSymbol & ":" & vbCrLf & t
-
-End Function
-Function DefinitionsNice() As String
-    Dim DefS As String
-    DefS = DefString
-    If Len(DefS) > 3 Then
-        '    defs = Mid(defs, 2, Len(defs) - 3)
-        DefS = ConvertToAscii(DefS)
-        DefS = Replace(DefS, "$", vbCrLf)
-        DefS = Replace(DefS, ":=", vbTab & "= ")
-        DefS = Replace(DefS, ":", vbTab & "= ")
-        If DecSeparator = "," Then
-            DefS = Replace(DefS, ",", ";")
-            DefS = Replace(DefS, ".", ",")
-        End If
-    End If
-
-    DefinitionsNice = DefS
-End Function
 
 Public Property Get DefName(Index As Integer) As String
     On Error Resume Next

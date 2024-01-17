@@ -269,7 +269,7 @@ Sub MaximaCommand()
     End If
 
 
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
 
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
@@ -384,7 +384,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
         End If
         
         
-        If omax.CheckForError Then GoTo slut
+        If CheckForError Then GoTo slut
 
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
@@ -453,7 +453,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim scrollpos As Double
     Dim UFSolvenumeric As New UserFormNumericQuestion
     Dim ea As New ExpressionAnalyser, SaveKommando As String
-    Dim sstart As Long, sslut As Long
+    Dim sstart As Long, sslut As Long, p As Long, p2 As Long
     scrollpos = ActiveWindow.VerticalPercentScrolled
     Dim oData As New DataObject, ClipText As String
     
@@ -472,7 +472,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     sstart = Selection.start
     sslut = Selection.End
 
-    If omax.deffejl Then
+    If omax.DefFejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -488,10 +488,21 @@ Sub MaximaSolvePar(Optional variabel As String)
         MaximaSolveInequality variabel
         GoTo slut
     End If
-    If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
+    p = InStr(Selection.OMaths(1).Range.Text, "=")
+    If p < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
         If result = vbNo Then GoTo slut
+    Else
+        p2 = InStr(p + 1, Selection.OMaths(1).Range.Text, "=")
+        If p2 > 0 Then
+            If Sprog.SprogNr = 1 Then
+                MsgBox "Der kan ikke være to ligmedtegn i en ligning", vbOKOnly, "Fejl"
+            Else
+                MsgBox "You cant place two equal sign in an equation", vbOKOnly, "Fejl"
+            End If
+            GoTo slut
+        End If
     End If
 
     omax.ReadSelection
@@ -614,7 +625,7 @@ newcas:
                 GoTo slut
             End If
         End If
-        If omax.CheckForError Then GoTo slut
+        If CheckForError Then GoTo slut
 
 #If Mac Then
 #Else
@@ -799,7 +810,7 @@ newcassys:
         End If
         
         If omax.StopNow Then GoTo slut
-        If omax.CheckForError Then GoTo slut
+        If CheckForError Then GoTo slut
         If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
@@ -809,7 +820,7 @@ newcassys:
             GoTo slut
         End If
 
-        If (omax.deffejl = True) Then
+        If (omax.DefFejl = True) Then
             MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
             GoTo slut
         End If
@@ -887,7 +898,7 @@ newcassys:
                     Selection.TypeText Sprog.A(138) & variabel
                 End If
             Else
-                If (omax.deffejl = True) Then
+                If (omax.DefFejl = True) Then
                     MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
                 Else
                     fejlm = Sprog.A(131) & vbCrLf
@@ -1011,7 +1022,7 @@ Sub MaximaEliminate()
     sstart = Selection.start
     sslut = Selection.End
 
-    If omax.deffejl Then
+    If omax.DefFejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -1063,7 +1074,7 @@ Sub MaximaEliminate()
         
         
         If omax.StopNow Then GoTo slut
-        If omax.CheckForError Then GoTo slut
+        If CheckForError Then GoTo slut
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
         If omax.StopNow Then GoTo slut
@@ -1075,7 +1086,7 @@ Sub MaximaEliminate()
             GoTo slut
         End If
 
-        If (omax.deffejl = True) Then
+        If (omax.DefFejl = True) Then
             MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
             GoTo slut
         End If
@@ -1116,7 +1127,7 @@ Sub MaximaEliminate()
                     Selection.TypeText Sprog.A(138) & variabel
                 End If
             Else
-                If (omax.deffejl = True) Then
+                If (omax.DefFejl = True) Then
                     MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
                 Else
                     fejlm = Sprog.A(131) & vbCrLf
@@ -1179,7 +1190,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     sstart = Selection.start
     sslut = Selection.End
 
-    If omax.deffejl Then
+    If omax.DefFejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -1300,7 +1311,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         UFnsolve.Show
 
         If omax.StopNow Then GoTo slut
-        If omax.CheckForError Then GoTo slut
+        If CheckForError Then GoTo slut
         If UFnsolve.result = "afbryd" Then GoTo slut
 
         If UFnsolve.result = "num" Then
@@ -1433,7 +1444,7 @@ ghop:
             End If
             omax.InsertMaximaOutput
         Else
-            If (omax.deffejl = True) Then
+            If (omax.DefFejl = True) Then
                 MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
             Else
                 fejlm = Sprog.A(383) & "." & vbCrLf
@@ -1552,7 +1563,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
         '    Set UFWait.omax = omax
         '    UFWait.Show
         If omax.StopNow Then GoTo slut
-        If omax.CheckForError Then GoTo slut
+        If CheckForError Then GoTo slut
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
         If InStr(omax.MaximaOutput, VBA.ChrW(8776) & "false") > 0 Then
             omax.MaximaOutput = ""
@@ -1587,7 +1598,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
 
         Else
             Dim fejlm As String
-            If (omax.deffejl = True) Then
+            If (omax.DefFejl = True) Then
                 MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
             Else
                 fejlm = Sprog.A(388) & "." & vbCrLf
@@ -1714,7 +1725,7 @@ Sub beregn()
     End If
     
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
     '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
 
 #If Mac Then
@@ -1856,7 +1867,7 @@ Sub Omskriv()
     
     
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
 
     If Not (UFomskriv.SammeLinje) Then
         omax.GoToEndOfSelectedMaths
@@ -1961,7 +1972,7 @@ Sub reducer()
     
     
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
 
@@ -2019,7 +2030,7 @@ Sub CompareTest()
     '    omax.OpenCmd
     omax.CompareTest
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2110,7 +2121,7 @@ Sub faktoriser()
 
     '    omax.OpenCmd
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2191,7 +2202,7 @@ Sub udvid()
     End If
 
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     
@@ -2276,7 +2287,7 @@ Sub Differentier()
     
     
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    Selection.TypeParagraph
@@ -2362,7 +2373,7 @@ Sub Integrer()
     
     
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    Selection.TypeParagraph
@@ -2698,7 +2709,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     
         
     If omax.StopNow Then GoTo slut
-    If omax.CheckForError Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2884,40 +2895,55 @@ End Sub
 
 Function ValidateInput(Expr) As Boolean
     Dim n As Integer
+    Dim ED As ErrorDefinition
    
     ValidateInput = True
-'    ' validate brackets
+    '    ' validate brackets
    
     If GetCountOfChar(Expr, "(") <> GetCountOfChar(Expr, ")") Then
         If Sprog.SprogNr = 1 Then
-            MsgBox "Antallet af parenteser passer ikke i udtrykket" & vbCrLf & vbCrLf & Expr, vbOKOnly, "Syntaks fejl"
+'            MsgBox "Antallet af parenteser passer ikke i udtrykket" & vbCrLf & vbCrLf & Expr, vbOKOnly, "Syntaks fejl"
+            ED.Title = "Syntaks fejl"
+            ED.Description = "Antallet af parenteser passer ikke i udtrykket"
+            ED.MaximaOutput = Expr
         Else
-            MsgBox "The number of brackets do not match in" & vbCrLf & vbCrLf & Expr, vbOKOnly, "Syntax error"
+'            MsgBox "The number of brackets do not match in" & vbCrLf & vbCrLf & Expr, vbOKOnly, "Syntax error"
+            ED.Title = "Syntax error"
+            ED.Description = "The number of brackets do not match"
+            ED.MaximaOutput = Expr
         End If
-        ValidateInput = False
     ElseIf InStr(Expr, "\left(") Then
         If Sprog.SprogNr = 1 Then
-            MsgBox "Du har en forkert indstilling i Word." & vbCrLf & "I Ligningsmenuen skal du skifte fra Latex til Unicode for at WordMat virker", vbOKOnly, "Forkert indstilling"
+'            MsgBox "Du har en forkert indstilling i Word." & vbCrLf & "I Ligningsmenuen skal du skifte fra Latex til Unicode for at WordMat virker", vbOKOnly, "Forkert indstilling"
+            ED.Title = "Indstillingsfejl"
+            ED.Description = "Du har en forkert indstilling i Word." & vbCrLf & "I Ligningsmenuen skal du skifte fra Latex til Unicode for at WordMat virker"
         Else
-            MsgBox "You have a wrong setting in Words equation menu." & vbCrLf & "Change from Latex to Unicode.", vbOKOnly, "Wrong setting"
+'            MsgBox "You have a wrong setting in Words equation menu." & vbCrLf & "Change from Latex to Unicode.", vbOKOnly, "Wrong setting"
+            ED.Title = "Setting error"
+            ED.Description = "You have a wrong setting in Words equation menu." & vbCrLf & "Change from Latex to Unicode."
         End If
-        ValidateInput = False
     End If
    
+    If ED.Title <> vbNullString Then
+        UserFormError.SetErrorDefinition ED
+        UserFormError.Show
+        ValidateInput = False
+    End If
+    
 End Function
 
-Private Function GetCountOfChar(ByVal ar_sText As String, ByVal a_sChar As String) As Integer
-  Dim l_iIndex As Integer
-  Dim l_iMax As Integer
-  Dim l_iLen As Integer
+Public Function GetCountOfChar(ByVal ar_sText As String, ByVal a_sChar As String) As Integer
+    Dim l_iIndex As Integer
+    Dim l_iMax As Integer
+    Dim l_iLen As Integer
 
-  GetCountOfChar = 0
-  l_iMax = Len(ar_sText)
-  l_iLen = Len(a_sChar)
-  For l_iIndex = 1 To l_iMax
-    If (Mid(ar_sText, l_iIndex, l_iLen) = a_sChar) Then 'found occurrence
-      GetCountOfChar = GetCountOfChar + 1
-      If (l_iLen > 1) Then l_iIndex = l_iIndex + (l_iLen - 1) 'if matching more than 1 char, need to move more than one char ahead to continue searching
-    End If
-  Next l_iIndex
+    GetCountOfChar = 0
+    l_iMax = Len(ar_sText)
+    l_iLen = Len(a_sChar)
+    For l_iIndex = 1 To l_iMax
+        If (Mid(ar_sText, l_iIndex, l_iLen) = a_sChar) Then 'found occurrence
+            GetCountOfChar = GetCountOfChar + 1
+            If (l_iLen > 1) Then l_iIndex = l_iIndex + (l_iLen - 1) 'if matching more than 1 char, need to move more than one char ahead to continue searching
+        End If
+    Next l_iIndex
 End Function

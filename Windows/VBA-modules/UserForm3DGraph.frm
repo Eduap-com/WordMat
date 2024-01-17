@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm3DGraph
    ClientHeight    =   5235
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   10875
+   ClientWidth     =   11040
    OleObjectBlob   =   "UserForm3DGraph.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -762,7 +762,7 @@ End Sub
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
   If CloseMode = 0 Then
     Cancel = 1
-    Me.hide
+    Me.Hide
   End If
 End Sub
 

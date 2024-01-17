@@ -35,7 +35,7 @@ Private Sub Label_cancel_Click()
     End If
     
 '    If MaxProc.Finished = 0 Then
-    Me.hide
+    Me.Hide
 '    End If
 End Sub
 
@@ -49,7 +49,7 @@ Private Sub Label_nsolveB_Click()
     result = "nsolve"
     FejlMeld = ""
     Kommentar = Sprog.FoundNumericSolutions
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub Label_numeric_Click()
@@ -63,7 +63,7 @@ Private Sub Label_numeric_Click()
     result = "num"
     FejlMeld = ""
     Kommentar = ""
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_Omskrevet_Click()
@@ -77,7 +77,7 @@ Private Sub CommandButton_Omskrevet_Click()
     Finished = True
     Kommentar = Sprog.NoNumericSolution
     omax.MaximaOutput = Label_omskrevet.Caption
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub UserForm_Activate()

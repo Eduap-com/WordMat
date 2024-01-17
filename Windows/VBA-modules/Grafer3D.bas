@@ -170,7 +170,7 @@ Sub Plot3DGraph()
     For i = 0 To UBound(Arr)
         Arr(i) = Replace(Arr(i), " ", "")
         If Arr(i) <> "" Then
-            If MsgBox(Sprog.A(374) & ": " & Arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
+            If MsgBox2(Sprog.A(374) & ": " & Arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
                 Insert3DEquation (Arr(i))
             End If
         End If

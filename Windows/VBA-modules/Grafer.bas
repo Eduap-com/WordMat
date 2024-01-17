@@ -172,7 +172,7 @@ Sub PlotDF()
         s = Trim(omax.Kommando)
         s = GetCmdAfterEqualSign(s)
         If s = "" Then
-            MsgBox Sprog.EquationMissingError2, vbOKOnly, "Error"
+            MsgBox2 Sprog.EquationMissingError2, vbOKOnly, "Error"
             Exit Sub
         End If
         ea.Text = s

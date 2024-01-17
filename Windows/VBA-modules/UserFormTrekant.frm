@@ -265,7 +265,7 @@ slut:
 #If Mac Then
     Unload Me
 #Else
-    Me.hide
+    Me.Hide
 #End If
 
 End Sub
@@ -1295,7 +1295,7 @@ Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
     Label_ok.BackColor = LBColorHover
 End Sub
 Private Sub Label_cancel_Click()
-    Me.hide
+    Me.Hide
     Application.ScreenUpdating = False
 End Sub
 

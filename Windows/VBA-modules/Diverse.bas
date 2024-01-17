@@ -152,7 +152,7 @@ On Error GoTo slut
     End If
     Set m_tempDoc = Nothing
 #Else
-    tempDoc.Close
+    tempDoc.Close False
 '    tempDoc.ActiveWindow
     Set tempDoc = Nothing ' added v. 1.11
 #End If
@@ -2287,7 +2287,7 @@ Sub SaveBackup()
     ElseIf BackupType = 0 And BackupAnswer = 0 Then
         Set UFbackup = New UserFormBackup
         UFbackup.Show
-'        If MsgBox(Sprog.A(179), vbYesNo, "Backup") = vbNo Then
+        '        If MsgBox(Sprog.A(179), vbYesNo, "Backup") = vbNo Then
         If UFbackup.Backup = False Then
             BackupAnswer = 2
             Exit Sub
@@ -2295,7 +2295,7 @@ Sub SaveBackup()
             BackupAnswer = 1
         End If
     End If
-    
+        
     If Timer - SaveTime < BackupTime * 60 Then Exit Sub
     SaveTime = Timer
     If ActiveDocument.path = "" Then
@@ -2309,7 +2309,7 @@ Sub SaveBackup()
     DoEvents
    
     
-'    Application.ScreenUpdating = False
+    '    Application.ScreenUpdating = False
     If ActiveDocument.Saved = False Then ActiveDocument.Save
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
@@ -2320,31 +2320,40 @@ Sub SaveBackup()
 #Else
     path = GetDocumentsDir & "\WordMat-Backup\"
 #End If
-'    If Dir(path, vbDirectory) = "" Then MkDir path
+    '    If Dir(path, vbDirectory) = "" Then MkDir path
     If Not FileExists(path) Then MkDir path
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     path = path & "WordMatBackup" & BackupNo & ".docx"
     If VBA.LenB(path) = lCancelled_c Then Exit Sub
     
+    
+#If Mac Then
     Set tempDoc2 = Application.Documents.Add(Template:=ActiveDocument.FullName, visible:=False)
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
-#If Mac Then
     tempDoc2.ActiveWindow.Left = 2000
     tempDoc2.SaveAs path
-#Else
-    tempDoc2.SaveAs2 path
-#End If
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     tempDoc2.Close
+#Else
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    ActiveDocument.Save
+    fso.CopyFile ActiveDocument.FullName, path
+    Set fso = Nothing
+    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
+    DoEvents
+    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
+    DoEvents
+#End If
 
-GoTo slut
+    GoTo slut
 fejl:
     MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
 slut:
-On Error Resume Next
+    On Error Resume Next
     If Not UfWait Is Nothing Then Unload UfWait
     Application.ScreenUpdating = True
 End Sub
@@ -2732,4 +2741,26 @@ Function FormatDefinitions(DefS As String) As String
     FormatDefinitions = DefS
 End Function
 
+Function MsgBox2(prompt As String, Optional Buttons As VbMsgBoxStyle = vbOKCancel, Optional Title As String) As VbMsgBoxResult
+' erstatning for indbygget msgbox. Der bruger samme stil som resten af Userforms. Den tilpasser sig i størrelse.
+' Buttons understøttes: vbYesNo, vbOKonly, vbOKCancel
+' MsgBox2 "Dette er en lille test", vbOKOnly, "Hello"
 
+    Dim UFMsgBox As New UserFormMsgBox
+    
+    UFMsgBox.MsgBoxStyle = Buttons
+    UFMsgBox.Title = Title
+    UFMsgBox.prompt = prompt
+    
+    UFMsgBox.Show
+    
+    MsgBox2 = UFMsgBox.MsgBoxResult
+    
+    Unload UFMsgBox
+End Function
+
+Sub TestMe()
+ MsgBox2 "Dette er en lille test", vbOKOnly, "Hello"
+ MsgBox2 "Dette er en længere test" & vbCrLf & "Der skal være flere og længere linjer" & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej.", vbOKCancel, "Hello"
+ MsgBox2 "Dette er en bred test" & vbCrLf & "Der skal være en meget lang linje med mange forskellige tegn, så boksen bliver bred. Mon den kan blive så bred som denne linje?" & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej.", vbOKCancel, "Hello"
+End Sub

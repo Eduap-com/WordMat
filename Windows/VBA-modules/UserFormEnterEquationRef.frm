@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormEnterEquationRef
    ClientHeight    =   5535
    ClientLeft      =   30
    ClientTop       =   165
-   ClientWidth     =   6435
+   ClientWidth     =   6675
    OleObjectBlob   =   "UserFormEnterEquationRef.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,17 +13,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
 Public EquationName As String
-Private Sub CommandButton_cancel_Click()
+Private Sub Label_cancel_Click()
     EquationName = ""
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
@@ -46,7 +40,11 @@ For i = 1 To ActiveDocument.Bookmarks.Count
     End If
 Next
     
-    Me.hide
+    Me.Hide
+End Sub
+
+Private Sub Label_ok_Click()
+    CommandButton_ok_Click
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
@@ -77,9 +75,26 @@ End Sub
 Sub SetCaptions()
     Me.Caption = Sprog.A(5)
     Label_name.Caption = Sprog.A(5)
-    CommandButton_cancel.Caption = Sprog.Cancel
-    CommandButton_ok.Caption = Sprog.OK
+    Label_cancel.Caption = Sprog.Cancel
+    Label_ok.Caption = Sprog.OK
     Label_Ligninger.Caption = Sprog.A(10)
     Label_help.Caption = Sprog.A(11)
     Label_error.Caption = Sprog.A(12)
+End Sub
+
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
 End Sub

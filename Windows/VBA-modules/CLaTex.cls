@@ -438,8 +438,12 @@ If Dir(path, vbDirectory) <> "" Then
    GoTo slut
 End If
 
-path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX 2.9\miktex" ' hvis installeret i userprofile
+path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' hvis installeret i userprofile
 If Dir(path, vbDirectory) <> "" Then GoTo slut
+
+path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' hvis installeret i userprofile
+If Dir(path, vbDirectory) <> "" Then GoTo slut
+
 'path = GetProgramFilesDir() & "\MikTex*"
 'If Dir(path, vbDirectory) <> "" Then GoTo Slut
 

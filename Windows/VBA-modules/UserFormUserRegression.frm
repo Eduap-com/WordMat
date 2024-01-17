@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormUserRegression 
    Caption         =   "Regression"
-   ClientHeight    =   2745
+   ClientHeight    =   3135
    ClientLeft      =   30
    ClientTop       =   165
-   ClientWidth     =   9330.001
+   ClientWidth     =   9345.001
    OleObjectBlob   =   "UserFormUserRegression.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -23,11 +23,11 @@ Option Explicit
 Private EventsOn As Boolean
 Private Sub CommandButton_cancel_Click()
     TextBox_function.Text = ""
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
-    Me.hide
+    Me.Hide
 End Sub
 
 Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
