@@ -146,6 +146,7 @@ Sub InsertTabel()
         Application.ScreenUpdating = False
         SaveBackup
         antalp = val(InputBox(Sprog.A(24), Sprog.A(202), ""))
+        If antalp = 0 Then Exit Sub
         
         If antalp > 200 Then
             MsgBox Sprog.A(25)

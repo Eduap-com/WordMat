@@ -222,7 +222,7 @@ SA(23, 3) = ""
 SA(23, 2) = "Nueva versión"
 SA(23, 5) = ""
 
-SA(24, 0) = "Du skal indtaste en punktmængde enten i en tabel eller i et matematikfelt som f.eks. {(1,2;2),(2;5,3)}" & VbCrLfMac & VbCrLfMac & "Indtast et antal punkter, så oprettes automatisk en tabel som kan udfyldes med punterne. Når du har udfyldt den aktiverer du den ønskede regression."
+SA(24, 0) = "Indtast et antal punkter, så oprettes automatisk en tabel som kan udfyldes med punterne. Når du har udfyldt den aktiverer du den ønskede regression."
 SA(24, 1) = "Type the number of points you want to do regression on. Then a table will be created, where you can put your points. When you want to do the regression just select the table and choose your desired regression from the menu."
 SA(24, 4) = ""
 SA(24, 3) = ""
