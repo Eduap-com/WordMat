@@ -169,9 +169,11 @@ sp.ThisUser=Sólo para este usuario
 ;Source: WordMat.dotm; DestDir: {%appdata}\Microsoft\Word\{code:StartFolder2010}; Flags: ignoreversion restartreplace
 ;Source: WordMat.dotm; DestDir: {code:VUserStartupFolder12}; Check: VOffice12Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 ;Source: WordMat.dotm; DestDir: {code:VUserStartupFolder14}; Check: VOffice14Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
-;Source: WordMat.dotm; DestDir: {code:VUserStartupFolder15}; Check: VOffice15Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: WordMat.dotm; DestDir: {code:VUserStartupFolder15}; Check: VOffice15Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 ;Source: WordMat.dotm; DestDir: {code:VUserStartupFolder161}; Check: VOffice16Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
-;Source: WordMat.dotm; DestDir: {code:VUserStartupFolder162}; Check: VOffice16Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+; Denne er egentlig overtaget af CopyWordMat.vbs script. Har dog oplevet elev, hvor scriptet ikke fungerede fra installeren. Denne skulle gerne sikre at det virker for elever der har adm adgang
+Source: WordMat.dotm; DestDir: {code:VUserStartupFolder162}; Check: VOffice16Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: WordMatP.dotm; DestDir: {code:VUserStartupFolder162}; Check: VOffice16Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll12}; Check: VOffice12Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll14}; Check: VOffice14Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll15}; Check: VOffice15Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
@@ -437,6 +439,7 @@ Type: files; Name: "{code:VUserStartupFolder15}\WordMat.dotm"
 Type: files; Name: "{code:VUserStartupFolder16}\WordMat.dotm"
 Type: files; Name: "{code:VUserStartupFolder161}\WordMat.dotm"
 Type: files; Name: "{code:VUserStartupFolder162}\WordMat.dotm"
+Type: files; Name: "{code:VUserStartupFolder162}\WordMatP.dotm"
 Type: files; Name: "{code:VStartupFolderAll12}\WordMat.dotm" 
 Type: files; Name: "{code:VStartupFolderAll14}\WordMat.dotm" 
 Type: files; Name: "{code:VStartupFolderAll15}\WordMat.dotm" 
@@ -1426,7 +1429,7 @@ begin
  ////ShellExec('open','explorer.exe','http://www.update.microsoft.com','', SW_SHOW, ewNoWait, ErrorCode);
      ExtractTemporaryFile('dotNetFx40_Client_setup.exe');
 
-    if Exec(ExpandConstant('{tmp}\dotNetFx40_Client_setup.exe'), '', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+      if Exec(ExpandConstant('{tmp}\dotNetFx40_Client_setup.exe'), '', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
                     begin
 
                         // handle success if necessary; ResultCode contains the exit code
@@ -1456,8 +1459,8 @@ begin
        else if uninsval=4 then
            Result := False;
      end;
-    end;
-     end;
+  end;
+end;
 
 
 // Fjernet 1.29 for at undgå at indstillinger fjernes ved opdatering
