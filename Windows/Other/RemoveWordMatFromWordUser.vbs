@@ -26,6 +26,6 @@ Set objFolder = objFSO.GetFolder(topLevelFolder)
 set objFSO = Nothing
 set objShell = Nothing
 
-MsgBox "WordMat is now removed from the Ribbon in Word"
+'MsgBox "WordMat is now removed from the Ribbon in Word"
 
 Wscript.Quit

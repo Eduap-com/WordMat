@@ -429,6 +429,9 @@ Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" 
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\MathMenu.dll"" /u " ; WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
 Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{app}\WebViewWrap\WebViewWrap.dll"" /u " ; WorkingDir: "{app}";tasks: installeralle; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /u " ; WorkingDir: "{%appdata}\WordMat\";tasks: installerbruger; StatusMsg: "Unregistering controls ..."; Flags: runhidden;
+; ikke testet:
+Filename: cscript.exe; Parameters: {app}\RemoveWordMatFromWordUser.vbs ; StatusMsg: "Fjerner WordMat";tasks: installerbruger;  Flags: runhidden
+
 
 [UninstallDelete]
 ;Type: files; Name: "{code:VUserStartupFolder12}\MathMenu.dotm"

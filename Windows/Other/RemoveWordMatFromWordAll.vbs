@@ -19,6 +19,6 @@ objFSO.DeleteFile(topLevelFolder & "\WordMat.dotm")
 set objFSO = Nothing
 set objShell = Nothing
 
-MsgBox "WordMat is now removed from Word Ribbon"
+'MsgBox "WordMat is now removed from Word Ribbon"
 
 Wscript.Quit
