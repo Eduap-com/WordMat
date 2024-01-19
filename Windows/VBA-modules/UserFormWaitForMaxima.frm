@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormWaitForMaxima
    Caption         =   "Regner"
    ClientHeight    =   2610
    ClientLeft      =   -30
-   ClientTop       =   675
-   ClientWidth     =   3345
+   ClientTop       =   680
+   ClientWidth     =   3350
    OleObjectBlob   =   "UserFormWaitForMaxima.frx":0000
    StartUpPosition =   3  'Windows Default
 End

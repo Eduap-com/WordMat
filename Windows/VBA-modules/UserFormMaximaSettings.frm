@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMaximaSettings 
    Caption         =   "Indstillinger"
-   ClientHeight    =   5955
-   ClientLeft      =   -15
-   ClientTop       =   45
-   ClientWidth     =   10410
+   ClientHeight    =   5950
+   ClientLeft      =   -20
+   ClientTop       =   50
+   ClientWidth     =   10420
    OleObjectBlob   =   "UserFormMaximaSettings.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

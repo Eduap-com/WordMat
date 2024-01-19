@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSolveNumeric 
    Caption         =   "Løsning af ligning med grafiske og numeriske metoder"
-   ClientHeight    =   7395
-   ClientLeft      =   -15
-   ClientTop       =   75
-   ClientWidth     =   14250
+   ClientHeight    =   7390
+   ClientLeft      =   -20
+   ClientTop       =   80
+   ClientWidth     =   14260
    OleObjectBlob   =   "UserFormSolveNumeric.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

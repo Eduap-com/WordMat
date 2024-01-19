@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDiffEq
    Caption         =   "Løsning af differentialligning"
    ClientHeight    =   4920
    ClientLeft      =   -30
-   ClientTop       =   75
-   ClientWidth     =   6855
+   ClientTop       =   80
+   ClientWidth     =   6860
    OleObjectBlob   =   "UserFormDiffEq.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

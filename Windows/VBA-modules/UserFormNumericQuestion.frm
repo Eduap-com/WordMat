@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormNumericQuestion
    Caption         =   "Numerisk løsning"
    ClientHeight    =   4155
    ClientLeft      =   -30
-   ClientTop       =   75
-   ClientWidth     =   10485
+   ClientTop       =   80
+   ClientWidth     =   10490
    OleObjectBlob   =   "UserFormNumericQuestion.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

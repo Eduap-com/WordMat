@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormAskSign
    Caption         =   "Fortegn?"
    ClientHeight    =   3540
    ClientLeft      =   -30
-   ClientTop       =   75
-   ClientWidth     =   5145
+   ClientTop       =   80
+   ClientWidth     =   5150
    OleObjectBlob   =   "UserFormAskSign.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

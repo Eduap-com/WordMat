@@ -186,31 +186,7 @@ Function DataFolder() As String
     DataFolder = Replace(DataFolder, "/Desktop", "") & "Library/containers/com.microsoft.Word/Data/"
     mDatafolder = DataFolder
 End Function
-Public Function ExecuteMaximaViaFile(MaximaCommand As String, Optional ByVal MaxWait As Integer = 10, Optional UnitCore As Boolean = False) As String
-' M1 via textfiler
-' scriptfile must be placed in ~/Library/Application Scripts/com.microsoft.Word/
-' ~/library is a hidden folder in the user folder
-' filetype: .scpt or .applescript
-On Error GoTo Fejl
-'    SaveCommandFile MaximaCommand
-    If UnitCore Then
-'        AppleScriptTask "WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait)
-        If OutUnits <> "" Then
-            ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & "setunits(" & omax.ConvertUnits(OutUnits) & ")$" & MaximaCommand)
-        Else
-            ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & MaximaCommand)
-        End If
-    Else
-        ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaxima", CStr(MaxWait) & "£" & MaximaCommand)
-    End If
-'    ExecuteMaximaViaFile = ReadMaximaOutputFile()
-'MsgBox ExecuteMaximaViaFile
-    GoTo Slut
-Fejl:
-    ExecuteMaximaViaFile = "Fejln" & Err.Number
-Slut:
-    
-End Function
+
 Function RunScript(ScriptName As String, Param As String) As String
 ' scriptfile must be placed in ~/Library/Application Scripts/com.microsoft.Word/
 ' ~/library is a hidden folder in the user folder
@@ -227,8 +203,104 @@ Function RunScript(ScriptName As String, Param As String) As String
 ' lige nu en dummy shell så der ikke kommer compilefejl
 '    RunScript = Shell("WordMatScripts.scpt", ScriptName, Param)
 End Function
+
 #End If
 
+Public Function ExecuteMaximaViaFile(MaximaCommand As String, Optional ByVal MaxWait As Integer = 10, Optional UnitCore As Boolean = False) As String
+' M1 via textfiler
+' scriptfile must be placed in ~/Library/Application Scripts/com.microsoft.Word/
+' ~/library is a hidden folder in the user folder
+' filetype: .scpt or .applescript
+On Error GoTo Fejl
+#If Mac Then
+#Else
+    Dim WshShell As Object
+    Set WshShell = CreateObject("WScript.Shell")
+#End If
+
+'    SaveCommandFile MaximaCommand
+    If UnitCore Then
+'        AppleScriptTask "WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait)
+        If OutUnits <> "" Then
+#If Mac Then
+            ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & "setunits(" & omax.ConvertUnits(OutUnits) & ")$" & MaximaCommand)
+#Else
+#End If
+        Else
+#If Mac Then
+            ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & MaximaCommand)
+#Else
+#End If
+        End If
+    Else
+#If Mac Then
+        ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaxima", CStr(MaxWait) & "£" & MaximaCommand)
+#Else
+        ExecuteMaximaViaFile = WshShell.Exec("maxima.bat --batch-string ""2+3;""").StdOut.ReadAll
+#End If
+    End If
+'    ExecuteMaximaViaFile = ReadMaximaOutputFile()
+'MsgBox ExecuteMaximaViaFile
+    
+
+    GoTo Slut
+Fejl:
+    ExecuteMaximaViaFile = "Fejln" & Err.Number
+Slut:
+    
+#If Mac Then
+#Else
+    Set WshShell = Nothing
+#End If
+End Function
 
 
+Sub TestSHell()
+' WshShell.Exec kan ike skjule vinduet. .run kan ikke få output tilbage
+' .exec() kører asynkront og via det object den returnerer kan man checke om den færdig. WshScriptExec.status=1
+' WshScriptExec.StdIn.write "2+3;"  kan bruges til at sende input
+' WshScriptExec.StdIn.ReadAll()  eller readline eller read(1) henter output. Desværre er alle blocking, så låser hvis der ikke er output
+' WshScriptExec.terminate kan bruges til at forcelukke
+' AtEndOfStream er også blocking
 
+    Dim WshShell As Object, Output As String, WshScriptExec As Object, i As Integer, t As String
+    Set WshShell = CreateObject("WScript.Shell")
+    
+    
+'    Set WshScriptExec = WshShell.Exec("""C:\Program Files (x86)\WordMat\Maxima-5.47.0\bin\maxima.bat"" --batch-string ""2+3;""")
+    Set WshScriptExec = WshShell.Exec("""C:\Program Files (x86)\WordMat\Maxima-5.47.0\bin\maxima.bat""")
+'    Set WshScriptExec = WshShell.Exec("cmd /c start /B cmd /c ""C:\Program Files (x86)\WordMat\Maxima-5.47.0\bin\maxima.bat"" & timeout /t 5 & taskkill /IM cmd.exe")
+    
+    'start /B cmd /c "C:\Program Files (x86)\WordMat\Maxima-5.47.0\bin\maxima.bat" & timeout /t 5 & taskkill /IM cmd.exe
+    
+    WshScriptExec.StdIn.Write "2+3;" & vbCrLf
+    
+    Do While WshScriptExec.Status = 0 And i < 50 ' 0=running  1=finished
+        Sleep (100)
+        DoEvents
+        'start cmd /c "C:\Program Files (x86)\WordMat\Maxima-5.47.0\bin\maxima.bat" & timeout /t 5 & taskkill /im Maxima*
+        Do
+            t = WshScriptExec.StdOut.Read(1)
+'            t = WshScriptExec.StdOut.ReadLine
+            Output = Output & t '& vbCrLf
+            Debug.Assert t <> "2"
+        Loop Until t = vbNullString Or WshScriptExec.StdOut.AtEndOfStream
+        
+        'waitform code here
+        i = i + 1
+    Loop
+        
+    If WshScriptExec.Status = 1 Then
+        Output = Output & WshScriptExec.StdOut.ReadAll
+    Else
+        Do While Not WshScriptExec.StdOut.AtEndOfStream
+            Output = Output & WshScriptExec.StdOut.Read(1)
+        Loop
+    End If
+    MsgBox Output
+    
+    If WshScriptExec.Status = 1 Then ' Hvis den stadig kører, så tving den til at lukke
+        WshScriptExec.Terminate
+    End If
+    Set WshShell = Nothing
+End Sub

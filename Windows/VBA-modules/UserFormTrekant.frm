@@ -1,9 +1,9 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormTrekant 
    Caption         =   "Trekantsløser"
-   ClientHeight    =   6585
+   ClientHeight    =   6580
    ClientLeft      =   -30
-   ClientTop       =   75
+   ClientTop       =   80
    ClientWidth     =   11130
    OleObjectBlob   =   "UserFormTrekant.frx":0000
    StartUpPosition =   1  'CenterOwner

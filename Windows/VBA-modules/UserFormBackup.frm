@@ -1,9 +1,9 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormBackup 
    Caption         =   "Backup?"
-   ClientHeight    =   2025
+   ClientHeight    =   2020
    ClientLeft      =   60
-   ClientTop       =   165
+   ClientTop       =   170
    ClientWidth     =   3840
    OleObjectBlob   =   "UserFormBackup.frx":0000
    StartUpPosition =   1  'CenterOwner

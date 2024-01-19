@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormGeoGebraMacInstall
    Caption         =   "GeoGebra 5 Installation"
    ClientHeight    =   5340
    ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   11565
+   ClientTop       =   470
+   ClientWidth     =   11570
    OleObjectBlob   =   "UserFormGeoGebraMacInstall.frx":0000
    ShowModal       =   0   'False
 End

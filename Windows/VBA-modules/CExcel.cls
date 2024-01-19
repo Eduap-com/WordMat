@@ -72,7 +72,7 @@ End Sub
 Public Sub CloseExcel()
 On Error GoTo Fejl
 xlwb.Close False ' close the workbook without saving
-XLapp.quit ' close the Excel application
+XLapp.Quit ' close the Excel application
 
 Fejl:
 Set xlwb = Nothing

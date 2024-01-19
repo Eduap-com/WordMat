@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormKonstanter 
    Caption         =   "Konstanter"
    ClientHeight    =   7125
-   ClientLeft      =   -15
-   ClientTop       =   75
-   ClientWidth     =   8025
+   ClientLeft      =   -20
+   ClientTop       =   80
+   ClientWidth     =   8030
    OleObjectBlob   =   "UserFormKonstanter.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

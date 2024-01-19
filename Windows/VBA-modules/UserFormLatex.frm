@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormLatex 
    Caption         =   "LaTex"
-   ClientHeight    =   10590
-   ClientLeft      =   -75
-   ClientTop       =   -75
-   ClientWidth     =   11115
+   ClientHeight    =   10600
+   ClientLeft      =   -80
+   ClientTop       =   -80
+   ClientWidth     =   11120
    OleObjectBlob   =   "UserFormLatex.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

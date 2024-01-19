@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDebug
    Caption         =   "Debug"
    ClientHeight    =   9360.001
    ClientLeft      =   -30
-   ClientTop       =   75
+   ClientTop       =   80
    ClientWidth     =   16200
    OleObjectBlob   =   "UserFormDebug.frx":0000
    StartUpPosition =   1  'CenterOwner

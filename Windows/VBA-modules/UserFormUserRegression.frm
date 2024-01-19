@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormUserRegression 
    Caption         =   "Regression"
-   ClientHeight    =   3135
+   ClientHeight    =   3130
    ClientLeft      =   30
-   ClientTop       =   165
-   ClientWidth     =   9345.001
+   ClientTop       =   170
+   ClientWidth     =   9350.001
    OleObjectBlob   =   "UserFormUserRegression.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
