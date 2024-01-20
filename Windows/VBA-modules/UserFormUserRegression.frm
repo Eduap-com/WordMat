@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormUserRegression
    Caption         =   "Regression"
    ClientHeight    =   3130
    ClientLeft      =   30
-   ClientTop       =   170
-   ClientWidth     =   9350.001
+   ClientTop       =   165
+   ClientWidth     =   9345.001
    OleObjectBlob   =   "UserFormUserRegression.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,12 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
 Private EventsOn As Boolean
 Private Sub CommandButton_cancel_Click()

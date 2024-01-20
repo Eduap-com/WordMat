@@ -21,7 +21,6 @@ Sub LavRCMenu()
 #Else
     Dim cmdb As CommandBar
     Dim but As CommandBarControl
-    Dim i As Integer
 On Error GoTo Slut
     SletRCMenu ' sikrer at der ikke oprettes dobbelt
     

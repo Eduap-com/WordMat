@@ -3,7 +3,6 @@ Option Explicit
 Public HiddenDoc As Document
 Public MainDoc As Document
 Private LatexFilePath As String
-Dim ImageArr() As String
 Public ImageCounter As Long
 Public HTMLindex As Integer ' whenever a html-file is generated it needs a new filename or images vil be overwritten. Then they cannot be used for preview
 
@@ -23,7 +22,6 @@ Public Sub SaveFile(doctype As Integer)
    ' 0 - pdf
    ' 1 - dvi
    ' 2 - Tex
-   Dim l As List
    Dim i As Integer, s As String, p As Long
    Dim SaveSel As Range, HasBib As Boolean
    
@@ -109,7 +107,7 @@ Public Sub SaveFile(doctype As Integer)
    
    UfWait.Label_tip.Caption = "Konverterer bibliografi"
    ' Fields
-   Dim F As Field, CiteName As String, CiteP As String, p2 As Integer, fr As Range
+   Dim F As Field, CiteName As String, CiteP As String, p2 As Integer
    For Each F In HiddenDoc.Fields
       If F.Type = wdFieldCitation Then
          HasBib = True
@@ -296,7 +294,7 @@ Slut:
    Unload UfWait
 End Sub
 Sub ConvertList(l As List)
-   Dim p As Paragraph, s As String, i As Long
+   Dim s As String, i As Long
    If l.Range.ListFormat.ListType = wdListBullet Or l.Range.ListFormat.ListType = wdListMixedNumbering Or l.Range.ListFormat.ListType = wdListNoNumbering Or l.Range.ListFormat.ListType = wdListOutlineNumbering Or l.Range.ListFormat.ListType = wdListPictureBullet Then
       s = "\begin{itemize}" & vbCrLf
       For i = 1 To l.ListParagraphs.Count
@@ -342,7 +340,7 @@ End Function
 
 Sub ConvertImagesToLatex(d As Document)
 '   On Error GoTo Fejl
-   Dim FilNavn As String, ImagFilDir As String, tDoc As Document, sh As InlineShape, si As Integer, sh2 As Shape, sha As Variant, i As Integer
+   Dim FilNavn As String, ImagFilDir As String, tDoc As Document, sh As InlineShape, si As Integer, sh2 As Shape, sha As Variant
    Dim ImagCol As New Collection
    If d.InlineShapes.Count = 0 And d.Shapes.Count = 0 Then
       latexfil.ImagDir = ""

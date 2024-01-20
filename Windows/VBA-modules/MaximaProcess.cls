@@ -134,7 +134,7 @@ Slut:
 End Sub
 Sub AnswerQuestion(answer As String)
 ' check c#
-    ExecuteMaximaCommand Command, 0
+    ExecuteMaximaCommand answer, 0
 End Sub
 Private Sub CheckForQuestion()
 ' skal udbygges se i c# kode
@@ -309,16 +309,6 @@ End Function
 Public Function SetCommandindex(mi As LongPtr)
      mIndex = mi
 End Function
-Public Sub ForceDZ()
-'On Error GoTo fejl:
-Dim c As Long
-'    MsgBox testFunc()
-    
-'    c = ForceDivZero()
-    GoTo Slut
-Fejl:
-    MsgBox "divzero"
-Slut:
-End Sub
+
 #End If
 

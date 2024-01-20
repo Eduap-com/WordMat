@@ -23,7 +23,6 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Dim sl As New CSortList
     Dim Var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
-    Dim DefS As String
     Dim Arr As Variant, uvar As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
@@ -197,7 +196,7 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
 ' Funktionen læser ikke noget i dokumentet. Preparemaxima skal være kørt inden, hvor definitioner findes, når UseDefs=true anvendes
 ' cmd tilføjes i slutningen af url'en med ?command=       Definitioner tilføjes også til command
 
-    Dim UrlLink As String, Arr() As String, c As Variant, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
+    Dim UrlLink As String, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
     Dim DefS As String, DN As String
        
     If UseDefs Then
@@ -310,8 +309,7 @@ Public Function GetDefsForGeoGebra(Optional ConvertHTML As Boolean = True) As St
     Dim cmd As String, i As Integer, k As Integer, j As Integer, fktudtryk As String, UrlLink As String, p As Integer
     Dim sl As New CSortList
     Dim Var As String, DefList As String
-    Dim ea As New ExpressionAnalyser, Arr() As String
-    Dim geogebrafil As New CGeoGebraFile
+    Dim ea As New ExpressionAnalyser
     
     ea.SetNormalBrackets
 
@@ -441,7 +439,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
 ' definitioner vil allerede være kørt igennem codeforMaxima, så der skal convertmaxima være false
 
    Dim p As Integer, p2 As Integer, Arr() As String, p3 As Integer, sp As Integer, ep As Integer
-   Dim ea As ExpressionAnalyser, s As String, t As String, gexpr As String, i As Integer, n As Integer
+   Dim ea As ExpressionAnalyser, s As String, gexpr As String, i As Integer, n As Integer
    Set ea = New ExpressionAnalyser
    ea.SetNormalBrackets
     
@@ -600,7 +598,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
 '    Set geogebrafil = Nothing
 End Function
 Function ConvertGeoGebraSyntaxToWord(ByVal Text As String) As String
-    Dim p As Long, p2 As Long, ea As New ExpressionAnalyser, mtext As String, s As String, n As Integer
+    Dim p As Long, ea As New ExpressionAnalyser, mtext As String, s As String
     ea.SetNormalBrackets
     
     Text = TrimB(Text, """")
@@ -808,7 +806,7 @@ Slut:
 End Sub
 
 Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
-    Dim i As Long, DDir As String, FN As String
+
 '    Dim UfWait As UserFormWaitForMaxima
     
     If ConfirmPrompt Then
@@ -981,10 +979,8 @@ End Function
 Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
     Dim i As Integer, j As Integer
-    Dim DefS As String
     Dim Arr As Variant
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
-    Dim dd As New DocData
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     On Error GoTo Fejl
@@ -1144,7 +1140,7 @@ Function DefinerKonstanter(Expr As String, ByRef DefList As String, Optional ByR
 ' deflist er en liste af variable der er defineret
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim Var As String, var2 As String, i As Integer, p As Integer
+Dim Var As String, i As Integer
 Dim varval As String
     ea.Text = DefList
     ea2.Text = Expr

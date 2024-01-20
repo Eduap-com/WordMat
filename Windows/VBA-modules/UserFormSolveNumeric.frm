@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSolveNumeric 
    Caption         =   "Løsning af ligning med grafiske og numeriske metoder"
    ClientHeight    =   7390
-   ClientLeft      =   -20
-   ClientTop       =   80
-   ClientWidth     =   14260
+   ClientLeft      =   -15
+   ClientTop       =   75
+   ClientWidth     =   14250
    OleObjectBlob   =   "UserFormSolveNumeric.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,12 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
 Public udtryk As String
 Public dispudtryk As String
@@ -115,7 +109,6 @@ OpdaterGraf
 End Sub
 
 Private Sub CommandButton_visgraf_Click()
-Dim Text As String
 On Error GoTo Fejl
 'Dim omax As New CMaxima
     If omax Is Nothing Then
@@ -205,7 +198,6 @@ Dim xmin As Single
 Dim xmax As Single
 Dim cfakt As Single
 Dim dx As Single
-Dim midt As Single
 Dim X As Single
 Label_zoom.visible = False
 
@@ -330,7 +322,6 @@ Slut:
 End Sub
 Private Sub UserForm_Activate()
 Dim Arr As Variant
-Dim i As Integer
 On Error Resume Next
     SetCaptions
 #If Mac Then

@@ -11,9 +11,6 @@ End Type
 Function CheckForError() As Boolean
 ' Checks if latest output has error, and if thats the case shows the error in a Userform
 '    Dim UFerror As UserFormError
-    Dim fejltekst As String
-    Dim t As String
-    Dim DefFejl As Boolean
     Dim ndeferror As Integer
     Dim CheckText As String
     Dim ED As ErrorDefinition
@@ -55,7 +52,7 @@ End Function
 Function GetErrorDefinition(CheckText As String) As ErrorDefinition
 ' Klassificerer og fortolker fejlen i en errordefinition.
 ' Checktext skal være output fra Maxima
-    Dim Pos As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
+    Dim Pos As Integer
     
     If InStr(CheckText, "syntax error") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
@@ -115,7 +112,7 @@ End Function
 
 Function GetErrorText(Text As String) As String
 ' used by GetErrorDefinition()
-    Dim Pos As Integer, pos2 As Integer, pos3 As Integer, pos4 As Integer
+    Dim Pos As Integer, pos2 As Integer, pos4 As Integer
     Dim t As String
     Dim l As Integer
     On Error Resume Next

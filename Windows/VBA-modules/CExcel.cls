@@ -350,7 +350,6 @@ Dim i As Integer
 Dim j As Integer
 Dim n As Integer
 Dim oFS As Integer
-Dim r As Range
 
 On Error GoTo Fejl
 
@@ -455,13 +454,8 @@ Dim j As Integer
 End Function
 
 Public Sub CopyTableToXL()
-    Dim c As Integer
-    Dim r As Integer
     Dim i As Integer
     Dim j As Integer
-'    r = UBound(tabel, 1)
-'    c = UBound(tabel, 2)
-'    Dim ws As Worksheet
     Dim ws As Object 'Worksheet
     Set ws = xlwb.ActiveSheet
 

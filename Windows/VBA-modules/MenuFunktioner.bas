@@ -210,19 +210,13 @@ Slut:
 End Sub
 
 Sub Gange()
-' prik Gangetegn
-On Error Resume Next
-'    Selection.InsertSymbol Font:="+Brødtekst", CharacterNumber:=183, Unicode:=True
-
-'    Selection.InsertSymbol Font:="+Brødtekst", CharacterNumber:=AscW(MaximaGangeTegn), Unicode:=True
-    Selection.InsertSymbol CharacterNumber:=AscW(MaximaGangeTegn), Unicode:=True 'font brødtekst fjernet for at understøtte international
-
+    On Error Resume Next
+    Selection.InsertSymbol CharacterNumber:=AscW(MaximaGangeTegn), Unicode:=True
 End Sub
 Sub SimpelUdregning()
 ' laver simpel udregning med 4 regningsarter og ^
     
     On Error GoTo Slut
-    Dim crange As Range
     Dim r As Range
     Dim sindex As Integer
     Dim resultat As String

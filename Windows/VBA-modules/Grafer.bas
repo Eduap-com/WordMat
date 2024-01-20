@@ -152,10 +152,8 @@ End Sub
 
 Sub PlotDF()
 ' plot retningsfelt
-    Dim forskrifter As String, s As String, V As String
+    Dim s As String, V As String
     Dim Arr As Variant
-    Dim i As Integer
-    Dim j As Integer
     Dim ea As New ExpressionAnalyser
   '  On Error GoTo fejl
     Dim sstart As Long, sslut As Long
@@ -242,7 +240,6 @@ End Sub
 
 Sub InsertEmptyGraphOleObject()
 ' indsætter graph object www.padowan.dk
-Dim path As String
 Dim ils As InlineShape
 Application.ScreenUpdating = False
 
@@ -275,11 +272,8 @@ Sub InsertGraphOleObject()
 #Else
 Dim path As String
 Dim ils As InlineShape
-Dim fkt As String
 Dim Arr As Variant
 Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
-Dim dd As New DocData
-Dim listform As String
 Dim ea As New ExpressionAnalyser
 Dim p As Integer
     Dim sslut As Long
@@ -399,20 +393,9 @@ Dim i As Integer
         End If
     End If
     
-' dette virker kun hvis punkterne er i lodret tabel
-'    dd.ReadSelection
-'    If Len(dd.GetSetForm) > 4 Then
-'        listform = dd.GetSetForm
-'        listform = Mid(listform, 4, Len(listform) - 4)
-'        listform = Replace(listform, "),(", ";")
-'        listform = Replace(listform, ")", ";")
-'        graphfil.InsertPointSeries listform
-'    End If
-    
     Selection.start = sslut
     Selection.End = sslut
-    
-    
+
     If Selection.OMaths.Count > 0 Then
         omax.GoToEndOfSelectedMaths
     End If
@@ -422,8 +405,7 @@ Dim i As Integer
     End If
     Selection.MoveRight wdCharacter, 1
     Selection.TypeParagraph
-    
-    
+
     UfWait.Label_progress.Caption = "******"
 
     If graphfil.funkno > 0 Or Len(graphfil.CustomFunctions) > 0 Or graphfil.relationno > 0 Or graphfil.pointno > 0 Then
@@ -449,7 +431,6 @@ Fejl:
     Unload UfWait
 Slut:
     omax.ConvertLnLog = True
-    
 #End If
 End Sub
 #If Mac Then
@@ -501,21 +482,13 @@ End If
 ReplaceIndepvarX = ea.Text
 End Function
 Sub InsertChart()
-Dim path As String
-Dim ils As InlineShape
-'Dim ws As Worksheet
-'Dim wb As Workbook
 Dim WB As Object
 Dim ws As Object
 'Dim xlap As Excel.Application
 Dim xlap As Object 'Excel.Application
-Dim tb As TextBox
-Dim forskrift As String
 Dim xmin As Double, xmax As Double
-Dim plinjer As Variant
-Dim linje As Variant
 Dim i As Integer
-Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String
 Dim Arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
@@ -529,8 +502,6 @@ ea.SetNormalBrackets
 
 Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
 
-'PrepareMaxima
-'omax.ReadSelection
 dd.ReadSelection
 
 'cxl.PrePareExcel
@@ -560,10 +531,6 @@ Else ' indlejret
     Set xlap = WB.Application
 End If
     
-
-'excel.Application.EnableEvents = False
-'excel.Application.ScreenUpdating = False
-
     UfWait2.Label_progress = UfWait2.Label_progress & "*****"
 
 ' indstillinger
@@ -626,7 +593,7 @@ End If
 
     'datapunkter
     If Selection.Tables.Count > 0 Then
-        Dim Cregr As New CRegression, setdata As String
+        Dim Cregr As New CRegression
         Cregr.GetTableData
         xmin = Cregr.XValues(1)
         xmax = Cregr.XValues(1)
@@ -695,7 +662,6 @@ Dim WB As Object 'Workbook
 Dim ws As Object
 Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim dd As New DocData
-Dim listform As String
 Dim i As Integer
 Dim Arr As Variant
 Dim ea As New ExpressionAnalyser

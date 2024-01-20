@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormEquationReference
    Caption         =   "Ligningsreference"
    ClientHeight    =   6000
    ClientLeft      =   30
-   ClientTop       =   170
+   ClientTop       =   165
    ClientWidth     =   4170
    OleObjectBlob   =   "UserFormEquationReference.frx":0000
    StartUpPosition =   1  'CenterOwner

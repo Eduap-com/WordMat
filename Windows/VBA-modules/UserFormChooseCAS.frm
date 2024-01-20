@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormChooseCAS
    Caption         =   "Choose CAS"
    ClientHeight    =   3630
    ClientLeft      =   120
-   ClientTop       =   470
-   ClientWidth     =   7520
+   ClientTop       =   465
+   ClientWidth     =   7515
    OleObjectBlob   =   "UserFormChooseCAS.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

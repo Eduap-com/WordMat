@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormTest
    Caption         =   "UserForm1"
    ClientHeight    =   7650
    ClientLeft      =   30
-   ClientTop       =   170
-   ClientWidth     =   13220
+   ClientTop       =   165
+   ClientWidth     =   13215
    OleObjectBlob   =   "UserFormTest.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,15 +13,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
 Dim ErrorCount As Long, OkCount As Long
-Dim i As Integer, TabNo As Integer, j As Integer, RowNo As Integer
+Dim TabNo As Integer, RowNo As Integer
 Dim StopTest As Boolean
 
 Private Sub CommandButton_luk_Click()
@@ -93,8 +87,6 @@ Sub AllTables()
     Next
 
     TextBox_status.Text = TextBox_status.Text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemført " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
-
-
 Fejl:
 Slut:
 End Sub

@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
-' Dummy for DOMDocument30
+' Dummy for DOMDocument30 needed on Mac for GeoGebra files
 Private m_children As Collection
 '
 Public Function createProcessingInstruction(target As String, Data As String) As IXMLDOMProcessingInstruction

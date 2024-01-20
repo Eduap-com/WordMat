@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormTabel
    Caption         =   "Punkter"
    ClientHeight    =   4470
    ClientLeft      =   -30
-   ClientTop       =   80
-   ClientWidth     =   4580
+   ClientTop       =   75
+   ClientWidth     =   4575
    OleObjectBlob   =   "UserFormTabel.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,12 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Public raekker As Integer
 Public kolonner As Integer
 Private Sub CommandButton_ok_Click()
@@ -50,22 +44,22 @@ Sub AddNewRow()
 End Sub
 
 Sub AddTextbox(n As String, t As Integer, l As Integer)
-Dim tb As MSForms.TextBox
+    Dim tb As MSForms.TextBox
 
-Set tb = Me.Controls.Add("Forms.textbox.1")
-        With tb
-            .Name = n
-            .Top = t
-            .Left = l
-            .Width = 24
-            .Height = 12
-            .Font.Size = 7
-            .Font.Name = "Tahoma"
-            .BorderStyle = fmBorderStyleSingle
-            .SpecialEffect = fmSpecialEffectFlat
-            .SelectionMargin = False
-            .WordWrap = False
-        End With
+    Set tb = Me.Controls.Add("Forms.textbox.1")
+    With tb
+        .Name = n
+        .Top = t
+        .Left = l
+        .Width = 24
+        .Height = 12
+        .Font.Size = 7
+        .Font.Name = "Tahoma"
+        .BorderStyle = fmBorderStyleSingle
+        .SpecialEffect = fmSpecialEffectFlat
+        .SelectionMargin = False
+        .WordWrap = False
+    End With
 End Sub
 Sub AddLabel(n As String, t As Integer, l As Integer)
 Dim la As MSForms.Label
@@ -89,25 +83,19 @@ Set la = Me.Controls.Add("Forms.label.1")
         
 End Sub
 
-
-
 Public Property Get PunktText() As Variant
-Dim ctrlx As Object
-Dim ctrly As Object
-Dim Text As String
-Dim i As Integer
+    Dim ctrlx As Object
+    Dim ctrly As Object
+    Dim Text As String
+    Dim i As Integer
 
-Do
-Set ctrlx = Me.Controls("X" & i)
-Set ctrly = Me.Controls("Y" & i)
-Text = Text & ctrlx.Text & ";" & ctrly.Text & "$"
-i = i + 1
-Loop While i < raekker
+    Do
+        Set ctrlx = Me.Controls("X" & i)
+        Set ctrly = Me.Controls("Y" & i)
+        Text = Text & ctrlx.Text & ";" & ctrly.Text & "$"
+        i = i + 1
+    Loop While i < raekker
 
 
-PunktText = Text
-End Property
-
-Public Property Let PunktText(ByVal vNewValue As Variant)
-
+    PunktText = Text
 End Property

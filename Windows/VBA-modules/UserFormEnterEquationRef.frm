@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormEnterEquationRef
    Caption         =   "Indtast navn på ligning"
    ClientHeight    =   5530
    ClientLeft      =   30
-   ClientTop       =   170
-   ClientWidth     =   6680
+   ClientTop       =   165
+   ClientWidth     =   6675
    OleObjectBlob   =   "UserFormEnterEquationRef.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

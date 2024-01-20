@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormLatex 
    Caption         =   "LaTex"
-   ClientHeight    =   10600
-   ClientLeft      =   -80
-   ClientTop       =   -80
-   ClientWidth     =   11120
+   ClientHeight    =   10590
+   ClientLeft      =   -75
+   ClientTop       =   -75
+   ClientWidth     =   11115
    OleObjectBlob   =   "UserFormLatex.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,12 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Public EventsOn As Boolean
 Private Sub CheckBox_contents_Change()
    If EventsOn Then SaveSet2
@@ -324,7 +318,7 @@ Private Sub UserForm_Activate()
 End Sub
 
 Sub UpDateLatex()
-   Dim t As Table, s As String
+   Dim t As Table
    If Not EventsOn Then Exit Sub
    If Selection.OMaths.Count = 0 Then Exit Sub
    SaveSet

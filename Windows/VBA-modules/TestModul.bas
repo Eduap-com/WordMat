@@ -23,7 +23,7 @@ End Sub
 Sub RunTestSequence()
 ' runs a series of test calculations. The expressions are typed into Word and the test math action is performed. Result is shown
 '    Application.ScreenUpdating = False
-    Dim scrollpos As Double, s As String
+    Dim s As String
     Dim AllR As Range
     
     On Error GoTo Fejl
@@ -586,8 +586,8 @@ Sub CreateTestBeregnDE()
 End Sub
 
 Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
-   Dim s As String, TypeText As String, Oresul As String, Arr() As String, ResultOK As Boolean, i As Integer
-   Dim komm As String, Var As String, varpar As String
+   Dim Oresul As String, Arr() As String
+   Dim komm As String, Var As String
     
    omax.ReadSelection
    komm = TrimR(omax.Kommando, vbCr)
@@ -650,7 +650,7 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
 End Sub
 Sub GetTestString()
     ' placer cursoren i resultat af en beregning, så giver denne sub det udtryk som performtest skal have som resultat
-    Dim Oresul As String, Text As String, s As String
+    Dim Oresul As String, s As String
     omax.ReadSelection
     Oresul = TrimR(omax.Kommando, vbCr)
     

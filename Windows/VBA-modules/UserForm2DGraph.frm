@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm2DGraph
    Caption         =   "Plot af grafer og punkter i planen"
    ClientHeight    =   7170
    ClientLeft      =   -30
-   ClientTop       =   50
-   ClientWidth     =   15950
+   ClientTop       =   45
+   ClientWidth     =   15945
    OleObjectBlob   =   "UserForm2DGraph.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -158,8 +158,6 @@ End Sub
 
 Private Sub UserForm_Activate()
 Dim d As String, nd As String
-Dim ea As New ExpressionAnalyser
-Dim s As String
 Dim xmin As String, xmax As String
 Dim Arr As Variant, i As Integer
 On Error Resume Next
@@ -515,8 +513,6 @@ Dim WB As Object
 
 Dim path As String
 Dim ils As InlineShape
-Dim tb As TextBox
-Dim forskrift As String
 Dim xmin As Double, xmax As Double
 Dim plinjer As Variant
 Dim linje As Variant
@@ -928,8 +924,6 @@ On Error GoTo Fejl
 Dim grafobj As String
 Dim xmin As String
 Dim xmax As String
-Dim Ymin As String
-Dim Ymax As String
 Dim ymin2 As String
 Dim ymax2 As String
 Dim xming As String
@@ -1427,7 +1421,6 @@ Private Sub OpdaterGraf(Optional highres As Double = 1)
 Dim Text As String
 Dim df As String
 Dim dfsol As String
-Dim pm As String
 On Error GoTo Fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
@@ -1678,250 +1671,6 @@ Private Sub CommandButton_nulstil_Click()
     TextBox_vektorer.Text = ""
     Call FillLineStyleCombos
 End Sub
-Private Sub MMathPlot()
-    Dim MathSyntax As String
-    Dim objEq As OMath
-    Dim objRange As Range
-    Dim plinjer As Variant
-    Dim xmin As Double
-    Dim mmax As Double
-    Dim i As Integer
-    Dim linje As Variant
-    
-    Set objRange = Selection.Range
-    MathSyntax = "show("
-    
-    If TextBox_ligning1.Text <> "" Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning1.Text, "=") Then
-            MathSyntax = MathSyntax & "ploteq("
-        Else
-            MathSyntax = MathSyntax & "plot("
-        End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning1.Text, ",", ".")
-        If TextBox_xmin1.Text <> "" And TextBox_xmax1.Text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & Me.TextBox_xmin1.Text & "," & Me.TextBox_xmax1.Text & "}"
-        End If
-'        If Me.TextBox_xmin1.text <> "" And Me.TextBox_ymax1.text <> "" Then
-'            MathSyntax = MathSyntax + ",{y," & Me.TextBox_ymin1.text & "," & Me.TextBox_ymax1.text & "}"
-'        End If
-        If ComboBox_ligning1.Text = "---" Then
-        ElseIf ComboBox_ligning1.Text = "..." Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning1.Text = "- - -" Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning1.Text = "-.-.-." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning1.Text = "- . . - . ." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
-        End If
-'        If TextBox_samplesize.text <> "" Then
-'            MathSyntax = MathSyntax + ",{SampleSize," & TextBox_samplesize.text & "}"
-'        End If
-        MathSyntax = MathSyntax + ")"
-    End If
-    If TextBox_ligning2.Text <> "" Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning2.Text, "=") Then
-            MathSyntax = MathSyntax & "ploteq("
-        Else
-            MathSyntax = MathSyntax & "plot("
-        End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning2.Text, ",", ".")
-        If TextBox_xmin2.Text <> "" And TextBox_xmax2.Text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin2.Text & "," & TextBox_xmax2.Text & "}"
-        End If
-'        If TextBox_ymin2.text <> "" And TextBox_ymax2.text <> "" Then
-'            MathSyntax = MathSyntax + ",{y," & TextBox_ymin2.text & "," & TextBox_ymax2.text & "}"
-'        End If
-        If ComboBox_ligning2.Text = "---" Then
-        ElseIf ComboBox_ligning2.Text = "..." Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning2.Text = "- - -" Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning2.Text = "-.-.-." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning2.Text = "- . . - . ." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
-        End If
-'        If TextBox_samplesize.text <> "" Then
-'            MathSyntax = MathSyntax + ",{SampleSize," & TextBox_samplesize.text & "}"
-'        End If
-        MathSyntax = MathSyntax + ")"
-    End If
-    If TextBox_ligning3.Text <> "" Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning3.Text, "=") Then
-            MathSyntax = MathSyntax & "ploteq("
-        Else
-            MathSyntax = MathSyntax & "plot("
-        End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning3.Text, ",", ".")
-        If TextBox_xmin3.Text <> "" And TextBox_xmax3.Text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin3.Text & "," & TextBox_xmax3.Text & "}"
-        End If
-'        If TextBox_ymin3.text <> "" And TextBox_ymax3.text <> "" Then
-'            MathSyntax = MathSyntax + ",{y," & TextBox_ymin3.text & "," & TextBox_ymax3.text & "}"
-'        End If
-        If ComboBox_ligning3.Text = "---" Then
-        ElseIf ComboBox_ligning3.Text = "..." Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning3.Text = "- - -" Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning3.Text = "-.-.-." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning3.Text = "- . . - . ." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
-        End If
-'        If TextBox_samplesize.text <> "" Then
-'            MathSyntax = MathSyntax + ",{SampleSize," & TextBox_samplesize.text & "}"
-'        End If
-        MathSyntax = MathSyntax + ")"
-    End If
-    If TextBox_ligning4.Text <> "" Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning4.Text, "=") Then
-            MathSyntax = MathSyntax & "ploteq("
-        Else
-            MathSyntax = MathSyntax & "plot("
-        End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning4.Text, ",", ".")
-        If TextBox_xmin4.Text <> "" And TextBox_xmax4.Text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin4.Text & "," & TextBox_xmax4.Text & "}"
-        End If
-'        If TextBox_ymin4.text <> "" And TextBox_ymax4.text <> "" Then
-'            MathSyntax = MathSyntax + ",{y," & TextBox_ymin4.text & "," & TextBox_ymax4.text & "}"
-'        End If
-        If ComboBox_ligning4.Text = "---" Then
-        ElseIf ComboBox_ligning4.Text = "..." Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning4.Text = "- - -" Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning4.Text = "-.-.-." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning4.Text = "- . . - . ." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
-        End If
-'        If TextBox_samplesize.text <> "" Then
-'            MathSyntax = MathSyntax + ",{SampleSize," & TextBox_samplesize.text & "}"
-'        End If
-        MathSyntax = MathSyntax + ")"
-    End If
-    If TextBox_ligning5.Text <> "" Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning5.Text, "=") Then
-            MathSyntax = MathSyntax & "ploteq("
-        Else
-            MathSyntax = MathSyntax & "plot("
-        End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning5.Text, ",", ".")
-        If TextBox_xmin5.Text <> "" And TextBox_xmax5.Text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin5.Text & "," & TextBox_xmax5.Text & "}"
-        End If
-'        If TextBox_ymin5.text <> "" And TextBox_ymax5.text <> "" Then
-'            MathSyntax = MathSyntax + ",{y," & TextBox_ymin5.text & "," & TextBox_ymax5.text & "}"
-'        End If
-        If ComboBox_ligning5.Text = "---" Then
-        ElseIf ComboBox_ligning5.Text = "..." Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning5.Text = "- - -" Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning5.Text = "-.-.-." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning5.Text = "- . . - . ." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
-        End If
-        MathSyntax = MathSyntax + ")"
-    End If
-    If TextBox_ligning6.Text <> "" Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        If InStr(TextBox_ligning6.Text, "=") Then
-            MathSyntax = MathSyntax & "ploteq("
-        Else
-            MathSyntax = MathSyntax & "plot("
-        End If
-        MathSyntax = MathSyntax & Replace(TextBox_ligning6.Text, ",", ".")
-        If TextBox_xmin6.Text <> "" And TextBox_xmax6.Text <> "" Then
-            MathSyntax = MathSyntax + ",{x," & TextBox_xmin6.Text & "," & TextBox_xmax6.Text & "}"
-        End If
-        If ComboBox_ligning6.Text = "---" Then
-        ElseIf ComboBox_ligning6.Text = "..." Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dot}"
-        ElseIf ComboBox_ligning6.Text = "- - -" Then
-            MathSyntax = MathSyntax + ",{LineStyle,Dash}"
-        ElseIf ComboBox_ligning6.Text = "-.-.-." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDot}"
-        ElseIf ComboBox_ligning6.Text = "- . . - . ." Then
-            MathSyntax = MathSyntax + ",{LineStyle,DashDotDot}"
-        End If
-        MathSyntax = MathSyntax + ")"
-    End If
-    
-    'datapunkter
-    If TextBox_punkter.Text <> "" Then
-        If Len(MathSyntax) > 5 Then MathSyntax = MathSyntax + ","
-        MathSyntax = MathSyntax + "plotdataset({"
-        Dim punkttekst As String
-        punkttekst = TextBox_punkter.Text
-'        Dim plinjer(20) As String
-        plinjer = Split(punkttekst, VbCrLfMac)
-        For i = 0 To UBound(plinjer)
-            linje = Split(plinjer(i), ",")
-            If UBound(linje) > 0 Then
-                MathSyntax = MathSyntax + "{" & linje(0) & "," & linje(1) & "},"
-            End If
-        Next
-        MathSyntax = Left(MathSyntax, Len(MathSyntax) - 1)
-        
-        MathSyntax = MathSyntax + "})"
-    End If
-    
-    ' xmin og xmax
-    If TextBox_xmin.Text <> "" And TextBox_xmax.Text <> "" Then
-        MathSyntax = MathSyntax + ",{x," & TextBox_xmin.Text & "," & TextBox_xmax.Text & "}"
-    End If
-    ' ymin og ymax
-    If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
-        MathSyntax = MathSyntax + ",{y," & TextBox_ymin.Text & "," & TextBox_ymax.Text & "}"
-    End If
-    
-    If TextBox_xaksetitel.Text <> "" Then
-            MathSyntax = MathSyntax + ",{aliasX," & TextBox_xaksetitel.Text & "}"
-    End If
-    If TextBox_yaksetitel.Text <> "" Then
-            MathSyntax = MathSyntax + ",{aliasY," & TextBox_yaksetitel.Text & "}"
-    End If
-    
-    
-    MathSyntax = MathSyntax + ",{ShowBox,false}"
-'    MathSyntax = MathSyntax + ",{color,""00ff00""}"
-'    MathSyntax = MathSyntax + ",{color,""ff00ff00""}" ' første er opaque 00 gennemsigtig ff uigennemsigtig
-'    MathSyntax = MathSyntax + ",{ShowGrid,true}"
-'    MathSyntax = MathSyntax + ",{ShowAxis,true}"
-'    MathSyntax = MathSyntax + ",{ShowWireframe,false}"
-'    MathSyntax = MathSyntax + ",{Proportional,false}"
-    MathSyntax = MathSyntax + ")"
-    If Selection.OMaths.Count > 0 Then
-        Selection.OMaths(Selection.OMaths.Count).Range.Select
-        Selection.Range.Collapse (wdCollapseEnd)
-        Selection.MoveRight Unit:=wdWord, Count:=1
-    End If
-    
-'    Selection.Range.Collapse (wdCollapseEnd)
-'    Selection.MoveRight Unit:=wdWord, Count:=1
-    Selection.TypeParagraph
-    
-   Selection.OMaths.Add Range:=Selection.Range
-     Selection.TypeText Text:=MathSyntax
-    Selection.OMaths.BuildUp
-'    Set objEq = objRange.OMaths(1)
-'    objEq.BuildUp
-    Selection.TypeParagraph
-
-    Hide
-    
-Slut:
-End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 ' skjuler istedet for at lukke, så funktioner gemmes.
@@ -2037,7 +1786,6 @@ Dim xmin As Single
 Dim xmax As Single
 Dim Ymin As Single
 Dim Ymax As Single
-Dim Temp As Single
 Dim s As String
 
 Label_zoom.visible = False
@@ -2066,11 +1814,8 @@ Dim xmin As Single
 Dim xmax As Single
 Dim Ymin As Single
 Dim Ymax As Single
-Dim cfakt As Single
 Dim dx As Single, dy As Single
-Dim midt As Single
 Dim nyy As Single
-Dim X As Single
 Dim s As String
 Label_zoom.visible = False
 
@@ -2281,9 +2026,7 @@ Sub OpdaterDefinitioner()
 Dim vars As String
 Dim Var As String, var2 As String
 Dim ea As New ExpressionAnalyser
-Dim ea2 As New ExpressionAnalyser
 Dim Arr As Variant
-Dim arr2 As Variant
 Dim i As Integer
     
     
@@ -2355,8 +2098,6 @@ Dim Var As String
     End If
 End Function
 Function GetTextboxLignVars(tb As TextBox) As String
-Dim ea As New ExpressionAnalyser
-Dim Var As String
     If Len(tb.Text) > 0 Then
         omax.vars = ""
         omax.FindVariable (tb.Text)
@@ -2384,7 +2125,6 @@ Sub opdaterLabels()
     Label_diffy.Caption = TextBox_dfy.Text & "'(" & TextBox_dfx.Text & ")="
 End Sub
 Private Sub CommandButton_plotdf_Click()
-Dim Text As String
 Dim pm As String
 Dim sl As String
     Label_vent.visible = True
@@ -2432,7 +2172,6 @@ Dim Pos As Integer
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim s As String, l As String
-Dim assumelist As String
 ea.SetNormalBrackets
 ea2.SetNormalBrackets
     DefS = GetDefString()

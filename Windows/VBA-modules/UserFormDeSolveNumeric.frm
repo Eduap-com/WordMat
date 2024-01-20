@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDeSolveNumeric 
    Caption         =   "Løs differentialligning(er) numerisk"
    ClientHeight    =   8130
-   ClientLeft      =   50
+   ClientLeft      =   45
    ClientTop       =   150
-   ClientWidth     =   16720
+   ClientWidth     =   16725
    OleObjectBlob   =   "UserFormDeSolveNumeric.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -820,9 +820,7 @@ Sub OpdaterDefinitioner()
    Dim vars As String
    Dim Var As String, var2 As String
    Dim ea As New ExpressionAnalyser
-   Dim ea2 As New ExpressionAnalyser
    Dim Arr As Variant
-   Dim arr2 As Variant
    Dim i As Integer, s As String
    Validate
     
@@ -895,7 +893,6 @@ Sub OpdaterDefinitioner()
     
 End Sub
 Function GetTextboxVars(tb As TextBox, tbvar As TextBox) As String
-Dim ea As New ExpressionAnalyser
     If Len(tb.Text) > 0 Then
         omax.vars = ""
         omax.FindVariable tb.Text, False

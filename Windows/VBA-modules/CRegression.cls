@@ -74,7 +74,6 @@ Dim i As Integer
 Dim j As Integer
 Dim n As Integer
 Dim oFS As Integer
-Dim r As Range
 
 On Error GoTo Fejl
 
@@ -191,7 +190,6 @@ Dim i, j, n, oFS As Integer
 '        Call MsgBox("Du skal lave en tabel med to kolonner. x-værdier i venstre kolonne og y-værdier i højrekolonne")
 '        Exit Sub
 '    End If
-Dim r As Range
 If Selection.Tables.Count = 0 Then Exit Sub
 
 tableonly:
@@ -268,8 +266,6 @@ End Sub
 Public Sub GetSetData()
 ' læser mængde {(2,1),(3,4)} fra mathbox ind i xval og yval
 Dim p As String
-Dim xs As String
-Dim ys As String
 Dim Text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
@@ -392,7 +388,6 @@ Sub ComputeLinRegr()
 
 End Sub
 Sub ComputeExpRegr()
-    Dim n As Integer
     Dim astr As String
     ReDim logy(LBound(yval) To UBound(yval)) As Double
     
@@ -424,7 +419,6 @@ End Sub
 
 Sub ComputePowRegr()
 On Error GoTo Fejl
-    Dim n As Integer
     ReDim logx(LBound(xval) To UBound(xval)) As Double
     ReDim logy(LBound(yval) To UBound(yval)) As Double
     
@@ -453,7 +447,6 @@ Slut:
 End Sub
 Sub ComputeUserRegr()
     Dim fkt As String
-    Dim ea As New ExpressionAnalyser
     Dim Arr As Variant
     Dim xlist As String, ylist As String
     Dim i As Long, guess As String, Var As String, p As Integer, eps As String
@@ -633,9 +626,8 @@ Function polregr(X() As Double, Y() As Double, orden As Integer, Optional ByVal 
 'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
-Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
 Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
-Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
+Dim SStotal As Double, SSregr As Double
 Dim M() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
 On Error GoTo Fejl
@@ -739,7 +731,7 @@ Function polregrkvad(X() As Double, Y() As Double, Optional ByVal tving As Boole
 'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2 via userdefined datatype
 ' tving betyder tving gennem (0,0)
 '  ax^2+bx+c
-Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
+Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double
 Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim M(3, 4)

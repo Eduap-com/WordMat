@@ -99,7 +99,6 @@ Dim D1 As Double
 Dim d2 As Double
 Dim Done As Boolean
 Dim Compare As VbCompareMethod
-Dim LB As Long
 
 ''''''''''''''''''''''''''''''''''''
 ' Set the default return value.
@@ -267,12 +266,9 @@ Public Function ConcatenateArrays(ResultArray As Variant, ArrayToAppend As Varia
 '
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-Dim VTypeResult As VbVarType
 Dim Ndx As Long
-Dim Res As Long
 Dim NumElementsToAdd As Long
 Dim AppendNdx As Long
-Dim VTypeAppend As VbVarType
 Dim ResultLB As Long
 Dim ResultUB As Long
 Dim ResultWasAllocated As Boolean
@@ -458,11 +454,8 @@ Public Function CopyArray(DestinationArray As Variant, SourceArray As Variant, _
 ' element in DestinationArray having a value of 0.
 '
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Dim VTypeSource As VbVarType
-Dim VTypeDest As VbVarType
 Dim SNdx As Long
 Dim DNdx As Long
-
 
 '''''''''''''''''''''''''''''''
 ' Set the default return value.
@@ -1980,7 +1973,6 @@ Public Function MoveEmptyStringsToEndOfArray(InputArray As Variant) As Boolean
 '       IsArrayAllocated
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Dim Temp As String
 Dim Ndx As Long
 Dim Ndx2 As Long
 Dim NonEmptyNdx As Long
@@ -2789,8 +2781,6 @@ Public Function VectorsToArray(Arr As Variant, ParamArray Vectors()) As Boolean
 ' the LBound of each vector and regardless of the Option Base statement.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Dim Vector As Variant
-Dim VectorNdx As Long
-Dim NumElements As Long
 Dim NumRows As Long
 Dim NumCols As Long
 Dim RowNdx As Long
@@ -3216,7 +3206,6 @@ Dim UBoundCol2 As Long
 '''''''''''''''''''''''''''''''''''
 ' Upper and lower bounds of Result.
 '''''''''''''''''''''''''''''''''''
-Dim LBoundRowResult As Long
 Dim UBoundRowResult As Long
 Dim LBoundColResult As Long
 Dim UBoundColResult As Long
@@ -3229,7 +3218,6 @@ Dim ColNdx1 As Long
 Dim RowNdx2 As Long
 Dim ColNdx2 As Long
 Dim RowNdxResult As Long
-Dim ColNdxResult As Long
 
 
 '''''''''''''
@@ -3242,11 +3230,9 @@ Dim NumRows2 As Long
 Dim NumCols2 As Long
 
 Dim NumRowsResult As Long
-Dim NumColsResult As Long
 
 Dim Done As Boolean
 Dim result() As Variant
-Dim ResultTrans() As Variant
 
 Dim V As Variant
 
@@ -3411,14 +3397,10 @@ Function ExpandArray(Arr As Variant, WhichDim As Long, AdditionalElements As Lon
 Dim result As Variant
 Dim RowNdx As Long
 Dim ColNdx As Long
-Dim ResultRowNdx As Long
-Dim ResultColNdx As Long
 Dim NumRows As Long
 Dim NumCols As Long
-Dim NewUBound As Long
 
 Const ROWS_ As Long = 1
-Const COLS_ As Long = 2
 
 
 ''''''''''''''''''''''''''''
@@ -3525,7 +3507,6 @@ Function SwapArrayRows(Arr As Variant, Row1 As Long, Row2 As Long) As Variant
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Dim V As Variant
 Dim result As Variant
-Dim RowNdx As Long
 Dim ColNdx As Long
 
 '''''''''''''''''''''''''
@@ -3595,7 +3576,6 @@ Function SwapArrayColumns(Arr As Variant, Col1 As Long, Col2 As Long) As Variant
 Dim V As Variant
 Dim result As Variant
 Dim RowNdx As Long
-Dim ColNdx As Long
 
 '''''''''''''''''''''''''
 ' Ensure Arr is an array.

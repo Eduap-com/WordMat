@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMaximaSettings 
    Caption         =   "Indstillinger"
-   ClientHeight    =   5950
-   ClientLeft      =   -20
-   ClientTop       =   50
-   ClientWidth     =   10420
+   ClientHeight    =   5955
+   ClientLeft      =   -15
+   ClientTop       =   45
+   ClientWidth     =   10410
    OleObjectBlob   =   "UserFormMaximaSettings.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -38,7 +38,7 @@ End Sub
 
 Private Sub NulstilWordDoc(FilNavn As String)
 Dim appdir As String
-Dim fs, F, s
+Dim fs As Object
 On Error GoTo Fejl
     
 If MsgBox(Sprog.A(665) & ", " & FilNavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo Slut
@@ -100,8 +100,6 @@ End Sub
 
 Private Sub CommandButton_ok_Click()
 On Error Resume Next
-    Dim xact As String, sett As String, gangetegn As String, lm As String, logout As String
-    Dim knap As CommandBarButton
     Dim UnitChanged As Boolean
     
     If InStr(TextBox_outunits.Text, "/") > 0 Or InStr(TextBox_outunits.Text, "*") > 0 Or InStr(TextBox_outunits.Text, "^") > 0 Then
@@ -272,11 +270,7 @@ Private Sub CommandButton_restartmaxima_Click()
 End Sub
 
 Private Sub CommandButton_shortcuts_Click()
-    Dim result As VbMsgBoxResult
     Dim WT As Template, TemplateFundet As Boolean, KSok As Boolean, KB As KeyBinding
-    
-    '    DeleteNormalDotm
-    '    MsgBox Sprog.A(671), vbOKOnly, ""
     
     ' Slet genveje i normal.dotm ' Det kan give fejl, specielt på mac
     DeleteKeyboardShortcutsInNormalDotm
@@ -359,10 +353,8 @@ Private Sub OptionButton_casmaxima_Change()
     SetCasButtons
 End Sub
 
-
 Private Sub UserForm_Activate()
     On Error Resume Next
-    Dim sett As String
     FillComboBoxCifre
     FillComboBoxLanguage
     FillComboBoxBackup

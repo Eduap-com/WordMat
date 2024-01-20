@@ -7,7 +7,6 @@ EnableExcelMacros
 Dim vers As String
 Dim oWS As Object ' Worksheet Object
 'Dim oOLEWd As OLEObject ' OLE Word Object
-Dim oOLEWd As Object 'OLEObject ' OLE Word Object
 Dim ils As InlineShape
 Dim oWD As Document ' Word Document Object (Use Microsoft Word Reference)
 Set oWD = ActiveDocument

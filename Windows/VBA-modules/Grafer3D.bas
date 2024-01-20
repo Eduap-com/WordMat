@@ -1,12 +1,11 @@
 Attribute VB_Name = "Grafer3D"
 Option Explicit
 Sub OmdrejningsLegeme()
-    Dim geogebrafil As New CGeoGebraFile
 Dim Kommando As String
     Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim Arr As Variant
 Dim i As Integer, UrlLink As String, cmd As String, j As Integer
-    Dim Var As String, DefList As String
+    Dim DefList As String
 
     Dim ea As New ExpressionAnalyser
 '    Dim ea2 As New ExpressionAnalyser
@@ -138,7 +137,6 @@ End Sub
 
 Sub Plot3DGraph()
     Dim forskrifter As String
-    Dim result As Variant
     Dim Arr As Variant
     Dim i As Integer
     On Error GoTo Fejl

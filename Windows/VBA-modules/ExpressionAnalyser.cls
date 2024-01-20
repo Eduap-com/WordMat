@@ -52,7 +52,6 @@ End If
 End Function
 Public Function FindPrevBracket(StartPos As Long) As Long
 Dim pos1 As Long
-Dim pos2 As Long
 Dim c As String
 pos1 = StartPos + 1
 Do
@@ -413,7 +412,7 @@ End Sub
 Public Sub InsertBracketAfter(s As String)
 ' indsætter underfortået parantes efter symbol s i hele teksten
 ' bruges til ^ og / . Hvis der allerede er parantes efter s gøres intet
-    Dim gempos As Long, t As String, u As String
+    Dim gempos As Long, t As String
     Pos = 1
     Do
     Pos = InStr(Pos, Text, s)
@@ -643,8 +642,7 @@ Dim Var As String
 End Function
 Sub InsertMultSigns()
 ' indsætter underforståede gangetegn
-Dim navn As String
-Dim C1 As Integer, C2 As Integer, gempos As Long
+Dim gempos As Long
 Dim c As String, Var As String
     On Error Resume Next
     Do
@@ -1195,7 +1193,6 @@ End Sub
 Sub RemoveSpaceAfterSubSuperscript(tegn As String)
 ' fjerner mellemrum efter f.eks. f_a (x)
 ' man så ellers kan erstatte mellemrum med *
-Dim p As Long
 On Error GoTo Slut
 
 Do
@@ -1246,7 +1243,6 @@ Sub InsertFunctionBrackets()
 ' indsætter parenteser efter f.eks. log 2 -> log(2)
 '  specielt funktionssymbol 8289 fjernes ikke endnu da det skal bruges af andre funktioner
 Dim p As Long
-Dim p2 As Long
 Dim c As String
 Dim sb As String
 Dim eb As String

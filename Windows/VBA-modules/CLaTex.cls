@@ -50,7 +50,7 @@ LaTexDoc = FixedLatexPreamble1 & LatexPreamble & FixedLatexPreamble2 & LaTexDoc
 End Sub
 
 Public Function FixedLatexPreamble1() As String
-   Dim s As String, pageNo As String, LID As Long, dClass As String, ps As String
+   Dim s As String, LID As Long, dClass As String, ps As String
    
    s = s & "% !TEX encoding = ISO-8859-1" & vbCrLf ' kun til TexMaker?
    If LatexDocumentclass = 0 Then
@@ -236,9 +236,8 @@ Public Function FixedLatexPreamble2() As String
 End Function
 
 Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
-Dim filnr As Integer, filren As String, s As String
-Dim fsT As Object
-'On Error GoTo fejl
+Dim filren As String, s As String
+On Error GoTo Fejl
 
    UfWait.Label_tip.Caption = "Gemmer Tex-fil"
 LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
@@ -246,28 +245,10 @@ filren = Split(FilNavn, ".")(0)
 On Error Resume Next
 s = Mappe & "\" & filren & ".log"
 If Dir(s) <> "" Then Kill Mappe & "\" & filren & ".*"
-'s = Mappe & "\" & filren & ".toc"
-'If Dir(s) <> "" Then
-'Kill Mappe & "\*.*"
+
 On Error GoTo 0
 
 WriteTextfileToString Mappe & "\" & FilNavn, LaTexDoc
-
-'Set fsT = CreateObject("ADODB.Stream")
-'fsT.Type = 2 'Specify stream type - we want To save text/string data.
-'fsT.Charset = "iso-8859-1" 'Specify charset For the source text data. utf-8
-'fsT.Open 'Open the stream And write binary data To the object
-'fsT.WriteText LaTexDoc
-'fsT.SaveToFile Mappe & "\" & filnavn, 2 'Save binary data To disk
-'fsT.Close
-'Set fsT = Nothing
-
-'filnr = FreeFile()
-'Open Mappe & "\" & filnavn For Output As filnr   ' Open file for output.
-'
-'Print #filnr, LaTexDoc  ' print skriver uden " "
-'Close #filnr    ' Close file.
-
 
 GoTo Slut
 Fejl:
@@ -337,11 +318,11 @@ End Sub
 Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    ' filnavn uden extension
    Dim shellcmd As String
-   Dim appnr As Integer, p As Long, p2 As Long, ErrorS As String
+   Dim p As Long, p2 As Long, ErrorS As String
    Dim i As Integer, j As Integer
    Dim mtpath As String, ReRun As Boolean
    
-   '   On Error GoTo Fejl
+      On Error GoTo Fejl
 #If Mac Then
    MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
 #Else

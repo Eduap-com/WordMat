@@ -116,7 +116,6 @@ Dim r As Integer
 Dim i As Integer, j As Integer, k As Integer, l As Integer, c As Integer
 Dim startrow As Integer
 Dim startcol As Integer
-Dim d As Double
 
 r = 1
 c = 1
@@ -300,14 +299,10 @@ End Function
 Public Sub GetSetData()
 ' læser mængde {(2,1),(3,4)} eller liste fra mathbox ind i tabel
 Dim p As String
-Dim xs As String
-Dim ys As String
 Dim Text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
-Dim ea2 As New ExpressionAnalyser
 Dim r() As String
-Dim Arr As Variant
 Dim i As Integer
 On Error GoTo Slut
 
@@ -428,10 +423,7 @@ End Function
 
 Sub ReadMathBoxes()
 ' indsætter de markerede ligningsfelter som mboxes array
-Dim mtext As String, copytext As String
 Dim antal As Integer
-Dim sstart As Long
-Dim sslut As Long
 Dim j As Integer
 On Error GoTo Slut
 
@@ -473,7 +465,6 @@ Else
     .OMaths.Linearize
     End With
     
-    Dim i As Integer
     Dim mathcol As OMaths
     Set mathcol = r.OMaths
     For j = 0 To antal - 1

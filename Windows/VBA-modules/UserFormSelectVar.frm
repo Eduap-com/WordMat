@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar
    Caption         =   "Løs ligning"
    ClientHeight    =   4690
    ClientLeft      =   -30
-   ClientTop       =   80
+   ClientTop       =   75
    ClientWidth     =   10560
    OleObjectBlob   =   "UserFormSelectVar.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -135,7 +135,7 @@ Private Sub TextBox_def_Enter()
 End Sub
 
 Private Sub UserForm_Activate()
-    Dim i As Integer, svar As String, p As Integer, p2 As Integer
+    Dim i As Integer, svar As String
     
     SetCaptions
     TextBox_def.WordWrap = True

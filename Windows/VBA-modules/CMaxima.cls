@@ -14,7 +14,6 @@ Public KommandoForklaring As String ' til skrivning af kommando
 Private Kommandoer() As String    ' kommandoer som maxima skal udføre. KommandoerStreng må bruges public
 Public MaximaOutput As String    ' resultat fra Maxima
 Public KommentarOutput As String    ' evt. kommentar fra Maxima
-Private AntalKommandoer As Integer    ' bruges af runmaxima til at se hvornår færdig
 Public vars As String    ' variable i udtryk adskilt ad ;
 Public AntalVars As Integer    ' antal variable fundet af findvariable
 Private IntegrationVars As String    ' variable der bruges til integration skal ikke med i varlisten
@@ -48,45 +47,16 @@ Public MaximaSti As String
 
 Private Sub Class_Initialize()
 ' Finder Maximastien. søger i Appdata og programfiles. Hvis der er Maxima begge steder så bruges nyeste version
-    Dim FN As String, DN As String, V As Single, s As String
-    Dim FN1 As String, DN1 As String, V1 As Single
+
     On Error Resume Next
     ConvertLnLog = True
 #If Mac Then
     MaximaInstalled = True
 #Else
-
-    DN = Environ("AppData") & "\WordMat\"
-    FN = Dir(DN & "Maxima*", vbDirectory)
-    V = GetVersion(FN)
-    Do
-        s = Dir()
-        If GetVersion(s) > V Then
-            FN = s
-            V = GetVersion(FN)
-        End If
-    Loop While s <> ""
     
-    DN1 = GetProgramFilesDir() & "\WordMat\"
-    FN1 = Dir(DN1 & "Maxima*", vbDirectory)
-    If FN = vbNullString Then
-        DN = DN1
-        FN = FN1
-        V = GetVersion(FN)
-    Else
-        V1 = GetVersion(FN1)
-        If V1 > V Then
-            DN = DN1
-            FN = FN1
-            V = V1
-        End If
-    End If
-    If FN = vbNullString Then
-        DN = Environ("ProgramFiles") & "\"
-        FN = Dir(Environ("ProgramFiles") & "\Maxima*", vbDirectory)
-    End If
+    MaximaSti = GetMaximaPath()
     
-    If FN = vbNullString Then
+    If MaximaSti = vbNullString Then
         MaximaInstalled = False
         MsgBox "WordMat could not locate the Maxima installation. Try to reinstall", vbOKOnly, Sprog.Error
         Exit Sub
@@ -94,7 +64,6 @@ Private Sub Class_Initialize()
         MaximaInstalled = True
     End If
     
-    MaximaSti = DN & FN
     MaxProc.SetMaximaPath MaximaSti
     
     OpretTempdoc
@@ -103,16 +72,6 @@ Private Sub Class_Initialize()
     '    Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
     'End If
 End Sub
-Public Function GetVersion(n As String) As Single
-' finder versionsnr ud fra mappenavn på maxima
-Dim V As String, p As Integer
-    p = InStr(n, "-")
-    If p > 0 Then
-        V = right(n, Len(n) - p)
-    End If
-    GetVersion = val(V)
-End Function
-
 Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
     Dim DefS As String
     On Error Resume Next    ' der kommer fejl ved autoexec
@@ -160,47 +119,46 @@ Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
     GoTo Slut
 
     ' -------------------- skal nok bruges til mac på et tidspunkt: --------------
-    Dim fkommando As String
-    MaximaInputStreng = "["
-    'MaximaInputStreng = MaximaInputStreng & "display2d:false,"
-    'MaximaInputStreng = MaximaInputStreng & "breakup:false$"  ' ikke dele udtryk op
-    'MaximaInputStreng = MaximaInputStreng & "fpprec:5$" 'antal cifre der skal bruges i beregninger, default 16 mindre gør beregninger upræcise
-    MaximaInputStreng = MaximaInputStreng & "fpprintprec:" & MaximaCifre & ","    ' antal cifre der skal vises fpprec styrer hvor mange der skal bruges i beregninger
-    MaximaInputStreng = MaximaInputStreng & "ratprint:false,"    'ingen advarsel om konvertering fra decimal til brøk
-    MaximaInputStreng = MaximaInputStreng & "ratsimpexpons:true,"  ' simplificer også eksponenter,
-    MaximaInputStreng = MaximaInputStreng & "algebraic:false,"  ' false er default value, simplifikation af algebraiske heltal bl.a. noget med %i. Udtryk der er relle bliver ikke reduceret så %i fjernes helt hvis denne er false
-    MaximaInputStreng = MaximaInputStreng & "logexpand:super,"  ' alle log regneregler
-    'MaximaInputStreng = MaximaInputStreng & "realonly:" & VBA.LCase(MaximaComplex) & "," 'reelle eller komplekse løsninger, men kun til algsys
-    If MaximaComplex Then
-        MaximaInputStreng = MaximaInputStreng & "domain:complex,"  '
-    Else
-        MaximaInputStreng = MaximaInputStreng & "realonly:true,"    'reelle eller komplekse løsninger, men kun til algsys
-    End If
-    If MaximaExact = 2 Then
-        MaximaInputStreng = MaximaInputStreng & "numer:true,"  ' numeriske løsninger
-    Else
-        MaximaInputStreng = MaximaInputStreng & "numer:false,"  ' exact
-    End If
-    If MaximaUnits Then
-        MaximaInputStreng = MaximaInputStreng & "load(unit),setunits([N,J,W]),"    'enheder har nok bugs
-    Else
-        '    MaximaInputStreng = MaximaInputStreng & "load(noninteractive)," 'nogle gange spørges om fortegn på variable. giver output differentieret. er vidst ikke stabil
-    End If
-    If Not Radians Then
-        '    MaximaInputStreng = MaximaInputStreng & "HasInvTrig(udt):=block([i,del],partswitch:true,i:0,start,del:inpart(udt,i),if del=end then return (false),if del=asin then return (true),if del=acos then return (true),if del=atan then return (true), i:i+1, go (start))," ' nødvendigt at checke for inverse trig da det tager ca. 0,5s ekstra at implicere inverse trig funktioner uden grund
-        '    MaximaInputStreng = MaximaInputStreng & "ConvertToDegr(udt):=block([aliz],remfunction(sing),matchdeclare(aliz,all),tellsimp(sin(aliz),sing(180/%pi*aliz)),tellsimp(cos(aliz),cosg(180/%pi*aliz)),tellsimp(tan(aliz),tang(180/%pi*aliz)),if not(HasInvTrig(udt)) then go(slut),tellsimp(asin(aliz),%pi/180*asing(aliz)),tellsimp(acos(aliz),%pi/180*acosg(aliz)),tellsimp(atan(aliz),%pi/180*atang(aliz)),slut,udt:ev(udt,simp),clear_rules(),udt),"
-    End If
-
-    'MaximaInputStreng = MaximaInputStreng & "assume_pos_pred:true," '
-    'MaximaInputStreng = MaximaInputStreng & "assume_pos:true," 'nogle gange spørges om fortegn på variable. Nu antages pos. Men så kan den ikke løse y2/y1=(x2/x1)^a for a
-    MaximaInputStreng = MaximaInputStreng & "radexpand:true,"  ' default true, styrer reduktion af rødder. hvis all er sqrt(x^2)=x hvis true sqrt(x^2)=abs(x) ' all giver problemer ved reduktion af imaginære udtryk til reelle
-    MaximaInputStreng = MaximaInputStreng & "listconstvars:true,"  ' for at %i også kommer med blandt variable så kompleks kan findes
-    MaximaInputStreng = MaximaInputStreng & "solveradcan:false"    'default false, kan løse flere ligninger men langsommere. Bl.a. bruges log nu som løsning. Men kan ikke løse f.eks. 20=3*x^2.9 så
-    MaximaInputStreng = MaximaInputStreng & "]$"
-    'If MaximaUnits Then
-    '    MaximaInputStreng = MaximaInputStreng & "setunits([N,J])$"  '
-    '    AntalKommandoer = AntalKommandoer + 1
-    'End If
+'    MaximaInputStreng = "["
+'    'MaximaInputStreng = MaximaInputStreng & "display2d:false,"
+'    'MaximaInputStreng = MaximaInputStreng & "breakup:false$"  ' ikke dele udtryk op
+'    'MaximaInputStreng = MaximaInputStreng & "fpprec:5$" 'antal cifre der skal bruges i beregninger, default 16 mindre gør beregninger upræcise
+'    MaximaInputStreng = MaximaInputStreng & "fpprintprec:" & MaximaCifre & ","    ' antal cifre der skal vises fpprec styrer hvor mange der skal bruges i beregninger
+'    MaximaInputStreng = MaximaInputStreng & "ratprint:false,"    'ingen advarsel om konvertering fra decimal til brøk
+'    MaximaInputStreng = MaximaInputStreng & "ratsimpexpons:true,"  ' simplificer også eksponenter,
+'    MaximaInputStreng = MaximaInputStreng & "algebraic:false,"  ' false er default value, simplifikation af algebraiske heltal bl.a. noget med %i. Udtryk der er relle bliver ikke reduceret så %i fjernes helt hvis denne er false
+'    MaximaInputStreng = MaximaInputStreng & "logexpand:super,"  ' alle log regneregler
+'    'MaximaInputStreng = MaximaInputStreng & "realonly:" & VBA.LCase(MaximaComplex) & "," 'reelle eller komplekse løsninger, men kun til algsys
+'    If MaximaComplex Then
+'        MaximaInputStreng = MaximaInputStreng & "domain:complex,"  '
+'    Else
+'        MaximaInputStreng = MaximaInputStreng & "realonly:true,"    'reelle eller komplekse løsninger, men kun til algsys
+'    End If
+'    If MaximaExact = 2 Then
+'        MaximaInputStreng = MaximaInputStreng & "numer:true,"  ' numeriske løsninger
+'    Else
+'        MaximaInputStreng = MaximaInputStreng & "numer:false,"  ' exact
+'    End If
+'    If MaximaUnits Then
+'        MaximaInputStreng = MaximaInputStreng & "load(unit),setunits([N,J,W]),"    'enheder har nok bugs
+'    Else
+'        '    MaximaInputStreng = MaximaInputStreng & "load(noninteractive)," 'nogle gange spørges om fortegn på variable. giver output differentieret. er vidst ikke stabil
+'    End If
+'    If Not Radians Then
+'        '    MaximaInputStreng = MaximaInputStreng & "HasInvTrig(udt):=block([i,del],partswitch:true,i:0,start,del:inpart(udt,i),if del=end then return (false),if del=asin then return (true),if del=acos then return (true),if del=atan then return (true), i:i+1, go (start))," ' nødvendigt at checke for inverse trig da det tager ca. 0,5s ekstra at implicere inverse trig funktioner uden grund
+'        '    MaximaInputStreng = MaximaInputStreng & "ConvertToDegr(udt):=block([aliz],remfunction(sing),matchdeclare(aliz,all),tellsimp(sin(aliz),sing(180/%pi*aliz)),tellsimp(cos(aliz),cosg(180/%pi*aliz)),tellsimp(tan(aliz),tang(180/%pi*aliz)),if not(HasInvTrig(udt)) then go(slut),tellsimp(asin(aliz),%pi/180*asing(aliz)),tellsimp(acos(aliz),%pi/180*acosg(aliz)),tellsimp(atan(aliz),%pi/180*atang(aliz)),slut,udt:ev(udt,simp),clear_rules(),udt),"
+'    End If
+'
+'    'MaximaInputStreng = MaximaInputStreng & "assume_pos_pred:true," '
+'    'MaximaInputStreng = MaximaInputStreng & "assume_pos:true," 'nogle gange spørges om fortegn på variable. Nu antages pos. Men så kan den ikke løse y2/y1=(x2/x1)^a for a
+'    MaximaInputStreng = MaximaInputStreng & "radexpand:true,"  ' default true, styrer reduktion af rødder. hvis all er sqrt(x^2)=x hvis true sqrt(x^2)=abs(x) ' all giver problemer ved reduktion af imaginære udtryk til reelle
+'    MaximaInputStreng = MaximaInputStreng & "listconstvars:true,"  ' for at %i også kommer med blandt variable så kompleks kan findes
+'    MaximaInputStreng = MaximaInputStreng & "solveradcan:false"    'default false, kan løse flere ligninger men langsommere. Bl.a. bruges log nu som løsning. Men kan ikke løse f.eks. 20=3*x^2.9 så
+'    MaximaInputStreng = MaximaInputStreng & "]$"
+'    'If MaximaUnits Then
+'    '    MaximaInputStreng = MaximaInputStreng & "setunits([N,J])$"  '
+'    '    AntalKommandoer = AntalKommandoer + 1
+'    'End If
 Fejl:
     MsgBox Sprog.ErrorGeneral & vbCrLf & " preparing maxima", vbOKOnly, Sprog.Error
     PrepareNewCommand = False
@@ -257,15 +215,8 @@ End Sub
 Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = True, Optional ConvertWordSymbols As Boolean = True)
 ' starts maxima sends input and receives output
 
-'AntalKommandoer = AntalKommandoer + 2
-'If Definitions Then AntalKommandoer = AntalKommandoer + 1
-
     Dim i As Integer
-    Dim svar As String
-    Dim spr As Boolean
-    
-'    If CASengine > 0 Then Exit Sub  ' giver problemer med gnuplot
-    
+        
 #If Mac Then
     RunMaximaFile
     Exit Sub
@@ -371,19 +322,6 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         MaxProc.ExecuteMaximaCommand MaximaInputStreng, 0
         UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
     End If
-
-
-    '    If stoptime < 0 Then
-    '        Do While MaxProc.Finished = 0
-    '        Wait (0.1)
-    '        If StopNow Then
-    '            Unload ufwait2
-    '            MaxProc.CloseProcess
-    '            Exit Sub
-    '        End If
-    '        Loop
-    '        GoTo slut
-    '    End If
     
     WaitForMaximaForm StopTime
 
@@ -545,7 +483,6 @@ Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
         Pos = InStr(MaxProc.LastMaximaOutput, "positive, negative or zero?")
         pos2 = InStr(MaxProc.LastMaximaOutput, "positive or negative?")
         If Pos > 0 Or pos2 > 0 Then
-            Dim udtryk As String
             Dim UF As New UserFormAskSign
             If Pos <= 0 And pos2 > 0 Then Pos = pos2
             pos2 = InStr(MaxProc.LastMaximaOutput, "Is ")
@@ -613,7 +550,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 ' for mac. Starts maxima, sends command, receives output. closes maxima
 #If Mac Then
 
-    Dim s As String, i As Integer, WT As String, p As Long, p2 As Long, Var As String
+    Dim s As String, WT As String, p As Long, p2 As Long, Var As String
     Dim FN As String
     Dim UfWait2 As UserFormWaitForMaxima
     If StopTime > 0 Then
@@ -874,8 +811,6 @@ Public Sub ExecuteMaximaCommand(Optional MaxCmd As String, Optional TranslateToM
     End If
     Call RunMaxima
     If StopNow Then GoTo Slut
-
-
 Slut:
 End Sub
 
@@ -887,7 +822,7 @@ Sub MaximaSolve(variabel As String)
     'ti = Timer
 
     If variabel = "" Then Exit Sub
-    Dim rkommando As String, ikommando As String, pkommando As String, ckommando As String
+    Dim rkommando As String, ikommando As String, ckommando As String
 
     ikommando = Kommando    ' kommando gemmes. Denne pilles der ikke ved
 start:
@@ -1283,7 +1218,7 @@ End Sub
 Sub SolveSystem(Variable As String)
     Dim Kommentar As String
     Dim i As Integer
-    Dim rkommando As String, ikommando As String, pkommando As String, ckommando As String
+    Dim rkommando As String, ikommando As String
 
     ikommando = Kommando    ' kommando gemmes. Denne pilles der ikke ved
 
@@ -1477,7 +1412,7 @@ Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional
 Slut:
 End Sub
 Sub beregn()
-    Dim inkom As String, pkommando As String, StartKommando2 As String, StartKommando3 As String
+    Dim inkom As String, pkommando As String, StartKommando3 As String
     Dim posca As Integer
     Dim posligmed As Integer
     Dim possumtegn As Integer
@@ -2661,12 +2596,8 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     Dim app As String
     Dim F As String
     Dim udtryk As String
-    Dim varl2 As String
     Dim i As Integer, j As Integer
     Dim c As String
-    Dim posstart As Integer
-    Dim posslut As Integer
-    Dim pos2d As Integer
     Dim poss As Integer
     Dim posn As Integer
     Dim poso As Integer
@@ -2678,7 +2609,6 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     Dim mtext As String
     Dim pm As String
     Dim s As String    ' universal string
-    Dim ib As Boolean
     Dim subs As Integer, sups As Integer, ends As Integer
     Dim antalm As Integer, varl As Integer, di As Integer, antalmS As String
 
@@ -4353,7 +4283,7 @@ Function ConvertUnits(ByVal Text As String) As String
 
 End Function
 Function ConvertDegreeToRad(Text As String, trigfunc As String) As String
-    Dim Pos, spos As Integer, s As String, V As String, F As Boolean
+    Dim Pos, spos As Integer, s As String
     Dim ea As New ExpressionAnalyser ', ea2 As New ExpressionAnalyser
     ea.SetNormalBrackets
 '    ea2.SetNormalBrackets
@@ -5147,12 +5077,11 @@ Sub RemoveComplexSolutions()
 
 End Sub
 Function ConvertToLatex(Text As String) As String
-    Dim Pos As Long, pos1 As Long, pos2 As Long, pos3 As Long, pos4 As Long
+    Dim Pos As Long, pos1 As Long, pos2 As Long, pos3 As Long
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     Dim s As String, t As String
     Dim Arr As Variant
-    Dim ib As Boolean
     Dim rod As Integer
     Dim ends As Integer
     Dim subs As Integer, sups As Integer
@@ -5915,7 +5844,6 @@ Sub ReadSelection()
     ' denne metode bruger ikke tempdoc, men ændrer den markerede ligning til text, læser den og ændrer tilbage til prof layout. Det kan give ændringer i den måde det står på.
     ' metoden er dog nok lidt hurtigere
     
-    Dim mtext As String, copytext As String
     Dim antal As Integer
     Dim sstart As Long
     Dim sslut As Long
@@ -5998,7 +5926,6 @@ genstart:
             .OMaths.Linearize
         End With
 
-        Dim i As Integer
         Dim mathcol As OMaths
         Set mathcol = r.OMaths
         For j = 0 To antal - 1
@@ -6139,7 +6066,6 @@ Function ReadFromWord(Expr As String) As String
 End Function
 Sub ReadSelectionOld()
 ' indsætter det markerede som kommando
-    Dim mtext As String
     Dim antal As Integer
     Dim sstart As Integer
     Dim sslut As Integer
@@ -6606,7 +6532,7 @@ End Sub
 Function FindNextio(StartPos As Long, Text As String) As Long
 
 On Error GoTo Fejl
-Dim Pos As Long, pos2 As Long, io As String
+Dim Pos As Long, io As String
 Dim ea As New ExpressionAnalyser
 
 FindNextio = 0
@@ -6786,7 +6712,6 @@ End Sub
 Sub FindVariable(Optional Text As String, Optional MaximaCode As Boolean = True)
 ' finder variable i texten og putter dem i Vars-string
     Dim Var As String
-    Dim Pos As Integer
     Dim i As Integer
     Dim j As Integer
     Dim arrint As Variant
@@ -6915,11 +6840,11 @@ Slut:
     '    Selection.Collapse (wdCollapseStart)
 End Function
 Function AddDefinition(s As String) As String
-   Dim t As String, i As Integer, Expr As String, c As String, j As Integer, Pos As Integer, pos2 As Integer, k As Integer
+   Dim t As String
    Dim ea As New ExpressionAnalyser
    Dim ea2 As New ExpressionAnalyser
-   Dim defenk As String, ass As String
-   Dim Arr As Variant, arr2() As String, arr3() As String
+   Dim defenk As String
+   Dim Arr As Variant
    Dim deflign As Boolean
 
    ea.SetNormalBrackets
@@ -6958,7 +6883,6 @@ Function AddDefinition(s As String) As String
 
       If InStr(VBA.LCase(s), "slet def") > 0 Or InStr(VBA.LCase(s), "delete def") > 0 Then
          '            FindDefinitions = ""
-         Dim sletvar As String
          s = Replace(Trim(Split(s, ":")(1)), vbCr, "")
          If s = "" Then
             AddDefinition = "STOP"
@@ -7117,7 +7041,7 @@ End Function
 Function SplitAssump(s As String) As String
 ' Deler  0<x<5 op til x>0 and x<5
    Dim ea As New ExpressionAnalyser
-   Dim V As String, p As Integer, p2 As Integer
+   Dim V As String, p As Integer
    Dim pre As String, pst As String
    
    ea.SetNormalBrackets
@@ -7166,8 +7090,8 @@ Function SplitAssump(s As String) As String
 End Function
 Function sqbrAssump(s As String) As String
    Dim ea As ExpressionAnalyser, t As String
-   Dim V As String, p As Integer, p2 As Integer, c As String
-   Dim pre As String, pst As String, Arr() As String, l1 As String, l2 As String
+   Dim V As String, p As Integer, c As String
+   Dim Arr() As String, l1 As String, l2 As String
    t = s
    p = InStr(s, VBA.ChrW(8712))
    If p <= 0 Then
@@ -7230,7 +7154,6 @@ Sub ResetDefinitions()
 End Sub
 Function ValidateDef(ByVal lhs As String, ByVal rhs As String) As Boolean
 ' returnerer false hvis der er fejl
-    Dim ea As New ExpressionAnalyser
     Dim Pos As Integer
     On Error GoTo Fejl
     ValidateDef = False
@@ -7327,7 +7250,6 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
 ' starter den med variabel= ?
 ' indgår variabel på højresiden af =tegn
     On Error GoTo Slut
-    Dim NotSolved As Boolean
     Dim ea As New ExpressionAnalyser
     Dim Var As String
     Dim Arr As Variant
@@ -7436,16 +7358,7 @@ Fejl:
     KommandoerStreng = ""
 Slut:
 End Property
-Private Function TrigFunction(Expr As String) As Boolean
-    TrigFunction = False
-    If InStr(Expr, "sin") > 0 Then
-        TrigFunction = True
-    ElseIf InStr(Expr, "cos") > 0 Then
-        TrigFunction = True
-    ElseIf InStr(Expr, "tan") > 0 Then
-        TrigFunction = True
-    End If
-End Function
+
 Public Property Get AntalKom() As Integer
 ' antal ligninger/udtryk
     On Error GoTo Fejl

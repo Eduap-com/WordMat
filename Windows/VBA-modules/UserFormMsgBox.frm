@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMsgBox
    Caption         =   "MsgBox"
    ClientHeight    =   3750
    ClientLeft      =   120
-   ClientTop       =   470
+   ClientTop       =   465
    ClientWidth     =   7260
    OleObjectBlob   =   "UserFormMsgBox.frx":0000
    StartUpPosition =   1  'CenterOwner

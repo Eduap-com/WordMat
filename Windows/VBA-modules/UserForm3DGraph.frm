@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm3DGraph
    Caption         =   "3D grafer"
    ClientHeight    =   5235
    ClientLeft      =   -30
-   ClientTop       =   80
+   ClientTop       =   75
    ClientWidth     =   11040
    OleObjectBlob   =   "UserForm3DGraph.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -13,12 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
-
-
-
-
 Option Explicit
 Private palindex As Integer
 Private Sub CommandButton_geogebra_Click()
@@ -321,7 +315,6 @@ End Sub
 
 Private Sub CommandButton_ok_Click()
 Dim grafobj As String
-Dim grafobj2 As String
 Dim vekt As String
 Dim lign As String
 Dim parx As String
@@ -337,7 +330,6 @@ Dim tmin As String
 Dim tmax As String
 Dim smin As String
 Dim smax As String
-Dim gridno As String
 Dim punkttekst As String
 Dim antalobj As Integer
 Dim Arr As Variant

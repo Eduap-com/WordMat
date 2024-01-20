@@ -11,29 +11,28 @@ Option Explicit
 Public WithEvents oApp As Word.Application
 Attribute oApp.VB_VarHelpID = -1
 Private Sub oapp_DocumentBeforeClose(ByVal Doc As Document, Cancel As Boolean)
-Dim d As Document
-On Error Resume Next
-If AntalB > Antalberegninger Then
-    Antalberegninger = AntalB
-End If
-If Application.Documents.Count <= 2 Then
-LukTempDoc
-MaxProc.CloseProcess
-cxl.CloseExcel
+    On Error Resume Next
+    If AntalB > Antalberegninger Then
+        Antalberegninger = AntalB
+    End If
+    If Application.Documents.Count <= 2 Then
+        LukTempDoc
+        MaxProc.CloseProcess
+        cxl.CloseExcel
 
 #If Mac Then
 #Else
-    Set WebV = Nothing
-    Set MaxProc = Nothing
-    Set MaxProcUnit = Nothing
+        Set WebV = Nothing
+        Set MaxProc = Nothing
+        Set MaxProcUnit = Nothing
 #End If
-'    For Each d In Application.Documents ' får WOrd til altid at spørge om der ikke skal gemmes
-'       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-'           d.Close (False)
-'       End If
-'    Next
-'    SletRCMenu
-End If
+        '    For Each d In Application.Documents ' får Word til altid at spørge om der ikke skal gemmes
+        '       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+        '           d.Close (False)
+        '       End If
+        '    Next
+        '    SletRCMenu
+    End If
 End Sub
 
 'Private Sub oapp_NewDocument(ByVal Doc As Document)

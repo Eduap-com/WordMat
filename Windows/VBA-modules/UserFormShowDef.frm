@@ -3,7 +3,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormShowDef
    Caption         =   "Definitions"
    ClientHeight    =   5170
    ClientLeft      =   120
-   ClientTop       =   470
+   ClientTop       =   465
    ClientWidth     =   9330.001
    OleObjectBlob   =   "UserFormShowDef.frx":0000
    StartUpPosition =   1  'CenterOwner

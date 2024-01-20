@@ -225,41 +225,6 @@ Sub SetTempDocSaved()
 End Sub
 #End If
 
-Sub ActivateTask(navn As String)
-AppActivate navn
-Exit Sub
-
-Dim task1 As Task
-Dim tasksave As Task
-For Each task1 In Tasks
-    If InStr(task1.Name, navn) > 0 Then
-        Set tasksave = task1
-        Exit For
-    End If
-Next
-'Call AppActivate("Word", True)
-Dim i As Integer
-On Error GoTo start
-start:
-Err.Clear
-i = i + 1
-Wait (0.1)
-If i > 2 Then GoTo Slut
-tasksave.Activate
-
-Slut:
-End Sub
-
-Sub Wait(pausetime As Variant)
-'pausetime in senconds
-Dim start
-    start = Timer    ' Set start time.
-    Do While Timer < start + pausetime
-        DoEvents    ' Yield to other processes.
-    Loop
-
-End Sub
-
 Function MakeMMathCompatible(ut As String) As String
     ut = Replace(ut, ",", ".")
     ut = Replace(ut, "E", VBA.ChrW(183) & "10^ ")
@@ -296,7 +261,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     Dim WT As Template
     Dim KB As KeyBinding
     Dim GemT As Template, s As String
-    Dim KeybInNormal As Boolean, FejlText As String, KBerr As Boolean
+    Dim KeybInNormal As Boolean, KBerr As Boolean
     
     Set GemT = CustomizationContext
         
@@ -375,7 +340,6 @@ End Function
 Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Template
     ' Hvis det aktuelle dokument hedder wordmat*.dotm så returneres den som template
     ' Ellers søges alle globale skabeloner igennem efter om der er en der hedder wordmat*.dotm
-    Dim WT As Template
     If Len(ActiveDocument.AttachedTemplate) > 10 Then
         If LCase(Left(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase(right(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
             Set GetWordMatTemplate = ActiveDocument.AttachedTemplate
@@ -404,7 +368,7 @@ Public Sub GenerateKeyboardShortcutsWordMat()
     GenerateKeyboardShortcutsPar False
 End Sub
 Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False)
-    Dim Wd As WdKey, WT As Template, s As String
+    Dim Wd As WdKey, WT As Template
     Dim GemT As Template
     
     Set GemT = CustomizationContext
@@ -730,13 +694,11 @@ Fejl:
 End Sub
 #End If
 Sub InsertSletDef()
-    Dim tdefs As String
     Dim gemfontsize As Integer
     Dim gemitalic As Boolean
     Dim gemfontcolor As Integer
     Dim gemsb As Integer
     Dim gemsa As Integer
-    Dim mo As Range
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -797,7 +759,6 @@ Sub ForrigeResultat()
     Dim s As String
     Dim start As Integer
     Dim sslut As Integer
-    Dim posligmed As Integer
     Dim matfeltno As Integer
     Dim hopover As Boolean
     Application.ScreenUpdating = False
@@ -1412,8 +1373,7 @@ End Sub
 Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     ' selvom den hedder windows er det nu også mac
     On Error GoTo Fejl
-    Dim NewVersion As String, p As Integer, p2 As Integer, News As String, s As String, V As String
-    Dim FilNavn As String, FilDir As String, FilPath As String, result As VbMsgBoxResult
+    Dim NewVersion As String, p As Integer, News As String, s As String
     Dim UpdateNow As Boolean, PartnerShip As Boolean
     Dim UFvent As UserFormWaitForMaxima
     
@@ -1581,7 +1541,6 @@ Fejl:
 Slut:
 End Sub
 Function GetHTML(URL As String) As String
-    Dim html As String
     With CreateObject("MSXML2.XMLHTTP")
         .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer sikrer at det ikke er cached version
         .Send
@@ -1681,7 +1640,6 @@ End Function
 
 Function ConvertNumberToMaxima(n As String) As String
 ' tager højde for E, men ikke helt entydigt.
-Dim ea As New ExpressionAnalyser
 
     n = Replace(n, ",", ".")
     
@@ -1716,38 +1674,6 @@ Sub LandScapePage()
 
 End Sub
 
-Function TrimR(ByVal Text As String, c As String)
-' fjerner c fra højre side af text
-Dim s As String
-If Text = "" Then GoTo Slut
-Do While right(Text, 1) = c
-    Text = Left(Text, Len(Text) - 1)
-Loop
-TrimR = Text
-Slut:
-End Function
-Function TrimL(ByVal Text As String, c As String)
-' fjerner c fra venstre side af text
-Dim s As String
-If Text = "" Then GoTo Slut
-Do While Left(Text, 1) = c
-    Text = right(Text, Len(Text) - 1)
-Loop
-TrimL = Text
-Slut:
-End Function
-
-Function TrimB(ByVal Text As String, c As String)
-' fjerner c fra Begge sider af text
-
-TrimB = TrimL(Text, c)
-TrimB = TrimR(TrimB, c)
-Slut:
-End Function
-Function TrimRenter(ByVal Text As String)
-' removes crlf at right end
-    TrimRenter = TrimR(TrimR(Text, vbLf), vbCr)
-End Function
 Sub ForceError()
     Dim A As Integer
     
@@ -1766,10 +1692,6 @@ On Error GoTo Slut
 Slut:
 End Sub
 
-Sub testt()
-MsgBox Application.International(wdProductLanguageID)
-
-End Sub
 Sub GoToEndOfMath()
 Dim mc As OMaths
 Dim i As Integer
@@ -1876,7 +1798,6 @@ Slut:
 End Sub
 Sub ListToTabel()
 Dim dd As New DocData
-Dim om As Range
 Dim Tabel As Table
 Dim i As Integer, j As Integer
 On Error GoTo Fejl
@@ -1979,7 +1900,7 @@ Function Get2DVector(Text As String) As String
 End Function
 
 Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
-    Dim t As Table, F As Field, ccut As Boolean, i As Long
+    Dim t As Table, F As Field, ccut As Boolean
     Dim placement As Integer
     On Error GoTo Fejl
     Application.ScreenUpdating = False
@@ -2167,7 +2088,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo Fejl
     Application.ScreenUpdating = False
-    Dim F As Field, f2 As Field, t As String, n As String, i As Integer, p As Integer, Arr As Variant
+    Dim F As Field, f2 As Field, n As String, p As Integer, Arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox Sprog.A(345), vbOKOnly, Sprog.Error
@@ -2400,9 +2321,8 @@ MsgBox Sprog.A(681), vbOKOnly, ""
 End Sub
 Sub DeleteKeyboardShortcutsInNormalDotm()
 ' Sletter genveje til WordMat makroer der ved en fejl skulle være blevet gemt i normal.dotm
-    Dim GemT As Template, WT As Template
+    Dim GemT As Template
     Dim KB As KeyBinding
-    Dim Arr(50) As String, i As Integer
 '    On Error Resume Next
     
     Set GemT = CustomizationContext
@@ -2568,7 +2488,7 @@ Function RemoveFileNameFromPath(ByVal ShortName As String) As String
 End Function
 
 Function ExtractTag(s As String, StartTag As String, EndTag As String) As String
-   Dim p As Long, p2 As Long, p3 As Long
+   Dim p As Long, p2 As Long
    
    p = InStr(s, StartTag)
    If p <= 0 Then

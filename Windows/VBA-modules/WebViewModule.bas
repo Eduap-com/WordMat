@@ -89,7 +89,6 @@ Sub PrepareGeoGebraCAS()
 '        MsgBox Res
     End If
 #Else
-    Dim JS As String, Res As String
     If WebV Is Nothing Then OpenWebV
     Err.Clear
     On Error Resume Next
@@ -115,17 +114,10 @@ Sub TestWV()
     MsgBox Res
 End Sub
 
-Sub TestJSCommand()
-    JS = "2+4;"
-    Res = WebV.ExecuteScript(JS)
-    MsgBox Res
-End Sub
-
 Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Boolean = True) As String
 Dim Res As String
 
-    Dim JS As String, Arr() As String, ArrDef() As String, ArrCas() As String, cmd As String, s As String, i As Integer, AssumeCol As New Collection, AssumeString As String, AE As Variant
-    Dim FC As Integer
+    Dim JS As String, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
     If WebV Is Nothing Then PrepareGeoGebraCAS
     JS = "ggbApplet.reset();" 'ggbApplet.setRounding(""" & MaximaCifre & "s"");"
     If UseDefs Then

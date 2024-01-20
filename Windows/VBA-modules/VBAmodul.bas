@@ -155,20 +155,15 @@ Function FolderExists(FolderPath As String) As Boolean
 End Function
 
 Function FolderWithVBAProjectFiles() As String
-    Dim WshShell As Object
-'    Dim FSO As Object
     Dim SpecialPath As String
 
-'    Set FSO = CreateObject("Scripting.FileSystemObject")
     SpecialPath = ActiveDocument.path
     
     If right(SpecialPath, 1) <> "\" Then
         SpecialPath = SpecialPath & "\"
     End If
-'    SpecialPath = """" & SpecialPath & "VBAProjectFiles"""
     SpecialPath = SpecialPath & VBAModulesFolder ' "VBAProjectFiles"
     
-'    If FSO.FolderExists(SpecialPath) = False Then
     If FolderExists(SpecialPath) = False Then
         On Error Resume Next
         MkDir SpecialPath
@@ -354,14 +349,12 @@ Slut:
 End Sub
 Sub ImportAllModules()
 ' Hvis denne sub køres via en commandbutton, så virker det ikke, så går det galt med Userforms og VBAmodul
-    Dim bExport As Boolean, d As String, q As String
+    Dim d As String, q As String
     Dim wkbSource As Document
     Dim szSourceWorkbook As String
     Dim szExportPath As String
-    Dim szFileName As String
     Dim StrFile As String, i As Integer
     Dim Arr() As String, FileList As String, MBP As Integer
-    Dim cmpComponent As VBIDE.VBComponent
     Dim ModuleFolder As String, C1 As Long
     Dim ImportCount As Integer, EAge As String
     Dim NoOfModules As Integer

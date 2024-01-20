@@ -8,7 +8,7 @@ Public tid As Double
 Private DeVarList As String
 Private TempCas As Integer
 
-Public Function PrepareMaxima(Optional Unit As Boolean = False) As Boolean
+Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
     '    Dim UFwait2 As UserFormWaitForMaxima
 
     On Error GoTo Fejl
@@ -28,7 +28,7 @@ Public Function PrepareMaxima(Optional Unit As Boolean = False) As Boolean
     If Not SettingsRead Then ReadAllSettingsFromRegistry
 
     If omax Is Nothing Then
-'        LavRCMenu    ' højreklikmenu på ligninger
+        '        LavRCMenu    ' højreklikmenu på ligninger
         SetMathAutoCorrect
         If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
         UfWait2.Show vbModeless
@@ -124,6 +124,8 @@ Fejl:
     Unload UfWait2
     PrepareMaxima = False
 Slut:
+    On Error Resume Next
+    If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
 #If Mac Then
 Function GetMaxProc() As MaximaProcess
@@ -331,7 +333,6 @@ Sub MaximaSolveInequality(Optional variabel As String)
         End If
         If variabel = "" Then GoTo Slut
         
-        Dim Res As String, d As String, td As Variant
         If CASengine = 1 Or CASengine = 2 Then
             s = Trim(omax.Kommando)
             s = Replace(s, vbCrLf, "")
@@ -455,7 +456,6 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim ea As New ExpressionAnalyser, SaveKommando As String
     Dim sstart As Long, sslut As Long, p As Long, p2 As Long
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    Dim oData As New DataObject, ClipText As String
     
     TempCas = CASengine
 '    On Error Resume Next: oData.GetFromClipboard:   ClipText = oData.GetText: On Error GoTo fejl ' Skulle sikre at clipboard ikke ændres, men virker ikke
@@ -566,7 +566,6 @@ newcas:
         If variabel = "" Then GoTo Slut
         omax.TempDefs = UFSelectVar.TempDefs
         
-        Dim Res As String, d As String, td As Variant
         If CASengine = 1 Or CASengine = 2 Then
             s = Trim(omax.Kommando)
             s = Replace(s, vbCrLf, "")
@@ -1166,7 +1165,6 @@ End Sub
 Sub MaximaNsolve(Optional ByVal variabel As String)
     Dim Arr As Variant
     Dim fejlm As String
-    Dim solutions As String
     Dim UFnsolve As New UserFormNumericQuestion
         On Error GoTo Fejl
     Application.ScreenUpdating = False
@@ -1480,9 +1478,6 @@ Sub MaximaSolveNumeric(Optional Var As String)
     Dim t As String
     Dim scrollpos As Double
     Dim VarGuess As String
-    Dim Arr As Variant
-    Dim arr2 As Variant
-    Dim j As Integer
     scrollpos = ActiveWindow.VerticalPercentScrolled
     Dim sstart As Long
     Dim sslut As Long
@@ -1671,7 +1666,7 @@ Sub beregn()
     '    UFWait.Show
     '    If omax.StopNow Then GoTo slut
     
-    Dim s As String, Res As String, def As String, Arr() As String, i As Integer, ms As String, t As String, fo As String
+    Dim s As String, t As String, fo As String
     
     If CASengine > 0 Then
         s = Trim(omax.Kommando)
@@ -2405,8 +2400,7 @@ End Sub
 Sub SolveDENumeric()
     Dim scrollpos As Double
     Dim sstart As Long, sslut As Long
-    Dim variabel As String, i As Integer
-    Dim xmin As String, xmax As String, xstep As String, DElist As String, varlist As String, guesslist As String
+    Dim variabel As String
     Dim ea As New ExpressionAnalyser
     Dim UFdiffeq As New UserFormDeSolveNumeric
     On Error GoTo Fejl
@@ -2564,11 +2558,9 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     On Error GoTo Fejl
     PrepareMaxima
     omax.prevspr = ""
-    Dim vars As String
     Dim scrollpos As Double
     Dim sstart As Long, sslut As Long
     Dim t As String
-    Dim Arr As Variant
     Dim UFdiffeq As New UserFormDiffEq
     Dim ea As New ExpressionAnalyser
     ea.SetNormalBrackets
@@ -2894,7 +2886,6 @@ End Sub
 #End If
 
 Function ValidateInput(Expr) As Boolean
-    Dim n As Integer
     Dim ED As ErrorDefinition
    
     ValidateInput = True
@@ -2932,18 +2923,57 @@ Function ValidateInput(Expr) As Boolean
     
 End Function
 
-Public Function GetCountOfChar(ByVal ar_sText As String, ByVal a_sChar As String) As Integer
-    Dim l_iIndex As Integer
-    Dim l_iMax As Integer
-    Dim l_iLen As Integer
-
-    GetCountOfChar = 0
-    l_iMax = Len(ar_sText)
-    l_iLen = Len(a_sChar)
-    For l_iIndex = 1 To l_iMax
-        If (Mid(ar_sText, l_iIndex, l_iLen) = a_sChar) Then 'found occurrence
-            GetCountOfChar = GetCountOfChar + 1
-            If (l_iLen > 1) Then l_iIndex = l_iIndex + (l_iLen - 1) 'if matching more than 1 char, need to move more than one char ahead to continue searching
-        End If
-    Next l_iIndex
+Public Function GetVersion(n As String) As Single
+' finder versionsnr ud fra mappenavn på maxima
+Dim V As String, p As Integer
+    p = InStr(n, "-")
+    If p > 0 Then
+        V = right(n, Len(n) - p)
+    End If
+    GetVersion = val(V)
 End Function
+
+Function GetMaximaPath() As String
+' Finder Maximastien. søger i Appdata og programfiles. Hvis der er Maxima begge steder så bruges nyeste version
+' Hvis der er samme version begge steder, så returneres stien til appdata.
+
+#If Mac Then
+#Else
+    Dim FN As String, DN As String, V As Single ' Til AppData
+    Dim FN1 As String, DN1 As String, V1 As Single ' Til Program files
+    Dim s As String
+    On Error Resume Next
+
+    DN = Environ("AppData") & "\WordMat\"
+    FN = Dir(DN & "Maxima*", vbDirectory)
+    V = GetVersion(FN)
+    Do
+        s = Dir()
+        If GetVersion(s) > V Then
+            FN = s
+            V = GetVersion(FN)
+        End If
+    Loop While s <> ""
+    
+    DN1 = GetProgramFilesDir() & "\WordMat\"
+    FN1 = Dir(DN1 & "Maxima*", vbDirectory)
+    If FN = vbNullString Then
+        DN = DN1
+        FN = FN1
+        V = GetVersion(FN)
+    Else
+        V1 = GetVersion(FN1)
+        If V1 > V Then
+            DN = DN1
+            FN = FN1
+            V = V1
+        End If
+    End If
+            
+    GetMaximaPath = DN & FN
+#End If
+End Function
+
+Sub TestMaximaPath()
+    MsgBox GetMaximaPath
+End Sub
