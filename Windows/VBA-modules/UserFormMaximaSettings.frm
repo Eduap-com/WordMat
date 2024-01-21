@@ -202,6 +202,7 @@ On Error Resume Next
     BackupType = ComboBox_backup.ListIndex
     BackupMaxNo = ComboBox_backupno.Text
     BackupTime = ComboBox_backuptime.Text
+    WSHmaxima = CheckBox_maximawsh.Value
     
     If MaximaUnits <> CheckBox_units.Value Then
         MaximaUnits = CheckBox_units.Value
@@ -401,6 +402,8 @@ Private Sub UserForm_Activate()
     CheckBox_polaroutput.Value = PolarOutput
     CheckBox_dasdiffchr.Value = dAsDiffChr
     CheckBox_askref.Value = EqAskRef
+    CheckBox_maximawsh.Value = WSHmaxima
+    
     Label_antalb.Caption = AntalB
     
     ComboBox_language.ListIndex = LanguageSetting

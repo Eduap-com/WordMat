@@ -1465,7 +1465,7 @@ Dim s As String
 Dim Arr As Variant
 Dim arr2 As Variant
 Dim i As Long, j As Long
-Dim M As New CMatrix
+Dim m As New CMatrix
     
     SetNormalBrackets
     Text = Replace(Text, VBA.ChrW(9632), VBA.ChrW(9608))
@@ -1476,20 +1476,20 @@ Dim M As New CMatrix
     For i = 0 To UBound(Arr)
         arr2 = Split(Arr(i), "&")
         For j = 0 To UBound(arr2)
-            M.Element(i, j) = arr2(j)
+            m.Element(i, j) = arr2(j)
         Next
     Next
     End If
-    Set GetFirstMatrix = M
+    Set GetFirstMatrix = m
 End Function
 Function GetAllMatrices() As Collection
-Dim M As CMatrix
+Dim m As CMatrix
     Pos = 1
     
-    M = GetFirstMatrix()
-    Do While Not M Is Nothing
-        GetAllMatrices.Add M
-        M = GetFirstMatrix()
+    m = GetFirstMatrix()
+    Do While Not m Is Nothing
+        GetAllMatrices.Add m
+        m = GetFirstMatrix()
     Loop
 
 End Function

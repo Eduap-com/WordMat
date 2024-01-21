@@ -2933,12 +2933,12 @@ Dim V As String, p As Integer
     GetVersion = val(V)
 End Function
 
+#If Mac Then
+#Else
 Function GetMaximaPath() As String
 ' Finder Maximastien. søger i Appdata og programfiles. Hvis der er Maxima begge steder så bruges nyeste version
 ' Hvis der er samme version begge steder, så returneres stien til appdata.
 
-#If Mac Then
-#Else
     Dim FN As String, DN As String, V As Single ' Til AppData
     Dim FN1 As String, DN1 As String, V1 As Single ' Til Program files
     Dim s As String
@@ -2971,9 +2971,7 @@ Function GetMaximaPath() As String
     End If
             
     GetMaximaPath = DN & FN
-#End If
 End Function
+#End If
 
-Sub TestMaximaPath()
-    MsgBox GetMaximaPath
-End Sub
+

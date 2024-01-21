@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar 
    Caption         =   "Løs ligning"
-   ClientHeight    =   4690
+   ClientHeight    =   4695
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   10560

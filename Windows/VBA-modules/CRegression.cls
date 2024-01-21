@@ -628,7 +628,7 @@ Function polregr(X() As Double, Y() As Double, orden As Integer, Optional ByVal 
 '  ax^2+bx+c
 Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim SStotal As Double, SSregr As Double
-Dim M() As Double, s() As Double, t() As Double
+Dim m() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
 On Error GoTo Fejl
 
@@ -644,7 +644,7 @@ If np <= orden Then
     Exit Function
 End If
 
-ReDim M(1 To orden + 1, 1 To orden + 2)
+ReDim m(1 To orden + 1, 1 To orden + 2)
 ReDim s(2 * orden)
 ReDim t(orden)
 
@@ -668,30 +668,30 @@ If tving = False Then
 ' sæt indre af matrix op
 For i = 1 To orden + 1
     For j = 1 To orden + 1
-        M(i, j) = s(orden + i - j)
+        m(i, j) = s(orden + i - j)
     Next
 Next
 'sæt højre kolonne i matrix op
 For i = 0 To orden
-    M(i + 1, orden + 2) = t(i)
+    m(i + 1, orden + 2) = t(i)
 Next
 
 ' Der udføres gaussisk eliminination
 For i = 1 To orden + 1
 ' dividerer række i med værdien i celle (i,i)
   For j = orden + 2 To 1 Step -1
-    If M(i, i) = 0 Then
+    If m(i, i) = 0 Then
         MsgBox "Divide by zero", vbOKOnly, Sprog.Error
         Exit Function
     Else
-        M(i, j) = M(i, j) / M(i, i)
+        m(i, j) = m(i, j) / m(i, i)
     End If
   Next
 ' laver nuller i kolonne i undtagen celle i,i hvor der skal stå et 1
   For q = 1 To orden + 1
     If q <> i Then
       For j = orden + 2 To 1 Step -1
-        M(q, j) = M(q, j) - M(i, j) * M(q, i)
+        m(q, j) = m(q, j) - m(i, j) * m(q, i)
       Next
     End If
   Next
@@ -699,7 +699,7 @@ Next
 
 ReDim Coeff(orden)
 For i = 0 To orden
-    Coeff(i) = M(orden + 1 - i, orden + 2)
+    Coeff(i) = m(orden + 1 - i, orden + 2)
 Next
             
 Else
@@ -734,7 +734,7 @@ Function polregrkvad(X() As Double, Y() As Double, Optional ByVal tving As Boole
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double
 Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
-Dim M(3, 4)
+Dim m(3, 4)
 
 On Error GoTo Fejl
 
@@ -752,42 +752,42 @@ Next
 
 If tving = False Then
 
-M(1, 1) = sumxx
-M(1, 2) = sumx
-M(1, 3) = n
-M(1, 4) = sumy
-M(2, 1) = sumx3
-M(2, 2) = sumxx
-M(2, 3) = sumx
-M(2, 4) = sumxy
-M(3, 1) = sumx4
-M(3, 2) = sumx3
-M(3, 3) = sumxx
-M(3, 4) = sumx2y
+m(1, 1) = sumxx
+m(1, 2) = sumx
+m(1, 3) = n
+m(1, 4) = sumy
+m(2, 1) = sumx3
+m(2, 2) = sumxx
+m(2, 3) = sumx
+m(2, 4) = sumxy
+m(3, 1) = sumx4
+m(3, 2) = sumx3
+m(3, 3) = sumxx
+m(3, 4) = sumx2y
 
 ' Der udføres gaussisk eliminination
 For i = 1 To 3
 ' dividerer række i med værdien i celle (i,i)
   For j = 4 To 1 Step -1
-    If M(i, i) = 0 Then
+    If m(i, i) = 0 Then
 '        MsgBox "nul"
         GoTo tving
     Else
-        M(i, j) = M(i, j) / M(i, i)
+        m(i, j) = m(i, j) / m(i, i)
     End If
   Next
 ' laver nuller i kolonne i undtagen celle i,i hvor der skal stå et 1
   For q = 1 To 3
     If q <> i Then
       For j = 4 To 1 Step -1
-        M(q, j) = M(q, j) - M(i, j) * M(q, i)
+        m(q, j) = m(q, j) - m(i, j) * m(q, i)
       Next
     End If
   Next
 Next
-A = M(1, 4)
-b = M(2, 4)
-c = M(3, 4)
+A = m(1, 4)
+b = m(2, 4)
+c = m(3, 4)
             
 Else
 tving:

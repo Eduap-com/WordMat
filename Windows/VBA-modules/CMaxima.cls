@@ -213,7 +213,7 @@ Public Sub ResetMaxima()
     End If
 End Sub
 Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = True, Optional ConvertWordSymbols As Boolean = True)
-' starts maxima sends input and receives output
+    ' starts maxima sends input and receives output
 
     Dim i As Integer
         
@@ -229,15 +229,15 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     '    MaximaInputStreng = "mu:2;sigma:1;Integrate(1/(sqrt(2*%pi)*sigma)*%e^(-1/2*((y-mu)/sigma)^2),y,minf,1000);"
     '     MsgBox (MaximaInputStreng)
     '    Selection.InsertAfter MaximaInputStreng
-
-    If DebugWM Then
-        '        UserFormDebug.Label_time.Caption = UserFormDebug.Label_time.Caption & "vba tid: " & Timer - tid & vbCrLf
-        '        ShowDebug
+    
+    If WSHmaxima Then
+        RunMaximaWSH StopTime
+        Exit Sub
     End If
 
     If MaxProc Is Nothing Then
-       Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
-       MaxProc.StartMaximaProcess
+        Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
+        MaxProc.StartMaximaProcess
     End If
 
     MaxProc.AntalCifre = MaximaCifre
@@ -257,7 +257,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     Dim UfWait2 As UserFormWaitForMaxima
     Set UfWait2 = New UserFormWaitForMaxima
 
-'    Dim UFStartup As New UserFormWaitStartup  ' slettet 18/2 2017 Hvad skulle den?
+    '    Dim UFStartup As New UserFormWaitStartup  ' slettet 18/2 2017 Hvad skulle den?
     If StopTime < -2 Then    ' ved grafer og enkelte andre nsolve
         '        MsgBox MaximaInputStreng
         MaxProc.ExecuteMaximaCommand MaximaInputStreng, 0
@@ -340,6 +340,26 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 Slut:
+End Sub
+Sub RunMaximaWSH(Optional StopTime As Integer)
+    Dim Moutp As String
+    
+    If Not QActivePartnership Then
+        If MsgBox2("Connecting to Maxima using WSH requires Partnership with Eduap" & vbCrLf & vbCrLf & "Do you want to change the setting to use the default option: api?", vbYesNo, "Error") = vbYes Then
+            WSHmaxima = False
+        End If
+        Exit Sub
+    End If
+    
+    On Error Resume Next
+    Err.Clear
+    Moutp = Application.Run("ExecuteMaximaViaWSH", MaximaInputStreng, 10, False)
+    If Err <> 0 Then
+        FindLastMaximaOutput True, Moutp
+        ShowDebug
+    Else
+        MsgBox2 "Error connecting to Maxima using WSH", vbOKOnly, "Error"
+    End If
 End Sub
 Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) As String
 ' Converts a maxima expression, using the maxima-image with units loaded

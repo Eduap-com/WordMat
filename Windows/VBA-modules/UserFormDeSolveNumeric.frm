@@ -495,8 +495,8 @@ Private Sub UserForm_Activate()
 #If Mac Then
     Me.Left = 0
     Me.Top = 350
-    CommandButton_toExcel.visible = False
-    CommandButton_insertgraph.visible = False
+    Label_toExcel.visible = False
+    Label_insertgraph.visible = False
     CheckBox_pointsjoined.visible = False
     CheckBox_visforklaring.visible = False
     TextBox_ymin.visible = False

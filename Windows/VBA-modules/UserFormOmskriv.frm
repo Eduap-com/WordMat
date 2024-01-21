@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormOmskriv 
    Caption         =   "Omskriv"
-   ClientHeight    =   5590
+   ClientHeight    =   5595
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   10545
+   ClientWidth     =   10845
    OleObjectBlob   =   "UserFormOmskriv.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

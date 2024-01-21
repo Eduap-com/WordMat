@@ -1888,13 +1888,13 @@ End Sub
 Function Get2DVector(Text As String) As String
     Dim ea As New ExpressionAnalyser
 '    Dim c As Collection
-    Dim M As CMatrix
+    Dim m As CMatrix
     ea.Text = Text
     
 '    c = ea.GetAllMatrices()
-    For Each M In ea.GetAllMatrices()
+    For Each m In ea.GetAllMatrices()
         
-        Get2DVector = Get2DVector & "vector(" & M
+        Get2DVector = Get2DVector & "vector(" & m
     Next
     
 End Function

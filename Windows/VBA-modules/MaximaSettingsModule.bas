@@ -1,5 +1,6 @@
 Attribute VB_Name = "MaximaSettingsModule"
 Option Explicit
+
 Public UFMSettings As UserFormMaximaSettings
 Public SettingsRead As Boolean
 Private mforklaring As Boolean
@@ -49,6 +50,7 @@ Private mLatexTOC As Integer
 Private mCASengine As Integer
 Private mLastUpdateCheck As String
 Private mRegAppVersion As String
+Private mWSHmaxima As Boolean
 
 
 Public Sub ReadAllSettingsFromRegistry()
@@ -99,6 +101,7 @@ On Error Resume Next
     mLatexTOC = CInt(GetRegSettingLong("LatexToc"))
     mCASengine = CInt(GetRegSettingLong("CASengine"))
     mLastUpdateCheck = GetRegSettingString("LastUpdateCheck")
+    mWSHmaxima = CBool(GetRegSetting("WSHmaxima"))
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -588,7 +591,16 @@ Public Property Let RegAppVersion(ByVal V As String)
     SetRegSettingString "AppVersion", V
     mRegAppVersion = V
 End Property
+Public Property Get WSHmaxima() As Boolean ' false to use dll to connect to Maxima, true to use WSH
+    WSHmaxima = mWSHmaxima
+End Property
+Public Property Let WSHmaxima(xval As Boolean)
+    SetRegSetting "WSHmaxima", Abs(CInt(xval))
+    mWSHmaxima = xval
+End Property
 
+
+'------------------- registry functions --------------------
 Private Function GetRegSetting(Key As String) As Integer
     GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key)
 End Function
