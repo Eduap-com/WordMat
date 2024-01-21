@@ -11,7 +11,7 @@ Mac/WordMat*.pkg
 # Dont upload temp copies
 Windows/WordMat*- Kopi*.dotm
 
-Windows/WordMatP.dotm
+#Windows/WordMatP.dotm
 
 # Dont upload Backup folders
 /Windows/Backup/
