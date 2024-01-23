@@ -174,11 +174,13 @@ Source: WordMat.dotm; DestDir: {code:VUserStartupFolder15}; Check: VOffice15Inst
 ; Denne er egentlig overtaget af CopyWordMat.vbs script. Har dog oplevet elev, hvor scriptet ikke fungerede fra installeren. Denne skulle gerne sikre at det virker for elever der har adm adgang
 Source: WordMat.dotm; DestDir: {code:VUserStartupFolder162}; Check: VOffice16Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMatP.dotm; DestDir: {code:VUserStartupFolder162}; Check: VOffice16Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: WordMatP2.dotm; DestDir: {code:VUserStartupFolder162}; Check: VOffice16Installed ; tasks: installerbruger; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll12}; Check: VOffice12Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll14}; Check: VOffice14Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll15}; Check: VOffice15Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {code:VStartupFolderAll16}; Check: VOffice16Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMatP.dotm; DestDir: {code:VStartupFolderAll16}; Check: VOffice16Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: WordMatP2.dotm; DestDir: {code:VStartupFolderAll16}; Check: VOffice16Installed ; tasks: installeralle; Flags: ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {app}; tasks: installeralle installerbruger; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMatP.dotm; DestDir: {app}; tasks: installeralle installerbruger; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 ;Source: Other\WordMatLommeregner.docm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
@@ -443,10 +445,13 @@ Type: files; Name: "{code:VUserStartupFolder16}\WordMat.dotm"
 Type: files; Name: "{code:VUserStartupFolder161}\WordMat.dotm"
 Type: files; Name: "{code:VUserStartupFolder162}\WordMat.dotm"
 Type: files; Name: "{code:VUserStartupFolder162}\WordMatP.dotm"
+Type: files; Name: "{code:VUserStartupFolder162}\WordMatP2.dotm"
 Type: files; Name: "{code:VStartupFolderAll12}\WordMat.dotm" 
 Type: files; Name: "{code:VStartupFolderAll14}\WordMat.dotm" 
 Type: files; Name: "{code:VStartupFolderAll15}\WordMat.dotm" 
 Type: files; Name: "{code:VStartupFolderAll16}\WordMat.dotm" 
+Type: files; Name: "{code:VStartupFolderAll16}\WordMatP.dotm" 
+Type: files; Name: "{code:VStartupFolderAll16}\WordMatP2.dotm" 
 Type: filesandordirs; Name: "{%appdata}\WordMat" 
 Type: filesandordirs; Name: "{app}\WebViewWrap"
 Type: filesandordirs; Name: "{app}\geogebra-math-apps"

@@ -194,8 +194,8 @@ SA(19, 3) = ""
 SA(19, 2) = "Inserte referencia con 2 x Alt+m"
 SA(19, 5) = ""
 
-SA(20, 0) = AppNavn & " er lavet af Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2024." & VbCrLfMac & VbCrLfMac & "Programmet er gratis og stilles til rådighed under Gnu General public license." & VbCrLfMac & VbCrLfMac & "Med WordMat er følgende andre gratis programmer installeret: Maxima, GnuPlot, GeoGebra, Graph " & VbCrLfMac & VbCrLfMac & "www.eduap.com"
-SA(20, 1) = AppNavn & " was made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2024." & VbCrLfMac & VbCrLfMac & "The program is free and open source under Gnu General public license." & VbCrLfMac & VbCrLfMac & "WordMat uses the following programs: Maxima, GnuPlot, GeoGebra, Graph " & VbCrLfMac & VbCrLfMac & "www.eduap.com"
+SA(20, 0) = "WordMat gør det muligt at foretage matematiske beregninger i Word. WordMat er open source og stilles gratis til rådighed." & VbCrLfMac & "Med WordMat er følgende andre programmer installeret:" & VbCrLfMac & "Maxima, GnuPlot, GeoGebra, Graph, WordMat+" & VbCrLfMac & VbCrLfMac & "WordMat er lavet af Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2024."
+SA(20, 1) = "WordMath makes it possible to do math calculations in Word. WordMath is open source and free" & VbCrLfMac & "WordMat also installs the following programs: Maxima, GnuPlot, GeoGebra, Graph, WordMath+ " & VbCrLfMac & VbCrLfMac & "WordMath was made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2024."
 SA(20, 4) = ""
 SA(20, 3) = ""
 SA(20, 2) = ""
@@ -5462,10 +5462,10 @@ End Property
 Public Property Get Language() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Sprog (beta)"
-Case 3: s = "Lenguaje (beta)"
+Case 1: s = "Sprog"
+Case 3: s = "Lenguaje"
 Case 4: s = ""
-Case Else: s = "Language (beta)"
+Case Else: s = "Language"
 End Select
 Language = s
 End Property

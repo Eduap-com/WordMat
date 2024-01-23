@@ -79,6 +79,8 @@ On Error GoTo Fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
+If Selection.Range.OMaths.Count > 0 Or Selection.Tables(1).Range.OMaths.Count > 1 Then PrepareMaxima
+
 If Selection.Range.start < Selection.Tables(1).Range.start Then
    Selection.start = Selection.Tables(1).Range.start
 End If
@@ -136,7 +138,7 @@ End If
     For j = 1 To n
         i = i + 1
         If rws(j).Cells(1 + oFS).Range.OMaths.Count > 0 Then
-            PrepareMaxima
+'            PrepareMaxima
             rws(j).Cells(1 + oFS).Range.Select
             omax.ReadSelection
             omax.beregn
@@ -147,11 +149,12 @@ End If
         End If
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Replace(cellval, "*10^", "E")
+        If Not IsNumeric(cellval) Then GoTo NotNumber
         xval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", "")) ' skal med for at melde fejl , men alene duer ikke da den er afh af sprog indstill. De to replace fjerner . og , da disse ikke genkendes af alle sprog fx norsk bruger ikke . så alle tal med . ville blive ignoreret
-        xval(i) = val(cellval) 'melder ikke fejl ved bogstaver
+        xval(i) = val(Replace(cellval, ",", ".")) 'melder ikke fejl ved bogstaver
         
         If rws(j).Cells(2 + oFS).Range.OMaths.Count > 0 Then
-            PrepareMaxima
+'            PrepareMaxima
             rws(j).Cells(2 + oFS).Range.Select
             omax.ReadSelection
             omax.beregn
@@ -163,9 +166,11 @@ End If
 
 '        cellval = tabel.Cell(j, 2).Range.text
         cellval = Replace(cellval, "*10^", "E")
+        If Not IsNumeric(cellval) Then GoTo NotNumber
         yval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
-        yval(i) = val(cellval)
+        yval(i) = val(Replace(cellval, ",", "."))
         If Err.Number > 0 Then ' hvis enten x -eller y-værdien ikke er et tal (fejl fra cdbl) så skal linjen ignoreres
+NotNumber:
            i = i - 1
             Err.Clear
         End If

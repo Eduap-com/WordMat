@@ -959,7 +959,7 @@ Sub Rib_wasolve(control As IRibbonControl)
 End Sub
 'Callback for ButtonOm onAction
 Sub Rib_om(control As IRibbonControl)
-    OmMathMenu
+    UserFormAbout.Show
 End Sub
 'Callback for ButtonHelp onAction
 Sub Rib_Help(control As IRibbonControl)

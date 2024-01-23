@@ -273,7 +273,7 @@ Sub InsertGraphOleObject()
 Dim path As String
 Dim ils As InlineShape
 Dim Arr As Variant
-Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim ea As New ExpressionAnalyser
 Dim p As Integer
     Dim sslut As Long
@@ -333,19 +333,19 @@ Dim i As Integer
     
     ' funktioner der markeres
     For i = 0 To omax.KommandoArrayLength
-        udtryk = omax.KommandoArray(i)
-        udtryk = Replace(udtryk, "definer:", "")
-        udtryk = Replace(udtryk, "Definer:", "")
-        udtryk = Replace(udtryk, "define:", "")
-        udtryk = Replace(udtryk, "Define:", "")
-        udtryk = Trim(udtryk)
-        udtryk = Replace(udtryk, VBA.ChrW(8788), "=") ' :=
-        udtryk = Replace(udtryk, VBA.ChrW(8797), "=") ' tripel =
-        udtryk = Replace(udtryk, VBA.ChrW(8801), "=") ' def =
-        If Len(udtryk) > 0 Then
-            If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
-                If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
+        Udtryk = omax.KommandoArray(i)
+        Udtryk = Replace(Udtryk, "definer:", "")
+        Udtryk = Replace(Udtryk, "Definer:", "")
+        Udtryk = Replace(Udtryk, "define:", "")
+        Udtryk = Replace(Udtryk, "Define:", "")
+        Udtryk = Trim(Udtryk)
+        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
+        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
+        If Len(Udtryk) > 0 Then
+            If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+                If InStr(Udtryk, "=") > 0 Then
+                    Arr = Split(Udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
                     ea.Text = lhs
@@ -359,20 +359,20 @@ Dim i As Integer
                         DefinerKonstanterGraph fktudtryk, DefList, graphfil
                         graphfil.InsertFunction fktudtryk
                     Else
-                        DefinerKonstanterGraph udtryk, DefList, graphfil, True
-                        graphfil.InsertRelation udtryk
+                        DefinerKonstanterGraph Udtryk, DefList, graphfil, True
+                        graphfil.InsertRelation Udtryk
                         ' blev brugt før relation
 '                        fktudtryk = ReplaceIndepvarX(rhs)
 '                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
 '                        graphfil.InsertFunction fktudtryk
                     End If
-                ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
-                    DefinerKonstanterGraph udtryk, DefList, graphfil, True
-                    graphfil.InsertRelation udtryk
+                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
+                    DefinerKonstanterGraph Udtryk, DefList, graphfil, True
+                    graphfil.InsertRelation Udtryk
                 Else
-                    udtryk = ReplaceIndepvarX(udtryk)
-                    DefinerKonstanterGraph udtryk, DefList, graphfil
-                    graphfil.InsertFunction udtryk
+                    Udtryk = ReplaceIndepvarX(Udtryk)
+                    DefinerKonstanterGraph Udtryk, DefList, graphfil
+                    graphfil.InsertFunction Udtryk
                End If
             End If
         End If
@@ -488,7 +488,7 @@ Dim ws As Object
 Dim xlap As Object 'Excel.Application
 Dim xmin As Double, xmax As Double
 Dim i As Integer
-Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String
+Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String
 Dim Arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
@@ -542,22 +542,22 @@ End If
 
     ' funktioner der markeres
     For i = 0 To dd.AntalMathBoxes - 1
-        udtryk = dd.MathBoxes(i)
-        udtryk = Replace(udtryk, "definer:", "")
-        udtryk = Replace(udtryk, "Definer:", "")
-        udtryk = Replace(udtryk, "define:", "")
-        udtryk = Replace(udtryk, "Define:", "")
-        udtryk = Trim(udtryk)
-        udtryk = Replace(udtryk, VBA.ChrW(8788), "=") ' :=
-        udtryk = Replace(udtryk, VBA.ChrW(8797), "=") ' tripel =
-        udtryk = Replace(udtryk, VBA.ChrW(8801), "=") ' def =
-        udtryk = Replace(udtryk, vbCrLf, "") '
-        udtryk = Replace(udtryk, vbCr, "") '
-        udtryk = Replace(udtryk, vbLf, "") '
-        If Len(udtryk) > 0 Then
-            If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
-                If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
+        Udtryk = dd.MathBoxes(i)
+        Udtryk = Replace(Udtryk, "definer:", "")
+        Udtryk = Replace(Udtryk, "Definer:", "")
+        Udtryk = Replace(Udtryk, "define:", "")
+        Udtryk = Replace(Udtryk, "Define:", "")
+        Udtryk = Trim(Udtryk)
+        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
+        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
+        Udtryk = Replace(Udtryk, vbCrLf, "") '
+        Udtryk = Replace(Udtryk, vbCr, "") '
+        Udtryk = Replace(Udtryk, vbLf, "") '
+        If Len(Udtryk) > 0 Then
+            If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+                If InStr(Udtryk, "=") > 0 Then
+                    Arr = Split(Udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
                     ea.Text = lhs
@@ -576,11 +576,11 @@ End If
 '                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
 '                        graphfil.InsertFunction fktudtryk
                     End If
-                ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
+                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
                 Else
-                    udtryk = ReplaceIndepvarX(udtryk)
+                    Udtryk = ReplaceIndepvarX(Udtryk)
 '                    DefinerKonstanterGraph udtryk, deflist, graphfil
-                    ws.Range("b4").Offset(0, i).Value = udtryk
+                    ws.Range("b4").Offset(0, i).Value = Udtryk
                     ws.Range("B1").Offset(0, i).Value = "x"
                End If
             End If
@@ -660,7 +660,7 @@ Sub InsertChartG()
 'Dim ws As Worksheet
 Dim WB As Object 'Workbook
 Dim ws As Object
-Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim dd As New DocData
 Dim i As Integer
 Dim Arr As Variant
@@ -712,19 +712,19 @@ End If
 
     ' funktioner der markeres
     For i = 0 To omax.KommandoArrayLength
-        udtryk = omax.KommandoArray(i)
-        udtryk = Replace(udtryk, "definer:", "")
-        udtryk = Replace(udtryk, "Definer:", "")
-        udtryk = Replace(udtryk, "define:", "")
-        udtryk = Replace(udtryk, "Define:", "")
-        udtryk = Trim(udtryk)
-        udtryk = Replace(udtryk, VBA.ChrW(8788), "=") ' :=
-        udtryk = Replace(udtryk, VBA.ChrW(8797), "=") ' tripel =
-        udtryk = Replace(udtryk, VBA.ChrW(8801), "=") ' def =
-        If Len(udtryk) > 0 Then
-            If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
-                If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
+        Udtryk = omax.KommandoArray(i)
+        Udtryk = Replace(Udtryk, "definer:", "")
+        Udtryk = Replace(Udtryk, "Definer:", "")
+        Udtryk = Replace(Udtryk, "define:", "")
+        Udtryk = Replace(Udtryk, "Define:", "")
+        Udtryk = Trim(Udtryk)
+        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
+        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
+        If Len(Udtryk) > 0 Then
+            If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+                If InStr(Udtryk, "=") > 0 Then
+                    Arr = Split(Udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
                     ea.Text = lhs
@@ -740,18 +740,18 @@ End If
                         ws.Range("B1").Offset(0, i).Value = varnavn
                     Else
 '                        DefinerKonstanterGraph udtryk, deflist, graphfil, True
-                        ws.Range("b4").Offset(0, i).Value = udtryk
+                        ws.Range("b4").Offset(0, i).Value = Udtryk
                         ws.Range("B1").Offset(0, i).Value = "x"
                         ' blev brugt før relation
 '                        fktudtryk = ReplaceIndepvarX(rhs)
 '                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
 '                        graphfil.InsertFunction fktudtryk
                     End If
-                ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
+                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
                 Else
-                    udtryk = ReplaceIndepvarX(udtryk)
+                    Udtryk = ReplaceIndepvarX(Udtryk)
 '                    DefinerKonstanterGraph udtryk, deflist, graphfil
-                    ws.Range("b4").Offset(0, i).Value = udtryk
+                    ws.Range("b4").Offset(0, i).Value = Udtryk
                     ws.Range("B1").Offset(0, i).Value = "x"
                End If
             End If

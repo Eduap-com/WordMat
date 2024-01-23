@@ -7,21 +7,21 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+Option Explicit
 #If Mac Then
-Private Declare PtrSafe Function StartMaxima Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" () As LongPtr
-Private Declare PtrSafe Function CloseMaxima Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" () As LongPtr
-Private Declare PtrSafe Function SetMaximaPath Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal maximapath As String) As LongPtr
-Private Declare PtrSafe Function IsMaximaRunning Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" () As LongPtr
-Private Declare PtrSafe Function SendToMaxima Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal s As String) As LongPtr
-'Private Declare PtrSafe Function SendToMaximaWait Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal s As String, ByVal outstring As String, ByVal waittime As LongPtr) As LongPtr
-Private Declare PtrSafe Function ReadOutputIfAny Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal outstring As String) As LongPtr
+'Private Declare PtrSafe Function StartMaxima Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" () As LongPtr
+'Private Declare PtrSafe Function CloseMaxima Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" () As LongPtr
+'Private Declare PtrSafe Function SetMaximaPath Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal maximapath As String) As LongPtr
+'Private Declare PtrSafe Function IsMaximaRunning Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" () As LongPtr
+'Private Declare PtrSafe Function SendToMaxima Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal s As String) As LongPtr
+''Private Declare PtrSafe Function SendToMaximaWait Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal s As String, ByVal outstring As String, ByVal waittime As LongPtr) As LongPtr
+'Private Declare PtrSafe Function ReadOutputIfAny Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal outstring As String) As LongPtr
 
 'Private Declare PtrSafe Function InString Lib "Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal startpos As Integer, ByVal searchstring As String, ByVal findstring As String) As LongPtr
 'Private Declare PtrSafe Function CountInString Lib "Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal startpos As Integer, ByVal searchstring As String, ByVal findstring As String) As Integer
 Private Declare PtrSafe Function system Lib "/usr/lib/libc.dylib" (ByVal Command As String) As Long
 Private Declare PtrSafe Function Sleep Lib "/usr/lib/libc.dylib" Alias "sleep" (ByVal seconds As Long) As Long
 Private Declare PtrSafe Function uSleep Lib "/usr/lib/libc.dylib" Alias "usleep" (ByVal useconds As Long) As Long
-
 
 Private mUnits As Integer
 Private mExact As Integer

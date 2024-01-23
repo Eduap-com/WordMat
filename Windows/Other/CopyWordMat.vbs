@@ -10,17 +10,20 @@ Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objShell = CreateObject( "WScript.Shell" )
 
 ' Define the source file and the top level folder
-Dim sourceFile, topLevelFolder
+Dim sourceFile, topLevelFolder, sourceFolder
 topLevelFolder = objShell.ExpandEnvironmentStrings("%APPDATA%") & "\Microsoft\Word"
 sourceFile = "C:\Program Files (x86)\WordMat\WordMat.dotm"
+sourceFolder = "C:\Program Files (x86)\WordMat\"
 if Not objFSO.FileExists(sourceFile) Then
 	sourceFile = objShell.ExpandEnvironmentStrings("%APPDATA%") & "\WordMat\WordMat.dotm"
+	sourceFolder = objShell.ExpandEnvironmentStrings("%APPDATA%") & "\WordMat\"
 End If
 if Not objFSO.FileExists(sourceFile) Then
 	MsgBox "WordMat.dotm could not be found"
 	Wscript.Quit
 End If
 
+' Create the STARTUP and START folders if they don't exist
 if Not objFSO.FolderExists(topLevelFolder & "\STARTUP") Then
 	objFSO.CreateFolder(topLevelFolder & "\STARTUP")
 End If
@@ -31,9 +34,11 @@ End If
 
 Set objFolder = objFSO.GetFolder(topLevelFolder)
 
+on error resume next
     For Each objSubFolder in objFolder.Subfolders
 		objFSO.CopyFile sourceFile, objSubFolder.Path & "\WordMat.dotm", TRUE
-		objFSO.CopyFile sourceFile, objSubFolder.Path & "\WordMatP.dotm", TRUE
+		objFSO.CopyFile sourceFolder & "WordMatP.dotm", objSubFolder.Path & "\WordMatP.dotm", TRUE
+		objFSO.CopyFile sourceFolder & "WordMatP2.dotm", objSubFolder.Path & "\WordMatP.dotm", TRUE
     Next
 
 set objFSO = Nothing

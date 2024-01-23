@@ -28,6 +28,17 @@ Fejl:
     QActivePartnership = False
 Slut:
 End Function
+Function SkoleNavn() As String
+    On Error GoTo Fejl
+    SkoleNavn = Application.Run("PSkoleNavn")
+    
+    GoTo Slut
+Fejl:
+    SkoleNavn = vbNullString
+Slut:
+
+End Function
+
 Sub Test67()
 On Error Resume Next
     Application.Run "TestWordMatP2"

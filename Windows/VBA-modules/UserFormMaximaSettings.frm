@@ -328,6 +328,9 @@ Private Sub CommandButton_sletenheder_Click()
     TextBox_outunits.Text = ""
 End Sub
 
+Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+End Sub
 Private Sub Label4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
@@ -344,9 +347,6 @@ Private Sub Label8_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, By
     SetTabsInactive
 End Sub
 Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
-    SetTabsInactive
-End Sub
-Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
 

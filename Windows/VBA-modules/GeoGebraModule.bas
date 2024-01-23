@@ -24,7 +24,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Dim Var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
     Dim Arr As Variant, uvar As String
-    Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
 
     Dim ea As New ExpressionAnalyser
@@ -87,21 +87,21 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     j = 1
     ' indsæt de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
-        udtryk = omax.KommandoArray(i)
-        udtryk = Replace(udtryk, "definer:", "")
-        udtryk = Replace(udtryk, "Definer:", "")
-        udtryk = Replace(udtryk, "define:", "")
-        udtryk = Replace(udtryk, "Define:", "")
-        udtryk = Replace(udtryk, VBA.ChrW(8788), "=") ' :=
-        udtryk = Replace(udtryk, VBA.ChrW(8797), "=") ' tripel =
-        udtryk = Replace(udtryk, VBA.ChrW(8801), "=") ' def =
-        udtryk = Trim(udtryk)
-        udtryk = ConvertToGeogebraSyntax(udtryk)
+        Udtryk = omax.KommandoArray(i)
+        Udtryk = Replace(Udtryk, "definer:", "")
+        Udtryk = Replace(Udtryk, "Definer:", "")
+        Udtryk = Replace(Udtryk, "define:", "")
+        Udtryk = Replace(Udtryk, "Define:", "")
+        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
+        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
+        Udtryk = Trim(Udtryk)
+        Udtryk = ConvertToGeogebraSyntax(Udtryk)
         If Gtype <> "CAS" Then
-            If Len(udtryk) > 0 Then
-                If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
-                    If InStr(udtryk, "=") > 0 Then
-                        Arr = Split(udtryk, "=")
+            If Len(Udtryk) > 0 Then
+                If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+                    If InStr(Udtryk, "=") > 0 Then
+                        Arr = Split(Udtryk, "=")
                         lhs = Arr(0)
                         rhs = Arr(1)
                         ea.Text = lhs
@@ -134,16 +134,16 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                             UrlLink = UrlLink & cmd
                             j = j + 1
                         End If
-                    ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
-                        DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                        cmd = "u" & j & "=" & udtryk
+                    ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
+                        DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
+                        cmd = "u" & j & "=" & Udtryk
                         cmd = Replace(cmd, "+", "%2B") & ";"
                         UrlLink = UrlLink & cmd
                         '                    geogebrafil.CreateFunction "u" & j, udtryk, True
                     Else
-                        udtryk = ReplaceIndepvarX(udtryk)
-                        DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                        cmd = "f" & j & "=" & udtryk
+                        Udtryk = ReplaceIndepvarX(Udtryk)
+                        DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
+                        cmd = "f" & j & "=" & Udtryk
                         cmd = Replace(cmd, "+", "%2B") & ";"
                         UrlLink = UrlLink & cmd
 
@@ -154,9 +154,9 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
             End If
         Else 'CAS
             If CASfunc <> "" Then
-                udtryk = CASfunc & "(" & udtryk & ")"
+                Udtryk = CASfunc & "(" & Udtryk & ")"
             End If
-            cmd = Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ";"
+            cmd = Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ";"
             UrlLink = UrlLink & cmd
         End If
     Next
@@ -980,7 +980,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
     Dim i As Integer, j As Integer
     Dim Arr As Variant
-    Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     On Error GoTo Fejl
@@ -1042,19 +1042,19 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     j = 1
     ' indsæt de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
-        udtryk = omax.KommandoArray(i)
-        udtryk = Replace(udtryk, "definer:", "")
-        udtryk = Replace(udtryk, "Definer:", "")
-        udtryk = Replace(udtryk, "define:", "")
-        udtryk = Replace(udtryk, "Define:", "")
-        udtryk = Replace(udtryk, VBA.ChrW(8788), "=") ' :=
-        udtryk = Replace(udtryk, VBA.ChrW(8797), "=") ' tripel =
-        udtryk = Replace(udtryk, VBA.ChrW(8801), "=") ' def =
-        udtryk = Trim(udtryk)
-        If Len(udtryk) > 0 Then
-            If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
-                If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
+        Udtryk = omax.KommandoArray(i)
+        Udtryk = Replace(Udtryk, "definer:", "")
+        Udtryk = Replace(Udtryk, "Definer:", "")
+        Udtryk = Replace(Udtryk, "define:", "")
+        Udtryk = Replace(Udtryk, "Define:", "")
+        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
+        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
+        Udtryk = Trim(Udtryk)
+        If Len(Udtryk) > 0 Then
+            If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+                If InStr(Udtryk, "=") > 0 Then
+                    Arr = Split(Udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
                     ea.Text = lhs
@@ -1074,14 +1074,14 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                         geogebrafil.CreateFunction "f" & j, fktudtryk, False
                         j = j + 1
                     End If
-                ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
+                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
                 ' kan først bruges med GeoGebra 4.0
-                    DefinerKonstanter udtryk, DefList, geogebrafil
-                    geogebrafil.CreateFunction "u" & j, udtryk, True
+                    DefinerKonstanter Udtryk, DefList, geogebrafil
+                    geogebrafil.CreateFunction "u" & j, Udtryk, True
                 Else
-                    udtryk = ReplaceIndepvarX(udtryk)
-                    DefinerKonstanter udtryk, DefList, geogebrafil
-                    geogebrafil.CreateFunction "f" & j, udtryk, False
+                    Udtryk = ReplaceIndepvarX(Udtryk)
+                    DefinerKonstanter Udtryk, DefList, geogebrafil
+                    geogebrafil.CreateFunction "f" & j, Udtryk, False
                     j = j + 1
                 End If
             End If

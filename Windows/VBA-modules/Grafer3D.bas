@@ -2,7 +2,7 @@ Attribute VB_Name = "Grafer3D"
 Option Explicit
 Sub OmdrejningsLegeme()
 Dim Kommando As String
-    Dim fktnavn As String, udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
 Dim Arr As Variant
 Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim DefList As String
@@ -32,19 +32,19 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     
         ' indsæt de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
-        udtryk = omax.KommandoArray(i)
-        udtryk = Replace(udtryk, "definer:", "")
-        udtryk = Replace(udtryk, "Definer:", "")
-        udtryk = Replace(udtryk, "define:", "")
-        udtryk = Replace(udtryk, "Define:", "")
-        udtryk = Replace(udtryk, VBA.ChrW(8788), "=") ' :=
-        udtryk = Replace(udtryk, VBA.ChrW(8797), "=") ' tripel =
-        udtryk = Replace(udtryk, VBA.ChrW(8801), "=") ' def =
-        udtryk = Trim(udtryk)
-        If Len(udtryk) > 0 Then
-            If InStr(udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
-                If InStr(udtryk, "=") > 0 Then
-                    Arr = Split(udtryk, "=")
+        Udtryk = omax.KommandoArray(i)
+        Udtryk = Replace(Udtryk, "definer:", "")
+        Udtryk = Replace(Udtryk, "Definer:", "")
+        Udtryk = Replace(Udtryk, "define:", "")
+        Udtryk = Replace(Udtryk, "Define:", "")
+        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
+        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
+        Udtryk = Trim(Udtryk)
+        If Len(Udtryk) > 0 Then
+            If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+                If InStr(Udtryk, "=") > 0 Then
+                    Arr = Split(Udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
                     ea.Text = lhs
@@ -68,26 +68,26 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                         UrlLink = UrlLink & cmd
                         j = j + 1
                     End If
-                ElseIf InStr(udtryk, ">") > 0 Or InStr(udtryk, "<") > 0 Or InStr(udtryk, VBA.ChrW(8804)) > 0 Or InStr(udtryk, VBA.ChrW(8805)) > 0 Then
+                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
                 ' kan først bruges med GeoGebra 4.0
-                    DefinerKonstanter udtryk, DefList, Nothing, UrlLink
+                    DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
                     cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
-                    cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
+                    cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
                     UrlLink = UrlLink & cmd
 '                    geogebrafil.CreateFunction "u" & j, udtryk, True
                 Else
-                    udtryk = ReplaceIndepvarX(udtryk)
-                    udtryk = Replace(udtryk, vbCrLf, "")
-                    udtryk = Replace(udtryk, vbCr, "")
-                    udtryk = Replace(udtryk, vbLf, "")
-                    DefinerKonstanter udtryk, DefList, Nothing, UrlLink
-                    If Trim(udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
-                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2" & ";"
+                    Udtryk = ReplaceIndepvarX(Udtryk)
+                    Udtryk = Replace(Udtryk, vbCrLf, "")
+                    Udtryk = Replace(Udtryk, vbCr, "")
+                    Udtryk = Replace(Udtryk, vbLf, "")
+                    DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
+                    If Trim(Udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
+                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & cmd
                     Else
-                        cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2)" & ";"
+                        cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
                         UrlLink = UrlLink & cmd
-                        cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(udtryk), "+", "%2B") & ")^2-y^2)" & ";"
+                        cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
                         UrlLink = UrlLink & cmd
                     End If
 

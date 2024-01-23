@@ -1,15 +1,6 @@
 Attribute VB_Name = "MenuFunktioner"
 Option Explicit
 
-Sub OmMathMenu()
-    Dim V As String
-    V = AppVersion
-    If PatchVersion <> "" Then
-        V = V & PatchVersion
-    End If
-    MsgBox Sprog.A(20), vbOKOnly, AppNavn & " version " & V
-End Sub
-
 Sub indsaetformel()
     On Error GoTo Fejl
 '    MsgBox CommandBars.ActionControl.Caption

@@ -14,7 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Public udtryk As String
+Public Udtryk As String
 Public dispudtryk As String
 Public vars As String
 Public SelectedVar As String
@@ -123,9 +123,9 @@ On Error GoTo Fejl
     If TextBox_xmin.Text = "" Then TextBox_xmin = -5
     If TextBox_xmax.Text = "" Then TextBox_xmax = 5
     
-    udtryk = Replace(udtryk, "=", ";")
+    Udtryk = Replace(Udtryk, "=", ";")
 '    Me.Hide
-    Call omax.Plot2D(udtryk, "", TextBox_variabel.Text, Replace(TextBox_xmin.Text, ",", "."), Replace(TextBox_xmax.Text, ",", "."), "", "", "", "")
+    Call omax.Plot2D(Udtryk, "", TextBox_variabel.Text, Replace(TextBox_xmin.Text, ",", "."), Replace(TextBox_xmax.Text, ",", "."), "", "", "", "")
        
     omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
     DoEvents
@@ -299,7 +299,7 @@ Dim Arr As Variant
 '    End If
     Call omax.Draw2D(Text, "", TextBox_variabel.Text, "y", True, True, 3)
 #Else
-    Call omax.Plot2D(udtryk, "", TextBox_variabel.Text, Replace(TextBox_xmin.Text, ",", "."), Replace(TextBox_xmax.Text, ",", "."), "", "", "", "", True)
+    Call omax.Plot2D(Udtryk, "", TextBox_variabel.Text, Replace(TextBox_xmin.Text, ",", "."), Replace(TextBox_xmax.Text, ",", "."), "", "", "", "", True)
 #End If
     
     TextBox_guess.Text = (CSng(TextBox_xmax.Text) + CSng(TextBox_xmin.Text)) / 2
@@ -354,7 +354,7 @@ On Error GoTo Fejl
     TextBox_guess.Text = "1"
     TextBox_xmin.Text = "-5"
     TextBox_xmax.Text = "5"
-    Label_ligning.Caption = omax.ConvertToAscii(udtryk)
+    Label_ligning.Caption = omax.ConvertToAscii(Udtryk)
     Arr = Split(vars, ";")
     Set gemr = Selection.Range
     gemstartr = Selection.Range.start
@@ -380,7 +380,7 @@ On Error GoTo Fejl
 '    End If
     omax.PrepareNewCommand ' nulstiller og finder definitioner
         
-    udtryk = Replace(udtryk, "=", ";")
+    Udtryk = Replace(Udtryk, "=", ";")
 '    Me.Hide
 
     OpdaterGraf

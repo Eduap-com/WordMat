@@ -218,7 +218,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     Dim i As Integer
         
 #If Mac Then
-    RunMaximaFile
+    RunMaximaFile StopTime, ConvertWordSymbols
     Exit Sub
 #Else
 #End If
@@ -342,7 +342,7 @@ Fejl:
 Slut:
 End Sub
 Sub RunMaximaWSH(Optional StopTime As Integer)
-    Dim Moutp As String
+    Dim Moutp As String, cmd As String
     
     If Not QActivePartnership Then
         If MsgBox2("Connecting to Maxima using WSH requires Partnership with Eduap" & vbCrLf & vbCrLf & "Do you want to change the setting to use the default option: api?", vbYesNo, "Error") = vbYes Then
@@ -353,8 +353,14 @@ Sub RunMaximaWSH(Optional StopTime As Integer)
     
     On Error Resume Next
     Err.Clear
-    Moutp = Application.Run("ExecuteMaximaViaWSH", MaximaInputStreng, 10, False)
-    If Err <> 0 Then
+    
+    cmd = GetMaximaSettingsString & MaximaInputStreng
+    If MaximaUnits Then
+        Moutp = Application.Run("ExecuteMaximaViaWSH", cmd, 10, True)
+    Else
+        Moutp = Application.Run("ExecuteMaximaViaWSH", cmd, 10, False)
+    End If
+    If Err = 0 Then
         FindLastMaximaOutput True, Moutp
         ShowDebug
     Else
@@ -588,7 +594,7 @@ start:
     UfWait2.Label_tip.Caption = GetRandomTip
     DoEvents
   FN = DataFolder & "output.txt"
-    s = ExecuteMaximaViaFile(MaximaInputStreng, WT, MaximaUnits)
+    s = ExecuteMaximaViaFile(GetMaximaSettingsString & MaximaInputStreng, WT, MaximaUnits)
     If Left(s, 5) = "Fejln" Then
         WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.", "Afbrudt", 20)
         If Trim(WT) <> "" Then
@@ -2615,7 +2621,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     Dim sluts As String
     Dim app As String
     Dim F As String
-    Dim udtryk As String
+    Dim Udtryk As String
     Dim i As Integer, j As Integer
     Dim c As String
     Dim poss As Integer
@@ -3516,9 +3522,9 @@ videre:
 
             If ea.ChrByIndex(Pos - 1) = ")" Then    ' hvis (...)'(x)
                 ' find startparantes?
-                udtryk = ea.GetPrevBracketContent(Pos)
+                Udtryk = ea.GetPrevBracketContent(Pos)
                 If ea.ChrByIndex(ea.Pos - 2) = "_" Then    '  f_(...)'(x)
-                    F = ea.GetPrevVar(ea.Pos - 1) & "(" & udtryk & ")"
+                    F = ea.GetPrevVar(ea.Pos - 1) & "(" & Udtryk & ")"
                     GoTo msat
                     '                MsgBox "Der er sænket skrift som ikke kan fortolkes", vbOKOnly, "Fejl"
                     '                GoTo fejl
@@ -3527,7 +3533,7 @@ videre:
                     Text = Left(Text, ea.Pos - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
                     di = di + 1
                 Else    ' (x^2)'
-                    Text = Left(ea.Text, ea.Pos - 2) & "diff(" & udtryk & "," & Var & "," & antalmS & ")" & right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
+                    Text = Left(ea.Text, ea.Pos - 2) & "diff(" & Udtryk & "," & Var & "," & antalmS & ")" & right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
                 End If
             ElseIf ea.ChrByIndex(Pos - 2 - Len(subt)) = ")" And Len(subt) > 0 And Len(subt) = antalm Then ' partiel (...)_xy''
                   s = ea.GetPrevBracketContent(Pos - 2)
@@ -4173,7 +4179,7 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
     
     Dim num As String, dem As String, vararr(9) As String, varind As Integer, antalm2 As Integer
     Dim udtryk1 As String, udtryk2 As String, Pos As Integer, pos3 As Integer, antalm As Integer
-    Dim pos2 As Integer, Var As String, i As Integer, udtryk As String, posstart As Integer, posslut As Integer
+    Dim pos2 As Integer, Var As String, i As Integer, Udtryk As String, posstart As Integer, posslut As Integer
     Dim ea As New ExpressionAnalyser
     ea.SetNormalBrackets
     Do
@@ -4222,21 +4228,21 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
                 udtryk2 = udtryk2 & "," & vararr(i) & ",1)"
             Next
             If Len(num) > 1 And Mid(num, 2, 1) <> "^" Then ' dy/dx eller df(x)/dx
-                udtryk = right(num, Len(num) - 1)
-                If Left(udtryk, 1) = "^" Then
-                    udtryk = right(udtryk, Len(udtryk) - 1)
+                Udtryk = right(num, Len(num) - 1)
+                If Left(Udtryk, 1) = "^" Then
+                    Udtryk = right(Udtryk, Len(Udtryk) - 1)
                 End If
-                Text = Left(Text, Pos - 2) & udtryk1 & udtryk & udtryk2 & right(Text, Len(Text) - pos3 + 1)
+                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & right(Text, Len(Text) - pos3 + 1)
             ElseIf Mid(Text, pos3 + 1, 1) = "(" Then ' parentes lige efter d/dx operator
-                udtryk = ea.GetNextBracketContent(pos3)
-                Text = Left(Text, Pos - 2) & udtryk1 & udtryk & udtryk2 & right(Text, Len(Text) - ea.Pos + 1)
+                Udtryk = ea.GetNextBracketContent(pos3)
+                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & right(Text, Len(Text) - ea.Pos + 1)
                 ' Her mangler notation for df(x)/dx
             Else ' ingen parentes efter d/dx operator så udtrykket må findes via hieraki
                 posstart = pos3
                 ea.Pos = pos3 + 1
                 posslut = ea.FindHierakiBreak(2)
-                udtryk = Trim(Mid(Text, pos3, posslut - posstart + 1))
-                Text = Left(Text, Pos - 2) & udtryk1 & udtryk & udtryk2 & right(Text, Len(Text) - posslut)
+                Udtryk = Trim(Mid(Text, pos3, posslut - posstart + 1))
+                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & right(Text, Len(Text) - posslut)
             End If
             '        var = Mid(text, pos + 3, 1)
             '            If di = 8 Then
@@ -4424,7 +4430,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Dim gtegn As String
     Dim ea As New ExpressionAnalyser
     Dim Pos As Long, pos2 As Long
-    Dim udtryk As String
+    Dim Udtryk As String
     Dim possep As Long
     Dim Arr As Variant
     Dim mtext As String
@@ -4581,9 +4587,9 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
             If Pos > 1 And ea.IsLetterPos(Pos - 1, False) Then
                 ea.Pos = Pos
                 ea.SetSquareBrackets
-                udtryk = ea.GetNextBracketContent(Pos)
+                Udtryk = ea.GetNextBracketContent(Pos)
                 '       if ea.ChrByIndex(ea.pos)=
-                ea.Text = Left(ea.Text, Pos - 1) & "_(" & udtryk & ")" & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+                ea.Text = Left(ea.Text, Pos - 1) & "_(" & Udtryk & ")" & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
 
             End If
         Loop While Pos > 1
@@ -4654,10 +4660,10 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         Pos = InStr(Text, "nroot(")
         If Pos > 0 Then
             ea.Text = Text
-            udtryk = ea.GetNextBracketContent(Pos + 4)
+            Udtryk = ea.GetNextBracketContent(Pos + 4)
             pos2 = ea.Pos
 '            Arr = Split(udtryk, ";")
-            ea.Text = udtryk
+            ea.Text = Udtryk
             ea.SplitNonBracket Arr, ";"
             If UBound(Arr) > 0 Then
                 Text = Left(Text, Pos - 1) & "" & VBA.ChrW(8730) & "(" & Arr(1) & "&" & Arr(0) & ")" & right(Text, Len(Text) - pos2 + 1)
@@ -4673,8 +4679,8 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         Pos = InStr(Text, "notequal(")
         If Pos > 0 Then
             ea.Text = Text
-            udtryk = ea.GetNextBracketContent(Pos + 7)
-            Text = Left(Text, Pos - 1) & " " & Replace(udtryk, ListSeparator, VBA.ChrW(8800)) & " " & right(Text, Len(Text) - ea.Pos + 1)
+            Udtryk = ea.GetNextBracketContent(Pos + 7)
+            Text = Left(Text, Pos - 1) & " " & Replace(Udtryk, ListSeparator, VBA.ChrW(8800)) & " " & right(Text, Len(Text) - ea.Pos + 1)
         End If
     Loop While Pos > 0
 
@@ -4683,8 +4689,8 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         Pos = InStr(Text, "equal(")
         If Pos > 0 Then
             ea.Text = Text
-            udtryk = ea.GetNextBracketContent(Pos + 4)
-            Text = Left(Text, Pos - 1) & " " & Replace(udtryk, ListSeparator, "=") & " " & right(Text, Len(Text) - ea.Pos + 1)
+            Udtryk = ea.GetNextBracketContent(Pos + 4)
+            Text = Left(Text, Pos - 1) & " " & Replace(Udtryk, ListSeparator, "=") & " " & right(Text, Len(Text) - ea.Pos + 1)
         End If
     Loop While Pos > 0
 
@@ -4697,8 +4703,8 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         Pos = InStr(Text, "abs(")
         If Pos > 0 Then
             ea.Text = Text
-            udtryk = ea.GetNextBracketContent(Pos)
-            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & udtryk & VBA.ChrW(124) & right(Text, Len(Text) - ea.Pos + 1)
+            Udtryk = ea.GetNextBracketContent(Pos)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & Udtryk & VBA.ChrW(124) & right(Text, Len(Text) - ea.Pos + 1)
         End If
     Loop While Pos > 0
 
@@ -4707,8 +4713,8 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         Pos = InStr(Text, "'vecmag(")
         If Pos > 0 Then
             ea.Text = Text
-            udtryk = ea.GetNextBracketContent(Pos + 6)
-            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & udtryk & VBA.ChrW(124) & right(Text, Len(Text) - ea.Pos + 1)
+            Udtryk = ea.GetNextBracketContent(Pos + 6)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & Udtryk & VBA.ChrW(124) & right(Text, Len(Text) - ea.Pos + 1)
         End If
     Loop While Pos > 0
 
@@ -7393,8 +7399,6 @@ Fejl:
 Slut:
 End Property
 
-
-
 Public Property Get DefName(Index As Integer) As String
     On Error Resume Next
     DefName = ldefname(Index)
@@ -7425,3 +7429,37 @@ End Property
 '    Is2DVector = (Rows = 2 And Columns = 1)
 'End Property
 
+Function GetMaximaSettingsString() As String
+' dll API laver disse indstillinger selv
+    Dim SettingsString As String
+    
+    
+    SettingsString = "["
+    If MaximaUnits Then
+        SettingsString = SettingsString & "keepfloat:false,setunits([N,J,W,Pa,C,V,F,Ohm,T,H,K]),"
+        If OutUnits <> vbNullString Then
+            SettingsString = SettingsString & "errcatch(setunits(" & ConvertUnits(OutUnits) & ")),"
+        End If
+    Else
+        SettingsString = SettingsString & "keepfloat:false,"
+    End If
+    
+    If MaximaComplex Then
+        SettingsString = SettingsString & "domain:complex,realonly:false,"
+    Else
+        SettingsString = SettingsString & "domain:real,"
+    End If
+    
+    If MaximaExact = 2 Then
+        SettingsString = SettingsString & "dectalall(udt):=dectalallNum(udt),"
+    Else
+        SettingsString = SettingsString & "dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1]),"
+    End If
+    
+    SettingsString = SettingsString & "NoSigFig:" & MaximaCifre & ","
+            
+    If right(SettingsString, 1) = "," Then SettingsString = Left(SettingsString, Len(SettingsString) - 1)
+    SettingsString = SettingsString & "]$"
+     
+    GetMaximaSettingsString = SettingsString
+End Function

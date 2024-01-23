@@ -1521,7 +1521,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
             variabel = Var
             UFSolvenumeric.TextBox_variabel.Text = Var
         End If
-        UFSolvenumeric.udtryk = omax.Kommando
+        UFSolvenumeric.Udtryk = omax.Kommando
         UFSolvenumeric.Show
         '    Set omax = New CMaxima
         omax.ReadSelection
@@ -2782,100 +2782,6 @@ Sub InsertOutput(Text As String)
     If IsBold Then Selection.OMaths(1).Range.Font.Bold = True
     omax.GoToEndOfSelectedMaths
 End Sub
-Sub unicodevals()
-    Dim s As String
-    Dim i As Integer
-    Dim c As Range
-    MsgBox Selection.Text
-    For Each c In Selection.Characters
-        i = AscW(c)
-        s = s & c & " - " & i & vbCrLf
-    Next
-
-    MsgBox s
-End Sub
-
-Sub unicodevals2()
-    Dim Text As String
-    Dim i As Integer
-    Dim j As Integer
-    Dim s As String
-    Selection.OMaths.Linearize
-    Selection.OMaths(1).ConvertToNormalText
-    Text = Selection.Text
-    Selection.OMaths(1).ConvertToMathText
-    Selection.OMaths(1).Range.Select
-    Selection.OMaths.BuildUp
-
-    For j = 1 To Len(Text)
-        i = AscW(Mid(Text, j, 1))
-        s = s & Mid(Text, j, 1) & " - " & i & vbCrLf
-    Next
-    MsgBox s
-
-End Sub
-Sub UnicodeValsToString()
-' laver alle Omaths i selection om til en streng der kan indsættes i VBA-kode. Bruges primært til testmodul
-' Strengene indsættes efter selection i rækkefølge. Hver på ny linje
-    Dim Text As String
-    Dim j As Integer
-    Dim i As Integer
-    Dim k As Integer, n As Integer
-    Dim s As String
-    Dim mo As OMath
-    Dim Arr() As String
-    Dim MoArr() As Variant
-
-    n = Selection.OMaths.Count
-    If n = 0 Then
-        MsgBox "You must select an equation", vbOKOnly, "Error"
-        Exit Sub
-    End If
-    ReDim Arr(n - 1)
-    ReDim MoArr(n - 1)
-'    Selection.OMaths.Linearize
-    For k = 0 To n - 1
-        Set MoArr(k) = Selection.OMaths(k + 1)
-    Next
-    For k = 0 To n - 1
-        Set mo = MoArr(k)
-        mo.Linearize
-        mo.ConvertToNormalText
-        Arr(k) = Trim(mo.Range.Text)
-        mo.ConvertToMathText
-        mo.Range.Select
-        mo.BuildUp
-    Next
-    Selection.Collapse wdCollapseEnd
-    Selection.EndKey Unit:=wdLine
-
-    For k = 0 To UBound(Arr)
-        Text = Arr(k)
-        s = ""
-        For j = 1 To Len(Text)
-            i = AscW(Mid(Text, j, 1))
-            If i > 200 Or i = 183 Then
-                s = s & """ & VBA.ChrW(" & i & ") & """
-            Else
-                s = s & Mid(Text, j, 1)
-            End If
-        Next
-        If Left(s, 4) = """ & " Then
-            s = right(s, Len(s) - 4)
-        ElseIf Left(s, 1) <> """" Then
-            s = """" & s
-        End If
-        If right(s, 4) = " & """ Then
-            s = Left(s, Len(s) - 4)
-        ElseIf right(s, 1) <> """" Then
-            s = s & """"
-        End If
-        Selection.Collapse wdCollapseEnd
-        Selection.TypeParagraph
-        Selection.TypeText (s)
-    Next
-
-End Sub
 
 #If Mac Then
 #Else
@@ -2974,4 +2880,20 @@ Function GetMaximaPath() As String
 End Function
 #End If
 
-
+Function AskSignFromForm(Udtryk As String) As Integer
+' 0=zero   1=neg   2=pos    3= nochoice
+    Dim UF As New UserFormAskSign
+    UF.Label_udtryk.Caption = Udtryk
+    UF.Show
+    
+    If UF.OptionButton_nul.Value Then
+        AskSignFromForm = 0
+    ElseIf UF.OptionButton_negativ.Value Then
+        AskSignFromForm = 1
+    ElseIf UF.OptionButton_positiv.Value Then
+        AskSignFromForm = 2
+    Else
+        AskSignFromForm = 3
+    End If
+    Unload UF
+End Function
