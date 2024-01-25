@@ -293,38 +293,38 @@ Public Sub SaveFile(doctype As Integer)
 Slut:
    Unload UfWait
 End Sub
-Sub ConvertList(l As List)
+Sub ConvertList(L As List)
    Dim s As String, i As Long
-   If l.Range.ListFormat.ListType = wdListBullet Or l.Range.ListFormat.ListType = wdListMixedNumbering Or l.Range.ListFormat.ListType = wdListNoNumbering Or l.Range.ListFormat.ListType = wdListOutlineNumbering Or l.Range.ListFormat.ListType = wdListPictureBullet Then
+   If L.Range.ListFormat.ListType = wdListBullet Or L.Range.ListFormat.ListType = wdListMixedNumbering Or L.Range.ListFormat.ListType = wdListNoNumbering Or L.Range.ListFormat.ListType = wdListOutlineNumbering Or L.Range.ListFormat.ListType = wdListPictureBullet Then
       s = "\begin{itemize}" & vbCrLf
-      For i = 1 To l.ListParagraphs.Count
+      For i = 1 To L.ListParagraphs.Count
          If i > 1 Then
-            If l.ListParagraphs(i).Range.ListFormat.ListLevelNumber > l.ListParagraphs(i - 1).Range.ListFormat.ListLevelNumber Then
+            If L.ListParagraphs(i).Range.ListFormat.ListLevelNumber > L.ListParagraphs(i - 1).Range.ListFormat.ListLevelNumber Then
                s = s & " \begin{itemize}" & vbCrLf
-            ElseIf l.ListParagraphs(i).Range.ListFormat.ListLevelNumber < l.ListParagraphs(i - 1).Range.ListFormat.ListLevelNumber Then
+            ElseIf L.ListParagraphs(i).Range.ListFormat.ListLevelNumber < L.ListParagraphs(i - 1).Range.ListFormat.ListLevelNumber Then
                s = s & " \end{itemize}" & vbCrLf
             End If
          End If
-         s = s & " \item " & l.ListParagraphs(i).Range.Text
+         s = s & " \item " & L.ListParagraphs(i).Range.Text
       Next
       s = s & "\end{itemize}" & vbCrLf
-      l.Range.InsertAfter s
-      l.Range.Delete
-   ElseIf l.Range.ListFormat.ListType = wdListSimpleNumbering Or l.Range.ListFormat.ListType = wdListListNumOnly Then
+      L.Range.InsertAfter s
+      L.Range.Delete
+   ElseIf L.Range.ListFormat.ListType = wdListSimpleNumbering Or L.Range.ListFormat.ListType = wdListListNumOnly Then
       s = "\begin{enumerate}" & vbCrLf
-      For i = 1 To l.ListParagraphs.Count
+      For i = 1 To L.ListParagraphs.Count
          If i > 1 Then
-            If l.ListParagraphs(i).Range.ListFormat.ListLevelNumber > l.ListParagraphs(i - 1).Range.ListFormat.ListLevelNumber Then
+            If L.ListParagraphs(i).Range.ListFormat.ListLevelNumber > L.ListParagraphs(i - 1).Range.ListFormat.ListLevelNumber Then
                s = s & " \begin{enumerate}" & vbCrLf
-            ElseIf l.ListParagraphs(i).Range.ListFormat.ListLevelNumber < l.ListParagraphs(i - 1).Range.ListFormat.ListLevelNumber Then
+            ElseIf L.ListParagraphs(i).Range.ListFormat.ListLevelNumber < L.ListParagraphs(i - 1).Range.ListFormat.ListLevelNumber Then
                s = s & " \end{enumerate}" & vbCrLf
             End If
          End If
-         s = s & " \item " & l.ListParagraphs(i).Range.Text
+         s = s & " \item " & L.ListParagraphs(i).Range.Text
       Next
       s = s & "\end{enumerate}" & vbCrLf
-      l.Range.InsertAfter s
-      l.Range.Delete
+      L.Range.InsertAfter s
+      L.Range.Delete
    End If
 
 End Sub

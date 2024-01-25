@@ -43,14 +43,14 @@ Sub AddNewRow()
     
 End Sub
 
-Sub AddTextbox(n As String, t As Integer, l As Integer)
+Sub AddTextbox(n As String, t As Integer, L As Integer)
     Dim tb As MSForms.TextBox
 
     Set tb = Me.Controls.Add("Forms.textbox.1")
     With tb
         .Name = n
         .Top = t
-        .Left = l
+        .Left = L
         .Width = 24
         .Height = 12
         .Font.Size = 7
@@ -61,7 +61,7 @@ Sub AddTextbox(n As String, t As Integer, l As Integer)
         .WordWrap = False
     End With
 End Sub
-Sub AddLabel(n As String, t As Integer, l As Integer)
+Sub AddLabel(n As String, t As Integer, L As Integer)
 Dim la As MSForms.Label
 
 Set la = Me.Controls.Add("Forms.label.1")
@@ -69,7 +69,7 @@ Set la = Me.Controls.Add("Forms.label.1")
             .Name = ""
             .Caption = n
             .Top = t
-            .Left = l
+            .Left = L
             .Width = 8
             .Height = 12
             .Font.Size = 8

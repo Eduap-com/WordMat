@@ -114,16 +114,16 @@ Function GetErrorText(Text As String) As String
 ' used by GetErrorDefinition()
     Dim Pos As Integer, pos2 As Integer, pos4 As Integer
     Dim t As String
-    Dim l As Integer
+    Dim L As Integer
     On Error Resume Next
-    l = Len(Text)
+    L = Len(Text)
     Pos = InStr(omax.MaximaOutput, "incorrectsyntax")
     pos2 = InStr(Pos, omax.MaximaOutput, Text)
-    pos4 = InStr(pos2 + l, omax.MaximaOutput, "^")
+    pos4 = InStr(pos2 + L, omax.MaximaOutput, "^")
     If pos4 < 1 Then
         pos4 = Len(omax.MaximaOutput)
     End If
-    t = Mid(omax.MaximaOutput, pos2 + l, pos4 - pos2 - l + 1)
+    t = Mid(omax.MaximaOutput, pos2 + L, pos4 - pos2 - L + 1)
     t = Replace(t, "^", vbCrLf & "    ^", 1, 1)
     GetErrorText = Sprog.SyntaxError & vbCrLf & Sprog.IllegalSymbol & ":" & vbCrLf & t
 

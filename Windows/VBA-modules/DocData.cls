@@ -21,7 +21,7 @@ End Sub
 Public Function ReadSelection() As Boolean
 Dim cellval As String
 Dim r As Integer
-Dim i As Integer, j As Integer, k As Integer, l As Integer, c As Integer
+Dim i As Integer, j As Integer, k As Integer, L As Integer, c As Integer
 Dim startrow As Integer
 Dim startcol As Integer
 Dim d As Double
@@ -81,18 +81,18 @@ End If
     For j = 1 To r
         i = i + 1
         For k = 1 To c
-        l = l + 1
-        cellval = Replace(Selection.Rows(i + startrow).Cells(l + startcol - 1).Range.Text, ",", ".")
+        L = L + 1
+        cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.Text, ",", ".")
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
-        Tabel(i, l) = CDbl(cellval)
-        Tabel(i, l) = val(cellval)
+        Tabel(i, L) = CDbl(cellval)
+        Tabel(i, L) = val(cellval)
         If Err.Number > 0 Then
 '           l = l - 1
            Err.Clear
         End If
         Next
-        l = 0
+        L = 0
     Next
     ReDim Preserve Tabel(1 To i, 1 To c) As Double
     nrows = i
@@ -113,7 +113,7 @@ Public Function ReadSelectionS() As Boolean
 ' læser som strenge
 Dim cellval As String
 Dim r As Integer
-Dim i As Integer, j As Integer, k As Integer, l As Integer, c As Integer
+Dim i As Integer, j As Integer, k As Integer, L As Integer, c As Integer
 Dim startrow As Integer
 Dim startcol As Integer
 
@@ -145,15 +145,15 @@ End If
     For j = 1 To r
         i = i + 1
         For k = 1 To c
-        l = l + 1
-        cellval = Replace(Selection.Rows(i + startrow).Cells(l + startcol - 1).Range.Text, ",", ".")
+        L = L + 1
+        cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.Text, ",", ".")
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, vbCrLf, "")
         cellval = Replace(cellval, vbCr, "")
         cellval = Replace(cellval, vbLf, "")
-        tabels(i, l) = cellval
+        tabels(i, L) = cellval
         Next
-        l = 0
+        L = 0
     Next
     ReDim Preserve tabels(1 To i, 1 To c) As String
     nrows = i

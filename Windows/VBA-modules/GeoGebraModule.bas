@@ -256,15 +256,26 @@ Slut:
 End Sub
 
 Function GetGeoGebraMathAppsFolder() As String
+' Finder GeoGebramath apps i Appdata eller programfiles. Der søges først efter hvad sidste installation
 #If Mac Then
     GetGeoGebraMathAppsFolder = "/Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/"
 #Else
-    Dim DN As String
-    DN = GetProgramFilesDir & "/WordMat/geogebra-math-apps/"
-    If Dir(DN, vbDirectory) = vbNullString Then
+    Dim DN As String, RK As String
+    If InstallLocation = "All" Then
+        DN = GetProgramFilesDir & "/WordMat/geogebra-math-apps/"
+        If Dir(DN, vbDirectory) = vbNullString Then
+            DN = Environ("AppData") & "/WordMat/geogebra-math-apps/"
+            If Dir(DN, vbDirectory) = vbNullString Then
+                MsgBox "geogebra-math-apps could not be found", vbOKOnly, "Error"
+            End If
+        End If
+    Else
         DN = Environ("AppData") & "/WordMat/geogebra-math-apps/"
         If Dir(DN, vbDirectory) = vbNullString Then
-            MsgBox "geogebra-math-apps could not be found", vbOKOnly, "Error"
+            DN = GetProgramFilesDir & "/WordMat/geogebra-math-apps/"
+            If Dir(DN, vbDirectory) = vbNullString Then
+                MsgBox "geogebra-math-apps could not be found", vbOKOnly, "Error"
+            End If
         End If
     End If
     GetGeoGebraMathAppsFolder = DN

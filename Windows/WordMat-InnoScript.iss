@@ -203,6 +203,8 @@ Source: Other\CopyWordMat.vbs; DestDir: {app}; Flags: ignoreversion overwriterea
 Source: Other\CopyWordMat.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\RemoveWordMatFromWordUser.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\RemoveWordMatFromWordAll.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: QlmCLRHost\QlmCLRHost_x64.dll; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: QlmCLRHost\QlmCLRHost_x86.dll; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
 
 ; These files are in a folder a level up from the Windows folder as they are shared with the Mac version
 ; Kopier alle docx og dotx dokumenter til WordDocs
@@ -343,8 +345,10 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisable
 
 
 ; WordMat settings  ; V. 1.29 fjernet for at sikre at de ikke nulstilles ved opdatering
-;Root: HKCU; Subkey: "Software\WordMat"; Flags: 
-;Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: 
+ Root: HKCU; Subkey: "Software\WordMat"; Flags: 
+ Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: 
+ Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "InstallLocation"; ValueData: "AppData" ;tasks: installerbruger; Flags: uninsdeletekey createvalueifdoesntexist
+ Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "InstallLocation"; ValueData: "All" ;tasks: installeralle ; Flags: uninsdeletekey createvalueifdoesntexist
 ;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AllTrig"; ValueData: 0 ; Flags: uninsdeletekey
 ;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Exact"; ValueData: 2 ; Flags: uninsdeletekey
 ;Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Separator"; ValueData: 0 ; Flags: uninsdeletekey

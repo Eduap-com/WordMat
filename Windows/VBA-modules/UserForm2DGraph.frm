@@ -2171,7 +2171,7 @@ Dim DefS As String
 Dim Pos As Integer
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
-Dim s As String, l As String
+Dim s As String, L As String
 ea.SetNormalBrackets
 ea2.SetNormalBrackets
     DefS = GetDefString()
@@ -2193,15 +2193,15 @@ ea2.SetNormalBrackets
     Do While Pos > 0
         s = ea.GetNextBracketContent(Pos)
         ea2.Text = s
-        l = ea2.GetNextListItem(1, ",")
-        Do While Len(l) > 0
-            InsertBoundary TextBox_var1.Text, l, TextBox_xmin1, TextBox_xmax1
-            InsertBoundary TextBox_var2.Text, l, TextBox_xmin2, TextBox_xmax2
-            InsertBoundary TextBox_var3.Text, l, TextBox_xmin3, TextBox_xmax3
-            InsertBoundary TextBox_var4.Text, l, TextBox_xmin4, TextBox_xmax4
-            InsertBoundary TextBox_var5.Text, l, TextBox_xmin5, TextBox_xmax5
-            InsertBoundary TextBox_var6.Text, l, TextBox_xmin6, TextBox_xmax6
-            l = ea2.GetNextListItem(ea2.Pos, ",")
+        L = ea2.GetNextListItem(1, ",")
+        Do While Len(L) > 0
+            InsertBoundary TextBox_var1.Text, L, TextBox_xmin1, TextBox_xmax1
+            InsertBoundary TextBox_var2.Text, L, TextBox_xmin2, TextBox_xmax2
+            InsertBoundary TextBox_var3.Text, L, TextBox_xmin3, TextBox_xmax3
+            InsertBoundary TextBox_var4.Text, L, TextBox_xmin4, TextBox_xmax4
+            InsertBoundary TextBox_var5.Text, L, TextBox_xmin5, TextBox_xmax5
+            InsertBoundary TextBox_var6.Text, L, TextBox_xmin6, TextBox_xmax6
+            L = ea2.GetNextListItem(ea2.Pos, ",")
         Loop
         Pos = InStr(Pos + 8, ea.Text, "assume(")
     Loop

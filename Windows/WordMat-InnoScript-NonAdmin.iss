@@ -210,7 +210,9 @@ Source: Other\CopyWordMat.vbs; DestDir: {%appdata}\WordMat\; Flags: ignoreversio
 Source: ..\Shared\WordDocs\*.do*; DestDir: {%appdata}\WordMat\WordDocs\; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\geogebra-math-apps\*; DestDir: {%appdata}\WordMat\geogebra-math-apps\; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: MathMenu.dll\MathMenu.dll; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
-Source: MathMenu.dll\MathMenu.tlb; DestDir: {%appdata}\WordMat\; Flags: ignoreversion regtypelib overwritereadonly uninsremovereadonly
+Source: MathMenu.dll\MathMenu.tlb; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: QlmCLRHost\QlmCLRHost_x64.dll; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: QlmCLRHost\QlmCLRHost_x86.dll; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
 
 ;fjernet da overgået til geogebra silent install /S
 ;Source: GeoGebra\*; DestDir: {app}\GeoGebra; Flags: ignoreversion overwritereadonly uninsremovereadonly
@@ -218,7 +220,7 @@ Source: MathMenu.dll\MathMenu.tlb; DestDir: {%appdata}\WordMat\; Flags: ignoreve
 
 Source: ExternalPrograms\dotNetFx40_Client_setup.exe; DestDir: {tmp}; Flags: dontcopy
 
-Source: ExternalPrograms\Maxima-5.47.0\*; DestDir: {%appdata}\WordMat\Maxima-5.47.0; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; AfterInstall: ReplacePathInBat(); 
+Source: ExternalPrograms\Maxima-5.47.0\*; DestDir: {%appdata}\WordMat\Maxima-5.47.0; Flags: ignoreversion recursesubdirs overwritereadonly uninsremovereadonly; 
 ;Source: Maxima-5.23.2\*; DestDir: {app}\Maxima-5.23.2; Flags: ignoreversion
 ;Source: Maxima-5.23.2\bin\*; DestDir: {app}\Maxima-5.23.2\bin; Flags: ignoreversion recursesubdirs
 ;Source: Maxima-5.23.2\gnuplot\*; DestDir: {app}\Maxima-5.23.2\gnuplot; Flags: ignoreversion recursesubdirs
@@ -310,8 +312,9 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisable
 
 
 ; WordMat settings
-; Root: HKCU; Subkey: "Software\WordMat"; Flags: 
-; Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: 
+ Root: HKCU; Subkey: "Software\WordMat"; Flags: 
+ Root: HKCU; Subkey: "Software\WordMat\Settings"; Flags: 
+ Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: string; ValueName: "InstallLocation"; ValueData: "AppData" ; Flags: uninsdeletekey createvalueifdoesntexist
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AllTrig"; ValueData: 0 ; Flags: uninsdeletekey
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Exact"; ValueData: 2 ; Flags: uninsdeletekey
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Separator"; ValueData: 0 ; Flags: uninsdeletekey
@@ -741,10 +744,10 @@ begin
     Result := 1;
 end;
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////// event called 
 procedure CurStepChanged(CurStep: TSetupStep);
 begin
-  if (CurStep=ssInstall) then
+  if ((CurStep = ssInstall) and IsAdminLoggedOn() ) then
   begin
     if (IsUpgrade()) then
     begin
@@ -1292,21 +1295,6 @@ begin
   end;
 end;
 
-function InstallGeogebra():Boolean;
-begin
-  if (ExistCommandlineParam('/NoGeoGebra')) then
-    Result:=false
-  else
-    Result:=true;
-end;
-function InstallGraph():Boolean;
-begin
-  if (ExistCommandlineParam('/NoGraph')) then
-    Result:=false
-  else
-    Result:=true;
-end;
-
 
 function InitializeSetup(): Boolean;
 var 
@@ -1418,67 +1406,8 @@ end; // InitializeSetup finished
 
 procedure DeinitializeSetup();
 begin
-//     if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
-  //         if not FileExists(Office14Folder + 'STARTUP\WordMat.dotm') then
-    //            if not FileExists(Office12Folder + 'STARTUP\WordMat.dotm') then
-    if AntalBeregninger>0 then
-    begin
-    RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AntalBeregninger', AntalBeregninger);  // ikke slet alle beregninger ved nyinstallation
-//    if IsTaskSelected('AutoStart') then
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'AutoStart', AutoStart);
-//    if IsTaskSelected('CheckForUpdate') then
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings\', 'CheckForUpdate', CheckForUpdate);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','AllTrig', AllTrig);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Complex', Complex);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Exact', Exact);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ExcelEmbed', ExcelEmbed);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Forklaring', Forklaring);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Gangetegn', Gangetegn);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LogOutput', LogOutput);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','MaximaCommand', MaximaCommand);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Radians', Radians);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Separator', Separator);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','SigFig', SigFig );
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','SolveBoolOrSet', SolveBoolOrSet);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Units', Units);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','VidNot', VidNot);
-      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','OutUnits', OutUnits);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Index', mIndex);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BigFloat', BigFloat);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ShowAssum', ShowAssum);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','PolarOutput', PolarOutput);
-
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','GraphApp', GraphApp);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Language', Language);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','dAsDiffChr', dAsDiffChr);
-      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexStart', LatexStart);
-      RegWriteStringValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexSlut', LatexSlut);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','LatexUnits', LatexUnits);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','ConvertTexWithMaxima', ConvertTexWithMaxima);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqNumPlacement', EqNumPlacement);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqNumType', EqNumType);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','EqAskRef', EqAskRef);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','Backup', Backup);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupNo', BackupNo);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupMaxNo', BackupMaxNo);
-      RegWriteDWordValue(HKEY_CURRENT_USER, 'Software\WordMat\Settings','BackupTime', BackupTime);
-
-     end;
 end;
 
-function InitializeUninstall(): Boolean;
-begin
-  ClickToRun:=CheckClickToRun();
-  Office12Folder:=WordInstallFolder('12');
-  Office14Folder:=WordInstallFolder('14');
-  Office15Folder:=WordInstallFolder('15');
-  Office16Folder:=WordInstallFolder('16');
-  UserStartupFolder12:=StartupFolder('12');
-  UserStartupFolder14:=StartupFolder('14');
-  UserStartupFolder15:=StartupFolder('15');
-  UserStartupFolder16:=StartupFolder('16');
-  Result := CloseWord();
-end;
 
 { Check if a path contains spaces.  If it does, convert it to
   the equivalent short path }
@@ -1496,43 +1425,5 @@ end;
 
 { Note: Functions called by AfterInstall can have maximum of one argument }
 
-procedure ReplaceApp(MaximaPath: String);
-var
-  iLineCounter : Integer;
-  a_strTextfile : TArrayOfString;
-  strFilename : String;
-  strFind : String;
-  strNewLine : String;
-  strApp : String;
-begin
-  strApp := ExpandConstant('{app}');
-{  strFilename := strApp + '\Maxima-5.30.0\bin\maxima.bat';}
-  strFilename := strApp + '\' + MaximaPath;
-  strFind := 'set maxima_prefix';
-  strApp := strApp + '\Maxima-5.47.0\';
-  strNewLine := 'set maxima_prefix='+PathWithoutSpaces(strApp);
-  
-  { Load textfile into string array }
-  LoadStringsFromFile(strFilename, a_strTextfile);
-  
-  { Search through all textlines for given text, only replace first}
-  for iLineCounter := 0 to GetArrayLength(a_strTextfile)-1 do
-    begin
-      { Overwrite textline when text searched for is part of it }
-      if (Pos(strFind, a_strTextfile[iLineCounter]) > 0) then
-        a_strTextfile[iLineCounter] := strNewLine;
-        Break;
-    end;
 
-  { Save string array to textfile (overwrite, no append!) }
-  SaveStringsToFile(strFilename, a_strTextfile, False);
-
-end;
-
-// this I believe is deprecated
-procedure ReplacePathInBat();
-begin
-//  ReplaceApp('Maxima-5.47.0\bin\maxima.bat');
-//  ReplaceApp('Maxima-5.47.0\bin\maximaunit.bat');  
-end;
 

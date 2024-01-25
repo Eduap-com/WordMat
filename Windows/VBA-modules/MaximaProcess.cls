@@ -64,7 +64,7 @@ Sub CloseProcess()
 End Sub
 
 Function StartMaximaWait(WaitTime As LongPtr) As LongPtr
-    Dim l As LongPtr, i As LongPtr
+    Dim L As LongPtr, i As LongPtr
     Dim OutputBuffer As String
     Dim Startupstring As String
     Dim retval As LongPtr
@@ -83,9 +83,9 @@ Function StartMaximaWait(WaitTime As LongPtr) As LongPtr
     Loop
     Do
         uSleep 50000
-        l = ReadOutputIfAny(OutputBuffer)
-        If l > 0 Then
-            Startupstring = Startupstring & Left(OutputBuffer, CInt(l))
+        L = ReadOutputIfAny(OutputBuffer)
+        If L > 0 Then
+            Startupstring = Startupstring & Left(OutputBuffer, CInt(L))
         End If
         i = i - 1
     Loop While i > 0 And InStr(Startupstring, "(%i1)") < 1  'l < 1 And
@@ -100,7 +100,7 @@ Function StartMaximaWait(WaitTime As LongPtr) As LongPtr
 End Function
 
 Sub ExecuteMaximaCommand(Command As String, WaitForIt As Integer)
-Dim l As LongPtr, nocmd As LongPtr
+Dim L As LongPtr, nocmd As LongPtr
 Dim ea As New ExpressionAnalyser
 On Error GoTo Fejl
     mFinished = 0
@@ -114,9 +114,9 @@ On Error GoTo Fejl
     mIndex = mIndex + nocmd
         
     If WaitForIt = 0 Then
-        l = SendToMaxima(Command)
+        L = SendToMaxima(Command)
     Else
-        l = SendToMaxima(Command)
+        L = SendToMaxima(Command)
         WaitForMaximaUntil WaitForIt
         
 '        lastOutput = GetEmptyString()
@@ -164,7 +164,7 @@ Function WaitForMaximaUntil(Optional StopTime As Integer = 6) As Integer
 ' tid angives i hele  s
 ' -1 = error     0=timeout    1=maxima finished
 Dim i As Integer
-Dim l As LongPtr
+Dim L As LongPtr
 Dim stoptext As String
 Dim OutputBuffer As String
 Dim t As String
@@ -185,10 +185,10 @@ If StopTime = 0 Then StopTime = 1
 WaitForMaximaUntil = 1
     Do While Not (omax.StopNow) And i < StopTime
         OutputBuffer = GetEmptyString()
-        l = ReadOutputIfAny(OutputBuffer)
+        L = ReadOutputIfAny(OutputBuffer)
 '        l = GetLastOutputVB(OutputBuffer, 10)
-        If l > 0 Then
-            t = Left(OutputBuffer, CInt(l))
+        If L > 0 Then
+            t = Left(OutputBuffer, CInt(L))
             lastOutput = lastOutput & t
         End If
 '        msgbox stoptext & vbLf & vbLf & lastOutput

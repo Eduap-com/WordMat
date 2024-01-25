@@ -51,6 +51,7 @@ Private mCASengine As Integer
 Private mLastUpdateCheck As String
 Private mRegAppVersion As String
 Private mDllConnType As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
+Private mInstallLocation As String ' All AppData
 
 Public Sub ReadAllSettingsFromRegistry()
 Dim setn As Integer
@@ -101,6 +102,7 @@ On Error Resume Next
     mCASengine = CInt(GetRegSettingLong("CASengine"))
     mLastUpdateCheck = GetRegSettingString("LastUpdateCheck")
     mDllConnType = CInt(GetRegSetting("DllConnType"))
+    mInstallLocation = GetRegSetting("InstallLocation")
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -597,7 +599,18 @@ Public Property Let DllConnType(xval As Integer)
     SetRegSetting "DllConnType", xval
     mDllConnType = xval
 End Property
-
+Public Property Get InstallLocation() As String
+    If mInstallLocation <> vbNullString Then
+        InstallLocation = mInstallLocation
+    Else
+        InstallLocation = GetRegSettingString("InstallLocation")
+        mInstallLocation = InstallLocation
+    End If
+End Property
+Public Property Let InstallLocation(ByVal L As String)
+    SetRegSettingString "InstallLocation", L
+    mInstallLocation = L
+End Property
 
 '------------------- registry functions --------------------
 Private Function GetRegSetting(Key As String) As Integer
