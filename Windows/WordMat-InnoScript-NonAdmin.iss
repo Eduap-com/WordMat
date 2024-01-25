@@ -379,7 +379,7 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Options"; ValueType: st
 ;Filename: {app}\SetupGraph-4.4.2.exe; Parameters: "/verysilent /SUPPRESSMSGBOXES"; StatusMsg: "Installerer Graph..."; check:InstallGraph; Components: Graph ; Flags: nowait    Non-admin    
 ;Filename: {app}\GeoGebra.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;  Non-admin
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{%appdata}\WordMat\"; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
-Filename: cscript.exe; Parameters: {%appdata}\WordMat\CopyWordMat.vbs ; StatusMsg: "Kopierer WordMat";  Flags: runasoriginaluser
+Filename: cscript.exe; Parameters: {%appdata}\WordMat\CopyWordMat.vbs ; StatusMsg: "Kopierer WordMat";  Flags: runhidden
 
 
 [UninstallRun]
