@@ -230,7 +230,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     '     MsgBox (MaximaInputStreng)
     '    Selection.InsertAfter MaximaInputStreng
     
-    If WSHmaxima Then
+    If DllConnType = 2 Then
         RunMaximaWSH StopTime
         Exit Sub
     End If
@@ -345,8 +345,8 @@ Sub RunMaximaWSH(Optional StopTime As Integer)
     Dim Moutp As String, cmd As String
     
     If Not QActivePartnership Then
-        If MsgBox2("Connecting to Maxima using WSH requires Partnership with Eduap" & vbCrLf & vbCrLf & "Do you want to change the setting to use the default option: api?", vbYesNo, "Error") = vbYes Then
-            WSHmaxima = False
+        If MsgBox2("Connecting to Maxima using WSH requires Partnership with Eduap" & vbCrLf & vbCrLf & "Do you want to change the setting to use the default option: registered dll?", vbYesNo, "Error") = vbYes Then
+            DllConnType = 0
         End If
         Exit Sub
     End If

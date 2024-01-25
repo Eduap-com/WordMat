@@ -191,6 +191,7 @@ sp.ThisUser=Sólo para este usuario
 ;Source: WordMat.dotm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMat.dotm; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 Source: WordMatP.dotm; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
+Source: WordMatP2.dotm; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 ;Source: Other\WordMatLommeregner.docm; DestDir: {app}; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
 ;Source: ExternalPrograms\SetupGraph-4.4.2.exe; DestDir: {app}; Components: Graph ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
 ;Source: ExternalPrograms\GeoGebra.exe; DestDir: {app}; Components: GeoGebra ; Flags: ignoreversion overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete deleteafterinstall
@@ -329,9 +330,7 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisable
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "Index"; ValueData: 0 ; Flags: uninsdeletekey
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AntalBeregninger"; ValueData: 0 ; Flags: createvalueifdoesntexist
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 0 ; Flags: uninsdeletekey
-oot: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "AutoStart"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: TaskAutoStart
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey
-oot: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "CheckForUpdate"; ValueData: 1 ; Flags: uninsdeletekey ; Tasks: Taskcheckforupdates;
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "RibbonPointer"; ValueData: 0 ; Flags: uninsdeletekey
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "BigFloat"; ValueData: 0 ; Flags: uninsdeletekey
 ; Root: HKCU; Subkey: "Software\WordMat\Settings"; ValueType: dword; ValueName: "ShowAssum"; ValueData: 0 ; Flags: uninsdeletekey
@@ -380,7 +379,6 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Options"; ValueType: st
 ;Filename: {app}\GeoGebra.exe; Parameters: "/S";check:InstallGeoGebra; StatusMsg: "Installerer GeoGebra...";  Components: GeoGebra ;  Non-admin
 ;Filename:"{code:DotNetFolder}\RegAsm.exe"; Parameters: " ""{%appdata}\WordMat\WebViewWrap\WebViewWrap.dll"" /codebase" ;WorkingDir: "{%appdata}\WordMat\"; StatusMsg: "Registrerer WebViewWrap.dll ..."; Flags: runhidden;
 Filename: cscript.exe; Parameters: {%appdata}\WordMat\CopyWordMat.vbs ; StatusMsg: "Kopierer WordMat";  Flags: runhidden
-
 
 [UninstallRun]
 ;;Filename:"{dotnet40}\RegAsm.exe"; Parameters: " ""{app}\MathMenu.dll"" /u " ; WorkingDir: "{app}"; StatusMsg: "Unregistering controls ..."; Flags: runhidden;

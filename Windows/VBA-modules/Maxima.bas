@@ -56,10 +56,29 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
         
 #If Mac Then
 #Else
+getproc:
         Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
         If Err.Number <> 0 Then
-            MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
+            If QActivePartnership Then
+                If DllConnType = 0 Then
+                    If MsgBox2("Kan ikke forbinde til Maxima. Vil du anvende metoden 'dll direct' i stedet?" & VbCrLfMac & VbCrLfMac & "(Denne indstilling findes under avanceret i Indstillinger)", vbYesNo, Sprog.Error) = vbYes Then
+                        DllConnType = 1
+                        GoTo getproc
+                    End If
+                ElseIf DllConnType = 1 Then
+                    If MsgBox2("Kan ikke forbinde til Maxima. Vil du anvende metoden 'WSH' i stedet?" & VbCrLfMac & VbCrLfMac & "(Denne indstilling findes under avanceret i Indstillinger)", vbYesNo, Sprog.Error) = vbYes Then
+                        DllConnType = 2
+                    End If
+                Else ' wsh har ikke brug for
+                End If
+            Else
+                MsgBox2 Sprog.A(54), vbOKOnly, Sprog.Error
+            End If
             GoTo Slut
+        End If
+        If DllConnType = 2 Then
+            If SettCheckForUpdate Then CheckForUpdateSilent
+            GoTo finish
         End If
         On Error GoTo Fejl
         MaxProc.Units = 0
@@ -106,6 +125,8 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
         End If
     End If
 #End If
+
+finish:
     omax.ConvertLnLog = True ' andre funktioner kan ændre denne. den nulstilles
     If Not omax.PrepareNewCommand Then    ' nulstiller og finder definitioner
         GoTo Fejl
@@ -133,7 +154,15 @@ Function GetMaxProc() As MaximaProcess
 End Function
 #Else
 Function GetMaxProc() As Object
+    If DllConnType = 0 Then
         Set GetMaxProc = CreateObject("MaximaProcessClass")
+    ElseIf DllConnType = 1 Then
+        If QCheckPartnerShip Then
+            Set GetMaxProc = Application.Run("PGetMaxProc")
+        ElseIf DllConnType = 0 Then ' QCheckPartnerShip kan ændre indstillingen
+            Set GetMaxProc = CreateObject("MaximaProcessClass")
+        End If
+    End If
 End Function
 #End If
 Sub WaitForMaximaUntil(Optional StopTime As Integer = 500)

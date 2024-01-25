@@ -694,3 +694,51 @@ Sub ConvertEquationToLatex(Optional KeepOriginal As Boolean = False)
 
 End Sub
 
+Sub KonverterTilLaTex()
+
+    PrepareMaxima
+'    omax.ReadSelection
+    Dim uflatex As New UserFormLatex
+    uflatex.Show
+    
+End Sub
+Sub ToggleLatex()
+Dim mtext As String
+Dim r As Range
+On Error GoTo Slut
+#If Mac Then
+#Else
+        Dim Oundo As UndoRecord
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
+#End If
+    If Selection.OMaths.Count > 0 Then
+        PrepareMaxima
+        omax.ReadSelection
+        Selection.OMaths(1).Range.Text = ""
+        Selection.InsertAfter LatexStart & omax.ConvertToLatex(omax.Kommando) & LatexSlut
+    Else
+        PrepareMaxima
+        
+        mtext = omax.ConvertLatexToWord(RemoveLatexOmslut(Selection.Range.Text))
+        Selection.Range.Delete
+        Selection.Collapse wdCollapseEnd
+        Set r = Selection.OMaths.Add(Selection.Range)
+        Selection.TypeText mtext
+        r.OMaths(1).BuildUp
+        Selection.TypeParagraph
+    End If
+#If Mac Then
+#Else
+        Oundo.EndCustomRecord
+#End If
+
+Slut:
+End Sub
+Function RemoveLatexOmslut(Text As String)
+
+    Text = TrimB(Text, "$")
+    Text = TrimL(Text, "\[")
+    Text = TrimR(Text, "\]")
+    RemoveLatexOmslut = Text
+End Function

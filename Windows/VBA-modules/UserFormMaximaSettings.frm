@@ -177,6 +177,13 @@ On Error Resume Next
         CASengine = 0
     End If
 
+    If OptionButton_regdll.Value Then
+        DllConnType = 0
+    ElseIf OptionButton_directdll.Value Then
+        DllConnType = 1
+    ElseIf OptionButton_WSH.Value Then
+        DllConnType = 2
+    End If
     
     LanguageSetting = ComboBox_language.ListIndex
     Sprog.LoadSprogArray
@@ -202,7 +209,6 @@ On Error Resume Next
     BackupType = ComboBox_backup.ListIndex
     BackupMaxNo = ComboBox_backupno.Text
     BackupTime = ComboBox_backuptime.Text
-    WSHmaxima = CheckBox_maximawsh.Value
     
     If MaximaUnits <> CheckBox_units.Value Then
         MaximaUnits = CheckBox_units.Value
@@ -378,6 +384,7 @@ Private Sub UserForm_Activate()
     CommandButton_nulstilkemiformler.visible = False
     CommandButton_nulstilmatformler.visible = False
     OptionButton_casgeogebradirect.visible = True
+    Frame_conntype.visible = False
     OptionButton_geogebra.Caption = "GeoGebra 5"
 #Else
     OptionButton_geogebra.Caption = "GeoGebra 5"
@@ -402,7 +409,6 @@ Private Sub UserForm_Activate()
     CheckBox_polaroutput.Value = PolarOutput
     CheckBox_dasdiffchr.Value = dAsDiffChr
     CheckBox_askref.Value = EqAskRef
-    CheckBox_maximawsh.Value = WSHmaxima
     
     Label_antalb.Caption = AntalB
     
@@ -505,6 +511,14 @@ Private Sub UserForm_Activate()
         OptionButton_casgeogebradirect.Value = True
     Else
         OptionButton_casmaxima.Value = True
+    End If
+    
+    If DllConnType = 0 Then
+        OptionButton_regdll.Value = True
+    ElseIf DllConnType = 1 Then
+        OptionButton_directdll.Value = True
+    Else
+        OptionButton_WSH.Value = True
     End If
     
     MustRestart = False

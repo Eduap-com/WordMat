@@ -50,8 +50,7 @@ Private mLatexTOC As Integer
 Private mCASengine As Integer
 Private mLastUpdateCheck As String
 Private mRegAppVersion As String
-Private mWSHmaxima As Boolean
-
+Private mDllConnType As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
 
 Public Sub ReadAllSettingsFromRegistry()
 Dim setn As Integer
@@ -101,7 +100,7 @@ On Error Resume Next
     mLatexTOC = CInt(GetRegSettingLong("LatexToc"))
     mCASengine = CInt(GetRegSettingLong("CASengine"))
     mLastUpdateCheck = GetRegSettingString("LastUpdateCheck")
-    mWSHmaxima = CBool(GetRegSetting("WSHmaxima"))
+    mDllConnType = CInt(GetRegSetting("DllConnType"))
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -591,12 +590,12 @@ Public Property Let RegAppVersion(ByVal V As String)
     SetRegSettingString "AppVersion", V
     mRegAppVersion = V
 End Property
-Public Property Get WSHmaxima() As Boolean ' false to use dll to connect to Maxima, true to use WSH
-    WSHmaxima = mWSHmaxima
+Public Property Get DllConnType() As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
+    DllConnType = mDllConnType
 End Property
-Public Property Let WSHmaxima(xval As Boolean)
-    SetRegSetting "WSHmaxima", Abs(CInt(xval))
-    mWSHmaxima = xval
+Public Property Let DllConnType(xval As Integer)
+    SetRegSetting "DllConnType", xval
+    mDllConnType = xval
 End Property
 
 
