@@ -10,7 +10,23 @@ Sub OpenWebV()
     UfWait2.Label_tip.Caption = Sprog.A(684)
     UfWait2.Label_progress.Caption = "**"
     
-    Set WebV = CreateObject("WebViewWrap.Browser")
+    Err.Clear
+    If DllConnType = 0 Then
+        On Error Resume Next
+        Set WebV = CreateObject("WebViewWrap.Browser")
+        On Error GoTo 0
+        Err.Clear
+    Else
+        If QCheckPartnerShip Then
+            Set WebV = Application.Run("PGetWebView")
+        ElseIf DllConnType = 0 Then ' QCheckPartnerShip kan ændre indstillingen
+            Set WebV = CreateObject("WebViewWrap.Browser")
+        End If
+    End If
+'    If WebV = Nothing Then
+'        MsgBox2 "Error"
+'    End If
+    
     DN = GetGeoGebraMathAppsFolder()
     If DN = vbNullString Then
         MsgBox "geogebra-math-apps could not be located"

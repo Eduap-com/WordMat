@@ -10,6 +10,13 @@ Private Declare PtrSafe Function CreateMutex Lib "kernel32" _
         ByVal lpName As String) As LongPtr
 #End If
 
+Sub SetDocEvents()
+    If oAppClass Is Nothing Then
+        Set oAppClass = New oAppClass
+        Set oAppClass.oApp = Word.Application
+    End If
+End Sub
+
 Sub AutoExec()
 ' denne køres kun hvis filen er sat som globalskabelon. Altså ikke hvis den bare åbnes
 ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
@@ -59,22 +66,42 @@ End Sub
 
 Sub AutoClose()
 ' hver gang dokument lukkes
-Dim d As Variant
-Exit Sub  ' nødvendig når der er appclass?
+'Dim d As Variant
+'Exit Sub  ' nødvendig når der er appclass?
 
 On Error Resume Next
 'tempDoc.Close (False)
-LukTempDoc
+'LukTempDoc
+'
+'    For Each d In Application.Documents
+'        If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+'       d.Close (False)
+'       End If
+'    Next
+'
+''    Set WebV = Nothing
+''    Set MaxProc = Nothing
+''    Set MaxProcUnit = Nothing
 
-    For Each d In Application.Documents
-        If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-       d.Close (False)
-       End If
-    Next
 
-'    Set WebV = Nothing
-'    Set MaxProc = Nothing
-'    Set MaxProcUnit = Nothing
+    If Application.Documents.Count <= 2 Then
+        LukTempDoc
+        MaxProc.CloseProcess
+        cxl.CloseExcel
+
+#If Mac Then
+#Else
+        Set WebV = Nothing
+        Set MaxProc = Nothing
+        Set MaxProcUnit = Nothing
+#End If
+        '    For Each d In Application.Documents ' får Word til altid at spørge om der ikke skal gemmes
+        '       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+        '           d.Close (False)
+        '       End If
+        '    Next
+        '    SletRCMenu
+    End If
 
 End Sub
 

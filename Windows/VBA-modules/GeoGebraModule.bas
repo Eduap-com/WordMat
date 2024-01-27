@@ -794,7 +794,7 @@ Sub GeoGebra()
 #If Mac Then
     RunScript "OpenGeoGebra", geogebrafilersti
 #Else
-    appnr = shell(geogebrasti, vbNormalFocus)   'vbNormalFocus vbMinimizedFocus ' til offline installer
+    appnr = Shell(geogebrasti, vbNormalFocus)   'vbNormalFocus vbMinimizedFocus ' til offline installer
 #End If
 ' til webstart:
 '    appnr = Shell("javaws -system -open """ & geogebrafilersti & "geogebra.ggb""" & " http://www.geogebra.org/webstart/geogebra.jnlp", vbNormalFocus)    'vbNormalFocus vbMinimizedFocus

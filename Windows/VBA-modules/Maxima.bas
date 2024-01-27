@@ -13,6 +13,7 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
 
     On Error GoTo Fejl
     Dim op As Boolean
+    SetDocEvents
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
         tid = Timer
@@ -57,8 +58,10 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
 #If Mac Then
 #Else
 getproc:
+        Err.Clear
         Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
         If Err.Number <> 0 Then
+            Err.Clear
             If QActivePartnership Then
                 If DllConnType = 0 Then
                     If MsgBox2("Kan ikke forbinde til Maxima. Vil du anvende metoden 'dll direct' i stedet?" & VbCrLfMac & VbCrLfMac & "(Denne indstilling findes under avanceret i Indstillinger)", vbYesNo, Sprog.Error) = vbYes Then
@@ -248,6 +251,7 @@ Sub RestartMaxima()
     Else
         '        Set MaxProc = New MathMenu.MaximaProcessClass
         On Error Resume Next
+'        Shell "cmd.exe /c taskkill /IM sbcl.exe /F" ' Denne slår alt maxima ihjel
         Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
         If Err.Number <> 0 Then
             MsgBox Sprog.A(54), vbOKOnly, Sprog.Error

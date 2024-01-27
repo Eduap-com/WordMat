@@ -268,7 +268,7 @@ On Error Resume Next
 #If Mac Then
     RunScript "OpenFinder", GetTempDir() & "/WordMat-backup"
 #Else
-    shell "explorer.exe" & " " & GetDocumentsDir & "\WordMat-Backup", vbNormalFocus
+    Shell "explorer.exe" & " " & GetDocumentsDir & "\WordMat-Backup", vbNormalFocus
 #End If
 End Sub
 

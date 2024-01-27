@@ -21,8 +21,8 @@ Sub RunTestSequenceInteractive()
 End Sub
 
 Sub RunTestSequence()
-' runs a series of test calculations. The expressions are typed into Word and the test math action is performed. Result is shown
-'    Application.ScreenUpdating = False
+    ' runs a series of test calculations. The expressions are typed into Word and the test math action is performed. Result is shown
+    '    Application.ScreenUpdating = False
     Dim s As String
     Dim AllR As Range
     
@@ -82,25 +82,25 @@ Sub RunTestSequence()
         Selection.Font.Bold = False
         Selection.Font.ColorIndex = wdAuto
         Selection.TypeParagraph
-'        Selection.TypeText ("  ")
+        '        Selection.TypeText ("  ")
         ErrCount = ErrCount + 1
     End If
     TestCount = TestCount + 1
 
-'GoTo ggbtest
-'GoTo slut
+    'GoTo ggbtest
     
     ' når der skal laves nye test, er det nemmest at bruge funktion 'CreateTestberegn'
     ' alternativt: bare at køre testen med et tomt expected result. Der skrives hvilken teststreng der skal bruges hvis resultat er korrekt
     ' ellers brug GetTestString' eller UnicodeValsToString for at finde streng fra et matematikfelt for kommandoen.
     ' the result may have to be adjusted for calculations (not solve). Often brackets of exponents are different and spaces must be removed
     ' Multiple correct answers can be separated by @$
-'    DoEvents ' virker ikke
-'    Application.ScreenRefresh
+    '    DoEvents ' virker ikke
+    '    Application.ScreenRefresh
 
-   'til test af enkelt
+    'til test af enkelt
+    GoTo Slut
     
-   ' Man kan indtaste flere korrekte resultater, bare adskil med @$
+    ' Man kan indtaste flere korrekte resultater, bare adskil med @$
     'calculation tests
     If TestBeregn("2+3", "=5") Then GoTo Slut
     TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2@$=-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,899830495714724" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
@@ -219,7 +219,7 @@ Sub RunTestSequence()
     MaximaExact = 1
     
     '    TestSolve "", "x", "x="
-'    If StopNow Then GoTo slut
+    '    If StopNow Then GoTo slut
     
     'Often fails, but not always ??? then works numerically
     If Not NonInterA Then
@@ -282,22 +282,22 @@ Sub RunTestSequence()
     AllTrig = False
     Radians = False
 
-'    TestSolve "", "x", "x="
-'    If StopNow Then GoTo slut
+    '    TestSolve "", "x", "x="
+    '    If StopNow Then GoTo slut
     
     If Not NonInterA Then '****** Interactive start *******
-    ' requires user to stop and choose retry numeric
-    TestBeregn "(1+1/10^12 )^(10^12 )", VBA.ChrW(8776) & "2,718523"
-    If StopNow Then GoTo Slut
+        ' requires user to stop and choose retry numeric
+        TestBeregn "(1+1/10^12 )^(10^12 )", VBA.ChrW(8776) & "2,718523"
+        If StopNow Then GoTo Slut
 
-    ' Requires user input. Equations that trigger numeric solution
-    TestSolve "x^2=" & VBA.ChrW(12310) & "0,7" & VBA.ChrW(12311) & "^x", "x", "x" & VBA.ChrW(8776) & "-15,29371    " & VBA.ChrW(8744) & "    x" & VBA.ChrW(8776) & "-1,249643    " & VBA.ChrW(8744) & "    x" & VBA.ChrW(8776) & "0,8581024", "Click maxima numeric"
-    If StopNow Then GoTo Slut
-    TestSolve "x" & VBA.ChrW(183) & "e^2x+e^2x=0", "x", "x" & VBA.ChrW(8776) & "-1", "Click maxima numeric"  ' Only x=-1 is a solution
-    If StopNow Then GoTo Slut
+        ' Requires user input. Equations that trigger numeric solution
+        TestSolve "x^2=" & VBA.ChrW(12310) & "0,7" & VBA.ChrW(12311) & "^x", "x", "x" & VBA.ChrW(8776) & "-15,29371    " & VBA.ChrW(8744) & "    x" & VBA.ChrW(8776) & "-1,249643    " & VBA.ChrW(8744) & "    x" & VBA.ChrW(8776) & "0,8581024", "Click maxima numeric"
+        If StopNow Then GoTo Slut
+        TestSolve "x" & VBA.ChrW(183) & "e^2x+e^2x=0", "x", "x" & VBA.ChrW(8776) & "-1", "Click maxima numeric"  ' Only x=-1 is a solution
+        If StopNow Then GoTo Slut
     
     End If '****** Interactive end *******
-'    TestBeregn VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^" & VBA.ChrW(8734) & "" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "á3)áe^(-1/2á((y-1)/3)^2 ) dy", "=1"
+    '    TestBeregn VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^" & VBA.ChrW(8734) & "" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "á3)áe^(-1/2á((y-1)/3)^2 ) dy", "=1"
     
     
     ' Numrerisk test
@@ -316,7 +316,7 @@ Sub RunTestSequence()
     MaximaExact = 0
     ShowSettings
     
-     'numeric definition test
+    'numeric definition test
     InsertTestMath "definer: f(x)=-x^2" & VBA.ChrW(8729) & "" & VBA.ChrW(8730) & "x+2/x;x_1=0,25"
     Selection.TypeParagraph
     TestSolve "f^' (x)=-32", "x", "x=0,251239    " & VBA.ChrW(8744) & "    x=5,464284"
@@ -356,7 +356,9 @@ Sub RunTestSequence()
     If TestBeregn("((" & VBA.ChrW(9608) & "(-4@3))" & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(1@7)))/|((" & VBA.ChrW(9608) & "(-4@3)))|^2 " & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(-4@3))", "=(" & VBA.ChrW(9632) & "(-68/25@51/25))=(" & VBA.ChrW(9632) & "(-2,72@2,04))@$=(" & VBA.ChrW(9632) & "(-(68/25)@51/25))=(" & VBA.ChrW(9632) & "(-2,72@2,04))") Then GoTo Slut
     If TestBeregn("(" & VBA.ChrW(9632) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9632) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo Slut 'To forskellige måde at taste vektorer på:
     If TestBeregn("(" & VBA.ChrW(9608) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9608) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo Slut
-
+    If TestSolve("(" & VBA.ChrW(9608) & "(x+y@x-y))=(" & VBA.ChrW(9608) & "(1@2))", "x", "x=3/2    " & VBA.ChrW(8743) & "    y=-(1/2)") Then GoTo Slut
+    If TestSolve("(" & VBA.ChrW(9608) & "(t^3-t@t))=(" & VBA.ChrW(9608) & "((-15)/64@ 1/4))", "t", "t=1/4") Then GoTo Slut ' denne fejler. Virker hvis man giver den x som varibel manuelt
+    
     MaximaExact = 2
     TestBeregn "rref([" & VBA.ChrW(9632) & "(-1&0&1/2&1/2@1/2&-1&0&1/2@1/2&1&-1&0@0&0&1/2&-1)])", "=[" & VBA.ChrW(9632) & "(1&0&0&-1,5@0&1&0&-1,25@0&0&1&-2@0&0&0&0)]"
     If StopNow Then GoTo Slut
@@ -394,8 +396,8 @@ ggbtest:
     ' GeoGebra test
     CASengine = 2
     MaximaExact = 1 ' 1=exact
-'    Selection.TypeParagraph
-'    Selection.TypeText "GeoGebra CAS Test"
+    '    Selection.TypeParagraph
+    '    Selection.TypeText "GeoGebra CAS Test"
     ShowSettings "GeoGebra CAS Test"
     
     TestBeregn "2+3", "=5"
@@ -423,10 +425,10 @@ ggbtest:
     If StopNow Then GoTo Slut
     TestBeregn "log_4" & VBA.ChrW(8289) & "a", "=ln(a)/ln(4)"
     If StopNow Then GoTo Slut
-'    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(x_0)+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)" ' Test af forkert placerede skjulte parenteser
+    '    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(x_0)+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)" ' Test af forkert placerede skjulte parenteser
     TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x+y)", "=(-sin" & VBA.ChrW(8289) & "(1/180 x_0 " & VBA.ChrW(960) & ")+sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x+y)"
     If StopNow Then GoTo Slut
-'    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(x_0)-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
+    '    TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(x_0)-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
     TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(1/180 x_0 " & VBA.ChrW(960) & ")-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
     If StopNow Then GoTo Slut
     
@@ -579,6 +581,7 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
     TestCount = TestCount + 1
 End Sub
 Sub CreateTestBeregn()
+' laver en ny test
     CreateTestBeregnPar
 End Sub
 Sub CreateTestBeregnDE()

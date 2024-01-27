@@ -187,6 +187,8 @@ End Sub
 Public Sub ResetMaxima()
     Dim kd As String
     
+    If DllConnType = 2 Then Exit Sub ' wsh starter på ny hver gang så reset ikke nødv
+    
 #If Mac Then ' indført fra version 1.23
     KillDef = ""
     ForgetList = ""
@@ -362,7 +364,7 @@ Sub RunMaximaWSH(Optional StopTime As Integer)
     End If
     If Err = 0 Then
         FindLastMaximaOutput True, Moutp
-        ShowDebug
+        ShowDebug False, cmd, Moutp
     Else
         MsgBox2 "Error connecting to Maxima using WSH", vbOKOnly, "Error"
     End If
@@ -487,14 +489,21 @@ Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 Slut:
 End Sub
-Sub ShowDebug(Optional vis As Boolean = False)
+Sub ShowDebug(Optional vis As Boolean = False, Optional MInputString As String, Optional OutputString As String)
     If DebugWM Or vis Then
-        UserFormDebug.TextBox_input = MaximaInputStreng
+        If MInputString = vbNullString Then MInputString = MaximaInputStreng
+        UserFormDebug.TextBox_input = MInputString
+        If OutputString = vbNullString Then
 #If Mac Then
 #Else
-        UserFormDebug.TextBox_output = MaxProc.MaximaOutput
+            UserFormDebug.TextBox_lastmaximaoutput = MaxProc.LastMaximaOutput
+            UserFormDebug.TextBox_maximaoutput = MaxProc.MaximaOutput
 #End If
-        UserFormDebug.TextBox_maximaoutput = MaxProc.LastMaximaOutput
+        Else
+            UserFormDebug.TextBox_lastmaximaoutput = OutputString
+            UserFormDebug.TextBox_maximaoutput = OutputString
+        End If
+        
         UserFormDebug.Label_time.Caption = UserFormDebug.Label_time.Caption & "Samlet tid: " & Timer - tid & vbCrLf
         UserFormDebug.Show
     End If
@@ -6596,8 +6605,11 @@ Function RemovePrintetBool(s As String) As String
 '#Else
 '    arr = Split(s, vbLf)
 '#End If
-Arr = Split(s, VbCrLfMac) ' ændret v. 1.23
-
+If DllConnType = 2 Then
+    Arr = Split(s, vbLf) ' wsh er lidt anderledes
+Else
+    Arr = Split(s, VbCrLfMac) ' ændret v. 1.23
+End If
     ant = UBound(Arr)
     If ant > 0 Then
         t = Trim(Arr(ant))
@@ -7441,7 +7453,7 @@ Function GetMaximaSettingsString() As String
             SettingsString = SettingsString & "errcatch(setunits(" & ConvertUnits(OutUnits) & ")),"
         End If
     Else
-        SettingsString = SettingsString & "keepfloat:false,"
+        SettingsString = SettingsString & "keepfloat:true,"
     End If
     
     If MaximaComplex Then

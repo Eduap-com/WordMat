@@ -92,9 +92,9 @@ Function GetErrorDefinition(CheckText As String) As ErrorDefinition
 '    ElseIf InStr(KommentarOutput, "Division by 0") > 0 Then ' maybe not relevant in SBCL
 '        fejltekst = Sprog.DivisionByZero
 '        CheckForError = True
-    ElseIf InStr(CheckText, "expt:undefined:0toanegativeexponent") > 0 Then
-        GetErrorDefinition.Title = "Division by zero"
-        GetErrorDefinition.Description = Sprog.DivisionByZero
+'    ElseIf InStr(CheckText, "expt:undefined:0toanegativeexponent") > 0 Then ' kommer ved mange alm beregninger uden fejl
+'        GetErrorDefinition.Title = "Division by zero"
+'        GetErrorDefinition.Description = Sprog.DivisionByZero
     ElseIf InStr(CheckText, "anerrorTodebugthistry:debugmode(true)") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
         GetErrorDefinition.Description = Sprog.LispError

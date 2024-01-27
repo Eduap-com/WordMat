@@ -289,7 +289,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
       'Kill Mappe & "\" & filnavn & ".dvi"
       On Error GoTo Fejl
 
-      appnr = shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
+      appnr = Shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
 
       ' vent på maxima har genereret outputfil
       i = 0
@@ -358,7 +358,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
       If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
       On Error GoTo 0 'Fejl
 
-      shell shellcmd, vbNormal
+      Shell shellcmd, vbNormal
       'appnr = Shell(shellcmd, vbNormal) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
       ' vent på maxima har genereret outputfil
       i = 0

@@ -658,7 +658,7 @@ On Error Resume Next
 #Else
 ' ActiveDocument.FollowHyperlink fjerner parametre som fx. ?command=...   Derfor kan det være nødvendigt at bruge script
     If Script Then
-        shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus ' giver problemer med bitdefender
+        Shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus ' giver problemer med bitdefender
 '        shell "cmd /S /C """"" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """""", vbNormalFocus ' Denne bliver ikke fanget ved install, men bitdefender blokerer den ved kørsel
     Else
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' hvis linket ikke virker så sker der bare ingen ting
