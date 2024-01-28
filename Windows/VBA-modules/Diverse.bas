@@ -1492,7 +1492,7 @@ Install2:
         End If
     Else
         If Not RunSilent Then
-            MsgBox2 "Du har allerede den nyeste version af WordMat installeret: v." & NewVersion, vbOKOnly, "Ingen opdatering"
+            MsgBox2 "Du har allerede den nyeste version af WordMat installeret: v." & AppVersion, vbOKOnly, "Ingen opdatering"
         End If
     End If
    

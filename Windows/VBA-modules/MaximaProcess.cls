@@ -8,6 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+' denne klasse benyttes ikke mere efter Maxima tilgås med terminal på Mac. Den er der kun for at der ikke kommer fejlkompilering
 #If Mac Then
 'Private Declare PtrSafe Function StartMaxima Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" () As LongPtr
 'Private Declare PtrSafe Function CloseMaxima Lib "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" () As LongPtr
@@ -37,21 +38,21 @@ Sub StartMaximaProcess(Optional WaitTime As LongPtr = 15)
     Dim r As LongPtr
     mFinished = 0
     mQuestion = 0
-    If IsMaximaRunning() > 0 Then
-'        MsgBox "Maxima already running"
-        Exit Sub
-    End If
-    SetMaximaPath "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/Maxima.app/Contents/Resources/maxima.sh"
+'    If IsMaximaRunning() > 0 Then
+''        MsgBox "Maxima already running"
+'        Exit Sub
+'    End If
+'    SetMaximaPath "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/Maxima.app/Contents/Resources/maxima.sh"
 '    SetMaximaPath "/Applications/WordMat/Maxima.app/Contents/Resources/maxima.sh"
-    If WaitTime = 0 Then
-        r = StartMaxima()
-    Else
-        r = StartMaximaWait(WaitTime)
+'    If WaitTime = 0 Then
+'        r = StartMaxima()
+'    Else
+'        r = StartMaximaWait(WaitTime)
     ' Mac: pga ændring af operator _, som ikke  virker på Mac. Skal vel være i image. Er nu puttet i image v. 1.03.
 '        Dim Command As String
 '        Command = "infix(""##"",115,115)$""##""(qwa,qwb):=block(if scalarp(qwa) or scalarp(qwb) then return(qwa*qwb) else return(qwa.qwb))$" & Command
 '        ExecuteMaximaCommand Command, 5
-    End If
+'    End If
     mIndex = 1
         If r < 1 Then
             MsgBox "Error starting Maxima", vbOKOnly, Sprog.Error
@@ -60,7 +61,7 @@ Sub StartMaximaProcess(Optional WaitTime As LongPtr = 15)
 Slut:
 End Sub
 Sub CloseProcess()
-    CloseMaxima
+  '  CloseMaxima
 End Sub
 
 Function StartMaximaWait(WaitTime As LongPtr) As LongPtr
@@ -71,24 +72,24 @@ Function StartMaximaWait(WaitTime As LongPtr) As LongPtr
 
     i = WaitTime * 20
     OutputBuffer = GetEmptyString()
-    retval = StartMaxima()
+'    retval = StartMaxima()
 
     If retval < 1 Then
-        StartMaximaWait = retval
+'        StartMaximaWait = retval
         Exit Function
     End If
 
-    Do While IsMaximaRunning() < 1
-        uSleep 50000
-    Loop
-    Do
-        uSleep 50000
-        L = ReadOutputIfAny(OutputBuffer)
-        If L > 0 Then
-            Startupstring = Startupstring & Left(OutputBuffer, CInt(L))
-        End If
-        i = i - 1
-    Loop While i > 0 And InStr(Startupstring, "(%i1)") < 1  'l < 1 And
+'    Do While IsMaximaRunning() < 1
+'        uSleep 50000
+'    Loop
+'    Do
+'        uSleep 50000
+'        L = ReadOutputIfAny(OutputBuffer)
+'        If L > 0 Then
+'            Startupstring = Startupstring & Left(OutputBuffer, CInt(L))
+'        End If
+'        i = i - 1
+'    Loop While i > 0 And InStr(Startupstring, "(%i1)") < 1  'l < 1 And
 
 '    MsgBox Startupstring
     If InStr(Startupstring, "(%i1)") > 0 Then
@@ -113,11 +114,11 @@ On Error GoTo Fejl
     nocmd = ea.CountText(";") + ea.CountText("$")
     mIndex = mIndex + nocmd
         
-    If WaitForIt = 0 Then
-        L = SendToMaxima(Command)
-    Else
-        L = SendToMaxima(Command)
-        WaitForMaximaUntil WaitForIt
+'    If WaitForIt = 0 Then
+'        L = SendToMaxima(Command)
+'    Else
+'        L = SendToMaxima(Command)
+'        WaitForMaximaUntil WaitForIt
         
 '        lastOutput = GetEmptyString()
 '        l = SendToMaximaWait(command, lastOutput, WaitForIt)
@@ -125,8 +126,8 @@ On Error GoTo Fejl
 '            lastOutput = Left(lastOutput, l)
 '            mFinished = 1
 '        End If
-        CheckForQuestion
-    End If
+'        CheckForQuestion
+'    End If
 GoTo Slut
 Fejl:
     MsgBox "Maxima execute error", vbOKOnly, Sprog.Error
@@ -185,7 +186,7 @@ If StopTime = 0 Then StopTime = 1
 WaitForMaximaUntil = 1
     Do While Not (omax.StopNow) And i < StopTime
         OutputBuffer = GetEmptyString()
-        L = ReadOutputIfAny(OutputBuffer)
+'        L = ReadOutputIfAny(OutputBuffer)
 '        l = GetLastOutputVB(OutputBuffer, 10)
         If L > 0 Then
             t = Left(OutputBuffer, CInt(L))
@@ -295,7 +296,7 @@ Public Property Let Question(ByVal vNewValue As Integer)
 End Property
 Public Function MaximaStarted() As Boolean
     Dim i As LongPtr
-    i = IsMaximaRunning()
+'    i = IsMaximaRunning()
     If i = 0 Then
         MaximaStarted = False
     Else
