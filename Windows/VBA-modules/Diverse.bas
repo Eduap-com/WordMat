@@ -1375,7 +1375,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     On Error GoTo Fejl
     Dim NewVersion As String, p As Integer, News As String, s As String
     Dim UpdateNow As Boolean, PartnerShip As Boolean
-    Dim UFvent As UserFormWaitForMaxima
+'    Dim UFvent As UserFormWaitForMaxima
     
    
     If GetInternetConnectedState = False Then
@@ -1400,7 +1400,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
 #End If
     If Len(s) = 0 Then
         If Not RunSilent Then
-            MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
+            MsgBox2 "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
         End If
         GoTo Slut
     End If
@@ -1419,7 +1419,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
    
     If Len(NewVersion) = 0 Or Len(NewVersion) > 15 Then
         If Not RunSilent Then
-            MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
+            MsgBox2 "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
         End If
         GoTo Slut
     End If
@@ -1468,12 +1468,13 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     
     If UpdateNow Then
         If PartnerShip Then
-            Set UFvent = New UserFormWaitForMaxima
+'            Set UFvent = New UserFormWaitForMaxima
             If MsgBox2(Sprog.A(21) & News & vbCrLf & "WordMat vil downloade og installere automatisk" & vbCrLf & vbCrLf & "Bemærk at det vil tage lidt tid at downloade og Word vil lukke inden installationen starter.", vbOKCancel, Sprog.A(23)) = vbOK Then
-                ActiveDocument.Save
-                UFvent.Label_tip.Caption = "Downloader WordMat " & NewVersion
-                UFvent.Label_progress.Caption = "**"
-                UFvent.Show
+                On Error Resume Next
+                Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
+'                UFvent.Label_tip.Caption = "Downloader WordMat " & NewVersion
+'                UFvent.Label_progress.Caption = "**"
+'                UFvent.Show
                 On Error GoTo Install2
                 Application.Run ("PUpdateWordMat")
                 On Error GoTo Fejl
@@ -1481,7 +1482,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         Else
 Install2:
             On Error GoTo Fejl
-            MsgBox Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, Sprog.A(23)
+            MsgBox2 Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, Sprog.A(23)
             '        If MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbYesNo, Sprog.A(23)) = vbYes Then
             If Sprog.SprogNr = 1 Then
                 OpenLink "https://www.eduap.com/da/download-wordmat/"
@@ -1491,7 +1492,7 @@ Install2:
         End If
     Else
         If Not RunSilent Then
-            MsgBox "Du har allerede den nyeste version af WordMat installeret.", vbOKOnly, "Ingen opdatering"
+            MsgBox2 "Du har allerede den nyeste version af WordMat installeret: v." & NewVersion, vbOKOnly, "Ingen opdatering"
         End If
     End If
    
@@ -1507,7 +1508,7 @@ Fejl:
     End If
 Slut:
     On Error Resume Next
-    Unload UFvent
+'    Unload UFvent
 
 End Sub
 #If Mac Then
