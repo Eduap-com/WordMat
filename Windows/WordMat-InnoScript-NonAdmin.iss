@@ -206,6 +206,8 @@ Source: ExternalPrograms\graphtemplate.grf; DestDir: {%appdata}\WordMat\; Flags:
 Source: Other\ReaktiverWordMat.vbs; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
 ;Source: Other\ReaktiverWordMat.vbs; DestDir: {app}; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: Other\CopyWordMat.vbs; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: Other\UnInstallWordMat.vbs; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
+Source: Other\UnInstallWordMatAdmin.bat; DestDir: {%appdata}\WordMat\; Flags: ignoreversion overwritereadonly uninsremovereadonly
 ; These files are in a folder a level up from the Windows folder as they are shared with the Mac version
 Source: ..\Shared\WordDocs\*.do*; DestDir: {%appdata}\WordMat\WordDocs\; Flags: ignoreversion overwritereadonly uninsremovereadonly
 Source: ..\Shared\geogebra-math-apps\*; DestDir: {%appdata}\WordMat\geogebra-math-apps\; Check: VOverWriteDocs; Flags: recursesubdirs ignoreversion restartreplace overwritereadonly replacesameversion uninsremovereadonly uninsrestartdelete
@@ -309,6 +311,9 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\12.0\Word\Options\"; ValueType: n
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"WordMat"; ValueData: 1 
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"WordMat.dotm"; ValueData: 1 
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"C:\Program Files\Microsoft Office\Root\Office16\STARTUP\WordMat.dotm"; ValueData: 1 
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"{%appdata}\Microsoft\Word\STARTUP\WordMat.dotm"; ValueData: 1 
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"{%appdata}\Microsoft\Word\STARTUP\WordMatP.dotm"; ValueData: 1 
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"{%appdata}\Microsoft\Word\STARTUP\WordMatP2.dotm"; ValueData: 1 
 
 
 ; WordMat settings
@@ -415,13 +420,14 @@ Type: dirifempty; Name: "{app}"
                    
 
 [Icons]
-Name: "{group}\{cm:InstallThisUser}"; Filename: "{app}\OpretWordMenu.vbs"; WorkingDir: "{app}"
-Name: "{group}\{cm:ReactivateWordMat}"; Filename: "{app}\ReaktiverWordMat.vbs"; WorkingDir: "{app}"
+;Name: "{group}\{cm:InstallThisUser}"; Filename: "{app}\OpretWordMenu.vbs"; WorkingDir: "{app}"
+Name: "{group}\{cm:ReactivateWordMat}"; Filename: "{%appdata}\WordMat\ReaktiverWordMat.vbs"; WorkingDir: "{%appdata}"
+Name: "{group}\CopyWordMat"; Filename: "{%appdata}\WordMat\CopyWordMat.vbs"; WorkingDir: "{%appdata}"
 ;Name: "{group}\GeoGebra"; Filename: "{app}\GeoGebra\geogebra.exe"; WorkingDir: "{app}" 
 ;Name: "{group}\GeoGebra"; Filename: "javaws.exe";Parameters: "-system http://www.geogebra.org/webstart/geogebra.jnlp"; WorkingDir: "{app}"
-Name: "{group}\{cm:QuickWordMat}"; Filename: "{app}\WordMatLommeregner.docm"; WorkingDir: "{app}"
-Name: {group}\{cm:ProgramOnTheWeb,WordMat}; Filename: http://www.eduap.com/
-Name: {group}\{cm:UninstallProgram,WordMat}; Filename: {uninstallexe}
+;Name: "{group}\{cm:QuickWordMat}"; Filename: "{app}\WordMatLommeregner.docm"; WorkingDir: "{app}"
+Name: {group}\{cm:ProgramOnTheWeb,WordMat}; Filename: https://www.eduap.com/
+Name: {group}\{cm:UninstallProgram,WordMat}; Filename: "{%appdata}\WordMat\UnInstallWordMat.vbs"
 ;Name: "{userdesktop}\{cm:QuickWordMat}"; Filename: "{app}\WordMatLommeregner.docm"; WorkingDir: "{app}"
  
 [Code]
@@ -1334,6 +1340,16 @@ begin
 //  OverWriteDocs:=OverWriteFigurer();
   OverWriteDocs:=True;
 
+  if IsAdmin() then
+   MsgBox( 'admin = true', mbInformation, MB_OK)
+  else
+   MsgBox( 'admin = false', mbInformation, MB_OK);
+
+  if IsAdminInstallMode() then
+   MsgBox( 'adminmode = true', mbInformation, MB_OK)
+  else
+   MsgBox( 'adminmode = false', mbInformation, MB_OK);
+
   //ShowParameters();
 
   Result := True; // Hvis  InitializeSetup() returnerer false, stoppes installationen
@@ -1360,9 +1376,9 @@ begin
       Result := False; 
    end
 //  else if (not IsAdminLoggedOn() and FileExists(ExpandConstant('{pf32}\WordMat\WordMat.dotm'))) then
-  else if (not IsAdminLoggedOn() and FileExists(StartupFolder16a('') + 'WordMat.dotm')) then
+  else if (FileExists(VStartupFolderAll16('') + 'WordMat.dotm')) then
      begin
-         MsgBox(ExpandConstant('WordMat Non-admin kan ikke installeres, når WordMat allerede er installeret for alle brugere i Programmer. Den gamle version kan ikke afinstalleres uden Administrator rettigheder' + '{cm:NotAdmin}'), mbInformation, MB_OK); 
+         MsgBox(ExpandConstant('WordMat Non-admin kan ikke installeres, når WordMat allerede er installeret for alle brugere i Programmer. Den gamle version kan ikke afinstalleres uden Administratorrettigheder' + '{cm:NotAdmin}'), mbInformation, MB_OK); 
          Result:=False;
      end
   else if not CloseWord() then

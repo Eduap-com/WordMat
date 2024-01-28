@@ -56,9 +56,9 @@ End If
  TriangleSett3 = False
  TriangleSett4 = False
 
-If AutoStart Then
-    PrepareMaximaNoSplash
-End If
+'If AutoStart Then ' WordMat start ret hurtigt op nu. Der er ikke meget fordel ved denne. Den giver bare potentielt problemer.
+'    PrepareMaximaNoSplash
+'End If
 End Sub
 
 Sub AutoExit()
@@ -67,7 +67,7 @@ End Sub
 Sub AutoClose()
 ' hver gang dokument lukkes
 'Dim d As Variant
-'Exit Sub  ' nødvendig når der er appclass?
+Exit Sub  ' nødvendig når der er appclass?
 
 On Error Resume Next
 'tempDoc.Close (False)

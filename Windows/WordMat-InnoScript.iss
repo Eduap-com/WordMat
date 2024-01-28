@@ -342,6 +342,8 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\12.0\Word\Options\"; ValueType: n
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"WordMat"; ValueData: 1 
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"WordMat.dotm"; ValueData: 1 
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"C:\Program Files\Microsoft Office\Root\Office16\STARTUP\WordMat.dotm"; ValueData: 1 
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"C:\Program Files\Microsoft Office\Root\Office16\STARTUP\WordMatP.dotm"; ValueData: 1 
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Word\Resiliency\DoNotDisableAddinList\"; ValueType: dword; ValueName:"C:\Program Files\Microsoft Office\Root\Office16\STARTUP\WordMatP2.dotm"; ValueData: 1 
 
 
 ; WordMat settings  ; V. 1.29 fjernet for at sikre at de ikke nulstilles ved opdatering
@@ -474,7 +476,7 @@ Name: "{group}\{cm:ReactivateWordMat}"; Filename: "{app}\ReaktiverWordMat.vbs"; 
 ;Name: "{group}\GeoGebra"; Filename: "{app}\GeoGebra\geogebra.exe"; WorkingDir: "{app}" 
 ;Name: "{group}\GeoGebra"; Filename: "javaws.exe";Parameters: "-system http://www.geogebra.org/webstart/geogebra.jnlp"; WorkingDir: "{app}"
 Name: "{group}\{cm:QuickWordMat}"; Filename: "{app}\WordMatLommeregner.docm"; WorkingDir: "{app}"
-Name: {group}\{cm:ProgramOnTheWeb,WordMat}; Filename: http://www.eduap.com/
+Name: {group}\{cm:ProgramOnTheWeb,WordMat}; Filename: https://www.eduap.com/
 Name: {group}\{cm:UninstallProgram,WordMat}; Filename: {uninstallexe}
 ;Name: "{userdesktop}\{cm:QuickWordMat}"; Filename: "{app}\WordMatLommeregner.docm"; WorkingDir: "{app}"
  
