@@ -3,11 +3,11 @@
 #define MyAppName "WordMat"
 #define MyAppVersion "1.29.0"
 
-; Formålet med denne fil er at distribuere opdateringer, hvor dll-filer ikke er ændret
+; Formålet med denne fil er at installere WordMat uden adm rettigheder
+; Der er lavet uniinstall.vbs der kan afinstallere
 ; Den forrige version skal være installeret med 'bruger' og ikke for alle
 ; WordMat.dotm er lavet, så den kan bruge Maxima og GeoGebra applet fra appdata.
 ; Denne installation kører ikke hvis WordMat.dotm er placeret for alle brugere.
-
 ; Der er fjernet en del linjer i Non-admin 
 ; I section [Files] er tasks fjernet og dem der var på taskalle er fjernet 
 ; I section [Tasks] er alt fjernet
@@ -134,8 +134,8 @@ da.NoExcel=Du har ikke installeret Excel 2010, 2013, 2016 eller 2019. Installati
 en.NoExcel=Excel 2010, 2013, 2016 or 2019 is not installed. The installation will terminate.
 sp.NoExcel=Excel 2010, 2013, 2016 o 2019 no está instalado. La instalación finalizará
 
-da.NotAdmin=Du skal være Administrator for at installere WordMat.%n%n Installationen afsluttes.
-en.NotAdmin=You need to be administrator to install WordMat.%n%n The installation will terminate.
+da.NotAdmin=WordMat Non-admin kan ikke installeres, når WordMat allerede er installeret for alle brugere. Den gamle version kan ikke afinstalleres uden Administratorrettigheder.%n%nFjern først WordMat fra "Kontrolpanel / Programmer / Fjern program". Dernæst genstart denne installation.%n%n Installationen afsluttes.
+en.NotAdmin=WordMat Non-admin cannot be installed, when WordMat is already installed for all users. You need to be administrator to uninstall that version%n%n First remove WordMat from "Control panel / Programs / Remove program". Then restart this installation. %n%n The installation will terminate.
 sp.NotAdmin=Debe ser administrador para instalar WordMat.%n%n la instalación finalizará.
 
 da.NoDotNet=WordMat kræver Microsoft .NET Framework 4.0%n%n Opdateringen fra Microsoft vil nu blive hentet og installeret, men installationen vil tage noget tid (15-30min) og kræve internetforbindelse.%n%n Denne installation vil ikke skulle køres ved fremtidige opdateringer af WordMat.
@@ -1340,15 +1340,6 @@ begin
 //  OverWriteDocs:=OverWriteFigurer();
   OverWriteDocs:=True;
 
-  if IsAdmin() then
-   MsgBox( 'admin = true', mbInformation, MB_OK)
-  else
-   MsgBox( 'admin = false', mbInformation, MB_OK);
-
-  if IsAdminInstallMode() then
-   MsgBox( 'adminmode = true', mbInformation, MB_OK)
-  else
-   MsgBox( 'adminmode = false', mbInformation, MB_OK);
 
   //ShowParameters();
 
@@ -1376,9 +1367,9 @@ begin
       Result := False; 
    end
 //  else if (not IsAdminLoggedOn() and FileExists(ExpandConstant('{pf32}\WordMat\WordMat.dotm'))) then
-  else if (FileExists(VStartupFolderAll16('') + 'WordMat.dotm')) then
+  else if (FileExists(VStartupFolderAll16('') + '\WordMat.dotm')) then
      begin
-         MsgBox(ExpandConstant('WordMat Non-admin kan ikke installeres, når WordMat allerede er installeret for alle brugere i Programmer. Den gamle version kan ikke afinstalleres uden Administratorrettigheder' + '{cm:NotAdmin}'), mbInformation, MB_OK); 
+         MsgBox(ExpandConstant('{cm:NotAdmin}'), mbInformation, MB_OK); 
          Result:=False;
      end
   else if not CloseWord() then
