@@ -7,20 +7,6 @@ Option Explicit
 Private m_screenwidth As Integer
 Private mDatafolder As String
 
-
-Sub TestMaxima()
-
-    PrepareMaxima
-    MaxProc.ExecuteMaximaCommand "2+4;", 5
-'    MaxProc.WaitForMaximaUntil 5
-    MsgBox MaxProc.LastMaximaOutput
-    Application.Windows(1).WindowState = 1
-    'ActiveDocument.ActiveWindow.View = wdReadingView
-    
-    
-End Sub
-
-
 Function ScreenWidth() As Integer
     If m_screenwidth > 0 Then
         ScreenWidth = m_screenwidth
@@ -154,8 +140,6 @@ Sub CreateSCPTfile(fileName As String, ScriptString As String)
     AppleScriptTaskScript = ScriptString & ";" & AppleScriptTaskFolder
     RunMyScript = AppleScriptTask("MakeSCPTFile.scpt", "CreateSCPTFile", AppleScriptTaskScript)
 End Sub
-
-
 
 Function CheckAppleScriptTaskWordScriptFile(ScriptFileName As String) As Boolean
     'Function to Check if the AppleScriptTask script file exists

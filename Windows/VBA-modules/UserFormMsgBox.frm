@@ -68,7 +68,7 @@ End Sub
 Private Sub UserForm_Activate()
     Dim h As Integer, w As Integer, Arr() As String, i As Integer
     
-    Arr = Split(prompt, VbCrLfMac)
+    Arr = Split(prompt, vbLf)
     
 '    h = 120 + 16 * GetCountOfChar(prompt, VbCrLfMac)
     h = 120 + 16 * UBound(Arr)

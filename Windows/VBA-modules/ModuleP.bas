@@ -18,10 +18,10 @@ Function WMFs(FunctionName As String) As String
     End If
 End Function
 
-Public Function QActivePartnership() As Boolean
+Public Function QActivePartnership(Optional Force As Boolean = False) As Boolean
 ' Returns true if the user has active partnership
     On Error GoTo Fejl
-    QActivePartnership = Application.Run("PQActivePartnership")
+    QActivePartnership = Application.Run("PQActivePartnership", Force)
     
     GoTo Slut
 Fejl:

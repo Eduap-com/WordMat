@@ -3095,6 +3095,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                      ass = arr3(1)
                   End If
                 If UBound(arr3) > 0 Then
+                  ass = Replace(ass, "&", "") ' Hvis der bruges skabelon fra Word vil der være & efter komma
                   ass = Replace(ass, "" & ChrW(8743) & " ", "&&and&&")
                   ass = Replace(ass, " " & ChrW(8743) & " ", "&&and&&")
                   ass = Replace(ass, "" & ChrW(8744) & " ", "&&or&&")

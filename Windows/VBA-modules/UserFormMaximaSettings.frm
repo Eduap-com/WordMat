@@ -334,6 +334,14 @@ Private Sub CommandButton_sletenheder_Click()
     TextBox_outunits.Text = ""
 End Sub
 
+Private Sub Label_checkpartnerskab_Click()
+    If QActivePartnership(True) Then
+        MsgBox "Din skole har aktivt partnerskab", vbOKOnly, "Partnerskab OK"
+    Else
+        MsgBox "Der kunne ikke registreres et aktivt partnerskab", vbOKOnly, "Ingen Partnerskab"
+    End If
+End Sub
+
 Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub

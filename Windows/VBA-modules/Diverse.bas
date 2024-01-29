@@ -1469,7 +1469,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     If UpdateNow Then
         If PartnerShip Then
 '            Set UFvent = New UserFormWaitForMaxima
-            If MsgBox2(Sprog.A(21) & News & vbCrLf & "WordMat vil downloade og installere automatisk" & vbCrLf & vbCrLf & "Bemærk at det vil tage lidt tid at downloade og Word vil lukke inden installationen starter.", vbOKCancel, Sprog.A(23)) = vbOK Then
+            If MsgBox2(Sprog.A(21) & News & vbCrLf & vbCrLf & "Klik OK for at starte opdateringen.", vbOKCancel, Sprog.A(23)) = vbOK Then
                 On Error Resume Next
                 Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
 '                UFvent.Label_tip.Caption = "Downloader WordMat " & NewVersion
