@@ -66,10 +66,15 @@ Sub SetButtonsInactive()
 End Sub
 
 Private Sub UserForm_Activate()
-    Dim h As Integer, w As Integer, Arr() As String, i As Integer
+    Dim h As Integer, w As Integer, Arr() As String, i As Integer, LC As Integer
     
+#If Mac Then
+    prompt = Replace(prompt, vbCrLf, vbLf)
+    prompt = Replace(prompt, vbCr, vbLf)
+#Else
+#End If
+'    prompt = Replace(prompt, vbCr, vbLf)
     Arr = Split(prompt, vbLf)
-    
 '    h = 120 + 16 * GetCountOfChar(prompt, VbCrLfMac)
     h = 120 + 16 * UBound(Arr)
     If h > 1000 Then h = 1000

@@ -1407,7 +1407,7 @@ ghop:
 
     Else    ' ligningssystem
         Dim Variable As String, guess As String, inp As String, j As Integer
-        Dim arr2 As Variant
+        Dim Arr2 As Variant
 
         omax.ReadSelection
         omax.FindVariable
@@ -1423,12 +1423,12 @@ ghop:
 
         Variable = ""
         For j = 0 To UBound(Arr)
-            arr2 = Split(Arr(j), "=")
-            Variable = Variable & Trim(arr2(0)) & ","
-            If UBound(arr2) = 0 Or Trim(arr2(1)) = "" Then
+            Arr2 = Split(Arr(j), "=")
+            Variable = Variable & Trim(Arr2(0)) & ","
+            If UBound(Arr2) = 0 Or Trim(Arr2(1)) = "" Then
                 guess = guess & ",1"
             Else
-                guess = guess & Replace(Trim(arr2(1)), ",", ".") & ","
+                guess = guess & Replace(Trim(Arr2(1)), ",", ".") & ","
             End If
         Next
         Variable = Left(Variable, Len(Variable) - 1)

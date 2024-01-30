@@ -1764,7 +1764,7 @@ Sub ConvertOutputToSolvedGGB()
     ' til geogebraoutput ved ligningssystemer
     Dim p As Integer, s As String, i As Integer, j As Integer
     Dim ea As New ExpressionAnalyser
-    Dim Arr() As String, arr2() As String
+    Dim Arr() As String, Arr2() As String
     
     If MaximaOutput = "?" Or MaximaOutput = "" Then
         Exit Sub
@@ -1778,11 +1778,11 @@ Sub ConvertOutputToSolvedGGB()
     MaximaOutput = ""
     
     For i = 0 To UBound(Arr)
-        arr2 = Split(Arr(i), "&")
-        If UBound(arr2) > 0 Then
+        Arr2 = Split(Arr(i), "&")
+        If UBound(Arr2) > 0 Then
             If UBound(Arr) > 0 Then MaximaOutput = MaximaOutput & "("
-            For j = 0 To UBound(arr2)
-                MaximaOutput = MaximaOutput & arr2(j) & "    " & VBA.ChrW(8743) & "    "
+            For j = 0 To UBound(Arr2)
+                MaximaOutput = MaximaOutput & Arr2(j) & "    " & VBA.ChrW(8743) & "    "
             Next
             MaximaOutput = Left(MaximaOutput, Len(MaximaOutput) - 9)
             If UBound(Arr) > 0 Then MaximaOutput = MaximaOutput & ")"
@@ -2622,7 +2622,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     Dim pos4 As Long
     Dim pos5 As Long
     Dim posog As Long
-    Dim Arr As Variant, arr2() As String, arr3() As String
+    Dim Arr As Variant, Arr2() As String, Arr3() As String
     Dim Var As String
     Dim startn As String
     Dim slutn As String
@@ -3059,42 +3059,42 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
 '            pos2 = InStr(pos, ea.Text, VBA.ChrW(9508))
 '            expr = Mid(ea.Text, pos + 2, pos2 - pos - 1)
             Expr = ea.GetNextBracketContent(Pos)
-            arr2 = Split(Expr, "@")
+            Arr2 = Split(Expr, "@")
             s = "(if&&"
-            For j = 0 To UBound(arr2)
-               If InStr(arr2(j), ";") > 0 Then
+            For j = 0 To UBound(Arr2)
+               If InStr(Arr2(j), ";") > 0 Then
                   c = ";"
-               ElseIf InStr(arr2(j), ", ") > 0 Then
+               ElseIf InStr(Arr2(j), ", ") > 0 Then
                   c = ", "
-               ElseIf InStr(arr2(j), " ,") > 0 Then
+               ElseIf InStr(Arr2(j), " ,") > 0 Then
                   c = " ,"
-               ElseIf InStr(arr2(j), ",") > 0 Then
+               ElseIf InStr(Arr2(j), ",") > 0 Then
                   c = ","
-               ElseIf InStr(arr2(j), "|") > 0 Then
+               ElseIf InStr(Arr2(j), "|") > 0 Then
                   c = "|"
                Else
                   c = ""
                End If
-                arr3 = Split(arr2(j), c)
-                  If UBound(arr3) > 1 Then
+                Arr3 = Split(Arr2(j), c)
+                  If UBound(Arr3) > 1 Then
                      k = 1
                      ass = ""
-                     Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
-                        If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
+                     Do While k <= UBound(Arr3) ' hvis delt op forkert så repareres
+                        If Len(ass) > 0 Or InStr(Arr3(k), "<") > 0 Or InStr(Arr3(k), ">") > 0 Or InStr(Arr3(k), VBA.ChrW(8712)) > 0 Then
                            If ass = "" Then
-                              ass = arr3(k)
+                              ass = Arr3(k)
                            Else
-                              ass = ass & c & arr3(k)
+                              ass = ass & c & Arr3(k)
                            End If
                         Else
-                           arr3(0) = arr3(0) & c & arr3(k)
+                           Arr3(0) = Arr3(0) & c & Arr3(k)
                         End If
                         k = k + 1
                      Loop
-                  ElseIf UBound(arr3) = 1 Then
-                     ass = arr3(1)
+                  ElseIf UBound(Arr3) = 1 Then
+                     ass = Arr3(1)
                   End If
-                If UBound(arr3) > 0 Then
+                If UBound(Arr3) > 0 Then
                   ass = Replace(ass, "&", "") ' Hvis der bruges skabelon fra Word vil der være & efter komma
                   ass = Replace(ass, "" & ChrW(8743) & " ", "&&and&&")
                   ass = Replace(ass, " " & ChrW(8743) & " ", "&&and&&")
@@ -3105,14 +3105,14 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                   ass = Replace(ass, " OR ", "&&or&&")
                   ass = Replace(ass, " or ", "&&or&&")
                   If CasType = 0 Then
-                    s = s & sqbrAssump(SplitAssump(Trim(ass))) & "&&then&&(" & Trim(arr3(0)) & ")"
+                    s = s & sqbrAssump(SplitAssump(Trim(ass))) & "&&then&&(" & Trim(Arr3(0)) & ")"
                   Else
-                    s = s & ass & "&&then&&(" & Trim(arr3(0)) & ")"
+                    s = s & ass & "&&then&&(" & Trim(Arr3(0)) & ")"
                   End If
                Else
-                    s = s & "0=0&&then&&(" & Trim(arr3(0)) & ")"
+                    s = s & "0=0&&then&&(" & Trim(Arr3(0)) & ")"
                 End If
-                If j < UBound(arr2) Then s = s & "&&elseif&&"
+                If j < UBound(Arr2) Then s = s & "&&elseif&&"
             Next
             ea.Text = Left(ea.Text, Pos - 1) & s & ")" & right(ea.Text, Len(ea.Text) - Pos - Len(Expr) - 3)
             i = i + 1

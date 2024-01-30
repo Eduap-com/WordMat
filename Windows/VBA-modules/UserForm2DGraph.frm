@@ -934,7 +934,7 @@ Dim labeltext As String
 Dim lign As String
 Dim punkttekst As String
 Dim Arr As Variant
-Dim arr2 As Variant
+Dim Arr2 As Variant
 Dim i As Integer
 Dim vekt As String
 Dim parx As String
@@ -1294,10 +1294,10 @@ If TextBox_markerpunkter.Text <> "" Then
 '        If Right(arr(i), 1) = ")" Then
 '            arr(i) = Left(arr(i), Len(arr(i)) - 1)
 '        End If
-        arr2 = Split(Arr(i), ",")
-        If UBound(arr2) = 1 Then
-            X = arr2(0)
-            Y = arr2(1)
+        Arr2 = Split(Arr(i), ",")
+        If UBound(Arr2) = 1 Then
+            X = Arr2(0)
+            Y = Arr2(1)
             punkttekst = punkttekst & "points([[" & X & ",0],[" & X & "," & Y & "],[0," & Y & "]]),"
         End If
         End If
@@ -1344,15 +1344,15 @@ End If
         Arr = Split(TextBox_labels.Text, VbCrLfMac)
         For i = 0 To UBound(Arr)
             If InStr(Arr(i), ";") > 0 Then
-                arr2 = Split(Arr(i), ";")
+                Arr2 = Split(Arr(i), ";")
             Else
-                arr2 = Split(Arr(i), ",")
+                Arr2 = Split(Arr(i), ",")
             End If
-            If UBound(arr2) >= 2 Then
+            If UBound(Arr2) >= 2 Then
             labeltext = labeltext & "["
-            labeltext = labeltext & """" & arr2(0) & """"
-            labeltext = labeltext & "," & Replace(arr2(1), ",", ".")
-            labeltext = labeltext & "," & Replace(arr2(2), ",", ".")
+            labeltext = labeltext & """" & Arr2(0) & """"
+            labeltext = labeltext & "," & Replace(Arr2(1), ",", ".")
+            labeltext = labeltext & "," & Replace(Arr2(2), ",", ".")
             labeltext = labeltext & "],"
             End If
         Next

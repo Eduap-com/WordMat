@@ -1463,7 +1463,7 @@ Function GetFirstMatrix() As CMatrix
 Dim p As Long
 Dim s As String
 Dim Arr As Variant
-Dim arr2 As Variant
+Dim Arr2 As Variant
 Dim i As Long, j As Long
 Dim m As New CMatrix
     
@@ -1474,9 +1474,9 @@ Dim m As New CMatrix
     If Len(s) > 0 Then
     Arr = Split(s, "@")
     For i = 0 To UBound(Arr)
-        arr2 = Split(Arr(i), "&")
-        For j = 0 To UBound(arr2)
-            m.Element(i, j) = arr2(j)
+        Arr2 = Split(Arr(i), "&")
+        For j = 0 To UBound(Arr2)
+            m.Element(i, j) = Arr2(j)
         Next
     Next
     End If

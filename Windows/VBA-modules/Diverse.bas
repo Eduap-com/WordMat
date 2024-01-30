@@ -39,7 +39,9 @@ Private Declare PtrSafe Function InternetGetConnectedState Lib "wininet.dll" (By
 'Wait (5)
 'UnLockWindow
 'End Sub
-
+Sub Tstmsg()
+    MsgBox2 "det er" & vbCrLf & "test" & vbCrLf & "test" & vbCrLf & "test" & vbCrLf & "test" & vbCrLf & "test" & vbCrLf & "test", vbOKCancel, "d"
+End Sub
 #If Mac Then
 #Else
 Sub UnitImageTest()

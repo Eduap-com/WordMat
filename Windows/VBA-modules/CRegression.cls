@@ -42,7 +42,7 @@ Public Property Let Datatext(ByVal Text As Variant)
     Dim j As Integer
     Dim lsep As String
     Dim Arr As Variant
-    Dim arr2 As Variant
+    Dim Arr2 As Variant
     Dim n As Integer
     Arr = Split(Text, VbCrLfMac)
     n = UBound(Arr)
@@ -54,11 +54,11 @@ Public Property Let Datatext(ByVal Text As Variant)
         Else
             lsep = ","
         End If
-        arr2 = Split(Arr(j), lsep)
-        If UBound(arr2) > 0 Then
+        Arr2 = Split(Arr(j), lsep)
+        If UBound(Arr2) > 0 Then
         i = i + 1
-        xval(i) = Replace(arr2(0), ".", ",")
-        yval(i) = Replace(arr2(1), ".", ",")
+        xval(i) = Replace(Arr2(0), ".", ",")
+        yval(i) = Replace(Arr2(1), ".", ",")
         End If
     Next
     ReDim Preserve xval(1 To i) As Double

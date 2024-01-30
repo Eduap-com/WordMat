@@ -3158,7 +3158,7 @@ End Function
 
 
 Public Function CombineTwoDArrays(Arr1 As Variant, _
-    arr2 As Variant) As Variant
+    Arr2 As Variant) As Variant
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ' TwoArraysToOneArray
 ' This takes two 2-dimensional arrays, Arr1 and Arr2, and
@@ -3241,7 +3241,7 @@ Dim V As Variant
 ' Ensure that Arr1 and Arr2 are
 ' arrays.
 ''''''''''''''''''''''''''''''
-If (IsArray(Arr1) = False) Or (IsArray(arr2) = False) Then
+If (IsArray(Arr1) = False) Or (IsArray(Arr2) = False) Then
     CombineTwoDArrays = Null
     Exit Function
 End If
@@ -3250,7 +3250,7 @@ End If
 ' Ensure both arrays are allocated
 ' two dimensional arrays.
 ''''''''''''''''''''''''''''''''''
-If (NumberOfArrayDimensions(Arr1) <> 2) Or (NumberOfArrayDimensions(arr2) <> 2) Then
+If (NumberOfArrayDimensions(Arr1) <> 2) Or (NumberOfArrayDimensions(Arr2) <> 2) Then
     CombineTwoDArrays = Null
     Exit Function
 End If
@@ -3270,11 +3270,11 @@ UBoundRow1 = UBound(Arr1, 1)
 LBoundCol1 = LBound(Arr1, 2)
 UBoundCol1 = UBound(Arr1, 2)
 
-LBoundRow2 = LBound(arr2, 1)
-UBoundRow2 = UBound(arr2, 1)
+LBoundRow2 = LBound(Arr2, 1)
+UBoundRow2 = UBound(Arr2, 1)
 
-LBoundCol2 = LBound(arr2, 2)
-UBoundCol2 = UBound(arr2, 2)
+LBoundCol2 = LBound(Arr2, 2)
+UBoundCol2 = UBound(Arr2, 2)
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 ' Get the total number of rows for the result
@@ -3341,10 +3341,10 @@ Do Until Done
     '''''''''''''''''''''''''''''''''''''''''''''
     ' Copy elements of Arr2 to Result
     '''''''''''''''''''''''''''''''''''''''''''''
-    For RowNdx2 = LBound(arr2, 1) To UBound(arr2, 1)
+    For RowNdx2 = LBound(Arr2, 1) To UBound(Arr2, 1)
         RowNdxResult = RowNdxResult + 1
-        For ColNdx2 = LBound(arr2, 2) To UBound(arr2, 2)
-            V = arr2(RowNdx2, ColNdx2)
+        For ColNdx2 = LBound(Arr2, 2) To UBound(Arr2, 2)
+            V = Arr2(RowNdx2, ColNdx2)
             result(RowNdxResult, ColNdx2) = V
         Next ColNdx2
     Next RowNdx2
