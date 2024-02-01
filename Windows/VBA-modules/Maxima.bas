@@ -166,6 +166,7 @@ Function GetMaxProc() As Object
             Set GetMaxProc = CreateObject("MaximaProcessClass")
         End If
     End If
+    If Not GetMaxProc Is Nothing Then GetMaxProc.SetMaximaPath GetMaximaPath()
 End Function
 #End If
 Sub WaitForMaximaUntil(Optional StopTime As Integer = 500)
