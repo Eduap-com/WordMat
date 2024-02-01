@@ -1,5 +1,6 @@
 Attribute VB_Name = "AutoMacros"
 Option Explicit
+' AutoMacros. Hvis der er flere globale skabeloner med fx AutoClose køres kun den ene.
 Dim oAppClass As New oAppClass
 #If Mac Then
 #Else
@@ -64,45 +65,46 @@ End Sub
 Sub AutoExit()
 End Sub
 
-Sub AutoClose()
-' hver gang dokument lukkes
-'Dim d As Variant
-Exit Sub  ' nødvendig når der er appclass?
-
-On Error Resume Next
-'tempDoc.Close (False)
-'LukTempDoc
+'Sub AutoClose()
+'' hver gang dokument lukkes, men kun når filen er åbnet - ikke når den er sat som global skabelonen. Så kaldes den slet ikke. Sådan burde det dog ikke være og det er det heller ikke med autoexec
 '
-'    For Each d In Application.Documents
-'        If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-'       d.Close (False)
-'       End If
-'    Next
+''Dim d As Variant
+'Exit Sub  ' nødvendig når der er appclass?
 '
-''    Set WebV = Nothing
-''    Set MaxProc = Nothing
-''    Set MaxProcUnit = Nothing
-
-
-    If Application.Documents.Count <= 2 Then
-        LukTempDoc
-        MaxProc.CloseProcess
-        cxl.CloseExcel
-
-#If Mac Then
-#Else
-        Set WebV = Nothing
-        Set MaxProc = Nothing
-        Set MaxProcUnit = Nothing
-#End If
-        '    For Each d In Application.Documents ' får Word til altid at spørge om der ikke skal gemmes
-        '       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-        '           d.Close (False)
-        '       End If
-        '    Next
-        '    SletRCMenu
-    End If
-
-End Sub
+'On Error Resume Next
+''tempDoc.Close (False)
+''LukTempDoc
+''
+''    For Each d In Application.Documents
+''        If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+''       d.Close (False)
+''       End If
+''    Next
+''
+'''    Set WebV = Nothing
+'''    Set MaxProc = Nothing
+'''    Set MaxProcUnit = Nothing
+'
+'
+'    If Application.Documents.Count <= 2 Then
+'        LukTempDoc
+'        MaxProc.CloseProcess
+'        cxl.CloseExcel
+'
+'#If Mac Then
+'#Else
+'        Set WebV = Nothing
+'        Set MaxProc = Nothing
+'        Set MaxProcUnit = Nothing
+'#End If
+'        '    For Each d In Application.Documents ' får Word til altid at spørge om der ikke skal gemmes
+'        '       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+'        '           d.Close (False)
+'        '       End If
+'        '    Next
+'        '    SletRCMenu
+'    End If
+'
+'End Sub
 
 

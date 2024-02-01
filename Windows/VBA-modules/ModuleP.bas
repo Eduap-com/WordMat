@@ -23,10 +23,10 @@ Public Function QActivePartnership(Optional Force As Boolean = False) As Boolean
     On Error GoTo Fejl
     QActivePartnership = Application.Run("PQActivePartnership", Force)
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     QActivePartnership = False
-Slut:
+slut:
 End Function
 Public Function QCheckPartnerShip() As Boolean
 ' Returns true if the user has active partnership, and ask the user to change dll setting if not
@@ -47,10 +47,10 @@ Function SkoleNavn() As String
     On Error GoTo Fejl
     SkoleNavn = Application.Run("PSkoleNavn")
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     SkoleNavn = vbNullString
-Slut:
+slut:
 
 End Function
 

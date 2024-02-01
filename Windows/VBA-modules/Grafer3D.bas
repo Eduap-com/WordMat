@@ -132,7 +132,7 @@ Exit Sub
     UserFormOmdrejninglegeme.Show
     
 Fejl:
-Slut:
+slut:
 End Sub
 
 Sub Plot3DGraph()
@@ -176,10 +176,10 @@ Sub Plot3DGraph()
     End If
     
     UserForm3DGraph.Show
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub Insert3DEquation(Equation As String)

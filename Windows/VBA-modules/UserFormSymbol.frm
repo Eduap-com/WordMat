@@ -65,9 +65,9 @@ End If
 
 Me.Hide
 
-GoTo Slut
+GoTo slut
 Fejl:
-Slut:
+slut:
 End Sub
 
 

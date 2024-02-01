@@ -77,7 +77,7 @@ getproc:
             Else
                 MsgBox2 Sprog.A(54), vbOKOnly, Sprog.Error
             End If
-            GoTo Slut
+            GoTo slut
         End If
         If DllConnType = 2 Then
             If SettCheckForUpdate Then CheckForUpdateSilent
@@ -118,7 +118,7 @@ getproc:
             Set MaxProcUnit = GetMaxProc() 'CreateObject("MaximaProcessClass")
             If Err.Number <> 0 Then
                 MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-                GoTo Slut
+                GoTo slut
             End If
             On Error GoTo Fejl
             MaxProcUnit.Units = 1
@@ -142,12 +142,12 @@ finish:
 #End If
     End If
     PrepareMaxima = True
-    GoTo Slut
+    GoTo slut
 Fejl:
     On Error Resume Next
     Unload UfWait2
     PrepareMaxima = False
-Slut:
+slut:
     On Error Resume Next
     If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
@@ -178,7 +178,7 @@ Sub WaitForMaximaUntil(Optional StopTime As Integer = 500)
         Wait (0.1)
         i = i + 1
     Loop
-Slut:
+slut:
 End Sub
 Sub WaitForMaximaUnitUntil(Optional StopTime As Integer = 500)
     Dim i As Integer
@@ -192,11 +192,11 @@ Sub WaitForMaximaUnitUntil(Optional StopTime As Integer = 500)
         Wait (0.1)
         i = i + 1
     Loop
-Slut:
+slut:
 End Sub
 
 Public Sub PrepareMaximaNoSplash()
-    On Error GoTo Slut
+    On Error GoTo slut
     If Not SettingsRead Then ReadAllSettingsFromRegistry
     If omax Is Nothing Then
 '        LavRCMenu    ' højreklikmenu på ligninger
@@ -207,7 +207,7 @@ Public Sub PrepareMaximaNoSplash()
                 On Error Resume Next
                 If Err.Number <> 0 Then
                     MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-                    GoTo Slut
+                    GoTo slut
                 End If
                 On Error GoTo Fejl
             MaxProc.Units = 0
@@ -224,7 +224,7 @@ Public Sub PrepareMaximaNoSplash()
                 On Error Resume Next
                 If Err.Number <> 0 Then
                     MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-                    GoTo Slut
+                    GoTo slut
                 End If
                 On Error GoTo Fejl
                 MaxProcUnit.Units = 1
@@ -238,7 +238,7 @@ Public Sub PrepareMaximaNoSplash()
     omax.PrepareNewCommand    ' nulstiller og finder definitioner
     '    WaitForMaximaUntil
 Fejl:
-Slut:
+slut:
 End Sub
 Sub RestartMaxima()
 
@@ -256,7 +256,7 @@ Sub RestartMaxima()
         Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
         If Err.Number <> 0 Then
             MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
         On Error GoTo Fejl
         If omax Is Nothing Then
@@ -271,10 +271,10 @@ Sub RestartMaxima()
     End If
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
      MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub MaximaCommand()
     Dim scrollpos As Double
@@ -287,11 +287,11 @@ Sub MaximaCommand()
     '    Set UFWait = New UserFormWaitForMaxima
     PrepareMaxima
     omax.prevspr = ""
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     '    UFWait.Show vbModeless
@@ -299,23 +299,23 @@ Sub MaximaCommand()
         omax.ExecuteMaximaCommand
     ElseIf CASengine = 1 Then
         OpenGeoGebraWeb omax.Kommando, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
         omax.MaximaOutput = RunGeoGebraDirect(omax.Kommando)
     End If
 
 
-    If CheckForError Then GoTo Slut
+    If CheckForError Then GoTo slut
 
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     omax.InsertMaximaOutput
     '   UFWait.Hide
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -336,7 +336,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    Set UFWait = New UserFormWaitForMaxima
     
     Set UFSelectVar = New UserFormSelectVar
@@ -346,7 +346,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
         omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
         eqs = False
         If InStr(omax.Kommando, VBA.ChrW(8804)) > 0 Or InStr(omax.Kommando, VBA.ChrW(8805)) > 0 Then
@@ -363,9 +363,9 @@ Sub MaximaSolveInequality(Optional variabel As String)
         End If
         
         If variabel = "" Then
-            GoTo Slut
+            GoTo slut
         End If
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         
         If CASengine = 1 Or CASengine = 2 Then
             s = Trim(omax.Kommando)
@@ -397,7 +397,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
                 End If
             End If
             OpenGeoGebraWeb s, "CAS", True, True
-            GoTo Slut
+            GoTo slut
         ElseIf CASengine = 2 Then
             Call RunGeoGebraDirect(s)
             If omax.MaximaOutput = "{}" Then
@@ -419,7 +419,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
         End If
         
         
-        If CheckForError Then GoTo Slut
+        If CheckForError Then GoTo slut
 
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
@@ -456,11 +456,11 @@ Sub MaximaSolveInequality(Optional variabel As String)
     Else    ' ligningssystem
         MsgBox (Sprog.A(376))
     End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -500,7 +500,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     Set UFSelectVar = New UserFormSelectVar
 '    Set UFSelectVars = New UserFormSelectVars
     UFSelectVar.NoEq = 1
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    If UFWait Is Nothing Then Set UFWait = New UserFormWaitForMaxima
     '    Set UFWait = New UserFormWaitForMaxima
     sstart = Selection.start
@@ -508,25 +508,25 @@ Sub MaximaSolvePar(Optional variabel As String)
 
     If omax.DefFejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     If InStr(Selection.OMaths(1).Range.Text, "<") > 1 Or InStr(Selection.OMaths(1).Range.Text, ">") > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8805)) > 1 Then
         MaximaSolveInequality variabel
-        GoTo Slut
+        GoTo slut
     End If
     p = InStr(Selection.OMaths(1).Range.Text, "=")
     If p < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If result = vbNo Then GoTo Slut
+        If result = vbNo Then GoTo slut
     Else
         p2 = InStr(p + 1, Selection.OMaths(1).Range.Text, "=")
         If p2 > 0 Then
@@ -535,7 +535,7 @@ Sub MaximaSolvePar(Optional variabel As String)
             Else
                 MsgBox "You cant place two equal sign in an equation", vbOKOnly, "Fejl"
             End If
-            GoTo Slut
+            GoTo slut
         End If
     End If
 
@@ -543,10 +543,10 @@ Sub MaximaSolvePar(Optional variabel As String)
 '    On Error Resume Next: oData.SetText ClipText: oData.PutInClipboard: On Error GoTo fejl
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8743)) < 1 Then
         ' kun 1 ligning
@@ -597,7 +597,7 @@ newcas:
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
         End If
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVar.TempDefs
         
         If CASengine = 1 Or CASengine = 2 Then
@@ -630,7 +630,7 @@ newcas:
                 End If
             End If
             OpenGeoGebraWeb s, "CAS", True, True
-            GoTo Slut
+            GoTo slut
         ElseIf CASengine = 2 Then
             Call RunGeoGebraDirect(s)
             If omax.MaximaOutput = "{}" Then
@@ -655,10 +655,10 @@ newcas:
         
         If omax.StopNow Then
             If omax.AntalVars > 1 Then
-                GoTo Slut
+                GoTo slut
             End If
         End If
-        If CheckForError Then GoTo Slut
+        If CheckForError Then GoTo slut
 
 #If Mac Then
 #Else
@@ -671,7 +671,7 @@ newcas:
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
             resultat = MsgBox(Sprog.A(127) & vbCrLf & vbCrLf & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
-            If resultat = vbCancel Then GoTo Slut
+            If resultat = vbCancel Then GoTo slut
         End If
 
         variabel = omax.ConvertToWordSymbols(variabel)
@@ -718,7 +718,7 @@ newcas:
                 CASengine = 0
                 GoTo stophop
             ElseIf UserFormChooseCAS.ChosenCAS = -1 Then
-                GoTo Slut
+                GoTo slut
             ElseIf UserFormChooseCAS.ChosenCAS = 1 Then ' Maxima sym
                 CASengine = 0
                 GoTo newcas
@@ -729,7 +729,7 @@ newcas:
                 CASengine = 2
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                GoTo Slut
+                GoTo slut
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
                 CASengine = 1
                 GoTo newcas
@@ -737,7 +737,7 @@ newcas:
                 CASengine = 1
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                GoTo Slut
+                GoTo slut
             End If
         ElseIf False Then
 stophop:     If omax.AntalVars > 1 Then
@@ -760,7 +760,7 @@ stophop:     If omax.AntalVars > 1 Then
                     CASengine = 1
                     Selection.MoveLeft wdCharacter, 1
                     MaximaNsolve variabel
-                    GoTo Slut
+                    GoTo slut
                 End If
             Else
                 If UFSolvenumeric.result = "nsolve" Then
@@ -795,7 +795,7 @@ stophop:     If omax.AntalVars > 1 Then
 
         '    variabel = InputBox("Indtast variable som ligningssystemet skal løses for adskilt af komma", "Variable", "x,y")
 
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVar.TempDefs
         '    UFWait.ActionToPerform = "solvesystem"
         '    UFWait.VarParam = variabel
@@ -829,7 +829,7 @@ newcassys:
                 End If
             End If
             OpenGeoGebraWeb s, "CAS", True, True
-            GoTo Slut
+            GoTo slut
         ElseIf CASengine = 2 Then
             Call RunGeoGebraDirect(s)
             If omax.MaximaOutput = "{}" Then
@@ -842,20 +842,20 @@ newcassys:
             Application.Activate
         End If
         
-        If omax.StopNow Then GoTo Slut
-        If CheckForError Then GoTo Slut
-        If omax.StopNow Then GoTo Slut
+        If omax.StopNow Then GoTo slut
+        If CheckForError Then GoTo slut
+        If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
 
         If omax.MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
             MsgBox Sprog.A(133), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
 
         If (omax.DefFejl = True) Then
             MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
 
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
@@ -865,7 +865,7 @@ newcassys:
             If UserFormChooseCAS.ChosenCAS = 2 Then ' maxima num
                 GoTo stophop
             ElseIf UserFormChooseCAS.ChosenCAS = -1 Then
-                GoTo Slut
+                GoTo slut
             ElseIf UserFormChooseCAS.ChosenCAS = 1 Then ' Maxima sym
                 CASengine = 0
                 GoTo newcassys
@@ -877,7 +877,7 @@ newcassys:
                 CASengine = 2
 '                Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                GoTo Slut
+                GoTo slut
                 CASengine = TempCas
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
                 CASengine = 1
@@ -888,7 +888,7 @@ newcassys:
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 CASengine = TempCas
-                GoTo Slut
+                GoTo slut
             End If
         ElseIf Len(omax.MaximaOutput) > 1 Then
             omax.GoToEndOfSelectedMaths
@@ -955,11 +955,11 @@ newcassys:
             End If
         End If
     End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     '    omax.Luk
     On Error Resume Next
     CASengine = TempCas
@@ -1049,7 +1049,7 @@ Sub MaximaEliminate()
     Set UFSelectVar = New UserFormSelectVar
     Dim variabel As String
     Dim sstart As Long, sslut As Long
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    If UFWait Is Nothing Then Set UFWait = New UserFormWaitForMaxima
     '    Set UFWait = New UserFormWaitForMaxima
     sstart = Selection.start
@@ -1057,12 +1057,12 @@ Sub MaximaEliminate()
 
     If omax.DefFejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1070,11 +1070,11 @@ Sub MaximaEliminate()
     If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If result = vbNo Then GoTo Slut
+        If result = vbNo Then GoTo slut
     End If
 
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8743)) < 1 Then
-        GoTo Slut
+        GoTo slut
     Else    ' ligningssystem
 
         omax.ReadSelection
@@ -1089,7 +1089,7 @@ Sub MaximaEliminate()
 
         '    variabel = InputBox("Indtast variable som ligningssystemet skal løses for adskilt af komma", "Variable", "x,y")
 
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVar.TempDefs
         '    UFWait.ActionToPerform = "solvesystem"
         '    UFWait.VarParam = variabel
@@ -1102,26 +1102,26 @@ Sub MaximaEliminate()
         omax.Eliminate (variabel)
     Else
         MsgBox "This function is not supported by GeoGebra. Try equation solver", vbOKOnly, "No support"
-        GoTo Slut
+        GoTo slut
     End If
         
         
-        If omax.StopNow Then GoTo Slut
-        If CheckForError Then GoTo Slut
+        If omax.StopNow Then GoTo slut
+        If CheckForError Then GoTo slut
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
-        If omax.StopNow Then GoTo Slut
+        If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
 
         If omax.MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
             MsgBox Sprog.A(133), vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
 
         If (omax.DefFejl = True) Then
             MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-            GoTo Slut
+            GoTo slut
         End If
 
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
@@ -1184,11 +1184,11 @@ Sub MaximaEliminate()
             End If
         End If
     End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     '    omax.Luk
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
@@ -1216,7 +1216,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
 '    Set UFSelectVars = New UserFormSelectVars
 '    Dim variabel As String
     Dim sstart As Long, sslut As Long
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    If UFWait Is Nothing Then Set UFWait = New UserFormWaitForMaxima
     '    Set UFWait = New UserFormWaitForMaxima
     sstart = Selection.start
@@ -1224,30 +1224,30 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
 
     If omax.DefFejl Then
         MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
     If InStr(Selection.OMaths(1).Range.Text, "<") > 1 Or InStr(Selection.OMaths(1).Range.Text, ">") > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8805)) > 1 Then
         MaximaSolveInequality
-        GoTo Slut
+        GoTo slut
     End If
     If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If result = vbNo Then GoTo Slut
+        If result = vbNo Then GoTo slut
     End If
 
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8743)) < 1 Then
@@ -1284,7 +1284,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             variabel = UFSelectVar.SelectedVar
         End If
         
-        If variabel = "" Then GoTo Slut
+        If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVar.TempDefs
         
         Dim lhs As String, rhs As String
@@ -1320,7 +1320,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
                 rhs = ea.Text
             End If
             OpenGeoGebraWeb "y=" & lhs & ";y=" & rhs & ";intersect(" & lhs & "," & rhs & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
-            GoTo Slut
+            GoTo slut
         ElseIf CASengine = 2 Then
             If MaximaVidNotation Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
@@ -1342,9 +1342,9 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         UFnsolve.variabel = variabel
         UFnsolve.Show
 
-        If omax.StopNow Then GoTo Slut
-        If CheckForError Then GoTo Slut
-        If UFnsolve.result = "afbryd" Then GoTo Slut
+        If omax.StopNow Then GoTo slut
+        If CheckForError Then GoTo slut
+        If UFnsolve.result = "afbryd" Then GoTo slut
 
         If UFnsolve.result = "num" Then
             Selection.End = sslut    ' slut skal være først ellers går det galt
@@ -1368,7 +1368,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             End If
             OpenGeoGebraWeb "y=" & lhs & ";y=" & rhs & ";intersect(" & lhs & "," & rhs & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
             End If
-            GoTo Slut
+            GoTo slut
         End If
 ghop:
         omax.GoToEndOfSelectedMaths
@@ -1388,7 +1388,7 @@ ghop:
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
             resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
-            If resultat = vbCancel Then GoTo Slut
+            If resultat = vbCancel Then GoTo slut
         End If
 
         variabel = omax.ConvertToWordSymbols(variabel)
@@ -1419,7 +1419,7 @@ ghop:
         Variable = Replace(Variable, ",", "=1" & ListSeparator)
         Variable = Variable & "=1"
         inp = InputBox(Sprog.A(379), Sprog.A(380), Variable)
-        If inp = "" Then GoTo Slut    ' trykket cancel
+        If inp = "" Then GoTo slut    ' trykket cancel
         Arr = Split(inp, ListSeparator)
 
         Variable = ""
@@ -1435,7 +1435,7 @@ ghop:
         Variable = Left(Variable, Len(Variable) - 1)
         guess = Left(guess, Len(guess) - 1)
 
-        If Variable = "" Then GoTo Slut
+        If Variable = "" Then GoTo slut
 
         If CASengine = 1 Or CASengine = 2 Then
             s = "nsolve({" & Replace(omax.KommandoerStreng, ";", " , ") & "},{" & Replace(inp, ";", " , ") & "})"
@@ -1452,7 +1452,7 @@ ghop:
             End If
             If InStr(Variable, "x") > 0 And InStr(Variable, "y") > 0 Then s = omax.KommandoerStreng & ";intersect(" & Replace(omax.KommandoerStreng, ";", " , ") & ");" & s
             OpenGeoGebraWeb s, "CAS", True, True
-            GoTo Slut
+            GoTo slut
         ElseIf CASengine = 2 Then
             If MaximaVidNotation Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
@@ -1488,11 +1488,11 @@ ghop:
             MsgBox fejlm & Sprog.A(384) & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
         End If
     End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     '    omax.Luk
     On Error Resume Next
     Unload UFnsolve
@@ -1518,7 +1518,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
     sstart = Selection.start
     sslut = Selection.End
 
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    Set UFWait = New UserFormWaitForMaxima
     Dim UFSolvenumeric As New UserFormSolveNumeric
 
@@ -1534,7 +1534,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1542,7 +1542,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
     If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If result = vbNo Then GoTo Slut
+        If result = vbNo Then GoTo slut
     End If
 
     If Selection.OMaths.Count < 2 Then
@@ -1561,12 +1561,12 @@ Sub MaximaSolveNumeric(Optional Var As String)
         omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
         omax.FindVariable
         omax.TempDefs = UFSelectVar.TempDefs
 
-        If UFSolvenumeric.SelectedVar = "" Then GoTo Slut
+        If UFSolvenumeric.SelectedVar = "" Then GoTo slut
         If UFSolvenumeric.Method = "newton" Then
             '        UFWait.ActionToPerform = "solvenumeric"
             '        varguess = UFSolvenumeric.SelectedVar & "=" & UFSolvenumeric.TextBox_guess.text
@@ -1591,8 +1591,8 @@ Sub MaximaSolveNumeric(Optional Var As String)
 
         '    Set UFWait.omax = omax
         '    UFWait.Show
-        If omax.StopNow Then GoTo Slut
-        If CheckForError Then GoTo Slut
+        If omax.StopNow Then GoTo slut
+        If CheckForError Then GoTo slut
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
         If InStr(omax.MaximaOutput, VBA.ChrW(8776) & "false") > 0 Then
             omax.MaximaOutput = ""
@@ -1605,7 +1605,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
             resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
-            If resultat = vbCancel Then GoTo Slut
+            If resultat = vbCancel Then GoTo slut
         End If
 
         If Len(omax.MaximaOutput) > 1 And InStr(omax.MaximaOutput, "Lisperror") < 1 Then
@@ -1642,11 +1642,11 @@ Sub MaximaSolveNumeric(Optional Var As String)
 
     End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1675,26 +1675,26 @@ Sub beregn()
     '    st = Timer
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    Set UFWait = New UserFormWaitForMaxima
-    If Not PrepareMaxima Then GoTo Slut
+    If Not PrepareMaxima Then GoTo slut
     omax.prevspr = ""
 
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If Selection.OMaths.Count > 1 Then
         MsgBox Sprog.A(149), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
-    If omax.Kommando = "" Then GoTo Slut
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If omax.Kommando = "" Then GoTo slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
     '    Set UFWait.omax = omax
     '    UFWait.ActionToPerform = "beregn"
     '    UFWait.Show
@@ -1725,7 +1725,7 @@ Sub beregn()
             End If
         End If
         OpenGeoGebraWeb s, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
         fo = RunGeoGebraDirect(s)
         If MaximaExact = 0 And Not MaximaVidNotation Then
@@ -1753,8 +1753,8 @@ Sub beregn()
         omax.MaximaOutput = "=" & omax.MaximaOutput
     End If
     
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
     '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
 
 #If Mac Then
@@ -1785,11 +1785,11 @@ Sub beregn()
         Oundo.EndCustomRecord
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
 #If Mac Then
     d.Activate
 #End If
@@ -1839,12 +1839,12 @@ Sub Omskriv()
     SaveSettingsExact = MaximaExact
     SaveSettingsOutunits = OutUnits
     SaveSettingsLog = MaximaLogOutput
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1852,16 +1852,16 @@ Sub Omskriv()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    omax.OpenCmd
     omax.FindVariable
     UFomskriv.vars = omax.vars
     UFomskriv.Show
-    If UFomskriv.annuller Then GoTo Slut
+    If UFomskriv.annuller Then GoTo slut
 
     omax.TempDefs = UFomskriv.TempDefs
     
@@ -1889,14 +1889,14 @@ Sub Omskriv()
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
         omax.MaximaOutput = RunGeoGebraDirect(s)
     End If
     
     
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
 
     If Not (UFomskriv.SammeLinje) Then
         omax.GoToEndOfSelectedMaths
@@ -1933,11 +1933,11 @@ Sub Omskriv()
         InsertOutput "=" & omax.MaximaOutput
     End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     MaximaCifre = SaveSettingsCifre
     MaximaExact = SaveSettingsExact
     OutUnits = SaveSettingsOutunits
@@ -1957,12 +1957,12 @@ Sub reducer()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -1970,10 +1970,10 @@ Sub reducer()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     If CASengine > 0 Then
         s = "simplify(" & omax.Kommando & ")"
@@ -1994,14 +1994,14 @@ Sub reducer()
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
         omax.MaximaOutput = RunGeoGebraDirect(s)
     End If
     
     
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
 
@@ -2018,11 +2018,11 @@ Sub reducer()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -2038,12 +2038,12 @@ Sub CompareTest()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -2051,15 +2051,15 @@ Sub CompareTest()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    omax.OpenCmd
     omax.CompareTest
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2083,11 +2083,11 @@ Sub CompareTest()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -2103,12 +2103,12 @@ Sub faktoriser()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -2116,10 +2116,10 @@ Sub faktoriser()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
     
     
     If CASengine > 0 Then
@@ -2142,15 +2142,15 @@ Sub faktoriser()
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
         omax.MaximaOutput = RunGeoGebraDirect(s)
     End If
     
 
     '    omax.OpenCmd
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2166,11 +2166,11 @@ Sub faktoriser()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -2186,7 +2186,7 @@ Sub udvid()
     sslut = Selection.End
     Dim scrollpos As Double, s As String
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
     '    Set UFWait = New UserFormWaitForMaxima
 
@@ -2196,15 +2196,15 @@ Sub udvid()
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     If CASengine > 0 Then
         s = "expand(" & omax.Kommando & ")"
@@ -2225,13 +2225,13 @@ Sub udvid()
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
         omax.MaximaOutput = RunGeoGebraDirect(s)
     End If
 
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     
@@ -2246,11 +2246,11 @@ Sub udvid()
 
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -2267,7 +2267,7 @@ Sub Differentier()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -2275,18 +2275,18 @@ Sub Differentier()
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     variabel = InputBox(Sprog.A(51), Sprog.Variable, "x")
-    If variabel = "" Then GoTo Slut
+    If variabel = "" Then GoTo slut
     '    omax.OpenCmd
     
     If CASengine > 0 Then
@@ -2309,14 +2309,14 @@ Sub Differentier()
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
         omax.MaximaOutput = RunGeoGebraDirect(s)
     End If
     
     
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    Selection.TypeParagraph
@@ -2333,11 +2333,11 @@ Sub Differentier()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -2355,11 +2355,11 @@ Sub Integrer()
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    MsgBox WordWindowNavn
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
     If sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -2367,13 +2367,13 @@ Sub Integrer()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     variabel = InputBox(Sprog.A(51), Sprog.Variable, "x")
-    If variabel = "" Then GoTo Slut
+    If variabel = "" Then GoTo slut
     '    omax.OpenCmd
     
     If CASengine > 0 Then
@@ -2395,14 +2395,14 @@ Sub Integrer()
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
         omax.MaximaOutput = RunGeoGebraDirect(s)
     End If
     
     
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    Selection.TypeParagraph
@@ -2420,11 +2420,11 @@ Sub Integrer()
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -2447,7 +2447,7 @@ Sub SolveDENumeric()
 
     PrepareMaxima
 
-    If Not omax.MaximaInstalled Then GoTo Slut
+    If Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count > 0 And sstart = sslut Then    ' sikrer at gotoendofselectedmaths virker
         Selection.OMaths(1).ParentOMath.Range.Select
@@ -2455,7 +2455,7 @@ Sub SolveDENumeric()
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
     omax.FindVariable
@@ -2530,7 +2530,7 @@ Sub SolveDENumeric()
     UFdiffeq.TextBox_varx.Text = variabel
 
     UFdiffeq.Show
-    If UFdiffeq.luk Then GoTo Slut
+    If UFdiffeq.luk Then GoTo slut
 
 
     '    MsgBox omax.MaximaOutput
@@ -2543,11 +2543,11 @@ Sub SolveDENumeric()
     End If
 
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -2602,11 +2602,11 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    MsgBox WordWindowNavn
-    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo Slut
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 '    If MaximaUnits Then ' ikke et problem for unitimage
 '        MsgBox Sprog.A(159), vbOKOnly, Sprog.Error
@@ -2618,10 +2618,10 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     End If
 
-    If Not ValidateInput(omax.Kommando) Then GoTo Slut
+    If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     '    funktion = InputBox("Indtast funktion som udtrykket skal løses for", "Variabel", "y")
     '    variabel = InputBox("Indtast variabel som funktionen afhænger af", "Variabel", "x")
@@ -2676,11 +2676,11 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         UFdiffeq.TextBox_variabel.Text = variabel
         UFdiffeq.Label_ligning.Caption = Replace(omax.ConvertToAscii(omax.Kommando), " ", "")
         UFdiffeq.Show
-        If UFdiffeq.luk Then GoTo Slut
+        If UFdiffeq.luk Then GoTo slut
         variabel = UFdiffeq.TextBox_variabel.Text
         funktion = UFdiffeq.TextBox_funktion.Text
     End If
-    If variabel = "" Then GoTo Slut
+    If variabel = "" Then GoTo slut
     '    omax.OpenCmd
     omax.TempDefs = UFdiffeq.TempDefs
 
@@ -2723,7 +2723,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
             End If
         End If
         OpenGeoGebraWeb s, "CAS", True, True
-        GoTo Slut
+        GoTo slut
     ElseIf CASengine = 2 Then
             Call RunGeoGebraDirect(s)
             omax.MaximaOutput = Replace(omax.MaximaOutput, "{", "")
@@ -2734,8 +2734,8 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     End If
     
         
-    If omax.StopNow Then GoTo Slut
-    If CheckForError Then GoTo Slut
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then GoTo slut
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2761,11 +2761,11 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     RestartMaxima
-Slut:
+slut:
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først ellers går det galt
     Selection.start = sstart

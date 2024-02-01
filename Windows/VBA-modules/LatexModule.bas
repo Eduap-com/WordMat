@@ -29,14 +29,14 @@ Public Sub SaveFile(doctype As Integer)
    If Not latexfil.IsMikTexInstalled Then
       MsgBox "MikTex is not installed. You will now be sent to miktex.org where you can download. After the download you will also be prompted to download some packages the first time you run the converter. Just click ok.", vbOKOnly, Sprog.Error
       OpenLink "https://miktex.org/download"
-      GoTo Slut
+      GoTo slut
    End If
    '***
    
    'Check if document saved
    If ActiveDocument.path = "" Then
       MsgBox "Save your document before attempting to convert to Latex. The Latex files will be placed in a folder next to your document-file.", vbOKOnly, "File not saved"
-      GoTo Slut
+      GoTo slut
    End If
    
    Dim UfWait As New UserFormWaitForMaxima
@@ -290,7 +290,7 @@ Public Sub SaveFile(doctype As Integer)
    '    d2.Close False
    '    MainDoc.Activate
    SaveSel.Select
-Slut:
+slut:
    Unload UfWait
 End Sub
 Sub ConvertList(L As List)
@@ -410,10 +410,10 @@ Sub ConvertImagesToLatex(d As Document)
       sh2.Delete
    Next
    
-   GoTo Slut
+   GoTo slut
 Fejl:
    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure ConvertImagesToLatex, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
-Slut:
+slut:
 End Sub
 
 Sub SortImagCol(coll As Collection, first As Long, last As Long)
@@ -705,7 +705,7 @@ End Sub
 Sub ToggleLatex()
 Dim mtext As String
 Dim r As Range
-On Error GoTo Slut
+On Error GoTo slut
 #If Mac Then
 #Else
         Dim Oundo As UndoRecord
@@ -733,7 +733,7 @@ On Error GoTo Slut
         Oundo.EndCustomRecord
 #End If
 
-Slut:
+slut:
 End Sub
 Function RemoveLatexOmslut(Text As String)
 

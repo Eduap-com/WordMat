@@ -115,10 +115,10 @@ Dim i As Integer, c As Integer
         CASengine = 1
     End If
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     SelectedVar = vbNullString
-Slut:
+slut:
     Me.Hide
     Application.ScreenUpdating = False
 End Sub

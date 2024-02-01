@@ -163,10 +163,10 @@ s = s & "true" & Sep & "false" & Sep & "false" & Sep & "false" & Sep
 
 ils.AlternativeText = s
 Unload Me
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -263,10 +263,10 @@ Dim i As Long, j As Integer
     Next
     
     Unload Me
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -457,7 +457,7 @@ Dim st As Double
 End Sub
 
 Private Sub Validate()
-On Error GoTo Slut
+On Error GoTo slut
    Dim st As Double
    Label_validate.Caption = ""
    Label_validate.visible = False
@@ -476,7 +476,7 @@ On Error GoTo Slut
 #Else
    End If
 #End If
-Slut:
+slut:
    If Label_validate.Caption <> vbNullString Then Label_validate.visible = True
 End Sub
 Function StrToDbl(s As String) As Double
@@ -539,7 +539,7 @@ Function SolveDE() As Boolean
     DElist = "["
     If TextBox_var1.Text = vbNullString Or TextBox_eq1.Text = vbNullString Or TextBox_init1.Text = vbNullString Then
         MsgBox "Der mangler data", vbOKOnly, Sprog.Error
-        GoTo Slut
+        GoTo slut
     Else
         n = n + 1
         varlist = varlist & TextBox_var1.Text & ","
@@ -622,14 +622,14 @@ Function SolveDE() As Boolean
         i = i + 1
     Loop While ea.Pos < ea.Length - 1 And i < 10000
 SolveDE = True
-GoTo Slut
+GoTo slut
 Fejl:
    If i >= Npoints Then
     SolveDE = True
    Else
     SolveDE = False
     End If
-Slut:
+slut:
 End Function
 
 Sub PlotOutput(Optional highres As Double = 1)
@@ -755,7 +755,7 @@ On Error GoTo Fejl
         If omax.MaximaOutput = "" Then
             Label_wait.Caption = "Fejl!"
             Label_wait.visible = True
-            GoTo Slut
+            GoTo slut
         Else
             DoEvents
 #If Mac Then
@@ -770,7 +770,7 @@ On Error GoTo Fejl
         Label_wait.visible = False
     End If
     Label_wait.visible = False
-GoTo Slut
+GoTo slut
 Fejl:
     On Error Resume Next
     Label_wait.Caption = Sprog.A(94)
@@ -778,7 +778,7 @@ Fejl:
     Label_wait.Width = 150
     Label_wait.visible = True
     Image1.Picture = Nothing
-Slut:
+slut:
 
 End Sub
 

@@ -539,7 +539,7 @@ End If
 
 
 
-If grafobj = "" Then GoTo Slut
+If grafobj = "" Then GoTo slut
 
 If OptionButton_kunlinjer Then
     If Not CheckBox_transp.Value Then
@@ -602,10 +602,10 @@ End If
 '    End If
     omax.PrepareNewCommand
     Label_vent.visible = False
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Function GetNextEnhFunc() As String

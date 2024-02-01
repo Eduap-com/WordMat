@@ -184,7 +184,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     OpenGeoGebraWeb UrlLink, Gtype, False, False ' v.1.26 false, false tilføjet da definitioner kom med to gange
 Fejl:
 
-Slut:
+slut:
     CASengine = TempCas
 End Sub
 
@@ -246,13 +246,13 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
         Else
             UrlLink = "file://" & DN & "GeoGebra" & Gtype & "Applet.html"
         End If
-    Else: GoTo Slut
+    Else: GoTo slut
     End If
 #End If
     UrlLink = UrlLink & "?command=" & cmd
 
     OpenLink UrlLink, True
-Slut:
+slut:
 End Sub
 
 Function GetGeoGebraMathAppsFolder() As String
@@ -400,7 +400,7 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
             Do
                 Wait (0.2)
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-                If UfWait2.StopNow Then GoTo Slut
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -421,7 +421,7 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
             Do
                 Wait (0.2)
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-                If UfWait2.StopNow Then GoTo Slut
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -435,13 +435,13 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#?" & Defliste)
         ElseIf Left(Res, 5) = "error" Then
 '            Wait (1)
-            GoTo Slut
+            GoTo slut
         End If
 '        Res = Replace(Res, " ", "")
         Res = ConvertGeoGebraSyntaxToWord(Res)
         omax.MaximaOutput = Res
         RunGeoGebraDirect = Res
-Slut:
+slut:
      If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
 
@@ -774,7 +774,7 @@ Sub GeoGebra()
     If geogebrasti = "" Then ' hvis geogebra ikke installeret
         Unload UfWait
         InstallGeoGebra
-        GoTo Slut
+        GoTo slut
     End If
 '    geogebrafilersti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     geogebrafilersti = GetTempDir()
@@ -805,10 +805,10 @@ Sub GeoGebra()
     Unload UfWait
     Set UfWait = Nothing
     
-    GoTo Slut
+    GoTo slut
 Fejl:
 '    UserFormGeoGebra.Show
-Slut:
+slut:
     If Not UfWait Is Nothing Then
         Unload UfWait
         Set UfWait = Nothing
@@ -870,10 +870,10 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
     End If
 #End If
     
-    GoTo Slut
+    GoTo slut
 Fejl:
 
-Slut:
+slut:
 '    If Not UfWait Is Nothing Then Unload UfWait
 End Sub
 Function GeoGebraPath() As String
@@ -903,7 +903,7 @@ On Error GoTo Fejl
         Loop
         If DN <> "" Then
             GeoGebraPath = """" & GetProgramFilesDir & "\" & DN & "\GeoGebra.exe"""
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -917,7 +917,7 @@ On Error GoTo Fejl
         If DN <> "" Then
             GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\" & DN & "\GeoGebraCalculator.exe"
             GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -931,7 +931,7 @@ On Error GoTo Fejl
         If DN <> "" Then
             GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_6\" & DN & "\GeoGebra.exe"
             GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -945,7 +945,7 @@ On Error GoTo Fejl
         If DN <> "" Then
             GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Graphing\" & DN & "\GeoGebraGraphing.exe"
             GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo Slut
+            GoTo slut
         End If
     End If
         
@@ -959,7 +959,7 @@ On Error GoTo Fejl
         If DN <> "" Then
             GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_CAS\" & DN & "\GeoGebraCAS.exe"
             GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -977,15 +977,15 @@ On Error GoTo Fejl
     If Not GeoGebraPath = "" Then
         GeoGebraPath = GetProgramFilesDir & "\" & GeoGebraPath & "\GeoGebra.exe"
         GeoGebraPath = """" & GeoGebraPath & """"
-        GoTo Slut
+        GoTo slut
     End If
     
     
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     GeoGebraPath = ""
-Slut:
+slut:
 End Function
 Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
@@ -1139,10 +1139,10 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     CreateZipFile geogebrasti & "geogebra.zip", geogebrasti & "geogebra.xml"
     Name geogebrasti & "geogebra.zip" As geogebrasti & "geogebra.ggb"
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 On Error Resume Next
     omax.ConvertLnLog = True
 End Sub
@@ -1244,10 +1244,10 @@ Sub CreateZipFile(zipfilnavn As Variant, FilNavn As Variant, Optional filnavn2 A
     
 '    On Error GoTo 0
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
  

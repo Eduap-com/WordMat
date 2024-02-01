@@ -145,100 +145,88 @@ Sub ShowTempDoc()
     MsgBox tempDoc.Range.Text
 End Sub
 Sub LukTempDoc()
-On Error GoTo Slut
-#If Mac Then
-    If Not m_tempDoc Is Nothing Then
-        If Word.Application.IsObjectValid(m_tempDoc) Then
-            m_tempDoc.Close (False)
-        End If
-    End If
-    Set m_tempDoc = Nothing
-#Else
+On Error GoTo slut
+'#If Mac Then ' fjernet 1.29
+'    If Not m_tempDoc Is Nothing Then
+'        If Word.Application.IsObjectValid(m_tempDoc) Then
+'            m_tempDoc.Close (False)
+'        End If
+'    End If
+'    Set m_tempDoc = Nothing
+'#Else
     tempDoc.Close False
-'    tempDoc.ActiveWindow
     Set tempDoc = Nothing ' added v. 1.11
-#End If
-Slut:
+'#End If
+slut:
 End Sub
 
-#If Mac Then
-Function tempDoc() As Document
-    'Mac: User may have closed the document, so the variable tempDoc is now a function
-    Dim farRight As Integer
-    On Error Resume Next
-'    farRight = ScreenWidth - 1 ' just inside the screen hides most
-    If Not m_tempDoc Is Nothing Then
-        If Word.Application.IsObjectValid(m_tempDoc) Then
-            If m_tempDoc.ActiveWindow.Left <> farRight Then m_tempDoc.ActiveWindow.Left = farRight
-            Set tempDoc = m_tempDoc
-            Exit Function
-        Else
-            Set m_tempDoc = Nothing
-        End If
-    End If
-    Dim activeDoc As Document
-    Set activeDoc = ActiveDocument
-    
-' men kun hvis ikke eksisterer allerede
-Dim d As Document
-If m_tempDoc Is Nothing Then
-For Each d In Application.Documents
-'    If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-    If d.ActiveWindow.Caption = "WordMatTempDoc" Then
-        Set m_tempDoc = d
-        Exit For
-    End If
-Next
-End If
-
-If m_tempDoc Is Nothing Then
-    Set m_tempDoc = Documents.Add(, , , False)
-    m_tempDoc.ActiveWindow.Left = farRight
-'    m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" ' på mac gav denne problemer. Der blev skiftet fokus til tempdoc nogle sekunder senere. Måske fordi den er meget langsom
-    'Mac: Visible=False?
-    m_tempDoc.ActiveWindow.Caption = "WordMatTempDoc"
-    
-    m_tempDoc.Sections(1).Headers(wdHeaderFooterPrimary).Range.Text = Sprog.A(680) '"Do NOT edit this document or close or it. WordMat needs it for calculations. Anything you enter here will be deleted."
-    'Note: Update 14.2.5 for Office 2011 allows document to be placed outside screen
-    'm_tempDoc.ActiveWindow.WindowState = wdWindowStateMinimize
-    m_tempDoc.Saved = True
-End If
-
-' fjernet 26/1-17
-'If Not m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-'    m_tempDoc.Close SaveChanges:=wdDoNotSaveChanges
-'    m_tempDoc.ActiveWindow.Left = farRight
-'    Set m_tempDoc = Documents.Add(, , , False)
-'    m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
+'#If Mac Then ' fjernet 1.29 håndteres nu ens på mac og windows
+'Function tempDoc() As Document
+'    'Mac: User may have closed the document, so the variable tempDoc is now a function
+'    Dim farRight As Integer
+'    On Error Resume Next
+''    farRight = ScreenWidth - 1 ' just inside the screen hides most
+'    If Not m_tempDoc Is Nothing Then
+'        If Word.Application.IsObjectValid(m_tempDoc) Then
+''            If m_tempDoc.ActiveWindow.Left <> farRight Then m_tempDoc.ActiveWindow.Left = farRight
+'            Set tempDoc = m_tempDoc
+'            Exit Function
+'        Else
+'            Set m_tempDoc = Nothing
+'        End If
+'    End If
+'    Dim activeDoc As Document
+'    Set activeDoc = ActiveDocument
 '
+'' men kun hvis ikke eksisterer allerede
+'Dim d As Document
+'If m_tempDoc Is Nothing Then
+'For Each d In Application.Documents
+''    If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+'    If d.ActiveWindow.Caption = "WordMatTempDoc" Then
+'        Set m_tempDoc = d
+'        Exit For
+'    End If
+'Next
+'End If
+'
+'If m_tempDoc Is Nothing Then
+'    Set m_tempDoc = Documents.Add(, , , False)
+''    m_tempDoc.ActiveWindow.Left = farRight
+''    m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" ' på mac gav denne problemer. Der blev skiftet fokus til tempdoc nogle sekunder senere. Måske fordi den er meget langsom
 '    'Mac: Visible=False?
 '    m_tempDoc.ActiveWindow.Caption = "WordMatTempDoc"
+'
+'    m_tempDoc.Sections(1).Headers(wdHeaderFooterPrimary).Range.Text = Sprog.A(680) '"Do NOT edit this document or close or it. WordMat needs it for calculations. Anything you enter here will be deleted."
 '    'Note: Update 14.2.5 for Office 2011 allows document to be placed outside screen
 '    'm_tempDoc.ActiveWindow.WindowState = wdWindowStateMinimize
 '    m_tempDoc.Saved = True
 'End If
-    'Mac:
-    Set tempDoc = m_tempDoc
-    If Not activeDoc Is Nothing Then activeDoc.Activate
-End Function
-Sub SetTempDocSaved()
-    On Error Resume Next
-    m_tempDoc.Saved = True
-End Sub
-#End If
-
-Function MakeMMathCompatible(ut As String) As String
-    ut = Replace(ut, ",", ".")
-    ut = Replace(ut, "E", VBA.ChrW(183) & "10^ ")
-    MakeMMathCompatible = ut
-End Function
-
-Sub testwait()
-    Wait (3000)
-End Sub
+'
+'' fjernet 26/1-17
+''If Not m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+''    m_tempDoc.Close SaveChanges:=wdDoNotSaveChanges
+''    m_tempDoc.ActiveWindow.Left = farRight
+''    Set m_tempDoc = Documents.Add(, , , False)
+''    m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
+''
+''    'Mac: Visible=False?
+''    m_tempDoc.ActiveWindow.Caption = "WordMatTempDoc"
+''    'Note: Update 14.2.5 for Office 2011 allows document to be placed outside screen
+''    'm_tempDoc.ActiveWindow.WindowState = wdWindowStateMinimize
+''    m_tempDoc.Saved = True
+''End If
+'    'Mac:
+'    Set tempDoc = m_tempDoc
+'    If Not activeDoc Is Nothing Then activeDoc.Activate
+'End Function
+'Sub SetTempDocSaved()
+'    On Error Resume Next
+'    m_tempDoc.Saved = True
+'End Sub
+'#End If
 
 Sub ChangeAutoHyphen()
-'
     Options.AutoFormatAsYouTypeReplaceFarEastDashes = False
     Options.AutoFormatAsYouTypeReplaceSymbols = False
 End Sub
@@ -274,7 +262,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
             MsgBox "Det ser ikke ud til at du har åbnet wordmat.dotm, men kører som global skabelon. Genveje vises for " & ActiveDocument.AttachedTemplate & "", vbOKOnly, "Ingen WordMat skabelon"
             Set WT = ActiveDocument.AttachedTemplate
         Else
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -300,7 +288,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
             MsgBox "Der er sat WordMat tastaturgenveje i Normal.dotm", vbOKOnly Or vbInformation, "Advarsel"
             DeleteNormalDotm
         End If
-        GoTo Slut
+        GoTo slut
     End If
     
     CustomizationContext = WT
@@ -335,7 +323,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
         CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er problemer med Genvejene i WordMat*.dotm. Der skal nok køres GenerateKeyboardShortcutsWordMat på Mac." & vbCrLf
     End If
     
-Slut:
+slut:
     CustomizationContext = GemT
 
 End Function
@@ -385,7 +373,7 @@ Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False
 '            GoTo slut
 '        End If
         MsgBox "Den åbne skabelon er ikke wordmat*.dotm", vbOKOnly, "Fejl"
-        GoTo Slut
+        GoTo slut
     End If
     
     CustomizationContext = WT
@@ -478,7 +466,7 @@ End If
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyQ, Wd), KeyCategory:= _
         wdKeyCategoryCommand, Command:="SaveDocToLatexPdf()"
         
-Slut:
+slut:
     Set CustomizationContext = GemT
 
 End Sub
@@ -509,10 +497,10 @@ Function GetProgramFilesDir() As String
     End If
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
-Slut:
+slut:
     'MsgBox GetProgramFilesDir
 End Function
 Function GetDocumentsDir() As String
@@ -531,10 +519,10 @@ On Error GoTo Fejl
  DocumentsDir = GetDocumentsDir
  End If
  
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
-Slut:
+slut:
 'MsgBox GetProgramFilesDir
 End Function
 
@@ -669,32 +657,6 @@ On Error Resume Next
 Fejl:
 End Sub
 
- Sub TestDll()
-'Dim mp As New MaximaProcessClass
-'Dim mp As New MathMenu.MaximaProcessClass
-   
-'    mp.ExecuteMaximaCommand "2+3;", 1
-'    MsgBox mp.LastMaximaOutput
-
-End Sub
-#If Mac Then
-#Else
-Sub TestDll2()
-' dll skal ligge i samme mappe som programmet (Word)
-' navnet skal være navnet på klassen og metoder skal være com-visible
-' Med denne metode kan man dog ikke bruge intellisense, men den er måske nemmere at distribuere
-' man kan måske registrere på udviklingsmaskinen og så ændre til object når distribueres
-
-If MaxProc Is Nothing Then
-    Set MaxProc = GetMaxProc() ' CreateObject("MaximaProcessClass")
-End If
-    MaxProc.ExecuteMaximaCommand "2+3;", 1
-    MsgBox MaxProc.MaximaOutput
-
-Fejl:
-
-End Sub
-#End If
 Sub InsertSletDef()
     Dim gemfontsize As Integer
     Dim gemitalic As Boolean
@@ -736,7 +698,6 @@ Sub InsertSletDef()
 #End If
 End Sub
 
-
 Sub InsertDefiner()
     On Error GoTo Fejl
 
@@ -747,10 +708,10 @@ Sub InsertDefiner()
 '    Selection.OMaths(1).BuildUp
     Selection.Collapse wdCollapseEnd
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub ForrigeResultat()
@@ -766,7 +727,7 @@ Sub ForrigeResultat()
     Application.ScreenUpdating = False
     
     On Error Resume Next
-    If Selection.OMaths.Count = 0 Then GoTo Slut
+    If Selection.OMaths.Count = 0 Then GoTo slut
     
     Dim scrollpos As Double
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -812,7 +773,7 @@ Sub ForrigeResultat()
         If Len(r.Text) = 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
-            GoTo Slut
+            GoTo slut
         End If
 '        s = omax.ReadEquation2(r)
         s = omax.ReadEquation(r)
@@ -853,13 +814,13 @@ Loop While hopover
 '    ResPos2 = Selection.start
 '    ActiveDocument.Range.OMaths(ra.OMaths.Count).BuildUp
 '    ResPos2 = ResPos1 + Len(ActiveDocument.Range.OMaths(matfeltno).Range.text) - ml
-GoTo Slut
+GoTo slut
 Fejl:
     ResIndex = 0
     ResFeltIndex = 0
     ResPos2 = 0
     ResPos1 = 0
-Slut:
+slut:
 '    Selection.End = sslut ' slut skal være først eller går det galt
 '    Selection.start = start
 '    Call sr.Move(wdCharacter, Len(s))
@@ -948,15 +909,6 @@ Function ReadEquationFast(Optional ir As Range) As String
     
 End Function
 
-Sub testdef()
-Dim ea As New ExpressionAnalyser
-Dim i As Integer
-ea.Text = "f(x)=x^2;a=3;b=a;c=[1;4;7];f(x;y)=x*y"
-Do
-    MsgBox ea.GetNextListItem(10)
-    i = i + 1
-Loop While i < 10
-End Sub
 Sub OpenFormulae(FilNavn As String)
 On Error GoTo Fejl
 #If Mac Then
@@ -964,10 +916,10 @@ On Error GoTo Fejl
 #Else
     OpenWordFile "" & FilNavn
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub OpenWordFile(FilNavn As String)
     ' OpenWordFile ("Figurer.docx")
@@ -1005,10 +957,10 @@ Sub OpenWordFile(FilNavn As String)
     End If
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 
@@ -1044,8 +996,6 @@ Function GetRandomTip()
     i = Int(Rnd(1) * (n - mindste) + mindste) ' tilfældigt tal 0-(n-1)
 'hævet a " & VBA.ChrW(7491) & " hævet b " & VBA.ChrW(7495) & " hævet p  " & VBA.ChrW(7510) & "  hævet q " & VBA.ChrW(8319) & "
 ' sænket 0 " & VBA.ChrW(8320) & " sænket 1 " & VBA.ChrW(8321) & " hævet 2 " & VBA.ChrW(8322) & "_
-
-
 
     Select Case i
     Case 0
@@ -1184,13 +1134,10 @@ Dim Text As String
         Text = "" ' mærkeligt men len(text)=0 er ikke nødv ""
     End If
     
-    
-    
 '    MaxProc.ExecuteMaximaCommand text, 0
 '    MaxProc.OutUnits = omax.ConvertUnits(OutUnits)
 '     MaxProc.TurnUnitsOn text, ""
 '     MaxProc.TurnUnitsOn "", ""
-
 
 'Dim text As String
    Text = "[" & Text & "load(WordMatUnitAddon)"
@@ -1225,8 +1172,6 @@ Sub UpdateUnits()
 
 End Sub
 Sub ToggleNum()
-
-
     Dim ufq As New UserFormExactNum
     If MaximaExact = 0 Then
         ufq.SetExact
@@ -1276,10 +1221,10 @@ Sub CheckForUpdateOld()
     End If
 
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub CheckForUpdate()
 '#If Mac Then
@@ -1386,9 +1331,9 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     End If
     
     If RunSilent Then
-        If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo Slut ' ikke automatisk opdatere i maj og juni
+        If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo slut ' ikke automatisk opdatere i maj og juni
         If IsDate(LastUpdateCheck) Then
-            If DateDiff("d", LastUpdateCheck, Date) < 7 Then GoTo Slut ' hvis der er checket indenfor de sidste 7 dage så afslut
+            If DateDiff("d", LastUpdateCheck, Date) < 7 Then GoTo slut ' hvis der er checket indenfor de sidste 7 dage så afslut
         End If
     End If
     LastUpdateCheck = Date ' denne skal være her, og ikke i slutningen, for hvis der sker en fejl i opdateringen, skal den kun komme én gang
@@ -1404,7 +1349,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         If Not RunSilent Then
             MsgBox2 "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
         End If
-        GoTo Slut
+        GoTo slut
     End If
     NewVersion = s
     p = InStr(NewVersion, vbLf)
@@ -1423,7 +1368,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         If Not RunSilent Then
             MsgBox2 "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
         End If
-        GoTo Slut
+        GoTo slut
     End If
     
     '        p = InStr(s, "<body")
@@ -1500,7 +1445,7 @@ Install2:
    
    
    
-    GoTo Slut
+    GoTo slut
 Fejl:
     '   MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure CheckForUpdate, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     If Not RunSilent Then
@@ -1508,7 +1453,7 @@ Fejl:
         OpenLink "https://www.eduap.com/da/download-wordmat/"
         '        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     End If
-Slut:
+slut:
     On Error Resume Next
 '    Unload UFvent
 
@@ -1538,10 +1483,10 @@ Sub CheckForUpdateSilent()
 '#Else
     CheckForUpdateWindows True
 '#End If
-GoTo Slut
+GoTo slut
 Fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
-Slut:
+slut:
 End Sub
 Function GetHTML(URL As String) As String
     With CreateObject("MSXML2.XMLHTTP")
@@ -1614,7 +1559,7 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = ConvertNumberToString & ") "
     End If
     
-Slut:
+slut:
 End Function
 Function ConvertNumberToStringBC(n As Double, Optional bc As Integer) As String
 ' konverter tal til streng med angivet antal betydende cifre. Hvis ingen angives anvendes maximacifre
@@ -1686,13 +1631,13 @@ End Sub
 Public Sub ClearClipBoard()
 ' giver desværre sjældne problemer på nogle computere
 ' specielt hvis der er definitioner i dokumentet så den fyres to gange
-On Error GoTo Slut
+On Error GoTo slut
     Dim oData   As New DataObject 'object to use the clipboard
      
     oData.SetText Text:=Empty 'Clear
     oData.PutInClipboard 'take in the clipboard to empty it
     Set oData = Nothing
-Slut:
+slut:
 End Sub
 
 Sub GoToEndOfMath()
@@ -1703,7 +1648,7 @@ Dim i As Integer
     If mc.Count > 0 Then
 On Error Resume Next
     mc(mc.Count).ParentOMath.Range.Select
-On Error GoTo Slut
+On Error GoTo slut
     mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
     Else
         i = 0
@@ -1712,7 +1657,7 @@ On Error GoTo Slut
             i = i + 1
         Loop
     End If
-Slut:
+slut:
 On Error Resume Next
     Selection.Collapse wdCollapseEnd
     Dim r As Range
@@ -1723,7 +1668,6 @@ On Error Resume Next
     End If
 End Sub
 
-
 Function NotZero(i As Integer) As Integer
 ' hvis negativ returner nul
     If i < 0 Then
@@ -1731,7 +1675,6 @@ Function NotZero(i As Integer) As Integer
     Else
         NotZero = i
     End If
-
 End Function
 
 Sub TabelToList()
@@ -1747,10 +1690,10 @@ Set om = Selection.OMaths.Add(Selection.Range)
 Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
 om.OMaths(1).BuildUp
 Selection.TypeParagraph
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ListToTabel()
 Dim dd As New DocData
@@ -1784,10 +1727,8 @@ Selection.TypeParagraph
             .Columns(i).Width = 65
         Next
         End With
-        
 
 'Set tabel = Selection.Tables.Add(Selection.Range, dd.nrows, dd.ncolumns)
-
 
 For i = 1 To dd.nrows
     For j = 1 To dd.ncolumns
@@ -1795,10 +1736,10 @@ For i = 1 To dd.nrows
     Next
 Next
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub GoToInsertPoint()
 ' finder næste punkt efter selection hvor der kan indsættes nog
@@ -1861,7 +1802,6 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     On Error GoTo Fejl
     Application.ScreenUpdating = False
 
-
     If Selection.Tables.Count > 0 Then
         MsgBox "Cant insert numbered equation in table", vbOKOnly, Sprog.Error
         Exit Sub
@@ -1891,7 +1831,6 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
             Selection.TypeParagraph
         End If
     End If
-
 
     Selection.Collapse wdCollapseEnd
     Set t = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=1, NumColumns:=3, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed)
@@ -1960,7 +1899,6 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         End If
     End If
 
-
     ' indsæt mat-felt
     t.Cell(1, 2).Range.Select
     Selection.Collapse wdCollapseStart
@@ -1986,10 +1924,10 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         Oundo.EndCustomRecord
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEquationRef()
@@ -2035,10 +1973,10 @@ Dim b As String
 
 '    Selection.MoveLeft Unit:=wdCharacter, count:=1
 '    Selection.Fields.ToggleShowCodes
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub SetEquationNumber()
@@ -2079,10 +2017,10 @@ On Error GoTo Fejl
     End If
     
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub SetFieldNo(F As Field, n As String)
@@ -2097,10 +2035,10 @@ On Error GoTo Fejl
     F.Code.Text = F.Code.Text & "\r" & n & " \c"
     F.Update
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEquationHeadingNo()
@@ -2117,10 +2055,10 @@ On Error GoTo Fejl
       Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 \r0 \h"
 
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub UpdateEquationNumbers()
@@ -2128,10 +2066,10 @@ On Error GoTo Fejl
 
     ActiveDocument.Fields.Update
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub CreateSprogArrays()
@@ -2219,7 +2157,6 @@ Sub SaveBackup()
     path = path & "WordMatBackup" & BackupNo & ".docx"
     If VBA.LenB(path) = lCancelled_c Then Exit Sub
     
-    
 #If Mac Then
     Set tempDoc2 = Application.Documents.Add(Template:=ActiveDocument.FullName, visible:=False)
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
@@ -2241,10 +2178,10 @@ Sub SaveBackup()
     DoEvents
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
-Slut:
+slut:
     On Error Resume Next
     If Not UfWait Is Nothing Then Unload UfWait
     Application.ScreenUpdating = True
@@ -2253,10 +2190,10 @@ End Sub
 Sub OpenLatexTemplate()
 On Error GoTo Fejl
     Documents.Add Template:=GetWordMatDir() & "WordDocs/LatexWordTemplate.dotx"
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub DeleteNormalDotm()
@@ -2337,10 +2274,10 @@ Function ReadTextfileToString(FilNavn As String) As String
    Set fsT = Nothing
 #End If
 
-   GoTo Slut
+   GoTo slut
 Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
-Slut:
+slut:
 
 End Function
 
@@ -2356,10 +2293,10 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
    Dim fsT As Object
    'On Error GoTo fejl
 
-   If FilNavn = "" Then GoTo Slut
+   If FilNavn = "" Then GoTo slut
    If WriteText = "" Then
       If Dir(FilNavn) <> "" Then Kill FilNavn
-         GoTo Slut
+         GoTo slut
    End If
    Set fsT = CreateObject("ADODB.Stream")
    fsT.Type = 2 'Specify stream type - we want To save text/string data.
@@ -2372,10 +2309,10 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
 #End If
 
 
-   GoTo Slut
+   GoTo slut
 Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTexfilen"
-Slut:
+slut:
 
 End Sub
 
@@ -2516,10 +2453,10 @@ Sub NewEquation()
         Selection.TypeParagraph
         Selection.MoveLeft Unit:=wdCharacter, Count:=2
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Function FormatDefinitions(DefS As String) As String

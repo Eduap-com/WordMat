@@ -62,12 +62,12 @@ Sub RefreshRibbon()
         ' It is exactly what we should have instead of that brute force reload mechanism.
     End If
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(394), vbOKOnly, Sprog.Error
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
-Slut:
+slut:
 #End If
 End Sub
 ' events der fyres når der trykkes på ribbon
@@ -98,10 +98,10 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
         Oundo.EndCustomRecord
 #End If
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(395), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Public Sub Rib_Settings(control As IRibbonControl)
@@ -848,10 +848,10 @@ Sub Rib_nylign(control As IRibbonControl)
     Selection.OMaths.Add Range:=Selection.Range
 '    Selection.OMaths(1).BuildUp
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 'Callback for ButtonNumEq onAction
 Sub Rib_nynumlign(control As IRibbonControl)

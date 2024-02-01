@@ -103,10 +103,10 @@ If Err.Number <> 0 Then
     Set XLapp = CreateObject("Excel.Application")
 '    Set XLapp = New excel.Application
 End If
-GoTo Slut
+GoTo slut
 Fejl:
     RestartExcel
-Slut:
+slut:
 End Sub
 Public Sub Freeze()
 On Error Resume Next
@@ -131,7 +131,7 @@ On Error Resume Next
 '    Set XLapp = CreateObject("Excel.Application")
 '    Set XLapp = New Excel.Application
 'End If
-On Error GoTo Slut
+On Error GoTo slut
 Application.ScreenUpdating = False
 EnableExcelMacros
     
@@ -184,12 +184,12 @@ End If
 'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
-GoTo Slut
+GoTo slut
 Fejl:
     On Error Resume Next
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 '    Unload ufwait2
-Slut:
+slut:
 End Function
 
 
@@ -433,10 +433,10 @@ End If
     Selection.Tables(1).Select
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Public Function GetTableData() As Boolean

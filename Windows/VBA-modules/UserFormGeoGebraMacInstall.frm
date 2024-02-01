@@ -50,13 +50,13 @@ Private Sub CommandButton_test_Click()
     
     If Dir(FilePath, vbDirectory) = vbNullString Then
         MsgBox "GeoGebra er ikke blevet installeret endnu. Vent til download er færdig.", vbOKOnly, "Vent"
-        GoTo Slut
+        GoTo slut
     End If
     
     Me.Hide
     GeoGebra
 '    RunScript "OpenGeoGebra", geogebrafilersti
-Slut:
+slut:
 End Sub
 Public Sub DownloadNow()
     Dim FilePath As String, i As Integer
@@ -89,7 +89,7 @@ Public Sub DownloadNow()
             Label1.Caption = "Download stopped"
             Label2.Caption = "You must grant access to GeoGebra.app for the installation to proceed"
         End If
-        GoTo Slut
+        GoTo slut
     End If
     If Sprog.SprogNr = 1 Then
         Label1.Caption = "GeoGebra 5 er ved at blive hentet"
@@ -120,7 +120,7 @@ Public Sub DownloadNow()
             CommandButton_stop.visible = False
             CommandButton_test.visible = False
             CommandButton_retry.visible = True
-            GoTo Slut
+            GoTo slut
         End If
         If GrantAccessToMultipleFiles(Array(FilePath)) = "false" Then
             If Sprog.SprogNr = 1 Then
@@ -133,7 +133,7 @@ Public Sub DownloadNow()
             CommandButton_stop.visible = False
             CommandButton_test.visible = False
             CommandButton_retry.visible = True
-            GoTo Slut
+            GoTo slut
         End If
         Wait 1
         Label_progress.Caption = Label_progress.Caption & "*"
@@ -156,7 +156,7 @@ Public Sub DownloadNow()
         End If
         CommandButton_test.visible = False
         CommandButton_stop.visible = False
-        GoTo Slut
+        GoTo slut
     Else
         CommandButton_stop.visible = False
         If Sprog.SprogNr = 1 Then
@@ -210,7 +210,7 @@ Public Sub DownloadNow()
         End If
     End If
 
-Slut:
+slut:
 End Sub
 
 Private Sub UserForm_Activate()

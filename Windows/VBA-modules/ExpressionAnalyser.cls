@@ -169,10 +169,10 @@ On Error GoTo Fejl
     Else
         ChrByIndex = VBA.ChrW(0)
     End If
-GoTo Slut
+GoTo slut
 Fejl:
         ChrByIndex = VBA.ChrW(0)
-Slut:
+slut:
 End Property
 
 Public Function FindNextBreak(Optional stopforbrackets As Boolean = False) As Long
@@ -679,7 +679,7 @@ Sub ReplaceSpaceByMult()
 ' bogstav mellemrum (
 
 Dim p As Long
-On Error GoTo Slut
+On Error GoTo slut
 p = 0
 Do
     p = InStr(p + 1, Text, " ")
@@ -700,7 +700,7 @@ Do
     End If
 Loop While p > 0
 
-Slut:
+slut:
 End Sub
 Sub RemoveMultSign()
 ' fjerner gangetegn
@@ -1045,7 +1045,7 @@ Do
     
     If c = Sep Or c = vbTab Then
         Pos = Pos
-        GoTo Slut
+        GoTo slut
     Else
         cs = c
         If c = "(" Then
@@ -1073,7 +1073,7 @@ Do
     Loop Until bracketlevel = 0 Or Pos > Len(Text) ' ændret fra >= til > da der var eksempel på fejl med streng der slutter på )
 Loop Until Pos > Len(Text)
 
-Slut:
+slut:
 GetNextListItem = Mid(Text, spos, Pos - spos)
 If right(GetNextListItem, 1) = Sep Then
     GetNextListItem = Left(GetNextListItem, Len(GetNextListItem) - 1)
@@ -1193,7 +1193,7 @@ End Sub
 Sub RemoveSpaceAfterSubSuperscript(tegn As String)
 ' fjerner mellemrum efter f.eks. f_a (x)
 ' man så ellers kan erstatte mellemrum med *
-On Error GoTo Slut
+On Error GoTo slut
 
 Do
     Pos = InStr(Pos + 1, Text, tegn)
@@ -1207,7 +1207,7 @@ Do
     End If
 Loop While Pos > 0
 
-Slut:
+slut:
 End Sub
 Sub AddSpaceAfterSubSuperscript(tegn As String)
 ' tilføjer mellemrum efter f.eks. f_a (x)
@@ -1236,7 +1236,7 @@ Do
     End If
 Loop While Pos > 0
 Pos = p
-Slut:
+slut:
 End Sub
 
 Sub InsertFunctionBrackets()
@@ -1388,7 +1388,7 @@ Dim p As String
 
 If E = "kWh" Or E = "min" Then ' godkend dem der kan forveksles med præfiks
     IsUnit = True
-    GoTo Slut
+    GoTo slut
 End If
 
 If Len(E) > 1 Then ' fjern evt. præfiks
@@ -1404,7 +1404,7 @@ Else
     IsUnit = False
 End If
 
-Slut:
+slut:
 End Function
 
 Function SubString(StartPos As Long, endpos As Long)
