@@ -17,16 +17,6 @@ In the VBE there are
 - Modules
 - Class modules
 
-Here is a description of some the most important functions in these modules:
-
-**Module: Maxima**
-
-
-**Class module:** *Cmaxima*
-Holds all the 
-
-**Class module:** *MaximaProcess*
-*Function:* 
 
 
 ### WordMat Ribbon
@@ -54,10 +44,9 @@ The installer registers the library with Windows
 
 The purpose of the library is to communicate safely between Word and Maxima. It is an API.
 To edit the source code written in c# you need Visual Studio to open the project. The newly build files will be in the release folder.
-The code has not been changed for many years.
-It is basically
 
 ## MaximaConnectionDylib
+depracated. This is only here for historical reasons. WordMat now communicates with Maxima directly using a shell command. 
 Code for the dylib API library written in c to communicate between Word and Maxima on Mac.
 Use xcode to edit.
 
