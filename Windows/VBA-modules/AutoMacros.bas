@@ -1,7 +1,6 @@
 Attribute VB_Name = "AutoMacros"
 Option Explicit
-' AutoMacros. Hvis der er flere globale skabeloner med fx AutoClose køres kun den ene.
-Dim oAppClass As New oAppClass
+'Dim oAppClass As New oAppClass ' flyttet til P, så risiko for tabt tempdoc er mindre
 #If Mac Then
 #Else
 Private Declare PtrSafe Function CreateMutex Lib "kernel32" _
@@ -11,18 +10,18 @@ Private Declare PtrSafe Function CreateMutex Lib "kernel32" _
         ByVal lpName As String) As LongPtr
 #End If
 
-Sub SetDocEvents()
-    If oAppClass Is Nothing Then
-        Set oAppClass = New oAppClass
-        Set oAppClass.oApp = Word.Application
-    End If
-End Sub
+'Sub SetDocEvents()
+'    If oAppClass Is Nothing Then
+'        Set oAppClass = New oAppClass
+'        Set oAppClass.oApp = Word.Application
+'    End If
+'End Sub
 
 Sub AutoExec()
 ' denne køres kun hvis filen er sat som globalskabelon. Altså ikke hvis den bare åbnes
 ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
 
-Set oAppClass.oApp = Word.Application
+'Set oAppClass.oApp = Word.Application
 
 
 #If Mac Then

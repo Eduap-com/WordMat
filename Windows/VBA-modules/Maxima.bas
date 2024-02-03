@@ -13,7 +13,6 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
 
     On Error GoTo Fejl
     Dim op As Boolean
-    SetDocEvents
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
         tid = Timer
