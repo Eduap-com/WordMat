@@ -13,7 +13,7 @@ Windows/WordMat*- Kopi*.dotm
 
 #Windows/WordMatP.dotm
 
-/Windows/WordMat-InnoScript-NonAdmin.iss
+/Windows/WordMat*.iss
 
 # Dont upload Backup folders
 /Windows/Backup/
