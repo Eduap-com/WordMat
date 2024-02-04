@@ -1,30 +1,51 @@
-WordMath is really an aggregate of different components providing math functionality.
-The components are more or less integrated. Some do not communicate and some communicate more closely.
-This reflects in the License, which is different for different components.
-Most are licensed under GNU GPL, others are optional add-ins which are not part of the WordMath core source code.
+WordMath License
 
+WordMath is really an aggregate of different components providing math functionality.
+This reflects in the License, which is different for different components. The core components are all licensed under GNU GPL, while some of the optional components/add-ins have other licenses.
+For the WordMath core you are free to use, copy, distribute and modify WordMath source code under the GNU GPL license agreement (version 3 or later). License text: http://www.gnu.org/licenses/gpl.html.
+The WordMath core source code is available on the following Git-Hub site: https://github.com/Eduap-com/WordMat
+An installer for the WordMath core is also provided on the eduap.com website. The installer however is proprietary, but is free of charge for non-commercial purposes. The installer provided can also install some of the optional addons. Be advised that you must comply with the licenses of those addons.
+For schools and organisations that sign up for WordMat Partnership, additional licenses and benefits are provided.
+WordMat partnerships help support the further development of WordMath.
+Partnership agreements provide support, access to digitally signed code and installer, fully automated update procedure, additional WordMat+ functions and more. see full list of benefits at www.eduap.com
+
+Partnership License details
+  1. This license requires an active partnership agreement between your organisation and Eduap
+  2. The license is valid for all members of your organisation e.g. all students and teachers at your school. 
+  3. The license expires if the partnership agreement is cancelled and for members that leaves your organisation
+  4. The software is licensed to your organisation with online technical support for the WordMath core components and optional components. Conditions for support apply.
+  5. Your organisation has license to access a restricted download page via IP-restriction with ads, where partnership installers are distributed. The download page automatically makes installers available compatible with your system (Windows/Mac)
+  6. Your organisation has license to use any installer downloadable from the restricted download page to install and use all your required components of WordMath. Though you must also comply with any special licenses for which Eduap does not hold copyright - namely Geogebra 5
+  7. The installers made available through this license are digitially signed for a ease of use and security
+  8. Your organisation has license to use the WordMath+ component of WordMath. Providing automatic update procedure and other functions liable to change.
+  9. The software is licensed to your organisation on a limited, non-exclusive, non-transferable license
+  10. The copyright and other intellectual property rights remain Eduap property
+  
+  
+List of WordMath components and corresponding Licenses
 Core components:
-Component		License			Copyright holder	Comment
-WordMat.dotm		GNU GPL			Eduap			vba code that ties everything together
-Maxima			GNU GPL			DOE			Math program
-Maxima-files		GNU GPL			Eduap			3 mac files with Maxima code functions, that extend Maxima.
-MathMenu.dll		GNU GPL			Eduap			Library to communicate between Maxima and Word VBA
-ExcelFiles		GNU GPL 		Eduap			Collection of Excel VBA programs
-WordDocs		GNU GPL			Eduap			Documentation, formulae collections, Latex Template
+Component		        License			Copyright holder	Comment
+WordMat.dotm		    GNU GPL			Eduap			vba code that ties everything together.
+Maxima		          GNU GPL			DOE			Math program https://maxima.sourceforge.io/
+Maxima-files	      GNU GPL			Eduap			3 mac files with Maxima code functions, that extend Maxima.
+MathMenu.dll		    GNU GPL			Eduap			Library to communicate between Maxima and Word VBA
+ExcelFiles		      GNU GPL 		Eduap			Collection of Excel VBA programs
+WordDocs		        GNU GPL			Eduap			Documentation, formulae collections, Latex Template
 geogebra-math-apps	GNU GPL			Geogebra.org		Geogebra source code to show graphs in a browser
 
-Optional addons:
-WordMat installer	Proprietary		Eduap			eduap.com	
-WordMatP		Proprietary		Eduap			Available for partnerships.
-WebViewWrap.dll		Proprietary but gratis	Eduap			System library for webview2 access
-QlmCLRHost		Proprietary but gratis	Soraco			System library for .Net framework
-Fonts			GFL						Math fonts that are Free software
-GeoGebra 5		Proprietary installer	GeoGebra.org		Free for non-commercial use.
-Graph			GNU GPL			padowan.dk		Graph program
+Optional components/addons:
+WordMath installers   Proprietary		Eduap			eduap.com some free of charge, other require partnership
+WordMatP		          Proprietary		Eduap			Available for partnerships.
+WebViewWrap.dll	      Proprietary but gratis	Eduap			System library for webview2 access
+QlmCLRHost.dll		    Proprietary but gratis	Soraco			System library for .Net framework
+Fonts			            GFL						Math fonts that are Free software
+GeoGebra 5		        Proprietary installer	GeoGebra.org		Free for non-commercial use.
+Graph			            GNU GPL		padowan.dk		Graph program
 
-Eduap optional addons are licensed to Schools and companies on 1 year partnerships, that include support. see more at www.eduap.com
+The components are more or less integrated. Some do not communicate and some communicate more closely. Most communicating is done in a rudimentary way, using shell commands.
 
 Microsoft Word & Excel VBA, .Net framework and webview2 are considered 'Major components' in GNU GPL License regards.
+
 
 ----------------------------------------------------------------
                     GNU GENERAL PUBLIC LICENSE

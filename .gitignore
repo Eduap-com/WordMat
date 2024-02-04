@@ -1,9 +1,5 @@
 ## Files GitHub ignores
 
-# This file exceeds GitHubs 100 MB filelimit. It is required to build the Mac version
-# Get the file from the most recent installer. It will be placed in folder: /Library/Application support/Microsoft/Office365/User Content/Add-ins/WordMat/
-Mac/ExternalPrograms/Maxima.app
-
 # Dont upload the compiled installers
 Windows/WordMat*.exe
 Mac/WordMat*.pkg
@@ -11,9 +7,8 @@ Mac/WordMat*.pkg
 # Dont upload temp copies
 Windows/WordMat*- Kopi*.dotm
 
-#Windows/WordMatP.dotm
-
-/Windows/WordMat*.iss
+Windows/WordMat*.iss
+Mac/WordMat*.pkgproj
 
 # Dont upload Backup folders
 /Windows/Backup/
