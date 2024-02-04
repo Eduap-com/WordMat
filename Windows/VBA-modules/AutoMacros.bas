@@ -20,7 +20,11 @@ Private Declare PtrSafe Function CreateMutex Lib "kernel32" _
 Sub AutoExec()
 ' denne køres kun hvis filen er sat som globalskabelon. Altså ikke hvis den bare åbnes
 ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
-
+    If Sprog.SprogNr = 1 Then
+        AppNavn = "WordMat"
+    Else
+        AppNavn = "WordMath"
+    End If
 'Set oAppClass.oApp = Word.Application
 
 
