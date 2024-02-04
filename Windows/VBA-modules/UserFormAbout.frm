@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormAbout 
    Caption         =   "About"
-   ClientHeight    =   5100
+   ClientHeight    =   5475
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   8355.001
@@ -20,11 +20,11 @@ Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVa
 End Sub
 
 Private Sub Label_license_Click()
-    OpenLink "https://www.gnu.org/licenses/gpl-3.0.html"
+    OpenLink "https://www.eduap.com/wordmath-license/"
 End Sub
 
 Private Sub Label_Licensetitle_Click()
-    OpenLink "https://www.gnu.org/licenses/gpl-3.0.html"
+    OpenLink "https://www.eduap.com/wordmath-license/"
 End Sub
 
 Private Sub Label_link_Click()
@@ -78,8 +78,13 @@ Sub SetCaptions()
     If PatchVersion <> "" Then
         V = V & PatchVersion
     End If
-    
-    Me.Caption = Sprog.About & " WordMat"
+    If Sprog.SprogNr = 1 Then
+        Me.Caption = Sprog.About & " WordMat"
+        Label_title.Caption = "WordMat"
+    Else
+        Me.Caption = Sprog.About & " WordMath"
+        Label_title.Caption = "WordMath"
+    End If
     Label_version.Caption = "Version: " & V
     Label_text.Caption = Sprog.A(20)
 

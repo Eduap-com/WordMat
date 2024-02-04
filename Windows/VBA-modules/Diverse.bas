@@ -116,9 +116,9 @@ Function GetTempDir() As String
 End Function
 Sub OpretTempdoc()
 ' men kun hvis ikke eksisterer allerede
-#If Mac Then
-    Call tempDoc
-#Else
+'#If Mac Then
+'    Call tempDoc
+'#Else
 Dim d As Document
 If tempDoc Is Nothing Then
 For Each d In Application.Documents
@@ -139,7 +139,7 @@ If Not tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
     Set tempDoc = Documents.Add(, , , False)
     tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
 End If
-#End If
+'#End If
 End Sub
 Sub ShowTempDoc()
     MsgBox tempDoc.Range.Text
