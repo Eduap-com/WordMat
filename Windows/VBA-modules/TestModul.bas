@@ -98,7 +98,7 @@ Sub RunTestSequence()
     '    Application.ScreenRefresh
 
     'til test af enkelt
-    GoTo slut
+'    GoTo slut
     
     ' Man kan indtaste flere korrekte resultater, bare adskil med @$
     'calculation tests
@@ -697,9 +697,11 @@ Function TestSolveDE(komm As String, Var As String, resul As String) As Boolean
     If StopNow Then TestSolveDE = True ' betyder stop
 End Function
 Sub GotoPrevEq()
-    Do While Selection.OMaths.Count = 0
+Dim i As Integer
+    Do While Selection.OMaths.Count = 0 And i < 100
         Selection.GoToPrevious (wdGoToLine)
         Selection.EndKey Unit:=wdLine
+        i = i + 1 ' der er nogle ligninger, hvor den bare sidder fast ved samme linje. Noget med vektorer
     Loop
 End Sub
 Function TestSolve(komm As String, Var As String, resul As String, Optional Instruk As String) As Boolean
