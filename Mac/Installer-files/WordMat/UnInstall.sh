@@ -28,7 +28,7 @@ sudo rm /Library/fonts/Latinmodern-math.otf
 sudo rm /Library/fonts/Lmroman12-regular.otf
 
 #libs
-sudo rm /opt/local/lib/Libzstd.1.5.1.dylib
+sudo rm /opt/local/lib/Libzstd.1.5.5.dylib
 sudo rm /opt/local/lib/Libzstd.1.dylib
 
 #Formuale and Temp files and backups files
@@ -38,8 +38,8 @@ sudo rm /opt/local/lib/Libzstd.1.dylib
 #rmdir /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/
 
 sudo rm /Applications/WordMat/InstallScript.sh
-sudo rm /Applications/WordMat/WordMat\ installation\ files.docx
-sudo rm /Applications/WordMat/UnInstallScript
+sudo rm /Applications/WordMat/UnInstall\ Instructions.docx
+sudo rm /Applications/WordMat/UnInstall.sh
 sudo rmdir  /Applications/WordMat/
 
 Echo
