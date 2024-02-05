@@ -9,7 +9,10 @@ Echo
 
 
 #Main Add-in file. Removes WordMat from Word menu
-sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMatMac.dotm
+sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMat.dotm
+sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMatP.dotm
+sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMatP2.dotm
+
 
 #Main installation
 sudo rm -rf /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Add-ins.localized/WordMat/
@@ -20,6 +23,14 @@ sudo rm ~/Library/Application\ Scripts/com.microsoft.Word/WordMatScripts.scpt
 #Temp files and backups files
 sudo rm -rf ~/Library/Containers/com.microsoft.Word/Data/WordMat/
 
+#Fonts
+sudo rm /Library/fonts/Latinmodern-math.otf
+sudo rm /Library/fonts/Lmroman12-regular.otf
+
+#libs
+sudo rm /opt/local/lib/Libzstd.1.5.5.dylib
+sudo rm /opt/local/lib/Libzstd.1.dylib
+
 #Formuale and Temp files and backups files
 #sudo rm -rf ~/Library/Containers/com.microsoft.Word/Data/WordMat/
 
@@ -27,8 +38,8 @@ sudo rm -rf ~/Library/Containers/com.microsoft.Word/Data/WordMat/
 #rmdir /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/
 
 sudo rm /Applications/WordMat/InstallScript.sh
-sudo rm /Applications/WordMat/WordMat\ installation\ files.docx
-sudo rm /Applications/WordMat/UnInstallScript
+sudo rm /Applications/WordMat/UnInstall\ Instructions.docx
+sudo rm /Applications/WordMat/UnInstall.sh
 sudo rmdir  /Applications/WordMat/
 
 Echo
