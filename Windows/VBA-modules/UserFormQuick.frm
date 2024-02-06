@@ -29,7 +29,7 @@ Private Sub UserForm_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 End Sub
 
 Private Sub UserForm_Initialize()
-    Call RemoveCaption(Me)
+'    Call RemoveCaption(Me)
 
 End Sub
 

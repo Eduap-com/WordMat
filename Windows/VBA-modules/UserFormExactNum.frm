@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormExactNum 
-   ClientHeight    =   1210
+   ClientHeight    =   1290
    ClientLeft      =   30
    ClientTop       =   165
    ClientWidth     =   2040
@@ -34,7 +34,7 @@ Private Sub UserForm_Initialize()
     Label_exact.Caption = Sprog.Exact
     Label_num.Caption = Sprog.Numeric
 #If Mac Then
-    Me.Height = 100
+'    Me.Height = 100
 #End If
 
 End Sub
@@ -64,29 +64,28 @@ Public Sub SetNum()
 End Sub
 
 Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
-'    If (KeyCode.Value = 18 Or KeyCode.Value = 78) And Shift = 4 Then ' alt+n
-On Error GoTo slut
+    '    If (KeyCode.Value = 18 Or KeyCode.Value = 78) And Shift = 4 Then ' alt+n
+    On Error GoTo slut
     If KeyCode.Value = 78 And Shift = 4 Then ' alt+n
-    If MaximaExact = 0 Then
-        SetExact
-        DoEvents
-        MaximaExact = 1
+        If MaximaExact = 0 Then
+            SetExact
+            MaximaExact = 1
+        ElseIf MaximaExact = 1 Then
+            SetNum
+            MaximaExact = 2
+        Else
+            SetAuto
+            MaximaExact = 0
+        End If
         start = Timer    ' Set start time.
-    ElseIf MaximaExact = 1 Then
-        SetNum
+#If Mac Then
+#Else
         DoEvents
-        MaximaExact = 2
-        start = Timer    ' Set start time.
-    Else
-        SetAuto
-        DoEvents
-        MaximaExact = 0
-        start = Timer    ' Set start time.
-    End If
+#End If
+        WoMatRibbon.Invalidate
     Else
         Me.Hide
     End If
-    WoMatRibbon.Invalidate
 slut:
 End Sub
 

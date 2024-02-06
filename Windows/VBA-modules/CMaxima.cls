@@ -589,20 +589,20 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 
     Dim s As String, WT As String, p As Long, p2 As Long, Var As String
     Dim FN As String
-    Dim UfWait2 As UserFormWaitForMaxima
+'    Dim UfWait2 As UserFormWaitForMaxima
     If StopTime > 0 Then
         WT = StopTime
     Else
         WT = "5"
     End If
-    Set UfWait2 = New UserFormWaitForMaxima
-    On Error Resume Next ' hvis en form allerede er åben giver det fejl
-    UfWait2.Show vbModeless
-    UfWait2.Label_tip.Font.Size = 10
-    UfWait2.Label_tip.Font.Italic = False
-    On Error GoTo 0
+'    Set UfWait2 = New UserFormWaitForMaxima
+'    On Error Resume Next ' hvis en form allerede er åben giver det fejl
+'    UfWait2.Show vbModeless
+'    UfWait2.Label_tip.Font.Size = 10
+'    UfWait2.Label_tip.Font.Italic = False
+'    On Error GoTo 0
 start:
-    UfWait2.Label_tip.Caption = GetRandomTip
+'    UfWait2.Label_tip.Caption = GetRandomTip
     DoEvents
   FN = DataFolder & "output.txt"
     s = ExecuteMaximaViaFile(GetMaximaSettingsString & MaximaInputStreng, WT, MaximaUnits)
@@ -640,7 +640,7 @@ start:
 '    Loop
     FindLastMaximaOutput ConvertWordSymbols, s
 '    GenerateOutputArray (s)
-    Unload UfWait2
+'    Unload UfWait2
 #End If
 End Sub
 'Public Sub RunMaximaFileOld()

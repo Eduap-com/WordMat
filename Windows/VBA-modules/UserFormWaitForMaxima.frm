@@ -23,10 +23,11 @@ Private Sub UserForm_Activate()
 End Sub
 
 Private Sub UserForm_Initialize()
-    Call RemoveCaption(Me)
-#If Mac Then
-    Me.Height = 180
-#End If
+'    Call RemoveCaption(Me)
+'#If Mac Then
+'    Me.Height = 180
+'#End If
+    
 End Sub
 
 Private Sub SetCaptions()

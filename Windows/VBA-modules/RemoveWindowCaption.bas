@@ -33,6 +33,7 @@ Private Declare PtrSafe Function DrawMenuBar Lib "user32" ( _
 ByVal hwnd As LongPtr) As LongPtr
 
 Sub RemoveCaption(objForm As Object)
+' Virker ikke mere efter hensigten. Der er stadig menubar, men den bliver bare lidt højere
 ' skal køres i initialize af form
 ' Call RemoveCaption(Me)
 Dim mhWndForm As Variant
