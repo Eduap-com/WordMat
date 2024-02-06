@@ -5,6 +5,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormExactNum
    ClientTop       =   165
    ClientWidth     =   2040
    OleObjectBlob   =   "UserFormExactNum.frx":0000
+   ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
 End
 Attribute VB_Name = "UserFormExactNum"
@@ -13,7 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Dim start
+Dim start As Single, j As Integer ' time
 Private Sub UserForm_Activate()
     start = Timer    ' Set start time.
     Do While Timer < start + 1
@@ -66,6 +67,11 @@ End Sub
 Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
     '    If (KeyCode.Value = 18 Or KeyCode.Value = 78) And Shift = 4 Then ' alt+n
     On Error GoTo slut
+#If Mac Then
+    j = j + 1
+    If j Mod 2 = 0 Then GoTo slut
+#Else
+#End If
     If KeyCode.Value = 78 And Shift = 4 Then ' alt+n
         If MaximaExact = 0 Then
             SetExact

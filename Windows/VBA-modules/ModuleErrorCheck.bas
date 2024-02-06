@@ -12,7 +12,6 @@ Function CheckForError() As Boolean
 ' Checks if latest output has error, and if thats the case shows the error in a Userform
 '    Dim UFerror As UserFormError
     Dim ndeferror As Integer
-    Dim CheckText As String
     Dim ED As ErrorDefinition
 
     If omax.DefString <> "" Then
@@ -20,11 +19,10 @@ Function CheckForError() As Boolean
     Else
         ndeferror = 3
     End If
-    CheckText = omax.MaximaOutput & omax.KommentarOutput
     On Error Resume Next
     CheckForError = False
 
-    ED = GetErrorDefinition(CheckText)
+    ED = GetErrorDefinition(omax.MaximaOutput, omax.KommentarOutput)
     
     If ED.Title <> vbNullString Then ' Show the error in userform
         CheckForError = True
@@ -49,11 +47,12 @@ Function CheckForError() As Boolean
     End If
 End Function
 
-Function GetErrorDefinition(CheckText As String) As ErrorDefinition
+Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) As ErrorDefinition
 ' Klassificerer og fortolker fejlen i en errordefinition.
 ' Checktext skal være output fra Maxima
-    Dim Pos As Integer
+    Dim Pos As Integer, CheckText As String
     
+    CheckText = MaximaOutput & KommentarOutput
     If InStr(CheckText, "syntax error") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
         GetErrorDefinition.Description = Sprog.SyntaxErrorLong
@@ -104,6 +103,15 @@ Function GetErrorDefinition(CheckText As String) As ErrorDefinition
     ElseIf (omax.DefFejl = True) Then
         GetErrorDefinition.Title = "Definition error"
         GetErrorDefinition.Description = Sprog.DefError & vbCrLf & VisDef
+#If Mac Then
+    ElseIf (MaximaOutput = vbNullString) Then
+        GetErrorDefinition.Title = "Timeout"
+        If Sprog.SprogNr = 1 Then
+            GetErrorDefinition.Description = "Beregningen blev afbrudt, da den tog meget lang tid. Det kan nogle kan hjælpe at prøve beregningen med indstillingen 'Numerisk' istedet for Exact eller Auto"
+        Else
+            GetErrorDefinition.Description = "Calculation timed out. Try again with numerical setting."
+        End If
+#End If
     End If
     
     GetErrorDefinition.MaximaOutput = omax.KommentarOutput & vbCrLf & vbCrLf & omax.MaximaOutput

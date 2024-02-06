@@ -243,7 +243,10 @@ Sub RestartMaxima()
 
     Set omax = New CMaxima
     
+#If Mac Then
+#Else
     If Not CASengine = 0 Then Exit Sub
+    
     
     If Not MaxProc Is Nothing Then
         MaxProc.CloseProcess
@@ -262,8 +265,6 @@ Sub RestartMaxima()
             Set omax = New CMaxima
         End If
     End If
-#If Mac Then
-#Else
     If Not MaxProcUnit Is Nothing Then
         MaxProcUnit.CloseProcess
         MaxProcUnit.StartMaximaProcess
@@ -1772,10 +1773,10 @@ Sub beregn()
         '        End If
 #If Mac Then
         fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf
-        MsgBox fejlm, vbOKOnly, Sprog.Error
+        MsgBox2 fejlm, vbOKOnly, Sprog.Error
 #Else
         fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput
-        MsgBox fejlm, vbOKOnly, Sprog.Error
+        MsgBox2 fejlm, vbOKOnly, Sprog.Error
         RestartMaxima
 #End If
     End If

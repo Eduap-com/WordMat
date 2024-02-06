@@ -588,7 +588,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 #If Mac Then
 
     Dim s As String, WT As String, p As Long, p2 As Long, Var As String
-    Dim FN As String
+'    Dim FN As String
 '    Dim UfWait2 As UserFormWaitForMaxima
     If StopTime > 0 Then
         WT = StopTime
@@ -604,7 +604,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 start:
 '    UfWait2.Label_tip.Caption = GetRandomTip
     DoEvents
-  FN = DataFolder & "output.txt"
+'  FN = DataFolder & "output.txt"
     s = ExecuteMaximaViaFile(GetMaximaSettingsString & MaximaInputStreng, WT, MaximaUnits)
     If Left(s, 5) = "Fejln" Then
         WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.", "Afbrudt", 20)
