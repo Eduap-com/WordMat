@@ -11,9 +11,11 @@ WordMat creates a new ribbon-menu in Word with math functionality. You can do si
 This GitHub-site is for people that wants to contribute to the project by reporting bugs, help fix bugs, translate or add new functionality.
 See [CONTRIBUTING.md](https://github.com/Eduap-com/WordMat/blob/master/CONTRIBUTING.md)
 
+To Install WordMat read 'How to Install WordMat', or use the free installer on eduap.com.
+
 If you want to learn how to build and change the code read [How To Build WordMat](https://github.com/Eduap-com/WordMat/blob/master/How%20to%20build%20WordMat.md)
 
-WordMat is open source, released as GNU General public License.
+WordMat core is open source, released as GNU General public License.
 
 *Mikael Samsøe Sørensen*
 
