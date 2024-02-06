@@ -33,6 +33,7 @@ End Sub
 
 Private Sub UserForm_Activate()
     SetCaptions
+    Label_TAB1_Click
 End Sub
 
 Sub SetErrorDefinition(ED As ErrorDefinition)

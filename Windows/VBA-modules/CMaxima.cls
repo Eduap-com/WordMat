@@ -1607,6 +1607,7 @@ start:
     If nr <= 1 Then
         MaximaOutput = ""
         KommentarOutput = Minput(1) ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        KommentarOutput = moutput(1) ' på windows '23,,' skal det være denne for at få fejl med
     ElseIf MaximaExact = 0 And Not MaximaVidNotation And Not MaximaUnits Then
         Dim exactres As String
         Dim numres As String
@@ -6523,7 +6524,8 @@ Sub GenerateOutputArray(Optional Text As String)
             ' næste er input
             Minput(ArrIndex) = Minput(ArrIndex) & Output
         Else
-            Output = Replace(Trim(Output), VbCrLfMac, "") ' v. 1.29 denne nu kun for output, da input kan være fejl, med flere linjer. Her er det vigtigt med pil
+'            Output = Replace(Trim(Output), VbCrLfMac, "") ' v. 1.29 denne nu kun for output, da input kan være fejl, med flere linjer. Her er det vigtigt med pil
+            Output = Trim(Output) ' replace vbcrlfmac fjernet 1.29 forde '23,,' blev pilen der viser fejlen ikke sat korrekt på næste linje
             ' næste er output
             moutput(ArrIndex) = moutput(ArrIndex) & Output
             ArrIndex = ArrIndex + 1 'mac

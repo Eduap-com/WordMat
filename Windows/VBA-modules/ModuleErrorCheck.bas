@@ -68,26 +68,26 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
         Pos = InStr(CheckText, "incorrect syntax: Too many")
         GetErrorDefinition.Description = Sprog.SyntaxError & ". " & vbCrLf & Sprog.TooMany & " " & Mid(CheckText, Pos + 29, 1)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "isnotaprefixoperator") > 0 Then
+    ElseIf InStr(CheckText, "is not a prefix operator") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
-        GetErrorDefinition.Description = GetErrorText("isnotaprefixoperator")
+        GetErrorDefinition.Description = GetErrorText("is not a prefix operator", CheckText)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "isnotaninfixoperator") > 0 Then
+    ElseIf InStr(CheckText, "is not an infix operator") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
-        GetErrorDefinition.Description = GetErrorText("isnotaninfixoperator")
+        GetErrorDefinition.Description = GetErrorText("is not an infix operator", CheckText)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "Prematureterminationofinputat") > 0 Then
+    ElseIf InStr(CheckText, "Premature termination of input at") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
-        GetErrorDefinition.Description = GetErrorText("Prematureterminationofinputat")
+        GetErrorDefinition.Description = GetErrorText("Premature termination of input at", CheckText)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "incorrectsyntax:") > 0 Then
+    ElseIf InStr(CheckText, "incorrect syntax:") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
         GetErrorDefinition.Description = Sprog.SyntaxError & "."
         GetErrorDefinition.DefFejl = True
     ElseIf InStr(CheckText, "lisp error") And InStr(CheckText, "[") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
         GetErrorDefinition.Description = Sprog.LispError
-    ElseIf InStr(CheckText, "encounteredaLisperror") > 0 Then
+    ElseIf InStr(CheckText, "en countered a Lisp error") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
         GetErrorDefinition.Description = Sprog.LispError
 '    ElseIf InStr(KommentarOutput, "Division by 0") > 0 Then ' maybe not relevant in SBCL
@@ -123,20 +123,20 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     
 End Function
 
-Function GetErrorText(Text As String) As String
+Function GetErrorText(Text As String, MaximaOutput As String) As String
 ' used by GetErrorDefinition()
     Dim Pos As Integer, pos2 As Integer, pos4 As Integer
     Dim t As String
     Dim L As Integer
     On Error Resume Next
     L = Len(Text)
-    Pos = InStr(omax.MaximaOutput, "incorrectsyntax")
-    pos2 = InStr(Pos, omax.MaximaOutput, Text)
-    pos4 = InStr(pos2 + L, omax.MaximaOutput, "^")
+    Pos = InStr(MaximaOutput, "incorrectsyntax")
+    pos2 = InStr(Pos, MaximaOutput, Text)
+    pos4 = InStr(pos2 + L, MaximaOutput, "^")
     If pos4 < 1 Then
-        pos4 = Len(omax.MaximaOutput)
+        pos4 = Len(MaximaOutput)
     End If
-    t = Mid(omax.MaximaOutput, pos2 + L, pos4 - pos2 - L + 1)
+    t = Mid(MaximaOutput, pos2 + L, pos4 - pos2 - L + 1)
     t = Replace(t, "^", vbCrLf & "    ^", 1, 1)
     GetErrorText = Sprog.SyntaxError & vbCrLf & Sprog.IllegalSymbol & ":" & vbCrLf & t
 
