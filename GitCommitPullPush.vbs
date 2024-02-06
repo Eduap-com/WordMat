@@ -8,10 +8,9 @@ Set objShell = CreateObject("WScript.Shell")
 ' Change directory to your repository
 'objShell.Run "cmd /c cd C:\path\to\your\repository", 0, True
 
-' User inputs the mesasge for commit message
 ' User inputs the message for commit message
 Dim commitMessage
-commitMessage = InputBox("Enter a commit message:",  "Commit","WordMat updated", 100, 100  )
+commitMessage = InputBox("Enter a commit message:",  "Commit","WordMat updated")
 
 if commitMessage = "" then
     msgbox "No commit message entered. Exiting.", vbokonly, "No commit message"
