@@ -42,6 +42,7 @@ sudo rm /Applications/WordMat/InstallScript.sh
 sudo rm /Applications/WordMat/UnInstall\ Instructions.docx
 sudo rm /Applications/WordMat/UnInstall.sh
 sudo rm /Applications/WordMat/WordMat\ installation \ files.docx
+sudo rm /Applications/WordMat/Readme.docx
 sudo rm /Applications/WordMat/UnInstallScript.sh
 sudo rm /Applications/WordMat/UnInstallScript
 sudo rmdir  /Applications/WordMat/
