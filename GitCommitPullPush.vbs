@@ -18,7 +18,7 @@ if commitMessage = "" then
 end if  
 
 ' Git push
-objShell.Run "cmd /k git add . && git commit -m """ & commitMessage & """ && git pull && git push && pause && Exit", 1, true
+objShell.Run "cmd /k git add . && git commit -m """ & commitMessage & """ && git pull && git push && pause && exit", 1, false
 
 Set objShell = Nothing
 
