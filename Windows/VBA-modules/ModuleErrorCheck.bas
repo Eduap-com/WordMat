@@ -28,7 +28,6 @@ Function CheckForError() As Boolean
     If ED.Stop Then CheckForError = True
     
     If ED.Title <> vbNullString Then ' Show the error in userform
-        CheckForError = True
         
 '        Set UFerror = New UserFormError
         UserFormError.Label_maximaoutput.Caption = ED.MaximaOutput    ' eller maxproc.lastmaximaoutput
@@ -116,6 +115,8 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
         End If
         GetErrorDefinition.Stop = False
 #End If
+        Else
+        GetErrorDefinition.Stop = False
     End If
     
     GetErrorDefinition.MaximaOutput = omax.KommentarOutput & vbCrLf & vbCrLf & omax.MaximaOutput

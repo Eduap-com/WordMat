@@ -384,87 +384,66 @@ On Error Resume Next
 '#If Mac Then
 '    Wd = wdKeyControl
 '#Else
-    Wd = wdKeyAlt
+    Wd = wdKeyAlt ' 1024 på windows, 2048 på mac
 '#End If
     
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyG, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="Gange"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyG, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Gange"
         
 If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyB, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="beregn"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyB, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
 Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyC, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="beregn"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyC, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
 End If
 
 #If Mac Then
 #Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyReturn, Wd, wdKeyControl), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="beregn"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyReturn, Wd, wdKeyControl), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
 #End If
 
 If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyL, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="MaximaSolve"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyL, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="MaximaSolve"
 Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyE, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="MaximaSolve"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyE, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="MaximaSolve"
 End If
     
 If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyS, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="InsertSletDef"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyS, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="InsertSletDef"
 Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="InsertSletDef"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="InsertSletDef"
 End If
     
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyD, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="InsertDefiner"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyD, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="InsertDefiner"
     
 If Sprog.SprogNr = 1 Then
 '#If Mac Then ' alt+i bruges til numerisk tegn på mac, så hellere ikke genvej til indstillinger
 '#Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyJ, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="MaximaSettings"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyJ, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="MaximaSettings"
 '#End If
 Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyO, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="MaximaSettings"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyO, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="MaximaSettings"
 End If
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyP, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="StandardPlot"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyP, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="StandardPlot"
         
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyM, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="NewEquation"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyM, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="NewEquation"
         
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyR, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="ForrigeResultat"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyR, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ForrigeResultat"
         
 If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyE, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="ToggleUnits"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyE, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleUnits"
 Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyU, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="ToggleUnits"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyU, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleUnits"
 End If
     
 If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyO, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="Omskriv"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyO, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Omskriv"
 Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyS, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="Omskriv"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyS, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Omskriv"
 End If
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyN, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="ToggleNum"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyN, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleNum"
         
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyT, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="ToggleLatex"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyT, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleLatex"
         
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyQ, Wd), KeyCategory:= _
-        wdKeyCategoryCommand, Command:="SaveDocToLatexPdf()"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyQ, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="SaveDocToLatexPdf()"
         
 slut:
     Set CustomizationContext = GemT

@@ -53,15 +53,15 @@ Private Sub Document_Open()
     Dim s As String
     s = CheckKeyboardShortcutsPar(True)
     If s <> vbNullString Then
-       MsgBox "Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & "Du skal gøre følgende: " & vbCrLf & "1. Compile på mac (Alt+F11)" & vbCrLf & "2. Kør makro 'GenerateKeyboardShortcutsWordMat'" & vbCrLf & "3. Kør Macro 'Check KeyboardShortCuts' for at se om alt er korrekt", vbOKOnly, "Compile"
-       ' Hvis der ikke er compilet får man ikke ret mange makroer op med Alt+F8 på Mac
+       If MsgBox("Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & "Du skal gøre følgende: " & vbCrLf & "1. Compile på mac (Alt+F11)" & vbCrLf & "2. Kør makro 'GenerateKeyboardShortcutsWordMat'" & vbCrLf & "3. Kør Macro 'Check KeyboardShortCuts' for at se om alt er korrekt" & vbCrLf & vbCrLf & "Vil du gøre det nu?", vbYesNo, "Shortcuts") = vbYes Then
+       ' Hvis der ikke er compilet får man ikke ret mange makroer op med Alt+F8 på Mac (Det gør der nu. Det er et tidligere problem, måske cleaner virkede?)
        
-' Denne metode fungerer ikke når WordMat ikke er compilet på Mac. Genvejene bliver ikke tilknyttet korrekt
+' Denne metode fungerer ikke når WordMat ikke er compilet på Mac. Genvejene bliver ikke tilknyttet korrekt. (Det gør der nu. Det er et tidligere problem måske, cleaner virkede?)
 '        If MsgBox("Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & "Vil du fixe?", vbYesNo) = vbYes Then
-'            GenerateKeyboardShortcuts
-'            CheckKeyboardShortcuts
+            GenerateKeyboardShortcutsWordMat
+            CheckKeyboardShortcuts
 '            MsgBox "Keyboard Genveje er repareret." & vbCrLf & vbCrLf & "Glem ikke at compile på Mac, med det samme.", vbOKOnly, "Husk compile!"
-'        End If
+        End If
     End If
     
     '#If Mac Then

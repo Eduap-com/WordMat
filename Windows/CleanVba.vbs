@@ -2,6 +2,9 @@
 ' Det kræver at Ribbon Commander er installeret med licens
 ' Det er en hjælp hvis WordMat.dotm pludelig crasher ved åbning. 
 ' Der er andre løsninger, men denne er nemmest.
+' Scriptet skal ligge i samme mappe som WordMat.dotm
+' scriptet kopierer også de rensede filer til Mac-mappen
+
 Option Explicit
 
 Dim WordApp, Document, strPath, FilNavn, Arr, i, FL, strFile, OldSize
@@ -33,10 +36,15 @@ Next
 Document.Close
 WordApp.Quit
 
+' Copy the cleaned files to Mac folder one level up
+objFSO.CopyFile strPath & "WordMat.dotm", strPath & "..\Mac\WordMat.dotm", TRUE
+objFSO.CopyFile strPath & "WordMatP.dotm", strPath & "..\Mac\WordMatP.dotm", TRUE
+objFSO.CopyFile strPath & "WordMatP2.dotm", strPath & "..\Mac\WordMatP2.dotm", TRUE
+
 set objFSO = Nothing
 Set Document = Nothing
 Set WordApp = Nothing
 
-msgbox "Following files has been cleaned:" & vbcrlf & vbcrlf  & FL
+msgbox "Following files has been cleaned:" & vbcrlf & vbcrlf  & FL & VbCrLf & VbCrLf & "Also Files has been copied to Mac-folder" 
 
 WScript.Quit
