@@ -12,6 +12,7 @@ Echo
 sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMat.dotm
 sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMatP.dotm
 sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMatP2.dotm
+sudo rm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word/WordMatMac.dotm
 
 
 #Main installation
@@ -40,6 +41,9 @@ sudo rm /opt/local/lib/Libzstd.1.dylib
 sudo rm /Applications/WordMat/InstallScript.sh
 sudo rm /Applications/WordMat/UnInstall\ Instructions.docx
 sudo rm /Applications/WordMat/UnInstall.sh
+sudo rm /Applications/WordMat/WordMat\ installation \ files.docx
+sudo rm /Applications/WordMat/UnInstallScript.sh
+sudo rm /Applications/WordMat/UnInstallScript
 sudo rmdir  /Applications/WordMat/
 
 Echo
