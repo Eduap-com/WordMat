@@ -6,6 +6,7 @@ Type ErrorDefinition
     Description As String
     MaximaOutput As String
     DefFejl As Boolean
+    Stop As Boolean ' means that you must stop after the error has been shown
 End Type
 
 Function CheckForError() As Boolean
@@ -23,6 +24,8 @@ Function CheckForError() As Boolean
     CheckForError = False
 
     ED = GetErrorDefinition(omax.MaximaOutput, omax.KommentarOutput)
+    
+    If ED.Stop Then CheckForError = True
     
     If ED.Title <> vbNullString Then ' Show the error in userform
         CheckForError = True
@@ -51,7 +54,7 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
 ' Klassificerer og fortolker fejlen i en errordefinition.
 ' Checktext skal være output fra Maxima
     Dim Pos As Integer, CheckText As String
-    
+    GetErrorDefinition.Stop = True
     CheckText = MaximaOutput & KommentarOutput
     If InStr(CheckText, "syntax error") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
@@ -107,10 +110,11 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     ElseIf (MaximaOutput = vbNullString) Then
         GetErrorDefinition.Title = "Timeout"
         If Sprog.SprogNr = 1 Then
-            GetErrorDefinition.Description = "Beregningen blev afbrudt, da den tog meget lang tid. Det kan nogle kan hjælpe at prøve beregningen med indstillingen 'Numerisk' istedet for Exact eller Auto"
+            GetErrorDefinition.Description = "Beregningen blev afbrudt, da den tog meget lang tid. Det kan nogle gange hjælpe at prøve beregningen med indstillingen 'Numerisk' istedet for Eksakt eller Auto"
         Else
             GetErrorDefinition.Description = "Calculation timed out. Try again with numerical setting."
         End If
+        GetErrorDefinition.Stop = False
 #End If
     End If
     

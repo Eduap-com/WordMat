@@ -2463,7 +2463,7 @@ Function FormatDefinitions(DefS As String) As String
 ' Tager en streng som kommer fra omax.definitions og laver den så pæn som mulig til visning i en textbox
 ' Bruges til visning af gældende definitioner på flere Forms
     DefS = " " & omax.ConvertToAscii(DefS)
-    DefS = Replace(DefS, "$", vbCrLf & " ")
+    DefS = Replace(DefS, "$", VbCrLfMac & VbCrLfMac & " ")
     DefS = Replace(DefS, ":=", " = ")
     DefS = Replace(DefS, ":", " = ")
         

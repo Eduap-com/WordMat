@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSolveNumeric 
    Caption         =   "Løsning af ligning med grafiske og numeriske metoder"
-   ClientHeight    =   7390
+   ClientHeight    =   7395
    ClientLeft      =   -15
    ClientTop       =   75
    ClientWidth     =   14250

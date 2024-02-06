@@ -29,11 +29,14 @@ Private Sub Label_cancel_Click()
     Kommentar = ""
     omax.StopNow = True
     Finished = True
+#If Mac Then
+#Else
     If CASengine = 0 Then
         MaxProc.CloseProcess
         MaxProc.StartMaximaProcess
     End If
-    
+#End If
+
 '    If MaxProc.Finished = 0 Then
     Me.Hide
 '    End If
@@ -82,6 +85,10 @@ End Sub
 
 Private Sub UserForm_Activate()
 '    PrepareMaximaNoSplash
+
+#If Mac Then
+    Label_numeric.visible = False ' grafisk løsning er gnuplot, som ikke længere understøttes på Mac.
+#End If
 
     If CASengine > 0 Then
         Label2.Caption = ""

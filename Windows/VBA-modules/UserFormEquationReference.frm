@@ -44,7 +44,7 @@ Sub SetCaptions()
     Me.Caption = Sprog.A(15)
     Label_ok.Caption = Sprog.OK
     Label_cancel.Caption = Sprog.Cancel
-    Label_Ligninger.Caption = Sprog.Equations
+    Label_ligninger.Caption = Sprog.Equations
     
 End Sub
 
