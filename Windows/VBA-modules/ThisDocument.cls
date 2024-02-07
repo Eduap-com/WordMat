@@ -60,6 +60,7 @@ Private Sub Document_Open()
 '        If MsgBox("Keyboard Genveje er ikke korrekte." & vbCrLf & s & vbCrLf & "Vil du fixe?", vbYesNo) = vbYes Then
             GenerateKeyboardShortcutsWordMat
             CheckKeyboardShortcuts
+            CompileMe
 '            MsgBox "Keyboard Genveje er repareret." & vbCrLf & vbCrLf & "Glem ikke at compile på Mac, med det samme.", vbOKOnly, "Husk compile!"
  '       End If
     End If
@@ -71,4 +72,14 @@ Private Sub Document_Open()
     '    End If
     '#End If
 
+End Sub
+
+Sub CompileMe()
+#If Mac Then ' virker ikke på mac
+#Else
+    Dim objVBECommandBar As Object, CompileMe As Variant
+    Set objVBECommandBar = Application.VBE.CommandBars
+    Set CompileMe = objVBECommandBar.FindControl(Type:=msoControlButton, Id:=578)
+    CompileMe.Execute
+#End If
 End Sub

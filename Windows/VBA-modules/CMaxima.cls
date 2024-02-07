@@ -588,7 +588,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 #If Mac Then
 
     Dim s As String, WT As String, p As Long, p2 As Long, Var As String
-    Dim Pos As Integer, pos2 As Integer, svar As String
+    Dim Pos As Integer, pos2 As Integer, Assume As String
 
     '    Dim FN As String
     '    Dim UfWait2 As UserFormWaitForMaxima
@@ -607,7 +607,7 @@ start:
     '    UfWait2.Label_tip.Caption = GetRandomTip
     DoEvents
     '  FN = DataFolder & "output.txt"
-    s = ExecuteMaximaViaFile(GetMaximaSettingsString & MaximaInputStreng & svar, WT, MaximaUnits)
+    s = ExecuteMaximaViaFile(GetMaximaSettingsString & Assume & MaximaInputStreng, WT, MaximaUnits)
     If Left(s, 5) = "Fejln" Then
         WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.", "Afbrudt", 20)
         If Trim(WT) <> "" Then
@@ -617,23 +617,23 @@ start:
             StopNow = True
         End If
     End If
-    If svar = vbNullString Then
-        Pos = InStr(MaxProc.LastMaximaOutput, "positive, negative or zero?")
-        pos2 = InStr(MaxProc.LastMaximaOutput, "positive or negative?")
+    If Assume = vbNullString Then
+        Pos = InStr(s, "positive, negative or zero?")
+        pos2 = InStr(s, "positive or negative?")
     
         If Pos > 0 Or pos2 > 0 Then
             Dim UF As New UserFormAskSign
             If Pos <= 0 And pos2 > 0 Then Pos = pos2
-            pos2 = InStr(MaxProc.LastMaximaOutput, "Is ")
-            Var = Mid(MaxProc.LastMaximaOutput, pos2 + 3, Pos - pos2 - 4)
+            pos2 = InStr(s, "Is ")
+            Var = Mid(s, pos2 + 3, Pos - pos2 - 4)
             UF.Label_udtryk.Caption = Var
             UF.Show
             If UF.OptionButton_positiv.Value = True Then
-                svar = "pos"
+                Assume = "assume(" & Var & ">0)$"
             ElseIf UF.OptionButton_negativ.Value = True Then
-                svar = "neg"
+                Assume = "assume(" & Var & "<0)$"
             Else
-                svar = "zero"
+                Assume = "assume(" & Var & "=0)$"
             End If
             Unload UF
             WT = 2
@@ -656,7 +656,7 @@ start:
             '            MsgBox "The problem could not be solved, because the sign of a variable is unknown. You can probably solve the problem by inserting a definition. Example:" & vbCr & " 'Define: " & Var & ">0'" & vbCrLf & "Maxima Asked:" & vbCrLf & right(s, Len(s) - p)
             '        End If
         ElseIf InStr(MaxProc.LastMaximaOutput, " integer?") And MaximaComplex = False Then
-            svar = "y"
+            Assume = "assume(" & Var & ", integer)$"
             GoTo start
         End If
     End If
