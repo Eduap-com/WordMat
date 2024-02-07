@@ -56,6 +56,7 @@ Private Sub Label_nsolveB_Click()
 End Sub
 
 Private Sub Label_numeric_Click()
+On Error GoTo slut
     If Not Finished Then
         MaxProc.CloseProcess
         MaxProc.StartMaximaProcess
@@ -63,6 +64,7 @@ Private Sub Label_numeric_Click()
         omax.MaximaOutput = Label_nsolve.Caption
     End If
 '    omax.StopNow = True
+slut:
     result = "num"
     FejlMeld = ""
     Kommentar = ""

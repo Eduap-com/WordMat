@@ -108,7 +108,7 @@ Private Sub GeoGebraPlot()
     End If
 End Sub
 
-Private Sub CommandButton_insertgraph_Click()
+Private Sub Label_insertgraph_Click()
 Dim ils As InlineShape
 Dim Sep As String, s As String
 Dim pointText As String, i As Long
@@ -170,16 +170,17 @@ slut:
 Application.ScreenUpdating = True
 End Sub
 
-Private Sub CommandButton_inserttabel_Click()
+Private Sub Label_inserttabel_Click()
 Dim Tabel As Table
 Dim i As Long, j As Integer
-    On Error GoTo Fejl
+'    On Error GoTo Fejl
     If ListOutput = vbNullString Then SolveDE
     InsertType = 2
         Application.ScreenUpdating = False
         Selection.Collapse wdCollapseEnd
                 
-        
+        GoToEndOfMath
+        Selection.TypeParagraph
         Set Tabel = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=UBound(PointArr, 1) + 2, NumColumns:= _
         UBound(PointArr, 2) + 1, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
         wdAutoFitFixed)
@@ -287,7 +288,7 @@ Private Sub GnuPlotOpdater()
     PlotOutput
 End Sub
 
-Private Sub CommandButton_toExcel_Click()
+Private Sub Label_toExcel_Click()
 '    Dim ws As excel.Worksheet
     Dim ws As Object 'excel.Worksheet
     Dim i As Long, j As Integer
@@ -360,7 +361,7 @@ Function ConvertNumberToExcel(n As String) As String
     n = Replace(n, VBA.ChrW(183), "*")
     ConvertNumberToExcel = n
 End Function
-Private Sub CommandButton_tolist_Click()
+Private Sub Label_tolist_Click()
     InsertType = 3
     Unload Me
 End Sub

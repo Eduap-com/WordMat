@@ -360,8 +360,8 @@ Public Function FindPrevBreak() As Long
         RestoreBrackets
     End If
     Pos = Pos - 1
-    Loop Until Pos <= 0 Or c = 32 Or c = 38 Or (c >= 42 And c <= 45) Or c = 40 Or c = 47 Or (c >= 58 And c <= 64) Or c = 9618 Or c = 91 Or c = 123 Or c = 12310
-    If Pos <= 0 Then
+    Loop Until Pos < 0 Or c = 32 Or c = 38 Or (c >= 42 And c <= 45) Or c = 40 Or c = 47 Or (c >= 58 And c <= 64) Or c = 9618 Or c = 91 Or c = 123 Or c = 12310
+    If Pos < 0 Then ' v. 1.29 ændret til < istedet for <= pga problem hvor [1/.. blev til ([1)/...
         Pos = 1
     Else
         Pos = Pos + 2

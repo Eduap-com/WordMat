@@ -42,8 +42,7 @@ Function CheckForError() As Boolean
             UserFormError.TextBox_definitioner.visible = False
             UserFormError.Label_definitioner.visible = False
         End If
-        UserFormError.Label_titel.Caption = ED.Title
-        UserFormError.Label_fejltekst.Caption = ED.Description
+        UserFormError.SetErrorDefinition ED
         UserFormError.Show
         RestartWordMat
     End If
@@ -87,18 +86,23 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     ElseIf InStr(CheckText, "lisp error") And InStr(CheckText, "[") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
         GetErrorDefinition.Description = Sprog.LispError
-    ElseIf InStr(CheckText, "en countered a Lisp error") > 0 Then
+    ElseIf InStr(CheckText, "encountered a Lisp error") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
         GetErrorDefinition.Description = Sprog.LispError
 '    ElseIf InStr(KommentarOutput, "Division by 0") > 0 Then ' maybe not relevant in SBCL
 '        fejltekst = Sprog.DivisionByZero
 '        CheckForError = True
-'    ElseIf InStr(CheckText, "expt:undefined:0toanegativeexponent") > 0 Then ' kommer ved mange alm beregninger uden fejl
+'    ElseIf InStr(CheckText, "expt:undefined:0toanegativeexponent") > 0 Then ' kommer ved mange alm beregninger uden fejl, flyttet ned med en anden
 '        GetErrorDefinition.Title = "Division by zero"
 '        GetErrorDefinition.Description = Sprog.DivisionByZero
     ElseIf InStr(CheckText, "anerrorTodebugthistry:debugmode(true)") > 0 Then
-        GetErrorDefinition.Title = "Lisp error"
-        GetErrorDefinition.Description = Sprog.LispError
+        If InStr(CheckText, "expt:undefined:0toanegativeexponent") > 0 Then
+            GetErrorDefinition.Title = "Division by zero"
+            GetErrorDefinition.Description = Sprog.DivisionByZero
+        Else
+            GetErrorDefinition.Title = "Lisp error"
+            GetErrorDefinition.Description = Sprog.LispError
+        End If
     ElseIf CheckText = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
         GetErrorDefinition.Title = "Variable error"
         GetErrorDefinition.Description = Sprog.A(133) '"Du har bedt om at løse ligningen for en variabel der allerede er defineret. Indsæt en 'slet def:' kommando før ligningen"

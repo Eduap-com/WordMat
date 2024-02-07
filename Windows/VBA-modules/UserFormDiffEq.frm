@@ -96,7 +96,8 @@ Dim i As Integer
 Dim svar As String
     SetCaptions
     
-    Label_ligning.Caption = Replace(Label_ligning.Caption, "=", " = ")
+    Label_ligning.Caption = FormatDefinitions(Replace(Label_ligning.Caption, "=", " = "))
+    Label_ligning.Caption = Replace(Label_ligning.Caption, ChrW(180), "'") ' converttoascii indfører 180. Der står det er nødvendigt, men ved ikke hvorfor denne ser bedre ud
 
     If InStr(Label_ligning.Caption, ChrW(180) & ChrW(180)) > 0 Then ' "´´" to accenter der vender opad
         Label_diffy.visible = True

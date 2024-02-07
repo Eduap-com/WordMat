@@ -45,6 +45,6 @@ set objFSO = Nothing
 Set Document = Nothing
 Set WordApp = Nothing
 
-msgbox "Following files has been cleaned:" & vbcrlf & vbcrlf  & FL & VbCrLf & VbCrLf & "Also Files has been copied to Mac-folder" 
+msgbox "Following files has been cleaned:" & vbcrlf & vbcrlf  & FL & VbCrLf & VbCrLf & ""
 
 WScript.Quit

@@ -846,6 +846,13 @@ newcassys:
         If CheckForError Then GoTo slut
         If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
+        
+#If Mac Then
+#Else
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
+#End If
+        
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
 
         If omax.MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
@@ -954,6 +961,10 @@ newcassys:
                 '                MsgBox fejlm & "Angav du de rigtige variable?" & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, "Fejl"
             End If
         End If
+#If Mac Then
+#Else
+        Oundo.EndCustomRecord
+#End If
     End If
     GoTo slut
 Fejl:
@@ -1898,6 +1909,13 @@ Sub Omskriv()
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
 
+#If Mac Then
+#Else
+        Dim Oundo As UndoRecord
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
+#End If
+
     If Not (UFomskriv.SammeLinje) Then
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
@@ -1932,6 +1950,10 @@ Sub Omskriv()
     Else    ' not newline
         InsertOutput "=" & omax.MaximaOutput
     End If
+#If Mac Then
+#Else
+        Oundo.EndCustomRecord
+#End If
 
     GoTo slut
 Fejl:
@@ -2736,7 +2758,17 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
+    
+#If Mac Then
+#Else
+        Dim Oundo As UndoRecord
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
+#End If
+    
     omax.GoToEndOfSelectedMaths
+    
+    
     Selection.TypeParagraph
     '    omax.CloseCmd
     If Len(omax.MaximaOutput) > 1 Then
@@ -2760,6 +2792,11 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
 
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
+
+#If Mac Then
+#Else
+        Oundo.EndCustomRecord
+#End If
 
     GoTo slut
 Fejl:

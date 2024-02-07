@@ -655,7 +655,7 @@ start:
             '        Else
             '            MsgBox "The problem could not be solved, because the sign of a variable is unknown. You can probably solve the problem by inserting a definition. Example:" & vbCr & " 'Define: " & Var & ">0'" & vbCrLf & "Maxima Asked:" & vbCrLf & right(s, Len(s) - p)
             '        End If
-        ElseIf InStr(MaxProc.LastMaximaOutput, " integer?") And MaximaComplex = False Then
+        ElseIf InStr(s, " integer?") And MaximaComplex = False Then
             Assume = "assume(" & Var & ", integer)$"
             GoTo start
         End If
@@ -2254,8 +2254,14 @@ Sub SolveDENumeric(variabel As String, xmin As String, xmax As String, xstep As 
     MaximaInputStreng = MaximaInputStreng & ";"
     
     AddStandardSecondary
-
-    Call RunMaxima
+    
+    If MaximaUnits Then
+        MaximaUnits = False
+        Call RunMaxima
+        MaximaUnits = True
+    Else
+        Call RunMaxima
+    End If
     If StopNow Then GoTo slut
     
 slut:
@@ -3218,7 +3224,6 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     ea.InsertFunctionBrackets ' v. 1.29 flyttet fra lige efter d/dx notation for at log a/b ikke bliver til log(a)/b. Testet med RunTestseq, og log a/b+2 tilføjet test
     ea.InsertBracketAfter ("/")
     ea.InsertBracketBefore ("/")
-    Text = ea.Text
     
     ' indsæt underforståede gangetegn ' den køres også til slut efter alle mellemrum er fjernet, da der så kan opstå flere.
     'Indført her også for at omgå problem med fx at underforstået gangetegn ved 3(x+1) ikke bliver håndteret af findhierarkibreak
@@ -3229,21 +3234,21 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
 '    text = ea.text
     
     ' d/dx notation
-    Text = ConvertDifferentials(Text, VBA.ChrW(8518)) ' \dd
-    If Left(Text, 5) = "Fejl!" Then
+    ea.Text = ConvertDifferentials(ea.Text, VBA.ChrW(8518)) ' \dd
+    If Left(ea.Text, 5) = "Fejl!" Then
         Text = ea.Text
         ConvertErrorText = Text
         GoTo slut
     End If
-    Text = ConvertDifferentials(Text, VBA.ChrW(8706)) ' \partial
-    If Left(Text, 5) = "Fejl!" Then
+    ea.Text = ConvertDifferentials(ea.Text, VBA.ChrW(8706)) ' \partial
+    If Left(ea.Text, 5) = "Fejl!" Then
         Text = ea.Text
         ConvertErrorText = Text
         GoTo slut
     End If
     If dAsDiffChr Then
-        Text = ConvertDifferentials(Text, "d") ' normal d
-        If Left(Text, 5) = "Fejl!" Then
+        ea.Text = ConvertDifferentials(ea.Text, "d") ' normal d
+        If Left(ea.Text, 5) = "Fejl!" Then
             Text = ea.Text
             ConvertErrorText = Text
             GoTo slut

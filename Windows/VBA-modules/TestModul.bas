@@ -100,9 +100,7 @@ Sub RunTestSequence()
     '    Application.ScreenRefresh
 
     'til test af enkelt
-        Radians = True
-        If TestBeregn("sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "a/b" & VBA.ChrW(12311) & "+2", "=sin" & VBA.ChrW(8289) & "(a/b)+2") Then GoTo slut
-'    GoTo slut
+'        GoTo slut
     
     ' Man kan indtaste flere korrekte resultater, bare adskil med @$
     'calculation tests
@@ -352,6 +350,9 @@ Sub RunTestSequence()
     ' Differential- og integralregning
     MaximaExact = 0
     ShowSettings "Differential- og integralregning"
+    If TestBeregn(VBA.ChrW(8518) & "/" & VBA.ChrW(8518) & "x (" & VBA.ChrW(8747) & "x^2 dx)", "=x^(2)") Then GoTo slut
+    If TestBeregn(VBA.ChrW(8706) & "^2/" & VBA.ChrW(8706) & "x" & VBA.ChrW(8706) & "y (x^2" & VBA.ChrW(183) & "y)", "=2" & VBA.ChrW(183) & "x") Then GoTo slut
+    If TestBeregn(VBA.ChrW(8518) & "^2/(" & VBA.ChrW(8518) & "x^2 ) (x^2+2x)", "=2") Then GoTo slut
     If TestBeregn(VBA.ChrW(8747) & "_1^10" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(x^(-2)+1) dx", "=-(ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2" & VBA.ChrW(8776) & "9,417202@$=-((ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2)" & VBA.ChrW(8776) & "9,417202") Then GoTo slut
     InsertTestMath "Definer: f(x)=" & VBA.ChrW(8730) & "(3x+9)  ;g(x)=x+3"
     If TestSolve(VBA.ChrW(8747) & "_0^k" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "g(x)-f(x) " & VBA.ChrW(12311) & " dx=1,5", "k", "k=-3    " & VBA.ChrW(8744) & "    k=7/3") Then GoTo slut
