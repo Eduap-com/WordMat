@@ -12,8 +12,14 @@ Echo "******************************************************"
 # Scriptfolder. needed if script is run via click. It will only hold the path if run from terminal
 # move up one folder level
 #MacFolder=${PWD%/*}
-#Macfolder=${0:a:h}
-MacFolder=$(dirname "$0")
+#echo Macfolder: $MacFolder
+MacFolder=${0:a:h}
+MacFolder2=$(dirname "$0")
+if [[ ${#MacFolder2} -gt ${#MacFolder} ]]
+then
+MacFolder=$MacFolder2
+fi
+echo $MacFolder
 WMFolder=${MacFolder%/*}
 #read REPLY\?"Achitecture: "
 
@@ -28,3 +34,6 @@ cp $WMFolder/Windows/WordMatP2.dotm $WMFolder/Mac
 
 Echo
 Echo "Done"
+# I shell indstillinger kan man sætte shell til at lukke automatisk, så er denne rar
+# Åben terminsla. command + ,   åbner indstillinger vælg profil, så shell, så vælg 'Luk hvis shell afsluttede korrekt'
+read -s -k '?Press any key to close.'
