@@ -20,3 +20,6 @@ git push origin master
 
 Echo
 Echo "Done"
+# I shell indstillinger kan man sætte shell til at lukke automatisk, så er denne rar
+# Åben terminsla. command + ,   åbner indstillinger vælg profil, så shell, så vælg 'Luk hvis shell afsluttede korrekt'
+read -s -k '?Press any key to close.'
