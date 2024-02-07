@@ -584,28 +584,30 @@ igen:
 
 End Sub
 Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbols As Boolean = True)
-' for mac. Starts maxima, sends command, receives output. closes maxima
+    ' for mac. Starts maxima, sends command, receives output. closes maxima
 #If Mac Then
 
     Dim s As String, WT As String, p As Long, p2 As Long, Var As String
-'    Dim FN As String
-'    Dim UfWait2 As UserFormWaitForMaxima
+    Dim Pos As Integer, pos2 As Integer, svar As String
+
+    '    Dim FN As String
+    '    Dim UfWait2 As UserFormWaitForMaxima
     If StopTime > 0 Then
         WT = StopTime
     Else
         WT = "5"
     End If
-'    Set UfWait2 = New UserFormWaitForMaxima
-'    On Error Resume Next ' hvis en form allerede er åben giver det fejl
-'    UfWait2.Show vbModeless
-'    UfWait2.Label_tip.Font.Size = 10
-'    UfWait2.Label_tip.Font.Italic = False
-'    On Error GoTo 0
+    '    Set UfWait2 = New UserFormWaitForMaxima
+    '    On Error Resume Next ' hvis en form allerede er åben giver det fejl
+    '    UfWait2.Show vbModeless
+    '    UfWait2.Label_tip.Font.Size = 10
+    '    UfWait2.Label_tip.Font.Italic = False
+    '    On Error GoTo 0
 start:
-'    UfWait2.Label_tip.Caption = GetRandomTip
+    '    UfWait2.Label_tip.Caption = GetRandomTip
     DoEvents
-'  FN = DataFolder & "output.txt"
-    s = ExecuteMaximaViaFile(GetMaximaSettingsString & MaximaInputStreng, WT, MaximaUnits)
+    '  FN = DataFolder & "output.txt"
+    s = ExecuteMaximaViaFile(GetMaximaSettingsString & MaximaInputStreng & svar, WT, MaximaUnits)
     If Left(s, 5) = "Fejln" Then
         WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.", "Afbrudt", 20)
         If Trim(WT) <> "" Then
@@ -614,33 +616,58 @@ start:
         Else
             StopNow = True
         End If
-    ElseIf InStr(s, "positive or negative?") > 0 Then
-        p = InStrRev(s, vbCr)
-        p = InStrRev(s, vbCr, p - 2)
-        If p > 0 Then
-            p2 = InStr(p + 4, s, " ")
-            If p2 > 0 Then
-                Var = Mid(s, p + 3, p2 - p - 3)
+    End If
+    If svar = vbNullString Then
+        Pos = InStr(MaxProc.LastMaximaOutput, "positive, negative or zero?")
+        pos2 = InStr(MaxProc.LastMaximaOutput, "positive or negative?")
+    
+        If Pos > 0 Or pos2 > 0 Then
+            Dim UF As New UserFormAskSign
+            If Pos <= 0 And pos2 > 0 Then Pos = pos2
+            pos2 = InStr(MaxProc.LastMaximaOutput, "Is ")
+            Var = Mid(MaxProc.LastMaximaOutput, pos2 + 3, Pos - pos2 - 4)
+            UF.Label_udtryk.Caption = Var
+            UF.Show
+            If UF.OptionButton_positiv.Value = True Then
+                svar = "pos"
+            ElseIf UF.OptionButton_negativ.Value = True Then
+                svar = "neg"
             Else
-                Var = "x"
+                svar = "zero"
             End If
-        Else
-            Var = "x"
-        End If
-        If Sprog.SprogNr = 1 Then
-            MsgBox "Problemet kunne ikke løses da fortegnet på en variabel er ukendt. Du kan formenlig løse problemet ved at indsætte en definition som fx" & vbCr & " 'Definer: " & Var & ">0'" & vbCrLf & "Maxima spurgte om:" & vbCrLf & right(s, Len(s) - p)
-        Else
-            MsgBox "The problem could not be solved, because the sign of a variable is unknown. You can probably solve the problem by inserting a definition. Example:" & vbCr & " 'Define: " & Var & ">0'" & vbCrLf & "Maxima Asked:" & vbCrLf & right(s, Len(s) - p)
+            Unload UF
+            WT = 2
+            GoTo start
+            '        p = InStrRev(s, vbCr)
+            '        p = InStrRev(s, vbCr, p - 2)
+            '        If p > 0 Then
+            '            p2 = InStr(p + 4, s, " ")
+            '            If p2 > 0 Then
+            '                Var = Mid(s, p + 3, p2 - p - 3)
+            '            Else
+            '                Var = "x"
+            '            End If
+            '        Else
+            '            Var = "x"
+            '        End If
+            '        If Sprog.SprogNr = 1 Then
+            '            MsgBox "Problemet kunne ikke løses da fortegnet på en variabel er ukendt. Du kan formenlig løse problemet ved at indsætte en definition som fx" & vbCr & " 'Definer: " & Var & ">0'" & vbCrLf & "Maxima spurgte om:" & vbCrLf & right(s, Len(s) - p)
+            '        Else
+            '            MsgBox "The problem could not be solved, because the sign of a variable is unknown. You can probably solve the problem by inserting a definition. Example:" & vbCr & " 'Define: " & Var & ">0'" & vbCrLf & "Maxima Asked:" & vbCrLf & right(s, Len(s) - p)
+            '        End If
+        ElseIf InStr(MaxProc.LastMaximaOutput, " integer?") And MaximaComplex = False Then
+            svar = "y"
+            GoTo start
         End If
     End If
-'    i = 0
-'    Do Until Dir(FN) > "" Or i > 80
-'        i = i + 1
-'        Wait (0.1)
-'    Loop
+    '    i = 0
+    '    Do Until Dir(FN) > "" Or i > 80
+    '        i = i + 1
+    '        Wait (0.1)
+    '    Loop
     FindLastMaximaOutput ConvertWordSymbols, s
-'    GenerateOutputArray (s)
-'    Unload UfWait2
+    '    GenerateOutputArray (s)
+    '    Unload UfWait2
 #End If
 End Sub
 'Public Sub RunMaximaFileOld()
@@ -3187,6 +3214,8 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
 
     ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma)
     ea.Text = Text
+    ' indsæt parentes ved f.eks. log 2 -> log(2)
+    ea.InsertFunctionBrackets ' v. 1.29 flyttet fra lige efter d/dx notation for at log a/b ikke bliver til log(a)/b. Testet med RunTestseq, og log a/b+2 tilføjet test
     ea.InsertBracketAfter ("/")
     ea.InsertBracketBefore ("/")
     Text = ea.Text
@@ -3221,9 +3250,6 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
         End If
     End If
     
-    ' indsæt parentes ved f.eks. log 2 -> log(2)
-    ea.Text = Text
-    ea.InsertFunctionBrackets
     ' {rod(5&3)}^2  hvor rod er rodtegn og {} er usynlig paranteser. Indført med geogebra, men nu løst i potensdelen
 '    pos = InStr(ea.text, VBA.ChrW(12311) & "^")
 '    Do While pos > 0

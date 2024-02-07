@@ -7,6 +7,8 @@ Option Explicit
     Private ContCount As Integer
     Private NonInterA As Boolean
 
+' Brug CreateTestBeregn til at lave nye test
+
 Sub TestTabel()
 ' depracated
     UserFormTest.Show
@@ -98,6 +100,8 @@ Sub RunTestSequence()
     '    Application.ScreenRefresh
 
     'til test af enkelt
+        Radians = True
+        If TestBeregn("sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "a/b" & VBA.ChrW(12311) & "+2", "=sin" & VBA.ChrW(8289) & "(a/b)+2") Then GoTo slut
 '    GoTo slut
     
     ' Man kan indtaste flere korrekte resultater, bare adskil med @$
@@ -277,6 +281,9 @@ Sub RunTestSequence()
     TestSolve "sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " " & VBA.ChrW(8730) & "(cos" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " )=0", "x", "x=0    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "/2"
     InsertSletDef
     If StopNow Then GoTo slut
+    
+    Radians = True
+    If TestBeregn("sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "a/b" & VBA.ChrW(12311) & "+2", "=sin" & VBA.ChrW(8289) & "(a/b)+2") Then GoTo slut
     
     MaximaExact = 0
     AllTrig = False
