@@ -420,6 +420,10 @@ Sub MaximaSolveInequality(Optional variabel As String)
         
         
         If CheckForError Then GoTo slut
+        
+        Dim Oundo As UndoRecord
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
 
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
@@ -456,6 +460,9 @@ Sub MaximaSolveInequality(Optional variabel As String)
     Else    ' ligningssystem
         MsgBox (Sprog.A(376))
     End If
+    
+    Oundo.EndCustomRecord
+
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -660,12 +667,10 @@ newcas:
         End If
         If CheckForError Then GoTo slut
 
-#If Mac Then
-#Else
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
-#End If
+        
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
         If Len(omax.MaximaOutput) > 150 Then
@@ -779,10 +784,7 @@ stophop:     If omax.AntalVars > 1 Then
             omax.InsertMaximaOutput
         End If
 
-#If Mac Then
-#Else
         Oundo.EndCustomRecord
-#End If
 
     Else    '--------------- ligningssystem ----------------------
 
@@ -847,11 +849,8 @@ newcassys:
         If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         
-#If Mac Then
-#Else
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
-#End If
         
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
 
@@ -961,10 +960,7 @@ newcassys:
                 '                MsgBox fejlm & "Angav du de rigtige variable?" & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, "Fejl"
             End If
         End If
-#If Mac Then
-#Else
         Oundo.EndCustomRecord
-#End If
     End If
     GoTo slut
 Fejl:
@@ -1119,6 +1115,11 @@ Sub MaximaEliminate()
         
         If omax.StopNow Then GoTo slut
         If CheckForError Then GoTo slut
+        
+        Dim Oundo As UndoRecord
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
+        
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
         If omax.StopNow Then GoTo slut
@@ -1195,6 +1196,9 @@ Sub MaximaEliminate()
             End If
         End If
     End If
+    
+    Oundo.EndCustomRecord
+
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -1355,6 +1359,11 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
 
         If omax.StopNow Then GoTo slut
         If CheckForError Then GoTo slut
+        
+        Dim Oundo As UndoRecord
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
+
         If UFnsolve.result = "afbryd" Then GoTo slut
 
         If UFnsolve.result = "num" Then
@@ -1499,6 +1508,9 @@ ghop:
             MsgBox fejlm & Sprog.A(384) & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
         End If
     End If
+    
+    Oundo.EndCustomRecord
+
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -1768,12 +1780,10 @@ Sub beregn()
     If CheckForError Then GoTo slut
     '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
 
-#If Mac Then
-#Else
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
-#End If
+    
     If Len(omax.MaximaOutput) > 0 And Trim(omax.MaximaOutput) <> "=res1" Then
         InsertOutput omax.MaximaOutput
     Else
@@ -1791,10 +1801,7 @@ Sub beregn()
         RestartMaxima
 #End If
     End If
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
 
     GoTo slut
 Fejl:
@@ -1909,12 +1916,9 @@ Sub Omskriv()
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
 
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
 
     If Not (UFomskriv.SammeLinje) Then
         omax.GoToEndOfSelectedMaths
@@ -1950,10 +1954,8 @@ Sub Omskriv()
     Else    ' not newline
         InsertOutput "=" & omax.MaximaOutput
     End If
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    
+    Oundo.EndCustomRecord
 
     GoTo slut
 Fejl:
@@ -2024,6 +2026,11 @@ Sub reducer()
     
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
+    
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
 
@@ -2039,6 +2046,8 @@ Sub reducer()
 
         MsgBox fejlm & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
     End If
+
+    Oundo.EndCustomRecord
 
     GoTo slut
 Fejl:
@@ -2173,6 +2182,11 @@ Sub faktoriser()
     '    omax.OpenCmd
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
+    
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2187,7 +2201,8 @@ Sub faktoriser()
 
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
-
+    
+    Oundo.EndCustomRecord
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -2254,6 +2269,11 @@ Sub udvid()
 
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
+    
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+    
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     
@@ -2268,6 +2288,8 @@ Sub udvid()
 
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
+    
+    Oundo.EndCustomRecord
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -2277,7 +2299,6 @@ slut:
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
-
 End Sub
 Sub Differentier()
     On Error GoTo Fejl
@@ -2339,6 +2360,11 @@ Sub Differentier()
     
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
+    
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+    
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    Selection.TypeParagraph
@@ -2354,7 +2380,8 @@ Sub Differentier()
 
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
-
+    
+    Oundo.EndCustomRecord
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -2364,7 +2391,6 @@ slut:
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
-
 End Sub
 Sub Integrer()
     On Error GoTo Fejl
@@ -2425,6 +2451,10 @@ Sub Integrer()
     
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    Selection.TypeParagraph
@@ -2441,7 +2471,8 @@ Sub Integrer()
 
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
-
+    
+    Oundo.EndCustomRecord
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -2451,7 +2482,6 @@ slut:
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
-
 End Sub
 Sub SolveDENumeric()
     Dim scrollpos As Double
@@ -2759,12 +2789,9 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     If omax.StopNow Then GoTo slut
     If CheckForError Then GoTo slut
     
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
     
     omax.GoToEndOfSelectedMaths
     
@@ -2793,10 +2820,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
     End If
 
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
 
     GoTo slut
 Fejl:
@@ -2807,10 +2831,8 @@ slut:
     Selection.End = sslut    ' slut skal være først ellers går det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
-
 End Sub
 Function TranslateComment(comm As String) As String
-
     If InStr(comm, "infix") > 0 Then
         TranslateComment = Sprog.A(161)
     ElseIf InStr(comm, "prefix") > 0 Then
@@ -2822,7 +2844,6 @@ Function TranslateComment(comm As String) As String
     Else
         TranslateComment = ""
     End If
-
 End Function
 Function TranslateReplaceOutput(comm As String) As String
 
