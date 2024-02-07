@@ -73,12 +73,9 @@ End Sub
 ' events der fyres når der trykkes på ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
     On Error GoTo Fejl
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
 
     Application.ScreenUpdating = False
     If Kommentar <> "" Then
@@ -93,10 +90,7 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
     
     Selection.MoveRight Unit:=wdCharacter, Count:=2
     
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
     
     GoTo slut
 Fejl:

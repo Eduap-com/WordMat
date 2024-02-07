@@ -396,6 +396,7 @@ Else
 End If
 
 #If Mac Then
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyReturn, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
 #Else
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyReturn, Wd, wdKeyControl), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
 #End If
@@ -642,12 +643,9 @@ Sub InsertSletDef()
     Dim gemfontcolor As Integer
     Dim gemsb As Integer
     Dim gemsa As Integer
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
             
     gemfontsize = Selection.Font.Size
     gemitalic = Selection.Font.Italic
@@ -671,10 +669,7 @@ Sub InsertSletDef()
         .SpaceAfter = gemsa
 '        .SpaceAfterAuto = False
     End With
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
 End Sub
 
 Sub InsertDefiner()
@@ -1786,12 +1781,9 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         Exit Sub
     End If
 
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
 
     If Selection.OMaths.Count > 0 Then
         If Not Selection.OMaths(1).Range.Text = vbNullString Then
@@ -1898,10 +1890,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
     ActiveDocument.Fields.Update
 
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
 
     GoTo slut
 Fejl:
@@ -1910,48 +1899,42 @@ slut:
 End Sub
 
 Sub InsertEquationRef()
-Dim b As String
+    Dim b As String
     On Error GoTo Fejl
     UserFormEquationReference.Show
     b = UserFormEquationReference.EqName
     
     If b <> vbNullString Then
-#If Mac Then
-#Else
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
-#End If
-    Selection.TypeText Sprog.Equation & " "
+        Selection.TypeText Sprog.Equation & " "
 #If Mac Then
-    Selection.InsertCrossReference referencetype:=wdRefTypeBookmark, ReferenceKind:= _
-        wdContentText, ReferenceItem:=b, InsertAsHyperlink:=False, _
-        IncludePosition:=False
+        Selection.InsertCrossReference referencetype:=wdRefTypeBookmark, ReferenceKind:= _
+            wdContentText, ReferenceItem:=b, InsertAsHyperlink:=False, _
+            IncludePosition:=False
 #Else
-    Selection.InsertCrossReference referencetype:=wdRefTypeBookmark, ReferenceKind:= _
-        wdContentText, ReferenceItem:=b, InsertAsHyperlink:=False, _
-        IncludePosition:=False, SeparateNumbers:=False, SeparatorString:=" "
+        Selection.InsertCrossReference referencetype:=wdRefTypeBookmark, ReferenceKind:= _
+            wdContentText, ReferenceItem:=b, InsertAsHyperlink:=False, _
+            IncludePosition:=False, SeparateNumbers:=False, SeparatorString:=" "
 #End If
 
-    Selection.MoveLeft Unit:=wdCharacter, Count:=1
-    Selection.Fields.ToggleShowCodes
-    Selection.Collapse wdCollapseEnd
+        Selection.MoveLeft Unit:=wdCharacter, Count:=1
+        Selection.Fields.ToggleShowCodes
+        Selection.Collapse wdCollapseEnd
     
-#If Mac Then
-#Else
         Oundo.EndCustomRecord
-#End If
     
     End If
     
     ActiveDocument.Fields.Update
     
-'    Selection.InsertCrossReference referencetype:="Bogmærke", ReferenceKind:= _
-'        wdContentText, ReferenceItem:="lign1", InsertAsHyperlink:=False, _
-'        IncludePosition:=False, SeparateNumbers:=False, SeparatorString:=" "
+    '    Selection.InsertCrossReference referencetype:="Bogmærke", ReferenceKind:= _
+    '        wdContentText, ReferenceItem:="lign1", InsertAsHyperlink:=False, _
+    '        IncludePosition:=False, SeparateNumbers:=False, SeparatorString:=" "
 
-'    Selection.MoveLeft Unit:=wdCharacter, count:=1
-'    Selection.Fields.ToggleShowCodes
+    '    Selection.MoveLeft Unit:=wdCharacter, count:=1
+    '    Selection.Fields.ToggleShowCodes
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error

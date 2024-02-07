@@ -823,12 +823,9 @@ End Function
 Sub InsertEquation()
     If Ligning = "" Then Exit Sub
     Application.ScreenUpdating = False
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
     Selection.TypeText RegressionText
 
     Selection.TypeText Text:="R"
@@ -843,10 +840,7 @@ Sub InsertEquation()
     Selection.OMaths.BuildUp
     Selection.TypeParagraph
 '    Call Indsæt2DPlot(ligning, xval, yval)
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
 
 End Sub
 

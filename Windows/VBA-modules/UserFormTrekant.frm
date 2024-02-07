@@ -83,12 +83,9 @@ On Error GoTo Fejl
 
     
     ' indsæt i Word
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
     Selection.Collapse wdCollapseEnd
 '    If MaximaForklaring Then
         Selection.TypeParagraph
@@ -177,10 +174,7 @@ On Error GoTo Fejl
         .SpaceAfter = gemsa
     End With
     
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
     
 GoTo slut
 Fejl:

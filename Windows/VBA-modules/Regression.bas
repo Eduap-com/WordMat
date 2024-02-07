@@ -142,56 +142,53 @@ Fejl:
 slut:
 End Sub
 Sub InsertTabel()
-        Dim antalp As Integer
-        Application.ScreenUpdating = False
-        SaveBackup
-        antalp = val(InputBox(Sprog.A(24), Sprog.A(202), ""))
-        If antalp = 0 Then Exit Sub
+    Dim antalp As Integer
+    Application.ScreenUpdating = False
+    SaveBackup
+    antalp = val(InputBox(Sprog.A(24), Sprog.A(202), ""))
+    If antalp = 0 Then Exit Sub
         
-        If antalp > 200 Then
-            MsgBox Sprog.A(25)
-        ElseIf antalp > 0 Then
+    If antalp > 200 Then
+        MsgBox Sprog.A(25)
+    ElseIf antalp > 0 Then
         Selection.Collapse wdCollapseEnd
                 
         
-#If Mac Then
-#Else
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
-#End If
+        
         ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=antalp + 1, NumColumns:= _
-        2, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
-        wdAutoFitFixed
+            2, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
+            wdAutoFitFixed
         With Selection.Tables(1)
-'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' på 2013 giver det ingen kanter
-'        If .Style <> "Tabel - Gitter" And InStr(.Style, "Table") < 0 Then
-'            On Error Resume Next
-'            .Style = "Tabel - Gitter" ' duer ikke på udenlandsk
-'        End If
+            '            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' på 2013 giver det ingen kanter
+            '        If .Style <> "Tabel - Gitter" And InStr(.Style, "Table") < 0 Then
+            '            On Error Resume Next
+            '            .Style = "Tabel - Gitter" ' duer ikke på udenlandsk
+            '        End If
 #If Mac Then
 #Else
-        .ApplyStyleHeadingRows = True
-        .ApplyStyleLastRow = False
-        .ApplyStyleFirstColumn = True
-        .ApplyStyleLastColumn = False
-        .ApplyStyleRowBands = True
-        .ApplyStyleColumnBands = False
+            .ApplyStyleHeadingRows = True
+            .ApplyStyleLastRow = False
+            .ApplyStyleFirstColumn = True
+            .ApplyStyleLastColumn = False
+            .ApplyStyleRowBands = True
+            .ApplyStyleColumnBands = False
 #End If
-        .Cell(1, 1).Range.Text = "x"
-        .Cell(1, 1).Range.Bold = True
-        .Cell(1, 2).Range.Text = "y"
-        .Cell(1, 2).Range.Bold = True
-        .Cell(2, 1).Range.Select
-        .Columns(1).Width = 65
-        .Columns(2).Width = 65
+            .Cell(1, 1).Range.Text = "x"
+            .Cell(1, 1).Range.Bold = True
+            .Cell(1, 2).Range.Text = "y"
+            .Cell(1, 2).Range.Bold = True
+            .Cell(2, 1).Range.Select
+            .Columns(1).Width = 65
+            .Columns(2).Width = 65
         End With
-        End If
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    End If
+        
+    Oundo.EndCustomRecord
 
 End Sub
+
 
 

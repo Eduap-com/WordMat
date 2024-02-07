@@ -3,30 +3,24 @@ Option Explicit
 
 Sub indsaetformel()
     On Error GoTo Fejl
-'    MsgBox CommandBars.ActionControl.Caption
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    '    MsgBox CommandBars.ActionControl.Caption
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
 
     Application.ScreenUpdating = False
     If CommandBars.ActionControl.DescriptionText <> "" Then
-    Selection.InsertAfter (CommandBars.ActionControl.DescriptionText)
-    Selection.Collapse (wdCollapseEnd)
-    Selection.TypeParagraph
+        Selection.InsertAfter (CommandBars.ActionControl.DescriptionText)
+        Selection.Collapse (wdCollapseEnd)
+        Selection.TypeParagraph
     End If
     Selection.InsertAfter (CommandBars.ActionControl.Tag)
     Selection.OMaths.Add Range:=Selection.Range
     Selection.OMaths(1).BuildUp
     Selection.MoveRight Unit:=wdCharacter, Count:=2
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
 
-GoTo slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:

@@ -706,12 +706,9 @@ Sub ToggleLatex()
 Dim mtext As String
 Dim r As Range
 On Error GoTo slut
-#If Mac Then
-#Else
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
-#End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
     If Selection.OMaths.Count > 0 Then
         PrepareMaxima
         omax.ReadSelection
@@ -728,10 +725,7 @@ On Error GoTo slut
         r.OMaths(1).BuildUp
         Selection.TypeParagraph
     End If
-#If Mac Then
-#Else
-        Oundo.EndCustomRecord
-#End If
+    Oundo.EndCustomRecord
 
 slut:
 End Sub
