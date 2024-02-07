@@ -36,10 +36,10 @@ Next
 Document.Close
 WordApp.Quit
 
-' Copy the cleaned files to Mac folder one level up
-objFSO.CopyFile strPath & "WordMat.dotm", strPath & "..\Mac\WordMat.dotm", TRUE
-objFSO.CopyFile strPath & "WordMatP.dotm", strPath & "..\Mac\WordMatP.dotm", TRUE
-objFSO.CopyFile strPath & "WordMatP2.dotm", strPath & "..\Mac\WordMatP2.dotm", TRUE
+' Copy the cleaned files to Mac folder one level up. Dette giver problemer på Mac da git pull stoppes når der er ændringer i filerne
+'objFSO.CopyFile strPath & "WordMat.dotm", strPath & "..\Mac\WordMat.dotm", TRUE
+'objFSO.CopyFile strPath & "WordMatP.dotm", strPath & "..\Mac\WordMatP.dotm", TRUE
+'objFSO.CopyFile strPath & "WordMatP2.dotm", strPath & "..\Mac\WordMatP2.dotm", TRUE
 
 set objFSO = Nothing
 Set Document = Nothing
