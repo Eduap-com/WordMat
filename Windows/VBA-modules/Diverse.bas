@@ -1066,7 +1066,7 @@ Sub ToggleUnits()
 chosunit:
             OutUnits = InputBox(Sprog.A(167), Sprog.A(168), OutUnits)
             If InStr(OutUnits, "/") > 0 Or InStr(OutUnits, "*") > 0 Or InStr(OutUnits, "^") > 0 Then
-                MsgBox Sprog.A(343), vbOKOnly, Sprog.Error
+                MsgBox2 Sprog.A(343), vbOKOnly, Sprog.Error
                 GoTo chosunit
             End If
             On Error Resume Next
@@ -1102,7 +1102,7 @@ Dim Text As String
     Text = omax.KillDef
     If Len(Text) > 0 Then
          Text = Left(Text, Len(Text) - 1) 'fjern sidste komma
-         Text = "kill(" & Text & ")"
+         Text = "errcatch(kill(" & Text & "))"
          omax.KillDef = ""
     Else
         Text = "" ' mærkeligt men len(text)=0 er ikke nødv ""

@@ -51,42 +51,43 @@ End Function
 Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) As ErrorDefinition
 ' Klassificerer og fortolker fejlen i en errordefinition.
 ' Checktext skal være output fra Maxima
-    Dim Pos As Integer, CheckText As String
+    Dim Pos As Integer, CheckText As String, CheckText2 As String
     GetErrorDefinition.Stop = True
     CheckText = MaximaOutput & KommentarOutput
-    If InStr(CheckText, "syntax error") > 0 Then
+    CheckText2 = Replace(CheckText, " ", vbNullString) ' på mac er der mellemrum, men ikke på windows
+    If InStr(CheckText2, "syntaxerror") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
         GetErrorDefinition.Description = Sprog.SyntaxErrorLong
-    ElseIf InStr(CheckText, "incorrect syntax: Missing") > 0 Then
+    ElseIf InStr(CheckText2, "incorrectsyntax:Missing") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
-        Pos = InStr(CheckText, "incorrect syntax: Missing")
+        Pos = InStr(CheckText, "incorrectsyntax:Missing")
         GetErrorDefinition.Description = Sprog.Missing & " " & Mid(CheckText, Pos + 26, 1)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "incorrect syntax: Too many") > 0 Then
+    ElseIf InStr(CheckText2, "incorrectsyntax:Toomany") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
         Pos = InStr(CheckText, "incorrect syntax: Too many")
         GetErrorDefinition.Description = Sprog.SyntaxError & ". " & vbCrLf & Sprog.TooMany & " " & Mid(CheckText, Pos + 29, 1)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "is not a prefix operator") > 0 Then
+    ElseIf InStr(CheckText2, "isnotaprefixoperator") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
         GetErrorDefinition.Description = GetErrorText("is not a prefix operator", CheckText)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "is not an infix operator") > 0 Then
+    ElseIf InStr(CheckText2, "isnotaninfixoperator") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
         GetErrorDefinition.Description = GetErrorText("is not an infix operator", CheckText)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "Premature termination of input at") > 0 Then
+    ElseIf InStr(CheckText2, "Prematureterminationofinputat") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
         GetErrorDefinition.Description = GetErrorText("Premature termination of input at", CheckText)
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "incorrect syntax:") > 0 Then
+    ElseIf InStr(CheckText2, "incorrectsyntax:") > 0 Then
         GetErrorDefinition.Title = "Syntax error"
         GetErrorDefinition.Description = Sprog.SyntaxError & "."
         GetErrorDefinition.DefFejl = True
-    ElseIf InStr(CheckText, "lisp error") And InStr(CheckText, "[") > 0 Then
+    ElseIf InStr(CheckText2, "lisperror") And InStr(CheckText, "[") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
         GetErrorDefinition.Description = Sprog.LispError
-    ElseIf InStr(CheckText, "encountered a Lisp error") > 0 Then
+    ElseIf InStr(CheckText2, "encounteredaLisperror") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
         GetErrorDefinition.Description = Sprog.LispError
 '    ElseIf InStr(KommentarOutput, "Division by 0") > 0 Then ' maybe not relevant in SBCL
@@ -95,15 +96,15 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
 '    ElseIf InStr(CheckText, "expt:undefined:0toanegativeexponent") > 0 Then ' kommer ved mange alm beregninger uden fejl, flyttet ned med en anden
 '        GetErrorDefinition.Title = "Division by zero"
 '        GetErrorDefinition.Description = Sprog.DivisionByZero
-    ElseIf InStr(CheckText, "anerrorTodebugthistry:debugmode(true)") > 0 Then
-        If InStr(CheckText, "expt:undefined:0toanegativeexponent") > 0 Then
+    ElseIf InStr(CheckText2, "Todebugthistry:debugmode(true)") > 0 Then ' anerror foran er ikke taget med, da på Mac er der ogspå punktum mellem
+        If InStr(CheckText2, "expt:undefined:0toanegativeexponent") > 0 Then
             GetErrorDefinition.Title = "Division by zero"
             GetErrorDefinition.Description = Sprog.DivisionByZero
         Else
             GetErrorDefinition.Title = "Lisp error"
             GetErrorDefinition.Description = Sprog.LispError
         End If
-    ElseIf CheckText = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
+    ElseIf CheckText2 = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
         GetErrorDefinition.Title = "Variable error"
         GetErrorDefinition.Description = Sprog.A(133) '"Du har bedt om at løse ligningen for en variabel der allerede er defineret. Indsæt en 'slet def:' kommando før ligningen"
     ElseIf (omax.DefFejl = True) Then
@@ -123,7 +124,7 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
         GetErrorDefinition.Stop = False
     End If
     
-    GetErrorDefinition.MaximaOutput = omax.KommentarOutput & vbCrLf & vbCrLf & omax.MaximaOutput
+    GetErrorDefinition.MaximaOutput = KommentarOutput & vbCrLf & vbCrLf & MaximaOutput
     
 End Function
 

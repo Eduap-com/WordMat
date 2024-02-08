@@ -41,6 +41,7 @@ Sub SetErrorDefinition(ED As ErrorDefinition)
     Label_fejltekst.Caption = ED.Description
     If ED.DefFejl Then
         Label_definitioner.visible = True
+        TextBox_definitioner.visible = True
         TextBox_definitioner.Text = FormatDefinitions(omax.DefString)
     Else
         Label_definitioner.visible = False

@@ -514,12 +514,12 @@ Sub MaximaSolvePar(Optional variabel As String)
     sslut = Selection.End
 
     If omax.DefFejl Then
-        MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+        MsgBox2 Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
         GoTo slut
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
+        MsgBox2 Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
         GoTo slut
     End If
     If sstart = sslut Then
@@ -587,9 +587,9 @@ newcas:
                 Loop While V <> ""
                 If s <> "" And Radians Then
                     If s = "90" Then
-                        s = "pi/2"
+                        s = ChrW(960) & "/2" ' pi
                     Else
-                        s = "pi"
+                        s = ChrW(960) '"pi"
                     End If
                 End If
                 If s <> "" Then
@@ -605,8 +605,7 @@ newcas:
             variabel = UFSelectVar.SelectedVar
         End If
         If variabel = "" Then GoTo slut
-        omax.TempDefs = UFSelectVar.TempDefs
-        
+        omax.TempDefs = Replace(UFSelectVar.TempDefs, "%pi", "pi")
         If CASengine = 1 Or CASengine = 2 Then
             s = Trim(omax.Kommando)
             s = Replace(s, vbCrLf, "")
@@ -673,7 +672,7 @@ newcas:
         
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
-        If Len(omax.MaximaOutput) > 150 Then
+        If Len(omax.MaximaOutput) > 250 Then
             Dim resultat As VbMsgBoxResult
             resultat = MsgBox(Sprog.A(127) & vbCrLf & vbCrLf & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
             If resultat = vbCancel Then GoTo slut
@@ -1020,6 +1019,7 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
         '                    tdefs = Replace(tdefs, ".", ",")
         '                Else
         tdefs = omax.TempDefs
+        tdefs = Replace(tdefs, "pi", ChrW(960))
         '                End If
         Selection.TypeText Sprog.A(61)
         Set mo = Selection.OMaths.Add(Selection.Range)

@@ -199,7 +199,7 @@ Public Sub ResetMaxima()
     
     If Len(KillDef) > 0 Then
         KillDef = Left(KillDef, Len(KillDef) - 1)    'fjern sidste komma
-        kd = kd & "kill(" & KillDef & ")"
+        kd = kd & "errcatch(kill(" & KillDef & "))"
         KillDef = ""
     End If
     If Len(ForgetList) > 0 Then
@@ -808,7 +808,7 @@ End Sub
 Sub InsertKillDef()
     If Len(KillDef) > 0 Then
         KillDef = Left(KillDef, Len(KillDef) - 1)    'fjern sidste komma
-        MaximaInputStreng = MaximaInputStreng & "kill(" & KillDef & ")$"
+        MaximaInputStreng = MaximaInputStreng & "errcatch(kill(" & KillDef & "))$"
         KillDef = ""
     End If
     If Len(ForgetList) > 0 Then
@@ -6963,7 +6963,7 @@ Function AddDefinition(s As String) As String
             Exit Function
          Else
             '                AddDefinition = "kill(" & Replace(Replace(s, ";", ","), vbCr, "") & ")$" & AddDefinition
-            AddDefinition = "kill(" & CodeForMaxima(Replace(s, ",", ";"), CASengine) & ")$" & AddDefinition
+            AddDefinition = "errcatch(kill(" & CodeForMaxima(Replace(s, ",", ";"), CASengine) & "))$" & AddDefinition
          End If
       Else    ' gem definitioner
          '            FindDefinitions = CodeForMaxima(s) & "," & FindDefinitions

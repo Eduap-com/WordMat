@@ -629,8 +629,8 @@ Sub SetCaptions()
     CheckBox_showassum.Caption = Sprog.ShowSolutionConditions
     
     Frame5.Caption = Sprog.Exact & " ?"
-    OptionButton_exactandnum.Caption = Sprog.Auto & "  (x=pi=3.14)"
-    OptionButton_exactonly.Caption = Sprog.Exact & "  (x=pi)"
+    OptionButton_exactandnum.Caption = Sprog.Auto & "  (x=" & ChrW(960) & "=3.14)"
+    OptionButton_exactonly.Caption = Sprog.Exact & "  (x=" & ChrW(960) & ")"
     OptionButton_numonly.Caption = Sprog.Numeric & "  (x=3.14)"
     CheckBox_bigfloat.Caption = Sprog.HighPrecision
     CheckBox_Insertforklaring.Caption = Sprog.InsertExplanation
