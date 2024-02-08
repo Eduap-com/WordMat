@@ -402,6 +402,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
     End If
 '    MsgBox k
 #If Mac Then
+    k = GetMaximaSettingsString & "fpprintprec:" & MaximaCifre & "$" & k ' der problemer med dectalallNum, så der bruges denne fppprintprec metode her med units
     s = ExecuteMaximaViaFile(k, 3, True)
 
     ConvertMaximaUnits = GetMaximaUnitOutput(s) 'MaxProcUnit.LastMaximaOutput
@@ -594,14 +595,14 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
 #If Mac Then
 
     Dim s As String, WT As String, p As Long, p2 As Long, Var As String
-    Dim Pos As Integer, pos2 As Integer, Assume As String
+    Dim Pos As Integer, pos2 As Integer, Assume As String, InputString As String
 
     '    Dim FN As String
     '    Dim UfWait2 As UserFormWaitForMaxima
     If StopTime > 0 Then
         WT = StopTime
     Else
-        WT = "5"
+        WT = "3"
     End If
     '    Set UfWait2 = New UserFormWaitForMaxima
     '    On Error Resume Next ' hvis en form allerede er åben giver det fejl
@@ -613,7 +614,8 @@ start:
     '    UfWait2.Label_tip.Caption = GetRandomTip
     DoEvents
     '  FN = DataFolder & "output.txt"
-    s = ExecuteMaximaViaFile(GetMaximaSettingsString & Assume & MaximaInputStreng, WT, MaximaUnits)
+    InputString = GetMaximaSettingsString & Assume & MaximaInputStreng
+    s = ExecuteMaximaViaFile(InputString, WT, MaximaUnits)
     If Left(s, 5) = "Fejln" Then
         WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.", "Afbrudt", 20)
         If Trim(WT) <> "" Then
@@ -671,6 +673,9 @@ start:
     '        i = i + 1
     '        Wait (0.1)
     '    Loop
+    
+    ShowDebug False, InputString, s
+    
     FindLastMaximaOutput ConvertWordSymbols, s
     '    GenerateOutputArray (s)
     '    Unload UfWait2
@@ -1259,7 +1264,11 @@ Sub Nsolve(ByVal variabel As String, ByVal qn As Integer, ByVal qm As Integer, B
     End If
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec & ";"
 
+#If Mac Then
+    RunMaxima 2
+#Else
     RunMaxima -150
+#End If
     If StopNow Then GoTo slut
 
     If LmSet Then
@@ -6694,9 +6703,8 @@ Function GetMaximaUnitOutput(Optional Text As String) As String
     ReDim moutputU(1 To 100) As String
     Dim slutnu As Boolean
 '    MsgBox text
-
-    Pos = InStr(1, Text, vbLf & "(%")
-    pos2 = InStr(Pos + 2, Text, "(%") - 1
+   Pos = FindNextio(1, Text) - 1
+   pos2 = FindNextio(Pos + 2, Text) - 1
     Do
         If Pos < 1 Then
             Exit Function
@@ -6712,8 +6720,10 @@ Function GetMaximaUnitOutput(Optional Text As String) As String
             AntalCifre = 1
         ElseIf nr < 100 Then
             AntalCifre = 2
-        Else
+        ElseIf nr < 1000 Then
             AntalCifre = 3
+        Else
+            AntalCifre = 4
         End If
         Output = Replace(Trim(Mid(Text, posb + 1, pos2 - Pos - 4 - AntalCifre)), vbCrLf, "")
 
@@ -6725,7 +6735,12 @@ Function GetMaximaUnitOutput(Optional Text As String) As String
             moutputU(nr) = moutputU(nr) & Output
         End If
         Pos = pos2
-        pos2 = InStr(Pos + 3, Text, vbLf & "(%")
+        pos2 = FindNextio(Pos + 2, Text) - 1
+'#If Mac Then
+'        pos2 = InStr(Pos + 3, Text, vbCr & "(%")
+'#Else
+'        pos2 = InStr(Pos + 3, Text, vbLf & "(%")
+'#End If
     Loop Until slutnu
 
     If moutputU(nr) = "" And Len(MinputU(nr)) < 6 Then
@@ -7494,7 +7509,7 @@ Function GetMaximaSettingsString() As String
         If Not OutUnits = vbNullString Then
             Arr = Split(OutUnits, ",")
             For i = 0 To UBound(Arr) ' Det skal gøres på denne måde fordi man ikke kan køre setunits på en liste hvor der optræder den samme type enhed to gange. fx eV og J
-                SettingsString = SettingsString & "setunits(" & omax.ConvertUnits(Arr(i)) & ")$"
+                SettingsString = SettingsString & "setunits(" & omax.ConvertUnits(Arr(i)) & "),"
             Next
         End If
     Else

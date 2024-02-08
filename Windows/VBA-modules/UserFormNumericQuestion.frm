@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private IsRunning As Boolean
 Public result As String
 Public variabel As String
 Public FejlMeld As String
@@ -87,7 +88,10 @@ End Sub
 
 Private Sub UserForm_Activate()
 '    PrepareMaximaNoSplash
-
+    Dim tid As Single
+    If IsRunning Then Exit Sub
+    IsRunning = True
+    tid = Timer
 #If Mac Then
     Label_numeric.visible = False ' grafisk løsning er gnuplot, som ikke længere understøttes på Mac.
 #End If
@@ -122,7 +126,7 @@ Private Sub UserForm_Activate()
     omax.Kommando = Ligning
     omax.Nsolve variabel, 0, 2, 15, 1, 0, 0
     If Finished Then GoTo slut
-    If omax.StopNow Then GoTo afslut
+    If omax.StopNow Or (Timer - tid) > 15 Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")
     
     If Len(omax.MaximaOutput) > 1 Then
@@ -141,7 +145,7 @@ Private Sub UserForm_Activate()
     omax.TempDefs = TempDefs
     omax.Nsolve variabel, -3, 3, 15, 5, 0, 0
     If Finished Then GoTo slut
-    If omax.StopNow Then GoTo afslut
+    If omax.StopNow Or (Timer - tid) > 15 Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")
     If Len(omax.MaximaOutput) > 1 Then
         Label_nsolveB.visible = True
@@ -159,7 +163,7 @@ Private Sub UserForm_Activate()
     omax.TempDefs = TempDefs
     omax.Nsolve variabel, -6, 6, 15, 20, 0, 0
     If Finished Then GoTo slut
-    If omax.StopNow Then GoTo afslut
+    If omax.StopNow Or (Timer - tid) > 15 Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")
     If Len(omax.MaximaOutput) > 1 Then
         Label_nsolveB.visible = True
@@ -177,7 +181,7 @@ Private Sub UserForm_Activate()
     omax.TempDefs = TempDefs
     omax.Nsolve variabel, -15, 15, 15, 20, 30, 30, True
     If Finished Then GoTo slut
-    If omax.StopNow Then GoTo afslut
+    If omax.StopNow Or (Timer - tid) > 15 Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")
     If Len(omax.MaximaOutput) > 1 Then
         Label_nsolveB.visible = True
@@ -202,7 +206,7 @@ afslut:
 '    CommandButton_nsolve.SetFocus
 slut:
     Finished = True
-    
+    IsRunning = False
 End Sub
 
 Private Sub UserForm_Initialize()
