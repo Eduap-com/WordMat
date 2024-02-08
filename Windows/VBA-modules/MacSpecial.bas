@@ -193,11 +193,11 @@ On Error GoTo Fejl
 '    SaveCommandFile MaximaCommand
     If UnitCore Then
 '        AppleScriptTask "WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait)
-        If OutUnits <> "" Then
-            ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & "setunits(" & omax.ConvertUnits(OutUnits) & ")$" & MaximaCommand)
-        Else
+'        If OutUnits <> "" Then ' fjernet da units nu håndteres af RunMaximaFile via GetSettingString
+'            ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & "setunits(" & omax.ConvertUnits(OutUnits) & ")$" & MaximaCommand)
+'        Else
             ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & MaximaCommand)
-        End If
+'        End If
     Else
         ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaxima", CStr(MaxWait) & "£" & MaximaCommand)
     End If

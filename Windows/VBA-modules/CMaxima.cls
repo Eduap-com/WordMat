@@ -373,10 +373,10 @@ Sub RunMaximaWSH(Optional StopTime As Integer)
 End Sub
 Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) As String
 ' Converts a maxima expression, using the maxima-image with units loaded
-#If Mac Then ' noget af nedenstående må kunne bruges, men først prøves dette
-    ConvertMaximaUnits = Expr
-#Else
-    Dim i As Integer, k As String, Arr As Variant
+'#If Mac Then ' noget af nedenstående må kunne bruges, men først prøves dette
+'    ConvertMaximaUnits = Expr
+'#Else
+    Dim i As Integer, k As String, Arr As Variant, s As String
     
     Expr = Replace(Expr, """", "") ' svaret vil typisk være kørt igennem num-funktion der tilføjer "" om tal
     
@@ -384,7 +384,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         k = Expr & ",numer;applyb1(%,unitrule),numer;dectalallNum(%),numer;"
     Else
         k = "numer:true$uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
-        k = k & "setunits(usersetunits);"
+'        k = k & "setunits(usersetunits);"  ' 1.29 fjernet. usersetunits findes ikke og Outunits håndteres nedenfor
         If Not OutUnits = vbNullString Then
             Arr = Split(OutUnits, ",")
             For i = 0 To UBound(Arr) ' Det skal gøres på denne måde fordi man ikke kan køre setunits på en liste hvor der optræder den samme type enhed to gange. fx eV og J
@@ -401,10 +401,16 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         End If
     End If
 '    MsgBox k
+#If Mac Then
+    s = ExecuteMaximaViaFile(k, 3, True)
+
+    ConvertMaximaUnits = GetMaximaUnitOutput(s) 'MaxProcUnit.LastMaximaOutput
+#Else
+
     MaxProcUnit.ExecuteMaximaCommand k, 0
     WaitForMaximaUnitUntil
-'    MsgBox MaxProcUnit.LastMaximaOutput
     ConvertMaximaUnits = GetMaximaUnitOutput() 'MaxProcUnit.LastMaximaOutput
+'    MsgBox MaxProcUnit.LastMaximaOutput
 #End If
 End Function
 Sub WaitForMaximaForm(StopTime As Integer)
@@ -6664,8 +6670,7 @@ slut:
     RemovePrintetBool = s
 End Function
 '#End If
-Function GetMaximaUnitOutput() As String
-    Dim Text As String
+Function GetMaximaUnitOutput(Optional Text As String) As String
     Dim Output As String
     Dim nr As Integer
     Dim AntalCifre As Integer
@@ -6676,12 +6681,14 @@ Function GetMaximaUnitOutput() As String
     Dim MinputU() As String
     Dim moutputU() As String
     
-
     On Error GoTo Fejl
+    
 #If Mac Then
-    Text = MaxProc.LastMaximaOutput
+'    Text = MaxProc.LastMaximaOutput
 #Else
-    Text = MaxProcUnit.LastMaximaOutput
+    If Text = vbNullString Then
+        Text = MaxProcUnit.LastMaximaOutput
+    End If
 #End If
     ReDim MinputU(1 To 100) As String
     ReDim moutputU(1 To 100) As String
@@ -7479,14 +7486,16 @@ End Property
 
 Function GetMaximaSettingsString() As String
 ' dll API laver disse indstillinger selv
-    Dim SettingsString As String
-    
+    Dim SettingsString As String, Arr() As String, i As Integer
     
     SettingsString = "["
     If MaximaUnits Then
         SettingsString = SettingsString & "keepfloat:false,setunits([N,J,W,Pa,C,V,F,Ohm,T,H,K]),"
-        If OutUnits <> vbNullString Then
-            SettingsString = SettingsString & "errcatch(setunits(" & ConvertUnits(OutUnits) & ")),"
+        If Not OutUnits = vbNullString Then
+            Arr = Split(OutUnits, ",")
+            For i = 0 To UBound(Arr) ' Det skal gøres på denne måde fordi man ikke kan køre setunits på en liste hvor der optræder den samme type enhed to gange. fx eV og J
+                SettingsString = SettingsString & "setunits(" & omax.ConvertUnits(Arr(i)) & ")$"
+            Next
         End If
     Else
         SettingsString = SettingsString & "keepfloat:true,"
