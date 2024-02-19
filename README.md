@@ -1,5 +1,4 @@
 # WordMat
-https://img.shields.io/github/downloads/Eduap-com/WordMat/total.svg?style=popout
 [![Downloads](https://img.shields.io/github/downloads/Eduap-com/WordMat/total.svg)](https://github.com/Eduap-com/WordMat/releases)
 [![Release Version](https://img.shields.io/github/release/Eduap-com/WordMat)](https://github.com/Eduap-com/WordMat/releases/latest)
 
