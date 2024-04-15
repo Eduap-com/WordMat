@@ -1,6 +1,8 @@
 Attribute VB_Name = "GlobalVariables"
 Option Explicit
 
+#Const AVsafe = False ' Compiler constant. AntiVirus safe. If true will not compile functions that could potentially be blocked by AntiVirus
+
 Public AppNavn As String
 
 Public Const AppVersion = "1.29"
