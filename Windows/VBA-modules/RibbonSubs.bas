@@ -79,10 +79,11 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
 
     Application.ScreenUpdating = False
     If Kommentar <> "" Then
-    Selection.InsertAfter (Kommentar)
-    Selection.Collapse (wdCollapseEnd)
-    Selection.TypeParagraph
+        Selection.InsertAfter (Kommentar)
+        Selection.Collapse (wdCollapseEnd)
+        Selection.TypeParagraph
     End If
+    Selection.Font.Bold = False
     Selection.OMaths.Add Range:=Selection.Range
     Selection.TypeText formel
     Selection.OMaths.BuildUp

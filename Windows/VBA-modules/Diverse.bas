@@ -2367,6 +2367,7 @@ Sub SetMathAutoCorrect()
     ElseIf MaximaGangeTegn = VBA.ChrW(215) Then
         Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(215))
     Else
+        On Error Resume Next
         Call Application.OMathAutoCorrect.Entries("*").Delete
     End If
 End Sub
