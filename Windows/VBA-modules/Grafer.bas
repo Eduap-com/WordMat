@@ -270,7 +270,7 @@ Sub InsertGraphOleObject()
     MsgBox "Sorry. Graph is not supported on Mac. There is a beta version you could try though. You will now be forwarded to the download page", vbOKOnly, Sprog.Error
     OpenLink "http://www.padowan.dk/mac/"
 #Else
-Dim path As String
+Dim Path As String
 Dim ils As InlineShape
 Dim Arr As Variant
 Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
@@ -298,7 +298,7 @@ If Not FileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
 End If
 
 'path = """" & GetProgramFilesDir & "\WordMat\graphtemplate.grf"""
-path = Environ("TEMP") & "\" & "wordmatgraph.grf"
+Path = Environ("TEMP") & "\" & "wordmatgraph.grf"
 'path = "c:\wordmatgraph.grf" ' til test
 
 Dim graphfil As New CGraphFile
@@ -409,10 +409,10 @@ Dim i As Integer
     UfWait.Label_progress.Caption = "******"
 
     If graphfil.funkno > 0 Or Len(graphfil.CustomFunctions) > 0 Or graphfil.relationno > 0 Or graphfil.pointno > 0 Then
-        graphfil.Save path
+        graphfil.Save Path
 
         'indsæt vha. tom graphfil. Nok lidt langsommere, men kan på et tidspunkt måske bruges til kommunikation
-        Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+        Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
         ils.OLEFormat.DoVerb (wdOLEVerbShow)
 
     Else
@@ -665,7 +665,7 @@ Dim dd As New DocData
 Dim i As Integer
 Dim Arr As Variant
 Dim ea As New ExpressionAnalyser
-Dim path As String
+Dim Path As String
 Dim ils As InlineShape
 Application.ScreenUpdating = False
 ea.SetNormalBrackets
@@ -679,11 +679,11 @@ omax.ReadSelection
 If ExcelIndlejret Then
     GoToInsertPoint
     Selection.TypeParagraph
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
+Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
 
 EnableExcelMacros
 
-Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=path, LinkToFile:=False, _
+Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, _
 DisplayAsIcon:=False, Range:=Selection.Range)
 
 ils.OLEFormat.DoVerb (wdOLEVerbShow)
@@ -787,11 +787,11 @@ Exit Sub
 'Dim ws As Variant
 EnableExcelMacros
 Application.ScreenUpdating = False
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
+Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
 
 'Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
 Set ils = ActiveDocument.InlineShapes.AddOLEObject( _
-fileName:=path, LinkToFile:=False, _
+fileName:=Path, LinkToFile:=False, _
 DisplayAsIcon:=False, Range:=Selection.Range)
 'Ils.Height = 300
 'Ils.Width = 500
@@ -862,18 +862,18 @@ Close filno
 ReadTextFile = Text
 End Function
 Sub TestEmbed()
-Dim path As String
+Dim Path As String
 Dim ils As InlineShape
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
+Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
 
-Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=path, LinkToFile:=False, _
+Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, _
 DisplayAsIcon:=False, Range:=Selection.Range)
 
 End Sub
 Function InsertIndlejret(FilNavn As String, Optional startark As String) As Object
 'indsætter exceldokument som indlejret dokument
 ' bemærk fejler hvis google cloud connect installeret
-Dim path As String
+Dim Path As String
 Dim ils As InlineShape
 Dim vers As String
 On Error GoTo Fejl
@@ -888,9 +888,9 @@ EnableExcelMacros
         DoEvents
         UfWait2.Label_progress = "***"
 #If Mac Then
-path = GetWordMatDir() & "Excelfiles/" & FilNavn
+Path = GetWordMatDir() & "Excelfiles/" & FilNavn
 #Else
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
+Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
 #End If
     If Selection.Range.Tables.Count > 0 Then
 '        Selection.Copy
@@ -916,7 +916,7 @@ End If
 'Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.Sheet" & vers & Application.Version, _
 'FileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.SheetMacroEnabled" & vers & Application.Version, _
-fileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
         
         UfWait2.Label_progress = "***************************************"
 'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)

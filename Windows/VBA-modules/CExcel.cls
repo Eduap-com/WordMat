@@ -122,7 +122,7 @@ On Error Resume Next
 End Sub
 Function InsertIndlejret(FilNavn As String, Optional startark As String)
 'indsætter exceldokument som indlejret dokument
-Dim path As String
+Dim Path As String
 Dim ils As InlineShape
 Dim vers As String
 On Error Resume Next
@@ -142,7 +142,7 @@ EnableExcelMacros
 '    ufwait2.Show vbModeless
         DoEvents
 '        ufwait2.Label_progress = "***"
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
+Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
     If Selection.Range.Tables.Count > 0 Then
 '        Selection.Copy
         Selection.Tables(Selection.Tables.Count).Select
@@ -162,7 +162,7 @@ Else
 End If
 
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.Sheet" & vers & Application.Version, _
-fileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 '        ufwait2.Label_progress = "***************************************"
 'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
 'ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)

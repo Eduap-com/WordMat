@@ -1384,7 +1384,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         If AppVersion <> NewVersion Then UpdateNow = True
     End If
     On Error Resume Next
-    PartnerShip = Application.Run("PQActivePartnership")
+    PartnerShip = QActivePartnership()
     On Error GoTo Fejl
     
     If UpdateNow Then
@@ -1397,7 +1397,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
 '                UFvent.Label_progress.Caption = "**"
 '                UFvent.Show
                 On Error GoTo Install2
-                Application.Run ("PUpdateWordMat")
+                Application.Run macroname:="PUpdateWordMat"
                 On Error GoTo Fejl
             End If
         Else
@@ -2067,7 +2067,7 @@ End Sub
 
 Sub SaveBackup()
     On Error GoTo Fejl
-    Dim path As String
+    Dim Path As String
     Dim UFbackup As UserFormBackup
     Dim UfWait As UserFormWaitForMaxima
     Const lCancelled_c As Long = 0
@@ -2090,7 +2090,7 @@ Sub SaveBackup()
         
     If Timer - SaveTime < BackupTime * 60 Then Exit Sub
     SaveTime = Timer
-    If ActiveDocument.path = "" Then
+    If ActiveDocument.Path = "" Then
         MsgBox Sprog.A(679)
         Exit Sub
     End If
@@ -2108,23 +2108,23 @@ Sub SaveBackup()
     BackupNo = BackupNo + 1
     If BackupNo > BackupMaxNo Then BackupNo = 1
 #If Mac Then
-    path = GetTempDir & "WordMat-Backup/"
+    Path = GetTempDir & "WordMat-Backup/"
 #Else
-    path = GetDocumentsDir & "\WordMat-Backup\"
+    Path = GetDocumentsDir & "\WordMat-Backup\"
 #End If
     '    If Dir(path, vbDirectory) = "" Then MkDir path
-    If Not FileExists(path) Then MkDir path
+    If Not FileExists(Path) Then MkDir Path
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
-    path = path & "WordMatBackup" & BackupNo & ".docx"
-    If VBA.LenB(path) = lCancelled_c Then Exit Sub
+    Path = Path & "WordMatBackup" & BackupNo & ".docx"
+    If VBA.LenB(Path) = lCancelled_c Then Exit Sub
     
 #If Mac Then
     Set tempDoc2 = Application.Documents.Add(Template:=ActiveDocument.FullName, visible:=False)
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     tempDoc2.ActiveWindow.Left = 2000
-    tempDoc2.SaveAs path
+    tempDoc2.SaveAs Path
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     tempDoc2.Close
@@ -2132,7 +2132,7 @@ Sub SaveBackup()
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
     ActiveDocument.Save
-    fso.CopyFile ActiveDocument.FullName, path
+    fso.CopyFile ActiveDocument.FullName, Path
     Set fso = Nothing
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
@@ -2281,7 +2281,7 @@ End Sub
 Public Function Local_Document_Path(ByRef Doc As Document, Optional bPathOnly As Boolean = True) As String
 'returns local path or nothing if local path not found. Converts a onedrive path to local path
 #If Mac Then
-   Local_Document_Path = Doc.path
+   Local_Document_Path = Doc.Path
 #Else
 Dim i As Long, X As Long
 Dim OneDrivePath As String

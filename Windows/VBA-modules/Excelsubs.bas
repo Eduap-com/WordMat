@@ -27,7 +27,7 @@ DisableExcelMacros
 End Function
 
 Sub ExcelIns()
- Application.Run MacroName:="TableExcelSpreadsheetInsert"
+ Application.Run macroname:="TableExcelSpreadsheetInsert"
 End Sub
 Sub Chi2Test()
 #If Mac Then

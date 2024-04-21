@@ -157,7 +157,7 @@ End Function
 Function FolderWithVBAProjectFiles() As String
     Dim SpecialPath As String
 
-    SpecialPath = ActiveDocument.path
+    SpecialPath = ActiveDocument.Path
     
     If right(SpecialPath, 1) <> "\" Then
         SpecialPath = SpecialPath & "\"

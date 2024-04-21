@@ -34,7 +34,7 @@ Public Sub SaveFile(doctype As Integer)
    '***
    
    'Check if document saved
-   If ActiveDocument.path = "" Then
+   If ActiveDocument.Path = "" Then
       MsgBox "Save your document before attempting to convert to Latex. The Latex files will be placed in a folder next to your document-file.", vbOKOnly, "File not saved"
       GoTo slut
    End If

@@ -613,33 +613,36 @@ Public Property Let InstallLocation(ByVal L As String)
 End Property
 
 '------------------- registry functions --------------------
-Private Function GetRegSetting(Key As String) As Integer
-    GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key)
+Public Function GetReg(key As String) As String
+    GetReg = GetRegSettingString(key)
 End Function
-Private Sub SetRegSetting(ByVal Key As String, ByVal val As Integer)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_DWORD"
+Private Function GetRegSetting(key As String) As Integer
+    GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
+End Function
+Private Sub SetRegSetting(ByVal key As String, ByVal val As Integer)
+    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
 
 #If VBA7 Then
-Public Sub SetRegSettingLong(Key As String, val As LongPtr)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_DWORD"
+Public Sub SetRegSettingLong(key As String, val As LongPtr)
+    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
-Public Function GetRegSettingLong(Key As String) As LongPtr
-    GetRegSettingLong = CLngPtr(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key))
+Public Function GetRegSettingLong(key As String) As LongPtr
+    GetRegSettingLong = CLngPtr(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key))
 End Function
 #Else
-Public Sub SetRegSettingLong(Key As String, val As Long)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_DWORD"
+Public Sub SetRegSettingLong(key As String, val As Long)
+    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
-Public Function GetRegSettingLong(Key As String) As Long
-    GetRegSettingLong = CLng(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key))
+Public Function GetRegSettingLong(key As String) As Long
+    GetRegSettingLong = CLng(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key))
 End Function
 #End If
 
-Private Function GetRegSettingString(Key As String) As String
-    GetRegSettingString = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key)
+Private Function GetRegSettingString(key As String) As String
+    GetRegSettingString = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
 End Function
-Private Sub SetRegSettingString(Key As String, ByVal val As String)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_SZ"
+Private Sub SetRegSettingString(key As String, ByVal val As String)
+    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_SZ"
 End Sub
 

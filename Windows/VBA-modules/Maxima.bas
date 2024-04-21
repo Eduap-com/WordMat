@@ -160,7 +160,7 @@ Function GetMaxProc() As Object
         Set GetMaxProc = CreateObject("MaximaProcessClass")
     ElseIf DllConnType = 1 Then
         If QCheckPartnerShip Then
-            Set GetMaxProc = Application.Run("PGetMaxProc")
+            Set GetMaxProc = PGetMaxProc()
         ElseIf DllConnType = 0 Then ' QCheckPartnerShip kan ændre indstillingen
             Set GetMaxProc = CreateObject("MaximaProcessClass")
         End If
@@ -1679,7 +1679,7 @@ Sub beregn()
     '    MsgBox WordWindowNavn
     '    Dim omax As New CMaxima
     Dim fejlm As String
-    '    On Error GoTo fejl
+        On Error GoTo Fejl
     '    Application.ScreenUpdating = False
     '   LockWindow
     
