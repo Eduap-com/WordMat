@@ -404,33 +404,33 @@ slut:
 End Sub
 
 Function MikTexPath() As String
-Dim path As String
+Dim Path As String
      
-path = Environ("ProgramW6432") & "\MikTex*"
-If Dir(path, vbDirectory) <> "" Then
+Path = Environ("ProgramW6432") & "\MikTex*"
+If Dir(Path, vbDirectory) <> "" Then
    MikTex64bit = True
-   path = Environ("ProgramW6432") & "\" & Dir(path, vbDirectory) & "\miktex"
+   Path = Environ("ProgramW6432") & "\" & Dir(Path, vbDirectory) & "\miktex"
    GoTo slut
 End If
-path = Environ("ProgramFiles") & "\MikTex*"
-If Dir(path, vbDirectory) <> "" Then
+Path = Environ("ProgramFiles") & "\MikTex*"
+If Dir(Path, vbDirectory) <> "" Then
     MikTex64bit = False
-   path = Environ("ProgramFiles") & "\" & Dir(path, vbDirectory) & "\miktex"
+   Path = Environ("ProgramFiles") & "\" & Dir(Path, vbDirectory) & "\miktex"
    GoTo slut
 End If
 
-path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' hvis installeret i userprofile
-If Dir(path, vbDirectory) <> "" Then GoTo slut
+Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' hvis installeret i userprofile
+If Dir(Path, vbDirectory) <> "" Then GoTo slut
 
-path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' hvis installeret i userprofile
-If Dir(path, vbDirectory) <> "" Then GoTo slut
+Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' hvis installeret i userprofile
+If Dir(Path, vbDirectory) <> "" Then GoTo slut
 
 'path = GetProgramFilesDir() & "\MikTex*"
 'If Dir(path, vbDirectory) <> "" Then GoTo Slut
 
-path = ""
+Path = ""
 slut:
-MikTexPath = path
+MikTexPath = Path
 End Function
 Function IsMikTexInstalled() As Boolean
 If MikTexPath = "" Then

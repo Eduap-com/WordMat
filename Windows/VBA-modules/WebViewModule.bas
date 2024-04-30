@@ -18,7 +18,7 @@ Sub OpenWebV()
         Err.Clear
     Else
         If QCheckPartnerShip Then
-            Set WebV = Application.Run("PGetWebView")
+            Set WebV = PGetWebView()
         ElseIf DllConnType = 0 Then ' QCheckPartnerShip kan ændre indstillingen
             Set WebV = CreateObject("WebViewWrap.Browser")
         End If

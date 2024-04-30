@@ -360,16 +360,23 @@ Sub RunMaximaWSH(Optional StopTime As Integer)
     
     cmd = GetMaximaSettingsString & MaximaInputStreng
     If MaximaUnits Then
-        Moutp = Application.Run("ExecuteMaximaViaWSH", cmd, 10, True)
+        Application.Run macroname:="ExecuteMaximaViaWSH", varg1:=cmd, varg2:=10, varg3:=True, varg4:=True
+        If Err.Number = 513 Then
+            Moutp = Err.Description
+        End If
     Else
-        Moutp = Application.Run("ExecuteMaximaViaWSH", cmd, 10, False)
+        Application.Run macroname:="ExecuteMaximaViaWSH", varg1:=cmd, varg2:=10, varg3:=False, varg4:=True
+        If Err.Number = 513 Then
+            Moutp = Err.Description
+        End If
     End If
-    If Err = 0 Then
+    If Err.Number = 513 Then
         FindLastMaximaOutput True, Moutp
         ShowDebug False, cmd, Moutp
     Else
         MsgBox2 "Error connecting to Maxima using WSH", vbOKOnly, "Error"
     End If
+    Err.Clear
 End Sub
 Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) As String
 ' Converts a maxima expression, using the maxima-image with units loaded

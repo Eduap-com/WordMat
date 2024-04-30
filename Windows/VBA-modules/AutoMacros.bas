@@ -19,12 +19,9 @@ Private Declare PtrSafe Function CreateMutex Lib "kernel32" _
 
 Sub AutoExec()
 ' denne køres kun hvis filen er sat som globalskabelon. Altså ikke hvis den bare åbnes
+
 ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
-    If Sprog.SprogNr = 1 Then
-        AppNavn = "WordMat"
-    Else
-        AppNavn = "WordMath"
-    End If
+
 'Set oAppClass.oApp = Word.Application
 
 
@@ -38,6 +35,7 @@ ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
                 ' det forårsagede ændringer i normal.dot. Nu rykket til preparemaxima
 '    CustomizationContext = ActiveDocument.AttachedTemplate ' kan man ikke på dette tidspunkt i opstart
 SetAllDefaultRegistrySettings ' hvis ny bruger
+
 ReadAllSettingsFromRegistry
 AntalB = Antalberegninger
 
@@ -60,6 +58,11 @@ End If
  TriangleSett3 = False
  TriangleSett4 = False
 
+    If Sprog.SprogNr = 1 Then
+        AppNavn = "WordMat"
+    Else
+        AppNavn = "WordMath"
+    End If
 'If AutoStart Then ' WordMat start ret hurtigt op nu. Der er ikke meget fordel ved denne. Den giver bare potentielt problemer.
 '    PrepareMaximaNoSplash
 'End If

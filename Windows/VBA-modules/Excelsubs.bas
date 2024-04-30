@@ -27,7 +27,7 @@ DisableExcelMacros
 End Function
 
 Sub ExcelIns()
- Application.Run MacroName:="TableExcelSpreadsheetInsert"
+ Application.Run macroname:="TableExcelSpreadsheetInsert"
 End Sub
 Sub Chi2Test()
 #If Mac Then
@@ -292,20 +292,8 @@ Else
 End If
 End Sub
 Sub EnableExcelMacros()
-#If Mac Then
-#Else
-On Error Resume Next
-ExcelVBAWarning = val(RegKeyRead("HKEY_CURRENT_USER\Software\Microsoft\Office\" & Application.Version & "\Excel\Security\VBAWarnings"))
-
-Call RegKeySave("HKEY_CURRENT_USER\Software\Microsoft\Office\" & Application.Version & "\Excel\Security\VBAWarnings", "1", "REG_DWORD")
-#End If
+' Denne kode er fjernet, for at se om AntiVirus ikke reagerer
 End Sub
 Sub DisableExcelMacros()
-On Error Resume Next
-
-#If Mac Then
-#Else
-Call RegKeySave("HKEY_CURRENT_USER\Software\Microsoft\Office\" & Application.Version & "\Excel\Security\VBAWarnings", ByVal ExcelVBAWarning, "REG_DWORD")
-#End If
 End Sub
 

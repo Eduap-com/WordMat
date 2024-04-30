@@ -511,7 +511,7 @@ Sub ExcelPlot()
 Dim ws As Object
 Dim WB As Object
 
-Dim path As String
+Dim Path As String
 Dim ils As InlineShape
 Dim xmin As Double, xmax As Double
 Dim plinjer As Variant
@@ -541,7 +541,7 @@ Set ws = cxl.xlwb.Sheets("Tabel")
 
 Else
 
-path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
+Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
 PrepareMaximaNoSplash
 omax.GoToEndOfSelectedMaths
 'Selection.Collapse wdCollapseEnd
@@ -550,7 +550,7 @@ Selection.TypeParagraph
 
 EnableExcelMacros
 
-Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=path, LinkToFile:=False, _
+Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, _
 DisplayAsIcon:=False, Range:=Selection.Range)
 
 'Ils.Height = 300

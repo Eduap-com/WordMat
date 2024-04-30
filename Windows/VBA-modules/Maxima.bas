@@ -11,7 +11,7 @@ Private TempCas As Integer
 Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
     '    Dim UFwait2 As UserFormWaitForMaxima
 
-    On Error GoTo Fejl
+'    On Error GoTo Fejl
     Dim op As Boolean
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
@@ -144,7 +144,7 @@ finish:
     GoTo slut
 Fejl:
     On Error Resume Next
-    Unload UfWait2
+    If Not UfWait2 Is Nothing Then Unload UfWait2
     PrepareMaxima = False
 slut:
     On Error Resume Next
@@ -160,7 +160,7 @@ Function GetMaxProc() As Object
         Set GetMaxProc = CreateObject("MaximaProcessClass")
     ElseIf DllConnType = 1 Then
         If QCheckPartnerShip Then
-            Set GetMaxProc = Application.Run("PGetMaxProc")
+            Set GetMaxProc = PGetMaxProc()
         ElseIf DllConnType = 0 Then ' QCheckPartnerShip kan ændre indstillingen
             Set GetMaxProc = CreateObject("MaximaProcessClass")
         End If
@@ -1676,10 +1676,10 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub beregn()
-'    MsgBox WordWindowNavn
-'    Dim omax As New CMaxima
+    '    MsgBox WordWindowNavn
+    '    Dim omax As New CMaxima
     Dim fejlm As String
-'    On Error GoTo fejl
+        On Error GoTo Fejl
     '    Application.ScreenUpdating = False
     '   LockWindow
     
@@ -1727,7 +1727,7 @@ Sub beregn()
     
     If CASengine > 0 Then
         s = Trim(omax.Kommando)
-'        If Left(s, 1) = "=" Then s = Left(s, Len(s) - 1)
+        '        If Left(s, 1) = "=" Then s = Left(s, Len(s) - 1)
         s = GetCmdAfterEqualSign(s)
         If MaximaVidNotation Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
@@ -1755,9 +1755,9 @@ Sub beregn()
             If fo = "?" Or fo = "null" Or fo = "" Then
                 s = "numeric(" & s & " , " & MaximaCifre & ")"
             Else
-            ' det første resultat kan ikke bare fødes ind i GeoGebra igen. Det giver problemer i særlige tilfælde. Eksempel: '\cbrt(79/138)^(2)' Her burde være parentes. Den rigtige fortolkning er cbrt((79/138)^2), som kommer frem hvis den tastes og læses i Word. Hvis den køres direkte i WordMat oversætteren indsættes ikke korrekt parentes. Normalt ikke et problem, da alt normalt læses fra Word
-'                fo = omax.ReadFromWord(fo) ' forsøg på at omgå problem med at føde resulkat direkte ind i geogebra igen
-'                s = "numeric(" & fo & " , " & MaximaCifre & ")"
+                ' det første resultat kan ikke bare fødes ind i GeoGebra igen. Det giver problemer i særlige tilfælde. Eksempel: '\cbrt(79/138)^(2)' Her burde være parentes. Den rigtige fortolkning er cbrt((79/138)^2), som kommer frem hvis den tastes og læses i Word. Hvis den køres direkte i WordMat oversætteren indsættes ikke korrekt parentes. Normalt ikke et problem, da alt normalt læses fra Word
+                '                fo = omax.ReadFromWord(fo) ' forsøg på at omgå problem med at føde resulkat direkte ind i geogebra igen
+                '                s = "numeric(" & fo & " , " & MaximaCifre & ")"
                 s = "numeric(" & s & " , " & MaximaCifre & ")" ' Der er eksempler, hvor det er bedre at beregne numerisk videre på det eksakte resultat istedet for direkte på det originale, men pga ovenstående problematik
             End If
             MaximaExact = 2
@@ -1780,9 +1780,9 @@ Sub beregn()
     If CheckForError Then GoTo slut
     '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
 
-        Dim Oundo As UndoRecord
-        Set Oundo = Application.UndoRecord
-        Oundo.StartCustomRecord
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
     
     If Len(omax.MaximaOutput) > 0 And Trim(omax.MaximaOutput) <> "=res1" Then
         InsertOutput omax.MaximaOutput

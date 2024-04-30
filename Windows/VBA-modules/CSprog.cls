@@ -3380,7 +3380,7 @@ Public Property Get RibMath() As String
 Dim s As String
 Select Case SprogNr
 Case 1: s = "Mat"
-Case 3: s = "Matemáticas"
+Case 3: s = "Mat" 'Matemáticas
 Case 4: s = ""
 Case Else: s = "Math"
 End Select
