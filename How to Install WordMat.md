@@ -58,7 +58,7 @@ Shared\WordDocs              ->     /Library/Application support/Microsoft/Offic
 
 Copy these files 
 Mac/WordMatMac.dotm  ->  /Library/Application support/Microsoft/Office365/User Content/Add-ins/Startup/Word/
-Mac/Installer-files/WordMat/WordMatScripts.scpt    ->   ~/Library/Application Scripts/com.microsoft.Word/
+Mac/AppleScrips/WordMatScripts.scpt    ->   ~/Library/Application Scripts/com.microsoft.Word/
 Shared/Fonts/latin-modern-math.otf                 ->    /Library/Fonts/
 Shared/Fonts/lmroman12-regular.otf                 ->    /Library/Fonts/
 Mac/External-files/WordMat/M1/libzstd.1.5.5.dylib  ->   /opt/local/lib/
