@@ -183,6 +183,7 @@ On Error Resume Next
     LatexTitlePage = 0
     LatexTOC = 0
     CASengine = 0
+    DoubleTapM = 1
     
 '    End If
     End If

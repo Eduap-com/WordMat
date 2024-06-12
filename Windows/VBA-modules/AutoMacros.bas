@@ -40,9 +40,10 @@ ReadAllSettingsFromRegistry
 AntalB = Antalberegninger
 
 If AppVersion <> RegAppVersion Then ' hvis det er første gang WordMat startes efter en opdatering, Så her kan sættes indstillinger der skal ændres
-    If val(AppVersion) >= 1.28 Then
-        BackupType = 2 ' spørg ikke
-        SettCheckForUpdate = True
+    If val(AppVersion) >= 1.3 Then
+'        BackupType = 2 ' spørg ikke
+'        SettCheckForUpdate = True
+        DoubleTapM = 1
     End If
     RegAppVersion = AppVersion
 End If
