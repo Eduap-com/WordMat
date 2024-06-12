@@ -8,6 +8,7 @@ Dim SaveTime As Single
 Dim BackupAnswer As Integer
 Private UserDir As String
 Private tmpdir As String
+Private TapTime As Single
 #If Mac Then
     Private m_tempDoc As Document
 #Else
@@ -2394,14 +2395,22 @@ End Function
 
 Sub NewEquation()
     Dim r As Range
-'    On Error GoTo fejl
+    On Error GoTo Fejl
     On Error Resume Next
+    
+    If DoubleTapM = 1 Then
+        If Timer() - TapTime < 0.8 Then
+            Application.Run macroname:="ShowFormler"
+        End If
+        TapTime = Timer()
+    End If
+    
     If Selection.OMaths.Count = 0 Then
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then
         If Selection.OMaths(1).Range.Text = vbNullString Then
             Set r = Selection.OMaths.Add(Selection.Range)
-        Else
+        ElseIf DoubleTapM = 2 Then
             If Not Selection.Range.ListFormat.ListValue = 0 Then
                 Selection.Range.ListFormat.RemoveNumbers
             End If

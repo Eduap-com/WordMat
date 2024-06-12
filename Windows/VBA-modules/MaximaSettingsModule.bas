@@ -52,6 +52,7 @@ Private mLastUpdateCheck As String
 Private mRegAppVersion As String
 Private mDllConnType As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
 Private mInstallLocation As String ' All AppData
+Private mDoubleTapM As Integer ' 0= intet, 1=formelsamling, 2=num ligning
 
 Public Sub ReadAllSettingsFromRegistry()
 Dim setn As Integer
@@ -103,6 +104,7 @@ On Error Resume Next
     mLastUpdateCheck = GetRegSettingString("LastUpdateCheck")
     mDllConnType = CInt(GetRegSetting("DllConnType"))
     mInstallLocation = GetRegSetting("InstallLocation")
+    mDoubleTapM = GetRegSetting("DoubleTapM")
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -346,6 +348,13 @@ End Property
 Public Property Let EqNumType(ByVal Text As Boolean)
     SetRegSetting "EqNumType", Abs(CInt(Text))
     meqnumtype = Text
+End Property
+Public Property Get DoubleTapM() As Integer
+    DoubleTapM = mDoubleTapM
+End Property
+Public Property Let DoubleTapM(ByVal iVal As Integer)
+    SetRegSetting "DoubleTapM", iVal
+    mDoubleTapM = iVal
 End Property
 Public Property Get EqAskRef() As Boolean
     EqAskRef = maskref

@@ -185,6 +185,15 @@ On Error Resume Next
         DllConnType = 2
     End If
     
+    If OptionButton_DoubleTapMFormula.Value Then
+        DoubleTapM = 1
+    ElseIf OptionButton_DoubleTapMNummeretLigning.Value Then
+        DoubleTapM = 2
+    Else
+        DoubleTapM = 0
+    End If
+    
+    
     LanguageSetting = ComboBox_language.ListIndex
     Sprog.LoadSprogArray
     
@@ -527,6 +536,14 @@ Private Sub UserForm_Activate()
         OptionButton_directdll.Value = True
     Else
         OptionButton_WSH.Value = True
+    End If
+    
+    If DoubleTapM = 1 Then
+        OptionButton_DoubleTapMFormula.Value = True
+    ElseIf DoubleTapM = 2 Then
+        OptionButton_DoubleTapMNummeretLigning.Value = True
+    Else
+        OptionButton_DoubleTapMNothing.Value = True
     End If
     
     MustRestart = False
