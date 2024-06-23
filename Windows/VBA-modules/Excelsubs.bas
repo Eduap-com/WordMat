@@ -38,7 +38,7 @@ Sub Chi2Test()
     Dim r As Integer
     Dim c As Integer
     
-On Error GoTo Fejl
+On Error GoTo fejl
 'If (Selection.Rows.count < 2 Or Selection.Columns.count < 2) And Selection.Tables.count = 0 Then
 '    GoTo fejl
 'End If
@@ -82,7 +82,7 @@ If cxl.Below5 Or cxl.sum < 50 Then
 End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 Application.ScreenUpdating = True
@@ -172,7 +172,7 @@ xlsh.visible = -1 'xlSheetVisible
 'xlapp.EnableEvents = False
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 XLapp.ScreenUpdating = True
@@ -183,7 +183,7 @@ Function betcif(Optional ByVal tal As Double = 1, Optional ByVal cif As Integer 
 ' Returnerer tal med cif betydende cifre.
 ' hvis der ikke angives noget antal betydende cifre bruges 5
 Dim p As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
   
   If tal = 0 Then
     betcif = 0
@@ -213,7 +213,7 @@ Else
 End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Function
@@ -262,14 +262,14 @@ Function GetExcelSti() As String
 End Function
 Function InsertOpenExcel(FilNavn As String, Optional startark As String = "", Optional WorkBookName As String) As Object
 ' indsætter indlejret eller åbner afhængig af indstilling
-On Error GoTo Fejl
+On Error GoTo fejl
     If ExcelIndlejret Then
         Set InsertOpenExcel = InsertIndlejret(FilNavn, startark)
     Else
         Set InsertOpenExcel = OpenExcelWB(FilNavn, startark, WorkBookName)
     End If
 
-Fejl:
+fejl:
 End Function
 Sub Chi2Graf()
     InsertOpenExcel FilNavn:="Chi2Fordeling.xltm", WorkBookName:=Sprog.A(483)

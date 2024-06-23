@@ -25,7 +25,7 @@ Dim i As Integer, j As Integer, k As Integer, L As Integer, c As Integer
 Dim startrow As Integer
 Dim startcol As Integer
 Dim d As Double
-On Error GoTo Fejl
+On Error GoTo fejl
 
 r = 1
 c = 1
@@ -40,14 +40,14 @@ On Error GoTo hop
 r = Selection.Rows.Count
 c = Selection.Columns.Count
 hop:
-On Error GoTo Fejl
+On Error GoTo fejl
 If r < 2 Or c < 2 Then
-    If Selection.Tables.Count < 1 Then GoTo Fejl
+    If Selection.Tables.Count < 1 Then GoTo fejl
     Selection.Tables(1).Select
     r = Selection.Rows.Count
     c = Selection.Columns.Count
     If r < 2 Or c < 2 Then
-        GoTo Fejl
+        GoTo fejl
     End If
 End If
     On Error Resume Next
@@ -103,7 +103,7 @@ End If
     ReadSelection = True ' ingen fejl
 End If
 GoTo slut
-Fejl:
+fejl:
 '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelection = False
 slut:
@@ -126,14 +126,14 @@ On Error GoTo hop
 r = Selection.Rows.Count
 c = Selection.Columns.Count
 hop:
-On Error GoTo Fejl
+On Error GoTo fejl
 If r < 1 Or c < 1 Or (r = 1 And c = 1) Then
-    If Selection.Tables.Count < 1 Then GoTo Fejl
+    If Selection.Tables.Count < 1 Then GoTo fejl
     Selection.Tables(1).Select
     r = Selection.Rows.Count
     c = Selection.Columns.Count
     If r < 1 Or c < 1 Then
-        GoTo Fejl
+        GoTo fejl
     End If
 End If
     On Error Resume Next
@@ -164,7 +164,7 @@ End If
     ReadSelectionS = True ' ingen fejl
 End If
 GoTo slut
-Fejl:
+fejl:
 '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelectionS = False
 slut:
@@ -172,24 +172,24 @@ slut:
 End Function
 
 Public Function TabelCelle(r, c) As Double
-On Error GoTo Fejl
+On Error GoTo fejl
 If c > ncolumns Or r > nrows Then GoTo slut
 
 TabelCelle = Tabel(r, c)
 
 GoTo slut
-Fejl:
+fejl:
 slut:
 
 End Function
 Public Function TabelsCelle(r, c) As String
-On Error GoTo Fejl
+On Error GoTo fejl
 If c > ncolumns Or r > nrows Then GoTo slut
 
 TabelsCelle = tabels(r, c)
 
 GoTo slut
-Fejl:
+fejl:
 slut:
 
 End Function

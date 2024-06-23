@@ -28,7 +28,7 @@ Sub RunTestSequence()
     Dim s As String
     Dim AllR As Range
     
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ErrCount = 0
     TestCount = 0
     ContCount = 0
@@ -448,7 +448,7 @@ ggbtest:
     If TestSolveDE("y^'=b" & VBA.ChrW(183) & "y" & VBA.ChrW(183) & "(M-y)", "y,x", "y=-M e^(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x)/(c_1-e^(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x) )") Then GoTo slut
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Err.Description & vbCrLf & vbCrLf & "Error at test no.:" & TestCount + 1, vbOKOnly, "Error during test"
 slut:
     Selection.TypeParagraph

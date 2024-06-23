@@ -70,11 +70,11 @@ End If
 
 End Sub
 Public Sub CloseExcel()
-On Error GoTo Fejl
+On Error GoTo fejl
 xlwb.Close False ' close the workbook without saving
 XLapp.Quit ' close the Excel application
 
-Fejl:
+fejl:
 Set xlwb = Nothing
 Set XLapp = Nothing
 
@@ -104,7 +104,7 @@ If Err.Number <> 0 Then
 '    Set XLapp = New excel.Application
 End If
 GoTo slut
-Fejl:
+fejl:
     RestartExcel
 slut:
 End Sub
@@ -185,7 +185,7 @@ End If
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
 DisableExcelMacros
 GoTo slut
-Fejl:
+fejl:
     On Error Resume Next
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 '    Unload ufwait2
@@ -351,7 +351,7 @@ Dim j As Integer
 Dim n As Integer
 Dim oFS As Integer
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -399,7 +399,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
 End If
 
 If n < 2 Then
-    GoTo Fejl
+    GoTo fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -434,7 +434,7 @@ End If
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 

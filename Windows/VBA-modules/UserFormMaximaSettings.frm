@@ -39,7 +39,7 @@ End Sub
 Private Sub NulstilWordDoc(FilNavn As String)
 Dim appdir As String
 Dim fs As Object
-On Error GoTo Fejl
+On Error GoTo fejl
     
 If MsgBox(Sprog.A(665) & ", " & FilNavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo slut
     
@@ -59,7 +59,7 @@ End If
 #End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 

@@ -87,7 +87,7 @@ Sub AllTables()
     Next
 
     TextBox_status.Text = TextBox_status.Text & vbCrLf & "Test afsluttet. " & vbCrLf & "Der blev gennemført " & OkCount + ErrorCount & " test med " & ErrorCount & " fejl."
-Fejl:
+fejl:
 slut:
 End Sub
 

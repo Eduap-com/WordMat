@@ -411,7 +411,7 @@ Sub ConvertImagesToLatex(d As Document)
    Next
    
    GoTo slut
-Fejl:
+fejl:
    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure ConvertImagesToLatex, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
 slut:
 End Sub

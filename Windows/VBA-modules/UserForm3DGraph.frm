@@ -336,7 +336,7 @@ Dim Arr As Variant
 Dim i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser
 
-On Error GoTo Fejl
+On Error GoTo fejl
 'Me.Hide
 Label_vent.visible = True
 colindex = 0
@@ -603,7 +603,7 @@ End If
     omax.PrepareNewCommand
     Label_vent.visible = False
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 

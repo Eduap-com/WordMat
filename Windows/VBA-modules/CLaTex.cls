@@ -237,7 +237,7 @@ End Function
 
 Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
 Dim filren As String, s As String
-On Error GoTo Fejl
+On Error GoTo fejl
 
    UfWait.Label_tip.Caption = "Gemmer Tex-fil"
 LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
@@ -251,7 +251,7 @@ On Error GoTo 0
 WriteTextfileToString Mappe & "\" & FilNavn, LaTexDoc
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
 slut:
 
@@ -287,7 +287,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
       On Error Resume Next
       If Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Then Kill Mappe & "\" & FilNavn & ".dvi"
       'Kill Mappe & "\" & filnavn & ".dvi"
-      On Error GoTo Fejl
+      On Error GoTo fejl
 
       appnr = Shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
 
@@ -309,7 +309,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
 
    'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
    GoTo slut
-Fejl:
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 #End If
@@ -322,7 +322,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    Dim i As Integer, j As Integer
    Dim mtpath As String, ReRun As Boolean
    
-      On Error GoTo Fejl
+      On Error GoTo fejl
 #If Mac Then
    MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
 #Else
@@ -398,7 +398,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    End If
 #End If
    GoTo slut
-Fejl:
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
