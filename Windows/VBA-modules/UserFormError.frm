@@ -42,7 +42,7 @@ Sub SetErrorDefinition(ED As ErrorDefinition)
     If ED.DefFejl Then
         Label_definitioner.visible = True
         TextBox_definitioner.visible = True
-        TextBox_definitioner.Text = FormatDefinitions(omax.DefString)
+        TextBox_definitioner.text = FormatDefinitions(omax.DefString)
     Else
         Label_definitioner.visible = False
         TextBox_definitioner.visible = False

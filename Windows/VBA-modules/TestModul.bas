@@ -673,15 +673,15 @@ Sub GetTestString()
     Selection.TypeText (s)
 
 End Sub
-Function ConvertToVBAString(Text As String) As String
+Function ConvertToVBAString(text As String) As String
     Dim s As String, j As Integer, i As Integer
     s = ""
-    For j = 1 To Len(Text)
-        i = AscW(Mid(Text, j, 1))
+    For j = 1 To Len(text)
+        i = AscW(Mid(text, j, 1))
         If i > 200 Or i = 183 Then
             s = s & """ & VBA.ChrW(" & i & ") & """
         Else
-            s = s & Mid(Text, j, 1)
+            s = s & Mid(text, j, 1)
         End If
     Next
     If Left(s, 4) = """ & " Then
@@ -769,7 +769,7 @@ End Sub
 Sub testGetListItem()
 Dim ea As New ExpressionAnalyser
 
-ea.Text = "dette er[ad;sdfs] en test ; hej(a;b{1;2}) ;{a;d} hallo"
+ea.text = "dette er[ad;sdfs] en test ; hej(a;b{1;2}) ;{a;d} hallo"
 
 MsgBox ea.GetNextListItem()
 MsgBox ea.GetNextListItem()
@@ -861,7 +861,7 @@ Sub unicodevals()
     Dim s As String
     Dim i As Integer
     Dim c As Range
-    MsgBox Selection.Text
+    MsgBox Selection.text
     For Each c In Selection.Characters
         i = AscW(c)
         s = s & c & " - " & i & vbCrLf
@@ -871,20 +871,20 @@ Sub unicodevals()
 End Sub
 
 Sub unicodevals2()
-    Dim Text As String
+    Dim text As String
     Dim i As Integer
     Dim j As Integer
     Dim s As String
     Selection.OMaths.Linearize
     Selection.OMaths(1).ConvertToNormalText
-    Text = Selection.Text
+    text = Selection.text
     Selection.OMaths(1).ConvertToMathText
     Selection.OMaths(1).Range.Select
     Selection.OMaths.BuildUp
 
-    For j = 1 To Len(Text)
-        i = AscW(Mid(Text, j, 1))
-        s = s & Mid(Text, j, 1) & " - " & i & vbCrLf
+    For j = 1 To Len(text)
+        i = AscW(Mid(text, j, 1))
+        s = s & Mid(text, j, 1) & " - " & i & vbCrLf
     Next
     MsgBox s
 
@@ -892,7 +892,7 @@ End Sub
 Sub UnicodeValsToString()
 ' laver alle Omaths i selection om til en streng der kan indsættes i VBA-kode. Bruges primært til testmodul
 ' Strengene indsættes efter selection i rækkefølge. Hver på ny linje
-    Dim Text As String
+    Dim text As String
     Dim j As Integer
     Dim i As Integer
     Dim k As Integer, n As Integer
@@ -916,7 +916,7 @@ Sub UnicodeValsToString()
         Set mo = MoArr(k)
         mo.Linearize
         mo.ConvertToNormalText
-        Arr(k) = Trim(mo.Range.Text)
+        Arr(k) = Trim(mo.Range.text)
         mo.ConvertToMathText
         mo.Range.Select
         mo.BuildUp
@@ -925,14 +925,14 @@ Sub UnicodeValsToString()
     Selection.EndKey Unit:=wdLine
 
     For k = 0 To UBound(Arr)
-        Text = Arr(k)
+        text = Arr(k)
         s = ""
-        For j = 1 To Len(Text)
-            i = AscW(Mid(Text, j, 1))
+        For j = 1 To Len(text)
+            i = AscW(Mid(text, j, 1))
             If i > 200 Or i = 183 Then
                 s = s & """ & VBA.ChrW(" & i & ") & """
             Else
-                s = s & Mid(Text, j, 1)
+                s = s & Mid(text, j, 1)
             End If
         Next
         If Left(s, 4) = """ & " Then

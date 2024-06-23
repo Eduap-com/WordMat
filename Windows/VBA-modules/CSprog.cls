@@ -13,6 +13,11 @@ Private SA(800, 5) As String
 
 Private Sub Class_Initialize()
     CheckSetting
+    If Sprog.SprogNr = 1 Then
+        AppNavn = "WordMat"
+    Else
+        AppNavn = "WordMath"
+    End If
     LoadSprogArray
 End Sub
 Public Sub CheckSetting()
@@ -3369,7 +3374,7 @@ End Sub
 Public Property Get RibFormulae() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Formelsamling"
+Case 1: s = "Formler"
 Case 3: s = "Formulario"
 Case 4: s = ""
 Case Else: s = "Formulae"

@@ -102,7 +102,7 @@ Private Sub CommandButton_ok_Click()
 On Error Resume Next
     Dim UnitChanged As Boolean
     
-    If InStr(TextBox_outunits.Text, "/") > 0 Or InStr(TextBox_outunits.Text, "*") > 0 Or InStr(TextBox_outunits.Text, "^") > 0 Then
+    If InStr(TextBox_outunits.text, "/") > 0 Or InStr(TextBox_outunits.text, "*") > 0 Or InStr(TextBox_outunits.text, "^") > 0 Then
         MsgBox Sprog.A(343)
         MultiPage1.Value = 2
         TextBox_outunits.SetFocus
@@ -216,8 +216,8 @@ On Error Resume Next
     dAsDiffChr = CheckBox_dasdiffchr.Value
     EqAskRef = CheckBox_askref.Value
     BackupType = ComboBox_backup.ListIndex
-    BackupMaxNo = ComboBox_backupno.Text
-    BackupTime = ComboBox_backuptime.Text
+    BackupMaxNo = ComboBox_backupno.text
+    BackupTime = ComboBox_backuptime.text
     
     If MaximaUnits <> CheckBox_units.Value Then
         MaximaUnits = CheckBox_units.Value
@@ -229,8 +229,8 @@ On Error Resume Next
         End If
     End If
     
-    If OutUnits <> TextBox_outunits.Text Then
-        OutUnits = TextBox_outunits.Text
+    If OutUnits <> TextBox_outunits.text Then
+        OutUnits = TextBox_outunits.text
         UserUnits = True
     End If
         
@@ -340,7 +340,7 @@ Private Sub CommandButton_shortcuts_Click()
 End Sub
 
 Private Sub CommandButton_sletenheder_Click()
-    TextBox_outunits.Text = ""
+    TextBox_outunits.text = ""
 End Sub
 
 Private Sub Label_checkpartnerskab_Click()
@@ -418,7 +418,7 @@ Private Sub UserForm_Activate()
     CheckBox_units.Value = MaximaUnits
     CheckBox_vidnotation.Value = MaximaVidNotation
     CheckBox_indlejret.Value = ExcelIndlejret
-    TextBox_outunits.Text = OutUnits
+    TextBox_outunits.text = OutUnits
     CheckBox_autostart2.Value = AutoStart
     CheckBox_checkupdate.Value = SettCheckForUpdate
     CheckBox_bigfloat.Value = MaximaBigFloat
@@ -432,8 +432,8 @@ Private Sub UserForm_Activate()
     ComboBox_language.ListIndex = LanguageSetting
     
     ComboBox_backup.ListIndex = BackupType
-    ComboBox_backupno.Text = BackupMaxNo
-    ComboBox_backuptime.Text = BackupTime
+    ComboBox_backupno.text = BackupMaxNo
+    ComboBox_backuptime.text = BackupTime
 
     If CheckBox_complex.Value Then
         CheckBox_polaroutput.visible = True

@@ -110,7 +110,7 @@ On Error GoTo fejl
 
     lastOutput = ""
     
-    ea.Text = Command
+    ea.text = Command
     nocmd = ea.CountText(";") + ea.CountText("$")
     mIndex = mIndex + nocmd
         

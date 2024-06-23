@@ -117,6 +117,22 @@ End Sub
 'slut:
 'End Sub
 
+'Callback for comboBoxNum onChange
+Sub Rib_CBcifre(control As IRibbonControl, text As String)
+On Error Resume Next
+    If IsNumeric(text) Then
+        Dim n As Integer
+        n = CInt(text)
+        If n >= 2 And n <= 16 Then
+            MaximaCifre = n
+        End If
+    End If
+End Sub
+'Callback for comboBoxNum getText
+Sub CBgetText(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = MaximaCifre
+End Sub
+
 'Callback for Button4 onAction
 Sub Rib_FSkapital(control As IRibbonControl)
     If Sprog.SprogNr = 1 Then
@@ -1475,7 +1491,7 @@ Sub Rib_GetLabelMaximaHelp(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(0)
 End Sub
 Sub Rib_GetLabelAbout(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.About
+    returnedVal = Sprog.About & " " & AppNavn
 End Sub
 Sub Rib_GetLabelUpdate(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.Update

@@ -37,7 +37,7 @@ Function CheckForError() As Boolean
 '            Else
 '                ED.Description = ED.Description & vbCrLf & vbCrLf & Sprog.DefError3
 '            End If
-            UserFormError.TextBox_definitioner.Text = FormatDefinitions(omax.DefString) 'DefinitionsNice
+            UserFormError.TextBox_definitioner.text = FormatDefinitions(omax.DefString) 'DefinitionsNice
         Else
             UserFormError.TextBox_definitioner.visible = False
             UserFormError.Label_definitioner.visible = False
@@ -128,15 +128,15 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     
 End Function
 
-Function GetErrorText(Text As String, MaximaOutput As String) As String
+Function GetErrorText(text As String, MaximaOutput As String) As String
 ' used by GetErrorDefinition()
     Dim Pos As Integer, pos2 As Integer, pos4 As Integer
     Dim t As String
     Dim L As Integer
     On Error Resume Next
-    L = Len(Text)
+    L = Len(text)
     Pos = InStr(MaximaOutput, "incorrectsyntax")
-    pos2 = InStr(Pos, MaximaOutput, Text)
+    pos2 = InStr(Pos, MaximaOutput, text)
     pos4 = InStr(pos2 + L, MaximaOutput, "^")
     If pos4 < 1 Then
         pos4 = Len(MaximaOutput)

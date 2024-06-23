@@ -78,12 +78,12 @@ Public Sub Plot2DGraph()
     If Selection.Tables.Count > 0 Then
         Dim Cregr As New CRegression, xmin As Double, xmax As Double
         Cregr.GetTableData
-        If UF2Dgraph.TextBox_punkter.Text <> "" Then UF2Dgraph.TextBox_punkter.Text = UF2Dgraph.TextBox_punkter.Text & VbCrLfMac
+        If UF2Dgraph.TextBox_punkter.text <> "" Then UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & VbCrLfMac
         xmin = Cregr.XValues(1)
         xmax = Cregr.XValues(1)
         For j = 1 To UBound(Cregr.XValues)
 '            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & CStr(Cregr.XValues(j)) & ListSeparator & CStr(Cregr.YValues(j)) & vbCrLf
-            UF2Dgraph.TextBox_punkter.Text = UF2Dgraph.TextBox_punkter.Text & ConvertNumber(Cregr.XValues(j)) & ListSeparator & ConvertNumber(Cregr.YValues(j)) & VbCrLfMac
+            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & ConvertNumber(Cregr.XValues(j)) & ListSeparator & ConvertNumber(Cregr.YValues(j)) & VbCrLfMac
             If Cregr.XValues(j) > xmax Then xmax = Cregr.XValues(j)
             If Cregr.XValues(j) < xmin Then xmin = Cregr.XValues(j)
         Next
@@ -117,32 +117,32 @@ Arr = Split(Ligning, "=")
 'End If
 Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(Arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
 
-If UF2Dgraph.TextBox_ligning1.Text = Ligning Then
+If UF2Dgraph.TextBox_ligning1.text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning2.Text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning2.text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning3.Text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning3.text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning4.Text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning4.text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning5.Text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning5.text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning6.Text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning6.text = Ligning Then
     Exit Sub
 End If
 
-If UF2Dgraph.TextBox_ligning1.Text = "" Then
-    UF2Dgraph.TextBox_ligning1.Text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning2.Text = "" Then
-    UF2Dgraph.TextBox_ligning2.Text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning3.Text = "" Then
-    UF2Dgraph.TextBox_ligning3.Text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning4.Text = "" Then
-    UF2Dgraph.TextBox_ligning4.Text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning5.Text = "" Then
-    UF2Dgraph.TextBox_ligning5.Text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning6.Text = "" Then
-    UF2Dgraph.TextBox_ligning6.Text = Ligning
+If UF2Dgraph.TextBox_ligning1.text = "" Then
+    UF2Dgraph.TextBox_ligning1.text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning2.text = "" Then
+    UF2Dgraph.TextBox_ligning2.text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning3.text = "" Then
+    UF2Dgraph.TextBox_ligning3.text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning4.text = "" Then
+    UF2Dgraph.TextBox_ligning4.text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning5.text = "" Then
+    UF2Dgraph.TextBox_ligning5.text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning6.text = "" Then
+    UF2Dgraph.TextBox_ligning6.text = Ligning
 End If
 GoTo slut
 fejl:
@@ -173,7 +173,7 @@ Sub PlotDF()
             MsgBox2 Sprog.EquationMissingError2, vbOKOnly, "Error"
             Exit Sub
         End If
-        ea.Text = s
+        ea.text = s
         V = ea.GetNextVar
         If V <> "x" And V <> "y" Then
             If V = "t" Then
@@ -184,11 +184,11 @@ Sub PlotDF()
                 ea.ReplaceVar V, "y"
             End If
         End If
-        s = ea.Text
+        s = ea.text
         s = "SlopeField(" & s & ");"
         s = s & "A=(1, 2);Xmin=-100;Xmax=100;Tic=0.1;"
-        s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
-        s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmax, Tic)"
+        s = s & "SolveODE(" & ea.text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
+        s = s & "SolveODE(" & ea.text & ", x(A), y(A), Xmax, Tic)"
         OpenGeoGebraWeb s, "Classic", True, True
         GoTo slut
 #If Mac Then
@@ -204,24 +204,24 @@ Sub PlotDF()
     Arr = Split(omax.Kommando, "=")
     omax.Kommando = Arr(UBound(Arr))
     End If
-    UF2Dgraph.TextBox_dfligning.Text = omax.ConvertToAscii(omax.Kommando)
+    UF2Dgraph.TextBox_dfligning.text = omax.ConvertToAscii(omax.Kommando)
     
     omax.FindVariable
     If InStr(omax.vars, "x") > 0 Then
-        UF2Dgraph.TextBox_dfx.Text = "x"
+        UF2Dgraph.TextBox_dfx.text = "x"
     ElseIf InStr(omax.vars, "t") > 0 Then
-        UF2Dgraph.TextBox_dfx.Text = "t"
+        UF2Dgraph.TextBox_dfx.text = "t"
     Else
-        UF2Dgraph.TextBox_dfx.Text = "x"
+        UF2Dgraph.TextBox_dfx.text = "x"
     End If
     If InStr(omax.vars, "y") > 0 Then
-        UF2Dgraph.TextBox_dfy.Text = "y"
+        UF2Dgraph.TextBox_dfy.text = "y"
     ElseIf InStr(omax.vars, "N") > 0 Then
-        UF2Dgraph.TextBox_dfy.Text = "N"
+        UF2Dgraph.TextBox_dfy.text = "N"
     Else
-        ea.Text = omax.vars
-        UF2Dgraph.TextBox_dfy.Text = ea.GetNextVar
-        If UF2Dgraph.TextBox_dfy.Text = "" Then UF2Dgraph.TextBox_dfy.Text = "y"
+        ea.text = omax.vars
+        UF2Dgraph.TextBox_dfy.text = ea.GetNextVar
+        If UF2Dgraph.TextBox_dfy.text = "" Then UF2Dgraph.TextBox_dfy.text = "y"
     End If
 
 
@@ -348,14 +348,14 @@ Dim i As Integer
                     Arr = Split(Udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
-                    ea.Text = lhs
+                    ea.text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     If lhs = fktnavn & "(" & varnavn & ")" Then
-                        ea.Text = rhs
+                        ea.text = rhs
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
-                        fktudtryk = ea.Text
+                        fktudtryk = ea.text
                         DefinerKonstanterGraph fktudtryk, DefList, graphfil
                         graphfil.InsertFunction fktudtryk
                     Else
@@ -441,9 +441,9 @@ Sub DefinerKonstanterGraph(Expr As String, DefList As String, ByRef graphfil As 
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim Var As String
-    ea.Text = DefList
-    If noty Then ea.Text = ea.Text & ",y"
-    ea2.Text = Expr
+    ea.text = DefList
+    If noty Then ea.text = ea.text & ",y"
+    ea2.text = Expr
     ea2.Pos = 0
     Do
         Var = ea2.GetNextVar
@@ -462,7 +462,7 @@ Function ReplaceIndepvarX(fkt As String, Optional ByRef uvar = "") As String
 Dim ea As New ExpressionAnalyser
 Dim Var As String
 'Dim uvar As String
-ea.Text = fkt
+ea.text = fkt
 Var = ea.GetNextVar
 ReplacedVar = "x"
 If Not (ea.ContainsVar("x")) And Var <> "" And Var <> "matrix" Then
@@ -479,7 +479,7 @@ If Not (ea.ContainsVar("x")) And Var <> "" And Var <> "matrix" Then
     ReplacedVar = uvar
 End If
 
-ReplaceIndepvarX = ea.Text
+ReplaceIndepvarX = ea.text
 End Function
 Sub InsertChart()
 Dim WB As Object
@@ -560,7 +560,7 @@ End If
                     Arr = Split(Udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
-                    ea.Text = lhs
+                    ea.text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
 '                    If varnavn = "" And fktnavn = Y Then varnavn = X
@@ -727,14 +727,14 @@ End If
                     Arr = Split(Udtryk, "=")
                     lhs = Arr(0)
                     rhs = Arr(1)
-                    ea.Text = lhs
+                    ea.text = lhs
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     If lhs = fktnavn & "(" & varnavn & ")" Then
-                        ea.Text = rhs
+                        ea.text = rhs
                         ea.Pos = 1
 '                        ea.ReplaceVar varnavn, "x"
-                        fktudtryk = ea.Text
+                        fktudtryk = ea.text
 '                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
                         ws.Range("b4").Offset(0, i).Value = fktudtryk
                         ws.Range("B1").Offset(0, i).Value = varnavn
@@ -849,17 +849,17 @@ End Sub
 
 Function ReadTextFile(fil As String) As String
 Dim filno As Integer
-Dim linje, Text As String
+Dim linje, text As String
 filno = FreeFile
 
 Open fil For Input As filno
 Do While Not EOF(filno) ' Loop until end of file.
   Line Input #filno, linje
-   Text = Text & vbCrLf & linje
+   text = text & vbCrLf & linje
 Loop
 Close filno
 
-ReadTextFile = Text
+ReadTextFile = text
 End Function
 Sub TestEmbed()
 Dim Path As String
@@ -982,44 +982,44 @@ End Sub
 Sub InsertTrappediagram()
     InsertOpenExcel "TrappeDiagram.xltm"
 End Sub
-Function ConvertDrawLabel(Text As String) As String
+Function ConvertDrawLabel(text As String) As String
 ' konverterer tegn til draw2d plot
 'text = Replace(text, "", "")
 'text = Replace(text, "", "")
 'text = Replace(text, "", "")
 
-    Text = Replace(Text, VBA.ChrW(916), "{/Symbol D}")
-    Text = Replace(Text, VBA.ChrW(948), "{/Symbol d}")
-    Text = Replace(Text, VBA.ChrW(945), "{/Symbol a}")
-    Text = Replace(Text, VBA.ChrW(946), "{/Symbol b}")
-    Text = Replace(Text, VBA.ChrW(947), "{/Symbol g}")
-    Text = Replace(Text, VBA.ChrW(952), "{/Symbol t}") 'theta
-    Text = Replace(Text, VBA.ChrW(920), "{/Symbol T}")
-    Text = Replace(Text, VBA.ChrW(955), "{/Symbol l}")
-    Text = Replace(Text, VBA.ChrW(923), "{/Symbol L}")
-    Text = Replace(Text, VBA.ChrW(956), "{/Symbol m}")
-    Text = Replace(Text, VBA.ChrW(961), "{/Symbol r}") ' rho
-    Text = Replace(Text, VBA.ChrW(963), "{/Symbol s}")
-    Text = Replace(Text, VBA.ChrW(931), "{/Symbol S}")
-    Text = Replace(Text, VBA.ChrW(981), "{/Symbol p}") ' phi
-    Text = Replace(Text, VBA.ChrW(934), "{/Symbol P}")
-    Text = Replace(Text, VBA.ChrW(949), "{/Symbol v}") 'varepsilon
-    Text = Replace(Text, VBA.ChrW(1013), "{/Symbol e}") 'epsilon
-    Text = Replace(Text, VBA.ChrW(968), "{/Symbol p}") 'psi
-    Text = Replace(Text, VBA.ChrW(936), "{/Symbol P}")
-    Text = Replace(Text, VBA.ChrW(926), "{/Symbol X}") 'xi
-    Text = Replace(Text, VBA.ChrW(958), "{/Symbol x}")
-    Text = Replace(Text, VBA.ChrW(935), "{/Symbol C}") 'chi
-    Text = Replace(Text, VBA.ChrW(967), "{/Symbol c}")
-    Text = Replace(Text, VBA.ChrW(928), "{/Symbol Pi}")
-    Text = Replace(Text, VBA.ChrW(964), "{/Symbol t}") 'tau
-    Text = Replace(Text, VBA.ChrW(957), "{/Symbol n}") 'greeknu
-    Text = Replace(Text, VBA.ChrW(954), "{/Symbol k}") 'kappa
-    Text = Replace(Text, VBA.ChrW(951), "{/Symbol e}") 'eta
-    Text = Replace(Text, VBA.ChrW(950), "{/Symbol z}") 'zeta
+    text = Replace(text, VBA.ChrW(916), "{/Symbol D}")
+    text = Replace(text, VBA.ChrW(948), "{/Symbol d}")
+    text = Replace(text, VBA.ChrW(945), "{/Symbol a}")
+    text = Replace(text, VBA.ChrW(946), "{/Symbol b}")
+    text = Replace(text, VBA.ChrW(947), "{/Symbol g}")
+    text = Replace(text, VBA.ChrW(952), "{/Symbol t}") 'theta
+    text = Replace(text, VBA.ChrW(920), "{/Symbol T}")
+    text = Replace(text, VBA.ChrW(955), "{/Symbol l}")
+    text = Replace(text, VBA.ChrW(923), "{/Symbol L}")
+    text = Replace(text, VBA.ChrW(956), "{/Symbol m}")
+    text = Replace(text, VBA.ChrW(961), "{/Symbol r}") ' rho
+    text = Replace(text, VBA.ChrW(963), "{/Symbol s}")
+    text = Replace(text, VBA.ChrW(931), "{/Symbol S}")
+    text = Replace(text, VBA.ChrW(981), "{/Symbol p}") ' phi
+    text = Replace(text, VBA.ChrW(934), "{/Symbol P}")
+    text = Replace(text, VBA.ChrW(949), "{/Symbol v}") 'varepsilon
+    text = Replace(text, VBA.ChrW(1013), "{/Symbol e}") 'epsilon
+    text = Replace(text, VBA.ChrW(968), "{/Symbol p}") 'psi
+    text = Replace(text, VBA.ChrW(936), "{/Symbol P}")
+    text = Replace(text, VBA.ChrW(926), "{/Symbol X}") 'xi
+    text = Replace(text, VBA.ChrW(958), "{/Symbol x}")
+    text = Replace(text, VBA.ChrW(935), "{/Symbol C}") 'chi
+    text = Replace(text, VBA.ChrW(967), "{/Symbol c}")
+    text = Replace(text, VBA.ChrW(928), "{/Symbol Pi}")
+    text = Replace(text, VBA.ChrW(964), "{/Symbol t}") 'tau
+    text = Replace(text, VBA.ChrW(957), "{/Symbol n}") 'greeknu
+    text = Replace(text, VBA.ChrW(954), "{/Symbol k}") 'kappa
+    text = Replace(text, VBA.ChrW(951), "{/Symbol e}") 'eta
+    text = Replace(text, VBA.ChrW(950), "{/Symbol z}") 'zeta
 
 
-ConvertDrawLabel = Text
+ConvertDrawLabel = text
 End Function
 
 

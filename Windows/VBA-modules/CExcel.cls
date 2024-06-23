@@ -384,7 +384,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
     On Error Resume Next
     For i = 1 To n ' bestem hvor der ligger tal
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.Text
+        cellval = rws(i).Cells(j).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         tal = CDbl(cellval)
@@ -411,13 +411,13 @@ End If
     For j = 1 To n
         i = i + 1
 
-        cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
+        cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         Tabel(i, 1) = CDbl(cellval) ' skal med for at melde fejl , men alene duer ikke da den er afh af sprog indstill
         Tabel(i, 1) = val(cellval) 'melder ikke fejl ved bogstaver
-        cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
+        cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")

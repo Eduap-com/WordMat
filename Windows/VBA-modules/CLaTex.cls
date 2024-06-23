@@ -439,63 +439,63 @@ Else
     IsMikTexInstalled = True
 End If
 End Function
-Sub InsertText(Text As String)
-    LaTexDoc = LaTexDoc & Text ' & vbCr
+Sub InsertText(text As String)
+    LaTexDoc = LaTexDoc & text ' & vbCr
 End Sub
-Sub InsertParagraph(Text As String)
-   If Text = "" Or Text = vbCrLf Or Text = vbCr Or Text = vbLf Then
+Sub InsertParagraph(text As String)
+   If text = "" Or text = vbCrLf Or text = vbCr Or text = vbLf Then
       LaTexDoc = LaTexDoc & vbCrLf
    Else
-    LaTexDoc = LaTexDoc & vbCrLf & Text & vbCrLf
+    LaTexDoc = LaTexDoc & vbCrLf & text & vbCrLf
 '    LaTexDoc = LaTexDoc & "\paragraph{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertChapter(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+Sub InsertChapter(text As String)
+   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
     
-   If InStr(Text, "*") > 0 Then
-      LaTexDoc = LaTexDoc & "\chapter*{" & Replace(Text, "*", "") & "}" & vbCrLf
+   If InStr(text, "*") > 0 Then
+      LaTexDoc = LaTexDoc & "\chapter*{" & Replace(text, "*", "") & "}" & vbCrLf
    Else
-      LaTexDoc = LaTexDoc & "\chapter{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\chapter{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+Sub InsertSection(text As String)
+   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(Text, "*") > 0 Then
-         LaTexDoc = LaTexDoc & "\section*{" & Replace(Text, "*", "") & "}" & vbCrLf
+      If InStr(text, "*") > 0 Then
+         LaTexDoc = LaTexDoc & "\section*{" & Replace(text, "*", "") & "}" & vbCrLf
       Else
-         LaTexDoc = LaTexDoc & "\section{" & Text & "}" & vbCrLf
+         LaTexDoc = LaTexDoc & "\section{" & text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\section*{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\section*{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSubSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+Sub InsertSubSection(text As String)
+   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(Text, "*") > 0 Then
-      LaTexDoc = LaTexDoc & "\subsection*{" & Replace(Text, "*", "") & "}" & vbCrLf
+      If InStr(text, "*") > 0 Then
+      LaTexDoc = LaTexDoc & "\subsection*{" & Replace(text, "*", "") & "}" & vbCrLf
       Else
-      LaTexDoc = LaTexDoc & "\subsection{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsection{" & text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\subsection*{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsection*{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSubSubSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+Sub InsertSubSubSection(text As String)
+   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(Text, "*") > 0 Then
-         LaTexDoc = LaTexDoc & "\subsubsection*{" & Replace(Text, "*", "") & "}" & vbCrLf
+      If InStr(text, "*") > 0 Then
+         LaTexDoc = LaTexDoc & "\subsubsection*{" & Replace(text, "*", "") & "}" & vbCrLf
       Else
-         LaTexDoc = LaTexDoc & "\subsubsection{" & Text & "}" & vbCrLf
+         LaTexDoc = LaTexDoc & "\subsubsection{" & text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\subsubsection*{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsubsection*{" & text & "}" & vbCrLf
    End If
 End Sub
 

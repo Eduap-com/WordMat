@@ -21,12 +21,12 @@ Private Sub Label_cancel_Click()
 End Sub
 
 Private Sub Label_ok_Click()
-    EqName = ListBox1.Text
+    EqName = ListBox1.text
     Me.Hide
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    EqName = ListBox1.Text
+    EqName = ListBox1.text
     Me.Hide
 End Sub
 

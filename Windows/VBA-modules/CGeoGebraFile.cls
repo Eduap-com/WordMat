@@ -571,9 +571,9 @@ End Sub
 
 'End Sub
 
-Function ConvertToGeogebraSyntaxFile(ByVal Text As String, Optional ConvertMaxima As Boolean = True) As String
+Function ConvertToGeogebraSyntaxFile(ByVal text As String, Optional ConvertMaxima As Boolean = True) As String
 
-   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(Text, ConvertMaxima, False)
+   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(text, ConvertMaxima, False)
 End Function
 
 

@@ -59,11 +59,6 @@ End If
  TriangleSett3 = False
  TriangleSett4 = False
 
-    If Sprog.SprogNr = 1 Then
-        AppNavn = "WordMat"
-    Else
-        AppNavn = "WordMath"
-    End If
 'If AutoStart Then ' WordMat start ret hurtigt op nu. Der er ikke meget fordel ved denne. Den giver bare potentielt problemer.
 '    PrepareMaximaNoSplash
 'End If
