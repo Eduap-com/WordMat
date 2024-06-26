@@ -998,7 +998,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     ea.SetNormalBrackets
     ea2.SetNormalBrackets
     geogebrafil.Show3D = False
-    
+    PrepareMaxima
     'geogebrasti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     omax.ConvertLnLog = False
 #If Mac Then

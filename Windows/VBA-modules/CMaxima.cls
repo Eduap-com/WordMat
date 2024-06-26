@@ -6244,7 +6244,7 @@ slut:
         r.text = VBA.ChrW(13)
     End If
 End Sub
-Sub GoToEndOfSelectedMaths()
+Sub GoToEndOfSelectedMaths(Optional DontGoBack As Boolean = False)
     Dim mc As OMaths
     Dim i As Integer
     
@@ -6266,7 +6266,7 @@ Sub GoToEndOfSelectedMaths()
         mc(mc.Count).ParentOMath.Range.Select
         On Error GoTo slut
         mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
-    Else
+    ElseIf Not DontGoBack Then
         i = 0
         Do While Selection.OMaths.Count = 0 And i < 100
             Selection.MoveLeft wdCharacter, 1

@@ -1653,19 +1653,31 @@ Function NotZero(i As Integer) As Integer
 End Function
 
 Sub TabelToList()
-Dim dd As New DocData
-Dim om As Range
-On Error GoTo fejl
-PrepareMaxima
-dd.ReadSelectionS
+    Dim dd As New DocData
+    Dim om As Range
+    On Error GoTo fejl
+    If Selection.Range.Tables.Count = 0 Then
+        If Sprog.SprogNr = 1 Then
+            MsgBox "Du skal markere en tabel først", vbOKOnly, "Fejl"
+        Else
+            MsgBox "Select a table first", vbOKOnly, "Error"
+        End If
+        GoTo slut
+    End If
+    PrepareMaxima
+    dd.ReadSelectionS
 
-GoToInsertPoint
-'Selection.TypeParagraph
-Set om = Selection.OMaths.Add(Selection.Range)
-Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
-om.OMaths(1).BuildUp
-Selection.TypeParagraph
-GoTo slut
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+
+    GoToInsertPoint
+    'Selection.TypeParagraph
+    Set om = Selection.OMaths.Add(Selection.Range)
+    Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
+    om.OMaths(1).BuildUp
+    Selection.TypeParagraph
+    GoTo slut
 fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
@@ -1676,14 +1688,23 @@ Dim Tabel As Table
 Dim i As Integer, j As Integer
 On Error GoTo fejl
 PrepareMaxima
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
 dd.ReadSelection
-
+If dd.nrows = 0 Or dd.ncolumns = 0 Then
+    If Sprog.SprogNr = 1 Then
+        MsgBox "Du skal markere en liste først fx [1;2;3]", vbOKOnly, "Fejl"
+    Else
+        MsgBox "Select a list first. Example: [1;2;3]", vbOKOnly, "Error"
+    End If
+    GoTo slut
+End If
 GoToInsertPoint
 Selection.TypeParagraph
 'Selection.Tables.Add Selection.Range, dd.nrows, dd.ncolumns
         Set Tabel = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=dd.nrows, NumColumns:=dd.ncolumns _
-        , DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
-        wdAutoFitFixed)
+        , DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed)
 
 '        ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=dd.nrows, NumColumns:=dd.ncolumns _
 '        , DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
@@ -1715,6 +1736,7 @@ GoTo slut
 fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
+    Oundo.EndCustomRecord
 End Sub
 Sub GoToInsertPoint()
 ' finder næste punkt efter selection hvor der kan indsættes nog

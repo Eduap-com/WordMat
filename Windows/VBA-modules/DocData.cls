@@ -19,92 +19,92 @@ Private Sub Class_Initialize()
 End Sub
 
 Public Function ReadSelection() As Boolean
-Dim cellval As String
-Dim r As Integer
-Dim i As Integer, j As Integer, k As Integer, L As Integer, c As Integer
-Dim startrow As Integer
-Dim startcol As Integer
-Dim d As Double
-On Error GoTo fejl
+    Dim cellval As String
+    Dim r As Integer
+    Dim i As Integer, j As Integer, k As Integer, L As Integer, c As Integer
+    Dim startrow As Integer
+    Dim startcol As Integer
+    Dim d As Double
+    On Error GoTo fejl
 
-r = 1
-c = 1
-If Selection.OMaths.Count > 0 Then
-    ReadMathBoxes
+    r = 1
+    c = 1
+    If Selection.OMaths.Count > 0 Then
+        ReadMathBoxes
+    End If
     If Selection.Tables.Count = 0 Then
         GetSetData
     End If
-End If
-If Selection.Tables.Count > 0 Then
-On Error GoTo hop
-r = Selection.Rows.Count
-c = Selection.Columns.Count
+    If Selection.Tables.Count > 0 Then
+        On Error GoTo hop
+        r = Selection.Rows.Count
+        c = Selection.Columns.Count
 hop:
-On Error GoTo fejl
-If r < 2 Or c < 2 Then
-    If Selection.Tables.Count < 1 Then GoTo fejl
-    Selection.Tables(1).Select
-    r = Selection.Rows.Count
-    c = Selection.Columns.Count
-    If r < 2 Or c < 2 Then
-        GoTo fejl
-    End If
-End If
-    On Error Resume Next
-    startrow = 0
-    startcol = Selection.Cells(1).Column.Index
-    If c > 1 Then
-        cellval = Selection.Rows(1).Cells(startcol + 1).Range.text
-        cellval = Left(cellval, Len(cellval) - 1)
-        cellval = Replace(cellval, "*10^", "E")
-        d = CDbl(cellval)
-        If Err.Number > 0 Then
-            startrow = 1
-            r = r - 1
-            Err.Clear
+        On Error GoTo fejl
+        If r < 2 Or c < 2 Then
+            If Selection.Tables.Count < 1 Then GoTo fejl
+            Selection.Tables(1).Select
+            r = Selection.Rows.Count
+            c = Selection.Columns.Count
+            If r < 2 Or c < 2 Then
+                GoTo fejl
+            End If
         End If
-    End If
-    If r > 1 Then
-        cellval = Selection.Rows(2).Cells(startcol).Range.text
-        cellval = Left(cellval, Len(cellval) - 1)
-        cellval = Replace(cellval, "*10^", "E")
-        d = CDbl(cellval)
-        If Err.Number > 0 Then
-            startcol = startcol + 1
-            c = c - 1
-            Err.Clear
+        On Error Resume Next
+        startrow = 0
+        startcol = Selection.Cells(1).Column.Index
+        If c > 1 Then
+            cellval = Selection.Rows(1).Cells(startcol + 1).Range.text
+            cellval = Left(cellval, Len(cellval) - 1)
+            cellval = Replace(cellval, "*10^", "E")
+            d = CDbl(cellval)
+            If Err.Number > 0 Then
+                startrow = 1
+                r = r - 1
+                Err.Clear
+            End If
         End If
-    End If
+        If r > 1 Then
+            cellval = Selection.Rows(2).Cells(startcol).Range.text
+            cellval = Left(cellval, Len(cellval) - 1)
+            cellval = Replace(cellval, "*10^", "E")
+            d = CDbl(cellval)
+            If Err.Number > 0 Then
+                startcol = startcol + 1
+                c = c - 1
+                Err.Clear
+            End If
+        End If
     
-    ReDim Tabel(1 To r, 1 To c) As Double
+        ReDim Tabel(1 To r, 1 To c) As Double
 
-    For j = 1 To r
-        i = i + 1
-        For k = 1 To c
-        L = L + 1
-        cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.text, ",", ".")
-        cellval = Left(cellval, Len(cellval) - 1)
-        cellval = Replace(cellval, "*10^", "E")
-        Tabel(i, L) = CDbl(cellval)
-        Tabel(i, L) = val(cellval)
-        If Err.Number > 0 Then
-'           l = l - 1
-           Err.Clear
-        End If
+        For j = 1 To r
+            i = i + 1
+            For k = 1 To c
+                L = L + 1
+                cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.text, ",", ".")
+                cellval = Left(cellval, Len(cellval) - 1)
+                cellval = Replace(cellval, "*10^", "E")
+                Tabel(i, L) = CDbl(cellval)
+                Tabel(i, L) = val(cellval)
+                If Err.Number > 0 Then
+                    '           l = l - 1
+                    Err.Clear
+                End If
+            Next
+            L = 0
         Next
-        L = 0
-    Next
-    ReDim Preserve Tabel(1 To i, 1 To c) As Double
-    nrows = i
-    ncolumns = c
-    Selection.Tables(1).Select
-    Selection.Collapse (wdCollapseEnd)
-    Selection.TypeParagraph
-    ReadSelection = True ' ingen fejl
-End If
-GoTo slut
+        ReDim Preserve Tabel(1 To i, 1 To c) As Double
+        nrows = i
+        ncolumns = c
+        Selection.Tables(1).Select
+        Selection.Collapse (wdCollapseEnd)
+        Selection.TypeParagraph
+        ReadSelection = True ' ingen fejl
+    End If
+    GoTo slut
 fejl:
-'    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
+    '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelection = False
 slut:
 

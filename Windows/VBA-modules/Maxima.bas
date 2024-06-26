@@ -278,7 +278,7 @@ slut:
 End Sub
 Sub MaximaCommand()
     Dim scrollpos As Double
-    Dim sstart As Long, sslut As Long
+    Dim sstart As Long, sslut As Long, DontGoBack As Boolean
     On Error GoTo fejl
     sstart = Selection.start
     sslut = Selection.End
@@ -288,7 +288,19 @@ Sub MaximaCommand()
     PrepareMaxima
     omax.prevspr = ""
     If Not omax.MaximaInstalled Then GoTo slut
-    omax.ReadSelection
+    
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        GoTo slut
+    ElseIf Selection.OMaths.Count > 0 Then
+        omax.ReadSelection
+    Else
+        omax.Kommando = Selection.Range.text
+        DontGoBack = True
+    End If
+    
+    
+    
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
@@ -307,7 +319,7 @@ Sub MaximaCommand()
 
     If CheckForError Then GoTo slut
 
-    omax.GoToEndOfSelectedMaths
+    omax.GoToEndOfSelectedMaths DontGoBack
     Selection.TypeParagraph
     omax.InsertMaximaOutput
     '   UFWait.Hide
@@ -1702,7 +1714,7 @@ Sub beregn()
     omax.prevspr = ""
 
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
