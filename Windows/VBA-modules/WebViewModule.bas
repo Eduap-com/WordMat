@@ -1,7 +1,10 @@
 Attribute VB_Name = "WebViewModule"
 Public WebV As Object ' WebViewWrap.Browser
 Public GeoGebraWindowOpen As Boolean
+
 Sub OpenWebV()
+#If Mac Then
+#Else
     Dim DN As String, FN As String
     Set UfWait2 = New UserFormWaitForMaxima
     UfWait2.Label_tip.Font.Size = 10
@@ -74,6 +77,7 @@ hop:
    
 slut:
     Unload UfWait2
+#End If
 End Sub
 
 Sub PrepareGeoGebraCAS()

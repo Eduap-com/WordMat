@@ -15,31 +15,7 @@ Private Sub oapp_DocumentBeforeClose(ByVal Doc As Document, Cancel As Boolean)
     If AntalB > Antalberegninger Then
         Antalberegninger = AntalB
     End If
-    If Application.Documents.Count <= 2 Then
-        LukTempDoc
-        MaxProc.CloseProcess
-        cxl.CloseExcel
-
-#If Mac Then
-#Else
-        Set WebV = Nothing
-        Set MaxProc = Nothing
-        Set MaxProcUnit = Nothing
-#End If
-        '    For Each d In Application.Documents ' får Word til altid at spørge om der ikke skal gemmes
-        '       If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-        '           d.Close (False)
-        '       End If
-        '    Next
-        '    SletRCMenu
-    End If
 End Sub
-
-'Private Sub oapp_NewDocument(ByVal Doc As Document)
-'If AutoStart Then
-'    PrepareMaxima
-'End If
-'End Sub
 
 Private Sub oapp_WindowBeforeDoubleClick(ByVal Sel As Selection, Cancel As Boolean)
 Dim s As String

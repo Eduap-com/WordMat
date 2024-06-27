@@ -30,6 +30,7 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
     If omax Is Nothing Then
         '        LavRCMenu    ' højreklikmenu på ligninger
         SetMathAutoCorrect
+        Application.Run macroname:="Popstart"
         If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
         UfWait2.Show vbModeless
         op = True

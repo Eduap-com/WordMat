@@ -2422,7 +2422,7 @@ Sub NewEquation()
     
     If DoubleTapM = 1 Then
         If Timer() - TapTime < 0.8 Then
-            Application.Run macroname:="ShowFormler"
+            Application.Run macroname:="WMPShowFormler"
         End If
         TapTime = Timer()
     End If

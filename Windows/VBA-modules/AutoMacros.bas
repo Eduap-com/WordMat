@@ -1,6 +1,6 @@
 Attribute VB_Name = "AutoMacros"
 Option Explicit
-'Dim oAppClass As New oAppClass ' flyttet til P, så risiko for tabt tempdoc er mindre
+Dim oAppClass As New oAppClass ' flyttet til P, så risiko for tabt tempdoc er mindre
 #If Mac Then
 #Else
 Private Declare PtrSafe Function CreateMutex Lib "kernel32" _
@@ -22,7 +22,7 @@ Sub AutoExec()
 
 ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
 
-'Set oAppClass.oApp = Word.Application
+Set oAppClass.oApp = Word.Application
 
 
 #If Mac Then
