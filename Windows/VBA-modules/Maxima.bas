@@ -64,7 +64,7 @@ getproc:
         Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
         If Err.Number <> 0 Then
             Err.Clear
-            If QActivePartnership Then
+            If QActivePartnership(False, True) Then
                 If DllConnType = 0 Then
                     If MsgBox2("Kan ikke forbinde til Maxima. Vil du anvende metoden 'dll direct' i stedet?" & VbCrLfMac & VbCrLfMac & "(Denne indstilling findes under avanceret i Indstillinger)", vbYesNo, Sprog.Error) = vbYes Then
                         DllConnType = 1
@@ -162,11 +162,7 @@ Function GetMaxProc() As Object
     If DllConnType = 0 Then
         Set GetMaxProc = CreateObject("MaximaProcessClass")
     ElseIf DllConnType = 1 Then
-        If QCheckPartnerShip Then
-            Set GetMaxProc = PGetMaxProc()
-        ElseIf DllConnType = 0 Then ' QCheckPartnerShip kan ændre indstillingen
-            Set GetMaxProc = CreateObject("MaximaProcessClass")
-        End If
+        Set GetMaxProc = PGetMaxProc()
     End If
     If Not GetMaxProc Is Nothing Then GetMaxProc.SetMaximaPath GetMaximaPath()
 End Function

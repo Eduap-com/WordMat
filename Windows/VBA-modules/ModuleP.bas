@@ -10,12 +10,12 @@ Sub TestPP()
     MsgBox mSkoleNavn
 End Sub
 
-Public Function QActivePartnership(Optional Force As Boolean = False) As Boolean
+Public Function QActivePartnership(Optional Force As Boolean = False, Optional ShowForm As Boolean = False) As Boolean
 ' Returns true if the user has active partnership
     Err.Clear
     On Error Resume Next
     
-    Application.Run macroname:="PQActivePartnership", varg1:=Force, varg2:=True
+    Application.Run macroname:="PQActivePartnership", varg1:=Force, varg2:=True, varg3:=ShowForm
     If Err.Number = 513 Then
         QActivePartnership = True
         mSkoleNavn = Err.Description
