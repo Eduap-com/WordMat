@@ -117,20 +117,16 @@ End Sub
 'slut:
 'End Sub
 
-'Callback for comboBoxNum onChange
-Sub Rib_CBcifre(control As IRibbonControl, text As String)
-On Error Resume Next
-    If IsNumeric(text) Then
-        Dim n As Integer
-        n = CInt(text)
-        If n >= 2 And n <= 16 Then
-            MaximaCifre = n
-        End If
-    End If
-End Sub
-'Callback for comboBoxNum getText
-Sub CBgetText(control As IRibbonControl, ByRef returnedVal)
+
+'Callback for menu_cifre getLabel
+Sub Rib_getLabelCiffer(control As IRibbonControl, ByRef returnedVal)
     returnedVal = MaximaCifre
+End Sub
+'Callback for b2 onAction
+Sub Rib_Ciffer(control As IRibbonControl)
+    MaximaCifre = control.Tag
+    RefreshRibbon
+'    If Not WoMatRibbon Is Nothing Then WoMatRibbon.InvalidateControl ("menu_cifre")
 End Sub
 
 'Callback for Button4 onAction

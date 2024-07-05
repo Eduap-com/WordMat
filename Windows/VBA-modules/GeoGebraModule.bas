@@ -24,7 +24,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Dim Var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
     Dim Arr As Variant, uvar As String
-    Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
 
     Dim ea As New ExpressionAnalyser
@@ -102,13 +102,13 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                 If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                     If InStr(Udtryk, "=") > 0 Then
                         Arr = Split(Udtryk, "=")
-                        lhs = Arr(0)
+                        LHS = Arr(0)
                         rhs = Arr(1)
-                        ea.text = lhs
+                        ea.text = LHS
                         fktnavn = ea.GetNextVar(1)
                         varnavn = ea.GetNextBracketContent(1)
                     
-                        If lhs = fktnavn & "(" & varnavn & ")" Then
+                        If LHS = fktnavn & "(" & varnavn & ")" Then
                             ea.text = rhs
                             ea.Pos = 1
                             ea.ReplaceVar varnavn, "x"
@@ -233,7 +233,8 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
 #If Mac Then
     '    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
     If Gtype = "" Then
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra" & Gtype & "Applet.html"
+'        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html"
     Else
         UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra" & Gtype & "Applet.html"
     End If
@@ -991,7 +992,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
     Dim i As Integer, j As Integer
     Dim Arr As Variant
-    Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     On Error GoTo fejl
@@ -1066,13 +1067,13 @@ Sub CreateGeoGebraFil(geogebrasti As String)
             If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
-                    lhs = Arr(0)
+                    LHS = Arr(0)
                     rhs = Arr(1)
-                    ea.text = lhs
+                    ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     
-                    If lhs = fktnavn & "(" & varnavn & ")" Then
+                    If LHS = fktnavn & "(" & varnavn & ")" Then
                         ea.text = rhs
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"

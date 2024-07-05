@@ -12,7 +12,7 @@ Public Sub StandardPlot()
     ElseIf GraphApp = 3 Then
         InsertChart
     ElseIf GraphApp = 4 Then
-        GeoGebraWeb
+        GeoGebraWeb ""
     End If
     
 End Sub
@@ -273,7 +273,7 @@ Sub InsertGraphOleObject()
 Dim Path As String
 Dim ils As InlineShape
 Dim Arr As Variant
-Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
 Dim ea As New ExpressionAnalyser
 Dim p As Integer
     Dim sslut As Long
@@ -346,12 +346,12 @@ Dim i As Integer
             If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
-                    lhs = Arr(0)
+                    LHS = Arr(0)
                     rhs = Arr(1)
-                    ea.text = lhs
+                    ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
-                    If lhs = fktnavn & "(" & varnavn & ")" Then
+                    If LHS = fktnavn & "(" & varnavn & ")" Then
                         ea.text = rhs
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
@@ -488,7 +488,7 @@ Dim ws As Object
 Dim xlap As Object 'Excel.Application
 Dim xmin As Double, xmax As Double
 Dim i As Integer
-Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String
+Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String
 Dim Arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
@@ -558,13 +558,13 @@ End If
             If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
-                    lhs = Arr(0)
+                    LHS = Arr(0)
                     rhs = Arr(1)
-                    ea.text = lhs
+                    ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
 '                    If varnavn = "" And fktnavn = Y Then varnavn = X
-                    If lhs = fktnavn & "(" & varnavn & ")" Then
+                    If LHS = fktnavn & "(" & varnavn & ")" Then
                         ws.Range("B4").Offset(0, i).Value = rhs
                         ws.Range("B1").Offset(0, i).Value = varnavn
                     Else
@@ -660,7 +660,7 @@ Sub InsertChartG()
 'Dim ws As Worksheet
 Dim WB As Object 'Workbook
 Dim ws As Object
-Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
 Dim dd As New DocData
 Dim i As Integer
 Dim Arr As Variant
@@ -725,12 +725,12 @@ End If
             If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
-                    lhs = Arr(0)
+                    LHS = Arr(0)
                     rhs = Arr(1)
-                    ea.text = lhs
+                    ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
-                    If lhs = fktnavn & "(" & varnavn & ")" Then
+                    If LHS = fktnavn & "(" & varnavn & ")" Then
                         ea.text = rhs
                         ea.Pos = 1
 '                        ea.ReplaceVar varnavn, "x"

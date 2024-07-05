@@ -2,7 +2,7 @@ Attribute VB_Name = "Grafer3D"
 Option Explicit
 Sub OmdrejningsLegeme()
 Dim Kommando As String
-    Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
 Dim Arr As Variant
 Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim DefList As String
@@ -45,26 +45,28 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
             If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
-                    lhs = Arr(0)
+                    LHS = Arr(0)
                     rhs = Arr(1)
-                    ea.text = lhs
+                    ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     
-                    If lhs = fktnavn & "(" & varnavn & ")" Then
+                    If LHS = fktnavn & "(" & varnavn & ")" Then
                         ea.text = rhs
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
-                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        cmd = "surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
+'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & cmd
 
                     Else
                         fktudtryk = ReplaceIndepvarX(rhs)
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
-                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        cmd = "surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
+'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & cmd
                         j = j + 1
                     End If
@@ -81,15 +83,17 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                     Udtryk = Replace(Udtryk, vbCr, "")
                     Udtryk = Replace(Udtryk, vbLf, "")
                     DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
-                    If Trim(Udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
-                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
-                        UrlLink = UrlLink & cmd
-                    Else
-                        cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
-                        UrlLink = UrlLink & cmd
-                        cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
-                        UrlLink = UrlLink & cmd
-                    End If
+                    cmd = "surface(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ",2*pi);"
+                    UrlLink = UrlLink & cmd
+'                    If Trim(Udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
+'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
+'                        UrlLink = UrlLink & cmd
+'                    Else
+'                        cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
+'                        UrlLink = UrlLink & cmd
+'                        cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
+'                        UrlLink = UrlLink & cmd
+'                    End If
 
 '                    geogebrafil.CreateFunction "f" & j, udtryk, False
                     j = j + 1
@@ -103,7 +107,7 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     
     OpenLink UrlLink, True
 
-Exit Sub
+Exit Sub '******************************************
 
     PrepareMaxima
     omax.ReadSelection

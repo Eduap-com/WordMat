@@ -11,14 +11,14 @@ Private TempCas As Integer
 Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
     '    Dim UFwait2 As UserFormWaitForMaxima
 
-'    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim op As Boolean
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
         tid = Timer
     End If
 #If Mac Then
-    Dim d As Document
+    Dim D As Document
 #End If
     
     SaveBackup
@@ -30,12 +30,14 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
     If omax Is Nothing Then
         '        LavRCMenu    ' højreklikmenu på ligninger
         SetMathAutoCorrect
+        On Error Resume Next
         Application.Run macroname:="Popstart"
+        On Error GoTo fejl
         If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
         UfWait2.Show vbModeless
         op = True
 #If Mac Then
-        Set d = ActiveDocument
+        Set D = ActiveDocument
 #End If
         DoEvents
         '        Wait (0.1)
@@ -45,7 +47,7 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
     If MaxProc Is Nothing And CASengine = 0 Then
         If Not op Then
 #If Mac Then
-            Set d = ActiveDocument
+            Set D = ActiveDocument
 #Else
             If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
             UfWait2.Show vbModeless
@@ -110,7 +112,7 @@ getproc:
                 UfWait2.Show vbModeless
                 op = True
 #If Mac Then
-                Set d = ActiveDocument
+                Set D = ActiveDocument
 #End If
                 DoEvents
             End If
@@ -138,7 +140,7 @@ finish:
     If op Then
         Unload UfWait2
 #If Mac Then
-        d.Activate
+        D.Activate
 #End If
     End If
     PrepareMaxima = True
@@ -544,9 +546,8 @@ Sub MaximaSolvePar(Optional variabel As String)
     End If
     p = InStr(Selection.OMaths(1).Range.text, "=")
     If p < 1 Then
-        Dim result As VbMsgBoxResult
-        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
-        If result = vbNo Then GoTo slut
+        MsgBox Sprog.A(141), vbOKOnly, Sprog.Error
+        GoTo slut
     Else
         p2 = InStr(p + 1, Selection.OMaths(1).Range.text, "=")
         If p2 > 0 Then
@@ -572,8 +573,9 @@ Sub MaximaSolvePar(Optional variabel As String)
         ' kun 1 ligning
 
         UFSolvenumeric.Ligning = omax.Kommando
-
+        
         omax.FindVariable
+        If Not ValiderVariable Then GoTo slut
         SaveKommando = omax.Kommando
 newcas:
         omax.StopNow = False
@@ -793,6 +795,11 @@ stophop:     If omax.AntalVars > 1 Then
             End If
 
         Else    ' hvis der er løsning
+'            If MaximaUnits Then
+'                omax.Kommando = omax.MaximaOutput
+'                omax.beregn
+'                omax.MaximaOutput = omax.MaximaOutput
+'            End If
             omax.InsertMaximaOutput
         End If
 
@@ -801,6 +808,7 @@ stophop:     If omax.AntalVars > 1 Then
     Else    '--------------- ligningssystem ----------------------
 
         omax.FindVariable
+        If Not ValiderVariable Then GoTo slut
         UFSelectVar.NoEq = omax.AntalKom
         UFSelectVar.vars = omax.vars
         UFSelectVar.DefS = omax.DefString
@@ -1099,6 +1107,7 @@ Sub MaximaEliminate()
 
         omax.ReadSelection
         omax.FindVariable
+        If Not ValiderVariable Then GoTo slut
         UFSelectVar.Eliminate = True
         UFSelectVar.NoEq = omax.AntalKom
         UFSelectVar.vars = omax.vars
@@ -1315,7 +1324,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         If variabel = "" Then GoTo slut
         omax.TempDefs = UFSelectVar.TempDefs
         
-        Dim lhs As String, rhs As String
+        Dim LHS As String, rhs As String
         If CASengine = 1 Or CASengine = 2 Then
             s = Trim(omax.Kommando)
             s = Replace(s, vbCrLf, "")
@@ -1337,17 +1346,17 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             End If
             s = Replace(omax.Kommando, ",", ".")
             Arr = Split(s, "=")
-            lhs = Arr(0)
+            LHS = Arr(0)
             rhs = Arr(1)
             If variabel <> "x" Then
-                ea.text = lhs
+                ea.text = LHS
                 ea.ReplaceVar variabel, "x"
-                lhs = ea.text
+                LHS = ea.text
                 ea.text = rhs
                 ea.ReplaceVar variabel, "x"
                 rhs = ea.text
             End If
-            OpenGeoGebraWeb "y=" & lhs & ";y=" & rhs & ";intersect(" & lhs & "," & rhs & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
+            OpenGeoGebraWeb "y=" & LHS & ";y=" & rhs & ";intersect(" & LHS & "," & rhs & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
             GoTo slut
         ElseIf CASengine = 2 Then
             If MaximaVidNotation Then
@@ -1389,17 +1398,17 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             Else
       s = Replace(omax.Kommando, ",", ".")
             Arr = Split(s, "=")
-            lhs = Arr(0)
+            LHS = Arr(0)
             rhs = Arr(1)
             If variabel <> "x" Then
-                ea.text = lhs
+                ea.text = LHS
                 ea.ReplaceVar variabel, "x"
-                lhs = ea.text
+                LHS = ea.text
                 ea.text = rhs
                 ea.ReplaceVar variabel, "x"
                 rhs = ea.text
             End If
-            OpenGeoGebraWeb "y=" & lhs & ";y=" & rhs & ";intersect(" & lhs & "," & rhs & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
+            OpenGeoGebraWeb "y=" & LHS & ";y=" & rhs & ";intersect(" & LHS & "," & rhs & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
             End If
             GoTo slut
         End If
@@ -1697,8 +1706,8 @@ Sub beregn()
     '   LockWindow
     
 #If Mac Then
-    Dim d As Document
-    Set d = ActiveDocument
+    Dim D As Document
+    Set D = ActiveDocument
 #Else
     system.Cursor = wdCursorWait
 #End If
@@ -1725,6 +1734,7 @@ Sub beregn()
     End If
 
     omax.ReadSelection
+    
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut
@@ -1822,7 +1832,7 @@ fejl:
     RestartMaxima
 slut:
 #If Mac Then
-    d.Activate
+    D.Activate
 #End If
     On Error Resume Next
     ActiveWindow.VerticalPercentScrolled = scrollpos
@@ -2914,7 +2924,7 @@ Function ValidateInput(Expr) As Boolean
             ED.Description = "The number of brackets do not match"
             ED.MaximaOutput = Expr
         End If
-    ElseIf InStr(Expr, "\left(") Then
+    ElseIf InStr(Expr, "\left(") > 0 Or InStr(Expr, "\ast") > 0 Then
         If Sprog.SprogNr = 1 Then
 '            MsgBox "Du har en forkert indstilling i Word." & vbCrLf & "I Ligningsmenuen skal du skifte fra Latex til Unicode for at WordMat virker", vbOKOnly, "Forkert indstilling"
             ED.Title = "Indstillingsfejl"
@@ -3001,4 +3011,30 @@ Function AskSignFromForm(Udtryk As String) As Integer
         AskSignFromForm = 3
     End If
     Unload UF
+End Function
+
+Function ValiderVariable() As Boolean
+    Dim Arr() As String, i As Integer, s As String, ED As ErrorDefinition
+'    On Error Resume Next
+    ValiderVariable = True
+    If omax.AntalVars > 0 Then
+        Arr = Split(omax.vars, ";")
+        For i = 0 To UBound(Arr)
+            If Left(Arr(i), 1) = "_" Then
+                ValiderVariable = False
+                If Sprog.SprogNr = 1 Then
+                    ED.Title = "Syntaksfejl - Ikke korrekt matematik."
+                    ED.DefFejl = False
+                    ED.Description = "Du har indtastes noget som ikke er korrekt matematisk notation." & vbCrLf & "Fejlen er relateret til en variabel: " & Arr(i) & vbCrLf & vbCrLf & "Det kan fx skyldes, at du har sænket skrift på et tal. " & vbCrLf & "K" & VBA.ChrW(8345) & " skal erstattes med et tal og ikke med fx 5000" & VBA.ChrW(8345) & ". Der skal bare stå 5000."
+                Else
+                    ED.Title = "Syntax error - Not correct math."
+                    ED.DefFejl = False
+                    ED.Description = "You have typed something that is not correct mathematical notation" & vbCrLf & "The error is related to a variable: " & Arr(i) & vbCrLf & "This can be caused by a subscript on a number." & vbCrLf & "K" & VBA.ChrW(8345) & " must be replaced by fx 5000" & VBA.ChrW(8345) & ". Just write 5000."
+                End If
+                UserFormError.SetErrorDefinition ED
+                UserFormError.Show
+                Exit Function
+            End If
+        Next
+    End If
 End Function

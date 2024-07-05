@@ -24,7 +24,7 @@ Public Function ReadSelection() As Boolean
     Dim i As Integer, j As Integer, k As Integer, L As Integer, c As Integer
     Dim startrow As Integer
     Dim startcol As Integer
-    Dim d As Double
+    Dim D As Double
     On Error GoTo fejl
 
     r = 1
@@ -57,7 +57,7 @@ hop:
             cellval = Selection.Rows(1).Cells(startcol + 1).Range.text
             cellval = Left(cellval, Len(cellval) - 1)
             cellval = Replace(cellval, "*10^", "E")
-            d = CDbl(cellval)
+            D = CDbl(cellval)
             If Err.Number > 0 Then
                 startrow = 1
                 r = r - 1
@@ -68,7 +68,7 @@ hop:
             cellval = Selection.Rows(2).Cells(startcol).Range.text
             cellval = Left(cellval, Len(cellval) - 1)
             cellval = Replace(cellval, "*10^", "E")
-            d = CDbl(cellval)
+            D = CDbl(cellval)
             If Err.Number > 0 Then
                 startcol = startcol + 1
                 c = c - 1

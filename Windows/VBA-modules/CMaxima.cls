@@ -414,7 +414,6 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
 
     ConvertMaximaUnits = GetMaximaUnitOutput(s) 'MaxProcUnit.LastMaximaOutput
 #Else
-
     MaxProcUnit.ExecuteMaximaCommand k, 0
     WaitForMaximaUnitUntil
     ConvertMaximaUnits = GetMaximaUnitOutput() 'MaxProcUnit.LastMaximaOutput
@@ -962,13 +961,13 @@ start:
         End If
     End If
     
-'    If MaximaUnits Then ' fjernet pga maximaunitimage
-'        MaximaInputStreng = MaximaInputStreng & "rhs(" & ckommando & ");"    ' kryptisk, men ellers kan komme lisp fejl f.eks. (-t+1)*m/s=0
-'        MaximaInputStreng = MaximaInputStreng & "lhs(" & ckommando & ");"    ' kryptisk, men ellers kan komme lisp fejl f.eks. -(252178095*m*x-206157266*m)/(342482374*s)=0
-'        MaximaInputStreng = MaximaInputStreng & "%=%th(2);"    ' kryptisk, men ellers kan komme lisp fejl f.eks. (-t+1)*m/s=0
-'        MaximaInputStreng = MaximaInputStreng & "fullratsimp(%),numer;"    ' hvis lisp fejl på denne bliver % bare lig forrige
-'        MaximaInputStreng = MaximaInputStreng & "applyunitrule(lhs(%)-rhs(%))=0;"
-'        MaximaInputStreng = MaximaInputStreng & "CSolve(%," & variabel & ");"
+    '    If MaximaUnits Then ' fjernet pga maximaunitimage
+    '        MaximaInputStreng = MaximaInputStreng & "rhs(" & ckommando & ");"    ' kryptisk, men ellers kan komme lisp fejl f.eks. (-t+1)*m/s=0
+    '        MaximaInputStreng = MaximaInputStreng & "lhs(" & ckommando & ");"    ' kryptisk, men ellers kan komme lisp fejl f.eks. -(252178095*m*x-206157266*m)/(342482374*s)=0
+    '        MaximaInputStreng = MaximaInputStreng & "%=%th(2);"    ' kryptisk, men ellers kan komme lisp fejl f.eks. (-t+1)*m/s=0
+    '        MaximaInputStreng = MaximaInputStreng & "fullratsimp(%),numer;"    ' hvis lisp fejl på denne bliver % bare lig forrige
+    '        MaximaInputStreng = MaximaInputStreng & "applyunitrule(lhs(%)-rhs(%))=0;"
+    '        MaximaInputStreng = MaximaInputStreng & "CSolve(%," & variabel & ");"
     If MaximaExact = 2 Then    ' nødvendigt for at trig ligninger med sing ikke løses eksakt
         MaximaInputStreng = MaximaInputStreng & "Solve(ev(" & ckommando & ",numer)," & variabel & ");"
     Else
@@ -984,7 +983,9 @@ start:
 
     AddStandardSecondary
 
+
     Call RunMaxima
+
 
     'MsgBox MaximaInputStreng
     '    MaxProc.AnswerQuestion (MaximaInputStreng)
@@ -7255,25 +7256,25 @@ Sub ResetDefinitions()
     defindex = 0
 
 End Sub
-Function ValidateDef(ByVal lhs As String, ByVal rhs As String) As Boolean
+Function ValidateDef(ByVal LHS As String, ByVal rhs As String) As Boolean
 ' returnerer false hvis der er fejl
     Dim Pos As Integer
     On Error GoTo fejl
     ValidateDef = False
 
-    Pos = InStr(lhs, "[")    ' Man kan skrive alt muligt i subscript/index
+    Pos = InStr(LHS, "[")    ' Man kan skrive alt muligt i subscript/index
     If Pos > 0 Then
-        lhs = Left(lhs, Pos - 1)
+        LHS = Left(LHS, Pos - 1)
     End If
 
     ' If Not ea.IsAllText Then ikke god nok da , og ; ikke bliver taget højde for
-    If InStr(lhs, "+") > 0 Or InStr(lhs, "-") > 0 Or InStr(lhs, "*") > 0 Or InStr(lhs, "/") > 0 Then
-        MsgBox Sprog.A(117) & vbCrLf & vbTab & ConvertToAscii(lhs & "=" & rhs) & vbCrLf & Sprog.A(118), vbOKOnly, Sprog.Error
+    If InStr(LHS, "+") > 0 Or InStr(LHS, "-") > 0 Or InStr(LHS, "*") > 0 Or InStr(LHS, "/") > 0 Then
+        MsgBox Sprog.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & rhs) & vbCrLf & Sprog.A(118), vbOKOnly, Sprog.Error
         Exit Function
     End If
 
     If right(rhs, 1) = "+" > 0 Then
-        MsgBox Sprog.A(117) & vbCrLf & vbTab & ConvertToAscii(lhs & "=" & rhs) & vbCrLf & Sprog.A(118), vbOKOnly, Sprog.Error
+        MsgBox Sprog.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & rhs) & vbCrLf & Sprog.A(118), vbOKOnly, Sprog.Error
         Exit Function
     End If
 

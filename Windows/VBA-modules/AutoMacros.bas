@@ -1,33 +1,19 @@
 Attribute VB_Name = "AutoMacros"
 Option Explicit
-Dim oAppClass As New oAppClass ' flyttet til P, så risiko for tabt tempdoc er mindre
 #If Mac Then
 #Else
-Private Declare PtrSafe Function CreateMutex Lib "kernel32" _
-        Alias "CreateMutexA" _
-       (ByVal lpMutexAttributes As LongPtr, _
-        ByVal bInitialOwner As LongPtr, _
-        ByVal lpName As String) As LongPtr
+    Dim oAppClass As New oAppClass ' er også i P, så risiko for tabt tempdoc er mindre
+    Private Declare PtrSafe Function CreateMutex Lib "kernel32" Alias "CreateMutexA" (ByVal lpMutexAttributes As LongPtr, ByVal bInitialOwner As LongPtr, ByVal lpName As String) As LongPtr
 #End If
-
-'Sub SetDocEvents()
-'    If oAppClass Is Nothing Then
-'        Set oAppClass = New oAppClass
-'        Set oAppClass.oApp = Word.Application
-'    End If
-'End Sub
 
 Sub AutoExec()
 ' denne køres kun hvis filen er sat som globalskabelon. Altså ikke hvis den bare åbnes
 
 ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
 
-Set oAppClass.oApp = Word.Application
-
-
 #If Mac Then
 #Else
-'Place in startup code (Form_Load or Sub Main):
+    Set oAppClass.oApp = Word.Application
     CreateMutex 0&, 0&, "WordMatMutex"
 #End If
 

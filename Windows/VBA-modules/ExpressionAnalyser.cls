@@ -1118,7 +1118,7 @@ Sub InsertTextAt(it As String, Optional ByVal ipos As Long = -1)
 
     If ipos < 2 Then
         text = it & text
-    ElseIf ipos = Len(text) + 1 Then
+    ElseIf ipos >= Len(text) + 1 Then
         text = text & it
     Else
         text = Left(text, ipos - 1) & it & right(text, Len(text) - ipos + 1)
@@ -1213,12 +1213,15 @@ Sub AddSpaceAfterSubSuperscript(tegn As String)
 ' tilføjer mellemrum efter f.eks. f_a (x)
 ' man så ellers kan erstatte mellemrum med *
 Dim p As Long
-'On Error GoTo slut
+On Error GoTo slut
 p = Pos
 Pos = 1
 Do
     Pos = InStr(Pos, text, tegn)
-    If Pos = 1 Or Pos = Len(text) Then
+    If Pos = Len(text) Then
+        Exit Sub
+    ElseIf Pos = 1 Then
+        Pos = Pos + 1
     ElseIf Pos > 0 Then
         Pos = Pos + 1
         If ChrByIndex(Pos) = StartBracket Then

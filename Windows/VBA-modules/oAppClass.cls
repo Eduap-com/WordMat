@@ -15,6 +15,14 @@ Private Sub oapp_DocumentBeforeClose(ByVal Doc As Document, Cancel As Boolean)
     If AntalB > Antalberegninger Then
         Antalberegninger = AntalB
     End If
+    Dim D As Document
+    If Application.Documents.Count <= 2 Then
+        For Each D In Application.Documents ' får Word til altid at spørge om der ikke skal gemmes
+           If D.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+               D.Close (False)
+           End If
+        Next
+    End If
 End Sub
 
 Private Sub oapp_WindowBeforeDoubleClick(ByVal Sel As Selection, Cancel As Boolean)

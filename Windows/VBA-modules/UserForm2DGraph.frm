@@ -157,7 +157,7 @@ Me.Repaint
 End Sub
 
 Private Sub UserForm_Activate()
-Dim d As String, nd As String
+Dim D As String, nd As String
 Dim xmin As String, xmax As String
 Dim Arr As Variant, i As Integer
 On Error Resume Next
@@ -178,16 +178,16 @@ On Error Resume Next
 If Not PicOpen Then
     omax.PrepareNewCommand '
     If Len(omax.DefString) > 1 Then
-    d = omax.defstringtext
+    D = omax.defstringtext
 
-    d = Replace(d, "assume", "")
-    d = Replace(d, ":=", "=")
-    d = Replace(d, ":", "=")
+    D = Replace(D, "assume", "")
+    D = Replace(D, ":=", "=")
+    D = Replace(D, ":", "=")
 '    d = omax.ConvertToAscii(omax.ConvertToWordSymbols(d)) ' fjernet efter defstringtext anvendes
-    d = Trim(d)
+    D = Trim(D)
     
     ' reverse definition order
-    Arr = Split(d, "$")
+    Arr = Split(D, "$")
     nd = Arr(0)
     For i = 1 To UBound(Arr)
         If Len(Arr(i)) > 0 Then nd = Trim(Arr(i)) & VbCrLfMac & nd
@@ -2253,7 +2253,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
     Label29.Caption = Sprog.Definitions
     Label45.Caption = Sprog.Title
-    Label_ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

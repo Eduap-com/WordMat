@@ -120,11 +120,11 @@ Sub OpretTempdoc()
 '#If Mac Then
 '    Call tempDoc
 '#Else
-Dim d As Document
+Dim D As Document
 If tempDoc Is Nothing Then
-For Each d In Application.Documents
-    If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-        Set tempDoc = d
+For Each D In Application.Documents
+    If D.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+        Set tempDoc = D
         Exit For
     End If
 Next
@@ -676,17 +676,28 @@ End Sub
 Sub InsertDefiner()
     On Error GoTo fejl
 
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+
     Application.ScreenUpdating = False
-    Selection.InsertAfter (Sprog.A(62) & ": ")
-    Selection.OMaths.Add Range:=Selection.Range
-    Selection.OMaths.BuildUp
-'    Selection.OMaths(1).BuildUp
+    If Selection.OMaths.Count > 0 Then
+        Selection.OMaths(1).Range.Select
+        Selection.Collapse wdCollapseStart
+        Selection.InsertAfter (Sprog.A(62) & ": ")
+    Else
+        Selection.InsertAfter (Sprog.A(62) & ": ")
+        Selection.OMaths.Add Range:=Selection.Range
+        Selection.OMaths.BuildUp
+    '    Selection.OMaths(1).BuildUp
+    End If
     Selection.Collapse wdCollapseEnd
-    
+        
     GoTo slut
 fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
+    Oundo.EndCustomRecord
 End Sub
 
 Sub ForrigeResultat()
@@ -1090,8 +1101,9 @@ Sub TurnUnitsOn()
 On Error Resume Next
     MaximaUnits = True
     Application.OMathAutoCorrect.Functions("min").Delete  ' ellers kan min ikke bruges som enhed
-    Exit Sub ' resten er ikke nødv v. 1.23
     
+    Exit Sub ' resten er ikke nødv v. 1.23
+    '******************************
 #If Mac Then
 #Else
     Exit Sub ' overtaget af maxprocunit

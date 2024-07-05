@@ -338,15 +338,15 @@ Function Get3DigitImageNo(n As Integer) As String
    End If
 End Function
 
-Sub ConvertImagesToLatex(d As Document)
+Sub ConvertImagesToLatex(D As Document)
 '   On Error GoTo Fejl
    Dim FilNavn As String, ImagFilDir As String, tDoc As Document, sh As InlineShape, si As Integer, sh2 As Shape, sha As Variant
    Dim ImagCol As New Collection
-   If d.InlineShapes.Count = 0 And d.Shapes.Count = 0 Then
+   If D.InlineShapes.Count = 0 And D.Shapes.Count = 0 Then
       latexfil.ImagDir = ""
       Exit Sub
    End If
-   d.Range.Copy
+   D.Range.Copy
    Set tDoc = Documents.Add(, , , False)
 '   Wait (1)
    DoEvents
@@ -376,10 +376,10 @@ Sub ConvertImagesToLatex(d As Document)
       Kill FilNavn
    End If
 
-   For Each sh In d.InlineShapes
+   For Each sh In D.InlineShapes
       ImagCol.Add sh
    Next
-   For Each sh2 In d.Shapes
+   For Each sh2 In D.Shapes
       ImagCol.Add sh2
    Next
    
@@ -403,10 +403,10 @@ Sub ConvertImagesToLatex(d As Document)
       si = si + 1
    Next
        
-   For Each sh In d.InlineShapes
+   For Each sh In D.InlineShapes
       sh.Delete
    Next
-   For Each sh2 In d.Shapes
+   For Each sh2 In D.Shapes
       sh2.Delete
    Next
    
@@ -550,11 +550,11 @@ Sub OpretHiddendoc()
 #If Mac Then
 '    Call tempDoc
 #Else
-Dim d As Document
+Dim D As Document
 If HiddenDoc Is Nothing Then
-For Each d In Application.Documents
-    If d.BuiltInDocumentProperties("Title") = "WordMatLatexHiddenDoc" Then
-        Set HiddenDoc = d
+For Each D In Application.Documents
+    If D.BuiltInDocumentProperties("Title") = "WordMatLatexHiddenDoc" Then
+        Set HiddenDoc = D
         Exit For
     End If
 Next
