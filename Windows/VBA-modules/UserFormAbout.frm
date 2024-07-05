@@ -110,8 +110,9 @@ Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 Private Sub Label_checkpartnerskab_Click()
     If QActivePartnership(True) Then
-        MsgBox "Din skole har aktivt partnerskab", vbOKOnly, "Partnerskab OK"
+        MsgBox "Din skole har aktivt partnerskab. Du kan nu bruge WordMat+", vbOKOnly, "Success!"
+        UserForm_Activate
     Else
-        MsgBox "Der kunne ikke registreres et aktivt partnerskab", vbOKOnly, "Ingen Partnerskab"
+        MsgBox "Desværre. Din skole har ikke et aktivt partnerskab.", vbOKOnly, "Ingen Partnerskab"
     End If
 End Sub

@@ -77,7 +77,7 @@ Sub SetCaptions()
     Label_name.Caption = Sprog.A(5)
     Label_cancel.Caption = Sprog.Cancel
     Label_ok.Caption = Sprog.OK
-    Label_Ligninger.Caption = Sprog.A(10)
+    Label_ligninger.Caption = Sprog.A(10)
     Label_help.Caption = Sprog.A(11)
     Label_error.Caption = Sprog.A(12)
 End Sub
