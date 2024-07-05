@@ -69,7 +69,6 @@ slut:
 
 End Function
 
-
 #If Mac Then
 #Else
 Public Function PGetMaxProc() As Object
