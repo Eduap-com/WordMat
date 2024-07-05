@@ -360,6 +360,7 @@ Public Sub GenerateKeyboardShortcutsWordMat()
 End Sub
 Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False)
     Dim Wd As WdKey, WT As Template
+    Dim WdMac As WdKey
     Dim GemT As Template
     
     Set GemT = CustomizationContext
@@ -386,6 +387,7 @@ On Error Resume Next
 '    Wd = wdKeyControl
 '#Else
     Wd = wdKeyAlt ' 1024 på windows, 2048 på mac
+    WdMac = 2048 ' 1024 på windows, 2048 på mac
 '#End If
     
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyG, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Gange"
@@ -446,6 +448,9 @@ End If
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyT, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleLatex"
         
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyQ, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="SaveDocToLatexPdf()"
+        
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="WMPShowFormler"
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, WdMac), KeyCategory:=wdKeyCategoryCommand, Command:="WMPShowFormler"
         
 slut:
     Set CustomizationContext = GemT
