@@ -387,9 +387,7 @@ On Error Resume Next
 '    Wd = wdKeyControl
 '#Else
     Wd = wdKeyAlt ' 1024 på windows, 2048 på mac
-    WdMac = 2048 ' 1024 på windows, 2048 på mac
 '#End If
-    
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyG, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Gange"
         
 If Sprog.SprogNr = 1 Then
@@ -450,8 +448,7 @@ End If
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyQ, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="SaveDocToLatexPdf()"
         
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="WMPShowFormler"
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, WdMac), KeyCategory:=wdKeyCategoryCommand, Command:="WMPShowFormler"
-        
+    
 slut:
     Set CustomizationContext = GemT
 
