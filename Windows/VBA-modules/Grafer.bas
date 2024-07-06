@@ -550,13 +550,17 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
     If Selection.Tables.Count > 0 Then
         Dim Cregr As New CRegression
         Cregr.GetTableData
+        xmin = Cregr.XValues(1)
+        xmax = Cregr.XValues(1)
         For i = 1 To UBound(Cregr.XValues)
             ScriptDataPoints = ScriptDataPoints & val(Replace(Cregr.XValues(i), ",", ".")) & ":"
             ScriptDataPoints = ScriptDataPoints & val(Replace(Cregr.YValues(i), ",", ".")) & "#"
+            If Cregr.XValues(i) > xmax Then xmax = Cregr.XValues(i)
+            If Cregr.XValues(i) < xmin Then xmin = Cregr.XValues(i)
         Next
         If right(ScriptDataPoints, 1) = "#" Then ScriptDataPoints = Left(ScriptDataPoints, Len(ScriptDataPoints) - 1)
+        ScriptDataPoints = ScriptDataPoints & ";" & xmin & ":" & xmax
     End If
-    
     
     OpenExcelMac "Graphs.xltm", ";" & ScriptFunctions & ";" & ScriptDataPoints
 
