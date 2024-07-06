@@ -712,11 +712,11 @@ Sub Rib_GeoGebraB(control As IRibbonControl)
 End Sub
 'Callback for excelobj onAction
 Sub Rib_excelobj(control As IRibbonControl)
-#If Mac Then
-    InsertOpenExcel "Graphs.xltm"
-#Else
+'#If Mac Then
+'    InsertOpenExcel "Graphs.xltm"
+'#Else
     Call InsertChart
-#End If
+'#End If
 End Sub
 'Callback for ButtonGraf onAction
 Sub Rib_graf(control As IRibbonControl)

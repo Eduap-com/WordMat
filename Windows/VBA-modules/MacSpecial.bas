@@ -82,8 +82,8 @@ Dim xdrawdim As Long, ydrawdim As Long
 End Function
 
 
-Sub OpenExcelMac(fileName As String)
-    RunScript "OpenExcel", GetWordMatDir & "Excelfiles/" & fileName
+Sub OpenExcelMac(fileName As String, Optional ParamS As String)
+    RunScript "OpenExcel", GetWordMatDir & "Excelfiles/" & fileName & ";" & ParamS
 End Sub
 
 Sub requestFileAccess()

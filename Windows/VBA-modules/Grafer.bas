@@ -481,6 +481,91 @@ End If
 
 ReplaceIndepvarX = ea.text
 End Function
+#If Mac Then
+Sub InsertChart()
+Dim dd As New DocData
+Dim ea As New ExpressionAnalyser
+Dim xmin As Double, xmax As Double
+Dim Arr As Variant
+Dim i As Integer
+Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String
+Dim srange As Range
+Dim ScriptDataPoints As String ' "1:2#3:4"
+Dim ScriptFunctions As String ' "2*x+1#3*t-1:t"
+Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
+
+    Set srange = Selection.Range
+
+    dd.ReadSelection
+
+    DoEvents
+    Application.ScreenUpdating = False
+    
+    Dim UfWait2 As New UserFormWaitForMaxima
+    UfWait2.Show vbModeless
+    DoEvents
+    UfWait2.Label_progress = "***"
+    
+    ' funktioner der markeres
+    For i = 0 To dd.AntalMathBoxes - 1
+        Udtryk = dd.MathBoxes(i)
+        Udtryk = Replace(Udtryk, "definer:", "")
+        Udtryk = Replace(Udtryk, "Definer:", "")
+        Udtryk = Replace(Udtryk, "define:", "")
+        Udtryk = Replace(Udtryk, "Define:", "")
+        Udtryk = Trim(Udtryk)
+        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
+        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
+        Udtryk = Replace(Udtryk, vbCrLf, "") '
+        Udtryk = Replace(Udtryk, vbCr, "") '
+        Udtryk = Replace(Udtryk, vbLf, "") '
+        If Len(Udtryk) > 0 Then
+            If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+                If InStr(Udtryk, "=") > 0 Then
+                    Arr = Split(Udtryk, "=")
+                    LHS = Arr(0)
+                    rhs = Arr(1)
+                    ea.text = LHS
+                    fktnavn = ea.GetNextVar(1)
+                    varnavn = ea.GetNextBracketContent(1)
+'                    If varnavn = "" And fktnavn = Y Then varnavn = X
+                    If LHS = fktnavn & "(" & varnavn & ")" Then
+                        ScriptFunctions = ScriptFunctions & rhs & ":" & varnavn & "#"
+                    Else
+                        ScriptFunctions = ScriptFunctions & rhs & ":x" & "#"
+                    End If
+                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
+                Else
+                    Udtryk = ReplaceIndepvarX(Udtryk)
+                    ScriptFunctions = ScriptFunctions & Udtryk & ":x" & "#"
+               End If
+            End If
+        End If
+    Next
+    If right(ScriptFunctions, 1) = "#" Then ScriptFunctions = Left(ScriptFunctions, Len(ScriptFunctions) - 1)
+    
+    srange.Select
+    'datapunkter
+    If Selection.Tables.Count > 0 Then
+        Dim Cregr As New CRegression
+        Cregr.GetTableData
+        For i = 1 To UBound(Cregr.XValues)
+            ScriptDataPoints = ScriptDataPoints & val(Replace(Cregr.XValues(i), ",", ".")) & ":"
+            ScriptDataPoints = ScriptDataPoints & val(Replace(Cregr.YValues(i), ",", ".")) & "#"
+        Next
+        If right(ScriptDataPoints, 1) = "#" Then ScriptDataPoints = Left(ScriptDataPoints, Len(ScriptDataPoints) - 1)
+    End If
+    
+    
+    OpenExcelMac "Graphs.xltm", ";" & ScriptFunctions & ";" & ScriptDataPoints
+
+slut2:
+    On Error Resume Next
+    Unload UfWait2
+
+End Sub
+#Else
 Sub InsertChart()
 Dim WB As Object
 Dim ws As Object
@@ -502,12 +587,12 @@ ea.SetNormalBrackets
 
 Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
 
-dd.ReadSelection
+    dd.ReadSelection
 
 'cxl.PrePareExcel
     DoEvents
 
-Application.ScreenUpdating = False
+    Application.ScreenUpdating = False
     Dim UfWait2 As New UserFormWaitForMaxima
     UfWait2.Show vbModeless
     DoEvents
@@ -654,6 +739,8 @@ slut2:
 'Selection.PasteSpecial DataType:=wdPasteOLEObject
 'Selection.PasteSpecial DataType:=wdPasteShape
 End Sub
+
+#End If
 Sub InsertChartG()
 'indsætter exceldokument som indlejret dokument
 'Dim wb As Workbook

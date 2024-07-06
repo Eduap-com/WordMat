@@ -37,8 +37,8 @@ Public Function ReadSelection() As Boolean
     End If
     If Selection.Tables.Count > 0 Then
         On Error GoTo hop
-        r = Selection.Rows.Count
-        c = Selection.Columns.Count
+        r = Selection.Tables(1).Rows.Count
+        c = Selection.Tables(1).Columns.Count
 hop:
         On Error GoTo fejl
         If r < 2 Or c < 2 Then

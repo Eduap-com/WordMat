@@ -62,7 +62,11 @@ XLapp.visible = vis
 '    Set XLapp = CreateObject("Excel.Application")
 'End If
     XLapp.visible = True
-wordmatsti = GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & ""
+    GetWordMatDir
+wordmatsti = GetWordMatDir & "ExcelFiles\" & FilNavn & ""
+If Dir(wordmatsti) = "" Then
+    wordmatsti = Environ("AppData") & "\WordMat\Excelfiles\" & FilNavn
+End If
 If Dir(wordmatsti) <> "" Then
     Set xlwb = XLapp.Workbooks.Add(wordmatsti)
 End If
