@@ -8,6 +8,7 @@ Dim SaveTime As Single
 Dim BackupAnswer As Integer
 Private UserDir As String
 Private tmpdir As String
+Private TapTime As Single
 #If Mac Then
     Private m_tempDoc As Document
 #Else
@@ -119,11 +120,11 @@ Sub OpretTempdoc()
 '#If Mac Then
 '    Call tempDoc
 '#Else
-Dim d As Document
+Dim D As Document
 If tempDoc Is Nothing Then
-For Each d In Application.Documents
-    If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-        Set tempDoc = d
+For Each D In Application.Documents
+    If D.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+        Set tempDoc = D
         Exit For
     End If
 Next
@@ -142,7 +143,7 @@ End If
 '#End If
 End Sub
 Sub ShowTempDoc()
-    MsgBox tempDoc.Range.Text
+    MsgBox tempDoc.Range.text
 End Sub
 Sub LukTempDoc()
 On Error GoTo slut
@@ -359,6 +360,7 @@ Public Sub GenerateKeyboardShortcutsWordMat()
 End Sub
 Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False)
     Dim Wd As WdKey, WT As Template
+    Dim WdMac As WdKey
     Dim GemT As Template
     
     Set GemT = CustomizationContext
@@ -386,7 +388,6 @@ On Error Resume Next
 '#Else
     Wd = wdKeyAlt ' 1024 på windows, 2048 på mac
 '#End If
-    
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyG, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Gange"
         
 If Sprog.SprogNr = 1 Then
@@ -446,6 +447,8 @@ End If
         
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyQ, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="SaveDocToLatexPdf()"
         
+    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="WMPShowFormler"
+    
 slut:
     Set CustomizationContext = GemT
 
@@ -456,7 +459,7 @@ Function GetProgramFilesDir() As String
     ' bruges ikke af maxima mere da det er dll-filen der står for det nu.
     ' bruges af de Worddokumenter mm. der skal findes
     'MsgBox GetProgFilesPath
-    On Error GoTo Fejl
+    On Error GoTo fejl
 #If Mac Then
     GetProgramFilesDir = "/Applications/"
 #Else
@@ -478,13 +481,13 @@ Function GetProgramFilesDir() As String
 #End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
 slut:
     'MsgBox GetProgramFilesDir
 End Function
 Function GetDocumentsDir() As String
-On Error GoTo Fejl
+On Error GoTo fejl
   If DocumentsDir <> "" Then
     GetDocumentsDir = DocumentsDir
   Else
@@ -500,7 +503,7 @@ On Error GoTo Fejl
  End If
  
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
 slut:
 'MsgBox GetProgramFilesDir
@@ -634,7 +637,7 @@ On Error Resume Next
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' hvis linket ikke virker så sker der bare ingen ting
     End If
 #End If
-Fejl:
+fejl:
 End Sub
 
 Sub InsertSletDef()
@@ -673,19 +676,30 @@ Sub InsertSletDef()
 End Sub
 
 Sub InsertDefiner()
-    On Error GoTo Fejl
+    On Error GoTo fejl
+
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
 
     Application.ScreenUpdating = False
-    Selection.InsertAfter (Sprog.A(62) & ": ")
-    Selection.OMaths.Add Range:=Selection.Range
-    Selection.OMaths.BuildUp
-'    Selection.OMaths(1).BuildUp
+    If Selection.OMaths.Count > 0 Then
+        Selection.OMaths(1).Range.Select
+        Selection.Collapse wdCollapseStart
+        Selection.InsertAfter (Sprog.A(62) & ": ")
+    Else
+        Selection.InsertAfter (Sprog.A(62) & ": ")
+        Selection.OMaths.Add Range:=Selection.Range
+        Selection.OMaths.BuildUp
+    '    Selection.OMaths(1).BuildUp
+    End If
     Selection.Collapse wdCollapseEnd
-    
+        
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
+    Oundo.EndCustomRecord
 End Sub
 
 Sub ForrigeResultat()
@@ -726,7 +740,7 @@ Sub ForrigeResultat()
     End If
     
     If ResIndex < 0 Then ResIndex = 0
-    On Error GoTo Fejl
+    On Error GoTo fejl
     start = Selection.Range.start
     sslut = Selection.Range.End
     Set ra = ActiveDocument.Range
@@ -734,17 +748,17 @@ Sub ForrigeResultat()
     matfeltno = ra.OMaths.Count
     Do
         If ResFeltIndex >= matfeltno - 1 Then
-            If ActiveDocument.Range.OMaths(matfeltno).Range.Text = Selection.Range.Text Then
-                Selection.Text = ""
+            If ActiveDocument.Range.OMaths(matfeltno).Range.text = Selection.Range.text Then
+                Selection.text = ""
                 Selection.OMaths.Add Range:=Selection.Range
             Else
-                Selection.Text = ""
+                Selection.text = ""
             End If
-            GoTo Fejl
+            GoTo fejl
         End If
 '        ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range.Select
         Set r = ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range
-        If Len(r.Text) = 0 Then
+        If Len(r.text) = 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
             GoTo slut
@@ -776,11 +790,11 @@ Loop While hopover
     
     sr.Select
     ResPos1 = Selection.Range.start
-    If Selection.Range.Text = "Skriv ligningen her." Then
+    If Selection.Range.text = "Skriv ligningen her." Then
         ResPos1 = ResPos1 - 1 ' hvis tom i forvejen er selection af eller anden grund 1 tegn for meget
     End If
     s = Replace(s, VBA.ChrW(8289), "") ' funktionstegn  sin(x) bliver ellers til si*n(x). også problem med andre funktioner
-    Selection.Text = s
+    Selection.text = s
     
 '    Dim ml As Integer
 '    ml = Len(ActiveDocument.Range.OMaths(matfeltno).Range.text)
@@ -789,7 +803,7 @@ Loop While hopover
 '    ActiveDocument.Range.OMaths(ra.OMaths.Count).BuildUp
 '    ResPos2 = ResPos1 + Len(ActiveDocument.Range.OMaths(matfeltno).Range.text) - ml
 GoTo slut
-Fejl:
+fejl:
     ResIndex = 0
     ResFeltIndex = 0
     ResPos2 = 0
@@ -804,7 +818,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 
-Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
+Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
 ' returnerer sidste del af texten til første position talt fra enden for = eller ca. ligmed
 ' = i sumtegn ignoreres
     
@@ -817,12 +831,12 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     Dim i As Integer
     
     Do ' gå tilbage til nærmeste ligmed
-    posligmed = InStr(Text, "=")
-    possumtegn = InStr(Text, VBA.ChrW(8721))
-    posca = InStr(Text, VBA.ChrW(8776))
-    poseller = InStr(Text, VBA.ChrW(8744))
+    posligmed = InStr(text, "=")
+    possumtegn = InStr(text, VBA.ChrW(8721))
+    posca = InStr(text, VBA.ChrW(8776))
+    poseller = InStr(text, VBA.ChrW(8744))
     
-    Pos = Len(Text)
+    Pos = Len(text)
 '    pos = posligmed
     If posligmed > 0 And posligmed < Pos Then Pos = posligmed
     If posca > 0 And posca < Pos Then Pos = posca
@@ -831,19 +845,19 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     If possumtegn > 0 And possumtegn < Pos Then ' hvis sumtegn er der =tegn som del deraf
         Pos = 0
     End If
-    If Pos = Len(Text) Then Pos = 0
+    If Pos = Len(text) Then Pos = 0
     If Pos > 0 Then
-        Arr(i) = Left(Text, Pos - 1)
-        Text = right(Text, Len(Text) - Pos)
+        Arr(i) = Left(text, Pos - 1)
+        text = right(text, Len(text) - Pos)
         i = i + 1
     Else
-        Arr(i) = Text
+        Arr(i) = text
     End If
     Loop While Pos > 0
     
     If indeks = i Then ResIndex = -1  ' global variabel markerer at der ikke er flere til venstre
     If i = 0 Then
-        KlipTilLigmed = Text
+        KlipTilLigmed = text
         ResIndex = -1
     Else
         KlipTilLigmed = Arr(i - indeks)
@@ -872,7 +886,7 @@ Function ReadEquationFast(Optional ir As Range) As String
     sr.OMaths.Linearize
     sr.OMaths(1).ConvertToNormalText
     
-    ReadEquationFast = sr.OMaths(1).Range.Text
+    ReadEquationFast = sr.OMaths(1).Range.text
     
     Selection.OMaths(1).ConvertToMathText
     Selection.OMaths(1).Range.Select
@@ -884,14 +898,14 @@ Function ReadEquationFast(Optional ir As Range) As String
 End Function
 
 Sub OpenFormulae(FilNavn As String)
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
     Documents.Open "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/WordDocs/" & FilNavn
 #Else
     OpenWordFile "" & FilNavn
 #End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -907,7 +921,7 @@ Sub OpenWordFile(FilNavn As String)
     Dim filnavn2 As String
     Dim appdir As String
     Dim fs
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Set fs = CreateObject("Scripting.FileSystemObject")
     appdir = Environ("AppData")
     filnavn1 = appdir & "\WordMat\WordDocs\" & FilNavn
@@ -932,7 +946,7 @@ Sub OpenWordFile(FilNavn As String)
 #End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
 slut:
 
@@ -1089,23 +1103,24 @@ Sub TurnUnitsOn()
 On Error Resume Next
     MaximaUnits = True
     Application.OMathAutoCorrect.Functions("min").Delete  ' ellers kan min ikke bruges som enhed
-    Exit Sub ' resten er ikke nødv v. 1.23
     
+    Exit Sub ' resten er ikke nødv v. 1.23
+    '******************************
 #If Mac Then
 #Else
     Exit Sub ' overtaget af maxprocunit
 #End If
 
-Dim Text As String
+Dim text As String
     
     MaxProc.Units = 1
-    Text = omax.KillDef
-    If Len(Text) > 0 Then
-         Text = Left(Text, Len(Text) - 1) 'fjern sidste komma
-         Text = "errcatch(kill(" & Text & "))"
+    text = omax.KillDef
+    If Len(text) > 0 Then
+         text = Left(text, Len(text) - 1) 'fjern sidste komma
+         text = "errcatch(kill(" & text & "))"
          omax.KillDef = ""
     Else
-        Text = "" ' mærkeligt men len(text)=0 er ikke nødv ""
+        text = "" ' mærkeligt men len(text)=0 er ikke nødv ""
     End If
     
 '    MaxProc.ExecuteMaximaCommand text, 0
@@ -1114,14 +1129,14 @@ Dim Text As String
 '     MaxProc.TurnUnitsOn "", ""
 
 'Dim text As String
-   Text = "[" & Text & "load(WordMatUnitAddon)"
+   text = "[" & text & "load(WordMatUnitAddon)"
 '    text = "[" & text & "keepfloat:false,usersetunits:[N,J,W,Pa,C,V,F,Ohm,T,H,K],load(unit)"
     If OutUnits <> "" Then
-        Text = Text & ",setunits(" & omax.ConvertUnits(OutUnits) & ")"
+        text = text & ",setunits(" & omax.ConvertUnits(OutUnits) & ")"
     End If
-    Text = Text & "]$"
+    text = text & "]$"
     
-    MaxProc.ExecuteMaximaCommand Text, 0
+    MaxProc.ExecuteMaximaCommand text, 0
 
 '            MaxProc.TurnUnitsOn
 End Sub
@@ -1139,10 +1154,10 @@ Sub TurnUnitsOff()
 
 End Sub
 Sub UpdateUnits()
-    Dim Text As String
-    Text = "setunits(" & omax.ConvertUnits(OutUnits) & ")$"
+    Dim text As String
+    text = "setunits(" & omax.ConvertUnits(OutUnits) & ")$"
     
-    MaxProc.ExecuteMaximaCommand Text, 0
+    MaxProc.ExecuteMaximaCommand text, 0
 
 End Sub
 Sub ToggleNum()
@@ -1196,7 +1211,7 @@ Sub CheckForUpdateOld()
 
 #End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -1293,7 +1308,7 @@ End Sub
 'End Sub
 Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     ' selvom den hedder windows er det nu også mac
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim NewVersion As String, p As Integer, News As String, s As String
     Dim UpdateNow As Boolean, PartnerShip As Boolean
 '    Dim UFvent As UserFormWaitForMaxima
@@ -1384,8 +1399,8 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         If AppVersion <> NewVersion Then UpdateNow = True
     End If
     On Error Resume Next
-    PartnerShip = Application.Run("PQActivePartnership")
-    On Error GoTo Fejl
+    PartnerShip = QActivePartnership()
+    On Error GoTo fejl
     
     If UpdateNow Then
         If PartnerShip Then
@@ -1397,12 +1412,12 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
 '                UFvent.Label_progress.Caption = "**"
 '                UFvent.Show
                 On Error GoTo Install2
-                Application.Run ("PUpdateWordMat")
-                On Error GoTo Fejl
+                Application.Run macroname:="PUpdateWordMat"
+                On Error GoTo fejl
             End If
         Else
 Install2:
-            On Error GoTo Fejl
+            On Error GoTo fejl
             MsgBox2 Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, Sprog.A(23)
             '        If MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbYesNo, Sprog.A(23)) = vbYes Then
             If Sprog.SprogNr = 1 Then
@@ -1420,7 +1435,7 @@ Install2:
    
    
     GoTo slut
-Fejl:
+fejl:
     '   MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure CheckForUpdate, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     If Not RunSilent Then
         MsgBox "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com"
@@ -1450,7 +1465,7 @@ End Function
 
 Sub CheckForUpdateSilent()
 ' maxproc skal være oprettet
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
 '#If Mac Then
 '    CheckForUpdateF True
@@ -1458,7 +1473,7 @@ Sub CheckForUpdateSilent()
     CheckForUpdateWindows True
 '#End If
 GoTo slut
-Fejl:
+fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
 slut:
 End Sub
@@ -1608,7 +1623,7 @@ Public Sub ClearClipBoard()
 On Error GoTo slut
     Dim oData   As New DataObject 'object to use the clipboard
      
-    oData.SetText Text:=Empty 'Clear
+    oData.SetText text:=Empty 'Clear
     oData.PutInClipboard 'take in the clipboard to empty it
     Set oData = Nothing
 slut:
@@ -1637,8 +1652,8 @@ On Error Resume Next
     Dim r As Range
     Set r = Selection.Range
     r.MoveStart wdCharacter, -1
-    If r.Text = VBA.ChrW(11) Then ' hvis der er shift-enter i slutningen erstattes med alm. retur
-        r.Text = VBA.ChrW(13)
+    If r.text = VBA.ChrW(11) Then ' hvis der er shift-enter i slutningen erstattes med alm. retur
+        r.text = VBA.ChrW(13)
     End If
 End Sub
 
@@ -1652,20 +1667,32 @@ Function NotZero(i As Integer) As Integer
 End Function
 
 Sub TabelToList()
-Dim dd As New DocData
-Dim om As Range
-On Error GoTo Fejl
-PrepareMaxima
-dd.ReadSelectionS
+    Dim dd As New DocData
+    Dim om As Range
+    On Error GoTo fejl
+    If Selection.Range.Tables.Count = 0 Then
+        If Sprog.SprogNr = 1 Then
+            MsgBox "Du skal markere en tabel først", vbOKOnly, "Fejl"
+        Else
+            MsgBox "Select a table first", vbOKOnly, "Error"
+        End If
+        GoTo slut
+    End If
+    PrepareMaxima
+    dd.ReadSelectionS
 
-GoToInsertPoint
-'Selection.TypeParagraph
-Set om = Selection.OMaths.Add(Selection.Range)
-Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
-om.OMaths(1).BuildUp
-Selection.TypeParagraph
-GoTo slut
-Fejl:
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+
+    GoToInsertPoint
+    'Selection.TypeParagraph
+    Set om = Selection.OMaths.Add(Selection.Range)
+    Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
+    om.OMaths(1).BuildUp
+    Selection.TypeParagraph
+    GoTo slut
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -1673,16 +1700,25 @@ Sub ListToTabel()
 Dim dd As New DocData
 Dim Tabel As Table
 Dim i As Integer, j As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 PrepareMaxima
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
 dd.ReadSelection
-
+If dd.nrows = 0 Or dd.ncolumns = 0 Then
+    If Sprog.SprogNr = 1 Then
+        MsgBox "Du skal markere en liste først fx [1;2;3]", vbOKOnly, "Fejl"
+    Else
+        MsgBox "Select a list first. Example: [1;2;3]", vbOKOnly, "Error"
+    End If
+    GoTo slut
+End If
 GoToInsertPoint
 Selection.TypeParagraph
 'Selection.Tables.Add Selection.Range, dd.nrows, dd.ncolumns
         Set Tabel = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=dd.nrows, NumColumns:=dd.ncolumns _
-        , DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
-        wdAutoFitFixed)
+        , DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed)
 
 '        ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=dd.nrows, NumColumns:=dd.ncolumns _
 '        , DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
@@ -1706,14 +1742,15 @@ Selection.TypeParagraph
 
 For i = 1 To dd.nrows
     For j = 1 To dd.ncolumns
-        Tabel.Cell(i, j).Range.Text = dd.TabelsCelle(i, j)
+        Tabel.Cell(i, j).Range.text = dd.TabelsCelle(i, j)
     Next
 Next
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
+    Oundo.EndCustomRecord
 End Sub
 Sub GoToInsertPoint()
 ' finder næste punkt efter selection hvor der kan indsættes nog
@@ -1756,11 +1793,11 @@ LukTempDoc
 OpretTempdoc
 End Sub
 
-Function Get2DVector(Text As String) As String
+Function Get2DVector(text As String) As String
     Dim ea As New ExpressionAnalyser
 '    Dim c As Collection
     Dim m As CMatrix
-    ea.Text = Text
+    ea.text = text
     
 '    c = ea.GetAllMatrices()
     For Each m In ea.GetAllMatrices()
@@ -1773,7 +1810,7 @@ End Function
 Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Dim t As Table, F As Field, ccut As Boolean
     Dim placement As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
 
     If Selection.Tables.Count > 0 Then
@@ -1786,12 +1823,12 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Oundo.StartCustomRecord
 
     If Selection.OMaths.Count > 0 Then
-        If Not Selection.OMaths(1).Range.Text = vbNullString Then
+        If Not Selection.OMaths(1).Range.text = vbNullString Then
             Selection.OMaths(1).Range.Cut
             ccut = True
             'der kan nogen gange være en rest af et matematikfelt
             If Selection.OMaths.Count > 0 Then
-                If Selection.OMaths(1).Range.Text = vbNullString Then
+                If Selection.OMaths(1).Range.text = vbNullString Then
                     Selection.OMaths(1).Range.Delete
                 Else
                     Selection.TypeParagraph
@@ -1837,20 +1874,20 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     t.Cell(1, placement).Range.Select
     Selection.Collapse wdCollapseStart
     If Not EqNumType Then
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="LISTNUM ""WMeq"" ""NumberDefault"" \L 4")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="LISTNUM ""WMeq"" ""NumberDefault"" \L 4")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
     Else
         Selection.TypeText "("
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ chapter \c")
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1 \c")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1 \c")
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="STYLEREF ""Overskrift 1""")
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SECTION")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
         Selection.TypeText "."
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ figure \s1") ' starter automatisk forfra ved ny overskrift 1
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 ")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq2 ")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
         Selection.TypeText ")"
@@ -1893,14 +1930,14 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
 Sub InsertEquationRef()
     Dim b As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     UserFormEquationReference.Show
     b = UserFormEquationReference.EqName
     
@@ -1936,13 +1973,13 @@ Sub InsertEquationRef()
     '    Selection.MoveLeft Unit:=wdCharacter, count:=1
     '    Selection.Fields.ToggleShowCodes
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
 Sub SetEquationNumber()
-On Error GoTo Fejl
+On Error GoTo fejl
     Application.ScreenUpdating = False
     Dim F As Field, f2 As Field, n As String, p As Integer, Arr As Variant
     
@@ -1952,15 +1989,15 @@ On Error GoTo Fejl
     End If
     
     Set F = Selection.Fields(1)
-    If Selection.Fields.Count = 1 And InStr(F.Code.Text, "LISTNUM") > 0 Then
+    If Selection.Fields.Count = 1 And InStr(F.Code.text, "LISTNUM") > 0 Then
         n = InputBox(Sprog.A(346), Sprog.A(6), "1")
-        p = InStr(F.Code.Text, "\S")
+        p = InStr(F.Code.text, "\S")
         If p > 0 Then
-            F.Code.Text = Left(F.Code.Text, p - 1)
+            F.Code.text = Left(F.Code.text, p - 1)
         End If
-        F.Code.Text = F.Code.Text & "\S" & n
+        F.Code.text = F.Code.text & "\S" & n
         F.Update
-    ElseIf Selection.Fields.Count = 1 Or Selection.Fields.Count = 2 And InStr(F.Code.Text, "WMeq") > 0 Then
+    ElseIf Selection.Fields.Count = 1 Or Selection.Fields.Count = 2 And InStr(F.Code.text, "WMeq") > 0 Then
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(Sprog.A(346), Sprog.A(6), F.result & "." & f2.result)
@@ -1980,56 +2017,56 @@ On Error GoTo Fejl
     
     ActiveDocument.Fields.Update
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
 Sub SetFieldNo(F As Field, n As String)
     Dim p As Integer, p2 As Integer
-On Error GoTo Fejl
-    p = InStr(F.Code.Text, "\r")
-    p2 = InStr(F.Code.Text, "\c")
+On Error GoTo fejl
+    p = InStr(F.Code.text, "\r")
+    p2 = InStr(F.Code.text, "\c")
     If p2 > 0 And p2 < p Then p = p2
     If p > 0 Then
-        F.Code.Text = Left(F.Code.Text, p - 1)
+        F.Code.text = Left(F.Code.text, p - 1)
     End If
-    F.Code.Text = F.Code.Text & "\r" & n & " \c"
+    F.Code.text = F.Code.text & "\r" & n & " \c"
     F.Update
     ActiveDocument.Fields.Update
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
 Sub InsertEquationHeadingNo()
     Dim result As Long
-On Error GoTo Fejl
+On Error GoTo fejl
     result = MsgBox(Sprog.A(348), vbYesNoCancel, Sprog.A(8))
     If result = vbCancel Then Exit Sub
     If result = vbYes Then
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1"
+      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1"
     Else
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1 \h"
+      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1 \h"
     End If
       Selection.Collapse wdCollapseEnd
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 \r0 \h"
+      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq2 \r0 \h"
 
     ActiveDocument.Fields.Update
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
 Sub UpdateEquationNumbers()
-On Error GoTo Fejl
+On Error GoTo fejl
 
     ActiveDocument.Fields.Update
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -2066,8 +2103,8 @@ Selection.Range.InsertAfter s
 End Sub
 
 Sub SaveBackup()
-    On Error GoTo Fejl
-    Dim path As String
+    On Error GoTo fejl
+    Dim Path As String
     Dim UFbackup As UserFormBackup
     Dim UfWait As UserFormWaitForMaxima
     Const lCancelled_c As Long = 0
@@ -2090,7 +2127,7 @@ Sub SaveBackup()
         
     If Timer - SaveTime < BackupTime * 60 Then Exit Sub
     SaveTime = Timer
-    If ActiveDocument.path = "" Then
+    If ActiveDocument.Path = "" Then
         MsgBox Sprog.A(679)
         Exit Sub
     End If
@@ -2108,23 +2145,23 @@ Sub SaveBackup()
     BackupNo = BackupNo + 1
     If BackupNo > BackupMaxNo Then BackupNo = 1
 #If Mac Then
-    path = GetTempDir & "WordMat-Backup/"
+    Path = GetTempDir & "WordMat-Backup/"
 #Else
-    path = GetDocumentsDir & "\WordMat-Backup\"
+    Path = GetDocumentsDir & "\WordMat-Backup\"
 #End If
     '    If Dir(path, vbDirectory) = "" Then MkDir path
-    If Not FileExists(path) Then MkDir path
+    If Not FileExists(Path) Then MkDir Path
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
-    path = path & "WordMatBackup" & BackupNo & ".docx"
-    If VBA.LenB(path) = lCancelled_c Then Exit Sub
+    Path = Path & "WordMatBackup" & BackupNo & ".docx"
+    If VBA.LenB(Path) = lCancelled_c Then Exit Sub
     
 #If Mac Then
     Set tempDoc2 = Application.Documents.Add(Template:=ActiveDocument.FullName, visible:=False)
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     tempDoc2.ActiveWindow.Left = 2000
-    tempDoc2.SaveAs path
+    tempDoc2.SaveAs Path
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     tempDoc2.Close
@@ -2132,7 +2169,7 @@ Sub SaveBackup()
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
     ActiveDocument.Save
-    fso.CopyFile ActiveDocument.FullName, path
+    fso.CopyFile ActiveDocument.FullName, Path
     Set fso = Nothing
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
@@ -2141,7 +2178,7 @@ Sub SaveBackup()
 #End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
 slut:
     On Error Resume Next
@@ -2150,10 +2187,10 @@ slut:
 End Sub
 
 Sub OpenLatexTemplate()
-On Error GoTo Fejl
+On Error GoTo fejl
     Documents.Add Template:=GetWordMatDir() & "WordDocs/LatexWordTemplate.dotx"
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -2237,7 +2274,7 @@ Function ReadTextfileToString(FilNavn As String) As String
 #End If
 
    GoTo slut
-Fejl:
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
 slut:
 
@@ -2272,7 +2309,7 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
 
 
    GoTo slut
-Fejl:
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTexfilen"
 slut:
 
@@ -2281,7 +2318,7 @@ End Sub
 Public Function Local_Document_Path(ByRef Doc As Document, Optional bPathOnly As Boolean = True) As String
 'returns local path or nothing if local path not found. Converts a onedrive path to local path
 #If Mac Then
-   Local_Document_Path = Doc.path
+   Local_Document_Path = Doc.Path
 #Else
 Dim i As Long, X As Long
 Dim OneDrivePath As String
@@ -2367,6 +2404,7 @@ Sub SetMathAutoCorrect()
     ElseIf MaximaGangeTegn = VBA.ChrW(215) Then
         Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(215))
     Else
+        On Error Resume Next
         Call Application.OMathAutoCorrect.Entries("*").Delete
     End If
 End Sub
@@ -2393,14 +2431,22 @@ End Function
 
 Sub NewEquation()
     Dim r As Range
-'    On Error GoTo fejl
+    On Error GoTo fejl
     On Error Resume Next
+    
+    If DoubleTapM = 1 Then
+        If Timer() - TapTime < 0.8 Then
+            Application.Run macroname:="WMPShowFormler"
+        End If
+        TapTime = Timer()
+    End If
+    
     If Selection.OMaths.Count = 0 Then
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then
-        If Selection.OMaths(1).Range.Text = vbNullString Then
+        If Selection.OMaths(1).Range.text = vbNullString Then
             Set r = Selection.OMaths.Add(Selection.Range)
-        Else
+        ElseIf DoubleTapM = 2 Then
             If Not Selection.Range.ListFormat.ListValue = 0 Then
                 Selection.Range.ListFormat.RemoveNumbers
             End If
@@ -2416,7 +2462,7 @@ Sub NewEquation()
         Selection.MoveLeft Unit:=wdCharacter, Count:=2
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub

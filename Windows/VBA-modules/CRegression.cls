@@ -37,14 +37,14 @@ Public Property Get Datatext() As Variant
 
 End Property
 
-Public Property Let Datatext(ByVal Text As Variant)
+Public Property Let Datatext(ByVal text As Variant)
     Dim i As Integer
     Dim j As Integer
     Dim lsep As String
     Dim Arr As Variant
     Dim Arr2 As Variant
     Dim n As Integer
-    Arr = Split(Text, VbCrLfMac)
+    Arr = Split(text, VbCrLfMac)
     n = UBound(Arr)
     ReDim xval(1 To n + 1) As Double
     ReDim yval(1 To n + 1) As Double
@@ -75,7 +75,7 @@ Dim j As Integer
 Dim n As Integer
 Dim oFS As Integer
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
 
@@ -110,7 +110,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
     On Error Resume Next
     For i = 1 To n ' bestem hvor der ligger tal
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.Text
+        cellval = rws(i).Cells(j).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         tal = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
@@ -126,7 +126,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
 End If
 
 If n < 2 Then
-    GoTo Fejl
+    GoTo fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -144,7 +144,7 @@ End If
             omax.beregn
             cellval = Replace(omax.MaximaOutput, "=", "")
         Else
-            cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
+            cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
             cellval = Left(cellval, Len(cellval) - 1)
         End If
 '        cellval = tabel.Cell(j, 1).Range.text
@@ -160,7 +160,7 @@ End If
             omax.beregn
             cellval = Replace(omax.MaximaOutput, "=", "")
         Else
-            cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
+            cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
             cellval = Left(cellval, Len(cellval) - 1)
         End If
 
@@ -181,7 +181,7 @@ NotNumber:
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 
@@ -233,7 +233,7 @@ If n < 2 Then
     n = rws.Count
 End If
 If n < 2 Then
-    GoTo Fejl
+    GoTo fejl
 End If
 
     ReDim xval(1 To n) As Double
@@ -244,11 +244,11 @@ End If
     For j = 1 To n
         i = i + 1
         
-        cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
+        cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         xval(i) = val(cellval)
-        cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
+        cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         yval(i) = val(cellval)
@@ -263,7 +263,7 @@ End If
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
 slut:
 
@@ -271,7 +271,7 @@ End Sub
 Public Sub GetSetData()
 ' læser mængde {(2,1),(3,4)} fra mathbox ind i xval og yval
 Dim p As String
-Dim Text As String
+Dim text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim Arr As Variant
@@ -281,9 +281,9 @@ Dim Arr As Variant
 ea.StartBracket = "{"
 ea.EndBracket = "}"
 Selection.OMaths.Linearize
-Text = Selection.OMaths(1).Range.Text
-ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' nødvendigt
-ea.Text = ea.GetNextBracketContent()
+text = Selection.OMaths(1).Range.text
+ea.text = Replace(text, VBA.ChrW(8722), "-") ' nødvendigt
+ea.text = ea.GetNextBracketContent()
 ea.SetNormalBrackets
 ea.Pos = 1
 Do
@@ -313,7 +313,7 @@ Private Function ComputeRegr(X() As Double, Y() As Double) As Boolean
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
 Dim n As Integer
 Dim i As Integer
-On Error GoTo Fejl
+On Error GoTo fejl
 
 n = UBound(X) - LBound(X) + 1
                
@@ -338,7 +338,7 @@ If r > 1 Then r = 1
 
 ComputeRegr = True
 GoTo slut
-Fejl:
+fejl:
     ComputeRegr = False
     MsgBox Sprog.A(28), vbOKOnly, Sprog.Error
 slut:
@@ -423,7 +423,7 @@ Sub ComputeExpRegr()
 End Sub
 
 Sub ComputePowRegr()
-On Error GoTo Fejl
+On Error GoTo fejl
     ReDim logx(LBound(xval) To UBound(xval)) As Double
     ReDim logy(LBound(yval) To UBound(yval)) As Double
     
@@ -446,7 +446,7 @@ On Error GoTo Fejl
         r = 0
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(32), vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -455,7 +455,7 @@ Sub ComputeUserRegr()
     Dim Arr As Variant
     Dim xlist As String, ylist As String
     Dim i As Long, guess As String, Var As String, p As Integer, eps As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     xlist = "["
     For i = LBound(xval) To UBound(xval)
         xlist = xlist & Replace((xval(i)), ",", ".") & ","
@@ -475,7 +475,7 @@ Sub ComputeUserRegr()
             Arr = Split(fkt, "=")
             If UBound(Arr) > 0 Then fkt = Arr(1)
         End If
-        UserFormUserRegression.TextBox_function.Text = fkt
+        UserFormUserRegression.TextBox_function.text = fkt
     End If
     
     If InStr(fkt, "x") > 0 Then
@@ -495,17 +495,17 @@ Sub ComputeUserRegr()
     Else
         Var = ""
     End If
-    UserFormUserRegression.TextBox_var.Text = Var
+    UserFormUserRegression.TextBox_var.text = Var
     
-    UserFormUserRegression.TextBox_eps.Text = MaximaCifre
+    UserFormUserRegression.TextBox_eps.text = MaximaCifre
     
     UserFormUserRegression.Show
     
-    eps = UserFormUserRegression.TextBox_eps.Text
-    fkt = UserFormUserRegression.TextBox_function.Text
+    eps = UserFormUserRegression.TextBox_eps.text
+    fkt = UserFormUserRegression.TextBox_function.text
     fkt = Replace(fkt, "*", MaximaGangeTegn)
     guess = "[" & UserFormUserRegression.TextBox_guess & "]"
-    Var = UserFormUserRegression.TextBox_var.Text
+    Var = UserFormUserRegression.TextBox_var.text
     If Var <> vbNullString And fkt <> vbNullString Then
         omax.UserRegression ConvertSep(fkt), Var, xlist, ylist, CInt(eps), ConvertSep(guess)
         p = InStr(omax.KommentarOutput, "R^2=")
@@ -517,20 +517,20 @@ Sub ComputeUserRegr()
     End If
     
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
-Function ConvertSep(Text As String) As String
+Function ConvertSep(text As String) As String
     ' kommaer og listeseparator
     Dim ea As New ExpressionAnalyser
     If Not MaximaSeparator Then
-        ea.Text = Text
+        ea.text = text
         ea.ConvertDecSeparator
-        Text = ea.Text
+        text = ea.text
         '        text = Replace(text, ",", ".")
     End If
-    ConvertSep = Replace(Text, ";", ",")
+    ConvertSep = Replace(text, ";", ",")
 
 End Function
 Sub ComputePolRegrKvad()
@@ -566,7 +566,7 @@ Sub ComputePolRegr()
     On Error Resume Next
     n = UBound(xval) - LBound(xval)
     orden = InputBox(Sprog.A(35) & n & ")" & vbCrLf & vbCrLf & Sprog.A(36), Sprog.A(37), "2")
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If orden < 1 Or orden > n Then
         MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, Sprog.Error
         Exit Sub
@@ -622,7 +622,7 @@ Sub ComputePolRegr()
         r = 0
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -635,7 +635,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim SStotal As Double, SSregr As Double
 Dim m() As Double, s() As Double, t() As Double
 Dim np As Integer ' number of points
-On Error GoTo Fejl
+On Error GoTo fejl
 
 If Not (UBound(X) = UBound(Y)) Then
     polregr = False
@@ -727,7 +727,7 @@ r = SSregr / SStotal
              
 polregr = True
 GoTo slut
-Fejl:
+fejl:
   polregr = False
 '  MsgBox Err.Number
 slut:
@@ -741,7 +741,7 @@ Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
 Dim m(3, 4)
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
 n = UBound(X) - LBound(X) + 1
                
@@ -813,7 +813,7 @@ r = SSregr / SStotal
              
 polregrkvad = True
 GoTo slut
-Fejl:
+fejl:
   polregrkvad = False
 '  MsgBox Err.Number
 slut:
@@ -828,15 +828,15 @@ Sub InsertEquation()
     Oundo.StartCustomRecord
     Selection.TypeText RegressionText
 
-    Selection.TypeText Text:="R"
+    Selection.TypeText text:="R"
     Selection.Font.Superscript = wdToggle
-    Selection.TypeText Text:="2"
+    Selection.TypeText text:="2"
     Selection.Font.Superscript = wdToggle
-    Selection.TypeText Text:=" = " & ConvertNumberToString(r)
+    Selection.TypeText text:=" = " & ConvertNumberToString(r)
     Selection.TypeParagraph
     Selection.Collapse
     Selection.OMaths.Add Range:=Selection.Range
-    Selection.TypeText Text:=Ligning
+    Selection.TypeText text:=Ligning
     Selection.OMaths.BuildUp
     Selection.TypeParagraph
 '    Call Indsæt2DPlot(ligning, xval, yval)

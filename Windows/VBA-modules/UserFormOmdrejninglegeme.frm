@@ -23,18 +23,18 @@ Private Sub CommandButton_ok_Click()
     Dim Sxmin As String
     Dim Sxmax As String
     Dim grafobj As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     Label_vent.visible = True
-    Sxmin = Replace(TextBox_xmin.Text, ",", ".")
-    Sxmax = Replace(TextBox_xmax.Text, ",", ".")
+    Sxmin = Replace(TextBox_xmin.text, ",", ".")
+    Sxmax = Replace(TextBox_xmax.text, ",", ".")
     
     xmin = val(Sxmin)
     xmax = val(Sxmax)
 '    funk = InputBox("Indtast forskrift som funktion af x", "Omdrejningslegeme")
-    funk = TextBox_forskrift.Text
+    funk = TextBox_forskrift.text
     funk = omax.CodeForMaxima(funk)
-    funk2 = TextBox_forskrift2.Text
+    funk2 = TextBox_forskrift2.text
     funk2 = omax.CodeForMaxima(funk2)
     dx = (xmax - xmin) / 5
     omax.MaximaInputStreng = omax.MaximaInputStreng & "fomd(x):=" & funk & "$"
@@ -80,7 +80,7 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
     Me.Hide
 #End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
     Label_vent.visible = False

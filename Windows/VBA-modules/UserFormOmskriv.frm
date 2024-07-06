@@ -38,10 +38,10 @@ Sub ExecuteOK()
 '    MaximaVidNotation = CheckBox_vidnotation.value
     MaximaCifre = ComboBox_cifre.Value
     If MaximaUnits Then
-        If OutUnits <> TextBox_outunits.Text Then
-            OutUnits = TextBox_outunits.Text
+        If OutUnits <> TextBox_outunits.text Then
+            OutUnits = TextBox_outunits.text
             omax.MaximaInputStreng = omax.MaximaInputStreng & "uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
-            If TextBox_outunits.Text <> "" Then omax.MaximaInputStreng = omax.MaximaInputStreng & "setunits(" & omax.ConvertUnits(TextBox_outunits.Text) & ")$"
+            If TextBox_outunits.text <> "" Then omax.MaximaInputStreng = omax.MaximaInputStreng & "setunits(" & omax.ConvertUnits(TextBox_outunits.text) & ")$"
         End If
     End If
 
@@ -54,7 +54,7 @@ Sub ExecuteOK()
     End If
 
 
-    TempDefs = TextBox_def.Text
+    TempDefs = TextBox_def.text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
@@ -85,7 +85,7 @@ Dim Arr() As String, i As Integer
     If MaximaUnits Then
         Label_enheder.visible = True
         TextBox_outunits.visible = True
-        TextBox_outunits.Text = OutUnits
+        TextBox_outunits.text = OutUnits
     Else
         Label_enheder.visible = False
         TextBox_outunits.visible = False
@@ -117,7 +117,7 @@ Dim Arr() As String, i As Integer
     
     For i = 0 To UBound(Arr)
         If Arr(i) <> "" Then
-            TextBox_def.Text = TextBox_def.Text & Arr(i) & "=" & VbCrLfMac    ' midlertidige definitioner
+            TextBox_def.text = TextBox_def.text & Arr(i) & "=" & VbCrLfMac    ' midlertidige definitioner
         End If
     Next
     

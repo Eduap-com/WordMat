@@ -52,6 +52,7 @@ Private mLastUpdateCheck As String
 Private mRegAppVersion As String
 Private mDllConnType As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
 Private mInstallLocation As String ' All AppData
+Private mDoubleTapM As Integer ' 0= intet, 1=formelsamling, 2=num ligning
 
 Public Sub ReadAllSettingsFromRegistry()
 Dim setn As Integer
@@ -103,6 +104,7 @@ On Error Resume Next
     mLastUpdateCheck = GetRegSettingString("LastUpdateCheck")
     mDllConnType = CInt(GetRegSetting("DllConnType"))
     mInstallLocation = GetRegSetting("InstallLocation")
+    mDoubleTapM = GetRegSetting("DoubleTapM")
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -181,6 +183,7 @@ On Error Resume Next
     LatexTitlePage = 0
     LatexTOC = 0
     CASengine = 0
+    DoubleTapM = 1
     
 '    End If
     End If
@@ -220,9 +223,9 @@ End Property
 Public Property Get Radians() As Boolean
     Radians = mradians
 End Property
-Public Property Let Radians(ByVal Text As Boolean)
-    SetRegSetting "Radians", Abs(CInt(Text))
-    mradians = Text
+Public Property Let Radians(ByVal text As Boolean)
+    SetRegSetting "Radians", Abs(CInt(text))
+    mradians = text
 End Property
 Public Property Get MaximaCifre() As Integer
     If mcifre > 1 Then
@@ -336,43 +339,50 @@ End Property
 Public Property Get EqNumPlacement() As Boolean
     EqNumPlacement = meqnumplacement
 End Property
-Public Property Let EqNumPlacement(ByVal Text As Boolean)
-    SetRegSetting "EqNumPlacement", Abs(CInt(Text))
-    meqnumplacement = Text
+Public Property Let EqNumPlacement(ByVal text As Boolean)
+    SetRegSetting "EqNumPlacement", Abs(CInt(text))
+    meqnumplacement = text
 End Property
 Public Property Get EqNumType() As Boolean
     EqNumType = meqnumtype
 End Property
-Public Property Let EqNumType(ByVal Text As Boolean)
-    SetRegSetting "EqNumType", Abs(CInt(Text))
-    meqnumtype = Text
+Public Property Let EqNumType(ByVal text As Boolean)
+    SetRegSetting "EqNumType", Abs(CInt(text))
+    meqnumtype = text
+End Property
+Public Property Get DoubleTapM() As Integer
+    DoubleTapM = mDoubleTapM
+End Property
+Public Property Let DoubleTapM(ByVal iVal As Integer)
+    SetRegSetting "DoubleTapM", iVal
+    mDoubleTapM = iVal
 End Property
 Public Property Get EqAskRef() As Boolean
     EqAskRef = maskref
 End Property
-Public Property Let EqAskRef(ByVal Text As Boolean)
-    SetRegSetting "EqAskRef", Abs(CInt(Text))
-    maskref = Text
+Public Property Let EqAskRef(ByVal text As Boolean)
+    SetRegSetting "EqAskRef", Abs(CInt(text))
+    maskref = text
 End Property
 Public Property Get LastUpdateCheck() As String
     LastUpdateCheck = mLastUpdateCheck
 End Property
-Public Property Let LastUpdateCheck(ByVal Text As String)
-    SetRegSettingString "LastUpdateCheck", Text
-    mLastUpdateCheck = Text
+Public Property Let LastUpdateCheck(ByVal text As String)
+    SetRegSettingString "LastUpdateCheck", text
+    mLastUpdateCheck = text
 End Property
 
 Public Property Get OutUnits() As String
     OutUnits = moutunits
 End Property
-Public Property Let OutUnits(ByVal Text As String)
-    Text = Replace(Text, "kwh", "kWh")
-    Text = Replace(Text, "hz", "Hz")
-    Text = Replace(Text, "HZ", "Hz")
-    Text = Replace(Text, "bq", "Bq")
-    Text = Replace(Text, "ev", "eV")
-    SetRegSettingString "OutUnits", Text
-    moutunits = Text
+Public Property Let OutUnits(ByVal text As String)
+    text = Replace(text, "kwh", "kWh")
+    text = Replace(text, "hz", "Hz")
+    text = Replace(text, "HZ", "Hz")
+    text = Replace(text, "bq", "Bq")
+    text = Replace(text, "ev", "eV")
+    SetRegSettingString "OutUnits", text
+    moutunits = text
 End Property
 Public Property Get AutoStart() As Boolean
     AutoStart = mautostart
@@ -445,9 +455,9 @@ End Property
 Public Property Get dAsDiffChr() As Boolean
     dAsDiffChr = mdasdiffchr
 End Property
-Public Property Let dAsDiffChr(ByVal Text As Boolean)
-    SetRegSetting "dAsDiffChr", Abs(CInt(Text))
-    mdasdiffchr = Text
+Public Property Let dAsDiffChr(ByVal text As Boolean)
+    SetRegSetting "dAsDiffChr", Abs(CInt(text))
+    mdasdiffchr = text
 End Property
 Public Property Get LatexStart() As String
     LatexStart = mlatexstart
@@ -466,16 +476,16 @@ End Property
 Public Property Get LatexUnits() As Boolean
     LatexUnits = mlatexunits
 End Property
-Public Property Let LatexUnits(ByVal Text As Boolean)
-    SetRegSetting "LatexUnits", Abs(CInt(Text))
-    mlatexunits = Text
+Public Property Let LatexUnits(ByVal text As Boolean)
+    SetRegSetting "LatexUnits", Abs(CInt(text))
+    mlatexunits = text
 End Property
 Public Property Get ConvertTexWithMaxima() As Boolean
     ConvertTexWithMaxima = mConvertTexWithMaxima
 End Property
-Public Property Let ConvertTexWithMaxima(ByVal Text As Boolean)
-    SetRegSetting "ConvertTexWithMaxima", Abs(CInt(Text))
-    mConvertTexWithMaxima = Text
+Public Property Let ConvertTexWithMaxima(ByVal text As Boolean)
+    SetRegSetting "ConvertTexWithMaxima", Abs(CInt(text))
+    mConvertTexWithMaxima = text
 End Property
 Public Property Get LatexWordMargins() As Boolean
     LatexWordMargins = mLatexWordMargins
@@ -613,33 +623,36 @@ Public Property Let InstallLocation(ByVal L As String)
 End Property
 
 '------------------- registry functions --------------------
-Private Function GetRegSetting(Key As String) As Integer
-    GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key)
+Public Function GetReg(key As String) As String
+    GetReg = GetRegSettingString(key)
 End Function
-Private Sub SetRegSetting(ByVal Key As String, ByVal val As Integer)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_DWORD"
+Private Function GetRegSetting(key As String) As Integer
+    GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
+End Function
+Private Sub SetRegSetting(ByVal key As String, ByVal val As Integer)
+    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
 
 #If VBA7 Then
-Public Sub SetRegSettingLong(Key As String, val As LongPtr)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_DWORD"
+Public Sub SetRegSettingLong(key As String, val As LongPtr)
+    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
-Public Function GetRegSettingLong(Key As String) As LongPtr
-    GetRegSettingLong = CLngPtr(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key))
+Public Function GetRegSettingLong(key As String) As LongPtr
+    GetRegSettingLong = CLngPtr(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key))
 End Function
 #Else
-Public Sub SetRegSettingLong(Key As String, val As Long)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_DWORD"
+Public Sub SetRegSettingLong(key As String, val As Long)
+    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
-Public Function GetRegSettingLong(Key As String) As Long
-    GetRegSettingLong = CLng(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key))
+Public Function GetRegSettingLong(key As String) As Long
+    GetRegSettingLong = CLng(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key))
 End Function
 #End If
 
-Private Function GetRegSettingString(Key As String) As String
-    GetRegSettingString = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & Key)
+Private Function GetRegSettingString(key As String) As String
+    GetRegSettingString = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
 End Function
-Private Sub SetRegSettingString(Key As String, ByVal val As String)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & Key, val, "REG_SZ"
+Private Sub SetRegSettingString(key As String, ByVal val As String)
+    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_SZ"
 End Sub
 

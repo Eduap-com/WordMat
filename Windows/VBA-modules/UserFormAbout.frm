@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormAbout 
    Caption         =   "About"
-   ClientHeight    =   5475
+   ClientHeight    =   5715
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   8355.001
@@ -17,6 +17,10 @@ Option Explicit
 
 Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     OpenLink "https://www.eduap.com"
+End Sub
+
+Private Sub Label_checkpartnerskab_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_checkpartnerskab.BackColor = LBColorHover
 End Sub
 
 Private Sub Label_license_Click()
@@ -60,8 +64,10 @@ Private Sub UserForm_Activate()
         Else
             Label_partnerskab.Caption = "Partnership registered with " & SkoleNavn
         End If
+        Label_checkpartnerskab.visible = False
     Else
         Label_partnerskab.Caption = "Ingen Partnerskab registreret"
+        Label_checkpartnerskab.visible = True
     End If
         If Sprog.SprogNr = 1 Then
 '            Label_partnerskab.Caption = "Partnerskab registreret med " & SkoleNavn
@@ -100,4 +106,13 @@ Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorInactive
+    Label_checkpartnerskab.BackColor = LBColorInactive
+End Sub
+Private Sub Label_checkpartnerskab_Click()
+    If QActivePartnership(True) Then
+        MsgBox "Din skole har aktivt partnerskab. Du kan nu bruge WordMat+", vbOKOnly, "Success!"
+        UserForm_Activate
+    Else
+        MsgBox "Desværre. Din skole har ikke et aktivt partnerskab.", vbOKOnly, "Ingen Partnerskab"
+    End If
 End Sub

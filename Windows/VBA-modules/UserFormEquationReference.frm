@@ -21,12 +21,12 @@ Private Sub Label_cancel_Click()
 End Sub
 
 Private Sub Label_ok_Click()
-    EqName = ListBox1.Text
+    EqName = ListBox1.text
     Me.Hide
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    EqName = ListBox1.Text
+    EqName = ListBox1.text
     Me.Hide
 End Sub
 
@@ -44,7 +44,7 @@ Sub SetCaptions()
     Me.Caption = Sprog.A(15)
     Label_ok.Caption = Sprog.OK
     Label_cancel.Caption = Sprog.Cancel
-    Label_Ligninger.Caption = Sprog.Equations
+    Label_ligninger.Caption = Sprog.Equations
     
 End Sub
 

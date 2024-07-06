@@ -16,7 +16,7 @@ Attribute VB_Exposed = False
 Option Explicit
 Private EventsOn As Boolean
 Private Sub CommandButton_cancel_Click()
-    TextBox_function.Text = ""
+    TextBox_function.text = ""
     Me.Hide
 End Sub
 
@@ -26,10 +26,10 @@ End Sub
 
 Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
     Dim n As Long
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If Not EventsOn Then Exit Sub
     EventsOn = False
-    n = val(TextBox_eps.Text)
+    n = val(TextBox_eps.text)
     If n > 0 And n < 5 Then
         Label_epswarning.Caption = ""
 '        Label_epswarning.visible = False
@@ -47,7 +47,7 @@ Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shif
     End If
 
 GoTo slut
-Fejl:
+fejl:
         Label_epswarning.Caption = Sprog.A(46)
         Label_eps.visible = True
 slut:

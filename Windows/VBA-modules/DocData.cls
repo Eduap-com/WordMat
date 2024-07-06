@@ -19,92 +19,92 @@ Private Sub Class_Initialize()
 End Sub
 
 Public Function ReadSelection() As Boolean
-Dim cellval As String
-Dim r As Integer
-Dim i As Integer, j As Integer, k As Integer, L As Integer, c As Integer
-Dim startrow As Integer
-Dim startcol As Integer
-Dim d As Double
-On Error GoTo Fejl
+    Dim cellval As String
+    Dim r As Integer
+    Dim i As Integer, j As Integer, k As Integer, L As Integer, c As Integer
+    Dim startrow As Integer
+    Dim startcol As Integer
+    Dim D As Double
+    On Error GoTo fejl
 
-r = 1
-c = 1
-If Selection.OMaths.Count > 0 Then
-    ReadMathBoxes
+    r = 1
+    c = 1
+    If Selection.OMaths.Count > 0 Then
+        ReadMathBoxes
+    End If
     If Selection.Tables.Count = 0 Then
         GetSetData
     End If
-End If
-If Selection.Tables.Count > 0 Then
-On Error GoTo hop
-r = Selection.Rows.Count
-c = Selection.Columns.Count
+    If Selection.Tables.Count > 0 Then
+        On Error GoTo hop
+        r = Selection.Rows.Count
+        c = Selection.Columns.Count
 hop:
-On Error GoTo Fejl
-If r < 2 Or c < 2 Then
-    If Selection.Tables.Count < 1 Then GoTo Fejl
-    Selection.Tables(1).Select
-    r = Selection.Rows.Count
-    c = Selection.Columns.Count
-    If r < 2 Or c < 2 Then
-        GoTo Fejl
-    End If
-End If
-    On Error Resume Next
-    startrow = 0
-    startcol = Selection.Cells(1).Column.Index
-    If c > 1 Then
-        cellval = Selection.Rows(1).Cells(startcol + 1).Range.Text
-        cellval = Left(cellval, Len(cellval) - 1)
-        cellval = Replace(cellval, "*10^", "E")
-        d = CDbl(cellval)
-        If Err.Number > 0 Then
-            startrow = 1
-            r = r - 1
-            Err.Clear
+        On Error GoTo fejl
+        If r < 2 Or c < 2 Then
+            If Selection.Tables.Count < 1 Then GoTo fejl
+            Selection.Tables(1).Select
+            r = Selection.Rows.Count
+            c = Selection.Columns.Count
+            If r < 2 Or c < 2 Then
+                GoTo fejl
+            End If
         End If
-    End If
-    If r > 1 Then
-        cellval = Selection.Rows(2).Cells(startcol).Range.Text
-        cellval = Left(cellval, Len(cellval) - 1)
-        cellval = Replace(cellval, "*10^", "E")
-        d = CDbl(cellval)
-        If Err.Number > 0 Then
-            startcol = startcol + 1
-            c = c - 1
-            Err.Clear
+        On Error Resume Next
+        startrow = 0
+        startcol = Selection.Cells(1).Column.Index
+        If c > 1 Then
+            cellval = Selection.Rows(1).Cells(startcol + 1).Range.text
+            cellval = Left(cellval, Len(cellval) - 1)
+            cellval = Replace(cellval, "*10^", "E")
+            D = CDbl(cellval)
+            If Err.Number > 0 Then
+                startrow = 1
+                r = r - 1
+                Err.Clear
+            End If
         End If
-    End If
+        If r > 1 Then
+            cellval = Selection.Rows(2).Cells(startcol).Range.text
+            cellval = Left(cellval, Len(cellval) - 1)
+            cellval = Replace(cellval, "*10^", "E")
+            D = CDbl(cellval)
+            If Err.Number > 0 Then
+                startcol = startcol + 1
+                c = c - 1
+                Err.Clear
+            End If
+        End If
     
-    ReDim Tabel(1 To r, 1 To c) As Double
+        ReDim Tabel(1 To r, 1 To c) As Double
 
-    For j = 1 To r
-        i = i + 1
-        For k = 1 To c
-        L = L + 1
-        cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.Text, ",", ".")
-        cellval = Left(cellval, Len(cellval) - 1)
-        cellval = Replace(cellval, "*10^", "E")
-        Tabel(i, L) = CDbl(cellval)
-        Tabel(i, L) = val(cellval)
-        If Err.Number > 0 Then
-'           l = l - 1
-           Err.Clear
-        End If
+        For j = 1 To r
+            i = i + 1
+            For k = 1 To c
+                L = L + 1
+                cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.text, ",", ".")
+                cellval = Left(cellval, Len(cellval) - 1)
+                cellval = Replace(cellval, "*10^", "E")
+                Tabel(i, L) = CDbl(cellval)
+                Tabel(i, L) = val(cellval)
+                If Err.Number > 0 Then
+                    '           l = l - 1
+                    Err.Clear
+                End If
+            Next
+            L = 0
         Next
-        L = 0
-    Next
-    ReDim Preserve Tabel(1 To i, 1 To c) As Double
-    nrows = i
-    ncolumns = c
-    Selection.Tables(1).Select
-    Selection.Collapse (wdCollapseEnd)
-    Selection.TypeParagraph
-    ReadSelection = True ' ingen fejl
-End If
-GoTo slut
-Fejl:
-'    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
+        ReDim Preserve Tabel(1 To i, 1 To c) As Double
+        nrows = i
+        ncolumns = c
+        Selection.Tables(1).Select
+        Selection.Collapse (wdCollapseEnd)
+        Selection.TypeParagraph
+        ReadSelection = True ' ingen fejl
+    End If
+    GoTo slut
+fejl:
+    '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelection = False
 slut:
 
@@ -126,14 +126,14 @@ On Error GoTo hop
 r = Selection.Rows.Count
 c = Selection.Columns.Count
 hop:
-On Error GoTo Fejl
+On Error GoTo fejl
 If r < 1 Or c < 1 Or (r = 1 And c = 1) Then
-    If Selection.Tables.Count < 1 Then GoTo Fejl
+    If Selection.Tables.Count < 1 Then GoTo fejl
     Selection.Tables(1).Select
     r = Selection.Rows.Count
     c = Selection.Columns.Count
     If r < 1 Or c < 1 Then
-        GoTo Fejl
+        GoTo fejl
     End If
 End If
     On Error Resume Next
@@ -146,7 +146,7 @@ End If
         i = i + 1
         For k = 1 To c
         L = L + 1
-        cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.Text, ",", ".")
+        cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.text, ",", ".")
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, vbCrLf, "")
         cellval = Replace(cellval, vbCr, "")
@@ -164,7 +164,7 @@ End If
     ReadSelectionS = True ' ingen fejl
 End If
 GoTo slut
-Fejl:
+fejl:
 '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelectionS = False
 slut:
@@ -172,24 +172,24 @@ slut:
 End Function
 
 Public Function TabelCelle(r, c) As Double
-On Error GoTo Fejl
+On Error GoTo fejl
 If c > ncolumns Or r > nrows Then GoTo slut
 
 TabelCelle = Tabel(r, c)
 
 GoTo slut
-Fejl:
+fejl:
 slut:
 
 End Function
 Public Function TabelsCelle(r, c) As String
-On Error GoTo Fejl
+On Error GoTo fejl
 If c > ncolumns Or r > nrows Then GoTo slut
 
 TabelsCelle = tabels(r, c)
 
 GoTo slut
-Fejl:
+fejl:
 slut:
 
 End Function
@@ -299,7 +299,7 @@ End Function
 Public Sub GetSetData()
 ' læser mængde {(2,1),(3,4)} eller liste fra mathbox ind i tabel
 Dim p As String
-Dim Text As String
+Dim text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim r() As String
@@ -308,27 +308,27 @@ On Error GoTo slut
 
 ReDim r(1 To 1000) As String
 If Selection.OMaths.Count > 0 Then
-    Text = mboxes(0)
+    text = mboxes(0)
 '    Selection.OMaths.Linearize
 '    text = Selection.OMaths(1).Range.text
 Else
-    Text = Selection.Range.Text
+    text = Selection.Range.text
 End If
-ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' nødvendigt
+ea.text = Replace(text, VBA.ChrW(8722), "-") ' nødvendigt
 
-If InStr(Text, "[") > 0 Then
+If InStr(text, "[") > 0 Then
     ea.SetSquareBrackets
-    ea.Text = ea.GetNextBracketContent()
-ElseIf InStr(Text, "{") > 0 Then
+    ea.text = ea.GetNextBracketContent()
+ElseIf InStr(text, "{") > 0 Then
     ea.SetTuborgBrackets
-    ea.Text = ea.GetNextBracketContent()
+    ea.text = ea.GetNextBracketContent()
 Else
-    ea.Text = Text
+    ea.text = text
 End If
 ea.SetNormalBrackets
 ea.Pos = 1
 nrows = 0
-    ea.Text = Replace(ea.Text, ";", " , ")
+    ea.text = Replace(ea.text, ";", " , ")
     ea.ConvertDecSeparator
 
 
@@ -361,7 +361,7 @@ Else
 End If
 
 For i = 1 To nrows
-    ea.Text = r(i)
+    ea.text = r(i)
     ea.Pos = 1
     n = 0
     Do
@@ -372,7 +372,7 @@ For i = 1 To nrows
         End If
         If Not (MaximaSeparator) Then p = Replace(p, ".", ",")
         tabels(i, n) = omax.ConvertToAscii(p)
-    Loop While ea.Pos < Len(ea.Text) And n < 1000
+    Loop While ea.Pos < Len(ea.text) And n < 1000
 Next
     
 If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt så er det formentlig kun et matematikfelt og ikke en liste eller tabel
@@ -411,7 +411,7 @@ Function ReadEquation(Optional ir As Range) As String
     .OMaths(1).ConvertToNormalText
     End With
     
-    ReadEquation = r.Text
+    ReadEquation = r.text
     sr.Select
 
     r.Delete
@@ -448,7 +448,7 @@ Else
     ReDim mboxes(0 To 100)
     Set sr = Selection.Range
     
-    If Len(Selection.Text) < 3 Then
+    If Len(Selection.text) < 3 Then
         Selection.OMaths(1).Range.Select
     End If
 '    If Selection.OMaths(1).Range.End < Selection.Range.End Then
@@ -469,7 +469,7 @@ Else
     Set mathcol = r.OMaths
     For j = 0 To antal - 1
         mathcol(j + 1).ConvertToNormalText
-        mboxes(j) = Replace(mathcol(j + 1).Range.Text, ChrW(11), "") ' fjern shift-enter
+        mboxes(j) = Replace(mathcol(j + 1).Range.text, ChrW(11), "") ' fjern shift-enter
     Next
     ReDim Preserve mboxes(0 To antal - 1)
     antalmboxes = antal

@@ -25,6 +25,6 @@ Sub SetCaptions()
 '#If Mac Then
 '    TextBox1.Text = Replace(Sprog.A(68), "Alt", "ctrl")
 '#Else
-    TextBox1.Text = Sprog.A(68)
+    TextBox1.text = Sprog.A(68)
 '#End If
 End Sub

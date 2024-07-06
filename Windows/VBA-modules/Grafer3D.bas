@@ -2,7 +2,7 @@ Attribute VB_Name = "Grafer3D"
 Option Explicit
 Sub OmdrejningsLegeme()
 Dim Kommando As String
-    Dim fktnavn As String, Udtryk As String, lhs As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
 Dim Arr As Variant
 Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim DefList As String
@@ -45,26 +45,28 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
             If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
-                    lhs = Arr(0)
+                    LHS = Arr(0)
                     rhs = Arr(1)
-                    ea.Text = lhs
+                    ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     
-                    If lhs = fktnavn & "(" & varnavn & ")" Then
-                        ea.Text = rhs
+                    If LHS = fktnavn & "(" & varnavn & ")" Then
+                        ea.text = rhs
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
-                        fktudtryk = ea.Text
+                        fktudtryk = ea.text
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
-                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        cmd = "surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
+'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & cmd
 
                     Else
                         fktudtryk = ReplaceIndepvarX(rhs)
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
-                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        cmd = "surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
+'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & cmd
                         j = j + 1
                     End If
@@ -81,15 +83,17 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                     Udtryk = Replace(Udtryk, vbCr, "")
                     Udtryk = Replace(Udtryk, vbLf, "")
                     DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
-                    If Trim(Udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
-                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
-                        UrlLink = UrlLink & cmd
-                    Else
-                        cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
-                        UrlLink = UrlLink & cmd
-                        cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
-                        UrlLink = UrlLink & cmd
-                    End If
+                    cmd = "surface(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ",2*pi);"
+                    UrlLink = UrlLink & cmd
+'                    If Trim(Udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
+'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
+'                        UrlLink = UrlLink & cmd
+'                    Else
+'                        cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
+'                        UrlLink = UrlLink & cmd
+'                        cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
+'                        UrlLink = UrlLink & cmd
+'                    End If
 
 '                    geogebrafil.CreateFunction "f" & j, udtryk, False
                     j = j + 1
@@ -103,7 +107,7 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     
     OpenLink UrlLink, True
 
-Exit Sub
+Exit Sub '******************************************
 
     PrepareMaxima
     omax.ReadSelection
@@ -120,9 +124,9 @@ Exit Sub
         Kommando = omax.ConvertToWordSymbols(Kommando)
         Kommando = Replace(Kommando, ";", ".")
         If Len(Kommando) > 0 And i = 0 Then
-            UserFormOmdrejninglegeme.TextBox_forskrift.Text = Kommando
+            UserFormOmdrejninglegeme.TextBox_forskrift.text = Kommando
         ElseIf Len(Kommando) > 0 And i = 1 Then
-            UserFormOmdrejninglegeme.TextBox_forskrift2.Text = Kommando
+            UserFormOmdrejninglegeme.TextBox_forskrift2.text = Kommando
         End If
         i = i + 1
     Loop
@@ -131,7 +135,7 @@ Exit Sub
     
     UserFormOmdrejninglegeme.Show
     
-Fejl:
+fejl:
 slut:
 End Sub
 
@@ -139,7 +143,7 @@ Sub Plot3DGraph()
     Dim forskrifter As String
     Dim Arr As Variant
     Dim i As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     PrepareMaxima
     omax.ReadSelection
@@ -177,7 +181,7 @@ Sub Plot3DGraph()
     
     UserForm3DGraph.Show
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -185,15 +189,15 @@ End Sub
 Sub Insert3DEquation(Equation As String)
 
 If InStr(Equation, "=") > 0 Then
-    If UserForm3DGraph.TextBox_ligning1.Text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_ligning2.Text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_ligning3.Text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_ligning1.Text = "" Then
-        UserForm3DGraph.TextBox_ligning1.Text = Equation
-    ElseIf UserForm3DGraph.TextBox_ligning2.Text = "" Then
-        UserForm3DGraph.TextBox_ligning2.Text = Equation
-    ElseIf UserForm3DGraph.TextBox_ligning3.Text = "" Then
-        UserForm3DGraph.TextBox_ligning3.Text = Equation
+    If UserForm3DGraph.TextBox_ligning1.text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_ligning2.text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_ligning3.text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_ligning1.text = "" Then
+        UserForm3DGraph.TextBox_ligning1.text = Equation
+    ElseIf UserForm3DGraph.TextBox_ligning2.text = "" Then
+        UserForm3DGraph.TextBox_ligning2.text = Equation
+    ElseIf UserForm3DGraph.TextBox_ligning3.text = "" Then
+        UserForm3DGraph.TextBox_ligning3.text = Equation
     End If
 ElseIf InStr(Equation, VBA.ChrW(9632)) Then
     Equation = Replace(Equation, VBA.ChrW(9632), "")
@@ -201,22 +205,22 @@ ElseIf InStr(Equation, VBA.ChrW(9632)) Then
     Equation = Replace(Equation, "((", "(")
     Equation = Replace(Equation, "))", ")")
     Equation = "(0,0,0)-" & Equation
-    If UserForm3DGraph.TextBox_vektorer.Text <> "" Then
-        If right(UserForm3DGraph.TextBox_vektorer.Text, 1) = ")" Then
-            UserForm3DGraph.TextBox_vektorer.Text = UserForm3DGraph.TextBox_vektorer.Text & vbCr
+    If UserForm3DGraph.TextBox_vektorer.text <> "" Then
+        If right(UserForm3DGraph.TextBox_vektorer.text, 1) = ")" Then
+            UserForm3DGraph.TextBox_vektorer.text = UserForm3DGraph.TextBox_vektorer.text & vbCr
         End If
     End If
-    UserForm3DGraph.TextBox_vektorer.Text = UserForm3DGraph.TextBox_vektorer.Text & Equation
+    UserForm3DGraph.TextBox_vektorer.text = UserForm3DGraph.TextBox_vektorer.text & Equation
 Else
-    If UserForm3DGraph.TextBox_forskrift1.Text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_forskrift2.Text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_forskrift3.Text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_forskrift1.Text = "" Then
-         UserForm3DGraph.TextBox_forskrift1.Text = Equation
-    ElseIf UserForm3DGraph.TextBox_forskrift2.Text = "" Then
-         UserForm3DGraph.TextBox_forskrift2.Text = Equation
-    ElseIf UserForm3DGraph.TextBox_forskrift3.Text = "" Then
-         UserForm3DGraph.TextBox_forskrift3.Text = Equation
+    If UserForm3DGraph.TextBox_forskrift1.text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift2.text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift3.text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift1.text = "" Then
+         UserForm3DGraph.TextBox_forskrift1.text = Equation
+    ElseIf UserForm3DGraph.TextBox_forskrift2.text = "" Then
+         UserForm3DGraph.TextBox_forskrift2.text = Equation
+    ElseIf UserForm3DGraph.TextBox_forskrift3.text = "" Then
+         UserForm3DGraph.TextBox_forskrift3.text = Equation
     End If
 End If
 

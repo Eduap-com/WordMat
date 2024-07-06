@@ -39,7 +39,7 @@ Sub RefreshRibbon()
         WoMatRibbon.Invalidate
     End If
 #Else
-    On Error GoTo Fejl
+    On Error GoTo fejl
    Dim lngRibPtr As LongPtr
    Dim lngRibPtrBackup As LongPtr
    
@@ -63,7 +63,7 @@ Sub RefreshRibbon()
     End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(394), vbOKOnly, Sprog.Error
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
@@ -72,17 +72,18 @@ slut:
 End Sub
 ' events der fyres når der trykkes på ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
 
     Application.ScreenUpdating = False
     If Kommentar <> "" Then
-    Selection.InsertAfter (Kommentar)
-    Selection.Collapse (wdCollapseEnd)
-    Selection.TypeParagraph
+        Selection.InsertAfter (Kommentar)
+        Selection.Collapse (wdCollapseEnd)
+        Selection.TypeParagraph
     End If
+    Selection.Font.Bold = False
     Selection.OMaths.Add Range:=Selection.Range
     Selection.TypeText formel
     Selection.OMaths.BuildUp
@@ -93,7 +94,7 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
     Oundo.EndCustomRecord
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.A(395), vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -105,6 +106,27 @@ End Sub
 'Callback for proc1 onAction
 Sub Rib_FSfremskriv(control As IRibbonControl)
     insertribformel "", "S=B" & VBA.ChrW(183) & "(1+r)"
+End Sub
+
+'Sub Rib_Formelsamling(control As IRibbonControl)
+'    On Error GoTo fejl
+'    Application.Run macroname:="WMPShowFormler"
+'    GoTo slut
+'fejl:
+'    MsgBox "Formelsamlingen kunne ikke findes. Måske er WordMat+ ikke installeret."
+'slut:
+'End Sub
+
+
+'Callback for menu_cifre getLabel
+Sub Rib_getLabelCiffer(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = MaximaCifre
+End Sub
+'Callback for b2 onAction
+Sub Rib_Ciffer(control As IRibbonControl)
+    MaximaCifre = control.Tag
+    RefreshRibbon
+'    If Not WoMatRibbon Is Nothing Then WoMatRibbon.InvalidateControl ("menu_cifre")
 End Sub
 
 'Callback for Button4 onAction
@@ -836,14 +858,14 @@ End Sub
 
 'Callback for ButtonNyLig onAction
 Sub Rib_nylign(control As IRibbonControl)
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     Application.ScreenUpdating = False
     Selection.OMaths.Add Range:=Selection.Range
 '    Selection.OMaths(1).BuildUp
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
@@ -1465,7 +1487,7 @@ Sub Rib_GetLabelMaximaHelp(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(0)
 End Sub
 Sub Rib_GetLabelAbout(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.About
+    returnedVal = Sprog.About & " " & AppNavn
 End Sub
 Sub Rib_GetLabelUpdate(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.Update
@@ -1481,6 +1503,9 @@ Sub Rib_GetLabelRegrExcel(control As IRibbonControl, ByRef returnedVal)
 End Sub
 
 ' screentips
+Sub Rib_STformelsamling(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.RibFormulae
+End Sub
 Sub Rib_STmathformula(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(486)
 End Sub

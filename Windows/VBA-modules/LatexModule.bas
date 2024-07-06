@@ -34,7 +34,7 @@ Public Sub SaveFile(doctype As Integer)
    '***
    
    'Check if document saved
-   If ActiveDocument.path = "" Then
+   If ActiveDocument.Path = "" Then
       MsgBox "Save your document before attempting to convert to Latex. The Latex files will be placed in a folder next to your document-file.", vbOKOnly, "File not saved"
       GoTo slut
    End If
@@ -95,7 +95,7 @@ Public Sub SaveFile(doctype As Integer)
    
    Dim footn As Footnote
    For Each footn In HiddenDoc.Footnotes
-      footn.Reference.InsertAfter "\footnote{" & footn.Range.Text & "}"
+      footn.Reference.InsertAfter "\footnote{" & footn.Range.text & "}"
       footn.Delete
    Next
    
@@ -154,7 +154,7 @@ Public Sub SaveFile(doctype As Integer)
       If t.Rows(1).Borders.Item(wdBorderTop).LineStyle <> wdLineStyleNone Then s = s & "\hline" & vbCrLf
       For Each r In t.Rows
          For Each c In r.Cells
-            s = s & Left(c.Range.Text, Len(c.Range.Text) - 2) & "&"
+            s = s & Left(c.Range.text, Len(c.Range.text) - 2) & "&"
          Next
          s = Left(s, Len(s) - 1) & "\\ "
          If r.Borders.Item(wdBorderBottom).LineStyle <> wdLineStyleNone Then s = s & "\hline"
@@ -183,29 +183,29 @@ Public Sub SaveFile(doctype As Integer)
         
       ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleTitle) Or ActiveDocument.Paragraphs(i).Range.Style = "Title" Then
          If LatexDocumentclass = 0 Then
-            latexfil.Titel = Replace(ActiveDocument.Paragraphs(i).Range.Text, vbCr, "")
+            latexfil.Titel = Replace(ActiveDocument.Paragraphs(i).Range.text, vbCr, "")
          Else
-            latexfil.InsertChapter ActiveDocument.Paragraphs(i).Range.Text
+            latexfil.InsertChapter ActiveDocument.Paragraphs(i).Range.text
          End If
       ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleHeading1) Or ActiveDocument.Paragraphs(i).Range.Style = "Heading 1" Or ActiveDocument.Paragraphs(i).Range.Style = "Overskrift 1" Then
-         latexfil.InsertSection (ActiveDocument.Paragraphs(i).Range.Text)
+         latexfil.InsertSection (ActiveDocument.Paragraphs(i).Range.text)
       ElseIf ActiveDocument.Paragraphs(i).Style = ActiveDocument.Styles(wdStyleHeading2) Or ActiveDocument.Paragraphs(i).Range.Style = "Heading 2" Then
-         latexfil.InsertSubSection (ActiveDocument.Paragraphs(i).Range.Text)
+         latexfil.InsertSubSection (ActiveDocument.Paragraphs(i).Range.text)
       ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleHeading3) Or ActiveDocument.Paragraphs(i).Range.Style = "Heading 3" Then
-         latexfil.InsertSubSubSection (ActiveDocument.Paragraphs(i).Range.Text)
-      ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleNormal) And InStr(ActiveDocument.Paragraphs(i).Range.Text, "\") <= 0 Then
-         latexfil.InsertParagraph (ActiveDocument.Paragraphs(i).Range.Text)
+         latexfil.InsertSubSubSection (ActiveDocument.Paragraphs(i).Range.text)
+      ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleNormal) And InStr(ActiveDocument.Paragraphs(i).Range.text, "\") <= 0 Then
+         latexfil.InsertParagraph (ActiveDocument.Paragraphs(i).Range.text)
       ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListBullet Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListMixedNumbering Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListOutlineNumbering Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListPictureBullet Then  ' Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListNoNumbering
          If HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListType <> HiddenDoc.Paragraphs(i).Range.ListFormat.ListType Then
             latexfil.InsertText "\begin{itemize}" & vbCrLf
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
          ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListLevelNumber > HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListLevelNumber Then
-            latexfil.InsertText " \begin{itemize}" & vbCrLf & " \item " & HiddenDoc.Paragraphs(i).Range.Text
+            latexfil.InsertText " \begin{itemize}" & vbCrLf & " \item " & HiddenDoc.Paragraphs(i).Range.text
          ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListLevelNumber < HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListLevelNumber Then
             latexfil.InsertText " \end{itemize}" & vbCrLf
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
          Else
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
          End If
          If HiddenDoc.Paragraphs(i + 1).Range.ListFormat.ListType <> HiddenDoc.Paragraphs(i).Range.ListFormat.ListType Then
             latexfil.InsertText "\end{itemize}"
@@ -213,21 +213,21 @@ Public Sub SaveFile(doctype As Integer)
       ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListSimpleNumbering Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListListNumOnly Then
          If HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListType <> HiddenDoc.Paragraphs(i).Range.ListFormat.ListType Then
             latexfil.InsertText "\begin{enumerate}" & vbCrLf
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
          ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListLevelNumber > HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListLevelNumber Then
-            latexfil.InsertText " \begin{enumerate}" & vbCrLf & " \item " & HiddenDoc.Paragraphs(i).Range.Text
+            latexfil.InsertText " \begin{enumerate}" & vbCrLf & " \item " & HiddenDoc.Paragraphs(i).Range.text
          ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListLevelNumber < HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListLevelNumber Then
             latexfil.InsertText " \end{enumerate}" & vbCrLf
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
          Else
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
          End If
          If HiddenDoc.Paragraphs(i + 1).Range.ListFormat.ListType <> HiddenDoc.Paragraphs(i).Range.ListFormat.ListType Then
             latexfil.InsertText "\end{enumerate}"
          End If
       Else
          '            MsgBox ActiveDocument.Paragraphs(i).Range.Style
-         latexfil.InsertText (ActiveDocument.Paragraphs(i).Range.Text)
+         latexfil.InsertText (ActiveDocument.Paragraphs(i).Range.text)
       End If
    Next
     
@@ -305,7 +305,7 @@ Sub ConvertList(L As List)
                s = s & " \end{itemize}" & vbCrLf
             End If
          End If
-         s = s & " \item " & L.ListParagraphs(i).Range.Text
+         s = s & " \item " & L.ListParagraphs(i).Range.text
       Next
       s = s & "\end{itemize}" & vbCrLf
       L.Range.InsertAfter s
@@ -320,7 +320,7 @@ Sub ConvertList(L As List)
                s = s & " \end{enumerate}" & vbCrLf
             End If
          End If
-         s = s & " \item " & L.ListParagraphs(i).Range.Text
+         s = s & " \item " & L.ListParagraphs(i).Range.text
       Next
       s = s & "\end{enumerate}" & vbCrLf
       L.Range.InsertAfter s
@@ -338,15 +338,15 @@ Function Get3DigitImageNo(n As Integer) As String
    End If
 End Function
 
-Sub ConvertImagesToLatex(d As Document)
+Sub ConvertImagesToLatex(D As Document)
 '   On Error GoTo Fejl
    Dim FilNavn As String, ImagFilDir As String, tDoc As Document, sh As InlineShape, si As Integer, sh2 As Shape, sha As Variant
    Dim ImagCol As New Collection
-   If d.InlineShapes.Count = 0 And d.Shapes.Count = 0 Then
+   If D.InlineShapes.Count = 0 And D.Shapes.Count = 0 Then
       latexfil.ImagDir = ""
       Exit Sub
    End If
-   d.Range.Copy
+   D.Range.Copy
    Set tDoc = Documents.Add(, , , False)
 '   Wait (1)
    DoEvents
@@ -376,10 +376,10 @@ Sub ConvertImagesToLatex(d As Document)
       Kill FilNavn
    End If
 
-   For Each sh In d.InlineShapes
+   For Each sh In D.InlineShapes
       ImagCol.Add sh
    Next
-   For Each sh2 In d.Shapes
+   For Each sh2 In D.Shapes
       ImagCol.Add sh2
    Next
    
@@ -403,15 +403,15 @@ Sub ConvertImagesToLatex(d As Document)
       si = si + 1
    Next
        
-   For Each sh In d.InlineShapes
+   For Each sh In D.InlineShapes
       sh.Delete
    Next
-   For Each sh2 In d.Shapes
+   For Each sh2 In D.Shapes
       sh2.Delete
    Next
    
    GoTo slut
-Fejl:
+fejl:
    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure ConvertImagesToLatex, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
 slut:
 End Sub
@@ -470,7 +470,7 @@ Function GetShapePos(sh As Variant) As Long
 End Function
 Sub ConvertFormattingToLatex(r As Range)
     With r.Find
-        .Text = ""
+        .text = ""
         .Forward = True
         .Wrap = wdFindContinue
         .Format = False
@@ -483,7 +483,7 @@ Sub ConvertFormattingToLatex(r As Range)
         .Font.Bold = True
         With .Replacement
             .ClearFormatting
-            .Text = "\textbf{^&}"
+            .text = "\textbf{^&}"
             .Font.Bold = False
         End With
         .Execute Replace:=wdReplaceAll
@@ -491,7 +491,7 @@ Sub ConvertFormattingToLatex(r As Range)
         .Font.Italic = True
         With .Replacement
             .ClearFormatting
-            .Text = "\textit{^&}"
+            .text = "\textit{^&}"
             .Font.Italic = False
         End With
         .Execute Replace:=wdReplaceAll
@@ -499,22 +499,22 @@ Sub ConvertFormattingToLatex(r As Range)
         .Font.Underline = True
         With .Replacement
             .ClearFormatting
-            .Text = "\underline{^&}"
+            .text = "\underline{^&}"
             .Font.Underline = False
         End With
         .Execute Replace:=wdReplaceAll
         .ClearFormatting
-        .Text = "^m"
+        .text = "^m"
         With .Replacement
             .ClearFormatting
-            .Text = "^&\newpage"
+            .text = "^&\newpage"
         End With
         .Execute Replace:=wdReplaceAll
         .ClearFormatting
-        .Text = "^l" ' softbreak
+        .text = "^l" ' softbreak
         With .Replacement
             .ClearFormatting
-            .Text = "\newline^10"
+            .text = "\newline^10"
         End With
         .Execute Replace:=wdReplaceAll
     End With
@@ -550,11 +550,11 @@ Sub OpretHiddendoc()
 #If Mac Then
 '    Call tempDoc
 #Else
-Dim d As Document
+Dim D As Document
 If HiddenDoc Is Nothing Then
-For Each d In Application.Documents
-    If d.BuiltInDocumentProperties("Title") = "WordMatLatexHiddenDoc" Then
-        Set HiddenDoc = d
+For Each D In Application.Documents
+    If D.BuiltInDocumentProperties("Title") = "WordMatLatexHiddenDoc" Then
+        Set HiddenDoc = D
         Exit For
     End If
 Next
@@ -712,12 +712,12 @@ On Error GoTo slut
     If Selection.OMaths.Count > 0 Then
         PrepareMaxima
         omax.ReadSelection
-        Selection.OMaths(1).Range.Text = ""
+        Selection.OMaths(1).Range.text = ""
         Selection.InsertAfter LatexStart & omax.ConvertToLatex(omax.Kommando) & LatexSlut
     Else
         PrepareMaxima
         
-        mtext = omax.ConvertLatexToWord(RemoveLatexOmslut(Selection.Range.Text))
+        mtext = omax.ConvertLatexToWord(RemoveLatexOmslut(Selection.Range.text))
         Selection.Range.Delete
         Selection.Collapse wdCollapseEnd
         Set r = Selection.OMaths.Add(Selection.Range)
@@ -729,10 +729,10 @@ On Error GoTo slut
 
 slut:
 End Sub
-Function RemoveLatexOmslut(Text As String)
+Function RemoveLatexOmslut(text As String)
 
-    Text = TrimB(Text, "$")
-    Text = TrimL(Text, "\[")
-    Text = TrimR(Text, "\]")
-    RemoveLatexOmslut = Text
+    text = TrimB(text, "$")
+    text = TrimL(text, "\[")
+    text = TrimR(text, "\]")
+    RemoveLatexOmslut = text
 End Function

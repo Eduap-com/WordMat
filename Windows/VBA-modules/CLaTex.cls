@@ -237,7 +237,7 @@ End Function
 
 Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
 Dim filren As String, s As String
-On Error GoTo Fejl
+On Error GoTo fejl
 
    UfWait.Label_tip.Caption = "Gemmer Tex-fil"
 LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
@@ -251,7 +251,7 @@ On Error GoTo 0
 WriteTextfileToString Mappe & "\" & FilNavn, LaTexDoc
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
 slut:
 
@@ -287,7 +287,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
       On Error Resume Next
       If Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Then Kill Mappe & "\" & FilNavn & ".dvi"
       'Kill Mappe & "\" & filnavn & ".dvi"
-      On Error GoTo Fejl
+      On Error GoTo fejl
 
       appnr = Shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
 
@@ -309,7 +309,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
 
    'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
    GoTo slut
-Fejl:
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 #End If
@@ -322,7 +322,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    Dim i As Integer, j As Integer
    Dim mtpath As String, ReRun As Boolean
    
-      On Error GoTo Fejl
+      On Error GoTo fejl
 #If Mac Then
    MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
 #Else
@@ -398,39 +398,39 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    End If
 #End If
    GoTo slut
-Fejl:
+fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
 Function MikTexPath() As String
-Dim path As String
+Dim Path As String
      
-path = Environ("ProgramW6432") & "\MikTex*"
-If Dir(path, vbDirectory) <> "" Then
+Path = Environ("ProgramW6432") & "\MikTex*"
+If Dir(Path, vbDirectory) <> "" Then
    MikTex64bit = True
-   path = Environ("ProgramW6432") & "\" & Dir(path, vbDirectory) & "\miktex"
+   Path = Environ("ProgramW6432") & "\" & Dir(Path, vbDirectory) & "\miktex"
    GoTo slut
 End If
-path = Environ("ProgramFiles") & "\MikTex*"
-If Dir(path, vbDirectory) <> "" Then
+Path = Environ("ProgramFiles") & "\MikTex*"
+If Dir(Path, vbDirectory) <> "" Then
     MikTex64bit = False
-   path = Environ("ProgramFiles") & "\" & Dir(path, vbDirectory) & "\miktex"
+   Path = Environ("ProgramFiles") & "\" & Dir(Path, vbDirectory) & "\miktex"
    GoTo slut
 End If
 
-path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' hvis installeret i userprofile
-If Dir(path, vbDirectory) <> "" Then GoTo slut
+Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' hvis installeret i userprofile
+If Dir(Path, vbDirectory) <> "" Then GoTo slut
 
-path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' hvis installeret i userprofile
-If Dir(path, vbDirectory) <> "" Then GoTo slut
+Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' hvis installeret i userprofile
+If Dir(Path, vbDirectory) <> "" Then GoTo slut
 
 'path = GetProgramFilesDir() & "\MikTex*"
 'If Dir(path, vbDirectory) <> "" Then GoTo Slut
 
-path = ""
+Path = ""
 slut:
-MikTexPath = path
+MikTexPath = Path
 End Function
 Function IsMikTexInstalled() As Boolean
 If MikTexPath = "" Then
@@ -439,63 +439,63 @@ Else
     IsMikTexInstalled = True
 End If
 End Function
-Sub InsertText(Text As String)
-    LaTexDoc = LaTexDoc & Text ' & vbCr
+Sub InsertText(text As String)
+    LaTexDoc = LaTexDoc & text ' & vbCr
 End Sub
-Sub InsertParagraph(Text As String)
-   If Text = "" Or Text = vbCrLf Or Text = vbCr Or Text = vbLf Then
+Sub InsertParagraph(text As String)
+   If text = "" Or text = vbCrLf Or text = vbCr Or text = vbLf Then
       LaTexDoc = LaTexDoc & vbCrLf
    Else
-    LaTexDoc = LaTexDoc & vbCrLf & Text & vbCrLf
+    LaTexDoc = LaTexDoc & vbCrLf & text & vbCrLf
 '    LaTexDoc = LaTexDoc & "\paragraph{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertChapter(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+Sub InsertChapter(text As String)
+   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
     
-   If InStr(Text, "*") > 0 Then
-      LaTexDoc = LaTexDoc & "\chapter*{" & Replace(Text, "*", "") & "}" & vbCrLf
+   If InStr(text, "*") > 0 Then
+      LaTexDoc = LaTexDoc & "\chapter*{" & Replace(text, "*", "") & "}" & vbCrLf
    Else
-      LaTexDoc = LaTexDoc & "\chapter{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\chapter{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+Sub InsertSection(text As String)
+   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(Text, "*") > 0 Then
-         LaTexDoc = LaTexDoc & "\section*{" & Replace(Text, "*", "") & "}" & vbCrLf
+      If InStr(text, "*") > 0 Then
+         LaTexDoc = LaTexDoc & "\section*{" & Replace(text, "*", "") & "}" & vbCrLf
       Else
-         LaTexDoc = LaTexDoc & "\section{" & Text & "}" & vbCrLf
+         LaTexDoc = LaTexDoc & "\section{" & text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\section*{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\section*{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSubSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+Sub InsertSubSection(text As String)
+   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(Text, "*") > 0 Then
-      LaTexDoc = LaTexDoc & "\subsection*{" & Replace(Text, "*", "") & "}" & vbCrLf
+      If InStr(text, "*") > 0 Then
+      LaTexDoc = LaTexDoc & "\subsection*{" & Replace(text, "*", "") & "}" & vbCrLf
       Else
-      LaTexDoc = LaTexDoc & "\subsection{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsection{" & text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\subsection*{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsection*{" & text & "}" & vbCrLf
    End If
 End Sub
-Sub InsertSubSubSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+Sub InsertSubSubSection(text As String)
+   If right(text, 1) = vbCr Then text = Left(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
-      If InStr(Text, "*") > 0 Then
-         LaTexDoc = LaTexDoc & "\subsubsection*{" & Replace(Text, "*", "") & "}" & vbCrLf
+      If InStr(text, "*") > 0 Then
+         LaTexDoc = LaTexDoc & "\subsubsection*{" & Replace(text, "*", "") & "}" & vbCrLf
       Else
-         LaTexDoc = LaTexDoc & "\subsubsection{" & Text & "}" & vbCrLf
+         LaTexDoc = LaTexDoc & "\subsubsection{" & text & "}" & vbCrLf
       End If
    Else
-      LaTexDoc = LaTexDoc & "\subsubsection*{" & Text & "}" & vbCrLf
+      LaTexDoc = LaTexDoc & "\subsubsection*{" & text & "}" & vbCrLf
    End If
 End Sub
 

@@ -36,24 +36,24 @@ Option Explicit
     Dim inputtext As String
 
 Private Sub Label_nulstil_Click()
-    TextBox_A.Text = ""
-    TextBox_B.Text = ""
-    TextBox_C.Text = ""
-    TextBox_sa.Text = ""
-    TextBox_sb.Text = ""
-    TextBox_sc.Text = ""
-    TextBox_captionA.Text = "A"
-    TextBox_captionB.Text = "B"
-    TextBox_captionC.Text = "C"
-    TextBox_captionsa.Text = "a"
-    TextBox_captionsb.Text = "b"
-    TextBox_captionsc.Text = "c"
+    TextBox_A.text = ""
+    TextBox_B.text = ""
+    TextBox_C.text = ""
+    TextBox_sa.text = ""
+    TextBox_sb.text = ""
+    TextBox_sc.text = ""
+    TextBox_captionA.text = "A"
+    TextBox_captionB.text = "B"
+    TextBox_captionC.text = "C"
+    TextBox_captionsa.text = "a"
+    TextBox_captionsb.text = "b"
+    TextBox_captionsc.text = "c"
     
 End Sub
 
 Private Sub Label_ok_Click()
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
     Dim t As Table
     Dim r As Range
@@ -99,13 +99,13 @@ On Error GoTo Fejl
 
     Set r = t.Cell(1, 1).Range
     t.Cell(1, 2).Select
-    TypeLine TextBox_captionA.Text & " = " & ConvertNumberToStringBC(vA) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_A.Text)))
-    TypeLine TextBox_captionB.Text & " = " & ConvertNumberToStringBC(vB) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_B.Text)))
-    TypeLine TextBox_captionC.Text & " = " & ConvertNumberToStringBC(vC) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_C.Text)))
+    TypeLine TextBox_captionA.text & " = " & ConvertNumberToStringBC(vA) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_A.text)))
+    TypeLine TextBox_captionB.text & " = " & ConvertNumberToStringBC(vB) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_B.text)))
+    TypeLine TextBox_captionC.text & " = " & ConvertNumberToStringBC(vC) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_C.text)))
     Selection.TypeParagraph
-    TypeLine TextBox_captionsa.Text & " = " & ConvertNumberToStringBC(SA), Not (CBool(ConvertStringToNumber(TextBox_sa.Text)))
-    TypeLine TextBox_captionsb.Text & " = " & ConvertNumberToStringBC(sb), Not (CBool(ConvertStringToNumber(TextBox_sb.Text)))
-    TypeLine TextBox_captionsc.Text & " = " & ConvertNumberToStringBC(sc), Not (CBool(ConvertStringToNumber(TextBox_sc.Text)))
+    TypeLine TextBox_captionsa.text & " = " & ConvertNumberToStringBC(SA), Not (CBool(ConvertStringToNumber(TextBox_sa.text)))
+    TypeLine TextBox_captionsb.text & " = " & ConvertNumberToStringBC(sb), Not (CBool(ConvertStringToNumber(TextBox_sb.text)))
+    TypeLine TextBox_captionsc.text & " = " & ConvertNumberToStringBC(sc), Not (CBool(ConvertStringToNumber(TextBox_sc.text)))
     
 
     If CheckBox_tal.Value Then
@@ -116,7 +116,7 @@ On Error GoTo Fejl
         If bc > MaximaCifre Then bc = MaximaCifre
         InsertTriangle r, vA, sb, sc, ConvertNumberToStringBC(vA, 3) & VBA.ChrW(176), ConvertNumberToStringBC(vB, 3) & VBA.ChrW(176), ConvertNumberToStringBC(vC, 3) & VBA.ChrW(176), ConvertNumberToStringBC(SA, bc), ConvertNumberToStringBC(sb, bc), ConvertNumberToStringBC(sc, bc)
     Else
-        InsertTriangle r, vA, sb, sc, TextBox_captionA.Text, TextBox_captionB.Text, TextBox_captionC.Text, TextBox_captionsa.Text, TextBox_captionsb.Text, TextBox_captionsc.Text
+        InsertTriangle r, vA, sb, sc, TextBox_captionA.text, TextBox_captionB.text, TextBox_captionC.text, TextBox_captionsa.text, TextBox_captionsb.text, TextBox_captionsc.text
     End If
     
     t.Range.Select
@@ -130,13 +130,13 @@ On Error GoTo Fejl
     
     Set r = t.Cell(1, 1).Range
     t.Cell(1, 2).Select
-    TypeLine TextBox_captionA.Text & " = " & ConvertNumberToStringBC(vA2) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_A.Text)))
-    TypeLine TextBox_captionB.Text & " = " & ConvertNumberToStringBC(vB2) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_B.Text)))
-    TypeLine TextBox_captionC.Text & " = " & ConvertNumberToStringBC(vC2) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_C.Text)))
+    TypeLine TextBox_captionA.text & " = " & ConvertNumberToStringBC(vA2) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_A.text)))
+    TypeLine TextBox_captionB.text & " = " & ConvertNumberToStringBC(vB2) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_B.text)))
+    TypeLine TextBox_captionC.text & " = " & ConvertNumberToStringBC(vC2) & VBA.ChrW(176), Not (CBool(ConvertStringToNumber(TextBox_C.text)))
     Selection.TypeParagraph
-    TypeLine TextBox_captionsa.Text & " = " & ConvertNumberToStringBC(sa2), Not (CBool(ConvertStringToNumber(TextBox_sa.Text)))
-    TypeLine TextBox_captionsb.Text & " = " & ConvertNumberToStringBC(sb2), Not (CBool(ConvertStringToNumber(TextBox_sb.Text)))
-    TypeLine TextBox_captionsc.Text & " = " & ConvertNumberToStringBC(sc2), Not (CBool(ConvertStringToNumber(TextBox_sc.Text)))
+    TypeLine TextBox_captionsa.text & " = " & ConvertNumberToStringBC(sa2), Not (CBool(ConvertStringToNumber(TextBox_sa.text)))
+    TypeLine TextBox_captionsb.text & " = " & ConvertNumberToStringBC(sb2), Not (CBool(ConvertStringToNumber(TextBox_sb.text)))
+    TypeLine TextBox_captionsc.text & " = " & ConvertNumberToStringBC(sc2), Not (CBool(ConvertStringToNumber(TextBox_sc.text)))
         
     If CheckBox_tal.Value Then
         bc = 3 ' antal betydende cifre på sidelængde på figur
@@ -146,7 +146,7 @@ On Error GoTo Fejl
         If bc > MaximaCifre Then bc = MaximaCifre
         InsertTriangle r, vA2, sb2, sc2, ConvertNumberToStringBC(vA2, 3) & VBA.ChrW(176), ConvertNumberToStringBC(vB2, 3) & VBA.ChrW(176), ConvertNumberToStringBC(vC2, 3) & VBA.ChrW(176), ConvertNumberToStringBC(sa2, bc), ConvertNumberToStringBC(sb2, bc), ConvertNumberToStringBC(sc2, bc)
     Else
-        InsertTriangle r, vA2, sb2, sc2, TextBox_captionA.Text, TextBox_captionB.Text, TextBox_captionC.Text, TextBox_captionsa.Text, TextBox_captionsb.Text, TextBox_captionsc.Text
+        InsertTriangle r, vA2, sb2, sc2, TextBox_captionA.text, TextBox_captionB.text, TextBox_captionC.text, TextBox_captionsa.text, TextBox_captionsb.text, TextBox_captionsc.text
     End If
 
     t.Range.Select
@@ -177,7 +177,7 @@ On Error GoTo Fejl
     Oundo.EndCustomRecord
     
 GoTo slut
-Fejl:
+fejl:
     MsgBox Sprog.TSNoSolution, vbOKOnly, Sprog.Error
     Exit Sub
 slut:
@@ -190,13 +190,13 @@ slut:
 
 End Sub
 
-Sub TypeLine(Text As String, fed As Boolean)
+Sub TypeLine(text As String, fed As Boolean)
     If fed Then
         Selection.Font.Bold = True
     Else
         Selection.Font.Bold = False
     End If
-    Selection.TypeText Text
+    Selection.TypeText text
     Selection.Font.Bold = False
     Selection.TypeParagraph
 
@@ -204,7 +204,7 @@ End Sub
 
 Sub FindSolutions(Optional advarsler As Boolean = False)
 
-    Dim d As Double
+    Dim D As Double
     Dim san As String
     Dim sbn As String
     Dim scn As String
@@ -212,21 +212,21 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     Dim vBn As String
     Dim vCn As String
     
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
-    san = TextBox_captionsa.Text
-    sbn = TextBox_captionsb.Text
-    scn = TextBox_captionsc.Text
-    vAn = TextBox_captionA.Text
-    vBn = TextBox_captionB.Text
-    vCn = TextBox_captionC.Text
+    san = TextBox_captionsa.text
+    sbn = TextBox_captionsb.text
+    scn = TextBox_captionsc.text
+    vAn = TextBox_captionA.text
+    vBn = TextBox_captionB.text
+    vCn = TextBox_captionC.text
     
-    vA = ConvertStringToNumber(TextBox_A.Text)
-    vB = ConvertStringToNumber(TextBox_B.Text)
-    vC = ConvertStringToNumber(TextBox_C.Text)
-    SA = ConvertStringToNumber(TextBox_sa.Text)
-    sb = ConvertStringToNumber(TextBox_sb.Text)
-    sc = ConvertStringToNumber(TextBox_sc.Text)
+    vA = ConvertStringToNumber(TextBox_A.text)
+    vB = ConvertStringToNumber(TextBox_B.text)
+    vC = ConvertStringToNumber(TextBox_C.text)
+    SA = ConvertStringToNumber(TextBox_sa.text)
+    sb = ConvertStringToNumber(TextBox_sb.text)
+    sc = ConvertStringToNumber(TextBox_sc.text)
     nv = 0
     ns = 0
     elaboindex = 0
@@ -235,27 +235,27 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     
     If vA > 0 Then
         nv = nv + 1
-        inputtext = inputtext & TextBox_captionA.Text & " = " & TextBox_A.Text & VBA.ChrW(176) & " , "
+        inputtext = inputtext & TextBox_captionA.text & " = " & TextBox_A.text & VBA.ChrW(176) & " , "
     End If
     If vB > 0 Then
         nv = nv + 1
-        inputtext = inputtext & TextBox_captionB.Text & " = " & TextBox_B.Text & VBA.ChrW(176) & " , "
+        inputtext = inputtext & TextBox_captionB.text & " = " & TextBox_B.text & VBA.ChrW(176) & " , "
     End If
     If vC > 0 Then
         nv = nv + 1
-        inputtext = inputtext & TextBox_captionC.Text & " = " & TextBox_C.Text & VBA.ChrW(176) & " , "
+        inputtext = inputtext & TextBox_captionC.text & " = " & TextBox_C.text & VBA.ChrW(176) & " , "
     End If
     If SA > 0 Then
         ns = ns + 1
-        inputtext = inputtext & TextBox_captionsa.Text & " = " & TextBox_sa.Text & " , "
+        inputtext = inputtext & TextBox_captionsa.text & " = " & TextBox_sa.text & " , "
     End If
     If sb > 0 Then
         ns = ns + 1
-        inputtext = inputtext & TextBox_captionsb.Text & " = " & TextBox_sb.Text & " , "
+        inputtext = inputtext & TextBox_captionsb.text & " = " & TextBox_sb.text & " , "
     End If
     If sc > 0 Then
         ns = ns + 1
-        inputtext = inputtext & TextBox_captionsc.Text & " = " & TextBox_sc.Text & " , "
+        inputtext = inputtext & TextBox_captionsc.text & " = " & TextBox_sc.text & " , "
     End If
     If Len(inputtext) > 1 Then inputtext = Left(inputtext, Len(inputtext) - 2)
         
@@ -460,22 +460,22 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             ElseIf SA > 0 And sb > 0 Then ' sider ikke om vinkel
-                d = SA ^ 2 - sb ^ 2 * Sin(vA * PI / 180) ^ 2
-                If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                D = SA ^ 2 - sb ^ 2 * Sin(vA * PI / 180) ^ 2
+                If D < 0 Then ' ingen løsning
+                    GoTo fejl
                 End If
-                sc = sb * Cos(vA * PI / 180) + Sqr(d)
-                sc2 = sb * Cos(vA * PI / 180) - Sqr(d)
+                sc = sb * Cos(vA * PI / 180) + Sqr(D)
+                sc2 = sb * Cos(vA * PI / 180) - Sqr(D)
                 vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vC = 180 - vB - vA
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
                 AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(223), san & "^2=" & sbn & "^2+" & scn & "^2-2" & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
                 AddElaborate Sprog.A(225) & " " & scn, scn & "=" & sbn & VBA.ChrW(183) & "cos(" & vAn & ")+" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sc)
-                If d > 0 Then AddElaborate Sprog.A(226), scn & "_2=" & sbn & VBA.ChrW(183) & "cos(" & vAn & ")-" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sc2)
+                If D > 0 Then AddElaborate Sprog.A(226), scn & "_2=" & sbn & VBA.ChrW(183) & "cos(" & vAn & ")-" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sc2)
                 If sc2 < 0 Then AddElaborate Sprog.A(227), ""
                 AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
-                If d > 0 And sc2 > 0.000000000000001 Then
+                If D > 0 And sc2 > 0.000000000000001 Then
                     vA2 = vA
                     sb2 = sb
                     sa2 = SA
@@ -486,22 +486,22 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                     AddElaborate Sprog.A(215) & " " & vCn & VBA.ChrW(8322) & " " & Sprog.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
                 End If
             ElseIf SA > 0 And sc > 0 Then ' sider ikke om vinkel
-                d = SA ^ 2 - sc ^ 2 * Sin(vA * PI / 180) ^ 2
-                If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                D = SA ^ 2 - sc ^ 2 * Sin(vA * PI / 180) ^ 2
+                If D < 0 Then ' ingen løsning
+                    GoTo fejl
                 End If
-                sb = sc * Cos(vA * PI / 180) + Sqr(d)
-                sb2 = sc * Cos(vA * PI / 180) - Sqr(d)
+                sb = sc * Cos(vA * PI / 180) + Sqr(D)
+                sb2 = sc * Cos(vA * PI / 180) - Sqr(D)
                 vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vC = 180 - vB - vA
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
                 AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(223), san & "^2=" & sbn & "^2+" & scn & "^2-2" & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
                 AddElaborate Sprog.A(225) & " " & sbn, sbn & "=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")+" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sb)
-                If d > 0 Then AddElaborate Sprog.A(226), sbn & "_2=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")-" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sb2)
+                If D > 0 Then AddElaborate Sprog.A(226), sbn & "_2=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")-" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sb2)
                 If sb2 < 0 Then AddElaborate Sprog.A(227), ""
                 AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
-                If d > 0 And sb2 > 0.000000000000001 Then
+                If D > 0 And sb2 > 0.000000000000001 Then
                     vA2 = vA
                     sc2 = sc
                     sa2 = SA
@@ -521,22 +521,22 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             ElseIf SA > 0 And sb > 0 Then ' sider ikke om vinkel
-                d = sb ^ 2 - SA ^ 2 * Sin(vB * PI / 180) ^ 2
-                If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                D = sb ^ 2 - SA ^ 2 * Sin(vB * PI / 180) ^ 2
+                If D < 0 Then ' ingen løsning
+                    GoTo fejl
                 End If
-                sc = SA * Cos(vB * PI / 180) + Sqr(d)
-                sc2 = SA * Cos(vB * PI / 180) - Sqr(d)
+                sc = SA * Cos(vB * PI / 180) + Sqr(D)
+                sc2 = SA * Cos(vB * PI / 180) - Sqr(D)
                 vA = Arccos((sb ^ 2 + sc ^ 2 - SA ^ 2) / (2 * sb * sc)) * 180 / PI
                 vC = 180 - vB - vA
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
                 AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(223), sbn & "^2=" & san & "^2+" & scn & "^2-2" & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
                 AddElaborate Sprog.A(225) & " " & scn, scn & "=" & san & VBA.ChrW(183) & "cos(" & vBn & ")+" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sc)
-                If d > 0 Then AddElaborate Sprog.A(226), scn & "_2=" & san & VBA.ChrW(183) & "cos(" & vBn & ")-" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sc2)
+                If D > 0 Then AddElaborate Sprog.A(226), scn & "_2=" & san & VBA.ChrW(183) & "cos(" & vBn & ")-" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sc2)
                 If sc2 < 0 Then AddElaborate Sprog.A(227), ""
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
-                If d > 0 And sc2 > 0.000000000000001 Then
+                If D > 0 And sc2 > 0.000000000000001 Then
                     vB2 = vB
                     sb2 = sb
                     sa2 = SA
@@ -547,22 +547,22 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                     AddElaborate Sprog.A(215) & " " & vCn & VBA.ChrW(8322) & " " & Sprog.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
                 End If
             ElseIf sb > 0 And sc > 0 Then ' sider ikke om vinkel
-                d = sb ^ 2 - sc ^ 2 * Sin(vB * PI / 180) ^ 2
-                If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                D = sb ^ 2 - sc ^ 2 * Sin(vB * PI / 180) ^ 2
+                If D < 0 Then ' ingen løsning
+                    GoTo fejl
                 End If
-                SA = sc * Cos(vB * PI / 180) + Sqr(d)
-                sa2 = sc * Cos(vB * PI / 180) - Sqr(d)
+                SA = sc * Cos(vB * PI / 180) + Sqr(D)
+                sa2 = sc * Cos(vB * PI / 180) - Sqr(D)
                 vA = Arccos((sb ^ 2 + sc ^ 2 - SA ^ 2) / (2 * sb * sc)) * 180 / PI
                 vC = 180 - vB - vA
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
                 AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(223), sbn & "^2=" & san & "^2+" & scn & "^2-2" & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vBn & ")"
                 AddElaborate Sprog.A(225) & " " & san, san & "=" & scn & VBA.ChrW(183) & "cos(" & vBn & ")+" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(SA)
-                If d > 0 Then AddElaborate Sprog.A(226), san & "_2=" & scn & VBA.ChrW(183) & "cos(" & vBn & ")-" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sa2)
+                If D > 0 Then AddElaborate Sprog.A(226), san & "_2=" & scn & VBA.ChrW(183) & "cos(" & vBn & ")-" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sa2)
                 If sa2 < 0 Then AddElaborate Sprog.A(227), ""
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
-                If d > 0 And sa2 > 0.000000000000001 Then
+                If D > 0 And sa2 > 0.000000000000001 Then
                     vB2 = vB
                     sc2 = sc
                     sb2 = sb
@@ -582,22 +582,22 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             ElseIf sc > 0 And sb > 0 Then ' sider ikke om vinkel
-                d = sc ^ 2 - sb ^ 2 * Sin(vC * PI / 180) ^ 2
-                If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                D = sc ^ 2 - sb ^ 2 * Sin(vC * PI / 180) ^ 2
+                If D < 0 Then ' ingen løsning
+                    GoTo fejl
                 End If
-                SA = sb * Cos(vC * PI / 180) + Sqr(d)
-                sa2 = sb * Cos(vC * PI / 180) - Sqr(d)
+                SA = sb * Cos(vC * PI / 180) + Sqr(D)
+                sa2 = sb * Cos(vC * PI / 180) - Sqr(D)
                 vB = Arccos((sc ^ 2 + SA ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vA = 180 - vB - vC
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
                 AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(223), scn & "^2=" & sbn & "^2+" & san & "^2-2" & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & ")"
                 AddElaborate Sprog.A(225) & " " & san, san & "=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")+" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(SA)
-                If d > 0 Then AddElaborate Sprog.A(226), san & "_2=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")-" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sa2)
+                If D > 0 Then AddElaborate Sprog.A(226), san & "_2=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")-" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sa2)
                 If sa2 < 0 Then AddElaborate Sprog.A(227), ""
                 AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
-                If d > 0 And sa2 > 0.000000000000001 Then
+                If D > 0 And sa2 > 0.000000000000001 Then
                     vC2 = vC
                     sb2 = sb
                     sc2 = sc
@@ -608,22 +608,22 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                     AddElaborate Sprog.A(215) & " " & vAn & VBA.ChrW(8322) & " " & Sprog.A(216), vAn & "_2=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
                 End If
             ElseIf SA > 0 And sc > 0 Then ' sider ikke om vinkel
-                d = sc ^ 2 - SA ^ 2 * Sin(vC * PI / 180) ^ 2
-                If d < 0 Then ' ingen løsning
-                    GoTo Fejl
+                D = sc ^ 2 - SA ^ 2 * Sin(vC * PI / 180) ^ 2
+                If D < 0 Then ' ingen løsning
+                    GoTo fejl
                 End If
-                sb = SA * Cos(vC * PI / 180) + Sqr(d)
-                sb2 = SA * Cos(vC * PI / 180) - Sqr(d)
+                sb = SA * Cos(vC * PI / 180) + Sqr(D)
+                sb2 = SA * Cos(vC * PI / 180) - Sqr(D)
                 vB = Arccos((sc ^ 2 + SA ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vA = 180 - vB - vC
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
                 AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(223), scn & "^2=" & sbn & "^2+" & san & "^2-2" & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & ")"
                 AddElaborate Sprog.A(225) & " " & sbn, sbn & "=" & san & VBA.ChrW(183) & "cos(" & vCn & ")+" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sb)
-                If d > 0 Then AddElaborate Sprog.A(226), sbn & "_2=" & san & VBA.ChrW(183) & "cos(" & vCn & ")-" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sb2)
+                If D > 0 Then AddElaborate Sprog.A(226), sbn & "_2=" & san & VBA.ChrW(183) & "cos(" & vCn & ")-" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sb2)
                 If sb2 < 0 Then AddElaborate Sprog.A(227), ""
                 AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
-                If d > 0 And sb2 > 0.000000000000001 Then
+                If D > 0 And sb2 > 0.000000000000001 Then
                     vC2 = vC
                     sa2 = SA
                     sc2 = sc
@@ -637,13 +637,13 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         End If
     End If
 GoTo slut
-Fejl:
+fejl:
     statustext = Sprog.TSMissingInfo
     If advarsler Then MsgBox statustext, vbOKOnly, Sprog.Error
     Exit Sub
 slut:
     If SA <= 0 Or sb <= 0 Or sc <= 0 Or vA <= 0 Or vB <= 0 Or vC <= 0 Then
-        GoTo Fejl
+        GoTo fejl
     Else
         succes = True
         statustext = Sprog.TSInfoOK
@@ -739,12 +739,12 @@ v12:
 slut:
 End Sub
 
-Function AddLabel(Text As String, X As Double, Y As Double, s As Shape) As Shape
+Function AddLabel(text As String, X As Double, Y As Double, s As Shape) As Shape
     Dim lbl As Shape
     Set lbl = s.CanvasItems.AddLabel(msoTextOrientationHorizontal, CSng(X), CSng(Y), 8, 14)
     lbl.TextFrame.AutoSize = msoTrue
     lbl.TextFrame.WordWrap = False
-    lbl.TextFrame.TextRange.Text = Text
+    lbl.TextFrame.TextRange.text = text
     lbl.TextFrame.TextRange.Font.Size = 10
     lbl.TextFrame.MarginBottom = 0
     lbl.TextFrame.MarginTop = 0
@@ -763,8 +763,8 @@ End Sub
 Private Sub OptionButton_reth_Click()
 Dim FN As String
 On Error Resume Next
-TextBox_C.Text = 90
-If CSng(TextBox_A.Text) >= 90 Then TextBox_A.Text = ""
+TextBox_C.text = 90
+If CSng(TextBox_A.text) >= 90 Then TextBox_A.text = ""
 TextBox_C.Enabled = False
 TextBox_A.Enabled = True
 #If Mac Then
@@ -805,8 +805,8 @@ End Sub
 Private Sub OptionButton_retv_Click()
 Dim FN As String
 On Error Resume Next
-TextBox_A.Text = 90
-If CSng(TextBox_C.Text) >= 90 Then TextBox_C.Text = ""
+TextBox_A.text = 90
+If CSng(TextBox_C.text) >= 90 Then TextBox_C.text = ""
 TextBox_A.Enabled = False
 TextBox_C.Enabled = True
 #If Mac Then
@@ -939,34 +939,34 @@ OpdaterNavngivning
 End Sub
 Sub OpdaterNavngivning()
 If OptionButton_navngivstorlille.Value = True Then
-    TextBox_captionA.Text = VBA.UCase(TextBox_captionA.Text)
-    TextBox_captionsa.Text = VBA.LCase(TextBox_captionA.Text)
-    TextBox_captionB.Text = VBA.UCase(TextBox_captionB.Text)
-    TextBox_captionsb.Text = VBA.LCase(TextBox_captionB.Text)
-    TextBox_captionC.Text = VBA.UCase(TextBox_captionC.Text)
-    TextBox_captionsc.Text = VBA.LCase(TextBox_captionC.Text)
+    TextBox_captionA.text = VBA.UCase(TextBox_captionA.text)
+    TextBox_captionsa.text = VBA.LCase(TextBox_captionA.text)
+    TextBox_captionB.text = VBA.UCase(TextBox_captionB.text)
+    TextBox_captionsb.text = VBA.LCase(TextBox_captionB.text)
+    TextBox_captionC.text = VBA.UCase(TextBox_captionC.text)
+    TextBox_captionsc.text = VBA.LCase(TextBox_captionC.text)
 ElseIf OptionButton_navngivsiderAB.Value = True Then
-    TextBox_captionsa.Text = TextBox_captionB.Text & TextBox_captionC.Text
-    TextBox_captionsb.Text = TextBox_captionA.Text & TextBox_captionC.Text
-    TextBox_captionsc.Text = TextBox_captionA.Text & TextBox_captionB.Text
+    TextBox_captionsa.text = TextBox_captionB.text & TextBox_captionC.text
+    TextBox_captionsb.text = TextBox_captionA.text & TextBox_captionC.text
+    TextBox_captionsc.text = TextBox_captionA.text & TextBox_captionB.text
 End If
-OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.right
-OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.right
+OptionButton_retv.Caption = TextBox_captionA.text & " " & Sprog.right
+OptionButton_reth.Caption = TextBox_captionC.text & " " & Sprog.right
 End Sub
 Private Sub TextBox_captionA_Change()
 If OptionButton_navngivstorlille.Value = True Then
-    TextBox_captionA.Text = VBA.UCase(TextBox_captionA.Text)
-    TextBox_captionsa.Text = VBA.LCase(TextBox_captionA.Text)
+    TextBox_captionA.text = VBA.UCase(TextBox_captionA.text)
+    TextBox_captionsa.text = VBA.LCase(TextBox_captionA.text)
 ElseIf OptionButton_navngivsiderAB.Value = True Then
     OpdaterNavngivning
 End If
-OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.right
+OptionButton_retv.Caption = TextBox_captionA.text & " " & Sprog.right
 End Sub
 
 Private Sub TextBox_captionB_Change()
 If OptionButton_navngivstorlille.Value = True Then
-    TextBox_captionB.Text = VBA.UCase(TextBox_captionB.Text)
-    TextBox_captionsb.Text = VBA.LCase(TextBox_captionB.Text)
+    TextBox_captionB.text = VBA.UCase(TextBox_captionB.text)
+    TextBox_captionsb.text = VBA.LCase(TextBox_captionB.text)
 ElseIf OptionButton_navngivsiderAB.Value = True Then
     OpdaterNavngivning
 End If
@@ -974,34 +974,34 @@ End Sub
 
 Private Sub TextBox_captionC_Change()
 If OptionButton_navngivstorlille.Value = True Then
-    TextBox_captionC.Text = VBA.UCase(TextBox_captionC.Text)
-    TextBox_captionsc.Text = VBA.LCase(TextBox_captionC.Text)
+    TextBox_captionC.text = VBA.UCase(TextBox_captionC.text)
+    TextBox_captionsc.text = VBA.LCase(TextBox_captionC.text)
 ElseIf OptionButton_navngivsiderAB.Value = True Then
     OpdaterNavngivning
 End If
-OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.right
+OptionButton_reth.Caption = TextBox_captionC.text & " " & Sprog.right
 End Sub
 
 Private Sub TextBox_captionsa_Change()
 If OptionButton_navngivstorlille.Value = True Then
-    TextBox_captionsa.Text = VBA.LCase(TextBox_captionsa.Text)
-    TextBox_captionA.Text = VBA.UCase(TextBox_captionsa.Text)
+    TextBox_captionsa.text = VBA.LCase(TextBox_captionsa.text)
+    TextBox_captionA.text = VBA.UCase(TextBox_captionsa.text)
 End If
 OpdaterNavngivning
 End Sub
 
 Private Sub TextBox_captionsb_Change()
 If OptionButton_navngivstorlille.Value = True Then
-    TextBox_captionsb.Text = VBA.LCase(TextBox_captionsb.Text)
-    TextBox_captionB.Text = VBA.UCase(TextBox_captionsb.Text)
+    TextBox_captionsb.text = VBA.LCase(TextBox_captionsb.text)
+    TextBox_captionB.text = VBA.UCase(TextBox_captionsb.text)
 End If
 OpdaterNavngivning
 End Sub
 
 Private Sub TextBox_captionsc_Change()
 If OptionButton_navngivstorlille.Value = True Then
-    TextBox_captionsc.Text = VBA.LCase(TextBox_captionsc.Text)
-    TextBox_captionC.Text = VBA.UCase(TextBox_captionsc.Text)
+    TextBox_captionsc.text = VBA.LCase(TextBox_captionsc.text)
+    TextBox_captionC.text = VBA.UCase(TextBox_captionsc.text)
 End If
 OpdaterNavngivning
 End Sub
@@ -1016,9 +1016,9 @@ Private Sub TextBox_sc_Change()
     UpdateSolution
 End Sub
 
-Sub AddElaborate(Text As String, lign As String)
+Sub AddElaborate(text As String, lign As String)
 
-    elabotext(elaboindex) = Text
+    elabotext(elaboindex) = text
     elabolign(elaboindex) = lign
     
     elaboindex = elaboindex + 1
@@ -1030,12 +1030,12 @@ Private Sub UserForm_Activate()
 #If Mac Then
     Frame1.visible = False
 #End If
-    TextBox_A.Text = TriangleAV
-    TextBox_B.Text = TriangleBV
-    TextBox_C.Text = TriangleCV
-    TextBox_sa.Text = TriangleAS
-    TextBox_sb.Text = TriangleBS
-    TextBox_sc.Text = TriangleCS
+    TextBox_A.text = TriangleAV
+    TextBox_B.text = TriangleBV
+    TextBox_C.text = TriangleCV
+    TextBox_sa.text = TriangleAS
+    TextBox_sb.text = TriangleBS
+    TextBox_sc.text = TriangleCS
     
     If TriangleSett1 = 1 Then
         OptionButton_retv.Value = True
@@ -1065,12 +1065,12 @@ Private Sub UserForm_Activate()
     TriangleSett3 = False
     TriangleSett4 = False
     End If
-    TextBox_captionA.Text = TriangleNAV
-    TextBox_captionB.Text = TriangleNBV
-    TextBox_captionC.Text = TriangleNCV
-    TextBox_captionsa.Text = TriangleNAS
-    TextBox_captionsb.Text = TriangleNBS
-    TextBox_captionsc.Text = TriangleNCS
+    TextBox_captionA.text = TriangleNAV
+    TextBox_captionB.text = TriangleNBV
+    TextBox_captionC.text = TriangleNCV
+    TextBox_captionsa.text = TriangleNAS
+    TextBox_captionsb.text = TriangleNBS
+    TextBox_captionsc.text = TriangleNCS
     CheckBox_tal.Value = TriangleSett3
     CheckBox_forklaring.Value = TriangleSett4
     
@@ -1078,18 +1078,18 @@ Private Sub UserForm_Activate()
 End Sub
 
 Private Sub SaveSettings()
-    TriangleAV = TextBox_A.Text
-    TriangleBV = TextBox_B.Text
-    TriangleCV = TextBox_C.Text
-    TriangleAS = TextBox_sa.Text
-    TriangleBS = TextBox_sb.Text
-    TriangleCS = TextBox_sc.Text
-    TriangleNAV = TextBox_captionA.Text
-    TriangleNBV = TextBox_captionB.Text
-    TriangleNCV = TextBox_captionC.Text
-    TriangleNAS = TextBox_captionsa.Text
-    TriangleNBS = TextBox_captionsb.Text
-    TriangleNCS = TextBox_captionsc.Text
+    TriangleAV = TextBox_A.text
+    TriangleBV = TextBox_B.text
+    TriangleCV = TextBox_C.text
+    TriangleAS = TextBox_sa.text
+    TriangleBS = TextBox_sb.text
+    TriangleCS = TextBox_sc.text
+    TriangleNAV = TextBox_captionA.text
+    TriangleNBV = TextBox_captionB.text
+    TriangleNCV = TextBox_captionC.text
+    TriangleNAS = TextBox_captionsa.text
+    TriangleNBS = TextBox_captionsb.text
+    TriangleNCS = TextBox_captionsc.text
     TriangleSett3 = CheckBox_tal.Value
     TriangleSett4 = CheckBox_forklaring.Value
     If OptionButton_retv.Value Then

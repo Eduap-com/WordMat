@@ -157,7 +157,7 @@ End Function
 Function FolderWithVBAProjectFiles() As String
     Dim SpecialPath As String
 
-    SpecialPath = ActiveDocument.path
+    SpecialPath = ActiveDocument.Path
     
     If right(SpecialPath, 1) <> "\" Then
         SpecialPath = SpecialPath & "\"
@@ -195,7 +195,7 @@ Public Sub ExportAllModules()
     Dim backupFolder As String, n As Integer, ns As String
     '    Dim UfWait2 As UserFormWaitForMaxima ' det duer ikke at bruge noget der refererer uden for vbamodul, da de bliver slettet, og så fejler hele modulet og der kan ikke importeres
     '    Set UfWait2 = New UserFormWaitForMaxima
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
 
 #If Mac Then
@@ -334,7 +334,7 @@ Public Sub ExportAllModules()
             On Error Resume Next
 '            Kill ModuleBackupFolder & "*.*"
 '            RmDir ModuleBackupFolder
-            On Error GoTo Fejl
+            On Error GoTo fejl
         End If
     Else
         MsgBox "An error occurred during Export. The module folder only contains " & C1 & " files. " & vbCrLf & "Your previous Export is saved to a backup folder: " & vbCrLf & ModuleBackupFolder, vbOKOnly, "Error"
@@ -342,14 +342,14 @@ Public Sub ExportAllModules()
     
     ExportDatetime = Now
     GoTo slut
-Fejl:
+fejl:
     MsgBox "An error occurred during Export. Your previous Export is saved to a backup folder: " & VBAModulesFolder & "-Backup", vbOKOnly, "Error"
 slut:
     '    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
 End Sub
 Sub ImportAllModules()
 ' Hvis denne sub køres via en commandbutton, så virker det ikke, så går det galt med Userforms og VBAmodul
-    Dim d As String, q As String
+    Dim D As String, q As String
     Dim wkbSource As Document
     Dim szSourceWorkbook As String
     Dim szExportPath As String
@@ -395,8 +395,8 @@ Sub ImportAllModules()
     If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     StrFile = Dir(szExportPath & "A-ExportCreated*")
-    If StrFile <> "" Then d = Mid(StrFile, 17, Len(StrFile) - 20)
-    d = Left(d, 13) & ":" & Mid(d, 14, 2) & ":" & right(d, 2)
+    If StrFile <> "" Then D = Mid(StrFile, 17, Len(StrFile) - 20)
+    D = Left(D, 13) & ":" & Mid(D, 14, 2) & ":" & right(D, 2)
     
     
     StrFile = Dir(szExportPath & "*")
@@ -415,8 +415,8 @@ Sub ImportAllModules()
         MBP = vbExclamation
     End If
     
-    If GetTimeString(ActiveDocument.BuiltInDocumentProperties("Last Save Time")) - 100 > GetTimeString(d) Then
-        q = q & "Your document is newer than the export in '" & VBAModulesFolder & "'" & vbCrLf & "Export date: " & d & vbCrLf & "Save date: " & ActiveDocument.BuiltInDocumentProperties("Last Save Time") & vbCrLf
+    If GetTimeString(ActiveDocument.BuiltInDocumentProperties("Last Save Time")) - 100 > GetTimeString(D) Then
+        q = q & "Your document is newer than the export in '" & VBAModulesFolder & "'" & vbCrLf & "Export date: " & D & vbCrLf & "Save date: " & ActiveDocument.BuiltInDocumentProperties("Last Save Time") & vbCrLf
         If MBP = vbExclamation Then
             MBP = vbCritical
         Else
@@ -424,16 +424,16 @@ Sub ImportAllModules()
         End If
     End If
     
-    If DateDiff("d", d, Now) > 0 Then
-        EAge = DateDiff("d", d, Now) & " days"
-    ElseIf DateDiff("h", d, Now) > 0 Then
-        EAge = DateDiff("h", d, Now) & " hours"
+    If DateDiff("d", D, Now) > 0 Then
+        EAge = DateDiff("d", D, Now) & " days"
+    ElseIf DateDiff("h", D, Now) > 0 Then
+        EAge = DateDiff("h", D, Now) & " hours"
     Else
-        EAge = DateDiff("n", d, Now) & " min"
+        EAge = DateDiff("n", D, Now) & " min"
     End If
     
     q = q & vbCrLf & "Confirm you want to import all VBA modules from folder " & VBAModulesFolder & "? (All existing VBA-modules will be removed before importing)" & vbCrLf & vbCrLf
-    If d <> "" Then q = q & "Export age: " & EAge & "       (Export date: " & d & ")" & vbCrLf & vbCrLf
+    If D <> "" Then q = q & "Export age: " & EAge & "       (Export date: " & D & ")" & vbCrLf & vbCrLf
     q = q & "No of files to import: " & ImportCount  ' & vbCrLf & FileList
     
    If MsgBox(q, vbOKCancel + MBP, "Continue?") = vbCancel Then Exit Sub
@@ -455,7 +455,7 @@ Sub ImportAllModules()
         MsgBox ImportCount & " files successfully imported from folder '" & VBAModulesFolder & "'", vbOKOnly, "Import complete"
     End If
     GoTo slut
-Fejl:
+fejl:
 slut:
 End Sub
 Public Sub RemoveAllModules()
@@ -529,9 +529,9 @@ Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
     If PromptOk Then MsgBox "All modules has been removed (Except VBAmodul)"
 End Sub
 
-Function GetTimeString(ByVal d As Date) As String
+Function GetTimeString(ByVal D As Date) As String
 
-GetTimeString = Year(d) & Month(d) & Day(d) & AddZero(Hour(d)) & AddZero(Minute(d)) & AddZero(Second(d))
+GetTimeString = Year(D) & Month(D) & Day(D) & AddZero(Hour(D)) & AddZero(Minute(D)) & AddZero(Second(D))
 
 End Function
 

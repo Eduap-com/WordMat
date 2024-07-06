@@ -86,16 +86,16 @@ End Sub
 Public Property Get PunktText() As Variant
     Dim ctrlx As Object
     Dim ctrly As Object
-    Dim Text As String
+    Dim text As String
     Dim i As Integer
 
     Do
         Set ctrlx = Me.Controls("X" & i)
         Set ctrly = Me.Controls("Y" & i)
-        Text = Text & ctrlx.Text & ";" & ctrly.Text & "$"
+        text = text & ctrlx.text & ";" & ctrly.text & "$"
         i = i + 1
     Loop While i < raekker
 
 
-    PunktText = Text
+    PunktText = text
 End Property

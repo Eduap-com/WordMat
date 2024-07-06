@@ -1,9 +1,11 @@
 Attribute VB_Name = "GlobalVariables"
 Option Explicit
 
+#Const AVsafe = False ' Compiler constant. AntiVirus safe. If true will not compile functions that could potentially be blocked by AntiVirus
+
 Public AppNavn As String
 
-Public Const AppVersion = "1.29"
+Public Const AppVersion = "1.30"
 #If Mac Then ' WordMat shows patchVersion attached to AppVersion. if ".1" then shows as 1.24.1. or " beta" -> "1.24 beta" A new PatchVersion does not trigger autoupdate
     Public Const PatchVersion = "" ' Mac  ".1"
 #Else
@@ -34,6 +36,9 @@ Public MaxProc As MaximaProcess
 Public MaxProc As Object
 Public MaxProcUnit As Object
 #End If
+
+Public mSkoleNavn As String
+Public mPartnerSkab As Integer ' 0=not checked, 1= true, 2=false
 
 ' Farvekoder til LabelButtons
 Public Const LBColorFont = &H242424 'ForeColor

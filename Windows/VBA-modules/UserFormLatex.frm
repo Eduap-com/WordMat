@@ -59,17 +59,17 @@ End Sub
 Sub ShowFixedPreamble()
    latexfil.UseWordMargins = LatexWordMargins
 '   latexfil.ImagDir = ""
-   TextBox_FixedPreamble.Text = latexfil.FixedLatexPreamble1 & vbrlf & "... Custom ..." & vbCrLf & latexfil.FixedLatexPreamble2
+   TextBox_FixedPreamble.text = latexfil.FixedLatexPreamble1 & vbrlf & "... Custom ..." & vbCrLf & latexfil.FixedLatexPreamble2
 End Sub
 
 Sub SaveSet2()
    If Not EventsOn Then Exit Sub
-    LatexPreamble = TextBox_preamble.Text
+    LatexPreamble = TextBox_preamble.text
     LatexSectionNumbering = CheckBox_sectionnumbers.Value
     LatexDocumentclass = ComboBox_documentclass.ListIndex
     LatexFontsize = ComboBox_fontsize.ListIndex + 10
     LatexWordMargins = CheckBox_forceMargins.Value
-    TextBox_FixedPreamble.Text = latexfil.FixedLatexPreamble1
+    TextBox_FixedPreamble.text = latexfil.FixedLatexPreamble1
     LatexTOC = CInt(CheckBox_contents.Value)
     LatexTitlePage = CInt(CheckBox_title.Value)
 End Sub
@@ -105,8 +105,8 @@ ElseIf OptionButton_omslutlatex.Value = True Then
     LatexStart = "[latex]"
     LatexSlut = "[\latex]"
 ElseIf OptionButton_omslutuser.Value = True Then
-    LatexStart = TextBox_for.Text
-    LatexSlut = TextBox_efter.Text
+    LatexStart = TextBox_for.text
+    LatexSlut = TextBox_efter.text
 ElseIf OptionButton_omslutauto.Value = True Then
    If Selection.OMaths.Count > 0 Then
     If Selection.OMaths(1).Justification = wdOMathJcInline Then
@@ -126,7 +126,7 @@ End Sub
 Private Sub CommandButton_copy_Click()
 Dim Obj As New DataObject
 
-Obj.SetText TextBox_latex.Text
+Obj.SetText TextBox_latex.text
 Obj.PutInClipboard
 End Sub
 
@@ -138,8 +138,8 @@ End Sub
 
 Private Sub CommandButton_next_Click()
     If Selection.OMaths.Count > 0 Then
-        Selection.OMaths(1).Range.Text = ""
-        Selection.InsertAfter TextBox_latex.Text
+        Selection.OMaths(1).Range.text = ""
+        Selection.InsertAfter TextBox_latex.text
     End If
     Me.Hide
     Selection.End = ActiveDocument.Range.End
@@ -149,7 +149,7 @@ Private Sub CommandButton_next_Click()
         Label_input.Caption = omax.Kommando
     Else
         Label_input.Caption = ""
-        TextBox_latex.Text = ""
+        TextBox_latex.text = ""
     End If
     UpDateLatex
     Me.Show
@@ -171,16 +171,16 @@ End Sub
 Private Sub CommandButton_onlinelatex_Click()
 'http://latex.codecogs.com/emf.latex?%5Cint_0%5E1%20x%5E2%20dx
 'http://www.codecogs.com/latex/eqneditor.php?latex=x^2+1
-Dim Text As String
+Dim text As String
 
-Text = LatexCode
+text = LatexCode
 
-Text = Replace(Text, "^", "%5E")
-Text = Replace(Text, "&", "%26")
-Text = Replace(Text, "\", "%5C")
-Text = Replace(Text, " ", "%20")
-Text = Replace(Text, "+", "@plus;")
-OpenLink "http://www.codecogs.com/latex/eqneditor.php?latex=" & Text  '"%5Cint_0%5E1%20x%5E2%20dx"
+text = Replace(text, "^", "%5E")
+text = Replace(text, "&", "%26")
+text = Replace(text, "\", "%5C")
+text = Replace(text, " ", "%20")
+text = Replace(text, "+", "@plus;")
+OpenLink "http://www.codecogs.com/latex/eqneditor.php?latex=" & text  '"%5Cint_0%5E1%20x%5E2%20dx"
 
 End Sub
 
@@ -275,8 +275,8 @@ Private Sub UserForm_Activate()
     
     EventsOn = False
     Selection.End = ActiveDocument.Range.End
-    TextBox_for.Text = ""
-    TextBox_efter.Text = ""
+    TextBox_for.text = ""
+    TextBox_efter.text = ""
     If Selection.OMaths.Count = 0 Then
 '        MsgBox Sprog.A(84), vbOKOnly, Sprog.Error
     Else
@@ -299,7 +299,7 @@ Private Sub UserForm_Activate()
     Else
        ComboBox_fontsize.ListIndex = 0
     End If
-    TextBox_preamble.Text = LatexPreamble
+    TextBox_preamble.text = LatexPreamble
     ShowFixedPreamble
     CheckBox_forceMargins.Value = LatexWordMargins
     CheckBox_title.Value = CBool(LatexTitlePage)
@@ -333,22 +333,22 @@ Sub UpDateLatex()
 
    If OptionButton_omslutauto.Value = True Then
       If Selection.OMaths(1).Justification = wdOMathJcInline Then
-         TextBox_latex.Text = "$" & LatexCode & "$"
+         TextBox_latex.text = "$" & LatexCode & "$"
       Else
          If Selection.OMaths(1).Range.Tables.Count > 0 Then
             Set t = Selection.OMaths(1).Range.Tables(1)
             If t.Rows.Count = 1 And t.Columns.Count = 3 And t.Cell(1, 2).Range.OMaths.Count > 0 And t.Cell(1, 3).Range.Fields.Count Then
                
-               TextBox_latex.Text = "\begin{equation}" & LatexCode & "\end{equation}"
+               TextBox_latex.text = "\begin{equation}" & LatexCode & "\end{equation}"
             Else
-               TextBox_latex.Text = "\begin{equation*}" & LatexCode & "\end{equation*}"
+               TextBox_latex.text = "\begin{equation*}" & LatexCode & "\end{equation*}"
             End If
          Else
-            TextBox_latex.Text = "\begin{equation*}" & LatexCode & "\end{equation*}"
+            TextBox_latex.text = "\begin{equation*}" & LatexCode & "\end{equation*}"
          End If
       End If
    Else
-      TextBox_latex.Text = LatexStart & LatexCode & LatexSlut
+      TextBox_latex.text = LatexStart & LatexCode & LatexSlut
    End If
 
 End Sub
@@ -430,6 +430,6 @@ Private Sub CommandButton_resetpreamble_Click()
    
 
    LatexPreamble = s
-   TextBox_preamble.Text = s
+   TextBox_preamble.text = s
 
 End Sub
