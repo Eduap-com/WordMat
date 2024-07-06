@@ -812,11 +812,11 @@ Sub Rib_regrpol(control As IRibbonControl)
 End Sub
 
 Sub Rib_regrexcel(control As IRibbonControl)
-#If Mac Then
-    InsertOpenExcel "Graphs.xltm"
-#Else
+'#If Mac Then
+'    InsertOpenExcel "Graphs.xltm"
+'#Else
     Call InsertChart
-#End If
+'#End If
 End Sub
 
 'Callback for regruser onAction
