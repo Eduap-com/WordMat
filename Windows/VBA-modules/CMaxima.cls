@@ -2936,6 +2936,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
 
     If InStr(text, VBA.ChrW(9608)) > 0 And InStr(text, VBA.ChrW(9508)) <= 0 Then matvekt = True    '9608=matrixtegn  , bruges dog også ved stykkevis definerede funktioner, hvor 9508 bruges som afsluttende tegn
     If InStr(text, VBA.ChrW(9632)) > 0 Then matvekt = True    '9632= andet vektortegn
+    If InStr(text, VBA.ChrW(166)) > 0 Then matvekt = True    ' ¦ bruges ved vektorer indtastet fra ligningsmenuen
     
     text = Replace(text, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ] bruges ved stykkevis def. funktioner flyttet her 1.26 pga problemer med vekt
 
@@ -5995,36 +5996,35 @@ genstart:
         Selection.Collapse (wdCollapseEnd)
     ElseIf antal > 1 Then
         ReDim Kommandoer(0 To 100)
-        '    For j = 1 To antal
-        '        Selection.OMaths(j).Range.Select ' ovenstående var ikke nok, men hvorfor var det der?
-        '        Kommandoer(j - 1) = Replace(ReadEquationCopy(), Chr(11), "") ' fjern shift-enter
-        '    Next
-
-        '    GoTo hop ' forsøg
+        Dim mathcol As OMaths
 
         Set sr = Selection.Range
-        Selection.Copy
-        '    Set at = NormalTemplate.AutoTextEntries.Add(Name:="WordMat", Range:=Selection.Range)
-        '    Set at = ActiveDocument.AttachedTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
+'        Selection.Copy
+'        Set r = tempDoc.Range
+'        r.Paste
+'        With r
+'            .OMaths.BuildUp
+'            .OMaths.Linearize
+'        End With
 
+    Dim OM As OMath
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+    
+    Set mathcol = Selection.OMaths
+    With Selection.OMaths
+        .BuildUp
+        .Linearize
+    End With
 
-        '    Set tempDoc = Documents.Add(, , , False)
-        Set r = tempDoc.Range
-        '    at.Insert r, True
-        '    r.text = copytext
-        '    r.OMaths.Add Range:=r
-        r.Paste
-        With r
-            .OMaths.BuildUp
-            .OMaths.Linearize
-        End With
-
-        Dim mathcol As OMaths
-        Set mathcol = r.OMaths
         For j = 0 To antal - 1
             mathcol(j + 1).ConvertToNormalText
             Kommandoer(j) = Replace(mathcol(j + 1).Range.text, ChrW(11), "")    ' fjern shift-enter
         Next
+        
+    Oundo.EndCustomRecord
+    ActiveDocument.Undo
         
 hop:
         ReDim Preserve Kommandoer(0 To antal - 1)
@@ -6035,7 +6035,7 @@ fejl:
     On Error GoTo slut
     ReadSelectionOld
 slut:
-    tempDoc.Saved = True
+'    tempDoc.Saved = True
     Selection.start = sstart
     Selection.End = sslut
 
@@ -6076,6 +6076,25 @@ Function ReadEquationCopy(Optional ir As Range) As String
 ' 22/8-2023 Har oplevet nogle win 11 computere, der fryser lige når selection.copy eksekveres. Det virker at skifte til readselectionold (men det er der også ulemper ved)
     Dim sr As Range, r As Range
 
+    Set sr = Selection.Range
+    Dim OM As OMath
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+    Set OM = Selection.OMaths(1)
+    OM.Range.Font.Bold = False
+    OM.BuildUp
+    OM.Linearize
+    OM.ConvertToNormalText
+    ReadEquationCopy = OM.Range.text
+    Oundo.EndCustomRecord
+    ActiveDocument.Undo
+    sr.Select
+
+
+Exit Function
+'  nedenfor v1.30 og før
+
 On Error GoTo fejl
     '    Dim t As Variant
     '    t = Timer
@@ -6112,9 +6131,31 @@ slut:
 End Function
 Function ReadEquation2(ir As Range) As String
     Dim sr As Range
+
+    Set sr = Selection.Range
+    Dim OM As OMath
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+    Set OM = ir.OMaths(1)
+    OM.Range.Font.Bold = False
+    OM.BuildUp
+    OM.Linearize
+    OM.ConvertToNormalText
+    ReadEquation2 = OM.Range.text
+    Oundo.EndCustomRecord
+    ActiveDocument.Undo
+    sr.Select
+
+Exit Function
+'  nedenfor v1.30 og før
+    
+    
+    
     Dim r As Range
     Set sr = Selection.Range
     ir.Copy
+    
     Set r = tempDoc.Range
 '    at.Insert r, True   ' fjernet 19/2 den er vel erstattet af paste under with nedenfor?
 

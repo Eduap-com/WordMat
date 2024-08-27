@@ -23,7 +23,7 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
     
     SaveBackup
     
-    Dim UfWait2 As UserFormWaitStartup
+'    Dim UfWait2 As UserFormWaitStartup
     op = False
     If Not SettingsRead Then ReadAllSettingsFromRegistry
 
@@ -33,8 +33,8 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
         On Error Resume Next
         Application.Run macroname:="Popstart"
         On Error GoTo fejl
-        If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
-        UfWait2.Show vbModeless
+'        If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+'        UfWait2.Show vbModeless
         op = True
 #If Mac Then
         Set D = ActiveDocument
@@ -49,8 +49,8 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
 #If Mac Then
             Set D = ActiveDocument
 #Else
-            If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
-            UfWait2.Show vbModeless
+'            If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+ '           UfWait2.Show vbModeless
             op = True
 #End If
             DoEvents
@@ -108,8 +108,8 @@ getproc:
     If MaximaUnits Then
         If MaxProcUnit Is Nothing Then
             If Not op Then
-                If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
-                UfWait2.Show vbModeless
+'                If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+'                UfWait2.Show vbModeless
                 op = True
 #If Mac Then
                 Set D = ActiveDocument
@@ -138,7 +138,7 @@ finish:
     End If
     On Error Resume Next
     If op Then
-        Unload UfWait2
+'        Unload UfWait2
 #If Mac Then
         D.Activate
 #End If
@@ -147,11 +147,11 @@ finish:
     GoTo slut
 fejl:
     On Error Resume Next
-    If Not UfWait2 Is Nothing Then Unload UfWait2
+'    If Not UfWait2 Is Nothing Then Unload UfWait2
     PrepareMaxima = False
 slut:
     On Error Resume Next
-    If Not UfWait2 Is Nothing Then Unload UfWait2
+'    If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
 #If Mac Then
 Function GetMaxProc() As MaximaProcess
@@ -1698,9 +1698,10 @@ Sub beregn()
     '    Dim omax As New CMaxima
     Dim fejlm As String
         On Error GoTo fejl
-    '    Application.ScreenUpdating = False
+   ' Application.ScreenUpdating = False
     '   LockWindow
-    
+    Dim tid As Single
+    tid = Timer
 #If Mac Then
     Dim D As Document
     Set D = ActiveDocument
@@ -1716,6 +1717,21 @@ Sub beregn()
     '    st = Timer
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    Set UFWait = New UserFormWaitForMaxima
+    
+    If MaximaExact = 2 Then
+        On Error Resume Next
+        Err.Clear
+        Application.Run macroname:="CASCALC"
+        If Err.Number = 513 Then
+            MsgBox2 Err.Description, vbOKOnly, "Fejl"
+            GoTo slut
+        ElseIf Err.Number = 0 Then
+            GoTo slut
+        End If
+        On Error GoTo fejl
+    End If
+    
+    
     If Not PrepareMaxima Then GoTo slut
     omax.prevspr = ""
 
@@ -1836,7 +1852,7 @@ slut:
     '    UnLockWindow
     '    TimeText = TimeText & vbCrLf & "beregn ialt: " & Timer - st
     '    MsgBox TimeText
-
+'    MsgBox Timer - tid
 End Sub
 
 Function GetCmdAfterEqualSign(Kommando As String) As String

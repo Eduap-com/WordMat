@@ -120,6 +120,10 @@ Sub OpretTempdoc()
 '#If Mac Then
 '    Call tempDoc
 '#Else
+
+    Exit Sub
+' indtil v1.30:
+
 Dim D As Document
 If tempDoc Is Nothing Then
 For Each D In Application.Documents
@@ -132,6 +136,7 @@ End If
 
 If tempDoc Is Nothing Then
     Set tempDoc = Documents.Add(, , , False)
+'    tempDoc.ActiveWindow.View.Draft = True ' giver måske en hastighedsforbedring, men har ikke kunnet måle det
     tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
 End If
 
@@ -1668,7 +1673,7 @@ End Function
 
 Sub TabelToList()
     Dim dd As New DocData
-    Dim om As Range
+    Dim OM As Range
     On Error GoTo fejl
     If Selection.Range.Tables.Count = 0 Then
         If Sprog.SprogNr = 1 Then
@@ -1687,9 +1692,9 @@ Sub TabelToList()
 
     GoToInsertPoint
     'Selection.TypeParagraph
-    Set om = Selection.OMaths.Add(Selection.Range)
+    Set OM = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
-    om.OMaths(1).BuildUp
+    OM.OMaths(1).BuildUp
     Selection.TypeParagraph
     GoTo slut
 fejl:
@@ -2599,5 +2604,10 @@ Sub TestMe()
  MsgBox2 "Dette er en lille test", vbOKOnly, "Hello"
  MsgBox2 "Dette er en længere test" & vbCrLf & "Der skal være flere og længere linjer" & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej.", vbOKCancel, "Hello"
  MsgBox2 "Dette er en bred test" & vbCrLf & "Der skal være en meget lang linje med mange forskellige tegn, så boksen bliver bred. Mon den kan blive så bred som denne linje?" & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej.", vbOKCancel, "Hello"
+End Sub
+
+Sub TestError()
+    On Error Resume Next
+    Err.Raise 1, , "dsds"
 End Sub
 
