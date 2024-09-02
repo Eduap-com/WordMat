@@ -548,8 +548,6 @@ omax.GoToEndOfSelectedMaths
 Selection.TypeParagraph
     UfWait2.Label_progress = UfWait2.Label_progress & "**"
 
-EnableExcelMacros
-
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, _
 DisplayAsIcon:=False, Range:=Selection.Range)
 
@@ -563,7 +561,6 @@ ils.OLEFormat.DoVerb (wdOLEVerbShow)
 Set WB = ils.OLEFormat.Object
 Set ws = WB.Sheets("Tabel")
 'ws.Activate
-DisableExcelMacros
 End If
 
 XLapp.Application.EnableEvents = False

@@ -3,7 +3,7 @@ Option Explicit
 Function InsertIndlejretExcel() As Object
 '    InsertIndlejret "TomExcel.xlsx"
 On Error GoTo slut
-EnableExcelMacros
+
 Dim vers As String
 Dim oWS As Object ' Worksheet Object
 'Dim oOLEWd As OLEObject ' OLE Word Object
@@ -23,7 +23,6 @@ Set InsertIndlejretExcel = oWS
 'oWS.ActiveSheet.Cells(1, 1).value = "Test"
 'ils.OLEFormat.Activate
 slut:
-DisableExcelMacros
 End Function
 
 Sub ExcelIns()
@@ -290,10 +289,5 @@ If Sprog.SprogNr = 1 Then
 Else
     InsertOpenExcel "BinomialFordeling.xltm", "Binomial test", Sprog.A(593)
 End If
-End Sub
-Sub EnableExcelMacros()
-' Denne kode er fjernet, for at se om AntiVirus ikke reagerer
-End Sub
-Sub DisableExcelMacros()
 End Sub
 

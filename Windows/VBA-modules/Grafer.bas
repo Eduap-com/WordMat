@@ -772,16 +772,11 @@ If ExcelIndlejret Then
     Selection.TypeParagraph
 Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
 
-EnableExcelMacros
-
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, _
 DisplayAsIcon:=False, Range:=Selection.Range)
 
 ils.OLEFormat.DoVerb (wdOLEVerbShow)
 Set WB = ils.OLEFormat.Object
-DisableExcelMacros
-
-
 
 Else
     Set WB = InsertOpenExcel("Graphs.xltm", "Tabel")
@@ -876,7 +871,6 @@ Exit Sub
 'Dim ils As InlineShape
 'Dim wb As Variant
 'Dim ws As Variant
-EnableExcelMacros
 Application.ScreenUpdating = False
 Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
 
@@ -908,7 +902,6 @@ ws.Activate
 'Set excel = CreateObject("Excel.Application")
 'Set wb = excel.Workbooks(excel.Workbooks.Count)
 slut:
-DisableExcelMacros
 End Sub
 
 Sub InsertGeoGeobraObject()
@@ -969,7 +962,6 @@ Dim ils As InlineShape
 Dim vers As String
 On Error GoTo fejl
 Application.ScreenUpdating = False
-EnableExcelMacros
     
     Dim UfWait2 As New UserFormWaitForMaxima
     UfWait2.Label_stop.visible = False
@@ -1001,35 +993,18 @@ Else
     vers = ""
 End If
 
-'Set ils = ActiveDocument.InlineShapes.AddOLEObject(FileName:=path, LinkToFile:=False, _
-'DisplayAsIcon:=False, Range:=Selection.Range)
-' forsøg uden classtype. prøv evt med classtype:=Excel.SheetMacroEnabled.12
-'Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.Sheet" & vers & Application.Version, _
-'FileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.SheetMacroEnabled" & vers & Application.Version, _
 fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
         
         UfWait2.Label_progress = "***************************************"
-'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
-'ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
-'ils.OLEFormat.DoVerb (wdOLEVerbShow)
+
 If startark <> "" Then
     ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
     DoEvents
     Set InsertIndlejret = ils.OLEFormat.Object
-
-'    Dim oWS As Object ' Worksheet Object
-'    Set oWS = ils.OLEFormat.Object
-'    ils.OLEFormat.Object.Sheets(startark).Activate
-'    oWS.ActiveSheet.Cells(4, 1).Activate
-'    oWS.ActiveSheet.Application.Selection.Paste ' virker ikke
-'    oWS.Selection.Paste
 End If
 Unload UfWait2
-'Ils.OLEFormat.DoVerb (wdOLEVerbUIActivate)
-'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
-'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
-DisableExcelMacros
+
 GoTo slut
 fejl:
     On Error Resume Next

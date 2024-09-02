@@ -1718,12 +1718,12 @@ Sub beregn()
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    Set UFWait = New UserFormWaitForMaxima
     
-    If MaximaExact = 2 Then
+    If MaximaExact = 2 And Not MaximaUnits And Not MaximaComplex Then
         On Error Resume Next
         Err.Clear
         Application.Run macroname:="CASCALC"
         If Err.Number = 513 Then
-            MsgBox2 Err.Description, vbOKOnly, "Fejl"
+            MsgBox2 Err.Description, vbOKOnly, Sprog.Error
             GoTo slut
         ElseIf Err.Number = 0 Then
             GoTo slut

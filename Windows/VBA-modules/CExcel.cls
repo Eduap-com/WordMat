@@ -137,7 +137,6 @@ On Error Resume Next
 'End If
 On Error GoTo slut
 Application.ScreenUpdating = False
-EnableExcelMacros
     
 '    Dim ufwait2 As New UserFormWaitForMaxima
 '    ufwait2.CommandButton_stop.visible = False
@@ -187,7 +186,6 @@ End If
 'Ils.OLEFormat.DoVerb (wdOLEVerbUIActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
 'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
-DisableExcelMacros
 GoTo slut
 fejl:
     On Error Resume Next
