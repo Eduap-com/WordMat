@@ -17,12 +17,13 @@ Public Sub StandardPlot()
     
 End Sub
 Public Sub Plot2DGraph()
-' gnuplot
-'    Dim omax As New CMaxima
+    ' gnuplot
+    '    Dim omax As New CMaxima
     Dim forskrifter As String
     Dim Arr As Variant
     Dim i As Integer
     Dim j As Integer
+    Dim s As String
     On Error GoTo fejl
     Dim sstart As Long, sslut As Long
     Dim TempCas As Integer
@@ -40,38 +41,135 @@ Public Sub Plot2DGraph()
     
     TempCas = CASengine
     CASengine = 0
+    Set UF2Dgraph = New UserForm2DGraph
     PrepareMaxima
+    Dim Sel As Selection
+    Set Sel = Selection
+    If Sel.InlineShapes.Count > 0 Then
+        If Sel.InlineShapes(1).Type = wdInlineShapePicture Then
+            s = Sel.InlineShapes(1).AlternativeText
+            Arr = Split(s, "|")
+            If Arr(0) = "WordMat" Then
+                ' arr(1) indeholder version. Hvis der kommer flere felter kræves nok check
+                On Error Resume Next
+                PicOpen = False
+                UF2Dgraph.TextBox_definitioner.text = Arr(2)
+                UF2Dgraph.TextBox_titel.text = Arr(3)
+                UF2Dgraph.TextBox_xaksetitel.text = Arr(4)
+                UF2Dgraph.TextBox_yaksetitel.text = Arr(5)
+        
+                UF2Dgraph.TextBox_xmin.text = Arr(6)
+                UF2Dgraph.TextBox_xmax.text = Arr(7)
+                UF2Dgraph.TextBox_ymin.text = Arr(8)
+                UF2Dgraph.TextBox_ymax.text = Arr(9)
+        
+                UF2Dgraph.TextBox_ligning1.text = Arr(10)
+                UF2Dgraph.TextBox_var1.text = Arr(11)
+                UF2Dgraph.TextBox_xmin1.text = Arr(12)
+                UF2Dgraph.TextBox_xmax1.text = Arr(13)
+                UF2Dgraph.ComboBox_ligning1.ListIndex = CInt(Arr(14))
+        
+                UF2Dgraph.TextBox_ligning2.text = Arr(15)
+                UF2Dgraph.TextBox_var2.text = Arr(16)
+                UF2Dgraph.TextBox_xmin2.text = Arr(17)
+                UF2Dgraph.TextBox_xmax2.text = Arr(18)
+                UF2Dgraph.ComboBox_ligning2.ListIndex = CInt(Arr(19))
+        
+                UF2Dgraph.TextBox_ligning3.text = Arr(20)
+                UF2Dgraph.TextBox_var3.text = Arr(21)
+                UF2Dgraph.TextBox_xmin3.text = Arr(22)
+                UF2Dgraph.TextBox_xmax3.text = Arr(23)
+                UF2Dgraph.ComboBox_ligning3.ListIndex = CInt(Arr(24))
+        
+                UF2Dgraph.TextBox_ligning4.text = Arr(25)
+                UF2Dgraph.TextBox_var4.text = Arr(26)
+                UF2Dgraph.TextBox_xmin4.text = Arr(27)
+                UF2Dgraph.TextBox_xmax4.text = Arr(28)
+                UF2Dgraph.ComboBox_ligning4.ListIndex = CInt(Arr(29))
+        
+                UF2Dgraph.TextBox_ligning5.text = Arr(30)
+                UF2Dgraph.TextBox_var5.text = Arr(31)
+                UF2Dgraph.TextBox_xmin5.text = Arr(32)
+                UF2Dgraph.TextBox_xmax5.text = Arr(33)
+                UF2Dgraph.ComboBox_ligning5.ListIndex = CInt(Arr(34))
+        
+                UF2Dgraph.TextBox_ligning6.text = Arr(35)
+                UF2Dgraph.TextBox_var6.text = Arr(36)
+                UF2Dgraph.TextBox_xmin6.text = Arr(37)
+                UF2Dgraph.TextBox_xmax6.text = Arr(38)
+                UF2Dgraph.ComboBox_ligning6.ListIndex = CInt(Arr(39))
+        
+                UF2Dgraph.TextBox_lig1.text = Arr(40)
+                UF2Dgraph.TextBox_lig2.text = Arr(41)
+                UF2Dgraph.TextBox_Lig3.text = Arr(42)
+        
+                UF2Dgraph.TextBox_parametric1x.text = Arr(43)
+                UF2Dgraph.TextBox_parametric1y.text = Arr(44)
+                UF2Dgraph.TextBox_tmin1.text = Arr(45)
+                UF2Dgraph.TextBox_tmax1.text = Arr(46)
+                UF2Dgraph.TextBox_parametric2x.text = Arr(47)
+                UF2Dgraph.TextBox_parametric2y.text = Arr(48)
+                UF2Dgraph.TextBox_tmin2.text = Arr(49)
+                UF2Dgraph.TextBox_tmax2.text = Arr(50)
+                UF2Dgraph.TextBox_parametric3x.text = Arr(51)
+                UF2Dgraph.TextBox_parametric3y.text = Arr(51)
+                UF2Dgraph.TextBox_tmin3.text = Arr(53)
+                UF2Dgraph.TextBox_tmax3.text = Arr(54)
+        
+                UF2Dgraph.TextBox_punkter.text = Arr(55)
+                UF2Dgraph.TextBox_punkter2.text = Arr(56)
+                UF2Dgraph.TextBox_markerpunkter.text = Arr(57)
+                UF2Dgraph.CheckBox_pointsjoined.Value = CBool(Arr(58))
+                UF2Dgraph.CheckBox_pointsjoined2.Value = CBool(Arr(59))
+                UF2Dgraph.TextBox_pointsize.text = Arr(60)
+                UF2Dgraph.TextBox_pointsize2.text = Arr(61)
+        
+                UF2Dgraph.TextBox_vektorer.text = Arr(62)
+                UF2Dgraph.TextBox_labels.text = Arr(63)
+        
+                UF2Dgraph.CheckBox_gitter.Value = CBool(Arr(64))
+                UF2Dgraph.CheckBox_logx.Value = CBool(Arr(65))
+                UF2Dgraph.CheckBox_logy.Value = CBool(Arr(66))
+                UF2Dgraph.CheckBox_visforklaring.Value = CBool(Arr(67))
+                
+        
+                Sel.InlineShapes(1).Select
+                UF2Dgraph.Show vbModeless
+                PicOpen = True
+                GoTo slut
+            End If
+        End If
+    End If
+    
+    
     omax.ReadSelection
-'    If UF2Dgraph Is Nothing Then
-       Set UF2Dgraph = New UserForm2DGraph
-'    End If
     
-'    forskrifter = omax.FindDefinitions
-'    If Len(forskrifter) > 3 Then
-'    forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3)
-'    arr = Split(forskrifter, ",")
-'    forskrifter = ""
+    '    forskrifter = omax.FindDefinitions
+    '    If Len(forskrifter) > 3 Then
+    '    forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3)
+    '    arr = Split(forskrifter, ",")
+    '    forskrifter = ""
     
-'    For i = 0 To UBound(arr)
-'        If InStr(arr(i), "):") > 0 Then
-'            forskrifter = forskrifter & omax.ConvertToWordSymbols(arr(i)) & ListSeparator
-'        End If
-'    Next
-'    End If
+    '    For i = 0 To UBound(arr)
+    '        If InStr(arr(i), "):") > 0 Then
+    '            forskrifter = forskrifter & omax.ConvertToWordSymbols(arr(i)) & ListSeparator
+    '        End If
+    '    Next
+    '    End If
     
-'    If forskrifter <> "" Then
-'        forskrifter = Left(forskrifter, Len(forskrifter) - 1)
-'    End If
-'    forskrifter = omax.KommandoerStreng & ListSeparator & forskrifter
+    '    If forskrifter <> "" Then
+    '        forskrifter = Left(forskrifter, Len(forskrifter) - 1)
+    '    End If
+    '    forskrifter = omax.KommandoerStreng & ListSeparator & forskrifter
     
     forskrifter = omax.KommandoerStreng
     
     If Len(forskrifter) > 1 Then
-    Arr = Split(forskrifter, ListSeparator)
-    For i = 0 To UBound(Arr)
-        Arr(i) = Trim(Replace(Arr(i), "  ", " ")) ' må ikke fjerne alle mellemrum da f.eks 1/x 3 så bliver 1/x3 hvor x3 er variabel
-        If Arr(i) <> "" Then InsertNextEquation (Arr(i))
-    Next
+        Arr = Split(forskrifter, ListSeparator)
+        For i = 0 To UBound(Arr)
+            Arr(i) = Trim(Replace(Arr(i), "  ", " ")) ' må ikke fjerne alle mellemrum da f.eks 1/x 3 så bliver 1/x3 hvor x3 er variabel
+            If Arr(i) <> "" Then InsertNextEquation (Arr(i))
+        Next
     End If
     
     'datapunkter
@@ -82,7 +180,7 @@ Public Sub Plot2DGraph()
         xmin = Cregr.XValues(1)
         xmax = Cregr.XValues(1)
         For j = 1 To UBound(Cregr.XValues)
-'            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & CStr(Cregr.XValues(j)) & ListSeparator & CStr(Cregr.YValues(j)) & vbCrLf
+            '            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & CStr(Cregr.XValues(j)) & ListSeparator & CStr(Cregr.YValues(j)) & vbCrLf
             UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & ConvertNumber(Cregr.XValues(j)) & ListSeparator & ConvertNumber(Cregr.YValues(j)) & VbCrLfMac
             If Cregr.XValues(j) > xmax Then xmax = Cregr.XValues(j)
             If Cregr.XValues(j) < xmin Then xmin = Cregr.XValues(j)
@@ -91,7 +189,7 @@ Public Sub Plot2DGraph()
         UF2Dgraph.TextBox_xmax = xmax
     End If
     
-'    UserForm2DGraph.Show vbModeless
+    '    UserForm2DGraph.Show vbModeless
     Selection.End = sslut ' slut skal være først ellers går det galt
     Selection.start = sstart
     UF2Dgraph.Show vbModeless
@@ -239,7 +337,7 @@ slut:
 End Sub
 
 Sub InsertEmptyGraphOleObject()
-' indsætter graph object www.padowan.dk
+' indsætter graph object padowan
 Dim ils As InlineShape
 Application.ScreenUpdating = False
 
@@ -247,7 +345,7 @@ If Not FileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
     Dim result As VbMsgBoxResult
     result = MsgBox(Sprog.A(366), vbOKCancel, Sprog.Error)
     If result = vbOK Then
-        OpenLink ("http://www.padowan.dk/graph/Download.php")
+        OpenLink ("https://www.google.dk/search?q=padowan+graph")
     End If
     Exit Sub
 End If
@@ -265,10 +363,9 @@ Application.ScreenUpdating = True
 
 End Sub
 Sub InsertGraphOleObject()
-' indsætter graph object www.padowan.dk
+' indsætter graph object padowan.dk
 #If Mac Then
-    MsgBox "Sorry. Graph is not supported on Mac. There is a beta version you could try though. You will now be forwarded to the download page", vbOKOnly, Sprog.Error
-    OpenLink "http://www.padowan.dk/mac/"
+    MsgBox "Sorry. Graph is not supported on Mac.", vbOKOnly, Sprog.Error
 #Else
 Dim Path As String
 Dim ils As InlineShape
@@ -292,7 +389,7 @@ If Not FileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
     Dim result As VbMsgBoxResult
     result = MsgBox(Sprog.A(366), vbOKCancel, Sprog.Error)
     If result = vbOK Then
-        OpenLink ("http://www.padowan.dk/graph/Download.php")
+        OpenLink ("https://www.google.dk/search?q=padowan+graph")
     End If
     Exit Sub
 End If
@@ -745,164 +842,7 @@ slut2:
 End Sub
 
 #End If
-Sub InsertChartG()
-'indsætter exceldokument som indlejret dokument
-'Dim wb As Workbook
-'Dim ws As Worksheet
-Dim WB As Object 'Workbook
-Dim ws As Object
-Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
-Dim dd As New DocData
-Dim i As Integer
-Dim Arr As Variant
-Dim ea As New ExpressionAnalyser
-Dim Path As String
-Dim ils As InlineShape
-Application.ScreenUpdating = False
-ea.SetNormalBrackets
 
-PrepareMaxima
-omax.ReadSelection
-'    dd.ReadSelection
-
-    MsgBox Sprog.Wait
-
-If ExcelIndlejret Then
-    GoToInsertPoint
-    Selection.TypeParagraph
-Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
-
-Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, _
-DisplayAsIcon:=False, Range:=Selection.Range)
-
-ils.OLEFormat.DoVerb (wdOLEVerbShow)
-Set WB = ils.OLEFormat.Object
-
-Else
-    Set WB = InsertOpenExcel("Graphs.xltm", "Tabel")
-End If
-Set ws = WB.Sheets("Tabel")
-'Excel.Application.EnableEvents = False
-'Excel.Application.ScreenUpdating = False
-XLapp.Application.EnableEvents = False
-XLapp.Application.ScreenUpdating = False
-
-GoTo hop
-
-If Radians Then
-    ws.Range("A4").Value = "rad"
-Else
-    ws.Range("A4").Value = "grad"
-End If
-
-
-    ' funktioner der markeres
-    For i = 0 To omax.KommandoArrayLength
-        Udtryk = omax.KommandoArray(i)
-        Udtryk = Replace(Udtryk, "definer:", "")
-        Udtryk = Replace(Udtryk, "Definer:", "")
-        Udtryk = Replace(Udtryk, "define:", "")
-        Udtryk = Replace(Udtryk, "Define:", "")
-        Udtryk = Trim(Udtryk)
-        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
-        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
-        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
-        If Len(Udtryk) > 0 Then
-            If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
-                If InStr(Udtryk, "=") > 0 Then
-                    Arr = Split(Udtryk, "=")
-                    LHS = Arr(0)
-                    rhs = Arr(1)
-                    ea.text = LHS
-                    fktnavn = ea.GetNextVar(1)
-                    varnavn = ea.GetNextBracketContent(1)
-                    If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = rhs
-                        ea.Pos = 1
-'                        ea.ReplaceVar varnavn, "x"
-                        fktudtryk = ea.text
-'                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
-                        ws.Range("b4").Offset(0, i).Value = fktudtryk
-                        ws.Range("B1").Offset(0, i).Value = varnavn
-                    Else
-'                        DefinerKonstanterGraph udtryk, deflist, graphfil, True
-                        ws.Range("b4").Offset(0, i).Value = Udtryk
-                        ws.Range("B1").Offset(0, i).Value = "x"
-                        ' blev brugt før relation
-'                        fktudtryk = ReplaceIndepvarX(rhs)
-'                        DefinerKonstanterGraph fktudtryk, deflist, graphfil
-'                        graphfil.InsertFunction fktudtryk
-                    End If
-                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
-                Else
-                    Udtryk = ReplaceIndepvarX(Udtryk)
-'                    DefinerKonstanterGraph udtryk, deflist, graphfil
-                    ws.Range("b4").Offset(0, i).Value = Udtryk
-                    ws.Range("B1").Offset(0, i).Value = "x"
-               End If
-            End If
-        End If
-    Next
-    
-    If dd.nrows > 1 And dd.ncolumns > 1 Then
-        For i = 1 To dd.nrows
-            ws.Range("H6").Offset(i, 0).Value = dd.TabelCelle(i, 1)
-            ws.Range("I6").Offset(i, 0).Value = dd.TabelCelle(i, 2)
-        Next
-    End If
-
-
-hop:
-' Opdater Excel med ændringer
-On Error Resume Next
-'wb.Application.Run ("UpDateAll")
-WB.Charts(1).Activate
-'Excel.Application.EnableEvents = True
-'Excel.Application.ScreenUpdating = True
-'Excel.Run ("UpDateAll")
-XLapp.Application.EnableEvents = True
-XLapp.Application.ScreenUpdating = True
-XLapp.Run ("UpDateAll")
-
-Exit Sub
-
-'On Error GoTo slut
-'Dim path As String
-'Dim ils As InlineShape
-'Dim wb As Variant
-'Dim ws As Variant
-Application.ScreenUpdating = False
-Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
-
-'Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
-Set ils = ActiveDocument.InlineShapes.AddOLEObject( _
-fileName:=Path, LinkToFile:=False, _
-DisplayAsIcon:=False, Range:=Selection.Range)
-'Ils.Height = 300
-'Ils.Width = 500
-
-'ils.OLEFormat.DoVerb (wdOLEVerbShow)
-ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
-
-Set WB = ils.OLEFormat.Object
-Set ws = WB.Sheets("Tabel")
-ws.Activate
-
-
-'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
-'Ils.OLEFormat.DoVerb (wdOLEVerbShow)
-'Ils.OLEFormat.DoVerb (wdOLEVerbUIActivate)
-'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
-'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
-
-'DoEvents
-'Application.ScreenUpdating = True
-'Dim wb As excel.Workbook
-'Dim excel As excel.Application
-'Set excel = CreateObject("Excel.Application")
-'Set wb = excel.Workbooks(excel.Workbooks.Count)
-slut:
-End Sub
 
 Sub InsertGeoGeobraObject()
 Dim ils As InlineShape

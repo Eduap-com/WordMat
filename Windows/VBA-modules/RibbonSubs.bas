@@ -1024,6 +1024,57 @@ End Sub
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 '''''''''''''''''''Language labels''''''''''''''''
 ''''''''''''''''''''''''''''''''''''''''''''''''''
+Sub Rib_GetLabelUnits(control As IRibbonControl, ByRef returnedVal)
+    If Sprog.SprogNr = 1 Then
+        returnedVal = "E"
+    Else
+        returnedVal = "U"
+    End If
+End Sub
+Sub Rib_STunit1(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(688)
+End Sub
+Sub Rib_STunit2(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(689)
+End Sub
+Sub Rib_GetPressedUnit(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = MaximaUnits
+End Sub
+Sub Rib_unit(control As IRibbonControl, ByRef returnedVal)
+    MaximaUnits = Not MaximaUnits
+    returnedVal = MaximaUnits
+End Sub
+
+Sub Rib_STunit3(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(690)
+End Sub
+Sub Rib_STunit4(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(691)
+End Sub
+Sub Rib_GetLabelChangeUnits(control As IRibbonControl, ByRef returnedVal)
+    If Sprog.SprogNr = 1 Then
+        returnedVal = "SE"
+    Else
+        returnedVal = "CU"
+    End If
+End Sub
+Sub Rib_ChangeUnits(control As IRibbonControl)
+chosunit:
+        OutUnits = InputBox(Sprog.A(167), Sprog.A(168), OutUnits)
+        If InStr(OutUnits, "/") > 0 Or InStr(OutUnits, "*") > 0 Or InStr(OutUnits, "^") > 0 Then
+            MsgBox2 Sprog.A(343), vbOKOnly, Sprog.Error
+            GoTo chosunit
+        End If
+End Sub
+Sub Rib_GetImageUnit(control As IRibbonControl, ByRef returnedVal)
+    If Sprog.SprogNr = 1 Then
+    returnedVal = "E"
+    Else
+        returnedVal = "U"
+    End If
+End Sub
+
+
 
 Sub Rib_GetLabelFormulae(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.RibFormulae

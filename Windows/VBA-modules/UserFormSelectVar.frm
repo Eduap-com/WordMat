@@ -205,9 +205,15 @@ Private Sub UserForm_Activate()
         Label_tast.Caption = Sprog.A(248) & " " & NoEq - 1 & " " & Sprog.A(249)
     ElseIf NoEq > 1 Then
         ListBox_vars.MultiSelect = fmMultiSelectMulti
-        For i = 0 To NoEq - 1
-            ListBox_vars.Selected(i) = True
-        Next
+        If ListBox_vars.ListCount >= NoEq Then
+            For i = 0 To NoEq - 1
+                ListBox_vars.Selected(i) = True
+            Next
+        Else
+            For i = 0 To ListBox_vars.ListCount - 1
+                ListBox_vars.Selected(i) = True
+            Next
+        End If
         Label_choose.Caption = Sprog.A(250) & " " & NoEq & " " & Sprog.A(245)
         Label_tast.Caption = Sprog.A(251) & " " & NoEq & " " & Sprog.A(249)
     Else

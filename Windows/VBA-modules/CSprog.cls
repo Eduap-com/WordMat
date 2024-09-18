@@ -3365,6 +3365,22 @@ SA(687, 0) = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221
 SA(687, 1) = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221A) & "(" & ChrW(&H70) & ChrW(&H302) & ChrW(183) & "(1-" & ChrW(&H70) & ChrW(&H302) & ")/n)       Uncertainty"
 SA(687, 2) = ""
 
+SA(688, 0) = "Slå enheder til"
+SA(688, 1) = "Turn units on"
+SA(688, 2) = ""
+
+SA(689, 0) = "Beregninger understøtter enheder, og kan omregne mellem enheder."
+SA(689, 1) = "Calculations support unit conversion."
+SA(689, 2) = ""
+
+SA(690, 0) = "Skift Enheder"
+SA(690, 1) = "Change Units"
+SA(690, 2) = ""
+
+SA(691, 0) = "Angiv hvilke enheder, der skal konverteres til ved beregninger."
+SA(691, 1) = "State the units to convert to."
+SA(691, 2) = ""
+
 'Problemet kunne ikke løses. Vil du prøve med en anden CAS motor?
 End Sub
 

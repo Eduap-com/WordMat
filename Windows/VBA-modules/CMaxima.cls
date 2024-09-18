@@ -6077,6 +6077,15 @@ Function ReadEquationCopy(Optional ir As Range) As String
     Dim sr As Range, r As Range
 
     Set sr = Selection.Range
+        
+    ' dette for at undgå en meget mærkelig fejl, når bestemt udtryk var i slutningen af dokumentet
+    ' "f_a (x)" placeret aller sidst fik ved EndCustomRecord, dokumentet til at 'virke tomt' man kunne ikke placere cursoren i det tomme dokument, men Word var ikke låst
+    If sr.End >= ActiveDocument.End - 1 Then
+        Selection.Collapse wdCollapseEnd
+        Selection.TypeParagraph ' indsætter enter efter ligningen
+        sr.Select
+    End If
+    
     Dim OM As OMath
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord

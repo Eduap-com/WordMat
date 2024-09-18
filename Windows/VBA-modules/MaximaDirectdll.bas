@@ -52,7 +52,7 @@ Private Sub TestBrowserDll()
     Set m_myobject = GetObjectFromDll("C:\Users\mikae\AppData\Roaming\WordMat\WebViewWrap\", "WebViewWrap.dll", "WebViewWrap.Browser", "C:\Users\mikae\AppData\Roaming\WordMat\") ' "namespace.class"  WebViewWrap.Browser   burde være global klasse så forstår ikke hvorfor der skal WebViewWrap med
     m_myobject.start
     m_myobject.Show
-    m_myobject.navigate "https://www.dr.dk"
+    m_myobject.navigate "https://www.eduap.com"
     MsgBox "ok for at lukke", vbOKOnly
     m_myobject.Close
     Set m_myobject = Nothing

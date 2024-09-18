@@ -25,7 +25,7 @@ If Len(DefAxes) > 1 Then
     GraphText = DefAxes
     GraphText = GraphText & "" & vbCrLf
 Else
-GraphText = ";This file was created by Graph (http://www.padowan.dk)" & vbCrLf
+GraphText = ";This file was created by Graph (padowan.dk)" & vbCrLf
 'GraphText = GraphText & ";Do not change this file from other programs." & vbCrLf
 GraphText = GraphText & "[Graph]" & vbCrLf
 GraphText = GraphText & "Version = 4.3.0.384" & vbCrLf

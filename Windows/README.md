@@ -2,7 +2,8 @@
 This folder contains all the files required to install WordMat for Windows.
 
 In the root folder:
-WordMat.dotm   - Contains the main code in Visual Basic for Applications (VBA)
+WordMat.dotm   - Contains the main code in Visual Basic for Applications (VBA) minus VBAmodul
+WordMatDev.dotm   - devolper version. Rename to WordMat.dotm and remove VBAmodul + ThisDocument content
 Right click the file and choose open. Then press alt+F11 to open the VBE and see the code.
 
 ##How to edit on Mac and Windows

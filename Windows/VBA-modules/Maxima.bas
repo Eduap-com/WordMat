@@ -488,11 +488,6 @@ End Sub
 Sub MaximaSolve()
 ' Denne konstruktion er nødvendig for at kunne kalde MaximaSolve med parametre fra TestTabel
 ' Man kan ikke tilknytte genveje subs der tager parametre selvom de optional
-    
-'    If CASengine = 1 Then
-'        GeoGebraWeb "CAS", "solve"
-'        Exit Sub
-'    End If
     MaximaSolvePar
 End Sub
 'Sub MaximaSolve(Optional variabel As String)
@@ -501,7 +496,6 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim fejlm As String
     On Error GoTo fejl
     Application.ScreenUpdating = False
-    '    LockWindow
     Dim IsSolved As Boolean
     Dim scrollpos As Double
     Dim UFSolvenumeric As New UserFormNumericQuestion
@@ -511,16 +505,12 @@ Sub MaximaSolvePar(Optional variabel As String)
     
     TempCas = CASengine
 '    On Error Resume Next: oData.GetFromClipboard:   ClipText = oData.GetText: On Error GoTo fejl ' Skulle sikre at clipboard ikke ændres, men virker ikke
-    '    PrepareMaximaNoSplash  ' ved ikke hvorfor det var nosplash, erstattet
     PrepareMaxima
     omax.prevspr = ""
 
     Set UFSelectVar = New UserFormSelectVar
-'    Set UFSelectVars = New UserFormSelectVars
     UFSelectVar.NoEq = 1
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
-    '    If UFWait Is Nothing Then Set UFWait = New UserFormWaitForMaxima
-    '    Set UFWait = New UserFormWaitForMaxima
     sstart = Selection.start
     sslut = Selection.End
 
@@ -557,7 +547,6 @@ Sub MaximaSolvePar(Optional variabel As String)
     End If
 
     omax.ReadSelection
-'    On Error Resume Next: oData.SetText ClipText: oData.PutInClipboard: On Error GoTo fejl
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
         GoTo slut

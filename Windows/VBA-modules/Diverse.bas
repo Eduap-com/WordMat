@@ -14,6 +14,7 @@ Private TapTime As Single
 #Else
 Private Declare PtrSafe Function InternetGetConnectedState Lib "wininet.dll" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 #End If
+
 'Declare Function LockWindowUpdate Lib "user32" (ByVal hWnd As Long) As Long
 
 'Private Declare Function FindWindow Lib "user32.dll" _
@@ -85,22 +86,6 @@ Function FileExists(FullFileName As String) As Boolean
 Err:
 End Function
 
-Sub SolveCantSaveProblem()
-    ' Forsøger at
-    ' finder to gentagne softreturns og reducerer til 1
-    Application.ScreenUpdating = False
-    Dim resultat As VbMsgBoxResult
-    resultat = MsgBox("Word 2007 har en fejl der gør det umuligt at gemme dokumentet under specielle omstændigheder. Problemet opstår ved en kombination af ligninger og shift-enter, men kun i specielle tilfælde." & vbCrLf & vbCrLf & " Hvis du ikke kan gemme dit dokument kan denne funktion måske finde fejlen i dette dokument og rette det" & vbCrLf & "Du kan altid gemme dokumentet i Word 2003 format og så senere konvertere tilbage til 2007 format" & vbCrLf & "Tryk OK for at rette fejlen.", vbOKCancel, "Hjælp jeg kan ikke gemme")
-    If resultat = vbOK Then
-            
-        ActiveDocument.OMaths.Linearize
-        ActiveDocument.OMaths.BuildUp
-        ' skal udføres to gange ellers kan der godt stadig være dobbelt hvis der kommer flere i træk
-        '        Call Selection.Range.Find.Execute(VBA.ChrW(11) & VBA.ChrW(11), , , , , , , , , VBA.ChrW(11) & " " & VBA.ChrW(11), wdReplaceAll)
-        '        Call Selection.Range.Find.Execute(VBA.ChrW(11) & VBA.ChrW(11), , , , , , , , , VBA.ChrW(11) & " " & VBA.ChrW(11), wdReplaceAll)
-    End If
-
-End Sub
 Function GetTempDir() As String
 #If Mac Then
 '    If startupdrive = vbNullString Then getappdir
@@ -604,7 +589,7 @@ ErrorHandler:
 #End If
 End Function
 Sub TestLink()
-    OpenLink "https://dr.dk"
+    OpenLink "https://www.eduap.com"
 End Sub
 Sub TestLink2()
 ' virker ikke, men det burde være sådan
@@ -1236,7 +1221,7 @@ End Sub
 ''   On Error GoTo fejl
 ''#If Mac Then
 ''    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
-''    OpenLink "http://eduap.com/download-wordmat/"
+''    OpenLink "http://eduap.com/wordmat/"
 ''#Else
 '    Dim result As VbMsgBoxResult
 '    MapsClient.BaseUrl = "https://www.eduap.com/wordmat-version-history/"
@@ -1426,9 +1411,9 @@ Install2:
             MsgBox2 Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, Sprog.A(23)
             '        If MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbYesNo, Sprog.A(23)) = vbYes Then
             If Sprog.SprogNr = 1 Then
-                OpenLink "https://www.eduap.com/da/download-wordmat/"
+                OpenLink "https://www.eduap.com/da/wordmat/"
             Else
-                OpenLink "https://www.eduap.com/download-wordmat/"
+                OpenLink "https://www.eduap.com/wordmat/"
             End If
         End If
     Else
@@ -1452,21 +1437,6 @@ slut:
 '    Unload UFvent
 
 End Sub
-#If Mac Then
-#Else
-Function DownloadFile(URL As String, FilNavn As String) As Boolean
-   'downloadFile("http://screinfo.eduap.com/","outlecsynkversion.txt")
-    Dim LocalFileName As String
-'    URL = "http://screinfo.eduap.com/" & FilNavn 'Here is the web address
-    LocalFileName = Environ("TEMP") & "\" & FilNavn 'here the drive and download directory
-    If URLDownloadToFile(0, URL & FilNavn, LocalFileName, 0, 0) <> 0 Then
-        DownloadFile = False
-        Exit Function
-'        MsgBox "Der opstod et problem med at downloade den nye version", vbOKOnly, "Fejl"
-    End If
-    DownloadFile = True
-End Function
-#End If
 
 Sub CheckForUpdateSilent()
 ' maxproc skal være oprettet
