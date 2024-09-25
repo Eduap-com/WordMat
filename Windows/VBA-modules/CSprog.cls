@@ -2596,8 +2596,8 @@ SA(495, 0) = "Antal betydende cifre"
 SA(495, 1) = "Significant figures"
 SA(495, 2) = ""
 
-SA(496, 0) = "Angiver hvor mange betydende cifre som resultater skal angives med."
-SA(496, 1) = "Determines the number of significant figures on the results"
+SA(496, 0) = "Angiver hvor mange (betydende) cifre som resultater skal angives med."
+SA(496, 1) = "Determines the number of (significant) figures on the results"
 SA(496, 2) = ""
 
 SA(497, 0) = "Radianer"
@@ -2616,8 +2616,8 @@ SA(500, 0) = "Når trykket ind angives resultater i videnskabelig notation dvs. f
 SA(500, 1) = "When depressed all results are returned in scientific notation. Example: 2.3" & ChrW(183) & "10^4"
 SA(500, 2) = ""
 
-SA(501, 0) = "Indstillinger (Alt+i)"
-SA(501, 1) = "Settings (Alt+S)"
+SA(501, 0) = "Indstillinger (Alt+j)"
+SA(501, 1) = "Settings"
 SA(501, 2) = ""
 
 SA(502, 0) = "Indstil diverse indstillinger."
@@ -2625,7 +2625,7 @@ SA(502, 1) = "Change all sorts of settings."
 SA(502, 2) = ""
 
 SA(503, 0) = "Beregn (AltGr+Enter)"
-SA(503, 1) = "Calculate (AltGr+Enter or Alt+C)"
+SA(503, 1) = "Calculate (AltGr+Enter)"
 SA(503, 2) = ""
 
 SA(504, 0) = "Udregner det markerede udtryk. Hvis cursoren placeres i et udtryk beregnes hele udtrykket. Hvis der er et =tegn i udtrykket beregnes kun tilbage til =tegnet."
@@ -3365,21 +3365,41 @@ SA(687, 0) = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221
 SA(687, 1) = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221A) & "(" & ChrW(&H70) & ChrW(&H302) & ChrW(183) & "(1-" & ChrW(&H70) & ChrW(&H302) & ")/n)       Uncertainty"
 SA(687, 2) = ""
 
-SA(688, 0) = "Slå enheder til"
-SA(688, 1) = "Turn units on"
+SA(688, 0) = "Slå enheder til/fra"
+SA(688, 1) = "Turn units on/off"
 SA(688, 2) = ""
 
-SA(689, 0) = "Beregninger understøtter enheder, og kan omregne mellem enheder."
-SA(689, 1) = "Calculations support unit conversion."
+SA(689, 0) = "Hvis enheder er slået til kan WordMat forstå og omregne enheder. På knappen SI kan du angive hvilke enheder du vil have omregnet til. Som standard er output i SI-enheder. Slå ikke enheder til hvis du ikke specifikt skal bruge det. Det kan påvirke WordMats virkemåde, og reserverer en masse variable."
+SA(689, 1) = "If units are turned on, WordMath kan interpret and convert units. On the SI button you can change the output units. Do not turn units on, unless you need it. It can affect the behaviour of WordMat and reserves a lot of variables."
 SA(689, 2) = ""
 
-SA(690, 0) = "Skift Enheder"
-SA(690, 1) = "Change Units"
+SA(690, 0) = "Outputenheder"
+SA(690, 1) = "Output units"
 SA(690, 2) = ""
 
-SA(691, 0) = "Angiv hvilke enheder, der skal konverteres til ved beregninger."
-SA(691, 1) = "State the units to convert to."
+SA(691, 0) = "Angiv hvilke enheder, der skal konverteres til ved beregninger. Som standard er output i SI-enheder"
+SA(691, 1) = "State the units to convert to. By default output units are SI units."
 SA(691, 2) = ""
+
+SA(692, 0) = "bc"
+SA(692, 1) = "sf"
+SA(692, 2) = "sf"
+
+SA(693, 0) = "vid"
+SA(693, 1) = "sci"
+SA(693, 2) = ""
+
+SA(694, 0) = "Antal cifre"
+SA(694, 1) = "No. of figures"
+SA(694, 2) = ""
+
+SA(695, 0) = "Tal afrunding"
+SA(695, 1) = "Rounding"
+SA(695, 2) = "Redondeo de números"
+
+SA(696, 0) = "Vælg hvordan tal skal skrives og afrundes. I eksemplerne nedenfor er WordMat sat til 3 cifre." & vbCrLf & vbCrLf & "Antal decimaler: 12,345" & vbCrLf & "Betydende cifre: 12,3" & vbCrLf & "Vid. notation: 1,23*10^1"
+SA(696, 1) = "Choose how numbers are fomatted and rounded. In the examples below WordMat is set to 3 figures" & vbCrLf & vbCrLf & "Decimals: 12,345" & vbCrLf & "Significant figures: 12,3" & vbCrLf & "Sci. notation: 1,23*10^1"
+SA(696, 2) = ""
 
 'Problemet kunne ikke løses. Vil du prøve med en anden CAS motor?
 End Sub
@@ -3533,10 +3553,10 @@ End Property
 Public Property Get RibSolve() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Løs Ligning(er)"
-Case 3: s = "Resolver ecuación(es)"
+Case 1: s = "Løs" ' Ligning(er)
+Case 3: s = "Resolver" ' ecuación(es)
 Case 4: s = ""
-Case Else: s = "Solve equation(s)"
+Case Else: s = "Solve" ' equation(s)
 End Select
 RibSolve = s
 End Property

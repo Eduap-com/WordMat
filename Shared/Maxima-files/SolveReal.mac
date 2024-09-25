@@ -13,6 +13,7 @@ define_variable(solvar,x,any)$
 define_variable(solvar2,x,any)$
 define_variable(solsysvars,[],list)$
 define_variable(NoSigFig,7,integer)$
+define_variable(DecOutType,1,integer)$ /* 0: decimals  1: decimal with significant figures,  2: scientific notation, */
 /* define_variable(iteind,0,integer)$
 define_variable(factind,0,integer)$ */  /* Nu lokalt i solvereal*/
 define_variable(solvesteps,[],list)$
@@ -230,10 +231,10 @@ scinot(udt):=block([talfakt,antbsf],if not(numberp(udt)) then return(udt),
     if abs(udt)<1e-9 then antbsf:antbsf+1, 
     (if udt<-10 or (udt>-1 and udt<1) or udt>10 then return(sremove(" ",printf(false,concat("~",antbsf,"e"),udt))) else return(dectal(udt))))$
 
-
 scinotall(udt):=block([],apply1(udt,scinotrul))$
 
-dectal(udt):=block([qudt,antbsf],
+/*bruges ved bc*/
+dectalbc(udt):=block([qudt,antbsf],
 if numberp(udt) then go(hop),
 if atom(udt)  then return(printf(false,concat("~a"),udt)),
 if not(numberp(udt)) then return(udt),
@@ -245,6 +246,18 @@ if qudt<1 then antbsf:antbsf-1-floor(log(qudt)/log(10)),
 if udt<0 then antbsf:antbsf+1,
 udt:printf(false,concat("~",antbsf,"f"),udt),udt:striml(" ",udt),udt:strimr("0",udt),udt:strimr(".",udt),parse_string(udt) 
 )$
+
+/* bruges ved antal decimaler og ikke betydende cifre */
+dectaldec(udt):=block([qudt,antbsf],
+if numberp(udt) then go(hop),
+if atom(udt)  then return(printf(false,concat("~a"),udt)),
+if not(numberp(udt)) then return(udt),
+hop,
+udt:printf(false,concat("~,",NoSigFig,"f"),udt),udt:striml(" ",udt),udt:strimr("0",udt),udt:strimr(".",udt),parse_string(udt) 
+)$
+
+/*Bruger dectalbc, dectaldec eller scinot afh af indstilling af DecOutType*/
+dectal(udt):=block([],if DecOutType=0 then dectalbc(udt) else (if DecOutType=1 then dectaldec(udt) else scinotall(udt)))$
 
 funp1(fun,exp):=block([inflag],inflag:true,if mapatom(exp) then false else (if inpart(exp,0) = fun then true else member(true,maplist(lambda([q],funp1(fun,q)),exp))))$
 funp2(fun,exp,var):=block([inflag],inflag:true,if mapatom(exp) then false else (if inpart(exp,0) = fun and member(var,listofvars(exp)) then true else member(true,maplist(lambda([q],funp2(fun,q,var)),exp))))$

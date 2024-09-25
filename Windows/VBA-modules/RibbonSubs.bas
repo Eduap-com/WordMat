@@ -195,7 +195,9 @@ End Sub
 Sub Rib_FSford(control As IRibbonControl)
     insertribformel "", "T_2=ln" & VBA.ChrW(8289) & "(2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(2)/k"
 End Sub
-
+Sub Rib_GetLabelInfinitesimalShort(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.RibInfinitesimalShort
+End Sub
 'Callback for eksp4 onAction
 Sub Rib_FShalv(control As IRibbonControl)
 #If Mac Then
@@ -1052,10 +1054,12 @@ Sub Rib_STunit4(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(691)
 End Sub
 Sub Rib_GetLabelChangeUnits(control As IRibbonControl, ByRef returnedVal)
-    If Sprog.SprogNr = 1 Then
-        returnedVal = "SE"
+    If OutUnits <> vbNullString Then
+        Dim Arr() As String
+        Arr = Split(OutUnits, ",")
+        returnedVal = Arr(0)
     Else
-        returnedVal = "CU"
+        returnedVal = "SI"
     End If
 End Sub
 Sub Rib_ChangeUnits(control As IRibbonControl)
@@ -1065,6 +1069,7 @@ chosunit:
             MsgBox2 Sprog.A(343), vbOKOnly, Sprog.Error
             GoTo chosunit
         End If
+        WoMatRibbon.Invalidate
 End Sub
 Sub Rib_GetImageUnit(control As IRibbonControl, ByRef returnedVal)
     If Sprog.SprogNr = 1 Then
@@ -1072,6 +1077,36 @@ Sub Rib_GetImageUnit(control As IRibbonControl, ByRef returnedVal)
     Else
         returnedVal = "U"
     End If
+End Sub
+Sub Rib_getLabelDecimaler(control As IRibbonControl, ByRef returnedVal)
+    If MaximaDecOutType = 1 Then
+        returnedVal = "dec"
+    ElseIf MaximaDecOutType = 2 Then
+        returnedVal = Sprog.A(692)
+    Else
+        returnedVal = Sprog.RibSciNot
+    End If
+End Sub
+Sub Rib_STDecimaler1(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(695)
+End Sub
+Sub Rib_STDecimaler2(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(696)
+End Sub
+
+Sub Rib_getLabelDecimal(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(41)
+End Sub
+Sub Rib_getLabelBC(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(495)
+End Sub
+Sub Rib_getLabelVid(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = Sprog.A(499)
+End Sub
+Sub Rib_decimaler(control As IRibbonControl)
+    MaximaDecOutType = control.Tag
+    RefreshRibbon
+'    If Not WoMatRibbon Is Nothing Then WoMatRibbon.InvalidateControl ("menu_cifre")
 End Sub
 
 
@@ -1198,9 +1233,6 @@ Sub Rib_FSprob8(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(462)
 End Sub
 
-Sub Rib_GetLabelInfinitesimalShort(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibInfinitesimalShort
-End Sub
 Sub Rib_FSinf1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(463)
 End Sub
@@ -1279,9 +1311,7 @@ End Sub
 Sub Rib_GetLabelSettings(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.RibSettings
 End Sub
-Sub Rib_GetLabelSettingsShort(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibSettingsShort
-End Sub
+
 Sub Rib_GetLabelSciNot(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.RibSciNot
 End Sub
@@ -1585,7 +1615,7 @@ Sub Rib_STnum2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(494)
 End Sub
 Sub Rib_STbetcif1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(495)
+    returnedVal = Sprog.A(694)
 End Sub
 Sub Rib_STbetcif2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(496)
@@ -1703,12 +1733,6 @@ Sub Rib_STexpand1(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_STexpand2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(534)
-End Sub
-Sub Rib_STinf1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(535)
-End Sub
-Sub Rib_STinf2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(536)
 End Sub
 Sub Rib_STdiff1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(537)
@@ -2080,4 +2104,5 @@ End Sub
 Sub Rib_STgeogebraBplot2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "Plot graphs and points using GeoGebra webapplet in a browser. Does not require internet access. Quite fast. Many functions."
 End Sub
+
 

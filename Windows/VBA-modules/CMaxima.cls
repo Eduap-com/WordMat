@@ -7580,12 +7580,13 @@ Function GetMaximaSettingsString() As String
         SettingsString = SettingsString & "domain:real,"
     End If
     
-    If MaximaExact = 2 Then
-        SettingsString = SettingsString & "dectalall(udt):=dectalallNum(udt),"
-    Else
-        SettingsString = SettingsString & "dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1]),"
-    End If
+'    If MaximaExact = 2 Then
+'        SettingsString = SettingsString & "dectalall(udt):=dectalallNum(udt),"
+'    Else
+'        SettingsString = SettingsString & "dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1]),"
+'    End If
     
+    SettingsString = SettingsString & ",DecOutType:=" & MaximaDecOutType - 1 & ","
     SettingsString = SettingsString & "NoSigFig:" & MaximaCifre & ","
             
     If right(SettingsString, 1) = "," Then SettingsString = Left(SettingsString, Len(SettingsString) - 1)

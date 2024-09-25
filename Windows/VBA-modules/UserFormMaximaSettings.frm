@@ -204,7 +204,6 @@ On Error Resume Next
     MaximaSeparator = OptionButton_punktum.Value
     MaximaComplex = CheckBox_complex.Value
     LmSet = OptionButton_lmset.Value
-    MaximaVidNotation = CheckBox_vidnotation.Value
     ExcelIndlejret = CheckBox_indlejret.Value
     AllTrig = OptionButton_trigall.Value
     AutoStart = CheckBox_autostart2.Value
@@ -218,6 +217,7 @@ On Error Resume Next
     BackupType = ComboBox_backup.ListIndex
     BackupMaxNo = ComboBox_backupno.text
     BackupTime = ComboBox_backuptime.text
+    MaximaDecOutType = ComboBox_DecType.ListIndex + 1
     
     If MaximaUnits <> CheckBox_units.Value Then
         MaximaUnits = CheckBox_units.Value
@@ -380,6 +380,7 @@ End Sub
 Private Sub UserForm_Activate()
     On Error Resume Next
     FillComboBoxCifre
+    FillComboBoxDecType
     FillComboBoxLanguage
     FillComboBoxBackup
     FillComboBoxBackupNo
@@ -414,9 +415,9 @@ Private Sub UserForm_Activate()
     CheckBox_Insertforklaring.Value = MaximaForklaring
     CheckBox_Insertmaximacommand.Value = MaximaKommando
     ComboBox_cifre.Value = MaximaCifre
+    ComboBox_DecType.ListIndex = MaximaDecOutType - 1
     CheckBox_complex.Value = MaximaComplex
     CheckBox_units.Value = MaximaUnits
-    CheckBox_vidnotation.Value = MaximaVidNotation
     CheckBox_indlejret.Value = ExcelIndlejret
     TextBox_outunits.text = OutUnits
     CheckBox_autostart2.Value = AutoStart
@@ -575,7 +576,12 @@ Dim i As Integer
         ComboBox_cifre.AddItem i
     Next
 End Sub
-
+Sub FillComboBoxDecType()
+    ComboBox_DecType.Clear
+    ComboBox_DecType.AddItem "Decimaler"
+    ComboBox_DecType.AddItem Sprog.SignificantFigures
+    ComboBox_DecType.AddItem Sprog.ScientificNotation
+End Sub
 Sub FillComboBoxLanguage()
     ComboBox_language.Clear
     ComboBox_language.AddItem "Auto"
@@ -635,8 +641,6 @@ Sub SetCaptions()
     
     Label_cancel.Caption = Sprog.Cancel
     CommandButton_ok.Caption = Sprog.OK
-    Label_sigfig.Caption = Sprog.SignificantFigures
-    CheckBox_vidnotation.Caption = Sprog.ScientificNotation
     CheckBox_complex.Caption = Sprog.Complex
     CheckBox_units.Caption = Sprog.Units
     CheckBox_polaroutput.Caption = Sprog.PolarNotation

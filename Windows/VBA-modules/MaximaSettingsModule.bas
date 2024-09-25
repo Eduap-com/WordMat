@@ -53,6 +53,7 @@ Private mRegAppVersion As String
 Private mDllConnType As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
 Private mInstallLocation As String ' All AppData
 Private mDoubleTapM As Integer ' 0= intet, 1=formelsamling, 2=num ligning
+Private mDecOutType As Integer ' 1 =dec, 2=bet cif, 3=vidnot
 
 Public Sub ReadAllSettingsFromRegistry()
 Dim setn As Integer
@@ -184,6 +185,7 @@ On Error Resume Next
     LatexTOC = 0
     CASengine = 0
     DoubleTapM = 1
+    MaximaDecOutType = 1
     
 '    End If
     End If
@@ -314,6 +316,16 @@ End Property
 Public Property Let MaximaVidNotation(vidval As Boolean)
     SetRegSetting "VidNot", Abs(CInt(vidval))
     mvidnot = vidval
+End Property
+Public Property Get MaximaDecOutType() As Integer
+    If mDecOutType = 0 Then
+        mDecOutType = CInt(GetRegSetting("DecOutType"))
+    End If
+    MaximaDecOutType = mDecOutType
+End Property
+Public Property Let MaximaDecOutType(vidval As Integer)
+    SetRegSetting "DecOutType", vidval
+    mDecOutType = vidval
 End Property
 Public Property Get MaximaLogOutput() As Integer
     MaximaLogOutput = mlogout
