@@ -167,6 +167,8 @@ On Error Resume Next
         EqNumType = True
     End If
     
+    SettUseVBACAS = CheckBox_VBACAS.Value
+    
     If OptionButton_casmaxima.Value = True Then
         CASengine = 0
     ElseIf OptionButton_casgeogebra.Value = True Then
@@ -521,6 +523,8 @@ Private Sub UserForm_Activate()
         OptionButton_eqnumone.Value = True
     End If
     
+    CheckBox_VBACAS.Value = SettUseVBACAS
+
     If CASengine = 0 Then
         OptionButton_casmaxima.Value = True
     ElseIf CASengine = 1 Then
@@ -703,7 +707,7 @@ Sub SetCaptions()
     Label_casexplain.visible = True
 #Else
     Label_casexplain.visible = False
-    Frame_casengine.Height = 75
+    Frame_casengine.Height = 95
 #End If
     
 End Sub

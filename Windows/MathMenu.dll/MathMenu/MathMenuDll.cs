@@ -273,34 +273,34 @@ using System.Collections;
 //                    //                    initialsetup.Appelistconstvars:truend("matchdeclare (iszeroqwz, lambda ([qwz], qwz =0)),tellsimp(iszeroqwz^iszeroqwz,1),"); // def af 0^0=1 gav problemer ved integration af normalfordeling så nu i funktion: mu:2;sigma:1;Integrate(1/(sqrt(2*%pi)*sigma)*%e^(-1/2*((y-mu)/sigma)^2),y,(minf),1000);
 //                    //test: [domain:real,display2d:false,ratprint:false,dotscrules:true,numer_pbranch:true,ratsimpexpons:true,assumescalar:all,logabs:true,breakup:false,algebraic:false,logexpand:true,triginverses:all,intanalysis:false,listconstvars:true,ev(tellsimp(0 ^ 0, 1), simp: false)]
 //                    //                initialsetup.Append("radexpand:true,"); // default true, styrer reduktion af rødder. hvis all er sqrt(x^2)=x hvis true sqrt(x^2)=abs(x) ' all giver problemer ved reduktion af imaginære udtryk til reelle
-                    if (units == 1)
-                    {
-                        initialsetup.Append("keepfloat:false,"); // keepfloat=true giver problemer for nogle enheds beregninger. Der meldes en fejl.
-                        initialsetup.Append("setunits([N,J,W,Pa,C,V,F,Ohm,T,H,K]),");
-                        if (moutunits.Length > 0)
-                        {
-                            string[] outunits;
-                            outunits = moutunits.Split(",".ToArray());
-                            foreach (string unit in outunits)
-                            {
-                                initialsetup.Append("errcatch(setunits(");
-                                initialsetup.Append(unit);
-                                initialsetup.Append(")),");
-                            }
-                        }
-                    }
-                    else
-                        initialsetup.Append("keepfloat:true,"); // sørger for at der ikke omdannes fra decimaltal til brøk ved eksakt når det er nødvendigt at bruge numeriske metoder
+//                    if (units == 1)
+//                    {
+//                        initialsetup.Append("keepfloat:false,"); // keepfloat=true giver problemer for nogle enheds beregninger. Der meldes en fejl.
+//                        initialsetup.Append("setunits([N,J,W,Pa,C,V,F,Ohm,T,H,K]),");
+//                        if (moutunits.Length > 0)
+//                        {
+//                            string[] outunits;
+//                            outunits = moutunits.Split(",".ToArray());
+//                            foreach (string unit in outunits)
+//                            {
+//                                initialsetup.Append("errcatch(setunits(");
+//                                initialsetup.Append(unit);
+//                                initialsetup.Append(")),");
+//                            }
+//                        }
+//                    }
+//                    else
+//                        initialsetup.Append("keepfloat:true,"); // sørger for at der ikke omdannes fra decimaltal til brøk ved eksakt når det er nødvendigt at bruge numeriske metoder
 
-                    // FLyttet til slovereal.mac
-//                    initialsetup.Append(@"errcatch(remrule(""^"",all)),ev(tellsimp(0 ^ 0, 1), simp: false),"); // def af 0^0=1 gav problemer ved integration af normalfordeling så nu i funktion: mu:2;sigma:1;Integrate(1/(sqrt(2*%pi)*sigma)*%e^(-1/2*((y-mu)/sigma)^2),y,(minf),1000);
-//                    //fjernet alizvisnot til scinotrul da f.eks 3/2*kg så ikke blev til 1.5*kg        matchdeclare(alizvidnot,lambda([z],if numberp(z) then (if abs(z)<1 or abs(z)>10 then true) else false ))
-//                    initialsetup.Append("matchdeclare(aliz,all),matchdeclare(aliznum,numberp),matchdeclare(alizfloat,floatnump),matchdeclare(aliz2,lambda([z],not(numberp(z)))),defrule(scinotrul,aliznum,scinot(aliznum)),defrule(dectalrul,aliznum,dectal(aliznum)),defrule(floatrul,alizfloat,dectal(alizfloat)),defrule(msinrul,sin(aliz),sing(180/%pi*aliz)),defrule(mcosrul,cos(aliz),cosg(180/%pi*aliz)),defrule(mtanrul,tan(aliz),tang(180/%pi*aliz)),defrule(masinrul,asin(aliz),%pi/180*asing(aliz)),defrule(macosrul,acos(aliz),%pi/180*acosg(aliz)),defrule(matanrul,atan(aliz),%pi/180*atang(aliz)),defrule(mlogrul,log(aliz),lgog(aliz)/lgog(%e)),defrule(merul,%e^aliz2,10^(lgog(%e)*aliz2))");
-//                    initialsetup.Append(@",defrule(unitrule,aliz,convert(aliz,[])),applyunitrule(qudt):=(applyb1(qudt,unitrule))");
-//                    initialsetup.Append(@",dectalallNum(udt):=block([qout],udt:ev(udt,lgog(x):=if x=%e then 0.4342944819032518 elseif numberp(x) then ev(log(x)/log(10),numer) else 'lgog(x),numer),qout:errcatch(apply1(udt,dectalrul)),if qout=[] then udt else qout[1])");
-//                    initialsetup.Append(@",dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1]),");
+//                    // FLyttet til slovereal.mac
+////                    initialsetup.Append(@"errcatch(remrule(""^"",all)),ev(tellsimp(0 ^ 0, 1), simp: false),"); // def af 0^0=1 gav problemer ved integration af normalfordeling så nu i funktion: mu:2;sigma:1;Integrate(1/(sqrt(2*%pi)*sigma)*%e^(-1/2*((y-mu)/sigma)^2),y,(minf),1000);
+////                    //fjernet alizvisnot til scinotrul da f.eks 3/2*kg så ikke blev til 1.5*kg        matchdeclare(alizvidnot,lambda([z],if numberp(z) then (if abs(z)<1 or abs(z)>10 then true) else false ))
+////                    initialsetup.Append("matchdeclare(aliz,all),matchdeclare(aliznum,numberp),matchdeclare(alizfloat,floatnump),matchdeclare(aliz2,lambda([z],not(numberp(z)))),defrule(scinotrul,aliznum,scinot(aliznum)),defrule(dectalrul,aliznum,dectal(aliznum)),defrule(floatrul,alizfloat,dectal(alizfloat)),defrule(msinrul,sin(aliz),sing(180/%pi*aliz)),defrule(mcosrul,cos(aliz),cosg(180/%pi*aliz)),defrule(mtanrul,tan(aliz),tang(180/%pi*aliz)),defrule(masinrul,asin(aliz),%pi/180*asing(aliz)),defrule(macosrul,acos(aliz),%pi/180*acosg(aliz)),defrule(matanrul,atan(aliz),%pi/180*atang(aliz)),defrule(mlogrul,log(aliz),lgog(aliz)/lgog(%e)),defrule(merul,%e^aliz2,10^(lgog(%e)*aliz2))");
+////                    initialsetup.Append(@",defrule(unitrule,aliz,convert(aliz,[])),applyunitrule(qudt):=(applyb1(qudt,unitrule))");
+////                    initialsetup.Append(@",dectalallNum(udt):=block([qout],udt:ev(udt,lgog(x):=if x=%e then 0.4342944819032518 elseif numberp(x) then ev(log(x)/log(10),numer) else 'lgog(x),numer),qout:errcatch(apply1(udt,dectalrul)),if qout=[] then udt else qout[1])");
+////                    initialsetup.Append(@",dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1]),");
 
-                    initialsetup.Append(GuiSettingsString);
+//                    initialsetup.Append(GuiSettingsString);
                     
                     return initialsetup.ToString();
                 }
@@ -384,26 +384,26 @@ using System.Collections;
             }
 
             // settings der kan ændres via gui og skal derfor køres hver gang der udføres ny kommando da de kan være ændret
-            private string GuiSettingsString
+            private string GuiSettingsString // bruges ikke mere
             {
                 get
                 {
                     StringBuilder initialsetup = new StringBuilder();
-                    if (complex == 1)
-                    {
-                        initialsetup.Append("domain:complex,");
-                        initialsetup.Append("realonly:false,");
-                    }
-                    else
-                    {
-                        initialsetup.Append("domain:real,");
-                        //                        initialsetup.Append("realonly:true,");  // giver problemer for to_poly_solve
-                    }
+                    //if (complex == 1)
+                    //{
+                    //    initialsetup.Append("domain:complex,");
+                    //    initialsetup.Append("realonly:false,");
+                    //}
+                    //else
+                    //{
+                    //    initialsetup.Append("domain:real,");
+                    //    //                        initialsetup.Append("realonly:true,");  // giver problemer for to_poly_solve
+                    //}
 
-                    if (exact == 2) // num
-                        initialsetup.Append(@"dectalall(udt):=dectalallNum(udt),");
-                    else // exact og auto så afrundes kun float dvs kommatal eller Exp not.
-                        initialsetup.Append(@"dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1]),");
+//                    if (exact == 2) // num
+//                        initialsetup.Append(@"dectalall(udt):=dectalallNum(udt),");
+//                    else // exact og auto så afrundes kun float dvs kommatal eller Exp not.
+//                        initialsetup.Append(@"dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1]),");
 
                     //dectalall(carg(1+%i));
                     // håndteres nu via $%,numer;     dette giver problemer med nogle to_poly_solve
@@ -427,7 +427,7 @@ using System.Collections;
 
                     //                initialsetup.Append("");
 
-                    initialsetup.Append("NoSigFig:" + Convert.ToString(AntalCifre)); // +"," fjernet da nu sidste
+//                    initialsetup.Append("NoSigFig:" + Convert.ToString(AntalCifre)); // +"," fjernet da nu sidste
 // Disse to forsøges låst fast på høje værdier i solvereal.mac
 //                    initialsetup.Append("rootsepsilon:1E-" + Convert.ToString(AntalCifre + 2) + ",");
 //                    initialsetup.Append("algepsilon:1E+" + Convert.ToString(AntalCifre + 2) + ",");
@@ -463,7 +463,8 @@ using System.Collections;
                 {
                     extrakommando = extrakommando + ",";
                 }
-                ExecuteMaximaCommand("[" + extrakommando + "reset(linenum,%,features,%rnum)," + GuiSettingsString + "]$", 0);
+//                ExecuteMaximaCommand("[" + extrakommando + "reset(linenum,%,features,%rnum)," + GuiSettingsString + "]$", 0);
+                ExecuteMaximaCommand("[" + extrakommando + "reset(linenum,%,features,%rnum)]$", 0);
                 KommandoNr = 2;
                 mindex = 2;
                 LastWasOutput = false;
@@ -576,7 +577,7 @@ using System.Collections;
                     int numInputLines = 0;
                     if (!String.IsNullOrEmpty(inputText))
                     {
-                        maximaStreamWriter.WriteLine("[" + GuiSettingsString + "]$" + inputText + "slutprut;"); // forsøg med ikke at printe slutprut da det giver problemer for read() i solvesystem
+                        maximaStreamWriter.WriteLine("[]$" + inputText + "slutprut;"); // forsøg med ikke at printe slutprut da det giver problemer for read() i solvesystem
 //                        maximaStreamWriter.WriteLine("[" + GuiSettingsString + "]$" + inputText + "print(\"slutprut\");");
                         //                        maximaStreamWriter.WriteLine("[" + GuiSettingsString + "]$" + inputText + "print(\"slutprut\",linenum:linenum-1,%)$");
                         numInputLines++;

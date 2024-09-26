@@ -54,6 +54,7 @@ Private mDllConnType As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
 Private mInstallLocation As String ' All AppData
 Private mDoubleTapM As Integer ' 0= intet, 1=formelsamling, 2=num ligning
 Private mDecOutType As Integer ' 1 =dec, 2=bet cif, 3=vidnot
+Private mUseVBACAS As Integer  ' 0 = not loaded  1=no  2=yes
 
 Public Sub ReadAllSettingsFromRegistry()
 Dim setn As Integer
@@ -106,6 +107,8 @@ On Error Resume Next
     mDllConnType = CInt(GetRegSetting("DllConnType"))
     mInstallLocation = GetRegSetting("InstallLocation")
     mDoubleTapM = GetRegSetting("DoubleTapM")
+    mUseVBACAS = GetRegSetting("UseVBACAS")
+    
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -186,6 +189,7 @@ On Error Resume Next
     CASengine = 0
     DoubleTapM = 1
     MaximaDecOutType = 1
+    SettUseVBACAS = 2
     
 '    End If
     End If
@@ -633,7 +637,16 @@ Public Property Let InstallLocation(ByVal L As String)
     SetRegSettingString "InstallLocation", L
     mInstallLocation = L
 End Property
-
+Public Property Get SettUseVBACAS() As Boolean
+    If mUseVBACAS = 0 Then
+        mUseVBACAS = GetRegSetting("UseVBACAS")
+    End If
+    SettUseVBACAS = CBool(mUseVBACAS - 1)
+End Property
+Public Property Let SettUseVBACAS(xval As Boolean)
+    mUseVBACAS = Abs(CInt(xval) + 1)
+    SetRegSetting "UseVBACAS", mUseVBACAS
+End Property
 '------------------- registry functions --------------------
 Public Function GetReg(key As String) As String
     GetReg = GetRegSettingString(key)

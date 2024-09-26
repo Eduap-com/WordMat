@@ -1707,7 +1707,7 @@ Sub beregn()
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    Set UFWait = New UserFormWaitForMaxima
     
-    If MaximaExact = 2 And Not MaximaUnits And Not MaximaComplex Then
+    If SettUseVBACAS And (MaximaExact = 2 And Not MaximaUnits And Not MaximaComplex) Then
         On Error Resume Next
         Err.Clear
         Application.Run macroname:="CASCALC"

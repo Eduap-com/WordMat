@@ -208,7 +208,7 @@ udt:ev(udt,lgog(x):=if x=%e then 0.4342944819032518 elseif numberp(x) then ev(lo
 qout:errcatch(apply1(udt,dectalrul)),
 if qout#[] then return(qout[1]),
 qout:errcatch(apply1(udt,dectalnumrul)),
-if qout=[] then udt else qout[1])$ /* Justeret i 1.19 dectalrul giver desv�rre fejl nu. gjorde den ikke f�r. dectalnumrul virker, men der kan v�re noget med r�kkef�lgen, s� den er andet valg*/
+if qout=[] then udt else qout[1])$ /* Justeret i 1.19 dectalrul giver desvaerre fejl nu. gjorde den ikke foer. dectalnumrul virker, men der kan vaere noget med raekkefoelgen, saa den er andet valg*/
 
 dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1])$
 /* fra funcdef*/
@@ -229,7 +229,7 @@ scinot(udt):=block([talfakt,antbsf],if not(numberp(udt)) then return(udt),
     if udt<0 then antbsf:antbsf+1,
     if udt>1e10 or udt <-1e10 then antbsf:antbsf+1, 
     if abs(udt)<1e-9 then antbsf:antbsf+1, 
-    (if udt<-10 or (udt>-1 and udt<1) or udt>10 then return(sremove(" ",printf(false,concat("~",antbsf,"e"),udt))) else return(dectal(udt))))$
+    (if udt<-10 or (udt>-1 and udt<1) or udt>10 then return(sremove(" ",printf(false,concat("~",antbsf,"e"),udt))) else return(dectaldec(udt))))$
 
 scinotall(udt):=block([],apply1(udt,scinotrul))$
 
@@ -257,7 +257,7 @@ udt:printf(false,concat("~,",NoSigFig,"f"),udt),udt:striml(" ",udt),udt:strimr("
 )$
 
 /*Bruger dectalbc, dectaldec eller scinot afh af indstilling af DecOutType*/
-dectal(udt):=block([],if DecOutType=0 then dectalbc(udt) else (if DecOutType=1 then dectaldec(udt) else scinotall(udt)))$
+dectal(udt):=block([],if DecOutType=0 then dectaldec(udt) else (if DecOutType=1 then dectalbc(udt) else scinotall(udt)))$
 
 funp1(fun,exp):=block([inflag],inflag:true,if mapatom(exp) then false else (if inpart(exp,0) = fun then true else member(true,maplist(lambda([q],funp1(fun,q)),exp))))$
 funp2(fun,exp,var):=block([inflag],inflag:true,if mapatom(exp) then false else (if inpart(exp,0) = fun and member(var,listofvars(exp)) then true else member(true,maplist(lambda([q],funp2(fun,q,var)),exp))))$

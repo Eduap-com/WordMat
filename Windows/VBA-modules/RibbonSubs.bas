@@ -1341,9 +1341,6 @@ End Sub
 Sub Rib_GetLabelSolveDEnum(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.RibSolveDEnum
 End Sub
-Sub Rib_GetLabelDefinitions(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDefinitions
-End Sub
 Sub Rib_GetLabelDeleteDefs(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.RibDefDelete
 End Sub

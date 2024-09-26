@@ -219,7 +219,7 @@ End Sub
 Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = True, Optional ConvertWordSymbols As Boolean = True)
     ' starts maxima sends input and receives output
 
-    Dim i As Integer
+    Dim i As Integer, InputStreng As String
         
 #If Mac Then
     RunMaximaFile StopTime, ConvertWordSymbols
@@ -244,6 +244,9 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         MaxProc.StartMaximaProcess
     End If
 
+    InputStreng = GetMaximaSettingsString & MaximaInputStreng
+
+
     MaxProc.AntalCifre = MaximaCifre
 
     If MaximaComplex Then
@@ -264,7 +267,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     '    Dim UFStartup As New UserFormWaitStartup  ' slettet 18/2 2017 Hvad skulle den?
     If StopTime < -2 Then    ' ved grafer og enkelte andre nsolve
         '        MsgBox MaximaInputStreng
-        MaxProc.ExecuteMaximaCommand MaximaInputStreng, 0
+        MaxProc.ExecuteMaximaCommand InputStreng, 0
 #If Mac Then
         MaxProc.WaitForMaximaUntil (-1 * StopTime)
 #Else
@@ -292,7 +295,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     ElseIf StopTime < 0 Then
         UfWait2.Show vbModeless
         DoEvents
-        MaxProc.ExecuteMaximaCommand MaximaInputStreng, 1
+        MaxProc.ExecuteMaximaCommand InputStreng, 1
         FindLastMaximaOutput
         ResetMaxima
         Unload UfWait2
@@ -323,7 +326,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
             Exit Sub
         End If
 
-        MaxProc.ExecuteMaximaCommand MaximaInputStreng, 0
+        MaxProc.ExecuteMaximaCommand InputStreng, 0
         UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
     End If
     
@@ -1581,7 +1584,7 @@ start:
         End If
     End If
 
-    If MaximaVidNotation Then      ' videnskabelig notation og enheder
+    If MaximaDecOutType = 3 Then    ' videnskabelig notation og evt enheder
         MaximaInputStreng = MaximaInputStreng & Kommando & ";"
         MaximaInputStrengSec = "ev(" & inkom & ",numer);scinotall(%);ev(is(equal(ev(scanmap(strtonum,%th(1)),nouns),%th(2))),numer);"    ' ,numer fjernet fra scinot
         MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
@@ -7586,7 +7589,7 @@ Function GetMaximaSettingsString() As String
 '        SettingsString = SettingsString & "dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1]),"
 '    End If
     
-    SettingsString = SettingsString & ",DecOutType:=" & MaximaDecOutType - 1 & ","
+    SettingsString = SettingsString & "DecOutType:" & MaximaDecOutType - 1 & ","
     SettingsString = SettingsString & "NoSigFig:" & MaximaCifre & ","
             
     If right(SettingsString, 1) = "," Then SettingsString = Left(SettingsString, Len(SettingsString) - 1)
