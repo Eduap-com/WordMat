@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar
    ClientHeight    =   4695
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   10560
+   ClientWidth     =   10710
    OleObjectBlob   =   "UserFormSelectVar.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -23,6 +23,34 @@ Public NoEq As Integer ' no of equations to solve for
 Public Eliminate As Boolean
 Private Svars As Variant ' array der holder variabelnavne.  som de skal returneres dvs. uden asciikonvertering
 
+Private EventsCol As New Collection
+Sub SetEscEvents(ControlColl As Controls)
+' SetEscEvents Me.Controls     in Initialize
+    Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
+    On Error Resume Next
+    For Each c In ControlColl ' Me.Controls
+        TN = TypeName(c)
+        If TN = "CheckBox" Then
+            Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "OptionButton" Then
+            Set CE = New CEvents: Set CE.OptionButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ComboBox" Then
+            Set CE = New CEvents: Set CE.ComboBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Label" Then
+            Set CE = New CEvents: Set CE.LabelControl = c: EventsCol.Add CE
+        ElseIf TN = "TextBox" Then
+            Set CE = New CEvents: Set CE.TextBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "CommandButton" Then
+            Set CE = New CEvents: Set CE.CommandButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ListBox" Then
+            Set CE = New CEvents: Set CE.ListBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Frame" Then
+            Set F = c
+            SetEscEvents F.Controls
+        End If
+    Next
+End Sub
+
 Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
 Dim Arr As Variant
@@ -34,9 +62,7 @@ Dim i As Integer, c As Integer
     Else
         MaximaExact = 0
     End If
-    
-    
-    MaximaVidNotation = CheckBox_vidnotation.Value
+        
     MaximaCifre = ComboBox_cifre.Value
     If MaximaUnits Then
         If OutUnits <> TextBox_outunits.text Then
@@ -115,12 +141,16 @@ Dim i As Integer, c As Integer
         CASengine = 1
     End If
     
+    MaximaDecOutType = ComboBox_DecType.ListIndex + 1
+    
+    
     GoTo slut
 fejl:
     SelectedVar = vbNullString
 slut:
-    Me.Hide
+    Me.hide
     Application.ScreenUpdating = False
+    RefreshRibbon
 End Sub
 
 Private Sub ListBox_vars_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
@@ -163,7 +193,6 @@ Private Sub UserForm_Activate()
         OptionButton_exactandnum.Value = True
     End If
 
-    CheckBox_vidnotation.Value = MaximaVidNotation
     ComboBox_cifre.Value = MaximaCifre
 
     If CASengine = 0 Then
@@ -173,6 +202,8 @@ Private Sub UserForm_Activate()
     Else
         ComboBox_cas.ListIndex = 1
     End If
+
+    ComboBox_DecType.ListIndex = MaximaDecOutType - 1
 
     SelectedVar = ""
     ListBox_vars.Clear
@@ -237,9 +268,10 @@ End Sub
 Private Sub UserForm_Initialize()
     FillComboBoxCifre
     FillComboBoxCAS
+    FillComboBoxDecType
     
 '    ScaleForm 1.5
-    
+    SetEscEvents Me.Controls
 End Sub
 Private Sub SetCaptions()
     If NoEq > 1 Then
@@ -260,8 +292,6 @@ Private Sub SetCaptions()
     OptionButton_exactandnum.Caption = Sprog.Auto
     OptionButton_exactonly.Caption = Sprog.Exact
     OptionButton_numonly.Caption = Sprog.Numeric
-    CheckBox_vidnotation.Caption = Sprog.ScientificNotation
-    Label6.Caption = Sprog.SignificantFigures
     Label_enheder.Caption = Sprog.OutputUnits & ":"
     Label_unitwarning.Caption = Sprog.UnitWarning
 End Sub
@@ -281,9 +311,8 @@ Dim c As control
     Me.Font.Size = Me.Font.Size * SF
 End Sub
 
-
 Private Sub Label_cancel_Click()
-    Me.Hide
+    Me.hide
     Application.ScreenUpdating = False
 End Sub
 Private Sub Label_ok_Click()
@@ -306,4 +335,9 @@ Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
 End Sub
-
+Sub FillComboBoxDecType()
+    ComboBox_DecType.Clear
+    ComboBox_DecType.AddItem "Decimaler"
+    ComboBox_DecType.AddItem Sprog.SignificantFigures
+    ComboBox_DecType.AddItem Sprog.ScientificNotation
+End Sub

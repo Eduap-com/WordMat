@@ -47,7 +47,9 @@ Sub RefreshRibbon()
         WoMatRibbon.Invalidate
     Else
         lngRibPtrBackup = ObjPtr(WoMatRibbon)
+        On Error Resume Next
         lngRibPtr = CLng(GetRegSettingLong("RibbonPointer"))
+        On Error GoTo fejl
         If lngRibPtr > 0 Then
           Set WoMatRibbon = GetRibbon(lngRibPtr)
           WoMatRibbon.Invalidate
@@ -64,7 +66,8 @@ Sub RefreshRibbon()
 
 GoTo slut
 fejl:
-    MsgBox Sprog.A(394), vbOKOnly, Sprog.Error
+'    MsgBox Sprog.A(394), vbOKOnly, Sprog.Error ' oplever ikke at WordMat crasher af den grund mere
+    MsgBox Err.Description
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
 slut:
@@ -601,17 +604,7 @@ End Sub
 Sub Rib_rad(control As IRibbonControl, pressed As Boolean)
     Radians = pressed
 End Sub
-'Callback for togglebuttonVid getPressed
-Sub Rib_GetPressedVid(control As IRibbonControl, ByRef returnedVal)
-On Error Resume Next
-    returnedVal = MaximaVidNotation
-    RefreshRibbon
-End Sub
 
-'Callback for togglebuttonVid onAction
-Sub Rib_vid(control As IRibbonControl, pressed As Boolean)
-    MaximaVidNotation = pressed
-End Sub
 Public Sub Rib_Beregn(control As IRibbonControl)
     beregn
 End Sub

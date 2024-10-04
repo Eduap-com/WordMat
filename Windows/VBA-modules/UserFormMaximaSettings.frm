@@ -20,6 +20,34 @@ Private LoadUnits As Boolean
 Private UserUnits As Boolean
 Private LangChange As Boolean
 
+Private EventsCol As New Collection
+Sub SetEscEvents(ControlColl As Controls)
+' SetEscEvents Me.Controls     in Initialize
+    Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
+    On Error Resume Next
+    For Each c In ControlColl ' Me.Controls
+        TN = TypeName(c)
+        If TN = "CheckBox" Then
+            Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "OptionButton" Then
+            Set CE = New CEvents: Set CE.OptionButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ComboBox" Then
+            Set CE = New CEvents: Set CE.ComboBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Label" Then
+            Set CE = New CEvents: Set CE.LabelControl = c: EventsCol.Add CE
+        ElseIf TN = "TextBox" Then
+            Set CE = New CEvents: Set CE.TextBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "CommandButton" Then
+            Set CE = New CEvents: Set CE.CommandButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ListBox" Then
+            Set CE = New CEvents: Set CE.ListBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Frame" Then
+            Set F = c
+            SetEscEvents F.Controls
+        End If
+    Next
+End Sub
+
 Private Sub CheckBox_complex_Change()
     If CheckBox_complex.Value Then
         CheckBox_polaroutput.visible = True
@@ -28,12 +56,16 @@ Private Sub CheckBox_complex_Change()
     End If
 End Sub
 
+Private Sub CheckBox_units_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+    CheckEsc KeyCode
+End Sub
+
 Private Sub ComboBox_language_Change()
     LangChange = True
 End Sub
 
 Private Sub Label_cancel_Click()
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub NulstilWordDoc(FilNavn As String)
@@ -238,7 +270,7 @@ On Error Resume Next
         
     SetMathAutoCorrect
     
-    UFMSettings.Hide
+    UFMSettings.hide
     Sprog.CheckSetting
     RibbonSubs.RefreshRibbon
 '#If Mac Then
@@ -375,6 +407,9 @@ Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, By
     SetTabsInactive
 End Sub
 
+
+
+
 Private Sub OptionButton_casmaxima_Change()
     SetCasButtons
 End Sub
@@ -391,6 +426,7 @@ Private Sub UserForm_Activate()
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
     
+
     If Sprog.SprogNr = 1 Then
         Label_geogebraexplain.Caption = "GeoGebra Calculator Suite bliver installeret sammen med WordMat. Det kører i en browser, men kræver ikke internet. Det fungerer ens på Windows og Mac, og starter hurtigt op." & vbCrLf & "GeoGebra 5 fungerer ens på Windows og Mac, men kræver separat installation." & vbCrLf & "Windows understøtter også de andre app-versioner af GeoGebra som Geogebra 6, Graphing calculator mm. Disse vil blive anvendt, hvis GeoGebra 5 ikke er installeret."
     Else
@@ -523,7 +559,13 @@ Private Sub UserForm_Activate()
         OptionButton_eqnumone.Value = True
     End If
     
-    CheckBox_VBACAS.Value = SettUseVBACAS
+    If QActivePartnership Then
+        CheckBox_VBACAS.Enabled = True
+        CheckBox_VBACAS.Value = SettUseVBACAS
+    Else
+        CheckBox_VBACAS.Enabled = False
+        CheckBox_VBACAS.Value = False
+    End If
 
     If CASengine = 0 Then
         OptionButton_casmaxima.Value = True
@@ -557,6 +599,7 @@ Private Sub UserForm_Activate()
     LangChange = False
     
     SetCasButtons
+    
 
 End Sub
 
@@ -732,6 +775,7 @@ Private Sub UserForm_Initialize()
 #If Mac Then
     ScaleForm 1.5
 #End If
+    SetEscEvents Me.Controls
 End Sub
 
 Private Sub Label_ok_Click()
@@ -834,6 +878,11 @@ Private Sub Label_TAB7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer
     SetTabsInactive
     If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorHover
 End Sub
+
+Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+    MsgBox KeyCode
+End Sub
+
 Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
@@ -851,3 +900,10 @@ Sub SetTabsInactive()
     If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorInactive
     
 End Sub
+
+Sub CheckEsc(ByVal KeyCode As Integer)
+    If KeyCode = 27 Then
+        Label_cancel_Click
+    End If
+End Sub
+

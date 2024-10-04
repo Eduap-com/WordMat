@@ -20,12 +20,40 @@ Public TempDefs As String
 Public vars As String
 Public SammeLinje As Boolean
 
+Private EventsCol As New Collection
+Sub SetEscEvents(ControlColl As Controls)
+' SetEscEvents Me.Controls     in Initialize
+    Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
+    On Error Resume Next
+    For Each c In ControlColl ' Me.Controls
+        TN = TypeName(c)
+        If TN = "CheckBox" Then
+            Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "OptionButton" Then
+            Set CE = New CEvents: Set CE.OptionButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ComboBox" Then
+            Set CE = New CEvents: Set CE.ComboBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Label" Then
+            Set CE = New CEvents: Set CE.LabelControl = c: EventsCol.Add CE
+        ElseIf TN = "TextBox" Then
+            Set CE = New CEvents: Set CE.TextBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "CommandButton" Then
+            Set CE = New CEvents: Set CE.CommandButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ListBox" Then
+            Set CE = New CEvents: Set CE.ListBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Frame" Then
+            Set F = c
+            SetEscEvents F.Controls
+        End If
+    Next
+End Sub
 Private Sub CommandButton_annuller_Click()
     annuller = True
-    Me.Hide
+    Me.hide
 End Sub
 Sub ExecuteOK()
     Dim Arr() As String, i As Integer
+    annuller = False
     SammeLinje = CheckBox_sammelinje.Value
 
     If OptionButton_numonly.Value = True Then
@@ -71,7 +99,7 @@ Sub ExecuteOK()
     End If
 
 
-    Me.Hide
+    Me.hide
     Application.ScreenUpdating = False
 
 End Sub
@@ -107,7 +135,6 @@ Dim Arr() As String, i As Integer
         OptionButton_ln.Value = True
     End If
 
-    CheckBox_vidnotation.Value = MaximaVidNotation
     ComboBox_cifre.Value = MaximaCifre
 
     
@@ -129,6 +156,7 @@ Dim Arr() As String, i As Integer
         Label_rationaliser.visible = False
     End If
     
+    annuller = True
     Application.ScreenUpdating = True
 
 End Sub
@@ -142,6 +170,7 @@ End Sub
 
 Private Sub UserForm_Initialize()
     FillComboBoxCifre
+    SetEscEvents Me.Controls
 End Sub
 
 Private Sub SetCaptions()
@@ -151,7 +180,6 @@ Private Sub SetCaptions()
     Label_cancel.Caption = Sprog.Cancel
     Label_enheder.Caption = Sprog.OutputUnits
     Label6.Caption = Sprog.SignificantFigures
-    CheckBox_vidnotation.Caption = Sprog.ScientificNotation
     Frame5.Caption = Sprog.Exact & "?"
     OptionButton_exactonly.Caption = Sprog.Exact
     OptionButton_numonly.Caption = Sprog.Numeric
@@ -189,7 +217,7 @@ Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 Private Sub Label_cancel_Click()
     annuller = True
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)

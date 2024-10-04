@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+
 Private Sub CommandButton_ok_Click()
     Dim funk As String
     Dim funk2 As String
@@ -77,7 +78,7 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
 #If Mac Then
     ShowPreviewMac
 #Else
-    Me.Hide
+    Me.hide
 #End If
     GoTo slut
 fejl:
@@ -108,6 +109,7 @@ Private Sub UserForm_Initialize()
     Label9.Caption = Sprog.A(192) 'Påvirker rotationshastighed
     Label7.Caption = Sprog.A(193) ' forklaring...
 #End If
+
 End Sub
 Sub ShowPreviewMac()
 #If Mac Then

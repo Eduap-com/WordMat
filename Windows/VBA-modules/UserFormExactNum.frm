@@ -21,11 +21,11 @@ Private Sub UserForm_Activate()
         DoEvents    ' Yield to other processes.
     Loop
 On Error Resume Next
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub UserForm_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -90,7 +90,7 @@ Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
 #End If
         WoMatRibbon.Invalidate
     Else
-        Me.Hide
+        Me.hide
     End If
 slut:
 End Sub

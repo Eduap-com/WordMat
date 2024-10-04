@@ -21,15 +21,43 @@ Public TempDefs As String
 Public luk As Boolean
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
 
+Private EventsCol As New Collection
+Sub SetEscEvents(ControlColl As Controls)
+' SetEscEvents Me.Controls     in Initialize
+    Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
+    On Error Resume Next
+    For Each c In ControlColl ' Me.Controls
+        TN = TypeName(c)
+        If TN = "CheckBox" Then
+            Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "OptionButton" Then
+            Set CE = New CEvents: Set CE.OptionButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ComboBox" Then
+            Set CE = New CEvents: Set CE.ComboBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Label" Then
+            Set CE = New CEvents: Set CE.LabelControl = c: EventsCol.Add CE
+        ElseIf TN = "TextBox" Then
+            Set CE = New CEvents: Set CE.TextBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "CommandButton" Then
+            Set CE = New CEvents: Set CE.CommandButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ListBox" Then
+            Set CE = New CEvents: Set CE.ListBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Frame" Then
+            Set F = c
+            SetEscEvents F.Controls
+        End If
+    Next
+End Sub
 Private Sub Label_cancel_Click()
     luk = True
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub CommandButton_ok_Click()
 Dim Arr As Variant
 Dim i As Integer
     
+    luk = False
     TempDefs = TextBox_def.text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
@@ -51,7 +79,7 @@ Dim i As Integer
     End If
     End If
     
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub Label_solvenum_Click()
@@ -63,7 +91,7 @@ Private Sub Label_solvenum_Click()
       Exit Sub
    End If
    luk = True
-   Me.Hide
+   Me.hide
    UserFormDeSolveNumeric.TextBox_varx.text = TextBox_variabel.text
    UserFormDeSolveNumeric.TextBox_var1.text = TextBox_funktion.text
    UserFormDeSolveNumeric.TextBox_eq1.text = F
@@ -96,6 +124,7 @@ Dim i As Integer
 Dim svar As String
     SetCaptions
     
+    luk = True
     Label_ligning.Caption = FormatDefinitions(Replace(Label_ligning.Caption, "=", " = "))
     Label_ligning.Caption = Replace(Label_ligning.Caption, ChrW(180), "'") ' converttoascii indfører 180. Der står det er nødvendigt, men ved ikke hvorfor denne ser bedre ud
 
@@ -127,6 +156,10 @@ Dim svar As String
         End If
     Next
 
+End Sub
+
+Private Sub UserForm_Initialize()
+    SetEscEvents Me.Controls
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)

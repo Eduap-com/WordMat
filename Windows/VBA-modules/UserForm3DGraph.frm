@@ -15,6 +15,34 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Private palindex As Integer
+
+Private EventsCol As New Collection
+Sub SetEscEvents(ControlColl As Controls)
+' SetEscEvents Me.Controls     in Initialize
+    Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
+    On Error Resume Next
+    For Each c In ControlColl ' Me.Controls
+        TN = TypeName(c)
+        If TN = "CheckBox" Then
+            Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "OptionButton" Then
+            Set CE = New CEvents: Set CE.OptionButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ComboBox" Then
+            Set CE = New CEvents: Set CE.ComboBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Label" Then
+            Set CE = New CEvents: Set CE.LabelControl = c: EventsCol.Add CE
+        ElseIf TN = "TextBox" Then
+            Set CE = New CEvents: Set CE.TextBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "CommandButton" Then
+            Set CE = New CEvents: Set CE.CommandButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ListBox" Then
+            Set CE = New CEvents: Set CE.ListBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Frame" Then
+            Set F = c
+            SetEscEvents F.Controls
+        End If
+    Next
+End Sub
 Private Sub CommandButton_geogebra_Click()
 Dim s As String, vekt As String, Arr() As String, i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String, cmd As String
@@ -749,12 +777,13 @@ Private Sub UserForm_Initialize()
     ComboBox_farver.AddItem Sprog.A(324) '("Grå")
     ComboBox_farver.ListIndex = 0
 
+    SetEscEvents Me.Controls
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
   If CloseMode = 0 Then
     Cancel = 1
-    Me.Hide
+    Me.hide
   End If
 End Sub
 

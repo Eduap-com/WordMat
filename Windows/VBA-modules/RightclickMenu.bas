@@ -73,9 +73,9 @@ Public Sub SletRCMenu()
 #If Mac Then
 #Else
 On Error Resume Next
-Dim ctrl As Object
-    For Each ctrl In Application.CommandBars("Equation Popup").Controls
-        If ctrl.Tag = "cust" Then ctrl.Delete
+Dim Ctrl As Object
+    For Each Ctrl In Application.CommandBars("Equation Popup").Controls
+        If Ctrl.Tag = "cust" Then Ctrl.Delete
     Next
 #End If
 End Sub

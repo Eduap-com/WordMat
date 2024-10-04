@@ -1018,7 +1018,7 @@ Function GetNextListItem(Optional ByVal spos As Long = 0, Optional Sep As String
 ' ikke færdig
 Dim c As String
 Dim cs As String 'startbracket
-Dim ce As String 'endbracket
+Dim CE As String 'endbracket
 Dim bracketlevel As Integer
 
 If Sep = "" Then
@@ -1049,14 +1049,14 @@ Do
     Else
         cs = c
         If c = "(" Then
-            ce = ")"
+            CE = ")"
         ElseIf c = "[" Then
-            ce = "]"
+            CE = "]"
         ElseIf c = "{" Then
           If ChrByIndex(Pos) = VBA.ChrW(9608) Then  ' tuborgparentes uden ende til gaffelforskrifter
-            ce = VBA.ChrW(9508)
+            CE = VBA.ChrW(9508)
           Else
-            ce = "}"
+            CE = "}"
           End If
         End If
     End If
@@ -1066,7 +1066,7 @@ Do
         
         If c = cs Then
             bracketlevel = bracketlevel + 1
-        ElseIf c = ce Then
+        ElseIf c = CE Then
             bracketlevel = bracketlevel - 1
         End If
         Pos = Pos + 1

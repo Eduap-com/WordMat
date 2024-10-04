@@ -23,6 +23,33 @@ Private nytmarkerpunkt As Boolean
 Private DisableEvents As Boolean
 Private Opened As Boolean
 
+Private EventsCol As New Collection
+Sub SetEscEvents(ControlColl As Controls)
+' SetEscEvents Me.Controls     in Initialize
+    Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
+    On Error Resume Next
+    For Each c In ControlColl ' Me.Controls
+        TN = TypeName(c)
+        If TN = "CheckBox" Then
+            Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "OptionButton" Then
+            Set CE = New CEvents: Set CE.OptionButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ComboBox" Then
+            Set CE = New CEvents: Set CE.ComboBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Label" Then
+            Set CE = New CEvents: Set CE.LabelControl = c: EventsCol.Add CE
+        ElseIf TN = "TextBox" Then
+            Set CE = New CEvents: Set CE.TextBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "CommandButton" Then
+            Set CE = New CEvents: Set CE.CommandButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ListBox" Then
+            Set CE = New CEvents: Set CE.ListBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Frame" Then
+            Set F = c
+            SetEscEvents F.Controls
+        End If
+    Next
+End Sub
 Private Sub Label_cancel_Click()
     On Error Resume Next
     PicOpen = False
@@ -88,12 +115,12 @@ MsgBox Sprog.A(196), vbOKOnly, Sprog.Help
 End Sub
 
 Private Sub Label_symbol_Click()
-Dim ctrl As control
+Dim Ctrl As control
 On Error GoTo fejl
-Set ctrl = Me.ActiveControl
-If Left(ctrl.Name, 7) <> "TextBox" Then Set ctrl = TextBox_titel
+Set Ctrl = Me.ActiveControl
+If Left(Ctrl.Name, 7) <> "TextBox" Then Set Ctrl = TextBox_titel
 UserFormSymbol.Show
-ctrl.text = ctrl.text & UserFormSymbol.tegn
+Ctrl.text = Ctrl.text & UserFormSymbol.tegn
 fejl:
 End Sub
 
@@ -239,6 +266,7 @@ Private Sub UserForm_Initialize()
     FillLineStyleCombos
     Label_symbol.Caption = VBA.ChrW(937)
 
+    SetEscEvents Me.Controls
 End Sub
 
 Private Sub CommandButton_insertmarkerpunkt_Click()
@@ -520,7 +548,7 @@ Dim i As Integer
 
 If cxl Is Nothing Then Set cxl = New CExcel
 Application.ScreenUpdating = False
-Me.Hide
+Me.hide
     Dim UfWait2 As New UserFormWaitForMaxima
     UfWait2.Show vbModeless
     DoEvents

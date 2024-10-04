@@ -14,7 +14,6 @@ Private mlistseparator As String
 Private mdecseparator As String
 Private mComplex As Boolean
 Private mUnits As Boolean
-Private mvidnot As Boolean
 Private mlogout As Integer
 Private mexcelembed As Boolean
 Private malltrig As Boolean
@@ -68,7 +67,6 @@ On Error Resume Next
     mComplex = CBool(GetRegSetting("Complex"))
     mlmset = CBool(GetRegSetting("SolveBoolOrSet"))
     mUnits = CBool(GetRegSetting("Units"))
-    mvidnot = CBool(GetRegSetting("VidNot"))
     mlogout = GetRegSetting("LogOutput")
     mexcelembed = CBool(GetRegSetting("ExcelEmbed"))
     malltrig = CBool(GetRegSetting("AllTrig"))
@@ -108,6 +106,7 @@ On Error Resume Next
     mInstallLocation = GetRegSetting("InstallLocation")
     mDoubleTapM = GetRegSetting("DoubleTapM")
     mUseVBACAS = GetRegSetting("UseVBACAS")
+    mDecOutType = CInt(GetRegSetting("DecOutType"))
     
     
     mseparator = CBool(GetRegSetting("Separator"))
@@ -152,7 +151,6 @@ On Error Resume Next
     MaximaComplex = False
     LmSet = False
     MaximaUnits = False
-    MaximaVidNotation = False
     MaximaLogOutput = 0
     ExcelIndlejret = False
     AllTrig = False
@@ -313,13 +311,6 @@ End Property
 Public Property Let MaximaUnits(xval As Boolean)
     SetRegSetting "Units", Abs(CInt(xval))
     mUnits = xval
-End Property
-Public Property Get MaximaVidNotation() As Boolean
-    MaximaVidNotation = mvidnot
-End Property
-Public Property Let MaximaVidNotation(vidval As Boolean)
-    SetRegSetting "VidNot", Abs(CInt(vidval))
-    mvidnot = vidval
 End Property
 Public Property Get MaximaDecOutType() As Integer
     If mDecOutType = 0 Then
@@ -638,10 +629,19 @@ Public Property Let InstallLocation(ByVal L As String)
     mInstallLocation = L
 End Property
 Public Property Get SettUseVBACAS() As Boolean
-    If mUseVBACAS = 0 Then
-        mUseVBACAS = GetRegSetting("UseVBACAS")
+    If QActivePartnership Then
+        If mUseVBACAS = 0 Then
+            mUseVBACAS = GetRegSetting("UseVBACAS")
+        End If
+        If mUseVBACAS = 0 Then
+            SetRegSetting "UseVBACAS", 2 ' 1=no, 2=yes
+            mUseVBACAS = 2
+        End If
+
+        SettUseVBACAS = CBool(mUseVBACAS - 1)
+    Else ' if no partnership VBACAS will fail
+        SettUseVBACAS = False
     End If
-    SettUseVBACAS = CBool(mUseVBACAS - 1)
 End Property
 Public Property Let SettUseVBACAS(xval As Boolean)
     mUseVBACAS = Abs(CInt(xval) + 1)
@@ -651,7 +651,7 @@ End Property
 Public Function GetReg(key As String) As String
     GetReg = GetRegSettingString(key)
 End Function
-Private Function GetRegSetting(key As String) As Integer
+Public Function GetRegSetting(key As String) As Integer
     GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
 End Function
 Private Sub SetRegSetting(ByVal key As String, ByVal val As Integer)

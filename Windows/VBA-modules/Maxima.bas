@@ -388,7 +388,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
             Else
                 s = "solve(" & Replace(s, ",", ".") & "," & variabel & ")"
             End If
-            If MaximaVidNotation Then
+            If MaximaDecOutType = 3 Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
             ElseIf MaximaExact = 2 Then
                 s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -616,7 +616,7 @@ newcas:
             Else
                 s = "solve(" & Replace(s, ",", ".") & "," & variabel & ")"
             End If
-            If MaximaVidNotation Then
+            If MaximaDecOutType = 3 Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
             ElseIf MaximaExact = 2 Then
                 s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -817,7 +817,7 @@ newcassys:
             Else
                 s = "solve({" & Replace(Replace(omax.KommandoerStreng, ",", "."), ";", " , ") & "},{" & Replace(variabel, ";", " , ") & "})"
             End If
-            If MaximaVidNotation Then
+            If MaximaDecOutType = 3 Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
             ElseIf MaximaExact = 2 Then
                 s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -1344,7 +1344,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             OpenGeoGebraWeb "y=" & LHS & ";y=" & rhs & ";intersect(" & LHS & "," & rhs & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
             GoTo slut
         ElseIf CASengine = 2 Then
-            If MaximaVidNotation Then
+            If MaximaDecOutType = 3 Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
             Else
                 s = "Numeric(" & s & " , " & MaximaCifre & ")"
@@ -1481,7 +1481,7 @@ ghop:
             OpenGeoGebraWeb s, "CAS", True, True
             GoTo slut
         ElseIf CASengine = 2 Then
-            If MaximaVidNotation Then
+            If MaximaDecOutType = 3 Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
             Else
                 s = "Numeric(" & s & " , " & MaximaCifre & ")"
@@ -1714,9 +1714,10 @@ Sub beregn()
         If Err.Number = 513 Then
             MsgBox2 Err.Description, vbOKOnly, Sprog.Error
             GoTo slut
-        ElseIf Err.Number = 0 Then
+        ElseIf Err.Number = 0 Then ' hvis ingen fejl, så er beregningen done og sat ind i Word
             GoTo slut
         End If
+        Err.Clear
         On Error GoTo fejl
     End If
     
@@ -1753,7 +1754,7 @@ Sub beregn()
         s = Trim(omax.Kommando)
         '        If Left(s, 1) = "=" Then s = Left(s, Len(s) - 1)
         s = GetCmdAfterEqualSign(s)
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
             s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -1775,7 +1776,7 @@ Sub beregn()
         GoTo slut
     ElseIf CASengine = 2 Then
         fo = RunGeoGebraDirect(s)
-        If MaximaExact = 0 And Not MaximaVidNotation Then
+        If MaximaExact = 0 And MaximaDecOutType < 3 Then
             If fo = "?" Or fo = "null" Or fo = "" Then
                 s = "numeric(" & s & " , " & MaximaCifre & ")"
             Else
@@ -1914,7 +1915,7 @@ Sub Omskriv()
         If UFomskriv.CheckBox_factor.Value Then s = "factor(" & s & ")"
         If UFomskriv.CheckBox_expand.Value Then s = "expand(" & s & ")"
         If UFomskriv.CheckBox_auto.Value Then s = "simplify(" & s & ")"
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
             s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -1922,7 +1923,7 @@ Sub Omskriv()
     End If
     
     If CASengine = 0 Then
-        omax.Omskriv UFomskriv.CheckBox_vidnotation.Value, UFomskriv.CheckBox_auto.Value, UFomskriv.CheckBox_factor.Value, UFomskriv.CheckBox_expand.Value, UFomskriv.CheckBox_rationaliser.Value, UFomskriv.CheckBox_trigreduce.Value
+        omax.Omskriv False, UFomskriv.CheckBox_auto.Value, UFomskriv.CheckBox_factor.Value, UFomskriv.CheckBox_expand.Value, UFomskriv.CheckBox_rationaliser.Value, UFomskriv.CheckBox_trigreduce.Value
     ElseIf CASengine = 1 Then
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
@@ -2025,7 +2026,7 @@ Sub reducer()
 
     If CASengine > 0 Then
         s = "simplify(" & omax.Kommando & ")"
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
             s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -2179,7 +2180,7 @@ Sub faktoriser()
     
     If CASengine > 0 Then
         s = "factor(" & omax.Kommando & ")"
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
             s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -2269,7 +2270,7 @@ Sub udvid()
 
     If CASengine > 0 Then
         s = "expand(" & omax.Kommando & ")"
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
             s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -2358,7 +2359,7 @@ Sub Differentier()
     
     If CASengine > 0 Then
         s = "derivative(" & omax.Kommando & " , " & variabel & ")"
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
             s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -2450,7 +2451,7 @@ Sub Integrer()
     
     If CASengine > 0 Then
         s = "integral(" & omax.Kommando & " , " & variabel & ")"
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
             s = "numeric(" & s & " , " & MaximaCifre & ")"
@@ -2755,6 +2756,18 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         If UFdiffeq.luk Then GoTo slut
         variabel = UFdiffeq.TextBox_variabel.text
         funktion = UFdiffeq.TextBox_funktion.text
+    Else
+        Dim Arr() As String
+        Arr = Split(variabel, "=")
+        If UBound(Arr) > 0 Then
+            UFdiffeq.TextBox_startx.text = Arr(1)
+            variabel = Arr(0)
+        End If
+        Arr = Split(funktion, "=")
+        If UBound(Arr) > 0 Then
+            UFdiffeq.TextBox_starty.text = Arr(1)
+            funktion = Arr(0)
+        End If
     End If
     If variabel = "" Then GoTo slut
     '    omax.OpenCmd
@@ -2780,7 +2793,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         t = t & ",(0," & Replace(UFdiffeq.TextBox_starty2.text, ",", ".") & ")"
         End If
         s = "solveODE(" & s & t & ")"
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
             s = "numeric(" & s & " , " & MaximaCifre & ")"

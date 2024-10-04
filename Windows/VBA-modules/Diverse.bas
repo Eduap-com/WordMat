@@ -674,14 +674,25 @@ Sub InsertDefiner()
 
     Application.ScreenUpdating = False
     If Selection.OMaths.Count > 0 Then
-        Selection.OMaths(1).Range.Select
-        Selection.Collapse wdCollapseStart
-        Selection.InsertAfter (Sprog.A(62) & ": ")
+        If Selection.OMaths(1).Type = wdOMathInline Then
+            Selection.OMaths(1).Range.Select
+            If Selection.OMaths(1).Range.text = "Type equation here." Or Selection.OMaths(1).Range.text = "Skriv ligningen her." Then
+            Else
+                Selection.Collapse wdCollapseStart
+                Selection.MoveRight wdCharacter, 1
+            End If
+            Selection.TypeText Sprog.A(62) & ": "
+        Else
+            Selection.OMaths(1).Range.Select
+            Selection.Collapse wdCollapseStart
+            If Selection.OMaths(1).Range.text = "Type equation here." Or Selection.OMaths(1).Range.text = "Skriv ligningen her." Then
+                Selection.MoveRight wdCharacter, 1
+            End If
+            Selection.TypeText Sprog.A(62) & ": "
+        End If
     Else
-        Selection.InsertAfter (Sprog.A(62) & ": ")
-        Selection.OMaths.Add Range:=Selection.Range
-        Selection.OMaths.BuildUp
-    '    Selection.OMaths(1).BuildUp
+        Selection.OMaths.Add Selection.Range
+        Selection.TypeText Sprog.A(62) & ": "
     End If
     Selection.Collapse wdCollapseEnd
         
@@ -1081,7 +1092,7 @@ chosunit:
 '            MaxProc.CloseProcess
 '            MaxProc.StartMaximaProcess
         End If
-    
+        RefreshRibbon
 '    UserFormQuick.Hide
 '    Unload ufq
 
@@ -1488,7 +1499,7 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = "0"
         Exit Function
     End If
-    If MaximaVidNotation Or Abs(n) > 10 ^ 6 Or Abs(n) < 10 ^ -6 Then
+    If MaximaDecOutType = 3 Or Abs(n) > 10 ^ 6 Or Abs(n) < 10 ^ -6 Then
 '#If Mac Then
 '    ConvertNumberToString = n
 '    ConvertNumberToString = Replace(ConvertNumberToString, "e", "E")
@@ -1786,6 +1797,14 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Dim t As Table, F As Field, ccut As Boolean
     Dim placement As Integer
     On Error GoTo fejl
+    
+    If AskRef Then
+        Dim EqName As String
+        UserFormEnterEquationRef.Show
+        EqName = UserFormEnterEquationRef.EquationName    'Replace(InputBox(Sprog.A(5), Sprog.A(4), "Eq"), " ", "")
+        If EqName = vbNullString Then GoTo slut
+    End If
+    
     Application.ScreenUpdating = False
 
     If Selection.Tables.Count > 0 Then
@@ -1869,11 +1888,8 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     End If
 
     If AskRef Then
-        Dim EqName As String
-        t.Cell(1, 3).Range.Fields(1).Select
-        UserFormEnterEquationRef.Show
-        EqName = UserFormEnterEquationRef.EquationName    'Replace(InputBox(Sprog.A(5), Sprog.A(4), "Eq"), " ", "")
         If EqName <> vbNullString Then
+            t.Cell(1, 3).Range.Fields(1).Select
             With ActiveDocument.Bookmarks
                 .Add Range:=Selection.Range, Name:=EqName
                 .DefaultSorting = wdSortByName

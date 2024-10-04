@@ -44,7 +44,7 @@ Sub RunTestSequence()
     CASengine = 0 ' 0=maxima
     MaximaExact = 1 ' 0 - auto ' 1 - exact ' 2 - num
     MaximaCifre = 7
-    MaximaVidNotation = False
+    MaximaDecOutType = 2 ' bc
     Radians = False
     MaximaComplex = False
     AllTrig = False
@@ -100,7 +100,8 @@ Sub RunTestSequence()
     '    Application.ScreenRefresh
 
     'til test af enkelt
-'        GoTo slut
+    
+'    GoTo slut
     
     ' Man kan indtaste flere korrekte resultater, bare adskil med @$
     'calculation tests
@@ -213,7 +214,6 @@ Sub RunTestSequence()
     TestSolve "x^2+x-12" & VBA.ChrW(8805) & "8", "x", "x" & VBA.ChrW(8804) & "-5   " & VBA.ChrW(8744) & "   x" & VBA.ChrW(8805) & "4" ' ulighed
     If StopNow Then GoTo slut
     If TestSolve("e^(-x)=2", "x", "x=-ln" & VBA.ChrW(8289) & "(2)") Then GoTo slut
-    
     MaximaExact = 2
     InsertTestMath "Definer: " & VBA.ChrW(963) & ">0"
     If TestSolve("0,1=" & VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^5" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "" & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((y-7)/" & VBA.ChrW(963) & ")^2 ) dy", "sigma", VBA.ChrW(963) & "=1,560608") Then GoTo slut
@@ -223,10 +223,13 @@ Sub RunTestSequence()
     '    TestSolve "", "x", "x="
     '    If StopNow Then GoTo slut
     
-    'Often fails, but not always ??? then works numerically
+    'Often fails, but not always ??? then works numerically. Det er noget med en overflow fejl. Virker ikke mere numerisk
+    ' resultat er numerisk 100. Nogle gange kører denne i lykke og skal gentages numerisk. Ukendt hvorfor.
     If Not NonInterA Then
-        TestSolve "40=72" & VBA.ChrW(183) & "e^((0,619/0,22" & VBA.ChrW(8729) & "(e^22-e^0,22t )) )", "t", "t=100@$t=ln" & VBA.ChrW(8289) & "(ln" & VBA.ChrW(8289) & "(5/9)" & VBA.ChrW(183) & "-0,355412+e^22 )" & VBA.ChrW(183) & "4,545455" ' resultat er numerisk 100. Nogle gange kører denne i lykke og skal gentages numerisk. Ukendt hvorfor.
-        If StopNow Then GoTo slut
+        InsertTestMath "OBS: Denne kan tage lang tid. Vent med at trykke STOP"
+        Selection.TypeParagraph
+        DoEvents
+        If TestSolve("40=72" & VBA.ChrW(183) & "e^((0,619/0,22" & VBA.ChrW(8729) & "(e^22-e^0,22t )) )", "t", "t=100@$t=ln" & VBA.ChrW(8289) & "(ln" & VBA.ChrW(8289) & "(5/9)" & VBA.ChrW(183) & "-0,355412+e^22 )" & VBA.ChrW(183) & "4,545455@t=4,545455" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(e^22-0,355412" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(5/9) )") Then GoTo slut
     End If
         
     ' Defintion test
@@ -296,9 +299,9 @@ Sub RunTestSequence()
         If StopNow Then GoTo slut
 
         ' Requires user input. Equations that trigger numeric solution
-        TestSolve "x^2=" & VBA.ChrW(12310) & "0,7" & VBA.ChrW(12311) & "^x", "x", "x" & VBA.ChrW(8776) & "-15,29371    " & VBA.ChrW(8744) & "    x" & VBA.ChrW(8776) & "-1,249643    " & VBA.ChrW(8744) & "    x" & VBA.ChrW(8776) & "0,8581024", "Click maxima numeric"
+        TestSolve "x^2=" & VBA.ChrW(12310) & "0,7" & VBA.ChrW(12311) & "^x", "x", "x " & VBA.ChrW(8776) & " -15,29371    " & VBA.ChrW(8744) & "    x " & VBA.ChrW(8776) & " -1,249643    " & VBA.ChrW(8744) & "    x " & VBA.ChrW(8776) & " 0,8581024", "Click maxima numeric"
         If StopNow Then GoTo slut
-        TestSolve "x" & VBA.ChrW(183) & "e^2x+e^2x=0", "x", "x" & VBA.ChrW(8776) & "-1", "Click maxima numeric"  ' Only x=-1 is a solution
+        TestSolve "x" & VBA.ChrW(183) & "e^2x+e^2x=0", "x", "x" & VBA.ChrW(8776) & "-1@x=-1", "Click maxima numeric"  ' Only x=-1 is a solution
         If StopNow Then GoTo slut
     
     End If '****** Interactive end *******
@@ -340,12 +343,11 @@ Sub RunTestSequence()
     
     ' Scientific notation test
     MaximaExact = 2
-    MaximaVidNotation = True
+    MaximaDecOutType = 3
     ShowSettings "Videnskabelig notation test"
     TestBeregn "123", "=1,23" & VBA.ChrW(183) & "10^2"
     If StopNow Then GoTo slut
-    MaximaVidNotation = False
-    
+    MaximaDecOutType = 2
 
     ' Differential- og integralregning
     MaximaExact = 0
@@ -356,7 +358,13 @@ Sub RunTestSequence()
     If TestBeregn(VBA.ChrW(8747) & "_1^10" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(x^(-2)+1) dx", "=-(ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2" & VBA.ChrW(8776) & "9,417202@$=-((ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2)" & VBA.ChrW(8776) & "9,417202") Then GoTo slut
     InsertTestMath "Definer: f(x)=" & VBA.ChrW(8730) & "(3x+9)  ;g(x)=x+3"
     If TestSolve(VBA.ChrW(8747) & "_0^k" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "g(x)-f(x) " & VBA.ChrW(12311) & " dx=1,5", "k", "k=-3    " & VBA.ChrW(8744) & "    k=7/3") Then GoTo slut
-    
+    ' de næste to gav før forkert resultat pga brug ldefint i integrate, så nu anvendes Nintegrate før ldefint, som åbenbart er fejlbarlig.
+    If TestBeregn(VBA.ChrW(8747) & "_(-1)^1" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(1+((4" & VBA.ChrW(183) & "x-4" & VBA.ChrW(183) & "x^3 )" & VBA.ChrW(183) & "e^(2" & VBA.ChrW(183) & "x^2-x^4 ) )^2 ) dx", VBA.ChrW(8776) & "4,142057") Then GoTo slut
+    InsertTestMath "Definer: f(x)=0,000003" & VBA.ChrW(183) & "x^4-0,01676" & VBA.ChrW(183) & "x^2+60"
+    Selection.TypeParagraph
+    If TestBeregn(VBA.ChrW(8747) & "_(-52)^52" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "" & VBA.ChrW(8730) & "(1+(f^' (x))^2 ) dx" & VBA.ChrW(12311), VBA.ChrW(8776) & "115,7009") Then GoTo slut
+    InsertSletDef
+
 
     ' Vektortest
     MaximaExact = 0
@@ -398,7 +406,11 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     If TestSolveDE("y^'=b" & VBA.ChrW(183) & "y" & VBA.ChrW(183) & "(M-y)", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=M    " & VBA.ChrW(8744) & "    y=M/(c" & VBA.ChrW(183) & "e^(-(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x) )+1)") Then GoTo slut
     If TestSolveDE("(y^' )^2+x" & VBA.ChrW(183) & "y^'=0", "y,x", "y=c    " & VBA.ChrW(8744) & "    y=c-x^2/2") Then GoTo slut
-    
+    ' partikulære løsninger
+    ' Denne har tidligere ikke givet en løsning. Den blev sorteret fra i ic1real, da TESTTF fandt en lille forskel i konstanterne, og så troede det var en falsk løsning. TestTF har nu fået numerisk sammenligning
+    If TestSolveDE("p^'=0,015" & VBA.ChrW(183) & "p^1,2", "p=5,28;x=0", "p=-(1000000000000000/(243" & VBA.ChrW(183) & "(x-238,9747)^5 ))") Then GoTo slut
+    ' Denne har tidligere givet forkert løsning, da der kommer to løsninger, men når konstanten er sat ind, passer kun den ene.
+    If TestSolveDE("(x+5)" & VBA.ChrW(183) & "y^'=" & VBA.ChrW(8730) & "y", "y=1;x=-4", "y=(ln" & VBA.ChrW(8289) & "(|x+5|)+2)^2/4") Then GoTo slut
 
 ggbtest:
     ' GeoGebra test
@@ -461,7 +473,7 @@ slut:
     Selection.TypeParagraph
     Selection.TypeText "Don't forget to do manual test, as the UI isn't tested using the testmodule"
     
-    MaximaVidNotation = False
+    MaximaDecOutType = 2
     MaximaUnits = False
     MaximaExact = 0 ' Auto
     CASengine = 0 ' Maxima
@@ -522,7 +534,7 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
     ElseIf TestType = 2 Then
         MaximaSolvePar (Var)
     ElseIf TestType = 3 Then 'solvede
-        Arr = Split(Var, ",")
+        Arr = Split(Var, ";")
         SolveDEpar Arr(0), Arr(1)
     End If
     Wait 0.2
@@ -607,11 +619,11 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
       TestType = 3
    ElseIf InStr(komm, "y^'=") > 0 Or TestType = 4 Then
      TestType = 4
-      Var = InputBox("Enter dependent and independent variable to DEsolve for", "Variable", "y,x")
+      Var = InputBox("Enter dependent and independent variable to DEsolve for. Separate by semicolon. You can add initial condition." & vbCrLf & "Examples: y;x " & vbCrLf & "y=5;x=0", "Variable", "y;x")
       If Trim(Var) = vbNullString Then Exit Sub
-      Arr = Split(Var, ",")
+      Arr = Split(Var, ";")
       If UBound(Arr) < 1 Then Exit Sub
-      SolveDEpar Arr(0), Arr(1)
+      SolveDEpar Trim(Arr(0)), Trim(Arr(1))
    ElseIf InStr(komm, "=") > 0 Or TestType = 2 Then
       TestType = 2
       Var = InputBox("Enter variable to solve for", "Variable", "x")
@@ -846,7 +858,7 @@ Sub ShowSettings(Optional Htext As String)
     Selection.TypeParagraph
     Selection.TypeText "Exact: " & MaximaExact & vbTab & "Cifre: " & MaximaCifre
     Selection.TypeParagraph
-    Selection.TypeText "Scientific notation: " & MaximaVidNotation & vbTab & "Units: " & MaximaUnits
+    Selection.TypeText "Scientific notation: " & (MaximaDecOutType = 3) & vbTab & "Units: " & MaximaUnits
     Selection.TypeParagraph
     Selection.TypeText "Radians: " & Radians & vbTab & "Complex: " & MaximaComplex
     Selection.Font.Size = 11

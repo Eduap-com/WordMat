@@ -20,12 +20,12 @@ Private Sub UserForm_Activate()
     Do While Timer < start + 2
         DoEvents    ' Yield to other processes.
     Loop
-    Me.Hide
+    Me.hide
 
 End Sub
 
 Private Sub UserForm_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    Me.Hide
+    Me.hide
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -54,7 +54,7 @@ On Error GoTo slut
         start = Timer    ' Set start time.
     End If
     Else
-        Me.Hide
+        Me.hide
     End If
     If Not (WoMatRibbon Is Nothing) Then
         WoMatRibbon.Invalidate

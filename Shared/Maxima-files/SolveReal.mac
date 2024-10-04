@@ -211,6 +211,7 @@ qout:errcatch(apply1(udt,dectalnumrul)),
 if qout=[] then udt else qout[1])$ /* Justeret i 1.19 dectalrul giver desvaerre fejl nu. gjorde den ikke foer. dectalnumrul virker, men der kan vaere noget med raekkefoelgen, saa den er andet valg*/
 
 dectalall(udt):=block([qout],qout:errcatch(apply1(udt,floatrul)),if qout=[] then udt else qout[1])$
+
 /* fra funcdef*/
 infix("~",135,135)$
 infix("�",135,135)$
@@ -338,10 +339,10 @@ Integrate(udt,var,x0,x1):=block([res1,res2,numer,qindef],numer:false,udt:rationa
 if x0#minf and x1#inf then (qindef:integrate(udt,var),if freeof(integrate,qindef) then return(subst(x1,var,qindef)-subst(x0,var,qindef))),
 errcatch(res1:ev(integrate(udt,var,x0,x1),numer=false)),
 if not(numberp(x0) and numberp(x1)) and x0#minf and x1#inf  then return(res1),
-if numberp(ev(res1,numer)) then return(res1),res1:ev(res1,numer),if numberp(res1) then return(res1),errcatch(res2:ldefint(udt,var,x0,x1)),
-if numberp(res2) then return(res2),
-res2:NIntegrate(udt,var,x0,x1),
-if numberp(res2) then return(res2),res1)$
+if numberp(ev(res1,numer)) then return(res1),res1:ev(res1,numer),if numberp(res1) then return(res1),
+res2:NIntegrate(udt,var,x0,x1), if numberp(res2) then return(res2),
+errcatch(res2:ldefint(udt,var,x0,x1)), if numberp(res2) then return(res2),
+res1)$
 
 zerorule(exprq):=block([indq,ledq,restq,xledq,exprq2],partswitch:true,
 if op(exprq)#"=" or inpart(exprq,3)#end then return(exprq),
@@ -1444,15 +1445,25 @@ SolExists(SolList,Sol):=block([indq,retval],retval:[],
 retval
 );
 
-/* Tester om udsagnet er sandt, falsk eller ukendt baade analytisk og numerisk. �ndret 1.22 s� der forts�ttes hvis ikke true istedet for unknown */
-TestTF(qexpr):=block([qres,qvar],
+/* Tester om udsagnet er sandt, falsk eller ukendt baade analytisk og numerisk. Aendret 1.22 saa der fortsaettes hvis ikke true istedet for unknown. 1.31 tilføjet numerisk ca. check*/
+TestTF(qexpr):=block([qres,qvar,qweks,qsave],qsave:qexpr,
 if not(freeof("=",qexpr)) then qexpr:equal(lhs(qexpr)-rhs(qexpr),0),
 qres:is(qexpr),if qres=true then return(qres),qres:is(trigreduce(qexpr)),
 if qres=true then return(qres),
     qres:is(radcan(qexpr)),
     if qres=true then return(qres),
+    if qres=true then (print("Numerically tested"), return(qres)),
+            (errcatch(qweks:ceiling(log(ev(abs(ev(lhs(qsave),numer)),numer))/log(10))),
+        if not(integerp(qweks)) then 
+            qweks=1, 
+        if NoSigFig>5 then 
+            qweks:qweks+NoSigFig-5,
+        if qweks<0 then 
+            qweks:0 ,
+        qres:is(ev(abs(ev(lhs(qexpr)-rhs(qexpr),numer)),numer)<10^(-NoSigFig+qweks+1)),
+                if not(qres) then print(sconcat("Possible solution removed: ",qsave))),
+    if qres=true then return(qres),
      (qvar:listofvars(qexpr),if length(qvar)>0 then qvar:first(qvar) else return(qres),qres:zeroequiv(lhs(qexpr)-rhs(qexpr),qvar)),
-    if qres=true or qres=false then print("Numerically tested"),
 qres)$
 
 /* Til haandtering af dobbeltbetydning af determinant  det(matrix) eller det(vektor,vektor) */

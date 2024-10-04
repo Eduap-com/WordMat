@@ -19,7 +19,7 @@ Dim TabNo As Integer, RowNo As Integer
 Dim StopTest As Boolean
 
 Private Sub CommandButton_luk_Click()
-    Me.Hide
+    Me.hide
 End Sub
 
 

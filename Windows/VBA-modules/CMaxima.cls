@@ -403,7 +403,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         End If
 '        k = k & expr & ",numer;applyb1(%,unitrule),numer;scanmap(processunits,%);dectalallNum(%),numer;"
         k = k & Expr & ",numer;ConvertUnit(%);"
-        If MaximaVidNotation Then
+        If MaximaDecOutType = 3 Then
             k = k & "scinotall(%);"
         Else
 '            k = k & "dectalallNum(%),numer;" ' giver problemer for enheder med % prefix da enhederne så vises først.
@@ -842,7 +842,7 @@ Sub AddStandardSecondary()
 ' typisk skal denne køres efter maximastregen er sat op til at køre kommandoen
 ' denne sørger så for at output kommer som anvist i indstillinger
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = MaximaInputStrengSec & "scinotall(%),numer"    ' uden ,numer bliver der ikke reduceret i udtrykket sqrt(2) f.eks.
     ElseIf MaximaExact = 2 Or MaximaUnits Then    ' numerisk
         MaximaInputStrengSec = MaximaInputStrengSec & "dectalall(%),numer"
@@ -1185,7 +1185,7 @@ Sub MaximaSolveNumeric(ByVal variabel As String, ByVal guess As String, Optional
     MaximaInputStreng = MaximaInputStreng & "[ratsimpexpons:false,load(""newton1"")]$" & Kommando & ";"
     ' af uransagelige årsager kan der komme eksakte løsninger ud
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer"  ' uden ,numer bliver der ikke reduceret i udtrykket sqrt(2) f.eks.
     Else
         MaximaInputStrengSec = "dectalall(%),numer"
@@ -1225,7 +1225,7 @@ Sub MaximaFindRoot(ByVal variabel As String, ByVal xmin As String, ByVal xmax As
     Kommando = "find_root(" & CodeForMaxima(Kommando) & "," & variabel & "," & xmin & "," & xmax & ")"
     MaximaInputStreng = MaximaInputStreng & "[ratsimpexpons:false]$" & Kommando & ";"
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer"  ' uden ,numer bliver der ikke reduceret i udtrykket sqrt(2) f.eks.
     Else
         MaximaInputStrengSec = "dectalall(%),numer"
@@ -1268,7 +1268,7 @@ Sub Nsolve(ByVal variabel As String, ByVal qn As Integer, ByVal qm As Integer, B
     Kommando = "nsolve(" & CodeForMaxima(Kommando) & "," & variabel & "," & qn & "," & qm & "," & qtid & "," & maxsol & "," & qnn & "," & qmm & "," & VBA.LCase(newt) & ")"
     MaximaInputStreng = MaximaInputStreng & "[ratsimpexpons:false]$" & Kommando & ";"
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer"  ' uden ,numer bliver der ikke reduceret i udtrykket sqrt(2) f.eks.
     Else
         MaximaInputStrengSec = "dectalall(%),numer"
@@ -1483,7 +1483,7 @@ Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional
 
     MaximaInputStreng = MaximaInputStreng & "[load(""mnewton""),ratsimpexpons:false,newtonmaximeter:5000000,newtonepsilon:10^-" & MaximaCifre & "]$" & Kommando & ";"
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer;"
     Else
         MaximaInputStrengSec = "dectalall(%),numer;"
@@ -1661,7 +1661,7 @@ start:
         MaximaOutput = ""
         KommentarOutput = Minput(1) ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
         KommentarOutput = moutput(1) ' på windows '23,,' skal det være denne for at få fejl med
-    ElseIf MaximaExact = 0 And Not MaximaVidNotation And Not MaximaUnits Then
+    ElseIf MaximaExact = 0 And MaximaDecOutType < 3 And Not MaximaUnits Then
         Dim exactres As String
         Dim numres As String
         If nr > 1 Then moutput(nr - 1) = Replace(moutput(nr - 1), vbLf, "")
@@ -1749,7 +1749,7 @@ Sub PolySolve(ByVal variabel As String)
     Kommando = "algsys([" & CodeForMaxima(Kommando) & "],[" & variabel & "])"
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer;"
     Else
         MaximaInputStrengSec = "dectalall(%),numer;"
@@ -2027,7 +2027,7 @@ Sub Reduce()
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer;"
     ElseIf MaximaExact = 2 Then
         MaximaInputStrengSec = "dectalall(%),numer;"
@@ -2066,7 +2066,7 @@ Sub CompareTest()
     End If
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer;"
     ElseIf MaximaExact = 2 Then
         MaximaInputStrengSec = "dectalall(%),numer;"
@@ -2105,7 +2105,7 @@ Sub Factor()
     End If
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer;"
     ElseIf MaximaExact = 2 Then
         MaximaInputStrengSec = "dectalall(%),numer;"
@@ -2146,7 +2146,7 @@ Sub Expand()
     End If
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer;"
     ElseIf MaximaExact = 2 Then
         MaximaInputStrengSec = "dectalall(%),numer;"
@@ -2211,7 +2211,7 @@ Sub UserRegression(fkt As String, Var As String, xlist As String, ylist As Strin
     Kommando = Kommando & ",numer"
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
-    If MaximaVidNotation Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then     ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer;"
     ElseIf MaximaExact = 2 Then
         MaximaInputStrengSec = "dectalall(%),numer;"
@@ -2709,7 +2709,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     Dim subs As Integer, sups As Integer, ends As Integer
     Dim antalm As Integer, varl As Integer, di As Integer, antalmS As String
 
-'    On Error GoTo fejl
+    On Error GoTo fejl
     ea.SetNormalBrackets
     ea2.StartBracket = VBA.ChrW(12310)
     ea2.EndBracket = VBA.ChrW(12311)
@@ -3683,11 +3683,11 @@ msat:
             ea.StartBracket = VBA.ChrW(8747)
             ea.EndBracket = VBA.ChrW(8518)    'differential d
             integrand = ea.GetNextBracketContent
-            Pos = ea.Pos - Len(integrand)    'pos sættes til start-integraltegnet
+            Pos = ea.Pos - Len(integrand) - 2  'pos sættes til start-integraltegnet
             pos2 = ea.Pos
             If Len(integrand) = 0 Then
                 ea.EndBracket = "d"
-                integrand = ea.GetNextBracketContent(Pos)
+                integrand = ea.GetNextBracketContent(Pos - 2)
                 Pos = ea.Pos - Len(integrand) - 2    'pos sættes til start-integraltegnet
                 pos2 = ea.Pos
                 If Not (ea.IsLetterPos(ea.Pos, False) And Not (ea.IsLetterPos(ea.Pos - 2, False))) Then ' hvis enligt d eller som af variabel/funktion der ikke starter med d, så er det ikke slutningen af integralet. Derfor forsøges med simplere metode til at finde d
@@ -3700,8 +3700,11 @@ msat:
                     integrand = Mid(ea.text, Pos + 1, pos3 - Pos - 1)
                     pos2 = ea.Pos
                 End If
+                Var = ea.GetNextVar(ea.Pos - 1)
+            Else
+                Var = "d" & ea.GetNextVar(ea.Pos - 1)
+                ea.Pos = ea.Pos - 1
             End If
-            Var = ea.GetNextVar(ea.Pos - 1)
             If Len(integrand) > 0 Then
                 If Len(integrand) < 3 And Mid(ea.text, pos2 - Len(Var), 2 + Len(Var)) = "(" & Var & ")" Then    ' hvis speciel notation med \int (dx)/(bla bla)
                     ea.SetNormalBrackets
@@ -4066,7 +4069,12 @@ spring:
             End If
             
             If Len(text) - slpos >= 0 Then
-                text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos)
+                If ea.ChrByIndex(stpos) = "[" Then
+                    text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos) ' fjern omslutningstegn hvis  [
+                Else
+                    text = Left(text, stpos) & mtext & right(text, Len(text) - slpos + 1) ' bevar omslutningsregn hvis ( eller |
+                End If
+'                text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos) ' ændret 1.31 pga vektor med || hvor parenteser forsvinder
             Else
                 text = Left(text, stpos - 1) & mtext
             End If
@@ -4080,10 +4088,47 @@ spring:
             matvekt = True
             ea.text = text
             ea.Pos = Pos
+'            ' identify bracket type ( [ or |
+'            i = Pos - 1
+'            Do While i > 0
+'                If ea.ChrByIndex(i) = "(" Then
+'                    ea.StartBracket = "("
+'                    ea.EndBracket = ")"
+'                    Exit Do
+'                ElseIf ea.ChrByIndex(i) = "[" Then
+'                    ea.StartBracket = "["
+'                    ea.EndBracket = "]"
+'                    Exit Do
+'                ElseIf ea.ChrByIndex(i) = "|" Then
+'                    ea.StartBracket = "|"
+'                    ea.EndBracket = "|"
+'                    Exit Do
+'                End If
+'                i = i - 1
+'            Loop
+            
             ea.Pos = ea.FindPrevBracket(Pos - 1)
             stpos = ea.Pos
             
-            matrix = ea.GetNextBracketContent
+            ea.StartBracket = "|" ' Hvis der indtastes || om en vektor, kan Word fjerne () i vektoren, så der kun står []
+            ea.EndBracket = "|"
+            ea.Pos = ea.FindPrevBracket(Pos - 1)
+            If ea.Pos > stpos Then
+                stpos = ea.Pos
+            Else
+                ea.SetNormalBrackets
+            End If
+            
+            ea.StartBracket = "[" ' Hvis der indtastes || om en vektor, kan Word fjerne () i vektoren, så der kun står []
+            ea.EndBracket = "]"
+            ea.Pos = ea.FindPrevBracket(Pos - 1)
+            If ea.Pos > stpos Then
+                stpos = ea.Pos
+            Else
+                ea.SetNormalBrackets
+            End If
+            
+            matrix = ea.GetNextBracketContent(stpos)
             slpos = ea.Pos - 1
             ea.Pos = Pos
             Arr = Split(matrix, VBA.ChrW(166))
@@ -4102,13 +4147,14 @@ spring:
             End If
             
             If Len(text) - slpos >= 0 Then
-                text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos)
+'                text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos)
+                text = Left(text, stpos) & mtext & right(text, Len(text) - slpos + 1)
             Else
                 text = Left(text, stpos - 1) & mtext
             End If
         End If
     Loop While Pos > 0
-
+    ea.SetNormalBrackets
 
     ' indsæt underforståede gangetegn mellem bogstav mellemrum og bogstav
     ' virker men så kan man ikke lave funktioner med sænket skrift da der da er mellemrum
@@ -7205,7 +7251,7 @@ Function SplitAssump(s As String) As String
    
     s = Replace(s, VBA.ChrW(8804), "<=")    '
     s = Replace(s, VBA.ChrW(8805), ">=")    '
-
+    s = Replace(s, " ", vbNullString)
    ea.text = s
    
    V = ea.GetNextVar()

@@ -14,6 +14,35 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Public EventsOn As Boolean
+
+Private EventsCol As New Collection
+Sub SetEscEvents(ControlColl As Controls)
+' SetEscEvents Me.Controls     in Initialize
+    Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
+    For Each c In ControlColl ' Me.Controls
+        TN = TypeName(c)
+        If TN = "CheckBox" Then
+            Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "OptionButton" Then
+            Set CE = New CEvents: Set CE.OptionButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ComboBox" Then
+            Set CE = New CEvents: Set CE.ComboBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Label" Then
+            Set CE = New CEvents: Set CE.LabelControl = c: EventsCol.Add CE
+        ElseIf TN = "TextBox" Then
+            Set CE = New CEvents: Set CE.TextBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "CommandButton" Then
+            Set CE = New CEvents: Set CE.CommandButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ListBox" Then
+            Set CE = New CEvents: Set CE.ListBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "MultiPage" Then
+            Set CE = New CEvents: Set CE.MultiPageControl = c: EventsCol.Add CE
+        ElseIf TN = "Frame" Then
+            Set F = c
+            SetEscEvents F.Controls
+        End If
+    Next
+End Sub
 Private Sub CheckBox_contents_Change()
    If EventsOn Then SaveSet2
    ShowFixedPreamble
@@ -49,10 +78,10 @@ Private Sub ComboBox_fontsize_Change()
 End Sub
 
 Private Sub CommandButton_convertall_Click()
-    Me.Hide
+    Me.hide
     SaveSet
     ConvertAllEquations
-    Me.Hide
+    Me.hide
 
 End Sub
 
@@ -131,7 +160,7 @@ Obj.PutInClipboard
 End Sub
 
 Private Sub CommandButton_latex_Click()
-   Me.Hide
+   Me.hide
     SaveFile 2
     'open latex
 End Sub
@@ -141,7 +170,7 @@ Private Sub CommandButton_next_Click()
         Selection.OMaths(1).Range.text = ""
         Selection.InsertAfter TextBox_latex.text
     End If
-    Me.Hide
+    Me.hide
     Selection.End = ActiveDocument.Range.End
     If Selection.OMaths.Count > 0 Then
         Selection.OMaths(1).Range.Select
@@ -166,7 +195,7 @@ Private Sub CommandButton_ok_Click()
 '    Selection.InsertAfter TextBox_latex.text
 'End If
 
-Me.Hide
+Me.hide
 End Sub
 Private Sub CommandButton_onlinelatex_Click()
 'http://latex.codecogs.com/emf.latex?%5Cint_0%5E1%20x%5E2%20dx
@@ -189,7 +218,7 @@ Private Sub CommandButton_dvi_Click()
 End Sub
 
 Private Sub CommandButton_pdflatex_Click()
-   Me.Hide
+   Me.hide
     SaveFile (0)
 End Sub
 
@@ -432,4 +461,14 @@ Private Sub CommandButton_resetpreamble_Click()
    LatexPreamble = s
    TextBox_preamble.text = s
 
+End Sub
+
+Private Sub UserForm_Initialize()
+    SetEscEvents Me.Controls
+End Sub
+
+Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+    If KeyCode = 27 Then
+        Me.hide
+    End If
 End Sub
