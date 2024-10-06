@@ -1982,7 +1982,7 @@ Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
 
-    If vidnot Then     ' videnskabelig notation
+    If MaximaDecOutType = 3 Then   ' videnskabelig notation
         MaximaInputStrengSec = "scinotall(%),numer;"
     ElseIf MaximaExact = 2 Then
         MaximaInputStrengSec = "dectalall(%),numer;"

@@ -501,6 +501,12 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim UFSolvenumeric As New UserFormNumericQuestion
     Dim ea As New ExpressionAnalyser, SaveKommando As String
     Dim sstart As Long, sslut As Long, p As Long, p2 As Long
+    Dim SaveSettingsCifre As Integer
+    Dim SaveSettingsExact As Integer
+    Dim SaveSettingsOutunits As String
+    Dim SaveSettingsLog As Integer
+    Dim SaveSettingsDecOutType As Integer
+    
     scrollpos = ActiveWindow.VerticalPercentScrolled
     
     TempCas = CASengine
@@ -510,6 +516,14 @@ Sub MaximaSolvePar(Optional variabel As String)
 
     Set UFSelectVar = New UserFormSelectVar
     UFSelectVar.NoEq = 1
+    
+    SaveSettingsCifre = MaximaCifre
+    SaveSettingsExact = MaximaExact
+    SaveSettingsOutunits = OutUnits
+    SaveSettingsLog = MaximaLogOutput
+    SaveSettingsDecOutType = MaximaDecOutType
+    
+    
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     sstart = Selection.start
     sslut = Selection.End
@@ -974,6 +988,11 @@ fejl:
 slut:
     '    omax.Luk
     On Error Resume Next
+    MaximaCifre = SaveSettingsCifre
+    MaximaExact = SaveSettingsExact
+    OutUnits = SaveSettingsOutunits
+    MaximaLogOutput = SaveSettingsLog
+    MaximaDecOutType = SaveSettingsDecOutType
     CASengine = TempCas
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
@@ -1874,6 +1893,8 @@ Sub Omskriv()
     Dim SaveSettingsExact As Integer
     Dim SaveSettingsOutunits As String
     Dim SaveSettingsLog As Integer
+    Dim SaveSettingsDecOutType As Integer
+    
     Dim sstart As Long, sslut As Long
     sstart = Selection.start
     sslut = Selection.End
@@ -1882,6 +1903,7 @@ Sub Omskriv()
     SaveSettingsExact = MaximaExact
     SaveSettingsOutunits = OutUnits
     SaveSettingsLog = MaximaLogOutput
+    SaveSettingsDecOutType = MaximaDecOutType
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
@@ -1991,6 +2013,7 @@ slut:
     MaximaExact = SaveSettingsExact
     OutUnits = SaveSettingsOutunits
     MaximaLogOutput = SaveSettingsLog
+    MaximaDecOutType = SaveSettingsDecOutType
     On Error Resume Next
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart

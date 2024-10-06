@@ -62,6 +62,11 @@ Sub SetEscEvents(ControlColl As Controls)
         End If
     Next
 End Sub
+
+Private Sub CommandButton_ok_Click()
+    Label_ok_Click
+End Sub
+
 Private Sub Label_nulstil_Click()
     TextBox_A.text = ""
     TextBox_B.text = ""

@@ -5,7 +5,7 @@ Option Explicit
 
 Public AppNavn As String
 
-Public Const AppVersion = "1.30"
+Public Const AppVersion = "1.31"
 #If Mac Then ' WordMat shows patchVersion attached to AppVersion. if ".1" then shows as 1.24.1. or " beta" -> "1.24 beta" A new PatchVersion does not trigger autoupdate
     Public Const PatchVersion = "" ' Mac  ".1"
 #Else

@@ -81,6 +81,7 @@ Sub ExecuteOK()
         MaximaLogOutput = 1
     End If
 
+    MaximaDecOutType = ComboBox_DecType.ListIndex + 1
 
     TempDefs = TextBox_def.text
     TempDefs = Trim(TempDefs)
@@ -136,7 +137,7 @@ Dim Arr() As String, i As Integer
     End If
 
     ComboBox_cifre.Value = MaximaCifre
-
+    ComboBox_DecType.ListIndex = MaximaDecOutType - 1
     
     
     Arr = Split(vars, ";")
@@ -170,6 +171,7 @@ End Sub
 
 Private Sub UserForm_Initialize()
     FillComboBoxCifre
+    FillComboBoxDecType
     SetEscEvents Me.Controls
 End Sub
 
@@ -179,7 +181,6 @@ Private Sub SetCaptions()
     Frame6.Caption = Sprog.Logarithm & " output"
     Label_cancel.Caption = Sprog.Cancel
     Label_enheder.Caption = Sprog.OutputUnits
-    Label6.Caption = Sprog.SignificantFigures
     Frame5.Caption = Sprog.Exact & "?"
     OptionButton_exactonly.Caption = Sprog.Exact
     OptionButton_numonly.Caption = Sprog.Numeric
@@ -231,3 +232,10 @@ Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
 End Sub
+Sub FillComboBoxDecType()
+    ComboBox_DecType.Clear
+    ComboBox_DecType.AddItem "Decimaler"
+    ComboBox_DecType.AddItem Sprog.SignificantFigures
+    ComboBox_DecType.AddItem Sprog.ScientificNotation
+End Sub
+
