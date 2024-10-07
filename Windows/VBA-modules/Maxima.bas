@@ -1030,7 +1030,7 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
         Selection.OMaths.Add Range:=Selection.Range
         Selection.InsertSymbol CharacterNumber:=8661, Unicode:=True, Bias:=0
         Selection.OMaths(1).Range.Font.Size = 16
-        Selection.MoveRight Unit:=wdCharacter, Count:=1
+        Selection.MoveRight unit:=wdCharacter, Count:=1
         Selection.TypeText text:=vbTab
     End If
     Selection.Font.Size = 8

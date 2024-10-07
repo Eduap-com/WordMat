@@ -24,7 +24,7 @@ Sub Chi2Fordeling()
 '    Selection.InsertAfter ("p(x)=1/(2^(" & k & "/2)á" & G & ")áx^(" & k & "/2-1)áe^(-x/2)")
     Selection.OMaths.Add Range:=Selection.Range
     Selection.OMaths(1).BuildUp
-    Selection.MoveRight Unit:=wdCharacter, Count:=2
+    Selection.MoveRight unit:=wdCharacter, Count:=2
 
 End Sub
 

@@ -637,31 +637,53 @@ Sub InsertSletDef()
     Dim gemsb As Integer
     Dim gemsa As Integer
     Dim Oundo As UndoRecord
+    On Error GoTo slut
+    
+    If Selection.Tables.Count > 0 Then
+        MsgBox2 "Can't insert in a table", vbOKOnly, "Error"
+        Exit Sub
+    End If
+    
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
-            
+    
     gemfontsize = Selection.Font.Size
     gemitalic = Selection.Font.Italic
     gemfontcolor = Selection.Font.ColorIndex
     gemsb = Selection.ParagraphFormat.SpaceBefore
     gemsa = Selection.ParagraphFormat.SpaceAfter
             
+    If Selection.OMaths.Count > 0 Then
+        Selection.OMaths(1).Range.Select
+        Selection.Collapse wdCollapseEnd
+        Selection.MoveRight wdCharacter, 1
+        Selection.TypeParagraph
+    Else
+        Selection.Paragraphs(1).Range.Select
+        Selection.Collapse wdCollapseEnd
+    End If
             
-            Selection.Font.Size = 8
-            Selection.Font.ColorIndex = wdGray50
-            
-    insertribformel "", Sprog.A(69) & ":"
-            
-'            Selection.TypeParagraph
-            Selection.Font.Size = gemfontsize
-            Selection.Font.Italic = gemitalic
-            Selection.Font.ColorIndex = gemfontcolor
-    With Selection.ParagraphFormat
-        .SpaceBefore = gemsb
-'        .SpaceBeforeAuto = False
-        .SpaceAfter = gemsa
-'        .SpaceAfterAuto = False
-    End With
+    
+    Selection.OMaths.Add Range:=Selection.Range
+    Selection.OMaths(1).Range.Font.Size = 8
+    Selection.OMaths(1).Range.Font.ColorIndex = wdGray50
+    Selection.TypeText Sprog.A(69) & ":"
+    Selection.Collapse (wdCollapseEnd)
+    Selection.TypeParagraph
+    Selection.Font.Bold = False
+        
+    If Selection.OMaths.Count = 0 Then
+        Selection.Font.Size = gemfontsize
+        Selection.Font.Italic = gemitalic
+        Selection.Font.ColorIndex = gemfontcolor
+        With Selection.ParagraphFormat
+            .SpaceBefore = gemsb
+            '        .SpaceBeforeAuto = False
+            .SpaceAfter = gemsa
+            '        .SpaceAfterAuto = False
+        End With
+    End If
+slut:
     Oundo.EndCustomRecord
 End Sub
 
@@ -1904,7 +1926,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     If ccut Then
         DoEvents
         Selection.Paste
-        Selection.MoveLeft Unit:=wdCharacter, Count:=1
+        Selection.MoveLeft unit:=wdCharacter, Count:=1
     Else
         Selection.OMaths.Add Range:=Selection.Range
     End If
@@ -1947,7 +1969,7 @@ Sub InsertEquationRef()
             IncludePosition:=False, SeparateNumbers:=False, SeparatorString:=" "
 #End If
 
-        Selection.MoveLeft Unit:=wdCharacter, Count:=1
+        Selection.MoveLeft unit:=wdCharacter, Count:=1
         Selection.Fields.ToggleShowCodes
         Selection.Collapse wdCollapseEnd
     
@@ -2450,11 +2472,11 @@ Sub NewEquation()
         Selection.Tables(1).Delete
         Selection.Paste
         Selection.TypeParagraph
-        Selection.MoveLeft Unit:=wdCharacter, Count:=2
+        Selection.MoveLeft unit:=wdCharacter, Count:=2
     End If
 GoTo slut
 fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox2 Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 

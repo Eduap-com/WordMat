@@ -186,7 +186,7 @@ On Error Resume Next
     LatexTOC = 0
     CASengine = 0
     DoubleTapM = 1
-    MaximaDecOutType = 1
+    MaximaDecOutType = 2
     SettUseVBACAS = 2
     
 '    End If
@@ -314,7 +314,11 @@ Public Property Let MaximaUnits(xval As Boolean)
 End Property
 Public Property Get MaximaDecOutType() As Integer
     If mDecOutType = 0 Then
-        mDecOutType = CInt(GetRegSetting("DecOutType"))
+        Dim s As String
+        mDecOutType = GetRegSetting("DecOutType")
+        If mDecOutType = 0 Then
+            mDecOutType = 2
+        End If
     End If
     MaximaDecOutType = mDecOutType
 End Property
@@ -652,7 +656,14 @@ Public Function GetReg(key As String) As String
     GetReg = GetRegSettingString(key)
 End Function
 Public Function GetRegSetting(key As String) As Integer
-    GetRegSetting = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
+    Dim s As String
+    s = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
+    If s = vbNullString Then
+        GetRegSetting = 0
+    Else
+        On Error Resume Next
+        GetRegSetting = CInt(s)
+    End If
 End Function
 Private Sub SetRegSetting(ByVal key As String, ByVal val As Integer)
     RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"

@@ -694,7 +694,7 @@ Sub GetTestString()
    s = ConvertToVBAString(Oresul)
     
     Selection.Collapse wdCollapseEnd
-    Selection.EndKey Unit:=wdLine
+    Selection.EndKey unit:=wdLine
     Selection.TypeParagraph
     Selection.TypeText (s)
 
@@ -734,7 +734,7 @@ Sub GotoPrevEq()
 Dim i As Integer
     Do While Selection.OMaths.Count = 0 And i < 100
         Selection.GoToPrevious (wdGoToLine)
-        Selection.EndKey Unit:=wdLine
+        Selection.EndKey unit:=wdLine
         i = i + 1 ' der er nogle ligninger, hvor den bare sidder fast ved samme linje. Noget med vektorer
     Loop
 End Sub
@@ -818,7 +818,7 @@ Sub InsertTestMath(s As String, Optional NewLine As Boolean = True)
     Selection.TypeText s
     mo.OMaths.BuildUp
     If NewLine Then
-        Selection.EndKey Unit:=wdLine
+        Selection.EndKey unit:=wdLine
         Selection.Collapse wdCollapseEnd
         Selection.TypeParagraph
     End If
@@ -828,7 +828,7 @@ Sub MoveCursorToEndOfCalculation(Optional AddLine As Boolean = True)
     If Not Selection.Find.Execute("*^13^13", , , True) Then
 '        MsgBox "ingen ny linje"
         '    Selection.GoToNext (wdGoToLine)
-        Selection.EndKey Unit:=wdLine
+        Selection.EndKey unit:=wdLine
         Selection.Collapse wdCollapseEnd
         Selection.TypeParagraph
         Selection.TypeParagraph
@@ -836,7 +836,7 @@ Sub MoveCursorToEndOfCalculation(Optional AddLine As Boolean = True)
         Selection.TypeParagraph
         Selection.GoToPrevious (wdGoToLine)
         Selection.GoToPrevious (wdGoToLine)
-        Selection.EndKey Unit:=wdLine
+        Selection.EndKey unit:=wdLine
     End If
     Selection.Collapse wdCollapseEnd
     If AddLine Then
@@ -844,7 +844,7 @@ Sub MoveCursorToEndOfCalculation(Optional AddLine As Boolean = True)
         Selection.GoToPrevious (wdGoToLine)
     End If
     Selection.GoToPrevious (wdGoToLine)
-    Selection.EndKey Unit:=wdLine
+    Selection.EndKey unit:=wdLine
 
 End Sub
 Sub InsertHeadingtext(Htext As String)
@@ -948,7 +948,7 @@ Sub UnicodeValsToString()
         mo.BuildUp
     Next
     Selection.Collapse wdCollapseEnd
-    Selection.EndKey Unit:=wdLine
+    Selection.EndKey unit:=wdLine
 
     For k = 0 To UBound(Arr)
         text = Arr(k)

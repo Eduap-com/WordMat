@@ -48,6 +48,10 @@ Sub SetEscEvents(ControlColl As Controls)
     Next
 End Sub
 
+Private Sub CommandButton_ok_Click()
+    Label_ok_Click
+End Sub
+
 Private Sub Label_cancel_Click()
     If MsgBoxStyle = vbOKOnly Or MsgBoxStyle = vbOKCancel Then
         MsgBoxResult = vbCancel

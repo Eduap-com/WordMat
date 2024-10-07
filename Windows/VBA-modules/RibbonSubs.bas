@@ -92,7 +92,7 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
     Selection.OMaths.BuildUp
 '    Selection.OMaths(1).BuildUp
     
-    Selection.MoveRight Unit:=wdCharacter, Count:=2
+    Selection.MoveRight unit:=wdCharacter, Count:=2
     
     Oundo.EndCustomRecord
     

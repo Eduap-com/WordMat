@@ -47,6 +47,7 @@ $wordApp.Quit()
 [System.GC]::WaitForPendingFinalizers()
 
 # Copy the cleaned files to Mac folder one level up
+Write-Host "Copying cleaned files to Mac folder"
 Copy-Item -Path "$strPath\WordMat.dotm" -Destination "$strPath\..\Mac\WordMat.dotm" -Force
 Copy-Item -Path "$strPath\WordMatP.dotm" -Destination "$strPath\..\Mac\WordMatP.dotm" -Force
 Copy-Item -Path "$strPath\WordMatP2.dotm" -Destination "$strPath\..\Mac\WordMatP2.dotm" -Force
@@ -54,3 +55,7 @@ Copy-Item -Path "$strPath\WordMatP2.dotm" -Destination "$strPath\..\Mac\WordMatP
 # Display cleaned files
 Write-Host "Following files have been cleaned:"
 Write-Host $fl
+
+# pause and wait for key press
+Write-Host "Press any key to continue..."
+$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")

@@ -17,7 +17,7 @@ Sub indsaetformel()
     Selection.InsertAfter (CommandBars.ActionControl.Tag)
     Selection.OMaths.Add Range:=Selection.Range
     Selection.OMaths(1).BuildUp
-    Selection.MoveRight Unit:=wdCharacter, Count:=2
+    Selection.MoveRight unit:=wdCharacter, Count:=2
     Oundo.EndCustomRecord
 
     GoTo slut
@@ -56,7 +56,7 @@ Sub DefinerVar()
         Selection.InsertAfter (Var)
         Selection.OMaths.Add Range:=Selection.Range
         Selection.OMaths(1).BuildUp
-        Selection.MoveRight Unit:=wdCharacter, Count:=2
+        Selection.MoveRight unit:=wdCharacter, Count:=2
     End If
     
 GoTo slut
@@ -77,7 +77,7 @@ On Error GoTo fejl
         Selection.InsertAfter (Var)
         Selection.OMaths.Add Range:=Selection.Range
         Selection.OMaths(1).BuildUp
-        Selection.MoveRight Unit:=wdCharacter, Count:=2
+        Selection.MoveRight unit:=wdCharacter, Count:=2
     End If
 GoTo slut
 fejl:
@@ -94,7 +94,7 @@ On Error GoTo fejl
         Selection.InsertAfter (Var)
         Selection.OMaths.Add Range:=Selection.Range
         Selection.OMaths(1).BuildUp
-        Selection.MoveRight Unit:=wdCharacter, Count:=2
+        Selection.MoveRight unit:=wdCharacter, Count:=2
     End If
 GoTo slut
 fejl:
@@ -107,7 +107,7 @@ Sub ErstatPunktum()
 '
 '
 On Error GoTo fejl
-    Selection.HomeKey Unit:=wdStory
+    Selection.HomeKey unit:=wdStory
     Selection.Find.ClearFormatting
     Selection.Find.Font.Name = "Cambria Math"
     Selection.Find.Replacement.ClearFormatting
@@ -125,7 +125,7 @@ On Error GoTo fejl
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
 
-    Selection.HomeKey Unit:=wdStory
+    Selection.HomeKey unit:=wdStory
     Selection.Find.ClearFormatting
     Selection.Find.Font.Name = "Cambria Math"
     Selection.Find.Replacement.ClearFormatting
@@ -153,7 +153,7 @@ Sub ErstatKomma()
 '
 '
 On Error GoTo fejl
-    Selection.HomeKey Unit:=wdStory
+    Selection.HomeKey unit:=wdStory
     Selection.Find.ClearFormatting
     Selection.Find.Font.Name = "Cambria Math"
     Selection.Find.Replacement.ClearFormatting
@@ -171,7 +171,7 @@ On Error GoTo fejl
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
 
-    Selection.HomeKey Unit:=wdStory
+    Selection.HomeKey unit:=wdStory
     Selection.Find.ClearFormatting
     Selection.Find.Font.Name = "Cambria Math"
     Selection.Find.Replacement.ClearFormatting
@@ -236,12 +236,12 @@ Sub SimpelUdregning()
     resultat = Selection.Range.Calculate()
     Selection.Range.InsertAfter ("=" & resultat)
     Call Selection.Range.Find.Execute(VBA.ChrW(42), , , , , , , , , VBA.ChrW(183), wdReplaceAll)
-    Selection.MoveEnd Unit:=wdCharacter, Count:=Len(resultat) + 1
+    Selection.MoveEnd unit:=wdCharacter, Count:=Len(resultat) + 1
     Call Selection.Range.Find.Execute(",", , , , , , , , , ".", wdReplaceAll)
     Selection.OMaths.Add Range:=Selection.Range
     Selection.OMaths.BuildUp
     Selection.Collapse (wdCollapseEnd)
-    Selection.MoveRight Unit:=wdCharacter, Count:=1
+    Selection.MoveRight unit:=wdCharacter, Count:=1
 '    Selection.TypeText (" ")
 
 slut:
