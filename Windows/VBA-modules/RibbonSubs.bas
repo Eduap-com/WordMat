@@ -123,7 +123,16 @@ End Sub
 
 'Callback for menu_cifre getLabel
 Sub Rib_getLabelCiffer(control As IRibbonControl, ByRef returnedVal)
+#If Mac Then
+    Dim s As String
+    s = CStr(MaximaCifre)
+    If Len(s) = 1 Then
+        s = s & " "
+    End If
+    returnedVal = s
+#Else
     returnedVal = MaximaCifre
+#End If
 End Sub
 'Callback for b2 onAction
 Sub Rib_Ciffer(control As IRibbonControl)
@@ -1075,7 +1084,11 @@ Sub Rib_getLabelDecimaler(control As IRibbonControl, ByRef returnedVal)
     If MaximaDecOutType = 1 Then
         returnedVal = "dec"
     ElseIf MaximaDecOutType = 2 Then
+#If Mac Then
+        returnedVal = Sprog.A(692) & "  "
+#Else
         returnedVal = Sprog.A(692)
+#End If
     Else
         returnedVal = Sprog.RibSciNot
     End If
