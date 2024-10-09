@@ -5,7 +5,7 @@
 
 # Jeg har tilføjet en VBAclean2 sub til VBAcleaner.docm filen, fordi jeg ikke kunne få det til at virke med at powershell skulle sende en parameter med til VBAcleaner.docm filen.
 # Define variables
-$filNavn = "WordMat.dotm"
+$filNavn = "WordMat.dotm" # OBS: Den fil der cleanes står i vbacleaner.docm filen som CleanVBA2
 $filArr = $filNavn -split ","
 $strPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $vbaCleanerDocm = Join-Path -Path $strPath -ChildPath "VBACleaner.docm"
@@ -47,9 +47,9 @@ $wordApp.Quit()
 [System.GC]::WaitForPendingFinalizers()
 
 # Copy the cleaned files to Mac folder one level up
-Copy-Item -Path "$strPath\WordMat.dotm" -Destination "$strPath\..\Mac\WordMat.dotm" -Force
-Copy-Item -Path "$strPath\WordMatP.dotm" -Destination "$strPath\..\Mac\WordMatP.dotm" -Force
-Copy-Item -Path "$strPath\WordMatP2.dotm" -Destination "$strPath\..\Mac\WordMatP2.dotm" -Force
+#Copy-Item -Path "$strPath\WordMat.dotm" -Destination "$strPath\..\Mac\WordMat.dotm" -Force
+#Copy-Item -Path "$strPath\WordMatP.dotm" -Destination "$strPath\..\Mac\WordMatP.dotm" -Force
+#Copy-Item -Path "$strPath\WordMatP2.dotm" -Destination "$strPath\..\Mac\WordMatP2.dotm" -Force
 
 # Display cleaned files
 Write-Host "Following files have been cleaned:"
