@@ -106,49 +106,37 @@ Sub OpretTempdoc()
 '    Call tempDoc
 '#Else
 
-    Exit Sub
 ' indtil v1.30:
 
-Dim D As Document
-If tempDoc Is Nothing Then
-For Each D In Application.Documents
-    If D.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-        Set tempDoc = D
-        Exit For
-    End If
-Next
-End If
-
-If tempDoc Is Nothing Then
-    Set tempDoc = Documents.Add(, , , False)
-'    tempDoc.ActiveWindow.View.Draft = True ' giver måske en hastighedsforbedring, men har ikke kunnet måle det
-    tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
-End If
-
-If Not tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-    tempDoc.Close SaveChanges:=wdDoNotSaveChanges
-    Set tempDoc = Documents.Add(, , , False)
-    tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
-End If
-'#End If
-End Sub
-Sub ShowTempDoc()
-    MsgBox tempDoc.Range.text
-End Sub
-Sub LukTempDoc()
-On Error GoTo slut
-'#If Mac Then ' fjernet 1.29
-'    If Not m_tempDoc Is Nothing Then
-'        If Word.Application.IsObjectValid(m_tempDoc) Then
-'            m_tempDoc.Close (False)
-'        End If
+'Dim D As Document
+'If tempDoc Is Nothing Then
+'For Each D In Application.Documents
+'    If D.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+'        Set tempDoc = D
+'        Exit For
 '    End If
-'    Set m_tempDoc = Nothing
-'#Else
-    tempDoc.Close False
-    Set tempDoc = Nothing ' added v. 1.11
-'#End If
-slut:
+'Next
+'End If
+'
+'If tempDoc Is Nothing Then
+'    Set tempDoc = Documents.Add(, , , False)
+''    tempDoc.ActiveWindow.View.Draft = True ' giver måske en hastighedsforbedring, men har ikke kunnet måle det
+'    tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
+'End If
+'
+'If Not tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
+'    tempDoc.Close SaveChanges:=wdDoNotSaveChanges
+'    Set tempDoc = Documents.Add(, , , False)
+'    tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
+'End If
+''#End If
+End Sub
+
+Sub LukTempDoc()
+'On Error GoTo slut
+'    tempDoc.Close False
+'    Set tempDoc = Nothing ' added v. 1.11
+'slut:
 End Sub
 
 '#If Mac Then ' fjernet 1.29 håndteres nu ens på mac og windows
@@ -789,8 +777,8 @@ Sub ForrigeResultat()
             ResIndex = 0
             GoTo slut
         End If
-'        s = omax.ReadEquation2(r)
-        s = omax.ReadEquation(r)
+        s = omax.ReadEquation2(r)
+'        s = omax.ReadEquation(r)
         hopover = False
         If InStr(VBA.LCase(s), "defin") > 0 Then
             ResFeltIndex = ResFeltIndex + 1
@@ -857,28 +845,28 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     Dim i As Integer
     
     Do ' gå tilbage til nærmeste ligmed
-    posligmed = InStr(text, "=")
-    possumtegn = InStr(text, VBA.ChrW(8721))
-    posca = InStr(text, VBA.ChrW(8776))
-    poseller = InStr(text, VBA.ChrW(8744))
-    
-    Pos = Len(text)
-'    pos = posligmed
-    If posligmed > 0 And posligmed < Pos Then Pos = posligmed
-    If posca > 0 And posca < Pos Then Pos = posca
-    If poseller > 0 And poseller < Pos Then Pos = poseller
-    
-    If possumtegn > 0 And possumtegn < Pos Then ' hvis sumtegn er der =tegn som del deraf
-        Pos = 0
-    End If
-    If Pos = Len(text) Then Pos = 0
-    If Pos > 0 Then
-        Arr(i) = Left(text, Pos - 1)
-        text = right(text, Len(text) - Pos)
-        i = i + 1
-    Else
-        Arr(i) = text
-    End If
+        posligmed = InStr(text, "=")
+        possumtegn = InStr(text, VBA.ChrW(8721))
+        posca = InStr(text, VBA.ChrW(8776))
+        poseller = InStr(text, VBA.ChrW(8744))
+        
+        Pos = Len(text)
+    '    pos = posligmed
+        If posligmed > 0 And posligmed < Pos Then Pos = posligmed
+        If posca > 0 And posca < Pos Then Pos = posca
+        If poseller > 0 And poseller < Pos Then Pos = poseller
+        
+        If possumtegn > 0 And possumtegn < Pos Then ' hvis sumtegn er der =tegn som del deraf
+            Pos = 0
+        End If
+        If Pos = Len(text) Then Pos = 0
+        If Pos > 0 Then
+            Arr(i) = Left(text, Pos - 1)
+            text = right(text, Len(text) - Pos)
+            i = i + 1
+        Else
+            Arr(i) = text
+        End If
     Loop While Pos > 0
     
     If indeks = i Then ResIndex = -1  ' global variabel markerer at der ikke er flere til venstre

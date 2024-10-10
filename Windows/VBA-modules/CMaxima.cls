@@ -6019,7 +6019,8 @@ Sub ReadSelection()
         Selection.OMaths(1).ParentOMath.Range.Select ' ovenstående var ikke nok, men hvorfor var det der?
         antalgenstart = 0
 genstart:
-        Kommando = ReadEquationCopy()
+'        Kommando = ReadEquationCopy()
+        Kommando = ReadEquation2()
         If Kommando = "" And antalgenstart = 0 Then    ' forsøg på at rette sjældent problem hvor alt læses som "" måske skyldes det tempdoc
             '            tempDoc.Close (False)
             '            Set tempDoc = Nothing
@@ -6089,108 +6090,111 @@ slut:
     Selection.End = sslut
 
 End Sub
-Function ReadEquation(Optional ir As Range) As String
-    ' Oversætter selection der er omath til streng
-    ' kan gøres hurtigere hvis der kopieres indenfor samme document, men virker ikke 100%
-    ' Denne metode bruger autotextentries istedet for clipboard, og er måske hurtigere, men det er meget tvivlsomt.
-    ' har dog oplevet at det giver problemer. Ligningssystem tan(30)=h/x og tan(25)=h/(x+34) på løsningen beregnes i enden. Det går helt galt, men virker når autotextentries ikke anvendes
-
-    Dim sr As Range, r As Range
-    If ir Is Nothing Then
-        Set ir = Selection.Range
-    End If
-
-    Set sr = Selection.Range
-    Set at = ActiveDocument.AttachedTemplate.AutoTextEntries.Add(Name:="WordMat", Range:=ir)
-
-    Set r = tempDoc.Range
-    at.Insert r, True
-
-    With r
-        .Font.Bold = False
-        .OMaths.BuildUp
-        .OMaths.Linearize
-        .OMaths(1).ConvertToNormalText
-    End With
-
-    ReadEquation = r.text
-    r.Delete    ' dette afhjælper muligvis at word bliver langsom
-
-    sr.Select
-
-End Function
-Function ReadEquationCopy(Optional ir As Range) As String
-' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
-' Oversætter selection der er omath til streng
-' 22/8-2023 Har oplevet nogle win 11 computere, der fryser lige når selection.copy eksekveres. Det virker at skifte til readselectionold (men det er der også ulemper ved)
-    Dim sr As Range, r As Range
-
-    Set sr = Selection.Range
-        
-    ' dette for at undgå en meget mærkelig fejl, når bestemt udtryk var i slutningen af dokumentet
-    ' "f_a (x)" placeret aller sidst fik ved EndCustomRecord, dokumentet til at 'virke tomt' man kunne ikke placere cursoren i det tomme dokument, men Word var ikke låst
-    If sr.End >= ActiveDocument.End - 1 Then
-        Selection.Collapse wdCollapseEnd
-        Selection.TypeParagraph ' indsætter enter efter ligningen
-        sr.Select
-    End If
-    
-    Dim OM As OMath
-    Dim Oundo As UndoRecord
-    Set Oundo = Application.UndoRecord
-    Oundo.StartCustomRecord
-    Set OM = Selection.OMaths(1)
-    OM.Range.Font.Bold = False
-    OM.BuildUp
-    OM.Linearize
-    OM.ConvertToNormalText
-    ReadEquationCopy = OM.Range.text
-    Oundo.EndCustomRecord
-    ActiveDocument.Undo
-    sr.Select
-
-
-Exit Function
-'  nedenfor v1.30 og før
-
-On Error GoTo fejl
-    '    Dim t As Variant
-    '    t = Timer
-    If ir Is Nothing Then
-
-    End If
-
-    '    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
-    Set sr = Selection.Range
-
-    Selection.Copy
-
-    Set r = tempDoc.Range
-    With r
-'        .Text = "x" ' for at undgå at næste linje med paste en sjælden gang giver fejl
-        .Paste
-        .Font.Bold = False
-        .OMaths.BuildUp
-        .OMaths.Linearize
-        .OMaths(1).ConvertToNormalText
-    End With
-
-    ReadEquationCopy = r.text
-    sr.Select
-
-    r.Delete
-    '    ClearClipboard
-
-    '    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
-    '    MsgBox Timer - t
-    GoTo slut
-fejl:
-slut:
-End Function
-Function ReadEquation2(ir As Range) As String
+'Function ReadEquation(Optional ir As Range) As String
+'    ' Oversætter selection der er omath til streng
+'    ' kan gøres hurtigere hvis der kopieres indenfor samme document, men virker ikke 100%
+'    ' Denne metode bruger autotextentries istedet for clipboard, og er måske hurtigere, men det er meget tvivlsomt.
+'    ' har dog oplevet at det giver problemer. Ligningssystem tan(30)=h/x og tan(25)=h/(x+34) på løsningen beregnes i enden. Det går helt galt, men virker når autotextentries ikke anvendes
+'
+'    Dim sr As Range, r As Range
+'    If ir Is Nothing Then
+'        Set ir = Selection.Range
+'    End If
+'
+'    Set sr = Selection.Range
+'    Set at = ActiveDocument.AttachedTemplate.AutoTextEntries.Add(Name:="WordMat", Range:=ir)
+'
+'    Set r = tempDoc.Range
+'    at.Insert r, True
+'
+'    With r
+'        .Font.Bold = False
+'        .OMaths.BuildUp
+'        .OMaths.Linearize
+'        .OMaths(1).ConvertToNormalText
+'    End With
+'
+'    ReadEquation = r.text
+'    r.Delete    ' dette afhjælper muligvis at word bliver langsom
+'
+'    sr.Select
+'
+'End Function
+'Function ReadEquationCopy(Optional ir As Range) As String
+'    ' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
+'    ' Oversætter selection der er omath til streng
+'    ' 22/8-2023 Har oplevet nogle win 11 computere, der fryser lige når selection.copy eksekveres. Det virker at skifte til readselectionold (men det er der også ulemper ved)
+'    Dim sr As Range, r As Range
+'
+'    Set sr = Selection.Range
+'
+'    ' dette for at undgå en meget mærkelig fejl, når bestemt udtryk var i slutningen af dokumentet
+'    ' "f_a (x)" placeret aller sidst fik ved EndCustomRecord, dokumentet til at 'virke tomt' man kunne ikke placere cursoren i det tomme dokument, men Word var ikke låst
+'    If sr.End >= ActiveDocument.End - 1 Then
+'        Selection.Collapse wdCollapseEnd
+'        Selection.TypeParagraph ' indsætter enter efter ligningen
+'        sr.Select
+'    End If
+'
+'    Dim OM As OMath
+'    Dim Oundo As UndoRecord
+'    Set Oundo = Application.UndoRecord
+'    Oundo.StartCustomRecord
+'    Set OM = Selection.OMaths(1)
+'    OM.Range.Font.Bold = False
+'    OM.BuildUp
+'    OM.Linearize
+'    OM.ConvertToNormalText
+'    ReadEquationCopy = OM.Range.text
+'    Oundo.EndCustomRecord
+'    ActiveDocument.Undo
+'    sr.Select
+'
+'
+'    Exit Function
+'    '  nedenfor v1.30 og før
+'
+'    On Error GoTo fejl
+'    '    Dim t As Variant
+'    '    t = Timer
+'    If ir Is Nothing Then
+'
+'    End If
+'
+'    '    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
+'    Set sr = Selection.Range
+'
+'    Selection.Copy
+'
+'    Set r = tempDoc.Range
+'    With r
+'        '        .Text = "x" ' for at undgå at næste linje med paste en sjælden gang giver fejl
+'        .Paste
+'        .Font.Bold = False
+'        .OMaths.BuildUp
+'        .OMaths.Linearize
+'        .OMaths(1).ConvertToNormalText
+'    End With
+'
+'    ReadEquationCopy = r.text
+'    sr.Select
+'
+'    r.Delete
+'    '    ClearClipboard
+'
+'    '    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
+'    '    MsgBox Timer - t
+'    GoTo slut
+'fejl:
+'slut:
+'End Function
+Function ReadEquation2(Optional ir As Range) As String
     Dim sr As Range
-
     Set sr = Selection.Range
+
+    If ir Is Nothing Then
+        Set ir = sr
+    End If
     Dim OM As OMath
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -6210,52 +6214,28 @@ Exit Function
     
     
     
-    Dim r As Range
-    Set sr = Selection.Range
-    ir.Copy
-    
-    Set r = tempDoc.Range
-'    at.Insert r, True   ' fjernet 19/2 den er vel erstattet af paste under with nedenfor?
-
-    With r
-        .Paste
-        .Font.Bold = False
-        .OMaths.BuildUp
-        .OMaths.Linearize
-        .OMaths(1).ConvertToNormalText
-    End With
-
-    ReadEquation2 = r.text
-    sr.Select
-
-    tempDoc.Range.Delete    ' dette afhjælper muligvis at word bliver langsom
+'    Dim r As Range
+'    Set sr = Selection.Range
+'    ir.Copy
+'
+'    Set r = tempDoc.Range
+''    at.Insert r, True   ' fjernet 19/2 den er vel erstattet af paste under with nedenfor?
+'
+'    With r
+'        .Paste
+'        .Font.Bold = False
+'        .OMaths.BuildUp
+'        .OMaths.Linearize
+'        .OMaths(1).ConvertToNormalText
+'    End With
+'
+'    ReadEquation2 = r.text
+'    sr.Select
+'
+'    tempDoc.Range.Delete    ' dette afhjælper muligvis at word bliver langsom
 
 End Function
-Function ReadFromWord(Expr As String) As String
-' tager udtryk som streng. Indsætter i word, bygger op og returnerer
 
-    Dim r As Range, oldr As Range
-
-    Set oldr = Selection.Range
-
-    Set r = tempDoc.Range
-    r.Delete
-    Set r = tempDoc.Range
-    With r
-        .OMaths.Add r
-        .OMaths(1).Range.text = Expr
-        .OMaths(1).Range.Font.Bold = False
-        .OMaths.BuildUp
-        .OMaths.Linearize
-        .OMaths(1).ConvertToNormalText
-    End With
-
-    ReadFromWord = r.text
-
-    r.Delete
-    
-    oldr.Select
-End Function
 Sub ReadSelectionOld()
 ' indsætter det markerede som kommando
     Dim antal As Integer

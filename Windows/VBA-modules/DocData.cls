@@ -386,40 +386,40 @@ End If
 slut:
 End Sub
 
-Function ReadEquation(Optional ir As Range) As String
-' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
-' Oversætter selection der er omath til streng
-    Dim sr As Range, r As Range
-'    Dim t As Variant
-'    t = Timer
-    If ir Is Nothing Then
-        
-    End If
-    
-'    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
-    Set sr = Selection.Range
-    
-    Selection.Copy
-
-    Set r = tempDoc.Range
-    
-    
-    With r
-    .Paste
-    .OMaths.BuildUp
-    .OMaths.Linearize
-    .OMaths(1).ConvertToNormalText
-    End With
-    
-    ReadEquation = r.text
-    sr.Select
-
-    r.Delete
-'    ClearClipboard
-    
-'    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
-'    MsgBox Timer - t
-End Function
+'Function ReadEquation(Optional ir As Range) As String
+'' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
+'' Oversætter selection der er omath til streng
+'    Dim sr As Range, r As Range
+''    Dim t As Variant
+''    t = Timer
+'    If ir Is Nothing Then
+'
+'    End If
+'
+''    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
+'    Set sr = Selection.Range
+'
+'    Selection.Copy
+'
+'    Set r = tempDoc.Range
+'
+'
+'    With r
+'    .Paste
+'    .OMaths.BuildUp
+'    .OMaths.Linearize
+'    .OMaths(1).ConvertToNormalText
+'    End With
+'
+'    ReadEquation = r.text
+'    sr.Select
+'
+'    r.Delete
+''    ClearClipboard
+'
+''    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
+''    MsgBox Timer - t
+'End Function
 
 Sub ReadMathBoxes()
 ' indsætter de markerede ligningsfelter som mboxes array
@@ -450,23 +450,27 @@ Else
     
     If Len(Selection.text) < 3 Then
         Selection.OMaths(1).Range.Select
+        Set sr = Selection.Range
     End If
-'    If Selection.OMaths(1).Range.End < Selection.Range.End Then
-'        Selection.OMaths(1).Range.Select
-'    End If
-    Selection.Copy
 
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+    With sr
+        .OMaths.BuildUp
+        .OMaths.Linearize
+    End With
 
 '    Set tempDoc = Documents.Add(, , , False)
-    Set r = tempDoc.Range
-    r.Paste
-    With r
-    .OMaths.BuildUp
-    .OMaths.Linearize
-    End With
+'    Set r = tempDoc.Range
+'    r.Paste
+'    With r
+'    .OMaths.BuildUp
+'    .OMaths.Linearize
+'    End With
     
     Dim mathcol As OMaths
-    Set mathcol = r.OMaths
+    Set mathcol = sr.OMaths
     For j = 0 To antal - 1
         mathcol(j + 1).ConvertToNormalText
         mboxes(j) = Replace(mathcol(j + 1).Range.text, ChrW(11), "") ' fjern shift-enter
@@ -474,6 +478,8 @@ Else
     ReDim Preserve mboxes(0 To antal - 1)
     antalmboxes = antal
     sr.Select
+    Oundo.EndCustomRecord
+    ActiveDocument.Undo
 End If
 
 slut:

@@ -590,6 +590,7 @@ Dim srange As Range
 Dim ScriptDataPoints As String ' "1:2#3:4"
 Dim ScriptFunctions As String ' "2*x+1#3*t-1:t"
 Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
+    ea.SetNormalBrackets
 
     Set srange = Selection.Range
 
@@ -670,7 +671,6 @@ End Sub
 Sub InsertChart()
 Dim WB As Object
 Dim ws As Object
-'Dim xlap As Excel.Application
 Dim xlap As Object 'Excel.Application
 Dim xmin As Double, xmax As Double
 Dim i As Integer
@@ -690,7 +690,6 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
 
     dd.ReadSelection
 
-'cxl.PrePareExcel
     DoEvents
 
     Application.ScreenUpdating = False
@@ -766,7 +765,7 @@ End If
                 Else
                     Udtryk = ReplaceIndepvarX(Udtryk)
 '                    DefinerKonstanterGraph udtryk, deflist, graphfil
-                    ws.Range("b4").Offset(0, i).Value = Udtryk
+                    ws.Range("B4").Offset(0, i).Value = Udtryk
                     ws.Range("B1").Offset(0, i).Value = "x"
                End If
             End If
@@ -793,7 +792,13 @@ End If
         Next
         ws.Range("W3").Value = xmin
         ws.Range("X3").Value = xmax
+    Else
+        If Len(Udtryk) > 0 Then ' hvis kun funktion, så skal xmin og xmax sættes
+            ws.Range("W3").Value = -2
+            ws.Range("X3").Value = 5
+        End If
     End If
+    
 
 ' virker kun med lodret tabel
 '    If dd.nrows > 1 And dd.ncolumns > 1 Then
@@ -816,7 +821,7 @@ On Error GoTo slut2
     UfWait2.Label_progress = UfWait2.Label_progress & "**"
     xlap.Run ("Auto_open")
 xlap.Run ("UpDateAll")
-'excel.Run ("UpDateAll")
+'
 UfWait2.Label_progress = UfWait2.Label_progress & "***"
 
 'If Not wb Is Nothing Then ' start på tabel sheet, ikke graph

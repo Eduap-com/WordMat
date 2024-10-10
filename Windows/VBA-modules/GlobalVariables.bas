@@ -23,7 +23,7 @@ Public Const PI As Double = 3.14159265358979
 
 '#If Mac Then
 '#Else
-    Public tempDoc As Document ' dokument hvor ligning kopieres over og læses. På mac er der lavet en function . v.1.29 Mac kan nu håndteres som Windows
+'    Public tempDoc As Document ' dokument hvor ligning kopieres over og læses. På mac er der lavet en function . v.1.29 Mac kan nu håndteres som Windows
 '#End If
 
 'Public XLapp As Excel.Application
