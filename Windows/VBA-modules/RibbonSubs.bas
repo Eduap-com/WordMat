@@ -127,7 +127,7 @@ Sub Rib_getLabelCiffer(control As IRibbonControl, ByRef returnedVal)
     Dim s As String
     s = CStr(MaximaCifre)
     If Len(s) = 1 Then
-        s = s & " "
+        s = s & "  "
     End If
     returnedVal = s
 #Else

@@ -665,8 +665,11 @@ Sub InsertSletDef()
             
     
     Selection.OMaths.Add Range:=Selection.Range
+    DoEvents
+    On Error Resume Next
     Selection.OMaths(1).Range.Font.Size = 8
     Selection.OMaths(1).Range.Font.ColorIndex = wdGray50
+    On Error GoTo slut
     Selection.TypeText Sprog.A(69) & ":"
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
