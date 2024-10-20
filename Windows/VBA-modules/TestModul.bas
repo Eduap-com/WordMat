@@ -101,22 +101,7 @@ Sub RunTestSequence()
 
     'til test af enkelt
     ' Numrerisk test
-    MaximaExact = 2
-    ShowSettings "Numerisk test"
-
-    TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", VBA.ChrW(8776) & "Ikke defineret indenfor " & VBA.ChrW(8477)
-    If StopNow Then GoTo slut
-    TestBeregn VBA.ChrW(12310) & "cos" & VBA.ChrW(12311) & "^(-1) (0,5)", VBA.ChrW(8776) & "60" ' test af invers trig og indtastning via design-skrift-hævet skrift
-    If StopNow Then GoTo slut
-    TestBeregn "23456789123", VBA.ChrW(8776) & "2,345679" & VBA.ChrW(183) & "10^10"
-    If StopNow Then GoTo slut
-    TestBeregn "B=sin^(-1)" & VBA.ChrW(8289) & "(sin" & VBA.ChrW(8289) & "(40)" & VBA.ChrW(183) & "0,8605341)", VBA.ChrW(8776) & "33,58274"
-    If StopNow Then GoTo slut
-
-    MaximaExact = 0
-    
-    GoTo slut
-    
+        
     ' Man kan indtaste flere korrekte resultater, bare adskil med @$
     'calculation tests
     If TestBeregn("2+3", "=5") Then GoTo slut

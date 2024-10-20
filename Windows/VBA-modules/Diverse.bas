@@ -649,6 +649,12 @@ Sub InsertSletDef()
     Else
         Selection.Paragraphs(1).Range.Select
         Selection.Collapse wdCollapseEnd
+        If Selection.OMaths.Count > 0 Then
+            Selection.MoveLeft wdCharacter, 1
+            If Selection.OMaths.Count > 0 Then
+                Selection.MoveLeft wdCharacter, 1
+            End If
+        End If
     End If
             
     

@@ -22,4 +22,11 @@ foreach ($fil in $filArr) {
 
 # Display cleaned files
 Write-Host "Done"
-$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+
+# wait until space is pressed
+Write-Host "Press space to continue"
+
+# Wait for space key
+do {
+    $key = [System.Console]::ReadKey($true)
+} until ($key.Key -eq "Spacebar")
