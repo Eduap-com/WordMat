@@ -6201,7 +6201,7 @@ Function ReadEquation2(Optional ir As Range) As String
     Set OM = ir.OMaths(1)
     OM.Range.Font.Bold = False
     Oundo.StartCustomRecord
-    If OM.Range.End + 3 >= ActiveDocument.Range.End Then ' hvis ligningen er aller sidst i dokument (eller 1+2 entertegn efter) og der er integrale, så sker mærkelig fejl hvor dokumentet virker tomt. Man kan dog se det i kladdevisning. Fejlen sker ikke hvis der bare er et tegn mere, så der indsættes ny tom linje
+    If OM.Range.End + 4 >= ActiveDocument.Range.End Then ' hvis ligningen er aller sidst i dokument (eller 1+2 entertegn efter) og der er integrale, så sker mærkelig fejl hvor dokumentet virker tomt. Man kan dog se det i kladdevisning. Fejlen sker ikke hvis der bare er et tegn mere, så der indsættes ny tom linje
         OM.Range.Select
         Selection.Collapse wdCollapseEnd
         Selection.TypeParagraph

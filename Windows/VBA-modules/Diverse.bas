@@ -632,6 +632,8 @@ Sub InsertSletDef()
         Exit Sub
     End If
     
+    Application.ScreenUpdating = False
+    
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
     
