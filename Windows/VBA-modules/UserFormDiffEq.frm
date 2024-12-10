@@ -16,7 +16,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Public DefS As String
-Public vars As String
+Public Vars As String
 Public TempDefs As String
 Public luk As Boolean
 Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
@@ -148,7 +148,7 @@ Dim svar As String
         Label_solvenum.visible = True
     End If
 
-    Svars = Split(vars, ";")
+    Svars = Split(Vars, ";")
     For i = 0 To UBound(Svars)
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))

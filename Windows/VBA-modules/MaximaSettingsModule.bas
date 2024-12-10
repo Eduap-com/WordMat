@@ -609,9 +609,9 @@ Public Property Get RegAppVersion() As String
         mRegAppVersion = RegAppVersion
     End If
 End Property
-Public Property Let RegAppVersion(ByVal V As String)
-    SetRegSettingString "AppVersion", V
-    mRegAppVersion = V
+Public Property Let RegAppVersion(ByVal v As String)
+    SetRegSettingString "AppVersion", v
+    mRegAppVersion = v
 End Property
 Public Property Get DllConnType() As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
     DllConnType = mDllConnType

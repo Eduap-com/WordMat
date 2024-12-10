@@ -4799,10 +4799,12 @@ End Property
 Public Property Get DefError2() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Bemærk at en syntaksfejl godt kan skyldes en fejl i en af dine definitioner, men det er ikke sikkert. Kig på listen over definitioner nedenfor og se om du kan lokalisere fejlen. Alternativt kan du prøve at indsætte en 'slet definitioner' kommando og se om det så virker."
+'Case 1: s = "Bemærk at en syntaksfejl godt kan skyldes en fejl i en af dine definitioner, men det er ikke sikkert. Kig på listen over definitioner nedenfor og se om du kan lokalisere fejlen. Alternativt kan du prøve at indsætte en 'slet definitioner' kommando og se om det så virker."
+Case 1: s = "Der er en fejl i en af dine definitioner." & VbCrLfMac & "Definitionen vil blive markeret i Word."
 Case 3: s = "Un error de sintaxis puede haber sido causado por un error en una de sus definiciones. Vea la lista de definiciones abajo y verifique si puede localizar el error. También puede tratar de insertar el comando 'delete def' para depurar."
 Case 4: s = ""
-Case Else: s = "A syntax error could be caused by an error in one of your definitions. Check the list of definitions below and check if you can locate an error.  You could also try to insert a  'delete def' command to debug"
+'Case Else: s = "A syntax error could be caused by an error in one of your definitions. Check the list of definitions below and check if you can locate an error.  You could also try to insert a  'delete def' command to debug"
+Case Else: s = "There is an error in one of your definitions." & VbCrLfMac & "The definition will now be selected in Word."
 End Select
 DefError2 = s
 End Property

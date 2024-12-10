@@ -15,7 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public vars As String ' semikolon separeret liste over de variable som der skal vælges mellem. Sættes inden show kaldes
+Public Vars As String ' semikolon separeret liste over de variable som der skal vælges mellem. Sættes inden show kaldes
 Public DefS As String ' definitioner der er i dokumentet. Sættes inden show kaldes
 Public TempDefs As String ' Kan både sættes før show kaldes og på formen
 Public SelectedVar As String ' Den variabel der er blevet valgt
@@ -208,7 +208,7 @@ Private Sub UserForm_Activate()
     SelectedVar = ""
     ListBox_vars.Clear
     TextBox_variabel.text = ""
-    Svars = Split(vars, ";")
+    Svars = Split(Vars, ";")
     
     ' definitioner vises
     If Len(DefS) > 3 Then

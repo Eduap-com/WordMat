@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormError
    ClientHeight    =   7335
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   9360.001
+   ClientWidth     =   9885.001
    OleObjectBlob   =   "UserFormError.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -65,15 +65,7 @@ End Sub
 
 Sub SetErrorDefinition(ED As ErrorDefinition)
     Label_titel.Caption = ED.Title
-    Label_fejltekst.Caption = ED.Description
-    If ED.DefFejl Then
-        Label_definitioner.visible = True
-        TextBox_definitioner.visible = True
-        TextBox_definitioner.text = FormatDefinitions(omax.DefString)
-    Else
-        Label_definitioner.visible = False
-        TextBox_definitioner.visible = False
-    End If
+    Label_fejltekst.Caption = ED.Description & VbCrLfMac & ED.LocationError
     If ED.MaximaOutput = vbNullString Then
         Label_TAB2.visible = False
     Else
@@ -88,7 +80,6 @@ Private Sub SetCaptions()
     MultiPage1.Pages(1).Caption = Sprog.MaximaError
     Label_TAB1.Caption = Sprog.Error
     Label_TAB2.Caption = Sprog.MaximaError
-    Label_definitioner.Caption = Sprog.Definitions
     Label_restart.Caption = Sprog.RestartWordMat
 'MultiPage1.Pages("Page1").Caption
 End Sub

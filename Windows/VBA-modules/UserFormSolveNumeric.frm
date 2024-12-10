@@ -16,7 +16,7 @@ Attribute VB_Exposed = False
 Option Explicit
 Public Udtryk As String
 Public dispudtryk As String
-Public vars As String
+Public Vars As String
 Public SelectedVar As String
 Public Method As String
 Private gemx As Single
@@ -382,7 +382,7 @@ On Error GoTo fejl
     TextBox_xmin.text = "-5"
     TextBox_xmax.text = "5"
     Label_ligning.Caption = omax.ConvertToAscii(Udtryk)
-    Arr = Split(vars, ";")
+    Arr = Split(Vars, ";")
     Set gemr = Selection.Range
     gemstartr = Selection.Range.start
     gemslutr = Selection.Range.End

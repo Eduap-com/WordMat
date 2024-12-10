@@ -112,11 +112,11 @@ Private Sub UserForm_Activate()
 End Sub
 
 Sub SetCaptions()
-    Dim V As String
+    Dim v As String
 
-    V = AppVersion
+    v = AppVersion
     If PatchVersion <> "" Then
-        V = V & PatchVersion
+        v = v & PatchVersion
     End If
     If Sprog.SprogNr = 1 Then
         Me.Caption = Sprog.About & " WordMat"
@@ -125,7 +125,7 @@ Sub SetCaptions()
         Me.Caption = Sprog.About & " WordMath"
         Label_title.Caption = "WordMath"
     End If
-    Label_version.Caption = "Version: " & V
+    Label_version.Caption = "Version: " & v
     Label_text.Caption = Sprog.A(20)
 
 End Sub

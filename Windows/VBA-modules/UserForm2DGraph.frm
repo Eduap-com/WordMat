@@ -2048,29 +2048,29 @@ End If
 End Function
 Sub OpdaterDefinitioner()
 ' ser efter variable i textboxene og indsætter under definitioner
-Dim vars As String
+Dim Vars As String
 Dim Var As String, var2 As String
 Dim ea As New ExpressionAnalyser
 Dim Arr As Variant
 Dim i As Integer
     
     
-    vars = vars & GetTextboxVars(TextBox_ligning1, TextBox_var1)
-    vars = vars & GetTextboxVars(TextBox_ligning2, TextBox_var2)
-    vars = vars & GetTextboxVars(TextBox_ligning3, TextBox_var3)
-    vars = vars & GetTextboxVars(TextBox_ligning4, TextBox_var4)
-    vars = vars & GetTextboxVars(TextBox_ligning5, TextBox_var5)
-    vars = vars & GetTextboxVars(TextBox_ligning6, TextBox_var6)
-    vars = vars & GetTextboxLignVars(TextBox_lig1)
-    vars = vars & GetTextboxLignVars(TextBox_lig2)
-    vars = vars & GetTextboxLignVars(TextBox_Lig3)
+    Vars = Vars & GetTextboxVars(TextBox_ligning1, TextBox_var1)
+    Vars = Vars & GetTextboxVars(TextBox_ligning2, TextBox_var2)
+    Vars = Vars & GetTextboxVars(TextBox_ligning3, TextBox_var3)
+    Vars = Vars & GetTextboxVars(TextBox_ligning4, TextBox_var4)
+    Vars = Vars & GetTextboxVars(TextBox_ligning5, TextBox_var5)
+    Vars = Vars & GetTextboxVars(TextBox_ligning6, TextBox_var6)
+    Vars = Vars & GetTextboxLignVars(TextBox_lig1)
+    Vars = Vars & GetTextboxLignVars(TextBox_lig2)
+    Vars = Vars & GetTextboxLignVars(TextBox_Lig3)
     
     
-    omax.FindVariable vars, False ' fjerner dobbelte
-    vars = omax.vars
-    If Left(vars, 1) = ";" Then vars = right(vars, Len(vars) - 1)
+    omax.FindVariable Vars, False ' fjerner dobbelte
+    Vars = omax.Vars
+    If Left(Vars, 1) = ";" Then Vars = right(Vars, Len(Vars) - 1)
     
-    ea.text = vars
+    ea.text = Vars
     Do While right(TextBox_definitioner.text, 2) = VbCrLfMac
         TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
     Loop
@@ -2103,33 +2103,33 @@ Function GetTextboxVars(tb As TextBox, tbvar As TextBox) As String
 Dim ea As New ExpressionAnalyser
 Dim Var As String
     If Len(tb.text) > 0 Then
-        omax.vars = ""
+        omax.Vars = ""
         omax.FindVariable (tb.text)
-        If InStr(omax.vars, "x") > 0 Then
+        If InStr(omax.Vars, "x") > 0 Then
             Var = "x"
-        ElseIf InStr(omax.vars, "t") > 0 Then
+        ElseIf InStr(omax.Vars, "t") > 0 Then
             Var = "t"
         Else
-            ea.text = omax.vars
+            ea.text = omax.Vars
             Var = ea.GetNextVar(1)
         End If
         If Len(Var) > 0 Then
             tbvar.text = Var
         End If
-        omax.vars = RemoveVar(omax.vars, tbvar.text)
-        If Len(omax.vars) > 0 Then
-            GetTextboxVars = ";" & omax.vars
+        omax.Vars = RemoveVar(omax.Vars, tbvar.text)
+        If Len(omax.Vars) > 0 Then
+            GetTextboxVars = ";" & omax.Vars
         End If
     End If
 End Function
 Function GetTextboxLignVars(tb As TextBox) As String
     If Len(tb.text) > 0 Then
-        omax.vars = ""
+        omax.Vars = ""
         omax.FindVariable (tb.text)
-        omax.vars = RemoveVar(omax.vars, "x")
-        omax.vars = RemoveVar(omax.vars, "y")
-        If Len(omax.vars) > 0 Then
-            GetTextboxLignVars = ";" & omax.vars
+        omax.Vars = RemoveVar(omax.Vars, "x")
+        omax.Vars = RemoveVar(omax.Vars, "y")
+        If Len(omax.Vars) > 0 Then
+            GetTextboxLignVars = ";" & omax.Vars
         End If
     End If
 End Function

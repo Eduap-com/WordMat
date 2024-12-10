@@ -250,7 +250,7 @@ End Sub
 
 Sub PlotDF()
 ' plot retningsfelt
-    Dim s As String, V As String
+    Dim s As String, v As String
     Dim Arr As Variant
     Dim ea As New ExpressionAnalyser
   '  On Error GoTo fejl
@@ -272,14 +272,14 @@ Sub PlotDF()
             Exit Sub
         End If
         ea.text = s
-        V = ea.GetNextVar
-        If V <> "x" And V <> "y" Then
-            If V = "t" Then
+        v = ea.GetNextVar
+        If v <> "x" And v <> "y" Then
+            If v = "t" Then
                 ea.ReplaceVar "t", "x"
-            ElseIf V = "N" Then
-                ea.ReplaceVar V, "y"
+            ElseIf v = "N" Then
+                ea.ReplaceVar v, "y"
             Else
-                ea.ReplaceVar V, "y"
+                ea.ReplaceVar v, "y"
             End If
         End If
         s = ea.text
@@ -305,19 +305,19 @@ Sub PlotDF()
     UF2Dgraph.TextBox_dfligning.text = omax.ConvertToAscii(omax.Kommando)
     
     omax.FindVariable
-    If InStr(omax.vars, "x") > 0 Then
+    If InStr(omax.Vars, "x") > 0 Then
         UF2Dgraph.TextBox_dfx.text = "x"
-    ElseIf InStr(omax.vars, "t") > 0 Then
+    ElseIf InStr(omax.Vars, "t") > 0 Then
         UF2Dgraph.TextBox_dfx.text = "t"
     Else
         UF2Dgraph.TextBox_dfx.text = "x"
     End If
-    If InStr(omax.vars, "y") > 0 Then
+    If InStr(omax.Vars, "y") > 0 Then
         UF2Dgraph.TextBox_dfy.text = "y"
-    ElseIf InStr(omax.vars, "N") > 0 Then
+    ElseIf InStr(omax.Vars, "N") > 0 Then
         UF2Dgraph.TextBox_dfy.text = "N"
     Else
-        ea.text = omax.vars
+        ea.text = omax.Vars
         UF2Dgraph.TextBox_dfy.text = ea.GetNextVar
         If UF2Dgraph.TextBox_dfy.text = "" Then UF2Dgraph.TextBox_dfy.text = "y"
     End If

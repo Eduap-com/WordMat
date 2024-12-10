@@ -367,7 +367,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
         End If
         omax.FindVariable
         If variabel = vbNullString Then
-            UFSelectVar.vars = omax.vars
+            UFSelectVar.Vars = omax.Vars
             UFSelectVar.DefS = omax.DefString
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
@@ -492,7 +492,7 @@ Sub MaximaSolve()
 End Sub
 'Sub MaximaSolve(Optional variabel As String)
 Sub MaximaSolvePar(Optional variabel As String)
-    Dim Arr As Variant, s As String, t As String, V As String
+    Dim Arr As Variant, s As String, t As String, v As String
     Dim fejlm As String
     On Error GoTo fejl
     Application.ScreenUpdating = False
@@ -580,17 +580,17 @@ newcas:
         omax.StopNow = False
         omax.Kommando = SaveKommando
         If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
-            If Not InStr(omax.vars, ";") > 0 Then ' metoden virker kun med 1 variabel
+            If Not InStr(omax.Vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
                 ea.text = omax.Kommando
                 ea.text = Replace(ea.text, VBA.ChrW(8289), "")
                 s = ""
                 Do
-                    V = ea.GetNextVar()
-                    If V = "sin" Or V = "cos" Or V = "tan" Then
+                    v = ea.GetNextVar()
+                    If v = "sin" Or v = "cos" Or v = "tan" Then
                         t = ea.GetNextBracketContent()
-                        If InStr(t, omax.vars) > 0 Then
-                            If V = "cos" Then
+                        If InStr(t, omax.Vars) > 0 Then
+                            If v = "cos" Then
                                 s = "180"
                             Else
                                 s = "90"
@@ -598,7 +598,7 @@ newcas:
                         End If
                     End If
                     ea.Pos = ea.Pos + 1
-                Loop While V <> ""
+                Loop While v <> ""
                 If s <> "" And Radians Then
                     If s = "90" Then
                         s = ChrW(960) & "/2" ' pi
@@ -607,13 +607,13 @@ newcas:
                     End If
                 End If
                 If s <> "" Then
-                    UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
-                    UFSelectVar.TempDefs = "0<=" & omax.vars & "<=" & s
+                    UFSelectVar.TextBox_def.text = "0<=" & omax.Vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TempDefs = "0<=" & omax.Vars & "<=" & s
                 End If
             End If
         End If
         If variabel = vbNullString Then
-            UFSelectVar.vars = omax.vars
+            UFSelectVar.Vars = omax.Vars
             UFSelectVar.DefS = omax.DefString
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
@@ -809,7 +809,7 @@ stophop:     If omax.AntalVars > 1 Then
         omax.FindVariable
         If Not ValiderVariable Then GoTo slut
         UFSelectVar.NoEq = omax.AntalKom
-        UFSelectVar.vars = omax.vars
+        UFSelectVar.Vars = omax.Vars
         UFSelectVar.DefS = omax.DefString
         UFSelectVar.Show
         variabel = UFSelectVar.SelectedVar
@@ -1114,7 +1114,7 @@ Sub MaximaEliminate()
         If Not ValiderVariable Then GoTo slut
         UFSelectVar.Eliminate = True
         UFSelectVar.NoEq = omax.AntalKom
-        UFSelectVar.vars = omax.vars
+        UFSelectVar.Vars = omax.Vars
         UFSelectVar.DefS = omax.DefString
         UFSelectVar.Caption = Sprog.A(377)
         UFSelectVar.Show
@@ -1246,7 +1246,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     '    LockWindow
     Dim IsSolved As Boolean
     Dim scrollpos As Double
-    Dim ea As New ExpressionAnalyser, s As String, V As String, t As String
+    Dim ea As New ExpressionAnalyser, s As String, v As String, t As String
     scrollpos = ActiveWindow.VerticalPercentScrolled
 
     '    PrepareMaximaNoSplash
@@ -1298,28 +1298,28 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         omax.FindVariable
         
         If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
-            If Not InStr(omax.vars, ";") > 0 Then ' metoden virker kun med 1 variabel
+            If Not InStr(omax.Vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
                 ea.text = omax.Kommando
                 ea.text = Replace(ea.text, VBA.ChrW(8289), "")
                 s = ""
                 Do
-                    V = ea.GetNextVar()
-                    If V = "sin" Or V = "cos" Or V = "tan" Then
+                    v = ea.GetNextVar()
+                    If v = "sin" Or v = "cos" Or v = "tan" Then
                         t = ea.GetNextBracketContent()
-                        If InStr(t, omax.vars) > 0 Then s = "90"
+                        If InStr(t, omax.Vars) > 0 Then s = "90"
                     End If
                     ea.Pos = ea.Pos + 1
-                Loop While V <> ""
+                Loop While v <> ""
                 If s <> "" And Radians Then s = "pi/2"
                 If s <> "" Then
-                    UFSelectVar.TextBox_def.text = "0<=" & omax.vars & "<=" & s & VbCrLfMac
-                    UFSelectVar.TempDefs = "0<=" & omax.vars & "<=" & s
+                    UFSelectVar.TextBox_def.text = "0<=" & omax.Vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TempDefs = "0<=" & omax.Vars & "<=" & s
                 End If
             End If
         End If
         If variabel = vbNullString Then
-            UFSelectVar.vars = omax.vars
+            UFSelectVar.Vars = omax.Vars
             UFSelectVar.DefS = omax.DefString
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
@@ -1459,7 +1459,7 @@ ghop:
         omax.ReadSelection
         omax.FindVariable
         UFSelectVar.NoEq = Selection.OMaths.Count
-        UFSelectVar.vars = omax.vars
+        UFSelectVar.Vars = omax.Vars
         UFSelectVar.Show
         Variable = UFSelectVar.SelectedVar
         Variable = Replace(Variable, ",", "=1" & ListSeparator)
@@ -1741,7 +1741,13 @@ Sub beregn()
     End If
     
     
-    If Not PrepareMaxima Then GoTo slut
+    If Not PrepareMaxima Then
+        If omax.DefFejl Then
+            Exit Sub
+        Else
+            GoTo slut
+        End If
+    End If
     omax.prevspr = ""
 
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
@@ -1761,7 +1767,13 @@ Sub beregn()
         GoTo slut
     End If
     If omax.Kommando = "" Then GoTo slut
-    If Not ValidateInput(omax.Kommando) Then GoTo slut
+    If Not ValidateInput(omax.Kommando) Then
+        If omax.DefFejl Then
+            Exit Sub
+        Else
+            GoTo slut
+        End If
+    End If
     '    Set UFWait.omax = omax
     '    UFWait.ActionToPerform = "beregn"
     '    UFWait.Show
@@ -1821,7 +1833,7 @@ Sub beregn()
     End If
     
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+    If CheckForError Then Exit Sub ' der skal ikke scrolles ved fejl, deffejl skal markeres
     '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
 
     Dim Oundo As UndoRecord
@@ -1924,7 +1936,7 @@ Sub Omskriv()
 
     '    omax.OpenCmd
     omax.FindVariable
-    UFomskriv.vars = omax.vars
+    UFomskriv.Vars = omax.Vars
     UFomskriv.Show
     If UFomskriv.annuller Then GoTo slut
 
@@ -2559,9 +2571,9 @@ Sub SolveDENumeric()
     End If
 
     omax.FindVariable
-    If InStr(omax.vars, "t") > 0 Then
+    If InStr(omax.Vars, "t") > 0 Then
         variabel = "t"
-    ElseIf InStr(omax.vars, "x") > 0 Then
+    ElseIf InStr(omax.Vars, "x") > 0 Then
         variabel = "x"
     Else
         variabel = "x"
@@ -2727,9 +2739,9 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     '    variabel = InputBox("Indtast variabel som funktionen afhænger af", "Variabel", "x")
     If funktion = vbNullString And variabel = vbNullString Then
         omax.FindVariable
-        If InStr(omax.vars, "t") > 0 Then
+        If InStr(omax.Vars, "t") > 0 Then
             variabel = "t"
-        ElseIf InStr(omax.vars, "x") > 0 Then
+        ElseIf InStr(omax.Vars, "x") > 0 Then
             variabel = "x"
         Else
             variabel = "x"
@@ -2764,13 +2776,13 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
             omax.Kommando = Replace(omax.Kommando, "y(" & variabel & ")", "y")
             omax.Kommando = Replace(omax.Kommando, "y^' (" & variabel & ")", "y^'")
             funktion = "y"
-        ElseIf InStr(omax.vars, "y") > 0 Then
+        ElseIf InStr(omax.Vars, "y") > 0 Then
             funktion = "y"
         Else
             ea.text = omax.Kommando
             funktion = ea.GetNextVar(1)
         End If
-        UFdiffeq.vars = omax.vars
+        UFdiffeq.Vars = omax.Vars
         UFdiffeq.DefS = omax.DefString
         UFdiffeq.TextBox_funktion.text = funktion
         UFdiffeq.TextBox_variabel.text = variabel
@@ -2943,23 +2955,21 @@ Sub LukMaximaProcess()
 End Sub
 #End If
 
-Function ValidateInput(Expr) As Boolean
+Function ValidateInput(Expr, Optional MathObj As OMath) As Boolean
     Dim ED As ErrorDefinition
    
     ValidateInput = True
     '    ' validate brackets
    
     If GetCountOfChar(Expr, "(") <> GetCountOfChar(Expr, ")") Then
+        ED.Title = Sprog.SyntaxError
+            ED.MaximaOutput = Expr
         If Sprog.SprogNr = 1 Then
 '            MsgBox "Antallet af parenteser passer ikke i udtrykket" & vbCrLf & vbCrLf & Expr, vbOKOnly, "Syntaks fejl"
-            ED.Title = "Syntaks fejl"
-            ED.Description = "Antallet af parenteser passer ikke i udtrykket"
-            ED.MaximaOutput = Expr
+            ED.Description = "Antallet af parenteser passer ikke i udtrykket" & vbCrLf & Expr
         Else
 '            MsgBox "The number of brackets do not match in" & vbCrLf & vbCrLf & Expr, vbOKOnly, "Syntax error"
-            ED.Title = "Syntax error"
-            ED.Description = "The number of brackets do not match"
-            ED.MaximaOutput = Expr
+            ED.Description = "The number of brackets do not match" & vbCrLf & Expr
         End If
     ElseIf InStr(Expr, "\left(") > 0 Or InStr(Expr, "\ast") > 0 Then
         If Sprog.SprogNr = 1 Then
@@ -2974,6 +2984,14 @@ Function ValidateInput(Expr) As Boolean
     End If
    
     If ED.Title <> vbNullString Then
+        If Not MathObj Is Nothing Then
+            ED.Description = ED.Title & vbCrLf & ED.Description
+            ED.Title = "Fejl i definition"
+            Application.ScreenUpdating = True
+            MathObj.Range.Select
+            omax.DefFejl = True
+        End If
+        
         UserFormError.SetErrorDefinition ED
         UserFormError.Show
         ValidateInput = False
@@ -2983,12 +3001,12 @@ End Function
 
 Public Function GetVersion(n As String) As Single
 ' finder versionsnr ud fra mappenavn på maxima
-Dim V As String, p As Integer
+Dim v As String, p As Integer
     p = InStr(n, "-")
     If p > 0 Then
-        V = right(n, Len(n) - p)
+        v = right(n, Len(n) - p)
     End If
-    GetVersion = val(V)
+    GetVersion = val(v)
 End Function
 
 #If Mac Then
@@ -2997,19 +3015,19 @@ Function GetMaximaPath() As String
 ' Finder Maximastien. søger i Appdata og programfiles. Hvis der er Maxima begge steder så bruges nyeste version
 ' Hvis der er samme version begge steder, så returneres stien til appdata.
 
-    Dim FN As String, DN As String, V As Single ' Til AppData
+    Dim FN As String, DN As String, v As Single ' Til AppData
     Dim FN1 As String, DN1 As String, V1 As Single ' Til Program files
     Dim s As String
     On Error Resume Next
 
     DN = Environ("AppData") & "\WordMat\"
     FN = Dir(DN & "Maxima*", vbDirectory)
-    V = GetVersion(FN)
+    v = GetVersion(FN)
     Do
         s = Dir()
-        If GetVersion(s) > V Then
+        If GetVersion(s) > v Then
             FN = s
-            V = GetVersion(FN)
+            v = GetVersion(FN)
         End If
     Loop While s <> ""
     
@@ -3018,13 +3036,13 @@ Function GetMaximaPath() As String
     If FN = vbNullString Then
         DN = DN1
         FN = FN1
-        V = GetVersion(FN)
+        v = GetVersion(FN)
     Else
         V1 = GetVersion(FN1)
-        If V1 > V Then
+        If V1 > v Then
             DN = DN1
             FN = FN1
-            V = V1
+            v = V1
         End If
     End If
             
@@ -3055,7 +3073,7 @@ Function ValiderVariable() As Boolean
 '    On Error Resume Next
     ValiderVariable = True
     If omax.AntalVars > 0 Then
-        Arr = Split(omax.vars, ";")
+        Arr = Split(omax.Vars, ";")
         For i = 0 To UBound(Arr)
             If Left(Arr(i), 1) = "_" Then
                 ValiderVariable = False

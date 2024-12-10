@@ -14,7 +14,7 @@ Public KommandoForklaring As String ' til skrivning af kommando
 Private Kommandoer() As String    ' kommandoer som maxima skal udføre. KommandoerStreng må bruges public
 Public MaximaOutput As String    ' resultat fra Maxima
 Public KommentarOutput As String    ' evt. kommentar fra Maxima
-Public vars As String    ' variable i udtryk adskilt ad ;
+Public Vars As String    ' variable i udtryk adskilt ad ;
 Public AntalVars As Integer    ' antal variable fundet af findvariable
 Private IntegrationVars As String    ' variable der bruges til integration skal ikke med i varlisten
 Public DiffEqVar As String    ' variabel til differentialligninger. sikrer at subst ikke bruges i diff
@@ -26,8 +26,10 @@ Public DefFejl As Boolean    ' sættes hvis der er fejl i definitioner
 Public Definitions As Boolean    ' sættes hvis der er definitioner i dokumentet
 Public DefString As String    ' contains the output from finddefinition
 Public defstringtext As String    ' contains definitions from finddefinitions before ConvertToMaxima
+Public DefColl As Collection
 Private ldefname() As String    ' array med alle definitioner
 Private ldefvalue() As String    ' array med alle definitioner
+Private MathOArr() As OMath
 Public defindex As Integer
 Public KillDef As String    'indeholder listseparatoret liste over sidste definitioner
 Public ForgetList As String    ' indeholder liste over assumes der skal slettes
@@ -92,7 +94,7 @@ Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
     MaximaOutput = ""
 
     KommentarOutput = ""
-    vars = ""
+    Vars = ""
     IntegrationVars = ""
     AntalVars = 0
     TempDefs = ""
@@ -112,7 +114,8 @@ Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
             GoTo slut
         End If
         If Len(DefS) > 0 Then
-            MaximaInputStreng = MaximaInputStreng & "[" & Left(Replace(DefS, "$", ","), Len(DefS) - 1) & "]$"
+'            MaximaInputStreng = MaximaInputStreng & "[" & Left(Replace(DefS, "$", ","), Len(DefS) - 1) & "]$"
+            MaximaInputStreng = Replace(DefS, "$", ";")
         End If
         MaximaInputStreng = MaximaInputStreng & "fejl;"
     End If
@@ -227,7 +230,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
 #Else
 #End If
     
-    If StopTime = 0 Then StopTime = 10000
+    If StopTime = 0 Then StopTime = 200
     AntalB = AntalB + 1
 
     '    MaximaInputStreng = "mu:2;sigma:1;Integrate(1/(sqrt(2*%pi)*sigma)*%e^(-1/2*((y-mu)/sigma)^2),y,minf,1000);"
@@ -303,8 +306,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         ShowDebug
         Exit Sub
         GoTo slut
-    Else
-
+    Else ' normal beregning
         If MaxProc.Finished = 0 Then
             UfWait2.Show vbModeless
             DoEvents
@@ -445,12 +447,16 @@ Sub WaitForMaximaForm(StopTime As Integer)
         i = 0
         Do While MaxProc.Finished = 0 And i < StopTime
 #If Mac Then
-    MaxProc.WaitForMaximaUntil 1
+            MaxProc.WaitForMaximaUntil 1
             i = i + 10
 #Else
             Wait (0.1)
             i = i + 1
 #End If
+            If InStr(MaxProc.LastMaximaOutput, "Lisp error:") > 0 Then 'MaxProc.Finished virker ikke altid
+                MaxProc.CloseProcess
+                Exit Do
+            End If
             If Round(i / 8) = i / 8 Then
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
             ElseIf Round(i / 60) = i / 60 Then
@@ -1657,10 +1663,21 @@ start:
     Dim eql As String
     nr = UBound(Minput)
 
-    If nr <= 1 Then
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
         MaximaOutput = ""
-        KommentarOutput = Minput(1) ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
-        KommentarOutput = moutput(1) ' på windows '23,,' skal det være denne for at få fejl med
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        Else
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
     ElseIf MaximaExact = 0 And MaximaDecOutType < 3 And Not MaximaUnits Then
         Dim exactres As String
         Dim numres As String
@@ -1709,6 +1726,9 @@ start:
         If moutput(nr - 1) <> "" Then
             MaximaOutput = eqsg & ConvertToWordSymbols(moutput(nr - 1))
             KommentarOutput = ""
+            If MaximaOutput = "=fejl" Then
+                KommentarOutput = moutput(nr - 3) & moutput(nr - 2)
+            End If
             For i = 0 To nr - 1
                 KommentarOutput = KommentarOutput & Minput(nr - i)
             Next
@@ -6904,7 +6924,7 @@ Sub FindVariable(Optional text As String, Optional MaximaCode As Boolean = True)
     Dim j As Integer
     Dim arrint As Variant
     AntalVars = 0
-    vars = ""
+    Vars = ""
     IntegrationVars = ""
     If text = "" Then
         text = Kommando
@@ -6946,10 +6966,10 @@ Sub FindVariable(Optional text As String, Optional MaximaCode As Boolean = True)
                 If vararr(i) = Var Then varexists = True
             Next
             If Not (varexists) And Var <> "e" And Var <> "i" And Var <> "pi" And Var <> "inf" And Var <> "minf" Then
-                If vars <> "" Then
-                    vars = vars & ";" & Var
+                If Vars <> "" Then
+                    Vars = Vars & ";" & Var
                 Else
-                    vars = Var
+                    Vars = Var
                 End If
                 vararr(varind) = Var
                 varind = varind + 1
@@ -6983,26 +7003,21 @@ Function FindDefinitions() As String
     defstringtext = ""
     ReDim ldefname(100)
     ReDim ldefvalue(100)
+    ReDim MathOArr(100)
+    Set DefColl = New Collection
     start = Selection.Range.start
     sslut = Selection.Range.End
     Set ra = ActiveDocument.Range
     ra.End = start
     For i = ra.OMaths.Count To 1 Step -1
-        '    MsgBox ActiveDocument.Range.OMaths(i).Range.Text
         s = ActiveDocument.Range.OMaths(i).Range.text
-        '        If ActiveDocument.Range.OMaths(i).Range.start > start Then GoTo slut
-
         If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then    ' kun se på felter med :  tripelligmed def= og specielt := tegn
-#If Mac Then
-            s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range) ' kan ikke huske hvad forskel på readeq1 og 2 er. Ihvert et tilfælde på mac numerisk grafisk ligningsløsning med foregående definition fejler. så derfor alm. readeq på mac. april2022 skiftet tilbage til readeq2, da der opstod problemer med definitioner anden gang de blev l_st. De kom ind som tekst med en masse "" og mellemrum
-#Else
             s = ReadEquation2(ActiveDocument.Range.OMaths(i).Range)
-#End If
-            If Not ValidateInput(s) Then
+            If Not ValidateInput(s, ActiveDocument.Range.OMaths(i)) Then
                 FindDefinitions = "error"
                 Exit Function
             End If
-            t = AddDefinition(s)
+            t = AddDefinition(s, ra.OMaths(i))
             If t = "STOP" Then Exit For
             FindDefinitions = t & FindDefinitions
         End If
@@ -7010,6 +7025,7 @@ Function FindDefinitions() As String
     If defindex > 0 Then
         ReDim Preserve ldefname(defindex - 1)
         ReDim Preserve ldefvalue(defindex - 1)
+        ReDim Preserve MathOArr(defindex - 1)
     End If
 
     GoTo slut
@@ -7027,209 +7043,208 @@ slut:
     Selection.End = sslut
     '    Selection.Collapse (wdCollapseStart)
 End Function
-Function AddDefinition(s As String) As String
-   Dim t As String
-   Dim ea As New ExpressionAnalyser
-   Dim ea2 As New ExpressionAnalyser
-   Dim defenk As String
-   Dim Arr As Variant
-   Dim deflign As Boolean
+Function AddDefinition(s As String, Optional MathObj As OMath) As String
+    Dim t As String
+    Dim ea As New ExpressionAnalyser
+    Dim ea2 As New ExpressionAnalyser
+    Dim defenk As String
+    Dim Arr As Variant
+    Dim deflign As Boolean
 
-   ea.SetNormalBrackets
-   s = Replace(s, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes
-   s = Replace(s, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
-   s = Replace(s, vbCrLf, "")    ' enter kan forekomme
-   s = Replace(s, vbCr, "")    '
+    ea.SetNormalBrackets
+    s = Replace(s, VBA.ChrW(12310), "")    ' specielle usynlige paranteser fjernes
+    s = Replace(s, VBA.ChrW(12311), "")    ' specielle usynlige paranteser fjernes
+    s = Replace(s, vbCrLf, "")    ' enter kan forekomme
+    s = Replace(s, vbCr, "")    '
 
-   If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(VBA.LCase(s), "definer:") > 0 Or InStr(VBA.LCase(s), "define:") > 0 Or InStr(VBA.LCase(s), "ligning:") > 0 Or InStr(VBA.LCase(s), "equation:") > 0 Or InStr(VBA.LCase(s), "slet def") > 0 Or InStr(VBA.LCase(s), "delete def") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then
+    If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(VBA.LCase(s), "definer:") > 0 Or InStr(VBA.LCase(s), "define:") > 0 Or InStr(VBA.LCase(s), "ligning:") > 0 Or InStr(VBA.LCase(s), "equation:") > 0 Or InStr(VBA.LCase(s), "slet def") > 0 Or InStr(VBA.LCase(s), "delete def") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then
 
-      If VBA.LCase(Left(s, 8)) = "definer:" Then
-         s = right(s, Len(s) - 8)
-      ElseIf VBA.LCase(Left(s, 7)) = "define:" Then
-         s = right(s, Len(s) - 7)
-      ElseIf VBA.LCase(Left(s, 16)) = "definer ligning:" Then
-         s = right(s, Len(s) - 16)
-         deflign = True
-      ElseIf VBA.LCase(Left(s, 16)) = "define equation:" Then
-         s = right(s, Len(s) - 16)
-         deflign = True
-      End If
-      s = Replace(s, VBA.ChrW(8788), ":=")    ' \equiv og
-      s = Replace(s, VBA.ChrW(8797), ":=")    ' def=
-      s = Replace(s, VBA.ChrW(8801), ":=")    ' specielt := tegn
+        If VBA.LCase(Left(s, 8)) = "definer:" Then
+            s = right(s, Len(s) - 8)
+        ElseIf VBA.LCase(Left(s, 7)) = "define:" Then
+            s = right(s, Len(s) - 7)
+        ElseIf VBA.LCase(Left(s, 16)) = "definer ligning:" Then
+            s = right(s, Len(s) - 16)
+            deflign = True
+        ElseIf VBA.LCase(Left(s, 16)) = "define equation:" Then
+            s = right(s, Len(s) - 16)
+            deflign = True
+        End If
+        s = Replace(s, VBA.ChrW(8788), ":=")    ' \equiv og
+        s = Replace(s, VBA.ChrW(8797), ":=")    ' def=
+        s = Replace(s, VBA.ChrW(8801), ":=")    ' specielt := tegn
 
-      s = Replace(s, VBA.ChrW(11), "")
+        s = Replace(s, VBA.ChrW(11), "")
 
-      '        If InStr(s, "block") < 1 Then
-      '            s = Replace(s, VBA.ChrW(34), "") ' apostrof
-      '            s = Replace(s, "=", ":")
-      '            s = Replace(s, "::", ":")
-      '            s = Replace(s, "):", "):=")
-      '        End If
+        '        If InStr(s, "block") < 1 Then
+        '            s = Replace(s, VBA.ChrW(34), "") ' apostrof
+        '            s = Replace(s, "=", ":")
+        '            s = Replace(s, "::", ":")
+        '            s = Replace(s, "):", "):=")
+        '        End If
 
-      '        s = Replace(s, "):=:", "):=")
+        '        s = Replace(s, "):=:", "):=")
 
-      If InStr(VBA.LCase(s), "slet def") > 0 Or InStr(VBA.LCase(s), "delete def") > 0 Then
-         '            FindDefinitions = ""
-         s = Replace(Trim(Split(s, ":")(1)), vbCr, "")
-         If s = "" Then
-            AddDefinition = "STOP"
-            Exit Function
-         Else
-            '                AddDefinition = "kill(" & Replace(Replace(s, ";", ","), vbCr, "") & ")$" & AddDefinition
-            AddDefinition = "errcatch(kill(" & CodeForMaxima(Replace(s, ",", ";"), CASengine) & "))$" & AddDefinition
-         End If
-      Else    ' gem definitioner
-         '            FindDefinitions = CodeForMaxima(s) & "," & FindDefinitions
-         defstringtext = defstringtext & s & "$"
-         ea.text = Replace(s, ";", " , ")    ' forsøg med at fjerne semikolon
-         ea.ConvertDecSeparator
-         ea.Pos = 1
-         Do
-            defenk = Trim(ea.GetNextListItem(ea.Pos, ","))
-            If Len(defenk) = 0 Then GoTo hop
-            If InStr(defenk, "block") > 0 Then
-               defenk = Replace(defenk, ";", ",")
-               defenk = Replace(defenk, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
-               defenk = Replace(defenk, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
-               defenk = Replace(defenk, VBA.ChrW(11), "")    ' shift-enter
-               defenk = Replace(defenk, vbLf, "")    ' shift-enter og enter
-               defenk = Replace(defenk, vbCrLf, "")
-               defenk = Replace(defenk, vbCr, "")
-               defenk = Replace(defenk, VBA.ChrW(183), "*")    ' prik erstattes med gange
-               defenk = Replace(defenk, VBA.ChrW(8901), "*")    ' \cdot , ved ikke hvorfor der tilsyneladende er to
-               defenk = Replace(defenk, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
-               defenk = Replace(defenk, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
-               defenk = Replace(defenk, VBA.ChrW(247), "/")    '
-               defenk = Replace(defenk, VBA.ChrW(8800), "#")    ' ikkeligmed
-               defenk = Replace(defenk, VBA.ChrW(8804), "<=")    '
-               defenk = Replace(defenk, VBA.ChrW(8805), ">=")    '
-               defenk = Replace(defenk, VBA.ChrW(160), "")    ' foran accent f.eks. vector pil 160 8407
-               defenk = Replace(defenk, VBA.ChrW(8289), "") ' funktionstegn
-               defenk = Replace(defenk, VBA.ChrW(9618), "") ' funktionstegn
-               defenk = Replace(defenk, VBA.ChrW(12310), "(") ' skjulte parenteser
-               defenk = Replace(defenk, VBA.ChrW(12311), ")") ' skjulte parenteser
-'            ElseIf InStr(defenk, VBA.ChrW(9608)) > 0 And InStr(defenk, VBA.ChrW(9508)) > 0 Then ' tuborg parentes ' fjernet v. 1.26 Er nu i CodeForMaxima
-'               ea2.Text = defenk
-'               ea2.SetNormalBrackets
-'               i = 0
-'               Do
-'                  Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
-'                  If Pos > 0 Then
-'                     ea2.Text = Replace(ea2.Text, ")=", "):=", 1, Pos)
-'                     Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
-'                     pos2 = InStr(Pos, ea2.Text, VBA.ChrW(9508))
-'
-'                     Expr = Mid(ea2.Text, Pos + 2, pos2 - Pos - 1)
-'                     Expr = ea2.GetNextBracketContent(Pos)
-'                     arr2 = Split(Expr, "@")
-'                     t = "(if "
-'                     For j = 0 To UBound(arr2)
-'                        If InStr(arr2(j), ";") > 0 Then
-'                           c = ";"
-'                        ElseIf InStr(arr2(j), ", ") > 0 Then
-'                           c = ", "
-'                        ElseIf InStr(arr2(j), " ,") > 0 Then
-'                           c = " ,"
-'                        ElseIf InStr(arr2(j), ",") > 0 Then
-'                           c = ","
-'                        ElseIf InStr(arr2(j), "|") > 0 Then
-'                           c = "|"
-'                        Else
-'                           c = ""
-'                        End If
-'                        arr3 = Split(arr2(j), c)
-'                        If UBound(arr3) > 1 Then
-'                           k = 1
-'                           ass = ""
-'                           Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
-'                              If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
-'                                 If ass = "" Then
-'                                    ass = arr3(k)
-'                                 Else
-'                                    ass = ass & c & arr3(k)
-'                                 End If
-'                              Else
-'                                 arr3(0) = arr3(0) & c & arr3(k)
-'                              End If
-'                              k = k + 1
-'                           Loop
-'                        ElseIf UBound(arr3) = 1 Then
-'                           ass = arr3(1)
-'                        End If
-'                        If UBound(arr3) > 0 Then
-'                           '                           t = t & sqbrAssump(SplitAssump(CodeForMaxima(Trim(arr3(1))))) & " then " & CodeForMaxima(arr3(0))
-'                           t = t & sqbrAssump(SplitAssump(Trim(ass))) & " then " & CodeForMaxima(arr3(0), CASengine)
-'                        Else
-'                           t = t & " 0=0 then " & CodeForMaxima(arr3(0), CASengine)
-'                        End If
-'                        If j < UBound(arr2) Then t = t & " elseif "
-'                     Next
-'                     ea2.Text = Left(ea2.Text, Pos - 1) & t & ")"  ' & Right(ea2.Text, Len(ea2.Text) - pos - Len(expr) - 6)
-'                     i = i + 1
-'                  End If
-'               Loop While Pos > 0 And i < 1000
-'               defenk = ea2.Text
+        If InStr(VBA.LCase(s), "slet def") > 0 Or InStr(VBA.LCase(s), "delete def") > 0 Then
+            '            FindDefinitions = ""
+            s = Replace(Trim(Split(s, ":")(1)), vbCr, "")
+            If s = "" Then
+                AddDefinition = "STOP"
+                Exit Function
             Else
-               defenk = Replace(defenk, VBA.ChrW(34), "")    ' apostrof
-               defenk = CodeForMaxima(defenk, CASengine)
-'#If Mac Then ' på mac bruges ## som multiplikator ved vektorer, så ikke nødvendigvis 'ikke ligmed'  nu også på windows 1.18
-               If InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
-'#Else
-'               If InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0 Or InStr(defenk, "#") > 0 Then
-'#End If
-                  AddDefinition = AddDefinition & GetAssumeText(defenk)
-                  GoTo hop
-               End If
-               If Not deflign Then
-                  defenk = Replace(defenk, "=", ":", 1, 1)
-                  defenk = Replace(defenk, "::", ":", 1, 1)
-                  defenk = Replace(defenk, "):", "):=", 1, 1)
-               End If
+                '                AddDefinition = "kill(" & Replace(Replace(s, ";", ","), vbCr, "") & ")$" & AddDefinition
+                AddDefinition = "errcatch(kill(" & CodeForMaxima(Replace(s, ",", ";"), CASengine) & "))$" & AddDefinition
             End If
-            Arr = Split(defenk, ":")
-            If UBound(Arr) = 0 Then
-               '                    If InStr(defenk, "setunits") > 0 Or InStr(defenk, "assume") > 0 Then
-               GoTo hop2
-               '                    End If
-            End If
-            If Not ValidateDef(Arr(0), Arr(1)) Then GoTo hop
+        Else    ' gem definitioner
+            '            FindDefinitions = CodeForMaxima(s) & "," & FindDefinitions
+            defstringtext = defstringtext & s & "$"
+            ea.text = Replace(s, ";", " , ")    ' forsøg med at fjerne semikolon
+            ea.ConvertDecSeparator
+            ea.Pos = 1
+            Do
+                defenk = Trim(ea.GetNextListItem(ea.Pos, ","))
+                If Len(defenk) = 0 Then GoTo hop
+                If InStr(defenk, "block") > 0 Then
+                    defenk = Replace(defenk, ";", ",")
+                    defenk = Replace(defenk, VBA.ChrW(9633), "")    ' tegn foran paranteser der gør dem usynlige. Muligvis problematisk da paranteserne ikke fjernes. gør også brøker små
+                    defenk = Replace(defenk, VBA.ChrW(9508), "")    ' tegn for tom plads ved ihvertfald [ ]
+                    defenk = Replace(defenk, VBA.ChrW(11), "")    ' shift-enter
+                    defenk = Replace(defenk, vbLf, "")    ' shift-enter og enter
+                    defenk = Replace(defenk, vbCrLf, "")
+                    defenk = Replace(defenk, vbCr, "")
+                    defenk = Replace(defenk, VBA.ChrW(183), "*")    ' prik erstattes med gange
+                    defenk = Replace(defenk, VBA.ChrW(8901), "*")    ' \cdot , ved ikke hvorfor der tilsyneladende er to
+                    defenk = Replace(defenk, VBA.ChrW(8729), "*")    ' prik \cdot erstattes med gange
+                    defenk = Replace(defenk, VBA.ChrW(8226), "*")    ' tyk prik erstattes med gange
+                    defenk = Replace(defenk, VBA.ChrW(247), "/")    '
+                    defenk = Replace(defenk, VBA.ChrW(8800), "#")    ' ikkeligmed
+                    defenk = Replace(defenk, VBA.ChrW(8804), "<=")    '
+                    defenk = Replace(defenk, VBA.ChrW(8805), ">=")    '
+                    defenk = Replace(defenk, VBA.ChrW(160), "")    ' foran accent f.eks. vector pil 160 8407
+                    defenk = Replace(defenk, VBA.ChrW(8289), "") ' funktionstegn
+                    defenk = Replace(defenk, VBA.ChrW(9618), "") ' funktionstegn
+                    defenk = Replace(defenk, VBA.ChrW(12310), "(") ' skjulte parenteser
+                    defenk = Replace(defenk, VBA.ChrW(12311), ")") ' skjulte parenteser
+                    '            ElseIf InStr(defenk, VBA.ChrW(9608)) > 0 And InStr(defenk, VBA.ChrW(9508)) > 0 Then ' tuborg parentes ' fjernet v. 1.26 Er nu i CodeForMaxima
+                    '               ea2.Text = defenk
+                    '               ea2.SetNormalBrackets
+                    '               i = 0
+                    '               Do
+                    '                  Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
+                    '                  If Pos > 0 Then
+                    '                     ea2.Text = Replace(ea2.Text, ")=", "):=", 1, Pos)
+                    '                     Pos = InStr(ea2.Text, "{" & VBA.ChrW(9608))
+                    '                     pos2 = InStr(Pos, ea2.Text, VBA.ChrW(9508))
+                    '
+                    '                     Expr = Mid(ea2.Text, Pos + 2, pos2 - Pos - 1)
+                    '                     Expr = ea2.GetNextBracketContent(Pos)
+                    '                     arr2 = Split(Expr, "@")
+                    '                     t = "(if "
+                    '                     For j = 0 To UBound(arr2)
+                    '                        If InStr(arr2(j), ";") > 0 Then
+                    '                           c = ";"
+                    '                        ElseIf InStr(arr2(j), ", ") > 0 Then
+                    '                           c = ", "
+                    '                        ElseIf InStr(arr2(j), " ,") > 0 Then
+                    '                           c = " ,"
+                    '                        ElseIf InStr(arr2(j), ",") > 0 Then
+                    '                           c = ","
+                    '                        ElseIf InStr(arr2(j), "|") > 0 Then
+                    '                           c = "|"
+                    '                        Else
+                    '                           c = ""
+                    '                        End If
+                    '                        arr3 = Split(arr2(j), c)
+                    '                        If UBound(arr3) > 1 Then
+                    '                           k = 1
+                    '                           ass = ""
+                    '                           Do While k <= UBound(arr3) ' hvis delt op forkert så repareres
+                    '                              If Len(ass) > 0 Or InStr(arr3(k), "<") > 0 Or InStr(arr3(k), ">") > 0 Or InStr(arr3(k), VBA.ChrW(8712)) > 0 Then
+                    '                                 If ass = "" Then
+                    '                                    ass = arr3(k)
+                    '                                 Else
+                    '                                    ass = ass & c & arr3(k)
+                    '                                 End If
+                    '                              Else
+                    '                                 arr3(0) = arr3(0) & c & arr3(k)
+                    '                              End If
+                    '                              k = k + 1
+                    '                           Loop
+                    '                        ElseIf UBound(arr3) = 1 Then
+                    '                           ass = arr3(1)
+                    '                        End If
+                    '                        If UBound(arr3) > 0 Then
+                    '                           '                           t = t & sqbrAssump(SplitAssump(CodeForMaxima(Trim(arr3(1))))) & " then " & CodeForMaxima(arr3(0))
+                    '                           t = t & sqbrAssump(SplitAssump(Trim(ass))) & " then " & CodeForMaxima(arr3(0), CASengine)
+                    '                        Else
+                    '                           t = t & " 0=0 then " & CodeForMaxima(arr3(0), CASengine)
+                    '                        End If
+                    '                        If j < UBound(arr2) Then t = t & " elseif "
+                    '                     Next
+                    '                     ea2.Text = Left(ea2.Text, Pos - 1) & t & ")"  ' & Right(ea2.Text, Len(ea2.Text) - pos - Len(expr) - 6)
+                    '                     i = i + 1
+                    '                  End If
+                    '               Loop While Pos > 0 And i < 1000
+                    '               defenk = ea2.Text
+                Else
+                    defenk = Replace(defenk, VBA.ChrW(34), "")    ' apostrof
+                    defenk = CodeForMaxima(defenk, CASengine)
+                    If InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
+                        AddDefinition = AddDefinition & GetAssumeText(defenk)
+                        GoTo hop
+                    End If
+                    If Not deflign Then
+                        defenk = Replace(defenk, "=", ":", 1, 1)
+                        defenk = Replace(defenk, "::", ":", 1, 1)
+                        defenk = Replace(defenk, "):", "):=", 1, 1)
+                    End If
+                End If
+                Arr = Split(defenk, ":")
+                If UBound(Arr) = 0 Then
+                    '                    If InStr(defenk, "setunits") > 0 Or InStr(defenk, "assume") > 0 Then
+                    GoTo hop2
+                    '                    End If
+                End If
+                If Not ValidateDef(Arr(0), Arr(1)) Then GoTo hop
 
-            If Left(Arr(1), 1) = "=" Then Arr(1) = right(Arr(1), Len(Arr(1)) - 1)
-            If Arr(1) = "" Then GoTo hop
-            If UBound(ldefname) < defindex Then
-               ReDim Preserve ldefname(defindex)
-               ReDim Preserve ldefvalue(defindex)
-            End If
-            ldefname(defindex) = Arr(0)
-            ldefvalue(defindex) = Arr(1)
-            defindex = defindex + 1
+                If Left(Arr(1), 1) = "=" Then Arr(1) = right(Arr(1), Len(Arr(1)) - 1)
+                If Arr(1) = "" Then GoTo hop
+            
+                If UBound(ldefname) < defindex Then
+                    ReDim Preserve ldefname(defindex)
+                    ReDim Preserve ldefvalue(defindex)
+                    ReDim Preserve MathOArr(defindex)
+                End If
+                ldefname(defindex) = Arr(0)
+                ldefvalue(defindex) = Arr(1)
+                Set MathOArr(defindex) = MathObj
+                defindex = defindex + 1
 hop2:                    ' hvis setunit eller assume eller declare
-            ea2.text = defenk
-            ea2.Pos = 1
-            t = ea2.GetNextVar
+                ea2.text = defenk
+                ea2.Pos = 1
+                t = ea2.GetNextVar
 
-            If InStr(Split(defenk, ":")(0), "diff") > 0 Then
-               MsgBox Sprog.A(116) & s
-            ElseIf (t = "e" And InStr(defenk, "[") <= 0) Or t = "integrate" Or t = "sin" Or t = "cos" Or t = "tan" Or t = "diff" Or t = "solve" Or t = "at" Or t = "for" Or t = "in" Or t = "do" Or t = "if" Or t = "and" Or t = "or" Or t = "product" Or t = "step" Or t = "next" Or t = "from" Or t = "limit" Or t = "sum" Or t = "then" Or t = "and" Or t = "or" Or t = "else" Or t = "unless" Or t = "while" Then
-               MsgBox Sprog.Variable & " " & t & " " & Sprog.A(434), vbOKOnly, Sprog.Error
-            ElseIf t = "setunits" Or t = "assume" Or t = "declare" Then
-               '                    AddDefinition =  AddDefinition & CodeForMaxima(defenk) & "$"
-               AddDefinition = AddDefinition & defenk & "$"
-            ElseIf t <> "" Then
-               KillDef = KillDef & t & ","
-               AddDefinition = AddDefinition & defenk & "$"
-            End If
+                If InStr(Split(defenk, ":")(0), "diff") > 0 Then
+                    MsgBox Sprog.A(116) & s
+                ElseIf (t = "e" And InStr(defenk, "[") <= 0) Or t = "integrate" Or t = "sin" Or t = "cos" Or t = "tan" Or t = "diff" Or t = "solve" Or t = "at" Or t = "for" Or t = "in" Or t = "do" Or t = "if" Or t = "and" Or t = "or" Or t = "product" Or t = "step" Or t = "next" Or t = "from" Or t = "limit" Or t = "sum" Or t = "then" Or t = "and" Or t = "or" Or t = "else" Or t = "unless" Or t = "while" Then
+                    MsgBox Sprog.Variable & " " & t & " " & Sprog.A(434), vbOKOnly, Sprog.Error
+                ElseIf t = "setunits" Or t = "assume" Or t = "declare" Then
+                    '                    AddDefinition =  AddDefinition & CodeForMaxima(defenk) & "$"
+                    AddDefinition = AddDefinition & defenk & "$"
+                ElseIf t <> "" Then
+                    KillDef = KillDef & t & ","
+                    AddDefinition = AddDefinition & defenk & "$"
+                End If
 hop:
-         Loop Until ea.Pos >= Len(ea.text)
-      End If
-   End If
+            Loop Until ea.Pos >= Len(ea.text)
+        End If
+    End If
 
 End Function
 Function SplitAssump(s As String) As String
 ' Deler  0<x<5 op til x>0 and x<5
    Dim ea As New ExpressionAnalyser
-   Dim V As String, p As Integer
+   Dim v As String, p As Integer
    Dim pre As String, pst As String
    
    ea.SetNormalBrackets
@@ -7239,46 +7254,46 @@ Function SplitAssump(s As String) As String
     s = Replace(s, " ", vbNullString)
    ea.text = s
    
-   V = ea.GetNextVar()
-   If V = "" Then
+   v = ea.GetNextVar()
+   If v = "" Then
       SplitAssump = s
       Exit Function
    End If
    
-   p = InStr(s, "<=" & V & "<=")
+   p = InStr(s, "<=" & v & "<=")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 4)
-      SplitAssump = V & ">=" & pre & "&&and&&" & V & "<=" & pst
+      SplitAssump = v & ">=" & pre & "&&and&&" & v & "<=" & pst
 '      SplitAssump = pre & "<=" & v & " and " & v & "<=" & pst
       Exit Function
    End If
-   p = InStr(s, "<=" & V & "<")
+   p = InStr(s, "<=" & v & "<")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 3)
-      SplitAssump = pre & "<=" & V & "&&and&&" & V & "<" & pst
+      SplitAssump = pre & "<=" & v & "&&and&&" & v & "<" & pst
       Exit Function
    End If
-   p = InStr(s, "<" & V & "<=")
+   p = InStr(s, "<" & v & "<=")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 3)
-      SplitAssump = pre & "<" & V & "&&and&&" & V & "<=" & pst
+      SplitAssump = pre & "<" & v & "&&and&&" & v & "<=" & pst
       Exit Function
    End If
-   p = InStr(s, "<" & V & "<")
+   p = InStr(s, "<" & v & "<")
    If p > 0 Then
       pre = Left(s, p - 1)
       pst = right(s, Len(s) - p - 2)
-      SplitAssump = pre & "<" & V & "&&and&&" & V & "<" & pst
+      SplitAssump = pre & "<" & v & "&&and&&" & v & "<" & pst
       Exit Function
    End If
    SplitAssump = s
 End Function
 Function sqbrAssump(s As String) As String
    Dim ea As ExpressionAnalyser, t As String
-   Dim V As String, p As Integer, c As String
+   Dim v As String, p As Integer, c As String
    Dim Arr() As String, l1 As String, l2 As String
    t = s
    p = InStr(s, VBA.ChrW(8712))
@@ -7288,8 +7303,8 @@ Function sqbrAssump(s As String) As String
    End If
    Set ea = New ExpressionAnalyser
    ea.text = s
-   V = ea.GetNextVar()
-   If V = "" Then
+   v = ea.GetNextVar()
+   If v = "" Then
       sqbrAssump = s
       Exit Function
    End If
@@ -7328,7 +7343,7 @@ Function sqbrAssump(s As String) As String
    End If
    Arr = Split(s, c)
    If UBound(Arr) = 1 Then
-      sqbrAssump = V & l1 & Arr(0) & "&&and&&" & Arr(1) & l2 & V
+      sqbrAssump = v & l1 & Arr(0) & "&&and&&" & Arr(1) & l2 & v
    Else
       sqbrAssump = t
    End If
@@ -7337,6 +7352,7 @@ End Function
 Sub ResetDefinitions()
     ReDim ldefname(100)
     ReDim ldefvalue(100)
+    ReDim MathOArr(100)
     defindex = 0
 
 End Sub
@@ -7569,6 +7585,10 @@ End Property
 Public Property Get DefValue(Index As Integer) As String
     On Error Resume Next
     DefValue = ldefvalue(Index)
+End Property
+Public Property Get DefOMath(Index As Integer) As OMath
+    On Error Resume Next
+    DefOMath = MathOArr(Index)
 End Property
 
 Public Property Get KommandoArray(Index As Integer) As String

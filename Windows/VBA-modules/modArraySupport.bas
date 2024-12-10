@@ -3234,7 +3234,7 @@ Dim NumRowsResult As Long
 Dim Done As Boolean
 Dim result() As Variant
 
-Dim V As Variant
+Dim v As Variant
 
 
 '''''''''''''''''''''''''''''''
@@ -3333,8 +3333,8 @@ Do Until Done
     For RowNdx1 = LBound(Arr1, 1) To UBound(Arr1, 1)
         RowNdxResult = RowNdxResult + 1
         For ColNdx1 = LBound(Arr1, 2) To UBound(Arr1, 2)
-            V = Arr1(RowNdx1, ColNdx1)
-            result(RowNdxResult, ColNdx1) = V
+            v = Arr1(RowNdx1, ColNdx1)
+            result(RowNdxResult, ColNdx1) = v
         Next ColNdx1
     Next RowNdx1
 
@@ -3344,8 +3344,8 @@ Do Until Done
     For RowNdx2 = LBound(Arr2, 1) To UBound(Arr2, 1)
         RowNdxResult = RowNdxResult + 1
         For ColNdx2 = LBound(Arr2, 2) To UBound(Arr2, 2)
-            V = Arr2(RowNdx2, ColNdx2)
-            result(RowNdxResult, ColNdx2) = V
+            v = Arr2(RowNdx2, ColNdx2)
+            result(RowNdxResult, ColNdx2) = v
         Next ColNdx2
     Next RowNdx2
     
@@ -3505,7 +3505,7 @@ Function SwapArrayRows(Arr As Variant, Row1 As Long, Row2 As Long) As Variant
 ' This function returns an array based on Arr with Row1 and Row2 swapped.
 ' It returns the result array or NULL if an error occurred.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Dim V As Variant
+Dim v As Variant
 Dim result As Variant
 Dim ColNdx As Long
 
@@ -3552,14 +3552,14 @@ End If
 '''''''''''''''''''''''''''''''''''''''''
 ' Redim V to the number of columns.
 '''''''''''''''''''''''''''''''''''''''''
-ReDim V(LBound(Arr, 2) To UBound(Arr, 2))
+ReDim v(LBound(Arr, 2) To UBound(Arr, 2))
 '''''''''''''''''''''''''''''''''''''''''
 ' Put Row1 in V
 '''''''''''''''''''''''''''''''''''''''''
 For ColNdx = LBound(Arr, 2) To UBound(Arr, 2)
-    V(ColNdx) = Arr(Row1, ColNdx)
+    v(ColNdx) = Arr(Row1, ColNdx)
     result(Row1, ColNdx) = Arr(Row2, ColNdx)
-    result(Row2, ColNdx) = V(ColNdx)
+    result(Row2, ColNdx) = v(ColNdx)
 Next ColNdx
 
 SwapArrayRows = result
@@ -3573,7 +3573,7 @@ Function SwapArrayColumns(Arr As Variant, Col1 As Long, Col2 As Long) As Variant
 ' This function returns an array based on Arr with Col1 and Col2 swapped.
 ' It returns the result array or NULL if an error occurred.
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-Dim V As Variant
+Dim v As Variant
 Dim result As Variant
 Dim RowNdx As Long
 
@@ -3620,14 +3620,14 @@ End If
 '''''''''''''''''''''''''''''''''''''''''
 ' Redim V to the number of columns.
 '''''''''''''''''''''''''''''''''''''''''
-ReDim V(LBound(Arr, 1) To UBound(Arr, 1))
+ReDim v(LBound(Arr, 1) To UBound(Arr, 1))
 '''''''''''''''''''''''''''''''''''''''''
 ' Put Col2 in V
 '''''''''''''''''''''''''''''''''''''''''
 For RowNdx = LBound(Arr, 1) To UBound(Arr, 1)
-    V(RowNdx) = Arr(RowNdx, Col1)
+    v(RowNdx) = Arr(RowNdx, Col1)
     result(RowNdx, Col1) = Arr(RowNdx, Col2)
-    result(RowNdx, Col2) = V(RowNdx)
+    result(RowNdx, Col2) = v(RowNdx)
 Next RowNdx
 
 SwapArrayColumns = result

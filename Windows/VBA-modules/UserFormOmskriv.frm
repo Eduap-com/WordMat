@@ -17,7 +17,7 @@ Option Explicit
 
 Public annuller As Boolean
 Public TempDefs As String
-Public vars As String
+Public Vars As String
 Public SammeLinje As Boolean
 
 Private EventsCol As New Collection
@@ -140,7 +140,7 @@ Dim Arr() As String, i As Integer
     ComboBox_DecType.ListIndex = MaximaDecOutType - 1
     
     
-    Arr = Split(vars, ";")
+    Arr = Split(Vars, ";")
     ' definitioner vises
     
     For i = 0 To UBound(Arr)

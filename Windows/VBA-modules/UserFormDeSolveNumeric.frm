@@ -844,38 +844,38 @@ End Function
 
 Sub OpdaterDefinitioner()
    ' ser efter variable i textboxene og indsætter under definitioner
-   Dim vars As String
+   Dim Vars As String
    Dim Var As String, var2 As String
    Dim ea As New ExpressionAnalyser
    Dim Arr As Variant
    Dim i As Integer, s As String
    Validate
     
-   vars = vars & GetTextboxVars(TextBox_eq1, TextBox_varx)
-   vars = vars & GetTextboxVars(TextBox_eq2, TextBox_varx)
-   vars = vars & GetTextboxVars(TextBox_eq3, TextBox_varx)
-   vars = vars & GetTextboxVars(TextBox_eq4, TextBox_varx)
-   vars = vars & GetTextboxVars(TextBox_eq5, TextBox_varx)
-   vars = vars & GetTextboxVars(TextBox_eq6, TextBox_varx)
-   vars = vars & GetTextboxVars(TextBox_eq7, TextBox_varx)
-   vars = vars & GetTextboxVars(TextBox_eq8, TextBox_varx)
-   vars = vars & GetTextboxVars(TextBox_eq9, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq1, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq2, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq3, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq4, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq5, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq6, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq7, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq8, TextBox_varx)
+   Vars = Vars & GetTextboxVars(TextBox_eq9, TextBox_varx)
     
-   omax.FindVariable vars, False ' fjerner dobbelte
-   vars = omax.vars
-   vars = RemoveVar(vars, TextBox_var1.text)
-   vars = RemoveVar(vars, TextBox_var2.text)
-   vars = RemoveVar(vars, TextBox_var3.text)
-   vars = RemoveVar(vars, TextBox_var4.text)
-   vars = RemoveVar(vars, TextBox_var5.text)
-   vars = RemoveVar(vars, TextBox_var6.text)
-   vars = RemoveVar(vars, TextBox_var7.text)
-   vars = RemoveVar(vars, TextBox_var8.text)
-   vars = RemoveVar(vars, TextBox_var9.text)
+   omax.FindVariable Vars, False ' fjerner dobbelte
+   Vars = omax.Vars
+   Vars = RemoveVar(Vars, TextBox_var1.text)
+   Vars = RemoveVar(Vars, TextBox_var2.text)
+   Vars = RemoveVar(Vars, TextBox_var3.text)
+   Vars = RemoveVar(Vars, TextBox_var4.text)
+   Vars = RemoveVar(Vars, TextBox_var5.text)
+   Vars = RemoveVar(Vars, TextBox_var6.text)
+   Vars = RemoveVar(Vars, TextBox_var7.text)
+   Vars = RemoveVar(Vars, TextBox_var8.text)
+   Vars = RemoveVar(Vars, TextBox_var9.text)
     
-   If Left(vars, 1) = ";" Then vars = right(vars, Len(vars) - 1)
+   If Left(Vars, 1) = ";" Then Vars = right(Vars, Len(Vars) - 1)
     
-   ea.text = vars
+   ea.text = Vars
    Do While right(TextBox_definitioner.text, 2) = VbCrLfMac
       TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
    Loop
@@ -921,11 +921,11 @@ Sub OpdaterDefinitioner()
 End Sub
 Function GetTextboxVars(tb As TextBox, tbvar As TextBox) As String
     If Len(tb.text) > 0 Then
-        omax.vars = ""
+        omax.Vars = ""
         omax.FindVariable tb.text, False
-        omax.vars = RemoveVar(omax.vars, tbvar.text)
-        If Len(omax.vars) > 0 Then
-            GetTextboxVars = ";" & omax.vars
+        omax.Vars = RemoveVar(omax.Vars, tbvar.text)
+        If Len(omax.Vars) > 0 Then
+            GetTextboxVars = ";" & omax.Vars
         End If
     End If
 End Function
