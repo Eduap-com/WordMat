@@ -56,6 +56,9 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
         GetErrorDefinition.Title = Sprog.SyntaxError
         Pos = InStr(CheckText, "incorrect syntax: Too many")
         GetErrorDefinition.Description = Sprog.SyntaxError & ". " & vbCrLf & Sprog.TooMany & " " & Mid(CheckText, Pos + 29, 1)
+    ElseIf InStr(CheckText2, "incorrectsyntax:Found") > 0 Then
+        GetErrorDefinition.Title = Sprog.SyntaxError
+        GetErrorDefinition.Description = GetErrorText("incorrect syntax: ", CheckText)
     ElseIf InStr(CheckText2, "isnotaprefixoperator") > 0 Then
         GetErrorDefinition.Title = Sprog.SyntaxError
         GetErrorDefinition.Description = GetErrorText("is not a prefix operator", CheckText)

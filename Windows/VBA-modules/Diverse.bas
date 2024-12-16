@@ -231,7 +231,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     Dim KB As KeyBinding
     Dim GemT As Template, s As String
     Dim KeybInNormal As Boolean, KBerr As Boolean
-    
+    On Error GoTo slut
     Set GemT = CustomizationContext
         
     Set WT = GetWordMatTemplate(False)
@@ -303,6 +303,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     End If
     
 slut:
+    On Error Resume Next
     CustomizationContext = GemT
 
 End Function
@@ -2227,7 +2228,7 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
 ' Sletter genveje til WordMat makroer der ved en fejl skulle være blevet gemt i normal.dotm
     Dim GemT As Template
     Dim KB As KeyBinding
-'    On Error Resume Next
+    On Error Resume Next
     
     Set GemT = CustomizationContext
             

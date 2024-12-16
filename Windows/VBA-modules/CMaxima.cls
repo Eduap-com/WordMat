@@ -901,6 +901,27 @@ Public Sub ExecuteMaximaCommand(Optional MaxCmd As String, Optional TranslateToM
     End If
     Call RunMaxima
     If StopNow Then GoTo slut
+    
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
 slut:
 End Sub
 
@@ -1021,13 +1042,34 @@ start:
     '    MsgBox MaxProc.LastMaximaOutput
     '    ShowOutputArray
     nr = UBound(Minput)
-    If nr < 2 Or nr = 1000 Then Exit Sub
+    
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        KommentarOutput = ""
+        For i = 0 To nr - 1
+            KommentarOutput = KommentarOutput & Minput(nr - i)
+        Next
+        KommentarOutput = Replace(KommentarOutput, vbCrLf, "")
+    End If
+    
+    
+'    If nr < 2 Or nr = 1000 Then Exit Sub
 
-    KommentarOutput = ""
-    For i = 0 To nr - 1
-        KommentarOutput = KommentarOutput & Minput(nr - i)
-    Next
-    KommentarOutput = Replace(KommentarOutput, vbCrLf, "")
 
     '    MaximaOutput = Trim(ConvertToWordSymbols(Moutput(nr))) ' numerisk med radcan
 
@@ -1099,11 +1141,33 @@ Sub MaximaSolveInequality(variabel As String)
     If StopNow Then GoTo slut
 
     nr = UBound(Minput)
-    If Not MaximaExact = 2 Then
-        MaximaOutput = ConvertToWordSymbols(moutput(nr - 2))
-    End If
+    
 
-    ConvertOutputToSolved2 (variabel)
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        If Not MaximaExact = 2 Then
+            MaximaOutput = ConvertToWordSymbols(moutput(nr - 2))
+        End If
+        ConvertOutputToSolved2 (variabel)
+    End If
+    
+    
+
 
     GoTo slut
 
@@ -1202,23 +1266,45 @@ Sub MaximaSolveNumeric(ByVal variabel As String, ByVal guess As String, Optional
     Call RunMaxima
     If StopNow Then GoTo slut
 
-    If LmSet Then
-        ' notation med L={}
-        MaximaOutput = Trim(MaximaOutput)
-        If MaximaOutput <> "" Then
-            MaximaOutput = Replace(MaximaOutput, "[", "")
-            MaximaOutput = Replace(MaximaOutput, "]", "")
-            MaximaOutput = Replace(MaximaOutput, "=", "")
-            MaximaOutput = Replace(MaximaOutput, variabel, "")
-            MaximaOutput = "L={" & MaximaOutput & "}"
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
         End If
-    Else    ' notation med x=...
-        MaximaOutput = RemoveBrackets(MaximaOutput)
-        If MaximaOutput <> "" Then
-            MaximaOutput = variabel & VBA.ChrW(&H2248) & RemoveBrackets(MaximaOutput)
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        If LmSet Then
+            ' notation med L={}
+            MaximaOutput = Trim(MaximaOutput)
+            If MaximaOutput <> "" Then
+                MaximaOutput = Replace(MaximaOutput, "[", "")
+                MaximaOutput = Replace(MaximaOutput, "]", "")
+                MaximaOutput = Replace(MaximaOutput, "=", "")
+                MaximaOutput = Replace(MaximaOutput, variabel, "")
+                MaximaOutput = "L={" & MaximaOutput & "}"
+            End If
+        Else    ' notation med x=...
+            MaximaOutput = RemoveBrackets(MaximaOutput)
+            If MaximaOutput <> "" Then
+                MaximaOutput = variabel & VBA.ChrW(&H2248) & RemoveBrackets(MaximaOutput)
+            End If
+            MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    " & variabel & VBA.ChrW(&H2248))    ' komma erstattes med eller
         End If
-        MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    " & variabel & VBA.ChrW(&H2248))    ' komma erstattes med eller
     End If
+    
 
 slut:
 End Sub
@@ -1288,25 +1374,47 @@ Sub Nsolve(ByVal variabel As String, ByVal qn As Integer, ByVal qm As Integer, B
 #End If
     If StopNow Then GoTo slut
 
-    If LmSet Then
-        ' notation med L={}
-        MaximaOutput = Trim(MaximaOutput)
-        If MaximaOutput <> "" Then
-            MaximaOutput = Replace(MaximaOutput, "[", "")
-            MaximaOutput = Replace(MaximaOutput, "]", "")
-            MaximaOutput = Replace(MaximaOutput, "=", "")
-            MaximaOutput = Replace(MaximaOutput, variabel, "")
-            MaximaOutput = "L={" & MaximaOutput & "}"
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
         End If
-    Else    ' notation med x=...
-        MaximaOutput = RemoveBrackets(MaximaOutput)
-        MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
-        MaximaOutput = Replace(MaximaOutput, "=", VBA.ChrW(&H2248))    ' cirka ligmed
-        '    If MaximaOutput <> "" Then
-        '        MaximaOutput = variabel & VBA.ChrW(&H2248) & RemoveBrackets(MaximaOutput)
-        '    End If
-        '    MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    " & variabel & VBA.ChrW(&H2248)) ' komma erstattes med eller
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        If LmSet Then
+            ' notation med L={}
+            MaximaOutput = Trim(MaximaOutput)
+            If MaximaOutput <> "" Then
+                MaximaOutput = Replace(MaximaOutput, "[", "")
+                MaximaOutput = Replace(MaximaOutput, "]", "")
+                MaximaOutput = Replace(MaximaOutput, "=", "")
+                MaximaOutput = Replace(MaximaOutput, variabel, "")
+                MaximaOutput = "L={" & MaximaOutput & "}"
+            End If
+        Else    ' notation med x=...
+            MaximaOutput = RemoveBrackets(MaximaOutput)
+            MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
+            MaximaOutput = Replace(MaximaOutput, "=", VBA.ChrW(&H2248))    ' cirka ligmed
+            '    If MaximaOutput <> "" Then
+            '        MaximaOutput = variabel & VBA.ChrW(&H2248) & RemoveBrackets(MaximaOutput)
+            '    End If
+            '    MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    " & variabel & VBA.ChrW(&H2248)) ' komma erstattes med eller
+        End If
     End If
+
 
 slut:
 End Sub
@@ -1397,7 +1505,29 @@ Sub SolveSystem(Variable As String)
     Call RunMaxima
     If StopNow Then GoTo slut
 
-    ConvertOutputToSolved2 (Variable)
+    Dim nr As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        ConvertOutputToSolved2 (Variable)
+    End If
+
 
 slut:
 End Sub
@@ -1449,20 +1579,43 @@ Sub Eliminate(Variable As String)
     Call RunMaxima
     If StopNow Then GoTo slut
 
-    MaximaOutput = Mid(MaximaOutput, 2, Len(MaximaOutput) - 2)
-    Arr = Split(MaximaOutput, ListSeparator)
-    If Not (InStr(Arr(0), "=") > 0) Then
-        MaximaOutput = Arr(0) & "=0"
-    Else
-        MaximaOutput = Arr(0)
-    End If
-    For i = 1 To UBound(Arr)
-        If Not (InStr(Arr(i), "=") > 0) Then
-            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & Arr(i) & "=0"
-        Else
-            MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & Arr(i)
+    Dim nr As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
         End If
-    Next
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        MaximaOutput = Mid(MaximaOutput, 2, Len(MaximaOutput) - 2)
+        Arr = Split(MaximaOutput, ListSeparator)
+        If Not (InStr(Arr(0), "=") > 0) Then
+            MaximaOutput = Arr(0) & "=0"
+        Else
+            MaximaOutput = Arr(0)
+        End If
+        For i = 1 To UBound(Arr)
+            If Not (InStr(Arr(i), "=") > 0) Then
+                MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & Arr(i) & "=0"
+            Else
+                MaximaOutput = MaximaOutput & "    " & VBA.ChrW(8743) & "    " & Arr(i)
+            End If
+        Next
+    End If
+    
+
 
 slut:
 End Sub
@@ -1503,7 +1656,29 @@ Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional
 
     '    MaximaOutput = Mid(MaximaOutput, 2, Len(MaximaOutput) - 2)
 
-    ConvertOutputToSolved2 (Variable)
+    Dim nr As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        ConvertOutputToSolved2 (Variable)
+    End If
+
 
 slut:
 End Sub
@@ -1659,19 +1834,22 @@ start:
         End If
     End If
 
-    Dim nr As Integer, i As Integer
+    Dim nr As Integer, i As Integer, DefNo As Integer
     Dim eql As String
     nr = UBound(Minput)
+'    DefNo = UBound(ldefname) + 1
+    DefNo = defindex
 
-    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
-        MaximaOutput = ""
+    If DefNo > 0 And nr <= 1 + DefNo Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
         For i = 1 To nr
             KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
         Next
         If nr = 1 And Len(moutput(1)) < 2 Then
-            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
-        Else
-            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+            If Not MathOArr(DefNo - nr) Is Nothing Then MathOArr(DefNo - nr).Range.Select
+        ElseIf DefNo - nr - 1 >= 0 Then
+            If Not MathOArr(DefNo - nr - 1) Is Nothing Then MathOArr(DefNo - nr - 1).Range.Select
         End If
         DefFejl = True
 '        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
@@ -2016,6 +2194,27 @@ Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid
     Call RunMaxima
     If StopNow Then GoTo slut
 
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
+
 slut:
 End Sub
 Sub Reduce()
@@ -2061,6 +2260,27 @@ Sub Reduce()
     Call RunMaxima
     If StopNow Then GoTo slut
 
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
+
 slut:
 End Sub
 Sub CompareTest()
@@ -2099,6 +2319,26 @@ Sub CompareTest()
     Call RunMaxima
     If StopNow Then GoTo slut
 
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
 
 slut:
 End Sub
@@ -2138,6 +2378,26 @@ Sub Factor()
     Call RunMaxima
     If StopNow Then GoTo slut
 
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
 
 slut:
 End Sub
@@ -2179,7 +2439,26 @@ Sub Expand()
     Call RunMaxima
     If StopNow Then GoTo slut
 
-    '    MaximaOutput = Replace(MaximaOutput, "%i", "i")
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
 
 slut:
 End Sub
@@ -2210,6 +2489,28 @@ Sub Differentier(variabel As String)
     AddStandardSecondary
 
     Call RunMaxima
+    
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
+    
 slut:
 End Sub
 Sub UserRegression(fkt As String, Var As String, xlist As String, ylist As String, prec As Integer, VarGuess As String)
@@ -2279,6 +2580,27 @@ Sub Integrer(variabel As String)
 
     Call RunMaxima
 
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
+
 slut:
 End Sub
 Sub SolveDENumeric(variabel As String, xmin As String, xmax As String, xstep As String, yvarlist As String, initguesslist As String, DElist As String)
@@ -2309,6 +2631,27 @@ Sub SolveDENumeric(variabel As String, xmin As String, xmax As String, xstep As 
         Call RunMaxima
     End If
     If StopNow Then GoTo slut
+    
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
     
 slut:
 End Sub
@@ -2398,14 +2741,36 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
     
     If StopNow Then GoTo slut
 
-    If funktion = "qvar" Then
-        MaximaOutput = Replace(MaximaOutput, "qvar", gemfkt)
-    End If
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
 
-    If Len(MaximaOutput) > 1 Then
-        MaximaOutput = RemoveBrackets(MaximaOutput)
-        MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
+    If defindex > 0 And nr <= 1 + defindex Then ' fejl i definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf ' ændret fra moutput(1) i v.1.29  da fejl ikke kom med
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+'        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        If funktion = "qvar" Then
+            MaximaOutput = Replace(MaximaOutput, "qvar", gemfkt)
+        End If
+    
+        If Len(MaximaOutput) > 1 Then
+            MaximaOutput = RemoveBrackets(MaximaOutput)
+            MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & VBA.ChrW(8744) & "    ")    ' komma erstattes med eller
+        End If
     End If
+    
 
 slut:
 End Sub
@@ -4617,11 +4982,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     ' eksponentiel notation positiv   ' før insertbracketbefore da ellers 4E-13/x -> 4E-(13)/x men c^5.0E-1 -> c^0.5*10^-1 duer ikke
     Pos = 0
     Do
-'#If Mac Then ' SBCL
         Pos = InStr(Pos + 1, ea.text, "e+")
-'#Else 'GCL
-'        pos = InStr(pos + 1, ea.text, "E+")
-'#End If
         If Pos > 1 Then
             If ea.IsNumber(Pos - 1) Then
                 ea.Pos = Pos + 1
@@ -4638,11 +4999,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     ' eksponentiel notation negativ
     Pos = 0
     Do
-'#If Mac Then ' SBCL
         Pos = InStr(Pos + 1, ea.text, "e-")
-'#Else 'GCL
-'        pos = InStr(pos + 1, ea.text, "E-")
-'#End If
         If Pos > 1 Then
             If ea.IsNumber(Pos - 1) Then
                 ea.Pos = Pos + 1
@@ -4654,6 +5011,24 @@ Function ConvertToWordSymbols(ByVal text As String) As String
             End If
         End If
     Loop While Pos > 1
+
+    ' eksponentiel notation uden fortegn
+    Pos = 0
+    Do
+        Pos = InStr(Pos + 1, ea.text, "e")
+        If Pos > 1 Then
+            If ea.IsNumber(Pos - 1) And ea.IsNumber(Pos + 1) Then
+                ea.Pos = Pos + 1
+                Do
+                    ea.Pos = ea.Pos + 1
+                Loop While ea.IsNumber(ea.Pos)
+                ea.text = Left(ea.text, Pos - 1) & gtegn & "10^" & Mid(ea.text, Pos + 1, ea.Pos - Pos - 1) & " " & right(ea.text, Len(ea.text) - ea.Pos + 1)
+                '    ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 1, ea.pos - pos - 1) & Right(ea.text, Len(ea.text) - ea.pos + 1)
+            End If
+        End If
+    Loop While Pos > 1
+
+
 
     ' efter eksponentiel da 1E-1*x går galt
     ' 1* fjernes
@@ -6349,17 +6724,19 @@ slut:
         r.text = VBA.ChrW(13)
     End If
 End Sub
-Sub GoToEndOfSelectedMaths(Optional DontGoBack As Boolean = False)
+Sub GoToEndOfSelectedMaths(Optional DontGoBack As Boolean = False, Optional ResultAfterNum As Boolean = True)
     Dim mc As OMaths
     Dim i As Integer
     
-    If Selection.Tables.Count > 0 Then 'nummereret ligning
-        If Selection.Tables(1).Columns.Count = 3 Then
-            If Selection.Tables(1).Cell(1, 3).Range.Fields.Count > 0 Then
-                Selection.Tables(1).Select
-                Selection.Collapse wdCollapseEnd
-'                Selection.MoveRight wdCharacter, 1
-                Exit Sub
+    If ResultAfterNum Then
+        If Selection.Tables.Count > 0 Then 'nummereret ligning
+            If Selection.Tables(1).Columns.Count = 3 Then
+                If Selection.Tables(1).Cell(1, 3).Range.Fields.Count > 0 Then
+                    Selection.Tables(1).Select
+                    Selection.Collapse wdCollapseEnd
+                    '                Selection.MoveRight wdCharacter, 1
+                    Exit Sub
+                End If
             End If
         End If
     End If
@@ -7017,7 +7394,7 @@ Function FindDefinitions() As String
                 FindDefinitions = "error"
                 Exit Function
             End If
-            t = AddDefinition(s, ra.OMaths(i))
+            t = AddDefinition(s, ActiveDocument.Range.OMaths(i)) 'ra.OMaths(i)
             If t = "STOP" Then Exit For
             FindDefinitions = t & FindDefinitions
         End If
@@ -7026,6 +7403,10 @@ Function FindDefinitions() As String
         ReDim Preserve ldefname(defindex - 1)
         ReDim Preserve ldefvalue(defindex - 1)
         ReDim Preserve MathOArr(defindex - 1)
+    Else
+        ReDim Preserve ldefname(0)
+        ReDim Preserve ldefvalue(0)
+        ReDim Preserve MathOArr(0)
     End If
 
     GoTo slut
@@ -7191,6 +7572,10 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
                     defenk = CodeForMaxima(defenk, CASengine)
                     If InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
                         AddDefinition = AddDefinition & GetAssumeText(defenk)
+                        ldefname(defindex) = defenk
+                        ldefvalue(defindex) = ""
+                        Set MathOArr(defindex) = MathObj
+                        defindex = defindex + 1
                         GoTo hop
                     End If
                     If Not deflign Then

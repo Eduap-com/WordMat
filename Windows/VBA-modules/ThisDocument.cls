@@ -9,6 +9,11 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 ' OBS: Dette modul kan ikke fjernes. Det bliver eksporteret ved ExportAllModules, men kan ikke importere ved ImportAllModules.
 Option Explicit
+Private DontRun As Boolean
+
+Private Sub ActivateDontRun()
+    DontRun = True
+End Sub
 
 Private Sub CommandButton_backup_Click()
     BackupThisDocument
@@ -35,6 +40,7 @@ Private Sub Document_Close()
 ' køres kun hvis WordMat.dotm er åbnet direkte og ikke som global skabelon
 #If Mac Then
 #Else
+    If DontRun Then Exit Sub
     If DateDiff("n", ExportDatetime, Now) > 2 Then ' hvis lige eksporteret, så spørg ikke
         If MsgBox("Do you want to Export modules and create a backup?", vbYesNo, "Export?") = vbYes Then
             ExportAllModules

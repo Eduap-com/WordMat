@@ -316,7 +316,12 @@ Sub MaximaCommand()
     End If
 
 
-    If CheckForError Then GoTo slut
+    If CheckForError Then
+        scrollpos = ActiveWindow.VerticalPercentScrolled
+        sslut = Selection.End
+        sstart = Selection.start
+        GoTo slut
+    End If
 
     omax.GoToEndOfSelectedMaths DontGoBack
     Selection.TypeParagraph
@@ -430,7 +435,12 @@ Sub MaximaSolveInequality(Optional variabel As String)
         End If
         
         
-        If CheckForError Then GoTo slut
+        If CheckForError Then
+            scrollpos = ActiveWindow.VerticalPercentScrolled
+            sslut = Selection.End
+            sstart = Selection.start
+            GoTo slut
+        End If
         
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
@@ -528,10 +538,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     sstart = Selection.start
     sslut = Selection.End
 
-    If omax.DefFejl Then
-        MsgBox2 Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo slut
-    End If
+    If omax.DefFejl Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox2 Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
@@ -678,7 +685,12 @@ newcas:
                 GoTo slut
             End If
         End If
-        If CheckForError Then GoTo slut
+        If CheckForError Then
+            scrollpos = ActiveWindow.VerticalPercentScrolled
+            sslut = Selection.End
+            sstart = Selection.start
+            GoTo slut
+        End If
 
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
@@ -864,7 +876,12 @@ newcassys:
         End If
         
         If omax.StopNow Then GoTo slut
-        If CheckForError Then GoTo slut
+        If CheckForError Then
+            scrollpos = ActiveWindow.VerticalPercentScrolled
+            sslut = Selection.End
+            sstart = Selection.start
+            GoTo slut
+        End If
         If omax.StopNow Then GoTo slut
         Application.ScreenUpdating = False
         
@@ -878,10 +895,7 @@ newcassys:
             GoTo slut
         End If
 
-        If (omax.DefFejl = True) Then
-            MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-            GoTo slut
-        End If
+        If omax.DefFejl Then GoTo slut
 
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
         
@@ -956,11 +970,11 @@ newcassys:
                     Selection.TypeText Sprog.A(138) & variabel
                 End If
             Else
-                If (omax.DefFejl = True) Then
-                    MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-                Else
+                If omax.DefFejl Then GoTo slut
+'                    MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+'                Else
                     fejlm = Sprog.A(131) & vbCrLf
-                End If
+'                End If
                 If InStr(omax.Kommando, "=") < 1 Then
                     fejlm = fejlm & Sprog.A(139) & vbCrLf
                 End If
@@ -1087,10 +1101,7 @@ Sub MaximaEliminate()
     sstart = Selection.start
     sslut = Selection.End
 
-    If omax.DefFejl Then
-        MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo slut
-    End If
+    If omax.DefFejl Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
@@ -1140,7 +1151,12 @@ Sub MaximaEliminate()
         
         
         If omax.StopNow Then GoTo slut
-        If CheckForError Then GoTo slut
+        If CheckForError Then
+            scrollpos = ActiveWindow.VerticalPercentScrolled
+            sslut = Selection.End
+            sstart = Selection.start
+            GoTo slut
+        End If
         
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
@@ -1157,10 +1173,10 @@ Sub MaximaEliminate()
             GoTo slut
         End If
 
-        If (omax.DefFejl = True) Then
-            MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-            GoTo slut
-        End If
+        If omax.DefFejl Then GoTo slut
+'            MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+'            GoTo slut
+'        End If
 
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
 
@@ -1198,11 +1214,7 @@ Sub MaximaEliminate()
                     Selection.TypeText Sprog.A(138) & variabel
                 End If
             Else
-                If (omax.DefFejl = True) Then
-                    MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-                Else
-                    fejlm = Sprog.A(131) & vbCrLf
-                End If
+                If omax.DefFejl Then GoTo slut
                 If InStr(omax.Kommando, "=") < 1 Then
                     fejlm = fejlm & Sprog.A(139) & vbCrLf
                 End If
@@ -1263,10 +1275,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     sstart = Selection.start
     sslut = Selection.End
 
-    If omax.DefFejl Then
-        MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-        GoTo slut
-    End If
+    If omax.DefFejl Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
@@ -1384,7 +1393,12 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         UFnsolve.Show
 
         If omax.StopNow Then GoTo slut
-        If CheckForError Then GoTo slut
+        If CheckForError Then
+            scrollpos = ActiveWindow.VerticalPercentScrolled
+            sslut = Selection.End
+            sstart = Selection.start
+            GoTo slut
+        End If
         
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
@@ -1522,11 +1536,8 @@ ghop:
             End If
             omax.InsertMaximaOutput
         Else
-            If (omax.DefFejl = True) Then
-                MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-            Else
-                fejlm = Sprog.A(383) & "." & vbCrLf
-            End If
+            If omax.DefFejl Then GoTo slut
+            fejlm = Sprog.A(383) & "." & vbCrLf
             If InStr(omax.Kommando, "=") < 1 Then
                 fejlm = fejlm & Sprog.A(139) & "." & vbCrLf
             End If
@@ -1641,7 +1652,12 @@ Sub MaximaSolveNumeric(Optional Var As String)
         '    Set UFWait.omax = omax
         '    UFWait.Show
         If omax.StopNow Then GoTo slut
-        If CheckForError Then GoTo slut
+        If CheckForError Then
+            scrollpos = ActiveWindow.VerticalPercentScrolled
+            sslut = Selection.End
+            sstart = Selection.start
+            GoTo slut
+        End If
         '    omax.KommentarOutput = TranslateReplaceComment(omax.KommentarOutput)
         If InStr(omax.MaximaOutput, VBA.ChrW(8776) & "false") > 0 Then
             omax.MaximaOutput = ""
@@ -1676,11 +1692,8 @@ Sub MaximaSolveNumeric(Optional Var As String)
 
         Else
             Dim fejlm As String
-            If (omax.DefFejl = True) Then
-                MsgBox Sprog.DefError & vbCrLf & VisDef & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
-            Else
-                fejlm = Sprog.A(388) & "." & vbCrLf
-            End If
+            If omax.DefFejl Then GoTo slut
+            fejlm = Sprog.A(388) & "." & vbCrLf
             fejlm = fejlm & TranslateComment(omax.KommentarOutput)
             MsgBox fejlm & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.A(389)
         End If
@@ -1841,7 +1854,7 @@ Sub beregn()
     Oundo.StartCustomRecord
     
     If Len(omax.MaximaOutput) > 0 And Trim(omax.MaximaOutput) <> "=res1" Then
-        InsertOutput omax.MaximaOutput
+        InsertOutput omax.MaximaOutput, False
     Else
         fejlm = Sprog.A(128) & vbCrLf
         fejlm = fejlm & TranslateComment(omax.KommentarOutput)
@@ -1973,7 +1986,12 @@ Sub Omskriv()
     
     
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+        If CheckForError Then
+            scrollpos = ActiveWindow.VerticalPercentScrolled
+            sslut = Selection.End
+            sstart = Selection.start
+            GoTo slut
+        End If
 
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -2085,7 +2103,12 @@ Sub reducer()
     
     
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+        If CheckForError Then
+            scrollpos = ActiveWindow.VerticalPercentScrolled
+            sslut = Selection.End
+            sstart = Selection.start
+            GoTo slut
+        End If
     
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -2150,7 +2173,12 @@ Sub CompareTest()
     '    omax.OpenCmd
     omax.CompareTest
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+    If CheckForError Then
+        scrollpos = ActiveWindow.VerticalPercentScrolled
+        sslut = Selection.End
+        sstart = Selection.start
+        GoTo slut
+    End If
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
     '    omax.CloseCmd
@@ -2241,7 +2269,12 @@ Sub faktoriser()
 
     '    omax.OpenCmd
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+    If CheckForError Then
+        scrollpos = ActiveWindow.VerticalPercentScrolled
+        sslut = Selection.End
+        sstart = Selection.start
+        GoTo slut
+    End If
     
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -2328,7 +2361,12 @@ Sub udvid()
     End If
 
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+    If CheckForError Then
+        scrollpos = ActiveWindow.VerticalPercentScrolled
+        sslut = Selection.End
+        sstart = Selection.start
+        GoTo slut
+    End If
     
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -2419,7 +2457,12 @@ Sub Differentier()
     
     
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+    If CheckForError Then
+        scrollpos = ActiveWindow.VerticalPercentScrolled
+        sslut = Selection.End
+        sstart = Selection.start
+        GoTo slut
+    End If
     
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -2510,7 +2553,12 @@ Sub Integrer()
     
     
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+    If CheckForError Then
+        scrollpos = ActiveWindow.VerticalPercentScrolled
+        sslut = Selection.End
+        sstart = Selection.start
+        GoTo slut
+    End If
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
@@ -2859,7 +2907,12 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     
         
     If omax.StopNow Then GoTo slut
-    If CheckForError Then GoTo slut
+    If CheckForError Then
+        scrollpos = ActiveWindow.VerticalPercentScrolled
+        sslut = Selection.End
+        sstart = Selection.start
+        GoTo slut
+    End If
     
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -2923,11 +2976,11 @@ Function TranslateReplaceOutput(comm As String) As String
 
     TranslateReplaceOutput = comm
 End Function
-Sub InsertOutput(text As String)
+Sub InsertOutput(text As String, Optional ResultAfterTable As Boolean = True)
 ' indsætter text efter den mathobj cursoren er i på sikker måde
     Dim IsBold As Boolean
     If Selection.start = Selection.End Then
-        omax.GoToEndOfSelectedMaths
+        omax.GoToEndOfSelectedMaths False, ResultAfterTable
     Else
         Selection.Collapse wdCollapseEnd
     End If

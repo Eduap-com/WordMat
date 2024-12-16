@@ -125,6 +125,10 @@ Private Sub UserForm_Activate()
     Label2.Caption = Sprog.SearchingSolutions
     omax.Kommando = Ligning
     omax.Nsolve variabel, 0, 2, 15, 1, 0, 0
+    If omax.DefFejl Then
+        Me.hide
+        GoTo slut
+    End If
     If Finished Then GoTo slut
     If omax.StopNow Or (Timer - tid) > 15 Then GoTo afslut
     If Len(Label_nsolve.Caption) < Len(omax.MaximaOutput) Then Label_nsolve.Caption = Replace(omax.MaximaOutput, ChrW(8776), " " & ChrW(8776) & " ")

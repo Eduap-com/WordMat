@@ -166,7 +166,7 @@ End Sub
 
 Private Sub UserForm_Activate()
     Dim i As Integer, svar As String
-    
+    On Error GoTo fejl
     SetCaptions
     TextBox_def.WordWrap = True
     TextBox_def.WordWrap = False
@@ -229,9 +229,15 @@ Private Sub UserForm_Activate()
     
     If Eliminate Then
         ListBox_vars.MultiSelect = fmMultiSelectMulti
-        For i = 0 To NoEq - 2
-            ListBox_vars.Selected(i) = True
-        Next
+        If ListBox_vars.ListCount >= NoEq Then
+            For i = 0 To NoEq - 2
+                ListBox_vars.Selected(i) = True
+            Next
+        Else
+            For i = 0 To ListBox_vars.ListCount - 1
+                ListBox_vars.Selected(i) = True
+            Next
+        End If
         Label_choose.Caption = Sprog.A(247) & " " & NoEq - 1 & " " & Sprog.A(245)
         Label_tast.Caption = Sprog.A(248) & " " & NoEq - 1 & " " & Sprog.A(249)
     ElseIf NoEq > 1 Then
@@ -251,6 +257,8 @@ Private Sub UserForm_Activate()
         ListBox_vars.MultiSelect = fmMultiSelectSingle
     End If
 
+fejl:
+    On Error Resume Next
     ListBox_vars.SetFocus
 End Sub
 Sub FillComboBoxCifre()
