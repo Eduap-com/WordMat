@@ -1031,39 +1031,55 @@ solq:RemoveIncorrect(makelist(qvar=zq,zq,solq))
 
 EmptyToZero(qin):=if qin=[] then 0 else qin$
 
-nsolverec(qfkt,qvar,sollq,qn,qm):=block([qfkt,ql,glf,qi],
-qi:1,
-ql:makelist((1b-1+i*1b-2)*10^qn,i,0,90),
-qlf:flatten(errcatch(qfkt(ql))),
-do(
-if qi>=length(qlf) then return(),
-if qlf[qi]=0.0b0 then (if op(qfkt(ql[qi]-10^(qn-3)))#op(qfkt(ql[qi]+10^(qn-3))) then sollq:append(sollq,flatten([errcatch(bf_find_root(qfkt,qvar,ql[qi],ql[qi+1]))]))
-) elseif qlf[qi+1]=0.0b0 then (nothing)
- elseif not(freeof(%i,qlf[qi])) then (nothing)
- elseif op(qlf[qi])#op(qlf[qi+1]) then (
-sollq:append(sollq,flatten([errcatch(bf_find_root(qfkt,qvar,ql[qi],ql[qi+1]))]))
-), 
-qi:qi+1
-),
-if (absolute_real_time()-qti)>qmaxti then (print("Time out"),return(sollq)), 
-if length(sollq)>=qantal then (print(concat("Stopped searching because " , qantal , " solutions were found")),return(sollq)),
-qi:1,
-qlf:flatten(errcatch(qfkt(-ql))),
-do(
-if qi>=length(qlf) then return(),
-if qlf[qi]=0.0b0 then (if op(qfkt(-ql[qi]-10^(qn-3)))#op(qfkt(-ql[qi]+10^(qn-3))) then
-(sollq:append(sollq,flatten([errcatch(bf_find_root(qfkt,qvar,-ql[qi+1],-ql[qi]))])))
-)  elseif qlf[qi+1]=0.0b0 then (nothing)
-   elseif not(freeof(%i,qlf[qi])) then (nothing)
-   elseif op(qlf[qi])#op(qlf[qi+1]) then (
-sollq:append(sollq,flatten([errcatch(bf_find_root(qfkt,qvar,-ql[qi+1],-ql[qi]))]))
-),
-qi:qi+1
-),
-slut,
-if (absolute_real_time()-qti)>qmaxti then (print("Time out"),return(sollq)), 
-if length(sollq)>=qantal then (print(concat("Stopped searching because " , qantal , " solutions were found")),return(sollq)),
-if qn>qm then return(sollq) else nsolverec(qlign,qvar,sollq,qn+1,qm)
+nsolverec(qfkt, qvar, sollq, qn, qm) := block([ql, glf, qi],
+	qi: 1,
+	ql: makelist((1b-1 + i * 1b-2) * 10^qn, i, 0, 90),
+	glf: flatten(errcatch(qfkt(ql))),
+	while qi < length(glf) do (
+		if glf[qi] = 0.0b0 then (
+			if op(qfkt(ql[qi] - 10^(qn - 3))) # op(qfkt(ql[qi] + 10^(qn - 3))) then
+				sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+		) elseif glf[qi + 1] = 0.0b0 then (
+			nothing
+		) elseif not(freeof(%i, glf[qi])) then (
+			nothing
+		) elseif op(glf[qi]) # op(glf[qi + 1]) then (
+			sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+		),
+		qi: qi + 1
+	),
+	if (absolute_real_time() - qti) > qmaxti then (
+		print("Time out"),
+		return(sollq)
+	),
+	if length(sollq) >= qantal then (
+		print(concat("Stopped searching because ", qantal, " solutions were found")),
+		return(sollq)
+	),
+	qi: 1,
+	glf: flatten(errcatch(qfkt(-ql))),
+	while qi < length(glf) do (
+		if glf[qi] = 0.0b0 then (
+			if op(qfkt(-ql[qi] - 10^(qn - 3))) # op(qfkt(-ql[qi] + 10^(qn - 3))) then
+				sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
+		) elseif glf[qi + 1] = 0.0b0 then (
+			nothing
+		) elseif not(freeof(%i, glf[qi])) then (
+			nothing
+		) elseif op(glf[qi]) # op(glf[qi + 1]) then (
+			sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
+		),
+		qi: qi + 1
+	),
+	if (absolute_real_time() - qti) > qmaxti then (
+		print("Time out"),
+		return(sollq)
+	),
+	if length(sollq) >= qantal then (
+		print(concat("Stopped searching because ", qantal, " solutions were found")),
+		return(sollq)
+	),
+	if qn > qm then return(sollq) else nsolverec(qfkt, qvar, sollq, qn + 1, qm)
 )$
 
 RemoveIncorrectNum(sollistq):=block([indq,sollistq2,solq],
