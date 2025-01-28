@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormOmskriv 
    Caption         =   "Omskriv"
-   ClientHeight    =   5595
+   ClientHeight    =   6195
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   10845
@@ -196,6 +196,9 @@ Private Sub SetCaptions()
     CheckBox_trigreduce.Caption = Sprog.TrigReduce
     Label_trigreduce.Caption = Sprog.TrigReduceExplain
     CommandButton_ok.Caption = Sprog.OK
+    
+    CheckBox_completesquare.Caption = Sprog.A(697)
+    Label_completesquare.Caption = Sprog.A(698)
     
     If Sprog.SprogNr = 1 Then
         CheckBox_sammelinje.Caption = "Indsæt samme linje"

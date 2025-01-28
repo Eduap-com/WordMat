@@ -101,8 +101,7 @@ Sub RunTestSequence()
     
     'til test af enkelt
         
-        
-    'goto slut
+'    GoTo Slut
     
     
     ' ikke den kønneste løsning, men tomme linjer bliver spist og hvis der ikke er plads som beregninger kan vokse i, så giver det problemer.
@@ -339,7 +338,7 @@ Sub RunTestSequence()
     'numeric definition test
     InsertTestMath "definer: f(x)=-x^2" & VBA.ChrW(8729) & "" & VBA.ChrW(8730) & "x+2/x;x_1=0,25"
     Selection.TypeParagraph
-    TestSolve "f^' (x)=-32", "x", "x=0,251239    " & VBA.ChrW(8744) & "    x=5,464284"
+    TestSolve "f^' (x)=-32", "x", "x=0,2512389    " & VBA.ChrW(8744) & "    x=5,464284"
     If StopNow Then GoTo Slut
     TestBeregn "y=f^' (x_1 )" & VBA.ChrW(183) & "(x-x_1 )+f(x_1 )", VBA.ChrW(8776) & "-32,3125" & VBA.ChrW(183) & "x+16,04688@$" & VBA.ChrW(8776) & "16,04688-32,3125" & VBA.ChrW(183) & "x"
     InsertSletDef
@@ -369,7 +368,7 @@ Sub RunTestSequence()
     If TestBeregn(VBA.ChrW(8518) & "^2/(" & VBA.ChrW(8518) & "x^2 ) (x^2+2x)", "=2") Then GoTo Slut
     If TestBeregn(VBA.ChrW(8747) & "_1^10" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(x^(-2)+1) dx", "=-(ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2" & VBA.ChrW(8776) & "9,417202@$=-((ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2)" & VBA.ChrW(8776) & "9,417202") Then GoTo Slut
     InsertTestMath "Definer: f(x)=" & VBA.ChrW(8730) & "(3x+9)  ;g(x)=x+3"
-    If TestSolve(VBA.ChrW(8747) & "_0^k" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "g(x)-f(x) " & VBA.ChrW(12311) & " dx=1,5", "k", "k=-3    " & VBA.ChrW(8744) & "    k=7/3") Then GoTo Slut
+    If TestSolve(VBA.ChrW(8747) & "_0^k" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "g(x)-f(x) " & VBA.ChrW(12311) & " dx=1,5", "k", "k=-3    " & VBA.ChrW(8744) & "    k=7/3@$k=-3    " & VBA.ChrW(8744) & "    k=2,333333") Then GoTo Slut
     ' de næste to gav før forkert resultat pga brug ldefint i integrate, så nu anvendes Nintegrate før ldefint, som åbenbart er fejlbarlig.
     If TestBeregn(VBA.ChrW(8747) & "_(-1)^1" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(1+((4" & VBA.ChrW(183) & "x-4" & VBA.ChrW(183) & "x^3 )" & VBA.ChrW(183) & "e^(2" & VBA.ChrW(183) & "x^2-x^4 ) )^2 ) dx", VBA.ChrW(8776) & "4,142057") Then GoTo Slut
     InsertTestMath "Definer: f(x)=0,000003" & VBA.ChrW(183) & "x^4-0,01676" & VBA.ChrW(183) & "x^2+60"

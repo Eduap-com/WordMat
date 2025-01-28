@@ -1,14 +1,14 @@
 /* Examples: solvereal(a*b+c=log(a+x),x)  
 factoring the input may yield different results. Factoring is only done using sqfr() since factor can timeout factor(2^(1.1*x)+1)*/
 
-load(to_poly_solve)$
+/*load(to_poly_solve)$*/
 
 simpsum:true$
 
 [packagefile:true,partswitch:true,domain:real]$
 define_variable(AllTrig,false,boolean)$
 define_variable(uselambertw,true,boolean)$
-define_variable(autonsolve,false,boolean)$
+define_variable(autonsolve,true,boolean)$
 define_variable(solvar,x,any)$
 define_variable(solvar2,x,any)$
 define_variable(solsysvars,[],list)$
@@ -21,7 +21,7 @@ define_variable(solvesteps,[],list)$
 define_variable(dissolveabs,true,boolean)$
 define_variable(showassumptions,true,boolean)$
 define_variable(sepsolvecontext,true,boolean)$
-define_variable(solverealtopoly,true,boolean)$
+define_variable(solverealtopoly,false,boolean)$
 define_variable(solverealmaximasolve,true,boolean)$
 newcontext(solreal)$context:initial$
 
@@ -823,7 +823,7 @@ if IsAnySolved(solu_1a,varq) then go(slutqw) ,
 nxqsol0 ,
 if ContainsTrig(lignq) then go(nxqsol2),
 if solverealtopoly then 
-	(
+	(load(to_poly_solve),
 	solu_1a:ev(errcatch(nicedummies(ev(to_poly_solve(lignq,varq),realonly:false)))[1]),
 	if not(freeof(to_poly_solve,solu_1a)) then go(nxqsol1),
 	solu_1a:flatten(errcatch(args(solu_1a))),
@@ -872,67 +872,67 @@ solverecursive(lignq,varq,condq):=block([solq],
 	iteind:iteind+1,
 	if iteind>35 then return(solq),
 	addsolstep(solq,"Start"),
-	solq:applyswaprule(solq),
-	addsolstep(solq,"Byt side"),
+	solq:applyswaprule(solq),addsolstep(solq,"Byt side"),
 	solq:applyrulelist(solq,divzerorule),addsolstep(solq,"divzerorule"),
 	solq:applyzerorule(solq),addsolstep(solq,"Nulregel"),
-solq:applyaddrule(solq),addsolstep(solq,"addrule"),
-solq:applyrulelist(solq,prodrule4),addsolstep(solq,"prodrule4"),
-solq:applyaddrule2(solq),addsolstep(solq,"addrule2"),
-solq:applyprodrule(solq),addsolstep(solq,"prodrule"),
-solq:applyprodrule2(solq),addsolstep(solq,"prodrule2"),
-/* solq:applyprodrule3(solq),addsolstep(solq,"prodrule3"),  */ /* Overser loesning i fx solvereal(x^2*(x^2-1)=9*(x^2-1),x); fordi der divideres med udtryk hvor x indgaar. Forhaabentlig er den ikke noedvendig. Ellers skal den aendres*/
-solq:applydivrule(solq),addsolstep(solq,"divrule"),
-solq:applydivrule2(solq),addsolstep(solq,"divrule2"),
-solq:applydivrule3(solq),addsolstep(solq,"divrule3"),
-solq:applyrulelist(solq,divrule5),addsolstep(solq,"divrule5"),
-solq:applyrulelist(solq,expandrule),addsolstep(solq,"expandrule"),
-if solq#lignq then return(solverecursive(solq,varq,condq)),
-solq:applyrulelist(solq,absremoverule),addsolstep(solq,"absremoverule"),
-solq:applyabsrule(solq),addsolstep(solq,"lift abs(x)"),
-solq:applyrulelistZero(solq,lambertwillrule),addsolstep(solq,"lambertwillrule"),
-solq:applyrulelistZero(solq,lambertwrule2sol),addsolstep(solq,"lambertwrule2sol"),
-solq:applyrulelistZero(solq,lambertwrule1sol),addsolstep(solq,"lambertwrule1sol"),
-solq:applyrulelistZero(solq,lambertwrulegeneral),addsolstep(solq,"lambertwrulegeneral"),
-solq:applyrulelistZero(solq,lambertwrule2),addsolstep(solq,"lambertwrule2"),
-solq:applyrulelist(solq,powrulezero),addsolstep(solq,"powrulezero"),
-solq:applyrulelist(solq,powruleoddneg),addsolstep(solq,"powruleoddneg"),
-solq:applyrulelist(solq,powruleodd),addsolstep(solq,"powruleodd"),
-solq:applyrulelist(solq,powruleodd2),addsolstep(solq,"powruleodd"),
-solq:applyrulelist(solq,powruleevenneg),addsolstep(solq,"powruleevenneg"),
-solq:applyrulelist(solq,powruleeven),addsolstep(solq,"powruleeven"),
-solq:applyrulelist(solq,powruleirratneg),addsolstep(solq,"powruleirratneg"),
-solq:applyrulelist(solq,powruleirrat),addsolstep(solq,"powruleirrat"),
-solq:applypowrulenotnum(solq),addsolstep(solq,"powrulenotnum"),
-solq:applydoubleexp(solq),addsolstep(solq,"doubleexp"),
-solq:applyexprule(solq),addsolstep(solq,"exprule"),
-solq:applyrulelist(solq,expremoverule),addsolstep(solq,"expremoverule"),
-solq:applylnrule(solq),addsolstep(solq,"lnrule"),
-solq:applysinrule(solq),addsolstep(solq,"sinrule"),
-solq:applycosrule(solq),addsolstep(solq,"cosrule"),
-solq:applytanrule(solq),addsolstep(solq,"tanrule"),
-solq:applyasinrule(solq),addsolstep(solq,"asinrule"),
-solq:applyacosrule(solq),addsolstep(solq,"acosrule"),
-solq:applyatanrule(solq),addsolstep(solq,"atanrule"),
-if solq#lignq then return(solverecursive(solq,varq,condq)),
-solq:applysolvepoly(solq),addsolstep(solq,"solvepoly"),
-if solq#lignq then return(solverecursive(solq,varq,condq)),
-solq:simplifyhyp(solq),
-solq:applyrulelist(solq,sinhsolrule),addsolstep(solq,"sinhsolrule"),
-solq:applyrulelist(solq,coshillrule),addsolstep(solq,"coshillrule"),
-solq:applyrulelist(solq,coshsolrule),addsolstep(solq,"coshsolrule"),
-solq:applyrulelist(solq,tanhillrule),addsolstep(solq,"tanhillrule"),
-solq:applyrulelist(solq,tanhsolrule),addsolstep(solq,"tanhsolrule"),
-if solq#lignq and iteind<15 then return(solverecursive(solq,varq,condq)),
-if solq=lignq and factind>1 then return(solq),
-solq:applyabsrule2(solq),addsolstep(solq,"absrule2"),
-solq:applylogcontract(solq),addsolstep(solq,"logcontract"),
-solq:applyb1(solq,powrulexp),addsolstep(solq,"powrulexp"),
-if solq#lignq then return(solverecursive(solq,varq,condq)),
-if factind<3 then (factind:factind+1,solq:applyfactor(solq),addsolstep(solq,"factor")),
-if factind=3 then (factind:factind+1,solq:expand(solq),addsolstep(solq,"expand")),
-solq:solverecursive(solq,varq,condq),
-solq)$
+	solq:applyaddrule(solq),addsolstep(solq,"addrule"),
+	solq:applyrulelist(solq,prodrule4),addsolstep(solq,"prodrule4"),
+	solq:applyaddrule2(solq),addsolstep(solq,"addrule2"),
+	solq:applyprodrule(solq),addsolstep(solq,"prodrule"),
+	solq:applyprodrule2(solq),addsolstep(solq,"prodrule2"),
+	/* solq:applyprodrule3(solq),addsolstep(solq,"prodrule3"),  */ /* Overser loesning i fx solvereal(x^2*(x^2-1)=9*(x^2-1),x); fordi der divideres med udtryk hvor x indgaar. Forhaabentlig er den ikke noedvendig. Ellers skal den aendres*/
+	solq:applydivrule(solq),addsolstep(solq,"divrule"),
+	solq:applydivrule2(solq),addsolstep(solq,"divrule2"),
+	solq:applydivrule3(solq),addsolstep(solq,"divrule3"),
+	solq:applyrulelist(solq,divrule5),addsolstep(solq,"divrule5"),
+	solq:applyrulelist(solq,expandrule),addsolstep(solq,"expandrule"),
+	if solq#lignq then return(solverecursive(solq,varq,condq)),
+	solq:applyrulelist(solq,absremoverule),addsolstep(solq,"absremoverule"),
+	solq:applyabsrule(solq),addsolstep(solq,"lift abs(x)"),
+	solq:applyrulelistZero(solq,lambertwillrule),addsolstep(solq,"lambertwillrule"),
+	solq:applyrulelistZero(solq,lambertwrule2sol),addsolstep(solq,"lambertwrule2sol"),
+	solq:applyrulelistZero(solq,lambertwrule1sol),addsolstep(solq,"lambertwrule1sol"),
+	solq:applyrulelistZero(solq,lambertwrulegeneral),addsolstep(solq,"lambertwrulegeneral"),
+	solq:applyrulelistZero(solq,lambertwrule2),addsolstep(solq,"lambertwrule2"),
+	solq:applyrulelist(solq,powrulezero),addsolstep(solq,"powrulezero"),
+	solq:applyrulelist(solq,powruleoddneg),addsolstep(solq,"powruleoddneg"),
+	solq:applyrulelist(solq,powruleodd),addsolstep(solq,"powruleodd"),
+	solq:applyrulelist(solq,powruleodd2),addsolstep(solq,"powruleodd"),
+	solq:applyrulelist(solq,powruleevenneg),addsolstep(solq,"powruleevenneg"),
+	solq:applyrulelist(solq,powruleeven),addsolstep(solq,"powruleeven"),
+	solq:applyrulelist(solq,powruleirratneg),addsolstep(solq,"powruleirratneg"),
+	solq:applyrulelist(solq,powruleirrat),addsolstep(solq,"powruleirrat"),
+	solq:applypowrulenotnum(solq),addsolstep(solq,"powrulenotnum"),
+	solq:applydoubleexp(solq),addsolstep(solq,"doubleexp"),
+	solq:applyexprule(solq),addsolstep(solq,"exprule"),
+	solq:applyrulelist(solq,expremoverule),addsolstep(solq,"expremoverule"),
+	solq:applylnrule(solq),addsolstep(solq,"lnrule"),
+	solq:applysinrule(solq),addsolstep(solq,"sinrule"),
+	solq:applycosrule(solq),addsolstep(solq,"cosrule"),
+	solq:applytanrule(solq),addsolstep(solq,"tanrule"),
+	solq:applyasinrule(solq),addsolstep(solq,"asinrule"),
+	solq:applyacosrule(solq),addsolstep(solq,"acosrule"),
+	solq:applyatanrule(solq),addsolstep(solq,"atanrule"),
+	if solq#lignq then return(solverecursive(solq,varq,condq)),
+	solq:applysolvepoly(solq),addsolstep(solq,"solvepoly"),
+	if solq#lignq then return(solverecursive(solq,varq,condq)),
+	solq:simplifyhyp(solq),
+	solq:applyrulelist(solq,sinhsolrule),addsolstep(solq,"sinhsolrule"),
+	solq:applyrulelist(solq,coshillrule),addsolstep(solq,"coshillrule"),
+	solq:applyrulelist(solq,coshsolrule),addsolstep(solq,"coshsolrule"),
+	solq:applyrulelist(solq,tanhillrule),addsolstep(solq,"tanhillrule"),
+	solq:applyrulelist(solq,tanhsolrule),addsolstep(solq,"tanhsolrule"),
+	if solq#lignq and iteind<15 then return(solverecursive(solq,varq,condq)),
+	if solq=lignq and factind>1 then return(solq),
+	solq:applyabsrule2(solq),addsolstep(solq,"absrule2"),
+	solq:applylogcontract(solq),addsolstep(solq,"logcontract"),
+	solq:applyb1(solq,powrulexp),addsolstep(solq,"powrulexp"),
+	if solq#lignq then return(solverecursive(solq,varq,condq)),
+	if factind<3 then (factind:factind+1,solq:applyfactor(solq),addsolstep(solq,"factor")),
+	if factind=3 then (factind:factind+1,solq:expand(solq),addsolstep(solq,"expand")),
+	solq:solverecursive(solq,varq,condq),
+	solq
+)$
 
 addsolstep(qsol,qkomm):=block([li],li:append(qsol,[qkomm]),if solsteps=[] then solsteps:[li] elseif rest(last(solsteps),-1)#qsol then solsteps:append(solsteps,[li]),return())$
 /* mere simpel, men ikke god til debug
@@ -996,55 +996,357 @@ if freeof(abs,solq2) then
 solq2 else DissolveAbs(solq2)
 )$
 
-nsolve([paramq]):=block([qfkt,solq,qn,qm,qti,qmaxti,qantal,qmm,qnn,qnewt,fpprec:50],
-if length(paramq)<2 then (print("Too few arguments"),return()) elseif length(paramq)>9 then (print("Too many arguments"),return()),
-qlign:paramq[1],qvar:paramq[2],
-if length(paramq)>=3 then qn:paramq[3] else qn:-15,
-if length(paramq)>=4 then qm:paramq[4] else qm:15,
-if length(paramq)>=5 then qti:paramq[5] else qmaxti:15,
-if length(paramq)>=6 then qantal:paramq[6] else qantal:20,
-if length(paramq)>=7 then qnn:paramq[7] else qnn:30,
-if length(paramq)>=8 then qmm:paramq[8] else qmm:30,
-if length(paramq)>=9 then qnewt:paramq[9] else qnewt:true,
-errormsg:false,
-solq:[],
-define(qfkt(qvar),ev(lhs(qlign)-rhs(qlign),bfloat)),
-qti:absolute_real_time(),
-if not(numberp(ev(qfkt(1),numer))) then (print("nsolve requires an equation with only 1 variable"),return(qlign)), 
-solq:nsolverec(qfkt(qvar),qvar,[],qn,qm),
-if length(solq)>=qantal then go(afslut),
-errcatch(if op(qfkt(-1b1^qn))#op(qfkt(0b0)) then solq:append(solq,flatten([errcatch(bf_find_root(qfkt,qvar,-10^qn,0))]))),
-if length(solq)>=qantal then go(afslut),
-errcatch(if op(qfkt(0b0))#op(qfkt(1b1^qm)) then solq:append(solq,flatten([errcatch(bf_find_root(qfkt,qvar,0,10^qm))]))),
-if length(solq)>=qantal then go(afslut),
-if qmm>qm then errcatch(if op(qfkt(1b1^qm))#op(qfkt(1b1^qmm)) then solq:append(solq,flatten([errcatch(bf_find_root(qfkt,qvar,10^qm,10^qmm))]))),
-if length(solq)>=qantal then go(afslut),
-if qnn>qn then errcatch(if op(qfkt(-1b1^qnn))#op(qfkt(-1b1^qn)) then solq:append(solq,flatten([errcatch(bf_find_root(qfkt,qvar,-10^qnn,-10^qn))]))),
-if qnewt then (load(newton1),solq:append(solq,bfloat(errcatch(newton(qfkt(qvar),qvar,1,10^-14))))),
-afslut,
-errormsg:true,
-print("More solutions may exist"),
-solq:ev(solq,numer),
-solq:unique(solq),
-solq:RemoveIncorrect(makelist(qvar=zq,zq,solq))
+/*Checks if the two arguments have opposite sign*/
+opposite_sign(a, b) := block(
+	[result],
+	if numberp(a) and numberp(b) then (
+		result: (a > 0 and b < 0) or (a < 0 and b > 0)
+	) else (
+		result: false
+	),
+	return(result)
 )$
 
-EmptyToZero(qin):=if qin=[] then 0 else qin$
+/* Newton's method for finding roots of a function, with damping technique, and asymptotic detection
+Switches to secant method if expr isnt differentiable at guess.
+If guess is a bfloat, the function will use bfloats otherwise float. Float is faster.
+*/
+newton_method(expr, var, guess, tol, max_iter) := block(
+	[x0, x1, x2, fx, dfx, pfx, pfx2, iter, solq, lmbd, sec, UseBF, fpprec],
+	if bfloatp(guess) then (
+		UseBF: true,
+		fpprec: 50,
+		lmbd: 1b0,
+		pfx: 1b30,
+		define(f(var), ev(expr, bfloat)), 
+		define(dfunc(var), ev(diff(expr,var), bfloat))
+	) else (
+		UseBF: false,
+		lmbd: 1.0,
+		pfx: 1.0*10^30,
+		guess: ev(guess, numer),
+		define(f(var), ev(expr, numer)), 
+		define(dfunc(var), float(ev(diff(expr,var), numer)))
+	),
+	x0: guess,
+	iter: 0,
+	solq:[],
+	sec: false,
+	if errcatch(dfunc(guess)) = [] then (
+/*		print("Newton's method requires a differentiable function. Switching to secant method"),*/
+		sec: true
+	),
+	while iter < max_iter do (
+		if errcatch(
+		if UseBF=true then (
+			fx: ev(f(x0),bfloat)
+		) else (
+			fx: ev(f(x0),numer)
+		),
+/*		print(sconcat("x0=", x0, " f(x0)=",fx)),*/
+		if (abs(fx) <= tol) then (			
+			if (abs(x1-x0)<=tol)  and imagpart(fx)=0 then (
+			solq:[x0], 
+/*		 	print(sconcat("Iteration ", iter, ": x0 = ", x0, ", x1 = ", x1, ", f(x0) = ", fx ,",f'(x0) = ",dfx, ", lmbd = ", lmbd)) ,*/ 
+			return()
+			),
+			UseBF: true,x0:bfloat(x0),lmbd:bfloat(lmbd),fpprec:30,
+			if max_iter<=100 then max_iter:200
+		),
+		if (sec=true) then
+		(
+			dfx: ev((fx-f(x0-1e-9))/(1e-9))
+		)
+		else (
+			if UseBF=true then (
+				dfx: ev(dfunc(x0),bfloat)
+			) else (
+				dfx: ev(dfunc(x0),numer)
+			)
+			),
+		if abs(dfx) < tol then (
+			print("Derivative too small"), /* Dette er tegn paa asymptotisk gang mod 0, som vil give falsk loesning hvis det fortsaetter*/
+			return()
+		),
+		if abs(fx)>=abs(pfx) then (
+			lmbd: lmbd / 2, /* damping. Kan hjaelpe med faa den til at konvergere*/		
+			if lmbd < 0.25 then lmbd:0.25
+		),
+		if imagpart(fx)#0 and iter>2 then (
+			x0:x1,
+			if lmbd=1 then lmbd:0.5
+		) else (
+			x2: x1,
+			x1: x0
+		),
+		if UseBF=true then (
+			x0: ev(realpart(x0 - lmbd * fx / dfx),bloat)
+		) else (
+			x0: ev(realpart(x0 - lmbd * fx / dfx),numer)
+		),
+		pfx2: pfx,
+		pfx: fx
+		)=[] then (sec:true,x0=x0+1),
+		iter: iter + 1
+	),
+	if iter >= max_iter then print("Maximum iterations reached"),
+	/*print(sconcat("Newton iterations: ",iter," L=",lmbd,"  S=",solq)),*/
+	if useBF=true then (
+		solq: bfloat(solq)
+	) else (
+		solq: float(solq)
+	),
+	return(solq)
+)$
 
-nsolverec(qfkt, qvar, sollq, qn, qm) := block([ql, glf, qi],
+
+/*
+ * nsolve([paramq]) - A function to solve a given equation numerically.
+ *
+ * Parameters:
+ *   paramq - A list of parameters:
+ *     paramq[1] (qlign) - The equation to be solved.
+ *     paramq[2] (qvar) - The variable in the equation.
+ *     paramq[3] (qn) - The lower bound for the search interval (default: -15) meaning 10^-15. if this value i a bfloat, the function will use bfloats.
+ *     paramq[4] (qm) - The upper bound for the search interval (default: 15). meaning 10^15.
+ *     paramq[5] (qti) - maximum time (default: 15 s).
+ *     paramq[6] (qantal) - Maximum number of solutions to find (default: 20).
+ *     paramq[7] (qnn) - Extended lower bound for the search interval (default: 30). meaning 10^-30. This extra range is only searched for 1 solution
+ *     paramq[8] (qmm) - Extended upper bound for the search interval (default: 30). meaning 10^30.
+ *     paramq[9] (qnewt) - Boolean to determine if Newton's method should be used (default: true).
+ *
+ * Returns:
+ *   A list of solutions to the equation.
+ *
+ * Notes:
+ *   - It uses various methods to find the roots of the equation within the specified bounds.
+ *   - uses nsolverealrecursive to search ranges: ... [0-0.01] [0-0.1] [0-1], [0-10], [0-100] ... depending on qn and qm. Each range is divided into 91 points. and searches for different signs between neighboring points.
+ *   - If the number of solutions found is less than the specified maximum, it attempts to find more solutions using extended bounds and Newton's method.
+ *   - The function ensures that the solutions are unique and correct.
+ */
+/* Solves an equation for a variable or expression. The variable to solve for will have any arrays attached removed*/
+nsolve([paramq]) := block(
+	[qfkt, solq, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter],
+	if length(paramq) < 2 then (
+		print("Too few arguments"),
+		return()
+	) elseif length(paramq) > 9 then (
+		print("Too many arguments"),
+		return()
+	),
+	qlign: paramq[1],
+	qvar: paramq[2],
+	if length(paramq) >= 3 then qn: paramq[3] else qn: -15,
+	if length(paramq) >= 4 then qm: paramq[4] else qm: 15,
+	if length(paramq) >= 5 then qti: paramq[5] else qmaxti: 15,
+	if length(paramq) >= 6 then qantal: paramq[6] else qantal: 20,
+	if length(paramq) >= 7 then qnn: paramq[7] else qnn: 30,
+	if length(paramq) >= 8 then qmm: paramq[8] else qmm: 30,
+	if length(paramq) >= 9 then qnewt: paramq[9] else qnewt: true,
+	qtol: 10^-15,
+	if bfloatp(qn) then UseBF: true else UseBF: false,
+	if UseBF=true then(
+		qn: bfloat(qn),
+		qm: bfloat(qm),
+		qnn: bfloat(qnn),
+		qmm: bfloat(qmm),
+		qtol: bfloat(qtol)
+	) else (
+		qn: float(qn),
+		qm: float(qm),
+		qnn: float(qnn),
+		qmm: float(qmm),
+		qtol: float(qtol)
+	), 
+	errormsg: false,
+	solq: [],
+	if UseBF = true then (
+		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), bfloat))
+	) else (
+		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), numer))
+	),
+	qti: absolute_real_time(),
+	/* This is not the best method. The function could be defined some wehere else like sqrt(x-2)*/
+	if not(numberp(ev(qfkt(1.234), numer))) then (
+		print("nsolve requires an equation with only 1 variable"),
+		return(qlign)
+	),
+	solq: nsolverec(qfkt(qvar), qvar, [], qn, qm),
+	errcatch(
+		if opposite_sign(qfkt(-10^qn),qfkt(0)) then(
+			if UseBF = true then (
+				solq: append(solq, flatten([errcatch(bf_find_root(qfkt, qvar, -10^qn, 0))]))
+			) else (
+				solq: append(solq, flatten([errcatch(find_root(qfkt, qvar, -10^qn, 0))]))
+			)
+		)
+	),
+	errcatch(
+		if opposite_sign(qfkt(0),qfkt(10^qm)) then
+		(
+			if UseBF = true then (
+				solq: append(solq, flatten([errcatch(bf_find_root(qfkt, qvar, 0, 10^qm))]))
+			) else (
+				solq: append(solq, flatten([errcatch(find_root(qfkt, qvar, 0, 10^qm))]))
+			)
+		)
+	),
+	if qmm > qm then errcatch(
+		if opposite_sign(qfkt(10^qm),qfkt(10^qmm)) then
+		(
+			if UseBF = true then (
+				solq: append(solq, flatten([errcatch(bf_find_root(qfkt, qvar, 10^qm, 10^qmm))]))
+			) else (
+				solq: append(solq, flatten([errcatch(find_root(qfkt, qvar, 10^qm, 10^qmm))]))
+			)
+		)
+	),
+	if qnn > qn then errcatch(
+		if opposite_sign(qfkt(-10^qnn),qfkt(-10^qn)) then
+		(
+			if UseBF = true then (
+				solq: append(solq, flatten([errcatch(bf_find_root(qfkt, qvar, -10^qnn, -10^qn))]))
+			) else (
+				solq: append(solq, flatten([errcatch(find_root(qfkt, qvar, -10^qnn, -10^qn))]))
+			)
+		)
+	),
+	if qnewt then (
+/*		load(mnewton),newtonepsilon: 1*10^-30,newtonmaxiter: 1000,
+		qsol:flatten(bfloat(errcatch(mnewton(qfkt(qvar), qvar, 1)))), */
+		/*Find roots of taylorapprox and use these as guess for newtons method*/
+		if errcatch(ql:ev(realroots(ev(taylor(qfkt(qvar),x,1,10),numer),qtol*10),float)) = [] then ( 
+			ql: makelist(10^i, i, qn, qm),
+			ql: append(ql, [-8,-6,-4,-2,2,3,4,5,6,7,8,9]),
+			NmaxIter:500
+		) else (
+			ql: makelist(rhs(zq), zq, ql),
+			NmaxIter:100
+		),
+		if UseBF then (
+			ql:bfloat(ql)
+		) else (
+			ql:float(ql)
+		),
+		for zq in ql do (			
+			qsol:flatten(errcatch(newton_method(qfkt(qvar), qvar, zq, qtol/10, NmaxIter))),
+			if qsol # [] then (
+				errcatch(qsol:qsol[1]),
+				solq: append(solq, [qsol]))
+			)
+	), 
+	afslut,
+	errormsg: true,
+	print("More solutions may exist"), 
+	/*If there is an error using find_root, it will append the function to solution. These must be removed*/
+	solq: block([new_solq: []],
+		for zq in solq do (
+			if (op(zq) # 'bf_find_root) and (op(zq) # 'find_root)  then new_solq: cons(zq, new_solq)
+		),
+		solq: reverse(new_solq)
+	),
+
+/*remove duplicate values from solq, where values are within qtol*/
+	NewSolq:[],
+	for zq in solq do (
+		if flatten(makelist(if abs(zq2-zq)<qtol*10 then 1 else [] , zq2, NewSolq))=[] then
+			NewSolq:cons(zq,NewSolq)
+	),
+	solq:NewSolq,
+
+	/* Loesningerne er approksimative. Her forsoeges at checke om paenere afrundede vaerdier er loesninger*/
+	solq: block([new_solq: []],
+		for zq in solq do (
+			if numberp(zq) then (
+				rounded_zq: round(zq),
+				if member(rounded_zq, solq) then
+					new_solq: cons(zq, new_solq)
+				elseif errcatch(qfkt(rounded_zq)) = [0] then
+					new_solq: cons(rounded_zq, new_solq)
+				else
+					new_solq: cons(zq, new_solq)
+			) else
+				new_solq: cons(zq, new_solq)
+		),
+		solq: reverse(new_solq)
+	), 
+	if DecOutType>0 then fpprintprec:NoSigFig,
+	solq: unique(solq),
+	solq: sort(solq),
+	solq: makelist(qvar = zq, zq, solq),
+	solq: TestSolution(solq)
+/*	solq: RemoveIncorrect(makelist(qvar = zq, zq, solq)) */
+)$
+
+
+/* Removes solutions that does not comply with the rules in the current context. Ex: Assume(x>0);TestSolution([x=-3,x=3])    ->   [x=3]*/
+TestSolution(solq):=block([zq,zq2,NewSolq:[]],
+	Antag:facts(),
+	forget(facts()),forget(all), /*Even when changing context, facts remain, though facts return []. Problem only in function but not always. Facts are reset at the end of the function*/
+	context:TestSol,
+	solq:reverse(solq),
+	for zq in solq do (
+		assume(equal(lhs(zq),rhs(zq))),
+		if flatten(makelist(if is(zq2)=false then 1 else [] , zq2, Antag))=[] then
+			NewSolq:cons(zq,NewSolq),
+		forget(facts())
+	),
+	killcontext(TestSol),
+	apply(assume,Antag),
+	NewSolq
+)$
+
+/*
+ * Function: nsolverec
+ * -------------------
+ * Recursively solves a given function for real roots within a specified range and precision.
+ *
+ * Parameters:
+ *   qfkt  - The function to be solved. it must be the name of a function, not an expression.
+ *   qvar  - The variable for which the function is solved.
+ *   sollq - A list to store the solutions found.
+ *   qn    - The current power level.
+ *   qm    - The maximum power level
+ *
+ * Returns:
+ *   A list of solutions found for the given function.
+ *
+ * Description:
+ *   This function attempts to find real roots of the given function `qfkt` by iterating over a range of values
+ *   It uses the `bf_find_root` function to find roots within specified intervals and appends the solutions to the `sollq` list.
+ *   typically start with qn=1 and qm=15. Solverec then test 91 values between 0 and 1 and then between -1 and 0. Then continues with 91 values between 1 and 10 and -1 and -10. This is repeated until
+ *   a specified number of solutions `qantal` is found, or a timeout occurs or the maximum power level `qm` is reached. If two different signs are found for neighboring values, the Maxima function `bf_find_root` is used to find the root.
+ */
+nsolverec(qfkt, qvar, sollq, qn, qm) := block([ql, glf, qi,UseBF],
 	qi: 1,
-	ql: makelist((1b-1 + i * 1b-2) * 10^qn, i, 0, 90),
+	if bfloatp(qn) then (
+			UseBF: true,
+			ql: makelist((1b-1 + i * 1b-2) * 10^qn, i, 0, 90)
+		) else (
+			UseBF: false,
+			ql: makelist((1e-1 + i * 1e-2) * 10^qn, i, 0, 90)
+		),
 	glf: flatten(errcatch(qfkt(ql))),
 	while qi < length(glf) do (
-		if glf[qi] = 0.0b0 then (
-			if op(qfkt(ql[qi] - 10^(qn - 3))) # op(qfkt(ql[qi] + 10^(qn - 3))) then
-				sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
-		) elseif glf[qi + 1] = 0.0b0 then (
+		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (
+			if opposite_sign(qfkt(ql[qi] - 10^(qn - 3)),qfkt(ql[qi] + 10^(qn - 3))) then
+			(
+				if UseBF = true then (
+					sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+				) else (
+					sollq: append(sollq, flatten([errcatch(find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+				)
+			)
+		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (
 			nothing
 		) elseif not(freeof(%i, glf[qi])) then (
 			nothing
-		) elseif op(glf[qi]) # op(glf[qi + 1]) then (
-			sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+		) elseif opposite_sign(glf[qi],glf[qi + 1]) then (
+			if UseBF = true then (
+				sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+			) else (
+				sollq: append(sollq, flatten([errcatch(find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+			)
 		),
 		qi: qi + 1
 	),
@@ -1059,15 +1361,25 @@ nsolverec(qfkt, qvar, sollq, qn, qm) := block([ql, glf, qi],
 	qi: 1,
 	glf: flatten(errcatch(qfkt(-ql))),
 	while qi < length(glf) do (
-		if glf[qi] = 0.0b0 then (
-			if op(qfkt(-ql[qi] - 10^(qn - 3))) # op(qfkt(-ql[qi] + 10^(qn - 3))) then
-				sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
-		) elseif glf[qi + 1] = 0.0b0 then (
+		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (
+			if opposite_sign(qfkt(-ql[qi] - 10^(qn - 3)),qfkt(-ql[qi] + 10^(qn - 3))) then
+			(
+				if UseBF = true then (
+					sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
+				) else (
+					sollq: append(sollq, flatten([errcatch(find_root(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
+				)
+			)
+		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (
 			nothing
 		) elseif not(freeof(%i, glf[qi])) then (
 			nothing
-		) elseif op(glf[qi]) # op(glf[qi + 1]) then (
-			sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
+		) elseif opposite_sign(glf[qi],glf[qi + 1]) then (
+			if UseBF = true then (
+				sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
+			) else (
+				sollq: append(sollq, flatten([errcatch(find_root(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
+			)
 		),
 		qi: qi + 1
 	),
@@ -1241,10 +1553,11 @@ resq:do
 	),
 tryagainlabel,
 if resq=false then 
-	(/*Hvis foerste ligning ikke kunne loeses for nogen af variablene og alle de andre ligninger allerede er forsoegt*/
-	print("Can't solve. Trying to_poly_solve"),
+	(
+		/*Hvis foerste ligning ikke kunne loeses for nogen af variablene og alle de andre ligninger allerede er forsoegt*/
+/*	print("Can't solve. Trying to_poly_solve"),
 	eqnlq:to_poly_solve(eqnlqsave,varlqsave),
-	eqnlq:scanmap(RemoveUnion,eqnlq),
+	eqnlq:scanmap(RemoveUnion,eqnlq),*/
 	return(eqnlq)
 	)
 elseif resq=retry then 
@@ -1400,8 +1713,8 @@ if soluqw#[] then return(soluqw),
 load(fourier_elim),
 errcatch(soluqw:fourier_elim([lignq],[varq])),
 if soluqw#[] then return([soluqw]),
-soluqw:to_poly_solve(lignq,varq),
-if soluqw#[] then return(args(soluqw)),
+/* soluqw:to_poly_solve(lignq,varq),
+if soluqw#[] then return(args(soluqw)),*/
 print("kunne ikke loeses")
 )$
 
@@ -1611,3 +1924,33 @@ prefix("laplaceq")$
 laplaceq(parq):=block(if member('z,listofvars(parq)) then matrix([diff(parq,'x,2)],[diff(parq,'y,2)],[diff(parq,'z,2)]) else matrix([diff(parq,'x,2)],[diff(parq,'y,2)]))$
 prefix("curlq")$
 curlq(parq):=block(matrix([diff(parq[3,1],'y,1)-diff(parq[2,1],'z,1)],[diff(parq[1,1],'z,1)-diff(parq[3,1],'x,1)],[diff(parq[2,1],'x,1)-diff(parq[1,1],'y,1)]))$
+
+/*This function completes the square of an expression. Examples:
+CompleteSquare(x^2+4*x+y^2+(-6)*y = 12,[x,y])
+    (y-3)^2+(x+2)^2-25 = 0                   If the expression is an equation, the function will complete the square for the left hand side of the equation - the right hand side, and return an equation =0
+CompleteSquare(x^2+4*x+y^2+(-6)*y+78)        If you dont specify the variables, the function will attempt to complete the square for all variables in the expression.
+    (y-3)^2+(x+2)^2+65
+*/
+CompleteSquare([paramq]) := block(
+	[completed_expr, expr, var, a, b, c, square_term, constant_term],
+	expr: paramq[1],
+	completed_expr: expr,
+	if length(paramq) >= 2 then vars: paramq[2] else vars: listofvars(completed_expr),
+	if op(expr) = "=" then completed_expr: lhs(expr) - rhs(expr),
+	for var in vars do (
+		if not freeof(var, completed_expr) then (
+			errcatch(
+			a: coeff(completed_expr, var, 2),
+			b: coeff(completed_expr, var, 1),
+			c: coeff(completed_expr, var, 0),
+			if a#0 then (
+			square_term: a * (var + b/(2*a))^2,
+			constant_term: c - b^2/(4*a),
+			completed_expr: subst(square_term + constant_term, var^2 + b*var + c, completed_expr)
+			)
+			)
+		)
+	),
+	if op(expr) = "=" then completed_expr: completed_expr = 0,
+	completed_expr
+)$

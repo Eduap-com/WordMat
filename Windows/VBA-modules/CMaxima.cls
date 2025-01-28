@@ -42,7 +42,7 @@ Private matvekt As Boolean    ' sættes hvis der registreres matricer. Så aktiver
 Public matrixstartbracket As String
 Public matrixendbracket As String
 Private at As AutoTextEntry
-Public ConvertLnLog As Boolean    ' whethter converttomaxima converts ln(x) -> log(x) and log(x)-> log(x)/log(10)
+Public ConvertLnLog As Boolean    ' whether converttomaxima converts ln(x) -> log(x) and log(x)-> log(x)/log(10)
 Public prevspr As String    ' bruges til når Maxima spr. gentagne gange om det samme
 Public prevsvar As String
 Public MaximaSti As String
@@ -593,6 +593,7 @@ igen:
 '        MsgBox MaxProc.LastMaximaOutput
         WaitForMaximaForm StopTime
         answered = True
+        defindex = 0 ' When answering the initial definition is lost from lastmaximaoutput. definition errors will not be detected. If this variable is not reset. WordMat will think a defition error has occured.
     Loop
 
     If answered And MaximaInputStrengSec <> "" Then
@@ -1060,8 +1061,8 @@ start:
         MaximaOutput = ""
         KommentarOutput = Minput(1) & vbLf & moutput(1)
     Else
-        KommentarOutput = ""
-        For i = 0 To nr - 1
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+        For i = 0 To nr - 2
             KommentarOutput = KommentarOutput & Minput(nr - i)
         Next
         KommentarOutput = Replace(KommentarOutput, vbCrLf, "")
@@ -2128,7 +2129,7 @@ Sub ConvertOutputToSolved2(Optional Variable As String)
     End If
 
 End Sub
-Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid As Boolean, rationaliser As Boolean, trigsimp As Boolean)
+Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid As Boolean, rationaliser As Boolean, trigsimp As Boolean, CompleteSquare As Boolean)
     Dim pkommando As String
     pkommando = Kommando
 
@@ -2159,6 +2160,9 @@ Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid
     End If
     If trigsimp Then
         Kommando = "trigreduce(trigsimp(" & Kommando & "))"
+    End If
+    If CompleteSquare Then
+        Kommando = "CompleteSquare(" & Kommando & ")"
     End If
 
     If Not Radians Then
@@ -4807,6 +4811,11 @@ Function ConvertUnits(ByVal text As String) As String
     ea.ReplaceVar "muOhm", "%muOhm"
     ea.ReplaceVar "mpc", "%%mpc"
     ea.ReplaceVar "mupc", "%mupc"
+    ea.ReplaceVar "mL", "%%mL"
+    ea.ReplaceVar "muL", "%muL"
+    ea.ReplaceVar "ml", "%%mL"
+    ea.ReplaceVar "mul", "%muL"
+    
     ConvertUnits = ea.text
 
 End Function
@@ -6863,6 +6872,10 @@ Function TranslateReplaceComment(comm As String) As String
 
     If InStr(comm, "Warning too few variables, only") > 0 Then
         outtext = outtext & Sprog.A(107)
+    End If
+
+    If InStr(comm, "More solutions may exist") > 0 Then
+        outtext = outtext & Sprog.FoundNumericSolutions
     End If
 
 

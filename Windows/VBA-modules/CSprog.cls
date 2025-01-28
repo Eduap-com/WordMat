@@ -3401,6 +3401,14 @@ SA(696, 0) = "Vælg hvordan tal skal skrives og afrundes. I eksemplerne nedenfor 
 SA(696, 1) = "Choose how numbers are fomatted and rounded. In the examples below WordMat is set to 3 figures" & vbCrLf & vbCrLf & "Decimals: 12,345" & vbCrLf & "Significant figures: 12,3" & vbCrLf & "Sci. notation: 1,23*10^1"
 SA(696, 2) = ""
 
+SA(697, 0) = "Kvadratkomplementering"
+SA(697, 1) = "Complete the square"
+SA(697, 2) = ""
+
+SA(698, 0) = "Anvender kvadratsætning til at faktorisere. fx til cirklens ligning"
+SA(698, 1) = "Applies complete the square for all variables in expression"
+SA(698, 2) = ""
+
 'Problemet kunne ikke løses. Vil du prøve med en anden CAS motor?
 End Sub
 
@@ -5161,10 +5169,10 @@ End Property
 Public Property Get FoundNumericSolutions() As String
 Dim s As String
 Select Case SprogNr
-Case 1: s = "Der blev fundet løsninger vha. numeriske metoder, men der findes muligvis flere."
+Case 1: s = "OBS: Der blev anvendt numeriske metoder til at løse ligningen. Der kan muligvis findes flere løsninger."
 Case 3: s = "Se han encontrado soluciones utilizando métodos numéricos, pero posiblemente hay más."
 Case 4: s = ""
-Case Else: s = "Solutions where found using numeric methods. More solutions may exist though"
+Case Else: s = "Numerical methods were applied when solving the equation. More solutions may exist."
 End Select
 FoundNumericSolutions = s
 End Property
