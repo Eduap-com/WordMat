@@ -2,7 +2,7 @@ Attribute VB_Name = "Grafer3D"
 Option Explicit
 Sub OmdrejningsLegeme()
 Dim Kommando As String
-    Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
 Dim Arr As Variant
 Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim DefList As String
@@ -46,13 +46,13 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
-                    rhs = Arr(1)
+                    RHS = Arr(1)
                     ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     
                     If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = rhs
+                        ea.text = RHS
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
@@ -63,7 +63,7 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                         UrlLink = UrlLink & cmd
 
                     Else
-                        fktudtryk = ReplaceIndepvarX(rhs)
+                        fktudtryk = ReplaceIndepvarX(RHS)
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         cmd = "surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
 '                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
@@ -136,7 +136,7 @@ Exit Sub '******************************************
     UserFormOmdrejninglegeme.Show
     
 Fejl:
-Slut:
+slut:
 End Sub
 
 Sub Plot3DGraph()
@@ -148,47 +148,54 @@ Sub Plot3DGraph()
     PrepareMaxima
     omax.ReadSelection
     
-'   Set UF2Dgraph = New UserForm2DGraph
+    '   Set UF2Dgraph = New UserForm2DGraph
     forskrifter = omax.FindDefinitions
     If Len(forskrifter) > 3 Then
-    forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3)
-    Arr = Split(forskrifter, ListSeparator)
-    forskrifter = ""
+'        forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3) 'fjernet 1.33
+        Arr = Split(forskrifter, ListSeparator)
+        forskrifter = ""
     
-    For i = 0 To UBound(Arr)
-        If InStr(Arr(i), "):") > 0 Then
-            forskrifter = forskrifter & omax.ConvertToWordSymbols(Arr(i)) & ListSeparator
-        End If
-    Next
+        For i = 0 To UBound(Arr)
+            If InStr(Arr(i), "):") > 0 Then
+                Arr(i) = Replace(Arr(i), ":=", "=")
+                forskrifter = forskrifter & omax.ConvertToWordSymbols(Arr(i)) & "#$"
+            End If
+        Next
     End If
     
     If forskrifter <> "" Then
-        forskrifter = Left(forskrifter, Len(forskrifter) - 1)
+        forskrifter = Left(forskrifter, Len(forskrifter) - 2)
     End If
-    forskrifter = omax.KommandoerStreng & ListSeparator & forskrifter
+    forskrifter = omax.KommandoerStreng & "#$" & forskrifter
     
     If Len(forskrifter) > 1 Then
-    Arr = Split(forskrifter, ListSeparator)
-    For i = 0 To UBound(Arr)
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Arr(i) <> "" Then
-            If MsgBox2(Sprog.A(374) & ": " & Arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
-                Insert3DEquation (Arr(i))
+        Arr = Split(forskrifter, "#$")
+        For i = 0 To UBound(Arr)
+            Arr(i) = Replace(Arr(i), " ", "")
+            If Arr(i) <> "" Then
+                If MsgBox2(Sprog.A(374) & ": " & Arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
+                    Insert3DEquation (Arr(i))
+                End If
             End If
-        End If
-    Next
+        Next
     End If
     
     UserForm3DGraph.Show
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub Insert3DEquation(Equation As String)
+    Dim LHS As String, RHS As String, Arr() As String
+    
+    If Equation = vbNullString Then Exit Sub
+    Arr = Split(Equation, "=")
+    LHS = LCase(Replace(Replace(Trim(Arr(0)), " ", ""), ";", ","))
+    If UBound(Arr) > 0 Then RHS = Arr(1)
 
-If InStr(Equation, "=") > 0 Then
+If InStr(Equation, "=") > 0 And LHS <> "z" And LHS <> "f(x,y)" Then
     If UserForm3DGraph.TextBox_ligning1.text = Equation Then Exit Sub
     If UserForm3DGraph.TextBox_ligning2.text = Equation Then Exit Sub
     If UserForm3DGraph.TextBox_ligning3.text = Equation Then Exit Sub
@@ -212,15 +219,15 @@ ElseIf InStr(Equation, VBA.ChrW(9632)) Then
     End If
     UserForm3DGraph.TextBox_vektorer.text = UserForm3DGraph.TextBox_vektorer.text & Equation
 Else
-    If UserForm3DGraph.TextBox_forskrift1.text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_forskrift2.text = Equation Then Exit Sub
-    If UserForm3DGraph.TextBox_forskrift3.text = Equation Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift1.text = RHS Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift2.text = RHS Then Exit Sub
+    If UserForm3DGraph.TextBox_forskrift3.text = RHS Then Exit Sub
     If UserForm3DGraph.TextBox_forskrift1.text = "" Then
-         UserForm3DGraph.TextBox_forskrift1.text = Equation
+         UserForm3DGraph.TextBox_forskrift1.text = RHS
     ElseIf UserForm3DGraph.TextBox_forskrift2.text = "" Then
-         UserForm3DGraph.TextBox_forskrift2.text = Equation
+         UserForm3DGraph.TextBox_forskrift2.text = RHS
     ElseIf UserForm3DGraph.TextBox_forskrift3.text = "" Then
-         UserForm3DGraph.TextBox_forskrift3.text = Equation
+         UserForm3DGraph.TextBox_forskrift3.text = RHS
     End If
 End If
 

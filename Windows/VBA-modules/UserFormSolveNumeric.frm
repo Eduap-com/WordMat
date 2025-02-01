@@ -65,19 +65,19 @@ On Error GoTo Fejl
     TextBox_lval.text = Replace(TextBox_lval.text, ",", ".")
     TextBox_hval.text = Replace(TextBox_hval.text, ",", ".")
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     SelectedVar = ""
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_findroot_Click()
     SaveVar
     Method = "findroot"
     
-    GoTo Slut
+    GoTo slut
 Fejl:
-Slut:
+slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
@@ -104,10 +104,10 @@ s = s & TextBox_xmin.text & Sep & TextBox_xmax.text & Sep & "" & Sep & "" & Sep
 s = s & Arr(0) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
 s = s & Arr(1) & Sep & TextBox_variabel.text & Sep & "" & Sep & "" & Sep & "" & Sep
 ils.AlternativeText = s
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Application.ScreenUpdating = True
 End Sub
 
@@ -116,9 +116,9 @@ Private Sub CommandButton_ok_Click()
     SaveVar
     Method = "newton"
     
-    GoTo Slut
+    GoTo slut
 Fejl:
-Slut:
+slut:
     Selection.start = gemstartr
     Selection.End = gemslutr
     Application.ScreenUpdating = False
@@ -157,10 +157,10 @@ On Error GoTo Fejl
     omax.PrepareNewCommand ' nødvendigt da der efterfølgende skal køres newton el lign eller vises grafen igen
     DoEvents
 '    Me.Show
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Private Sub CommandButton_zoom_Click()
@@ -180,10 +180,10 @@ TextBox_xmax.text = xmax - dx
 OpdaterGraf
 
 Me.Repaint
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 
 End Sub
@@ -205,10 +205,10 @@ TextBox_xmax.text = xmax + dx
 OpdaterGraf
 
 Me.Repaint
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 
@@ -241,10 +241,10 @@ TextBox_xmax.text = xmin + cfakt * X + dx
 OpdaterGraf
 
     Me.Repaint
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox "Der skete en fejl. Se på tallene ved xmin og xmax", vbOKOnly, Sprog.Error
-Slut:
+slut:
     
 End Sub
 
@@ -276,7 +276,7 @@ Dim xmax As Single
 Dim cfakt As Single
 
 Label_zoom.visible = False
-If Abs(X - gemx) < 5 Then GoTo Slut
+If Abs(X - gemx) < 5 Then GoTo slut
 
 xmin = CSng(TextBox_xmin.text)
 xmax = CSng(TextBox_xmax.text)
@@ -290,7 +290,7 @@ TextBox_xmin.text = xmin + cfakt * gemx
 OpdaterGraf
 
     Me.Repaint
-Slut:
+slut:
 End Sub
 
 Private Sub Label_intervalhelp_Click()
@@ -341,10 +341,10 @@ Dim Arr As Variant
     Image1.Picture = LoadPicture(GetTempDir() & "WordMatGraf.gif")
 #End If
 '    Image1.Picture = LoadPicture(Environ("TEMP") & "\WordMatGraf.gif")
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox "Der skete en fejl. Prøv at trykke Opdater.", vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Private Sub UserForm_Activate()
@@ -414,10 +414,10 @@ On Error GoTo Fejl
     
     CommandButton_ok.SetFocus
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 '    newton.Select
 
 End Sub

@@ -844,7 +844,7 @@ if solverealtopoly then (
 nxqsol2,
 if solverealmaximasolve then
 	(
-	solu_1a:ev(solve(lignq,varq),simp),
+	errcatch(solu_1a:ev(solve(lignq,varq),simp)),
 	if domain=real then solu_1a:RemoveImag(solu_1a),
 	solu_1a: CheckSolutions(lignq,varq,solu_1a), 
 	if IsAnySolved(solu_1a,varq) then go(slutqw),
@@ -1946,7 +1946,7 @@ CompleteSquare([paramq]) := block(
 			if a#0 then (
 			square_term: a * (var + b/(2*a))^2,
 			constant_term: c - b^2/(4*a),
-			completed_expr: subst(square_term + constant_term, var^2 + b*var + c, completed_expr)
+			completed_expr: subst(square_term + constant_term, a*var^2 + b*var + c, completed_expr)
 			)
 			)
 		)

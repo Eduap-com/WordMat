@@ -33,12 +33,12 @@ Sub OpenWebV()
     DN = GetGeoGebraMathAppsFolder()
     If DN = vbNullString Then
         MsgBox "geogebra-math-apps could not be located"
-        GoTo Slut
+        GoTo slut
     End If
     FN = DN & "GeoGebraCASApplet.html"
     If Dir(FN) = vbNullString Then
         MsgBox "geogebra-math-apps/GeoGebraCASApplet.html could not be located"
-        GoTo Slut
+        GoTo slut
     End If
     
     WebV.navigate "file://" & FN
@@ -56,7 +56,7 @@ hop:
     WebV.ExecuteScriptNonBlock (JS)
     Do Until WebV.WaitUntilScriptFinished(1000) Or j >= 5
         UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-        If omax.StopNow Then GoTo Slut
+        If omax.StopNow Then GoTo slut
         res = WebV.GetJSReturnVal()
         If Replace(res, """", "") = "5" Then Exit Do
         DoEvents
@@ -75,7 +75,7 @@ hop:
         End If
     End If
    
-Slut:
+slut:
     Unload UfWait2
 #End If
 End Sub
@@ -205,7 +205,7 @@ start1:
     Do Until WebV.WaitUntilScriptFinished(200) Or j >= 75
 '    Do Until WebV.GetJSReturnVal() <> "xQw6rT" Or j >= 75
         If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-        If omax.StopNow Then GoTo Slut
+        If omax.StopNow Then GoTo slut
 '        Wait (0.2)
         j = j + 1
         If j = 10 And UfWait2 Is Nothing Then
@@ -245,7 +245,7 @@ start1:
     Else
         ExecuteGeogebraCmdViaJS = WebV.GetJSReturnVal()
     End If
-Slut:
+slut:
     If Not UfWait2 Is Nothing Then Unload UfWait2
 #End If
 End Function

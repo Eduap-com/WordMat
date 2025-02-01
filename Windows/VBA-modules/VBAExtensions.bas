@@ -21,28 +21,28 @@ Public Function GetCountOfChar(ByVal ar_sText As String, ByVal a_sChar As String
 End Function
 Function TrimR(ByVal text As String, c As String)
 ' fjerner c fra højre side af text
-If text = "" Then GoTo Slut
+If text = "" Then GoTo slut
 Do While right(text, 1) = c
     text = Left(text, Len(text) - 1)
 Loop
 TrimR = text
-Slut:
+slut:
 End Function
 Function TrimL(ByVal text As String, c As String)
 ' fjerner c fra venstre side af text
-If text = "" Then GoTo Slut
+If text = "" Then GoTo slut
 Do While Left(text, 1) = c
     text = right(text, Len(text) - 1)
 Loop
 TrimL = text
-Slut:
+slut:
 End Function
 
 Function TrimB(ByVal text As String, c As String)
 ' fjerner c fra Begge sider af text
 TrimB = TrimL(text, c)
 TrimB = TrimR(TrimB, c)
-Slut:
+slut:
 End Function
 Function TrimRenter(ByVal text As String)
 ' removes crlf at right end

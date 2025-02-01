@@ -58,7 +58,7 @@ Private Sub MultiPageControl_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByV
 End Sub
 
 Sub CloseForm(Ctrl As MSForms.control, ByVal KeyCode As Integer)
-On Error GoTo Slut
+On Error GoTo slut
     If KeyCode = 27 Then
         If Left(TypeName(Ctrl.Parent), 8) = "UserForm" Then
             Ctrl.Parent.hide
@@ -72,6 +72,6 @@ On Error GoTo Slut
             Ctrl.Parent.Parent.Parent.Parent.Parent.hide
         End If
     End If
-Slut:
+slut:
 End Sub
 

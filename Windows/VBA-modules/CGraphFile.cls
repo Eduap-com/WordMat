@@ -89,10 +89,10 @@ Print #filnr, GraphText  ' print skriver uden " "
 'Write #filnr,    ' Write blank line.
 'Write #filnr, MyError; " is an error value"
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 Close #filnr    ' Close file.
 
 End Sub

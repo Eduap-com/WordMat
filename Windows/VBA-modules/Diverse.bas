@@ -231,7 +231,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     Dim KB As KeyBinding
     Dim GemT As Template, s As String
     Dim KeybInNormal As Boolean, KBerr As Boolean
-    On Error GoTo Slut
+    On Error GoTo slut
     Set GemT = CustomizationContext
         
     Set WT = GetWordMatTemplate(False)
@@ -241,7 +241,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
             MsgBox "Det ser ikke ud til at du har åbnet wordmat.dotm, men kører som global skabelon. Genveje vises for " & ActiveDocument.AttachedTemplate & "", vbOKOnly, "Ingen WordMat skabelon"
             Set WT = ActiveDocument.AttachedTemplate
         Else
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -267,7 +267,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
             MsgBox "Der er sat WordMat tastaturgenveje i Normal.dotm", vbOKOnly Or vbInformation, "Advarsel"
             DeleteNormalDotm
         End If
-        GoTo Slut
+        GoTo slut
     End If
     
     CustomizationContext = WT
@@ -302,7 +302,7 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
         CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er problemer med Genvejene i WordMat*.dotm. Der skal nok køres GenerateKeyboardShortcutsWordMat på Mac." & vbCrLf
     End If
     
-Slut:
+slut:
     On Error Resume Next
     CustomizationContext = GemT
 
@@ -354,7 +354,7 @@ Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False
 '            GoTo slut
 '        End If
         MsgBox "Den åbne skabelon er ikke wordmat*.dotm", vbOKOnly, "Fejl"
-        GoTo Slut
+        GoTo slut
     End If
     
     CustomizationContext = WT
@@ -428,7 +428,7 @@ End If
         
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="WMPShowFormler"
     
-Slut:
+slut:
     Set CustomizationContext = GemT
 
 End Sub
@@ -459,10 +459,10 @@ Function GetProgramFilesDir() As String
     End If
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
-Slut:
+slut:
     'MsgBox GetProgramFilesDir
 End Function
 Function GetDocumentsDir() As String
@@ -481,10 +481,10 @@ On Error GoTo Fejl
  DocumentsDir = GetDocumentsDir
  End If
  
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
-Slut:
+slut:
 'MsgBox GetProgramFilesDir
 End Function
 
@@ -626,7 +626,7 @@ Sub InsertSletDef()
     Dim gemsb As Integer
     Dim gemsa As Integer
     Dim Oundo As UndoRecord
-    On Error GoTo Slut
+    On Error GoTo slut
     
     If Selection.Tables.Count > 0 Then
         MsgBox2 "Can't insert in a table", vbOKOnly, "Error"
@@ -666,7 +666,7 @@ Sub InsertSletDef()
     On Error Resume Next
     Selection.OMaths(1).Range.Font.Size = 8
     Selection.OMaths(1).Range.Font.ColorIndex = wdGray50
-    On Error GoTo Slut
+    On Error GoTo slut
     Selection.TypeText Sprog.A(69) & ":"
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
@@ -683,7 +683,7 @@ Sub InsertSletDef()
             '        .SpaceAfterAuto = False
         End With
     End If
-Slut:
+slut:
     Oundo.EndCustomRecord
 End Sub
 
@@ -718,10 +718,10 @@ Sub InsertDefiner()
     End If
     Selection.Collapse wdCollapseEnd
         
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
     Oundo.EndCustomRecord
 End Sub
 
@@ -738,7 +738,7 @@ Sub ForrigeResultat()
     Application.ScreenUpdating = False
     
     On Error Resume Next
-    If Selection.OMaths.Count = 0 Then GoTo Slut
+    If Selection.OMaths.Count = 0 Then GoTo slut
     
     Dim scrollpos As Double
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -784,7 +784,7 @@ Sub ForrigeResultat()
         If Len(r.text) = 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
-            GoTo Slut
+            GoTo slut
         End If
         s = omax.ReadEquation2(r)
 '        s = omax.ReadEquation(r)
@@ -825,13 +825,13 @@ Loop While hopover
 '    ResPos2 = Selection.start
 '    ActiveDocument.Range.OMaths(ra.OMaths.Count).BuildUp
 '    ResPos2 = ResPos1 + Len(ActiveDocument.Range.OMaths(matfeltno).Range.text) - ml
-GoTo Slut
+GoTo slut
 Fejl:
     ResIndex = 0
     ResFeltIndex = 0
     ResPos2 = 0
     ResPos1 = 0
-Slut:
+slut:
 '    Selection.End = sslut ' slut skal være først eller går det galt
 '    Selection.start = start
 '    Call sr.Move(wdCharacter, Len(s))
@@ -927,10 +927,10 @@ On Error GoTo Fejl
 #Else
     OpenWordFile "" & FilNavn
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub OpenWordFile(FilNavn As String)
     ' OpenWordFile ("Figurer.docx")
@@ -968,10 +968,10 @@ Sub OpenWordFile(FilNavn As String)
     End If
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 
@@ -1233,10 +1233,10 @@ Sub CheckForUpdateOld()
     End If
 
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub CheckForUpdate()
 '#If Mac Then
@@ -1343,9 +1343,9 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     End If
     
     If RunSilent Then
-        If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo Slut ' ikke automatisk opdatere i maj og juni
+        If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo slut ' ikke automatisk opdatere i maj og juni
         If IsDate(LastUpdateCheck) Then
-            If DateDiff("d", LastUpdateCheck, Date) < 7 Then GoTo Slut ' hvis der er checket indenfor de sidste 7 dage så afslut
+            If DateDiff("d", LastUpdateCheck, Date) < 7 Then GoTo slut ' hvis der er checket indenfor de sidste 7 dage så afslut
         End If
     End If
     LastUpdateCheck = Date ' denne skal være her, og ikke i slutningen, for hvis der sker en fejl i opdateringen, skal den kun komme én gang
@@ -1374,7 +1374,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         If Not RunSilent Then
             MsgBox2 "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
         End If
-        GoTo Slut
+        GoTo slut
     End If
     NewVersion = s
     p = InStr(NewVersion, vbLf)
@@ -1393,7 +1393,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         If Not RunSilent Then
             MsgBox2 "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
         End If
-        GoTo Slut
+        GoTo slut
     End If
     
     '        p = InStr(s, "<body")
@@ -1467,7 +1467,7 @@ Install2:
    
    
    
-    GoTo Slut
+    GoTo slut
 Fejl:
     '   MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure CheckForUpdate, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     If Not RunSilent Then
@@ -1475,7 +1475,7 @@ Fejl:
         OpenLink "https://www.eduap.com/da/download-wordmat/"
         '        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     End If
-Slut:
+slut:
     On Error Resume Next
 '    Unload UFvent
 
@@ -1490,10 +1490,10 @@ Sub CheckForUpdateSilent()
 '#Else
     CheckForUpdateWindows True
 '#End If
-GoTo Slut
+GoTo slut
 Fejl:
 '    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
-Slut:
+slut:
 End Sub
 Function GetHTML(URL As String) As String
     With CreateObject("MSXML2.XMLHTTP")
@@ -1566,7 +1566,7 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = ConvertNumberToString & ") "
     End If
     
-Slut:
+slut:
 End Function
 Function ConvertNumberToStringBC(n As Double, Optional bc As Integer) As String
 ' konverter tal til streng med angivet antal betydende cifre. Hvis ingen angives anvendes maximacifre
@@ -1638,13 +1638,13 @@ End Sub
 Public Sub ClearClipBoard()
 ' giver desværre sjældne problemer på nogle computere
 ' specielt hvis der er definitioner i dokumentet så den fyres to gange
-On Error GoTo Slut
+On Error GoTo slut
     Dim oData   As New DataObject 'object to use the clipboard
      
     oData.SetText text:=Empty 'Clear
     oData.PutInClipboard 'take in the clipboard to empty it
     Set oData = Nothing
-Slut:
+slut:
 End Sub
 
 Sub GoToEndOfMath()
@@ -1655,7 +1655,7 @@ Dim i As Integer
     If mc.Count > 0 Then
 On Error Resume Next
     mc(mc.Count).ParentOMath.Range.Select
-On Error GoTo Slut
+On Error GoTo slut
     mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
     Else
         i = 0
@@ -1664,7 +1664,7 @@ On Error GoTo Slut
             i = i + 1
         Loop
     End If
-Slut:
+slut:
 On Error Resume Next
     Selection.Collapse wdCollapseEnd
     Dim r As Range
@@ -1694,7 +1694,7 @@ Sub TabelToList()
         Else
             MsgBox "Select a table first", vbOKOnly, "Error"
         End If
-        GoTo Slut
+        GoTo slut
     End If
     PrepareMaxima
     dd.ReadSelectionS
@@ -1709,10 +1709,10 @@ Sub TabelToList()
     Selection.TypeText dd.GetListFormS(CInt(Not (MaximaSeparator)))
     OM.OMaths(1).BuildUp
     Selection.TypeParagraph
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ListToTabel()
 Dim dd As New DocData
@@ -1730,7 +1730,7 @@ If dd.nrows = 0 Or dd.ncolumns = 0 Then
     Else
         MsgBox "Select a list first. Example: [1;2;3]", vbOKOnly, "Error"
     End If
-    GoTo Slut
+    GoTo slut
 End If
 GoToInsertPoint
 Selection.TypeParagraph
@@ -1764,10 +1764,10 @@ For i = 1 To dd.nrows
     Next
 Next
 
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
     Oundo.EndCustomRecord
 End Sub
 Sub GoToInsertPoint()
@@ -1834,7 +1834,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         Dim EqName As String
         UserFormEnterEquationRef.Show
         EqName = UserFormEnterEquationRef.EquationName    'Replace(InputBox(Sprog.A(5), Sprog.A(4), "Eq"), " ", "")
-        If EqName = vbNullString Then GoTo Slut
+        If EqName = vbNullString Then GoTo slut
     End If
     
     Application.ScreenUpdating = False
@@ -1952,10 +1952,10 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
     Oundo.EndCustomRecord
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEquationRef()
@@ -1995,10 +1995,10 @@ Sub InsertEquationRef()
 
     '    Selection.MoveLeft Unit:=wdCharacter, count:=1
     '    Selection.Fields.ToggleShowCodes
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub SetEquationNumber()
@@ -2039,10 +2039,10 @@ On Error GoTo Fejl
     End If
     
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub SetFieldNo(F As Field, n As String)
@@ -2057,10 +2057,10 @@ On Error GoTo Fejl
     F.Code.text = F.Code.text & "\r" & n & " \c"
     F.Update
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEquationHeadingNo()
@@ -2077,10 +2077,10 @@ On Error GoTo Fejl
       Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq2 \r0 \h"
 
     ActiveDocument.Fields.Update
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub UpdateEquationNumbers()
@@ -2088,10 +2088,10 @@ On Error GoTo Fejl
 
     ActiveDocument.Fields.Update
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub CreateSprogArrays()
@@ -2200,10 +2200,10 @@ Sub SaveBackup()
     DoEvents
 #End If
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
-Slut:
+slut:
     On Error Resume Next
     If Not UfWait Is Nothing Then Unload UfWait
     Application.ScreenUpdating = True
@@ -2212,10 +2212,10 @@ End Sub
 Sub OpenLatexTemplate()
 On Error GoTo Fejl
     Documents.Add Template:=GetWordMatDir() & "WordDocs/LatexWordTemplate.dotx"
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub DeleteNormalDotm()
@@ -2296,10 +2296,10 @@ Function ReadTextfileToString(FilNavn As String) As String
    Set fsT = Nothing
 #End If
 
-   GoTo Slut
+   GoTo slut
 Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
-Slut:
+slut:
 
 End Function
 
@@ -2315,10 +2315,10 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
    Dim fsT As Object
    'On Error GoTo fejl
 
-   If FilNavn = "" Then GoTo Slut
+   If FilNavn = "" Then GoTo slut
    If WriteText = "" Then
       If Dir(FilNavn) <> "" Then Kill FilNavn
-         GoTo Slut
+         GoTo slut
    End If
    Set fsT = CreateObject("ADODB.Stream")
    fsT.Type = 2 'Specify stream type - we want To save text/string data.
@@ -2331,10 +2331,10 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
 #End If
 
 
-   GoTo Slut
+   GoTo slut
 Fejl:
    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTexfilen"
-Slut:
+slut:
 
 End Sub
 
@@ -2484,10 +2484,10 @@ Sub NewEquation()
         Selection.TypeParagraph
         Selection.MoveLeft unit:=wdCharacter, Count:=2
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox2 Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Function FormatDefinitions(DefS As String) As String

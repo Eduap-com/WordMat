@@ -20,10 +20,10 @@ Sub indsaetformel()
     Selection.MoveRight unit:=wdCharacter, Count:=2
     Oundo.EndCustomRecord
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Function VisDef() As String
 'Dim omax As New CMaxima
@@ -39,10 +39,10 @@ Dim deftext As String
         deftext = Sprog.A(114)
     End If
     VisDef = deftext
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Function
 Sub DefinerVar()
     Dim Var As String
@@ -59,10 +59,10 @@ Sub DefinerVar()
         Selection.MoveRight unit:=wdCharacter, Count:=2
     End If
     
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub DefinerFunktion()
     Dim Var As String
@@ -79,10 +79,10 @@ On Error GoTo Fejl
         Selection.OMaths(1).BuildUp
         Selection.MoveRight unit:=wdCharacter, Count:=2
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub DefinerLigning()
     Dim Var As String
@@ -96,10 +96,10 @@ On Error GoTo Fejl
         Selection.OMaths(1).BuildUp
         Selection.MoveRight unit:=wdCharacter, Count:=2
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ErstatPunktum()
 '
@@ -142,10 +142,10 @@ On Error GoTo Fejl
         .MatchAllWordForms = False
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ErstatKomma()
 '
@@ -188,10 +188,10 @@ On Error GoTo Fejl
         .MatchAllWordForms = False
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub Gange()
@@ -201,7 +201,7 @@ End Sub
 Sub SimpelUdregning()
 ' laver simpel udregning med 4 regningsarter og ^
     
-    On Error GoTo Slut
+    On Error GoTo slut
     Dim r As Range
     Dim sindex As Integer
     Dim resultat As String
@@ -244,7 +244,7 @@ Sub SimpelUdregning()
     Selection.MoveRight unit:=wdCharacter, Count:=1
 '    Selection.TypeText (" ")
 
-Slut:
+slut:
 End Sub
 
 Sub ReplaceStarMult()
@@ -257,10 +257,10 @@ On Error GoTo Fejl
     Call ActiveDocument.Range.Find.Execute("*", , , , , , , , , VBA.ChrW(183), wdReplaceAll)
 
 '    MsgBox "Alle * er nu lavet om til " & VBA.ChrW(183)
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub ReplaceStarMultBack()
 ' fjerner alm gangetegn og indsætter *
@@ -272,18 +272,18 @@ On Error GoTo Fejl
     Call Selection.Range.Find.Execute(VBA.ChrW(8226), , , , , , , , , "*", wdReplaceAll) ' tyk prik
     
 '    MsgBox "Alle " & VBA.ChrW(183) & " er nu lavet om til *"
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 Sub MaximaSettings()
 On Error GoTo Fejl
     If UFMSettings Is Nothing Then Set UFMSettings = New UserFormMaximaSettings
     UFMSettings.Show
-    GoTo Slut
+    GoTo slut
 Fejl:
     Set UFMSettings = New UserFormMaximaSettings
     UFMSettings.Show
-Slut:
+slut:
 End Sub

@@ -64,13 +64,13 @@ Sub RefreshRibbon()
         ' It is exactly what we should have instead of that brute force reload mechanism.
     End If
 
-GoTo Slut
+GoTo slut
 Fejl:
 '    MsgBox Sprog.A(394), vbOKOnly, Sprog.Error ' oplever ikke at WordMat crasher af den grund mere
     MsgBox Err.Description
     Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
     lngRibPtr = 0
-Slut:
+slut:
 #End If
 End Sub
 ' events der fyres når der trykkes på ribbon
@@ -96,10 +96,10 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
     
     Oundo.EndCustomRecord
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(395), vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Public Sub Rib_Settings(control As IRibbonControl)
@@ -868,10 +868,10 @@ Sub Rib_nylign(control As IRibbonControl)
     Selection.OMaths.Add Range:=Selection.Range
 '    Selection.OMaths(1).BuildUp
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 'Callback for ButtonNumEq onAction
 Sub Rib_nynumlign(control As IRibbonControl)
@@ -935,6 +935,19 @@ Sub Rib_ConvTexLatex(control As IRibbonControl)
     SaveDocToLatexTex
 #End If
 End Sub
+Sub Rib_ConvHtml(control As IRibbonControl)
+#If Mac Then
+    MsgBox2 "This function is not supported on Mac", vbOKOnly, "No support"
+#Else
+    On Error Resume Next
+    Err.Clear
+    Application.Run macroname:="ExportHTML"
+    If Err.Number <> 0 Then
+        MsgBox2 "This function requires WordMat+" & vbCrLf & "The codefile may be missing", vbOKOnly, "No WordMat+"
+    End If
+#End If
+End Sub
+
 Sub Rib_ConvPDFLatex(control As IRibbonControl)
 #If Mac Then
     MsgBox "This function is not avaiable on Mac.", vbOKOnly, "Mac issue"
@@ -991,7 +1004,12 @@ Sub Rib_Help(control As IRibbonControl)
 '    hjælpeMenu
 End Sub
 Sub Rib_HelpOnline(control As IRibbonControl)
-    OpenLink "https://sites.google.com/site/wordmat/"
+'    OpenLink "https://sites.google.com/site/wordmat/"
+    If Sprog.SprogNr = 1 Then
+        OpenLink "https://www.eduap.com/wordmatdoc/da/index.html"
+    Else
+        OpenLink "https://www.eduap.com/wordmatdoc/en/index.html"
+    End If
 End Sub
 Sub Rib_HelpMaxima(control As IRibbonControl)
     OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
@@ -1072,13 +1090,6 @@ chosunit:
             GoTo chosunit
         End If
         WoMatRibbon.Invalidate
-End Sub
-Sub Rib_GetImageUnit(control As IRibbonControl, ByRef returnedVal)
-    If Sprog.SprogNr = 1 Then
-    returnedVal = "E"
-    Else
-        returnedVal = "U"
-    End If
 End Sub
 Sub Rib_getLabelDecimaler(control As IRibbonControl, ByRef returnedVal)
     If MaximaDecOutType = 1 Then

@@ -177,10 +177,10 @@ Function RunScript(ScriptName As String, Param As String) As String
 ' filetype: .scpt or .applescript
 On Error GoTo Fejl
     RunScript = AppleScriptTask("WordMatScripts.scpt", ScriptName, Param)
-GoTo Slut
+GoTo slut
 Fejl:
     RunScript = "ScriptError"
-Slut:
+slut:
 End Function
 
 Public Function ExecuteMaximaViaFile(MaximaCommand As String, Optional ByVal MaxWait As Integer = 10, Optional UnitCore As Boolean = False) As String
@@ -204,10 +204,10 @@ On Error GoTo Fejl
 '    ExecuteMaximaViaFile = ReadMaximaOutputFile()
 'MsgBox ExecuteMaximaViaFile
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     ExecuteMaximaViaFile = "Fejln" & Err.Number
-Slut:
+slut:
     
 End Function
 

@@ -80,10 +80,10 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
 #Else
     Me.hide
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
     Label_vent.visible = False
 End Sub
 Private Sub UserForm_Initialize()

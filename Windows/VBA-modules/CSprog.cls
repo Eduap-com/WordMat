@@ -3401,7 +3401,7 @@ SA(696, 0) = "Vælg hvordan tal skal skrives og afrundes. I eksemplerne nedenfor 
 SA(696, 1) = "Choose how numbers are fomatted and rounded. In the examples below WordMat is set to 3 figures" & vbCrLf & vbCrLf & "Decimals: 12,345" & vbCrLf & "Significant figures: 12,3" & vbCrLf & "Sci. notation: 1,23*10^1"
 SA(696, 2) = ""
 
-SA(697, 0) = "Kvadratkomplementering"
+SA(697, 0) = "Kvadratkomplettering"
 SA(697, 1) = "Complete the square"
 SA(697, 2) = ""
 

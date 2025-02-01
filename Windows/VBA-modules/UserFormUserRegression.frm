@@ -74,11 +74,11 @@ Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shif
 '        Label_epswarning.visible = False
     End If
 
-GoTo Slut
+GoTo slut
 Fejl:
         Label_epswarning.Caption = Sprog.A(46)
         Label_eps.visible = True
-Slut:
+slut:
     EventsOn = True
 
 End Sub

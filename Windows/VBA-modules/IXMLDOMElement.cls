@@ -28,8 +28,8 @@ End Function
 Public Property Get tagName() As String
     tagName = m_tagname
 End Property
-Public Property Let tagName(rhs As String)
-    m_tagname = rhs
+Public Property Let tagName(RHS As String)
+    m_tagname = RHS
 End Property
 '
 Private Sub Class_Initialize()
@@ -46,8 +46,8 @@ End Function
 Public Property Get IXMLDOMNode_nodeValue() As String
     IXMLDOMNode_nodeValue = m_value
 End Property
-Public Property Let IXMLDOMNode_nodeValue(rhs As String)
-    m_value = rhs
+Public Property Let IXMLDOMNode_nodeValue(RHS As String)
+    m_value = RHS
 End Property
 '
 Public Function IXMLDOMNode_myChildren() As Collection

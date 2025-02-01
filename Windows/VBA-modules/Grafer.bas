@@ -136,7 +136,7 @@ Public Sub Plot2DGraph()
                 Sel.InlineShapes(1).Select
                 UF2Dgraph.Show vbModeless
                 PicOpen = True
-                GoTo Slut
+                GoTo slut
             End If
         End If
     End If
@@ -194,10 +194,10 @@ Public Sub Plot2DGraph()
     Selection.start = sstart
     UF2Dgraph.Show vbModeless
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
     CASengine = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
@@ -242,10 +242,10 @@ ElseIf UF2Dgraph.TextBox_ligning5.text = "" Then
 ElseIf UF2Dgraph.TextBox_ligning6.text = "" Then
     UF2Dgraph.TextBox_ligning6.text = Ligning
 End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub PlotDF()
@@ -288,7 +288,7 @@ Sub PlotDF()
         s = s & "SolveODE(" & ea.text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
         s = s & "SolveODE(" & ea.text & ", x(A), y(A), Xmax, Tic)"
         OpenGeoGebraWeb s, "Classic", True, True
-        GoTo Slut
+        GoTo slut
 #If Mac Then
 #Else
     End If
@@ -330,10 +330,10 @@ Sub PlotDF()
     UF2Dgraph.MultiPage1.SetFocus
     UF2Dgraph.Show vbModeless
 
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 End Sub
 
 Sub InsertEmptyGraphOleObject()
@@ -370,7 +370,7 @@ Sub InsertGraphOleObject()
 Dim Path As String
 Dim ils As InlineShape
 Dim Arr As Variant
-Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
+Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
 Dim ea As New ExpressionAnalyser
 Dim p As Integer
     Dim sslut As Long
@@ -444,12 +444,12 @@ Dim i As Integer
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
-                    rhs = Arr(1)
+                    RHS = Arr(1)
                     ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = rhs
+                        ea.text = RHS
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
@@ -521,12 +521,12 @@ Dim i As Integer
     Unload UfWait
 
 Application.ScreenUpdating = True
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.A(97), vbOKOnly, Sprog.Error
     omax.ConvertLnLog = True
     Unload UfWait
-Slut:
+slut:
     omax.ConvertLnLog = True
 #End If
 End Sub
@@ -585,7 +585,7 @@ Dim ea As New ExpressionAnalyser
 Dim xmin As Double, xmax As Double
 Dim Arr As Variant
 Dim i As Integer
-Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String
+Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String
 Dim srange As Range
 Dim ScriptDataPoints As String ' "1:2#3:4"
 Dim ScriptFunctions As String ' "2*x+1#3*t-1:t"
@@ -623,15 +623,15 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
-                    rhs = Arr(1)
+                    RHS = Arr(1)
                     ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
 '                    If varnavn = "" And fktnavn = Y Then varnavn = X
                     If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ScriptFunctions = ScriptFunctions & rhs & ":" & varnavn & "#"
+                        ScriptFunctions = ScriptFunctions & RHS & ":" & varnavn & "#"
                     Else
-                        ScriptFunctions = ScriptFunctions & rhs & ":x" & "#"
+                        ScriptFunctions = ScriptFunctions & RHS & ":x" & "#"
                     End If
                 ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
                 Else
@@ -674,7 +674,7 @@ Dim ws As Object
 Dim xlap As Object 'Excel.Application
 Dim xmin As Double, xmax As Double
 Dim i As Integer
-Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String
+Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String
 Dim Arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
@@ -744,17 +744,17 @@ End If
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
-                    rhs = Arr(1)
+                    RHS = Arr(1)
                     ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
 '                    If varnavn = "" And fktnavn = Y Then varnavn = X
                     If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ws.Range("B4").Offset(0, i).Value = rhs
+                        ws.Range("B4").Offset(0, i).Value = RHS
                         ws.Range("B1").Offset(0, i).Value = varnavn
                     Else
 '                        DefinerKonstanterGraph udtryk, deflist, graphfil, True
-                        ws.Range("B4").Offset(0, i).Value = rhs
+                        ws.Range("B4").Offset(0, i).Value = RHS
                         ws.Range("B1").Offset(0, i).Value = "x"
                         ' blev brugt før relation
 '                        fktudtryk = ReplaceIndepvarX(rhs)
@@ -813,10 +813,10 @@ End If
     srange.Select
     Selection.Collapse wdCollapseEnd
 
-GoTo Slut:
+GoTo slut:
 Fejl:
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
-Slut:
+slut:
 On Error GoTo slut2
     UfWait2.Label_progress = UfWait2.Label_progress & "**"
     xlap.Run ("Auto_open")
@@ -950,12 +950,12 @@ If startark <> "" Then
 End If
 Unload UfWait2
 
-GoTo Slut
+GoTo slut
 Fejl:
     On Error Resume Next
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
     Unload UfWait2
-Slut:
+slut:
 End Function
 
 Sub InsertPindeDiagram()

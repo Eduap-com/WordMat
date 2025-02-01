@@ -102,11 +102,11 @@ hop:
         Selection.TypeParagraph
         ReadSelection = True ' ingen fejl
     End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelection = False
-Slut:
+slut:
 
 End Function
 Public Function ReadSelectionS() As Boolean
@@ -163,34 +163,34 @@ End If
     Selection.TypeParagraph
     ReadSelectionS = True ' ingen fejl
 End If
-GoTo Slut
+GoTo slut
 Fejl:
 '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelectionS = False
-Slut:
+slut:
 
 End Function
 
 Public Function TabelCelle(r, c) As Double
 On Error GoTo Fejl
-If c > ncolumns Or r > nrows Then GoTo Slut
+If c > ncolumns Or r > nrows Then GoTo slut
 
 TabelCelle = Tabel(r, c)
 
-GoTo Slut
+GoTo slut
 Fejl:
-Slut:
+slut:
 
 End Function
 Public Function TabelsCelle(r, c) As String
 On Error GoTo Fejl
-If c > ncolumns Or r > nrows Then GoTo Slut
+If c > ncolumns Or r > nrows Then GoTo slut
 
 TabelsCelle = tabels(r, c)
 
-GoTo Slut
+GoTo slut
 Fejl:
-Slut:
+slut:
 
 End Function
 
@@ -304,7 +304,7 @@ Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim r() As String
 Dim i As Integer
-On Error GoTo Slut
+On Error GoTo slut
 
 ReDim r(1 To 1000) As String
 If Selection.OMaths.Count > 0 Then
@@ -383,7 +383,7 @@ ElseIf nrows > 0 Then
     ReDim Preserve tabels(1 To nrows, 1 To ncolumns) As String
 End If
 
-Slut:
+slut:
 End Sub
 
 'Function ReadEquation(Optional ir As Range) As String
@@ -425,7 +425,7 @@ Sub ReadMathBoxes()
 ' indsætter de markerede ligningsfelter som mboxes array
 Dim antal As Integer
 Dim j As Integer
-On Error GoTo Slut
+On Error GoTo slut
 
 ' hvis bold giver det buildup problemer
 For j = 1 To Selection.OMaths.Count
@@ -482,7 +482,7 @@ Else
     ActiveDocument.Undo
 End If
 
-Slut:
+slut:
     
     sr.Select
 ' Selection.start = sstart

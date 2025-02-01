@@ -253,9 +253,11 @@ End Sub
 Private Sub CommandButton_nulstillign1_Click()
     TextBox_ligning1.text = ""
 End Sub
-Private Sub CommandButton_nulstilligning2_Click()
+
+Private Sub CommandButton_nulstillign2_Click()
     TextBox_ligning2.text = ""
 End Sub
+
 Private Sub CommandButton_nulstillign3_Click()
     TextBox_ligning3.text = ""
 End Sub
@@ -567,7 +569,7 @@ End If
 
 
 
-If grafobj = "" Then GoTo Slut
+If grafobj = "" Then GoTo slut
 
 If OptionButton_kunlinjer Then
     If Not CheckBox_transp.Value Then
@@ -630,10 +632,10 @@ End If
 '    End If
     omax.PrepareNewCommand
     Label_vent.visible = False
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
 Function GetNextEnhFunc() As String
@@ -790,9 +792,9 @@ End Sub
 Sub SetCaptions()
     Me.Caption = Sprog.A(302)
 '    CommandButton_ok.Caption = Sprog.OK ' gnuplot not ok
-    Label6.Caption = Sprog.Equation & " 1"
-    Label7.Caption = Sprog.Equation & " 2"
-    Label8.Caption = Sprog.Equation & " 3"
+    Label6.Caption = Sprog.A(186) & " 1"
+    Label7.Caption = Sprog.A(186) & " 2"
+    Label8.Caption = Sprog.A(186) & " 3"
     Label9.Caption = Sprog.A(198)
     CommandButton_nulstilforsk1.Caption = Sprog.Reset
     CommandButton_nulstilforsk2.Caption = Sprog.Reset

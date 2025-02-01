@@ -53,10 +53,10 @@ Err:
     On Error Resume Next
     Close fh
 End Sub
-Public Property Let preserveWhiteSpace(ByVal rhs As Boolean)
+Public Property Let preserveWhiteSpace(ByVal RHS As Boolean)
 '
 End Property
-Public Property Let Async(ByVal rhs As Boolean)
+Public Property Let Async(ByVal RHS As Boolean)
 '
 End Property
 Private Sub Class_Initialize()

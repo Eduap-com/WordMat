@@ -24,8 +24,10 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Dim Var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
     Dim Arr As Variant, uvar As String
-    Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
+    Dim VektNArr As Variant, VNi As Integer
+    VektNArr = Array("a", "b", "c", "v", "w")
 
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
@@ -99,17 +101,17 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
         Udtryk = ConvertToGeogebraSyntax(Udtryk)
         If Gtype <> "CAS" Then
             If Len(Udtryk) > 0 Then
-                If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+                If InStr(Udtryk, "matrix") < 1 Then ' matricer er ikke implementeret endnu
                     If InStr(Udtryk, "=") > 0 Then
                         Arr = Split(Udtryk, "=")
-                        LHS = Arr(0)
-                        rhs = Arr(1)
+                        LHS = Trim(Arr(0))
+                        RHS = Trim(Arr(1))
                         ea.text = LHS
                         fktnavn = ea.GetNextVar(1)
                         varnavn = ea.GetNextBracketContent(1)
                     
                         If LHS = fktnavn & "(" & varnavn & ")" Then
-                            ea.text = rhs
+                            ea.text = RHS
                             ea.Pos = 1
                             ea.ReplaceVar varnavn, "x"
                             fktudtryk = ea.text
@@ -118,9 +120,8 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                             cmd = fktnavn & "(x)=" & fktudtryk
                             cmd = Replace(cmd, "+", "%2B") & ";"
                             UrlLink = UrlLink & cmd
-
-                        Else
-                            fktudtryk = ReplaceIndepvarX(rhs, uvar)
+                        ElseIf LHS = "y" Or LHS = "z" Then
+                            fktudtryk = ReplaceIndepvarX(RHS, uvar)
                             If Not (uvar = "" Or uvar = "x") Then  'Or uvar = "t"
                                 DefList = DefList & uvar & ","
                             End If
@@ -133,7 +134,41 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                             cmd = Replace(cmd, "+", "%2B") & ";"
                             UrlLink = UrlLink & cmd
                             j = j + 1
+                        ElseIf LHS = "({{x},{y}})" Then 'parameterfremstilling
+                            RHS = Replace(RHS, "{", "(")
+                            RHS = Replace(RHS, "}", ")")
+                            RHS = Replace(RHS, "((", "(")
+                            RHS = Replace(RHS, "))", ")")
+                            cmd = "Param:X=" & RHS
+                            cmd = Replace(cmd, "+", "%2B") & ";"
+                            UrlLink = UrlLink & cmd
+                        ElseIf right(LHS, 3) = "pil" Then
+                            LHS = Left(LHS, Len(LHS) - 3)
+                            RHS = Replace(RHS, "{", "(")
+                            RHS = Replace(RHS, "}", ")")
+                            cmd = LHS & "=" & RHS
+                            DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
+                            cmd = Replace(cmd, "+", "%2B") & ";"
+                            UrlLink = UrlLink & cmd
+                        Else ' ligning
+                            cmd = LHS & "=" & RHS
+                            DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
+                            cmd = Replace(cmd, "+", "%2B") & ";"
+                            UrlLink = UrlLink & cmd
                         End If
+                    ElseIf Left(Udtryk, 3) = "({{" Then ' vektor
+                        Udtryk = Replace(Udtryk, "{", "(")
+                        Udtryk = Replace(Udtryk, "}", ")")
+'                        Udtryk = Replace(Udtryk, "((", "(")
+'                        Udtryk = Replace(Udtryk, "))", ")")
+                        If VNi < 5 Then
+                            cmd = VektNArr(VNi) & "=" & Udtryk
+                        Else
+                            cmd = "v" & VNi - 4 & "=" & Udtryk
+                        End If
+                        VNi = VNi + 1
+                        cmd = Replace(cmd, "+", "%2B") & ";"
+                        UrlLink = UrlLink & cmd
                     ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
                         DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
                         cmd = "u" & j & "=" & Udtryk
@@ -146,7 +181,6 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                         cmd = "f" & j & "=" & Udtryk
                         cmd = Replace(cmd, "+", "%2B") & ";"
                         UrlLink = UrlLink & cmd
-
                         '                    geogebrafil.CreateFunction "f" & j, udtryk, False
                         j = j + 1
                     End If
@@ -184,7 +218,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     OpenGeoGebraWeb UrlLink, Gtype, False, False ' v.1.26 false, false tilføjet da definitioner kom med to gange
 Fejl:
 
-Slut:
+slut:
     CASengine = TempCas
 End Sub
 
@@ -247,13 +281,13 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
         Else
             UrlLink = "file://" & DN & "GeoGebra" & Gtype & "Applet.html"
         End If
-    Else: GoTo Slut
+    Else: GoTo slut
     End If
 #End If
     UrlLink = UrlLink & "?command=" & cmd
 
     OpenLink UrlLink, True
-Slut:
+slut:
 End Sub
 
 Function GetGeoGebraMathAppsFolder() As String
@@ -401,7 +435,7 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
             Do
                 Wait (0.2)
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-                If UfWait2.StopNow Then GoTo Slut
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -422,7 +456,7 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
             Do
                 Wait (0.2)
                 UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
-                If UfWait2.StopNow Then GoTo Slut
+                If UfWait2.StopNow Then GoTo slut
                 s = RunScript("IsGeoGebraAppReady", "")
                 If Left(s, 3) = "yes" Then Exit Do
                 i = i + 1
@@ -436,13 +470,13 @@ Function RunGeoGebraDirect(ByVal cmd As String, Optional UseDefs As Boolean = Tr
 '            Res = RunScript("ExecuteGeoGebraCASCommand", Cmd & "#?" & Defliste)
         ElseIf Left(res, 5) = "error" Then
 '            Wait (1)
-            GoTo Slut
+            GoTo slut
         End If
 '        Res = Replace(Res, " ", "")
         res = ConvertGeoGebraSyntaxToWord(res)
         omax.MaximaOutput = res
         RunGeoGebraDirect = res
-Slut:
+slut:
      If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
 
@@ -775,7 +809,7 @@ Sub GeoGebra()
     If geogebrasti = "" Then ' hvis geogebra ikke installeret
         Unload UfWait
         InstallGeoGebra
-        GoTo Slut
+        GoTo slut
     End If
 '    geogebrafilersti = GetProgramFilesDir & "\WordMat\GeoGebraFiler\"
     geogebrafilersti = GetTempDir()
@@ -806,10 +840,10 @@ Sub GeoGebra()
     Unload UfWait
     Set UfWait = Nothing
     
-    GoTo Slut
+    GoTo slut
 Fejl:
 '    UserFormGeoGebra.Show
-Slut:
+slut:
     If Not UfWait Is Nothing Then
         Unload UfWait
         Set UfWait = Nothing
@@ -871,10 +905,10 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
     End If
 #End If
     
-    GoTo Slut
+    GoTo slut
 Fejl:
 
-Slut:
+slut:
 '    If Not UfWait Is Nothing Then Unload UfWait
 End Sub
 Function GeoGebraPath() As String
@@ -904,7 +938,7 @@ On Error GoTo Fejl
         Loop
         If DN <> "" Then
             GeoGebraPath = """" & GetProgramFilesDir & "\" & DN & "\GeoGebra.exe"""
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -918,7 +952,7 @@ On Error GoTo Fejl
         If DN <> "" Then
             GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Calculator\" & DN & "\GeoGebraCalculator.exe"
             GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -932,7 +966,7 @@ On Error GoTo Fejl
         If DN <> "" Then
             GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_6\" & DN & "\GeoGebra.exe"
             GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -946,7 +980,7 @@ On Error GoTo Fejl
         If DN <> "" Then
             GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_Graphing\" & DN & "\GeoGebraGraphing.exe"
             GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo Slut
+            GoTo slut
         End If
     End If
         
@@ -960,7 +994,7 @@ On Error GoTo Fejl
         If DN <> "" Then
             GeoGebraPath = Environ("USERPROFILE") & "\AppData\Local\GeoGebra_CAS\" & DN & "\GeoGebraCAS.exe"
             GeoGebraPath = """" & GeoGebraPath & """"
-            GoTo Slut
+            GoTo slut
         End If
     End If
     
@@ -978,21 +1012,21 @@ On Error GoTo Fejl
     If Not GeoGebraPath = "" Then
         GeoGebraPath = GetProgramFilesDir & "\" & GeoGebraPath & "\GeoGebra.exe"
         GeoGebraPath = """" & GeoGebraPath & """"
-        GoTo Slut
+        GoTo slut
     End If
     
     
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     GeoGebraPath = ""
-Slut:
+slut:
 End Function
 Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
     Dim i As Integer, j As Integer
     Dim Arr As Variant
-    Dim fktnavn As String, Udtryk As String, LHS As String, rhs As String, varnavn As String, fktudtryk As String
+    Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     On Error GoTo Fejl
@@ -1068,20 +1102,20 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
-                    rhs = Arr(1)
+                    RHS = Arr(1)
                     ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     
                     If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = rhs
+                        ea.text = RHS
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
                         DefinerKonstanter fktudtryk, DefList, geogebrafil
                         geogebrafil.CreateFunction fktnavn, fktudtryk, False, True
                     Else
-                        fktudtryk = ReplaceIndepvarX(rhs)
+                        fktudtryk = ReplaceIndepvarX(RHS)
                         DefinerKonstanter fktudtryk, DefList, geogebrafil
                         geogebrafil.CreateFunction "f" & j, fktudtryk, False
                         j = j + 1
@@ -1140,10 +1174,10 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     CreateZipFile geogebrasti & "geogebra.zip", geogebrasti & "geogebra.xml"
     Name geogebrasti & "geogebra.zip" As geogebrasti & "geogebra.ggb"
 #End If
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 On Error Resume Next
     omax.ConvertLnLog = True
 End Sub
@@ -1245,10 +1279,10 @@ Sub CreateZipFile(zipfilnavn As Variant, FilNavn As Variant, Optional filnavn2 A
     
 '    On Error GoTo 0
 #End If
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-Slut:
+slut:
 
 End Sub
  

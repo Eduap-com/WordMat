@@ -341,10 +341,10 @@ Public Sub ExportAllModules()
     End If
     
     ExportDatetime = Now
-    GoTo Slut
+    GoTo slut
 Fejl:
     MsgBox "An error occurred during Export. Your previous Export is saved to a backup folder: " & VBAModulesFolder & "-Backup", vbOKOnly, "Error"
-Slut:
+slut:
     '    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
 End Sub
 Sub ImportAllModules()
@@ -378,9 +378,9 @@ Sub ImportAllModules()
     C1 = CountFilesInFolder(ModuleFolder)
     If C1 < 2 Then
         MsgBox "There is only " & C1 & " files in import folder. Import aborted", vbOKOnly, "Aborted"
-        GoTo Slut
+        GoTo slut
     ElseIf C1 < 10 Then
-        If MsgBox("There is only " & C1 & " files in import folder. Are you sure you wish to continue?", vbYesNo, "Warning!") = vbNo Then GoTo Slut
+        If MsgBox("There is only " & C1 & " files in import folder. Are you sure you wish to continue?", vbYesNo, "Warning!") = vbNo Then GoTo slut
     End If
     szSourceWorkbook = ActiveDocument.Name
     Set wkbSource = Application.ActiveDocument
@@ -454,9 +454,9 @@ Sub ImportAllModules()
     Else
         MsgBox ImportCount & " files successfully imported from folder '" & VBAModulesFolder & "'", vbOKOnly, "Import complete"
     End If
-    GoTo Slut
+    GoTo slut
 Fejl:
-Slut:
+slut:
 End Sub
 Public Sub RemoveAllModules()
     DeleteAllModules True

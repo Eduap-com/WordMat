@@ -144,10 +144,10 @@ Dim i As Integer, c As Integer
     MaximaDecOutType = ComboBox_DecType.ListIndex + 1
     
     
-    GoTo Slut
+    GoTo slut
 Fejl:
     SelectedVar = vbNullString
-Slut:
+slut:
     Me.hide
     Application.ScreenUpdating = False
     RefreshRibbon

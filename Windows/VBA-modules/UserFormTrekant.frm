@@ -208,11 +208,11 @@ On Error GoTo Fejl
     
     Oundo.EndCustomRecord
     
-GoTo Slut
+GoTo slut
 Fejl:
     MsgBox Sprog.TSNoSolution, vbOKOnly, Sprog.Error
     Exit Sub
-Slut:
+slut:
     SaveSettings
 #If Mac Then
     Unload Me
@@ -376,7 +376,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(222), sbn & "=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
             End If
         End If
-        GoTo Slut
+        GoTo slut
     ElseIf vA = 90 Then
         If ns = 2 Then
             If SA > 0 And sb > 0 Then
@@ -415,7 +415,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(221), scn & "=" & san & VBA.ChrW(183) & "sin(" & vCn & ")=" & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sc)
             End If
         End If
-        GoTo Slut
+        GoTo slut
     ElseIf vB = 90 Then
         If ns = 2 Then
             If SA > 0 And sb > 0 Then
@@ -454,7 +454,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(221), scn & "=" & sbn & VBA.ChrW(183) & "sin(" & vCn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sc)
             End If
         End If
-        GoTo Slut
+        GoTo slut
     End If
     
     ' Vilkårlig trekant
@@ -668,12 +668,12 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             End If
         End If
     End If
-GoTo Slut
+GoTo slut
 Fejl:
     statustext = Sprog.TSMissingInfo
     If advarsler Then MsgBox statustext, vbOKOnly, Sprog.Error
     Exit Sub
-Slut:
+slut:
     If SA <= 0 Or sb <= 0 Or sc <= 0 Or vA <= 0 Or vB <= 0 Or vC <= 0 Then
         GoTo Fejl
     Else
@@ -713,7 +713,7 @@ SA = Sqr(sb ^ 2 + sc ^ 2 - 2 * sb * sc * Cos(vA * PI / 180))
 
 If SA <= 0 Or sb <= 0 Or sc <= 0 Then
     MsgBox "Der er sider der er 0", vbOKOnly, Sprog.Error
-    GoTo Slut
+    GoTo slut
 End If
 
 If SA > sb Then maxs = SA Else maxs = sb
@@ -763,12 +763,12 @@ yc = yc + 15
         ClearClipBoard
     Else
 v12:
-        On Error GoTo Slut
+        On Error GoTo slut
         cv.CanvasItems.AddConnector msoConnectorStraight, CSng(xa), CSng(ya), CSng(xc - xa), 0
         cv.CanvasItems.AddConnector msoConnectorStraight, CSng(xa), CSng(ya), CSng(xb - xa), CSng(yb - ya)
         cv.CanvasItems.AddConnector msoConnectorStraight, CSng(xc), CSng(yc), CSng(xb - xc), CSng(yb - yc)
     End If
-Slut:
+slut:
 End Sub
 
 Function AddLabel(text As String, X As Double, Y As Double, s As Shape) As Shape

@@ -38,7 +38,7 @@ Sub RemoveCaption(objForm As Object)
 ' Call RemoveCaption(Me)
 Dim mhWndForm As Variant
 Dim lStyle As Variant
-On Error GoTo Slut
+On Error GoTo slut
 
 '    Dim lStyle          As LongPtr
 '    Dim hMenu           As LongPtr
@@ -59,7 +59,7 @@ On Error GoTo Slut
     SetWindowLongPtr mhWndForm, -16, lStyle
     DrawMenuBar mhWndForm
     End If
-Slut:
+slut:
 End Sub
 
 Sub RemoveCaption64bit(objForm As Object)
@@ -84,7 +84,7 @@ Dim lStyle As Variant
     SetWindowLongPtr mhWndForm, -16, lStyle
     DrawMenuBar mhWndForm
 
-Slut:
+slut:
 End Sub
 #End If
 

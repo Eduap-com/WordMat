@@ -13,11 +13,11 @@ Implements IXMLDOMNode
 Private m_target As String
 Private m_data As String
 '
-Public Property Let target(rhs As String)
-    m_target = rhs
+Public Property Let target(RHS As String)
+    m_target = RHS
 End Property
-Public Property Let Data(rhs As String)
-    m_data = rhs
+Public Property Let Data(RHS As String)
+    m_data = RHS
 End Property
 '
 Private Sub Class_Initialize()
@@ -31,7 +31,7 @@ End Function
 Public Property Get IXMLDOMNode_nodeValue() As String
 '
 End Property
-Public Property Let IXMLDOMNode_nodeValue(rhs As String)
+Public Property Let IXMLDOMNode_nodeValue(RHS As String)
 '
 End Property
 '

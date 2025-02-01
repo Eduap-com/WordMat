@@ -15,7 +15,7 @@ Public Declare PtrSafe Function ShellExecute Lib "shell32.dll" Alias "ShellExecu
    Optional ByVal nShowCmd As LongPtr) As LongPtr
 
 Declare PtrSafe Function URLDownloadToFile Lib "urlmon" Alias "URLDownloadToFileA" (ByVal pCaller As Long, ByVal szURL As String, ByVal szFileName As String, ByVal dwReserved As Long, ByVal lpfnCB As Long) As Long
-
+ 
 Sub Sleep2(ByVal WaitTime As Long)
 'waittime is sekunder
 On Error Resume Next

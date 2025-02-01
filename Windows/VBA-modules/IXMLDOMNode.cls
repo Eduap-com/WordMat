@@ -16,7 +16,7 @@ End Function
 Public Property Get nodeValue() As String
 '
 End Property
-Public Property Let nodeValue(rhs As String)
+Public Property Let nodeValue(RHS As String)
 '
 End Property
 Public Function myChildren() As Collection

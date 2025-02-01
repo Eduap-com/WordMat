@@ -62,7 +62,7 @@ Public Function GetObjectFromDll(dllFolder As String, dllFileName As String, dll
 ' dllFolder er den mappe hvor dll-filen ligger
 ' dllFileName er navnet på dll-filen
 ' CLRdllFolder er mappen hvor de to QlmCLRHost_x64.dll and QlmCLRHost_x86.dll er placeret. Hvis intet angives, så bruges dllFolder
-On Error GoTo Slut
+On Error GoTo slut
     Dim LongPath As String, PathLength As Integer, dllPath As String
     Dim ShortPath As String
     
@@ -104,7 +104,7 @@ On Error GoTo Slut
     Dim clrObject As Object
     Set GetObjectFromDll = handle.Unwrap
 
-Slut:
+slut:
     On Error Resume Next
     Call clr.Stop
 End Function

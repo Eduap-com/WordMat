@@ -66,10 +66,10 @@ End Sub
 
 Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
     '    If (KeyCode.Value = 18 Or KeyCode.Value = 78) And Shift = 4 Then ' alt+n
-    On Error GoTo Slut
+    On Error GoTo slut
 #If Mac Then
     j = j + 1
-    If j Mod 2 = 0 Then GoTo Slut
+    If j Mod 2 = 0 Then GoTo slut
 #Else
 #End If
     If KeyCode.Value = 78 And Shift = 4 Then ' alt+n
@@ -92,6 +92,6 @@ Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
     Else
         Me.hide
     End If
-Slut:
+slut:
 End Sub
 

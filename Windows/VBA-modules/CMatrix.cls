@@ -18,13 +18,13 @@ End Sub
 
 Public Property Get Element(r As Long, c As Long) As Variant
 On Error GoTo Fejl
-If c > Columns Or r > Rows Then GoTo Slut
+If c > Columns Or r > Rows Then GoTo slut
 
 Element = Tabel(r, c)
 
-GoTo Slut
+GoTo slut
 Fejl:
-Slut:
+slut:
 End Property
 
 Public Property Let Element(r As Long, c As Long, nval As Variant)
