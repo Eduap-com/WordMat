@@ -1620,15 +1620,14 @@ solvesystem(eqnlqsave, varlqsave) := block(
     SortSolutions(sollq),
     /*forsøg med mnewton, men kun for 2 ligninger*/
     if length(varlqsave)=2 then (
-        load(mnewton),
+        errcatch[load(mnewton)],
         ql: [[0,0],[1,1],[10,10],[100,100],[-1,-1],[-10,-10],[-100,-100],[-10,10],[10,-10]],
 		for zq in ql do (			
-            sollq2: ev(mnewton(eqnlqsave, varlqsave,zq),numer),
+            sollq2: errcatch(ev(mnewton(eqnlqsave, varlqsave,zq),numer)),
             if sollq2 # [] and not(member(sollq2[1],sollq)) then (
                 sollq:append(sollq,[sollq2[1]])
-            )
+            ),print("sollq: ",sollq)
         ),
-        /*remove duplicate values from sollq, where values are within qtol*/
         NewSolq:[],qtol:10^-15,
         for zq in sollq do (
             if flatten(makelist(if (abs(rhs(zq2[1])-rhs(zq[1]))<qtol*10 and abs(rhs(zq2[2])-rhs(zq[2]))<qtol*10) then 1 else [] , zq2, NewSolq))=[] then
@@ -1636,7 +1635,7 @@ solvesystem(eqnlqsave, varlqsave) := block(
         ),
         sollq:NewSolq
     ),
-    /*remove solutions that are false*/
+	    /*remove solutions that are false*/
     sollq2:[],
     for zq in sollq do (
         zq:makelist(if is(equal(lhs(zq2),rhs(zq2)))#false then zq2 else false,zq2,zq),
