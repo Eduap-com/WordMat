@@ -603,24 +603,18 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
         Selection.Font.Bold = False
         Selection.Font.ColorIndex = wdAuto
         Selection.TypeText ("  ")
+        Selection.TypeParagraph
+        Selection.TypeText "resul(forventet resultat):   " & resul
+        Selection.TypeParagraph
+        Selection.TypeText "Oresul(egentlige resultat):  " & Oresul
+        Selection.TypeParagraph
+        Selection.TypeText "Brug denne kode-streng:"
+        Selection.TypeParagraph
         If TestType = 1 Then
-            Selection.TypeParagraph
-            Selection.TypeText "resul(forventet resultat):   " & resul
-            Selection.TypeParagraph
-            Selection.TypeText "Oresul(egentlige resultat):  " & Oresul
-            Selection.TypeParagraph
-            Selection.TypeText "Brug denne kode-streng:"
-            Selection.TypeParagraph
             Selection.TypeText "TestBeregn " & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul))
         ElseIf TestType = 2 Then
-            Selection.TypeParagraph
-            Selection.TypeText "Brug denne kode-streng:"
-            Selection.TypeParagraph
             Selection.TypeText vbTab & "If TestSolve(" & Trim(ConvertToVBAString(komm)) & " , """ & Var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
         ElseIf TestType = 3 Then
-            Selection.TypeParagraph
-            Selection.TypeText "Brug denne kode-streng:"
-            Selection.TypeParagraph
             Selection.TypeText vbTab & "If TestSolveDE(" & Trim(ConvertToVBAString(komm)) & " , """ & Var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
         End If
         Selection.TypeParagraph

@@ -1470,7 +1470,7 @@ Sub SolveSystem(Variable As String)
     End If
 
 
-    MaximaInputStreng = MaximaInputStreng & "autonsolve:false$" ' det tager for lang tid. der er mange solves. solvesystem slår det selv til når det er nødvendigt.
+'    MaximaInputStreng = MaximaInputStreng & "autonsolve:false$"
     Kommando = "[" & CodeForMaxima(Kommandoer(0))
     For i = 1 To UBound(Kommandoer)
         Kommando = Kommando & "," & CodeForMaxima(Kommandoer(i))
@@ -1509,9 +1509,9 @@ Sub SolveSystem(Variable As String)
 
     MaximaInputStreng = MaximaInputStreng & Kommando
 '    If MaximaExact = 1 Then    ' exact
-'        MaximaInputStreng = MaximaInputStreng & ";"
+        MaximaInputStreng = MaximaInputStreng & ";"
 '    Else
-        MaximaInputStreng = MaximaInputStreng & ",autonsolve=true;"
+'        MaximaInputStreng = MaximaInputStreng & ",autonsolve=true;"
 '    End If
 
     MaximaInputStrengSec = MaximaInputStrengSec & "fullratsimp(" & rkommando & ");"    'så log og trig konverteringer
