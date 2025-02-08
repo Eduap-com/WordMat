@@ -5,6 +5,8 @@ factoring the input may yield different results. Factoring is only done using sq
 
 simpsum:true$
 
+charat("x",1)$ /*On Mac charlist always returns [] unless charat has been called once*/
+
 [packagefile:true,partswitch:true,domain:real]$
 define_variable(AllTrig,false,boolean)$
 define_variable(uselambertw,true,boolean)$
@@ -641,6 +643,8 @@ exprq
 simplifysol(sollist):=block([exprq2],exprq2:makelist(block([zxq2],if not(op(zxq)="=") then return(zxq),zxq2:lhs(zxq)=simplify(rhs(zxq)),if zxq2=false then return(zxq),zxq2),zxq,sollist))$
 
 exprsize(exprq):=length(charlist(string(exprq)))$
+
+
 
 /*Giver et tal for stoerrelsen af ligningen. Det er antallet af charaterer. Hvis det er polynomium i en af variablene saa laegges 15 til. det er ikke godt nok med polynomialp*/
 exprmetric(exprq,varlq):=block([qm],
