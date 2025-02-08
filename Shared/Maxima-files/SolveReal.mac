@@ -5,7 +5,6 @@ factoring the input may yield different results. Factoring is only done using sq
 
 simpsum:true$
 
-
 [packagefile:true,partswitch:true,domain:real]$
 define_variable(AllTrig,false,boolean)$
 define_variable(uselambertw,true,boolean)$
