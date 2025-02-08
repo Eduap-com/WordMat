@@ -1618,7 +1618,7 @@ solvesystem(eqnlqsave, varlqsave) := block(
         go(startq)
     ),
     SortSolutions(sollq),
-    /*forsøg med mnewton, men kun for 2 ligninger*/
+    /*forsøg med mnewton, men kun for 2 ligninger. Desværre virker det ikke på Mac. Maxima 5.47. Der kommer en FLONUM-EPSILON is unbound error i linearalgebra/mring.lisp*/
     if length(varlqsave)=2 then (
         errcatch[load(mnewton)],
         ql: [[0,0],[1,1],[10,10],[100,100],[-1,-1],[-10,-10],[-100,-100],[-10,10],[10,-10]],
